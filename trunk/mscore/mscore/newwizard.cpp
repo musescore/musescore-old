@@ -203,6 +203,7 @@ void InstrumentWizard::on_upButton_clicked()
             bool isExpanded = partiturList->isItemExpanded(item);
             int idx = partiturList->indexOfTopLevelItem(item);
             if (idx) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
                   partiturList->insertTopLevelItem(idx-1, item);
                   partiturList->setItemExpanded(item, isExpanded);
@@ -213,6 +214,7 @@ void InstrumentWizard::on_upButton_clicked()
             QTreeWidgetItem* parent = item->parent();
             int idx = parent->indexOfChild(item);
             if (idx) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = parent->takeChild(idx);
                   parent->insertChild(idx-1, item);
                   partiturList->setItemSelected(item, true);
@@ -236,6 +238,7 @@ void InstrumentWizard::on_downButton_clicked()
             int idx = partiturList->indexOfTopLevelItem(item);
             int n = partiturList->topLevelItemCount();
             if (idx < (n-1)) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
                   partiturList->insertTopLevelItem(idx+1, item);
                   partiturList->setItemExpanded(item, isExpanded);
@@ -247,6 +250,7 @@ void InstrumentWizard::on_downButton_clicked()
             int idx = parent->indexOfChild(item);
             int n = parent->childCount();
             if (idx < (n-1)) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = parent->takeChild(idx);
                   parent->insertChild(idx+1, item);
                   partiturList->setItemSelected(item, true);

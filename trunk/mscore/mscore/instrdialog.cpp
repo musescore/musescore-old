@@ -337,10 +337,10 @@ void InstrumentsDialog::on_upButton_clicked()
       QTreeWidgetItem* item = wi.front();
 
       if (item->type() == PART_LIST_ITEM) {
-            partiturList->selectionModel()->clear();
             bool isExpanded = partiturList->isItemExpanded(item);
             int idx = partiturList->indexOfTopLevelItem(item);
             if (idx) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
                   partiturList->insertTopLevelItem(idx-1, item);
                   partiturList->setItemExpanded(item, isExpanded);
@@ -348,10 +348,10 @@ void InstrumentsDialog::on_upButton_clicked()
                   }
             }
       else {
-            partiturList->selectionModel()->clear();
             QTreeWidgetItem* parent = item->parent();
             int idx = parent->indexOfChild(item);
             if (idx) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = parent->takeChild(idx);
                   parent->insertChild(idx-1, item);
                   partiturList->setItemSelected(item, true);
@@ -375,6 +375,7 @@ void InstrumentsDialog::on_downButton_clicked()
             int idx = partiturList->indexOfTopLevelItem(item);
             int n = partiturList->topLevelItemCount();
             if (idx < (n-1)) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
                   partiturList->insertTopLevelItem(idx+1, item);
                   partiturList->setItemExpanded(item, isExpanded);
@@ -386,6 +387,7 @@ void InstrumentsDialog::on_downButton_clicked()
             int idx = parent->indexOfChild(item);
             int n = parent->childCount();
             if (idx < (n-1)) {
+                  partiturList->selectionModel()->clear();
                   QTreeWidgetItem* item = parent->takeChild(idx);
                   parent->insertChild(idx+1, item);
                   partiturList->setItemSelected(item, true);
