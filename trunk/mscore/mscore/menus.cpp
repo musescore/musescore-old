@@ -71,6 +71,9 @@ void MuseScore::showPalette(bool visible)
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
 
+            connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
+            addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
+
             if (!useFactorySettings) {
                   QFile f(dataPath + "/" + "mscore-palette.xml");
                   if (f.exists()) {
@@ -81,9 +84,6 @@ void MuseScore::showPalette(bool visible)
                               }
                         }
                   }
-
-            connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
-            addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
             //-----------------------------------
             //    notes
