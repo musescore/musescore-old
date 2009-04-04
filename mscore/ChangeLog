@@ -1,6 +1,8 @@
 4.apr (lv)
       - MusicXML handling of meta-data
       (ws)
+      - add accidental-note distance and accidental-accidental distance to style
+      - reworked accidental layout; better algorithm for accidentals at chords
       - fix custom palette creation
       (tb)
       - update Dutch translation by Jaap Plaisier

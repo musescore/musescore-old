@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
+    <width>896</width>
     <height>475</height>
    </rect>
   </property>
@@ -108,7 +108,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>9</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -931,14 +931,14 @@
           <item>
            <layout class="QFormLayout" name="formLayout_4">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_22">
+             <widget class="QLabel" name="label_25">
               <property name="text">
-               <string>note dot distance</string>
+               <string>accidental note distance</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QDoubleSpinBox" name="noteDotDistance">
+             <widget class="QDoubleSpinBox" name="accidentalNoteDistance">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -951,14 +951,14 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_23">
+             <widget class="QLabel" name="label_43">
               <property name="text">
-               <string>dot dot distance</string>
+               <string>accidental distance</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QDoubleSpinBox" name="dotDotDistance">
+             <widget class="QDoubleSpinBox" name="accidentalDistance">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -971,13 +971,53 @@
              </widget>
             </item>
             <item row="2" column="0">
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>note dot distance</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="noteDotDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="suffix">
+               <string>sp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>dot dot distance</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="dotDotDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="suffix">
+               <string>sp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
              <widget class="QLabel" name="label_24">
               <property name="text">
                <string>ledger line width</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="4" column="1">
              <widget class="QDoubleSpinBox" name="ledgerLineWidth">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
