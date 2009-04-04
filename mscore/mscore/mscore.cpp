@@ -374,10 +374,9 @@ MuseScore::MuseScore()
       layout->setSpacing(0);
       tab = new QTabWidget;
       tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      removeTabButton = new QToolButton;
-      removeTabButton->setIcon(QIcon(QPixmap(":/data/tab_remove.png")));
-      tab->setCornerWidget(removeTabButton);
-      connect(removeTabButton, SIGNAL(clicked()), SLOT(removeTab()));
+      tab->setTabsClosable(true);
+      connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+      connect(tab, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
       layout->addWidget(tab);
 
@@ -1359,6 +1358,7 @@ void MuseScore::removeTab()
 
 void MuseScore::removeTab(int i)
       {
+printf("removeTab %d\n", i);
       int n = scoreList.size();
       if (n <= 0)
             return;

@@ -326,7 +326,7 @@ Style::Style()
             StyleVal(Spatium(0.08)),              // ST_staffLineWidth,
             StyleVal(Spatium(0.16)),              // ST_ledgerLineWidth,
             StyleVal(Spatium(1.6)),               // ST_akkoladeWidth,
-            StyleVal(Spatium(0.13)),              // ST_accidentalDistance,
+            StyleVal(Spatium(0.22)),              // ST_accidentalDistance,
             StyleVal(Spatium(0.22)),              // ST_accidentalNoteDistance,
             StyleVal(Spatium(0.48)),              // ST_beamWidth,
             StyleVal(0.5),                        // ST_beamDistance,

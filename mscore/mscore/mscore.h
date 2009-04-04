@@ -162,7 +162,6 @@ class MuseScore : public QMainWindow {
 
       QVBoxLayout* layout;
       QTabWidget* tab;
-      QToolButton* removeTabButton;
 
       QMenu* menuDisplay;
       QMenu* openRecent;
