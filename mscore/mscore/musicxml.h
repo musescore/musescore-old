@@ -101,6 +101,24 @@ typedef  CreditWordsList::const_iterator ciCreditWords;
 //---------------------------------------------------------
 
 /**
+ The MusicXML "creator" meta-data element.
+*/
+
+class MusicXmlCreator {
+      QString _type;
+      QString _text;
+
+   public:
+      MusicXmlCreator(QString& tp, QString& txt) { _type = tp; _text = txt; }
+      QString crType() const                     { return _type; }
+      QString crText() const                     { return _text; }
+      };
+
+//---------------------------------------------------------
+//   MusicXml
+//---------------------------------------------------------
+
+/**
  The MusicXML importer.
 */
 

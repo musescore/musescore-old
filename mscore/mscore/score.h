@@ -80,6 +80,7 @@ class Part;
 class Instrument;
 class UndoStack;
 class RepeatList;
+class MusicXmlCreator;
 
 struct SigEvent;
 struct TEvent;
@@ -251,6 +252,8 @@ class Score : public QObject {
       QString _workNumber;
       QString _workTitle;
       QString _source;
+      QString _rights;
+      QList<MusicXmlCreator*> _creators;
       bool _creditsRead;             ///< credits were read at MusicXML import
 
       int textUndoLevel;
@@ -333,10 +336,10 @@ class Score : public QObject {
       void posChanged(int);
 
    public:
-      int curTick;            // for read optimizations
+      int curTick;                  // for read optimizations
       int curTrack;
 
-      TextC* rights;
+      TextC* rights;                ///< Copyright printed at bottom of page
 
       int _pageOffset;              ///< Offset for page numbers.
 
@@ -690,18 +693,23 @@ class Score : public QObject {
       void cmdConcertPitchChanged(bool);
       TempoList* getTempomap() const { return tempomap; }
 
-      QString movementNumber() const           { return _movementNumber; }
-      QString movementTitle() const            { return _movementTitle;  }
-      QString workNumber() const               { return _workNumber;     }
-      QString workTitle() const                { return _workTitle;      }
-      QString source() const                   { return _source;         }
-      bool creditsRead() const                 { return _creditsRead;    }
-      void setMovementNumber(const QString& s) { _movementNumber = s;    }
-      void setMovementTitle(const QString& s)  { _movementTitle = s;     }
-      void setWorkNumber(const QString& s)     { _workNumber = s;        }
-      void setWorkTitle(const QString& s)      { _workTitle = s;         }
-      void setSource(const QString& s)         { _source = s;            }
-      void setCreditsRead(bool b)              { _creditsRead = b;       }
+      QString movementNumber() const                 { return _movementNumber;  }
+      QString movementTitle() const                  { return _movementTitle;   }
+      QString workNumber() const                     { return _workNumber;      }
+      QString workTitle() const                      { return _workTitle;       }
+      QString source() const                         { return _source;          }
+      QString mxmlRights() const                     { return _rights;          }
+      bool creditsRead() const                       { return _creditsRead;     }
+      void setMovementNumber(const QString& s)       { _movementNumber = s;     }
+      void setMovementTitle(const QString& s)        { _movementTitle = s;      }
+      void setWorkNumber(const QString& s)           { _workNumber = s;         }
+      void setWorkTitle(const QString& s)            { _workTitle = s;          }
+      void setSource(const QString& s)               { _source = s;             }
+      void setmxmlRights(const QString& s)           { _rights = s;             }
+      void setCreditsRead(bool b)                    { _creditsRead = b;        }
+      void addCreator(MusicXmlCreator* c)            { _creators.append(c);     }
+      const MusicXmlCreator* getCreator(int i) const { return _creators.at(i);  }
+      int numberOfCreators() const                   { return _creators.size(); }
 
       void lassoSelect(const QRectF&);
       void lassoSelectEnd(const QRectF&);

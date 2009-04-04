@@ -2454,26 +2454,16 @@ foreach(Element* el, *(score->gel())) {
       // LVI TODO: write these text elements as credit-words
       // use meta data here instead
       xml.stag("identification");
-/*
-      foreach(const Element* element, *measure->el()) {
-            if (element->type() == TEXT) {
-                  const Text* text = (const Text*)element;
-                  switch (text->subtype()) {
-                        case TEXT_COMPOSER:
-                              xml.tag("creator type=\"composer\"", text->getText());
-                              break;
-                        case TEXT_POET:
-                              xml.tag("creator type=\"poet\"", text->getText());
-                              break;
-                        case TEXT_TRANSLATOR:
-                              xml.tag("creator type=\"creator\"", text->getText());
-                              break;
-                        }
-                  }
+      for (int i = 0; i < score->numberOfCreators(); ++i) {
+            printf("creator type='%s' text='%s'\n",
+                   score->getCreator(i)->crType().toUtf8().data(),
+                   score->getCreator(i)->crText().toUtf8().data()
+                  );
+            const MusicXmlCreator* crt = score->getCreator(i);
+            xml.tag(QString("creator type=\"%1\"").arg(crt->crType()), crt->crText());
             }
-      if (score->rights)
-            xml.tag("rights", score->rights->getText());
-*/
+      if (!score->mxmlRights().isEmpty())
+            xml.tag("rights", score->mxmlRights());
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));

@@ -545,6 +545,8 @@ void MusicXml::scorePartwise(QDomElement ee)
                               // type is an arbitrary label
                               QString type = ee.attribute(QString("type"));
                               QString str = ee.text();
+                              MusicXmlCreator* crt = new MusicXmlCreator(type, str);
+                              score->addCreator(crt);
                               if (type == "composer")
                                     composer = str;
                               else if (type == "poet") //not in dtd ?
@@ -559,7 +561,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (ee.tagName() == "rights")
-                              ; // score->setCopyright(ee.text());
+                              score->setmxmlRights(ee.text());
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
                         else if (ee.tagName() == "source")
