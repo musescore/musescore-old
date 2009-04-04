@@ -1718,7 +1718,7 @@ toonhoogte</translation>
     </message>
     <message>
         <source>use jazz font</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruik jazzfont</translation>
     </message>
 </context>
 <context>
@@ -5011,11 +5011,11 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken:</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken</translation>
     </message>
 </context>
 <context>

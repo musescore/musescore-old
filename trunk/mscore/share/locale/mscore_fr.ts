@@ -113,8 +113,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1681 révisée JLW 28/03/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1681</translation>
+        <translatorcomment>r1706 révisée JLW 04/04/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1706</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1728,7 +1728,7 @@ failed: </source>
     </message>
     <message>
         <source>use jazz font</source>
-        <translation type="unfinished"></translation>
+        <translation>utiliser la police jazz</translation>
     </message>
 </context>
 <context>
@@ -5021,11 +5021,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher : </translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
 </context>
 <context>
