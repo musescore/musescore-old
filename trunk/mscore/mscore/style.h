@@ -210,8 +210,8 @@ enum STYLE_TYPE {
       ST_ledgerLineWidth,
       ST_akkoladeWidth,
 
-      ST_prefixDistance,
-      ST_prefixNoteDistance,
+      ST_accidentalDistance,
+      ST_accidentalNoteDistance,
       ST_beamWidth,
       ST_beamDistance,
       ST_beamMinLen,

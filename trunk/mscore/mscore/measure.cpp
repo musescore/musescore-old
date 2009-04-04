@@ -308,6 +308,15 @@ static void initLineList(char* ll, int key)
       }
 
 //---------------------------------------------------------
+//   AcEl
+//---------------------------------------------------------
+
+struct AcEl {
+      Note* note;
+      double x;
+      };
+
+//---------------------------------------------------------
 //   layoutChords
 //    only called from layout0
 //    - calculate displaced note heads
@@ -486,33 +495,101 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       //    layout accidentals
       //---------------------------------------------------
 
-      int ll2    = -1000;      // line distance to previous accidental
-      int ll3    = -1000;
-      int accCol = 0;
+      QList<AcEl> aclist;
+
       int nNotes = notes.size();
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
-            if (!ac)
-                  continue;
-            int line    = note->line();
-            if (qAbs(line - ll2) <= 4) {
-                  if (accCol == 0 || (qAbs(line - ll3) <= 4))
-                        ++accCol;
-                  else
-                        --accCol;
+            if (ac) {
+                  AcEl acel;
+                  acel.note = note;
+                  acel.x    = 0.0;
+                  aclist.append(acel);
                   }
-            if (accCol > 5)
-                  accCol = 0;
-            double x = -point(score()->styleS(ST_prefixNoteDistance)) * ac->mag();
-            x  -= ac->width() + ac->bbox().x();
-            x  *= (accCol + 1);
-            Chord* chord = note->chord();
-            if (moveLeft && ((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
-                  x -= note->headWidth();
-            ac->setPos(x, 0);
-            ll3 = ll2;
-            ll2 = line;
+            }
+      int nAcc = aclist.size();
+      if (nAcc == 0)
+            return;
+      double pd  = point(score()->styleS(ST_accidentalDistance));
+      double pnd = point(score()->styleS(ST_accidentalNoteDistance));
+      //
+      // layout top accidental
+      //
+      Note* note      = aclist[0].note;
+      Accidental* acc = note->accidental();
+      aclist[0].x     = -pnd * acc->mag() - acc->width() - acc->bbox().x();
+
+      //
+      // layout bottom accidental
+      //
+      if (nAcc > 1) {
+            note = aclist[nAcc-1].note;
+            acc  = note->accidental();
+            int l1 = aclist[0].note->line();
+            int l2 = note->line();
+
+            int st1   = aclist[0].note->accidental()->subtype();
+            int st2   = acc->subtype();
+            int ldiff = st1 == ACC_FLAT ? 4 : 5;
+
+            if (qAbs(l1-l2) > ldiff) {
+                  aclist[nAcc-1].x = -pnd * acc->mag() - acc->width() - acc->bbox().x();
+                  }
+            else {
+                  if ((st1 == ACC_FLAT) && (st2 == ACC_FLAT) && (qAbs(l1-l2) > 2))
+                        aclist[nAcc-1].x = aclist[0].x - acc->width() * .5;
+                  else
+                        aclist[nAcc-1].x = aclist[0].x - acc->width();
+                  }
+            }
+
+      //
+      // layout middle accidentals
+      //
+      if (nAcc > 2) {
+            int n = nAcc - 1;
+            for (int i = 1; i < n; ++i) {
+                  note = aclist[i].note;
+                  acc  = note->accidental();
+                  int l1 = aclist[i-1].note->line();
+                  int l2 = note->line();
+                  int l3 = aclist[n].note->line();
+                  double x = 0.0;
+
+                  int st1 = aclist[i-1].note->accidental()->subtype();
+                  int st2 = acc->subtype();
+
+                  int ldiff = st1 == ACC_FLAT ? 4 : 5;
+                  if (qAbs(l1-l2) <= ldiff) {   // overlap accidental above
+                        if ((st1 == ACC_FLAT) && (st2 == ACC_FLAT) && (qAbs(l1-l2) > 2))
+                              x = aclist[i-1].x + acc->width() * .5;    // undercut flats
+                        else
+                              x = aclist[i-1].x;
+                        }
+
+                  ldiff = acc->subtype() == ACC_FLAT ? 4 : 5;
+                  if (qAbs(l2-l3) <= ldiff) {       // overlap accidental below
+                        if (aclist[n].x < x)
+                              x = aclist[n].x;
+                        }
+                  if (x == 0.0 || x > acc->width())
+                        x = -pnd * acc->mag() - acc->bbox().x();
+                  else
+                        x -= pd * acc->mag();   // accidental distance
+                  aclist[i].x = x - acc->width() - acc->bbox().x();
+                  }
+            }
+
+      foreach(const AcEl e, aclist) {
+            Note* note = e.note;
+            double x = e.x;
+            if (moveLeft) {
+                  Chord* chord = note->chord();
+                  if (((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
+                        x -= note->headWidth();
+                  }
+            note->accidental()->setPos(x, 0);
             }
       }
 

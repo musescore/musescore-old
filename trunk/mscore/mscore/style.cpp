@@ -73,8 +73,8 @@ StyleType styleTypes[] = {
       StyleType("ledgerLineWidth",         ST_SPATIUM),
       StyleType("akkoladeWidth",           ST_SPATIUM),
 
-      StyleType("prefixDistance",          ST_SPATIUM),
-      StyleType("prefixNoteDistance",      ST_SPATIUM),
+      StyleType("accidentalDistance",      ST_SPATIUM),
+      StyleType("accidentalNoteDistance",  ST_SPATIUM),
       StyleType("beamWidth",               ST_SPATIUM),
       StyleType("beamDistance",            ST_DOUBLE),        // in beamWidth units
       StyleType("beamMinLen",              ST_SPATIUM),           // len for broken beams
@@ -326,8 +326,8 @@ Style::Style()
             StyleVal(Spatium(0.08)),              // ST_staffLineWidth,
             StyleVal(Spatium(0.16)),              // ST_ledgerLineWidth,
             StyleVal(Spatium(1.6)),               // ST_akkoladeWidth,
-            StyleVal(Spatium(0.13)),              // ST_prefixDistance,
-            StyleVal(Spatium(0.22)),              // ST_prefixNoteDistance,
+            StyleVal(Spatium(0.13)),              // ST_accidentalDistance,
+            StyleVal(Spatium(0.22)),              // ST_accidentalNoteDistance,
             StyleVal(Spatium(0.48)),              // ST_beamWidth,
             StyleVal(0.5),                        // ST_beamDistance,
             StyleVal(Spatium(1.25)),              // ST_beamMinLen,
