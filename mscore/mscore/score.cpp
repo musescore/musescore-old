@@ -468,7 +468,7 @@ bool Score::read(QString name)
                   connectSlurs();
                   }
             else {
-                  printf("unknown file suffix\n");
+                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   }
             }
 
