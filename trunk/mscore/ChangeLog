@@ -1,4 +1,6 @@
-4.apr (ws)
+4.apr (lv)
+      - MusicXML handling of meta-data
+      (ws)
       - fix custom palette creation
       (tb)
       - update Dutch translation by Jaap Plaisier

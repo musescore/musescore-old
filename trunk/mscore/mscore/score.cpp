@@ -363,6 +363,8 @@ void Score::clear()
       _workNumber.clear();
       _workTitle.clear();
       _source.clear();
+      _rights.clear();
+      _creators.clear();
       _creditsRead = false;
 
       _pageOffset     = 0;
