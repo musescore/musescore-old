@@ -145,7 +145,7 @@ class TextB : public Element {
       QTextDocument* doc() const            { return textBase()->doc(); }
 
       virtual void resetMode();
-      bool isEmpty() const;
+      virtual bool isEmpty() const;
 
       double frameWidth() const             { return textBase()->frameWidth();   }
       double paddingWidth() const           { return textBase()->paddingWidth(); }

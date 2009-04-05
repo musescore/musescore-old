@@ -1,74 +1,69 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ElementBase</class>
- <widget class="QWidget" name="ElementBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ElementBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>220</height>
+    <width>590</width>
+    <height>323</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout">
+   <property name="spacing">
     <number>6</number>
    </property>
-   <property name="margin" >
+   <property name="margin">
     <number>8</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string comment="do not translate" >Element</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string comment="do not translate">Element</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" >
-      <property name="spacing" >
-       <number>3</number>
-      </property>
-      <property name="margin" >
-       <number>4</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
+       <layout class="QHBoxLayout">
+        <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin" >
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QPushButton" name="previousButton" >
-          <property name="text" >
+         <widget class="QPushButton" name="previousButton">
+          <property name="text">
            <string>Previous</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="nextButton" >
-          <property name="text" >
+         <widget class="QPushButton" name="nextButton">
+          <property name="text">
            <string>Next</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="parentButton" >
-          <property name="text" >
+         <widget class="QPushButton" name="parentButton">
+          <property name="text">
            <string>Parent</string>
           </property>
          </widget>
         </item>
         <item>
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
             <height>20</height>
@@ -77,8 +72,8 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="address" >
-          <property name="text" >
+         <widget class="QLabel" name="address">
+          <property name="text">
            <string>0</string>
           </property>
          </widget>
@@ -86,79 +81,79 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
+       <layout class="QHBoxLayout">
+        <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin" >
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="selected" >
-          <property name="text" >
-           <string comment="do not translate" >selected</string>
+         <widget class="QCheckBox" name="selected">
+          <property name="text">
+           <string comment="do not translate">selected</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="generated" >
-          <property name="text" >
-           <string comment="do not translate" >generated</string>
+         <widget class="QCheckBox" name="generated">
+          <property name="text">
+           <string comment="do not translate">generated</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="visible" >
-          <property name="text" >
-           <string comment="do not translate" >visible</string>
+         <widget class="QCheckBox" name="visible">
+          <property name="text">
+           <string comment="do not translate">visible</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="systemFlag" >
-          <property name="text" >
-           <string comment="do not translate" >system</string>
+         <widget class="QCheckBox" name="systemFlag">
+          <property name="text">
+           <string comment="do not translate">system</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+         <widget class="QLabel" name="label_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="text" >
-           <string comment="do not translate" >subtype</string>
+          <property name="text">
+           <string comment="do not translate">subtype</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="subtype" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="QSpinBox" name="subtype">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <number>999999999</number>
           </property>
          </widget>
         </item>
         <item>
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>221</width>
             <height>20</height>
@@ -169,155 +164,155 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
+       <layout class="QHBoxLayout">
+        <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin" >
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="label" >
-          <property name="text" >
-           <string comment="do not translate" >Voice</string>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string comment="do not translate">Voice</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="voice" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="QSpinBox" name="voice">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <number>1</number>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <number>4</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_9" >
-          <property name="text" >
-           <string comment="do not translate" >Staff</string>
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string comment="do not translate">Staff</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="staff" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="QSpinBox" name="staff">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="specialValueText" >
+          <property name="specialValueText">
            <string>invalid</string>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <number>0</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2" >
-          <property name="text" >
-           <string comment="do not translate" >Time</string>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string comment="do not translate">Time</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="time" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="QSpinBox" name="time">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="specialValueText" >
+          <property name="specialValueText">
            <string>invalid</string>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <number>-1</number>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <number>999999</number>
           </property>
-          <property name="value" >
+          <property name="value">
            <number>-1</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_8" >
-          <property name="text" >
-           <string comment="do not translate" >Len</string>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string comment="do not translate">Len</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="duration" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="QSpinBox" name="duration">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <number>999999</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3" >
-          <property name="text" >
-           <string comment="do not translate" >Color</string>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string comment="do not translate">Color</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="Awl::ColorLabel" name="color" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <widget class="Awl::ColorLabel" name="color">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -327,273 +322,247 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <property name="margin" >
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="verticalSpacing">
          <number>0</number>
         </property>
-        <item>
-         <widget class="QLabel" name="label_5" >
-          <property name="text" >
-           <string comment="do not translate" >Pos</string>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string comment="do not translate">Pos</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="posx" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="posx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="posy" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="0" column="2">
+         <widget class="QDoubleSpinBox" name="posy">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label_10" >
-          <property name="text" >
-           <string comment="do not translate" >CPos</string>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string comment="do not translate">CPos</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="cposx" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="cposx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="cposy" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="1" column="2">
+         <widget class="QDoubleSpinBox" name="cposy">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Horizontal</enum>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string comment="do not translate">Offset</string>
           </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_6" >
-          <property name="text" >
-           <string comment="do not translate" >Offset</string>
-          </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="offsetx" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="offsetx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="suffix" >
-           <string comment="do not translate" > sp</string>
+          <property name="suffix">
+           <string comment="do not translate"> sp</string>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
-          <property name="singleStep" >
+          <property name="singleStep">
            <double>0.100000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="offsety" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="2" column="2">
+         <widget class="QDoubleSpinBox" name="offsety">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="suffix" >
-           <string comment="do not translate" > sp</string>
+          <property name="suffix">
+           <string comment="do not translate"> sp</string>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
-          <property name="singleStep" >
+          <property name="singleStep">
            <double>0.100000000000000</double>
           </property>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <property name="margin" >
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_7" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="text" >
-           <string comment="do not translate" >BBox</string>
+          <property name="text">
+           <string comment="do not translate">BBox</string>
           </property>
-          <property name="textFormat" >
+          <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="bboxx" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="bboxx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="bboxy" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="3" column="2">
+         <widget class="QDoubleSpinBox" name="bboxy">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="bboxw" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <item row="3" column="3">
+         <widget class="QDoubleSpinBox" name="bboxw">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="bboxh" >
-          <property name="readOnly" >
+        <item row="3" column="4">
+         <widget class="QDoubleSpinBox" name="bboxh">
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="minimum" >
+          <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label_11" >
-          <property name="text" >
-           <string comment="do not translate" >Mag</string>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string comment="do not translate">Mag</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="mag" >
-          <property name="value" >
+        <item row="4" column="1">
+         <widget class="QDoubleSpinBox" name="mag">
+          <property name="value">
            <double>1.000000000000000</double>
           </property>
          </widget>
@@ -601,46 +570,6 @@
        </layout>
       </item>
      </layout>
-     <widget class="QWidget" native="1" name="layoutWidget" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>362</width>
-        <height>32</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QWidget" native="1" name="layoutWidget_2" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>281</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QWidget" native="1" name="layoutWidget_3" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>100</y>
-        <width>458</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QWidget" native="1" name="layoutWidget_4" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>150</y>
-        <width>474</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
     </widget>
    </item>
   </layout>
