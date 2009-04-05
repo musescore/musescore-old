@@ -864,6 +864,7 @@ void ShowNoteWidget::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       nb.pitch->setValue(note->pitch());
+      nb.ppitch->setValue(note->ppitch());
       nb.line->setValue(note->line());
       nb.move->setValue(note->staffMove());
       nb.mirror->setChecked(note->mirror());

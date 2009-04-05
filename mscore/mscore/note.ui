@@ -1,209 +1,230 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>NoteBase</class>
- <widget class="QWidget" name="NoteBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="NoteBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
-    <height>323</height>
+    <width>660</width>
+    <height>325</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout">
+   <property name="spacing">
     <number>6</number>
    </property>
-   <property name="margin" >
+   <property name="margin">
     <number>8</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string comment="do not translate" >Note</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string comment="do not translate">Note</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string comment="do not translate" >Pitch</string>
+     <layout class="QGridLayout">
+      <property name="verticalSpacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string comment="do not translate">Pitch</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>pitch</cstring>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QSpinBox" name="pitch" >
-        <property name="maximum" >
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="pitch">
+        <property name="maximum">
          <number>127</number>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
-         <string comment="do not translate" >Head</string>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string comment="do not translate">Head</string>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" >
-       <widget class="QSpinBox" name="head" >
-        <property name="toolTip" >
+      <item row="0" column="3">
+       <widget class="QSpinBox" name="head">
+        <property name="toolTip">
          <string>head index</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" >
-       <widget class="QLabel" name="label_10" >
-        <property name="text" >
-         <string comment="do not translate" >Subelements:</string>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string comment="do not translate">TPC</string>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_6" >
-        <property name="text" >
-         <string comment="do not translate" >TPC</string>
-        </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="QSpinBox" name="tpc" />
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="tpc"/>
       </item>
-      <item row="1" column="2" >
-       <widget class="QLabel" name="label_7" >
-        <property name="text" >
-         <string comment="do not translate" >HGrp.</string>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string comment="do not translate">HGrp.</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="3" >
-       <widget class="QSpinBox" name="headGroup" >
-        <property name="toolTip" >
+      <item row="2" column="3">
+       <widget class="QSpinBox" name="headGroup">
+        <property name="toolTip">
          <string>note head group</string>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <number>4</number>
         </property>
        </widget>
       </item>
-      <item rowspan="4" row="1" column="4" >
-       <widget class="QListWidget" name="fingering" />
+      <item row="2" column="4" rowspan="4">
+       <widget class="QListWidget" name="fingering"/>
       </item>
-      <item row="2" column="0" >
-       <widget class="QLabel" name="label_3" >
-        <property name="text" >
-         <string comment="do not translate" >Line</string>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string comment="do not translate">Line</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>line</cstring>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
-       <widget class="QSpinBox" name="line" >
-        <property name="minimum" >
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="line">
+        <property name="minimum">
          <number>-99</number>
         </property>
        </widget>
       </item>
-      <item row="2" column="2" colspan="2" >
-       <widget class="QPushButton" name="tieFor" >
-        <property name="text" >
-         <string comment="do not translate" >Tie Forw.</string>
+      <item row="3" column="2" colspan="2">
+       <widget class="QPushButton" name="tieFor">
+        <property name="text">
+         <string comment="do not translate">Tie Forw.</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" >
-       <widget class="QLabel" name="label_4" >
-        <property name="text" >
-         <string comment="do not translate" >Move</string>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string comment="do not translate">Move</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>move</cstring>
         </property>
        </widget>
       </item>
-      <item row="3" column="1" >
-       <widget class="QSpinBox" name="move" />
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="move"/>
       </item>
-      <item row="3" column="2" colspan="2" >
-       <widget class="QPushButton" name="tieBack" >
-        <property name="text" >
-         <string comment="do not translate" >Tie Back</string>
+      <item row="4" column="2" colspan="2">
+       <widget class="QPushButton" name="tieBack">
+        <property name="text">
+         <string comment="do not translate">Tie Back</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="2" colspan="2" >
-       <widget class="QPushButton" name="accidental" >
-        <property name="text" >
-         <string comment="do not translate" >Accidental</string>
+      <item row="5" column="2" colspan="2">
+       <widget class="QPushButton" name="accidental">
+        <property name="text">
+         <string comment="do not translate">Accidental</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2" >
-       <widget class="QCheckBox" name="mirror" >
-        <property name="text" >
-         <string comment="do not translate" >Mirror Head</string>
+      <item row="7" column="0" colspan="2">
+       <widget class="QCheckBox" name="mirror">
+        <property name="text">
+         <string comment="do not translate">Mirror Head</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" >
-       <widget class="QLabel" name="label_5" >
-        <property name="text" >
-         <string comment="do not translate" >S-Channel</string>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string comment="do not translate">S-Channel</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1" >
-       <widget class="QSpinBox" name="subchannel" />
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="subchannel"/>
       </item>
-      <item row="6" column="2" colspan="2" >
-       <widget class="QCheckBox" name="hidden" >
-        <property name="text" >
-         <string comment="do not translate" >Hidden</string>
+      <item row="7" column="2" colspan="2">
+       <widget class="QCheckBox" name="hidden">
+        <property name="text">
+         <string comment="do not translate">Hidden</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0" >
-       <widget class="QLabel" name="label_8" >
-        <property name="text" >
-         <string comment="do not translate" >User-Acc</string>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string comment="do not translate">User-Acc</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1" >
-       <widget class="QSpinBox" name="userAccidental" />
+      <item row="6" column="1">
+       <widget class="QSpinBox" name="userAccidental"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Ppitch</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string comment="do not translate">Subelements:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="ppitch">
+        <property name="maximum">
+         <number>127</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

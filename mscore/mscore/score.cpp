@@ -1337,8 +1337,7 @@ void Score::setClean(bool val)
       val = !val;
       if (_dirty != val) {
             _dirty = val;
-            if (val)
-                  _playlistDirty = true;
+            _playlistDirty = true;
             emit dirtyChanged(this);
             }
       }
