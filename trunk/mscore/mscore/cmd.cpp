@@ -2673,6 +2673,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                   }
             }
       layout()->connectTies();
+      fixPpitch();
       }
 
 //---------------------------------------------------------

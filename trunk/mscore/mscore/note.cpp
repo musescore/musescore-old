@@ -567,8 +567,14 @@ void Note::read(QDomElement e)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "pitch")
-                  _pitch = i;
+            if (tag == "pitch") {
+                  if (i > 127)
+                        i = 127;
+                  else if (i < 0)
+                        i = 0;
+                  _pitch  = i;
+                  _ppitch = i;
+                  }
             else if (tag == "tpc")
                   tpcVal = i;
             else if (tag == "Tie") {
