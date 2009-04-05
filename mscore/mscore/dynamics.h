@@ -36,6 +36,8 @@ struct Dyn {
          : velocity(velo), tag(t) {}
       };
 
+enum DynamicType { DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM };
+
 //---------------------------------------------------------
 //   Dynamic
 //---------------------------------------------------------
@@ -43,6 +45,7 @@ struct Dyn {
 class Dynamic : public Text {
       mutable QPointF dragOffset;
       int _velocity;          // associated midi velocity 0-127
+      DynamicType _dynType;
 
    public:
       Dynamic(Score*);
@@ -57,7 +60,7 @@ class Dynamic : public Text {
       virtual void setSubtype(const QString&);
       virtual const QString subtypeName() const;
 
-      virtual bool isMovable() const  { return true; }
+      virtual bool isMovable() const   { return true; }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
@@ -67,8 +70,10 @@ class Dynamic : public Text {
       virtual void toDefault();
 
       void resetType();
-      int velocity() const    { return _velocity; }
-      void setVelocity(int v) { _velocity = v;    }
+      void setVelocity(int v);
+      int velocity() const;
+      DynamicType dynType() const    { return _dynType; }
+      void setDynType(DynamicType t) { _dynType = t;    }
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(const QString& s);

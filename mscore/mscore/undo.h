@@ -695,16 +695,17 @@ class ChangeUserOffset : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeVelocity
+//   ChangeDynamic
 //---------------------------------------------------------
 
-class ChangeVelocity : public UndoCommand {
+class ChangeDynamic : public UndoCommand {
       Dynamic* dynamic;
       int velocity;
+      int dynType;
       void flip();
 
    public:
-      ChangeVelocity(Dynamic*, int velocity);
+      ChangeDynamic(Dynamic*, int velocity, int dt);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

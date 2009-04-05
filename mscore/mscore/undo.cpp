@@ -485,12 +485,12 @@ void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
       }
 
 //---------------------------------------------------------
-//   undoChangeVelocity
+//   undoChangeDynamic
 //---------------------------------------------------------
 
-void Score::undoChangeVelocity(Dynamic* e, int velocity)
+void Score::undoChangeDynamic(Dynamic* e, int velocity, int type)
       {
-      _undo->push(new ChangeVelocity(e, velocity));
+      _undo->push(new ChangeDynamic(e, velocity, type));
       }
 
 //---------------------------------------------------------
@@ -1666,19 +1666,23 @@ void ChangeUserOffset::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeVelocity
+//   ChangeDynamic
 //---------------------------------------------------------
 
-ChangeVelocity::ChangeVelocity(Dynamic* d, int v)
+ChangeDynamic::ChangeDynamic(Dynamic* d, int v, int dt)
       {
-      dynamic = d;
+      dynamic  = d;
       velocity = v;
+      dynType  = dt;
       }
 
-void ChangeVelocity::flip()
+void ChangeDynamic::flip()
       {
       int v = dynamic->velocity();
+      DynamicType t = dynamic->dynType();
       dynamic->setVelocity(velocity);
+      dynamic->setDynType(DynamicType(dynType));
+      dynType  = int(t);
       velocity = v;
       }
 

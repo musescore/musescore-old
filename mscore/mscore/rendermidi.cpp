@@ -42,6 +42,8 @@
 #include "measure.h"
 #include "tempo.h"
 #include "repeatlist.h"
+#include "velo.h"
+#include "dynamics.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -172,10 +174,8 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             int idx = instr->channel[note->subchannel()]->channel;
             NoteOn* ev = new NoteOn();
             int pitch = note->ppitch();
-            if (pitch > 127)
-                  pitch = 127;
             ev->setPitch(pitch);
-            ev->setVelo(60);
+            ev->setVelo(note->velocity());
             ev->setNote(note);
             ev->setChannel(idx);
             events->insertMulti(tick + i * arpeggioOffset, ev);
@@ -189,6 +189,10 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             }
       }
 
+//---------------------------------------------------------
+//   OttavaShiftSegment
+//---------------------------------------------------------
+
 struct OttavaShiftSegment {
       int stick;
       int etick;
@@ -197,7 +201,7 @@ struct OttavaShiftSegment {
 
 //---------------------------------------------------------
 //   fixPpitch
-//    calculate play pitch for all notes
+//    calculate play pitch and velocity for all notes
 //---------------------------------------------------------
 
 void Score::fixPpitch()
@@ -218,6 +222,39 @@ void Score::fixPpitch()
                   osl[e->staffIdx()].append(ss);
                   }
             }
+      //
+      //    collect Dynamics
+      //
+      VeloList velo[ns];
+
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            velo[staffIdx].setVelo(0, 80);
+            Part* prt = part(staffIdx);
+            int partStaves = prt->nstaves();
+            int partStaff  = Score::staffIdx(prt);
+
+            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                  foreach(const Element* e, *m->el()) {
+                        if (e->type() != DYNAMIC)
+                              continue;
+                        const Dynamic* d = static_cast<const Dynamic*>(e);
+                        switch(d->dynType()) {
+                              case DYNAMIC_STAFF:
+                                    velo[staffIdx].setVelo(d->tick(), d->velocity());
+                                    break;
+                              case DYNAMIC_PART:
+                                    for (int i = partStaff; i < partStaff+partStaves; ++i)
+                                          velo[i].setVelo(d->tick(), d->velocity());
+                                    break;
+                              case DYNAMIC_SYSTEM:
+                                    for (int i = 0; i < nstaves(); ++i)
+                                          velo[i].setVelo(d->tick(), d->velocity());
+                                    break;
+                              }
+                        }
+                  }
+            }
+
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
 
@@ -242,6 +279,7 @@ void Score::fixPpitch()
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
                               Note* note = in->second;
                               note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
+                              note->setVelocity(velo[staffIdx].velo(chord->tick()));
                               }
                         }
                   }
@@ -393,10 +431,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                         NoteOn* ev = new NoteOn();
                         int pitch = note->ppitch();
-                        if (pitch > 127)
-                              pitch = 127;
                         ev->setPitch(pitch);
-                        ev->setVelo(60);
+                        ev->setVelo(note->velocity());
                         ev->setNote(note);
                         ev->setChannel(idx);
                         events->insertMulti(tick + i * arpeggioOffset, ev);

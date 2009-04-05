@@ -77,13 +77,34 @@ Dynamic::Dynamic(const Dynamic& d)
       }
 
 //---------------------------------------------------------
+//   setVelocity
+//---------------------------------------------------------
+
+void Dynamic::setVelocity(int v)
+      {
+      _velocity = v;
+      }
+
+//---------------------------------------------------------
+//   velocity
+//---------------------------------------------------------
+
+int Dynamic::velocity() const
+      {
+      return _velocity <= 0 ? dynList[subtype()].velocity : _velocity;
+      }
+
+//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
-      xml.tag("velocity", _velocity);
+      if (_velocity > 0)
+            xml.tag("velocity", _velocity);
+      if (_dynType != DYNAMIC_PART)
+            xml.tag("dynType", _dynType);
       Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }
@@ -97,6 +118,8 @@ void Dynamic::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "velocity")
                   _velocity = e.text().toInt();
+            else if (e.tagName() == "dynType")
+                  _dynType = DynamicType(e.text().toInt());
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -132,7 +155,6 @@ void Dynamic::setSubtype(int idx)
             tf.setFont(font);
             cursor.setBlockCharFormat(tf);
             cursor.insertText(dynList[idx].tag);
-            _velocity = dynList[idx].velocity;
             }
       }
 
@@ -265,13 +287,16 @@ void Dynamic::propertyAction(const QString& s)
                   delete nText;
             }
       else if (s == "dynamics") {
-            int oldVelo = _velocity;
+            int oldVelo    = _velocity;
+            DynamicType ot = _dynType;
             DynamicProperties dp(this);
             int rv = dp.exec();
             if (rv) {
-                  int newVelo = _velocity;
-                  _velocity = oldVelo;
-                  score()->undoChangeVelocity(this, newVelo);
+                  int newVelo    = _velocity;
+                  DynamicType nt = _dynType;
+                  _velocity      = oldVelo;
+                  _dynType       = ot;
+                  score()->undoChangeDynamic(this, newVelo, int(nt));
                   }
             }
       else
@@ -288,6 +313,11 @@ DynamicProperties::DynamicProperties(Dynamic* d, QWidget* parent)
       setupUi(this);
       dynamic = d;
       velocity->setValue(dynamic->velocity());
+      switch(dynamic->dynType()) {
+            case DYNAMIC_STAFF:     staffButton->setChecked(true); break;
+            case DYNAMIC_PART:      partButton->setChecked(true); break;
+            case DYNAMIC_SYSTEM:    systemButton->setChecked(true); break;
+            }
       }
 
 //---------------------------------------------------------
@@ -297,8 +327,6 @@ DynamicProperties::DynamicProperties(Dynamic* d, QWidget* parent)
 void DynamicProperties::accept()
       {
       dynamic->setVelocity(velocity->value());
+
       QDialog::accept();
       }
-
-
-
