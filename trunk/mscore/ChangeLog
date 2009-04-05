@@ -1,4 +1,6 @@
 5.apr (ws)
+      - import midi: copyright text
+      - midi import fixes
       - midi implementation of simple dynamics
       - fix regression: pasted noted do not playback
       - fix regression: editing of chord names
