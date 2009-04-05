@@ -157,6 +157,7 @@ class Harmony : public Text {
       virtual void propertyAction(const QString&);
       virtual void layout(ScoreLayout*);
 
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void endEdit();
 
       int baseTpc() const                  { return _baseTpc;      }
@@ -183,6 +184,8 @@ class Harmony : public Text {
       void setChordId(int id);
 
       virtual void textStyleChanged(const QVector<TextStyle*>&s);
+      virtual bool isEmpty() const;
+      virtual qreal baseLine() const;
 
       static const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       static const ChordDescription* fromXml(const QString& s);

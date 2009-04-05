@@ -879,8 +879,9 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
             s     = s.mid(idx, slash - idx);
             *base = convertRoot(bs, germanNames);
             }
-      else
-            s = s.mid(idx);
+      else {
+            s = s.mid(idx).simplified();
+            }
       s = s.toLower();
       for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
             if (QString(chordList[i].name).toLower() == s)
@@ -888,6 +889,19 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
             }
       printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
       return 0;
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Harmony::startEdit(Viewer* view, const QPointF& p)
+      {
+      if (!textList.isEmpty()) {
+            QString s(harmonyName());
+            setText(s);
+            }
+      return TextB::startEdit(view, p);
       }
 
 //---------------------------------------------------------
@@ -908,10 +922,23 @@ void Harmony::endEdit()
             }
       else {
             // syntax error, leave text as is
+            foreach(const TextSegment* s, textList)
+                  delete s;
+            textList.clear();
+
             setRootTpc(INVALID_TPC);
             setBaseTpc(INVALID_TPC);
             setDescr(0);
             }
+      }
+
+//---------------------------------------------------------
+//   baseLine
+//---------------------------------------------------------
+
+qreal Harmony::baseLine() const
+      {
+      return (editMode || textList.isEmpty()) ? Text::baseLine() : 0.0;
       }
 
 //---------------------------------------------------------
@@ -1011,42 +1038,6 @@ void Score::harmonyEndEdit()
       }
 
 //---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Harmony::layout(ScoreLayout* l)
-      {
-      setSubtype(TEXT_CHORD);    // apply style changes
-
-      if (textList.isEmpty()) {
-            Text::layout(l);
-            return;
-            }
-      Element::layout(l);
-      Measure* m = static_cast<Measure*>(parent());
-      double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
-      setPos(ipos() + QPointF(x, y));
-
-      y = ipos().y();
-      x = ipos().x();
-
-      QRectF bb;
-      foreach(const TextSegment* ts, textList) {
-            y += ts->baseLineOffset;
-            QFontMetricsF fm(ts->font);
-
-            QRectF br = fm.boundingRect(QRectF(x, y, 0.0, 0.0),
-               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft,
-               ts->text);
-            y -= ts->baseLineOffset;
-            x += br.width();
-            bb |= br;
-            }
-      setbbox(bb);
-      }
-
-//---------------------------------------------------------
 //   textStyleChanged
 //---------------------------------------------------------
 
@@ -1059,24 +1050,66 @@ void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       }
 
 //---------------------------------------------------------
+//   isEmpty
+//---------------------------------------------------------
+
+bool Harmony::isEmpty() const
+      {
+      return textList.isEmpty() && doc()->isEmpty();
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Harmony::layout(ScoreLayout* l)
+      {
+      setSubtype(TEXT_CHORD);    // apply style changes
+
+      if (editMode || textList.isEmpty()) {
+            Text::layout(l);
+            return;
+            }
+      Element::layout(l);
+      Measure* m = static_cast<Measure*>(parent());
+      double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
+      double xx = (tick() < 0) ? 0.0 : m->tick2pos(tick());
+
+      setPos(ipos() + QPointF(xx, yy));
+
+      double y = .0, x = .0;
+      QRectF bb;
+      foreach(const TextSegment* ts, textList) {
+            y += ts->baseLineOffset;
+            QFontMetricsF fm(ts->font);
+
+            QRectF br = fm.boundingRect(QRectF(x, y, 0.0, 0.0),
+               Qt::TextSingleLine | Qt::AlignLeft | Qt::AlignBottom, ts->text);
+            y -= ts->baseLineOffset;
+            x += br.width();
+            bb |= br;
+            }
+      setbbox(bb);
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
 void Harmony::draw(QPainter& p) const
       {
-      if (textList.isEmpty()) {
+      if (editMode || textList.isEmpty()) {
             Text::draw(p);
             return;
             }
-      double y = ipos().y();
-      double x = ipos().x();
-
+      double y = 0.0;
+      double x = 0.0;
       foreach(const TextSegment* ts, textList) {
             y += ts->baseLineOffset;
             QRectF br;
             p.setFont(ts->font);
             p.drawText(QRectF(x, y, 0.0, 0.0),
-               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft,
+               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft | Qt::AlignBottom,
                ts->text, &br);
             y -= ts->baseLineOffset;
             x += br.width();
@@ -1101,16 +1134,16 @@ void Harmony::buildText()
       if (_rootTpc == INVALID_TPC)
             return;
 
-      clear();
+//      clear();
       bool useSymbols  = score()->styleB(ST_chordNamesUseSymbols);
       bool useJazzFont = score()->styleB(ST_chordNamesUseJazzFont);
 
       QString txt(harmonyName());
 // printf("Harmony <%s>\n", qPrintable(txt));
+      if (txt.isEmpty())
+            return;
       int size = txt.size();
       int idx  = 0;
-      if (size == idx)
-            return;
 
       foreach(const TextSegment* s, textList)
             delete s;

@@ -1,3 +1,5 @@
+5.apr (ws)
+      - fix regression: editing of chord names
 4.apr (lv)
       - MusicXML handling of meta-data
       (ws)
