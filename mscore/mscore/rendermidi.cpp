@@ -238,17 +238,20 @@ void Score::fixPpitch()
                         if (e->type() != DYNAMIC)
                               continue;
                         const Dynamic* d = static_cast<const Dynamic*>(e);
+                        int v = d->velocity();
+                        if (v < 1)     //  illegal value
+                              continue;
                         switch(d->dynType()) {
                               case DYNAMIC_STAFF:
-                                    velo[staffIdx].setVelo(d->tick(), d->velocity());
+                                    velo[staffIdx].setVelo(d->tick(), v);
                                     break;
                               case DYNAMIC_PART:
                                     for (int i = partStaff; i < partStaff+partStaves; ++i)
-                                          velo[i].setVelo(d->tick(), d->velocity());
+                                          velo[i].setVelo(d->tick(), v);
                                     break;
                               case DYNAMIC_SYSTEM:
                                     for (int i = 0; i < nstaves(); ++i)
-                                          velo[i].setVelo(d->tick(), d->velocity());
+                                          velo[i].setVelo(d->tick(), v);
                                     break;
                               }
                         }

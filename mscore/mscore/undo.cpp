@@ -1684,6 +1684,7 @@ void ChangeDynamic::flip()
       dynamic->setDynType(DynamicType(dynType));
       dynType  = int(t);
       velocity = v;
+      dynamic->score()->fixPpitch();
       }
 
 //---------------------------------------------------------

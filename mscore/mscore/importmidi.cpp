@@ -892,27 +892,27 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
 //   processMeta
 //---------------------------------------------------------
 
-void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent* mm)
+void MidiFile::processMeta(Score* cs, MidiTrack* track, MetaEvent* mm)
       {
       int tick = mm->ontime();
-      Staff* staff = cs->staff(staffIdx);
+      Staff* staff = track->staff();
       unsigned char* data = (unsigned char*)mm->data();
+      int staffIdx = staff ? cs->staffIdx(staff) : -1;
 
       switch (mm->metaType()) {
             case META_TEXT:
             case META_LYRIC:
-                  {
-                  QString s((char*)data);
-                  cs->addLyrics(tick, staffIdx, s);
-                  }
+                  if (staff) {
+                        QString s((char*)data);
+                        cs->addLyrics(tick, staffIdx, s);
+                        }
                   break;
 
             case META_TRACK_NAME:
-                  {
-                  QString txt((char*)data);
-                  staff->part()->setTrackName(txt);
-                  staff->part()->setLongName(txt);
-                  }
+                  if (staff) {
+                        QString txt((char*)data);
+                        track->setName(txt);
+                        }
                   break;
 
             case META_TEMPO:
@@ -924,15 +924,15 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent*
                   break;
 
             case META_KEY_SIGNATURE:
-                  {
-                  int key = ((char*)data)[0];
-                  if (key < -7 || key > 7) {
-                        printf("ImportMidi: illegal key %d\n", key);
-                        break;
+                  if (staff) {
+                        int key = ((char*)data)[0];
+                        if (key < -7 || key > 7) {
+                              printf("ImportMidi: illegal key %d\n", key);
+                              break;
+                              }
+                        (*staff->keymap())[mm->ontime()] = key;
+                        track->setHasKey(true);
                         }
-                  (*staff->keymap())[mm->ontime()] = key;
-                  track->setHasKey(true);
-                  }
                   break;
             case META_COMPOSER:     // mscore extension
             case META_POET:
@@ -1014,7 +1014,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             track->maxPitch = 0;
             track->minPitch = 127;
             track->medPitch = 0;
-            track->program  = 0;
+            track->setProgram(0);
 		int events      = 0;
             const EventList el = track->events();
             foreach (Event* e, track->events()) {
@@ -1027,14 +1027,12 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                               track->minPitch = pitch;
                         track->medPitch += pitch;
                         }
-                  else if (e->type() == ME_CONTROLLER && ((ControllerEvent*)e)->controller() == CTRL_PROGRAM) {
-                        track->program = ((ControllerEvent*)e)->value();
+                  else if (e->type() == ME_CONTROLLER && static_cast<ControllerEvent*>(e)->controller() == CTRL_PROGRAM) {
+                        track->setProgram(static_cast<ControllerEvent*>(e)->value());
                         }
                   }
-            if (events == 0) {
-                  printf("empty track found\n");
+            if (events == 0)
                   track->setStaffIdx(-1);       // dont create staff for this track
-                  }
             else {
                   track->setStaffIdx(staffIdx++);
 	            track->medPitch /= events;
@@ -1051,21 +1049,26 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       for (int i = 0; i < ntracks; ++i) {
             MidiTrack* track = tracks->at(i);
             int staffIdx = track->staffIdx();
-            if (staffIdx == -1)
+            if (staffIdx == -1) {
+                  track->setStaff(0);
                   continue;
+                  }
             int program  = track->getInitProgram();
+            track->setProgram(program);
             Part* part   = new Part(this);
 
             Staff* s = new Staff(this, part, 0);
             part->insertStaff(s);
             _staves.push_back(s);
+            track->setStaff(s);
+
             if (track->isDrumTrack()) {
                   s->clefList()->setClef(0, CLEF_PERC);
                   part->setDrumset(smDrumset);
                   }
             else {
                   if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
-                     && ((program & 0xff) == 0))) {
+                     && ((program & 0xff) == 0) && tracks->at(i+1)->staffIdx() != -1)) {
                         // assume that the current track and the next track
                         // form a piano part
                         Staff* ss = new Staff(this, part, 1);
@@ -1082,26 +1085,6 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                         s->clefList()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
                         }
                   }
-            if (track->name().isEmpty()) {
-                  int hbank = -1, lbank = -1;
-                  if (program == -1)
-                        program = 0;
-                  else {
-                        hbank = (program >> 16);
-                        lbank = (program >> 8) & 0xff;
-                        program = program & 0xff;
-                        }
-                  QString t(instrName(mf->midiType(), hbank, lbank, program));
-                  if (!t.isEmpty())
-                        part->setLongName(t);
-                  }
-            else
-
-                  part->setLongName(track->name());
-
-            part->setTrackName(part->longName()->getText());
-            part->setMidiChannel(track->outChannel());
-            part->setMidiProgram(track->program & 0x7f);  // only GM
             _parts.push_back(part);
             }
 
@@ -1205,13 +1188,38 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       //  process meta events
       //---------------------------------------------------
 
-      staffIdx = 0;
       foreach (MidiTrack* track, *tracks) {
-            if (track->staffIdx() != -1)
-                  staffIdx = track->staffIdx();
             foreach (Event* e, track->events()) {
                   if (e->type() == ME_META)
-                        mf->processMeta(this, track, staffIdx, (MetaEvent*)e);
+                        mf->processMeta(this, track, static_cast<MetaEvent*>(e));
+                  }
+            if (debugMode) {
+                  printf("Track %2d:%2d key %d <%s><%s>\n", track->outChannel(),
+                     track->outPort(), track->hasKey(), qPrintable(track->name()),
+                     qPrintable(track->comment()));
+                  }
+
+            Part* part = track->staff() ? track->staff()->part() : 0;
+            if (part) {
+                  int program = track->program();
+                  if (track->name().isEmpty()) {
+                        int hbank = -1, lbank = -1;
+                        if (program == -1)
+                              program = 0;
+                        else {
+                              hbank = (program >> 16);
+                              lbank = (program >> 8) & 0xff;
+                              program = program & 0xff;
+                              }
+                        QString t(instrName(mf->midiType(), hbank, lbank, program));
+                        if (!t.isEmpty())
+                              part->setLongName(t);
+                        }
+                  else
+                        part->setLongName(track->name());
+                  part->setTrackName(part->longName()->getText());
+                  part->setMidiChannel(track->outChannel());
+                  part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }
             }
 
