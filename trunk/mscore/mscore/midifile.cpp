@@ -434,6 +434,7 @@ MidiTrack::MidiTrack(MidiFile* f)
       _drumTrack  = false;
       _hasKey     = false;
       _staffIdx   = -1;
+      _staff      = 0;
       }
 
 MidiTrack::~MidiTrack()
@@ -1058,7 +1059,7 @@ void MidiFile::changeDivision(int newDivision)
 
 bool instrumentLessThan(const MidiTrack* t1, const MidiTrack* t2)
       {
-      return t1->program < t2->program;
+      return t1->program() < t2->program();
       }
 
 void MidiFile::sortTracks()

@@ -2126,7 +2126,7 @@ void Score::addElement(Element* element)
             ((ChordRest*)s->startElement())->addSlurFor(s);
             ((ChordRest*)s->endElement())->addSlurBack(s);
             }
-      else if (element->type() == OTTAVA) {
+      else if ((element->type() == OTTAVA) || (element->type() == DYNAMIC)) {
             fixPpitch();
             }
       }
@@ -2163,6 +2163,7 @@ void Score::removeElement(Element* element)
 
       switch(element->type()) {
             case OTTAVA:
+            case DYNAMIC:
                   fixPpitch();
                   break;
 

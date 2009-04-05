@@ -38,6 +38,7 @@ class MidiFile;
 class Xml;
 
 class MidiFile;
+class Staff;
 
 //---------------------------------------------------------
 //   MidiTrack
@@ -53,6 +54,8 @@ class MidiTrack {
       bool _drumTrack;
       bool _hasKey;
       int _staffIdx;
+      Staff* _staff;
+      int _program;
 
    protected:
       void readXml(QDomElement);
@@ -61,7 +64,6 @@ class MidiTrack {
       int maxPitch;
       int minPitch;
       int medPitch;
-      int program;
 
       MidiTrack(MidiFile*);
       ~MidiTrack();
@@ -94,6 +96,10 @@ class MidiTrack {
       bool hasKey() const      { return _hasKey;   }
       int staffIdx() const     { return _staffIdx; }
       void setStaffIdx(int v)  { _staffIdx = v;    }
+      Staff* staff() const     { return _staff;    }
+      void setStaff(Staff* st) { _staff = st;      }
+      int program() const      { return _program;  }
+      void setProgram(int v)   { _program = v;     }
 
       friend class MidiFile;
       };
@@ -160,7 +166,7 @@ class MidiFile {
       SigList siglist() const         { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
-      void processMeta(Score*, MidiTrack* track, int staffIdx, MetaEvent* e);
+      void processMeta(Score*, MidiTrack* track, MetaEvent* e);
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
 
