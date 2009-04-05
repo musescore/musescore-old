@@ -1,4 +1,5 @@
 5.apr (ws)
+      - midi implementation of simple dynamics
       - fix regression: pasted noted do not playback
       - fix regression: editing of chord names
 4.apr (lv)

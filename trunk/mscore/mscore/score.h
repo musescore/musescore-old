@@ -448,7 +448,7 @@ class Score : public QObject {
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
-      void undoChangeVelocity(Dynamic* e, int velocity);
+      void undoChangeDynamic(Dynamic* e, int velocity, int type);
       void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);

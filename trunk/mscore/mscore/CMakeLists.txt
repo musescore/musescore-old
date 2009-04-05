@@ -183,7 +183,7 @@ add_executable ( ${ExecutableName}
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scbytearray.cpp
-      exportaudio.cpp repeatlist.cpp
+      exportaudio.cpp repeatlist.cpp velo.cpp
       ${AUDIO}
       )
 

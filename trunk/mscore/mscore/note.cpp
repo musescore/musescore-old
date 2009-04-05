@@ -91,6 +91,7 @@ Note::Note(Score* s)
       {
       _pitch          = 0;
       _ppitch         = 0;
+      _velocity       = 80;
       _accidental     = 0;
       _mirror         = false;
       _line           = 0;
@@ -112,6 +113,7 @@ Note::Note(const Note& n)
       _subchannel     = n._subchannel;
       _pitch          = n._pitch;
       _ppitch         = n._ppitch;
+      _velocity       = n._velocity;
       _tpc            = n._tpc;
       _line           = n._line;
       _staffMove      = n._staffMove;

@@ -77,7 +77,8 @@ class Note : public Element {
       int _line;              ///< y-Position; 0 - top line.
 
       char _pitch;             ///< Note pitch as midi value (0 - 127).
-      char _ppitch;            ///< played pitch (honor voltas etc.)
+      char _ppitch;            ///< played pitch (honor voltas etc.); cached value
+      char _velocity;          ///< midi playback velocity (0 - 127); cached value
       char _tpc;               ///< tonal pitch class
       char _staffMove;         ///< -1, 0, +1, used for crossbeaming
 
@@ -122,10 +123,12 @@ class Note : public Element {
       int headGroup() const           { return _headGroup; }
       void setHeadGroup(int val);
 
-      int pitch() const               { return _pitch;  }
+      int pitch() const               { return _pitch;    }
       void setPitch(int val);
-      int ppitch() const              { return _ppitch; }
-      void setPpitch(int v)           { _ppitch = v;    }
+      int ppitch() const              { return _ppitch;   }
+      void setPpitch(int v)           { _ppitch = v;      }
+      int velocity() const            { return _velocity; }
+      void setVelocity(int v)         { _velocity = v;    }
 
       int tpc() const                 { return _tpc;    }
       void setTpc(int v);
