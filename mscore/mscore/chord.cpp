@@ -799,30 +799,41 @@ void Chord::layout(ScoreLayout* layout)
 
       int uppos;
       int downpos;
+      bool upl;
+      bool dol;
       if (minMove == -1) {
             uppos   = 1000;
             downpos = -1000;
+            upl     = false;
+            dol     = false;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if (in->second->staffMove() == -1) {
-                        if (in->second->line() < uppos)
-                              uppos = in->second->line();
-                        if (in->second->line() > downpos)
-                              downpos = in->second->line();
+                  Note* note = in->second;
+                  if (note->staffMove() == -1) {
+                        int l = note->line();
+                        if (l < uppos) {
+                              uppos = l;
+                              if (uppos < 0 && note->mirror())
+                                    upl = true;
+                              }
+                        if (l > 10 && note->mirror())
+                              dol = true;
+                        if (l > downpos)
+                              downpos = l;
                         }
                   }
 
             if (uppos < 0 || downpos >= 10) {
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() - 1, i, 0);
+                        addLedgerLine(x1, staffIdx() - 1, i, upl ? -1 : 0);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() - 1, i, 0);
+                        addLedgerLine(x2, staffIdx() - 1, i, dol ? 1 : 0);
                   }
             }
 
-      uppos    = 1000;
-      downpos  = -1000;
-      bool upl = false;
-      bool dol = false;
+      uppos   = 1000;
+      downpos = -1000;
+      upl     = false;
+      dol     = false;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
             if (note->staffMove() == 0) {
@@ -855,19 +866,28 @@ void Chord::layout(ScoreLayout* layout)
       if (maxMove == 1) {
             uppos   = 1000;
             downpos = -1000;
+            upl     = false;
+            dol     = false;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if (in->second->staffMove() == 1) {
-                        if (in->second->line() < uppos)
-                              uppos = in->second->line();
-                        if (in->second->line() > downpos)
-                              downpos = in->second->line();
+                  Note* note = in->second;
+                  if (note->staffMove() == 1) {
+                        int l = note->line();
+                        if (l < uppos) {
+                              uppos = l;
+                              if (uppos < 0 && note->mirror())
+                                    upl = true;
+                              }
+                        if (l >= 10 && note->mirror())
+                              dol = true;
+                        if (l > downpos)
+                              downpos = l;
                         }
                   }
             if (uppos < 0 || downpos >= 10) {
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() + 1, i, 0);
+                        addLedgerLine(x1, staffIdx() + 1, i, upl ? -1 : 0);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() + 1, i, 0);
+                        addLedgerLine(x2, staffIdx() + 1, i, dol ? 1 : 0);
                   }
             }
 
