@@ -1,4 +1,6 @@
 6.apr (ws)
+      - fix improper vertical note alignment for whole note chords
+      - fix ledger line len for chords with displaced note heads
       - more translatable text (symbol names, element names and more)
       (tb)
       - first commit of Norwegian translation by daghenningsorbo

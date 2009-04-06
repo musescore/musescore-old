@@ -456,7 +456,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                   isLeft = !isLeft;
             int nmirror   = note->chord()->isUp() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
-            // bool sameHead = (ll == line) && (ticks == lastTicks);
 
             if (conflict && (nmirror == mirror) && !sameHead) {
                   Note* note = notes[idx];
