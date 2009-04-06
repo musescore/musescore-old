@@ -322,7 +322,7 @@ void Palette::append(int symIdx)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
-      append(s, tr(::symbols[symIdx].name()));
+      append(s, qApp->translate("symbol", ::symbols[symIdx].name()));
       }
 
 //---------------------------------------------------------

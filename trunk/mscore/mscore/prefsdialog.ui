@@ -889,7 +889,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Replace 1/2 ... with ½ ...</string>
+         <string>Replace 1/2 ... with symbol ...</string>
         </property>
        </widget>
        <widget class="QCheckBox" name="replaceCopyrightSymbol">
@@ -902,7 +902,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Replace (C) ... with © ... in Copyright Text</string>
+         <string>Replace (C) ... with symbol ... in Copyright Text</string>
         </property>
        </widget>
       </widget>

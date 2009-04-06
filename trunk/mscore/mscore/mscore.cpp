@@ -1358,7 +1358,6 @@ void MuseScore::removeTab()
 
 void MuseScore::removeTab(int i)
       {
-printf("removeTab %d\n", i);
       int n = scoreList.size();
       if (n <= 0)
             return;
