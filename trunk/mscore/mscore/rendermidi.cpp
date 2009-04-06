@@ -153,8 +153,7 @@ bool Score::isVolta(int tick, int repeat) const
 //   collectChord
 //---------------------------------------------------------
 
-void Score::collectChord(EventMap* events, Instrument* instr,
-   Chord* chord, int tick, int len)
+void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
       {
       NoteList* nl = chord->noteList();
       Arpeggio* arpeggio = chord->arpeggio();
@@ -320,8 +319,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         continue;
                         }
 
-                  int gateTime    = _style[ST_gateTime].toInt();  // 100 - legato (100%)
-                  int tick        = chord->tick();
+                  int gateTime = _style[ST_gateTime].toInt();  // 100 - legato (100%)
+                  int tick     = chord->tick();
                   if (playExpandRepeats && !_foundPlayPosAfterRepeats && tick == playPos()) {
                         setPlayPos(tick + tickOffset);
                         _foundPlayPosAfterRepeats = true;
@@ -448,6 +447,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         events->insertMulti(tick + len, ev);
                         }
                   }
+                  lv.clear();
+                  sv.clear();
                   }
             }
       //
@@ -471,31 +472,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   }
             }
       }
-
-//---------------------------------------------------------
-//   RepeatLoop
-//---------------------------------------------------------
-
-struct RepeatLoop {
-      enum LoopType { LOOP_REPEAT, LOOP_JUMP };
-
-      LoopType type;
-      Measure* m;   // start measure of LOOP_REPEAT
-      int count;
-      QString stop, cont;
-
-      RepeatLoop() {}
-      RepeatLoop(Measure* _m)  {
-            m     = _m;
-            count = 0;
-            type  = LOOP_REPEAT;
-            }
-      RepeatLoop(const QString s, const QString c)
-         : stop(s), cont(c)
-            {
-            type = LOOP_JUMP;
-            }
-      };
 
 //---------------------------------------------------------
 //   searchLabel
