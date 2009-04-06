@@ -80,7 +80,7 @@ void StaffListItem::setPartIdx(int val)
 void StaffListItem::setClef(int val)
       {
       _clef = val;
-      setText(1, InstrumentsDialog::tr(clefTable[_clef].name));
+      setText(1, qApp->translate("clefTable", clefTable[_clef].name));
       }
 
 //---------------------------------------------------------

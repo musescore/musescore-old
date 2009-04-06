@@ -246,7 +246,7 @@ class Element {
       // debug functions
       virtual void dump() const;
       const char* name() const          { return name(type()); }
-      virtual QString userName() const  { return name(type()); }
+      virtual QString userName() const  { return qApp->translate("elementName", name(type())); }
       void dumpQPointF(const char*) const;
 
       bool operator>(const Element&) const;

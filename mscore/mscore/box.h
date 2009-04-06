@@ -77,13 +77,13 @@ class Box : public MeasureBase {
 //---------------------------------------------------------
 
 class HBox : public Box {
+      Q_DECLARE_TR_FUNCTIONS(HBox)
 
    public:
       HBox(Score* score);
       ~HBox();
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
-      virtual QString userName() const { return QWidget::tr("Horizontal Frame"); }
 
       virtual void layout(ScoreLayout*);
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
@@ -100,12 +100,12 @@ class HBox : public Box {
 //---------------------------------------------------------
 
 class VBox : public Box {
+      Q_DECLARE_TR_FUNCTIONS(VBox)
 
    public:
       VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
-      virtual QString userName() const { return QWidget::tr("Vertical Frame"); }
 
       virtual void layout(ScoreLayout*);
 

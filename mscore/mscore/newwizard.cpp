@@ -42,7 +42,7 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
 
-      instrumentList->setHeaderLabels(QStringList("Instrument List"));
+      instrumentList->setHeaderLabels(QStringList(tr("Instrument List")));
       QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
       partiturList->setHeaderLabels(header);
 
@@ -591,16 +591,16 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i+1);
-            sp->append(k, tr(keyNames[i*2]));
+            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
             }
       for (int i = -7; i < 0; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i & 0xff);
-            sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
+            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
             }
       KeySig* k = new KeySig(gscore);
       k->setSubtype(0);
-      sp->append(k, keyNames[14]);
+      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       sp->setSelected(14);
 
       sp->resizeWidth(300);
