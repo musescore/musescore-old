@@ -671,7 +671,7 @@ void Chord::layoutStem(ScoreLayout* layout)
 ///   \arg line       vertical position of line
 //---------------------------------------------------------
 
-void Chord::addLedgerLine(double x, int staffIdx, int line)
+void Chord::addLedgerLine(double x, int staffIdx, int line, int extend)
       {
       double staffMag = score()->staff(staffIdx)->mag();
       LedgerLine* h   = new LedgerLine(score());
@@ -688,6 +688,12 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
       //
 
       x -= len.point() * .5;
+      if (extend) {
+            double hw = notes.begin()->second->headWidth();
+            if (extend == -1)
+                  x  -= hw;
+            len += hw;
+            }
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
             if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidental()) {
@@ -807,28 +813,38 @@ void Chord::layout(ScoreLayout* layout)
 
             if (uppos < 0 || downpos >= 10) {
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() - 1, i);
+                        addLedgerLine(x1, staffIdx() - 1, i, 0);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() - 1, i);
+                        addLedgerLine(x2, staffIdx() - 1, i, 0);
                   }
             }
 
-      uppos   = 1000;
-      downpos = -1000;
+      uppos    = 1000;
+      downpos  = -1000;
+      bool upl = false;
+      bool dol = false;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            if (in->second->staffMove() == 0) {
-                  if (in->second->line() < uppos)
-                        uppos = in->second->line();
-                  if (in->second->line() > downpos)
-                        downpos = in->second->line();
+            Note* note = in->second;
+            if (note->staffMove() == 0) {
+                  int l = note->line();
+                  if (l < uppos) {
+                        uppos = l;
+                        if (uppos < 0 && note->mirror())
+                              upl = true;
+                        }
+                  if (l >= 10 && note->mirror())
+                        dol = true;
+                  if (l > downpos)
+                        downpos = l;
                   }
             }
 
       if (uppos < 0 || downpos >= 10) {
-            for (int i = -2; i >= uppos; i -= 2)
-                  addLedgerLine(x1, staffIdx(), i);
+            for (int i = -2; i >= uppos; i -= 2) {
+                  addLedgerLine(x1, staffIdx(), i, upl ? -1 : 0);
+                  }
             for (int i = 10; i <= downpos; i += 2)
-                  addLedgerLine(x2, staffIdx(), i);
+                  addLedgerLine(x2, staffIdx(), i, dol ? 1 : 0);
             }
 
       //---------------------------------------------------
@@ -849,9 +865,9 @@ void Chord::layout(ScoreLayout* layout)
                   }
             if (uppos < 0 || downpos >= 10) {
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() + 1, i);
+                        addLedgerLine(x1, staffIdx() + 1, i, 0);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() + 1, i);
+                        addLedgerLine(x2, staffIdx() + 1, i, 0);
                   }
             }
 
@@ -930,10 +946,6 @@ void Chord::computeUp()
             return;
             }
       if (_noteType != NOTE_NORMAL) {
-            _up = true;
-            return;
-            }
-      if (!duration().hasStem()) {
             _up = true;
             return;
             }
