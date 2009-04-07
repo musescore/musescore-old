@@ -99,6 +99,14 @@ const ClefInfo clefTable[] = {
       { "G",   1,  0,   2, 47,
             { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
             QT_TRANSLATE_NOOP("clefTable", "French Violin Clef") },       // CLEF_G4
+
+      { "F",   4,  1, -5, 40,                                          // CLEF_F_8VA
+            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
+            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 8va") },
+
+      { "F",   4,  2,  2, 47,                                          // CLEF_F_15MA
+            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
+            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 15ma") },
       };
 
 //---------------------------------------------------------
@@ -257,6 +265,29 @@ void Clef::layout(ScoreLayout*)
             case CLEF_G4:
                   symbol->setSym(trebleclefSym);
                   yoff = 4.0;
+                  break;
+            case CLEF_F_8VA:
+                  {
+                  symbol->setSym(bassclefSym);
+                  yoff = 1.0;
+                  Symbol* number = new Symbol(score());
+                  number->setMag(smag);
+                  number->setSym(clefEightSym);
+                  addElement(number, .5 * msp, -1.5 * msp);
+                  }
+                  break;
+            case CLEF_F_15MA:
+                  {
+                  symbol->setSym(bassclefSym);
+                  yoff = 1.0;
+                  Symbol* number = new Symbol(score());
+                  symbol->setMag(smag);
+                  number->setSym(clefOneSym);
+                  addElement(number, .0 * msp, -1.5 * msp);
+                  number = new Symbol(score());
+                  number->setSym(clefFiveSym);
+                  addElement(number, .8 * msp, -1.5 * msp);
+                  }
                   break;
             }
       addElement(symbol, .0, .0);

@@ -1,4 +1,5 @@
 7.apr (ws)
+      - added two new clefs, reordered clef list
       - make saved files readable by all
       - forgot to update ppitch in Note() when changing accidental
 6.apr (ws)
