@@ -1,3 +1,6 @@
+7.apr (ws)
+      - make saved files readable by all
+      - forgot to update ppitch in Note() when changing accidental
 6.apr (ws)
       - fix improper vertical note alignment for whole note chords
       - fix ledger line len for chords with displaced note heads

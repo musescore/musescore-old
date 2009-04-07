@@ -269,17 +269,21 @@ void Note::changeAccidental(int accType)
                   return;
                   }
             if (_accidental && _accidental->subtype() == ACC_NATURAL) {
-                  int acc  = m->findAccidental2(this);
-                  _pitch   = line2pitch(_line, clef, 0) + acc;
-                  _tpc     = step2tpc(step, acc);
+                  int acc    = m->findAccidental2(this);
+                  int opitch = _pitch;
+                  _pitch     = line2pitch(_line, clef, 0) + acc;
+                  _ppitch    = _ppitch + (_pitch - opitch);
+                  _tpc       = step2tpc(step, acc);
                   return;
                   }
             }
       _userAccidental = ACC_NONE;
 
-      int acc  = Accidental::subtype2value(accType);
-      _tpc     = step2tpc(step, acc);
-      _pitch   = line2pitch(_line, clef, 0) + acc;
+      int acc    = Accidental::subtype2value(accType);
+      _tpc       = step2tpc(step, acc);
+      int opitch = _pitch;
+      _pitch     = line2pitch(_line, clef, 0) + acc;
+      _ppitch    = _ppitch + (_pitch - opitch);
 
       // compute the "normal" accidental of this note in
       // measure context:
@@ -560,8 +564,10 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 void Note::read(QDomElement e)
       {
       int ptch = e.attribute("pitch", "-1").toInt();
-      if (ptch != -1)
+      if (ptch != -1) {
             _pitch = ptch;
+            _ppitch = ptch;
+            }
       int tpcVal = e.attribute("tpc", "-100").toInt();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

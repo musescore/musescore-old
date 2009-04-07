@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.10">
+<museScore version="1.11">
   <MagIdx>9</MagIdx>
   <xoff>0</xoff>
   <yoff>0</yoff>
@@ -19,9 +19,6 @@
     <beamMaxSlope>0.5</beamMaxSlope>
     <dotNoteDistance>0.5</dotNoteDistance>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <gateTime>85</gateTime>
-    <staccatoGateTime>50</staccatoGateTime>
-    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
@@ -127,7 +124,6 @@
           <tpc>18</tpc>
           </Note>
         <Note>
-          <selected>1</selected>
           <tick>0</tick>
           <pitch>69</pitch>
           <tpc>17</tpc>
@@ -278,6 +274,7 @@
         <track>1</track>
         <tick>3360</tick>
         <ticklen>960</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
           <tick>0</tick>
@@ -710,8 +707,10 @@
         <track>5</track>
         <tick>4320</tick>
         <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>5</track>
+          <selected>1</selected>
           <tick>0</tick>
           <pitch>57</pitch>
           <tpc>17</tpc>
@@ -773,5 +772,5 @@
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>5</cursorTrack>
   </museScore>

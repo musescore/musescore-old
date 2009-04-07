@@ -121,7 +121,6 @@ bool LoadFile::load(const QString& name)
                QWidget::tr("MuseScore: load failed:"),
                error,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            printf("load failed: %s\n", qPrintable(error));
             }
       fp.close();
       return false;
@@ -346,6 +345,10 @@ bool Score::saveFile(bool autosave)
                tr("renaming <") + tmpName + tr("> to <") + name + tr("> failed"));
             return false;
             }
+      // make file readable by all
+      QFile::setPermissions(name, QFile::ReadOwner | QFile::WriteOwner | QFile::ReadUser
+         | QFile::ReadGroup | QFile::ReadOther);
+
       _undo->setClean();
       setSaved(true);
       return true;
@@ -565,11 +568,18 @@ void MuseScore::newFile()
       //  create score from template
       //
       if (newWizard->useTemplate()) {
-            score->read(newWizard->templatePath());
+            if (!score->read(newWizard->templatePath())) {
+                  QMessageBox::warning(0,
+                     tr("MuseScore: failure"),
+                     tr("Load template file ") + newWizard->templatePath() + tr(" failed"),
+                     QString::null, QString::null, QString::null, 0, 1);
+                  delete score;
+                  return;
+                  }
             score->fileInfo()->setFile(createDefaultName());
 
             int m = 0;
-            for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
+            for (Measure* mb = score->firstMeasure(); mb; mb = mb->nextMeasure()) {
                   if (mb->type() == MEASURE)
                         ++m;
                   }
@@ -580,16 +590,21 @@ void MuseScore::newFile()
             //
             // remove all notes & rests
             //
+            for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
+                  Staff* staff = score->staff(staffIdx);
+                  staff->keymap()->clear();
+                  }
+
             int tracks = score->nstaves() * VOICES;
-            for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* measure = static_cast<Measure*>(mb);
+            for (Measure* measure = score->firstMeasure(); measure; measure = measure->nextMeasure()) {
                   for (Segment* s = measure->first(); s;) {
                         Segment* ns = s->next();
                         if (
                               (s->subtype() == Segment::SegChordRest)
                            || (s->subtype() == Segment::SegClef)
+                           || (s->subtype() == Segment::SegKeySig)
+                           || (s->subtype() == Segment::SegGrace)
+                           || (s->subtype() == Segment::SegBreath)
                            || (s->subtype() == Segment::SegTimeSig)
                            ) {
                               for (int track = 0; track < tracks; ++track) {
