@@ -1,4 +1,5 @@
 8.apr (ws)
+      - fix problem with special characters(&<>\") in filename for compressed files
       - make changing of playback instrument undoable, this also sets the dirty
         flag for the score to ensure the changed score is saved
       (tb)
