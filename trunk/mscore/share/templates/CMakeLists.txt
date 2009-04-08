@@ -24,6 +24,7 @@ install(FILES
       instruments_ru.xml
       instruments_fr.xml
       instruments_nl.xml
+      instruments_pt.xml
       instruments.xml
       Choir\ SATB.mscx
       Choir\ SATB\ with\ Piano.mscx
