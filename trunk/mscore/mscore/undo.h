@@ -54,6 +54,7 @@ class MeasureBase;
 class Dynamic;
 class Selection;
 class TextB;
+class Channel;
 
 class UndoGroup;
 
@@ -944,6 +945,24 @@ class EditText : public UndoCommand {
       EditText(TextB* t, int l) : text(t), undoLevel(l) {}
       virtual void undo();
       virtual void redo();
+      };
+
+//---------------------------------------------------------
+//   ChangePatch
+//---------------------------------------------------------
+
+class ChangePatch : public UndoCommand {
+      Part* part;
+      Channel* channel;
+      int prog, hbank, lbank;
+
+      void flip();
+
+   public:
+      ChangePatch(Part* p, Channel* c, int pr, int h, int l)
+         : part(p), channel(c), prog(pr), hbank(h), lbank(l) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
       };
 
 #endif
