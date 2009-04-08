@@ -788,7 +788,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
       xml.stag("container");
       xml.stag("rootfiles");
-      xml.stag(QString("rootfile full-path=\"%1\"").arg(fn));
+      xml.stag(QString("rootfile full-path=\"%1\"").arg(Xml::xmlString(fn)));
       xml.etag();
       int idx = 1;
       foreach(ImagePath* ip, imagePathList) {

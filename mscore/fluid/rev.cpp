@@ -277,14 +277,11 @@ struct _fluid_revmodel_t {
 void fluid_revmodel_update(fluid_revmodel_t* rev);
 void fluid_revmodel_init(fluid_revmodel_t* rev);
 
-fluid_revmodel_t*
-new_fluid_revmodel()
-{
-  fluid_revmodel_t* rev;
-  rev = FLUID_NEW(fluid_revmodel_t);
-  if (rev == NULL) {
-    return NULL;
-  }
+fluid_revmodel_t* new_fluid_revmodel()
+      {
+      fluid_revmodel_t* rev = FLUID_NEW(fluid_revmodel_t);
+      if (rev == 0)
+            return 0;
 
   /* Tie the components to their buffers */
   fluid_comb_setbuffer(&rev->combL[0], rev->bufcombL1, combtuningL1);
@@ -337,8 +334,7 @@ new_fluid_revmodel()
   return rev;
 }
 
-void
-delete_fluid_revmodel(fluid_revmodel_t* rev)
+void delete_fluid_revmodel(fluid_revmodel_t* rev)
 {
   FLUID_FREE(rev);
 }
@@ -478,44 +474,38 @@ fluid_revmodel_getroomsize(fluid_revmodel_t* rev)
   return (rev->roomsize - offsetroom) / scaleroom;
 }
 
-void
-fluid_revmodel_setdamp(fluid_revmodel_t* rev, fluid_real_t value)
+void fluid_revmodel_setdamp(fluid_revmodel_t* rev, fluid_real_t value)
 {
 /*   fluid_clip(value, 0.0f, 1.0f); */
   rev->damp = value * scaledamp;
   fluid_revmodel_update(rev);
 }
 
-fluid_real_t
-fluid_revmodel_getdamp(fluid_revmodel_t* rev)
+fluid_real_t fluid_revmodel_getdamp(fluid_revmodel_t* rev)
 {
   return rev->damp / scaledamp;
 }
 
-void
-fluid_revmodel_setlevel(fluid_revmodel_t* rev, fluid_real_t value)
+void fluid_revmodel_setlevel(fluid_revmodel_t* rev, fluid_real_t value)
 {
 /*   fluid_clip(value, 0.0f, 1.0f); */
 /*   rev->wet = value * scalewet; */
 /*   fluid_revmodel_update(rev); */
 }
 
-fluid_real_t
-fluid_revmodel_getlevel(fluid_revmodel_t* rev)
+fluid_real_t fluid_revmodel_getlevel(fluid_revmodel_t* rev)
 {
   return rev->wet / scalewet;
 }
 
-void
-fluid_revmodel_setwidth(fluid_revmodel_t* rev, fluid_real_t value)
+void fluid_revmodel_setwidth(fluid_revmodel_t* rev, fluid_real_t value)
 {
 /*   fluid_clip(value, 0.0f, 1.0f); */
   rev->width = value;
   fluid_revmodel_update(rev);
 }
 
-fluid_real_t
-fluid_revmodel_getwidth(fluid_revmodel_t* rev)
+fluid_real_t fluid_revmodel_getwidth(fluid_revmodel_t* rev)
 {
   return rev->width;
 }
