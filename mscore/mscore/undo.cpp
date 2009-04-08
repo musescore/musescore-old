@@ -56,6 +56,7 @@
 #include "part.h"
 #include "beam.h"
 #include "dynamics.h"
+#include "seq.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -1851,3 +1852,39 @@ void EditText::redo()
             text->doc()->redo();
       }
 
+//---------------------------------------------------------
+//   ChangePatch
+//---------------------------------------------------------
+
+void ChangePatch::flip()
+      {
+      int oprogram     = channel->program;
+      int ohbank       = channel->hbank;
+      int olbank       = channel->lbank;
+      channel->program = prog;
+      channel->hbank   = hbank;
+      channel->lbank   = lbank;
+      prog             = oprogram;
+      hbank            = ohbank;
+      lbank            = olbank;
+
+      MidiOutEvent event;
+      int idx    = channel->channel;
+      event.port = part->score()->midiPort(idx);
+      event.type = ME_CONTROLLER | part->score()->midiChannel(idx);
+
+      if (channel->hbank != -1) {
+            event.a    = CTRL_HBANK;
+            event.b    = channel->hbank;
+            seq->sendEvent(event);
+            }
+      if (channel->lbank != -1) {
+            event.a    = CTRL_LBANK;
+            event.b    = channel->lbank;
+            seq->sendEvent(event);
+            }
+      event.type = ME_PROGRAM | part->score()->midiChannel(idx);
+      event.a    = channel->program;
+      event.b    = part->useDrumset();
+      seq->sendEvent(event);
+      }

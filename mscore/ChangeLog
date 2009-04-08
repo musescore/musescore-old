@@ -1,4 +1,7 @@
-8.apr (tb)
+8.apr (ws)
+      - make changing of playback instrument undoable, this also sets the dirty
+        flag for the score to ensure the changed score is saved
+      (tb)
       - update Portuguese translation and instruments by José Luciano Batista Gomes
       - update Dutch translation by Jaap Plaisier
 7.apr (ws)

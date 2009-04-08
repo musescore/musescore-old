@@ -23,6 +23,7 @@
 #include "part.h"
 #include "partedit.h"
 #include "seq.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   PartEdit
@@ -157,29 +158,10 @@ void PartEdit::patchChanged(int n)
             if (p == 0)
                   break;
             if (idx == n) {
-                  channel->program = p->prog;
-                  channel->hbank   = p->hbank;
-                  channel->lbank   = p->lbank;
-
-                  MidiOutEvent event;
-                  int idx    = channel->channel;
-                  event.port = part->score()->midiPort(idx);
-                  event.type = ME_CONTROLLER | part->score()->midiChannel(idx);
-
-                  if (channel->hbank != -1) {
-                        event.a    = CTRL_HBANK;
-                        event.b    = channel->hbank;
-                        seq->sendEvent(event);
-                        }
-                  if (channel->lbank != -1) {
-                        event.a    = CTRL_LBANK;
-                        event.b    = channel->lbank;
-                        seq->sendEvent(event);
-                        }
-                  event.type = ME_PROGRAM | part->score()->midiChannel(idx);
-                  event.a    = channel->program;
-                  event.b    = part->useDrumset();
-                  seq->sendEvent(event);
+                  Score* score = part->score();
+                  score->startCmd();
+                  score->undo()->push(new ChangePatch(part, channel, p->prog, p->hbank, p->lbank));
+                  score->endCmd();
                   return;
                   }
             }
