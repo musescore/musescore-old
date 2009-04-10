@@ -1,4 +1,5 @@
 10.apr (ws)
+      - fix: ties do not work via note entry with mouse
       - pitch up/down for drum does not change pitch but change to next/prev
         instrument in drumset
       - disable dragging of drum note heads

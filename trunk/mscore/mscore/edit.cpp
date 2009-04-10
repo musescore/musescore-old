@@ -438,9 +438,24 @@ void Score::putNote(const QPointF& pos, bool replace)
                         setNote(tick, track, pitch, len, headGroup, stemDirection);
                   }
             }
+
+//====================//
+      if (_is.cr) {
+            cr = nextChordRest(_is.cr);
+            if ((cr == 0) && (_is.track % VOICES)) {
+                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
+                  int track = (_is.track / VOICES) * VOICES;
+                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+                  }
+            _is.cr = cr;
+            if (_is.cr) {
+                  emit posChanged(_is.pos());
+                  }
+            }
+//====================//
+
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
-      emit posChanged(_is.pos());
       }
 
 //---------------------------------------------------------
