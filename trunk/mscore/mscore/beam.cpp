@@ -201,7 +201,7 @@ Beam::Beam(Score* s)
    : Element(s)
       {
       _direction    = AUTO;
-      _up           = true;
+      _up           = -1;
       _userModified = false;
       }
 
@@ -703,6 +703,7 @@ void Beam::layout(ScoreLayout* layout)
             isGrace = chord->noteType() != NOTE_NORMAL;
             break;
             }
+
       Spatium bw        = score()->style(ST_beamWidth).toSpatium();
       double bd         = score()->style(ST_beamDistance).toDouble();
       double beamMinLen = point(score()->style(ST_beamMinLen).toSpatium());
@@ -712,7 +713,8 @@ void Beam::layout(ScoreLayout* layout)
             bw *= graceMag;
             beamMinLen *= graceMag;
             }
-      setMag(isGrace ? graceMag : 1.0);
+      else
+            setMag(1.0);
 
       double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
       double min      = 1000.0;
@@ -740,13 +742,14 @@ void Beam::layout(ScoreLayout* layout)
       if (fabs(max-min) > (_spatium * 2.0))
             n = 2.0;    // reduce minimum stem len (heuristic)
 
-      double diff = n * _spatium - min;
       if (isGrace)
             n *= graceMag;
+      double diff = n * _spatium - min;
       if (_up)
             diff = -diff;
       p1.ry() += diff;
       p2.ry() += diff;
+
 
       //---------------------------------------------------
       if (_userModified) {
@@ -1213,10 +1216,14 @@ void Beam::read(QDomElement e)
                   _p2 = QPointF(0.0, val.toDouble());
                   }
             else if (tag == "StemDirection") {
-                  if (val == "up")
+                  if (val == "up") {
                         _direction = UP;
-                  else if (val == "down")
+                        _up = 1;
+                        }
+                  else if (val == "down") {
                         _direction = DOWN;
+                        _up = 0;
+                        }
                   else
                         domError(e);
                   }
@@ -1257,9 +1264,14 @@ void Beam::updateGrips(int* grips, QRectF* grip) const
 
 bool Beam::isUp()
       {
-      if (_direction == AUTO)
-            return _up;
-      return _direction == UP;
+      return _up;
+      }
+
+void Beam::setBeamDirection(Direction d)
+      {
+      _direction = d;
+      if (d != AUTO)
+            _up = d == UP;
       }
 
 //---------------------------------------------------------
@@ -1269,6 +1281,7 @@ bool Beam::isUp()
 void Beam::toDefault()
       {
       _direction = AUTO;
+      _up        = -1;
       _userModified = false;
       setGenerated(true);
       }

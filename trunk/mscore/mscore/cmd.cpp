@@ -532,10 +532,8 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
       _is.cr = cr;
-      if (_is.cr) {
-            // _is.setPos(_is.cr->tick());
-            emit posChanged(_is.pos());
-            }
+      if (cr)
+            emit posChanged(cr->tick());
       return n;
       }
 

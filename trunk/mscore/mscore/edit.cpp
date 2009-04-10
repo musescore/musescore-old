@@ -439,7 +439,6 @@ void Score::putNote(const QPointF& pos, bool replace)
                   }
             }
 
-//====================//
       if (_is.cr) {
             cr = nextChordRest(_is.cr);
             if ((cr == 0) && (_is.track % VOICES)) {
@@ -452,7 +451,6 @@ void Score::putNote(const QPointF& pos, bool replace)
                   emit posChanged(_is.pos());
                   }
             }
-//====================//
 
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
@@ -1107,7 +1105,6 @@ void Score::cmdDeleteSelection()
             }
       sel->elements()->clear();
       select(0, SELECT_SINGLE, 0);
-      updateEntryMode();
       layoutAll = true;
       }
 
@@ -1761,47 +1758,20 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       }
 
 //---------------------------------------------------------
-//   updateEntryMode
-//    given the tick position and staffIdx,
-//    select current ChordRest
-//
-//   called after cmdDeleteSelection
+//   setInputPos
 //---------------------------------------------------------
 
-void Score::updateEntryMode()
+void Score::setInputPos(ChordRest* cr)
       {
-      _is.cr = 0;
-      if (!noteEntryMode())
-            return;
-      if (_is.cr == 0) {
-            Segment* segment = tick2segment(_is.pos());
-            if (segment) {
-                  Element* e = segment->element(_is.track);
-                  if (e && e->isChordRest())
-                        _is.cr = static_cast<ChordRest*>(e);
-                  else
-                        printf("no CR at %d track %d\n", _is.pos(), _is.track);
-                  }
-            else {
-                  setNoteEntry(false);
-                  }
+      // select(note, SELECT_SINGLE, 0);
+      cr = nextChordRest(cr);
+      if ((cr == 0) && (_is.track % VOICES)) {
+            Segment* s = tick2segment(cr->tick() + cr->tickLen());
+            int track = (cr->track() / VOICES) * VOICES;
+            cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
-      if (_is.cr) {
-            if (_is.cr->type() == REST)
-                  select(_is.cr, SELECT_SINGLE, 0);
-            else if (_is.cr->type() == CHORD)
-                  select(static_cast<Chord*>(_is.cr)->downNote(), SELECT_SINGLE, 0);
-            }
-      }
-
-//---------------------------------------------------------
-//   setPos
-//---------------------------------------------------------
-
-void Score::setPos(int tick)
-      {
-//      _is.setPos(tick);
-      emit posChanged(tick);
-      updateEntryMode();
+      _is.cr = cr;
+      if (cr)
+            emit posChanged(cr->tick());
       }
 
