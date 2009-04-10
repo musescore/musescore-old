@@ -237,8 +237,9 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Direction dir = c->stemDirection();
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);
-                  score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
-                  score()->setPos(tick() + len);
+                  n             = score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
+                  score()->setInputPos(n->chord());
+                  delete e;
                   }
                   break;
 

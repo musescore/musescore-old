@@ -112,7 +112,7 @@ ChordRest::ChordRest(const ChordRest& cr)
 
 bool ChordRest::isUp() const
       {
-      return _beam ? _beam->up() : _up;
+      return _beam ? (_beam->up() != -1 ? _beam->up() : _up) : _up;
       }
 
 //---------------------------------------------------------

@@ -387,7 +387,6 @@ class Score : public QObject {
 
       void cmdEnterRest();
       void cmdEnterRest(Duration::DurationType d);
-      void updateEntryMode();
 
       Rest* addRest(int tick, int len, int track);
       void lyricsEndEdit();
@@ -733,8 +732,6 @@ class Score : public QObject {
       void setXoff(double v)  { _xoff = v;    }
       void setYoff(double v)  { _yoff = v;    }
 
-      void setPos(int tick);
-
       ImagePath* addImage(const QString&);      // add image to imagePathList
       void moveBracket(int staffIdx, int srcCol, int dstCol);
       Measure* getCreateMeasure(int tick);
@@ -756,6 +753,8 @@ class Score : public QObject {
       int utime2utick(double utime);
       void updateRepeatList(bool expandRepeats);
       void fixPpitch();
+
+      void setInputPos(ChordRest* cr);
       };
 
 extern Score* gscore;

@@ -84,7 +84,7 @@ class Beam : public Element {
       QList<ChordRest*> _elements;
       BeamSegmentList beamSegments;
       Direction _direction;
-      bool _up;
+      int _up;                // -1: unknown  0: down   1: up
 
       bool _userModified;
       QPointF _p1, _p2;
@@ -123,12 +123,12 @@ class Beam : public Element {
       virtual void move(double, double);
       virtual QRectF bbox() const;
       virtual void draw(QPainter&) const;
-      bool up() const                     { return _up; }
-      void setUp(bool v)                  { _up = v; }
+      int up() const                      { return _up; }
+      void setUp(int v)                   { _up = v; }
       void setId(int i) const             { _id = i; }
       int id() const                      { return _id; }
 
-      void setBeamDirection(Direction d)  { _direction = d; }
+      void setBeamDirection(Direction d);
       bool isUp();
       };
 
