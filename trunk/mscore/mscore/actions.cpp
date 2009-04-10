@@ -1178,16 +1178,6 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-flat",
-         QT_TR_NOOP("flat"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("flat"),
-         QT_TR_NOOP("flat"),
-         &flatIcon
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-flat2",
          QT_TR_NOOP("double flat"),
          0,

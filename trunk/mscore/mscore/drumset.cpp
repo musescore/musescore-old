@@ -112,6 +112,40 @@ void Drumset::clear()
       }
 
 //---------------------------------------------------------
+//   nextPitch
+//---------------------------------------------------------
+
+int Drumset::nextPitch(int ii)
+      {
+      for (int i = ii + 1; i < 127; ++i) {
+            if (isValid(i))
+                  return i;
+            }
+      for (int i = 0; i <= ii; ++i) {
+            if (isValid(i))
+                  return i;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   prevPitch
+//---------------------------------------------------------
+
+int Drumset::prevPitch(int ii)
+      {
+      for (int i = ii - 1; i >= 0; --i) {
+            if (isValid(i))
+                  return i;
+            }
+      for (int i = 127; i >= ii; --i) {
+            if (isValid(i))
+                  return i;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   initDrumset
 //    initialize standard midi drumset
 //---------------------------------------------------------

@@ -1371,15 +1371,23 @@ void Score::upDown(bool up, bool octave)
       int newPitch = _is.pitch;
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
+            Part* part = oNote->staff()->part();
             int pitch   = oNote->pitch();
             int newTpc;
-            if (octave)  {
-                  newPitch = pitch + (up ? 12 : -12);
-                  newTpc   = oNote->tpc();
+            if (part->useDrumset()) {
+                  Drumset* ds = part->drumset();
+                  newPitch    = up ? ds->prevPitch(pitch) : ds->nextPitch(pitch);
+                  newTpc      = oNote->tpc();
                   }
             else {
-                  newPitch = up ? pitch+1 : pitch-1;
-                  newTpc   = pitch2tpc(newPitch);
+                  if (octave)  {
+                        newPitch = pitch + (up ? 12 : -12);
+                        newTpc   = oNote->tpc();
+                        }
+                  else {
+                        newPitch = up ? pitch+1 : pitch-1;
+                        newTpc   = pitch2tpc(newPitch);
+                        }
                   }
             if (newPitch < 0) {
                   newPitch = 0;

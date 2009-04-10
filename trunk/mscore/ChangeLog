@@ -1,3 +1,10 @@
+10.apr (ws)
+      - pitch up/down for drum does not change pitch but change to next/prev
+        instrument in drumset
+      - disable dragging of drum note heads
+      - fix: freeze when double click in drum palette
+9.apr (ws)
+      - fix shortcut for flat
 8.apr (ws)
       - fix problem with special characters(&<>\") in filename for compressed files
       - make changing of playback instrument undoable, this also sets the dirty

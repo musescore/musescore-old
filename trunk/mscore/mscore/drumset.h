@@ -59,6 +59,8 @@ struct Drumset {
       void save(Xml&);
       void load(QDomElement);
       void clear();
+      int nextPitch(int);
+      int prevPitch(int);
       };
 
 extern Drumset* smDrumset;

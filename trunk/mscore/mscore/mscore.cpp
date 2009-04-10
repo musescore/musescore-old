@@ -1554,9 +1554,11 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
-      qApp->setStyleSheet(appStyleSheet());
-      if (!preferences.style.isEmpty())
-            QApplication::setStyle(preferences.style);
+      if (!useFactorySettings) {
+            qApp->setStyleSheet(appStyleSheet());
+            if (!preferences.style.isEmpty())
+                  QApplication::setStyle(preferences.style);
+            }
 
       //
       //  load internal fonts
