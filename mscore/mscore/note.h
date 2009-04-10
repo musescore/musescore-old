@@ -97,7 +97,7 @@ class Note : public Element {
       int _lineOffset;        ///< Used during mouse dragging.
       int  _head;              ///< note head symbol number
 
-      virtual bool isMovable() const { return true; }
+      virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
 

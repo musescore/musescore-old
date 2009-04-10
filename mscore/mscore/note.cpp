@@ -136,6 +136,18 @@ Note::Note(const Note& n)
       }
 
 //---------------------------------------------------------
+//   isMovable
+//---------------------------------------------------------
+
+bool Note::isMovable() const
+      {
+      //
+      // drumset notes are not movable
+      //
+      return !staff()->part()->useDrumset();
+      }
+
+//---------------------------------------------------------
 //   setPitch
 //---------------------------------------------------------
 
@@ -1021,8 +1033,9 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Direction dir = c->stemDirection();
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);
-                  score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
-                  score()->setPos(tick() + len);
+                  int tick      = chord()->tick();
+                  score()->setNote(tick, t, n->pitch(), len, headGroup, dir);
+                  score()->setPos(tick + len);
                   }
                   break;
 
