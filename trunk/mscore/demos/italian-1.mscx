@@ -526,9 +526,9 @@
     <tick>9120</tick>
     <tick2>9480</tick2>
     <Segment>
-      <off1 x="0.0806563" y="-0.241969"/>
+      <off1 x="0.157681" y="-0.858166"/>
       <off2 x="0" y="0"/>
-      <offset x="0.0806563" y="-0.241969"/>
+      <offset x="0.157681" y="-0.858166"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -1038,13 +1038,13 @@
     <tick>106560</tick>
     <tick2>109440</tick2>
     <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    <Segment>
       <off1 x="-0.462148" y="0.693222"/>
       <off2 x="0" y="0"/>
       <offset x="-0.462148" y="0.693222"/>
-      </Segment>
-    <Segment>
-      <off1 x="0" y="0"/>
-      <off2 x="0" y="0"/>
       <track>0</track>
       </Segment>
     </Trill>
@@ -1858,7 +1858,6 @@
       </Segment>
     </HairPin>
   <Slur id="359">
-    <tick>0</tick>
     <SlurSegment no="0">
       <o1 x="0.154049" y="-1.38644"/>
       <o4 x="-0.385123" y="-0.924296"/>
@@ -1900,7 +1899,7 @@
       </VBox>
     <Measure number="1">
       <Dynamic>
-        <velocity>2097162</velocity>
+        <velocity>127</velocity>
         <dynType>2097184</dynType>
         <subtype>f</subtype>
         <offset x="-1.51732" y="-0.12923"/>
@@ -2171,10 +2170,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="5">
       <Dynamic>
-        <velocity>2097184</velocity>
+        <velocity>127</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
-        <offset x="-0.0974566" y="1.48988"/>
+        <offset x="-0.0974566" y="1.02773"/>
         <style>12</style>
         </Dynamic>
       <Rest>
@@ -4922,7 +4921,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.885pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">sempre <span style=" font-family:'MScore1'; font-style:normal;">p</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:11pt;">sempre </span><span style=" font-family:'MScore1'; font-size:11pt; font-style:normal;">p</span></p></body></html>
           </html-data>
         </Dynamic>
       <Beam id="67">
@@ -9015,6 +9014,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="90">
       <Dynamic>
+        <velocity>139717864</velocity>
         <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-0.527124" y="-1.78029"/>
@@ -9652,7 +9652,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.885pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-style:normal;">p</span> grazioso e tranquillo</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:11pt; font-style:normal;">p</span><span style=" font-size:11pt;"> grazioso e tranquillo</span></p></body></html>
           </html-data>
         </Dynamic>
       <Beam id="178">
@@ -11982,7 +11982,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.885pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-style:normal;">p</span> dolce cantabile</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:11pt; font-style:normal;">p</span><span style=" font-size:11pt;"> dolce cantabile</span></p></body></html>
           </html-data>
         </Dynamic>
       <Beam id="218">
@@ -14456,6 +14456,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="167">
       <Dynamic>
+        <velocity>201359592</velocity>
         <dynType>0</dynType>
         <subtype>ff</subtype>
         <offset x="-2.07461" y="-0.201366"/>
@@ -26048,5 +26049,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>1</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

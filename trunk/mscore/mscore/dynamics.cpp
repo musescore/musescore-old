@@ -28,21 +28,24 @@
 #include "style.h"
 #include "layout.h"
 
+//
+// see: http://en.wikipedia.org/wiki/File:Dynamic's_Note_Velocity.svg
+//
 Dyn dynList[] = {
       Dyn( -1,  "other-dynamics"),
       Dyn(  1,  "pppppp"),
       Dyn(  5,  "ppppp"),
       Dyn( 10,  "pppp"),
-      Dyn( 30,  "ppp"),
-      Dyn( 50,  "pp"),
-      Dyn( 60,  "p"),
-      Dyn( 70,  "mp"),
+      Dyn( 16,  "ppp"),
+      Dyn( 33,  "pp"),
+      Dyn( 49,  "p"),
+      Dyn( 64,  "mp"),
       Dyn( 80,  "mf"),
-      Dyn( 90,  "f"),
-      Dyn(100,  "ff"),
-      Dyn(110,  "fff"),
-      Dyn(120,  "ffff"),
-      Dyn(125,  "fffff"),
+      Dyn( 96,  "f"),
+      Dyn(112,  "ff"),
+      Dyn(126,  "fff"),
+      Dyn(127,  "ffff"),
+      Dyn(127,  "fffff"),
       Dyn(127,  "ffffff"),
       Dyn( -1,  "fp"),
       Dyn( -1,  "sf"),

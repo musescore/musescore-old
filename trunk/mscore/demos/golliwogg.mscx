@@ -1556,7 +1556,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
-        <velocity>2097162</velocity>
+        <velocity>110</velocity>
         <dynType>2097184</dynType>
         <subtype>sff</subtype>
         <offset x="0.306481" y="0.510802"/>
@@ -1564,7 +1564,7 @@ p, li { white-space: pre-wrap; }
         <style>12</style>
         </Dynamic>
       <Dynamic>
-        <velocity>2097184</velocity>
+        <velocity>90</velocity>
         <dynType>7340042</dynType>
         <offset x="0.637271" y="0.297395"/>
         <tick>2880</tick>
@@ -1787,7 +1787,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="9">
       <Dynamic>
-        <velocity>50</velocity>
+        <velocity>40</velocity>
         <dynType>0</dynType>
         <subtype>pp</subtype>
         <style>12</style>
@@ -1833,7 +1833,7 @@ p, li { white-space: pre-wrap; }
         <velocity>80</velocity>
         <dynType>0</dynType>
         <subtype>mf</subtype>
-        <offset x="-4.45136" y="-1.23123"/>
+        <offset x="-4.27727" y="-1.05714"/>
         <style>12</style>
         </Dynamic>
       <StaffText>
@@ -2073,6 +2073,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="12">
       <Dynamic>
+        <velocity>110</velocity>
         <dynType>0</dynType>
         <subtype>sff</subtype>
         <offset x="-0.947098" y="0.378839"/>
@@ -2615,9 +2616,10 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>110</velocity>
         <dynType>0</dynType>
         <subtype>sff</subtype>
-        <offset x="-1.23123" y="0.852388"/>
+        <offset x="-0.883055" y="1.46169"/>
         <tick>18960</tick>
         <style>12</style>
         </Dynamic>
@@ -2969,7 +2971,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Rest>
-        <offset x="0.306481" y="-4"/>
+        <offset x="0.306481" y="-3"/>
         <track>1</track>
         <tick>24960</tick>
         <ticklen>480</ticklen>
@@ -2992,7 +2994,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="-4"/>
+        <offset x="0.0870436" y="-3"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -3142,7 +3144,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="32">
       <Dynamic>
-        <velocity>2097184</velocity>
+        <velocity>60</velocity>
         <dynType>0</dynType>
         <offset x="-0.0778523" y="1.8298"/>
         <style>12</style>
@@ -3290,7 +3292,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Rest>
-        <offset x="0.177411" y="-1"/>
+        <offset x="0.264455" y="-4"/>
         <track>1</track>
         <tick>32640</tick>
         <ticklen>480</ticklen>
@@ -3298,6 +3300,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
           <tick>33120</tick>
@@ -3804,6 +3807,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>60</velocity>
         <dynType>0</dynType>
         <offset x="-0.180013" y="0.501714"/>
         <style>12</style>
@@ -3948,6 +3952,7 @@ p, li { white-space: pre-wrap; }
         <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="-0.95287" y="-1.44339"/>
+        <selected>1</selected>
         <style>12</style>
         </Dynamic>
       <Rest>
@@ -6985,7 +6990,6 @@ p, li { white-space: pre-wrap; }
         <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-1.14892" y="2.6037"/>
-        <selected>1</selected>
         <style>12</style>
         </Dynamic>
       <Beam id="89">

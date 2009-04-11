@@ -277,11 +277,31 @@ void Score::fixPpitch()
                         if (!el || el->type() != CHORD)
                               continue;
                         Chord* chord = static_cast<Chord*>(el);
+                        int velocity = velo[staffIdx].velo(chord->tick());
+
+                        foreach(Articulation* a, *chord->getArticulations()) {
+                              switch(a->subtype()) {
+                                    case SforzatoaccentSym:
+                                          velocity = velocity + (velocity * 100)/50;
+                                          break;
+                                    case UmarcatoSym:
+                                    case DmarcatoSym:
+                                          velocity = velocity + (velocity * 100)/30;
+                                          break;
+                                    default:
+                                          break;
+                                    }
+                              }
+                        if (velocity > 127)
+                              velocity = 127;
+                        else if (velocity < 1)
+                              velocity = 1;
+
                         NoteList* nl = chord->noteList();
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
                               Note* note = in->second;
                               note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
-                              note->setVelocity(velo[staffIdx].velo(chord->tick()));
+                              note->setVelocity(velocity);
                               }
                         }
                   }
@@ -343,6 +363,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                                     gateTime = _style[ST_tenutoGateTime].toInt();
                                     break;
                               case StaccatoSym:
+                                    gateTime = _style[ST_staccatoGateTime].toInt();
+                                    break;
+                              case UmarcatoSym:
+                              case DmarcatoSym:
                                     gateTime = _style[ST_staccatoGateTime].toInt();
                                     break;
                               default:

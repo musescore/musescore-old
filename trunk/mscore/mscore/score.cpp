@@ -2251,9 +2251,9 @@ void Score::search(const QString& s)
                               ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
                               if (cr) {
                                     if (cr->type() == CHORD)
-                                          select(cr, SELECT_SINGLE, 0);
-                                    else
                                           select(static_cast<Chord*>(cr)->upNote(), SELECT_SINGLE, 0);
+                                    else
+                                          select(cr, SELECT_SINGLE, 0);
                                     break;
                                     }
                               }
