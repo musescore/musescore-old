@@ -2,7 +2,7 @@
 <museScore version="1.11">
   <Mag>1.41807</Mag>
   <xoff>3.73185</xoff>
-  <yoff>-53.8088</yoff>
+  <yoff>-16.5813</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -191,7 +191,29 @@
         <ticklen>480</ticklen>
         <Note pitch="62" tpc="16"/>
         </Chord>
+      <Beam id="1">
+        </Beam>
       <Chord>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <selected>1</selected>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
         </Chord>
@@ -233,7 +255,6 @@
       </Measure>
     <Measure number="3">
       <Rest>
-        <selected>1</selected>
         </Rest>
       </Measure>
     <Measure number="4">
@@ -365,7 +386,25 @@
         <ticklen>480</ticklen>
         <Note pitch="62" tpc="16"/>
         </Chord>
+      <Beam id="2">
+        </Beam>
       <Chord>
+        <ticklen>240</ticklen>
+        <Beam>2</Beam>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="68" tpc="10"/>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
+        <ticklen>240</ticklen>
+        <Beam>2</Beam>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
         </Chord>

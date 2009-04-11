@@ -1,4 +1,7 @@
+11.apr (ws)
+      - fix displaced notehead (visible in italian-1.mscx bar 34)
 10.apr (ws)
+      - reduce stem len of beamed grace notes
       - fix: ties do not work via note entry with mouse
       - pitch up/down for drum does not change pitch but change to next/prev
         instrument in drumset

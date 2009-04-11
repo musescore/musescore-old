@@ -444,6 +444,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       bool mirror   = false;
       int lastHead  = -1;
       // int lastTicks = -1;
+
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
             int move   = note->staffMove();
@@ -457,33 +458,36 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             int nmirror   = note->chord()->isUp() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
 
-            if (conflict && (nmirror == mirror) && !sameHead) {
-                  Note* note = notes[idx];
-                  note->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
-                  moveLeft = true;
-                  }
-            else
-                  note->chord()->setXpos(0);
-            if (conflict && (nmirror == mirror) && sameHead) {
-                  if (ticks > notes[idx-1]->chord()->tickLen()) {
-                        notes[idx-1]->setHidden(true);
-                        note->setHidden(false);
+            Chord* chord = note->chord();
+            if (conflict && (nmirror == mirror)) {
+                  if (sameHead) {
+                        chord->setXpos(0.0);
+                        if (ticks > notes[idx-1]->chord()->tickLen()) {
+                              notes[idx-1]->setHidden(true);
+                              note->setHidden(false);
+                              }
+                        else {
+                              note->setHidden(true);
+                              }
                         }
                   else {
-                        note->setHidden(true);
+                        if (line > ll)
+                              note->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
+                        else
+                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
+                        moveLeft = true;
                         }
                   }
-            else
+            else {
+                  chord->setXpos(0.0);
                   note->setHidden(false);
+                  }
+
             mirror = nmirror;
             note->setMirror(mirror);
             if (mirror)
                   moveLeft = true;
 
-//            if ((nNotes >= 3) && (i == (nNotes-1)) && mirror && !notes[i-2]->mirror()) {
-//                  notes[i-1]->setMirror(true);
-//                  mirror = false;
-//                  }
             move1    = move;
             ll       = line;
             lastHead = head;

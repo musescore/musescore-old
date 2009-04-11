@@ -1,79 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.9">
-  <Mag>2.06053</Mag>
-  <xoff>-149.511</xoff>
-  <yoff>-95.2424</yoff>
+<museScore version="1.11">
+  <Mag>0.985545</Mag>
+  <xoff>-1.82205</xoff>
+  <yoff>-7.17919</yoff>
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
-    <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
-    <systemDistance>9.25</systemDistance>
     <lyricsDistance>6.5</lyricsDistance>
-    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
-    <systemFrameDistance>7</systemFrameDistance>
     <frameSystemDistance>7</frameSystemDistance>
-    <minMeasureWidth>4</minMeasureWidth>
-    <barWidth>0.16</barWidth>
-    <doubleBarWidth>0.16</doubleBarWidth>
-    <endBarWidth>0.3</endBarWidth>
-    <doubleBarDistance>0.3</doubleBarDistance>
-    <endBarDistance>0.3</endBarDistance>
-    <bracketWidth>0.35</bracketWidth>
     <bracketDistance>0.3</bracketDistance>
-    <clefLeftMargin>0.5</clefLeftMargin>
-    <keysigLeftMargin>0.5</keysigLeftMargin>
-    <timesigLeftMargin>0.5</timesigLeftMargin>
-    <clefKeyRightMargin>1.75</clefKeyRightMargin>
-    <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.5</measureSpacing>
-    <barNoteDistance>1.5</barNoteDistance>
-    <noteBarDistance>1</noteBarDistance>
-    <staffLineWidth>0.08</staffLineWidth>
     <ledgerLineWidth>0.08</ledgerLineWidth>
-    <akkoladeWidth>1.6</akkoladeWidth>
-    <prefixDistance>0.13</prefixDistance>
-    <prefixNoteDistance>0.22</prefixNoteDistance>
-    <beamWidth>0.48</beamWidth>
-    <beamDistance>0.5</beamDistance>
-    <beamMinLen>1.25</beamMinLen>
     <beamMinSlope>0.1</beamMinSlope>
     <beamMaxSlope>0.5</beamMaxSlope>
-    <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
-    <dotRestDistance>0.25</dotRestDistance>
-    <dotDotDistance>0.5</dotDotDistance>
-    <propertyDistanceHead>0.5</propertyDistanceHead>
-    <propertyDistanceStem>0.5</propertyDistanceStem>
-    <propertyDistance>0.25</propertyDistance>
-    <pageFillLimit>0.7</pageFillLimit>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <hairpinHeight>1.2</hairpinHeight>
-    <hairpinContHeight>0.5</hairpinContHeight>
-    <hairpinWidth>0.13</hairpinWidth>
-    <showPageNumber>1</showPageNumber>
-    <showPageNumberOne>0</showPageNumberOne>
-    <pageNumberOddEven>1</pageNumberOddEven>
-    <showMeasureNumber>1</showMeasureNumber>
-    <showMeasureNumberOne>0</showMeasureNumberOne>
-    <measureNumberInterval>5</measureNumberInterval>
-    <measureNumberAllStaffs>0</measureNumberAllStaffs>
-    <measureNumberSystem>1</measureNumberSystem>
-    <graceNoteMag>0.7</graceNoteMag>
-    <smallStaffMag>0.7</smallStaffMag>
-    <smallNoteMag>0.7</smallNoteMag>
-    <smallClefMag>0.8</smallClefMag>
-    <genClef>1</genClef>
-    <genKeysig>1</genKeysig>
     <gateTime>70</gateTime>
-    <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
@@ -103,10 +54,14 @@
       </Staff>
     <trackName>Violin</trackName>
     <shortName>
+      <subtype>InstrumentShort</subtype>
+      <style>10</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">V1n.</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:10.2047pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">V1n.</span></p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
       <Channel name="normal">
@@ -119,41 +74,29 @@ p, li { white-space: pre-wrap; }
       </Instrument>
     </Part>
   <Slur id="1">
-    <track>0</track>
     <up>2</up>
     </Slur>
   <Staff id="1">
     <VBox>
       <height>10</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
-        <track>-1</track>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Test 3</p></body></html>
-          </html-data>
+        <style>2</style>
+        <text>Test 3</text>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-        <track>-1</track>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Displaced note heads</p></body></html>
-          </html-data>
+        <style>3</style>
+        <text>Displaced note heads</text>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-        <track>-1</track>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Werner Schweer</p></body></html>
-          </html-data>
+        <style>4</style>
+        <text>Werner Schweer</text>
         </Text>
       </VBox>
     <Measure number="1">
@@ -215,7 +158,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="67" tpc="15"/>
+        <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -225,6 +168,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>1920</tick>
         <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
           <pitch>59</pitch>
@@ -233,6 +177,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Beam id="2">
         <track>1</track>
+        <StemDirection>down</StemDirection>
         </Beam>
       <Chord>
         <track>1</track>
@@ -258,6 +203,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>3360</tick>
         <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
           <pitch>65</pitch>
@@ -272,6 +218,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Rest>
+        <offset x="0.50186" y="-2"/>
         <track>1</track>
         <tick>3840</tick>
         <ticklen>240</ticklen>
@@ -360,18 +307,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>960</ticklen>
         <Slur type="stop" number="1"/>
         <StemDirection>down</StemDirection>
-        <Note>
-          <selected>1</selected>
-          <pitch>67</pitch>
-          <tpc>15</tpc>
-          </Note>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Rest>
-        <offset x="0.19326" y="1.76804"/>
+        <offset x="0.19326" y="2"/>
         <ticklen>480</ticklen>
         <small>1</small>
         </Rest>
@@ -423,6 +366,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
           <pitch>72</pitch>
@@ -430,12 +374,12 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.177314" y="1.77314"/>
+        <offset x="0.302779" y="-1"/>
         <track>1</track>
         <tick>7200</tick>
         <ticklen>480</ticklen>
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>
