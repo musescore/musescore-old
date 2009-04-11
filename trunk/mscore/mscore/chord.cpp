@@ -823,10 +823,18 @@ void Chord::layout(ScoreLayout* layout)
                   }
 
             if (uppos < 0 || downpos >= 10) {
-                  for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() - 1, i, upl ? -1 : 0);
-                  for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() - 1, i, dol ? 1 : 0);
+                  for (int i = -2; i >= uppos; i -= 2) {
+                        int extend = upl ? -1 : 0;
+                        if (i <= uppos)
+                              extend = 0;
+                        addLedgerLine(x1, staffIdx() - 1, i, extend);
+                        }
+                  for (int i = 10; i <= downpos; i += 2) {
+                        int extend = dol ? 1 : 0;
+                        if (i >= downpos)
+                              extend = 0;
+                        addLedgerLine(x2, staffIdx() - 1, i, extend);
+                        }
                   }
             }
 
@@ -852,10 +860,17 @@ void Chord::layout(ScoreLayout* layout)
 
       if (uppos < 0 || downpos >= 10) {
             for (int i = -2; i >= uppos; i -= 2) {
-                  addLedgerLine(x1, staffIdx(), i, upl ? -1 : 0);
+                  int extend = upl ? -1 : 0;
+                  if (i <= uppos)
+                        extend = 0;
+                  addLedgerLine(x1, staffIdx(), i, extend);
                   }
-            for (int i = 10; i <= downpos; i += 2)
-                  addLedgerLine(x2, staffIdx(), i, dol ? 1 : 0);
+            for (int i = 10; i <= downpos; i += 2) {
+                  int extend = dol ? 1 : 0;
+                  if (i >= downpos)
+                        extend = 0;
+                  addLedgerLine(x2, staffIdx(), i, extend);
+                  }
             }
 
       //---------------------------------------------------
@@ -884,10 +899,18 @@ void Chord::layout(ScoreLayout* layout)
                         }
                   }
             if (uppos < 0 || downpos >= 10) {
-                  for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x1, staffIdx() + 1, i, upl ? -1 : 0);
-                  for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() + 1, i, dol ? 1 : 0);
+                  for (int i = -2; i >= uppos; i -= 2) {
+                        int extend = upl ? -1 : 0;
+                        if (i <= uppos)
+                              extend = 0;
+                        addLedgerLine(x1, staffIdx() + 1, i, extend);
+                        }
+                  for (int i = 10; i <= downpos; i += 2) {
+                        int extend = dol ? 1 : 0;
+                        if (i >= downpos)
+                              extend = 0;
+                        addLedgerLine(x2, staffIdx() + 1, i, extend);
+                        }
                   }
             }
 

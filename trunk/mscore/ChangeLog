@@ -1,4 +1,6 @@
 11.apr (ws)
+      - dont extend top/bottom ledger line for chords with displaced note heads
+        (layout enhancement)
       - fix displaced notehead (visible in italian-1.mscx bar 34)
 10.apr (ws)
       - reduce stem len of beamed grace notes
