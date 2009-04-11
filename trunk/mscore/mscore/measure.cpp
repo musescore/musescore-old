@@ -471,7 +471,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                               }
                         }
                   else {
-                        if (line > ll)
+                        if ((line > ll) || !chord->up())
                               note->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
                         else
                               notes[idx-incIdx]->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
