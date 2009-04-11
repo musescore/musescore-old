@@ -1941,11 +1941,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "find",
-         QT_TR_NOOP("find"),
+         QT_TR_NOOP("search"),
          Qt::CTRL + Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TR_NOOP("find"),
-         QT_TR_NOOP("find")
+         QT_TR_NOOP("Search"),
+         QT_TR_NOOP("Search")
          ),
       Shortcut(0, 0, 0),
       };

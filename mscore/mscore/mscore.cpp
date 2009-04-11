@@ -572,6 +572,7 @@ MuseScore::MuseScore()
       selectionChanged(0);
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
+      menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
       QMenu* menuVoices = new QMenu(tr("Voices"));

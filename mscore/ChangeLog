@@ -1,4 +1,5 @@
 11.apr (ws)
+      - add "Search" to edit menu
       - dont extend top/bottom ledger line for chords with displaced note heads
         (layout enhancement)
       - fix displaced notehead (visible in italian-1.mscx bar 34)
