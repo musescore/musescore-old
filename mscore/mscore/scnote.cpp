@@ -257,3 +257,24 @@ void ScNotePrototype::setPitch(int v)
       thisNote()->setPitch(v);
       }
 
+//---------------------------------------------------------
+//   getColor
+//---------------------------------------------------------
+
+QColor ScNotePrototype::getColor() const
+      {
+      return thisNote()->color();
+      }
+
+//---------------------------------------------------------
+//   setColor
+//---------------------------------------------------------
+
+void ScNotePrototype::setColor(QColor c)
+      {
+      thisNote()->setColor(c);
+      }
+
+
+
+

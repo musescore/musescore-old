@@ -113,6 +113,7 @@ Objects
          Properties:
             pitch       integer     midi pitch value of note
             name        string      name of note pitch value (read only)
+            color       QColor      notehead color
 
    Text
          create:   var a = Text(score);

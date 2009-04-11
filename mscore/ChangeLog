@@ -6,6 +6,7 @@
       (la)
       - enable paste of chord names on rest
       - fix export of dominant chord in musicXML
+      - add ability to color notehead from plugins
 10.apr (ws)
       - reduce stem len of beamed grace notes
       - fix: ties do not work via note entry with mouse
