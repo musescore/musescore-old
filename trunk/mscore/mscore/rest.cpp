@@ -174,6 +174,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == BREATH)
          || (type == CHORD)
          || (type == DYNAMIC)
+         || (type == HARMONY)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -242,7 +243,12 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   delete e;
                   }
                   break;
-
+            case HARMONY:
+                  e->setParent(measure());
+                  e->setTick(tick());
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->undoAddElement(e);
+                  return e;
             default:
                   return ChordRest::drop(p1, p2, e);
             }
