@@ -66,6 +66,7 @@ class ScNotePrototype : public QObject, public QScriptable
       Q_OBJECT
       Q_PROPERTY(QString name READ getName SCRIPTABLE true)
       Q_PROPERTY(int pitch READ getPitch WRITE setPitch SCRIPTABLE true)
+      Q_PROPERTY(QColor color READ getColor WRITE setColor SCRIPTABLE true)
 
       Note* thisNote() const;
 
@@ -76,6 +77,8 @@ class ScNotePrototype : public QObject, public QScriptable
       QString getName() const;
       int getPitch() const;
       void setPitch(int v);
+      QColor getColor() const;
+      void setColor(QColor c);
 
    public slots:
       };
