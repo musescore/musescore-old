@@ -187,7 +187,6 @@ void ScoreLayout::doLayout()
                   return;
                   }
             }
-
       if (first() == 0) {
             // score is empty
             foreach(Page* page, _pages)
@@ -215,6 +214,10 @@ void ScoreLayout::doLayout()
                   mb->setDirty();
                   if (mb->type() == MEASURE) {
                         Measure* m = static_cast<Measure*>(mb);
+#if 1 // CS1
+                        if (staffIdx == 0)
+                              m->layoutBeams1(this);  // find hooks / stem direction
+#endif
                         m->layout0(staffIdx);
                         }
                   }
@@ -1036,11 +1039,12 @@ void ScoreLayout::reLayout(Measure* m)
 
 bool ScoreLayout::doReLayout()
       {
+#if 0
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
                   static_cast<Measure*>(startLayout)->layout0(staffIdx);
             }
-
+#endif
       System* system  = startLayout->system();
       qreal sysWidth  = system->width();
       double minWidth = system->leftMargin();
