@@ -643,6 +643,8 @@ void Beam::layout(ScoreLayout* layout)
                   }
             }
       else {
+            foreach(ChordRest* cr, _elements)
+                  cr->setUp(_up);
             bool concave = false;
             for (int i = 0; i < _elements.size() - 2; ++i) {
                   int l1 = _elements[i]->line(_up);
