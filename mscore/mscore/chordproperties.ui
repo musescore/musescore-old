@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ChordPropertyBase</class>
- <widget class="QDialog" name="ChordPropertyBase" >
-  <property name="geometry" >
+ <widget class="QDialog" name="ChordPropertyBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,83 +10,89 @@
     <height>313</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Chord Properties</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_3" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
+      <widget class="QLabel" name="label_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text" >
+       <property name="text">
         <string/>
        </property>
-       <property name="pixmap" >
-        <pixmap resource="mscore.qrc" >:/data/bg1.jpg</pixmap>
+       <property name="pixmap">
+        <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox" >
-       <property name="title" >
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
         <string>Chord Properties</string>
        </property>
-       <property name="flat" >
+       <property name="flat">
         <bool>true</bool>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2" >
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QCheckBox" name="smallCheckBox" >
-          <property name="text" >
+         <widget class="QCheckBox" name="smallCheckBox">
+          <property name="text">
            <string>small</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="noStemCheckBox" >
-          <property name="text" >
+         <widget class="QCheckBox" name="noStemCheckBox">
+          <property name="text">
            <string>no stem</string>
           </property>
          </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout" >
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label" >
-            <property name="text" >
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
              <string>additional leading space </string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="QDoubleSpinBox" name="extraLeadingSpace" >
-            <property name="suffix" >
-             <string comment="spatium unit" >sp</string>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="extraLeadingSpace">
+            <property name="suffix">
+             <string comment="spatium unit">sp</string>
             </property>
-            <property name="singleStep" >
+            <property name="minimum">
+             <double>-990000.000000000000000</double>
+            </property>
+            <property name="singleStep">
              <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_2" >
-            <property name="text" >
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
              <string>additional trailing space</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="QDoubleSpinBox" name="extraTrailingSpace" >
-            <property name="suffix" >
-             <string comment="spatium unit" >sp</string>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="extraTrailingSpace">
+            <property name="suffix">
+             <string comment="spatium unit">sp</string>
             </property>
-            <property name="singleStep" >
+            <property name="minimum">
+             <double>-99.000000000000000</double>
+            </property>
+            <property name="singleStep">
              <double>0.100000000000000</double>
             </property>
            </widget>
@@ -93,11 +100,11 @@
          </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
+         <spacer name="verticalSpacer">
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
             <height>21</height>
@@ -106,11 +113,11 @@
          </spacer>
         </item>
         <item>
-         <widget class="QDialogButtonBox" name="buttonBox" >
-          <property name="orientation" >
+         <widget class="QDialogButtonBox" name="buttonBox">
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="standardButtons" >
+          <property name="standardButtons">
            <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
           </property>
          </widget>
@@ -123,7 +130,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="mscore.qrc" />
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -132,11 +139,11 @@
    <receiver>ChordPropertyBase</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -148,11 +155,11 @@
    <receiver>ChordPropertyBase</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

@@ -1,3 +1,6 @@
+12.apr (ws)
+      - fix note stem direction of beamed notes if notes are above and below the beam
+      - add new demo "praeludium2.mscx" (J.S.Bach WTC I)
 11.apr (ws)
       - add "Search" to edit menu
       - dont extend top/bottom ledger line for chords with displaced note heads

@@ -39,9 +39,11 @@
 //   startBeam
 //---------------------------------------------------------
 
+#if 0
 static BeamHint startBeamList[] = {
       BeamHint(0, 0, 0, 0, 0, 0),
       };
+#endif
 
 //---------------------------------------------------------
 //   endBeam
@@ -539,7 +541,7 @@ QString Beam::xmlType(ChordRest* cr) const
 //   layout1
 //---------------------------------------------------------
 
-void Beam::layout1(ScoreLayout* layout)
+void Beam::layout1(ScoreLayout*)
       {
       //delete old segments
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
@@ -623,46 +625,62 @@ void Beam::layout(ScoreLayout* layout)
       //    - the slope is set to zero on "concave" chord sequences
       //------------------------------------------------------------
 
-      bool concave = false;
-      for (int i = 0; i < _elements.size() - 2; ++i) {
-            int l1 = _elements[i]->line(_up);
-            int l  = _elements[i+1]->line(_up);
-            int l2 = _elements[i+2]->line(_up);
-
-            concave = ((l1 < l2) && ((l < l1) || (l > l2)))
-                    || ((l1 > l2) && ((l > l1) || (l < l2)));
-            if (concave)
-                  break;
-            }
-
-      int l1 = _elements.front()->line(_up);
-      int l2 = _elements.back()->line(_up);
-
-      int cut     = 0;
       qreal slope = 0.0;
+      int cut = 0;
+      if (_userModified) {
+            double p1x = c1->upNote()->canvasPos().x();
+            double p2x = c2->upNote()->canvasPos().x();
+            slope      = (_p2.y() - _p1.y()) / (p2x - p1x);
+            double y2  = _p1.y() + c1->upNote()->chord()->canvasPos().y();
 
-      if (!concave) {
-            double dx = (a2->pos().x() + a2->segment()->pos().x())
-                          - (a1->pos().x() + a1->segment()->pos().x());
-            double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
-            if (dx) {
-                  slope = (l2 - l1) * _spatium * .5 / dx;
-                  if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
-                        cut = slope > 0.0 ? 0 : -1;
-                        slope = 0;
-                        }
-                  else if (slope > maxSlope) {
-                        slope = maxSlope;
-                        cut = 1;
-                        }
-                  else if (-slope > maxSlope) {
-                        slope = -maxSlope;
-                        cut = -1;
-                        }
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  Chord* c  = static_cast<Chord*>(cr);
+                  QPointF p = c->upNote()->canvasPos();
+                  double y1 = y2 + (p.x() - p1x) * slope;
+                  cr->setUp(y1 < p.y());
                   }
             }
+      else {
+            bool concave = false;
+            for (int i = 0; i < _elements.size() - 2; ++i) {
+                  int l1 = _elements[i]->line(_up);
+                  int l  = _elements[i+1]->line(_up);
+                  int l2 = _elements[i+2]->line(_up);
 
-      cut *= (_up ? 1 : -1);
+                  concave = ((l1 < l2) && ((l < l1) || (l > l2)))
+                          || ((l1 > l2) && ((l > l1) || (l < l2)));
+                  if (concave)
+                        break;
+                  }
+
+            int l1 = _elements.front()->line(_up);
+            int l2 = _elements.back()->line(_up);
+
+            if (!concave) {
+                  double dx = (a2->pos().x() + a2->segment()->pos().x())
+                                - (a1->pos().x() + a1->segment()->pos().x());
+                  double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
+                  if (dx) {
+                        slope = (l2 - l1) * _spatium * .5 / dx;
+                        if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
+                              cut = slope > 0.0 ? 0 : -1;
+                              slope = 0;
+                              }
+                        else if (slope > maxSlope) {
+                              slope = maxSlope;
+                              cut = 1;
+                              }
+                        else if (-slope > maxSlope) {
+                              slope = -maxSlope;
+                              cut = -1;
+                              }
+                        }
+                  }
+
+            cut *= (_up ? 1 : -1);
+            }
 
       //---------------------------------------------------
       //    create beam segments
@@ -672,16 +690,18 @@ void Beam::layout(ScoreLayout* layout)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium())/2;
+      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
       double xoffRight = xoffLeft;
 
-      QPointF p1s(a1->stemPos(_up, false));
-      QPointF p2s(a2->stemPos(_up, false));
+      QPointF p1s(c1->stemPos(c1->up(), false));
+      QPointF p2s(c2->stemPos(c2->up(), false));
+
       double x1 = p1s.x() - xoffLeft;
       double x2 = p2s.x() + xoffRight;
 
-      QPointF p1, p2;
       double ys = (x2 - x1) * slope;
+
+      QPointF p1, p2;
       if (cut >= 0) {
             // left dot is reference
             p1 = QPointF(x1, p1s.y());
@@ -719,6 +739,7 @@ void Beam::layout(ScoreLayout* layout)
             setMag(1.0);
 
       double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+
       double min      = 1000.0;
       double max      = -1000.0;
 
@@ -887,6 +908,7 @@ void Beam::layout(ScoreLayout* layout)
             if (cr->type() != CHORD)
                   continue;
             Chord* chord = static_cast<Chord*>(cr);
+            bool _up = cr->up();
 
             Stem* stem = chord->stem();
             if (!stem) {
@@ -980,7 +1002,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       if (_userModified) {
             p1.setY(_p1.y());
             p2.setY(_p2.y());
-            slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
+            slope = (p2.y() - p1.y()) / (p2.x() - p1.x());  // CHECK: already calculated?
             }
       else {
             double yu2, yo1;
@@ -991,9 +1013,6 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                   if (cr->type() != CHORD)
                         continue;
                   _up = cr->up();
-// printf("  up %d %f %f\n", _up,
-//   cr->stemPos(true, false).y(),
-//   cr->stemPos(false, false).y());
 
                   double y = cr->stemPos(!_up, false).y();
                   if (cr->staffMove() == 0) {
