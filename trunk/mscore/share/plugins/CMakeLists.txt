@@ -23,6 +23,7 @@ install(FILES
       test2.js
       test3.js
       notenames.js
+      colornotes.js
       fonttest.js
       test4.js
       test4.ui
