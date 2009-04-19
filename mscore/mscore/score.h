@@ -754,6 +754,7 @@ class Score : public QObject {
       void updateRepeatList(bool expandRepeats);
       void fixPpitch();
 
+      void nextInputPos(ChordRest* cr);
       void setInputPos(ChordRest* cr);
       };
 

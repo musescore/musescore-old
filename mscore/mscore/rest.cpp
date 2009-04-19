@@ -120,12 +120,12 @@ void Rest::draw(QPainter& p) const
 void Rest::setUserOffset(double x, double y)
       {
       int line = lrint(y  / _spatium);
-      int off = 0;
-      if (voice() == 2)
-            off = -3;
-      else if (voice() == 1 || voice() == 3)
-            off = 3;
-      line += off;
+//      int off = 0;
+//      if (voice() == 2)
+//            off = -3;
+//      else if (voice() == 1 || voice() == 3)
+//            off = 3;
+//      line += off;
       if (_sym == wholerestSym && (line <= -2 || line >= 4))
             _sym = outsidewholerestSym;
       else if (_sym == outsidewholerestSym && (line > -2 && line < 4))
@@ -134,7 +134,8 @@ void Rest::setUserOffset(double x, double y)
             _sym = outsidehalfrestSym;
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
-      setUserOff(QPointF(x / _spatium, double(line-off)));
+//      setUserOff(QPointF(x / _spatium, double(line-off)));
+      setUserOff(QPointF(x / _spatium, double(line)));
       }
 
 //---------------------------------------------------------
@@ -239,7 +240,7 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);
                   n             = score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
-                  score()->setInputPos(n->chord());
+                  score()->nextInputPos(n->chord());
                   delete e;
                   }
                   break;

@@ -103,29 +103,91 @@ void KeySig::layout(ScoreLayout*)
       qreal xo = 0.0;
 
 
-      switch(t2) {
-            case 7:   addLayout(naturalSym, 6.0, clefTable[clef].lines[6]);
-            case 6:   addLayout(naturalSym, 5.0, clefTable[clef].lines[5]);
-            case 5:   addLayout(naturalSym, 4.0, clefTable[clef].lines[4]);
-            case 4:   addLayout(naturalSym, 3.0, clefTable[clef].lines[3]);
-            case 3:   addLayout(naturalSym, 2.0, clefTable[clef].lines[2]);
-            case 2:   addLayout(naturalSym, 1.0, clefTable[clef].lines[1]);
-            case 1:   addLayout(naturalSym, 0.0, clefTable[clef].lines[0]);
-                  xo = double(t2) + .5;
+      int accidentals = 0;
+      switch(t1) {
+            case 7:
+            case -7:
+                  accidentals = 0x7f;
                   break;
-            case -7:  addLayout(naturalSym, 6.0, clefTable[clef].lines[13]);
-            case -6:  addLayout(naturalSym, 5.0, clefTable[clef].lines[12]);
-            case -5:  addLayout(naturalSym, 4.0, clefTable[clef].lines[11]);
-            case -4:  addLayout(naturalSym, 3.0, clefTable[clef].lines[10]);
-            case -3:  addLayout(naturalSym, 2.0, clefTable[clef].lines[9]);
-            case -2:  addLayout(naturalSym, 1.0, clefTable[clef].lines[8]);
-            case -1:  addLayout(naturalSym, 0.0, clefTable[clef].lines[7]);
-            case 0:
-                  xo = double(-t2) + .5;
+            case 6:
+            case -6:
+                  accidentals = 0x3f;
                   break;
+            case 5:
+            case -5:
+                  accidentals = 0x1f;
+                  break;
+            case 4:
+            case -4:
+                  accidentals = 0xf;
+                  break;
+            case 3:
+            case -3:
+                  accidentals = 0x7;
+                  break;
+            case 2:
+            case -2:
+                  accidentals = 0x3;
+                  break;
+            case 1:
+            case -1:
+                  accidentals = 0x1;
+                  break;
+
+            case 0:   break;
             default:
                   printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
                   break;
+            }
+
+      int naturals = 0;
+      switch(t2) {
+            case 7:
+            case -7:
+                  naturals = 0x7f;
+                  break;
+            case 6:
+            case -6:
+                  naturals = 0x3f;
+                  break;
+            case 5:
+            case -5:
+                  naturals = 0x1f;
+                  break;
+            case 4:
+            case -4:
+                  naturals = 0xf;
+                  break;
+            case 3:
+            case -3:
+                  naturals = 0x7;
+                  break;
+            case 2:
+            case -2:
+                  naturals = 0x3;
+                  break;
+            case 1:
+            case -1:
+                  naturals = 0x1;
+                  break;
+
+            case 0:   break;
+            default:
+                  printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
+                  break;
+            }
+
+      xo = 0.0;
+      int coffset = t2 < 0 ? 7 : 0;
+
+      if (!((t1 > 0) ^ (t2 > 0)))
+            naturals &= ~accidentals;
+
+      for (int i = 0; i < 7; ++i) {
+            if (naturals & (1 << i)) {
+                  addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
+                  xo += 1.0;
+                  }
             }
 
       switch(t1) {

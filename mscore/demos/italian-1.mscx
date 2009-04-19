@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
   <MagIdx>9</MagIdx>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <xoff>-320.74</xoff>
+  <yoff>-156.379</yoff>
   <Spatium>1.6</Spatium>
   <Division>480</Division>
   <Style>
@@ -1037,16 +1037,6 @@
     <track>0</track>
     <tick>106560</tick>
     <tick2>109440</tick2>
-    <Segment>
-      <off1 x="0" y="0"/>
-      <off2 x="0" y="0"/>
-      </Segment>
-    <Segment>
-      <off1 x="-0.462148" y="0.693222"/>
-      <off2 x="0" y="0"/>
-      <offset x="-0.462148" y="0.693222"/>
-      <track>0</track>
-      </Segment>
     </Trill>
   <Trill>
     <track>0</track>
@@ -3382,6 +3372,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>7611264</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.882064" y="1.30413"/>
@@ -3882,6 +3873,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="27">
       <Dynamic>
+        <velocity>199886672</velocity>
         <dynType>0</dynType>
         <subtype>ff</subtype>
         <offset x="-0.703431" y="1.61395"/>
@@ -4949,6 +4941,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Beam>67</Beam>
         <Note>
+          <selected>1</selected>
           <pitch>69</pitch>
           <tpc>17</tpc>
           <Tie>
@@ -4961,7 +4954,11 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Slur type="start" number="74"/>
         <Beam>68</Beam>
-        <Note pitch="69" tpc="17"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
@@ -8259,6 +8256,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="81">
       <Dynamic>
+        <velocity>200562832</velocity>
         <dynType>0</dynType>
         <subtype>mf</subtype>
         <offset x="-1.98792" y="0.163162"/>
@@ -10977,6 +10975,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>14863</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.59371" y="0.538949"/>
@@ -11052,6 +11051,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>24</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.782829" y="-0.0969607"/>
@@ -12678,6 +12678,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>202503232</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-2.13524" y="0.276264"/>
@@ -13890,6 +13891,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>205924912</velocity>
         <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-0.320491" y="-0.210232"/>
@@ -16066,6 +16068,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="189">
       <Dynamic>
+        <velocity>198214880</velocity>
         <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.271159" y="0.397547"/>
@@ -16197,6 +16200,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="191">
       <Dynamic>
+        <velocity>19491</velocity>
         <dynType>0</dynType>
         <subtype>ff</subtype>
         <offset x="4.53574" y="0.513793"/>
@@ -17460,6 +17464,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="30">
       <Dynamic>
+        <velocity>6815744</velocity>
         <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0.127443" y="-10.341"/>
@@ -17935,8 +17940,16 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>367</Beam>
-        <Note pitch="60" tpc="14"/>
-        <Note pitch="65" tpc="13"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <selected>1</selected>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
@@ -20848,6 +20861,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="93">
       <Dynamic>
+        <velocity>193787528</velocity>
         <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-0.0781696" y="-0.154408"/>
@@ -26049,5 +26063,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

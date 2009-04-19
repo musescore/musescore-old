@@ -45,46 +45,46 @@ const ClefInfo clefTable[] = {
 //             name line octave  yoffset pitchoffset  name
       { "G",   2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble Clef (G Clef)")
+            QT_TRANSLATE_NOOP("clefTable", "Treble clef")
             },
       { "G",   2,  1,   7, 52,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble Clef 8va") },
+            QT_TRANSLATE_NOOP("clefTable", "Treble clef 8va") },
       { "G",   2,  2,  14, 59,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble Clef 15ma") },
+            QT_TRANSLATE_NOOP("clefTable", "Treble clef 15ma") },
       { "G",   2, -1,  -7, 38,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble Clef 8va bassa") },
+            QT_TRANSLATE_NOOP("clefTable", "Treble clef 8vb") },
       { "F",   4,  0, -12, 33,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass Clef (F Clef)") },
+            QT_TRANSLATE_NOOP("clefTable", "Bass clef") },
       { "F",   4, -1, -19, 26,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 8va bassa") },
+            QT_TRANSLATE_NOOP("clefTable", "Bass clef 8vb") },
       { "F",   4, -2, -26, 19,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 15mb bassa") },
+            QT_TRANSLATE_NOOP("clefTable", "Bass clef 15mb") },
 
       { "F",   4,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone Clef") },
+            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (C clef)") },
       { "F",   2,  0, -14, 31,
             { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
-            QT_TRANSLATE_NOOP("clefTable", "Subbass Clef") },
+            QT_TRANSLATE_NOOP("clefTable", "Subbass clef") },
 
       { "C",   1,  0,  -2, 43,
             { 5, 1, 4, 0, 3, -1, 2, 2, -1, 3, 0, 4, 1, 5 },
-            QT_TRANSLATE_NOOP("clefTable", "Soprano Clef") },        // CLEF_C1
+            QT_TRANSLATE_NOOP("clefTable", "Soprano clef") },        // CLEF_C1
       { "C",   2,  0,  -4, 41,
             { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 },
-            QT_TRANSLATE_NOOP("clefTable", "Mezzo-soprano Clef") },  // CLEF_C2
+            QT_TRANSLATE_NOOP("clefTable", "Mezzo-soprano clef") },  // CLEF_C2
       { "C",   3,  0,  -6, 39,
             { 1, 4, 0, 3, 6, 2, 5, 5, 2, 6, 3, 7, 4, 8 },
-            QT_TRANSLATE_NOOP("clefTable", "Alto Clef") },           // CLEF_C3
+            QT_TRANSLATE_NOOP("clefTable", "Alto clef") },           // CLEF_C3
       { "C",   4,  0,  -8, 37,
             { 6, 2, 5, 1, 4, 0, 3, 3, 0, 4, 1, 5, 2, 6 },
-            QT_TRANSLATE_NOOP("clefTable", "Tenor Clef")  },          // CLEF_C4
+            QT_TRANSLATE_NOOP("clefTable", "Tenor clef")  },          // CLEF_C4
 
       { "TAB", 5,  0,   0,  0,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
@@ -95,18 +95,18 @@ const ClefInfo clefTable[] = {
 
       { "C",   5,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone Clef") },            // CLEF_C5
+            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },            // CLEF_C5
       { "G",   1,  0,   2, 47,
             { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
-            QT_TRANSLATE_NOOP("clefTable", "French Violin Clef") },       // CLEF_G4
+            QT_TRANSLATE_NOOP("clefTable", "French violin clef") },       // CLEF_G4
 
       { "F",   4,  1, -5, 40,                                          // CLEF_F_8VA
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 8va") },
+            QT_TRANSLATE_NOOP("clefTable", "Bass clef 8va") },
 
       { "F",   4,  2,  2, 47,                                          // CLEF_F_15MA
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass Clef 15ma") },
+            QT_TRANSLATE_NOOP("clefTable", "Bass clef 15ma") },
       };
 
 //---------------------------------------------------------
