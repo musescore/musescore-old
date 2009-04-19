@@ -1,3 +1,6 @@
+19.apr (ws)
+      - note entry mode: modified chord entry, prev-chord, next-chord
+      - fix default stem direction in multi voice context
 12.apr (ws)
       - fix note stem direction of beamed notes if notes are above and below the beam
       - add new demo "praeludium2.mscx" (J.S.Bach WTC I)
