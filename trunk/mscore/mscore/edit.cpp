@@ -1758,10 +1758,10 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       }
 
 //---------------------------------------------------------
-//   setInputPos
+//   nextInputPos
 //---------------------------------------------------------
 
-void Score::setInputPos(ChordRest* cr)
+void Score::nextInputPos(ChordRest* cr)
       {
       // select(note, SELECT_SINGLE, 0);
       cr = nextChordRest(cr);
@@ -1774,4 +1774,15 @@ void Score::setInputPos(ChordRest* cr)
       if (cr)
             emit posChanged(cr->tick());
       }
+
+//---------------------------------------------------------
+//   setPos
+//---------------------------------------------------------
+
+void Score::setInputPos(ChordRest* cr)
+      {
+      _is.cr = cr;
+      emit posChanged(cr ? cr->tick() : 0);
+      }
+
 

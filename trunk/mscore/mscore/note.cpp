@@ -498,7 +498,9 @@ void Note::draw(QPainter& p) const
                   double dd = point(score()->styleS(ST_dotDotDistance));
                   double y = 0;
                   // do not draw dots on line, except ledger lines
-                  if ((_line >= 0) && (_line < 9) && (_line & 1) == 0)
+//                  if ((_line >= 0) && (_line < 9) && (_line & 1) == 0)
+                  // do not draw dots on line
+                  if ((_line & 1) == 0)
                         y = -_spatium *.5 * mag();
 
                   for (int i = 0; i < dots; ++i)
@@ -1035,7 +1037,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   score()->select(0, SELECT_SINGLE, 0);
                   int tick      = chord()->tick();
                   n             = score()->setNote(tick, t, n->pitch(), len, headGroup, dir);
-                  score()->setInputPos(n->chord());
+                  score()->nextInputPos(n->chord());
                   delete e;
                   }
                   break;

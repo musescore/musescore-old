@@ -52,6 +52,7 @@ class InputState {
 
       InputState();
       int pos() const;
+      void setPos(ChordRest* cr);
       };
 
 #endif

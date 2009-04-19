@@ -100,7 +100,8 @@ void Navigator::paintEvent(QPaintEvent* ev)
             QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
 
             p.begin(&pm);
-            p.setRenderHint(QPainter::Antialiasing, true);
+//            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setRenderHint(QPainter::Antialiasing, false);
 
             p.fillRect(rr, _fgColor);
             if (_score->layout()->pages().empty())

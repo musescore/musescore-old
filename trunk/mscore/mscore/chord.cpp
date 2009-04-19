@@ -996,10 +996,10 @@ void Chord::computeUp()
       int si = staffIdx();
       if (measure()->mstaff(si)->hasVoices) {
             switch(voice()) {
-                  case 0:  _up = score()->style(ST_stemDir1).toBool() == UP; break;
-                  case 1:  _up = score()->style(ST_stemDir2).toBool() == UP; break;
-                  case 2:  _up = score()->style(ST_stemDir3).toBool() == UP; break;
-                  case 3:  _up = score()->style(ST_stemDir4).toBool() == UP; break;
+                  case 0:  _up = (score()->style(ST_stemDir1).toDirection() == UP); break;
+                  case 1:  _up = (score()->style(ST_stemDir2).toDirection() == UP); break;
+                  case 2:  _up = (score()->style(ST_stemDir3).toDirection() == UP); break;
+                  case 3:  _up = (score()->style(ST_stemDir4).toDirection() == UP); break;
                   }
             return;
             }

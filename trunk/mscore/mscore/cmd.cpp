@@ -483,12 +483,16 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             // add note to chord
             Note* on = getSelectedNote();
             if (on) {
+                  ChordRest* cr = _is.cr;
+
                   n = addNote(on->chord(), pitch);
                   select(n, SELECT_SINGLE, 0);
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
                   // reset position
-                  // _is.setPos(_is.pos() + on->chord()->tickLen());
+                  // _is.cr = n->chord();
+
+                  _is.cr = cr;
                   }
             return n;
             }
@@ -2790,32 +2794,59 @@ void Score::move(const QString& cmd)
       ChordRest* cr = sel->lastChordRest();
       if (sel->activeCR())
             cr = sel->activeCR();
-      if (cr) {
+      if (!cr)
+            return;
+      if (noteEntryMode()) {
             Element* el = 0;
-            if (cmd == "next-chord")
-                  el = nextChordRest(cr);
-            else if (cmd == "prev-chord")
+            if (cmd == "prev-chord") {
                   el = prevChordRest(cr);
-            else if (cmd == "next-measure")
-                  el = nextMeasure(cr);
-            else if (cmd == "prev-measure")
-                  el = prevMeasure(cr);
-            if (el) {
-                  // int tick = el->tick();
-                  if (el->type() == CHORD) {
-                        el = static_cast<Chord*>(el)->upNote();
-                        mscore->play(el);
+                  if (el) {
+                        if (el->type() == CHORD)
+                              el = static_cast<Chord*>(el)->upNote();
+                        select(el, SELECT_SINGLE, 0);
                         }
-                  select(el, SELECT_SINGLE, 0);
-                  adjustCanvasPosition(el, false);
-
-/* set in select  if (noteEntryMode()) {
-                        // _is.setPos(tick);
-                        emit posChanged(_is.pos());
-                        }
-                  */
-
+                  setInputPos(cr);
                   }
+            else if (cmd == "next-chord") {
+                  el = nextChordRest(cr);
+                  if (el->type() == CHORD)
+                        el = static_cast<Chord*>(el)->upNote();
+                  select(el, SELECT_SINGLE, 0);
+                  setInputPos(nextChordRest(_is.cr));
+                  }
+            else if (cmd == "next-measure") {
+                  el = nextMeasure(cr);
+                  if (el->type() == CHORD)
+                        el = static_cast<Chord*>(el)->upNote();
+                  select(el, SELECT_SINGLE, 0);
+                  }
+            else if (cmd == "prev-measure") {
+                  el = prevMeasure(cr);
+                  if (el->type() == CHORD)
+                        el = static_cast<Chord*>(el)->upNote();
+                  select(el, SELECT_SINGLE, 0);
+                  }
+            if (el)
+                  adjustCanvasPosition(el, false);
+            return;
+            }
+
+      Element* el = 0;
+      if (cmd == "next-chord")
+            el = nextChordRest(cr);
+      else if (cmd == "prev-chord")
+            el = prevChordRest(cr);
+      else if (cmd == "next-measure")
+            el = nextMeasure(cr);
+      else if (cmd == "prev-measure")
+            el = prevMeasure(cr);
+      if (el) {
+            Note* note = 0;
+            if (el->type() == CHORD) {
+                  note = static_cast<Chord*>(el)->upNote();
+                  mscore->play(note);
+                  }
+            adjustCanvasPosition(el, false);
             }
       }
 
