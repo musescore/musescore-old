@@ -1,6 +1,12 @@
 19.apr (ws)
       - note entry mode: modified chord entry, prev-chord, next-chord
       - fix default stem direction in multi voice context
+      (db)
+      - added soprano cornet, treble clef euphonium, baritone, and treble clef baritone
+        to English instruments list
+      - updates to handbook using latest SVN version of pisa. Support for inline images 
+        now possible (see voices and beams pages)
+      - update Norwegian translation by daghenningsorbo
 12.apr (ws)
       - fix note stem direction of beamed notes if notes are above and below the beam
       - add new demo "praeludium2.mscx" (J.S.Bach WTC I)

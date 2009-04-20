@@ -1048,6 +1048,17 @@
            </channel>
          </instrument>
       <instrument>
+         <name>Soprano Cornet</name>
+         <short-name>Sop. Cnt.</short-name>
+         <transposition>3</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
          <name>Flugelhorn</name>
          <short-name>Flghn.</short-name>
          <transposition>-2</transposition>
@@ -1083,16 +1094,49 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tuba</name>
-         <short-name>Tba.</short-name>
+         <name>Euphonium</name>
+         <short-name>Euph.</short-name>
          <clef>4</clef>
          <channel>
             <program>58</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Euphonium</name>
+         <name>Euphonium (T.C.)</name>
          <short-name>Euph.</short-name>
+         <transposition>-14</transposition>
+         <channel>
+            <program>57</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Baritone</name>
+         <short-name>Bari</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Baritone (T.C.)</name>
+         <short-name>Bari</short-name>
+         <transposition>-14</transposition>
+         <channel>
+            <program>57</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Tuba</name>
+         <short-name>Tba.</short-name>
          <clef>4</clef>
          <channel>
             <program>58</program>
