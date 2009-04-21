@@ -171,9 +171,9 @@ void Preferences::init()
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/demo.mscx";
-      workingDirectory         = ".";
-      lastSaveDirectory        = ".";
-      lastSaveCopyDirectory    = ".";
+      workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+      lastSaveDirectory        = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+      lastSaveCopyDirectory    = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       showSplashScreen         = true;
 
       rewind.type              = -1;
@@ -375,9 +375,12 @@ void Preferences::read()
       portaudioDevice    = s.value("portaudioDevice", -1).toInt();
       layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
-      workingDirectory   = s.value("workingDirectory", ".").toString();
-      lastSaveDirectory  = s.value("lastSaveDirectory", ".").toString();
-      lastSaveCopyDirectory    = s.value("lastSaveCopyDirectory", ".").toString();
+
+      QString path = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+      workingDirectory   = s.value("workingDirectory", path).toString();
+      lastSaveDirectory  = s.value("lastSaveDirectory", path).toString();
+      lastSaveCopyDirectory    = s.value("lastSaveCopyDirectory", path).toString();
+
       showSplashScreen         = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();
       playRepeats              = s.value("playRepeats", true).toBool();

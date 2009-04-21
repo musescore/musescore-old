@@ -1,3 +1,6 @@
+21.apr (ws)
+      use QDesktopServices::storageLocation to set default working directory to
+      "DocumentsLocation"
 19.apr (ws)
       - note entry mode: modified chord entry, prev-chord, next-chord
       - fix default stem direction in multi voice context
