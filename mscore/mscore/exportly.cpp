@@ -1253,8 +1253,9 @@ void ExportLy::writeKeySig(int st)
   indent();
   out << "\\key ";
   switch(st) {
+  case 7:  out << "cis"; break;
   case 6:  out << "fis"; break;
-  case 5:  out << "h";   break;
+  case 5:  out << "b";   break;
   case 4:  out << "e";   break;
   case 3:  out << "a";   break;
   case 2:  out << "d";   break;
