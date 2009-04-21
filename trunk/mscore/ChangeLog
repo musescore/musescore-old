@@ -1,4 +1,5 @@
 21.apr (ws)
+      - optimize layout for notehead dots in multi voice context
       - layout optimization for articulation symbols
       - use QDesktopServices::storageLocation to set default working directory to
       "DocumentsLocation"
