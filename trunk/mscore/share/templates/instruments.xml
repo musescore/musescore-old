@@ -1142,6 +1142,28 @@
             <program>58</program>
             </channel>
          </instrument>
+      <instrument>
+         <name>E<symbol name="flat"/> Bass</name>
+         <short-name>E<symbol name="flat"/> Bass</short-name>
+         <transposition>-21</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Bass</name>
+         <short-name>B<symbol name="flat"/> Bass</short-name>
+         <transposition>-26</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
       </instrument-group>
 
    <instrument-group name="Percussion">

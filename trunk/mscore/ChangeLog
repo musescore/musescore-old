@@ -2,6 +2,9 @@
       - layout optimization for articulation symbols
       - use QDesktopServices::storageLocation to set default working directory to
       "DocumentsLocation"
+      (db)
+      - LilyPond: fix export of B major and C-sharp major key signatures
+      - add E flat bass and B flat bass to brass section of English instruments list
 19.apr (ws)
       - note entry mode: modified chord entry, prev-chord, next-chord
       - fix default stem direction in multi voice context
