@@ -2845,7 +2845,9 @@ void Score::move(const QString& cmd)
             if (el->type() == CHORD) {
                   note = static_cast<Chord*>(el)->upNote();
                   mscore->play(note);
+                  el = note;
                   }
+            select(el, SELECT_SINGLE, 0);
             adjustCanvasPosition(el, false);
             }
       }
