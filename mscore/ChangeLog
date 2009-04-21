@@ -1,5 +1,6 @@
 21.apr (ws)
-      use QDesktopServices::storageLocation to set default working directory to
+      - layout optimization for articulation symbols
+      - use QDesktopServices::storageLocation to set default working directory to
       "DocumentsLocation"
 19.apr (ws)
       - note entry mode: modified chord entry, prev-chord, next-chord
@@ -7,7 +8,7 @@
       (db)
       - added soprano cornet, treble clef euphonium, baritone, and treble clef baritone
         to English instruments list
-      - updates to handbook using latest SVN version of pisa. Support for inline images 
+      - updates to handbook using latest SVN version of pisa. Support for inline images
         now possible (see voices and beams pages)
       - update Norwegian translation by daghenningsorbo
 12.apr (ws)

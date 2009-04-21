@@ -335,8 +335,12 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       System* s  = m->system();
       int idx    = staff()->rstaff();
       qreal x    = centerX();
-      qreal sy   = _spatium;      // TODO: style parameter: distance to top/bottom line
-      qreal sy2  = _spatium * .5; // TODO: style parameter: distance to top/bottom note
+      double distance  = point(score()->styleS(ST_propertyDistance));
+      double distance1 = point(score()->styleS(ST_propertyDistanceHead));
+      double distance2 = point(score()->styleS(ST_propertyDistanceStem));
+
+      qreal sy   = distance1; // TODO: style parameter: distance to top/bottom line
+      qreal sy2  = distance2;
 
       qreal chordTopY = upPos()   - point(score()->styleS(ST_propertyDistanceStem)) - sy2;
       qreal chordBotY = downPos() + point(score()->styleS(ST_propertyDistanceHead)) + sy2;
@@ -350,44 +354,53 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       //    pass 1
       //    place all articulations with anchor at chord/rest
       //
-      for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
-            Articulation* a = *ia;
+
+      foreach (Articulation* a, articulations) {
             qreal y = 0;
             ArticulationAnchor aa = a->anchor();
-            if (aa == A_CHORD)
-                  aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
+            if (aa != A_CHORD)
+                  continue;
+            QRectF bb(a->bbox());
+
+            aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
             if (aa == A_TOP_CHORD) {
-                  y = chordTopY - dyTop;
+                  dyTop += bb.top();
+                  y = chordTopY + dyTop;
                   //
                   // check for collision with staff line
                   //
                   if (y >= staffTopY+.1) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
-                        if (delta < 0.4)
+                        if (delta < 0.4) {
                               y -= _spatium * .5;
+                              dyTop -= _spatium * .5;
+                              }
                         }
                   a->setPos(x, y);
-                  dyTop += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
+                  dyTop -= (distance + bb.bottom());
                   }
             else if (aa == A_BOTTOM_CHORD) {
-                  y = chordBotY + dyBot;
+                  dyBot -= bb.bottom();
+                  y = chordBotY - dyBot;
                   //
                   // check for collision with staff line
                   //
-                  if (y <= staffBotY+.1) {
+                  if (y <= staffBotY+.1+sy) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
-                        if (delta < 0.4)
+                        if (delta < 0.4) {
                               y += _spatium * .5;
+                              dyBot -= _spatium * .5;
+                              }
                         }
                   a->setPos(x, y);
-                  dyBot += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
+                  dyBot -= (distance - bb.top());
                   }
             }
 
       //
-      //    pass 1
+      //    pass 2
       //    now place all articulations with staff top or bottom anchor
       //
       if (chordTopY - dyTop > staffTopY)
