@@ -2,6 +2,7 @@
 
 #include <QtScript/QScriptEngine>
 #include <QVariant>
+#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
@@ -14,6 +15,7 @@
 #include <qgraphicsscene.h>
 #include <qgraphicssceneevent.h>
 #include <qgraphicswidget.h>
+#include <qkeysequence.h>
 #include <qlist.h>
 #include <qobject.h>
 #include <qpainter.h>

@@ -31,7 +31,7 @@ static QScriptValue qtscript_QStyleHintReturn_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleHintReturn::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleHintReturn_HintReturnType_keys[] = {
 static QString qtscript_QStyleHintReturn_HintReturnType_toStringHelper(QStyleHintReturn::HintReturnType value)
 {
     if ((value >= QStyleHintReturn::SH_Default) && (value <= QStyleHintReturn::SH_Variant))
-        return qtscript_QStyleHintReturn_HintReturnType_keys[static_cast<int>(value)];
+        return qtscript_QStyleHintReturn_HintReturnType_keys[static_cast<int>(value)-static_cast<int>(QStyleHintReturn::SH_Default)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleHintReturn_StyleOptionVersion_keys[] = 
 static QString qtscript_QStyleHintReturn_StyleOptionVersion_toStringHelper(QStyleHintReturn::StyleOptionVersion value)
 {
     if ((value >= QStyleHintReturn::Version) && (value <= QStyleHintReturn::Version))
-        return qtscript_QStyleHintReturn_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleHintReturn_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleHintReturn::Version)];
     return QString();
 }
 
@@ -204,7 +204,7 @@ static const char * const qtscript_QStyleHintReturn_StyleOptionType_keys[] = {
 static QString qtscript_QStyleHintReturn_StyleOptionType_toStringHelper(QStyleHintReturn::StyleOptionType value)
 {
     if ((value >= QStyleHintReturn::Type) && (value <= QStyleHintReturn::Type))
-        return qtscript_QStyleHintReturn_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleHintReturn_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleHintReturn::Type)];
     return QString();
 }
 

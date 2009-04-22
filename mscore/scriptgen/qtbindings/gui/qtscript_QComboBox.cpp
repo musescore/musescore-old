@@ -8,6 +8,7 @@
 #include <qcombobox.h>
 #include <QVariant>
 #include <qabstractitemdelegate.h>
+#include <qabstractitemmodel.h>
 #include <qabstractitemview.h>
 #include <qaction.h>
 #include <qbitmap.h>
@@ -18,6 +19,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -128,7 +130,7 @@ static QScriptValue qtscript_QComboBox_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QComboBox::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -365,7 +367,7 @@ static QScriptValue qtscript_QComboBox_prototype_call(QScriptContext *context, Q
             _q_self->addItem(_q_arg0, _q_arg1);
             return context->engine()->undefinedValue();
         } else if (context->argument(0).isString()
-            && context->argument(1).isVariant()) {
+            && true) {
             QString _q_arg0 = context->argument(0).toString();
             QVariant _q_arg1 = context->argument(1).toVariant();
             _q_self->addItem(_q_arg0, _q_arg1);
@@ -457,7 +459,7 @@ static QScriptValue qtscript_QComboBox_prototype_call(QScriptContext *context, Q
             return context->engine()->undefinedValue();
         } else if (context->argument(0).isNumber()
             && context->argument(1).isString()
-            && context->argument(2).isVariant()) {
+            && true) {
             int _q_arg0 = context->argument(0).toInt32();
             QString _q_arg1 = context->argument(1).toString();
             QVariant _q_arg2 = context->argument(2).toVariant();

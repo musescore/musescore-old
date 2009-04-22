@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -61,7 +62,7 @@ static QScriptValue qtscript_QAbstractSlider_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QAbstractSlider::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -112,7 +113,7 @@ static const char * const qtscript_QAbstractSlider_SliderAction_keys[] = {
 static QString qtscript_QAbstractSlider_SliderAction_toStringHelper(QAbstractSlider::SliderAction value)
 {
     if ((value >= QAbstractSlider::SliderNoAction) && (value <= QAbstractSlider::SliderMove))
-        return qtscript_QAbstractSlider_SliderAction_keys[static_cast<int>(value)];
+        return qtscript_QAbstractSlider_SliderAction_keys[static_cast<int>(value)-static_cast<int>(QAbstractSlider::SliderNoAction)];
     return QString();
 }
 

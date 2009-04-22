@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -55,12 +56,14 @@ static const char * const qtscript_QLineEdit_function_names[] = {
     , "del"
     , "deselect"
     , "end"
+    , "getTextMargins"
     , "home"
     , "insert"
     , "minimumSizeHint"
     , "selectionStart"
     , "setCompleter"
     , "setSelection"
+    , "setTextMargins"
     , "setValidator"
     , "sizeHint"
     , "validator"
@@ -82,12 +85,14 @@ static const char * const qtscript_QLineEdit_function_signatures[] = {
     , ""
     , ""
     , "bool mark"
+    , "int left, int top, int right, int bottom"
     , "bool mark"
     , "String arg__1"
     , ""
     , ""
     , "QCompleter completer"
     , "int arg__1, int arg__2"
+    , "int left, int top, int right, int bottom"
     , "QValidator arg__1"
     , ""
     , ""
@@ -101,7 +106,7 @@ static QScriptValue qtscript_QLineEdit_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QLineEdit::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -115,6 +120,7 @@ Q_DECLARE_METATYPE(QtScriptShell_QLineEdit*)
 Q_DECLARE_METATYPE(QLineEdit::EchoMode)
 Q_DECLARE_METATYPE(QCompleter*)
 Q_DECLARE_METATYPE(QMenu*)
+Q_DECLARE_METATYPE(int*)
 Q_DECLARE_METATYPE(QValidator*)
 
 static QScriptValue qtscript_create_enum_class_helper(
@@ -222,7 +228,7 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 20;
+        _id = 0xBABE0000 + 22;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -330,6 +336,17 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     break;
 
     case 11:
+    if (context->argumentCount() == 4) {
+        int* _q_arg0 = qscriptvalue_cast<int*>(context->argument(0));
+        int* _q_arg1 = qscriptvalue_cast<int*>(context->argument(1));
+        int* _q_arg2 = qscriptvalue_cast<int*>(context->argument(2));
+        int* _q_arg3 = qscriptvalue_cast<int*>(context->argument(3));
+        _q_self->getTextMargins(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 12:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->home(_q_arg0);
@@ -337,7 +354,7 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 12:
+    case 13:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->insert(_q_arg0);
@@ -345,21 +362,21 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->minimumSizeHint();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 15:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->selectionStart();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 16:
     if (context->argumentCount() == 1) {
         QCompleter* _q_arg0 = qscriptvalue_cast<QCompleter*>(context->argument(0));
         _q_self->setCompleter(_q_arg0);
@@ -367,7 +384,7 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 16:
+    case 17:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -376,7 +393,18 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 17:
+    case 18:
+    if (context->argumentCount() == 4) {
+        int _q_arg0 = context->argument(0).toInt32();
+        int _q_arg1 = context->argument(1).toInt32();
+        int _q_arg2 = context->argument(2).toInt32();
+        int _q_arg3 = context->argument(3).toInt32();
+        _q_self->setTextMargins(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 19:
     if (context->argumentCount() == 1) {
         QValidator* _q_arg0 = qscriptvalue_cast<QValidator*>(context->argument(0));
         _q_self->setValidator(_q_arg0);
@@ -384,21 +412,21 @@ static QScriptValue qtscript_QLineEdit_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->sizeHint();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 19:
+    case 21:
     if (context->argumentCount() == 0) {
         QValidator* _q_result = const_cast<QValidator*>(_q_self->validator());
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 20: {
+    case 22: {
     QString result = QString::fromLatin1("QLineEdit");
     return QScriptValue(context->engine(), result);
     }
@@ -485,12 +513,14 @@ QScriptValue qtscript_create_QLineEdit_class(QScriptEngine *engine)
         , 0
         , 0
         , 1
+        , 4
         , 1
         , 1
         , 0
         , 0
         , 1
         , 2
+        , 4
         , 1
         , 0
         , 0
@@ -499,7 +529,7 @@ QScriptValue qtscript_create_QLineEdit_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QLineEdit*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QLineEdit*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QWidget*>()));
-    for (int i = 0; i < 21; ++i) {
+    for (int i = 0; i < 23; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QLineEdit_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QLineEdit_function_names[i+1]),

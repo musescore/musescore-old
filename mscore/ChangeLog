@@ -1,3 +1,7 @@
+22.apr (ws)
+      - fix script initialization (colornotes.js)
+      - fix crash when inserting new staff above
+      - updated gui script interface
 21.apr (ws)
       - optimize layout for notehead dots in multi voice context
       - layout optimization for articulation symbols

@@ -56,7 +56,7 @@ static QScriptValue qtscript_QKeySequence_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QKeySequence::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -98,7 +98,7 @@ static const char * const qtscript_QKeySequence_SequenceFormat_keys[] = {
 static QString qtscript_QKeySequence_SequenceFormat_toStringHelper(QKeySequence::SequenceFormat value)
 {
     if ((value >= QKeySequence::NativeText) && (value <= QKeySequence::PortableText))
-        return qtscript_QKeySequence_SequenceFormat_keys[static_cast<int>(value)];
+        return qtscript_QKeySequence_SequenceFormat_keys[static_cast<int>(value)-static_cast<int>(QKeySequence::NativeText)];
     return QString();
 }
 
@@ -214,6 +214,9 @@ static const QKeySequence::StandardKey qtscript_QKeySequence_StandardKey_values[
     , QKeySequence::DeleteStartOfWord
     , QKeySequence::DeleteEndOfWord
     , QKeySequence::DeleteEndOfLine
+    , QKeySequence::InsertParagraphSeparator
+    , QKeySequence::InsertLineSeparator
+    , QKeySequence::SaveAs
 };
 
 static const char * const qtscript_QKeySequence_StandardKey_keys[] = {
@@ -278,12 +281,15 @@ static const char * const qtscript_QKeySequence_StandardKey_keys[] = {
     , "DeleteStartOfWord"
     , "DeleteEndOfWord"
     , "DeleteEndOfLine"
+    , "InsertParagraphSeparator"
+    , "InsertLineSeparator"
+    , "SaveAs"
 };
 
 static QString qtscript_QKeySequence_StandardKey_toStringHelper(QKeySequence::StandardKey value)
 {
-    if ((value >= QKeySequence::UnknownKey) && (value <= QKeySequence::DeleteEndOfLine))
-        return qtscript_QKeySequence_StandardKey_keys[static_cast<int>(value)];
+    if ((value >= QKeySequence::UnknownKey) && (value <= QKeySequence::SaveAs))
+        return qtscript_QKeySequence_StandardKey_keys[static_cast<int>(value)-static_cast<int>(QKeySequence::UnknownKey)];
     return QString();
 }
 
@@ -301,7 +307,7 @@ static void qtscript_QKeySequence_StandardKey_fromScriptValue(const QScriptValue
 static QScriptValue qtscript_construct_QKeySequence_StandardKey(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QKeySequence::UnknownKey) && (arg <= QKeySequence::DeleteEndOfLine))
+    if ((arg >= QKeySequence::UnknownKey) && (arg <= QKeySequence::SaveAs))
         return qScriptValueFromValue(engine,  static_cast<QKeySequence::StandardKey>(arg));
     return context->throwError(QString::fromLatin1("StandardKey(): invalid enum value (%0)").arg(arg));
 }
@@ -325,7 +331,7 @@ static QScriptValue qtscript_create_QKeySequence_StandardKey_class(QScriptEngine
         qtscript_QKeySequence_StandardKey_valueOf, qtscript_QKeySequence_StandardKey_toString);
     qScriptRegisterMetaType<QKeySequence::StandardKey>(engine, qtscript_QKeySequence_StandardKey_toScriptValue,
         qtscript_QKeySequence_StandardKey_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 61; ++i) {
+    for (int i = 0; i < 64; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QKeySequence_StandardKey_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QKeySequence_StandardKey_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -352,7 +358,7 @@ static const char * const qtscript_QKeySequence_SequenceMatch_keys[] = {
 static QString qtscript_QKeySequence_SequenceMatch_toStringHelper(QKeySequence::SequenceMatch value)
 {
     if ((value >= QKeySequence::NoMatch) && (value <= QKeySequence::ExactMatch))
-        return qtscript_QKeySequence_SequenceMatch_keys[static_cast<int>(value)];
+        return qtscript_QKeySequence_SequenceMatch_keys[static_cast<int>(value)-static_cast<int>(QKeySequence::NoMatch)];
     return QString();
 }
 
@@ -424,7 +430,7 @@ static QScriptValue qtscript_QKeySequence_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QKeySequence.%0(): this object is not a QKeySequence")
-            .arg(qtscript_QKeySequence_function_names[_id+1]));
+            .arg(qtscript_QKeySequence_function_names[_id+4]));
     }
 
     switch (_id) {

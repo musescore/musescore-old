@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionTab_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionTab::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -95,7 +95,7 @@ static const char * const qtscript_QStyleOptionTab_StyleOptionVersion_keys[] = {
 static QString qtscript_QStyleOptionTab_StyleOptionVersion_toStringHelper(QStyleOptionTab::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionTab::Version) && (value <= QStyleOptionTab::Version))
-        return qtscript_QStyleOptionTab_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTab_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTab::Version)];
     return QString();
 }
 
@@ -164,7 +164,7 @@ static const char * const qtscript_QStyleOptionTab_CornerWidget_keys[] = {
 static QString qtscript_QStyleOptionTab_CornerWidget_toStringHelper(QStyleOptionTab::CornerWidget value)
 {
     if ((value >= QStyleOptionTab::NoCornerWidgets) && (value <= QStyleOptionTab::RightCornerWidget))
-        return qtscript_QStyleOptionTab_CornerWidget_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTab_CornerWidget_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTab::NoCornerWidgets)];
     return QString();
 }
 
@@ -311,7 +311,7 @@ static const char * const qtscript_QStyleOptionTab_TabPosition_keys[] = {
 static QString qtscript_QStyleOptionTab_TabPosition_toStringHelper(QStyleOptionTab::TabPosition value)
 {
     if ((value >= QStyleOptionTab::Beginning) && (value <= QStyleOptionTab::OnlyOneTab))
-        return qtscript_QStyleOptionTab_TabPosition_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTab_TabPosition_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTab::Beginning)];
     return QString();
 }
 
@@ -380,7 +380,7 @@ static const char * const qtscript_QStyleOptionTab_SelectedPosition_keys[] = {
 static QString qtscript_QStyleOptionTab_SelectedPosition_toStringHelper(QStyleOptionTab::SelectedPosition value)
 {
     if ((value >= QStyleOptionTab::NotAdjacent) && (value <= QStyleOptionTab::PreviousIsSelected))
-        return qtscript_QStyleOptionTab_SelectedPosition_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTab_SelectedPosition_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTab::NotAdjacent)];
     return QString();
 }
 
@@ -445,7 +445,7 @@ static const char * const qtscript_QStyleOptionTab_StyleOptionType_keys[] = {
 static QString qtscript_QStyleOptionTab_StyleOptionType_toStringHelper(QStyleOptionTab::StyleOptionType value)
 {
     if ((value >= QStyleOptionTab::Type) && (value <= QStyleOptionTab::Type))
-        return qtscript_QStyleOptionTab_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTab_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTab::Type)];
     return QString();
 }
 

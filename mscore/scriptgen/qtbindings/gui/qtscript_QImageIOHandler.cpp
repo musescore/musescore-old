@@ -71,7 +71,7 @@ static QScriptValue qtscript_QImageIOHandler_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QImageIOHandler::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -115,6 +115,7 @@ static const QImageIOHandler::ImageOption qtscript_QImageIOHandler_ImageOption_v
     , QImageIOHandler::Endianness
     , QImageIOHandler::Animation
     , QImageIOHandler::BackgroundColor
+    , QImageIOHandler::ImageFormat
 };
 
 static const char * const qtscript_QImageIOHandler_ImageOption_keys[] = {
@@ -132,12 +133,13 @@ static const char * const qtscript_QImageIOHandler_ImageOption_keys[] = {
     , "Endianness"
     , "Animation"
     , "BackgroundColor"
+    , "ImageFormat"
 };
 
 static QString qtscript_QImageIOHandler_ImageOption_toStringHelper(QImageIOHandler::ImageOption value)
 {
-    if ((value >= QImageIOHandler::Size) && (value <= QImageIOHandler::BackgroundColor))
-        return qtscript_QImageIOHandler_ImageOption_keys[static_cast<int>(value)];
+    if ((value >= QImageIOHandler::Size) && (value <= QImageIOHandler::ImageFormat))
+        return qtscript_QImageIOHandler_ImageOption_keys[static_cast<int>(value)-static_cast<int>(QImageIOHandler::Size)];
     return QString();
 }
 
@@ -155,7 +157,7 @@ static void qtscript_QImageIOHandler_ImageOption_fromScriptValue(const QScriptVa
 static QScriptValue qtscript_construct_QImageIOHandler_ImageOption(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QImageIOHandler::Size) && (arg <= QImageIOHandler::BackgroundColor))
+    if ((arg >= QImageIOHandler::Size) && (arg <= QImageIOHandler::ImageFormat))
         return qScriptValueFromValue(engine,  static_cast<QImageIOHandler::ImageOption>(arg));
     return context->throwError(QString::fromLatin1("ImageOption(): invalid enum value (%0)").arg(arg));
 }
@@ -179,7 +181,7 @@ static QScriptValue qtscript_create_QImageIOHandler_ImageOption_class(QScriptEng
         qtscript_QImageIOHandler_ImageOption_valueOf, qtscript_QImageIOHandler_ImageOption_toString);
     qScriptRegisterMetaType<QImageIOHandler::ImageOption>(engine, qtscript_QImageIOHandler_ImageOption_toScriptValue,
         qtscript_QImageIOHandler_ImageOption_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 14; ++i) {
+    for (int i = 0; i < 15; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QImageIOHandler_ImageOption_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QImageIOHandler_ImageOption_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);

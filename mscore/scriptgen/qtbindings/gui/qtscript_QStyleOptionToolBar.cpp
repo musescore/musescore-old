@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionToolBar_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionToolBar::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -94,7 +94,7 @@ static const char * const qtscript_QStyleOptionToolBar_StyleOptionVersion_keys[]
 static QString qtscript_QStyleOptionToolBar_StyleOptionVersion_toStringHelper(QStyleOptionToolBar::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionToolBar::Version) && (value <= QStyleOptionToolBar::Version))
-        return qtscript_QStyleOptionToolBar_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionToolBar_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionToolBar::Version)];
     return QString();
 }
 
@@ -159,7 +159,7 @@ static const char * const qtscript_QStyleOptionToolBar_StyleOptionType_keys[] = 
 static QString qtscript_QStyleOptionToolBar_StyleOptionType_toStringHelper(QStyleOptionToolBar::StyleOptionType value)
 {
     if ((value >= QStyleOptionToolBar::Type) && (value <= QStyleOptionToolBar::Type))
-        return qtscript_QStyleOptionToolBar_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionToolBar_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionToolBar::Type)];
     return QString();
 }
 
@@ -230,7 +230,7 @@ static const char * const qtscript_QStyleOptionToolBar_ToolBarPosition_keys[] = 
 static QString qtscript_QStyleOptionToolBar_ToolBarPosition_toStringHelper(QStyleOptionToolBar::ToolBarPosition value)
 {
     if ((value >= QStyleOptionToolBar::Beginning) && (value <= QStyleOptionToolBar::OnlyOne))
-        return qtscript_QStyleOptionToolBar_ToolBarPosition_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionToolBar_ToolBarPosition_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionToolBar::Beginning)];
     return QString();
 }
 
@@ -297,7 +297,7 @@ static const char * const qtscript_QStyleOptionToolBar_ToolBarFeature_keys[] = {
 static QString qtscript_QStyleOptionToolBar_ToolBarFeature_toStringHelper(QStyleOptionToolBar::ToolBarFeature value)
 {
     if ((value >= QStyleOptionToolBar::None) && (value <= QStyleOptionToolBar::Movable))
-        return qtscript_QStyleOptionToolBar_ToolBarFeature_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionToolBar_ToolBarFeature_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionToolBar::None)];
     return QString();
 }
 

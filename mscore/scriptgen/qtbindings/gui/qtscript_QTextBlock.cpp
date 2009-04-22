@@ -28,16 +28,20 @@ static const char * const qtscript_QTextBlock_function_names[] = {
     , "contains"
     , "document"
     , "end"
+    , "firstLineNumber"
+    , "fragmentIndex"
     , "isValid"
     , "isVisible"
     , "layout"
     , "length"
+    , "lineCount"
     , "next"
     , "equals"
     , "operator_less"
     , "position"
     , "previous"
     , "revision"
+    , "setLineCount"
     , "setRevision"
     , "setUserData"
     , "setUserState"
@@ -68,11 +72,15 @@ static const char * const qtscript_QTextBlock_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
+    , ""
+    , ""
     , "QTextBlock o"
     , "QTextBlock o"
     , ""
     , ""
     , ""
+    , "int count"
     , "int rev"
     , "QTextBlockUserData data"
     , "int state"
@@ -91,7 +99,7 @@ static QScriptValue qtscript_QTextBlock_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextBlock::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -119,7 +127,7 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 28;
+        _id = 0xBABE0000 + 32;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -204,40 +212,61 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
 
     case 10:
     if (context->argumentCount() == 0) {
-        bool _q_result = _q_self->isValid();
+        int _q_result = _q_self->firstLineNumber();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 11:
     if (context->argumentCount() == 0) {
-        bool _q_result = _q_self->isVisible();
+        int _q_result = _q_self->fragmentIndex();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 12:
     if (context->argumentCount() == 0) {
-        QTextLayout* _q_result = _q_self->layout();
-        return qScriptValueFromValue(context->engine(), _q_result);
+        bool _q_result = _q_self->isValid();
+        return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 13:
     if (context->argumentCount() == 0) {
-        int _q_result = _q_self->length();
+        bool _q_result = _q_self->isVisible();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 14:
     if (context->argumentCount() == 0) {
-        QTextBlock _q_result = _q_self->next();
+        QTextLayout* _q_result = _q_self->layout();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 15:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->length();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 16:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->lineCount();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 17:
+    if (context->argumentCount() == 0) {
+        QTextBlock _q_result = _q_self->next();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 18:
     if (context->argumentCount() == 1) {
         QTextBlock _q_arg0 = qscriptvalue_cast<QTextBlock>(context->argument(0));
         bool _q_result = _q_self->operator==(_q_arg0);
@@ -245,7 +274,7 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 16:
+    case 19:
     if (context->argumentCount() == 1) {
         QTextBlock _q_arg0 = qscriptvalue_cast<QTextBlock>(context->argument(0));
         bool _q_result = _q_self->operator<(_q_arg0);
@@ -253,28 +282,36 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 17:
+    case 20:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->position();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 18:
+    case 21:
     if (context->argumentCount() == 0) {
         QTextBlock _q_result = _q_self->previous();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 19:
+    case 22:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->revision();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 20:
+    case 23:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        _q_self->setLineCount(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 24:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setRevision(_q_arg0);
@@ -282,7 +319,7 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 21:
+    case 25:
     if (context->argumentCount() == 1) {
         QTextBlockUserData* _q_arg0 = qscriptvalue_cast<QTextBlockUserData*>(context->argument(0));
         _q_self->setUserData(_q_arg0);
@@ -290,7 +327,7 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 22:
+    case 26:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setUserState(_q_arg0);
@@ -298,7 +335,7 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 23:
+    case 27:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setVisible(_q_arg0);
@@ -306,35 +343,35 @@ static QScriptValue qtscript_QTextBlock_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 24:
+    case 28:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->text();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 25:
+    case 29:
     if (context->argumentCount() == 0) {
         QTextList* _q_result = _q_self->textList();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 26:
+    case 30:
     if (context->argumentCount() == 0) {
         QTextBlockUserData* _q_result = _q_self->userData();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 27:
+    case 31:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->userState();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 28: {
+    case 32: {
     QString result = QString::fromLatin1("QTextBlock");
     return QScriptValue(context->engine(), result);
     }
@@ -398,11 +435,15 @@ QScriptValue qtscript_create_QTextBlock_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
+        , 0
+        , 0
         , 1
         , 1
         , 0
         , 0
         , 0
+        , 1
         , 1
         , 1
         , 1
@@ -415,7 +456,7 @@ QScriptValue qtscript_create_QTextBlock_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QTextBlock*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextBlock*)0));
-    for (int i = 0; i < 29; ++i) {
+    for (int i = 0; i < 33; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextBlock_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextBlock_function_names[i+1]),

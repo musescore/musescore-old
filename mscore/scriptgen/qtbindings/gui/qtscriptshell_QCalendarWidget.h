@@ -24,7 +24,7 @@ public:
     void dropEvent(QDropEvent*  arg__1);
     void enterEvent(QEvent*  arg__1);
     bool  event(QEvent*  event);
-    bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+    bool  eventFilter(QObject*  watched, QEvent*  event);
     void focusInEvent(QFocusEvent*  arg__1);
     bool  focusNextPrevChild(bool  next);
     void focusOutEvent(QFocusEvent*  arg__1);

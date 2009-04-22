@@ -12,6 +12,7 @@
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qfont.h>
+#include <qgraphicswidget.h>
 #include <qicon.h>
 #include <qkeysequence.h>
 #include <qlist.h>
@@ -27,6 +28,7 @@ static const char * const qtscript_QAction_function_names[] = {
     // prototype
     , "actionGroup"
     , "activate"
+    , "associatedGraphicsWidgets"
     , "associatedWidgets"
     , "data"
     , "isSeparator"
@@ -53,6 +55,7 @@ static const char * const qtscript_QAction_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
     , "QActionGroup group"
     , "Object var"
     , "QMenu menu"
@@ -70,7 +73,7 @@ static QScriptValue qtscript_QAction_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QAction::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -84,6 +87,8 @@ Q_DECLARE_METATYPE(QtScriptShell_QAction*)
 Q_DECLARE_METATYPE(QAction::ActionEvent)
 Q_DECLARE_METATYPE(QAction::MenuRole)
 Q_DECLARE_METATYPE(QActionGroup*)
+Q_DECLARE_METATYPE(QGraphicsWidget*)
+Q_DECLARE_METATYPE(QList<QGraphicsWidget*>)
 Q_DECLARE_METATYPE(QList<QWidget*>)
 Q_DECLARE_METATYPE(QVariant)
 Q_DECLARE_METATYPE(QMenu*)
@@ -121,7 +126,7 @@ static const char * const qtscript_QAction_ActionEvent_keys[] = {
 static QString qtscript_QAction_ActionEvent_toStringHelper(QAction::ActionEvent value)
 {
     if ((value >= QAction::Trigger) && (value <= QAction::Hover))
-        return qtscript_QAction_ActionEvent_keys[static_cast<int>(value)];
+        return qtscript_QAction_ActionEvent_keys[static_cast<int>(value)-static_cast<int>(QAction::Trigger)];
     return QString();
 }
 
@@ -268,7 +273,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 14;
+        _id = 0xBABE0000 + 15;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -297,40 +302,47 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
 
     case 2:
     if (context->argumentCount() == 0) {
-        QList<QWidget*> _q_result = _q_self->associatedWidgets();
+        QList<QGraphicsWidget*> _q_result = _q_self->associatedGraphicsWidgets();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
     case 3:
     if (context->argumentCount() == 0) {
+        QList<QWidget*> _q_result = _q_self->associatedWidgets();
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    break;
+
+    case 4:
+    if (context->argumentCount() == 0) {
         QVariant _q_result = _q_self->data();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isSeparator();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         QMenu* _q_result = _q_self->menu();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->parentWidget();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 1) {
         QActionGroup* _q_arg0 = qscriptvalue_cast<QActionGroup*>(context->argument(0));
         _q_self->setActionGroup(_q_arg0);
@@ -338,7 +350,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 1) {
         QVariant _q_arg0 = context->argument(0).toVariant();
         _q_self->setData(_q_arg0);
@@ -346,7 +358,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 1) {
         QMenu* _q_arg0 = qscriptvalue_cast<QMenu*>(context->argument(0));
         _q_self->setMenu(_q_arg0);
@@ -354,7 +366,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setSeparator(_q_arg0);
@@ -362,7 +374,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 11:
+    case 12:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QKeySequence::StandardKey>() == context->argument(0).toVariant().userType())) {
             QKeySequence::StandardKey _q_arg0 = qscriptvalue_cast<QKeySequence::StandardKey>(context->argument(0));
@@ -377,14 +389,14 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 12:
+    case 13:
     if (context->argumentCount() == 0) {
         QList<QKeySequence> _q_result = _q_self->shortcuts();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->showStatusText();
         return QScriptValue(context->engine(), _q_result);
@@ -396,7 +408,7 @@ static QScriptValue qtscript_QAction_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 14: {
+    case 15: {
     QString result = QString::fromLatin1("QAction");
     return QScriptValue(context->engine(), result);
     }
@@ -474,6 +486,7 @@ QScriptValue qtscript_create_QAction_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 1
         , 1
         , 1
@@ -486,7 +499,7 @@ QScriptValue qtscript_create_QAction_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QAction*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QAction*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QObject*>()));
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 16; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QAction_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QAction_function_names[i+1]),

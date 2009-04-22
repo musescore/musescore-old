@@ -151,7 +151,7 @@ static QScriptValue qtscript_QTreeWidgetItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTreeWidgetItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -271,7 +271,7 @@ static const char * const qtscript_QTreeWidgetItem_ChildIndicatorPolicy_keys[] =
 static QString qtscript_QTreeWidgetItem_ChildIndicatorPolicy_toStringHelper(QTreeWidgetItem::ChildIndicatorPolicy value)
 {
     if ((value >= QTreeWidgetItem::ShowIndicator) && (value <= QTreeWidgetItem::DontShowIndicatorWhenChildless))
-        return qtscript_QTreeWidgetItem_ChildIndicatorPolicy_keys[static_cast<int>(value)];
+        return qtscript_QTreeWidgetItem_ChildIndicatorPolicy_keys[static_cast<int>(value)-static_cast<int>(QTreeWidgetItem::ShowIndicator)];
     return QString();
 }
 

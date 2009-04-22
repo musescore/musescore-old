@@ -3,6 +3,7 @@
 #include <QtScript/QScriptEngine>
 #include <QVariant>
 #include <qcoreevent.h>
+#include <qgraphicsitem.h>
 #include <qgraphicslayoutitem.h>
 #include <qgraphicslinearlayout.h>
 #include <qrect.h>

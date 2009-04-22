@@ -134,7 +134,7 @@ static const char * const qtscript_QPainter_function_names[] = {
 };
 
 static const char * const qtscript_QPainter_function_signatures[] = {
-    "\nQPaintDevice arg__1"
+    ""
     // static
     , "QPaintDevice device, QPoint offset"
     , "QPaintDevice device"
@@ -183,7 +183,7 @@ static const char * const qtscript_QPainter_function_signatures[] = {
     , ""
     , "QRect arg__1\nQRectF arg__1\nint x, int y, int w, int h"
     , "QPainterPath path, QBrush brush"
-    , "QRect arg__1, QBrush arg__2\nQRectF arg__1, QBrush arg__2\nint x, int y, int w, int h, QBrush arg__5"
+    , "QRect arg__1, QBrush arg__2\nQRect arg__1, QColor color\nQRect r, BrushStyle style\nQRect r, GlobalColor c\nQRectF arg__1, QBrush arg__2\nQRectF arg__1, QColor color\nQRectF r, BrushStyle style\nQRectF r, GlobalColor c\nint x, int y, int w, int h, BrushStyle style\nint x, int y, int w, int h, GlobalColor c\nint x, int y, int w, int h, QBrush arg__5\nint x, int y, int w, int h, QColor color"
     , ""
     , ""
     , "QWidget widget"
@@ -242,7 +242,7 @@ static QScriptValue qtscript_QPainter_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QPainter::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -268,9 +268,10 @@ Q_DECLARE_METATYPE(Qt::SizeMode)
 Q_DECLARE_METATYPE(QRect*)
 Q_DECLARE_METATYPE(QRectF*)
 Q_DECLARE_METATYPE(QTextItem)
+Q_DECLARE_METATYPE(Qt::BrushStyle)
+Q_DECLARE_METATYPE(Qt::GlobalColor)
 Q_DECLARE_METATYPE(Qt::LayoutDirection)
 Q_DECLARE_METATYPE(QPaintEngine*)
-Q_DECLARE_METATYPE(Qt::BrushStyle)
 Q_DECLARE_METATYPE(Qt::ClipOperation)
 Q_DECLARE_METATYPE(Qt::PenStyle)
 Q_DECLARE_METATYPE(QPoint*)
@@ -335,6 +336,15 @@ static const QPainter::CompositionMode qtscript_QPainter_CompositionMode_values[
     , QPainter::CompositionMode_SoftLight
     , QPainter::CompositionMode_Difference
     , QPainter::CompositionMode_Exclusion
+    , QPainter::RasterOp_SourceOrDestination
+    , QPainter::RasterOp_SourceAndDestination
+    , QPainter::RasterOp_SourceXorDestination
+    , QPainter::RasterOp_NotSourceAndNotDestination
+    , QPainter::RasterOp_NotSourceOrNotDestination
+    , QPainter::RasterOp_NotSourceXorDestination
+    , QPainter::RasterOp_NotSource
+    , QPainter::RasterOp_NotSourceAndDestination
+    , QPainter::RasterOp_SourceAndNotDestination
 };
 
 static const char * const qtscript_QPainter_CompositionMode_keys[] = {
@@ -362,12 +372,21 @@ static const char * const qtscript_QPainter_CompositionMode_keys[] = {
     , "CompositionMode_SoftLight"
     , "CompositionMode_Difference"
     , "CompositionMode_Exclusion"
+    , "RasterOp_SourceOrDestination"
+    , "RasterOp_SourceAndDestination"
+    , "RasterOp_SourceXorDestination"
+    , "RasterOp_NotSourceAndNotDestination"
+    , "RasterOp_NotSourceOrNotDestination"
+    , "RasterOp_NotSourceXorDestination"
+    , "RasterOp_NotSource"
+    , "RasterOp_NotSourceAndDestination"
+    , "RasterOp_SourceAndNotDestination"
 };
 
 static QString qtscript_QPainter_CompositionMode_toStringHelper(QPainter::CompositionMode value)
 {
-    if ((value >= QPainter::CompositionMode_SourceOver) && (value <= QPainter::CompositionMode_Exclusion))
-        return qtscript_QPainter_CompositionMode_keys[static_cast<int>(value)];
+    if ((value >= QPainter::CompositionMode_SourceOver) && (value <= QPainter::RasterOp_SourceAndNotDestination))
+        return qtscript_QPainter_CompositionMode_keys[static_cast<int>(value)-static_cast<int>(QPainter::CompositionMode_SourceOver)];
     return QString();
 }
 
@@ -385,7 +404,7 @@ static void qtscript_QPainter_CompositionMode_fromScriptValue(const QScriptValue
 static QScriptValue qtscript_construct_QPainter_CompositionMode(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QPainter::CompositionMode_SourceOver) && (arg <= QPainter::CompositionMode_Exclusion))
+    if ((arg >= QPainter::CompositionMode_SourceOver) && (arg <= QPainter::RasterOp_SourceAndNotDestination))
         return qScriptValueFromValue(engine,  static_cast<QPainter::CompositionMode>(arg));
     return context->throwError(QString::fromLatin1("CompositionMode(): invalid enum value (%0)").arg(arg));
 }
@@ -409,7 +428,7 @@ static QScriptValue qtscript_create_QPainter_CompositionMode_class(QScriptEngine
         qtscript_QPainter_CompositionMode_valueOf, qtscript_QPainter_CompositionMode_toString);
     qScriptRegisterMetaType<QPainter::CompositionMode>(engine, qtscript_QPainter_CompositionMode_toScriptValue,
         qtscript_QPainter_CompositionMode_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 24; ++i) {
+    for (int i = 0; i < 33; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QPainter_CompositionMode_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QPainter_CompositionMode_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -592,7 +611,7 @@ static QScriptValue qtscript_QPainter_prototype_call(QScriptContext *context, QS
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QPainter.%0(): this object is not a QPainter")
-            .arg(qtscript_QPainter_function_names[_id+1]));
+            .arg(qtscript_QPainter_function_names[_id+4]));
     }
 
     switch (_id) {
@@ -1739,22 +1758,100 @@ static QScriptValue qtscript_QPainter_prototype_call(QScriptContext *context, QS
             QBrush _q_arg1 = qscriptvalue_cast<QBrush>(context->argument(1));
             _q_self->fillRect(_q_arg0, _q_arg1);
             return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRect>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<QColor>() == context->argument(1).toVariant().userType())) {
+            QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
+            QColor _q_arg1 = qscriptvalue_cast<QColor>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRect>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<Qt::BrushStyle>() == context->argument(1).toVariant().userType())) {
+            QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
+            Qt::BrushStyle _q_arg1 = qscriptvalue_cast<Qt::BrushStyle>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRect>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<Qt::GlobalColor>() == context->argument(1).toVariant().userType())) {
+            QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
+            Qt::GlobalColor _q_arg1 = qscriptvalue_cast<Qt::GlobalColor>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
         } else if ((qMetaTypeId<QRectF>() == context->argument(0).toVariant().userType())
             && (qMetaTypeId<QBrush>() == context->argument(1).toVariant().userType())) {
             QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
             QBrush _q_arg1 = qscriptvalue_cast<QBrush>(context->argument(1));
             _q_self->fillRect(_q_arg0, _q_arg1);
             return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRectF>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<QColor>() == context->argument(1).toVariant().userType())) {
+            QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
+            QColor _q_arg1 = qscriptvalue_cast<QColor>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRectF>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<Qt::BrushStyle>() == context->argument(1).toVariant().userType())) {
+            QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
+            Qt::BrushStyle _q_arg1 = qscriptvalue_cast<Qt::BrushStyle>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QRectF>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<Qt::GlobalColor>() == context->argument(1).toVariant().userType())) {
+            QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
+            Qt::GlobalColor _q_arg1 = qscriptvalue_cast<Qt::GlobalColor>(context->argument(1));
+            _q_self->fillRect(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
         }
     }
     if (context->argumentCount() == 5) {
-        int _q_arg0 = context->argument(0).toInt32();
-        int _q_arg1 = context->argument(1).toInt32();
-        int _q_arg2 = context->argument(2).toInt32();
-        int _q_arg3 = context->argument(3).toInt32();
-        QBrush _q_arg4 = qscriptvalue_cast<QBrush>(context->argument(4));
-        _q_self->fillRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3, _q_arg4);
-        return context->engine()->undefinedValue();
+        if (context->argument(0).isNumber()
+            && context->argument(1).isNumber()
+            && context->argument(2).isNumber()
+            && context->argument(3).isNumber()
+            && (qMetaTypeId<Qt::BrushStyle>() == context->argument(4).toVariant().userType())) {
+            int _q_arg0 = context->argument(0).toInt32();
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_arg2 = context->argument(2).toInt32();
+            int _q_arg3 = context->argument(3).toInt32();
+            Qt::BrushStyle _q_arg4 = qscriptvalue_cast<Qt::BrushStyle>(context->argument(4));
+            _q_self->fillRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3, _q_arg4);
+            return context->engine()->undefinedValue();
+        } else if (context->argument(0).isNumber()
+            && context->argument(1).isNumber()
+            && context->argument(2).isNumber()
+            && context->argument(3).isNumber()
+            && (qMetaTypeId<Qt::GlobalColor>() == context->argument(4).toVariant().userType())) {
+            int _q_arg0 = context->argument(0).toInt32();
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_arg2 = context->argument(2).toInt32();
+            int _q_arg3 = context->argument(3).toInt32();
+            Qt::GlobalColor _q_arg4 = qscriptvalue_cast<Qt::GlobalColor>(context->argument(4));
+            _q_self->fillRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3, _q_arg4);
+            return context->engine()->undefinedValue();
+        } else if (context->argument(0).isNumber()
+            && context->argument(1).isNumber()
+            && context->argument(2).isNumber()
+            && context->argument(3).isNumber()
+            && (qMetaTypeId<QBrush>() == context->argument(4).toVariant().userType())) {
+            int _q_arg0 = context->argument(0).toInt32();
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_arg2 = context->argument(2).toInt32();
+            int _q_arg3 = context->argument(3).toInt32();
+            QBrush _q_arg4 = qscriptvalue_cast<QBrush>(context->argument(4));
+            _q_self->fillRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3, _q_arg4);
+            return context->engine()->undefinedValue();
+        } else if (context->argument(0).isNumber()
+            && context->argument(1).isNumber()
+            && context->argument(2).isNumber()
+            && context->argument(3).isNumber()
+            && (qMetaTypeId<QColor>() == context->argument(4).toVariant().userType())) {
+            int _q_arg0 = context->argument(0).toInt32();
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_arg2 = context->argument(2).toInt32();
+            int _q_arg3 = context->argument(3).toInt32();
+            QColor _q_arg4 = qscriptvalue_cast<QColor>(context->argument(4));
+            _q_self->fillRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3, _q_arg4);
+            return context->engine()->undefinedValue();
+        }
     }
     break;
 
@@ -2289,11 +2386,6 @@ static QScriptValue qtscript_QPainter_static_call(QScriptContext *context, QScri
         QPainter* _q_cpp_result = new QPainter();
         QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
         return _q_result;
-    } else if (context->argumentCount() == 1) {
-        QPaintDevice* _q_arg0 = qscriptvalue_cast<QPaintDevice*>(context->argument(0));
-        QPainter* _q_cpp_result = new QPainter(_q_arg0);
-        QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
-        return _q_result;
     }
     break;
 
@@ -2341,7 +2433,7 @@ static QScriptValue qtscript_QPainter_static_call(QScriptContext *context, QScri
 QScriptValue qtscript_create_QPainter_class(QScriptEngine *engine)
 {
     static const int function_lengths[] = {
-        1
+        0
         // static
         , 2
         , 1

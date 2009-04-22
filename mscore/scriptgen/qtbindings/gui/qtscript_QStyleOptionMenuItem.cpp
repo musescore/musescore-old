@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionMenuItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionMenuItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -76,7 +76,7 @@ static const char * const qtscript_QStyleOptionMenuItem_StyleOptionVersion_keys[
 static QString qtscript_QStyleOptionMenuItem_StyleOptionVersion_toStringHelper(QStyleOptionMenuItem::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionMenuItem::Version) && (value <= QStyleOptionMenuItem::Version))
-        return qtscript_QStyleOptionMenuItem_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionMenuItem_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionMenuItem::Version)];
     return QString();
 }
 
@@ -141,7 +141,7 @@ static const char * const qtscript_QStyleOptionMenuItem_StyleOptionType_keys[] =
 static QString qtscript_QStyleOptionMenuItem_StyleOptionType_toStringHelper(QStyleOptionMenuItem::StyleOptionType value)
 {
     if ((value >= QStyleOptionMenuItem::Type) && (value <= QStyleOptionMenuItem::Type))
-        return qtscript_QStyleOptionMenuItem_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionMenuItem_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionMenuItem::Type)];
     return QString();
 }
 
@@ -210,7 +210,7 @@ static const char * const qtscript_QStyleOptionMenuItem_CheckType_keys[] = {
 static QString qtscript_QStyleOptionMenuItem_CheckType_toStringHelper(QStyleOptionMenuItem::CheckType value)
 {
     if ((value >= QStyleOptionMenuItem::NotCheckable) && (value <= QStyleOptionMenuItem::NonExclusive))
-        return qtscript_QStyleOptionMenuItem_CheckType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionMenuItem_CheckType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionMenuItem::NotCheckable)];
     return QString();
 }
 
@@ -289,7 +289,7 @@ static const char * const qtscript_QStyleOptionMenuItem_MenuItemType_keys[] = {
 static QString qtscript_QStyleOptionMenuItem_MenuItemType_toStringHelper(QStyleOptionMenuItem::MenuItemType value)
 {
     if ((value >= QStyleOptionMenuItem::Normal) && (value <= QStyleOptionMenuItem::EmptyArea))
-        return qtscript_QStyleOptionMenuItem_MenuItemType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionMenuItem_MenuItemType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionMenuItem::Normal)];
     return QString();
 }
 

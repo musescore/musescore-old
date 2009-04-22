@@ -7,8 +7,10 @@
 
 #include <qevent.h>
 #include <QVariant>
+#include <qmimedata.h>
 #include <qpoint.h>
 #include <qrect.h>
+#include <qwidget.h>
 
 #include "qtscriptshell_QDragMoveEvent.h"
 
@@ -39,7 +41,7 @@ static QScriptValue qtscript_QDragMoveEvent_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QDragMoveEvent::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -50,6 +52,7 @@ Q_DECLARE_METATYPE(QMimeData*)
 Q_DECLARE_METATYPE(QFlags<Qt::MouseButton>)
 Q_DECLARE_METATYPE(QFlags<Qt::KeyboardModifier>)
 Q_DECLARE_METATYPE(QEvent::Type)
+Q_DECLARE_METATYPE(QDropEvent*)
 
 //
 // QDragMoveEvent
@@ -168,6 +171,7 @@ QScriptValue qtscript_create_QDragMoveEvent_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QDragMoveEvent*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QDragMoveEvent*)0));
+    proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QDropEvent*>()));
     for (int i = 0; i < 4; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QDragMoveEvent_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));

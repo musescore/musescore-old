@@ -50,9 +50,11 @@ static const char * const qtscript_QGraphicsTextItem_function_names[] = {
     , "setHtml"
     , "setOpenExternalLinks"
     , "setPlainText"
+    , "setTabChangesFocus"
     , "setTextCursor"
     , "setTextInteractionFlags"
     , "setTextWidth"
+    , "tabChangesFocus"
     , "textCursor"
     , "textInteractionFlags"
     , "textWidth"
@@ -76,9 +78,11 @@ static const char * const qtscript_QGraphicsTextItem_function_signatures[] = {
     , "String html"
     , "bool open"
     , "String text"
+    , "bool b"
     , "QTextCursor cursor"
     , "TextInteractionFlags flags"
     , "qreal width"
+    , ""
     , ""
     , ""
     , ""
@@ -94,7 +98,7 @@ static QScriptValue qtscript_QGraphicsTextItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsTextItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -118,7 +122,7 @@ static QScriptValue qtscript_QGraphicsTextItem_prototype_call(QScriptContext *co
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 19;
+        _id = 0xBABE0000 + 21;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -215,13 +219,21 @@ static QScriptValue qtscript_QGraphicsTextItem_prototype_call(QScriptContext *co
 
     case 11:
     if (context->argumentCount() == 1) {
+        bool _q_arg0 = context->argument(0).toBoolean();
+        _q_self->setTabChangesFocus(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 12:
+    if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         _q_self->setTextCursor(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 12:
+    case 13:
     if (context->argumentCount() == 1) {
         QFlags<Qt::TextInteractionFlag> _q_arg0 = qscriptvalue_cast<QFlags<Qt::TextInteractionFlag> >(context->argument(0));
         _q_self->setTextInteractionFlags(_q_arg0);
@@ -229,7 +241,7 @@ static QScriptValue qtscript_QGraphicsTextItem_prototype_call(QScriptContext *co
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setTextWidth(_q_arg0);
@@ -237,42 +249,49 @@ static QScriptValue qtscript_QGraphicsTextItem_prototype_call(QScriptContext *co
     }
     break;
 
-    case 14:
+    case 15:
+    if (context->argumentCount() == 0) {
+        bool _q_result = _q_self->tabChangesFocus();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 16:
     if (context->argumentCount() == 0) {
         QTextCursor _q_result = _q_self->textCursor();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 0) {
         QFlags<Qt::TextInteractionFlag> _q_result = _q_self->textInteractionFlags();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->textWidth();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->toHtml();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->toPlainText();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 19: {
+    case 21: {
     QString result = QString::fromLatin1("QGraphicsTextItem");
     return QScriptValue(context->engine(), result);
     }
@@ -381,6 +400,8 @@ QScriptValue qtscript_create_QGraphicsTextItem_class(QScriptEngine *engine)
         , 1
         , 1
         , 1
+        , 1
+        , 0
         , 0
         , 0
         , 0
@@ -394,7 +415,7 @@ QScriptValue qtscript_create_QGraphicsTextItem_class(QScriptEngine *engine)
     proto.setProperty(QString::fromLatin1("__QGraphicsItem__"),
         engine->defaultPrototype(qMetaTypeId<QGraphicsItem*>()),
         QScriptValue::SkipInEnumeration);
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < 22; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QGraphicsTextItem_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QGraphicsTextItem_function_names[i+1]),

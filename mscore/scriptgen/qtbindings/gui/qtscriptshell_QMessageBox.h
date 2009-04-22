@@ -8,7 +8,7 @@
 class QtScriptShell_QMessageBox : public QMessageBox
 {
 public:
-    QtScriptShell_QMessageBox(QMessageBox::Icon  icon, const QString&  title, const QString&  text, QMessageBox::StandardButtons  buttons = NoButton, QWidget*  parent = 0, Qt::WindowFlags  f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    QtScriptShell_QMessageBox(QMessageBox::Icon  icon, const QString&  title, const QString&  text, QMessageBox::StandardButtons  buttons = NoButton, QWidget*  parent = 0, Qt::WindowFlags  flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     QtScriptShell_QMessageBox(QWidget*  parent = 0);
     QtScriptShell_QMessageBox(const QString&  title, const QString&  text, QMessageBox::Icon  icon, int  button0, int  button1, int  button2, QWidget*  parent = 0, Qt::WindowFlags  f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     ~QtScriptShell_QMessageBox();

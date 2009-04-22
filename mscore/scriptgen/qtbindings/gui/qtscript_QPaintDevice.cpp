@@ -59,7 +59,7 @@ static QScriptValue qtscript_QPaintDevice_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QPaintDevice::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -115,7 +115,7 @@ static const char * const qtscript_QPaintDevice_PaintDeviceMetric_keys[] = {
 static QString qtscript_QPaintDevice_PaintDeviceMetric_toStringHelper(QPaintDevice::PaintDeviceMetric value)
 {
     if ((value >= QPaintDevice::PdmWidth) && (value <= QPaintDevice::PdmPhysicalDpiY))
-        return qtscript_QPaintDevice_PaintDeviceMetric_keys[static_cast<int>(value)];
+        return qtscript_QPaintDevice_PaintDeviceMetric_keys[static_cast<int>(value)-static_cast<int>(QPaintDevice::PdmWidth)];
     return QString();
 }
 

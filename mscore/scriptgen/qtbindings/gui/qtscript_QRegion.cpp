@@ -8,7 +8,6 @@
 #include <qregion.h>
 #include <QVariant>
 #include <qbitmap.h>
-#include <qbytearray.h>
 #include <qdatastream.h>
 #include <qpoint.h>
 #include <qpolygon.h>
@@ -77,7 +76,7 @@ static QScriptValue qtscript_QRegion_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QRegion::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -119,7 +118,7 @@ static const char * const qtscript_QRegion_RegionType_keys[] = {
 static QString qtscript_QRegion_RegionType_toStringHelper(QRegion::RegionType value)
 {
     if ((value >= QRegion::Rectangle) && (value <= QRegion::Ellipse))
-        return qtscript_QRegion_RegionType_keys[static_cast<int>(value)];
+        return qtscript_QRegion_RegionType_keys[static_cast<int>(value)-static_cast<int>(QRegion::Rectangle)];
     return QString();
 }
 

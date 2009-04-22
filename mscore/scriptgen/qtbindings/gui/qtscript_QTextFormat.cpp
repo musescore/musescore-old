@@ -131,7 +131,7 @@ static QScriptValue qtscript_QTextFormat_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextFormat::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -226,6 +226,9 @@ static const QTextFormat::Property qtscript_QTextFormat_Property_values[] = {
     , QTextFormat::FirstFontProperty
     , QTextFormat::FontLetterSpacing
     , QTextFormat::FontWordSpacing
+    , QTextFormat::FontStyleHint
+    , QTextFormat::FontStyleStrategy
+    , QTextFormat::FontKerning
     , QTextFormat::FontFamily
     , QTextFormat::FontPointSize
     , QTextFormat::FontSizeAdjustment
@@ -298,6 +301,9 @@ static const char * const qtscript_QTextFormat_Property_keys[] = {
     , "FirstFontProperty"
     , "FontLetterSpacing"
     , "FontWordSpacing"
+    , "FontStyleHint"
+    , "FontStyleStrategy"
+    , "FontKerning"
     , "FontFamily"
     , "FontPointSize"
     , "FontSizeAdjustment"
@@ -400,7 +406,7 @@ static QScriptValue qtscript_create_QTextFormat_Property_class(QScriptEngine *en
         qtscript_QTextFormat_Property_valueOf, qtscript_QTextFormat_Property_toString);
     qScriptRegisterMetaType<QTextFormat::Property>(engine, qtscript_QTextFormat_Property_toScriptValue,
         qtscript_QTextFormat_Property_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 69; ++i) {
+    for (int i = 0; i < 72; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QTextFormat_Property_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QTextFormat_Property_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);

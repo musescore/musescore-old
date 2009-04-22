@@ -536,9 +536,9 @@ void MuseScore::editInstrList()
                   QTreeWidgetItem* ci = 0;
                   rstaff = 0;
                   for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
-                        StaffListItem* sli = (StaffListItem*)ci;
-                        Staff* staff = new Staff(cs, part, rstaff);
-                        sli->staff = staff;
+                        StaffListItem* sli = static_cast<StaffListItem*>(ci);
+                        Staff* staff       = new Staff(cs, part, rstaff);
+                        sli->staff         = staff;
                         staff->setRstaff(rstaff);
                         // ++rstaff;
                         staff->clefList()->setClef(0, sli->clef());
@@ -751,6 +751,7 @@ void Score::removePart(Part* part)
 void Score::insertStaff(Staff* staff, int idx)
       {
       _staves.insert(idx, staff);
+
       staff->part()->insertStaff(staff);
 
       int track = idx * VOICES;

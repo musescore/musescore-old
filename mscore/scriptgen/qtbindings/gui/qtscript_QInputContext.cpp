@@ -68,7 +68,7 @@ static QScriptValue qtscript_QInputContext_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QInputContext::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -112,7 +112,7 @@ static const char * const qtscript_QInputContext_StandardFormat_keys[] = {
 static QString qtscript_QInputContext_StandardFormat_toStringHelper(QInputContext::StandardFormat value)
 {
     if ((value >= QInputContext::PreeditFormat) && (value <= QInputContext::SelectionFormat))
-        return qtscript_QInputContext_StandardFormat_keys[static_cast<int>(value)];
+        return qtscript_QInputContext_StandardFormat_keys[static_cast<int>(value)-static_cast<int>(QInputContext::PreeditFormat)];
     return QString();
 }
 

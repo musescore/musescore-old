@@ -64,7 +64,7 @@ static QScriptValue qtscript_QSessionManager_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSessionManager::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -106,7 +106,7 @@ static const char * const qtscript_QSessionManager_RestartHint_keys[] = {
 static QString qtscript_QSessionManager_RestartHint_toStringHelper(QSessionManager::RestartHint value)
 {
     if ((value >= QSessionManager::RestartIfRunning) && (value <= QSessionManager::RestartNever))
-        return qtscript_QSessionManager_RestartHint_keys[static_cast<int>(value)];
+        return qtscript_QSessionManager_RestartHint_keys[static_cast<int>(value)-static_cast<int>(QSessionManager::RestartIfRunning)];
     return QString();
 }
 

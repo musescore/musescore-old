@@ -68,7 +68,7 @@ static QScriptValue qtscript_QTabletEvent_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTabletEvent::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -121,7 +121,7 @@ static const char * const qtscript_QTabletEvent_TabletDevice_keys[] = {
 static QString qtscript_QTabletEvent_TabletDevice_toStringHelper(QTabletEvent::TabletDevice value)
 {
     if ((value >= QTabletEvent::NoDevice) && (value <= QTabletEvent::RotationStylus))
-        return qtscript_QTabletEvent_TabletDevice_keys[static_cast<int>(value)];
+        return qtscript_QTabletEvent_TabletDevice_keys[static_cast<int>(value)-static_cast<int>(QTabletEvent::NoDevice)];
     return QString();
 }
 
@@ -192,7 +192,7 @@ static const char * const qtscript_QTabletEvent_PointerType_keys[] = {
 static QString qtscript_QTabletEvent_PointerType_toStringHelper(QTabletEvent::PointerType value)
 {
     if ((value >= QTabletEvent::UnknownPointer) && (value <= QTabletEvent::Eraser))
-        return qtscript_QTabletEvent_PointerType_keys[static_cast<int>(value)];
+        return qtscript_QTabletEvent_PointerType_keys[static_cast<int>(value)-static_cast<int>(QTabletEvent::UnknownPointer)];
     return QString();
 }
 

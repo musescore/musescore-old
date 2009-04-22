@@ -10,6 +10,7 @@
 #include <qdatastream.h>
 #include <qicon.h>
 #include <qiconengine.h>
+#include <qlist.h>
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qrect.h>
@@ -22,6 +23,7 @@ static const char * const qtscript_QIcon_function_names[] = {
     , "actualSize"
     , "addFile"
     , "addPixmap"
+    , "availableSizes"
     , "cacheKey"
     , "isNull"
     , "paint"
@@ -38,6 +40,7 @@ static const char * const qtscript_QIcon_function_signatures[] = {
     , "QSize size, Mode mode, State state"
     , "String fileName, QSize size, Mode mode, State state"
     , "QPixmap pixmap, Mode mode, State state"
+    , "Mode mode, State state"
     , ""
     , ""
     , "QPainter painter, QRect rect, Alignment alignment, Mode mode, State state\nQPainter painter, int x, int y, int w, int h, Alignment alignment, Mode mode, State state"
@@ -54,13 +57,14 @@ static QScriptValue qtscript_QIcon_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QIcon::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QIcon*)
 Q_DECLARE_METATYPE(QIcon::Mode)
 Q_DECLARE_METATYPE(QIcon::State)
+Q_DECLARE_METATYPE(QList<QSize>)
 Q_DECLARE_METATYPE(QPainter*)
 Q_DECLARE_METATYPE(QFlags<Qt::AlignmentFlag>)
 Q_DECLARE_METATYPE(QDataStream*)
@@ -102,7 +106,7 @@ static const char * const qtscript_QIcon_Mode_keys[] = {
 static QString qtscript_QIcon_Mode_toStringHelper(QIcon::Mode value)
 {
     if ((value >= QIcon::Normal) && (value <= QIcon::Selected))
-        return qtscript_QIcon_Mode_keys[static_cast<int>(value)];
+        return qtscript_QIcon_Mode_keys[static_cast<int>(value)-static_cast<int>(QIcon::Normal)];
     return QString();
 }
 
@@ -169,7 +173,7 @@ static const char * const qtscript_QIcon_State_keys[] = {
 static QString qtscript_QIcon_State_toStringHelper(QIcon::State value)
 {
     if ((value >= QIcon::On) && (value <= QIcon::Off))
-        return qtscript_QIcon_State_keys[static_cast<int>(value)];
+        return qtscript_QIcon_State_keys[static_cast<int>(value)-static_cast<int>(QIcon::On)];
     return QString();
 }
 
@@ -233,7 +237,7 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 9;
+        _id = 0xBABE0000 + 10;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -318,19 +322,37 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
 
     case 3:
     if (context->argumentCount() == 0) {
+        QList<QSize> _q_result = _q_self->availableSizes();
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 1) {
+        QIcon::Mode _q_arg0 = qscriptvalue_cast<QIcon::Mode>(context->argument(0));
+        QList<QSize> _q_result = _q_self->availableSizes(_q_arg0);
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 2) {
+        QIcon::Mode _q_arg0 = qscriptvalue_cast<QIcon::Mode>(context->argument(0));
+        QIcon::State _q_arg1 = qscriptvalue_cast<QIcon::State>(context->argument(1));
+        QList<QSize> _q_result = _q_self->availableSizes(_q_arg0, _q_arg1);
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    break;
+
+    case 4:
+    if (context->argumentCount() == 0) {
         qint64 _q_result = _q_self->cacheKey();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isNull();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 2) {
         QPainter* _q_arg0 = qscriptvalue_cast<QPainter*>(context->argument(0));
         QRect _q_arg1 = qscriptvalue_cast<QRect>(context->argument(1));
@@ -414,7 +436,7 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QSize>() == context->argument(0).toVariant().userType())) {
             QSize _q_arg0 = qscriptvalue_cast<QSize>(context->argument(0));
@@ -484,7 +506,7 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator>>(*_q_arg0, *_q_self);
@@ -492,7 +514,7 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator<<(*_q_arg0, *_q_self);
@@ -500,7 +522,7 @@ static QScriptValue qtscript_QIcon_prototype_call(QScriptContext *context, QScri
     }
     break;
 
-    case 9: {
+    case 10: {
     QString result = QString::fromLatin1("QIcon");
     return QScriptValue(context->engine(), result);
     }
@@ -574,6 +596,7 @@ QScriptValue qtscript_create_QIcon_class(QScriptEngine *engine)
         , 3
         , 4
         , 3
+        , 2
         , 0
         , 0
         , 8
@@ -584,7 +607,7 @@ QScriptValue qtscript_create_QIcon_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QIcon*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QIcon*)0));
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 11; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QIcon_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QIcon_function_names[i+1]),

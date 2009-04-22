@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionTitleBar_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionTitleBar::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionTitleBar_StyleOptionVersion_keys[
 static QString qtscript_QStyleOptionTitleBar_StyleOptionVersion_toStringHelper(QStyleOptionTitleBar::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionTitleBar::Version) && (value <= QStyleOptionTitleBar::Version))
-        return qtscript_QStyleOptionTitleBar_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTitleBar_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTitleBar::Version)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleOptionTitleBar_StyleOptionType_keys[] =
 static QString qtscript_QStyleOptionTitleBar_StyleOptionType_toStringHelper(QStyleOptionTitleBar::StyleOptionType value)
 {
     if ((value >= QStyleOptionTitleBar::Type) && (value <= QStyleOptionTitleBar::Type))
-        return qtscript_QStyleOptionTitleBar_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTitleBar_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTitleBar::Type)];
     return QString();
 }
 

@@ -9,6 +9,7 @@
 #include <QTextBlock>
 #include <QTextDocumentFragment>
 #include <QVariant>
+#include <qimage.h>
 #include <qtextcursor.h>
 #include <qtextdocument.h>
 #include <qtextdocumentfragment.h>
@@ -40,6 +41,7 @@ static const char * const qtscript_QTextCursor_function_names[] = {
     , "currentTable"
     , "deleteChar"
     , "deletePreviousChar"
+    , "document"
     , "endEditBlock"
     , "hasComplexSelection"
     , "hasSelection"
@@ -103,11 +105,12 @@ static const char * const qtscript_QTextCursor_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
     , "\nQTextBlockFormat format\nQTextBlockFormat format, QTextCharFormat charFormat"
     , "QTextDocumentFragment fragment"
     , "QTextFrameFormat format"
     , "String html"
-    , "String name\nQTextImageFormat format\nQTextImageFormat format, Position alignment"
+    , "QImage image, String name\nString name\nQTextImageFormat format\nQTextImageFormat format, Position alignment"
     , "Style style\nQTextListFormat format"
     , "int rows, int cols\nint rows, int cols, QTextTableFormat format"
     , "String text\nString text, QTextCharFormat format"
@@ -144,7 +147,7 @@ static QScriptValue qtscript_QTextCursor_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextCursor::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -161,13 +164,13 @@ Q_DECLARE_METATYPE(QTextList*)
 Q_DECLARE_METATYPE(QTextListFormat)
 Q_DECLARE_METATYPE(QTextFrame*)
 Q_DECLARE_METATYPE(QTextTable*)
+Q_DECLARE_METATYPE(QTextDocument*)
 Q_DECLARE_METATYPE(QTextDocumentFragment)
 Q_DECLARE_METATYPE(QTextFrameFormat)
 Q_DECLARE_METATYPE(QTextImageFormat)
 Q_DECLARE_METATYPE(QTextFrameFormat::Position)
 Q_DECLARE_METATYPE(QTextTableFormat)
 Q_DECLARE_METATYPE(int*)
-Q_DECLARE_METATYPE(QTextDocument*)
 
 static QScriptValue qtscript_create_enum_class_helper(
     QScriptEngine *engine,
@@ -200,7 +203,7 @@ static const char * const qtscript_QTextCursor_MoveMode_keys[] = {
 static QString qtscript_QTextCursor_MoveMode_toStringHelper(QTextCursor::MoveMode value)
 {
     if ((value >= QTextCursor::MoveAnchor) && (value <= QTextCursor::KeepAnchor))
-        return qtscript_QTextCursor_MoveMode_keys[static_cast<int>(value)];
+        return qtscript_QTextCursor_MoveMode_keys[static_cast<int>(value)-static_cast<int>(QTextCursor::MoveAnchor)];
     return QString();
 }
 
@@ -276,6 +279,10 @@ static const QTextCursor::MoveOperation qtscript_QTextCursor_MoveOperation_value
     , QTextCursor::NextWord
     , QTextCursor::Right
     , QTextCursor::WordRight
+    , QTextCursor::NextCell
+    , QTextCursor::PreviousCell
+    , QTextCursor::NextRow
+    , QTextCursor::PreviousRow
 };
 
 static const char * const qtscript_QTextCursor_MoveOperation_keys[] = {
@@ -300,12 +307,16 @@ static const char * const qtscript_QTextCursor_MoveOperation_keys[] = {
     , "NextWord"
     , "Right"
     , "WordRight"
+    , "NextCell"
+    , "PreviousCell"
+    , "NextRow"
+    , "PreviousRow"
 };
 
 static QString qtscript_QTextCursor_MoveOperation_toStringHelper(QTextCursor::MoveOperation value)
 {
-    if ((value >= QTextCursor::NoMove) && (value <= QTextCursor::WordRight))
-        return qtscript_QTextCursor_MoveOperation_keys[static_cast<int>(value)];
+    if ((value >= QTextCursor::NoMove) && (value <= QTextCursor::PreviousRow))
+        return qtscript_QTextCursor_MoveOperation_keys[static_cast<int>(value)-static_cast<int>(QTextCursor::NoMove)];
     return QString();
 }
 
@@ -323,7 +334,7 @@ static void qtscript_QTextCursor_MoveOperation_fromScriptValue(const QScriptValu
 static QScriptValue qtscript_construct_QTextCursor_MoveOperation(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QTextCursor::NoMove) && (arg <= QTextCursor::WordRight))
+    if ((arg >= QTextCursor::NoMove) && (arg <= QTextCursor::PreviousRow))
         return qScriptValueFromValue(engine,  static_cast<QTextCursor::MoveOperation>(arg));
     return context->throwError(QString::fromLatin1("MoveOperation(): invalid enum value (%0)").arg(arg));
 }
@@ -347,7 +358,7 @@ static QScriptValue qtscript_create_QTextCursor_MoveOperation_class(QScriptEngin
         qtscript_QTextCursor_MoveOperation_valueOf, qtscript_QTextCursor_MoveOperation_toString);
     qScriptRegisterMetaType<QTextCursor::MoveOperation>(engine, qtscript_QTextCursor_MoveOperation_toScriptValue,
         qtscript_QTextCursor_MoveOperation_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 21; ++i) {
+    for (int i = 0; i < 25; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QTextCursor_MoveOperation_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QTextCursor_MoveOperation_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -376,7 +387,7 @@ static const char * const qtscript_QTextCursor_SelectionType_keys[] = {
 static QString qtscript_QTextCursor_SelectionType_toStringHelper(QTextCursor::SelectionType value)
 {
     if ((value >= QTextCursor::WordUnderCursor) && (value <= QTextCursor::Document))
-        return qtscript_QTextCursor_SelectionType_keys[static_cast<int>(value)];
+        return qtscript_QTextCursor_SelectionType_keys[static_cast<int>(value)-static_cast<int>(QTextCursor::WordUnderCursor)];
     return QString();
 }
 
@@ -440,7 +451,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 53;
+        _id = 0xBABE0000 + 54;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -594,26 +605,33 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
 
     case 19:
     if (context->argumentCount() == 0) {
+        QTextDocument* _q_result = _q_self->document();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 20:
+    if (context->argumentCount() == 0) {
         _q_self->endEditBlock();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 20:
+    case 21:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->hasComplexSelection();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 21:
+    case 22:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->hasSelection();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 22:
+    case 23:
     if (context->argumentCount() == 0) {
         _q_self->insertBlock();
         return context->engine()->undefinedValue();
@@ -631,7 +649,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 23:
+    case 24:
     if (context->argumentCount() == 1) {
         QTextDocumentFragment _q_arg0 = qscriptvalue_cast<QTextDocumentFragment>(context->argument(0));
         _q_self->insertFragment(_q_arg0);
@@ -639,7 +657,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 24:
+    case 25:
     if (context->argumentCount() == 1) {
         QTextFrameFormat _q_arg0 = qscriptvalue_cast<QTextFrameFormat>(context->argument(0));
         QTextFrame* _q_result = _q_self->insertFrame(_q_arg0);
@@ -647,7 +665,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 25:
+    case 26:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->insertHtml(_q_arg0);
@@ -655,9 +673,13 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 26:
+    case 27:
     if (context->argumentCount() == 1) {
-        if (context->argument(0).isString()) {
+        if ((qMetaTypeId<QImage>() == context->argument(0).toVariant().userType())) {
+            QImage _q_arg0 = qscriptvalue_cast<QImage>(context->argument(0));
+            _q_self->insertImage(_q_arg0);
+            return context->engine()->undefinedValue();
+        } else if (context->argument(0).isString()) {
             QString _q_arg0 = context->argument(0).toString();
             _q_self->insertImage(_q_arg0);
             return context->engine()->undefinedValue();
@@ -668,14 +690,23 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
         }
     }
     if (context->argumentCount() == 2) {
-        QTextImageFormat _q_arg0 = qscriptvalue_cast<QTextImageFormat>(context->argument(0));
-        QTextFrameFormat::Position _q_arg1 = qscriptvalue_cast<QTextFrameFormat::Position>(context->argument(1));
-        _q_self->insertImage(_q_arg0, _q_arg1);
-        return context->engine()->undefinedValue();
+        if ((qMetaTypeId<QImage>() == context->argument(0).toVariant().userType())
+            && context->argument(1).isString()) {
+            QImage _q_arg0 = qscriptvalue_cast<QImage>(context->argument(0));
+            QString _q_arg1 = context->argument(1).toString();
+            _q_self->insertImage(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        } else if ((qMetaTypeId<QTextImageFormat>() == context->argument(0).toVariant().userType())
+            && (qMetaTypeId<QTextFrameFormat::Position>() == context->argument(1).toVariant().userType())) {
+            QTextImageFormat _q_arg0 = qscriptvalue_cast<QTextImageFormat>(context->argument(0));
+            QTextFrameFormat::Position _q_arg1 = qscriptvalue_cast<QTextFrameFormat::Position>(context->argument(1));
+            _q_self->insertImage(_q_arg0, _q_arg1);
+            return context->engine()->undefinedValue();
+        }
     }
     break;
 
-    case 27:
+    case 28:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QTextListFormat::Style>() == context->argument(0).toVariant().userType())) {
             QTextListFormat::Style _q_arg0 = qscriptvalue_cast<QTextListFormat::Style>(context->argument(0));
@@ -689,7 +720,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 28:
+    case 29:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -705,7 +736,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 29:
+    case 30:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->insertText(_q_arg0);
@@ -719,7 +750,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 30:
+    case 31:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         bool _q_result = _q_self->isCopyOf(_q_arg0);
@@ -727,21 +758,21 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 31:
+    case 32:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isNull();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 32:
+    case 33:
     if (context->argumentCount() == 0) {
         _q_self->joinPreviousEditBlock();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 33:
+    case 34:
     if (context->argumentCount() == 1) {
         QTextCharFormat _q_arg0 = qscriptvalue_cast<QTextCharFormat>(context->argument(0));
         _q_self->mergeBlockCharFormat(_q_arg0);
@@ -749,7 +780,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 34:
+    case 35:
     if (context->argumentCount() == 1) {
         QTextBlockFormat _q_arg0 = qscriptvalue_cast<QTextBlockFormat>(context->argument(0));
         _q_self->mergeBlockFormat(_q_arg0);
@@ -757,7 +788,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 35:
+    case 36:
     if (context->argumentCount() == 1) {
         QTextCharFormat _q_arg0 = qscriptvalue_cast<QTextCharFormat>(context->argument(0));
         _q_self->mergeCharFormat(_q_arg0);
@@ -765,7 +796,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 36:
+    case 37:
     if (context->argumentCount() == 1) {
         QTextCursor::MoveOperation _q_arg0 = qscriptvalue_cast<QTextCursor::MoveOperation>(context->argument(0));
         bool _q_result = _q_self->movePosition(_q_arg0);
@@ -786,7 +817,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 37:
+    case 38:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         bool _q_result = _q_self->operator==(_q_arg0);
@@ -794,7 +825,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 38:
+    case 39:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         bool _q_result = _q_self->operator<(_q_arg0);
@@ -802,21 +833,21 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 39:
+    case 40:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->position();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 40:
+    case 41:
     if (context->argumentCount() == 0) {
         _q_self->removeSelectedText();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 41:
+    case 42:
     if (context->argumentCount() == 1) {
         QTextCursor::SelectionType _q_arg0 = qscriptvalue_cast<QTextCursor::SelectionType>(context->argument(0));
         _q_self->select(_q_arg0);
@@ -824,7 +855,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 42:
+    case 43:
     if (context->argumentCount() == 4) {
         int* _q_arg0 = qscriptvalue_cast<int*>(context->argument(0));
         int* _q_arg1 = qscriptvalue_cast<int*>(context->argument(1));
@@ -835,35 +866,35 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 43:
+    case 44:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->selectedText();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 44:
+    case 45:
     if (context->argumentCount() == 0) {
         QTextDocumentFragment _q_result = _q_self->selection();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 45:
+    case 46:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->selectionEnd();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 46:
+    case 47:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->selectionStart();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 47:
+    case 48:
     if (context->argumentCount() == 1) {
         QTextCharFormat _q_arg0 = qscriptvalue_cast<QTextCharFormat>(context->argument(0));
         _q_self->setBlockCharFormat(_q_arg0);
@@ -871,7 +902,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 48:
+    case 49:
     if (context->argumentCount() == 1) {
         QTextBlockFormat _q_arg0 = qscriptvalue_cast<QTextBlockFormat>(context->argument(0));
         _q_self->setBlockFormat(_q_arg0);
@@ -879,7 +910,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 49:
+    case 50:
     if (context->argumentCount() == 1) {
         QTextCharFormat _q_arg0 = qscriptvalue_cast<QTextCharFormat>(context->argument(0));
         _q_self->setCharFormat(_q_arg0);
@@ -887,7 +918,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 50:
+    case 51:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setPosition(_q_arg0);
@@ -901,7 +932,7 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 51:
+    case 52:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setVisualNavigation(_q_arg0);
@@ -909,14 +940,14 @@ static QScriptValue qtscript_QTextCursor_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 52:
+    case 53:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->visualNavigation();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 53: {
+    case 54: {
     QString result = QString::fromLatin1("QTextCursor");
     return QScriptValue(context->engine(), result);
     }
@@ -1004,6 +1035,7 @@ QScriptValue qtscript_create_QTextCursor_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 2
         , 1
         , 1
@@ -1039,7 +1071,7 @@ QScriptValue qtscript_create_QTextCursor_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QTextCursor*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextCursor*)0));
-    for (int i = 0; i < 54; ++i) {
+    for (int i = 0; i < 55; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextCursor_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextCursor_function_names[i+1]),

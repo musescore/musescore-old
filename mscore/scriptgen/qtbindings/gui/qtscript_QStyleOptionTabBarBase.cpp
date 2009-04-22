@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionTabBarBase_throw_ambiguity_error_helper
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionTabBarBase::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionTabBarBase_StyleOptionVersion_key
 static QString qtscript_QStyleOptionTabBarBase_StyleOptionVersion_toStringHelper(QStyleOptionTabBarBase::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionTabBarBase::Version) && (value <= QStyleOptionTabBarBase::Version))
-        return qtscript_QStyleOptionTabBarBase_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTabBarBase_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTabBarBase::Version)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleOptionTabBarBase_StyleOptionType_keys[]
 static QString qtscript_QStyleOptionTabBarBase_StyleOptionType_toStringHelper(QStyleOptionTabBarBase::StyleOptionType value)
 {
     if ((value >= QStyleOptionTabBarBase::Type) && (value <= QStyleOptionTabBarBase::Type))
-        return qtscript_QStyleOptionTabBarBase_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionTabBarBase_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionTabBarBase::Type)];
     return QString();
 }
 

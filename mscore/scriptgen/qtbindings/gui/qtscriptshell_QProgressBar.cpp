@@ -9,6 +9,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -561,9 +562,9 @@ void QtScriptShell_QProgressBar::tabletEvent(QTabletEvent*  arg__1)
 
 QString  QtScriptShell_QProgressBar::text() const
 {
-    QScriptValue _q_function = __qtscript_self.property("text");
+    QScriptValue _q_function = __qtscript_self.property("_qs_text");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
-        || (__qtscript_self.propertyFlags("text") & QScriptValue::QObjectMember)) {
+        || (__qtscript_self.propertyFlags("_qs_text") & QScriptValue::QObjectMember)) {
         return QProgressBar::text();
     } else {
         return qscriptvalue_cast<QString >(_q_function.call(__qtscript_self));

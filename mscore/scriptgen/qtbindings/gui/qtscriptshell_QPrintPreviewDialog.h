@@ -20,7 +20,7 @@ public:
     void contextMenuEvent(QContextMenuEvent*  arg__1);
     void customEvent(QEvent*  arg__1);
     int  devType() const;
-    void done(int  arg__1);
+    void done(int  result);
     void dragEnterEvent(QDragEnterEvent*  arg__1);
     void dragLeaveEvent(QDragLeaveEvent*  arg__1);
     void dragMoveEvent(QDragMoveEvent*  arg__1);

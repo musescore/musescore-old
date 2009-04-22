@@ -14,6 +14,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -43,6 +44,7 @@ static const char * const qtscript_QProgressDialog_function_names[] = {
     "QProgressDialog"
     // static
     // prototype
+    , "open"
     , "setBar"
     , "setCancelButton"
     , "setLabel"
@@ -50,9 +52,10 @@ static const char * const qtscript_QProgressDialog_function_names[] = {
 };
 
 static const char * const qtscript_QProgressDialog_function_signatures[] = {
-    "QWidget parent, WindowFlags f\nString labelText, String cancelButtonText, int minimum, int maximum, QWidget parent, WindowFlags f"
+    "QWidget parent, WindowFlags flags\nString labelText, String cancelButtonText, int minimum, int maximum, QWidget parent, WindowFlags flags"
     // static
     // prototype
+    , "QObject receiver, char member"
     , "QProgressBar bar"
     , "QPushButton button"
     , "QLabel label"
@@ -66,12 +69,13 @@ static QScriptValue qtscript_QProgressDialog_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QProgressDialog::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QProgressDialog*)
 Q_DECLARE_METATYPE(QtScriptShell_QProgressDialog*)
+Q_DECLARE_METATYPE(char*)
 Q_DECLARE_METATYPE(QProgressBar*)
 Q_DECLARE_METATYPE(QPushButton*)
 Q_DECLARE_METATYPE(QLabel*)
@@ -92,7 +96,7 @@ static QScriptValue qtscript_QProgressDialog_prototype_call(QScriptContext *cont
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 3;
+        _id = 0xBABE0000 + 4;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -105,6 +109,15 @@ static QScriptValue qtscript_QProgressDialog_prototype_call(QScriptContext *cont
 
     switch (_id) {
     case 0:
+    if (context->argumentCount() == 2) {
+        QObject* _q_arg0 = context->argument(0).toQObject();
+        char* _q_arg1 = qscriptvalue_cast<char*>(context->argument(1));
+        _q_self->open(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 1:
     if (context->argumentCount() == 1) {
         QProgressBar* _q_arg0 = qscriptvalue_cast<QProgressBar*>(context->argument(0));
         _q_self->setBar(_q_arg0);
@@ -112,7 +125,7 @@ static QScriptValue qtscript_QProgressDialog_prototype_call(QScriptContext *cont
     }
     break;
 
-    case 1:
+    case 2:
     if (context->argumentCount() == 1) {
         QPushButton* _q_arg0 = qscriptvalue_cast<QPushButton*>(context->argument(0));
         _q_self->setCancelButton(_q_arg0);
@@ -120,7 +133,7 @@ static QScriptValue qtscript_QProgressDialog_prototype_call(QScriptContext *cont
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 1) {
         QLabel* _q_arg0 = qscriptvalue_cast<QLabel*>(context->argument(0));
         _q_self->setLabel(_q_arg0);
@@ -128,7 +141,7 @@ static QScriptValue qtscript_QProgressDialog_prototype_call(QScriptContext *cont
     }
     break;
 
-    case 3: {
+    case 4: {
     QString result = QString::fromLatin1("QProgressDialog");
     return QScriptValue(context->engine(), result);
     }
@@ -226,6 +239,7 @@ QScriptValue qtscript_create_QProgressDialog_class(QScriptEngine *engine)
         6
         // static
         // prototype
+        , 2
         , 1
         , 1
         , 1
@@ -234,7 +248,7 @@ QScriptValue qtscript_create_QProgressDialog_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QProgressDialog*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QProgressDialog*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QDialog*>()));
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 5; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QProgressDialog_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QProgressDialog_function_names[i+1]),

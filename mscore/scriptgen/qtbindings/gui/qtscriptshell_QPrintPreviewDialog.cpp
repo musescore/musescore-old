@@ -10,6 +10,7 @@
 #include <qdialog.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -172,17 +173,17 @@ int  QtScriptShell_QPrintPreviewDialog::devType() const
     }
 }
 
-void QtScriptShell_QPrintPreviewDialog::done(int  arg__1)
+void QtScriptShell_QPrintPreviewDialog::done(int  result)
 {
     QScriptValue _q_function = __qtscript_self.property("done");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("done") & QScriptValue::QObjectMember)) {
-        QPrintPreviewDialog::done(arg__1);
+        QPrintPreviewDialog::done(result);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, result));
     }
 }
 

@@ -11,6 +11,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -61,8 +62,8 @@ Q_DECLARE_METATYPE(QTabletEvent*)
 Q_DECLARE_METATYPE(QTimerEvent*)
 Q_DECLARE_METATYPE(QWheelEvent*)
 
-QtScriptShell_QMessageBox::QtScriptShell_QMessageBox(QMessageBox::Icon  icon, const QString&  title, const QString&  text, QMessageBox::StandardButtons  buttons, QWidget*  parent, Qt::WindowFlags  f)
-    : QMessageBox(icon, title, text, buttons, parent, f) {}
+QtScriptShell_QMessageBox::QtScriptShell_QMessageBox(QMessageBox::Icon  icon, const QString&  title, const QString&  text, QMessageBox::StandardButtons  buttons, QWidget*  parent, Qt::WindowFlags  flags)
+    : QMessageBox(icon, title, text, buttons, parent, flags) {}
 
 QtScriptShell_QMessageBox::QtScriptShell_QMessageBox(QWidget*  parent)
     : QMessageBox(parent) {}

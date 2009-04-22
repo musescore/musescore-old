@@ -3,6 +3,7 @@
 #include <QtScript/QScriptEngine>
 #include <QVariant>
 #include <qabstractitemdelegate.h>
+#include <qabstractitemmodel.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qdatawidgetmapper.h>

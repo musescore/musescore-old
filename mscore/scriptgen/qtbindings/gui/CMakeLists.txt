@@ -303,7 +303,6 @@ add_library (
       qtscript_QTextBlockUserData.cpp
       qtscript_QTextBrowser.cpp
       qtscript_QTextCharFormat.cpp
-      qtscript_QTextCodecPlugin.cpp
       qtscript_QTextCursor.cpp
       qtscript_QTextDocument.cpp
       qtscript_QTextDocumentFragment.cpp
@@ -558,7 +557,6 @@ add_library (
       qtscriptshell_QTextBlockUserData.cpp
       qtscriptshell_QTextBrowser.cpp
       qtscriptshell_QTextCharFormat.cpp
-      qtscriptshell_QTextCodecPlugin.cpp
       qtscriptshell_QTextDocument.cpp
       qtscriptshell_QTextEdit.cpp
       qtscriptshell_QTextFrame.cpp
@@ -593,6 +591,17 @@ add_library (
       qtscriptshell_QWizard.cpp
       qtscriptshell_QWizardPage.cpp
       qtscriptshell_QWorkspace.cpp
+      qtscript_QItemSelectionModel.cpp
+      qtscript_QItemSelectionRange.cpp
+      qtscript_QDropEvent.cpp
+      qtscript_QDrag.cpp
+      qtscriptshell_QColorDialog.cpp
+      qtscriptshell_QStringListModel.cpp
+      qtscriptshell_QItemSelectionModel.cpp
+      qtscriptshell_QInputDialog.cpp
+      qtscriptshell_QFontDialog.cpp
+      qtscriptshell_QDropEvent.cpp
+      qtscriptshell_QDrag.cpp
       )
 
 set_target_properties(qtscript_gui

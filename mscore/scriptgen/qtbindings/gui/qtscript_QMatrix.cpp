@@ -39,11 +39,11 @@ static const char * const qtscript_QMatrix_function_names[] = {
     , "operator_multiply_assign"
     , "readFrom"
     , "reset"
-    , "rotate"
-    , "scale"
+    , "rotate_private"
+    , "scale_private"
     , "setMatrix"
-    , "shear"
-    , "translate"
+    , "shear_private"
+    , "translate_private"
     , "writeTo"
     , "toString"
 };
@@ -62,7 +62,7 @@ static const char * const qtscript_QMatrix_function_signatures[] = {
     , ""
     , ""
     , ""
-    , "QLine l\nQLineF l\nQPainterPath p\nQPoint p\nQPointF p\nQPolygon a\nQPolygonF a\nQRegion r\nqreal x, qreal y, qreal tx, qreal ty"
+    , "QLine l\nQLineF l\nQPainterPath p\nQPoint p\nQPointF p\nQPolygon a\nQPolygonF a\nQRegion r"
     , "QRect arg__1\nQRectF arg__1"
     , "QRect r"
     , "QMatrix arg__1"
@@ -86,14 +86,13 @@ static QScriptValue qtscript_QMatrix_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QMatrix::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QMatrix*)
 Q_DECLARE_METATYPE(QPainterPath)
 Q_DECLARE_METATYPE(QPolygonF)
-Q_DECLARE_METATYPE(qreal*)
 Q_DECLARE_METATYPE(QDataStream*)
 
 //
@@ -227,14 +226,6 @@ static QScriptValue qtscript_QMatrix_prototype_call(QScriptContext *context, QSc
             QRegion _q_result = _q_self->map(_q_arg0);
             return qScriptValueFromValue(context->engine(), _q_result);
         }
-    }
-    if (context->argumentCount() == 4) {
-        qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
-        qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
-        qreal* _q_arg2 = qscriptvalue_cast<qreal*>(context->argument(2));
-        qreal* _q_arg3 = qscriptvalue_cast<qreal*>(context->argument(3));
-        _q_self->map(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
-        return context->engine()->undefinedValue();
     }
     break;
 
@@ -426,7 +417,7 @@ QScriptValue qtscript_create_QMatrix_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
-        , 4
+        , 1
         , 1
         , 1
         , 1

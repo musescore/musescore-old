@@ -18,6 +18,7 @@
 #include <qevent.h>
 #include <qfont.h>
 #include <qgraphicsitem.h>
+#include <qgraphicsproxywidget.h>
 #include <qgraphicsscene.h>
 #include <qgraphicsview.h>
 #include <qicon.h>
@@ -117,7 +118,7 @@ static QScriptValue qtscript_QGraphicsView_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsView::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -495,7 +496,7 @@ static const char * const qtscript_QGraphicsView_CacheModeFlag_keys[] = {
 static QString qtscript_QGraphicsView_CacheModeFlag_toStringHelper(QGraphicsView::CacheModeFlag value)
 {
     if ((value >= QGraphicsView::CacheNone) && (value <= QGraphicsView::CacheBackground))
-        return qtscript_QGraphicsView_CacheModeFlag_keys[static_cast<int>(value)];
+        return qtscript_QGraphicsView_CacheModeFlag_keys[static_cast<int>(value)-static_cast<int>(QGraphicsView::CacheNone)];
     return QString();
 }
 

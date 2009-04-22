@@ -3,6 +3,7 @@
 #include <QtScript/QScriptEngine>
 #include <QVariant>
 #include <qabstractitemdelegate.h>
+#include <qabstractitemmodel.h>
 #include <qabstractitemview.h>
 #include <qaction.h>
 #include <qbitmap.h>
@@ -12,6 +13,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qitemselectionmodel.h>

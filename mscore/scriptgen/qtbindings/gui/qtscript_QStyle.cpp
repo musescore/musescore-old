@@ -98,7 +98,7 @@ static QScriptValue qtscript_QStyle_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyle::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -254,6 +254,10 @@ static const QStyle::PixelMetric qtscript_QStyle_PixelMetric_values[] = {
     , QStyle::PM_LayoutVerticalSpacing
     , QStyle::PM_TabBar_ScrollButtonOverlap
     , QStyle::PM_TextCursorWidth
+    , QStyle::PM_TabCloseIndicatorWidth
+    , QStyle::PM_TabCloseIndicatorHeight
+    , QStyle::PM_ScrollView_ScrollBarSpacing
+    , QStyle::PM_SubMenuOverlap
 };
 
 static const char * const qtscript_QStyle_PixelMetric_keys[] = {
@@ -346,11 +350,15 @@ static const char * const qtscript_QStyle_PixelMetric_keys[] = {
     , "PM_LayoutVerticalSpacing"
     , "PM_TabBar_ScrollButtonOverlap"
     , "PM_TextCursorWidth"
+    , "PM_TabCloseIndicatorWidth"
+    , "PM_TabCloseIndicatorHeight"
+    , "PM_ScrollView_ScrollBarSpacing"
+    , "PM_SubMenuOverlap"
 };
 
 static QString qtscript_QStyle_PixelMetric_toStringHelper(QStyle::PixelMetric value)
 {
-    for (int i = 0; i < 89; ++i) {
+    for (int i = 0; i < 93; ++i) {
         if (qtscript_QStyle_PixelMetric_values[i] == value)
             return QString::fromLatin1(qtscript_QStyle_PixelMetric_keys[i]);
     }
@@ -371,7 +379,7 @@ static void qtscript_QStyle_PixelMetric_fromScriptValue(const QScriptValue &valu
 static QScriptValue qtscript_construct_QStyle_PixelMetric(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 89; ++i) {
+    for (int i = 0; i < 93; ++i) {
         if (qtscript_QStyle_PixelMetric_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QStyle::PixelMetric>(arg));
     }
@@ -397,7 +405,7 @@ static QScriptValue qtscript_create_QStyle_PixelMetric_class(QScriptEngine *engi
         qtscript_QStyle_PixelMetric_valueOf, qtscript_QStyle_PixelMetric_toString);
     qScriptRegisterMetaType<QStyle::PixelMetric>(engine, qtscript_QStyle_PixelMetric_toScriptValue,
         qtscript_QStyle_PixelMetric_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 89; ++i) {
+    for (int i = 0; i < 93; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QStyle_PixelMetric_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QStyle_PixelMetric_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -876,6 +884,9 @@ static const QStyle::StyleHint qtscript_QStyle_StyleHint_values[] = {
     , QStyle::SH_FormLayoutFieldGrowthPolicy
     , QStyle::SH_FormLayoutFormAlignment
     , QStyle::SH_FormLayoutLabelAlignment
+    , QStyle::SH_ItemView_DrawDelegateFrame
+    , QStyle::SH_TabBar_CloseButtonPosition
+    , QStyle::SH_DockWidget_ButtonsHaveFrame
 };
 
 static const char * const qtscript_QStyle_StyleHint_keys[] = {
@@ -973,11 +984,14 @@ static const char * const qtscript_QStyle_StyleHint_keys[] = {
     , "SH_FormLayoutFieldGrowthPolicy"
     , "SH_FormLayoutFormAlignment"
     , "SH_FormLayoutLabelAlignment"
+    , "SH_ItemView_DrawDelegateFrame"
+    , "SH_TabBar_CloseButtonPosition"
+    , "SH_DockWidget_ButtonsHaveFrame"
 };
 
 static QString qtscript_QStyle_StyleHint_toStringHelper(QStyle::StyleHint value)
 {
-    for (int i = 0; i < 94; ++i) {
+    for (int i = 0; i < 97; ++i) {
         if (qtscript_QStyle_StyleHint_values[i] == value)
             return QString::fromLatin1(qtscript_QStyle_StyleHint_keys[i]);
     }
@@ -998,7 +1012,7 @@ static void qtscript_QStyle_StyleHint_fromScriptValue(const QScriptValue &value,
 static QScriptValue qtscript_construct_QStyle_StyleHint(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 94; ++i) {
+    for (int i = 0; i < 97; ++i) {
         if (qtscript_QStyle_StyleHint_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QStyle::StyleHint>(arg));
     }
@@ -1024,7 +1038,7 @@ static QScriptValue qtscript_create_QStyle_StyleHint_class(QScriptEngine *engine
         qtscript_QStyle_StyleHint_valueOf, qtscript_QStyle_StyleHint_toString);
     qScriptRegisterMetaType<QStyle::StyleHint>(engine, qtscript_QStyle_StyleHint_toScriptValue,
         qtscript_QStyle_StyleHint_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 94; ++i) {
+    for (int i = 0; i < 97; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QStyle_StyleHint_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QStyle_StyleHint_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1089,6 +1103,8 @@ static const QStyle::PrimitiveElement qtscript_QStyle_PrimitiveElement_values[] 
     , QStyle::PE_PanelItemViewItem
     , QStyle::PE_PanelItemViewRow
     , QStyle::PE_PanelStatusBar
+    , QStyle::PE_IndicatorTabClose
+    , QStyle::PE_PanelMenu
     , QStyle::PE_CustomBase
 };
 
@@ -1145,12 +1161,14 @@ static const char * const qtscript_QStyle_PrimitiveElement_keys[] = {
     , "PE_PanelItemViewItem"
     , "PE_PanelItemViewRow"
     , "PE_PanelStatusBar"
+    , "PE_IndicatorTabClose"
+    , "PE_PanelMenu"
     , "PE_CustomBase"
 };
 
 static QString qtscript_QStyle_PrimitiveElement_toStringHelper(QStyle::PrimitiveElement value)
 {
-    for (int i = 0; i < 53; ++i) {
+    for (int i = 0; i < 55; ++i) {
         if (qtscript_QStyle_PrimitiveElement_values[i] == value)
             return QString::fromLatin1(qtscript_QStyle_PrimitiveElement_keys[i]);
     }
@@ -1171,7 +1189,7 @@ static void qtscript_QStyle_PrimitiveElement_fromScriptValue(const QScriptValue 
 static QScriptValue qtscript_construct_QStyle_PrimitiveElement(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 53; ++i) {
+    for (int i = 0; i < 55; ++i) {
         if (qtscript_QStyle_PrimitiveElement_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QStyle::PrimitiveElement>(arg));
     }
@@ -1197,7 +1215,7 @@ static QScriptValue qtscript_create_QStyle_PrimitiveElement_class(QScriptEngine 
         qtscript_QStyle_PrimitiveElement_valueOf, qtscript_QStyle_PrimitiveElement_toString);
     qScriptRegisterMetaType<QStyle::PrimitiveElement>(engine, qtscript_QStyle_PrimitiveElement_toScriptValue,
         qtscript_QStyle_PrimitiveElement_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 53; ++i) {
+    for (int i = 0; i < 55; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QStyle_PrimitiveElement_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QStyle_PrimitiveElement_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1258,6 +1276,7 @@ static const QStyle::ControlElement qtscript_QStyle_ControlElement_values[] = {
     , QStyle::CE_HeaderEmptyArea
     , QStyle::CE_ColumnViewGrip
     , QStyle::CE_ItemViewItem
+    , QStyle::CE_ShapedFrame
 };
 
 static const char * const qtscript_QStyle_ControlElement_keys[] = {
@@ -1309,11 +1328,12 @@ static const char * const qtscript_QStyle_ControlElement_keys[] = {
     , "CE_HeaderEmptyArea"
     , "CE_ColumnViewGrip"
     , "CE_ItemViewItem"
+    , "CE_ShapedFrame"
 };
 
 static QString qtscript_QStyle_ControlElement_toStringHelper(QStyle::ControlElement value)
 {
-    for (int i = 0; i < 48; ++i) {
+    for (int i = 0; i < 49; ++i) {
         if (qtscript_QStyle_ControlElement_values[i] == value)
             return QString::fromLatin1(qtscript_QStyle_ControlElement_keys[i]);
     }
@@ -1334,7 +1354,7 @@ static void qtscript_QStyle_ControlElement_fromScriptValue(const QScriptValue &v
 static QScriptValue qtscript_construct_QStyle_ControlElement(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 48; ++i) {
+    for (int i = 0; i < 49; ++i) {
         if (qtscript_QStyle_ControlElement_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QStyle::ControlElement>(arg));
     }
@@ -1360,7 +1380,7 @@ static QScriptValue qtscript_create_QStyle_ControlElement_class(QScriptEngine *e
         qtscript_QStyle_ControlElement_valueOf, qtscript_QStyle_ControlElement_toString);
     qScriptRegisterMetaType<QStyle::ControlElement>(engine, qtscript_QStyle_ControlElement_toScriptValue,
         qtscript_QStyle_ControlElement_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 48; ++i) {
+    for (int i = 0; i < 49; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QStyle_ControlElement_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QStyle_ControlElement_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1840,6 +1860,10 @@ static const QStyle::SubElement qtscript_QStyle_SubElement_values[] = {
     , QStyle::SE_ItemViewItemDecoration
     , QStyle::SE_ItemViewItemText
     , QStyle::SE_ItemViewItemFocusRect
+    , QStyle::SE_TabBarTabLeftButton
+    , QStyle::SE_TabBarTabRightButton
+    , QStyle::SE_TabBarTabText
+    , QStyle::SE_ShapedFrameContents
 };
 
 static const char * const qtscript_QStyle_SubElement_keys[] = {
@@ -1903,11 +1927,15 @@ static const char * const qtscript_QStyle_SubElement_keys[] = {
     , "SE_ItemViewItemDecoration"
     , "SE_ItemViewItemText"
     , "SE_ItemViewItemFocusRect"
+    , "SE_TabBarTabLeftButton"
+    , "SE_TabBarTabRightButton"
+    , "SE_TabBarTabText"
+    , "SE_ShapedFrameContents"
 };
 
 static QString qtscript_QStyle_SubElement_toStringHelper(QStyle::SubElement value)
 {
-    for (int i = 0; i < 60; ++i) {
+    for (int i = 0; i < 64; ++i) {
         if (qtscript_QStyle_SubElement_values[i] == value)
             return QString::fromLatin1(qtscript_QStyle_SubElement_keys[i]);
     }
@@ -1928,7 +1956,7 @@ static void qtscript_QStyle_SubElement_fromScriptValue(const QScriptValue &value
 static QScriptValue qtscript_construct_QStyle_SubElement(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 60; ++i) {
+    for (int i = 0; i < 64; ++i) {
         if (qtscript_QStyle_SubElement_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QStyle::SubElement>(arg));
     }
@@ -1954,7 +1982,7 @@ static QScriptValue qtscript_create_QStyle_SubElement_class(QScriptEngine *engin
         qtscript_QStyle_SubElement_valueOf, qtscript_QStyle_SubElement_toString);
     qScriptRegisterMetaType<QStyle::SubElement>(engine, qtscript_QStyle_SubElement_toScriptValue,
         qtscript_QStyle_SubElement_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 60; ++i) {
+    for (int i = 0; i < 64; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QStyle_SubElement_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QStyle_SubElement_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1984,7 +2012,7 @@ static QScriptValue qtscript_QStyle_prototype_call(QScriptContext *context, QScr
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QStyle.%0(): this object is not a QStyle")
-            .arg(qtscript_QStyle_function_names[_id+1]));
+            .arg(qtscript_QStyle_function_names[_id+7]));
     }
 
     switch (_id) {

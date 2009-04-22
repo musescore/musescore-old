@@ -482,6 +482,57 @@ QRectF Chord::bbox() const
  Layout chord stem and hook.
 */
 
+void Chord::layoutStem1(ScoreLayout* /*layout*/)
+      {
+      int istaff = staffIdx();
+      System* s  = segment()->measure()->system();
+      if (s == 0)       //DEBUG
+            return;
+
+//      Note* upnote   = upNote();
+//      Note* downnote = downNote();
+
+      //-----------------------------------------
+      //  process stem
+      //-----------------------------------------
+
+      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
+      int hookIdx  = hasStem ? duration().hooks() : 0;
+
+      if (hasStem) {
+            if (!_stem)
+                  setStem(new Stem(score()));
+            }
+      else
+            setStem(0);
+
+      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
+            _stemSlash = new StemSlash(score());
+            _stemSlash->setMag(mag());
+            _stemSlash->setParent(this);
+            }
+      else if (_stemSlash) {
+            delete _stemSlash;
+            _stemSlash = 0;
+            }
+
+      //-----------------------------------------
+      //  process hook
+      //-----------------------------------------
+
+      if (hookIdx) {
+            if (!up())
+                  hookIdx = -hookIdx;
+            if (!_hook)
+                  setHook(new Hook(score()));
+            _hook->setMag(mag());
+            _hook->setSubtype(hookIdx);
+            }
+      else
+            setHook(0);
+      }
+
+#if 0
 void Chord::layoutStem1(ScoreLayout* layout)
       {
       int istaff      = staffIdx();
@@ -489,6 +540,10 @@ void Chord::layoutStem1(ScoreLayout* layout)
       System* s       = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
+
+      if (s->staves()->size() <= istaff)
+            printf("layoutStem1: staves %d index %d\n", s->staves()->size(), istaff);
+
       double sy      = s->staff(istaff)->bbox().y();
       Note* upnote   = upNote();
       Note* downnote = downNote();
@@ -542,6 +597,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       else
             setHook(0);
       }
+#endif
 
 //---------------------------------------------------------
 //   layoutStem

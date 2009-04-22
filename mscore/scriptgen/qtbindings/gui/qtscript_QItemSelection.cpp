@@ -7,6 +7,7 @@
 
 #include <qitemselectionmodel.h>
 #include <QVariant>
+#include <qabstractitemmodel.h>
 #include <qitemselectionmodel.h>
 #include <qlist.h>
 #include <qvector.h>
@@ -24,6 +25,7 @@ static const char * const qtscript_QItemSelection_function_names[] = {
     , "contains"
     , "count"
     , "empty"
+    , "endsWith"
     , "first"
     , "front"
     , "indexOf"
@@ -31,6 +33,7 @@ static const char * const qtscript_QItemSelection_function_names[] = {
     , "isEmpty"
     , "last"
     , "lastIndexOf"
+    , "length"
     , "merge"
     , "mid"
     , "move"
@@ -49,6 +52,7 @@ static const char * const qtscript_QItemSelection_function_names[] = {
     , "select"
     , "setSharable"
     , "size"
+    , "startsWith"
     , "swap"
     , "takeAt"
     , "takeFirst"
@@ -64,13 +68,14 @@ static const char * const qtscript_QItemSelection_function_signatures[] = {
     , "List vector"
     , "QItemSelectionRange range, QItemSelectionRange other, QItemSelection result"
     // prototype
-    , "QItemSelectionRange t"
+    , "QItemSelectionRange t\nList t"
     , "int i"
     , ""
     , ""
     , "QModelIndex index"
     , "\nQItemSelectionRange t"
     , ""
+    , "QItemSelectionRange t"
     , ""
     , ""
     , "QItemSelectionRange t, int from"
@@ -78,6 +83,7 @@ static const char * const qtscript_QItemSelection_function_signatures[] = {
     , ""
     , ""
     , "QItemSelectionRange t, int from"
+    , ""
     , "QItemSelection other, SelectionFlags command"
     , "int pos, int length"
     , "int from, int to"
@@ -96,6 +102,7 @@ static const char * const qtscript_QItemSelection_function_signatures[] = {
     , "QModelIndex topLeft, QModelIndex bottomRight"
     , "bool sharable"
     , ""
+    , "QItemSelectionRange t"
     , "int i, int j"
     , "int i"
     , ""
@@ -112,17 +119,17 @@ static QScriptValue qtscript_QItemSelection_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QItemSelection::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QItemSelection)
 Q_DECLARE_METATYPE(QItemSelection*)
 Q_DECLARE_METATYPE(QItemSelectionRange)
+Q_DECLARE_METATYPE(QList<QItemSelectionRange>)
 Q_DECLARE_METATYPE(QModelIndex)
 Q_DECLARE_METATYPE(QList<QModelIndex>)
 Q_DECLARE_METATYPE(QFlags<QItemSelectionModel::SelectionFlag>)
-Q_DECLARE_METATYPE(QList<QItemSelectionRange>)
 Q_DECLARE_METATYPE(QVector<QItemSelectionRange>)
 
 //
@@ -139,7 +146,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 38;
+        _id = 0xBABE0000 + 41;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -147,15 +154,22 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QItemSelection.%0(): this object is not a QItemSelection")
-            .arg(qtscript_QItemSelection_function_names[_id+1]));
+            .arg(qtscript_QItemSelection_function_names[_id+3]));
     }
 
     switch (_id) {
     case 0:
     if (context->argumentCount() == 1) {
-        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
-        _q_self->append(_q_arg0);
-        return context->engine()->undefinedValue();
+        if ((qMetaTypeId<QItemSelectionRange>() == context->argument(0).toVariant().userType())) {
+            QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
+            _q_self->append(_q_arg0);
+            return context->engine()->undefinedValue();
+        } else if (context->argument(0).isArray()) {
+            QList<QItemSelectionRange> _q_arg0;
+            qScriptValueToSequence(context->argument(0), _q_arg0);
+            _q_self->append(_q_arg0);
+            return context->engine()->undefinedValue();
+        }
     }
     break;
 
@@ -209,20 +223,28 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     break;
 
     case 7:
+    if (context->argumentCount() == 1) {
+        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
+        bool _q_result = _q_self->endsWith(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 8:
     if (context->argumentCount() == 0) {
         QItemSelectionRange _q_result = _q_self->first();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         QItemSelectionRange _q_result = _q_self->front();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 1) {
         QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
         int _q_result = _q_self->indexOf(_q_arg0);
@@ -236,28 +258,28 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 0) {
         QList<QModelIndex> _q_result = _q_self->indexes();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 12:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isEmpty();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 12:
+    case 13:
     if (context->argumentCount() == 0) {
         QItemSelectionRange _q_result = _q_self->last();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 1) {
         QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
         int _q_result = _q_self->lastIndexOf(_q_arg0);
@@ -271,7 +293,14 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 14:
+    case 15:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->length();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 16:
     if (context->argumentCount() == 2) {
         QItemSelection _q_arg0 = qscriptvalue_cast<QItemSelection>(context->argument(0));
         QFlags<QItemSelectionModel::SelectionFlag> _q_arg1 = qscriptvalue_cast<QFlags<QItemSelectionModel::SelectionFlag> >(context->argument(1));
@@ -280,7 +309,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QList<QItemSelectionRange> _q_result = _q_self->mid(_q_arg0);
@@ -294,7 +323,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -303,7 +332,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 1) {
         QList<QItemSelectionRange> _q_arg0;
         qScriptValueToSequence(context->argument(0), _q_arg0);
@@ -312,32 +341,16 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 0) {
         _q_self->pop_back();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 19:
+    case 21:
     if (context->argumentCount() == 0) {
         _q_self->pop_front();
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 20:
-    if (context->argumentCount() == 1) {
-        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
-        _q_self->prepend(_q_arg0);
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 21:
-    if (context->argumentCount() == 1) {
-        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
-        _q_self->push_back(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
@@ -345,7 +358,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     case 22:
     if (context->argumentCount() == 1) {
         QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
-        _q_self->push_front(_q_arg0);
+        _q_self->prepend(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
@@ -353,12 +366,28 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     case 23:
     if (context->argumentCount() == 1) {
         QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
+        _q_self->push_back(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 24:
+    if (context->argumentCount() == 1) {
+        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
+        _q_self->push_front(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 25:
+    if (context->argumentCount() == 1) {
+        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
         int _q_result = _q_self->removeAll(_q_arg0);
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 24:
+    case 26:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->removeAt(_q_arg0);
@@ -366,21 +395,21 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 25:
+    case 27:
     if (context->argumentCount() == 0) {
         _q_self->removeFirst();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 26:
+    case 28:
     if (context->argumentCount() == 0) {
         _q_self->removeLast();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 27:
+    case 29:
     if (context->argumentCount() == 1) {
         QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
         bool _q_result = _q_self->removeOne(_q_arg0);
@@ -388,7 +417,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 28:
+    case 30:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QItemSelectionRange _q_arg1 = qscriptvalue_cast<QItemSelectionRange>(context->argument(1));
@@ -397,7 +426,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 29:
+    case 31:
     if (context->argumentCount() == 2) {
         QModelIndex _q_arg0 = qscriptvalue_cast<QModelIndex>(context->argument(0));
         QModelIndex _q_arg1 = qscriptvalue_cast<QModelIndex>(context->argument(1));
@@ -406,7 +435,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 30:
+    case 32:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setSharable(_q_arg0);
@@ -414,14 +443,22 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 31:
+    case 33:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->size();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 32:
+    case 34:
+    if (context->argumentCount() == 1) {
+        QItemSelectionRange _q_arg0 = qscriptvalue_cast<QItemSelectionRange>(context->argument(0));
+        bool _q_result = _q_self->startsWith(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 35:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -430,7 +467,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 33:
+    case 36:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QItemSelectionRange _q_result = _q_self->takeAt(_q_arg0);
@@ -438,28 +475,28 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 34:
+    case 37:
     if (context->argumentCount() == 0) {
         QItemSelectionRange _q_result = _q_self->takeFirst();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 35:
+    case 38:
     if (context->argumentCount() == 0) {
         QItemSelectionRange _q_result = _q_self->takeLast();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 36:
+    case 39:
     if (context->argumentCount() == 0) {
         QVector<QItemSelectionRange> _q_result = _q_self->toVector();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 37:
+    case 40:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QItemSelectionRange _q_result = _q_self->value(_q_arg0);
@@ -473,7 +510,7 @@ static QScriptValue qtscript_QItemSelection_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 38: {
+    case 41: {
     QString result = QString::fromLatin1("QItemSelection");
     return QScriptValue(context->engine(), result);
     }
@@ -551,6 +588,7 @@ QScriptValue qtscript_create_QItemSelection_class(QScriptEngine *engine)
         , 1
         , 1
         , 0
+        , 1
         , 0
         , 0
         , 2
@@ -558,6 +596,7 @@ QScriptValue qtscript_create_QItemSelection_class(QScriptEngine *engine)
         , 0
         , 0
         , 2
+        , 0
         , 2
         , 2
         , 2
@@ -576,6 +615,7 @@ QScriptValue qtscript_create_QItemSelection_class(QScriptEngine *engine)
         , 2
         , 1
         , 0
+        , 1
         , 2
         , 1
         , 0
@@ -586,7 +626,7 @@ QScriptValue qtscript_create_QItemSelection_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QItemSelection*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QItemSelection*)0));
-    for (int i = 0; i < 39; ++i) {
+    for (int i = 0; i < 42; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QItemSelection_prototype_call, function_lengths[i+3]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QItemSelection_function_names[i+3]),

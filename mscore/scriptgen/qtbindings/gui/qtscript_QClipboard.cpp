@@ -14,6 +14,7 @@
 #include <qcoreevent.h>
 #include <qimage.h>
 #include <qlist.h>
+#include <qmimedata.h>
 #include <qobject.h>
 #include <qpixmap.h>
 
@@ -66,7 +67,7 @@ static QScriptValue qtscript_QClipboard_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QClipboard::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -107,7 +108,7 @@ static const char * const qtscript_QClipboard_Mode_keys[] = {
 static QString qtscript_QClipboard_Mode_toStringHelper(QClipboard::Mode value)
 {
     if ((value >= QClipboard::Clipboard) && (value <= QClipboard::FindBuffer))
-        return qtscript_QClipboard_Mode_keys[static_cast<int>(value)];
+        return qtscript_QClipboard_Mode_keys[static_cast<int>(value)-static_cast<int>(QClipboard::Clipboard)];
     return QString();
 }
 

@@ -51,7 +51,7 @@ static QScriptValue qtscript_QSystemTrayIcon_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSystemTrayIcon::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -96,7 +96,7 @@ static const char * const qtscript_QSystemTrayIcon_MessageIcon_keys[] = {
 static QString qtscript_QSystemTrayIcon_MessageIcon_toStringHelper(QSystemTrayIcon::MessageIcon value)
 {
     if ((value >= QSystemTrayIcon::NoIcon) && (value <= QSystemTrayIcon::Critical))
-        return qtscript_QSystemTrayIcon_MessageIcon_keys[static_cast<int>(value)];
+        return qtscript_QSystemTrayIcon_MessageIcon_keys[static_cast<int>(value)-static_cast<int>(QSystemTrayIcon::NoIcon)];
     return QString();
 }
 
@@ -169,7 +169,7 @@ static const char * const qtscript_QSystemTrayIcon_ActivationReason_keys[] = {
 static QString qtscript_QSystemTrayIcon_ActivationReason_toStringHelper(QSystemTrayIcon::ActivationReason value)
 {
     if ((value >= QSystemTrayIcon::Unknown) && (value <= QSystemTrayIcon::MiddleClick))
-        return qtscript_QSystemTrayIcon_ActivationReason_keys[static_cast<int>(value)];
+        return qtscript_QSystemTrayIcon_ActivationReason_keys[static_cast<int>(value)-static_cast<int>(QSystemTrayIcon::Unknown)];
     return QString();
 }
 
@@ -241,7 +241,7 @@ static QScriptValue qtscript_QSystemTrayIcon_prototype_call(QScriptContext *cont
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QSystemTrayIcon.%0(): this object is not a QSystemTrayIcon")
-            .arg(qtscript_QSystemTrayIcon_function_names[_id+1]));
+            .arg(qtscript_QSystemTrayIcon_function_names[_id+3]));
     }
 
     switch (_id) {

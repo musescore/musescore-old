@@ -7,6 +7,7 @@
 
 #include <qgraphicslayoutitem.h>
 #include <QVariant>
+#include <qgraphicsitem.h>
 #include <qgraphicslayoutitem.h>
 #include <qrect.h>
 #include <qsize.h>
@@ -22,6 +23,7 @@ static const char * const qtscript_QGraphicsLayoutItem_function_names[] = {
     , "effectiveSizeHint"
     , "geometry"
     , "getContentsMargins"
+    , "graphicsItem"
     , "isLayout"
     , "maximumHeight"
     , "maximumSize"
@@ -29,6 +31,7 @@ static const char * const qtscript_QGraphicsLayoutItem_function_names[] = {
     , "minimumHeight"
     , "minimumSize"
     , "minimumWidth"
+    , "ownedByLayout"
     , "parentLayoutItem"
     , "preferredHeight"
     , "preferredSize"
@@ -69,6 +72,8 @@ static const char * const qtscript_QGraphicsLayoutItem_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
+    , ""
     , "QRectF rect"
     , "qreal height"
     , "QSizeF size\nqreal w, qreal h"
@@ -93,7 +98,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsLayoutItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -118,7 +123,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 29;
+        _id = 0xBABE0000 + 31;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -171,82 +176,96 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
 
     case 4:
     if (context->argumentCount() == 0) {
+        QGraphicsItem* _q_result = _q_self->graphicsItem();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 5:
+    if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isLayout();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->maximumHeight();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 0) {
         QSizeF _q_result = _q_self->maximumSize();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->maximumWidth();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->minimumHeight();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 0) {
         QSizeF _q_result = _q_self->minimumSize();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->minimumWidth();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 12:
+    if (context->argumentCount() == 0) {
+        bool _q_result = _q_self->ownedByLayout();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 13:
     if (context->argumentCount() == 0) {
         QGraphicsLayoutItem* _q_result = _q_self->parentLayoutItem();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->preferredHeight();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 0) {
         QSizeF _q_result = _q_self->preferredSize();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 16:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->preferredWidth();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 1) {
         QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
         _q_self->setGeometry(_q_arg0);
@@ -254,7 +273,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setMaximumHeight(_q_arg0);
@@ -262,7 +281,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 1) {
         QSizeF _q_arg0 = qscriptvalue_cast<QSizeF>(context->argument(0));
         _q_self->setMaximumSize(_q_arg0);
@@ -276,7 +295,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setMaximumWidth(_q_arg0);
@@ -284,7 +303,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 19:
+    case 21:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setMinimumHeight(_q_arg0);
@@ -292,7 +311,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 20:
+    case 22:
     if (context->argumentCount() == 1) {
         QSizeF _q_arg0 = qscriptvalue_cast<QSizeF>(context->argument(0));
         _q_self->setMinimumSize(_q_arg0);
@@ -306,7 +325,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 21:
+    case 23:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setMinimumWidth(_q_arg0);
@@ -314,7 +333,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 22:
+    case 24:
     if (context->argumentCount() == 1) {
         QGraphicsLayoutItem* _q_arg0 = qscriptvalue_cast<QGraphicsLayoutItem*>(context->argument(0));
         _q_self->setParentLayoutItem(_q_arg0);
@@ -322,7 +341,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 23:
+    case 25:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setPreferredHeight(_q_arg0);
@@ -330,7 +349,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 24:
+    case 26:
     if (context->argumentCount() == 1) {
         QSizeF _q_arg0 = qscriptvalue_cast<QSizeF>(context->argument(0));
         _q_self->setPreferredSize(_q_arg0);
@@ -344,7 +363,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 25:
+    case 27:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setPreferredWidth(_q_arg0);
@@ -352,7 +371,7 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 26:
+    case 28:
     if (context->argumentCount() == 1) {
         QSizePolicy _q_arg0 = qscriptvalue_cast<QSizePolicy>(context->argument(0));
         _q_self->setSizePolicy(_q_arg0);
@@ -373,21 +392,21 @@ static QScriptValue qtscript_QGraphicsLayoutItem_prototype_call(QScriptContext *
     }
     break;
 
-    case 27:
+    case 29:
     if (context->argumentCount() == 0) {
         QSizePolicy _q_result = _q_self->sizePolicy();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 28:
+    case 30:
     if (context->argumentCount() == 0) {
         _q_self->updateGeometry();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 29: {
+    case 31: {
     QString result = QString::fromLatin1("QGraphicsLayoutItem");
     return QScriptValue(context->engine(), result);
     }
@@ -460,6 +479,8 @@ QScriptValue qtscript_create_QGraphicsLayoutItem_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
+        , 0
         , 1
         , 1
         , 2
@@ -478,7 +499,7 @@ QScriptValue qtscript_create_QGraphicsLayoutItem_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QGraphicsLayoutItem*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QGraphicsLayoutItem*)0));
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 32; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QGraphicsLayoutItem_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QGraphicsLayoutItem_function_names[i+1]),

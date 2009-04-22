@@ -25,6 +25,8 @@ static const char * const qtscript_QTextTable_function_names[] = {
     "QTextTable"
     // static
     // prototype
+    , "appendColumns"
+    , "appendRows"
     , "cellAt"
     , "columns"
     , "insertColumns"
@@ -46,6 +48,8 @@ static const char * const qtscript_QTextTable_function_signatures[] = {
     "QTextDocument doc"
     // static
     // prototype
+    , "int count"
+    , "int count"
     , "QTextCursor c\nint position\nint row, int col"
     , ""
     , "int pos, int num"
@@ -70,7 +74,7 @@ static QScriptValue qtscript_QTextTable_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextTable::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -96,7 +100,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 14;
+        _id = 0xBABE0000 + 16;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -109,6 +113,22 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
 
     switch (_id) {
     case 0:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        _q_self->appendColumns(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 1:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        _q_self->appendRows(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 2:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QTextCursor>() == context->argument(0).toVariant().userType())) {
             QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
@@ -128,14 +148,14 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 1:
+    case 3:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->columns();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 2:
+    case 4:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -144,7 +164,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 3:
+    case 5:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -153,7 +173,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 4:
+    case 6:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         _q_self->mergeCells(_q_arg0);
@@ -169,7 +189,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 5:
+    case 7:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -178,7 +198,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 6:
+    case 8:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -187,7 +207,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 7:
+    case 9:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -196,7 +216,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 8:
+    case 10:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         QTextCursor _q_result = _q_self->rowEnd(_q_arg0);
@@ -204,7 +224,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 9:
+    case 11:
     if (context->argumentCount() == 1) {
         QTextCursor _q_arg0 = qscriptvalue_cast<QTextCursor>(context->argument(0));
         QTextCursor _q_result = _q_self->rowStart(_q_arg0);
@@ -212,14 +232,14 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->rows();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 1) {
         QTextTableFormat _q_arg0 = qscriptvalue_cast<QTextTableFormat>(context->argument(0));
         _q_self->setFormat(_q_arg0);
@@ -227,7 +247,7 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 4) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -238,14 +258,14 @@ static QScriptValue qtscript_QTextTable_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 0) {
         QTextTableFormat _q_result = _q_self->format();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 14: {
+    case 16: {
     QString result = QString::fromLatin1("QTextTable");
     return QScriptValue(context->engine(), result);
     }
@@ -301,6 +321,8 @@ QScriptValue qtscript_create_QTextTable_class(QScriptEngine *engine)
         1
         // static
         // prototype
+        , 1
+        , 1
         , 2
         , 0
         , 2
@@ -320,7 +342,7 @@ QScriptValue qtscript_create_QTextTable_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QTextTable*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextTable*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QTextFrame*>()));
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 17; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextTable_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextTable_function_names[i+1]),

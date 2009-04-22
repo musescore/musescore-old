@@ -15,6 +15,7 @@
 #include <qdialog.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -44,18 +45,24 @@ static const char * const qtscript_QPageSetupDialog_function_names[] = {
     , "addEnabledOption"
     , "enabledOptions"
     , "isOptionEnabled"
+    , "open"
     , "setEnabledOptions"
+    , "setOption"
+    , "testOption"
     , "toString"
 };
 
 static const char * const qtscript_QPageSetupDialog_function_signatures[] = {
-    "QPrinter printer, QWidget parent"
+    "QPrinter printer, QWidget parent\nQWidget parent"
     // static
     // prototype
     , "PageSetupDialogOption option"
     , ""
     , "PageSetupDialogOption option"
+    , "QObject receiver, char member"
     , "PageSetupDialogOptions options"
+    , "PageSetupDialogOption option, bool on"
+    , "PageSetupDialogOption option"
 ""
 };
 
@@ -66,14 +73,20 @@ static QScriptValue qtscript_QPageSetupDialog_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QPageSetupDialog::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
+}
+
+static const QMetaObject *qtscript_QPageSetupDialog_metaObject()
+{
+    return &QPageSetupDialog::staticMetaObject;
 }
 
 Q_DECLARE_METATYPE(QPageSetupDialog*)
 Q_DECLARE_METATYPE(QtScriptShell_QPageSetupDialog*)
 Q_DECLARE_METATYPE(QPageSetupDialog::PageSetupDialogOption)
 Q_DECLARE_METATYPE(QFlags<QPageSetupDialog::PageSetupDialogOption>)
+Q_DECLARE_METATYPE(char*)
 Q_DECLARE_METATYPE(QPrinter*)
 Q_DECLARE_METATYPE(QAbstractPageSetupDialog*)
 
@@ -113,20 +126,24 @@ static QScriptValue qtscript_create_flags_class_helper(
 //
 
 static const QPageSetupDialog::PageSetupDialogOption qtscript_QPageSetupDialog_PageSetupDialogOption_values[] = {
-    QPageSetupDialog::None
+    QPageSetupDialog::OwnsPrinter
+    , QPageSetupDialog::None
     , QPageSetupDialog::DontUseSheet
 };
 
 static const char * const qtscript_QPageSetupDialog_PageSetupDialogOption_keys[] = {
-    "None"
+    "OwnsPrinter"
+    , "None"
     , "DontUseSheet"
 };
 
 static QString qtscript_QPageSetupDialog_PageSetupDialogOption_toStringHelper(QPageSetupDialog::PageSetupDialogOption value)
 {
-    if ((value >= QPageSetupDialog::None) && (value <= QPageSetupDialog::DontUseSheet))
-        return qtscript_QPageSetupDialog_PageSetupDialogOption_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_QPageSetupDialog_metaObject();
+    int idx = meta->indexOfEnumerator("PageSetupDialogOption");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_QPageSetupDialog_PageSetupDialogOption_toScriptValue(QScriptEngine *engine, const QPageSetupDialog::PageSetupDialogOption &value)
@@ -143,7 +160,11 @@ static void qtscript_QPageSetupDialog_PageSetupDialogOption_fromScriptValue(cons
 static QScriptValue qtscript_construct_QPageSetupDialog_PageSetupDialogOption(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QPageSetupDialog::None) && (arg <= QPageSetupDialog::DontUseSheet))
+    const QMetaObject *meta = qtscript_QPageSetupDialog_metaObject();
+    int idx = meta->indexOfEnumerator("PageSetupDialogOption");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<QPageSetupDialog::PageSetupDialogOption>(arg));
     return context->throwError(QString::fromLatin1("PageSetupDialogOption(): invalid enum value (%0)").arg(arg));
 }
@@ -167,7 +188,7 @@ static QScriptValue qtscript_create_QPageSetupDialog_PageSetupDialogOption_class
         qtscript_QPageSetupDialog_PageSetupDialogOption_valueOf, qtscript_QPageSetupDialog_PageSetupDialogOption_toString);
     qScriptRegisterMetaType<QPageSetupDialog::PageSetupDialogOption>(engine, qtscript_QPageSetupDialog_PageSetupDialogOption_toScriptValue,
         qtscript_QPageSetupDialog_PageSetupDialogOption_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QPageSetupDialog_PageSetupDialogOption_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QPageSetupDialog_PageSetupDialogOption_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -223,7 +244,7 @@ static QScriptValue qtscript_QPageSetupDialog_PageSetupDialogOptions_toString(QS
 {
     QPageSetupDialog::PageSetupDialogOptions value = qscriptvalue_cast<QPageSetupDialog::PageSetupDialogOptions>(context->thisObject());
     QString result;
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         if ((value & qtscript_QPageSetupDialog_PageSetupDialogOption_values[i]) == qtscript_QPageSetupDialog_PageSetupDialogOption_values[i]) {
             if (!result.isEmpty())
                 result.append(QString::fromLatin1(","));
@@ -265,7 +286,7 @@ static QScriptValue qtscript_QPageSetupDialog_prototype_call(QScriptContext *con
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 4;
+        _id = 0xBABE0000 + 7;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -301,6 +322,15 @@ static QScriptValue qtscript_QPageSetupDialog_prototype_call(QScriptContext *con
     break;
 
     case 3:
+    if (context->argumentCount() == 2) {
+        QObject* _q_arg0 = context->argument(0).toQObject();
+        char* _q_arg1 = qscriptvalue_cast<char*>(context->argument(1));
+        _q_self->open(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 4:
     if (context->argumentCount() == 1) {
         QFlags<QPageSetupDialog::PageSetupDialogOption> _q_arg0 = qscriptvalue_cast<QFlags<QPageSetupDialog::PageSetupDialogOption> >(context->argument(0));
         _q_self->setEnabledOptions(_q_arg0);
@@ -308,7 +338,29 @@ static QScriptValue qtscript_QPageSetupDialog_prototype_call(QScriptContext *con
     }
     break;
 
-    case 4: {
+    case 5:
+    if (context->argumentCount() == 1) {
+        QPageSetupDialog::PageSetupDialogOption _q_arg0 = qscriptvalue_cast<QPageSetupDialog::PageSetupDialogOption>(context->argument(0));
+        _q_self->setOption(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    if (context->argumentCount() == 2) {
+        QPageSetupDialog::PageSetupDialogOption _q_arg0 = qscriptvalue_cast<QPageSetupDialog::PageSetupDialogOption>(context->argument(0));
+        bool _q_arg1 = context->argument(1).toBoolean();
+        _q_self->setOption(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 6:
+    if (context->argumentCount() == 1) {
+        QPageSetupDialog::PageSetupDialogOption _q_arg0 = qscriptvalue_cast<QPageSetupDialog::PageSetupDialogOption>(context->argument(0));
+        bool _q_result = _q_self->testOption(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 7: {
     QString result = QString::fromLatin1("QPageSetupDialog");
     return QScriptValue(context->engine(), result);
     }
@@ -331,12 +383,25 @@ static QScriptValue qtscript_QPageSetupDialog_static_call(QScriptContext *contex
     if (context->thisObject().strictlyEquals(context->engine()->globalObject())) {
         return context->throwError(QString::fromLatin1("QPageSetupDialog(): Did you forget to construct with 'new'?"));
     }
-    if (context->argumentCount() == 1) {
-        QPrinter* _q_arg0 = qscriptvalue_cast<QPrinter*>(context->argument(0));
-        QtScriptShell_QPageSetupDialog* _q_cpp_result = new QtScriptShell_QPageSetupDialog(_q_arg0);
+    if (context->argumentCount() == 0) {
+        QtScriptShell_QPageSetupDialog* _q_cpp_result = new QtScriptShell_QPageSetupDialog();
         QScriptValue _q_result = context->engine()->newQObject(context->thisObject(), (QPageSetupDialog*)_q_cpp_result, QScriptEngine::AutoOwnership);
         _q_cpp_result->__qtscript_self = _q_result;
         return _q_result;
+    } else if (context->argumentCount() == 1) {
+        if (qscriptvalue_cast<QPrinter*>(context->argument(0))) {
+            QPrinter* _q_arg0 = qscriptvalue_cast<QPrinter*>(context->argument(0));
+            QtScriptShell_QPageSetupDialog* _q_cpp_result = new QtScriptShell_QPageSetupDialog(_q_arg0);
+            QScriptValue _q_result = context->engine()->newQObject(context->thisObject(), (QPageSetupDialog*)_q_cpp_result, QScriptEngine::AutoOwnership);
+            _q_cpp_result->__qtscript_self = _q_result;
+            return _q_result;
+        } else if (qscriptvalue_cast<QWidget*>(context->argument(0))) {
+            QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
+            QtScriptShell_QPageSetupDialog* _q_cpp_result = new QtScriptShell_QPageSetupDialog(_q_arg0);
+            QScriptValue _q_result = context->engine()->newQObject(context->thisObject(), (QPageSetupDialog*)_q_cpp_result, QScriptEngine::AutoOwnership);
+            _q_cpp_result->__qtscript_self = _q_result;
+            return _q_result;
+        }
     } else if (context->argumentCount() == 2) {
         QPrinter* _q_arg0 = qscriptvalue_cast<QPrinter*>(context->argument(0));
         QWidget* _q_arg1 = qscriptvalue_cast<QWidget*>(context->argument(1));
@@ -374,13 +439,16 @@ QScriptValue qtscript_create_QPageSetupDialog_class(QScriptEngine *engine)
         , 1
         , 0
         , 1
+        , 2
+        , 1
+        , 2
         , 1
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QPageSetupDialog*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QPageSetupDialog*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QAbstractPageSetupDialog*>()));
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 8; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QPageSetupDialog_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QPageSetupDialog_function_names[i+1]),

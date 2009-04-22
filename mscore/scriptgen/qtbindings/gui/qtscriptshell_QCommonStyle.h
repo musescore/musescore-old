@@ -24,9 +24,9 @@ public:
     QStyle::SubControl  hitTestComplexControl(QStyle::ComplexControl  cc, const QStyleOptionComplex*  opt, const QPoint&  pt, const QWidget*  w = 0) const;
     QRect  itemPixmapRect(const QRect&  r, int  flags, const QPixmap&  pixmap) const;
     int  pixelMetric(QStyle::PixelMetric  m, const QStyleOption*  opt = 0, const QWidget*  widget = 0) const;
-    void polish(QApplication*  arg__1);
+    void polish(QApplication*  app);
     void polish(QPalette&  arg__1);
-    void polish(QWidget*  arg__1);
+    void polish(QWidget*  widget);
     QSize  sizeFromContents(QStyle::ContentsType  ct, const QStyleOption*  opt, const QSize&  contentsSize, const QWidget*  widget = 0) const;
     QPalette  standardPalette() const;
     QPixmap  standardPixmap(QStyle::StandardPixmap  standardPixmap, const QStyleOption*  opt, const QWidget*  widget) const;
@@ -34,8 +34,8 @@ public:
     QRect  subControlRect(QStyle::ComplexControl  cc, const QStyleOptionComplex*  opt, QStyle::SubControl  sc, const QWidget*  w = 0) const;
     QRect  subElementRect(QStyle::SubElement  r, const QStyleOption*  opt, const QWidget*  widget = 0) const;
     void timerEvent(QTimerEvent*  arg__1);
-    void unpolish(QApplication*  arg__1);
-    void unpolish(QWidget*  arg__1);
+    void unpolish(QApplication*  application);
+    void unpolish(QWidget*  widget);
 
     QScriptValue __qtscript_self;
 };

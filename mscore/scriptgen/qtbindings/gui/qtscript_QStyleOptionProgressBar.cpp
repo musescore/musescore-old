@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionProgressBar_throw_ambiguity_error_helpe
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionProgressBar::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionProgressBar_StyleOptionVersion_ke
 static QString qtscript_QStyleOptionProgressBar_StyleOptionVersion_toStringHelper(QStyleOptionProgressBar::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionProgressBar::Version) && (value <= QStyleOptionProgressBar::Version))
-        return qtscript_QStyleOptionProgressBar_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionProgressBar_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionProgressBar::Version)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleOptionProgressBar_StyleOptionType_keys[
 static QString qtscript_QStyleOptionProgressBar_StyleOptionType_toStringHelper(QStyleOptionProgressBar::StyleOptionType value)
 {
     if ((value >= QStyleOptionProgressBar::Type) && (value <= QStyleOptionProgressBar::Type))
-        return qtscript_QStyleOptionProgressBar_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionProgressBar_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionProgressBar::Type)];
     return QString();
 }
 

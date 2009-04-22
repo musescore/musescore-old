@@ -66,7 +66,7 @@ static QScriptValue qtscript_QGraphicsPixmapItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsPixmapItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -108,7 +108,7 @@ static const char * const qtscript_QGraphicsPixmapItem_ShapeMode_keys[] = {
 static QString qtscript_QGraphicsPixmapItem_ShapeMode_toStringHelper(QGraphicsPixmapItem::ShapeMode value)
 {
     if ((value >= QGraphicsPixmapItem::MaskShape) && (value <= QGraphicsPixmapItem::HeuristicMaskShape))
-        return qtscript_QGraphicsPixmapItem_ShapeMode_keys[static_cast<int>(value)];
+        return qtscript_QGraphicsPixmapItem_ShapeMode_keys[static_cast<int>(value)-static_cast<int>(QGraphicsPixmapItem::MaskShape)];
     return QString();
 }
 

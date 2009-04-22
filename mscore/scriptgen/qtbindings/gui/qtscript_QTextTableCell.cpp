@@ -31,6 +31,7 @@ static const char * const qtscript_QTextTableCell_function_names[] = {
     , "row"
     , "rowSpan"
     , "setFormat"
+    , "tableCellFormatIndex"
     , "toString"
 };
 
@@ -52,6 +53,7 @@ static const char * const qtscript_QTextTableCell_function_signatures[] = {
     , ""
     , ""
     , "QTextCharFormat format"
+    , ""
 ""
 };
 
@@ -62,7 +64,7 @@ static QScriptValue qtscript_QTextTableCell_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextTableCell::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -86,7 +88,7 @@ static QScriptValue qtscript_QTextTableCell_prototype_call(QScriptContext *conte
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 14;
+        _id = 0xBABE0000 + 15;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -198,7 +200,14 @@ static QScriptValue qtscript_QTextTableCell_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 14: {
+    case 14:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->tableCellFormatIndex();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 15: {
     QString result = QString::fromLatin1("QTextTableCell");
     return QScriptValue(context->engine(), result);
     }
@@ -262,10 +271,11 @@ QScriptValue qtscript_create_QTextTableCell_class(QScriptEngine *engine)
         , 0
         , 1
         , 0
+        , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QTextTableCell*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextTableCell*)0));
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 16; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextTableCell_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextTableCell_function_names[i+1]),

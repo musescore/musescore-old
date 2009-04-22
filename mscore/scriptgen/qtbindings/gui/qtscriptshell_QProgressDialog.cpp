@@ -9,6 +9,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -60,11 +61,11 @@ Q_DECLARE_METATYPE(QTabletEvent*)
 Q_DECLARE_METATYPE(QTimerEvent*)
 Q_DECLARE_METATYPE(QWheelEvent*)
 
-QtScriptShell_QProgressDialog::QtScriptShell_QProgressDialog(QWidget*  parent, Qt::WindowFlags  f)
-    : QProgressDialog(parent, f) {}
+QtScriptShell_QProgressDialog::QtScriptShell_QProgressDialog(QWidget*  parent, Qt::WindowFlags  flags)
+    : QProgressDialog(parent, flags) {}
 
-QtScriptShell_QProgressDialog::QtScriptShell_QProgressDialog(const QString&  labelText, const QString&  cancelButtonText, int  minimum, int  maximum, QWidget*  parent, Qt::WindowFlags  f)
-    : QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, f) {}
+QtScriptShell_QProgressDialog::QtScriptShell_QProgressDialog(const QString&  labelText, const QString&  cancelButtonText, int  minimum, int  maximum, QWidget*  parent, Qt::WindowFlags  flags)
+    : QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, flags) {}
 
 QtScriptShell_QProgressDialog::~QtScriptShell_QProgressDialog() {}
 
@@ -93,17 +94,17 @@ void QtScriptShell_QProgressDialog::actionEvent(QActionEvent*  arg__1)
     }
 }
 
-void QtScriptShell_QProgressDialog::changeEvent(QEvent*  arg__1)
+void QtScriptShell_QProgressDialog::changeEvent(QEvent*  event)
 {
     QScriptValue _q_function = __qtscript_self.property("changeEvent");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("changeEvent") & QScriptValue::QObjectMember)) {
-        QProgressDialog::changeEvent(arg__1);
+        QProgressDialog::changeEvent(event);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, event));
     }
 }
 
@@ -121,17 +122,17 @@ void QtScriptShell_QProgressDialog::childEvent(QChildEvent*  arg__1)
     }
 }
 
-void QtScriptShell_QProgressDialog::closeEvent(QCloseEvent*  arg__1)
+void QtScriptShell_QProgressDialog::closeEvent(QCloseEvent*  event)
 {
     QScriptValue _q_function = __qtscript_self.property("closeEvent");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("closeEvent") & QScriptValue::QObjectMember)) {
-        QProgressDialog::closeEvent(arg__1);
+        QProgressDialog::closeEvent(event);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, event));
     }
 }
 
@@ -558,31 +559,31 @@ void QtScriptShell_QProgressDialog::reject()
     }
 }
 
-void QtScriptShell_QProgressDialog::resizeEvent(QResizeEvent*  arg__1)
+void QtScriptShell_QProgressDialog::resizeEvent(QResizeEvent*  event)
 {
     QScriptValue _q_function = __qtscript_self.property("resizeEvent");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("resizeEvent") & QScriptValue::QObjectMember)) {
-        QProgressDialog::resizeEvent(arg__1);
+        QProgressDialog::resizeEvent(event);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, event));
     }
 }
 
-void QtScriptShell_QProgressDialog::showEvent(QShowEvent*  e)
+void QtScriptShell_QProgressDialog::showEvent(QShowEvent*  event)
 {
     QScriptValue _q_function = __qtscript_self.property("showEvent");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("showEvent") & QScriptValue::QObjectMember)) {
-        QProgressDialog::showEvent(e);
+        QProgressDialog::showEvent(event);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, e));
+            << qScriptValueFromValue(_q_engine, event));
     }
 }
 

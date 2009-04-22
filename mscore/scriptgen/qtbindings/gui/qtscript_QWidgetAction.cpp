@@ -11,6 +11,7 @@
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qfont.h>
+#include <qgraphicswidget.h>
 #include <qicon.h>
 #include <qkeysequence.h>
 #include <qlist.h>
@@ -50,7 +51,7 @@ static QScriptValue qtscript_QWidgetAction_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QWidgetAction::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 

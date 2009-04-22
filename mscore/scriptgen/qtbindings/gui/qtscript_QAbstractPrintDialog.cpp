@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -86,7 +87,7 @@ static QScriptValue qtscript_QAbstractPrintDialog_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QAbstractPrintDialog::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -149,7 +150,7 @@ static const char * const qtscript_QAbstractPrintDialog_PrintRange_keys[] = {
 static QString qtscript_QAbstractPrintDialog_PrintRange_toStringHelper(QAbstractPrintDialog::PrintRange value)
 {
     if ((value >= QAbstractPrintDialog::AllPages) && (value <= QAbstractPrintDialog::PageRange))
-        return qtscript_QAbstractPrintDialog_PrintRange_keys[static_cast<int>(value)];
+        return qtscript_QAbstractPrintDialog_PrintRange_keys[static_cast<int>(value)-static_cast<int>(QAbstractPrintDialog::AllPages)];
     return QString();
 }
 

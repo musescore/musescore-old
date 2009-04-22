@@ -6,6 +6,7 @@
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qfont.h>
+#include <qgraphicswidget.h>
 #include <qicon.h>
 #include <qkeysequence.h>
 #include <qlist.h>
