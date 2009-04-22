@@ -1288,7 +1288,8 @@ void Harmony::buildText()
                         }
                   else if ((txt[idx] == '#') || (txt[idx] == 'b')) {
                         if (useSymbols) {
-                              ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2s, superOffset - fsize2*4);
+                              QString s(txt[idx] == '#' ? sharpSym : flatSym);
+                              ts->set(s, font2s, superOffset); //  - fsize2/4);
                               }
                         else {
                               ts->set(QString(txt[idx]), font1s, superOffset);
