@@ -1,4 +1,5 @@
 22.apr (ws)
+      - changed default style for lyrics odd/even lines to be the same (no italic any more)
       - fix script initialization (colornotes.js)
       - fix crash when inserting new staff above
       - updated gui script interface
