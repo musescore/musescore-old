@@ -2,6 +2,7 @@
 
 #include <QtScript/QScriptEngine>
 #include <QVariant>
+#include <qabstractitemmodel.h>
 #include <qbrush.h>
 #include <qdatastream.h>
 #include <qfont.h>

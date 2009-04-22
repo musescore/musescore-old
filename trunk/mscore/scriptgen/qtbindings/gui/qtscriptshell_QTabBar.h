@@ -52,7 +52,7 @@ public:
     QSize  tabSizeHint(int  index) const;
     void tabletEvent(QTabletEvent*  arg__1);
     void timerEvent(QTimerEvent*  arg__1);
-    void wheelEvent(QWheelEvent*  arg__1);
+    void wheelEvent(QWheelEvent*  event);
 
     QScriptValue __qtscript_self;
 };

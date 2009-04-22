@@ -8,6 +8,7 @@
 #include <qlistwidget.h>
 #include <QVariant>
 #include <qabstractitemdelegate.h>
+#include <qabstractitemmodel.h>
 #include <qaction.h>
 #include <qbitmap.h>
 #include <qbytearray.h>
@@ -15,6 +16,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qitemselectionmodel.h>
@@ -23,6 +25,7 @@
 #include <qlist.h>
 #include <qlistwidget.h>
 #include <qlocale.h>
+#include <qmimedata.h>
 #include <qobject.h>
 #include <qpaintdevice.h>
 #include <qpaintengine.h>
@@ -102,7 +105,7 @@ static QScriptValue qtscript_QListWidget_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QListWidget::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 

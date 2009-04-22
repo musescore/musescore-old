@@ -58,7 +58,6 @@ static const char * const qtscript_QImage_function_names[] = {
     , "equals"
     , "pixel"
     , "pixelIndex"
-    , "private_save"
     , "readFrom"
     , "rect"
     , "rgbSwapped"
@@ -116,11 +115,10 @@ static const char * const qtscript_QImage_function_signatures[] = {
     , "QImage arg__1"
     , "QPoint pt\nint x, int y"
     , "QPoint pt\nint x, int y"
-    , "String fileName, char format, int quality"
     , "QDataStream arg__1"
     , ""
     , ""
-    , "QIODevice device, char format, int quality"
+    , "QIODevice device, char format, int quality\nString fileName, char format, int quality"
     , "QSize s, AspectRatioMode aspectMode, TransformationMode mode\nint w, int h, AspectRatioMode aspectMode, TransformationMode mode"
     , "int h, TransformationMode mode"
     , "int w, TransformationMode mode"
@@ -148,7 +146,7 @@ static QScriptValue qtscript_QImage_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QImage::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -197,7 +195,7 @@ static const char * const qtscript_QImage_InvertMode_keys[] = {
 static QString qtscript_QImage_InvertMode_toStringHelper(QImage::InvertMode value)
 {
     if ((value >= QImage::InvertRgb) && (value <= QImage::InvertRgba))
-        return qtscript_QImage_InvertMode_keys[static_cast<int>(value)];
+        return qtscript_QImage_InvertMode_keys[static_cast<int>(value)-static_cast<int>(QImage::InvertRgb)];
     return QString();
 }
 
@@ -294,7 +292,7 @@ static const char * const qtscript_QImage_Format_keys[] = {
 static QString qtscript_QImage_Format_toStringHelper(QImage::Format value)
 {
     if ((value >= QImage::Format_Invalid) && (value <= QImage::NImageFormats))
-        return qtscript_QImage_Format_keys[static_cast<int>(value)];
+        return qtscript_QImage_Format_keys[static_cast<int>(value)-static_cast<int>(QImage::Format_Invalid)];
     return QString();
 }
 
@@ -358,7 +356,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 49;
+        _id = 0xBABE0000 + 48;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -366,7 +364,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QImage.%0(): this object is not a QImage")
-            .arg(qtscript_QImage_function_names[_id+1]));
+            .arg(qtscript_QImage_function_names[_id+3]));
     }
 
     switch (_id) {
@@ -673,20 +671,6 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     break;
 
     case 27:
-    if (context->argumentCount() == 3) {
-        QString _q_arg0 = context->argument(0).toString();
-
-          // TEMPLATE - core.convert_string_arg_to_char* - START
-          QByteArray tmp__q_arg1 = context->argument(1).toString().toLatin1();
-          const char * _q_arg1 = tmp__q_arg1.constData();
-    // TEMPLATE - core.convert_string_arg_to_char* - END
-                int _q_arg2 = context->argument(2).toInt32();
-        bool _q_result = _q_self->save(_q_arg0, _q_arg1, _q_arg2);
-        return QScriptValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 28:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator>>(*_q_arg0, *_q_self);
@@ -694,50 +678,85 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 29:
+    case 28:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->rect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 30:
+    case 29:
     if (context->argumentCount() == 0) {
         QImage _q_result = _q_self->rgbSwapped();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 31:
+    case 30:
     if (context->argumentCount() == 1) {
-        QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
-        bool _q_result = _q_self->save(_q_arg0);
-        return QScriptValue(context->engine(), _q_result);
+        if (qscriptvalue_cast<QIODevice*>(context->argument(0))) {
+            QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
+            bool _q_result = _q_self->save(_q_arg0);
+            return QScriptValue(context->engine(), _q_result);
+        } else if (context->argument(0).isString()) {
+            QString _q_arg0 = context->argument(0).toString();
+            bool _q_result = _q_self->save(_q_arg0);
+            return QScriptValue(context->engine(), _q_result);
+        }
     }
     if (context->argumentCount() == 2) {
-        QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
+        if (qscriptvalue_cast<QIODevice*>(context->argument(0))
+            && context->argument(1).isString()) {
+            QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
 
           // TEMPLATE - core.convert_string_arg_to_char* - START
           QByteArray tmp__q_arg1 = context->argument(1).toString().toLatin1();
           const char * _q_arg1 = tmp__q_arg1.constData();
     // TEMPLATE - core.convert_string_arg_to_char* - END
-                bool _q_result = _q_self->save(_q_arg0, _q_arg1);
-        return QScriptValue(context->engine(), _q_result);
+                    bool _q_result = _q_self->save(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        } else if (context->argument(0).isString()
+            && context->argument(1).isString()) {
+            QString _q_arg0 = context->argument(0).toString();
+
+          // TEMPLATE - core.convert_string_arg_to_char* - START
+          QByteArray tmp__q_arg1 = context->argument(1).toString().toLatin1();
+          const char * _q_arg1 = tmp__q_arg1.constData();
+    // TEMPLATE - core.convert_string_arg_to_char* - END
+                    bool _q_result = _q_self->save(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        }
     }
     if (context->argumentCount() == 3) {
-        QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
+        if (qscriptvalue_cast<QIODevice*>(context->argument(0))
+            && context->argument(1).isString()
+            && context->argument(2).isNumber()) {
+            QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
 
           // TEMPLATE - core.convert_string_arg_to_char* - START
           QByteArray tmp__q_arg1 = context->argument(1).toString().toLatin1();
           const char * _q_arg1 = tmp__q_arg1.constData();
     // TEMPLATE - core.convert_string_arg_to_char* - END
-                int _q_arg2 = context->argument(2).toInt32();
-        bool _q_result = _q_self->save(_q_arg0, _q_arg1, _q_arg2);
-        return QScriptValue(context->engine(), _q_result);
+                    int _q_arg2 = context->argument(2).toInt32();
+            bool _q_result = _q_self->save(_q_arg0, _q_arg1, _q_arg2);
+            return QScriptValue(context->engine(), _q_result);
+        } else if (context->argument(0).isString()
+            && context->argument(1).isString()
+            && context->argument(2).isNumber()) {
+            QString _q_arg0 = context->argument(0).toString();
+
+          // TEMPLATE - core.convert_string_arg_to_char* - START
+          QByteArray tmp__q_arg1 = context->argument(1).toString().toLatin1();
+          const char * _q_arg1 = tmp__q_arg1.constData();
+    // TEMPLATE - core.convert_string_arg_to_char* - END
+                    int _q_arg2 = context->argument(2).toInt32();
+            bool _q_result = _q_self->save(_q_arg0, _q_arg1, _q_arg2);
+            return QScriptValue(context->engine(), _q_result);
+        }
     }
     break;
 
-    case 32:
+    case 31:
     if (context->argumentCount() == 1) {
         QSize _q_arg0 = qscriptvalue_cast<QSize>(context->argument(0));
         QImage _q_result = _q_self->scaled(_q_arg0);
@@ -787,7 +806,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 33:
+    case 32:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QImage _q_result = _q_self->scaledToHeight(_q_arg0);
@@ -801,7 +820,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 34:
+    case 33:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QImage _q_result = _q_self->scaledToWidth(_q_arg0);
@@ -815,7 +834,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 35:
+    case 34:
     if (context->argumentCount() == 1) {
         QImage _q_arg0 = qscriptvalue_cast<QImage>(context->argument(0));
         _q_self->setAlphaChannel(_q_arg0);
@@ -823,7 +842,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 36:
+    case 35:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         uint _q_arg1 = context->argument(1).toUInt32();
@@ -832,7 +851,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 37:
+    case 36:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setDotsPerMeterX(_q_arg0);
@@ -840,7 +859,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 38:
+    case 37:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setDotsPerMeterY(_q_arg0);
@@ -848,7 +867,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 39:
+    case 38:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setNumColors(_q_arg0);
@@ -856,7 +875,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 40:
+    case 39:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         _q_self->setOffset(_q_arg0);
@@ -864,7 +883,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 41:
+    case 40:
     if (context->argumentCount() == 2) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         uint _q_arg1 = context->argument(1).toUInt32();
@@ -880,7 +899,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 42:
+    case 41:
     if (context->argumentCount() == 2) {
         QString _q_arg0 = context->argument(0).toString();
         QString _q_arg1 = context->argument(1).toString();
@@ -889,14 +908,14 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 43:
+    case 42:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->size();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 44:
+    case 43:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->text();
         return QScriptValue(context->engine(), _q_result);
@@ -908,14 +927,14 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 45:
+    case 44:
     if (context->argumentCount() == 0) {
         QStringList _q_result = _q_self->textKeys();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 46:
+    case 45:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QMatrix>() == context->argument(0).toVariant().userType())) {
             QMatrix _q_arg0 = qscriptvalue_cast<QMatrix>(context->argument(0));
@@ -944,7 +963,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 47:
+    case 46:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         bool _q_result = _q_self->valid(_q_arg0);
@@ -958,7 +977,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 48:
+    case 47:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator<<(*_q_arg0, *_q_self);
@@ -966,7 +985,7 @@ static QScriptValue qtscript_QImage_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 49: {
+    case 48: {
     QString result = QString::fromLatin1("QImage");
     return QScriptValue(context->engine(), result);
     }
@@ -1119,7 +1138,6 @@ QScriptValue qtscript_create_QImage_class(QScriptEngine *engine)
         , 1
         , 2
         , 2
-        , 3
         , 1
         , 0
         , 0
@@ -1146,7 +1164,7 @@ QScriptValue qtscript_create_QImage_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QImage*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QImage*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QPaintDevice*>()));
-    for (int i = 0; i < 50; ++i) {
+    for (int i = 0; i < 49; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QImage_prototype_call, function_lengths[i+3]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QImage_function_names[i+3]),

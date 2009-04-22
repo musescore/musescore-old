@@ -15,6 +15,7 @@
 #include <qerrormessage.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -59,7 +60,7 @@ static QScriptValue qtscript_QErrorMessage_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QErrorMessage::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -89,7 +90,7 @@ static QScriptValue qtscript_QErrorMessage_prototype_call(QScriptContext *contex
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QErrorMessage.%0(): this object is not a QErrorMessage")
-            .arg(qtscript_QErrorMessage_function_names[_id+1]));
+            .arg(qtscript_QErrorMessage_function_names[_id+2]));
     }
 
     switch (_id) {

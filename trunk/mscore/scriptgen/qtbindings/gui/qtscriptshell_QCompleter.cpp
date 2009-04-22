@@ -2,6 +2,7 @@
 
 #include <QtScript/QScriptEngine>
 #include <QVariant>
+#include <qabstractitemmodel.h>
 #include <qabstractitemview.h>
 #include <qbytearray.h>
 #include <qcompleter.h>

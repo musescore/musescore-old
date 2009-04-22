@@ -13,6 +13,7 @@
 #include <qevent.h>
 #include <qfont.h>
 #include <qgraphicsitem.h>
+#include <qgraphicsproxywidget.h>
 #include <qgraphicsscene.h>
 #include <qgraphicsview.h>
 #include <qicon.h>

@@ -15,6 +15,7 @@
 #include <qdockwidget.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -68,8 +69,11 @@ static const char * const qtscript_QMainWindow_function_names[] = {
     , "setMenuBar"
     , "setMenuWidget"
     , "setStatusBar"
+    , "setTabPosition"
     , "splitDockWidget"
     , "statusBar"
+    , "tabPosition"
+    , "tabifiedDockWidgets"
     , "tabifyDockWidget"
     , "toolBarArea"
     , "toolBarBreak"
@@ -103,8 +107,11 @@ static const char * const qtscript_QMainWindow_function_signatures[] = {
     , "QMenuBar menubar"
     , "QWidget menubar"
     , "QStatusBar statusbar"
+    , "DockWidgetAreas areas, TabPosition tabPosition"
     , "QDockWidget after, QDockWidget dockwidget, Orientation orientation"
     , ""
+    , "DockWidgetArea area"
+    , "QDockWidget dockwidget"
     , "QDockWidget first, QDockWidget second"
     , "QToolBar toolbar"
     , "QToolBar toolbar"
@@ -118,7 +125,7 @@ static QScriptValue qtscript_QMainWindow_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QMainWindow::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -140,6 +147,9 @@ Q_DECLARE_METATYPE(Qt::Corner)
 Q_DECLARE_METATYPE(QMenu*)
 Q_DECLARE_METATYPE(QMenuBar*)
 Q_DECLARE_METATYPE(QStatusBar*)
+Q_DECLARE_METATYPE(QFlags<Qt::DockWidgetArea>)
+Q_DECLARE_METATYPE(QTabWidget::TabPosition)
+Q_DECLARE_METATYPE(QList<QDockWidget*>)
 Q_DECLARE_METATYPE(QFlags<Qt::WindowType>)
 
 static QScriptValue qtscript_create_enum_class_helper(
@@ -342,7 +352,7 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 28;
+        _id = 0xBABE0000 + 31;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -571,6 +581,15 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     break;
 
     case 23:
+    if (context->argumentCount() == 2) {
+        QFlags<Qt::DockWidgetArea> _q_arg0 = qscriptvalue_cast<QFlags<Qt::DockWidgetArea> >(context->argument(0));
+        QTabWidget::TabPosition _q_arg1 = qscriptvalue_cast<QTabWidget::TabPosition>(context->argument(1));
+        _q_self->setTabPosition(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 24:
     if (context->argumentCount() == 3) {
         QDockWidget* _q_arg0 = qscriptvalue_cast<QDockWidget*>(context->argument(0));
         QDockWidget* _q_arg1 = qscriptvalue_cast<QDockWidget*>(context->argument(1));
@@ -580,14 +599,30 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 24:
+    case 25:
     if (context->argumentCount() == 0) {
         QStatusBar* _q_result = _q_self->statusBar();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 25:
+    case 26:
+    if (context->argumentCount() == 1) {
+        Qt::DockWidgetArea _q_arg0 = qscriptvalue_cast<Qt::DockWidgetArea>(context->argument(0));
+        QTabWidget::TabPosition _q_result = _q_self->tabPosition(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 27:
+    if (context->argumentCount() == 1) {
+        QDockWidget* _q_arg0 = qscriptvalue_cast<QDockWidget*>(context->argument(0));
+        QList<QDockWidget*> _q_result = _q_self->tabifiedDockWidgets(_q_arg0);
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    break;
+
+    case 28:
     if (context->argumentCount() == 2) {
         QDockWidget* _q_arg0 = qscriptvalue_cast<QDockWidget*>(context->argument(0));
         QDockWidget* _q_arg1 = qscriptvalue_cast<QDockWidget*>(context->argument(1));
@@ -596,7 +631,7 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 26:
+    case 29:
     if (context->argumentCount() == 1) {
         QToolBar* _q_arg0 = qscriptvalue_cast<QToolBar*>(context->argument(0));
         Qt::ToolBarArea _q_result = _q_self->toolBarArea(_q_arg0);
@@ -604,7 +639,7 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 27:
+    case 30:
     if (context->argumentCount() == 1) {
         QToolBar* _q_arg0 = qscriptvalue_cast<QToolBar*>(context->argument(0));
         bool _q_result = _q_self->toolBarBreak(_q_arg0);
@@ -612,7 +647,7 @@ static QScriptValue qtscript_QMainWindow_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 28: {
+    case 31: {
     QString result = QString::fromLatin1("QMainWindow");
     return QScriptValue(context->engine(), result);
     }
@@ -703,8 +738,11 @@ QScriptValue qtscript_create_QMainWindow_class(QScriptEngine *engine)
         , 1
         , 1
         , 1
+        , 2
         , 3
         , 0
+        , 1
+        , 1
         , 2
         , 1
         , 1
@@ -713,7 +751,7 @@ QScriptValue qtscript_create_QMainWindow_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QMainWindow*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QMainWindow*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QWidget*>()));
-    for (int i = 0; i < 29; ++i) {
+    for (int i = 0; i < 32; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QMainWindow_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QMainWindow_function_names[i+1]),

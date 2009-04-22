@@ -7,6 +7,7 @@
 
 #include <qcompleter.h>
 #include <QVariant>
+#include <qabstractitemmodel.h>
 #include <qabstractitemview.h>
 #include <qbytearray.h>
 #include <qcompleter.h>
@@ -68,7 +69,7 @@ static QScriptValue qtscript_QCompleter_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QCompleter::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -113,7 +114,7 @@ static const char * const qtscript_QCompleter_ModelSorting_keys[] = {
 static QString qtscript_QCompleter_ModelSorting_toStringHelper(QCompleter::ModelSorting value)
 {
     if ((value >= QCompleter::UnsortedModel) && (value <= QCompleter::CaseInsensitivelySortedModel))
-        return qtscript_QCompleter_ModelSorting_keys[static_cast<int>(value)];
+        return qtscript_QCompleter_ModelSorting_keys[static_cast<int>(value)-static_cast<int>(QCompleter::UnsortedModel)];
     return QString();
 }
 
@@ -182,7 +183,7 @@ static const char * const qtscript_QCompleter_CompletionMode_keys[] = {
 static QString qtscript_QCompleter_CompletionMode_toStringHelper(QCompleter::CompletionMode value)
 {
     if ((value >= QCompleter::PopupCompletion) && (value <= QCompleter::InlineCompletion))
-        return qtscript_QCompleter_CompletionMode_keys[static_cast<int>(value)];
+        return qtscript_QCompleter_CompletionMode_keys[static_cast<int>(value)-static_cast<int>(QCompleter::PopupCompletion)];
     return QString();
 }
 

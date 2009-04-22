@@ -68,6 +68,7 @@ static const char * const qtscript_QApplication_function_names[] = {
     , "setDesktopSettingsAware"
     , "setEffectEnabled"
     , "setFont"
+    , "setGraphicsSystem"
     , "setOverrideCursor"
     , "setPalette"
     , "setStyle"
@@ -117,6 +118,7 @@ static const char * const qtscript_QApplication_function_signatures[] = {
     , "bool arg__1"
     , "UIEffect arg__1, bool enable"
     , "QFont arg__1, char className"
+    , "String arg__1"
     , "QCursor arg__1"
     , "QPalette arg__1, char className"
     , "QStyle arg__1\nString arg__1"
@@ -142,7 +144,7 @@ static QScriptValue qtscript_QApplication_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QApplication::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -195,7 +197,7 @@ static const char * const qtscript_QApplication_Type_keys[] = {
 static QString qtscript_QApplication_Type_toStringHelper(QApplication::Type value)
 {
     if ((value >= QApplication::Tty) && (value <= QApplication::GuiServer))
-        return qtscript_QApplication_Type_keys[static_cast<int>(value)];
+        return qtscript_QApplication_Type_keys[static_cast<int>(value)-static_cast<int>(QApplication::Tty)];
     return QString();
 }
 
@@ -264,7 +266,7 @@ static const char * const qtscript_QApplication_ColorSpec_keys[] = {
 static QString qtscript_QApplication_ColorSpec_toStringHelper(QApplication::ColorSpec value)
 {
     if ((value >= QApplication::NormalColor) && (value <= QApplication::ManyColor))
-        return qtscript_QApplication_ColorSpec_keys[static_cast<int>(value)];
+        return qtscript_QApplication_ColorSpec_keys[static_cast<int>(value)-static_cast<int>(QApplication::NormalColor)];
     return QString();
 }
 
@@ -336,7 +338,7 @@ static QScriptValue qtscript_QApplication_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QApplication.%0(): this object is not a QApplication")
-            .arg(qtscript_QApplication_function_names[_id+1]));
+            .arg(qtscript_QApplication_function_names[_id+39]));
     }
 
     switch (_id) {
@@ -385,8 +387,8 @@ static QScriptValue qtscript_QApplication_prototype_call(QScriptContext *context
     Q_ASSERT(false);
     }
     return qtscript_QApplication_throw_ambiguity_error_helper(context,
-        qtscript_QApplication_function_names[_id+38],
-        qtscript_QApplication_function_signatures[_id+38]);
+        qtscript_QApplication_function_names[_id+39],
+        qtscript_QApplication_function_signatures[_id+39]);
 }
 
 static QScriptValue qtscript_QApplication_static_call(QScriptContext *context, QScriptEngine *)
@@ -633,13 +635,21 @@ static QScriptValue qtscript_QApplication_static_call(QScriptContext *context, Q
 
     case 29:
     if (context->argumentCount() == 1) {
+        QString _q_arg0 = context->argument(0).toString();
+        QApplication::setGraphicsSystem(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 30:
+    if (context->argumentCount() == 1) {
         QCursor _q_arg0 = qscriptvalue_cast<QCursor>(context->argument(0));
         QApplication::setOverrideCursor(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 30:
+    case 31:
     if (context->argumentCount() == 2) {
         QPalette _q_arg0 = qscriptvalue_cast<QPalette>(context->argument(0));
 
@@ -652,7 +662,7 @@ static QScriptValue qtscript_QApplication_static_call(QScriptContext *context, Q
     }
     break;
 
-    case 31:
+    case 32:
     if (context->argumentCount() == 1) {
         if (qscriptvalue_cast<QStyle*>(context->argument(0))) {
             QStyle* _q_arg0 = qscriptvalue_cast<QStyle*>(context->argument(0));
@@ -666,21 +676,21 @@ static QScriptValue qtscript_QApplication_static_call(QScriptContext *context, Q
     }
     break;
 
-    case 32:
+    case 33:
     if (context->argumentCount() == 0) {
         QStyle* _q_result = QApplication::style();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 33:
+    case 34:
     if (context->argumentCount() == 0) {
         QApplication::syncX();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 34:
+    case 35:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QWidget* _q_result = QApplication::topLevelAt(_q_arg0);
@@ -694,21 +704,21 @@ static QScriptValue qtscript_QApplication_static_call(QScriptContext *context, Q
     }
     break;
 
-    case 35:
+    case 36:
     if (context->argumentCount() == 0) {
         QList<QWidget*> _q_result = QApplication::topLevelWidgets();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 36:
+    case 37:
     if (context->argumentCount() == 0) {
         QApplication::Type _q_result = QApplication::type();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 37:
+    case 38:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QWidget* _q_result = QApplication::widgetAt(_q_arg0);
@@ -774,6 +784,7 @@ QScriptValue qtscript_create_QApplication_class(QScriptEngine *engine)
         , 2
         , 2
         , 1
+        , 1
         , 2
         , 1
         , 0
@@ -794,9 +805,9 @@ QScriptValue qtscript_create_QApplication_class(QScriptEngine *engine)
     QScriptValue proto = engine->newVariant(qVariantFromValue((QApplication*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QCoreApplication*>()));
     for (int i = 0; i < 6; ++i) {
-        QScriptValue fun = engine->newFunction(qtscript_QApplication_prototype_call, function_lengths[i+38]);
+        QScriptValue fun = engine->newFunction(qtscript_QApplication_prototype_call, function_lengths[i+39]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
-        proto.setProperty(QString::fromLatin1(qtscript_QApplication_function_names[i+38]),
+        proto.setProperty(QString::fromLatin1(qtscript_QApplication_function_names[i+39]),
             fun, QScriptValue::SkipInEnumeration);
     }
 
@@ -805,7 +816,7 @@ QScriptValue qtscript_create_QApplication_class(QScriptEngine *engine)
 
     QScriptValue ctor = engine->newFunction(qtscript_QApplication_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
-    for (int i = 0; i < 37; ++i) {
+    for (int i = 0; i < 38; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QApplication_static_call,
             function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i+1)));

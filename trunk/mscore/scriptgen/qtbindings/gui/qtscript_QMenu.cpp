@@ -14,6 +14,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -67,7 +68,7 @@ static const char * const qtscript_QMenu_function_names[] = {
 static const char * const qtscript_QMenu_function_signatures[] = {
     "QWidget parent\nString title, QWidget parent"
     // static
-    , "List actions, QPoint pos, QAction at"
+    , "List actions, QPoint pos, QAction at\nList actions, QPoint pos, QAction at, QWidget parent"
     // prototype
     , "QPoint arg__1"
     , "QAction arg__1"
@@ -98,7 +99,7 @@ static QScriptValue qtscript_QMenu_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QMenu::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -129,7 +130,7 @@ static QScriptValue qtscript_QMenu_prototype_call(QScriptContext *context, QScri
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QMenu.%0(): this object is not a QMenu")
-            .arg(qtscript_QMenu_function_names[_id+1]));
+            .arg(qtscript_QMenu_function_names[_id+2]));
     }
 
     switch (_id) {
@@ -379,6 +380,15 @@ static QScriptValue qtscript_QMenu_static_call(QScriptContext *context, QScriptE
         QAction* _q_result = QMenu::exec(_q_arg0, _q_arg1, _q_arg2);
         return qScriptValueFromValue(context->engine(), _q_result);
     }
+    if (context->argumentCount() == 4) {
+        QList<QAction*> _q_arg0;
+        qScriptValueToSequence(context->argument(0), _q_arg0);
+        QPoint _q_arg1 = qscriptvalue_cast<QPoint>(context->argument(1));
+        QAction* _q_arg2 = qscriptvalue_cast<QAction*>(context->argument(2));
+        QWidget* _q_arg3 = qscriptvalue_cast<QWidget*>(context->argument(3));
+        QAction* _q_result = QMenu::exec(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
     break;
 
     default:
@@ -404,7 +414,7 @@ QScriptValue qtscript_create_QMenu_class(QScriptEngine *engine)
     static const int function_lengths[] = {
         2
         // static
-        , 3
+        , 4
         // prototype
         , 1
         , 1

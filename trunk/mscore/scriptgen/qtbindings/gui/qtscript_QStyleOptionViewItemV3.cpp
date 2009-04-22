@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionViewItemV3_throw_ambiguity_error_helper
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionViewItemV3::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionViewItemV3_StyleOptionVersion_key
 static QString qtscript_QStyleOptionViewItemV3_StyleOptionVersion_toStringHelper(QStyleOptionViewItemV3::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionViewItemV3::Version) && (value <= QStyleOptionViewItemV3::Version))
-        return qtscript_QStyleOptionViewItemV3_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionViewItemV3_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionViewItemV3::Version)];
     return QString();
 }
 

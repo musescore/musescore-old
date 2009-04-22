@@ -47,7 +47,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (debugMode)
             printf("Register Plugin <%s>\n", qPrintable(pluginPath));
 
-      QScriptEngine se(0);
+      ScriptEngine se;
       QScriptValue val  = se.evaluate(f.readAll(), pluginPath);
       if (se.hasUncaughtException()) {
             QScriptValue sv = se.uncaughtException();
@@ -164,7 +164,7 @@ void MuseScore::loadPlugins()
 ScriptEngine::ScriptEngine()
    : QScriptEngine()
       {
-      const char* xts[] = {
+      static const char* xts[] = {
             "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
             };
       for (unsigned i = 0; i < sizeof(xts)/sizeof(*xts); ++i) {

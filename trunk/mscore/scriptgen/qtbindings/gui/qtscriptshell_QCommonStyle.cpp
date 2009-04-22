@@ -255,17 +255,17 @@ int  QtScriptShell_QCommonStyle::pixelMetric(QStyle::PixelMetric  m, const QStyl
     }
 }
 
-void QtScriptShell_QCommonStyle::polish(QApplication*  arg__1)
+void QtScriptShell_QCommonStyle::polish(QApplication*  app)
 {
     QScriptValue _q_function = __qtscript_self.property("polish");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("polish") & QScriptValue::QObjectMember)) {
-        QCommonStyle::polish(arg__1);
+        QCommonStyle::polish(app);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, app));
     }
 }
 
@@ -283,17 +283,17 @@ void QtScriptShell_QCommonStyle::polish(QPalette&  arg__1)
     }
 }
 
-void QtScriptShell_QCommonStyle::polish(QWidget*  arg__1)
+void QtScriptShell_QCommonStyle::polish(QWidget*  widget)
 {
     QScriptValue _q_function = __qtscript_self.property("polish");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("polish") & QScriptValue::QObjectMember)) {
-        QCommonStyle::polish(arg__1);
+        QCommonStyle::polish(widget);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, widget));
     }
 }
 
@@ -405,31 +405,31 @@ void QtScriptShell_QCommonStyle::timerEvent(QTimerEvent*  arg__1)
     }
 }
 
-void QtScriptShell_QCommonStyle::unpolish(QApplication*  arg__1)
+void QtScriptShell_QCommonStyle::unpolish(QApplication*  application)
 {
     QScriptValue _q_function = __qtscript_self.property("unpolish");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("unpolish") & QScriptValue::QObjectMember)) {
-        QCommonStyle::unpolish(arg__1);
+        QCommonStyle::unpolish(application);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, application));
     }
 }
 
-void QtScriptShell_QCommonStyle::unpolish(QWidget*  arg__1)
+void QtScriptShell_QCommonStyle::unpolish(QWidget*  widget)
 {
     QScriptValue _q_function = __qtscript_self.property("unpolish");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("unpolish") & QScriptValue::QObjectMember)) {
-        QCommonStyle::unpolish(arg__1);
+        QCommonStyle::unpolish(widget);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, widget));
     }
 }
 

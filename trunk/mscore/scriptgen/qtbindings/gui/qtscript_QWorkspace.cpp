@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -66,7 +67,7 @@ static QScriptValue qtscript_QWorkspace_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QWorkspace::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -107,7 +108,7 @@ static const char * const qtscript_QWorkspace_WindowOrder_keys[] = {
 static QString qtscript_QWorkspace_WindowOrder_toStringHelper(QWorkspace::WindowOrder value)
 {
     if ((value >= QWorkspace::CreationOrder) && (value <= QWorkspace::StackingOrder))
-        return qtscript_QWorkspace_WindowOrder_keys[static_cast<int>(value)];
+        return qtscript_QWorkspace_WindowOrder_keys[static_cast<int>(value)-static_cast<int>(QWorkspace::CreationOrder)];
     return QString();
 }
 

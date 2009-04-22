@@ -35,7 +35,7 @@ static QScriptValue qtscript_QStyleOption_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOption::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -76,7 +76,7 @@ static const char * const qtscript_QStyleOption_StyleOptionVersion_keys[] = {
 static QString qtscript_QStyleOption_StyleOptionVersion_toStringHelper(QStyleOption::StyleOptionVersion value)
 {
     if ((value >= QStyleOption::Version) && (value <= QStyleOption::Version))
-        return qtscript_QStyleOption_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOption_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOption::Version)];
     return QString();
 }
 
@@ -141,7 +141,7 @@ static const char * const qtscript_QStyleOption_StyleOptionType_keys[] = {
 static QString qtscript_QStyleOption_StyleOptionType_toStringHelper(QStyleOption::StyleOptionType value)
 {
     if ((value >= QStyleOption::Type) && (value <= QStyleOption::Type))
-        return qtscript_QStyleOption_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOption_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOption::Type)];
     return QString();
 }
 

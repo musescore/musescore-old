@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionHeader_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionHeader::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -77,7 +77,7 @@ static const char * const qtscript_QStyleOptionHeader_StyleOptionVersion_keys[] 
 static QString qtscript_QStyleOptionHeader_StyleOptionVersion_toStringHelper(QStyleOptionHeader::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionHeader::Version) && (value <= QStyleOptionHeader::Version))
-        return qtscript_QStyleOptionHeader_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionHeader_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionHeader::Version)];
     return QString();
 }
 
@@ -148,7 +148,7 @@ static const char * const qtscript_QStyleOptionHeader_SectionPosition_keys[] = {
 static QString qtscript_QStyleOptionHeader_SectionPosition_toStringHelper(QStyleOptionHeader::SectionPosition value)
 {
     if ((value >= QStyleOptionHeader::Beginning) && (value <= QStyleOptionHeader::OnlyOneSection))
-        return qtscript_QStyleOptionHeader_SectionPosition_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionHeader_SectionPosition_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionHeader::Beginning)];
     return QString();
 }
 
@@ -219,7 +219,7 @@ static const char * const qtscript_QStyleOptionHeader_SelectedPosition_keys[] = 
 static QString qtscript_QStyleOptionHeader_SelectedPosition_toStringHelper(QStyleOptionHeader::SelectedPosition value)
 {
     if ((value >= QStyleOptionHeader::NotAdjacent) && (value <= QStyleOptionHeader::NextAndPreviousAreSelected))
-        return qtscript_QStyleOptionHeader_SelectedPosition_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionHeader_SelectedPosition_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionHeader::NotAdjacent)];
     return QString();
 }
 
@@ -284,7 +284,7 @@ static const char * const qtscript_QStyleOptionHeader_StyleOptionType_keys[] = {
 static QString qtscript_QStyleOptionHeader_StyleOptionType_toStringHelper(QStyleOptionHeader::StyleOptionType value)
 {
     if ((value >= QStyleOptionHeader::Type) && (value <= QStyleOptionHeader::Type))
-        return qtscript_QStyleOptionHeader_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionHeader_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionHeader::Type)];
     return QString();
 }
 
@@ -353,7 +353,7 @@ static const char * const qtscript_QStyleOptionHeader_SortIndicator_keys[] = {
 static QString qtscript_QStyleOptionHeader_SortIndicator_toStringHelper(QStyleOptionHeader::SortIndicator value)
 {
     if ((value >= QStyleOptionHeader::None) && (value <= QStyleOptionHeader::SortDown))
-        return qtscript_QStyleOptionHeader_SortIndicator_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionHeader_SortIndicator_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionHeader::None)];
     return QString();
 }
 

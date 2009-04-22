@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionRubberBand_throw_ambiguity_error_helper
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionRubberBand::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionRubberBand_StyleOptionVersion_key
 static QString qtscript_QStyleOptionRubberBand_StyleOptionVersion_toStringHelper(QStyleOptionRubberBand::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionRubberBand::Version) && (value <= QStyleOptionRubberBand::Version))
-        return qtscript_QStyleOptionRubberBand_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionRubberBand_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionRubberBand::Version)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleOptionRubberBand_StyleOptionType_keys[]
 static QString qtscript_QStyleOptionRubberBand_StyleOptionType_toStringHelper(QStyleOptionRubberBand::StyleOptionType value)
 {
     if ((value >= QStyleOptionRubberBand::Type) && (value <= QStyleOptionRubberBand::Type))
-        return qtscript_QStyleOptionRubberBand_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionRubberBand_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionRubberBand::Type)];
     return QString();
 }
 

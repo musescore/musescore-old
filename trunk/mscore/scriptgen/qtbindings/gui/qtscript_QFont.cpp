@@ -164,7 +164,7 @@ static QScriptValue qtscript_QFont_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QFont::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -307,7 +307,7 @@ static const char * const qtscript_QFont_SpacingType_keys[] = {
 static QString qtscript_QFont_SpacingType_toStringHelper(QFont::SpacingType value)
 {
     if ((value >= QFont::PercentageSpacing) && (value <= QFont::AbsoluteSpacing))
-        return qtscript_QFont_SpacingType_keys[static_cast<int>(value)];
+        return qtscript_QFont_SpacingType_keys[static_cast<int>(value)-static_cast<int>(QFont::PercentageSpacing)];
     return QString();
 }
 
@@ -382,7 +382,7 @@ static const char * const qtscript_QFont_StyleHint_keys[] = {
 static QString qtscript_QFont_StyleHint_toStringHelper(QFont::StyleHint value)
 {
     if ((value >= QFont::Helvetica) && (value <= QFont::AnyStyle))
-        return qtscript_QFont_StyleHint_keys[static_cast<int>(value)];
+        return qtscript_QFont_StyleHint_keys[static_cast<int>(value)-static_cast<int>(QFont::Helvetica)];
     return QString();
 }
 
@@ -532,7 +532,7 @@ static const char * const qtscript_QFont_Capitalization_keys[] = {
 static QString qtscript_QFont_Capitalization_toStringHelper(QFont::Capitalization value)
 {
     if ((value >= QFont::MixedCase) && (value <= QFont::Capitalize))
-        return qtscript_QFont_Capitalization_keys[static_cast<int>(value)];
+        return qtscript_QFont_Capitalization_keys[static_cast<int>(value)-static_cast<int>(QFont::MixedCase)];
     return QString();
 }
 
@@ -686,7 +686,7 @@ static const char * const qtscript_QFont_Style_keys[] = {
 static QString qtscript_QFont_Style_toStringHelper(QFont::Style value)
 {
     if ((value >= QFont::StyleNormal) && (value <= QFont::StyleOblique))
-        return qtscript_QFont_Style_keys[static_cast<int>(value)];
+        return qtscript_QFont_Style_keys[static_cast<int>(value)-static_cast<int>(QFont::StyleNormal)];
     return QString();
 }
 
@@ -758,7 +758,7 @@ static QScriptValue qtscript_QFont_prototype_call(QScriptContext *context, QScri
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QFont.%0(): this object is not a QFont")
-            .arg(qtscript_QFont_function_names[_id+1]));
+            .arg(qtscript_QFont_function_names[_id+10]));
     }
 
     switch (_id) {

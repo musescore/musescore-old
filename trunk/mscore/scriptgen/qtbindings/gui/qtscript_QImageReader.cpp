@@ -28,6 +28,7 @@ static const char * const qtscript_QImageReader_function_names[] = {
     , "imageFormat"
     , "supportedImageFormats"
     // prototype
+    , "autoDetectImageFormat"
     , "backgroundColor"
     , "canRead"
     , "clipRect"
@@ -39,6 +40,7 @@ static const char * const qtscript_QImageReader_function_names[] = {
     , "fileName"
     , "format"
     , "imageCount"
+    , "imageFormat"
     , "jumpToImage"
     , "jumpToNextImage"
     , "loopCount"
@@ -47,6 +49,7 @@ static const char * const qtscript_QImageReader_function_names[] = {
     , "read"
     , "scaledClipRect"
     , "scaledSize"
+    , "setAutoDetectImageFormat"
     , "setBackgroundColor"
     , "setClipRect"
     , "setDevice"
@@ -80,6 +83,8 @@ static const char * const qtscript_QImageReader_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
+    , ""
     , "int imageNumber"
     , ""
     , ""
@@ -88,6 +93,7 @@ static const char * const qtscript_QImageReader_function_signatures[] = {
     , ""
     , ""
     , ""
+    , "bool enabled"
     , "QColor color"
     , "QRect rect"
     , "QIODevice device"
@@ -111,13 +117,14 @@ static QScriptValue qtscript_QImageReader_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QImageReader::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QImageReader*)
 Q_DECLARE_METATYPE(QImageReader::ImageReaderError)
 Q_DECLARE_METATYPE(QIODevice*)
+Q_DECLARE_METATYPE(QImage::Format)
 Q_DECLARE_METATYPE(QImageIOHandler::ImageOption)
 Q_DECLARE_METATYPE(QList<QByteArray>)
 
@@ -158,7 +165,7 @@ static const char * const qtscript_QImageReader_ImageReaderError_keys[] = {
 static QString qtscript_QImageReader_ImageReaderError_toStringHelper(QImageReader::ImageReaderError value)
 {
     if ((value >= QImageReader::UnknownError) && (value <= QImageReader::InvalidDataError))
-        return qtscript_QImageReader_ImageReaderError_keys[static_cast<int>(value)];
+        return qtscript_QImageReader_ImageReaderError_keys[static_cast<int>(value)-static_cast<int>(QImageReader::UnknownError)];
     return QString();
 }
 
@@ -222,7 +229,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 32;
+        _id = 0xBABE0000 + 35;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -230,88 +237,102 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QImageReader.%0(): this object is not a QImageReader")
-            .arg(qtscript_QImageReader_function_names[_id+1]));
+            .arg(qtscript_QImageReader_function_names[_id+3]));
     }
 
     switch (_id) {
     case 0:
+    if (context->argumentCount() == 0) {
+        bool _q_result = _q_self->autoDetectImageFormat();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 1:
     if (context->argumentCount() == 0) {
         QColor _q_result = _q_self->backgroundColor();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 1:
+    case 2:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->canRead();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->clipRect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 3:
+    case 4:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->currentImageNumber();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->currentImageRect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         QIODevice* _q_result = _q_self->device();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 0) {
         QImageReader::ImageReaderError _q_result = _q_self->error();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->errorString();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->fileName();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 0) {
         QByteArray _q_result = _q_self->format();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->imageCount();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 12:
+    if (context->argumentCount() == 0) {
+        QImage::Format _q_result = _q_self->imageFormat();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 13:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         bool _q_result = _q_self->jumpToImage(_q_arg0);
@@ -319,56 +340,64 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->jumpToNextImage();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->loopCount();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 16:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->nextImageDelay();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->quality();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 0) {
         QImage _q_result = _q_self->read();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->scaledClipRect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->scaledSize();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 19:
+    case 21:
+    if (context->argumentCount() == 1) {
+        bool _q_arg0 = context->argument(0).toBoolean();
+        _q_self->setAutoDetectImageFormat(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 22:
     if (context->argumentCount() == 1) {
         QColor _q_arg0 = qscriptvalue_cast<QColor>(context->argument(0));
         _q_self->setBackgroundColor(_q_arg0);
@@ -376,7 +405,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 20:
+    case 23:
     if (context->argumentCount() == 1) {
         QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
         _q_self->setClipRect(_q_arg0);
@@ -384,7 +413,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 21:
+    case 24:
     if (context->argumentCount() == 1) {
         QIODevice* _q_arg0 = qscriptvalue_cast<QIODevice*>(context->argument(0));
         _q_self->setDevice(_q_arg0);
@@ -392,7 +421,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 22:
+    case 25:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setFileName(_q_arg0);
@@ -400,7 +429,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 23:
+    case 26:
     if (context->argumentCount() == 1) {
         QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
         _q_self->setFormat(_q_arg0);
@@ -408,7 +437,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 24:
+    case 27:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setQuality(_q_arg0);
@@ -416,7 +445,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 25:
+    case 28:
     if (context->argumentCount() == 1) {
         QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
         _q_self->setScaledClipRect(_q_arg0);
@@ -424,7 +453,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 26:
+    case 29:
     if (context->argumentCount() == 1) {
         QSize _q_arg0 = qscriptvalue_cast<QSize>(context->argument(0));
         _q_self->setScaledSize(_q_arg0);
@@ -432,21 +461,21 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 27:
+    case 30:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->size();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 28:
+    case 31:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->supportsAnimation();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 29:
+    case 32:
     if (context->argumentCount() == 1) {
         QImageIOHandler::ImageOption _q_arg0 = qscriptvalue_cast<QImageIOHandler::ImageOption>(context->argument(0));
         bool _q_result = _q_self->supportsOption(_q_arg0);
@@ -454,7 +483,7 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 30:
+    case 33:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QString _q_result = _q_self->text(_q_arg0);
@@ -462,14 +491,14 @@ static QScriptValue qtscript_QImageReader_prototype_call(QScriptContext *context
     }
     break;
 
-    case 31:
+    case 34:
     if (context->argumentCount() == 0) {
         QStringList _q_result = _q_self->textKeys();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 32: {
+    case 35: {
     QString result = QString::fromLatin1("QImageReader");
     return QScriptValue(context->engine(), result);
     }
@@ -575,6 +604,8 @@ QScriptValue qtscript_create_QImageReader_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
+        , 0
         , 1
         , 0
         , 0
@@ -583,6 +614,7 @@ QScriptValue qtscript_create_QImageReader_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 1
         , 1
         , 1
         , 1
@@ -600,7 +632,7 @@ QScriptValue qtscript_create_QImageReader_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QImageReader*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QImageReader*)0));
-    for (int i = 0; i < 33; ++i) {
+    for (int i = 0; i < 36; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QImageReader_prototype_call, function_lengths[i+3]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QImageReader_function_names[i+3]),

@@ -10,6 +10,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -60,6 +61,9 @@ Q_DECLARE_METATYPE(QWheelEvent*)
 
 QtScriptShell_QPrintDialog::QtScriptShell_QPrintDialog(QPrinter*  printer, QWidget*  parent)
     : QPrintDialog(printer, parent) {}
+
+QtScriptShell_QPrintDialog::QtScriptShell_QPrintDialog(QWidget*  parent)
+    : QPrintDialog(parent) {}
 
 QtScriptShell_QPrintDialog::~QtScriptShell_QPrintDialog() {}
 
@@ -169,17 +173,17 @@ int  QtScriptShell_QPrintDialog::devType() const
     }
 }
 
-void QtScriptShell_QPrintDialog::done(int  arg__1)
+void QtScriptShell_QPrintDialog::done(int  result)
 {
     QScriptValue _q_function = __qtscript_self.property("done");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("done") & QScriptValue::QObjectMember)) {
-        QPrintDialog::done(arg__1);
+        QPrintDialog::done(result);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         _q_function.call(__qtscript_self,
             QScriptValueList()
-            << qScriptValueFromValue(_q_engine, arg__1));
+            << qScriptValueFromValue(_q_engine, result));
     }
 }
 

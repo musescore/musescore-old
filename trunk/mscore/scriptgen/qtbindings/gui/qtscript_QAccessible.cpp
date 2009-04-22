@@ -41,7 +41,7 @@ static QScriptValue qtscript_QAccessible_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QAccessible::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -112,7 +112,7 @@ static const char * const qtscript_QAccessible_Method_keys[] = {
 static QString qtscript_QAccessible_Method_toStringHelper(QAccessible::Method value)
 {
     if ((value >= QAccessible::ListSupportedMethods) && (value <= QAccessible::BackgroundColor))
-        return qtscript_QAccessible_Method_keys[static_cast<int>(value)];
+        return qtscript_QAccessible_Method_keys[static_cast<int>(value)-static_cast<int>(QAccessible::ListSupportedMethods)];
     return QString();
 }
 
@@ -394,7 +394,7 @@ static const char * const qtscript_QAccessible_Action_keys[] = {
 static QString qtscript_QAccessible_Action_toStringHelper(QAccessible::Action value)
 {
     if ((value >= QAccessible::AddToSelection) && (value <= QAccessible::DefaultAction))
-        return qtscript_QAccessible_Action_keys[static_cast<int>(value)];
+        return qtscript_QAccessible_Action_keys[static_cast<int>(value)-static_cast<int>(QAccessible::AddToSelection)];
     return QString();
 }
 
@@ -1068,7 +1068,7 @@ static QScriptValue qtscript_QAccessible_prototype_call(QScriptContext *context,
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QAccessible.%0(): this object is not a QAccessible")
-            .arg(qtscript_QAccessible_function_names[_id+1]));
+            .arg(qtscript_QAccessible_function_names[_id+5]));
     }
 
     switch (_id) {

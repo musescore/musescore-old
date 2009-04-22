@@ -36,6 +36,8 @@ static const char * const qtscript_QTextDocument_function_names[] = {
     , "adjustSize"
     , "allFormats"
     , "begin"
+    , "characterAt"
+    , "characterCount"
     , "clear"
     , "clone"
     , "defaultTextOption"
@@ -44,6 +46,7 @@ static const char * const qtscript_QTextDocument_function_names[] = {
     , "end"
     , "find"
     , "findBlock"
+    , "findBlockByLineNumber"
     , "findBlockByNumber"
     , "firstBlock"
     , "frameAt"
@@ -52,6 +55,7 @@ static const char * const qtscript_QTextDocument_function_names[] = {
     , "isRedoAvailable"
     , "isUndoAvailable"
     , "lastBlock"
+    , "lineCount"
     , "markContentsDirty"
     , "metaInformation"
     , "object"
@@ -81,6 +85,8 @@ static const char * const qtscript_QTextDocument_function_signatures[] = {
     , ""
     , ""
     , ""
+    , "int pos"
+    , ""
     , ""
     , "QObject parent"
     , ""
@@ -90,8 +96,10 @@ static const char * const qtscript_QTextDocument_function_signatures[] = {
     , "QRegExp expr, QTextCursor from, FindFlags options\nQRegExp expr, int from, FindFlags options\nString subString, QTextCursor from, FindFlags options\nString subString, int from, FindFlags options"
     , "int pos"
     , "int blockNumber"
+    , "int blockNumber"
     , ""
     , "int pos"
+    , ""
     , ""
     , ""
     , ""
@@ -125,7 +133,7 @@ static QScriptValue qtscript_QTextDocument_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextDocument::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -419,7 +427,7 @@ static const char * const qtscript_QTextDocument_MetaInformation_keys[] = {
 static QString qtscript_QTextDocument_MetaInformation_toStringHelper(QTextDocument::MetaInformation value)
 {
     if ((value >= QTextDocument::DocumentTitle) && (value <= QTextDocument::DocumentUrl))
-        return qtscript_QTextDocument_MetaInformation_keys[static_cast<int>(value)];
+        return qtscript_QTextDocument_MetaInformation_keys[static_cast<int>(value)-static_cast<int>(QTextDocument::DocumentTitle)];
     return QString();
 }
 
@@ -483,7 +491,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 38;
+        _id = 0xBABE0000 + 42;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -527,13 +535,28 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     break;
 
     case 4:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QChar _q_result = _q_self->characterAt(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 5:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->characterCount();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 6:
     if (context->argumentCount() == 0) {
         _q_self->clear();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 5:
+    case 7:
     if (context->argumentCount() == 0) {
         QTextDocument* _q_result = _q_self->clone();
         return qScriptValueFromValue(context->engine(), _q_result);
@@ -545,21 +568,21 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 6:
+    case 8:
     if (context->argumentCount() == 0) {
         QTextOption _q_result = _q_self->defaultTextOption();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 9:
     if (context->argumentCount() == 0) {
         QAbstractTextDocumentLayout* _q_result = _q_self->documentLayout();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 8:
+    case 10:
     if (context->argumentCount() == 1) {
         QPainter* _q_arg0 = qscriptvalue_cast<QPainter*>(context->argument(0));
         _q_self->drawContents(_q_arg0);
@@ -573,14 +596,14 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 9:
+    case 11:
     if (context->argumentCount() == 0) {
         QTextBlock _q_result = _q_self->end();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 1) {
         if (context->argument(0).isRegExp()) {
             QRegExp _q_arg0 = context->argument(0).toRegExp();
@@ -656,7 +679,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QTextBlock _q_result = _q_self->findBlock(_q_arg0);
@@ -664,7 +687,15 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 12:
+    case 14:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QTextBlock _q_result = _q_self->findBlockByLineNumber(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 15:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QTextBlock _q_result = _q_self->findBlockByNumber(_q_arg0);
@@ -672,14 +703,14 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 13:
+    case 16:
     if (context->argumentCount() == 0) {
         QTextBlock _q_result = _q_self->firstBlock();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 17:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QTextFrame* _q_result = _q_self->frameAt(_q_arg0);
@@ -687,42 +718,49 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 15:
+    case 18:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->idealWidth();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 16:
+    case 19:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isEmpty();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 17:
+    case 20:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isRedoAvailable();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 18:
+    case 21:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isUndoAvailable();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 19:
+    case 22:
     if (context->argumentCount() == 0) {
         QTextBlock _q_result = _q_self->lastBlock();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 20:
+    case 23:
+    if (context->argumentCount() == 0) {
+        int _q_result = _q_self->lineCount();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 24:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -731,7 +769,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 21:
+    case 25:
     if (context->argumentCount() == 1) {
         QTextDocument::MetaInformation _q_arg0 = qscriptvalue_cast<QTextDocument::MetaInformation>(context->argument(0));
         QString _q_result = _q_self->metaInformation(_q_arg0);
@@ -739,7 +777,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 22:
+    case 26:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QTextObject* _q_result = _q_self->object(_q_arg0);
@@ -747,7 +785,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 23:
+    case 27:
     if (context->argumentCount() == 1) {
         QTextFormat _q_arg0 = qscriptvalue_cast<QTextFormat>(context->argument(0));
         QTextObject* _q_result = _q_self->objectForFormat(_q_arg0);
@@ -755,14 +793,14 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 24:
+    case 28:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->pageCount();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 25:
+    case 29:
     if (context->argumentCount() == 1) {
         QPrinter* _q_arg0 = qscriptvalue_cast<QPrinter*>(context->argument(0));
         _q_self->print(_q_arg0);
@@ -770,7 +808,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 26:
+    case 30:
     if (context->argumentCount() == 1) {
         QTextCursor* _q_arg0 = qscriptvalue_cast<QTextCursor*>(context->argument(0));
         _q_self->redo(_q_arg0);
@@ -778,7 +816,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 27:
+    case 31:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QUrl _q_arg1 = qscriptvalue_cast<QUrl>(context->argument(1));
@@ -787,21 +825,21 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 28:
+    case 32:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->revision();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 29:
+    case 33:
     if (context->argumentCount() == 0) {
         QTextFrame* _q_result = _q_self->rootFrame();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 30:
+    case 34:
     if (context->argumentCount() == 1) {
         QTextOption _q_arg0 = qscriptvalue_cast<QTextOption>(context->argument(0));
         _q_self->setDefaultTextOption(_q_arg0);
@@ -809,7 +847,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 31:
+    case 35:
     if (context->argumentCount() == 1) {
         QAbstractTextDocumentLayout* _q_arg0 = qscriptvalue_cast<QAbstractTextDocumentLayout*>(context->argument(0));
         _q_self->setDocumentLayout(_q_arg0);
@@ -817,7 +855,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 32:
+    case 36:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setHtml(_q_arg0);
@@ -825,7 +863,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 33:
+    case 37:
     if (context->argumentCount() == 2) {
         QTextDocument::MetaInformation _q_arg0 = qscriptvalue_cast<QTextDocument::MetaInformation>(context->argument(0));
         QString _q_arg1 = context->argument(1).toString();
@@ -834,7 +872,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 34:
+    case 38:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setPlainText(_q_arg0);
@@ -842,7 +880,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 35:
+    case 39:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->toHtml();
         return QScriptValue(context->engine(), _q_result);
@@ -854,14 +892,14 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 36:
+    case 40:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->toPlainText();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 37:
+    case 41:
     if (context->argumentCount() == 1) {
         QTextCursor* _q_arg0 = qscriptvalue_cast<QTextCursor*>(context->argument(0));
         _q_self->undo(_q_arg0);
@@ -869,7 +907,7 @@ static QScriptValue qtscript_QTextDocument_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 38: {
+    case 42: {
     QString result = QString::fromLatin1("QTextDocument");
     return QScriptValue(context->engine(), result);
     }
@@ -949,6 +987,8 @@ QScriptValue qtscript_create_QTextDocument_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 1
+        , 0
         , 0
         , 1
         , 0
@@ -958,8 +998,10 @@ QScriptValue qtscript_create_QTextDocument_class(QScriptEngine *engine)
         , 3
         , 1
         , 1
+        , 1
         , 0
         , 1
+        , 0
         , 0
         , 0
         , 0
@@ -988,7 +1030,7 @@ QScriptValue qtscript_create_QTextDocument_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QTextDocument*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextDocument*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QObject*>()));
-    for (int i = 0; i < 39; ++i) {
+    for (int i = 0; i < 43; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextDocument_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextDocument_function_names[i+1]),

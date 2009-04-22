@@ -15,6 +15,7 @@
 #include <qdialog.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -41,6 +42,8 @@ static const char * const qtscript_QPrintPreviewDialog_function_names[] = {
     "QPrintPreviewDialog"
     // static
     // prototype
+    , "open"
+    , "printer"
     , "toString"
 };
 
@@ -48,6 +51,8 @@ static const char * const qtscript_QPrintPreviewDialog_function_signatures[] = {
     "QPrinter printer, QWidget parent, WindowFlags flags\nQWidget parent, WindowFlags flags"
     // static
     // prototype
+    , "QObject receiver, char member"
+    , ""
 ""
 };
 
@@ -58,12 +63,13 @@ static QScriptValue qtscript_QPrintPreviewDialog_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QPrintPreviewDialog::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QPrintPreviewDialog*)
 Q_DECLARE_METATYPE(QtScriptShell_QPrintPreviewDialog*)
+Q_DECLARE_METATYPE(char*)
 Q_DECLARE_METATYPE(QPrinter*)
 Q_DECLARE_METATYPE(QFlags<Qt::WindowType>)
 Q_DECLARE_METATYPE(QDialog*)
@@ -82,7 +88,7 @@ static QScriptValue qtscript_QPrintPreviewDialog_prototype_call(QScriptContext *
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 0;
+        _id = 0xBABE0000 + 2;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -94,7 +100,23 @@ static QScriptValue qtscript_QPrintPreviewDialog_prototype_call(QScriptContext *
     }
 
     switch (_id) {
-    case 0: {
+    case 0:
+    if (context->argumentCount() == 2) {
+        QObject* _q_arg0 = context->argument(0).toQObject();
+        char* _q_arg1 = qscriptvalue_cast<char*>(context->argument(1));
+        _q_self->open(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 1:
+    if (context->argumentCount() == 0) {
+        QPrinter* _q_result = _q_self->printer();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 2: {
     QString result = QString::fromLatin1("QPrintPreviewDialog");
     return QScriptValue(context->engine(), result);
     }
@@ -189,11 +211,19 @@ QScriptValue qtscript_create_QPrintPreviewDialog_class(QScriptEngine *engine)
         3
         // static
         // prototype
+        , 2
+        , 0
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QPrintPreviewDialog*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QPrintPreviewDialog*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QDialog*>()));
+    for (int i = 0; i < 3; ++i) {
+        QScriptValue fun = engine->newFunction(qtscript_QPrintPreviewDialog_prototype_call, function_lengths[i+1]);
+        fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
+        proto.setProperty(QString::fromLatin1(qtscript_QPrintPreviewDialog_function_names[i+1]),
+            fun, QScriptValue::SkipInEnumeration);
+    }
 
     qScriptRegisterMetaType<QPrintPreviewDialog*>(engine, qtscript_QPrintPreviewDialog_toScriptValue, 
         qtscript_QPrintPreviewDialog_fromScriptValue, proto);

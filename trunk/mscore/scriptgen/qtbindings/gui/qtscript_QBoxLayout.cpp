@@ -38,8 +38,10 @@ static const char * const qtscript_QBoxLayout_function_names[] = {
     , "insertWidget"
     , "setDirection"
     , "setSpacing"
+    , "setStretch"
     , "setStretchFactor"
     , "spacing"
+    , "stretch"
     , "toString"
 };
 
@@ -61,8 +63,10 @@ static const char * const qtscript_QBoxLayout_function_signatures[] = {
     , "int index, QWidget widget, int stretch, Alignment alignment"
     , "Direction arg__1"
     , "int spacing"
+    , "int index, int stretch"
     , "QLayout l, int stretch\nQWidget w, int stretch"
     , ""
+    , "int index"
 ""
 };
 
@@ -73,7 +77,7 @@ static QScriptValue qtscript_QBoxLayout_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QBoxLayout::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -119,7 +123,7 @@ static const char * const qtscript_QBoxLayout_Direction_keys[] = {
 static QString qtscript_QBoxLayout_Direction_toStringHelper(QBoxLayout::Direction value)
 {
     if ((value >= QBoxLayout::LeftToRight) && (value <= QBoxLayout::BottomToTop))
-        return qtscript_QBoxLayout_Direction_keys[static_cast<int>(value)];
+        return qtscript_QBoxLayout_Direction_keys[static_cast<int>(value)-static_cast<int>(QBoxLayout::LeftToRight)];
     return QString();
 }
 
@@ -183,7 +187,7 @@ static QScriptValue qtscript_QBoxLayout_prototype_call(QScriptContext *context, 
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 16;
+        _id = 0xBABE0000 + 18;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -352,6 +356,15 @@ static QScriptValue qtscript_QBoxLayout_prototype_call(QScriptContext *context, 
 
     case 14:
     if (context->argumentCount() == 2) {
+        int _q_arg0 = context->argument(0).toInt32();
+        int _q_arg1 = context->argument(1).toInt32();
+        _q_self->setStretch(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 15:
+    if (context->argumentCount() == 2) {
         if (qscriptvalue_cast<QLayout*>(context->argument(0))
             && context->argument(1).isNumber()) {
             QLayout* _q_arg0 = qscriptvalue_cast<QLayout*>(context->argument(0));
@@ -368,14 +381,22 @@ static QScriptValue qtscript_QBoxLayout_prototype_call(QScriptContext *context, 
     }
     break;
 
-    case 15:
+    case 16:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->spacing();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 16: {
+    case 17:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        int _q_result = _q_self->stretch(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 18: {
     QString result = QString::fromLatin1("QBoxLayout");
     return QScriptValue(context->engine(), result);
     }
@@ -453,13 +474,15 @@ QScriptValue qtscript_create_QBoxLayout_class(QScriptEngine *engine)
         , 1
         , 1
         , 2
+        , 2
         , 0
+        , 1
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QBoxLayout*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QBoxLayout*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QLayout*>()));
-    for (int i = 0; i < 17; ++i) {
+    for (int i = 0; i < 19; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QBoxLayout_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QBoxLayout_function_names[i+1]),

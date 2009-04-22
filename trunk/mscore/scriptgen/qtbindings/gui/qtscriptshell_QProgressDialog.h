@@ -8,15 +8,15 @@
 class QtScriptShell_QProgressDialog : public QProgressDialog
 {
 public:
-    QtScriptShell_QProgressDialog(QWidget*  parent = 0, Qt::WindowFlags  f = 0);
-    QtScriptShell_QProgressDialog(const QString&  labelText, const QString&  cancelButtonText, int  minimum, int  maximum, QWidget*  parent = 0, Qt::WindowFlags  f = 0);
+    QtScriptShell_QProgressDialog(QWidget*  parent = 0, Qt::WindowFlags  flags = 0);
+    QtScriptShell_QProgressDialog(const QString&  labelText, const QString&  cancelButtonText, int  minimum, int  maximum, QWidget*  parent = 0, Qt::WindowFlags  flags = 0);
     ~QtScriptShell_QProgressDialog();
 
     void accept();
     void actionEvent(QActionEvent*  arg__1);
-    void changeEvent(QEvent*  arg__1);
+    void changeEvent(QEvent*  event);
     void childEvent(QChildEvent*  arg__1);
-    void closeEvent(QCloseEvent*  arg__1);
+    void closeEvent(QCloseEvent*  event);
     void contextMenuEvent(QContextMenuEvent*  arg__1);
     void customEvent(QEvent*  arg__1);
     int  devType() const;
@@ -48,8 +48,8 @@ public:
     QPaintEngine*  paintEngine() const;
     void paintEvent(QPaintEvent*  arg__1);
     void reject();
-    void resizeEvent(QResizeEvent*  arg__1);
-    void showEvent(QShowEvent*  e);
+    void resizeEvent(QResizeEvent*  event);
+    void showEvent(QShowEvent*  event);
     void tabletEvent(QTabletEvent*  arg__1);
     void timerEvent(QTimerEvent*  arg__1);
     void wheelEvent(QWheelEvent*  arg__1);

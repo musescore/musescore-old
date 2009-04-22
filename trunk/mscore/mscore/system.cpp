@@ -149,7 +149,6 @@ void System::layout(ScoreLayout* layout, double xo1)
       static const Spatium instrumentNameOffset(1.0);
 
       int nstaves  = _staves.size();
-
       if (nstaves != score()->nstaves())
             printf("System::layout: nstaves %d != %d\n", nstaves, score()->nstaves());
 

@@ -72,7 +72,7 @@ static QScriptValue qtscript_QImageWriter_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QImageWriter::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -115,7 +115,7 @@ static const char * const qtscript_QImageWriter_ImageWriterError_keys[] = {
 static QString qtscript_QImageWriter_ImageWriterError_toStringHelper(QImageWriter::ImageWriterError value)
 {
     if ((value >= QImageWriter::UnknownError) && (value <= QImageWriter::UnsupportedFormatError))
-        return qtscript_QImageWriter_ImageWriterError_keys[static_cast<int>(value)];
+        return qtscript_QImageWriter_ImageWriterError_keys[static_cast<int>(value)-static_cast<int>(QImageWriter::UnknownError)];
     return QString();
 }
 
@@ -187,7 +187,7 @@ static QScriptValue qtscript_QImageWriter_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QImageWriter.%0(): this object is not a QImageWriter")
-            .arg(qtscript_QImageWriter_function_names[_id+1]));
+            .arg(qtscript_QImageWriter_function_names[_id+2]));
     }
 
     switch (_id) {

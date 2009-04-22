@@ -20,6 +20,8 @@
 static const char * const qtscript_QTransform_function_names[] = {
     "QTransform"
     // static
+    , "fromScale"
+    , "fromTranslate"
     , "quadToQuad"
     , "quadToSquare"
     , "squareToQuad"
@@ -70,8 +72,10 @@ static const char * const qtscript_QTransform_function_names[] = {
 };
 
 static const char * const qtscript_QTransform_function_signatures[] = {
-    "\nQMatrix mtx\nqreal h11, qreal h12, qreal h13, qreal h21, qreal h22, qreal h23\nqreal h11, qreal h12, qreal h13, qreal h21, qreal h22, qreal h23, qreal h31, qreal h32, qreal h33"
+    "\nQMatrix mtx\nqreal h11, qreal h12, qreal h13, qreal h21, qreal h22, qreal h23, qreal h31, qreal h32, qreal h33\nqreal h11, qreal h12, qreal h21, qreal h22, qreal dx, qreal dy"
     // static
+    , "qreal dx, qreal dy"
+    , "qreal dx, qreal dy"
     , "QPolygonF one, QPolygonF two, QTransform result"
     , "QPolygonF quad, QTransform result"
     , "QPolygonF square, QTransform result"
@@ -97,7 +101,7 @@ static const char * const qtscript_QTransform_function_signatures[] = {
     , ""
     , ""
     , ""
-    , "QLine l\nQLineF l\nQPainterPath p\nQPoint p\nQPointF p\nQPolygon a\nQPolygonF a\nQRegion r\nqreal x, qreal y, qreal tx, qreal ty"
+    , "QLine l\nQLineF l\nQPainterPath p\nQPoint p\nQPointF p\nQPolygon a\nQPolygonF a\nQRegion r"
     , "QRect arg__1\nQRectF arg__1"
     , "QRect r"
     , "QTransform o"
@@ -128,7 +132,7 @@ static QScriptValue qtscript_QTransform_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTransform::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -136,7 +140,6 @@ Q_DECLARE_METATYPE(QTransform*)
 Q_DECLARE_METATYPE(QTransform::TransformationType)
 Q_DECLARE_METATYPE(QPainterPath)
 Q_DECLARE_METATYPE(QPolygonF)
-Q_DECLARE_METATYPE(qreal*)
 Q_DECLARE_METATYPE(QDataStream*)
 Q_DECLARE_METATYPE(Qt::Axis)
 
@@ -255,7 +258,7 @@ static QScriptValue qtscript_QTransform_prototype_call(QScriptContext *context, 
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QTransform.%0(): this object is not a QTransform")
-            .arg(qtscript_QTransform_function_names[_id+1]));
+            .arg(qtscript_QTransform_function_names[_id+6]));
     }
 
     switch (_id) {
@@ -441,14 +444,6 @@ static QScriptValue qtscript_QTransform_prototype_call(QScriptContext *context, 
             QRegion _q_result = _q_self->map(_q_arg0);
             return qScriptValueFromValue(context->engine(), _q_result);
         }
-    }
-    if (context->argumentCount() == 4) {
-        qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
-        qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
-        qreal* _q_arg2 = qscriptvalue_cast<qreal*>(context->argument(2));
-        qreal* _q_arg3 = qscriptvalue_cast<qreal*>(context->argument(3));
-        _q_self->map(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
-        return context->engine()->undefinedValue();
     }
     break;
 
@@ -654,8 +649,8 @@ static QScriptValue qtscript_QTransform_prototype_call(QScriptContext *context, 
     Q_ASSERT(false);
     }
     return qtscript_QTransform_throw_ambiguity_error_helper(context,
-        qtscript_QTransform_function_names[_id+4],
-        qtscript_QTransform_function_signatures[_id+4]);
+        qtscript_QTransform_function_names[_id+6],
+        qtscript_QTransform_function_signatures[_id+6]);
 }
 
 static QScriptValue qtscript_QTransform_static_call(QScriptContext *context, QScriptEngine *)
@@ -716,6 +711,24 @@ static QScriptValue qtscript_QTransform_static_call(QScriptContext *context, QSc
     break;
 
     case 1:
+    if (context->argumentCount() == 2) {
+        qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
+        qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
+        QTransform _q_result = QTransform::fromScale(_q_arg0, _q_arg1);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 2:
+    if (context->argumentCount() == 2) {
+        qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
+        qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
+        QTransform _q_result = QTransform::fromTranslate(_q_arg0, _q_arg1);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 3:
     if (context->argumentCount() == 3) {
         QPolygonF _q_arg0 = qscriptvalue_cast<QPolygonF>(context->argument(0));
         QPolygonF _q_arg1 = qscriptvalue_cast<QPolygonF>(context->argument(1));
@@ -725,7 +738,7 @@ static QScriptValue qtscript_QTransform_static_call(QScriptContext *context, QSc
     }
     break;
 
-    case 2:
+    case 4:
     if (context->argumentCount() == 2) {
         QPolygonF _q_arg0 = qscriptvalue_cast<QPolygonF>(context->argument(0));
         QTransform _q_arg1 = qscriptvalue_cast<QTransform>(context->argument(1));
@@ -734,7 +747,7 @@ static QScriptValue qtscript_QTransform_static_call(QScriptContext *context, QSc
     }
     break;
 
-    case 3:
+    case 5:
     if (context->argumentCount() == 2) {
         QPolygonF _q_arg0 = qscriptvalue_cast<QPolygonF>(context->argument(0));
         QTransform _q_arg1 = qscriptvalue_cast<QTransform>(context->argument(1));
@@ -756,6 +769,8 @@ QScriptValue qtscript_create_QTransform_class(QScriptEngine *engine)
     static const int function_lengths[] = {
         9
         // static
+        , 2
+        , 2
         , 3
         , 2
         , 2
@@ -781,7 +796,7 @@ QScriptValue qtscript_create_QTransform_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
-        , 4
+        , 1
         , 1
         , 1
         , 1
@@ -807,9 +822,9 @@ QScriptValue qtscript_create_QTransform_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QTransform*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTransform*)0));
     for (int i = 0; i < 43; ++i) {
-        QScriptValue fun = engine->newFunction(qtscript_QTransform_prototype_call, function_lengths[i+4]);
+        QScriptValue fun = engine->newFunction(qtscript_QTransform_prototype_call, function_lengths[i+6]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
-        proto.setProperty(QString::fromLatin1(qtscript_QTransform_function_names[i+4]),
+        proto.setProperty(QString::fromLatin1(qtscript_QTransform_function_names[i+6]),
             fun, QScriptValue::SkipInEnumeration);
     }
 
@@ -818,7 +833,7 @@ QScriptValue qtscript_create_QTransform_class(QScriptEngine *engine)
 
     QScriptValue ctor = engine->newFunction(qtscript_QTransform_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 5; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTransform_static_call,
             function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i+1)));

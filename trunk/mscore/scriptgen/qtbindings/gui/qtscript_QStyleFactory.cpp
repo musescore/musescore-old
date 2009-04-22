@@ -37,7 +37,7 @@ static QScriptValue qtscript_QStyleFactory_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleFactory::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -67,7 +67,7 @@ static QScriptValue qtscript_QStyleFactory_prototype_call(QScriptContext *contex
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QStyleFactory.%0(): this object is not a QStyleFactory")
-            .arg(qtscript_QStyleFactory_function_names[_id+1]));
+            .arg(qtscript_QStyleFactory_function_names[_id+3]));
     }
 
     switch (_id) {

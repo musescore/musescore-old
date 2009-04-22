@@ -16,6 +16,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -52,9 +53,12 @@ static const char * const qtscript_QMessageBox_function_names[] = {
     // prototype
     , "addButton"
     , "button"
+    , "buttonRole"
+    , "buttons"
     , "clickedButton"
     , "defaultButton"
     , "escapeButton"
+    , "open"
     , "removeButton"
     , "setDefaultButton"
     , "setEscapeButton"
@@ -63,7 +67,7 @@ static const char * const qtscript_QMessageBox_function_names[] = {
 };
 
 static const char * const qtscript_QMessageBox_function_signatures[] = {
-    "Icon icon, String title, String text, StandardButtons buttons, QWidget parent, WindowFlags f\nQWidget parent"
+    "Icon icon, String title, String text, StandardButtons buttons, QWidget parent, WindowFlags flags\nQWidget parent"
     // static
     , "QWidget parent, String title, String text"
     , "QWidget parent, String title"
@@ -74,9 +78,12 @@ static const char * const qtscript_QMessageBox_function_signatures[] = {
     // prototype
     , "QAbstractButton button, ButtonRole role\nStandardButton button\nString text, ButtonRole role"
     , "StandardButton which"
+    , "QAbstractButton button"
     , ""
     , ""
     , ""
+    , ""
+    , "QObject receiver, char member"
     , "QAbstractButton button"
     , "StandardButton button\nQPushButton button"
     , "QAbstractButton button\nStandardButton button"
@@ -91,7 +98,7 @@ static QScriptValue qtscript_QMessageBox_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QMessageBox::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -108,6 +115,8 @@ Q_DECLARE_METATYPE(QFlags<QMessageBox::StandardButton>)
 Q_DECLARE_METATYPE(QMessageBox::Icon)
 Q_DECLARE_METATYPE(QAbstractButton*)
 Q_DECLARE_METATYPE(QPushButton*)
+Q_DECLARE_METATYPE(QList<QAbstractButton*>)
+Q_DECLARE_METATYPE(char*)
 Q_DECLARE_METATYPE(QFlags<Qt::WindowType>)
 Q_DECLARE_METATYPE(QDialog*)
 
@@ -177,7 +186,7 @@ static const char * const qtscript_QMessageBox_ButtonRole_keys[] = {
 static QString qtscript_QMessageBox_ButtonRole_toStringHelper(QMessageBox::ButtonRole value)
 {
     if ((value >= QMessageBox::InvalidRole) && (value <= QMessageBox::NRoles))
-        return qtscript_QMessageBox_ButtonRole_keys[static_cast<int>(value)];
+        return qtscript_QMessageBox_ButtonRole_keys[static_cast<int>(value)-static_cast<int>(QMessageBox::InvalidRole)];
     return QString();
 }
 
@@ -509,7 +518,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 9;
+        _id = 0xBABE0000 + 12;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -517,7 +526,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QMessageBox.%0(): this object is not a QMessageBox")
-            .arg(qtscript_QMessageBox_function_names[_id+1]));
+            .arg(qtscript_QMessageBox_function_names[_id+7]));
     }
 
     switch (_id) {
@@ -553,27 +562,51 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     break;
 
     case 2:
-    if (context->argumentCount() == 0) {
-        QAbstractButton* _q_result = _q_self->clickedButton();
+    if (context->argumentCount() == 1) {
+        QAbstractButton* _q_arg0 = qscriptvalue_cast<QAbstractButton*>(context->argument(0));
+        QMessageBox::ButtonRole _q_result = _q_self->buttonRole(_q_arg0);
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 3:
     if (context->argumentCount() == 0) {
+        QList<QAbstractButton*> _q_result = _q_self->buttons();
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    break;
+
+    case 4:
+    if (context->argumentCount() == 0) {
+        QAbstractButton* _q_result = _q_self->clickedButton();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 5:
+    if (context->argumentCount() == 0) {
         QPushButton* _q_result = _q_self->defaultButton();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 4:
+    case 6:
     if (context->argumentCount() == 0) {
         QAbstractButton* _q_result = _q_self->escapeButton();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 7:
+    if (context->argumentCount() == 2) {
+        QObject* _q_arg0 = context->argument(0).toQObject();
+        char* _q_arg1 = qscriptvalue_cast<char*>(context->argument(1));
+        _q_self->open(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 8:
     if (context->argumentCount() == 1) {
         QAbstractButton* _q_arg0 = qscriptvalue_cast<QAbstractButton*>(context->argument(0));
         _q_self->removeButton(_q_arg0);
@@ -581,7 +614,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 6:
+    case 9:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QMessageBox::StandardButton>() == context->argument(0).toVariant().userType())) {
             QMessageBox::StandardButton _q_arg0 = qscriptvalue_cast<QMessageBox::StandardButton>(context->argument(0));
@@ -595,7 +628,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 7:
+    case 10:
     if (context->argumentCount() == 1) {
         if (qscriptvalue_cast<QAbstractButton*>(context->argument(0))) {
             QAbstractButton* _q_arg0 = qscriptvalue_cast<QAbstractButton*>(context->argument(0));
@@ -609,7 +642,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 8:
+    case 11:
     if (context->argumentCount() == 1) {
         QAbstractButton* _q_arg0 = qscriptvalue_cast<QAbstractButton*>(context->argument(0));
         QMessageBox::StandardButton _q_result = _q_self->standardButton(_q_arg0);
@@ -617,7 +650,7 @@ static QScriptValue qtscript_QMessageBox_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 9: {
+    case 12: {
     QString result = QString::fromLatin1("QMessageBox");
     return QScriptValue(context->engine(), result);
     }
@@ -943,9 +976,12 @@ QScriptValue qtscript_create_QMessageBox_class(QScriptEngine *engine)
         // prototype
         , 2
         , 1
+        , 1
         , 0
         , 0
         , 0
+        , 0
+        , 2
         , 1
         , 1
         , 1
@@ -955,7 +991,7 @@ QScriptValue qtscript_create_QMessageBox_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QMessageBox*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QMessageBox*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QDialog*>()));
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 13; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QMessageBox_prototype_call, function_lengths[i+7]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QMessageBox_function_names[i+7]),

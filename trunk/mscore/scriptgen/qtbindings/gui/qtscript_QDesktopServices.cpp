@@ -43,7 +43,7 @@ static QScriptValue qtscript_QDesktopServices_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QDesktopServices::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -81,6 +81,7 @@ static const QDesktopServices::StandardLocation qtscript_QDesktopServices_Standa
     , QDesktopServices::TempLocation
     , QDesktopServices::HomeLocation
     , QDesktopServices::DataLocation
+    , QDesktopServices::CacheLocation
 };
 
 static const char * const qtscript_QDesktopServices_StandardLocation_keys[] = {
@@ -94,12 +95,13 @@ static const char * const qtscript_QDesktopServices_StandardLocation_keys[] = {
     , "TempLocation"
     , "HomeLocation"
     , "DataLocation"
+    , "CacheLocation"
 };
 
 static QString qtscript_QDesktopServices_StandardLocation_toStringHelper(QDesktopServices::StandardLocation value)
 {
-    if ((value >= QDesktopServices::DesktopLocation) && (value <= QDesktopServices::DataLocation))
-        return qtscript_QDesktopServices_StandardLocation_keys[static_cast<int>(value)];
+    if ((value >= QDesktopServices::DesktopLocation) && (value <= QDesktopServices::CacheLocation))
+        return qtscript_QDesktopServices_StandardLocation_keys[static_cast<int>(value)-static_cast<int>(QDesktopServices::DesktopLocation)];
     return QString();
 }
 
@@ -117,7 +119,7 @@ static void qtscript_QDesktopServices_StandardLocation_fromScriptValue(const QSc
 static QScriptValue qtscript_construct_QDesktopServices_StandardLocation(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QDesktopServices::DesktopLocation) && (arg <= QDesktopServices::DataLocation))
+    if ((arg >= QDesktopServices::DesktopLocation) && (arg <= QDesktopServices::CacheLocation))
         return qScriptValueFromValue(engine,  static_cast<QDesktopServices::StandardLocation>(arg));
     return context->throwError(QString::fromLatin1("StandardLocation(): invalid enum value (%0)").arg(arg));
 }
@@ -141,7 +143,7 @@ static QScriptValue qtscript_create_QDesktopServices_StandardLocation_class(QScr
         qtscript_QDesktopServices_StandardLocation_valueOf, qtscript_QDesktopServices_StandardLocation_toString);
     qScriptRegisterMetaType<QDesktopServices::StandardLocation>(engine, qtscript_QDesktopServices_StandardLocation_toScriptValue,
         qtscript_QDesktopServices_StandardLocation_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 11; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QDesktopServices_StandardLocation_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QDesktopServices_StandardLocation_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -171,7 +173,7 @@ static QScriptValue qtscript_QDesktopServices_prototype_call(QScriptContext *con
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QDesktopServices.%0(): this object is not a QDesktopServices")
-            .arg(qtscript_QDesktopServices_function_names[_id+1]));
+            .arg(qtscript_QDesktopServices_function_names[_id+6]));
     }
 
     switch (_id) {

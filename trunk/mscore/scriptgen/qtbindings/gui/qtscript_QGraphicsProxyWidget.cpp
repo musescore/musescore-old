@@ -7,6 +7,7 @@
 
 #include <qgraphicsproxywidget.h>
 #include <QVariant>
+#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
@@ -19,6 +20,7 @@
 #include <qgraphicsscene.h>
 #include <qgraphicssceneevent.h>
 #include <qgraphicswidget.h>
+#include <qkeysequence.h>
 #include <qlist.h>
 #include <qobject.h>
 #include <qpainter.h>
@@ -41,6 +43,7 @@ static const char * const qtscript_QGraphicsProxyWidget_function_names[] = {
     "QGraphicsProxyWidget"
     // static
     // prototype
+    , "createProxyForChildWidget"
     , "setWidget"
     , "subWidgetRect"
     , "widget"
@@ -51,6 +54,7 @@ static const char * const qtscript_QGraphicsProxyWidget_function_signatures[] = 
     "QGraphicsItem parent, WindowFlags wFlags"
     // static
     // prototype
+    , "QWidget child"
     , "QWidget widget"
     , "QWidget widget"
     , ""
@@ -64,7 +68,7 @@ static QScriptValue qtscript_QGraphicsProxyWidget_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsProxyWidget::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -87,7 +91,7 @@ static QScriptValue qtscript_QGraphicsProxyWidget_prototype_call(QScriptContext 
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 3;
+        _id = 0xBABE0000 + 4;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -102,12 +106,20 @@ static QScriptValue qtscript_QGraphicsProxyWidget_prototype_call(QScriptContext 
     case 0:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
+        QGraphicsProxyWidget* _q_result = _q_self->createProxyForChildWidget(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 1:
+    if (context->argumentCount() == 1) {
+        QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         _q_self->setWidget(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 1:
+    case 2:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         QRectF _q_result = _q_self->subWidgetRect(_q_arg0);
@@ -115,14 +127,14 @@ static QScriptValue qtscript_QGraphicsProxyWidget_prototype_call(QScriptContext 
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->widget();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 3: {
+    case 4: {
     QString result = QString::fromLatin1("QGraphicsProxyWidget");
     return QScriptValue(context->engine(), result);
     }
@@ -192,13 +204,14 @@ QScriptValue qtscript_create_QGraphicsProxyWidget_class(QScriptEngine *engine)
         // prototype
         , 1
         , 1
+        , 1
         , 0
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QGraphicsProxyWidget*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QGraphicsProxyWidget*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QGraphicsWidget*>()));
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 5; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QGraphicsProxyWidget_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QGraphicsProxyWidget_function_names[i+1]),

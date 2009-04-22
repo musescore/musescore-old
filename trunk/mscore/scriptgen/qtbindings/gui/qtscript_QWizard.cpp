@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -50,7 +51,9 @@ static const char * const qtscript_QWizard_function_names[] = {
     , "hasVisitedPage"
     , "nextId"
     , "page"
+    , "pageIds"
     , "pixmap"
+    , "removePage"
     , "setButton"
     , "setButtonLayout"
     , "setButtonText"
@@ -76,7 +79,9 @@ static const char * const qtscript_QWizard_function_signatures[] = {
     , "int id"
     , ""
     , "int id"
+    , ""
     , "WizardPixmap which"
+    , "int id"
     , "WizardButton which, QAbstractButton button"
     , "List layout"
     , "WizardButton which, String text"
@@ -97,7 +102,7 @@ static QScriptValue qtscript_QWizard_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QWizard::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -116,8 +121,8 @@ Q_DECLARE_METATYPE(QFlags<QWizard::WizardOption>)
 Q_DECLARE_METATYPE(QWizardPage*)
 Q_DECLARE_METATYPE(QAbstractButton*)
 Q_DECLARE_METATYPE(QVariant)
-Q_DECLARE_METATYPE(QList<QWizard::WizardButton>)
 Q_DECLARE_METATYPE(QList<int>)
+Q_DECLARE_METATYPE(QList<QWizard::WizardButton>)
 Q_DECLARE_METATYPE(QFlags<Qt::WindowType>)
 Q_DECLARE_METATYPE(QDialog*)
 
@@ -187,7 +192,7 @@ static const char * const qtscript_QWizard_WizardButton_keys[] = {
 static QString qtscript_QWizard_WizardButton_toStringHelper(QWizard::WizardButton value)
 {
     if ((value >= QWizard::NoButton) && (value <= QWizard::Stretch))
-        return qtscript_QWizard_WizardButton_keys[static_cast<int>(value)];
+        return qtscript_QWizard_WizardButton_keys[static_cast<int>(value)-static_cast<int>(QWizard::NoButton)];
     return QString();
 }
 
@@ -339,7 +344,7 @@ static const char * const qtscript_QWizard_WizardPixmap_keys[] = {
 static QString qtscript_QWizard_WizardPixmap_toStringHelper(QWizard::WizardPixmap value)
 {
     if ((value >= QWizard::WatermarkPixmap) && (value <= QWizard::NPixmaps))
-        return qtscript_QWizard_WizardPixmap_keys[static_cast<int>(value)];
+        return qtscript_QWizard_WizardPixmap_keys[static_cast<int>(value)-static_cast<int>(QWizard::WatermarkPixmap)];
     return QString();
 }
 
@@ -580,7 +585,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 19;
+        _id = 0xBABE0000 + 21;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -655,6 +660,13 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     break;
 
     case 8:
+    if (context->argumentCount() == 0) {
+        QList<int> _q_result = _q_self->pageIds();
+        return qScriptValueFromSequence(context->engine(), _q_result);
+    }
+    break;
+
+    case 9:
     if (context->argumentCount() == 1) {
         QWizard::WizardPixmap _q_arg0 = qscriptvalue_cast<QWizard::WizardPixmap>(context->argument(0));
         QPixmap _q_result = _q_self->pixmap(_q_arg0);
@@ -662,7 +674,15 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 9:
+    case 10:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        _q_self->removePage(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 11:
     if (context->argumentCount() == 2) {
         QWizard::WizardButton _q_arg0 = qscriptvalue_cast<QWizard::WizardButton>(context->argument(0));
         QAbstractButton* _q_arg1 = qscriptvalue_cast<QAbstractButton*>(context->argument(1));
@@ -671,7 +691,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 1) {
         QList<QWizard::WizardButton> _q_arg0;
         qScriptValueToSequence(context->argument(0), _q_arg0);
@@ -680,7 +700,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 2) {
         QWizard::WizardButton _q_arg0 = qscriptvalue_cast<QWizard::WizardButton>(context->argument(0));
         QString _q_arg1 = context->argument(1).toString();
@@ -689,7 +709,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 2) {
         QString _q_arg0 = context->argument(0).toString();
         QVariant _q_arg1 = context->argument(1).toVariant();
@@ -698,7 +718,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 1) {
         QWizard::WizardOption _q_arg0 = qscriptvalue_cast<QWizard::WizardOption>(context->argument(0));
         _q_self->setOption(_q_arg0);
@@ -712,7 +732,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 14:
+    case 16:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QWizardPage* _q_arg1 = qscriptvalue_cast<QWizardPage*>(context->argument(1));
@@ -721,7 +741,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 2) {
         QWizard::WizardPixmap _q_arg0 = qscriptvalue_cast<QWizard::WizardPixmap>(context->argument(0));
         QPixmap _q_arg1 = qscriptvalue_cast<QPixmap>(context->argument(1));
@@ -730,7 +750,7 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 1) {
         QWizard::WizardOption _q_arg0 = qscriptvalue_cast<QWizard::WizardOption>(context->argument(0));
         bool _q_result = _q_self->testOption(_q_arg0);
@@ -738,21 +758,21 @@ static QScriptValue qtscript_QWizard_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->validateCurrentPage();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 0) {
         QList<int> _q_result = _q_self->visitedPages();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 19: {
+    case 21: {
     QString result = QString::fromLatin1("QWizard");
     return QScriptValue(context->engine(), result);
     }
@@ -828,6 +848,8 @@ QScriptValue qtscript_create_QWizard_class(QScriptEngine *engine)
         , 1
         , 0
         , 1
+        , 0
+        , 1
         , 1
         , 2
         , 1
@@ -844,7 +866,7 @@ QScriptValue qtscript_create_QWizard_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QWizard*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QWizard*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QDialog*>()));
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < 22; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QWizard_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QWizard_function_names[i+1]),

@@ -16,6 +16,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -64,6 +65,7 @@ static const char * const qtscript_QWidget_function_names[] = {
     , "grabKeyboard"
     , "grabMouse"
     , "grabShortcut"
+    , "graphicsProxyWidget"
     , "heightForWidth"
     , "inputContext"
     , "inputMethodQuery"
@@ -173,6 +175,7 @@ static const char * const qtscript_QWidget_function_signatures[] = {
     , ""
     , "\nQCursor arg__1"
     , "QKeySequence key, ShortcutContext context"
+    , ""
     , "int arg__1"
     , ""
     , "InputMethodQuery arg__1"
@@ -262,7 +265,7 @@ static QScriptValue qtscript_QWidget_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QWidget::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -275,6 +278,7 @@ Q_DECLARE_METATYPE(QPalette::ColorRole)
 Q_DECLARE_METATYPE(WId)
 Q_DECLARE_METATYPE(int*)
 Q_DECLARE_METATYPE(Qt::ShortcutContext)
+Q_DECLARE_METATYPE(QGraphicsProxyWidget*)
 Q_DECLARE_METATYPE(QInputContext*)
 Q_DECLARE_METATYPE(Qt::InputMethodQuery)
 Q_DECLARE_METATYPE(QVariant)
@@ -483,7 +487,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 99;
+        _id = 0xBABE0000 + 100;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -491,7 +495,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QWidget.%0(): this object is not a QWidget")
-            .arg(qtscript_QWidget_function_names[_id+1]));
+            .arg(qtscript_QWidget_function_names[_id+4]));
     }
 
     switch (_id) {
@@ -662,6 +666,13 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     break;
 
     case 20:
+    if (context->argumentCount() == 0) {
+        QGraphicsProxyWidget* _q_result = _q_self->graphicsProxyWidget();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 21:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_result = _q_self->heightForWidth(_q_arg0);
@@ -669,14 +680,14 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 21:
+    case 22:
     if (context->argumentCount() == 0) {
         QInputContext* _q_result = _q_self->inputContext();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 22:
+    case 23:
     if (context->argumentCount() == 1) {
         Qt::InputMethodQuery _q_arg0 = qscriptvalue_cast<Qt::InputMethodQuery>(context->argument(0));
         QVariant _q_result = _q_self->inputMethodQuery(_q_arg0);
@@ -684,7 +695,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 23:
+    case 24:
     if (context->argumentCount() == 2) {
         QAction* _q_arg0 = qscriptvalue_cast<QAction*>(context->argument(0));
         QAction* _q_arg1 = qscriptvalue_cast<QAction*>(context->argument(1));
@@ -693,7 +704,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 24:
+    case 25:
     if (context->argumentCount() == 2) {
         QAction* _q_arg0 = qscriptvalue_cast<QAction*>(context->argument(0));
         QList<QAction*> _q_arg1;
@@ -703,7 +714,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 25:
+    case 26:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         bool _q_result = _q_self->isAncestorOf(_q_arg0);
@@ -711,7 +722,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 26:
+    case 27:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         bool _q_result = _q_self->isEnabledTo(_q_arg0);
@@ -719,28 +730,28 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 27:
+    case 28:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isHidden();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 28:
+    case 29:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isLeftToRight();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 29:
+    case 30:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isRightToLeft();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 30:
+    case 31:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         bool _q_result = _q_self->isVisibleTo(_q_arg0);
@@ -748,21 +759,21 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 31:
+    case 32:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isWindow();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 32:
+    case 33:
     if (context->argumentCount() == 0) {
         QLayout* _q_result = _q_self->layout();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 33:
+    case 34:
     if (context->argumentCount() == 2) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         QPoint _q_arg1 = qscriptvalue_cast<QPoint>(context->argument(1));
@@ -771,7 +782,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 34:
+    case 35:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QPoint _q_result = _q_self->mapFromGlobal(_q_arg0);
@@ -779,7 +790,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 35:
+    case 36:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QPoint _q_result = _q_self->mapFromParent(_q_arg0);
@@ -787,7 +798,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 36:
+    case 37:
     if (context->argumentCount() == 2) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         QPoint _q_arg1 = qscriptvalue_cast<QPoint>(context->argument(1));
@@ -796,7 +807,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 37:
+    case 38:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QPoint _q_result = _q_self->mapToGlobal(_q_arg0);
@@ -804,7 +815,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 38:
+    case 39:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         QPoint _q_result = _q_self->mapToParent(_q_arg0);
@@ -812,14 +823,14 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 39:
+    case 40:
     if (context->argumentCount() == 0) {
         QRegion _q_result = _q_self->mask();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 40:
+    case 41:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -828,21 +839,21 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 41:
+    case 42:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->nativeParentWidget();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 42:
+    case 43:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->nextInFocusChain();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 43:
+    case 44:
     if (context->argumentCount() == 1) {
         QFlags<Qt::WindowType> _q_arg0 = qscriptvalue_cast<QFlags<Qt::WindowType> >(context->argument(0));
         _q_self->overrideWindowFlags(_q_arg0);
@@ -850,7 +861,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 44:
+    case 45:
     if (context->argumentCount() == 1) {
         QFlags<Qt::WindowState> _q_arg0 = qscriptvalue_cast<QFlags<Qt::WindowState> >(context->argument(0));
         _q_self->overrideWindowState(_q_arg0);
@@ -858,28 +869,28 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 45:
+    case 46:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->parentWidget();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 46:
+    case 47:
     if (context->argumentCount() == 0) {
         _q_self->releaseKeyboard();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 47:
+    case 48:
     if (context->argumentCount() == 0) {
         _q_self->releaseMouse();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 48:
+    case 49:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->releaseShortcut(_q_arg0);
@@ -887,7 +898,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 49:
+    case 50:
     if (context->argumentCount() == 1) {
         QAction* _q_arg0 = qscriptvalue_cast<QAction*>(context->argument(0));
         _q_self->removeAction(_q_arg0);
@@ -895,7 +906,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 50:
+    case 51:
     if (context->argumentCount() == 1) {
         QPaintDevice* _q_arg0 = qscriptvalue_cast<QPaintDevice*>(context->argument(0));
         _q_self->render(_q_arg0);
@@ -960,7 +971,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 51:
+    case 52:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QRect>() == context->argument(0).toVariant().userType())) {
             QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
@@ -982,7 +993,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 52:
+    case 53:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -991,7 +1002,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 53:
+    case 54:
     if (context->argumentCount() == 1) {
         QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
         bool _q_result = _q_self->restoreGeometry(_q_arg0);
@@ -999,14 +1010,14 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 54:
+    case 55:
     if (context->argumentCount() == 0) {
         QByteArray _q_result = _q_self->saveGeometry();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 55:
+    case 56:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1022,7 +1033,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 56:
+    case 57:
     if (context->argumentCount() == 1) {
         Qt::WidgetAttribute _q_arg0 = qscriptvalue_cast<Qt::WidgetAttribute>(context->argument(0));
         _q_self->setAttribute(_q_arg0);
@@ -1036,7 +1047,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 57:
+    case 58:
     if (context->argumentCount() == 1) {
         QPalette::ColorRole _q_arg0 = qscriptvalue_cast<QPalette::ColorRole>(context->argument(0));
         _q_self->setBackgroundRole(_q_arg0);
@@ -1044,7 +1055,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 58:
+    case 59:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1053,7 +1064,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 59:
+    case 60:
     if (context->argumentCount() == 4) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1064,7 +1075,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 60:
+    case 61:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setFixedHeight(_q_arg0);
@@ -1072,7 +1083,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 61:
+    case 62:
     if (context->argumentCount() == 1) {
         QSize _q_arg0 = qscriptvalue_cast<QSize>(context->argument(0));
         _q_self->setFixedSize(_q_arg0);
@@ -1086,7 +1097,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 62:
+    case 63:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setFixedWidth(_q_arg0);
@@ -1094,7 +1105,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 63:
+    case 64:
     if (context->argumentCount() == 1) {
         Qt::FocusReason _q_arg0 = qscriptvalue_cast<Qt::FocusReason>(context->argument(0));
         _q_self->setFocus(_q_arg0);
@@ -1102,7 +1113,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 64:
+    case 65:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         _q_self->setFocusProxy(_q_arg0);
@@ -1110,7 +1121,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 65:
+    case 66:
     if (context->argumentCount() == 1) {
         QPalette::ColorRole _q_arg0 = qscriptvalue_cast<QPalette::ColorRole>(context->argument(0));
         _q_self->setForegroundRole(_q_arg0);
@@ -1118,7 +1129,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 66:
+    case 67:
     if (context->argumentCount() == 4) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1129,7 +1140,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 67:
+    case 68:
     if (context->argumentCount() == 1) {
         QInputContext* _q_arg0 = qscriptvalue_cast<QInputContext*>(context->argument(0));
         _q_self->setInputContext(_q_arg0);
@@ -1137,7 +1148,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 68:
+    case 69:
     if (context->argumentCount() == 1) {
         QLayout* _q_arg0 = qscriptvalue_cast<QLayout*>(context->argument(0));
         _q_self->setLayout(_q_arg0);
@@ -1145,7 +1156,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 69:
+    case 70:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QBitmap>() == context->argument(0).toVariant().userType())) {
             QBitmap _q_arg0 = qscriptvalue_cast<QBitmap>(context->argument(0));
@@ -1159,7 +1170,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 70:
+    case 71:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1168,7 +1179,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 71:
+    case 72:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1177,7 +1188,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 72:
+    case 73:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         _q_self->setParent(_q_arg0);
@@ -1191,7 +1202,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 73:
+    case 74:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setShortcutAutoRepeat(_q_arg0);
@@ -1205,7 +1216,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 74:
+    case 75:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setShortcutEnabled(_q_arg0);
@@ -1219,7 +1230,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 75:
+    case 76:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         int _q_arg1 = context->argument(1).toInt32();
@@ -1228,7 +1239,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 76:
+    case 77:
     if (context->argumentCount() == 2) {
         QSizePolicy::Policy _q_arg0 = qscriptvalue_cast<QSizePolicy::Policy>(context->argument(0));
         QSizePolicy::Policy _q_arg1 = qscriptvalue_cast<QSizePolicy::Policy>(context->argument(1));
@@ -1237,7 +1248,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 77:
+    case 78:
     if (context->argumentCount() == 1) {
         QStyle* _q_arg0 = qscriptvalue_cast<QStyle*>(context->argument(0));
         _q_self->setStyle(_q_arg0);
@@ -1245,7 +1256,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 78:
+    case 79:
     if (context->argumentCount() == 1) {
         QFlags<Qt::WindowType> _q_arg0 = qscriptvalue_cast<QFlags<Qt::WindowType> >(context->argument(0));
         _q_self->setWindowFlags(_q_arg0);
@@ -1253,7 +1264,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 79:
+    case 80:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setWindowOpacity(_q_arg0);
@@ -1261,7 +1272,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 80:
+    case 81:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setWindowRole(_q_arg0);
@@ -1269,7 +1280,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 81:
+    case 82:
     if (context->argumentCount() == 1) {
         QFlags<Qt::WindowState> _q_arg0 = qscriptvalue_cast<QFlags<Qt::WindowState> >(context->argument(0));
         _q_self->setWindowState(_q_arg0);
@@ -1277,7 +1288,7 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 82:
+    case 83:
     if (context->argumentCount() == 1) {
         QWidget* _q_arg0 = qscriptvalue_cast<QWidget*>(context->argument(0));
         _q_self->stackUnder(_q_arg0);
@@ -1285,14 +1296,14 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 83:
+    case 84:
     if (context->argumentCount() == 0) {
         QStyle* _q_result = _q_self->style();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 84:
+    case 85:
     if (context->argumentCount() == 1) {
         Qt::WidgetAttribute _q_arg0 = qscriptvalue_cast<Qt::WidgetAttribute>(context->argument(0));
         bool _q_result = _q_self->testAttribute(_q_arg0);
@@ -1300,35 +1311,35 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 85:
+    case 86:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->underMouse();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 86:
+    case 87:
     if (context->argumentCount() == 0) {
         _q_self->unsetCursor();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 87:
+    case 88:
     if (context->argumentCount() == 0) {
         _q_self->unsetLayoutDirection();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 88:
+    case 89:
     if (context->argumentCount() == 0) {
         _q_self->unsetLocale();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 89:
+    case 90:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QRect>() == context->argument(0).toVariant().userType())) {
             QRect _q_arg0 = qscriptvalue_cast<QRect>(context->argument(0));
@@ -1350,70 +1361,70 @@ static QScriptValue qtscript_QWidget_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 90:
+    case 91:
     if (context->argumentCount() == 0) {
         _q_self->updateGeometry();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 91:
+    case 92:
     if (context->argumentCount() == 0) {
         QRegion _q_result = _q_self->visibleRegion();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 92:
+    case 93:
     if (context->argumentCount() == 0) {
         WId _q_result = _q_self->winId();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 93:
+    case 94:
     if (context->argumentCount() == 0) {
         QWidget* _q_result = _q_self->window();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 94:
+    case 95:
     if (context->argumentCount() == 0) {
         QFlags<Qt::WindowType> _q_result = _q_self->windowFlags();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 95:
+    case 96:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->windowOpacity();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 96:
+    case 97:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->windowRole();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 97:
+    case 98:
     if (context->argumentCount() == 0) {
         QFlags<Qt::WindowState> _q_result = _q_self->windowState();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 98:
+    case 99:
     if (context->argumentCount() == 0) {
         Qt::WindowType _q_result = _q_self->windowType();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 99: {
+    case 100: {
     QString result = QString::fromLatin1("QWidget");
     return QScriptValue(context->engine(), result);
     }
@@ -1527,6 +1538,7 @@ QScriptValue qtscript_create_QWidget_class(QScriptEngine *engine)
         , 0
         , 1
         , 2
+        , 0
         , 1
         , 0
         , 1
@@ -1614,7 +1626,7 @@ QScriptValue qtscript_create_QWidget_class(QScriptEngine *engine)
     proto.setProperty(QString::fromLatin1("__QPaintDevice__"),
         engine->defaultPrototype(qMetaTypeId<QPaintDevice*>()),
         QScriptValue::SkipInEnumeration);
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 101; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QWidget_prototype_call, function_lengths[i+4]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QWidget_function_names[i+4]),

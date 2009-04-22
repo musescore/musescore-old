@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionViewItem_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionViewItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -75,7 +75,7 @@ static const char * const qtscript_QStyleOptionViewItem_StyleOptionVersion_keys[
 static QString qtscript_QStyleOptionViewItem_StyleOptionVersion_toStringHelper(QStyleOptionViewItem::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionViewItem::Version) && (value <= QStyleOptionViewItem::Version))
-        return qtscript_QStyleOptionViewItem_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionViewItem_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionViewItem::Version)];
     return QString();
 }
 
@@ -140,7 +140,7 @@ static const char * const qtscript_QStyleOptionViewItem_StyleOptionType_keys[] =
 static QString qtscript_QStyleOptionViewItem_StyleOptionType_toStringHelper(QStyleOptionViewItem::StyleOptionType value)
 {
     if ((value >= QStyleOptionViewItem::Type) && (value <= QStyleOptionViewItem::Type))
-        return qtscript_QStyleOptionViewItem_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionViewItem_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionViewItem::Type)];
     return QString();
 }
 
@@ -211,7 +211,7 @@ static const char * const qtscript_QStyleOptionViewItem_Position_keys[] = {
 static QString qtscript_QStyleOptionViewItem_Position_toStringHelper(QStyleOptionViewItem::Position value)
 {
     if ((value >= QStyleOptionViewItem::Left) && (value <= QStyleOptionViewItem::Bottom))
-        return qtscript_QStyleOptionViewItem_Position_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionViewItem_Position_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionViewItem::Left)];
     return QString();
 }
 

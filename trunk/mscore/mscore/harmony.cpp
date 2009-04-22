@@ -1080,7 +1080,7 @@ void Harmony::layout(ScoreLayout* l)
       double y = .0, x = .0;
       QRectF bb;
       foreach(const TextSegment* ts, textList) {
-            y += ts->baseLineOffset;
+            y += ts->offset();
             QFontMetricsF fm(ts->font);
 
             QRectF br = fm.boundingRect(QRectF(x, y, 0.0, 0.0),
@@ -1104,16 +1104,48 @@ void Harmony::draw(QPainter& p) const
             }
       double y = 0.0;
       double x = 0.0;
+
       foreach(const TextSegment* ts, textList) {
             y += ts->baseLineOffset;
-            QRectF br;
             p.setFont(ts->font);
-            p.drawText(QRectF(x, y, 0.0, 0.0),
-               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft | Qt::AlignBottom,
-               ts->text, &br);
+            p.drawText(x, y, ts->text);
             y -= ts->baseLineOffset;
-            x += br.width();
+            x += ts->width;
             }
+      }
+
+//---------------------------------------------------------
+//   TextSegment
+//---------------------------------------------------------
+
+TextSegment::TextSegment(const QString& s, const QFont& f, double offset)
+      {
+      set(s, f, offset);
+      }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
+
+void TextSegment::setText(const QString& s)
+      {
+      text = s;
+      QFontMetricsF fm(font);
+      width = 0.0;
+      foreach(QChar c, text) {
+            width += fm.width(c);
+            }
+      }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
+
+void TextSegment::set(const QString& s, const QFont& f, double offset)
+      {
+      font = f;
+      baseLineOffset = offset;
+      setText(s);
       }
 
 //---------------------------------------------------------
@@ -1128,8 +1160,8 @@ void Harmony::buildText()
 //      static const QChar augmentedSym(0x2b);
 //      static const QChar diminishedSym(0xb0);
 //      static const QChar halfDiminishedSym(0xf8);
-      QChar sharpSym(0xe10c);
-      QChar flatSym(0xe10d);
+      static const QChar sharpSym(0xe10c);
+      static const QChar flatSym(0xe10d);
 
       if (_rootTpc == INVALID_TPC)
             return;
@@ -1170,82 +1202,72 @@ void Harmony::buildText()
 
       // root name
       QChar c = txt[idx++];
-      TextSegment* ts = new TextSegment;
-      ts->text = QString(c);
-      ts->font = useJazzFont ? font3 : font1;
-      ts->baseLineOffset = 0.0;
+      TextSegment* ts = new TextSegment(QString(c),
+         useJazzFont ? font3 : font1, 0.0);
       textList.append(ts);
       if (size == idx)
             return;
-
       if ((txt[idx] == '#') || (txt[idx] == 'b')) {
             ts = new TextSegment;
             if (useJazzFont) {
-                  sharpSym = 0x5f;
-                  flatSym  = 0x5e;
-                  if ((txt[idx] == '#') || (txt[idx] == 'b')) {
-                        ts = new TextSegment;
-                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
-                        ts->font = font3;
-                        ts->baseLineOffset = 0.0;
-                        }
+                  static const QChar sharpSym = 0x5f;
+                  static const QChar flatSym  = 0x5e;
+                  QString str(txt[idx] == '#' ? sharpSym : flatSym);
+                  ts->set(str, font3, 0.0);
                   }
             else {
-                  ts = new TextSegment;
-                  if (useSymbols) {
-                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
-                        ts->font = font2;
-                        ts->baseLineOffset = -fsize2 * .5;
-                        }
-                  else {
-                        ts->text = QString(txt[idx]);
-                        ts->font = font1;
-                        ts->baseLineOffset = 0.0;
-                        }
+                  if (useSymbols)
+                        ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2, -fsize2 * .5);
+                  else
+                        ts->set(QString(txt[idx]), font1, 0.0);
                   }
             textList.append(ts);
             ++idx;
             if (size == idx)
                   return;
             }
-      if (txt[idx] == ' ')
+      while (txt[idx] == ' ') {
             ++idx;
-      if (size == idx)
-            return;
+            if (size == idx)
+                  return;
+            }
 
       int superOffset = -fsize * .3;
 
       ts = new TextSegment;
-      ts->baseLineOffset = 0;
-      ts->font = useJazzFont ? font3 : font1;
+      ts->setFont(useJazzFont ? font3 : font1);
 
       if (txt.mid(idx, 1) == "m") {
-            ts->text = useJazzFont ? QString(0x81) : QString("m");
+            ts->setText(useJazzFont ? QString(0x81) : QString("m"));
             idx++;
             }
       else if (!useJazzFont && useSymbols && (txt.mid(idx, 4) == "Maj7")) {
-            ts->text = QString(majorSym);
+            ts->setText(QString(majorSym));
             idx += 4;
             }
       else if (txt.mid(idx, 3) == "Maj") {
-            ts->text = useJazzFont ? QString(0x80) : "maj";
+            ts->setText(useJazzFont ? QString(0x80) : "maj");
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "aug") {
-            ts->text = "aug";
+            ts->setText("aug");
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "sus") {
-            ts->text = useJazzFont ? QString(0x85) : QString("sus");
+            ts->setText(useJazzFont ? QString(0x85) : QString("sus"));
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "dim") {
-            ts->text = useJazzFont ? QString(0x84) : QString("dim");
+            ts->setText(useJazzFont ? QString(0x84) : QString("dim"));
             idx += 3;
             }
-      textList.append(ts);
-      if (size == idx)
-            return;
+      if (ts->text.isEmpty())
+            delete ts;
+      else {
+            textList.append(ts);
+            if (size == idx)
+                  return;
+            }
 
       int idx2 = idx;
       while (idx2 < size) {
@@ -1258,76 +1280,51 @@ void Harmony::buildText()
             while (idx < idx2) {
 // printf("  Harmony(%d) <%s>\n", textList.size(), qPrintable(txt.mid(idx, idx2-idx)));
                   ts = new TextSegment;
-                  ts->baseLineOffset = superOffset;
                   if (useJazzFont && (txt[idx] == '#')) {
-                        ts->text           = QString(0x89);
-                        ts->font           = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x89), font3, 0.0);
                         }
                   else if (useJazzFont && (txt[idx] == 'b')) {
-                        ts->text           = QString(0x88);
-                        ts->font           = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x88), font3, 0.0);
                         }
                   else if ((txt[idx] == '#') || (txt[idx] == 'b')) {
                         if (useSymbols) {
-                              ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
-                              ts->font = font2s;
-                              ts->baseLineOffset -= fsize2 * .4;
+                              ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2s, superOffset - fsize2*4);
                               }
                         else {
-                              ts->text = QString(txt[idx]);
-                              ts->font = font1s;
+                              ts->set(QString(txt[idx]), font1s, superOffset);
                               }
                         }
                   else if (useJazzFont && (txt[idx] == '6' || txt[idx] == '7' || txt[idx] == '9')) {
-                        ts->text           = QString(txt[idx]);
-                        ts->font           = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(txt[idx]), font3, 0.0);
                         }
                   else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '1') {
-                        ts->text = QString(0x82);     // 11
-                        ts->font = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x82), font3, 0.0);     // 11
                         ++idx;
                         }
                   else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '3') {
-                        ts->text = QString(0x83);     // 13
-                        ts->font = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x83), font3, 0.0);     // 13
                         ++idx;
                         }
                   else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 's') && (txt[idx+1] == 'u') && (txt[idx+2] == 's')) {
-                        ts->text = QString(0x85);     // sus
-                        ts->baseLineOffset = 0;
-                        ts->font = font3;
+                        ts->set(QString(0x85), font3, 0.0);     // sus
                         idx += 2;
                         }
                   else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'd') && (txt[idx+1] == 'i') && (txt[idx+2] == 'm')) {
-                        ts->text = QString(0x86);     // dim
-                        ts->baseLineOffset = 0;
-                        ts->font = font3;
+                        ts->set(QString(0x86), font3, 0.0);     // dim
                         idx += 2;
                         }
                   else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'a') && (txt[idx+1] == 'd') && (txt[idx+2] == 'd')) {
-                        ts->text = QString(0x8b);     // add
-                        ts->baseLineOffset = 0;
-                        ts->font = font3;
+                        ts->set(QString(0x8b), font3, 0.0);     // add
                         idx += 2;
                         }
                   else if (useJazzFont && (txt[idx] == '+')) {
-                        ts->text           = QString(0x86);
-                        ts->font           = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x86), font3, 0.0);
                         }
                   else if (useJazzFont && (txt[idx] == '5')) {
-                        ts->text           = QString(0x8a);
-                        ts->font           = font3;
-                        ts->baseLineOffset = 0;
+                        ts->set(QString(0x8a), font3, 0.0);
                         }
                   else {
-                        ts->text = QString(txt[idx]);
-                        ts->font = font1s;
+                        ts->set(QString(txt[idx]), font1s, superOffset);
                         }
                   ++idx;
                   textList.append(ts);
@@ -1335,40 +1332,27 @@ void Harmony::buildText()
             }
       idx = slashIdx;
       if (idx) {
-            ts = new TextSegment;
-            ts->font = font1;
-            ts->text = "/" + QString(txt[idx]);
-            ts->baseLineOffset = 0;
+            ts = new TextSegment("/" + QString(txt[idx]), font1, 0.0);
             textList.append(ts);
             ++idx;
             if (size == idx)
                   return;
             ts = new TextSegment;
-            ts->baseLineOffset = 0;
             if ((txt[idx] == '#') || (txt[idx] == 'b')) {
-                  if (useSymbols) {
-                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
-                        ts->font = font2;
-                        ts->baseLineOffset -= fsize2 * .4;
-                        }
-                  else {
-                        ts->text = QString(txt[idx]);
-                        ts->font = font1;
-                        }
+                  if (useSymbols)
+                        ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2, -fsize2 * .4);
+                  else
+                        ts->set(QString(txt[idx]), font1, 0.0);
                   }
             else {
-                  ts->text = QString(txt[idx]);
-                  ts->font = font1s;
+                  ts->set(QString(txt[idx]), font1s, 0.0);
                   }
             ++idx;
             textList.append(ts);
             if (size == idx)
                   return;
 
-            ts                 = new TextSegment;
-            ts->baseLineOffset = 0;
-            ts->text           = QString(txt[idx]);
-            ts->font           = font1;
+            ts = new TextSegment(QString(txt[idx]), font1, 0.0);
             textList.append(ts);
             }
       }

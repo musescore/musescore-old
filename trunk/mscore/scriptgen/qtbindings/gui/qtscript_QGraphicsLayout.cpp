@@ -8,6 +8,7 @@
 #include <qgraphicslayout.h>
 #include <QVariant>
 #include <qcoreevent.h>
+#include <qgraphicsitem.h>
 #include <qgraphicslayout.h>
 #include <qgraphicslayoutitem.h>
 #include <qrect.h>
@@ -53,7 +54,7 @@ static QScriptValue qtscript_QGraphicsLayout_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QGraphicsLayout::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 

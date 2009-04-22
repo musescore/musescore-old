@@ -31,7 +31,7 @@ static QScriptValue qtscript_QStyleHintReturnVariant_throw_ambiguity_error_helpe
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleHintReturnVariant::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -70,7 +70,7 @@ static const char * const qtscript_QStyleHintReturnVariant_StyleOptionVersion_ke
 static QString qtscript_QStyleHintReturnVariant_StyleOptionVersion_toStringHelper(QStyleHintReturnVariant::StyleOptionVersion value)
 {
     if ((value >= QStyleHintReturnVariant::Version) && (value <= QStyleHintReturnVariant::Version))
-        return qtscript_QStyleHintReturnVariant_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleHintReturnVariant_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleHintReturnVariant::Version)];
     return QString();
 }
 
@@ -135,7 +135,7 @@ static const char * const qtscript_QStyleHintReturnVariant_StyleOptionType_keys[
 static QString qtscript_QStyleHintReturnVariant_StyleOptionType_toStringHelper(QStyleHintReturnVariant::StyleOptionType value)
 {
     if ((value >= QStyleHintReturnVariant::Type) && (value <= QStyleHintReturnVariant::Type))
-        return qtscript_QStyleHintReturnVariant_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleHintReturnVariant_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleHintReturnVariant::Type)];
     return QString();
 }
 

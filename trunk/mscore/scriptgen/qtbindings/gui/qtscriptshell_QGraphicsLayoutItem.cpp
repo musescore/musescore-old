@@ -2,6 +2,7 @@
 
 #include <QtScript/QScriptEngine>
 #include <QVariant>
+#include <qgraphicsitem.h>
 #include <qgraphicslayoutitem.h>
 #include <qrect.h>
 #include <qsize.h>

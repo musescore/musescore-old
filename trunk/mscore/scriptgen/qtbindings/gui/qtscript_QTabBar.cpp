@@ -16,6 +16,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <qfont.h>
+#include <qgraphicsproxywidget.h>
 #include <qicon.h>
 #include <qinputcontext.h>
 #include <qkeysequence.h>
@@ -47,7 +48,9 @@ static const char * const qtscript_QTabBar_function_names[] = {
     , "insertTab"
     , "isTabEnabled"
     , "minimumSizeHint"
+    , "moveTab"
     , "removeTab"
+    , "setTabButton"
     , "setTabData"
     , "setTabEnabled"
     , "setTabIcon"
@@ -57,6 +60,7 @@ static const char * const qtscript_QTabBar_function_names[] = {
     , "setTabWhatsThis"
     , "sizeHint"
     , "tabAt"
+    , "tabButton"
     , "tabData"
     , "tabIcon"
     , "tabRect"
@@ -75,7 +79,9 @@ static const char * const qtscript_QTabBar_function_signatures[] = {
     , "int index, QIcon icon, String text\nint index, String text"
     , "int index"
     , ""
+    , "int from, int to"
     , "int index"
+    , "int index, ButtonPosition position, QWidget widget"
     , "int index, Object data"
     , "int index, bool arg__2"
     , "int index, QIcon icon"
@@ -85,6 +91,7 @@ static const char * const qtscript_QTabBar_function_signatures[] = {
     , "int index, String text"
     , ""
     , "QPoint pos"
+    , "int index, ButtonPosition position"
     , "int index"
     , "int index"
     , "int index"
@@ -102,7 +109,7 @@ static QScriptValue qtscript_QTabBar_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTabBar::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -113,6 +120,8 @@ static const QMetaObject *qtscript_QTabBar_metaObject()
 
 Q_DECLARE_METATYPE(QTabBar*)
 Q_DECLARE_METATYPE(QtScriptShell_QTabBar*)
+Q_DECLARE_METATYPE(QTabBar::SelectionBehavior)
+Q_DECLARE_METATYPE(QTabBar::ButtonPosition)
 Q_DECLARE_METATYPE(QTabBar::Shape)
 Q_DECLARE_METATYPE(QVariant)
 
@@ -128,6 +137,142 @@ static QScriptValue qtscript_create_enum_class_helper(
     proto.setProperty(QString::fromLatin1("toString"),
         engine->newFunction(toString), QScriptValue::SkipInEnumeration);
     return engine->newFunction(construct, proto, 1);
+}
+
+//
+// QTabBar::SelectionBehavior
+//
+
+static const QTabBar::SelectionBehavior qtscript_QTabBar_SelectionBehavior_values[] = {
+    QTabBar::SelectLeftTab
+    , QTabBar::SelectRightTab
+    , QTabBar::SelectPreviousTab
+};
+
+static const char * const qtscript_QTabBar_SelectionBehavior_keys[] = {
+    "SelectLeftTab"
+    , "SelectRightTab"
+    , "SelectPreviousTab"
+};
+
+static QString qtscript_QTabBar_SelectionBehavior_toStringHelper(QTabBar::SelectionBehavior value)
+{
+    if ((value >= QTabBar::SelectLeftTab) && (value <= QTabBar::SelectPreviousTab))
+        return qtscript_QTabBar_SelectionBehavior_keys[static_cast<int>(value)-static_cast<int>(QTabBar::SelectLeftTab)];
+    return QString();
+}
+
+static QScriptValue qtscript_QTabBar_SelectionBehavior_toScriptValue(QScriptEngine *engine, const QTabBar::SelectionBehavior &value)
+{
+    QScriptValue clazz = engine->globalObject().property(QString::fromLatin1("QTabBar"));
+    return clazz.property(qtscript_QTabBar_SelectionBehavior_toStringHelper(value));
+}
+
+static void qtscript_QTabBar_SelectionBehavior_fromScriptValue(const QScriptValue &value, QTabBar::SelectionBehavior &out)
+{
+    out = qvariant_cast<QTabBar::SelectionBehavior>(value.toVariant());
+}
+
+static QScriptValue qtscript_construct_QTabBar_SelectionBehavior(QScriptContext *context, QScriptEngine *engine)
+{
+    int arg = context->argument(0).toInt32();
+    if ((arg >= QTabBar::SelectLeftTab) && (arg <= QTabBar::SelectPreviousTab))
+        return qScriptValueFromValue(engine,  static_cast<QTabBar::SelectionBehavior>(arg));
+    return context->throwError(QString::fromLatin1("SelectionBehavior(): invalid enum value (%0)").arg(arg));
+}
+
+static QScriptValue qtscript_QTabBar_SelectionBehavior_valueOf(QScriptContext *context, QScriptEngine *engine)
+{
+    QTabBar::SelectionBehavior value = qscriptvalue_cast<QTabBar::SelectionBehavior>(context->thisObject());
+    return QScriptValue(engine, static_cast<int>(value));
+}
+
+static QScriptValue qtscript_QTabBar_SelectionBehavior_toString(QScriptContext *context, QScriptEngine *engine)
+{
+    QTabBar::SelectionBehavior value = qscriptvalue_cast<QTabBar::SelectionBehavior>(context->thisObject());
+    return QScriptValue(engine, qtscript_QTabBar_SelectionBehavior_toStringHelper(value));
+}
+
+static QScriptValue qtscript_create_QTabBar_SelectionBehavior_class(QScriptEngine *engine, QScriptValue &clazz)
+{
+    QScriptValue ctor = qtscript_create_enum_class_helper(
+        engine, qtscript_construct_QTabBar_SelectionBehavior,
+        qtscript_QTabBar_SelectionBehavior_valueOf, qtscript_QTabBar_SelectionBehavior_toString);
+    qScriptRegisterMetaType<QTabBar::SelectionBehavior>(engine, qtscript_QTabBar_SelectionBehavior_toScriptValue,
+        qtscript_QTabBar_SelectionBehavior_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
+    for (int i = 0; i < 3; ++i) {
+        clazz.setProperty(QString::fromLatin1(qtscript_QTabBar_SelectionBehavior_keys[i]),
+            engine->newVariant(qVariantFromValue(qtscript_QTabBar_SelectionBehavior_values[i])),
+            QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    }
+    return ctor;
+}
+
+//
+// QTabBar::ButtonPosition
+//
+
+static const QTabBar::ButtonPosition qtscript_QTabBar_ButtonPosition_values[] = {
+    QTabBar::LeftSide
+    , QTabBar::RightSide
+};
+
+static const char * const qtscript_QTabBar_ButtonPosition_keys[] = {
+    "LeftSide"
+    , "RightSide"
+};
+
+static QString qtscript_QTabBar_ButtonPosition_toStringHelper(QTabBar::ButtonPosition value)
+{
+    if ((value >= QTabBar::LeftSide) && (value <= QTabBar::RightSide))
+        return qtscript_QTabBar_ButtonPosition_keys[static_cast<int>(value)-static_cast<int>(QTabBar::LeftSide)];
+    return QString();
+}
+
+static QScriptValue qtscript_QTabBar_ButtonPosition_toScriptValue(QScriptEngine *engine, const QTabBar::ButtonPosition &value)
+{
+    QScriptValue clazz = engine->globalObject().property(QString::fromLatin1("QTabBar"));
+    return clazz.property(qtscript_QTabBar_ButtonPosition_toStringHelper(value));
+}
+
+static void qtscript_QTabBar_ButtonPosition_fromScriptValue(const QScriptValue &value, QTabBar::ButtonPosition &out)
+{
+    out = qvariant_cast<QTabBar::ButtonPosition>(value.toVariant());
+}
+
+static QScriptValue qtscript_construct_QTabBar_ButtonPosition(QScriptContext *context, QScriptEngine *engine)
+{
+    int arg = context->argument(0).toInt32();
+    if ((arg >= QTabBar::LeftSide) && (arg <= QTabBar::RightSide))
+        return qScriptValueFromValue(engine,  static_cast<QTabBar::ButtonPosition>(arg));
+    return context->throwError(QString::fromLatin1("ButtonPosition(): invalid enum value (%0)").arg(arg));
+}
+
+static QScriptValue qtscript_QTabBar_ButtonPosition_valueOf(QScriptContext *context, QScriptEngine *engine)
+{
+    QTabBar::ButtonPosition value = qscriptvalue_cast<QTabBar::ButtonPosition>(context->thisObject());
+    return QScriptValue(engine, static_cast<int>(value));
+}
+
+static QScriptValue qtscript_QTabBar_ButtonPosition_toString(QScriptContext *context, QScriptEngine *engine)
+{
+    QTabBar::ButtonPosition value = qscriptvalue_cast<QTabBar::ButtonPosition>(context->thisObject());
+    return QScriptValue(engine, qtscript_QTabBar_ButtonPosition_toStringHelper(value));
+}
+
+static QScriptValue qtscript_create_QTabBar_ButtonPosition_class(QScriptEngine *engine, QScriptValue &clazz)
+{
+    QScriptValue ctor = qtscript_create_enum_class_helper(
+        engine, qtscript_construct_QTabBar_ButtonPosition,
+        qtscript_QTabBar_ButtonPosition_valueOf, qtscript_QTabBar_ButtonPosition_toString);
+    qScriptRegisterMetaType<QTabBar::ButtonPosition>(engine, qtscript_QTabBar_ButtonPosition_toScriptValue,
+        qtscript_QTabBar_ButtonPosition_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
+    for (int i = 0; i < 2; ++i) {
+        clazz.setProperty(QString::fromLatin1(qtscript_QTabBar_ButtonPosition_keys[i]),
+            engine->newVariant(qVariantFromValue(qtscript_QTabBar_ButtonPosition_values[i])),
+            QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    }
+    return ctor;
 }
 
 //
@@ -229,7 +374,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 21;
+        _id = 0xBABE0000 + 24;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -287,6 +432,15 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     break;
 
     case 4:
+    if (context->argumentCount() == 2) {
+        int _q_arg0 = context->argument(0).toInt32();
+        int _q_arg1 = context->argument(1).toInt32();
+        _q_self->moveTab(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 5:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->removeTab(_q_arg0);
@@ -294,7 +448,17 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 5:
+    case 6:
+    if (context->argumentCount() == 3) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QTabBar::ButtonPosition _q_arg1 = qscriptvalue_cast<QTabBar::ButtonPosition>(context->argument(1));
+        QWidget* _q_arg2 = qscriptvalue_cast<QWidget*>(context->argument(2));
+        _q_self->setTabButton(_q_arg0, _q_arg1, _q_arg2);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 7:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QVariant _q_arg1 = context->argument(1).toVariant();
@@ -303,7 +467,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 6:
+    case 8:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         bool _q_arg1 = context->argument(1).toBoolean();
@@ -312,7 +476,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 7:
+    case 9:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QIcon _q_arg1 = qscriptvalue_cast<QIcon>(context->argument(1));
@@ -321,7 +485,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 8:
+    case 10:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_arg1 = context->argument(1).toString();
@@ -330,7 +494,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 9:
+    case 11:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QColor _q_arg1 = qscriptvalue_cast<QColor>(context->argument(1));
@@ -339,7 +503,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_arg1 = context->argument(1).toString();
@@ -348,7 +512,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_arg1 = context->argument(1).toString();
@@ -357,14 +521,14 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 0) {
         QSize _q_result = _q_self->sizeHint();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 1) {
         QPoint _q_arg0 = qscriptvalue_cast<QPoint>(context->argument(0));
         int _q_result = _q_self->tabAt(_q_arg0);
@@ -372,26 +536,11 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 14:
-    if (context->argumentCount() == 1) {
-        int _q_arg0 = context->argument(0).toInt32();
-        QVariant _q_result = _q_self->tabData(_q_arg0);
-        return qScriptValueFromValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 15:
-    if (context->argumentCount() == 1) {
-        int _q_arg0 = context->argument(0).toInt32();
-        QIcon _q_result = _q_self->tabIcon(_q_arg0);
-        return qScriptValueFromValue(context->engine(), _q_result);
-    }
-    break;
-
     case 16:
-    if (context->argumentCount() == 1) {
+    if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
-        QRect _q_result = _q_self->tabRect(_q_arg0);
+        QTabBar::ButtonPosition _q_arg1 = qscriptvalue_cast<QTabBar::ButtonPosition>(context->argument(1));
+        QWidget* _q_result = _q_self->tabButton(_q_arg0, _q_arg1);
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
@@ -399,15 +548,15 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     case 17:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
-        QString _q_result = _q_self->tabText(_q_arg0);
-        return QScriptValue(context->engine(), _q_result);
+        QVariant _q_result = _q_self->tabData(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 18:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
-        QColor _q_result = _q_self->tabTextColor(_q_arg0);
+        QIcon _q_result = _q_self->tabIcon(_q_arg0);
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
@@ -415,12 +564,36 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     case 19:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
+        QRect _q_result = _q_self->tabRect(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 20:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QString _q_result = _q_self->tabText(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 21:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QColor _q_result = _q_self->tabTextColor(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 22:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
         QString _q_result = _q_self->tabToolTip(_q_arg0);
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 20:
+    case 23:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_result = _q_self->tabWhatsThis(_q_arg0);
@@ -428,7 +601,7 @@ static QScriptValue qtscript_QTabBar_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 21: {
+    case 24: {
     QString result = QString::fromLatin1("QTabBar");
     return QScriptValue(context->engine(), result);
     }
@@ -493,7 +666,9 @@ QScriptValue qtscript_create_QTabBar_class(QScriptEngine *engine)
         , 3
         , 1
         , 0
+        , 2
         , 1
+        , 3
         , 2
         , 2
         , 2
@@ -503,6 +678,7 @@ QScriptValue qtscript_create_QTabBar_class(QScriptEngine *engine)
         , 2
         , 0
         , 1
+        , 2
         , 1
         , 1
         , 1
@@ -515,7 +691,7 @@ QScriptValue qtscript_create_QTabBar_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QTabBar*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTabBar*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QWidget*>()));
-    for (int i = 0; i < 22; ++i) {
+    for (int i = 0; i < 25; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTabBar_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTabBar_function_names[i+1]),
@@ -528,6 +704,10 @@ QScriptValue qtscript_create_QTabBar_class(QScriptEngine *engine)
     QScriptValue ctor = engine->newFunction(qtscript_QTabBar_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
 
+    ctor.setProperty(QString::fromLatin1("SelectionBehavior"),
+        qtscript_create_QTabBar_SelectionBehavior_class(engine, ctor));
+    ctor.setProperty(QString::fromLatin1("ButtonPosition"),
+        qtscript_create_QTabBar_ButtonPosition_class(engine, ctor));
     ctor.setProperty(QString::fromLatin1("Shape"),
         qtscript_create_QTabBar_Shape_class(engine, ctor));
     return ctor;

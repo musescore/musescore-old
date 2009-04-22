@@ -103,11 +103,21 @@ struct ChordDescription {
 //   TextSegment
 //---------------------------------------------------------
 
-struct TextSegment {
+class TextSegment {
+
+   public:
+      QFont font;
       QString text;
       double baseLineOffset;
-      QFont font;
-      double width;
+      double width;           // cached string width
+
+      TextSegment() { baseLineOffset = 0.0; }
+      TextSegment(const QString&, const QFont&, double offset = 0.0);
+      void set(const QString&, const QFont&, double offset);
+      void setFont(const QFont& f) { font = f; }
+      void setText(const QString&);       // font must be set first
+      void setOffset(double o)     { baseLineOffset = o; }
+      double offset() const { return baseLineOffset; }
       };
 
 //---------------------------------------------------------

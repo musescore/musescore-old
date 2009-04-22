@@ -33,7 +33,7 @@ static QScriptValue qtscript_QStyleOptionGraphicsItem_throw_ambiguity_error_help
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStyleOptionGraphicsItem::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -74,7 +74,7 @@ static const char * const qtscript_QStyleOptionGraphicsItem_StyleOptionVersion_k
 static QString qtscript_QStyleOptionGraphicsItem_StyleOptionVersion_toStringHelper(QStyleOptionGraphicsItem::StyleOptionVersion value)
 {
     if ((value >= QStyleOptionGraphicsItem::Version) && (value <= QStyleOptionGraphicsItem::Version))
-        return qtscript_QStyleOptionGraphicsItem_StyleOptionVersion_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionGraphicsItem_StyleOptionVersion_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionGraphicsItem::Version)];
     return QString();
 }
 
@@ -139,7 +139,7 @@ static const char * const qtscript_QStyleOptionGraphicsItem_StyleOptionType_keys
 static QString qtscript_QStyleOptionGraphicsItem_StyleOptionType_toStringHelper(QStyleOptionGraphicsItem::StyleOptionType value)
 {
     if ((value >= QStyleOptionGraphicsItem::Type) && (value <= QStyleOptionGraphicsItem::Type))
-        return qtscript_QStyleOptionGraphicsItem_StyleOptionType_keys[static_cast<int>(value)];
+        return qtscript_QStyleOptionGraphicsItem_StyleOptionType_keys[static_cast<int>(value)-static_cast<int>(QStyleOptionGraphicsItem::Type)];
     return QString();
 }
 

@@ -66,7 +66,7 @@ static QScriptValue qtscript_QFormLayout_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QFormLayout::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -256,11 +256,13 @@ static QScriptValue qtscript_create_QFormLayout_RowWrapPolicy_class(QScriptEngin
 static const QFormLayout::ItemRole qtscript_QFormLayout_ItemRole_values[] = {
     QFormLayout::LabelRole
     , QFormLayout::FieldRole
+    , QFormLayout::SpanningRole
 };
 
 static const char * const qtscript_QFormLayout_ItemRole_keys[] = {
     "LabelRole"
     , "FieldRole"
+    , "SpanningRole"
 };
 
 static QString qtscript_QFormLayout_ItemRole_toStringHelper(QFormLayout::ItemRole value)
@@ -314,7 +316,7 @@ static QScriptValue qtscript_create_QFormLayout_ItemRole_class(QScriptEngine *en
         qtscript_QFormLayout_ItemRole_valueOf, qtscript_QFormLayout_ItemRole_toString);
     qScriptRegisterMetaType<QFormLayout::ItemRole>(engine, qtscript_QFormLayout_ItemRole_toScriptValue,
         qtscript_QFormLayout_ItemRole_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QFormLayout_ItemRole_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QFormLayout_ItemRole_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);

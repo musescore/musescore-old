@@ -145,7 +145,7 @@ static QScriptValue qtscript_QPrinter_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QPrinter::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -201,7 +201,7 @@ static const char * const qtscript_QPrinter_OutputFormat_keys[] = {
 static QString qtscript_QPrinter_OutputFormat_toStringHelper(QPrinter::OutputFormat value)
 {
     if ((value >= QPrinter::NativeFormat) && (value <= QPrinter::PostScriptFormat))
-        return qtscript_QPrinter_OutputFormat_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_OutputFormat_keys[static_cast<int>(value)-static_cast<int>(QPrinter::NativeFormat)];
     return QString();
 }
 
@@ -272,7 +272,7 @@ static const char * const qtscript_QPrinter_DuplexMode_keys[] = {
 static QString qtscript_QPrinter_DuplexMode_toStringHelper(QPrinter::DuplexMode value)
 {
     if ((value >= QPrinter::DuplexNone) && (value <= QPrinter::DuplexShortSide))
-        return qtscript_QPrinter_DuplexMode_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_DuplexMode_keys[static_cast<int>(value)-static_cast<int>(QPrinter::DuplexNone)];
     return QString();
 }
 
@@ -341,7 +341,7 @@ static const char * const qtscript_QPrinter_PrintRange_keys[] = {
 static QString qtscript_QPrinter_PrintRange_toStringHelper(QPrinter::PrintRange value)
 {
     if ((value >= QPrinter::AllPages) && (value <= QPrinter::PageRange))
-        return qtscript_QPrinter_PrintRange_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PrintRange_keys[static_cast<int>(value)-static_cast<int>(QPrinter::AllPages)];
     return QString();
 }
 
@@ -418,7 +418,7 @@ static const char * const qtscript_QPrinter_Unit_keys[] = {
 static QString qtscript_QPrinter_Unit_toStringHelper(QPrinter::Unit value)
 {
     if ((value >= QPrinter::Millimeter) && (value <= QPrinter::DevicePixel))
-        return qtscript_QPrinter_Unit_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_Unit_keys[static_cast<int>(value)-static_cast<int>(QPrinter::Millimeter)];
     return QString();
 }
 
@@ -487,7 +487,7 @@ static const char * const qtscript_QPrinter_PrinterMode_keys[] = {
 static QString qtscript_QPrinter_PrinterMode_toStringHelper(QPrinter::PrinterMode value)
 {
     if ((value >= QPrinter::ScreenResolution) && (value <= QPrinter::HighResolution))
-        return qtscript_QPrinter_PrinterMode_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PrinterMode_keys[static_cast<int>(value)-static_cast<int>(QPrinter::ScreenResolution)];
     return QString();
 }
 
@@ -554,7 +554,7 @@ static const char * const qtscript_QPrinter_Orientation_keys[] = {
 static QString qtscript_QPrinter_Orientation_toStringHelper(QPrinter::Orientation value)
 {
     if ((value >= QPrinter::Portrait) && (value <= QPrinter::Landscape))
-        return qtscript_QPrinter_Orientation_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_Orientation_keys[static_cast<int>(value)-static_cast<int>(QPrinter::Portrait)];
     return QString();
 }
 
@@ -625,7 +625,7 @@ static const char * const qtscript_QPrinter_PrinterState_keys[] = {
 static QString qtscript_QPrinter_PrinterState_toStringHelper(QPrinter::PrinterState value)
 {
     if ((value >= QPrinter::Idle) && (value <= QPrinter::Error))
-        return qtscript_QPrinter_PrinterState_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PrinterState_keys[static_cast<int>(value)-static_cast<int>(QPrinter::Idle)];
     return QString();
 }
 
@@ -692,7 +692,7 @@ static const char * const qtscript_QPrinter_ColorMode_keys[] = {
 static QString qtscript_QPrinter_ColorMode_toStringHelper(QPrinter::ColorMode value)
 {
     if ((value >= QPrinter::GrayScale) && (value <= QPrinter::Color))
-        return qtscript_QPrinter_ColorMode_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_ColorMode_keys[static_cast<int>(value)-static_cast<int>(QPrinter::GrayScale)];
     return QString();
 }
 
@@ -783,7 +783,7 @@ static const char * const qtscript_QPrinter_PaperSource_keys[] = {
 static QString qtscript_QPrinter_PaperSource_toStringHelper(QPrinter::PaperSource value)
 {
     if ((value >= QPrinter::OnlyOne) && (value <= QPrinter::MaxPageSource))
-        return qtscript_QPrinter_PaperSource_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PaperSource_keys[static_cast<int>(value)-static_cast<int>(QPrinter::OnlyOne)];
     return QString();
 }
 
@@ -850,7 +850,7 @@ static const char * const qtscript_QPrinter_PageOrder_keys[] = {
 static QString qtscript_QPrinter_PageOrder_toStringHelper(QPrinter::PageOrder value)
 {
     if ((value >= QPrinter::FirstPageFirst) && (value <= QPrinter::LastPageFirst))
-        return qtscript_QPrinter_PageOrder_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PageOrder_keys[static_cast<int>(value)-static_cast<int>(QPrinter::FirstPageFirst)];
     return QString();
 }
 
@@ -975,7 +975,7 @@ static const char * const qtscript_QPrinter_PageSize_keys[] = {
 static QString qtscript_QPrinter_PageSize_toStringHelper(QPrinter::PageSize value)
 {
     if ((value >= QPrinter::A4) && (value <= QPrinter::Custom))
-        return qtscript_QPrinter_PageSize_keys[static_cast<int>(value)];
+        return qtscript_QPrinter_PageSize_keys[static_cast<int>(value)-static_cast<int>(QPrinter::A4)];
     return QString();
 }
 
