@@ -114,8 +114,13 @@ bool LoadFile::load(const QString& name)
             return true;
 
       QFile fp(name);
-      if (!fp.open(QIODevice::ReadOnly))
+      if (!fp.open(QIODevice::ReadOnly)) {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: file not found:"),
+               name,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return true;
+            }
       if (loader(&fp)) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: load failed:"),
