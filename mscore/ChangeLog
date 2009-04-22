@@ -1,4 +1,6 @@
-22.apr (ws)
+22.apr (lv)
+      - check for and report "file not found" error
+       (ws)
       - changed default style for lyrics odd/even lines to be the same (no italic any more)
       - fix script initialization (colornotes.js)
       - fix crash when inserting new staff above
