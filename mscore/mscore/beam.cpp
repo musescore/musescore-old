@@ -571,7 +571,7 @@ void Beam::layout1(ScoreLayout*)
       // done twice for beamed chords:
 #if 0 // CS1
       foreach(ChordRest* cr, _elements)
-            cr->layoutAttributes(layout);
+            cr->layoutArticulations(layout);
 #endif
       }
 

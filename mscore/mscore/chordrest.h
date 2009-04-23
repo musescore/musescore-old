@@ -105,7 +105,7 @@ class ChordRest : public DurationElement {
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }
       void setLen(int ticks);
-      void layoutAttributes(ScoreLayout*);
+      void layoutArticulations(ScoreLayout*);
       Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
       void setExtraLeadingSpace(Spatium v)      { _extraLeadingSpace = v;     }
       Spatium extraTrailingSpace() const        { return _extraTrailingSpace; }

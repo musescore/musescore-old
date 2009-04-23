@@ -486,11 +486,11 @@ void Canvas::modifyElement(Element* el)
             return;
             }
       switch (el->type()) {
-            case ATTRIBUTE:
+            case ARTICULATION:
                   chord->add((Articulation*)el);
                   break;
             default:
-                  printf("modifyElement: %s not ATTRIBUTE\n", el->name());
+                  printf("modifyElement: %s not ARTICULATION\n", el->name());
                   delete el;
                   return;
             }
@@ -662,10 +662,10 @@ void Score::cmdSetBeamMode(int mode)
       }
 
 //---------------------------------------------------------
-//   cmdFlipStemDirection
+//   cmdFlip
 //---------------------------------------------------------
 
-void Score::cmdFlipStemDirection()
+void Score::cmdFlip()
       {
       QList<Element*>* el = sel->elements();
       if (el->isEmpty()) {
@@ -720,6 +720,15 @@ void Score::cmdFlipStemDirection()
             else if (e->type() == HAIRPIN_SEGMENT) {
                   Hairpin* hp = static_cast<HairpinSegment*>(e)->hairpin();
                   _undo->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
+                  }
+            else if (e->type() == ARTICULATION) {
+                  int newSubtype = -1;
+                  if (e->subtype() == UfermataSym)
+                        newSubtype = DfermataSym;
+                  else if (e->subtype() == DfermataSym)
+                        newSubtype = UfermataSym;
+                  if (newSubtype != e->subtype())
+                        _undo->push(new ChangeSubtype(e, newSubtype));
                   }
             }
       layoutAll = true;
@@ -820,7 +829,7 @@ void Score::deleteItem(Element* el)
             case COMPOUND:
             case DYNAMIC:
             case LYRICS:
-            case ATTRIBUTE:
+            case ARTICULATION:
             case BRACKET:
             case VOLTA:
             case LAYOUT_BREAK:

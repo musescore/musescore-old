@@ -1296,10 +1296,11 @@ marker:
             }
       }
 
-//---------------------------------------------------------
+//-------------------------------------------------------------------
 //   moveTicks
-//    also adjust endBarLine if measure len has changed
-//---------------------------------------------------------
+//    Also adjust endBarLine if measure len has changed. For this
+//    diff == 0 cannot be optimized away
+//-------------------------------------------------------------------
 
 void Measure::moveTicks(int diff)
       {
@@ -1311,16 +1312,19 @@ void Measure::moveTicks(int diff)
       for (Segment* segment = first(); segment; segment = segment->next()) {
             int ltick;
             if ((segment->subtype() == Segment::SegEndBarLine)
-               || (segment->subtype() == Segment::SegTimeSigAnnounce))
+               || (segment->subtype() == Segment::SegTimeSigAnnounce)) {
                   ltick = tick() + tickLen();
-            else
+                  }
+            else {
                   ltick = segment->tick() + diff;
+                  }
             segment->setTick(ltick);
 
             for (int track = 0; track < tracks; ++track) {
                   Element* e = segment->element(track);
                   if (e)
-                        e->setTick(e->tick() + diff);
+                        // e->setTick(e->tick() + diff);
+                        e->setTick(ltick);
                   }
             for (int staff = 0; staff < staves; ++staff) {
                   const LyricsList* ll = segment->lyricsList(staff);

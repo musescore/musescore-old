@@ -1,3 +1,6 @@
+23.apr (ws)
+      - fix: time signature changes cause extra bar lines at end
+      - new command: "x" flips between up fermata and down fermata
 22.apr (lv)
       - check for and report "file not found" error
        (ws)

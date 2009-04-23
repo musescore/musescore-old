@@ -94,7 +94,7 @@ class Articulation : public Symbol {
       Articulation &operator=(const Articulation&);
 
       virtual Articulation* clone() const { return new Articulation(*this); }
-      virtual ElementType type() const     { return ATTRIBUTE; }
+      virtual ElementType type() const     { return ARTICULATION; }
 
       virtual void setSubtype(int);
       virtual void read(QDomElement);

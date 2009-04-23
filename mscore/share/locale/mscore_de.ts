@@ -1357,11 +1357,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation>Oberste Notenzeile</translation>
+        <translation>Notenzeile oben</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation>Unterste Notenzeile</translation>
+        <translation>Notenzeile unten</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1369,11 +1369,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>TopChord</source>
-        <translation>Oberster Akkord</translation>
+        <translation>Akkord oben</translation>
     </message>
     <message>
         <source>BottomChord</source>
-        <translation>Unterster Akkord</translation>
+        <translation>Akkord unten</translation>
     </message>
 </context>
 <context>
@@ -4990,10 +4990,6 @@ before closing?</source>
         <translation>Rückschritt</translation>
     </message>
     <message>
-        <source>find</source>
-        <translation>suchen</translation>
-    </message>
-    <message>
         <source>Search: </source>
         <translation>Suchen:</translation>
     </message>
@@ -5032,6 +5028,22 @@ before closing?</source>
     <message>
         <source>MuseScore: Layout Breaks</source>
         <translation>MuseScore: Layout Umbrüche</translation>
+    </message>
+    <message>
+        <source>search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load template file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> failed</source>
+        <translation type="unfinished"> fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -7631,58 +7643,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>clefTable</name>
     <message>
-        <source>Treble Clef (G Clef)</source>
-        <translation>Violinenschlüssel (G)</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va</source>
-        <translation>Violinenschlüssel 8va</translation>
-    </message>
-    <message>
-        <source>Treble Clef 15ma</source>
-        <translation>Violinenschlüssel 15ma</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va bassa</source>
-        <translation>Violinenschlüssel 8va bassa</translation>
-    </message>
-    <message>
-        <source>Bass Clef (F Clef)</source>
-        <translation>Bassschlüssel (F)</translation>
-    </message>
-    <message>
-        <source>Bass Clef 8va bassa</source>
-        <translation>Bassschlüssel 8va bassa</translation>
-    </message>
-    <message>
-        <source>Bass Clef 15mb bassa</source>
-        <translation>Bassschlüssel 15mb bassa</translation>
-    </message>
-    <message>
-        <source>Baritone Clef</source>
-        <translation>Baritonschlüssel</translation>
-    </message>
-    <message>
-        <source>Subbass Clef</source>
-        <translation>Subbassschlüssel</translation>
-    </message>
-    <message>
-        <source>Soprano Clef</source>
-        <translation>Sopranschlüssel</translation>
-    </message>
-    <message>
-        <source>Mezzo-soprano Clef</source>
-        <translation>Mezzosopranschlüssel</translation>
-    </message>
-    <message>
-        <source>Alto Clef</source>
-        <translation>Altschlüssel</translation>
-    </message>
-    <message>
-        <source>Tenor Clef</source>
-        <translation>Tenorschlüssel</translation>
-    </message>
-    <message>
         <source>Tablature</source>
         <translation>Tabulatur</translation>
     </message>
@@ -7691,8 +7651,72 @@ p, li { white-space: pre-wrap; }
         <translation>Schlagzeug</translation>
     </message>
     <message>
-        <source>French Violin Clef</source>
-        <translation>Französischer Violinschlüssel</translation>
+        <source>Treble clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble clef 8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble clef 15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble clef 8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass clef 8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass clef 15mb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baritone clef (C clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subbass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alto clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tenor clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baritone clef (F clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>French violin clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass clef 8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass clef 15ma</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

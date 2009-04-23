@@ -1,216 +1,199 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MeasureBase</class>
- <widget class="QWidget" name="MeasureBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MeasureBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
+    <width>570</width>
     <height>355</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QGroupBox" name="MeasureBase_2" >
-     <property name="title" >
+  <layout class="QGridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="MeasureBase_2">
+     <property name="title">
       <string>Measure</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" >
-      <property name="leftMargin" >
-       <number>9</number>
-      </property>
-      <property name="topMargin" >
-       <number>9</number>
-      </property>
-      <property name="rightMargin" >
-       <number>9</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>9</number>
-      </property>
-      <property name="horizontalSpacing" >
+     <layout class="QGridLayout">
+      <property name="horizontalSpacing">
        <number>6</number>
       </property>
-      <property name="verticalSpacing" >
-       <number>6</number>
+      <property name="verticalSpacing">
+       <number>0</number>
       </property>
-      <item row="4" column="0" colspan="6" >
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
+      <property name="margin">
+       <number>9</number>
+      </property>
+      <item row="4" column="0" colspan="6">
+       <layout class="QHBoxLayout">
+        <property name="spacing">
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="lineBreak" >
-          <property name="text" >
+         <widget class="QCheckBox" name="lineBreak">
+          <property name="text">
            <string>Line Break</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="pageBreak" >
-          <property name="text" >
+         <widget class="QCheckBox" name="pageBreak">
+          <property name="text">
            <string>Page Break</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="irregular" >
-          <property name="text" >
+         <widget class="QCheckBox" name="irregular">
+          <property name="text">
            <string>Irregular</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="startRepeat" >
-          <property name="text" >
+         <widget class="QCheckBox" name="startRepeat">
+          <property name="text">
            <string>StartRepeat</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
-      <item row="1" column="5" >
-       <widget class="QSpinBox" name="measureNo" />
+      <item row="1" column="5">
+       <widget class="QSpinBox" name="measureNo"/>
       </item>
-      <item row="1" column="4" >
-       <widget class="QLabel" name="label_8" >
-        <property name="text" >
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
          <string>No.:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" >
-       <widget class="QLabel" name="label_7" >
-        <property name="text" >
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
          <string>Beams:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="5" >
-       <widget class="QSpinBox" name="beams" />
+      <item row="0" column="5">
+       <widget class="QSpinBox" name="beams"/>
       </item>
-      <item row="2" column="3" >
-       <widget class="QDoubleSpinBox" name="stretch" />
+      <item row="2" column="3">
+       <widget class="QDoubleSpinBox" name="stretch"/>
       </item>
-      <item row="1" column="3" >
-       <widget class="QSpinBox" name="pageElements" />
+      <item row="1" column="3">
+       <widget class="QSpinBox" name="pageElements"/>
       </item>
-      <item row="2" column="2" >
-       <widget class="QLabel" name="label_6" >
-        <property name="text" >
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
          <string>Stretch:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" >
-       <widget class="QSpinBox" name="staves" />
+      <item row="0" column="3">
+       <widget class="QSpinBox" name="staves"/>
       </item>
-      <item row="1" column="2" >
-       <widget class="QLabel" name="label_5" >
-        <property name="text" >
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
          <string>PageElem:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QLabel" name="label_4" >
-        <property name="text" >
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
          <string>Staves:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
-       <widget class="QSpinBox" name="noOffset" />
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="noOffset"/>
       </item>
-      <item row="1" column="1" >
-       <widget class="QSpinBox" name="tuplets" />
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="tuplets"/>
       </item>
-      <item row="2" column="0" >
-       <widget class="QLabel" name="label_3" >
-        <property name="text" >
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
          <string>NoOffset:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
          <string>Tuplets:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QSpinBox" name="segments" />
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="segments"/>
       </item>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
          <string>Segments:</string>
         </property>
-        <property name="textFormat" >
+        <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="2" column="5" >
-       <widget class="QSpinBox" name="endRepeat" />
+      <item row="2" column="5">
+       <widget class="QSpinBox" name="endRepeat"/>
       </item>
-      <item row="2" column="4" >
-       <widget class="QLabel" name="label_9" >
-        <property name="text" >
+      <item row="2" column="4">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
          <string>EndRep:</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1" >
-       <widget class="QLineEdit" name="repeatFlags" >
-        <property name="readOnly" >
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="repeatFlags">
+        <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" >
-       <widget class="QLabel" name="label_13" >
-        <property name="text" >
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
          <string>RepeatFLags:</string>
         </property>
        </widget>
@@ -218,22 +201,22 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="label_11" >
-     <property name="text" >
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
       <string>Elements:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="QTreeWidget" name="sel" >
+   <item row="2" column="0">
+    <widget class="QTreeWidget" name="sel">
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Element</string>
       </property>
      </column>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Subtype</string>
       </property>
      </column>

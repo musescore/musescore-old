@@ -62,10 +62,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       headers << tr("Symbol") << tr("Anchor");
       articulationTable->setHorizontalHeaderLabels(headers);
       articulationTable->setColumnWidth(0, 200);
-      articulationTable->setColumnWidth(1, 150);
-      QStringList ci;
-      ci << tr("TopStaff") << tr("BottomStaff") << tr("Chord") << tr("TopChord")
-         << tr("BottomChord");
+      articulationTable->setColumnWidth(1, 180);
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
@@ -74,7 +71,9 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
             articulationTable->setItem(i, 0, item);
 
             QComboBox* cb = new QComboBox();
-            cb->addItems(ci);
+            cb->addItem(tr("TopStaff"), A_TOP_STAFF);
+            cb->addItem(tr("BottomStaff"), A_BOTTOM_STAFF);
+            cb->addItem(tr("Chord"), A_CHORD);
             articulationTable->setCellWidget(i, 1, cb);
             }
       setValues();
@@ -186,7 +185,7 @@ void EditStyle::getValues()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
-            lstyle[STYLE_TYPE(ST_UfermataAnchor + i)] = StyleVal(cb->currentIndex());
+            lstyle[STYLE_TYPE(ST_UfermataAnchor + i)] = StyleVal(cb->itemData(cb->currentIndex()).toInt());
             }
       }
 
@@ -283,7 +282,15 @@ void EditStyle::setValues()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
-            cb->setCurrentIndex(lstyle[STYLE_TYPE(ST_UfermataAnchor + i)].toInt());
+            int st  = lstyle[STYLE_TYPE(ST_UfermataAnchor + i)].toInt();
+            int idx = 0;
+            if (st == A_TOP_STAFF)
+                  idx = 0;
+            else if (st == A_BOTTOM_STAFF)
+                  idx = 1;
+            else if (st == A_CHORD)
+                  idx = 2;
+            cb->setCurrentIndex(idx);
             }
       }
 

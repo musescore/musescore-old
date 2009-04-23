@@ -369,7 +369,7 @@ void Chord::add(Element* e)
                   }
             note->setType(duration());
             }
-      else if (e->type() == ATTRIBUTE)
+      else if (e->type() == ARTICULATION)
             articulations.push_back(static_cast<Articulation*>(e));
       else if (e->type() == ARPEGGIO)
             _arpeggio = static_cast<Arpeggio*>(e);
@@ -416,7 +416,7 @@ void Chord::remove(Element* e)
             if (i == notes.end())
                   printf("Chord::remove() note %p not found!\n", e);
             }
-      else if (e->type() == ATTRIBUTE) {
+      else if (e->type() == ARTICULATION) {
             if (!articulations.removeOne(static_cast<Articulation*>(e)))
                   printf("Chord::remove(): attribute not found\n");
             }
@@ -973,11 +973,7 @@ void Chord::layout(ScoreLayout* layout)
       foreach(LedgerLine* l, _ledgerLines)
             l->layout(layout);
 
-      //-----------------------------------------
-      //  articulation
-      //-----------------------------------------
-
-      layoutAttributes(layout);
+      layoutArticulations(layout);
 
       //-----------------------------------------
       //  Fingering
