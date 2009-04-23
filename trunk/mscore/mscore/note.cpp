@@ -812,7 +812,7 @@ QRectF ShadowNote::bbox() const
 
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
-      if (type == ATTRIBUTE
+      if (type == ARTICULATION
          || type == TEXT
          || type == ACCIDENTAL
          || type == BREATH
@@ -854,7 +854,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
       Chord* ch = chord();
       switch(e->type()) {
-            case ATTRIBUTE:
+            case ARTICULATION:
                   {
                   Articulation* atr = (Articulation*)e;
                   Articulation* oa = ch->hasArticulation(atr);

@@ -95,7 +95,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "RepeatMeasure"),
       QT_TRANSLATE_NOOP("elementName", "Image"),
       QT_TRANSLATE_NOOP("elementName", "Tie"),
-      QT_TRANSLATE_NOOP("elementName", "Attribute"),
+      QT_TRANSLATE_NOOP("elementName", "Articulation"),
       QT_TRANSLATE_NOOP("elementName", "Dynamic"),
       QT_TRANSLATE_NOOP("elementName", "Page"),
       QT_TRANSLATE_NOOP("elementName", "Beam"),
@@ -1195,7 +1195,7 @@ Element* Element::create(ElementType type, Score* score)
             case BREATH:            return new Breath(score);
             case GLISSANDO:         return new Glissando(score);
             case BRACKET:           return new Bracket(score);
-            case ATTRIBUTE:         return new Articulation(score);
+            case ARTICULATION:      return new Articulation(score);
             case ACCIDENTAL:        return new Accidental(score);
             case DYNAMIC:           return new Dynamic(score);
             case TEXT:              return new Text(score);
@@ -1285,7 +1285,7 @@ const char* Element::name(ElementType type)
             case REPEAT_MEASURE:    return "RepeatMeasure";
             case IMAGE:             return "Image";
             case TIE:               return "Tie";
-            case ATTRIBUTE:         return "Attribute";
+            case ARTICULATION:      return "Articulation";
             case DYNAMIC:           return "Dynamic";
             case PAGE:              return "Page";
             case BEAM:              return "Beam";

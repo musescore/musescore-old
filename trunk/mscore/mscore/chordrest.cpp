@@ -231,7 +231,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
                   bm = i;
             _beamMode = BeamMode(bm);
             }
-      else if (tag == "Attribute") {
+      else if (tag == "Attribute" || tag == "Articulation") {     // obsolete: "Attribute"
             Articulation* atr = new Articulation(score());
             atr->read(e);
             add(atr);
@@ -324,28 +324,29 @@ void ChordRest::setSmall(bool val)
       }
 
 //---------------------------------------------------------
-//   layoutAttributes
+//   layoutArticulations
 //---------------------------------------------------------
 
-void ChordRest::layoutAttributes(ScoreLayout* layout)
+void ChordRest::layoutArticulations(ScoreLayout* layout)
       {
-      double _spatium = layout->spatium();
+      double _spatium  = layout->spatium();
+      Measure* m       = measure();
+      System* s        = m->system();
+      int idx          = staff()->rstaff();
+      qreal x          = centerX();
 
-      Measure* m = measure();
-      System* s  = m->system();
-      int idx    = staff()->rstaff();
-      qreal x    = centerX();
       double distance  = point(score()->styleS(ST_propertyDistance));
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));
       double distance2 = point(score()->styleS(ST_propertyDistanceStem));
 
-      qreal sy   = distance1; // TODO: style parameter: distance to top/bottom line
-      qreal sy2  = distance2;
+      qreal sy   = distance1;
+//      qreal sy2  = distance2;
 
-      qreal chordTopY = upPos()   - point(score()->styleS(ST_propertyDistanceStem)) - sy2;
-      qreal chordBotY = downPos() + point(score()->styleS(ST_propertyDistanceHead)) + sy2;
-      qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - sy;
-      qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + sy;
+      qreal chordTopY = upPos()   - point(score()->styleS(ST_propertyDistanceStem)) - sy;
+      qreal chordBotY = downPos() + point(score()->styleS(ST_propertyDistanceHead)) + sy;
+
+      qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - distance2;
+      qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + distance2;
 
       qreal dyTop = 0;
       qreal dyBot = 0;
@@ -364,7 +365,9 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
 
             aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
             if (aa == A_TOP_CHORD) {
-                  dyTop += bb.top();
+                  if (a->subtype() != TenutoSym)
+                        dyTop += bb.top();
+
                   y = chordTopY + dyTop;
                   //
                   // check for collision with staff line
@@ -378,10 +381,14 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                               }
                         }
                   a->setPos(x, y);
-                  dyTop -= (distance + bb.bottom());
+                  if (a->subtype() == TenutoSym)
+                        dyTop -= distance;
+                  else
+                        dyTop -= (distance + bb.bottom());
                   }
             else if (aa == A_BOTTOM_CHORD) {
-                  dyBot -= bb.bottom();
+                  if (a->subtype() != TenutoSym)
+                        dyBot -= bb.bottom();
                   y = chordBotY - dyBot;
                   //
                   // check for collision with staff line
@@ -395,7 +402,10 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                               }
                         }
                   a->setPos(x, y);
-                  dyBot -= (distance - bb.top());
+                  if (a->subtype() == TenutoSym)
+                        dyBot -= distance;
+                  else
+                        dyBot -= (distance - bb.top());
                   }
             }
 

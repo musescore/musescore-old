@@ -1931,9 +1931,9 @@ void Score::cmd(const QString& cmd)
             // Hack for moving articulations while selected
             //
             Element* el = sel->element();
-            if (el && el->type() == ATTRIBUTE && cmd == "pitch-up")
+            if (el && el->type() == ARTICULATION && cmd == "pitch-up")
                   cmdMove(el, QPointF(0.0, -.25));
-            else if (el && el->type() == ATTRIBUTE && cmd == "pitch-down")
+            else if (el && el->type() == ARTICULATION && cmd == "pitch-down")
                   cmdMove(el, QPointF(0.0, .25));
 
             else if (cmd == "append-measure")
@@ -2174,7 +2174,7 @@ void Score::cmd(const QString& cmd)
                   addAccidental(_is.prefix);
                   }
             else if (cmd == "flip")
-                  cmdFlipStemDirection();
+                  cmdFlip();
             else if (cmd == "voice-1")
                   changeVoice(0);
             else if (cmd == "voice-2")

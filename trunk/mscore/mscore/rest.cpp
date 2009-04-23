@@ -167,8 +167,8 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ICON && subtype == ICON_NBEAM)
          || (type == ICON && subtype == ICON_BEAM32)
          || (type == ICON && subtype == ICON_AUTOBEAM)
-         || (type == ATTRIBUTE && subtype == UfermataSym)
-         || (type == ATTRIBUTE && subtype == DfermataSym)
+         || (type == ARTICULATION && subtype == UfermataSym)
+         || (type == ARTICULATION && subtype == DfermataSym)
          || (type == CLEF)
          || (type == STAFF_TEXT)
          || (type == BAR_LINE)
@@ -190,7 +190,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
       switch (e->type()) {
-            case ATTRIBUTE:
+            case ARTICULATION:
                   if (e->subtype() == UfermataSym || e->subtype() == DfermataSym)
                         score()->addArticulation(this, (Articulation*)e);
                   return 0;
@@ -301,7 +301,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
 
 void Rest::add(Element* e)
       {
-      if (e->type() != ATTRIBUTE)
+      if (e->type() != ARTICULATION)
             return;
       e->setParent(this);
       e->setTrack(track());
@@ -314,7 +314,7 @@ void Rest::add(Element* e)
 
 void Rest::remove(Element* e)
       {
-      if (e->type() != ATTRIBUTE)
+      if (e->type() != ARTICULATION)
             return;
       int idx = articulations.indexOf((Articulation*)e);
       if (idx == -1)
@@ -384,7 +384,7 @@ void Rest::setDuration(Duration dt)
 void Rest::layout(ScoreLayout* l)
       {
       setDuration(duration());      // apply mag
-      layoutAttributes(l);
+      layoutArticulations(l);
       Element::layout(l);
       }
 

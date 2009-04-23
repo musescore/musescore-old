@@ -100,7 +100,7 @@ void Articulation::read(QDomElement e)
 
 void Articulation::write(Xml& xml) const
       {
-      xml.stag("Attribute");
+      xml.stag("Articulation");
       if (!_channelName.isEmpty())
             xml.tagE(QString("channel name=\"%1\"").arg(_channelName));
       Element::writeProperties(xml);

@@ -1603,7 +1603,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case TIMESIG:
                   case BREATH:
                   case GLISSANDO:
-                  case ATTRIBUTE:
+                  case ARTICULATION:
                   case ACCIDENTAL:
                   case DYNAMIC:
                   case TEXT:
@@ -1728,7 +1728,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case BREATH:
                   case GLISSANDO:
                   case BRACKET:
-                  case ATTRIBUTE:
+                  case ARTICULATION:
                   case ACCIDENTAL:
                   case TEXT:
                   case TEMPO_TEXT:
@@ -1875,7 +1875,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case BREATH:
                   case GLISSANDO:
                   case BRACKET:
-                  case ATTRIBUTE:
+                  case ARTICULATION:
                   case ACCIDENTAL:
                   case TEXT:
                   case TEMPO_TEXT:
