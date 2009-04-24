@@ -1800,6 +1800,16 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             		else
             			  domError(ee);
 					}
+            else if (e.tagName() == "measure-style")
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "multiple-rest") {
+                              int multipleRest = ee.text().toInt();
+                              printf("ImportMusicXml: multiple-rest %d not supported\n",
+                                      multipleRest);
+                              }
+                        else
+                              domError(ee);
+                        }
             else
                   domError(e);
             }
@@ -1816,8 +1826,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   }
             else  {
                   if (!timeSymbol.isEmpty()) {
-                        printf("ImportMusicXml: time symbol <%s> not recognized\n",
-                           qPrintable(timeSymbol));
+                        printf("ImportMusicXml: time symbol <%s> not recognized with beats=%s and beat-type=%s\n",
+                           qPrintable(timeSymbol), qPrintable(beats), qPrintable(beatType));
                         }
 
                   btp = beatType.toInt();
