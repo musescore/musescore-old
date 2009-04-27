@@ -1,3 +1,5 @@
+27.apr (db)
+      - Change CMakeLists.txt to workaround NSIS bug creating Windows installer
 24.apr (lv)
       - MusicXML parsing of multiple-rest
 23.apr (ws)
