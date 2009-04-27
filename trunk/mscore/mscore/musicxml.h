@@ -139,6 +139,8 @@ class MusicXml {
       int tick;         ///< Current position in MusicXML time
       int maxtick;      ///< Maxtick of a measure, used to calculate measure len
       int lastMeasureLen;
+      unsigned int multiMeasureRestCount;       ///< Remaining measures in a multi measure rest
+      bool startMultiMeasureRest;               ///< Multi measure rest started in this measure
 
       int lastLen;      ///< Needed for chords
       int maxLyrics;

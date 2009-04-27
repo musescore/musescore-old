@@ -340,6 +340,9 @@ void MusicXml::import(Score* s)
       trill = 0;
       pedal = 0;
 
+      // TODO only if multi-measure rests used ???
+      score->setStyle(ST_createMultiMeasureRests, StyleVal(true));
+
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
                   scorePartwise(e.firstChildElement());
@@ -885,9 +888,11 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             printf("Import MusicXml:xmlPart: cannot find part %s\n", id.toLatin1().data());
             exit(-1);
             }
-      tick           = 0;
-      maxtick        = 0;
-      lastMeasureLen = 0;
+      tick                  = 0;
+      maxtick               = 0;
+      lastMeasureLen        = 0;
+      multiMeasureRestCount = 0;
+      startMultiMeasureRest = false;
 
       if (!score->measures()->first()) {
             doCredits();
@@ -1173,6 +1178,26 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             }
       lastMeasureLen = measureLen;
       tick = maxtick;
+
+      // multi-measure rest handling:
+      // all normal measures get setBreakMultiMeasureRest(true)
+      // the first measure in a multi-measure rest gets setBreakMultiMeasureRest(true)
+      // all other measures in a multi-measure rest get setBreakMultiMeasureRest(false)
+      // and count down the remaining number of measures
+      if (startMultiMeasureRest) {
+            measure->setBreakMultiMeasureRest(true);
+            startMultiMeasureRest = false;
+            }
+      else {
+            if (multiMeasureRestCount > 0) {
+                  // measure is continuation of a multi-measure rest
+                  measure->setBreakMultiMeasureRest(false);
+                  --multiMeasureRestCount;
+                  }
+            else
+                  measure->setBreakMultiMeasureRest(true);
+            }
+
       return measure;
       }
 
@@ -1804,8 +1829,13 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "multiple-rest") {
                               int multipleRest = ee.text().toInt();
-                              printf("ImportMusicXml: multiple-rest %d not supported\n",
-                                      multipleRest);
+                              if (multipleRest > 1) {
+                                    multiMeasureRestCount = multipleRest - 1;
+                                    startMultiMeasureRest = true;
+                                    }
+                              else
+                                    printf("ImportMusicXml: multiple-rest %d not supported\n",
+                                       multipleRest);
                               }
                         else
                               domError(ee);
