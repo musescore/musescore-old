@@ -1,7 +1,9 @@
-27.apr (db)
+27.apr (lv)
+      - MusicXML import of multiple-measure rest
+       (db)
       - Change CMakeLists.txt to workaround NSIS bug creating Windows installer
 24.apr (lv)
-      - MusicXML parsing of multiple-rest
+      - MusicXML parsing of multiple-measure rest
 23.apr (ws)
       - fix: time signature changes cause extra bar lines at end
       - new command: "x" flips between up fermata and down fermata
