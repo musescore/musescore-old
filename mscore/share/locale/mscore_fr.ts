@@ -97,8 +97,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1731 révisée JLW 11/04/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1731</translation>
+        <translatorcomment>r1766 revised JLW 25/04/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1766</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -909,7 +909,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/Db</source>
-        <translation>/Réb</translation>
+        <translation>/Ré b</translation>
     </message>
     <message>
         <source>/D</source>
@@ -917,7 +917,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/Eb</source>
-        <translation>/Mib</translation>
+        <translation>/Mi b</translation>
     </message>
     <message>
         <source>/E</source>
@@ -929,7 +929,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/F#</source>
-        <translation>/Fa#</translation>
+        <translation>/Fa #</translation>
     </message>
     <message>
         <source>/G</source>
@@ -937,7 +937,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/Ab</source>
-        <translation>/Lab</translation>
+        <translation>/La b</translation>
     </message>
     <message>
         <source>/A</source>
@@ -945,7 +945,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/Bb</source>
-        <translation>/Sib</translation>
+        <translation>/Si b</translation>
     </message>
     <message>
         <source>/B</source>
@@ -1360,7 +1360,7 @@ failed: </source>
     </message>
     <message>
         <source>Anchor</source>
-        <translation>Poignée</translation>
+        <translation>Point d&apos;ancrage</translation>
     </message>
     <message>
         <source>TopStaff</source>
@@ -1965,7 +1965,7 @@ failed: </source>
     <name>HBox</name>
     <message>
         <source>Add Text</source>
-        <translation>Ajouter du texte</translation>
+        <translation>Ajouter un texte</translation>
     </message>
     <message>
         <source>HBox Properties...</source>
@@ -3048,87 +3048,87 @@ failed: </source>
     </message>
     <message>
         <source>add a to chord</source>
-        <translation>ajouter La à l&apos;accord</translation>
+        <translation>ajouter un La à l&apos;accord</translation>
     </message>
     <message>
         <source>Add A</source>
-        <translation>Ajouter La</translation>
+        <translation>Ajouter un La</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Ajouter La à l&apos;accord</translation>
+        <translation>Ajouter un La à l&apos;accord</translation>
     </message>
     <message>
         <source>add b to chord</source>
-        <translation>ajouter Si à l&apos;accord</translation>
+        <translation>ajouter un Si à l&apos;accord</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation>Ajouter Si</translation>
+        <translation>Ajouter un Si</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Ajouter Si à l&apos;accord</translation>
+        <translation>Ajouter un Si à l&apos;accord</translation>
     </message>
     <message>
         <source>add c to chord</source>
-        <translation>ajouter Do à l&apos;accord</translation>
+        <translation>ajouter un Do à l&apos;accord</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation>Ajouter Do</translation>
+        <translation>Ajouter un Do</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Ajouter Do à l&apos;accord</translation>
+        <translation>Ajouter un Do à l&apos;accord</translation>
     </message>
     <message>
         <source>add d to chord</source>
-        <translation>ajouter Ré à l&apos;accord</translation>
+        <translation>ajouter un Ré à l&apos;accord</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation>Ajouter Ré</translation>
+        <translation>Ajouter un Ré</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Ajouter Ré à l&apos;accord</translation>
+        <translation>Ajouter un Ré à l&apos;accord</translation>
     </message>
     <message>
         <source>add e to chord</source>
-        <translation>ajouter Mi à l&apos;accord</translation>
+        <translation>ajouter un Mi à l&apos;accord</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation>Ajouter Mi</translation>
+        <translation>Ajouter un Mi</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Ajouter Mi à l&apos;accord</translation>
+        <translation>Ajouter un Mi à l&apos;accord</translation>
     </message>
     <message>
         <source>add f to chord</source>
-        <translation>ajouter Fa à l&apos;accord</translation>
+        <translation>Ajouter un Fa à l&apos;accord</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation>Ajouter Fa</translation>
+        <translation>Ajouter un Fa</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Ajouter Fa à l&apos;accord</translation>
+        <translation>Ajouter un Fa à l&apos;accord</translation>
     </message>
     <message>
         <source>add g to chord</source>
-        <translation>ajouter Sol à l&apos;accord</translation>
+        <translation>Ajouter un Sol à l&apos;accord</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation>Ajouter Sol</translation>
+        <translation>Ajouter un Sol</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Ajouter Sol à l&apos;accord</translation>
+        <translation>Ajouter un Sol à l&apos;accord</translation>
     </message>
     <message>
         <source>enter rest</source>
@@ -3592,7 +3592,7 @@ failed: </source>
     </message>
     <message>
         <source>Add Text</source>
-        <translation>Ajouter du texte</translation>
+        <translation>Ajouter un texte</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -5037,19 +5037,19 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Déffaillance de MuseScore</translation>
     </message>
     <message>
         <source>Load template file </source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement du modèle</translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"> échec</translation>
+        <translation> échec</translation>
     </message>
 </context>
 <context>
@@ -6146,11 +6146,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Remplacer (C) ... par le symbole ... dans le texte de Copyright</translation>
+        <translation>Remplacer (C) ... par le symbole © ... dans le texte de Copyright</translation>
     </message>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Remplacer 1/2 ... par le symble ...</translation>
+        <translation>Remplacer 1/2 ... par le symble ½ ...</translation>
     </message>
 </context>
 <context>
@@ -6378,7 +6378,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>Anchor:</source>
-        <translation>Poignée :</translation>
+        <translation>Point d&apos;ancrage :</translation>
     </message>
     <message>
         <source>SEGMENT</source>
@@ -7661,71 +7661,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Treble clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Sol</translation>
     </message>
     <message>
         <source>Treble clef 8va</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Sol 8va</translation>
     </message>
     <message>
         <source>Treble clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Sol 15ma</translation>
     </message>
     <message>
         <source>Treble clef 8vb</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Sol 8vb</translation>
     </message>
     <message>
         <source>Bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa</translation>
     </message>
     <message>
         <source>Bass clef 8vb</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 8vb</translation>
     </message>
     <message>
         <source>Bass clef 15mb</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 15mb</translation>
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef d&apos;Ut 5ème ligne (Baryton)</translation>
     </message>
     <message>
         <source>Subbass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 5ème ligne</translation>
     </message>
     <message>
         <source>Soprano clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef d&apos;Ut 1ère ligne (Soprano)</translation>
     </message>
     <message>
         <source>Mezzo-soprano clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef d&apos;Ut 2ème ligne (Mezzo-soprano)</translation>
     </message>
     <message>
         <source>Alto clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef d&apos;Ut 3ème ligne (Alto)</translation>
     </message>
     <message>
         <source>Tenor clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef d&apos;Ut 4ème ligne (Ténor)</translation>
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 3ème ligne (Baryton)</translation>
     </message>
     <message>
         <source>French violin clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Sol 1ère ligne (Clef française du violon)</translation>
     </message>
     <message>
         <source>Bass clef 8va</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 8va</translation>
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef de Fa 15ma</translation>
     </message>
 </context>
 <context>
@@ -8134,11 +8134,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>pause à l&apos;extérieur</translation>
+        <translation>pause</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>demi pause à l&apos;extérieur</translation>
+        <translation>demi pause</translation>
     </message>
     <message>
         <source>rest M3</source>
@@ -8178,7 +8178,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>128&apos; rest</source>
-        <translation>trente duxième de soupir</translation>
+        <translation>trente deuxième de soupir</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -8534,11 +8534,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation>tiret de Fioriture</translation>
+        <translation>tiret d&apos;acciaccature</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation>tiret de Fioriture vers le bas</translation>
+        <translation>tiret d&apos;acciaccature vers le bas</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
