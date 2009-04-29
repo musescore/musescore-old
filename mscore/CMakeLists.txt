@@ -253,9 +253,15 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.musescore.org")
       SET(CPACK_NSIS_CONTACT "ws@seh.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
-#      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "")
-#      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "")
       SET(CPACK_STRIP_FILES "mscore.exe")
+      
+      # File types association:
+      SET(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}/packaging\\\\FileAssociation.nsh")
+      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\\\${registerExtension} '\\\$INSTDIR\\\\bin\\\\mscore.exe' '.mscx' 'MuseScore File'")
+      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\\\${registerExtension} '\\\$INSTDIR\\\\bin\\\\mscore.exe' '.mscz' 'Compressed MuseScore File'")
+      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "\\\${unregisterExtension} '.mscx' 'MuseScore File'")
+      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "\\\${unregisterExtension} '.mscz' 'Compressed MuseScore File' ")
+      
   ELSE(MINGW)
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
       SET(CPACK_STRIP_FILES "mscore")
