@@ -1,5 +1,7 @@
 29.apr (db)
       - work towards setting file associations on Windows (initial work by la)
+       (tb)
+      - adding zh_TW instruments file
 28.apr (db)
       - improve header image for Windows installer
       - update French translation by JLWaltener
