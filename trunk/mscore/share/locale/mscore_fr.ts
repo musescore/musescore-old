@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
-<defaultcodec></defaultcodec>
 <context>
     <name></name>
     <message>
@@ -97,8 +96,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1766 revised JLW 25/04/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1766</translation>
+        <translatorcomment>r1771 revised JLWaltener 29/04/2009 - QT Linguist v4.5.1</translatorcomment>
+        <translation>Révision : 1771</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1719,7 +1718,7 @@ failed: </source>
     </message>
     <message>
         <source>ledger line width</source>
-        <translation>Largeur de ligne supplémentaire de portée</translation>
+        <translation>Epaisseur des lignes supplémentaires</translation>
     </message>
     <message>
         <source>sp</source>
@@ -8554,11 +8553,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alto clef</source>
-        <translation>Clef d&apos;Ut 3ème ligne (Alto)</translation>
+        <translation>Clef d&apos;Ut</translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation>Petite Clef d&apos;Ut 3ème ligne (Alto)</translation>
+        <translation>Petite Clef d&apos;Ut</translation>
     </message>
     <message>
         <source>bass clef</source>
