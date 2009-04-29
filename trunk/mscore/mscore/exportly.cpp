@@ -88,6 +88,7 @@ class ExportLy {
   int barlen;
   bool slur;
   bool pickup;
+  bool rehearsalnumbers;
   bool donefirst; //to prevent doing things in first ordinary bar which are already done in pickupbar
   bool graceswitch, gracebeam;
   int gracecount;
@@ -105,6 +106,7 @@ class ExportLy {
   int findSlur(const Slur* s) const;
   const char *relativ, *staffrelativ;
   bool voiceActive[VOICES];
+  int prevElTick;
 
   struct lybrackets
   {
@@ -476,9 +478,24 @@ void ExportLy::tempoText(TempoText* text)
 //---------------------------------------------------------
 
 void ExportLy::words(Text* text)
-      {
-	//todo: find mscore-position of text, and position accordingly in lily.
-	out << "^\\markup {" << text->getText() << "}";
+     {
+       char* c;
+       char a;
+       //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
+	if (text->subtypeName()== "RehearsalMark")
+	  {
+	    out << "\\mark\\default ";
+	    //There must be an easier way to check if QString is number????
+	    //is there a .toInteger()????
+	    c=text->getText().toAscii().data();
+	    a=(char)c[0];
+	    if ((a>= 48) && (a<= 57)) 
+	      {
+		rehearsalnumbers=true;
+	      }
+	  }
+	else
+	  out << "^\\markup {" << text->getText() << "}";
       }
 
 
@@ -498,8 +515,9 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
 	    if (art == 1) //crescendo
 	      out << "\\> ";
 	  }
-	else   out << "\\! ";
+	else   out << "\\! "; //end of hairpin
       }
+
 //---------------------------------------------------------
 //   ottava
 // <octave-shift type="down" size="8" relative-y="14"/>
@@ -747,6 +765,7 @@ void ExportLy::handleElement(Element* el, bool start)
 	      dynamic((Dynamic*) instruction);
 	      break;
 	    case HAIRPIN:
+	      printf("funnet HÅRNÅL i ankerliste\n");
 	      hairpin((Hairpin*) instruction, anchors[i].tick);
 	      break;
 	    case OTTAVA:
@@ -798,25 +817,21 @@ bool ExportLy::findSpecificMatchInMeasure(int tick, Staff* stf, Measure* m, int 
       for (Segment* seg = m->first(); seg; seg = seg->next())
 	{
 	  Element* el = seg->element(st);
-	  if (!el)
-	    continue;
-	  if (!(el->isChordRest()) && ((el->tick() == tick) || ((el->tick() + el->tickLen()) == tick)))
+	  if (!el) continue;
+	  if ((el->isChordRest()) && (el->staff() == stf) && ((el->tick() >= tick)))
 	    {
-	      printf("funnet uten chordorrest\n");
-	    }
-
-	  if ((el->isChordRest() && el->staff() == stf) && ((el->tick() == tick) || ((el->tick() + el->tickLen()) == tick)))
-	    {
+	      if (el->tick() > tick) tick=prevElTick;
 	      anker.anchor=el;
 	      found=true;
 	      anker.tick=tick;
 	      anker.start=true;
-	      continue;
+	      goto fertig;
 	    }
-	}
+	    prevElTick=el->tick();
+	 }
     }
-// if (found=true) return true; else return false;
-      return found;
+ fertig:
+ return found;
 }
 
 
@@ -844,9 +859,10 @@ bool ExportLy::findSpecificMatchInPart(int tick, Staff* st, Score* sc, int strac
       if (mb->type() != MEASURE)
 	continue;
       Measure* m = (Measure*)mb;
-      found= findSpecificMatchInMeasure(tick, st, m, strack, etrack);
-    }
-  return found;
+      found=findSpecificMatchInMeasure(tick, st, m, strack, etrack);
+      if (found) break;
+     }
+return found;
 }
 
 //---------------------------------------------------------
@@ -857,7 +873,6 @@ bool ExportLy::findMatchInPart(int tick, Staff* st, Score* sc, Part*, int strack
       {
 	bool found=false;
 	found = findSpecificMatchInPart(tick, st, sc, strack, etrack);
-	found =	findSpecificMatchInPart(tick, st, sc, strack, etrack);
 	return found;
       }
 
@@ -871,6 +886,7 @@ void ExportLy::buildInstructionList(Part* p, int strack, int etrack)
 {
   // part-level elements stored in the score layout
 
+  prevElTick=0;
   foreach(Element* instruction, *(score->gel()))
     {
       bool found=false;
@@ -878,12 +894,12 @@ void ExportLy::buildInstructionList(Part* p, int strack, int etrack)
 	{
 	case JUMP:
 	  printf("score JUMP found at tick: %d\n", instruction->tick());
-
 	case MARKER:
 	  printf("score MARKER found at tick: %d\n", instruction->tick());
 	case HAIRPIN:
 	case OTTAVA:
 	case PEDAL:
+	case DYNAMIC:
 	case TEXTLINE:
 	  {
 	    SLine* sl = (SLine*) instruction;
@@ -899,15 +915,15 @@ void ExportLy::buildInstructionList(Part* p, int strack, int etrack)
 		anker.instruct=instruction;
 		storeAnchor(anker);
 	      }
-	  }
 	  break;
-	default:
-	  // all others silently ignored
-	  // printf("InstructionHandler::buildInstructionList: direction type %s not implemented\n",
-	  //        Element::name(instruction->type()));
+	  }
+	  default:
+	  // all others ignored
+	  //printf(" instruction type %s not implemented\n", Element::name(instruction->type()));
 	  break;
 	}
     }// end foreach element....
+
 
   // part-level elements stored in measures
   for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next())
@@ -946,19 +962,21 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case SYMBOL:
 	case TEMPO_TEXT:
 	case TEXT:
+	case HAIRPIN:
+	case OTTAVA:
+	case PEDAL:
 	case STAFF_TEXT:
 	  found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack);
 	  if (found)
 	    {
 	      anker.instruct=instruction;
 	      storeAnchor(anker);
-	      found=false;
+	      printf("put instruction type %d in anchorlist\n", instruction->type());
 	    }
-	  if (!found) printf("element ikke forankret: %d\n", instruction->type());
+	  //else if (!found) printf("element not anchored?!: %d\n", instruction->type());
 	  break;
 	default:
 	  printf("Intet measurerelevant anker\n");
-	  break;
 	}
     }
 }
@@ -1179,8 +1197,8 @@ void  ExportLy::findVolta()
     }//for all measures
   lastind=i;
 
-  for (i=0; i<lastind; i++)
-    cout << "voltatest: " << voltarray[i].barno << "  " << voltarray[i].voltart <<"\n";
+  //  for (i=0; i<lastind; i++)
+  //  cout << "voltatest: " << voltarray[i].barno << "  " << voltarray[i].voltart <<"\n";
 }// end findvolta
 
 
@@ -1608,6 +1626,7 @@ void ExportLy::writeChord(Chord* c)
       oktavdiff=prevpitch - purepitch;
       int oktreit=numval(oktavdiff);
 
+
       while (oktreit > 0)
 	{
 	  if ((oktavdiff < -6) or ((prevnote=="b") and (oktavdiff < -5)))
@@ -1622,6 +1641,7 @@ void ExportLy::writeChord(Chord* c)
 	      }
 	  oktreit=oktreit-12;
 	}
+
 
       prevpitch=purepitch;
       pitchlist[j]=purepitch;
@@ -1709,7 +1729,7 @@ int ExportLy::getLen(int l, int* dots)
       len  = 1;
       *dots = 1;
     }
-  else if (l == 5 * division)
+  else if (l == 5 * division) //doubledotted whole
     {
       len = 1;
       *dots = 2;
@@ -1720,6 +1740,11 @@ int ExportLy::getLen(int l, int* dots)
     {
       len = 2;
       *dots = 1;
+    }
+  else if (l == ((division/2)*7)) // double-dotted half: 7/8 used for \partial bar.
+    {
+      len = 2;
+      *dots=2;
     }
   else if (l == 2 * division)
     len = 2;
@@ -1762,7 +1787,7 @@ int ExportLy::getLen(int l, int* dots)
     len = 16;
   else if (l == division /3*4)
     len = 32;
-  else printf("unsupported len %d (%d,%d)\n", l, l/division, l % division);
+  else printf("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/division, l % division);
   return len;
 }
 
@@ -1798,6 +1823,7 @@ void ExportLy::writeLen(int ticks)
 	  break;
 	}
       curTicks = ticks;
+      if (dots>0) curTicks = 0; //first note after dotted: always explicit length
     }
 }
 
@@ -1917,7 +1943,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	      out << "\\bar \"|.\"";
 	      break;
           default:
-	    case none: printf("strange voltarraycontents?\n");
+	    // case none: printf("strange voltarraycontents?\n");
 	      break;
 	    }//end switch
 
@@ -1942,13 +1968,13 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 {
   int i=0;
   char cvoicenum, cstaffnum;
-
+  if (m->no() >0) out << " | % " << m->no() << "\n" ; //barchecksign and barnumber for previous measure
   measurenumber=m->no()+1;
 
-//   if (m->irregular())
-//     {
-//       printf("irregular measure, number: %d\n", measurenumber);
-//     }
+   if (m->irregular())
+     {
+       printf("irregular measure, number: %d\n", measurenumber);
+     }
 
 
   if ((measurenumber==1) and (donefirst==false))
@@ -2019,17 +2045,17 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	      repeatactive=true;
 	    }
 	}
-    }// if start of first measure
+    }// END if start of first measure
 
   indent();
   int tick = m->tick();
-  barlen = m->tickLen();
   int measuretick=0;
   Element* e;
 
+
   for(Segment* s = m->first(); s; s = s->next())
     {
-      // for all segments in measure.
+      // for all segments in measure. Get element:
       e = s->element(staffInd * VOICES + voice);
 
       if (!(e == 0 || e->generated()))  voiceActive[voice] = true;
@@ -2044,7 +2070,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  {
 	    out << "%bartimesig: \n";
 	    writeTimeSig((TimeSig*)e);
-	    out << "\n\n";
+	    out << "\n";
 	    barlen=m->tickLen();
 	    int nombarlen=z1*division;
 	    if (n==8) nombarlen=nombarlen/2;
@@ -2072,6 +2098,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 		    }
 		  } //end switch (punkt)
 	      }
+	    curTicks=-1; //we always need explicit length after timesig.
 	    indent();
 	    break;
 	  }
@@ -2080,6 +2107,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  out << "%barkeysig: \n";
 	  indent();
 	  writeKeySig(e->subtype());
+	  curTicks=-1; //feels safe to force explicit length after keysig
 	  break;
 	case CHORD:
 	  {
@@ -2101,7 +2129,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	    findTuplets((Rest *) e);
 	    int l = e->tickLen();
 	    int mlen=((Rest*)e)->segment()->measure()->tickLen();
-	    printf("pauselengde: %d, taktlengde %d \n",l, mlen );
+	    //	    printf("pauselengde: %d, taktlengde %d \n",l, mlen );
 	    if ((l==mlen) or (l==0))
 	      {
 		l = ((Rest*)e)->segment()->measure()->tickLen();
@@ -2129,19 +2157,10 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  printf("ordinary elements: Jump found\n");
 	  break;
 	default:
-	  printf("Export Lilypond: unsupported element <%s>\n", e->name());
+	  //printf("Export Lilypond: unsupported element <%s>\n", e->name());
 	  break;
 	}
       handleElement(e, true); //check for instructions anchored to element e.
-      //check for instructions anchored to start of next element
-//       Element * nextel;
-//       Segment* nextseg;
-//       nextseg=s->next();
-//       if(nextseg)
-// 	{ printf("nextseg \n");
-// 	  nextel=nextseg->element(staffInd * VOICES + voice);
-// 	  handleElement(nextel, staffInd, false);
-// 	}
     } //end for all segments
 
 
@@ -2185,7 +2204,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
       }
 
   writeVolta(measurenumber, lastind);
-  out << " | % " << m->no()+1 << "\n" ; //barcheck and barnumber
+  
 } //end write VoiceMeasure
 
 
@@ -2310,6 +2329,9 @@ void ExportLy::writeScore()
 		    continue;
 		    writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
 		}
+	      level--;
+	      indent();
+	      out << "\\bar \"|.\" \n"; //thin-thick barline as last. 
 	      level=0;
 	      indent();
 	      out << "}% end of last bar in partorvoice\n\n";
@@ -2371,7 +2393,7 @@ void ExportLy::writeScore()
 //-------------------
 void ExportLy::writeScoreBlock()
 {
-  bracktest();
+  //  bracktest();
   level=0;
   os << "\n\\score { \n";
   level++;
@@ -2468,9 +2490,20 @@ void ExportLy::writeScoreBlock()
   os << "%% remove previous line to get barnumbers only at beginning of system.\n";
   indentF();
   os << " #(set-accidental-style 'modern-cautionary)\n";
+if (rehearsalnumbers)
+    {
+      indentF();
+      os << "\\set Score.markFormatter = #format-mark-box-numbers %%boxed rehearsal-numbers \n";
+    }
+ else
+   {
+     indentF();
+     os << "\\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
+   }
   indentF();
-  os << "\\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
-
+  os << "\\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n"; 
+  indentF();
+  os << "%% remove previous line to get cut-time/alla breve or common time \n";
   --level;
   indentF();
   os << ">>\n";
@@ -2494,6 +2527,7 @@ void ExportLy::writeScoreBlock()
 bool ExportLy::write(const QString& name)
 {
   pianostaff=false;
+  rehearsalnumbers=false;
   f.setFileName(name);
   if (!f.open(QIODevice::WriteOnly))
     return false;
@@ -2538,6 +2572,10 @@ bool ExportLy::write(const QString& name)
   os <<  "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n";
   os <<  "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n";
   os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
+  os <<  "  indent = 0 \\mm \n";
+  os <<  "  %%set to ##t if your score is less than one page: \n";
+  os <<  "  ragged-last-bottom = ##f \n";
+  os <<  "  ragged-bottom = ##f  \n";
   os <<  "  }\n\n";
 
 
@@ -2600,7 +2638,11 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------- NEWS and HISTORY:--------------------  */
 
-/* 12.feb.2009. - Removed bug: double instrument definitions in pieces
+/* mar. 2009 always explicit end-bar -> no need to declare last bar as
+   incomplete, but writes to end-bars when last bar is complete. This
+   doesn't show in print.
+
+   12.feb.2009. - Removed bug: double instrument definitions in pieces
    with pickup-measure (prev'ly defined both in measure 0 and measure
    1). - Removed bug: nonrecognition of startrepeats. -Improved
    recognition of whole-measure rests.
@@ -2662,28 +2704,24 @@ bool ExportLy::write(const QString& name)
 /*----------------------TODOS------------------------------------*/
 
 /* TODO: PROJECTS
-   3.
    4. Lyrics (low priority in relation to music itself)
    5. Collisions in crowded multi-voice staffs (e.g. cello-suite).
    6. General tuplets
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
-   10. fingerings, chordname; rehearsal marks as \mark in all voices.
-   11.
+   10. fingerings, chordname; rehearsal marks as \mark\default in all voices.
    12. correct indentation in score-block.
    13. cross-staff beaming in pianostaff
    14. Real multimeasure rests (for now only one-measure rests are exported).
+   18. lacking fermata above/below rest.
+   -  big problems with hairpins.
+   ExportLy::symbol(): rcomma not supported
    - etc.etc.etc.etc........
 */
 
 /*TODO: BUGS
-  - unsupported len= 1680.
-  - no end-bar in Brandenburg.
-  - partial last measures to match pickupmeasure.
   - massive failure on gollywog and Bilder
   - in Tarrega study: \stemNeutral failure, second voice, first part, from last bar before repeat.
   - metronome marks must be given as \tempo 4 = 60 and not as markups.
-  - lacking fermata above rest.
-
- - etc. etc. etc. ad nauseam.
+  - etc. etc. etc. ad nauseam.
  */
