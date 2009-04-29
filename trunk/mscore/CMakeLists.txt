@@ -257,11 +257,23 @@ include (InstallRequiredSystemLibraries)
       
       # File types association:
       SET(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}/packaging\\\\FileAssociation.nsh")
-      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\\\${registerExtension} '\\\$INSTDIR\\\\bin\\\\mscore.exe' '.mscx' 'MuseScore File'")
-      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\\\${registerExtension} '\\\$INSTDIR\\\\bin\\\\mscore.exe' '.mscz' 'Compressed MuseScore File'")
-      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "\\\${unregisterExtension} '.mscx' 'MuseScore File'")
-      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "\\\${unregisterExtension} '.mscz' 'Compressed MuseScore File' ")
       
+      set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
+    Push \\\"ATENDATA\\\"
+    Push \\\"$INSTDIR\\\\share\\\\aten\\\"
+    Call WriteEnvStr      
+"
+  )
+
+      
+      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
+         \\\${registerExtension} \\\"MuseScore File\\\" \\\".mscx\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\"
+         \\\${registerExtension} \\\"Compressed MuseScore File\\\" \\\".mscz\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\" 
+      ")
+      SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
+         \\\${unregisterExtension} \\\".mscx\\\" \\\"MuseScore File\\\"
+         \\\${unregisterExtension} \\\".mscz\\\" \\\"Compressed MuseScore File\\\"
+      ")
   ELSE(MINGW)
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
       SET(CPACK_STRIP_FILES "mscore")
