@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: exportxml.cpp,v 1.71 2006/03/28 14:58:58 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2405,6 +2405,46 @@ static bool elementRighter(const Element* e1, const Element* e2)
       }
 
 //---------------------------------------------------------
+//  measureStyle -- write measure-style
+//---------------------------------------------------------
+
+// this is done at the first measure of a multi-meaure rest
+// note: the measure count is stored in the last measure
+// see measure.h _multiMeasure
+
+static void measureStyle(Xml& xml, Attributes& attr, Measure* m, bool& inMMR)
+      {
+//      printf("measureStyle(inMMR=%d)", inMMR);
+      if (m->multiMeasure() == -1 && !inMMR) {
+            // found first measure of multi-measure rest
+            inMMR = true;
+            // search for last measure
+            int measureCount = 0;
+            for (MeasureBase* mb = m->next(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+                  measureCount = m->multiMeasure();
+                  if (measureCount >= 0)
+                        // found end of multi-measure rest
+                        break;
+                  } // for
+//            printf(" count=%d", measureCount);
+            if (measureCount > 0) {
+                  attr.doAttr(xml, true);
+                  xml.stag("measure-style");
+                  xml.tag("multiple-rest", measureCount);
+                  xml.etag();
+                  }
+            } // if (m->multi...
+      else if (m->multiMeasure() >= 0)
+            // in regular measure or last measure of multi-measure rest
+            inMMR = false;
+
+//      printf("\n");
+      }
+
+//---------------------------------------------------------
 //  write
 //---------------------------------------------------------
 
@@ -2569,6 +2609,7 @@ foreach(Element* el, *(score->gel())) {
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
             tick = 0;
+            bool inMultiMeasureRest = false;
             xml.stag(QString("part id=\"P%1\"").arg(idx+1));
 
             int staves = part->nstaves();
@@ -2687,6 +2728,9 @@ foreach(Element* el, *(score->gel())) {
                                           }
                                     }
                         }
+
+                  // output attribute at start of measure: measure-style
+                  measureStyle(xml, attr, m, inMultiMeasureRest);
 
                   // MuseScore limitation: repeats are always in the first part
                   // and are implicitly placed at either measure start or stop
