@@ -249,8 +249,8 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data\\\\installerhead.bmp")
       SET(CPACK_NSIS_INSTALLED_ICON_NAME "${PROJECT_SOURCE_DIR}/mscore/data\\\\mscore.bmp")
       SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} MuseScore score typesetter")
-      SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.musescore.org")
-      SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.musescore.org")
+      SET(CPACK_NSIS_HELP_LINK "http://www.musescore.org/")
+      SET(CPACK_NSIS_URL_INFO_ABOUT "http://www.musescore.org/")
       SET(CPACK_NSIS_CONTACT "ws@seh.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
       SET(CPACK_STRIP_FILES "mscore.exe")
@@ -258,21 +258,19 @@ include (InstallRequiredSystemLibraries)
       # File types association:
       SET(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}/packaging\\\\FileAssociation.nsh")
       
-      set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
-    Push \\\"ATENDATA\\\"
-    Push \\\"$INSTDIR\\\\share\\\\aten\\\"
-    Call WriteEnvStr      
-"
-  )
-
+      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
+          Push \\\"ATENDATA\\\"
+          Push \\\"$INSTDIR\\\\share\\\\aten\\\"
+          Call WriteEnvStr      
+      ")
       
       SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
-         \\\${registerExtension} \\\"MuseScore File\\\" \\\".mscx\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\"
-         \\\${registerExtension} \\\"Compressed MuseScore File\\\" \\\".mscz\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\" 
+          \\\${registerExtension} \\\"MuseScore File\\\" \\\".mscx\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\"
+          \\\${registerExtension} \\\"Compressed MuseScore File\\\" \\\".mscz\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\" 
       ")
       SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
-         \\\${unregisterExtension} \\\".mscx\\\" \\\"MuseScore File\\\"
-         \\\${unregisterExtension} \\\".mscz\\\" \\\"Compressed MuseScore File\\\"
+          \\\${unregisterExtension} \\\".mscx\\\" \\\"MuseScore File\\\"
+          \\\${unregisterExtension} \\\".mscz\\\" \\\"Compressed MuseScore File\\\"
       ")
   ELSE(MINGW)
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
@@ -311,6 +309,7 @@ else (MINGW)
 endif (MINGW)
   set(CPACK_DEB "on")
 
+  set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/packaging" ${CMAKE_MODULE_PATH}) # Use custom version of NSIS.InstallOptions.ini
   include (CPack)
 
 add_custom_target(lupdate

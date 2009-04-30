@@ -1,5 +1,8 @@
 30.apr (lv)
       - MusicXML export of multiple-measure rest, including testfile testMultiMeasureRest.xml
+      (db)
+      - Added NSIS.InstallOptions.ini to allow more complex customizations to Windows 
+        installer
 29.apr (db)
       - work towards setting file associations on Windows (initial work by la)
        (tb)
