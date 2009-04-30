@@ -1,3 +1,5 @@
+30.apr (lv)
+      - MusicXML export of multiple-measure rest, including testfile testMultiMeasureRest.xml
 29.apr (db)
       - work towards setting file associations on Windows (initial work by la)
        (tb)
