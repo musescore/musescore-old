@@ -1,3 +1,6 @@
+1.may (db)
+      - Windows installer decompresses a Windows SoundFont and moves it to the 
+        MuseScore folder. Work is incomplete since the user must manually install 7-Zip first.
 30.apr (lv)
       - MusicXML export of multiple-measure rest, including testfile testMultiMeasureRest.xml
       (db)
