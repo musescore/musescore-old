@@ -430,6 +430,7 @@ bool Score::saveAs(bool saveCopy)
                   _undo->setClean();
                   mscore->dirtyChanged(this);
                   setCreated(false);
+                  mscore->updateRecentScores(this);
                   }
             }
       else if (selectedFilter == fl[2]) {
