@@ -96,8 +96,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1771 revised JLWaltener 29/04/2009 - QT Linguist v4.5.1</translatorcomment>
-        <translation>Révision : 1771</translation>
+        <translatorcomment>r1791 revised JLWaltener 02/05/2009 - QT Linguist v4.5.1</translatorcomment>
+        <translation>Révision : 1791</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5044,11 +5044,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom arrière</translation>
     </message>
 </context>
 <context>
@@ -6262,7 +6262,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: file not found:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Fichier non trouvé :</translation>
     </message>
 </context>
 <context>
@@ -8007,7 +8007,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Articulation</translation>
     </message>
 </context>
 <context>
