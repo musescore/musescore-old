@@ -22,6 +22,8 @@
 
 #include "priv.h"
 
+namespace FluidS {
+
 /*
  *
  * Lists
@@ -31,15 +33,12 @@
  *
  */
 
-typedef struct _fluid_list_t fluid_list_t;
-
 typedef int (*fluid_compare_func_t)(void* a, void* b);
 
-struct _fluid_list_t
-{
-  void* data;
-  fluid_list_t *next;
-};
+struct fluid_list_t {
+      void* data;
+      fluid_list_t *next;
+      };
 
 fluid_list_t* new_fluid_list(void);
 void delete_fluid_list(fluid_list_t *list);
@@ -54,8 +53,9 @@ fluid_list_t* fluid_list_last(fluid_list_t *list);
 fluid_list_t* fluid_list_insert_at(fluid_list_t *list, int n, void* data);
 int fluid_list_size(fluid_list_t *list);
 
-#define fluid_list_next(slist)	((slist) ? (((fluid_list_t *)(slist))->next) : 0)
-#define fluid_list_get(slist)	((slist) ? ((slist)->data) : 0)
+#define fluid_list_next(slist) ((slist) ? (((fluid_list_t *)(slist))->next) : 0)
+#define fluid_list_get(slist)	 ((slist) ? ((slist)->data) : 0)
 
+}
 
 #endif  /* _FLUID_LIST_H */

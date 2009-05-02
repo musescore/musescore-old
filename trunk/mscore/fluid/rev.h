@@ -24,6 +24,8 @@
 
 #include "priv.h"
 
+namespace FluidS {
+
 typedef struct _fluid_revmodel_t fluid_revmodel_t;
 
 
@@ -63,5 +65,6 @@ typedef struct _fluid_revmodel_presets_t {
   fluid_real_t level;
 } fluid_revmodel_presets_t;
 
+}
 
 #endif /* _FLUID_REV_H */

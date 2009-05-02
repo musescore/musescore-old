@@ -18,91 +18,53 @@
  * 02111-1307, USA
  */
 
-
 #include "tuning.h"
 #include "priv.h"
 
+namespace FluidS {
 
-fluid_tuning_t* new_fluid_tuning(char* name, int bank, int prog)
+Tuning::Tuning(char* n, int b, int p)
       {
-      fluid_tuning_t* tuning;
-      int i;
+      _name = 0;
+      setName(n);
+      bank = b;
+      prog = p;
 
-  tuning = FLUID_NEW(fluid_tuning_t);
-  if (tuning == NULL) {
-    FLUID_LOG(FLUID_PANIC, "Out of memory");
-    return NULL;
-  }
+      for (int i = 0; i < 128; i++)
+            pitch[i] = i * 100.0;
+      }
 
-  tuning->name = NULL;
+Tuning::~Tuning()
+      {
+      if (_name)
+            free(_name);
+      }
 
-  if (name != NULL) {
-    tuning->name = FLUID_STRDUP(name);
-  }
+void Tuning::setName(char* n)
+      {
+      if (_name)
+            free(_name);
+      _name = 0;
+      if (n)
+            _name = strdup(n);
+      }
 
-  tuning->bank = bank;
-  tuning->prog = prog;
+void Tuning::setOctave(double* pitch_deriv)
+      {
+      for (int i = 0; i < 128; i++)
+            pitch[i] = i * 100.0 + pitch_deriv[i % 12];
+      }
 
-  for (i = 0; i < 128; i++) {
-    tuning->pitch[i] = i * 100.0;
-  }
+void Tuning::setAll(double* pitch)
+      {
+      for (int i = 0; i < 128; i++)
+            pitch[i] = pitch[i];
+      }
 
-  return tuning;
+void Tuning::setPitch(int k, double p)
+      {
+      if ((k >= 0) && (k < 128))
+            pitch[k] = p;
+      }
 }
 
-void delete_fluid_tuning(fluid_tuning_t* tuning)
-{
-  if (tuning == NULL) {
-    return;
-  }
-  if (tuning->name != NULL) {
-    FLUID_FREE(tuning->name);
-  }
-  FLUID_FREE(tuning);
-}
-
-void fluid_tuning_set_name(fluid_tuning_t* tuning, char* name)
-{
-  if (tuning->name != NULL) {
-    FLUID_FREE(tuning->name);
-    tuning->name = NULL;
-  }
-  if (name != NULL) {
-    tuning->name = FLUID_STRDUP(name);
-  }
-}
-
-char* fluid_tuning_get_name(fluid_tuning_t* tuning)
-{
-  return tuning->name;
-}
-
-void fluid_tuning_set_key(fluid_tuning_t* tuning, int key, double pitch)
-{
-  tuning->pitch[key] = pitch;
-}
-
-void fluid_tuning_set_octave(fluid_tuning_t* tuning, double* pitch_deriv)
-{
-  int i;
-
-  for (i = 0; i < 128; i++) {
-    tuning->pitch[i] = i * 100.0 + pitch_deriv[i % 12];
-  }
-}
-
-void fluid_tuning_set_all(fluid_tuning_t* tuning, double* pitch)
-{
-  int i;
-
-  for (i = 0; i < 128; i++) {
-    tuning->pitch[i] = pitch[i];
-  }
-}
-
-void fluid_tuning_set_pitch(fluid_tuning_t* tuning, int key, double pitch)
-{
-  if ((key >= 0) && (key < 128)) {
-    tuning->pitch[key] = pitch;
-  }
-}

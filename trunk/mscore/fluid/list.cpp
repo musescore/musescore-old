@@ -24,10 +24,9 @@
  * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-
-
 #include "list.h"
 
+namespace FluidS {
 
 fluid_list_t*
 new_fluid_list(void)
@@ -254,4 +253,5 @@ fluid_list_t* fluid_list_insert_at(fluid_list_t *list, int n, void* data)
   } else {
     return new_list;
   }
+}
 }

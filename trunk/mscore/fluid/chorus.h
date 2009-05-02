@@ -24,12 +24,13 @@
 
 #include "priv.h"
 
-
-typedef struct _fluid_chorus_t fluid_chorus_t;
+namespace FluidS {
 
 /*
  * chorus
  */
+struct fluid_chorus_t;
+
 fluid_chorus_t* new_fluid_chorus(fluid_real_t sample_rate);
 void delete_fluid_chorus(fluid_chorus_t* chorus);
 void fluid_chorus_processmix(fluid_chorus_t* chorus, fluid_real_t *in,
@@ -52,5 +53,5 @@ fluid_real_t fluid_chorus_get_speed_Hz(fluid_chorus_t* chorus);
 fluid_real_t fluid_chorus_get_depth_ms(fluid_chorus_t* chorus);
 int fluid_chorus_get_type(fluid_chorus_t* chorus);
 
-
+}
 #endif /* _FLUID_CHORUS_H */

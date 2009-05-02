@@ -18,27 +18,13 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
+set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
-add_library (
-  fluid STATIC
-  synth.cpp
-  settings.cpp
-  voice.cpp
-  chan.cpp
-  defsfont.cpp
-  chorus.cpp
-  hash.cpp
-  list.cpp
-  ramsfont.cpp
-  conv.cpp
-  gen.cpp
-  mod.cpp
-  rev.cpp
-  tuning.cpp
-  sys.cpp
+add_library (fluid STATIC
+  fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
+  list.cpp conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp
   )
 
 set_target_properties( fluid
