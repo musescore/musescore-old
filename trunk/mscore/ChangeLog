@@ -8,6 +8,8 @@
            startup and reduces the memory footprint escpecially
            when using large sound fonts.
          - converted to c++, added namespace protection
+      (tb)
+      - adding first update of Traditional Chinese (Taiwan) zh_TW locale made by benice
 1.may (db)
       - Windows installer decompresses a Windows SoundFont and moves it to the
         MuseScore folder. Work is incomplete since the user must manually install 7-Zip first.
