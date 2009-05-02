@@ -223,8 +223,7 @@ Channel::Channel()
             init.append(0);
       channel  = -1;
       program  = -1;
-      hbank    = -1;
-      lbank    = -1;
+      bank     = -1;
       volume   = 100;
       pan      = 64;
       chorus   = 30;
@@ -285,11 +284,11 @@ void Channel::read(QDomElement e)
                   switch(ctrl) {
                         case CTRL_HBANK:
                               init[A_HBANK] = e;
-                              hbank = value;
+                              bank = (value << 7) + (bank & 0x7f);
                               break;
                         case CTRL_LBANK:
                               init[A_LBANK] = e;
-                              lbank = value;
+                              bank = (bank << 7) + (value & 0x7f);
                               break;
                         case CTRL_VOLUME:
                               init[A_VOLUME] = e;
@@ -337,19 +336,18 @@ void Channel::updateInitList() const
             e->setValue(program);
             init[A_PROGRAM] = e;
             }
+#if 0 // TODO
+      e = new ControllerEvent();
+      e->setController(CTRL_HBANK);
+      e->setValue(hbank);
+      init[A_HBANK] = e;
 
-      if (hbank != -1) {
-            e = new ControllerEvent();
-            e->setController(CTRL_HBANK);
-            e->setValue(hbank);
-            init[A_HBANK] = e;
-            }
-      if (lbank != -1) {
-            e = new ControllerEvent();
-            e->setController(CTRL_LBANK);
-            e->setValue(lbank);
-            init[A_LBANK] = e;
-            }
+      e = new ControllerEvent();
+      e->setController(CTRL_LBANK);
+      e->setValue(lbank);
+      init[A_LBANK] = e;
+#endif
+
       e = new ControllerEvent();
       e->setController(CTRL_VOLUME);
       e->setValue(volume);

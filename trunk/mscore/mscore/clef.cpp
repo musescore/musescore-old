@@ -89,7 +89,7 @@ const ClefInfo clefTable[] = {
       { "TAB", 5,  0,   0,  0,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Tablature") },
-      { "PERC",2,  0,   0, 45,
+      { "percussion", 2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Percussion") },
 

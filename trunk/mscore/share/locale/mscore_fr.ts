@@ -1373,14 +1373,6 @@ failed: </source>
         <source>Chord</source>
         <translation>Accord</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Haut de l&apos;accord</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Bas de l&apos;accord</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6260,6 +6252,10 @@ Veuillez sélectionner une note ou un silence et réessayez
         <source>MuseScore: Import Capella</source>
         <translation>MuseScore : Import Capella</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7810,10 +7806,6 @@ p, li { white-space: pre-wrap; }
         <translation>liaison de prolongation</translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation>Attribut</translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation>Nuance</translation>
     </message>
@@ -8004,6 +7996,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon</source>
         <translation>Icône</translation>
+    </message>
+    <message>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

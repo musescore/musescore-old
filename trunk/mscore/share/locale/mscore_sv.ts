@@ -1364,14 +1364,6 @@ misslyckades: </translation>
         <source>Chord</source>
         <translation>Ackord</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Översta ackordet</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Nedersta ackordet</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6247,6 +6239,10 @@ Vänligen markera ett not- eller paustecken och försök igen
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Palettladdning misslyckades:</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7798,10 +7794,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation type="unfinished">Dynamik</translation>
     </message>
@@ -7991,6 +7983,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

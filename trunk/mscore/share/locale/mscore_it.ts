@@ -1373,14 +1373,6 @@ fallito: </translation>
         <source>Chord</source>
         <translation>Accordo</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Accordo superiore</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Accordo inferiore</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6259,6 +6251,10 @@ selezionare una nota o una pausa e ripetere l&apos;operazione
         <source>MuseScore: Import Capella</source>
         <translation>MuseScore: importazione file Capella</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7812,10 +7808,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation type="unfinished">Dinamica</translation>
     </message>
@@ -8005,6 +7997,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

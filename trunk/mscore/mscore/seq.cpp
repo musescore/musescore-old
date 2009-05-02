@@ -18,9 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "config.h"
 #include "seq.h"
 #include "mscore.h"
-#include "fluid.h"
+
 #ifdef USE_JACK
 #include "jackaudio.h"
 #endif
@@ -205,6 +206,34 @@ bool Seq::init()
             printf("init audio driver failed\n");
             return false;
             }
+      Synth* synth = driver->getSynth();
+      if (synth) {
+            QString p;
+            if (!preferences.soundFont.isEmpty())
+                  p = preferences.soundFont;
+            else
+                  p = QString(getenv("DEFAULT_SOUNDFONT"));
+            if (p.isEmpty()) {
+                  //
+                  // fallback to integrated soundfont
+                  //
+                  p = ":/data/piano1.sf2";
+                  }
+            if (debugMode)
+                  printf("load soundfont <%s>\n", qPrintable(p));
+            bool rv = synth->loadSoundFont(p);
+            if (!rv) {
+                  QString s = QString("Loading Soundfont\n"
+                                      "\"%1\"\n"
+                                      "failed.\n"
+                                      "Sequencer will be disabled.").arg(p);
+                  QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
+                  delete driver;
+                  driver = 0;
+                  return false;
+                  }
+            }
+
       if (!driver->start()) {
             printf("Cannot start I/O\n");
             return false;

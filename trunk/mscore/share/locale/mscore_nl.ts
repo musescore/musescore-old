@@ -1363,14 +1363,6 @@ failed: </source>
         <source>Chord</source>
         <translation>Akkoord</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Bovenste Akkoord</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Onderste Akkoord</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6248,6 +6240,10 @@ Please select a single note or rest and retry operation
         <source>MuseScore: Import Capella</source>
         <translation>MuseScore: Import Capella</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7795,10 +7791,6 @@ p, li { white-space: pre-wrap; }
         <translation>Bindingsboog</translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation>Attribuut</translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation>Dynamiek</translation>
     </message>
@@ -7989,6 +7981,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon</source>
         <translation>Pictogram</translation>
+    </message>
+    <message>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

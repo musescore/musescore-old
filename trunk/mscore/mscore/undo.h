@@ -954,13 +954,13 @@ class EditText : public UndoCommand {
 class ChangePatch : public UndoCommand {
       Part* part;
       Channel* channel;
-      int prog, hbank, lbank;
+      int prog, bank;
 
       void flip();
 
    public:
-      ChangePatch(Part* p, Channel* c, int pr, int h, int l)
-         : part(p), channel(c), prog(pr), hbank(h), lbank(l) {}
+      ChangePatch(Part* p, Channel* c, int pr, int b)
+         : part(p), channel(c), prog(pr), bank(b) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

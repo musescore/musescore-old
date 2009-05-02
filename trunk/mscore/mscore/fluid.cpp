@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "config.h"
+
+#ifdef USE_GLOBAL_FLUID
+
 #include "preferences.h"
 #include "fluid.h"
 #include "score.h"
@@ -25,16 +29,13 @@
 #include "seq.h"
 
 //---------------------------------------------------------
-//   ISynth
+//   Fluid
 //---------------------------------------------------------
 
-ISynth::ISynth()
+Fluid::Fluid()
       {
       _fluidsynth = 0;
-      sfont       = 0;
-      fontId      = -1;
-      fluid_font  = 0;
-      lbank       = 0;
+      fluid_font = 0;
       }
 
 //---------------------------------------------------------
@@ -42,37 +43,14 @@ ISynth::ISynth()
 //    return false on error
 //---------------------------------------------------------
 
-bool ISynth::init(int sampleRate)
+void Fluid::init(int sampleRate, int channels)
       {
       fluid_settings_t* settings = new_fluid_settings();
       fluid_settings_setnum(settings, "synth.sample-rate", float(sampleRate));
-      fluid_settings_setint(settings, "synth.midi-channels", 64);
-      fluid_settings_setint(settings, "synth.audio-channels", 2);
+      fluid_settings_setint(settings, "synth.midi-channels", channels);
+      fluid_settings_setint(settings, "synth.audio-channels", 1);
 
       _fluidsynth = new_fluid_synth(settings);
-
-      QString p;
-      if (!preferences.soundFont.isEmpty())
-            p = preferences.soundFont;
-      else
-            p = QString(getenv("DEFAULT_SOUNDFONT"));
-      if (p.isEmpty()) {
-            //
-            // fallback to integrated soundfont
-            //
-            p = ":/data/piano1.sf2";
-            }
-      if (debugMode)
-            printf("load soundfont <%s>\n", qPrintable(p));
-      bool rv = loadSoundFont(p);
-      if (!rv) {
-            QString s = QString("Loading Soundfont\n"
-                                "\"%1\"\n"
-                                "failed.\n"
-                                "Sequencer will be disabled.").arg(p);
-            QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
-            }
-      return rv;
       }
 
 //---------------------------------------------------------
@@ -80,17 +58,11 @@ bool ISynth::init(int sampleRate)
 //    return false on error;
 //---------------------------------------------------------
 
-bool ISynth::loadSoundFont(const QString& sfont)
+bool Fluid::loadSoundFont(const QString& sfont)
       {
-      if (fontId != -1)
-            fluid_synth_sfunload(_fluidsynth, fontId, true);
-#ifdef USE_GLOBAL_FLUID
-      fontId = fluid_synth_sfload(_fluidsynth, qPrintable(sfont), true);
-#else
-      fontId = fluid_synth_sfload(_fluidsynth, sfont, true);
-#endif
+      int fontId = fluid_synth_sfload(_fluidsynth, qPrintable(sfont), true);
       if (fontId == -1) {
-            fprintf(stderr, "ISynth: %s\n", fluid_synth_error(_fluidsynth));
+            fprintf(stderr, "Fluid: %s\n", fluid_synth_error(_fluidsynth));
             return false;
             }
       fluid_synth_set_gain(_fluidsynth, 0.2);
@@ -101,20 +73,16 @@ bool ISynth::loadSoundFont(const QString& sfont)
 //   process
 //---------------------------------------------------------
 
-void ISynth::process(unsigned n, float* l, float* r, int stride)
+void Fluid::process(unsigned n, float* l, float* r, int stride)
       {
-#ifdef USE_GLOBAL_FLUID
       fluid_synth_write_float(_fluidsynth, n, l, 0, 1, r, 0, 1);
-#else
-      fluid_synth_write_float(_fluidsynth, n, l, r, stride);
-#endif
       }
 
 //---------------------------------------------------------
 //   play
 //---------------------------------------------------------
 
-void ISynth::play(const MidiOutEvent& e)
+void Fluid::play(const MidiOutEvent& e)
       {
       int ch      = e.type & 0xf;
       int channel = e.port * 16 + ch;
@@ -137,20 +105,16 @@ void ISynth::play(const MidiOutEvent& e)
                         }
                   break;
             case ME_CONTROLLER:
-                  if (e.a == CTRL_LBANK)
-                        lbank = e.b;
-                  else {
-                        fluid_synth_cc(_fluidsynth, channel, e.a, e.b);
-                        if (midiOutputTrace)
-                              printf("MidiOut: %2d:%2d Ctrl    %3d %3d\n", e.port, ch, e.a, e.b);
-                        }
+                  fluid_synth_cc(_fluidsynth, channel, e.a, e.b);
+                  if (midiOutputTrace)
+                        printf("MidiOut: %2d:%2d Ctrl    %3d %3d\n", e.port, ch, e.a, e.b);
                   break;
 
             case ME_PROGRAM:
                   // if e.b == 1 then a drum instrument is requested and we set lbank to 128
-                  err = fluid_synth_program_select(_fluidsynth, channel, fontId, e.b ? 128 : lbank, e.a);
+                  err = fluid_synth_program_change(_fluidsynth, channel, e.a);
                   if (midiOutputTrace)
-                        printf("MidiOut: %2d:%2d Prog    %3d %3d drum %d\n", e.port, ch, lbank, e.a, e.b);
+                        printf("MidiOut: %2d:%2d Prog %3d\n", e.port, ch, e.a);
                   break;
             }
 
@@ -159,30 +123,11 @@ void ISynth::play(const MidiOutEvent& e)
                e.type & 0xff, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
       }
 
-#if 0
-//---------------------------------------------------------
-//   program
-//---------------------------------------------------------
-
-void ISynth::program(int channel, int program, bool drum)
-      {
-      int lbank = drum ? 128 : ((program & 0xff00) >> 8);
-      program &= 0xff;
-
-      int err = fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, program);
-      if (midiOutputTrace)
-            printf("MidiOut: %d Prog %3d Drum: %d\n", channel, program, drum);
-      if (err)
-            fprintf(stderr, "FluidSynth error: program channel %d program %d drum %d: %s\n",
-               channel, program, drum, fluid_synth_error(_fluidsynth));
-      }
-#endif
-
 //---------------------------------------------------------
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* ISynth::getPatchInfo(bool onlyDrums, const MidiPatch* p) const
+const MidiPatch* Fluid::getPatchInfo(bool onlyDrums, const MidiPatch* p) const
       {
       if (_fluidsynth == 0)
             return 0;
@@ -196,16 +141,17 @@ const MidiPatch* ISynth::getPatchInfo(bool onlyDrums, const MidiPatch* p) const
       fluid_preset_t preset;
 
       while ((*fluid_font->iteration_next)(fluid_font, &preset)) {
-            patch.hbank = fluid_sfont_get_id(fluid_font);
+            patch.bank = fluid_sfont_get_id(fluid_font);
             int bank    = (*preset.get_banknum)(&preset);
             if (onlyDrums && bank != 128)
                   continue;
             patch.name  = (*preset.get_name)(&preset);
-            patch.lbank = -1;
+            patch.bank = bank;
             patch.prog  = (*preset.get_num)(&preset);
             patch.drum  = onlyDrums;
             return &patch;
             }
       return 0;
       }
+#endif
 

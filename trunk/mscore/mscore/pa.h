@@ -23,7 +23,7 @@
 
 #include "config.h"
 
-class ISynth;
+class Synth;
 class Seq;
 class MidiDriver;
 
@@ -40,7 +40,6 @@ class Portaudio : public Driver {
       unsigned pos;
       double startTime;
 
-      ISynth* synth;
       MidiDriver* midiDriver;
 
    public:

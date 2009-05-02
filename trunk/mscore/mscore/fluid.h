@@ -26,37 +26,33 @@
 #include "seq.h"
 
 #ifdef USE_GLOBAL_FLUID
-#include <fluidsynth.h>
-#else
-#include "fluid/fluidsynth.h"
-#endif
 
+#include <fluidsynth.h>
 struct MidiOutEvent;
 
 //---------------------------------------------------------
-//   ISynth
+//   Fluid
 //---------------------------------------------------------
 
-class ISynth : public Synth {
-      _fluid_synth_t* _fluidsynth;
+class Fluid : public Synth {
+      fluid_synth_t* _fluidsynth;
 
       mutable fluid_sfont_t* fluid_font;
       mutable MidiPatch patch;
 
-      char* sfont;
-      int fontId;
-      int lbank;
-
    public:
-      ISynth();
-      ~ISynth() {}
-      virtual bool init(int sampleRate);
+      Fluid();
+      ~Fluid() {}
+      virtual void init(int sampleRate, int midiChannels);
       virtual bool loadSoundFont(const QString&);
       virtual void process(unsigned, float*, float*, int);
       virtual void play(const MidiOutEvent&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const;
       };
 
+#else // USE_GLOBAL_FLUID
+#include "fluid/fluid.h"
+#endif // USE_GLOBAL_FLUID
 #endif
 
 

@@ -25,7 +25,7 @@
 #include "driver.h"
 #include <jack/jack.h>
 
-class ISynth;
+class Synth;
 class Seq;
 class MidiDriver;
 
@@ -42,7 +42,6 @@ class JackAudio : public Driver {
       jack_port_t* portR;
       jack_port_t* portL;
 
-      ISynth* synth;
       MidiDriver* midiDriver;
 
       static int processAudio(jack_nframes_t, void*);
