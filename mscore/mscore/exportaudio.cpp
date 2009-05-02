@@ -29,12 +29,13 @@
 #include "note.h"
 #include "mscore.h"
 #include "part.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   playEvent
 //---------------------------------------------------------
 
-static void playEvent(Score* cs, ISynth* driver, const Event* event)
+static void playEvent(Score* cs, Synth* driver, const Event* event)
       {
       int type = event->type();
       if (type == ME_NOTEON) {
@@ -69,9 +70,27 @@ bool Score::saveAudio(const QString& name, int format)
       {
       int sampleRate = 44100;
 
-      ISynth* synth = new ISynth();
-      if (!synth->init(sampleRate)) {
-            fprintf(stderr, "Synti init failed\n");
+#ifdef USE_GLOBAL_FLUID
+      Synth* synth = new Fluid();
+#else
+      Synth* synth = new FluidS::Fluid();
+#endif
+
+      synth->init(sampleRate, preferences.midiPorts);
+      QString p;
+      if (!preferences.soundFont.isEmpty())
+            p = preferences.soundFont;
+      else
+            p = QString(getenv("DEFAULT_SOUNDFONT"));
+      if (p.isEmpty()) {
+            //
+            // fallback to integrated soundfont
+            //
+            p = ":/data/piano1.sf2";
+            }
+      bool rv = synth->loadSoundFont(p);
+      if (!rv) {
+            fprintf(stderr, "loading sound font <%s> failed\n", qPrintable(p));
             delete synth;
             return false;
             }

@@ -25,8 +25,8 @@
 #include "driver.h"
 #include "fifo.h"
 #include "tempo.h"
+#include "moevent.h"
 
-class Synth;
 class Note;
 class QTimer;
 class Score;
@@ -35,16 +35,6 @@ class Measure;
 class Driver;
 class Part;
 struct Channel;
-
-//---------------------------------------------------------
-//   MidiPatch
-//---------------------------------------------------------
-
-struct MidiPatch {
-      bool drum;
-      signed char hbank, lbank, prog;
-      const char* name;
-      };
 
 //---------------------------------------------------------
 //   SeqMsg

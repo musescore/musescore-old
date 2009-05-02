@@ -72,8 +72,7 @@ struct Channel {
       mutable EventList init;
 
       int program;     // current values as shown in mixer
-      int hbank;       // initialized from "init"
-      int lbank;
+      int bank;        // initialized from "init"
       char volume;
       char pan;
       char chorus;

@@ -21,36 +21,12 @@
 #ifndef __DRIVER_H__
 #define __DRIVER_H__
 
-#include "event.h"
+// #include "event.h"
 
 class Seq;
 class MidiPatch;
-
-//---------------------------------------------------------
-//   MidiOutEvent
-//---------------------------------------------------------
-
-struct MidiOutEvent {
-      char port;
-      char type;        // midi event type and channel
-      char a;
-      char b;
-
-      MidiOutEvent() {}
-
-      bool operator<(const MidiOutEvent& e) const {
-            // play note off events first to prevent overlapping
-            // notes
-
-            int channel = type & 0xf;
-            if (channel == (e.type & 0xf)) {
-                  int t = type & 0xf0;
-                  return t == ME_NOTEOFF || (t == ME_NOTEON && b == 0);
-                  }
-            int map[16] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15 };
-            return map[channel] < map[e.type & 0xf];
-            }
-      };
+class Synth;
+class MidiOutEvent;
 
 //---------------------------------------------------------
 //   Driver
@@ -60,9 +36,10 @@ class Driver {
 
    protected:
       Seq* seq;
+      Synth* synth;
 
    public:
-      Driver(Seq* s)    { seq = s;}
+      Driver(Seq* s)    { seq = s; synth = 0; }
       virtual ~Driver() {}
       virtual bool init() = 0;
       virtual bool start() = 0;
@@ -77,6 +54,8 @@ class Driver {
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
       virtual const MidiPatch* getPatchInfo(bool /*onlyDrums*/, const MidiPatch*) { return 0; }
+
+      Synth* getSynth() const { return synth; }
       };
 
 #endif

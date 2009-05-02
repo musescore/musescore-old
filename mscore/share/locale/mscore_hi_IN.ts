@@ -1362,14 +1362,6 @@ failed: </source>
         <source>Chord</source>
         <translation type="unfinished">स्वरसंघात/कॉर्ड</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6240,6 +6232,10 @@ Please select a single note or rest and retry operation
         <source>MuseScore: Import Capella</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7781,10 +7777,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation type="unfinished">गतिक (डैनामिक)</translation>
     </message>
@@ -7974,6 +7966,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

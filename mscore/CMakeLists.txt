@@ -28,7 +28,7 @@ cmake_policy(SET CMP0003 NEW)
 
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
-set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
+set(USE_GLOBAL_FLUID TRUE)                # use internal fluid lib if false
 set(GCC_VISIBILITY FALSE)                 # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
@@ -254,19 +254,19 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_CONTACT "ws@seh.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
       SET(CPACK_STRIP_FILES "mscore.exe")
-      
+
       # File types association:
       SET(CPACK_NSIS_DEFINES "!include ${PROJECT_SOURCE_DIR}/packaging\\\\FileAssociation.nsh")
-      
+
       SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
           Push \\\"ATENDATA\\\"
           Push \\\"$INSTDIR\\\\share\\\\aten\\\"
-          Call WriteEnvStr      
+          Call WriteEnvStr
       ")
-      
+
       SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
           \\\${registerExtension} \\\"MuseScore File\\\" \\\".mscx\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\"
-          \\\${registerExtension} \\\"Compressed MuseScore File\\\" \\\".mscz\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\" 
+          \\\${registerExtension} \\\"Compressed MuseScore File\\\" \\\".mscz\\\" \\\"\\\$INSTDIR\\\\bin\\\\mscore.exe\\\"
       ")
       SET(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
           \\\${unregisterExtension} \\\".mscx\\\" \\\"MuseScore File\\\"

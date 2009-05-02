@@ -109,7 +109,6 @@ class AlsaAudio : public Driver {
       int state;
       bool seekflag;
       double startTime;
-      ISynth* synth;
 
       Port midiInPort;
       MidiDriver* midiDriver;

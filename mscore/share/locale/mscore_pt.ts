@@ -1099,7 +1099,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alinhamento  esquerda</translation>
     </message>
 </context>
 <context>
@@ -1369,14 +1369,6 @@ failed: </source>
     <message>
         <source>Chord</source>
         <translation type="unfinished">Acorde</translation>
-    </message>
-    <message>
-        <source>TopChord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6251,6 +6243,10 @@ Por favor, seleccione uma única nota ou pausa e tente novamente</translation>
         <source>MuseScore: Import Capella</source>
         <translation>MuseScore: Importar Capella</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7799,10 +7795,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation type="unfinished">Dinâmica</translation>
     </message>
@@ -7992,6 +7984,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

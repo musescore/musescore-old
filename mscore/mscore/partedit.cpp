@@ -24,6 +24,7 @@
 #include "partedit.h"
 #include "seq.h"
 #include "undo.h"
+#include "synti.h"
 
 //---------------------------------------------------------
 //   PartEdit
@@ -160,7 +161,7 @@ void PartEdit::patchChanged(int n)
             if (idx == n) {
                   Score* score = part->score();
                   score->startCmd();
-                  score->undo()->push(new ChangePatch(part, channel, p->prog, p->hbank, p->lbank));
+                  score->undo()->push(new ChangePatch(part, channel, p->prog, p->bank));
                   score->endCmd();
                   return;
                   }

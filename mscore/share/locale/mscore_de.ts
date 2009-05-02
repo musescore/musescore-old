@@ -1367,14 +1367,6 @@ fehlgeschlagen: </translation>
         <source>Chord</source>
         <translation>Akkord</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Akkord oben</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Akkord unten</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6256,6 +6248,10 @@ Bitte wählen sie eine Note oder Pause aus und versuchen es nochmal.
         <source>MuseScore: Import Capella</source>
         <translation>MuseScore: Import Capella</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7802,10 +7798,6 @@ p, li { white-space: pre-wrap; }
         <translation>Bindebogen</translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation>Attribut</translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation>Dynamik</translation>
     </message>
@@ -7996,6 +7988,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon</source>
         <translation>Icon</translation>
+    </message>
+    <message>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

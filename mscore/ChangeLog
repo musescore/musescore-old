@@ -1,10 +1,18 @@
+2.may (ws)
+      - reworked internal fluid synthesizer:
+         - do not process chorus/reverb if no sound is produced; this reduces
+           the idle load on my processor from 10% to nearly 0%
+         - Samples are only loaded from soundfont if needed. This speeds up
+           startup and reduces the memory footprint escpecially
+           when using large sound fonts.
+         - converted to c++, added namespace protection
 1.may (db)
-      - Windows installer decompresses a Windows SoundFont and moves it to the 
+      - Windows installer decompresses a Windows SoundFont and moves it to the
         MuseScore folder. Work is incomplete since the user must manually install 7-Zip first.
 30.apr (lv)
       - MusicXML export of multiple-measure rest, including testfile testMultiMeasureRest.xml
       (db)
-      - Added NSIS.InstallOptions.ini to allow more complex customizations to Windows 
+      - Added NSIS.InstallOptions.ini to allow more complex customizations to Windows
         installer
 29.apr (db)
       - work towards setting file associations on Windows (initial work by la)
@@ -20,6 +28,7 @@
 24.apr (lv)
       - MusicXML parsing of multiple-measure rest
 23.apr (ws)
+      - export percussion clef as "percussion" instead as "PERC" to musicxml
       - fix: time signature changes cause extra bar lines at end
       - new command: "x" flips between up fermata and down fermata
 22.apr (lv)

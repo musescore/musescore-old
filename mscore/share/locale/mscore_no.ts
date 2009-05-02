@@ -1373,14 +1373,6 @@ feilet:</translation>
         <source>Chord</source>
         <translation>Akkord</translation>
     </message>
-    <message>
-        <source>TopChord</source>
-        <translation>Øverste akkord</translation>
-    </message>
-    <message>
-        <source>BottomChord</source>
-        <translation>Nederste akkord</translation>
-    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -6256,6 +6248,10 @@ Vennligst velg én enkelt note eller pause og prøv igjen
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Innlasting av paletter feilet:</translation>
     </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -7807,10 +7803,6 @@ p, li { white-space: pre-wrap; }
         <translation>Bindebue</translation>
     </message>
     <message>
-        <source>Attribute</source>
-        <translation>Egenskap</translation>
-    </message>
-    <message>
         <source>Dynamic</source>
         <translation>Dynamikk</translation>
     </message>
@@ -8001,6 +7993,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon</source>
         <translation>Ikon</translation>
+    </message>
+    <message>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

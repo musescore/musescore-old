@@ -51,8 +51,8 @@ InstrumentTemplate::InstrumentTemplate()
 void InstrumentTemplate::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.tag("name", name.toPlainText());            // TODO
-      xml.tag("short-name", shortName.toPlainText()); // TODO
+      xml.tag("name", name.toPlainText());            // TODO: use doc
+      xml.tag("short-name", shortName.toPlainText()); // TODO: use doc
       xml.tag("description", trackName);
       if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
@@ -254,6 +254,7 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             a->reverb       = 0;
             a->name         = "normal";
             a->program      = 0;
+            a->bank         = 0;
             a->volume       = 100;
             a ->pan         = 60;
             channel.append(a);

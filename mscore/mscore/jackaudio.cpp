@@ -332,13 +332,13 @@ bool JackAudio::init()
                   fprintf(stderr, "no jack port for right channel found!\n");
                   }
             }
-      synth = new ISynth();
-      if (!synth->init(_sampleRate)) {
-            fprintf(stderr, "Synti init failed\n");
-            delete synth;
-            synth = 0;
-            return false;
-            }
+
+#ifdef USE_GLOBAL_FLUID
+      synth = new Fluid();
+#else
+      synth = new FluidS::Fluid();
+#endif
+      synth->init(_sampleRate, preferences.midiPorts);
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;

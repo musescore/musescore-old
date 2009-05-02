@@ -23,6 +23,7 @@
 #include "driver.h"
 #include "score.h"
 #include "part.h"
+#include "moevent.h"
 
 //---------------------------------------------------------
 //   NoteEvent::write

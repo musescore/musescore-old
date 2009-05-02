@@ -116,13 +116,12 @@ bool Portaudio::init()
                   printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
             return false;
             }
-      synth = new ISynth();
-      if (!synth->init(_sampleRate)) {
-            fprintf(stderr, "Synti init failed\n");
-            delete synth;
-            synth = 0;
-            return false;
-            }
+#ifdef USE_GLOBAL_FLUID
+      synth = new Fluid();
+#else
+      synth = new FluidS::Fluid();
+#endif
+      synth->init(_sampleRate, preferences.midiPorts);
 #ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver(seq);
 #endif
