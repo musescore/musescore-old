@@ -356,7 +356,7 @@ MuseScore::MuseScore()
          << "system-break" << "page-break"
          << "edit-element"
          << "mag" << "reset-positions" << "inspector" << "script-debug"
-         << "backspace" << "find"
+         << "backspace" << "find" << "zoomin" << "zoomout"
          ;
 
       foreach(const QString& s, sl) {
@@ -1445,7 +1445,7 @@ void setMscoreLocale(QString localeName)
       //
       shortcuts.clear();
       for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
+            if (MuseScore::sc[i].xml[0] == 0)
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
@@ -1885,6 +1885,10 @@ void MuseScore::cmd(QAction* a)
             }
       else if (cmd == "backspace")
             undo();
+      else if (cmd == "zoomin")
+            incMag();
+      else if (cmd == "zoomout")
+            decMag();
       else {
             if (cs)
                   cs->cmd(cmd);
@@ -2014,38 +2018,59 @@ void MuseScore::changeState(int val)
 
 Shortcut::Shortcut()
       {
-      state   = STATE_NORMAL;
-      xml     = 0;
-      key     = 0;
-      context = Qt::WindowShortcut;
-      icon    = 0;
-      action  = 0;
-      translated = false;
+      state       = STATE_NORMAL;
+      xml         = 0;
+      standardKey = QKeySequence::UnknownKey;
+      key         = 0;
+      context     = Qt::WindowShortcut;
+      icon        = 0;
+      action      = 0;
+      translated  = false;
       }
 
 Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k,
    Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
       {
-      state   = s;
-      xml     = name;
-      key     = k;
-      context = cont;
-      icon    = i;
-      action  = 0;
-      descr   = d; // qApp->translate("MuseScore", d);
-      help    = h; // qApp->translate("MuseScore", h);
-      text    = txt; // qApp->translate("MuseScore", txt);
-      translated = false;
+      state       = s;
+      xml         = name;
+      standardKey = QKeySequence::UnknownKey;
+      key         = k;
+      context     = cont;
+      icon        = i;
+      action      = 0;
+      descr       = d; // qApp->translate("MuseScore", d);
+      help        = h; // qApp->translate("MuseScore", h);
+      text        = txt; // qApp->translate("MuseScore", txt);
+      translated  = false;
+      }
+
+Shortcut::Shortcut(int s, const char* name, const char* d, QKeySequence::StandardKey sk,
+   Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
+      {
+      state       = s;
+      xml         = name;
+      standardKey = sk;
+      key         = 0;
+      context     = cont;
+      icon        = i;
+      action      = 0;
+      descr       = d;   // qApp->translate("MuseScore", d);
+      help        = h;   // qApp->translate("MuseScore", h);
+      text        = txt; // qApp->translate("MuseScore", txt);
+      translated  = false;
       }
 
 Shortcut::Shortcut(const Shortcut& c)
       {
-      state   = c.state;
-      xml     = c.xml;
-      key     = c.key;
-      context = c.context;
-      icon    = c.icon;
-      action  = c.action;
+      state       = c.state;
+      xml         = c.xml;
+      standardKey = c.standardKey;
+      key         = c.key;
+      if (standardKey != QKeySequence::UnknownKey)
+            key = QKeySequence(standardKey);
+      context     = c.context;
+      icon        = c.icon;
+      action      = c.action;
       if (c.translated) {
             descr   = c.descr;
             help    = c.help;

@@ -34,6 +34,7 @@
 #include "pa.h"
 #endif
 
+#include "synti.h"
 #include "slur.h"
 #include "score.h"
 #include "segment.h"
