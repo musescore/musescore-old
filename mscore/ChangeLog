@@ -1,4 +1,5 @@
 2.may (ws)
+      - fix pitch of transposing instruments
       - reworked internal fluid synthesizer:
          - do not process chorus/reverb if no sound is produced; this reduces
            the idle load on my processor from 10% to nearly 0%

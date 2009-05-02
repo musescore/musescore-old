@@ -157,9 +157,10 @@ void Note::setPitch(int val)
             val = 127;
       else if (val < 0)
             val = 0;
-      int diff = _ppitch - _pitch;
       _pitch  = val;
-      _ppitch = val + diff;
+      Instrument* instr = score()->part(staffIdx())->instrument();
+      int pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
+      _ppitch = _pitch + pitchOffset;
       int key = (staff() && chord()) ? staff()->key(chord()->tick()) : 0;
       _tpc    = pitch2tpc(_pitch, key);
       }

@@ -1853,6 +1853,7 @@ void Score::cmd(const QString& cmd)
       if (debugMode)
             printf("cmd <%s>\n", cmd.toLatin1().data());
 
+      QAction* a = getAction(cmd.toLatin1().data());
       if (editObject) {                          // in edit mode?
             if (cmd == "paste") {
                   if (editObject->isTextB())
@@ -1865,7 +1866,6 @@ void Score::cmd(const QString& cmd)
       if (cmd == "print")
             printFile();
       else if (cmd == "note-input") {
-            QAction* a = getAction(cmd.toLatin1().data());
             setNoteEntry(a->isChecked());
 //            _is.rest = false;
             end();
@@ -2267,7 +2267,6 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "transpose")
                   transpose();
             else if (cmd == "concert-pitch") {
-                  QAction* a = getAction(cmd.toLatin1().data());
                   if (styleB(ST_concertPitch) != a->isChecked())
                         cmdConcertPitchChanged(a->isChecked());
                   }
