@@ -131,14 +131,14 @@ int transposeKey(int key, int semitones)
             semitones += 12;
       semitones = semitones % 12;
 
-      printf("transposeKey key %d semitones %d\n", key, semitones);
+//      printf("transposeKey key %d semitones %d\n", key, semitones);
 
       // switch to enharmonic key:
       if (key == -7)
             key = 5;
       else if (key == 7)
             key = -5;
-      printf("  transposeKey key %d semitones %d\n", key, semitones);
+//      printf("  transposeKey key %d semitones %d\n", key, semitones);
 
       key += 6;         // normalize key to 0 - 13
 

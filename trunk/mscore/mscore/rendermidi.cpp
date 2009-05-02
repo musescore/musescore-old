@@ -205,6 +205,7 @@ struct OttavaShiftSegment {
 
 void Score::fixPpitch()
       {
+printf("fixPpitch()\n");
       int ns = nstaves();
       QList<OttavaShiftSegment> osl[ns];
 
