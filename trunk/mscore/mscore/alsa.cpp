@@ -607,7 +607,7 @@ bool AlsaAudio::init()
 #endif
 
       int sr = alsa->sampleRate();
-      synth->init(sr, preferences.midiPorts);
+      synth->init(sr, preferences.midiPorts * 16);
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;

@@ -338,7 +338,7 @@ bool JackAudio::init()
 #else
       synth = new FluidS::Fluid();
 #endif
-      synth->init(_sampleRate, preferences.midiPorts);
+      synth->init(_sampleRate, preferences.midiPorts * 16);
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;

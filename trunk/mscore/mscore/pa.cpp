@@ -121,7 +121,7 @@ bool Portaudio::init()
 #else
       synth = new FluidS::Fluid();
 #endif
-      synth->init(_sampleRate, preferences.midiPorts);
+      synth->init(_sampleRate, preferences.midiPorts * 16);
 #ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver(seq);
 #endif

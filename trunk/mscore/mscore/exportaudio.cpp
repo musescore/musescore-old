@@ -76,7 +76,7 @@ bool Score::saveAudio(const QString& name, int format)
       Synth* synth = new FluidS::Fluid();
 #endif
 
-      synth->init(sampleRate, preferences.midiPorts);
+      synth->init(sampleRate, preferences.midiPorts * 16);
       QString p;
       if (!preferences.soundFont.isEmpty())
             p = preferences.soundFont;
