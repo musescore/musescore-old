@@ -124,6 +124,7 @@ class Shortcut {
       const char* xml;        //! xml tag name for configuration file
       QString descr;          //! descriptor, shown in editor
       QKeySequence key;       //! shortcut
+      QKeySequence::StandardKey standardKey;
       Qt::ShortcutContext context;
       QString text;           //! text as shown on buttons or menus
       QString help;           //! ballon help
@@ -132,6 +133,9 @@ class Shortcut {
       bool translated;
 
       Shortcut();
+      Shortcut(int state, const char* name, const char* d, QKeySequence::StandardKey sk = QKeySequence::UnknownKey,
+         Qt::ShortcutContext cont = Qt::ApplicationShortcut,
+         const char* txt = 0, const char* h = 0, QIcon* i = 0);
       Shortcut(int state, const char* name, const char* d, const QKeySequence& k = QKeySequence(),
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
          const char* txt = 0, const char* h = 0, QIcon* i = 0);

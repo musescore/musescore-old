@@ -1,4 +1,5 @@
 2.may (ws)
+      - use platform independend QKeySequence::StandardKey for shortcut initialization
       - put only saved files on "open recent" list
       - fix pitch of transposing instruments
       - reworked internal fluid synthesizer:
