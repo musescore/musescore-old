@@ -158,8 +158,12 @@ void Note::setPitch(int val)
       else if (val < 0)
             val = 0;
       _pitch  = val;
-      Instrument* instr = score()->part(staffIdx())->instrument();
-      int pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
+      int pitchOffset   = 0;
+      Part* part        = score()->part(staffIdx());
+      if (part) {
+            Instrument* instr = part->instrument();
+            pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
+            }
       _ppitch = _pitch + pitchOffset;
       int key = (staff() && chord()) ? staff()->key(chord()->tick()) : 0;
       _tpc    = pitch2tpc(_pitch, key);

@@ -930,9 +930,17 @@ void MuseScore::appendScore(Score* score)
       tab->blockSignals(true);
       tab->addTab(score->canvas(), score->name());
       tab->blockSignals(false);
+      }
 
-      recentScores.removeAll(score->filePath());
-      recentScores.prepend(score->filePath());
+//---------------------------------------------------------
+//   updateRecentScores
+//---------------------------------------------------------
+
+void MuseScore::updateRecentScores(Score* score)
+      {
+      QString path = score->fileInfo()->absoluteFilePath();
+      recentScores.removeAll(path);
+      recentScores.prepend(path);
       }
 
 //---------------------------------------------------------
@@ -1011,8 +1019,13 @@ void MuseScore::loadScoreList()
       if (useFactorySettings)
             return;
       QSettings s;
-      for (int i = 0; i < RECENT_LIST_SIZE; ++i)
-            recentScores.append(s.value(QString("recent-%1").arg(i),"").toString());
+      for (int i = RECENT_LIST_SIZE-1; i >= 0; --i) {
+            QString path = s.value(QString("recent-%1").arg(i),"").toString();
+            if (!path.isEmpty()) {
+                  recentScores.removeAll(path);
+                  recentScores.prepend(path);
+                  }
+            }
       }
 
 //---------------------------------------------------------

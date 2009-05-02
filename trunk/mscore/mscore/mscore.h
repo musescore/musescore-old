@@ -344,6 +344,7 @@ class MuseScore : public QMainWindow {
       void setCurrentScore(Score*);
       QProgressBar* showProgressBar();
       void hideProgressBar();
+      void updateRecentScores(Score*);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

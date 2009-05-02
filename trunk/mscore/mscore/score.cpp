@@ -495,6 +495,8 @@ bool Score::read(QString name)
       updateChannel();
       fixPpitch();
 
+      mscore->updateRecentScores(this);
+
       layoutAll = false;
       return true;
       }

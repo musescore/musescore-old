@@ -216,30 +216,10 @@ bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, Score* cs) const
       switch(controller()) {
             case CTRL_PROGRAM:
                   {
-                  int hb = (value() >> 16) & 0xff;
-                  int lb = (value() >> 8) & 0xff;
-                  int pr = value() & 0xff;
-                  if (hb != 0xff) {
-                        MidiOutEvent e;
-                        e.port = port;
-                        e.type = ME_CONTROLLER | ch;
-                        e.a    = CTRL_HBANK;
-                        e.b    = hb;
-                        el->append(e);
-                        }
-                  if (lb != 0xff) {
-                        MidiOutEvent e;
-                        e.port = port;
-                        e.type = ME_CONTROLLER | ch;
-                        e.a    = CTRL_LBANK;
-                        e.b    = lb;
-                        el->append(e);
-                        }
                   MidiOutEvent e;
                   e.port = port;
                   e.type = ME_PROGRAM | ch;
-                  e.a    = pr;
-                  e.b    = cs->midiMapping()->at(channel()).part->useDrumset();
+                  e.a    = value() & 0x7f;
                   el->append(e);
                   }
                   return true;

@@ -706,7 +706,9 @@ void Seq::initInstruments()
             const Instrument* instr = part->instrument();
 
             foreach(const Channel* a, instr->channel) {
+                  int idx = 0;
                   foreach(Event* e, a->init) {
+                        ++idx;
                         if (e == 0)
                               continue;
                         e->setChannel(a->channel);

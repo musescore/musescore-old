@@ -115,6 +115,7 @@ void Instrument::write(Xml& xml) const
 void Instrument::read(QDomElement e)
       {
       int program = -1;
+      int bank    = 0;
       int chorus = 30;
       int reverb = 30;
       int volume = 100;
@@ -194,9 +195,15 @@ void Instrument::read(QDomElement e)
             a->reverb       = reverb;
             a->name         = "normal";
             a->program      = program;
+            a->bank         = bank;
             a->volume       = volume;
             a ->pan         = pan;
             channel.append(a);
+            }
+      if (useDrumset) {
+            if (channel[0]->bank == 0)
+                  channel[0]->bank = 128;
+            channel[0]->updateInitList();
             }
       }
 
@@ -223,7 +230,7 @@ Channel::Channel()
             init.append(0);
       channel  = -1;
       program  = -1;
-      bank     = -1;
+      bank     = 0;
       volume   = 100;
       pan      = 64;
       chorus   = 30;
@@ -270,44 +277,36 @@ void Channel::read(QDomElement e)
                   program = e.attribute("value", "-1").toInt();
                   if (program == -1)
                         program = val.toInt();
-                  ControllerEvent* e = new ControllerEvent();
-                  e->setController(CTRL_PROGRAM);
-                  e->setValue(program);
-                  init[A_PROGRAM] = e;
                   }
             else if (tag == "controller") {
                   int value = e.attribute("value", "0").toInt();
                   int ctrl  = e.attribute("ctrl", "0").toInt();
-                  ControllerEvent* e = new ControllerEvent();
-                  e->setController(ctrl);
-                  e->setValue(value);
                   switch(ctrl) {
                         case CTRL_HBANK:
-                              init[A_HBANK] = e;
                               bank = (value << 7) + (bank & 0x7f);
                               break;
                         case CTRL_LBANK:
-                              init[A_LBANK] = e;
-                              bank = (bank << 7) + (value & 0x7f);
+                              bank = (bank & ~0x7f) + (value & 0x7f);
                               break;
                         case CTRL_VOLUME:
-                              init[A_VOLUME] = e;
                               volume = value;
                               break;
                         case CTRL_PANPOT:
                               pan = value;
-                              init[A_PAN] = e;
                               break;
                         case CTRL_CHORUS_SEND:
                               chorus = value;
-                              init[A_CHORUS] = e;
                               break;
                         case CTRL_REVERB_SEND:
                               reverb = value;
-                              init[A_REVERB] = e;
                               break;
                         default:
+                              {
+                              ControllerEvent* e = new ControllerEvent();
+                              e->setController(ctrl);
+                              e->setValue(value);
                               init.append(e);
+                              }
                               break;
                         }
                   }
@@ -336,17 +335,16 @@ void Channel::updateInitList() const
             e->setValue(program);
             init[A_PROGRAM] = e;
             }
-#if 0 // TODO
+
       e = new ControllerEvent();
       e->setController(CTRL_HBANK);
-      e->setValue(hbank);
+      e->setValue((bank >> 7) & 0x7f);
       init[A_HBANK] = e;
 
       e = new ControllerEvent();
       e->setController(CTRL_LBANK);
-      e->setValue(lbank);
+      e->setValue(bank & 0x7f);
       init[A_LBANK] = e;
-#endif
 
       e = new ControllerEvent();
       e->setController(CTRL_VOLUME);
