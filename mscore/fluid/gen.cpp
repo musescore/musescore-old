@@ -18,13 +18,13 @@
  * 02111-1307, USA
  */
 
-
 #include "gen.h"
-#include "chan.h"
+#include "fluid.h"
 
+namespace FluidS {
 
 /* See SFSpec21 $8.1.3 */
-fluid_gen_info_t fluid_gen_info[] = {
+GenInfo fluid_gen_info[] = {
         /* number/name             init  scale         min        max         def */
         { GEN_STARTADDROFS,           1,     1,       0.0f,     1e10f,       0.0f },
         { GEN_ENDADDROFS,             1,     1,     -1e10f,      0.0f,       0.0f },
@@ -94,56 +94,49 @@ fluid_gen_info_t fluid_gen_info[] = {
  * @param gen Array of generators (should be #GEN_LAST in size).
  * @return Always returns 0
  */
-int
-fluid_gen_set_default_values(fluid_gen_t* gen)
-{
-	int i;
-
-	for (i = 0; i < GEN_LAST; i++) {
+int fluid_gen_set_default_values(Generator* gen)
+      {
+	for (int i = 0; i < GEN_LAST; i++) {
 		gen[i].flags = GEN_UNUSED;
 		gen[i].mod = 0.0;
 		gen[i].nrpn = 0.0;
 		gen[i].val = fluid_gen_info[i].def;
-	}
-
-	return FLUID_OK;
-}
+	      }
+      return FLUID_OK;
+      }
 
 
 /* fluid_gen_init
  *
  * Set an array of generators to their initial value
  */
-int
-fluid_gen_init(fluid_gen_t* gen, fluid_channel_t* channel)
-{
-	int i;
-
+int fluid_gen_init(Generator* gen, Channel* channel)
+      {
 	fluid_gen_set_default_values(gen);
 
-	for (i = 0; i < GEN_LAST; i++) {
-		gen[i].nrpn = fluid_channel_get_gen(channel, i);
+	for (int i = 0; i < GEN_LAST; i++) {
+		gen[i].nrpn = channel->getGen(i);
 
 		/* This is an extension to the SoundFont standard. More
 		 * documentation is available at the fluid_synth_set_gen2()
 		 * function. */
-		if (fluid_channel_get_gen_abs(channel, i)) {
+		if (channel->getGenAbs(i))
 			gen[i].flags = GEN_ABS_NRPN;
-		}
-	}
+	      }
 
 	return FLUID_OK;
-}
+      }
 
 fluid_real_t fluid_gen_scale(int gen, float value)
-{
-	return (fluid_gen_info[gen].min
+      {
+      return (fluid_gen_info[gen].min
 		+ value * (fluid_gen_info[gen].max - fluid_gen_info[gen].min));
-}
+      }
 
 fluid_real_t fluid_gen_scale_nrpn(int gen, int data)
-{
+      {
 	fluid_real_t value = (float) data - 8192.0f;
 	fluid_clip(value, -8192, 8192);
 	return value * (float) fluid_gen_info[gen].nrpn_scale;
+      }
 }

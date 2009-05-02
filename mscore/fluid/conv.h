@@ -23,6 +23,8 @@
 
 #include "priv.h"
 
+namespace FluidS {
+
 #define FLUID_CENTS_HZ_SIZE     1200
 #define FLUID_VEL_CB_SIZE       128
 #define FLUID_CB_AMP_SIZE       961
@@ -58,5 +60,5 @@ extern fluid_real_t fluid_concave_tab[128];
 extern fluid_real_t fluid_convex_tab[128];
 extern fluid_real_t fluid_pan_tab[FLUID_PAN_SIZE];
 
-
+}
 #endif /* _FLUID_CONV_H */

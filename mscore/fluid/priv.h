@@ -1,138 +1,7 @@
-/* FluidSynth - A Software Synthesizer
- *
- * Copyright (C) 2003  Peter Hanappe and others.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public License
- * as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the Free
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
- * 02111-1307, USA
- */
-
-
 #ifndef _FLUIDSYNTH_PRIV_H
 #define _FLUIDSYNTH_PRIV_H
 
-#include "config.h"
-
-#include <sys/time.h>
-
-//==============================================================
-#if 0
-#if HAVE_STRING_H
-#include <string.h>
-#endif
-
-#if HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-
-#if HAVE_STDIO_H
-#include <stdio.h>
-#endif
-
-#if HAVE_MATH_H
-#include <math.h>
-#endif
-
-#if HAVE_ERRNO_H
-#include <errno.h>
-#endif
-
-#if HAVE_STDARG_H
-#include <stdarg.h>
-#endif
-
-#if HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-
-#if HAVE_FCNTL_H
-#include <fcntl.h>
-#endif
-
-#if HAVE_SYS_MMAN_H
-#include <sys/mman.h>
-#endif
-
-#include <sys/types.h>
-
-#if HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
-
-#include <sys/time.h>
-
-#if HAVE_SYS_SOCKET_H
-#include <sys/socket.h>
-#endif
-
-#if HAVE_NETINET_IN_H
-#include <netinet/in.h>
-#endif
-
-#if HAVE_NETINET_TCP_H
-#include <netinet/tcp.h>
-#endif
-
-#if HAVE_ARPA_INET_H
-#include <arpa/inet.h>
-#endif
-
-#if HAVE_LIMITS_H
-#include <limits.h>
-#endif
-
-#if HAVE_PTHREAD_H
-#include <pthread.h>
-#endif
-
-#if HAVE_IO_H
-#include <io.h>
-#endif
-#endif
-
-#ifdef __MINGW32__
-#include <windows.h>
-#endif
-
-//============================================================
-
-/* MinGW32 special defines */
-#ifdef MINGW32
-
-#include <stdint.h>
-#define snprintf _snprintf
-#define vsnprintf _vsnprintf
-
-#define DSOUND_SUPPORT 1
-#define WINMIDI_SUPPORT 1
-#define STDIN_FILENO 0
-#define STDOUT_FILENO 1
-#define STDERR_FILENO 2
-#define WITHOUT_SERVER 1
-
-#endif
-
-/* Darwin special defines (taken from config_macosx.h) */
-#ifdef DARWIN
-#define MACINTOSH
-#define __Types__
-#define WITHOUT_SERVER 1
-#endif
-
-
-#include "fluidsynth.h"
-
+namespace FluidS {
 
 /***************************************************************
  *
@@ -142,54 +11,14 @@
 typedef float fluid_real_t;
 
 
-typedef enum {
-  FLUID_OK = 0,
-  FLUID_FAILED = -1
-} fluid_status;
+enum fluid_status {
+      FLUID_OK = 0,
+      FLUID_FAILED = -1
+      };
 
 
 /** Integer types  */
 
-#if defined(MINGW32)
-
-/* Windows using MinGW32 */
-typedef int8_t             sint8;
-typedef uint8_t            uint8;
-typedef int16_t            sint16;
-typedef uint16_t           uint16;
-typedef int32_t            sint32;
-typedef uint32_t           uint32;
-typedef int64_t            sint64;
-typedef uint64_t           uint64;
-
-#elif defined(_WIN32)
-
-/* Windows */
-typedef signed __int8      sint8;
-typedef unsigned __int8    uint8;
-typedef signed __int16     sint16;
-typedef unsigned __int16   uint16;
-typedef signed __int32     sint32;
-typedef unsigned __int32   uint32;
-typedef signed __int64     sint64;
-typedef unsigned __int64   uint64;
-
-#elif defined(MACOS9)
-
-/* Macintosh */
-typedef signed char        sint8;
-typedef unsigned char      uint8;
-typedef signed short       sint16;
-typedef unsigned short     uint16;
-typedef signed int         sint32;
-typedef unsigned int       uint32;
-/* FIXME: needs to be verified */
-typedef long long          sint64;
-typedef unsigned long long uint64;
-
-#else
-
-/* Linux & Darwin */
 typedef int8_t             sint8;
 typedef u_int8_t           uint8;
 typedef int16_t            sint16;
@@ -199,20 +28,6 @@ typedef u_int32_t          uint32;
 typedef int64_t            sint64;
 typedef u_int64_t          uint64;
 
-#endif
-
-
-/***************************************************************
- *
- *       FORWARD DECLARATIONS
- */
-typedef struct _fluid_env_data_t fluid_env_data_t;
-typedef struct _fluid_adriver_definition_t fluid_adriver_definition_t;
-typedef struct _fluid_channel_t fluid_channel_t;
-typedef struct _fluid_tuning_t fluid_tuning_t;
-typedef struct _fluid_hashtable_t  fluid_hashtable_t;
-typedef struct _fluid_client_t fluid_client_t;
-typedef struct _fluid_server_socket_t fluid_server_socket_t;
 
 /***************************************************************
  *
@@ -263,20 +78,7 @@ typedef FILE*  fluid_file;
  * As soon as proper alignment is supported by the compiler, this
  * can be removed.
  */
-#ifdef ENABLE_SSE
-/* FIXME - This is broken on AMD 64 - only used if SSE enabled */
-#define FLUID_ALIGN16BYTE(ptr)(((int)(ptr)+15) & (~0xFL))
-#else
 #define FLUID_ALIGN16BYTE(ptr) ptr
-#endif
-
-#if WITH_FTS
-#define FLUID_PRINTF                 post
-#define FLUID_FLUSH()
-#else
-#define FLUID_PRINTF                 printf
-#define FLUID_FLUSH()                fflush(stdout)
-#endif
 
 #define FLUID_LOG                    fluid_log
 
@@ -284,14 +86,8 @@ typedef FILE*  fluid_file;
 #define M_PI 3.1415926535897932384626433832795
 #endif
 
-
-#define FLUID_ASSERT(a,b)
-#define FLUID_ASSERT_P(a,b)
-
-char* fluid_error();
-
-/* Internationalization */
-#define _(s) s
+extern char* fluid_error();
+}
 
 
 #endif /* _FLUIDSYNTH_PRIV_H */

@@ -18,7 +18,6 @@
  * 02111-1307, USA
  */
 
-
 /* Purpose:
  * Low-level voice processing:
  *
