@@ -1755,6 +1755,8 @@ static Segment* getNextCRSegment(Segment* s, int staffIdx)
 
 bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) const
       {
+      divideSegment = false;  // DEBUG
+
       const Page* page = searchPage(p);
       if (page == 0)
             return false;
