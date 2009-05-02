@@ -28,7 +28,7 @@ cmake_policy(SET CMP0003 NEW)
 
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
-set(USE_GLOBAL_FLUID TRUE)                # use internal fluid lib if false
+set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(GCC_VISIBILITY FALSE)                 # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
