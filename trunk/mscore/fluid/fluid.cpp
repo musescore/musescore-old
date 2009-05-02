@@ -704,12 +704,7 @@ int Fluid::program_change(int chan, int prognum)
       unsigned banknum = c->getBanknum();
       c->setPrognum(prognum);
 
-      Preset* preset = 0;
-      if (c->channum == 9)
-            preset = find_preset(banknum | DRUM_INST_MASK, prognum);
-
-      if (preset == 0)
-            preset = find_preset(banknum, prognum);
+      Preset* preset = find_preset(banknum, prognum);
 
       unsigned sfont_id = preset? preset->sfont->id() : 0;
       c->setSfontnum(sfont_id);

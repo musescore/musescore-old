@@ -16,18 +16,8 @@ enum fluid_status {
       FLUID_FAILED = -1
       };
 
-
-/** Integer types  */
-
-typedef int8_t             sint8;
-typedef u_int8_t           uint8;
-typedef int16_t            sint16;
-typedef u_int16_t          uint16;
-typedef int32_t            sint32;
-typedef u_int32_t          uint32;
-typedef int64_t            sint64;
-typedef u_int64_t          uint64;
-
+typedef int32_t  sint32;
+typedef uint32_t uint32;
 
 /***************************************************************
  *
