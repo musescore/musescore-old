@@ -330,15 +330,15 @@ void ChordRest::setSmall(bool val)
 
 void ChordRest::layoutArticulations(ScoreLayout* layout)
       {
-      double _spatium  = layout->spatium();
+      double _spatium  = layout->spatium() * mag();
       Measure* m       = measure();
       System* s        = m->system();
       int idx          = staff()->rstaff();
       qreal x          = centerX();
 
-      double distance  = point(score()->styleS(ST_propertyDistance));
-      double distance1 = point(score()->styleS(ST_propertyDistanceHead));
-      double distance2 = point(score()->styleS(ST_propertyDistanceStem));
+      double distance  = point(score()->styleS(ST_propertyDistance)) * mag();
+      double distance1 = point(score()->styleS(ST_propertyDistanceHead)) * mag();
+      double distance2 = point(score()->styleS(ST_propertyDistanceStem)) * mag();
 
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();
@@ -358,12 +358,12 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
             ArticulationAnchor aa = a->anchor();
             if (aa != A_CHORD)
                   continue;
-            QRectF bb(a->bbox());
+            qreal sh = a->bbox().height() * mag();
 
             dy += distance1;
-            if (bb.height() > (_spatium * .5))   // hack
-                  dy += bb.height() * .5;
-            qreal y = dy;
+            if (sh > (_spatium * .5))   // hack
+                  dy += sh * .5;
+            qreal y;
             if (isUp()) {
                   y = chordBotY + dy;
                   //

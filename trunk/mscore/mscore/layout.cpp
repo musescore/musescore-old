@@ -786,6 +786,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
+                                    ts->setMag(ts->staff()->mag());
                                     s->add(ts);
                                     needRelayout = true;
                                     }
