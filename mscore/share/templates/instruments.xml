@@ -979,6 +979,7 @@
             <program>80</program>
             </channel>
          </instrument>
+      </instrument-group>
 
    <instrument-group name="Brass">
       <instrument>
@@ -1610,6 +1611,7 @@
             <program>58</program>
             </channel>
          </instrument>
+      </instrument-group>
 
    <instrument-group name="Pitched Percussion">
       <instrument>
@@ -1977,6 +1979,7 @@
             <program>84</program>
             </channel>
          </instrument>
+      </instrument-group>
 
    <instrument-group name="Unpitched Percussion">
       <instrument>
@@ -2660,6 +2663,7 @@
             <name>Crash Cymbal 2</name>
             <stem>2</stem>
             </Drum>
+          </instrument>
       <instrument>
          <name>Ride Cymbal</name>
          <short-name>R. Cym.</short-name>
