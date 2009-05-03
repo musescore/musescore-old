@@ -12,7 +12,6 @@
     <frameSystemDistance>0</frameSystemDistance>
     <bracketDistance>0.3</bracketDistance>
     <measureSpacing>1.5</measureSpacing>
-    <dotNoteDistance>0.5</dotNoteDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
