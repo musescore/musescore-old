@@ -1,3 +1,5 @@
+3.may (ws)
+      - added extended instruments.xml file from Magnus Johansson
 2.may (ws)
       - use platform independend QKeySequence::StandardKey for shortcut initialization
       - put only saved files on "open recent" list
