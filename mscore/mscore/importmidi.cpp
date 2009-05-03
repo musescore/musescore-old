@@ -50,6 +50,7 @@
 #include "preferences.h"
 #include "box.h"
 #include "importmidi.h"
+#include "keysig.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -637,222 +638,6 @@ static QString instrName(int type, int hbank, int lbank, int program)
       }
 
 //---------------------------------------------------------
-//   exportMidi
-//---------------------------------------------------------
-
-class ExportMidi {
-      QFile f;
-      Score* cs;
-
-      void writeHeader();
-
-   public:
-      MidiFile mf;
-
-      ExportMidi(Score* s) { cs = s; }
-      bool write(const QString& name);
-      };
-
-//---------------------------------------------------------
-//   exportMidi
-//    return false on error
-//---------------------------------------------------------
-
-bool Score::saveMidi(const QString& name)
-      {
-      ExportMidi em(this);
-      return em.write(name);
-      }
-
-//---------------------------------------------------------
-//   writeHeader
-//---------------------------------------------------------
-
-void ExportMidi::writeHeader()
-      {
-      MidiTrack* track  = mf.tracks()->front();
-      MeasureBase* measure  = cs->layout()->first();
-
-      foreach (const Element* e, *measure->el()) {
-            if (e->type() == TEXT) {
-                  const Text* text = (const Text*)(e);
-                  QString str = text->getText();
-                  int len     = str.length() + 1;
-                  unsigned char* data = new unsigned char[len];
-                  strcpy((char*)(data), str.toLatin1().data());
-                  MetaEvent* ev = new MetaEvent();
-                  ev->setOntime(0);
-                  ev->setData(data);
-                  ev->setLen(len);
-
-                  switch (text->subtype()) {
-                        case TEXT_TITLE:
-                              ev->setMetaType(META_TITLE);
-                              track->insert(ev);
-                              break;
-                        case TEXT_SUBTITLE:
-                              ev->setMetaType(META_SUBTITLE);
-                              track->insert(ev);
-                              break;
-                        case TEXT_COMPOSER:
-                              ev->setMetaType(META_COMPOSER);
-                              track->insert(ev);
-                              break;
-                        case TEXT_TRANSLATOR:
-                              ev->setMetaType(META_TRANSLATOR);
-                              track->insert(ev);
-                              break;
-                        case TEXT_POET:
-                              ev->setMetaType(META_POET);
-                              track->insert(ev);
-                              break;
-                        default:
-                              delete ev;
-                              break;
-                        }
-                  }
-            }
-
-      //--------------------------------------------
-      //    write time signature
-      //--------------------------------------------
-
-      SigList* sigmap = cs->sigmap;
-      for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-            SigEvent se   = is->second;
-            unsigned char* data = new unsigned char[4];
-            data[0] = se.nominator;
-            int n;
-            switch (se.denominator) {
-                  case 1:  n = 0; break;
-                  case 2:  n = 1; break;
-                  case 4:  n = 2; break;
-                  case 8:  n = 3; break;
-                  case 16: n = 4; break;
-                  case 32: n = 5; break;
-                  default:
-                        n = 2;
-                        printf("ExportMidi: unknown time signature %d/%d\n", se.nominator, n);
-                        break;
-                  }
-            data[1] = n;
-            data[2] = 24;
-            data[3] = 8;
-
-            MetaEvent* ev = new MetaEvent;
-            ev->setMetaType(META_TIME_SIGNATURE);
-            ev->setData(data);
-            ev->setLen(4);
-            ev->setOntime(is->first);
-            track->insert(ev);
-            }
-
-      //---------------------------------------------------
-      //    write key signatures
-      //    assume every staff corresponds to a midi track
-      //---------------------------------------------------
-
-      QList<MidiTrack*>* tl = mf.tracks();
-      for (int i = 0; i < tl->size(); ++i) {
-            MidiTrack* track  = tl->at(i);
-
-            KeyList* keymap = cs->staff(i)->keymap();
-            for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-                  MetaEvent* ev  = new MetaEvent;
-                  ev->setOntime(ik->first);
-                  int key       = ik->second;   // -7 -- +7
-                  ev->setMetaType(META_KEY_SIGNATURE);
-                  ev->setLen(2);
-                  unsigned char* data = new unsigned char[2];
-                  data[0]   = key;
-                  data[1]   = 0;  // major
-                  ev->setData(data);
-                  track->insert(ev);
-                  }
-            }
-
-      //--------------------------------------------
-      //    write tempo changes
-      //--------------------------------------------
-
-      TempoList* tempomap = cs->tempomap;
-      for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-            MetaEvent* ev = new MetaEvent;
-            ev->setOntime(it->first);
-            //
-            // compute midi tempo: microseconds / quarter note
-            //
-            int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
-
-            ev->setMetaType(META_TEMPO);
-            ev->setLen(3);
-            unsigned char* data = new unsigned char[3];
-            data[0]   = tempo >> 16;
-            data[1]   = tempo >> 8;
-            data[2]   = tempo;
-            ev->setData(data);
-            track->insert(ev);
-            }
-      }
-
-//---------------------------------------------------------
-//  write
-//    export midi file
-//    return false on error
-//---------------------------------------------------------
-
-bool ExportMidi::write(const QString& name)
-      {
-      f.setFileName(name);
-      if (!f.open(QIODevice::WriteOnly))
-            return false;
-
-      mf.setDivision(::division);
-      mf.setFormat(1);
-      QList<MidiTrack*>* tracks = mf.tracks();
-      int nstaves = cs->nstaves();
-
-      for (int i = 0; i < nstaves; ++i)
-            tracks->append(new MidiTrack(&mf));
-
-      writeHeader();
-
-      SigList* sigmap = cs->sigmap;
-      int tickOffset  = sigmap->ticksMeasure(0);
-
-      cs->updateRepeatList(preferences.midiExpandRepeats);
-
-      foreach (Staff* staff, cs->staves()) {
-            Part* part       = staff->part();
-            int channel      = part->midiChannel();
-            int staffIdx     = staff->idx();
-            MidiTrack* track = tracks->at(staffIdx);
-            track->setOutPort(0);
-            track->setOutChannel(channel);
-
-            if (staff->isTop()) {
-                  if (part->midiProgram() != -1)
-                        track->insert(new ControllerEvent(0, channel, CTRL_PROGRAM, part->midiProgram()));
-                  track->insert(new ControllerEvent(2, channel, CTRL_VOLUME,      part->volume()));
-                  track->insert(new ControllerEvent(4, channel, CTRL_PANPOT,      part->pan()));
-                  track->insert(new ControllerEvent(6, channel, CTRL_REVERB_SEND, part->reverb()));
-                  track->insert(new ControllerEvent(8, channel, CTRL_CHORUS_SEND, part->chorus()));
-                  }
-            EventMap events;
-            cs->toEList(&events, tickOffset, staffIdx);
-            for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
-                  if (i.value()->type() == ME_NOTEON) {
-                        NoteOn* n = (NoteOn*)i.value();
-                        track->insert(new NoteOn(i.key(), n->channel(), n->pitch(), n->velo()));
-                        }
-                  else
-                        printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());
-                  }
-            }
-      return !mf.write(&f);
-      }
-
-//---------------------------------------------------------
 //   addLyrics
 //---------------------------------------------------------
 
@@ -933,6 +718,8 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, MetaEvent* mm)
                         (*staff->keymap())[mm->ontime()] = key;
                         track->setHasKey(true);
                         }
+                  else
+                        printf("meta key: no staff\n");
                   break;
             case META_COMPOSER:     // mscore extension
             case META_POET:
@@ -943,19 +730,20 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, MetaEvent* mm)
                   Text* text = new Text(cs);
                   switch(mm->metaType()) {
                         case META_COMPOSER:
-                              text->setSubtype(TEXT_COMPOSER);
+                        case TEXT_TITLE:
+                              text->setTextStyle(TEXT_STYLE_COMPOSER);
                               break;
                         case META_TRANSLATOR:
-                              text->setSubtype(TEXT_TRANSLATOR);
+                              text->setTextStyle(TEXT_STYLE_TRANSLATOR);
                               break;
                         case META_POET:
-                              text->setSubtype(TEXT_POET);
+                              text->setTextStyle(TEXT_STYLE_POET);
                               break;
                         case META_SUBTITLE:
-                              text->setSubtype(TEXT_SUBTITLE);
+                              text->setTextStyle(TEXT_STYLE_SUBTITLE);
                               break;
                         case META_TITLE:
-                              text->setSubtype(TEXT_TITLE);
+                              text->setTextStyle(TEXT_STYLE_TITLE);
                               break;
                         }
 
@@ -1086,6 +874,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                         s->setBracketSpan(0, 2);
                         ss->clefList()->setClef(0, CLEF_F);
                         ++i;
+                        tracks->at(i)->setStaff(ss);
                         }
                   else {
                         s->clefList()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
@@ -1183,13 +972,6 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             midiTrack->cleanup();
             }
 
-	staffIdx = 0;
-	foreach (MidiTrack* midiTrack, *tracks) {
-            if (midiTrack->staffIdx() == -1)
-                  continue;
-            convertTrack(midiTrack);
-            }
-
       //---------------------------------------------------
       //  process meta events
       //---------------------------------------------------
@@ -1227,6 +1009,8 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                   part->setMidiChannel(track->outChannel());
                   part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }
+            if (track->staffIdx() != -1)
+                  convertTrack(track);
             }
 
       for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
@@ -1270,13 +1054,13 @@ void Score::convertTrack(MidiTrack* midiTrack)
       int key      = findKey(midiTrack, sigmap);
       int staffIdx = midiTrack->staffIdx();
       midiTrack->findChords();
-      int voices = midiTrack->separateVoices(2);
 
-      Staff* cstaff = staff(staffIdx);
+      int voices         = midiTrack->separateVoices(2);
+      Staff* cstaff      = midiTrack->staff();
 	const EventList el = midiTrack->events();
-
-      Drumset* drumset = cstaff->part()->drumset();
-      bool useDrumset  = cstaff->part()->useDrumset();
+      Drumset* drumset   = cstaff->part()->drumset();
+      bool useDrumset    = cstaff->part()->useDrumset();
+      KeyList* km        = cstaff->keymap();
 
       for (int voice = 0; voice < voices; ++voice) {
             QList<MNote*> notes;
@@ -1448,7 +1232,22 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   }
             }
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
-            (*cstaff->keymap())[0] = key;
+            (*km)[0] = key;
+            }
+      for (ciKeyEvent i = km->begin(); i != km->end(); ++i) {
+            int tick = i->first;
+            int key  = i->second;
+            if (tick == 0)
+                  continue;
+            KeySig* ks = new KeySig(this);
+            ks->setTrack(staffIdx * VOICES);
+            ks->setTick(tick);
+            ks->setGenerated(false);
+            ks->setSubtype(key);
+            ks->setMag(cstaff->mag());
+            Measure* m = tick2measure(tick);
+            Segment* seg = m->getSegment(ks);
+            seg->add(ks);
             }
       }
 

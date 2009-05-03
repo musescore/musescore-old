@@ -52,7 +52,11 @@ static void playEvent(Score* cs, Synth* driver, const Event* event)
       else if (type == ME_CONTROLLER)  {
             const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
             QList<MidiOutEvent> ol;
-            if (c->midiOutEvent(&ol, cs)) {
+
+            int port = cs->midiPort(c->channel());
+            int ch   = cs->midiChannel(c->channel());
+
+            if (c->midiOutEvent(&ol, port, ch)) {
                   foreach(const MidiOutEvent& e, ol)
                         driver->play(e);
                   }
