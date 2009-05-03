@@ -85,10 +85,10 @@ StyleType styleTypes[] = {
       StyleType("dotRestDistance",         ST_SPATIUM),
 
       StyleType("dotDotDistance",          ST_SPATIUM),
-      StyleType("propertyDistanceHead",    ST_SPATIUM),  // note property to note head
-      StyleType("propertyDistanceStem",    ST_SPATIUM),  // note property to note stem
-      StyleType("propertyDistance",        ST_SPATIUM),      // note property to note property
-      StyleType("pageFillLimit",           ST_DOUBLE),         // 0-1.0
+      StyleType("propertyDistanceHead",    ST_SPATIUM),     // note property to note head
+      StyleType("propertyDistanceStem",    ST_SPATIUM),     // note property to note stem
+      StyleType("propertyDistance",        ST_SPATIUM),     // note property to note property
+      StyleType("pageFillLimit",           ST_DOUBLE),      // 0-1.0
       StyleType("lastSystemFillLimit",     ST_DOUBLE),
       StyleType("hairpinHeight",           ST_SPATIUM),
       StyleType("hairpinContHeight",       ST_SPATIUM),
@@ -337,9 +337,9 @@ Style::Style()
             StyleVal(Spatium(0.35)),              // ST_dotNoteDistance,
             StyleVal(Spatium(0.25)),              // ST_dotRestDistance,
             StyleVal(Spatium(0.5)),               // ST_dotDotDistance,
-            StyleVal(Spatium(0.5)),               // ST_propertyDistanceHead,
+            StyleVal(Spatium(1.0)),               // ST_propertyDistanceHead,
             StyleVal(Spatium(0.5)),               // ST_propertyDistanceStem,
-            StyleVal(Spatium(0.25)),              // ST_propertyDistance,
+            StyleVal(Spatium(1.0)),               // ST_propertyDistance,
             StyleVal(0.7),                        // ST_pageFillLimit,
             StyleVal(0.3),                        // ST_lastSystemFillLimit,
             StyleVal(Spatium(1.2)),               // ST_hairpinHeight,
