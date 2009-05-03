@@ -1,5 +1,7 @@
 3.may (ws)
       - added extended instruments.xml file from Magnus Johansson
+      (db)
+      - added new document-style icon for MuseScore
 2.may (ws)
       - use platform independend QKeySequence::StandardKey for shortcut initialization
       - put only saved files on "open recent" list

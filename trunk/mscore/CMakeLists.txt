@@ -247,7 +247,7 @@ include (InstallRequiredSystemLibraries)
       # There is a bug in NSI that does not handle full unix paths properly. Make
       # sure there is at least one set of four (4) backlasshes.
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data\\\\installerhead.bmp")
-      SET(CPACK_NSIS_INSTALLED_ICON_NAME "${PROJECT_SOURCE_DIR}/mscore/data\\\\mscore.bmp")
+      SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\mscore.exe,0")
       SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://www.musescore.org/")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://www.musescore.org/")
