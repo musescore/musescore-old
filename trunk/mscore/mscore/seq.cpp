@@ -82,6 +82,7 @@ Seq::Seq()
       heartBeatTimer->stop();
 
       noteTimer = new QTimer(this);
+      noteTimer->setSingleShot(true);
       connect(noteTimer, SIGNAL(timeout()), this, SLOT(stopNotes()));
       noteTimer->stop();
 
@@ -947,9 +948,8 @@ void Seq::startNote(Channel* a, int pitch, int velo)
 
 void Seq::startNote(Channel* a, int pitch, int velo, int duration)
       {
-      stopNotes();
       startNote(a, pitch, velo);
-      noteTimer->setSingleShot(duration);
+      noteTimer->setInterval(duration);
       noteTimer->start();
       }
 
