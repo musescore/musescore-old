@@ -361,7 +361,7 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
             QRectF bb(a->bbox());
 
             dy += distance1;
-            if (bb.height() > (_spatium * .3))   // hack
+            if (bb.height() > (_spatium * .5))   // hack
                   dy += bb.height() * .5;
             qreal y = dy;
             if (isUp()) {
