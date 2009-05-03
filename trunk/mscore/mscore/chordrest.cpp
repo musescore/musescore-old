@@ -325,6 +325,7 @@ void ChordRest::setSmall(bool val)
 
 //---------------------------------------------------------
 //   layoutArticulations
+//    if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
 //---------------------------------------------------------
 
 void ChordRest::layoutArticulations(ScoreLayout* layout)
@@ -339,17 +340,14 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));
       double distance2 = point(score()->styleS(ST_propertyDistanceStem));
 
-      qreal sy   = distance1;
-//      qreal sy2  = distance2;
+      qreal chordTopY = upPos();
+      qreal chordBotY = downPos();
 
-      qreal chordTopY = upPos()   - distance1;
-      qreal chordBotY = downPos() + distance1;
+      qreal staffTopY = s->bboxStaff(idx).y() - pos().y();
+      qreal staffBotY = staffTopY + 4.0 * _spatium + distance2;
+      staffTopY      -= distance2;
 
-      qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - distance2;
-      qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + distance2;
-
-      qreal dyTop = 0;
-      qreal dyBot = 0;
+      qreal dy = 0.0;
 
       //
       //    pass 1
@@ -357,23 +355,31 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
       //
 
       foreach (Articulation* a, articulations) {
-            qreal y = 0;
             ArticulationAnchor aa = a->anchor();
             if (aa != A_CHORD)
                   continue;
             QRectF bb(a->bbox());
 
-            aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
-            if (aa == A_TOP_CHORD) {
+            dy += distance1;
+            if (bb.height() > (_spatium * .3))   // hack
+                  dy += bb.height() * .5;
+            qreal y = dy;
+            if (isUp()) {
+                  y = chordBotY + dy;
                   //
-                  // stem down
+                  // check for collision with staff line
                   //
-                  if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
-                        dyTop -= _spatium * .5;
-                  else
-                        dyTop -= bb.top();
-
-                  y = chordTopY + dyTop;
+                  if (y <= staffBotY-.1) {
+                        qreal l = y / _spatium;
+                        qreal delta = fabs(l - round(l));
+                        if (delta < 0.4) {
+                              y  += _spatium * .5;
+                              dy += _spatium * .5;
+                              }
+                        }
+                  }
+            else {
+                  y = chordTopY - dy;
                   //
                   // check for collision with staff line
                   //
@@ -381,58 +387,20 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4) {
-                              y -= _spatium * .5;
-                              dyTop -= _spatium * .5;
+                              y  -= _spatium * .5;
+                              dy += _spatium * .5;
                               }
                         }
-                  a->setPos(x, y);
-                  if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
-                        dyTop -= distance;
-                  else
-                        dyTop -= (distance + bb.bottom());
                   }
-            else if (aa == A_BOTTOM_CHORD) {
-                  //
-                  // stem up
-                  //
-                  if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
-                        dyBot += _spatium * .5;
-                  else
-                        dyBot += bb.bottom();
-
-                  y = chordBotY + dyBot;
-                  //
-                  // check for collision with staff line
-                  //
-                  if (y <= staffBotY+.1) {
-                        qreal l = y / _spatium;
-                        qreal delta = fabs(l - round(l));
-                        if (delta < 0.4) {
-                              y += _spatium * .5;
-                              dyBot -= _spatium * .5;
-                              }
-                        }
-                  a->setPos(x, y);
-                  if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
-                        dyBot += distance;
-                  else
-                        dyBot += (distance - bb.top());
-                  }
+            a->setPos(x, y);
             }
 
       //
       //    pass 2
       //    now place all articulations with staff top or bottom anchor
       //
-      if (chordTopY - dyTop > staffTopY)
-            dyTop = 0;
-      else
-            dyTop = staffTopY - (chordTopY - dyTop);
-
-      if (chordBotY + dyBot < staffBotY)
-            dyBot = 0;
-      else
-            dyBot = (chordBotY + dyBot) - staffBotY;
+      qreal dyTop = 0.0;
+      qreal dyBot = 0.0;
 
       for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
             Articulation* a = *ia;
