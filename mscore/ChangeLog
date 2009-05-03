@@ -1,4 +1,6 @@
 3.may (ws)
+      - fix layout of accidentals for small staves
+      - fix size of cautionary time signatures for small staves
       - import key signature changes from midi files
       - added extended instruments.xml file from Magnus Johansson
       (db)

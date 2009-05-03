@@ -1890,7 +1890,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.751781" y="-6.01425"/>
           </Attribute>
         <Beam>12</Beam>
         <Note>
@@ -1913,7 +1912,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.205031" y="-5.9459"/>
           </Attribute>
         <Beam>12</Beam>
         <Note pitch="70" tpc="12"/>
@@ -2022,7 +2020,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.648411" y="-6.5255"/>
           </Attribute>
         <Beam>14</Beam>
         <Note pitch="59" tpc="7"/>
@@ -2031,7 +2028,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0" y="-5.79431"/>
           </Attribute>
         <Beam>14</Beam>
         <Note pitch="63" tpc="11"/>
@@ -2096,7 +2092,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.559364" y="-6.00045"/>
           </Attribute>
         <Slur type="stop" number="18"/>
         <Beam>15</Beam>
@@ -2123,7 +2118,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.152554" y="-5.9496"/>
           </Attribute>
         <Slur type="stop" number="19"/>
         <Beam>16</Beam>
@@ -2469,7 +2463,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.48" y="-6.36"/>
           </Attribute>
         <Beam>25</Beam>
         <Note pitch="65" tpc="13"/>
@@ -2478,7 +2471,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.178372" y="-5.66827"/>
           </Attribute>
         <Beam>25</Beam>
         <Note pitch="70" tpc="12"/>
@@ -2560,7 +2552,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.372923" y="-6.41821"/>
           </Attribute>
         <Beam>27</Beam>
         <Note pitch="59" tpc="7"/>
@@ -2569,7 +2560,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.0785102" y="-6.00603"/>
           </Attribute>
         <Beam>27</Beam>
         <Note pitch="63" tpc="11"/>
@@ -2639,7 +2629,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.571978" y="-5.81511"/>
           </Attribute>
         <Slur type="stop" number="13"/>
         <Beam>28</Beam>
@@ -2666,7 +2655,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.667308" y="-5.91044"/>
           </Attribute>
         <Slur type="stop" number="14"/>
         <Beam>29</Beam>
@@ -2825,7 +2813,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.571978" y="-6.00577"/>
           </Attribute>
         <Slur type="stop" number="15"/>
         <Beam>33</Beam>
@@ -2863,7 +2850,6 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.410063" y="-8.47464"/>
           </Attribute>
         <Beam>34</Beam>
         <Note pitch="67" tpc="15"/>
@@ -2891,7 +2877,6 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.117052" y="1.57563"/>
           </Attribute>
         <Slur type="stop" number="10"/>
         <Note pitch="82" tpc="12"/>
@@ -3085,7 +3070,6 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.152889" y="-0.611557"/>
           </Attribute>
         <Slur type="stop" number="43"/>
         <Beam>39</Beam>
@@ -3480,7 +3464,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.503482" y="-6.14248"/>
           <track>1</track>
           </Attribute>
         <Beam>47</Beam>
@@ -6019,7 +6002,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.704875" y="-5.33691"/>
           <track>1</track>
           <tick>81120</tick>
           </Attribute>
@@ -6038,7 +6020,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.402786" y="-5.639"/>
           <track>1</track>
           </Attribute>
         <Beam>66</Beam>
@@ -6093,7 +6074,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.402786" y="-5.43761"/>
           <track>1</track>
           <tick>82080</tick>
           </Attribute>
@@ -6112,7 +6092,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.503482" y="-6.14248"/>
           <track>1</track>
           </Attribute>
         <Beam>67</Beam>
@@ -6254,7 +6233,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.604179" y="-5.639"/>
           <track>2</track>
           <tick>84000</tick>
           </Attribute>
@@ -6272,7 +6250,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.503482" y="-6.24318"/>
           <track>2</track>
           </Attribute>
         <Beam>68</Beam>
@@ -6347,7 +6324,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.402786" y="-5.639"/>
           <track>2</track>
           <tick>84960</tick>
           </Attribute>
@@ -6365,7 +6341,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.503482" y="-6.04179"/>
           <track>2</track>
           </Attribute>
         <Beam>69</Beam>
@@ -6518,7 +6493,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.473549" y="-7.48207"/>
           </Attribute>
         <Beam>74</Beam>
         <Note pitch="58" tpc="12"/>
@@ -6782,7 +6756,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.80789" y="-6.80936"/>
           </Attribute>
         <Beam>84</Beam>
         <Note pitch="65" tpc="13"/>
@@ -6791,7 +6764,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.432798" y="-5.74179"/>
           </Attribute>
         <Beam>84</Beam>
         <Note pitch="70" tpc="12"/>
@@ -6872,7 +6844,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.345517" y="-6.67999"/>
           </Attribute>
         <Beam>86</Beam>
         <Note pitch="59" tpc="7"/>
@@ -6881,7 +6852,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0.101095" y="-5.54"/>
           </Attribute>
         <Beam>86</Beam>
         <Note pitch="63" tpc="11"/>
@@ -9217,7 +9187,6 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0" y="-0.79835"/>
           </Attribute>
         <Slur type="stop" number="11"/>
         <Slur type="stop" number="12"/>
@@ -9890,7 +9859,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0" y="-6.34387"/>
           <track>5</track>
           </Attribute>
         <Beam>177</Beam>
@@ -10230,7 +10198,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.479106" y="4.99639"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note>
@@ -10258,7 +10225,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.479106" y="5.06484"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10308,7 +10274,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.273775" y="5.06484"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10321,7 +10286,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.273775" y="4.92795"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10348,7 +10312,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.407815" y="4.86979"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10361,7 +10324,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.359837" y="4.8458"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10420,7 +10382,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.359837" y="4.82181"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10433,7 +10394,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.26388" y="4.67788"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10466,7 +10426,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.503772" y="5.75739"/>
           </Attribute>
         <Beam>185</Beam>
         <StemDirection>down</StemDirection>
@@ -10492,7 +10451,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.599728" y="5.27761"/>
           </Attribute>
         <Beam>185</Beam>
         <StemDirection>down</StemDirection>
@@ -10502,7 +10460,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.623717" y="5.66143"/>
           </Attribute>
         <Beam>185</Beam>
         <Note pitch="39" tpc="11"/>
@@ -10530,7 +10487,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.575739" y="4.34203"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="37" tpc="9"/>
@@ -10697,7 +10653,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.460204" y="4.8431"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note>
@@ -10850,7 +10805,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.543045" y="5.06589"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10863,7 +10817,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.560774" y="5.2473"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -10973,7 +10926,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="-0.647047" y="4.57247"/>
           </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="37" tpc="9"/>
@@ -13343,7 +13295,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <offset x="0" y="-6"/>
           </Attribute>
         <Beam>256</Beam>
         <Note pitch="70" tpc="12"/>
