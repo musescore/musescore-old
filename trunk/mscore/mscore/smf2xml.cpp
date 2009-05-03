@@ -28,7 +28,7 @@ QTextStream eout(stderr);
 
 static const char versionString[] = "0.1";
 
-int division  = 480;
+int division         = 480;
 bool debugMode       = false;
 bool mergeNotes      = false;
 bool separateChannel = false;

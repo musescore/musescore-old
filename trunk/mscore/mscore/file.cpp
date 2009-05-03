@@ -251,6 +251,7 @@ bool Score::saveFile(bool autosave)
                );
             if (fn.isEmpty())
                   return false;
+            mscore->updateRecentScores(this);
             info.setFile(fn);
             setCreated(false);
             }

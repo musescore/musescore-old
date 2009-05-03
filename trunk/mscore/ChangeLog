@@ -1,4 +1,5 @@
 3.may (ws)
+      - import key signature changes from midi files
       - added extended instruments.xml file from Magnus Johansson
       (db)
       - added new document-style icon for MuseScore

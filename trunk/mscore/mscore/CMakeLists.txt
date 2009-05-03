@@ -183,7 +183,7 @@ add_executable ( ${ExecutableName}
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scbytearray.cpp
-      exportaudio.cpp repeatlist.cpp velo.cpp
+      exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp
       ${AUDIO}
       )
 
@@ -317,33 +317,29 @@ endif (QT45)
 endif (MINGW)
 
 if (NOT MINGW)
+# command line utilities are not build for windows
+#
 #======================================
 #     target smf2xml
 #======================================
 
-#      add_executable(
-#            smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
-#            )
-
-#      target_link_libraries( smf2xml
-#            ${QT_LIBRARIES}
-#            )
-#      set_target_properties( smf2xml
-#            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-#            )
+   add_executable(
+      smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+      )
+   target_link_libraries(smf2xml ${QT_LIBRARIES} )
+   set_target_properties( smf2xml
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+      )
 
 #======================================
 #     target xml2smf
 #======================================
 
-#      add_executable(
-#            xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
-#            )
-
-#      target_link_libraries( xml2smf
-#            ${QT_LIBRARIES}
-#            )
-#      set_target_properties( xml2smf
-#            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-#            )
+   add_executable(
+      xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+      )
+   target_link_libraries(xml2smf ${QT_LIBRARIES} )
+   set_target_properties( xml2smf
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+      )
 endif (NOT MINGW)

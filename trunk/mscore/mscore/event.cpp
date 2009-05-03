@@ -209,10 +209,10 @@ void ControllerEvent::write(MidiFile* mf) const
 //   midiOutEvent
 //---------------------------------------------------------
 
-bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, Score* cs) const
+bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, int p, int c) const
       {
-      int port = cs->midiPort(channel());
-      int ch   = cs->midiChannel(channel());
+      int port = p;     // cs->midiPort(channel());
+      int ch   = c;     // cs->midiChannel(channel());
       switch(controller()) {
             case CTRL_PROGRAM:
                   {

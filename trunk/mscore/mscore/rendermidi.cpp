@@ -523,14 +523,14 @@ Measure* Score::searchLabel(const QString& s, Measure* start)
 //   toEList
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, int offset, int staffIdx)
+void Score::toEList(EventMap* events, int staffIdx)
       {
       foreach(const RepeatSegment* rs, *_repeatList) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
             for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
-                  collectMeasureEvents(events, m, staffIdx, tickOffset + offset);
+                  collectMeasureEvents(events, m, staffIdx, tickOffset);
                   if (m->tick() + m->tickLen() >= endTick)
                         break;
                   }
@@ -575,6 +575,6 @@ void Score::toEList(EventMap* events)
       _foundPlayPosAfterRepeats = false;
       updateChannel();
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
-            toEList(events, 0, staffIdx);
+            toEList(events, staffIdx);
       }
 

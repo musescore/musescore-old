@@ -666,7 +666,7 @@ class Score : public QObject {
       void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events);
-      void toEList(EventMap* events, int tickOffset, int staffIdx);
+      void toEList(EventMap* events, int staffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 

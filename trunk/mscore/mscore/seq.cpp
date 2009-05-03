@@ -548,7 +548,9 @@ void Seq::playEvent(const Event* event)
       else if (type == ME_CONTROLLER)  {
             const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
             QList<MidiOutEvent> ol;
-            if (c->midiOutEvent(&ol, cs)) {
+            int channel = cs->midiChannel(c->channel());
+            int port    = cs->midiPort(c->channel());
+            if (c->midiOutEvent(&ol, port, channel)) {
                   foreach(const MidiOutEvent& e, ol)
                         driver->putEvent(e);
                   }
@@ -720,7 +722,9 @@ void Seq::initInstruments()
                               continue;
                         e->setChannel(a->channel);
                         QList<MidiOutEvent> el;
-                        if (e->midiOutEvent(&el, cs)) {
+                        int channel = cs->midiChannel(a->channel);
+                        int port    = cs->midiPort(a->channel);
+                        if (e->midiOutEvent(&el, port, channel)) {
                               foreach(const MidiOutEvent& event, el)
                                     sendEvent(event);
                               }

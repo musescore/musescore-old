@@ -25,7 +25,6 @@ class Note;
 class MidiFile;
 class Xml;
 class MidiOutEvent;
-class Score;
 
 //---------------------------------------------------------
 //   Midi Events
@@ -148,7 +147,7 @@ class Event {
       virtual void write(MidiFile*) const {}
       virtual void write(Xml&) const {}
       virtual void read(QDomElement) {}
-      virtual bool midiOutEvent(QList<MidiOutEvent>*, Score*) const { return false; }
+      virtual bool midiOutEvent(QList<MidiOutEvent>*, int, int) const { return false; }
       virtual Event* clone() const = 0;
       };
 
@@ -300,7 +299,7 @@ class ControllerEvent : public ChannelEvent {
       void setValue(int v)                { _b = v; }
       virtual void write(MidiFile*) const;
       virtual void write(Xml&) const;
-      virtual bool midiOutEvent(QList<MidiOutEvent>*, Score*) const;
+      virtual bool midiOutEvent(QList<MidiOutEvent>*, int port, int channel) const;
       };
 
 //---------------------------------------------------------
