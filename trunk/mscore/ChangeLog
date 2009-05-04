@@ -1,3 +1,7 @@
+4.may (la)
+      - export correct tempo in musicXML (sound tag)
+      - fix lyrics separator alignment at end of page
+      - change FileAssociation.nsh to handle document-style icon
 3.may (ws)
       - fix layout of accidentals for small staves
       - fix size of cautionary time signatures for small staves

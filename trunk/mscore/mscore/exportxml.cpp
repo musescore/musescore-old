@@ -1907,7 +1907,7 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
-      xml.tagE("sound tempo=\"%d\"", (int) text->tempo());
+      xml.tagE(QString("sound tempo=\"%1\"").arg(QString::number(text->tempo()*60.0)));
       xml.etag();
       }
 
