@@ -752,7 +752,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             qreal x1 = l->canvasPos().x();
             qreal x2 = nl->canvasPos().x();
             qreal len;
-            if (x2 < x1) {
+            if (x2 < x1 || s->measure()->system()->page() != ns->measure()->system()->page()) {
                   System* system = s->measure()->system();
                   x2 = system->canvasPos().x() + system->bbox().width();
                   }
