@@ -129,7 +129,7 @@ _____________________________________________________________________________
   StrCmp $0 "" 0 "${Index}-Skip"
   WriteRegStr HKCR $R0 "" $R0
   WriteRegStr HKCR "$R0\shell" "" "open"
-  WriteRegStr HKCR "$R0\DefaultIcon" "" "$R2,0"
+  WriteRegStr HKCR "$R0\DefaultIcon" "" "$R2,1"
  
 "${Index}-Skip:"
   WriteRegStr HKCR "$R0\shell\open\command" "" '$R2 "%1"'
