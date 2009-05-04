@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
-  <Mag>1.42791</Mag>
+  <Mag>1.5083</Mag>
   <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <yoff>-165.567</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -97,6 +97,8 @@
     <trackName>Piano</trackName>
     <Instrument>
       <Channel>
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="0"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="64"/>
@@ -1404,10 +1406,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.12" y="-1.44"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="1"/>
         <Beam>1</Beam>
         <Note>
@@ -1428,9 +1430,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="1"/>
         <Beam>1</Beam>
         <Note pitch="80" tpc="10"/>
@@ -1444,17 +1446,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>2</Beam>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>2</Beam>
         <Note pitch="82" tpc="12"/>
         </Chord>
@@ -1466,10 +1468,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.12" y="-1.32"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="2"/>
         <Beam>3</Beam>
         <Note>
@@ -1501,9 +1503,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="71" tpc="7"/>
         </Chord>
       <BarLine>
@@ -1538,9 +1540,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Clef>
@@ -1599,22 +1601,22 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-2.76"/>
-          </Attribute>
+          </Articulation>
         <Beam>6</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="47" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>6</Beam>
         <Note pitch="50" tpc="16"/>
         <Note pitch="55" tpc="15"/>
@@ -1657,9 +1659,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>begin</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>7</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1672,18 +1674,18 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>7</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>7</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1720,9 +1722,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>8</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1753,18 +1755,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>9</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>9</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1776,9 +1778,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>9</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1798,9 +1800,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>10</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1812,9 +1814,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>10</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1850,10 +1852,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.201393" y="-6.94805"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="16"/>
         <Beam>11</Beam>
         <StemDirection>up</StemDirection>
@@ -1888,9 +1890,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>12</Beam>
         <Note>
           <pitch>65</pitch>
@@ -1910,9 +1912,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>12</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -1967,10 +1969,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.341719" y="-6.90271"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="17"/>
         <Beam>13</Beam>
         <Note>
@@ -2018,17 +2020,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>14</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>14</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -2080,19 +2082,19 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>10560</tick>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.662968" y="-7.86091"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="18"/>
         <Beam>15</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="18"/>
         <Beam>15</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2116,9 +2118,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="19"/>
         <Beam>16</Beam>
         <Note pitch="63" tpc="11"/>
@@ -2130,9 +2132,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="13">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Clef>
@@ -2152,13 +2154,13 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.101702" y="-0.355959"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="20"/>
         <Beam>17</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2178,17 +2180,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>18</Beam>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>18</Beam>
         <Note pitch="56" tpc="10"/>
         </Chord>
@@ -2208,14 +2210,14 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.0947098" y="-1.42065"/>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0" y="0.757678"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="6"/>
         <Beam>19</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2235,17 +2237,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>20</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>20</Beam>
         <Note pitch="56" tpc="10"/>
         </Chord>
@@ -2304,9 +2306,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>21</Beam>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -2314,17 +2316,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>22</Beam>
         <Note pitch="51" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>22</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -2348,10 +2350,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>15360</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>15360</tick>
-          </Attribute>
+          </Articulation>
         <Beam>23</Beam>
         <Note>
           <pitch>48</pitch>
@@ -2372,25 +2374,25 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>23</Beam>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.12" y="1.44"/>
-          </Attribute>
+          </Articulation>
         <Beam>23</Beam>
         <Note>
           <pitch>48</pitch>
@@ -2411,13 +2413,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.12" y="1.32"/>
-          </Attribute>
+          </Articulation>
         <Beam>23</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -2437,10 +2439,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.24" y="-7.56"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="8"/>
         <Beam>24</Beam>
         <StemDirection>up</StemDirection>
@@ -2461,17 +2463,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>25</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>25</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -2526,10 +2528,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.12" y="-7.08"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="9"/>
         <Beam>26</Beam>
         <StemDirection>up</StemDirection>
@@ -2550,17 +2552,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>27</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>27</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -2617,19 +2619,19 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>18240</tick>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.476649" y="-7.34039"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="13"/>
         <Beam>28</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="13"/>
         <Beam>28</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2653,9 +2655,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="14"/>
         <Beam>29</Beam>
         <Note pitch="63" tpc="11"/>
@@ -2668,9 +2670,9 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
@@ -2700,19 +2702,18 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>20160</tick>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.136687" y="0.205031"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="113"/>
         <Beam>30</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="113"/>
         <Beam>30</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2726,17 +2727,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>31</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>31</Beam>
         <Note pitch="61" tpc="9"/>
         </Chord>
@@ -2747,34 +2748,34 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>32</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>32</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>32</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>32</Beam>
         <Note pitch="66" tpc="8"/>
         </Chord>
@@ -2801,29 +2802,29 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.190659" y="-7.24506"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="15"/>
         <Beam>33</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="15"/>
         <Beam>33</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.381319" y="-6.67308"/>
-          </Attribute>
+          </Articulation>
         <Beam>33</Beam>
         <Note>
           <pitch>67</pitch>
@@ -2835,22 +2836,22 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.762638" y="-7.62638"/>
-          </Attribute>
+          </Articulation>
         <Beam>34</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="0.476649" y="-7.91237"/>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>34</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="74" tpc="16"/>
@@ -2862,22 +2863,22 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="10"/>
         <Note pitch="62" tpc="16"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="-0.00991198" y="-0.157521"/>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="10"/>
         <Note pitch="82" tpc="12"/>
         <Note pitch="94" tpc="12"/>
@@ -2924,9 +2925,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="40"/>
         <Beam>36</Beam>
         <Note pitch="62" tpc="16"/>
@@ -2934,9 +2935,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="40"/>
         <Beam>36</Beam>
         <Note pitch="60" tpc="14"/>
@@ -2946,10 +2947,10 @@ p, li { white-space: pre-wrap; }
     <Measure number="27">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="-0.458667" y="5.27468"/>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -3017,9 +3018,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="42"/>
         <Beam>38</Beam>
         <Note pitch="62" tpc="16"/>
@@ -3027,9 +3028,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="42"/>
         <Beam>38</Beam>
         <Note pitch="60" tpc="14"/>
@@ -3040,9 +3041,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>no</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -3064,13 +3065,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.458667" y="-7.26224"/>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="43"/>
         <Beam>39</Beam>
         <Note pitch="67" tpc="15"/>
@@ -3088,9 +3089,9 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>56</pitch>
           <tpc>10</tpc>
@@ -3140,9 +3141,9 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="55" tpc="15"/>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
@@ -3201,9 +3202,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>41</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -3245,9 +3246,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="50"/>
         <Beam>43</Beam>
         <Note pitch="62" tpc="16"/>
@@ -3255,9 +3256,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="50"/>
         <Beam>43</Beam>
         <Note pitch="60" tpc="14"/>
@@ -3267,9 +3268,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="35">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -3340,9 +3341,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="23"/>
         <Beam>45</Beam>
         <Note pitch="62" tpc="16"/>
@@ -3350,9 +3351,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>45</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
@@ -3362,9 +3363,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>no</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="23"/>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -3373,9 +3374,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="24"/>
         <Beam>46</Beam>
         <Note pitch="60" tpc="14"/>
@@ -3390,9 +3391,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="24"/>
         <Beam>46</Beam>
         <Note pitch="67" tpc="15"/>
@@ -3434,11 +3435,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.302089" y="-6.34387"/>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>47</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -3462,10 +3463,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>47</Beam>
         <Note>
           <track>1</track>
@@ -3482,12 +3483,12 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>36000</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.402786" y="-6.94805"/>
           <track>1</track>
           <tick>36000</tick>
-          </Attribute>
+          </Articulation>
         <Beam>48</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -3500,11 +3501,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.201393" y="-5.639"/>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>48</Beam>
         <Note>
           <track>1</track>
@@ -3532,11 +3533,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.140864" y="-6.681"/>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>49</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -3571,11 +3572,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="0.201393" y="-4.22925"/>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -3629,9 +3630,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>51</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
@@ -3641,12 +3642,12 @@ p, li { white-space: pre-wrap; }
         </Clef>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>51</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="50" tpc="16"/>
@@ -3672,12 +3673,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3686,12 +3687,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3715,12 +3716,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3729,12 +3730,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3759,12 +3760,12 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>begin</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3774,12 +3775,12 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -3847,10 +3848,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>44400</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>44400</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="29"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -3868,10 +3869,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>44880</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>44880</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="30"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -3892,10 +3893,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>45360</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>45360</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="31"/>
         <Note>
           <pitch>56</pitch>
@@ -3917,10 +3918,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>45840</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>45840</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="32"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="60" tpc="14"/>
@@ -3934,7 +3935,6 @@ p, li { white-space: pre-wrap; }
         <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="-0.95287" y="-1.44339"/>
-        <selected>1</selected>
         <style>12</style>
         </Dynamic>
       <Rest>
@@ -3950,10 +3950,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>46320</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>46320</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="33"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -3971,10 +3971,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>46800</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>46800</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="34"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -3995,10 +3995,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>47280</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>47280</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="35"/>
         <Note>
           <pitch>56</pitch>
@@ -4020,10 +4020,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>47760</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>47760</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="36"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="60" tpc="14"/>
@@ -4045,10 +4045,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>48240</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>48240</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="37"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4074,10 +4074,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>49440</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>49440</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="38"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4108,10 +4108,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>51360</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>51360</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="61"/>
         <Note>
           <pitch>47</pitch>
@@ -4145,10 +4145,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>52080</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>52080</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="55"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4170,10 +4170,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>52560</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>52560</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="56"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4193,10 +4193,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>53040</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>53040</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="57"/>
         <Note>
           <pitch>56</pitch>
@@ -4245,10 +4245,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>54000</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>54000</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="59"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4266,10 +4266,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>54480</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>54480</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="60"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -4492,10 +4492,10 @@ p, li { white-space: pre-wrap; }
         <tick>59760</tick>
         <BeamMode>begin</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>59760</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="65"/>
         <Beam>52</Beam>
         <StemDirection>down</StemDirection>
@@ -4513,10 +4513,10 @@ p, li { white-space: pre-wrap; }
         <tick>60000</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>60000</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="66"/>
         <Beam>52</Beam>
         <Note>
@@ -4544,10 +4544,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>60240</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>60240</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="67"/>
         <Beam>52</Beam>
         <Note pitch="72" tpc="14"/>
@@ -4623,10 +4623,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>60720</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>60720</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="68"/>
         <Beam>53</Beam>
         <Note pitch="71" tpc="7"/>
@@ -4643,10 +4643,10 @@ p, li { white-space: pre-wrap; }
         <tick>60960</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>60960</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="69"/>
         <Beam>53</Beam>
         <Note>
@@ -4674,10 +4674,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>61200</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>61200</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="70"/>
         <Beam>53</Beam>
         <Note pitch="72" tpc="14"/>
@@ -4793,10 +4793,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>63600</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>63600</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="73"/>
         <Beam>54</Beam>
         <StemDirection>down</StemDirection>
@@ -4814,10 +4814,10 @@ p, li { white-space: pre-wrap; }
         <tick>63840</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>63840</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="74"/>
         <Beam>54</Beam>
         <StemDirection>down</StemDirection>
@@ -4842,10 +4842,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>64080</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>64080</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="75"/>
         <Beam>54</Beam>
         <Note pitch="70" tpc="12"/>
@@ -4892,10 +4892,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>64560</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>64560</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="76"/>
         <Beam>55</Beam>
         <Note pitch="70" tpc="12"/>
@@ -4912,10 +4912,10 @@ p, li { white-space: pre-wrap; }
         <tick>64800</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>64800</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="77"/>
         <Beam>55</Beam>
         <Note pitch="70" tpc="12"/>
@@ -4939,10 +4939,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>65040</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>65040</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="78"/>
         <Beam>55</Beam>
         <Note pitch="70" tpc="12"/>
@@ -4996,10 +4996,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.215682" y="-0.129409"/>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>80</pitch>
           <tpc>10</tpc>
@@ -5359,11 +5359,11 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <tick>71280</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
           <tick>71280</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="115"/>
         <Beam>60</Beam>
         <StemDirection>down</StemDirection>
@@ -5398,11 +5398,11 @@ p, li { white-space: pre-wrap; }
         <tick>71520</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
           <tick>71520</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="116"/>
         <Beam>60</Beam>
         <StemDirection>down</StemDirection>
@@ -5437,11 +5437,11 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <tick>71760</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
           <tick>71760</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="117"/>
         <Beam>60</Beam>
         <Note>
@@ -5588,11 +5588,11 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>74160</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
           <tick>74160</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="89"/>
         <Beam>61</Beam>
         <Note>
@@ -5626,11 +5626,11 @@ p, li { white-space: pre-wrap; }
         <tick>74400</tick>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
           <tick>74400</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="114"/>
         <Beam>61</Beam>
         <Note>
@@ -5665,11 +5665,11 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>74640</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
           <tick>74640</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="90"/>
         <Beam>61</Beam>
         <Note>
@@ -5713,9 +5713,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="86"/>
         <Note pitch="73" tpc="9"/>
         </Chord>
@@ -5732,17 +5732,17 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>75840</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <tick>75840</tick>
-          </Attribute>
+          </Articulation>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="83" tpc="7"/>
         </Chord>
       <Chord>
@@ -5785,10 +5785,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0.201393" y="-4.83343"/>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
@@ -5872,10 +5872,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0.503482" y="-6.14248"/>
-          </Attribute>
+          </Articulation>
         <Beam>65</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -6000,11 +6000,11 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>81120</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
           <tick>81120</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="92"/>
         <Beam>66</Beam>
         <StemDirection>up</StemDirection>
@@ -6018,10 +6018,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>66</Beam>
         <Note>
           <track>1</track>
@@ -6072,11 +6072,11 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>82080</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
           <tick>82080</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="91"/>
         <Beam>67</Beam>
         <StemDirection>up</StemDirection>
@@ -6090,10 +6090,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <Beam>67</Beam>
         <Note>
           <track>1</track>
@@ -6137,12 +6137,12 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>82560</tick>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0.544287" y="-5.51709"/>
           <track>1</track>
           <tick>82560</tick>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -6231,11 +6231,11 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <tick>84000</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
           <tick>84000</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="94"/>
         <Beam>68</Beam>
         <Note>
@@ -6248,10 +6248,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>2</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
-          </Attribute>
+          </Articulation>
         <Beam>68</Beam>
         <Note>
           <track>2</track>
@@ -6322,11 +6322,11 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <tick>84960</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
           <tick>84960</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="95"/>
         <Beam>69</Beam>
         <Note>
@@ -6339,10 +6339,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>2</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>2</track>
-          </Attribute>
+          </Articulation>
         <Beam>69</Beam>
         <Note>
           <track>2</track>
@@ -6393,9 +6393,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>70</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -6403,17 +6403,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>71</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>71</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -6435,9 +6435,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>72</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -6445,17 +6445,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>73</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>73</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -6482,18 +6482,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="0.435219"/>
-          </Attribute>
+          </Articulation>
         <Beam>74</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>74</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6527,9 +6527,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Clef>
@@ -6542,13 +6542,13 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-0.378839"/>
-          </Attribute>
+          </Articulation>
         <Beam>76</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6566,17 +6566,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>77</Beam>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>77</Beam>
         <Note pitch="56" tpc="10"/>
         </Chord>
@@ -6586,13 +6586,13 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.18942" y="-0.284129"/>
-          </Attribute>
+          </Articulation>
         <Beam>78</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6610,17 +6610,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>79</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>79</Beam>
         <Note pitch="56" tpc="10"/>
         </Chord>
@@ -6640,9 +6640,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>80</Beam>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -6650,17 +6650,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>81</Beam>
         <Note pitch="51" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>81</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -6674,43 +6674,43 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>82</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>82</Beam>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>82</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>82</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -6730,10 +6730,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.796606" y="-8.16521"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="132"/>
         <Beam>83</Beam>
         <StemDirection>up</StemDirection>
@@ -6754,17 +6754,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>84</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>84</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -6819,10 +6819,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.398303" y="-7.3686"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="133"/>
         <Beam>85</Beam>
         <Note pitch="68" tpc="10"/>
@@ -6842,17 +6842,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>86</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>86</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -6895,19 +6895,19 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="0.523865"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="134"/>
         <Beam>87</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="134"/>
         <Beam>87</Beam>
         <Note pitch="58" tpc="12"/>
@@ -6927,9 +6927,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="135"/>
         <Beam>88</Beam>
         <Note pitch="63" tpc="11"/>
@@ -6943,9 +6943,9 @@ p, li { white-space: pre-wrap; }
         </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
@@ -6965,19 +6965,19 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.068777" y="1.37554"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="96"/>
         <Beam>89</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="96"/>
         <Beam>89</Beam>
         <Note pitch="58" tpc="12"/>
@@ -6991,17 +6991,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>90</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>90</Beam>
         <Note pitch="61" tpc="9"/>
         </Chord>
@@ -7012,34 +7012,34 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>91</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>91</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>91</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>91</Beam>
         <Note pitch="66" tpc="8"/>
         </Chord>
@@ -7066,30 +7066,30 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>98880</tick>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.068777" y="0.825324"/>
           <tick>98880</tick>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="97"/>
         <Beam>92</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="97"/>
         <Beam>92</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.068777" y="0.481439"/>
-          </Attribute>
+          </Articulation>
         <Beam>92</Beam>
         <Note>
           <pitch>67</pitch>
@@ -7101,18 +7101,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.137554" y="0.68777"/>
-          </Attribute>
+          </Articulation>
         <Beam>93</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>93</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="74" tpc="16"/>
@@ -7122,12 +7122,12 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="98"/>
         <Slur type="start" number="137"/>
         <Note pitch="62" tpc="16"/>
@@ -7135,12 +7135,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="98"/>
         <Slur type="stop" number="137"/>
         <Note pitch="82" tpc="12"/>
@@ -7170,9 +7170,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>94</Beam>
         <Note pitch="63" tpc="11"/>
         <Note pitch="67" tpc="15"/>
@@ -7181,9 +7181,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="100"/>
         <Beam>95</Beam>
         <Note pitch="62" tpc="16"/>
@@ -7191,9 +7191,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="100"/>
         <Beam>95</Beam>
         <Note pitch="60" tpc="14"/>
@@ -7204,10 +7204,10 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="-0.275108" y="5.43338"/>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -7221,10 +7221,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>1</track>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
@@ -7284,9 +7284,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="108"/>
         <Beam>97</Beam>
         <Note pitch="62" tpc="16"/>
@@ -7294,9 +7294,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="108"/>
         <Beam>97</Beam>
         <Note pitch="60" tpc="14"/>
@@ -7308,9 +7308,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>no</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -7330,13 +7330,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.343885" y="-7.56547"/>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="109"/>
         <Beam>98</Beam>
         <Note pitch="67" tpc="15"/>
@@ -7669,10 +7669,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.0870438" y="-6.34818"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="138"/>
         <Beam>105</Beam>
         <Note pitch="82" tpc="12"/>
@@ -7692,19 +7692,19 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-6.75"/>
-          </Attribute>
+          </Articulation>
         <Beam>106</Beam>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-5.5"/>
-          </Attribute>
+          </Articulation>
         <Beam>106</Beam>
         <Note pitch="82" tpc="12"/>
         </Chord>
@@ -7740,10 +7740,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-6.94635"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="139"/>
         <Beam>107</Beam>
         <Note pitch="80" tpc="10"/>
@@ -7761,10 +7761,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="0.678419" y="-4"/>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>71</pitch>
           <tpc>7</tpc>
@@ -7838,9 +7838,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>begin</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>109</Beam>
         <Note pitch="59" tpc="7"/>
         </Chord>
@@ -7851,12 +7851,12 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>109</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="50" tpc="16"/>
@@ -7878,12 +7878,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -7892,12 +7892,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -7921,12 +7921,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -7935,12 +7935,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -7968,12 +7968,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -7982,12 +7982,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -8009,9 +8009,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="119"/>
         <Beam>110</Beam>
         <Note pitch="47" tpc="7"/>
@@ -8050,12 +8050,12 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>120960</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="119"/>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -8076,12 +8076,12 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="51" tpc="11"/>
         </Chord>
       <Rest>
@@ -8101,10 +8101,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.24" y="1.44"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="3"/>
         <Beam>111</Beam>
         <StemDirection>up</StemDirection>
@@ -8126,9 +8126,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="3"/>
         <Beam>111</Beam>
         <Note pitch="68" tpc="10"/>
@@ -8142,17 +8142,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>112</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>112</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -8164,10 +8164,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="1.61114"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="4"/>
         <Beam>113</Beam>
         <Note>
@@ -8199,9 +8199,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Clef>
@@ -8234,9 +8234,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="47" tpc="7"/>
         </Chord>
@@ -8268,21 +8268,21 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.24" y="0.48"/>
-          </Attribute>
+          </Articulation>
         <Beam>116</Beam>
         <Note pitch="35" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>116</Beam>
         <Note pitch="34" tpc="12"/>
         <Note pitch="46" tpc="12"/>
@@ -8302,9 +8302,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>117</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8312,9 +8312,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>117</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8330,9 +8330,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>118</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8343,9 +8343,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>119</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8353,9 +8353,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>119</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8371,9 +8371,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>120</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8384,9 +8384,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>121</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8394,9 +8394,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>121</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8405,9 +8405,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>122</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8425,9 +8425,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>123</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8435,9 +8435,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>123</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8446,9 +8446,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>124</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8456,9 +8456,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>124</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8476,9 +8476,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>125</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8486,9 +8486,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>125</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8497,9 +8497,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>126</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8507,9 +8507,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>126</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8520,9 +8520,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>127</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8530,9 +8530,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>127</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8541,9 +8541,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>128</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8551,9 +8551,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>128</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8564,9 +8564,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>129</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8574,9 +8574,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>129</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8585,9 +8585,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>130</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8605,9 +8605,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>131</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8615,9 +8615,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>131</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8626,9 +8626,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>132</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8636,9 +8636,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>132</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8649,9 +8649,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>133</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8659,9 +8659,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>133</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -8670,9 +8670,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>134</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8680,9 +8680,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>134</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -8693,9 +8693,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>135</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8703,9 +8703,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>135</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -8714,9 +8714,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>136</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8724,9 +8724,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>136</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -8757,18 +8757,18 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="5"/>
         <Beam>137</Beam>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>137</Beam>
         <Note pitch="41" tpc="13"/>
         </Chord>
@@ -8776,17 +8776,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>138</Beam>
         <Note pitch="39" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>138</Beam>
         <Note>
           <pitch>38</pitch>
@@ -8812,44 +8812,44 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>139</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>139</Beam>
         <Note pitch="31" tpc="15"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>139</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>139</Beam>
         <Note pitch="38" tpc="16"/>
         </Chord>
@@ -8859,9 +8859,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>140</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8869,9 +8869,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>140</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8880,9 +8880,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>141</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8890,9 +8890,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>141</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8903,9 +8903,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>142</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8913,9 +8913,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>142</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8924,9 +8924,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>143</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8934,9 +8934,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>143</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -8947,9 +8947,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>144</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8957,9 +8957,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>144</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8968,9 +8968,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>145</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8978,9 +8978,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>145</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -8991,9 +8991,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>146</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -9001,9 +9001,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>146</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -9012,9 +9012,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>147</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -9022,9 +9022,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>147</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -9035,9 +9035,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>148</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -9045,9 +9045,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>148</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -9057,9 +9057,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>149</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -9067,9 +9067,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>149</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -9081,9 +9081,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>150</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -9100,9 +9100,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>151</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -9110,9 +9110,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>151</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -9125,9 +9125,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>61</pitch>
           <tpc>9</tpc>
@@ -9143,21 +9143,21 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>152</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>152</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="57" tpc="17"/>
@@ -9167,12 +9167,12 @@ p, li { white-space: pre-wrap; }
     <Measure number="25">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="11"/>
         <Slur type="start" number="12"/>
         <Note pitch="46" tpc="12"/>
@@ -9181,13 +9181,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
           <offset x="0.0887056" y="1.15317"/>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="11"/>
         <Slur type="stop" number="12"/>
         <Note pitch="34" tpc="12"/>
@@ -9207,9 +9207,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>153</Beam>
         <Note pitch="56" tpc="10"/>
         <Note>
@@ -9220,9 +9220,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>153</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9233,18 +9233,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>154</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>154</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9257,18 +9257,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>155</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>155</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9279,18 +9279,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>156</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>156</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9303,18 +9303,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>157</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>157</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -9324,18 +9324,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>158</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>158</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -9347,18 +9347,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>159</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>159</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -9368,9 +9368,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="44"/>
         <Beam>160</Beam>
         <Note pitch="55" tpc="15"/>
@@ -9378,13 +9378,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.378839" y="-8.7133"/>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="44"/>
         <Beam>160</Beam>
         <Note pitch="63" tpc="11"/>
@@ -9411,9 +9411,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>161</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -9421,17 +9421,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>162</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>162</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -9453,9 +9453,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>163</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -9463,17 +9463,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>164</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>164</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -9495,9 +9495,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>165</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -9505,17 +9505,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>166</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>166</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -9552,9 +9552,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>168</Beam>
         <Note pitch="22" tpc="12"/>
         <Note pitch="34" tpc="12"/>
@@ -9570,18 +9570,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>169</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>169</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9592,18 +9592,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>170</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>170</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9616,18 +9616,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>171</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>171</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9638,18 +9638,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>172</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>172</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -9662,18 +9662,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>173</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>173</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -9684,18 +9684,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>174</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>174</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -9708,18 +9708,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>175</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>175</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -9737,13 +9737,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.739423" y="-7.90065"/>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="47"/>
         <Beam>176</Beam>
         <Note>
@@ -9814,11 +9814,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-7.65293"/>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="26"/>
         <Beam>177</Beam>
         <StemDirection>up</StemDirection>
@@ -9857,10 +9857,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Beam>177</Beam>
         <Note>
           <track>5</track>
@@ -9877,12 +9877,12 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>36000</tick>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.302089" y="-6.54527"/>
           <track>5</track>
           <tick>36000</tick>
-          </Attribute>
+          </Articulation>
         <Beam>178</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -9895,11 +9895,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.302089" y="-6.14248"/>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Beam>178</Beam>
         <Note>
           <track>5</track>
@@ -9927,11 +9927,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="-0.402786" y="-6.64596"/>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="27"/>
         <Beam>179</Beam>
         <StemDirection>up</StemDirection>
@@ -9968,11 +9968,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="0" y="-6.84736"/>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -10010,20 +10010,20 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>181</Beam>
         <Note pitch="47" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>181</Beam>
         <Note pitch="34" tpc="12"/>
         <Note pitch="46" tpc="12"/>
@@ -10037,12 +10037,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>182</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10050,21 +10050,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>182</Beam>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>182</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10073,9 +10073,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -10091,12 +10091,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>183</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10104,21 +10104,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>183</Beam>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>183</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10127,9 +10127,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -10145,12 +10145,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>184</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10158,21 +10158,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>184</Beam>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>184</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -10196,9 +10196,9 @@ p, li { white-space: pre-wrap; }
         </KeySig>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>42</pitch>
@@ -10223,9 +10223,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10237,11 +10237,11 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>44160</tick>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0.700787" y="-5.53253"/>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -10272,9 +10272,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="48">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10284,9 +10284,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10310,9 +10310,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="49">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10322,9 +10322,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10380,9 +10380,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10392,9 +10392,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10424,9 +10424,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>185</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -10449,18 +10449,18 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>185</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="41" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>185</Beam>
         <Note pitch="39" tpc="11"/>
         </Chord>
@@ -10485,9 +10485,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="37" tpc="9"/>
         </Chord>
@@ -10514,9 +10514,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>42</pitch>
           <tpc>8</tpc>
@@ -10537,9 +10537,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>186</Beam>
         <Note>
           <pitch>41</pitch>
@@ -10560,9 +10560,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>186</Beam>
         <Note pitch="39" tpc="11"/>
         </Chord>
@@ -10572,17 +10572,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>187</Beam>
         <Note pitch="37" tpc="9"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>187</Beam>
         <Note>
           <pitch>35</pitch>
@@ -10604,9 +10604,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>187</Beam>
         <Note>
           <pitch>34</pitch>
@@ -10626,9 +10626,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>187</Beam>
         <Note>
           <pitch>32</pitch>
@@ -10651,9 +10651,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>42</pitch>
@@ -10803,9 +10803,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="58">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10815,9 +10815,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -10847,9 +10847,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>188</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -10872,18 +10872,18 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>188</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="41" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>188</Beam>
         <Note pitch="39" tpc="11"/>
         </Chord>
@@ -10924,9 +10924,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="60">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="37" tpc="9"/>
         </Chord>
@@ -11118,9 +11118,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>191</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="56" tpc="10"/>
@@ -11130,9 +11130,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>191</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="56" tpc="10"/>
@@ -11141,9 +11141,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>191</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
@@ -11176,9 +11176,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>192</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
@@ -11187,9 +11187,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>192</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
@@ -11197,9 +11197,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>192</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
@@ -11213,9 +11213,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="66">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="72"/>
         <Note pitch="49" tpc="9"/>
         </Chord>
@@ -11241,10 +11241,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Beam>193</Beam>
         <Note>
           <track>5</track>
@@ -11269,10 +11269,10 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Beam>193</Beam>
         <Note>
           <track>5</track>
@@ -11296,10 +11296,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>5</track>
-          </Attribute>
+          </Articulation>
         <Beam>193</Beam>
         <Note>
           <track>5</track>
@@ -11329,9 +11329,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>194</Beam>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -11340,9 +11340,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>194</Beam>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -11350,9 +11350,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>194</Beam>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -11365,9 +11365,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="81"/>
         <Note pitch="57" tpc="17"/>
         </Chord>
@@ -11379,9 +11379,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>68</pitch>
           <tpc>10</tpc>
@@ -11593,9 +11593,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>197</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="56" tpc="10"/>
@@ -11605,9 +11605,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>197</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="56" tpc="10"/>
@@ -11616,9 +11616,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>197</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
@@ -11735,10 +11735,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>6</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>6</track>
-          </Attribute>
+          </Articulation>
         <Beam>199</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -11764,10 +11764,10 @@ p, li { white-space: pre-wrap; }
         <track>6</track>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>6</track>
-          </Attribute>
+          </Articulation>
         <Beam>199</Beam>
         <Note>
           <track>6</track>
@@ -11791,10 +11791,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>6</track>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
           <track>6</track>
-          </Attribute>
+          </Articulation>
         <Beam>199</Beam>
         <Note>
           <track>6</track>
@@ -11825,9 +11825,9 @@ p, li { white-space: pre-wrap; }
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="85"/>
         <Note pitch="61" tpc="9"/>
         </Chord>
@@ -11835,18 +11835,18 @@ p, li { white-space: pre-wrap; }
     <Measure number="80">
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.195406" y="-1.23829"/>
-          </Attribute>
+          </Articulation>
         <Note pitch="71" tpc="7"/>
         </Chord>
       <Chord>
@@ -11977,9 +11977,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>37</pitch>
           <tpc>9</tpc>
@@ -12135,9 +12135,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>208</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12145,9 +12145,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>208</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12156,9 +12156,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>209</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12166,9 +12166,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>209</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12179,9 +12179,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>210</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12189,9 +12189,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>210</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12200,9 +12200,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>211</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12210,9 +12210,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>211</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12230,9 +12230,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>212</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12240,9 +12240,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>212</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -12251,9 +12251,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>213</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12261,9 +12261,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>213</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -12281,9 +12281,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>214</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12291,9 +12291,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>214</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -12302,9 +12302,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>215</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12312,9 +12312,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>215</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="53" tpc="13"/>
@@ -12335,9 +12335,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>216</Beam>
         <Note pitch="41" tpc="13"/>
         </Chord>
@@ -12345,17 +12345,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>217</Beam>
         <Note pitch="39" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>217</Beam>
         <Note pitch="38" tpc="16"/>
         </Chord>
@@ -12365,43 +12365,43 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>218</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>218</Beam>
         <Note pitch="31" tpc="15"/>
         </Chord>
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>218</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>218</Beam>
         <Note pitch="38" tpc="16"/>
         </Chord>
@@ -12411,9 +12411,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>219</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12421,9 +12421,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>219</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -12432,9 +12432,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>220</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12442,9 +12442,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>220</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -12455,9 +12455,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>221</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12465,9 +12465,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>221</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -12476,9 +12476,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>222</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12486,9 +12486,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>222</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="56" tpc="10"/>
@@ -12499,9 +12499,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>223</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12509,9 +12509,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>223</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12520,9 +12520,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>224</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12530,9 +12530,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>224</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12543,9 +12543,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>225</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12553,9 +12553,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>225</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12564,9 +12564,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>226</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -12574,9 +12574,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>226</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -12587,9 +12587,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>227</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -12597,9 +12597,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>227</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -12609,9 +12609,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>228</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -12619,9 +12619,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>228</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="55" tpc="15"/>
@@ -12633,9 +12633,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>229</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -12643,9 +12643,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>229</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -12655,9 +12655,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>230</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
@@ -12665,9 +12665,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>230</Beam>
         <Note pitch="49" tpc="9"/>
         <Note pitch="54" tpc="8"/>
@@ -12694,12 +12694,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>231</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="57" tpc="17"/>
@@ -12709,12 +12709,12 @@ p, li { white-space: pre-wrap; }
     <Measure number="105">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>umarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="101"/>
         <Slur type="start" number="102"/>
         <Note pitch="46" tpc="12"/>
@@ -12723,12 +12723,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="101"/>
         <Slur type="stop" number="102"/>
         <Note pitch="34" tpc="12"/>
@@ -12746,9 +12746,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>232</Beam>
         <Note>
           <pitch>56</pitch>
@@ -12759,9 +12759,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>232</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -12770,18 +12770,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>233</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>233</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -12792,18 +12792,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>234</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>234</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -12812,18 +12812,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>235</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>235</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -12834,18 +12834,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>236</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>236</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -12853,18 +12853,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>237</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>237</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -12874,18 +12874,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>238</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>238</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -12900,13 +12900,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.618993" y="-6.94648"/>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="103"/>
         <Beam>239</Beam>
         <Note pitch="63" tpc="11"/>
@@ -12933,9 +12933,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>240</Beam>
         <Note pitch="51" tpc="23"/>
         </Chord>
@@ -12943,17 +12943,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>241</Beam>
         <Note pitch="49" tpc="21"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>241</Beam>
         <Note pitch="47" tpc="19"/>
         </Chord>
@@ -12983,9 +12983,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>242</Beam>
         <Note>
           <pitch>50</pitch>
@@ -12997,17 +12997,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>243</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>243</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -13029,9 +13029,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>244</Beam>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -13039,17 +13039,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>245</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>245</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -13081,21 +13081,21 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="143"/>
         <Beam>247</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>247</Beam>
         <Note pitch="22" tpc="12"/>
         <Note pitch="34" tpc="12"/>
@@ -13109,18 +13109,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>248</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>248</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -13129,18 +13129,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>249</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>249</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -13151,18 +13151,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>250</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>250</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -13171,18 +13171,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>251</Beam>
         <Note pitch="56" tpc="10"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>251</Beam>
         <Note pitch="68" tpc="10"/>
         <Note pitch="70" tpc="12"/>
@@ -13193,18 +13193,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>252</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>252</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -13213,18 +13213,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>253</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>253</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -13235,18 +13235,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>254</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>254</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -13255,18 +13255,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>255</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>255</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -13277,10 +13277,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.0870438" y="-7.03339"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="140"/>
         <Beam>256</Beam>
         <Note pitch="70" tpc="12"/>
@@ -13293,9 +13293,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>256</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -13303,19 +13303,19 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-5.75"/>
-          </Attribute>
+          </Articulation>
         <Beam>257</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0" y="-5.75"/>
-          </Attribute>
+          </Articulation>
         <Beam>257</Beam>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -13351,10 +13351,10 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>sforzato</subtype>
           <offset x="0.174088" y="-6.44635"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="141"/>
         <Beam>258</Beam>
         <Note pitch="68" tpc="10"/>
@@ -13372,10 +13372,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>umarcato</subtype>
           <offset x="0.678419" y="-5.77137"/>
-          </Attribute>
+          </Articulation>
         <Note>
           <pitch>59</pitch>
           <tpc>7</tpc>
@@ -13437,20 +13437,20 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>260</Beam>
         <Note pitch="47" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>260</Beam>
         <Note pitch="34" tpc="12"/>
         <Note pitch="46" tpc="12"/>
@@ -13464,12 +13464,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>261</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13477,21 +13477,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>261</Beam>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>261</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13500,9 +13500,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="122">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -13518,12 +13518,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>262</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13537,12 +13537,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>262</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13551,9 +13551,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="124">
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -13569,12 +13569,12 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>263</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13588,12 +13588,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>staccato</subtype>
-          </Attribute>
-        <Attribute>
+          </Articulation>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>263</Beam>
         <Note pitch="53" tpc="13"/>
         <Note pitch="55" tpc="15"/>
@@ -13608,9 +13608,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>begin</BeamMode>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>dmarcato</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="118"/>
         <Beam>264</Beam>
         <Note pitch="35" tpc="7"/>
@@ -13668,5 +13668,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

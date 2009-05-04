@@ -324,20 +324,13 @@ void Rest::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   setDuration
+//   layout
 //---------------------------------------------------------
 
-void Rest::setDuration(Duration dt)
+void Rest::layout(ScoreLayout* l)
       {
-      if (dt == duration())
-            return;
-
-      // symbols[outsidewholerestSym]        = Sym("outside whole rest",       0xe102, 0);
-      // symbols[outsidehalfrestSym]         = Sym("outside half rest",        0xe103, 0);
-
-      DurationElement::setDuration(dt);
       setYoff(2.0 * mag());
-      switch(dt.val()) {
+      switch(duration().val()) {
             case Duration::V_LONG:
                   _sym = longarestSym;
                   break;
@@ -375,15 +368,6 @@ void Rest::setDuration(Duration dt)
                   _sym = quartrestSym;    // TODO
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Rest::layout(ScoreLayout* l)
-      {
-      setDuration(duration());      // apply mag
       layoutArticulations(l);
       Element::layout(l);
       }

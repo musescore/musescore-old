@@ -183,6 +183,10 @@ void EditStyle::getValues()
       lstyle[ST_stemDir3]                = StyleVal(voice3Up->isChecked() ? UP : DOWN);
       lstyle[ST_stemDir4]                = StyleVal(voice4Up->isChecked() ? UP : DOWN);
 
+      lstyle[ST_shortenStem]             = StyleVal(shortenStem->isChecked());
+      lstyle[ST_shortStemProgression]    = StyleVal(Spatium(shortStemProgression->value()));
+      lstyle[ST_shortestStem]            = StyleVal(Spatium(shortestStem->value()));
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle[STYLE_TYPE(ST_UfermataAnchor + i)] = StyleVal(cb->itemData(cb->currentIndex()).toInt());
@@ -279,6 +283,10 @@ void EditStyle::setValues()
       voice2Down->setChecked(lstyle[ST_stemDir2].toDirection() != UP);
       voice3Down->setChecked(lstyle[ST_stemDir3].toDirection() != UP);
       voice4Down->setChecked(lstyle[ST_stemDir4].toDirection() != UP);
+
+      shortenStem->setChecked(lstyle[ST_shortenStem].toBool());
+      shortStemProgression->setValue(lstyle[ST_shortStemProgression].toSpatium().val());
+      shortestStem->setValue(lstyle[ST_shortestStem].toSpatium().val());
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));

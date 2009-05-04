@@ -563,7 +563,7 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m, System* system)
                   m->setSystem(system);
                   m = static_cast<Measure*>(m->next());
                   }
-            m->setMultiMeasure(n);
+            m->setMultiMeasure(n);  // last measure is presented as multi measure rest
             }
       else
             m->setMultiMeasure(0);

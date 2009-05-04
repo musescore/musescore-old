@@ -1,4 +1,10 @@
-4.may (la)
+4.may (ws)
+      - progressivly shorten note stems of "wrong" direction; make
+        this stylable
+      - fix end detection of multi measure rests
+      - allow for multiple shortcuts for actions when using
+        QKeySequence::StandardKey
+      (la)
       - export correct tempo in musicXML (sound tag)
       - fix lyrics separator alignment at end of page
       - change FileAssociation.nsh to handle document-style icon

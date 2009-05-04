@@ -251,8 +251,8 @@ bool Score::saveFile(bool autosave)
                );
             if (fn.isEmpty())
                   return false;
-            mscore->updateRecentScores(this);
             info.setFile(fn);
+            mscore->updateRecentScores(this);
             setCreated(false);
             }
       QString suffix = info.suffix();

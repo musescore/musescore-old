@@ -475,61 +475,6 @@ void fluid_chorus_processmix(fluid_chorus_t* chorus, fluid_real_t *in,
             } /* foreach sample */
       }
 
-/* Duplication of code ... */
-void fluid_chorus_processreplace(fluid_chorus_t* chorus, fluid_real_t *in,
-   fluid_real_t *left_out, fluid_real_t *right_out)
-      {
-      for (int sample_index = 0; sample_index < FLUID_BUFSIZE; sample_index++) {
-            fluid_real_t d_in = in[sample_index];
-            fluid_real_t d_out = 0.0f;
-
-            /* Write the current sample into the circular buffer */
-            chorus->chorusbuf[chorus->counter] = d_in;
-
-            for (int i = 0; i < chorus->number_blocks; i++) {
-                  /* Calculate the delay in subsamples for the delay line of chorus block nr. */
-
-                  /* The value in the lookup table is so, that this expression
-                   * will always be positive.  It will always include a number of
-                   * full periods of MAX_SAMPLES*INTERPOLATION_SUBSAMPLES to
-                   * remain positive at all times.
-                   */
-                  int pos_subsamples = (INTERPOLATION_SUBSAMPLES * chorus->counter
-                     - chorus->lookup_tab[chorus->phase[i]]);
-
-                  int pos_samples = pos_subsamples / INTERPOLATION_SUBSAMPLES;
-
-                  /* modulo divide by INTERPOLATION_SUBSAMPLES */
-                  pos_subsamples &= INTERPOLATION_SUBSAMPLES_ANDMASK;
-
-                  for (int ii = 0; ii < INTERPOLATION_SAMPLES; ii++){
-	                  /* Add the delayed signal to the chorus sum d_out Note: The
-	                   * delay in the delay line moves backwards for increasing
-	                   * delay!*/
-
-	                  /* The & in chorusbuf[...] is equivalent to a division modulo
-                           MAX_SAMPLES, only faster.
-                         */
-	                  d_out += chorus->chorusbuf[pos_samples & MAX_SAMPLES_ANDMASK] * chorus->sinc_table[ii][pos_subsamples];
-                        pos_samples--;
-                        }
-                  /* Cycle the phase of the modulating LFO */
-                  chorus->phase[i]++;
-                  chorus->phase[i] %= (chorus->modulation_period_samples);
-                  } /* foreach chorus block */
-
-            d_out *= chorus->level;
-
-            /* Add the chorus sum d_out to output */
-            left_out[sample_index] = d_out;
-            right_out[sample_index] = d_out;
-
-            /* Move forward in circular buffer */
-            chorus->counter++;
-            chorus->counter %= MAX_SAMPLES;
-            } /* foreach sample */
-      }
-
 /* Purpose:
  *
  * Calculates a modulation waveform (sine) Its value ( modulo

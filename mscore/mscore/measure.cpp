@@ -628,11 +628,13 @@ void Measure::layout0(int staffIdx)
                         }
                   }
             }
+      int track = staffIdx * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() == Segment::SegKeySig
                || segment->subtype() == Segment::SegStartRepeatBarLine
                || segment->subtype() == Segment::SegTimeSig) {
-                  _breakMMRest = true;
+                  if (segment->element(track) && !segment->element(track)->generated())
+                        _breakMMRest = true;
                   }
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                   continue;

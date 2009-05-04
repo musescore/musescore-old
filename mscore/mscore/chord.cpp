@@ -489,9 +489,6 @@ void Chord::layoutStem1(ScoreLayout* /*layout*/)
       if (s == 0)       //DEBUG
             return;
 
-//      Note* upnote   = upNote();
-//      Note* downnote = downNote();
-
       //-----------------------------------------
       //  process stem
       //-----------------------------------------
@@ -531,73 +528,6 @@ void Chord::layoutStem1(ScoreLayout* /*layout*/)
       else
             setHook(0);
       }
-
-#if 0
-void Chord::layoutStem1(ScoreLayout* layout)
-      {
-      int istaff      = staffIdx();
-      double _spatium = layout->spatium();
-      System* s       = segment()->measure()->system();
-      if (s == 0)       //DEBUG
-            return;
-
-      if (s->staves()->size() <= istaff)
-            printf("layoutStem1: staves %d index %d\n", s->staves()->size(), istaff);
-
-      double sy      = s->staff(istaff)->bbox().y();
-      Note* upnote   = upNote();
-      Note* downnote = downNote();
-
-      double uppos   = s->staff(istaff + upnote->staffMove())->bbox().y();
-            uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
-
-      double downpos = s->staff(istaff + downnote->staffMove())->bbox().y();
-            downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
-
-      //-----------------------------------------
-      //  process stem
-      //-----------------------------------------
-
-      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
-      int hookIdx  = hasStem ? duration().hooks() : 0;
-
-      if (hasStem) {
-            if (!_stem)
-                  setStem(new Stem(score()));
-            }
-      else
-            setStem(0);
-
-      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
-            _stemSlash = new StemSlash(score());
-            _stemSlash->setMag(mag());
-            _stemSlash->setParent(this);
-            }
-      else if (_stemSlash) {
-            delete _stemSlash;
-            _stemSlash = 0;
-            }
-
-      //-----------------------------------------
-      //  process hook
-      //-----------------------------------------
-
-      if (hookIdx) {
-            if (!up())
-                  hookIdx = -hookIdx;
-            if (!_hook)
-                  setHook(new Hook(score()));
-            _hook->setMag(mag());
-            _hook->setSubtype(hookIdx);
-            qreal lw     = point(score()->style(ST_stemWidth).toSpatium()) * .5;
-            QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
-            // set x-pos to get correct boundingRect width for layout
-            _hook->setPos(npos + QPointF(lw, 0.0));
-            }
-      else
-            setHook(0);
-      }
-#endif
 
 //---------------------------------------------------------
 //   layoutStem
@@ -634,27 +564,27 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       int hookIdx  = _stem ? duration().hooks() : 0;
 
-      if (_noteType != NOTE_NORMAL) {
-            // stemLen = Spatium(2.5 * mag());
+      if (_noteType != NOTE_NORMAL)
             stemLen = normalLen * score()->style(ST_graceNoteMag).toDouble();
-            }
       else {
-            if (up()) {
-                  stemLen = Spatium((uppos - 4.0 * staffMag) * .5);
-                  }
-            else {
-                  stemLen = Spatium((4.0 * staffMag - downpos) * .5);
-                  }
+            double l = 4.0 * staffMag;
+            stemLen  = Spatium((up() ? (uppos - l) : (l - downpos)) * .5);
 
-            // stems in the "wrong" direction are shorter than one octave:
-            if (stemLen.val() < 0.0)
-                  if (hookIdx == 0)
-                        stemLen = Spatium(2.5 * staffMag);
-                  else if (hookIdx <= 2)
-                        stemLen = Spatium(3.0 * staffMag);  // 16th and 8th
-                  else
-                        stemLen = Spatium(3.5 * staffMag);  // 32nd, 64th, ...
+            //
+            // Stems in the "wrong" direction are shortened progressively.
+            // Exceptions are down stems with hooks to avoid collision of
+            // hook and note head.
+            //
+            bool shortenStem = score()->styleB(ST_shortenStem);
+            if (shortenStem && (stemLen.val() < 0.0) && (up() || hookIdx==0)) {
+                  Spatium progression(score()->styleS(ST_shortStemProgression));
+                  Spatium shortest(score()->styleS(ST_shortestStem) * staffMag);
 
+                  double n = (-stemLen.val()) / (0.5 * staffMag);
+                  stemLen = Spatium((3.5 - n * progression.val()) * staffMag);
+                  if (stemLen < shortest)
+                        stemLen = shortest;
+                  }
             else if (stemLen < normalLen)
                   stemLen = normalLen;
             }
