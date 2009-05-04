@@ -89,6 +89,7 @@ const ClefInfo clefTable[] = {
       { "TAB", 5,  0,   0,  0,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Tablature") },
+
       { "percussion", 2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Percussion") },
@@ -96,6 +97,7 @@ const ClefInfo clefTable[] = {
       { "C",   5,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
             QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },            // CLEF_C5
+
       { "G",   1,  0,   2, 47,
             { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
             QT_TRANSLATE_NOOP("clefTable", "French violin clef") },       // CLEF_G4
@@ -107,6 +109,11 @@ const ClefInfo clefTable[] = {
       { "F",   4,  2,  2, 47,                                          // CLEF_F_15MA
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
             QT_TRANSLATE_NOOP("clefTable", "Bass clef 15ma") },
+
+      { "percussion", 2,  0,   0, 45,                                   // CLEF_PERC2 placeholder
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
+            QT_TRANSLATE_NOOP("clefTable", "Percussion") },
+
       };
 
 //---------------------------------------------------------
@@ -259,6 +266,7 @@ void Clef::layout(ScoreLayout*)
                   yoff = 2.0; //(staff()->lines() - 1) * 0.5;
                   break;
             case CLEF_PERC:
+            case CLEF_PERC2:
                   symbol->setSym(percussionclefSym);
                   yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
                   break;

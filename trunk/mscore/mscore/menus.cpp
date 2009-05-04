@@ -143,11 +143,11 @@ void MuseScore::showPalette(bool visible)
             sp->setMag(0.8);
             sp->setGrid(33, 60);
             sp->setYOffset(1.0);
-            int clefs[19] = {
-                  0, 1, 2, 3, 16, 9, 10, 11, 12, 15, 4, 17, 18, 5, 6, 7, 8, 14, 13
+            int clefs[20] = {
+                  0, 1, 2, 3, 16, 9, 10, 11, 12, 15, 4, 17, 18, 5, 6, 7, 8, 14, 13, CLEF_PERC2
                   };
 
-            for (int i = 0; i < 19; ++i) {
+            for (int i = 0; i < 20; ++i) {
                   int j = clefs[i];
                   Clef* k = new ::Clef(gscore, j);
                   sp->append(k, qApp->translate("clefTable", clefTable[j].name));
@@ -747,7 +747,7 @@ void MuseScore::clefMenu()
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
             sp->setGrid(60, 80);
-            for (int i = 0; i < 16; ++i) {
+            for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->append(k, qApp->translate("clefTable", clefTable[i].name));
                   }

@@ -71,7 +71,8 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
             setUseDrumset(true);
             setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
             }
-      _instrument.midiActions   = t->midiActions;
+      _instrument.midiActions = t->midiActions;
+
       foreach(Channel* a, _instrument.channel)
             delete a;
       _instrument.channel.clear();

@@ -354,24 +354,25 @@ Fluid::~Fluid()
 
 void Fluid::play(const MidiOutEvent& e)
       {
-      int channel = e.port * 16 + (e.type & 0xf);
+      int ch = e.port * 16 + (e.type & 0xf);
       int err = 0;
+// printf("Fluid::play %d 0x%02x %d %d\n", ch, e.type & 0xf0, e.a, e.b);
       switch(e.type & 0xf0) {
             case ME_NOTEON:
-                  err = noteon(channel, e.a, e.b);
+                  err = noteon(ch, e.a, e.b);
                   break;
 
             case ME_CONTROLLER:
-                  err = cc(channel, e.a, e.b);
+                  channel[ch]->setcc(e.a, e.b);
                   break;
 
             case ME_PROGRAM:
-                  err = program_change(channel, e.a);
+                  err = program_change(ch, e.a);
                   break;
             }
       if (err)
             fprintf(stderr, "FluidSynth error: event 0x%2x channel %d dataA %d dataB %d: %s\n",
-               e.type & 0xff, channel, e.a, e.b, fluid_error());
+               e.type & 0xff, ch, e.a, e.b, fluid_error());
       }
 
 //---------------------------------------------------------
@@ -387,8 +388,10 @@ int Fluid::noteon(int chan, int key, int vel)
       Channel* ch = channel[chan];
 
       /* make sure this channel has a preset */
-      if (ch->preset() == 0)
+      if (ch->preset() == 0) {
+            fluid_log(0, "channel has no preset");
             return FLUID_FAILED;
+            }
 
       /* If there is another voice process on the same channel and key,
          advance it to the release phase.
@@ -412,6 +415,8 @@ int Fluid::noteoff(int chan, int key)
                   status = FLUID_OK;
                   }
             }
+      if (status == FLUID_FAILED)
+            fluid_log(0, "noteoff: no note (ch %d, key %d) found", chan, key);
       return status;
       }
 
@@ -426,16 +431,6 @@ int Fluid::damp_voices(int chan)
             if ((v->chan == chan) && v->SUSTAINED())
                   v->noteoff();
             }
-      return FLUID_OK;
-      }
-
-//---------------------------------------------------------
-//   cc
-//---------------------------------------------------------
-
-int Fluid::cc(int chan, int num, int val)
-      {
-      channel[chan]->setcc(num, val);
       return FLUID_OK;
       }
 
