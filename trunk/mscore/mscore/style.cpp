@@ -64,6 +64,10 @@ StyleType styleTypes[] = {
 
       StyleType("clefKeyRightMargin",      ST_SPATIUM),
       StyleType("stemWidth",               ST_SPATIUM),
+      StyleType("shortenStem",             ST_BOOL),        // ST_shortenStem,
+      StyleType("shortStemProgression",    ST_SPATIUM),     // ST_shortStemProgression,
+      StyleType("shortestStem",            ST_SPATIUM),
+
       StyleType("beginRepeatLeftMargin",   ST_SPATIUM),
       StyleType("minNoteDistance",         ST_SPATIUM),
       StyleType("barNoteDistance",         ST_SPATIUM),
@@ -111,6 +115,7 @@ StyleType styleTypes[] = {
       StyleType("genKeysig",               ST_BOOL),         // create key signature for all systems
       StyleType("genTimesig",              ST_BOOL),
       StyleType("genCourtesyTimesig",      ST_BOOL),
+      StyleType("genCourtesyKeysig",       ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
       StyleType("warnPitchRange",          ST_BOOL),
       StyleType("chordNamesUseSymbols",    ST_BOOL),
@@ -318,6 +323,10 @@ Style::Style()
             StyleVal(Spatium(0.5)),               // ST_timesigLeftMargin,
             StyleVal(Spatium(1.75)),              // ST_clefKeyRightMargin,
             StyleVal(Spatium(0.13)),              // ST_stemWidth,
+            StyleVal(true),                       // ST_shortenStem,
+            StyleVal(Spatium(0.25)),              // ST_shortStemProgression,
+            StyleVal(Spatium(2.25)),              // ST_shortestStem,
+
             StyleVal(Spatium(1.0)),               // ST_beginRepeatLeftMargin,
             StyleVal(Spatium(0.4)),               // ST_minNoteDistance,
             StyleVal(Spatium(1.5)),               // ST_barNoteDistance,
@@ -361,6 +370,7 @@ Style::Style()
             StyleVal(true),                       // ST_genKeysig,
             StyleVal(true),                       // ST_genTimesig,
             StyleVal(true),                       // ST_genCourtesyTimesig
+            StyleVal(true),                       // ST_genCourtesyKeysig
             StyleVal(false),                      // ST_useGermanNoteNames
             StyleVal(true),                       // ST_warnPitchRange
             StyleVal(false),                      // ST_chordNamesUseSymbols

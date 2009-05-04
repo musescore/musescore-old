@@ -205,7 +205,6 @@ void Sample::load()
 
 int Preset::noteon(Fluid* synth, int chan, int key, int vel)
       {
-      Inst* inst;
       InstZone *global_inst_zone, *z;
       Sample* sample;
       Voice* voice;
@@ -221,7 +220,7 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                preset */
             if (fluid_preset_zone_inside_range(preset_zone, key, vel)) {
 
-                  inst = fluid_preset_zone_get_inst(preset_zone);
+                  Inst* inst = fluid_preset_zone_get_inst(preset_zone);
                   global_inst_zone = inst->get_global_zone();
 
                   /* run thru all the zones of this instrument */

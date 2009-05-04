@@ -201,6 +201,9 @@ enum STYLE_TYPE {
 
       ST_clefKeyRightMargin,
       ST_stemWidth,
+      ST_shortenStem,
+      ST_shortStemProgression,
+      ST_shortestStem,
       ST_beginRepeatLeftMargin,
       ST_minNoteDistance,
       ST_barNoteDistance,
@@ -248,6 +251,7 @@ enum STYLE_TYPE {
       ST_genKeysig,
       ST_genTimesig,
       ST_genCourtesyTimesig,
+      ST_genCourtesyKeysig,
       ST_useGermanNoteNames,
       ST_warnPitchRange,
       ST_chordNamesUseSymbols,

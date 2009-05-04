@@ -1173,15 +1173,16 @@ Shortcut* getShortcut(const char* id)
 QAction* getAction(const char* id)
       {
       Shortcut* s = getShortcut(id);
-      if (s == 0) {
-            printf("no shortcut found for action <%s>\n", id);
+      if (s == 0)
             return 0;
-            }
       if (s->action == 0) {
             QAction* a = new QAction(s->xml, 0); // mscore);
             s->action  = a;
             a->setData(s->xml);
-            a->setShortcut(s->key);
+            if (s->standardKey != QKeySequence::UnknownKey)
+                  a->setShortcuts(s->standardKey);
+            else
+                  a->setShortcut(s->key);
             a->setShortcutContext(s->context);
             if (!s->help.isEmpty()) {
                   a->setToolTip(s->help);
@@ -1191,9 +1192,24 @@ QAction* getAction(const char* id)
                   a->setToolTip(s->descr);
                   a->setWhatsThis(s->descr);
                   }
-            if (!s->key.isEmpty())
+            if (s->standardKey != QKeySequence::UnknownKey) {
+                  QList<QKeySequence> kl = a->shortcuts();
+                  if (!kl.isEmpty()) {
+                        QString s(a->toolTip());
+                        s += " (";
+                        for (int i = 0; i < kl.size(); ++i) {
+                              if (i)
+                                    s += ",";
+                              s += kl[i].toString(QKeySequence::NativeText);
+                              }
+                        s += ")";
+                        a->setToolTip(s);
+                        }
+                  }
+            else if (!s->key.isEmpty()) {
                   a->setToolTip(a->toolTip() +
                         " (" + s->key.toString(QKeySequence::NativeText) + ")" );
+                  }
             if (!s->text.isEmpty())
                   a->setText(s->text);
             if (s->icon)

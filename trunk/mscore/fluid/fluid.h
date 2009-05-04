@@ -36,6 +36,7 @@ class Sample;
 struct Tuning;
 class Channel;
 class Mod;
+class Reverb;
 
 #define FLUID_NUM_PROGRAMS      129
 #define DRUM_INST_MASK         ((unsigned int)0x80000000)
@@ -97,7 +98,7 @@ class Fluid : public Synth {
       fluid_real_t* fx_left_buf[2];
       fluid_real_t* fx_right_buf[2];
 
-      fluid_revmodel_t* reverb;
+      Reverb* reverb;
       fluid_chorus_t* chorus;
       int cur;                            // the current sample in the audio buffers to be output
 
@@ -157,17 +158,13 @@ class Fluid : public Synth {
       int get_bank_offset(int sfont_id);
       int set_bank_offset(int sfont_id, int offset);
       int stop(unsigned int id);
-      int start(unsigned int id, Preset* preset, int /*audio_chan*/, int midi_chan, int key, int vel);
+      int start(unsigned int id, Preset* preset, int midi_chan, int key, int vel);
       int set_gen2(int chan, int param, float value, int absolute, int normalized);
       float get_gen(int chan, int param);
       int set_gen(int chan, int param, float value);
       int count_audio_channels() const   { return audio_channels; }
       int count_midi_channels() const    { return midi_channels; }
       int set_interp_method(int chan, int interp_method);
-      double get_reverb_roomsize();
-      double get_reverb_damp();
-      double get_reverb_level();
-      double get_reverb_width();
       void set_reverb_on(int on);
       void set_chorus_on(int on);
       int get_chorus_nr();
@@ -927,6 +924,7 @@ typedef union {
  * Creates the expression a.index++.
  * It is slightly different, when USE_LONGLONG is turned on. */
 #define fluid_phase_index_plusplus(a) (((a).b32.index)++)
+
 //---------------------------------------------------------
 //   Voice
 //---------------------------------------------------------
@@ -935,7 +933,7 @@ class Voice
       {
    public:
 	unsigned int id;                /* the id is incremented for every new noteon.
-					   it's used for noteoff's  */
+					           it's used for noteoff's  */
 	unsigned char status;
 	unsigned char chan;             /* the channel number, quick access for channel messages */
 	unsigned char key;              /* the key, quick acces for noteoff */
@@ -947,7 +945,7 @@ class Voice
 	int has_looped;                 /* Flag that is set as soon as the first loop is completed. */
 	Sample* sample;
 	int check_sample_sanity_flag;   /* Flag that initiates, that sample-related parameters
-					   have to be checked. */
+					           have to be checked. */
 	/* basic parameters */
 	fluid_real_t output_rate;        /* the sample rate of the synthesizer */
 

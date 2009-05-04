@@ -26,44 +26,140 @@
 
 namespace FluidS {
 
-typedef struct _fluid_revmodel_t fluid_revmodel_t;
+#define numcombs 8
+#define numallpasses 4
 
+#define stereospread 23
 
 /*
- * reverb
- */
-fluid_revmodel_t* new_fluid_revmodel(void);
-void delete_fluid_revmodel(fluid_revmodel_t* rev);
+ These values assume 44.1KHz sample rate
+ they will probably be OK for 48KHz sample rate
+ but would need scaling for 96KHz (or other) sample rates.
+ The values were obtained by listening tests.
+*/
+#define combtuningL1 1116
+#define combtuningR1 1116 + stereospread
+#define combtuningL2 1188
+#define combtuningR2 1188 + stereospread
+#define combtuningL3 1277
+#define combtuningR3 1277 + stereospread
+#define combtuningL4 1356
+#define combtuningR4 1356 + stereospread
+#define combtuningL5 1422
+#define combtuningR5 1422 + stereospread
+#define combtuningL6 1491
+#define combtuningR6 1491 + stereospread
+#define combtuningL7 1557
+#define combtuningR7 1557 + stereospread
+#define combtuningL8 1617
+#define combtuningR8 1617 + stereospread
+#define allpasstuningL1 556
+#define allpasstuningR1 556 + stereospread
+#define allpasstuningL2 441
+#define allpasstuningR2 441 + stereospread
+#define allpasstuningL3 341
+#define allpasstuningR3 341 + stereospread
+#define allpasstuningL4 225
+#define allpasstuningR4 225 + stereospread
 
-void fluid_revmodel_processmix(fluid_revmodel_t* rev, fluid_real_t *in,
-			      fluid_real_t *left_out, fluid_real_t *right_out);
 
-void fluid_revmodel_processreplace(fluid_revmodel_t* rev, fluid_real_t *in,
-				  fluid_real_t *left_out, fluid_real_t *right_out);
+struct fluid_allpass {
+      fluid_real_t feedback;
+      fluid_real_t *buffer;
+      int bufsize;
+      int bufidx;
+      };
 
-void fluid_revmodel_reset(fluid_revmodel_t* rev);
+struct fluid_comb {
+      fluid_real_t feedback;
+      fluid_real_t filterstore;
+      fluid_real_t damp1;
+      fluid_real_t damp2;
+      fluid_real_t *buffer;
+      int bufsize;
+      int bufidx;
+      };
 
-void fluid_revmodel_setroomsize(fluid_revmodel_t* rev, fluid_real_t value);
-void fluid_revmodel_setdamp(fluid_revmodel_t* rev, fluid_real_t value);
-void fluid_revmodel_setlevel(fluid_revmodel_t* rev, fluid_real_t value);
-void fluid_revmodel_setwidth(fluid_revmodel_t* rev, fluid_real_t value);
-void fluid_revmodel_setmode(fluid_revmodel_t* rev, fluid_real_t value);
+//---------------------------------------------------------
+//   Reverb
+//---------------------------------------------------------
 
-fluid_real_t fluid_revmodel_getroomsize(fluid_revmodel_t* rev);
-fluid_real_t fluid_revmodel_getdamp(fluid_revmodel_t* rev);
-fluid_real_t fluid_revmodel_getlevel(fluid_revmodel_t* rev);
-fluid_real_t fluid_revmodel_getwidth(fluid_revmodel_t* rev);
+class Reverb {
+
+      void update();
+      void init();
+
+   public:
+      fluid_real_t roomsize;
+      fluid_real_t damp;
+      fluid_real_t wet, wet1, wet2;
+      fluid_real_t width;
+      fluid_real_t gain;
+      /*
+       The following are all declared inline
+       to remove the need for dynamic allocation
+       with its subsequent error-checking messiness
+       */
+      /* Comb filters */
+      fluid_comb combL[numcombs];
+      fluid_comb combR[numcombs];
+      /* Allpass filters */
+      fluid_allpass allpassL[numallpasses];
+      fluid_allpass allpassR[numallpasses];
+      /* Buffers for the combs */
+      fluid_real_t bufcombL1[combtuningL1];
+      fluid_real_t bufcombR1[combtuningR1];
+      fluid_real_t bufcombL2[combtuningL2];
+      fluid_real_t bufcombR2[combtuningR2];
+      fluid_real_t bufcombL3[combtuningL3];
+      fluid_real_t bufcombR3[combtuningR3];
+      fluid_real_t bufcombL4[combtuningL4];
+      fluid_real_t bufcombR4[combtuningR4];
+      fluid_real_t bufcombL5[combtuningL5];
+      fluid_real_t bufcombR5[combtuningR5];
+      fluid_real_t bufcombL6[combtuningL6];
+      fluid_real_t bufcombR6[combtuningR6];
+      fluid_real_t bufcombL7[combtuningL7];
+      fluid_real_t bufcombR7[combtuningR7];
+      fluid_real_t bufcombL8[combtuningL8];
+      fluid_real_t bufcombR8[combtuningR8];
+      /* Buffers for the allpasses */
+      fluid_real_t bufallpassL1[allpasstuningL1];
+      fluid_real_t bufallpassR1[allpasstuningR1];
+      fluid_real_t bufallpassL2[allpasstuningL2];
+      fluid_real_t bufallpassR2[allpasstuningR2];
+      fluid_real_t bufallpassL3[allpasstuningL3];
+      fluid_real_t bufallpassR3[allpasstuningR3];
+      fluid_real_t bufallpassL4[allpasstuningL4];
+      fluid_real_t bufallpassR4[allpasstuningR4];
+
+      Reverb();
+      void processmix(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out);
+
+      void reset() { init(); }
+
+      void setroomsize(fluid_real_t value);
+      void setdamp(fluid_real_t value);
+      void setlevel(fluid_real_t value);
+      void setwidth(fluid_real_t value);
+      void setmode(fluid_real_t value);
+
+      fluid_real_t getroomsize();
+      fluid_real_t getdamp();
+      fluid_real_t getlevel();
+      fluid_real_t getwidth() { return width; }
+      };
 
 /*
  * reverb preset
  */
-typedef struct _fluid_revmodel_presets_t {
-  const char* name;
-  fluid_real_t roomsize;
-  fluid_real_t damp;
-  fluid_real_t width;
-  fluid_real_t level;
-} fluid_revmodel_presets_t;
+struct fluid_revmodel_presets_t {
+      const char* name;
+      fluid_real_t roomsize;
+      fluid_real_t damp;
+      fluid_real_t width;
+      fluid_real_t level;
+      };
 
 }
 

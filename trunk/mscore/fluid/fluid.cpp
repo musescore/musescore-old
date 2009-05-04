@@ -282,7 +282,7 @@ void Fluid::init(int sr, int channels)
       cur = FLUID_BUFSIZE;
 
       /* allocate the reverb module */
-      reverb = new_fluid_revmodel();
+      reverb = new Reverb();
       set_reverb(FLUID_REVERB_DEFAULT_ROOMSIZE,
          FLUID_REVERB_DEFAULT_DAMP,
 	   FLUID_REVERB_DEFAULT_WIDTH,
@@ -326,9 +326,8 @@ Fluid::~Fluid()
                   FLUID_FREE(fx_right_buf[i]);
             }
 
-      /* release the reverb module */
       if (reverb)
-            delete_fluid_revmodel(reverb);
+            delete reverb;
 
       /* release the chorus module */
       if (chorus)
@@ -395,7 +394,7 @@ int Fluid::noteon(int chan, int key, int vel)
          advance it to the release phase.
        */
       release_voice_on_same_note(chan, key);
-      return start(noteid++, ch->preset(), 0, chan, key, vel);
+      return start(noteid++, ch->preset(), chan, key, vel);
       }
 
 //---------------------------------------------------------
@@ -507,7 +506,7 @@ int Fluid::system_reset()
             channel[i]->reset();
 
       fluid_chorus_reset(chorus);
-      fluid_revmodel_reset(reverb);
+      reverb->reset();
       return FLUID_OK;
       }
 
@@ -919,10 +918,10 @@ int Fluid::set_reverb_preset(int num)
       int i = 0;
       while (revmodel_preset[i].name != 0) {
             if (i == num) {
-                  fluid_revmodel_setroomsize(reverb, revmodel_preset[i].roomsize);
-                  fluid_revmodel_setdamp(reverb, revmodel_preset[i].damp);
-                  fluid_revmodel_setwidth(reverb, revmodel_preset[i].width);
-                  fluid_revmodel_setlevel(reverb, revmodel_preset[i].level);
+                  reverb->setroomsize(revmodel_preset[i].roomsize);
+                  reverb->setdamp(revmodel_preset[i].damp);
+                  reverb->setwidth(revmodel_preset[i].width);
+                  reverb->setlevel(revmodel_preset[i].level);
                   return FLUID_OK;
                   }
             i++;
@@ -935,10 +934,10 @@ int Fluid::set_reverb_preset(int num)
  */
 void Fluid::set_reverb(double roomsize, double damping, double width, double level)
       {
-      fluid_revmodel_setroomsize(reverb, roomsize);
-      fluid_revmodel_setdamp(reverb, damping);
-      fluid_revmodel_setwidth(reverb, width);
-      fluid_revmodel_setlevel(reverb, level);
+      reverb->setroomsize(roomsize);
+      reverb->setdamp(damping);
+      reverb->setwidth(width);
+      reverb->setlevel(level);
       }
 
 /*
@@ -1012,7 +1011,7 @@ int Fluid::one_block()
 
       if (silentBlocks > 0) {
            if (revb)
-                  fluid_revmodel_processmix(reverb, revb, left_buf, right_buf);
+                  reverb->processmix(revb, left_buf, right_buf);
             if (chob)
                   fluid_chorus_processmix(chorus, chob, left_buf, right_buf);
             }
@@ -1105,7 +1104,7 @@ Voice* Fluid::free_voice_by_kill()
  */
 Voice* Fluid::alloc_voice(Sample* sample, int chan, int key, int vel)
       {
-      Voice* v = 0;
+      Voice* v   = 0;
       Channel* c = 0;
 
       /* check if there's an available synthesis process */
@@ -1433,27 +1432,6 @@ int Fluid::get_chorus_type()
       return fluid_chorus_get_type(chorus);
       }
 
-/* Returns the current settings_old of the reverb unit */
-double Fluid::get_reverb_roomsize()
-      {
-      return (double)fluid_revmodel_getroomsize(reverb);
-      }
-
-double Fluid::get_reverb_damp()
-      {
-      return (double) fluid_revmodel_getdamp(reverb);
-      }
-
-double Fluid::get_reverb_level()
-      {
-      return (double) fluid_revmodel_getlevel(reverb);
-      }
-
-double Fluid::get_reverb_width()
-      {
-      return (double) fluid_revmodel_getwidth(reverb);
-      }
-
 /*
  * If the same note is hit twice on the same channel, then the older
  * voice process is advanced to the release stage.  Using a mechanical
@@ -1722,7 +1700,7 @@ float Fluid::get_gen(int chan, int param)
       return channel[chan]->getGen(param);
       }
 
-int Fluid::start(unsigned int id, Preset* preset, int /*audio_chan*/, int midi_chan, int key, int vel)
+int Fluid::start(unsigned int id, Preset* preset, int midi_chan, int key, int vel)
       {
       /* check the ranges of the arguments */
       if ((midi_chan < 0) || (midi_chan >= midi_channels)) {

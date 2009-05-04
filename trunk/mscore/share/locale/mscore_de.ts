@@ -1396,7 +1396,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>show first</source>
-        <translation>ersten zeigen</translation>
+        <translation>erste zeigen</translation>
     </message>
     <message>
         <source>Measure Numbers</source>

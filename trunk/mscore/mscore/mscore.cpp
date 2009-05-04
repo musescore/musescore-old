@@ -2038,9 +2038,9 @@ Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k
       context     = cont;
       icon        = i;
       action      = 0;
-      descr       = d; // qApp->translate("MuseScore", d);
-      help        = h; // qApp->translate("MuseScore", h);
-      text        = txt; // qApp->translate("MuseScore", txt);
+      descr       = d;        // qApp->translate("MuseScore", d);
+      help        = h;        // qApp->translate("MuseScore", h);
+      text        = txt;      // qApp->translate("MuseScore", txt);
       translated  = false;
       }
 
@@ -2054,9 +2054,9 @@ Shortcut::Shortcut(int s, const char* name, const char* d, QKeySequence::Standar
       context     = cont;
       icon        = i;
       action      = 0;
-      descr       = d;   // qApp->translate("MuseScore", d);
-      help        = h;   // qApp->translate("MuseScore", h);
-      text        = txt; // qApp->translate("MuseScore", txt);
+      descr       = d;        // qApp->translate("MuseScore", d);
+      help        = h;        // qApp->translate("MuseScore", h);
+      text        = txt;      // qApp->translate("MuseScore", txt);
       translated  = false;
       }
 
@@ -2066,8 +2066,6 @@ Shortcut::Shortcut(const Shortcut& c)
       xml         = c.xml;
       standardKey = c.standardKey;
       key         = c.key;
-      if (standardKey != QKeySequence::UnknownKey)
-            key = QKeySequence(standardKey);
       context     = c.context;
       icon        = c.icon;
       action      = c.action;
