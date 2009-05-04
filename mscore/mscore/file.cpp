@@ -705,6 +705,7 @@ void MuseScore::newFile()
       QString composer  = newWizard->composer();
       QString poet      = newWizard->poet();
       QString copyright = newWizard->copyright();
+
       if (!title.isEmpty() || !subtitle.isEmpty() || !composer.isEmpty() || !poet.isEmpty()) {
             MeasureBase* measure = score->measures()->first();
             if (measure->type() != VBOX) {

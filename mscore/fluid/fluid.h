@@ -147,7 +147,6 @@ class Fluid : public Synth {
 
       int noteon(int chan, int key, int vel);
       int noteoff(int chan, int key);
-      int cc(int chan, int num, int val);
       int get_cc(int chan, int num, int* pval);
       int system_reset();
       int pitch_bend(int chan, int val);
