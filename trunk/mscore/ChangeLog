@@ -1,3 +1,5 @@
+5.may (la)
+      - fix export of c major key to lilypond
 4.may (ws)
       - progressivly shorten note stems of "wrong" direction; make
         this stylable
