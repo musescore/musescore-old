@@ -1266,8 +1266,6 @@ void ExportLy::writeTimeSig(TimeSig* sig)
 void ExportLy::writeKeySig(int st)
 {
   st = char(st & 0xff);
-  if (st == 0)
-    return;
   indent();
   out << "\\key ";
   switch(st) {
