@@ -28,7 +28,6 @@
 #include "driver.h"
 
 class Event;
-class MidiOutEvent;
 class MidiSeq;
 class Seq;
 
@@ -75,7 +74,7 @@ class MidiDriver {
       virtual void getInputPollFd(struct pollfd**, int* n) = 0;
       virtual void getOutputPollFd(struct pollfd**, int* n) = 0;
       virtual void read() = 0;
-      virtual void write(const MidiOutEvent&) = 0;
+      virtual void write(const Event&) = 0;
       };
 
 #ifdef USE_ALSA
@@ -109,7 +108,7 @@ class AlsaMidi : public Driver {
       virtual int getState()          { return state; }
       virtual int sampleRate() const  { return 10000; }
       virtual bool isRealtime() const { return false; }
-      virtual void putEvent(const MidiOutEvent&);
+      virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int) {}
       virtual void midiRead();
       };

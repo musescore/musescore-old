@@ -23,264 +23,250 @@
 #include "driver.h"
 #include "score.h"
 #include "part.h"
-#include "moevent.h"
+#include "event.h"
 
 //---------------------------------------------------------
-//   NoteEvent::write
+//   Event::Event
 //---------------------------------------------------------
 
-void NoteEvent::write(Xml& xml) const
+Event::Event()
       {
-      xml.tagE(QString("note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
-         .arg(ontime()).arg(channel()).arg(duration()).arg(pitch()).arg(velo()));
+      _data   = 0;
+      _note   = 0;
+      _tuning = 0.0;
+      _ontime = -1;
+      _channel = 0;
       }
 
-//---------------------------------------------------------
-//   NoteOn::write
-//---------------------------------------------------------
-
-void NoteOn::write(Xml& xml) const
+Event::Event(int t)
       {
-      xml.tagE(QString("note-on  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-            .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+      _type   = t;
+      _data   = 0;
+      _note   = 0;
+      _tuning = 0.0;
+      _ontime = -1;
+      _channel = 0;
       }
 
-//---------------------------------------------------------
-//   NoteOff::write
-//---------------------------------------------------------
 
-void NoteOff::write(Xml& xml) const
+Event::Event(const Event& e)
       {
-      xml.tagE(QString("note-off  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-            .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
-      }
-
-//---------------------------------------------------------
-//   ControllerEvent::write
-//---------------------------------------------------------
-
-void ControllerEvent::write(Xml& xml) const
-      {
-      if (controller() == CTRL_PROGRAM) {
-            if ((ontime() == -1) && (channel() == 0)) {
-                  xml.tagE(QString("program value=\"%1\"").arg(value()));
-                  }
-            else {
-                  xml.tagE(QString("program tick=\"%1\" channel=\"%2\" value=\"%3\"")
-                     .arg(ontime()).arg(channel()).arg(value()));
-                  }
+      _type       = e._type;
+      _ontime     = e._ontime;
+      _channel    = e._channel;
+      _a          = e._a;
+      _b          = e._b;
+      _tuning     = e._tuning;
+      _duration   = e._duration;
+      _tpc        = e._tpc;
+      _voice      = e._voice;
+      _notes      = e._notes;
+      _len        = e._len;
+      if (e._data) {
+            _data = new unsigned char[_len];
+            memcpy(_data, e._data, _len);
             }
-      else {
-            if ((ontime() == -1) && (channel() == 0)) {
-                  xml.tagE(QString("controller ctrl=\"%1\" value=\"%2\"")
-                     .arg(controller()).arg(value()));
-                  }
-            else {
-                  xml.tagE(QString("controller tick=\"%1\" channel=\"%2\" ctrl=\"%3\" value=\"%4\"")
-                     .arg(ontime()).arg(channel()).arg(controller()).arg(value()));
-                  }
-            }
+      else
+            _data = 0;
+      _metaType = e._metaType;
+      _note     = e._note;
+      }
+
+Event::~Event()
+      {
+      if (_data)
+            delete[] _data;
       }
 
 //---------------------------------------------------------
-//   SysexEvent::write
+//   isChannelEvent
 //---------------------------------------------------------
 
-void SysexEvent::write(Xml& xml) const
+bool Event::isChannelEvent() const
       {
-      xml.stag(QString("sysex tick=\"%1\" len=\"%2\"").arg(ontime()).arg(_len));
-      xml.dump(_len, _data);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   MetaEvent::write
-//---------------------------------------------------------
-
-void MetaEvent::write(Xml& xml) const
-      {
-      switch(metaType()) {
-            case META_TRACK_NAME:
-                  xml.tag(QString("TrackName tick=\"%1\"").arg(ontime()), QString((char*)(data())));
-                  break;
-
-            case META_LYRIC:
-                  xml.tag(QString("Lyric tick=\"%1\"").arg(ontime()), QString((char*)(data())));
-                  break;
-
-            case META_KEY_SIGNATURE:
-                  {
-                  const char* keyTable[] = {
-                        "Ces", "Ges", "Des", "As", "Es", "Bes", "F",
-                        "C",
-                        "G", "D", "A", "E", "B", "Fis", "Cis"
-                        };
-                  int key = (char)(_data[0]) + 7;
-                  if (key < 0 || key > 14) {
-                        printf("bad key signature %d\n", key);
-                        key = 0;
-                        }
-                  QString sex(_data[1] ? "Minor" : "Major");
-                  QString keyName(keyTable[key]);
-                  xml.tag(QString("Key tick=\"%1\" key=\"%2\" sex=\"%3\"").arg(ontime()).arg(_data[0]).arg(_data[1]),
-                     QString("%1 %2").arg(keyName).arg(sex));
-                  }
-                  break;
-
-            case META_TIME_SIGNATURE:
-                  xml.tagE(QString("TimeSig tick=\"%1\" num=\"%2\" denom=\"%3\" metro=\"%4\" quarter=\"%5\"")
-                     .arg(ontime())
-                     .arg(int(_data[0]))
-                     .arg(int(_data[1]))
-                     .arg(int(_data[2]))
-                     .arg(int(_data[3])));
-                  break;
-
-            case META_TEMPO:
-                  {
-                  unsigned tempo = _data[2] + (_data[1] << 8) + (_data[0] << 16);
-                  xml.tagE(QString("Tempo tick=\"%1\" value=\"%2\"").arg(ontime()).arg(tempo));
-                  }
-                  break;
-
-            default:
-                  xml.stag(QString("Meta tick=\"%1\" type=\"%2\" len=\"%3\" name=\"%4\"")
-                     .arg(ontime()).arg(metaType()).arg(_len).arg(midiMetaName(metaType())));
-                  xml.dump(_len, _data);
-                  xml.etag();
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   NoteOn::write
-//---------------------------------------------------------
-
-void NoteOn::write(MidiFile* mf) const
-      {
-      mf->writeStatus(ME_NOTEON, channel());
-      mf->put(pitch());
-      mf->put(velo());
-      }
-
-//---------------------------------------------------------
-//   NoteOff::write
-//---------------------------------------------------------
-
-void NoteOff::write(MidiFile* mf) const
-      {
-      mf->writeStatus(ME_NOTEOFF, channel());
-      mf->put(pitch());
-      mf->put(velo());
-      }
-
-//---------------------------------------------------------
-//   ControllerEvent::write
-//---------------------------------------------------------
-
-void ControllerEvent::write(MidiFile* mf) const
-      {
-      switch(controller()) {
-            case CTRL_PROGRAM:
-                  mf->writeStatus(ME_PROGRAM, channel());
-                  mf->put(value());
-                  break;
-            case CTRL_PITCH:
-                  {
-                  mf->writeStatus(ME_PITCHBEND, channel());
-                  int v = value() + 8192;
-                  mf->put(v & 0x7f);
-                  mf->put((v >> 7) & 0x7f);
-                  }
-                  break;
-            case CTRL_PRESS:
-                  mf->writeStatus(ME_AFTERTOUCH, channel());
-                  mf->put(value());
-                  break;
-            default:
-                  mf->writeStatus(ME_CONTROLLER, channel());
-                  mf->put(controller());
-                  mf->put(value());
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   midiOutEvent
-//---------------------------------------------------------
-
-bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, int p, int c) const
-      {
-      int port = p;     // cs->midiPort(channel());
-      int ch   = c;     // cs->midiChannel(channel());
-      switch(controller()) {
-            case CTRL_PROGRAM:
-                  {
-                  MidiOutEvent e;
-                  e.port = port;
-                  e.type = ME_PROGRAM | ch;
-                  e.a    = value() & 0x7f;
-                  el->append(e);
-                  }
-                  return true;
-            case CTRL_PITCH:
-                  {
-                  MidiOutEvent e;
-                  e.port = port;
-                  e.type = ME_PITCHBEND | ch;
-                  int v  = value() + 8192;
-                  e.a    = v & 0x7f;
-                  e.b    = (v >> 7) & 0x7f;
-                  el->append(e);
-                  }
-                  return true;
-            case CTRL_PRESS:
-                  {
-                  MidiOutEvent e;
-                  e.port = port;
-                  e.type = ME_AFTERTOUCH | ch;
-                  e.a    = value();
-                  el->append(e);
-                  }
+      switch(_type) {
+            case ME_NOTEOFF:
+            case ME_NOTEON:
+            case ME_POLYAFTER:
+            case ME_CONTROLLER:
+            case ME_PROGRAM:
+            case ME_AFTERTOUCH:
+            case ME_PITCHBEND:
+            case ME_NOTE:
+            case ME_CHORD:
                   return true;
             default:
-                  {
-                  MidiOutEvent e;
-                  e.port = port;
-                  e.type = ME_CONTROLLER | ch;
-                  e.a    = controller();
-                  e.b    = value();
-                  el->append(e);
-                  }
-                  return true;
+                  return false;
             }
       return false;
       }
 
 //---------------------------------------------------------
-//   MetaEvent::write
+//   Event::write
 //---------------------------------------------------------
 
-void MetaEvent::write(MidiFile* mf) const
+void Event::write(Xml& xml) const
       {
-      mf->put(ME_META);
-      mf->put(_metaType);
-      mf->putvl(len());
-      mf->write(data(), len());
-      mf->resetRunningStatus();     // really ?!
+      switch(_type) {
+            case ME_NOTE:
+                  xml.tagE(QString("note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
+                     .arg(ontime()).arg(channel()).arg(duration()).arg(pitch()).arg(velo()));
+                  break;
+
+            case ME_NOTEON:
+                  xml.tagE(QString("note-on  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+                     .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+                  break;
+
+            case ME_NOTEOFF:
+                  xml.tagE(QString("note-off  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+                     .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+                  break;
+
+            case ME_CONTROLLER:
+                  if (controller() == CTRL_PROGRAM) {
+                        if ((ontime() == -1) && (channel() == 0)) {
+                              xml.tagE(QString("program value=\"%1\"").arg(value()));
+                              }
+                        else {
+                              xml.tagE(QString("program tick=\"%1\" channel=\"%2\" value=\"%3\"")
+                                 .arg(ontime()).arg(channel()).arg(value()));
+                              }
+                        }
+                  else {
+                        if ((ontime() == -1) && (channel() == 0)) {
+                              xml.tagE(QString("controller ctrl=\"%1\" value=\"%2\"")
+                                 .arg(controller()).arg(value()));
+                              }
+                        else {
+                              xml.tagE(QString("controller tick=\"%1\" channel=\"%2\" ctrl=\"%3\" value=\"%4\"")
+                                 .arg(ontime()).arg(channel()).arg(controller()).arg(value()));
+                              }
+                        }
+                  break;
+
+            case ME_SYSEX:
+                  xml.stag(QString("sysex tick=\"%1\" len=\"%2\"").arg(ontime()).arg(_len));
+                  xml.dump(_len, _data);
+                  xml.etag();
+                  break;
+
+            case ME_META:
+                  switch(metaType()) {
+                        case META_TRACK_NAME:
+                              xml.tag(QString("TrackName tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                              break;
+
+                        case META_LYRIC:
+                              xml.tag(QString("Lyric tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                              break;
+
+                        case META_KEY_SIGNATURE:
+                              {
+                              const char* keyTable[] = {
+                                    "Ces", "Ges", "Des", "As", "Es", "Bes", "F",
+                                    "C",
+                                    "G", "D", "A", "E", "B", "Fis", "Cis"
+                                    };
+                              int key = (char)(_data[0]) + 7;
+                              if (key < 0 || key > 14) {
+                                    printf("bad key signature %d\n", key);
+                                    key = 0;
+                                    }
+                              QString sex(_data[1] ? "Minor" : "Major");
+                              QString keyName(keyTable[key]);
+                              xml.tag(QString("Key tick=\"%1\" key=\"%2\" sex=\"%3\"").arg(ontime()).arg(_data[0]).arg(_data[1]),
+                                 QString("%1 %2").arg(keyName).arg(sex));
+                              }
+                              break;
+
+                        case META_TIME_SIGNATURE:
+                              xml.tagE(QString("TimeSig tick=\"%1\" num=\"%2\" denom=\"%3\" metro=\"%4\" quarter=\"%5\"")
+                                 .arg(ontime())
+                                 .arg(int(_data[0]))
+                                 .arg(int(_data[1]))
+                                 .arg(int(_data[2]))
+                                 .arg(int(_data[3])));
+                              break;
+
+                        case META_TEMPO:
+                              {
+                              unsigned tempo = _data[2] + (_data[1] << 8) + (_data[0] << 16);
+                              xml.tagE(QString("Tempo tick=\"%1\" value=\"%2\"").arg(ontime()).arg(tempo));
+                              }
+                              break;
+
+                        default:
+                              xml.stag(QString("Meta tick=\"%1\" type=\"%2\" len=\"%3\" name=\"%4\"")
+                                 .arg(ontime()).arg(metaType()).arg(_len).arg(midiMetaName(metaType())));
+                              xml.dump(_len, _data);
+                              xml.etag();
+                              break;
+                        }
+                  break;
+            }
       }
 
 //---------------------------------------------------------
-//   SysexEvent::write
+//   Event::write
 //---------------------------------------------------------
 
-void SysexEvent::write(MidiFile* mf) const
+void Event::write(MidiFile* mf) const
       {
-      mf->put(ME_SYSEX);
-      mf->putvl(len() + 1);  // including 0xf7
-      mf->write(data(), len());
-      mf->put(ME_ENDSYSEX);
-      mf->resetRunningStatus();
-      }
+      switch(_type) {
+            case ME_NOTEON:
+                  mf->writeStatus(ME_NOTEON, channel());
+                  mf->put(pitch());
+                  mf->put(velo());
+                  break;
 
+            case ME_NOTEOFF:
+                  mf->writeStatus(ME_NOTEOFF, channel());
+                  mf->put(pitch());
+                  mf->put(velo());
+                  break;
+
+            case ME_CONTROLLER:
+                  switch(controller()) {
+                        case CTRL_PROGRAM:
+                              mf->writeStatus(ME_PROGRAM, channel());
+                              mf->put(value());
+                              break;
+                        case CTRL_PITCH:
+                              {
+                              mf->writeStatus(ME_PITCHBEND, channel());
+                              int v = value() + 8192;
+                              mf->put(v & 0x7f);
+                              mf->put((v >> 7) & 0x7f);
+                              }
+                              break;
+                        case CTRL_PRESS:
+                              mf->writeStatus(ME_AFTERTOUCH, channel());
+                              mf->put(value());
+                              break;
+                        default:
+                              mf->writeStatus(ME_CONTROLLER, channel());
+                              mf->put(controller());
+                              mf->put(value());
+                              break;
+                        }
+                  break;
+
+            case ME_META:
+                  mf->put(ME_META);
+                  mf->put(_metaType);
+                  mf->putvl(len());
+                  mf->write(data(), len());
+                  mf->resetRunningStatus();     // really ?!
+                  break;
+
+            case ME_SYSEX:
+                  mf->put(ME_SYSEX);
+                  mf->putvl(len() + 1);  // including 0xf7
+                  mf->write(data(), len());
+                  mf->put(ME_ENDSYSEX);
+                  mf->resetRunningStatus();
+                  break;
+            }
+      }
 

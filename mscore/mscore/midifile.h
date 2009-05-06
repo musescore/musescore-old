@@ -166,15 +166,11 @@ class MidiFile {
       SigList siglist() const         { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
-      void processMeta(Score*, MidiTrack* track, MetaEvent* e);
+      void processMeta(Score*, MidiTrack* track, Event* e);
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
 
-      friend class NoteOn;
-      friend class NoteOff;
-      friend class MetaEvent;
-      friend class SysexEvent;
-      friend class ControllerEvent;
+      friend class Event;
       friend class MidiTrack;
       };
 

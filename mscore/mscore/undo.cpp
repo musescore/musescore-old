@@ -730,6 +730,15 @@ void Score::undoRemoveElement(Element* element)
       }
 
 //---------------------------------------------------------
+//   undoChangeTuning
+//---------------------------------------------------------
+
+void Score::undoChangeTuning(Note* n, double v)
+      {
+      _undo->push(new ChangeTuning(n, v));
+      }
+
+//---------------------------------------------------------
 //   AddElement
 //---------------------------------------------------------
 
@@ -1865,24 +1874,33 @@ void ChangePatch::flip()
       prog             = oprogram;
       bank             = obank;
 
-      MidiOutEvent event;
-      int idx    = channel->channel;
-      event.port = part->score()->midiPort(idx);
-      event.type = ME_CONTROLLER | part->score()->midiChannel(idx);
+      Event event(ME_CONTROLLER);
+      event.setChannel(channel->channel);
 
       int hbank = (bank >> 7) & 0x7f;
       int lbank = bank & 0x7f;
 
-      event.a    = CTRL_HBANK;
-      event.b    = hbank;
+      event.setController(CTRL_HBANK);
+      event.setValue(hbank);
       seq->sendEvent(event);
 
-      event.a    = CTRL_LBANK;
-      event.b    = lbank;
+      event.setController(CTRL_LBANK);
+      event.setValue(lbank);
       seq->sendEvent(event);
 
-      event.type = ME_PROGRAM | part->score()->midiChannel(idx);
-      event.a    = channel->program;
+      event.setController(CTRL_PROGRAM);
+      event.setValue(channel->program);
       seq->sendEvent(event);
+      }
+
+//---------------------------------------------------------
+//   ChangeTuning
+//---------------------------------------------------------
+
+void ChangeTuning::flip()
+      {
+      double ot = note->tuning();
+      note->setTuning(tuning);
+      tuning = ot;
       }
 

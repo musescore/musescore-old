@@ -203,13 +203,13 @@ void Sample::load()
 //   noteon
 //---------------------------------------------------------
 
-int Preset::noteon(Fluid* synth, int chan, int key, int vel)
+int Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double nt)
       {
       InstZone *global_inst_zone, *z;
       Sample* sample;
       Voice* voice;
-      Mod * mod;
-      Mod * mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
+      Mod* mod;
+      Mod* mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
       int mod_list_count;
 
       PresetZone* global_preset_zone = global_zone();
@@ -238,7 +238,7 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                               /* this is a good zone. allocate a new synthesis process and
                                  initialize it */
 
-                              voice = synth->alloc_voice(sample, chan, key, vel);
+                              voice = synth->alloc_voice(id, sample, chan, key, vel, nt);
                               if (voice == 0)
                                     return FLUID_FAILED;
                               z = inst_zone;
@@ -246,7 +246,6 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                               /* Instrument level, generators */
 
                               for (int i = 0; i < GEN_LAST; i++) {
-
                   	            /* SF 2.01 section 9.4 'bullet' 4:
                   	             *
                   	             * A generator in a local instrument zone supersedes a
@@ -285,7 +284,6 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                                * SF 2.01 page 69, 'bullet' 8
                                */
                               mod = inst_zone->mod;
-
                               while (mod) {
 	                              /* 'Identical' modulators will be deleted by setting their
 	                               *  list entry to 0.  The list length is known, 0
@@ -306,7 +304,7 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                               /* Add instrument modulators (global / local) to the voice. */
                               for (int i = 0; i < mod_list_count; i++){
                                     mod = mod_list[i];
-                                    if (mod != 0){ /* disabled modulators CANNOT be skipped. */
+                                    if (mod) {  // disabled modulators CANNOT be skipped.
                                           /* Instrument modulators -supersede- existing (default)
 	                                     * modulators.  SF 2.01 page 69, 'bullet' 6 */
 	                                    fluid_voice_add_mod(voice, mod, FLUID_VOICE_OVERWRITE);
@@ -316,7 +314,6 @@ int Preset::noteon(Fluid* synth, int chan, int key, int vel)
                               /* Preset level, generators */
 
                               for (int i = 0; i < GEN_LAST; i++) {
-
                                     /* SF 2.01 section 8.5 page 58: If some generators are
                                      * encountered at preset level, they should be ignored */
                                     if ((i != GEN_STARTADDROFS)

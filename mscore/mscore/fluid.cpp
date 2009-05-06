@@ -82,8 +82,32 @@ void Fluid::process(unsigned n, float* l, float* r, int stride)
 //   play
 //---------------------------------------------------------
 
-void Fluid::play(const MidiOutEvent& e)
+void Fluid::play(const Event& e)
       {
+#if 0
+      int type = event->type();
+      if (type == ME_NOTEON) {
+            NoteOn* n = (NoteOn*) event;
+
+            int channel = n->channel();
+            MidiOutEvent e;
+            e.port = cs->midiPort(channel);
+            e.type = ME_NOTEON | cs->midiChannel(channel);
+            e.a    = n->pitch();
+            e.b    = n->velo();
+            driver->play(e);
+            }
+      else if (type == ME_CONTROLLER)  {
+            const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
+            int port = cs->midiPort(c->channel());
+            int ch   = cs->midiChannel(c->channel());
+            driver->play(c->midiOutEvent(port, ch));
+            }
+      else {
+            printf("bad event type %x\n", type);
+            }
+
+#if 0
       int ch      = e.type & 0xf;
       int channel = e.port * 16 + ch;
 // printf("note %d %d %d\n", channel, pitch, velo);
@@ -121,6 +145,8 @@ void Fluid::play(const MidiOutEvent& e)
       if (err)
             fprintf(stderr, "FluidSynth error: event 0x%2x channel %d dataA %d dataB %d: %s\n",
                e.type & 0xff, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
+#endif
+#endif
       }
 
 //---------------------------------------------------------

@@ -155,6 +155,7 @@ bool Score::isVolta(int tick, int repeat) const
 
 void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
       {
+printf("collectChord\n");
       NoteList* nl = chord->noteList();
       Arpeggio* arpeggio = chord->arpeggio();
 
@@ -170,20 +171,21 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
                   continue;
             if (note->tieBack())
                   continue;
-            int idx = instr->channel[note->subchannel()]->channel;
-            NoteOn* ev = new NoteOn();
-            int pitch = note->ppitch();
+            int idx    = instr->channel[note->subchannel()]->channel;
+            int pitch  = note->ppitch();
+            Event* ev = new Event(ME_NOTEON);
+            ev->setChannel(idx);
             ev->setPitch(pitch);
             ev->setVelo(note->velocity());
+            ev->setTuning(note->tuning());
             ev->setNote(note);
-            ev->setChannel(idx);
             events->insertMulti(tick + i * arpeggioOffset, ev);
 
-            ev = new NoteOn();
-            ev->setPitch(pitch);
-            ev->setVelo(0);
-            ev->setNote(note);
-            ev->setChannel(idx);
+            Event* evo = new Event(ME_NOTEOFF);
+            evo->setChannel(idx);
+            evo->setPitch(pitch);
+            evo->setVelo(0);
+            evo->setNote(note);
             events->insertMulti(tick + len, ev);
             }
       }
@@ -455,15 +457,16 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         else
                               len = (len * gateTime) / 100 - 1;
 
-                        NoteOn* ev = new NoteOn();
+                        Event* ev = new Event(ME_NOTEON);
                         int pitch = note->ppitch();
                         ev->setPitch(pitch);
+                        ev->setTuning(note->tuning());
                         ev->setVelo(note->velocity());
                         ev->setNote(note);
                         ev->setChannel(idx);
                         events->insertMulti(tick + i * arpeggioOffset, ev);
 
-                        ev = new NoteOn();
+                        ev = new Event(ME_NOTEON);
                         ev->setPitch(pitch);
                         ev->setVelo(0);
                         ev->setNote(note);
@@ -487,7 +490,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   NamedEventList* nel = instr->midiAction(ma);
                   if (nel) {
                         foreach(Event* ev, nel->events) {
-                              Event* event = ev->clone();
+                              Event* event = new Event(*ev);
                               int tick = st->tick() + tickOffset;
                               event->setOntime(tick);
                               events->insertMulti(tick, event);

@@ -1,3 +1,7 @@
+6.may (ws)
+      - new feature: every note can be microtuned +/- 200 cent via
+        the note/chord properties dialog. The internal synthesizer is
+        modified to allow proper playback.
 5.may (la)
       - fix export of c major key to lilypond
 4.may (ws)

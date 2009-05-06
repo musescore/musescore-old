@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,7 +24,6 @@
 class Note;
 class MidiFile;
 class Xml;
-class MidiOutEvent;
 
 //---------------------------------------------------------
 //   Midi Events
@@ -131,235 +130,72 @@ enum {
 //---------------------------------------------------------
 
 class Event {
+      int _type;
+
       int _ontime;
-
-   public:
-      Event()               { _ontime = -1; }
-      Event(int t)          { _ontime = t;  }
-      virtual ~Event()  {}
-      virtual int type() const = 0;
-
-      int ontime() const    { return _ontime; }
-      void setOntime(int v) { _ontime = v;    }
-
-      virtual bool isChannelEvent() const = 0;
-      virtual void setChannel(int )       {}
-      virtual void write(MidiFile*) const {}
-      virtual void write(Xml&) const {}
-      virtual void read(QDomElement) {}
-      virtual bool midiOutEvent(QList<MidiOutEvent>*, int, int) const { return false; }
-      virtual Event* clone() const = 0;
-      };
-
-//---------------------------------------------------------
-//   MidiChannelEvent
-//---------------------------------------------------------
-
-class ChannelEvent : public Event {
       int _channel;     // mscore channel number, not midi channel
-
-   protected:
-      int _a;
-      int _b;
-
-   public:
-      ChannelEvent()          { _channel = 0; _a = -1; _b = -1;   }
-      ChannelEvent(int t, int c) : Event(t), _channel(c) {}
-      ChannelEvent(int t, int c, int a, int b)
-         : Event(t), _channel(c), _a(a), _b(b) {}
-      virtual int type() const = 0;
-
-      bool isChannelEvent() const { return true;     }
-      int channel() const         { return _channel; }
-      virtual void setChannel(int c) { _channel = c;    }
-      int dataA() const           { return _a;       }
-      int dataB() const           { return _b;       }
-      void setDataA(int v)        { _a = v;          }
-      void setDataB(int v)        { _b = v;          }
-      };
-
-//---------------------------------------------------------
-//   NoteOnOff
-//---------------------------------------------------------
-
-class NoteOnOff : public ChannelEvent {
-      Note* _note;
-
-   public:
-      NoteOnOff()                   { _note = 0; }
-      NoteOnOff(int t, int c, int p, int v)
-         : ChannelEvent(t, c, p, v) { _note = 0; }
-      virtual int type() const = 0;
-
-      int pitch() const        { return _a; }
-      void setPitch(int p)     { _a = p;    }
-      int velo() const         { return _b; }
-      void setVelo(int v)      { _b = v;    }
-      Note* note() const       { return _note; }
-      void setNote(Note* n)    { _note = n; }
-      };
-
-//---------------------------------------------------------
-//   NoteOn
-//---------------------------------------------------------
-
-class NoteOn : public NoteOnOff {
-   public:
-      NoteOn()             {}
-      NoteOn(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
-      virtual int type() const { return ME_NOTEON; }
-      virtual Event* clone() const { return new NoteOn(*this); }
-
-      virtual void write(MidiFile*) const;
-      virtual void write(Xml&) const;
-      };
-
-//---------------------------------------------------------
-//   MidiNoteOff
-//---------------------------------------------------------
-
-class NoteOff : public NoteOnOff {
-   public:
-      NoteOff()            {}
-      NoteOff(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
-      virtual int type() const { return ME_NOTEOFF; }
-      virtual Event* clone() const { return new NoteOff(*this); }
-
-      virtual void write(MidiFile*) const;
-      virtual void write(Xml&) const;
-      };
-
-//---------------------------------------------------------
-//   NoteEvent
-//---------------------------------------------------------
-
-class NoteEvent : public NoteOnOff {
+      int _a, _b;
+      double _tuning;
       int _duration;
       int _tpc;               // tonal pitch class
 
-   public:
-      NoteEvent()               { _a = -1; _b = -1; _duration = -1; }
-      virtual int type() const { return ME_NOTE; }
-      virtual Event* clone() const { return new NoteEvent(*this); }
-
-      int duration() const     { return _duration; }
-      void setDuration(int v)  { _duration = v; }
-      int offtime() const      { return ontime() + _duration; }
-      int tpc() const          { return _tpc;    }
-      void setTpc(int v)       { _tpc = v;       }
-      virtual void write(Xml&) const;
-      };
-
-//---------------------------------------------------------
-//   ChordEvent
-//---------------------------------------------------------
-
-class ChordEvent : public Event {
-      int _duration;
       int _voice;
-      QList<NoteEvent*> _notes;
+      QList<Event*> _notes;
 
-   public:
-      ChordEvent()                  {}
-      virtual int type() const      { return ME_CHORD;  }
-      virtual Event* clone() const { return new ChordEvent(*this); }
-
-      int duration() const          { return _duration; }
-      void setDuration(int v)       { _duration = v;    }
-      int voice() const             { return _voice;    }
-      void setVoice(int val)        { _voice = val;     }
-      int offtime() const           { return ontime() + _duration; }
-      QList<NoteEvent*>& notes()    { return _notes;    }
-      bool isChannelEvent() const   { return true;      }
-      virtual void write(Xml&) const {}
-      };
-
-//---------------------------------------------------------
-//   ControllerEvent
-//    the following midi events are stored as special
-//    controller:
-//      ME_POLYAFTER  =
-//      ME_PROGRAM    =
-//      ME_AFTERTOUCH =
-//      ME_PITCHBEND  =
-//---------------------------------------------------------
-
-class ControllerEvent : public ChannelEvent {
-   public:
-      ControllerEvent()                    { _a = -1; _b = 0; }
-      ControllerEvent(int t, int ch, int c, int v)
-         : ChannelEvent(t, ch, c, v) {}
-      virtual int type() const            { return ME_CONTROLLER; }
-      virtual Event* clone() const { return new ControllerEvent(*this); }
-
-      virtual bool isChannelEvent() const { return true; }
-      int controller() const              { return _a; }
-      void setController(int val)         { _a = val; }
-      int value() const                   { return _b; }
-      void setValue(int v)                { _b = v; }
-      virtual void write(MidiFile*) const;
-      virtual void write(Xml&) const;
-      virtual bool midiOutEvent(QList<MidiOutEvent>*, int port, int channel) const;
-      };
-
-//---------------------------------------------------------
-//   DataEvent
-//---------------------------------------------------------
-
-class DataEvent : public Event {
-   protected:
       int _len;
       unsigned char* _data;
-
-   public:
-      DataEvent() { _data = 0; _len = 0; }
-      DataEvent(int t, int l, unsigned char* d) : Event(t), _len(l), _data(d) {}
-      virtual int type() const = 0;
-
-      ~DataEvent() {
-            if (_data)
-                  delete _data;
-            }
-      virtual bool isChannelEvent() const { return false; }
-      unsigned char* data() const         { return _data; }
-      void setData(unsigned char* d)      { _data = d;    }
-      int len() const                     { return _len;  }
-      void setLen(int l)                  { _len = l;     }
-      };
-
-//---------------------------------------------------------
-//   SysexEvent
-//---------------------------------------------------------
-
-class SysexEvent : public DataEvent {
-   public:
-      SysexEvent()              {}
-      SysexEvent(int t, int l, unsigned char* d) : DataEvent(t, l, d) {}
-      virtual int type() const { return ME_SYSEX; }
-      virtual Event* clone() const { return new SysexEvent(*this); }
-
-      virtual void write(MidiFile*) const;
-      virtual void write(Xml&) const;
-      };
-
-//---------------------------------------------------------
-//   MetaEvent
-//---------------------------------------------------------
-
-class MetaEvent : public DataEvent {
       int _metaType;
 
-   public:
-      MetaEvent()               { _metaType = -1; }
-      MetaEvent(int t, int mt, int l, unsigned char* d)
-         : DataEvent(t, l, d), _metaType(mt) {}
-      virtual int type() const { return ME_META;   }
-      virtual Event* clone() const { return new MetaEvent(*this); }
+      Note* _note;
 
-      int metaType() const     { return _metaType; }
-      void setMetaType(int v)  { _metaType = v;    }
-      virtual void write(MidiFile*) const;
-      virtual void write(Xml&) const;
+   public:
+      Event();
+      Event(const Event&);
+      Event(int t);
+      ~Event();
+
+      void write(MidiFile*) const;
+      void write(Xml&) const;
+      void read(QDomElement);
+
+      bool isChannelEvent() const;
+
+      int type() const               { return _type;                }
+      void setType(int v)            { _type = v;                   }
+      int ontime() const             { return _ontime;              }
+      void setOntime(int v)          { _ontime = v;                 }
+      int channel() const            { return _channel;             }
+      void setChannel(int c)         { _channel = c;                }
+      int dataA() const              { return _a;                   }
+      int dataB() const              { return _b;                   }
+      void setDataA(int v)           { _a = v;                      }
+      void setDataB(int v)           { _b = v;                      }
+      int pitch() const              { return _a;                   }
+      void setPitch(int v)           { _a = v;                      }
+      int velo() const               { return _b;                   }
+      void setVelo(int v)            { _b = v;                      }
+      int controller() const         { return _a;                   }
+      void setController(int val)    { _a = val;                    }
+      int value() const              { return _b;                   }
+      void setValue(int v)           { _b = v;                      }
+      int duration() const           { return _duration;            }
+      void setDuration(int v)        { _duration = v;               }
+      int voice() const              { return _voice;               }
+      void setVoice(int val)         { _voice = val;                }
+      int offtime() const            { return ontime() + _duration; }
+      QList<Event*>& notes()         { return _notes;               }
+      unsigned char* data() const    { return _data;                }
+      void setData(unsigned char* d) { _data = d;                   }
+      int len() const                { return _len;                 }
+      void setLen(int l)             { _len = l;                    }
+      int metaType() const           { return _metaType;            }
+      void setMetaType(int v)        { _metaType = v;               }
+      int tpc() const                { return _tpc;                 }
+      void setTpc(int v)             { _tpc = v;                    }
+      Note* note() const             { return _note;                }
+      void setNote(Note* v)          { _note = v;                   }
+      double tuning() const          { return _tuning;              }
+      void setTuning(double v)       { _tuning = v;                 }
       };
 
 //---------------------------------------------------------

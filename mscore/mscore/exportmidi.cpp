@@ -75,7 +75,7 @@ void ExportMidi::writeHeader()
                   int len     = str.length() + 1;
                   unsigned char* data = new unsigned char[len];
                   strcpy((char*)(data), str.toLatin1().data());
-                  MetaEvent* ev = new MetaEvent();
+                  Event* ev = new Event(ME_META);
                   ev->setOntime(0);
                   ev->setData(data);
                   ev->setLen(len);
@@ -134,7 +134,7 @@ void ExportMidi::writeHeader()
             data[2] = 24;
             data[3] = 8;
 
-            MetaEvent* ev = new MetaEvent;
+            Event* ev = new Event(ME_META);
             ev->setMetaType(META_TIME_SIGNATURE);
             ev->setData(data);
             ev->setLen(4);
@@ -153,7 +153,7 @@ void ExportMidi::writeHeader()
 
             KeyList* keymap = cs->staff(i)->keymap();
             for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-                  MetaEvent* ev  = new MetaEvent;
+                  Event* ev  = new Event(ME_META);
                   ev->setOntime(ik->first);
                   int key       = ik->second;   // -7 -- +7
                   ev->setMetaType(META_KEY_SIGNATURE);
@@ -172,7 +172,7 @@ void ExportMidi::writeHeader()
 
       TempoList* tempomap = cs->tempomap;
       for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-            MetaEvent* ev = new MetaEvent;
+            Event* ev = new Event(ME_META);
             ev->setOntime(it->first);
             //
             // compute midi tempo: microseconds / quarter note
@@ -212,7 +212,7 @@ bool ExportMidi::write(const QString& name)
 
       writeHeader();
 
-      SigList* sigmap = cs->sigmap;
+//      SigList* sigmap = cs->sigmap;
 
       cs->updateRepeatList(preferences.midiExpandRepeats);
 
@@ -225,19 +225,53 @@ bool ExportMidi::write(const QString& name)
             track->setOutChannel(channel);
 
             if (staff->isTop()) {
-                  if (part->midiProgram() != -1)
-                        track->insert(new ControllerEvent(0, channel, CTRL_PROGRAM, part->midiProgram()));
-                  track->insert(new ControllerEvent(2, channel, CTRL_VOLUME,      part->volume()));
-                  track->insert(new ControllerEvent(4, channel, CTRL_PANPOT,      part->pan()));
-                  track->insert(new ControllerEvent(6, channel, CTRL_REVERB_SEND, part->reverb()));
-                  track->insert(new ControllerEvent(8, channel, CTRL_CHORUS_SEND, part->chorus()));
+                  if (part->midiProgram() != -1) {
+                        Event* ce = new Event(ME_CONTROLLER);
+                        ce->setOntime(0);
+                        ce->setController(CTRL_PROGRAM);
+                        ce->setChannel(channel);
+                        ce->setValue(part->midiProgram());
+                        track->insert(ce);
+                        }
+                  Event* e = new Event(ME_CONTROLLER);
+                  e->setOntime(2);
+                  e->setChannel(channel);
+                  e->setController(CTRL_VOLUME);
+                  e->setValue(part->volume());
+                  track->insert(e);
+
+                  e = new Event(ME_CONTROLLER);
+                  e->setOntime(4);
+                  e->setChannel(channel);
+                  e->setController(CTRL_PANPOT);
+                  e->setValue(part->pan());
+                  track->insert(e);
+
+                  e = new Event(ME_CONTROLLER);
+                  e->setOntime(6);
+                  e->setChannel(channel);
+                  e->setController(CTRL_REVERB_SEND);
+                  e->setValue(part->reverb());
+                  track->insert(e);
+
+                  e = new Event(ME_CONTROLLER);
+                  e->setOntime(8);
+                  e->setChannel(channel);
+                  e->setController(CTRL_CHORUS_SEND);
+                  e->setValue(part->chorus());
+                  track->insert(e);
                   }
             EventMap events;
             cs->toEList(&events, staffIdx);
             for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
                   if (i.value()->type() == ME_NOTEON) {
-                        NoteOn* n = (NoteOn*)i.value();
-                        track->insert(new NoteOn(i.key(), n->channel(), n->pitch(), n->velo()));
+                        Event* n = i.value();
+                        Event* ne = new Event(ME_NOTEON);
+                        ne->setOntime(i.key());
+                        ne->setChannel(n->channel());
+                        ne->setPitch(n->pitch());
+                        ne->setVelo(n->velo());
+                        track->insert(ne);
                         }
                   else
                         printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());

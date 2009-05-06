@@ -58,10 +58,10 @@ BBTrack::~BBTrack()
 //---------------------------------------------------------
 
 struct MNote {
-	ChordEvent* mc;
+	Event* mc;
       QList<Tie*> ties;
 
-      MNote(ChordEvent* _mc) : mc(_mc) {
+      MNote(Event* _mc) : mc(_mc) {
             for (int i = 0; i < mc->notes().size(); ++i)
                   ties.append(0);
             }
@@ -338,7 +338,7 @@ bool BBFile::read(const QString& name)
                               printf("event tick %d > %d\n", tick, endTick);
                               continue;
                               }
-                        NoteEvent* note = new NoteEvent();
+                        Event* note = new Event(ME_NOTE);
                         note->setOntime((tick * division) / bbDivision);
                         note->setPitch(a[idx + 5]);
                         note->setVelo(a[idx + 6]);
@@ -555,9 +555,9 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       s->add(chord);
 
       foreach (MNote* n, *notes) {
-            QList<NoteEvent*>& nl = n->mc->notes();
+            QList<Event*>& nl = n->mc->notes();
             for (int i = 0; i < nl.size(); ++i) {
-                  NoteEvent* mn = nl[i];
+                  Event* mn = nl[i];
       		Note* note = new Note(this);
                   note->setPitch(mn->pitch());
                   note->setTpc(mn->tpc());
@@ -584,7 +584,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
                   continue;
                   }
             for (int i = 0; i < nl.size(); ++i) {
-                  NoteEvent* mn = nl[i];
+                  Event* mn = nl[i];
                   Note* note = chord->noteList()->find(mn->pitch());
       		n->ties[i] = new Tie(this);
                   n->ties[i]->setStartNote(note);
@@ -606,7 +606,7 @@ static ciEvent collectNotes(int tick, int voice, ciEvent i, const EventList* el,
             Event* e = *i;
             if (e->type() != ME_CHORD)
                   continue;
-            ChordEvent* mc = (ChordEvent*)e;
+            Event* mc = e;
             if (mc->voice() != voice)
                   continue;
             if ((*i)->ontime() > tick)
@@ -638,7 +638,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
 
             for (; i != el.end();) {
                   Event* e = *i;
-                  if (e->type() != ME_CHORD || ((ChordEvent*)e)->voice() != voice) {
+                  if (e->type() != ME_CHORD || e->voice() != voice) {
                         ++i;
                         continue;
                         }
@@ -731,8 +731,8 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             Event* e = *i;
             if (e->ontime() >= endTick)
                   break;
-            if (e->type() == ME_NOTE && (((NoteEvent*)e)->duration() < mintick))
-                  mintick = ((NoteEvent*)e)->duration();
+            if (e->type() == ME_NOTE && (e->duration() < mintick))
+                  mintick = e->duration();
             }
       if (mintick <= division / 16)        // minimum duration is 1/64
             mintick = division / 16;
@@ -764,7 +764,7 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             if (e->ontime() >= endTick)
                   break;
             if (e->type() == ME_NOTE) {
-                  NoteEvent* note = (NoteEvent*)e;
+                  Event* note = e;
                   // prefer moving note to the right
       	      int tick = ((note->ontime() + raster/2) / raster) * raster;
                   int diff = tick - note->ontime();
@@ -781,7 +781,7 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             Event* e = *i;
             if (e->type() != ME_NOTE)
                   continue;
-            NoteEvent* note = (NoteEvent*)e;
+            Event* note = e;
             int tick   = note->ontime();
             int len    = note->duration();
             int ntick  = tick + len;
@@ -834,7 +834,7 @@ void BBTrack::cleanup()
       foreach (Event* e, _events) {
             if (e->type() != ME_NOTE)
                   continue;
-            int offtime  = ((NoteEvent*)e)->offtime();
+            int offtime  = e->offtime();
             if (offtime > lastTick)
                   lastTick = offtime;
             }
@@ -859,14 +859,14 @@ void BBTrack::cleanup()
                   ++ii;
                   for (; ii != dl.end(); ++ii) {
                         Event* ee = *ii;
-                        if (ee->type() != ME_NOTE || ((NoteEvent*)ee)->pitch() != ((NoteEvent*)e)->pitch())
+                        if (ee->type() != ME_NOTE || ee->pitch() != e->pitch())
                               continue;
-                        if (ee->ontime() >= e->ontime() + ((NoteEvent*)e)->duration())
+                        if (ee->ontime() >= e->ontime() + e->duration())
                               break;
-                        ((NoteEvent*)e)->setDuration(ee->ontime() - e->ontime());
+                        e->setDuration(ee->ontime() - e->ontime());
                         break;
                         }
-                  if (((NoteEvent*)e)->duration() <= 0)
+                  if (e->duration() <= 0)
                         continue;
                   }
 		_events.insert(e);
@@ -898,10 +898,10 @@ void BBTrack::findChords()
                   continue;
                   }
 
-            NoteEvent* note  = (NoteEvent*)e;
+            Event* note      = e;
             int ontime       = note->ontime();
             int offtime      = note->offtime();
-            ChordEvent* chord = new ChordEvent();
+            Event* chord = new Event(ME_CHORD);
             chord->setOntime(ontime);
             chord->setDuration(note->duration());
             chord->notes().append(note);
@@ -922,7 +922,7 @@ void BBTrack::findChords()
             for (int k = i + 1; k < n; ++k) {
                   if (_events[k] == 0 || _events[k]->type() != ME_NOTE)
                         continue;
-                  NoteEvent* nn = (NoteEvent*)_events[k];
+                  Event* nn = _events[k];
                   if (nn->ontime() - jitter > ontime)
                         break;
                   if (qAbs(nn->ontime() - ontime) > jitter || qAbs(nn->offtime() - offtime) > jitter)

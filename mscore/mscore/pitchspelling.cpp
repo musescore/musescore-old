@@ -404,7 +404,7 @@ static const int ASIZE        = 1024;   // 2 ** WINDOW
 //   computeWindow
 //---------------------------------------------------------
 
-static int computeWindow(const QList<NoteEvent*>& notes, int start, int end, int keyIdx)
+static int computeWindow(const QList<Event*>& notes, int start, int end, int keyIdx)
       {
       int p   = 10000;
       int idx = -1;
@@ -559,7 +559,7 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
 //   spell
 //---------------------------------------------------------
 
-void spell(QList<NoteEvent*>& notes, int key)
+void spell(QList<Event*>& notes, int key)
       {
       key += 7;
 

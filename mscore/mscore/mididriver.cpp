@@ -33,6 +33,7 @@
 #include "seq.h"
 #include "midiseq.h"
 #include "utils.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Port
@@ -431,27 +432,26 @@ void AlsaMidiDriver::read()
 //   write
 //---------------------------------------------------------
 
-void AlsaMidiDriver::write(const MidiOutEvent& e)
+void AlsaMidiDriver::write(const Event& e)
       {
-      int chn = e.type & 0xf;
-      int a   = e.a;
-      int b   = e.b;
+      Score* cs = mscore->currentScore();
+      int port  = cs->midiPort(e.channel());
+      int chn   = cs->midiChannel(e.channel());
+      int a     = e.dataA();
+      int b     = e.dataB();
 
-      if (midiOutputTrace) {
-            printf("midiOut: %2d %02x %02x %02x\n",
-               e.port, e.type & 0xff, e.a, e.b);
-            }
+      if (midiOutputTrace)
+            printf("midiOut: %2d %02x %02x %02x\n", port, e.type(), a, b);
 
       snd_seq_event_t event;
       memset(&event, 0, sizeof(event));
       snd_seq_ev_set_direct(&event);
-      int port = e.port;
       if (port >= preferences.midiPorts)
             port = 0;
       snd_seq_ev_set_source(&event, midiOutPorts[port].alsaPort());
       snd_seq_ev_set_dest(&event, SND_SEQ_ADDRESS_SUBSCRIBERS, 0);
 
-      switch(e.type & 0xf0) {
+      switch(e.type()) {
             case ME_NOTEON:
                   snd_seq_ev_set_noteon(&event, chn, a, b);
                   break;
@@ -496,8 +496,7 @@ void AlsaMidiDriver::write(const MidiOutEvent& e)
                   return;
                   }
             default:
-                  printf("MidiAlsaDriver::putEvent(): event type 0x%02x not implemented\n",
-                     e.type & 0xf0);
+                  printf("MidiAlsaDriver::putEvent(): event type 0x%02x not implemented\n", e.type());
                   return;
             }
       putEvent(&event);
@@ -616,7 +615,7 @@ void AlsaMidi::stopTransport()
 //   putEvent
 //---------------------------------------------------------
 
-void AlsaMidi::putEvent(const MidiOutEvent& e)
+void AlsaMidi::putEvent(const Event& e)
       {
       midiDriver->write(e);
       }

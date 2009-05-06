@@ -90,7 +90,6 @@ class Fluid : public Synth {
       int nvoice;                         // the length of the synthesis process array
       QList<Voice*> voice;                // the synthesis processes
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
-      unsigned int storeid;
       int nbuf;                           // How many audio buffers are used? (depends on nr of audio channels / groups)
 
       fluid_real_t* left_buf;
@@ -110,22 +109,22 @@ class Fluid : public Synth {
       ~Fluid();
       virtual void init(int sr, int ch);
       virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
-      virtual void play(const MidiOutEvent&);
+      virtual void play(const Event&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
 
       static bool initialized;
 
       static void init();
 
-      int set_reverb_preset(int num);
+      bool set_reverb_preset(int num);
       int one_block();
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
-      int all_notes_off(int chan);
-      int all_sounds_off(int chan);
-      int modulate_voices(int chan, int is_cc, int ctrl);
-      int modulate_voices_all(int chan);
+      void all_notes_off(int chan);
+      void all_sounds_off(int chan);
+      void modulate_voices(int chan, int is_cc, int ctrl);
+      void modulate_voices_all(int chan);
       int damp_voices(int chan);
       int kill_voice(Voice * voice);
       void kill_by_exclusive_class(Voice* voice);
@@ -138,18 +137,15 @@ class Fluid : public Synth {
        *  unloaded or reloaded. */
       void update_presets();
 
-      int update_gain(char* name, double value);
-      int update_polyphony(char* name, int value);
       BankOffset* get_bank_offset0(int sfont_id) const;
       void remove_bank_offset(int sfont_id);
 
       char* error()                             { return fluid_error(); }
 
-      int noteon(int chan, int key, int vel);
-      int noteoff(int chan, int key);
+//      int noteon(int chan, int key, int vel);
+//      int noteoff(int chan, int key);
       int get_cc(int chan, int num, int* pval);
-      int system_reset();
-      int pitch_bend(int chan, int val);
+      void system_reset();
       int program_change(int chan, int prognum);
       int Fluiduning_iteration_next(int* bank, int* prog);
       void Fluiduning_iteration_start();
@@ -157,25 +153,20 @@ class Fluid : public Synth {
       int get_bank_offset(int sfont_id);
       int set_bank_offset(int sfont_id, int offset);
       int stop(unsigned int id);
-      int start(unsigned int id, Preset* preset, int midi_chan, int key, int vel);
       int set_gen2(int chan, int param, float value, int absolute, int normalized);
       float get_gen(int chan, int param);
       int set_gen(int chan, int param, float value);
-      int count_audio_channels() const   { return audio_channels; }
-      int count_midi_channels() const    { return midi_channels; }
+      int count_audio_channels() const    { return audio_channels; }
+      int count_midi_channels() const     { return midi_channels; }
       int set_interp_method(int chan, int interp_method);
-      void set_reverb_on(int on);
-      void set_chorus_on(int on);
-      int get_chorus_nr();
-      double get_chorus_level();
-      double get_chorus_speed_Hz();
-      double get_chorus_depth_ms();
-      int get_chorus_type();
+      void set_reverb_on(bool on)         { with_reverb = on; }
+      void set_chorus_on(bool on)         { with_chorus = on; }
+
       void get_voicelist(Voice* buf[], int bufsize, int ID);
       Preset* get_channel_preset(int chan);
       SFont* get_sfont_by_name(const QString& name);
       SFont* get_sfont_by_id(unsigned int id);
-      SFont* get_sfont(unsigned int num);
+      SFont* get_sfont(unsigned int num)  { return sfonts[num];   }
       int sfcount() const                 { return sfonts.size(); }
       void remove_sfont(SFont* sf);
       int add_sfont(SFont* sf);
@@ -183,7 +174,7 @@ class Fluid : public Synth {
       int sfunload(unsigned int id, int reset_presets);
       int sfload(const QString& filename, int reset_presets);
       void start_voice(Voice* voice);
-      Voice* alloc_voice(Sample* sample, int chan, int key, int vel);
+      Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);
       Voice* free_voice_by_kill();
 
       virtual void process(unsigned len, float* lout, float* rout, int stride);
@@ -191,17 +182,18 @@ class Fluid : public Synth {
       void set_chorus(int nr, double level, double speed, double depth_ms, int type);
       void set_reverb(double roomsize, double damping, double width, double level);
       int program_reset();
-      int get_internal_bufsize();
-      int get_polyphony();
+      int get_internal_bufsize() const { return FLUID_BUFSIZE; }
+      int get_polyphony() const { return polyphony; }
+
       int set_polyphony(int val);
-      float get_gain();
+      float get_gain()          { return gain;  }
       void set_gain(float g);
       int program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
       int program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num);
       int get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num);
       int sfont_select(int chan, unsigned int sfont_id);
       int bank_select(int chan, unsigned int bank);
-      Preset* get_preset2(char* sfont_name, unsigned banknum, unsigned prognum);
+      Preset* get_preset(char* sfont_name, unsigned banknum, unsigned prognum);
       int get_pitch_wheel_sens(int chan, int* pval);
       int pitch_wheel_sens(int chan, int val);
       int get_pitch_bend(int chan, int* ppitch_bend);
@@ -215,14 +207,6 @@ class Fluid : public Synth {
 
 /** Get the offset of the bank numbers in a SoundFont. */
 int fluid_synth_get_bank_offset(Fluid* synth, int sfont_id);
-
-  /* Those are the default settings for the reverb */
-#define FLUID_REVERB_DEFAULT_ROOMSIZE     0.2f
-#define FLUID_REVERB_DEFAULT_DAMP         0.0f
-#define FLUID_REVERB_DEFAULT_WIDTH        0.5f
-#define FLUID_REVERB_DEFAULT_LEVEL        0.9f
-
-
 
   /*
    *
@@ -930,13 +914,16 @@ typedef union {
 
 class Voice
       {
+      double _noteTuning;             // +/- in midicent
+
    public:
-	unsigned int id;                /* the id is incremented for every new noteon.
-					           it's used for noteoff's  */
+	unsigned int id;                // the id is incremented for every new noteon.
+					           // it's used for noteoff's
 	unsigned char status;
-	unsigned char chan;             /* the channel number, quick access for channel messages */
-	unsigned char key;              /* the key, quick acces for noteoff */
-	unsigned char vel;              /* the velocity */
+	unsigned char chan;             // the channel number, quick access for channel messages
+	unsigned char key;              // the key, quick acces for noteoff
+	unsigned char vel;              // the velocity
+
 	Channel* channel;
 	Generator gen[GEN_LAST];
 	Mod mod[FLUID_NUM_MOD];
@@ -958,7 +945,7 @@ class Voice
 	fluid_real_t pitch;              /* the pitch in midicents */
 	fluid_real_t attenuation;        /* the attenuation in centibels */
 	fluid_real_t min_attenuation_cB; /* Estimate on the smallest possible attenuation
-					  * during the lifetime of the voice */
+					          * during the lifetime of the voice */
 	fluid_real_t root_pitch;
 
 	/* sample and loop start and end points (offset in sample memory).  */
@@ -1051,7 +1038,7 @@ class Voice
       void voice_start();
       int voice_off();
       void init(Sample*, Channel*, int key, int vel, unsigned int id,
-         unsigned int start_time, fluid_real_t _gain);
+         unsigned int start_time, fluid_real_t _gain, double tuning);
       void gen_incr(int i, float val);
       void gen_set(int i, float val);
       float gen_get(int gen);
@@ -1067,10 +1054,8 @@ class Voice
 
       void update_param(int gen);
 
-      fluid_real_t GEN(int n) {
-         return fluid_real_t(gen[n].val) + fluid_real_t(gen[n].mod)
-            + fluid_real_t(gen[n].nrpn);
-         }
+      double GEN(int n) { return gen[n].val + gen[n].mod + gen[n].nrpn; }
+
       void modulate_all();
       void modulate(int _cc, int _ctrl);
       fluid_real_t get_lower_boundary_for_attenuation();

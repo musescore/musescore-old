@@ -78,6 +78,7 @@ class Note : public Element {
 
       char _pitch;             ///< Note pitch as midi value (0 - 127).
       char _ppitch;            ///< played pitch (honor voltas etc.); cached value
+      double _tuning;          ///< pitch offset in cent, playable only by internal synthesizer
       char _velocity;          ///< midi playback velocity (0 - 127); cached value
       char _tpc;               ///< tonal pitch class
       char _staffMove;         ///< -1, 0, +1, used for crossbeaming
@@ -127,10 +128,12 @@ class Note : public Element {
       void setPitch(int val);
       int ppitch() const              { return _ppitch;   }
       void setPpitch(int v)           { _ppitch = v;      }
+      double tuning() const           { return _tuning;   }
+      void setTuning(double v)        { _tuning = v;      }
       int velocity() const            { return _velocity; }
       void setVelocity(int v)         { _velocity = v;    }
 
-      int tpc() const                 { return _tpc;    }
+      int tpc() const                 { return _tpc;      }
       void setTpc(int v);
       void changePitch(int val);
 

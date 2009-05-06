@@ -47,7 +47,7 @@ class PortMidiDriver : public MidiDriver {
       virtual void getInputPollFd(struct pollfd**, int* n);
       virtual void getOutputPollFd(struct pollfd**, int* n);
       virtual void read();
-      virtual void write(const MidiOutEvent&);
+      virtual void write(const Event&);
       };
 
 #endif

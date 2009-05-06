@@ -68,7 +68,7 @@ const ClefInfo clefTable[] = {
 
       { "F",   4,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (C clef)") },
+            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },
       { "F",   2,  0, -14, 31,
             { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
             QT_TRANSLATE_NOOP("clefTable", "Subbass clef") },
@@ -96,7 +96,7 @@ const ClefInfo clefTable[] = {
 
       { "C",   5,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },            // CLEF_C5
+            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (C clef)") },            // CLEF_C5
 
       { "G",   1,  0,   2, 47,
             { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },

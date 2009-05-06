@@ -965,5 +965,21 @@ class ChangePatch : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeTuning
+//---------------------------------------------------------
+
+class ChangeTuning : public UndoCommand {
+      Note* note;
+      double tuning;
+
+      void flip();
+
+   public:
+      ChangeTuning(Note* n, double t) : note(n), tuning(t) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 

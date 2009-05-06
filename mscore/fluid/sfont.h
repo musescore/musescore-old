@@ -189,7 +189,7 @@ class Preset {
       QString get_name() const               { return name; }
       int get_banknum() const                { return bank; }
       int get_num() const                    { return num;  }
-      int noteon(Fluid*, int chan, int key, int vel);
+      int noteon(Fluid*, unsigned id, int chan, int key, int vel, double nt);
 
       void setGlobalZone(PresetZone* z)               { _global_zone = z;   }
       int importSfont(SFPreset*, SFont*);
@@ -520,21 +520,7 @@ int safe_fread (void *buf, int count, QFile* fd);
 int safe_fwrite (void *buf, int count, QFile* fd);
 int safe_fseek (QFile*, long ofs, int whence);
 
-/*
-
-  Public interface
-
- */
-
-char* fluid_defpreset_preset_get_name(Preset* preset);
-int fluid_defpreset_preset_get_banknum(Preset* preset);
-int fluid_defpreset_preset_get_num(Preset* preset);
-int fluid_defpreset_preset_noteon(Preset* preset, Fluid* synth, int chan, int key, int vel);
-
 Preset* fluid_defsfont_get_preset(SFont* sfont, unsigned int bank, unsigned int prenum);
-
-
-// Preset* fluid_defpreset_next(Preset* preset);
 
 int fluid_preset_zone_inside_range(PresetZone* zone, int key, int vel);
 Inst* fluid_preset_zone_get_inst(PresetZone* zone);

@@ -70,7 +70,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-reload",
          QT_TR_NOOP("file reload"),
-         QKeySequence::Refresh,
+         0,                         // no shortcut, its an destructive non undoable operation
          Qt::WindowShortcut,
          QT_TR_NOOP("Reload"),
          QT_TR_NOOP("Reload Score from File")
