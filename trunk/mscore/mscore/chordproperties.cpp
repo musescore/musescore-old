@@ -20,32 +20,66 @@
 
 #include "chordproperties.h"
 #include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   ChordProperties
 //---------------------------------------------------------
 
-ChordProperties::ChordProperties(Chord* c, QWidget* parent)
+ChordProperties::ChordProperties(const Note* note, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      chord = c;
+      const Chord* chord = note->chord();
       smallCheckBox->setChecked(chord->small());
       noStemCheckBox->setChecked(chord->noStem());
       extraLeadingSpace->setValue(chord->extraLeadingSpace().val());
       extraTrailingSpace->setValue(chord->extraTrailingSpace().val());
+      tuningSpinBox->setValue(note->tuning());
       }
 
 //---------------------------------------------------------
-//   accept
+//   small
 //---------------------------------------------------------
 
-void ChordProperties::accept()
+bool ChordProperties::small() const
       {
-      chord->setSmall(smallCheckBox->isChecked());
-      chord->setNoStem(noStemCheckBox->isChecked());
-      chord->setExtraLeadingSpace(Spatium(extraLeadingSpace->value()));
-      chord->setExtraTrailingSpace(Spatium(extraTrailingSpace->value()));
-      QDialog::accept();
+      return smallCheckBox->isChecked();
+      }
+
+//---------------------------------------------------------
+//   noStem
+//---------------------------------------------------------
+
+bool ChordProperties::noStem() const
+      {
+      return noStemCheckBox->isChecked();
+      }
+
+//---------------------------------------------------------
+//   leadingSpace
+//---------------------------------------------------------
+
+double ChordProperties::leadingSpace() const
+      {
+      return extraLeadingSpace->value();
+      }
+
+//---------------------------------------------------------
+//   trailingSpace
+//---------------------------------------------------------
+
+double ChordProperties::trailingSpace() const
+      {
+      return extraTrailingSpace->value();
+      }
+
+//---------------------------------------------------------
+//   tuning
+//---------------------------------------------------------
+
+double ChordProperties::tuning() const
+      {
+      return tuningSpinBox->value();
       }
 

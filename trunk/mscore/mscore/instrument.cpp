@@ -45,13 +45,13 @@ void NamedEventList::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "program") {
-                  ControllerEvent* ev = new ControllerEvent();
+                  Event* ev = new Event(ME_CONTROLLER);
                   ev->setController(CTRL_PROGRAM);
                   ev->setValue(e.attribute("value", "0").toInt());
                   events.append(ev);
                   }
             else if (tag == "controller") {
-                  ControllerEvent* ev = new ControllerEvent();
+                  Event* ev = new Event(ME_CONTROLLER);
                   ev->setController(e.attribute("ctrl", "0").toInt());
                   ev->setValue(e.attribute("value", "0").toInt());
                   events.append(ev);
@@ -302,7 +302,7 @@ void Channel::read(QDomElement e)
                               break;
                         default:
                               {
-                              ControllerEvent* e = new ControllerEvent();
+                              Event* e = new Event(ME_CONTROLLER);
                               e->setController(ctrl);
                               e->setValue(value);
                               init.append(e);
@@ -328,40 +328,40 @@ void Channel::updateInitList() const
                   init[i] = 0;
                   }
             }
-      ControllerEvent* e;
+      Event* e;
       if (program != -1) {
-            e = new ControllerEvent();
+            e = new Event(ME_CONTROLLER);
             e->setController(CTRL_PROGRAM);
             e->setValue(program);
             init[A_PROGRAM] = e;
             }
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_HBANK);
       e->setValue((bank >> 7) & 0x7f);
       init[A_HBANK] = e;
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_LBANK);
       e->setValue(bank & 0x7f);
       init[A_LBANK] = e;
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_VOLUME);
       e->setValue(volume);
       init[A_VOLUME] = e;
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_PANPOT);
       e->setValue(pan);
       init[A_PAN] = e;
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_CHORUS_SEND);
       e->setValue(chorus);
       init[A_CHORUS] = e;
 
-      e = new ControllerEvent();
+      e = new Event(ME_CONTROLLER);
       e->setController(CTRL_REVERB_SEND);
       e->setValue(reverb);
       init[A_REVERB] = e;

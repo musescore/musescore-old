@@ -2378,7 +2378,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
 //  data is taken from the score metadata instead of the Text elements
 //---------------------------------------------------------
 
-void ExportMusicXml::work(const MeasureBase* measure)
+void ExportMusicXml::work(const MeasureBase* /*measure*/)
       {
       if (!(score->workTitle().isEmpty() && score->workNumber().isEmpty())) {
             xml.stag("work");

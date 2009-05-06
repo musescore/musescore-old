@@ -91,6 +91,7 @@ Note::Note(Score* s)
       {
       _pitch          = 0;
       _ppitch         = 0;
+      _tuning         = 0.0;
       _velocity       = 80;
       _accidental     = 0;
       _mirror         = false;
@@ -113,6 +114,7 @@ Note::Note(const Note& n)
       _subchannel     = n._subchannel;
       _pitch          = n._pitch;
       _ppitch         = n._ppitch;
+      _tuning         = n._tuning;
       _velocity       = n._velocity;
       _tpc            = n._tpc;
       _line           = n._line;
@@ -157,9 +159,9 @@ void Note::setPitch(int val)
             val = 127;
       else if (val < 0)
             val = 0;
-      _pitch  = val;
-      int pitchOffset   = 0;
-      Part* part        = score()->part(staffIdx());
+      _pitch          = val;
+      int pitchOffset = 0;
+      Part* part      = score()->part(staffIdx());
       if (part) {
             Instrument* instr = part->instrument();
             pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
@@ -543,11 +545,9 @@ QRectF Note::bbox() const
 bool Note::isSimple(Xml& xml) const
       {
       QList<Prop> pl = Element::properties(xml);
-      if (_accidental &&
-         (!_accidental->userOff().isNull() || !_accidental->visible())
-         )
+      if (_accidental && (!_accidental->userOff().isNull() || !_accidental->visible()))
             return false;
-      return (pl.empty() && _el.empty() && _tieFor == 0 && _staffMove == 0
+      return (_tuning == 0.0 && pl.empty() && _el.empty() && _tieFor == 0 && _staffMove == 0
          && _headGroup == 0
          && _userAccidental == 0);
       }
@@ -566,6 +566,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             QList<Prop> pl = Element::properties(xml);
             xml.prop(pl);
             xml.tag("pitch", pitch());
+            if (_tuning != 0.0)
+                  xml.tag("tuning", _tuning);
             xml.tag("tpc", tpc());
 
             if (_userAccidental)
@@ -615,6 +617,8 @@ void Note::read(QDomElement e)
                   _pitch  = i;
                   _ppitch = i;
                   }
+            else if (tag == "tuning")
+                  _tuning = val.toDouble();
             else if (tag == "tpc")
                   tpcVal = i;
             else if (tag == "Tie") {
@@ -1092,20 +1096,20 @@ bool Note::genPropertyMenu(QMenu* popup) const
 void Note::propertyAction(const QString& s)
       {
       if (s == "props") {
-            Chord c(*chord());
-            ChordProperties vp(&c);
+            ChordProperties vp(this);
             int rv = vp.exec();
             if (rv) {
-                  if (c.small() != chord()->small())
-                        score()->undoChangeChordRestSize(chord(), c.small());
-                  if (c.extraLeadingSpace() != chord()->extraLeadingSpace()
-                     || c.extraTrailingSpace() != chord()->extraTrailingSpace()) {
-                        score()->undoChangeChordRestSpace(chord(), c.extraLeadingSpace(),
-                           c.extraTrailingSpace());
+                  if (vp.small() != chord()->small())
+                        score()->undoChangeChordRestSize(chord(), vp.small());
+                  if (Spatium(vp.leadingSpace()) != chord()->extraLeadingSpace()
+                     || Spatium(vp.trailingSpace()) != chord()->extraTrailingSpace()) {
+                        score()->undoChangeChordRestSpace(chord(), Spatium(vp.leadingSpace()),
+                           Spatium(vp.trailingSpace()));
                         }
-                  if (c.noStem() != chord()->noStem()) {
-                        score()->undoChangeChordNoStem(chord(), c.noStem());
-                        }
+                  if (vp.noStem() != chord()->noStem())
+                        score()->undoChangeChordNoStem(chord(), vp.noStem());
+                  if (vp.tuning() != tuning())
+                        score()->undoChangeTuning(this, vp.tuning());
                   }
             }
       else if (s == "tupletProps") {

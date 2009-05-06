@@ -2138,7 +2138,7 @@ void MuseScore::play(Element* e, int pitch) const
             Part* part = note->staff()->part();
             Instrument* i = part->instrument();
             seq->startNote(i->channel[note->subchannel()], pitch, 80,
-               preferences.defaultPlayDuration);
+               preferences.defaultPlayDuration, note->tuning());
             }
       }
 

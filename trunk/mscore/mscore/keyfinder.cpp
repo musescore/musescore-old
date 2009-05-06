@@ -79,7 +79,7 @@ struct SBeat {
 struct MidiSegment {
       int start;
       int end;
-      QList<NoteEvent> snote;
+      QList<Event> snote;
       int numnotes;           // number of notes in the segment
       double average_dur;     // average input vector value (needed for K-S algorithm)
       };
@@ -117,7 +117,7 @@ Krumhansl's minor, normalized: 5.94 2.51 3.30 5.05 2.44 3.31 2.38 4.46 3.73 2.52
 */
 
 static int firstbeat;
-static QList<NoteEvent*> note;
+static QList<Event*> note;
 static QList<MidiSegment> segment;  // An array storing the notes in each segment
 static int segtotal;                // total number of segments - 1
 
@@ -213,7 +213,7 @@ static void create_segments()
 static void fill_segments()
       {
       for (int s = 0; s < segment.size(); ++s) {
-            foreach (const NoteEvent* n, note) {
+            foreach (const Event* n, note) {
                   int ontime  = n->ontime();
                   int offtime = n->offtime();
                   int start   = segment[s].start;
@@ -221,7 +221,7 @@ static void fill_segments()
 
                   if (ontime >= start && ontime < end && offtime <= end) {
                         // note begins and ends in segment
-                        NoteEvent sn;
+                        Event sn(ME_NOTE);
                         sn.setPitch(n->pitch());
                         sn.setTpc(n->tpc());
                         sn.setDuration(n->duration());
@@ -229,7 +229,7 @@ static void fill_segments()
                         }
                   if (ontime >= start && ontime < end && offtime > end) {
                         // note begins, doesn't end in segment
-                        NoteEvent sn;
+                        Event sn(ME_NOTE);
                         sn.setPitch(n->pitch());
                         sn.setTpc(n->tpc());
                         sn.setDuration(end - ontime);
@@ -237,7 +237,7 @@ static void fill_segments()
                         }
                   if (ontime < start && offtime > start && offtime <= end) {
                         // note ends, doesn't begin in segment
-                        NoteEvent sn;
+                        Event sn(ME_NOTE);
                         sn.setPitch(n->pitch());
                         sn.setTpc(n->tpc());
                         sn.setDuration(offtime - start);
@@ -245,7 +245,7 @@ static void fill_segments()
                         }
                   if (ontime < start && offtime > end) {
                         // note doesn't begin or end in segment
-                        NoteEvent sn;
+                        Event sn(ME_NOTE);
                         sn.setPitch(n->pitch());
                         sn.setTpc(n->tpc());
                         sn.setDuration(end - start);
@@ -827,15 +827,14 @@ int findKey(MidiTrack* mt, SigList* sigmap)
       int lastTick = 0;
       const EventList el = mt->events();
 
-      foreach (const Event* e, el) {
+      foreach (Event* e, el) {
             if (e->type() != ME_NOTE)
                   continue;
-            NoteEvent* mn = (NoteEvent*)e;
-            if (mn->offtime() > lastTick)
-                  lastTick = mn->offtime();
+            if (e->offtime() > lastTick)
+                  lastTick = e->offtime();
             // For note input, generate TPC labels within the 9-to-20 range
-            mn->setTpc((((((mn->pitch() % 12) * 7) % 12) + 5) % 12) + 9);
-            note.append(mn);
+            e->setTpc((((((e->pitch() % 12) * 7) % 12) + 5) % 12) + 9);
+            note.append(e);
             }
       spell(note, 0);
       npc_found = 1;

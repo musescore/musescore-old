@@ -144,7 +144,7 @@ Voice::Voice(fluid_real_t r)
 //---------------------------------------------------------
 
 void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
-   unsigned int _id, unsigned int _start_time, fluid_real_t _gain)
+   unsigned int _id, unsigned int _start_time, fluid_real_t _gain, double tuning)
       {
       // Note: The voice parameters will be initialized later, when the
       // generators have been retrieved from the sound font. Here, only
@@ -152,9 +152,10 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       // of IIR filters, position in sample etc) is initialized.
 
       id             = _id;
+      _noteTuning    = tuning;
       chan           = _channel->getNum();
-      key            = (unsigned char) _key;
-      vel            = (unsigned char) _vel;
+      key            = _key;
+      vel            = _vel;
       channel        = _channel;
       mod_count      = 0;
       sample         = _sample;
@@ -776,7 +777,8 @@ void Voice::voice_start()
       calculate_runtime_synthesis_parameters();
 
       /* Force setting of the phase at the first DSP loop run
-       * This cannot be done earlier, because it depends on modulators.*/
+       * This cannot be done earlier, because it depends on modulators.
+       */
       check_sample_sanity_flag = FLUID_SAMPLESANITY_STARTUP;
 
       status = FLUID_VOICE_ON;
@@ -795,7 +797,7 @@ void Voice::voice_start()
 
 void Voice::calculate_runtime_synthesis_parameters()
       {
-      int list_of_generators_to_initialize[35] = {
+      static int list_of_generators_to_initialize[35] = {
             GEN_STARTADDROFS,                    // SF2.01 page 48 #0
             GEN_ENDADDROFS,                      //                #1
             GEN_STARTLOOPADDROFS,                //                #2
@@ -886,13 +888,11 @@ void Voice::calculate_runtime_synthesis_parameters()
 
       if (channel->hasTuning()) {
             Tuning* t = channel->getTuning();
-            gen[GEN_PITCH].val = (t->getPitch(60) + (gen[GEN_SCALETUNE].val / 100.0f *
-               (t->getPitch(key) - t->getPitch(60))));
+            gen[GEN_PITCH].val = _noteTuning + t->getPitch(60) + (gen[GEN_SCALETUNE].val * .01 *
+               (t->getPitch(key) - t->getPitch(60)));
             }
-      else {
-            gen[GEN_PITCH].val = (gen[GEN_SCALETUNE].val * (key - 60.0f)
-               + 100.0f * 60.0f);
-            }
+      else
+            gen[GEN_PITCH].val = _noteTuning + gen[GEN_SCALETUNE].val * (key - 60.0) + 100.0 * 60.0;
 
      /* Now the generators are initialized, nominal and modulation value.
       * The voice parameters (which depend on generators) are calculated
@@ -1019,8 +1019,7 @@ void Voice::update_param(int _gen)
             case GEN_COARSETUNE:
             case GEN_FINETUNE:
                   /* The testing for allowed range is done in 'fluid_ct2hz' */
-                  pitch = GEN(GEN_PITCH)
-		         + 100.0f * GEN(GEN_COARSETUNE) + GEN(GEN_FINETUNE);
+                  pitch = GEN(GEN_PITCH) + 100.0f * GEN(GEN_COARSETUNE) + GEN(GEN_FINETUNE);
                   break;
 
             case GEN_REVERBSEND:

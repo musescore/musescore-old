@@ -388,7 +388,7 @@ int JackAudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void JackAudio::putEvent(const MidiOutEvent& e)
+void JackAudio::putEvent(const Event& e)
       {
       synth->play(e);
       }

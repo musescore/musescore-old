@@ -32,41 +32,6 @@
 #include "preferences.h"
 
 //---------------------------------------------------------
-//   playEvent
-//---------------------------------------------------------
-
-static void playEvent(Score* cs, Synth* driver, const Event* event)
-      {
-      int type = event->type();
-      if (type == ME_NOTEON) {
-            NoteOn* n = (NoteOn*) event;
-
-            int channel = n->channel();
-            MidiOutEvent e;
-            e.port = cs->midiPort(channel);
-            e.type = ME_NOTEON | cs->midiChannel(channel);
-            e.a    = n->pitch();
-            e.b    = n->velo();
-            driver->play(e);
-            }
-      else if (type == ME_CONTROLLER)  {
-            const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
-            QList<MidiOutEvent> ol;
-
-            int port = cs->midiPort(c->channel());
-            int ch   = cs->midiChannel(c->channel());
-
-            if (c->midiOutEvent(&ol, port, ch)) {
-                  foreach(const MidiOutEvent& e, ol)
-                        driver->play(e);
-                  }
-            }
-      else {
-            printf("bad event type %x\n", type);
-            }
-      }
-
-//---------------------------------------------------------
 //   saveAudio
 //---------------------------------------------------------
 
@@ -134,7 +99,7 @@ bool Score::saveAudio(const QString& name, int format)
                         if (e == 0)
                               continue;
                         e->setChannel(a->channel);
-                        playEvent(this, synth, e);
+                        synth->play(*e);
                         }
                   }
             }
@@ -163,7 +128,7 @@ bool Score::saveAudio(const QString& name, int format)
                   r         += n * stride;
                   playTime += double(n)/double(sampleRate);
                   frames    -= n;
-                  playEvent(this, synth, playPos.value());
+                  synth->play(*(playPos.value()));
                   }
             if (frames) {
                   synth->process(frames, l, r, stride);

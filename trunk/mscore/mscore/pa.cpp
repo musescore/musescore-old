@@ -290,7 +290,7 @@ int Portaudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void Portaudio::putEvent(const MidiOutEvent& e)
+void Portaudio::putEvent(const Event& e)
       {
       synth->play(e);
       }

@@ -25,7 +25,6 @@
 #include "driver.h"
 #include "fifo.h"
 #include "tempo.h"
-#include "moevent.h"
 
 class Note;
 class QTimer;
@@ -46,7 +45,7 @@ enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 struct SeqMsg {
       int id;
       int data;
-      MidiOutEvent midiOutEvent;
+      Event event;
       };
 
 //---------------------------------------------------------
@@ -85,7 +84,7 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      QList<NoteOn*> activeNotes;         // notes sounding
+      QList<const Event*> activeNotes;   // notes sounding
       double playTime;
       double startTime;
 
@@ -111,10 +110,10 @@ class Seq : public QObject {
       void startTransport();
       void setPos(int);
       void playEvent(const Event*);
-      void playEvent(const MidiOutEvent&);
+      void playEvent(const Event&);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
-      void startNote(Channel*, int, int);
+      void startNote(Channel*, int, int, double nt);
 
    private slots:
       void seqMessage(int msg);
@@ -164,9 +163,9 @@ class Seq : public QObject {
       float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(Channel*, int, int, int);
+      void startNote(Channel*, int, int, int, double nt);
       void setController(int, int, int);
-      void sendEvent(const MidiOutEvent&);
+      void sendEvent(const Event&);
       void setScore(Score* s);
       void initInstruments();
 

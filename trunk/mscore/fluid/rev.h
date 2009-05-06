@@ -148,12 +148,15 @@ class Reverb {
       fluid_real_t getdamp();
       fluid_real_t getlevel();
       fluid_real_t getwidth() { return width; }
+
+
+      bool setPreset(int);
       };
 
 /*
  * reverb preset
  */
-struct fluid_revmodel_presets_t {
+struct ReverbPreset {
       const char* name;
       fluid_real_t roomsize;
       fluid_real_t damp;

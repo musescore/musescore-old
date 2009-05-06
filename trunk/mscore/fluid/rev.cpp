@@ -20,6 +20,16 @@ namespace FluidS {
 
 #define DC_OFFSET 1e-8
 
+static ReverbPreset revmodel_preset[] = {
+      /* name */    /* roomsize */ /* damp */ /* width */ /* level */
+      { "Default",         0.2f,      0.0f,       0.5f,       0.9f },
+      { "Test 2",          0.4f,      0.2f,       0.5f,       0.8f },
+      { "Test 3",          0.6f,      0.4f,       0.5f,       0.7f },
+      { "Test 4",          0.8f,      0.7f,       0.5f,       0.6f },
+      { "Test 5",          0.8f,      1.0f,       0.5f,       0.5f },
+      { 0, 0.0f, 0.0f, 0.0f, 0.0f }
+      };
+
 void fluid_allpass_setbuffer(fluid_allpass* allpass, fluid_real_t *buf, int size);
 void fluid_allpass_init(fluid_allpass* allpass);
 void fluid_allpass_setfeedback(fluid_allpass* allpass, fluid_real_t val);
@@ -183,6 +193,10 @@ Reverb::Reverb()
       init();     // Clear all buffers
       }
 
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
 void Reverb::init()
       {
       for (int i = 0; i < numcombs; i++) {
@@ -194,6 +208,10 @@ void Reverb::init()
             fluid_allpass_init(&allpassR[i]);
             }
       }
+
+//---------------------------------------------------------
+//   processmix
+//---------------------------------------------------------
 
 void Reverb::processmix(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out)
       {
@@ -230,6 +248,10 @@ void Reverb::processmix(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *
             right_out[k] += outR * rev->wet1 + outL * rev->wet2;
             }
       }
+
+//---------------------------------------------------------
+//   update
+//---------------------------------------------------------
 
 void Reverb::update()
       {
@@ -294,4 +316,18 @@ void Reverb::setwidth(fluid_real_t value)
       update();
       }
 
+//---------------------------------------------------------
+//   setPreset
+//---------------------------------------------------------
+
+bool Reverb::setPreset(int nr)
+      {
+      if (nr >= sizeof(revmodel_preset)/sizeof(*revmodel_preset))
+            return false;
+      setroomsize(revmodel_preset[nr].roomsize);
+      setdamp(revmodel_preset[nr].damp);
+      setwidth(revmodel_preset[nr].width);
+      setlevel(revmodel_preset[nr].level);
+      return true;
+      }
 }

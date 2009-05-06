@@ -28,7 +28,7 @@
 #ifdef USE_GLOBAL_FLUID
 
 #include <fluidsynth.h>
-struct MidiOutEvent;
+class Event;
 
 //---------------------------------------------------------
 //   Fluid
@@ -46,7 +46,7 @@ class Fluid : public Synth {
       virtual void init(int sampleRate, int midiChannels);
       virtual bool loadSoundFont(const QString&);
       virtual void process(unsigned, float*, float*, int);
-      virtual void play(const MidiOutEvent&);
+      virtual void play(const Event&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const;
       };
 

@@ -20,7 +20,7 @@
 
 #include <math.h>
 
-#include "moevent.h"
+#include "event.h"
 #include "fluid.h"
 #include "tuning.h"
 #include "sfont.h"
@@ -54,17 +54,6 @@ Mod default_reverb_mod;         /* SF2.01 section 8.4.8  */
 Mod default_chorus_mod;         /* SF2.01 section 8.4.9  */
 Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
 
-/* reverb presets */
-static fluid_revmodel_presets_t revmodel_preset[] = {
-      /* name */    /* roomsize */ /* damp */ /* width */ /* level */
-      { "Test 1",          0.2f,      0.0f,       0.5f,       0.9f },
-      { "Test 2",          0.4f,      0.2f,       0.5f,       0.8f },
-      { "Test 3",          0.6f,      0.4f,       0.5f,       0.7f },
-      { "Test 4",          0.8f,      0.7f,       0.5f,       0.6f },
-      { "Test 5",          0.8f,      1.0f,       0.5f,       0.5f },
-      { 0, 0.0f, 0.0f, 0.0f, 0.0f }
-      };
-
 //---------------------------------------------------------
 //   Fluid
 //---------------------------------------------------------
@@ -93,7 +82,6 @@ void Fluid::init()
       fluid_conversion_config();
       fluid_voice_config();
 
-
       /* SF2.01 page 53 section 8.4.1: MIDI Note-On Velocity to Initial Attenuation */
       fluid_mod_set_source1(&default_vel2att_mod, /* The modulator we are programming here */
 		       FLUID_MOD_VELOCITY,    /* Source. VELOCITY corresponds to 'index=2'. */
@@ -108,13 +96,13 @@ void Fluid::init()
 
 
 
-  /* SF2.01 page 53 section 8.4.2: MIDI Note-On Velocity to Filter Cutoff
-   * Have to make a design decision here. The specs don't make any sense this way or another.
-   * One sound font, 'Kingston Piano', which has been praised for its quality, tries to
-   * override this modulator with an amount of 0 and positive polarity (instead of what
-   * the specs say, D=1) for the secondary source.
-   * So if we change the polarity to 'positive', one of the best free sound fonts works...
-   */
+     /* SF2.01 page 53 section 8.4.2: MIDI Note-On Velocity to Filter Cutoff
+      * Have to make a design decision here. The specs don't make any sense this way or another.
+      * One sound font, 'Kingston Piano', which has been praised for its quality, tries to
+      * override this modulator with an amount of 0 and positive polarity (instead of what
+      * the specs say, D=1) for the secondary source.
+      * So if we change the polarity to 'positive', one of the best free sound fonts works...
+      */
       fluid_mod_set_source1(&default_vel2filter_mod, FLUID_MOD_VELOCITY, /* Index=2 */
 		       FLUID_MOD_GC                        /* CC=0 */
 		       | FLUID_MOD_LINEAR                  /* type=0 */
@@ -244,19 +232,18 @@ void Fluid::init(int sr, int channels)
       if (!initialized) // initialize all the conversion tables and other stuff
             init();
 
-      sample_rate      = double(sr);
-      sfont_id         = 0;
-      with_reverb      = true;
-      with_chorus      = true;
-      polyphony        = 256;
-      midi_channels    = channels;
-      audio_channels   = 1;
-      gain             = .2;
+      sample_rate     = double(sr);
+      sfont_id        = 0;
+      with_reverb     = true;
+      with_chorus     = true;
+      polyphony       = 256;
+      midi_channels   = channels;
+      audio_channels  = 1;
+      gain            = .2;
 
       nbuf = audio_channels;
 
-      /* as soon as the synth is created it starts playing. */
-      state  = FLUID_SYNTH_PLAYING;
+      state  = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid = 0;
       ticks  = 0;
       tuning = 0;
@@ -283,10 +270,7 @@ void Fluid::init(int sr, int channels)
 
       /* allocate the reverb module */
       reverb = new Reverb();
-      set_reverb(FLUID_REVERB_DEFAULT_ROOMSIZE,
-         FLUID_REVERB_DEFAULT_DAMP,
-	   FLUID_REVERB_DEFAULT_WIDTH,
-	   FLUID_REVERB_DEFAULT_LEVEL);
+      reverb->setPreset(0);
 
       /* allocate the chorus module */
       chorus = new_fluid_chorus(sample_rate);
@@ -352,39 +336,61 @@ Fluid::~Fluid()
 //   play
 //---------------------------------------------------------
 
-void Fluid::play(const MidiOutEvent& e)
+void Fluid::play(const Event& event)
       {
-      int ch = e.port * 16 + (e.type & 0xf);
-      int err = 0;
-// printf("Fluid::play %d 0x%02x %d %d\n", ch, e.type & 0xf0, e.a, e.b);
-      switch(e.type & 0xf0) {
-            case ME_NOTEON:
-                  err = noteon(ch, e.a, e.b);
-                  break;
+      int err     = 0;
+      int ch      = event.channel();
+      int type    = event.type();
+      Channel* cp = channel[ch];
 
-            case ME_CONTROLLER:
-                  channel[ch]->setcc(e.a, e.b);
-                  break;
-
-            case ME_PROGRAM:
-                  err = program_change(ch, e.a);
-                  break;
+      if (type == ME_NOTEON) {
+            int key = event.dataA();
+            int vel = event.dataB();
+            if (vel == 0) {
+                  foreach (Voice* v, voice) {
+                        if (v->ON() && (v->chan == ch) && (v->key == key))
+                              v->noteoff();
+                        }
+                  return;
+                  }
+            if (cp->preset() == 0) {
+                  fluid_log(0, "channel has no preset");
+                  err = FLUID_FAILED;
+                  }
+            else {
+                  /* If there is another voice process on the same channel and key,
+                     advance it to the release phase.
+                   */
+                  release_voice_on_same_note(ch, key);
+                  err = cp->preset()->noteon(this, noteid++, ch, key, vel, event.tuning());
+                  }
+            }
+      else if (type == ME_CONTROLLER)  {
+            switch(event.controller()) {
+                  case CTRL_PROGRAM:
+                        err = program_change(ch, event.value());
+                        break;
+                  case CTRL_PITCH:
+                        cp->pitchBend(event.value());
+                        break;
+                  case CTRL_PRESS:
+                        break;
+                  default:
+                        cp->setcc(event.controller(), event.value());
+                        break;
+                  }
             }
       if (err)
-            fprintf(stderr, "FluidSynth error: event 0x%2x channel %d dataA %d dataB %d: %s\n",
-               e.type & 0xff, ch, e.a, e.b, fluid_error());
+            fprintf(stderr, "FluidSynth error: event 0x%2x channel %d: %s\n",
+               type, ch, fluid_error());
       }
-
+#if 0
 //---------------------------------------------------------
 //   noteon
 //---------------------------------------------------------
 
 int Fluid::noteon(int chan, int key, int vel)
       {
-      /* notes with velocity zero go to noteoff  */
-      if (vel == 0)
-            return noteoff(chan, key);
-
       Channel* ch = channel[chan];
 
       /* make sure this channel has a preset */
@@ -397,7 +403,7 @@ int Fluid::noteon(int chan, int key, int vel)
          advance it to the release phase.
        */
       release_voice_on_same_note(chan, key);
-      return start(noteid++, ch->preset(), chan, key, vel);
+      return ch->preset()->noteon(this, noteid++, chan, key, vel, nt);
       }
 
 //---------------------------------------------------------
@@ -408,8 +414,7 @@ int Fluid::noteoff(int chan, int key)
       {
       int status = FLUID_FAILED;
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach (Voice* v, voice) {
             if (v->ON() && (v->chan == chan) && (v->key == key)) {
                   v->noteoff();
                   status = FLUID_OK;
@@ -419,6 +424,7 @@ int Fluid::noteoff(int chan, int key)
             fluid_log(0, "noteoff: no note (ch %d, key %d) found", chan, key);
       return status;
       }
+#endif
 
 //---------------------------------------------------------
 //   damp_voices
@@ -457,15 +463,12 @@ int Fluid::get_cc(int chan, int num, int* pval)
 //   all_notes_off
 //---------------------------------------------------------
 
-int Fluid::all_notes_off(int chan)
+void Fluid::all_notes_off(int chan)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
-            if (v->isPlaying() && (v->chan == chan)) {
+      foreach(Voice* v, voice) {
+            if (v->isPlaying() && (v->chan == chan))
                   v->noteoff();
-                  }
             }
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -473,14 +476,12 @@ int Fluid::all_notes_off(int chan)
 //    immediately stop all notes on this channel.
 //---------------------------------------------------------
 
-int Fluid::all_sounds_off(int chan)
+void Fluid::all_sounds_off(int chan)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->isPlaying() && (v->chan == chan))
                   v->voice_off();
             }
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -490,10 +491,9 @@ int Fluid::all_sounds_off(int chan)
 //    Respond to the MIDI command 'system reset' (0xFF, big red 'panic' button)
 //---------------------------------------------------------
 
-int Fluid::system_reset()
+void Fluid::system_reset()
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->isPlaying())
                   v->voice_off();
             }
@@ -502,7 +502,6 @@ int Fluid::system_reset()
 
       fluid_chorus_reset(chorus);
       reverb->reset();
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -541,14 +540,12 @@ const MidiPatch* Fluid::getPatchInfo(bool onlyDrums, const MidiPatch* pp) const
  * tell all synthesis processes on this channel to update their
  * synthesis parameters after a control change.
  */
-int Fluid::modulate_voices(int chan, int is_cc, int ctrl)
+void Fluid::modulate_voices(int chan, int is_cc, int ctrl)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->chan == chan)
                   v->modulate(is_cc, ctrl);
             }
-      return FLUID_OK;
       }
 
 /*
@@ -558,28 +555,12 @@ int Fluid::modulate_voices(int chan, int is_cc, int ctrl)
  * synthesis parameters after an all control off message (i.e. all
  * controller have been reset to their default value).
  */
-int Fluid::modulate_voices_all(int chan)
+void Fluid::modulate_voices_all(int chan)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->chan == chan)
                   v->modulate_all();
             }
-      return FLUID_OK;
-      }
-
-/*
- * fluid_synth_pitch_bend
- */
-int Fluid::pitch_bend(int chan, int val)
-      {
-      /* check the ranges of the arguments */
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-      channel[chan]->pitchBend(val);
-      return FLUID_OK;
       }
 
 /*
@@ -651,18 +632,12 @@ Preset* Fluid::get_preset(unsigned int sfontnum, unsigned banknum, unsigned prog
       return 0;
       }
 
-/*
- * fluid_synth_get_preset2
- */
-Preset* Fluid::get_preset2(char* sfont_name, unsigned banknum, unsigned prognum)
+Preset* Fluid::get_preset(char* sfont_name, unsigned banknum, unsigned prognum)
       {
       SFont* sf = get_sfont_by_name(sfont_name);
-
       if (sf) {
-            int offset     = get_bank_offset(sf->id());
-            Preset* preset = sf->get_preset(banknum - offset, prognum);
-            if (preset != 0)
-                  return preset;
+            int offset = get_bank_offset(sf->id());
+            return sf->get_preset(banknum - offset, prognum);
             }
       return 0;
       }
@@ -813,16 +788,6 @@ void Fluid::update_presets()
             }
       }
 
-
-/*
- * fluid_synth_update_gain
- */
-int Fluid::update_gain(char* /*name*/, double value)
-      {
-      set_gain((float) value);
-      return 0;
-      }
-
 /*
  * fluid_synth_set_gain
  */
@@ -836,23 +801,6 @@ void Fluid::set_gain(float g)
             if (v->isPlaying())
                   v->set_gain(g);
             }
-      }
-
-/*
- * fluid_synth_get_gain
- */
-float Fluid::get_gain()
-      {
-      return gain;
-      }
-
-/*
- * fluid_synth_update_polyphony
- */
-int Fluid::update_polyphony(char* /*name*/, int value)
-      {
-      set_polyphony(value);
-      return 0;
       }
 
 /*
@@ -875,22 +823,6 @@ int Fluid::set_polyphony(int val)
       }
 
 /*
- * fluid_synth_get_polyphony
- */
-int Fluid::get_polyphony()
-      {
-      return polyphony;
-      }
-
-/*
- * fluid_synth_get_internal_buffer_size
- */
-int Fluid::get_internal_bufsize()
-      {
-      return FLUID_BUFSIZE;
-      }
-
-/*
  * fluid_synth_program_reset
  *
  * Resend a bank select and a program change for every channel. This
@@ -908,20 +840,9 @@ int Fluid::program_reset()
 /*
  * fluid_synth_set_reverb_preset
  */
-int Fluid::set_reverb_preset(int num)
+bool Fluid::set_reverb_preset(int num)
       {
-      int i = 0;
-      while (revmodel_preset[i].name != 0) {
-            if (i == num) {
-                  reverb->setroomsize(revmodel_preset[i].roomsize);
-                  reverb->setdamp(revmodel_preset[i].damp);
-                  reverb->setwidth(revmodel_preset[i].width);
-                  reverb->setlevel(revmodel_preset[i].level);
-                  return FLUID_OK;
-                  }
-            i++;
-            }
-      return FLUID_FAILED;
+      return reverb->setPreset(num);
       }
 
 /*
@@ -954,16 +875,13 @@ void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int 
 
 void Fluid::process(unsigned len, float* lout, float* rout, int stride)
       {
-      fluid_real_t* left_in  = left_buf;
-      fluid_real_t* right_in = right_buf;
-
       for (unsigned int i = 0; i < len; i++, cur++) {
             if (cur == FLUID_BUFSIZE) {
                   one_block();
                   cur = 0;
                   }
-            *lout = left_in[cur];
-            *rout = right_in[cur];
+            *lout = left_buf[cur];
+            *rout = right_buf[cur];
             lout += stride;
             rout += stride;
             }
@@ -1094,10 +1012,11 @@ Voice* Fluid::free_voice_by_kill()
       return v;
       }
 
-/*
- * fluid_synth_alloc_voice
- */
-Voice* Fluid::alloc_voice(Sample* sample, int chan, int key, int vel)
+//---------------------------------------------------------
+//   alloc_voice
+//---------------------------------------------------------
+
+Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt)
       {
       Voice* v   = 0;
       Channel* c = 0;
@@ -1122,7 +1041,7 @@ Voice* Fluid::alloc_voice(Sample* sample, int chan, int key, int vel)
       if (chan >= 0)
             c = channel[chan];
 
-      v->init(sample, c, key, vel, storeid, ticks, gain);
+      v->init(sample, c, key, vel, id, ticks, gain, vt);
 
       /* add the default modulators to the synthesis process. */
       fluid_voice_add_mod(v, &default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */
@@ -1296,7 +1215,6 @@ int Fluid::sfreload(unsigned int id)
       return -1;
       }
 
-
 /*
  * fluid_synth_add_sfont
  */
@@ -1312,7 +1230,6 @@ int Fluid::add_sfont(SFont* sf)
 	return sf->id();
       }
 
-
 /*
  * fluid_synth_remove_sfont
  */
@@ -1323,16 +1240,6 @@ void Fluid::remove_sfont(SFont* sf)
 
 	remove_bank_offset(sfont_id); /* remove a possible bank offset */
 	program_reset();              /* reset the presets for all channels */
-      }
-
-
-/* fluid_synth_get_sfont
- *
- * Returns SoundFont num
- */
-SFont* Fluid::get_sfont(unsigned int num)
-      {
-      return sfonts[num];
       }
 
 /* fluid_synth_get_sfont_by_id
@@ -1387,44 +1294,6 @@ void Fluid::get_voicelist(Voice* buf[], int bufsize, int ID)
       if (count >= bufsize)
             return;
       buf[count++] = 0;
-      }
-
-/* Turns on / off the reverb unit in the synth */
-void Fluid::set_reverb_on(int on)
-      {
-      with_reverb = on;
-      }
-
-/* Turns on / off the chorus unit in the synth */
-void Fluid::set_chorus_on(int on)
-      {
-      with_chorus = on;
-      }
-
-/* Reports the current setting of the chorus unit. */
-int Fluid::get_chorus_nr()
-      {
-      return fluid_chorus_get_nr(chorus);
-      }
-
-double Fluid::get_chorus_level()
-      {
-      return (double)fluid_chorus_get_level(chorus);
-      }
-
-double Fluid::get_chorus_speed_Hz()
-      {
-      return (double)fluid_chorus_get_speed_Hz(chorus);
-      }
-
-double Fluid::get_chorus_depth_ms()
-      {
-      return (double)fluid_chorus_get_depth_ms(chorus);
-      }
-
-int Fluid::get_chorus_type()
-      {
-      return fluid_chorus_get_type(chorus);
       }
 
 /*
@@ -1693,29 +1562,6 @@ float Fluid::get_gen(int chan, int param)
             return 0.0;
             }
       return channel[chan]->getGen(param);
-      }
-
-int Fluid::start(unsigned int id, Preset* preset, int midi_chan, int key, int vel)
-      {
-      /* check the ranges of the arguments */
-      if ((midi_chan < 0) || (midi_chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-
-      if ((key < 0) || (key >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Key out of range");
-            return FLUID_FAILED;
-            }
-
-      if ((vel <= 0) || (vel >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Velocity out of range");
-            return FLUID_FAILED;
-            }
-
-      storeid = id;
-      int r = preset->noteon(this, midi_chan, key, vel);
-      return r;
       }
 
 int Fluid::stop(unsigned int id)

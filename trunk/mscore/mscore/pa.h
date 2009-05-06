@@ -68,7 +68,7 @@ class Portaudio : public Driver {
       int currentApi() const;
       int currentDevice() const;
 
-      virtual void putEvent(const MidiOutEvent&);
+      virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
       };

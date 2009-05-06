@@ -22,7 +22,7 @@
 #define __SYNTI_H__
 
 struct MidiPatch;
-struct MidiOutEvent;
+class Event;
 
 //---------------------------------------------------------
 //   MidiPatch
@@ -46,7 +46,7 @@ class Synth {
       virtual void init(int sampleRate, int midiChannels) = 0;
       virtual bool loadSoundFont(const QString&) = 0;
       virtual void process(unsigned, float*, float*, int) = 0;
-      virtual void play(const MidiOutEvent&) = 0;
+      virtual void play(const Event&) = 0;
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const = 0;
       };
 
