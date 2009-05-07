@@ -588,9 +588,7 @@ Part* Score::part(int n)
 
 void Score::addMeasure(MeasureBase* m)
       {
-      int tick        = m->tick();
-      MeasureBase* im = tick2measureBase(tick);
-      m->setNext(im);
+      m->setNext(tick2measureBase(m->tick()));
       _measures.add(m);
       }
 
@@ -1886,7 +1884,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
             }
 
       if (segment == 0) {
-            printf("no segment+\n");
+            // printf("no segment+\n");
             return false;
             }
       //

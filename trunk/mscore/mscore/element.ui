@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
-    <height>323</height>
+    <width>602</width>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,20 +37,6 @@
         <property name="margin">
          <number>0</number>
         </property>
-        <item>
-         <widget class="QPushButton" name="previousButton">
-          <property name="text">
-           <string>Previous</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="nextButton">
-          <property name="text">
-           <string>Next</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QPushButton" name="parentButton">
           <property name="text">

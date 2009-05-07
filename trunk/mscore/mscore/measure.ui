@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
+    <width>572</width>
     <height>355</height>
    </rect>
   </property>
@@ -32,7 +32,7 @@
       <property name="margin">
        <number>9</number>
       </property>
-      <item row="4" column="0" colspan="6">
+      <item row="5" column="0" colspan="6">
        <layout class="QHBoxLayout">
         <property name="spacing">
          <number>6</number>
@@ -70,10 +70,10 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="5">
+      <item row="2" column="5">
        <widget class="QSpinBox" name="measureNo"/>
       </item>
-      <item row="1" column="4">
+      <item row="2" column="4">
        <widget class="QLabel" name="label_8">
         <property name="text">
          <string>No.:</string>
@@ -83,7 +83,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
+      <item row="1" column="4">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Beams:</string>
@@ -93,16 +93,16 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="5">
+      <item row="1" column="5">
        <widget class="QSpinBox" name="beams"/>
       </item>
-      <item row="2" column="3">
+      <item row="3" column="3">
        <widget class="QDoubleSpinBox" name="stretch"/>
       </item>
-      <item row="1" column="3">
+      <item row="2" column="3">
        <widget class="QSpinBox" name="pageElements"/>
       </item>
-      <item row="2" column="2">
+      <item row="3" column="2">
        <widget class="QLabel" name="label_6">
         <property name="text">
          <string>Stretch:</string>
@@ -112,10 +112,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
+      <item row="1" column="3">
        <widget class="QSpinBox" name="staves"/>
       </item>
-      <item row="1" column="2">
+      <item row="2" column="2">
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>PageElem:</string>
@@ -125,7 +125,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="1" column="2">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Staves:</string>
@@ -135,13 +135,13 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="3" column="1">
        <widget class="QSpinBox" name="noOffset"/>
       </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <widget class="QSpinBox" name="tuplets"/>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>NoOffset:</string>
@@ -151,7 +151,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Tuplets:</string>
@@ -161,10 +161,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="1" column="1">
        <widget class="QSpinBox" name="segments"/>
       </item>
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Segments:</string>
@@ -174,27 +174,41 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="5">
+      <item row="3" column="5">
        <widget class="QSpinBox" name="endRepeat"/>
       </item>
-      <item row="2" column="4">
+      <item row="3" column="4">
        <widget class="QLabel" name="label_9">
         <property name="text">
          <string>EndRep:</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="repeatFlags">
         <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="label_13">
         <property name="text">
          <string>RepeatFLags:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="prevButton">
+        <property name="text">
+         <string>previous</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="nextButton">
+        <property name="text">
+         <string>next</string>
         </property>
        </widget>
       </item>

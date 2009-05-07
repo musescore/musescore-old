@@ -1461,8 +1461,7 @@ MeasureBase* Score::appendMeasure(int type)
                   }
             }
       undoInsertMeasure(mb);
-      mb->setNext(0);
-      _layout->add(mb);
+
       if (type == MEASURE)
             undoFixTicks();
       layoutAll = true;

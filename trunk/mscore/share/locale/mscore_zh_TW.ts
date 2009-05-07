@@ -988,6 +988,18 @@ p, li { white-space: pre-wrap; }
         <source>additional trailing space</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Note Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1728,6 +1740,18 @@ failed: </source>
         <comment>space unit</comment>
         <translation type="unfinished">sp</translation>
     </message>
+    <message>
+        <source>shorten stems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shortest stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1836,7 +1860,7 @@ failed: </source>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">拍號</translation>
     </message>
     <message>
         <source>Len</source>
@@ -5212,7 +5236,7 @@ before closing?</source>
     <message>
         <source>Line</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">線條</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
@@ -7762,7 +7786,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">線條</translation>
     </message>
     <message>
         <source>Bracket</source>

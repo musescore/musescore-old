@@ -594,7 +594,27 @@ MeasureView::MeasureView()
       layout->addWidget(seg);
       layout->addStretch(10);
       connect(mb.sel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      connect(mb.nextButton, SIGNAL(clicked()), SLOT(nextClicked()));
+      connect(mb.prevButton, SIGNAL(clicked()), SLOT(prevClicked()));
       seg->show();
+      }
+
+//---------------------------------------------------------
+//   nextClicked
+//---------------------------------------------------------
+
+void MeasureView::nextClicked()
+      {
+      emit elementChanged(((MeasureBase*)element())->next());
+      }
+
+//---------------------------------------------------------
+//   prevClicked
+//---------------------------------------------------------
+
+void MeasureView::prevClicked()
+      {
+      emit elementChanged(((MeasureBase*)element())->prev());
       }
 
 //---------------------------------------------------------
@@ -627,6 +647,8 @@ void MeasureView::setElement(Element* e)
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             mb.sel->addTopLevelItem(item);
             }
+      mb.prevButton->setEnabled(m->prev());
+      mb.nextButton->setEnabled(m->next());
       }
 
 //---------------------------------------------------------

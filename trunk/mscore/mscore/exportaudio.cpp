@@ -82,6 +82,7 @@ bool Score::saveAudio(const QString& name, int format)
 
       QProgressBar* pBar = mscore->showProgressBar();
       pBar->reset();
+
       EventMap::const_iterator endPos = events.constEnd();
       --endPos;
       double et = utick2utime(endPos.key());
@@ -93,7 +94,6 @@ bool Score::saveAudio(const QString& name, int format)
       //
       foreach(const Part* part, _parts) {
             const Instrument* instr = part->instrument();
-
             foreach(const Channel* a, instr->channel) {
                   foreach(Event* e, a->init) {
                         if (e == 0)
@@ -128,7 +128,13 @@ bool Score::saveAudio(const QString& name, int format)
                   r         += n * stride;
                   playTime += double(n)/double(sampleRate);
                   frames    -= n;
-                  synth->play(*(playPos.value()));
+                  const Event* e = playPos.value();
+                  if (e->isChannelEvent()) {
+                        int channelIdx = e->channel();
+                        Channel* c = _midiMapping[channelIdx].articulation;
+                        if (!c->mute)
+                              synth->play(*e);
+                        }
                   }
             if (frames) {
                   synth->process(frames, l, r, stride);

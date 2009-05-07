@@ -984,6 +984,18 @@ p, li { white-space: pre-wrap; }
         <source>additional trailing space</source>
         <translation>Zusätzlicher Platz rechts</translation>
     </message>
+    <message>
+        <source>Note Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1724,6 +1736,18 @@ zu Notenzeile</translation>
     <message>
         <source>accidental distance</source>
         <translation>Abstand Vorzeichen</translation>
+    </message>
+    <message>
+        <source>shorten stems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shortest stem</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
