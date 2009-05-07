@@ -178,12 +178,23 @@ static void printVersion(const char* prog)
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
+      QList<Score*> removeList;
       foreach(Score* score, scoreList) {
-            if (checkDirty(score)) {
-                  ev->ignore();
-                  return;
+            if (score->created() && !score->dirty())
+                  removeList.append(score);
+            else {
+                  if (checkDirty(score)) {
+                        ev->ignore();
+                        return;
+                        }
                   }
             }
+      // remove all new created/not save score so they are
+      // note saved as session data
+
+      foreach(Score* score, removeList)
+            scoreList.removeAll(score);
+
       saveScoreList();
       writeSettings();
       if (pageListEdit)
@@ -1001,7 +1012,10 @@ void MuseScore::saveScoreList()
             settings.setValue(QString("recent-%1").arg(i), recentScores.value(i));
 
       settings.setValue("scores", scoreList.size());
-      settings.setValue("currentScore", scoreList.indexOf(cs));
+      int curScore = scoreList.indexOf(cs);
+      if (curScore == -1)  // cs removed if new created and not modified
+            curScore = 0;
+      settings.setValue("currentScore", curScore);
       int idx = 0;
       foreach(Score* s, scoreList) {
             settings.setValue(QString("score-%1").arg(idx), s->fileInfo()->absoluteFilePath());
@@ -1038,8 +1052,9 @@ void MuseScore::openRecentMenu()
       foreach(QString s, recentScores) {
             if (s.isEmpty())
                   break;
-            QFileInfo fi(s);
-            QAction* action = openRecent->addAction(fi.completeBaseName());
+            // QFileInfo fi(s);
+            // QAction* action = openRecent->addAction(fi.completeBaseName());
+            QAction* action = openRecent->addAction(s);  // show complete path
             action->setData(s);
             }
       }
@@ -1125,6 +1140,7 @@ void MuseScore::setCurrentScore(Score* score)
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
       setPos(cs->inputPos());
+      _statusBar->showMessage(cs->filePath(), 2000);
       changeState(cs->state());
       }
 

@@ -1,3 +1,8 @@
+7.may (ws)
+      - fix "append measure" operation
+      - show complete path in recent scores list
+      - do not export muted parts to wave
+      - when creating new score, select first rest instead of first measure
 6.may (ws)
       - new feature: every note can be microtuned +/- 200 cent via
         the note/chord properties dialog. The internal synthesizer is

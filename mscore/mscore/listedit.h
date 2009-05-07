@@ -187,6 +187,8 @@ class MeasureView : public ShowElementBase {
 
    private slots:
       void elementClicked(QTreeWidgetItem* item);
+      void nextClicked();
+      void prevClicked();
 
    public:
       MeasureView();

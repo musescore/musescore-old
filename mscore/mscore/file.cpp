@@ -638,8 +638,8 @@ void MuseScore::newFile()
             score->measures()->add(measure);
             }
 
-      Measure* lastMeasure = static_cast<Measure*>(score->measures()->last());
-      if ((lastMeasure->type() == MEASURE) && (lastMeasure->endBarLineType() == NORMAL_BAR))
+      Measure* lastMeasure = score->lastMeasure();
+      if (lastMeasure && (lastMeasure->endBarLineType() == NORMAL_BAR))
             lastMeasure->setEndBarLineType(END_BAR, false);
 
       SigList* sigmap = score->getSigmap();
@@ -698,7 +698,18 @@ void MuseScore::newFile()
             tick += ticks;
             }
       score->fixTicks();
-      score->select(score->measures()->first(), SELECT_SINGLE, 0);
+      //
+      // select first rest
+      //
+      Measure* m = score->firstMeasure();
+      for (Segment* s = m->first(); s; s = s->next()) {
+            if (s->subtype() == Segment::SegChordRest) {
+                  if (s->element(0)) {
+                        score->select(s->element(0), SELECT_SINGLE, 0);
+                        break;
+                        }
+                  }
+            }
 
       QString title     = newWizard->title();
       QString subtitle  = newWizard->subtitle();

@@ -136,7 +136,7 @@ MeasureBase* Score::tick2measureBase(int tick) const
             if (tick >= st && tick < (st+l))
                   return mb;
             }
-      printf("tick2measureBase %d not found\n", tick);
+//      printf("tick2measureBase %d not found\n", tick);
       return 0;
       }
 
