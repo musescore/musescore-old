@@ -529,10 +529,6 @@ FunctionEnd
 
   @CPACK_NSIS_PAGE_COMPONENTS@
 
-  ;--Customization--
-  Page custom SoundFonts
-  ;--End Customization--
-  
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
 
@@ -709,13 +705,6 @@ Function InstallOptionsPage
   !insertmacro MUI_HEADER_TEXT "Install Options" "Chose options for installing @CPACK_PACKAGE_INSTALL_DIRECTORY@"
   !insertmacro MUI_INSTALLOPTIONS_DISPLAY "NSIS.InstallOptions.ini"
 
-FunctionEnd
-
-;--------------------------------
-; Create custom pages
-Function SoundFonts
-  !insertmacro MUI_HEADER_TEXT "SoundFont Setup" "Set up sound files so that you can hear all instruments"
-  nsExec::ExecToStack '"7z" e "$WINDIR\Driver Cache\i386\driver.cab" -o"$INSTDIR\bin" 2gmgsmt.sf2 -y'
 FunctionEnd
 
 ;--------------------------------
