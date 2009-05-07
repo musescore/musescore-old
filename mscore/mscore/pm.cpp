@@ -228,7 +228,7 @@ void PortMidiDriver::read()
 //   write
 //---------------------------------------------------------
 
-void PortMidiDriver::write(const MidiOutEvent&)
+void PortMidiDriver::write(const Event&)
       {
       }
 
