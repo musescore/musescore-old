@@ -55,6 +55,7 @@ class Dynamic;
 class Selection;
 class TextB;
 class Channel;
+struct PageFormat;
 
 class UndoGroup;
 
@@ -977,6 +978,24 @@ class ChangeTuning : public UndoCommand {
 
    public:
       ChangeTuning(Note* n, double t) : note(n), tuning(t) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   ChangePageFormat
+//---------------------------------------------------------
+
+class ChangePageFormat : public UndoCommand {
+      Score* score;
+      PageFormat* pf;
+      double spatium;
+
+      void flip();
+
+   public:
+      ChangePageFormat(Score*, PageFormat*, double sp);
+      ~ChangePageFormat();
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

@@ -24,10 +24,9 @@
 #include "element.h"
 #include "style.h"
 
-#include "ui_textproperties.h"
-
 class TextPalette;
 class Viewer;
+class TextProp;
 
 struct SymCode;
 
@@ -241,13 +240,13 @@ class TextC : public TextB {
 //   TextProperties
 //---------------------------------------------------------
 
-class TextProperties : public QDialog, public Ui::TextProperties {
+class TextProperties : public QDialog {
       Q_OBJECT
+      TextProp* tp;
       TextB* tb;
 
    private slots:
       virtual void accept();
-      void mmToggled(bool);
 
    public:
       TextProperties(TextB*, QWidget* parent = 0);

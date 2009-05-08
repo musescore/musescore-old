@@ -60,6 +60,15 @@ DurationElement::DurationElement(const DurationElement& e)
       }
 
 //---------------------------------------------------------
+//   ticks
+//---------------------------------------------------------
+
+int DurationElement::ticks() const
+      {
+      return _tickLen == 0 ? measure()->tickLen() : _tickLen;
+      }
+
+//---------------------------------------------------------
 //   hasArticulation
 //---------------------------------------------------------
 

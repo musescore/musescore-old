@@ -62,9 +62,6 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void pageHeightChanged(double);
       void pageWidthChanged(double);
 
-   signals:
-      void pageSettingsChanged();
-
    public:
       PageSettings(QWidget* parent = 0);
       ~PageSettings();

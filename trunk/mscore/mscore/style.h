@@ -76,6 +76,7 @@ class TextStyle {
       bool bold;
       bool italic;
       bool underline;
+      bool hasFrame;
       Align align;
       double xoff, yoff;                  // absolute offset: inch or spatium
       OffsetType offsetType;

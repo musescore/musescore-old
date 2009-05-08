@@ -35,6 +35,7 @@
 #include "preferences.h"
 #include "system.h"
 #include "measure.h"
+#include "textproperties.h"
 
 TextPalette* textPalette;
 
@@ -687,10 +688,8 @@ void TextB::setTextStyle(int idx)
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       setSystemFlag(s->systemFlag);
 
-      if (s->frameWidth > 0.0) {
-            textBase()->setFrameWidth(s->frameWidth);
-            textBase()->setHasFrame(true);
-            }
+      textBase()->setFrameWidth(s->frameWidth);
+      textBase()->setHasFrame(s->hasFrame);
       textBase()->setPaddingWidth(s->paddingWidth);
       textBase()->setFrameColor(s->frameColor);
       textBase()->setFrameRound(s->frameRound);
@@ -1349,66 +1348,23 @@ QLineF TextB::dragAnchor() const
 TextProperties::TextProperties(TextB* t, QWidget* parent)
    : QDialog(parent)
       {
-      setupUi(this);
+      setWindowTitle(tr("MuseScore: Text Properties"));
+      QGridLayout* layout = new QGridLayout;
+      tp = new TextProp;
+      layout->addWidget(tp, 0, 1);
+      QLabel* l = new QLabel;
+      l->setPixmap(QPixmap(":/data/bg1.jpg"));
+      layout->addWidget(l, 0, 0, 2, 1);
+      QDialogButtonBox* bb = new QDialogButtonBox(
+         QDialogButtonBox::Ok | QDialogButtonBox::Cancel
+         );
+      layout->addWidget(bb, 1, 0, 1, 2);
+      setLayout(layout);
 
       tb = t;
-
-      QButtonGroup* g1 = new QButtonGroup(this);
-      g1->addButton(alignLeft);
-      g1->addButton(alignHCenter);
-      g1->addButton(alignRight);
-
-      QButtonGroup* g2 = new QButtonGroup(this);
-      g2->addButton(alignTop);
-      g2->addButton(alignVCenter);
-      g2->addButton(alignBottom);
-
-      QButtonGroup* g3 = new QButtonGroup(this);
-      g3->addButton(circleButton);
-      g3->addButton(boxButton);
-
-      int a = int(tb->align());
-      if (a & ALIGN_HCENTER)
-            alignHCenter->setChecked(true);
-      else if (a & ALIGN_RIGHT)
-            alignRight->setChecked(true);
-      else
-            alignLeft->setChecked(true);
-
-      if (a & ALIGN_VCENTER)
-            alignVCenter->setChecked(true);
-      else if (a & ALIGN_BOTTOM)
-            alignBottom->setChecked(true);
-      else
-            alignTop->setChecked(true);
-
-      QFont f = tb->defaultFont();
-      fontBold->setChecked(f.bold());
-      fontItalic->setChecked(f.italic());
-      fontUnderline->setChecked(f.underline());
-      color->setColor(tb->color());
-
-      double ps = f.pointSizeF();
-      fontSize->setValue(lrint(ps));
-      fontSelect->setCurrentFont(f);
-
-      frameWidth->setValue(tb->frameWidth());
-      frame->setChecked(tb->textBase()->hasFrame());
-      paddingWidth->setValue(tb->paddingWidth());
-      frameColor->setColor(tb->frameColor());
-      frameRound->setValue(tb->frameRound());
-      circleButton->setChecked(tb->circle());
-      boxButton->setChecked(!tb->circle());
-
-      xOffset->setValue(tb->xoff());
-      yOffset->setValue(tb->yoff());
-      rxOffset->setValue(tb->rxoff());
-      ryOffset->setValue(tb->ryoff());
-      mmUnit->setChecked(tb->offsetType() == OFFSET_ABS);
-      spatiumUnit->setChecked(tb->offsetType() == OFFSET_SPATIUM);
-
-      mmToggled(tb->offsetType() == OFFSET_ABS);      // set suffix on spin boxes
-      connect(mmUnit, SIGNAL(toggled(bool)), SLOT(mmToggled(bool)));
+      tp->set(tb);
+      connect(bb, SIGNAL(accepted()), SLOT(accept()));
+      connect(bb, SIGNAL(rejected()), SLOT(reject()));
       }
 
 //---------------------------------------------------------
@@ -1417,50 +1373,7 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
 
 void TextProperties::accept()
       {
-      tb->textBase()->setHasFrame(frame->isChecked());
-      tb->setFrameWidth(frameWidth->value());
-      tb->setPaddingWidth(paddingWidth->value());
-      tb->setFrameColor(frameColor->color());
-      tb->setFrameRound(frameRound->value());
-      tb->setCircle(circleButton->isChecked());
-      QFont f = fontSelect->currentFont();
-      double ps = fontSize->value();
-      f.setPointSizeF(ps);
-      f.setBold(fontBold->isChecked());
-      f.setItalic(fontItalic->isChecked());
-      f.setUnderline(fontUnderline->isChecked());
-      tb->setDefaultFont(f);
-      tb->setColor(color->color());
-
-      int a = 0;
-      if (alignHCenter->isChecked())
-            a |= ALIGN_HCENTER;
-      if (alignRight->isChecked())
-            a |= ALIGN_RIGHT;
-      if (alignVCenter->isChecked())
-            a |= ALIGN_VCENTER;
-      if (alignBottom->isChecked())
-            a |= ALIGN_BOTTOM;
-      tb->setAlign(Align(a));
-      tb->doc()->setModified(true);       // force relayout
-
-      tb->setXoff(xOffset->value());
-      tb->setYoff(yOffset->value());
-      tb->setRXoff(rxOffset->value());
-      tb->setRYoff(ryOffset->value());
-      tb->setOffsetType(mmUnit->isChecked() ? OFFSET_ABS : OFFSET_SPATIUM);
-
+      tp->get(tb);
       QDialog::accept();
-      }
-
-//---------------------------------------------------------
-//   mmToggled
-//---------------------------------------------------------
-
-void TextProperties::mmToggled(bool val)
-      {
-      QString unit(val ? tr("mm", "millimeter unit") : tr("sp", "spatium unit"));
-      xOffset->setSuffix(unit);
-      yOffset->setSuffix(unit);
       }
 

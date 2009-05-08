@@ -938,9 +938,10 @@ int Score::makeGap1(int tick, int staff, int len)
 
 void Score::changeCRlen(ChordRest* cr, int len)
       {
-      if (len == cr->tickLen())
+      int olen = cr->ticks();
+      if (len == olen)
             return;
-      if (cr->tickLen() > len) {
+      if (olen > len) {
             //
             // make shorter and fill with rest
             //
@@ -956,20 +957,20 @@ void Score::changeCRlen(ChordRest* cr, int len)
                               undoRemoveElement(n->tieFor());
                         }
                   }
-            int restLen = cr->tickLen() - len;
+            int restLen = cr->ticks() - len;
             undoChangeChordRestLen(cr, len);
             setRest(cr->tick() + len, restLen, cr->track());
             }
       else {
             Measure* m = cr->measure();
-            int tick = cr->tick() + cr->tickLen();
+            int tick = cr->tick() + cr->ticks();
 
             if (tick == m->tick() + m->tickLen()) {
                   //
                   //  gap starts in next measure
                   //  must create ties for chord notes
                   //
-                  int gap  = makeGap(tick, cr->track(), len - cr->tickLen());
+                  int gap  = makeGap(tick, cr->track(), len - cr->ticks());
                   ChordRest* newcr;
                   if (cr->type() == REST) {
                         Rest* rest = new Rest(this);
@@ -1009,11 +1010,11 @@ void Score::changeCRlen(ChordRest* cr, int len)
                   undoAddElement(newcr);
                   }
             else {
-                  len -= cr->tickLen();
+                  len -= cr->ticks();
                   int gap  = makeGap(tick, cr->track(), len);
 
                   if (gap) {
-                        int l = cr->tickLen() + ((gap > len) ? len : gap);
+                        int l = cr->ticks() + ((gap > len) ? len : gap);
                         if (l >= Duration(Duration::V_QUARTER).ticks() && cr->beam()) {
                               Beam* beam = cr->beam();
                               if (beam->generated()) {
@@ -1115,7 +1116,7 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       if (noteLen < len)
             printf("setRest: cannot find segment! rest: %d\n", len - noteLen);
 
-      Rest* rest;
+      Rest* rest = 0;
       if (useDots) {
             rest = new Rest(this);
             rest->setTick(tick);
@@ -1133,8 +1134,11 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             }
       else {
             rest = setRest(tick, len, track);
+            if (rest == 0)
+                  printf("setRest failed\n");
             }
-      select(rest, SELECT_SINGLE, 0);
+      if (rest)
+            select(rest, SELECT_SINGLE, 0);
       if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track);
       layoutAll = true;

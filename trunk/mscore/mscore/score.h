@@ -461,6 +461,7 @@ class Score : public QObject {
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
       void undoChangeTuning(Note*, double);
+      void undoChangePageFormat(PageFormat*, double spatium);
 
       Note* setNote(int tick, int track, int pitch, int len, int headGroup = 0,
          Direction stemDirection = AUTO);
