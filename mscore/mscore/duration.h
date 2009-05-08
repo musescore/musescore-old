@@ -42,6 +42,7 @@ class DurationElement : public Element {
       DurationElement(Score* s);
       DurationElement(const DurationElement& e);
 
+      virtual Measure* measure() const = 0;
       Duration duration() const                    { return _duration; }
       virtual void setDuration(const Duration t)   { _duration = t;    }
 
@@ -50,6 +51,7 @@ class DurationElement : public Element {
       virtual Beam* beam() const                   { return 0;         }
       virtual int tickLen() const                  { return _tickLen;  }
       virtual void setTickLen(int t) const         { _tickLen = t;     }
+      int ticks() const;
       };
 
 #endif

@@ -443,11 +443,12 @@ TextStyle::TextStyle(
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
    frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag)
       {
-		#ifdef Q_WS_MAC
-		  family = _family+" 20";
-		#else
-		  family = _family;
-		#endif
+      hasFrame = fw != 0.0;
+#ifdef Q_WS_MAC
+      family = _family + " 20";
+#else
+	family = _family;
+#endif
       }
 
 //---------------------------------------------------------
@@ -521,12 +522,14 @@ void TextStyle::write(Xml& xml) const
             }
       xml.tag("rxoffset", rxoff);
       xml.tag("ryoffset", ryoff);
-      xml.tag("frameWidth", frameWidth);
-      xml.tag("paddingWidth", paddingWidth);
-      xml.tag("frameRound", frameRound);
-      xml.tag("frameColor", frameColor);
-      if (circle)
-            xml.tag("circle", circle);
+      if (hasFrame) {
+            xml.tag("frameWidth", frameWidth);
+            xml.tag("paddingWidth", paddingWidth);
+            xml.tag("frameRound", frameRound);
+            xml.tag("frameColor", frameColor);
+            if (circle)
+                  xml.tag("circle", circle);
+            }
       if (systemFlag)
             xml.tag("systemFlag", systemFlag);
       xml.etag();
@@ -538,6 +541,7 @@ void TextStyle::write(Xml& xml) const
 
 void TextStyle::read(QDomElement e)
       {
+      frameWidth = 0.0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -569,8 +573,10 @@ void TextStyle::read(QDomElement e)
                   offsetType = (OffsetType)i;
             else if (tag == "sizeIsSpatiumDependent")
                   sizeIsSpatiumDependent = val.toDouble();
-            else if (tag == "frameWidth")
+            else if (tag == "frameWidth") {
                   frameWidth = val.toDouble();
+                  hasFrame = frameWidth != 0.0;
+                  }
             else if (tag == "paddingWidth")
                   paddingWidth = val.toDouble();
             else if (tag == "frameRound")

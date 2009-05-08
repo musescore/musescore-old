@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: textstyle.h,v 1.3 2006/03/02 17:08:43 wschweer Exp $
+//  $Id:$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,39 +18,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TEXTSTYLE_H__
-#define __TEXTSTYLE_H__
+#ifndef __TEXTPROPERTIES_H__
+#define __TEXTPROPERTIES_H__
 
-#include "style.h"
+#include "ui_textproperties.h"
 
-class Score;
-class TextProp;
+class TextB;
+class TextStyle;
 
 //---------------------------------------------------------
-//   TextStyleDialog
+//   TextProp
 //---------------------------------------------------------
 
-class TextStyleDialog : public QDialog {
+class TextProp : public QWidget, public Ui::TextPropertiesBase {
       Q_OBJECT
-      TextProp* tp;
-      QVector<TextStyle*> styles;
-      Score* cs;
-      QListWidget* textNames;
-      int current;
-      QDialogButtonBox* bb;
 
-      void saveStyle(int);
-      void apply();
+      int curUnit;
 
    private slots:
-      void nameSelected(int);
-      void buttonClicked(QAbstractButton*);
-
-   signals:
+      void mmToggled(bool);
 
    public:
-      TextStyleDialog(QWidget* parent, Score* );
-      ~TextStyleDialog();
+      TextProp(QWidget* parent = 0);
+      void set(TextB*);
+      void get(TextB*);
+      void set(TextStyle*);
+      void get(TextStyle*);
       };
 
 #endif

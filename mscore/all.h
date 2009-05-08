@@ -102,6 +102,7 @@
 #include <QtGui/QUndoGroup>
 #include <QtGui/QUndoStack>
 #include <QtGui/QProgressBar>
+#include <QtGui/QDialogButtonBox>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

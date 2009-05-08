@@ -297,22 +297,28 @@ void PageSettings::apply()
       double f  = mmUnit ? 1.0/INCH : 1.0;
       double f1 = mmUnit ? DPMM : DPI;
 
-      cs->pageFormat()->size             = pageGroup->currentIndex();
-      cs->pageFormat()->_width           = pageWidth->value() * f;
-      cs->pageFormat()->_height          = pageHeight->value() * f;
-      cs->pageFormat()->evenTopMargin    = evenPageTopMargin->value() * f;
-      cs->pageFormat()->evenBottomMargin = evenPageBottomMargin->value() * f;
-      cs->pageFormat()->evenLeftMargin   = evenPageLeftMargin->value() * f;
-      cs->pageFormat()->evenRightMargin  = evenPageRightMargin->value() * f;
-      cs->pageFormat()->oddTopMargin     = oddPageTopMargin->value() * f;
-      cs->pageFormat()->oddBottomMargin  = oddPageBottomMargin->value() * f;
-      cs->pageFormat()->oddLeftMargin    = oddPageLeftMargin->value() * f;
-      cs->pageFormat()->oddRightMargin   = oddPageRightMargin->value() * f;
+      PageFormat pf;
 
-      cs->pageFormat()->landscape = landscape->isChecked();
-      cs->pageFormat()->twosided = twosided->isChecked();
-      cs->setSpatium(spatiumEntry->value() * f1);
-      emit pageSettingsChanged();
+      pf.size             = pageGroup->currentIndex();
+      pf._width           = pageWidth->value() * f;
+      pf._height          = pageHeight->value() * f;
+      pf.evenTopMargin    = evenPageTopMargin->value() * f;
+      pf.evenBottomMargin = evenPageBottomMargin->value() * f;
+      pf.evenLeftMargin   = evenPageLeftMargin->value() * f;
+      pf.evenRightMargin  = evenPageRightMargin->value() * f;
+      pf.oddTopMargin     = oddPageTopMargin->value() * f;
+      pf.oddBottomMargin  = oddPageBottomMargin->value() * f;
+      pf.oddLeftMargin    = oddPageLeftMargin->value() * f;
+      pf.oddRightMargin   = oddPageRightMargin->value() * f;
+      pf.landscape        = landscape->isChecked();
+      pf.twosided         = twosided->isChecked();
+
+      double sp = spatiumEntry->value() * f1;
+
+      cs->startCmd();
+      cs->undoChangePageFormat(&pf, sp);
+      cs->setLayoutAll(true);
+      cs->endCmd();
       }
 
 //---------------------------------------------------------

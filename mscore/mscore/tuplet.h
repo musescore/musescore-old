@@ -83,7 +83,7 @@ class Tuplet : public DurationElement {
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
 
-      Measure* measure() const      { return (Measure*)parent(); }
+      virtual Measure* measure() const { return (Measure*)parent(); }
 
       int numberType() const        { return _numberType;   }
       int bracketType() const       { return _bracketType;  }

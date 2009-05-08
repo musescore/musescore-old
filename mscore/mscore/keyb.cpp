@@ -258,10 +258,12 @@ void Score::padToggle(int n)
                   setTupletChordRest(cr, pitch, len);
                   }
             else {
-                  if (_is.rest)
+                  if (_is.rest) {
                         setRest(tick, _is.track, len, _is.dots);
-                  else
+                        }
+                  else {
                         changeCRlen(cr, len);
+                        }
                   }
             }
       }

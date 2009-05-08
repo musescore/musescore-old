@@ -57,6 +57,7 @@
 #include "beam.h"
 #include "dynamics.h"
 #include "seq.h"
+#include "page.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -736,6 +737,15 @@ void Score::undoRemoveElement(Element* element)
 void Score::undoChangeTuning(Note* n, double v)
       {
       _undo->push(new ChangeTuning(n, v));
+      }
+
+//---------------------------------------------------------
+//   undoChangePageFormat
+//---------------------------------------------------------
+
+void Score::undoChangePageFormat(PageFormat* p, double v)
+      {
+      _undo->push(new ChangePageFormat(this, p, v));
       }
 
 //---------------------------------------------------------
@@ -1903,4 +1913,37 @@ void ChangeTuning::flip()
       note->setTuning(tuning);
       tuning = ot;
       }
+
+//---------------------------------------------------------
+//   ChangePageFormat
+//---------------------------------------------------------
+
+ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, double s)
+      {
+      score = cs;
+      pf = new PageFormat(*p);
+      spatium = s;
+      }
+
+ChangePageFormat::~ChangePageFormat()
+      {
+      delete pf;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangePageFormat::flip()
+      {
+      PageFormat f = *(score->pageFormat());
+      double os    = score->layout()->spatium();
+
+      *(score->pageFormat()) = *pf;
+      score->setSpatium(spatium);
+
+      *pf     = f;
+      spatium = os;
+      }
+
 

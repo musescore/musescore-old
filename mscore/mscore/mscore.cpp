@@ -1194,24 +1194,11 @@ void MuseScore::dropEvent(QDropEvent* event)
 
 void MuseScore::showPageSettings()
       {
-      if (pageSettings == 0) {
+      if (pageSettings == 0)
             pageSettings = new PageSettings();
-            connect(pageSettings, SIGNAL(pageSettingsChanged()), SLOT(pageSettingsChanged()));
-            }
       pageSettings->setScore(cs);
       pageSettings->show();
       pageSettings->raise();
-      }
-
-//---------------------------------------------------------
-//   pageSettingsChanged
-//---------------------------------------------------------
-
-void MuseScore::pageSettingsChanged()
-      {
-      cs->canvas()->updateNavigator(true);
-      cs->setLayoutAll(true);
-      cs->end();
       }
 
 //---------------------------------------------------------

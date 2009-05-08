@@ -77,7 +77,7 @@ QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
       edittempo.ui element.ui hairpin.ui instrdialog.ui measure.ui measuresdialog.ui
       note.ui page.ui pagesettings.ui partedit.ui playpanel.ui prefsdialog.ui
-      measureproperties.ui segment.ui text.ui textpalette.ui textstyle.ui timedialog.ui
+      measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
@@ -102,7 +102,7 @@ QT4_WRAP_CPP (mocs
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h scscore.h scnote.h scchord.h sctext.h scbytearray.h
-      dynamics.h undo.h
+      dynamics.h undo.h textproperties.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -183,7 +183,7 @@ add_executable ( ${ExecutableName}
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scbytearray.cpp
-      exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp
+      exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       ${AUDIO}
       )
 

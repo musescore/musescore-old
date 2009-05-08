@@ -134,8 +134,6 @@ class Element {
       mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
                                 ///< valid after call to layout()
 
-//      mutable int _duration;    ///< Note: lazy evaluation
-
    public:
       Element(Score*);
       Element(const Element&);

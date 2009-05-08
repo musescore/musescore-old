@@ -291,7 +291,6 @@ class MuseScore : public QMainWindow {
       void showLayoutBreakPalette();
       void magChanged(int);
       void showPageSettings();
-      void pageSettingsChanged();
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);

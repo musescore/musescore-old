@@ -141,7 +141,7 @@ Rest* Score::addRest(int tick, int len, int track)
 
 Rest* Score::setRest(int tick, int len, int track)
       {
-// printf("setRest %d %d\n", tick, len);
+// printf("setRest tick %d len %d track %d\n", tick, len, track);
       if (len == 0)
             return 0;
       Measure* measure = tick2measure(tick);
@@ -1049,7 +1049,7 @@ void Score::cmdDeleteSelection()
                   if (mb) {
                         Measure* lastMeasure = static_cast<Measure*>(mb);
                         if (lastMeasure->endBarLineType() == NORMAL_BAR) {
-                              lastMeasure->setEndBarLineType(END_BAR, false);
+                              undoChangeEndBarLineType(lastMeasure, END_BAR);
                               }
                         }
                   }
