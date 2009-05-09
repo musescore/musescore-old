@@ -1644,6 +1644,8 @@ bool Score::saveSvg(const QString& saveName)
       return true;
       }
 
+
+
 //---------------------------------------------------------
 //   savePng
 //    return true on success
@@ -1651,25 +1653,38 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
-      if (!preferences.pngScreenShot)
-            _printing = true;             // dont print page break symbols etc.
+      return savePng(name, !preferences.pngScreenShot, true, converterDpi );
+}
+
+//---------------------------------------------------------
+//   savePng with options
+//    return true on success
+//---------------------------------------------------------
+
+bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi){
+      
+      _printing = !screenshot;             // dont print page break symbols etc.
 
       bool rv = true;
-      if (!canvas()->lassoRect().isEmpty() && preferences.pngScreenShot) {
+      if (!canvas()->lassoRect().isEmpty() && !_printing) {
             // this is a special hack to export only the canvas lasso selection
             // into png (screen shot mode)
 
             QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
 
-            int w = lrint(r.width()  * converterDpi / DPI);
-            int h = lrint(r.height() * converterDpi / DPI);
+            int w = lrint(r.width()  * convDpi / DPI);
+            int h = lrint(r.height() * convDpi / DPI);
 
             QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
             printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
             printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-//          printer.fill(-1);     // white background
-            printer.fill(0);      // transparent background
-            double m = converterDpi / PDPI;
+            
+            if (transparent)
+              printer.fill(0);      // transparent background
+            else
+              printer.fill(-1);     // white background
+                
+            double m = convDpi / PDPI;
             QPainter p(&printer);
             canvas()->paintLasso(p, m);
             rv = printer.save(name, "png");
@@ -1697,15 +1712,19 @@ bool Score::savePng(const QString& name)
                   page->collectElements(el);
 
                   QRectF r = page->abbox();
-                  int w = lrint(r.width()  * converterDpi / DPI);
-                  int h = lrint(r.height() * converterDpi / DPI);
+                  int w = lrint(r.width()  * convDpi / DPI);
+                  int h = lrint(r.height() * convDpi / DPI);
 
                   QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
                   printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
                   printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-                  printer.fill(0);      // transparent background
+                  
+                  if (transparent)
+                    printer.fill(0);      // transparent background
+                  else
+                    printer.fill(-1);     // white background
 
-                  double mag = converterDpi / DPI;
+                  double mag = convDpi / DPI;
                   QPainter p(&printer);
                   p.setRenderHint(QPainter::Antialiasing, true);
                   p.setRenderHint(QPainter::TextAntialiasing, true);

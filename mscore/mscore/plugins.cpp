@@ -157,6 +157,25 @@ void MuseScore::loadPlugins()
             }
       }
 
+bool MuseScore::loadPlugin(const QString& filename)
+      {
+      bool result = false;
+    
+      QDir pluginDir(mscoreGlobalShare + "plugins");
+      if (debugMode)
+            printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
+      
+      if (filename.endsWith(".js")){
+        QFileInfo fi(pluginDir, filename);
+        if (fi.exists()){
+          QString path(fi.filePath());
+          registerPlugin(path);
+          result = true;
+          }
+        }
+        return result;
+      }
+      
 //---------------------------------------------------------
 //   ScriptEngine
 //---------------------------------------------------------

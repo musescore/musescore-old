@@ -72,6 +72,7 @@ Objects
             bool saveMxl(string path);
             bool saveMidi(string path);
             bool savePng(string path);
+            bool savePng(string path, boolean screenshot, boolean transparent, double dpi);
             bool saveSvg(string path);
             bool saveLilypond(string path);
             appendPart(string partname)

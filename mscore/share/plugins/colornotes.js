@@ -62,16 +62,15 @@ function run()
       cursor.rewind();  // set cursor to first chord/rest
 
       while (!cursor.eos()) {
-            if (cursor.isChord()) {
-		  	for (var i=0; i< cursor.chord().notes() ; i++){
-	              	    var note = cursor.chord().note(i);
-			    note.color = new QColor(colors[note.pitch % 12]);
-			}
-		  
-                  }
-            cursor.next();
-            }
+        if (cursor.isChord()) {
+          for (var i=0; i< cursor.chord().notes() ; i++){
+            var note = cursor.chord().note(i);
+            note.color = new QColor(colors[note.pitch % 12]);
+          }
+        }
+        cursor.next();
       }
+    }
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed

@@ -30,8 +30,12 @@ win32:
 	cd win32build & $(MAKE) lupdate                              
 	cd win32build & $(MAKE) lrelease                             
 	cd win32build & $(MAKE) 
+
+install:
 	cd win32build & $(MAKE) install                              
-#	cd win32build & $(MAKE) package                              
+
+package:
+	cd win32build & $(MAKE) package                              
 
 
 

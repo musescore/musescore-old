@@ -291,6 +291,15 @@ bool ScScorePrototype::savePng(const QString& name)
       }
 
 //---------------------------------------------------------
+//   savePng with options
+//---------------------------------------------------------
+
+bool ScScorePrototype::savePng(const QString& name, bool screenshot, bool transparent, double convDpi)
+      {
+      return thisScore()->savePng(name, screenshot, transparent, convDpi);
+      }
+
+//---------------------------------------------------------
 //   saveSvg
 //---------------------------------------------------------
 
