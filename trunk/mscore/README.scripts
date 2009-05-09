@@ -124,7 +124,26 @@ Objects
             text           string         the displayed text
             defaultFont    QFont
             color          QColor         text foreground color
+   
+   CursorMeasure
+         create:  var a = CursorMeasure(Score score);
 
+
+         Fuctions:
+            rewind()                position cursor at the beginning
+            measure()               return measure at current position
+            eos()                   return true if at end of score
+            
+   Measure
+   
+         Properties:
+            lineBreak   bool     break the system after this measure
+            pageNumber  int      number of the page where the measure is drawn (ro)
+            x           double   x position (ro)
+            y           double   y position (ro) 
+            width       double   width of the bounding box (ro)
+            height      double   height of the bounding box (ro)
+            
 
 
 Global Variables

@@ -102,7 +102,7 @@ QT4_WRAP_CPP (mocs
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h scscore.h scnote.h scchord.h sctext.h scbytearray.h
-      dynamics.h undo.h textproperties.h
+      dynamics.h undo.h textproperties.h scmeasure.h sccursormeasure.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -184,6 +184,7 @@ add_executable ( ${ExecutableName}
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scbytearray.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
+      scmeasure.cpp sccursormeasure.cpp
       ${AUDIO}
       )
 
