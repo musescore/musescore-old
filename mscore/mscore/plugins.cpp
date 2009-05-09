@@ -28,6 +28,8 @@
 #include "scnote.h"
 #include "sctext.h"
 #include "scbytearray.h"
+#include "sccursormeasure.h"
+#include "scmeasure.h"
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -211,6 +213,12 @@ ScriptEngine::ScriptEngine()
 
       ScText* textClass = new ScText(this);
       globalObject().setProperty("Text", textClass->constructor());
+
+      ScMeasure* measureClass = new ScMeasure(this);
+      globalObject().setProperty("Measure", measureClass->constructor());
+      
+      cursorMeasureClass = new ScSCursorMeasure(this);
+      globalObject().setProperty("CursorMeasure", cursorMeasureClass->constructor());
 
       QScriptValue v = newVariant(division);
       globalObject().setProperty("division", v);
