@@ -78,6 +78,7 @@ class ScScorePrototype : public QObject, public QScriptable
       bool saveMxl(const QString&);
       bool saveMidi(const QString&);
       bool savePng(const QString&);
+      bool savePng(const QString&, bool, bool, double);
       bool saveSvg(const QString&);
       bool saveLilypond(const QString&);
       void appendPart(const QString& name);

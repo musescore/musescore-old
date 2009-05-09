@@ -1,5 +1,9 @@
 9.may (ws)
       - changes in note entry for voices > 0
+      (la)
+      - add -p option on command line to launch a plugin. 
+        Musescore closes after execution but honored -o if any.
+      - add option to savePng from plugin (screenshot, transparency, dpi)
 8.may (ws)
       - page settings undoable
       - use same widget for text properties and text style

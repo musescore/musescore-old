@@ -80,9 +80,11 @@ static QStringList recentScores;
 Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
 bool converterMode = false;
+bool pluginMode = false;
 double converterDpi = 300;
 
 static const char* outFileName;
+static const char* pluginName;
 static const char* styleFile;
 static QString localeName;
 bool useFactorySettings = false;
@@ -1481,7 +1483,7 @@ int main(int argc, char* argv[])
       setDefaultStyle();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:DF")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:p:r:S:DF")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1509,6 +1511,10 @@ int main(int argc, char* argv[])
                         converterMode = true;
                         outFileName = optarg;
                         break;
+                  case 'p':
+                        pluginMode = true;
+                        pluginName = optarg;
+                        break;      
                   case 'r':
                         converterDpi = atof(optarg);
                         break;
@@ -1551,7 +1557,7 @@ int main(int argc, char* argv[])
             preferences.read();
 
       QSplashScreen* sc = 0;
-      if (!converterMode && preferences.showSplashScreen) {
+      if (!converterMode && !pluginMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
             sc->setWindowFlags(Qt::FramelessWindowHint);
@@ -1732,7 +1738,23 @@ int main(int argc, char* argv[])
       mscore->showPlayPanel(preferences.showPlayPanel);
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
-
+      if (pluginMode){
+          QString pn(pluginName);
+          bool res = false;          
+          if (mscore->loadPlugin(pn)){
+            Score* cs = mscore->currentScore();
+            if (styleFile) {
+                  QFile f(styleFile);
+                  if (f.open(QIODevice::ReadOnly))
+                        cs->loadStyle(&f);
+                  }
+            cs->layout()->doLayout();
+            mscore->pluginTriggered(0);
+            res = true;
+          } 
+          if(!converterMode)
+            exit(res ? 0 : -1);       
+      }
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();

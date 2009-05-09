@@ -297,7 +297,6 @@ class MuseScore : public QMainWindow {
       void removeTab();
       void cmd(QAction*);
       void clipboardChanged();
-      void pluginTriggered(int);
       void drumPaletteSelected(int);
       void undo();
       void redo();
@@ -312,6 +311,7 @@ class MuseScore : public QMainWindow {
       void changeState(int);
       void setPos(int tick);
       void searchTextChanged(const QString& s);
+      void pluginTriggered(int);
 
    public:
       MuseScore();
@@ -335,6 +335,7 @@ class MuseScore : public QMainWindow {
       void play(Element* e) const;
       void play(Element* e, int pitch) const;
       void loadPlugins();
+      bool loadPlugin(const QString& filename);
       QString createDefaultName() const;
       void startAutoSave();
       void updateDrumset();
