@@ -325,6 +325,7 @@ class Score : public QObject {
 
       void resetUserStretch();
       void toDefault();
+      void expandVoice();
 
    private slots:
       void textUndoLevelAdded();

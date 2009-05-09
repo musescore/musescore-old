@@ -473,6 +473,22 @@ void Score::cmdAddPitch(int note, bool addFlag)
       }
 
 //---------------------------------------------------------
+//   expandVoice
+//---------------------------------------------------------
+
+void Score::expandVoice()
+      {
+      if ((_is.cr->track() % VOICES) != _is.voice) {
+            // voice is empty, fill with rest
+            int tick = _is.cr->tick();
+            if (tick == _is.cr->measure()->tick()) {
+                  Rest* rest = setRest(tick, _is.cr->measure()->tickLen(), _is.track);
+                  _is.cr = rest;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   cmdAddPitch1
 //---------------------------------------------------------
 
@@ -496,8 +512,11 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   }
             return n;
             }
+
+      expandVoice();
+
       // insert note
-      int len       = _is.tickLen;
+      int len = _is.tickLen;
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
             n = (Note*)(setTupletChordRest(cr, pitch, len));
