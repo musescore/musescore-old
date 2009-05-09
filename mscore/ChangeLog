@@ -1,5 +1,7 @@
+9.may (ws)
+      - changes in note entry for voices > 0
 8.may (ws)
-      - page page settings undoable
+      - page settings undoable
       - use same widget for text properties and text style
       - fix end bar line when undoing removing last measure
 7.may (ws)

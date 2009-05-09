@@ -1412,8 +1412,39 @@ void Score::changeVoice(int voice)
       {
       _is.voice = voice;
       if (_is.track % VOICES != voice) {
-            setInputTrack((_is.track / VOICES) * VOICES + voice);
-            layoutAll = true;
+            _is.track = (_is.track / VOICES) * VOICES + voice;
+            //
+            // in note entry mode search for a valid input
+            // position
+            //
+            if (_is.noteEntryMode && _is.cr) {
+                  Segment* seg = _is.cr->segment();
+                  while (seg) {
+                        if (seg->element(_is.track)) {
+                              _is.cr = static_cast<ChordRest*>(seg->element(_is.track));
+                              break;
+                              }
+                        Segment* nseg = seg;
+                        while (nseg) {
+                              nseg = nseg->prev();
+                              if (!nseg || nseg->subtype() == Segment::SegChordRest)
+                                    break;
+                              }
+                        if (nseg == 0) {
+                              //
+                              // no segment found
+                              //    this can happen for voices > 0, when there
+                              //    is no chord/rest for this voice
+                              int track = (_is.track / VOICES) * VOICES;
+                              _is.cr = static_cast<ChordRest*>(seg->element(track));
+                              break;
+                              }
+                        seg = nseg;
+                        }
+                  foreach(Viewer* v, viewer)
+                        v->moveCursor();
+                  }
+            updateAll = true;
             }
       }
 
@@ -1650,6 +1681,9 @@ void Score::cmdEnterRest()
             printf("cannot enter rest here\n");
             return;
             }
+
+      expandVoice();
+
       ChordRest* cr = _is.cr;
       if (cr->tuplet()) {
             setTupletChordRest(cr, -1, _is.tickLen);
