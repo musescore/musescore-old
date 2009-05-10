@@ -826,6 +826,8 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
             setSystemFlag(ns->systemFlag);
       if (textBase()->isSimpleText(os, score()->layout()->spatium()))
             setDefaultFont(ns->font());
+      if (textBase()->hasFrame() == os->hasFrame)
+            textBase()->setHasFrame(ns->hasFrame);
       }
 
 //---------------------------------------------------------

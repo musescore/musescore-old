@@ -103,7 +103,7 @@ void EditStyle::apply()
             }
       cs->setStyle(lstyle);
       cs->startCmd();
-      cs->textStyleChanged(cs->textStyles()); // only to update harmony text
+      cs->textStyleChanged(cs->textStyles());
       cs->setLayoutAll(true);
       cs->endCmd();
       cs->setClean(false);

@@ -547,13 +547,45 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   }
             setLayoutAll(true);
             }
+
       // go to next ChordRest
-      cr = nextChordRest(_is.cr);
-      if ((cr == 0) && (_is.track % VOICES)) {
-            Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
-            int track = (_is.track / VOICES) * VOICES;
-            cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+
+      cr = _is.cr;
+      int nextTick = cr->tick() + cr->ticks();
+      Segment* seg = cr->segment();
+      int track    = cr->track();
+
+      for (;;) {
+            seg = seg->next1();
+            if (!seg)
+                  break;
+            if (seg->measure()->multiMeasure() < 0)
+                  continue;
+            Element* e = seg->element(track);
+            if (e && e->isChordRest() && e->tick() == nextTick) {
+                  cr = static_cast<ChordRest*>(e);
+                  break;
+                  }
+            if (seg->tick() > nextTick) {
+                  Segment* s = cr->segment();
+                  for (;;) {
+                        s = s->next();
+                        if ((s == 0) || (s->element(track) && s->element(track)->isChordRest()))
+                              break;
+                        }
+                  int len;
+                  if (s)
+                        len = s->tick() - nextTick;
+                  else {
+                        Measure* m = cr->measure();
+                        int etick = m->tick() + m->tickLen();
+                        len = etick - nextTick;
+                        }
+                  if (len)
+                        cr = setRest(nextTick, len, track);
+                  }
             }
+
       _is.cr = cr;
       if (cr)
             emit posChanged(cr->tick());

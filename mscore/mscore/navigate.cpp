@@ -45,6 +45,7 @@ ChordRest* nextChordRest(ChordRest* cr)
       {
       if (!cr)
             return 0;
+      int tick = cr->tick() + cr->ticks();
       Segment* seg = cr->segment();
       int track = cr->track();
 
@@ -55,8 +56,12 @@ ChordRest* nextChordRest(ChordRest* cr)
             if (seg->measure()->multiMeasure() < 0)
                   continue;
             Element* e = seg->element(track);
-            if (e && e->isChordRest())
-                  return static_cast<ChordRest*>(e);
+            if (e && e->isChordRest() && e->tick()) {
+                  if (e->tick() == tick)
+                        return static_cast<ChordRest*>(e);
+                  else if (e->tick() > tick)
+                        return 0;
+                  }
             }
       return 0;
       }
