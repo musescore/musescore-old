@@ -167,6 +167,7 @@ class Seq : public QObject {
       void setController(int, int, int);
       void sendEvent(const Event&);
       void setScore(Score* s);
+      Score* score() const { return cs; }
       void initInstruments();
 
       const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p);

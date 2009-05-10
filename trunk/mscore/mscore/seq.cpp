@@ -106,7 +106,9 @@ Seq::~Seq()
 void Seq::setScore(Score* s)
       {
       if (cs) {
+printf("STOP\n");
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
+            cs = s;
             stop();
 #ifndef __MINGW32__
             while (state != STOP)
@@ -416,6 +418,8 @@ void MuseScore::seqStopped()
 
 void Seq::guiStop()
       {
+      if (!cs)
+            return;
       if (!pauseState) {
             QAction* a = getAction("play");
             a->setChecked(false);
