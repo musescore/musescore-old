@@ -676,11 +676,15 @@ void Score::cmdFlip()
             if (e->type() == NOTE) {
                   Chord* chord = static_cast<Note*>(e)->chord();
 
-                  if (chord->stemDirection() == AUTO)
-                        chord->setStemDirection(chord->up() ? DOWN : UP);
-                  else
-                        chord->setStemDirection(chord->stemDirection() == UP ? DOWN : UP);
                   Direction dir = chord->stemDirection();
+
+                  if (dir == AUTO)
+                        dir = chord->up() ? DOWN : UP;
+                  else
+                        dir = dir == UP ? DOWN : UP;
+
+                  _undo->push(new SetStemDirection(chord, dir));
+
                   Beam* beam = chord->beam();
                   if (beam) {
                         bool set = false;
