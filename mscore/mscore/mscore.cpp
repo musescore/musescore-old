@@ -1381,8 +1381,12 @@ void MuseScore::removeTab(int i)
       if (n <= 0)
             return;
       Score* score = scoreList[i];
+
       if (checkDirty(score))
             return;
+      if (seq->score() == score)
+            seq->setScore(0);
+
       scoreList.removeAt(i);
       tab->blockSignals(true);
       tab->removeTab(i);
@@ -1514,7 +1518,7 @@ int main(int argc, char* argv[])
                   case 'p':
                         pluginMode = true;
                         pluginName = optarg;
-                        break;      
+                        break;
                   case 'r':
                         converterDpi = atof(optarg);
                         break;
@@ -1740,7 +1744,7 @@ int main(int argc, char* argv[])
             mscore->getPlayPanel()->move(preferences.playPanelPos);
       if (pluginMode){
           QString pn(pluginName);
-          bool res = false;          
+          bool res = false;
           if (mscore->loadPlugin(pn)){
             Score* cs = mscore->currentScore();
             if (styleFile) {
@@ -1751,9 +1755,9 @@ int main(int argc, char* argv[])
             cs->layout()->doLayout();
             mscore->pluginTriggered(0);
             res = true;
-          } 
+          }
           if(!converterMode)
-            exit(res ? 0 : -1);       
+            exit(res ? 0 : -1);
       }
       if (converterMode) {
             QString fn(outFileName);
