@@ -51,8 +51,9 @@ function run()
       {
       print("break4");
 
-      var cursor   = new CursorMeasure(curScore);
-      
+      var cursor   = new Cursor(curScore);
+      cursor.staff = 0;
+      cursor.voice = 0;
       cursor.rewind();  // set cursor to first chord/rest
       var i = 1;
       while (!cursor.eos()) {
@@ -62,7 +63,7 @@ function run()
 			      }else{
 			        m.lineBreak = false;
             }           
-            cursor.next();
+            cursor.nextMeasure();
             i++;
       }
       }
