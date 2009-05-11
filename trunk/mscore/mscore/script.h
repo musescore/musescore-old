@@ -25,7 +25,6 @@
 
 class ScScore;
 class ScSCursor;
-class ScSCursorMeasure;
 class ByteArrayClass;
 
 //---------------------------------------------------------
@@ -38,13 +37,11 @@ class ScriptEngine : public QScriptEngine {
       ByteArrayClass* baClass;
       ScScore* scoreClass;
       ScSCursor* cursorClass;
-      ScSCursorMeasure* cursorMeasureClass;
 
    public:
       ScriptEngine();
       ScScore* getScoreClass() const { return scoreClass; }
       ScSCursor* getCursorClass() const { return cursorClass; }
-      ScSCursorMeasure* getCursorMeasureClass() const { return cursorMeasureClass; }
       };
 
 #endif

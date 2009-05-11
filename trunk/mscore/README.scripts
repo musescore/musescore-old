@@ -94,6 +94,9 @@ Objects
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
             addChord(Chord)
+            measure()               return the current measure
+            next()                  go to next segment
+            nextMeasure()           go to first chord/rest of next measure
 
    Chord
          create:   var a = Chord()
@@ -124,15 +127,6 @@ Objects
             text           string         the displayed text
             defaultFont    QFont
             color          QColor         text foreground color
-   
-   CursorMeasure
-         create:  var a = CursorMeasure(Score score);
-
-
-         Fuctions:
-            rewind()                position cursor at the beginning
-            measure()               return measure at current position
-            eos()                   return true if at end of score
             
    Measure
    

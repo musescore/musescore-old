@@ -28,7 +28,6 @@
 #include "scnote.h"
 #include "sctext.h"
 #include "scbytearray.h"
-#include "sccursormeasure.h"
 #include "scmeasure.h"
 
 //---------------------------------------------------------
@@ -216,9 +215,6 @@ ScriptEngine::ScriptEngine()
 
       ScMeasure* measureClass = new ScMeasure(this);
       globalObject().setProperty("Measure", measureClass->constructor());
-      
-      cursorMeasureClass = new ScSCursorMeasure(this);
-      globalObject().setProperty("CursorMeasure", cursorMeasureClass->constructor());
 
       QScriptValue v = newVariant(division);
       globalObject().setProperty("division", v);
