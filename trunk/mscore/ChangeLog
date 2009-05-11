@@ -1,4 +1,6 @@
 11.may (ws)
+      - modified "save as"; should work, if the user choosen filter
+        (==filetype) returns nothing
       - "colornotes" script example now colors all notes in all staves
       - make plugin "colornotes" undoable
       - fixes for note entry with mouse:
