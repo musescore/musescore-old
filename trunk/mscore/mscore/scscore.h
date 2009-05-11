@@ -67,7 +67,7 @@ class ScScorePrototype : public QObject, public QScriptable
       {
       Q_OBJECT
       Score* thisScore() const;
-      Q_PROPERTY(QString title WRITE setTitle SCRIPTABLE true)
+      Q_PROPERTY(QString title READ title WRITE setTitle SCRIPTABLE true)
 
    public:
       ScScorePrototype(QObject *parent = 0) : QObject(parent) {}
@@ -84,8 +84,9 @@ class ScScorePrototype : public QObject, public QScriptable
       void appendPart(const QString& name);
       void appendMeasures(int n);
       void setTitle(const QString&);
-      void startUndo() { thisScore()->startCmd(); }
-      void endUndo()   { thisScore()->endCmd();   }
+      QString title() const { return QString("dummy"); }
+      void startUndo()    { thisScore()->startCmd(); }
+      void endUndo()        { thisScore()->endCmd();   }
       };
 
 Q_DECLARE_METATYPE(ScorePtr)

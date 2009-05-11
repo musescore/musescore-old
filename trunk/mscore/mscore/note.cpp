@@ -331,12 +331,10 @@ void Note::add(Element* e)
                   BSymbol* b = static_cast<BSymbol*>(e);
                   foreach(Element* ee, b->getLeafs())
                         ee->setParent(b);
-//                  e->setMag(mag());
                   _el.append(e);
                   }
                   break;
             case TEXT:
-//                  e->setMag(mag());
                   _el.append(e);
                   break;
             case TIE:
@@ -351,7 +349,6 @@ void Note::add(Element* e)
                   break;
             case ACCIDENTAL:
                   _accidental = static_cast<Accidental*>(e);
-//                  _accidental->setMag(mag());
                   break;
             default:
                   printf("Note::add() not impl. %s\n", e->name());
@@ -756,43 +753,39 @@ void ShadowNote::draw(QPainter& p) const
             return;
 
       QPointF ap(canvasPos());
-
       QRect r(abbox().toRect());
-//      QRect c(p.clipRect());
 
-//      if (c.intersects(r)) {
-            p.translate(ap);
-            qreal lw = point(score()->styleS(ST_ledgerLineWidth));
-            InputState ps = score()->inputState();
-            int voice;
-            if (ps.drumNote != -1 && ps.drumset)
-                  voice = ps.drumset->voice(ps.drumNote);
-            else
-                  voice = ps.voice;
+      p.translate(ap);
+      qreal lw = point(score()->styleS(ST_ledgerLineWidth));
+      InputState ps = score()->inputState();
+      int voice;
+      if (ps.drumNote != -1 && ps.drumset)
+            voice = ps.drumset->voice(ps.drumNote);
+      else
+            voice = ps.voice();
 
-            QPen pen(preferences.selectColor[voice].light(160));
-            pen.setWidthF(lw);
-            p.setPen(pen);
+      QPen pen(preferences.selectColor[voice].light(160));
+      pen.setWidthF(lw);
+      p.setPen(pen);
 
-//            symbols[quartheadSym].draw(p);
+      symbols[noteHeads[_headGroup][2]].draw(p, mag());
 
-            symbols[noteHeads[_headGroup][2]].draw(p);
+      double ms = _spatium * mag();
 
-            double x1 = symbols[quartheadSym].width(mag())*.5 - _spatium;
-            double x2 = x1 + 2 * _spatium;
+      double x1 = symbols[quartheadSym].width(mag())*.5 - ms;
+      double x2 = x1 + 2 * ms;
 
-            if (_line < 100 && _line > -100) {
-                  for (int i = -2; i >= _line; i -= 2) {
-                        double y = _spatium * .5 * (i - _line);
-                        p.drawLine(QLineF(x1, y, x2, y));
-                        }
-                  for (int i = 10; i <= _line; i += 2) {
-                        double y = _spatium * .5 * (i - _line);
-                        p.drawLine(QLineF(x1, y, x2, y));
-                        }
+      if (_line < 100 && _line > -100) {
+            for (int i = -2; i >= _line; i -= 2) {
+                  double y = ms * .5 * (i - _line);
+                  p.drawLine(QLineF(x1, y, x2, y));
                   }
-            p.translate(-ap);
-//            }
+            for (int i = 10; i <= _line; i += 2) {
+                  double y = ms * .5 * (i - _line);
+                  p.drawLine(QLineF(x1, y, x2, y));
+                  }
+            }
+      p.translate(-ap);
       }
 
 //---------------------------------------------------------

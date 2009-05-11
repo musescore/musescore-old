@@ -96,7 +96,6 @@ InputState::InputState()
       tickLen       = division;
       rest          = false;
       pad           = 0;
-      voice         = 0;
       pitch         = 60;
       prefix        = 0;
       noteType      = NOTE_NORMAL;
@@ -851,7 +850,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
 Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
    Segment** seg) const
       {
-      int voice = _is.voice;
+      int voice = _is.voice();
 
       foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
@@ -1751,10 +1750,8 @@ static Segment* getNextCRSegment(Segment* s, int staffIdx)
 //    return true if valid position found
 //---------------------------------------------------------
 
-bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) const
+bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       {
-      divideSegment = false;  // DEBUG
-
       const Page* page = searchPage(p);
       if (page == 0)
             return false;
@@ -1826,7 +1823,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
             sy1 = sy2;
             }
       if (sstaff == 0) {
-//            printf("no sys staff\n");
+// printf("no sys staff\n");
             return false;
             }
 
@@ -1838,6 +1835,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
       Segment* segment = 0;
       pos->tick        = -1;
 
+      int track = pos->staffIdx * VOICES + voice;
       for (segment = pos->measure->first(); segment;) {
             segment = getNextCRSegment(segment, pos->staffIdx);
             if (segment == 0)
@@ -1847,52 +1845,48 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
             double x1 = segment->x();
             double x2;
             int ntick;
+            double d;
             if (ns) {
                   x2    = ns->x();
                   ntick = ns->tick();
+                  d = x2 - x1;
                   }
             else {
                   x2    = pos->measure->bbox().width();
                   ntick = pos->measure->tick() + pos->measure->tickLen();
+                  d = (x2 - x1) * 2.0;
                   }
-            double d  = x2 - x1;
-            int track = pos->staffIdx * VOICES;       // Experimental
 
-            bool isTuplet = segment->element(track) && segment->element(track)->isChordRest()
-               && static_cast<ChordRest*>(segment->element(track))->tuplet();
-
-            if (divideSegment && !isTuplet) {
-                  if (x < (x1 + d * .3)) {
-                        x = x1;
-                        pos->tick = segment->tick();
-                        break;
-                        }
-                  if (x < (x1 + d)) {
-                        x = x1 + d * .5;
-                        pos->tick = segment->tick() + (ntick - segment->tick()) / 2;
-                        break;
-                        }
-                  }
-            else {
-                  if (x < (x1 + d * .5)) {
-                        x = x1;
-                        pos->tick = segment->tick();
-                        break;
-                        }
+            if (x < (x1 + d * .5) && segment->element(track)) {
+                  x = x1;
+                  pos->tick = segment->tick();
+                  break;
                   }
             segment = ns;
             }
 
       if (segment == 0) {
-            // printf("no segment+\n");
-            return false;
+            if (voice) {
+                  for (segment = pos->measure->first(); segment;) {
+                        if (segment->subtype() == Segment::SegChordRest)
+                              break;
+                        segment = getNextCRSegment(segment, pos->staffIdx);
+                        }
+                  x = segment->x();
+                  pos->tick = pos->measure->tick();
+                  }
+            else {
+// printf("no segment+ track %d voice %d itrack %d\n", track, voice, _is.track);
+                  return false;
+                  }
             }
       //
       // TODO: restrict to reasonable values (pitch 0-127)
       //
-      pos->line = lrint((pppp.y() - sstaff->bbox().y()) / _spatium * 2.0);
+      double mag = staff(pos->staffIdx)->mag();
+      pos->line = lrint((pppp.y() - sstaff->bbox().y()) / (_spatium * mag) * 2.0);
       double y  = pos->measure->canvasPos().y() + sstaff->y();
-      y += pos->line * _spatium * .5;
+      y += pos->line * _spatium * .5 * mag;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
       return true;
       }

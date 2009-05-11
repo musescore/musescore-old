@@ -23,6 +23,7 @@
 #include "note.h"
 #include "utils.h"
 #include "scscore.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   ScNotePropertyIterator
@@ -272,7 +273,12 @@ QColor ScNotePrototype::getColor() const
 
 void ScNotePrototype::setColor(QColor c)
       {
-      thisNote()->setColor(c);
+      Note* note = thisNote();
+      Score* score = note->score();
+      if (score)
+            score->undo()->push(new ChangeColor(note, c));
+      else
+            note->setColor(c);
       }
 
 

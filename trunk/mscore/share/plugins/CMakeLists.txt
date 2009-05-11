@@ -27,5 +27,6 @@ install(FILES
       fonttest.js
       test4.js
       test4.ui
+      break4.js
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )

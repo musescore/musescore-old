@@ -364,10 +364,9 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
-      int len            = _is.tickLen;
-      bool divideSegment = len >= (division/2);
+      int len  = _is.tickLen;
       Position p;
-      if (!getPosition(&p, pos, divideSegment)) {
+      if (!getPosition(&p, pos, _is.voice())) {
             printf("cannot put note here, get position failed\n");
             return;
             }
@@ -380,7 +379,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key);
       Instrument* instr       = st->part()->instrument();
-      int voice               = _is.voice;
+      int voice               = _is.voice();
       int track               = staffIdx * VOICES + voice;
       int headGroup           = 0;
       Direction stemDirection = AUTO;
@@ -1414,8 +1413,7 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
 
 void Score::changeVoice(int voice)
       {
-      _is.voice = voice;
-      if (_is.track % VOICES != voice) {
+      if ((_is.track % VOICES) != voice) {
             _is.track = (_is.track / VOICES) * VOICES + voice;
             //
             // in note entry mode search for a valid input

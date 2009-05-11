@@ -49,7 +49,7 @@ function run()
       {
       print("plugin path: ", pluginPath);
       print("score name:  ", curScore.name);
-      print("staves:      ", curScore.nstaves);
+      print("staves:      ", curScore.staves);
       print("division:    ", division);
       mb = new QMessageBox();
       mb.setWindowTitle("MuseScore: Test Plugin");

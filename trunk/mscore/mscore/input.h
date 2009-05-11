@@ -38,7 +38,6 @@ class InputState {
       int tickLen;  // len + len * (dot ? .5 : 0)
       bool rest;
       int pad;
-      int voice;
       int pitch;
       int prefix;
       NoteType noteType;
@@ -53,6 +52,8 @@ class InputState {
       InputState();
       int pos() const;
       void setPos(ChordRest* cr);
+
+      int voice() const { return track % VOICES; }
       };
 
 #endif

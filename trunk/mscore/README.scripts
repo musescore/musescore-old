@@ -89,8 +89,11 @@ Objects
 
          Fuctions:
             rewind()                position cursor to staff/voice
+            next()                  goto next chord/rest
+            nextMeasure()           goto first chord/rest in next measure
             isChord()               return true if cursor points to a chord
             chord()                 return chord at current position
+            measure()               return measure at current position
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
             addChord(Chord)
@@ -127,17 +130,17 @@ Objects
             text           string         the displayed text
             defaultFont    QFont
             color          QColor         text foreground color
-            
+
    Measure
-   
+
          Properties:
             lineBreak   bool     break the system after this measure
             pageNumber  int      number of the page where the measure is drawn (ro)
             x           double   x position (ro)
-            y           double   y position (ro) 
+            y           double   y position (ro)
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
-            
+
 
 
 Global Variables
