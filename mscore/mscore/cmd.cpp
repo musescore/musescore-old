@@ -427,7 +427,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
       {
       if (!noteEntryMode())
             setNoteEntry(true);
-      if (_is.cr == 0 && _is.voice == 0) {
+      if (_is.cr == 0 && _is.voice() == 0) {
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
@@ -478,7 +478,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
 
 void Score::expandVoice()
       {
-      if ((_is.cr->track() % VOICES) != _is.voice) {
+      if ((_is.cr->track() % VOICES) != _is.voice()) {
             // voice is empty, fill with rest
             int tick = _is.cr->tick();
             if (tick == _is.cr->measure()->tick()) {

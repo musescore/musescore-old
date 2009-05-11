@@ -41,10 +41,10 @@
 Rest::Rest(Score* s)
   : ChordRest(s)
       {
+      setOffsetType(OFFSET_SPATIUM);
       _beamMode  = BEAM_NO;
       _staffMove = 0;
       dotline    = -1;
-      setOffsetType(OFFSET_SPATIUM);
       _sym       = quartrestSym;
       }
 
@@ -120,12 +120,6 @@ void Rest::draw(QPainter& p) const
 void Rest::setUserOffset(double x, double y)
       {
       int line = lrint(y  / _spatium);
-//      int off = 0;
-//      if (voice() == 2)
-//            off = -3;
-//      else if (voice() == 1 || voice() == 3)
-//            off = 3;
-//      line += off;
       if (_sym == wholerestSym && (line <= -2 || line >= 4))
             _sym = outsidewholerestSym;
       else if (_sym == outsidewholerestSym && (line > -2 && line < 4))
@@ -134,7 +128,6 @@ void Rest::setUserOffset(double x, double y)
             _sym = outsidehalfrestSym;
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
-//      setUserOff(QPointF(x / _spatium, double(line-off)));
       setUserOff(QPointF(x / _spatium, double(line)));
       }
 
@@ -329,6 +322,8 @@ void Rest::remove(Element* e)
 
 void Rest::layout(ScoreLayout* l)
       {
+      int line = lrint(userOff().y());
+
       setYoff(2.0 * mag());
       switch(duration().val()) {
             case Duration::V_LONG:
@@ -339,11 +334,11 @@ void Rest::layout(ScoreLayout* l)
                   break;
             case Duration::V_MEASURE:
             case Duration::V_WHOLE:
-                  _sym = wholerestSym;
+                  _sym = (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
                   setYoff(1.0 * mag());
                   break;
             case Duration::V_HALF:
-                  _sym = halfrestSym;
+                  _sym = (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;
                   break;
             case Duration::V_INVALID:
             case Duration::V_QUARTER:

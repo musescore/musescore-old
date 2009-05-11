@@ -287,7 +287,7 @@ void Score::setPadState(Element* e)
             Accidental* prefix  = note->accidental();
             _is.prefix    = prefix ? prefix->subtype() : 0;
             _is.rest      = false;
-            _is.voice     = note->voice();
+            _is.track     = note->track();
             _is.pitch     = note->pitch();
             _is.noteType  = note->noteType();
             _is.beamMode  = chord->beamMode();
@@ -301,7 +301,7 @@ void Score::setPadState(Element* e)
 
             _is.prefix   = 0;
             _is.rest     = true;
-            _is.voice    = rest->voice();
+            _is.track    = rest->track();
             _is.beamMode = rest->beamMode();
             }
       else {
@@ -357,10 +357,11 @@ void Score::setPadState()
       getAction("pad-flat")->setChecked(_is.prefix == 2);
       getAction("pad-flat2")->setChecked(_is.prefix == 4);
 
-      getAction("voice-1")->setChecked(_is.voice == 0);
-      getAction("voice-2")->setChecked(_is.voice == 1);
-      getAction("voice-3")->setChecked(_is.voice == 2);
-      getAction("voice-4")->setChecked(_is.voice == 3);
+      int voice = _is.voice();
+      getAction("voice-1")->setChecked(voice == 0);
+      getAction("voice-2")->setChecked(voice == 1);
+      getAction("voice-3")->setChecked(voice == 2);
+      getAction("voice-4")->setChecked(voice == 3);
 
       getAction("pad-acciaccatura")->setChecked(_is.noteType == NOTE_ACCIACCATURA);
       getAction("pad-appoggiatura")->setChecked(_is.noteType == NOTE_APPOGGIATURA);

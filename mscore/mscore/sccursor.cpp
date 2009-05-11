@@ -22,6 +22,8 @@
 #include "scscore.h"
 #include "scnote.h"
 #include "sctext.h"
+#include "scmeasure.h"
+
 #include "chordrest.h"
 #include "chord.h"
 #include "note.h"
@@ -139,7 +141,6 @@ QScriptClass::QueryFlags ScSCursor::queryProperty(const QScriptValue &object,
 QScriptValue ScSCursor::property(const QScriptValue& object,
    const QScriptString& name, uint /*id*/)
       {
-printf("ScCursor::property <%s>\n", qPrintable(name.toString()));
       SCursor* cursor = qscriptvalue_cast<SCursor*>(object.data());
       if (!cursor)
             return QScriptValue();
@@ -157,14 +158,24 @@ printf("ScCursor::property <%s>\n", qPrintable(name.toString()));
 void ScSCursor::setProperty(QScriptValue &object,
    const QScriptString& name, uint /*id*/, const QScriptValue& value)
       {
-printf("ScCursor::setProperty <%s>\n", qPrintable(name.toString()));
       SCursor* cursor = qscriptvalue_cast<SCursor*>(object.data());
       if (!cursor)
             return;
-      if (name == cursorStaff)
-            cursor->setStaffIdx(value.toInt32());
-      else if (name == cursorVoice)
-            cursor->setVoice(value.toInt32());
+      int val = value.toInt32();
+      if (name == cursorStaff) {
+            if (val < 0)
+                  val = 0;
+            else if (val >= cursor->score()->nstaves())
+                  val = cursor->score()->nstaves() - 1;
+            cursor->setStaffIdx(val);
+            }
+      else if (name == cursorVoice) {
+            if (val < 0)
+                  val = 0;
+            else if (val >= VOICES)
+                  val = VOICES - 1;
+            cursor->setVoice(val);
+            }
       }
 
 //---------------------------------------------------------
@@ -321,6 +332,20 @@ ChordPtr ScSCursorPrototype::chord()
       }
 
 //---------------------------------------------------------
+//   measure
+//    get measure at current position
+//---------------------------------------------------------
+
+MeasurePtr ScSCursorPrototype::measure()
+      {
+      SCursor* cursor = thisSCursor();
+      Measure* m = cursor->cr()->measure();
+      if (m == 0)
+            return 0;
+      return m;
+      }
+
+//---------------------------------------------------------
 //   isChord
 //---------------------------------------------------------
 
@@ -368,6 +393,32 @@ bool ScSCursorPrototype::nextMeasure()
       if (staffIdx >= 0) {
             int track = staffIdx * VOICES + cursor->voice();
             while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0) || curMeasure==seg->measure()))
+                  seg = seg->next1();
+            }
+      cursor->setSegment(seg);
+      return seg != 0;
+      }
+
+//---------------------------------------------------------
+//   nextMeasure
+//    go to first segment of next measure
+//    return false if end of score is reached
+//---------------------------------------------------------
+
+bool ScSCursorPrototype::nextMeasure()
+      {
+      SCursor* cursor = thisSCursor();
+      Measure* m = cursor->segment()->measure();
+      m = m->nextMeasure();
+      if (m == 0) {
+            cursor->setSegment(0);
+            return false;
+            }
+      Segment* seg = m->first();
+      int staffIdx = cursor->staffIdx();
+      if (staffIdx >= 0) {
+            int track = staffIdx * VOICES + cursor->voice();
+            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
       cursor->setSegment(seg);

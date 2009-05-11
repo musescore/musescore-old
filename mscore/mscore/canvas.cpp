@@ -1147,11 +1147,14 @@ void Canvas::setCursorOn(bool val)
 void Canvas::setShadowNote(const QPointF& p)
       {
       Position pos;
-      bool divideSegment = score()->inputState().tickLen >= (division/2);
-      if (!score()->getPosition(&pos, p, divideSegment))
+      if (!score()->getPosition(&pos, p, score()->inputState().voice())) {
+            shadowNote->setVisible(false);
             return;
+            }
 
+      shadowNote->setVisible(true);
       Staff* staff      = score()->staff(pos.staffIdx);
+      shadowNote->setMag(staff->mag());
       Instrument* instr = staff->part()->instrument();
       int notehead      = 0;
       int line          = pos.line;
@@ -1166,7 +1169,7 @@ void Canvas::setShadowNote(const QPointF& p)
             }
       shadowNote->setLine(line);
       shadowNote->setHeadGroup(notehead);
-      shadowNote->setPos(pos.pos.x(), pos.pos.y());
+      shadowNote->setPos(pos.pos);
       }
 
 //---------------------------------------------------------

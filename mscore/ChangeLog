@@ -1,3 +1,9 @@
+11.may (ws)
+      - "colornotes" script example now colors all notes in all staves
+      - make plugin "colornotes" undoable
+      - fixes for note entry with mouse:
+            - fix positions for small staves
+            - fix allowable positions for voices != 0
 10.may (ws)
       - flip stem direction is now undoable
       - remove scCursorMeasure and merge with scCursor

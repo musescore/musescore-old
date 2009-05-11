@@ -4,7 +4,7 @@
 //  $Id:$
 //
 //  Color notehead plugin
-//	Noteheads are colored according to pitch. User can change to color by 
+//	Noteheads are colored according to pitch. User can change to color by
 //  modifying the colors array. First element is C, second C# etc...
 //
 //  Copyright (C)2008 Werner Schweer and others
@@ -55,6 +55,7 @@ function run()
       cursor.staff = 0;
       cursor.voice = 0;
       cursor.rewind();  // set cursor to first chord/rest
+
       var i = 1;
       while (!cursor.eos()) {
             var m = cursor.measure();
@@ -62,10 +63,10 @@ function run()
               m.lineBreak = true;
 			      }else{
 			        m.lineBreak = false;
-            }           
+            }
             cursor.nextMeasure();
             i++;
-      }
+            }
       }
 
 //---------------------------------------------------------

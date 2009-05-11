@@ -4,7 +4,7 @@
 //  $Id:$
 //
 //  Color notehead plugin
-//	Noteheads are colored according to pitch. User can change to color by 
+//	Noteheads are colored according to pitch. User can change to color by
 //  modifying the colors array. First element is C, second C# etc...
 //
 //  Copyright (C)2008 Werner Schweer and others
@@ -54,23 +54,23 @@ function init()
 
 function run()
       {
-      print("script: color names");
+      var cursor = new Cursor(curScore);
+      for (var staff = 0; staff < curScore.staves; ++staff) {
+            cursor.staff = staff;
+            cursor.voice = 0;
+            cursor.rewind();  // set cursor to first chord/rest
 
-      var cursor   = new Cursor(curScore);
-      cursor.staff = 0;
-      cursor.voice = 0;
-      cursor.rewind();  // set cursor to first chord/rest
-
-      while (!cursor.eos()) {
-        if (cursor.isChord()) {
-          for (var i=0; i< cursor.chord().notes() ; i++){
-            var note = cursor.chord().note(i);
-            note.color = new QColor(colors[note.pitch % 12]);
-          }
-        }
-        cursor.next();
+            while (!cursor.eos()) {
+                  if (cursor.isChord()) {
+                        for (var i = 0; i < cursor.chord().notes(); i++) {
+                              var note = cursor.chord().note(i);
+                              note.color = new QColor(colors[note.pitch % 12]);
+                              }
+                        }
+                  cursor.next();
+                  }
+            }
       }
-    }
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed

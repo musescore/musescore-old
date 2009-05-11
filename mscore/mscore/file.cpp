@@ -397,11 +397,13 @@ bool Score::saveAs(bool saveCopy)
                                            tr("MuseScore: Save As");
       QString saveDirectory = saveCopy ? preferences.lastSaveCopyDirectory :
                                          preferences.lastSaveDirectory;
+      selectedFilter = fl[0];
       QString fn = QFileDialog::getSaveFileName(
          0, saveDialogTitle,
          saveDirectory,
          fl.join(";;"),
          &selectedFilter
+//         ,QFileDialog::DontUseNativeDialog
          );
       if (fn.isEmpty())
             return false;
@@ -1662,7 +1664,7 @@ bool Score::savePng(const QString& name)
 //---------------------------------------------------------
 
 bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi){
-      
+
       _printing = !screenshot;             // dont print page break symbols etc.
 
       bool rv = true;
@@ -1678,12 +1680,12 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
             printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
             printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-            
+
             if (transparent)
               printer.fill(0);      // transparent background
             else
               printer.fill(-1);     // white background
-                
+
             double m = convDpi / PDPI;
             QPainter p(&printer);
             canvas()->paintLasso(p, m);
@@ -1718,7 +1720,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
                   printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
                   printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-                  
+
                   if (transparent)
                     printer.fill(0);      // transparent background
                   else
