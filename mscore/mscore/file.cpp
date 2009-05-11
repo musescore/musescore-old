@@ -408,12 +408,15 @@ bool Score::saveAs(bool saveCopy)
       if (fn.isEmpty())
             return false;
 
+      QFileInfo fi(fn);
+      QString ext = fi.suffix();
+
       bool rv = false;
-      if (selectedFilter == fl[0] || selectedFilter == fl[1]) {
+      if (ext == "mscx" || ext == "mscz" || selectedFilter == fl[0] || selectedFilter == fl[1]) {
             // save as mscore *.msc[xz] file
-            if (selectedFilter == fl[0] && !fn.endsWith(".mscz"))
+            if (selectedFilter == fl[0] && (ext != "mscz"))
                   fn.append(".mscz");
-            else if (selectedFilter == fl[1] && !fn.endsWith(".mscx"))
+            else if (selectedFilter == fl[1] && (ext != "mscx"))
                   fn.append(".mscx");
             QFileInfo fi(fn);
             rv = true;
@@ -436,68 +439,68 @@ bool Score::saveAs(bool saveCopy)
                   mscore->updateRecentScores(this);
                   }
             }
-      else if (selectedFilter == fl[2]) {
+      else if (ext == "xml" || selectedFilter == fl[2]) {
             // save as MusicXML *.xml file
             if (!fn.endsWith(".xml"))
                   fn.append(".xml");
             rv = saveXml(fn);
             }
-      else if (selectedFilter == fl[3]) {
+      else if (ext == "mxl" || selectedFilter == fl[3]) {
             // save as compressed MusicXML *.mxl file
             if (!fn.endsWith(".mxl"))
                   fn.append(".mxl");
             rv = saveMxl(fn);
             }
-      else if (selectedFilter == fl[4]) {
+      else if (ext == "mid" || selectedFilter == fl[4]) {
             // save as midi file *.mid
             if (!fn.endsWith(".mid"))
                   fn.append(".mid");
             rv = saveMidi(fn);
             }
-      else if (selectedFilter == fl[5]) {
+      else if (ext == "pdf" || selectedFilter == fl[5]) {
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
             rv = savePsPdf(fn, QPrinter::PdfFormat);
             }
-      else if (selectedFilter == fl[6]) {
+      else if (ext == "ps" || selectedFilter == fl[6]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
             rv = savePsPdf(fn, QPrinter::PostScriptFormat);
             }
-      else if (selectedFilter == fl[7]) {
+      else if (ext == "png" || selectedFilter == fl[7]) {
             // save as png file *.png
             if (!fn.endsWith(".png"))
                   fn.append(".png");
             rv = savePng(fn);
             }
-      else if (selectedFilter == fl[8]) {
+      else if (ext == "svg" || selectedFilter == fl[8]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
             rv = saveSvg(fn);
             }
-      else if (selectedFilter == fl[9]) {
+      else if (ext == "ly" || selectedFilter == fl[9]) {
             // save as lilypond file *.ly
             if (!fn.endsWith(".ly"))
                   fn.append(".ly");
             rv = saveLilypond(fn);
             }
 #ifdef HAS_AUDIOFILE
-      else if (selectedFilter == fl[10]) {
+      else if (ext == "wav" || selectedFilter == fl[10]) {
             // save as wave file *.wav
             if (!fn.endsWith(".wav"))
                   fn.append(".wav");
             rv = saveWav(fn);
             }
-      else if (selectedFilter == fl[11]) {
+      else if (ext == "flac" || selectedFilter == fl[11]) {
             // save as lossless compressed audio file *.flac
             if (!fn.endsWith(".flac"))
                   fn.append(".flac");
             rv = saveFlac(fn);
             }
-      else if (selectedFilter == fl[12]) {
+      else if (ext == "ogg" || selectedFilter == fl[12]) {
             // save as compressed audio file *.ogg
             if (!fn.endsWith(".ogg"))
                   fn.append(".ogg");
@@ -509,9 +512,9 @@ bool Score::saveAs(bool saveCopy)
                qPrintable(selectedFilter));
             return false;
             }
-      // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
-      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")) && !saveCopy)
-            _undo->setClean();
+//    after a successful saveas (compressed) MusicXML, clear the "dirty" flag
+//      if (rv && ((ext == "xml") || (ext == "mxl")) && !saveCopy)
+//            _undo->setClean();
 
       QFileInfo fi(fn);
       if (saveCopy)
