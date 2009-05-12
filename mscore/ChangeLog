@@ -1,3 +1,5 @@
+12.may (ws)
+      - added qtsingleapplication-2.6
 11.may (ws)
       - modified "save as"; should work, if the user choosen filter
         (==filetype) returns nothing

@@ -25,6 +25,7 @@
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
 #include "ui_aboutbox.h"
+#include "singleapp/src/qtsingleapplication.h"
 
 class Canvas;
 class Element;
@@ -312,6 +313,7 @@ class MuseScore : public QMainWindow {
       void setPos(int tick);
       void searchTextChanged(const QString& s);
       void pluginTriggered(int);
+      void handleMessage(const QString& message);
 
    public:
       MuseScore();
