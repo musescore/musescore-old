@@ -376,28 +376,6 @@ bool ScSCursorPrototype::next()
       cursor->setSegment(seg);
       return seg != 0;
       }
-      
-//---------------------------------------------------------
-//   nextMeasure
-//    go to first segment of next measure
-//    return false if end of score is reached
-//---------------------------------------------------------
-
-bool ScSCursorPrototype::nextMeasure()
-      {
-      SCursor* cursor = thisSCursor();
-      Segment* seg = cursor->segment();
-      Measure* curMeasure = seg->measure();
-      seg = seg->next1();
-      int staffIdx = cursor->staffIdx();
-      if (staffIdx >= 0) {
-            int track = staffIdx * VOICES + cursor->voice();
-            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0) || curMeasure==seg->measure()))
-                  seg = seg->next1();
-            }
-      cursor->setSegment(seg);
-      return seg != 0;
-      }
 
 //---------------------------------------------------------
 //   nextMeasure
@@ -481,18 +459,5 @@ void ScSCursorPrototype::addChord(ChordPtr c)
       c->setParent(seg);
       c->setTrack(track);
       score->undoAddElement(c);
-      }
-
-//---------------------------------------------------------
-//   addChord
-//---------------------------------------------------------
-
-MeasurePtr ScSCursorPrototype::measure()
-      {          
-          SCursor* cursor = thisSCursor();
-          if (cursor->segment()){
-            return cursor->segment()->measure();
-          }
-          return 0;
       }
 

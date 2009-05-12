@@ -516,7 +516,6 @@ bool Score::saveAs(bool saveCopy)
 //      if (rv && ((ext == "xml") || (ext == "mxl")) && !saveCopy)
 //            _undo->setClean();
 
-      QFileInfo fi(fn);
       if (saveCopy)
             preferences.lastSaveCopyDirectory = fi.absolutePath();
       else
