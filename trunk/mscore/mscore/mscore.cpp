@@ -1466,6 +1466,8 @@ void setMscoreLocale(QString localeName)
 
 int main(int argc, char* argv[])
       {
+      QtSingleApplication app("mscore", argc, argv);
+
 //      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
       QSettings::setDefaultFormat(QSettings::IniFormat);
@@ -1474,7 +1476,7 @@ int main(int argc, char* argv[])
             midiActionMap[i] = 0;
 
       Harmony::initHarmony();
-      QApplication app(argc, argv);
+//      QApplication app(argc, argv);
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
@@ -1538,7 +1540,20 @@ int main(int argc, char* argv[])
                   }
             }
       argc -= optind;
+      if (argc > 0) {
+            int ok = true;
+            for (int i = 0; i < argc; ++i) {
+                  QString message = QString::fromLocal8Bit(argv[optind + i]);
+                  if (!app.sendMessage(message)) {
+                        ok = false;
+                        break;
+                        }
+                  }
+            if (ok)
+                  return 0;
+            }
       ++argc;
+
 /**/
       mscoreGlobalShare = getSharePath();
       if (debugMode)
@@ -1664,6 +1679,10 @@ int main(int argc, char* argv[])
       mscore = new MuseScore();
       gscore = new Score(defaultStyle);
       mscore->readSettings();
+
+      QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
+         mscore, SLOT(handleMessage(const QString&)));
+      app.setActivationWindow(mscore, false);
 
       //-------------------------------
       //  load scores
@@ -1824,7 +1843,7 @@ int main(int argc, char* argv[])
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
-      return qApp->exec();
+      return app.exec();
       }
 
 //---------------------------------------------------------
@@ -2361,5 +2380,20 @@ void MuseScore::endSearch()
       {
       if (cs)
             cs->setState(STATE_NORMAL);
+      }
+
+//---------------------------------------------------------
+//   handleMessage
+//---------------------------------------------------------
+
+void MuseScore::handleMessage(const QString& message)
+      {
+      ((QtSingleApplication*)(qApp))->activateWindow();
+      Score* score = new Score(defaultStyle);
+      score->addViewer(new Canvas);
+      score->read(message);
+      appendScore(score);
+      lastOpenPath = score->fileInfo()->path();
+      setCurrentScore(score);
       }
 

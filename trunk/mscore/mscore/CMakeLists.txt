@@ -102,7 +102,7 @@ QT4_WRAP_CPP (mocs
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h scscore.h scnote.h scchord.h sctext.h scmeasure.h scbytearray.h
-      dynamics.h undo.h textproperties.h 
+      dynamics.h undo.h textproperties.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -219,6 +219,7 @@ if (MINGW)
       awl
       osdabzip
       rtf2html
+      qtsingleapp
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
@@ -284,6 +285,7 @@ else (MINGW)
       awl
       osdabzip
       rtf2html
+      qtsingleapp
       )
    if (HAS_AUDIOFILE)
       target_link_libraries(mscore sndfile)
