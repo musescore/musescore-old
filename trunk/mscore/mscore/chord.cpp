@@ -530,126 +530,6 @@ void Chord::layoutStem1(ScoreLayout* /*layout*/)
       }
 
 //---------------------------------------------------------
-//   layoutStem
-//---------------------------------------------------------
-
-/**
- Layout chord stem and hook.
-*/
-
-void Chord::layoutStem(ScoreLayout* layout)
-      {
-      double _spatium = layout->spatium();
-      System* s       = segment()->measure()->system();
-      if (s == 0)       //DEBUG
-            return;
-      double sy      = s->staff(staffIdx())->bbox().y();
-      Note* upnote   = upNote();
-      Note* downnote = downNote();
-
-      double staffMag = staff()->mag();
-
-      double uppos   = s->staff(staffIdx() + upnote->staffMove())->bbox().y();
-            uppos    = (uppos - sy)/_spatium * 2.0 * staffMag + upnote->line() * staffMag;
-
-      double downpos = s->staff(staffIdx() + downnote->staffMove())->bbox().y();
-            downpos  = (downpos - sy)/_spatium * 2.0 * staffMag + downnote->line() * staffMag;
-
-      //-----------------------------------------
-      //  process stem
-      //-----------------------------------------
-
-      Spatium stemLen;
-      Spatium normalLen(3.5 * staffMag);  // stem length is one octave
-
-      int hookIdx  = _stem ? duration().hooks() : 0;
-
-      if (_noteType != NOTE_NORMAL)
-            stemLen = normalLen * score()->style(ST_graceNoteMag).toDouble();
-      else {
-            double l = 4.0 * staffMag;
-            stemLen  = Spatium((up() ? (uppos - l) : (l - downpos)) * .5);
-
-            //
-            // Stems in the "wrong" direction are shortened progressively.
-            // Exceptions are down stems with hooks to avoid collision of
-            // hook and note head.
-            //
-            bool shortenStem = score()->styleB(ST_shortenStem);
-            if (shortenStem && (stemLen.val() < 0.0) && (up() || hookIdx==0)) {
-                  Spatium progression(score()->styleS(ST_shortStemProgression));
-                  Spatium shortest(score()->styleS(ST_shortestStem) * staffMag);
-
-                  double n = (-stemLen.val()) / (0.5 * staffMag);
-                  stemLen = Spatium((3.5 - n * progression.val()) * staffMag);
-                  if (stemLen < shortest)
-                        stemLen = shortest;
-                  }
-            else if (stemLen < normalLen)
-                  stemLen = normalLen;
-            }
-
-      int extraStemLen = hookIdx - 2;
-      if (_tremolo && !_tremolo->twoNotes()) {
-            int extraStemLen2 = _tremolo->subtype();
-            if (hookIdx == 0)
-                  extraStemLen2 -= 1;
-            if (extraStemLen2 > extraStemLen)
-                  extraStemLen = extraStemLen2;
-            }
-
-      if (extraStemLen > 0)
-            stemLen += extraStemLen * Spatium(.6 * staffMag);
-
-      double headCorrection = 0.2;
-
-      stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
-
-      QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
-
-      if (up())
-            stemLen *= -1.0;
-
-      if (_stem) {
-            _stem->setLen(stemLen);
-            _stem->setPos(npos);
-            }
-
-      if (_stemSlash) {
-            // TODO: does not work for chords
-            double x = _stem->pos().x();
-            double y = _stem->pos().y();
-            double l = stemLen.point() * .5;
-            y += l;
-            double h2 = l * .5;
-            double w  = upnote->headWidth() * .7;
-            _stemSlash->setLine(QLineF(QPointF(x + w, y + h2), QPointF(x - w, y - h2)));
-            }
-
-      //-----------------------------------------
-      //    process tremolo
-      //-----------------------------------------
-
-      if (_tremolo)
-            _tremolo->layout(layout);
-
-      //-----------------------------------------
-      //  process hook
-      //-----------------------------------------
-
-      if (hookIdx) {
-            if (!up())
-                  hookIdx = -hookIdx;
-            _hook->setSubtype(hookIdx);
-            qreal lw  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
-            QPointF p = npos + QPointF(lw, point(_stem->stemLen()));
-            _hook->setPos(p);
-            }
-      else
-            setHook(0);
-      }
-
-//---------------------------------------------------------
 //   addLedgerLine
 ///   Add a ledger line to a chord.
 ///   \arg x          center of note head
@@ -657,39 +537,83 @@ void Chord::layoutStem(ScoreLayout* layout)
 ///   \arg line       vertical position of line
 //---------------------------------------------------------
 
-void Chord::addLedgerLine(double x, int staffIdx, int line, int extend)
+void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       {
-      double staffMag = score()->staff(staffIdx)->mag();
+      double hw       = upNote()->headWidth();
+      double hw2      = hw * .5;
       LedgerLine* h   = new LedgerLine(score());
+      double staffMag = score()->staff(staffIdx)->mag();
       Spatium len     = h->len() * staffMag;
+
       if (_noteType != NOTE_NORMAL)
             len *= score()->style(ST_graceNoteMag).toDouble();
+      x -= len.point() * .5;
+
+      x += (lr & 1) ? -hw2 : hw2;
+      if (lr == 3)
+            len += hw;
+
       h->setParent(this);
       h->setTrack(staffIdx * VOICES);
 
-      double ho = 0.0;
       //
       // Experimental:
       //  shorten ledger line to avoid collisions with accidentals
       //
 
-      x -= len.point() * .5;
-      if (extend) {
-            double hw = notes.begin()->second->headWidth();
-            if (extend == -1)
-                  x  -= hw;
-            len += hw;
-            }
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
             if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidental()) {
-                  ho   = _spatium * .25 * staffMag;
+                  x += _spatium * .25 * staffMag;
                   len -= Spatium(.25) * staffMag;
+                  break;
                   }
             }
       h->setLen(len);
-      h->setPos(x + ho, _spatium * .5 * line * staffMag);
+      h->setPos(x, _spatium * .5 * line * staffMag);
       _ledgerLines.push_back(h);
+      }
+
+//---------------------------------------------------------
+//   addLedgerLines
+//---------------------------------------------------------
+
+void Chord::addLedgerLines(double x, int move)
+      {
+      int uppos   = 1000;
+      int ulr = 0;
+      int idx = staffIdx() + move;
+      for (criNote in = notes.rbegin(); in != notes.rend(); ++in) {
+            const Note* note = in->second;
+            if (note->staffMove() != move)
+                  continue;
+            int l = note->line();
+            if (l >= 0)
+                  break;
+            for (int i = (uppos+1) & ~1; i < l; i += 2)
+                  addLedgerLine(x, idx, i, ulr);
+            ulr |= (up() ^ note->mirror()) ? 0x1 : 0x2;
+            uppos = l;
+            }
+      for (int i = (uppos+1) & ~1; i <= -2; i += 2)
+            addLedgerLine(x, idx, i, ulr);
+
+      int downpos = -1000;
+      int dlr = 0;
+      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
+            const Note* note = in->second;
+            if (note->staffMove() != move)
+                  continue;
+            int l = note->line();
+            if (l <= 8)
+                  break;
+            for (int i = downpos & ~1; i > l; i -= 2)
+                  addLedgerLine(x, idx, i, dlr);
+            dlr |= (up() ^ note->mirror()) ? 0x1 : 0x2;
+            downpos = l;
+            }
+      for (int i = downpos & ~1; i >= 10; i -= 2)
+            addLedgerLine(x, idx, i, dlr);
       }
 
 //---------------------------------------------------------
@@ -702,8 +626,6 @@ void Chord::layout(ScoreLayout* layout)
             return;
 
       double _spatium  = layout->spatium();
-      Note* upnote     = notes.back();
-      double headWidth = upnote->headWidth();
 
       if (!segment()) {
             //
@@ -719,6 +641,9 @@ void Chord::layout(ScoreLayout* layout)
                   }
             return;
             }
+
+      Note* upnote     = upNote();
+      double headWidth = upnote->headWidth();
 
       //-----------------------------------------
       //  process notes
@@ -777,128 +702,17 @@ void Chord::layout(ScoreLayout* layout)
       _ledgerLines.clear();
 
       //---------------------------------------------------
-      //    moved to upper staff
+      //    create ledger lines for notes moved to
+      //    upper staff
       //---------------------------------------------------
 
-      double x1 = upnote->pos().x() + headWidth * .5; //  - _spatium * staffMag;
-      double x2 = notes.front()->pos().x() + headWidth * .5; // - _spatium * staffMag;
+      double x  = upnote->pos().x();
+      if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
+            x += headWidth;
 
-      int uppos;
-      int downpos;
-      bool upl;
-      bool dol;
-      if (minMove == -1) {
-            uppos   = 1000;
-            downpos = -1000;
-            upl     = false;
-            dol     = false;
-            for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  Note* note = in->second;
-                  if (note->staffMove() == -1) {
-                        int l = note->line();
-                        if (l < uppos) {
-                              uppos = l;
-                              if (uppos < 0 && note->mirror())
-                                    upl = true;
-                              }
-                        if (l > 10 && note->mirror())
-                              dol = true;
-                        if (l > downpos)
-                              downpos = l;
-                        }
-                  }
-
-            if (uppos < 0 || downpos >= 10) {
-                  for (int i = -2; i >= uppos; i -= 2) {
-                        int extend = upl ? -1 : 0;
-                        if (i <= uppos)
-                              extend = 0;
-                        addLedgerLine(x1, staffIdx() - 1, i, extend);
-                        }
-                  for (int i = 10; i <= downpos; i += 2) {
-                        int extend = dol ? 1 : 0;
-                        if (i >= downpos)
-                              extend = 0;
-                        addLedgerLine(x2, staffIdx() - 1, i, extend);
-                        }
-                  }
-            }
-
-      uppos   = 1000;
-      downpos = -1000;
-      upl     = false;
-      dol     = false;
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
-            if (note->staffMove() == 0) {
-                  int l = note->line();
-                  if (l < uppos) {
-                        uppos = l;
-                        if (uppos < 0 && note->mirror())
-                              upl = true;
-                        }
-                  if (l >= 10 && note->mirror())
-                        dol = true;
-                  if (l > downpos)
-                        downpos = l;
-                  }
-            }
-
-      if (uppos < 0 || downpos >= 10) {
-            for (int i = -2; i >= uppos; i -= 2) {
-                  int extend = upl ? -1 : 0;
-                  if (i <= uppos)
-                        extend = 0;
-                  addLedgerLine(x1, staffIdx(), i, extend);
-                  }
-            for (int i = 10; i <= downpos; i += 2) {
-                  int extend = dol ? 1 : 0;
-                  if (i >= downpos)
-                        extend = 0;
-                  addLedgerLine(x2, staffIdx(), i, extend);
-                  }
-            }
-
-      //---------------------------------------------------
-      //    process ledger lines for notes
-      //    moved to lower staff
-      //---------------------------------------------------
-
-      if (maxMove == 1) {
-            uppos   = 1000;
-            downpos = -1000;
-            upl     = false;
-            dol     = false;
-            for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  Note* note = in->second;
-                  if (note->staffMove() == 1) {
-                        int l = note->line();
-                        if (l < uppos) {
-                              uppos = l;
-                              if (uppos < 0 && note->mirror())
-                                    upl = true;
-                              }
-                        if (l >= 10 && note->mirror())
-                              dol = true;
-                        if (l > downpos)
-                              downpos = l;
-                        }
-                  }
-            if (uppos < 0 || downpos >= 10) {
-                  for (int i = -2; i >= uppos; i -= 2) {
-                        int extend = upl ? -1 : 0;
-                        if (i <= uppos)
-                              extend = 0;
-                        addLedgerLine(x1, staffIdx() + 1, i, extend);
-                        }
-                  for (int i = 10; i <= downpos; i += 2) {
-                        int extend = dol ? 1 : 0;
-                        if (i >= downpos)
-                              extend = 0;
-                        addLedgerLine(x2, staffIdx() + 1, i, extend);
-                        }
-                  }
-            }
+      addLedgerLines(x, -1);     // notes moved to upper staff
+      addLedgerLines(x, 0);
+      addLedgerLines(x, 1);      // notes moved to lower staff
 
       foreach(LedgerLine* l, _ledgerLines)
             l->layout(layout);
@@ -1050,6 +864,7 @@ Note* Chord::selectedNote() const
 
 void Chord::write(Xml& xml, int startTick, int endTick) const
       {
+#if 0
       int oldTickLen = tickLen();
       int totalLen   = oldTickLen;
       if (xml.clipboardmode) {
@@ -1060,6 +875,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
                   }
             }
       setTickLen(totalLen);   // set temporary new tickLen
+#endif
 
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
@@ -1106,9 +922,12 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
       if (_tremolo)
             _tremolo->write(xml);
       xml.etag();
+      xml.curTick = tick() + tickLen();
+#if 0
       xml.curTick = tick() + totalLen;
       if (xml.clipboardmode)
             setTickLen(oldTickLen);
+#endif
       }
 
 //---------------------------------------------------------
@@ -1495,4 +1314,99 @@ void Chord::setMag(double val)
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->setMag(val);
       }
+
+//---------------------------------------------------------
+//   layoutStem
+//---------------------------------------------------------
+
+/**
+ Layout chord stem and hook.
+*/
+
+void Chord::layoutStem(ScoreLayout* layout)
+      {
+      System* s = segment()->measure()->system();
+      if (s == 0)       //DEBUG
+            return;
+
+      if (_stem) {
+            Spatium stemLen;
+            QPointF npos;
+
+            int hookIdx      = duration().hooks();
+            Note* upnote     = upNote();
+            Note* downnote   = downNote();
+            double ul        = upnote->line() * .5;
+            double dl        = downnote->line() * .5;
+            bool shortenStem = score()->styleB(ST_shortenStem);
+            Spatium progression(score()->styleS(ST_shortStemProgression));
+            Spatium shortest(score()->styleS(ST_shortestStem));
+
+            double normalStemLen = 3.5;
+            if (_noteType != NOTE_NORMAL)
+                  normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
+
+            if (up()) {
+                  double dy  = dl + downnote->stemYoff(true);
+                  double sel = ul - normalStemLen;
+
+                  if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
+                        sel -= sel  * progression.val();
+                  if (sel > 2.0)
+                        sel = 2.0;
+                  npos       = downnote->stemPos(true);
+                  stemLen    = Spatium(sel - dy);
+                  if (-stemLen < shortest)
+                        stemLen = -shortest;
+                  }
+            else {
+                  double uy  = ul + upnote->stemYoff(false);
+                  double sel = dl + normalStemLen;
+
+                  if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
+                        sel -= (sel - 4.0)  * progression.val();
+                  if (sel < 2.0)
+                        sel = 2.0;
+                  npos       = upnote->stemPos(false);
+                  stemLen    = Spatium(sel - uy);
+                  if (stemLen < shortest)
+                        stemLen = shortest;
+                  }
+
+            _stem->setLen(stemLen * mag());
+            _stem->setPos(npos);
+
+            if (_stemSlash) {
+                  // TODO: does not work for chords
+                  double x = _stem->pos().x();
+                  double y = _stem->pos().y();
+                  double l = stemLen.point() * .5;
+                  y += l;
+                  double h2 = l * .5;
+                  double w  = upnote->headWidth() * .7;
+                  _stemSlash->setLine(QLineF(QPointF(x + w, y + h2), QPointF(x - w, y - h2)));
+                  }
+
+            if (hookIdx) {
+                  if (!up())
+                        hookIdx = -hookIdx;
+                  _hook->setSubtype(hookIdx);
+                  qreal lw  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
+                  QPointF p = npos + QPointF(lw, point(_stem->stemLen()));
+                  _hook->setPos(p);
+                  }
+            else
+                  setHook(0);
+            }
+      else
+            setHook(0);
+
+      //-----------------------------------------
+      //    process tremolo
+      //-----------------------------------------
+
+      if (_tremolo)
+            _tremolo->layout(layout);
+      }
+
 

@@ -106,7 +106,6 @@ Seq::~Seq()
 void Seq::setScore(Score* s)
       {
       if (cs) {
-printf("STOP\n");
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             cs = s;
             stop();

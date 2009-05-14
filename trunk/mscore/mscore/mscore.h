@@ -249,7 +249,6 @@ class MuseScore : public QMainWindow {
       void playVisible(bool flag);
       void launchBrowser(const QString whereTo);
 
-      void saveScoreList();
       void loadScoreList();
       void editInstrList();
       void symbolMenu();

@@ -1,3 +1,11 @@
+14.may (ws)
+      - fix too wide ledger lines
+      - fix for qtsingleapplication
+      - fix for copy/paste tie
+      - Stem direction now selectable in chord context dialog.
+      - Note head position (left/right of stem) can now be overridden by
+        user. This supports notation of "Griffschrift" for "Steirische
+        Harmonika"  (http://en.wikipedia.org/wiki/Steirische_Harmonika)
 12.may (ws)
       - added qtsingleapplication-2.6
 11.may (ws)

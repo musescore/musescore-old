@@ -63,7 +63,10 @@ extern qreal DPMM;      // logical dots/mm
 enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
 // used for stem and slur:
-enum Direction { AUTO, UP, DOWN };
+enum Direction  { AUTO, UP, DOWN };
+
+// used for note head mirror
+enum DirectionH { DH_AUTO, DH_LEFT, DH_RIGHT };
 
 enum Placement {
       PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW, PLACE_LEFT

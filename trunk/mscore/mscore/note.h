@@ -85,7 +85,10 @@ class Note : public Element {
 
       char _userAccidental;    ///< editorial accidental type (0-15)
       char _headGroup;
+
       bool _mirror;           ///< True if note is mirrored at stem.
+      DirectionH _userMirror; ///< user override of mirror
+
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads are not shown
@@ -166,7 +169,9 @@ class Note : public Element {
       virtual void read(QDomElement);
       void write(Xml& xml, int start, int end) const;
       virtual void write(Xml& xml) const { write(xml, 0, 0); }
+
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
+      double stemYoff(bool upFlag) const;
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
@@ -188,6 +193,9 @@ class Note : public Element {
 
       int subchannel() const        { return _subchannel; }
       void setSubchannel(int val)   { _subchannel = val;  }
+
+      DirectionH userMirror() const    { return _userMirror; }
+      void setUserMirror(DirectionH d) { _userMirror = d; }
 
       virtual void toDefault();
       virtual void setMag(double val);

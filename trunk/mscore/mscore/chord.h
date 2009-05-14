@@ -159,6 +159,7 @@ class Chord : public ChordRest {
       virtual qreal downPos() const;
       virtual qreal centerX() const;
       void addLedgerLine(double x, int staffIdx, int line, int extend);
+      void addLedgerLines(double x, int move);
 
    public:
       Chord(Score*);

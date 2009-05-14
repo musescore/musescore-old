@@ -983,6 +983,22 @@ class ChangeTuning : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   ChangeUserMirror
+//---------------------------------------------------------
+
+class ChangeUserMirror : public UndoCommand {
+      Note* note;
+      DirectionH dir;
+
+      void flip();
+
+   public:
+      ChangeUserMirror(Note* n, DirectionH d) : note(n), dir(d) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
 //   ChangePageFormat
 //---------------------------------------------------------
 

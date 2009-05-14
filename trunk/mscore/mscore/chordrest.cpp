@@ -345,7 +345,7 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
       int idx          = staff()->rstaff();
       qreal x          = centerX();
 
-      double distance  = point(score()->styleS(ST_propertyDistance)) * mag();
+//      double distance  = point(score()->styleS(ST_propertyDistance)) * mag();
       double distance1 = point(score()->styleS(ST_propertyDistanceHead)) * mag();
       double distance2 = point(score()->styleS(ST_propertyDistanceStem)) * mag();
 

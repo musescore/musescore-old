@@ -174,6 +174,8 @@ static void printVersion(const char* prog)
 #endif
       }
 
+static const int RECENT_LIST_SIZE = 10;
+
 //---------------------------------------------------------
 //   closeEvent
 //---------------------------------------------------------
@@ -189,6 +191,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         ev->ignore();
                         return;
                         }
+                  //
+                  // if score is still dirty, the the user has discareded the
+                  // score and we can remove it from the list
+                  //
+                  if (score->created() && score->dirty())
+                        removeList.append(score);
                   }
             }
       // remove all new created/not save score so they are
@@ -197,7 +205,23 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       foreach(Score* score, removeList)
             scoreList.removeAll(score);
 
-      saveScoreList();
+      // save score list
+      QSettings settings;
+      for (int i = 0; i < RECENT_LIST_SIZE; ++i)
+            settings.setValue(QString("recent-%1").arg(i), recentScores.value(i));
+
+      settings.setValue("scores", scoreList.size());
+      int curScore = scoreList.indexOf(cs);
+      if (curScore == -1)  // cs removed if new created and not modified
+            curScore = 0;
+      settings.setValue("currentScore", curScore);
+
+      int idx = 0;
+      foreach(Score* s, scoreList) {
+            settings.setValue(QString("score-%1").arg(idx), s->fileInfo()->absoluteFilePath());
+            ++idx;
+            }
+
       writeSettings();
       if (pageListEdit)
             pageListEdit->writeSettings();
@@ -369,7 +393,7 @@ MuseScore::MuseScore()
          << "system-break" << "page-break"
          << "edit-element"
          << "mag" << "reset-positions" << "inspector" << "script-debug"
-         << "backspace" << "find" << "zoomin" << "zoomout"
+         << "backspace" << "find" << "zoomin" << "zoomout" << "mirror-note"
          ;
 
       foreach(const QString& s, sl) {
@@ -1001,30 +1025,6 @@ void MuseScore::editTextStyle()
       dialog.exec();
       }
 
-static const int RECENT_LIST_SIZE = 10;
-
-//---------------------------------------------------------
-//   saveScoreList
-//---------------------------------------------------------
-
-void MuseScore::saveScoreList()
-      {
-      QSettings settings;
-      for (int i = 0; i < RECENT_LIST_SIZE; ++i)
-            settings.setValue(QString("recent-%1").arg(i), recentScores.value(i));
-
-      settings.setValue("scores", scoreList.size());
-      int curScore = scoreList.indexOf(cs);
-      if (curScore == -1)  // cs removed if new created and not modified
-            curScore = 0;
-      settings.setValue("currentScore", curScore);
-      int idx = 0;
-      foreach(Score* s, scoreList) {
-            settings.setValue(QString("score-%1").arg(idx), s->fileInfo()->absoluteFilePath());
-            ++idx;
-            }
-      }
-
 //---------------------------------------------------------
 //   loadScoreList
 //    read list of "Recent Scores"
@@ -1544,7 +1544,8 @@ int main(int argc, char* argv[])
             int ok = true;
             for (int i = 0; i < argc; ++i) {
                   QString message = QString::fromLocal8Bit(argv[optind + i]);
-                  if (!app.sendMessage(message)) {
+                  QFileInfo fi(message);
+                  if (!app.sendMessage(fi.absoluteFilePath())) {
                         ok = false;
                         break;
                         }
@@ -1552,6 +1553,8 @@ int main(int argc, char* argv[])
             if (ok)
                   return 0;
             }
+      else
+            app.sendMessage("");
       ++argc;
 
 /**/
@@ -2388,6 +2391,8 @@ void MuseScore::endSearch()
 
 void MuseScore::handleMessage(const QString& message)
       {
+      if (message.isEmpty())
+            return;
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(defaultStyle);
       score->addViewer(new Canvas);
