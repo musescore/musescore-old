@@ -1997,6 +1997,8 @@ if (debugMode)
             return;
             }
 
+// printf("drop <%s>\n", data.data());
+
       QDomDocument doc;
       int line, column;
       QString err;

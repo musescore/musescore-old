@@ -29,7 +29,7 @@ class Note;
 //   ChordProperties
 //---------------------------------------------------------
 
-class ChordProperties : public QDialog, public Ui::ChordPropertyBase {
+class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       Q_OBJECT
 
    public:
@@ -39,6 +39,8 @@ class ChordProperties : public QDialog, public Ui::ChordPropertyBase {
       double leadingSpace() const;
       double trailingSpace() const;
       double tuning() const;
+      int getUserMirror() const;
+      int getStemDirection() const;
       };
 
 #endif

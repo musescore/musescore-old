@@ -95,6 +95,7 @@ Note::Note(Score* s)
       _velocity       = 80;
       _accidental     = 0;
       _mirror         = false;
+      _userMirror     = DH_AUTO;
       _line           = 0;
       _staffMove      = 0;
       _userAccidental = ACC_NONE;
@@ -126,6 +127,7 @@ Note::Note(const Note& n)
       _head           = n._head;
       _headGroup      = n._headGroup;
       _mirror         = n._mirror;
+      _userMirror     = n._userMirror;
 
       foreach(Element* e, n._el)
             add(e->clone());
@@ -434,6 +436,23 @@ QPointF Note::stemPos(bool upFlag) const
       }
 
 //---------------------------------------------------------
+//   stemYoff
+//---------------------------------------------------------
+
+double Note::stemYoff(bool upFlag) const
+      {
+      if (_mirror)
+            upFlag = !upFlag;
+      //
+      // TODO: implement table for all note heads
+      //
+      qreal yo = .2 * mag();
+      if (_headGroup == 5)
+            yo = 1.0 * mag();
+      return upFlag ? -yo : yo;
+      }
+
+//---------------------------------------------------------
 //   setAccidentalSubtype
 //---------------------------------------------------------
 
@@ -544,9 +563,15 @@ bool Note::isSimple(Xml& xml) const
       QList<Prop> pl = Element::properties(xml);
       if (_accidental && (!_accidental->userOff().isNull() || !_accidental->visible()))
             return false;
-      return (_tuning == 0.0 && pl.empty() && _el.empty() && _tieFor == 0 && _staffMove == 0
+      return (_tuning == 0.0
+         && pl.empty()
+         && _el.empty()
+         && _tieFor == 0
+         && _staffMove == 0
          && _headGroup == 0
-         && _userAccidental == 0);
+         && _userAccidental == 0
+         && _userMirror == DH_AUTO
+         );
       }
 
 //---------------------------------------------------------
@@ -584,6 +609,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
                   xml.tag("move", _staffMove);
             if (_headGroup != 0)
                   xml.tag("head", _headGroup);
+            if (_userMirror != DH_AUTO)
+                  xml.tag("mirror", _userMirror);
             xml.etag();
             }
       }
@@ -679,6 +706,8 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "move")
                   _staffMove = i;
+            else if (tag == "mirror")
+                  _userMirror = DirectionH(i);
             else if (Element::readProperties(e))
                   ;
             else
@@ -1101,8 +1130,12 @@ void Note::propertyAction(const QString& s)
                         }
                   if (vp.noStem() != chord()->noStem())
                         score()->undoChangeChordNoStem(chord(), vp.noStem());
+                  if (vp.getStemDirection() != chord()->stemDirection())
+                        score()->undo()->push(new SetStemDirection(chord(), Direction(vp.getStemDirection())));
                   if (vp.tuning() != tuning())
                         score()->undoChangeTuning(this, vp.tuning());
+                  if (DirectionH(vp.getUserMirror()) != userMirror())
+                        score()->undoChangeUserMirror(this, DirectionH(vp.getUserMirror()));
                   }
             }
       else if (s == "tupletProps") {

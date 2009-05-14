@@ -76,6 +76,8 @@ class Spatium {
             _val *= d;
             return *this;
             }
+      Spatium operator-() const { return Spatium(-_val); }
+
       friend Spatium spatium(double v);
       friend double point(Spatium s);
       };

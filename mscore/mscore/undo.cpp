@@ -739,6 +739,11 @@ void Score::undoChangeTuning(Note* n, double v)
       _undo->push(new ChangeTuning(n, v));
       }
 
+void Score::undoChangeUserMirror(Note* n, DirectionH d)
+      {
+      _undo->push(new ChangeUserMirror(n, d));
+      }
+
 //---------------------------------------------------------
 //   undoChangePageFormat
 //---------------------------------------------------------
@@ -1912,6 +1917,17 @@ void ChangeTuning::flip()
       double ot = note->tuning();
       note->setTuning(tuning);
       tuning = ot;
+      }
+
+//---------------------------------------------------------
+//   ChangeUserMirror
+//---------------------------------------------------------
+
+void ChangeUserMirror::flip()
+      {
+      DirectionH d = note->userMirror();
+      note->setUserMirror(dir);
+      dir = d;
       }
 
 //---------------------------------------------------------

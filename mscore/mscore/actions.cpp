@@ -1963,6 +1963,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TR_NOOP("Zoom Out")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "mirror-note",
+         QT_TR_NOOP("mirror note head"),
+         Qt::SHIFT + Qt::Key_X,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("mirror note head"),
+         QT_TR_NOOP("mirror note head"),
+         &flipIcon
+         ),
       Shortcut(0, "", "", QKeySequence::UnknownKey),
       };
 

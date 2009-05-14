@@ -437,13 +437,13 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             incIdx   = -1;
             endIdx   = -1;
             }
+
       bool moveLeft = false;
       int ll        = 1000;      // line distance to previous note head
       bool isLeft   = notes[startIdx]->chord()->isUp();
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
       int lastHead  = -1;
-      // int lastTicks = -1;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
@@ -459,7 +459,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             bool sameHead = (ll == line) && (head == lastHead);
 
             Chord* chord = note->chord();
-            if (conflict && (nmirror == mirror)) {
+            if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
                         chord->setXpos(0.0);
                         if (ticks > notes[idx-1]->chord()->tickLen()) {
@@ -483,15 +483,21 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                   note->setHidden(false);
                   }
 
-            mirror = nmirror;
+            if (note->userMirror() == DH_AUTO) {
+                  mirror = nmirror;
+                  }
+            else {
+                  mirror = note->chord()->isUp();
+                  if (note->userMirror() == DH_LEFT)
+                        mirror = !mirror;
+                  }
             note->setMirror(mirror);
-            if (mirror)
+            if (mirror && !note->chord()->isUp())
                   moveLeft = true;
 
             move1    = move;
             ll       = line;
             lastHead = head;
-            // lastTicks = ticks;
             }
 
       //---------------------------------------------------

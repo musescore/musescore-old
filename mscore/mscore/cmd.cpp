@@ -23,6 +23,7 @@
  Handling of several GUI commands.
 */
 
+#include "globals.h"
 #include "score.h"
 #include "utils.h"
 #include "key.h"
@@ -2405,6 +2406,8 @@ void Score::cmd(const QString& cmd)
                   toDefault();
             else if (cmd == "reset-stretch")
                   resetUserStretch();
+            else if (cmd == "mirror-note")
+                  cmdMirrorNoteHead();
             else if (cmd == "")
                   ;
             else
@@ -2957,5 +2960,23 @@ void Score::selectMove(const QString& cmd)
                   adjustCanvasPosition(el, false);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   cmdMirrorNoteHead
+//---------------------------------------------------------
+
+void Score::cmdMirrorNoteHead()
+      {
+      Element* e = getSelectedElement();
+      if (e->type() != NOTE)
+            return;
+      Note* note = static_cast<Note*>(e);
+      DirectionH d = note->userMirror();
+      if (d == DH_AUTO)
+            d = note->chord()->isUp() ? DH_RIGHT : DH_LEFT;
+      else
+            d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
+      undoChangeUserMirror(note, d);
       }
 

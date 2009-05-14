@@ -463,6 +463,7 @@ class Score : public QObject {
       void undoChangeBracketSpan(Staff* staff, int column, int span);
       void undoChangeTuning(Note*, double);
       void undoChangePageFormat(PageFormat*, double spatium);
+      void undoChangeUserMirror(Note*, DirectionH);
 
       Note* setNote(int tick, int track, int pitch, int len, int headGroup = 0,
          Direction stemDirection = AUTO);
@@ -760,6 +761,7 @@ class Score : public QObject {
 
       void nextInputPos(ChordRest* cr);
       void setInputPos(ChordRest* cr);
+      void cmdMirrorNoteHead();
       };
 
 extern Score* gscore;
