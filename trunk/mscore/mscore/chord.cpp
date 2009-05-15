@@ -583,7 +583,8 @@ void Chord::addLedgerLines(double x, int move)
       int uppos   = 1000;
       int ulr = 0;
       int idx = staffIdx() + move;
-      for (criNote in = notes.rbegin(); in != notes.rend(); ++in) {
+      // for (criNote in = notes.rbegin(); in != notes.rend(); ++in) {
+      for (riNote in = notes.rbegin(); in != notes.rend(); ++in) {
             const Note* note = in->second;
             if (note->staffMove() != move)
                   continue;
