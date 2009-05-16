@@ -283,6 +283,10 @@ static void readInstrumentGroup(QDomElement e)
                   t->read(group, e);
                   instrumentTemplates.push_back(t);
                   }
+            else if (tag == "ref") {
+                  QString name = e.text();
+printf("instr ref <%s>\n", qPrintable(name));
+                  }
             else
                   domError(e);
             }

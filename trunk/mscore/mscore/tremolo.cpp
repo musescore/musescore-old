@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include "tremolo.h"
-#include "layout.h"
 #include "score.h"
 #include "style.h"
 #include "chord.h"
@@ -88,7 +87,7 @@ void Tremolo::layout(ScoreLayout* layout)
       if (stem) {
             x = stem->pos().x();
             y  = stem->pos().y();
-            h  = stem->stemLen().point();
+            h  = stem->stemLen();
             }
       else {
             // center tremolo above note

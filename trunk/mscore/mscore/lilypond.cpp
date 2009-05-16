@@ -20,7 +20,6 @@
 
 #include "score.h"
 #include "element.h"
-#include "layout.h"
 #include "part.h"
 #include "staff.h"
 #include "note.h"

@@ -107,32 +107,32 @@ class Element {
 
       int _subtype;
 
-      int _track;               ///< staffIdx * VOICES + voice
-                                ///< -1 if this is a system element
+      int _track;                 ///< staffIdx * VOICES + voice
+                                  ///< -1 if this is a system element
 
       int _tick;
       QColor _color;
-      double _mag;              ///< standard magnification (derived value)
+      double _mag;                ///< standard magnification (derived value)
 
       void init();
 
    protected:
       Score* _score;
-      QPointF _pos;             ///< Reference position, relative to _parent.
-                                ///< Usually set from layout().
+      QPointF _pos;               ///< Reference position, relative to _parent.
+                                  ///< Usually set from layout().
       Align  _align;
       double _xoff, _yoff;
       double _rxoff, _ryoff;
       OffsetType _offsetType;
 
-      QPointF _userOff;         ///< Offset from normal layout position:
-                                ///< user dragged object this amount.
-                                ///< In Spatium ("space") units!
-      int _mxmlOff;             ///< MusicXML offset in ticks.
-                                ///< Note: interacts with userXoffset.
+      QPointF _userOff;           ///< Offset from normal layout position:
+                                  ///< user dragged object this amount.
+                                  ///< In Spatium ("space") units!
+      int _mxmlOff;               ///< MusicXML offset in ticks.
+                                  ///< Note: interacts with userXoffset.
 
-      mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
-                                ///< valid after call to layout()
+      mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
+                                  ///< valid after call to layout()
 
    public:
       Element(Score*);
@@ -141,10 +141,12 @@ class Element {
       Element &operator=(const Element&);
       virtual Element* clone() const = 0;
 
-      Score* score() const                    { return _score;  }
-      void setScore(Score* s)                 { _score = s;     }
-      Element* parent() const                 { return _parent; }
-      void setParent(Element* e)              { _parent = e;    }
+      Score* score() const                    { return _score;      }
+      void setScore(Score* s)                 { _score = s;         }
+      Element* parent() const                 { return _parent;     }
+      void setParent(Element* e)              { _parent = e;        }
+
+      double spatium() const;
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
@@ -159,9 +161,9 @@ class Element {
       void setDropTarget(bool f) const        { _dropTarget = f;    }
 
       virtual QPointF ipos() const            { return _pos;        }
-      virtual QPointF pos() const             { return _pos + (_userOff * _spatium);         }
-      virtual double x() const                { return _pos.x() + (_userOff.x() * _spatium); }
-      virtual double y() const                { return _pos.y() + (_userOff.y() * _spatium); }
+      virtual QPointF pos() const;
+      virtual double x() const                { return pos().x();        }
+      virtual double y() const                { return pos().y();        }
       void setPos(const QPointF& p)           { _pos = p;                }
       void setXpos(qreal x)                   { _pos.setX(x);            }
       void setYpos(qreal y)                   { _pos.setY(y);            }
@@ -183,8 +185,8 @@ class Element {
       virtual void setHeight(qreal v)         { return _bbox.setHeight(v); }
       virtual double width() const            { return bbox().width();     }
       virtual void setWidth(qreal v)          { return _bbox.setWidth(v);  }
-      QRectF abbox() const                    { return bbox().translated(canvasPos()); }
-      virtual void setbbox(const QRectF& r) const   { _bbox = r;                 }
+      QRectF abbox() const;
+      virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
       virtual bool contains(const QPointF& p) const;
       bool intersects(const QRectF& r) const;
       virtual QPainterPath shape() const;
@@ -243,8 +245,8 @@ class Element {
 
       // debug functions
       virtual void dump() const;
-      const char* name() const          { return name(type()); }
-      virtual QString userName() const  { return qApp->translate("elementName", name(type())); }
+      const char* name() const;
+      virtual QString userName() const;
       void dumpQPointF(const char*) const;
 
       bool operator>(const Element&) const;
@@ -348,6 +350,8 @@ class Element {
                 || type() == TEMPO_TEXT;
             }
       virtual void textStyleChanged(const QVector<TextStyle*>&) {}
+
+      double point(const Spatium sp) const { return sp.val() * spatium(); }
 
       static const char* name(ElementType type);
       static Element* create(ElementType type, Score*);

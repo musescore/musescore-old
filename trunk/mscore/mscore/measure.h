@@ -95,7 +95,7 @@ class Measure : public MeasureBase {
       Text* _noText;          ///< Measure number text object
 
       double _userStretch;
-      bool _irregular;        ///< Irregular measure, do not count
+      bool _irregular;              ///< Irregular measure, do not count
       bool _breakMultiMeasureRest;  ///< set by user
       bool _breakMMRest;            ///< set by layout
 
@@ -126,7 +126,6 @@ class Measure : public MeasureBase {
       virtual void write(Xml&, int, bool writeSystemElements) const;
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
-      virtual void read(QDomElement);
       void readBox(QDomElement);
       virtual bool startEdit(Viewer*, const QPointF&) { return false; }
 
@@ -142,15 +141,14 @@ class Measure : public MeasureBase {
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
       QList<Beam*>* beams()                { return &_beams;      }
       QList<Tuplet*>* tuplets()            { return &_tuplets;    }
-
-      int    no() const                { return _no;          }
-      bool   irregular() const         { return _irregular;   }
-      void   setIrregular(bool val)    { _irregular = val;    }
-      int    noOffset() const          { return _noOffset;    }
-      Text* noText() const             { return _noText;      }
-      void   setNo(int n)              { _no = n;             }
-      void   setNoOffset(int n)        { _noOffset = n;       }
-      virtual double distance(int i) const      { return staves[i]->distance; }
+      int no() const                       { return _no;          }
+      bool irregular() const               { return _irregular;   }
+      void setIrregular(bool val)          { _irregular = val;    }
+      int noOffset() const                 { return _noOffset;    }
+      Text* noText() const                 { return _noText;      }
+      void setNo(int n)                    { _no = n;             }
+      void setNoOffset(int n)              { _noOffset = n;       }
+      virtual double distance(int i) const { return staves[i]->distance; }
       virtual Spatium userDistance(int i) const;
 
       int size() const                 { return _size;       }

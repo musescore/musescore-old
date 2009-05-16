@@ -20,7 +20,6 @@
 
 #include "volta.h"
 #include "style.h"
-#include "layout.h"
 #include "system.h"
 #include "xml.h"
 #include "score.h"

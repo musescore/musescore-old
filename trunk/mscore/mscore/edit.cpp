@@ -31,7 +31,6 @@
 #include "segment.h"
 #include "staff.h"
 #include "part.h"
-#include "layout.h"
 #include "timesig.h"
 #include "page.h"
 #include "barline.h"
@@ -395,15 +394,30 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
 
       Segment* segment = p.measure->tick2segment(tick);
-      ChordRest* cr    = 0;
-      if (segment)
-            cr = static_cast<ChordRest*>(segment->element(track));
+      if (segment == 0) {
+            printf("cannot put note here, no segment found\n");
+            return;
+            }
+
+      _is.cr = static_cast<ChordRest*>(segment->element(track));
+      if (_is.cr == 0) {
+            Measure* m = segment->measure();
+            if (m->tick() != tick) {
+                  printf("cannot put note here, not at measure start (track %d)\n", track);
+                  return;
+                  }
+            _is.cr = setRest(tick, m->tickLen(), _is.track);
+            }
+      ChordRest* cr = _is.cr;
+      if (cr == 0)
+            return;
 
       bool addToChord = false;
-      int tl = len;
-      if (_is.cr && _is.cr->tuplet())
-            tl = _is.cr->tickLen();
-      if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
+      int tl          = len;
+
+      if (cr->tuplet())
+            tl = cr->tickLen();
+      if (!replace && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
             if (note) {
@@ -438,18 +452,14 @@ void Score::putNote(const QPointF& pos, bool replace)
                   }
             }
 
-      if (_is.cr) {
-            cr = nextChordRest(_is.cr);
-            if ((cr == 0) && (_is.track % VOICES)) {
-                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
-                  int track = (_is.track / VOICES) * VOICES;
-                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
-                  }
-            _is.cr = cr;
-            if (_is.cr) {
-                  emit posChanged(_is.pos());
-                  }
+      _is.cr = nextChordRest(_is.cr);
+      if ((_is.cr == 0) && (_is.track % VOICES)) {
+            Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
+            int track = (_is.track / VOICES) * VOICES;
+            _is.cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
+      if (_is.cr)
+            emit posChanged(_is.pos());
 
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
@@ -534,7 +544,7 @@ void Score::cmdAddSlur(Note* note)
       Slur* slur = new Slur(this);
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
-      slur->setParent(_layout);
+      slur->setParent(&_layout);
       cmdAdd(slur);
 
       slur->layout(layout());
@@ -640,7 +650,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
       pin->setTrack(cr->track());
-      pin->setParent(_layout);
+      pin->setParent(&_layout);
       pin->layout(layout());
       cmdAdd(pin);
       if (!noteEntryMode())
@@ -768,7 +778,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       else if (s->anchor() == ANCHOR_PARENT) {
 #endif
             bool foundPage = false;
-            foreach (Page* page, _layout->pages()) {
+            foreach (Page* page, _layout.pages()) {
                   if (page->contains(pos)) {
                         const QList<System*>* sl = page->systems();
                         if (sl->isEmpty()) {

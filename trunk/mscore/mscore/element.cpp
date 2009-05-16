@@ -33,7 +33,6 @@
 #include "sym.h"
 #include "symbol.h"
 #include "clef.h"
-#include "layout.h"
 #include "viewer.h"
 #include "volta.h"
 #include "ottava.h"
@@ -145,6 +144,53 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "VBox"),
       QT_TRANSLATE_NOOP("elementName", "Icon")
       };
+
+//---------------------------------------------------------
+//   spatium
+//---------------------------------------------------------
+
+double Element::spatium() const
+      {
+      Staff* s = staff();
+      double v = _score->spatium();
+      return s ? v * s->mag() : v;
+      }
+
+//---------------------------------------------------------
+//   pos
+//---------------------------------------------------------
+
+QPointF Element::pos() const
+      {
+      return _pos + _userOff * spatium();
+      }
+
+//---------------------------------------------------------
+//   name
+//---------------------------------------------------------
+
+const char* Element::name() const
+      {
+      return name(type());
+      }
+
+//---------------------------------------------------------
+//   userName
+//---------------------------------------------------------
+
+QString Element::userName() const
+      {
+      return qApp->translate("elementName", name(type()));
+      }
+
+//---------------------------------------------------------
+//   abbox
+//---------------------------------------------------------
+
+QRectF Element::abbox() const
+      {
+      return bbox().translated(canvasPos());
+      }
 
 //---------------------------------------------------------
 //   operator >
@@ -296,7 +342,7 @@ QColor Element::curColor() const
 QRectF Element::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(pos / _spatium);
+      setUserOff(pos / spatium());
       return abbox() | r;
       }
 
@@ -307,7 +353,10 @@ QRectF Element::drag(const QPointF& pos)
 
 QPointF Element::canvasPos() const
       {
-      QPointF p(pos());
+      double sp = _score->spatium();
+      if (_track >= 0)
+            sp *= score()->staff(_track / VOICES)->mag();
+      QPointF p(_pos + (_userOff * sp));
       if (parent())
             p += parent()->canvasPos();
       return p;
@@ -372,14 +421,11 @@ bool Element::intersects(const QRectF& rr) const
 //    values when calling this method
 //---------------------------------------------------------
 
-void Element::layout(ScoreLayout* layout)
+void Element::layout(ScoreLayout*)
       {
       QPointF o(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
-            if (layout)
-                  o *= layout->spatium();
-            else
-                  o *= _spatium;
+            o *= spatium();
       else
             o *= DPI;
       if (parent())
@@ -642,7 +688,7 @@ QPointF StaffLines::canvasPos() const
 QRectF StaffLines::bbox() const
       {
       int l    = lines() - 1;
-      qreal lw = point(score()->styleS(ST_staffLineWidth));
+      qreal lw = score()->styleS(ST_staffLineWidth).point();
 
       switch(l) {
             case 0:
@@ -669,7 +715,7 @@ void StaffLines::draw(QPainter& p) const
 //      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
       QPen pen(p.pen());
-      pen.setWidthF(point(score()->styleS(ST_staffLineWidth)) * mag());
+      pen.setWidthF(score()->styleS(ST_staffLineWidth).point() * mag());
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
             pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
@@ -792,7 +838,7 @@ Line::Line(Score* s, bool v)
 void Line::dump() const
       {
       printf("  width:%g height:%g vert:%d\n",
-         point(_width), point(_len), vertical);
+         _width.point(), _len.point(), vertical);
       }
 
 //---------------------------------------------------------
@@ -817,11 +863,11 @@ void Line::setLineWidth(Spatium w)
 //   layout
 //---------------------------------------------------------
 
-void Line::layout(ScoreLayout* layout)
+void Line::layout(ScoreLayout*)
       {
-      double spatium = layout->spatium();
-      double w = _width.val() * spatium;
-      double l = _len.val() * spatium;
+      double sp = spatium();
+      double w  = _width.val() * sp;
+      double l  = _len.val() * sp;
       double w2 = w * .5;
       if (vertical)
             setbbox(QRectF(-w2, -w2, w, l + w));
@@ -835,13 +881,15 @@ void Line::layout(ScoreLayout* layout)
 
 void Line::draw(QPainter& p) const
       {
+      double sp = spatium();
       QPen pen(p.pen());
-      pen.setWidthF(point(_width));
+      pen.setWidthF(_width.val() * sp);
       p.setPen(pen);
+      double l  = _len.val() * sp;
       if (vertical)
-            p.drawLine(QLineF(0.0, 0.0, 0.0, point(_len)));
+            p.drawLine(QLineF(0.0, 0.0, 0.0, l));
       else
-            p.drawLine(QLineF(0.0, 0.0, point(_len), 0.0));
+            p.drawLine(QLineF(0.0, 0.0, l, 0.0));
       }
 
 //---------------------------------------------------------

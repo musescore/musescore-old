@@ -21,7 +21,6 @@
 #include "transposedialog.h"
 #include "score.h"
 #include "mscore.h"
-#include "layout.h"
 #include "chord.h"
 #include "note.h"
 #include "key.h"
@@ -61,7 +60,7 @@ void Score::transpose(Note* n, int diff)
 
 void Score::transpose()
       {
-      if (_layout->last() == 0)     // empty score?
+      if (_layout.last() == 0)     // empty score?
             return;
       if (sel->state() == SEL_NONE) {
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
@@ -78,7 +77,7 @@ void Score::transpose()
             sel->setState(SEL_SYSTEM);
             sel->setStartSegment(tick2segment(0));
             sel->setEndSegment(
-               tick2segment(_layout->last()->tick() + _layout->last()->tickLen())
+               tick2segment(_layout.last()->tick() + _layout.last()->tickLen())
                );
             sel->staffStart = 0;
             sel->staffEnd   = nstaves();
@@ -185,7 +184,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;

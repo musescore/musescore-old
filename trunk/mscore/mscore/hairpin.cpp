@@ -27,7 +27,6 @@
 #include "measure.h"
 #include "segment.h"
 #include "system.h"
-#include "layout.h"
 
 //---------------------------------------------------------
 //   draw
@@ -35,8 +34,8 @@
 
 void HairpinSegment::draw(QPainter& p) const
       {
-      double h1 = point(score()->styleS(ST_hairpinHeight)) * .5;
-      double h2 = point(score()->styleS(ST_hairpinContHeight)) * .5;
+      double h1 = score()->styleS(ST_hairpinHeight).point() * .5;
+      double h2 = score()->styleS(ST_hairpinContHeight).point() * .5;
 
       QPen pen(p.pen());
       pen.setWidthF(score()->styleS(ST_hairpinWidth).point());
@@ -81,7 +80,7 @@ void HairpinSegment::draw(QPainter& p) const
 
 QRectF HairpinSegment::bbox() const
       {
-      double h = point(score()->styleS(ST_hairpinHeight));
+      double h = score()->styleS(ST_hairpinHeight).point();
       QRectF r(0.0, -h * .5, pos2().x(), h);
       double w = score()->styleS(ST_hairpinWidth).point();
       r.adjust(-w*.5, -w*.5, w, w);

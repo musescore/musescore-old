@@ -26,7 +26,6 @@
 #include "measure.h"
 #include "staff.h"
 #include "tuplet.h"
-#include "layout.h"
 #include "chordlist.h"
 #include "score.h"
 #include "sym.h"
@@ -346,8 +345,8 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
       qreal x          = centerX();
 
 //      double distance  = point(score()->styleS(ST_propertyDistance)) * mag();
-      double distance1 = point(score()->styleS(ST_propertyDistanceHead)) * mag();
-      double distance2 = point(score()->styleS(ST_propertyDistanceStem)) * mag();
+      double distance1 = score()->styleS(ST_propertyDistanceHead).point() * mag();
+      double distance2 = score()->styleS(ST_propertyDistanceStem).point() * mag();
 
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();
@@ -418,12 +417,12 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
             if (aa == A_TOP_STAFF) {
                   y = staffTopY - dyTop;
                   a->setPos(x, y);
-                  dyTop += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
+                  dyTop += score()->styleS(ST_propertyDistance).point() + a->bbox().height();
                   }
             else if (aa == A_BOTTOM_STAFF) {
                   y = staffBotY + dyBot;
                   a->setPos(x, y);
-                  dyBot += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
+                  dyBot += score()->styleS(ST_propertyDistance).point() + a->bbox().height();
                   }
             }
       }

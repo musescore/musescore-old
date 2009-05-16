@@ -409,7 +409,7 @@ void Note::remove(Element* e)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(score()->styleS(ST_stemWidth)) * .5 * mag();
+      double sw = score()->styleS(ST_stemWidth).point() * .5 * mag();
       double x  = pos().x();
       double y  = pos().y();
       if (staffMove()) {
@@ -517,8 +517,8 @@ void Note::draw(QPainter& p) const
             int dots = chord()->dots();
             double x = chord()->dotPosX() - pos().x();
             if (dots) {
-                  double d  = point(score()->styleS(ST_dotNoteDistance));
-                  double dd = point(score()->styleS(ST_dotDotDistance));
+                  double d  = score()->styleS(ST_dotNoteDistance).point();
+                  double dd = score()->styleS(ST_dotDotDistance).point();
                   double y = 0;
 
 //                do not draw dots on line, except ledger lines
@@ -785,7 +785,7 @@ void ShadowNote::draw(QPainter& p) const
       QRect r(abbox().toRect());
 
       p.translate(ap);
-      qreal lw = point(score()->styleS(ST_ledgerLineWidth));
+      qreal lw = score()->styleS(ST_ledgerLineWidth).point();
       InputState ps = score()->inputState();
       int voice;
       if (ps.drumNote != -1 && ps.drumset)
@@ -825,7 +825,7 @@ QRectF ShadowNote::bbox() const
       {
       QRectF b = symbols[quartheadSym].bbox();
       double x  = b.width()/2 - _spatium;
-      double lw = point(score()->styleS(ST_ledgerLineWidth));
+      double lw = score()->styleS(ST_ledgerLineWidth).point();
 
       if (_line < 100 && _line > -100) {
             QRectF r(0, -lw/2.0, 2 * _spatium, lw);

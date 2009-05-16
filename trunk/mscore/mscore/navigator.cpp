@@ -22,7 +22,6 @@
 #include "mscore.h"
 #include "canvas.h"
 #include "score.h"
-#include "layout.h"
 #include "page.h"
 #include "preferences.h"
 

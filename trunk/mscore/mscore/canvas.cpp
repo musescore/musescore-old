@@ -39,7 +39,6 @@
 #include "xml.h"
 #include "text.h"
 #include "note.h"
-#include "layout.h"
 #include "dynamics.h"
 #include "pedal.h"
 #include "volta.h"
@@ -659,7 +658,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         QPointF o;
                         if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM) {
                               _score->startDrag(dragObject);
-                              o = QPointF(dragObject->userOff() * _spatium);
+                              o = QPointF(dragObject->userOff() * dragObject->spatium());
                               setState(DRAG_OBJ);
                               }
                         startMove -= o;

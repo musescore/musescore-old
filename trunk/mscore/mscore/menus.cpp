@@ -1048,7 +1048,7 @@ void MuseScore::barMenu()
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
-                  b->setHeight(point(Spatium(4)));
+                  b->setHeight(4 * _spatium);
                   b->setSubtype(t[i].type);
                   sp->append(b, tr(t[i].name));
                   }
@@ -1203,7 +1203,7 @@ void MuseScore::updateDrumset()
                         note->setHeadGroup(noteHead);
                         chord->add(note);
                         Stem* stem = new Stem(gscore);
-                        stem->setLen(Spatium(up ? -3.0 : 3.0));
+                        stem->setLen((up ? -3.0 : 3.0) * _spatium);
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
                         drumPalette->append(chord, drumset->name(pitch));

@@ -24,7 +24,6 @@
 #include "style.h"
 #include "score.h"
 #include "preview.h"
-#include "layout.h"
 
 #define MM(x) ((x)/INCH)
 

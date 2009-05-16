@@ -64,7 +64,7 @@ class SysStaff {
       void setbbox(const QRectF& r)   { _bbox = r; }
       void move(double x, double y);
 
-      double distance() const        { return point(_distance); }
+      double distance() const        { return _distance.point(); }
       void setDistance(double v)     { _distance.set(v); }
       void setDistance(Spatium v)    { _distance = v; }
 

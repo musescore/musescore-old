@@ -25,7 +25,6 @@
 #include "staff.h"
 #include "part.h"
 #include "system.h"
-#include "layout.h"
 #include "page.h"
 #include "text.h"
 #include "box.h"

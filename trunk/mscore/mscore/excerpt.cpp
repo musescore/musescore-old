@@ -23,7 +23,6 @@
 #include "part.h"
 #include "xml.h"
 #include "staff.h"
-#include "layout.h"
 #include "box.h"
 #include "canvas.h"
 #include "style.h"
@@ -243,7 +242,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             xml.curTrack  = staffIdx * VOICES;
             xml.trackDiff = trackOffset[staffIdx];
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1 + xml.trackDiff/4));
-            for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            for (MeasureBase* m = _layout.first(); m; m = m->next()) {
                   if (isFirstStaff || m->type() == MEASURE)
                         m->write(xml, staffIdx, isFirstStaff);
                   if (m->type() == MEASURE)

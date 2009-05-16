@@ -38,7 +38,6 @@
 #include "segment.h"
 #include "input.h"
 #include "measure.h"
-#include "layout.h"
 #include "page.h"
 #include "barline.h"
 #include "xml.h"
@@ -538,7 +537,7 @@ void Score::lassoSelect(const QRectF& bbox)
       {
       select(0, SELECT_SINGLE, 0);
       QRectF lr(bbox.normalized());
-      QList<const Element*> el = _layout->items(lr);
+      QList<const Element*> el = _layout.items(lr);
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
@@ -617,9 +616,9 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
 void Score::searchSelectedElements()
       {
       QList<const Element*> l;
-      for(MeasureBase* m = _layout->first(); m; m = m->next())
+      for(MeasureBase* m = _layout.first(); m; m = m->next())
             m->collectElements(l);
-      foreach(const Page* page, _layout->pages())
+      foreach(const Page* page, _layout.pages())
             page->collectElements(l);
       sel->clear();
       foreach(const Element* e, l) {

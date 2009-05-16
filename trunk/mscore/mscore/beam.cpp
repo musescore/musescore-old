@@ -30,7 +30,6 @@
 #include "style.h"
 #include "note.h"
 #include "tuplet.h"
-#include "layout.h"
 #include "system.h"
 #include "tremolo.h"
 #include "measure.h"
@@ -692,7 +691,7 @@ void Beam::layout(ScoreLayout* layout)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
+      double xoffLeft  = score()->style(ST_stemWidth).toSpatium().point() * .5;
       double xoffRight = xoffLeft;
 
       QPointF p1s(c1->stemPos(c1->up(), false));
@@ -730,7 +729,7 @@ void Beam::layout(ScoreLayout* layout)
 
       Spatium bw        = score()->style(ST_beamWidth).toSpatium();
       double bd         = score()->style(ST_beamDistance).toDouble();
-      double beamMinLen = point(score()->style(ST_beamMinLen).toSpatium());
+      double beamMinLen = score()->style(ST_beamMinLen).toSpatium().point();
       double graceMag   = score()->style(ST_graceNoteMag).toDouble();
       if (isGrace) {
             setMag(graceMag);
@@ -740,7 +739,7 @@ void Beam::layout(ScoreLayout* layout)
       else
             setMag(1.0);
 
-      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      double beamDist = (bd * bw + bw).point() * (_up ? 1.0 : -1.0);
 
       double min      = 1000.0;
       double max      = -1000.0;
@@ -926,7 +925,7 @@ void Beam::layout(ScoreLayout* layout)
             double y2 = p1.y() + (x2 - x1) * slope;
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);
-            stem->setLen(spatium(stemLen));
+            stem->setLen(stemLen);
 
             if (_up)
                   npos += QPointF(0, -stemLen);
@@ -986,7 +985,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
+      double xoffLeft  = score()->style(ST_stemWidth).toSpatium().point() * .5;
       double xoffRight = xoffLeft;
 
       QPointF p1s(c1->stemPos(c1->up(), false));
@@ -1041,7 +1040,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       const Style s(score()->style());
       double bd(s[ST_beamDistance].toDouble());
       Spatium bw(s[ST_beamWidth].toSpatium());
-      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      double beamDist = (bd * bw + bw).point() * (_up ? 1.0 : -1.0);
       BeamSegment* bs = new BeamSegment;
       beamSegments.push_back(bs);
       bs->p1  = p1;
@@ -1110,7 +1109,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(_up, false).x();
-                              double x3 = x2 + point(score()->style(ST_beamMinLen).toSpatium());
+                              double x3 = x2 + score()->style(ST_beamMinLen).toSpatium().point();
 
                               if (!nn1r) {
                                     double tmp = x3;
@@ -1146,7 +1145,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(_up, false).x();
-                  double x2 = x3 - point(score()->style(ST_beamMinLen).toSpatium());
+                  double x2 = x3 - score()->style(ST_beamMinLen).toSpatium().point();
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
@@ -1177,7 +1176,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             double y2 = p1.y() + (x2 - x1) * slope;
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);
-            stem->setLen(spatium(stemLen));
+            stem->setLen(stemLen);
 
             if (_up)
                   npos += QPointF(0, -stemLen);

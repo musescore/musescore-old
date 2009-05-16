@@ -25,7 +25,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "sym.h"
-#include "layout.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   draw

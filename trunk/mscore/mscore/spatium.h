@@ -77,9 +77,6 @@ class Spatium {
             return *this;
             }
       Spatium operator-() const { return Spatium(-_val); }
-
-      friend Spatium spatium(double v);
-      friend double point(Spatium s);
       };
 
 inline Spatium operator+(Spatium a, Spatium b)
@@ -124,9 +121,6 @@ inline Spatium operator*(double a, Spatium b)
       r *= a;
       return r;
       }
-
-inline Spatium spatium(double v) { return Spatium(v / _spatium); }
-inline double point(Spatium s)   { return s._val * _spatium; }
 
 #endif
 

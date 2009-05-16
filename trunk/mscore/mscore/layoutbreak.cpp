@@ -22,7 +22,6 @@
 #include "preferences.h"
 #include "score.h"
 #include "canvas.h"
-#include "layout.h"
 
 //---------------------------------------------------------
 //   LayoutBreak

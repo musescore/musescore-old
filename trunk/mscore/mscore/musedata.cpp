@@ -20,7 +20,6 @@
 
 #include "musedata.h"
 #include "score.h"
-#include "layout.h"
 #include "part.h"
 #include "staff.h"
 #include "barline.h"

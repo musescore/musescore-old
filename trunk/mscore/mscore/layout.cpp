@@ -29,7 +29,6 @@
 #include "text.h"
 #include "staff.h"
 #include "style.h"
-#include "layout.h"
 #include "timesig.h"
 #include "canvas.h"
 #include "chord.h"
@@ -423,8 +422,8 @@ void ScoreLayout::getCurPage()
 bool ScoreLayout::layoutPage()
       {
       Page* page = _pages[curPage];
-      const double slb = point(score()->styleS(ST_staffLowerBorder));
-      const double sub = point(score()->styleS(ST_staffUpperBorder));
+      const double slb = score()->styleS(ST_staffLowerBorder).point();
+      const double sub = score()->styleS(ST_staffUpperBorder).point();
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -655,8 +654,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   stretch = m->userStretch() * score()->styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < point(score()->styleS(ST_minMeasureWidth)))
-                        ww = point(score()->styleS(ST_minMeasureWidth));
+                  if (ww < score()->styleS(ST_minMeasureWidth).point())
+                        ww = score()->styleS(ST_minMeasureWidth).point();
                   isFirstMeasure = false;
                   }
 
@@ -1069,8 +1068,8 @@ bool ScoreLayout::doReLayout()
                   double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < point(score()->styleS(ST_minMeasureWidth)))
-                        ww = point(score()->styleS(ST_minMeasureWidth));
+                  if (ww < score()->styleS(ST_minMeasureWidth).point())
+                        ww = score()->styleS(ST_minMeasureWidth).point();
                   }
             minWidth += ww;
             }
@@ -1088,8 +1087,8 @@ bool ScoreLayout::doReLayout()
             double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
 
             ww *= stretch;
-            if (ww < point(score()->styleS(ST_minMeasureWidth)))
-                  ww = point(score()->styleS(ST_minMeasureWidth));
+            if (ww < score()->styleS(ST_minMeasureWidth).point())
+                  ww = score()->styleS(ST_minMeasureWidth).point();
             if ((minWidth + ww) <= sysWidth)    // if another measure fits, do full layout
                   return false;
             }

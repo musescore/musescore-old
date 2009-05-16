@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
-  <Mag>1.41807</Mag>
-  <xoff>3.73185</xoff>
-  <yoff>-16.5813</yoff>
+  <Mag>5.86439</Mag>
+  <xoff>-167.615</xoff>
+  <yoff>-305.189</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Style>
-    <staffUpperBorder>8</staffUpperBorder>
-    <staffLowerBorder>4</staffLowerBorder>
-    <akkoladeDistance>5.5</akkoladeDistance>
-    <lyricsDistance>6.5</lyricsDistance>
-    <frameSystemDistance>7</frameSystemDistance>
-    <bracketDistance>0.3</bracketDistance>
-    <minNoteDistance>0.5</minNoteDistance>
-    <measureSpacing>1.3</measureSpacing>
-    <ledgerLineWidth>0.08</ledgerLineWidth>
-    <beamMinSlope>0.1</beamMinSlope>
-    <beamMaxSlope>0.5</beamMaxSlope>
-    <dotNoteDistance>0.5</dotNoteDistance>
-    <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <gateTime>70</gateTime>
-    <staccatoGateTime>40</staccatoGateTime>
-    <slurGateTime>90</slurGateTime>
-    </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
   <page-layout>
@@ -66,6 +48,8 @@
       </shortName>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="0"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -105,6 +89,8 @@
       </shortName>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="0"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -198,11 +184,7 @@
         <Beam>1</Beam>
         <appoggiatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <selected>1</selected>
-          <pitch>68</pitch>
-          <tpc>10</tpc>
-          </Note>
+        <Note pitch="68" tpc="10"/>
         </Chord>
       <Chord>
         <tick>960</tick>
@@ -215,7 +197,7 @@
       <Chord>
         <tick>960</tick>
         <ticklen>480</ticklen>
-        <Note pitch="64" tpc="18"/>
+        <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -406,7 +388,7 @@
       <Chord>
         <tick>960</tick>
         <ticklen>480</ticklen>
-        <Note pitch="64" tpc="18"/>
+        <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -528,5 +510,5 @@
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>4</cursorTrack>
   </museScore>

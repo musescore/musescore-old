@@ -38,7 +38,6 @@
 #include "measure.h"
 #include "style.h"
 #include "part.h"
-#include "layout.h"
 #include "timesig.h"
 #include "barline.h"
 #include "pedal.h"
@@ -963,7 +962,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
-      	_layout->add(measure);
+      	_layout.add(measure);
             }
 
 	foreach (MidiTrack* midiTrack, *tracks) {

@@ -23,7 +23,6 @@
 #include "part.h"
 #include "editdrumset.h"
 #include "score.h"
-#include "layout.h"
 #include "measure.h"
 
 //---------------------------------------------------------

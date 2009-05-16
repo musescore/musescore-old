@@ -42,7 +42,6 @@
 #include "slur.h"
 #include "clef.h"
 #include "staff.h"
-#include "layout.h"
 #include "chord.h"
 #include "sig.h"
 #include "key.h"

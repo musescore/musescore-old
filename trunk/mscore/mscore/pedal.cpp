@@ -23,7 +23,6 @@
 #include "sym.h"
 
 #include "score.h"
-#include "layout.h"
 
 //---------------------------------------------------------
 //   Pedal

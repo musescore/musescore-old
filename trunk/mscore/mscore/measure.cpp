@@ -55,7 +55,6 @@
 #include "page.h"
 #include "lyrics.h"
 #include "measureproperties.h"
-#include "layout.h"
 #include "viewer.h"
 #include "volta.h"
 #include "image.h"
@@ -472,9 +471,9 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         }
                   else {
                         if ((line > ll) || !chord->up())
-                              note->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
+                              note->chord()->setXpos(note->headWidth() - score()->styleS(ST_stemWidth).point() * note->mag());
                         else
-                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - point(score()->styleS(ST_stemWidth)) * note->mag());
+                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - score()->styleS(ST_stemWidth).point() * note->mag());
                         moveLeft = true;
                         }
                   }
@@ -520,8 +519,8 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int nAcc = aclist.size();
       if (nAcc == 0)
             return;
-      double pd  = point(score()->styleS(ST_accidentalDistance));
-      double pnd = point(score()->styleS(ST_accidentalNoteDistance));
+      double pd  = score()->styleS(ST_accidentalDistance).point();
+      double pnd = score()->styleS(ST_accidentalNoteDistance).point();
       //
       // layout top accidental
       //
@@ -1488,7 +1487,7 @@ if (debugMode)
                && (s->next()->subtype() == Segment::SegChordRest
                   || s->next()->subtype() == Segment::SegGrace)
                ) {
-                  additionalMin = point(score()->styleS(ST_clefKeyRightMargin));
+                  additionalMin = score()->styleS(ST_clefKeyRightMargin).point();
                   notesSeg = true;
                   }
             if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace) {
@@ -1496,25 +1495,25 @@ if (debugMode)
                         firstNoteRest = false;
                   else {
                         if (s->subtype() == Segment::SegGrace)
-                              additionalExtra = point(score()->styleS(ST_minNoteDistance)) * score()->styleD(ST_graceNoteMag);
+                              additionalExtra = score()->styleS(ST_minNoteDistance).point() * score()->styleD(ST_graceNoteMag);
                         else
-                              additionalExtra = point(score()->styleS(ST_minNoteDistance));
+                              additionalExtra = score()->styleS(ST_minNoteDistance).point();
                         }
                   }
             else if (s->subtype() == Segment::SegClef)
-                  additionalExtra = point(score()->styleS(ST_clefLeftMargin));
+                  additionalExtra = score()->styleS(ST_clefLeftMargin).point();
             else if (s->subtype() == Segment::SegTimeSig)
-                  additionalExtra = point(score()->styleS(ST_timesigLeftMargin));
+                  additionalExtra = score()->styleS(ST_timesigLeftMargin).point();
             else if (s->subtype() == Segment::SegKeySig)
-                  additionalExtra = point(score()->styleS(ST_keysigLeftMargin));
+                  additionalExtra = score()->styleS(ST_keysigLeftMargin).point();
             else if (s->subtype() == Segment::SegEndBarLine)
-                  additionalExtra = point(score()->styleS(ST_barNoteDistance));
+                  additionalExtra = score()->styleS(ST_barNoteDistance).point();
             else if (s->subtype() == Segment::SegTimeSigAnnounce) {
                   // additionalExtra = point(style->timesigLeftMargin);
-                  additionalMin   = point(Spatium(1.0));
+                  additionalMin   = _spatium;
                   }
             else if (s->subtype() == Segment::SegStartRepeatBarLine)
-                  additionalExtra = point(score()->styleS(ST_beginRepeatLeftMargin));
+                  additionalExtra = score()->styleS(ST_beginRepeatLeftMargin).point();
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   spaces[seg][staffIdx].setValid(false);
@@ -1555,7 +1554,7 @@ if (debugMode)
                   spaces[seg][staffIdx].setExtra(extra + additionalExtra);
                   if (lyrics) {
                         double y = lyrics->ipos().y() + lyrics->lineHeight()
-                             + point(score()->styleS(ST_lyricsMinBottomDistance));
+                             + score()->styleS(ST_lyricsMinBottomDistance).point();
                         if (y > staves[staffIdx]->distance)
                               staves[staffIdx]->distance = y;
                         }
@@ -1802,11 +1801,11 @@ printf("\n");
                         double y = 0.0;
                         double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)
-                              e->setPos(-e->bbox().x() - xo + point(score()->styleS(ST_clefLeftMargin)), y);
+                              e->setPos(-e->bbox().x() - xo + score()->styleS(ST_clefLeftMargin).point(), y);
                         else if (t == TIMESIG)
-                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_timesigLeftMargin)), y);
+                              e->setPos(- e->bbox().x() - xo + score()->styleS(ST_timesigLeftMargin).point(), y);
                         else if (t == KEYSIG)
-                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_keysigLeftMargin)), y);
+                              e->setPos(- e->bbox().x() - xo + score()->styleS(ST_keysigLeftMargin).point(), y);
                         else  if (s->subtype() == Segment::SegEndBarLine) {
                               // align right
                               e->setPos(width[seg] - e->width(), y);
@@ -2042,7 +2041,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
       ms->lines->setLines(staff->lines());
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
-      ms->distance = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+      ms->distance = (staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance)).point();
       insertMStaff(ms, staffIdx);
       }
 
@@ -2623,7 +2622,7 @@ void Measure::read(QDomElement e, int idx)
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
-            s->distance = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+            s->distance = (n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance)).point();
             staves.append(s);
             }
 
@@ -2924,45 +2923,11 @@ void Measure::read(QDomElement e, int idx)
             else
                   domError(e);
             }
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Measure::read(QDomElement e)
-      {
-      int curTickPos = e.attribute("tick", "0").toInt();
-      setTick(curTickPos);
-      int staffIdx = 0;
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "Staff") {
-                  read(e, staffIdx);
-                  ++staffIdx;
-                  }
-            else if (tag == "startRepeat")
-                  _repeatFlags |= RepeatStart;
-            else if (tag == "endRepeat") {
-                  _repeatCount = val.toInt();
-                  _repeatFlags |= RepeatEnd;
-                  }
-            else if (tag == "irregular")
-                  _irregular = true;
-            else if (tag == "breakMultiMeasureRest")
-                  _breakMultiMeasureRest = true;
-            else if (tag == "stretch")
-                  _userStretch = val.toDouble();
-            else if (tag == "Text") {
-                  Text* t = new Text(score());
-                  t->read(e);
-                  t->setTick(curTickPos);
-                  t->setTrack(0);
-                  add(t);
-                  }
-            else
-                  domError(e);
+      int nstaves = staves.size();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            MStaff* mstaff = staves[staffIdx];
+            if (mstaff->hasVoices)
+                  printf("has voices staff %d measure %d\n", staffIdx, _no);
             }
       }
 

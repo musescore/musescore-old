@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include "repeat.h"
-#include "layout.h"
 #include "sym.h"
 #include "score.h"
 #include "jumpproperties.h"

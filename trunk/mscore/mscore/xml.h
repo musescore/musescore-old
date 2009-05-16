@@ -22,6 +22,7 @@
 #define __XML_H__
 
 #include "globals.h"
+#include "spatium.h"
 
 //---------------------------------------------------------
 //   Property
@@ -74,6 +75,7 @@ class Xml : public QTextStream {
       void tag(const QString& name, QVariant data);
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
+      void tag(const char* name, Spatium sp)       { tag(name, QVariant(sp.val())); }
       void tag(const char* name, const QWidget*);
       void tag(const char* name, Placement);
 

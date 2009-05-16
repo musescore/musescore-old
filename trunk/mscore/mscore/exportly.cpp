@@ -41,7 +41,6 @@
 #include "hairpin.h"
 #include "key.h"
 #include "keysig.h"
-#include "layout.h"
 #include "measure.h"
 #include "note.h"
 #include "ottava.h"
@@ -489,7 +488,7 @@ void ExportLy::words(Text* text)
 	    //is there a .toInteger()????
 	    c=text->getText().toAscii().data();
 	    a=(char)c[0];
-	    if ((a>= 48) && (a<= 57)) 
+	    if ((a>= 48) && (a<= 57))
 	      {
 		rehearsalnumbers=true;
 	      }
@@ -2202,7 +2201,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
       }
 
   writeVolta(measurenumber, lastind);
-  
+
 } //end write VoiceMeasure
 
 
@@ -2329,7 +2328,7 @@ void ExportLy::writeScore()
 		}
 	      level--;
 	      indent();
-	      out << "\\bar \"|.\" \n"; //thin-thick barline as last. 
+	      out << "\\bar \"|.\" \n"; //thin-thick barline as last.
 	      level=0;
 	      indent();
 	      out << "}% end of last bar in partorvoice\n\n";
@@ -2499,7 +2498,7 @@ if (rehearsalnumbers)
      os << "\\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
    }
   indentF();
-  os << "\\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n"; 
+  os << "\\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n";
   indentF();
   os << "%% remove previous line to get cut-time/alla breve or common time \n";
   --level;
