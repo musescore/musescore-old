@@ -354,8 +354,11 @@ QRectF Element::drag(const QPointF& pos)
 QPointF Element::canvasPos() const
       {
       double sp = _score->spatium();
-      if (_track >= 0)
-            sp *= score()->staff(_track / VOICES)->mag();
+      if (_track >= 0) {
+            Staff* staff = score()->staff(_track / VOICES);
+            if (staff)
+                  sp *= staff->mag();
+            }
       QPointF p(_pos + (_userOff * sp));
       if (parent())
             p += parent()->canvasPos();
