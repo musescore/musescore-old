@@ -489,7 +489,7 @@ void Lyrics::layout(ScoreLayout* l)
       LyricsList* ll = seg->lyricsList(staffIdx());
 
       int line       = ll->indexOf(this);
-      double y       = lh * line + point(score()->styleS(ST_lyricsDistance))
+      double y       = lh * line + score()->styleS(ST_lyricsDistance).point()
                        + sys->staff(staffIdx())->bbox().height();
       double x       = noteHeadWidth2 - bbox().width() * .5;
       setPos(x, y);

@@ -49,7 +49,6 @@
 #include "part.h"
 #include "measure.h"
 #include "style.h"
-#include "layout.h"
 #include "musicxml.h"
 #include "slur.h"
 #include "hairpin.h"

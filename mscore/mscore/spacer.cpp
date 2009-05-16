@@ -22,7 +22,6 @@
 #include "preferences.h"
 #include "score.h"
 #include "canvas.h"
-#include "layout.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -125,7 +124,7 @@ void Spacer::editDrag(int, const QPointF& delta)
 void Spacer::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      QPointF p(_spatium * .5, point(_space));
+      QPointF p(_spatium * .5, _space.point());
       grip[0].translate(canvasPos() + p);
       }
 

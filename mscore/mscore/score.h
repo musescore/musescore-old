@@ -32,6 +32,8 @@
 #include "durationtype.h"
 #include "select.h"
 #include "config.h"
+#include "element.h"
+#include "bsp.h"
 
 class System;
 class TextStyle;
@@ -177,14 +179,90 @@ class ImagePath {
       };
 
 //---------------------------------------------------------
+//   ScoreLayout
+//---------------------------------------------------------
+
+class ScoreLayout : public Element {
+      double _spatium;
+      PageFormat* _pageFormat;
+      QPaintDevice* _paintDevice;
+      BspTree bspTree;
+
+      //
+      // generated objects by layout():
+      //
+      QList<Page*> _pages;          // pages are build from systems
+      QList<System*> _systems;      // measures are akkumulated to systems
+
+      bool _needLayout;
+      Measure* startLayout;
+
+      Page* addPage();
+      bool layoutPage();
+      bool layoutSystem1(double& minWidth, double w, bool);
+      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, double*);
+      void processSystemHeader(Measure* m, bool);
+      System* getNextSystem(bool, bool);
+      void getCurPage();
+
+      // values used during doLayout:
+      int curPage;
+      int curSystem;
+      bool firstSystem;
+      MeasureBase* curMeasure;
+      bool doReLayout();
+      void rebuildBspTree();
+      Measure* skipEmptyMeasures(Measure*, System*);
+
+   public:
+      ScoreLayout(Score*);
+      ~ScoreLayout();
+      virtual ElementType type() const        { return LAYOUT; }
+      virtual Element* clone() const          { abort(); }
+
+      void layout()                           { _needLayout = true; }
+      void doLayout();
+      void reLayout(Measure*);
+      Score* score() const                    { return _score; }
+      double spatium() const                  { return _spatium; }
+      void setSpatium(double v)               { _spatium = v; }
+      PageFormat* pageFormat() const          { return _pageFormat; }
+      void setPageFormat(const PageFormat& pf);
+      const QList<Page*>& pages() const       { return _pages; }
+      QList<System*>* systems()               { return &_systems; }
+      bool needLayout() const                 { return _needLayout; }
+      void clear();
+
+      MeasureBase* first() const;
+      MeasureBase* last()  const;
+
+      void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
+      QPaintDevice* paintDevice() const             { return _paintDevice; }
+      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
+      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
+
+      void insertBsp(Element* e)                    { bspTree.insert(e); }
+      void removeBsp(Element* e)                    { bspTree.remove(e); }
+
+      void setInstrumentNames();
+      void connectTies();
+
+      virtual void add(Element*);
+      virtual void remove(Element*);
+
+      friend class Score;
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
 class Score : public QObject {
       Q_OBJECT
 
-      UndoStack* _undo;
+      ScoreLayout _layout;
 
+      UndoStack* _undo;
       QList<ImagePath*> imagePathList;
 
       int _magIdx;
@@ -219,8 +297,6 @@ class Score : public QObject {
       Qt::KeyboardModifiers keyState;
 
       QList<Viewer*> viewer;
-
-      ScoreLayout* _layout;
 
       bool _showInvisible;
       bool _showFrames;
@@ -604,7 +680,7 @@ class Score : public QObject {
       Segment* tick2segment(int tick) const;
       void fixTicks();
       PageFormat* pageFormat() const;
-      ScoreLayout* layout() const { return _layout; }
+      ScoreLayout* layout() { return &_layout; }
 
       void addArticulation(Element*, Articulation* atr);
 
@@ -762,6 +838,8 @@ class Score : public QObject {
       void nextInputPos(ChordRest* cr);
       void setInputPos(ChordRest* cr);
       void cmdMirrorNoteHead();
+
+      double spatium() const { return _layout.spatium(); }
       };
 
 extern Score* gscore;

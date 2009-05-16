@@ -39,7 +39,6 @@
 #include "hook.h"
 #include "dynamics.h"
 #include "slur.h"
-#include "layout.h"
 #include "lyrics.h"
 #include "volta.h"
 #include "line.h"

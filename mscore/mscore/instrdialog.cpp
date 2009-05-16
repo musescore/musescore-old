@@ -30,7 +30,6 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
-#include "layout.h"
 #include "style.h"
 #include "editinstrument.h"
 #include "drumset.h"
@@ -875,7 +874,7 @@ void Score::removeStaff(Staff* staff)
 
 void Score::sortStaves(QList<int>& dst)
       {
-      _layout->systems()->clear();  //??
+      _layout.systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
       QList<Staff*> dl;

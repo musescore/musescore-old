@@ -46,7 +46,6 @@
 #include "measure.h"
 #include "style.h"
 #include "bracket.h"
-#include "layout.h"
 #include "timesig.h"
 #include "xml.h"
 #include "barline.h"
@@ -289,7 +288,7 @@ void Score::importMusicXml(const QString& name)
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
-      _layout->connectTies();
+      _layout.connectTies();
       layoutAll = true;
       _created = false;
       }
@@ -309,7 +308,7 @@ void Score::importCompressedMusicXml(const QString& name)
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
-      _layout->connectTies();
+      _layout.connectTies();
       layoutAll = true;
       _created = false;
       }

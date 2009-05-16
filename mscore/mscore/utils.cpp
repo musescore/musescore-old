@@ -27,7 +27,6 @@
 #include "score.h"
 #include "page.h"
 #include "segment.h"
-#include "layout.h"
 #include "recordbutton.h"
 #include "greendotbutton.h"
 #include "clef.h"
@@ -94,7 +93,7 @@ QRectF handleRect(const QPointF& pos)
 
 Measure* Score::tick2measure(int tick) const
       {
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = static_cast<Measure*>(mb);
@@ -114,7 +113,7 @@ Measure* Score::tick2measure(int tick) const
       printf("tick2measure %d not found\n", tick);
       if (debugMode) {
             int idx = 0;
-            for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            for (MeasureBase* m = _layout.first(); m; m = m->next()) {
                   int st = m->tick();
                   int l  = m->tickLen();
                   printf("(%d)   %d - %d\n", idx, st, st+l);
@@ -130,7 +129,7 @@ Measure* Score::tick2measure(int tick) const
 
 MeasureBase* Score::tick2measureBase(int tick) const
       {
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
             int st = mb->tick();
             int l  = mb->tickLen();
             if (tick >= st && tick < (st+l))

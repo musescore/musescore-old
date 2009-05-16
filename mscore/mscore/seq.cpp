@@ -45,7 +45,6 @@
 #include "playpanel.h"
 #include "staff.h"
 #include "measure.h"
-#include "layout.h"
 #include "preferences.h"
 #include "part.h"
 #include "ottava.h"

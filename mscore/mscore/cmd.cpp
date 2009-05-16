@@ -40,7 +40,6 @@
 #include "staff.h"
 #include "part.h"
 #include "style.h"
-#include "layout.h"
 #include "preferences.h"
 #include "page.h"
 #include "barline.h"
@@ -133,11 +132,11 @@ void Score::end()
 
       if (layoutAll) {
             updateAll = true;
-            _layout->layout();
+            _layout.layout();
             }
       else if (layoutStart) {
             updateAll = true;
-            _layout->reLayout(layoutStart);
+            _layout.reLayout(layoutStart);
             }
 
       // update a little more:
@@ -190,7 +189,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       Measure* measure = (Measure*)mb;
       e->setTrack(track);
-      e->setParent(_layout);
+      e->setParent(&_layout);
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();
@@ -769,7 +768,7 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
             }
       _is.cr = firstNote ? firstNote->chord() : 0;
       if (tie)
-            _layout->connectTies();
+            _layout.connectTies();
       if (note)
             select(note, SELECT_SINGLE, 0);
       return firstNote;
@@ -1300,7 +1299,7 @@ void Score::cmdAddText(int subtype)
             endCmd();
             return;
             }
-      Page* page = _layout->pages().front();
+      Page* page = _layout.pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
       Text* s = 0;

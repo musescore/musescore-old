@@ -31,7 +31,6 @@
 #include "key.h"
 #include "measure.h"
 #include "mscore.h"
-#include "layout.h"
 #include "slur.h"
 #include "tuplet.h"
 #include "text.h"

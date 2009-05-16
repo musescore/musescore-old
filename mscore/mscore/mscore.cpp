@@ -41,7 +41,6 @@
 #include "playpanel.h"
 #include "page.h"
 #include "partedit.h"
-#include "layout.h"
 #include "palette.h"
 #include "part.h"
 #include "drumset.h"
@@ -2034,7 +2033,7 @@ void MuseScore::changeState(int val)
                         connect(searchExit, SIGNAL(clicked()), SLOT(endSearch()));
                         searchDialogLayout->addWidget(searchExit);
 
-                        searchDialogLayout->addWidget(new QLabel(tr("Search: ")));
+                        searchDialogLayout->addWidget(new QLabel(tr("Go To: ")));
 
                         searchCombo = new QComboBox;
                         searchCombo->setEditable(true);

@@ -26,7 +26,6 @@
 #include "preferences.h"
 #include "measure.h"
 #include "style.h"
-#include "layout.h"
 #include "chord.h"
 #include "beam.h"
 #include "tuplet.h"

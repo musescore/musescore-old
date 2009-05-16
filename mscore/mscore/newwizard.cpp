@@ -23,7 +23,6 @@
 #include "instrtemplate.h"
 #include "score.h"
 #include "staff.h"
-#include "layout.h"
 #include "clef.h"
 #include "part.h"
 #include "drumset.h"

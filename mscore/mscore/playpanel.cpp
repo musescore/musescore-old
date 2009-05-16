@@ -22,7 +22,6 @@
 #include "sig.h"
 #include "score.h"
 #include "seq.h"
-#include "layout.h"
 #include "mscore.h"
 #include "measure.h"
 

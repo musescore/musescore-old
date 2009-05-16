@@ -26,7 +26,6 @@
 #include "globals.h"
 #include "sym.h"
 #include "symbol.h"
-#include "layout.h"
 #include "score.h"
 #include "image.h"
 #include "xml.h"

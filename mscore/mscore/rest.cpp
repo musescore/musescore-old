@@ -103,7 +103,7 @@ void Rest::draw(QPainter& p) const
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= _dots; ++i) {
                         double x = symbols[_sym].width(mag())
-                                   + point(score()->styleS(ST_dotNoteDistance)) * i;
+                                   + score()->styleS(ST_dotNoteDistance).point() * i;
                         symbols[dotSym].draw(p, mag(), x, y);
                         }
                   }
@@ -119,8 +119,11 @@ void Rest::draw(QPainter& p) const
 
 void Rest::setUserOffset(double x, double y)
       {
-      int line = lrint(y  / _spatium);
-      if (_sym == wholerestSym && (line <= -2 || line >= 4))
+      double _sp = spatium();
+
+      int line = lrint(y  / _sp);
+
+      if (_sym == wholerestSym && (line <= -2 || line >= 3))
             _sym = outsidewholerestSym;
       else if (_sym == outsidewholerestSym && (line > -2 && line < 4))
             _sym = wholerestSym;
@@ -128,7 +131,8 @@ void Rest::setUserOffset(double x, double y)
             _sym = outsidehalfrestSym;
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
-      setUserOff(QPointF(x / _spatium, double(line)));
+
+      setUserOff(QPointF(x / _sp, double(line)));
       }
 
 //---------------------------------------------------------
@@ -285,7 +289,8 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
             headType(tickLen(), &dt, &_dots);
             setDuration(dt);
             }
-      setUserOffset(userOff().x() * _spatium, userOff().y() * _spatium);
+      QPointF off(userOff() * spatium());
+      setUserOffset(off.x(), off.y());
       }
 
 //---------------------------------------------------------
@@ -324,7 +329,7 @@ void Rest::layout(ScoreLayout* l)
       {
       int line = lrint(userOff().y());
 
-      setYoff(2.0 * mag());
+      setYoff(2.0);
       switch(duration().val()) {
             case Duration::V_LONG:
                   _sym = longarestSym;
@@ -335,7 +340,7 @@ void Rest::layout(ScoreLayout* l)
             case Duration::V_MEASURE:
             case Duration::V_WHOLE:
                   _sym = (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
-                  setYoff(1.0 * mag());
+                  setYoff(1.0);
                   break;
             case Duration::V_HALF:
                   _sym = (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;

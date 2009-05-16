@@ -24,7 +24,6 @@
 #include "measure.h"
 #include "score.h"
 #include "xml.h"
-#include "layout.h"
 #include "viewer.h"
 #include "system.h"
 
@@ -57,7 +56,7 @@ LineSegment::LineSegment(const LineSegment& s)
 void LineSegment::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 2;
-      QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
+      QPointF pp2(_p2 + _userOff2 * spatium() + canvasPos());
       grip[1].translate(pp2);
       grip[0].translate(canvasPos());
       }
@@ -210,6 +209,7 @@ bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
 
 void LineSegment::editDrag(int curGrip, const QPointF& d)
       {
+      double _spatium = spatium();
       QPointF delta(d.x() / _spatium, 0);
 
       if (line()->type() == TEXTLINE) {

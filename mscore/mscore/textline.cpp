@@ -23,7 +23,6 @@
 #include "measure.h"
 #include "xml.h"
 #include "utils.h"
-#include "layout.h"
 #include "score.h"
 #include "preferences.h"
 #include "sym.h"
@@ -70,7 +69,8 @@ void TextLineSegment::setSelected(bool f)
 void TextLineSegment::draw(QPainter& p) const
       {
       TextLine* tl = textLine();
-      qreal textlineLineWidth    = tl->lineWidth().point();
+      double _spatium = spatium();
+      qreal textlineLineWidth    = point(tl->lineWidth());
       qreal textlineTextDistance = _spatium * .5;
 
       QPointF pp2(pos2());
@@ -127,13 +127,13 @@ void TextLineSegment::draw(QPainter& p) const
       p.drawLine(QLineF(pp1, pp2));
 
       if (tl->endHook()) {
-            double hh = textLine()->endHookHeight().point();
+            double hh = point(textLine()->endHookHeight());
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
                   p.drawLine(QLineF(pp2, QPointF(pp2.x(), pp2.y() + hh)));
                   }
             }
       if (tl->beginHook()) {
-            double hh = textLine()->beginHookHeight().point();
+            double hh = point(textLine()->beginHookHeight());
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
                   p.drawLine(QLineF(pp1, QPointF(pp1.x(), pp1.y() + hh)));
                   }
@@ -152,7 +152,7 @@ QRectF TextLineSegment::bbox() const
 
       if (!_text && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
-      double y1 = -textLine()->lineWidth().point();
+      double y1 = point(-textLine()->lineWidth());
       double y2 = -y1;
 
       int sym = textLine()->beginSymbol();
@@ -172,14 +172,14 @@ QRectF TextLineSegment::bbox() const
             y2 = symbols[sym].height() * .5;
             }
       if (textLine()->endHook()) {
-            double h = textLine()->endHookHeight().point();
+            double h = point(textLine()->endHookHeight());
             if (h > y2)
                   y2 = h;
             else if (h < y1)
                   y1 = h;
             }
       if (textLine()->beginHook()) {
-            double h = textLine()->beginHookHeight().point();
+            double h = point(textLine()->beginHookHeight());
             if (h > y2)
                   y2 = h;
             else if (h < y1)

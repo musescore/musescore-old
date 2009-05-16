@@ -162,7 +162,7 @@ QPointF Clef::canvasPos() const
 void Clef::layout(ScoreLayout*)
       {
       double smag = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
-      double msp  = _spatium * smag;
+      double msp  = spatium() * smag;
       int val     = subtype();
       double yoff = 0.0;
       clear();
@@ -300,7 +300,7 @@ void Clef::layout(ScoreLayout*)
             }
       addElement(symbol, .0, .0);
       symbol->setMag(smag * mag());
-      setUserOff(QPointF(0.0, yoff * mag()));
+      setUserOff(QPointF(0.0, yoff));
       }
 
 //---------------------------------------------------------

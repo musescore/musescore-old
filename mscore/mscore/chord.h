@@ -46,21 +46,22 @@ class Glissando;
 */
 
 class Stem : public Element {
-      Spatium _len;
+      double _len;
       Spatium _userLen;
 
    public:
       Stem(Score*);
       Stem &operator=(const Stem&);
 
-      virtual Stem* clone() const { return new Stem(*this); }
+      virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
       virtual void draw(QPainter& p) const;
-      void setLen(const Spatium&);
-      Spatium stemLen() const { return _len + _userLen; }
+      void setLen(double v)  { _len = v; }
+      double stemLen() const { return _len + _userLen.point(); }
       virtual QRectF bbox() const;
       virtual bool isMovable() const  { return true; }
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool startEdit(Viewer*, const QPointF&) { return true; }
+
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual void write(Xml& xml) const;

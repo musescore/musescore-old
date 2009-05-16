@@ -27,7 +27,6 @@
 #include "score.h"
 #include "volta.h"
 #include "note.h"
-#include "layout.h"
 #include "instrument.h"
 #include "part.h"
 #include "chord.h"

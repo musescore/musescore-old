@@ -28,7 +28,6 @@
 #include "key.h"
 #include "preferences.h"
 #include "text.h"
-#include "layout.h"
 #include "measure.h"
 
 //---------------------------------------------------------

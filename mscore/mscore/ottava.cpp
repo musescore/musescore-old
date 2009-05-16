@@ -24,7 +24,6 @@
 #include "measure.h"
 #include "xml.h"
 #include "utils.h"
-#include "layout.h"
 #include "score.h"
 #include "text.h"
 

@@ -24,7 +24,6 @@
 #include "system.h"
 #include "staff.h"
 #include "measure.h"
-#include "layout.h"
 #include "page.h"
 #include "score.h"
 #include "viewer.h"
