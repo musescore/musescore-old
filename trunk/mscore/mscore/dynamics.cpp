@@ -69,6 +69,7 @@ Dyn dynList[] = {
 Dynamic::Dynamic(Score* s)
    : Text(s)
       {
+      _velocity = -1;
       setTextStyle(TEXT_STYLE_DYNAMICS);
       }
 
@@ -329,6 +330,11 @@ DynamicProperties::DynamicProperties(Dynamic* d, QWidget* parent)
 void DynamicProperties::accept()
       {
       dynamic->setVelocity(velocity->value());
-
+      if (staffButton->isChecked())
+            dynamic->setDynType(DYNAMIC_STAFF);
+      else if (partButton->isChecked())
+            dynamic->setDynType(DYNAMIC_PART);
+      else if (systemButton->isChecked())
+            dynamic->setDynType(DYNAMIC_SYSTEM);
       QDialog::accept();
       }
