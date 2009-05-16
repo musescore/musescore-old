@@ -452,9 +452,10 @@ void Score::putNote(const QPointF& pos, bool replace)
                   }
             }
 
+      int nextTick = _is.cr->tick() + _is.cr->tickLen();
       _is.cr = nextChordRest(_is.cr);
       if ((_is.cr == 0) && (_is.track % VOICES)) {
-            Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
+            Segment* s = tick2segment(nextTick);
             int track = (_is.track / VOICES) * VOICES;
             _is.cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
@@ -740,7 +741,10 @@ void Score::cmdFlip()
                         newSubtype = DfermataSym;
                   else if (e->subtype() == DfermataSym)
                         newSubtype = UfermataSym;
-                  if (newSubtype != e->subtype())
+                  else if (e->subtype() == TenutoSym) {
+                        // TODO flip between A_CHORD, A_TOP_CHORD, A_BOTTOM_CHORD,
+                        }
+                  if (newSubtype != -1)
                         _undo->push(new ChangeSubtype(e, newSubtype));
                   }
             }

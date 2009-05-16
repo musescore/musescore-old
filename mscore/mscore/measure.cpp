@@ -2923,12 +2923,14 @@ void Measure::read(QDomElement e, int idx)
             else
                   domError(e);
             }
+#if 0
       int nstaves = staves.size();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             MStaff* mstaff = staves[staffIdx];
             if (mstaff->hasVoices)
                   printf("has voices staff %d measure %d\n", staffIdx, _no);
             }
+#endif
       }
 
 //---------------------------------------------------------

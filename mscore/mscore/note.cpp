@@ -314,7 +314,7 @@ void Note::changeAccidental(int accType)
       // redundant and is set as an editorial accidental
 
       if (accType != type2) {
-            printf("user acc %d  -- %d\n", accType, type2);
+//            printf("user acc %d  -- %d\n", accType, type2);
             _userAccidental = accType;    // editorial accidental
             }
       }
