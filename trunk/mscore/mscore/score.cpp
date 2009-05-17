@@ -2146,7 +2146,10 @@ void Score::removeElement(Element* element)
             remove(element);
             return;
             }
-      parent->remove(element);
+      if (parent)
+            parent->remove(element);
+      else
+            remove(element);
 
       switch(element->type()) {
             case OTTAVA:

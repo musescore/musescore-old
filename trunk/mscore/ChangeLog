@@ -1,3 +1,5 @@
+17.may (ws)
+      - fix exchange voices
 16.may (ws)
       - get rid of the global _spatium variable
       - removed ScoreLayout() class

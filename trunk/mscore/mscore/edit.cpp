@@ -577,12 +577,16 @@ void Score::cmdAddSlur(Note* note)
 void Score::cmdAddTie()
       {
       Note* note = getSelectedNote();
-      if (!note || note->tieFor())
+      if (!note || note->tieFor()) {
+            printf("cmdAddTie: no note selected or noteFor %p\n", note ? note->tieFor() : 0);
             return;
+            }
       Chord* chord  = note->chord();
       if (noteEntryMode()) {
-            if (_is.pos() == 0)
+            if (_is.pos() == 0) {
+                  printf("cmdAddTie: no pos\n");
                   return;
+                  }
 // printf("cmdAdd Tie pos %d cr %p\n", _is.pos(), _is.cr);
             Note* n = cmdAddPitch1(note->pitch(), false);
 // printf("cmdAdd Tie %p %p %d-%d\n", note, n, note->chord()->tick(), n->chord()->tick());
