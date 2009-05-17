@@ -263,7 +263,7 @@ void Lilypond::createMeasure()
       if (tick >= measure->tick() + measure->tickLen()) {
             measure = new Measure(score);
             measure->setTick(tick);
-            score->layout()->add(measure);
+            score->add(measure);
             }
       }
 
@@ -388,7 +388,7 @@ void Lilypond::convert()
 
       measure = new Measure(score);
       measure->setTick(tick);
-      score->layout()->add(measure);
+      score->add(measure);
 
       QChar c = lookup();
       if (c == '\\') {

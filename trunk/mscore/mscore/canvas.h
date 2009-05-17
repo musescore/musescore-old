@@ -51,7 +51,6 @@ class Canvas : public QFrame, public Viewer {
 
    private:
       Navigator* navigator;
-      ScoreLayout* _layout;
       int level;
 
       State state;
@@ -153,7 +152,7 @@ class Canvas : public QFrame, public Viewer {
       void setState(State);
       State getState() const { return state; }
       bool startEdit(Element*, int startGrip = -1);
-      void setScore(Score* s, ScoreLayout*);
+      void setScore(Score* s);
 
       qreal mag() const;
       qreal xoffset() const;

@@ -62,6 +62,15 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
       }
 
 //---------------------------------------------------------
+//   pos2
+//---------------------------------------------------------
+
+QPointF LineSegment::pos2() const
+      {
+      return _p2 + _userOff2 * spatium();
+      }
+
+//---------------------------------------------------------
 //   gripAnchor
 //---------------------------------------------------------
 
@@ -193,7 +202,7 @@ bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
             line()->setTick(tick1);
             line()->setTick2(tick2);
 
-            line()->layout(score()->layout());
+            line()->layout();
             if (line()->lineSegments().size() != segments)
                   score()->changeLineSegment(curGrip == 1);
             if (line()->type() == OTTAVA)
@@ -331,9 +340,9 @@ QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
 //    compute segments from tick1 tick2
 //---------------------------------------------------------
 
-void SLine::layout(ScoreLayout* layout)
+void SLine::layout()
       {
-      if (!parent()) {
+      if (score() == gscore) {
             //
             // when used in a palette, SLine has no parent and
             // tick and tick2 has no meaning so no layout is
@@ -341,7 +350,7 @@ void SLine::layout(ScoreLayout* layout)
             //
             if (!segments.isEmpty()) {
                   LineSegment* s = segments.front();
-                  s->layout(layout);
+                  s->layout();
                   setbbox(s->bbox());
                   }
             return;
@@ -355,7 +364,7 @@ void SLine::layout(ScoreLayout* layout)
       QPointF p1 = tick2pos(0, tick(), staffI, &s1);
       QPointF p2 = tick2pos(1, _tick2, staffI, &s2);
 
-      QList<System*>* systems = layout->systems();
+      QList<System*>* systems = score()->systems();
       int sysIdx1        = systems->indexOf(s1);
       int sysIdx2        = systems->indexOf(s2);
       int segmentsNeeded = sysIdx2 - sysIdx1 + 1;
@@ -418,7 +427,7 @@ void SLine::layout(ScoreLayout* layout)
                   seg->setPos(seg->gripAnchor(0));
                   seg->setXpos2(p2.x() - seg->ipos().x());
                   }
-            seg->layout(layout);
+            seg->layout();
             }
       }
 

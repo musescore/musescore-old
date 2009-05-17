@@ -47,8 +47,9 @@ void Tremolo::draw(QPainter& p) const
       if ((parent() == 0) && (subtype() < 3)) {
             double x = 0.0; // bbox().width() * .25;
             QPen pen(p.pen());
-            pen.setWidthF(score()->styleS(ST_stemWidth).point());
+            pen.setWidthF(point(score()->styleS(ST_stemWidth)));
             p.setPen(pen);
+            double _spatium = spatium();
             p.drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
             }
       }
@@ -57,9 +58,9 @@ void Tremolo::draw(QPainter& p) const
 //   layout
 //---------------------------------------------------------
 
-void Tremolo::layout(ScoreLayout* layout)
+void Tremolo::layout()
       {
-      double sp  = layout->spatium();
+      double sp  = spatium();
       double w   = sp * 1.2;
       double h   = sp * .8;
       double lw  = sp * .35;
@@ -93,14 +94,14 @@ void Tremolo::layout(ScoreLayout* layout)
             // center tremolo above note
             x = anchor2->x() + anchor2->headWidth() * .5;
             y = anchor2->y();
-            h = 2.0 * _spatium + bbox().height();
+            h = 2.0 * spatium() + bbox().height();
             if (anchor2->line() > 4)
                   h *= -1;
             }
       y += (h - bbox().height()) * .5;
       if (!twoNotes()) {
             if (_chord2->hook())
-                  y -= _spatium * .5 * (_chord2->isUp() ? -1.0 : 1.0);
+                  y -= spatium() * .5 * (_chord2->isUp() ? -1.0 : 1.0);
             setPos(x, y);
             return;
             }

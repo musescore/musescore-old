@@ -477,10 +477,10 @@ void Score::lyricsEndEdit()
 //   layout
 //---------------------------------------------------------
 
-void Lyrics::layout(ScoreLayout* l)
+void Lyrics::layout()
       {
       setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
-      Text::layout(l);
+      Text::layout();
       double lh             = lineSpacing();
       double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;
 
@@ -489,7 +489,7 @@ void Lyrics::layout(ScoreLayout* l)
       LyricsList* ll = seg->lyricsList(staffIdx());
 
       int line       = ll->indexOf(this);
-      double y       = lh * line + score()->styleS(ST_lyricsDistance).point()
+      double y       = lh * line + point(score()->styleS(ST_lyricsDistance))
                        + sys->staff(staffIdx())->bbox().height();
       double x       = noteHeadWidth2 - bbox().width() * .5;
       setPos(x, y);
@@ -511,7 +511,7 @@ void Lyrics::paste()
       if (sl.isEmpty())
             return;
       cursor->insertText(sl[0]);
-      layout(0);
+      layout();
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       score()->setUpdateAll();

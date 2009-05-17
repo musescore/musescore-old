@@ -62,7 +62,7 @@ class TimeSig : public Element {
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
 
       void getSig(int* n, int* z1) const;

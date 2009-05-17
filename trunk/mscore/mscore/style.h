@@ -102,10 +102,10 @@ class TextStyle {
       TextStyle() {}
       void write(Xml&) const;
       void read(QDomElement);
-      QFont font(double s = ::_spatium) const;
+      QFont font(double space) const;
       QFont fontPx() const;
-      QRectF bbox(const QString& s) const { return fontMetrics().boundingRect(s); }
-      QFontMetricsF fontMetrics() const   { return QFontMetricsF(font()); }
+      QRectF bbox(double space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
+      QFontMetricsF fontMetrics(double space) const { return QFontMetricsF(font(space)); }
       bool operator!=(const TextStyle& s) const {
             return s.name != name
                 || s.family != family

@@ -134,7 +134,7 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
 
 void Stem::editDrag(int, const QPointF& delta)
       {
-      _userLen += delta.y();
+      _userLen += Spatium(delta.y() / spatium());
       Chord* c = static_cast<Chord*>(parent());
       if (c->hook())
             c->hook()->move(0.0, delta.y());
@@ -463,7 +463,7 @@ QRectF Chord::bbox() const
  Layout chord stem and hook.
 */
 
-void Chord::layoutStem1(ScoreLayout* /*layout*/)
+void Chord::layoutStem1()
       {
       int istaff = staffIdx();
       System* s  = segment()->measure()->system();
@@ -535,7 +535,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
 
       x += (lr & 1) ? -hw2 : hw2;
       if (lr == 3)
-            len += hw;
+            len += Spatium(hw / spatium());
 
       h->setParent(this);
       h->setTrack(staffIdx * VOICES);
@@ -605,7 +605,7 @@ void Chord::addLedgerLines(double x, int move)
 //   layout
 //---------------------------------------------------------
 
-void Chord::layout(ScoreLayout* layout)
+void Chord::layout()
       {
       if (notes.empty())
             return;
@@ -618,7 +618,7 @@ void Chord::layout(ScoreLayout* layout)
             //
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
                   Note* note = in->second;
-                  note->layout(layout);
+                  note->layout();
 
                   double x = 0.0;
                   double y = note->line() * _spatium * .5;
@@ -642,7 +642,7 @@ void Chord::layout(ScoreLayout* layout)
       _dotPosX  = 0.0;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
-            note->layout(layout);
+            note->layout();
 
             double x = 0.0;
 
@@ -699,9 +699,9 @@ void Chord::layout(ScoreLayout* layout)
       addLedgerLines(x, 1);      // notes moved to lower staff
 
       foreach(LedgerLine* l, _ledgerLines)
-            l->layout(layout);
+            l->layout();
 
-      layoutArticulations(layout);
+      layoutArticulations();
 
       //-----------------------------------------
       //  Fingering
@@ -724,7 +724,7 @@ void Chord::layout(ScoreLayout* layout)
 
       if (_arpeggio) {
             double headHeight = upnote->headHeight();
-            _arpeggio->layout(layout);
+            _arpeggio->layout();
             lx -= _arpeggio->width() + _spatium * .5;
             double y = upNote()->pos().y() - headHeight * .5;
             double h = downNote()->pos().y() - y;
@@ -1092,6 +1092,7 @@ void Chord::space(double& min, double& extra) const
       double mirror = 0.0;
       double hw     = 0.0;
 
+      double _spatium = spatium();
       if (_arpeggio)
             extra = _arpeggio->width() + _spatium * .5;
       if (_glissando)
@@ -1307,7 +1308,7 @@ void Chord::setMag(double val)
  Layout chord stem and hook.
 */
 
-void Chord::layoutStem(ScoreLayout* layout)
+void Chord::layoutStem()
       {
       System* s = segment()->measure()->system();
       if (s == 0)       //DEBUG
@@ -1390,7 +1391,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       //-----------------------------------------
 
       if (_tremolo)
-            _tremolo->layout(layout);
+            _tremolo->layout();
       }
 
 

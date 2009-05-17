@@ -988,6 +988,46 @@ p, li { white-space: pre-wrap; }
         <source>additional trailing space</source>
         <translation>附加的後置間隔</translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">自動</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">音高上升</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">下鍵</translation>
+    </message>
+    <message>
+        <source>Note Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1728,6 +1768,18 @@ failed: </source>
         <comment>space unit</comment>
         <translation></translation>
     </message>
+    <message>
+        <source>shorten stems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shortest stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1772,14 +1824,6 @@ failed: </source>
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>Previous</source>
-        <translation>上一個</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>下一個</translation>
     </message>
     <message>
         <source>Parent</source>
@@ -2566,6 +2610,14 @@ failed: </source>
     <message>
         <source>Subtype</source>
         <translation>次類型</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5044,10 +5096,6 @@ before closing?</source>
         <translation>音符之間的三斜線</translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation>尋找： </translation>
-    </message>
-    <message>
         <source>Lyrics odd lines</source>
         <translation>歌詞奇數列</translation>
     </message>
@@ -5058,6 +5106,14 @@ before closing?</source>
     <message>
         <source>Ottava</source>
         <translation>八度記號</translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5269,6 +5325,18 @@ before closing?</source>
     <message>
         <source>Velo</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7004,391 +7072,237 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">毫米</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore：文字屬性</translation>
     </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">表單</translation>
+    </message>
     <message>
         <source>Font:</source>
-        <translation>字型：</translation>
+        <translation type="unfinished">字型：</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>字型</translation>
+        <translation type="unfinished">字型</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>大小：</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>樣式：</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>粗體</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>斜體</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>底線</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>對齊：</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>顏色：</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>外框顏色</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>外框</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>畫圓形框</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>圓形</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>畫矩形框</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>矩形</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>寬度：</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>框線寬度</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>邊緣：</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>外框內邊緣</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>圓角：</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>靠左對齊</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation>毫米</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation></translation>
+        <translation type="unfinished">大小：</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>字型點數大小</translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation>文字左側對齊參考點</translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation>文字中心對齊參考點</translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation>文字右側對齊參考點</translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation>文字頂端對齊參考點</translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation>文字中心垂直對齊參考點</translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation>文字底端對齊參考點</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation>文字顏色</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>偏移</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation>參考點的水平偏移</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation>參考點相對於上層元件寬度百分比的偏移</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation>參考點的垂直偏移</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation>參考點相對於上層元件高度百分比的偏移</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>單位：</translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation>偏移量為絕對的</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>毫米</translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation>間隔單位的偏移量</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>間隔</translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation>使用文字外框</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>毫米</translation>
-    </message>
-    <message>
-        <source>corner round</source>
-        <translation>圓角</translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore：編輯文字樣式</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>一般</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>字型：</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>大小：</translation>
+        <translation type="unfinished">字型點數大小</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>樣式：</translation>
+        <translation type="unfinished">樣式：</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">粗體</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">斜體</translation>
     </message>
     <message>
         <source>I</source>
-        <translation>I</translation>
+        <translation type="unfinished">I</translation>
+    </message>
+    <message>
+        <source>underline</source>
+        <translation type="unfinished">底線</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="unfinished">U</translation>
     </message>
     <message>
-        <source>Text Sample</source>
-        <translation>文字範例</translation>
+        <source>Align:</source>
+        <translation type="unfinished">對齊：</translation>
     </message>
     <message>
-        <source>Position</source>
-        <translation>位置</translation>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished">文字左側對齊參考點</translation>
     </message>
     <message>
-        <source>Alignment</source>
-        <translation>對齊</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
-        <source>Horizontal</source>
-        <translation>水平</translation>
+        <source>center text on reference point</source>
+        <translation type="unfinished">文字中心對齊參考點</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation>左</translation>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished">文字右側對齊參考點</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation>右</translation>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished">文字頂端對齊參考點</translation>
     </message>
     <message>
-        <source>Center</source>
-        <translation>中</translation>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished">文字中心垂直對齊參考點</translation>
     </message>
     <message>
-        <source>Vertical</source>
-        <translation>垂直</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>上</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>下</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>底線</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>偏移</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>單位：</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>毫米</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>間隔</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>外框</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>寬度：</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>邊緣：</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>圓角：</translation>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished">文字底端對齊參考點</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>顏色：</translation>
+        <translation type="unfinished">顏色：</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished">文字顏色</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">偏移</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished">參考點的水平偏移</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">relX:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished">參考點相對於上層元件寬度百分比的偏移</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished">參考點的垂直偏移</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">relY:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished">參考點相對於上層元件高度百分比的偏移</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">單位：</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished">偏移量為絕對的</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">毫米</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished">間隔單位的偏移量</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished">使用文字外框</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">畫圓形框</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>圓形</translation>
+        <translation type="unfinished">圓形</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">畫矩形框</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>矩形</translation>
+        <translation type="unfinished">矩形</translation>
     </message>
     <message>
-        <source>Preview</source>
-        <translation>預覽</translation>
+        <source>Width:</source>
+        <translation type="unfinished">寬度：</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation>套用</translation>
+        <source>frame line width</source>
+        <translation type="unfinished">框線寬度</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>確定</translation>
+        <source>mm</source>
+        <translation type="unfinished">毫米</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
+        <source>Margin:</source>
+        <translation type="unfinished">邊緣：</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">外框內邊緣</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished">圓角：</translation>
+    </message>
+    <message>
+        <source>corner round</source>
+        <translation type="unfinished">圓角</translation>
+    </message>
+    <message>
+        <source>frame color</source>
+        <translation type="unfinished">外框顏色</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Ich und du, Muellers Kuh...
-我是文字範例</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore：編輯文字樣式</translation>
     </message>
 </context>
 <context>

@@ -26,7 +26,6 @@
 #include "duration.h"
 
 class Score;
-class ScoreLayout;
 class Measure;
 class Beam;
 class Tuplet;
@@ -80,8 +79,8 @@ class ChordRest : public DurationElement {
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
 
-      virtual void layoutStem1(ScoreLayout*)    {}
-      virtual void layoutStem(ScoreLayout*)     {}
+      virtual void layoutStem1()                {}
+      virtual void layoutStem()                 {}
       virtual int upLine() const                { return 0;}
       virtual int downLine() const              { return 8;}
       virtual int line(bool up) const           { return up ? upLine() : downLine(); }
@@ -105,7 +104,7 @@ class ChordRest : public DurationElement {
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }
       void setLen(int ticks);
-      void layoutArticulations(ScoreLayout*);
+      void layoutArticulations();
       Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
       void setExtraLeadingSpace(Spatium v)      { _extraLeadingSpace = v;     }
       Spatium extraTrailingSpace() const        { return _extraTrailingSpace; }

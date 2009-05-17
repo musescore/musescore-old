@@ -42,7 +42,7 @@ TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
       _text = 0;
-      layout(score()->layout());    // set right _text
+      layout();    // set right _text
       }
 
 //---------------------------------------------------------
@@ -192,7 +192,7 @@ QRectF TextLineSegment::bbox() const
 //   layout
 //---------------------------------------------------------
 
-void TextLineSegment::layout(ScoreLayout* l)
+void TextLineSegment::layout()
       {
       TextLine* tl = (TextLine*)line();
       if (!tl->diagonal())
@@ -228,7 +228,7 @@ void TextLineSegment::layout(ScoreLayout* l)
                   break;
             }
       if (_text)
-            _text->layout(l);
+            _text->layout();
       }
 
 //---------------------------------------------------------
@@ -278,7 +278,7 @@ TextLine::TextLine(Score* s)
       _continueSymbol    = -1;
       _endSymbol         = -1;
 
-      setLen(_spatium * 7);   // for use in palettes
+      setLen(spatium() * 7);   // for use in palettes
       }
 
 TextLine::TextLine(const TextLine& e)

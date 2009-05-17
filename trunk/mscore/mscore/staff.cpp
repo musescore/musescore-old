@@ -414,7 +414,16 @@ void Staff::changeClef(int tick, int st)
 
 double Staff::height() const
       {
-      return 4 * _spatium * mag();
+      return 4 * _score->spatium() * mag();
+      }
+
+//---------------------------------------------------------
+//   spatium
+//---------------------------------------------------------
+
+double Staff::spatium() const
+      {
+      return _score->spatium() * mag();
       }
 
 //---------------------------------------------------------

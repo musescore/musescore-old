@@ -37,7 +37,6 @@ class TextC;
 class Bracket;
 class Lyrics;
 class Segment;
-class ScoreLayout;
 class MeasureBase;
 
 //---------------------------------------------------------
@@ -64,8 +63,8 @@ class SysStaff {
       void setbbox(const QRectF& r)   { _bbox = r; }
       void move(double x, double y);
 
-      double distance() const        { return _distance.point(); }
-      void setDistance(double v)     { _distance.set(v); }
+      Spatium distance() const        { return _distance; }
+//      void setDistance(double v)     { _distance.set(v); }
       void setDistance(Spatium v)    { _distance = v; }
 
       bool show() const              { return _show; }
@@ -112,8 +111,8 @@ class System : public Element {
 
       Page* page() const                 { return (Page*)parent(); }
 
-      virtual void layout(ScoreLayout*, double xoffset);
-      void layout2(ScoreLayout*);         ///< Called after Measure layout.
+      virtual void layout(double xoffset);
+      void layout2();         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
       QList<MeasureBase*>& measures()      { return ml; }
@@ -123,8 +122,8 @@ class System : public Element {
       const QList<SysStaff*>* staves() const { return &_staves;   }
       SysStaff* staff(int n) const         { return _staves[n]; }
 
-      double distance(int n) const         { return _staves[n]->distance(); }
-      void setDistance(int n, double v)    { _staves[n]->setDistance(v); }
+      Spatium distance(int n) const        { return _staves[n]->distance(); }
+//      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
       bool pageBreak() const               { return _pageBreak; }
       void setPageBreak(bool val)          { _pageBreak = val; }
 
@@ -147,7 +146,7 @@ class System : public Element {
       void setFirstSystem(bool v) { _firstSystem = v;   }
       bool isVbox() const         { return _vbox;       }
       void setVbox(bool v)        { _vbox = v;          }
-      void layoutLyrics(ScoreLayout*, Lyrics*, Segment*, int staffIdx);
+      void layoutLyrics(Lyrics*, Segment*, int staffIdx);
       };
 
 typedef QList<System*>::iterator iSystem;

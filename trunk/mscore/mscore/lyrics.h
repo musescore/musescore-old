@@ -47,7 +47,7 @@ class Lyrics : public Text {
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

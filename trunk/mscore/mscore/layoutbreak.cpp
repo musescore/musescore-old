@@ -61,9 +61,9 @@ void LayoutBreak::draw(QPainter& p) const
 //   layout
 //---------------------------------------------------------
 
-void LayoutBreak::layout(ScoreLayout* layout)
+void LayoutBreak::layout()
       {
-      double _spatium = layout->spatium();
+      double _spatium = spatium();
       path      = QPainterPath();
       lw        = _spatium * 0.3;
       double h  = _spatium * 4;
@@ -103,7 +103,7 @@ void LayoutBreak::layout(ScoreLayout* layout)
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
-      Element::layout(layout);      // alignment & offset
+      Element::layout();      // alignment & offset
       }
 
 //---------------------------------------------------------

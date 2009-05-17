@@ -305,11 +305,11 @@ void EditDrumset::updateExample()
       note->setTrack(voice);
       note->setPitch(pitch);
       note->setLine(line);
-      note->setPos(0.0, _spatium * .5 * line);
+      note->setPos(0.0, gscore->spatium() * .5 * line);
       note->setHeadGroup(noteHead);
       chord->add(note);
       Stem* stem = new Stem(gscore);
-      stem->setLen((up ? -3.0 : 3.0) * _spatium);
+      stem->setLen((up ? -3.0 : 3.0) * gscore->spatium());
       chord->setStem(stem);
       stem->setPos(note->stemPos(up));
       drumNote->add(0,  chord, nDrumset.name(pitch));

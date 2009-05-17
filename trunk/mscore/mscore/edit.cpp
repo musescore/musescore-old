@@ -545,10 +545,10 @@ void Score::cmdAddSlur(Note* note)
       Slur* slur = new Slur(this);
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
-      slur->setParent(&_layout);
+      slur->setParent(0);
       cmdAdd(slur);
 
-      slur->layout(layout());
+      slur->layout();
       QList<SlurSegment*>* el = slur->slurSegments();
 
       if (noteEntryMode()) {
@@ -651,8 +651,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
       pin->setTrack(cr->track());
-      pin->setParent(&_layout);
-      pin->layout(layout());
+      pin->layout();
       cmdAdd(pin);
       if (!noteEntryMode())
             select(pin, SELECT_SINGLE, 0);
@@ -782,7 +781,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       else if (s->anchor() == ANCHOR_PARENT) {
 #endif
             bool foundPage = false;
-            foreach (Page* page, _layout.pages()) {
+            foreach (Page* page, pages()) {
                   if (page->contains(pos)) {
                         const QList<System*>* sl = page->systems();
                         if (sl->isEmpty()) {

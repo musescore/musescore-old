@@ -934,7 +934,7 @@ void ExportMusicXml::calcDivisions()
 static void defaults(Xml& xml, Score* s)
       {
       const int tenths = 40;
-      double millimeters = s->layout()->spatium() * tenths / (10 * DPMM);
+      double millimeters = s->spatium() * tenths / (10 * DPMM);
       xml.stag("defaults");
       xml.stag("scaling");
       xml.tag("millimeters", millimeters);

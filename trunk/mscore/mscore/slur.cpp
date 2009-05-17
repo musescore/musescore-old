@@ -62,11 +62,13 @@ SlurSegment::SlurSegment(const SlurSegment& b)
 
 void SlurSegment::updatePath()
       {
+      double _spatium = spatium();
+
       QPointF pp[4];
       for (int i = 0; i < 4; ++i)
-            pp[i] = ups[i].pos();
+            pp[i] = ups[i].p + ups[i].off * _spatium;
       path = QPainterPath();
-      QPointF t(0.0, _spatium * .08);    // thickness of slur
+      QPointF t(0.0, spatium() * .08);    // thickness of slur
       path.moveTo(pp[0]);
       path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
       path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
@@ -102,7 +104,7 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
       *n = 4;
       QPointF p(canvasPos());
       for (int i = 0; i < 4; ++i)
-            r[i].translate(ups[i].pos() + p);
+            r[i].translate(ups[i].p + ups[i].off * spatium() + p);
       }
 
 //---------------------------------------------------------
@@ -127,7 +129,7 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
 
       if (key == Qt::Key_X) {
             sl->setSlurDirection(sl->isUp() ? DOWN : UP);
-            sl->layout(score()->layout());
+            sl->layout();
             return true;
             }
       if (!((modifiers & Qt::ShiftModifier)
@@ -161,7 +163,7 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
             }
 
       ups[curGrip].off = QPointF();
-      sl->layout(score()->layout());
+      sl->layout();
       if (sl->slurSegments()->size() != segments) {
             QList<SlurSegment*>* ss = sl->slurSegments();
             SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
@@ -219,14 +221,16 @@ QPointF SlurSegment::gripAnchor(int grip) const
 
 void SlurSegment::editDrag(int curGrip, const QPointF& delta)
       {
-      ups[curGrip].off += (delta / _spatium);
+      double _spatium = spatium();
+
+      ups[curGrip].off += (delta / spatium());
 
       if (curGrip == 0 || curGrip == 3) {
             //
             //  compute bezier help points
             //
-            QPointF p0 = ups[0].pos();
-            QPointF p3 = ups[3].pos();
+            QPointF p0 = ups[0].p + ups[0].off * _spatium;
+            QPointF p3 = ups[3].p + ups[3].off * _spatium;
 
             qreal xdelta = p3.x() - p0.x();
             if (xdelta == 0.0) {
@@ -322,7 +326,7 @@ void SlurSegment::read(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal b)
+void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
       bow      = b;
@@ -332,10 +336,12 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       //
       //  compute bezier help points
       //
-      qreal x0 = ups[0].pos().x();
-      qreal x3 = ups[3].pos().x();
-      qreal y0 = ups[0].pos().y();
-      qreal y3 = ups[3].pos().y();
+      double _spatium = spatium();
+      qreal x0 = ups[0].p.x() + ups[0].off.x() * _spatium;
+      qreal x3 = ups[3].p.x() + ups[3].off.x() * _spatium;
+
+      qreal y0 = ups[0].p.y() + ups[0].off.y() * _spatium;
+      qreal y3 = ups[3].p.y() + ups[3].off.y() * _spatium;
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
@@ -479,6 +485,8 @@ void SlurTie::change(Element* o, Element* n)
 
 QPointF SlurTie::slurPos(Element* e, System*& s)
       {
+      double _spatium = spatium();
+
       ChordRest* cr;
       if (e->type() == NOTE)
             cr = static_cast<Note*>(e)->chord();
@@ -755,6 +763,7 @@ void Slur::read(QDomElement e)
 //---------------------------------------------------------
 //   chordsHaveTie
 //---------------------------------------------------------
+
 static bool chordsHaveTie (Chord* c1, Chord* c2)
       {
       NoteList* nl1 = c1->noteList();
@@ -800,9 +809,11 @@ static bool isDirectionMixture (Chord* c1, Chord* c2)
 //   layout
 //---------------------------------------------------------
 
-void Slur::layout(ScoreLayout* layout)
+void Slur::layout()
       {
-      if (!parent()) {
+      double _spatium = spatium();
+
+      if (score() == gscore) {      // HACK
             //
             // when used in a palette, slur has no parent and
             // tick and tick2 has no meaning so no layout is
@@ -820,10 +831,9 @@ void Slur::layout(ScoreLayout* layout)
                   }
             s->setLineSegmentType(SEGMENT_SINGLE);
             qreal bow = up ? 1.5 * -_spatium : 1.5 * _spatium;
-            s->layout(layout, QPointF(0, 0), QPointF(_len, 0), bow);
+            s->layout(QPointF(0, 0), QPointF(_len, 0), bow);
             return;
             }
-      double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
             case DOWN:  up = false; break;
@@ -873,7 +883,7 @@ void Slur::layout(ScoreLayout* layout)
       QPointF p1 = slurPos(startElement(), s1);
       QPointF p2 = slurPos(endElement(), s2);
 
-      QList<System*>* sl = layout->systems();
+      QList<System*>* sl = score()->systems();
       iSystem is = sl->begin();
       while (is != sl->end()) {
             if (*is == s1)
@@ -923,27 +933,27 @@ void Slur::layout(ScoreLayout* layout)
 
             // case 1: one segment
             if (s1 == s2) {
-                  segment->layout(layout, p1, p2, bow);
+                  segment->layout(p1, p2, bow);
                   segment->setLineSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(layout, p1, QPointF(x, p1.y()), bow);
+                  segment->layout(p1, QPointF(x, p1.y()), bow);
                   segment->setLineSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
                   qreal x2 = sp.x() + system->bbox().width();
-                  segment->layout(layout, QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
+                  segment->layout(QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
                   segment->setLineSegmentType(SEGMENT_MIDDLE);
                   }
             // case 4: end segment
             else {
                   //qreal x = sp.x();
                   qreal x = firstNoteRestSegmentX(system) - _spatium;
-                  segment->layout(layout, QPointF(x, p2.y()), p2, bow);
+                  segment->layout(QPointF(x, p2.y()), p2, bow);
                   segment->setLineSegmentType(SEGMENT_END);
                   }
             if (system == s2)
@@ -1047,7 +1057,7 @@ void Tie::read(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void Tie::layout(ScoreLayout* layout)
+void Tie::layout()
       {
       //
       // TODO: if there is a startNote but no endNote
@@ -1055,7 +1065,7 @@ void Tie::layout(ScoreLayout* layout)
       if (startElement() == 0 || endElement() == 0)
             return;
 
-      double _spatium = layout->spatium();
+      double _spatium = spatium();
 
       Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();
@@ -1085,7 +1095,7 @@ void Tie::layout(ScoreLayout* layout)
       QPointF p1 = startNote()->canvasPos() + off1;
       QPointF p2 = endNote()->canvasPos()   + off2;
 
-      QList<System*>* systems = layout->systems();
+      QList<System*>* systems = score()->systems();
       setPos(0, 0);
 
       //---------------------------------------------------------
@@ -1129,13 +1139,13 @@ void Tie::layout(ScoreLayout* layout)
 
             // case 1: one segment
             if (s1 == s2) {
-                  segment->layout(layout, p1, p2, bow);
+                  segment->layout(p1, p2, bow);
                   segment->setLineSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(layout, p1, QPointF(x, p1.y()), bow);
+                  segment->layout(p1, QPointF(x, p1.y()), bow);
                   segment->setLineSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
@@ -1152,7 +1162,7 @@ void Tie::layout(ScoreLayout* layout)
                   // qreal x = sp.x();
                   qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
 
-                  segment->layout(layout, QPointF(x, p2.y()), p2, bow);
+                  segment->layout(QPointF(x, p2.y()), p2, bow);
                   segment->setLineSegmentType(SEGMENT_END);
                   }
             }

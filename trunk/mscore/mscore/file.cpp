@@ -1289,7 +1289,7 @@ bool Score::read(QDomElement e)
                         slur->read(ee);
                         slur->setTrack(-1);     // for backward compatibility
                         slur->setTick(-1);
-                        _layout.add(slur);
+                        add(slur);
                         }
                   else if (tag == "HairPin") {
                         Hairpin* hairpin = new Hairpin(this);
@@ -1300,37 +1300,37 @@ bool Score::read(QDomElement e)
                               delete hairpin;
                               }
                         else
-                              _layout.add(hairpin);
+                              add(hairpin);
                         }
                   else if (tag == "Ottava") {
                         Ottava* ottava = new Ottava(this);
                         ottava->setTick(curTick);
                         ottava->read(ee);
-                        _layout.add(ottava);
+                        add(ottava);
                         }
                   else if (tag == "TextLine") {
                         TextLine* textLine = new TextLine(this);
                         textLine->setTick(curTick);
                         textLine->read(ee);
-                        _layout.add(textLine);
+                        add(textLine);
                         }
                   else if (tag == "Volta") {
                         Volta* volta = new Volta(this);
                         volta->setTick(curTick);
                         volta->read(ee);
-                        _layout.add(volta);
+                        add(volta);
                         }
                   else if (tag == "Trill") {
                         Trill* trill = new Trill(this);
                         trill->setTick(curTick);
                         trill->read(ee);
-                        _layout.add(trill);
+                        add(trill);
                         }
                   else if (tag == "Pedal") {
                         Pedal* pedal = new Pedal(this);
                         pedal->setTick(curTick);
                         pedal->read(ee);
-                        _layout.add(pedal);
+                        add(pedal);
                         }
                   else if (tag == "Excerpt") {
                         Excerpt* e = new Excerpt(this);
@@ -1344,8 +1344,8 @@ bool Score::read(QDomElement e)
       if (_mscVersion < 108)
             connectSlurs();
 
-      _layout.connectTies();
-      _layout.setInstrumentNames();
+      connectTies();
+      setInstrumentNames();
 
       searchSelectedElements();
 
@@ -1521,7 +1521,7 @@ void Score::print(QPrinter* printer)
 
 printf("num copies %d\n", printer->numCopies());
       for (int copy = 0; copy < printer->numCopies(); ++copy) {
-            const QList<Page*> pl = _layout.pages();
+            const QList<Page*> pl = pages();
             int pages = pl.size();
 
             int fromPage = printer->fromPage() - 1;
@@ -1616,7 +1616,7 @@ bool Score::saveSvg(const QString& saveName)
             m->collectElements(eel);
             }
       QList<const Element*> el;
-      foreach(const Page* page, _layout.pages()) {
+      foreach(const Page* page, pages()) {
             el.clear();
             page->collectElements(el);
             foreach(const Element* e, eel) {
@@ -1691,7 +1691,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             rv = printer.save(name, "png");
             }
       else {
-            const QList<Page*>& pl = _layout.pages();
+            const QList<Page*>& pl = pages();
             int pages = pl.size();
 
             QList<const Element*> eel;

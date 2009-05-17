@@ -116,10 +116,10 @@ Element* BSymbol::drop(const QPointF&, const QPointF&, Element* el)
 //   layout
 //---------------------------------------------------------
 
-void BSymbol::layout(ScoreLayout* l)
+void BSymbol::layout()
       {
       foreach(Element* e, _leafs)
-            e->layout(l);
+            e->layout();
       if (parent() && parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
             double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
@@ -137,7 +137,7 @@ QRectF BSymbol::drag(const QPointF& pos)
       QRectF r(abbox());
       foreach(const Element* e, _leafs)
             r |= e->abbox();
-      setUserOff(pos / _spatium);
+      setUserOff(pos / spatium());
       r |= abbox();
       foreach(const Element* e, _leafs)
             r |= e->abbox();
@@ -170,10 +170,10 @@ void Symbol::setAbove(bool val)
 //    values when calling this method
 //---------------------------------------------------------
 
-void Symbol::layout(ScoreLayout* layout)
+void Symbol::layout()
       {
-      Element::layout(layout);
-      BSymbol::layout(layout);
+      Element::layout();
+      BSymbol::layout();
       }
 
 //---------------------------------------------------------

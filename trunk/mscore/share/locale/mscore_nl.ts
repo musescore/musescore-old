@@ -994,6 +994,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">automatisch</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">up</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">omlaag</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1790,14 +1818,6 @@ toonhoogte</translation>
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Volgende</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Vorige</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Huidige</translation>
     </message>
@@ -2578,6 +2598,14 @@ failed: </source>
     <message>
         <source>Subtype</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5002,10 +5030,6 @@ voor dat u afsluit?</translation>
         <translation>spatie terug</translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation>Zoeken:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Zoeken</translation>
     </message>
@@ -5064,6 +5088,14 @@ voor dat u afsluit?</translation>
     <message>
         <source>Zoom Out</source>
         <translation>Uitzoomen</translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5276,6 +5308,18 @@ voor dat u afsluit?</translation>
     <message>
         <source>Velo</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7007,390 +7051,237 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished">sp</translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Tekst Eigenschappen</translation>
     </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Vorm</translation>
+    </message>
     <message>
         <source>Font:</source>
-        <translation>Lettertype:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>lettertype gezicht</translation>
+        <translation type="unfinished">lettertype gezicht</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Grootte:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Stijl:</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>vet</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>schuin</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>onderstrepen</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>Lijn:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Kleur:</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>kader kleur</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kader</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>teken omcirkeld kader</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Cirkel</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>teken boxed kader</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Box</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Breedte:</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>breedte van de kaderlijn</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marge:</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>kader binnenmarge</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Rond:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>uitlijnen links</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation>tekst kleur</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Compensatie</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Eenheid:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Tussenuimte</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation type="unfinished">Grootte:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>lettertype grootte</translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation>uitlijnen linkerrand van tekst naar referentiepunt</translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation>centreer tekst op referentiepunt</translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation>uitlijnen rechterrand van tekst naar referentiepunt</translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation>uitlijnen bovenrand van tekst naar referentiepunt</translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation>centreer tekst verticaal tot referentiepunt</translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation>uitlijnen onderste rand van tekst naar referentiepunt</translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation>horizontale compensatie tot referentiepunt</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation>compensatie referentiepunt in procenten van de standaard breedte</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation>verticale compensatie naar referentiepunt</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation>verwijzings punt dat in procenten van standaard hoogte wordt gecompenseerd</translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation>compensatie is absoluut</translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation>compensatie in ruimte-eenheden</translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation>tekstframe inschakelen</translation>
-    </message>
-    <message>
-        <source>corner round</source>
-        <translation>ronde hoeken</translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Bewerk Tekst Stijlen</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Algemeen</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Font:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Grootte:</translation>
+        <translation type="unfinished">lettertype grootte</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stijl:</translation>
+        <translation type="unfinished">Stijl:</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">vet</translation>
     </message>
     <message>
         <source>B</source>
-        <translation></translation>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">schuin</translation>
     </message>
     <message>
         <source>I</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>underline</source>
+        <translation type="unfinished">onderstrepen</translation>
     </message>
     <message>
         <source>U</source>
-        <translation></translation>
+        <translation type="unfinished">U</translation>
     </message>
     <message>
-        <source>Text Sample</source>
-        <translation>Tekst voorbeeld</translation>
+        <source>Align:</source>
+        <translation type="unfinished">Lijn:</translation>
     </message>
     <message>
-        <source>Position</source>
-        <translation>Positie</translation>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished">uitlijnen linkerrand van tekst naar referentiepunt</translation>
     </message>
     <message>
-        <source>Alignment</source>
-        <translation>Groep</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
-        <source>Horizontal</source>
-        <translation>Horizontaal</translation>
+        <source>center text on reference point</source>
+        <translation type="unfinished">centreer tekst op referentiepunt</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation>Links</translation>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished">uitlijnen rechterrand van tekst naar referentiepunt</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation>Rechts</translation>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished">uitlijnen bovenrand van tekst naar referentiepunt</translation>
     </message>
     <message>
-        <source>Center</source>
-        <translation>Midden</translation>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished">centreer tekst verticaal tot referentiepunt</translation>
     </message>
     <message>
-        <source>Vertical</source>
-        <translation>verticaal</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Boven</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Onder</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Basislijn</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Compensatie</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Eenheid:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Tussenuimte</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kader</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Breedte:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marge:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Rond:</translation>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished">uitlijnen onderste rand van tekst naar referentiepunt</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Kleur:</translation>
+        <translation type="unfinished">Kleur:</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished">tekst kleur</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Compensatie</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished">horizontale compensatie tot referentiepunt</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">relX:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished">compensatie referentiepunt in procenten van de standaard breedte</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished">verticale compensatie naar referentiepunt</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">relY:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished">verwijzings punt dat in procenten van standaard hoogte wordt gecompenseerd</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Eenheid:</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished">compensatie is absoluut</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">MM</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished">compensatie in ruimte-eenheden</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished">Tussenuimte</translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished">tekstframe inschakelen</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished">Kader</translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">teken omcirkeld kader</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Cirkel</translation>
+        <translation type="unfinished">Cirkel</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">teken boxed kader</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Box</translation>
+        <translation type="unfinished">Box</translation>
     </message>
     <message>
-        <source>Preview</source>
-        <translation>Voorbeeld</translation>
+        <source>Width:</source>
+        <translation type="unfinished">Breedte:</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation>Toepassen</translation>
+        <source>frame line width</source>
+        <translation type="unfinished">breedte van de kaderlijn</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation></translation>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <source>Margin:</source>
+        <translation type="unfinished">Marge:</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">kader binnenmarge</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished">Rond:</translation>
+    </message>
+    <message>
+        <source>corner round</source>
+        <translation type="unfinished">ronde hoeken</translation>
+    </message>
+    <message>
+        <source>frame color</source>
+        <translation type="unfinished">kader kleur</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Ich und du, Muellers Kuh...</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Bewerk Tekst Stijlen</translation>
     </message>
 </context>
 <context>

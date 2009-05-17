@@ -97,9 +97,9 @@ void RepeatMeasure::draw(QPainter& p) const
 //   layout
 //---------------------------------------------------------
 
-void RepeatMeasure::layout(ScoreLayout* layout)
+void RepeatMeasure::layout()
       {
-      double sp  = layout->spatium();
+      double sp  = spatium();
 
       double w   = sp * 2.0;
       double h   = sp * 2.0;

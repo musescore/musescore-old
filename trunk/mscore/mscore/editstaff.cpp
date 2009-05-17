@@ -92,7 +92,7 @@ void EditStaff::apply()
       part->setShortName(*shortName->document());
       part->setLongName(*longName->document());
       Score* score = staff->score();
-      score->layout()->setInstrumentNames();
+      score->setInstrumentNames();
       MeasureBaseList* ml = score->measures();
       int staffIdx = score->staffIdx(staff);
       for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {

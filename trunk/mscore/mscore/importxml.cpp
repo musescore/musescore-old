@@ -288,7 +288,7 @@ void Score::importMusicXml(const QString& name)
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
-      _layout.connectTies();
+      connectTies();
       layoutAll = true;
       _created = false;
       }
@@ -308,7 +308,7 @@ void Score::importCompressedMusicXml(const QString& name)
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
-      _layout.connectTies();
+      connectTies();
       layoutAll = true;
       _created = false;
       }
@@ -381,10 +381,10 @@ void MusicXml::doCredits()
       printf("MusicXml::doCredits()\n");
       PageFormat* pf = score->pageFormat();
       printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
-             pf->width(), pf->height(), score->layout()->spatium(), DPMM, DPI);
+             pf->width(), pf->height(), score->spatium(), DPMM, DPI);
       // page width and height in tenths
-      const double pw  = pf->width() * 10 * DPI / score->layout()->spatium();
-      const double ph  = pf->height() * 10 * DPI / score->layout()->spatium();
+      const double pw  = pf->width() * 10 * DPI / score->spatium();
+      const double ph  = pf->height() * 10 * DPI / score->spatium();
       const int pw1 = (int) (pw / 3);
       const int pw2 = (int) (pw * 2 / 3);
       const int ph2 = (int) (ph / 2);
@@ -576,7 +576,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "scaling") {
-                              double millimeter = _spatium/10.0;
+                              double millimeter = score->spatium()/10.0;
                               double tenths = 1.0;
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
@@ -587,7 +587,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     else
                                           domError(eee);
                                     }
-                              _spatium = DPMM * (millimeter * 10.0 / tenths);
+                              double _spatium = DPMM * (millimeter * 10.0 / tenths);
                               score->setSpatium(_spatium);
                               }
                         else if (tag == "page-layout"){
@@ -1108,7 +1108,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
                                           volta->endings().append(iEendingNumber);
-                                          score->layout()->add(volta);
+                                          score->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
@@ -1518,7 +1518,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else {
                               pedal->setTick2(tick);
-                              score->layout()->add(pedal);
+                              score->add(pedal);
                               pedal = 0;
                               }
                         }
@@ -1617,7 +1617,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         QPointF userOff = b->userOff();
                         b->add(b->createLineSegment());
-                        b->layout(score->layout());
+                        b->layout();
                         b->setUserOff(QPointF()); // restore the offset
                         b->setMxmlOff2(offset);
                         LineSegment* ls1 = b->lineSegments().front();
@@ -1629,7 +1629,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         b->setEndHook(lineEnd != "none");
                         if (endLength != 0)
                               b->setEndHookHeight(Spatium(lineEnd == "up" ? endLength : -endLength));
-                        score->layout()->add(b);
+                        score->add(b);
                         bracket[n] = 0;
                         }
                   }
@@ -1683,7 +1683,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         ottava->setTick2(tick);
-                        score->layout()->add(ottava);
+                        score->add(ottava);
                         ottava = 0;
                         }
                   }
@@ -2163,7 +2163,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
                                     slur[slurNo]->setTrack((staff + relStaff) * VOICES);
-                                    score->layout()->add(slur[slurNo]);
+                                    score->add(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
                                     }
@@ -2481,7 +2481,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         trill->setTick2(tick+ticks);
-                        score->layout()->add(trill);
+                        score->add(trill);
                         trill = 0;
                         }
                   }
@@ -2645,7 +2645,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       hp->setSubtype(wedgeList[no].subType);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
-      score->layout()->add(hp);
+      score->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }
@@ -2662,10 +2662,10 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       double rx = e.attribute("relative-x", "0").toDouble()*0.1;
       double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
 
-      double styleYOff = measure->score()->textStyle(TEXT_STYLE_HARMONY)->yoff;
-      OffsetType offsetType = measure->score()->textStyle(TEXT_STYLE_HARMONY)->offsetType;
+      double styleYOff = score->textStyle(TEXT_STYLE_HARMONY)->yoff;
+      OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY)->offsetType;
       if (offsetType == OFFSET_ABS){
-    	  styleYOff = styleYOff * DPMM / _spatium;
+    	  styleYOff = styleYOff * DPMM / score->spatium();
       }
 
       double dy = e.attribute("default-y", QString::number(styleYOff*-10)).toDouble()*-0.1;
@@ -2677,7 +2677,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       QString kind, kindText;
       QList<HDegree> degreeList;
 
-      Harmony* ha = new Harmony(measure->score());
+      Harmony* ha = new Harmony(score);
       ha->setUserOff(QPointF(rx, ry + dy - styleYOff));
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

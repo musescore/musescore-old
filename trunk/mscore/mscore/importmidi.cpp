@@ -748,13 +748,12 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
 
                   text->setText((char*)(mm->data()));
 
-                  ScoreLayout* layout = cs->layout();
-                  MeasureBase* measure = layout->first();
+                  MeasureBase* measure = cs->first();
                   if (measure->type() != VBOX) {
                         measure = new VBox(cs);
                         measure->setTick(0);
-                        measure->setNext(layout->first());
-                        layout->add(measure);
+                        measure->setNext(cs->first());
+                        cs->add(measure);
                         }
                   measure->add(text);
                   }
@@ -962,7 +961,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
-      	_layout.add(measure);
+      	add(measure);
             }
 
 	foreach (MidiTrack* midiTrack, *tracks) {

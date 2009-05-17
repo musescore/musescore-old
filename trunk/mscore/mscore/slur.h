@@ -33,7 +33,7 @@ class Viewer;
 struct UP {
       QPointF p;            // layout position relative to pos()
       QPointF off;          // user offset in spatium units
-      QPointF pos() const { return p + off * _spatium; }
+//      QPointF pos() const { return p + off * _spatium; }
       };
 
 //---------------------------------------------------------
@@ -60,7 +60,7 @@ class SlurSegment : public Element {
 
       virtual QRectF bbox() const;
 
-      void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
+      void layout(const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&) const;
 
@@ -114,7 +114,7 @@ class SlurTie : public Element {
       Direction slurDirection() const    { return _slurDirection; }
       void setSlurDirection(Direction d) { _slurDirection = d; }
 
-      virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&)  {}
+      virtual void layout2(const QPointF, int, struct UP&)  {}
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const { return false; }  // not selectable
 
@@ -152,7 +152,7 @@ class Slur : public SlurTie {
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual QRectF bbox() const;
       virtual void setTrack(int val);
 
@@ -185,7 +185,7 @@ class Tie : public SlurTie {
       Note* endNote() const               { return (Note*)endElement();   }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       };
 
 #endif

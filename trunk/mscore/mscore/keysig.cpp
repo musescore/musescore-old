@@ -71,7 +71,7 @@ void KeySig::addLayout(int sym, double x, int line)
       {
       double y = double(line) * .5;
       QPointF pt(x, y);
-      pt *= _spatium * mag();
+      pt *= spatium();
       KeySym* ks = new KeySym;
       ks->sym = sym;
       ks->pos = pt;
@@ -84,7 +84,7 @@ void KeySig::addLayout(int sym, double x, int line)
 //   layout
 //---------------------------------------------------------
 
-void KeySig::layout(ScoreLayout*)
+void KeySig::layout()
       {
       foreach(KeySym* ks, keySymbols)
             delete ks;

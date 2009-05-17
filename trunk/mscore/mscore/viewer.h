@@ -23,7 +23,6 @@
 
 class Score;
 class Element;
-class ScoreLayout;
 class Segment;
 class TextB;
 
@@ -62,7 +61,6 @@ class Viewer {
       virtual ~Viewer() {}
       void setScore(Score* s) { _score = s; }
       Score* score() const    { return _score; }
-      ScoreLayout* layout();
       virtual void dataChanged(const QRectF&) = 0;
 
       virtual void updateAll(Score*) = 0;

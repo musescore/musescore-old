@@ -48,7 +48,7 @@ class Symbol : public BSymbol {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual QRectF bbox() const;
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       void setAbove(bool);
 
       virtual qreal baseLine() const { return 0.0; }

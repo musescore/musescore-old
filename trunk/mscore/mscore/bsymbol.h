@@ -42,7 +42,7 @@ class BSymbol : public Element {
       virtual void collectElements(QList<const Element*>& el) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual QRectF drag(const QPointF& pos);
       virtual bool isMovable() const { return true; }
 

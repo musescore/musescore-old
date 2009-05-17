@@ -59,7 +59,7 @@ class Bracket : public Element {
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual bool edit(Viewer*, int, int, Qt::KeyboardModifiers, const QString&);

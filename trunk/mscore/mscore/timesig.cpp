@@ -223,8 +223,9 @@ void TimeSig::read(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void TimeSig::layout(ScoreLayout*)
+void TimeSig::layout()
       {
+      double _spatium = spatium();
       QRectF bb;
       int st = subtype();
       if (st == 0)
@@ -252,8 +253,6 @@ void TimeSig::layout(ScoreLayout*)
 
             double m = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;
-//            pz = QPointF(0.0, 2.0 * _spatium * mag()) * im;
-//            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium * mag()) * im;
             pz = QPointF(0.0, 2.0 * _spatium) * im;
             pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium) * im;
 
@@ -272,13 +271,14 @@ void TimeSig::draw(QPainter& p) const
       int st = subtype();
       if (st == 0)
             return;
+      double _spatium = spatium();
       if (st ==  TSIG_FOUR_FOUR)
-            symbols[fourfourmeterSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
+            symbols[fourfourmeterSym].draw(p, mag(), 0.0, 2.0 * _spatium);
       else if (st == TSIG_ALLA_BREVE)
-            symbols[allabreveSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
+            symbols[allabreveSym].draw(p, mag(), 0.0, 2.0 * _spatium);
       else {
             p.setFont(symbols[allabreveSym].font());
-            double m  = _spatium * mag() / (DPI * SPATIUM20);
+            double m  = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;
             p.scale(m, m);
             p.drawText(pz, sz);

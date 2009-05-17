@@ -1002,6 +1002,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">automatique</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">haut</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">bas</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1799,14 +1827,6 @@ failed: </source>
         <translation>Formulaire</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Précédent</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Suivant</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Parent</translation>
     </message>
@@ -2589,6 +2609,14 @@ failed: </source>
     <message>
         <source>Subtype</source>
         <translation>Sous-type</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5011,10 +5039,6 @@ avant de fermer ?</translation>
         <translation>retour arrière</translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation>Rechercher : </translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Rechercher</translation>
     </message>
@@ -5073,6 +5097,14 @@ avant de fermer ?</translation>
     <message>
         <source>Zoom Out</source>
         <translation>Zoom arrière</translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5284,6 +5316,18 @@ avant de fermer ?</translation>
     <message>
         <source>Velo</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7019,390 +7063,237 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore : Propriétés du texte</translation>
     </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formulaire</translation>
+    </message>
     <message>
         <source>Font:</source>
-        <translation>Police :</translation>
+        <translation type="unfinished">Police :</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>visuel de la police</translation>
+        <translation type="unfinished">visuel de la police</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taille :</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Style :</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>gras</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>italique</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>souligné</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>Aligner :</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Couleur :</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>couleur du cadre</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cadre</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>tracer un cadre circulaire</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Cercle</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>tracer un cadre rectangulaire</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Boite</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Largeur :</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>largeur des lignes du cadre</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marge :</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>marge intérieure du cadre</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Arrondi :</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>aligné à gauche</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation>couleur du texte</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>Millimètres</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation>Millimètres</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation>espace</translation>
+        <translation type="unfinished">Taille :</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>Taille de la police</translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation>Aligner le bord gauche du texte au point de référence</translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation>Centrer le texte au point de référence</translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation>Aligner le bord droit du texte au point de référence</translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation>Aligner le bord supérieur du texte au point de référence</translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation>Centrer le texte verticalement au point de référence</translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation>Aligner le bord inférieur du texte au point de référence</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Décalage</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X :</translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation>Décalage horizontal au point de référence</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX :</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation>Décalage du point de référence en pourcent de la largeur parente</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y :</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation>Décalage vertical au point de référence</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY :</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation>Décalage du point de référence en pourcent de la hauteur parente</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Unité :</translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation>Décalage absolu</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>Millimètres</translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation>Décalage en espaces</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Espace</translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation>Activer le cadre texte</translation>
-    </message>
-    <message>
-        <source>corner round</source>
-        <translation>Coin arrondi</translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore : Editer le style de texte</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Général</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Police :</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Taille :</translation>
+        <translation type="unfinished">Taille de la police</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Style :</translation>
+        <translation type="unfinished">Style :</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">gras</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>G</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">italique</translation>
     </message>
     <message>
         <source>I</source>
-        <translation>I</translation>
+        <translation type="unfinished">I</translation>
+    </message>
+    <message>
+        <source>underline</source>
+        <translation type="unfinished">souligné</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>S</translation>
+        <translation type="unfinished">S</translation>
     </message>
     <message>
-        <source>Text Sample</source>
-        <translation>Exemple de texte</translation>
+        <source>Align:</source>
+        <translation type="unfinished">Aligner :</translation>
     </message>
     <message>
-        <source>Position</source>
-        <translation>Position</translation>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished">Aligner le bord gauche du texte au point de référence</translation>
     </message>
     <message>
-        <source>Alignment</source>
-        <translation>Alignement</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
-        <source>Horizontal</source>
-        <translation>Horizontal</translation>
+        <source>center text on reference point</source>
+        <translation type="unfinished">Centrer le texte au point de référence</translation>
     </message>
     <message>
-        <source>Left</source>
-        <translation>Gauche</translation>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished">Aligner le bord droit du texte au point de référence</translation>
     </message>
     <message>
-        <source>Right</source>
-        <translation>Droite</translation>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished">Aligner le bord supérieur du texte au point de référence</translation>
     </message>
     <message>
-        <source>Center</source>
-        <translation>Centré</translation>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished">Centrer le texte verticalement au point de référence</translation>
     </message>
     <message>
-        <source>Vertical</source>
-        <translation>Vertical</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Haut</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Bas</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Ligne de référence</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Décalage</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X :</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y :</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX :</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY :</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Unité :</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>Millimètres</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Espace</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cadre</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Largeur :</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marge :</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Arrondi :</translation>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished">Aligner le bord inférieur du texte au point de référence</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Couleur :</translation>
+        <translation type="unfinished">Couleur :</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished">couleur du texte</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Décalage</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X :</translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished">Décalage horizontal au point de référence</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">relX :</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished">Décalage du point de référence en pourcent de la largeur parente</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y :</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished">Décalage vertical au point de référence</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">relY :</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished">Décalage du point de référence en pourcent de la hauteur parente</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Unité :</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished">Décalage absolu</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">Millimètres</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished">Décalage en espaces</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished">Espace</translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished">Activer le cadre texte</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished">Cadre</translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">tracer un cadre circulaire</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Cercle</translation>
+        <translation type="unfinished">Cercle</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">tracer un cadre rectangulaire</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Boite</translation>
+        <translation type="unfinished">Boite</translation>
     </message>
     <message>
-        <source>Preview</source>
-        <translation>Aperçu</translation>
+        <source>Width:</source>
+        <translation type="unfinished">Largeur :</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
+        <source>frame line width</source>
+        <translation type="unfinished">largeur des lignes du cadre</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
+        <source>Margin:</source>
+        <translation type="unfinished">Marge :</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">marge intérieure du cadre</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished">Arrondi :</translation>
+    </message>
+    <message>
+        <source>corner round</source>
+        <translation type="unfinished">Coin arrondi</translation>
+    </message>
+    <message>
+        <source>frame color</source>
+        <translation type="unfinished">couleur du cadre</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>C&apos;est la mère Michelle qui a perdu son chat...</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore : Editer le style de texte</translation>
     </message>
 </context>
 <context>

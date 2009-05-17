@@ -1002,6 +1002,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">Auto</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">Opp</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">Ned</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1804,14 +1832,6 @@ feilet:</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Forrige</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Neste</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Rotelement</translation>
     </message>
@@ -2589,6 +2609,14 @@ feilet:</translation>
     <message>
         <source>Subtype</source>
         <translation>Undergruppe</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5007,10 +5035,6 @@ før lukking?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation>Søk:</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Søk</translation>
     </message>
@@ -5068,6 +5092,14 @@ før lukking?</translation>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5279,6 +5311,18 @@ før lukking?</translation>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7016,390 +7060,237 @@ feilet:</translation>
     </message>
 </context>
 <context>
-    <name>TextProperties</name>
+    <name>TextProp</name>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation>mm</translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>pkt</translation>
+        <translation type="unfinished">pkt</translation>
     </message>
+</context>
+<context>
+    <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Egenskaper for tekst</translation>
     </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
     <message>
         <source>Font:</source>
-        <translation>Skrift:</translation>
+        <translation type="unfinished">Skrift:</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>Skrifttype</translation>
+        <translation type="unfinished">Skrifttype</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Størrelse:</translation>
+        <translation type="unfinished">Størrelse:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>Tekststørrelse</translation>
+        <translation type="unfinished">Tekststørrelse</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stil:</translation>
+        <translation type="unfinished">Stil:</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation>Fet</translation>
+        <translation type="unfinished">Fet</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>italic</source>
-        <translation>Kursiv</translation>
+        <translation type="unfinished">Kursiv</translation>
     </message>
     <message>
         <source>I</source>
-        <translation>K</translation>
+        <translation type="unfinished">K</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation>Understrek</translation>
+        <translation type="unfinished">Understrek</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="unfinished">U</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation>Plassering:</translation>
+        <translation type="unfinished">Plassering:</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation>Venstrestill i forhold til referansepunkt</translation>
+        <translation type="unfinished">Venstrestill i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation>Midtstill i forhold til referansepunkt</translation>
+        <translation type="unfinished">Midtstill i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation>Høyrestill i forhold til referansepunkt</translation>
+        <translation type="unfinished">Høyrestill i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation>Plasser på topp i forhold til referansepunkt</translation>
+        <translation type="unfinished">Plasser på topp i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation>Midtstill vertikalt i forhold til referansepunkt</translation>
+        <translation type="unfinished">Midtstill vertikalt i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation>Plasser på bunn i forhold til referansepunkt</translation>
+        <translation type="unfinished">Plasser på bunn i forhold til referansepunkt</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Farge:</translation>
+        <translation type="unfinished">Farge:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation>Tekstfarge</translation>
+        <translation type="unfinished">Tekstfarge</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation>Avstand</translation>
+        <translation type="unfinished">Avstand</translation>
     </message>
     <message>
         <source>X:</source>
-        <translation>X:</translation>
+        <translation type="unfinished">X:</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation>Horisontal avstand til referansepunkt</translation>
+        <translation type="unfinished">Horisontal avstand til referansepunkt</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation>relX:</translation>
+        <translation type="unfinished">relX:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation>Avstand til referansepunkt i prosent</translation>
+        <translation type="unfinished">Avstand til referansepunkt i prosent</translation>
     </message>
     <message>
         <source>%</source>
-        <translation>%</translation>
+        <translation type="unfinished">%</translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation>Y:</translation>
+        <translation type="unfinished">Y:</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation>Vertikal avstand til referansepunkt</translation>
+        <translation type="unfinished">Vertikal avstand til referansepunkt</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation>relY:</translation>
+        <translation type="unfinished">relY:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation>Avstand til referansepunkt i prosent</translation>
+        <translation type="unfinished">Avstand til referansepunkt i prosent</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation>Mål:</translation>
+        <translation type="unfinished">Mål:</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation>Absolutt avstand</translation>
+        <translation type="unfinished">Absolutt avstand</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation>mm</translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation>Avstand i punkter</translation>
+        <translation type="unfinished">Avstand i punkter</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>punkter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation>Aktiver tekstramme</translation>
+        <translation type="unfinished">Aktiver tekstramme</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Ramme</translation>
+        <translation type="unfinished">Ramme</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation>Tegn sirkulær ramme</translation>
+        <translation type="unfinished">Tegn sirkulær ramme</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Sirkel</translation>
+        <translation type="unfinished">Sirkel</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation>Tegn rektangulær ramme</translation>
+        <translation type="unfinished">Tegn rektangulær ramme</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Boks</translation>
+        <translation type="unfinished">Boks</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Tykkelse:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation>Tykkelse på kantlinje</translation>
+        <translation type="unfinished">Tykkelse på kantlinje</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation>Marg:</translation>
+        <translation type="unfinished">Marg:</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation>Indre marg i ramme</translation>
+        <translation type="unfinished">Indre marg i ramme</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation>Rund:</translation>
+        <translation type="unfinished">Rund:</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation>Avrunding av hjørnene</translation>
+        <translation type="unfinished">Avrunding av hjørnene</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation>Rammefarge</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>Venstrejuster</translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Endre tekststiler</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Generell</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Skrift:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Størrelse:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Stil:</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>K</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Eksempeltekst</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Posisjon</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Plassering</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>Horisontalt</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Venstre</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Høyre</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Midtstilt</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>Vertikalt</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Topp</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Bunn</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Grunnlinje</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Avstand</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Mål:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>pkt</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Ramme</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Bredde:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marg:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Rund:</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Farge:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Sirkel</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Boks</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Forhåndsvisning</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Bruk</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation type="unfinished">Rammefarge</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Mennesker skaper musikk og musikk skaper mennesker...</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Endre tekststiler</translation>
     </message>
 </context>
 <context>

@@ -1671,7 +1671,7 @@ int main(int argc, char* argv[])
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
-      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
+//      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
       _spatiumMag = 1.0;
 
       initSymbols();
@@ -1773,7 +1773,7 @@ int main(int argc, char* argv[])
                   if (f.open(QIODevice::ReadOnly))
                         cs->loadStyle(&f);
                   }
-            cs->layout()->doLayout();
+            cs->doLayout();
             mscore->pluginTriggered(0);
             res = true;
           }
@@ -1788,7 +1788,7 @@ int main(int argc, char* argv[])
                   if (f.open(QIODevice::ReadOnly))
                         cs->loadStyle(&f);
                   }
-            cs->layout()->doLayout();
+            cs->doLayout();
 
             bool rv = true;
             if (fn.endsWith(".mscx")) {
