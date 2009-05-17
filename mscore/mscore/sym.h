@@ -24,7 +24,6 @@
 #include "style.h"
 
 extern void initSymbols();
-extern double _spatiumMag;
 
 enum SymbolType {
       SYMBOL_UNKNOWN,
