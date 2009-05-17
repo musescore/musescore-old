@@ -75,7 +75,7 @@ QIcon keysIcon;
 
 QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
-      double _spatium = 20.0; // TODOX
+      double _spatium = 80;
 
       double mag = (size/20.0) * 0.6 * (_spatium / (SPATIUM20 * DPI)) * PDPI / DPI;
 
