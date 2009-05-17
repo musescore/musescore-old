@@ -3242,10 +3242,12 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                   else if (s->element(strack) && !s->element(dtrack)) {
                         s->setElement(dtrack, s->element(strack));
                         s->element(dtrack)->setTrack(dtrack);
+                        s->setElement(strack, 0);
                         }
                   else if (!s->element(strack) && s->element(dtrack)) {
                         s->setElement(strack, s->element(dtrack));
                         s->element(strack)->setTrack(strack);
+                        s->setElement(dtrack, 0);
                         }
                   }
             }

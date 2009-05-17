@@ -2864,22 +2864,28 @@ void Score::move(const QString& cmd)
                   }
             else if (cmd == "next-chord") {
                   el = nextChordRest(cr);
-                  if (el->type() == CHORD)
-                        el = static_cast<Chord*>(el)->upNote();
-                  select(el, SELECT_SINGLE, 0);
+                  if (el) {
+                        if (el->type() == CHORD)
+                              el = static_cast<Chord*>(el)->upNote();
+                        select(el, SELECT_SINGLE, 0);
+                        }
                   setInputPos(nextChordRest(_is.cr));
                   }
             else if (cmd == "next-measure") {
                   el = nextMeasure(cr);
-                  if (el->type() == CHORD)
-                        el = static_cast<Chord*>(el)->upNote();
-                  select(el, SELECT_SINGLE, 0);
+                  if (el) {
+                        if (el->type() == CHORD)
+                              el = static_cast<Chord*>(el)->upNote();
+                        select(el, SELECT_SINGLE, 0);
+                        }
                   }
             else if (cmd == "prev-measure") {
                   el = prevMeasure(cr);
-                  if (el->type() == CHORD)
-                        el = static_cast<Chord*>(el)->upNote();
-                  select(el, SELECT_SINGLE, 0);
+                  if (el) {
+                        if (el->type() == CHORD)
+                              el = static_cast<Chord*>(el)->upNote();
+                        select(el, SELECT_SINGLE, 0);
+                        }
                   }
             if (el)
                   adjustCanvasPosition(el, false);
