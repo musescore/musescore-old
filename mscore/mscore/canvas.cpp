@@ -123,7 +123,7 @@ bool Canvas::navigatorVisible() const
 //   setScore
 //---------------------------------------------------------
 
-void Canvas::setScore(Score* s, ScoreLayout* l)
+void Canvas::setScore(Score* s)
       {
       _score = s;
       if (cursor == 0) {
@@ -136,7 +136,6 @@ void Canvas::setScore(Score* s, ScoreLayout* l)
             cursor->setScore(_score);
             shadowNote->setScore(_score);
             }
-      _layout = l;
       if (navigator) {
             navigator->setScore(_score);
             updateNavigator(false);
@@ -1087,7 +1086,7 @@ void Canvas::moveCursor()
       if (track == -1)
             track = 0;
 
-      double d = _spatium * .5;
+      double d = cursor->spatium() * .5;
       if (track == cursor->track() && cursor->tick() == _score->inputPos()) {
             _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
@@ -1118,6 +1117,7 @@ void Canvas::moveCursor(Segment* segment, int staffIdx)
       double y  = system->bboxStaff(idx).y() + system->canvasPos().y();
       double y2 = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
 
+      double _spatium = cursor->spatium();
       double d = _spatium * .5;
       _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setPos(x - _spatium, y - _spatium);
@@ -1198,7 +1198,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 //            unsigned long long a = cycles();
 // printf("paint event layout\n");
-            _score->layout()->doLayout();
+            _score->doLayout();
 //            unsigned long long b = (cycles() - a) / 1000000LL;
 //            printf("layout %lld\n", b);
 
@@ -1218,7 +1218,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
             paint(r, p);
 
 #if 0
-      foreach (const Page* page, _layout->pages()) {
+      foreach (const Page* page, _score->pages()) {
             QRect pr = _matrix.mapRect(page->abbox()).toRect();
             int o = pr.width() / 100;
             int x = pr.x();
@@ -1283,11 +1283,11 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
-      foreach (const Page* page, _layout->pages())
+      foreach (const Page* page, _score->pages())
             r1 -= _matrix.mapRect(page->abbox()).toRect();
 //      p.setClipRect(fr);
 
-      QList<const Element*> ell = _layout->items(fr);
+      QList<const Element*> ell = _score->items(fr);
       drawElements(p, ell);
 
       if (dropRectangle.isValid())
@@ -1331,6 +1331,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   pen.setStyle(Qt::SolidLine);
 
             p.setPen(pen);
+            double _spatium = score()->spatium();
             double x2      = ss->canvasPos().x() - _spatium;
             int staffStart = sel->staffStart;
             int staffEnd   = sel->staffEnd;
@@ -1523,6 +1524,7 @@ bool Canvas::dragAboveSystem(const QPointF& pos)
 
 void Canvas::dragEnterEvent(QDragEnterEvent* event)
       {
+      double _spatium = score()->spatium();
       if (dragElement) {
             delete dragElement;
             dragElement = 0;
@@ -1638,7 +1640,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   dragElement = el;
                   dragElement->setParent(0);
                   dragElement->read(e);
-                  dragElement->layout(score()->layout());
+                  dragElement->layout();
                   }
             }
 
@@ -2155,7 +2157,7 @@ static bool elementLower(const Element* e1, const Element* e2)
 
 const QList<const Element*> Canvas::elementsAt(const QPointF& p)
       {
-      QList<const Element*> el = _layout->items(p);
+      QList<const Element*> el = _score->items(p);
       qSort(el.begin(), el.end(), elementLower);
       return el;
       }
@@ -2186,7 +2188,7 @@ Element* Canvas::elementNear(const QPointF& p)
       double w  = (preferences.proximity * .5) / matrix().m11();
       QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
 
-      QList<const Element*> el = _layout->items(r);
+      QList<const Element*> el = _score->items(r);
       QList<const Element*> ll;
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
@@ -2302,7 +2304,7 @@ void Canvas::paintLasso(QPainter& p, double mag)
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      QList<const Element*> el = _layout->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
+      QList<const Element*> el = _score->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
       drawElements(p, el);
       cursor->draw(p);
 

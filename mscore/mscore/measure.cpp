@@ -471,9 +471,9 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         }
                   else {
                         if ((line > ll) || !chord->up())
-                              note->chord()->setXpos(note->headWidth() - score()->styleS(ST_stemWidth).point() * note->mag());
+                              note->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
                         else
-                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - score()->styleS(ST_stemWidth).point() * note->mag());
+                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
                         moveLeft = true;
                         }
                   }
@@ -519,8 +519,8 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int nAcc = aclist.size();
       if (nAcc == 0)
             return;
-      double pd  = score()->styleS(ST_accidentalDistance).point();
-      double pnd = score()->styleS(ST_accidentalNoteDistance).point();
+      double pd  = point(score()->styleS(ST_accidentalDistance));
+      double pnd = point(score()->styleS(ST_accidentalNoteDistance));
       //
       // layout top accidental
       //
@@ -793,7 +793,7 @@ int Measure::findAccidental2(Note* note) const
  Note: minWidth = width - stretch
 */
 
-void Measure::layout(ScoreLayout* layout, double width)
+void Measure::layout(double width)
       {
       int nstaves = _score->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -806,7 +806,7 @@ void Measure::layout(ScoreLayout* layout, double width)
       // keep old value for relayout
 
       setbbox(QRectF(0.0, 0.0, width, height()));
-      layoutX(layout, width);
+      layoutX(width);
       }
 
 //---------------------------------------------------------
@@ -854,11 +854,12 @@ double Measure::tick2pos(int tck) const
 //    called after layout of all pages
 //---------------------------------------------------------
 
-void Measure::layout2(ScoreLayout* layout)
+void Measure::layout2()
       {
       if (parent() == 0)
             return;
 
+      double _spatium = spatium();
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
             for (Segment* s = first(); s; s = s->next()) {
                   LyricsList* ll = s->lyricsList(staffIdx);
@@ -867,17 +868,17 @@ void Measure::layout2(ScoreLayout* layout)
                   foreach(Lyrics* l, *ll) {
                         if (!l)
                               continue;
-                        system()->layoutLyrics(layout, l, s, staffIdx);
+                        system()->layoutLyrics(l, s, staffIdx);
                         }
                   }
             if (staves[staffIdx]->_vspacer) {
-                  staves[staffIdx]->_vspacer->layout(layout);
+                  staves[staffIdx]->_vspacer->layout();
                   double y = system()->staff(staffIdx)->y();
                   staves[staffIdx]->_vspacer->setPos(_spatium * .5, y + 4 * _spatium);
                   }
             }
 
-      layoutBeams(layout);
+      layoutBeams();
 
       foreach(const MStaff* ms, staves) {
             StaffLines* lines = ms->lines;
@@ -885,7 +886,7 @@ void Measure::layout2(ScoreLayout* layout)
             }
 
       foreach(Element* element, _el) {
-            element->layout(layout);
+            element->layout();
             }
 
       //
@@ -919,7 +920,7 @@ void Measure::layout2(ScoreLayout* layout)
             _noText = 0;
             }
       if (_noText)
-            _noText->layout(layout);
+            _noText->layout();
       int tracks = _score->nstaves() * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int track = 0; track < tracks; ++track) {
@@ -930,14 +931,14 @@ void Measure::layout2(ScoreLayout* layout)
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                               Tie* tie = in->second->tieFor();
                               if (tie)
-                                    tie->layout(layout);
+                                    tie->layout();
                               }
                         }
                   }
             }
 
       foreach(Tuplet* tuplet, _tuplets)
-            tuplet->layout(layout);
+            tuplet->layout();
       }
 
 //---------------------------------------------------------
@@ -1431,10 +1432,12 @@ static double sff(double x, double xMin)
  to find out the minimal width of the measure.
 */
 
-void Measure::layoutX(ScoreLayout* layout, double stretch)
+void Measure::layoutX(double stretch)
       {
       if (!_dirty && (stretch == 1.0))
             return;
+
+      double _spatium = spatium();
 
       //-----------------------------------------------------------------------
       //    remove empty segments
@@ -1487,7 +1490,7 @@ if (debugMode)
                && (s->next()->subtype() == Segment::SegChordRest
                   || s->next()->subtype() == Segment::SegGrace)
                ) {
-                  additionalMin = score()->styleS(ST_clefKeyRightMargin).point();
+                  additionalMin = point(score()->styleS(ST_clefKeyRightMargin));
                   notesSeg = true;
                   }
             if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace) {
@@ -1495,25 +1498,25 @@ if (debugMode)
                         firstNoteRest = false;
                   else {
                         if (s->subtype() == Segment::SegGrace)
-                              additionalExtra = score()->styleS(ST_minNoteDistance).point() * score()->styleD(ST_graceNoteMag);
+                              additionalExtra = point(score()->styleS(ST_minNoteDistance)) * score()->styleD(ST_graceNoteMag);
                         else
-                              additionalExtra = score()->styleS(ST_minNoteDistance).point();
+                              additionalExtra = point(score()->styleS(ST_minNoteDistance));
                         }
                   }
             else if (s->subtype() == Segment::SegClef)
-                  additionalExtra = score()->styleS(ST_clefLeftMargin).point();
+                  additionalExtra = point(score()->styleS(ST_clefLeftMargin));
             else if (s->subtype() == Segment::SegTimeSig)
-                  additionalExtra = score()->styleS(ST_timesigLeftMargin).point();
+                  additionalExtra = point(score()->styleS(ST_timesigLeftMargin));
             else if (s->subtype() == Segment::SegKeySig)
-                  additionalExtra = score()->styleS(ST_keysigLeftMargin).point();
+                  additionalExtra = point(score()->styleS(ST_keysigLeftMargin));
             else if (s->subtype() == Segment::SegEndBarLine)
-                  additionalExtra = score()->styleS(ST_barNoteDistance).point();
+                  additionalExtra = point(score()->styleS(ST_barNoteDistance));
             else if (s->subtype() == Segment::SegTimeSigAnnounce) {
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = _spatium;
                   }
             else if (s->subtype() == Segment::SegStartRepeatBarLine)
-                  additionalExtra = score()->styleS(ST_beginRepeatLeftMargin).point();
+                  additionalExtra = point(score()->styleS(ST_beginRepeatLeftMargin));
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   spaces[seg][staffIdx].setValid(false);
@@ -1527,7 +1530,7 @@ if (debugMode)
                         if (!el)
                               continue;
                         spaces[seg][staffIdx].setValid(true);
-                        el->layout(layout);
+                        el->layout();
                         double min1, extra1;
                         el->space(min1, extra1);
                         if (min1 > min)
@@ -1541,7 +1544,7 @@ if (debugMode)
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
                               continue;
-                        (*l)->layout(layout);
+                        (*l)->layout();
                         lyrics = *l;
                         double lw = ((*l)->bbox().width()) * .5;
                         if (lw > min)
@@ -1554,7 +1557,7 @@ if (debugMode)
                   spaces[seg][staffIdx].setExtra(extra + additionalExtra);
                   if (lyrics) {
                         double y = lyrics->ipos().y() + lyrics->lineHeight()
-                             + score()->styleS(ST_lyricsMinBottomDistance).point();
+                             + point(score()->styleS(ST_lyricsMinBottomDistance));
                         if (y > staves[staffIdx]->distance)
                               staves[staffIdx]->distance = y;
                         }
@@ -1580,7 +1583,7 @@ if (debugMode)
                         min = score()->styleS(ST_barNoteDistance) * score()->styleD(ST_graceNoteMag);
                         break;
                   }
-            spaces[0][staffIdx].setMin(min.point());
+            spaces[0][staffIdx].setMin(point(min));
             spaces[0][staffIdx].setExtra(0);
             spaces[0][staffIdx].setValid(true);
             }
@@ -1769,12 +1772,12 @@ printf("\n");
                                           rest->setMMWidth(xpos[segs] - 2 * s->x());
                                           }
                                     else {
-                                          rest->setMMWidth(xpos[segs] - s->x() - score()->styleS(ST_barNoteDistance).point() );
+                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
                                           }
                                     }
                               else {
                                     if (seg == 1)
-                                          xx = (stretch - e->width()) * .5 - score()->styleS(ST_barNoteDistance).point();
+                                          xx = (stretch - e->width()) * .5 - point(score()->styleS(ST_barNoteDistance));
                                     else
                                           xx = (stretch - s->x() - e->width()) * .5 - _spatium * .5;
                                     }
@@ -1792,7 +1795,7 @@ printf("\n");
                   else if (t == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
                         if (chord->glissando())
-                              chord->glissando()->layout(layout);
+                              chord->glissando()->layout();
                         }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
@@ -1801,11 +1804,11 @@ printf("\n");
                         double y = 0.0;
                         double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)
-                              e->setPos(-e->bbox().x() - xo + score()->styleS(ST_clefLeftMargin).point(), y);
+                              e->setPos(-e->bbox().x() - xo + point(score()->styleS(ST_clefLeftMargin)), y);
                         else if (t == TIMESIG)
-                              e->setPos(- e->bbox().x() - xo + score()->styleS(ST_timesigLeftMargin).point(), y);
+                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_timesigLeftMargin)), y);
                         else if (t == KEYSIG)
-                              e->setPos(- e->bbox().x() - xo + score()->styleS(ST_keysigLeftMargin).point(), y);
+                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_keysigLeftMargin)), y);
                         else  if (s->subtype() == Segment::SegEndBarLine) {
                               // align right
                               e->setPos(width[seg] - e->width(), y);
@@ -2041,7 +2044,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
       ms->lines->setLines(staff->lines());
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
-      ms->distance = (staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance)).point();
+      ms->distance = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
       insertMStaff(ms, staffIdx);
       }
 
@@ -2180,10 +2183,10 @@ printf("drop staffList\n");
             case SYMBOL:
                   e->setParent(this);
                   e->setTrack(staffIdx * VOICES);
-                  e->layout(score()->layout());
+                  e->layout();
                   {
                   QPointF uo(p - e->canvasPos() - dragOffset);
-                  e->setUserOff(uo / _spatium);
+                  e->setUserOff(uo / spatium());
                   }
                   score()->cmdAdd(e);
                   break;
@@ -2622,7 +2625,7 @@ void Measure::read(QDomElement e, int idx)
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
-            s->distance = (n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance)).point();
+            s->distance = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
             staves.append(s);
             }
 
@@ -2785,13 +2788,12 @@ void Measure::read(QDomElement e, int idx)
                         else if (st == TEXT_POET)
                               t->setTextStyle(TEXT_STYLE_POET);
                         // for backward compatibility:
-                        ScoreLayout* layout = score()->layout();
-                        MeasureBase* measure = layout->first();
+                        MeasureBase* measure = score()->first();
                         if (measure->type() != VBOX) {
                               measure = new VBox(score());
                               measure->setTick(0);
-                              measure->setNext(layout->first());
-                              layout->add(measure);
+                              measure->setNext(score()->first());
+                              score()->add(measure);
                               }
                         measure->add(t);
                         }
@@ -2900,7 +2902,7 @@ void Measure::read(QDomElement e, int idx)
                   Slur* slur = new Slur(score());
                   slur->setTrack(score()->curTrack);
                   slur->read(e);
-                  score()->layout()->add(slur);
+                  score()->add(slur);
                   }
             else if (tag == "vspacer") {
                   if (staves[idx]->_vspacer == 0) {

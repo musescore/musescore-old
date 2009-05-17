@@ -25,7 +25,6 @@
 
 class Score;
 class PagePreview;
-class ScoreLayout;
 
 //---------------------------------------------------------
 //   PageSettings
@@ -37,7 +36,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       PagePreview* preview;
       bool mmUnit;
       Score* cs;
-      void setValues(ScoreLayout*);
+      void setValues(Score*);
 
    private slots:
       void mmClicked();

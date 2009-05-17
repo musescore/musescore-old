@@ -103,11 +103,11 @@ void Navigator::paintEvent(QPaintEvent* ev)
             p.setRenderHint(QPainter::Antialiasing, false);
 
             p.fillRect(rr, _fgColor);
-            if (_score->layout()->pages().empty())
+            if (_score->pages().empty())
                   return;
             p.setMatrix(matrix);
             QRegion r1(rr);
-            foreach(const Page* page, _score->layout()->pages()) {
+            foreach(const Page* page, _score->pages()) {
                   QRectF pbbox(page->abbox());
                   r1 -= matrix.mapRect(pbbox).toRect();
                   p.translate(page->pos());
@@ -116,7 +116,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                   }
 
             QRectF fr = matrix.inverted().mapRect(QRectF(rr));
-            QList<const Element*> ell = _score->layout()->items(fr);
+            QList<const Element*> ell = _score->items(fr);
 
             for (int i = 0; i < ell.size(); ++i) {
                   const Element* e = ell.at(i);

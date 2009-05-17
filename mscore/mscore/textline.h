@@ -47,7 +47,7 @@ class TextLineSegment : public LineSegment {
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void setSelected(bool f);
 
       TextC* text() const { return _text; }

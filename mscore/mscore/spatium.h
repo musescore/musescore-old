@@ -21,7 +21,6 @@
 #ifndef __SPATIUM_H__
 #define __SPATIUM_H__
 
-extern double _spatium; // spatium value in points
 extern double _spatiumMag;
 
 //---------------------------------------------------------
@@ -37,9 +36,7 @@ class Spatium {
    public:
       Spatium()                        { _val = 0.0; }
       explicit Spatium(double v)       { _val = v; }
-      double point() const             { return _val * _spatium; }
       double val() const               { return _val; }
-      void set(double v)               { _val = v/_spatium; }
       bool operator>(Spatium a) const  { return _val > a._val; }
       bool operator<(Spatium a) const  { return _val < a._val; }
       bool operator==(Spatium a) const { return _val == a._val; }
@@ -49,16 +46,8 @@ class Spatium {
             _val += a._val;
             return *this;
             }
-      Spatium& operator+=(double a) {
-            _val += (a / _spatium);
-            return *this;
-            }
       Spatium& operator-=(Spatium a) {
             _val -= a._val;
-            return *this;
-            }
-      Spatium& operator-=(double a) {
-            _val -= (a / _spatium);
             return *this;
             }
       Spatium& operator/=(double d) {

@@ -132,11 +132,11 @@ void Score::end()
 
       if (layoutAll) {
             updateAll = true;
-            _layout.layout();
+            layout();
             }
       else if (layoutStart) {
             updateAll = true;
-            _layout.reLayout(layoutStart);
+            reLayout(layoutStart);
             }
 
       // update a little more:
@@ -189,7 +189,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       Measure* measure = (Measure*)mb;
       e->setTrack(track);
-      e->setParent(&_layout);
+      e->setParent(0);
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();
@@ -211,7 +211,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   Measure* m = pos2measure3(pos, &tick);
                   volta->setTick(m->tick());
                   volta->setTick2(m->tick() + m->tickLen());
-                  volta->layout(layout());
+                  volta->layout();
                   const QList<LineSegment*> lsl = volta->lineSegments();
                   if (lsl.isEmpty()) {
                         delete e;
@@ -242,7 +242,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                         }
                   line->setTick(tick);
                   line->setTick2(tick2);
-                  line->layout(layout());
+                  line->layout();
                   LineSegment* ls = line->lineSegments().front();
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
                   ls->setUserOff(uo / _spatium);
@@ -254,7 +254,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   Dynamic* dyn = static_cast<Dynamic*>(e);
                   dyn->setTick(tick);
                   dyn->setParent(measure);
-                  dyn->layout(layout());
+                  dyn->layout();
 
                   double xx = measure->tick2pos(tick);
                   QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
@@ -768,7 +768,7 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
             }
       _is.cr = firstNote ? firstNote->chord() : 0;
       if (tie)
-            _layout.connectTies();
+            connectTies();
       if (note)
             select(note, SELECT_SINGLE, 0);
       return firstNote;
@@ -1299,7 +1299,7 @@ void Score::cmdAddText(int subtype)
             endCmd();
             return;
             }
-      Page* page = _layout.pages().front();
+      Page* page = pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
       Text* s = 0;
@@ -2737,7 +2737,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                   emit selectionChanged(int(sel->state()));
                   }
             }
-      layout()->connectTies();
+      connectTies();
       fixPpitch();
       }
 
@@ -2939,13 +2939,13 @@ void Score::selectMove(const QString& cmd)
                   el = measure->last()->nextChordRest(cr->track(), true);
                   }
             else if (cmd == "select-begin-score") {
-                  Measure* measure = layout()->first()->system()->firstMeasure();
+                  Measure* measure = first()->system()->firstMeasure();
                   if (!measure)
                         return;
                   el = measure->first()->nextChordRest(cr->track());
                   }
             else if (cmd == "select-end-score") {
-                  Measure* measure = layout()->last()->system()->lastMeasure();
+                  Measure* measure = last()->system()->lastMeasure();
                   if (!measure)
                         return;
                   el = measure->last()->nextChordRest(cr->track(), true);

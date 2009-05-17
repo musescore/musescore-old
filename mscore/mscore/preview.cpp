@@ -33,7 +33,6 @@ PagePreview::PagePreview(QWidget* parent)
       {
       setAttribute(Qt::WA_NoBackground);
       _score  = 0;
-      _layout = 0;
       }
 
 //---------------------------------------------------------
@@ -45,12 +44,9 @@ void PagePreview::setScore(Score* s)
       if (_score)
             delete _score;
       _score  = s->clone();
-      if (_score == 0) {
-            _layout = 0;
+      if (_score == 0)
             return;
-            }
-      _layout = _score->layout();
-      _layout->doLayout();
+      _score->doLayout();
       }
 
 //---------------------------------------------------------
@@ -91,7 +87,7 @@ void PagePreview::resizeEvent(QResizeEvent*)
 
 void PagePreview::layout()
       {
-      _layout->doLayout();
+      _score->doLayout();
       update();
       }
 
@@ -104,8 +100,8 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       QColor _fgColor(Qt::white);
       QColor _bgColor(Qt::gray);
       QRect rr;
-      if (_layout->needLayout()) {
-            _layout->doLayout();
+      if (_score->needLayout()) {
+            _score->doLayout();
             rr = QRect(00, 0, width(), height());
             }
       else {
@@ -119,20 +115,20 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::Antialiasing, true);
 
       p.fillRect(rr, _fgColor);
-      if (_layout->pages().empty())
+      if (_score->pages().empty())
             return;
 
       p.setMatrix(matrix);
 
       QRegion r1(rr);
-      Page* page = _layout->pages().front();
+      Page* page = _score->pages().front();
       QRectF pbbox(page->abbox());
       r1 -= matrix.mapRect(pbbox).toRect();
       p.translate(page->pos());
       page->draw(p);
 
       QRectF fr = matrix.inverted().mapRect(QRectF(rr));
-      QList<const Element*> ell = _layout->items(fr);
+      QList<const Element*> ell = _score->items(fr);
 
       for (int i = 0; i < ell.size(); ++i) {
             const Element* e = ell.at(i);

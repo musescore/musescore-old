@@ -813,7 +813,7 @@ void MuseScore::lineMenu()
             linePalette->setWindowTitle(tr("MuseScore: Lines"));
             sp->setGrid(100, 30);
 
-            double l = _spatium * 8;
+            double l = gscore->spatium() * 8;
 
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
@@ -922,6 +922,7 @@ void MuseScore::bracketMenu()
             bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
             sp->setGrid(40, 80);
 
+            double _spatium = gscore->spatium();
             Bracket* b1 = new Bracket(gscore);
             b1->setSubtype(BRACKET_NORMAL);
             Bracket* b2 = new Bracket(gscore);
@@ -1048,7 +1049,7 @@ void MuseScore::barMenu()
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
-                  b->setHeight(4 * _spatium);
+                  b->setHeight(4 * gscore->spatium());
                   b->setSubtype(t[i].type);
                   sp->append(b, tr(t[i].name));
                   }
@@ -1162,6 +1163,7 @@ void MuseScore::updateDrumset()
       if (cs == 0 || paletteBox == 0 || drumPalette == 0)
             return;
 
+      double _spatium = gscore->spatium();
       const InputState& padState = cs->inputState();
       Drumset* ds        = padState.drumset;
       if (ds != drumset) {

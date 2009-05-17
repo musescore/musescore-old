@@ -250,7 +250,7 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
             if (cells[currentIdx]) {
                   Element* el  = cells[currentIdx]->element;
                   QRect ir     = idxRect(currentIdx);
-                  qreal mag    = PALETTE_SPATIUM * extraMag / _spatium;
+                  qreal mag    = PALETTE_SPATIUM * extraMag / gscore->spatium();
                   QPointF spos = QPointF(dragStartPosition) / mag;
                   spos        -= QPointF(cells[currentIdx]->x, cells[currentIdx]->y);
 
@@ -319,7 +319,7 @@ void Palette::append(Element* s, const QString& name)
 
 void Palette::append(int symIdx)
       {
-      Symbol* s = new Symbol(0);
+      Symbol* s = new Symbol(gscore);
       s->setSym(symIdx);
       append(s, qApp->translate("symbol", ::symbols[symIdx].name()));
       }
@@ -359,10 +359,9 @@ void Palette::add(int idx, Element* s, const QString& name)
 
 void Palette::paintEvent(QPaintEvent*)
       {
-      qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-      ScoreLayout layout(gscore);
-      layout.setSpatium(_spatium);
-      layout.setPaintDevice(this);
+      qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
+      gscore->setSpatium(SPATIUM20  * DPI);
+      gscore->setPaintDevice(this);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -406,7 +405,7 @@ void Palette::paintEvent(QPaintEvent*)
                   int row    = idx / c;
                   int column = idx % c;
 
-                  el->layout(&layout);
+                  el->layout();
                   el->setPos(0.0, 0.0);   // HACK
 
                   if (drawStaff) {
@@ -431,7 +430,7 @@ void Palette::paintEvent(QPaintEvent*)
                   double sy;
 
                   if (drawStaff)
-                        sy = gy + gh * .5 - 2.0 * _spatium;
+                        sy = gy + gh * .5 - 2.0 * gscore->spatium();
                   else
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
@@ -587,7 +586,7 @@ void Palette::dropEvent(QDropEvent* event)
                         s = new RasterImage(0);
                   else
                         return;
-                  qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+                  qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
                   s->setPath(u.path());
                   s->setSize(QSizeF(hgrid / mag, hgrid / mag));
                   e = s;

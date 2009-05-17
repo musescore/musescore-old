@@ -39,8 +39,8 @@ InstrumentTemplate::InstrumentTemplate()
       name.setDefaultTextOption(to);
       shortName.setUseDesignMetrics(true);
       shortName.setDefaultTextOption(to);
-      name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
-      shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
+//TODOX      name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
+//      shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
       drumset = 0;
       }
 
@@ -127,16 +127,16 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
       transpose  = 0;
       useDrumset = false;
 
-
-      double extraMag = 1.0;
-      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
 #ifdef Q_WS_MAC
       QFont font("MScore1 20");
 #else
       QFont font("MScore1");
 #endif
+#if 0       // TODOX
+      double extraMag = 1.0;
+      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
       font.setPointSizeF(12.0 * mag);     // TODO: get from style
-
+#endif
       QString sName;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

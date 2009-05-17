@@ -1152,7 +1152,7 @@ void  ExportLy::findVolta()
 
   i=0;
 
-  for (MeasureBase * m=score->layout()->first(); m; m=m->next())
+  for (MeasureBase * m=score->first(); m; m=m->next())
     {// for all measures
       if (m->type() !=MEASURE )
 	continue;
@@ -2320,7 +2320,7 @@ void ExportLy::writeScore()
 	      donefirst=false;
 
 	      //for all measures in this voice:
-	      for (MeasureBase* m = score->layout()->first(); m; m = m->next())
+	      for (MeasureBase* m = score->first(); m; m = m->next())
 		{
 		  if (m->type() != MEASURE)
 		    continue;
@@ -2583,7 +2583,7 @@ bool ExportLy::write(const QString& name)
   os << "\\header {\n";
 
   ++level;
-  const MeasureBase* m = score->layout()->first();
+  const MeasureBase* m = score->first();
   foreach(const Element* e, *m->el()) {
     if (e->type() != TEXT)
       continue;

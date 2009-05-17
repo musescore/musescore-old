@@ -55,7 +55,7 @@ class Volta : public TextLine {
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual LineSegment* createLineSegment();
-      virtual void layout(ScoreLayout* layout);
+      virtual void layout();
 
       virtual void write(Xml&) const;
       virtual void read(QDomElement e);

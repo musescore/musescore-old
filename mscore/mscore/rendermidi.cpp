@@ -65,7 +65,7 @@ void Score::updateChannel()
       foreach(Part* part, _parts) {
             alist.clear();
             for (int i = 0; i < part->staves()->size(); ++i) {
-                  for (MeasureBase* mb = layout()->first(); mb; mb = mb->next()) {
+                  for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                         if (mb->type() != MEASURE)
                               continue;
                         Measure* m = static_cast<Measure*>(mb);

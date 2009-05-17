@@ -112,8 +112,8 @@ class Beam : public Element {
 
       Measure* measure() const            { return (Measure*)parent(); }
 
-      void layout1(ScoreLayout*);
-      void layout(ScoreLayout*);
+      void layout1();
+      void layout();
 
       const QList<ChordRest*>& elements() { return _elements;  }
       void clear()                        { _elements.clear(); }

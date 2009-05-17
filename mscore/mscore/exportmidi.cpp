@@ -65,7 +65,7 @@ bool Score::saveMidi(const QString& name)
 void ExportMidi::writeHeader()
       {
       MidiTrack* track  = mf.tracks()->front();
-      MeasureBase* measure  = cs->layout()->first();
+      MeasureBase* measure  = cs->first();
 
       foreach (const Element* e, *measure->el()) {
             if (e->type() == TEXT) {

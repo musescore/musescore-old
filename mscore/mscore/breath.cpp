@@ -38,7 +38,7 @@ Breath::Breath(Score* s)
 //   layout
 //---------------------------------------------------------
 
-void Breath::layout(ScoreLayout*)
+void Breath::layout()
       {
       }
 
@@ -80,7 +80,7 @@ void Breath::draw(QPainter& p) const
 
 void Breath::space(double& min, double& extra) const
       {
-      min   = _spatium * 1.5;
+      min   = spatium() * 1.5;
       extra = 0.0;
       }
 

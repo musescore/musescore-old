@@ -141,7 +141,7 @@ SysStaff* System::removeStaff(int idx)
  Layout the System.
 */
 
-void System::layout(ScoreLayout* layout, double xo1)
+void System::layout(double xo1)
       {
       if (isVbox())                 // ignore vbox
             return;
@@ -209,8 +209,8 @@ void System::layout(ScoreLayout* layout, double xo1)
                         }
                   }
             if (ss->instrumentName && !ss->instrumentName->isEmpty()) {
-                  ss->instrumentName->layout(layout);
-                  double w = ss->instrumentName->width() + instrumentNameOffset.point();
+                  ss->instrumentName->layout();
+                  double w = ss->instrumentName->width() + point(instrumentNameOffset);
                   if (w > xoff2)
                         xoff2 = w;
                   }
@@ -224,7 +224,7 @@ void System::layout(ScoreLayout* layout, double xo1)
       _leftMargin = xoff2;
 
       for (int i = 0; i < bracketLevels; ++i)
-            _leftMargin += bracketWidth[i] + score()->styleS(ST_bracketDistance).point();
+            _leftMargin += bracketWidth[i] + point(score()->styleS(ST_bracketDistance));
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* s  = _staves[staffIdx];
@@ -234,7 +234,7 @@ void System::layout(ScoreLayout* layout, double xo1)
                   continue;
                   }
             double staffMag = staff->mag();
-            s->setbbox(QRectF(_leftMargin + xo1, 0.0, 0.0, 4 * _spatium * staffMag));
+            s->setbbox(QRectF(_leftMargin + xo1, 0.0, 0.0, 4 * spatium() * staffMag));
             }
 
       if (nstaves > 1 && barLine == 0) {
@@ -247,7 +247,7 @@ void System::layout(ScoreLayout* layout, double xo1)
             barLine = 0;
             }
       if (barLine) {
-            barLine->setPos(_leftMargin + xo1, score()->styleS(ST_barWidth).point() * .25);
+            barLine->setPos(_leftMargin + xo1, point(score()->styleS(ST_barWidth)) * .25);
             }
 
       //---------------------------------------------------
@@ -261,7 +261,7 @@ void System::layout(ScoreLayout* layout, double xo1)
 
             double xo = -xo1;
             for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i] + score()->styleS(ST_bracketDistance).point();
+                  xo += bracketWidth[i] + point(score()->styleS(ST_bracketDistance));
                   Bracket* b = ss->brackets[i];
                   if (b == 0)
                         continue;
@@ -299,7 +299,7 @@ void System::layout(ScoreLayout* layout, double xo1)
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
-                  double d  = instrumentNameOffset.point() + s->instrumentName->bbox().width();
+                  double d  = point(instrumentNameOffset) + s->instrumentName->bbox().width();
                   s->instrumentName->setXpos(xoff2 - d + xo1);
                   }
             idx += nstaves;
@@ -312,12 +312,13 @@ void System::layout(ScoreLayout* layout, double xo1)
 //    adjusts staff distance
 //---------------------------------------------------------
 
-void System::layout2(ScoreLayout* layout)
+void System::layout2()
       {
       if (isVbox())                 // ignore vbox
             return;
 
       int nstaves = _staves.size();
+      double _spatium = spatium();
 
       qreal y = 0.0;
       int lastStaffIdx = 0;   // last visible staff
@@ -335,10 +336,10 @@ void System::layout2(ScoreLayout* layout)
             double dist = 0.0;
             foreach(MeasureBase* m, ml) {
                   dist = std::max(dist, m->distance(staffIdx));
-                  dist = std::max(dist, m->userDistance(staffIdx).point());
+                  dist = std::max(dist, point(m->userDistance(staffIdx)));
                   }
-            if (dist > distance(staffIdx))
-                  setDistance(staffIdx, dist);
+            if (dist > (distance(staffIdx).val() * _spatium))
+                  setDistance(staffIdx, Spatium(dist/_spatium));
             SysStaff* s = _staves[staffIdx];
             if (!s->show()) {
                   s->setbbox(QRectF());
@@ -346,7 +347,7 @@ void System::layout2(ScoreLayout* layout)
                   }
             double sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
-            y += sHeight + s->distance();
+            y += sHeight + (s->distance().val() * _spatium);
             lastStaffIdx = staffIdx;
             }
       qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();
@@ -363,7 +364,7 @@ void System::layout2(ScoreLayout* layout)
       if (barLine) {
             Spatium lw = score()->styleS(ST_barWidth);
             barLine->setLen(Spatium(systemHeight / _spatium) - lw * .5);
-            barLine->layout(layout);
+            barLine->layout();
             }
 
       //---------------------------------------------------
@@ -390,7 +391,7 @@ void System::layout2(ScoreLayout* layout)
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
                   b->setYpos(sy);
                   b->setHeight(ey - sy);
-                  b->layout(layout);
+                  b->layout();
                   }
             }
 
@@ -568,8 +569,10 @@ void System::remove(Element* el)
 
 void System::change(Element* o, Element* n)
       {
-      if (o->type() == VBOX || o->type() == HBOX)
-            score()->layout()->change((MeasureBase*)o, (MeasureBase*)n);
+      if (o->type() == VBOX || o->type() == HBOX) {
+            score()->remove((MeasureBase*)o);
+            score()->add((MeasureBase*)n);
+            }
       else {
             remove(o);
             add(n);
@@ -654,12 +657,13 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
 //   layoutLyrics
 //---------------------------------------------------------
 
-void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffIdx)
+void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       {
       if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->endTick() == 0)) {
             l->clearSeparator();
             return;
             }
+      double _spatium = spatium();
       if (l->endTick()) {
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
@@ -668,7 +672,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
                   }
 
             QList<Line*>* sl = l->separatorList();
-            QList<System*>* systems = layout->systems();
+            QList<System*>* systems = score()->systems();
             System* s1 = this;
             System* s2 = seg->measure()->system();
             int sysIdx1  = systems->indexOf(s1);
@@ -706,7 +710,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
                   else if (i == sysIdx2) {
                         // end segment
                         }
-                  line->layout(layout);
+                  line->layout();
                   }
             return;
             }
@@ -763,10 +767,8 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             double xo = (gap - len) * .5;
 
             line->setPos(QPointF(x + xo, y));
-            Spatium sp;
-            sp.set(len);
-            line->setLen(sp);
-            line->layout(layout);
+            line->setLen(Spatium(len / _spatium));
+            line->layout();
             return;
             }
       l->clearSeparator();

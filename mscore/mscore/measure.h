@@ -114,7 +114,7 @@ class Measure : public MeasureBase {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
-      void layoutBeams(ScoreLayout*);
+      void layoutBeams();
 
    public:
       Measure(Score*);
@@ -162,9 +162,9 @@ class Measure : public MeasureBase {
       double userStretch() const       { return _userStretch; }
       void setUserStretch(double v)    { _userStretch = v;  }
 
-      void layoutX(ScoreLayout*, double stretch);
-      void layout(ScoreLayout*, double width);
-      void layout2(ScoreLayout*);
+      void layoutX(double stretch);
+      void layout(double width);
+      void layout2();
 
       Chord* findChord(int tick, int track, bool grace);
       ChordRest* findChordRest(int tick, int track);
@@ -175,7 +175,7 @@ class Measure : public MeasureBase {
       void insertMStaff(MStaff* staff, int idx);
       void removeMStaff(MStaff* staff, int idx);
 
-      void layoutBeams1(ScoreLayout*);
+      void layoutBeams1();
       void layoutChords(Segment* segment, int startTrack, char* tversatz);
       void layout0(int staff);
 

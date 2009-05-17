@@ -56,7 +56,7 @@ class Clef : public Compound {
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void space(double& min, double& extra) const;
 
       bool small() const                        { return _small; }

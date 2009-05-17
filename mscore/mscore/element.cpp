@@ -424,7 +424,7 @@ bool Element::intersects(const QRectF& rr) const
 //    values when calling this method
 //---------------------------------------------------------
 
-void Element::layout(ScoreLayout*)
+void Element::layout()
       {
       QPointF o(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
@@ -690,8 +690,9 @@ QPointF StaffLines::canvasPos() const
 
 QRectF StaffLines::bbox() const
       {
+      double _spatium = spatium();
       int l    = lines() - 1;
-      qreal lw = score()->styleS(ST_staffLineWidth).point();
+      qreal lw = point(score()->styleS(ST_staffLineWidth));
 
       switch(l) {
             case 0:
@@ -712,13 +713,14 @@ QRectF StaffLines::bbox() const
 void StaffLines::draw(QPainter& p) const
       {
       QPointF _pos(0.0, 0.0);
+      double _spatium = spatium();
 
 //      p.save();
 //      p.setRenderHint(QPainter::Antialiasing, false);
 //      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
       QPen pen(p.pen());
-      pen.setWidthF(score()->styleS(ST_staffLineWidth).point() * mag());
+      pen.setWidthF(point(score()->styleS(ST_staffLineWidth)));
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
             pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
@@ -730,13 +732,13 @@ void StaffLines::draw(QPainter& p) const
       switch(lines()) {
             case 1:
                   {
-                  qreal y = _pos.y() + 2 * _spatium * mag();
+                  qreal y = _pos.y() + 2 * _spatium;
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
                   break;
             case 2:
                   {
-                  qreal y = _pos.y() + 1 * _spatium * mag();
+                  qreal y = _pos.y() + 1 * _spatium;
                   p.drawLine(QLineF(x1, y, x2, y));
                   y += 2 * _spatium * mag();
                   p.drawLine(QLineF(x1, y, x2, y));
@@ -744,14 +746,14 @@ void StaffLines::draw(QPainter& p) const
                   break;
             case 3:
                   for (int i = 0; i < lines(); ++i) {
-                        qreal y = _pos.y() + i * _spatium * mag() * 2.0;
+                        qreal y = _pos.y() + i * _spatium * 2.0;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
                   break;
 
             default:
                   for (int i = 0; i < lines(); ++i) {
-                        qreal y = _pos.y() + i * _spatium * mag();
+                        qreal y = _pos.y() + i * _spatium;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
                   break;
@@ -765,12 +767,14 @@ void StaffLines::draw(QPainter& p) const
 
 double StaffLines::y1() const
       {
+      double _spatium = spatium();
+
       double y = measure()->system()->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
-                  return y + _pos.y() + 1 * _spatium * mag();
+                  return y + _pos.y() + 1 * _spatium;
             case 2:
-                  return y + _pos.y() + 1 * _spatium * mag();
+                  return y + _pos.y() + 1 * _spatium;
             case 3:
             default:
                   return y + _pos.y();
@@ -783,15 +787,17 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
+      double _spatium = spatium();
+
       double y = measure()->system()->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
-                  return y + _pos.y() + 3 * _spatium * mag();
+                  return y + _pos.y() + 3 * _spatium;
             case 2:
-                  return y + _pos.y() + 3 * _spatium * mag();
+                  return y + _pos.y() + 3 * _spatium;
             case 3:
             default:
-                  return y + _pos.y() + 4 * _spatium * mag();
+                  return y + _pos.y() + 4 * _spatium;
             }
       }
 
@@ -840,8 +846,7 @@ Line::Line(Score* s, bool v)
 
 void Line::dump() const
       {
-      printf("  width:%g height:%g vert:%d\n",
-         _width.point(), _len.point(), vertical);
+      printf("  width:%g height:%g vert:%d\n", point(_width), point(_len), vertical);
       }
 
 //---------------------------------------------------------
@@ -866,7 +871,7 @@ void Line::setLineWidth(Spatium w)
 //   layout
 //---------------------------------------------------------
 
-void Line::layout(ScoreLayout*)
+void Line::layout()
       {
       double sp = spatium();
       double w  = _width.val() * sp;
@@ -1022,7 +1027,7 @@ Cursor::Cursor(Score* s, Viewer* v)
       viewer    = v;
       _on       = false;
       _blink    = true;
-      _h        = 6 * _spatium;
+      _h        = 6 * spatium();
       _seg      = 0;
       }
 
@@ -1047,7 +1052,7 @@ void Cursor::draw(QPainter& p) const
             return;
       double x = pos().x();
       if (_seg)
-            x = _seg->canvasPos().x() - _spatium;
+            x = _seg->canvasPos().x() - spatium();
 
       int v = track() == -1 ? 0 : voice();
       p.fillRect(QRectF(x, pos().y(), _bbox.width(), _bbox.height()), QBrush(preferences.selectColor[v]));
@@ -1161,7 +1166,7 @@ bool Element::startEdit(Viewer*, const QPointF&)
 
 void Element::editDrag(int, const QPointF& delta)
       {
-      setUserOff(userOff() + delta / _spatium);
+      setUserOff(userOff() + delta / spatium());
       }
 
 //---------------------------------------------------------

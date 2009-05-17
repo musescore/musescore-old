@@ -560,7 +560,7 @@ void MuseScore::editInstrList()
                   for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                         StaffListItem* sli = (StaffListItem*)ci;
                         if (sli->op == ITEM_DELETE) {
-                              cs->layout()->systems()->clear();
+                              cs->systems()->clear();
                               Staff* staff = sli->staff;
                               int sidx = staff->idx();
                               int eidx = sidx + 1;
@@ -874,7 +874,7 @@ void Score::removeStaff(Staff* staff)
 
 void Score::sortStaves(QList<int>& dst)
       {
-      _layout.systems()->clear();  //??
+      systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
       QList<Staff*> dl;

@@ -58,7 +58,7 @@ class Rest : public ChordRest {
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);

@@ -993,6 +993,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1788,14 +1816,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2575,6 +2595,14 @@ failed: </source>
     </message>
     <message>
         <source>Subtype</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4997,10 +5025,6 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5058,6 +5082,14 @@ before closing?</source>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5269,6 +5301,18 @@ before closing?</source>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6993,9 +7037,29 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">मिमी.</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7008,6 +7072,10 @@ failed: </source>
     </message>
     <message>
         <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font point size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7043,7 +7111,31 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text on reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align bottom edge of text to reference point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7051,7 +7143,71 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>frame color</source>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7083,6 +7239,10 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>mm</source>
+        <translation type="unfinished">मिमी.</translation>
+    </message>
+    <message>
         <source>Margin:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7095,287 +7255,18 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished">मिमी.</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation type="unfinished">मिमी.</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font point size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
     <message>
-        <source>MuseScore: Edit Text Styles</source>
+        <source>frame color</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished">नि</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">ओके (OK)</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
+        <source>MuseScore: Edit Text Styles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

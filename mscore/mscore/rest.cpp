@@ -70,6 +70,8 @@ Rest::Rest(Score* s, int tick, int len)
 
 void Rest::draw(QPainter& p) const
       {
+      double _spatium = spatium();
+
       Measure* m = measure();
       if (m && m->multiMeasure()) {
             int n = m->multiMeasure();
@@ -103,7 +105,7 @@ void Rest::draw(QPainter& p) const
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= _dots; ++i) {
                         double x = symbols[_sym].width(mag())
-                                   + score()->styleS(ST_dotNoteDistance).point() * i;
+                                   + point(score()->styleS(ST_dotNoteDistance)) * i;
                         symbols[dotSym].draw(p, mag(), x, y);
                         }
                   }
@@ -325,7 +327,7 @@ void Rest::remove(Element* e)
 //   layout
 //---------------------------------------------------------
 
-void Rest::layout(ScoreLayout* l)
+void Rest::layout()
       {
       int line = lrint(userOff().y());
 
@@ -368,8 +370,8 @@ void Rest::layout(ScoreLayout* l)
                   _sym = quartrestSym;    // TODO
                   break;
             }
-      layoutArticulations(l);
-      Element::layout(l);
+      layoutArticulations();
+      Element::layout();
       }
 
 //---------------------------------------------------------
@@ -380,9 +382,9 @@ QRectF Rest::bbox() const
       {
       Measure* m = measure();
       if (m && m->multiMeasure()) {
-            double h = _spatium * 6.5;
-            double w = score()->styleS(ST_minMMRestWidth).point();
-            return QRectF(-w * .5, -h + 2 * _spatium, w, h);
+            double h = spatium() * 6.5;
+            double w = point(score()->styleS(ST_minMMRestWidth));
+            return QRectF(-w * .5, -h + 2 * spatium(), w, h);
             }
       else {
             QRectF b = symbols[_sym].bbox(mag());
@@ -461,7 +463,7 @@ void Rest::propertyAction(const QString& s)
 
 void Rest::space(double& min, double& extra) const
       {
-      min   = width() + _extraTrailingSpace.point();
-      extra = _extraLeadingSpace.point();
+      min   = width() + point(_extraTrailingSpace);
+      extra = point(_extraLeadingSpace);
       }
 

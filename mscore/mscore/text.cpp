@@ -125,7 +125,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       if (fi.family() == f.family()
          && fi.pointSize() == f.pointSize()
          && fi.bold() == f.bold()
-         && style->font().underline() == f.underline()
+         && style->font(spatium).underline() == f.underline()
          && fi.italic() == f.italic())
             return true;
 
@@ -629,7 +629,7 @@ bool TextB::isEmpty() const
 //   layout
 //---------------------------------------------------------
 
-void TextB::layout(ScoreLayout* layout)
+void TextB::layout()
       {
       if (parent() && parent()->type() == HBOX)
             textBase()->layout(parent()->width());
@@ -637,20 +637,19 @@ void TextB::layout(ScoreLayout* layout)
             textBase()->layout(-1.0);
       setbbox(textBase()->bbox());
 
-      if (parent() == 0)
-            return;
-
-      Element::layout(layout);      // process alignment
+      Element::layout();      // process alignment
 
       if (_align & ALIGN_VCENTER && subtype() == TEXT_TEXTLINE) {
             // special case: vertically centered text with TextLine needs to
             // take into account the line width
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
-            qreal textlineLineWidth = tl->lineWidth().point();
+            qreal textlineLineWidth = point(tl->lineWidth());
             setYpos(pos().y() - textlineLineWidth * .5);
             }
 
+      if (parent() == 0)
+            return;
       if (parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
             double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
@@ -676,7 +675,7 @@ void TextB::setTextStyle(int idx)
       {
       _textStyle   = idx;
       TextStyle* s = score()->textStyle(idx);
-      doc()->setDefaultFont(s->font(_spatium));
+      doc()->setDefaultFont(s->font(spatium()));
 
       _align         = s->align;
       _xoff          = s->xoff;
@@ -781,7 +780,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
       if (subtype() == TEXT_MEASURE_NUMBER)
             return;
-      textBase()->writeProperties(xml, st, score()->layout()->spatium(), writeText);
+      textBase()->writeProperties(xml, st, score()->spatium(), writeText);
       }
 
 //---------------------------------------------------------
@@ -823,8 +822,9 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
             setCircle(ns->circle);
       if (systemFlag() == os->systemFlag)
             setSystemFlag(ns->systemFlag);
-      if (textBase()->isSimpleText(os, score()->layout()->spatium()))
-            setDefaultFont(ns->font());
+      double _spatium = spatium();
+      if (textBase()->isSimpleText(os, _spatium))
+            setDefaultFont(ns->font(_spatium));
       if (textBase()->hasFrame() == os->hasFrame)
             textBase()->setHasFrame(ns->hasFrame);
       }
@@ -1043,7 +1043,7 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
             }
       mscore->textTools()->setCharFormat(cursor->charFormat());
       mscore->textTools()->setBlockFormat(cursor->blockFormat());
-      layout(0);
+      layout();
       score()->addRefresh(abbox().adjusted(-w, -w, w, w));
       return true;
       }
@@ -1263,7 +1263,7 @@ void TextB::paste()
       if (debugMode)
             printf("TextB::paste() <%s>\n", qPrintable(txt));
       cursor->insertText(txt);
-      layout(0);
+      layout();
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       score()->setUpdateAll();

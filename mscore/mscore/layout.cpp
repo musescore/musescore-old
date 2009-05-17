@@ -48,7 +48,7 @@
 //   rebuildBspTree
 //---------------------------------------------------------
 
-void ScoreLayout::rebuildBspTree()
+void Score::rebuildBspTree()
       {
       QRectF r;
       QList<const Element*> el;
@@ -61,11 +61,11 @@ void ScoreLayout::rebuildBspTree()
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (const Element* element, *score()->gel()) {
+      foreach (const Element* element, _gel) {
             if (element->track() != -1) {
-                  if (element->staffIdx() < 0 || element->staffIdx() >= score()->nstaves()) {
+                  if (element->staffIdx() < 0 || element->staffIdx() >= nstaves()) {
                         printf("element %s bad staffIdx %d(track:%d) >= staves(%d)\n",
-                           element->name(), element->staffIdx(), element->track(), score()->nstaves());
+                           element->name(), element->staffIdx(), element->track(), nstaves());
                         continue;
                         }
                   if (!element->staff()->show())
@@ -86,41 +86,18 @@ void ScoreLayout::rebuildBspTree()
 //   first
 //---------------------------------------------------------
 
-MeasureBase* ScoreLayout::first() const
+MeasureBase* Score::first() const
       {
-      return _score->measures()->first();
+      return _measures.first();
       }
 
 //---------------------------------------------------------
 //   last
 //---------------------------------------------------------
 
-MeasureBase* ScoreLayout::last()  const
+MeasureBase* Score::last()  const
       {
-      return _score->measures()->last();
-      }
-
-//---------------------------------------------------------
-//   ScoreLayout
-//---------------------------------------------------------
-
-ScoreLayout::ScoreLayout(Score* score)
-   : Element(score)
-      {
-      _spatium = preferences.spatium * DPI;     // ::_spatium;
-
-      _systems.clear();
-      _pages.clear();
-      _needLayout  = false;
-      _pageFormat  = new PageFormat;
-      _paintDevice = 0;
-      startLayout  = 0;
-      }
-
-ScoreLayout::~ScoreLayout()
-      {
-      if (_pageFormat)
-            delete _pageFormat;
+      return _measures.last();
       }
 
 //---------------------------------------------------------
@@ -173,9 +150,8 @@ int Score::clefOffset(int tick, Staff* staff) const
 //   already existent systems and pages are reused
 //---------------------------------------------------------
 
-void ScoreLayout::doLayout()
+void Score::doLayout()
       {
-      ::_spatium  = _spatium;        // needed for preview
       _spatiumMag = _spatium / (DPI * SPATIUM20);
       _needLayout = false;
 
@@ -193,7 +169,7 @@ void ScoreLayout::doLayout()
             _pages.clear();
 
             Page* page = addPage();
-            page->layout(this);
+            page->layout();
             page->setNo(0);
             page->setPos(0.0, 0.0);
 
@@ -208,14 +184,14 @@ void ScoreLayout::doLayout()
       //             on context
       //-----------------------------------------------------------------------
 
-      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                   mb->setDirty();
                   if (mb->type() == MEASURE) {
                         Measure* m = static_cast<Measure*>(mb);
 #if 1 // CS1
                         if (staffIdx == 0)
-                              m->layoutBeams1(this);  // find hooks / stem direction
+                              m->layoutBeams1();  // find hooks / stem direction
 #endif
                         m->layout0(staffIdx);
                         }
@@ -248,12 +224,12 @@ void ScoreLayout::doLayout()
             if (mb->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(mb);
                   //if (m->multiMeasure() >= 0)
-                        m->layout2(this);
+                        m->layout2();
                   }
             }
 
-      foreach(Element* el, *score()->gel())
-            el->layout(this);
+      foreach(Element* el, _gel)
+            el->layout();
 
       //---------------------------------------------------
       //    remove remaining pages and systems
@@ -278,14 +254,15 @@ void ScoreLayout::doLayout()
 //    add generated timesig keysig and clef
 //---------------------------------------------------------
 
-void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
+void Score::processSystemHeader(Measure* m, bool isFirstSystem)
       {
       int tick = m->tick();
-      int nstaves = _score->nstaves();
-      for (int i = 0; i < nstaves; ++i) {
-            Staff* staff   = _score->staff(i);
-            if (!m->system()->staff(i)->show())
+      int i = 0;
+      foreach(Staff* staff, _staves) {
+            if (!m->system()->staff(i)->show()) {
+                  ++i;
                   continue;
+                  }
 
             KeySig* hasKeysig = 0;
             Clef*   hasClef   = 0;
@@ -321,12 +298,12 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                               break;
                         }
                   }
-            bool needKeysig = keyIdx && (isFirstSystem || _score->styleB(ST_genKeysig));
+            bool needKeysig = keyIdx && (isFirstSystem || styleB(ST_genKeysig));
             if (needKeysig && !hasKeysig) {
                   //
                   // create missing key signature
                   //
-                  KeySig* ks = new KeySig(_score);
+                  KeySig* ks = new KeySig(this);
                   ks->setTrack(i * VOICES);
                   ks->setTick(tick);
                   ks->setGenerated(true);
@@ -342,14 +319,14 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                   seg->setElement(track, 0);    // TODO: delete element
                   m->setDirty();
                   }
-            bool needClef = isFirstSystem || _score->styleB(ST_genClef);
+            bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
                   int idx = staff->clefList()->clef(tick);
                   if (!hasClef) {
                         //
                         // create missing clef
                         //
-                        hasClef = new Clef(_score);
+                        hasClef = new Clef(this);
                         hasClef->setTrack(i * VOICES);
                         hasClef->setTick(tick);
                         hasClef->setGenerated(true);
@@ -369,6 +346,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                         m->setDirty();
                         }
                   }
+            ++i;
             }
       }
 
@@ -376,11 +354,11 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
 //   getNextSystem
 //---------------------------------------------------------
 
-System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
+System* Score::getNextSystem(bool isFirstSystem, bool isVbox)
       {
       System* system;
       if (curSystem >= _systems.size()) {
-            system = new System(_score);
+            system = new System(this);
             _systems.append(system);
             }
       else {
@@ -390,7 +368,7 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
       system->setFirstSystem(isFirstSystem);
       system->setVbox(isVbox);
       if (!isVbox) {
-            int nstaves = _score->nstaves();
+            int nstaves = Score::nstaves();
             for (int i = system->staves()->size(); i < nstaves; ++i)
                   system->insertStaff(i);
             int dn = system->staves()->size() - nstaves;
@@ -404,11 +382,11 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
 //   getCurPage
 //---------------------------------------------------------
 
-void ScoreLayout::getCurPage()
+void Score::getCurPage()
       {
       Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
       page->setNo(curPage);
-      page->layout(this);
+      page->layout();
       double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
          + page->width() + ((curPage & 1) ? 1.0 : 50.0);
       page->setPos(x, 0.0);
@@ -419,11 +397,11 @@ void ScoreLayout::getCurPage()
 //    return true, if next page must be relayouted
 //---------------------------------------------------------
 
-bool ScoreLayout::layoutPage()
+bool Score::layoutPage()
       {
       Page* page = _pages[curPage];
-      const double slb = score()->styleS(ST_staffLowerBorder).point();
-      const double sub = score()->styleS(ST_staffUpperBorder).point();
+      const double slb = point(styleS(ST_staffLowerBorder));
+      const double sub = point(styleS(ST_staffUpperBorder));
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -448,7 +426,7 @@ bool ScoreLayout::layoutPage()
                   system->setWidth(w);
                   VBox* vbox = (VBox*) curMeasure;
                   vbox->setParent(system);
-                  vbox->layout(this);
+                  vbox->layout();
                   double bh = vbox->height();
 
                   // put at least one system on page
@@ -463,11 +441,11 @@ bool ScoreLayout::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += bh + score()->styleS(ST_frameSystemDistance).point();
+                  y += bh + point(styleS(ST_frameSystemDistance));
                   nettoHeight += bh;
                   if (y > ey)
                         break;
-                  nettoHeight += score()->styleS(ST_frameSystemDistance).point();
+                  nettoHeight += point(styleS(ST_frameSystemDistance));
                   }
             else {
                   if (firstSystemOnPage) {
@@ -515,10 +493,10 @@ bool ScoreLayout::layoutPage()
 
       double ph = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
-      if (restHeight > (ph * (1.0 - score()->styleD(ST_pageFillLimit))))
+      if (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit))))
             return true;
 
-      double systemDistance = score()->styleS(ST_systemDistance).point();
+      double systemDistance = point(styleS(ST_systemDistance));
       double extraDist = (rows > 1) ? ((ph - nettoHeight + systemDistance) / (rows - 1.0)) : 0.0;
       y = 0;
       int n = page->systems()->size();
@@ -542,7 +520,7 @@ bool ScoreLayout::layoutPage()
 //    measures in sequence
 //---------------------------------------------------------
 
-Measure* ScoreLayout::skipEmptyMeasures(Measure* m, System* system)
+Measure* Score::skipEmptyMeasures(Measure* m, System* system)
       {
       Measure* sm = m;
       int n       = 0;
@@ -556,7 +534,7 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m, System* system)
             m = static_cast<Measure*>(mb);
             }
       m = sm;
-      if (n >= score()->styleI(ST_minEmptyMeasures)) {
+      if (n >= styleI(ST_minEmptyMeasures)) {
             for (int i = 0; i < (n-1); ++i) {
                   m->setMultiMeasure(-1);
                   m->setSystem(system);
@@ -573,29 +551,29 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m, System* system)
 //   layoutSystem1
 //---------------------------------------------------------
 
-bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
+bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
       double xo = 0;
       if (curMeasure->type() == HBOX)
-            xo = static_cast<Box*>(curMeasure)->boxWidth().point();
+            xo = point(static_cast<Box*>(curMeasure)->boxWidth());
 
       system->setInstrumentNames();
-      system->layout(this, xo);
+      system->layout(xo);
       minWidth            = system->leftMargin();
       double systemWidth  = w;
 
       bool continueFlag   = false;
 
-      int nstaves = _score->nstaves();
+      int nstaves = Score::nstaves();
       bool isFirstMeasure = true;
 //      MeasureBase* firstMeasure = curMeasure;
 
       for (; curMeasure;) {
             if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (score()->styleB(ST_createMultiMeasureRests))
+                  if (styleB(ST_createMultiMeasureRests))
                         curMeasure = skipEmptyMeasures(m, system);
                   else
                         m->setMultiMeasure(0);
@@ -607,7 +585,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             double stretch = 0.0;
 
             if (curMeasure->type() == HBOX) {
-                  ww = static_cast<Box*>(curMeasure)->boxWidth().point();
+                  ww = point(static_cast<Box*>(curMeasure)->boxWidth());
                   if (!isFirstMeasure)
                         continueFlag = true;    //try to put another system on current row
                   }
@@ -633,7 +611,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
                                           seg->setElement(track, 0);
                                     }
-                              double staffMag = score()->staff(staffIdx)->mag();
+                              double staffMag = staff(staffIdx)->mag();
                               if (el->type() == CLEF) {
                                     Clef* clef = static_cast<Clef*>(el);
                                     clef->setSmall(!isFirstMeasure || (seg != m->first()));
@@ -641,21 +619,21 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     }
                               else if (el->type() == KEYSIG || el->type() == TIMESIG)
                                     el->setMag(staffMag);
-//TODO                              double staffMag = score()->staff(staffIdx)->mag();
+//TODO                              double staffMag = staff(staffIdx)->mag();
 //                              el->setMag(staffMag);
                               }
                         }
 
                   m->createEndBarLines();
-                  m->layoutBeams1(this);  // find hooks
+                  m->layoutBeams1();  // find hooks
 
-                  m->layoutX(this, 1.0);
+                  m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;
-                  stretch = m->userStretch() * score()->styleD(ST_measureSpacing);
+                  stretch = m->userStretch() * styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < score()->styleS(ST_minMeasureWidth).point())
-                        ww = score()->styleS(ST_minMeasureWidth).point();
+                  if (ww < point(styleS(ST_minMeasureWidth)))
+                        ww = point(styleS(ST_minMeasureWidth));
                   isFirstMeasure = false;
                   }
 
@@ -682,11 +660,11 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       bool showChanged = false;
       int staves = system->staves()->size();
       int staffIdx = 0;
-      foreach (Part* p, *score()->parts()) {
+      foreach (Part* p, _parts) {
             int nstaves   = p->nstaves();
             bool hidePart = false;
 
-            if (score()->styleB(ST_hideEmptyStaves) && (staves > 1)) {
+            if (styleB(ST_hideEmptyStaves) && (staves > 1)) {
                   hidePart = true;
                   for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
                         foreach(MeasureBase* m, system->measures()) {
@@ -702,7 +680,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
             for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
                   SysStaff* s  = system->staff(i);
-                  Staff* staff = score()->staff(i);
+                  Staff* staff = Score::staff(i);
                   bool oldShow = s->show();
                   s->setShow(hidePart ? false : staff->show());
                   if (oldShow != s->show()) {
@@ -728,7 +706,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 //    x, y  position of row on page
 //---------------------------------------------------------
 
-QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
+QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
    bool isFirstSystem, double* h)
       {
       bool raggedRight = layoutDebug;
@@ -748,7 +726,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       //
       // dont stretch last system row, if minWidth is <= lastSystemFillLimit
       //
-      if (curMeasure == 0 && ((minWidth / rowWidth) <= score()->styleD(ST_lastSystemFillLimit)))
+      if (curMeasure == 0 && ((minWidth / rowWidth) <= styleD(ST_lastSystemFillLimit)))
             raggedRight = true;
 
       //-------------------------------------------------------
@@ -770,19 +748,19 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   }
             MeasureBase* lm = system->measures().back();
             int tick        = lm->tick() + lm->tickLen();
-            SigEvent sig1   = _score->sigmap->timesig(tick - 1);
-            SigEvent sig2   = _score->sigmap->timesig(tick);
+            SigEvent sig1   = sigmap->timesig(tick - 1);
+            SigEvent sig2   = sigmap->timesig(tick);
 
-            if (score()->styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
+            if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
                   while (lm && lm->type() != MEASURE)
                         lm = lm->prev();
                   if (lm) {
                         Measure* m = (Measure*)lm;
                         Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
-                        int nstaves = score()->nstaves();
+                        int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track) == 0) {
-                                    TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
+                                    TimeSig* ts = new TimeSig(this, sig2.denominator, sig2.nominator);
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
                                     ts->setMag(ts->staff()->mag());
@@ -842,11 +820,11 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       foreach(System* system, sl) {
             foreach (MeasureBase* mb, system->measures()) {
                   if (mb->type() == HBOX)
-                        minWidth += ((Box*)mb)->boxWidth().point();
+                        minWidth += point(((Box*)mb)->boxWidth());
                   else {
                         Measure* m = (Measure*)mb;
                         if (needRelayout)
-                              m->layoutX(this, 1.0);
+                              m->layoutX(1.0);
                         minWidth    += m->layoutWidth().stretchable;
                         totalWeight += m->tickLen() * m->userStretch();
                         }
@@ -872,25 +850,25 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         Measure* m    = static_cast<Measure*>(mb);
                         double weight = m->tickLen() * m->userStretch();
                         ww            = m->layoutWidth().stretchable + rest * weight;
-                        m->layout(this, ww);
+                        m->layout(ww);
                         }
                   else if (mb->type() == HBOX) {
                         mb->setPos(pos);
-                        ww = static_cast<Box*>(mb)->boxWidth().point();
-                        mb->layout(this);
+                        ww = point(static_cast<Box*>(mb)->boxWidth());
+                        mb->layout();
                         }
                   pos.rx() += ww;
                   }
             system->setPos(xx + x, y);
             double w = pos.x();
             system->setWidth(w);
-            system->layout2(this);
+            system->layout2();
             foreach(MeasureBase* mb, system->measures()) {
                   if (mb->type() == HBOX)
                         mb->setHeight(system->height());
                   }
             xx += w;
-            double hh = system->height() + system->staves()->back()->distance();
+            double hh = system->height() + point(system->staves()->back()->distance());
             if (hh > *h)
                   *h = hh;
             }
@@ -901,7 +879,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 //   addPage
 //---------------------------------------------------------
 
-Page* ScoreLayout::addPage()
+Page* Score::addPage()
       {
       Page* page = new Page(this);
       page->setNo(_pages.size());
@@ -913,7 +891,7 @@ Page* ScoreLayout::addPage()
 //   setPageFormat
 //---------------------------------------------------------
 
-void ScoreLayout::setPageFormat(const PageFormat& pf)
+void Score::setPageFormat(const PageFormat& pf)
       {
       *_pageFormat = pf;
       }
@@ -922,7 +900,7 @@ void ScoreLayout::setPageFormat(const PageFormat& pf)
 //   setInstrumentNames
 //---------------------------------------------------------
 
-void ScoreLayout::setInstrumentNames()
+void Score::setInstrumentNames()
       {
       for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
             (*is)->setInstrumentNames();
@@ -957,9 +935,9 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
  Rebuild tie connections.
 */
 
-void ScoreLayout::connectTies()
+void Score::connectTies()
       {
-      int tracks = _score->nstaves() * VOICES;
+      int tracks = nstaves() * VOICES;
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -995,14 +973,13 @@ void ScoreLayout::connectTies()
 //   add
 //---------------------------------------------------------
 
-void ScoreLayout::add(Element* el)
+void Score::add(Element* el)
       {
       if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            _score->measures()->add((MeasureBase*)el);
+            measures()->add((MeasureBase*)el);
             }
       else {
-            el->setParent(this);
-            score()->gel()->append(el);
+            _gel.append(el);
             }
       }
 
@@ -1010,14 +987,14 @@ void ScoreLayout::add(Element* el)
 //   remove
 //---------------------------------------------------------
 
-void ScoreLayout::remove(Element* el)
+void Score::remove(Element* el)
       {
       if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            _score->measures()->remove(static_cast<MeasureBase*>(el));
+            measures()->remove(static_cast<MeasureBase*>(el));
             }
       else {
-            if (!score()->gel()->removeOne(el))
-                  printf("ScoreLayout::remove(): element not found\n");
+            if (!_gel.removeOne(el))
+                  printf("Score::remove(): element not found\n");
             }
       }
 
@@ -1025,7 +1002,7 @@ void ScoreLayout::remove(Element* el)
 //   reLayout
 //---------------------------------------------------------
 
-void ScoreLayout::reLayout(Measure* m)
+void Score::reLayout(Measure* m)
       {
       _needLayout = true;
       startLayout = m;
@@ -1037,11 +1014,11 @@ void ScoreLayout::reLayout(Measure* m)
 //    a full layout must be done starting at "startLayout"
 //---------------------------------------------------------
 
-bool ScoreLayout::doReLayout()
+bool Score::doReLayout()
       {
 #if 0
       if (startLayout->type() == MEASURE) {
-            for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
                   static_cast<Measure*>(startLayout)->layout0(staffIdx);
             }
 #endif
@@ -1056,20 +1033,20 @@ bool ScoreLayout::doReLayout()
       foreach(m, system->measures()) {
             double ww;
             if (m->type() == HBOX) {
-                  ww = static_cast<Box*>(m)->boxWidth().point();
+                  ww = point(static_cast<Box*>(m)->boxWidth());
                   }
             else if (m->type() == MEASURE) {
                   Measure* measure = static_cast<Measure*>(m);
-                  for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
+                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
                         measure->layout0(staffIdx);
-                  measure->layoutBeams1(this);
-                  measure->layoutX(this, 1.0);
+                  measure->layoutBeams1();
+                  measure->layoutX(1.0);
                   ww      = measure->layoutWidth().stretchable;
-                  double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
+                  double stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < score()->styleS(ST_minMeasureWidth).point())
-                        ww = score()->styleS(ST_minMeasureWidth).point();
+                  if (ww < point(styleS(ST_minMeasureWidth)))
+                        ww = point(styleS(ST_minMeasureWidth));
                   }
             minWidth += ww;
             }
@@ -1082,13 +1059,13 @@ bool ScoreLayout::doReLayout()
       m = m->next();
       if (m && m->subtype() == MEASURE) {
             Measure* measure = static_cast<Measure*>(m);
-            measure->layoutX(this, 1.0);
+            measure->layoutX(1.0);
             double ww      = measure->layoutWidth().stretchable;
-            double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
+            double stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
             ww *= stretch;
-            if (ww < score()->styleS(ST_minMeasureWidth).point())
-                  ww = score()->styleS(ST_minMeasureWidth).point();
+            if (ww < point(styleS(ST_minMeasureWidth)))
+                  ww = point(styleS(ST_minMeasureWidth));
             if ((minWidth + ww) <= sysWidth)    // if another measure fits, do full layout
                   return false;
             }
@@ -1099,7 +1076,7 @@ bool ScoreLayout::doReLayout()
       double totalWeight = 0.0;
       foreach (MeasureBase* mb, system->measures()) {
             if (mb->type() == HBOX)
-                  minWidth += static_cast<Box*>(mb)->boxWidth().point();
+                  minWidth += point(static_cast<Box*>(mb)->boxWidth());
             else {
                   Measure* m   = static_cast<Measure*>(mb);
                   minWidth    += m->layoutWidth().stretchable;
@@ -1122,19 +1099,19 @@ bool ScoreLayout::doReLayout()
                   Measure* m    = static_cast<Measure*>(mb);
                   double weight = m->tickLen() * m->userStretch();
                   ww            = m->layoutWidth().stretchable + rest * weight;
-                  m->layout(this, ww);
+                  m->layout(ww);
                   }
             else if (mb->type() == HBOX) {
                   mb->setPos(pos);
-                  ww = static_cast<Box*>(mb)->boxWidth().point();
-                  mb->layout(this);
+                  ww = point(static_cast<Box*>(mb)->boxWidth());
+                  mb->layout();
                   }
             pos.rx() += ww;
             }
 
       foreach(MeasureBase* mb, system->measures()) {
             if (mb->type() == MEASURE)
-                  static_cast<Measure*>(mb)->layout2(this);
+                  static_cast<Measure*>(mb)->layout2();
             }
 
       rebuildBspTree();
@@ -1145,9 +1122,10 @@ bool ScoreLayout::doReLayout()
 //   clear
 //---------------------------------------------------------
 
-void ScoreLayout::clear()
+#if 0
+void Score::clear()
       {
       _pages.clear();
       _systems.clear();
       }
-
+#endif

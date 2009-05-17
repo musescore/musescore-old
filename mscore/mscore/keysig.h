@@ -51,7 +51,7 @@ class KeySig : public Element {
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       void setSig(int oldSig, int newSig);
       Segment* segment() const { return (Segment*)parent(); }
       };

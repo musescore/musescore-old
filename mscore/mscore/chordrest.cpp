@@ -336,17 +336,17 @@ void ChordRest::setSmall(bool val)
 //    if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
 //---------------------------------------------------------
 
-void ChordRest::layoutArticulations(ScoreLayout* layout)
+void ChordRest::layoutArticulations()
       {
-      double _spatium  = layout->spatium() * mag();
+      double _spatium  = spatium();
       Measure* m       = measure();
       System* s        = m->system();
       int idx          = staff()->rstaff();
       qreal x          = centerX();
 
-//      double distance  = point(score()->styleS(ST_propertyDistance)) * mag();
-      double distance1 = score()->styleS(ST_propertyDistanceHead).point() * mag();
-      double distance2 = score()->styleS(ST_propertyDistanceStem).point() * mag();
+//      double distance  = point(score()->styleS(ST_propertyDistance));
+      double distance1 = point(score()->styleS(ST_propertyDistanceHead));
+      double distance2 = point(score()->styleS(ST_propertyDistanceStem));
 
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();
@@ -417,12 +417,12 @@ void ChordRest::layoutArticulations(ScoreLayout* layout)
             if (aa == A_TOP_STAFF) {
                   y = staffTopY - dyTop;
                   a->setPos(x, y);
-                  dyTop += score()->styleS(ST_propertyDistance).point() + a->bbox().height();
+                  dyTop += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
                   }
             else if (aa == A_BOTTOM_STAFF) {
                   y = staffBotY + dyBot;
                   a->setPos(x, y);
-                  dyBot += score()->styleS(ST_propertyDistance).point() + a->bbox().height();
+                  dyBot += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
                   }
             }
       }

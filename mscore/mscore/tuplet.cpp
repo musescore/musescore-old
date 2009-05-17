@@ -74,9 +74,9 @@ void Tuplet::setSelected(bool f)
 //   layout
 //---------------------------------------------------------
 
-void Tuplet::layout(ScoreLayout* layout)
+void Tuplet::layout()
       {
-      double _spatium = layout->spatium();
+      double _spatium = spatium();
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
@@ -224,7 +224,7 @@ void Tuplet::layout(ScoreLayout* layout)
       qreal x3 = 0.0, y3 = 0.0;
       qreal numberWidth = 0.0;
       if (_number) {
-            _number->layout(layout);
+            _number->layout();
             x3 = p1.x() + (p2.x() - p1.x()) * .5;
 
             y3 = p1.y() + (p2.y() - p1.y()) * .5
@@ -321,7 +321,7 @@ void Tuplet::draw(QPainter& p) const
             }
       if (_hasBracket) {
             QPen pen(p.pen());
-            pen.setWidthF(_spatium * 0.1);
+            pen.setWidthF(spatium() * 0.1);
             p.setPen(pen);
             if (!_number)
                   p.drawPolyline(bracketL, 4);

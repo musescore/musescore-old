@@ -117,6 +117,7 @@ class Staff {
       Score* score() const           { return _score;       }
       double mag() const;
       double height() const;
+      double spatium() const;
       };
 #endif
 

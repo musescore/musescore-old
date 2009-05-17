@@ -1001,6 +1001,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">auto</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">cima</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">baixo</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1796,14 +1824,6 @@ failed: </source>
         <translation>Forma</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Anterior</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Seguinte</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Parecido</translation>
     </message>
@@ -2584,6 +2604,14 @@ failed: </source>
     <message>
         <source>Subtype</source>
         <translation>SubTipo</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5046,10 +5074,6 @@ antes de fechar?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Lyrics odd lines</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5067,6 +5091,14 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5278,6 +5310,18 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7008,111 +7052,7 @@ Falhou: </translation>
     </message>
 </context>
 <context>
-    <name>TextProperties</name>
-    <message>
-        <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Propriedades do Texto</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Fonte:</translation>
-    </message>
-    <message>
-        <source>font face</source>
-        <translation>figura da fonte</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Tamanho:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Estilo:</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>negrito</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>itálico</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>sublinhado</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>Alinhar:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Cor:</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>cor da caixa</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Caixa</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>desenhar a caixa do círculo</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Círculo</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>desenhar o quadro da caixa</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Quadro</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Largura:</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>Largura da linha da caixa</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Margem:</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>margem interior da caixa</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Girar:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>alinhamento  esquerda</translation>
-    </message>
+    <name>TextProp</name>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
@@ -7123,13 +7063,75 @@ Falhou: </translation>
         <comment>spatium unit</comment>
         <translation type="unfinished">sp</translation>
     </message>
+</context>
+<context>
+    <name>TextProperties</name>
+    <message>
+        <source>MuseScore: Text Properties</source>
+        <translation>MuseScore: Propriedades do Texto</translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished">Fonte:</translation>
+    </message>
+    <message>
+        <source>font face</source>
+        <translation type="unfinished">figura da fonte</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Tamanho:</translation>
+    </message>
     <message>
         <source>font point size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Style:</source>
+        <translation type="unfinished">Estilo:</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">negrito</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">itálico</translation>
+    </message>
+    <message>
+        <source>I</source>
+        <translation type="unfinished">I</translation>
+    </message>
+    <message>
+        <source>underline</source>
+        <translation type="unfinished">sublinhado</translation>
+    </message>
+    <message>
+        <source>U</source>
+        <translation type="unfinished">U</translation>
+    </message>
+    <message>
+        <source>Align:</source>
+        <translation type="unfinished">Alinhar:</translation>
+    </message>
+    <message>
         <source>align left edge of text to reference point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
@@ -7150,6 +7152,10 @@ Falhou: </translation>
     <message>
         <source>align bottom edge of text to reference point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Cor:</translation>
     </message>
     <message>
         <source>text color</source>
@@ -7220,178 +7226,63 @@ Falhou: </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Frame</source>
+        <translation type="unfinished">Caixa</translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">desenhar a caixa do círculo</translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished">Círculo</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">desenhar o quadro da caixa</translation>
+    </message>
+    <message>
+        <source>Box</source>
+        <translation type="unfinished">Quadro</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largura:</translation>
+    </message>
+    <message>
+        <source>frame line width</source>
+        <translation type="unfinished">Largura da linha da caixa</translation>
+    </message>
+    <message>
         <source>mm</source>
         <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Margin:</source>
+        <translation type="unfinished">Margem:</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">margem interior da caixa</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished">Girar:</translation>
     </message>
     <message>
         <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
     <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Editar estilos de texto</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Geral</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Amostra de Texto</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Posição</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Alinhamento</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>Horizontal</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Esquerda</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Direita</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Centro</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>Vertical</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Topo</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Base</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Offset</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Unidade:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Espaço</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Caixa</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Pré-visualizao</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Aplicar</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Tamanho:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Estilo:</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Linha Base</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Fonte:</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Largura:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Margem:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Girar:</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Cor:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Círculo</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Quadro</translation>
+        <source>frame color</source>
+        <translation type="unfinished">cor da caixa</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Eu e tu... Vaca Muellers</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Editar estilos de texto</translation>
     </message>
 </context>
 <context>

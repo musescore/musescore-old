@@ -37,7 +37,6 @@ class Measure;
 class Staff;
 class Score;
 class Sym;
-class ScoreLayout;
 class Viewer;
 class Segment;
 class TextStyle;
@@ -240,7 +239,7 @@ class Element {
             add(n);
             }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void resetMode() {}
 
       // debug functions
@@ -466,7 +465,7 @@ class Line : public Element {
 
       virtual Line* clone() const { return new Line(*this); }
       virtual ElementType type() const { return LINE; }
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual void draw(QPainter&) const;
       void writeProperties(Xml& xml) const;

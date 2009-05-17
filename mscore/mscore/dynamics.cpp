@@ -146,7 +146,7 @@ void Dynamic::setSubtype(int idx)
             double size = ts->size;
             double m = size * DPI / PPI;
             if (ts->sizeIsSpatiumDependent)
-                  m *= (::_spatium / (SPATIUM20 * DPI));
+                  m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
 
 #ifdef Q_WS_MAC
@@ -247,10 +247,10 @@ void Dynamic::toDefault()
 //   layout
 //---------------------------------------------------------
 
-void Dynamic::layout(ScoreLayout* sl)
+void Dynamic::layout()
       {
       setSubtype(subtype());  // re-apply style
-      Text::layout(sl);
+      Text::layout();
       }
 
 //---------------------------------------------------------

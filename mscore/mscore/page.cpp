@@ -43,10 +43,9 @@
 //   Page
 //---------------------------------------------------------
 
-Page::Page(ScoreLayout* s)
-   : Element(s->score())
+Page::Page(Score* s)
+   : Element(s)
       {
-      _layout    = s;
       _no        = 0;
       _pageNo    = 0;
       _copyright = 0;
@@ -58,35 +57,35 @@ Page::Page(ScoreLayout* s)
 
 double Page::tm() const
       {
-      PageFormat* pf = _layout->pageFormat();
+      PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
       }
 
 double Page::bm() const
       {
-      PageFormat* pf = _layout->pageFormat();
+      PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
       }
 
 double Page::lm() const
       {
-      PageFormat* pf = _layout->pageFormat();
+      PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
       }
 
 double Page::rm() const
       {
-      PageFormat* pf = _layout->pageFormat();
+      PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
       }
 
 double Page::loWidth() const
       {
-      return _layout->pageFormat()->width() * DPI;
+      return score()->pageFormat()->width() * DPI;
       }
 double Page::loHeight() const
       {
-      return _layout->pageFormat()->height() * DPI;
+      return score()->pageFormat()->height() * DPI;
       }
 
 //---------------------------------------------------------
@@ -112,7 +111,7 @@ void Page::setNo(int n)
 //   layout
 //---------------------------------------------------------
 
-void Page::layout(ScoreLayout* layout)
+void Page::layout()
       {
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
 
@@ -130,7 +129,7 @@ void Page::layout(ScoreLayout* layout)
                   _pageNo->setTextStyle(style);
                   }
             _pageNo->setText(QString("%1").arg(n));
-            _pageNo->layout(layout);
+            _pageNo->layout();
             }
       else if (_pageNo) {
             delete _pageNo;
@@ -140,7 +139,7 @@ void Page::layout(ScoreLayout* layout)
       // add copyright to page
       if (score()->state() == STATE_EDIT) {      // for special case: edit copyright
             if (_copyright)
-                  _copyright->layout(layout);
+                  _copyright->layout();
             }
       else {
             if (_score->rights) {
@@ -148,7 +147,7 @@ void Page::layout(ScoreLayout* layout)
                         _copyright = new TextC(*_score->rights);
                         _copyright->setParent(this);
                         }
-                  _copyright->layout(layout);
+                  _copyright->layout();
                   }
             else if (_copyright) {
                   delete _copyright;

@@ -124,7 +124,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       QDomElement e = doc.documentElement();
       s->read(e);
       if (!excerpt->title().isEmpty()) {
-            MeasureBase* measure = s->layout()->first();
+            MeasureBase* measure = s->first();
             if (measure->type() != VBOX) {
                   measure = new VBox(s);
                   measure->setTick(0);
@@ -242,7 +242,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             xml.curTrack  = staffIdx * VOICES;
             xml.trackDiff = trackOffset[staffIdx];
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1 + xml.trackDiff/4));
-            for (MeasureBase* m = _layout.first(); m; m = m->next()) {
+            for (MeasureBase* m = first(); m; m = m->next()) {
                   if (isFirstStaff || m->type() == MEASURE)
                         m->write(xml, staffIdx, isFirstStaff);
                   if (m->type() == MEASURE)

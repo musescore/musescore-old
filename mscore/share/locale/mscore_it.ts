@@ -1001,6 +1001,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">Automatico</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">Su</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">Abbassa</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1799,14 +1827,6 @@ fallito: </translation>
         <translation>Formato</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Precedente</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Successivo</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Padre</translation>
     </message>
@@ -2588,6 +2608,14 @@ fallito: </translation>
     <message>
         <source>Elements:</source>
         <translation>Elementi:</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5010,10 +5038,6 @@ prima di chiudere?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5071,6 +5095,14 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5282,6 +5314,18 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7021,390 +7065,237 @@ selezionare una battuta e riprovare</translation>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Proprietà Testo</translation>
     </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
     <message>
         <source>Font:</source>
-        <translation>Carattere:</translation>
+        <translation type="unfinished">Carattere:</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>aspetto carattere</translation>
+        <translation type="unfinished">aspetto carattere</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Dimensione:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Stile:</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>Grassetto</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>Corsivo</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>Sottolineato</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>Allineamento:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Colore:</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>colore cornice</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cornice</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>disegna cornice circolare</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Cerchio</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>disegna cornice rettangolare</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Box</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Spessore:</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>spessore linea cornice</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Margine:</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>margine interno cornice</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Arrotondamento:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>Allineamento a Sinistra</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation>colore testo</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Spiazzamento</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Unità:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Spazio</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation>spazi</translation>
+        <translation type="unfinished">Dimensione:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>grandezza del font in punti</translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation>allineare il bordo sinistro del testo al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation>centrare il testo al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation>allineare il bordo destro del testo al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation>allineare il bordo superiore del testo al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation>centrare il testo verticalmente al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation>allineare il bordo inferiore del testo al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation>spiazzamento orizzontale al punto di riferimento</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation>spiazzamento punto di riferimento in percento della larghezza del genitore</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation>spiazzamento verticale dal punto di riferimento</translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation>spiazzamento punto di riferimento in percento dell&apos;altezza del genitore</translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation>spiazzamento assoluto</translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation>spiazzamento in unità di spazio</translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation>abilita la cornice del testo</translation>
-    </message>
-    <message>
-        <source>corner round</source>
-        <translation>angolo arrotondato</translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Stile del Testo</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Generale</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>Grassetto</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>Corsivo</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>Sottolineato</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Esempio Testo</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Posizione</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Allineamento</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>Orizzontale</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>A Sinistra</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>A Destra</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Al Centro</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>Verticale</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>In Alto</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>In Basso</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Spiazzamento</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>Oriz.:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Vert.:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Unità:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Spazi</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Applica</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annulla</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cornice</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Anteprima</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Dimensione:</translation>
+        <translation type="unfinished">grandezza del font in punti</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stile:</translation>
+        <translation type="unfinished">Stile:</translation>
     </message>
     <message>
-        <source>Baseline</source>
-        <translation>Base Linea</translation>
+        <source>bold</source>
+        <translation type="unfinished">Grassetto</translation>
     </message>
     <message>
-        <source>relX:</source>
-        <translation>relX:</translation>
+        <source>B</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%</source>
-        <translation>%</translation>
+        <source>italic</source>
+        <translation type="unfinished">Corsivo</translation>
     </message>
     <message>
-        <source>relY:</source>
-        <translation>relY:</translation>
+        <source>I</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Font:</source>
-        <translation>Carattere:</translation>
+        <source>underline</source>
+        <translation type="unfinished">Sottolineato</translation>
     </message>
     <message>
-        <source>Width:</source>
-        <translation>Spessore:</translation>
+        <source>U</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Margin:</source>
-        <translation>Margine:</translation>
+        <source>Align:</source>
+        <translation type="unfinished">Allineamento:</translation>
     </message>
     <message>
-        <source>Round:</source>
-        <translation>Arrotondamento:</translation>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished">allineare il bordo sinistro del testo al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>center text on reference point</source>
+        <translation type="unfinished">centrare il testo al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished">allineare il bordo destro del testo al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished">allineare il bordo superiore del testo al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished">centrare il testo verticalmente al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished">allineare il bordo inferiore del testo al punto di riferimento</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colore:</translation>
+        <translation type="unfinished">Colore:</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished">colore testo</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Spiazzamento</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished">spiazzamento orizzontale al punto di riferimento</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">relX:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished">spiazzamento punto di riferimento in percento della larghezza del genitore</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished">spiazzamento verticale dal punto di riferimento</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">relY:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished">spiazzamento punto di riferimento in percento dell&apos;altezza del genitore</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Unità:</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished">spiazzamento assoluto</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished">spiazzamento in unità di spazio</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished">abilita la cornice del testo</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">disegna cornice circolare</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Cerchio</translation>
+        <translation type="unfinished">Cerchio</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">disegna cornice rettangolare</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Cornice</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Spessore:</translation>
+    </message>
+    <message>
+        <source>frame line width</source>
+        <translation type="unfinished">spessore linea cornice</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Margin:</source>
+        <translation type="unfinished">Margine:</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">margine interno cornice</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished">Arrotondamento:</translation>
+    </message>
+    <message>
+        <source>corner round</source>
+        <translation type="unfinished">angolo arrotondato</translation>
+    </message>
+    <message>
+        <source>frame color</source>
+        <translation type="unfinished">colore cornice</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Fin che la barca va, lasciala andare...</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Stile del Testo</translation>
     </message>
 </context>
 <context>

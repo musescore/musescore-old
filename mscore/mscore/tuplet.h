@@ -101,7 +101,7 @@ class Tuplet : public DurationElement {
       int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
       const QList<DurationElement*>& elements() const   { return _elements; }
       void clear()                  { _elements.clear(); }
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       Text* number() const { return _number; }
 
       virtual void read(QDomElement);

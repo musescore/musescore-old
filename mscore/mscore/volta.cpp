@@ -72,10 +72,10 @@ void Volta::setSubtype(int val)
 //    compute segments from tick() to _tick2
 //---------------------------------------------------------
 
-void Volta::layout(ScoreLayout* layout)
+void Volta::layout()
       {
-      TextLine::layout(layout);
-      Element::layout(layout);
+      TextLine::layout();
+      Element::layout();
       }
 
 //---------------------------------------------------------

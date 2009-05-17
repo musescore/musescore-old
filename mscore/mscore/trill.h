@@ -50,7 +50,7 @@ class Trill : public SLine {
       virtual Trill* clone() const { return new Trill(*this); }
       virtual ElementType type() const { return TRILL; }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       virtual LineSegment* createLineSegment();

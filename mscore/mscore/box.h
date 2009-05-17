@@ -53,7 +53,7 @@ class Box : public MeasureBase {
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void write(Xml&) const;
       virtual void write(Xml& xml, int, bool) const { write(xml); }
       virtual void read(QDomElement);
@@ -85,7 +85,7 @@ class HBox : public Box {
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
@@ -107,7 +107,7 @@ class VBox : public Box {
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);

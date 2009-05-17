@@ -403,7 +403,7 @@ bool Score::importBB(const QString& name)
             Measure* measure  = new Measure(this);
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
-      	_layout.add(measure);
+      	add(measure);
             }
 
       //---------------------------------------------------
@@ -414,7 +414,7 @@ bool Score::importBB(const QString& name)
             track->cleanup();
 
       if (tracks->isEmpty()) {
-            for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
@@ -441,12 +441,12 @@ bool Score::importBB(const QString& name)
       text->setTextStyle(TEXT_STYLE_TITLE);
       text->setText(bb.title());
 
-      MeasureBase* measure = _layout.first();
+      MeasureBase* measure = first();
       if (measure->type() != VBOX) {
             measure = new VBox(this);
             measure->setTick(0);
-            measure->setNext(_layout.first());
-            _layout.add(measure);
+            measure->setNext(first());
+            add(measure);
             }
       measure->add(text);
 
@@ -487,7 +487,7 @@ bool Score::importBB(const QString& name)
       int endChorus   = bb.endChorus() - 1;
 
       int n = 0;
-      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = (Measure*)mb;

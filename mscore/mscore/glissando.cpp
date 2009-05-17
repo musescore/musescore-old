@@ -35,6 +35,7 @@ Glissando::Glissando(Score* s)
       {
       _text = "gliss.";
       _showText = true;
+      double _spatium = spatium();
       setSize(QSizeF(_spatium * 2, _spatium * 4));    // for use in palettes
       }
 
@@ -42,7 +43,7 @@ Glissando::Glissando(Score* s)
 //   layout
 //---------------------------------------------------------
 
-void Glissando::layout(ScoreLayout*)
+void Glissando::layout()
       {
       Chord* chord = static_cast<Chord*>(parent());
       if (chord == 0)
@@ -79,8 +80,8 @@ void Glissando::layout(ScoreLayout*)
       QLineF fullLine(x1, y1, x2, y2);
 
       // shorten line on each side by offsets
-      double xo = _spatium * .5;
-      double yo = _spatium * .5;
+      double xo = spatium() * .5;
+      double yo = xo;   // spatium() * .5;
       QPointF p1 = fullLine.pointAt(xo / fullLine.length());
       QPointF p2 = fullLine.pointAt(1 - (yo / fullLine.length()));
 
@@ -124,6 +125,8 @@ void Glissando::read(QDomElement e)
 
 void Glissando::draw(QPainter& p) const
       {
+      double _spatium = spatium();
+
       p.save();
       QPen pen(p.pen());
       pen.setWidthF(_spatium * .15);
@@ -170,9 +173,9 @@ void Glissando::draw(QPainter& p) const
             }
       if (_showText) {
             TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);
-            QRectF r      = st->bbox(_text);
+            QRectF r      = st->bbox(_spatium, _text);
             if (r.width() < l) {
-                  QFont f = st->font();
+                  QFont f = st->font(_spatium);
                   p.setFont(f);
                   double x = (l - r.width()) * .5;
                   p.drawText(x, -_spatium * .5, _text);
@@ -187,7 +190,7 @@ void Glissando::draw(QPainter& p) const
 
 void Glissando::space(double& min, double& extra) const
       {
-      min   = _spatium * 2;
+      min   = spatium() * 2;
       extra = 0.0;
       }
 

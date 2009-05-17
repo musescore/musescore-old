@@ -174,7 +174,7 @@ class TextB : public Element {
       virtual void read(QDomElement);
       void writeProperties(Xml& xml, bool writeText = true) const;
       bool readProperties(QDomElement node);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&, QMouseEvent* ev);
       double lineSpacing() const;

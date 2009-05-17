@@ -34,11 +34,11 @@
 
 void HairpinSegment::draw(QPainter& p) const
       {
-      double h1 = score()->styleS(ST_hairpinHeight).point() * .5;
-      double h2 = score()->styleS(ST_hairpinContHeight).point() * .5;
+      double h1 = point(score()->styleS(ST_hairpinHeight)) * .5;
+      double h2 = point(score()->styleS(ST_hairpinContHeight)) * .5;
 
       QPen pen(p.pen());
-      pen.setWidthF(score()->styleS(ST_hairpinWidth).point());
+      pen.setWidthF(point(score()->styleS(ST_hairpinWidth)));
       p.setPen(pen);
 
       qreal x = pos2().x();
@@ -80,9 +80,9 @@ void HairpinSegment::draw(QPainter& p) const
 
 QRectF HairpinSegment::bbox() const
       {
-      double h = score()->styleS(ST_hairpinHeight).point();
+      double h = point(score()->styleS(ST_hairpinHeight));
       QRectF r(0.0, -h * .5, pos2().x(), h);
-      double w = score()->styleS(ST_hairpinWidth).point();
+      double w = point(score()->styleS(ST_hairpinWidth));
       r.adjust(-w*.5, -w*.5, w, w);
       return r;
       }
@@ -96,7 +96,7 @@ Hairpin::Hairpin(Score* s)
       {
       setOffsetType(OFFSET_SPATIUM);
       setYoff(8.0);
-      setLen(_spatium * 7);   // for use in palettes
+      setLen(spatium() * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------
@@ -104,10 +104,10 @@ Hairpin::Hairpin(Score* s)
 //    compute segments from tick() to _tick2
 //---------------------------------------------------------
 
-void Hairpin::layout(ScoreLayout* layout)
+void Hairpin::layout()
       {
-      SLine::layout(layout);
-      Element::layout(layout);
+      SLine::layout();
+      Element::layout();
       }
 
 //---------------------------------------------------------

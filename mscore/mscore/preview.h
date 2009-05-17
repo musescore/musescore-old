@@ -22,7 +22,6 @@
 #define __PREVIEW_H__
 
 class Score;
-class ScoreLayout;
 
 //---------------------------------------------------------
 //   PagePreview
@@ -31,7 +30,6 @@ class ScoreLayout;
 class PagePreview : public QWidget {
       Q_OBJECT
       Score* _score;
-      ScoreLayout* _layout;
       QMatrix matrix;
 
       virtual void paintEvent(QPaintEvent*);
@@ -43,7 +41,7 @@ class PagePreview : public QWidget {
       void setScore(Score*);
       ~PagePreview();
       void layout();
-      ScoreLayout* lo() { return _layout; }
+      Score* score() const { return _score; }
       };
 
 #endif

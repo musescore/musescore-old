@@ -1045,7 +1045,7 @@ void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       {
       TextB::textStyleChanged(s);
       TextStyle* ns = s[_textStyle];
-      setDefaultFont(ns->font());   // force
+      setDefaultFont(ns->font(spatium()));   // force
       buildText();
       }
 
@@ -1062,15 +1062,15 @@ bool Harmony::isEmpty() const
 //   layout
 //---------------------------------------------------------
 
-void Harmony::layout(ScoreLayout* l)
+void Harmony::layout()
       {
       setSubtype(TEXT_CHORD);    // apply style changes
 
       if (editMode || textList.isEmpty()) {
-            Text::layout(l);
+            Text::layout();
             return;
             }
-      Element::layout(l);
+      Element::layout();
       Measure* m = static_cast<Measure*>(parent());
       double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
       double xx = (tick() < 0) ? 0.0 : m->tick2pos(tick());

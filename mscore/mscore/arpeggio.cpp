@@ -28,14 +28,14 @@
 Arpeggio::Arpeggio(Score* s)
   : Element(s)
       {
-      setHeight(_spatium * 4);      // for use in palettes
+      setHeight(spatium() * 4);      // for use in palettes
       }
 
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
-void Arpeggio::layout(ScoreLayout*)
+void Arpeggio::layout()
       {
       }
 
@@ -92,7 +92,7 @@ void Arpeggio::draw(QPainter& p) const
 
       double h1, h2, h3;
 
-      h1 = h2 = h3 = _spatium;
+      h1 = h2 = h3 = spatium();
 
       switch(subtype()) {
             case 0:

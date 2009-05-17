@@ -226,32 +226,13 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
       }
 
 //---------------------------------------------------------
-//   pageFormat
-//---------------------------------------------------------
-
-PageFormat* Score::pageFormat() const
-      {
-      return _layout.pageFormat();
-      }
-
-//---------------------------------------------------------
 //   setSpatium
 //---------------------------------------------------------
 
 void Score::setSpatium(double v)
       {
-      _layout.setSpatium(v);
       _spatium    = v;
       _spatiumMag = _spatium / (DPI * SPATIUM20);
-      }
-
-//---------------------------------------------------------
-//   needLayout
-//---------------------------------------------------------
-
-bool Score::needLayout() const
-      {
-      return _layout.needLayout();
       }
 
 //---------------------------------------------------------
@@ -259,8 +240,16 @@ bool Score::needLayout() const
 //---------------------------------------------------------
 
 Score::Score(const Style& s)
-   : _layout(this)
       {
+      _spatium = preferences.spatium * DPI;     // ::_spatium;
+
+      _systems.clear();
+      _pages.clear();
+      _needLayout  = false;
+      _pageFormat  = new PageFormat;
+      _paintDevice = 0;
+      startLayout  = 0;
+
       info.setFile("");
 
       _undo = new UndoStack();
@@ -303,6 +292,8 @@ Score::Score(const Style& s)
 
 Score::~Score()
       {
+      if (_pageFormat)
+            delete _pageFormat;
       if (rights)
             delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
@@ -321,8 +312,8 @@ void Score::addViewer(Viewer* v)
       viewer.push_back(v);
       if (viewer.size() == 1) {
             Canvas* c = canvas();
-            c->setScore(this, &_layout);
-            _layout.setPaintDevice(c);
+            c->setScore(this);
+            setPaintDevice(c);
             }
       }
 
@@ -379,12 +370,12 @@ void Score::clear()
       sigmap->add(0, 4, 4);
       tempomap->clear();
 
-      _layout.clear();
+      _pages.clear();
+      _systems.clear();
 
       sel->clear();
       _showInvisible = true;
       _showFrames = true;
-
       }
 
 //---------------------------------------------------------
@@ -394,7 +385,7 @@ void Score::clear()
 void Score::renumberMeasures()
       {
       int measureNo = 0;
-      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = static_cast<Measure*>(mb);
@@ -552,7 +543,7 @@ void Score::write(Xml& xml, bool autosave)
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             xml.curTick  = 0;
             xml.curTrack = staffIdx * VOICES;
-            for (MeasureBase* m = _layout.first(); m; m = m->next()) {
+            for (MeasureBase* m = first(); m; m = m->next()) {
                   if (m->type() == MEASURE || staffIdx == 0)
                         m->write(xml, staffIdx, staffIdx == 0);
                   if (m->type() == MEASURE)
@@ -595,7 +586,7 @@ void Score::addMeasure(MeasureBase* m)
 
 void Score::removeMeasure(MeasureBase* im)
       {
-      _layout.remove(im);
+      remove(im);
       }
 
 //---------------------------------------------------------
@@ -680,7 +671,7 @@ void Score::fixTicks()
       {
       int number = 0;
       int tick   = 0;
-      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
                   continue;
@@ -714,7 +705,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
    Segment** seg, QPointF* offset) const
       {
       int voice = 0;
-      foreach (const Page* page, _layout.pages()) {
+      foreach (const Page* page, pages()) {
             if (!page->abbox().contains(p))
                   continue;
 
@@ -780,7 +771,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                                 if (pitch) {
                                                       Staff* s = _staves[i];
                                                       int clef = s->clefList()->clef(*tick);
-                                                      *pitch = y2pitch(pppp.y()-staff->bbox().y(), clef);
+                                                      *pitch = y2pitch(pppp.y() - staff->bbox().y(), clef, s->spatium());
                                                       }
                                                 if (offset)
                                                       *offset = pppp - QPointF(segment->x(), staff->bbox().y());
@@ -814,8 +805,10 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                     if (tick)
                                           *tick = segment->tick();
                                     if (pitch) {
-                                          int clef = staff(*rst)->clefList()->clef(*tick);
-                                          *pitch = y2pitch(pppp.y(), clef);
+                                          Staff* s = staff(*rst);
+                                          // int clef = staff(*rst)->clefList()->clef(*tick);
+                                          int clef = s->clefList()->clef(*tick);
+                                          *pitch = y2pitch(pppp.y(), clef, s->spatium());
                                           }
                                     if (offset) {
                                           SysStaff* staff = s->staff(*rst);
@@ -850,7 +843,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
       {
       int voice = _is.voice();
 
-      foreach(const Page* page, _layout.pages()) {
+      foreach(const Page* page, pages()) {
             if (!page->contains(p))
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
@@ -939,7 +932,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
 
 Measure* Score::pos2measure3(const QPointF& p, int* tick) const
       {
-      foreach(const Page* page, _layout.pages()) {
+      foreach(const Page* page, pages()) {
             if (!page->contains(p))
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
@@ -1012,7 +1005,7 @@ int Score::staffIdx(const Part* part) const
 
 void Score::readStaff(QDomElement e)
       {
-      MeasureBase* mb = _layout.first();
+      MeasureBase* mb = first();
       int staff       = e.attribute("id", "1").toInt() - 1;
 
       curTick  = 0;
@@ -1025,7 +1018,7 @@ void Score::readStaff(QDomElement e)
                   if (staff == 0) {
                         measure = new Measure(this);
                         measure->setTick(curTick);
-                        _layout.add(measure);
+                        add(measure);
                         }
                   else {
                         while (mb) {
@@ -1042,7 +1035,7 @@ void Score::readStaff(QDomElement e)
                               printf("Score::readStaff(): missing measure!\n");
                               measure = new Measure(this);
                               measure->setTick(curTick);
-                              _layout.add(measure);
+                              add(measure);
                               }
                         }
                   measure->read(e, staff);
@@ -1052,13 +1045,13 @@ void Score::readStaff(QDomElement e)
                   HBox* hbox = new HBox(this);
                   hbox->read(e);
                   hbox->setTick(curTick);
-                  _layout.add(hbox);
+                  add(hbox);
                   }
             else if (tag == "VBox") {
                   VBox* vbox = new VBox(this);
                   vbox->read(e);
                   vbox->setTick(curTick);
-                  _layout.add(vbox);
+                  add(vbox);
                   }
             else
                   domError(e);
@@ -1110,7 +1103,7 @@ void Score::startEdit(Element* element)
             origEditObject->resetMode();
             undoChangeElement(origEditObject, editObject);
             select(editObject, SELECT_SINGLE, 0);
-            layout()->removeBsp(origEditObject);
+            removeBsp(origEditObject);
             }
       updateAll = true;
       end();
@@ -1162,7 +1155,7 @@ void Score::startDrag(Element* e)
       {
       _dragObject = e;
       _startDragPosition = e->userOff();
-      layout()->removeBsp(e);
+      removeBsp(e);
       }
 
 //---------------------------------------------------------
@@ -1397,7 +1390,7 @@ void Score::spell()
       {
       for (int i = 0; i < nstaves(); ++i) {
             QList<Note*> notes;
-            for(MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+            for(MeasureBase* mb = first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = static_cast<Measure*>(mb);
@@ -1425,7 +1418,7 @@ void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* 
       {
       for (int i = startStaff; i < endStaff; ++i) {
             QList<Note*> notes;
-            for(MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+            for(MeasureBase* mb = first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   // Measure* m = static_cast<Measure*>(mb);
@@ -1723,10 +1716,9 @@ int Score::midiChannel(int idx) const
 
 Page* Score::searchPage(const QPointF& p) const
       {
-      const QList<Page*>& pages = _layout.pages();
-      for (int i = 0; i < pages.size(); ++i) {
-            if (pages[i]->contains(p))
-                  return pages[i];
+      for (int i = 0; i < _pages.size(); ++i) {
+            if (_pages[i]->contains(p))
+                  return _pages[i];
             }
       return 0;
       }
@@ -1928,7 +1920,7 @@ void Score::setMagIdx(int idx)
 
 bool Score::checkHasMeasures() const
       {
-      Page* page = _layout.pages().front();
+      Page* page = pages().front();
       const QList<System*>* sl = page->systems();
       if (sl == 0 || sl->empty() || sl->front()->measures().empty()) {
             printf("first create measure, then repeat operation\n");
@@ -1988,7 +1980,7 @@ void ImagePath::reference()
 
 void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
       {
-      foreach(System* system, *_layout.systems()) {
+      foreach(System* system, *systems()) {
             if (system->isVbox())
                   continue;
             SysStaff* s = system->staff(staffIdx);
@@ -2014,7 +2006,7 @@ void Score::textStyleChanged(const QVector<TextStyle*>&style)
             e->textStyleChanged(style);
       for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
             mb->textStyleChanged(style);
-      foreach(System* s, *_layout.systems()) {
+      foreach(System* s, *systems()) {
             foreach(SysStaff* ss, *s->staves()) {
                   if (ss->instrumentName)
                         ss->instrumentName->textStyleChanged(style);
@@ -2022,7 +2014,7 @@ void Score::textStyleChanged(const QVector<TextStyle*>&style)
             }
       if (rights)
             rights->textStyleChanged(style);
-      foreach(Page* p, _layout.pages()) {
+      foreach(Page* p, pages()) {
             if (p->pageNo())
                   p->pageNo()->textStyleChanged(style);
             }
@@ -2043,7 +2035,7 @@ Measure* Score::getCreateMeasure(int tick)
             Measure* m = new Measure(this);
             m->setTick(lastTick);
             int ticks = sigmap->ticksMeasure(lastTick);
-            _layout.add(m);
+            add(m);
             lastTick += ticks;
             }
       return tick2measure(tick);
@@ -2070,11 +2062,13 @@ void Score::addElement(Element* element)
          || (element->type() == HBOX && element->parent()->type() != VBOX)
          || element->type() == VBOX
          ) {
-            _layout.add(element);
+            add(element);
             return;
             }
-
-      element->parent()->add(element);
+      if (element->parent() == 0)
+            add(element);
+      else
+            element->parent()->add(element);
 
       if (element->type() == CLEF) {
             int staffIdx = element->staffIdx();
@@ -2086,7 +2080,7 @@ void Score::addElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
@@ -2149,7 +2143,7 @@ void Score::removeElement(Element* element)
       if (element->type() == MEASURE
          || (element->type() == HBOX && parent->type() != VBOX)
          || element->type() == VBOX) {
-            _layout.remove(element);
+            remove(element);
             return;
             }
       parent->remove(element);
@@ -2178,7 +2172,7 @@ void Score::removeElement(Element* element)
                   //-----------------------------------------------
 
                   bool endFound = false;
-                  for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+                  for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                         if (mb->type() != MEASURE)
                               continue;
                         Measure* measure = static_cast<Measure*>(mb);
@@ -2228,7 +2222,7 @@ void Score::search(const QString& s)
             return;
 
       int i = 0;
-      for (MeasureBase* mb = _layout.first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             ++i;

@@ -51,7 +51,7 @@ class LineSegment : public Element {
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
-      virtual void layout(ScoreLayout*) {}
+      virtual void layout() {}
 
    public:
       LineSegment(Score* s);
@@ -64,7 +64,7 @@ class LineSegment : public Element {
       void setUserXoffset2(qreal x)       { _userOff2.setX(x); }
       void setPos2(const QPointF& p)      { _p2 = p;     }
       void setXpos2(qreal x)              { _p2.setX(x); }
-      QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
+      QPointF pos2() const;
       void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
       LineSegmentType segmentType() const { return _segmentType;       }
       void setSystem(System* s)           { _system = s;               }
@@ -92,7 +92,7 @@ class SLine : public Element {
 
       void setTick2(int t);
       int tick2() const    { return _tick2; }
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       bool readProperties(QDomElement node);
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;

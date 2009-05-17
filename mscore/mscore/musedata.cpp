@@ -150,7 +150,7 @@ void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
       slur[idx] = new Slur(score);
       slur[idx]->setStart(tick, staffIdx * VOICES + voice);
       slur[idx]->setTrack(staffIdx * VOICES + voice);
-      slur[idx]->setParent(score->layout());
+//      slur[idx]->setParent(score->layout());
       score->addElement(slur[idx]);
       }
 
@@ -486,8 +486,7 @@ void MuseData::readBackup(const QString& s)
 
 Measure* MuseData::createMeasure()
       {
-      ScoreLayout* la = score->layout();
-      for (MeasureBase* mb = la->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = score->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -520,7 +519,7 @@ Measure* MuseData::createMeasure()
       	      }
             }
 #endif
-      la->add(measure);
+      score->add(measure);
       return measure;
       }
 

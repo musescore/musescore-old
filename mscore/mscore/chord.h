@@ -57,7 +57,7 @@ class Stem : public Element {
       virtual ElementType type() const { return STEM; }
       virtual void draw(QPainter& p) const;
       void setLen(double v)  { _len = v; }
-      double stemLen() const { return _len + _userLen.point(); }
+      double stemLen() const { return _len + point(_userLen); }
       virtual QRectF bbox() const;
       virtual bool isMovable() const  { return true; }
       virtual bool startEdit(Viewer*, const QPointF&) { return true; }
@@ -186,8 +186,8 @@ class Chord : public ChordRest {
 
       QList<LedgerLine*>* ledgerLines()      { return &_ledgerLines; }
 
-      virtual void layoutStem1(ScoreLayout*);
-      virtual void layoutStem(ScoreLayout*);
+      virtual void layoutStem1();
+      virtual void layoutStem();
       NoteList* noteList()                   { return &notes; }
       const NoteList* noteList() const       { return &notes; }
       const Note* upNote() const             { return notes.back(); }
@@ -210,7 +210,7 @@ class Chord : public ChordRest {
       virtual void remove(Element*);
 
       Note* selectedNote() const;
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual int upLine() const;
       virtual int downLine() const;

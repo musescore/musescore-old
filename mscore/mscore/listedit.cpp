@@ -282,7 +282,9 @@ void PageListEditor::updateList(Score* s)
       {
       cs = s;
       list->clear();
-      ElementItem* li = new ElementItem(list, cs->layout());
+
+      // ElementItem* li = new ElementItem(list, cs->layout());
+      ElementItem* li = 0;
       foreach(Element* el, *cs->gel()) {
             if (el->type() == SLUR) {
                   ElementItem* se = new ElementItem(li, el);
@@ -323,7 +325,7 @@ void PageListEditor::updateList(Score* s)
 
       int staves = cs->nstaves();
       int tracks = staves * VOICES;
-      foreach(Page* page, cs->layout()->pages()) {
+      foreach(Page* page, cs->pages()) {
             ElementItem* pi = new ElementItem(list, page);
 
             if (page->copyright())

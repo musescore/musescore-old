@@ -1551,7 +1551,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     slur->setTrack(track);
                                     slur->setTick2(tick2);
                                     slur->setTrack2(track);
-                                    _layout.add(slur);
+                                    add(slur);
                                     }
                               else
                                     printf("second anchor for slur not found\n");
@@ -1655,6 +1655,6 @@ void Score::convertCapella(Capella* cap)
                   }
             }
       _parts.push_back(part);
-      _layout.connectTies();
+      connectTies();
       }
 

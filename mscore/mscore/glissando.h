@@ -43,7 +43,7 @@ class Glissando : public Element {
       virtual QRectF bbox() const;
 
       virtual void draw(QPainter&) const;
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       virtual bool isMovable() const   { return false; }

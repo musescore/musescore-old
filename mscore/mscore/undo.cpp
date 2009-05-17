@@ -1952,7 +1952,7 @@ ChangePageFormat::~ChangePageFormat()
 void ChangePageFormat::flip()
       {
       PageFormat f = *(score->pageFormat());
-      double os    = score->layout()->spatium();
+      double os    = score->spatium();
 
       *(score->pageFormat()) = *pf;
       score->setSpatium(spatium);

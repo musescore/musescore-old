@@ -29,7 +29,6 @@ class TextC;
 class Measure;
 class Xml;
 class Score;
-class ScoreLayout;
 
 //---------------------------------------------------------
 //   PaperSize
@@ -78,14 +77,13 @@ struct PageFormat {
 //---------------------------------------------------------
 
 class Page : public Element {
-      ScoreLayout* _layout;
       QList<System*> _systems;
       int _no;                      // page number
       Text* _pageNo;
       TextC* _copyright;
 
    public:
-      Page(ScoreLayout*);
+      Page(Score*);
       virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
 
@@ -111,7 +109,7 @@ class Page : public Element {
       Text* pageNo() const               { return _pageNo;    }
       TextC* copyright() const           { return _copyright; }
 
-      void layout(ScoreLayout*);
+      void layout();
 
       virtual void draw(QPainter&p) const;
       void collectElements(QList<const Element*>& el) const;

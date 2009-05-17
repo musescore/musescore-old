@@ -51,10 +51,10 @@ Box::Box(Score* score)
 //   layout
 //---------------------------------------------------------
 
-void Box::layout(ScoreLayout* layout)
+void Box::layout()
       {
       foreach (Element* el, _el)
-            el->layout(layout);
+            el->layout();
       }
 
 //---------------------------------------------------------
@@ -105,9 +105,9 @@ bool Box::edit(Viewer*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const 
 void Box::editDrag(int, const QPointF& d)
       {
       if (type() == VBOX)
-            _boxHeight += d.y();
+            _boxHeight += Spatium(d.y() / spatium());
       else {
-            _boxWidth += d.x();
+            _boxWidth += Spatium(d.x() / spatium());
             foreach(Element* e, _el) {
                   if (e->type() == TEXT) {
                         static_cast<Text*>(e)->setModified(true);  // force relayout
@@ -179,6 +179,7 @@ void Box::write(Xml& xml) const
 
 void Box::read(QDomElement e)
       {
+      double _spatium = spatium();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -280,21 +281,21 @@ HBox::~HBox()
 //   layout
 //---------------------------------------------------------
 
-void HBox::layout(ScoreLayout* layout)
+void HBox::layout()
       {
       if (parent() && parent()->type() == VBOX) {
             VBox* vb = static_cast<VBox*>(parent());
             double x = vb->leftMargin() * DPMM;
             double y = vb->topMargin() * DPMM;
-            double w = boxWidth().point();
+            double w = point(boxWidth());
             double h = vb->height() - vb->topMargin() * DPMM - vb->bottomMargin() * DPMM;
             setPos(x, y);
             setbbox(QRectF(0.0, 0.0, w, h));
             }
       else {
-            setbbox(QRectF(0.0, 0.0, boxWidth().point(), system()->height()));
+            setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
-      Box::layout(layout);
+      Box::layout();
       }
 
 //---------------------------------------------------------
@@ -369,7 +370,7 @@ bool HBox::isMovable() const
 QRectF HBox::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(QPointF(pos.x() / _spatium, 0.0));
+      setUserOff(QPointF(pos.x() / spatium(), 0.0));
       return abbox() | r;
       }
 
@@ -445,7 +446,7 @@ void VBox::propertyAction(const QString& cmd)
       else if (cmd == "insert-hbox") {
             s = new HBox(score());
             double w = width() - leftMargin() * DPMM - rightMargin() * DPMM;
-            static_cast<HBox*>(s)->setBoxWidth(Spatium(w / _spatium));
+            static_cast<HBox*>(s)->setBoxWidth(Spatium(w / spatium()));
             }
       else {
             printf("VBox::propertyAction: %s unknown\n", qPrintable(cmd));
@@ -470,11 +471,11 @@ void VBox::propertyAction(const QString& cmd)
 //   layout
 //---------------------------------------------------------
 
-void VBox::layout(ScoreLayout* layout)
+void VBox::layout()
       {
       setPos(QPointF());      // !?
-      setbbox(QRectF(0.0, 0.0, system()->width(), boxHeight().point()));
-      Box::layout(layout);
+      setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+      Box::layout();
       }
 
 //---------------------------------------------------------

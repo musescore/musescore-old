@@ -54,7 +54,7 @@ void Spacer::draw(QPainter& p) const
       else
             pen.setColor(preferences.layoutBreakColor);
 
-      pen.setWidthF(_spatium * 0.4);
+      pen.setWidthF(spatium() * 0.4);
       p.setPen(pen);
       p.setBrush(Qt::NoBrush);
       p.drawPath(path);
@@ -64,12 +64,14 @@ void Spacer::draw(QPainter& p) const
 //   layout
 //---------------------------------------------------------
 
-void Spacer::layout(ScoreLayout*)
+void Spacer::layout()
       {
+      double _spatium = spatium();
+
       path = QPainterPath();
       double a = _spatium;
       double b = _spatium * .5;
-      double h = _space.point();
+      double h = _space.val() * _spatium;
 
       path.lineTo(a, 0.0);
       path.moveTo(b, 0.0);
@@ -111,7 +113,7 @@ bool Spacer::startEdit(Viewer*, const QPointF&)
 
 void Spacer::editDrag(int, const QPointF& delta)
       {
-      _space += delta.y();
+      _space += Spatium(delta.y() / spatium());
       if (_space.val() < 2.0)
             _space = Spatium(2.0);
       score()->setLayoutAll(true);
@@ -124,7 +126,8 @@ void Spacer::editDrag(int, const QPointF& delta)
 void Spacer::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      QPointF p(_spatium * .5, _space.point());
+      double _spatium = spatium();
+      QPointF p(_spatium * .5, _space.val() * _spatium);
       grip[0].translate(canvasPos() + p);
       }
 
@@ -134,7 +137,8 @@ void Spacer::updateGrips(int* grips, QRectF* grip) const
 
 QRectF Spacer::bbox() const
       {
-      return QRectF(-_spatium * .2, -_spatium * .2, _spatium * 1.4, _space.point() + 0.4 * _spatium);
+      double _spatium = spatium();
+      return QRectF(-_spatium * .2, -_spatium * .2, _spatium * 1.4, (_space.val() + .4) * _spatium);
       }
 
 //---------------------------------------------------------

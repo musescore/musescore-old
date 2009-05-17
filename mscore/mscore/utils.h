@@ -45,7 +45,7 @@ extern QRectF handleRect(const QPointF& pos);
 extern int getStaff(System* system, const QPointF& p);
 extern int pitchKeyAdjust(int note, int key);
 extern int line2pitch(int line, int clef, int key);
-extern int y2pitch(double y, int clef);
+extern int y2pitch(double y, int clef, double spatium);
 extern int quantizeLen(int, int, int);
 extern double curTime();
 extern void selectNoteMessage();

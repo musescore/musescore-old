@@ -995,6 +995,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">авто</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1792,14 +1820,6 @@ failed: </source>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Предыдущий</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Следующий</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Родительский</translation>
     </message>
@@ -2582,6 +2602,14 @@ failed: </source>
     <message>
         <source>Elements:</source>
         <translation>Элементы:</translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5004,10 +5032,6 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5065,6 +5089,14 @@ before closing?</source>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5276,6 +5308,18 @@ before closing?</source>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7007,10 +7051,30 @@ please select a measure and try again</source>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -7023,6 +7087,10 @@ please select a measure and try again</source>
     <message>
         <source>Size:</source>
         <translation type="unfinished">Кегль:</translation>
+    </message>
+    <message>
+        <source>font point size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Style:</source>
@@ -7057,16 +7125,104 @@ please select a measure and try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>...</source>
         <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>center text on reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color:</source>
         <translation type="unfinished">Цвет:</translation>
     </message>
     <message>
-        <source>frame color</source>
-        <translation type="unfinished">Цвет рамки:</translation>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Смещение</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">отнX:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">ОтнY:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Единица измерения:</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">мм</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Frame</source>
@@ -7097,6 +7253,10 @@ please select a measure and try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Margin:</source>
         <translation type="unfinished">Поле:</translation>
     </message>
@@ -7109,288 +7269,19 @@ please select a measure and try again</source>
         <translation type="unfinished">Закругление:</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation type="unfinished">Выключка влево</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished">Смещение</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation type="unfinished">X:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished">отнX:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished">ОтнY:</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation type="unfinished">Единица измерения:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished">мм</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font point size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished">%</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
     <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Правка стилей текста</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Общие</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>Ж</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>К</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>Ч</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Позиция</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Выравнивание</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Влево</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Вправо</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Вверх</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Вниз</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Смещение</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Единица измерения:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>мм</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Пробел</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Образец текста</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>По горизонтали</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>По центру</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>По вертикали</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>ОК</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Отменить</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Рамка</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Просмотр</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Кегль:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Стиль:</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Линия шрифта</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>отнX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>ОтнY:</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Шрифт:</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Ширина:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Поле:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Закругление:</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Цвет:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Окружность</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation type="unfinished"></translation>
+        <source>frame color</source>
+        <translation type="unfinished">Цвет рамки:</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation type="unfinished"></translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Правка стилей текста</translation>
     </message>
 </context>
 <context>

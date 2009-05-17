@@ -1002,6 +1002,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">automaattinen</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">ylös</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">alas</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1798,14 +1826,6 @@ epäonnistui:</translation>
         <translation>Muoto</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Edellinen</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Seuraava</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Vanhempi</translation>
     </message>
@@ -2585,6 +2605,14 @@ failed: </source>
     </message>
     <message>
         <source>Subtype</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5008,10 +5036,6 @@ ennen sulkemista?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5069,6 +5093,14 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5280,6 +5312,18 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7015,151 +7059,7 @@ epäonnistui:</translation>
     </message>
 </context>
 <context>
-    <name>TextProperties</name>
-    <message>
-        <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Tekstiominaisuudet</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Fontti:</translation>
-    </message>
-    <message>
-        <source>font face</source>
-        <translation>fontin ulkoasu</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Koko:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Tyyli:</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>lihavoitu</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>kursiivi</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>alleviivattu</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation>Tasaa:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Väri:</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>kehysväri</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kehys</translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation>piirrä ympyräkehys</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Ympyrä</translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation>piirrä laatikkokehys</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Laatikko</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Leveys:</translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation>kehyksen viivan leveys</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marginaali:</translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation>kehyksen sisämarginaali</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Kierros:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>tasaa vasen</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation>tekstin väri</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished">Etäisyys</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation type="unfinished">X:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished">suht. X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished">suht. Y</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Yksikkö:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished">mm</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Väli</translation>
-    </message>
+    <name>TextProp</name>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
@@ -7170,37 +7070,119 @@ epäonnistui:</translation>
         <comment>spatium unit</comment>
         <translation type="unfinished">sp</translation>
     </message>
+</context>
+<context>
+    <name>TextProperties</name>
+    <message>
+        <source>MuseScore: Text Properties</source>
+        <translation>MuseScore: Tekstiominaisuudet</translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Muoto</translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished">Fontti:</translation>
+    </message>
+    <message>
+        <source>font face</source>
+        <translation type="unfinished">fontin ulkoasu</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Koko:</translation>
+    </message>
     <message>
         <source>font point size</source>
-        <translation>fontin pistekoko</translation>
+        <translation type="unfinished">fontin pistekoko</translation>
+    </message>
+    <message>
+        <source>Style:</source>
+        <translation type="unfinished">Tyyli:</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">lihavoitu</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">kursiivi</translation>
+    </message>
+    <message>
+        <source>I</source>
+        <translation type="unfinished">I</translation>
+    </message>
+    <message>
+        <source>underline</source>
+        <translation type="unfinished">alleviivattu</translation>
+    </message>
+    <message>
+        <source>U</source>
+        <translation type="unfinished">U</translation>
+    </message>
+    <message>
+        <source>Align:</source>
+        <translation type="unfinished">Tasaa:</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation>tasaa tekstin vasen reuna viitepisteeseen</translation>
+        <translation type="unfinished">tasaa tekstin vasen reuna viitepisteeseen</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation>keskitä teksti viitekohtaan</translation>
+        <translation type="unfinished">keskitä teksti viitekohtaan</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation>tasaa tekstin oikea reuna viitepisteeseen</translation>
+        <translation type="unfinished">tasaa tekstin oikea reuna viitepisteeseen</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation>tasaa tekstin yläreuna viitepisteeseen</translation>
+        <translation type="unfinished">tasaa tekstin yläreuna viitepisteeseen</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation>keskitä teksti vertikaalisesti viitepisteeseen</translation>
+        <translation type="unfinished">keskitä teksti vertikaalisesti viitepisteeseen</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation>tasaa tekstin alareuna viitepisteeseen</translation>
+        <translation type="unfinished">tasaa tekstin alareuna viitepisteeseen</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Väri:</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished">tekstin väri</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Etäisyys</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">suht. X:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
@@ -7211,194 +7193,103 @@ epäonnistui:</translation>
         <translation type="unfinished">%</translation>
     </message>
     <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
         <source>vertical offset to reference point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">suht. Y</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Yksikkö:</translation>
+    </message>
+    <message>
         <source>offset is absolute</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>offset in Space units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>enable text frame</source>
-        <translation>salli tekstikehys</translation>
+        <translation type="unfinished">salli tekstikehys</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished">Kehys</translation>
+    </message>
+    <message>
+        <source>draw circled frame</source>
+        <translation type="unfinished">piirrä ympyräkehys</translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished">Ympyrä</translation>
+    </message>
+    <message>
+        <source>draw boxed frame</source>
+        <translation type="unfinished">piirrä laatikkokehys</translation>
+    </message>
+    <message>
+        <source>Box</source>
+        <translation type="unfinished">Laatikko</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Leveys:</translation>
+    </message>
+    <message>
+        <source>frame line width</source>
+        <translation type="unfinished">kehyksen viivan leveys</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Margin:</source>
+        <translation type="unfinished">Marginaali:</translation>
+    </message>
+    <message>
+        <source>frame inner margin</source>
+        <translation type="unfinished">kehyksen sisämarginaali</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
     <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Muokkaa tekstityylejä</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Yleinen</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Fontti:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Koko:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Tyyli:</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Tekstiesimerkki</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Sijainti</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Kohdistus</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>Vaakasuoraan</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Vasemmalle</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Oikealle</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Keskelle</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>Pystysuoraan</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Ylös</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Alas</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Peruslinjaan</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Etäisyys</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>suht. X:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>suht. Y</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Yksikkö:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>välilyönti</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kehys</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>Leveys:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marginaali:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Pyöristys:</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Väri:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Ympyrä</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Laatikko</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Esikatselu</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Käytä</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Peruuta</translation>
+        <source>frame color</source>
+        <translation type="unfinished">kehysväri</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation type="unfinished"></translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Muokkaa tekstityylejä</translation>
     </message>
 </context>
 <context>

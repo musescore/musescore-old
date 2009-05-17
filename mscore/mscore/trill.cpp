@@ -60,17 +60,17 @@ QRectF TrillSegment::bbox() const
 Trill::Trill(Score* s)
   : SLine(s)
       {
-      setLen(_spatium * 7);   // for use in palettes
+      setLen(spatium() * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
-void Trill::layout(ScoreLayout* layout)
+void Trill::layout()
       {
-      SLine::layout(layout);
-      qreal y = -2.0 * layout->spatium();
+      SLine::layout();
+      qreal y = -2.0 * spatium();
       setPos(ipos().x(), y);
       }
 

@@ -165,7 +165,7 @@ class Harmony : public Text {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
-      virtual void layout(ScoreLayout*);
+      virtual void layout();
 
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual void endEdit();

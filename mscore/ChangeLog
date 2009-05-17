@@ -1,3 +1,6 @@
+16.may (ws)
+      - get rid of the global _spatium variable
+      - removed ScoreLayout() class
 14.may (ws)
       - fix too wide ledger lines
       - fix for qtsingleapplication

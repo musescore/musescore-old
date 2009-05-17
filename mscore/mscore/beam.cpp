@@ -289,7 +289,7 @@ void Beam::draw(QPainter& p) const
 
             QPointF ip1 = bs->p1;
             QPointF ip2 = bs->p2;
-            qreal lw2   = score()->style(ST_beamWidth).toSpatium().point() * .5 * mag();
+            qreal lw2   = point(score()->styleS(ST_beamWidth)) * .5;
 
             QPolygonF a(4);
             a[0] = QPointF(ip1.x(), ip1.y()-lw2);
@@ -320,7 +320,7 @@ void Beam::move(double x, double y)
 //    called before layout spacing of notes
 //---------------------------------------------------------
 
-void Measure::layoutBeams1(ScoreLayout* layout)
+void Measure::layoutBeams1()
       {
       foreach(Beam* beam, _beams)
             beam->clear();
@@ -356,12 +356,12 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     if (!s || (s->subtype() != Segment::SegGrace) || !s->element(track))
                                           break;
                                     }
-                              b->layout1(layout);
+                              b->layout1();
                               segment = nseg;
                               }
                         else {
                               cr->setBeam(0);
-                              cr->layoutStem1(layout);
+                              cr->layoutStem1();
                               }
                         continue;
                         }
@@ -370,16 +370,16 @@ void Measure::layoutBeams1(ScoreLayout* layout)
 
                   if ((len >= division) || (bm == BEAM_NO)) {
                         if (beam) {
-                              beam->layout1(layout);
+                              beam->layout1();
                               beam = 0;
                               }
                         if (a1) {
                               a1->setBeam(0);
-                              a1->layoutStem1(layout);
+                              a1->layoutStem1();
                               a1 = 0;
                               }
                         cr->setBeam(0);
-                        cr->layoutStem1(layout);
+                        cr->layoutStem1();
                         continue;
                         }
                   bool beamEnd = false;
@@ -402,7 +402,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     beamEnd = true;
                               }
                         if (beamEnd) {
-                              beam->layout1(layout);
+                              beam->layout1();
                               beam = 0;
                               a1   = 0;
                               }
@@ -412,18 +412,18 @@ void Measure::layoutBeams1(ScoreLayout* layout)
 
                               // is this the last beam element?
                               if (bm == BEAM_END) {
-                                    beam->layout1(layout);
+                                    beam->layout1();
                                     beam = 0;
                                     }
                               }
                         }
                   if (cr && cr->tuplet() && (cr->tuplet()->elements().back() == cr)) {
                         if (beam) {
-                              beam->layout1(layout);
+                              beam->layout1();
                               beam = 0;
 
                               cr->setBeam(0);
-                              cr->layoutStem1(layout);
+                              cr->layoutStem1();
                               }
                         else if (a1) {
                               beam = a1->beam();
@@ -437,12 +437,12 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               beam->add(a1);
                               beam->add(cr);
                               a1 = 0;
-                              beam->layout1(layout);
+                              beam->layout1();
                               beam = 0;
                               }
                         else {
                               cr->setBeam(0);
-                              cr->layoutStem1(layout);
+                              cr->layoutStem1();
                               }
                         }
                   else if (cr) {
@@ -459,7 +459,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                    )
                                  ) {
                                     a1->setBeam(0);
-                                    a1->layoutStem1(layout);      //?
+                                    a1->layoutStem1();      //?
                                     a1 = cr;
                                     }
                               else {
@@ -479,10 +479,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         }
                   }
             if (beam)
-                  beam->layout1(layout);
+                  beam->layout1();
             else if (a1) {
                   a1->setBeam(0);
-                  a1->layoutStem1(layout);
+                  a1->layoutStem1();
                   }
             }
       foreach(Beam* beam, _beams) {
@@ -499,13 +499,13 @@ void Measure::layoutBeams1(ScoreLayout* layout)
 //    called after layout spacing of notes
 //---------------------------------------------------------
 
-void Measure::layoutBeams(ScoreLayout* layout)
+void Measure::layoutBeams()
       {
       int nstaves = _score->nstaves();
       int tracks = nstaves * VOICES;
 
       foreach(Beam* beam, _beams)
-            beam->layout(layout);
+            beam->layout();
 
       for (int track = 0; track < tracks; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -514,7 +514,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         if (cr->beam())
                               continue;
-                        cr->layoutStem(layout);
+                        cr->layoutStem();
                         }
                   }
             }
@@ -540,7 +540,7 @@ QString Beam::xmlType(ChordRest* cr) const
 //   layout1
 //---------------------------------------------------------
 
-void Beam::layout1(ScoreLayout*)
+void Beam::layout1()
       {
       //delete old segments
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
@@ -570,7 +570,7 @@ void Beam::layout1(ScoreLayout*)
       // done twice for beamed chords:
 #if 0 // CS1
       foreach(ChordRest* cr, _elements)
-            cr->layoutArticulations(layout);
+            cr->layoutArticulations();
 #endif
       }
 
@@ -578,9 +578,9 @@ void Beam::layout1(ScoreLayout*)
 //   layout
 //---------------------------------------------------------
 
-void Beam::layout(ScoreLayout* layout)
+void Beam::layout()
       {
-      double _spatium = layout->spatium();
+      double _spatium = spatium();
 
       //---------------------------------------------------
       //   calculate direction of beam
@@ -691,7 +691,7 @@ void Beam::layout(ScoreLayout* layout)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = score()->style(ST_stemWidth).toSpatium().point() * .5;
+      double xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
       double xoffRight = xoffLeft;
 
       QPointF p1s(c1->stemPos(c1->up(), false));
@@ -727,10 +727,10 @@ void Beam::layout(ScoreLayout* layout)
             break;
             }
 
-      Spatium bw        = score()->style(ST_beamWidth).toSpatium();
-      double bd         = score()->style(ST_beamDistance).toDouble();
-      double beamMinLen = score()->style(ST_beamMinLen).toSpatium().point();
-      double graceMag   = score()->style(ST_graceNoteMag).toDouble();
+      Spatium bw        = score()->styleS(ST_beamWidth);
+      double bd         = score()->styleD(ST_beamDistance);
+      double beamMinLen = point(score()->styleS(ST_beamMinLen));
+      double graceMag   = score()->styleD(ST_graceNoteMag);
       if (isGrace) {
             setMag(graceMag);
             bw *= graceMag;
@@ -739,7 +739,7 @@ void Beam::layout(ScoreLayout* layout)
       else
             setMag(1.0);
 
-      double beamDist = (bd * bw + bw).point() * (_up ? 1.0 : -1.0);
+      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
 
       double min      = 1000.0;
       double max      = -1000.0;
@@ -934,7 +934,7 @@ void Beam::layout(ScoreLayout* layout)
 
             Tremolo* tremolo = chord->tremolo();
             if (tremolo)
-                  tremolo->layout(layout);
+                  tremolo->layout();
             }
       }
 
@@ -985,7 +985,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = score()->style(ST_stemWidth).toSpatium().point() * .5;
+      double xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
       double xoffRight = xoffLeft;
 
       QPointF p1s(c1->stemPos(c1->up(), false));
@@ -1040,7 +1040,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       const Style s(score()->style());
       double bd(s[ST_beamDistance].toDouble());
       Spatium bw(s[ST_beamWidth].toSpatium());
-      double beamDist = (bd * bw + bw).point() * (_up ? 1.0 : -1.0);
+      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
       BeamSegment* bs = new BeamSegment;
       beamSegments.push_back(bs);
       bs->p1  = p1;
@@ -1109,7 +1109,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(_up, false).x();
-                              double x3 = x2 + score()->style(ST_beamMinLen).toSpatium().point();
+                              double x3 = x2 + point(score()->styleS(ST_beamMinLen));
 
                               if (!nn1r) {
                                     double tmp = x3;
@@ -1145,7 +1145,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(_up, false).x();
-                  double x2 = x3 - score()->style(ST_beamMinLen).toSpatium().point();
+                  double x2 = x3 - point(score()->styleS(ST_beamMinLen));
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }

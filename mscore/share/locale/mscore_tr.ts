@@ -993,6 +993,34 @@ p, li { white-space: pre-wrap; }
         <source>cent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">otomatik</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">yukarı</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">aşağı</translation>
+    </message>
+    <message>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1789,14 +1817,6 @@ yapılamadı:</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Previous</source>
-        <translation>Önceki</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation>Sonraki</translation>
-    </message>
-    <message>
         <source>Parent</source>
         <translation>Ata(sı) (!!!Parent!!!)</translation>
     </message>
@@ -2578,6 +2598,14 @@ yapılamadı:</translation>
     </message>
     <message>
         <source>Subtype</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5001,10 +5029,6 @@ kaydetmek ister misiniz?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5062,6 +5086,14 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5273,6 +5305,18 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Velo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mirror Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7010,10 +7054,30 @@ başarısız:</translation>
     </message>
 </context>
 <context>
+    <name>TextProp</name>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -7026,6 +7090,10 @@ başarısız:</translation>
     <message>
         <source>Size:</source>
         <translation type="unfinished">Büyüklük:</translation>
+    </message>
+    <message>
+        <source>font point size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Style:</source>
@@ -7060,16 +7128,104 @@ başarısız:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>...</source>
         <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>center text on reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color:</source>
         <translation type="unfinished">Renk:</translation>
     </message>
     <message>
-        <source>frame color</source>
-        <translation type="unfinished">çerçeve rengi</translation>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Konum</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">göreceX:</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">göreceY</translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Birim:</translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">MM</translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished">Boşluk</translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Frame</source>
@@ -7100,6 +7256,10 @@ başarısız:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
         <source>Margin:</source>
         <translation type="unfinished">Kenar Boşluğu:</translation>
     </message>
@@ -7112,288 +7272,19 @@ başarısız:</translation>
         <translation type="unfinished">Çevre:</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation type="unfinished">sola dayalı</translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished">mm</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished">Konum</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation type="unfinished">X:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished">göreceX:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished">göreceY</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation type="unfinished">Birim:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished">MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished">Boşluk</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation type="unfinished">mm</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font point size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished">%</translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TextStyleBase</name>
     <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Metin Stilini Düzenle</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Genel</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation>Font:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Büyüklük:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Stil:</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>K</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation>İ</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>Text Sample</source>
-        <translation>Metin Nümunesi</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation>Pozisyon</translation>
-    </message>
-    <message>
-        <source>Alignment</source>
-        <translation>Hiza</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation>Yatay</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Sol</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Sağ</translation>
-    </message>
-    <message>
-        <source>Center</source>
-        <translation>Ortada</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation>Dikey</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Üst</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Alt</translation>
-    </message>
-    <message>
-        <source>Baseline</source>
-        <translation>Taban Çizgisi</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Konum</translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <translation>X:</translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation>göreceX:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation>göreceY</translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation>Birim:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Boşluk</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Çerçeve</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation>En:</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Kenar Boşluğu:</translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation>Çevre:</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Renk:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Çember</translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation>Kutu</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Önizleme</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Uygula</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>TMM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>İptal</translation>
+        <source>frame color</source>
+        <translation type="unfinished">çerçeve rengi</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, Muellers Kuh...</source>
-        <translation>Yine bir gülnihal, Aldı bu gönlümü...</translation>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished">MuseScore: Metin Stilini Düzenle</translation>
     </message>
 </context>
 <context>

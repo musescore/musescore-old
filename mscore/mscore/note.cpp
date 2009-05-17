@@ -409,7 +409,7 @@ void Note::remove(Element* e)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = score()->styleS(ST_stemWidth).point() * .5 * mag();
+      double sw = point(score()->styleS(ST_stemWidth)) * .5;
       double x  = pos().x();
       double y  = pos().y();
       if (staffMove()) {
@@ -421,9 +421,10 @@ QPointF Note::stemPos(bool upFlag) const
       //
       // TODO: implement table for all note heads
       //
-      qreal yo = _spatium * .2 * mag();
+      double _spatium = spatium();
+      qreal yo = _spatium * .2;
       if (_headGroup == 5)
-            yo = _spatium * 1.0 * mag();
+            yo = _spatium * 1.0;
       if (upFlag) {
             x += symbols[_head].width(mag()) - sw;
             y -= yo;
@@ -514,11 +515,12 @@ void Note::draw(QPainter& p) const
             }
 
       if (chord()) {
+            double _spatium = spatium();
             int dots = chord()->dots();
             double x = chord()->dotPosX() - pos().x();
             if (dots) {
-                  double d  = score()->styleS(ST_dotNoteDistance).point();
-                  double dd = score()->styleS(ST_dotDotDistance).point();
+                  double d  = point(score()->styleS(ST_dotNoteDistance));
+                  double dd = point(score()->styleS(ST_dotDotDistance));
                   double y = 0;
 
 //                do not draw dots on line, except ledger lines
@@ -529,14 +531,14 @@ void Note::draw(QPainter& p) const
                         Measure* m = chord()->measure();
                         if (m->mstaff(staffIdx())->hasVoices) {
                               if (voice() == 0 || voice() == 2) {
-                                    y = -_spatium *.5 * mag();
+                                    y = -_spatium *.5;
                                     }
                               else {
-                                    y = _spatium *.5 * mag();
+                                    y = _spatium *.5;
                                     }
                               }
                         else
-                              y = -_spatium *.5 * mag();
+                              y = -_spatium *.5;
                         }
 
                   for (int i = 0; i < dots; ++i)
@@ -727,7 +729,7 @@ void Note::read(QDomElement e)
 QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
-      _lineOffset = lrint(s.y() * 2.0 / _spatium);
+      _lineOffset = lrint(s.y() * 2.0 / spatium());
       score()->setLayoutStart(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }
@@ -785,7 +787,7 @@ void ShadowNote::draw(QPainter& p) const
       QRect r(abbox().toRect());
 
       p.translate(ap);
-      qreal lw = score()->styleS(ST_ledgerLineWidth).point();
+      qreal lw = point(score()->styleS(ST_ledgerLineWidth));
       InputState ps = score()->inputState();
       int voice;
       if (ps.drumNote != -1 && ps.drumset)
@@ -799,7 +801,7 @@ void ShadowNote::draw(QPainter& p) const
 
       symbols[noteHeads[_headGroup][2]].draw(p, mag());
 
-      double ms = _spatium * mag();
+      double ms = spatium();
 
       double x1 = symbols[quartheadSym].width(mag())*.5 - ms;
       double x2 = x1 + 2 * ms;
@@ -824,8 +826,9 @@ void ShadowNote::draw(QPainter& p) const
 QRectF ShadowNote::bbox() const
       {
       QRectF b = symbols[quartheadSym].bbox();
+      double _spatium = spatium();
       double x  = b.width()/2 - _spatium;
-      double lw = score()->styleS(ST_ledgerLineWidth).point();
+      double lw = point(score()->styleS(ST_ledgerLineWidth));
 
       if (_line < 100 && _line > -100) {
             QRectF r(0, -lw/2.0, 2 * _spatium, lw);
@@ -943,7 +946,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   {
                   Arpeggio* a = (Arpeggio*)e;
                   a->setParent(ch);
-                  a->setHeight(_spatium * 5);   //DEBUG
+                  a->setHeight(spatium() * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
                   break;
@@ -1152,7 +1155,7 @@ void Note::propertyAction(const QString& s)
 //   layout
 //---------------------------------------------------------
 
-void Note::layout(ScoreLayout* layout)
+void Note::layout()
       {
       if (parent() == 0)
             return;
@@ -1160,7 +1163,7 @@ void Note::layout(ScoreLayout* layout)
             _accidental->setMag(mag());
       foreach(Element* e, _el) {
             e->setMag(mag());
-            e->layout(layout);
+            e->layout();
             }
       }
 
