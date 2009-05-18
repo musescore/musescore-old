@@ -373,44 +373,27 @@ bool Score::saveFile(bool autosave)
 
 bool Score::saveAs(bool saveCopy)
       {
-      QString selectedFilter;
-      QStringList fl;
+      QFileDialog* saveAs = saveCopy ? mscore->saveCopyDialog() : mscore->saveAsDialog();
 
-      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
-      fl.append(tr("MuseScore Format (*.mscx)"));
-      fl.append(tr("MusicXML Format (*.xml)"));
-      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
-      fl.append(tr("Standard MIDI File (*.mid)"));
-      fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("PostScript File (*.ps)"));
-      fl.append(tr("PNG Bitmap Graphic (*.png)"));
-      fl.append(tr("Scalable Vector Graphic (*.svg)"));
-      fl.append(tr("Lilypond Format (*.ly)"));
-#ifdef HAS_AUDIOFILE
-      fl.append(tr("Wave Audio (*.wav)"));
-      fl.append(tr("Flac Audio (*.flac)"));
-      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
-#endif
+      if (!saveAs->exec())
+            return false;
 
-      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
-                                           tr("MuseScore: Save As");
-      QString saveDirectory = saveCopy ? preferences.lastSaveCopyDirectory :
-                                         preferences.lastSaveDirectory;
-      selectedFilter = fl[0];
-      QString fn = QFileDialog::getSaveFileName(
-         0, saveDialogTitle,
-         saveDirectory,
-         fl.join(";;"),
-         &selectedFilter
-//         ,QFileDialog::DontUseNativeDialog
-         );
+      QStringList sl = saveAs->selectedFiles();
+      if (sl.isEmpty())
+            return false;
+      QString fn = sl[0];
       if (fn.isEmpty())
             return false;
+
+      QString selectedFilter = saveAs->selectedNameFilter();
+
+// printf("  return selected <%s>\n", qPrintable(selectedFilter));
 
       QFileInfo fi(fn);
       QString ext = fi.suffix();
 
       bool rv = false;
+      QStringList fl = saveAs->nameFilters();
       if (ext == "mscx" || ext == "mscz" || selectedFilter == fl[0] || selectedFilter == fl[1]) {
             // save as mscore *.msc[xz] file
             if (selectedFilter == fl[0] && (ext != "mscz"))
@@ -511,14 +494,10 @@ bool Score::saveAs(bool saveCopy)
                qPrintable(selectedFilter));
             return false;
             }
+
 //    after a successful saveas (compressed) MusicXML, clear the "dirty" flag
 //      if (rv && ((ext == "xml") || (ext == "mxl")) && !saveCopy)
 //            _undo->setClean();
-
-      if (saveCopy)
-            preferences.lastSaveCopyDirectory = fi.absolutePath();
-      else
-            preferences.lastSaveDirectory = fi.absolutePath();
       return rv;
       }
 

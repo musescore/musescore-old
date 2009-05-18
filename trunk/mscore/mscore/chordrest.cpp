@@ -205,7 +205,10 @@ void ChordRest::writeProperties(Xml& xml) const
             }
       if (!xml.clipboardmode && _beam)
             xml.tag("Beam", _beam->id());
-      xml.curTick = tick() + tickLen();
+      int len = tickLen();
+      if (type() == REST && len == 0)
+            len = measure()->tickLen();
+      xml.curTick = tick() + len;
       }
 
 //---------------------------------------------------------
@@ -364,8 +367,9 @@ void ChordRest::layoutArticulations()
 
       foreach (Articulation* a, articulations) {
             ArticulationAnchor aa = a->anchor();
-            if (aa != A_CHORD)
+            if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
+
             qreal sh = a->bbox().height() * mag();
 
             dy += distance1;

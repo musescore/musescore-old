@@ -88,6 +88,8 @@ void Articulation::read(QDomElement e)
                   setSubtype(e.text().toInt());
             else if (tag == "channel")
                   _channelName = e.attribute("name");
+            else if (tag == "anchor")
+                  _anchor = ArticulationAnchor(e.text().toInt());
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -104,6 +106,9 @@ void Articulation::write(Xml& xml) const
       if (!_channelName.isEmpty())
             xml.tagE(QString("channel name=\"%1\"").arg(_channelName));
       Element::writeProperties(xml);
+      int t = subtype();
+      if (score()->styleI(STYLE_TYPE(ST_UfermataAnchor + t)) != int(_anchor))
+            xml.tag("anchor", int(_anchor));
       xml.etag();
       }
 
@@ -126,7 +131,9 @@ void Articulation::setSubtype(const QString& s)
             setSubtype(s.toInt());
             return;
             }
-      setSubtype(name2idx(s));
+      int t = name2idx(s);
+      setSubtype(t);
+      _anchor = ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + t)));
       }
 
 //---------------------------------------------------------
@@ -239,14 +246,4 @@ int Articulation::name2idx(const QString& s)
             }
       return -1;
       }
-
-//---------------------------------------------------------
-//   anchor
-//---------------------------------------------------------
-
-ArticulationAnchor Articulation::anchor() const
-      {
-      return ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + subtype())));
-      }
-
 

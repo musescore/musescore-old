@@ -745,7 +745,15 @@ void Score::cmdFlip()
                   else if (e->subtype() == DfermataSym)
                         newSubtype = UfermataSym;
                   else if (e->subtype() == TenutoSym) {
-                        // TODO flip between A_CHORD, A_TOP_CHORD, A_BOTTOM_CHORD,
+                        Articulation* a = static_cast<Articulation*>(e);
+                        if (a->anchor() == A_TOP_CHORD)
+                              a->setAnchor(A_BOTTOM_CHORD);
+                        else if (a->anchor() == A_BOTTOM_CHORD)
+                              a->setAnchor(A_TOP_CHORD);
+                        else if (a->anchor() == A_CHORD) {
+                              ChordRest* cr = static_cast<ChordRest*>(a->parent());
+                              a->setAnchor(cr->isUp() ? A_TOP_CHORD : A_BOTTOM_CHORD);
+                              }
                         }
                   if (newSubtype != -1)
                         _undo->push(new ChangeSubtype(e, newSubtype));
