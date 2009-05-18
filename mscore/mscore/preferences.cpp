@@ -172,8 +172,6 @@ void Preferences::init()
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/demo.mscx";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-      lastSaveDirectory        = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-      lastSaveCopyDirectory    = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       showSplashScreen         = true;
 
       rewind.type              = -1;
@@ -276,8 +274,8 @@ void Preferences::write()
             }
       s.setValue("startScore",         startScore);
       s.setValue("workingDirectory",   workingDirectory);
-      s.setValue("lastSaveDirectory",  lastSaveDirectory);
-      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
+//      s.setValue("lastSaveDirectory",  lastSaveDirectory);
+//      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
       s.setValue("showSplashScreen",   showSplashScreen);
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
@@ -378,8 +376,6 @@ void Preferences::read()
 
       QString path = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       workingDirectory   = s.value("workingDirectory", path).toString();
-      lastSaveDirectory  = s.value("lastSaveDirectory", path).toString();
-      lastSaveCopyDirectory    = s.value("lastSaveCopyDirectory", path).toString();
 
       showSplashScreen         = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();

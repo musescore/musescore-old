@@ -86,6 +86,7 @@ struct ArticulationInfo {
 
 class Articulation : public Symbol {
       QString _channelName;
+      ArticulationAnchor _anchor;
 
       virtual bool isMovable() const { return true; }
 
@@ -105,7 +106,8 @@ class Articulation : public Symbol {
 
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
-      ArticulationAnchor anchor() const;
+      ArticulationAnchor anchor() const     { return _anchor;      }
+      void setAnchor(ArticulationAnchor v)  { _anchor = v;         }
 
       QString channelName() const           { return _channelName; }
       void setChannelName(const QString& s) { _channelName = s;    }

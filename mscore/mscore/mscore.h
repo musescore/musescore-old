@@ -238,6 +238,8 @@ class MuseScore : public QMainWindow {
 
       QTimer* autoSaveTimer;
       QSignalMapper* pluginMapper;
+      QFileDialog* _saveAsDialog;
+      QFileDialog* _saveCopyDialog;
 
       //---------------------
 
@@ -301,6 +303,7 @@ class MuseScore : public QMainWindow {
       void undo();
       void redo();
       void endSearch();
+      void setSaveFilters(QFileDialog* d) const;
 
    public slots:
       void setCurrentScore(int);
@@ -350,6 +353,8 @@ class MuseScore : public QMainWindow {
       QProgressBar* showProgressBar();
       void hideProgressBar();
       void updateRecentScores(Score*);
+      QFileDialog* saveAsDialog();
+      QFileDialog* saveCopyDialog();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

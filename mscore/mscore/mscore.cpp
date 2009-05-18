@@ -234,9 +234,18 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-      QSettings s;
-      s.setValue("lastSaveDirectory",  preferences.lastSaveDirectory);
-      s.setValue("lastSaveCopyDirectory",  preferences.lastSaveCopyDirectory);
+
+      if (_saveAsDialog) {
+            QByteArray ba = _saveAsDialog->saveState();
+            settings.setValue("saveAs", ba);
+            int idx = _saveAsDialog->nameFilters().indexOf(_saveAsDialog->selectedNameFilter());
+            settings.setValue("saveAsFilter", idx);
+            }
+      if (_saveCopyDialog) {
+            settings.setValue("saveCopy", _saveCopyDialog->saveState());
+            int idx = _saveCopyDialog->nameFilters().indexOf(_saveCopyDialog->selectedNameFilter());
+            settings.setValue("saveCopyFilter", idx);
+            }
 
       //
       // close all toplevel windows
@@ -321,6 +330,8 @@ MuseScore::MuseScore()
       drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
+      _saveAsDialog         = 0;
+      _saveCopyDialog       = 0;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -2399,5 +2410,80 @@ void MuseScore::handleMessage(const QString& message)
       appendScore(score);
       lastOpenPath = score->fileInfo()->path();
       setCurrentScore(score);
+      }
+
+//---------------------------------------------------------
+//   setSaveFilters
+//---------------------------------------------------------
+
+void MuseScore::setSaveFilters(QFileDialog* d) const
+      {
+      QStringList fl;
+      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
+      fl.append(tr("MuseScore Format (*.mscx)"));
+      fl.append(tr("MusicXML Format (*.xml)"));
+      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
+      fl.append(tr("Standard MIDI File (*.mid)"));
+      fl.append(tr("PDF File (*.pdf)"));
+      fl.append(tr("PostScript File (*.ps)"));
+      fl.append(tr("PNG Bitmap Graphic (*.png)"));
+      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      fl.append(tr("Lilypond Format (*.ly)"));
+#ifdef HAS_AUDIOFILE
+      fl.append(tr("Wave Audio (*.wav)"));
+      fl.append(tr("Flac Audio (*.flac)"));
+      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
+#endif
+      d->setNameFilters(fl);
+      }
+
+//---------------------------------------------------------
+//   saveAsDialog
+//---------------------------------------------------------
+
+QFileDialog* MuseScore::saveAsDialog()
+      {
+      if (_saveAsDialog == 0) {
+            _saveAsDialog = new QFileDialog(mscore);
+            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            _saveAsDialog->setAcceptMode(QFileDialog::AcceptSave);
+            _saveAsDialog->setFileMode(QFileDialog::AnyFile);
+            _saveAsDialog->setWindowTitle(tr("MuseScore: Save As"));
+            setSaveFilters(_saveAsDialog);
+            QSettings settings;
+            _saveAsDialog->selectNameFilter(_saveAsDialog->nameFilters().value(settings.value("saveAsFilter", 0).toInt()));
+
+            if (settings.contains("saveAs")) {
+                  QByteArray ba = settings.value("saveAs").toByteArray();
+                  if (!_saveAsDialog->restoreState(ba))
+                        printf("restore failed\n");
+                  }
+            else
+                  _saveAsDialog->setDirectory(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
+            }
+      return _saveAsDialog;
+      }
+
+//---------------------------------------------------------
+//   saveCopyDialog
+//---------------------------------------------------------
+
+QFileDialog* MuseScore::saveCopyDialog()
+      {
+      if (_saveCopyDialog == 0) {
+            _saveCopyDialog = new QFileDialog(mscore);
+            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            _saveCopyDialog->setAcceptMode(QFileDialog::AcceptSave);
+            _saveCopyDialog->setFileMode(QFileDialog::AnyFile);
+            _saveCopyDialog->setWindowTitle(tr("MuseScore: Save a Copy"));
+            setSaveFilters(_saveCopyDialog);
+            QSettings settings;
+            _saveCopyDialog->selectNameFilter(_saveCopyDialog->nameFilters().value(settings.value("saveCopyFilter", 0).toInt()));
+            if (settings.contains("saveCopy"))
+                  _saveCopyDialog->restoreState(settings.value("saveCopy").toByteArray());
+            else
+                  _saveCopyDialog->setDirectory(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
+            }
+      return _saveCopyDialog;
       }
 

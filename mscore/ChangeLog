@@ -1,5 +1,7 @@
+18.may (ws)
+      - fixed saving measures with whole measure rest in voice 0
 17.may (ws)
-      - fix exchange voices
+      - fixed exchange voices
 16.may (ws)
       - get rid of the global _spatium variable
       - removed ScoreLayout() class
