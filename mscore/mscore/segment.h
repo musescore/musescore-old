@@ -27,7 +27,6 @@
 #define __SEGMENT_H__
 
 #include "element.h"
-#include "spatium.h"
 
 class Measure;
 class Segment;

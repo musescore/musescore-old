@@ -21,8 +21,6 @@
 #ifndef __SPATIUM_H__
 #define __SPATIUM_H__
 
-extern double _spatiumMag;
-
 //---------------------------------------------------------
 //   Spatium
 //    - a unit of measure

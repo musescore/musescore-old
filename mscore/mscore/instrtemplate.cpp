@@ -32,16 +32,47 @@ QList<InstrumentTemplate*> instrumentTemplates;
 
 InstrumentTemplate::InstrumentTemplate()
       {
-      QTextOption to = name.defaultTextOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(QTextOption::NoWrap);
-      name.setUseDesignMetrics(true);
-      name.setDefaultTextOption(to);
-      shortName.setUseDesignMetrics(true);
-      shortName.setDefaultTextOption(to);
-//TODOX      name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
-//      shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
       drumset = 0;
+      }
+
+InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
+      {
+      group      = t.group;
+      trackName  = t.trackName;
+      name       = t.name;
+      shortName  = t.shortName;
+      staves     = t.staves;
+
+      for (int i = 0; i < MAX_STAVES; ++i) {
+            clefIdx[i]    = t.clefIdx[i];
+            staffLines[i] = t.staffLines[i];
+            smallStaff[i] = t.smallStaff[i];
+            }
+      bracket    = t.bracket;
+      minPitchA  =  t.minPitchA;
+      maxPitchA  =  t.maxPitchA;
+      minPitchP  =  t.minPitchP;
+      maxPitchP  =  t.maxPitchP;
+      transpose  =  t.transpose;
+      useDrumset =  t.useDrumset;
+      if (t.drumset)
+            drumset = new Drumset(*t.drumset);
+      else
+            drumset = 0;
+      midiActions = t.midiActions;
+
+      foreach(Channel* c, t.channel) {
+            Channel* ch = new Channel(*c);
+            channel.append(ch);
+            }
+      }
+
+InstrumentTemplate::~InstrumentTemplate()
+      {
+      if (drumset)
+            delete drumset;
+      foreach(Channel* c, channel)
+            delete c;
       }
 
 //---------------------------------------------------------
@@ -51,8 +82,8 @@ InstrumentTemplate::InstrumentTemplate()
 void InstrumentTemplate::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.tag("name", name.toPlainText());            // TODO: use doc
-      xml.tag("short-name", shortName.toPlainText()); // TODO: use doc
+      xml.tag("name", name);
+      xml.tag("short-name",  shortName);
       xml.tag("description", trackName);
       if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
@@ -137,61 +168,15 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
       double mag = _spatium * extraMag / (SPATIUM20 * DPI);
       font.setPointSizeF(12.0 * mag);     // TODO: get from style
 #endif
-      QString sName;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "name") {
-                  QTextCursor cursor(&name);
-                  QTextCharFormat f = cursor.charFormat();
-                  QTextCharFormat sf(f);
-                  sf.setFont(font);
-
-                  for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
-                        QDomElement de1 = ee.toElement();
-                        QString tag(de1.tagName());
-                        if (tag == "symbol") {
-                              QString name = de1.attribute(QString("name"));
-                              if (name == "flat") {
-                                    sName += "b";
-                                    cursor.insertText(QString(0xe10d), sf);
-                                    }
-                              else if (name == "sharp") {
-                                    sName += "#";
-                                    cursor.insertText(QString(0xe10c), sf);
-                                    }
-                              }
-                        QDomText t = ee.toText();
-                        if (!t.isNull()) {
-                              sName += t.data();
-                              cursor.insertText(t.data(), f);
-                              }
-                        }
-                  }
-            else if (tag == "short-name") {
-                  QTextCursor cursor(&shortName);
-                  QTextCharFormat f = cursor.charFormat();
-                  QTextCharFormat sf(f);
-                  sf.setFont(font);
-
-                  for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
-                        QDomElement de1 = ee.toElement();
-                        QString tag(de1.tagName());
-                        if (tag == "symbol") {
-                              QString name = de1.attribute(QString("name"));
-                              if (name == "flat")
-                                    cursor.insertText(QString(0xe10d), sf);
-                              else if (name == "sharp")
-                                    cursor.insertText(QString(0xe10c), sf);
-                              }
-                        QDomText t = ee.toText();
-                        if (!t.isNull()) {
-                              cursor.insertText(t.data(), f);
-                              }
-                        }
-                  }
+            if (tag == "name")
+                  name = val;
+            else if (tag == "short-name")
+                  shortName = val;
             else if (tag == "description")
                   trackName = val;
             else if (tag == "staves")
@@ -265,7 +250,7 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             channel[0]->updateInitList();
             }
       if (trackName.isEmpty())
-            trackName = sName;
+            trackName = name;
       }
 
 //---------------------------------------------------------
@@ -285,7 +270,20 @@ static void readInstrumentGroup(QDomElement e)
                   }
             else if (tag == "ref") {
                   QString name = e.text();
-printf("instr ref <%s>\n", qPrintable(name));
+                  InstrumentTemplate* ttt = 0;
+                  foreach(InstrumentTemplate* tt, instrumentTemplates) {
+                        if (tt->trackName == name) {
+                              ttt = tt;
+                              break;
+                              }
+                        }
+                  if (ttt) {
+                        InstrumentTemplate* t = new InstrumentTemplate(*ttt);
+                        t->group = group;
+                        instrumentTemplates.push_back(t);
+                        }
+                  else
+                        printf("instrument reference not found <%s>\n", qPrintable(name));
                   }
             else
                   domError(e);
@@ -309,7 +307,10 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
       docName = qf.fileName();
       qf.close();
 
+      foreach(InstrumentTemplate* t, instrumentTemplates)
+            delete t;
       instrumentTemplates.clear();
+
       if (!rv) {
             QString s;
             s.sprintf("error reading file %s at line %d column %d: %s\n",

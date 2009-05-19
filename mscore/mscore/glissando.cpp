@@ -144,32 +144,12 @@ void Glissando::draw(QPainter& p) const
       if (subtype() == 0) {
             p.drawLine(0.0, 0.0, l, 0.0);
             }
-#if 0
       else if (subtype() == 1) {
-            double x    = 0.0;
-            double step = _spatium * .5;
-            double h1   = step * .8;
-            bool up     = true;
-            for (;;) {
-                  double step1 = step;
-                  if (x + step1 > l)
-                        step1 = l - x;
-                  if (up)
-                        p.drawArc(x, -h1*.5, step1, h1, 0, -180 * 16);
-                  else
-                        p.drawArc(x, h1*.5, step1, -h1, 0, 180 * 16);
-                  x += step;
-                  if (x >= l)
-                        break;
-                  up = !up;
-                  }
-            }
-#endif
-      else if (subtype() == 1) {
-            QRectF b = symbols[trillelementSym].bbox(mag());
-            qreal w  = symbols[trillelementSym].width(mag());
+            double mags = magS();
+            QRectF b = symbols[trillelementSym].bbox(mags);
+            qreal w  = symbols[trillelementSym].width(mags);
             int n    = lrint(l / w);
-            symbols[trillelementSym].draw(p, mag(), 0.0, b.height()*.5, n);
+            symbols[trillelementSym].draw(p, mags, 0.0, b.height()*.5, n);
             }
       if (_showText) {
             TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);

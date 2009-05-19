@@ -232,7 +232,6 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
 void Score::setSpatium(double v)
       {
       _spatium    = v;
-      _spatiumMag = _spatium / (DPI * SPATIUM20);
       }
 
 //---------------------------------------------------------

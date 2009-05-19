@@ -22,7 +22,6 @@
 #include "mscore.h"
 #include "element.h"
 #include "style.h"
-#include "spatium.h"
 #include "globals.h"
 #include "sym.h"
 #include "symbol.h"

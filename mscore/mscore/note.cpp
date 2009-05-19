@@ -199,7 +199,7 @@ Note::~Note()
 
 double Note::headWidth() const
       {
-      return symbols[_head].width(mag());
+      return symbols[_head].width(magS());
       }
 
 //---------------------------------------------------------
@@ -208,7 +208,7 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[_head].height(mag());
+      return symbols[_head].height(magS());
       }
 
 //---------------------------------------------------------
@@ -426,7 +426,7 @@ QPointF Note::stemPos(bool upFlag) const
       if (_headGroup == 5)
             yo = _spatium * 1.0;
       if (upFlag) {
-            x += symbols[_head].width(mag()) - sw;
+            x += symbols[_head].width(magS()) - sw;
             y -= yo;
             }
       else {
@@ -511,7 +511,7 @@ void Note::draw(QPainter& p) const
                   else if (i < in->minPitchA || i > in->maxPitchA)
                         p.setPen(Qt::yellow);
                   }
-            symbols[_head].draw(p, mag());
+            symbols[_head].draw(p, magS());
             }
 
       if (chord()) {
@@ -542,7 +542,7 @@ void Note::draw(QPainter& p) const
                         }
 
                   for (int i = 0; i < dots; ++i)
-                        symbols[dotSym].draw(p, mag(), x + d + dd * i, y);
+                        symbols[dotSym].draw(p, magS(), x + d + dd * i, y);
                   }
             }
       }
@@ -553,7 +553,7 @@ void Note::draw(QPainter& p) const
 
 QRectF Note::bbox() const
       {
-      return symbols[_head].bbox(mag());
+      return symbols[_head].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -799,20 +799,21 @@ void ShadowNote::draw(QPainter& p) const
       pen.setWidthF(lw);
       p.setPen(pen);
 
-      symbols[noteHeads[_headGroup][2]].draw(p, mag());
+      symbols[noteHeads[_headGroup][2]].draw(p, magS());
 
       double ms = spatium();
 
-      double x1 = symbols[quartheadSym].width(mag())*.5 - ms;
+      double x1 = symbols[quartheadSym].width(magS())*.5 - ms;
       double x2 = x1 + 2 * ms;
 
+      ms *= .5;
       if (_line < 100 && _line > -100) {
             for (int i = -2; i >= _line; i -= 2) {
-                  double y = ms * .5 * (i - _line);
+                  double y = ms * (i - _line);
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             for (int i = 10; i <= _line; i += 2) {
-                  double y = ms * .5 * (i - _line);
+                  double y = ms * (i - _line);
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             }
@@ -825,7 +826,7 @@ void ShadowNote::draw(QPainter& p) const
 
 QRectF ShadowNote::bbox() const
       {
-      QRectF b = symbols[quartheadSym].bbox();
+      QRectF b = symbols[quartheadSym].bbox(magS());
       double _spatium = spatium();
       double x  = b.width()/2 - _spatium;
       double lw = point(score()->styleS(ST_ledgerLineWidth));

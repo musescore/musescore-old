@@ -21,13 +21,11 @@
 #include "globals.h"
 #include "style.h"
 #include "sym.h"
-#include "spatium.h"
 #include "utils.h"
 #include "mscore.h"
 #include "score.h"
 
 QVector<Sym> symbols(lastSym);
-
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
@@ -212,35 +210,7 @@ const Sym* findSymbol(QChar code, int fontId)
 
 const QRectF Sym::bbox(double mag) const
       {
-      mag *= _spatiumMag;
       return QRectF(_bbox.x() * mag, _bbox.y() * mag, _bbox.width() * mag, _bbox.height() * mag);
-      }
-
-//---------------------------------------------------------
-//   height
-//---------------------------------------------------------
-
-double Sym::height(double mag) const
-      {
-      return _bbox.height() * mag * _spatiumMag;
-      }
-
-//---------------------------------------------------------
-//   width
-//---------------------------------------------------------
-
-double Sym::width(double mag) const
-      {
-      return w * mag * _spatiumMag;
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Sym::draw(QPainter& painter, qreal x, qreal y) const
-      {
-      draw(painter, 1.0, x, y);
       }
 
 //---------------------------------------------------------
@@ -249,7 +219,6 @@ void Sym::draw(QPainter& painter, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
-      mag *= _spatiumMag;
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(*_font);
@@ -263,7 +232,6 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       {
-      mag *= _spatiumMag;
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(*_font);

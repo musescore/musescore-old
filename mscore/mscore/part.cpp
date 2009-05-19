@@ -160,6 +160,7 @@ void Part::setShortNameHtml(const QString& s)
       _shortName->setHtml(s);
       }
 
+
 QString Part::shortNameHtml() const
       {
       return _shortName->getHtml();

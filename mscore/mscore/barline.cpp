@@ -103,7 +103,8 @@ void BarLine::draw(QPainter& p) const
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
 
-      double ld = spatium();       // actual line distance
+      double mags = magS();
+      double ld   = spatium();       // actual line distance
 
       switch(subtype()) {
             case BROKEN_BAR:
@@ -155,16 +156,16 @@ void BarLine::draw(QPainter& p) const
                   qreal lw2  = point(score()->styleS(ST_endBarWidth));
                   qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
-                  qreal dotw = symbols[dotSym].width(mag());
+                  qreal dotw = symbols[dotSym].width(mags);
                   qreal x2   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x0   =  dotw + d1 + lw + d1 + lw22;
 
-                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
                   if (_span == 2) {
-                        symbols[dotSym].draw(p, mag(), x0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
@@ -181,16 +182,16 @@ void BarLine::draw(QPainter& p) const
                   qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
 
-                  qreal dotw = symbols[dotSym].width(mag());
+                  qreal dotw = symbols[dotSym].width(mags);
                   qreal x0   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x2   =  dotw + d1 + lw + d1 + lw22;
 
-                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
                   if (_span == 2) {
-                        symbols[dotSym].draw(p, mag(), x0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
@@ -208,22 +209,22 @@ void BarLine::draw(QPainter& p) const
                   qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
 
-                  qreal dotw = symbols[dotSym].width(mag());
+                  qreal dotw = symbols[dotSym].width(mags);
                   qreal x0   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x2   =  dotw + d1 + lw + d1 + lw22;
                   qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw/2;
                   qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1 - dotw/2;
 
-                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
-                  symbols[dotSym].draw(p, mag(), x4, 1.5 * ld);
-                  symbols[dotSym].draw(p, mag(), x4, 2.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
+                  symbols[dotSym].draw(p, mags, x4, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
                   if (_span == 2) {
-                        symbols[dotSym].draw(p, mag(), x0, y2 - ld);
-                        symbols[dotSym].draw(p, mag(), x0, y2 - ld);
-                        symbols[dotSym].draw(p, mag(), x4, y2 - ld);
-                        symbols[dotSym].draw(p, mag(), x4, y2 - ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - ld);
+                        symbols[dotSym].draw(p, mags, x0, y2 - ld);
+                        symbols[dotSym].draw(p, mags, x4, y2 - ld);
+                        symbols[dotSym].draw(p, mags, x4, y2 - ld);
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
@@ -285,7 +286,7 @@ QRectF BarLine::bbox() const
             case START_REPEAT:
             case END_REPEAT:
                   w  += score()->styleS(ST_endBarWidth) + 2 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + symbols[dotSym].width(mag());
+                  dw = point(w) + symbols[dotSym].width(magS());
                   break;
             case END_BAR:
                   w += score()->styleS(ST_endBarWidth) + score()->styleS(ST_endBarDistance);
@@ -293,7 +294,7 @@ QRectF BarLine::bbox() const
                   break;
             case  END_START_REPEAT:
                   w  += score()->styleS(ST_endBarWidth) + 3 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + 2 * symbols[dotSym].width(mag());
+                  dw = point(w) + 2 * symbols[dotSym].width(magS());
                   break;
             case BROKEN_BAR:
             case NORMAL_BAR:

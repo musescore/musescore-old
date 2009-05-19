@@ -30,8 +30,6 @@ Style* style;
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
 
-double _spatiumMag;
-
 QVector<TextStyle> defaultTextStyles;
 Style defaultStyle;
 
@@ -483,7 +481,7 @@ QFont TextStyle::font(double _spatium) const
 //   font
 //---------------------------------------------------------
 
-QFont TextStyle::fontPx() const
+QFont TextStyle::fontPx(double _spatium) const
       {
       double m = size * DPI / PPI;
 
@@ -491,7 +489,7 @@ QFont TextStyle::fontPx() const
       f.setBold(bold);
       f.setItalic(italic);
       if (sizeIsSpatiumDependent)
-            m = m * _spatiumMag;
+            m = m * _spatium / (SPATIUM20 * DPI);
       f.setPixelSize(lrint(m));
       f.setUnderline(underline);
       return f;

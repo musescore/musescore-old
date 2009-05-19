@@ -77,7 +77,7 @@ void KeySig::addLayout(int sym, double x, int line)
       ks->pos = pt;
       keySymbols.append(ks);
       Sym* s = &symbols[sym];
-      _bbox |= s->bbox(mag()).translated(pt);
+      _bbox |= s->bbox(magS()).translated(pt);
       }
 
 //---------------------------------------------------------
@@ -221,7 +221,7 @@ void KeySig::layout()
 void KeySig::draw(QPainter& p) const
       {
       foreach(const KeySym* ks, keySymbols) {
-            symbols[ks->sym].draw(p, mag(), ks->pos.x(), ks->pos.y());
+            symbols[ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
             }
       }
 

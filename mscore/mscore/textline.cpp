@@ -68,9 +68,10 @@ void TextLineSegment::setSelected(bool f)
 
 void TextLineSegment::draw(QPainter& p) const
       {
-      TextLine* tl = textLine();
+      TextLine* tl    = textLine();
       double _spatium = spatium();
-      qreal textlineLineWidth    = point(tl->lineWidth());
+
+      qreal textlineLineWidth    = tl->lineWidth().val() * _spatium;
       qreal textlineTextDistance = _spatium * .5;
 
       QPointF pp2(pos2());
@@ -93,20 +94,20 @@ void TextLineSegment::draw(QPainter& p) const
             p.restore();
             }
       else if (sym != -1) {
-            const QRectF& bb = symbols[sym].bbox();
+            const QRectF& bb = symbols[sym].bbox(magS());
             qreal h = bb.height() * .5;
             QPointF o = tl->beginSymbolOffset() * _spatium;
-            symbols[sym].draw(p, o.x(), h + o.y());
+            symbols[sym].draw(p, 1.0, o.x(), h + o.y());
             l = bb.width() + textlineTextDistance;
             }
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
             if (tl->endSymbol() != -1) {
                   int sym = tl->endSymbol();
-                  const QRectF& bb = symbols[sym].bbox();
+                  const QRectF& bb = symbols[sym].bbox(magS());
                   qreal h = bb.height() * .5;
                   QPointF o = tl->endSymbolOffset() * _spatium;
                   pp2.setX(pp2.x() - bb.width() + textlineTextDistance);
-                  symbols[sym].draw(p, pp2.x() + textlineTextDistance + o.x(), h + o.y());
+                  symbols[sym].draw(p, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
                   }
             }
 
@@ -168,8 +169,9 @@ QRectF TextLineSegment::bbox() const
                   }
             }
       else if (sym != -1) {
-            y1 = -symbols[sym].height() * .5;
-            y2 = symbols[sym].height() * .5;
+            double hh = symbols[sym].height(magS()) * .5;
+            y1 = -hh;
+            y2 = hh;
             }
       if (textLine()->endHook()) {
             double h = point(textLine()->endHookHeight());

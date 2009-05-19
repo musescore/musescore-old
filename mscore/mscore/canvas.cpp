@@ -1219,7 +1219,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 #if 0
       foreach (const Page* page, _score->pages()) {
-            QRect pr = _matrix.mapRect(page->abbox()).toRect();
+            QRect pr = _matrix.mapRect(page->abbox()).toAlignedRect();
             int o = pr.width() / 100;
             int x = pr.x();
             int y = pr.y();
@@ -1284,7 +1284,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
       QRegion r1(rr);
       foreach (const Page* page, _score->pages())
-            r1 -= _matrix.mapRect(page->abbox()).toRect();
+            r1 -= _matrix.mapRect(page->abbox()).toAlignedRect();
 //      p.setClipRect(fr);
 
       QList<const Element*> ell = _score->items(fr);

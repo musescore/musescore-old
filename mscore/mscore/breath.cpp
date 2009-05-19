@@ -90,6 +90,6 @@ void Breath::space(double& min, double& extra) const
 
 QRectF Breath::bbox() const
       {
-      return symbols[symList[subtype()]].bbox();
+      return symbols[symList[subtype()]].bbox(magS());
       }
 

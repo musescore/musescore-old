@@ -100,13 +100,13 @@ void Rest::draw(QPainter& p) const
                QString("%1").arg(n));
             }
       else {
-            symbols[_sym].draw(p, mag());
+            symbols[_sym].draw(p, magS());
             if (_dots) {
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= _dots; ++i) {
-                        double x = symbols[_sym].width(mag())
+                        double x = symbols[_sym].width(magS())
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
-                        symbols[dotSym].draw(p, mag(), x, y);
+                        symbols[dotSym].draw(p, magS(), x, y);
                         }
                   }
             }
@@ -398,7 +398,7 @@ QRectF Rest::bbox() const
 
 qreal Rest::centerX() const
       {
-      return symbols[_sym].width(mag())*.5;
+      return symbols[_sym].width(magS())*.5;
       }
 
 //---------------------------------------------------------
@@ -407,7 +407,7 @@ qreal Rest::centerX() const
 
 qreal Rest::upPos() const
       {
-      return symbols[_sym].bbox().y();
+      return symbols[_sym].bbox(magS()).y();
       }
 
 //---------------------------------------------------------
@@ -416,7 +416,7 @@ qreal Rest::upPos() const
 
 qreal Rest::downPos() const
       {
-      return symbols[_sym].bbox().y() + symbols[_sym].height();
+      return symbols[_sym].bbox(magS()).y() + symbols[_sym].height(magS());
       }
 
 //---------------------------------------------------------
