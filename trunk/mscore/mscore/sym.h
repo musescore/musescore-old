@@ -66,15 +66,15 @@ class Sym {
       Sym(const char* name, const QChar& c, int fid);
 
       const char* name() const             { return _name; }
-      const QRectF bbox(double mag = 1.0) const;
-      double height(double mag = 1.0) const;
-      double width(double mag) const;
+      const QRectF bbox(double mag) const;
+      double height(double mag) const      { return _bbox.height() * mag; }
+
+      double width(double mag) const       { return w * mag;  }
       QChar code() const                   { return _code;    }
       int getFontId() const                { return fontId;   }
       const QFont& font() const            { return *_font;   }
       void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
-      void draw(QPainter& painter, qreal x, qreal y) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;
       void draw(QPainter& painter) const;
       void draw(QPainter& painter, double mag) const;

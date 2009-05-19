@@ -1,3 +1,6 @@
+19.may (ws)
+      - implement "ref" tag in instruments.xml
+      - get rid of global _spatiumMag
 18.may (ws)
       - fixed saving measures with whole measure rest in voice 0
 17.may (ws)

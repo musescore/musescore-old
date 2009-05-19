@@ -1182,7 +1182,7 @@ void Harmony::buildText()
       textList.clear();
 
       TextStyle* st = score()->textStyle(_textStyle);
-      QFont font1 = st->fontPx();
+      QFont font1 = st->fontPx(spatium());
       QFont font2(font1);
       QFont font3(font1);
 

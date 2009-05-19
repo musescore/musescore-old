@@ -33,13 +33,14 @@
 
 void TrillSegment::draw(QPainter& p) const
       {
-      QRectF b1 = symbols[trillSym].bbox(mag());
-      QRectF b2 = symbols[trillelementSym].bbox(mag());
-      qreal w2  = symbols[trillelementSym].width(mag());
+      double mags = magS();
+      QRectF b1 = symbols[trillSym].bbox(mags);
+      QRectF b2 = symbols[trillelementSym].bbox(mags);
+      qreal w2  = symbols[trillelementSym].width(mags);
       int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);
 
-      symbols[trillSym].draw(p, mag(), -b1.x(), 0);
-      symbols[trillelementSym].draw(p, mag(), b1.width() - b2.x(), b2.y(), n);
+      symbols[trillSym].draw(p, mags, -b1.x(), 0);
+      symbols[trillelementSym].draw(p, mags, b1.width() - b2.x(), b2.y(), n);
       }
 
 //---------------------------------------------------------
@@ -48,7 +49,7 @@ void TrillSegment::draw(QPainter& p) const
 
 QRectF TrillSegment::bbox() const
       {
-      QRectF rr(symbols[trillSym].bbox(mag()));
+      QRectF rr(symbols[trillSym].bbox(magS()));
       QRectF r(0.0, rr.y(), pos2().x(), rr.height());
       return r;
       }

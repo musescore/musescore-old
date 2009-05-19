@@ -182,7 +182,7 @@ void Symbol::layout()
 
 void Symbol::draw(QPainter& p) const
       {
-      symbols[_sym].draw(p, mag());
+      symbols[_sym].draw(p, magS());
       }
 
 //---------------------------------------------------------
@@ -191,7 +191,7 @@ void Symbol::draw(QPainter& p) const
 
 QRectF Symbol::bbox() const
       {
-      return symbols[_sym].bbox(mag());
+      return symbols[_sym].bbox(magS());
       }
 
 //---------------------------------------------------------

@@ -82,7 +82,7 @@ void Accidental::setSubtype(int i)
                   {
                   s->setSym(leftparenSym);
                   addElement(s, 0.0, 0.0);
-                  double x = symbols[leftparenSym].width(mag());
+                  double x = symbols[leftparenSym].width(magS());
 
                   s = new Symbol(score());
                   switch(i) {

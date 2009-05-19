@@ -77,9 +77,9 @@ void Arpeggio::setHeight(double h)
 
 QRectF Arpeggio::bbox() const
       {
-      QRectF b = symbols[arpeggioSym].bbox();
+//      QRectF b = symbols[arpeggioSym].bboxX(magS());
 //      printf("====%f %f %f %f\n", b.x(), b.y(), b.height(), b.width());
-      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(mag()), _height);
+      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(magS()), _height);
       }
 
 //---------------------------------------------------------
@@ -97,17 +97,17 @@ void Arpeggio::draw(QPainter& p) const
       switch(subtype()) {
             case 0:
                   for (y = h1; y < _height+h1; y += h1)
-                        symbols[arpeggioSym].draw(p, 0.0, y);
+                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case 1:
-                  symbols[arpeggioarrowupSym].draw(p, 0.0, h2);
+                  symbols[arpeggioarrowupSym].draw(p, 1.0, 0.0, h2);
                   for (y = h2 + h1; y < _height + h1; y += h1)
-                        symbols[arpeggioSym].draw(p, 0.0, y);
+                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case 2:
                   for (y = h1; y < _height + h1 - h3; y += h1)
-                        symbols[arpeggioSym].draw(p, 0.0, y);
-                  symbols[arpeggioarrowdownSym].draw(p, 0.0, y);
+                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
+                  symbols[arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
                   break;
             }
       }

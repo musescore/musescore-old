@@ -152,7 +152,6 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void Score::doLayout()
       {
-      _spatiumMag = _spatium / (DPI * SPATIUM20);
       _needLayout = false;
 
       if (startLayout) {

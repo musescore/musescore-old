@@ -35,9 +35,9 @@ class Staff;
 
 struct InstrumentTemplate {
       QString group;
-      QString trackName;            // also used for track name
-      QTextDocument name;           ///< shown on first system
-      QTextDocument shortName;      ///< shown on followup systems
+      QString trackName;     ///< also used for track name
+      QString name;          ///< shown on first system
+      QString shortName;     ///< shown on followup systems
 
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
@@ -57,6 +57,8 @@ struct InstrumentTemplate {
       QList<Channel*> channel;
 
       InstrumentTemplate();
+      InstrumentTemplate(const InstrumentTemplate&);
+      ~InstrumentTemplate();
 
       void setPitchRange(const QString& s, char* a, char* b) const;
       void write(Xml& xml) const;

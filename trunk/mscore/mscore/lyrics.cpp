@@ -482,7 +482,7 @@ void Lyrics::layout()
       setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       Text::layout();
       double lh             = lineSpacing();
-      double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;
+      double noteHeadWidth2 = symbols[quartheadSym].width(magS()) * .5;
 
       Segment* seg   = segment();
       System* sys    = seg->measure()->system();

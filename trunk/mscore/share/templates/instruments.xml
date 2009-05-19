@@ -3806,7 +3806,7 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Woodwinds">
+   <instrument-group name="link-test">
       <ref>Violone</ref>
       </instrument-group>
    </museScore>
