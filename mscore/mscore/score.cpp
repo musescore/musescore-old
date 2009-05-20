@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: score.cpp,v 1.24 2006/04/12 14:58:10 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2008 Werner Schweer and others
 //

@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2009 Werner Schweer and others
 //
 //  Some Code inspired by "The JAZZ++ Midi Sequencer"
 //  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.

@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: beam.cpp,v 1.41 2006/09/15 09:34:57 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2008 Werner Schweer and others
 //

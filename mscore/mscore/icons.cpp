@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: icons.cpp,v 1.16 2006/03/02 17:08:34 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
@@ -75,17 +75,9 @@ QIcon keysIcon;
 
 QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
-      double _spatium = 80;
+      double mag  = .6 * (size/20.0) * PDPI / DPI;
+      QRectF bb   = sc.bbox(mag);
 
-      double mags = _spatium / (SPATIUM20 * DPI);
-      double mag  = (size/20.0) * 0.6 * mags * PDPI / DPI;
-
-      double mag1 = double(preferences.noteEntryIconHeight) / double(ICON_HEIGHT);
-      mag         = mag * mag1 * 10;
-      width  *= 10;
-      height *= 10;
-
-      QRectF bb = sc.bbox(mag * mags);
       qreal w   = bb.width();
       qreal h   = bb.height();
       qreal x   = (width  - w) * .5 - bb.x();
@@ -97,7 +89,7 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setFont(sc.font());
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
-      sc.draw(painter, mags, x, y);
+      sc.draw(painter, mag, x, y);
       painter.end();
       return QIcon(image);
       }

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
-//  $Id: repeatflag.cpp,v 1.00 2007/08/23 14:00:00 dikrau Exp $
+//  $Id$
 //
 //  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
 //

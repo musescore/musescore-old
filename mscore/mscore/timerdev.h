@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE
 //  Linux Music Editor
-//  $Id:$
+//  $Id$
 //
 //  Plenty of code borrowed from timer.c example in
 //  alsalib 1.0.7

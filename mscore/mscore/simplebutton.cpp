@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE
 //  Linux Music Editor
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2002-2007 by Werner Schweer and others
 //

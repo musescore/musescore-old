@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE
 //  Linux Music Score Editor
-//  $Id: xml.h,v 1.15 2006/04/05 08:15:12 wschweer Exp $
+//  $Id$
 //
-//  Copyright (C) 2004-2008 Werner Schweer and others
+//  Copyright (C) 2004-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.

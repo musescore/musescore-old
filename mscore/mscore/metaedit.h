@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: chordrest.h,v 1.4 2006/03/03 21:47:11 wschweer Exp $
+//  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.

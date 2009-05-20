@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: alsa.h,v 1.8 2006/03/03 21:47:11 wschweer Exp $
+//  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  AlsaDriver based on code from Fons Adriaensen (clalsadr.cc)
 //  Copyright (C) 2003 Fons Adriaensen

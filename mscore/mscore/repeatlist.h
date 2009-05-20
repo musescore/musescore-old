@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2009 Werner Schweer and others
 //

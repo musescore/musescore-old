@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: instrdialog.cpp,v 1.32 2006/03/13 21:35:59 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
@@ -137,6 +137,45 @@ void InstrumentTemplate::setPitchRange(const QString& s, char* a, char* b) const
       }
 
 //---------------------------------------------------------
+//   parseInstrName
+//---------------------------------------------------------
+
+static QString parseInstrName(const QString& name)
+      {
+      QString sName;
+      QDomDocument dom;
+      int line, column;
+      QString err;
+      if (!dom.setContent(name, false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            QString error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", qPrintable(error));
+            printf("   data:<%s>\n", qPrintable(name));
+            return QString();
+            }
+
+      for (QDomNode e = dom.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+                  QDomElement el = ee.toElement();
+                  QString tag(el.tagName());
+                  if (tag == "symbol") {
+                        QString name = el.attribute(QString("name"));
+                        if (name == "flat")
+                              sName += "b";
+                        else if (name == "sharp")
+                              sName += "#";
+                        }
+                  QDomText t = ee.toText();
+                  if (!t.isNull())
+                        sName += t.data();
+                  }
+            }
+      return sName;
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -174,9 +213,9 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             int i = val.toInt();
 
             if (tag == "name")
-                  name = val;
+                  name = Xml::htmlToString(e);
             else if (tag == "short-name")
-                  shortName = val;
+                  shortName = Xml::htmlToString(e);
             else if (tag == "description")
                   trackName = val;
             else if (tag == "staves")
@@ -250,7 +289,7 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             channel[0]->updateInitList();
             }
       if (trackName.isEmpty())
-            trackName = name;
+            trackName = parseInstrName(name);
       }
 
 //---------------------------------------------------------
@@ -303,7 +342,9 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
       QDomDocument doc;
       int line, column;
       QString err;
+
       bool rv = doc.setContent(&qf, false, &err, &line, &column);
+
       docName = qf.fileName();
       qf.close();
 

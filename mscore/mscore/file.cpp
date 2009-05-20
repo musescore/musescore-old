@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: file.cpp,v 1.70 2006/04/12 14:58:10 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2008 Werner Schweer and others
 //
@@ -1135,9 +1135,7 @@ bool Score::loadMsc(QString name)
       QDomDocument doc;
       int line, column;
       QString err;
-      QXmlSimpleReader reader;
-      QXmlInputSource  source(&f);
-      if (!doc.setContent(&source, &reader, &err, &line, &column)) {
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
             QString s;
             s.sprintf("error reading file %s at line %d column %d: %s\n",
                f.fileName().toLatin1().data(), line, column, err.toLatin1().data());

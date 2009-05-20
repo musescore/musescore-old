@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE
 //  Linux Music Score Editor
-//  $Id: xml.cpp,v 1.20 2006/04/05 08:15:12 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //

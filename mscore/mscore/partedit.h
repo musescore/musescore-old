@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: partedit.h,v 1.2 2006/03/02 17:08:40 wschweer Exp $
+//  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.

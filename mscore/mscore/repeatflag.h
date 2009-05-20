@@ -2,9 +2,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2009 Werner Schweer (ws@seh.de)
 //
-//  $Id: repeatflag.h,v 1.00 2007/09/26 23:00:00 dikrau Exp $
+//  $Id$
 //
 //  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
 //
