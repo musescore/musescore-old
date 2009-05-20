@@ -1,6 +1,11 @@
 19.may (ws)
       - implement "ref" tag in instruments.xml
       - get rid of global _spatiumMag
+      (db)
+      - update handbook pdf's
+      - updated Galician translation from Xosé
+      - updated French translation from JLWaltener
+      - bar line through all staves in bach-bc2 demo
 18.may (ws)
       - fixed saving measures with whole measure rest in voice 0
 17.may (ws)
