@@ -4,8 +4,8 @@
 
 set (CMAKE_SYSTEM_NAME "Windows")
 
-set (CROSS C:/Qt/2009.01/mingw)
-set (CROSSQT C:/Qt/2009.01/qt)
+set (CROSS C:/mingw)
+set (CROSSQT C:/Qt/2009.02/qt)
 
 set (CMAKE_C_COMPILER     ${CROSS}/bin/gcc.exe)
 set (CMAKE_CXX_COMPILER   ${CROSS}/bin/g++.exe)
@@ -44,7 +44,7 @@ set (QT_mingw_LIBRARIES
     QtScript4
     QtSvg4
     QtUiTools
-    QtUiToolsd
+    ###QtUiToolsd
     QtGui4
     QtCore4
     QtXml4
