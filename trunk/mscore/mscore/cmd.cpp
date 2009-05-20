@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: cmd.cpp,v 1.74 2006/04/12 14:58:10 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2008 Werner Schweer and others
 //
@@ -550,7 +550,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
 
       // go to next ChordRest
 
-      cr = _is.cr;
+      cr           = _is.cr;
       int nextTick = cr->tick() + cr->ticks();
       Segment* seg = cr->segment();
       int track    = cr->track();
@@ -560,7 +560,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             if (!seg)
                   break;
             if (seg->measure()->multiMeasure() < 0)
-                  continue;
+                  break;
             Element* e = seg->element(track);
             if (e && e->isChordRest() && e->tick() == nextTick) {
                   cr = static_cast<ChordRest*>(e);
@@ -574,15 +574,37 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                               break;
                         }
                   int len;
-                  if (s)
+                  if (s) {
                         len = s->tick() - nextTick;
+                        if (len > 0)
+                              cr = setRest(nextTick, len, track);
+                        else
+                              printf("next chord overlaps current chord\n");
+                        }
                   else {
                         Measure* m = cr->measure();
-                        int etick = m->tick() + m->tickLen();
-                        len = etick - nextTick;
+                        int etick  = m->tick() + m->tickLen();
+                        len        = etick - nextTick;
+                        if (len > 0)
+                              cr = setRest(nextTick, len, track);
+                        else {
+                              printf("go to next measure\n");
+                              m = m->nextMeasure();
+                              if (m->multiMeasure())
+                                    break;
+                              for (Segment* s = m->first(); s; s = s->next()) {
+                                    if (s->subtype() == Segment::SegChordRest) {
+                                          //
+                                          // we point current chord rest to voice 0
+                                          // because there is no element at track
+                                          //
+                                          cr = static_cast<ChordRest*>(s->element((track/VOICES)*VOICES));
+                                          break;
+                                          }
+                                    }
+                              }
                         }
-                  if (len)
-                        cr = setRest(nextTick, len, track);
+                  break;
                   }
             }
 

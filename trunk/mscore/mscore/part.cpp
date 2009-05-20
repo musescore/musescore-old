@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: part.cpp,v 1.14 2006/03/28 14:58:58 wschweer Exp $
+//  $Id$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
@@ -133,12 +133,59 @@ void Part::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   parseInstrName
+//---------------------------------------------------------
+
+static void parseInstrName(QTextDocument* doc, const QString& name)
+      {
+      QTextCursor cursor(doc);
+      QTextCharFormat f = cursor.charFormat();
+      QTextCharFormat sf(f);
+#ifdef Q_WS_MAC
+      QFont font("MScore1 20");
+#else
+      QFont font("MScore1");
+#endif
+      sf.setFont(font);
+
+      QDomDocument dom;
+      int line, column;
+      QString err;
+      if (!dom.setContent(name, false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            QString error = err + "\n at line " + ln + " column " + col;
+            printf("parse instrument name: %s\n", qPrintable(error));
+            printf("   data:<%s>\n", qPrintable(name));
+            return;
+            }
+
+      for (QDomNode e = dom.documentElement(); !e.isNull(); e = e.nextSibling()) {
+            for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+                  QDomElement de1 = ee.toElement();
+                  QString tag(de1.tagName());
+                  if (tag == "symbol") {
+                        QString name = de1.attribute(QString("name"));
+                        if (name == "flat")
+                              cursor.insertText(QString(0xe10d), sf);
+                        else if (name == "sharp")
+                              cursor.insertText(QString(0xe10c), sf);
+                        }
+                  QDomText t = ee.toText();
+                  if (!t.isNull())
+                        cursor.insertText(t.data(), f);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   setLongName
 //---------------------------------------------------------
 
-void Part::setLongName(const QString& s)
+void Part::setLongName(const QString& name)
       {
-      _longName->setText(s);
+      parseInstrName(_longName->doc(), name);
       }
 
 //---------------------------------------------------------
@@ -147,7 +194,7 @@ void Part::setLongName(const QString& s)
 
 void Part::setShortName(const QString& s)
       {
-      _shortName->setText(s);
+      parseInstrName(_shortName->doc(), s);
       }
 
 void Part::setLongNameHtml(const QString& s)

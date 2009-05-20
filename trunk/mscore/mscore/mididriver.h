@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2009 Werner Schweer and others
 //
 //  AlsaDriver based on code from Fons Adriaensen (clalsadr.cc)
 //  Copyright (C) 2003 Fons Adriaensen
