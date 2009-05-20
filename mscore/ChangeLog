@@ -1,3 +1,7 @@
+20.may (ws)
+      - config keyword expansion for svn
+      - change "make revision"; revision is now a string and handled as
+        a mscore.qrc ressource
 19.may (ws)
       - implement "ref" tag in instruments.xml
       - get rid of global _spatiumMag

@@ -177,7 +177,7 @@ add_executable ( ${ExecutableName}
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       repeatproperties.cpp box.cpp measurebase.cpp
       instrtemplate.cpp boxproperties.cpp
-      newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
+      newwizard.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp

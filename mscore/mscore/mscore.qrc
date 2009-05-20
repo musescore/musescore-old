@@ -65,6 +65,7 @@
       <file alias="images/pending.svg">data/pending.svg</file>
       <file alias="images/breakpoint.svg">data/breakpoint.svg</file>
       <file alias="images/location.svg">data/location.svg</file>
+      <file>revision.h</file>
    </qresource>
 </RCC>
 

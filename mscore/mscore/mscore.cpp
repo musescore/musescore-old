@@ -88,6 +88,8 @@ static const char* styleFile;
 static QString localeName;
 bool useFactorySettings = false;
 
+QString revision;
+
 //---------------------------------------------------------
 //   NoteButton
 //---------------------------------------------------------
@@ -162,8 +164,6 @@ static QString getSharePath()
 
 static void printVersion(const char* prog)
       {
-      extern int revision;
-
 #ifdef MSCORE_UNSTABLE
       cout << prog << ": Linux Music Score Editor\nUnstable Prerelease for Version " << VERSION
            << "; Build " << revision << endl;
@@ -1476,6 +1476,11 @@ void setMscoreLocale(QString localeName)
 
 int main(int argc, char* argv[])
       {
+      QFile f(":/revision.h");
+      f.open(QIODevice::ReadOnly);
+      revision = QString(f.readAll());
+      f.close();
+
       QtSingleApplication app("mscore", argc, argv);
 
 //      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
@@ -2219,7 +2224,6 @@ void MuseScore::about()
 
 AboutBoxDialog::AboutBoxDialog()
       {
-      extern int revision;
       setupUi(this);
 #ifdef MSCORE_UNSTABLE
       versionLabel->setText(tr("Unstable Prerelease for Version: ") + VERSION);
