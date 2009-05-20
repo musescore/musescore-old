@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.10">
+<museScore version="1.11">
   <Mag>0.75</Mag>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <xoff>0.423333</xoff>
+  <yoff>0.423333</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -27,6 +27,20 @@
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
     </Style>
+  <TextStyle name="Measure Number">
+    <family>Times New Roman</family>
+    <size>8</size>
+    <bold>0</bold>
+    <italic>0</italic>
+    <underline>0</underline>
+    <align>14</align>
+    <offsetType>1</offsetType>
+    <sizeIsSpatiumDependent>0</sizeIsSpatiumDependent>
+    <xoffset>0</xoffset>
+    <yoffset>-1</yoffset>
+    <rxoffset>0</rxoffset>
+    <ryoffset>0</ryoffset>
+    </TextStyle>
   <showInvisible>0</showInvisible>
   <showFrames>1</showFrames>
   <page-layout>
@@ -70,16 +84,18 @@
         </keylist>
       <bracket type="0" span="4"/>
       <bracket type="-1" span="0"/>
+      <barLineSpan>9</barLineSpan>
       </Staff>
     <trackName>Trumpet             </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Trumpet</p></body></html>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <text>Trumpet</text>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="42"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -101,13 +117,14 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Flute</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Flute</p></body></html>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <text>Flute</text>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="74"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -129,13 +146,14 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Oboe                </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Oboe</p></body></html>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <text>Oboe</text>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="68"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -157,13 +175,14 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violin</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violin</p></body></html>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <text>Violin</text>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="40"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -185,14 +204,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violino 1.  di ripieno  </trackName>
     <name>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 1.</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Violino 1.</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">di ripieno</span></p></body></html>
+        </html-data>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="40"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -214,14 +239,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violino 2.  di ripieno</trackName>
     <name>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 2.</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Violino 2.</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">di ripieno</span></p></body></html>
+        </html-data>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="40"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -243,14 +274,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Viola  di ripieno    </trackName>
     <name>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Viola</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Viola</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">di ripieno</span></p></body></html>
+        </html-data>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="41"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -272,14 +309,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violone  di ripieno  </trackName>
     <name>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violone</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Violone</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">di ripieno</span></p></body></html>
+        </html-data>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="42"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -301,14 +344,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violoncello  e Cembalo</trackName>
     <name>
+      <subtype>InstrumentLong</subtype>
+      <style>9</style>
+      <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violoncello</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">e Cembalo</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Violoncello</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">e Cembalo</span></p></body></html>
+        </html-data>
       </name>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="43"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -587,7 +636,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>Title</subtype>
         <style>2</style>
-        <text>Brandenburg Concerto no. 2 in F Major</text>
+        <text>Brandenburg Concerto No. 2 in F Major</text>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
@@ -766,9 +815,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>84</pitch>
@@ -1569,9 +1618,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>33</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="83" tpc="19"/>
@@ -2055,9 +2104,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>49</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="88" tpc="18"/>
@@ -2231,9 +2280,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -2344,9 +2393,9 @@ p, li { white-space: pre-wrap; }
     <Measure number="35">
       <Chord>
         <ticklen>960</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>79</pitch>
@@ -3209,6 +3258,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="51">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.04"/>
         <style>12</style>
@@ -3454,6 +3504,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="-7"/>
         <tick>104160</tick>
@@ -3859,9 +3910,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>104</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="83" tpc="19"/>
@@ -4223,6 +4274,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.14"/>
         <tick>136800</tick>
@@ -4286,6 +4338,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.14"/>
         <tick>138960</tick>
@@ -4352,6 +4405,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-0.5" y="0.64"/>
         <style>12</style>
@@ -4416,6 +4470,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.9" y="0.74"/>
         <style>12</style>
@@ -5467,6 +5522,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>179520</tick>
@@ -6018,6 +6074,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.14"/>
         <style>12</style>
@@ -6140,6 +6197,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="109">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -6200,6 +6258,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="110">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.14"/>
         <style>12</style>
@@ -6372,6 +6431,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="113">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -7339,9 +7399,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>216</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -7382,9 +7442,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>217</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
@@ -7771,9 +7831,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>228</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="83" tpc="19"/>
@@ -9566,9 +9626,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>293</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -10549,6 +10609,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>94560</tick>
@@ -10763,6 +10824,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -10849,6 +10911,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="53">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="-0.7" y="0.54"/>
         <style>12</style>
@@ -11125,6 +11188,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="56">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.14"/>
         <tick>107040</tick>
@@ -11312,9 +11376,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>354</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
@@ -11404,9 +11468,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>356</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -12528,6 +12592,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="74">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.74"/>
         <style>12</style>
@@ -13268,9 +13333,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>427</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
@@ -14156,6 +14221,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>178560</tick>
@@ -15030,6 +15096,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="107">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.74"/>
         <tick>203880</tick>
@@ -15250,6 +15317,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="109">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -15336,6 +15404,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="110">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.14"/>
         <style>12</style>
@@ -15506,6 +15575,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="112">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.14"/>
         <style>12</style>
@@ -15958,9 +16028,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>517</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -16632,9 +16702,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>540</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -16675,9 +16745,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>541</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
@@ -16919,9 +16989,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>548</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
@@ -18383,9 +18453,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="73" tpc="9"/>
         </Chord>
@@ -18612,9 +18682,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>605</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -19593,6 +19663,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -19791,6 +19862,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="53">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.44"/>
         <style>12</style>
@@ -19855,6 +19927,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="54">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-1.9" y="1.94"/>
         <style>12</style>
@@ -19941,12 +20014,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.64"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.84"/>
         <tick>105600</tick>
@@ -20219,9 +20294,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>661</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
@@ -20264,9 +20339,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>662</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
@@ -20340,9 +20415,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>663</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
@@ -21129,6 +21204,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>138600</tick>
@@ -21349,6 +21425,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.5" y="2.44"/>
         <style>12</style>
@@ -21579,9 +21656,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
@@ -21783,9 +21860,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>714</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -22566,6 +22643,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="94">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.44"/>
         <tick>179520</tick>
@@ -23746,6 +23824,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="109">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.04"/>
         <style>12</style>
@@ -23912,6 +23991,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="111">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-1.3" y="1.94"/>
         <style>12</style>
@@ -23998,6 +24078,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="112">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="-0.06"/>
         <tick>213840</tick>
@@ -24424,9 +24505,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>806</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -25096,9 +25177,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>829</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -25139,9 +25220,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>830</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
@@ -25189,9 +25270,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>831</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
@@ -27505,9 +27586,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>913</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -28746,12 +28827,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="51">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.14"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="-7"/>
         <style>12</style>
@@ -28930,6 +29013,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="53">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -29070,12 +29154,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.34"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.34"/>
         <tick>105600</tick>
@@ -29342,9 +29428,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>980</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
@@ -29389,9 +29475,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>981</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
@@ -29658,9 +29744,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>360</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>991</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
@@ -30585,6 +30671,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="2.94"/>
         <tick>138720</tick>
@@ -30658,6 +30745,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="74">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="2.74"/>
         <style>12</style>
@@ -31502,9 +31590,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1061</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
@@ -32981,9 +33069,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1113</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="68" tpc="10"/>
@@ -33415,6 +33503,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="108">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.84"/>
         <style>12</style>
@@ -33593,6 +33682,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="110">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.74"/>
         <style>12</style>
@@ -33733,6 +33823,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="112">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.24"/>
         <style>12</style>
@@ -33845,12 +33936,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="113">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-1.8" y="-7"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.24"/>
         <tick>216240</tick>
@@ -34206,9 +34299,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1155</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -34880,9 +34973,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1178</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -34923,9 +35016,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1179</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
@@ -35924,6 +36017,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.24"/>
         <tick>57600</tick>
@@ -36014,6 +36108,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <tick>61440</tick>
         <style>12</style>
@@ -36385,9 +36480,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1224</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
@@ -36396,6 +36491,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>74880</tick>
@@ -36470,6 +36566,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="40">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>76800</tick>
@@ -36556,6 +36653,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.74"/>
         <tick>78720</tick>
@@ -36626,6 +36724,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.94"/>
         <tick>80640</tick>
@@ -36712,6 +36811,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>82560</tick>
@@ -36782,6 +36882,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>84480</tick>
@@ -36868,6 +36969,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="45">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.04"/>
         <tick>86400</tick>
@@ -36938,6 +37040,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.04"/>
         <tick>88320</tick>
@@ -37024,6 +37127,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="47">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.84"/>
         <tick>90240</tick>
@@ -37297,6 +37401,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.94"/>
         <style>12</style>
@@ -37552,6 +37657,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="57">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.44"/>
         <tick>109440</tick>
@@ -37708,9 +37814,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1257</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
@@ -37806,6 +37912,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="67">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.34"/>
         <tick>128640</tick>
@@ -37896,6 +38003,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="69">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="2.54"/>
         <tick>132480</tick>
@@ -38182,6 +38290,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -38252,6 +38361,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="74">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>142080</tick>
@@ -38717,9 +38827,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1284</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
@@ -38993,6 +39103,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="2.74"/>
         <tick>178560</tick>
@@ -39156,6 +39267,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="96">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>184560</tick>
@@ -39426,9 +39538,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>trill</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1303</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="68" tpc="10"/>
@@ -40008,6 +40120,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="115">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -40266,9 +40379,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>ustaccatissimo</subtype>
-          </Attribute>
+          </Articulation>
         <Beam>1325</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
@@ -41541,6 +41654,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.54"/>
         <tick>57600</tick>
@@ -41694,6 +41808,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="33">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <style>12</style>
         </Dynamic>
@@ -41884,6 +41999,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.44"/>
         <tick>74880</tick>
@@ -41942,6 +42058,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="40">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>76800</tick>
@@ -42028,6 +42145,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.04"/>
         <tick>78720</tick>
@@ -42098,6 +42216,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.44"/>
         <tick>80640</tick>
@@ -42184,6 +42303,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.84"/>
         <tick>82560</tick>
@@ -42254,6 +42374,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.24"/>
         <tick>84480</tick>
@@ -42340,6 +42461,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="45">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.94"/>
         <tick>86400</tick>
@@ -42410,6 +42532,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.34"/>
         <tick>88320</tick>
@@ -42496,6 +42619,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="47">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.44"/>
         <tick>90240</tick>
@@ -42658,6 +42782,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -42930,6 +43055,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="57">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>109440</tick>
@@ -43108,6 +43234,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="67">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.14"/>
         <tick>128640</tick>
@@ -43261,6 +43388,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="70">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.34"/>
         <tick>133200</tick>
@@ -43365,6 +43493,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>136800</tick>
@@ -43475,6 +43604,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.84"/>
         <tick>142560</tick>
@@ -43650,6 +43780,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="80">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="-7"/>
         <style>12</style>
@@ -44025,6 +44156,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="3.24"/>
         <tick>178560</tick>
@@ -44140,6 +44272,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="95">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>182160</tick>
@@ -44718,12 +44851,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="107">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="-8.4"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.34"/>
         <style>12</style>
@@ -44951,6 +45086,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="115">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -46273,6 +46409,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>134221824</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.04"/>
         <tick>57600</tick>
@@ -46363,6 +46500,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.34"/>
         <tick>61440</tick>
@@ -46821,6 +46959,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.24"/>
         <tick>74880</tick>
@@ -46879,6 +47018,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="40">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>76800</tick>
@@ -46965,6 +47105,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.24"/>
         <tick>78720</tick>
@@ -47035,6 +47176,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.94"/>
         <tick>80640</tick>
@@ -47121,6 +47263,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="-0.36"/>
         <tick>82560</tick>
@@ -47191,6 +47334,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.64"/>
         <tick>84480</tick>
@@ -47277,6 +47421,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="45">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.54"/>
         <tick>86400</tick>
@@ -47347,6 +47492,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>88320</tick>
@@ -47433,6 +47579,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="47">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.04"/>
         <tick>90240</tick>
@@ -47837,6 +47984,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="57">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>109440</tick>
@@ -48004,6 +48152,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="67">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.94"/>
         <tick>128640</tick>
@@ -48157,6 +48306,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="70">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.04"/>
         <tick>132960</tick>
@@ -48261,6 +48411,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.94"/>
         <style>12</style>
@@ -48369,6 +48520,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.04"/>
         <style>12</style>
@@ -49095,6 +49247,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.44"/>
         <tick>178560</tick>
@@ -49210,6 +49363,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="95">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <tick>182400</tick>
@@ -50154,6 +50308,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="115">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.8" y="1.04"/>
         <style>12</style>
@@ -51671,6 +51826,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>655408</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>57600</tick>
@@ -51810,6 +51966,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="2.44"/>
         <tick>60720</tick>
@@ -52314,6 +52471,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.44"/>
         <tick>74880</tick>
@@ -52378,6 +52536,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="40">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.74"/>
         <tick>76800</tick>
@@ -52440,6 +52599,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>78720</tick>
@@ -52498,6 +52658,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>80640</tick>
@@ -52560,6 +52721,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.44"/>
         <tick>82800</tick>
@@ -52618,6 +52780,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.44"/>
         <tick>84480</tick>
@@ -52680,6 +52843,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="45">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.74"/>
         <tick>86400</tick>
@@ -52738,6 +52902,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.74"/>
         <tick>88320</tick>
@@ -52852,6 +53017,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="47">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.34"/>
         <tick>90240</tick>
@@ -53549,6 +53715,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="67">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="2.74"/>
         <tick>128640</tick>
@@ -53867,6 +54034,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -53975,6 +54143,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-0.5" y="1.14"/>
         <style>12</style>
@@ -55053,6 +55222,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>178560</tick>
@@ -55204,6 +55374,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="95">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.54"/>
         <tick>182160</tick>
@@ -56067,6 +56238,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="107">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="-8"/>
         <tick>204000</tick>
@@ -56074,6 +56246,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.14"/>
         <style>12</style>
@@ -56285,6 +56458,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="113">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-2" y="1.94"/>
         <style>12</style>
@@ -56451,6 +56625,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="115">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.54"/>
         <style>12</style>
@@ -59264,6 +59439,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>2097184</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.14"/>
         <tick>78720</tick>
@@ -59322,6 +59498,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="42">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>2097184</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.94"/>
         <tick>80640</tick>
@@ -59384,6 +59561,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="0.54"/>
         <tick>82560</tick>
@@ -59442,6 +59620,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="1.04"/>
         <tick>84480</tick>
@@ -59504,6 +59683,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="45">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.04"/>
         <tick>86400</tick>
@@ -59580,6 +59760,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <Dynamic>
         <velocity>50</velocity>
+        <dynType>0</dynType>
         <subtype>pp</subtype>
         <offset x="0" y="0.84"/>
         <tick>88320</tick>
@@ -59694,6 +59875,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="47">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.44"/>
         <tick>90240</tick>
@@ -60250,6 +60432,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="56">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.44"/>
         <style>12</style>
@@ -61222,6 +61405,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="72">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.44"/>
         <style>12</style>
@@ -61402,6 +61586,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="75">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -62570,6 +62755,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <tick>178560</tick>
@@ -62721,6 +62907,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="95">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="0" y="0.74"/>
         <tick>182160</tick>
@@ -63674,6 +63861,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="107">
       <Dynamic>
         <velocity>60</velocity>
+        <dynType>0</dynType>
         <subtype>p</subtype>
         <offset x="0" y="1.94"/>
         <style>12</style>
@@ -64028,6 +64216,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="113">
       <Dynamic>
         <velocity>90</velocity>
+        <dynType>0</dynType>
         <subtype>f</subtype>
         <offset x="-1.6" y="1.94"/>
         <style>12</style>
@@ -64390,5 +64579,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>8</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
