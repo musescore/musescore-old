@@ -21,12 +21,12 @@
 install(FILES
       test.js
       test2.js
-      test3.js
+      createscore.js
       notenames.js
       colornotes.js
       fonttest.js
-      test4.js
-      test4.ui
+      removenotes.js
+      removenotes.ui
       break4.js
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )

@@ -68,7 +68,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.NoteNames',
+      menu: 'Plugins.Note Names',
       init: init,
       run:  run
       };

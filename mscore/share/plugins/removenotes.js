@@ -43,7 +43,7 @@ var form;
 function run()
       {
       var loader = new QUiLoader(null);
-      var file   = new QFile(pluginPath + "/test4.ui");
+      var file   = new QFile(pluginPath + "/removenotes.ui");
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
       form = loader.load(file, null);
       form.buttonBox.accepted.connect(accept);
@@ -95,7 +95,7 @@ function accept()
       }
 
 var mscorePlugin = {
-      menu: 'Arrange.RemoveNotes',
+      menu: 'Plugins.Remove Notes',
       init: init,
       run:  run
       };

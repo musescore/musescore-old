@@ -72,7 +72,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.CreateScore',
+      menu: 'Plugins.Create Score',
       init: init,
       run:  run
       };
