@@ -70,7 +70,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.FontTest',
+      menu: 'Plugins.Font Test',
       init: init,
       run:  run
       };
