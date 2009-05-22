@@ -1565,6 +1565,7 @@ if (debugMode)
             }
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Spatium min;
+            Spatium extra;
             switch(first()->subtype()) {
                   case Segment::SegClef:
                         min = score()->styleS(ST_clefLeftMargin);
@@ -1577,14 +1578,20 @@ if (debugMode)
                         min = score()->styleS(ST_timesigLeftMargin);
                         break;
                   case Segment::SegChordRest:
-                        min = score()->styleS(ST_barNoteDistance);
+                        //
+                        // allow accidentals of chord to eat up extra
+                        // space from left margin of measure
+                        //
+                        min   = score()->styleS(ST_barNoteDistance);
+                        extra = min * .5;
                         break;
                   case Segment::SegGrace:
                         min = score()->styleS(ST_barNoteDistance) * score()->styleD(ST_graceNoteMag);
                         break;
                   }
             spaces[0][staffIdx].setMin(point(min));
-            spaces[0][staffIdx].setExtra(0);
+            spaces[0][staffIdx].setExtra(point(extra));
+
             spaces[0][staffIdx].setValid(true);
             }
 
@@ -1610,14 +1617,11 @@ printf("\n");
                         if (spaces[tseg][staffIdx].valid())
                               break;
                         }
-                  if (tseg == 0) {
-//                        if (spaces[tseg][staffIdx].min() < extra)
-//                              spaces[tseg][staffIdx].setMin(extra);
-                        }
-                  else
+                  if (tseg)
                         spaces[tseg][staffIdx].addMin(extra);
                   }
             }
+
 #if 0
 printf("move space2:");
 for (int i = 0; i < segs; ++i)
@@ -1634,8 +1638,13 @@ printf("\n");
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (!spaces[seg][staffIdx].valid())
                         continue;
-                  double w = spaces[seg][staffIdx].min();
-                  double eew = (seg == 0) ? spaces[1][staffIdx].extra() : 0.0;
+                  double w   = spaces[seg][staffIdx].min();
+                  double eew = 0;
+                  if (seg == 0) {
+                        eew = spaces[1][staffIdx].extra() - spaces[0][staffIdx].extra();
+                        if (eew < 0.0)
+                              eew = 0;
+                        }
                   for (int nseg = seg+1; nseg < segs+1; ++nseg) {
                         if (spaces[nseg][staffIdx].valid())
                               break;

@@ -3,6 +3,8 @@
       - resize preferences dialog to fix on screen
       - Fix plugin names and menu item names
 20.may (ws)
+      - layout: allow accidentals to use some space from left margin
+        of measure
       - config keyword expansion for svn
       - change "make revision"; revision is now a string and handled as
         a mscore.qrc ressource

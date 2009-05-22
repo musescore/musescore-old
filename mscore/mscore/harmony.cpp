@@ -348,6 +348,7 @@ const ChordDescription Harmony::chordList[] = {
 /*60*/      { 60, "7(Blues)",       0, 0,                                                HChord("C E G Bb") },
             { 64, "7",              "dominant", 0,                                       HChord("C E G Bb") },        // dominant-seventh does not exist in musicXML
             { 64, "7",              "dominant-seventh", 0,                               HChord("C E G Bb") },        // dominant-seventh is kept for backward compatibility
+
             { 65, "13",             "dominant-13th", 0,                                  HChord("C E G Bb D F A") },  // dominant 13th
             { 66, "7b13",           "dominant", "addb13",                                HChord("C E G Ab Bb") },
             { 67, "7#11",           "dominant", "add#11",                                HChord("C E F# G Bb") },
@@ -469,7 +470,6 @@ const ChordDescription Harmony::chordList[] = {
             { 186, "sus2",          "suspended-second", 0,                               HChord("C D G") },      // suspended 2nd chord
             { 187, "maddb13",       "minor", "addb13",                                   HChord("C Eb Ab") },
             { 188, "#13",           "major", "add#13",                                   HChord("C E G A#") },
-            // { 189, "#11#13",     "major", "add#11 add#13",                            HChord("C E G F# A#") },
             { 189, "add#11#13",     "major", "add#11 add#13",                            HChord("C E G F# A#") },
 
 /*190*/     { 190, "add#13",        "major", "add#13",                                   HChord("C E G A#") },
@@ -479,14 +479,9 @@ const ChordDescription Harmony::chordList[] = {
             { 194, "Maj11",         "major-11th", 0,                                     HChord("C E G B D F") },  // major 11th
             { 195, "Tristan",       "tristan", 0,                                        HChord("C F# A# D") },    // Tristan
 
-            { 64,  "7",             "dominant", 0,                                       HChord("C E G Bb") },     // dominant-seventh
-            { 128, "7sus4",         "suspended-fourth", "add7",                          HChord("C F G Bb")   },
-
-//            { 146, "7sus#9",        "suspended-fourth", "add7 add#9",                  HChord("C F G Bb Eb") },
             { 196, "m7add11",       "minor-seventh", "add11",                            HChord("C Eb F G Bb") },
             { 197, "Maj7add13",     "major-seventh", "add13",                            HChord("C E G A B") },
             { 198, "madd9",         "minor", "add9",                                     HChord("C D Eb G") },
-            { 18,  "mMaj7",         "major-minor", 0,                                    HChord("C Eb G B") },     // minor major 7th = major minor 7th
             { 199, "m9Maj7",        "major-minor", "add9",                               HChord("C Eb G B D") },
 /* 40 */    { 200, "5",             "pedal", "add5",                                     HChord("C G") },
             { 201, "m11b5",         "minor-11th", "altb5",                               HChord("C Eb Gb Bb D F") },
