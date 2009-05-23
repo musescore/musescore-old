@@ -692,6 +692,7 @@ class Score : public QObject {
       void loadStyle();
       void saveStyle();
       void textStyleChanged(const QVector<TextStyle*>&s);
+      void spatiumChanged(double oldValue, double newValue);
 
       void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;

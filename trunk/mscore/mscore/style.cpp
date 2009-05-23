@@ -203,10 +203,10 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics odd lines"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 7),
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics even lines"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 7),
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Fingering"), ff,  8, false, false, false,
          ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
@@ -466,14 +466,17 @@ void setDefaultStyle()
 
 QFont TextStyle::font(double _spatium) const
       {
+      double m = size;
+
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);
-      if (sizeIsSpatiumDependent)
-            f.setPointSizeF(size * _spatium / (SPATIUM20 * DPI));
-      else
-            f.setPointSizeF(size);
       f.setUnderline(underline);
+
+      if (sizeIsSpatiumDependent)
+            m *= _spatium / ( SPATIUM20 * DPI);
+
+      f.setPointSizeF(m);
       return f;
       }
 
@@ -488,10 +491,12 @@ QFont TextStyle::fontPx(double _spatium) const
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);
-      if (sizeIsSpatiumDependent)
-            m = m * _spatium / (SPATIUM20 * DPI);
-      f.setPixelSize(lrint(m));
       f.setUnderline(underline);
+
+      if (sizeIsSpatiumDependent)
+            m *= _spatium / (SPATIUM20 * DPI);
+
+      f.setPixelSize(lrint(m));
       return f;
       }
 

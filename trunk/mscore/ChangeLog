@@ -1,3 +1,7 @@
+23.may (ws)
+      - resize spatium dependend text when changing spatium unit; this does
+        only work for simple text
+      - make lyrics size spatium dependent
 22.may (db)
       - update French handbook
       - resize preferences dialog to fix on screen

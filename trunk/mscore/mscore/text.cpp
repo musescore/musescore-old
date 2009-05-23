@@ -830,6 +830,19 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
       }
 
 //---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void TextB::spatiumChanged(double oldValue, double newValue)
+      {
+      if (!_sizeIsSpatiumDependent)
+            return;
+      TextStyle* style = score()->textStyle(_textStyle);
+      if (textBase()->isSimpleText(style, oldValue))
+            setDefaultFont(style->font(newValue));
+      }
+
+//---------------------------------------------------------
 //   readProperties
 //---------------------------------------------------------
 
