@@ -2020,6 +2020,31 @@ void Score::textStyleChanged(const QVector<TextStyle*>&style)
       }
 
 //---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void Score::spatiumChanged(double oldValue, double newValue)
+      {
+      foreach(Element* e, _gel)
+            e->spatiumChanged(oldValue, newValue);
+      for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
+            mb->spatiumChanged(oldValue, newValue);
+      foreach(System* s, *systems()) {
+            foreach(SysStaff* ss, *s->staves()) {
+                  if (ss->instrumentName)
+                        ss->instrumentName->spatiumChanged(oldValue, newValue);
+                  }
+            }
+      if (rights)
+            rights->spatiumChanged(oldValue, newValue);
+      foreach(Page* p, pages()) {
+            if (p->pageNo())
+                  p->pageNo()->spatiumChanged(oldValue, newValue);
+            }
+
+      }
+
+//---------------------------------------------------------
 //   getCreateMeasure
 //    - return Measure for tick
 //    - create new Measure(s) if there is no measure for

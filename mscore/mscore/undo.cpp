@@ -1935,8 +1935,8 @@ void ChangeUserMirror::flip()
 
 ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, double s)
       {
-      score = cs;
-      pf = new PageFormat(*p);
+      score   = cs;
+      pf      = new PageFormat(*p);
       spatium = s;
       }
 
@@ -1956,6 +1956,7 @@ void ChangePageFormat::flip()
 
       *(score->pageFormat()) = *pf;
       score->setSpatium(spatium);
+      score->spatiumChanged(os, spatium);
 
       *pf     = f;
       spatium = os;

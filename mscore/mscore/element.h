@@ -240,6 +240,7 @@ class Element {
             }
 
       virtual void layout();
+      virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
       virtual void resetMode() {}
 
       // debug functions

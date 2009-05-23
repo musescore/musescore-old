@@ -195,6 +195,7 @@ class TextB : public Element {
       QTextCursor* getCursor() const { return cursor; }
 
       virtual void textStyleChanged(const QVector<TextStyle*>&s);
+      virtual void spatiumChanged(double oldValue, double newValue);
       virtual void setTextStyle(int);
       int textStyle() const                 { return _textStyle; }
       };
