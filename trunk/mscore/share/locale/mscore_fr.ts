@@ -96,8 +96,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1831 revised JLWaltener 19/05/2009 - QT Linguist v4.5.1</translatorcomment>
-        <translation>Révision : 1831</translation>
+        <translatorcomment>r1843 revised JLWaltener 23/05/2009 - QT Linguist v4.5.1</translatorcomment>
+        <translation>Révision : 1843</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5108,63 +5108,63 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Format MuseScore compressé (*.mscz)</translation>
+        <translation>Format MuseScore compressé (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">Format MuseScore (*.mscx)</translation>
+        <translation>Format MuseScore (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">Format MusicXML (*.xml)</translation>
+        <translation>Format MusicXML (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">Format MusicXML Compressé (*.mxl)</translation>
+        <translation>Format MusicXML Compressé (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">Fichier Midi Standard (*.mid)</translation>
+        <translation>Fichier Midi Standard (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">Fichier PDF  (*.pdf)</translation>
+        <translation>Fichier PDF  (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">Fichier PostScript (*.ps)</translation>
+        <translation>Fichier PostScript (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">Image Bitmap Graphic PNG (*.png)</translation>
+        <translation>Image Bitmap Graphic PNG (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Image Scalable Vector Graphic (*.svg)</translation>
+        <translation>Image Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Format Lilypond (*.ly)</translation>
+        <translation>Format Lilypond (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished">Format Audio Wave (*.wav)</translation>
+        <translation>Format Audio Wave (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished">Format Audio Flac (*.flac)</translation>
+        <translation>Format Audio Flac (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished">Format Audio Ogg Vorbis (*.ogg)</translation>
+        <translation>Format Audio Ogg Vorbis (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished">MuseScore : Enregistrer sous</translation>
+        <translation>MuseScore : Enregistrer sous</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore : Enregistrer une copie</translation>
+        <translation>MuseScore : Enregistrer une copie</translation>
     </message>
 </context>
 <context>
