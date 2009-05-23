@@ -149,7 +149,7 @@ static const char* elementNames[] = {
 //   spatiumChanged
 //---------------------------------------------------------
 
-void Element::spatiumChanged(double oldValue, double newValue);
+void Element::spatiumChanged(double oldValue, double newValue)
       {
 
       }
