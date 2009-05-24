@@ -69,6 +69,8 @@ class Part {
       TextC* longName()                         { return _longName; }
       TextC* shortName()                        { return _shortName; }
       void setLongName(const QString& s);
+      void setLongNameEncoded(const QString& s);
+      void setShortNameEncoded(const QString& s);
       void setShortName(const QString& s);
       void setLongNameHtml(const QString& s);
       void setShortNameHtml(const QString& s);

@@ -578,7 +578,10 @@ void Score::cmdAddTie()
       {
       Note* note = getSelectedNote();
       if (!note || note->tieFor()) {
-            printf("cmdAddTie: no note selected or noteFor %p\n", note ? note->tieFor() : 0);
+            if (!note)
+                  printf("cmdAddTie: no note selected\n");
+            else
+                  printf("cmdAddTie: has already tie? noteFor: %p\n", note->tieFor());
             return;
             }
       Chord* chord  = note->chord();
