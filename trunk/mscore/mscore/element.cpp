@@ -151,7 +151,7 @@ static const char* elementNames[] = {
 
 void Element::spatiumChanged(double oldValue, double newValue)
       {
-
+      _userOff *= (newValue / oldValue);
       }
 
 //---------------------------------------------------------
@@ -171,7 +171,7 @@ double Element::spatium() const
 
 QPointF Element::pos() const
       {
-      return _pos + _userOff * spatium();
+      return _pos + _userOff;
       }
 
 //---------------------------------------------------------
@@ -351,7 +351,7 @@ QColor Element::curColor() const
 QRectF Element::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(pos / spatium());
+      setUserOff(pos);
       return abbox() | r;
       }
 
@@ -362,13 +362,7 @@ QRectF Element::drag(const QPointF& pos)
 
 QPointF Element::canvasPos() const
       {
-      double sp = _score->spatium();
-      if (_track >= 0) {
-            Staff* staff = score()->staff(_track / VOICES);
-            if (staff)
-                  sp *= staff->mag();
-            }
-      QPointF p(_pos + (_userOff * sp));
+      QPointF p(_pos + _userOff);
       if (parent())
             p += parent()->canvasPos();
       return p;
@@ -471,7 +465,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
                   pl.append(Prop("subtype", subtypeName()));
             }
       if (!_userOff.isNull())
-            pl.append(Prop("offset", _userOff));
+            pl.append(Prop("offset", _userOff / spatium()));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;
@@ -520,7 +514,7 @@ bool Element::readProperties(QDomElement e)
             this->setSubtype(val);
             }
       else if (tag == "offset")
-            setUserOff(readPoint(e));
+            setUserOff(readPoint(e) * spatium());
       else if (tag == "visible")
             setVisible(i);
       else if (tag == "voice")
@@ -1175,7 +1169,7 @@ bool Element::startEdit(Viewer*, const QPointF&)
 
 void Element::editDrag(int, const QPointF& delta)
       {
-      setUserOff(userOff() + delta / spatium());
+      setUserOff(userOff() + delta);
       }
 
 //---------------------------------------------------------

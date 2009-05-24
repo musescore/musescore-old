@@ -30,7 +30,6 @@
 */
 
 #include "spatium.h"
-// #include "mtime.h"
 
 class Xml;
 class Measure;
@@ -113,6 +112,11 @@ class Element {
       QColor _color;
       double _mag;                ///< standard magnification (derived value)
 
+      QPointF _userOff;           ///< Offset from normal layout position:
+                                  ///< user dragged object this amount.
+                                  ///< depends on Spatium ("space") units!
+
+
       void init();
 
    protected:
@@ -124,9 +128,6 @@ class Element {
       double _rxoff, _ryoff;
       OffsetType _offsetType;
 
-      QPointF _userOff;           ///< Offset from normal layout position:
-                                  ///< user dragged object this amount.
-                                  ///< In Spatium ("space") units!
       int _mxmlOff;               ///< MusicXML offset in ticks.
                                   ///< Note: interacts with userXoffset.
 

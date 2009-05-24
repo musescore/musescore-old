@@ -282,14 +282,14 @@ void SlurSegment::write(Xml& xml, int no) const
                   break;
                   }
             }
-      if (!_userOff.isNull())
+      if (!userOff().isNull())
             empty = false;
       if (empty)
             return;
 
       xml.stag(QString("SlurSegment no=\"%1\"").arg(no));
-      if (!_userOff.isNull())
-            xml.tag("offset", _userOff);
+      if (!userOff().isNull())
+            xml.tag("offset", userOff());
       if (!(ups[0].off.isNull()))
             xml.tag("o1", ups[0].off);
       if (!(ups[1].off.isNull()))

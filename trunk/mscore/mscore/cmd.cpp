@@ -220,7 +220,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   else {
                         LineSegment* ls = lsl.front();
                         QPointF uo(pos - ls->canvasPos() - dragOffset);
-                        ls->setUserOff(uo / _spatium);
+                        ls->setUserOff(uo);
                         }
                   }
                   break;
@@ -245,7 +245,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   line->layout();
                   LineSegment* ls = line->lineSegments().front();
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo / _spatium);
+                  ls->setUserOff(uo);
                   }
                   break;
 
@@ -259,7 +259,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   double xx = measure->tick2pos(tick);
                   QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
                   uo -= QPointF(0.0, dyn->ipos().y());
-                  dyn->setUserOff(uo / _spatium);
+                  dyn->setUserOff(uo);
                   }
                   break;
             default:

@@ -785,7 +785,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                   }
             offset -= off;
             s->setPos(segment->x(), 0.0);
-            s->setUserOff(offset / _spatium);
+            s->setUserOff(offset);
             s->setTick(segment->tick());
             s->setTrack(staffIdx * VOICES);
             s->setParent(measure);
@@ -809,7 +809,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                               return;
                               }
                         s->setPos(0.0, 0.0);
-                        s->setUserOff((pos - m->canvasPos() - off) / _spatium);
+                        s->setUserOff(pos - m->canvasPos() - off);
                         s->setTrack(0);
                         s->setParent(m);
                         foundPage = true;

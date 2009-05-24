@@ -370,7 +370,7 @@ bool HBox::isMovable() const
 QRectF HBox::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(QPointF(pos.x() / spatium(), 0.0));
+      setUserOff(QPointF(pos.x(), 0.0));
       return abbox() | r;
       }
 

@@ -1261,7 +1261,7 @@ fallou:</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">si</translation>
     </message>
     <message>
         <source>C</source>
@@ -1912,7 +1912,7 @@ fallou:</translation>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aumentar</translation>
     </message>
 </context>
 <context>
@@ -7158,7 +7158,7 @@ fallou:</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">si</translation>
     </message>
     <message>
         <source>italic</source>

@@ -74,6 +74,7 @@ void Articulation::setSubtype(int idx)
       {
       Element::setSubtype(idx);
       setSym(articulationList[subtype()].sym);
+      _anchor = ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + subtype())));
       }
 
 //---------------------------------------------------------
