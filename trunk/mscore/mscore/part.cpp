@@ -61,9 +61,9 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       setAmateurPitchRange(t->minPitchA, t->maxPitchA);
       setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
 
-      setShortName(t->shortName);
+      setShortNameEncoded(t->shortName);
       setTrackName(t->trackName);
-      setLongName(t->name);
+      setLongNameEncoded(t->name);
 
       setPitchOffset(t->transpose);
       if (t->useDrumset) {
@@ -183,44 +183,20 @@ static void parseInstrName(QTextDocument* doc, const QString& name)
 //   setLongName
 //---------------------------------------------------------
 
-void Part::setLongName(const QString& name)
+void Part::setLongNameEncoded(const QString& name)
       {
       parseInstrName(_longName->doc(), name);
       }
 
-//---------------------------------------------------------
-//   setShortName
-//---------------------------------------------------------
-
-void Part::setShortName(const QString& s)
+void Part::setLongName(const QString& name)
       {
-      parseInstrName(_shortName->doc(), s);
+      _longName->setText(name);
       }
 
 void Part::setLongNameHtml(const QString& s)
       {
       _longName->setHtml(s);
       }
-
-void Part::setShortNameHtml(const QString& s)
-      {
-      _shortName->setHtml(s);
-      }
-
-
-QString Part::shortNameHtml() const
-      {
-      return _shortName->getHtml();
-      }
-
-QString Part::longNameHtml() const
-      {
-      return _longName->getHtml();
-      }
-
-//---------------------------------------------------------
-//   setLongName
-//---------------------------------------------------------
 
 void Part::setLongName(const QTextDocument& s)
       {
@@ -231,9 +207,42 @@ void Part::setLongName(const QTextDocument& s)
 //   setShortName
 //---------------------------------------------------------
 
+void Part::setShortNameEncoded(const QString& s)
+      {
+      parseInstrName(_shortName->doc(), s);
+      }
+
+void Part::setShortName(const QString& s)
+      {
+      _shortName->setText(s);
+      }
+
+void Part::setShortNameHtml(const QString& s)
+      {
+      _shortName->setHtml(s);
+      }
+
 void Part::setShortName(const QTextDocument& s)
       {
       _shortName->setDoc(s);
+      }
+
+//---------------------------------------------------------
+//   shortNameHtml
+//---------------------------------------------------------
+
+QString Part::shortNameHtml() const
+      {
+      return _shortName->getHtml();
+      }
+
+//---------------------------------------------------------
+//   longNameHtml
+//---------------------------------------------------------
+
+QString Part::longNameHtml() const
+      {
+      return _longName->getHtml();
       }
 
 //---------------------------------------------------------
