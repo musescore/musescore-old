@@ -81,6 +81,14 @@ class ScScorePrototype : public QObject, public QScriptable
       bool savePng(const QString&, bool, bool, double);
       bool saveSvg(const QString&);
       bool saveLilypond(const QString&);
+#ifdef HAS_AUDIOFILE
+      bool saveWav(const QString&);
+      bool saveWav(const QString&, const QString&);
+      bool saveFlac(const QString&);
+      bool saveFlac(const QString&, const QString&);
+      bool saveOgg(const QString&);
+      bool saveOgg(const QString&, const QString&);
+#endif
       void appendPart(const QString& name);
       void appendMeasures(int n);
       void setTitle(const QString&);

@@ -75,6 +75,8 @@ Objects
             bool savePng(string path, boolean screenshot, boolean transparent, double dpi);
             bool saveSvg(string path);
             bool saveLilypond(string path);
+            bool saveWav(string path)
+            bool saveWav(string path, string soundfontPath)
             appendPart(string partname)
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations

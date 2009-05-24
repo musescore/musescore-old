@@ -28,6 +28,7 @@
 #include "page.h"
 #include "text.h"
 #include "box.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   ScScorePropertyIterator
@@ -315,6 +316,86 @@ bool ScScorePrototype::saveLilypond(const QString& name)
       {
       return thisScore()->saveLilypond(name);
       }
+
+#ifdef HAS_AUDIOFILE
+//---------------------------------------------------------
+//   saveWav
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveWav(const QString& name)
+      {
+      return thisScore()->saveWav(name);
+      }
+
+
+//---------------------------------------------------------
+//   saveWav
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveWav(const QString& name, const QString& soundFont)
+      {
+      bool result = false;
+      if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
+        QString save = preferences.soundFont;
+        preferences.soundFont = soundFont;
+        result = thisScore()->saveWav(name); 
+        preferences.soundFont = save;
+      }
+      return result;
+      }
+
+//---------------------------------------------------------
+//   saveOgg
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveOgg(const QString& name)
+      {
+      return thisScore()->saveOgg(name);
+      }
+
+
+//---------------------------------------------------------
+//   saveOgg
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveOgg(const QString& name, const QString& soundFont)
+      {
+      bool result = false;
+      if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
+        QString save = preferences.soundFont;
+        preferences.soundFont = soundFont;
+        result = thisScore()->saveOgg(name); 
+        preferences.soundFont = save;
+      }
+      return result;
+      }
+      
+//---------------------------------------------------------
+//   saveFlac
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveFlac(const QString& name)
+      {
+      return thisScore()->saveFlac(name);
+      }
+
+
+//---------------------------------------------------------
+//   saveFlac
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveFlac(const QString& name, const QString& soundFont)
+      {
+      bool result = false;
+      if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
+        QString save = preferences.soundFont;
+        preferences.soundFont = soundFont;
+        result = thisScore()->saveFlac(name); 
+        preferences.soundFont = save;
+      }
+      return result;
+      }
+#endif
 
 //---------------------------------------------------------
 //   appendMeasures
