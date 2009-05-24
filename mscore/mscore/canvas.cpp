@@ -657,7 +657,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         QPointF o;
                         if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM) {
                               _score->startDrag(dragObject);
-                              o = QPointF(dragObject->userOff() * dragObject->spatium());
+                              o = QPointF(dragObject->userOff());
                               setState(DRAG_OBJ);
                               }
                         startMove -= o;

@@ -137,7 +137,7 @@ QRectF BSymbol::drag(const QPointF& pos)
       QRectF r(abbox());
       foreach(const Element* e, _leafs)
             r |= e->abbox();
-      setUserOff(pos / spatium());
+      setUserOff(pos);
       r |= abbox();
       foreach(const Element* e, _leafs)
             r |= e->abbox();

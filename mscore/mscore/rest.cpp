@@ -121,9 +121,8 @@ void Rest::draw(QPainter& p) const
 
 void Rest::setUserOffset(double x, double y)
       {
-      double _sp = spatium();
-
-      int line = lrint(y  / _sp);
+      double _spatium = spatium();
+      int line = lrint(y/_spatium);
 
       if (_sym == wholerestSym && (line <= -2 || line >= 3))
             _sym = outsidewholerestSym;
@@ -134,7 +133,7 @@ void Rest::setUserOffset(double x, double y)
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
 
-      setUserOff(QPointF(x / _sp, double(line)));
+      setUserOff(QPointF(x, double(line) * _spatium));
       }
 
 //---------------------------------------------------------
@@ -291,7 +290,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
             headType(tickLen(), &dt, &_dots);
             setDuration(dt);
             }
-      QPointF off(userOff() * spatium());
+      QPointF off(userOff());
       setUserOffset(off.x(), off.y());
       }
 
@@ -329,7 +328,8 @@ void Rest::remove(Element* e)
 
 void Rest::layout()
       {
-      int line = lrint(userOff().y());
+      double _spatium = spatium();
+      int line = lrint(userOff().y() / _spatium);
 
       setYoff(2.0);
       switch(duration().val()) {

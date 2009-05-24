@@ -1,3 +1,8 @@
+24.may (ws)
+      - Change Element.userOffset from type spatium to pixel. Save/restore
+        userOffset as spatium. If spatium changes, userOffset for all
+        elements is adjusted. This saves a lot of float multiplications
+        for layout()
 23.may (ws)
       - resize spatium dependend text when changing spatium unit; this does
         only work for simple text

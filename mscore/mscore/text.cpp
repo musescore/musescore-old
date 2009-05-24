@@ -835,6 +835,7 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
 
 void TextB::spatiumChanged(double oldValue, double newValue)
       {
+      Element::spatiumChanged(oldValue, newValue);
       if (!_sizeIsSpatiumDependent)
             return;
       TextStyle* style = score()->textStyle(_textStyle);

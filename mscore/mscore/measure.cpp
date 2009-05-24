@@ -2195,7 +2195,7 @@ printf("drop staffList\n");
                   e->layout();
                   {
                   QPointF uo(p - e->canvasPos() - dragOffset);
-                  e->setUserOff(uo / spatium());
+                  e->setUserOff(uo);
                   }
                   score()->cmdAdd(e);
                   break;

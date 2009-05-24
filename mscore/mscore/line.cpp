@@ -218,21 +218,30 @@ bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
 
 void LineSegment::editDrag(int curGrip, const QPointF& d)
       {
-      double _spatium = spatium();
-      QPointF delta(d.x() / _spatium, 0);
+      QPointF delta(d.x(), 0);
 
       if (line()->type() == TEXTLINE) {
             TextLine* tl = static_cast<TextLine*>(line());
             if (tl->diagonal())
-                  delta.setY(d.y() / _spatium);
+                  delta.setY(d.y());
             }
 
       if (curGrip == 0) {
-            _userOff  += delta;
+            setUserOff(userOff() + delta);
             _userOff2 -= delta;
             }
       else
             _userOff2 += delta;
+      }
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void LineSegment::spatiumChanged(double ov, double nv)
+      {
+      Element::spatiumChanged(ov, nv);
+      _userOff2 *= nv / ov;
       }
 
 //---------------------------------------------------------
@@ -470,8 +479,8 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       //
       foreach(LineSegment* seg, segments) {
             xml.stag("Segment");
-            xml.tag("off1", seg->userOff());
-            xml.tag("off2", seg->userOff2());
+            xml.tag("off1", seg->userOff() / spatium());
+            xml.tag("off2", seg->userOff2() / spatium());
             seg->Element::writeProperties(xml);
             xml.etag();
             }
@@ -495,9 +504,9 @@ bool SLine::readProperties(QDomElement e)
             LineSegment* ls = createLineSegment();
             for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
                   if (e.tagName() == "off1")
-                        ls->setUserOff(readPoint(e));
+                        ls->setUserOff(readPoint(e) * spatium());
                   else if (e.tagName() == "off2")
-                        ls->setUserOff2(readPoint(e));
+                        ls->setUserOff2(readPoint(e) * spatium());
                   else if (!ls->Element::readProperties(e))
                         domError(e);
                   }

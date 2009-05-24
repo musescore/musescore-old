@@ -40,7 +40,7 @@ class Viewer;
 class LineSegment : public Element {
    protected:
       QPointF _p2;
-      QPointF _userOff2;
+      QPointF _userOff2;            // depends on spatium
       QRectF r1, r2;
       LineSegmentType _segmentType;
       System* _system;
@@ -69,6 +69,7 @@ class LineSegment : public Element {
       LineSegmentType segmentType() const { return _segmentType;       }
       void setSystem(System* s)           { _system = s;               }
       virtual void toDefault();
+      virtual void spatiumChanged(double, double);
 
       friend class SLine;
       };
