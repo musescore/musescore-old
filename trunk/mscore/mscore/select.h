@@ -58,8 +58,9 @@ class Selection {
 
    public:
       Selection(Score*);
+      Score* score() const      { return _score; }
       SelState state() const    { return _state; }
-      void setState(SelState s) { _state = s;  }
+      void setState(SelState s) { _state = s;    }
 
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF

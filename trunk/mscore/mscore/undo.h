@@ -142,9 +142,11 @@ class UndoGroup : public QObject {
 //---------------------------------------------------------
 
 class SaveState : public UndoCommand {
+      InputState undoInputState;
+      InputState redoInputState;
       Score* score;
-      InputState inputState;
-      Selection* selection;
+      Selection* undoSelection;
+      Selection* redoSelection;
 
    public:
       SaveState(Score*);

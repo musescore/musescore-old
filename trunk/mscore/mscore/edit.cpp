@@ -57,7 +57,7 @@
 
 Note* Score::getSelectedNote()
       {
-      Element* el = sel->element();
+      Element* el = selection()->element();
       if (el) {
             if (el->type() == NOTE)
                   return (Note*)el;
@@ -72,7 +72,7 @@ Note* Score::getSelectedNote()
 
 ChordRest* Score::getSelectedChordRest() const
       {
-      Element* el = sel->element();
+      Element* el = selection()->element();
       if (el) {
             if (el->type() == NOTE)
                   return ((Note*)el)->chord();
@@ -89,9 +89,9 @@ ChordRest* Score::getSelectedChordRest() const
 
 int Score::pos()
       {
-      Element* el = sel->element();
-      if (sel->activeCR())
-            el = sel->activeCR();
+      Element* el = selection()->element();
+      if (selection()->activeCR())
+            el = selection()->activeCR();
       if (el && (el->type() == REST || el->type() == NOTE || el->type() == CHORD)) {
             if (el->type() == NOTE)
                   el = el->parent();
@@ -478,12 +478,12 @@ void Canvas::modifyElement(Element* el)
             return;
             }
       Score* cs = el->score();
-      if (cs->sel->state() != SEL_SINGLE) {
-            printf("modifyElement: cs->sel->state() != SEL_SINGLE\n");
+      if (cs->selection()->state() != SEL_SINGLE) {
+            printf("modifyElement: cs->selection()->state() != SEL_SINGLE\n");
             delete el;
             return;
             }
-      Element* e = cs->sel->element();
+      Element* e = cs->selection()->element();
       Chord* chord;
       if (e->type() == CHORD)
             chord = (Chord*) e;
@@ -683,7 +683,7 @@ void Score::cmdSetBeamMode(int mode)
 
 void Score::cmdFlip()
       {
-      QList<Element*>* el = sel->elements();
+      QList<Element*>* el = selection()->elements();
       if (el->isEmpty()) {
             selectNoteSlurMessage();
             return;
@@ -959,6 +959,7 @@ void Score::deleteItem(Element* el)
                   undoFixTicks();
                   undoRemoveElement(el);
                   cmdRemoveTime(measure->tick(), measure->tickLen());
+//                  cmdRemoveGlobals(measure->tick(), measure->tick() + measure->tickLen(), 0, staves());
                   }
                   break;
 
@@ -996,6 +997,21 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
+      int etick = tick + len;
+      int idx = 0;
+      foreach(Element* e, _gel) {
+            if (e->type() == SLUR) {
+                  Slur* slur = static_cast<Slur*>(e);
+                  Element* e1 = slur->startElement();
+                  Element* e2 = slur->endElement();
+                  if ((e1->tick() >= tick && e1->tick() < etick)
+                     || (e2->tick() >= tick && e2->tick() < etick)) {
+                        undoRemoveElement(e);
+                        }
+                  }
+            ++idx;
+            }
+
       int tick2 = tick + len;
       foreach(Element* el, _gel) {
             if (el->type() == SLUR) {
@@ -1045,19 +1061,29 @@ void Score::cmdRemoveTime(int tick, int len)
       undoFixTicks();
       }
 
+#if 0
+//---------------------------------------------------------
+//   cmdRemoveGlobals
+//---------------------------------------------------------
+
+void Score::cmdRemoveGlobals(int tick, int etick, int sStaff, int eStaff)
+      {
+      }
+#endif
+
 //---------------------------------------------------------
 //   cmdDeleteSelection
 //---------------------------------------------------------
 
 void Score::cmdDeleteSelection()
       {
-      if (sel->state() == SEL_SYSTEM) {
-            MeasureBase* is = sel->startSegment()->measure();
+      if (selection()->state() == SEL_SYSTEM) {
+            MeasureBase* is = selection()->startSegment()->measure();
             bool createEndBar = false;
             if (is->next()) {
-                  MeasureBase* ie = sel->endSegment()->measure();
+                  MeasureBase* ie = selection()->endSegment()->measure();
                   if (ie) {
-                        if (ie->tick() < sel->endSegment()->tick()) {
+                        if (ie->tick() < selection()->endSegment()->tick()) {
                               // if last measure is selected
                               deleteItem(ie);
                               createEndBar = true;
@@ -1085,11 +1111,11 @@ void Score::cmdDeleteSelection()
                         }
                   }
             }
-      else if (sel->state() == SEL_STAFF) {
-            Segment* s1 = sel->startSegment();
-            Segment* s2 = sel->endSegment();
-            int track1  = sel->staffStart * VOICES;
-            int track2  = sel->staffEnd * VOICES;
+      else if (selection()->state() == SEL_STAFF) {
+            Segment* s1 = selection()->startSegment();
+            Segment* s2 = selection()->endSegment();
+            int track1  = selection()->staffStart * VOICES;
+            int track2  = selection()->staffEnd * VOICES;
             for (Segment* s = s1; s != s2; s = s->next1()) {
                   if (s->subtype() != Segment::SegChordRest)
                         continue;
@@ -1110,7 +1136,7 @@ void Score::cmdDeleteSelection()
                         undoRemoveElement(s);
                   }
 
-            for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
+            for (int staffIdx = selection()->staffStart; staffIdx < selection()->staffEnd; ++staffIdx) {
                   int tick   = s1->tick();
                   int gapLen;
                   if (s2)
@@ -1136,14 +1162,14 @@ void Score::cmdDeleteSelection()
             return;
             }
       else {
-            // deleteItem modifies sel->elements() list,
+            // deleteItem modifies selection()->elements() list,
             // so we need a local copy:
-            foreach(Element* e, *sel->elements()) {
+            foreach(Element* e, *selection()->elements()) {
                   e->setSelected(false);  // in case item is not deleted
                   deleteItem(e);
                   }
             }
-      sel->elements()->clear();
+      selection()->elements()->clear();
       select(0, SELECT_SINGLE, 0);
       layoutAll = true;
       }
@@ -1489,7 +1515,7 @@ void Score::colorItem(Element* element)
       if (!c.isValid())
             return;
 
-      foreach(Element* e, *sel->elements()) {
+      foreach(Element* e, *selection()->elements()) {
             if (e->color() != c) {
                   _undo->push(new ChangeColor(e, c));
                   e->setGenerated(false);
@@ -1503,7 +1529,7 @@ void Score::colorItem(Element* element)
                         }
                   }
             }
-      sel->deselectAll(this);
+      selection()->deselectAll(this);
       }
 
 //---------------------------------------------------------

@@ -341,7 +341,7 @@ void Score::endUndoRedo()
             canvas()->setState(Canvas::NOTE_ENTRY);
             setState(STATE_NOTE_ENTRY);
             }
-      sel->update();
+      selection()->update();
       layoutAll = true;
       end();
       }
@@ -352,29 +352,50 @@ void Score::endUndoRedo()
 
 SaveState::SaveState(Score* s)
       {
-      score     = s;
-      selection = 0;
+      score         = s;
+      redoSelection = 0;
+      undoSelection = 0;
+      redoInputState = score->inputState();
       }
 
 SaveState::~SaveState()
       {
-      if (selection)
-            delete selection;
+      if (undoSelection)
+            delete undoSelection;
+      if (redoSelection)
+            delete redoSelection;
       }
 
 void SaveState::undo()
       {
-      score->setInputState(inputState);
-      score->setSelection(new Selection(*selection));
+      if (!redoSelection)
+            redoSelection = new Selection(score);
+      foreach(Element* e, *score->selection()->elements())
+            e->setSelected(false);
+      *redoSelection = *score->selection();
+      if (undoSelection) {
+            score->setSelection(new Selection(*undoSelection));
+            foreach(Element* e, *score->selection()->elements())
+                  e->setSelected(true);
+            }
+      redoInputState = score->inputState();
+      score->setInputState(undoInputState);
       }
 
 void SaveState::redo()
       {
-      inputState = score->inputState();
-      if (!selection)
-            selection = new Selection(*score->selection());
-      else
-            *selection = *(score->selection());
+      if (!undoSelection)
+            undoSelection = new Selection(score);
+      foreach(Element* e, *score->selection()->elements())
+            e->setSelected(false);
+      *undoSelection = *score->selection();
+      if (redoSelection) {
+            score->setSelection(new Selection(*redoSelection));
+            foreach(Element* e, *score->selection()->elements())
+                  e->setSelected(true);
+            }
+      undoInputState = score->inputState();
+      score->setInputState(redoInputState);
       }
 
 //---------------------------------------------------------

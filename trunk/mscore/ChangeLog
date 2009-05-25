@@ -1,4 +1,6 @@
 25.may (ws)
+      - fix chord editing
+      - fix crash related to deleting measures+slurs
       - use qt file dialog (non native) for "save as" except for windows
         and mac platform
 24.may (ws)
