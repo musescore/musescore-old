@@ -70,6 +70,8 @@ class ScMeasurePrototype : public QObject, public QScriptable
       Q_PROPERTY(double y READ getY SCRIPTABLE true)
       Q_PROPERTY(double width READ getWidth SCRIPTABLE true)
       Q_PROPERTY(double height READ getHeight SCRIPTABLE true)
+      Q_PROPERTY(double tick READ getTick SCRIPTABLE true)
+      Q_PROPERTY(double time READ getTime SCRIPTABLE true)
       
       Measure* thisMeasure() const;
 
@@ -83,7 +85,8 @@ class ScMeasurePrototype : public QObject, public QScriptable
       double getY() const;
       double getWidth() const;
       double getHeight() const;
-      
+      int getTick() const;
+      double getTime() const;
 
    public slots:
       };

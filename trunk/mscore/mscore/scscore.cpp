@@ -398,6 +398,17 @@ bool ScScorePrototype::saveFlac(const QString& name, const QString& soundFont)
 #endif
 
 //---------------------------------------------------------
+//   updateRepeatList
+//---------------------------------------------------------
+
+void ScScorePrototype::setExpandRepeat(bool expandRepeat)
+      {
+      getAction("repeat")->setChecked(expandRepeat); 
+      preferences.midiExpandRepeats = expandRepeat;
+      thisScore()->updateRepeatList(expandRepeat);
+      }
+
+//---------------------------------------------------------
 //   appendMeasures
 //---------------------------------------------------------
 

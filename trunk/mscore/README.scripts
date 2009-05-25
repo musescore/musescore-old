@@ -77,6 +77,11 @@ Objects
             bool saveLilypond(string path);
             bool saveWav(string path)
             bool saveWav(string path, string soundfontPath)
+            bool saveOgg(string path)
+            bool saveOgg(string path, string soundfontPath)
+            bool saveFlac(string path)
+            bool saveFlac(string path, string soundfontPath)
+            setExpandRepeat(bool)
             appendPart(string partname)
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
@@ -142,6 +147,8 @@ Objects
             y           double   y position (ro)
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
+            time        double   in ms
+            tick        int         
 
 
 
