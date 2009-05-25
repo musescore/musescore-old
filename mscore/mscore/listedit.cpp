@@ -61,7 +61,7 @@ class ElementItem : public QTreeWidgetItem
 
    public:
       ElementItem(QTreeWidget* lv, Element* e);
-      ElementItem(ElementItem* ei, Element* e);
+      ElementItem(QTreeWidgetItem* ei, Element* e);
       Element* element() const { return el; }
       void init();
       };
@@ -73,7 +73,7 @@ ElementItem::ElementItem(QTreeWidget* lv, Element* e)
       init();
       }
 
-ElementItem::ElementItem(ElementItem* ei, Element* e)
+ElementItem::ElementItem(QTreeWidgetItem* ei, Element* e)
    : QTreeWidgetItem(ei, e->type())
       {
       el = e;
@@ -283,8 +283,8 @@ void PageListEditor::updateList(Score* s)
       cs = s;
       list->clear();
 
-      // ElementItem* li = new ElementItem(list, cs->layout());
-      ElementItem* li = 0;
+      QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
+      li->setText(0, "Global");
       foreach(Element* el, *cs->gel()) {
             if (el->type() == SLUR) {
                   ElementItem* se = new ElementItem(li, el);

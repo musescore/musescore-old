@@ -36,8 +36,6 @@ Volta::Volta(Score* s)
       setLineWidth(Spatium(.18));
       setBeginText("1.", TEXT_STYLE_VOLTA);
 
-//      setBeginTextPlace(PLACE_ABOVE);
-//      setContinueTextPlace(PLACE_ABOVE);
       setBeginTextPlace(PLACE_BELOW);
       setContinueTextPlace(PLACE_BELOW);
 

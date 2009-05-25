@@ -2448,7 +2448,11 @@ QFileDialog* MuseScore::saveAsDialog()
       {
       if (_saveAsDialog == 0) {
             _saveAsDialog = new QFileDialog(mscore);
+#if  defined(Q_WS_MAC) || defined(Q_WS_WIN)
+            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, false);
+#else
             _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+#endif
             _saveAsDialog->setAcceptMode(QFileDialog::AcceptSave);
             _saveAsDialog->setFileMode(QFileDialog::AnyFile);
             _saveAsDialog->setWindowTitle(tr("MuseScore: Save As"));
@@ -2475,7 +2479,11 @@ QFileDialog* MuseScore::saveCopyDialog()
       {
       if (_saveCopyDialog == 0) {
             _saveCopyDialog = new QFileDialog(mscore);
-            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+#if  defined(Q_WS_MAC) || defined(Q_WS_WIN)
+            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, false);
+#else
+            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+#endif
             _saveCopyDialog->setAcceptMode(QFileDialog::AcceptSave);
             _saveCopyDialog->setFileMode(QFileDialog::AnyFile);
             _saveCopyDialog->setWindowTitle(tr("MuseScore: Save a Copy"));

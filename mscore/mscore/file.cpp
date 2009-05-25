@@ -1496,7 +1496,6 @@ void Score::print(QPrinter* printer)
             m->collectElements(el);
             }
 
-printf("num copies %d\n", printer->numCopies());
       for (int copy = 0; copy < printer->numCopies(); ++copy) {
             const QList<Page*> pl = pages();
             int pages = pl.size();

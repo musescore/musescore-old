@@ -18,11 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#if defined(__MINGW32__) || defined(__APPLE__)
 #include <sys/time.h>
-#else
-#include <time.h>
-#endif
 
 #include "score.h"
 #include "page.h"
