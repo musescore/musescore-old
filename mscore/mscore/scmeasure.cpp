@@ -267,8 +267,8 @@ void ScMeasurePrototype::setLineBreak(bool v)
 
 int ScMeasurePrototype::getPageNumber() const
   {
-    Measure* mb = thisMeasure();
-    Page* page = (Page*)mb->parent()->parent();
+    Measure* m = thisMeasure();
+    Page* page = (Page*)m->parent()->parent();
     return page->no();
   }
 
@@ -278,8 +278,8 @@ int ScMeasurePrototype::getPageNumber() const
 
 double ScMeasurePrototype::getX() const
   {
-    Measure* mb = thisMeasure();
-    return mb->canvasPos().x();              
+    Measure* m = thisMeasure();
+    return m->canvasPos().x();              
   }
 
 //---------------------------------------------------------
@@ -288,8 +288,8 @@ double ScMeasurePrototype::getX() const
 
 double ScMeasurePrototype::getY() const
   {
-    Measure* mb = thisMeasure();
-    return  mb->canvasPos().y();
+    Measure* m = thisMeasure();
+    return  m->canvasPos().y();
   }
 
 //---------------------------------------------------------
@@ -298,8 +298,8 @@ double ScMeasurePrototype::getY() const
 
 double ScMeasurePrototype::getWidth() const
   {
-    Measure* mb = thisMeasure();
-    return mb->bbox().width();
+    Measure* m = thisMeasure();
+    return m->bbox().width();
   }
 
 //---------------------------------------------------------
@@ -307,8 +307,25 @@ double ScMeasurePrototype::getWidth() const
 //---------------------------------------------------------
 
 double ScMeasurePrototype::getHeight() const{
-  Measure* mb = thisMeasure();
-  return mb->bbox().height();
+  Measure* m = thisMeasure();
+  return m->bbox().height();
+}
+//---------------------------------------------------------
+//   getTick
+//---------------------------------------------------------
+
+int ScMeasurePrototype::getTick() const{
+  Measure* m = thisMeasure();
+  return m->tick();
+}
+
+//---------------------------------------------------------
+//   getTime
+//---------------------------------------------------------
+
+double ScMeasurePrototype::getTime() const{
+  Measure* m = thisMeasure();
+  return m->score()->utick2utime(m->tick())*1000;
 }
       
 

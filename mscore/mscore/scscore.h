@@ -89,6 +89,7 @@ class ScScorePrototype : public QObject, public QScriptable
       bool saveOgg(const QString&);
       bool saveOgg(const QString&, const QString&);
 #endif
+      void setExpandRepeat(bool);
       void appendPart(const QString& name);
       void appendMeasures(int n);
       void setTitle(const QString&);
