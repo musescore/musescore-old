@@ -1,3 +1,6 @@
+25.may (ws)
+      - use qt file dialog (non native) for "save as" except for windows
+        and mac platform
 24.may (ws)
       - Change Element.userOffset from type spatium to pixel. Save/restore
         userOffset as spatium. If spatium changes, userOffset for all

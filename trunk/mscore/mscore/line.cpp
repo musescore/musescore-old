@@ -56,7 +56,7 @@ LineSegment::LineSegment(const LineSegment& s)
 void LineSegment::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 2;
-      QPointF pp2(_p2 + _userOff2 * spatium() + canvasPos());
+      QPointF pp2(_p2 + _userOff2 + canvasPos());
       grip[1].translate(pp2);
       grip[0].translate(canvasPos());
       }
@@ -67,7 +67,7 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 QPointF LineSegment::pos2() const
       {
-      return _p2 + _userOff2 * spatium();
+      return _p2 + _userOff2;
       }
 
 //---------------------------------------------------------
@@ -452,10 +452,14 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
             xml.tag("diagonal", _diagonal);
       if (_anchor != ANCHOR_SEGMENT && (proto == 0 || proto->anchor() != _anchor))
             xml.tag("anchor", _anchor);
-      if (parent() == 0) {
+      if (score() == gscore) {
             // when used as icon
-            LineSegment* s = segments.front();
-            xml.tag("length", s->pos2().x());
+            if (!segments.isEmpty()) {
+                  LineSegment* s = segments.front();
+                  xml.tag("length", s->pos2().x());
+                  }
+            else
+                  xml.tag("length", spatium() * 4);
             return;
             }
       xml.tag("tick2", _tick2);
