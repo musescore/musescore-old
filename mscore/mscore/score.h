@@ -275,6 +275,7 @@ class Score : public QObject {
       bool _creditsRead;             ///< credits were read at MusicXML import
 
       int textUndoLevel;
+      Selection* _selection;
 
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
       ChordRest* prevMeasure(ChordRest* element);
@@ -384,7 +385,6 @@ class Score : public QObject {
       int _state;
       int _prevState;               ///< state before playback
 
-      Selection* sel;
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
 
@@ -622,9 +622,9 @@ class Score : public QObject {
       bool saveAudio(const QString& name, int format);
 #endif
       ChordRest* getSelectedChordRest() const;
-      Element* getSelectedElement() const { return sel->element(); }
-      Selection* selection() const        { return sel; }
-      void setSelection(Selection* s)     { sel = s;    }
+      Element* getSelectedElement() const { return _selection->element(); }
+      Selection* selection() const        { return _selection; }
+      void setSelection(Selection* s);
 
       int pos();
       Measure* tick2measure(int tick) const;
@@ -641,8 +641,8 @@ class Score : public QObject {
       bool saveFile(bool autosave);
       void adjustTime(int tick, MeasureBase*);
 
-      QString filePath() const    { return info.filePath(); }
-      QFileInfo* fileInfo()       { return &info; }
+      QString filePath() const       { return info.filePath(); }
+      QFileInfo* fileInfo()          { return &info; }
 
       QString name() const           { return info.completeBaseName(); }
       void setName(const QString& s) { info.setFile(s); }

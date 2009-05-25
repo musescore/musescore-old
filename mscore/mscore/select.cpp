@@ -51,13 +51,14 @@
 
 Selection::Selection(Score* s)
       {
-      _score = s;
-      _state = SEL_NONE;
-      _startSegment = 0;
-      _endSegment = 0;
+      _score         = s;
+      _state         = SEL_NONE;
+      _startSegment  = 0;
+      _endSegment    = 0;
       _activeSegment = 0;
-      staffStart = 0;
-      staffEnd   = 0;
+      staffStart     = 0;
+      staffEnd       = 0;
+      activeTrack    = 0;
       }
 
 //---------------------------------------------------------
@@ -229,7 +230,7 @@ void Selection::add(Element* el)
 void Score::deselect(Element* obj)
       {
       refresh |= obj->abbox();
-      sel->remove(obj);
+      selection()->remove(obj);
       obj->setSelected(false);
       }
 
@@ -240,7 +241,7 @@ void Score::deselect(Element* obj)
 void Score::updateSelectedElements(SelState state)
       {
       setUpdateAll();
-      QList<Element*>* el = sel->elements();
+      QList<Element*>* el = selection()->elements();
       foreach(Element* e, *el)
             e->setSelected(false);
       el->clear();
@@ -249,26 +250,26 @@ void Score::updateSelectedElements(SelState state)
       //  select all elements in range
       //
       if (state == SEL_SYSTEM) {
-            sel->staffStart = 0;
-            sel->staffEnd = nstaves();
+            _selection->staffStart = 0;
+            _selection->staffEnd = nstaves();
             }
       // assert:
-      if (sel->staffStart < 0 || sel->staffStart >= nstaves() || sel->staffEnd < 0 || sel->staffEnd > nstaves()
-         || sel->staffStart >= sel->staffEnd) {
-            printf("updateSelectedElements: bad staff selection %d - %d\n", sel->staffStart, sel->staffEnd);
-            sel->staffStart = 0;
-            sel->staffEnd   = 1;
+      if (_selection->staffStart < 0 || _selection->staffStart >= nstaves() || _selection->staffEnd < 0 || _selection->staffEnd > nstaves()
+         || _selection->staffStart >= _selection->staffEnd) {
+            printf("updateSelectedElements: bad staff selection %d - %d\n", _selection->staffStart, _selection->staffEnd);
+            _selection->staffStart = 0;
+            _selection->staffEnd   = 1;
             }
-      int startTrack = sel->staffStart * VOICES;
-      int endTrack   = sel->staffEnd * VOICES;
+      int startTrack = _selection->staffStart * VOICES;
+      int endTrack   = _selection->staffEnd * VOICES;
 
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* s = sel->startSegment(); s && (s != sel->endSegment()); s = s->next1()) {
+            for (Segment* s = _selection->startSegment(); s && (s != _selection->endSegment()); s = s->next1()) {
                   Element* e = s->element(st);
                   if (!e)
                         continue;
                   e->setSelected(true);
-                  sel->elements()->append(e);
+                  _selection->elements()->append(e);
                   }
             }
       }
@@ -281,12 +282,12 @@ void Score::updateSelectedElements(SelState state)
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
 //printf("select element <%s> type %d(state %d) staff %d\n",
-//   e ? e->name() : "", type, sel->state(), e ? e->staffIdx() : -1);
+//   e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
 
-      SelState selState = sel->state();
+      SelState selState = _selection->state();
 
       if (type == SELECT_SINGLE) {
-            refresh |= sel->deselectAll(this);
+            refresh |= _selection->deselectAll(this);
             if (e && (e->type() == MEASURE)) {
                   select(e, SELECT_RANGE, staffIdx);
                   return;
@@ -300,11 +301,11 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             else {
                   refresh |= e->abbox();
                   if (e->selected()) {
-                        sel->remove(e);
+                        _selection->remove(e);
                         selState = SEL_NONE;
                         }
                   else {
-                        sel->add(e);
+                        _selection->add(e);
                         _is.track = e->track();
                         selState = SEL_SINGLE;
                         }
@@ -323,16 +324,16 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
                   int etick = tick + m->tickLen();
-                  if (sel->state() == SEL_NONE) {
-                        sel->setStartSegment(m->tick2segment(tick, true));
-                        sel->setEndSegment(tick2segment(etick));
+                  if (_selection->state() == SEL_NONE) {
+                        _selection->setStartSegment(m->tick2segment(tick, true));
+                        _selection->setEndSegment(tick2segment(etick));
                         }
-                  else if (sel->state() == SEL_SYSTEM) {
-                        if (tick < sel->tickStart()) {
-                              sel->setStartSegment(m->tick2segment(tick, true));
+                  else if (_selection->state() == SEL_SYSTEM) {
+                        if (tick < _selection->tickStart()) {
+                              _selection->setStartSegment(m->tick2segment(tick, true));
                               }
-                        else if (etick >= sel->tickEnd())
-                              sel->setEndSegment(tick2segment(etick));
+                        else if (etick >= _selection->tickEnd())
+                              _selection->setEndSegment(tick2segment(etick));
                         }
                   else {
                         select(0, SELECT_SINGLE, 0);
@@ -344,13 +345,13 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   _is.len = 0;
                   }
             else {
-                  if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
+                  if (_selection->state() == SEL_STAFF || _selection->state() == SEL_SYSTEM) {
                         select(0, SELECT_SINGLE, 0);
                         return;
                         }
                   else {
                         refresh |= e->abbox();
-                        sel->add(e);
+                        _selection->add(e);
                         _is.len = 0;
                         selState = SEL_MULT;
                         }
@@ -364,35 +365,35 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   int tick  = m->tick();
                   int etick = tick + m->tickLen();
                   activeTrack = staffIdx * VOICES;
-                  if (sel->state() == SEL_NONE) {
-                        sel->staffStart = staffIdx;
-                        sel->staffEnd = staffIdx + 1;
-                        sel->setStartSegment(m->tick2segment(tick, true));
-                        sel->setEndSegment(tick2segment(etick));
+                  if (_selection->state() == SEL_NONE) {
+                        _selection->staffStart = staffIdx;
+                        _selection->staffEnd = staffIdx + 1;
+                        _selection->setStartSegment(m->tick2segment(tick, true));
+                        _selection->setEndSegment(tick2segment(etick));
                         }
-                  else if (sel->state() == SEL_STAFF) {
-                        if (staffIdx < sel->staffStart)
-                              sel->staffStart = staffIdx;
-                        else if (staffIdx >= sel->staffEnd)
-                              sel->staffEnd = staffIdx + 1;
-                        if (tick < sel->tickStart()) {
-                              sel->setStartSegment(m->tick2segment(tick, true));
+                  else if (_selection->state() == SEL_STAFF) {
+                        if (staffIdx < _selection->staffStart)
+                              _selection->staffStart = staffIdx;
+                        else if (staffIdx >= _selection->staffEnd)
+                              _selection->staffEnd = staffIdx + 1;
+                        if (tick < _selection->tickStart()) {
+                              _selection->setStartSegment(m->tick2segment(tick, true));
                               activeIsFirst = true;
                               }
-                        else if (etick >= sel->tickEnd())
-                              sel->setEndSegment(tick2segment(etick));
+                        else if (etick >= _selection->tickEnd())
+                              _selection->setEndSegment(tick2segment(etick));
                         else {
-                              if (sel->activeSegment() == sel->startSegment()) {
-                                    sel->setStartSegment(m->tick2segment(tick, true));
+                              if (_selection->activeSegment() == _selection->startSegment()) {
+                                    _selection->setStartSegment(m->tick2segment(tick, true));
                                     activeIsFirst = true;
                                     }
                               else
-                                    sel->setEndSegment(tick2segment(etick));
+                                    _selection->setEndSegment(tick2segment(etick));
                               }
                         }
-                  else if (sel->state() == SEL_SINGLE) {
+                  else if (_selection->state() == SEL_SINGLE) {
                         Segment* seg = 0;
-                        Element* oe = sel->element();
+                        Element* oe = _selection->element();
                         bool reverse = false;
                         if (tick < oe->tick())
                               seg = m->first();
@@ -419,7 +420,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         return;
                         }
                   else {
-                        printf("SELECT_RANGE: measure: sel state %d\n", sel->state());
+                        printf("SELECT_RANGE: measure: sel state %d\n", _selection->state());
                         }
                   }
             else if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
@@ -427,44 +428,44 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         e = static_cast<Note*>(e)->chord();
                   ChordRest* cr = static_cast<ChordRest*>(e);
 
-                  if (sel->state() == SEL_NONE) {
-                        sel->staffStart = e->staffIdx();
-                        sel->staffEnd   = sel->staffStart + 1;
-                        sel->setStartSegment(cr->segment());
-                        sel->setEndSegment(cr->segment()->nextCR(cr->track()));
+                  if (_selection->state() == SEL_NONE) {
+                        _selection->staffStart = e->staffIdx();
+                        _selection->staffEnd   = _selection->staffStart + 1;
+                        _selection->setStartSegment(cr->segment());
+                        _selection->setEndSegment(cr->segment()->nextCR(cr->track()));
                         }
-                  else if (sel->state() == SEL_SINGLE) {
-                        Element* oe = sel->element();
+                  else if (_selection->state() == SEL_SINGLE) {
+                        Element* oe = _selection->element();
                         if (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD) {
                               if (oe->type() == NOTE)
                                     oe = oe->parent();
                               ChordRest* ocr = static_cast<ChordRest*>(oe);
-                              sel->staffStart = oe->staffIdx();
-                              sel->staffEnd   = sel->staffStart + 1;
-                              sel->setStartSegment(ocr->segment());
-                              sel->setEndSegment(ocr->segment()->nextCR(ocr->track()));
-                              if (!sel->endSegment())
-                                    sel->setEndSegment(ocr->segment()->next());
+                              _selection->staffStart = oe->staffIdx();
+                              _selection->staffEnd   = _selection->staffStart + 1;
+                              _selection->setStartSegment(ocr->segment());
+                              _selection->setEndSegment(ocr->segment()->nextCR(ocr->track()));
+                              if (!_selection->endSegment())
+                                    _selection->setEndSegment(ocr->segment()->next());
 
                               staffIdx = cr->staffIdx();
                               int tick = cr->tick();
-                              if (staffIdx < sel->staffStart)
-                                    sel->staffStart = staffIdx;
-                              else if (staffIdx >= sel->staffEnd)
-                                    sel->staffEnd = staffIdx + 1;
-                              if (tick < sel->tickStart()) {
-                                    sel->setStartSegment(cr->segment());
+                              if (staffIdx < _selection->staffStart)
+                                    _selection->staffStart = staffIdx;
+                              else if (staffIdx >= _selection->staffEnd)
+                                    _selection->staffEnd = staffIdx + 1;
+                              if (tick < _selection->tickStart()) {
+                                    _selection->setStartSegment(cr->segment());
                                     activeIsFirst = true;
                                     }
-                              else if (tick >= sel->tickEnd())
-                                    sel->setEndSegment(cr->segment()->nextCR(cr->track()));
+                              else if (tick >= _selection->tickEnd())
+                                    _selection->setEndSegment(cr->segment()->nextCR(cr->track()));
                               else {
-                                    if (sel->activeSegment() == sel->startSegment()) {
-                                          sel->setStartSegment(cr->segment());
+                                    if (_selection->activeSegment() == _selection->startSegment()) {
+                                          _selection->setStartSegment(cr->segment());
                                           activeIsFirst = true;
                                           }
                                     else
-                                          sel->setEndSegment(cr->segment()->nextCR(cr->track()));
+                                          _selection->setEndSegment(cr->segment()->nextCR(cr->track()));
                                     }
                               }
                         else {
@@ -473,60 +474,60 @@ printf("select: TODO\n");
                               return;
                               }
                         }
-                  else if (sel->state() == SEL_STAFF) {
+                  else if (_selection->state() == SEL_STAFF) {
                         staffIdx = cr->staffIdx();
                         int tick = cr->tick();
-                        if (staffIdx < sel->staffStart)
-                              sel->staffStart = staffIdx;
-                        else if (staffIdx >= sel->staffEnd)
-                              sel->staffEnd = staffIdx + 1;
-                        if (tick < sel->tickStart()) {
-                              if (sel->activeSegment() == sel->endSegment())
-                                    sel->setEndSegment(sel->startSegment());
-                              sel->setStartSegment(cr->segment());
+                        if (staffIdx < _selection->staffStart)
+                              _selection->staffStart = staffIdx;
+                        else if (staffIdx >= _selection->staffEnd)
+                              _selection->staffEnd = staffIdx + 1;
+                        if (tick < _selection->tickStart()) {
+                              if (_selection->activeSegment() == _selection->endSegment())
+                                    _selection->setEndSegment(_selection->startSegment());
+                              _selection->setStartSegment(cr->segment());
                               activeIsFirst = true;
                               }
-                        else if (tick >= sel->tickEnd()) {
-                              if (sel->activeSegment() == sel->startSegment())
-                                    sel->setStartSegment(sel->endSegment());
-                              sel->setEndSegment(cr->segment()->nextCR(cr->track()));
+                        else if (tick >= _selection->tickEnd()) {
+                              if (_selection->activeSegment() == _selection->startSegment())
+                                    _selection->setStartSegment(_selection->endSegment());
+                              _selection->setEndSegment(cr->segment()->nextCR(cr->track()));
                               }
                         else {
-                              if (sel->activeSegment() == sel->startSegment()) {
-                                    sel->setStartSegment(cr->segment());
+                              if (_selection->activeSegment() == _selection->startSegment()) {
+                                    _selection->setStartSegment(cr->segment());
                                     activeIsFirst = true;
                                     }
                               else
-                                    sel->setEndSegment(cr->segment()->nextCR(cr->track()));
+                                    _selection->setEndSegment(cr->segment()->nextCR(cr->track()));
                               }
                         }
                   else {
-                        printf("sel state %d\n", sel->state());
+                        printf("sel state %d\n", _selection->state());
                         }
                   selState = SEL_STAFF;
-                  if (!sel->endSegment())
-                        sel->setEndSegment(cr->segment()->next());
+                  if (!_selection->endSegment())
+                        _selection->setEndSegment(cr->segment()->next());
                   }
             else {
                   select(e, SELECT_SINGLE, staffIdx);
                   return;
                   }
 
-// printf("range %d-%d %d-%d\n", sel->staffStart, sel->staffEnd, sel->tickStart(), sel->tickEnd());
+// printf("range %d-%d %d-%d\n", _selection->staffStart, _selection->staffEnd, _selection->tickStart(), _selection->tickEnd());
             if (activeIsFirst)
-                  sel->setActiveSegment(sel->startSegment());
+                  _selection->setActiveSegment(_selection->startSegment());
             else
-                  sel->setActiveSegment(sel->endSegment());
+                  _selection->setActiveSegment(_selection->endSegment());
 
-            sel->activeTrack = activeTrack;
+            _selection->activeTrack = activeTrack;
 
             selState = SEL_STAFF;
             updateSelectedElements(selState);
             _is.len = 0;
             }
 
-      sel->setState(selState);
-      emit selectionChanged(int(sel->state()));
+      _selection->setState(selState);
+      emit selectionChanged(int(_selection->state()));
       }
 
 //---------------------------------------------------------
@@ -574,7 +575,7 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
       int endStaff          = 0;
       int endTrack          = 0;
 
-      foreach(const Element* e, *(sel->elements())) {
+      foreach(const Element* e, *(_selection->elements())) {
             if (e->type() == NOTE || e->type() == REST) {
                   ++noteRestCount;
                   if (e->type() == NOTE)
@@ -595,10 +596,10 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
             }
       if (noteRestCount > 0) {
             endSegment = endSegment->nextCR(endTrack);
-            sel->setRange(startSegment, endSegment, startStaff, endStaff+1);
-            if (sel->state() != SEL_STAFF) {
-                  sel->setState(SEL_STAFF);
-                  emit selectionChanged(int(sel->state()));
+            _selection->setRange(startSegment, endSegment, startStaff, endStaff+1);
+            if (_selection->state() != SEL_STAFF) {
+                  _selection->setState(SEL_STAFF);
+                  emit selectionChanged(int(_selection->state()));
                   }
             }
       updateAll = true;
@@ -620,14 +621,14 @@ void Score::searchSelectedElements()
             m->collectElements(l);
       foreach(const Page* page, pages())
             page->collectElements(l);
-      sel->clear();
+      _selection->clear();
       foreach(const Element* e, l) {
             if (e->selected()) {
-                  sel->append(const_cast<Element*>(e));
+                  _selection->append(const_cast<Element*>(e));
                   }
             }
-      sel->updateState();
-      emit selectionChanged(int(sel->state()));
+      _selection->updateState();
+      emit selectionChanged(int(_selection->state()));
       }
 
 //---------------------------------------------------------

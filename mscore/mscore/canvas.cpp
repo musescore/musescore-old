@@ -573,12 +573,12 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
       if (QApplication::mouseButtons() == Qt::MidButton && dragObject) {
-            QString mimeType = _score->sel->mimeType();
+            QString mimeType = _score->selection()->mimeType();
             if (!mimeType.isEmpty()) {
                   QDrag* drag = new QDrag(this);
                   drag->setPixmap(QPixmap());
                   QMimeData* mimeData = new QMimeData;
-                  mimeData->setData(mimeType, _score->sel->mimeData());
+                  mimeData->setData(mimeType, _score->selection()->mimeData());
                   drag->setMimeData(mimeData);
                   _score->endCmd();
                   drag->start(Qt::CopyAction);
@@ -636,18 +636,18 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   {
                   if (dragObject && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
                         // drag selection
-                        QString mimeType = _score->sel->mimeType();
+                        QString mimeType = _score->selection()->mimeType();
                         if (!mimeType.isEmpty()) {
                               QDrag* drag = new QDrag(this);
                               QMimeData* mimeData = new QMimeData;
-                              mimeData->setData(mimeType, score()->sel->mimeData());
+                              mimeData->setData(mimeType, score()->selection()->mimeData());
                               drag->setMimeData(mimeData);
                               _score->endCmd();
                               //
                               //  also set into the clipboard
                               //
                               QMimeData* clip = new QMimeData();
-                              clip->setData(mimeType, score()->sel->mimeData());
+                              clip->setData(mimeType, score()->selection()->mimeData());
                               QApplication::clipboard()->setMimeData(clip);
                               drag->start(Qt::CopyAction);
                               }
@@ -655,7 +655,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         }
                   if (dragObject && dragObject->isMovable()) {
                         QPointF o;
-                        if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM) {
+                        if (_score->selection()->state() != SEL_STAFF && _score->selection()->state() != SEL_SYSTEM) {
                               _score->startDrag(dragObject);
                               o = QPointF(dragObject->userOff());
                               setState(DRAG_OBJ);

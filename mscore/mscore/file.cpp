@@ -169,7 +169,7 @@ void MuseScore::clearScore()
       {
       setDefaultStyle();
       cs->clear();
-      cs->sel->clear();
+      cs->selection()->clear();
       cs->canvas()->clearScore();
       }
 

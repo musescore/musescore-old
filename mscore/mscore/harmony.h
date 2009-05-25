@@ -170,15 +170,16 @@ class Harmony : public Text {
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual void endEdit();
 
-      int baseTpc() const                  { return _baseTpc;      }
-      void setBaseTpc(int val)             { _baseTpc = val;       }
-      int rootTpc() const                  { return _rootTpc;      }
-      void setRootTpc(int val)             { _rootTpc = val;       }
-      int chordId() const                  { return _descr ? _descr->id : 0; }
-      void addDegree(const HDegree& d)     { _degreeList << d;     }
-      int numberOfDegrees() const          { return _degreeList.size();   }
-      HDegree degree(int i) const          { return _degreeList.value(i); }
-      void clearDegrees()                  { _degreeList.clear(); }
+      int baseTpc() const                      { return _baseTpc;      }
+      void setBaseTpc(int val)                 { _baseTpc = val;       }
+      int rootTpc() const                      { return _rootTpc;      }
+      void setRootTpc(int val)                 { _rootTpc = val;       }
+      int chordId() const                      { return _descr ? _descr->id : 0; }
+      void addDegree(const HDegree& d)         { _degreeList << d;            }
+      int numberOfDegrees() const              { return _degreeList.size();   }
+      HDegree degree(int i) const              { return _degreeList.value(i); }
+      void clearDegrees()                      { _degreeList.clear();         }
+      const QList<HDegree>& degreeList() const { return _degreeList;          }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

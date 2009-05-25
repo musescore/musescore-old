@@ -266,7 +266,7 @@ Score::Score(const Style& s)
 
       tempomap          = new TempoList;
       sigmap            = new SigList;
-      sel               = new Selection(this);
+      _selection        = new Selection(this);
       _dirty            = false;
       _saved            = false;
       editObject        = 0;
@@ -298,7 +298,8 @@ Score::~Score()
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete tempomap;
       delete sigmap;
-      delete sel;
+      if (_selection)
+            delete _selection;
       delete _repeatList;
       }
 
@@ -372,7 +373,7 @@ void Score::clear()
       _pages.clear();
       _systems.clear();
 
-      sel->clear();
+      _selection->clear();
       _showInvisible = true;
       _showFrames = true;
       }
@@ -1163,7 +1164,7 @@ void Score::startDrag(Element* e)
 
 void Score::drag(const QPointF& delta)
       {
-      foreach(Element* e, *sel->elements())
+      foreach(Element* e, *_selection->elements())
             refresh |= e->drag(delta);
       }
 
@@ -1189,12 +1190,12 @@ void Score::setNoteEntry(bool val)
       {
       _is.cr = 0;
       if (val) {
-            Element* el = sel->element();
+            Element* el = _selection->element();
             Note* note = 0;
             Rest* rest = 0;
             Chord* c   = 0;
-            if (sel->activeCR())
-                  el = sel->activeCR();
+            if (_selection->activeCR())
+                  el = _selection->activeCR();
             if (el) {
                   if (el->type() == NOTE)
                         note = static_cast<Note*>(el);
@@ -2321,5 +2322,16 @@ double Score::utick2utime(int tick) const
 int Score::utime2utick(double utime)
       {
       return _repeatList->utime2utick(utime);
+      }
+
+//---------------------------------------------------------
+//   setSelection
+//---------------------------------------------------------
+
+void Score::setSelection(Selection* s)
+      {
+      if (_selection)
+            delete _selection;
+      _selection = s;
       }
 

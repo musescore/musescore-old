@@ -649,14 +649,19 @@ void Harmony::propertyAction(const QString& s)
             ce.setHarmony(this);
             int rv = ce.exec();
             if (rv) {
-                  const Harmony* h = ce.harmony();
+                  Harmony* h = ce.harmony()->clone();
+                  h->buildText();
+                  score()->undoChangeElement(this, h);
+#if 0
                   setRootTpc(h->rootTpc());
                   setBaseTpc(h->baseTpc());
                   setDescr(h->descr());
                   clearDegrees();
-                  for (int i = 0; i < h->numberOfDegrees(); i++)
-                        addDegree(h->degree(i));
-                  setText(harmonyName());
+                  _degreeList = h->degreeList();
+                  _descr      = h->descr();
+                  // setText(harmonyName());
+                  buildText();
+#endif
                   }
             }
       else

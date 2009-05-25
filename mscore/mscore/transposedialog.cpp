@@ -62,7 +62,7 @@ void Score::transpose()
       {
       if (last() == 0)     // empty score?
             return;
-      if (sel->state() == SEL_NONE) {
+      if (selection()->state() == SEL_NONE) {
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
                tr("MuseScore: transpose"),
                tr("There is nothing selected. Transpose whole score?"),
@@ -74,29 +74,29 @@ void Score::transpose()
             //
             // select all
             //
-            sel->setState(SEL_SYSTEM);
-            sel->setStartSegment(tick2segment(0));
-            sel->setEndSegment(
+            _selection->setState(SEL_SYSTEM);
+            _selection->setStartSegment(tick2segment(0));
+            _selection->setEndSegment(
                tick2segment(last()->tick() + last()->tickLen())
                );
-            sel->staffStart = 0;
-            sel->staffEnd   = nstaves();
+            _selection->staffStart = 0;
+            _selection->staffEnd   = nstaves();
             }
       TransposeDialog td;
-      td.enableTransposeKeys(sel->state() == SEL_SYSTEM);
+      td.enableTransposeKeys(_selection->state() == SEL_SYSTEM);
       if (!td.exec())
             return;
       int diff           = td.getSemitones();
       bool transposeKeys = td.getTransposeKeys();
-      if (sel->state() != SEL_SYSTEM)
+      if (_selection->state() != SEL_SYSTEM)
             transposeKeys = false;
       int d = diff < 0 ? -diff : diff;
       bool fullOctave = (d % 12) == 0;
       if (fullOctave)
             transposeKeys = false;
 
-      if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
-            QList<Element*>* el = sel->elements();
+      if (_selection->state() == SEL_SINGLE || _selection->state() == SEL_MULT) {
+            QList<Element*>* el = _selection->elements();
             foreach(Element* e, *el) {
                   if (e->type() != NOTE)
                         continue;
@@ -105,14 +105,14 @@ void Score::transpose()
             return;
             }
 
-      int startTrack = sel->staffStart * VOICES;
-      int endTrack   = sel->staffEnd * VOICES;
-      if (sel->state() == SEL_SYSTEM) {
+      int startTrack = _selection->staffStart * VOICES;
+      int endTrack   = _selection->staffEnd * VOICES;
+      if (_selection->state() == SEL_SYSTEM) {
             startTrack = 0;
             endTrack   = nstaves() * VOICES;
             }
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* segment = sel->startSegment(); segment && segment != sel->endSegment(); segment = segment->next1()) {
+            for (Segment* segment = _selection->startSegment(); segment && segment != _selection->endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
                         continue;
@@ -130,10 +130,10 @@ void Score::transpose()
             }
 
       if (!fullOctave && td.getTransposeChordNames()) {
-            Measure* sm = sel->startSegment()->measure();
-            Measure* em = sel->endSegment()->measure();
-            int stick = sel->startSegment()->tick();
-            int etick = sel->endSegment()->tick();
+            Measure* sm = _selection->startSegment()->measure();
+            Measure* em = _selection->endSegment()->measure();
+            int stick   = _selection->startSegment()->tick();
+            int etick   = _selection->endSegment()->tick();
 
             for (Measure* m = sm;;) {
                   foreach (Element* e, *m->el()) {
@@ -156,10 +156,10 @@ void Score::transpose()
             }
 
       if (transposeKeys) {
-            for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
+            for (int staffIdx = _selection->staffStart; staffIdx < _selection->staffEnd; ++staffIdx) {
                   KeyList* km = staff(staffIdx)->keymap();
-                  for (iKeyEvent ke = km->lower_bound(sel->tickStart());
-                     ke != km->lower_bound(sel->tickEnd()); ++ke) {
+                  for (iKeyEvent ke = km->lower_bound(_selection->tickStart());
+                     ke != km->lower_bound(_selection->tickEnd()); ++ke) {
                         int oKey  = ke->second;
                         int tick  = ke->first;
                         int nKey  = transposeKey(oKey, diff);
@@ -171,7 +171,7 @@ void Score::transpose()
       // do not respell if transposing a full octave
       //
       if (!fullOctave) {
-            spell(sel->staffStart, sel->staffEnd, sel->startSegment(), sel->endSegment());
+            spell(_selection->staffStart, _selection->staffEnd, _selection->startSegment(), _selection->endSegment());
             }
       }
 
@@ -221,7 +221,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
             int nKey  = transposeKey(oKey, diff);
             undoChangeKey(staff(staffIdx), tick, oKey, nKey);
             }
-      // spell(staffIdx, staffIdx+1, sel->startSegment(), sel->endSegment());
+      // spell(staffIdx, staffIdx+1, _selection->startSegment(), _selection->endSegment());
       spell();
       }
 

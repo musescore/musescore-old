@@ -231,12 +231,12 @@ void Score::padToggle(int n)
                   _is.rest = false;
             }
 
-      if (noteEntryMode() || sel->state() != SEL_SINGLE) {
+      if (noteEntryMode() || selection()->state() != SEL_SINGLE) {
             setPadState();    // updates dot state
             return;
             }
 
-      Element* el = sel->element();
+      Element* el = selection()->element();
       if (el->type() == NOTE)
             el = el->parent();
       if (!el->isChordRest())
