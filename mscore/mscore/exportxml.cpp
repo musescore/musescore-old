@@ -1683,7 +1683,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             // as editorial="yes". Wikipedia calls this a cautionary accidental.
             // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
             bool editorial = false;
-            int acc        = note->accidentalSubtype();
+            int acc        = note->accidentalType();
             if (acc != ACC_NONE) {
                   if (6 <= acc && acc <= 10) {
                         acc -= 5;

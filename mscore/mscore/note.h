@@ -91,9 +91,11 @@ class Note : public Element {
 
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
-                              ///< and heads are not shown
+                              ///< and heads + accidentals are not shown
 
+      int _accidentalType;
       Accidental* _accidental;
+
       ElementList _el;        ///< fingering, other text, symbols or images
       Tie* _tieFor;
       Tie* _tieBack;
@@ -143,9 +145,9 @@ class Note : public Element {
       int userAccidental() const      { return _userAccidental; }
       void setUserAccidental(int n)   { _userAccidental = n; }
 
-      int accidentalSubtype() const   { return _accidental ? _accidental->subtype() : ACC_NONE; }
-      Accidental* accidental() const  { return _accidental; }
-      void setAccidentalSubtype(int);
+      int accidentalType() const      { return _accidentalType; }
+      Accidental* accidental() const  { return _accidental;     }
+      void setAccidentalType(int);
       void changeAccidental(int);
 
       int line() const                { return _line + _lineOffset;   }

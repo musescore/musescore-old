@@ -487,7 +487,6 @@ class Score : public QObject {
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
       void undoInsertMeasure(MeasureBase*);
-      void undoChangeAccidental(Note*, int);
       void undoToggleInvisible(Element*);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
