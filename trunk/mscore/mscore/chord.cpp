@@ -547,7 +547,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
 
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
-            if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidental()) {
+            if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidentalType() != ACC_NONE) {
                   x   += _spatium * .25;
                   len -= Spatium(.25);
                   break;

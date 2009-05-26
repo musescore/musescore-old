@@ -382,7 +382,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         else  {
                               int accVal = ((tpc + 1) / 7) - 2;
                               accidental = ACC_NONE;
-                              if (accVal != tversatz[line]) {
+                              if (accVal != tversatz[line] || note->hidden()) {
                                     if (note->tieBack() == 0)
                                           tversatz[line] = accVal;
                                     switch(accVal) {
@@ -395,7 +395,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                                           }
                                     }
                               }
-                        note->setAccidentalSubtype(accidental);
+                        note->setAccidentalType(accidental);
 
                         //
                         // calculate the real note line depending on clef

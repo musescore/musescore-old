@@ -107,6 +107,7 @@ Note::Note(Score* s)
       _hidden         = false;
       _subchannel     = 0;
       _head           = noteHeads[0][2];
+      _accidentalType = ACC_NONE;
       }
 
 Note::Note(const Note& n)
@@ -122,6 +123,7 @@ Note::Note(const Note& n)
       _staffMove      = n._staffMove;
       _userAccidental = n._userAccidental;
       _accidental     = 0;
+      _accidentalType = n._accidentalType;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
       _head           = n._head;
@@ -289,7 +291,7 @@ void Note::changeAccidental(int accType)
                   _userAccidental = ACC_NONE;
                   return;
                   }
-            if (_accidental && _accidental->subtype() == ACC_NATURAL) {
+            if (accidentalType() == ACC_NATURAL) {
                   int acc    = m->findAccidental2(this);
                   int opitch = _pitch;
                   _pitch     = line2pitch(_line, clef, 0) + acc;
@@ -313,7 +315,7 @@ void Note::changeAccidental(int accType)
       // if the accidentals differ, this which means acc1 is
       // redundant and is set as an editorial accidental
 
-      if (accType != type2) {
+      if (accType != type2 && !_hidden) {
 //            printf("user acc %d  -- %d\n", accType, type2);
             _userAccidental = accType;    // editorial accidental
             }
@@ -351,6 +353,7 @@ void Note::add(Element* e)
                   break;
             case ACCIDENTAL:
                   _accidental = static_cast<Accidental*>(e);
+                  _accidentalType = _accidental->subtype();
                   break;
             default:
                   printf("Note::add() not impl. %s\n", e->name());
@@ -368,6 +371,7 @@ void Note::setTieBack(Tie* t)
       if (t && _accidental) {          // dont show prefix of second tied note
             delete _accidental;
             _accidental = 0;
+            _accidentalType = ACC_NONE;
             }
       }
 
@@ -395,6 +399,7 @@ void Note::remove(Element* e)
 
             case ACCIDENTAL:
                   _accidental = 0;
+                  _accidentalType = ACC_NONE;
                   break;
 
             default:
@@ -454,12 +459,12 @@ double Note::stemYoff(bool upFlag) const
       }
 
 //---------------------------------------------------------
-//   setAccidentalSubtype
+//   setAccidentalType
 //---------------------------------------------------------
 
-void Note::setAccidentalSubtype(int pre)
+void Note::setAccidentalType(int pre)
       {
-      if (pre && !_tieBack) {
+      if (pre != ACC_NONE && !_tieBack && !_hidden) {
             if (!_accidental) {
                   _accidental = new Accidental(score());
                   add(_accidental);
@@ -470,6 +475,7 @@ void Note::setAccidentalSubtype(int pre)
             delete _accidental;
             _accidental = 0;
             }
+      _accidentalType = pre;
       }
 
 //---------------------------------------------------------

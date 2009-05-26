@@ -283,8 +283,7 @@ void Score::setPadState(Element* e)
             Chord* chord        = note->chord();
             len = chord->duration().ticks(chord->dots());
 
-            Accidental* prefix  = note->accidental();
-            _is.prefix    = prefix ? prefix->subtype() : 0;
+            _is.prefix    = note->accidentalType();
             _is.rest      = false;
             _is.track     = note->track();
             _is.pitch     = note->pitch();

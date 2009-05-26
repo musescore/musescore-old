@@ -1703,20 +1703,31 @@ void Score::addAccidental(int idx)
  Add accidental of subtype \a idx to note \a oNote.
 */
 
-void Score::addAccidental(Note* oNote, int accidental)
+void Score::addAccidental(Note* note, int accidental)
       {
-      undoChangeAccidental(oNote, accidental);
-#if 0
-      UndoOp i;
-      i.type     = UndoOp::ChangeAccidental;
-      i.element1 = oNote;
-      i.val1     = oNote->pitch();
-      i.val2     = oNote->tpc();
-      i.val3     = oNote->accidentalSubtype();
-      undoList.back()->push_back(i);
-      oNote->changeAccidental(accidental);
-      layoutAll = true;
-#endif
+      _undo->push(new ChangeAccidental(note, accidental));
+
+      //
+      // look for note heads on the same staff line
+      //
+      Chord* chord     = note->chord();
+      Segment* segment = chord->segment();
+      int line         = note->line();
+      int t1 = chord->staffIdx() * VOICES;
+      int t2 = t1 + VOICES;
+      for (int track = t1; track < t2; ++track) {
+            Element* e = segment->element(track);
+            if (!e || e->type() != CHORD)
+                  continue;
+            Chord* c = static_cast<Chord*>(e);
+            NoteList* nl = c->noteList();
+            for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                  Note* n = in->second;
+                  if ((n != note) && (n->line() == line) && (n->accidentalType() != accidental)) {
+                        _undo->push(new ChangeAccidental(n, accidental));
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------

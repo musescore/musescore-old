@@ -356,3 +356,15 @@ int Portaudio::currentDevice() const
       return -1;
       }
 
+//---------------------------------------------------------
+//   getPatchInfo
+//---------------------------------------------------------
+
+const MidiPatch* Portaudio::getPatchInfo(bool onlyDrums, const MidiPatch* p)
+      {
+      if (synth)
+            return synth->getPatchInfo(onlyDrums, p);
+      return 0;
+      }
+
+
