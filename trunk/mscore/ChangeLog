@@ -1,3 +1,8 @@
+28.may (ws)
+      - fix regression in slur editing
+      - added ukrainian translation from Serhij Dubyk
+27.may (ws)
+      - check line elementes for consistency
 25.may (ws)
       - fix chord editing
       - fix crash related to deleting measures+slurs

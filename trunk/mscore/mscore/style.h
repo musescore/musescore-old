@@ -208,7 +208,7 @@ enum STYLE_TYPE {
       ST_beginRepeatLeftMargin,
       ST_minNoteDistance,
       ST_barNoteDistance,
-      ST_noteBarDistance,
+      ST_noteBarDistance,           // used??
       ST_measureSpacing,
       ST_staffLineWidth,
       ST_ledgerLineWidth,

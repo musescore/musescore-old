@@ -628,4 +628,16 @@ void SLine::read(QDomElement e)
             }
       }
 
+//---------------------------------------------------------
+//   check
+//    check for consistency; return false if element is
+//    invalid
+//---------------------------------------------------------
+
+bool SLine::check() const
+      {
+      if (tick2() <= tick())
+            return false;
+      return true;
+      }
 

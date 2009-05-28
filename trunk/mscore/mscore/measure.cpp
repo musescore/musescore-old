@@ -1510,7 +1510,7 @@ if (debugMode)
             else if (s->subtype() == Segment::SegKeySig)
                   additionalExtra = point(score()->styleS(ST_keysigLeftMargin));
             else if (s->subtype() == Segment::SegEndBarLine)
-                  additionalExtra = point(score()->styleS(ST_barNoteDistance));
+                  additionalExtra = point(score()->styleS(ST_noteBarDistance));
             else if (s->subtype() == Segment::SegTimeSigAnnounce) {
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = _spatium;
@@ -1740,7 +1740,7 @@ printf("\n");
             }
 
       //-----------------------------------------------------------------------
-      //    xpos[segs+2]   - start of next measure (width of current measure)
+      //    xpos[segs+1]   - start of next measure (width of current measure)
       //-----------------------------------------------------------------------
 
       double xpos[segs+2];
@@ -1792,14 +1792,6 @@ printf("\n");
                                     }
                               e->setXpos(xx);
                               }
-#if 0
-                        else if (e->voice() == 2) {          // TODO: check ??
-                              e->move(0.0, -3 * _spatium);
-                              }
-                        else if (e->voice() == 1 || e->voice() == 3) {
-                              e->move(0.0, 3 * _spatium);
-                              }
-#endif
                         }
                   else if (t == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);

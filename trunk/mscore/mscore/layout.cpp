@@ -978,7 +978,12 @@ void Score::add(Element* el)
             measures()->add((MeasureBase*)el);
             }
       else {
-            _gel.append(el);
+            if (el->check())
+                  _gel.append(el);
+            else {
+                  printf("remove invalid element <%s>\n", el->name());
+                  delete el;
+                  }
             }
       }
 

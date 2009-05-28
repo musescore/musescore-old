@@ -79,6 +79,10 @@
         <source>Norsk</source>
         <translation>Norsk - Norvégien</translation>
     </message>
+    <message>
+        <source>Ukrajina</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
