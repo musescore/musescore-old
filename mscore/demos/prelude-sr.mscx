@@ -97,74 +97,28 @@
       </Instrument>
     </Part>
   <Slur id="1">
-    <SlurSegment no="0">
-      <offset x="0" y="-1.27591e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="2">
-    <SlurSegment no="0">
-      <offset x="0" y="-1.13415e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="3">
-    <SlurSegment no="0">
-      <offset x="-2.83535e+16" y="-1.27591e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="4">
-    <SlurSegment no="0">
-      <offset x="-1.41769e+16" y="-1.13415e+17"/>
-      </SlurSegment>
-    <SlurSegment no="1">
-      <offset x="0" y="-4.00124e+16"/>
-      </SlurSegment>
     </Slur>
   <Slur id="5">
-    <SlurSegment no="0">
-      <offset x="-6.40196e+16" y="-4.80146e+16"/>
-      <o2 x="-0.453945" y="1.1555"/>
-      <o3 x="-0.0412677" y="1.11423"/>
-      <o4 x="-0.701551" y="-9.07889"/>
-      </SlurSegment>
     </Slur>
   <Slur id="6">
-    <SlurSegment no="0">
-      <offset x="-8.00246e+15" y="-1.04033e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="7">
-    <SlurSegment no="0">
-      <offset x="8.00246e+15" y="-1.2804e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="8">
-    <SlurSegment no="0">
-      <offset x="-8.00246e+16" y="-1.36042e+17"/>
-      </SlurSegment>
     </Slur>
   <Slur id="9">
-    <SlurSegment no="0">
-      <offset x="8.00246e+15" y="-1.9206e+17"/>
-      <o4 x="-0.165071" y="-1.07296"/>
-      </SlurSegment>
     </Slur>
   <Slur id="10">
-    <SlurSegment no="0">
-      <offset x="-8.00246e+16" y="1.60049e+16"/>
-      </SlurSegment>
-    <up>1</up>
     </Slur>
   <Slur id="11">
-    <SlurSegment no="0">
-      <offset x="-5.60172e+16" y="-8.00246e+15"/>
-      </SlurSegment>
-    <up>1</up>
     </Slur>
   <Slur id="12">
-    <SlurSegment no="0">
-      <offset x="-8.00246e+16" y="-2.40075e+16"/>
-      </SlurSegment>
-    <up>1</up>
     </Slur>
   <Slur id="13">
     <up>2</up>
@@ -191,25 +145,12 @@
   <Slur id="22">
     </Slur>
   <Slur id="23">
-    <SlurSegment no="0">
-      <offset x="531.517" y="-4252.13"/>
-      <o4 x="0" y="-1.31992"/>
-      </SlurSegment>
     </Slur>
   <Slur id="24">
-    <SlurSegment no="0">
-      <offset x="531.517" y="-10630.3"/>
-      </SlurSegment>
     </Slur>
   <Slur id="25">
-    <SlurSegment no="0">
-      <offset x="0" y="133.934"/>
-      </SlurSegment>
     </Slur>
   <Slur id="26">
-    <SlurSegment no="0">
-      <offset x="0" y="127.556"/>
-      </SlurSegment>
     </Slur>
   <Slur id="27">
     <SlurSegment no="0">
@@ -225,26 +166,12 @@
       </SlurSegment>
     </Slur>
   <Slur id="29">
-    <SlurSegment no="0">
-      <offset x="45.6746" y="-208.798"/>
-      </SlurSegment>
     </Slur>
   <Slur id="30">
-    <SlurSegment no="0">
-      <offset x="26.0998" y="-195.748"/>
-      </SlurSegment>
     </Slur>
   <Slur id="31">
-    <SlurSegment no="0">
-      <offset x="26.0998" y="-65.2495"/>
-      <o4 x="0.156589" y="-1.17442"/>
-      </SlurSegment>
     </Slur>
   <Slur id="32">
-    <SlurSegment no="0">
-      <offset x="32.6247" y="-84.8243"/>
-      <o4 x="0.0782944" y="-1.01783"/>
-      </SlurSegment>
     </Slur>
   <Staff id="1">
     <VBox>
