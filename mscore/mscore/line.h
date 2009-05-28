@@ -111,6 +111,7 @@ class SLine : public Element {
       void setDiagonal(bool v)      { _diagonal = v;    }
       Anchor anchor() const         { return _anchor;   }
       void setAnchor(Anchor a)      { _anchor = a;      }
+      virtual bool check() const;
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

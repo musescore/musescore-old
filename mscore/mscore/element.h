@@ -355,6 +355,12 @@ class Element {
 
       double point(const Spatium sp) const { return sp.val() * spatium(); }
 
+      //
+      // check element for consistency; return false if element
+      // is not valid
+      //
+      virtual bool check() const { return true; }
+
       static const char* name(ElementType type);
       static Element* create(ElementType type, Score*);
       static ElementType name2type(const QString&);

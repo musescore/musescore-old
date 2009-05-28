@@ -69,6 +69,7 @@ void SlurSegment::updatePath()
             pp[i] = ups[i].p + ups[i].off * _spatium;
       path = QPainterPath();
       QPointF t(0.0, spatium() * .08);    // thickness of slur
+
       path.moveTo(pp[0]);
       path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
       path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
@@ -289,7 +290,7 @@ void SlurSegment::write(Xml& xml, int no) const
 
       xml.stag(QString("SlurSegment no=\"%1\"").arg(no));
       if (!userOff().isNull())
-            xml.tag("offset", userOff());
+            xml.tag("offset", userOff() / spatium());
       if (!(ups[0].off.isNull()))
             xml.tag("o1", ups[0].off);
       if (!(ups[1].off.isNull()))
@@ -347,6 +348,10 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       if (xdelta == 0.0) {
             printf("warning: slur has zero width at %d-%d\n",
                slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
+            return;
+            }
+      if (x0 > x3) {
+            printf("illegal slurSegment\n");
             return;
             }
 

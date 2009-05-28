@@ -79,6 +79,10 @@
         <source>TÃ¼rkÃ§e</source>
         <translation>土耳其語</translation>
     </message>
+    <message>
+        <source>Ukrajina</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>

@@ -1272,12 +1272,7 @@ bool Score::read(QDomElement e)
                         Hairpin* hairpin = new Hairpin(this);
                         hairpin->setTick(curTick);
                         hairpin->read(ee);
-                        if (hairpin->tick2() == hairpin->tick()) {
-                              printf("removed zero length hairpin\n");
-                              delete hairpin;
-                              }
-                        else
-                              add(hairpin);
+                        add(hairpin);
                         }
                   else if (tag == "Ottava") {
                         Ottava* ottava = new Ottava(this);

@@ -770,6 +770,13 @@ void Canvas::updateGrips()
 
 void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
+      if (ev->button() == Qt::RightButton && ev->buttons() == Qt::LeftButton) {
+            _score->endCmd();
+            return;
+            }
+
+      //      if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
+
       if (ev->buttons() == 0)
             level = 0;
       if (dragCanvasState) {

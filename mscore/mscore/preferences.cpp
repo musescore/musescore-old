@@ -75,6 +75,7 @@ LanguageItem languages[] = {
       LanguageItem("ru",    QT_TR_NOOP("Русский")),
       LanguageItem("sv",    QT_TR_NOOP("Svenska")),
       LanguageItem("tr",    QT_TR_NOOP("Türkçe")),
+      LanguageItem("uk",    QT_TR_NOOP("Ukrajina")),
       };
 
 //---------------------------------------------------------
