@@ -1,9 +1,12 @@
 28.may (ws)
       - fix regression in slur editing
       - added ukrainian translation from Serhij Dubyk
+      (db)
+      - Fix instrument sound for trumpet in bach-bc2 demo
+      - Add sarabande-gfh demo to installer
+      - Add ukrainian to gen-qt-projectfile.bat
 27.may (ws)
-      - check line elementes for consistency
-25.may (ws)
+      - check line elementes for consistency25.may (ws)
       - fix chord editing
       - fix crash related to deleting measures+slurs
       - use qt file dialog (non native) for "save as" except for windows
