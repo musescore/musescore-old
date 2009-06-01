@@ -67,7 +67,7 @@ TimeDialog::TimeDialog(QWidget* parent)
 
 void TimeDialog::addClicked()
       {
-      TimeSig* ts = new TimeSig(0, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
+      TimeSig* ts = new TimeSig(gscore, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
       // extend palette:
       sp->append(ts, "");
       }
