@@ -279,7 +279,8 @@ int ScMeasurePrototype::getPageNumber() const
 double ScMeasurePrototype::getX() const
   {
     Measure* m = thisMeasure();
-    return m->canvasPos().x();              
+    Page* page = (Page*)m->parent()->parent();
+    return m->canvasPos().x() - page->canvasPos().x();              
   }
 
 //---------------------------------------------------------
