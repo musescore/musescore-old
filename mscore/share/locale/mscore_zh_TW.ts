@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Ukrajina</source>
-        <translation type="unfinished"></translation>
+        <translation>烏克蘭語</translation>
     </message>
 </context>
 <context>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>音符屬性</translation>
+        <translation>和弦屬性</translation>
     </message>
     <message>
         <source>small</source>
@@ -994,43 +994,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stem direction</source>
-        <translation type="unfinished"></translation>
+        <translation>符幹方向</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">自動</translation>
+        <translation>自動</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">音高上升</translation>
+        <translation>向上</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">下鍵</translation>
+        <translation>向下</translation>
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>音符屬性</translation>
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"></translation>
+        <translation>調整偏移</translation>
     </message>
     <message>
         <source>cent</source>
-        <translation type="unfinished"></translation>
+        <translation> 百分比</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation type="unfinished"></translation>
+        <translation>符頭位置 </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>符幹左側</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>符幹右側</translation>
     </message>
 </context>
 <context>
@@ -1532,7 +1532,6 @@ failed: </source>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translatorcomment>禮貌,殷勤,好意</translatorcomment>
         <translation>建立提示性的拍號</translation>
     </message>
     <message>
@@ -1774,15 +1773,15 @@ failed: </source>
     </message>
     <message>
         <source>shorten stems</source>
-        <translation type="unfinished"></translation>
+        <translation>縮短符幹</translation>
     </message>
     <message>
         <source>progression</source>
-        <translation type="unfinished"></translation>
+        <translation>縮小程度</translation>
     </message>
     <message>
         <source>shortest stem</source>
-        <translation type="unfinished"></translation>
+        <translation>最短符幹</translation>
     </message>
 </context>
 <context>
@@ -2617,11 +2616,11 @@ failed: </source>
     </message>
     <message>
         <source>previous</source>
-        <translation type="unfinished"></translation>
+        <translation>上一小節</translation>
     </message>
     <message>
         <source>next</source>
-        <translation type="unfinished"></translation>
+        <translation>下一小節</translation>
     </message>
 </context>
 <context>
@@ -3996,7 +3995,7 @@ failed: </source>
     </message>
     <message>
         <source>(2+2)/4 alla breve</source>
-        <translation>(2+2)/4 二二拍子</translation>
+        <translation>二二拍子</translation>
     </message>
     <message>
         <source>Time</source>
@@ -5113,71 +5112,71 @@ before closing?</source>
     </message>
     <message>
         <source>mirror note head</source>
-        <translation type="unfinished"></translation>
+        <translation>水平反轉符頭</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation type="unfinished"></translation>
+        <translation>到：</translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">壓縮的 MuseScore 格式 (*.mscz)</translation>
+        <translation>壓縮的 MuseScore 格式 (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">MuseScore 格式 (*.mscx)</translation>
+        <translation>MuseScore 格式 (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">MusicXML 格式 (*.xml)</translation>
+        <translation>MusicXML 格式 (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">壓縮的 MusicXML 格式 (*.mxl)</translation>
+        <translation>壓縮的 MusicXML 格式 (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">標準 MIDI 檔案 (*.mid)</translation>
+        <translation>標準 MIDI 檔案 (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF 檔案 (*.pdf)</translation>
+        <translation>PDF 檔案 (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">PostScript 檔案 (*.ps)</translation>
+        <translation>PostScript 檔案 (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG 點陣圖 (*.png)</translation>
+        <translation>PNG 點陣圖 (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">可變動向量繪圖 (*.svg)</translation>
+        <translation>可變動向量繪圖 (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond 格式 (*.ly)</translation>
+        <translation>Lilypond 格式 (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished">Wave 音訊檔 (*.wav)</translation>
+        <translation>Wave 音訊檔 (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished">Flac 音訊檔 (*.flac)</translation>
+        <translation>Flac 音訊檔 (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished">Ogg Vorbis 音訊檔 (*.ogg)</translation>
+        <translation>Ogg Vorbis 音訊檔 (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished">MuseScore：另存新檔</translation>
+        <translation>MuseScore：另存新檔</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore：儲存副本</translation>
+        <translation>MuseScore：儲存副本</translation>
     </message>
 </context>
 <context>
@@ -5392,15 +5391,15 @@ before closing?</source>
     </message>
     <message>
         <source>Mirror Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>自動反轉</translation>
     </message>
     <message>
         <source>Head Left</source>
-        <translation type="unfinished"></translation>
+        <translation>符頭在左側</translation>
     </message>
     <message>
         <source>Head Right</source>
-        <translation type="unfinished"></translation>
+        <translation>符頭在右側</translation>
     </message>
 </context>
 <context>
@@ -7140,12 +7139,12 @@ failed: </source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">毫米</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -7159,214 +7158,214 @@ failed: </source>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">表單</translation>
+        <translation>表單</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished">字型：</translation>
+        <translation>字型：</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation type="unfinished">字型</translation>
+        <translation>字型</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">大小：</translation>
+        <translation>大小：</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished">字型點數大小</translation>
+        <translation>字型點數大小</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished">樣式：</translation>
+        <translation>樣式：</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished">粗體</translation>
+        <translation>粗體</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished">斜體</translation>
+        <translation>斜體</translation>
     </message>
     <message>
         <source>I</source>
-        <translation type="unfinished">I</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation type="unfinished">底線</translation>
+        <translation>底線</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished">U</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished">對齊：</translation>
+        <translation>對齊：</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished">文字左側對齊參考點</translation>
+        <translation>文字左側對齊參考點</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished">文字中心對齊參考點</translation>
+        <translation>文字中心對齊參考點</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished">文字右側對齊參考點</translation>
+        <translation>文字右側對齊參考點</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished">文字頂端對齊參考點</translation>
+        <translation>文字頂端對齊參考點</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished">文字中心垂直對齊參考點</translation>
+        <translation>文字中心垂直對齊參考點</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished">文字底端對齊參考點</translation>
+        <translation>文字底端對齊參考點</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">顏色：</translation>
+        <translation>顏色：</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished">文字顏色</translation>
+        <translation>文字顏色</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">偏移</translation>
+        <translation>偏移</translation>
     </message>
     <message>
         <source>X:</source>
-        <translation type="unfinished">X:</translation>
+        <translation>X:</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished">參考點的水平偏移</translation>
+        <translation>參考點的水平偏移</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished">relX:</translation>
+        <translation>relX:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished">參考點相對於上層元件寬度百分比的偏移</translation>
+        <translation>參考點相對於上層元件寬度百分比的偏移</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished">參考點的垂直偏移</translation>
+        <translation>參考點的垂直偏移</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished">relY:</translation>
+        <translation>relY:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished">參考點相對於上層元件高度百分比的偏移</translation>
+        <translation>參考點相對於上層元件高度百分比的偏移</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">單位：</translation>
+        <translation>單位：</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation type="unfinished">偏移量為絕對的</translation>
+        <translation>偏移量為絕對的</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">毫米</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation type="unfinished">間隔單位的偏移量</translation>
+        <translation>間隔單位的偏移量</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>間隔</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished">使用文字外框</translation>
+        <translation>使用文字外框</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>外框</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation type="unfinished">畫圓形框</translation>
+        <translation>畫圓形框</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished">圓形</translation>
+        <translation>圓形</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation type="unfinished">畫矩形框</translation>
+        <translation>畫矩形框</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished">矩形</translation>
+        <translation>矩形</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">寬度：</translation>
+        <translation>寬度：</translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation type="unfinished">框線寬度</translation>
+        <translation>框線寬度</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">毫米</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation type="unfinished">邊緣：</translation>
+        <translation>邊緣：</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation type="unfinished">外框內邊緣</translation>
+        <translation>外框內邊緣</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation type="unfinished">圓角：</translation>
+        <translation>圓角：</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation type="unfinished">圓角</translation>
+        <translation>圓角</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished">外框顏色</translation>
+        <translation>外框顏色</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation type="unfinished">MuseScore：編輯文字樣式</translation>
+        <translation>MuseScore：編輯文字樣式</translation>
     </message>
 </context>
 <context>
@@ -7699,8 +7698,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tablature</source>
-        <translatorcomment>圖表記譜法；(香港)指法記譜法</translatorcomment>
-        <translation>古記譜法</translation>
+        <translatorcomment>古記譜法；(香港)指法記譜法</translatorcomment>
+        <translation>圖表記譜法</translation>
     </message>
     <message>
         <source>Percussion</source>
@@ -8581,12 +8580,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tab clef</source>
-        <translatorcomment>圖表記譜法譜號</translatorcomment>
-        <translation>古記譜法譜號</translation>
+        <translatorcomment>古記譜法譜號</translatorcomment>
+        <translation>圖表記譜法譜號</translation>
     </message>
     <message>
         <source>ctab clef</source>
-        <translation>提示性的古記譜法譜號</translation>
+        <translation>提示性的圖表記譜法譜號</translation>
     </message>
     <message>
         <source>four four meter</source>

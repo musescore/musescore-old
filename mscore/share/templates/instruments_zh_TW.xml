@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <museScore version="1.0">
    <Articulation name="staccato">
@@ -11,10 +11,10 @@
       <gateTime>100%</gateTime>
       </Articulation>
 
-   <instrument-group name="Woodwinds">
+   <instrument-group name="木管樂器">
       <instrument>
-         <name>Piccolo</name>
-         <short-name>Picc.</short-name>
+         <name>短笛</name>
+         <short-name>短笛</short-name>
          <clef>1</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
@@ -23,8 +23,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Treble Flute</name>
-         <short-name>T. Fl.</short-name>
+         <name>高音長笛</name>
+         <short-name>高音長笛</short-name>
          <clef>0</clef>
          <transposition>7</transposition>
          <aPitchRange>67-100</aPitchRange>
@@ -34,8 +34,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>E<symbol name="flat"/> Flute</name>
-         <short-name>E<symbol name="flat"/> Fl.</short-name>
+         <name>降Ｅ調長笛</name>
+         <short-name>降Ｅ調長笛</short-name>
          <clef>0</clef>
          <transposition>3</transposition>
          <aPitchRange>63-96</aPitchRange>
@@ -45,8 +45,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Flute</name>
-         <short-name>Fl.</short-name>
+         <name>長笛</name>
+         <short-name>長笛</short-name>
          <clef>0</clef>
          <aPitchRange>60-93</aPitchRange>
          <pPitchRange>59-98</pPitchRange>
@@ -55,8 +55,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Flute</name>
-         <short-name>A. Fl.</short-name>
+         <name>中音長笛</name>
+         <short-name>中音長笛</short-name>
          <clef>0</clef>
          <transposition>-5</transposition>
          <aPitchRange>55-88</aPitchRange>
@@ -66,8 +66,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Flute</name>
-         <short-name>B. Fl.</short-name>
+         <name>低音長笛</name>
+         <short-name>低音長笛</short-name>
          <clef>3</clef>
          <aPitchRange>48-77</aPitchRange>
          <pPitchRange>48-81</pPitchRange>
@@ -76,8 +76,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contra-alto Flute</name>
-         <short-name>C-a. Fl.</short-name>
+         <name>倍中音長笛</name>
+         <short-name>倍中音長笛</short-name>
          <clef>0</clef>
          <transposition>-17</transposition>
          <aPitchRange>43-76</aPitchRange>
@@ -87,8 +87,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabass Flute</name>
-         <short-name>Cb. Fl.</short-name>
+         <name>倍低音長笛</name>
+         <short-name>倍低音長笛</short-name>
          <clef>11</clef>
          <aPitchRange>36-65</aPitchRange>
          <pPitchRange>36-69</pPitchRange>
@@ -97,8 +97,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Subcontra-alto Flute</name>
-         <short-name>Sc-a. Fl.</short-name>
+         <name>超倍中音長笛</name>
+         <short-name>超倍中音長笛</short-name>
          <clef>11</clef>
          <transposition>-5</transposition>
          <aPitchRange>31-60</aPitchRange>
@@ -108,8 +108,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Subcontrabass Flute</name>
-         <short-name>Scb. Fl.</short-name>
+         <name>超倍低音長笛</name>
+         <short-name>超倍低音長笛</short-name>
          <clef>14</clef>
          <aPitchRange>24-60</aPitchRange>
          <pPitchRange>24-64</pPitchRange>
@@ -118,8 +118,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Hypobass Flute</name>
-         <short-name>Hb. Fl.</short-name>
+         <name>重低音笛</name>
+         <short-name>重低音笛</short-name>
          <clef>15</clef>
          <aPitchRange>12-48</aPitchRange>
          <pPitchRange>12-45</pPitchRange>
@@ -128,8 +128,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Transverse Flute</name>
-         <short-name>Tr. Fl.</short-name>
+         <name>橫笛</name>
+         <short-name>橫笛</short-name>
          <clef>0</clef>
          <aPitchRange>62-89</aPitchRange>
          <pPitchRange>62-93</pPitchRange>
@@ -138,8 +138,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Transverse Flute</name>
-         <short-name>A. Tr. Fl.</short-name>
+         <name>中音橫笛</name>
+         <short-name>中音橫笛</short-name>
          <clef>0</clef>
          <aPitchRange>55-76</aPitchRange>
          <pPitchRange>55-80</pPitchRange>
@@ -148,8 +148,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Pan Flute</name>
-         <short-name>P. Fl.</short-name>
+         <name>排笛</name>
+         <short-name>排笛</short-name>
          <clef>0</clef>
          <aPitchRange>60-96</aPitchRange>
          <pPitchRange>60-96</pPitchRange>
@@ -158,8 +158,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Garklein Recorder</name>
-         <short-name>Gk. Rec.</short-name>
+         <name>超高音直笛</name>
+         <short-name>超高音直笛</short-name>
          <clef>2</clef>
          <aPitchRange>84-105</aPitchRange>
          <pPitchRange>84-108</pPitchRange>
@@ -168,8 +168,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Recorder</name>
-         <short-name>Si. Rec.</short-name>
+         <name>最高音直笛</name>
+         <short-name>最高音直笛</short-name>
          <clef>1</clef>
          <aPitchRange>77-100</aPitchRange>
          <pPitchRange>77-103</pPitchRange>
@@ -178,8 +178,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Recorder</name>
-         <short-name>S. Rec.</short-name>
+         <name>高音直笛</name>
+         <short-name>高音直笛</short-name>
          <clef>1</clef>
          <aPitchRange>72-93</aPitchRange>
          <pPitchRange>72-98</pPitchRange>
@@ -188,8 +188,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Recorder</name>
-         <short-name>A. Rec.</short-name>
+         <name>中音直笛</name>
+         <short-name>中音直笛</short-name>
          <clef>0</clef>
          <aPitchRange>65-88</aPitchRange>
          <pPitchRange>65-91</pPitchRange>
@@ -198,8 +198,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Recorder</name>
-         <short-name>T. Rec.</short-name>
+         <name>次中音直笛</name>
+         <short-name>次中音直笛</short-name>
          <clef>0</clef>
          <aPitchRange>60-81</aPitchRange>
          <pPitchRange>60-86</pPitchRange>
@@ -208,8 +208,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Recorder</name>
-         <short-name>B. Rec.</short-name>
+         <name>低音直笛</name>
+         <short-name>低音直笛</short-name>
          <clef>12</clef>
          <aPitchRange>53-74</aPitchRange>
          <pPitchRange>53-77</pPitchRange>
@@ -218,8 +218,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Greatbass Recorder</name>
-         <short-name>Gb. Rec.</short-name>
+         <name>大低音直笛</name>
+         <short-name>大低音直笛</short-name>
          <clef>12</clef>
          <aPitchRange>48-69</aPitchRange>
          <pPitchRange>48-72</pPitchRange>
@@ -228,8 +228,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabass Recorder</name>
-         <short-name>Cb. Rec.</short-name>
+         <name>倍低音直笛</name>
+         <short-name>倍低音直笛</short-name>
          <clef>11</clef>
          <aPitchRange>41-62</aPitchRange>
          <pPitchRange>41-65</pPitchRange>
@@ -238,8 +238,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>G Soprano Ocarina</name>
-         <short-name>G S. Oc.</short-name>
+         <name>高音Ｇ調陶笛</name>
+         <short-name>高音Ｇ調陶笛</short-name>
          <clef>1</clef>
          <aPitchRange>79-93</aPitchRange>
          <pPitchRange>79-95</pPitchRange>
@@ -248,8 +248,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>F Soprano Ocarina</name>
-         <short-name>F S. Oc.</short-name>
+         <name>高音Ｆ調陶笛</name>
+         <short-name>高音Ｆ調陶笛</short-name>
          <clef>1</clef>
          <aPitchRange>77-91</aPitchRange>
          <pPitchRange>77-93</pPitchRange>
@@ -258,8 +258,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>C Soprano Ocarina</name>
-         <short-name>C S. Oc.</short-name>
+         <name>高音Ｃ調陶笛</name>
+         <short-name>高音Ｃ調陶笛</short-name>
          <clef>1</clef>
          <aPitchRange>72-86</aPitchRange>
          <pPitchRange>72-88</pPitchRange>
@@ -268,8 +268,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Soprano Ocarina</name>
-         <short-name>B<symbol name="flat"/> S. Oc.</short-name>
+         <name>高音降Ｂ調陶笛</name>
+         <short-name>高音降Ｂ調陶笛</short-name>
          <clef>1</clef>
          <aPitchRange>70-84</aPitchRange>
          <pPitchRange>70-86</pPitchRange>
@@ -278,8 +278,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>G Alto Ocarina</name>
-         <short-name>G A. Oc.</short-name>
+         <name>中音Ｇ調陶笛</name>
+         <short-name>中音Ｇ調陶笛</short-name>
          <clef>0</clef>
          <aPitchRange>67-81</aPitchRange>
          <pPitchRange>67-83</pPitchRange>
@@ -288,8 +288,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>F Alto Ocarina</name>
-         <short-name>F A. Oc.</short-name>
+         <name>中音Ｆ調陶笛</name>
+         <short-name>中音Ｆ調陶笛</short-name>
          <clef>0</clef>
          <aPitchRange>65-79</aPitchRange>
          <pPitchRange>65-81</pPitchRange>
@@ -298,8 +298,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>C Alto Ocarina</name>
-         <short-name>C A. Oc.</short-name>
+         <name>中音Ｃ調陶笛</name>
+         <short-name>中音Ｃ調陶笛</short-name>
          <clef>0</clef>
          <transposition>7</transposition>
          <aPitchRange>60-74</aPitchRange>
@@ -309,8 +309,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Alto Ocarina</name>
-         <short-name>B<symbol name="flat"/> A. Oc.</short-name>
+         <name>中音降Ｂ調陶笛</name>
+         <short-name>中音降Ｂ調陶笛</short-name>
          <clef>0</clef>
          <aPitchRange>58-72</aPitchRange>
          <pPitchRange>58-74</pPitchRange>
@@ -319,8 +319,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>C Bass Ocarina</name>
-         <short-name>C B. Oc.</short-name>
+         <name>低音Ｃ調陶笛</name>
+         <short-name>低音Ｃ調陶笛</short-name>
          <clef>11</clef>
          <aPitchRange>48-62</aPitchRange>
          <pPitchRange>48-64</pPitchRange>
@@ -329,8 +329,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Slide Whistle</name>
-         <short-name>Sl. Wh.</short-name>
+         <name>伸縮哨笛</name>
+         <short-name>伸縮哨笛</short-name>
          <clef>1</clef>
          <aPitchRange>69-96</aPitchRange>
          <pPitchRange>69-96</pPitchRange>
@@ -340,7 +340,7 @@
          </instrument>
       <instrument>
          <name>Piccolo Oboe</name>
-         <short-name>P. Ob.</short-name>
+         <short-name>Piccolo Oboe</short-name>
          <clef>0</clef>
          <transposition>3</transposition>
          <aPitchRange>61-90</aPitchRange>
@@ -350,8 +350,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Oboe</name>
-         <short-name>Ob.</short-name>
+         <name>雙簧管</name>
+         <short-name>雙簧管</short-name>
          <clef>0</clef>
          <aPitchRange>58-87</aPitchRange>
          <pPitchRange>58-93</pPitchRange>
@@ -360,8 +360,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Oboe d'amore</name>
-         <short-name>O. d'a.</short-name>
+         <name>柔音雙簧管</name>
+         <short-name>柔音雙簧管</short-name>
          <clef>0</clef>
          <transposition>-3</transposition>
          <aPitchRange>56-84</aPitchRange>
@@ -371,8 +371,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>English Horn</name>
-         <short-name>E. Hn.</short-name>
+         <name>英國管</name>
+         <short-name>英國管</short-name>
          <clef>0</clef>
          <transposition>-7</transposition>
          <aPitchRange>52-81</aPitchRange>
@@ -382,8 +382,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Baritone Oboe</name>
-         <short-name>Bar. Ob.</short-name>
+         <name>上低音雙簧管</name>
+         <short-name>上低音雙簧管</short-name>
          <clef>3</clef>
          <aPitchRange>47-76</aPitchRange>
          <pPitchRange>47-78</pPitchRange>
@@ -392,8 +392,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Heckelphone</name>
-         <short-name>Hph.</short-name>
+         <name>赫克管</name>
+         <short-name>赫克管</short-name>
          <clef>3</clef>
          <aPitchRange>45-75</aPitchRange>
          <pPitchRange>45-78</pPitchRange>
@@ -402,8 +402,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Baroque Oboe</name>
-         <short-name>Bq. Ob.</short-name>
+         <name>巴洛克雙簧管</name>
+         <short-name>巴洛克雙簧管</short-name>
          <clef>0</clef>
          <aPitchRange>60-83</aPitchRange>
          <pPitchRange>60-86</pPitchRange>
@@ -412,8 +412,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Oboe da caccia</name>
-         <short-name>Ob. d. ca.</short-name>
+         <name>獵管</name>
+         <short-name>獵管</short-name>
          <clef>0</clef>
          <aPitchRange>53-79</aPitchRange>
          <pPitchRange>53-81</pPitchRange>
@@ -422,8 +422,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Shawm</name>
-         <short-name>Sh.</short-name>
+         <name>蕭姆管</name>
+         <short-name>蕭姆管</short-name>
          <clef>0</clef>
          <aPitchRange>60-76</aPitchRange>
          <pPitchRange>60-79</pPitchRange>
@@ -432,8 +432,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Shawm</name>
-         <short-name>Si. Sh.</short-name>
+         <name>最高音蕭姆管</name>
+         <short-name>最高音蕭姆管</short-name>
          <clef>0</clef>
          <aPitchRange>65-81</aPitchRange>
          <pPitchRange>65-86</pPitchRange>
@@ -442,8 +442,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Descant Pommer</name>
-         <short-name>D. Po.</short-name>
+         <name>最高音彭馬管</name>
+         <short-name>最高音彭馬管</short-name>
          <clef>0</clef>
          <aPitchRange>61-95</aPitchRange>
          <pPitchRange>61-98</pPitchRange>
@@ -452,8 +452,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Pommer</name>
-         <short-name>A. Po.</short-name>
+         <name>中音彭馬管</name>
+         <short-name>中音彭馬管</short-name>
          <clef>0</clef>
          <aPitchRange>55-74</aPitchRange>
          <pPitchRange>55-77</pPitchRange>
@@ -462,8 +462,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Crumhorn</name>
-         <short-name>S. Crh.</short-name>
+         <name>高音克魯姆管</name>
+         <short-name>高音克魯姆管</short-name>
          <clef>0</clef>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-77</pPitchRange>
@@ -472,8 +472,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Crumhorn</name>
-         <short-name>A. Crh.</short-name>
+         <name>中音克魯姆管</name>
+         <short-name>中音克魯姆管</short-name>
          <clef>0</clef>
          <aPitchRange>53-67</aPitchRange>
          <pPitchRange>53-69</pPitchRange>
@@ -482,8 +482,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Crumhorn</name>
-         <short-name>T. Crh.</short-name>
+         <name>次中音克魯姆管</name>
+         <short-name>次中音克魯姆管</short-name>
          <clef>3</clef>
          <aPitchRange>48-62</aPitchRange>
          <pPitchRange>48-65</pPitchRange>
@@ -492,8 +492,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Crumhorn</name>
-         <short-name>B. Crh.</short-name>
+         <name>低音克魯姆管</name>
+         <short-name>低音克魯姆管</short-name>
          <clef>11</clef>
          <aPitchRange>41-55</aPitchRange>
          <pPitchRange>41-58</pPitchRange>
@@ -502,8 +502,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Greatbass Crumhorn</name>
-         <short-name>Gb. Crh.</short-name>
+         <name>大低音克魯姆管</name>
+         <short-name>大低音克魯姆管</short-name>
          <clef>0</clef>
          <aPitchRange>36-50</aPitchRange>
          <pPitchRange>36-53</pPitchRange>
@@ -512,8 +512,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Cornamuse</name>
-         <short-name>S. Cm.</short-name>
+         <name>高音 Cornamuse</name>
+         <short-name>高音 Cornamuse</short-name>
          <clef>0</clef>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-77</pPitchRange>
@@ -522,8 +522,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Cornamuse</name>
-         <short-name>A. Cm.</short-name>
+         <name>中音 Cornamuse</name>
+         <short-name>中音 Cornamuse</short-name>
          <clef>0</clef>
          <aPitchRange>55-67</aPitchRange>
          <pPitchRange>55-70</pPitchRange>
@@ -532,8 +532,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Cornamuse</name>
-         <short-name>T. Cm.</short-name>
+         <name>次中音 Cornamuse</name>
+         <short-name>次中音 Cornamuse</short-name>
          <clef>3</clef>
          <aPitchRange>48-62</aPitchRange>
          <pPitchRange>48-65</pPitchRange>
@@ -542,8 +542,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Cornamuse</name>
-         <short-name>B. Cm.</short-name>
+         <name>低音 Cornamuse</name>
+         <short-name>低音 Cornamuse</short-name>
          <clef>11</clef>
          <aPitchRange>41-55</aPitchRange>
          <pPitchRange>41-58</pPitchRange>
@@ -552,8 +552,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Rauschpfeife</name>
-         <short-name>Si. Rpf.</short-name>
+         <name>最高音勞施普費夫管</name>
+         <short-name>最高音勞施普費夫管</short-name>
          <clef>0</clef>
          <aPitchRange>65-81</aPitchRange>
          <pPitchRange>65-84</pPitchRange>
@@ -562,8 +562,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Rauschpfeife</name>
-         <short-name>S. Rpf.</short-name>
+         <name>高音勞施普費夫管</name>
+         <short-name>高音勞施普費夫管</short-name>
          <clef>0</clef>
          <aPitchRange>60-76</aPitchRange>
          <pPitchRange>60-79</pPitchRange>
@@ -572,8 +572,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Clarinet</name>
-         <short-name>S. Cl.</short-name>
+         <name>高音單簧管(Soprano Cl.)</name>
+         <short-name>高音單簧管</short-name>
          <clef>0</clef>
          <transposition>7</transposition>
          <aPitchRange>59-88</aPitchRange>
@@ -583,8 +583,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Piccolo Clarinet</name>
-         <short-name>P. Cl.</short-name>
+         <name>高音單簧管(Piccolo Cl.)</name>
+         <short-name>高音單簧管</short-name>
          <clef>0</clef>
          <transposition>8</transposition>
          <aPitchRange>60-99</aPitchRange>
@@ -594,8 +594,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>E<symbol name="flat"/> Clarinet</name>
-         <short-name>E<symbol name="flat"/> Cl.</short-name>
+         <name>降Ｅ調單簧管</name>
+         <short-name>降Ｅ調單簧管</short-name>
          <clef>0</clef>
          <transposition>3</transposition>
          <aPitchRange>55-94</aPitchRange>
@@ -605,8 +605,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>D Clarinet</name>
-         <short-name>D Cl.</short-name>
+         <name>Ｄ調單簧管</name>
+         <short-name>Ｄ調單簧管</short-name>
          <clef>0</clef>
          <transposition>2</transposition>
          <aPitchRange>54-93</aPitchRange>
@@ -616,8 +616,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>C Clarinet</name>
-         <short-name>C Cl.</short-name>
+         <name>Ｃ調單簧管</name>
+         <short-name>Ｃ調單簧管</short-name>
          <clef>0</clef>
          <aPitchRange>52-91</aPitchRange>
          <pPitchRange>52-96</pPitchRange>
@@ -626,8 +626,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Clarinet</name>
-         <short-name>B<symbol name="flat"/> Cl.</short-name>
+         <name>降Ｂ調單簧管</name>
+         <short-name>降Ｂ調單簧管</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
          <aPitchRange>50-89</aPitchRange>
@@ -637,8 +637,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>A Clarinet</name>
-         <short-name>A Cl.</short-name>
+         <name>Ａ調單簧管</name>
+         <short-name>Ａ調單簧管</short-name>
          <clef>0</clef>
          <transposition>-3</transposition>
          <aPitchRange>49-88</aPitchRange>
@@ -648,8 +648,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Basset Clarinet</name>
-         <short-name>Ba. Cl.</short-name>
+         <name>巴塞單簧管</name>
+         <short-name>巴塞單簧管</short-name>
          <clef>0</clef>
          <transposition>-3</transposition>
          <aPitchRange>45-88</aPitchRange>
@@ -659,8 +659,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Clarinet</name>
-         <short-name>A. Cl.</short-name>
+         <name>中音單簧管</name>
+         <short-name>中音單簧管</short-name>
          <clef>0</clef>
          <transposition>-9</transposition>
          <aPitchRange>43-80</aPitchRange>
@@ -670,8 +670,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Basset Horn</name>
-         <short-name>Ba. Hn.</short-name>
+         <name>巴塞管</name>
+         <short-name>巴塞管</short-name>
          <clef>0</clef>
          <transposition>-7</transposition>
          <aPitchRange>41-84</aPitchRange>
@@ -681,8 +681,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Clarinet</name>
-         <short-name>B. Cl.</short-name>
+         <name>低音單簧管</name>
+         <short-name>低音單簧管</short-name>
          <clef>0</clef>
          <transposition>-14</transposition>
          <aPitchRange>37-75</aPitchRange>
@@ -692,8 +692,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contra-alto Clarinet</name>
-         <short-name>C-a. Cl.</short-name>
+         <name>倍中音單簧管</name>
+         <short-name>倍中音單簧管</short-name>
          <clef>0</clef>
          <transposition>-21</transposition>
          <aPitchRange>31-70</aPitchRange>
@@ -703,8 +703,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabass Clarinet</name>
-         <short-name>Cb. Cl.</short-name>
+         <name>倍低音單簧管</name>
+         <short-name>倍低音單簧管</short-name>
          <clef>0</clef>
          <transposition>-26</transposition>
          <aPitchRange>26-65</aPitchRange>
@@ -714,8 +714,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Chalumeau</name>
-         <short-name>Si. Cha.</short-name>
+         <name>最高音夏魯摩</name>
+         <short-name>最高音夏魯摩</short-name>
          <clef>0</clef>
          <aPitchRange>65-79</aPitchRange>
          <pPitchRange>65-82</pPitchRange>
@@ -724,8 +724,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Chalumeau</name>
-         <short-name>S. Cha.</short-name>
+         <name>高音夏魯摩</name>
+         <short-name>高音夏魯摩</short-name>
          <clef>0</clef>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-77</pPitchRange>
@@ -734,8 +734,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Chalumeau</name>
-         <short-name>A. Cha.</short-name>
+         <name>中音夏魯摩</name>
+         <short-name>中音夏魯摩</short-name>
          <clef>3</clef>
          <aPitchRange>53-67</aPitchRange>
          <pPitchRange>53-70</pPitchRange>
@@ -744,8 +744,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Chalumeau</name>
-         <short-name>T. Cha.</short-name>
+         <name>次中音夏魯摩</name>
+         <short-name>次中音夏魯摩</short-name>
          <clef>3</clef>
          <aPitchRange>48-62</aPitchRange>
          <pPitchRange>48-65</pPitchRange>
@@ -754,8 +754,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Basson</name>
-         <short-name>Bsn.</short-name>
+         <name>低音管</name>
+         <short-name>低音管</short-name>
          <clef>11</clef>
          <aPitchRange>34-69</aPitchRange>
          <pPitchRange>34-76</pPitchRange>
@@ -764,8 +764,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabasson</name>
-         <short-name>Cbsn.</short-name>
+         <name>倍低音管</name>
+         <short-name>倍低音管</short-name>
          <clef>14</clef>
          <aPitchRange>22-57</aPitchRange>
          <pPitchRange>22-60</pPitchRange>
@@ -774,8 +774,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Dulcian</name>
-         <short-name>Du.</short-name>
+         <name>寇塔爾管</name>
+         <short-name>寇塔爾管</short-name>
          <clef>11</clef>
          <aPitchRange>40-62</aPitchRange>
          <pPitchRange>40-65</pPitchRange>
@@ -784,8 +784,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Rackett</name>
-         <short-name>Ra.</short-name>
+         <name>拉凱特管</name>
+         <short-name>拉凱特管</short-name>
          <clef>11</clef>
          <aPitchRange>34-62</aPitchRange>
          <pPitchRange>34-65</pPitchRange>
@@ -794,8 +794,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Sarrusophone</name>
-         <short-name>Si. Sar.</short-name>
+         <name>最高音薩魯管</name>
+         <short-name>最高音薩魯管</short-name>
          <clef>0</clef>
          <transposition>3</transposition>
          <aPitchRange>61-87</aPitchRange>
@@ -805,8 +805,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Sarrusophone</name>
-         <short-name>S. Sar.</short-name>
+         <name>高音薩魯管</name>
+         <short-name>高音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
          <aPitchRange>56-87</aPitchRange>
@@ -816,8 +816,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Sarrusophone</name>
-         <short-name>A. Sar.</short-name>
+         <name>中音薩魯管</name>
+         <short-name>中音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-9</transposition>
          <aPitchRange>49-80</aPitchRange>
@@ -827,8 +827,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Sarrusophone</name>
-         <short-name>T. Sar.</short-name>
+         <name>次中音薩魯管</name>
+         <short-name>次中音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-14</transposition>
          <aPitchRange>44-75</aPitchRange>
@@ -838,8 +838,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Baritone Sarrusophone</name>
-         <short-name>Bar. Sar.</short-name>
+         <name>上低音薩魯管</name>
+         <short-name>上低音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-21</transposition>
          <aPitchRange>37-68</aPitchRange>
@@ -849,8 +849,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Sarrusophone</name>
-         <short-name>B. Sar.</short-name>
+         <name>低音薩魯管</name>
+         <short-name>低音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-26</transposition>
          <aPitchRange>32-63</aPitchRange>
@@ -860,8 +860,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabass Sarrusophone</name>
-         <short-name>Cb. Sar.</short-name>
+         <name>倍低音薩魯管</name>
+         <short-name>倍低音薩魯管</short-name>
          <clef>0</clef>
          <transposition>-33</transposition>
          <aPitchRange>25-53</aPitchRange>
@@ -871,8 +871,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranissimo Saxophone</name>
-         <short-name>Sio. Sax.</short-name>
+         <name>超特高音薩克管</name>
+         <short-name>超特高音薩克管</short-name>
          <clef>0</clef>
          <transposition>10</transposition>
          <aPitchRange>68-92</aPitchRange>
@@ -882,8 +882,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Sopranino Saxophone</name>
-         <short-name>Si. Sax.</short-name>
+         <name>最高音薩克管</name>
+         <short-name>最高音薩克管</short-name>
          <clef>0</clef>
          <transposition>3</transposition>
          <aPitchRange>61-87</aPitchRange>
@@ -893,8 +893,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano Saxophone</name>
-         <short-name>S. Sax.</short-name>
+         <name>高音薩克管</name>
+         <short-name>高音薩克管</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
          <aPitchRange>56-89</aPitchRange>
@@ -904,8 +904,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Alto Saxophone</name>
-         <short-name>A. Sax.</short-name>
+         <name>中音薩克管</name>
+         <short-name>中音薩克管</short-name>
          <clef>0</clef>
          <transposition>-9</transposition>
          <aPitchRange>49-82</aPitchRange>
@@ -915,8 +915,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Saxophone</name>
-         <short-name>T. Sax.</short-name>
+         <name>次中音薩克管</name>
+         <short-name>次中音薩克管</short-name>
          <clef>0</clef>
          <transposition>-14</transposition>
          <aPitchRange>44-77</aPitchRange>
@@ -926,8 +926,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Baritone Saxophone</name>
-         <short-name>Bar. Sax.</short-name>
+         <name>上低音薩克管</name>
+         <short-name>上低音薩克管</short-name>
          <clef>0</clef>
          <transposition>-21</transposition>
          <aPitchRange>37-70</aPitchRange>
@@ -937,8 +937,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Saxophone</name>
-         <short-name>B. Sax.</short-name>
+         <name>低音薩克管</name>
+         <short-name>低音薩克管</short-name>
          <clef>0</clef>
          <transposition>-26</transposition>
          <aPitchRange>32-65</aPitchRange>
@@ -948,8 +948,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Contrabass Saxophone</name>
-         <short-name>Cb. Sax.</short-name>
+         <name>倍低音薩克管</name>
+         <short-name>倍低音薩克管</short-name>
          <clef>0</clef>
          <transposition>-33</transposition>
          <aPitchRange>25-53</aPitchRange>
@@ -959,8 +959,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Woodwind Synthesizer</name>
-         <short-name>Ww. Syn.</short-name>
+         <name>木管樂器合成器</name>
+         <short-name>木管樂器合成器</short-name>
          <clef>0</clef>
          <aPitchRange>0-127</aPitchRange>
          <pPitchRange>0-127</pPitchRange>
@@ -970,10 +970,10 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Brass">
+   <instrument-group name="銅管樂器">
       <instrument>
-         <name>Horn</name>
-         <short-name>Hn.</short-name>
+         <name>法國號</name>
+         <short-name>法國號</short-name>
          <clef>0</clef>
          <transposition>-7</transposition>
          <aPitchRange>35-75</aPitchRange>
@@ -983,8 +983,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Trumpet</name>
-         <short-name>B<symbol name="flat"/> Tpt.</short-name>
+         <name>降Ｂ調小號</name>
+         <short-name>降Ｂ調小號</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
          <channel>
@@ -995,8 +995,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>D Trumpet</name>
-         <short-name>D Tpt.</short-name>
+         <name>Ｄ調小號</name>
+         <short-name>Ｄ調小號</short-name>
          <transposition>2</transposition>
          <channel>
             <program>56</program>
@@ -1006,8 +1006,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>C Trumpet</name>
-         <short-name>C Tpt.</short-name>
+         <name>Ｃ調小號</name>
+         <short-name>Ｃ調小號</short-name>
          <channel>
             <program>56</program>
             </channel>
@@ -1016,8 +1016,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>E<symbol name="flat"/> Trumpet</name>
-         <short-name>E<symbol name="flat"/> Tpt.</short-name>
+         <name>降Ｅ調小號</name>
+         <short-name>降Ｅ調小號</short-name>
          <transposition>3</transposition>
          <channel>
             <program>56</program>
@@ -1027,8 +1027,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Muted Trumpet</name>
-         <short-name>Mt. Tpt.</short-name>
+         <name>弱音小號</name>
+         <short-name>弱音小號</short-name>
          <channel>
             <program>59</program>
             </channel>
@@ -1037,8 +1037,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Cornet</name>
-         <short-name>B<symbol name="flat"/> Cnt.</short-name>
+         <name>降Ｂ調短號</name>
+         <short-name>降Ｂ調短號</short-name>
          <transposition>-2</transposition>
          <channel>
             <program>56</program>
@@ -1048,8 +1048,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Soprano Cornet</name>
-         <short-name>Sop. Cnt.</short-name>
+         <name>高音短號</name>
+         <short-name>高音短號</short-name>
          <transposition>3</transposition>
          <channel>
             <program>56</program>
@@ -1059,8 +1059,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Flugelhorn</name>
-         <short-name>Flghn.</short-name>
+         <name>富魯格號</name>
+         <short-name>富魯格號</short-name>
          <transposition>-2</transposition>
          <channel>
             <program>56</program>
@@ -1070,40 +1070,40 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Trombone</name>
-         <short-name>Trb.</short-name>
+         <name>長號</name>
+         <short-name>長號</short-name>
          <clef>4</clef>
          <channel>
             <program>57</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor Trombone</name>
-         <short-name>Ten. Trb.</short-name>
+         <name>次中音長號</name>
+         <short-name>次中音長號</short-name>
          <clef>4</clef>
          <channel>
             <program>57</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Trombone</name>
-         <short-name>Bs. Trb.</short-name>
+         <name>低音長號</name>
+         <short-name>低音長號</short-name>
          <clef>4</clef>
          <channel>
             <program>57</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Euphonium</name>
-         <short-name>Euph.</short-name>
+         <name>粗管上低音號</name>
+         <short-name>粗管上低音號</short-name>
          <clef>4</clef>
          <channel>
             <program>58</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Euphonium (T.C.)</name>
-         <short-name>Euph.</short-name>
+         <name>粗管上低音號 (T.C.)</name>
+         <short-name>粗管上低音號</short-name>
          <transposition>-14</transposition>
          <channel>
             <program>57</program>
@@ -1113,8 +1113,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Baritone</name>
-         <short-name>Bari</short-name>
+         <name>上低音號</name>
+         <short-name>上低音號</short-name>
          <clef>4</clef>
          <channel>
             <program>57</program>
@@ -1124,8 +1124,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Baritone (T.C.)</name>
-         <short-name>Bari</short-name>
+         <name>上低音號 (T.C.)</name>
+         <short-name>上低音號</short-name>
          <transposition>-14</transposition>
          <channel>
             <program>57</program>
@@ -1135,16 +1135,16 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Tuba</name>
-         <short-name>Tba.</short-name>
+         <name>低音號</name>
+         <short-name>低音號</short-name>
          <clef>4</clef>
          <channel>
             <program>58</program>
             </channel>
          </instrument>
       <instrument>
-         <name>E<symbol name="flat"/> Bass</name>
-         <short-name>E<symbol name="flat"/> Bass</short-name>
+         <name>降Ｅ調低音號</name>
+         <short-name>降Ｅ調低音號</short-name>
          <transposition>-21</transposition>
          <channel>
             <program>56</program>
@@ -1154,8 +1154,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Bass</name>
-         <short-name>B<symbol name="flat"/> Bass</short-name>
+         <name>降Ｂ調低音號</name>
+         <short-name>降Ｂ調低音號</short-name>
          <transposition>-26</transposition>
          <channel>
             <program>56</program>
@@ -1166,11 +1166,11 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Percussion">
+   <instrument-group name="敲擊樂器">
       <instrument>
-         <name>Drumset</name>
-         <description>Drumset 3 lines</description>
-         <short-name>Drm.</short-name>
+         <name>鼓組</name>
+         <description>３線鼓組</description>
+         <short-name>鼓組</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
          <stafflines>3</stafflines>
@@ -1179,9 +1179,9 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Drumset</name>
-         <description>Drumset 5 lines</description>
-         <short-name>Drm.</short-name>
+         <name>鼓組</name>
+         <description>５線鼓組</description>
+         <short-name>鼓組</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
          <channel>
@@ -1189,8 +1189,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Snare Drum</name>
-         <short-name>S.Dr.</short-name>
+         <name>小鼓</name>
+         <short-name>小鼓</short-name>
          <drumset>1</drumset>
          <Drum pitch="37">
             <head>1</head>
@@ -1213,8 +1213,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Drum</name>
-         <short-name>B.Dr.</short-name>
+         <name>大鼓</name>
+         <short-name>大鼓</short-name>
          <drumset>1</drumset>
          <Drum pitch="35">
             <head>0</head>
@@ -1230,8 +1230,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Triangle</name>
-         <short-name>Trgl.</short-name>
+         <name>三角鐵</name>
+         <short-name>三角鐵</short-name>
          <drumset>1</drumset>
          <Drum pitch="80">
             <head>1</head>
@@ -1254,8 +1254,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Cymbal</name>
-         <short-name>Cym.</short-name>
+         <name>鈸</name>
+         <short-name>鈸</short-name>
          <drumset>1</drumset>
          <Drum pitch="49">
             <head>0</head>
@@ -1306,8 +1306,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Cowbell</name>
-         <short-name>C.Bl.</short-name>
+         <name>牛鈴</name>
+         <short-name>牛鈴</short-name>
          <drumset>1</drumset>
          <Drum pitch="56">
             <head>0</head>
@@ -1323,8 +1323,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bongos</name>
-         <short-name>Bong.</short-name>
+         <name>班戈鼓</name>
+         <short-name>班戈鼓</short-name>
          <drumset>1</drumset>
          <Drum pitch="60">
             <head>0</head>
@@ -1347,8 +1347,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Claves</name>
-         <short-name>Clv.</short-name>
+         <name>響棒</name>
+         <short-name>響棒</short-name>
          <drumset>1</drumset>
          <Drum pitch="75">
             <head>0</head>
@@ -1364,8 +1364,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Maracas</name>
-         <short-name>Mrcs.</short-name>
+         <name>沙鈴</name>
+         <short-name>沙鈴</short-name>
          <drumset>1</drumset>
          <Drum pitch="70">
             <head>0</head>
@@ -1381,8 +1381,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tambourine</name>
-         <short-name>Tamb.</short-name>
+         <name>鈴鼓</name>
+         <short-name>鈴鼓</short-name>
          <drumset>1</drumset>
          <Drum pitch="54">
             <head>0</head>
@@ -1398,8 +1398,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Temple Blocks</name>
-         <short-name>Temp. Bl.</short-name>
+         <name>木魚</name>
+         <short-name>木魚</short-name>
          <clef>14</clef>
          <channel>
             <program>115</program>
@@ -1407,33 +1407,33 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Pitched Percussion">
+   <instrument-group name="有音高敲擊樂器">
       <instrument>
-         <name>Timpani</name>
-         <short-name>Timp.</short-name>
+         <name>定音鼓</name>
+         <short-name>定音鼓</short-name>
          <clef>4</clef>
          <channel>
             <program>47</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Glockenspiel</name>
-         <short-name>Glk.</short-name>
+         <name>鍾琴</name>
+         <short-name>鍾琴</short-name>
          <transposition>24</transposition>
          <channel>
             <program>10</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Vibraphone</name>
-         <short-name>Vib.</short-name>
+         <name>震音鐵琴</name>
+         <short-name>震音鐵琴</short-name>
          <channel>
             <program>11</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Marimba</name>
-         <short-name>Mrm.</short-name>
+         <name>馬林巴木琴</name>
+         <short-name>馬林巴木琴</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1443,41 +1443,41 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Xylophone</name>
-         <short-name>Xyl.</short-name>
+         <name>木琴</name>
+         <short-name>木琴</short-name>
          <channel>
             <program>13</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Tubular Bells</name>
-         <short-name>T.B.</short-name>
+         <name>管鐘</name>
+         <short-name>管鐘</short-name>
          <channel>
             <program>14</program>
             </channel>
          </instrument>
       </instrument-group>
 
-    <instrument-group name="Guitars">
+    <instrument-group name="吉他">
       <instrument>
-         <name>Guitar</name>
-         <short-name>Guit.</short-name>
+         <name>吉他</name>
+         <short-name>吉他</short-name>
          <clef>3</clef>
          <channel>
             <program>24</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Electric Guitar</name>
-         <short-name>El. Guit.</short-name>
+         <name>電吉他</name>
+         <short-name>電吉他</short-name>
          <clef>3</clef>
          <channel>
             <program>27</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Guitar</name>
-         <short-name>B. Guit.</short-name>
+         <name>貝斯吉他</name>
+         <short-name>貝斯吉他</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
@@ -1486,67 +1486,67 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Vocals">
+   <instrument-group name="聲樂">
       <instrument>
-         <name>Voice</name>
+         <name>人聲</name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Soprano</name>
-         <short-name>S.</short-name>
+         <name>女高音</name>
+         <short-name>女高音</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Mezzo-soprano</name>
-         <short-name>Messo.</short-name>
+         <name>女中音</name>
+         <short-name>女中音</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Contralto</name>
-         <short-name>CAlt.</short-name>
+         <name>女低音(Contralto)</name>
+         <short-name>女低音</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Alto</name>
-         <short-name>A</short-name>
+         <name>女低音(Alto)</name>
+         <short-name>女低音</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Countertenor</name>
-         <short-name>CTen.</short-name>
+         <name>假聲男高音</name>
+         <short-name>假聲男高音</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Tenor</name>
-         <short-name>T.</short-name>
+         <name>男高音</name>
+         <short-name>男高音</short-name>
          <clef>3</clef>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Baritone</name>
-         <short-name>Bar.</short-name>
+         <name>男中音</name>
+         <short-name>男中音</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Bass</name>
-         <short-name>B.</short-name>
+         <name>男低音</name>
+         <short-name>男低音</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>
@@ -1554,10 +1554,10 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Keyboards">
+   <instrument-group name="鍵盤樂器">
       <instrument>
-         <name>Piano</name>
-         <short-name>Pno.</short-name>
+         <name>鋼琴</name>
+         <short-name>鋼琴</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1567,8 +1567,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Harpsichord</name>
-         <short-name>Hchd.</short-name>
+         <name>大鍵琴</name>
+         <short-name>大鍵琴</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1578,8 +1578,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Organ</name>
-         <short-name>Or.</short-name>
+         <name>風琴</name>
+         <short-name>風琴</short-name>
          <staves>3</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1590,8 +1590,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Rock Organ</name>
-         <short-name>Rk. Org.</short-name>
+         <name>搖滾風琴</name>
+         <short-name>搖滾風琴</short-name>
          <staves>3</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1602,8 +1602,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Accordion</name>
-         <short-name>Acc.</short-name>
+         <name>手風琴</name>
+         <short-name>手風琴</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1614,10 +1614,10 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Plucked Strings">
+   <instrument-group name="撥弦樂器">
       <instrument>
-         <name>Harp</name>
-         <short-name>Hrp.</short-name>
+         <name>豎琴</name>
+         <short-name>豎琴</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
@@ -1628,10 +1628,10 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Strings">
+   <instrument-group name="弦樂器">
       <instrument>
-         <name>Violin</name>
-         <short-name>Vln.</short-name>
+         <name>小提琴</name>
+         <short-name>小提琴</short-name>
          <channel>
             <program>40</program>
             </channel>
@@ -1643,8 +1643,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Violins 1</name>
-         <short-name>Vlns. 1</short-name>
+         <name>小提琴 1</name>
+         <short-name>小提琴 1</short-name>
          <channel>
            <program value="48"/>
             </channel>
@@ -1656,8 +1656,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Violins 2</name>
-         <short-name>Vlns. 2</short-name>
+         <name>小提琴 2</name>
+         <short-name>小提琴 2</short-name>
          <channel>
             <program>48</program>
             </channel>
@@ -1669,8 +1669,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Viola</name>
-         <short-name>Vla.</short-name>
+         <name>中提琴</name>
+         <short-name>中提琴</short-name>
          <clef>11</clef>
          <channel>
             <program>41</program>
@@ -1683,8 +1683,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Violas</name>
-         <short-name>Vlas.</short-name>
+         <name>中提琴組</name>
+         <short-name>中提琴組</short-name>
          <clef>11</clef>
          <channel>
             <program>49</program>
@@ -1697,8 +1697,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Violoncello</name>
-         <short-name>Vlc.</short-name>
+         <name>大提琴</name>
+         <short-name>大提琴</short-name>
          <clef>4</clef>
          <channel>
             <program>42</program>
@@ -1711,8 +1711,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Violoncellos</name>
-         <short-name>Vlcs.</short-name>
+         <name>大提琴組</name>
+         <short-name>大提琴組</short-name>
          <clef>4</clef>
          <channel>
             <program>49</program>
@@ -1725,8 +1725,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Double Bass</name>
-         <short-name>D.B.</short-name>
+         <name>低音提琴(D.B.)</name>
+         <short-name>低音提琴</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
@@ -1740,8 +1740,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Contrabass</name>
-         <short-name>C.B.</short-name>
+         <name>低音提琴(C.B.)</name>
+         <short-name>低音提琴</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
@@ -1755,8 +1755,8 @@
            </channel>
          </instrument>
        <instrument>
-         <name>Contrabasses</name>
-         <short-name>Cbs.</short-name>
+         <name>低音提琴組(C.B.)</name>
+         <short-name>低音提琴組</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
