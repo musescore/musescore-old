@@ -78,7 +78,7 @@
             </column>
             <column>
              <property name="text">
-              <string>SlashStyle</string>
+              <string>Stemless</string>
              </property>
             </column>
            </widget>
