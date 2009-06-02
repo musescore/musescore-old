@@ -887,7 +887,7 @@
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
-            <program>32</program>
+            <program>43</program>
             </channel>
          <channel name="pizzicato">
            <program value="45"/>
@@ -902,7 +902,7 @@
          <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
-            <program>43</program>
+            <program>49</program>
             </channel>
          <channel name="pizzicato">
            <program value="45"/>

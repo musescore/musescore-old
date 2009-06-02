@@ -16,7 +16,7 @@
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
          <transposition>12</transposition>
-         <clef>1</clef>
+         <clef>0</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
          <channel>
