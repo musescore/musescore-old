@@ -1,3 +1,8 @@
+2.jun (db)
+      - restore bass clef and octave transpositions for piccolo, 
+        bass flute, contrabasson, contrabass(es), and all bass guitars
+      - fix MIDI number for bass guitar and add acoustic bass
+      - renamed "slashStyle" as "no stem" in staff properties (UI only)
 28.may (ws)
       - fix regression in slur editing
       - added ukrainian translation from Serhij Dubyk
