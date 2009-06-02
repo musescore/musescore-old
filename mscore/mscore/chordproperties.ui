@@ -54,7 +54,7 @@
            <item>
             <widget class="QCheckBox" name="noStemCheckBox">
              <property name="text">
-              <string>no stem</string>
+              <string>stemless</string>
              </property>
             </widget>
            </item>

@@ -111,7 +111,7 @@
           <item>
            <widget class="QCheckBox" name="slashStyle">
             <property name="text">
-             <string>No Stem</string>
+             <string>Stemless</string>
             </property>
            </widget>
           </item>
