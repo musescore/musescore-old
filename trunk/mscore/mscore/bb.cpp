@@ -474,7 +474,7 @@ bool Score::importBB(const QString& name)
             else
                   h->setBaseTpc(INVALID_TPC);
             h->setChordId(c.extension);
-            h->buildText();
+            h->render();
             m->add(h);
             }
 

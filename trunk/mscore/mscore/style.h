@@ -25,6 +25,8 @@
 #include "spatium.h"
 
 class Xml;
+class ChordDescription;
+class ChordList;
 
 enum TEXT_STYLE {
       TEXT_STYLE_SYMBOL1 = 0,
@@ -134,7 +136,7 @@ class TextStyle {
 //---------------------------------------------------------
 
 enum StyleValueType {
-      ST_SPATIUM, ST_DOUBLE, ST_BOOL, ST_INT, ST_DIRECTION
+      ST_SPATIUM, ST_DOUBLE, ST_BOOL, ST_INT, ST_DIRECTION, ST_STRING
       };
 
 //---------------------------------------------------------
@@ -152,32 +154,10 @@ class StyleType {
       };
 
 //---------------------------------------------------------
-//   StyleVal
+//   StyleIdx
 //---------------------------------------------------------
 
-class StyleVal {
-      union {
-            double  dbl;
-            bool      b;
-            int       i;
-            Direction d;
-            } v;
-   public:
-      StyleVal()                    {}
-      StyleVal(Spatium val)         { v.dbl = val.val(); }
-      StyleVal(double val)          { v.dbl = val;     }
-      StyleVal(bool val)            { v.b   = val;     }
-      StyleVal(int val)             { v.i   = val;     }
-      StyleVal(Direction val)       { v.d   = val;     }
-
-      Spatium toSpatium() const     { return Spatium(v.dbl); }
-      double toDouble() const       { return v.dbl;  }
-      bool toBool() const           { return v.b;  }
-      int toInt() const             { return v.i;  }
-      Direction toDirection() const { return v.d;  }
-      };
-
-enum STYLE_TYPE {
+enum StyleIdx {
       ST_staffUpperBorder,
       ST_staffLowerBorder,
       ST_staffDistance,
@@ -201,6 +181,7 @@ enum STYLE_TYPE {
       ST_timesigLeftMargin,
 
       ST_clefKeyRightMargin,
+      ST_clefBarlineDistance,
       ST_stemWidth,
       ST_shortenStem,
       ST_shortStemProgression,
@@ -209,74 +190,76 @@ enum STYLE_TYPE {
       ST_minNoteDistance,
       ST_barNoteDistance,
       ST_noteBarDistance,           // used??
+
       ST_measureSpacing,
       ST_staffLineWidth,
       ST_ledgerLineWidth,
       ST_akkoladeWidth,
-
       ST_accidentalDistance,
       ST_accidentalNoteDistance,
       ST_beamWidth,
       ST_beamDistance,
       ST_beamMinLen,
       ST_beamMinSlope,
+
       ST_beamMaxSlope,
       ST_maxBeamTicks,
       ST_dotNoteDistance,
       ST_dotRestDistance,
-
       ST_dotDotDistance,
       ST_propertyDistanceHead,
       ST_propertyDistanceStem,
       ST_propertyDistance,
       ST_pageFillLimit,
       ST_lastSystemFillLimit,
+
       ST_hairpinHeight,
       ST_hairpinContHeight,
       ST_hairpinWidth,
       ST_showPageNumber,
-
       ST_showPageNumberOne,
       ST_pageNumberOddEven,
       ST_showMeasureNumber,
       ST_showMeasureNumberOne,
       ST_measureNumberInterval,
       ST_measureNumberSystem,
+
       ST_measureNumberAllStaffs,
       ST_smallNoteMag,
       ST_graceNoteMag,
       ST_smallStaffMag,
-
       ST_smallClefMag,
       ST_genClef,
       ST_genKeysig,
       ST_genTimesig,
       ST_genCourtesyTimesig,
       ST_genCourtesyKeysig,
+
+      // 70
       ST_useGermanNoteNames,
       ST_warnPitchRange,
-      ST_chordNamesUseSymbols,
-      ST_chordNamesUseJazzFont,
+      ST_chordDescriptionFile,
       ST_concertPitch,
-
       ST_createMultiMeasureRests,
       ST_minEmptyMeasures,
       ST_minMMRestWidth,
       ST_hideEmptyStaves,
       ST_stemDir1,
       ST_stemDir2,
+
+      // 80
       ST_stemDir3,
       ST_stemDir4,
       ST_gateTime,
       ST_tenutoGateTime,
-
       ST_staccatoGateTime,
-      ST_slurGateTime,        // 81
+      ST_slurGateTime,
 
       ST_UfermataAnchor,
       ST_DfermataAnchor,
       ST_ThumbAnchor,
       ST_SforzatoaccentAnchor,
+
       ST_EspressivoAnchor,
       ST_StaccatoAnchor,
       ST_UstaccatissimoAnchor,
@@ -306,17 +289,65 @@ enum STYLE_TYPE {
       };
 
 //---------------------------------------------------------
+//   StyleVal
+//---------------------------------------------------------
+
+class StyleVal {
+      StyleIdx idx;
+      union {
+            double  dbl;
+            bool      b;
+            int       i;
+            Direction d;
+            char*     s;
+            } v;
+
+   public:
+      StyleVal()                  { idx = StyleIdx(-1); }
+      StyleVal(const StyleVal& val);
+      StyleVal& operator=(const StyleVal& val);
+
+      StyleVal(StyleIdx t, Spatium val);
+      StyleVal(StyleIdx t, double val);
+      StyleVal(StyleIdx t, bool val);
+      StyleVal(StyleIdx t, int val);
+      StyleVal(StyleIdx t, Direction val);
+      StyleVal(StyleIdx t, const char* val);
+
+      Spatium toSpatium() const       { return Spatium(v.dbl); }
+      double toDouble() const         { return v.dbl;  }
+      bool toBool() const             { return v.b;  }
+      int toInt() const               { return v.i;  }
+      const char* toString() const    { return v.s;  }
+      Direction toDirection() const   { return v.d;  }
+      StyleIdx getIdx() const         { return idx;  }
+      };
+
+//---------------------------------------------------------
 //   Style
 //    this structure contains all style elements
 //---------------------------------------------------------
 
 class Style : public QVector<StyleVal> {
+      mutable ChordList* _chordList;     // cached value
 
    public:
       Style();
+      Style(const Style&);
+      Style& operator=(const Style&);
+      ~Style();
       void load(QDomElement e, int version);
       void save(Xml& xml, bool optimize);
       bool isDefault(int);
+      const ChordDescription* chordDescription(int id) const;
+      ChordList* chordList() const;
+      void set(const StyleVal&);
+      void set(StyleIdx t, Spatium val)     { set(StyleVal(t, val)); }
+      void set(StyleIdx t, double val)      { set(StyleVal(t, val)); }
+      void set(StyleIdx t, bool val)        { set(StyleVal(t, val)); }
+      void set(StyleIdx t, int val)         { set(StyleVal(t, val)); }
+      void set(StyleIdx t, Direction val)   { set(StyleVal(t, val)); }
+      void set(StyleIdx t, const char* val) { set(StyleVal(t, val)); }
       };
 
 extern QVector<TextStyle> defaultTextStyles;

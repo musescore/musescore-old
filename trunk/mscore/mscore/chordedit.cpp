@@ -80,13 +80,11 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extensionGroup->addButton(extOther,  0);
 
       extOtherCombo->clear();
-      const ChordDescription* cd = Harmony::chords();
-      unsigned int n = Harmony::chordListSize();
-
-      for (unsigned int i = 0; i < n; ++i) {           // HACK
-            const char* p = cd[i].name;
-            if (p)
-            	extOtherCombo->addItem(p, cd[i].id);
+      ChordList* cl = score->style().chordList();
+      foreach (const ChordDescription* cd, *cl) {
+            QString p(cd->name);
+            if (!p.isEmpty())
+            	extOtherCombo->addItem(p, cd->id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(extensionGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
@@ -228,10 +226,10 @@ const ChordDescription* ChordEdit::extension()
             return 0;
       else if (id == 0) {
             int idx = extOtherCombo->currentIndex();
-            return Harmony::chordDescription(extOtherCombo->itemData(idx).toInt());
+            return score->style().chordDescription(extOtherCombo->itemData(idx).toInt());
             }
       else
-            return Harmony::chordDescription(id);
+            return score->style().chordDescription(id);
       }
 
 //---------------------------------------------------------

@@ -1,10 +1,18 @@
+4.jun (ws)
+      - remove build option for using external fluid library
+      - dynamically allocate channels for the buildin synthesizer
+      - allow dotted notes/rests in tuplets
+      - make measure number size spatium dependent
+      - chordnames and rendering of chordnames is now configurable with
+        external xml chord description file styles/chords.xml
 2.jun (db)
-      - restore bass clef and octave transpositions for piccolo, 
+      - restore bass clef and octave transpositions for piccolo,
         bass flute, contrabasson, contrabass(es), and all bass guitars
       - fix MIDI number for bass guitar and add acoustic bass
       - renamed "slashStyle" as "Stemless" in staff, measure, and note properties
       - update handbooks
 28.may (ws)
+      - new style parameter: distance between clef and barline
       - fix regression in slur editing
       - added ukrainian translation from Serhij Dubyk
       (db)

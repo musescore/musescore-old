@@ -29,8 +29,7 @@
 #include "sym.h"
 #include "system.h"
 #include "measure.h"
-
-QHash<int, const ChordDescription*> Harmony::chordHash;
+#include "mscore.h"
 
 static const bool useJazzFont = true;     // DEBUG
 
@@ -38,14 +37,14 @@ static const bool useJazzFont = true;     // DEBUG
 //   HChord
 //---------------------------------------------------------
 
-HChord::HChord(const char* s)
+HChord::HChord(const QString& str)
       {
       static const char* const scaleNames[2][12] = {
             { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" },
             { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
             };
       keys = 0;
-      QStringList sl = QString(s).split(" ", QString::SkipEmptyParts);
+      QStringList sl = str.split(" ", QString::SkipEmptyParts);
       foreach(const QString& s, sl) {
             for (int i = 0; i < 12; ++i) {
                   if (s == scaleNames[0][i] || s == scaleNames[1][i]) {
@@ -288,236 +287,6 @@ void HChord::add(const QList<HDegree>& degreeList)
       }
 
 //---------------------------------------------------------
-//   Chord List
-//    list of all known chords
-//    sus4 == sus
-//    sus2 == 2
-//---------------------------------------------------------
-
-const ChordDescription Harmony::chordList[] = {
-            { 1, "",                "major", 0,                                          HChord("C E G") },        // major triad
-            { 2, "Maj",             0, 0,                                                HChord("C E G") },
-            { 3, "5b",              0, 0,                                                HChord("C E Gb") },       // major flat 5 triad
-
-//            { 4, "aug",             "augmented", 0,                                      HChord("C E G#") },       // augmented triad
-            { 4, "+",             "augmented", 0,                                      HChord("C E G#") },       // augmented triad
-
-            { 5, "6",               "major-sixth", 0,                                    HChord("C E G A") },      // sixth
-            { 6, "Maj7",            "major-seventh", 0,                                  HChord("C E G B") },
-            { 7, "Maj9",            "major-ninth", 0,                                    HChord("C E G B D") },
-            { 8, "Maj9#11",         "major-ninth", "add#11",                             HChord("C E G B D F#") },
-            { 9, "Maj13#11",        "major-13th", "add#11",                              HChord("C E G B D F# A") },
-/*10*/
-            { 10, "Maj13",          "major-13th", 0,                                     HChord("C E G B D F# A") },
-            { 11, "Maj9(no 3)",     "major-ninth", "sub3",                               HChord("C G B D") },
-            { 12, "+",              "augmented", 0,                                      HChord("C E G#") },       // +5, #5, +, augmented triad
-            { 13, "Maj7#5",         "major-seventh", "alt#5",                            HChord("C E G# B") },
-            { 14, "69",             "maj69", 0,                                          HChord("C D E G A") },
-            { 15, "2",              "major", "add2",                                     HChord("C D E G") },
-            { 16, "m",              "minor", 0,                                          HChord("C Eb G") },
-
-//            { 17, "maug",           "minor", "alt#5",                                    HChord("C Eb G#") },
-            { 17, "m+",           "minor", "alt#5",                                    HChord("C Eb G#") },
-
-            { 18, "mMaj7",          "minor-major", 0,                                    HChord("C Eb G B") },     // minor major 7th = major minor 7th
-            { 19, "m7",             "minor-seventh", 0,                                  HChord("C Eb G Bb") },
-
-/*20*/      { 20, "m9",             "minor-ninth", 0,                                    HChord("C Eb G Bb D") },
-            { 21, "m11",            "minor-11th", 0,                                     HChord("C Eb G Bb D F") },
-            { 22, "m13",            "minor-13th", 0,                                     HChord("C Eb G Bb D F A") },
-            { 23, "m6",             "minor-sixth", 0,                                    HChord("C Eb G A") },
-            { 24, "m#5",            "minor alt#5", 0,                                    HChord("C Eb G#") },
-            { 25, "m7#5",           "minor-seventh", "alt#5",                            HChord("C Eb G# Bb") },
-            { 26, "m69",            "minor-sixth", "add9",                               HChord("C D Eb G A") },
-            { 27, "Lyd",            0, 0,                                                  HChord() },
-//??          { 28, "Maj7Lyd",        "major-seventh", "altb5",                            HChord("C D E G A") },
-            { 28, "Maj7Lyd",        0, 0,                                                HChord("C D E G A") },
-            { 29, "Maj7b5",         "major-seventh", "altb5",                            HChord("C E Gb B") },
-
-            { 32, "m7b5",           "half-diminished", 0,                                HChord("C Eb Gb Bb") },
-            { 33, "dim",            "diminished", 0,                                     HChord("C Eb Gb") },
-            { 34, "m9b5",           "minor-ninth", "altb5",                              HChord("C Eb Gb Bb D") },
-
-/*40*/      { 40, "5",              "power", 0,                                          HChord("C G") },
-
-            { 56, "7+",             "augmented-seventh", 0,                              HChord("C E Ab") },        // augmented 7th
-            { 57, "9+",             "augmented-ninth", 0,                                HChord("C E Ab Bb D") },   // augmented 9th
-            { 58, "13+",            "dominant-13th", "alt#5",                            HChord("C E G# Bb D A") },
-            { 59, "(blues)",        0, 0,                                                HChord() },   // ??
-
-/*60*/      { 60, "7(Blues)",       0, 0,                                                HChord("C E G Bb") },
-            { 64, "7",              "dominant", 0,                                       HChord("C E G Bb") },        // dominant-seventh does not exist in musicXML
-            { 64, "7",              "dominant-seventh", 0,                               HChord("C E G Bb") },        // dominant-seventh is kept for backward compatibility
-
-            { 65, "13",             "dominant-13th", 0,                                  HChord("C E G Bb D F A") },  // dominant 13th
-            { 66, "7b13",           "dominant", "addb13",                                HChord("C E G Ab Bb") },
-            { 67, "7#11",           "dominant", "add#11",                                HChord("C E F# G Bb") },
-            { 68, "13#11",          "dominant-13th", "add#11",                           HChord("C E F# G Bb D F A") },
-
-            { 69, "7#11b13",        "dominant", "add#11 addb13",                 HChord("C E G Bb F# Ab") },
-/*70*/      { 70, "9",              "dominant-ninth", 0,                                 HChord("C E G Bb D") },
-            { 72, "9b13",           "dominant-ninth", "addb13",                          HChord("C E G Bb D Ab") },  // same as 71
-            { 73, "9#11",           "dominant-ninth", "add#11",                          HChord("C E G Bb D F#") },
-            { 74, "13#11",          "dominant-13th", "alt#11",                           HChord("C E G Bb D F# A") },
-            { 75, "9#11b13",        "dominant-ninth", "add#11 addb13",                   HChord("C E G Bb D F# Ab") },
-            { 76, "7b9",            "dominant", "addb9",                                 HChord("C E G Bb Db") },
-
-//          { 77, "13b9",           "dominant-13th", "altb9",                            HChord("C E G Bb D Fb A") },
-            { 77, "13b9",           "dominant-13th", "altb9",                            HChord("C E G Bb Db F A") },
-
-            { 78, "7b9b13",         "dominant", "addb9 addb13",                  HChord("C E G Bb Db Ab") },
-            { 79, "7b9#11",         "dominant", "addb9 alt#11",                  HChord("C E G Bb Db F#") },
-
-/*80*/      { 80, "13b9#11",        "dominant-13th", "altb9 alt#11",                     HChord("C E G Bb Db F# A") },
-            { 81, "7b9#11b13",      "dominant", "add#11 addb13",                 HChord("C E G Bb Db F# Ab") },
-            { 82, "7#9",            "dominant", "add#9",                                 HChord("C E G Bb Eb") },
-            { 83, "13#9",           "dominant-13th", "alt#9",                            HChord("C E G Bb D# F A") },
-            { 84, "7#9b13",         "dominant", "add#9 addb13",                  HChord("C E G Bb D# Ab") },
-            { 85, "9#11",           "dominant-ninth", "add#11",                          HChord("C E G Bb D F#") },
-            { 86, "13#9#11",        "dominant-13th", "alt#9 alt#11",                     HChord("C E G Bb D# F# A") },
-            { 87, "7#9#11b13",      "dominant", "add#9 add#11 addb13",           HChord("C E G Bb D# F# Ab") },
-            { 88, "7b5",            "dominant", "altb5",                                 HChord("C E Gb Bb") },
-            { 89, "13b5",           "dominant-13th", "altb5",                            HChord("C E Gb Bb D F A") },
-
-/*90*/      { 90, "7b5b13",         "dominant", "altb5 addb13",                  HChord("C E Gb Bb A") },
-            { 91, "9b5",            "dominant-ninth", "altb5",                           HChord("C E Gb Bb D") },
-            { 92, "9b5b13",         "dominant-ninth", "altb5 addb13",                    HChord("C E Gb Bb D Ab") },
-            { 93, "7b5b9",          "dominant", "altb5 addb9",                   HChord("C E Gb Bb Db") },
-            { 94, "13b5b9",         "dominant-13th", "altb5 addb9",                      HChord("C E Gb Bb Db F A") },
-            { 95, "7b5b9b13",       "dominant", "altb5 addb9 addb13",            HChord("C E Gb Bb Db Ab") },
-            { 96, "7b5#9",          "dominant", "altb5 add#9",                   HChord("C E Gb Bb D#") },
-            { 97, "13b5#9",         "dominant-13th", "altb5 alt#9",                      HChord("C E Gb Bb D# F A") },
-            { 98, "7b5#9b13",       "dominant", "altb5 add#9 addb13",            HChord("C E Gb Bb D# Ab") },
-            { 99, "7#5",            "augmented-seventh", 0,                              HChord("C E Ab Bb") },
-
-/*100*/     { 100, "13#5",          "dominant-13th", "alt#5",                            HChord("C E G# Bb D F A") },
-            { 101, "7#5#11",        "dominant", "alt#5 add#11",                  HChord("C E G# Bb D#") },
-            { 102, "13#5#11",       "dominant-13th", "alt#5 alt#11",                     HChord("C E G# Bb D F# A") },
-            { 103, "9#5",           "dominant-ninth", "alt#5",                           HChord("C E G# Bb D") },
-            { 104, "9#5#11",        "dominant-ninth", "alt#5 add#11",                    HChord("C E G# Bb D F#") },
-            { 105, "7#5b9",         "dominant", "alt#5 addb9",                   HChord("C E G# Bb Db") },
-            { 106, "13#5b9",        "dominant-13th", "alt#5 altb9",                      HChord("C E G# Bb Db F A") },
-            { 107, "7#5b9#11",      "dominant", "alt#5 addb9 add#11",            HChord("C E G# Bb Db F#") },
-            { 108, "13#5b9#11",     "dominant-13th", "alt#5 altb9 alt#11",               HChord("C E G# Bb Db F# A") },
-            { 109, "7#5#9",         "dominant", "alt#5 add#9",                   HChord("C E G# Bb D#") },
-
-/*110*/     { 110, "13#5#9#11",     "dominant-13th", "alt#5 alt#9 alt#11",               HChord("C E G# Bb D# F# A") },
-            { 111, "7#5#9#11",      "dominant", "alt#5 add#9 add#11",            HChord("C E G# Bb D# F#") },
-            { 112, "13#5#9#11",     "dominant-13th", "alt#5 alt#9 alt#11",               HChord("C E G# Bb D# F# A") }, // same as 110
-            { 113, "7alt",          "dominant", "alt#5 add#9 add#11",            HChord("C E G# Bb D# F#") },
-
-            { 128, "7sus",          "suspended-fourth", "add7",                          HChord("C F G Bb")        },
-            { 129, "13sus",         "suspended-fourth", "add7 add13",                    HChord("C F G Bb D A") },
-
-            { 130, "7susb13",       "suspended-fourth", "add7 addb13",                   HChord("C F G Bb Ab") },
-            { 131, "7sus#11",       "suspended-fourth", "add7 add#11",                   HChord("C F G Bb F") },
-            { 132, "13sus#11",      "suspended-fourth", "add#11 add13",                  HChord("C F G Bb D F# A") },
-            { 133, "7sus#11b13",    "suspended-fourth", "add7 add#11 addb13",            HChord("C F G Bb F# Ab") },
-            { 134, "9sus",          "suspended-fourth", "add7 add9",                     HChord("C F G Bb D") },   // 11 - 9sus
-            { 135, "9susb13",       "suspended-fourth", "add7 add9 addb13",              HChord("C F G Bb D Ab") },
-            { 136, "9sus#11",       "suspended-fourth", "add7 add9 add#11",              HChord("C F G Bb D F#") },
-            { 137, "13sus#11",      "suspended-fourth", "add7 add9 add#11 add13",        HChord("C F G Bb D F# A") },
-            { 138, "13sus#11",      "suspended-fourth", "add7 add9 add#11 add13",        HChord("C F G Bb D F# A") },   // as 137
-            { 139, "9sus#11b13",    "suspended-fourth", "add7 add9 add#11 addb13",       HChord("C F G Bb D F# Ab") },
-
-/*140*/     { 140, "7susb9",        "suspended-fourth", "add7 addb9",                    HChord("C F G Bb Db") },
-            { 141, "13susb9",       "suspended-fourth", "add7 addb9 add11 add13",        HChord("C F G Bb Db F A") },
-            { 142, "7susb9b13",     "suspended-fourth", "add7 addb9 addb13",             HChord("C F G Bb Db Ab") },
-            { 143, "7susb9#11",     "suspended-fourth", "add7 addb9 add#11",             HChord("C F G Bb Db F#") },
-            { 144, "13susb9#11",    "suspended-fourth", "add7 addb9 add#11 add13",       HChord("C F G Bb Dd F# A") },
-            { 145, "7susb9#11b13",  "suspended-fourth", "add7 addb9 add#11 addb13",      HChord("C F G Bb Db F# Ab") },
-            { 146, "7sus#9",        "suspended-fourth", "add7 add#9",                    HChord("C F G Bb Eb") },
-            { 147, "13sus#9",       "suspended-fourth", "add7 add#9 add13",              HChord("C F G Bb D# A") },
-            { 148, "7sus#9b13",     "suspended-fourth", "add7 add#9 addb13",             HChord("C F G Bb D# Ab") },
-            { 149, "9sus#11",       "suspended-fourth", "add7 add9 add#11",              HChord("C F G Bb D F#") },
-
-/*150*/     { 150, "13sus#9#11",    "suspended-fourth", "add7 add#9 add#11 add13",       HChord("C F G Bb D# F# A") },
-            { 151, "7sus#9#11b13",  "suspended-fourth", "add7 add#9 add#11 addb13",      HChord("C F G Bb D# F# Ab") },
-            { 148, "7sus#9b13",     "suspended-fourth", "add7 add#9 addb13",             HChord("C F G Bb D# Ab") },
-            { 152, "7susb5",        "suspended-fourth", "add7 altb5" ,                   HChord("C F Gb Bb")       },
-            { 153, "13susb5",       "suspended-fourth", "alt5 add7 add9 add13",          HChord("C F Gb Bb D A") },
-            { 154, "7susb5b13",     "suspended-fourth", "add7 altb5 addb13",             HChord("C F Gb Bb Ab")    },
-            { 155, "9susb5",        "suspended-fourth", "alt5 add7 add9",                HChord("C F Gb Bb D") },
-            { 156, "9susb5b13",     "suspended-fourth", "alt5 add7 add9 add13",          HChord("C F Gb Bb D Ab") },
-            { 157, "7susb5b9",      "suspended-fourth", "add7 altb5 addb9",              HChord("C F Gb Bb Db")    },
-            { 158, "13susb5b9",     "suspended-fourth", "alt5 add7 altb9 add13",         HChord("C F Gb Bb D A") },
-            { 159, "7susb5b9b13",   "suspended-fourth", "add7 altb5 addb9 addb13",       HChord("C F Gb Bb Db Ab") },
-
-/*160*/     { 160, "7susb5#9",      "suspended-fourth", "add7 altb5 add#9",              HChord("C F Gb Bb Eb")    },
-            { 161, "13susb5#9",     "suspended-fourth", "altb5 add7 add#9 add13",        HChord("C F Gb Bb D# A") },
-            { 162, "7susb5#9b13",   "suspended-fourth", "add7 altb5 add#9 addb13",       HChord("C F Gb Bb Eb Ab") },
-            { 163, "7sus#5",        "suspended-fourth", "add7 alt#5",                    HChord("C F Ab Bb")       },
-            { 164, "13sus#5",       "suspended-fourth", "alt#5 add7 add9 add13",         HChord("C F G# Bb D A") },
-            { 165, "7sus#5#11",     "suspended-fourth", "add7 alt#5 add#11",             HChord("C F Ab Bb")       },
-            { 166, "13sus#5#11",    "suspended-fourth", "alt#5 add7 add9 add#11 add13",  HChord("C F G# Bb D F# A") },
-            { 167, "9sus#5",        "suspended-fourth", "alt#5 add7 add9",               HChord("C F G# Bb D") },
-            { 168, "9sus#5#11",     "suspended-fourth", "alt#5 add7 add9 add#11",        HChord("C F G# Bb D F#") },
-            { 169, "7sus#5b9",      "suspended-fourth", "add7 alt#5 addb9",              HChord("C F Ab Bb Db")    },
-
-/*170*/     { 170, "13sus#5b9",     "suspended-fourth", "alt#5 add7 add9 add13",         HChord("C F G# Bb Db A") },
-            { 171, "7sus#5b9#11",   "suspended-fourth", "add7 alt#5 addb9 add#11",       HChord("C F Ab Bb Db Gb") },
-            { 172, "13sus#5b9#11",  "suspended-fourth", "alt#5 add7 add9 add#11 add13",  HChord("C F G# Bb Db F# A") },
-            { 173, "7sus#5#9",      "suspended-fourth", "add7 alt#5 add#9",              HChord("C F Ab Bb Eb")    },
-            { 174, "13sus#5#9#11",  "suspended-fourth", "alt#5 add7 add#9 add#11 add13", HChord("C F G# Bb D# F# A") },
-            { 175, "7sus#5#9#11",   "suspended-fourth", "add7 alt#5 add#9 add#11",       HChord("C F Ab Bb Eb Gb") },
-            { 176, "13sus#5#9#11",  "suspended-fourth", "alt#5 add7 add#9 add#11 add13", HChord("C F G# Bb D# F# A") }, //same as 174
-            { 177, "4",             "major", "add4",                                     HChord("C E F G") },
-
-            { 184, "sus",           "suspended-fourth", 0,                               HChord("C F G") },  // sus4
-
-            // the following ids are not in "BandInABox"
-            { 185, "dim7",          "diminished-seventh", 0,                             HChord("C Eb Gb Bbb") },  // mscore ext.
-            { 186, "sus2",          "suspended-second", 0,                               HChord("C D G") },      // suspended 2nd chord
-            { 187, "maddb13",       "minor", "addb13",                                   HChord("C Eb Ab") },
-            { 188, "#13",           "major", "add#13",                                   HChord("C E G A#") },
-            { 189, "add#11#13",     "major", "add#11 add#13",                            HChord("C E G F# A#") },
-
-/*190*/     { 190, "add#13",        "major", "add#13",                                   HChord("C E G A#") },
-            { 191, "6add9",         "maj69", 0,                                          HChord("C E G A D") },
-            { 192, "sus4",          "suspended-fourth", 0,                               HChord("C F G") },        // sus4
-            { 193, "11",            "dominant-11th", 0,                                  HChord("C E G Bb D F") }, // dominant 11th / 9sus
-            { 194, "Maj11",         "major-11th", 0,                                     HChord("C E G B D F") },  // major 11th
-            { 195, "Tristan",       "tristan", 0,                                        HChord("C F# A# D") },    // Tristan
-
-            { 196, "m7add11",       "minor-seventh", "add11",                            HChord("C Eb F G Bb") },
-            { 197, "Maj7add13",     "major-seventh", "add13",                            HChord("C E G A B") },
-            { 198, "madd9",         "minor", "add9",                                     HChord("C D Eb G") },
-            { 199, "m9Maj7",        "major-minor", "add9",                               HChord("C Eb G B D") },
-/* 40 */    { 200, "5",             "pedal", "add5",                                     HChord("C G") },
-            { 201, "m11b5",         "minor-11th", "altb5",                               HChord("C Eb Gb Bb D F") },
-            { 202, "dim7add#7",     "diminished-seventh", "add#7",                       HChord() }, // HChord("C Eb Gb Bbb") },
-            { 203, "#59",           "augmented-seventh", "add9",                         HChord("C E Ab D") },
-            { 204, "omit5",         "major", "sub5",                                     HChord("C E") },
-            { 205, "aug7",          "augmented-seventh", 0,                              HChord("C E Ab") },        // augmented 7th
-            { 206, "aug9",          "augmented-ninth", 0,                                HChord("C E Ab Bb D") },   // augmented 9th
-            { 207, "aug13",         "dominant-13th", "alt#5",                            HChord("C E G# Bb D A") },
-      };
-
-//---------------------------------------------------------
-//   chordListSize
-//---------------------------------------------------------
-
-unsigned int Harmony::chordListSize()
-      {
-      return sizeof(chordList)/sizeof(*chordList);
-      }
-
-//---------------------------------------------------------
-//   initHarmony
-//    init chordHash hash table
-//---------------------------------------------------------
-
-void Harmony::initHarmony()
-      {
-      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            if (chordList[i].name) {
-                  int id = chordList[i].id;
-                  chordHash[id] = &chordList[i];
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   harmonyName
 //---------------------------------------------------------
 
@@ -532,9 +301,10 @@ QString Harmony::harmonyName() const
             hc.add(_degreeList);
             // try to find the chord in chordList
             const ChordDescription* newExtension = 0;
-            for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
-                  if (chordList[i].chord == hc && chordList[i].name != 0) {
-                        newExtension = &chordList[i];
+            ChordList* cl = score()->style().chordList();
+            foreach(const ChordDescription* cd, *cl) {
+                  if (cd->chord == hc && !cd->name.isEmpty()) {
+                        newExtension = cd;
                         break;
                         }
                   }
@@ -575,15 +345,16 @@ void Harmony::resolveDegreeList()
 
       hc.add(_degreeList);
 
-printf("resolveDegreeList: <%s> <%s-%s>: ", _descr->name, _descr->xmlKind, _descr->xmlDegrees);
-hc.print();
-_descr->chord.print();
+// printf("resolveDegreeList: <%s> <%s-%s>: ", _descr->name, _descr->xmlKind, _descr->xmlDegrees);
+// hc.print();
+// _descr->chord.print();
 
       // try to find the chord in chordList
-      for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
-            if ((chordList[i].chord == hc) && chordList[i].name != 0) {
-printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
-                  _descr = &chordList[i];
+      ChordList* cl = score()->style().chordList();
+      foreach(const ChordDescription* cd, *cl) {
+            if ((cd->chord == hc) && !cd->name.isEmpty()) {
+printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->name));
+                  _descr = cd;
                   _degreeList.clear();
                   return;
                   }
@@ -650,18 +421,8 @@ void Harmony::propertyAction(const QString& s)
             int rv = ce.exec();
             if (rv) {
                   Harmony* h = ce.harmony()->clone();
-                  h->buildText();
+                  h->render();
                   score()->undoChangeElement(this, h);
-#if 0
-                  setRootTpc(h->rootTpc());
-                  setBaseTpc(h->baseTpc());
-                  setDescr(h->descr());
-                  clearDegrees();
-                  _degreeList = h->degreeList();
-                  _descr      = h->descr();
-                  // setText(harmonyName());
-                  buildText();
-#endif
                   }
             }
       else
@@ -774,7 +535,7 @@ void Harmony::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      buildText();
+      render();
       }
 
 //---------------------------------------------------------
@@ -883,9 +644,10 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
             s = s.mid(idx).simplified();
             }
       s = s.toLower();
-      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            if (QString(chordList[i].name).toLower() == s)
-                  return &chordList[i];
+      ChordList* cl = score()->style().chordList();
+      foreach(const ChordDescription* cd, *cl) {
+            if (cd->name.toLower() == s)
+                  return cd;
             }
       printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
       return 0;
@@ -918,7 +680,7 @@ void Harmony::endEdit()
             setRootTpc(r);
             setBaseTpc(b);
             setDescr(e);
-            buildText();
+            render();
             }
       else {
             // syntax error, leave text as is
@@ -972,25 +734,19 @@ QString HDegree::text() const
 
 const ChordDescription* Harmony::fromXml(const QString& kind,  const QList<HDegree>& dl)
       {
-      QString degrees;
+      QStringList degrees;
 
-      foreach(const HDegree& d, dl) {
-            if (!degrees.isEmpty())
-                  degrees += " ";
-            degrees += d.text();
-            }
+      foreach(const HDegree& d, dl)
+            degrees.append(d.text());
+
       QString lowerCaseKind = kind.toLower();
-      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            const ChordDescription& cd = chordList[i];
-            const char* k = cd.xmlKind;
-            const char* d = cd.xmlDegrees;
-            if (
-               (lowerCaseKind == k)
-               &&
-               (((d == 0) && degrees.isEmpty()) || (d == degrees))
-               ) {
-                  printf("harmony found in db: %s %s -> %d\n", qPrintable(kind), qPrintable(degrees), cd.id);
-                  return &cd;
+      ChordList* cl = score()->style().chordList();
+      foreach(const ChordDescription* cd, *cl) {
+            QString k     = cd->xmlKind;
+            QStringList d = cd->xmlDegrees;
+            if ((lowerCaseKind == k) && (d == degrees)) {
+//                  printf("harmony found in db: %s %s -> %d\n", qPrintable(kind), qPrintable(degrees), cd->id);
+                  return cd;
                   }
             }
       return 0;
@@ -1005,10 +761,10 @@ const ChordDescription* Harmony::fromXml(const QString& kind,  const QList<HDegr
 const ChordDescription* Harmony::fromXml(const QString& kind)
       {
       QString lowerCaseKind = kind.toLower();
-      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            const ChordDescription& cd = chordList[i];
-            if (lowerCaseKind == cd.xmlKind)
-                  return &cd;
+      ChordList* cl = score()->style().chordList();
+      foreach(const ChordDescription* cd, *cl) {
+            if (lowerCaseKind == cd->xmlKind)
+                  return cd;
             }
       return 0;
       }
@@ -1019,7 +775,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
 
 void Harmony::setChordId(int id)
       {
-      _descr = chordHash[id];
+      _descr = score()->style().chordDescription(id);
       }
 
 //---------------------------------------------------------
@@ -1046,7 +802,7 @@ void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       TextB::textStyleChanged(s);
       TextStyle* ns = s[_textStyle];
       setDefaultFont(ns->font(spatium()));   // force
-      buildText();
+      render();
       }
 
 //---------------------------------------------------------
@@ -1077,18 +833,9 @@ void Harmony::layout()
 
       setPos(ipos() + QPointF(xx, yy));
 
-      double y = .0, x = .0;
       QRectF bb;
-      foreach(const TextSegment* ts, textList) {
-            y += ts->offset();
-            QFontMetricsF fm(ts->font);
-
-            QRectF br = fm.boundingRect(QRectF(x, y, 0.0, 0.0),
-               Qt::TextSingleLine | Qt::AlignLeft | Qt::AlignBottom, ts->text);
-            y -= ts->baseLineOffset;
-            x += br.width();
-            bb |= br;
-            }
+      foreach(const TextSegment* ts, textList)
+            bb |= ts->boundingRect().translated(ts->x, ts->y);
       setbbox(bb);
       }
 
@@ -1102,15 +849,10 @@ void Harmony::draw(QPainter& p) const
             Text::draw(p);
             return;
             }
-      double y = 0.0;
-      double x = 0.0;
 
       foreach(const TextSegment* ts, textList) {
-            y += ts->baseLineOffset;
             p.setFont(ts->font);
-            p.drawText(x, y, ts->text);
-            y -= ts->baseLineOffset;
-            x += ts->width;
+            p.drawText(ts->x, ts->y, ts->text);
             }
       }
 
@@ -1118,244 +860,320 @@ void Harmony::draw(QPainter& p) const
 //   TextSegment
 //---------------------------------------------------------
 
-TextSegment::TextSegment(const QString& s, const QFont& f, double offset)
+TextSegment::TextSegment(const QString& s, const QFont& f, double x, double y)
       {
-      set(s, f, offset);
+      set(s, f, x, y);
       }
 
 //---------------------------------------------------------
-//   setText
+//   width
 //---------------------------------------------------------
 
-void TextSegment::setText(const QString& s)
+double TextSegment::width() const
       {
-      text = s;
       QFontMetricsF fm(font);
-      width = 0.0;
+      double w = 0.0;
       foreach(QChar c, text) {
-            width += fm.width(c);
+            w += fm.width(c);
             }
+      return w;
+      }
+
+//---------------------------------------------------------
+//   boundingRect
+//---------------------------------------------------------
+
+QRectF TextSegment::boundingRect() const
+      {
+      QFontMetricsF fm(font);
+      return fm.boundingRect(text);
       }
 
 //---------------------------------------------------------
 //   set
 //---------------------------------------------------------
 
-void TextSegment::set(const QString& s, const QFont& f, double offset)
+void TextSegment::set(const QString& s, const QFont& f, double _x, double _y)
       {
       font = f;
-      baseLineOffset = offset;
+      x    = _x;
+      y    = _y;
       setText(s);
       }
 
 //---------------------------------------------------------
-//   buildText
+//   readRenderList
+//---------------------------------------------------------
+
+static void readRenderList(QString val, QList<RenderAction>& renderList)
+      {
+      QStringList sl = val.split(" ", QString::SkipEmptyParts);
+      foreach(const QString& s, sl) {
+            if (s.startsWith("m:")) {
+                  QStringList ssl = s.split(":", QString::SkipEmptyParts);
+                  if (ssl.size() == 3) {
+                        RenderAction a;
+                        a.type = RenderAction::RENDER_MOVE;
+                        a.movex = ssl[1].toDouble();
+                        a.movey = ssl[2].toDouble();
+                        renderList.append(a);
+                        }
+                  }
+            else if (s == ":push")
+                  renderList.append(RenderAction(RenderAction::RENDER_PUSH));
+            else if (s == ":pop")
+                  renderList.append(RenderAction(RenderAction::RENDER_POP));
+            else if (s == ":n")
+                  renderList.append(RenderAction(RenderAction::RENDER_NOTE));
+            else if (s == ":a")
+                  renderList.append(RenderAction(RenderAction::RENDER_ACCIDENTAL));
+            else {
+                  RenderAction a(RenderAction::RENDER_SET);
+                  a.text = s;
+                  renderList.append(a);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void ChordDescription::read(QDomElement e)
+      {
+      id = e.attribute("id").toInt();
+      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "name")
+                  name = val;
+            else if (tag == "xml")
+                  xmlKind = val;
+            else if (tag == "degree")
+                  xmlDegrees.append(val);
+            else if (tag == "voicing")
+                  chord = HChord(val);
+            else if (tag == "render")
+                  readRenderList(val, renderList);
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void ChordList::read(QDomElement e)
+      {
+      int fontIdx = 0;
+      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "font") {
+                  fontFaces.append(e.attribute("family"));
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString val(ee.text());
+                        if (ee.tagName() == "sym") {
+                              ChordSymbol cs;
+                              cs.fontIdx = fontIdx;
+                              cs.name    = ee.attribute("name");
+                              cs.code    = ee.attribute("code").toInt(0, 0);
+                              symbols.insert(cs.name, cs);
+                              }
+                        else
+                              domError(ee);
+                        }
+                  ++fontIdx;
+                  }
+            else if (tag == "chord") {
+                  ChordDescription* cd = new ChordDescription();
+                  cd->read(e);
+                  insert(cd->id, cd);
+                  }
+            else if (tag == "renderRoot")
+                  readRenderList(val, renderListRoot);
+            else if (tag == "renderBase")
+                  readRenderList(val, renderListBase);
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   read
+//    read Chord List, return false on error
+//---------------------------------------------------------
+
+bool ChordList::read(const QString& name)
+      {
+      if (name.isEmpty())
+            return false;
+      QString path;
+      if (name[0] == '/')
+            path = name;
+      else
+            path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
+      QFile f(path);
+      if (!f.open(QIODevice::ReadOnly)) {
+            printf("cannot read chordlist at <%s>\n", qPrintable(path));
+            return false;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading style file %s at line %d column %d: %s\n",
+               qPrintable(f.fileName()), line, column, qPrintable(err));
+            int id = QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load chord list failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            if (id == 1)      // quit?
+                  exit(-1);
+            return false;
+            }
+      docName = f.fileName();
+
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  // QString version = e.attribute(QString("version"));
+                  // QStringList sl = version.split('.');
+                  // int _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  read(e);
+                  }
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   renderList
+//---------------------------------------------------------
+
+void Harmony::render(const QList<RenderAction>& renderList, double& x, double& y, int tpc)
+      {
+      ChordList* chordList = score()->style().chordList();
+      QStack<QPointF> stack;
+      int fontIdx = 0;
+      double _spatium = spatium();
+      double mag = (DPI / PPI) * (_spatium / (SPATIUM20 * DPI));
+
+      foreach(const RenderAction& a, renderList) {
+            if (a.type == RenderAction::RENDER_SET) {
+                  TextSegment* ts = new TextSegment(fontList[fontIdx], x, y);
+                  ChordSymbol cs = chordList->symbol(a.text);
+                  if (cs.isValid()) {
+                        ts->font = fontList[cs.fontIdx];
+                        ts->setText(QString(cs.code));
+                        }
+                  else
+                        ts->setText(a.text);
+                  textList.append(ts);
+                  x += ts->width();
+                  }
+            else if (a.type == RenderAction::RENDER_MOVE) {
+                  x += a.movex * mag;
+                  y += a.movey * mag;
+                  }
+            else if (a.type == RenderAction::RENDER_PUSH)
+                  stack.push(QPointF(x,y));
+            else if (a.type == RenderAction::RENDER_POP) {
+                  if (!stack.isEmpty()) {
+                        QPointF pt = stack.pop();
+                        x = pt.x();
+                        y = pt.y();
+                        }
+                  else
+                        printf("RenderAction::RENDER_POP: stack empty\n");
+                  }
+            else if (a.type == RenderAction::RENDER_NOTE) {
+                  bool germanNames = score()->styleB(ST_useGermanNoteNames);
+                  QChar c;
+                  int acc;
+                  tpc2name(tpc, germanNames, &c, &acc);
+                  TextSegment* ts = new TextSegment(fontList[fontIdx], x, y);
+                  ChordSymbol cs = chordList->symbol(QString(c));
+                  if (cs.isValid()) {
+                        ts->font = fontList[cs.fontIdx];
+                        ts->setText(QString(cs.code));
+                        }
+                  else
+                        ts->setText(QString(c));
+                  textList.append(ts);
+                  x += ts->width();
+                  }
+            else if (a.type == RenderAction::RENDER_ACCIDENTAL) {
+                  QChar c;
+                  int acc;
+                  tpc2name(tpc, false, &c, &acc);
+                  if (acc) {
+                        TextSegment* ts = new TextSegment(fontList[fontIdx], x, y);
+                        QString s;
+                        if (acc == -1)
+                              s = "b";
+                        else if (acc == 1)
+                              s = "#";
+                        ChordSymbol cs = chordList->symbol(s);
+                        if (cs.isValid()) {
+                              ts->font = fontList[cs.fontIdx];
+                              ts->setText(QString(cs.code));
+                              }
+                        else
+                              ts->setText(s);
+                        textList.append(ts);
+                        x += ts->width();
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   render
 //    construct Chord Symbol
 //---------------------------------------------------------
 
-void Harmony::buildText()
+void Harmony::render()
       {
-      static const QChar majorSym(0x25b3);
-//      static const QChar minorSym(0x2d);
-//      static const QChar augmentedSym(0x2b);
-//      static const QChar diminishedSym(0xb0);
-//      static const QChar halfDiminishedSym(0xf8);
-      static const QChar sharpSym(0xe10c);
-      static const QChar flatSym(0xe10d);
-
       if (_rootTpc == INVALID_TPC)
             return;
 
-//      clear();
-      bool useSymbols  = score()->styleB(ST_chordNamesUseSymbols);
-      bool useJazzFont = score()->styleB(ST_chordNamesUseJazzFont);
+      TextStyle* st        = score()->textStyle(_textStyle);
+      QFont f              = st->fontPx(spatium());
+      ChordList* chordList = score()->style().chordList();
 
-      QString txt(harmonyName());
-// printf("Harmony <%s>\n", qPrintable(txt));
-      if (txt.isEmpty())
-            return;
-      int size = txt.size();
-      int idx  = 0;
+      fontList.clear();
+      foreach(QString s, chordList->fontFaces) {
+            QFont font(f);
+#ifdef Q_WS_MAC
+            s += " 20";
+#endif
+            font.setFamily(s);
+            fontList.append(font);
+            }
+      if (fontList.isEmpty())
+            fontList.append(f);
 
       foreach(const TextSegment* s, textList)
             delete s;
       textList.clear();
 
-      TextStyle* st = score()->textStyle(_textStyle);
-      QFont font1 = st->fontPx(spatium());
-      QFont font2(font1);
-      QFont font3(font1);
+      double x = 0.0, y = 0.0;
+      render(chordList->renderListRoot, x, y, _rootTpc);
+      if (_descr)
+            render(_descr->renderList, x, y, 0);
+      if (_baseTpc != INVALID_TPC)
+            render(chordList->renderListBase, x, y, _baseTpc);
+      }
 
-#ifdef Q_WS_MAC
-      font2.setFamily("MScore1 20");
-      font3.setFamily("MuseJazz 20");
-#else
-      font2.setFamily("MScore1");
-      font3.setFamily("MuseJazz");
-#endif
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
 
-      font2.setPixelSize(font2.pixelSize() * 10 / 9);
-      QFont font1s = font1;
-      QFont font2s = font2;
-      double fsize2 = double(font2.pixelSize());
-      double fsize  = double(font1.pixelSize());
-
-      // root name
-      QChar c = txt[idx++];
-      TextSegment* ts = new TextSegment(QString(c),
-         useJazzFont ? font3 : font1, 0.0);
-      textList.append(ts);
-      if (size == idx)
-            return;
-      if ((txt[idx] == '#') || (txt[idx] == 'b')) {
-            ts = new TextSegment;
-            if (useJazzFont) {
-                  static const QChar sharpSym = 0x5f;
-                  static const QChar flatSym  = 0x5e;
-                  QString str(txt[idx] == '#' ? sharpSym : flatSym);
-                  ts->set(str, font3, 0.0);
-                  }
-            else {
-                  if (useSymbols)
-                        ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2, -fsize2 * .5);
-                  else
-                        ts->set(QString(txt[idx]), font1, 0.0);
-                  }
-            textList.append(ts);
-            ++idx;
-            if (size == idx)
-                  return;
-            }
-      while (txt[idx] == ' ') {
-            ++idx;
-            if (size == idx)
-                  return;
-            }
-
-      int superOffset = -fsize * .3;
-
-      ts = new TextSegment;
-      ts->setFont(useJazzFont ? font3 : font1);
-
-      if (txt.mid(idx, 1) == "m") {
-            ts->setText(useJazzFont ? QString(0x81) : QString("m"));
-            idx++;
-            }
-      else if (!useJazzFont && useSymbols && (txt.mid(idx, 4) == "Maj7")) {
-            ts->setText(QString(majorSym));
-            idx += 4;
-            }
-      else if (txt.mid(idx, 3) == "Maj") {
-            ts->setText(useJazzFont ? QString(0x80) : "maj");
-            idx += 3;
-            }
-      else if (txt.mid(idx, 3) == "aug") {
-            ts->setText("aug");
-            idx += 3;
-            }
-      else if (txt.mid(idx, 3) == "sus") {
-            ts->setText(useJazzFont ? QString(0x85) : QString("sus"));
-            idx += 3;
-            }
-      else if (txt.mid(idx, 3) == "dim") {
-            ts->setText(useJazzFont ? QString(0x84) : QString("dim"));
-            idx += 3;
-            }
-      if (ts->text.isEmpty())
-            delete ts;
-      else {
-            textList.append(ts);
-            if (size == idx)
-                  return;
-            }
-
-      int idx2 = idx;
-      while (idx2 < size) {
-            if (txt[idx2] == '/')
-                  break;
-            ++idx2;
-            }
-      int slashIdx = txt[idx2] == '/' ? idx2 + 1 : 0;
-      if (idx2 - idx > 0) {
-            while (idx < idx2) {
-// printf("  Harmony(%d) <%s>\n", textList.size(), qPrintable(txt.mid(idx, idx2-idx)));
-                  ts = new TextSegment;
-                  if (useJazzFont && (txt[idx] == '#')) {
-                        ts->set(QString(0x89), font3, 0.0);
-                        }
-                  else if (useJazzFont && (txt[idx] == 'b')) {
-                        ts->set(QString(0x88), font3, 0.0);
-                        }
-                  else if ((txt[idx] == '#') || (txt[idx] == 'b')) {
-                        if (useSymbols) {
-                              QString s(txt[idx] == '#' ? sharpSym : flatSym);
-                              ts->set(s, font2s, superOffset); //  - fsize2/4);
-                              }
-                        else {
-                              ts->set(QString(txt[idx]), font1s, superOffset);
-                              }
-                        }
-                  else if (useJazzFont && (txt[idx] == '6' || txt[idx] == '7' || txt[idx] == '9')) {
-                        ts->set(QString(txt[idx]), font3, 0.0);
-                        }
-                  else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '1') {
-                        ts->set(QString(0x82), font3, 0.0);     // 11
-                        ++idx;
-                        }
-                  else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '3') {
-                        ts->set(QString(0x83), font3, 0.0);     // 13
-                        ++idx;
-                        }
-                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 's') && (txt[idx+1] == 'u') && (txt[idx+2] == 's')) {
-                        ts->set(QString(0x85), font3, 0.0);     // sus
-                        idx += 2;
-                        }
-                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'd') && (txt[idx+1] == 'i') && (txt[idx+2] == 'm')) {
-                        ts->set(QString(0x86), font3, 0.0);     // dim
-                        idx += 2;
-                        }
-                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'a') && (txt[idx+1] == 'd') && (txt[idx+2] == 'd')) {
-                        ts->set(QString(0x8b), font3, 0.0);     // add
-                        idx += 2;
-                        }
-                  else if (useJazzFont && (txt[idx] == '+')) {
-                        ts->set(QString(0x86), font3, 0.0);
-                        }
-                  else if (useJazzFont && (txt[idx] == '5')) {
-                        ts->set(QString(0x8a), font3, 0.0);
-                        }
-                  else {
-                        ts->set(QString(txt[idx]), font1s, superOffset);
-                        }
-                  ++idx;
-                  textList.append(ts);
-                  }
-            }
-      idx = slashIdx;
-      if (idx) {
-            ts = new TextSegment("/" + QString(txt[idx]), font1, 0.0);
-            textList.append(ts);
-            ++idx;
-            if (size == idx)
-                  return;
-            ts = new TextSegment;
-            if ((txt[idx] == '#') || (txt[idx] == 'b')) {
-                  if (useSymbols)
-                        ts->set(QString(txt[idx] == '#' ? sharpSym : flatSym), font2, -fsize2 * .4);
-                  else
-                        ts->set(QString(txt[idx]), font1, 0.0);
-                  }
-            else {
-                  ts->set(QString(txt[idx]), font1s, 0.0);
-                  }
-            ++idx;
-            textList.append(ts);
-            if (size == idx)
-                  return;
-
-            ts = new TextSegment(QString(txt[idx]), font1, 0.0);
-            textList.append(ts);
-            }
+void Harmony::spatiumChanged(double oldValue, double newValue)
+      {
+      Text::spatiumChanged(oldValue, newValue);
+      render();
       }
 
 

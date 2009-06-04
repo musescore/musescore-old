@@ -350,7 +350,7 @@ Mod* fluid_mod_new()
  */
 void fluid_mod_delete(Mod * mod)
       {
-      FLUID_FREE(mod);
+      free(mod);
       }
 
 /*

@@ -25,6 +25,7 @@
 #include "articulation.h"
 #include "sym.h"
 #include "icons.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   EditStyle
@@ -77,6 +78,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
             articulationTable->setCellWidget(i, 1, cb);
             }
       setValues();
+      connect(chordDescriptionFileButton, SIGNAL(clicked()), SLOT(selectChordDescriptionFile()));
       }
 
 //---------------------------------------------------------
@@ -115,81 +117,80 @@ void EditStyle::apply()
 
 void EditStyle::getValues()
       {
-      lstyle[ST_staffUpperBorder]        = StyleVal(Spatium(staffUpperBorder->value()));
-      lstyle[ST_staffLowerBorder]        = StyleVal(Spatium(staffLowerBorder->value()));
-      lstyle[ST_staffDistance]           = StyleVal(Spatium(staffDistance->value()));
-      lstyle[ST_akkoladeDistance]        = StyleVal(Spatium(akkoladeDistance->value()));
-      lstyle[ST_systemDistance]          = StyleVal(Spatium(systemDistance->value()));
-      lstyle[ST_lyricsDistance]          = StyleVal(Spatium(lyricsDistance->value()));
-      lstyle[ST_lyricsMinBottomDistance] = StyleVal(Spatium(lyricsMinBottomDistance->value()));
-      lstyle[ST_systemFrameDistance]     = StyleVal(Spatium(systemFrameDistance->value()));
-      lstyle[ST_frameSystemDistance]     = StyleVal(Spatium(frameSystemDistance->value()));
-      lstyle[ST_bracketDistance]         = StyleVal(Spatium(bracketDistance->value()));
-      lstyle[ST_measureSpacing]          = StyleVal(measureSpacing->value());
-      lstyle[ST_minNoteDistance]         = StyleVal(Spatium(minNoteDistance->value()));
-      lstyle[ST_barNoteDistance]         = StyleVal(Spatium(barNoteDistance->value()));
-      lstyle[ST_noteBarDistance]         = StyleVal(Spatium(noteBarDistance->value()));
-      lstyle[ST_showPageNumber]          = StyleVal(showPageNumber->isChecked());
-      lstyle[ST_showPageNumberOne]       = StyleVal(showFirstPageNumber->isChecked());
-      lstyle[ST_pageNumberOddEven]       = StyleVal(showOddEvenPageNumber->isChecked());
-      lstyle[ST_showMeasureNumber]       = StyleVal(showMeasureNumber->isChecked());
-      lstyle[ST_showMeasureNumberOne]    = StyleVal(showFirstMeasureNumber->isChecked());
-      lstyle[ST_measureNumberInterval]   = StyleVal(intervalMeasureNumber->value());
-      lstyle[ST_measureNumberSystem]     = StyleVal(showEverySystemMeasureNumber->isChecked());
-      lstyle[ST_measureNumberAllStaffs]  = StyleVal(showAllStaffsMeasureNumber->isChecked());
-      lstyle[ST_clefLeftMargin]          = StyleVal(Spatium(clefLeftMargin->value()));
-      lstyle[ST_keysigLeftMargin]        = StyleVal(Spatium(keysigLeftMargin->value()));
-      lstyle[ST_timesigLeftMargin]       = StyleVal(Spatium(timesigLeftMargin->value()));
-      lstyle[ST_clefKeyRightMargin]      = StyleVal(Spatium(clefKeyRightMargin->value()));
-      lstyle[ST_beginRepeatLeftMargin]   = StyleVal(Spatium(beginRepeatLeftMargin->value()));
-      lstyle[ST_beamWidth]               = StyleVal(Spatium(beamWidth->value()));
-      lstyle[ST_beamDistance]            = StyleVal(beamDistance->value());
-      lstyle[ST_beamMinLen]              = StyleVal(Spatium(beamMinLen->value()));
-      lstyle[ST_beamMinSlope]            = StyleVal(beamMinSlope->value());
-      lstyle[ST_beamMaxSlope]            = StyleVal(beamMaxSlope->value());
-      lstyle[ST_graceNoteMag]            = StyleVal(graceNoteSize->value() * 0.01);
-      lstyle[ST_smallStaffMag]           = StyleVal(smallStaffSize->value() * 0.01);
-      lstyle[ST_smallNoteMag]            = StyleVal(smallNoteSize->value() * 0.01);
-      lstyle[ST_smallClefMag]            = StyleVal(smallClefSize->value() * 0.01);
-      lstyle[ST_pageFillLimit]           = StyleVal(pageFillThreshold->value() * 0.01);
-      lstyle[ST_lastSystemFillLimit]     = StyleVal(lastSystemFillThreshold->value() * 0.01);
-      lstyle[ST_hairpinWidth]            = StyleVal(Spatium(hairpinLineWidth->value()));
-      lstyle[ST_hairpinHeight]           = StyleVal(Spatium(hairpinHeight->value()));
-      lstyle[ST_hairpinContHeight]       = StyleVal(Spatium(hairpinContinueHeight->value()));
-      lstyle[ST_genClef]                 = StyleVal(genClef->isChecked());
-      lstyle[ST_genKeysig]               = StyleVal(genKeysig->isChecked());
-      lstyle[ST_genTimesig]              = StyleVal(genTimesig->isChecked());
-      lstyle[ST_genCourtesyTimesig]      = StyleVal(genCourtesyTimesig->isChecked());
-      lstyle[ST_useGermanNoteNames]      = StyleVal(useGermanNoteNames->isChecked());
-      lstyle[ST_chordNamesUseSymbols]    = StyleVal(chordNamesUseSymbols->isChecked());
-      lstyle[ST_chordNamesUseJazzFont]   = StyleVal(chordNamesUseJazzFont->isChecked());
-      lstyle[ST_concertPitch]            = StyleVal(concertPitch->isChecked());
-      lstyle[ST_createMultiMeasureRests] = StyleVal(multiMeasureRests->isChecked());
-      lstyle[ST_minEmptyMeasures]        = StyleVal(minEmptyMeasures->value());
-      lstyle[ST_minMMRestWidth]          = StyleVal(Spatium(minMeasureWidth->value()));
-      lstyle[ST_hideEmptyStaves]         = StyleVal(hideEmptyStaves->isChecked());
+      lstyle.set(ST_staffUpperBorder,        Spatium(staffUpperBorder->value()));
+      lstyle.set(ST_staffLowerBorder,        Spatium(staffLowerBorder->value()));
+      lstyle.set(ST_staffDistance,           Spatium(staffDistance->value()));
+      lstyle.set(ST_akkoladeDistance,        Spatium(akkoladeDistance->value()));
+      lstyle.set(ST_systemDistance,          Spatium(systemDistance->value()));
+      lstyle.set(ST_lyricsDistance,          Spatium(lyricsDistance->value()));
+      lstyle.set(ST_lyricsMinBottomDistance, Spatium(lyricsMinBottomDistance->value()));
+      lstyle.set(ST_systemFrameDistance,     Spatium(systemFrameDistance->value()));
+      lstyle.set(ST_frameSystemDistance,     Spatium(frameSystemDistance->value()));
+      lstyle.set(ST_bracketDistance,         Spatium(bracketDistance->value()));
+      lstyle.set(ST_measureSpacing,          measureSpacing->value());
+      lstyle.set(ST_minNoteDistance,         Spatium(minNoteDistance->value()));
+      lstyle.set(ST_barNoteDistance,         Spatium(barNoteDistance->value()));
+      lstyle.set(ST_noteBarDistance,         Spatium(noteBarDistance->value()));
+      lstyle.set(ST_showPageNumber,          showPageNumber->isChecked());
+      lstyle.set(ST_showPageNumberOne,       showFirstPageNumber->isChecked());
+      lstyle.set(ST_pageNumberOddEven,       showOddEvenPageNumber->isChecked());
+      lstyle.set(ST_showMeasureNumber,       showMeasureNumber->isChecked());
+      lstyle.set(ST_showMeasureNumberOne,    showFirstMeasureNumber->isChecked());
+      lstyle.set(ST_measureNumberInterval,   intervalMeasureNumber->value());
+      lstyle.set(ST_measureNumberSystem,     showEverySystemMeasureNumber->isChecked());
+      lstyle.set(ST_measureNumberAllStaffs,  showAllStaffsMeasureNumber->isChecked());
+      lstyle.set(ST_clefLeftMargin,          Spatium(clefLeftMargin->value()));
+      lstyle.set(ST_keysigLeftMargin,        Spatium(keysigLeftMargin->value()));
+      lstyle.set(ST_timesigLeftMargin,       Spatium(timesigLeftMargin->value()));
+      lstyle.set(ST_clefKeyRightMargin,      Spatium(clefKeyRightMargin->value()));
+      lstyle.set(ST_clefBarlineDistance,     Spatium(clefBarlineDistance->value()));
+      lstyle.set(ST_beginRepeatLeftMargin,   Spatium(beginRepeatLeftMargin->value()));
+      lstyle.set(ST_beamWidth,               Spatium(beamWidth->value()));
+      lstyle.set(ST_beamDistance,            beamDistance->value());
+      lstyle.set(ST_beamMinLen,              Spatium(beamMinLen->value()));
+      lstyle.set(ST_beamMinSlope,            beamMinSlope->value());
+      lstyle.set(ST_beamMaxSlope,            beamMaxSlope->value());
+      lstyle.set(ST_graceNoteMag,            graceNoteSize->value() * 0.01);
+      lstyle.set(ST_smallStaffMag,           smallStaffSize->value() * 0.01);
+      lstyle.set(ST_smallNoteMag,            smallNoteSize->value() * 0.01);
+      lstyle.set(ST_smallClefMag,            smallClefSize->value() * 0.01);
+      lstyle.set(ST_pageFillLimit,           pageFillThreshold->value() * 0.01);
+      lstyle.set(ST_lastSystemFillLimit,     lastSystemFillThreshold->value() * 0.01);
+      lstyle.set(ST_hairpinWidth,            Spatium(hairpinLineWidth->value()));
+      lstyle.set(ST_hairpinHeight,           Spatium(hairpinHeight->value()));
+      lstyle.set(ST_hairpinContHeight,       Spatium(hairpinContinueHeight->value()));
+      lstyle.set(ST_genClef,                 genClef->isChecked());
+      lstyle.set(ST_genKeysig,               genKeysig->isChecked());
+      lstyle.set(ST_genTimesig,              genTimesig->isChecked());
+      lstyle.set(ST_genCourtesyTimesig,      genCourtesyTimesig->isChecked());
+      lstyle.set(ST_chordDescriptionFile,    qPrintable(chordDescriptionFile->text()));
+      lstyle.set(ST_concertPitch,            concertPitch->isChecked());
+      lstyle.set(ST_createMultiMeasureRests, multiMeasureRests->isChecked());
+      lstyle.set(ST_minEmptyMeasures,        minEmptyMeasures->value());
+      lstyle.set(ST_minMMRestWidth,          Spatium(minMeasureWidth->value()));
+      lstyle.set(ST_hideEmptyStaves,         hideEmptyStaves->isChecked());
 
-      lstyle[ST_accidentalNoteDistance]  = StyleVal(Spatium(accidentalNoteDistance->value()));
-      lstyle[ST_accidentalDistance]      = StyleVal(Spatium(accidentalDistance->value()));
-      lstyle[ST_dotNoteDistance]         = StyleVal(Spatium(noteDotDistance->value()));
-      lstyle[ST_dotDotDistance]          = StyleVal(Spatium(dotDotDistance->value()));
-      lstyle[ST_ledgerLineWidth]         = StyleVal(Spatium(ledgerLineWidth->value()));
+      lstyle.set(ST_accidentalNoteDistance,  Spatium(accidentalNoteDistance->value()));
+      lstyle.set(ST_accidentalDistance,      Spatium(accidentalDistance->value()));
+      lstyle.set(ST_dotNoteDistance,         Spatium(noteDotDistance->value()));
+      lstyle.set(ST_dotDotDistance,          Spatium(dotDotDistance->value()));
+      lstyle.set(ST_ledgerLineWidth,         Spatium(ledgerLineWidth->value()));
 
-      lstyle[ST_propertyDistanceHead]    = StyleVal(Spatium(propertyDistanceHead->value()));
-      lstyle[ST_propertyDistanceStem]    = StyleVal(Spatium(propertyDistanceStem->value()));
-      lstyle[ST_propertyDistance]        = StyleVal(Spatium(propertyDistance->value()));
-      lstyle[ST_stemDir1]                = StyleVal(voice1Up->isChecked() ? UP : DOWN);
-      lstyle[ST_stemDir2]                = StyleVal(voice2Up->isChecked() ? UP : DOWN);
-      lstyle[ST_stemDir3]                = StyleVal(voice3Up->isChecked() ? UP : DOWN);
-      lstyle[ST_stemDir4]                = StyleVal(voice4Up->isChecked() ? UP : DOWN);
+      lstyle.set(ST_propertyDistanceHead,    Spatium(propertyDistanceHead->value()));
+      lstyle.set(ST_propertyDistanceStem,    Spatium(propertyDistanceStem->value()));
+      lstyle.set(ST_propertyDistance,        Spatium(propertyDistance->value()));
+      lstyle.set(ST_stemDir1,                voice1Up->isChecked() ? UP : DOWN);
+      lstyle.set(ST_stemDir2,                voice2Up->isChecked() ? UP : DOWN);
+      lstyle.set(ST_stemDir3,                voice3Up->isChecked() ? UP : DOWN);
+      lstyle.set(ST_stemDir4,                voice4Up->isChecked() ? UP : DOWN);
 
-      lstyle[ST_shortenStem]             = StyleVal(shortenStem->isChecked());
-      lstyle[ST_shortStemProgression]    = StyleVal(Spatium(shortStemProgression->value()));
-      lstyle[ST_shortestStem]            = StyleVal(Spatium(shortestStem->value()));
+      lstyle.set(ST_shortenStem,             shortenStem->isChecked());
+      lstyle.set(ST_shortStemProgression,    Spatium(shortStemProgression->value()));
+      lstyle.set(ST_shortestStem,            Spatium(shortestStem->value()));
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
-            lstyle[STYLE_TYPE(ST_UfermataAnchor + i)] = StyleVal(cb->itemData(cb->currentIndex()).toInt());
+            lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
             }
       }
 
@@ -230,6 +231,7 @@ void EditStyle::setValues()
       keysigLeftMargin->setValue(lstyle[ST_keysigLeftMargin].toSpatium().val());
       timesigLeftMargin->setValue(lstyle[ST_timesigLeftMargin].toSpatium().val());
       clefKeyRightMargin->setValue(lstyle[ST_clefKeyRightMargin].toSpatium().val());
+      clefBarlineDistance->setValue(lstyle[ST_clefBarlineDistance].toSpatium().val());
       beginRepeatLeftMargin->setValue(lstyle[ST_beginRepeatLeftMargin].toSpatium().val());
 
       beamWidth->setValue(lstyle[ST_beamWidth].toSpatium().val());
@@ -255,8 +257,8 @@ void EditStyle::setValues()
       genCourtesyTimesig->setChecked(lstyle[ST_genCourtesyTimesig].toBool());
 
       useGermanNoteNames->setChecked(lstyle[ST_useGermanNoteNames].toBool());
-      chordNamesUseSymbols->setChecked(lstyle[ST_chordNamesUseSymbols].toBool());
-      chordNamesUseJazzFont->setChecked(lstyle[ST_chordNamesUseJazzFont].toBool());
+      const char* s = lstyle[ST_chordDescriptionFile].toString();
+      chordDescriptionFile->setText(s);
       concertPitch->setChecked(lstyle[ST_concertPitch].toBool());
 
       multiMeasureRests->setChecked(lstyle[ST_createMultiMeasureRests].toBool());
@@ -290,7 +292,7 @@ void EditStyle::setValues()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
-            int st  = lstyle[STYLE_TYPE(ST_UfermataAnchor + i)].toInt();
+            int st  = lstyle[StyleIdx(ST_UfermataAnchor + i)].toInt();
             int idx = 0;
             if (st == A_TOP_STAFF)
                   idx = 0;
@@ -300,5 +302,23 @@ void EditStyle::setValues()
                   idx = 2;
             cb->setCurrentIndex(idx);
             }
+      }
+
+//---------------------------------------------------------
+//   selectChordDescriptionFile
+//---------------------------------------------------------
+
+void EditStyle::selectChordDescriptionFile()
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         0, QWidget::tr("MuseScore: Load Chord Description"),
+         QString("%1styles/").arg(mscoreGlobalShare),
+            QWidget::tr("MuseScore Chord Description (*.xml);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      chordDescriptionFile->setText(fn);
       }
 

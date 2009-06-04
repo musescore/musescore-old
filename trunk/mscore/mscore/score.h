@@ -662,24 +662,25 @@ class Score : public QObject {
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
 
-      const Style& style() const              { return _style;                   }
-      void setStyle(const Style& s)           { _style = s;                      }
-      StyleVal style(STYLE_TYPE type) const   { return _style[type];             }
-      Spatium styleS(STYLE_TYPE type) const   { return _style[type].toSpatium(); }
-      bool styleB(STYLE_TYPE type) const      { return _style[type].toBool();    }
-      double styleD(STYLE_TYPE type) const    { return _style[type].toDouble();  }
-      int styleI(STYLE_TYPE type) const       { return _style[type].toInt();     }
-      void setStyle(STYLE_TYPE t, StyleVal v) { _style[t] = v;                   }
+      Style& style()                           { return _style;                   }
+      const Style& style() const               { return _style;                   }
+      void setStyle(const Style& s)            { _style = s;                      }
+      StyleVal style(StyleIdx idx) const;
+      Spatium styleS(StyleIdx idx) const;
+      bool styleB(StyleIdx idx) const;
+      double styleD(StyleIdx idx) const;
+      int styleI(StyleIdx idx) const;
+      void setStyle(StyleIdx idx, const StyleVal& v);
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
-      QList<Viewer*> getViewer()              { return viewer;      }
-      int playPos() const                     { return _playPos;    }
-      void setPlayPos(int val)                { _playPos = val;     }
+      QList<Viewer*> getViewer()               { return viewer;      }
+      int playPos() const                      { return _playPos;    }
+      void setPlayPos(int val)                 { _playPos = val;     }
 
-      bool noteEntryMode() const              { return _is.noteEntryMode; }
-      int inputPos() const                    { return _is.pos();   }
-      int inputTrack() const                  { return _is.track;   }
+      bool noteEntryMode() const               { return _is.noteEntryMode; }
+      int inputPos() const                     { return _is.pos();   }
+      int inputTrack() const                   { return _is.track;   }
       InputState& inputState()                 { return _is;        }
       void setInputState(const InputState& st) { _is = st;          }
       void setInputTrack(int);

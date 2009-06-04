@@ -28,7 +28,6 @@ cmake_policy(SET CMP0003 NEW)
 
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
-set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
@@ -37,7 +36,6 @@ set(STATIC_SCRIPT_BINDINGS FALSE)
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
       set(STATIC_SCRIPT_BINDINGS TRUE)
-      set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
 
 if (APPLE)
@@ -122,19 +120,6 @@ _QT4_ADJUST_LIB_VARS(QTSCRIPT)
 include(${QT_USE_FILE})
 
 ##
-## look for fluidsynth
-##
-
-if (USE_GLOBAL_FLUID)
-      PKGCONFIG ( fluidsynth 1.0.0 FLUID_INCDIR FLUID_LIBDIR FLUID_LIB FLUID_CPP )
-      if (NOT FLUID_INCDIR)
-	      message (FATAL_ERROR "FluidSynth >= 1.0.0 required")
-      else (NOT FLUID_INCDIR)
-	      message ("FluidSynth detected.")
-      endif (NOT FLUID_INCDIR)
-endif (USE_GLOBAL_FLUID)
-
-##
 ## alsa >= 0.9.0
 ##
 
@@ -202,11 +187,8 @@ if (NOT MINGW)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
-set (subdirs awl osdabzip rtf2html mscore share manual demos scriptgen singleapp)
-
-if (NOT USE_GLOBAL_FLUID)
-      set (subdirs ${subdirs} fluid)
-endif (NOT USE_GLOBAL_FLUID)
+set (subdirs awl osdabzip rtf2html mscore share manual demos
+     scriptgen singleapp fluid)
 
 if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)
@@ -223,9 +205,6 @@ include_directories(
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
    )
-if (USE_GLOBAL_FLUID)
-      include_directories(${FLUID_INCDIR})
-endif (USE_GLOBAL_FLUID)
 
 ##
 ## create package target
@@ -286,11 +265,7 @@ include (InstallRequiredSystemLibraries)
   set(CPACK_DEBIAN_PACKAGE_VERSION      "${Mscore_VERSION_FULL}-0ubuntu0.1")
   set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "i386")
 
-  if (USE_GLOBAL_FLUID)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS  "libqt4-core (>= 4.4), libqt4-gui (>= 4.4), libfluidsynth-dev (>= 1.0.0)")
-  else (USE_GLOBAL_FLUID)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.4), libqt4-gui (>= 4.4)")
-  endif (USE_GLOBAL_FLUID)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS    "libqt4-core (>= 4.4), libqt4-gui (>= 4.4)")
 
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER   "tsmithe@ubuntu.com")
   set(CPACK_DEBIAN_PACKAGE_SECTION      "devel")

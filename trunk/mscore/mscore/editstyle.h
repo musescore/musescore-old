@@ -46,6 +46,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
    private slots:
       void ok();
       void apply();
+      void selectChordDescriptionFile();
 
    public:
       EditStyle(Score*, QWidget*);

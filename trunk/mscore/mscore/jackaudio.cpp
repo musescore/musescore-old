@@ -333,12 +333,9 @@ bool JackAudio::init()
                   }
             }
 
-#ifdef USE_GLOBAL_FLUID
-      synth = new Fluid();
-#else
       synth = new FluidS::Fluid();
-#endif
-      synth->init(_sampleRate, preferences.midiPorts * 16);
+      synth->init(_sampleRate);
+
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;

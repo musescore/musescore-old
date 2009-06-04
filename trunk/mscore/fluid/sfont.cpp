@@ -83,9 +83,8 @@ bool SFont::load(const QString& s)
 Sample* SFont::get_sample(char *s)
       {
       foreach(Sample* sa, sample) {
-            if (FLUID_STRCMP(sa->name, s) == 0) {
+            if (strcmp(sa->name, s) == 0)
                   return sa;
-                  }
             }
       return 0;
       }
@@ -170,8 +169,6 @@ void Sample::load()
       unsigned int size = end - start;
       data              = new short[size];
       size              *= sizeof(short);
-
-// printf("load <%s> %d\n", name, size);
 
       if (fd.read((char*)data, size) != size)
             return;
@@ -411,7 +408,7 @@ int Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double
 
 int Preset::importSfont(SFPreset* sfpreset, SFont* sfont)
       {
-      if ((sfpreset->name != 0) && (FLUID_STRLEN(sfpreset->name) > 0))
+      if (sfpreset->name && (strlen(sfpreset->name) > 0))
             name = sfpreset->name;
       else
             name = QString("Bank%1,Preset%2").arg(sfpreset->bank).arg(sfpreset->prenum);
@@ -699,26 +696,14 @@ bool Inst::import_sfont(SFInst *sfinst, SFont* sfont)
  */
 InstZone* new_fluid_inst_zone(const char* name)
       {
-      int size;
       InstZone* zone = FLUID_NEW(InstZone);
-      if (zone == 0) {
-            FLUID_LOG(FLUID_ERR, "Out of memory");
-            return 0;
-            }
-      zone->next = 0;
-      size = 1 + FLUID_STRLEN(name);
-      zone->name = (char*)FLUID_MALLOC(size);
-      if (zone->name == 0) {
-            FLUID_LOG(FLUID_ERR, "Out of memory");
-            FLUID_FREE(zone);
-            return 0;
-            }
-      FLUID_STRCPY(zone->name, name);
-      zone->sample = 0;
-      zone->keylo = 0;
-      zone->keyhi = 128;
-      zone->vello = 0;
-      zone->velhi = 128;
+      zone->next     = 0;
+      zone->name     = strdup(name);
+      zone->sample   = 0;
+      zone->keylo    = 0;
+      zone->keyhi    = 128;
+      zone->vello    = 0;
+      zone->velhi    = 128;
 
       /* Flag the generators as unused.
        * This also sets the generator values to default, but they will be overwritten anyway, if used.
@@ -742,8 +727,8 @@ int delete_fluid_inst_zone(InstZone* zone)
             fluid_mod_delete (tmp);
             }
       if (zone->name)
-            FLUID_FREE (zone->name);
-      FLUID_FREE(zone);
+            free (zone->name);
+      free(zone);
       return FLUID_OK;
       }
 
@@ -1203,7 +1188,7 @@ void SFData::process_info(int size)
                         throw(QString("INFO sub chunk has invalid chunk size"));
 
                   /* alloc for chunk id and da chunk */
-                  item = (char*)FLUID_MALLOC (chunk.size + 1);
+                  item = (char*)malloc(chunk.size + 1);
 
                   /* attach to INFO list, sfont_close will cleanup if FAIL occurs */
                   info = fluid_list_append (info, item);
@@ -2053,7 +2038,7 @@ SFZone::~SFZone()
       fluid_list_t* p = gen;
       while (p) {				/* Free gen chunks for this zone */
             if (p->data)
-                  FLUID_FREE (p->data);
+                  free (p->data);
             p = fluid_list_next (p);
             }
       delete_fluid_list (gen);	/* free genlist */
@@ -2061,7 +2046,7 @@ SFZone::~SFZone()
       p = mod;
       while (p) {				/* Free mod chunks for this zone */
             if (p->data)
-                  FLUID_FREE (p->data);
+                  free (p->data);
             p = fluid_list_next (p);
             }
       delete_fluid_list (mod);	/* free modlist */

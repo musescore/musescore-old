@@ -600,14 +600,9 @@ bool AlsaAudio::init()
             fprintf(stderr, "init ALSA audio driver failed\n");
             return false;
             }
-#ifdef USE_GLOBAL_FLUID
-      synth = new Fluid();
-#else
       synth = new FluidS::Fluid();
-#endif
+      synth->init(alsa->sampleRate());
 
-      int sr = alsa->sampleRate();
-      synth->init(sr, preferences.midiPorts * 16);
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;

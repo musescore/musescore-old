@@ -1569,8 +1569,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             Element* el = 0;
             switch(type) {
                   case SLUR:
-                        el = Element::create(type, score());
-                        // static_cast<SLine*>(el)->setLen(_spatium * 7);
+                        el = Element::create(type, gscore);
                         break;
                   case VOLTA:
                   case OTTAVA:
@@ -1578,8 +1577,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case PEDAL:
                   case HAIRPIN:
                   case TEXTLINE:
-                        el = Element::create(type, score());
-                        static_cast<SLine*>(el)->setLen(_spatium * 7);
+                        el = Element::create(type, gscore);
                         break;
                   case IMAGE:
                         {
@@ -1840,6 +1838,7 @@ void Canvas::dropEvent(QDropEvent* event)
 
       if (dragElement) {
             _score->startCmd();
+            dragElement->setScore(_score);
             _score->addRefresh(dragElement->abbox());
             switch(dragElement->type()) {
                   case VOLTA:

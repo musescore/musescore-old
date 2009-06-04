@@ -60,12 +60,13 @@ Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
 
 Fluid::Fluid()
       {
-      left_buf        = 0;
-      right_buf       = 0;
-      fx_left_buf[0]  = 0;
-      fx_left_buf[1]  = 0;
-      fx_right_buf[0] = 0;
-      fx_right_buf[1] = 0;
+      left_buf        = new fluid_real_t[FLUID_BUFSIZE];
+      right_buf       = new fluid_real_t[FLUID_BUFSIZE];
+      fx_left_buf[0]  = new fluid_real_t[FLUID_BUFSIZE];
+      fx_right_buf[0] = new fluid_real_t[FLUID_BUFSIZE];
+      fx_left_buf[1]  = new fluid_real_t[FLUID_BUFSIZE];
+      fx_right_buf[1] = new fluid_real_t[FLUID_BUFSIZE];
+
       reverb          = 0;
       chorus          = 0;
       tuning          = 0;
@@ -224,61 +225,35 @@ void Fluid::init()
       }
 
 //---------------------------------------------------------
-//   Fluid
+//   init
+//    instance initialization
 //---------------------------------------------------------
 
-void Fluid::init(int sr, int channels)
+void Fluid::init(int sr)
       {
       if (!initialized) // initialize all the conversion tables and other stuff
             init();
 
-      sample_rate     = double(sr);
-      sfont_id        = 0;
-      with_reverb     = true;
-      with_chorus     = true;
-      polyphony       = 256;
-      midi_channels   = channels;
-      audio_channels  = 1;
-      gain            = .2;
+      sample_rate = double(sr);
+      sfont_id    = 0;
+      gain        = .2;
+      state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
+      noteid      = 0;
+      tuning      = 0;
 
-      nbuf = audio_channels;
-
-      state  = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
-      noteid = 0;
-      ticks  = 0;
-      tuning = 0;
-
-      /* allocate all channel objects */
-      for (int i = 0; i < midi_channels; i++)
-            channel.append(new Channel(this, i));
-
-      /* allocate all synthesis processes */
-      nvoice = polyphony;
-      for (int i = 0; i < nvoice; i++)
+      for (int i = 0; i < 256; i++)
             voice.append(new Voice(sample_rate));
 
-      left_buf  = FLUID_ARRAY(fluid_real_t, FLUID_BUFSIZE);
-      right_buf = FLUID_ARRAY(fluid_real_t, FLUID_BUFSIZE);
-
-      for (int i = 0; i < 2; i++) {
-            /* +4: add four floats for 16 added bytes */
-            fx_left_buf[i]  = FLUID_ARRAY(fluid_real_t, FLUID_BUFSIZE);
-            fx_right_buf[i] = FLUID_ARRAY(fluid_real_t, FLUID_BUFSIZE);
-            }
-
-      cur = FLUID_BUFSIZE;
-
-      /* allocate the reverb module */
+      cur    = FLUID_BUFSIZE;
       reverb = new Reverb();
-      reverb->setPreset(0);
-
-      /* allocate the chorus module */
       chorus = new_fluid_chorus(sample_rate);
+      reverb->setPreset(0);
       }
 
-/*
- * delete_fluid_synth
- */
+//---------------------------------------------------------
+//   ~Fluid
+//---------------------------------------------------------
+
 Fluid::~Fluid()
       {
       state = FLUID_SYNTH_STOPPED;
@@ -287,7 +262,6 @@ Fluid::~Fluid()
             if (v->isPlaying())
                   v->voice_off();
             }
-
       foreach(SFont* sf, sfonts)
             delete sf;
       foreach(BankOffset* bankOffset, bank_offsets)
@@ -297,23 +271,15 @@ Fluid::~Fluid()
       foreach(Voice* v, voice)
             delete v;
 
-      /* free all the sample buffers */
-      if (left_buf)
-            FLUID_FREE(left_buf);
-      if (right_buf)
-            FLUID_FREE(right_buf);
-
-      for (int i = 0; i < 2; i++) {
-            if (fx_left_buf[i])
-                  FLUID_FREE(fx_left_buf[i]);
-            if (fx_right_buf[i])
-                  FLUID_FREE(fx_right_buf[i]);
-            }
+      delete[] left_buf;
+      delete[] right_buf;
+      delete[] fx_left_buf[0];
+      delete[] fx_right_buf[0];
+      delete[] fx_left_buf[1];
+      delete[] fx_right_buf[1];
 
       if (reverb)
             delete reverb;
-
-      /* release the chorus module */
       if (chorus)
             delete_fluid_chorus(chorus);
 
@@ -323,12 +289,12 @@ Fluid::~Fluid()
                   if (tuning[i] != 0) {
                         for (int k = 0; k < 128; k++) {
                               if (tuning[i][k] != 0)
-                                    FLUID_FREE(tuning[i][k]);
+                                    free(tuning[i][k]);
                               }
-                        FLUID_FREE(tuning[i]);
+                        free(tuning[i]);
                         }
                   }
-            FLUID_FREE(tuning);
+            free(tuning);
             }
       }
 
@@ -340,6 +306,13 @@ void Fluid::play(const Event& event)
       {
       int err     = 0;
       int ch      = event.channel();
+
+      if (ch >= channel.size()) {
+            for (int i = channel.size(); i < ch+1; i++) {
+                  channel.append(new Channel(this, i));
+                  }
+            }
+
       int type    = event.type();
       Channel* cp = channel[ch];
 
@@ -384,47 +357,6 @@ void Fluid::play(const Event& event)
             fprintf(stderr, "FluidSynth error: event 0x%2x channel %d: %s\n",
                type, ch, fluid_error());
       }
-#if 0
-//---------------------------------------------------------
-//   noteon
-//---------------------------------------------------------
-
-int Fluid::noteon(int chan, int key, int vel)
-      {
-      Channel* ch = channel[chan];
-
-      /* make sure this channel has a preset */
-      if (ch->preset() == 0) {
-            fluid_log(0, "channel has no preset");
-            return FLUID_FAILED;
-            }
-
-      /* If there is another voice process on the same channel and key,
-         advance it to the release phase.
-       */
-      release_voice_on_same_note(chan, key);
-      return ch->preset()->noteon(this, noteid++, chan, key, vel, nt);
-      }
-
-//---------------------------------------------------------
-//   noteoff
-//---------------------------------------------------------
-
-int Fluid::noteoff(int chan, int key)
-      {
-      int status = FLUID_FAILED;
-
-      foreach (Voice* v, voice) {
-            if (v->ON() && (v->chan == chan) && (v->key == key)) {
-                  v->noteoff();
-                  status = FLUID_OK;
-                  }
-            }
-      if (status == FLUID_FAILED)
-            fluid_log(0, "noteoff: no note (ch %d, key %d) found", chan, key);
-      return status;
-      }
-#endif
 
 //---------------------------------------------------------
 //   damp_voices
@@ -432,8 +364,7 @@ int Fluid::noteoff(int chan, int key)
 
 int Fluid::damp_voices(int chan)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if ((v->chan == chan) && v->SUSTAINED())
                   v->noteoff();
             }
@@ -444,19 +375,9 @@ int Fluid::damp_voices(int chan)
 //   get_cc
 //---------------------------------------------------------
 
-int Fluid::get_cc(int chan, int num, int* pval)
+int Fluid::get_cc(int chan, int num)
       {
-      /* check the ranges of the arguments */
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-      if ((num < 0) || (num >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Ctrl out of range");
-            return FLUID_FAILED;
-            }
-      *pval = channel[chan]->cc[num];
-      return FLUID_OK;
+      return channel[chan]->cc[num];
       }
 
 //---------------------------------------------------------
@@ -497,8 +418,8 @@ void Fluid::system_reset()
             if (v->isPlaying())
                   v->voice_off();
             }
-      for (int i = 0; i < midi_channels; i++)
-            channel[i]->reset();
+      foreach(Channel* c, channel)
+            c->reset();
 
       fluid_chorus_reset(chorus);
       reverb->reset();
@@ -568,12 +489,6 @@ void Fluid::modulate_voices_all(int chan)
  */
 int Fluid::get_pitch_bend(int chan, int* ppitch_bend)
       {
-      /* check the ranges of the arguments */
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-
       *ppitch_bend = channel[chan]->getPitchBend();
       return FLUID_OK;
       }
@@ -583,12 +498,6 @@ int Fluid::get_pitch_bend(int chan, int* ppitch_bend)
  */
 int Fluid::pitch_wheel_sens(int chan, int val)
       {
-      /* check the ranges of the arguments */
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-
       /* set the pitch-bend value in the channel */
       channel[chan]->pitchWheelSens(val);
 
@@ -605,12 +514,6 @@ int Fluid::pitch_wheel_sens(int chan, int val)
 
 int Fluid::get_pitch_wheel_sens(int chan, int* pval)
       {
-      // check the ranges of the arguments
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-
       // get the pitch-bend value in the channel
       *pval = channel[chan]->pitch_wheel_sensitivity;
 
@@ -664,7 +567,7 @@ Preset* Fluid::find_preset(unsigned banknum, unsigned prognum)
 
 int Fluid::program_change(int chan, int prognum)
       {
-      if ((prognum < 0) || (prognum >= FLUID_NUM_PROGRAMS) || (chan < 0) || (chan >= midi_channels)) {
+      if ((prognum < 0) || (prognum >= FLUID_NUM_PROGRAMS)) {
             FLUID_LOG(FLUID_ERR, "Index out of range (chan=%d, prog=%d)", chan, prognum);
             return FLUID_FAILED;
             }
@@ -686,11 +589,8 @@ int Fluid::program_change(int chan, int prognum)
  */
 int Fluid::bank_select(int chan, unsigned int bank)
       {
-      if ((chan >= 0) && (chan < midi_channels)) {
-            channel[chan]->setBanknum(bank);
-            return FLUID_OK;
-            }
-      return FLUID_FAILED;
+      channel[chan]->setBanknum(bank);
+      return FLUID_OK;
       }
 
 
@@ -699,11 +599,8 @@ int Fluid::bank_select(int chan, unsigned int bank)
  */
 int Fluid::sfont_select(int chan, unsigned int sfont_id)
       {
-      if ((chan >= 0) && (chan < midi_channels)) {
-            channel[chan]->setSfontnum(sfont_id);
-            return FLUID_OK;
-            }
-      return FLUID_FAILED;
+      channel[chan]->setSfontnum(sfont_id);
+      return FLUID_OK;
       }
 
 /*
@@ -711,14 +608,11 @@ int Fluid::sfont_select(int chan, unsigned int sfont_id)
  */
 int Fluid::get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num)
       {
-      if ((chan >= 0) && (chan < midi_channels)) {
-            Channel* c       = channel[chan];
-            *sfont_id        = c->getSfontnum();
-            *bank_num        = c->getBanknum();
-            *preset_num      = c->getPrognum();
-            return FLUID_OK;
-            }
-      return FLUID_FAILED;
+      Channel* c       = channel[chan];
+      *sfont_id        = c->getSfontnum();
+      *bank_num        = c->getBanknum();
+      *preset_num      = c->getPrognum();
+      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -749,10 +643,6 @@ int Fluid::program_select(int chan, unsigned sfont_id, unsigned bank_num, unsign
  */
 int Fluid::program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num)
       {
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_ERR, "Channel number out of range (chan=%d > %d)", chan, midi_channels);
-            return FLUID_FAILED;
-            }
       Channel* c = channel[chan];
       SFont* sf = get_sfont_by_name(sfont_name);
       if (sf == 0) {
@@ -781,11 +671,8 @@ int Fluid::program_select2(int chan, char* sfont_name, unsigned bank_num, unsign
  */
 void Fluid::update_presets()
       {
-      for (int chan = 0; chan < midi_channels; chan++) {
-            Channel* c = channel[chan];
-            c->setPreset(
-               get_preset(c->getSfontnum(), c->getBanknum(), c->getPrognum()));
-            }
+      foreach(Channel* c, channel)
+            c->setPreset(get_preset(c->getSfontnum(), c->getBanknum(), c->getPrognum()));
       }
 
 /*
@@ -796,30 +683,10 @@ void Fluid::set_gain(float g)
       fluid_clip(g, 0.0f, 10.0f);
       gain = g;
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->isPlaying())
                   v->set_gain(g);
             }
-      }
-
-/*
- * fluid_synth_set_polyphony
- */
-int Fluid::set_polyphony(int val)
-      {
-      if (val < 1 || val > nvoice)
-            return FLUID_FAILED;
-
-      /* turn off any voices above the new limit */
-      for (int i = val; i < nvoice; i++) {
-            Voice* v = voice[i];
-            if (v->isPlaying())
-                  v->voice_off();
-            }
-
-      polyphony = val;
-      return FLUID_OK;
       }
 
 /*
@@ -829,12 +696,12 @@ int Fluid::set_polyphony(int val)
  * function is called mainly after a SoundFont has been loaded,
  * unloaded or reloaded.  */
 
-int Fluid::program_reset()
+void Fluid::program_reset()
       {
       /* try to set the correct presets */
-      for (int i = 0; i < midi_channels; i++)
+      int n = channel.size();
+      for (int i = 0; i < n; i++)
             program_change(i, channel[i]->getPrognum());
-      return FLUID_OK;
       }
 
 /*
@@ -909,13 +776,12 @@ int Fluid::one_block()
        * DSP loop. Not sending the reverb / chorus signal saves some time
        * in that case. */
 
-      fluid_real_t* revb = with_reverb ? fx_left_buf[0] : 0;
-      fluid_real_t* chob = with_chorus ? fx_left_buf[1] : 0;
+      fluid_real_t* revb = fx_left_buf[0];
+      fluid_real_t* chob = fx_left_buf[1];
 
       --silentBlocks;
       /* call all playing synthesis processes */
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->isPlaying()) {
                   v->write(left_buf, right_buf, revb, chob);
                   silentBlocks = SILENT_BLOCKS;
@@ -928,7 +794,6 @@ int Fluid::one_block()
             if (chob)
                   fluid_chorus_processmix(chorus, chob, left_buf, right_buf);
             }
-      ticks += FLUID_BUFSIZE;
       return 0;
       }
 
@@ -943,11 +808,9 @@ Voice* Fluid::free_voice_by_kill()
       {
       fluid_real_t best_prio = 999999.;
       fluid_real_t this_voice_prio;
-      int best_voice_index=-1;
+      Voice* best_voice = 0;
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
-
+      foreach(Voice* v, voice) {
             /* safeguard against an available voice. */
             if (v->AVAILABLE()) {
                   return v;
@@ -1000,16 +863,13 @@ Voice* Fluid::free_voice_by_kill()
 
             /* check if this voice has less priority than the previous candidate. */
             if (this_voice_prio < best_prio)
-                  best_voice_index = i,
+                  best_voice = v;
             best_prio = this_voice_prio;
             }
-
-      if (best_voice_index < 0)
+      if (!best_voice)
             return 0;
-
-      Voice* v = voice[best_voice_index];
-      v->voice_off();
-      return v;
+      best_voice->voice_off();
+      return best_voice;
       }
 
 //---------------------------------------------------------
@@ -1022,9 +882,9 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
       Channel* c = 0;
 
       /* check if there's an available synthesis process */
-      for (int i = 0; i < polyphony; i++) {
-            if (voice[i]->AVAILABLE()) {
-                  v = voice[i];
+      foreach(Voice* vv, voice) {
+            if (vv->AVAILABLE()) {
+                  v = vv;
                   break;
                   }
             }
@@ -1041,7 +901,7 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
       if (chan >= 0)
             c = channel[chan];
 
-      v->init(sample, c, key, vel, id, ticks, gain, vt);
+      v->init(sample, c, key, vel, id, gain, vt);
 
       /* add the default modulators to the synthesis process. */
       fluid_voice_add_mod(v, &default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */
@@ -1085,9 +945,7 @@ void Fluid::kill_by_exclusive_class(Voice* new_voice)
 
       /* Kill all notes on the same channel with the same exclusive class */
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* existing_voice = voice[i];
-
+      foreach(Voice* existing_voice, voice) {
             /* Existing voice does not play? Leave it alone. */
             if (!existing_voice->isPlaying())
                   continue;
@@ -1271,29 +1129,7 @@ SFont* Fluid::get_sfont_by_name(const QString& name)
  */
 Preset* Fluid::get_channel_preset(int chan)
       {
-      if ((chan >= 0) && (chan < midi_channels)) {
-            return channel[chan]->preset();
-            }
-      return 0;
-      }
-
-/*
- * fluid_synth_get_voicelist
- */
-void Fluid::get_voicelist(Voice* buf[], int bufsize, int ID)
-      {
-      int count = 0;
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
-            if (count >= bufsize)
-                  return;
-
-            if (v->isPlaying() && ((int)v->id == ID || ID < 0))
-                  buf[count++] = v;
-            }
-      if (count >= bufsize)
-            return;
-      buf[count++] = 0;
+      return channel[chan]->preset();
       }
 
 /*
@@ -1307,8 +1143,7 @@ void Fluid::get_voicelist(Voice* buf[], int bufsize, int ID)
  */
 void Fluid::release_voice_on_same_note(int chan, int key)
       {
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->isPlaying() && (v->chan == chan) && (v->key == key) && (v->get_id() != noteid))
                   v->noteoff();
             }
@@ -1359,7 +1194,7 @@ static Tuning* fluid_synth_create_tuning(Fluid* synth, int bank, int prog, char*
                   FLUID_LOG(FLUID_PANIC, "Out of memory");
                   return 0;
                   }
-            FLUID_MEMSET(synth->tuning, 0, 128 * sizeof(Tuning**));
+            memset(synth->tuning, 0, 128 * sizeof(Tuning**));
             }
 
       if (synth->tuning[bank] == 0) {
@@ -1368,7 +1203,7 @@ static Tuning* fluid_synth_create_tuning(Fluid* synth, int bank, int prog, char*
                   FLUID_LOG(FLUID_PANIC, "Out of memory");
                   return 0;
                   }
-            FLUID_MEMSET(synth->tuning[bank], 0, 128 * sizeof(Tuning*));
+            memset(synth->tuning[bank], 0, 128 * sizeof(Tuning*));
             }
 
       if (synth->tuning[bank][prog] == 0) {
@@ -1379,7 +1214,7 @@ static Tuning* fluid_synth_create_tuning(Fluid* synth, int bank, int prog, char*
             }
 
       if ((synth->tuning[bank][prog]->name() == 0)
-         || (FLUID_STRCMP(synth->tuning[bank][prog]->name(), name) != 0)) {
+         || (strcmp(synth->tuning[bank][prog]->name(), name) != 0)) {
             synth->tuning[bank][prog]->setName(name);
             }
 
@@ -1424,10 +1259,6 @@ int fluid_synth_select_tuning(Fluid* synth, int chan, int bank, int prog)
 
       if (tuning == 0)
             return FLUID_FAILED;
-      if ((chan < 0) || (chan >= synth->midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
 
       synth->channel[chan]->setTuning(synth->tuning[bank][prog]);
       return FLUID_OK;
@@ -1439,11 +1270,6 @@ int fluid_synth_select_tuning(Fluid* synth, int chan, int bank, int prog)
 
 int fluid_synth_reset_tuning(Fluid* synth, int chan)
       {
-      if ((chan < 0) || (chan >= synth->midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
-
       synth->channel[chan]->setTuning(0);
       return FLUID_OK;
       }
@@ -1489,17 +1315,12 @@ int Fluid::Fluiduning_iteration_next(int* bank, int* prog)
 
 int Fluid::set_gen(int chan, int param, float value)
       {
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
       if ((param < 0) || (param >= GEN_LAST)) {
             FLUID_LOG(FLUID_WARN, "Parameter number out of range");
             return FLUID_FAILED;
             }
       channel[chan]->setGen(param, value, 0);
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->chan == chan)
                   v->set_param(param, value, 0);
             }
@@ -1531,10 +1352,6 @@ int Fluid::set_gen(int chan, int param, float value)
  */
 int Fluid::set_gen2(int chan, int param, float value, int absolute, int normalized)
       {
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return FLUID_FAILED;
-            }
       if ((param < 0) || (param >= GEN_LAST)) {
             FLUID_LOG(FLUID_WARN, "Parameter number out of range");
             return FLUID_FAILED;
@@ -1542,8 +1359,7 @@ int Fluid::set_gen2(int chan, int param, float value, int absolute, int normaliz
       float v = (normalized)? fluid_gen_scale(param, value) : value;
       channel[chan]->setGen(param, v, absolute);
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* vo = voice[i];
+      foreach(Voice* vo, voice) {
             if (vo->chan == chan)
                   vo->set_param(param, v, absolute);
             }
@@ -1552,11 +1368,6 @@ int Fluid::set_gen2(int chan, int param, float value, int absolute, int normaliz
 
 float Fluid::get_gen(int chan, int param)
       {
-      if ((chan < 0) || (chan >= midi_channels)) {
-            FLUID_LOG(FLUID_WARN, "Channel out of range");
-            return 0.0;
-            }
-
       if ((param < 0) || (param >= GEN_LAST)) {
             FLUID_LOG(FLUID_WARN, "Parameter number out of range");
             return 0.0;
@@ -1569,8 +1380,7 @@ int Fluid::stop(unsigned int id)
       int status = FLUID_FAILED;
       int count = 0;
 
-      for (int i = 0; i < polyphony; i++) {
-            Voice* v = voice[i];
+      foreach(Voice* v, voice) {
             if (v->ON() && (v->get_id() == id)) {
                   count++;
                   v->noteoff();

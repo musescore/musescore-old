@@ -154,7 +154,6 @@ bool Score::isVolta(int tick, int repeat) const
 
 void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
       {
-printf("collectChord\n");
       NoteList* nl = chord->noteList();
       Arpeggio* arpeggio = chord->arpeggio();
 

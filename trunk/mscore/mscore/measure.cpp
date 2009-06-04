@@ -1479,7 +1479,8 @@ if (debugMode)
          || first()->subtype() == Segment::SegGrace;
 
       bool firstNoteRest = true;
-      for (const Segment* s = first(); s; s = s->next(), ++seg) {
+      const Segment* ls = 0;
+      for (const Segment* s = first(); s; ls = s, s = s->next(), ++seg) {
             types[seg-1] = Segment::SegmentType(s->subtype());
             //
             // add extra space between clef/key/timesig and first notes
@@ -1509,8 +1510,12 @@ if (debugMode)
                   additionalExtra = point(score()->styleS(ST_timesigLeftMargin));
             else if (s->subtype() == Segment::SegKeySig)
                   additionalExtra = point(score()->styleS(ST_keysigLeftMargin));
-            else if (s->subtype() == Segment::SegEndBarLine)
-                  additionalExtra = point(score()->styleS(ST_noteBarDistance));
+            else if (s->subtype() == Segment::SegEndBarLine) {
+                  if (ls && ls->subtype() == Segment::SegClef)
+                        additionalExtra = point(score()->styleS(ST_clefBarlineDistance));
+                  else
+                        additionalExtra = point(score()->styleS(ST_noteBarDistance));
+                  }
             else if (s->subtype() == Segment::SegTimeSigAnnounce) {
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = _spatium;

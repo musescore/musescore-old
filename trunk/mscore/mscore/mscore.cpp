@@ -1490,7 +1490,6 @@ int main(int argc, char* argv[])
       for (int i = 0; i < 128; ++i)
             midiActionMap[i] = 0;
 
-      Harmony::initHarmony();
 //      QApplication app(argc, argv);
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
@@ -1860,6 +1859,7 @@ int main(int argc, char* argv[])
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
+
       return app.exec();
       }
 

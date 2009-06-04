@@ -873,7 +873,7 @@ ChangeConcertPitch::ChangeConcertPitch(Score* s, bool v)
 void ChangeConcertPitch::flip()
       {
       int oval = int(score->styleB(ST_concertPitch));
-      score->setStyle(ST_concertPitch, StyleVal(val));
+      score->style().set(ST_concertPitch, val);
       QAction* action = getAction("concert-pitch");
       action->setChecked(score->styleB(ST_concertPitch));
       val = oval;
@@ -1758,7 +1758,7 @@ void TransposeHarmony::flip()
       int rootTpc = harmony->rootTpc();
       harmony->setBaseTpc(transposeTpc(baseTpc, semitones));
       harmony->setRootTpc(transposeTpc(rootTpc, semitones));
-      harmony->buildText();
+      harmony->render();
       semitones = -semitones;
       }
 

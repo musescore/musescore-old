@@ -46,6 +46,7 @@ extern int computeWindow(const QList<Note*>& notes, int start, int end);
 extern int tpc(int idx, int pitch, int opt);
 extern int pitch2line(int pitch);
 extern QString tpc2name(int tpc, bool germanNames);
+extern void tpc2name(int tpc, bool germanNames, QChar* name, int* acc);
 extern int step2tpc(const QString& stepName, int alter);
 extern int step2tpc(int step, int alter);
 extern int tpc2pitch(int tpc);

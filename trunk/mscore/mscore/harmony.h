@@ -54,6 +54,7 @@ class HDegree {
 
 class HChord {
 //      static const HChord C0;
+      QString str;
 
    protected:
       int keys;
@@ -63,7 +64,8 @@ class HChord {
       HChord(int k) { keys = k; }
       HChord(int a, int b, int c=-1, int d=-1, int e=-1, int f=-1, int g=-1,
             int h=-1, int i=-1, int k=-1, int l=-1);
-      HChord(const char*);
+      HChord(const QString&);
+
       void rotate(int semiTones);
 
       bool contains(int key) const {       // key in chord?
@@ -87,37 +89,89 @@ class HChord {
       void add(const QList<HDegree>& degreeList);
       };
 
+
+//---------------------------------------------------------
+//   RenderAction
+//---------------------------------------------------------
+
+struct RenderAction {
+      enum RenderActionType {
+            RENDER_SET, RENDER_MOVE, RENDER_PUSH, RENDER_POP,
+            RENDER_NOTE, RENDER_ACCIDENTAL
+            };
+
+      RenderActionType type;
+      double movex, movey;          // RENDER_MOVE
+      QString text;                 // RENDER_SET
+
+      RenderAction() {}
+      RenderAction(RenderActionType t) : type(t) {}
+      };
+
 //---------------------------------------------------------
 //   ChordDescription
 //---------------------------------------------------------
 
 struct ChordDescription {
       int id;                 // Chord id number (Band In A Box Chord Number)
-      const char* name;       // chord name as entered from the keyboard (without root/base)
-      const char* xmlKind;    // MusicXml description: kind
-      const char* xmlDegrees; // MusicXml description: list of degrees (if any)
+      QString name;           // chord name as entered from the keyboard (without root/base)
+      QString xmlKind;        // MusicXml description: kind
+      QStringList xmlDegrees; // MusicXml description: list of degrees (if any)
       HChord chord;           // C based chord
+      QList<RenderAction> renderList;
+
+   public:
+      void read(QDomElement);
+      };
+
+//---------------------------------------------------------
+//   ChordSymbol
+//---------------------------------------------------------
+
+struct ChordSymbol {
+      int fontIdx;
+      QString name;
+      QChar code;
+
+      ChordSymbol() { fontIdx = -1; }
+      bool isValid() const { return fontIdx != -1; }
+      };
+
+//---------------------------------------------------------
+//   ChordList
+//---------------------------------------------------------
+
+class ChordList : public QMap<int, const ChordDescription*> {
+      QHash<QString, ChordSymbol> symbols;
+
+   public:
+      QList<QString> fontFaces;
+      QList<RenderAction> renderListRoot;
+      QList<RenderAction> renderListBase;
+
+      ChordList() {}
+      bool read(const QString& path);
+      void read(QDomElement);
+      ChordSymbol symbol(const QString& s) const { return symbols.value(s); }
       };
 
 //---------------------------------------------------------
 //   TextSegment
 //---------------------------------------------------------
 
-class TextSegment {
-
-   public:
+struct TextSegment {
       QFont font;
       QString text;
-      double baseLineOffset;
-      double width;           // cached string width
+      double x, y;
 
-      TextSegment() { baseLineOffset = 0.0; }
-      TextSegment(const QString&, const QFont&, double offset = 0.0);
-      void set(const QString&, const QFont&, double offset);
-      void setFont(const QFont& f) { font = f; }
-      void setText(const QString&);       // font must be set first
-      void setOffset(double o)     { baseLineOffset = o; }
-      double offset() const { return baseLineOffset; }
+      TextSegment()                { x = y = 0.0; }
+      double width() const;
+      QRectF boundingRect() const;
+
+      TextSegment(const QFont& f, double _x, double _y) : font(f), x(_x), y(_y) {}
+      TextSegment(const QString&, const QFont&, double x, double y);
+      void set(const QString&, const QFont&, double x, double y);
+      void setText(const QString& t)      { text = t; }
       };
 
 //---------------------------------------------------------
@@ -139,18 +193,18 @@ class TextSegment {
 class Harmony : public Text {
       Q_DECLARE_TR_FUNCTIONS(Harmony)
 
-      static const ChordDescription chordList[];
-      static QHash<int, const ChordDescription*> chordHash;
+      int _rootTpc;                       // root note for chord
+      int _baseTpc;                       // bass note or chord base; used for "slash" chords
+                                          // or notation of base note in chord
+      const ChordDescription* _descr;     // chord description
 
-      int _baseTpc;                   // bass note or chord base; used for "slash" chords
-                                      // or notation of base note in chord
-      int _rootTpc;                   // root note for chord
-      const ChordDescription* _descr; // chord description
       QList<HDegree> _degreeList;
 
-      QList<TextSegment*> textList;
+      QList<QFont> fontList;               // temp values used in render()
+      QList<TextSegment*> textList;       // rendered chord
 
       virtual void draw(QPainter&) const;
+      void render(const QList<RenderAction>& renderList, double&, double&, int tpc);
 
    public:
       Harmony(Score*);
@@ -161,7 +215,7 @@ class Harmony : public Text {
       Measure* measure()                       { return (Measure*)parent(); }
 
       void setDescr(const ChordDescription* d) { _descr = d; }
-      const ChordDescription* descr() const { return _descr; }
+      const ChordDescription* descr() const    { return _descr; }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
@@ -185,11 +239,11 @@ class Harmony : public Text {
       virtual void read(QDomElement);
       QString harmonyName() const;
       QString extensionName() const        { return _descr ? _descr->name : QString(); }
-      void buildText();
+      void render();
 
       const ChordDescription* parseHarmony(const QString& s, int* root, int* base);
-      const char* xmlKind() const         { return _descr ? _descr->xmlKind : 0; }
-      const char* xmlDegrees() const      { return _descr ? _descr->xmlDegrees : 0; }
+      QString xmlKind() const          { return _descr ? _descr->xmlKind : QString(); }
+      QStringList xmlDegrees() const   { return _descr ? _descr->xmlDegrees : QStringList(); }
 
       void resolveDegreeList();
       void setChordId(int id);
@@ -198,13 +252,9 @@ class Harmony : public Text {
       virtual bool isEmpty() const;
       virtual qreal baseLine() const;
 
-      static const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
-      static const ChordDescription* fromXml(const QString& s);
-
-      static void initHarmony();
-      static const ChordDescription* chords()  { return chordList; }
-      static unsigned int chordListSize();
-      static const ChordDescription* chordDescription(int id) { return chordHash[id]; }
+      const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
+      const ChordDescription* fromXml(const QString& s);
+      virtual void spatiumChanged(double oldValue, double newValue);
       };
 
 #endif

@@ -156,8 +156,7 @@ fluid_chorus_t* new_fluid_chorus(fluid_real_t sample_rate)
             return 0;
             }
 
-      FLUID_MEMSET(chorus, 0, sizeof(fluid_chorus_t));
-
+      memset(chorus, 0, sizeof(fluid_chorus_t));
       chorus->sample_rate = sample_rate;
 
       /* Lookup table for the SI function (impulse response of an ideal low pass) */
@@ -321,12 +320,12 @@ void delete_fluid_chorus(fluid_chorus_t* chorus)
             return;
 
       if (chorus->chorusbuf != 0)
-            FLUID_FREE(chorus->chorusbuf);
+            free(chorus->chorusbuf);
 
       if (chorus->lookup_tab != 0)
-            FLUID_FREE(chorus->lookup_tab);
+            free(chorus->lookup_tab);
 
-      FLUID_FREE(chorus);
+      free(chorus);
       }
 
 

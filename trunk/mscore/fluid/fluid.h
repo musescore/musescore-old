@@ -39,8 +39,6 @@ class Mod;
 class Reverb;
 
 #define FLUID_NUM_PROGRAMS      129
-#define DRUM_INST_MASK         ((unsigned int)0x80000000)
-
 
 enum fluid_loop {
       FLUID_UNLOOPED            = 0,
@@ -72,25 +70,17 @@ class Fluid : public Synth {
       static const int SILENT_BLOCKS = 32;
 
    public:
-      int polyphony;                      // maximum polyphony
-      bool with_reverb;                   // enable built-in reverb unit
-      bool with_chorus;                   // enable built-in chorus unit
       double sample_rate;                 // The sample rate
-      int midi_channels;                  // the number of MIDI channels (>= 16)
-      int audio_channels;                 // the number of audio channels (1 channel=left+right)
       unsigned int state;                 // the synthesizer state
-      unsigned int ticks;                 // the number of audio samples since the start
-      unsigned startTime;                 // the start in msec, as returned by system clock
+//      unsigned int ticks;                 // the number of audio samples since the start
 
       unsigned int sfont_id;
 
       double gain;                        // master gain
       QList<Channel*> channel;            // the channels
 
-      int nvoice;                         // the length of the synthesis process array
       QList<Voice*> voice;                // the synthesis processes
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
-      int nbuf;                           // How many audio buffers are used? (depends on nr of audio channels / groups)
 
       fluid_real_t* left_buf;
       fluid_real_t* right_buf;
@@ -107,7 +97,7 @@ class Fluid : public Synth {
    public:
       Fluid();
       ~Fluid();
-      virtual void init(int sr, int ch);
+      virtual void init(int sr);
       virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
       virtual void play(const Event&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
@@ -142,9 +132,7 @@ class Fluid : public Synth {
 
       char* error()                             { return fluid_error(); }
 
-//      int noteon(int chan, int key, int vel);
-//      int noteoff(int chan, int key);
-      int get_cc(int chan, int num, int* pval);
+      int get_cc(int chan, int num);
       void system_reset();
       int program_change(int chan, int prognum);
       int Fluiduning_iteration_next(int* bank, int* prog);
@@ -156,13 +144,8 @@ class Fluid : public Synth {
       int set_gen2(int chan, int param, float value, int absolute, int normalized);
       float get_gen(int chan, int param);
       int set_gen(int chan, int param, float value);
-      int count_audio_channels() const    { return audio_channels; }
-      int count_midi_channels() const     { return midi_channels; }
       int set_interp_method(int chan, int interp_method);
-      void set_reverb_on(bool on)         { with_reverb = on; }
-      void set_chorus_on(bool on)         { with_chorus = on; }
 
-      void get_voicelist(Voice* buf[], int bufsize, int ID);
       Preset* get_channel_preset(int chan);
       SFont* get_sfont_by_name(const QString& name);
       SFont* get_sfont_by_id(unsigned int id);
@@ -181,11 +164,9 @@ class Fluid : public Synth {
 
       void set_chorus(int nr, double level, double speed, double depth_ms, int type);
       void set_reverb(double roomsize, double damping, double width, double level);
-      int program_reset();
+      void program_reset();
       int get_internal_bufsize() const { return FLUID_BUFSIZE; }
-      int get_polyphony() const { return polyphony; }
 
-      int set_polyphony(int val);
       float get_gain()          { return gain;  }
       void set_gain(float g);
       int program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
@@ -935,7 +916,6 @@ class Voice
 	/* basic parameters */
 	fluid_real_t output_rate;        /* the sample rate of the synthesizer */
 
-	unsigned int start_time;
 	unsigned int ticks;
 
 	fluid_real_t amp;                /* the linear amplitude */
@@ -1038,7 +1018,7 @@ class Voice
       void voice_start();
       int voice_off();
       void init(Sample*, Channel*, int key, int vel, unsigned int id,
-         unsigned int start_time, fluid_real_t _gain, double tuning);
+         fluid_real_t _gain, double tuning);
       void gen_incr(int i, float val);
       void gen_set(int i, float val);
       float gen_get(int gen);

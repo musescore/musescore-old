@@ -123,6 +123,18 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
@@ -1034,6 +1046,10 @@ p, li { white-space: pre-wrap; }
         <source>right of stem</source>
         <translation>à droite de la hampe</translation>
     </message>
+    <message>
+        <source>stemless</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1394,6 +1410,10 @@ failed: </source>
         <source>Slash Style</source>
         <translation>Style Slash</translation>
     </message>
+    <message>
+        <source>Stemless</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1541,10 +1561,6 @@ failed: </source>
         <translation>Espaces</translation>
     </message>
     <message>
-        <source>min. right margin</source>
-        <translation>Marge droite minimum</translation>
-    </message>
-    <message>
         <source>min note distance</source>
         <translation>Distance min. entre les notes</translation>
     </message>
@@ -1559,10 +1575,6 @@ failed: </source>
     <message>
         <source>timesig left margin</source>
         <translation>Marge gauche des indications de mesures</translation>
-    </message>
-    <message>
-        <source>clef/key right margin</source>
-        <translation>Marge droite de la clef / armature</translation>
     </message>
     <message>
         <source>Page Numbers</source>
@@ -1785,6 +1797,26 @@ failed: </source>
         <source>shortest stem</source>
         <translation>plus courte taille de hampe</translation>
     </message>
+    <message>
+        <source>right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>clef-key distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>clef-barline distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chord description file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1919,11 +1951,6 @@ failed: </source>
     </message>
     <message>
         <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source> sp</source>
         <comment>do not translate</comment>
         <translation></translation>
     </message>
@@ -2688,6 +2715,10 @@ failed: </source>
     <message>
         <source>repeat count:</source>
         <translation>Nombre de répétitions :</translation>
+    </message>
+    <message>
+        <source>Stemless</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6396,6 +6427,18 @@ Veuillez sélectionner une note ou un silence et réessayez
         <source>MuseScore: file not found:</source>
         <translation>MuseScore : Fichier non trouvé :</translation>
     </message>
+    <message>
+        <source>MuseScore: Load Chord Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load chord list failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6590,26 +6633,6 @@ failed: </source>
         <translation>Il n&apos;y a rien de sélectionné. Transposer toute la partition ?</translation>
     </message>
     <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Format MuseScore compressé (*.mscz)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>Fichier PDF  (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>Image Bitmap Graphic PNG (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation>Image Scalable Vector Graphic (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Format Lilypond (*.ly)</translation>
-    </message>
-    <message>
         <source>MuseScore: Save As</source>
         <translation>MuseScore : Enregistrer sous</translation>
     </message>
@@ -6620,28 +6643,8 @@ failed: </source>
 </translation>
     </message>
     <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>Format MusicXML (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Format MusicXML Compressé (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>Fichier Midi Standard (*.mid)</translation>
-    </message>
-    <message>
         <source>MuseScore Style File (*.mss)</source>
         <translation>Fichier de Style MuseScore (*.mss)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore : Enregistrer une copie</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>Fichier PostScript (*.ps)</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -6682,22 +6685,6 @@ failed: </source>
     <message>
         <source>&gt; to &lt;</source>
         <translation>&gt; en &lt;</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>Format MuseScore (*.mscx)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation>Format Audio Wave (*.wav)</translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation>Format Audio Flac (*.flac)</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Format Audio Ogg Vorbis (*.ogg)</translation>
     </message>
 </context>
 <context>
