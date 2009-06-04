@@ -139,12 +139,7 @@ void Preferences::init()
 
       enableMidiInput    = true;
       playNotes          = true;
-
-#ifdef USE_GLOBAL_FLUID
-      soundFont          = INSTPREFIX "/piano1.sf2";
-#else
       soundFont          = ":/data/piano1.sf2";
-#endif
 
       lPort              = "";
       rPort              = "";
@@ -346,11 +341,7 @@ void Preferences::read()
       lPort           = s.value("lPort").toString();
       rPort           = s.value("rPort").toString();
 
-#ifdef USE_GLOBAL_FLUID
-      soundFont       = s.value("soundFont", INSTPREFIX "/piano1.sf2").toString();
-#else
       soundFont       = s.value("soundFont", ":/data/piano1.sf2").toString();
-#endif
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();

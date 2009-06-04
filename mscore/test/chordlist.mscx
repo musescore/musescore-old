@@ -21,7 +21,7 @@
     <smallStaffMag>0.7</smallStaffMag>
     <genClef>0</genClef>
     <genKeysig>0</genKeysig>
-    <chordNamesUseSymbols>1</chordNamesUseSymbols>
+    <chordDescriptionFile>jazzchords.xml</chordDescriptionFile>
     <gateTime>70</gateTime>
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
@@ -58,6 +58,8 @@
     <trackName>Violin</trackName>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="40"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -822,7 +824,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -915,7 +917,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1009,7 +1011,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1102,7 +1104,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1195,7 +1197,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1288,7 +1290,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1381,7 +1383,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1474,7 +1476,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1567,7 +1569,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1660,7 +1662,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1753,7 +1755,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1846,7 +1848,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1939,7 +1941,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2032,7 +2034,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2125,7 +2127,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2218,7 +2220,7 @@
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-7679</tick>
+        <tick>-7677</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>

@@ -1061,15 +1061,6 @@ void Score::cmdRemoveTime(int tick, int len)
       undoFixTicks();
       }
 
-#if 0
-//---------------------------------------------------------
-//   cmdRemoveGlobals
-//---------------------------------------------------------
-
-void Score::cmdRemoveGlobals(int tick, int etick, int sStaff, int eStaff)
-      {
-      }
-#endif
 
 //---------------------------------------------------------
 //   cmdDeleteSelection
@@ -1406,7 +1397,7 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
 
       undoAddElement(tuplet);
 
-      int ticks = baseLen * normalNotes / actualNotes;
+      int ticks = tuplet->actualTickLen(baseLen);
 
       if (cr->type() == CHORD) {
             cr = new Chord(this);
@@ -1571,18 +1562,6 @@ Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       Tuplet* tuplet = cr->tuplet();
       int bl         = tuplet->baseLen();
 
-      // make sure len is baseLen * 2^n or 1/baseLen*2^n for n = 1-8
-      if (len > bl) {
-            int i = 2;
-            for (i = 2; i < 256; i <<= 1) {
-                  if (bl * i == len)
-                        break;
-                  }
-            if (i >= 256) {
-                  printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
-                  return 0;
-                  }
-            }
       if (len < bl) {
             int i = 2;
             for (i = 2; i < 256; i <<= 1) {
@@ -1643,10 +1622,11 @@ Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //---------------------------------------------------
 
       Duration dt;
-      dt.setVal(len);
+      int dots;
+      headType(len, &dt, &dots);
 
       int tick = cr->tick();
-      int tl   = len * tuplet->normalNotes() / tuplet->actualNotes();
+      int tl   = tuplet->actualTickLen(len);
 
       Element* el = 0;
       if (pitch != -1) {
@@ -1660,6 +1640,7 @@ Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             chord->add(note);
             chord->setTickLen(tl);
             chord->setDuration(dt);
+            chord->setDots(dots);
             chord->setTrack(cr->track());
             Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
             if (segment == 0) {
@@ -1680,6 +1661,7 @@ Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             rest->setTick(tick);
             rest->setTickLen(tl);
             rest->setDuration(dt);
+            rest->setDots(dots);
             Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
             if (segment == 0) {
                   segment = measure->createSegment(Segment::SegChordRest, tick);
@@ -1699,11 +1681,11 @@ Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       if (remaining < 0) {
             remaining = -remaining;
             tick += tl;
-            printf("fill gap at %d len %d\n", tick, remaining);
+printf("fill gap at %d len %d\n", tick, remaining);
             while (remaining > 0) {
                   Duration dt;
                   dt.setVal(remaining);
-                  int tl = dt.ticks() * tuplet->normalNotes() / tuplet->actualNotes();
+                  int tl = tuplet->actualTickLen(dt.ticks());
                   Rest* rest = new Rest(this);
                   rest->setTrack(cr->track());
                   rest->setTick(tick);

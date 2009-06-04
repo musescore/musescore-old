@@ -108,7 +108,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>9</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -691,6 +691,9 @@
             <property name="fieldGrowthPolicy">
              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
             </property>
+            <property name="verticalSpacing">
+             <number>0</number>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_11">
               <property name="text">
@@ -734,7 +737,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_13">
               <property name="text">
-               <string>min. right margin</string>
+               <string>right margin</string>
               </property>
              </widget>
             </item>
@@ -834,7 +837,7 @@
             <item row="7" column="0">
              <widget class="QLabel" name="label_21">
               <property name="text">
-               <string>clef/key right margin</string>
+               <string>clef-key distance</string>
               </property>
              </widget>
             </item>
@@ -851,14 +854,14 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
+            <item row="9" column="0">
              <widget class="QLabel" name="label_17">
               <property name="text">
                <string>begin repeat left margin</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="9" column="1">
              <widget class="QDoubleSpinBox" name="beginRepeatLeftMargin">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -868,6 +871,20 @@
               </property>
               <property name="suffix">
                <string>sp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_53">
+              <property name="text">
+               <string>clef-barline distance</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QDoubleSpinBox" name="clefBarlineDistance">
+              <property name="suffix">
+               <string extracomment="spatium unit">sp</string>
               </property>
              </widget>
             </item>
@@ -1549,52 +1566,58 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_4">
-      <layout class="QGridLayout">
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="useGermanNoteNames">
-         <property name="text">
-          <string>use german names</string>
+      <layout class="QVBoxLayout" name="verticalLayout_12">
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Chordnames</string>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <spacer>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+         <property name="flat">
+          <bool>true</bool>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="0">
-        <spacer>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="chordNamesUseSymbols">
-         <property name="text">
-          <string>use symbols</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="chordNamesUseJazzFont">
-         <property name="text">
-          <string>use jazz font</string>
-         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QCheckBox" name="useGermanNoteNames">
+            <property name="text">
+             <string>use german names</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_54">
+              <property name="text">
+               <string>chord description file</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="chordDescriptionFile"/>
+            </item>
+            <item>
+             <widget class="QToolButton" name="chordDescriptionFileButton">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>303</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -1856,7 +1879,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="mscore.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonOk</sender>

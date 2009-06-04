@@ -188,6 +188,15 @@ QString tpc2name(int tpc, bool germanNames)
       return s;
       }
 
+void tpc2name(int tpc, bool germanNames, QChar* name, int* acc)
+      {
+      const char names[]  = "FCGDAEB";
+      const char gnames[] = "FCGDAEH";
+      *acc   = ((tpc+1) / 7) - 2;
+      int idx = (tpc + 1) % 7;
+      *name = QChar::fromLatin1(germanNames ? gnames[idx] : names[idx]);
+      }
+
 //---------------------------------------------------------
 //   tpc2stepName
 //---------------------------------------------------------

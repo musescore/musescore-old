@@ -30,8 +30,6 @@
 #ifndef _FLUID_TUNING_H
 #define _FLUID_TUNING_H
 
-#include "priv.h"
-
 namespace FluidS {
 
 //---------------------------------------------------------

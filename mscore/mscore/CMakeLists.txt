@@ -67,11 +67,8 @@ include_directories(
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}
+      ${PROJECT_SOURCE_DIR}/fluid
       )
-if (NOT USE_GLOBAL_FLUID)
-      include_directories(${PROJECT_SOURCE_DIR}/fluid)
-endif (NOT USE_GLOBAL_FLUID)
-
 
 QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
@@ -156,7 +153,7 @@ add_executable ( ${ExecutableName}
       actions.cpp accidental.cpp barline.cpp beam.cpp
       bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
-      edittempo.cpp element.cpp exportxml.cpp file.cpp fluid.cpp
+      edittempo.cpp element.cpp exportxml.cpp file.cpp
       hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
@@ -286,7 +283,9 @@ else (MINGW)
       osdabzip
       rtf2html
       qtsingleapp
+      fluid
       )
+
    if (HAS_AUDIOFILE)
       target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
@@ -301,12 +300,6 @@ else (MINGW)
 if (QT45)
    target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
 endif (QT45)
-
-   if (USE_GLOBAL_FLUID)
-         target_link_libraries(mscore ${FLUID_LIB} )
-   else (USE_GLOBAL_FLUID)
-         target_link_libraries(mscore fluid )
-   endif (USE_GLOBAL_FLUID)
 
    if (APPLE)
      install (TARGETS mscore BUNDLE DESTINATION "$(HOME)/Applications")

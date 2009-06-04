@@ -144,7 +144,7 @@ Voice::Voice(fluid_real_t r)
 //---------------------------------------------------------
 
 void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
-   unsigned int _id, unsigned int _start_time, fluid_real_t _gain, double tuning)
+   unsigned int _id, fluid_real_t _gain, double tuning)
       {
       // Note: The voice parameters will be initialized later, when the
       // generators have been retrieved from the sound font. Here, only
@@ -159,7 +159,6 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       channel        = _channel;
       mod_count      = 0;
       sample         = _sample;
-      start_time     = _start_time;
       ticks          = 0;
       debug          = 0;
       has_looped     = 0;     // Will be set during voice_write when the 2nd loop point is reached
@@ -285,12 +284,10 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
       unsigned int dsp_start, dsp_end;
       int dsp_filter_coeff_incr_count;
       int dsp_use_filter_flag = 1;
-      short* dsp_data;
       int dsp_interp_method = interp_method;
+      short* dsp_data;
 
-      /* +4: add four floats for 16 added bytes */
-      fluid_real_t dsp_buf_unaligned[FLUID_BUFSIZE+4];
-      fluid_real_t* dsp_buf = (fluid_real_t*) FLUID_ALIGN16BYTE(&dsp_buf_unaligned);
+      fluid_real_t dsp_buf[FLUID_BUFSIZE];
 
       if (!isPlaying()) // make sure we're playing and that we have sample data
             return;
@@ -656,7 +653,7 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
     * see fluid_dsp_core.c
     */
    /* Sample waveform data */
-   dsp_data = voice->sample->data;
+      dsp_data = voice->sample->data;
 
    /* IIR filter sample history */
    dsp_hist1 = voice->hist1;

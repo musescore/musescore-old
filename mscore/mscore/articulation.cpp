@@ -74,7 +74,7 @@ void Articulation::setSubtype(int idx)
       {
       Element::setSubtype(idx);
       setSym(articulationList[subtype()].sym);
-      _anchor = ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + subtype())));
+      _anchor = ArticulationAnchor(score()->styleI(StyleIdx(ST_UfermataAnchor + subtype())));
       }
 
 //---------------------------------------------------------
@@ -108,7 +108,7 @@ void Articulation::write(Xml& xml) const
             xml.tagE(QString("channel name=\"%1\"").arg(_channelName));
       Element::writeProperties(xml);
       int t = subtype();
-      if (score()->styleI(STYLE_TYPE(ST_UfermataAnchor + t)) != int(_anchor))
+      if (score()->styleI(StyleIdx(ST_UfermataAnchor + t)) != int(_anchor))
             xml.tag("anchor", int(_anchor));
       xml.etag();
       }
@@ -134,7 +134,7 @@ void Articulation::setSubtype(const QString& s)
             }
       int t = name2idx(s);
       setSubtype(t);
-      _anchor = ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + t)));
+      _anchor = ArticulationAnchor(score()->styleI(StyleIdx(ST_UfermataAnchor + t)));
       }
 
 //---------------------------------------------------------

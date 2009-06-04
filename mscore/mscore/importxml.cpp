@@ -340,7 +340,7 @@ void MusicXml::import(Score* s)
       pedal = 0;
 
       // TODO only if multi-measure rests used ???
-      score->setStyle(ST_createMultiMeasureRests, StyleVal(true));
+      score->style().set(ST_createMultiMeasureRests, true);
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -600,7 +600,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     if (tag == "system-margins")
                                           ;
                                     else if (tag == "system-distance") {
-                                          score->setStyle(ST_systemDistance, StyleVal(val));
+                                          score->style().set(ST_systemDistance, val);
                                           printf("system distance %f\n", val.val());
                                           }
                                     else if (tag == "top-system-distance")
@@ -614,7 +614,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     QString tag(eee.tagName());
                                     Spatium val(eee.text().toDouble() / 10.0);
                                     if (tag == "staff-distance")
-                                          score->setStyle(ST_staffDistance, StyleVal(val));
+                                          score->style().set(ST_staffDistance, val);
                                     else
                                           domError(eee);
                                     }
@@ -2779,7 +2779,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       ha->setTick(tick);
 
-      const ChordDescription* d = Harmony::fromXml(kind, degreeList);
+      const ChordDescription* d = ha->fromXml(kind, degreeList);
       if (d == 0) {
             QString degrees;
             foreach(const HDegree& d, degreeList) {
@@ -2793,13 +2793,13 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             // Strategy II: lookup "kind", merge in degree list and try to find
             //    harmony in list
 
-            d = Harmony::fromXml(kind);
+            d = ha->fromXml(kind);
             if (d) {
                   ha->setDescr(d);
                   foreach(const HDegree& d, degreeList)
                         ha->addDegree(d);
                   ha->resolveDegreeList();
-                  ha->buildText();
+                  ha->render();
                   }
             else {
                   printf("'kind: <%s> not found in harmony data base\n", qPrintable(kind));
@@ -2810,7 +2810,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       else {
             ha->setDescr(d);
 //            ha->resolveDegreeList();
-            ha->buildText();
+            ha->render();
             }
       ha->setVisible(printObject == "yes");
       measure->add(ha);

@@ -260,6 +260,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
                   uo -= QPointF(0.0, dyn->ipos().y());
                   dyn->setUserOff(uo);
+                  fixPpitch();      // recalculate all velocities
                   }
                   break;
             default:
@@ -412,6 +413,8 @@ void Score::cmdRemove(Element* e)
                   undoRemoveElement(e);
                   if (seg && seg->isEmpty())
                         undoRemoveElement(seg);
+                  if (e->type() == DYNAMIC)
+                        fixPpitch();      // recalculate all velocities
                   }
                   break;
             }
@@ -520,7 +523,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
             n = (Note*)(setTupletChordRest(cr, pitch, len));
-            len = len * cr->tuplet()->normalNotes() / cr->tuplet()->actualNotes();
+            len = cr->tuplet()->actualTickLen(len);
             }
       else {
             Direction stemDirection = AUTO;
@@ -1296,7 +1299,7 @@ void Score::cmdAddChordName2()
             s->clearDegrees();
             for (int i = 0; i < h->numberOfDegrees(); i++)
                   s->addDegree(h->degree(i));
-            s->buildText();
+            s->render();
             select(s, SELECT_SINGLE, 0);
             undoAddElement(s);
             layoutAll = true;

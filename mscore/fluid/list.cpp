@@ -32,7 +32,7 @@ fluid_list_t*
 new_fluid_list(void)
 {
   fluid_list_t* list;
-  list = (fluid_list_t*) FLUID_MALLOC(sizeof(fluid_list_t));
+  list = (fluid_list_t*) malloc(sizeof(fluid_list_t));
   list->data = NULL;
   list->next = NULL;
   return list;
@@ -44,7 +44,7 @@ delete_fluid_list(fluid_list_t *list)
   fluid_list_t *next;
   while (list) {
     next = list->next;
-    FLUID_FREE(list);
+    free(list);
     list = next;
   }
 }
@@ -53,7 +53,7 @@ void
 delete1_fluid_list(fluid_list_t *list)
 {
   if (list) {
-    FLUID_FREE(list);
+    free(list);
   }
 }
 

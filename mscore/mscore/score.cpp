@@ -2030,11 +2030,12 @@ void Score::spatiumChanged(double oldValue, double newValue)
             e->spatiumChanged(oldValue, newValue);
       for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
             mb->spatiumChanged(oldValue, newValue);
-      foreach(System* s, *systems()) {
-            foreach(SysStaff* ss, *s->staves()) {
-                  if (ss->instrumentName)
-                        ss->instrumentName->spatiumChanged(oldValue, newValue);
-                  }
+
+      foreach(Part* part, _parts) {
+            if (part->longName())
+                  part->longName()->spatiumChanged(oldValue, newValue);
+            if (part->shortName())
+                  part->shortName()->spatiumChanged(oldValue, newValue);
             }
       if (rights)
             rights->spatiumChanged(oldValue, newValue);
@@ -2333,5 +2334,35 @@ void Score::setSelection(Selection* s)
       if (_selection)
             delete _selection;
       _selection = s;
+      }
+
+StyleVal Score::style(StyleIdx idx) const
+      {
+      return _style[idx];
+      }
+
+Spatium Score::styleS(StyleIdx idx) const
+      {
+      return _style[idx].toSpatium();
+      }
+
+bool Score::styleB(StyleIdx idx) const
+      {
+      return _style[idx].toBool();
+      }
+
+double Score::styleD(StyleIdx idx) const
+      {
+      return _style[idx].toDouble();
+      }
+
+int Score::styleI(StyleIdx idx) const
+      {
+      return _style[idx].toInt();
+      }
+
+void Score::setStyle(StyleIdx idx, const StyleVal& v)
+      {
+      _style[idx] = v;
       }
 

@@ -322,7 +322,7 @@ void Reverb::setwidth(fluid_real_t value)
 
 bool Reverb::setPreset(int nr)
       {
-      if (nr >= sizeof(revmodel_preset)/sizeof(*revmodel_preset))
+      if ((unsigned)nr >= sizeof(revmodel_preset)/sizeof(*revmodel_preset))
             return false;
       setroomsize(revmodel_preset[nr].roomsize);
       setdamp(revmodel_preset[nr].damp);

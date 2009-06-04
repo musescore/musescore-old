@@ -3010,14 +3010,12 @@ void ExportMusicXml::harmony(Harmony* h)
                   xml.tag("root-alter", alter);
             xml.etag();
 
-            if (h->xmlKind()) {
+            if (!h->xmlKind().isEmpty()) {
                   xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), h->xmlKind());
-                  if (h->xmlDegrees()) {
-                        QString cs(h->xmlDegrees());
-                        QStringList l(cs.split(" ", QString::SkipEmptyParts));
-                        for (int i = 0; i < l.size(); ++i) {
+                  QStringList l = h->xmlDegrees();
+                  if (!l.isEmpty()) {
+                        foreach(QString tag, l) {
                               xml.stag("degree");
-                              QString tag(l[i]);
                               int alter = 0;
                               int idx = 3;
                               if (tag[idx] == '#') {

@@ -23,6 +23,7 @@
 #include "xml.h"
 #include "score.h"
 #include "articulation.h"
+#include "harmony.h"
 
 Style* style;
 //  20 points        font design size
@@ -61,6 +62,7 @@ StyleType styleTypes[] = {
       StyleType("timesigLeftMargin",       ST_SPATIUM),
 
       StyleType("clefKeyRightMargin",      ST_SPATIUM),
+      StyleType("clefBarlineDistance",     ST_SPATIUM),
       StyleType("stemWidth",               ST_SPATIUM),
       StyleType("shortenStem",             ST_BOOL),        // ST_shortenStem,
       StyleType("shortStemProgression",    ST_SPATIUM),     // ST_shortStemProgression,
@@ -116,8 +118,7 @@ StyleType styleTypes[] = {
       StyleType("genCourtesyKeysig",       ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
       StyleType("warnPitchRange",          ST_BOOL),
-      StyleType("chordNamesUseSymbols",    ST_BOOL),
-      StyleType("chordNamesUseJazzFont",   ST_BOOL),
+      StyleType("chordDescriptionFile",    ST_STRING),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
 
 /*70*/StyleType("createMultiMeasureRests", ST_BOOL),
@@ -237,7 +238,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Measure Number"), ff, 8, false, false, false,
-         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS),
+         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),
@@ -298,129 +299,163 @@ const TextStyle defaultTextStyleArray[] = {
 Style::Style()
    : QVector<StyleVal>(ST_STYLES)
       {
-      StyleVal values[ST_STYLES] = {
-            StyleVal(Spatium(7.0)),               // ST_staffUpperBorder,
-            StyleVal(Spatium(7.0)),               // ST_staffLowerBorder,
-            StyleVal(Spatium(6.5)),               // ST_staffDistance,
-            StyleVal(Spatium(6.5)),               // ST_akkoladeDistance,
-            StyleVal(Spatium(9.25)),              // ST_systemDistance,
-            StyleVal(Spatium(2)),                 // ST_lyricsDistance,
-            StyleVal(Spatium(2)),                 // ST_lyricsMinBottomDistance,
-            StyleVal(Spatium(7.0)),               // ST_systemFrameDistance,
-            StyleVal(Spatium(1.0)),               // ST_frameSystemDistance,
-            StyleVal(Spatium(4.0)),               // ST_minMeasureWidth,
-            StyleVal(Spatium(0.16)),              // ST_barWidth,
-            StyleVal(Spatium(0.16)),              // ST_doubleBarWidth,
-            StyleVal(Spatium(0.3)),               // ST_endBarWidth,
-            StyleVal(Spatium(0.30)),              // ST_doubleBarDistance,
-            StyleVal(Spatium(0.30)),              // ST_endBarDistance,
-            StyleVal(Spatium(0.35)),              // ST_bracketWidth,
-            StyleVal(Spatium(0.25)),              // ST_bracketDistance,
-            StyleVal(Spatium(0.5)),               // ST_clefLeftMargin,
-            StyleVal(Spatium(0.5)),               // ST_keysigLeftMargin,
-            StyleVal(Spatium(0.5)),               // ST_timesigLeftMargin,
-            StyleVal(Spatium(1.75)),              // ST_clefKeyRightMargin,
-            StyleVal(Spatium(0.13)),              // ST_stemWidth,
-            StyleVal(true),                       // ST_shortenStem,
-            StyleVal(Spatium(0.25)),              // ST_shortStemProgression,
-            StyleVal(Spatium(2.25)),              // ST_shortestStem,
+      static const StyleVal values[ST_STYLES] = {
+            StyleVal(ST_staffUpperBorder, Spatium(7.0)),
+            StyleVal(ST_staffLowerBorder, Spatium(7.0)),
+            StyleVal(ST_staffDistance, Spatium(6.5)),
+            StyleVal(ST_akkoladeDistance, Spatium(6.5)),
+            StyleVal(ST_systemDistance, Spatium(9.25)),
+            StyleVal(ST_lyricsDistance, Spatium(2)),
+            StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
+            StyleVal(ST_systemFrameDistance, Spatium(7.0)),
+            StyleVal(ST_frameSystemDistance, Spatium(1.0)),
+            StyleVal(ST_minMeasureWidth, Spatium(4.0)),
 
-            StyleVal(Spatium(1.0)),               // ST_beginRepeatLeftMargin,
-            StyleVal(Spatium(0.4)),               // ST_minNoteDistance,
-            StyleVal(Spatium(1.5)),               // ST_barNoteDistance,
-            StyleVal(Spatium(1.0)),               // ST_noteBarDistance,
-            StyleVal(1.2),                        // ST_measureSpacing,
-            StyleVal(Spatium(0.08)),              // ST_staffLineWidth,
-            StyleVal(Spatium(0.16)),              // ST_ledgerLineWidth,
-            StyleVal(Spatium(1.6)),               // ST_akkoladeWidth,
-            StyleVal(Spatium(0.22)),              // ST_accidentalDistance,
-            StyleVal(Spatium(0.22)),              // ST_accidentalNoteDistance,
-            StyleVal(Spatium(0.48)),              // ST_beamWidth,
-            StyleVal(0.5),                        // ST_beamDistance,
-            StyleVal(Spatium(1.25)),              // ST_beamMinLen,
-            StyleVal(0.05),                       // ST_beamMinSlope,
-            StyleVal(0.2),                        // ST_beamMaxSlope,
-            StyleVal(division),                   // ST_maxBeamTicks,
-            StyleVal(Spatium(0.35)),              // ST_dotNoteDistance,
-            StyleVal(Spatium(0.25)),              // ST_dotRestDistance,
-            StyleVal(Spatium(0.5)),               // ST_dotDotDistance,
-            StyleVal(Spatium(1.0)),               // ST_propertyDistanceHead,
-            StyleVal(Spatium(0.5)),               // ST_propertyDistanceStem,
-            StyleVal(Spatium(1.0)),               // ST_propertyDistance,
-            StyleVal(0.7),                        // ST_pageFillLimit,
-            StyleVal(0.3),                        // ST_lastSystemFillLimit,
-            StyleVal(Spatium(1.2)),               // ST_hairpinHeight,
-            StyleVal(Spatium(0.5)),               // ST_hairpinContHeight,
-            StyleVal(Spatium(0.13)),              // ST_hairpinWidth,
-            StyleVal(true),                       // ST_showPageNumber,
-            StyleVal(false),                      // ST_showPageNumberOne,
-            StyleVal(true),                       // ST_pageNumberOddEven,
-            StyleVal(true),                       // ST_showMeasureNumber,
-            StyleVal(false),                      // ST_showMeasureNumberOne,
-            StyleVal(5),                          // ST_measureNumberInterval,
-            StyleVal(true),                       // ST_measureNumberSystem,
-            StyleVal(false),                      // ST_measureNumberAllStaffs,
-            StyleVal(0.7),                        // ST_smallNoteMag,
-            StyleVal(0.7),                        // ST_graceNoteMag,
-            StyleVal(0.7),                        // ST_smallStaffMag,
-            StyleVal(0.8),                        // ST_smallClefMag,
-            StyleVal(true),                       // ST_genClef,
-            StyleVal(true),                       // ST_genKeysig,
-            StyleVal(true),                       // ST_genTimesig,
-            StyleVal(true),                       // ST_genCourtesyTimesig
-            StyleVal(true),                       // ST_genCourtesyKeysig
-            StyleVal(false),                      // ST_useGermanNoteNames
-            StyleVal(true),                       // ST_warnPitchRange
-            StyleVal(false),                      // ST_chordNamesUseSymbols
-            StyleVal(false),                      // ST_chordNamesUseJazzFont
-            StyleVal(false),                      // ST_concertPitch,
-            StyleVal(false),                      // ST_createMultiMeasureRests,
-            StyleVal(2),                          // ST_minEmptyMeasures,
-            StyleVal(Spatium(4)),                 // ST_minMMRestWidth,
-            StyleVal(false),                      // ST_hideEmptyStaves,
-            StyleVal(UP),                         // ST_stemDir1,
-            StyleVal(DOWN),                       // ST_stemDir2,
-            StyleVal(UP),                         // ST_stemDir3,
-            StyleVal(DOWN),                       // ST_stemDir4,
-            StyleVal(85),                         // ST_gateTime,
-            StyleVal(100),                        // ST_tenutoGateTime,
-            StyleVal(50),                         // ST_staccatoGateTime,
-            StyleVal(100),                        // ST_slurGateTime,
+            StyleVal(ST_barWidth, Spatium(0.16)),
+            StyleVal(ST_doubleBarWidth, Spatium(0.16)),
+            StyleVal(ST_endBarWidth, Spatium(0.3)),
+            StyleVal(ST_doubleBarDistance, Spatium(0.30)),
+            StyleVal(ST_endBarDistance, Spatium(0.30)),
+            StyleVal(ST_bracketWidth, Spatium(0.35)),
+            StyleVal(ST_bracketDistance, Spatium(0.25)),
+            StyleVal(ST_clefLeftMargin, Spatium(0.5)),
+            StyleVal(ST_keysigLeftMargin, Spatium(0.5)),
+            StyleVal(ST_timesigLeftMargin, Spatium(0.5)),
 
-            StyleVal(int(A_TOP_STAFF)),           // ufermata
-            StyleVal(int(A_BOTTOM_STAFF)),        // dfermata
-            StyleVal(int(A_CHORD)),               // thumb
-            StyleVal(int(A_CHORD)),               // sforzatoaccent
-            StyleVal(int(A_CHORD)),               // espr
-            StyleVal(int(A_CHORD)),               // staccato
-            StyleVal(int(A_CHORD)),               // ustaccatissimo
-            StyleVal(int(A_CHORD)),               // dstaccatissimo
-            StyleVal(int(A_CHORD)),               // tenuto
-            StyleVal(int(A_CHORD)),               // uportato
-            StyleVal(int(A_CHORD)),               // dportato
-            StyleVal(int(A_CHORD)),               // umarcato
-            StyleVal(int(A_CHORD)),               // dmarcato
-            StyleVal(int(A_CHORD)),               // ouvert
-            StyleVal(int(A_CHORD)),               // plusstop
-            StyleVal(int(A_TOP_STAFF)),           // upbow
-            StyleVal(int(A_TOP_STAFF)),           // downbow
-            StyleVal(int(A_TOP_STAFF)),           // reverseturn
-            StyleVal(int(A_TOP_STAFF)),           // turn
-            StyleVal(int(A_TOP_STAFF)),           // trill
-            StyleVal(int(A_TOP_STAFF)),           // prall
-            StyleVal(int(A_TOP_STAFF)),           // mordent
-            StyleVal(int(A_TOP_STAFF)),           // prallprall
-            StyleVal(int(A_TOP_STAFF)),           // prallmordent
-            StyleVal(int(A_TOP_STAFF)),           // upprall
-            StyleVal(int(A_TOP_STAFF)),    	  // downprall
-            StyleVal(int(A_TOP_STAFF)),    	  // upmordent
-            StyleVal(int(A_TOP_STAFF)),    	  // downmordent
+            StyleVal(ST_clefKeyRightMargin, Spatium(1.75)),
+            StyleVal(ST_clefBarlineDistance, Spatium(0.5)),
+            StyleVal(ST_stemWidth, Spatium(0.13)),
+            StyleVal(ST_shortenStem, true),
+            StyleVal(ST_shortStemProgression, Spatium(0.25)),
+            StyleVal(ST_shortestStem,Spatium(2.25)),
+            StyleVal(ST_beginRepeatLeftMargin,Spatium(1.0)),
+            StyleVal(ST_minNoteDistance,Spatium(0.4)),
+            StyleVal(ST_barNoteDistance,Spatium(1.5)),
+            StyleVal(ST_noteBarDistance,Spatium(1.0)),
+
+            StyleVal(ST_measureSpacing,1.2),
+            StyleVal(ST_staffLineWidth,Spatium(0.08)),
+            StyleVal(ST_ledgerLineWidth,Spatium(0.16)),
+            StyleVal(ST_akkoladeWidth,Spatium(1.6)),
+            StyleVal(ST_accidentalDistance,Spatium(0.22)),
+            StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
+            StyleVal(ST_beamWidth,Spatium(0.48)),
+            StyleVal(ST_beamDistance,0.5),
+            StyleVal(ST_beamMinLen,Spatium(1.25)),
+            StyleVal(ST_beamMinSlope,0.05),
+
+            StyleVal(ST_beamMaxSlope,0.2),
+            StyleVal(ST_maxBeamTicks,division),
+            StyleVal(ST_dotNoteDistance,Spatium(0.35)),
+            StyleVal(ST_dotRestDistance,Spatium(0.25)),
+            StyleVal(ST_dotDotDistance,Spatium(0.5)),
+            StyleVal(ST_propertyDistanceHead,Spatium(1.0)),
+            StyleVal(ST_propertyDistanceStem,Spatium(0.5)),
+            StyleVal(ST_propertyDistance,Spatium(1.0)),
+            StyleVal(ST_pageFillLimit,0.7),
+            StyleVal(ST_lastSystemFillLimit,0.3),
+
+            StyleVal(ST_hairpinHeight,Spatium(1.2)),
+            StyleVal(ST_hairpinContHeight,Spatium(0.5)),
+            StyleVal(ST_hairpinWidth,Spatium(0.13)),
+            StyleVal(ST_showPageNumber,true),
+            StyleVal(ST_showPageNumberOne,false),
+            StyleVal(ST_pageNumberOddEven,true),
+            StyleVal(ST_showMeasureNumber,true),
+            StyleVal(ST_showMeasureNumberOne,false),
+            StyleVal(ST_measureNumberInterval,5),
+            StyleVal(ST_measureNumberSystem,true),
+
+            StyleVal(ST_measureNumberAllStaffs,false),
+            StyleVal(ST_smallNoteMag,0.7),
+            StyleVal(ST_graceNoteMag,0.7),
+            StyleVal(ST_smallStaffMag,0.7),
+            StyleVal(ST_smallClefMag,0.8),
+            StyleVal(ST_genClef,true),
+            StyleVal(ST_genKeysig,true),
+            StyleVal(ST_genTimesig,true),
+            StyleVal(ST_genCourtesyTimesig, true),
+            StyleVal(ST_genCourtesyKeysig, true),
+
+            StyleVal(ST_useGermanNoteNames, false),
+            StyleVal(ST_warnPitchRange, true),
+/*72*/      StyleVal(ST_chordDescriptionFile, "chords.xml"),
+            StyleVal(ST_concertPitch,false),
+            StyleVal(ST_createMultiMeasureRests,false),
+            StyleVal(ST_minEmptyMeasures,2),
+            StyleVal(ST_minMMRestWidth,Spatium(4)),
+            StyleVal(ST_hideEmptyStaves,false),
+            StyleVal(ST_stemDir1,UP),
+            StyleVal(ST_stemDir2,DOWN),
+
+            StyleVal(ST_stemDir3,UP),
+            StyleVal(ST_stemDir4,DOWN),
+            StyleVal(ST_gateTime,85),
+            StyleVal(ST_tenutoGateTime,100),
+            StyleVal(ST_staccatoGateTime,50),
+            StyleVal(ST_slurGateTime,100),
+
+            StyleVal(ST_UfermataAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DfermataAnchor, int(A_BOTTOM_STAFF)),
+            StyleVal(ST_ThumbAnchor, int(A_CHORD)),
+            StyleVal(ST_SforzatoaccentAnchor, int(A_CHORD)),
+            StyleVal(ST_EspressivoAnchor, int(A_CHORD)),
+            StyleVal(ST_StaccatoAnchor, int(A_CHORD)),
+            StyleVal(ST_UstaccatissimoAnchor, int(A_CHORD)),
+            StyleVal(ST_DstaccatissimoAnchor, int(A_CHORD)),
+            StyleVal(ST_TenutoAnchor, int(A_CHORD)),
+            StyleVal(ST_UportatoAnchor, int(A_CHORD)),
+            StyleVal(ST_DportatoAnchor, int(A_CHORD)),
+            StyleVal(ST_UmarcatoAnchor, int(A_CHORD)),
+            StyleVal(ST_DmarcatoAnchor, int(A_CHORD)),
+            StyleVal(ST_OuvertAnchor, int(A_CHORD)),
+            StyleVal(ST_PlusstopAnchor, int(A_CHORD)),
+            StyleVal(ST_UpbowAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DownbowAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_ReverseturnAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_TurnAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_TrillAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_PrallAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_MordentAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_PrallPrallAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_PrallMordentAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_UpPrallAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DownPrallAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
             };
 
-      StyleVal* d = data();
       for (int idx = 0; idx < ST_STYLES; ++idx)
-            d[idx] = values[idx];
+            (*this)[idx] = values[idx];
+      _chordList = 0;
       };
+
+Style::Style(const Style& s)
+   : QVector<StyleVal>(s)
+      {
+      _chordList = 0;
+      }
+
+Style& Style::operator=(const Style& s)
+      {
+      if (_chordList) {
+            delete _chordList;
+            _chordList = 0;
+            }
+      foreach(const StyleVal& sv, s)
+            set(sv);
+      return *this;
+      }
+
+//---------------------------------------------------------
+//   Style
+//---------------------------------------------------------
+
+Style::~Style()
+      {
+      if (_chordList)
+            delete _chordList;
+      }
 
 //---------------------------------------------------------
 //   TextStyle
@@ -621,12 +656,14 @@ void Style::load(QDomElement e, int /*version*/)
             int idx;
             for (idx = 0; idx < ST_STYLES; ++idx) {
                   if (styleTypes[idx].name() == tag) {
+                        StyleIdx i = StyleIdx(idx);
                         switch(styleTypes[idx].valueType()) {
-                              case ST_SPATIUM:   data()[idx] = StyleVal(Spatium(val.toDouble()));   break;
-                              case ST_DOUBLE:    data()[idx] = StyleVal(val.toDouble());            break;
-                              case ST_BOOL:      data()[idx] = StyleVal(bool(val.toInt()));         break;
-                              case ST_INT:       data()[idx] = StyleVal(val.toInt());               break;
-                              case ST_DIRECTION: data()[idx] = StyleVal(Direction(val.toInt()));    break;
+                              case ST_SPATIUM:   set(i, Spatium(val.toDouble()));   break;
+                              case ST_DOUBLE:    set(i, val.toDouble());            break;
+                              case ST_BOOL:      set(i, bool(val.toInt()));         break;
+                              case ST_INT:       set(i, val.toInt());               break;
+                              case ST_DIRECTION: set(i, Direction(val.toInt()));    break;
+                              case ST_STRING:    set(i, qPrintable(val));           break;
                               }
                         break;
                         }
@@ -651,6 +688,8 @@ bool Style::isDefault(int idx)
             case ST_INT:
             case ST_DIRECTION:
                   return at(idx).toInt() == defaultStyle[idx].toInt();
+            case ST_STRING:
+                  return strcmp(at(idx).toString(), defaultStyle[idx].toString()) == 0;
             }
       return false;
       }
@@ -674,8 +713,103 @@ void Style::save(Xml& xml, bool optimize)
                   case ST_BOOL:      xml.tag(styleTypes[idx].name(), at(idx).toBool()); break;
                   case ST_INT:       xml.tag(styleTypes[idx].name(), at(idx).toInt()); break;
                   case ST_DIRECTION: xml.tag(styleTypes[idx].name(), int(at(idx).toDirection())); break;
+                  case ST_STRING:    xml.tag(styleTypes[idx].name(), at(idx).toString()); break;
                   }
             }
       xml.etag();
+      }
+
+//---------------------------------------------------------
+//   chordDescription
+//---------------------------------------------------------
+
+const ChordDescription* Style::chordDescription(int id) const
+      {
+      return chordList()->value(id);
+      }
+
+//---------------------------------------------------------
+//   chordList
+//---------------------------------------------------------
+
+ChordList* Style::chordList()  const
+      {
+      if (_chordList == 0) {
+            _chordList = new ChordList();
+            _chordList->read(value(ST_chordDescriptionFile).toString());
+            }
+      return _chordList;
+      }
+
+StyleVal::StyleVal(StyleIdx t, Spatium val)
+      {
+      idx  = t;
+      v.dbl = val.val();
+      }
+
+StyleVal::StyleVal(StyleIdx t, double val)
+      {
+      idx  = t;
+      v.dbl = val;
+      }
+
+StyleVal::StyleVal(StyleIdx t, bool val)
+      {
+      idx  = t;
+      v.b   = val;
+      }
+
+StyleVal::StyleVal(StyleIdx t, int val)
+      {
+      idx  = t;
+      v.i   = val;
+      }
+
+StyleVal::StyleVal(StyleIdx t, Direction val)
+      {
+      idx  = t;
+      v.d   = val;
+      }
+
+StyleVal::StyleVal(StyleIdx t, const char* val)
+      {
+      idx  = t;
+      int n = strlen(val) + 1;
+      v.s = new char[n];
+      memcpy(v.s, val, n);
+      }
+
+StyleVal::StyleVal(const StyleVal& val)
+      {
+      idx = val.idx;
+      v   = val.v;
+      if (styleTypes[idx].valueType() == ST_STRING && v.s) {
+            int n = strlen(val.v.s) + 1;
+            v.s = new char[n];
+            memcpy(v.s, val.v.s, n);
+            }
+      }
+
+StyleVal& StyleVal::operator=(const StyleVal& val)
+      {
+      if (styleTypes[idx].valueType() == ST_STRING && v.s)
+            delete v.s;
+      idx = val.idx;
+      v    = val.v;
+      if (styleTypes[idx].valueType() == ST_STRING && v.s) {
+            int n = strlen(val.v.s) + 1;
+            v.s = new char[n];
+            memcpy(v.s, val.v.s, n);
+            }
+      return *this;
+      }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
+
+void Style::set(const StyleVal& val)
+      {
+      (*this)[val.getIdx()] = val;
       }
 

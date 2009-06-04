@@ -43,7 +43,7 @@ class Synth {
    public:
       Synth() {}
       virtual ~Synth() {}
-      virtual void init(int sampleRate, int midiChannels) = 0;
+      virtual void init(int sampleRate) = 0;
       virtual bool loadSoundFont(const QString&) = 0;
       virtual void process(unsigned, float*, float*, int) = 0;
       virtual void play(const Event&) = 0;
