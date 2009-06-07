@@ -78,7 +78,7 @@ class ScScorePrototype : public QObject, public QScriptable
       bool saveMxl(const QString&);
       bool saveMidi(const QString&);
       bool savePng(const QString&);
-      bool savePng(const QString&, bool, bool, double);
+      bool savePng(const QString&, bool, bool, double, bool);
       bool saveSvg(const QString&);
       bool saveLilypond(const QString&);
 #ifdef HAS_AUDIOFILE
