@@ -611,7 +611,7 @@ class Score : public QObject {
       bool saveMidi(const QString& name);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       bool savePng(const QString& name);
-      bool savePng(const QString& name, bool screenshot, bool transparent, double convDpi);
+      bool savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);
 #ifdef HAS_AUDIOFILE

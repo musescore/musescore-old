@@ -294,9 +294,16 @@ bool ScScorePrototype::savePng(const QString& name)
 //   savePng with options
 //---------------------------------------------------------
 
-bool ScScorePrototype::savePng(const QString& name, bool screenshot, bool transparent, double convDpi)
+bool ScScorePrototype::savePng(const QString& name, bool screenshot, bool transparent, double convDpi, bool grayscale)
       {
-      return thisScore()->savePng(name, screenshot, transparent, convDpi);
+      
+      QImage::Format f;
+      if (grayscale)
+          f = QImage::Format_Indexed8;
+      else
+          f = QImage::Format_ARGB32_Premultiplied;
+          
+      return thisScore()->savePng(name, screenshot, transparent, convDpi, f);
       }
 
 //---------------------------------------------------------

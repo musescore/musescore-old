@@ -1625,7 +1625,7 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
-      return savePng(name, !preferences.pngScreenShot, true, converterDpi );
+      return savePng(name, !preferences.pngScreenShot, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
 }
 
 //---------------------------------------------------------
@@ -1633,11 +1633,18 @@ bool Score::savePng(const QString& name)
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi){
+bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format){
 
       _printing = !screenshot;             // dont print page break symbols etc.
 
       bool rv = true;
+      
+      QImage::Format f;
+      if (format != QImage::Format_Indexed8)
+          f = format;
+      else
+          f = QImage::Format_ARGB32_Premultiplied;
+    
       if (!canvas()->lassoRect().isEmpty() && !_printing) {
             // this is a special hack to export only the canvas lasso selection
             // into png (screen shot mode)
@@ -1646,8 +1653,9 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 
             int w = lrint(r.width()  * convDpi / DPI);
             int h = lrint(r.height() * convDpi / DPI);
-
-            QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
+              
+            QImage printer(w, h, f);
+              
             printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
             printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
 
@@ -1656,6 +1664,20 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             else
               printer.fill(-1);     // white background
 
+              if( format == QImage::Format_Indexed8){
+                //convert to grayscale & respect alpha
+                QVector<QRgb> colorTable;
+                colorTable.push_back(QColor(0, 0, 0, 0).rgba());
+                if(!transparent){
+                  for (int i = 1; i < 256; i++)
+                    colorTable.push_back(QColor(i, i, i).rgb());
+                }else{
+                  for (int i = 1; i < 256; i++)
+                    colorTable.push_back(QColor(0, 0, 0, i).rgba());
+                }            
+                printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
+              }
+            
             double m = convDpi / PDPI;
             QPainter p(&printer);
             canvas()->paintLasso(p, m);
@@ -1687,7 +1709,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   int w = lrint(r.width()  * convDpi / DPI);
                   int h = lrint(r.height() * convDpi / DPI);
 
-                  QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
+                  QImage printer(w, h, f);
+                    
                   printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
                   printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
 
@@ -1721,6 +1744,20 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                         e->draw(p);
                         p.translate(-ap);
                         }
+
+                  if( format == QImage::Format_Indexed8){
+                    //convert to grayscale & respect alpha
+                    QVector<QRgb> colorTable;
+                    colorTable.push_back(QColor(0, 0, 0, 0).rgba());
+                    if(!transparent){
+                      for (int i = 1; i < 256; i++)
+                        colorTable.push_back(QColor(i, i, i).rgb());
+                    }else{
+                      for (int i = 1; i < 256; i++)
+                        colorTable.push_back(QColor(0, 0, 0, i).rgba());
+                    }            
+                    printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
+                  }
 
                   QString fileName(name);
                   if (fileName.endsWith(".png"))
