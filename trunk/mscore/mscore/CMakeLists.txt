@@ -256,7 +256,7 @@ if (MINGW)
       ${CROSSQT}/translations/qt_es.qm
       ${CROSSQT}/translations/qt_fr.qm
       ${CROSSQT}/translations/qt_iw.qm
-      ${CROSSQT}/translations/qt_ja_jp.qm
+      ${CROSSQT}/translations/qt_ja_JP.qm
       ${CROSSQT}/translations/qt_pl.qm
       ${CROSSQT}/translations/qt_pt.qm
       ${CROSSQT}/translations/qt_ru.qm

@@ -6688,6 +6688,23 @@ selezionare una battuta e riprovare</translation>
         <source>&gt; to &lt;</source>
         <translation>&gt; a &lt;</translation>
     </message>
+    <message>
+        <source>MuseScore: Save File failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>renaming old file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>renaming temp. file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; failed:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>

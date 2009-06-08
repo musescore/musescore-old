@@ -1,4 +1,5 @@
 8.jun (ws)
+      - move to Qt4.5.1 for windows cross build
       - fix object inspector crash, when element not found
 4.jun (ws)
       - remove build option for using external fluid library
