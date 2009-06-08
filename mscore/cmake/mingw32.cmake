@@ -5,7 +5,7 @@
 set (CMAKE_SYSTEM_NAME "Windows")
 
 set (CROSS /home/ws/mingw)
-set (CROSSQT ${CROSS}/Qt/4.5.0)
+set (CROSSQT ${CROSS}/Qt/4.5.1)
 
 set (CMAKE_C_COMPILER     ${CROSS}/bin/i386-mingw32-gcc)
 set (CMAKE_CXX_COMPILER   ${CROSS}/bin/i386-mingw32-g++)
@@ -44,7 +44,6 @@ set (QT_mingw_LIBRARIES
     QtScript4
     QtSvg4
     QtUiTools
-    QtUiToolsd
     QtGui4
     QtCore4
     QtXml4
