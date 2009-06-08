@@ -1,3 +1,5 @@
+8.jun (ws)
+      - fix object inspector crash, when element not found
 4.jun (ws)
       - remove build option for using external fluid library
       - dynamically allocate channels for the buildin synthesizer

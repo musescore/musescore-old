@@ -488,7 +488,9 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
       {
       if (i == 0)
             return;
-      Element* el = ((ElementItem*)i)->element();
+      if (i->type() == INVALID)
+            return;
+      Element* el = static_cast<ElementItem*>(i)->element();
       setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
       ShowElementBase* ew = 0;
       switch (el->type()) {
