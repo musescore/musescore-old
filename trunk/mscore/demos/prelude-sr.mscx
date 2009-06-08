@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
-  <Mag>0.921092</Mag>
-  <xoff>-3.60875</xoff>
-  <yoff>-35.663</yoff>
+  <Mag>1.34857</Mag>
+  <xoff>-263.064</xoff>
+  <yoff>-12.1023</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -97,22 +97,50 @@
       </Instrument>
     </Part>
   <Slur id="1">
+    <SlurSegment no="0">
+      <offset x="0.119333" y="-0.477332"/>
+      </SlurSegment>
     </Slur>
   <Slur id="2">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-0.652049"/>
+      </SlurSegment>
     </Slur>
   <Slur id="3">
+    <SlurSegment no="0">
+      <offset x="0" y="-0.652049"/>
+      </SlurSegment>
     </Slur>
   <Slur id="4">
+    <SlurSegment no="0">
+      <offset x="-0.163012" y="-0.733555"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <offset x="0" y="-0.489037"/>
+      </SlurSegment>
     </Slur>
   <Slur id="5">
     </Slur>
   <Slur id="6">
+    <SlurSegment no="0">
+      <offset x="0" y="-0.652049"/>
+      </SlurSegment>
     </Slur>
   <Slur id="7">
+    <SlurSegment no="0">
+      <offset x="0" y="-0.652049"/>
+      </SlurSegment>
     </Slur>
   <Slur id="8">
+    <SlurSegment no="0">
+      <offset x="0.0815061" y="-0.570543"/>
+      </SlurSegment>
     </Slur>
   <Slur id="9">
+    <SlurSegment no="0">
+      <offset x="0.0815061" y="-1.79313"/>
+      <o1 x="-0.0815061" y="0.733555"/>
+      </SlurSegment>
     </Slur>
   <Slur id="10">
     </Slur>
@@ -139,39 +167,108 @@
   <Slur id="19">
     </Slur>
   <Slur id="20">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-0.896567"/>
+      </SlurSegment>
     </Slur>
   <Slur id="21">
+    <SlurSegment no="0">
+      <offset x="0" y="-0.815061"/>
+      </SlurSegment>
     </Slur>
   <Slur id="22">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="0"/>
+      </SlurSegment>
     </Slur>
   <Slur id="23">
     </Slur>
   <Slur id="24">
     </Slur>
   <Slur id="25">
-    </Slur>
-  <Slur id="26">
-    </Slur>
-  <Slur id="27">
     <SlurSegment no="0">
       <o2 x="0.306115" y="-0.994874"/>
       <o3 x="-0.0765288" y="-0.994874"/>
       </SlurSegment>
     </Slur>
-  <Slur id="28">
+  <Slur id="26">
     <SlurSegment no="0">
+      <offset x="0" y="-0.0815061"/>
       <o2 x="-1.53058" y="0.459173"/>
       <o3 x="0.765288" y="1.76016"/>
       <o4 x="0.153058" y="0.535701"/>
       </SlurSegment>
     </Slur>
+  <Slur id="27">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-0.244518"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="28">
+    <SlurSegment no="0">
+      <offset x="-0.163012" y="0.0815061"/>
+      </SlurSegment>
+    </Slur>
   <Slur id="29">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-1.05958"/>
+      </SlurSegment>
     </Slur>
   <Slur id="30">
+    <SlurSegment no="0">
+      <offset x="0.0815061" y="-0.896567"/>
+      </SlurSegment>
     </Slur>
   <Slur id="31">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-0.978073"/>
+      </SlurSegment>
     </Slur>
   <Slur id="32">
+    <SlurSegment no="0">
+      <offset x="-0.244518" y="-0.896567"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="33">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-0.978073"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="34">
+    <SlurSegment no="0">
+      <offset x="-0.0815061" y="-2.11916"/>
+      <o1 x="-0.244518" y="0.896567"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="35">
+    <SlurSegment no="0">
+      <o1 x="1.95615" y="-3.42326"/>
+      <o2 x="0.163012" y="0.0815061"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="36">
+    <SlurSegment no="0">
+      <o1 x="1.3856" y="-4.15681"/>
+      <o4 x="0.244518" y="-4.31982"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="37">
+    <SlurSegment no="0">
+      <o1 x="1.3041" y="-0.0815061"/>
+      <o2 x="0.570543" y="0.652049"/>
+      <o3 x="0.244518" y="0.652049"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="38">
+    <SlurSegment no="0">
+      <o1 x="1.3041" y="0.163012"/>
+      <o2 x="0.489037" y="0.815061"/>
+      <o3 x="0.244518" y="0.815061"/>
+      </SlurSegment>
+    <up>1</up>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -427,7 +524,7 @@
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-937</tick>
+        <tick>-936</tick>
         </LayoutBreak>
       <Chord>
         <tick>4800</tick>
@@ -1455,6 +1552,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.621219" y="-9.00768"/>
           </Articulation>
+        <Slur type="start" number="31"/>
         <Beam>11</Beam>
         <Note pitch="61" tpc="21"/>
         <Note pitch="68" tpc="22"/>
@@ -1466,6 +1564,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.388262" y="-8.46411"/>
           </Articulation>
+        <Slur type="stop" number="31"/>
         <Beam>11</Beam>
         <Note pitch="62" tpc="16"/>
         <Note>
@@ -1481,6 +1580,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.31061" y="-9.16299"/>
           </Articulation>
+        <Slur type="start" number="32"/>
         <Beam>11</Beam>
         <Note pitch="59" tpc="19"/>
         <Note pitch="66" tpc="20"/>
@@ -1496,6 +1596,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.31061" y="-8.69707"/>
           </Articulation>
+        <Slur type="stop" number="32"/>
         <Beam>12</Beam>
         <Note pitch="61" tpc="21"/>
         <Note pitch="68" tpc="22"/>
@@ -1507,6 +1608,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.232957" y="-9.70655"/>
           </Articulation>
+        <Slur type="start" number="33"/>
         <Beam>12</Beam>
         <Note pitch="57" tpc="17"/>
         <Note pitch="64" tpc="18"/>
@@ -1518,6 +1620,7 @@
           <subtype>tenuto</subtype>
           <offset x="0" y="-9.08533"/>
           </Articulation>
+        <Slur type="stop" number="33"/>
         <Beam>12</Beam>
         <Note pitch="59" tpc="19"/>
         <Note pitch="66" tpc="20"/>
@@ -1529,6 +1632,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.0776524" y="-9.86186"/>
           </Articulation>
+        <Slur type="start" number="34"/>
         <Beam>12</Beam>
         <Note pitch="56" tpc="22"/>
         <Note pitch="62" tpc="16"/>
@@ -1557,6 +1661,7 @@
           <subtype>tenuto</subtype>
           <offset x="0.0408966" y="-8.5065"/>
           </Articulation>
+        <Slur type="stop" number="34"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="66" tpc="20"/>
         <Note pitch="69" tpc="17"/>
@@ -1689,7 +1794,7 @@
         <velocity>16</velocity>
         <dynType>2</dynType>
         <subtype>ppp</subtype>
-        <offset x="-0.851693" y="0.0467503"/>
+        <offset x="-0.28115" y="0.128256"/>
         <style>12</style>
         </Dynamic>
       <Rest>
@@ -1702,18 +1807,30 @@
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.326024" y="-7.41705"/>
+          </Articulation>
         <Beam>14</Beam>
         <Note pitch="52" tpc="18"/>
         <Note pitch="61" tpc="21"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.244518" y="-6.60199"/>
+          </Articulation>
         <Beam>14</Beam>
         <Note pitch="56" tpc="22"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.489037" y="-7.58007"/>
+          </Articulation>
         <Beam>14</Beam>
         <Note pitch="55" tpc="27"/>
         <Note pitch="63" tpc="23"/>
@@ -1724,6 +1841,10 @@
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0" y="-7.00952"/>
+          </Articulation>
         <Note pitch="54" tpc="20"/>
         <Note pitch="60" tpc="26"/>
         <Note pitch="62" tpc="16"/>
@@ -1734,6 +1855,10 @@
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.0815061" y="-7.49856"/>
+          </Articulation>
         <Note>
           <pitch>51</pitch>
           <tpc>23</tpc>
@@ -1784,21 +1909,35 @@
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="15">
+        <y1>-345.057</y1>
+        <y2>-345.057</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.40753" y="-7.66157"/>
+          </Articulation>
         <Beam>15</Beam>
         <Note pitch="52" tpc="18"/>
         <Note pitch="61" tpc="21"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.40753" y="-6.6835"/>
+          </Articulation>
         <Beam>15</Beam>
         <Note pitch="56" tpc="22"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.163012" y="-7.49856"/>
+          </Articulation>
         <Beam>15</Beam>
         <Note pitch="55" tpc="27"/>
         <Note pitch="63" tpc="23"/>
@@ -1809,6 +1948,10 @@
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.163012" y="-6.84651"/>
+          </Articulation>
         <Note pitch="54" tpc="20"/>
         <Note pitch="60" tpc="26"/>
         <Note pitch="62" tpc="16"/>
@@ -1819,6 +1962,10 @@
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.40753" y="-7.66157"/>
+          </Articulation>
         <Note>
           <pitch>51</pitch>
           <tpc>23</tpc>
@@ -1868,7 +2015,7 @@
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
-        <offset x="0.0765288" y="2.37239"/>
+        <offset x="-0.249496" y="1.55733"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
         <text>Agitato</text>
@@ -1926,6 +2073,7 @@
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="start" number="35"/>
         <Beam>16</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2097,6 +2245,7 @@
           <offset x="0.688759" y="-2.90809"/>
           <track>1</track>
           </Articulation>
+        <Slur type="stop" number="35"/>
         <Beam>19</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2187,6 +2336,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>5</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="start" number="36"/>
         <Beam>20</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2338,6 +2488,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>8</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="stop" number="36"/>
         <Beam>23</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2407,6 +2558,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>9</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="start" number="37"/>
         <Beam>24</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2454,6 +2606,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>10</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="stop" number="37"/>
         <Beam>25</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2501,6 +2654,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>11</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="start" number="38"/>
         <Beam>26</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2548,6 +2702,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>160</ticklen>
         <Tuplet>12</Tuplet>
         <durationType>eighth</durationType>
+        <Slur type="stop" number="38"/>
         <Beam>27</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -2597,14 +2752,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>320</ticklen>
         <Tuplet>13</Tuplet>
         <durationType>quarter</durationType>
-        <Slur type="start" number="25"/>
+        <Slur type="start" number="23"/>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>13</Tuplet>
         <durationType>eighth</durationType>
-        <Slur type="stop" number="25"/>
+        <Slur type="stop" number="23"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
@@ -2622,14 +2777,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>320</ticklen>
         <Tuplet>14</Tuplet>
         <durationType>quarter</durationType>
-        <Slur type="start" number="26"/>
+        <Slur type="start" number="24"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>14</Tuplet>
         <durationType>eighth</durationType>
-        <Slur type="stop" number="26"/>
+        <Slur type="stop" number="24"/>
         <Note pitch="63" tpc="23"/>
         </Chord>
       <Chord>
@@ -2839,7 +2994,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.469767" y="-5.55891"/>
           </Articulation>
-        <Slur type="start" number="29"/>
+        <Slur type="start" number="27"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
@@ -2864,7 +3019,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.391472" y="-5.55891"/>
           </Articulation>
-        <Slur type="stop" number="29"/>
+        <Slur type="stop" number="27"/>
         <Note pitch="61" tpc="21"/>
         </Chord>
       <Tuplet id="19">
@@ -2963,8 +3118,8 @@ p, li { white-space: pre-wrap; }
         <Beam>33</Beam>
         <Note>
           <track>1</track>
-          <pitch>59</pitch>
-          <tpc>19</tpc>
+          <pitch>61</pitch>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Tuplet id="21">
@@ -3082,7 +3237,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.548061" y="-5.55891"/>
           </Articulation>
-        <Slur type="start" number="30"/>
+        <Slur type="start" number="28"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
@@ -3111,7 +3266,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.469767" y="-5.48061"/>
           </Articulation>
-        <Slur type="stop" number="30"/>
+        <Slur type="stop" number="28"/>
         <Note pitch="61" tpc="21"/>
         </Chord>
       <Tuplet id="23">
@@ -5235,6 +5390,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <track>5</track>
+          </Articulation>
         <Slur type="start" number="16"/>
         <Beam>54</Beam>
         <Note>
@@ -5246,6 +5405,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <track>5</track>
+          </Articulation>
         <Beam>54</Beam>
         <Note>
           <track>5</track>
@@ -5256,6 +5419,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <ticklen>240</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <track>5</track>
+          </Articulation>
         <Slur type="stop" number="16"/>
         <Beam>54</Beam>
         <Note>
@@ -5278,15 +5445,27 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.570543" y="-5.78693"/>
+          </Articulation>
         <Slur type="start" number="21"/>
         <Note pitch="46" tpc="24"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.652049" y="-5.3794"/>
+          </Articulation>
         <Note pitch="45" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.326024" y="-5.54241"/>
+          </Articulation>
         <Slur type="stop" number="21"/>
         <Note pitch="44" tpc="22"/>
         </Chord>
@@ -5309,19 +5488,35 @@ p, li { white-space: pre-wrap; }
     <Measure number="16">
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.326024" y="-5.70543"/>
+          </Articulation>
         <Slur type="start" number="20"/>
         <Note pitch="47" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.326024" y="-5.3794"/>
+          </Articulation>
         <Note pitch="46" tpc="24"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.40753" y="-5.21639"/>
+          </Articulation>
         <Note pitch="45" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Articulation>
+          <subtype>tenuto</subtype>
+          <offset x="0.40753" y="-5.54241"/>
+          </Articulation>
         <Slur type="stop" number="20"/>
         <Note pitch="44" tpc="22"/>
         </Chord>
@@ -5371,20 +5566,20 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Slur type="start" number="28"/>
+        <Slur type="start" number="26"/>
         <Note pitch="44" tpc="22"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Slur type="start" number="27"/>
+        <Slur type="start" number="25"/>
         <Note pitch="37" tpc="21"/>
         </Chord>
       </Measure>
     <Measure number="19">
       <Chord>
         <ticklen>1920</ticklen>
-        <Slur type="stop" number="27"/>
-        <Slur type="stop" number="28"/>
+        <Slur type="stop" number="25"/>
+        <Slur type="stop" number="26"/>
         <Note pitch="37" tpc="21"/>
         </Chord>
       <Chord>
@@ -5396,8 +5591,7 @@ p, li { white-space: pre-wrap; }
           <offset x="0.313178" y="-5.6372"/>
           <track>5</track>
           </Articulation>
-        <Slur type="start" number="23"/>
-        <Slur type="start" number="31"/>
+        <Slur type="start" number="29"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -5443,8 +5637,7 @@ p, li { white-space: pre-wrap; }
           <offset x="0.234883" y="-5.55891"/>
           <track>5</track>
           </Articulation>
-        <Slur type="stop" number="23"/>
-        <Slur type="stop" number="31"/>
+        <Slur type="stop" number="29"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -5460,8 +5653,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.391472" y="-5.79379"/>
           </Articulation>
-        <Slur type="start" number="24"/>
-        <Slur type="start" number="32"/>
+        <Slur type="start" number="30"/>
         <Note pitch="47" tpc="19"/>
         </Chord>
       <Chord>
@@ -5486,8 +5678,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <offset x="0.469767" y="-5.6372"/>
           </Articulation>
-        <Slur type="stop" number="24"/>
-        <Slur type="stop" number="32"/>
+        <Slur type="stop" number="30"/>
         <Note pitch="44" tpc="22"/>
         </Chord>
       <Chord>
@@ -5673,5 +5864,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>5</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
