@@ -292,18 +292,15 @@ bool Score::saveFile(bool autosave)
       // the original file in case of "disc full"
       //
 
-      QString tmpName;
       QTemporaryFile temp(info.path() + "/msXXXXXX." + suffix);
-//      temp.setAutoRemove(false);
+      temp.setAutoRemove(false);
       if (!temp.open()) {
             QString s = tr("Open Temp File\n") + temp.fileName() + tr("\nfailed: ")
                + QString(strerror(errno));
             QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
             return false;
             }
-      else
-            tmpName = temp.fileName();
-
+      QString tempName = temp.fileName();
       try {
             if (suffix == "msc" || suffix == "mscx")
                   saveFile(&temp, autosave);
@@ -311,9 +308,12 @@ bool Score::saveFile(bool autosave)
                   saveCompressedFile(&temp, info, autosave);
             }
       catch (QString s) {
-            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
+            QMessageBox::critical(mscore, tr("MuseScore: Save File failed: "), s);
             return false;
             }
+      if (temp.error() != QFile::NoError)
+            QMessageBox::critical(mscore, tr("MuseScore: Save File failed: "), temp.errorString());
+      temp.close();   //?
 
       //
       // step 2
@@ -336,7 +336,7 @@ bool Score::saveFile(bool autosave)
       if (dir.exists(name)) {
             if (!dir.rename(name, backupName)) {
                   QMessageBox::critical(mscore, tr("MuseScore: Save File"),
-                     tr("renaming file <")
+                     tr("renaming old file <")
                       + name + tr("> to backup <") + backupName + tr("> failed"));
                   }
             }
@@ -345,9 +345,10 @@ bool Score::saveFile(bool autosave)
       // step 4
       // rename temp name into file name
       //
-      if (!QFile::rename(tmpName, name)) {
+      if (!QFile::rename(tempName, name)) {
             QMessageBox::critical(mscore, tr("MuseScore: Save File"),
-               tr("renaming <") + tmpName + tr("> to <") + name + tr("> failed"));
+               tr("renaming temp. file <") + tempName + tr("> to <") + name + tr("> failed:\n")
+               + QString(strerror(errno)));
             return false;
             }
       // make file readable by all
@@ -823,14 +824,15 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             QByteArray ba;
             if (!ip->loaded()) {
                   QFile inFile(srcPath);
-                  inFile.open(QIODevice::ReadOnly);
+                  if (!inFile.open(QIODevice::ReadOnly))
+                        throw(QString("cannot open picture file"));
                   ip->buffer().setData(inFile.readAll());
                   inFile.close();
                   ip->setLoaded(true);
                   }
             cbuf.setBuffer(&(ip->buffer().buffer()));
             if (!cbuf.open(QIODevice::ReadOnly))
-                  throw(QString("cannot open open buffer cbuf"));
+                  throw(QString("cannot open buffer cbuf"));
             ec = uz.createEntry(dstPath, cbuf, dt);
             if (ec != Zip::Ok)
                   throw(QString("Cannot add <%1> to zipfile as <%1>\n").arg(srcPath).arg(dstPath));
@@ -1626,25 +1628,25 @@ bool Score::saveSvg(const QString& saveName)
 bool Score::savePng(const QString& name)
       {
       return savePng(name, !preferences.pngScreenShot, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
-}
+      }
 
 //---------------------------------------------------------
 //   savePng with options
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format){
-
+bool Score::savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format)
+      {
       _printing = !screenshot;             // dont print page break symbols etc.
 
       bool rv = true;
-      
+
       QImage::Format f;
       if (format != QImage::Format_Indexed8)
           f = format;
       else
           f = QImage::Format_ARGB32_Premultiplied;
-    
+
       if (!canvas()->lassoRect().isEmpty() && !_printing) {
             // this is a special hack to export only the canvas lasso selection
             // into png (screen shot mode)
@@ -1653,16 +1655,13 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 
             int w = lrint(r.width()  * convDpi / DPI);
             int h = lrint(r.height() * convDpi / DPI);
-              
+
             QImage printer(w, h, f);
-              
+
             printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
             printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
 
-            if (transparent)
-              printer.fill(0);      // transparent background
-            else
-              printer.fill(-1);     // white background
+            printer.fill(transparent ? 0 : 0xffffffff);
 
               if( format == QImage::Format_Indexed8){
                 //convert to grayscale & respect alpha
@@ -1674,10 +1673,10 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                 }else{
                   for (int i = 1; i < 256; i++)
                     colorTable.push_back(QColor(0, 0, 0, i).rgba());
-                }            
+                }
                 printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
               }
-            
+
             double m = convDpi / PDPI;
             QPainter p(&printer);
             canvas()->paintLasso(p, m);
@@ -1710,14 +1709,11 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   int h = lrint(r.height() * convDpi / DPI);
 
                   QImage printer(w, h, f);
-                    
+
                   printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
                   printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
 
-                  if (transparent)
-                    printer.fill(0);      // transparent background
-                  else
-                    printer.fill(-1);     // white background
+                  printer.fill(transparent ? 0 : 0xffffffff);
 
                   double mag = convDpi / DPI;
                   QPainter p(&printer);
@@ -1755,7 +1751,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                     }else{
                       for (int i = 1; i < 256; i++)
                         colorTable.push_back(QColor(0, 0, 0, i).rgba());
-                    }            
+                    }
                     printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
                   }
 
