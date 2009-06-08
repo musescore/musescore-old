@@ -292,15 +292,14 @@ bool Score::saveFile(bool autosave)
       // the original file in case of "disc full"
       //
 
-      QTemporaryFile temp(info.path() + "/msXXXXXX." + suffix);
-      temp.setAutoRemove(false);
-      if (!temp.open()) {
-            QString s = tr("Open Temp File\n") + temp.fileName() + tr("\nfailed: ")
+      QString tempName = info.fileName() + QString(".temp");
+      QFile temp(tempName);
+      if (!temp.open(QIODevice::WriteOnly)) {
+            QString s = tr("Open Temp File\n") + tempName + tr("\nfailed: ")
                + QString(strerror(errno));
             QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
             return false;
             }
-      QString tempName = temp.fileName();
       try {
             if (suffix == "msc" || suffix == "mscx")
                   saveFile(&temp, autosave);
@@ -313,7 +312,7 @@ bool Score::saveFile(bool autosave)
             }
       if (temp.error() != QFile::NoError)
             QMessageBox::critical(mscore, tr("MuseScore: Save File failed: "), temp.errorString());
-      temp.close();   //?
+      temp.close();
 
       //
       // step 2
