@@ -1169,7 +1169,7 @@ void MuseScore::dragEnterEvent(QDragEnterEvent* event)
                   if (debugMode)
                         printf("drag Url: %s\n", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
-                        QFileInfo fi(u.path());
+                        QFileInfo fi(u.toLocalFile());
                         event->acceptProposedAction();
                         break;
                         }
@@ -1190,7 +1190,7 @@ void MuseScore::dropEvent(QDropEvent* event)
                   if (u.scheme() == "file") {
                         Score* score = new Score(defaultStyle);
                         score->addViewer(new Canvas);
-                        score->read(u.path());
+                        score->read(u.toLocalFile());
                         appendScore(score);
                         lastScore = score;
                         }
@@ -1403,7 +1403,7 @@ void MuseScore::removeTab(int i)
       tab->blockSignals(false);
       cs = 0;
       if (i >= (n-1))
-            i = 0;
+            i = n-2;
       setCurrentScore(scoreList.isEmpty() ? 0 : scoreList[i]);
       delete score;
       }

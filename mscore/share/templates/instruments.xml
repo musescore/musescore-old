@@ -1164,8 +1164,8 @@
          <name>C Trumpet</name>
          <short-name>C Tpt.</short-name>
          <clef>0</clef>
-         <aPitchRange>55-82</aPitchRange>
-         <pPitchRange>55-85</pPitchRange>
+         <aPitchRange>54-82</aPitchRange>
+         <pPitchRange>54-85</pPitchRange>
          <channel>
             <program>56</program>
             </channel>
@@ -1178,8 +1178,8 @@
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
-         <aPitchRange>53-80</aPitchRange>
-         <pPitchRange>53-83</pPitchRange>
+         <aPitchRange>52-80</aPitchRange>
+         <pPitchRange>52-85</pPitchRange>
          <channel>
             <program>56</program>
             </channel>

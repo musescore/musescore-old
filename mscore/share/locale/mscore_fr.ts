@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Ukrajina</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrajina - Ukrainien</translation>
     </message>
 </context>
 <context>
@@ -100,8 +100,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1843 revised JLWaltener 23/05/2009 - QT Linguist v4.5.1</translatorcomment>
-        <translation>Révision : 1843</translation>
+        <translatorcomment>r1869 revised JLWaltener 13/06/2009 - QT Linguist v4.5.1</translatorcomment>
+        <translation>Révision : 1869</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -133,7 +133,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer et autres Contributeurs.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visitez &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; pour les nouvelles versions et&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;plus d&apos;information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1048,7 +1056,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>sans hampe</translation>
     </message>
 </context>
 <context>
@@ -1412,7 +1420,7 @@ failed: </source>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Sans hampe</translation>
     </message>
 </context>
 <context>
@@ -1799,23 +1807,23 @@ failed: </source>
     </message>
     <message>
         <source>right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Marge droite</translation>
     </message>
     <message>
         <source>clef-key distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance entre la clef et l&apos;armature</translation>
     </message>
     <message>
         <source>clef-barline distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance entre la clef et la barre de mesure</translation>
     </message>
     <message>
         <source>chord description file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier de déscription d&apos;accord</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2718,7 +2726,7 @@ failed: </source>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Sans hampe</translation>
     </message>
 </context>
 <context>
@@ -6429,15 +6437,15 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Ouvrir fichier de déscription d&apos;accord</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Déscription d&apos;accord MuseScore (*.xml);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Echec du chargement de la liste d&apos;accords :</translation>
     </message>
 </context>
 <context>
@@ -6688,20 +6696,21 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Echec d&apos;enregistrement de fichier : </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>renommer l&apos;ancien fichier &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>renommer le fichier temporaire &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; échec :
+</translation>
     </message>
 </context>
 <context>

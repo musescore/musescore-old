@@ -1,3 +1,9 @@
+12.jun (db)
+      - fix drag and drop of files on Windows
+      - closing the rightmost tab changes current score to next rightmost
+        tab instead of of reverting to the leftmost tab
+      - correct pitch ranges for Bb and C trumpet
+      - update French translation from JLWaltener
 8.jun (ws)
       - move to Qt4.5.1 for windows cross build
       - fix object inspector crash, when element not found
