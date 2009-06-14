@@ -4,6 +4,7 @@ set OLD_DIR=%CD%
 
 echo TRANSLATIONS = \
 echo       %1/share/locale/mscore_af.ts \
+echo       %1/share/locale/mscore_ar.ts \
 echo       %1/share/locale/mscore_da.ts \
 echo       %1/share/locale/mscore_de.ts \
 echo       %1/share/locale/mscore_ru.ts \
