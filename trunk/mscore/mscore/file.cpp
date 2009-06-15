@@ -1626,7 +1626,7 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
-      return savePng(name, !preferences.pngScreenShot, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
+      return savePng(name, preferences.pngScreenShot, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
       }
 
 //---------------------------------------------------------
