@@ -37,8 +37,8 @@
     </font>
 
   <font id="1" family="Mscore1">
-    <sym code="0x5e" name="b"/>
-    <sym code="0x5f" name="#"/>
+    <sym code="0xe10d" name="b"/>
+    <sym code="0xe10c" name="#"/>
     </font>
 
 
@@ -298,12 +298,6 @@
   <chord id="64">
     <name>7</name>
     <xml>dominant</xml>
-    <voicing>C E G Bb</voicing>
-    <render>7</render>
-    </chord>
-  <chord id="64">
-    <name>7</name>
-    <xml>dominant-seventh</xml>
     <voicing>C E G Bb</voicing>
     <render>7</render>
     </chord>

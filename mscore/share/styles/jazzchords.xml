@@ -308,12 +308,6 @@
     <voicing>C E G Bb</voicing>
     <render>7</render>
     </chord>
-  <chord id="64">
-    <name>7</name>
-    <xml>dominant-seventh</xml>
-    <voicing>C E G Bb</voicing>
-    <render>7</render>
-    </chord>
   <chord id="65">
     <name>13</name>
     <xml>dominant-13th</xml>
