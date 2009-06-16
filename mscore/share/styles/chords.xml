@@ -30,14 +30,15 @@
 <!--
       Part I: font list
             associate symbols (code points) with names
-      If no font family given, the text style font family is used.
+      If no font family is given or font family is "default" then the
+      configured text style font family is used.
 -->
 
-  <font id="0">
+  <font id="0">   <!-- use chord name text style font -->
     </font>
 
   <font id="1" family="Mscore1">
-    <sym code="0xe10d" name="b"/>
+    <sym code="0xe10d" name="b"/>   <!-- use symbols for accidentals -->
     <sym code="0xe10c" name="#"/>
     </font>
 
