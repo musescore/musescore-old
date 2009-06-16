@@ -971,7 +971,7 @@ void ChordList::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "font") {
-                  fontFaces.append(e.attribute("family"));
+                  fontFaces.append(e.attribute("family", "default"));
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString val(ee.text());
                         if (ee.tagName() == "sym") {
@@ -1144,12 +1144,14 @@ void Harmony::render()
 
       fontList.clear();
       foreach(QString s, chordList->fontFaces) {
-            QFont font(f);
+            if (s.isEmpty() || s == "default")
+                  fontList.append(f);
+            else {
 #ifdef Q_WS_MAC
-            s += " 20";
+                  s += " 20";
 #endif
-            font.setFamily(s);
-            fontList.append(font);
+                  fontList.append(QFont(s));
+                  }
             }
       if (fontList.isEmpty())
             fontList.append(f);
