@@ -62,7 +62,7 @@
 -->
 
   <renderRoot>:n :a</renderRoot>
-  <renderBase>:n :a</renderBase>
+  <renderBase>:n :a / :n :a</renderBase>
 
   <chord id="1">
     <name></name>
