@@ -5,6 +5,8 @@
       (db)
       - fix display of root notes for regular chords.xml
       - update Dutch translation and instruments file from Jaap Plaisier
+      (tb)
+      - committing draft of Arabic translation by HosAdeeb
 12.jun (db)
       - fix drag and drop of files on Windows
       - closing the rightmost tab changes current score to next rightmost
