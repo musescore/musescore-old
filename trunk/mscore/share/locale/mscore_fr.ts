@@ -83,6 +83,10 @@
         <source>Ukrajina</source>
         <translation>Ukrajina - Ukrainien</translation>
     </message>
+    <message>
+        <source>Arabic</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
