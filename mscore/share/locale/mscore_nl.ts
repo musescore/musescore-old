@@ -1,121 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl">
-<defaultcodec></defaultcodec>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
         <source>system</source>
-        <translation>systeem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Tsjechisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dansk</source>
-        <translation>Deens</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nederlands</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation>Engels (GB)</translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation>Engels (US)</translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation>Spaans</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>Frans</translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation>Galiciaans</translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation>Duits</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation>Hindisch</translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation>Italiaans</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation>Portugees</translation>
-    </message>
-    <message>
-        <source>Brasilian PortuguÃªs</source>
-        <translation>Braziliaans Portugees</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>Turks</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation>Fins</translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation>Zweeds</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Norsk</source>
-        <translation>Noors</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (GB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (US)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EspaÃ±ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FranÃ§ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TÃ¼rkÃ§e</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ukrajina</source>
-        <translation>Oekraïens</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer en Anderen. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Zie http://www.musescore.org voor nieuwe versies en&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;meer informatie.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Gepubliceerd onder de GNU Publieke Licensie&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -125,6448 +116,6402 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Zie &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; voor nieuwe versies en&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;meer informatie.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Gepubliseerd onder de GNU General Publieke Licensie&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Onstabiele Pre-vrijgave voor Versie:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Versie:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation>Revisie: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Articulatie Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>normal</source>
-        <translation>normaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Articulatie Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Kanaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Aktie</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Maatstreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation>SubType:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Frame Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation>Marges</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>left:</source>
-        <translation>links:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>right:</source>
-        <translation>rechts:</translation>
-    </message>
-    <message>
-        <source>top:</source>
-        <translation>boven:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation>onder:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Canvas</name>
     <message>
         <source>Object Inspector</source>
-        <translation>Inspecteer Objecten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Notenbalk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Bewerk Drumset...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Notenbalk Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Maat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>Akkoord</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>Stok</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>Haak</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <translation>Korte Voorslag</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <translation>Stokrichting</translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <translation>Hulplijnen:</translation>
-    </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation>Articulaties/Versieringen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chord</source>
         <comment>do not translate</comment>
-        <translation>Akkoord</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem</source>
         <comment>do not translate</comment>
-        <translation>Stok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hook</source>
         <comment>do not translate</comment>
-        <translation>Haak</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grace Note</source>
         <comment>do not translate</comment>
-        <translation>Korte Voorslag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem Direction</source>
         <comment>do not translate</comment>
-        <translation>Stokrichting</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Notes:</source>
         <comment>do not translate</comment>
-        <translation>Notities:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
         <comment>do not translate</comment>
-        <translation>Hulplijnen:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Harmonie Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TekstLabel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Root</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>E</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (dubbele mol)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (mol)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>G</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(geen voorteken)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source># (sharp)</source>
-        <translation># (kruis)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## (dubbele kruis)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>D</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Extension</source>
-        <translation>Uitbreiding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2</source>
-        <translation>2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>6</source>
-        <translation>6</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>69</source>
-        <translation>69</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m7b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7</source>
-        <translation>7</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7Sus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m6</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mMaj7</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dim</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9</source>
-        <translation>9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13</source>
-        <translation>13</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Other:</source>
-        <translation>Andere:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5b</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>aug</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj13#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>maug</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m7#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m69</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj7Lyd</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m9b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13+</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(blues)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#11</source>
-        <translation>7#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation>13#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#11</source>
-        <translation>9#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b9#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#9</source>
-        <translation>7#9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation>13#9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#9#11</source>
-        <translation>13#9#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#9#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9b5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9b5b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13b5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5b9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13b5#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b5#9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5</source>
-        <translation>7#5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation>13#5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation>7#5#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation>13#5#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation>9#5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation>9#5#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5#9</source>
-        <translation>7#5#9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation>13#5#9#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation>7#5#9#11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7alt</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9sus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9susb13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9sus#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9sus#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13susb9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13susb9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb9#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#9#11b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13susb5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9susb5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9susb5b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13susb5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5b9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13susb5#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7susb5#9b13</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#5#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9sus#5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9sus#5#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#5b9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#5b9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5#9</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13sus#5#9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7sus#5#9#11</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4</source>
-        <translation>4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Graden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Bas Noot/Inversie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>none</source>
-        <translation>niets</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/Db</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/D</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/Eb</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/E</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/F</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/F#</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/G</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/Ab</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/A</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/Bb</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/B</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3</source>
-        <translation>3</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Akkoord Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>small</source>
-        <translation>klein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>no stem</source>
-        <translation>zonder stok</translation>
+        <source>stemless</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra spatie links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra spatie rechts</translation>
-    </message>
-    <message>
-        <source>Note Properties</source>
-        <translation>Noten Eigenschappen</translation>
-    </message>
-    <message>
-        <source>tuning offset</source>
-        <translation>stem compensatie</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>procent</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translatorcomment>stokrichting</translatorcomment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>up</source>
-        <translatorcomment>omhoog</translatorcomment>
-        <translation>up</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>down</source>
-        <translation>omlaag</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation>notenkop positie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation>links van de stok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation>rechts van de stok</translation>
-    </message>
-    <message>
-        <source>stemless</source>
-        <translation>Zonder stok</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ChordRest</source>
-        <translation>AkkoordRust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Waardestreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Tuplet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Attributes:</source>
-        <translation>Attributen:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Omhoog</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>Is omhoog</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>Waardestreep Modus:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dots:</source>
-        <translation>Punten:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>isUp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Look for three note chords and</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove  bottom note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove middle note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove top note</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamiek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Maak Onzichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Maak Zichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Midi Properties...</source>
-        <translation>Midi Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekst Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dynamic</source>
-        <translation>Dynamiek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation>Sub Type:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Tekst Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Midi Values</source>
-        <translation>Midi Waarden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Snelheid:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>uitlijnen links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>valid for:</source>
-        <translation>geldig voor:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>staff</source>
-        <translation>notenbalk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>part</source>
-        <translation>partij</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>system</source>
-        <translation>systeem</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align left</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditDrumset</name>
     <message>
         <source>invalid</source>
-        <translation>ongeldig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Normal Head</source>
-        <translation>Normaal Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cross Head</source>
-        <translation>Kruis Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Diamond Head</source>
-        <translation>Diamond Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Triangle Head</source>
-        <translation>Triangel Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load</source>
-        <translation>Laad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
-        <translation>MuseScore: Laad Drumset</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore drumset (*.drm)</source>
-        <translation>MuseScore drumset (*.drm)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
-        <translation>MuseScore: Opslaan Drumset</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation>Open Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>mislukt:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation>MuseScore: Open Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation>MuseScore: Schrijf Drumset</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditDrumsetBase</name>
     <message>
         <source>MuseScore: Edit Drumset</source>
-        <translation>MuseScore: Bewerk Drumset</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Naam:</translation>
-    </message>
-    <message>
-        <source>Note Head:</source>
-        <translation>Noten Hoofd:</translation>
-    </message>
-    <message>
-        <source>Staff Line:</source>
-        <translation>Notenbalk Lijn:</translation>
-    </message>
-    <message>
-        <source>Stem Direction:</source>
-        <translation>Stokrichting:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>Automatisch</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Boven</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Onder</translation>
-    </message>
-    <message>
-        <source>Default Voice:</source>
-        <translation>Standaard Stem:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation>Toonhoogte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Noot</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Snelkoppeling</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Head:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Voice:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation>Snelkoppeling:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <translation>A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>E</source>
-        <translation>E</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <translation>F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>G</source>
-        <translation>G</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--</source>
-        <translation>--</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>Bewerk Instrumet Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>Instrument Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Short Name</source>
-        <translation>Korte Naam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>min. Pitch</source>
-        <translation>min. Toonhoogte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>max. Pitch</source>
-        <translation>max. Toonhoogte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transponeer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation>Midi Programma</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Notenbalken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Bewerk Notenbalk/Part Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>Notenbalk Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lines:</source>
-        <translation>Lijnen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Klein</translation>
-    </message>
-    <message>
-        <source>Part Properties</source>
-        <translation>Part Eigenschappen</translation>
-    </message>
-    <message>
-        <source>Long Instrument Name:</source>
-        <translation>Lange InstrumentNaam:</translation>
-    </message>
-    <message>
-        <source>Short Instrument Name:</source>
-        <translation>Korte InstrumentNaam:</translation>
-    </message>
-    <message>
-        <source>Play Transposition (Semitones)</source>
-        <translation>Speel Transpositie (Halve tonen)</translation>
-    </message>
-    <message>
-        <source>Use Drumset</source>
-        <translation>Gebruik Drumset</translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation>Bewerk Drumset...</translation>
-    </message>
-    <message>
-        <source>Slash Style</source>
-        <translation>Schuine Stijl</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Zonder stok</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Long Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Transposition (Semitones)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation>Symbool</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation>Bevestig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation>Bovenste Notenbalk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation>Onderste Notenbalk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation>Akkoord</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: Bewerk Style</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Pagina</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Maat</translation>
-    </message>
-    <message>
-        <source>Numbers</source>
-        <translation>Nummers</translation>
-    </message>
-    <message>
-        <source>Beams</source>
-        <translation>Waardestrepen</translation>
-    </message>
-    <message>
-        <source>Sizes</source>
-        <translation>Groottes</translation>
-    </message>
-    <message>
-        <source>Hairpins</source>
-        <translation>Crescendotekens</translation>
-    </message>
-    <message>
-        <source>Chordnames</source>
-        <translation>Akkoordnamen</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Toon reële
-toonhoogte</translation>
-    </message>
-    <message>
-        <source>Create Multi Measure Rests</source>
-        <translation>Creëer Multi Maat Rusten</translation>
-    </message>
-    <message>
-        <source>Hide Empty Staves</source>
-        <translation>Verberg Lege Notenbalken</translation>
-    </message>
-    <message>
-        <source>staff upper border</source>
-        <translation>notenbalk bovengrens</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <translation>sp</translation>
-    </message>
-    <message>
-        <source>staff lower border</source>
-        <translation>notenbalk ondergrens</translation>
-    </message>
-    <message>
-        <source>staff distance</source>
-        <translation>notenbalk afstand</translation>
-    </message>
-    <message>
-        <source>akkolade distance</source>
-        <translation>akkolade afstand</translation>
-    </message>
-    <message>
-        <source>system distance</source>
-        <translation>systeem afstand</translation>
-    </message>
-    <message>
-        <source>lyrics top distance</source>
-        <translation>woorden bovengrens</translation>
-    </message>
-    <message>
-        <source>lyrics bottom dist.</source>
-        <translation>woorden ondergrens.</translation>
-    </message>
-    <message>
-        <source>staff v-frame dist.</source>
-        <translation>notenbalk v-kadergrens.</translation>
-    </message>
-    <message>
-        <source>v-frame staff dist.</source>
-        <translation>v-kader notenbalkgrens.</translation>
-    </message>
-    <message>
-        <source>Page fill threshold:</source>
-        <translation>De pagina vult drempel:</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation>%</translation>
-    </message>
-    <message>
-        <source>Last system fill threshold</source>
-        <translation>Het laatste systeem vult drempel</translation>
-    </message>
-    <message>
-        <source>Create clef for all systems</source>
-        <translation>Creëer sleutel voor alle systemen</translation>
-    </message>
-    <message>
-        <source>Create time signatures</source>
-        <translation>Creëer Maatsoort</translation>
-    </message>
-    <message>
-        <source>Create key sig for all systems</source>
-        <translation>Creëer toonsoort voor alle systemen</translation>
-    </message>
-    <message>
-        <source>Create courtesy time signatures</source>
-        <translation>Creëer herrinnering maatsoort </translation>
-    </message>
-    <message>
-        <source>spacing (1=tight)</source>
-        <translation>spaties (1=vast)</translation>
-    </message>
-    <message>
-        <source>left margin</source>
-        <translation>linker marge</translation>
-    </message>
-    <message>
-        <source>spaces</source>
-        <translation>spaties</translation>
-    </message>
-    <message>
-        <source>min note distance</source>
-        <translation>min. noten afstand</translation>
-    </message>
-    <message>
-        <source>clef left margin</source>
-        <translation>sleutel linker marge</translation>
-    </message>
-    <message>
-        <source>keysig left margin</source>
-        <translation>toonsoort linker marge</translation>
-    </message>
-    <message>
-        <source>timesig left margin</source>
-        <translation>maatsoort linker marge</translation>
-    </message>
-    <message>
-        <source>Page Numbers</source>
-        <translation>Pagina Nummers</translation>
-    </message>
-    <message>
-        <source>show first</source>
-        <translation>toon eerst</translation>
-    </message>
-    <message>
-        <source>odd/even</source>
-        <translation>oneven/even</translation>
-    </message>
-    <message>
-        <source>Measure Numbers</source>
-        <translation>Maat Nummers</translation>
-    </message>
-    <message>
-        <source>all staffs</source>
-        <translation>alle notenbalken</translation>
-    </message>
-    <message>
-        <source>every system</source>
-        <translation>elk systeem</translation>
-    </message>
-    <message>
-        <source>interval</source>
-        <translation>interval</translation>
-    </message>
-    <message>
-        <source>beam width</source>
-        <translation>waardestreep breedte</translation>
-    </message>
-    <message>
-        <source>beam distance</source>
-        <translation>waardestreep afstand</translation>
-    </message>
-    <message>
-        <source>min. len</source>
-        <translation>minimum len</translation>
-    </message>
-    <message>
-        <source>min. slope</source>
-        <translation>minimum helling</translation>
-    </message>
-    <message>
-        <source>max. slope</source>
-        <translation>maximum helling</translation>
-    </message>
-    <message>
-        <source>beam width units</source>
-        <translation>waardestreep met eenheden</translation>
-    </message>
-    <message>
-        <source>Small Staff Size</source>
-        <translation>Grootte van Kleine Notenbalk</translation>
-    </message>
-    <message>
-        <source>Small Note Size</source>
-        <translation>Grootte van Kleine Noten</translation>
-    </message>
-    <message>
-        <source>Grace Note Size</source>
-        <translation>Grootte van voorslagen</translation>
-    </message>
-    <message>
-        <source>Small Clef Size</source>
-        <translation>Grootte van Kleine Sleutel</translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation>Lijn breedte</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Hoogte</translation>
-    </message>
-    <message>
-        <source>Continue Height</source>
-        <translation>Zet Hoogte voort</translation>
-    </message>
-    <message>
-        <source>use german names</source>
-        <translation>gebruik duitse namen</translation>
-    </message>
-    <message>
-        <source>use symbols</source>
-        <translation>gebruik symbolen</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Toepassen</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <source>Articulations, Ornaments</source>
-        <translation>Articulaties/Versieringen</translation>
-    </message>
-    <message>
-        <source>Voices</source>
-        <translation>Stemmen</translation>
-    </message>
-    <message>
-        <source>articulation - note head distance</source>
-        <translation>articulatie - notenhoofd afstand</translation>
-    </message>
-    <message>
-        <source>articulation - note stem distance</source>
-        <translation>ariculatie - notenstok afstand</translation>
-    </message>
-    <message>
-        <source>articulation - articulation distance</source>
-        <translation>articulatie - articulatie afstand</translation>
-    </message>
-    <message>
-        <source>Stem Direction in multi voice context</source>
-        <translation>De Richting van de stok in multistemcontext</translation>
-    </message>
-    <message>
-        <source>Voice 1</source>
-        <translation>Stem 1</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Boven</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Onder</translation>
-    </message>
-    <message>
-        <source>Voice 2</source>
-        <translation>Stem 2</translation>
-    </message>
-    <message>
-        <source>Voice 3</source>
-        <translation>Stem 3</translation>
-    </message>
-    <message>
-        <source>Voice 4</source>
-        <translation>Stem 4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Systeem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Bracket Distance:</source>
-        <translation>Systeem Groep Afstand:</translation>
-    </message>
-    <message>
-        <source>Minumum width of measure:</source>
-        <translation>Minimum breedte van de maten:</translation>
-    </message>
-    <message>
-        <source>Minimum Number of empty measures:</source>
-        <translation>Minimum aantal lege maten:</translation>
-    </message>
-    <message>
-        <source>begin repeat left margin</source>
-        <translation>linkermarge bij begin herhaling</translation>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Noten</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beams</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hairpins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chordnames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulations, Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Multi Measure Rests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide Empty Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff upper border</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff lower border</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>akkolade distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lyrics top distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lyrics bottom dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff v-frame dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>v-frame staff dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last system fill threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create clef for all systems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create time signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create key sig for all systems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create courtesy time signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Bracket Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>spacing (1=tight)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>clef left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>keysig left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>timesig left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>clef-key distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>clef-barline distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shorten stems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shortest stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accidental note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accidental distance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note dot distance</source>
-        <translation>noot punt afstand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dot dot distance</source>
-        <translation>dubbele punt afstand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ledger line width</source>
-        <translation>hulplijn breedte</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>odd/even</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all staffs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>every system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min. len</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min. slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>max. slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam width units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Staff Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Note Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Clef Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>use german names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chord description file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>articulation - note head distance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation>sp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>use jazz font</source>
-        <translation>gebruik jazzfont</translation>
+        <source>articulation - note stem distance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>accidental note distance</source>
-        <translation>voorteken noot afstand</translation>
+        <source>articulation - articulation distance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>accidental distance</source>
-        <translation>voorteken afstand</translation>
+        <source>Stem Direction in multi voice context</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>shorten stems</source>
-        <translation>korte stokken</translation>
+        <source>Voice 1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>progression</source>
-        <translation>progressie</translation>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>shortest stem</source>
-        <translation>korte stok</translation>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>right margin</source>
-        <translation>rechter marge</translation>
+        <source>Voice 2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>clef-key distance</source>
-        <translation>Astand Sleutel Toonsoortaanduiding</translation>
+        <source>Voice 3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>clef-barline distance</source>
-        <translation>Astand Sleutel Maatstreep</translation>
+        <source>Voice 4</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>chord description file</source>
-        <translation>akkoord beschrijving betand</translation>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditTempoBase</name>
     <message>
+        <source>MuseScore: Tempo Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>BPM:</source>
-        <translation>BPM:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <source>MuseScore: Tempo Text</source>
-        <translation>MuseScore: Tempo Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Maak Onzichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Maak Zichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color...</source>
-        <translation>Kleur...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation>Huidige</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
-        <source>invalid</source>
-        <translation>ongeldig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Element</source>
         <comment>do not translate</comment>
-        <translation>Element</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>selected</source>
         <comment>do not translate</comment>
-        <translation>geselecteerde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>generated</source>
         <comment>do not translate</comment>
-        <translation>gegenereerde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>visible</source>
         <comment>do not translate</comment>
-        <translation>zichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation>systeem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>subtype</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Voice</source>
         <comment>do not translate</comment>
-        <translation>Stem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff</source>
         <comment>do not translate</comment>
-        <translation>Notenbalk</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation>Maatsoorten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Len</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
         <comment>do not translate</comment>
-        <translation>Kleur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pos</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPos</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset</source>
         <comment>do not translate</comment>
-        <translation>Compensatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BBox</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation>Keuze menu</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Stemmen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Selecteer Stem:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Bewerk Stem:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Naam:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titel:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Instrument:</source>
-        <translation>Instrument:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Creëer Stem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation>Glissando Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation>MuseScore: Glissando Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Text</source>
-        <translation>Toon Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GreendotButton</name>
     <message>
         <source>record</source>
-        <translation>opnemen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HBox</name>
     <message>
         <source>Add Text</source>
-        <translation>Tekst toevoegen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>HBoxEigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HairpinBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hairpin</source>
-        <translation>Crescendoteken/Decrescendoteken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tick1:</source>
-        <translation>Tik1:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tick2:</source>
-        <translation>Tik2:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Harmonie Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Image</name>
     <message>
         <source>Image</source>
-        <translation>Afbeelding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Afbeelding Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImageProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Akkoord Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>lock aspect ratio</source>
-        <translation>slot aspectverhouding</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation>MuseScore: Midi Import</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
-        <translation>Kortste noot bij importeren:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/4</source>
-        <translation>1/4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation>1/8</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation>1/16</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation>1/32</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation>1/64</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation>1/128</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation>Maten Invoegen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation>Voeg lege maten in:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation>Aantal in te voegen maten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
-        <translation>MuseScore: Creëer Instrumenten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg Toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Omhoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Naar Beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bewerk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Toevoegen boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Toevoegen beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load</source>
-        <translation>Laad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Instrumentenlijst</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>InstrumentWizard</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Toevoegen boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Toevoegen beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
-    </message>
-    <message>
-        <source>Staves</source>
-        <translation>Notenbalken</translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation>Sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrumenten Lijst</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>InstrumentsDialog</name>
     <message>
+        <source>Staff %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Staves</source>
-        <translation>Notenbalken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
-        <translation>MuseScore: Opslaan Instrumenten Lijst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation>MuseScore Instrumenten (*.xml);;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>Open Instrumenten Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>mislukt:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore: Open Instrumenten Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Schrijf Stijl</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation>MuseScore: Laad Instrumenten Lijst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation>MuseScore Instrumenten (*.xml);;All files (*)</translation>
-    </message>
-    <message>
-        <source>Staff %1</source>
-        <translation>Notenbalk %1</translation>
-    </message>
-    <message>
-        <source>Instrument List</source>
-        <translation>Instrumenten Lijst</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation>Sprong Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>JumpPropertyBase</name>
     <message>
         <source>Jump Properties</source>
-        <translation>Sprong Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jump to:</source>
-        <translation>Spring naar:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Play until:</source>
-        <translation>Afspelen tot:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Continue at:</source>
-        <translation>Ga verder bij:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
-        <translation>MuseScore: Notenbalk Eigenschappen</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation>Kleur:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
-        <translation>Lijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Breedte:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line style:</source>
-        <translation>De stijl van de lijn:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>vast</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dash</source>
-        <translation>streepje</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>punt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dash dot</source>
-        <translation>streepje punt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dash dot dot</source>
-        <translation>streepje punt punt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hook</source>
-        <translation>Haak</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Boven</translation>
-    </message>
-    <message>
-        <source>Begin</source>
-        <translation>Begin</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Ped (Pedal)</source>
-        <translation>Ped (Pedaal)</translation>
-    </message>
-    <message>
-        <source>x:</source>
-        <translation>x:</translation>
-    </message>
-    <message>
-        <source>y:</source>
-        <translation>y:</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation>Doorgaan</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation>Einde</translation>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>diagonally</source>
-        <translation>diagonaal</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>place:</source>
-        <translation>plaats:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Above</source>
-        <translation>Boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Symb.</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>LineSegment</source>
-        <translation>LijnSegment</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SegmentType:</source>
-        <translation>SegmentType:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SINGLE</source>
-        <translation>ENKEL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BEGIN</source>
-        <translation>BEGIN</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MIDDLE</source>
-        <translation>MIDDEN</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>END</source>
-        <translation>EIND</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pos2</source>
-        <translation>Pos2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset2</source>
-        <translation>Offset2</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Woorden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Syllabic:</source>
-        <translation>Syllabisch:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Single</source>
-        <translation>Enkel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>Begin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Einde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Middle</source>
-        <translation>Centreer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Row:</source>
-        <translation>Rij:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End Tick:</source>
-        <translation>Einde Tik:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MagBox</name>
     <message>
-        <source>Zoom Canvas</source>
-        <translation>beeld partituur vergroten/verkleinen</translation>
+        <source>Magnification</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Magnification</source>
-        <translation>vergroot/verklein</translation>
+        <source>Zoom Canvas</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Marker</name>
     <message>
         <source>Marker Properties...</source>
-        <translation>Teller Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MarkerPropertyBase</name>
     <message>
         <source>Marker Properties</source>
-        <translation>Teller Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation>Label:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation>Maat Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Maat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line Break</source>
-        <translation>Lijn Einde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page Break</source>
-        <translation>Pagina Einde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Irregular</source>
-        <translation>Onregelmatig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>StartRepeat</source>
-        <translation>Begin Herhaling</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No.:</source>
-        <translation>No.:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Beams:</source>
-        <translation>Waardestrepen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stretch:</source>
-        <translation>Rek:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PageElem:</source>
-        <translation>PaginaElem:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staves:</source>
-        <translation>Notenbalken:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NoOffset:</source>
-        <translation>NoOffset:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuplets:</source>
-        <translation>Tuplets:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segments:</source>
-        <translation>Segmenten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>EndRep:</source>
-        <translation>EindRep:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>RepeatFLags:</source>
-        <translation>HerhaalVlaggen:</translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>Elementen:</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Element</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>previous</source>
-        <translation>vorige</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>next</source>
-        <translation>volgende</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subtype</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
-        <translation>MuseScore: Maat Eigenschappen</translation>
-    </message>
-    <message>
-        <source>Measure Duration</source>
-        <translation>Maatduur</translation>
-    </message>
-    <message>
-        <source>nominal</source>
-        <translation>weergave</translation>
-    </message>
-    <message>
-        <source>/</source>
-        <translation>/</translation>
-    </message>
-    <message>
-        <source>actual</source>
-        <translation>actueel</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation>Ander</translation>
-    </message>
-    <message>
-        <source>do not count</source>
-        <translation>niet tellen</translation>
-    </message>
-    <message>
-        <source>irregular</source>
-        <translation>onregelmatig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Notenbalken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Notenbalk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation>Zichtbaar</translation>
-    </message>
-    <message>
-        <source>SlashStyle</source>
-        <translation>Schuine Stijl</translation>
-    </message>
-    <message>
-        <source>break multi measure rest</source>
-        <translation>pauze rust bij meerdere maten </translation>
-    </message>
-    <message>
-        <source>add to measure number</source>
-        <translation>voeg toe aan maatnummer</translation>
-    </message>
-    <message>
-        <source>layout stretch</source>
-        <translation>indeling uittrekken</translation>
-    </message>
-    <message>
-        <source>repeat count:</source>
-        <translation>herhaal telling:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Zonder stok</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>nominal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>actual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>do not count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>irregular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation>Mscore: Maten Toevoegen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation>Voeg lege maten toe:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation>Aantal toe te voegen maten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuNotes</name>
     <message>
         <source>Notes</source>
-        <translation>Noten</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MetaEditDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Work Title:</source>
-        <translation>Werk Titel:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Work Number:</source>
-        <translation>Werk Nummer:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Movement Title:</source>
-        <translation>Titel van Beweging:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Movement Number:</source>
-        <translation>Nummer van Beweging:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Source:</source>
-        <translation>Bron:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MuseScore</name>
     <message>
         <source>file open</source>
-        <translation>bestand openen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation>Open...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load Score from File</source>
-        <translation>Laad Partituur van Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file save</source>
-        <translation>Sla bestand op</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Score to File</source>
-        <translation>Bewaar Partituur als Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file save as</source>
-        <translation>bestand opslaan als</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Opslaan als...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Score to named File</source>
-        <translation>Bewaar Partituur als genoemd Bestand</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>bestand sluiten</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Sluiten</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Huidig Partituur Afsluiten</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>nieuw bestand</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>Creëer een nieuw Partituur</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Print...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Print Partituur</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>maak ongedaan </translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Maak ongedaan </translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>maak laatste verandering ongedaan</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>doe over</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>Herstel</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>Herstel het laatst ongedaan maken</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>knip</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Knip</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>kopieer</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopieer</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>plakken</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>Plakken</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>Toon instrumentendialoog</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>Instrumenten...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Toon Instrumentendialoog</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>toon sleutelspalet</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Sleutels...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Toon SleutelsPallet</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>show toonsoortenplallet</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Toonsoorten...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Toon ToonsoortenPallet</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>toon symbolenpallet</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Symbolen...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>Toon SymbolenPallet</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>toon maatsoortenpallet</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Maatsoort...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Toon MaatsoortenPallet</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>toon dynamiektekenspallet</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Dynamiek...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Toon DynamiekTekensPallet</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>noten invoer</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>Noten Invoer</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>activeer/deactiveer noten invoermodus</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>noteer toonhoogte</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Noteer Toonhoogte</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>eenstemmig</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>tweede erboven</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>enter derde erboven</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>enter vierde erboven</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>enter vierde erboven</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>enter zesde erboven</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>enter zevende erboven</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation>enter achtste erboven</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>enter negende erboven</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>enter tweede eronder</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>enter derde eronder</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>enter vierde eronder</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>enter vijfde eronder</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>enter zesde eronder</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>enter zevende eronder</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>enter achtste eronder</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>enter negende eronder</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>enter noot a</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Enter Noot A</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>enter noot b</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>Enter Noot B</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>enter noot c</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Enter Noot C</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>enter noot d</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>Enter Noot D</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>enter noot e</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Enter Noot E</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>enter noot f</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>Enter Noot F</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>enter noot g</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Enter Noot G</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>voeg aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>A toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>Voeg noot A aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>voeg noot b aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>B toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>Voeg noot B aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>voeg noot c aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>C toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>Voeg noot C aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>voeg noot d aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>D toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>Voeg noot D aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>voeg noot e aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>E toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>Voeg noot E aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>voeg noot f aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>F toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>Voeg noot F aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>voeg noot g aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>G toevoegen</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>Voeg noot G aan akkoord toe</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>noteer rust</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>rust</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>staccato invoegen</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>mol</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>triller toevoegen</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>triller</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>meer stretch</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>Afstanden Vergroten</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>Vergroot Afstanden geselecteerde maten</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>minder stretch</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Afstanden Verkleinen</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>Verklein Afstanden geselecteerde maten</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>Terugzetten Waardestreep Mode</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Terugzetten Waardestreep Mode van de geselecfteerde maten</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>verander stokrichting</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>verander stokrichting</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>up</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>hogere noot van het akkoord</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>ga naar hogere noot in het akkoord</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>ga naar hoogste noot in het akkoord</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>hoogste noot van het akkoord</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>omhoog</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation>pijltje omhoog+ shift + ctrl</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>toonhoogte omlaag</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>omlaag</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>octaaf lager</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>pijltje onder + ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>noot omlaag in akkoord</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>ga naar lagere noot in het akkoord</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>ga naar lage noot in het akkoord</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>lage noot in akkoord</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>omlaag</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation>pijltje onder + shift + ctrl</translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>vorige akkoord</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>links</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>vorige maat</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation>links+ctrl</translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>volgende akkoord</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>rechts</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>volgende maat</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>rechts+ctrl</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>pagina-terug</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>pagina-volgende</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>pagina-bovenkant</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>pagina-eind</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>voeg verbindingsboog toe</translation>
-    </message>
-    <message>
-        <source>crescendo</source>
-        <translation>crescendo</translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation>decrescendo</translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation>ESCAPE</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>verwijder</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>voeg maat toe</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>Voeg Maat Toe</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>voeg meerdere maten toe</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>Voeg Meerdere Maten Toe...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>maat invoegen</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>Maat Invoegen</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>meerdere maten invoegen</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>Meerdere Maten Invoegen...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>Horizontaal kader invoegen</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>Verticaal kader invoegen</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>Voeg Horizontaal Kader toe</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>Voeg Verticaall Kader toe</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>Dutool/Duplet</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>Triplet</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>Kwartool</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>Kwintool</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>Sextuplet</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>Septool</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>Octuplet</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>Nonuplet</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>Andere Tuplets</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation>noteer 1/1 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation>noteer 1/2 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation>noteer 1/4 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation>noteer 1/8 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation>noteer 1/16 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation>noteer 1/32 noot</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation>noteer 1/64 noot</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation>polster punt</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation>binden</translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation>polster rust</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>dubbele kruis</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>kruis</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>herstelling</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>dubbele mol</translation>
-    </message>
-    <message>
-        <source>acciaccatura</source>
-        <translation>korte voorslag</translation>
-    </message>
-    <message>
-        <source>appoggiatura</source>
-        <translation>lange voorslag</translation>
-    </message>
-    <message>
-        <source>grace-4</source>
-        <translation>voorslag 1/4</translation>
-    </message>
-    <message>
-        <source>grace-16</source>
-        <translation>voorslag 1/16</translation>
-    </message>
-    <message>
-        <source>grace-32</source>
-        <translation>voorslag 1/32</translation>
-    </message>
-    <message>
-        <source>voice 1</source>
-        <translation>stem 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>stem 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>stem 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>stem 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Enable Midi Input</source>
-        <translation> Midi Input Inschakelen</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>bewerken geluid aan</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>Inschakelen geluid tijdens het bewerken</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>waardestreep start</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>waardestreep mid</translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation>geen waardestreep</translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation>waardestreep 32</translation>
-    </message>
-    <message>
-        <source>auto beam</source>
-        <translation>automatisch paatsen van waardestrepen</translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation>Palet</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>Afspeel Paneel</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navigator</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>Mixer</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>Afspeel Werkbalk</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>Transporteer</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>Noten Invoer Toolbar</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Afsluiten</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation>Keuze menu</translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>Vergroot/Verklein</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Woorden</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>Vingerzetting Pallet</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>Vingerzettingen...</translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation>Vingerzetting</translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation>Tempo Pallet</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation>Tempo...</translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Metronome</source>
-        <translation>Metronoom</translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation>Toevoegen systeem tekst</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>Systeem Tekst</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>Toevoegen tekst notenbalk</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>Notenbalk Tekst</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Tekst Toevoegen</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>Kader Tekst</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>Titel toevoegen</translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation>Titel</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>Add Titel Tekst</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>Subtitel Toevoegen</translation>
-    </message>
-    <message>
-        <source>Subtitle</source>
-        <translation>Subtitel</translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation>Subtitel Toevoegen</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>Toevoegen Componist</translation>
-    </message>
-    <message>
-        <source>Composer</source>
-        <translation>Componist</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>Componist toevoegen</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>Add Dichter</translation>
-    </message>
-    <message>
-        <source>Poet</source>
-        <translation>Dichter</translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation>Toevoegen Dichter Tekst</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>Toevoegen Copyright</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation>Copyright</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>Toevoegen Copyright Tekst</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>Invoegen Akkoord Naam</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>Akkoord Naam</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>Toevoegen Akkoord Tekst</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>toon harmonie eigenschappen akkoord</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>Harmonie Eigenswchappen</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>Invoegen cijfer, letter</translation>
-    </message>
-    <message>
-        <source>Rehearsal Mark</source>
-        <translation>Cijfer-, Letterteken</translation>
-    </message>
-    <message>
-        <source>player play</source>
-        <translation>speler afspelen</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Afspelen</translation>
-    </message>
-    <message>
-        <source>start sequencer play</source>
-        <translation>start sequencer afspelen</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>toggle pauze</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Pauze</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation>linker akkoord</translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>vorige maat</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation>trachten om te beginnen</translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>speler terugspoelen</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Terugspoelen</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>terugspoelen naar startpositie</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation>ga naar einde</translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>herhaling afspelen aan</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>Herhaal</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>afspelen herhalen aan/uit</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>laad stijl</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>Laad Stijl...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>Laad Stijl</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>stijl opslaan </translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Stijl Opslaan...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>Stijl Opslaan</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>selecteer alles</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Selecteer alles</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>transponeer</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>Transponeer...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>Transponeer</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>vioolsleutel</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>bassleutel</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>Verwissel Stem 1-2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>Verwissel Stem 1-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>Verwissel Stem 1-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>Verwissel Stem 2-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>Verwissel Stem 2-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>Verwissel Stem 3-4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>reëele toonhoogte</translation>
-    </message>
-    <message>
-        <source>Concert Pitch</source>
-        <translation>Reële 
-Toonhoogte</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Toon reële 
-Toonhoogte</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>herhaal laatste opdracht</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>Herhaal Laatste Opdracht</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>bewerk partituur meta gegevens</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>Meta Gegevens...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>Meta Gegevens</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>systeem afbreken aan/uit</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>Systeem Afbreken aan/uit</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>pagina  afbreken aan/uit</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>Pagina  Afbreken aan/uit</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Score</source>
-        <translation>MuseScore: Laad Partituur</translation>
-    </message>
-    <message>
-        <source>Untitled</source>
-        <translation>Zonder titel</translation>
-    </message>
-    <message>
-        <source>G major, E minor</source>
-        <translation>G majeur, E mineur</translation>
-    </message>
-    <message>
-        <source>Cb major, Ab minor</source>
-        <translation>Cb majeur, Ab mineur</translation>
-    </message>
-    <message>
-        <source>D major, B minor</source>
-        <translation>D majeur, B mineur</translation>
-    </message>
-    <message>
-        <source>Gb major, Eb minor</source>
-        <translation>Gb majeur, Eb mineur</translation>
-    </message>
-    <message>
-        <source>A major, F# minor</source>
-        <translation>A majeur, F# mineur</translation>
-    </message>
-    <message>
-        <source>Db major, Bb minor</source>
-        <translation>Db majeur, Bb mineur</translation>
-    </message>
-    <message>
-        <source>E major, C# minor</source>
-        <translation>E majeur, C# mineur</translation>
-    </message>
-    <message>
-        <source>Ab major, F minor</source>
-        <translation>Ab majeur, F mineur</translation>
-    </message>
-    <message>
-        <source>B major, G# minor</source>
-        <translation>B majeur, G# mineur</translation>
-    </message>
-    <message>
-        <source>Eb major, C minor</source>
-        <translation>Eb majeur, C mineur</translation>
-    </message>
-    <message>
-        <source>F# major, D# minor</source>
-        <translation>F# majeur, D# mineur</translation>
-    </message>
-    <message>
-        <source>Bb major, G minor</source>
-        <translation>Bb majeur, G mineur</translation>
-    </message>
-    <message>
-        <source>C# major, A# minor</source>
-        <translation>C# majeur, A# mineur</translation>
-    </message>
-    <message>
-        <source>F major,  D minor</source>
-        <translation>F majeur,  D mineur</translation>
-    </message>
-    <message>
-        <source>C major, A minor</source>
-        <translation>C majeur, A mineur</translation>
-    </message>
-    <message>
-        <source>Drums</source>
-        <translation>Drums</translation>
-    </message>
-    <message>
-        <source>Clefs</source>
-        <translation>Sleutels</translation>
-    </message>
-    <message>
-        <source>Keys</source>
-        <translation>Toonsoorten</translation>
-    </message>
-    <message>
-        <source>4/4 common time</source>
-        <translation>4/4 gemeenschappelijke tijd</translation>
-    </message>
-    <message>
-        <source>(2+2)/4 alla breve</source>
-        <translation>(2+2)/4 alla breve</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Maatsoorten</translation>
-    </message>
-    <message>
-        <source>Bar Lines</source>
-        <translation>Maatstrepen</translation>
-    </message>
-    <message>
-        <source>diminuendo</source>
-        <translation>diminuendo</translation>
-    </message>
-    <message>
-        <source>prima volta</source>
-        <translation>prima volta</translation>
-    </message>
-    <message>
-        <source>seconda volta</source>
-        <translation>seconda volta</translation>
-    </message>
-    <message>
-        <source>terza volta</source>
-        <translation>terza volta</translation>
-    </message>
-    <message>
-        <source>seconda volta 2</source>
-        <translation>seconda volta 2</translation>
-    </message>
-    <message>
-        <source>8va</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>15ma</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>8vb</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>15mb</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>pedal</source>
-        <translation>pedaal</translation>
-    </message>
-    <message>
-        <source>trill line</source>
-        <translation>trillerlijn</translation>
-    </message>
-    <message>
-        <source>text line</source>
-        <translation>tekstlijn</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation>Lijnen</translation>
-    </message>
-    <message>
-        <source>arpeggio</source>
-        <translation>gebroken akkoord</translation>
-    </message>
-    <message>
-        <source>glissando</source>
-        <translation>glissando</translation>
-    </message>
-    <message>
-        <source>Arpeggio/Glissando</source>
-        <translation>Arpeggio/Glissando</translation>
-    </message>
-    <message>
-        <source>breath</source>
-        <translation>ademhaling</translation>
-    </message>
-    <message>
-        <source>Breath</source>
-        <translation>Ademhaling</translation>
-    </message>
-    <message>
-        <source>Brackets</source>
-        <translation>Haken</translation>
-    </message>
-    <message>
-        <source>Articulations, Ornaments</source>
-        <translation>Articulaties/Versieringen</translation>
-    </message>
-    <message>
-        <source>Accidentals</source>
-        <translation>Voortekens</translation>
-    </message>
-    <message>
-        <source>Dynamics</source>
-        <translation>Dynamiek</translation>
-    </message>
-    <message>
-        <source>fingering %1</source>
-        <translation>vingerzetting %1</translation>
-    </message>
-    <message>
-        <source>string number %1</source>
-        <translation>snaar nummer %1</translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation>Tremolo</translation>
-    </message>
-    <message>
-        <source>repeat measure</source>
-        <translation>herhaal maat</translation>
-    </message>
-    <message>
-        <source>Segno</source>
-        <translation>Segno</translation>
-    </message>
-    <message>
-        <source>Coda</source>
-        <translation>Coda</translation>
-    </message>
-    <message>
-        <source>VarCoda</source>
-        <translation>VarCoda</translation>
-    </message>
-    <message>
-        <source>Codetta</source>
-        <translation>Codetta</translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation>Fine</translation>
-    </message>
-    <message>
-        <source>da Capo</source>
-        <translation>da Capo</translation>
-    </message>
-    <message>
-        <source>da Capo al Fine</source>
-        <translation>da Capo al Fine</translation>
-    </message>
-    <message>
-        <source>da Capo al Coda</source>
-        <translation>da Capo al Coda</translation>
-    </message>
-    <message>
-        <source>D.S al Coda</source>
-        <translation>D.S al Coda</translation>
-    </message>
-    <message>
-        <source>D.S al Fine</source>
-        <translation>D.S al Fine</translation>
-    </message>
-    <message>
-        <source>D.S</source>
-        <translation>D.S</translation>
-    </message>
-    <message>
-        <source>To Coda</source>
-        <translation>To Coda</translation>
-    </message>
-    <message>
-        <source>Repeats</source>
-        <translation>Herhalingstekens</translation>
-    </message>
-    <message>
-        <source>break line</source>
-        <translation>Systeem/Notenbalk Onderbreken</translation>
-    </message>
-    <message>
-        <source>break page</source>
-        <translation> pagina onderbreken</translation>
-    </message>
-    <message>
-        <source>start beam</source>
-        <translation>begin van waardestreep</translation>
-    </message>
-    <message>
-        <source>middle of beam</source>
-        <translation>midden van de waardestreep</translation>
-    </message>
-    <message>
-        <source>start subbeam</source>
-        <translation>einde enkele- en begin waardestreep</translation>
-    </message>
-    <message>
-        <source>Beam Properties</source>
-        <translation>Waardestreep Eigenschappen</translation>
-    </message>
-    <message>
-        <source>Symbols</source>
-        <translation>Symbolen</translation>
-    </message>
-    <message>
-        <source>&amp;Create</source>
-        <translation>&amp;Creëer</translation>
-    </message>
-    <message>
-        <source>Measures</source>
-        <translation>Maten</translation>
-    </message>
-    <message>
-        <source>Barlines...</source>
-        <translation>Maatstrepen...</translation>
-    </message>
-    <message>
-        <source>&amp;Lines...</source>
-        <translation>&amp;Lijnen...</translation>
-    </message>
-    <message>
-        <source>System Brackets...</source>
-        <translation>Haken...</translation>
-    </message>
-    <message>
-        <source>Note Attributes...</source>
-        <translation>Articulaties/Versieringen...</translation>
-    </message>
-    <message>
-        <source>Accidentals...</source>
-        <translation>Voortekens...</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>MuseScore: Clefs</source>
-        <translation>MuseScore: Sleutels</translation>
-    </message>
-    <message>
-        <source>MuseScore: Key Signature</source>
-        <translation>MuseScore: Toonsoorten</translation>
-    </message>
-    <message>
-        <source>File Operations</source>
-        <translation>Bestand Verrichtingen</translation>
-    </message>
-    <message>
-        <source>Transport Tools</source>
-        <translation>Afspeel Werkbalk</translation>
-    </message>
-    <message>
-        <source>Note Entry</source>
-        <translation>Noten Invoer modus</translation>
-    </message>
-    <message>
-        <source>Open &amp;Recent</source>
-        <translation>Open &amp;Recent</translation>
-    </message>
-    <message>
-        <source>Parts...</source>
-        <translation>Partijen...</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bewerk</translation>
-    </message>
-    <message>
-        <source>Voices</source>
-        <translation>Stemmen</translation>
-    </message>
-    <message>
-        <source>Preferences...</source>
-        <translation>Voorkeursinstellingen...</translation>
-    </message>
-    <message>
-        <source>Add Note</source>
-        <translation>Voeg noot toe</translation>
-    </message>
-    <message>
-        <source>Add Interval</source>
-        <translation>Voeg interval toe</translation>
-    </message>
-    <message>
-        <source>Tuplets</source>
-        <translation>Tuplets</translation>
-    </message>
-    <message>
-        <source>&amp;Layout</source>
-        <translation>&amp;Lay-out</translation>
-    </message>
-    <message>
-        <source>Page Settings...</source>
-        <translation>Pagina Instellingen...</translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation>Posities terugzetten</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>Standaard Afstanden</translation>
-    </message>
-    <message>
-        <source>Breaks...</source>
-        <translation>Onderbrekingen...</translation>
-    </message>
-    <message>
-        <source>&amp;Style</source>
-        <translation>&amp;Stijl</translation>
-    </message>
-    <message>
-        <source>Edit Style...</source>
-        <translation>Bewerk Stijl...</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Bewerk Tekststijl...</translation>
-    </message>
-    <message>
-        <source>&amp;Display</source>
-        <translation>&amp;Beeld</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>Toon Onzichtbaar</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Help</translation>
-    </message>
-    <message>
-        <source>Local Manual</source>
-        <translation>Lokaal Handboek</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Online Handboek</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;Over Musescore</translation>
-    </message>
-    <message>
-        <source>About&amp;Qt</source>
-        <translation>Over&amp; Qy</translation>
-    </message>
-    <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>MuseScore online handleiding niet vinden op:</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Help</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>note entry mode</source>
-        <translation>noten invoermodus</translation>
-    </message>
-    <message>
-        <source>edit mode</source>
-        <translation>bewerkingsmodus</translation>
-    </message>
-    <message>
-        <source>play</source>
-        <translation>afspelen</translation>
-    </message>
-    <message>
-        <source>Symbols1</source>
-        <translation>Symbolen1</translation>
-    </message>
-    <message>
-        <source>Symbols3</source>
-        <translation>Symbolen3</translation>
-    </message>
-    <message>
-        <source>InstrumentsLong</source>
-        <translation>Instrumenten Lang</translation>
-    </message>
-    <message>
-        <source>InstrumentsShort</source>
-        <translation>Instrumenten Kort</translation>
-    </message>
-    <message>
-        <source>InstrumentsExcerpt</source>
-        <translation>Uittreksel instrumenten</translation>
-    </message>
-    <message>
-        <source>Technik</source>
-        <translation>Techniek</translation>
-    </message>
-    <message>
-        <source>Measure Number</source>
-        <translation>Maatnummer</translation>
-    </message>
-    <message>
-        <source>Page Number Odd</source>
-        <translation>Oneven Paginanummers</translation>
-    </message>
-    <message>
-        <source>Page Number Even</source>
-        <translation>Even Paginanummers</translation>
-    </message>
-    <message>
-        <source>Translator</source>
-        <translation>Vertaal</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Systeem</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Notenbalk</translation>
-    </message>
-    <message>
-        <source>Chordname</source>
-        <translation>Akkoordnaam</translation>
-    </message>
-    <message>
-        <source>Repeat Text</source>
-        <translation>Herhaal Tekst</translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kader</translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation>TekstLijn</translation>
-    </message>
-    <message>
-        <source>Glissando</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>String Number</source>
-        <translation>Snaar Nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file save a copy</source>
-        <translation>sla op als kopie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation>Opslaan als Kopie...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Score to named File, but keep current name</source>
-        <translation>Opslaan Partituur als..., huidige naam partituur behouden</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>bewerk element</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>Bewerk Element</translation>
-    </message>
-    <message>
-        <source>staff spacer</source>
-        <translation>notenbalk spatie om ruimte tussen de notenbalken te vergroten</translation>
-    </message>
-    <message>
-        <source>Breaks/Spacer</source>
-        <translation>Onderbr./Spaties</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>&amp;Bestand</translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>vorig akkoord aan selectie toevoegen</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>selecteer tot het begin van de maat</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>voeg volgend akkoord aan selectie toe</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>selecteer tot het einde van de maat</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation> selecteren tot het begin van de lijn</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>selecteer tot het eind van de lijn</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation>shift + end</translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>selecteer tot het begin van de partituur</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>selecteer tot het einde van de partituur</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation>ctrl+shift+end</translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>voeg boven de selectie een notenbalk toe</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>voeg onder de selectie een notenbalk toe</translation>
-    </message>
-    <message>
-        <source>line</source>
-        <translation>lijn</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>Eenstemmig</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>noteer eenstemmig</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>2e er boven</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>Noteer 2e er boven</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>3e er boven</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>Noteer 3e er boven</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>4e er boven</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>Noteer 4e er boven</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>5e er boven</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>Noteer 5e er boven</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>6e er boven</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>Noteer 6e er boven</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>7e er boven</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>Noteer 7e er boven</translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>Octaaf er boven</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>Noteer octaaf er boven</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>9e er boven</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>Noteer 9e er boven</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>2e er onder</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>Noteer 2e er onder</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>3e er onder</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>Noteer 3e er onder</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>4e er onder</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>Noteer 4e er onder</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>5e er onder</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>Noteer 5e er onder</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>6e er onder</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>Noteer 6e er onder</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>7e er onder</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>Noteer 7e er onder</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>Octaaf er onder</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>Noteer octaaf er onder</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>9e er onder</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>Noteer 9e er onder</translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation>posities terug zetten</translation>
-    </message>
-    <message>
-        <source>no score</source>
-        <translation>geen partituur</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>toon inspecteur</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Inspecteur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file reload</source>
-        <translation>bestand herladen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation>Herlaad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reload Score from File</source>
-        <translation>Herlaad Partituur van Bestand</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Current Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>undo last change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>redo last undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show instruments dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instruments...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Instruments Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show clefs palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Clefs Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show keys palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Keys Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show symbols palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Symbols Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show time palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Time Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show dynamics palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamics...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Dynamics Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toggle note input mode N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch spell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch Spell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter unison above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unison Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter unison above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter second above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter second above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter third above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter third above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter fourth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fourth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fourth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter fifth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fifth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fifth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter sixth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sixth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter sixth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter seventh above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seventh Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter seventh above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter octave above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Octave Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter octave above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter ninth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ninth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter ninth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter second below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter second below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter third below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter third below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter fourth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fourth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fourth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter fifth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fifth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fifth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter sixth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sixth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter sixth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter seventh below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seventh Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter seventh below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter octave below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Octave Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter octave below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter ninth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ninth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter ninth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note c</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note d</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note e</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note f</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter note g</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add a to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note A to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add b to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note B to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add c to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note C to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add d to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note D to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add e to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note E to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add f to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note F to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add g to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add note G to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>more stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add More Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add more stretch to selected measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>less stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Less Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add less stretch to selected measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Beam Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Beam Mode of selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flip stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flip direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto higher pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto top note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch down octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto lower pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto bottom note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bottom note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>down+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add previous chord to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add next chord to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right+ctrl+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ctrl+shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ctrl+shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add staff above to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add staff below to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page-prev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page-next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page-top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page-end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>decrescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ESCAPE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>append measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>append measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append Measures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>insert measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>insert measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Measures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append Horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append Vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quadruplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quintuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sextuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Septuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Octuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nonuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Tuplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note breve</source>
-        <translation>noot breve</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad note 1/64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>midi input in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Midi Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>editing sound on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable sound while editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam 32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mixer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transport Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Input Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Canvas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fingering Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fingering...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fingering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metronome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add System Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Title Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Subtitle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subtitle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Subtitle Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Composer Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Poet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Poet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Poet Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Chord Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Chord Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show harmony properties for chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Harmony Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Rehearsal Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rehearsal Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>player play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start sequencer play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toggle pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prev measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seek to begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>player rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rewind to start position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seek to end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>play repeats on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>play repeats on/off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>load style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>save style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>violin clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 2-3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 2-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exchange Voice 3-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>display in concert pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit score meta data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meta Data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meta Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toggle system break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle System Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toggle page break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle Page Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Positions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation>terug zetten uitrekken maat</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable script debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Script Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Bewaar de wijzigingen van de &quot;%1&quot;
-voor dat u afsluit?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Nieuw...</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation>noot longa</translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation>Longa</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>Dubbele hele noot (twee hele noten)</translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>Hele noot (semibreve)</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>Halve noot (minim)</translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>Kwartnoot (crochet)</translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>Achtste noot (quaver)</translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>16e noot (semiquaver)</translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>32e noot (demi-semiquaver)</translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>64e noot (semi-demi-semiquaver)</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Punt</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation>dubbele punt</translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>Dubbele punt</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Noten</translation>
-    </message>
-    <message>
-        <source>NoteHeads</source>
-        <translation>Notenkoppen</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>toon onzichtbaar</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>toon frames</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>Toon Frames</translation>
-    </message>
-    <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ottava</source>
-        <translation>Octaaf</translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation>toon toetsenbord</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>Toon Toetsenbord</translation>
+        <source>MuseScore: Load Score</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lyrics odd lines</source>
-        <translation>Liedtekst oneven lijnen</translation>
+        <source>Untitled</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lyrics even lines</source>
-        <translation>Liedtekst even lijnen</translation>
+        <source>MuseScore: failure</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Other...</source>
-        <translation>Anderen...</translation>
+        <source>Load template file </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>enable script debugger</source>
-        <translation>script debugger inschakelen</translation>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable Script Debugger</source>
-        <translation>Script debugger inschakelen</translation>
+        <source>G major, E minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cb major, Ab minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D major, B minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gb major, Eb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A major, F# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Db major, Bb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E major, C# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ab major, F minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B major, G# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eb major, C minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F# major, D# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bb major, G minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C# major, A# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F major,  D minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C major, A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clefs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(2+2)/4 alla breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bar Lines</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>normal</source>
-        <translation>normaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>broken</source>
-        <translation> gebroken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End Bar</source>
-        <translation>Einde maat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Double Bar</source>
-        <translation>Dubbele maatstreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start Repeat</source>
-        <translation>Start Herhaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End Repeat</source>
-        <translation>Einde Herhaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End-Start Repeat</source>
-        <translation>Einde-start Herhaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1 through stem</source>
-        <translation></translation>
+        <source>Lines</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>2 through stem</source>
-        <translation></translation>
+        <source>slur</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>3 through stem</source>
-        <translation></translation>
+        <source>diminuendo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1 between notes</source>
-        <translation></translation>
+        <source>prima volta</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>2 between notes</source>
-        <translation></translation>
+        <source>seconda volta</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>3 between notes</source>
-        <translation></translation>
+        <source>terza volta</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>enter 1/1 rest</source>
-        <translation>plaats 1/1 rust</translation>
+        <source>seconda volta 2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/1 rest</source>
-        <translation>1/1 rust</translation>
+        <source>8va</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>enter 1/2 rest</source>
-        <translation>plaats 1/2 rust</translation>
+        <source>15ma</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/2 rest</source>
-        <translation>1/2 rust</translation>
+        <source>8vb</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>enter 1/4 rest</source>
-        <translation>plaats 1/4 rust</translation>
+        <source>15mb</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/4 rest</source>
-        <translation>1/4 rust</translation>
+        <source>pedal</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>enter 1/8 rest</source>
-        <translation>plaats 1/8 rust</translation>
+        <source>trill line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/8 rest</source>
-        <translation>1/8 rust</translation>
+        <source>text line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arpeggio/Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breath</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>breath</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brackets</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Haak</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulations, Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidentals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>string number %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NoteHeads</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>normal</source>
         <comment>note head</comment>
-        <translation>normaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>crossed</source>
         <comment>note head</comment>
-        <translation>kruis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>diamond</source>
         <comment>note head</comment>
-        <translation>ruit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>triangle</source>
         <comment>note head</comment>
-        <translation>driehoek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>diamond2</source>
         <comment>note head</comment>
-        <translation>ruit2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>slash</source>
         <comment>note head</comment>
-        <translation>schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>xcircle</source>
         <comment>note head</comment>
-        <translation>kruiscirkel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>slur</source>
-        <translation>boog</translation>
+        <source>Tremolo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>backspace</source>
-        <translation>spatie terug</translation>
+        <source>1 through stem</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation>Zoeken</translation>
+        <source>2 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segno</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VarCoda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codetta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>da Capo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>da Capo al Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>da Capo al Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D.S al Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D.S al Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D.S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breaks/Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>middle of beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start subbeam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Lines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Brackets...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidentals...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Clefs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Key Signature</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Lines</source>
-        <translation>MuseScore: Lijnen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: System Brackets</source>
-        <translation>MuseScore: Systeemhaken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Note Attributes</source>
-        <translation>MuseScore: Noten Attributen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: Voortekens</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
-        <translation>MuseScore: Dynamiek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation>MuseScore: Maatstrepen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>
-        <translation>MuseScore: Vingerzetting</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Layout Breaks</source>
-        <translation>MuseScore: Lay-out Onderbrekingen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>search</source>
-        <translation>zoeken</translation>
+        <source>File Operations</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: failure</source>
-        <translation>MuseScore: fout</translation>
+        <source>Transport Tools</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load template file </source>
-        <translation>Laad sjabloonbestand</translation>
+        <source>Note Entry</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> failed</source>
-        <translation>mislukt</translation>
+        <source>&amp;File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom In</source>
-        <translation>Inzoomen</translation>
+        <source>Open &amp;Recent</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom Out</source>
-        <translation>Uitzoomen</translation>
+        <source>Parts...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mirror note head</source>
-        <translation>spiegel notenkop</translation>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breaks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Text Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About&amp;Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore online manual not found at: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note entry mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>play</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation>Ga Naar:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScoreformaat (*.mscx)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML Formaat (*.xml)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Gecomprimeerd MusicXML Formaat (*.mxl)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation>Standaard MIDI File (*.mid)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation>PDF Bestand (*.pdf)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation>PostScript Bestand (*.ps)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG Bitmap Grafisch (*.png)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond Formaat (*.ly)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation>MuseScore: Opslaan Als</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Sla een kopie op</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbols3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics odd lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics even lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>InstrumentsLong</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>InstrumentsShort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>InstrumentsExcerpt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Technik</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Number Odd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Number Even</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chordname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>String Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizard</name>
     <message>
+        <source>MuseScore: Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titel:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Subtitle:</source>
-        <translation>SubTitel:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Composer:</source>
-        <translation>Componist:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Poet:</source>
-        <translation>Dichter:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation>Copyright:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create new score from template</source>
-        <translation>Creëer een nieuw Partituur van een voorbeeld</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>Creëer een nieuw Partituur van een model</translation>
-    </message>
-    <message>
-        <source>MuseScore: Create New Score</source>
-        <translation>Creëer Nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage1</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
-        <translation>Creëer een nieuwe Partituur met behulp van wizard</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Kies een of meerdere instrumenten. Elk instrument wordt vertegenwoordigd door één of meerdere notenbalken
-</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Kies Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select Template File:</source>
-        <translation>Selecteer een voorbeedlbestand:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een nieuw Partituur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Selecteer Toonsoort:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Note</name>
     <message>
         <source>Note Properties...</source>
-        <translation>Noten Eigenschappen...</translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>Tuplet Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation>Tuplet...</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation>Verwijder Tuplet</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NoteBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>head index</source>
-        <translation>hoofd index</translation>
-    </message>
-    <message>
-        <source>note head group</source>
-        <translation>notenhoofden groep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Note</source>
         <comment>do not translate</comment>
-        <translation>Noot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pitch</source>
         <comment>do not translate</comment>
-        <translation>Toonhoogte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Head</source>
         <comment>do not translate</comment>
-        <translation>Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation>Subelementen:</translation>
+        <source>head index</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TPC</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HGrp.</source>
         <comment>do not translate</comment>
-        <translation>HGrp.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note head group</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
         <comment>do not translate</comment>
-        <translation>Lijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie Forw.</source>
         <comment>do not translate</comment>
-        <translation>Boog Voorwaarts.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move</source>
         <comment>do not translate</comment>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie Back</source>
         <comment>do not translate</comment>
-        <translation>Boog Achterwaarts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accidental</source>
         <comment>do not translate</comment>
-        <translation>Voorteken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mirror Head</source>
         <comment>do not translate</comment>
-        <translation>Spiegel Hoofd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S-Channel</source>
         <comment>do not translate</comment>
-        <translation>S-Kanaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hidden</source>
         <comment>do not translate</comment>
-        <translation>Verbergen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User-Acc</source>
         <comment>do not translate</comment>
-        <translation>Gebruiker-Acc</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ppitch</source>
-        <translation>Toonhoogte</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subelements:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Velo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mirror Automatic</source>
-        <translation>Mirror Automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Head Left</source>
-        <translation>Hoofd Links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Head Right</source>
-        <translation>Hoofd Rechts</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Pagina</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page No.:</source>
-        <translation>Pagina Nr.:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageListEditor</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Object Inspecteren</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
-        <translation>MuseScore: Pagina Instellingen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation>Voorbeeld</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Toepassen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation>Pagina Afmetingen/Marges</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Dubbelzijdig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>Liggend</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hoogte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Breedte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Schalen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Tussenuimte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>inch</source>
-        <translation>inch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Even Page Margins</source>
-        <translation>Even Pagina Marges</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bottom Margin</source>
-        <translation>Onderkant Marge</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Top Margin</source>
-        <translation>Bovenkant Marge</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right Margin</source>
-        <translation>Rechter Marge</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Left Margin</source>
-        <translation>Linker Marge</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Odd Page Margins</source>
-        <translation>Onevenpagina Marges</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PaletteBox</name>
     <message>
         <source>Palettes</source>
-        <translation>Paletten</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PaletteBoxButton</name>
     <message>
-        <source>Delete Palette</source>
-        <translation>Verwijder Palet</translation>
-    </message>
-    <message>
         <source>Palette Properties</source>
-        <translation>Palet Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation>Nieuw Palet invoegen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation>Verplaats Palet naar Omhoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation>Verplaats Palet naar Beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation>Bewerken Toestaan</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation>MuseScore: Palet Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Naam:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cell Size:</source>
-        <translation>Cell Grootte:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>w:</source>
-        <translation>breed:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h:</source>
-        <translation>hoog:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation>Raster Tonen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation>Element Compensatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation>Schaal:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation>Deel Naam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Panorama Position</source>
-        <translation>Panorama Positie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Galm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation>Chorus (breder of dieper geluid)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Volume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pan</source>
-        <translation>Pan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Onderdrukken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Solo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Sound:</source>
-        <translation>Geluid:</translation>
-    </message>
-    <message>
-        <source>midi sound for part</source>
-        <translation>midi geluid voor een deel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>drumset</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>midi sound for part</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation>MuseScore Afspeelpaneel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>measure.beat</source>
-        <translation>maat.tel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>001.01</source>
-        <translation>001.01</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation>0:00:00</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual tempo</source>
-        <translation>actueel tempo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>120bpm</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relative tempo</source>
-        <translation>relatief tempo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>100%</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Terugspoelen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation>Pauze</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Afspelen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>volume</source>
-        <translation>volume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Volume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation>Tempo</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
     <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Choose Notepaper</source>
-        <translation>Kies Notenpapier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation>Afbeeldingen (*.jpg *.gif *.png)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>Kies Achtergrond</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Synthesizer Sound Font</source>
-        <translation>Kies Synthesizer Sound Font</translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation>Kies Werkmap</translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
-        <translation>Kies standaard Instrumentenlijst</translation>
-    </message>
-    <message>
-        <source>Instrument List (*.xml);;All (*)</source>
-        <translation>Instrumenten Lijst (*.xml);;All (*)</translation>
-    </message>
-    <message>
-        <source>Choose score to start with</source>
-        <translation>Kies hoe musescore start met</translation>
-    </message>
-    <message>
-        <source>MuseScore file (*.msc);;All (*)</source>
-        <translation>MuseScore bestand (*.msc);;All (*)</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>standaard</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>SoundFont Bestanden (*.sf2 *.SF2);;All (*)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose WorkingDirectory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose default Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose score to start with</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore file (*.msc);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
     <message>
         <source>MuseScore: Preferences</source>
-        <translation>MuseScore: Voorkeuren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Algemeen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Program Start</source>
-        <translation>Programma Start op met</translation>
-    </message>
-    <message>
-        <source>start with new score</source>
-        <translation>nieuw partituur</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>start with score:</source>
-        <translation>met partituur:</translation>
-    </message>
-    <message>
-        <source>continue last session</source>
-        <translation>laatste sessie</translation>
-    </message>
-    <message>
-        <source>show splash screen</source>
-        <translation>laat opstartscherm zien</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation>Paden</translation>
-    </message>
-    <message>
-        <source>Instrument List:</source>
-        <translation>Instrumenten Lijst:</translation>
-    </message>
-    <message>
-        <source>Working Directory:</source>
-        <translation>Werk Map:</translation>
-    </message>
-    <message>
-        <source>Windows</source>
-        <translation>Vensters</translation>
-    </message>
-    <message>
-        <source>Play Panel:</source>
-        <translation>Afspeel Paneel:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>tonen</translation>
-    </message>
-    <message>
-        <source>Cur</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navigator</translation>
-    </message>
-    <message>
-        <source>Auto Save</source>
-        <translation>Automatisch Opslaan</translation>
-    </message>
-    <message>
-        <source>minutes</source>
-        <translation> minuten</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation>Taal</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <translation>systeem</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Canvas</source>
-        <translation>Scherminstellingen</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation>Achtergrond</translation>
-    </message>
-    <message>
-        <source>Wallpaper</source>
-        <translation>Afbeelding</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation>Kleur</translation>
-    </message>
-    <message>
-        <source>Notesheet</source>
-        <translation>Notenblad</translation>
-    </message>
-    <message>
-        <source>Misc.</source>
-        <translation>Div.</translation>
-    </message>
-    <message>
-        <source>disable antialiased drawing</source>
-        <translation>uitschakelen antialiased tekening</translation>
-    </message>
-    <message>
-        <source>uncheck this to speed up drawing</source>
-        <translation>schakel dit selectievakje uit voor meer snelheid</translation>
-    </message>
-    <message>
-        <source>Draw Antialiased</source>
-        <translation>Teken Afrondingen</translation>
-    </message>
-    <message>
-        <source>Proximity for selecting elements</source>
-        <translation>Afstand voor het selecteren van elementen</translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation>Kleuren</translation>
-    </message>
-    <message>
-        <source>Note Entry</source>
-        <translation>Noten Invoer</translation>
-    </message>
-    <message>
-        <source>Enable midi input</source>
-        <translation>Midi input inschakelen</translation>
-    </message>
-    <message>
-        <source>Play notes when editing</source>
-        <translation>Speel noot tijdens bewerken</translation>
-    </message>
-    <message>
-        <source>Alternate input method</source>
-        <translation>Alternatieve invoer methode</translation>
-    </message>
-    <message>
-        <source>Export Midi</source>
-        <translation>Exporteer Midi</translation>
-    </message>
-    <message>
-        <source>Expand Repeats</source>
-        <translation>Breid Herhalingen uit</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>Midi afstandsbediening inschakelen</translation>
-    </message>
-    <message>
-        <source>Midi Remote Control</source>
-        <translation>Afstandsbediening Midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>is aktief</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>opnemen</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Opnemen</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Terugspoelen</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Afspelen</translation>
-    </message>
-    <message>
-        <source>I/O</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Use midi output</source>
-        <translation>Gebruik midi-uitgang</translation>
-    </message>
-    <message>
-        <source>Ports</source>
-        <translation>Poorten</translation>
-    </message>
-    <message>
-        <source>Auto Connect</source>
-        <translation>Automatisch Verbinden</translation>
-    </message>
-    <message>
-        <source>Use internal synthesizer</source>
-        <translation>Gebruik interne synthesizer</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>JACK Audio Server</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Left-Port:</source>
-        <translation>Linker-Poort:</translation>
-    </message>
-    <message>
-        <source>Right-Port:</source>
-        <translation>Rechter-Poort:</translation>
-    </message>
-    <message>
-        <source>ALSA Audio</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Device:</source>
-        <translation>Apparaat:</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>standaard</translation>
-    </message>
-    <message>
-        <source>Sample Rate:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>192000</source>
-        <translation>192000</translation>
-    </message>
-    <message>
-        <source>96000</source>
-        <translation>96000</translation>
-    </message>
-    <message>
-        <source>88200</source>
-        <translation>88200</translation>
-    </message>
-    <message>
-        <source>48000</source>
-        <translation>48000</translation>
-    </message>
-    <message>
-        <source>44100</source>
-        <translation>44100</translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation>32000</translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation>22050</translation>
-    </message>
-    <message>
-        <source>Fragments:</source>
-        <translation>Fragmenten:</translation>
-    </message>
-    <message>
-        <source>Period Size:</source>
-        <translation>Looptijd Grootte:</translation>
-    </message>
-    <message>
-        <source>4096</source>
-        <translation>4096</translation>
-    </message>
-    <message>
-        <source>2048</source>
-        <translation>2048</translation>
-    </message>
-    <message>
-        <source>1024</source>
-        <translation>1024</translation>
-    </message>
-    <message>
-        <source>512</source>
-        <translation>512</translation>
-    </message>
-    <message>
-        <source>256</source>
-        <translation>256</translation>
-    </message>
-    <message>
-        <source>128</source>
-        <translation>128</translation>
-    </message>
-    <message>
-        <source>64</source>
-        <translation>64</translation>
-    </message>
-    <message>
-        <source>Portaudio</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Api:</source>
-        <translation>Api:</translation>
-    </message>
-    <message>
-        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation>Aandacht: vereist het opnieuw opstarten van MuseScore.</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>Importeer</translation>
-    </message>
-    <message>
-        <source>Style used for import</source>
-        <translation>Stijl gebruiken voor import</translation>
-    </message>
-    <message>
-        <source>build in style</source>
-        <translation>bouw stijl in</translation>
-    </message>
-    <message>
-        <source>use style file:</source>
-        <translation>gebruik stijl bestand:</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PNG</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>screen shot function</source>
-        <translation>schermopname functie</translation>
-    </message>
-    <message>
-        <source>Shortcuts</source>
-        <translation>Snelkoppelingen</translation>
-    </message>
-    <message>
-        <source>Action</source>
-        <translation>Actie</translation>
-    </message>
-    <message>
-        <source>Shortcut</source>
-        <translation>Snelkoppeling</translation>
-    </message>
-    <message>
-        <source>Reset to Default</source>
-        <translation>Zet terug naar Standaardwaarden</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation>Wissen</translation>
-    </message>
-    <message>
-        <source>Define...</source>
-        <translation>Bepaal...</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Nederlands</translation>
-    </message>
-    <message>
-        <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation>LET OP: wanneer je de taalinstelling wijzigt, dan worden de instellingen pas van kracht nadat MuseScore opnieuw opgestart wordt.</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation>Stijl</translation>
-    </message>
-    <message>
-        <source>Save every</source>
-        <translation>Opslaan om de</translation>
-    </message>
-    <message>
-        <source>Icons</source>
-        <translation>pictogram</translation>
-    </message>
-    <message>
-        <source>General:</source>
-        <translation>Algemeen:</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation>Breedte</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Hoogte</translation>
-    </message>
-    <message>
-        <source>Note Entry:</source>
-        <translation>Noten Invoermodus:</translation>
-    </message>
-    <message>
-        <source>Application Font</source>
-        <translation>Applicatie Lettertype</translation>
-    </message>
-    <message>
-        <source>pt</source>
-        <translation>pt</translation>
-    </message>
-    <message>
-        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Wanneer je een noot noteert is de uitkomst afhankelijk van de toonsoort waarin je noteert. Bijvoorbeeld: door een F in G major te noteren, dan wordt een Fis geplaatst. Wanneer de alternatieve methode is ingeschakeld dan is de toonsoort niet van invloed. Het noteren van een F leidt dan altijd tot een F.</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Czech</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galician</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>Autocorrection</source>
-        <translation>Automatischecorrectie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>start empty</source>
-        <translation>leeg blad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Score element colors</source>
-        <translation>Partituur element kleuren</translation>
+        <source>continue last session</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default foreground</source>
-        <translation>Standaard voorgrondkleur</translation>
+        <source>start with new score</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Voice 1</source>
-        <translation>Selecteer kleur voor stem 1</translation>
+        <source>start with score:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Voice 2</source>
-        <translation>Selecteer kleur voor stem 2</translation>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Voice 3</source>
-        <translation>Selecteer kleur voor stem 3</translation>
+        <source>show splash screen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Voice 4</source>
-        <translation>Selecteer kleur voor stem 4</translation>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Drop Target</source>
-        <translation>Op Doel geplaatst element</translation>
+        <source>system</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation>tr Turkey</translation>
+        <source>cz Czech</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Score</source>
-        <translation>Papierformaten</translation>
+        <source>de German</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default Paper Size</source>
-        <translation>Standaard papierformaat</translation>
+        <source>en English</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Two Sided</source>
-        <translation>Dubbelzijdig</translation>
+        <source>es Spanish</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Landscape</source>
-        <translation>Liggend</translation>
+        <source>fr French</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>it Italian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>nl Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt Portuguese</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default duration:</source>
-        <translation>Standaard lengte:</translation>
+        <source>ru Russian</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ms</source>
-        <translation>ms</translation>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Scaling</source>
-        <translation>Schalen</translation>
+        <source>Attention: changing the language requires a restart of MuseScore.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Space</source>
-        <translation>Tussenuimte</translation>
+        <source>Paths</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mm</source>
-        <translation>mm</translation>
+        <source>Instrument List:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Vervang (C) ... met symbool ... in Copyright Tekst</translation>
+        <source>Working Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Panel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Entry:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Canvas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notesheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proximity for selecting elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>disable antialiased drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uncheck this to speed up drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw Antialiased</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autocorrection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Vervang 1/2 ... with symbol ...</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace (C) ... with symbol ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score element colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default foreground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop Target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable midi input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play notes when editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default duration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternate input method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expand Repeats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable midi remote control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi Remote Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>is active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two Sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JACK Audio Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ALSA Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>96000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>88200</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>48000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>44100</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>22050</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fragments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Period Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4096</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2048</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1024</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>512</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>256</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>128</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portaudio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Api:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style used for import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>build in style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>use style file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>screen shot function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset to Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (Pedaal)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* (Pedal)</source>
-        <translation>* (Pedaal)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>. (Pedal)</source>
-        <translation>. (Pedaal)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation>streepje (Pedaal)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tr (Trill)</source>
-        <translation>tr (Triller)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
         <source>MuseScore:</source>
-        <translation>MuseScore:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Geen noot geselecteerd:
-Selecteer één enkele noot en probeer het opnieuw
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Geen noot of rust geselecteerd:Selecteer één enkele noot of rust en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Selecteer één noot of boog en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation>Selecteer een of meer notenbalken en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>MuseScore: load failed:</source>
-        <translation>MuseScore: laden mislukt:</translation>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Afsluiten</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Stijl Laden</translation>
-    </message>
-    <message>
-        <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation>MuseScore Stijlen (*.mss);;All Files (*)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Style failed:</source>
-        <translation>MuseScore: Laad Stijle mislukt:</translation>
-    </message>
-    <message>
-        <source>MuseScore: load midi</source>
-        <translation>MuseScore: laad midi</translation>
-    </message>
-    <message>
-        <source>MuseScore: load Style failed:</source>
-        <translation>MuseScore: laad Stijl mislukt:</translation>
-    </message>
-    <message>
-        <source>MuseScore: invalid command</source>
-        <translation>MuseScore: verkeerde opdracht</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Palettes failed:</source>
-        <translation>MuseScore: Laden Paletten mislukt:</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>reading file &lt;</source>
-        <translation>bestand inlezen &lt;</translation>
-    </message>
-    <message>
-        <source>MuseScore: Import Capella</source>
-        <translation>MuseScore: Import Capella</translation>
-    </message>
-    <message>
-        <source>MuseScore: file not found:</source>
-        <translation>MuseScore: bestand niet gevonden:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>Musescore: Laad akkoordbeschrijving</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>Musescore: Akkoordbeschrijving (*.xml);;All Files (*)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Styles (*.mss);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Style failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>Musescore: Laden van akkoordlijst is mislukt:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load Style failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: invalid command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation>opnemen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RepeatFlag</name>
     <message>
         <source>Setup...</source>
-        <translation>Setup...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RepeatPropertiesBase</name>
     <message>
         <source>MuseScore: Repeat Properties</source>
-        <translation>MuseScore: Herhaal Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>repTypeName</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set specials for</source>
-        <translation>Instellen specials voor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TekstLabel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cycles</source>
-        <translation>Cycli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number</source>
-        <translation>Nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Destination number</source>
-        <translation>Bestemmings nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cycles to play</source>
-        <translation>Te spelen cycli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cycle numbers, example: 1,3,5</source>
-        <translation>cyclus aantallen, voorbeeld: 1,3,5</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Rest</name>
     <message>
         <source>Rest</source>
-        <translation>Rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation>Rust Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RestPropertyBase</name>
     <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Rest Properties</source>
-        <translation>Rust Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>small</source>
-        <translation>klein</translation>
-    </message>
-    <message>
-        <source>Chord Properties</source>
-        <translation>Akkoord Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra toonaangevende ruimte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra spatie</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SLine</source>
-        <translation>SLine</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tick2</source>
-        <translation>tik2</translation>
-    </message>
-    <message>
-        <source>LineSegments</source>
-        <translation>LijnSegmenten</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation>1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anchor:</source>
-        <translation>Bevestig:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SEGMENT</source>
-        <translation>SEGMENT</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MEASURE</source>
-        <translation>MAAT</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>digonal</source>
-        <translation>diagonaal</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LineSegments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6575,557 +6520,543 @@ Please select a single note or rest and retry operation
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Geen notenbalk gevonden:
-ga eerst naar creëer, 
-dan naar instrumenten...
-en selecteer dan een instrument</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Geen maten geselecteerd:
-selecteer eerst een maat
-en probeer het dan opnieuw</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.mscx)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
-        <translation>MuseScore: Opslaan Partituur</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Temp File
 </source>
-        <translation>Open Temp Bestand</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>mislukt:</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translatorcomment>Musescore Opslaan Als</translatorcomment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Open File
-</source>
-        <translation>Open Bestand</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Stijl Opslaan</translation>
-    </message>
-    <message>
-        <source>MuseScore Style File (*.mss)</source>
-        <translation>MuseScore Stijl Bestand (*.mss)</translation>
-    </message>
-    <message>
-        <source>Open Style File
-</source>
-        <translation>Open Stijl Bestand</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Open Stijl bestand</translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Stijl Opslaan</translation>
-    </message>
-    <message>
-        <source>MuseScore: Read File</source>
-        <translation>MuseScore: Lees Bestand</translation>
-    </message>
-    <message>
-        <source>MuseScore: transpose</source>
-        <translation>MuseScore: transponeren</translation>
-    </message>
-    <message>
-        <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Er is niets geselecteerd. Wilt u de gehele partituur transponeren?</translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore File (*.mscz)</source>
-        <translation>Gecomprimeerd MuseScore Bestand (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore File (*.mscx)</source>
-        <translation>MuseScore Bestand (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File</source>
-        <translation>Musescore: Bestand opslaan</translation>
-    </message>
-    <message>
-        <source>removing old backup file </source>
-        <translation>verwijder oude reserve bestand</translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation>mislukt</translation>
-    </message>
-    <message>
-        <source>renaming file &lt;</source>
-        <translation>hernoem bestand &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; to backup &lt;</source>
-        <translation>&gt; naar backup &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; failed</source>
-        <translation>&gt; mislukt</translation>
-    </message>
-    <message>
-        <source>renaming &lt;</source>
-        <translation>hernoemen &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; to &lt;</source>
-        <translation>&gt; naar &lt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore: Bestand opslaan mislukt:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>removing old backup file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation>hernoem oud bestand &lt;</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; to backup &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; failed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation>hernoem temp bestand &lt;</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; to &lt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&gt; failed:
 </source>
-        <translation>&gt; Mislukt:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Style File (*.mss)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Style File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Style file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Read File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is nothing selected. Transpose whole score?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clef Segment</source>
-        <translation>Sleutel Segment</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key Signature</source>
-        <translation>Toonsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Begin Repeat</source>
-        <translation>Begin Herhaling</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Akkoord/Rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Breath Segment</source>
-        <translation>Adem Segment</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End Bar Line</source>
-        <translation>Einde Maatstreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Begin Maatanduiding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lyrics:</source>
-        <translation>Liedtekst:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment Type:</source>
-        <translation>Segment Type:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
-        <translation>Plotseling conflict met</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Undefined</source>
-        <translation>Niet gedefiniëerd</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShortcutCaptureDialogBase</name>
     <message>
         <source>Enter shortcut sequence</source>
-        <translation>Enter snelkoppeling sequentie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation>Druk op 4  toets om de snelkoppeling te bevestigen!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Old shortcut:</source>
-        <translation>Oude sneltoets:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New shortcut:</source>
-        <translation>Nieuwe sneltoets:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Wissen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>waardestreep begin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>waardestreep midden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>waardestreep eind</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>geen waardestreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>begin 1/32</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShowClefWidget</name>
     <message>
         <source>Clef Type:</source>
-        <translation>Sleutel Soort:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>waardestreep begin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>waardestreep midden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>waardestreep eind</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>geen waardestreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment:</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Boog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Slur End</source>
-        <translation>Einde Boog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff:</source>
-        <translation>Notenbalk:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Voice:</source>
-        <translation>Stem:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tick:</source>
-        <translation>Tel/Tik:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
-        <translation>Bewerkingsmodus</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SlurTie</source>
-        <translation>Verbindingsboog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Slur Segment</source>
-        <translation>Verbindings Segment</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Direction:</source>
-        <translation>Richting:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatisch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Notenbalktekst Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation>normaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation>MuseScore: Notenbalk Tekst Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Kanaal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Aktie</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
-        <translation>MuseScore: Symbolen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SymbolDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Systeem Vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation>MuseScore: Tempo Tekst Eigenschappen</translation>
-    </message>
-    <message>
-        <source>Tempo:</source>
-        <translation>Tempo:</translation>
-    </message>
-    <message>
-        <source>BPM</source>
-        <translation>Slagen per minuut</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation>Tempo Eigenschappen</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TempoText</name>
     <message>
         <source>Tempo Properties...</source>
-        <translation>Tempo Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Text</name>
     <message>
-        <source>Text Properties...</source>
-        <translation>Tekst Eigenschappen...</translation>
-    </message>
-    <message>
         <source>Set Invisible</source>
-        <translation>Maak Onzichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Maak Zichtbaar</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>Type:</source>
-        <translation>Type:</translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation>MM</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation>Tussenuimte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation>Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation>Tekst:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation>Compensatie:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation>Abs.:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation>Rel.:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation>Tekststijl:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>TekstLijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>line width:</source>
-        <translation>lijnbreedte:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation>Begin Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation>Vervlg Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <source>Line Properties...</source>
-        <translation>Lijn Eigenschappen...</translation>
-    </message>
-    <message>
         <source>Set Invisible</source>
-        <translation>Maak Onzichtbaar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Maak Zichtbaar</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextPaletteBase</name>
     <message>
         <source>MuseScore: Special Text Symbols</source>
-        <translation>MuseScore: Speciale Tekst Symbolen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7133,1537 +7064,1651 @@ failed: </source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation>mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Tekst Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation>Lettertype:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>font face</source>
-        <translation>lettertype uiterlijk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Grootte:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>lettertype grootte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stijl:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bold</source>
-        <translation>vet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>italic</source>
-        <translation>schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>I</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>underline</source>
-        <translation>onderstrepen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation>Lijn:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation>uitlijnen linkerrand van tekst naar referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation>centreer tekst op referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation>uitlijnen rechterrand van tekst naar referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation>uitlijnen bovenrand van tekst naar referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation>centreer tekst verticaal tot referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation>uitlijnen onderste rand van tekst naar referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Kleur:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>text color</source>
-        <translation>tekst kleur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation>Compensatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X:</source>
-        <translation>X:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation>horizontale compensatie tot referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation>relX:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation>compensatie referentiepunt in procenten van de standaard breedte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%</source>
-        <translation>%</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation>Y:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation>verticale compensatie naar referentiepunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation>relY:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation>verwijzings punt dat in procenten van standaard hoogte wordt gecompenseerd</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation>Eenheid:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation>compensatie is absoluut</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MM</source>
-        <translation>MM</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation>compensatie in ruimte-eenheden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Tussenuimte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation>tekstframe inschakelen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Kader</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation>teken omcirkeld kader</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Cirkel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation>teken boxed kader</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Box</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Breedte:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation>breedte van de kaderlijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation>Marge:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation>kader binnenmarge</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation>Rond:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation>ronde hoeken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation>kader kleur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Bewerk Tekst Stijlen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation>Tekst Bewerken</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: TimeSignature</source>
-        <translation>MuseScore: Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create TimeSignature</source>
-        <translation>Kies Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>+</source>
-        <translation>+</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>voeg maatsoort aan palet toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Kies Maatsoort:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Maatsoort:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>/</source>
-        <translation>/</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation>Selecteer Opmaat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
-        <translation>Kies het Aantal Maten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measures:</source>
-        <translation>Maten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tip: u kunt ook na het maken van de partituur nog maten toevoegen of verwijderen r.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TransposeDialogBase</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Semitones:</source>
-        <translation>Halve Tonen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Transpose key signatures</source>
-        <translation>Transponeren toonsoorten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Herschik akkoordnamen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Tuplet Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Tuplet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>has number</source>
-        <translation>heeft nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>has line</source>
-        <translation>heeft lijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>base len</source>
-        <translation>basis len</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>normal notes</source>
-        <translation>normale noten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual notes</source>
-        <translation>actuele noten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chord/Rest list:</source>
-        <translation>Akkoord/Rust lijst:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text Element</source>
-        <translation>Tekst Element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Element</source>
-        <translation>Element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tick</source>
-        <translation>Tik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Lengte</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: creëer tuplet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual notes</source>
-        <translation>actuele noten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>normal notes</source>
-        <translation>normale noten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Format</source>
-        <translation>Formaat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number</source>
-        <translation>Nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>number</source>
-        <translation>nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relation</source>
-        <translation>relatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation>niets</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Afbreken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>automatisch afbreken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>afbreken</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Tuplet Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number</source>
-        <translation>Nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>number</source>
-        <translation>nummer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relation</source>
-        <translation>relatie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation>niets</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Afbreken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>automatisch afbreken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>afbreken</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UnZip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partially corrupted archive. Some files might be extracted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corrupted archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create a directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid or incompatible zip archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inconsistent headers. Archive might be corrupted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation>VBox Eigenschappen...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Volta Eigenschappen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Repeat List:</source>
-        <translation>Herhaal Lijst:</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Zip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>clefTable</name>
     <message>
-        <source>Tablature</source>
-        <translation>Tabulatuur </translation>
-    </message>
-    <message>
-        <source>Percussion</source>
-        <translation>Slagwerk</translation>
-    </message>
-    <message>
         <source>Treble clef</source>
-        <translation>G-sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Treble clef 8va</source>
-        <translation>G-sleutel 8va</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Treble clef 15ma</source>
-        <translation>G-sleutel 15ma</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Treble clef 8vb</source>
-        <translation>G-sleutel 8vb</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass clef</source>
-        <translation>Bas-sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass clef 8vb</source>
-        <translation>Bas-sleutel 8vb</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass clef 15mb</source>
-        <translation>Bas-sleutel 15mb</translation>
-    </message>
-    <message>
-        <source>Baritone clef (C clef)</source>
-        <translation>Bariton-sleutel (C-sleutel)</translation>
-    </message>
-    <message>
-        <source>Subbass clef</source>
-        <translation>Subbas-sleutel</translation>
-    </message>
-    <message>
-        <source>Soprano clef</source>
-        <translation>Sopraan-sleutel</translation>
-    </message>
-    <message>
-        <source>Mezzo-soprano clef</source>
-        <translation>Mezzo-sopraan-sleutel</translation>
-    </message>
-    <message>
-        <source>Alto clef</source>
-        <translation>Alt-sleutel</translation>
-    </message>
-    <message>
-        <source>Tenor clef</source>
-        <translation>Tenor-sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
-        <translation>Bariton-sleutel (F-sleutel)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subbass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alto clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tenor clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tablature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Percussion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baritone clef (C clef)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>French violin clef</source>
-        <translation>Franse Viool-sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass clef 8va</source>
-        <translation>Bas-sleutel 8va</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation>Bas-sleutel 15ma</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>elementName</name>
     <message>
         <source>Symbol</source>
-        <translation>Symbool</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SlurSegment</source>
-        <translation>Boog Segment</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Maatstreep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>StemSlash</source>
-        <translation>Schuine stok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
-        <translation>Lijn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Haak</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Gebroken Akkoord </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accidental</source>
-        <translation>Voorteken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Noot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem</source>
-        <translation>Stok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>KeySig</source>
-        <translation>Toonsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TimeSig</source>
-        <translation>Maatsoort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rest</source>
-        <translation>Rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation>Ademhaling</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>RepeatMeasure</source>
-        <translation>Herhaal Maat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Afbeelding</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie</source>
-        <translation>Bindingsboog</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Dynamiek</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>Pagina</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Waardestreep</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>Haak</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Woorden</translation>
-    </message>
-    <message>
-        <source>Marker</source>
-        <translation>Markeer</translation>
-    </message>
-    <message>
-        <source>Jump</source>
-        <translation>Spring</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Tuplet</translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation>Tempo</translation>
-    </message>
-    <message>
-        <source>StaffText</source>
-        <translation>Notenbalktekst</translation>
-    </message>
-    <message>
-        <source>Harmony</source>
-        <translation>Harmonie</translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation>Herhalingshaak</translation>
-    </message>
-    <message>
-        <source>HairpinSegment</source>
-        <translation>CresendotekenSegment</translation>
-    </message>
-    <message>
-        <source>OttavaSegment</source>
-        <translation>OctaafSegment</translation>
-    </message>
-    <message>
-        <source>PedalSegment</source>
-        <translation>PedaalSegment</translation>
-    </message>
-    <message>
-        <source>TrillSegment</source>
-        <translation>TrillerSegment</translation>
-    </message>
-    <message>
-        <source>TextLineSegment</source>
-        <translation>TekstlijnSegment</translation>
-    </message>
-    <message>
-        <source>VoltaSegment</source>
-        <translation>HerhalingshaakSegment</translation>
-    </message>
-    <message>
-        <source>LayoutBreak</source>
-        <translation>Lay-outPauze</translation>
-    </message>
-    <message>
-        <source>Spacer</source>
-        <translation>Tussenruimtes</translation>
-    </message>
-    <message>
-        <source>LedgerLine</source>
-        <translation>Hulplijn</translation>
-    </message>
-    <message>
-        <source>NoteHead</source>
-        <translation>Notenkop</translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation>Tremolo</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Maat</translation>
-    </message>
-    <message>
-        <source>StaffLines</source>
-        <translation>NotenbalkLijnen</translation>
-    </message>
-    <message>
-        <source>Cursor</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation>Selectie</translation>
-    </message>
-    <message>
-        <source>Lasso</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ShadowNote</source>
-        <translation>SchaduwNoot</translation>
-    </message>
-    <message>
-        <source>RubberBand</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HairPin</source>
-        <translation>Crescendoteken/Decrescendoteken</translation>
-    </message>
-    <message>
-        <source>Ottava</source>
-        <translation>Octaaf</translation>
-    </message>
-    <message>
-        <source>Pedal</source>
-        <translation>Pedaal</translation>
-    </message>
-    <message>
-        <source>Trill</source>
-        <translation>Triller</translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation>TekstLijn</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>Segment</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Systeem</translation>
-    </message>
-    <message>
-        <source>Compound</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>Akkoord</translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation>Boog</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Element</translation>
-    </message>
-    <message>
-        <source>ElementList</source>
-        <translation>ElementLijst</translation>
-    </message>
-    <message>
-        <source>StaffList</source>
-        <translation>NotenbalkLijst</translation>
-    </message>
-    <message>
-        <source>MeasureList</source>
-        <translation>MaatLijst</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation>Lay-out</translation>
-    </message>
-    <message>
-        <source>HBox</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>VBox</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation>Pictogram</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Articulation</source>
-        <translation>Articulatie</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jump</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StaffText</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Harmony</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HairpinSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OttavaSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PedalSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TrillSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLineSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VoltaSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LayoutBreak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LedgerLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NoteHead</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StaffLines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lasso</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ShadowNote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RubberBand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HairPin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ElementList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StaffList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MeasureList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>magTable</name>
     <message>
         <source>Page Width</source>
-        <translation>Pagina Breed</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Whole Page</source>
-        <translation>Hele Pagina</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Two Pages</source>
-        <translation>Twee Pagina&apos;s</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>symbol</name>
     <message>
-        <source>acc discant</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>acc dot</source>
-        <translation>acc punt</translation>
-    </message>
-    <message>
-        <source>acc freebase</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>acc stdbase</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>acc bayanbase</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>clef eight</source>
-        <translation>Sleutel acht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>clef one</source>
-        <translation>Sleutel een</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>clef five</source>
-        <translation>Sleutel vijf</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>plus</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>zero</source>
-        <translation>geen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>one</source>
-        <translation>een</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>two</source>
-        <translation>twee</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>three</source>
-        <translation>drie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>four</source>
-        <translation>vier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>five</source>
-        <translation>vijf</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>six</source>
-        <translation>zes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>seven</source>
-        <translation>zeven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>eight</source>
-        <translation>acht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>nine</source>
-        <translation>negen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>f</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>p</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>r</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>s</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>z</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole rest</source>
-        <translation>hele rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation>halve rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>buiten hele rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>buiten halve rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>rest M3</source>
-        <translation>rust M3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>longa rest</source>
-        <translation>Longa rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>breve rest</source>
-        <translation>breve rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>quart rest</source>
-        <translation>kwart rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation>clas kwart rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>eight rest</source>
-        <translation>achtste rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>16&apos; rest</source>
-        <translation>16&apos; rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>32&apos;  rest</source>
-        <translation>32&apos; rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>64&apos; rest</source>
-        <translation>64&apos; rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>128&apos; rest</source>
-        <translation>128&apos; rust</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>kruis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation>kruis schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation>kruis schuin2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation>kruis schuin3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation>kruis schuin4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>herstelling</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flat</source>
-        <translation>mol</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flat slash</source>
-        <translation>mol schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flat slash2</source>
-        <translation>mol schuin2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation>gespiegelde mol2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mirrored flat</source>
-        <translation>gespiegelde mol</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation>gespiegelde mol schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flat flat</source>
-        <translation>dubbele mol</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flat flat slash</source>
-        <translation>dubbele mol schuin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation>dubbele kruis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>right parenthesis</source>
-        <translation>haakje rechts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation>haakje links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>punt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>longa up</source>
-        <translation>longa omhoog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>longa down</source>
-        <translation>longa naar beneden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>brevis head</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole head</source>
-        <translation>hele kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half head</source>
-        <translation>halve kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>quart head</source>
-        <translation>kwart kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole diamond head</source>
-        <translation>hele ruit kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half diamond head</source>
-        <translation>halve diamond kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation>ruit kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation>hele triangel kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half triangle head</source>
-        <translation>halve triangelkop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>triangle head</source>
-        <translation>dreihoek kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole slash head</source>
-        <translation>hele schuine kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation>half schuine kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation>kwart schuine kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation>hele kruis kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half cross head</source>
-        <translation>halve kruiskop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation>kruis kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>x circle head</source>
-        <translation>xcirkelkop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>espressivo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>staccato</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dstacattissimo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation>open</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>plus stop</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>up bow</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation>neerw boog</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>reverse turn</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>turn</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>trill</source>
-        <translation>triller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>upedal heel</source>
-        <translation>upedaal hak</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dpedalheel</source>
-        <translation>dpedaal hak</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>upedal toe</source>
-        <translation>upedaal teen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation>dpedaal teen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flageolet</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>segno</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>coda</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>varied coda</source>
-        <translation>gevariëerde coda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>rcomma</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>lcomma</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arpeggio</source>
-        <translation>gebroken akkoord</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>trillelement</source>
-        <translation>trillerelement</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>trill element</source>
-        <translation>triller element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>prall</source>
-        <translation>praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mordent</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>prall prall</source>
-        <translation>dubbele praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>prall mordent</source>
-        <translation>praller mordent</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>up prall</source>
-        <translation>op praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>up mordent</source>
-        <translation>op mordent</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>prall down</source>
-        <translation>praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>down prall</source>
-        <translation>laag praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>down mordent</source>
-        <translation>laag praller</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>prall up</source>
-        <translation>praller op</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>line prall</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>eight flag</source>
-        <translation>achtste vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation>zestiende vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
-        <translation>tweeëndertigste vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation>vierenzestigste vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>grace dash</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
-        <translation>d zestiende vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dthirtysecond flag</source>
-        <translation>d tweeëndertigste vlag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dsixtyfourth flag</source>
-        <translation>d vierenzestigste</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>alto clef</source>
-        <translation>altsleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation>caltsleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation>bassleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cbass clef</source>
-        <translation>cbassleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>trebleclef</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ctrebleclef</source>
-        <translation>cvioolsleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>percussion clef</source>
-        <translation>slagwerksleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cpercussion clef</source>
-        <translation>slagwerk sleutel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tab clef</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ctab clef</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>four four meter</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>allabreve</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedalasterisk</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedaldash</source>
-        <translation>pedaalstreepje</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedaldot</source>
-        <translation>pedaalpunt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedalP</source>
-        <translation>pedaalP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedald</source>
-        <translation>pedaald</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedale</source>
-        <translation>pedaale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation>pedaal ped</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bracket ticks up</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bracket ticks down</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc discant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc freebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc stdbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation>acc oude ee</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>flip stem</source>
-        <translation>verander stokrichting</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>whole diamond2 head</source>
-        <translation>hele ruit2 kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half diamond2 head</source>
-        <translation>halve diamond2 kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>diamond2 head</source>
-        <translation>ruit2 kop</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/2</source>
-        <translation>noot 1/2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/4</source>
-        <translation>noot 1/4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/8</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/16</source>
-        <translation>noot 1/16</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/32</source>
-        <translation>noot 1/32</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note 1/64</source>
-        <translation>noot 1/64</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dot dot</source>
-        <translation>dubbele punt</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

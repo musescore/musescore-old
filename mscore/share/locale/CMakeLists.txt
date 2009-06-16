@@ -19,6 +19,8 @@
 #=============================================================================
 
 install(FILES
+      mscore_ar.qm
+      mscore_ar.ts
       mscore_da.qm
       mscore_da.ts
       mscore_de.qm
