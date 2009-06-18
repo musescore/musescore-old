@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
-  <Mag>1.34857</Mag>
-  <xoff>-263.064</xoff>
-  <yoff>-12.1023</yoff>
+  <Mag>1.38938</Mag>
+  <xoff>0.211667</xoff>
+  <yoff>0.211667</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -120,6 +120,12 @@
       </SlurSegment>
     </Slur>
   <Slur id="5">
+    <SlurSegment no="0">
+      <o1 x="-0.322511" y="0.117277"/>
+      <o2 x="0.0979225" y="0.759937"/>
+      <o3 x="-0.0293192" y="0.952874"/>
+      <o4 x="-0.815061" y="-9.3474"/>
+      </SlurSegment>
     </Slur>
   <Slur id="6">
     <SlurSegment no="0">
@@ -524,7 +530,7 @@
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-936</tick>
+        <tick>-935</tick>
         </LayoutBreak>
       <Chord>
         <tick>4800</tick>
@@ -1302,7 +1308,7 @@
         <velocity>16</velocity>
         <dynType>2</dynType>
         <subtype>ppp</subtype>
-        <offset x="-0.903911" y="1.0136"/>
+        <offset x="-0.434804" y="0.984281"/>
         <style>12</style>
         </Dynamic>
       <Chord>
@@ -5275,8 +5281,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="13">
       <Chord>
         <ticklen>960</ticklen>
-        <Note pitch="28" tpc="18"/>
-        <Note pitch="40" tpc="18"/>
+        <Note pitch="25" tpc="21"/>
+        <Note pitch="37" tpc="21"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -5359,8 +5365,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="14">
       <Chord>
         <ticklen>960</ticklen>
-        <Note pitch="28" tpc="18"/>
-        <Note pitch="40" tpc="18"/>
+        <Note pitch="25" tpc="21"/>
+        <Note pitch="37" tpc="21"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -5864,5 +5870,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
