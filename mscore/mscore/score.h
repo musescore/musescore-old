@@ -117,10 +117,11 @@ class MeasureBaseList {
       MeasureBaseList();
       MeasureBase* first() const { return _first; }
       MeasureBase* last()  const { return _last; }
-      void clear()               { _first = _last = 0; }
+      void clear()               { _first = _last = 0; _size = 0; }
       void add(MeasureBase*);
       void remove(MeasureBase*);
       void change(MeasureBase* o, MeasureBase* n);
+      int size() const { return _size; }
       };
 
 //---------------------------------------------------------

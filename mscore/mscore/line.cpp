@@ -186,14 +186,16 @@ bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
                               return true;
                         }
                   else if (curGrip == 1) {
-                        int t2;
+                        int t2 = 0;
                         if (snapSegment) {
                               t2 = score()->nextSeg1(tick2, track);
                               }
                         else {
                               Measure* m  = score()->tick2measure(tick2);
-                              Measure* mb = m->nextMeasure();
-                              t2 = mb ? mb->tick() : m->tick() + m->tickLen();
+                              if (m) {
+                                    Measure* mb = m->nextMeasure();
+                                    t2 = mb ? mb->tick() : m->tick() + m->tickLen();
+                                    }
                               }
                         if (t2 > tick1)
                               tick2 = t2;

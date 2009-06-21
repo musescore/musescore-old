@@ -219,6 +219,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                         }
                   else {
                         LineSegment* ls = lsl.front();
+                        ls->setScore(this);
                         QPointF uo(pos - ls->canvasPos() - dragOffset);
                         ls->setUserOff(uo);
                         }
@@ -244,6 +245,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   line->setTick2(tick2);
                   line->layout();
                   LineSegment* ls = line->lineSegments().front();
+                  ls->setScore(this);
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
                   ls->setUserOff(uo);
                   }
