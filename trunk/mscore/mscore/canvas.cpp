@@ -1848,6 +1848,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case DYNAMIC:
                   case HAIRPIN:
                   case TEXTLINE:
+                        dragElement->setScore(score());
                         score()->cmdAdd1(dragElement, pos, dragOffset);
                         event->acceptProposedAction();
                         break;

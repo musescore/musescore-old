@@ -106,16 +106,15 @@ Measure* Score::tick2measure(int tick) const
             if (nmb == 0)
                   return m;
             }
-      printf("tick2measure %d not found\n", tick);
-      if (debugMode) {
-            int idx = 0;
+      printf("-tick2measure %d not found\n", tick);
+//      if (debugMode) {
+        printf("first %p\n", first());
             for (MeasureBase* m = first(); m; m = m->next()) {
                   int st = m->tick();
                   int l  = m->tickLen();
-                  printf("(%d)   %d - %d\n", idx, st, st+l);
-                  ++idx;
+                  printf("%d - %d\n", st, st+l);
                   }
-            }
+//            }
       return 0;
       }
 
