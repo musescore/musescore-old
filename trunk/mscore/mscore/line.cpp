@@ -640,4 +640,3 @@ bool SLine::check() const
             return false;
       return true;
       }
-

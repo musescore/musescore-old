@@ -76,29 +76,6 @@ void Trill::layout()
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Trill::write(Xml& xml) const
-      {
-      xml.stag("Trill");
-      SLine::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Trill::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!SLine::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   createLineSegment
 //---------------------------------------------------------
 
