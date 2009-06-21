@@ -2738,6 +2738,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               Lyrics* lyrics = new Lyrics(this);
                               lyrics->setTrack(curTrack);
                               lyrics->read(eee);
+                              lyrics->setTrack(dstStaffIdx * VOICES);
                               int tick = lyrics->tick() - tickStart + dstTick;
                               lyrics->setTick(tick);
                               Segment* segment = tick2segment(tick);
@@ -2752,6 +2753,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               Harmony* harmony = new Harmony(this);
                               harmony->setTrack(curTrack);
                               harmony->read(eee);
+                              harmony->setTrack(dstStaffIdx * VOICES);
                               int tick = harmony->tick() - tickStart + dstTick;
                               harmony->setTick(tick);
                               Measure* m = tick2measure(tick);

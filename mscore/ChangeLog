@@ -1,3 +1,5 @@
+21.jun (ws)
+      - paste chordnames and lyrics to the right staff
 16.jun (la)
       - remove dominant-seventh for musicXML import. dominant is correct.
       - fix chordname default style for flat and sharp
