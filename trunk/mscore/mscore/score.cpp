@@ -1228,11 +1228,14 @@ void Score::setNoteEntry(bool val)
                   else
                         select(_is.cr, SELECT_SINGLE, 0);
                   }
-            else if (rest)
+            else if (rest) {
                   _is.cr = rest;
-            else
+                  select(_is.cr, SELECT_SINGLE, 0);
+                  }
+            else {
                   _is.cr = note->chord();
-//            _is.setPos(_is.cr->tick());
+                  select(_is.cr, SELECT_SINGLE, 0);
+                  }
             emit posChanged(_is.pos());
 
             setInputTrack(_is.cr->track());
