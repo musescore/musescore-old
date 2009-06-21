@@ -1,4 +1,5 @@
 21.jun (ws)
+      - make sure a valid duration is set in note entry mode
       - fix "Trill line position not saved"
       - fix fontsize in chord names
       - paste chordnames and lyrics to the right staff
