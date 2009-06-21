@@ -1150,7 +1150,9 @@ void Harmony::render()
 #ifdef Q_WS_MAC
                   s += " 20";
 #endif
-                  fontList.append(QFont(s));
+                  QFont ff(f);
+                  ff.setFamily(s);
+                  fontList.append(ff);
                   }
             }
       if (fontList.isEmpty())
