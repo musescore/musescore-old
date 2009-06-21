@@ -61,8 +61,16 @@ MeasureBase::MeasureBase(const MeasureBase& m)
 
 void MeasureBase::collectElements(QList<const Element*>& el) const
       {
-      foreach(Element* e, _el)
-            e->collectElements(el);
+      if (type() == MEASURE) {
+            foreach(Element* e, _el) {
+                  if ((e->track() == -1) || ((Measure*)this)->visible(e->staffIdx()))
+                        e->collectElements(el);
+                  }
+            }
+      else {
+            foreach(Element* e, _el)
+                  e->collectElements(el);
+            }
       el.append(this);
       }
 

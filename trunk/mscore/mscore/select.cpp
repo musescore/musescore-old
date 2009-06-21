@@ -281,7 +281,7 @@ void Score::updateSelectedElements(SelState state)
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
-//printf("select element <%s> type %d(state %d) staff %d\n",
+// printf("select element <%s> type %d(state %d) staff %d\n",
 //   e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
 
       SelState selState = _selection->state();
@@ -313,7 +313,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         if (e->type() == NOTE)
                               cr = static_cast<ChordRest*>(e->parent());
-//                        _is.setPos(cr->tick());
                         _is.cr = cr;
                         emit posChanged(_is.pos());
                         }
@@ -469,8 +468,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                                     }
                               }
                         else {
-printf("select: TODO\n");
-                              select(0, SELECT_SINGLE, 0);
+// printf("select: TODO\n");
+                              select(e, SELECT_SINGLE, 0);
                               return;
                               }
                         }
@@ -623,9 +622,8 @@ void Score::searchSelectedElements()
             page->collectElements(l);
       _selection->clear();
       foreach(const Element* e, l) {
-            if (e->selected()) {
+            if (e->selected())
                   _selection->append(const_cast<Element*>(e));
-                  }
             }
       _selection->updateState();
       emit selectionChanged(int(_selection->state()));
@@ -677,7 +675,6 @@ void Selection::updateState()
       {
       int n = _el.size();
       if (_state == SEL_NONE || _state == SEL_SINGLE || _state == SEL_MULT) {
-            int n = _el.size();
             if (n == 0)
                   setState(SEL_NONE);
             else if (n == 1) {

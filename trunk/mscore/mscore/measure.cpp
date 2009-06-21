@@ -3016,10 +3016,6 @@ void Measure::collectElements(QList<const Element*>& el) const
                         el.append(e);
                   }
             }
-      foreach(Element* e, _el) {
-            if ((e->track() == -1) || visible(e->staffIdx()))
-                  el.append(e);
-            }
       foreach(Beam* b, _beams) {
             if (visible(b->staffIdx()))
                   el.append(b);
