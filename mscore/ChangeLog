@@ -1,3 +1,5 @@
+23.jun (la)
+      - fix: crash on save a copy
 22.jun (ws)
       - fix: removing staff causes crash if multi-staff bar
       - added symbol for sus4 to jazzfont
