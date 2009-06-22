@@ -1190,54 +1190,24 @@ void Score::setNoteEntry(bool val)
       {
       _is.cr = 0;
       if (val) {
-            Element* el = _selection->element();
-            Note* note = 0;
-            Rest* rest = 0;
-            Chord* c   = 0;
-            if (_selection->activeCR())
-                  el = _selection->activeCR();
-            if (el) {
-                  if (el->type() == NOTE)
-                        note = static_cast<Note*>(el);
-                  else if (el->type() == REST)
-                        rest = static_cast<Rest*>(el);
-                  else if (el->type() == CHORD)
-                        c = static_cast<Chord*>(el);
-                  }
-            if (c) {
-                  _is.cr = c;
-                  select(_is.cr, SELECT_SINGLE, 0);
-                  }
-            else if (rest == 0 && note == 0) {
-                  int track = _is.track;
-                  if (track == -1)
-                        track = 0;
-                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos(), track));
-                  if (_is.cr == 0) {
+            Note* note  = 0;
+            Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
+            if (el == 0) {
+                  int track = _is.track == -1 ? 0 : _is.track;
+                  el = static_cast<ChordRest*>(searchNote(_is.pos(), track));
+                  if (el == 0) {
                         printf("no note or rest selected 1\n");
                         return;
                         }
-                  if (_is.cr->type() == CHORD) {
-                        Chord* chord = static_cast<Chord*>(_is.cr);
-                        note = chord->selectedNote();
-                        if (note == 0)
-                              note = chord->upNote();
-                        }
-                  if (note)
-                        select(note, SELECT_SINGLE, 0);
-                  else
-                        select(_is.cr, SELECT_SINGLE, 0);
                   }
-            else if (rest) {
-                  _is.cr = rest;
-                  select(_is.cr, SELECT_SINGLE, 0);
+            if (el->type() == CHORD) {
+                  Chord* c = static_cast<Chord*>(el);
+                  note = c->selectedNote();
+                  if (note == 0)
+                        note = c->upNote();
+                  el = note;
                   }
-            else {
-                  _is.cr = note->chord();
-                  select(_is.cr, SELECT_SINGLE, 0);
-                  }
-            emit posChanged(_is.pos());
-
+            select(el, SELECT_SINGLE, 0);
             setInputTrack(_is.cr->track());
             _is.noteEntryMode = true;
             canvas()->moveCursor();

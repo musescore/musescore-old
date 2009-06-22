@@ -44,6 +44,7 @@
     <sym code="0x83" name="13"/>
     <sym code="0x84" name="dim"/>
     <sym code="0x85" name="sus"/>
+    <sym code="0x8d" name="sus4"/>
     <sym code="0x86" name="+"/>
     <sym code="0x87" name="o"/>
     <sym code="0x88" name="sb"/>
@@ -1209,7 +1210,7 @@
     <name>sus4</name>
     <xml>suspended-fourth</xml>
     <voicing>C F G</voicing>
-    <render>sus 4</render>
+    <render>sus4</render>
     </chord>
   <chord id="193">
     <name>11</name>

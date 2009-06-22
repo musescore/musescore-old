@@ -288,10 +288,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
       if (type == SELECT_SINGLE) {
             refresh |= _selection->deselectAll(this);
-            if (e && (e->type() == MEASURE)) {
-                  select(e, SELECT_RANGE, staffIdx);
-                  return;
-                  }
             if (e == 0) {
                   selState = SEL_NONE;
                   if (!noteEntryMode())
@@ -299,6 +295,10 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   updateAll = true;
                   }
             else {
+                  if (e->type() == MEASURE) {
+                        select(e, SELECT_RANGE, staffIdx);
+                        return;
+                        }
                   refresh |= e->abbox();
                   if (e->selected()) {
                         _selection->remove(e);
@@ -310,10 +310,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         selState = SEL_SINGLE;
                         }
                   if (e->type() == NOTE || e->type() == REST) {
-                        ChordRest* cr = static_cast<ChordRest*>(e);
-                        if (e->type() == NOTE)
-                              cr = static_cast<ChordRest*>(e->parent());
-                        _is.cr = cr;
+                        _is.cr = static_cast<ChordRest*>(e->type() == NOTE ? e->parent() : e);
                         emit posChanged(_is.pos());
                         }
                   }
@@ -524,7 +521,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             updateSelectedElements(selState);
             _is.len = 0;
             }
-
       _selection->setState(selState);
       emit selectionChanged(int(_selection->state()));
       }
