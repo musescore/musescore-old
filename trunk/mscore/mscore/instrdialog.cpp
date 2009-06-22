@@ -697,8 +697,6 @@ void Score::cmdRemovePart(Part* part)
                   }
             }
 #endif
-      adjustBracketsDel(sidx, eidx);
-
       //
       //    adjust measures
       //
@@ -709,11 +707,8 @@ void Score::cmdRemovePart(Part* part)
             m->cmdRemoveStaves(sidx, eidx);
             }
 
-      for (int i = 0; i < n; ++i) {
-//            Staff* staff = _staves[sidx];
-//            undoRemoveStaff(staff, sidx);
+      for (int i = 0; i < n; ++i)
             cmdRemoveStaff(sidx);
-            }
       undoRemovePart(part, sidx);
       }
 
@@ -785,7 +780,7 @@ void Score::adjustBracketsDel(int sidx, int eidx)
 //                        }
                   }
             int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                   undoChangeBarLineSpan(staff, span - (eidx-sidx));
             }
       }
@@ -810,7 +805,7 @@ void Score::adjustBracketsIns(int sidx, int eidx)
 //                        }
                   }
             int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                   undoChangeBarLineSpan(staff, span + (eidx-sidx));
             }
       }
@@ -827,7 +822,6 @@ void Score::cmdRemoveStaff(int staffIdx)
                   case TRILL:
                   case PEDAL:
                         if (e->staffIdx() == staffIdx) {
-printf("removeStaff: %s\n", e->name());
                               undoRemoveElement(e);
                               }
                         break;
@@ -842,9 +836,9 @@ printf("removeStaff: %s\n", e->name());
                         break;
                   }
             }
+      adjustBracketsDel(staffIdx, staffIdx+1);
       Staff* s = staff(staffIdx);
       undoRemoveStaff(s, staffIdx);
-      adjustBracketsDel(staffIdx, staffIdx+1);
       }
 
 //---------------------------------------------------------

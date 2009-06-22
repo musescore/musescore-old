@@ -1844,16 +1844,15 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
 
 void Score::nextInputPos(ChordRest* cr)
       {
-      // select(note, SELECT_SINGLE, 0);
-      cr = nextChordRest(cr);
-      if ((cr == 0) && (_is.track % VOICES)) {
+      ChordRest* ncr = nextChordRest(cr);
+      if ((ncr == 0) && (_is.track % VOICES)) {
             Segment* s = tick2segment(cr->tick() + cr->tickLen());
             int track = (cr->track() / VOICES) * VOICES;
-            cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+            ncr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
-      _is.cr = cr;
-      if (cr)
-            emit posChanged(cr->tick());
+      _is.cr = ncr;
+      if (ncr)
+            emit posChanged(ncr->tick());
       }
 
 //---------------------------------------------------------
