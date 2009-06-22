@@ -2480,9 +2480,9 @@ QFileDialog* MuseScore::saveCopyDialog()
       if (_saveCopyDialog == 0) {
             _saveCopyDialog = new QFileDialog(mscore);
 #if  defined(Q_WS_MAC) || defined(Q_WS_WIN)
-            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, false);
+            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, false);
 #else
-            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, true);
 #endif
             _saveCopyDialog->setAcceptMode(QFileDialog::AcceptSave);
             _saveCopyDialog->setFileMode(QFileDialog::AnyFile);
