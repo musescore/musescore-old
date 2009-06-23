@@ -64,22 +64,23 @@ struct BankOffset {
 //---------------------------------------------------------
 
 class Fluid : public Synth {
+      static const int SILENT_BLOCKS = 32;
+      int silentBlocks;
+
       QList<SFont*> sfonts;               // the loaded soundfonts
       QList<BankOffset*> bank_offsets;    // the offsets of the soundfont banks
-      int silentBlocks;
-      static const int SILENT_BLOCKS = 32;
+      QList<Voice*> freeVoices;           // unused synthesis processes
+      QList<Voice*> activeVoices;         // active synthesis processes
 
    public:
       double sample_rate;                 // The sample rate
       unsigned int state;                 // the synthesizer state
-//      unsigned int ticks;                 // the number of audio samples since the start
 
       unsigned int sfont_id;
 
       double gain;                        // master gain
       QList<Channel*> channel;            // the channels
 
-      QList<Voice*> voice;                // the synthesis processes
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
 
       fluid_real_t* left_buf;
@@ -107,7 +108,7 @@ class Fluid : public Synth {
       static void init();
 
       bool set_reverb_preset(int num);
-      int one_block();
+      void one_block();
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
@@ -115,11 +116,9 @@ class Fluid : public Synth {
       void all_sounds_off(int chan);
       void modulate_voices(int chan, int is_cc, int ctrl);
       void modulate_voices_all(int chan);
-      int damp_voices(int chan);
+      void damp_voices(int chan);
       int kill_voice(Voice * voice);
-      void kill_by_exclusive_class(Voice* voice);
-      void release_voice_on_same_note(int chan, int key);
-      void sfunload_macos9();
+//      void sfunload_macos9();
       void print_voice();
 
       /** This function assures that every MIDI channels has a valid preset
@@ -178,6 +177,8 @@ class Fluid : public Synth {
       int get_pitch_wheel_sens(int chan, int* pval);
       int pitch_wheel_sens(int chan, int val);
       int get_pitch_bend(int chan, int* ppitch_bend);
+
+      void freeVoice(Voice* v);
       };
 
   /*
@@ -464,9 +465,6 @@ enum fluid_voice_add_mod {
       FLUID_VOICE_DEFAULT
       };
 
-  /* Add a modulator to a voice (SF2.1 only). */
-void fluid_voice_add_mod(Voice* voice, Mod* mod, int mode);
-
 /* Disable FPE exception check */
 #define fluid_check_fpe(expl)
 
@@ -632,10 +630,9 @@ class Channel
 #define NO_CHANNEL      0xff
 
 enum fluid_voice_status {
-	FLUID_VOICE_CLEAN,
+	FLUID_VOICE_OFF,
 	FLUID_VOICE_ON,
-	FLUID_VOICE_SUSTAINED,
-	FLUID_VOICE_OFF
+	FLUID_VOICE_SUSTAINED
       };
 
 /*
@@ -895,6 +892,7 @@ typedef union {
 
 class Voice
       {
+      Fluid* _fluid;
       double _noteTuning;             // +/- in midicent
 
    public:
@@ -913,9 +911,6 @@ class Voice
 	Sample* sample;
 	int check_sample_sanity_flag;   /* Flag that initiates, that sample-related parameters
 					           have to be checked. */
-	/* basic parameters */
-	fluid_real_t output_rate;        /* the sample rate of the synthesizer */
-
 	unsigned int ticks;
 
 	fluid_real_t amp;                /* the linear amplitude */
@@ -1013,10 +1008,10 @@ class Voice
 	double ref;
 
    public:
-      Voice(fluid_real_t output_rate);
+      Voice(Fluid*);
       Channel* get_channel() const    { return channel; }
       void voice_start();
-      int voice_off();
+      void voice_off();
       void init(Sample*, Channel*, int key, int vel, unsigned int id,
          fluid_real_t _gain, double tuning);
       void gen_incr(int i, float val);
@@ -1053,10 +1048,10 @@ class Voice
       bool RELEASED() const    { return chan == NO_CHANNEL; }
       bool SUSTAINED() const   { return status == FLUID_VOICE_SUSTAINED; }
       bool ON() const          { return (status == FLUID_VOICE_ON) && (volenv_section < FLUID_VOICE_ENVRELEASE); }
-      bool AVAILABLE() const   { return (status == FLUID_VOICE_CLEAN) || (status == FLUID_VOICE_OFF); }
       int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
 
       void write(fluid_real_t* l, fluid_real_t* r, fluid_real_t* reverb_buf, fluid_real_t* chorus_buf);
+      void add_mod(Mod* mod, int mode);
       };
 
 #define FLUID_SAMPLESANITY_CHECK (1 << 0)

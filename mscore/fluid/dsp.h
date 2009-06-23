@@ -267,9 +267,9 @@ if ((dsp_reverb_buf != NULL) && (voice->amp_reverb != 0.0)) {
 	}
 }
 
-/* chorus send. Buffer may be NULL. */
-if ((dsp_chorus_buf != NULL) && (voice->amp_chorus != 0)) {
-	for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
-		dsp_chorus_buf[dsp_i] += voice->amp_chorus * dsp_buf[dsp_i];
-	}
-}
+      /* chorus send. Buffer may be NULL. */
+      if (dsp_chorus_buf && voice->amp_chorus) {
+            for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
+                  dsp_chorus_buf[dsp_i] += voice->amp_chorus * dsp_buf[dsp_i];
+                  }
+            }

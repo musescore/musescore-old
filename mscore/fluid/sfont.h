@@ -100,13 +100,9 @@ class Sample {
       bool amplitude_that_reaches_noise_floor_is_valid;
       double amplitude_that_reaches_noise_floor;
 
-      unsigned int refcount;  // Count the number of playing voices that use this sample.
-
       Sample(SFont*);
       ~Sample();
 
-      void incr_ref()   { refcount++; }
-      void decr_ref()   { refcount--; }
       bool inRom() const;
       void optimize();
       void load();

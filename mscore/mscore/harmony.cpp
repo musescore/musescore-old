@@ -971,9 +971,10 @@ void ChordList::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "font") {
-                  fontFaces.append(e.attribute("family", "default"));
+                  ChordFont f;
+                  f.family = e.attribute("family", "default");
+                  f.mag    = 1.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
-                        QString val(ee.text());
                         if (ee.tagName() == "sym") {
                               ChordSymbol cs;
                               cs.fontIdx = fontIdx;
@@ -981,9 +982,13 @@ void ChordList::read(QDomElement e)
                               cs.code    = ee.attribute("code").toInt(0, 0);
                               symbols.insert(cs.name, cs);
                               }
+                        else if (ee.tagName() == "mag") {
+                              f.mag = ee.text().toDouble();
+                              }
                         else
                               domError(ee);
                         }
+                  fonts.append(f);
                   ++fontIdx;
                   }
             else if (tag == "chord") {
@@ -1139,24 +1144,23 @@ void Harmony::render()
             return;
 
       TextStyle* st        = score()->textStyle(_textStyle);
-      QFont f              = st->fontPx(spatium());
       ChordList* chordList = score()->style().chordList();
 
       fontList.clear();
-      foreach(QString s, chordList->fontFaces) {
-            if (s.isEmpty() || s == "default")
-                  fontList.append(f);
+      foreach(ChordFont cf, chordList->fonts) {
+            if (cf.family.isEmpty() || cf.family == "default")
+                  fontList.append(st->fontPx(spatium() * cf.mag));
             else {
 #ifdef Q_WS_MAC
                   s += " 20";
 #endif
-                  QFont ff(f);
-                  ff.setFamily(s);
+                  QFont ff(st->fontPx(spatium() * cf.mag));
+                  ff.setFamily(cf.family);
                   fontList.append(ff);
                   }
             }
       if (fontList.isEmpty())
-            fontList.append(f);
+            fontList.append(st->fontPx(spatium()));
 
       foreach(const TextSegment* s, textList)
             delete s;

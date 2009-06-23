@@ -242,7 +242,7 @@ void Fluid::init(int sr)
       tuning      = 0;
 
       for (int i = 0; i < 256; i++)
-            voice.append(new Voice(sample_rate));
+            freeVoices.append(new Voice(this));
 
       cur    = FLUID_BUFSIZE;
       reverb = new Reverb();
@@ -257,19 +257,16 @@ void Fluid::init(int sr)
 Fluid::~Fluid()
       {
       state = FLUID_SYNTH_STOPPED;
-      /* turn off all voices, needed to unload SoundFont data */
-      foreach(Voice* v, voice) {
-            if (v->isPlaying())
-                  v->voice_off();
-            }
+      foreach(Voice* v, activeVoices)
+            delete v;
+      foreach(Voice* v, freeVoices)
+            delete v;
       foreach(SFont* sf, sfonts)
             delete sf;
       foreach(BankOffset* bankOffset, bank_offsets)
             delete bankOffset;
       foreach(Channel* c, channel)
             delete c;
-      foreach(Voice* v, voice)
-            delete v;
 
       delete[] left_buf;
       delete[] right_buf;
@@ -299,6 +296,16 @@ Fluid::~Fluid()
       }
 
 //---------------------------------------------------------
+//   freeVoice
+//---------------------------------------------------------
+
+void Fluid::freeVoice(Voice* v)
+      {
+      if (activeVoices.removeOne(v))
+            freeVoices.append(v);
+      }
+
+//---------------------------------------------------------
 //   play
 //---------------------------------------------------------
 
@@ -308,9 +315,8 @@ void Fluid::play(const Event& event)
       int ch      = event.channel();
 
       if (ch >= channel.size()) {
-            for (int i = channel.size(); i < ch+1; i++) {
+            for (int i = channel.size(); i < ch+1; i++)
                   channel.append(new Channel(this, i));
-                  }
             }
 
       int type    = event.type();
@@ -320,7 +326,10 @@ void Fluid::play(const Event& event)
             int key = event.dataA();
             int vel = event.dataB();
             if (vel == 0) {
-                  foreach (Voice* v, voice) {
+                  //
+                  // process note off
+                  //
+                  foreach (Voice* v, activeVoices) {
                         if (v->ON() && (v->chan == ch) && (v->key == key))
                               v->noteoff();
                         }
@@ -331,10 +340,19 @@ void Fluid::play(const Event& event)
                   err = FLUID_FAILED;
                   }
             else {
-                  /* If there is another voice process on the same channel and key,
-                     advance it to the release phase.
+                  /*
+                   * If the same note is hit twice on the same channel, then the older
+                   * voice process is advanced to the release stage.  Using a mechanical
+                   * MIDI controller, the only way this can happen is when the sustain
+                   * pedal is held.  In this case the behaviour implemented here is
+                   * natural for many instruments.  Note: One noteon event can trigger
+                   * several voice processes, for example a stereo sample.  Don't
+                   * release those...
                    */
-                  release_voice_on_same_note(ch, key);
+                  foreach(Voice* v, activeVoices) {
+                        if (v->isPlaying() && (v->chan == ch) && (v->key == key) && (v->get_id() != noteid))
+                              v->noteoff();
+                        }
                   err = cp->preset()->noteon(this, noteid++, ch, key, vel, event.tuning());
                   }
             }
@@ -362,13 +380,12 @@ void Fluid::play(const Event& event)
 //   damp_voices
 //---------------------------------------------------------
 
-int Fluid::damp_voices(int chan)
+void Fluid::damp_voices(int chan)
       {
-      foreach(Voice* v, voice) {
+      foreach(Voice* v, activeVoices) {
             if ((v->chan == chan) && v->SUSTAINED())
                   v->noteoff();
             }
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -386,8 +403,8 @@ int Fluid::get_cc(int chan, int num)
 
 void Fluid::all_notes_off(int chan)
       {
-      foreach(Voice* v, voice) {
-            if (v->isPlaying() && (v->chan == chan))
+      foreach(Voice* v, activeVoices) {
+            if (v->chan == chan)
                   v->noteoff();
             }
       }
@@ -399,8 +416,8 @@ void Fluid::all_notes_off(int chan)
 
 void Fluid::all_sounds_off(int chan)
       {
-      foreach(Voice* v, voice) {
-            if (v->isPlaying() && (v->chan == chan))
+      foreach(Voice* v, activeVoices) {
+            if (v->chan == chan)
                   v->voice_off();
             }
       }
@@ -414,13 +431,10 @@ void Fluid::all_sounds_off(int chan)
 
 void Fluid::system_reset()
       {
-      foreach(Voice* v, voice) {
-            if (v->isPlaying())
-                  v->voice_off();
-            }
+      foreach(Voice* v, activeVoices)
+            v->voice_off();
       foreach(Channel* c, channel)
             c->reset();
-
       fluid_chorus_reset(chorus);
       reverb->reset();
       }
@@ -463,7 +477,7 @@ const MidiPatch* Fluid::getPatchInfo(bool onlyDrums, const MidiPatch* pp) const
  */
 void Fluid::modulate_voices(int chan, int is_cc, int ctrl)
       {
-      foreach(Voice* v, voice) {
+      foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
                   v->modulate(is_cc, ctrl);
             }
@@ -478,7 +492,7 @@ void Fluid::modulate_voices(int chan, int is_cc, int ctrl)
  */
 void Fluid::modulate_voices_all(int chan)
       {
-      foreach(Voice* v, voice) {
+      foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
                   v->modulate_all();
             }
@@ -683,10 +697,8 @@ void Fluid::set_gain(float g)
       fluid_clip(g, 0.0f, 10.0f);
       gain = g;
 
-      foreach(Voice* v, voice) {
-            if (v->isPlaying())
-                  v->set_gain(g);
-            }
+      foreach(Voice* v, activeVoices)
+            v->set_gain(g);
       }
 
 /*
@@ -758,7 +770,7 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
 //   one_block
 //---------------------------------------------------------
 
-int Fluid::one_block()
+void Fluid::one_block()
       {
       static const int byte_size = FLUID_BUFSIZE * sizeof(fluid_real_t);
 
@@ -779,14 +791,13 @@ int Fluid::one_block()
       fluid_real_t* revb = fx_left_buf[0];
       fluid_real_t* chob = fx_left_buf[1];
 
-      --silentBlocks;
-      /* call all playing synthesis processes */
-      foreach(Voice* v, voice) {
-            if (v->isPlaying()) {
-                  v->write(left_buf, right_buf, revb, chob);
-                  silentBlocks = SILENT_BLOCKS;
-                  }
-            }
+      if (activeVoices.isEmpty())
+            --silentBlocks;
+      else
+            silentBlocks = SILENT_BLOCKS;
+
+      foreach(Voice* v, activeVoices)
+            v->write(left_buf, right_buf, revb, chob);
 
       if (silentBlocks > 0) {
            if (revb)
@@ -794,9 +805,7 @@ int Fluid::one_block()
             if (chob)
                   fluid_chorus_processmix(chorus, chob, left_buf, right_buf);
             }
-      return 0;
       }
-
 
 /*
  * fluid_synth_free_voice_by_kill
@@ -804,18 +813,14 @@ int Fluid::one_block()
  * selects a voice for killing. the selection algorithm is a refinement
  * of the algorithm previously in fluid_synth_alloc_voice.
  */
+
 Voice* Fluid::free_voice_by_kill()
       {
       fluid_real_t best_prio = 999999.;
       fluid_real_t this_voice_prio;
       Voice* best_voice = 0;
 
-      foreach(Voice* v, voice) {
-            /* safeguard against an available voice. */
-            if (v->AVAILABLE()) {
-                  return v;
-                  }
-
+      foreach(Voice* v, activeVoices) {
             /* Determine, how 'important' a voice is.
              * Start with an arbitrary number */
             this_voice_prio = 10000.;
@@ -882,15 +887,9 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
       Channel* c = 0;
 
       /* check if there's an available synthesis process */
-      foreach(Voice* vv, voice) {
-            if (vv->AVAILABLE()) {
-                  v = vv;
-                  break;
-                  }
-            }
-
-      /* No success yet? Then stop a running voice. */
-      if (v == 0)
+      if (!freeVoices.isEmpty())
+            v = freeVoices.takeLast();
+      else
             v = free_voice_by_kill();
 
       if (v == 0) {
@@ -898,30 +897,37 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
             return 0;
             }
 
+      activeVoices.append(v);
+
       if (chan >= 0)
             c = channel[chan];
 
       v->init(sample, c, key, vel, id, gain, vt);
 
       /* add the default modulators to the synthesis process. */
-      fluid_voice_add_mod(v, &default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */
-      fluid_voice_add_mod(v, &default_vel2filter_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.2  */
-      fluid_voice_add_mod(v, &default_at2viblfo_mod, FLUID_VOICE_DEFAULT);  /* SF2.01 $8.4.3  */
-      fluid_voice_add_mod(v, &default_mod2viblfo_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.4  */
-      fluid_voice_add_mod(v, &default_att_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.5  */
-      fluid_voice_add_mod(v, &default_pan_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.6  */
-      fluid_voice_add_mod(v, &default_expr_mod, FLUID_VOICE_DEFAULT);       /* SF2.01 $8.4.7  */
-      fluid_voice_add_mod(v, &default_reverb_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.8  */
-      fluid_voice_add_mod(v, &default_chorus_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.9  */
-      fluid_voice_add_mod(v, &default_pitch_bend_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.10 */
+      v->add_mod(&default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */
+      v->add_mod(&default_vel2filter_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.2  */
+      v->add_mod(&default_at2viblfo_mod, FLUID_VOICE_DEFAULT);  /* SF2.01 $8.4.3  */
+      v->add_mod(&default_mod2viblfo_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.4  */
+      v->add_mod(&default_att_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.5  */
+      v->add_mod(&default_pan_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.6  */
+      v->add_mod(&default_expr_mod, FLUID_VOICE_DEFAULT);       /* SF2.01 $8.4.7  */
+      v->add_mod(&default_reverb_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.8  */
+      v->add_mod(&default_chorus_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.9  */
+      v->add_mod(&default_pitch_bend_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.10 */
       return v;
       }
 
-/*
- * fluid_synth_kill_by_exclusive_class
- */
-void Fluid::kill_by_exclusive_class(Voice* new_voice)
+//---------------------------------------------------------
+//   start_voice
+//---------------------------------------------------------
+
+void Fluid::start_voice(Voice* voice)
       {
+      /* Find the exclusive class of this voice. If set, kill all voices
+      * that match the exclusive class and are younger than the first
+      * voice process created by this noteon event. */
+
       /** Kill all voices on a given channel, which belong into
           excl_class.  This function is called by a SoundFont's preset in
           response to a noteon event.  If one noteon event results in
@@ -932,51 +938,35 @@ void Fluid::kill_by_exclusive_class(Voice* new_voice)
           class excl_class.
       */
 
-      int excl_class = new_voice->GEN(GEN_EXCLUSIVECLASS);
-
       /* Check if the voice belongs to an exclusive class. In that case,
          previous notes from the same class are released. */
 
-      /* Excl. class 0: No exclusive class */
-      if (excl_class == 0)
-            return;
+      int excl_class = voice->GEN(GEN_EXCLUSIVECLASS);
+      if (excl_class) {
 
-      //  FLUID_LOG(FLUID_INFO, "Voice belongs to exclusive class (class=%d, ignore_id=%d)", excl_class, ignore_ID);
+            /* Kill all notes on the same channel with the same exclusive class */
 
-      /* Kill all notes on the same channel with the same exclusive class */
+            foreach(Voice* existing_voice, activeVoices) {
+                  /* Existing voice does not play? Leave it alone. */
+                  if (!existing_voice->isPlaying())
+                        continue;
 
-      foreach(Voice* existing_voice, voice) {
-            /* Existing voice does not play? Leave it alone. */
-            if (!existing_voice->isPlaying())
-                  continue;
+                  /* An exclusive class is valid for a whole channel (or preset).
+                   * Is the voice on a different channel? Leave it alone. */
+                  if (existing_voice->chan != voice->chan)
+                        continue;
 
-            /* An exclusive class is valid for a whole channel (or preset).
-             * Is the voice on a different channel? Leave it alone. */
-            if (existing_voice->chan != new_voice->chan)
-                  continue;
+                  /* Existing voice has a different (or no) exclusive class? Leave it alone. */
+                  if ((int)existing_voice->GEN(GEN_EXCLUSIVECLASS) != excl_class)
+                        continue;
 
-            /* Existing voice has a different (or no) exclusive class? Leave it alone. */
-            if ((int)existing_voice->GEN(GEN_EXCLUSIVECLASS) != excl_class)
-                  continue;
-
-            /* Existing voice is a voice process belonging to this noteon
-             * event (for example: stereo sample)?  Leave it alone. */
-            if (existing_voice->get_id() == new_voice->get_id())
-                  continue;
-            existing_voice->kill_excl();
+                  /* Existing voice is a voice process belonging to this noteon
+                   * event (for example: stereo sample)?  Leave it alone. */
+                  if (existing_voice->get_id() == voice->get_id())
+                        continue;
+                  existing_voice->kill_excl();
+                  }
             }
-      }
-
-/*
- * fluid_synth_start_voice
- */
-void Fluid::start_voice(Voice* voice)
-      {
-      /* Find the exclusive class of this voice. If set, kill all voices
-      * that match the exclusive class and are younger than the first
-      * voice process created by this noteon event. */
-
-      kill_by_exclusive_class(voice);
       voice->voice_start();
       }
 
@@ -1130,23 +1120,6 @@ SFont* Fluid::get_sfont_by_name(const QString& name)
 Preset* Fluid::get_channel_preset(int chan)
       {
       return channel[chan]->preset();
-      }
-
-/*
- * If the same note is hit twice on the same channel, then the older
- * voice process is advanced to the release stage.  Using a mechanical
- * MIDI controller, the only way this can happen is when the sustain
- * pedal is held.  In this case the behaviour implemented here is
- * natural for many instruments.  Note: One noteon event can trigger
- * several voice processes, for example a stereo sample.  Don't
- * release those...
- */
-void Fluid::release_voice_on_same_note(int chan, int key)
-      {
-      foreach(Voice* v, voice) {
-            if (v->isPlaying() && (v->chan == chan) && (v->key == key) && (v->get_id() != noteid))
-                  v->noteoff();
-            }
       }
 
 /* Sets the interpolation method to use on channel chan.
@@ -1313,6 +1286,10 @@ int Fluid::Fluiduning_iteration_next(int* bank, int* prog)
       return 0;
       }
 
+//---------------------------------------------------------
+//   set_gen
+//---------------------------------------------------------
+
 int Fluid::set_gen(int chan, int param, float value)
       {
       if ((param < 0) || (param >= GEN_LAST)) {
@@ -1320,7 +1297,7 @@ int Fluid::set_gen(int chan, int param, float value)
             return FLUID_FAILED;
             }
       channel[chan]->setGen(param, value, 0);
-      foreach(Voice* v, voice) {
+      foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
                   v->set_param(param, value, 0);
             }
@@ -1359,7 +1336,7 @@ int Fluid::set_gen2(int chan, int param, float value, int absolute, int normaliz
       float v = (normalized)? fluid_gen_scale(param, value) : value;
       channel[chan]->setGen(param, v, absolute);
 
-      foreach(Voice* vo, voice) {
+      foreach(Voice* vo, activeVoices) {
             if (vo->chan == chan)
                   vo->set_param(param, v, absolute);
             }
@@ -1380,8 +1357,8 @@ int Fluid::stop(unsigned int id)
       int status = FLUID_FAILED;
       int count = 0;
 
-      foreach(Voice* v, voice) {
-            if (v->ON() && (v->get_id() == id)) {
+      foreach(Voice* v, activeVoices) {
+            if (v->get_id() == id) {
                   count++;
                   v->noteoff();
                   status = FLUID_OK;
