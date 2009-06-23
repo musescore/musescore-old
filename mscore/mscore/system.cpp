@@ -722,8 +722,8 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       Segment* ns = s;
 
       // TODO: then next two values should be style parameters
-      const double maxl = 0.8 * _spatium;   // lyrics hyphen length
-      const Spatium hlw(0.1);               // hyphen line width
+      const double maxl = 0.5 * _spatium;   // lyrics hyphen length
+      const Spatium hlw(0.14);               // hyphen line width
 
       while ((ns = ns->next1())) {
             LyricsList* nll = ns->lyricsList(staffIdx);
@@ -749,7 +749,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             qreal w  = b.width();
             qreal h  = b.height();
             qreal x  = b.x() + w;
-            qreal y  = b.y() + h * .5;
+            qreal y  = b.y() + h * .58;
             line->setPos(QPointF(x, y));
 
             qreal x1 = l->canvasPos().x();
