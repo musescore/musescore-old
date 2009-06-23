@@ -1,9 +1,11 @@
-23.jun (la)
+23.jun (ws)
+      - add "size" to font in chord description file
+      (la)
       - fix: crash on save a copy
       - enable sorting of shortcuts in preferences
       (db)
       - Remove faulty "hemidemisemiquaver" text from en_GB translation
-      - Fix lyric hyphen line to more closely approximate dimensions of 
+      - Fix lyric hyphen line to more closely approximate dimensions of
         an actual hyphen
       - Adjust size of preferences dialog for small screen sizes
 22.jun (ws)

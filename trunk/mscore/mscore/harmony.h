@@ -138,6 +138,15 @@ struct ChordSymbol {
       };
 
 //---------------------------------------------------------
+//   ChordFont
+//---------------------------------------------------------
+
+struct ChordFont {
+      QString family;
+      double mag;
+      };
+
+//---------------------------------------------------------
 //   ChordList
 //---------------------------------------------------------
 
@@ -145,7 +154,7 @@ class ChordList : public QMap<int, const ChordDescription*> {
       QHash<QString, ChordSymbol> symbols;
 
    public:
-      QList<QString> fontFaces;
+      QList<ChordFont> fonts;
       QList<RenderAction> renderListRoot;
       QList<RenderAction> renderListBase;
 

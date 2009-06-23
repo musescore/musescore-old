@@ -78,8 +78,9 @@ static QStringList recentScores;
 
 Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
+
 bool converterMode = false;
-bool pluginMode = false;
+static bool pluginMode = false;
 double converterDpi = 300;
 
 static const char* outFileName;
@@ -1021,6 +1022,7 @@ static void usage(const char* prog, const char*)
         "   -o file   export to 'file'; format depends on file extension\n"
         "   -r dpi    set output resolution for image export\n"
         "   -S style  load style file\n"
+        "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
         );
       }
@@ -1597,23 +1599,11 @@ int main(int argc, char* argv[])
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
             sc->setWindowFlags(Qt::FramelessWindowHint);
-#if 0
-            QSize s(pm.size());
-            QBitmap bm(s);
-            bm.clear();
-            QPainter p;
-            p.begin(&bm);
-            p.setBrush(Qt::SolidPattern);
-//            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
-            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/20, s.width()/20);
-            p.end();
-            sc->setMask(bm);
-#endif
             sc->show();
             app.processEvents();
             }
 
-      if (!useFactorySettings) {
+      if (!useFactorySettings && !converterMode) {
             qApp->setStyleSheet(appStyleSheet());
             if (!preferences.style.isEmpty())
                   QApplication::setStyle(preferences.style);
@@ -1622,6 +1612,7 @@ int main(int argc, char* argv[])
       //
       //  load internal fonts
       //
+
       if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore-20.ttf")) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             if (!debugMode)
@@ -1777,23 +1768,25 @@ int main(int argc, char* argv[])
       mscore->showPlayPanel(preferences.showPlayPanel);
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
-      if (pluginMode){
-          QString pn(pluginName);
-          bool res = false;
-          if (mscore->loadPlugin(pn)){
-            Score* cs = mscore->currentScore();
-            if (styleFile) {
-                  QFile f(styleFile);
-                  if (f.open(QIODevice::ReadOnly))
-                        cs->loadStyle(&f);
+
+      if (pluginMode) {
+            QString pn(pluginName);
+            bool res = false;
+            if (mscore->loadPlugin(pn)){
+                  Score* cs = mscore->currentScore();
+                  if (styleFile) {
+                        QFile f(styleFile);
+                        if (f.open(QIODevice::ReadOnly))
+                              cs->loadStyle(&f);
+                        }
+                  cs->doLayout();
+                  mscore->pluginTriggered(0);
+                  res = true;
                   }
-            cs->doLayout();
-            mscore->pluginTriggered(0);
-            res = true;
-          }
-          if(!converterMode)
-            exit(res ? 0 : -1);
-      }
+            if (!converterMode)
+                  exit(res ? 0 : -1);
+            }
+
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();

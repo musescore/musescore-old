@@ -304,7 +304,7 @@ int Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double
                                     if (mod) {  // disabled modulators CANNOT be skipped.
                                           /* Instrument modulators -supersede- existing (default)
 	                                     * modulators.  SF 2.01 page 69, 'bullet' 6 */
-	                                    fluid_voice_add_mod(voice, mod, FLUID_VOICE_OVERWRITE);
+                                          voice->add_mod(mod, FLUID_VOICE_OVERWRITE);
                                           }
                                     }
 
@@ -381,7 +381,7 @@ int Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double
                                           /* Preset modulators -add- to existing instrument /
 	                                     * default modulators.  SF2.01 page 70 first bullet on
 	                                     * page */
-                                          fluid_voice_add_mod(voice, mod, FLUID_VOICE_ADD);
+                                          voice->add_mod(mod, FLUID_VOICE_ADD);
                                           }
                                     }
 
@@ -946,7 +946,6 @@ Sample::Sample(SFont* s)
       data        = 0;
       amplitude_that_reaches_noise_floor_is_valid = false;
       amplitude_that_reaches_noise_floor = 0.0;
-      refcount    = 0;
       }
 
 //---------------------------------------------------------

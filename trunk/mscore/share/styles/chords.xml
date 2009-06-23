@@ -38,6 +38,7 @@
     </font>
 
   <font id="1" family="Mscore1">
+    <mag>1.2</mag>
     <sym code="0xe10d" name="b"/>   <!-- use symbols for accidentals -->
     <sym code="0xe10c" name="#"/>
     </font>
@@ -55,15 +56,15 @@
          render   this is a script which contains render commands
                   commands:
                         xxx         draw symbol name xxx
-                        m:x:y       add x:y (point) to current position
+                        m:x:y       add x:y (point?) to current position
                         :push
                         :pop
                         :n          root or base note
                         :a          accidental
 -->
 
-  <renderRoot>:n :a</renderRoot>
-  <renderBase>m:0:0 / :n :a</renderBase>
+  <renderRoot>:n m:0:-1 :a m:.5:1</renderRoot>
+  <renderBase>m:0:2 / :n :a</renderBase>
 
   <chord id="1">
     <name></name>

@@ -98,15 +98,15 @@ void fluid_voice_config()
 //   Voice
 //---------------------------------------------------------
 
-Voice::Voice(fluid_real_t r)
+Voice::Voice(Fluid* f)
       {
-      status  = FLUID_VOICE_CLEAN;
+      _fluid  = f;
+      status  = FLUID_VOICE_OFF;
       chan    = NO_CHANNEL;
       key     = 0;
       vel     = 0;
       channel = 0;
       sample  = 0;
-      output_rate = r;
 
       /* The 'sustain' and 'finished' segments of the volume / modulation
        * envelope are constant. They are never affected by any modulator
@@ -115,27 +115,27 @@ Voice::Voice(fluid_real_t r)
        */
       volenv_data[FLUID_VOICE_ENVSUSTAIN].count = 0xffffffff;
       volenv_data[FLUID_VOICE_ENVSUSTAIN].coeff = 1.0f;
-      volenv_data[FLUID_VOICE_ENVSUSTAIN].incr = 0.0f;
-      volenv_data[FLUID_VOICE_ENVSUSTAIN].min = -1.0f;
-      volenv_data[FLUID_VOICE_ENVSUSTAIN].max = 2.0f;
+      volenv_data[FLUID_VOICE_ENVSUSTAIN].incr  = 0.0f;
+      volenv_data[FLUID_VOICE_ENVSUSTAIN].min   = -1.0f;
+      volenv_data[FLUID_VOICE_ENVSUSTAIN].max   = 2.0f;
 
       volenv_data[FLUID_VOICE_ENVFINISHED].count = 0xffffffff;
       volenv_data[FLUID_VOICE_ENVFINISHED].coeff = 0.0f;
-      volenv_data[FLUID_VOICE_ENVFINISHED].incr = 0.0f;
-      volenv_data[FLUID_VOICE_ENVFINISHED].min = -1.0f;
-      volenv_data[FLUID_VOICE_ENVFINISHED].max = 1.0f;
+      volenv_data[FLUID_VOICE_ENVFINISHED].incr  = 0.0f;
+      volenv_data[FLUID_VOICE_ENVFINISHED].min   = -1.0f;
+      volenv_data[FLUID_VOICE_ENVFINISHED].max   = 1.0f;
 
       modenv_data[FLUID_VOICE_ENVSUSTAIN].count = 0xffffffff;
       modenv_data[FLUID_VOICE_ENVSUSTAIN].coeff = 1.0f;
-      modenv_data[FLUID_VOICE_ENVSUSTAIN].incr = 0.0f;
-      modenv_data[FLUID_VOICE_ENVSUSTAIN].min = -1.0f;
-      modenv_data[FLUID_VOICE_ENVSUSTAIN].max = 2.0f;
+      modenv_data[FLUID_VOICE_ENVSUSTAIN].incr  = 0.0f;
+      modenv_data[FLUID_VOICE_ENVSUSTAIN].min   = -1.0f;
+      modenv_data[FLUID_VOICE_ENVSUSTAIN].max   = 2.0f;
 
       modenv_data[FLUID_VOICE_ENVFINISHED].count = 0xffffffff;
       modenv_data[FLUID_VOICE_ENVFINISHED].coeff = 0.0f;
-      modenv_data[FLUID_VOICE_ENVFINISHED].incr = 0.0f;
-      modenv_data[FLUID_VOICE_ENVFINISHED].min = -1.0f;
-      modenv_data[FLUID_VOICE_ENVFINISHED].max = 1.0f;
+      modenv_data[FLUID_VOICE_ENVFINISHED].incr  = 0.0f;
+      modenv_data[FLUID_VOICE_ENVFINISHED].min   = -1.0f;
+      modenv_data[FLUID_VOICE_ENVFINISHED].max   = 1.0f;
       }
 
 //---------------------------------------------------------
@@ -211,11 +211,6 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
 
       amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR / synth_gain;
       amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR / synth_gain;
-
-      /* Increment the reference count of the sample to prevent the
-         unloading of the soundfont while this voice is playing.
-         */
-      sample->incr_ref();
       }
 
 //---------------------------------------------------------
@@ -247,7 +242,7 @@ float Voice::gen_get(int g)
       return gen[g].val;
       }
 
-//---------------------------------------------------------
+//-----------------------------------------------------------------------------
 // fluid_voice_write
 //
 // This is where it all happens. This function is called by the
@@ -257,7 +252,7 @@ float Voice::gen_get(int g)
 // The biggest part of this function sets the correct values for all
 // the dsp parameters (all the control data boil down to only a few
 // dsp parameters). The dsp routine is #included in several places (fluid_dsp_core.c).
-//---------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
    fluid_real_t* dsp_reverb_buf, fluid_real_t* dsp_chorus_buf)
@@ -289,10 +284,13 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
 
       fluid_real_t dsp_buf[FLUID_BUFSIZE];
 
-      if (!isPlaying()) // make sure we're playing and that we have sample data
+      if (!isPlaying()) { // make sure we're playing and that we have sample data
+            printf("not playing\n");
             return;
+            }
       if (!sample) {
             voice_off();
+            printf("no sample data\n");
             return;
             }
 
@@ -569,11 +567,12 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
    * clipping the maximum filter frequency at 0.45*srate, the filter
    * is used as an anti-aliasing filter. */
 
-  if (fres > 0.45f * voice->output_rate) {
-    fres = 0.45f * voice->output_rate;
-  } else if (fres < 5) {
-    fres = 5;
-  }
+      if (fres > 0.45f * _fluid->sample_rate) {
+            fres = 0.45f * _fluid->sample_rate;
+            }
+      else if (fres < 5) {
+            fres = 5;
+            }
 
   /* if filter enabled and there is a significant frequency change.. */
   if (/*dsp_use_filter_flag &&*/ (abs(fres - voice->last_fres) > 0.01)) {
@@ -959,7 +958,7 @@ int Voice::calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_d
       /* Each DSP loop processes FLUID_BUFSIZE samples. */
 
       /* round to next full number of buffers */
-      int buffers = (int)(((fluid_real_t)output_rate * seconds)
+      int buffers = (int)(((fluid_real_t)_fluid->sample_rate * seconds)
          / (fluid_real_t)FLUID_BUFSIZE +0.5);
 
       return buffers;
@@ -1047,9 +1046,8 @@ void Voice::update_param(int _gen)
                         root_pitch = sample->origpitch * 100.0f - sample->pitchadj;
                         }
                   root_pitch = fluid_ct2hz(root_pitch);
-                  if (sample != 0) {
-                        root_pitch *= (fluid_real_t) output_rate / sample->samplerate;
-                        }
+                  if (sample != 0)
+                        root_pitch *= (fluid_real_t) _fluid->sample_rate / sample->samplerate;
                   break;
 
             case GEN_FILTERFC:
@@ -1132,7 +1130,7 @@ void Voice::update_param(int _gen)
             case GEN_MODLFODELAY:
                   x = GEN(GEN_MODLFODELAY);
                   fluid_clip(x, -12000.0f, 5000.0f);
-                  modlfo_delay = (unsigned int) (output_rate * fluid_tc2sec_delay(x));
+                  modlfo_delay = (unsigned int) (_fluid->sample_rate * fluid_tc2sec_delay(x));
                   break;
 
             case GEN_MODLFOFREQ:
@@ -1141,7 +1139,7 @@ void Voice::update_param(int _gen)
                    */
                   x = GEN(GEN_MODLFOFREQ);
                   fluid_clip(x, -16000.0f, 4500.0f);
-                  modlfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / output_rate);
+                  modlfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / _fluid->sample_rate);
                   break;
 
             case GEN_VIBLFOFREQ:
@@ -1152,13 +1150,13 @@ void Voice::update_param(int _gen)
                    */
                   x = GEN(GEN_VIBLFOFREQ);
                   fluid_clip(x, -16000.0f, 4500.0f);
-                  viblfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / output_rate);
+                  viblfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / _fluid->sample_rate);
                   break;
 
             case GEN_VIBLFODELAY:
                   x = GEN(GEN_VIBLFODELAY);
                   fluid_clip(x, -12000.0f, 5000.0f);
-                  viblfo_delay = (unsigned int) (output_rate * fluid_tc2sec_delay(x));
+                  viblfo_delay = (unsigned int) (_fluid->sample_rate * fluid_tc2sec_delay(x));
                   break;
 
             case GEN_VIBLFOTOPITCH:
@@ -1263,9 +1261,9 @@ void Voice::update_param(int _gen)
                   break;
 
     /* Conversion functions differ in range limit */
-#define NUM_BUFFERS_DELAY(_v)   (unsigned int) (output_rate * fluid_tc2sec_delay(_v) / FLUID_BUFSIZE)
-#define NUM_BUFFERS_ATTACK(_v)  (unsigned int) (output_rate * fluid_tc2sec_attack(_v) / FLUID_BUFSIZE)
-#define NUM_BUFFERS_RELEASE(_v) (unsigned int) (output_rate * fluid_tc2sec_release(_v) / FLUID_BUFSIZE)
+#define NUM_BUFFERS_DELAY(_v)   (unsigned int) (_fluid->sample_rate * fluid_tc2sec_delay(_v) / FLUID_BUFSIZE)
+#define NUM_BUFFERS_ATTACK(_v)  (unsigned int) (_fluid->sample_rate * fluid_tc2sec_attack(_v) / FLUID_BUFSIZE)
+#define NUM_BUFFERS_RELEASE(_v) (unsigned int) (_fluid->sample_rate * fluid_tc2sec_release(_v) / FLUID_BUFSIZE)
 
            /* volume envelope
             *
@@ -1564,7 +1562,7 @@ void Voice::kill_excl()
 //    anymore by the DSP loop.
 //---------------------------------------------------------
 
-int Voice::voice_off()
+void Voice::voice_off()
       {
       chan           = NO_CHANNEL;
       volenv_section = FLUID_VOICE_ENVFINISHED;
@@ -1572,13 +1570,7 @@ int Voice::voice_off()
       modenv_section = FLUID_VOICE_ENVFINISHED;
       modenv_count   = 0;
       status         = FLUID_VOICE_OFF;
-
-      // Decrement the reference count of the sample.
-      if (sample) {
-            sample->decr_ref();
-            sample = 0;
-            }
-      return FLUID_OK;
+      _fluid->freeVoice(this);
       }
 
 /*
@@ -1592,8 +1584,9 @@ int Voice::voice_off()
  * mode == FLUID_VOICE_DEFAULT: This is a default modulator, there can be no identical modulator.
  *                             Don't check.
  */
-void fluid_voice_add_mod(Voice* voice, Mod* mod, int mode)
+void Voice::add_mod(Mod* mod, int mode)
       {
+      Voice* voice = this;
       int i;
 
       /*
@@ -1603,7 +1596,7 @@ void fluid_voice_add_mod(Voice* voice, Mod* mod, int mode)
        */
 
       if (((mod->flags1 & FLUID_MOD_CC) == 0)
-         && ((mod->src1 != 0)          /* SF2.01 section 8.2.1: Constant value */
+         && ((mod->src1 != 0)      /* SF2.01 section 8.2.1: Constant value */
 	   && (mod->src1 != 2)       /* Note-on velocity */
 	   && (mod->src1 != 3)       /* Note-on key number */
 	   && (mod->src1 != 10)      /* Poly pressure */
