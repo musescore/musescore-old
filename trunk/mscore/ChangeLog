@@ -1,6 +1,11 @@
 23.jun (la)
       - fix: crash on save a copy
       - enable sorting of shortcuts in preferences
+      (db)
+      - Remove faulty "hemidemisemiquaver" text from en_GB translation
+      - Fix lyric hyphen line to more closely approximate dimensions of 
+        an actual hyphen
+      - Adjust size of preferences dialog for small screen sizes
 22.jun (ws)
       - fix: removing staff causes crash if multi-staff bar
       - added symbol for sus4 to jazzfont

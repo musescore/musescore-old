@@ -384,7 +384,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished">hemidemisemiquaver {2?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Maj7</source>
@@ -396,11 +396,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished">hemidemisemiquaver {6?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished">hemidemisemiquaver {69?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>m</source>
@@ -416,7 +416,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished">hemidemisemiquaver {7?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sus</source>
@@ -444,11 +444,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished">hemidemisemiquaver {9?}</translation>
+        <translation type="unfinished">9</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished">hemidemisemiquaver {13?}</translation>
+        <translation type="unfinished">13</translation>
     </message>
     <message>
         <source>7b9</source>
@@ -524,7 +524,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">hemidemisemiquaver {5?}</translation>
+        <translation type="unfinished">5</translation>
     </message>
     <message>
         <source>7+</source>
@@ -552,11 +552,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished">hemidemisemiquaver {7#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished">hemidemisemiquaver {13#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#11b13</source>
@@ -568,7 +568,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished">hemidemisemiquaver {9#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#11b13</source>
@@ -596,11 +596,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished">hemidemisemiquaver {7#9?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished">hemidemisemiquaver {13#9?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#9b13</source>
@@ -608,7 +608,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>13#9#11</source>
-        <translation type="unfinished">hemidemisemiquaver {13#9#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#9#11b13</source>
@@ -660,27 +660,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished">hemidemisemiquaver {7#5?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation type="unfinished">hemidemisemiquaver {13#5?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation type="unfinished">hemidemisemiquaver {7#5#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation type="unfinished">hemidemisemiquaver {13#5#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished">hemidemisemiquaver {9#5?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation type="unfinished">hemidemisemiquaver {9#5#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5b9</source>
@@ -700,15 +700,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished">hemidemisemiquaver {7#5#9?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation type="unfinished">hemidemisemiquaver {13#5#9#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation type="unfinished">hemidemisemiquaver {7#5#9#11?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7alt</source>
@@ -896,7 +896,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished">hemidemisemiquaver {4?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -968,11 +968,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">hemidemisemiquaver {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished">hemidemisemiquaver {3?}</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1862,7 +1862,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">hemidemisemiquaver {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>invalid</source>
@@ -2146,7 +2146,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">hemidemisemiquaver {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -2178,7 +2178,7 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">hemidemisemiquaver {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load</source>
@@ -2212,7 +2212,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">hemidemisemiquaver {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -2240,7 +2240,7 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">hemidemisemiquaver {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staves</source>
@@ -5665,7 +5665,7 @@ before closing?</source>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished">hemidemisemiquaver {001.01?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -5673,7 +5673,7 @@ before closing?</source>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished">hemidemisemiquaver {0:00:00?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -6027,31 +6027,31 @@ before closing?</source>
     </message>
     <message>
         <source>192000</source>
-        <translation type="unfinished">hemidemisemiquaver {192000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>96000</source>
-        <translation type="unfinished">hemidemisemiquaver {96000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>88200</source>
-        <translation type="unfinished">hemidemisemiquaver {88200?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>48000</source>
-        <translation type="unfinished">hemidemisemiquaver {48000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished">hemidemisemiquaver {44100?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished">hemidemisemiquaver {32000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished">hemidemisemiquaver {22050?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fragments:</source>
@@ -6063,31 +6063,31 @@ before closing?</source>
     </message>
     <message>
         <source>4096</source>
-        <translation type="unfinished">hemidemisemiquaver {4096?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2048</source>
-        <translation type="unfinished">hemidemisemiquaver {2048?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1024</source>
-        <translation type="unfinished">hemidemisemiquaver {1024?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>512</source>
-        <translation type="unfinished">hemidemisemiquaver {512?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="unfinished">hemidemisemiquaver {256?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>128</source>
-        <translation type="unfinished">hemidemisemiquaver {128?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>64</source>
-        <translation type="unfinished">hemidemisemiquaver {64?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Portaudio</source>
@@ -6537,7 +6537,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">hemidemisemiquaver {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anchor:</source>
