@@ -1018,5 +1018,44 @@ class ChangePageFormat : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeStaff
+//---------------------------------------------------------
+
+class ChangeStaff : public UndoCommand {
+      Staff* staff;
+      int lines;
+      bool small;
+      bool noStems;
+
+      void flip();
+
+   public:
+      ChangeStaff(Staff*, int lines, bool small, bool noStems);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   ChangePart
+//---------------------------------------------------------
+
+class ChangePart : public UndoCommand {
+      Part* part;
+      bool useDrumset;
+      int transposition;
+      QTextDocument* longName;
+      QTextDocument* shortName;
+
+      void flip();
+
+   public:
+      ChangePart(Part*, bool useDrumset, int transposition, const QTextDocument*, const QTextDocument*);
+      ~ChangePart();
+
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 

@@ -73,6 +73,8 @@ class TextBase {
       void decRefCount()                    { --_refCount; }
 
       void setDoc(const QTextDocument& d);
+      QTextDocument* swapDoc(QTextDocument* d);
+
       QTextDocument* doc() const            { return _doc;          }
       bool hasFrame() const                 { return _hasFrame;     }
       void setHasFrame(bool val)            { _hasFrame = val;      }
@@ -141,6 +143,7 @@ class TextB : public Element {
       QString getHtml() const               { return textBase()->getHtml(); }
       void setHtml(const QString& s)        { textBase()->setHtml(s);       }
       void setDoc(const QTextDocument&);
+      QTextDocument* swapDoc(QTextDocument* d);
       QTextDocument* doc() const            { return textBase()->doc(); }
 
       virtual void resetMode();

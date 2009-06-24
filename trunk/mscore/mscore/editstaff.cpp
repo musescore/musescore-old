@@ -24,6 +24,8 @@
 #include "editdrumset.h"
 #include "score.h"
 #include "measure.h"
+#include "undo.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -82,26 +84,24 @@ void EditStaff::bboxClicked(QAbstractButton* button)
 
 void EditStaff::apply()
       {
+      Score* score = staff->score();
       Part* part = staff->part();
 
-      part->setUseDrumset(useDrumset->isChecked());
-      part->setPitchOffset(transposition->value());
-      staff->setLines(lines->value());
-      staff->setSmall(small->isChecked());
-      staff->setSlashStyle(slashStyle->isChecked());
-      part->setShortName(*shortName->document());
-      part->setLongName(*longName->document());
-      Score* score = staff->score();
-      score->setInstrumentNames();
-      MeasureBaseList* ml = score->measures();
-      int staffIdx = score->staffIdx(staff);
-      for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            MStaff* mstaff = static_cast<Measure*>(mb)->mstaff(staffIdx);
-            mstaff->lines->setLines(staff->lines());
-            }
+      bool ud = useDrumset->isChecked();
+      int  po = transposition->value();
+      const QTextDocument* ln = longName->document();
+      const QTextDocument* sn = shortName->document();
 
+      bool snd = sn->toHtml() != part->shortName()->doc()->toHtml();
+      bool lnd = ln->toHtml() != part->longName()->doc()->toHtml();
+      if ((ud != part->useDrumset()) || (po != part->pitchOffset()) || snd || lnd)
+            score->undo()->push(new ChangePart(part, ud, po, ln, sn));
+
+      int l        = lines->value();
+      bool s       = small->isChecked();
+      bool noStems = slashStyle->isChecked();
+      if (l != staff->lines() || s != staff->small() || s != staff->slashStyle())
+            score->undo()->push(new ChangeStaff(staff, l, s, noStems));
       }
 
 //---------------------------------------------------------

@@ -664,6 +664,10 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             return;
             }
       double _spatium = spatium();
+
+      TextStyle* ts = score()->textStyle(l->textStyle());
+      double lmag = double(ts->size) / 11.0;
+
       if (l->endTick()) {
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
@@ -687,9 +691,9 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   Line* line = sl->value(segIdx);
                   if (line == 0) {
                         line = new Line(l->score(), false);
-                        line->setLineWidth(Spatium(0.1));
                         l->add(line);
                         }
+                  line->setLineWidth(Spatium(0.1 * lmag));
                   if (sysIdx1 == sysIdx2) {
                         // single segment
                         line->setPos(p1);
@@ -722,8 +726,8 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       Segment* ns = s;
 
       // TODO: then next two values should be style parameters
-      const double maxl = 0.5 * _spatium;   // lyrics hyphen length
-      const Spatium hlw(0.14);               // hyphen line width
+      const double maxl = 0.5 * _spatium * lmag;   // lyrics hyphen length
+      const Spatium hlw(0.14 * lmag);              // hyphen line width
 
       while ((ns = ns->next1())) {
             LyricsList* nll = ns->lyricsList(staffIdx);
@@ -739,7 +743,6 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             Line* line;
             if (sl->isEmpty()) {
                   line = new Line(l->score(), false);
-                  line->setLineWidth(hlw);
                   l->add(line);
                   }
             else {
@@ -766,6 +769,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   len = maxl;
             double xo = (gap - len) * .5;
 
+            line->setLineWidth(hlw);
             line->setPos(QPointF(x + xo, y));
             line->setLen(Spatium(len / _spatium));
             line->layout();

@@ -148,6 +148,13 @@ void TextBase::setDoc(const QTextDocument& d)
       _doc = d.clone(0);
       }
 
+QTextDocument* TextBase::swapDoc(QTextDocument* d)
+      {
+      QTextDocument* od = _doc;
+      _doc = d;
+      return od;
+      }
+
 QFont TextBase::defaultFont() const
       {
       QTextCursor cursor(_doc);
@@ -491,6 +498,15 @@ void TextB::setDoc(const QTextDocument& d)
       {
       textBase()->setDoc(d);
       cursorPos = 0;
+      }
+
+//---------------------------------------------------------
+//   swapDoc
+//---------------------------------------------------------
+
+QTextDocument* TextB::swapDoc(QTextDocument* d)
+      {
+      return textBase()->swapDoc(d);
       }
 
 //---------------------------------------------------------
