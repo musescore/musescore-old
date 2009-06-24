@@ -1218,7 +1218,14 @@ ChangeElement::ChangeElement(Element* oe, Element* ne)
 
 void ChangeElement::flip()
       {
-      oldElement->parent()->change(oldElement, newElement);
+      if (oldElement->parent() == 0) {
+            Score* score = oldElement->score();
+            score->removeElement(oldElement);
+            score->addElement(newElement);
+            }
+      else {
+            oldElement->parent()->change(oldElement, newElement);
+            }
       // swap
       Element* e = oldElement;
       oldElement = newElement;
@@ -1974,4 +1981,85 @@ void ChangePageFormat::flip()
       spatium = os;
       }
 
+//---------------------------------------------------------
+//   ChangeStaff
+//---------------------------------------------------------
+
+ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems)
+      {
+      staff   = _staff;
+      lines   = _lines;
+      small   = _small;
+      noStems = _noStems;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeStaff::flip()
+      {
+      bool linesChanged = staff->lines() != lines;
+
+      int oldLines   = staff->lines();
+      int oldSmall   = staff->small();
+      int oldNoStems = staff->slashStyle();
+
+      staff->setLines(lines);
+      staff->setSmall(small);
+      staff->setSlashStyle(noStems);
+
+      lines   = oldLines;
+      small   = oldSmall;
+      noStems = oldNoStems;
+
+      if (linesChanged) {
+            Score* score = staff->score();
+            int staffIdx = score->staffIdx(staff);
+            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+                  MStaff* mstaff = m->mstaff(staffIdx);
+                  mstaff->lines->setLines(staff->lines());
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   ChangePart
+//---------------------------------------------------------
+
+ChangePart::ChangePart(Part* _part, bool _useDrumset, int _transposition,
+   const QTextDocument* _longName, const QTextDocument* _shortName)
+      {
+      longName      = _longName->clone(0);
+      shortName     = _shortName->clone(0);
+      part          = _part;
+      useDrumset    = _useDrumset;
+      transposition = _transposition;
+      }
+
+ChangePart::~ChangePart()
+      {
+      delete longName;
+      delete shortName;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangePart::flip()
+      {
+      bool oldUseDrumset          = part->useDrumset();
+      int oldTransposition        = part->pitchOffset();
+
+      longName  = part->longName()->swapDoc(longName);
+      shortName = part->shortName()->swapDoc(shortName);
+      part->setUseDrumset(useDrumset);
+      part->setPitchOffset(transposition);
+
+      useDrumset    = oldUseDrumset;
+      transposition = oldTransposition;
+
+      part->score()->setInstrumentNames();
+      }
 

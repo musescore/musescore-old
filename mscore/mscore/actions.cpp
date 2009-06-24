@@ -1956,7 +1956,10 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Zoom In")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         // conflicts with Ctrl+- in edit mode to enter lyrics hyphen
+         // STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "zoomout",
          QT_TR_NOOP("Zoom Out"),
          QKeySequence::ZoomOut,

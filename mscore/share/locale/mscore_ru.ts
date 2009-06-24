@@ -85,7 +85,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Arabic</source>
+        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
