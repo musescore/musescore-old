@@ -2484,6 +2484,7 @@ void Score::cmdPaste()
             }
       if (selection()->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
+// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2531,6 +2532,7 @@ void Score::cmdPaste()
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
+// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2738,6 +2740,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               }
                         else if (eee.tagName() == "Lyrics") {
                               Lyrics* lyrics = new Lyrics(this);
+                              lyrics->setTick(curTick);         // set default tick position
                               lyrics->setTrack(curTrack);
                               lyrics->read(eee);
                               lyrics->setTrack(dstStaffIdx * VOICES);
@@ -2753,6 +2756,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               }
                         else if (eee.tagName() == "Harmony") {
                               Harmony* harmony = new Harmony(this);
+                              harmony->setTick(curTick);         // set default tick position
                               harmony->setTrack(curTrack);
                               harmony->read(eee);
                               harmony->setTrack(dstStaffIdx * VOICES);

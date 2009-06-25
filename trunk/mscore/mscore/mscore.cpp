@@ -867,10 +867,13 @@ void MuseScore::autoSaveTimerTimeout()
 
 void MuseScore::helpBrowser()
       {
-      QString lang(localeName.left(2));
-      if (debugMode) {
+      QString lang;
+      if (localeName.toLower() == "system")
+            lang = QLocale::system().name().left(2);
+      else
+            lang = localeName.left(2);
+      if (debugMode)
             printf("open manual for language <%s>\n", qPrintable(lang));
-            }
 
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
@@ -898,16 +901,17 @@ void MuseScore::helpBrowser()
 
 void MuseScore::helpBrowser1()
       {
-      QString lang(localeName.left(2));
+      QString lang;
+      if (localeName.toLower() == "system")
+            lang = QLocale::system().name().left(2);
+      else
+            lang = localeName.left(2);
       if (debugMode)
             printf("open online manual for language <%s>\n", qPrintable(lang));
       QString help("http://musescore.org/en/handbook");
-      if (lang == "de")
-            help = "http://musescore.org/de/handbuch";
-      else if (lang == "es")
-            help = "http://musescore.org/es/manual";
-      else if (lang == "fr")
-            help = "http://musescore.org/fr/manuel";
+      if (lang == "de" || lang == "en" || lang == "es" || lang == "fi" || lang == "fr"
+         || lang == "gl" || lang == "it" || lang == "nl")
+            help = QString("http://musescore.org/%1/handbuch").arg(lang);
       QUrl url(help);
       QDesktopServices::openUrl(url);
       }
