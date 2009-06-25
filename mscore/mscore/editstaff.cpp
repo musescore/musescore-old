@@ -85,7 +85,7 @@ void EditStaff::bboxClicked(QAbstractButton* button)
 void EditStaff::apply()
       {
       Score* score = staff->score();
-      Part* part = staff->part();
+      Part* part   = staff->part();
 
       bool ud = useDrumset->isChecked();
       int  po = transposition->value();
@@ -100,7 +100,7 @@ void EditStaff::apply()
       int l        = lines->value();
       bool s       = small->isChecked();
       bool noStems = slashStyle->isChecked();
-      if (l != staff->lines() || s != staff->small() || s != staff->slashStyle())
+      if (l != staff->lines() || s != staff->small() || noStems != staff->slashStyle())
             score->undo()->push(new ChangeStaff(staff, l, s, noStems));
       }
 

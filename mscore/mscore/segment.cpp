@@ -245,7 +245,7 @@ void Segment::add(Element* el)
       switch(el->type()) {
             case LYRICS:
                   {
-                  Lyrics* l = (Lyrics*) el;
+                  Lyrics* l = static_cast<Lyrics*>(el);
                   LyricsList* ll = &_lyrics[staffIdx];
                   int size = ll->size();
                   if (l->no() >= size) {

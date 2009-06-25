@@ -1,3 +1,8 @@
+25.jun (ws)
+      - new score: do not create key signature for percussion staves
+      - fix copy/paste of lyrics stanza
+      - fix typo in part/staff property dialog: "stemless"
+        now works again
 24.jun (ws)
       - Scale hyphens in lyrics with text size.
       - Remove shortcut for zoomout in edit mode. It conflicts with

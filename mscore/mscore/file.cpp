@@ -652,22 +652,24 @@ void MuseScore::newFile()
                         Staff* staff = score->staff(staffIdx);
                         Part* part = staff->part();
                         Instrument* instrument = part->instrument();
-                        //
-                        // transpose key
-                        //
-                        int nKey = ks;
-                        if (instrument->pitchOffset && !newWizard->useTemplate()) {
-                              int diff = -instrument->pitchOffset;
-                              nKey = transposeKey(nKey, diff);
-                              }
-                        if (nKey) {
-                              (*(staff->keymap()))[0] = nKey;
-                              KeySig* keysig = new KeySig(score);
-                              keysig->setTrack(staffIdx * VOICES);
-                              keysig->setTick(0);
-                              keysig->setSig(0, nKey);
-                              s = measure->getSegment(keysig);
-                              s->add(keysig);
+                        if (!instrument->useDrumset) {
+                              //
+                              // transpose key
+                              //
+                              int nKey = ks;
+                              if (instrument->pitchOffset && !newWizard->useTemplate()) {
+                                    int diff = -instrument->pitchOffset;
+                                    nKey = transposeKey(nKey, diff);
+                                    }
+                              if (nKey) {
+                                    (*(staff->keymap()))[0] = nKey;
+                                    KeySig* keysig = new KeySig(score);
+                                    keysig->setTrack(staffIdx * VOICES);
+                                    keysig->setTick(0);
+                                    keysig->setSig(0, nKey);
+                                    s = measure->getSegment(keysig);
+                                    s->add(keysig);
+                                    }
                               }
                         if (pickupMeasure)
 	                        len = ticks;
