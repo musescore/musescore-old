@@ -1151,9 +1151,10 @@ void Harmony::render()
             if (cf.family.isEmpty() || cf.family == "default")
                   fontList.append(st->fontPx(spatium() * cf.mag));
             else {
-#ifdef Q_WS_MAC
-                  s += " 20";
-#endif
+//No more needed ?
+//#ifdef Q_WS_MAC
+//                  s += " 20";
+//#endif
                   QFont ff(st->fontPx(spatium() * cf.mag));
                   ff.setFamily(cf.family);
                   fontList.append(ff);
