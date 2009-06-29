@@ -84,8 +84,8 @@
         <translation>Ukrajina - Ukrainien</translation>
     </message>
     <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
+        <source>Arabic</source>
+        <translation>Arabic - Arabe</translation>
     </message>
 </context>
 <context>
@@ -104,8 +104,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1869 revised JLWaltener 13/06/2009 - QT Linguist v4.5.1</translatorcomment>
-        <translation>Révision : 1869</translation>
+        <translatorcomment>r1880 revised JLWaltener 23/06/2009 - QT Linguist v4.5.1</translatorcomment>
+        <translation>Révision : 1880</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5655,7 +5655,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Muet</translation>
+        <translation>Mute</translation>
     </message>
     <message>
         <source>Solo</source>
