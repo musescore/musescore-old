@@ -1,3 +1,11 @@
+29.jun (ws)
+      - preparations for hungary translation
+      - fix breath position for staff != 0
+      - fix boundingRect for breath symbol
+      - experimental: shorten colliding ledger lines
+26.jun (ws)
+      - apply staccato/trill only to notes not rests when using shortcuts
+      - fix "Apply button needs two clicks in EditTextSTyle->Chordname"
 25.jun (ws)
       - new score: do not create key signature for percussion staves
       - fix copy/paste of lyrics stanza

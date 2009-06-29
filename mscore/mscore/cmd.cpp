@@ -1674,9 +1674,9 @@ void Score::insertMeasures(int n, int type)
 
 void Score::addArticulation(int attr)
       {
-// printf("add articulation %d\n", attr);
       foreach(Element* el, *selection()->elements()) {
-            if (el->type() != NOTE && el->type() != REST)
+//            if (el->type() != NOTE && el->type() != REST)
+            if (el->type() != NOTE)
                   continue;
             Articulation* na = new Articulation(this);
             na->setSubtype(attr);
@@ -2063,9 +2063,9 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "add-slur")
                   cmdAddSlur();
 	      else if (cmd == "add-staccato")
-                  addArticulation(5);
+                  addArticulation(StaccatoSym);
 	      else if (cmd == "add-trill")
-                  addArticulation(19);
+                  addArticulation(TrillSym);
             else if (cmd == "add-hairpin")
                   cmdAddHairpin(false);
             else if (cmd == "add-hairpin-reverse")

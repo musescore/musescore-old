@@ -62,7 +62,6 @@ namespace FluidS {
 #define allpasstuningL4 225
 #define allpasstuningR4 225 + stereospread
 
-
 struct fluid_allpass {
       fluid_real_t feedback;
       fluid_real_t *buffer;
@@ -163,7 +162,5 @@ struct ReverbPreset {
       fluid_real_t width;
       fluid_real_t level;
       };
-
 }
-
 #endif /* _FLUID_REV_H */

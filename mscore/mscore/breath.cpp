@@ -20,6 +20,9 @@
 
 #include "breath.h"
 #include "sym.h"
+#include "system.h"
+#include "segment.h"
+#include "measure.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym, lcommaSym, rcommaSym, lcommaSym
@@ -40,6 +43,7 @@ Breath::Breath(Score* s)
 
 void Breath::layout()
       {
+      _bbox = symbols[symList[subtype()]].bbox(mag());
       }
 
 //---------------------------------------------------------
@@ -71,7 +75,7 @@ void Breath::read(QDomElement e)
 
 void Breath::draw(QPainter& p) const
       {
-      symbols[symList[subtype()]].draw(p);
+      symbols[symList[subtype()]].draw(p, mag());
       }
 
 //---------------------------------------------------------
@@ -85,11 +89,19 @@ void Breath::space(double& min, double& extra) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   canvasPos
 //---------------------------------------------------------
 
-QRectF Breath::bbox() const
+QPointF Breath::canvasPos() const
       {
-      return symbols[symList[subtype()]].bbox(magS());
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = segment()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
+
 

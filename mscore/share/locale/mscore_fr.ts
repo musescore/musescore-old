@@ -84,8 +84,8 @@
         <translation>Ukrajina - Ukrainien</translation>
     </message>
     <message>
-        <source>Arabic</source>
-        <translation>Arabic - Arabe</translation>
+        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -70,6 +70,7 @@ LanguageItem languages[] = {
       LanguageItem("gl",    QT_TR_NOOP("Galego")),
       LanguageItem("de",    QT_TR_NOOP("Deutsch")),
       LanguageItem("hi_IN", QT_TR_NOOP("Hindi")),
+      LanguageItem("hu", QT_TR_NOOP("Hungary")),
       LanguageItem("it",    QT_TR_NOOP("Italiano")),
       LanguageItem("pt",    QT_TR_NOOP("Português")),
       LanguageItem("pt_BR", QT_TR_NOOP("Brasilian Português")),

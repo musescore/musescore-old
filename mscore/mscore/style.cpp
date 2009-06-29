@@ -310,10 +310,10 @@ Style::Style()
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(1.0)),
             StyleVal(ST_minMeasureWidth, Spatium(4.0)),
-
-            StyleVal(ST_barWidth, Spatium(0.16)),
+                                                            // finale european style
+            StyleVal(ST_barWidth, Spatium(0.16)),           // 0.1875
             StyleVal(ST_doubleBarWidth, Spatium(0.16)),
-            StyleVal(ST_endBarWidth, Spatium(0.3)),
+            StyleVal(ST_endBarWidth, Spatium(0.3)),         // 0.5
             StyleVal(ST_doubleBarDistance, Spatium(0.30)),
             StyleVal(ST_endBarDistance, Spatium(0.30)),
             StyleVal(ST_bracketWidth, Spatium(0.35)),
@@ -324,7 +324,7 @@ Style::Style()
 
             StyleVal(ST_clefKeyRightMargin, Spatium(1.75)),
             StyleVal(ST_clefBarlineDistance, Spatium(0.5)),
-            StyleVal(ST_stemWidth, Spatium(0.13)),
+            StyleVal(ST_stemWidth, Spatium(0.13)),          // 0.09375
             StyleVal(ST_shortenStem, true),
             StyleVal(ST_shortStemProgression, Spatium(0.25)),
             StyleVal(ST_shortestStem,Spatium(2.25)),
@@ -334,8 +334,8 @@ Style::Style()
             StyleVal(ST_noteBarDistance,Spatium(1.0)),
 
             StyleVal(ST_measureSpacing,1.2),
-            StyleVal(ST_staffLineWidth,Spatium(0.08)),
-            StyleVal(ST_ledgerLineWidth,Spatium(0.16)),
+            StyleVal(ST_staffLineWidth,Spatium(0.08)),      // 0.09375
+            StyleVal(ST_ledgerLineWidth,Spatium(0.16)),     // 0.1875
             StyleVal(ST_akkoladeWidth,Spatium(1.6)),
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),

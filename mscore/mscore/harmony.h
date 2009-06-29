@@ -248,7 +248,7 @@ class Harmony : public Text {
       virtual void read(QDomElement);
       QString harmonyName() const;
       QString extensionName() const        { return _descr ? _descr->name : QString(); }
-      void render();
+      void render(const TextStyle* ts = 0);
 
       const ChordDescription* parseHarmony(const QString& s, int* root, int* base);
       QString xmlKind() const          { return _descr ? _descr->xmlKind : QString(); }

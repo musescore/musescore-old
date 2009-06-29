@@ -26,6 +26,7 @@
 #include "sfont.h"
 #include "conv.h"
 #include "gen.h"
+#include "chorus.h"
 
 namespace FluidS {
 
@@ -246,7 +247,7 @@ void Fluid::init(int sr)
 
       cur    = FLUID_BUFSIZE;
       reverb = new Reverb();
-      chorus = new_fluid_chorus(sample_rate);
+      chorus = new Chorus(sample_rate);
       reverb->setPreset(0);
       }
 
@@ -278,7 +279,7 @@ Fluid::~Fluid()
       if (reverb)
             delete reverb;
       if (chorus)
-            delete_fluid_chorus(chorus);
+            delete chorus;
 
       /* free the tunings, if any */
       if (tuning) {
@@ -435,7 +436,7 @@ void Fluid::system_reset()
             v->voice_off();
       foreach(Channel* c, channel)
             c->reset();
-      fluid_chorus_reset(chorus);
+      chorus->reset();
       reverb->reset();
       }
 
@@ -740,12 +741,12 @@ void Fluid::set_reverb(double roomsize, double damping, double width, double lev
  */
 void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int type)
       {
-      fluid_chorus_set_nr(chorus, nr);
-      fluid_chorus_set_level(chorus, (fluid_real_t)level);
-      fluid_chorus_set_speed_Hz(chorus, (fluid_real_t)speed);
-      fluid_chorus_set_depth_ms(chorus, (fluid_real_t)depth_ms);
-      fluid_chorus_set_type(chorus, type);
-      fluid_chorus_update(chorus);
+      chorus->set_nr(nr);
+      chorus->set_level((fluid_real_t)level);
+      chorus->set_speed_Hz((fluid_real_t)speed);
+      chorus->set_depth_ms((fluid_real_t)depth_ms);
+      chorus->set_type(type);
+      chorus->update();
       }
 
 //---------------------------------------------------------
@@ -803,7 +804,7 @@ void Fluid::one_block()
            if (revb)
                   reverb->processmix(revb, left_buf, right_buf);
             if (chob)
-                  fluid_chorus_processmix(chorus, chob, left_buf, right_buf);
+                  chorus->processmix(chob, left_buf, right_buf);
             }
       }
 

@@ -1802,6 +1802,7 @@ printf("\n");
                         Chord* chord = static_cast<Chord*>(e);
                         if (chord->glissando())
                               chord->glissando()->layout();
+                        chord->layout2();
                         }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
