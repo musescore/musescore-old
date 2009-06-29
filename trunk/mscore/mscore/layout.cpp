@@ -152,6 +152,7 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void Score::doLayout()
       {
+// printf("doLayout============\n");
       _needLayout = false;
 
       if (startLayout) {

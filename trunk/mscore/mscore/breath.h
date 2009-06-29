@@ -32,18 +32,20 @@ class Breath : public Element {
       static const int breathSymbols = 4;
       static int symList[breathSymbols];
 
+      Segment* segment() const         { return (Segment*)parent(); }
+
    public:
       Breath(Score* s);
       virtual Breath* clone() const { return new Breath(*this); }
       virtual ElementType type() const { return BREATH; }
       virtual void space(double& min, double& extra) const;
-      virtual QRectF bbox() const;
 
       virtual void draw(QPainter&) const;
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       virtual bool isMovable() const   { return true; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       };
 
 #endif

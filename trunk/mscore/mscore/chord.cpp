@@ -524,6 +524,8 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       double hw       = upNote()->headWidth();
       double hw2      = hw * .5;
 
+      double y = line * _spatium * .5;
+
       LedgerLine* h   = new LedgerLine(score());
       h->setTrack(staffIdx * VOICES);
 
@@ -554,7 +556,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
                   }
             }
       h->setLen(len);
-      h->setPos(x, _spatium * .5 * line);
+      h->setPos(x, y);
       _ledgerLines.push_back(h);
       }
 
@@ -564,9 +566,9 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
 
 void Chord::addLedgerLines(double x, int move)
       {
-      int uppos   = 1000;
-      int ulr = 0;
-      int idx = staffIdx() + move;
+      int uppos = 1000;
+      int ulr   = 0;
+      int idx   = staffIdx() + move;
       // for (criNote in = notes.rbegin(); in != notes.rend(); ++in) {
       for (riNote in = notes.rbegin(); in != notes.rend(); ++in) {
             const Note* note = in->second;
@@ -1394,4 +1396,60 @@ void Chord::layoutStem()
             _tremolo->layout();
       }
 
+//---------------------------------------------------------
+//   layout2
+//    Called after horizontal positions of all elements
+//    are fixed.
+//---------------------------------------------------------
+
+void Chord::layout2()
+      {
+      double _spatium = spatium();
+      foreach(LedgerLine* h, _ledgerLines) {
+            //
+            // Experimental:
+            //    look for colliding ledger lines
+            //
+
+            double y = h->y();
+            double x = h->x();
+            Spatium len(h->len());
+
+            double minDist = _spatium * .2;
+            bool found = false;
+            double cx  = x + canvasPos().x();
+            Segment* s = segment()->prev();
+            if (s && s->subtype() == Segment::SegChordRest) {
+                  int strack = staffIdx() * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        if (s->element(track)) {
+                              Element* e = s->element(track);
+                              if (e->type() == CHORD) {
+                                    Chord* ch = static_cast<Chord*>(e);
+                                    foreach(LedgerLine* ll, *ch->ledgerLines()) {
+                                          if (ll->y() == y) {
+                                                double d = cx - (ll->canvasPos().x() + ll->len().val()*_spatium) - minDist;
+                                                if (d < 0.0) {
+                                                      double shorten = -d;
+                                                      x   += shorten;
+                                                      len -= Spatium(shorten / _spatium);
+                                                      ll->setLen(ll->len() - Spatium(shorten / _spatium));
+                                                      }
+                                                found = true;
+                                                break;
+                                                }
+                                          }
+                                    }
+                              }
+                        if (found)
+                              break;
+                        }
+                  }
+            if (found) {
+                  h->setLen(len);
+                  h->setPos(x, y);
+                  }
+            }
+      }
 

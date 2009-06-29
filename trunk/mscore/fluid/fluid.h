@@ -25,7 +25,7 @@
 #include "synti.h"
 #include "list.h"
 #include "rev.h"
-#include "chorus.h"
+// #include "chorus.h"
 
 namespace FluidS {
 
@@ -37,6 +37,7 @@ struct Tuning;
 class Channel;
 class Mod;
 class Reverb;
+class Chorus;
 
 #define FLUID_NUM_PROGRAMS      129
 
@@ -89,7 +90,7 @@ class Fluid : public Synth {
       fluid_real_t* fx_right_buf[2];
 
       Reverb* reverb;
-      fluid_chorus_t* chorus;
+      Chorus* chorus;
       int cur;                            // the current sample in the audio buffers to be output
 
       Tuning*** tuning;                   // 128 banks of 128 programs for the tunings

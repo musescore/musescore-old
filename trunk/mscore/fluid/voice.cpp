@@ -371,7 +371,7 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
                   }
             else if (modlfo_val < -1.0) {
                   modlfo_incr = -modlfo_incr;
-                  modlfo_val  = -2.0 - voice->modlfo_val;
+                  modlfo_val  = -2.0 - modlfo_val;
                   }
             }
 
@@ -398,14 +398,14 @@ void Voice::write(fluid_real_t* dsp_left_buf, fluid_real_t* dsp_right_buf,
    * - amplitude envelope
    */
 
-  if (voice->volenv_section == FLUID_VOICE_ENVDELAY) {
+  if (volenv_section == FLUID_VOICE_ENVDELAY) {
     /* The volume amplitude is in hold phase. No sound is produced. */
     goto post_process;
-  } else if (voice->volenv_section == FLUID_VOICE_ENVATTACK) {
+  } else if (volenv_section == FLUID_VOICE_ENVATTACK) {
     /* the envelope is in the attack section: ramp linearly to max value.
      * A positive modlfo_to_vol should increase volume (negative attenuation).
      */
-    dsp_amp = fluid_atten2amp(voice->attenuation)
+    dsp_amp = fluid_atten2amp(attenuation)
       * fluid_cb2amp (voice->modlfo_val * -voice->modlfo_to_vol)
       * voice->volenv_val;
   } else {

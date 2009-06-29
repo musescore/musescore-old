@@ -120,30 +120,6 @@ void RepeatMeasure::layout()
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void RepeatMeasure::write(Xml& xml) const
-      {
-      xml.stag(name());
-      Element::writeProperties(xml);
-      xml.etag();
-      }
-
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void RepeatMeasure::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
 

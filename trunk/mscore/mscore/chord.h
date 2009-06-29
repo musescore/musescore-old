@@ -104,7 +104,7 @@ class LedgerLine : public Line {
       LedgerLine(Score*);
       LedgerLine &operator=(const LedgerLine&);
       virtual LedgerLine* clone() const { return new LedgerLine(*this); }
-      virtual ElementType type() const { return LEDGER_LINE; }
+      virtual ElementType type() const  { return LEDGER_LINE; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Chord* chord() const { return (Chord*)parent(); }
       };
@@ -211,6 +211,7 @@ class Chord : public ChordRest {
 
       Note* selectedNote() const;
       virtual void layout();
+      void layout2();
 
       virtual int upLine() const;
       virtual int downLine() const;

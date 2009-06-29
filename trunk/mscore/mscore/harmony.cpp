@@ -802,7 +802,7 @@ void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       TextB::textStyleChanged(s);
       TextStyle* ns = s[_textStyle];
       setDefaultFont(ns->font(spatium()));   // force
-      render();
+      render(ns);
       }
 
 //---------------------------------------------------------
@@ -849,7 +849,6 @@ void Harmony::draw(QPainter& p) const
             Text::draw(p);
             return;
             }
-
       foreach(const TextSegment* ts, textList) {
             p.setFont(ts->font);
             p.drawText(ts->x, ts->y, ts->text);
@@ -1138,12 +1137,13 @@ void Harmony::render(const QList<RenderAction>& renderList, double& x, double& y
 //    construct Chord Symbol
 //---------------------------------------------------------
 
-void Harmony::render()
+void Harmony::render(const TextStyle* st)
       {
       if (_rootTpc == INVALID_TPC)
             return;
 
-      TextStyle* st        = score()->textStyle(_textStyle);
+      if (st == 0)
+            st = score()->textStyle(_textStyle);
       ChordList* chordList = score()->style().chordList();
 
       fontList.clear();

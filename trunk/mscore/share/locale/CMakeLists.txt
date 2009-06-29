@@ -61,6 +61,8 @@ install(FILES
       mscore_ar.qm
       mscore_af.ts
       mscore_af.qm
+      mscore_hu.ts
+      mscore_hu.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 

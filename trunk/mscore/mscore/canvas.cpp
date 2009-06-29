@@ -775,8 +775,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
             return;
             }
 
-      //      if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
-
       if (ev->buttons() == 0)
             level = 0;
       if (dragCanvasState) {
