@@ -249,12 +249,14 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             }
 
       //
-      // close all toplevel windows
+      // close all toplevel windows (on mac it crashes on quit with these lines)
       //
-      foreach(QWidget* w, qApp->topLevelWidgets()) {
+	  #ifndef Q_WS_MAC
+	  foreach(QWidget* w, qApp->topLevelWidgets()) {
             if (w != this)
                   w->close();
             }
+	  #endif
       }
 
 //---------------------------------------------------------
