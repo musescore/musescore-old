@@ -241,10 +241,10 @@ void Chorus::update()
       }
 
 //---------------------------------------------------------
-//   processmix
+//   process
 //---------------------------------------------------------
 
-void Chorus::processmix(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out)
+void Chorus::process(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out)
       {
       for (int sample_index = 0; sample_index < FLUID_BUFSIZE; sample_index++) {
             fluid_real_t d_in = in[sample_index];

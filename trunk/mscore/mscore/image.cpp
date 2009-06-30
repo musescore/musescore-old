@@ -60,12 +60,11 @@ void Image::dereference()
 
 void Image::draw(QPainter& p) const
       {
-      p.drawImage(0, 0, buffer);
+      p.drawPixmap(0, 0, buffer);
       if (selected()) {
             p.setBrush(Qt::NoBrush);
             p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-            QRectF r(0.0, 0.0, sz.width(), sz.height());
-            p.drawRect(r);
+            p.drawRect(QRect(QPoint(), buffer.size()));
             }
       }
 
@@ -226,8 +225,8 @@ void SvgImage::draw(QPainter& p) const
       QSize s = sz.toSize();
 
       if (buffer.size() != s || _dirty) {
-            buffer = QImage(s, QImage::Format_ARGB32_Premultiplied);
-            buffer.fill(0x0);
+            buffer = QPixmap(s);
+            buffer.fill();
             QPainter pp(&buffer);
             pp.setViewport(0, 0, s.width(), s.height());
             doc->render(&pp);
@@ -280,13 +279,17 @@ RasterImage* RasterImage::clone() const
 
 void RasterImage::draw(QPainter& p) const
       {
-      QSize s = sz.toSize();
-
+      p.save();
+      QTransform t = p.worldTransform();
+      QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
+      t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
+      p.setWorldTransform(t);
       if (buffer.size() != s || _dirty) {
-            buffer = doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
             _dirty = false;
             }
       Image::draw(p);
+      p.restore();
       }
 
 //---------------------------------------------------------

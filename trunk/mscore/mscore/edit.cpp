@@ -76,7 +76,7 @@ ChordRest* Score::getSelectedChordRest() const
       if (el) {
             if (el->type() == NOTE)
                   return ((Note*)el)->chord();
-            else if (el->type() == REST)
+            else if (el->type() == REST || el->type() == REPEAT_MEASURE)
                   return (Rest*)el;
             }
       selectNoteRestMessage();
@@ -92,7 +92,7 @@ int Score::pos()
       Element* el = selection()->element();
       if (selection()->activeCR())
             el = selection()->activeCR();
-      if (el && (el->type() == REST || el->type() == NOTE || el->type() == CHORD)) {
+      if (el && (el->type() == REST || el->type() == REPEAT_MEASURE || el->type() == NOTE || el->type() == CHORD)) {
             if (el->type() == NOTE)
                   el = el->parent();
             return el->tick();

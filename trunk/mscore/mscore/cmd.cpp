@@ -1675,12 +1675,11 @@ void Score::insertMeasures(int n, int type)
 void Score::addArticulation(int attr)
       {
       foreach(Element* el, *selection()->elements()) {
-//            if (el->type() != NOTE && el->type() != REST)
-            if (el->type() != NOTE)
-                  continue;
-            Articulation* na = new Articulation(this);
-            na->setSubtype(attr);
-            addArticulation(el, na);
+            if (el->type() == NOTE || el->type() == CHORD) {
+                  Articulation* na = new Articulation(this);
+                  na->setSubtype(attr);
+                  addArticulation(el, na);
+                  }
             }
       }
 
@@ -1743,11 +1742,15 @@ void Score::addArticulation(Element* el, Articulation* atr)
       {
       ChordRest* cr;
       if (el->type() == NOTE)
-            cr = ((Note*)el)->chord();
+            cr = static_cast<ChordRest*>(((Note*)el)->chord());
       else if (el->type() == REST)
-            cr = (Rest*)el;
-      else
+            cr = static_cast<ChordRest*>(el);
+      else if (el->type() == CHORD)
+            cr = static_cast<ChordRest*>(el);
+      else {
+            delete atr;
             return;
+            }
       atr->setParent(cr);
       Articulation* oa = cr->hasArticulation(atr);
       if (oa) {

@@ -79,7 +79,7 @@ void MarkerProperties::saveValues()
 //---------------------------------------------------------
 
 RepeatMeasure::RepeatMeasure(Score* score)
-   : Element(score)
+   : Rest(score)
       {
       }
 
@@ -119,6 +119,7 @@ void RepeatMeasure::layout()
       setbbox(path.boundingRect());
       }
 
+#if 0
 //---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
@@ -134,6 +135,7 @@ QPointF RepeatMeasure::canvasPos() const
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
+#endif
 
 //---------------------------------------------------------
 //   Marker
