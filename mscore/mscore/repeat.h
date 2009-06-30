@@ -22,6 +22,7 @@
 #define __REPEAT_H__
 
 #include "text.h"
+#include "rest.h"
 
 class Score;
 class Segment;
@@ -30,7 +31,7 @@ class Segment;
 //   RepeatMeasure
 //---------------------------------------------------------
 
-class RepeatMeasure : public Element {
+class RepeatMeasure : public Rest {
       QPainterPath path;
 
    public:
@@ -40,8 +41,11 @@ class RepeatMeasure : public Element {
       virtual ElementType type() const      { return REPEAT_MEASURE; }
       virtual void draw(QPainter&) const;
       virtual void layout();
-      virtual QPointF canvasPos() const;
-      Segment* segment() const { return (Segment*)parent(); }
+//      virtual QPointF canvasPos() const;
+      virtual void read(QDomElement e)   { Element::read(e);    }
+      virtual void write(Xml& xml) const { Element::write(xml); }
+      virtual QRectF bbox() const        { return _bbox;        }
+
       };
 
 enum {

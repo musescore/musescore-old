@@ -1549,7 +1549,9 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
             QByteArray a = data->data(mimeSymbolFormat);
 
-// printf("DRAG<%s>\n", a.data());
+            if (debugMode)
+                  printf("DRAG<%s>\n", a.data());
+
             QDomDocument doc;
             int line, column;
             QString err;
@@ -1999,6 +2001,9 @@ if (debugMode)
             }
       else {
             printf("cannot drop this object: unknown mime type\n");
+            QStringList sl = md->formats();
+            foreach(QString s, sl)
+                  printf("  %s\n", qPrintable(s));
             _score->end();
             return;
             }

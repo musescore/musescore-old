@@ -86,8 +86,7 @@ class Fluid : public Synth {
 
       fluid_real_t* left_buf;
       fluid_real_t* right_buf;
-      fluid_real_t* fx_left_buf[2];
-      fluid_real_t* fx_right_buf[2];
+      fluid_real_t* fx_buf[2];
 
       Reverb* reverb;
       Chorus* chorus;

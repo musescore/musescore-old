@@ -93,7 +93,7 @@ class Chorus {
       void set_depth_ms(fluid_real_t depth_ms) { new_depth_ms = depth_ms; }
       void set_type(int type)                  { new_type = type;         }
 
-      void processmix(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out);
+      void process(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out);
       void reset();
 
       int get_nr() const                { return number_blocks; }

@@ -1,3 +1,9 @@
+30.jun (ws)
+      - change semantic of breath symbol input: symbol is placed after the chord it
+        was dropped on
+      - much faster rendering of embedded images
+      - make shift+dot (add staccato) work for rectangular selections
+      - allow to attach chord names to measure repeat symbol
 29.jun (ws)
       - preparations for hungary translation
       - fix breath position for staff != 0

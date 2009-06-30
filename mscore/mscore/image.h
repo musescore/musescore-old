@@ -34,7 +34,7 @@ class ImagePath;
 class Image : public BSymbol {
    protected:
       ImagePath* _ip;
-      mutable QImage buffer;        ///< cached rendering
+      mutable QPixmap buffer;        ///< cached rendering
       QSizeF sz;
       bool _lockAspectRatio;
       mutable bool _dirty;

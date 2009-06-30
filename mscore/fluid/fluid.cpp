@@ -61,16 +61,13 @@ Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
 
 Fluid::Fluid()
       {
-      left_buf        = new fluid_real_t[FLUID_BUFSIZE];
-      right_buf       = new fluid_real_t[FLUID_BUFSIZE];
-      fx_left_buf[0]  = new fluid_real_t[FLUID_BUFSIZE];
-      fx_right_buf[0] = new fluid_real_t[FLUID_BUFSIZE];
-      fx_left_buf[1]  = new fluid_real_t[FLUID_BUFSIZE];
-      fx_right_buf[1] = new fluid_real_t[FLUID_BUFSIZE];
-
-      reverb          = 0;
-      chorus          = 0;
-      tuning          = 0;
+      left_buf   = new fluid_real_t[FLUID_BUFSIZE];
+      right_buf  = new fluid_real_t[FLUID_BUFSIZE];
+      fx_buf[0]  = new fluid_real_t[FLUID_BUFSIZE];
+      fx_buf[1]  = new fluid_real_t[FLUID_BUFSIZE];
+      reverb     = 0;
+      chorus     = 0;
+      tuning     = 0;
       }
 
 //---------------------------------------------------------
@@ -271,10 +268,8 @@ Fluid::~Fluid()
 
       delete[] left_buf;
       delete[] right_buf;
-      delete[] fx_left_buf[0];
-      delete[] fx_right_buf[0];
-      delete[] fx_left_buf[1];
-      delete[] fx_right_buf[1];
+      delete[] fx_buf[0];
+      delete[] fx_buf[1];
 
       if (reverb)
             delete reverb;
@@ -776,35 +771,23 @@ void Fluid::one_block()
       static const int byte_size = FLUID_BUFSIZE * sizeof(fluid_real_t);
 
       /* clean the audio buffers */
-      memset(left_buf, 0, byte_size);
+      memset(left_buf,  0, byte_size);
       memset(right_buf, 0, byte_size);
 
-      for (int i = 0; i < 2; i++) {
-            memset(fx_left_buf[i], 0, byte_size);
-            memset(fx_right_buf[i], 0, byte_size);
-            }
-
-      /* Set up the reverb / chorus buffers only, when the effect is
-       * enabled on synth level.  Nonexisting buffers are detected in the
-       * DSP loop. Not sending the reverb / chorus signal saves some time
-       * in that case. */
-
-      fluid_real_t* revb = fx_left_buf[0];
-      fluid_real_t* chob = fx_left_buf[1];
+      for (int i = 0; i < 2; i++)
+            memset(fx_buf[i], 0, byte_size);
 
       if (activeVoices.isEmpty())
             --silentBlocks;
-      else
+      else {
             silentBlocks = SILENT_BLOCKS;
-
-      foreach(Voice* v, activeVoices)
-            v->write(left_buf, right_buf, revb, chob);
+            foreach(Voice* v, activeVoices)
+                  v->write(left_buf, right_buf, fx_buf[0], fx_buf[1]);
+            }
 
       if (silentBlocks > 0) {
-           if (revb)
-                  reverb->processmix(revb, left_buf, right_buf);
-            if (chob)
-                  chorus->processmix(chob, left_buf, right_buf);
+            reverb->process(fx_buf[0], left_buf, right_buf);
+            chorus->process(fx_buf[1], left_buf, right_buf);
             }
       }
 
