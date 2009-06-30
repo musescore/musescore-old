@@ -1,4 +1,5 @@
 30.jun (ws)
+      - fix midi redering of grace notes; mscore crashed on second playback
       - change semantic of breath symbol input: symbol is placed after the chord it
         was dropped on
       - much faster rendering of embedded images

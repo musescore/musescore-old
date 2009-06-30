@@ -184,7 +184,7 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
             evo->setPitch(pitch);
             evo->setVelo(0);
             evo->setNote(note);
-            events->insertMulti(tick + len, ev);
+            events->insertMulti(tick + len, evo);
             }
       }
 
