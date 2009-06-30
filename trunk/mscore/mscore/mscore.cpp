@@ -911,9 +911,24 @@ void MuseScore::helpBrowser1()
       if (debugMode)
             printf("open online manual for language <%s>\n", qPrintable(lang));
       QString help("http://musescore.org/en/handbook");
-      if (lang == "de" || lang == "en" || lang == "es" || lang == "fi" || lang == "fr"
-         || lang == "gl" || lang == "it" || lang == "nl")
-            help = QString("http://musescore.org/%1/handbuch").arg(lang);
+      if (lang == "de")
+            help = QString::fromUtf8("http://musescore.org/de/handbuch");
+      else if (lang == "nl")
+            help = QString::fromUtf8("http://musescore.org/nl/handboek");
+      else if (lang == "fr")
+            help = QString::fromUtf8("http://musescore.org/fr/manuel");
+      else if (lang == "gl")
+            help = QString::fromUtf8("http://musescore.org/gl/manual");
+      else if (lang == "it")
+            help = QString::fromUtf8("http://musescore.org/it/manuale-0");
+      else if (lang == "pt")
+            help = QString::fromUtf8("http://musescore.org/pt-br/manual");
+      else if (lang == "ru")
+            help = QString::fromUtf8("http://musescore.org/ru/cправочник");
+      else if (lang == "es")
+            help = QString::fromUtf8("http://musescore.org/es/manual");
+      else if (lang == "tr")
+            help = QString::fromUtf8("http://musescore.org/tr/kullanım-0");
       QUrl url(help);
       QDesktopServices::openUrl(url);
       }
