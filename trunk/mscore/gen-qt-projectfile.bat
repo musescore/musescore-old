@@ -24,7 +24,8 @@ echo       %1/share/locale/mscore_no.ts \
 echo       %1/share/locale/mscore_en_GB.ts \
 echo       %1/share/locale/mscore_zh_Hant.ts \
 echo       %1/share/locale/mscore_zh_TW.ts \
-echo       %1/share/locale/mscore_uk.ts
+echo       %1/share/locale/mscore_uk.ts \
+echo       %1/share/locale/mscore_hu.ts
 
 
 cd /d %1

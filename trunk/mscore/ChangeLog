@@ -3,6 +3,9 @@
       - fix breath position for staff != 0
       - fix boundingRect for breath symbol
       - experimental: shorten colliding ledger lines
+      (db)
+      - Fix preparations for hungary translation on Windows
+      - Update handbooks
 26.jun (ws)
       - apply staccato/trill only to notes not rests when using shortcuts
       - fix "Apply button needs two clicks in EditTextSTyle->Chordname"
@@ -80,7 +83,8 @@
       - Add sarabande-gfh demo to installer
       - Add ukrainian to gen-qt-projectfile.bat
 27.may (ws)
-      - check line elementes for consistency25.may (ws)
+      - check line elementes for consistency
+25.may (ws)
       - fix chord editing
       - fix crash related to deleting measures+slurs
       - use qt file dialog (non native) for "save as" except for windows
