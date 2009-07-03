@@ -150,7 +150,7 @@ void Preferences::init()
       showStatusBar      = true;
       playPanelPos       = QPoint(100, 300);
 
-#ifdef __MINGW32__
+#if defined(Q_WS_MAC) || defined(__MINGW32__) 
       useAlsaAudio       = false;
       useJackAudio       = false;
       usePortaudioAudio  = true;
@@ -348,7 +348,7 @@ void Preferences::read()
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
 
-#ifdef __MINGW32__
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
@@ -453,7 +453,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #ifndef USE_PORTAUDIO
       portaudioDriver->setEnabled(false);
 #endif
-#ifdef __MINGW32__
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
       useMidiOutput->setEnabled(false);
 #endif
 
