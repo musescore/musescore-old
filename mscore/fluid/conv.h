@@ -31,8 +31,8 @@ namespace FluidS {
 
 /* EMU 8k/10k don't follow spec in regards to volume attenuation.
  * This factor is used in the equation pow (10.0, cb / FLUID_ATTEN_POWER_FACTOR).
- * By the standard this should be -200.0. */
-#define FLUID_ATTEN_POWER_FACTOR  (-531.509)
+ */
+#define FLUID_ATTEN_POWER_FACTOR  (-200.0)
 
 void fluid_conversion_config(void);
 

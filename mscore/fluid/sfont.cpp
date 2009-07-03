@@ -23,6 +23,7 @@
 
 #include "sfont.h"
 #include "fluid.h"
+#include "voice.h"
 
 namespace FluidS {
 
@@ -278,7 +279,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
                                      *  page 69, 'bullet' 3 defines 'identical'.  */
 
                                     for (int i = 0; i < mod_list_count; i++){
-                                          if (Modest_identity(mod,mod_list[i])){
+                                          if (mod_list[i] && test_identity(mod, mod_list[i])){
                                                 mod_list[i] = 0;
 	                                          }
 	                                    }
@@ -355,9 +356,8 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
                               mod = preset_zone->mod;
                               while (mod) {
                                     for (int i = 0; i < mod_list_count; i++) {
-                                          if (Modest_identity(mod,mod_list[i])){
+                                          if (mod_list[i] && test_identity(mod,mod_list[i]))
                                                 mod_list[i] = 0;
-                                                }
                                           }
                                     /* Finally add the new modulator to the list. */
                                     mod_list[mod_list_count++] = mod;
@@ -672,10 +672,8 @@ InstZone::InstZone(const char* name)
 
 InstZone::~InstZone()
       {
-      Mod *mod, *tmp;
-
       while (mod)	{  /* delete the modulators */
-            tmp = mod;
+            Mod* tmp = mod;
             mod = mod->next;
             delete tmp;
             }
