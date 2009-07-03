@@ -47,7 +47,8 @@ if (APPLE)
       find_library(CoreAudioFW NAMES CoreAudio)
       find_library(CoreMidiFW NAMES CoreMIDI)
       find_library(SystemConfigurationFW NAMES SystemConfiguration)
-      set(OsxFrameworks ${AudioToolboxFW} ${AudioUnitFW} ${CoreAudioFW} ${CoreMidiFW} ${SystemConfigurationFW})
+      find_library(CoreServicesFW NAMES CoreServices)
+      set(OsxFrameworks ${AudioToolboxFW} ${AudioUnitFW} ${CoreAudioFW} ${CoreMidiFW} ${SystemConfigurationFW} ${CoreServicesFW})
 endif (APPLE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
@@ -62,13 +63,18 @@ SET(Mscore_VERSION_PATCH  "5")
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
 
-if (MINGW)
+if (MINGW OR APPLE)
+  if(MINGW)
       SET(Mscore_INSTALL_NAME  "")
       SET(Mscore_SHARE_NAME    "./")
-else (MINGW)
+  else(MINGW)
+      SET(Mscore_INSTALL_NAME  "Contents/Resources/")
+      SET(Mscore_SHARE_NAME    "mscore.app/")
+  endif(MINGW)
+else (MINGW OR APPLE)
       SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}/")
       SET(Mscore_SHARE_NAME    "share/")
-endif (MINGW)
+endif (MINGW OR APPLE)
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
@@ -161,9 +167,9 @@ if (MINGW)
       set ( USE_PORTAUDIO 1 )
       set ( USE_PORTMIDI  1 )
 else (MINGW)
-   PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
+   PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORTAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
    if (PORTAUDIO_INCDIR)
-	message("portaudio detected")
+	message("portaudio detected ${PORTAUDIO_INCDIR} ${PORTAUDIO_LIBDIR} ${PORTAUDIO_LIB}")
       set ( USE_PORTAUDIO 1 )
    else (PORTAUDIO_INCDIR)
       message("optional package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
@@ -183,9 +189,9 @@ configure_file (
       ${PROJECT_SOURCE_DIR}/config.h.in
       ${PROJECT_BINARY_DIR}/config.h
       )
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
-endif (NOT MINGW)
+endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs awl osdabzip rtf2html mscore share manual demos
      scriptgen singleapp fluid)
@@ -204,7 +210,8 @@ include_directories(
    ${PROJECT_BINARY_DIR}/mscore
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
-   )
+   ${PORTAUDIO_INCDIR}   
+)
 
 ##
 ## create package target
@@ -277,15 +284,15 @@ include (InstallRequiredSystemLibraries)
 
 if (MINGW)
   set(CPACK_GENERATOR             "NSIS")
+  set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/packaging" ${CMAKE_MODULE_PATH}) # Use custom version of NSIS.InstallOptions.ini
 else (MINGW)
   if (NOT APPLE)
     set(CPACK_GENERATOR             "DEB;TBZ2")
+    set(CPACK_DEB "on")
   endif (NOT APPLE)
 endif (MINGW)
-  set(CPACK_DEB "on")
 
-  set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/packaging" ${CMAKE_MODULE_PATH}) # Use custom version of NSIS.InstallOptions.ini
-  include (CPack)
+include (CPack)
 
 add_custom_target(lupdate
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro

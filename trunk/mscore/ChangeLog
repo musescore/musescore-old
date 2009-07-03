@@ -1,4 +1,9 @@
-2.jun (ws)
+2.jun (la)
+      - correct typo in mac specific part of portmidi code
+      - change cmake process for resources handling
+      - add specific code for getShareDir for mac
+      - add portaudio support for mac in cmake and modify preferences accordingly
+      (ws)
       - do not save full path of chord description file
 30.jun (ws)
       - fix midi redering of grace notes; mscore crashed on second playback
