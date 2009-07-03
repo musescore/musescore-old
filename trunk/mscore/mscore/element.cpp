@@ -234,7 +234,7 @@ Element::~Element()
 Element::Element(Score* s) :
    _parent(0),
    _selected(false),
-   _selectable(false),
+   _selectable(true),
    _dropTarget(false),
    _generated(false),
    _visible(true),

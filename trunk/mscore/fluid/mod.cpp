@@ -20,6 +20,7 @@
 
 #include "fluid.h"
 #include "conv.h"
+#include "voice.h"
 
 namespace FluidS {
 
@@ -137,6 +138,7 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
        * described in section 8.4.2, but it matches the definition used in
        * several SF2.1 sound fonts (where it is used only to turn it off).
        */
+#if 0
       if ((mod->src2 == FLUID_MOD_VELOCITY) &&
          (mod->src1 == FLUID_MOD_VELOCITY) &&
          (mod->flags1 == (FLUID_MOD_GC | FLUID_MOD_UNIPOLAR
@@ -149,7 +151,7 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
             else
                   return (float) mod->amount * (127 - voice->vel) / 127;
             }
-
+#endif
       /* get the initial value of the first source */
       if (mod->src1 > 0) {
             if (mod->flags1 & FLUID_MOD_CC) {
@@ -196,7 +198,7 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
                         v1 = -1.0f + 2.0f * v1 / range1;
                         break;
                   case 3: /* linear, bipolar, negative */
-                        v1 = -1.0f + 2.0f * v1 / range1;
+                        v1 = 1.0f - 2.0f * v1 / range1;
                         break;
                   case 4: /* concave, unipolar, positive */
                         v1 = fluid_concave(v1);
@@ -217,7 +219,7 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
                         v1 = fluid_convex(127 - v1);
                         break;
                   case 10: /* convex, bipolar, positive */
-                        v1 = (v1 > 64) ? -fluid_convex(2 * (v1 - 64)) : fluid_convex(2 * (64 - v1));
+                        v1 = (v1 > 64) ? fluid_convex(2 * (v1 - 64)) : -fluid_convex(2 * (64 - v1));
                         break;
                   case 11: /* convex, bipolar, negative */
                         v1 = (v1 > 64)? -fluid_convex(2 * (v1 - 64)) : fluid_convex(2 * (64 - v1));
@@ -336,13 +338,13 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
       }
 
 /*
- * Modest_identity
+ * test_identity
  */
 /* Purpose:
  * Checks, if two modulators are identical.
  *  SF2.01 section 9.5.1 page 69, 'bullet' 3 defines 'identical'.
  */
-int Modest_identity(Mod * mod1, Mod * mod2)
+int test_identity(Mod * mod1, Mod * mod2)
       {
       if (mod1->dest != mod2->dest)
             return 0;

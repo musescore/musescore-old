@@ -26,6 +26,7 @@
 #include "conv.h"
 #include "gen.h"
 #include "chorus.h"
+#include "voice.h"
 
 namespace FluidS {
 
@@ -78,7 +79,7 @@ void Fluid::init()
       {
       initialized = true;
       fluid_conversion_config();
-      fluid_voice_config();
+      Voice::dsp_float_config();
 
       /* SF2.01 page 53 section 8.4.1: MIDI Note-On Velocity to Initial Attenuation */
       fluid_mod_set_source1(&default_vel2att_mod, /* The modulator we are programming here */
@@ -413,7 +414,7 @@ void Fluid::all_sounds_off(int chan)
       {
       foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
-                  v->voice_off();
+                  v->off();
             }
       }
 
@@ -427,7 +428,7 @@ void Fluid::all_sounds_off(int chan)
 void Fluid::system_reset()
       {
       foreach(Voice* v, activeVoices)
-            v->voice_off();
+            v->off();
       foreach(Channel* c, channel)
             c->reset();
       chorus->reset();
@@ -834,7 +835,7 @@ Voice* Fluid::free_voice_by_kill()
             }
       if (!best_voice)
             return 0;
-      best_voice->voice_off();
+      best_voice->off();
       return best_voice;
       }
 

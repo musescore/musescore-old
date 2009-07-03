@@ -165,7 +165,6 @@ class Fluid : public Synth {
 
       int get_bank_offset(int sfont_id);
       int set_bank_offset(int sfont_id, int offset);
-//      int stop(unsigned int id);
       void set_gen2(int chan, int param, float value, int absolute, int normalized);
       float get_gen(int chan, int param);
       void set_gen(int chan, int param, float value);
@@ -221,15 +220,6 @@ class Fluid : public Synth {
 
   /*
    *
-   * Low level access
-   *
-   */
-
-/** Get the offset of the bank numbers in a SoundFont. */
-int fluid_synth_get_bank_offset(Fluid* synth, int sfont_id);
-
-  /*
-   *
    * Chorus
    *
    */
@@ -239,7 +229,7 @@ enum fluid_chorus_mod {
       FLUID_CHORUS_MOD_TRIANGLE = 1
       };
 
-  /* Those are the default settings for the chorus. */
+/* Those are the default settings for the chorus. */
 #define FLUID_CHORUS_DEFAULT_N      3
 #define FLUID_CHORUS_DEFAULT_LEVEL  2.0f
 #define FLUID_CHORUS_DEFAULT_SPEED  0.3f
@@ -267,41 +257,12 @@ enum fluid_interp {
       FLUID_INTERP_HIGHEST  = 7
       };
 
-
+#if 0
   /*
    *
    * Tuning
    *
    */
-
-  /** Create a new key-based tuning with given name, number, and
-      pitches. The array 'pitches' should have length 128 and contains
-      the pitch in cents of every key in cents. However, if 'pitches' is
-      NULL, a new tuning is created with the well-tempered scale.
-
-      \param synth The synthesizer object
-      \param tuning_bank The tuning bank number [0-127]
-      \param tuning_prog The tuning program number [0-127]
-      \param name The name of the tuning
-      \param pitch The array of pitch values. The array length has to be 128.
-  */
-int fluid_synth_create_key_tuning(Fluid* synth, int tuning_bank, int tuning_prog,
-				 char* name, double* pitch);
-
-  /** Create a new octave-based tuning with given name, number, and
-      pitches.  The array 'pitches' should have length 12 and contains
-      derivation in cents from the well-tempered scale. For example, if
-      pitches[0] equals -33, then the C-keys will be tuned 33 cents
-      below the well-tempered C.
-
-      \param synth The synthesizer object
-      \param tuning_bank The tuning bank number [0-127]
-      \param tuning_prog The tuning program number [0-127]
-      \param name The name of the tuning
-      \param pitch The array of pitch derivations. The array length has to be 12.
-  */
-int fluid_synth_create_octave_tuning(Fluid* synth, int tuning_bank, int tuning_prog,
-				    char* name, double* pitch);
 
   /** Request a note tuning changes. Both they 'keys' and 'pitches'
       arrays should be of length 'num_pitches'. If 'apply' is non-zero,
@@ -353,6 +314,7 @@ void Fluiduning_iteration_start(Fluid* synth);
       \returns 1 if there is a next tuning, 0 otherwise
   */
 int Fluiduning_iteration_next(Fluid* synth, int* bank, int* prog);
+#endif
 
 #define fluid_sample_refcount(_sample) ((_sample)->refcount)
 
@@ -652,37 +614,6 @@ class Channel
       int getInterpMethod() const         { return interp_method; }
       };
 
-#define NO_CHANNEL      0xff
-
-enum fluid_voice_status {
-	FLUID_VOICE_OFF,
-	FLUID_VOICE_ON,
-	FLUID_VOICE_SUSTAINED
-      };
-
-/*
- * envelope data
- */
-struct fluid_env_data_t {
-	unsigned int count;
-	float coeff;
-	float incr;
-	float min;
-	float max;
-      };
-
-/* Indices for envelope tables */
-enum fluid_voice_envelope_index_t {
-	FLUID_VOICE_ENVDELAY,
-	FLUID_VOICE_ENVATTACK,
-	FLUID_VOICE_ENVHOLD,
-	FLUID_VOICE_ENVDECAY,
-	FLUID_VOICE_ENVSUSTAIN,
-	FLUID_VOICE_ENVRELEASE,
-	FLUID_VOICE_ENVFINISHED,
-	FLUID_VOICE_ENVLAST
-      };
-
 /*
  * interpolation data
  */
@@ -758,7 +689,7 @@ double fluid_mod_get_amount(Mod* mod);
 
 /* Determines, if two modulators are 'identical' (all parameters
    except the amount match) */
-int Modest_identity(Mod * mod1, Mod * mod2);
+int test_identity(Mod * mod1, Mod * mod2);
 
 float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice);
 void fluid_dump_modulator(Mod * mod);
@@ -798,37 +729,24 @@ void fluid_dump_modulator(Mod * mod);
 * Note: b64 and index / fract share the same memory location!
 */
 
-class Phase {
-   public:
-      union {
-            struct {
-#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-                  qint32 _index;
-                  quint32 _fract;
-#else
-                  quint32 _fract;
-                  qint32 _index;
-#endif
-                  };
-            qint64 b64;
-            };
-      void operator+=(const Phase& p) { b64 += p.b64; }
-      void operator-=(int b)          { _index -= b;  }
+struct Phase {
+      qint64 data;
 
-      void setInt(qint32 b)           { _index = b; _fract = 0; }
-      int index() const               { return _index; }
-      int fract() const               { return _fract; }
-      void setFract(int v)            { _fract = v; }
+      void operator+=(const Phase& p) { data += p.data; }
+      void setInt(qint32 b)           { data = qint64(b) << 32; }
+      void setFloat(double b)          {
+             data = (((qint64)(b)) << 32) | (quint32) (((double)(b) - (int)(b)) * (double)FLUID_FRACT_MAX);
+            }
+
+      void operator-=(const Phase& b) { data -= b.data;  }
+      void operator-=(int b)          { data -= (qint64(b) << 32);  }
+      int index() const               { return data >> 32; }
+      quint32 fract() const           { return quint32(data & 0xffffffff); }
+      quint32 index_round() const     { return quint32((data+0x80000000) >> 32); }
+
+      Phase() {}
+      Phase(qint64 v) : data(v) {}
       };
-
-/* Purpose:
- * Sets the phase a to a phase increment given in b.
- * For example, assume b is 0.9. After setting a to it, adding a to
- * the playing pointer will advance it by 0.9 samples. */
-#define fluid_phase_set_float(a, b)   { \
-  (a)._index = (qint32) (b); \
-  (a)._fract = (quint32) (((double)(b) - (double)((a)._index)) * (double)FLUID_FRACT_MAX); \
-}
 
 /* Purpose:
  * Takes the fractional part of the argument phase and
@@ -854,178 +772,6 @@ class Phase {
  * Creates the expression a.index++.
 */
 #define fluid_phase_index_plusplus(a) (((a)._index)++)
-
-//---------------------------------------------------------
-//   Voice
-//---------------------------------------------------------
-
-class Voice
-      {
-      Fluid* _fluid;
-      double _noteTuning;             // +/- in midicent
-
-   public:
-	unsigned int id;                // the id is incremented for every new noteon.
-					           // it's used for noteoff's
-	unsigned char status;
-	unsigned char chan;             // the channel number, quick access for channel messages
-	unsigned char key;              // the key, quick acces for noteoff
-	unsigned char vel;              // the velocity
-
-	Channel* channel;
-	Generator gen[GEN_LAST];
-	Mod mod[FLUID_NUM_MOD];
-	int mod_count;
-	int has_looped;                 /* Flag that is set as soon as the first loop is completed. */
-	Sample* sample;
-	int check_sample_sanity_flag;   /* Flag that initiates, that sample-related parameters
-					           have to be checked. */
-	unsigned int ticks;
-
-	float amp;                /* the linear amplitude */
-	Phase phase;                     // the phase of the sample wave
-
-	/* basic parameters */
-	float pitch;              /* the pitch in midicents */
-	float attenuation;        /* the attenuation in centibels */
-	float min_attenuation_cB; /* Estimate on the smallest possible attenuation
-					          * during the lifetime of the voice */
-	float root_pitch;
-
-	/* sample and loop start and end points (offset in sample memory).  */
-	int start;
-	int end;
-	int loopstart;
-	int loopend;
-
-	/* master gain */
-	float synth_gain;
-
-	/* vol env */
-	fluid_env_data_t volenv_data[FLUID_VOICE_ENVLAST];
-	unsigned int volenv_count;
-	int volenv_section;
-	float volenv_val;
-	float amplitude_that_reaches_noise_floor_nonloop;
-	float amplitude_that_reaches_noise_floor_loop;
-
-	/* mod env */
-	fluid_env_data_t modenv_data[FLUID_VOICE_ENVLAST];
-	unsigned int modenv_count;
-	int modenv_section;
-	float modenv_val;         /* the value of the modulation envelope */
-	float modenv_to_fc;
-	float modenv_to_pitch;
-
-	/* mod lfo */
-	float modlfo_val;          /* the value of the modulation LFO */
-	unsigned int modlfo_delay;       /* the delay of the lfo in samples */
-	float modlfo_incr;         /* the lfo frequency is converted to a per-buffer increment */
-	float modlfo_to_fc;
-	float modlfo_to_pitch;
-	float modlfo_to_vol;
-
-	/* vib lfo */
-	float viblfo_val;        /* the value of the vibrato LFO */
-	unsigned int viblfo_delay;      /* the delay of the lfo in samples */
-	float viblfo_incr;       /* the lfo frequency is converted to a per-buffer increment */
-	float viblfo_to_pitch;
-
-	/* resonant filter */
-	float fres;              /* the resonance frequency, in cents (not absolute cents) */
-	float last_fres;         /* Current resonance frequency of the IIR filter */
-	/* Serves as a flag: A deviation between fres and last_fres */
-	/* indicates, that the filter has to be recalculated. */
-	float q_lin;             /* the q-factor on a linear scale */
-	float filter_gain;       /* Gain correction factor, depends on q */
-	float hist1, hist2;      /* Sample history for the IIR filter */
-	int filter_startup;             /* Flag: If set, the filter will be set directly.
-					   Else it changes smoothly. */
-
-	/* filter coefficients */
-	/* The coefficients are normalized to a0. */
-	/* b0 and b2 are identical => b02 */
-	float b02;              /* b0 / a0 */
-	float b1;              /* b1 / a0 */
-	float a1;              /* a0 / a0 */
-	float a2;              /* a1 / a0 */
-
-	float b02_incr;
-	float b1_incr;
-	float a1_incr;
-	float a2_incr;
-	int filter_coeff_incr_count;
-
-	/* pan */
-	float pan;
-	float amp_left;
-	float amp_right;
-
-	/* reverb */
-	float reverb_send;
-	float amp_reverb;
-
-	/* chorus */
-	float chorus_send;
-	float amp_chorus;
-
-	/* interpolation method, as in fluid_interp in fluidsynth.h */
-	int interp_method;
-
-	/* for debugging */
-	int debug;
-	double ref;
-
-   public:
-      Voice(Fluid*);
-      Channel* get_channel() const    { return channel; }
-      void voice_start();
-      void voice_off();
-      void init(Sample*, Channel*, int key, int vel, unsigned int id,
-         float _gain, double tuning);
-      void gen_incr(int i, float val);
-      void gen_set(int i, float val);
-      float gen_get(int gen);
-      unsigned int get_id() const { return id; }
-      bool isPlaying()            { return ((status == FLUID_VOICE_ON) || (status == FLUID_VOICE_SUSTAINED)); }
-      void set_gain(float gain);
-      void set_param(int gen, float nrpn_value, int abs);
-
-      // Update all the synthesis parameters, which depend on generator
-      // 'gen'. This is only necessary after changing a generator of an
-      // already operating voice.  Most applications will not need this
-      // function.
-
-      void update_param(int gen);
-
-      double GEN(int n) { return gen[n].val + gen[n].mod + gen[n].nrpn; }
-
-      void modulate_all();
-      void modulate(int _cc, int _ctrl);
-      float get_lower_boundary_for_attenuation();
-      void check_sample_sanity();
-      void noteoff();
-      void kill_excl();
-      int calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_decay);
-      void calculate_runtime_synthesis_parameters();
-
-
-      /* A voice is 'ON', if it has not yet received a noteoff
-       * event. Sending a noteoff event will advance the envelopes to
-       * section 5 (release).
-       */
-      bool RELEASED() const    { return chan == NO_CHANNEL; }
-      bool SUSTAINED() const   { return status == FLUID_VOICE_SUSTAINED; }
-      bool ON() const          { return (status == FLUID_VOICE_ON) && (volenv_section < FLUID_VOICE_ENVRELEASE); }
-      int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
-
-      void write(float* l, float* r, float* reverb_buf, float* chorus_buf);
-      void add_mod(Mod* mod, int mode);
-      };
-
-#define FLUID_SAMPLESANITY_CHECK (1 << 0)
-#define FLUID_SAMPLESANITY_STARTUP (1 << 1)
-extern void fluid_voice_config();
 
 }  // namespace Fluid
 

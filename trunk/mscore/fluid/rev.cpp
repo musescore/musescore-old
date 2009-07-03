@@ -17,7 +17,7 @@ namespace FluidS {
 
 static ReverbPreset revmodel_preset[] = {
       // name           roomsize       damp      width        level
-      { "Default",         0.5f,      0.0f,       1.0f,       0.9f },
+      { "Default",         0.5f,      0.2f,       1.0f,       0.9f },
       { "Test 2",          0.4f,      0.2f,       0.5f,       0.8f },
       { "Test 3",          0.6f,      0.4f,       0.5f,       0.7f },
       { "Test 4",          0.8f,      0.7f,       0.5f,       0.6f },

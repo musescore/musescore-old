@@ -438,7 +438,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   }
             return;
             }
-
       if (state != EDIT)
             _score->startCmd();
       switch (state) {
@@ -2226,7 +2225,8 @@ Element* Canvas::elementNear(const QPointF& p)
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
-      return const_cast<Element*>(ll.at(level % ll.size()));
+      Element* e = const_cast<Element*>(ll.at(level % ll.size()));
+      return e;
       }
 
 //---------------------------------------------------------
