@@ -89,11 +89,13 @@ namespace FluidS {
 #define MAX_SAMPLES (1 << (MAX_SAMPLES_LN2-1))
 #define MAX_SAMPLES_ANDMASK (MAX_SAMPLES-1)
 
+#define fluid_log(a, ...)
+
 //---------------------------------------------------------
-//   new_fluid_chorus
+//   Chorus
 //---------------------------------------------------------
 
-Chorus::Chorus(fluid_real_t sr)
+Chorus::Chorus(float sr)
       {
       Chorus* chorus = this;
 
@@ -113,18 +115,18 @@ Chorus::Chorus(fluid_real_t sr)
                   if (fabs(i_shifted) < 0.000001) {
                         /* sinc(0) cannot be calculated straightforward (limit needed
                            for 0/0) */
-                        sinc_table[i][ii] = (fluid_real_t)1.;
+                        sinc_table[i][ii] = (float)1.;
                         }
                   else {
-                        sinc_table[i][ii] = (fluid_real_t)sin(i_shifted * M_PI) / (M_PI * i_shifted);
+                        sinc_table[i][ii] = (float)sin(i_shifted * M_PI) / (M_PI * i_shifted);
                         /* Hamming window */
-                        sinc_table[i][ii] *= (fluid_real_t)0.5 * (1.0 + cos(2.0 * M_PI * i_shifted / (fluid_real_t)INTERPOLATION_SAMPLES));
+                        sinc_table[i][ii] *= (float)0.5 * (1.0 + cos(2.0 * M_PI * i_shifted / (float)INTERPOLATION_SAMPLES));
                         }
                   }
             }
 
       lookup_tab = new int[(int) (chorus->sample_rate / MIN_SPEED_HZ)];
-      chorusbuf  = new fluid_real_t[MAX_SAMPLES];
+      chorusbuf  = new float[MAX_SAMPLES];
       reset();
       }
 
@@ -244,11 +246,11 @@ void Chorus::update()
 //   process
 //---------------------------------------------------------
 
-void Chorus::process(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out)
+void Chorus::process(int n, float *in, float *left_out, float *right_out)
       {
-      for (int sample_index = 0; sample_index < FLUID_BUFSIZE; sample_index++) {
-            fluid_real_t d_in = in[sample_index];
-            fluid_real_t d_out = 0.0f;
+      for (int sample_index = 0; sample_index < n; sample_index++) {
+            float d_in = in[sample_index];
+            float d_out = 0.0f;
 
             /* Write the current sample into the circular buffer */
             chorusbuf[counter] = d_in;

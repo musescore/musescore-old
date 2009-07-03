@@ -21,8 +21,6 @@
 #ifndef _FLUID_CONV_H
 #define _FLUID_CONV_H
 
-#include "priv.h"
-
 namespace FluidS {
 
 #define FLUID_CENTS_HZ_SIZE     1200
@@ -38,27 +36,27 @@ namespace FluidS {
 
 void fluid_conversion_config(void);
 
-fluid_real_t fluid_ct2hz_real(fluid_real_t cents);
-fluid_real_t fluid_ct2hz(fluid_real_t cents);
-fluid_real_t fluid_cb2amp(fluid_real_t cb);
-fluid_real_t fluid_atten2amp(fluid_real_t atten);
-fluid_real_t fluid_tc2sec(fluid_real_t tc);
-fluid_real_t fluid_tc2sec_delay(fluid_real_t tc);
-fluid_real_t fluid_tc2sec_attack(fluid_real_t tc);
-fluid_real_t fluid_tc2sec_release(fluid_real_t tc);
-fluid_real_t fluid_act2hz(fluid_real_t c);
-fluid_real_t fluid_hz2ct(fluid_real_t c);
-fluid_real_t fluid_pan(fluid_real_t c, int left);
-fluid_real_t fluid_concave(fluid_real_t val);
-fluid_real_t fluid_convex(fluid_real_t val);
+float fluid_ct2hz_real(float cents);
+float fluid_ct2hz(float cents);
+float fluid_cb2amp(float cb);
+float fluid_atten2amp(float atten);
+float fluid_tc2sec(float tc);
+float fluid_tc2sec_delay(float tc);
+float fluid_tc2sec_attack(float tc);
+float fluid_tc2sec_release(float tc);
+float fluid_act2hz(float c);
+float fluid_hz2ct(float c);
+float fluid_pan(float c, int left);
+float fluid_concave(float val);
+float fluid_convex(float val);
 
-extern fluid_real_t fluid_ct2hz_tab[FLUID_CENTS_HZ_SIZE];
-extern fluid_real_t fluid_vel2cb_tab[FLUID_VEL_CB_SIZE];
-extern fluid_real_t fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
-extern fluid_real_t fluid_posbp_tab[128];
-extern fluid_real_t fluid_concave_tab[128];
-extern fluid_real_t fluid_convex_tab[128];
-extern fluid_real_t fluid_pan_tab[FLUID_PAN_SIZE];
+extern float fluid_ct2hz_tab[FLUID_CENTS_HZ_SIZE];
+extern float fluid_vel2cb_tab[FLUID_VEL_CB_SIZE];
+extern float fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
+extern float fluid_posbp_tab[128];
+extern float fluid_concave_tab[128];
+extern float fluid_convex_tab[128];
+extern float fluid_pan_tab[FLUID_PAN_SIZE];
 
 }
 #endif /* _FLUID_CONV_H */

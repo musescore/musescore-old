@@ -88,6 +88,10 @@
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hungary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -105,18 +109,6 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -986,10 +978,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>no stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>additional leading space </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1401,10 +1389,6 @@ failed: </source>
         <translation type="unfinished">Edit Drumkit...</translation>
     </message>
     <message>
-        <source>Slash Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1663,10 +1647,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>use symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1765,10 +1745,6 @@ failed: </source>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>use jazz font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2686,10 +2662,6 @@ failed: </source>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SlashStyle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6424,6 +6396,10 @@ Please select a single note or rest and retry operation
         <source>MuseScore: Load chord list failed:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MuseScore: Open chord list failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6647,19 +6623,11 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>renaming file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&gt; to backup &lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>renaming &lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

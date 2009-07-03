@@ -97,7 +97,7 @@ void Channel::initCtrl()
 //   setcc
 //---------------------------------------------------------
 
-int Channel::setcc(int num, int value)
+void Channel::setcc(int num, int value)
       {
       cc[num] = value;
 
@@ -141,7 +141,7 @@ int Channel::setcc(int num, int value)
                   /* SontFont 2.01 NRPN Message (Sect. 9.6, p. 74)  */
                   if ((cc[NRPN_MSB] == 120) && (cc[NRPN_LSB] < 100)) {
                         float val = fluid_gen_scale_nrpn(nrpn_select, data);
-                        FLUID_LOG(FLUID_WARN, "%s: %d: Data = %d, value = %f", __FILE__, __LINE__, data, val);
+                        synth->log("%s: %d: Data = %d, value = %f", __FILE__, __LINE__, data, val);
                         synth->set_gen(channum, nrpn_select, val);
                         }
                   break;
@@ -163,7 +163,7 @@ int Channel::setcc(int num, int value)
                               nrpn_select += 10000;
                         else if (value < 100) {
                               nrpn_select += value;
-                              FLUID_LOG(FLUID_WARN, "%s: %d: NRPN Select = %d", __FILE__, __LINE__, nrpn_select);
+                              synth->log("%s: %d: NRPN Select = %d", __FILE__, __LINE__, nrpn_select);
                               }
                         }
                   break;
@@ -181,7 +181,6 @@ int Channel::setcc(int num, int value)
             default:
                   synth->modulate_voices(channum, 1, num);
             }
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
@@ -197,22 +196,20 @@ int Channel::getCC(int num)
 //   pitchBend
 //---------------------------------------------------------
 
-int Channel::pitchBend(int val)
+void Channel::pitchBend(int val)
       {
       pitch_bend = val;
       synth->modulate_voices(channum, 0, FLUID_MOD_PITCHWHEEL);
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
 //   pitchWheelSens
 //---------------------------------------------------------
 
-int Channel::pitchWheelSens(int val)
+void Channel::pitchWheelSens(int val)
       {
       pitch_wheel_sensitivity = val;
       synth->modulate_voices(channum, 0, FLUID_MOD_PITCHWHEELSENS);
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,5 @@
+2.jun (ws)
+      - do not save full path of chord description file
 30.jun (ws)
       - fix midi redering of grace notes; mscore crashed on second playback
       - change semantic of breath symbol input: symbol is placed after the chord it

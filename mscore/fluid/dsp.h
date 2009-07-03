@@ -87,9 +87,7 @@
 
 /* Interpolation (find a value between two samples of the original waveform) */
 
-if ((fluid_phase_fract(dsp_phase) == 0)
-    && (fluid_phase_fract(dsp_phase_incr) == 0)
-    && (fluid_phase_index(dsp_phase_incr) == 1)) {
+if (dsp_phase.fract() == 0 && dsp_phase_incr.fract() == 0 && dsp_phase_incr.index() == 1) {
 
 	/* Check for a special case: The current phase falls directly on an
 	 * original sample.  Also, the stepsize per output sample is exactly
@@ -114,11 +112,11 @@ if ((fluid_phase_fract(dsp_phase) == 0)
 		 * efficient. */
 
 		for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
-			dsp_phase_index = fluid_phase_index(dsp_phase);
+			dsp_phase_index = dsp_phase.index();
 			dsp_buf[dsp_i] = dsp_amp * dsp_data[dsp_phase_index];
 
 			/* increment phase and amplitude */
-			fluid_phase_incr(dsp_phase, dsp_phase_incr);
+			dsp_phase += dsp_phase_incr;
 			dsp_amp += dsp_amp_incr;
 		};
 		break;
@@ -127,13 +125,13 @@ if ((fluid_phase_fract(dsp_phase) == 0)
 		/* Straight line interpolation. */
 		for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
 			dsp_coeff = &interp_coeff_linear[fluid_phase_fract_to_tablerow(dsp_phase)];
-			dsp_phase_index = fluid_phase_index(dsp_phase);
+			dsp_phase_index = dsp_phase.index();
 			dsp_buf[dsp_i] = (dsp_amp *
 					  (dsp_coeff->a0 * dsp_data[dsp_phase_index]
 					   + dsp_coeff->a1 * dsp_data[dsp_phase_index+1]));
 
 			/* increment phase and amplitude */
-			fluid_phase_incr(dsp_phase, dsp_phase_incr);
+			dsp_phase += dsp_phase_incr;
 			dsp_amp += dsp_amp_incr;
 		};
 		break;
@@ -145,7 +143,7 @@ if ((fluid_phase_fract(dsp_phase) == 0)
 		for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
 			dsp_coeff = &interp_coeff[fluid_phase_fract_to_tablerow(dsp_phase)];
 
-			dsp_phase_index = fluid_phase_index(dsp_phase);
+			dsp_phase_index = dsp_phase.index();
 			dsp_buf[dsp_i] = (dsp_amp *
 					  (dsp_coeff->a0 * dsp_data[dsp_phase_index]
 					   + dsp_coeff->a1 * dsp_data[dsp_phase_index+1]
@@ -153,7 +151,7 @@ if ((fluid_phase_fract(dsp_phase) == 0)
 					   + dsp_coeff->a3 * dsp_data[dsp_phase_index+3]));
 
 			/* increment phase and amplitude */
-			fluid_phase_incr(dsp_phase, dsp_phase_incr);
+			dsp_phase += dsp_phase_incr;
 			dsp_amp += dsp_amp_incr;
 		}
 		break;
@@ -162,18 +160,18 @@ if ((fluid_phase_fract(dsp_phase) == 0)
 	case FLUID_INTERP_7THORDER:
 		for (dsp_i = dsp_start; dsp_i < dsp_end; dsp_i++) {
 			int fract = fluid_phase_fract_to_tablerow(dsp_phase);
-			dsp_phase_index = fluid_phase_index(dsp_phase);
+			dsp_phase_index = dsp_phase.index();
 			dsp_buf[dsp_i] = (dsp_amp *
-					  (sinc_table7[0][fract] * (fluid_real_t) dsp_data[dsp_phase_index]
-					   + sinc_table7[1][fract] * (fluid_real_t) dsp_data[dsp_phase_index+1]
-					   + sinc_table7[2][fract] * (fluid_real_t) dsp_data[dsp_phase_index+2]
-					   + sinc_table7[3][fract] * (fluid_real_t) dsp_data[dsp_phase_index+3]
-					   + sinc_table7[4][fract] * (fluid_real_t) dsp_data[dsp_phase_index+4]
-					   + sinc_table7[5][fract] * (fluid_real_t) dsp_data[dsp_phase_index+5]
-					   + sinc_table7[6][fract] * (fluid_real_t) dsp_data[dsp_phase_index+6]));
+					  (sinc_table7[0][fract] * (float) dsp_data[dsp_phase_index]
+					   + sinc_table7[1][fract] * (float) dsp_data[dsp_phase_index+1]
+					   + sinc_table7[2][fract] * (float) dsp_data[dsp_phase_index+2]
+					   + sinc_table7[3][fract] * (float) dsp_data[dsp_phase_index+3]
+					   + sinc_table7[4][fract] * (float) dsp_data[dsp_phase_index+4]
+					   + sinc_table7[5][fract] * (float) dsp_data[dsp_phase_index+5]
+					   + sinc_table7[6][fract] * (float) dsp_data[dsp_phase_index+6]));
 
 			/* increment phase and amplitude */
-			fluid_phase_incr(dsp_phase, dsp_phase_incr);
+			dsp_phase += dsp_phase_incr;
 			dsp_amp += dsp_amp_incr;
 		}
 		break;

@@ -1013,29 +1013,26 @@ bool ChordList::read(const QString& name)
       {
       if (name.isEmpty())
             return false;
-      QString path;
-      if (name[0] == '/')
-            path = name;
-      else
-            path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
+      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
       QFile f(path);
       if (!f.open(QIODevice::ReadOnly)) {
-            printf("cannot read chordlist at <%s>\n", qPrintable(path));
+            QString error = QString("cannot open chord description: %1\n").arg(f.fileName());
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Open chord list failed:"),
+               error,
+               QString::null, QString::null, QString::null, 0, 1);
             return false;
             }
       QDomDocument doc;
       int line, column;
       QString err;
       if (!doc.setContent(&f, false, &err, &line, &column)) {
-            QString error;
-            error.sprintf("error reading style file %s at line %d column %d: %s\n",
-               qPrintable(f.fileName()), line, column, qPrintable(err));
-            int id = QMessageBox::warning(0,
+            QString error = QString("error reading chord description %1 at line %2 column %3: %4\n")
+               .arg(f.fileName()).arg(line).arg(column).arg(err);
+            QMessageBox::warning(0,
                QWidget::tr("MuseScore: Load chord list failed:"),
                error,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            if (id == 1)      // quit?
-                  exit(-1);
+               QString::null, QString::null, QString::null, 0, 1);
             return false;
             }
       docName = f.fileName();

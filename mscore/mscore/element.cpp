@@ -228,51 +228,29 @@ Element::~Element()
       }
 
 //---------------------------------------------------------
-//   init
-//---------------------------------------------------------
-
-void Element::init()
-      {
-      _tick       = -1;
-      _parent     = 0;
-      _selected   = false;
-      _selectable = true;
-      _dropTarget = false;
-      _visible    = true;
-      _generated  = false;
-      _track      = -1;
-      _color      = preferences.defaultColor;
-      _mxmlOff    = 0;
-      _pos.setX(0.0);
-      _pos.setY(0.0);
-      _userOff.setX(0.0);
-      _userOff.setY(0.0);
-      itemDiscovered = 0;
-
-      _align       = ALIGN_LEFT | ALIGN_TOP;
-      _xoff        = 0;
-      _yoff        = 0;
-      _rxoff       = 0;
-      _ryoff       = 0;
-      _offsetType  = OFFSET_SPATIUM;
-
-      _systemFlag  = false;
-      }
-
-//---------------------------------------------------------
 //   Element
 //---------------------------------------------------------
 
-//---------------------------------------------------------
-//   Element
-//---------------------------------------------------------
-
-Element::Element(Score* s)
+Element::Element(Score* s) :
+   _parent(0),
+   _selected(false),
+   _selectable(false),
+   _dropTarget(false),
+   _generated(false),
+   _visible(true),
+   _systemFlag(false),
+   _subtype(0),
+   _track(-1),
+   _tick(-1),
+   _color(preferences.defaultColor),
+   _mag(1.0),
+   _score(s),
+   _align(ALIGN_LEFT | ALIGN_TOP),
+   _xoff(0), _yoff(0), _rxoff(0), _ryoff(0),
+   _offsetType(OFFSET_SPATIUM),
+   _mxmlOff(0),
+   itemDiscovered(0)
       {
-      _score = s;
-      init();
-      setSubtype(0);
-      _mag = 1.0;
       }
 
 Element::Element(const Element& e)
@@ -291,14 +269,12 @@ Element::Element(const Element& e)
       _mag        = e._mag;
       _score      = e._score;
       _pos        = e._pos;
-
       _align      = e._align;
       _xoff       = e._xoff;
       _yoff       = e._yoff;
       _rxoff      = e._rxoff;
       _ryoff      = e._ryoff;
       _offsetType = e._offsetType;
-
       _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
