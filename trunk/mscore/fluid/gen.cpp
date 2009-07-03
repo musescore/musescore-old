@@ -94,7 +94,7 @@ GenInfo fluid_gen_info[] = {
  * @param gen Array of generators (should be #GEN_LAST in size).
  * @return Always returns 0
  */
-int fluid_gen_set_default_values(Generator* gen)
+void fluid_gen_set_default_values(Generator* gen)
       {
 	for (int i = 0; i < GEN_LAST; i++) {
 		gen[i].flags = GEN_UNUSED;
@@ -102,7 +102,6 @@ int fluid_gen_set_default_values(Generator* gen)
 		gen[i].nrpn = 0.0;
 		gen[i].val = fluid_gen_info[i].def;
 	      }
-      return FLUID_OK;
       }
 
 
@@ -110,7 +109,7 @@ int fluid_gen_set_default_values(Generator* gen)
  *
  * Set an array of generators to their initial value
  */
-int fluid_gen_init(Generator* gen, Channel* channel)
+void fluid_gen_init(Generator* gen, Channel* channel)
       {
 	fluid_gen_set_default_values(gen);
 
@@ -123,20 +122,17 @@ int fluid_gen_init(Generator* gen, Channel* channel)
 		if (channel->getGenAbs(i))
 			gen[i].flags = GEN_ABS_NRPN;
 	      }
-
-	return FLUID_OK;
       }
 
-fluid_real_t fluid_gen_scale(int gen, float value)
+float fluid_gen_scale(int gen, float value)
       {
       return (fluid_gen_info[gen].min
 		+ value * (fluid_gen_info[gen].max - fluid_gen_info[gen].min));
       }
 
-fluid_real_t fluid_gen_scale_nrpn(int gen, int data)
+float fluid_gen_scale_nrpn(int gen, int data)
       {
-	fluid_real_t value = (float) data - 8192.0f;
-	fluid_clip(value, -8192, 8192);
+	float value = qBound(-8192.0, (float) data - 8192.0, 8192.0);
 	return value * (float) fluid_gen_info[gen].nrpn_scale;
       }
 }

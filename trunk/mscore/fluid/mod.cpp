@@ -23,6 +23,9 @@
 
 namespace FluidS {
 
+#undef FLUID_LOG
+#define FLUID_LOG(a, ...)
+
 //---------------------------------------------------------
 //   clone
 //---------------------------------------------------------
@@ -98,17 +101,17 @@ int fluid_mod_get_dest(Mod* mod)
 
 double fluid_mod_get_amount(Mod* mod)
       {
-      return (fluid_real_t) mod->amount;
+      return (float) mod->amount;
       }
 
 
 /*
  * fluid_mod_get_value
  */
-fluid_real_t fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
+float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
       {
-      fluid_real_t v1 = 0.0, v2 = 1.0;
-      fluid_real_t range1 = 127.0, range2 = 127.0;
+      float v1 = 0.0, v2 = 1.0;
+      float range1 = 127.0, range2 = 127.0;
 
       if (chan == 0)
             return 0.0f;
@@ -142,9 +145,9 @@ fluid_real_t fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
             | FLUID_MOD_POSITIVE | FLUID_MOD_SWITCH)) &&
          (mod->dest == GEN_FILTERFC)) {
             if (voice->vel < 64)
-                  return (fluid_real_t) mod->amount / 2.0;
+                  return (float) mod->amount / 2.0;
             else
-                  return (fluid_real_t) mod->amount * (127 - voice->vel) / 127;
+                  return (float) mod->amount * (127 - voice->vel) / 127;
             }
 
       /* get the initial value of the first source */
@@ -329,28 +332,7 @@ fluid_real_t fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
             v2 = 1.0f;
 
       /* it's as simple as that: */
-      return (fluid_real_t) mod->amount * v1 * v2;
-      }
-
-/*
- * fluid_mod_new
- */
-Mod* fluid_mod_new()
-      {
-      Mod* mod = FLUID_NEW(Mod);
-      if (mod == NULL) {
-            FLUID_LOG(FLUID_ERR, "Out of memory");
-            return NULL;
-            }
-      return mod;
-      }
-
-/*
- * fluid_mod_delete
- */
-void fluid_mod_delete(Mod * mod)
-      {
-      free(mod);
+      return (float) mod->amount * v1 * v2;
       }
 
 /*
@@ -383,7 +365,7 @@ void fluid_dump_modulator(Mod * mod)
       int src2=mod->src2;
       int flags1=mod->flags1;
       int flags2=mod->flags2;
-      fluid_real_t amount=(fluid_real_t)mod->amount;
+      float amount=(float)mod->amount;
 
       printf("Src: ");
       if (flags1 & FLUID_MOD_CC){

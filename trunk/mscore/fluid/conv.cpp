@@ -23,13 +23,13 @@
 namespace FluidS {
 
 /* conversion tables */
-fluid_real_t fluid_ct2hz_tab[FLUID_CENTS_HZ_SIZE];
-fluid_real_t fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
-fluid_real_t fluid_atten2amp_tab[FLUID_ATTEN_AMP_SIZE];
-fluid_real_t fluid_posbp_tab[128];
-fluid_real_t fluid_concave_tab[128];
-fluid_real_t fluid_convex_tab[128];
-fluid_real_t fluid_pan_tab[FLUID_PAN_SIZE];
+float fluid_ct2hz_tab[FLUID_CENTS_HZ_SIZE];
+float fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
+float fluid_atten2amp_tab[FLUID_ATTEN_AMP_SIZE];
+float fluid_posbp_tab[128];
+float fluid_concave_tab[128];
+float fluid_convex_tab[128];
+float fluid_pan_tab[FLUID_PAN_SIZE];
 
 /*
  * void fluid_synth_init
@@ -42,7 +42,7 @@ void fluid_conversion_config(void)
       double x;
 
       for (i = 0; i < FLUID_CENTS_HZ_SIZE; i++)
-            fluid_ct2hz_tab[i] = (fluid_real_t) pow(2.0, (double) i / 1200.0);
+            fluid_ct2hz_tab[i] = (float) pow(2.0, (double) i / 1200.0);
 
       /* centibels to amplitude conversion
        * Note: SF2.01 section 8.1.3: Initial attenuation range is
@@ -50,7 +50,7 @@ void fluid_conversion_config(void)
        * not allowed.
        */
       for (i = 0; i < FLUID_CB_AMP_SIZE; i++)
-            fluid_cb2amp_tab[i] = (fluid_real_t) pow(10.0, (double) i / -200.0);
+            fluid_cb2amp_tab[i] = (float) pow(10.0, (double) i / -200.0);
 
       /* NOTE: EMU8k and EMU10k devices don't conform to the SoundFont
        * specification in regards to volume attenuation.  The below calculation
@@ -59,7 +59,7 @@ void fluid_conversion_config(void)
        * was generated from device testing.  By the spec this should be centibels.
        */
       for (i = 0; i < FLUID_ATTEN_AMP_SIZE; i++)
-            fluid_atten2amp_tab[i] = (fluid_real_t) pow(10.0, (double) i / FLUID_ATTEN_POWER_FACTOR);
+            fluid_atten2amp_tab[i] = (float) pow(10.0, (double) i / FLUID_ATTEN_POWER_FACTOR);
 
       /* initialize the conversion tables (see fluid_mod.c
          fluid_mod_get_value cases 4 and 8) */
@@ -78,55 +78,55 @@ void fluid_conversion_config(void)
 
       for (i = 1; i < 127; i++) {
             x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
-            fluid_convex_tab[i] = (fluid_real_t) (1.0 - x);
-            fluid_concave_tab[127 - i] = (fluid_real_t) x;
+            fluid_convex_tab[i] = (float) (1.0 - x);
+            fluid_concave_tab[127 - i] = (float) x;
             }
 
       /* initialize the pan conversion table */
       x = M_PI / 2.0 / (FLUID_PAN_SIZE - 1.0);
       for (i = 0; i < FLUID_PAN_SIZE; i++)
-            fluid_pan_tab[i] = (fluid_real_t) sin(i * x);
+            fluid_pan_tab[i] = (float) sin(i * x);
       }
 
 /*
  * fluid_ct2hz
  */
-fluid_real_t fluid_ct2hz_real(fluid_real_t cents)
+float fluid_ct2hz_real(float cents)
       {
       if (cents < 0)
-            return (fluid_real_t) 1.0;
+            return (float) 1.0;
       else if (cents < 900)
-            return (fluid_real_t) 6.875 * fluid_ct2hz_tab[(int) (cents + 300)];
+            return (float) 6.875 * fluid_ct2hz_tab[(int) (cents + 300)];
       else if (cents < 2100)
-            return (fluid_real_t) 13.75 * fluid_ct2hz_tab[(int) (cents - 900)];
+            return (float) 13.75 * fluid_ct2hz_tab[(int) (cents - 900)];
       else if (cents < 3300)
-            return (fluid_real_t) 27.5 * fluid_ct2hz_tab[(int) (cents - 2100)];
+            return (float) 27.5 * fluid_ct2hz_tab[(int) (cents - 2100)];
       else if (cents < 4500)
-            return (fluid_real_t) 55.0 * fluid_ct2hz_tab[(int) (cents - 3300)];
+            return (float) 55.0 * fluid_ct2hz_tab[(int) (cents - 3300)];
       else if (cents < 5700)
-            return (fluid_real_t) 110.0 * fluid_ct2hz_tab[(int) (cents - 4500)];
+            return (float) 110.0 * fluid_ct2hz_tab[(int) (cents - 4500)];
       else if (cents < 6900)
-            return (fluid_real_t) 220.0 * fluid_ct2hz_tab[(int) (cents - 5700)];
+            return (float) 220.0 * fluid_ct2hz_tab[(int) (cents - 5700)];
       else if (cents < 8100)
-            return (fluid_real_t) 440.0 * fluid_ct2hz_tab[(int) (cents - 6900)];
+            return (float) 440.0 * fluid_ct2hz_tab[(int) (cents - 6900)];
       else if (cents < 9300)
-            return (fluid_real_t) 880.0 * fluid_ct2hz_tab[(int) (cents - 8100)];
+            return (float) 880.0 * fluid_ct2hz_tab[(int) (cents - 8100)];
       else if (cents < 10500)
-            return (fluid_real_t) 1760.0 * fluid_ct2hz_tab[(int) (cents - 9300)];
+            return (float) 1760.0 * fluid_ct2hz_tab[(int) (cents - 9300)];
       else if (cents < 11700)
-            return (fluid_real_t) 3520.0 * fluid_ct2hz_tab[(int) (cents - 10500)];
+            return (float) 3520.0 * fluid_ct2hz_tab[(int) (cents - 10500)];
       else if (cents < 12900)
-            return (fluid_real_t) 7040.0 * fluid_ct2hz_tab[(int) (cents - 11700)];
+            return (float) 7040.0 * fluid_ct2hz_tab[(int) (cents - 11700)];
       else if (cents < 14100)
-            return (fluid_real_t) 14080.0 * fluid_ct2hz_tab[(int) (cents - 12900)];
+            return (float) 14080.0 * fluid_ct2hz_tab[(int) (cents - 12900)];
       else
-            return (fluid_real_t) 1.0; /* some loony trying to make you deaf */
+            return (float) 1.0; /* some loony trying to make you deaf */
       }
 
 /*
  * fluid_ct2hz
  */
-fluid_real_t fluid_ct2hz(fluid_real_t cents)
+float fluid_ct2hz(float cents)
       {
       /* Filter fc limit: SF2.01 page 48 # 8 */
       if (cents >= 13500)
@@ -142,7 +142,7 @@ fluid_real_t fluid_ct2hz(fluid_real_t cents)
  * in: a value between 0 and 960, 0 is no attenuation
  * out: a value between 1 and 0
  */
-fluid_real_t fluid_cb2amp(fluid_real_t cb)
+float fluid_cb2amp(float cb)
       {
       /*
        * cb: an attenuation in 'centibels' (1/10 dB)
@@ -167,7 +167,7 @@ fluid_real_t fluid_cb2amp(fluid_real_t cb)
  * Note: Volume attenuation is supposed to be centibels but EMU8k/10k don't
  * follow this.  Thats the reason for separate fluid_cb2amp and fluid_atten2amp.
  */
-fluid_real_t fluid_atten2amp(fluid_real_t atten)
+float fluid_atten2amp(float atten)
       {
       if (atten < 0)
             return 1.0;
@@ -180,7 +180,7 @@ fluid_real_t fluid_atten2amp(fluid_real_t atten)
 /*
  * fluid_tc2sec_delay
  */
-fluid_real_t fluid_tc2sec_delay(fluid_real_t tc)
+float fluid_tc2sec_delay(float tc)
       {
       /* SF2.01 section 8.1.2 items 21, 23, 25, 33
        * SF2.01 section 8.1.3 items 21, 23, 25, 33
@@ -189,45 +189,45 @@ fluid_real_t fluid_tc2sec_delay(fluid_real_t tc)
        * from -12000 to 5000
        */
       if (tc <= -32768.0f)
-            return (fluid_real_t) 0.0f;
+            return (float) 0.0f;
       if (tc < -12000.)
-            tc = (fluid_real_t) -12000.0f;
+            tc = (float) -12000.0f;
       if (tc > 5000.0f)
-            tc = (fluid_real_t) 5000.0f;
-      return (fluid_real_t) pow(2.0, (double) tc / 1200.0);
+            tc = (float) 5000.0f;
+      return (float) pow(2.0, (double) tc / 1200.0);
       }
 
 /*
  * fluid_tc2sec_attack
  */
-fluid_real_t fluid_tc2sec_attack(fluid_real_t tc)
+float fluid_tc2sec_attack(float tc)
       {
       /* SF2.01 section 8.1.2 items 26, 34
       * SF2.01 section 8.1.3 items 26, 34
       * The most negative number indicates a delay of 0
       * Range is limited from -12000 to 8000 */
       if (tc<=-32768.)
-            return (fluid_real_t) 0.0;
+            return (float) 0.0;
       if (tc<-12000.)
-            tc=(fluid_real_t) -12000.0;
+            tc=(float) -12000.0;
       if (tc>8000.)
-            tc=(fluid_real_t) 8000.0;
-      return (fluid_real_t) pow(2.0, (double) tc / 1200.0);
+            tc=(float) 8000.0;
+      return (float) pow(2.0, (double) tc / 1200.0);
       }
 
 /*
  * fluid_tc2sec
  */
-fluid_real_t fluid_tc2sec(fluid_real_t tc)
+float fluid_tc2sec(float tc)
       {
       /* No range checking here! */
-      return (fluid_real_t) pow(2.0, (double) tc / 1200.0);
+      return (float) pow(2.0, (double) tc / 1200.0);
       }
 
 /*
  * fluid_tc2sec_release
  */
-fluid_real_t fluid_tc2sec_release(fluid_real_t tc)
+float fluid_tc2sec_release(float tc)
       {
       /* SF2.01 section 8.1.2 items 30, 38
        * SF2.01 section 8.1.3 items 30, 38
@@ -235,12 +235,12 @@ fluid_real_t fluid_tc2sec_release(fluid_real_t tc)
        * Range is limited from -12000 to 8000
        */
       if (tc<=-32768.)
-            return (fluid_real_t) 0.0;
+            return (float) 0.0;
       if (tc<-12000.)
-            tc=(fluid_real_t) -12000.0;
+            tc=(float) -12000.0;
       if (tc>8000.)
-            tc=(fluid_real_t) 8000.0;
-      return (fluid_real_t) pow(2.0, (double) tc / 1200.0);
+            tc=(float) 8000.0;
+      return (float) pow(2.0, (double) tc / 1200.0);
       }
 
 /*
@@ -248,9 +248,9 @@ fluid_real_t fluid_tc2sec_release(fluid_real_t tc)
  *
  * Convert from absolute cents to Hertz
  */
-fluid_real_t fluid_act2hz(fluid_real_t c)
+float fluid_act2hz(float c)
       {
-      return (fluid_real_t) (8.176 * pow(2.0, (double) c / 1200.0));
+      return (float) (8.176 * pow(2.0, (double) c / 1200.0));
       }
 
 /*
@@ -258,22 +258,22 @@ fluid_real_t fluid_act2hz(fluid_real_t c)
  *
  * Convert from Hertz to cents
  */
-fluid_real_t fluid_hz2ct(fluid_real_t f)
+float fluid_hz2ct(float f)
       {
-      return (fluid_real_t) (6900 + 1200 * log(f / 440.0) / log(2.0));
+      return (float) (6900 + 1200 * log(f / 440.0) / log(2.0));
       }
 
 /*
  * fluid_pan
  */
-fluid_real_t fluid_pan(fluid_real_t c, int left)
+float fluid_pan(float c, int left)
       {
       if (left)
             c = -c;
       if (c < -500)
-            return (fluid_real_t) 0.0;
+            return (float) 0.0;
       else if (c > 500)
-            return (fluid_real_t) 1.0;
+            return (float) 1.0;
       else
             return fluid_pan_tab[(int) (c + 500)];
       }
@@ -281,7 +281,7 @@ fluid_real_t fluid_pan(fluid_real_t c, int left)
 /*
  * fluid_concave
  */
-fluid_real_t fluid_concave(fluid_real_t val)
+float fluid_concave(float val)
       {
       if (val < 0)
             return 0;
@@ -293,7 +293,7 @@ fluid_real_t fluid_concave(fluid_real_t val)
 /*
  * fluid_convex
  */
-fluid_real_t fluid_convex(fluid_real_t val)
+float fluid_convex(float val)
       {
       if (val < 0)
             return 0;

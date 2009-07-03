@@ -23,8 +23,6 @@
 #ifndef _FLUID_DEFSFONT_H
 #define _FLUID_DEFSFONT_H
 
-#include "priv.h"
-#include "list.h"
 #include "fluid.h"
 
 class Xml;
@@ -37,26 +35,77 @@ struct SFZone;
 class Preset;
 class Sample;
 
+struct SFChunk;
+
+//---------------------------------------------------------
+//   SFVersion
+//---------------------------------------------------------
+
+struct SFVersion {            // version structure
+      unsigned short major, minor;
+
+      SFVersion() {
+            major = 0;
+            minor = 0;
+            }
+      };
+
 //---------------------------------------------------------
 //   SFont
 //---------------------------------------------------------
 
 class SFont {
-      QString filename;             // the filename of this soundfont
+      Fluid* synth;
+      QFile f;
       unsigned samplepos;           // the position in the file at which the sample data starts
       unsigned samplesize;          // the size of the sample data
       QList<Preset*> presets;
       QList<Sample*> sample;
       unsigned _id;
+      SFVersion version;		// sound font version
+      SFVersion romver;		      // ROM version
+      QList<unsigned char*> info;	// list of info strings (1st byte is ID)
+      QList<SFPreset*> preset;      // list of preset info
+      QList<SFInst*> inst;
+
+      void read_listchunk(SFChunk* chunk);
+      void process_info(int size);
+      void process_sdta(int size);
+      void pdtahelper(unsigned int expid, unsigned int reclen, SFChunk* chunk, int* size);
+      void process_pdta(int size);
+      void load_phdr(int size);
+      void load_pbag(int size);
+      void load_pmod(int size);
+      void load_pgen(int size);
+      void load_ihdr(int size);
+      void load_ibag(int size);
+      void load_imod(int size);
+      void load_igen(int size);
+      void load_shdr(int size);
+      void fixup_pgen();
+      void fixup_igen();
+      void fixup_sample();
+
+      void readchunk(SFChunk*);
+      unsigned short READW();
+      void READD(unsigned int& var);
+      void FSKIP(int size)    {  return safe_fseek(size); }
+      void FSKIPW();
+      unsigned char READB();
+      void READSTR(char*);
+
+      void safe_fread(void *buf, int count);
+      void safe_fseek(long ofs);
+      bool load();
 
    public:
-      SFont();
+      SFont(Fluid* f);
       virtual ~SFont();
 
-      QString get_name()  const           { return filename; }
+      QString get_name()  const                 { return f.fileName(); }
       Preset* get_preset(int bank, int prenum);
 
-      bool load(const QString& file);
+      bool read(const QString& file);
       void write(Xml&);
 
       Sample* get_sample(char*);
@@ -114,17 +163,22 @@ class Sample {
 //   InstZone
 //---------------------------------------------------------
 
-struct InstZone
-      {
-      InstZone* next;
+class InstZone {
+      InstZone* _next;
+
+   public:
       char* name;
       Sample* sample;
-      int keylo;
-      int keyhi;
-      int vello;
-      int velhi;
+      int keylo, keyhi, vello, velhi;
       Generator gen[GEN_LAST];
       Mod* mod;   /* List of modulators */
+
+      InstZone(const char* name);
+      ~InstZone();
+      InstZone* next() const { return _next; }
+      bool import_sfont(SFZone *sfzone, SFont* sfont);
+      int inside_range(int key, int vel);
+      Sample* get_sample() const { return sample; }
       };
 
 //---------------------------------------------------------
@@ -162,7 +216,9 @@ class PresetZone {
 
       PresetZone(const QString&);
       ~PresetZone();
-      int importSfont(SFZone* sfzone, SFont* sfont);
+      bool importSfont(SFZone* sfzone, SFont* sfont);
+      bool inside_range(int key, int vel) const;
+      Inst* get_inst() const { return inst; }
       };
 
 //---------------------------------------------------------
@@ -182,31 +238,18 @@ class Preset {
 
       SFont* sfont;
 
-      QString get_name() const               { return name; }
-      int get_banknum() const                { return bank; }
-      int get_num() const                    { return num;  }
-      int noteon(Fluid*, unsigned id, int chan, int key, int vel, double nt);
+      QString get_name() const                  { return name; }
+      int get_banknum() const                   { return bank; }
+      int get_num() const                       { return num;  }
+      bool noteon(Fluid*, unsigned id, int chan, int key, int vel, double nt);
 
-      void setGlobalZone(PresetZone* z)               { _global_zone = z;   }
-      int importSfont(SFPreset*, SFont*);
+      void setGlobalZone(PresetZone* z)         { _global_zone = z;   }
+      bool importSfont(SFPreset*, SFont*);
 
       void add_zone(PresetZone* z)         { zones.prepend(z);  }
       PresetZone* global_zone()            { return _global_zone; }
       void loadSamples();
       QList<PresetZone*> getZones()        { return zones; }
-      };
-
-//---------------------------------------------------------
-//   SFVersion
-//---------------------------------------------------------
-
-struct SFVersion {            // version structure
-      unsigned short major, minor;
-
-      SFVersion() {
-            major = 0;
-            minor = 0;
-            }
       };
 
 //---------------------------------------------------------
@@ -217,68 +260,6 @@ struct SFChunk {              // RIFF file chunk structure
       unsigned int id;	      // chunk id
       unsigned int size;	// size of the following chunk
       };
-
-//---------------------------------------------------------
-//   SFData
-//    Sound font data structure
-//---------------------------------------------------------
-
-class SFData : public QFile {
-      void read_listchunk(SFChunk * chunk);
-      void process_info(int size);
-      void process_sdta(int size);
-      void pdtahelper(unsigned int expid, unsigned int reclen, SFChunk * chunk, int * size);
-      void process_pdta(int size);
-      void load_phdr(int size);
-      void load_pbag(int size);
-      void load_pmod(int size);
-      void load_pgen(int size);
-      void load_ihdr(int size);
-      void load_ibag(int size);
-      void load_imod(int size);
-      void load_igen(int size);
-      void load_shdr(unsigned int size);
-      void fixup_pgen();
-      void fixup_igen();
-      void fixup_sample();
-
-      void READCHUNK(SFChunk*);
-      unsigned short READW();
-      void READD(unsigned int& var);
-      void FSKIP(int size)    {  return safe_fseek(size, SEEK_CUR); }
-      void FSKIPW();
-      unsigned char READB();
-      void READSTR(char*);
-
-      void safe_fread(void *buf, int count);
-      void safe_fseek(long ofs, int whence);
-
-   public:
-      SFData(const QString&, SFont*);
-      ~SFData();
-      bool load();
-
-      SFVersion version;		// sound font version
-      SFVersion romver;		      // ROM version
-      SFont* sf;
-
-      fluid_list_t* info;		// linked list of info strings (1st byte is ID)
-      QList<SFPreset*> preset;      // linked list of preset info
-      QList<SFInst*> inst;
-      QList<Sample*> sample;
-      };
-
-/*-----------------------------------sfont.h----------------------------*/
-
-#define SF_SAMPMODES_LOOP	1
-#define SF_SAMPMODES_UNROLL	2
-
-#define SF_MIN_SAMPLERATE	400
-#define SF_MAX_SAMPLERATE	50000
-
-#define SF_MIN_SAMPLE_LENGTH	32
-
-/* Sound Font structure defines */
 
 struct SFMod {				/* Modulator structure */
       unsigned short src;		/* source modulator */
@@ -314,8 +295,8 @@ struct SFZone {                     /* Sample/instrument zone structure */
             int instIdx;
             };
 
-      fluid_list_t *gen;	      /* list of generators */
-      fluid_list_t *mod;		/* list of modulators */
+      QList<SFGen*> gen;
+      QList<SFMod*> mod;
 
       SFZone() {}
       ~SFZone();
@@ -327,7 +308,7 @@ struct SFZone {                     /* Sample/instrument zone structure */
 
 struct SFInst {                     // Instrument structure
       char name[21];		      // Name of instrument
-      fluid_list_t *zone;		// list of instrument zones
+      QList<SFZone*> zone;		// list of instrument zones
       };
 
 //---------------------------------------------------------
@@ -341,7 +322,7 @@ struct SFPreset {                   // Preset structure
       unsigned int libr;		// Not used (preserved)
       unsigned int genre;		// Not used (preserved)
       unsigned int morph;		// Not used (preserved)
-      fluid_list_t *zone;		// list of preset zones
+      QList<SFZone*> zone;          // list of preset zones
       };
 
 /* NOTE: sffd is also used to determine if sound font is new (NULL) */
@@ -384,8 +365,6 @@ enum Gen_Type {
       };
 
 #define Gen_MaxValid 	Gen_Dummy - 1	/* maximum valid generator */
-// #define Gen_Count	      Gen_Dummy	/* count of generators */
-// #define GenArrSize      sizeof(SFGenAmount)*Gen_Count	/* gen array size */
 
 /* generator unit type */
 enum Gen_Unit {
@@ -393,43 +372,23 @@ enum Gen_Unit {
       Unit_Smpls,			/* in samples */
       Unit_32kSmpls,		/* in 32k samples */
       Unit_Cent,			/* in cents (1/100th of a semitone) */
-      Unit_HzCent,			/* in Hz Cents */
+      Unit_HzCent,		/* in Hz Cents */
       Unit_TCent,			/* in Time Cents */
       Unit_cB,			/* in centibels (1/100th of a decibel) */
-      Unit_Percent,			/* in percentage */
+      Unit_Percent,	      /* in percentage */
       Unit_Semitone,		/* in semitones */
       Unit_Range			/* a range of values */
       };
 
 /* global data */
 
-extern unsigned short badgen[]; 	/* list of bad generators */
-extern unsigned short badpgen[]; 	/* list of bad preset generators */
-
-/* functions */
-void sfont_init_chunks (void);
-
-bool preset_compare(SFPreset* a, SFPreset* b);
-
-void sfont_zone_delete (SFData * sf, fluid_list_t ** zlist, SFZone * zone);
-
-fluid_list_t *gen_inlist (int gen, fluid_list_t * genlist);
-int gen_valid (int gen);
-int gen_validp (int gen);
-
-
-/*-----------------------------------sffile.h----------------------------*/
-/*
-   File structures and routines (used to be in sffile.h)
-*/
-
 #define CHNKIDSTR(id)           &idlist[(id - 1) * 4]
 
 /* sfont file chunk sizes */
 #define SFPHDRSIZE	38
-#define SFBAGSIZE	4
-#define SFMODSIZE	10
-#define SFGENSIZE	4
+#define SFBAGSIZE	      4
+#define SFMODSIZE	      10
+#define SFGENSIZE	      4
 #define SFIHDRSIZE	22
 #define SFSHDRSIZE	46
 
@@ -454,11 +413,6 @@ struct SFIhdr {
       char name[20];		      /* Name of instrument */
       unsigned short ibagndx;		/* Instrument bag index */
       };
-
-/* data */
-extern char idlist[];
-
-/* functions */
 
 /* Basic bit swapping functions
  */
@@ -494,42 +448,6 @@ extern char idlist[];
 #define GUINT32_FROM_LE(val)	(GUINT32_TO_LE (val))
 #define GINT32_FROM_BE(val)	(GINT32_TO_BE (val))
 #define GUINT32_FROM_BE(val)	(GUINT32_TO_BE (val))
-
-
-/*-----------------------------------util.h----------------------------*/
-/*
- */
-#define FAIL	0
-#define OK	      1
-
-enum {
-      ErrWarn, ErrFatal, ErrStatus, ErrCorr, ErrEof, ErrMem, Errno,
-      ErrRead, ErrWrite
-      };
-
-#define ErrMax		ErrWrite
-#define ErrnoStart	Errno
-#define ErrnoEnd	      ErrWrite
-
-int gerr (int ev, const char * fmt, ...);
-int safe_fread (void *buf, int count, QFile* fd);
-int safe_fwrite (void *buf, int count, QFile* fd);
-int safe_fseek (QFile*, long ofs, int whence);
-
-Preset* fluid_defsfont_get_preset(SFont* sfont, unsigned int bank, unsigned int prenum);
-
-int fluid_preset_zone_inside_range(PresetZone* zone, int key, int vel);
-Inst* fluid_preset_zone_get_inst(PresetZone* zone);
-
-InstZone* new_fluid_inst_zone(const char* name);
-int delete_fluid_inst_zone(InstZone* zone);
-InstZone* fluid_inst_zone_next(InstZone* zone);
-int fluid_inst_zone_import_sfont(InstZone* zone, SFZone *sfzone, SFont* sfont);
-int fluid_inst_zone_inside_range(InstZone* zone, int key, int vel);
-Sample* fluid_inst_zone_get_sample(InstZone* zone);
-
-// int fluid_sample_import_sfont(Sample* sample, Sample* sfsample, SFont* sfont);
-
 }
 
 #endif  /* _FLUID_SFONT_H */

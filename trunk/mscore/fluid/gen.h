@@ -22,8 +22,6 @@
 #ifndef _FLUID_GEN_H
 #define _FLUID_GEN_H
 
-#include "priv.h"
-
 namespace FluidS {
 
 class Channel;
@@ -42,9 +40,9 @@ class GenInfo {
 #define fluid_gen_set_mod(_gen, _val)  { (_gen)->mod = (double) (_val); }
 #define fluid_gen_set_nrpn(_gen, _val) { (_gen)->nrpn = (double) (_val); }
 
-fluid_real_t fluid_gen_scale(int gen, float value);
-fluid_real_t fluid_gen_scale_nrpn(int gen, int nrpn);
-int fluid_gen_init(Generator* gen, Channel* channel);
+float fluid_gen_scale(int gen, float value);
+float fluid_gen_scale_nrpn(int gen, int nrpn);
+void fluid_gen_init(Generator* gen, Channel* channel);
 
 }
 

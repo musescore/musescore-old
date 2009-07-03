@@ -87,6 +87,10 @@
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hungary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -105,18 +109,6 @@
     <message>
         <source>Revision: 628</source>
         <translation>Revision 628</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -985,10 +977,6 @@ p, li { white-space: pre-wrap; }
         <translation>liten</translation>
     </message>
     <message>
-        <source>no stem</source>
-        <translation>inget skaft</translation>
-    </message>
-    <message>
         <source>additional leading space </source>
         <translation>ytterligare föregående tomrum</translation>
     </message>
@@ -1378,10 +1366,6 @@ misslyckades: </translation>
         <translation>Liten</translation>
     </message>
     <message>
-        <source>Slash Style</source>
-        <translation>Snedstrecksstil</translation>
-    </message>
-    <message>
         <source>Part Properties</source>
         <translation>Stämegenskaper</translation>
     </message>
@@ -1708,10 +1692,6 @@ misslyckades: </translation>
         <translation>använd tyska namn</translation>
     </message>
     <message>
-        <source>use symbols</source>
-        <translation>använd symboler</translation>
-    </message>
-    <message>
         <source>articulation - note head distance</source>
         <translation>avstånd mellan nothuvud och artikulationsbeteckning</translation>
     </message>
@@ -1767,10 +1747,6 @@ misslyckades: </translation>
     <message>
         <source>Cancel</source>
         <translation>Avbryt</translation>
-    </message>
-    <message>
-        <source>use jazz font</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>accidental note distance</source>
@@ -2662,10 +2638,6 @@ misslyckades: </translation>
     <message>
         <source>Visible</source>
         <translation>Synlig</translation>
-    </message>
-    <message>
-        <source>SlashStyle</source>
-        <translation>Snedstrecksstil</translation>
     </message>
     <message>
         <source>Measure Duration</source>
@@ -6430,6 +6402,10 @@ Vänligen markera ett not- eller paustecken och försök igen
         <source>MuseScore: Load chord list failed:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MuseScore: Open chord list failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6615,20 +6591,12 @@ misslyckades: </translation>
         <translation> misslyckades</translation>
     </message>
     <message>
-        <source>renaming file &lt;</source>
-        <translation>döper om fil &lt;</translation>
-    </message>
-    <message>
         <source>&gt; to backup &lt;</source>
         <translation>&gt; till reserv &lt;</translation>
     </message>
     <message>
         <source>&gt; failed</source>
         <translation>&gt; misslyckades</translation>
-    </message>
-    <message>
-        <source>renaming &lt;</source>
-        <translation>döper om &lt;</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>

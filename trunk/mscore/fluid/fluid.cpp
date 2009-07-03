@@ -22,7 +22,6 @@
 
 #include "event.h"
 #include "fluid.h"
-#include "tuning.h"
 #include "sfont.h"
 #include "conv.h"
 #include "gen.h"
@@ -61,10 +60,10 @@ Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
 
 Fluid::Fluid()
       {
-      left_buf   = new fluid_real_t[FLUID_BUFSIZE];
-      right_buf  = new fluid_real_t[FLUID_BUFSIZE];
-      fx_buf[0]  = new fluid_real_t[FLUID_BUFSIZE];
-      fx_buf[1]  = new fluid_real_t[FLUID_BUFSIZE];
+      left_buf   = new float[FLUID_BUFSIZE];
+      right_buf  = new float[FLUID_BUFSIZE];
+      fx_buf[0]  = new float[FLUID_BUFSIZE];
+      fx_buf[1]  = new float[FLUID_BUFSIZE];
       reverb     = 0;
       chorus     = 0;
       tuning     = 0;
@@ -307,8 +306,8 @@ void Fluid::freeVoice(Voice* v)
 
 void Fluid::play(const Event& event)
       {
-      int err     = 0;
-      int ch      = event.channel();
+      bool err = false;
+      int ch   = event.channel();
 
       if (ch >= channel.size()) {
             for (int i = channel.size(); i < ch+1; i++)
@@ -332,8 +331,8 @@ void Fluid::play(const Event& event)
                   return;
                   }
             if (cp->preset() == 0) {
-                  fluid_log(0, "channel has no preset");
-                  err = FLUID_FAILED;
+                  log("channel has no preset");
+                  err = true;
                   }
             else {
                   /*
@@ -349,13 +348,13 @@ void Fluid::play(const Event& event)
                         if (v->isPlaying() && (v->chan == ch) && (v->key == key) && (v->get_id() != noteid))
                               v->noteoff();
                         }
-                  err = cp->preset()->noteon(this, noteid++, ch, key, vel, event.tuning());
+                  err = !cp->preset()->noteon(this, noteid++, ch, key, vel, event.tuning());
                   }
             }
       else if (type == ME_CONTROLLER)  {
             switch(event.controller()) {
                   case CTRL_PROGRAM:
-                        err = program_change(ch, event.value());
+                        program_change(ch, event.value());
                         break;
                   case CTRL_PITCH:
                         cp->pitchBend(event.value());
@@ -368,8 +367,8 @@ void Fluid::play(const Event& event)
                   }
             }
       if (err)
-            fprintf(stderr, "FluidSynth error: event 0x%2x channel %d: %s\n",
-               type, ch, fluid_error());
+            qWarning("FluidSynth error: event 0x%2x channel %d: %s\n",
+               type, ch, qPrintable(error()));
       }
 
 //---------------------------------------------------------
@@ -497,21 +496,18 @@ void Fluid::modulate_voices_all(int chan)
 /*
  * fluid_synth_get_pitch_bend
  */
-int Fluid::get_pitch_bend(int chan, int* ppitch_bend)
+void Fluid::get_pitch_bend(int chan, int* ppitch_bend)
       {
       *ppitch_bend = channel[chan]->getPitchBend();
-      return FLUID_OK;
       }
 
 /*
  * Fluid_synth_pitch_wheel_sens
  */
-int Fluid::pitch_wheel_sens(int chan, int val)
+void Fluid::pitch_wheel_sens(int chan, int val)
       {
       /* set the pitch-bend value in the channel */
       channel[chan]->pitchWheelSens(val);
-
-      return FLUID_OK;
       }
 
 /*
@@ -522,12 +518,10 @@ int Fluid::pitch_wheel_sens(int chan, int val)
  * version of fluidsynth. Maybe v2.0 ? -- Antoine Schmitt May 2003
  */
 
-int Fluid::get_pitch_wheel_sens(int chan, int* pval)
+void Fluid::get_pitch_wheel_sens(int chan, int* pval)
       {
       // get the pitch-bend value in the channel
       *pval = channel[chan]->pitch_wheel_sensitivity;
-
-      return FLUID_OK;
       }
 
 /*
@@ -575,13 +569,8 @@ Preset* Fluid::find_preset(unsigned banknum, unsigned prognum)
 //   program_change
 //---------------------------------------------------------
 
-int Fluid::program_change(int chan, int prognum)
+void Fluid::program_change(int chan, int prognum)
       {
-      if ((prognum < 0) || (prognum >= FLUID_NUM_PROGRAMS)) {
-            FLUID_LOG(FLUID_ERR, "Index out of range (chan=%d, prog=%d)", chan, prognum);
-            return FLUID_FAILED;
-            }
-
       Channel* c       = channel[chan];
       unsigned banknum = c->getBanknum();
       c->setPrognum(prognum);
@@ -591,53 +580,46 @@ int Fluid::program_change(int chan, int prognum)
       unsigned sfont_id = preset? preset->sfont->id() : 0;
       c->setSfontnum(sfont_id);
       c->setPreset(preset);
-      return FLUID_OK;
       }
 
 /*
  * fluid_synth_bank_select
  */
-int Fluid::bank_select(int chan, unsigned int bank)
+void Fluid::bank_select(int chan, unsigned int bank)
       {
       channel[chan]->setBanknum(bank);
-      return FLUID_OK;
       }
-
 
 /*
  * fluid_synth_sfont_select
  */
-int Fluid::sfont_select(int chan, unsigned int sfont_id)
+void Fluid::sfont_select(int chan, unsigned int sfont_id)
       {
       channel[chan]->setSfontnum(sfont_id);
-      return FLUID_OK;
       }
 
 /*
  * fluid_synth_get_program
  */
-int Fluid::get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num)
+void Fluid::get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num)
       {
       Channel* c       = channel[chan];
       *sfont_id        = c->getSfontnum();
       *bank_num        = c->getBanknum();
       *preset_num      = c->getPrognum();
-      return FLUID_OK;
       }
 
 //---------------------------------------------------------
 //   program_select
 //---------------------------------------------------------
 
-int Fluid::program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num)
+bool Fluid::program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num)
       {
       Channel* c     = channel[chan];
       Preset* preset = get_preset(sfont_id, bank_num, preset_num);
       if (preset == 0) {
-            FLUID_LOG(FLUID_ERR,
-               "There is no preset with bank number %d and preset number %d in SoundFont %d",
-                bank_num, preset_num, sfont_id);
-            return FLUID_FAILED;
+            log("There is no preset with bank number %d and preset number %d in SoundFont %d", bank_num, preset_num, sfont_id);
+            return false;
             }
 
       /* inform the channel of the new bank and program number */
@@ -645,35 +627,30 @@ int Fluid::program_select(int chan, unsigned sfont_id, unsigned bank_num, unsign
       c->setBanknum(bank_num);
       c->setPrognum(preset_num);
       c->setPreset(preset);
-      return FLUID_OK;
+      return true;
       }
 
 /*
  * fluid_synth_program_select2
  */
-int Fluid::program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num)
+bool Fluid::program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num)
       {
       Channel* c = channel[chan];
       SFont* sf = get_sfont_by_name(sfont_name);
-      if (sf == 0) {
-            FLUID_LOG(FLUID_ERR, "Could not find SoundFont %s", sfont_name);
-            return FLUID_FAILED;
-            }
+      if (sf == 0)
+            return log("Could not find SoundFont %s", sfont_name);
       int offset     = get_bank_offset(sf->id());
       Preset* preset = sf->get_preset(bank_num - offset, preset_num);
-      if (preset == 0) {
-            FLUID_LOG(FLUID_ERR,
-               "There is no preset with bank number %d and preset number %d in SoundFont %s",
+      if (preset == 0)
+            return log("There is no preset with bank number %d and preset number %d in SoundFont %s",
                bank_num, preset_num, sfont_name);
-            return FLUID_FAILED;
-            }
 
       /* inform the channel of the new bank and program number */
       c->setSfontnum(sf->id());
       c->setBanknum(bank_num);
       c->setPrognum(preset_num);
       c->setPreset(preset);
-      return FLUID_OK;
+      return true;
       }
 
 /*
@@ -690,7 +667,7 @@ void Fluid::update_presets()
  */
 void Fluid::set_gain(float g)
       {
-      fluid_clip(g, 0.0f, 10.0f);
+      g = qBound(0.0f, g, 10.0f);
       gain = g;
 
       foreach(Voice* v, activeVoices)
@@ -737,9 +714,9 @@ void Fluid::set_reverb(double roomsize, double damping, double width, double lev
 void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int type)
       {
       chorus->set_nr(nr);
-      chorus->set_level((fluid_real_t)level);
-      chorus->set_speed_Hz((fluid_real_t)speed);
-      chorus->set_depth_ms((fluid_real_t)depth_ms);
+      chorus->set_level((float)level);
+      chorus->set_speed_Hz((float)speed);
+      chorus->set_depth_ms((float)depth_ms);
       chorus->set_type(type);
       chorus->update();
       }
@@ -768,7 +745,7 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
 
 void Fluid::one_block()
       {
-      static const int byte_size = FLUID_BUFSIZE * sizeof(fluid_real_t);
+      static const int byte_size = FLUID_BUFSIZE * sizeof(float);
 
       /* clean the audio buffers */
       memset(left_buf,  0, byte_size);
@@ -786,8 +763,8 @@ void Fluid::one_block()
             }
 
       if (silentBlocks > 0) {
-            reverb->process(fx_buf[0], left_buf, right_buf);
-            chorus->process(fx_buf[1], left_buf, right_buf);
+            reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
+            chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
             }
       }
 
@@ -800,8 +777,8 @@ void Fluid::one_block()
 
 Voice* Fluid::free_voice_by_kill()
       {
-      fluid_real_t best_prio = 999999.;
-      fluid_real_t this_voice_prio;
+      float best_prio = 999999.;
+      float this_voice_prio;
       Voice* best_voice = 0;
 
       foreach(Voice* v, activeVoices) {
@@ -877,7 +854,7 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
             v = free_voice_by_kill();
 
       if (v == 0) {
-            FLUID_LOG(FLUID_WARN, "Failed to allocate a synthesis process. (chan=%d,key=%d)", chan, key);
+            log("Failed to allocate a synthesis process. (chan=%d,key=%d)", chan, key);
             return 0;
             }
 
@@ -962,42 +939,40 @@ int Fluid::sfload(const QString& filename, int reset_presets)
       {
       if (filename.isEmpty()) {
             printf("Invalid filename");
-            return FLUID_FAILED;
+            return -1;
             }
 
-      SFont* sf = new SFont();
-      if (sf->load(filename) == FLUID_FAILED) {
+      SFont* sf = new SFont(this);
+      if (!sf->read(filename)) {
             delete sf;
             sf = 0;
+            printf("Failed to load SoundFont <%s>", qPrintable(filename));
+            return -1;
             }
 
-      if (sf) {
-            sf->setId(++sfont_id);
+      sf->setId(++sfont_id);
 
-            /* insert the sfont as the first one on the list */
-            sfonts.prepend(sf);
+      /* insert the sfont as the first one on the list */
+      sfonts.prepend(sf);
 
-            /* reset the presets for all channels */
-            if (reset_presets)
-                  program_reset();
+      /* reset the presets for all channels */
+      if (reset_presets)
+            program_reset();
 
-            return (int) sf->id();
-            }
-      printf("Failed to load SoundFont <%s>", qPrintable(filename));
-      return FLUID_FAILED;
+      return (int) sf->id();
       }
 
 //---------------------------------------------------------
 //   sfunload
 //---------------------------------------------------------
 
-int Fluid::sfunload(unsigned int id, int reset_presets)
+bool Fluid::sfunload(unsigned int id, int reset_presets)
       {
       SFont* sf = get_sfont_by_id(id);
 
       if (!sf) {
             printf("No SoundFont with id = %d", id);
-            return FLUID_FAILED;
+            return false;
             }
 
       sfonts.removeAll(sf);   // remove the SoundFont from the list
@@ -1008,7 +983,7 @@ int Fluid::sfunload(unsigned int id, int reset_presets)
       else
             update_presets();
       delete sf;
-      return FLUID_OK;
+      return true;
       }
 
 /* fluid_synth_sfreload
@@ -1018,8 +993,8 @@ int Fluid::sfreload(unsigned int id)
       {
       SFont* sf = get_sfont_by_id(id);
       if (!sf) {
-            FLUID_LOG(FLUID_ERR, "No SoundFont with id = %d", id);
-            return FLUID_FAILED;
+            log("No SoundFont with id = %d", id);
+            return -1;
             }
 
       int index = sfonts.indexOf(sf);
@@ -1027,24 +1002,19 @@ int Fluid::sfreload(unsigned int id)
       /* keep a copy of the SoundFont's filename */
       QString filename = sf->get_name();
 
-      if (sfunload(id, 0) != FLUID_OK)
-            return FLUID_FAILED;
+      if (!sfunload(id, 0))
+            return -1;
 
-      if (sf->load(filename) == FLUID_FAILED) {
+      if (!sf->read(filename)) {
             delete sf;
             sf = 0;
+            log("Failed to load SoundFont \"%s\"", qPrintable(filename));
+            return -1;
             }
-      if (sf) {
-            sf->setId(id);
-
-            sfonts.insert(index, sf);
-
-            /* reset the presets for all channels */
-            update_presets();
-            return sf->id();
-            }
-      FLUID_LOG(FLUID_ERR, "Failed to load SoundFont \"%s\"", qPrintable(filename));
-      return -1;
+      sf->setId(id);
+      sfonts.insert(index, sf);
+      update_presets();       // reset the presets for all channels
+      return sf->id();
       }
 
 /*
@@ -1109,134 +1079,109 @@ Preset* Fluid::get_channel_preset(int chan)
 /* Sets the interpolation method to use on channel chan.
  * If chan is < 0, then set the interpolation method on all channels.
  */
-int Fluid::set_interp_method(int chan, int interp_method)
+void Fluid::set_interp_method(int chan, int interp_method)
       {
       foreach(Channel* c, channel) {
             if (chan < 0 || c->getNum() == chan)
                   c->setInterpMethod(interp_method);
             }
-      return FLUID_OK;
       }
 
-static Tuning* fluid_synth_get_tuning(Fluid* synth, int bank, int prog)
+Tuning* Fluid::get_tuning(int bank, int prog)
       {
       if ((bank < 0) || (bank >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Bank number out of range");
+            log("Bank number out of range");
             return 0;
             }
       if ((prog < 0) || (prog >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Program number out of range");
+            log("Program number out of range");
             return 0;
             }
-      if ((synth->tuning == 0) || (synth->tuning[bank] == 0) || (synth->tuning[bank][prog] == 0)) {
-            FLUID_LOG(FLUID_WARN, "No tuning at bank %d, prog %d", bank, prog);
+      if ((tuning == 0) || (tuning[bank] == 0) || (tuning[bank][prog] == 0)) {
+            log("No tuning at bank %d, prog %d", bank, prog);
             return 0;
             }
-      return synth->tuning[bank][prog];
+      return tuning[bank][prog];
       }
 
-static Tuning* fluid_synth_create_tuning(Fluid* synth, int bank, int prog, char* name)
+Tuning* Fluid::create_tuning(int bank, int prog, char* name)
       {
       if ((bank < 0) || (bank >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Bank number out of range");
+            log("Bank number out of range");
             return 0;
             }
       if ((prog < 0) || (prog >= 128)) {
-            FLUID_LOG(FLUID_WARN, "Program number out of range");
+            log("Program number out of range");
             return 0;
             }
-      if (synth->tuning == 0) {
-            synth->tuning = FLUID_ARRAY(Tuning**, 128);
-            if (synth->tuning == 0) {
-                  FLUID_LOG(FLUID_PANIC, "Out of memory");
-                  return 0;
-                  }
-            memset(synth->tuning, 0, 128 * sizeof(Tuning**));
+      if (tuning == 0) {
+            tuning = new Tuning**[128];
+            memset(tuning, 0, 128 * sizeof(Tuning**));
             }
-
-      if (synth->tuning[bank] == 0) {
-            synth->tuning[bank] = FLUID_ARRAY(Tuning*, 128);
-            if (synth->tuning[bank] == 0) {
-                  FLUID_LOG(FLUID_PANIC, "Out of memory");
-                  return 0;
-                  }
-            memset(synth->tuning[bank], 0, 128 * sizeof(Tuning*));
+      if (tuning[bank] == 0) {
+            tuning[bank] = new Tuning*[128];
+            memset(tuning[bank], 0, 128 * sizeof(Tuning*));
             }
-
-      if (synth->tuning[bank][prog] == 0) {
-            synth->tuning[bank][prog] = new Tuning(name, bank, prog);
-            if (synth->tuning[bank][prog] == 0) {
-                  return 0;
-                  }
-            }
-
-      if ((synth->tuning[bank][prog]->name() == 0)
-         || (strcmp(synth->tuning[bank][prog]->name(), name) != 0)) {
-            synth->tuning[bank][prog]->setName(name);
-            }
-
-      return synth->tuning[bank][prog];
+      if (tuning[bank][prog] == 0)
+            tuning[bank][prog] = new Tuning(name, bank, prog);
+      if (tuning[bank][prog]->name() != name)
+            tuning[bank][prog]->setName(name);
+      return tuning[bank][prog];
       }
 
-int fluid_synth_create_key_tuning(Fluid* synth, int bank, int prog, char* name, double* pitch)
+void Fluid::create_key_tuning(int bank, int prog, char* name, double* pitch)
       {
-      Tuning* tuning = fluid_synth_create_tuning(synth, bank, prog, name);
+      Tuning* tuning = create_tuning(bank, prog, name);
       if (pitch)
             tuning->setAll(pitch);
-      return FLUID_OK;
       }
 
-int fluid_synth_create_octave_tuning(Fluid* synth, int bank, int prog, char* name, double* pitch)
+void Fluid::create_octave_tuning(int bank, int prog, char* name, double* pitch)
       {
-      Tuning* tuning = fluid_synth_create_tuning(synth, bank, prog, name);
+      Tuning* tuning = create_tuning(bank, prog, name);
       tuning->setOctave(pitch);
-      return FLUID_OK;
       }
 
-int Fluidune_notes(Fluid* synth, int bank, int prog, int len, int *key, double* pitch, int /*apply*/)
+bool Fluid::tune_notes(int bank, int prog, int len, int *key, double* pitch)
       {
-      Tuning* tuning = fluid_synth_get_tuning(synth, bank, prog);
-
+      Tuning* tuning = get_tuning(bank, prog);
       if (tuning == 0)
-            return FLUID_FAILED;
-
+            return false;
       for (int i = 0; i < len; i++)
             tuning->setPitch(key[i], pitch[i]);
-
-      return FLUID_OK;
+      return true;
       }
 
 //---------------------------------------------------------
 //   fluid_synth_select_tuning
 //---------------------------------------------------------
 
-int fluid_synth_select_tuning(Fluid* synth, int chan, int bank, int prog)
+bool Fluid::select_tuning(int chan, int bank, int prog)
       {
-      Tuning* tuning = fluid_synth_get_tuning(synth, bank, prog);
+      Tuning* t = get_tuning(bank, prog);
 
-      if (tuning == 0)
-            return FLUID_FAILED;
+      if (t == 0)
+            return false;
 
-      synth->channel[chan]->setTuning(synth->tuning[bank][prog]);
-      return FLUID_OK;
+      channel[chan]->setTuning(t);
+      return true;
       }
 
 //---------------------------------------------------------
 //   fluid_synth_reset_tuning
 //---------------------------------------------------------
 
-int fluid_synth_reset_tuning(Fluid* synth, int chan)
+void Fluid::reset_tuning(int chan)
       {
-      synth->channel[chan]->setTuning(0);
-      return FLUID_OK;
+      channel[chan]->setTuning(0);
       }
 
-void Fluid::Fluiduning_iteration_start()
+void Fluid::tuning_iteration_start()
       {
       cur_tuning = 0;
       }
 
-int Fluid::Fluiduning_iteration_next(int* bank, int* prog)
+int Fluid::tuning_iteration_next(int* bank, int* prog)
       {
       int b = 0, p = 0;
 
@@ -1274,18 +1219,13 @@ int Fluid::Fluiduning_iteration_next(int* bank, int* prog)
 //   set_gen
 //---------------------------------------------------------
 
-int Fluid::set_gen(int chan, int param, float value)
+void Fluid::set_gen(int chan, int param, float value)
       {
-      if ((param < 0) || (param >= GEN_LAST)) {
-            FLUID_LOG(FLUID_WARN, "Parameter number out of range");
-            return FLUID_FAILED;
-            }
       channel[chan]->setGen(param, value, 0);
       foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
                   v->set_param(param, value, 0);
             }
-      return FLUID_OK;
       }
 
 /** Change the value of a generator. This function allows to control
@@ -1311,12 +1251,8 @@ int Fluid::set_gen(int chan, int param, float value)
     specifications.
 
  */
-int Fluid::set_gen2(int chan, int param, float value, int absolute, int normalized)
+void Fluid::set_gen2(int chan, int param, float value, int absolute, int normalized)
       {
-      if ((param < 0) || (param >= GEN_LAST)) {
-            FLUID_LOG(FLUID_WARN, "Parameter number out of range");
-            return FLUID_FAILED;
-            }
       float v = (normalized)? fluid_gen_scale(param, value) : value;
       channel[chan]->setGen(param, v, absolute);
 
@@ -1324,32 +1260,30 @@ int Fluid::set_gen2(int chan, int param, float value, int absolute, int normaliz
             if (vo->chan == chan)
                   vo->set_param(param, v, absolute);
             }
-      return FLUID_OK;
       }
 
 float Fluid::get_gen(int chan, int param)
       {
       if ((param < 0) || (param >= GEN_LAST)) {
-            FLUID_LOG(FLUID_WARN, "Parameter number out of range");
+            log("Parameter number out of range");
             return 0.0;
             }
       return channel[chan]->getGen(param);
       }
 
-int Fluid::stop(unsigned int id)
+#if 0
+bool Fluid::stop(unsigned int id)
       {
-      int status = FLUID_FAILED;
-      int count = 0;
-
+      bool status = false;
       foreach(Voice* v, activeVoices) {
             if (v->get_id() == id) {
-                  count++;
                   v->noteoff();
-                  status = FLUID_OK;
+                  status = true;
                   }
             }
       return status;
       }
+#endif
 
 BankOffset* Fluid::get_bank_offset0(int sfont_id) const
       {
@@ -1365,7 +1299,7 @@ int Fluid::set_bank_offset(int sfont_id, int offset)
 	BankOffset* bank_offset = get_bank_offset0(sfont_id);
 
 	if (bank_offset == 0) {
-		bank_offset = FLUID_NEW(BankOffset);
+		bank_offset = new BankOffset;
 		bank_offset->sfont_id = sfont_id;
 		bank_offset->offset   = offset;
 		bank_offsets.prepend(bank_offset);
@@ -1389,9 +1323,6 @@ void Fluid::remove_bank_offset(int sfont_id)
 		bank_offsets.removeAll(bank_offset);
       }
 
-
-static char fluid_errbuf[512];  /* buffer for error message */
-
 /**
  * Print a message to the log.
  * @param fmt Printf style format string for log message
@@ -1399,21 +1330,42 @@ static char fluid_errbuf[512];  /* buffer for error message */
  * @return Always returns -1
  */
 
-int fluid_log(int, const char* fmt, ...)
+bool Fluid::log(const char* fmt, ...)
       {
+      char buf[512];
       va_list args;
       va_start (args, fmt);
-      vsnprintf(fluid_errbuf, sizeof (fluid_errbuf), fmt, args);
+      vsnprintf(buf, sizeof(buf), fmt, args);
       va_end (args);
-      return FLUID_FAILED;
+      _error = buf;
+      return false;
       }
 
-/*
- * fluid_error
- */
-char* fluid_error()
+Tuning::Tuning(const QString& n, int b, int p)
       {
-      return fluid_errbuf;
+      _name = n;
+      bank = b;
+      prog = p;
+
+      for (int i = 0; i < 128; i++)
+            pitch[i] = i * 100.0;
       }
 
+void Tuning::setOctave(double* pitch_deriv)
+      {
+      for (int i = 0; i < 128; i++)
+            pitch[i] = i * 100.0 + pitch_deriv[i % 12];
+      }
+
+void Tuning::setAll(double* p)
+      {
+      for (int i = 0; i < 128; i++)
+            pitch[i] = p[i];
+      }
+
+void Tuning::setPitch(int k, double p)
+      {
+      if ((k >= 0) && (k < 128))
+            pitch[k] = p;
+      }
 }

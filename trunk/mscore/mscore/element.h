@@ -116,9 +116,6 @@ class Element {
                                   ///< user dragged object this amount.
                                   ///< depends on Spatium ("space") units!
 
-
-      void init();
-
    protected:
       Score* _score;
       QPointF _pos;               ///< Reference position, relative to _parent.

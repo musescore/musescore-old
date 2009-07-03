@@ -22,8 +22,6 @@
 #ifndef _FLUID_CHORUS_H
 #define _FLUID_CHORUS_H
 
-#include "priv.h"
-
 namespace FluidS {
 
 #define MAX_CHORUS	99
@@ -63,43 +61,43 @@ class Chorus {
 
       int type;                     // current value
       int new_type;                 // next value, if parameter check is OK
-      fluid_real_t depth_ms;        // current value
-      fluid_real_t new_depth_ms;    // next value, if parameter check is OK
-      fluid_real_t level;           // current value
-      fluid_real_t new_level;       // next value, if parameter check is OK
-      fluid_real_t speed_Hz;        // current value
-      fluid_real_t new_speed_Hz;    // next value, if parameter check is OK
+      float depth_ms;        // current value
+      float new_depth_ms;    // next value, if parameter check is OK
+      float level;           // current value
+      float new_level;       // next value, if parameter check is OK
+      float speed_Hz;        // current value
+      float new_speed_Hz;    // next value, if parameter check is OK
       int number_blocks;            // current value
       int new_number_blocks;        // next value, if parameter check is OK
 
-      fluid_real_t *chorusbuf;
+      float *chorusbuf;
       int counter;
       long phase[MAX_CHORUS];
       long modulation_period_samples;
       int *lookup_tab;
-      fluid_real_t sample_rate;
+      float sample_rate;
 
       /* sinc lookup table */
-      fluid_real_t sinc_table[INTERPOLATION_SAMPLES][INTERPOLATION_SUBSAMPLES];
+      float sinc_table[INTERPOLATION_SAMPLES][INTERPOLATION_SUBSAMPLES];
 
    public:
-      Chorus(fluid_real_t sample_rate);
+      Chorus(float sample_rate);
       ~Chorus();
 
       void update();
       void set_nr(int nr)                      { new_number_blocks = nr;  }
-      void set_level(fluid_real_t level)       { new_level = level;       }
-      void set_speed_Hz(fluid_real_t speed_Hz) { new_speed_Hz = speed_Hz; }
-      void set_depth_ms(fluid_real_t depth_ms) { new_depth_ms = depth_ms; }
+      void set_level(float level)       { new_level = level;       }
+      void set_speed_Hz(float speed_Hz) { new_speed_Hz = speed_Hz; }
+      void set_depth_ms(float depth_ms) { new_depth_ms = depth_ms; }
       void set_type(int type)                  { new_type = type;         }
 
-      void process(fluid_real_t *in, fluid_real_t *left_out, fluid_real_t *right_out);
+      void process(int, float *in, float *left_out, float *right_out);
       void reset();
 
       int get_nr() const                { return number_blocks; }
-      fluid_real_t get_level() const    { return level;    }
-      fluid_real_t get_speed_Hz() const { return speed_Hz; }
-      fluid_real_t get_depth_ms() const { return depth_ms; }
+      float get_level() const    { return level;    }
+      float get_speed_Hz() const { return speed_Hz; }
+      float get_depth_ms() const { return depth_ms; }
       int get_type() const              { return type;     }
       };
 

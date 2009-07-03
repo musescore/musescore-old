@@ -22,8 +22,6 @@
 #ifndef _FLUID_REV_H
 #define _FLUID_REV_H
 
-#include "priv.h"
-
 namespace FluidS {
 
 static const int numcombs = 8;
@@ -34,20 +32,20 @@ static const int numallpasses = 4;
 //---------------------------------------------------------
 
 class Allpass {
-      fluid_real_t feedback;
-      fluid_real_t *buffer;
+      float feedback;
+      float *buffer;
       int bufsize;
       int bufidx;
 
    public:
       void setbuffer(int size);
       void init();
-      void setfeedback(fluid_real_t val) { feedback = val;  }
-      fluid_real_t getfeedback() const   { return feedback; }
+      void setfeedback(float val) { feedback = val;  }
+      float getfeedback() const   { return feedback; }
 
-      fluid_real_t process(fluid_real_t _input) {
-            fluid_real_t bufout = buffer[bufidx];
-            fluid_real_t output = bufout - _input;
+      float process(float _input) {
+            float bufout = buffer[bufidx];
+            float output = bufout - _input;
             buffer[bufidx] = _input + (bufout * feedback);
             if (++bufidx >= bufsize)
                   bufidx = 0;
@@ -60,24 +58,24 @@ class Allpass {
 //---------------------------------------------------------
 
 class Comb {
-      fluid_real_t feedback;
-      fluid_real_t filterstore;
-      fluid_real_t damp1;
-      fluid_real_t damp2;
-      fluid_real_t *buffer;
+      float feedback;
+      float filterstore;
+      float damp1;
+      float damp2;
+      float *buffer;
       int bufsize;
       int bufidx;
 
    public:
       void setbuffer(int size);
       void init();
-      void setdamp(fluid_real_t val);
-      fluid_real_t getdamp() const       { return damp1;    }
-      void setfeedback(fluid_real_t val) { feedback = val;  }
-      fluid_real_t getfeedback() const   { return feedback; }
+      void setdamp(float val);
+      float getdamp() const       { return damp1;    }
+      void setfeedback(float val) { feedback = val;  }
+      float getfeedback() const   { return feedback; }
 
-      fluid_real_t process(fluid_real_t input) {
-            fluid_real_t tmp = buffer[bufidx];
+      float process(float input) {
+            float tmp = buffer[bufidx];
             filterstore      = (tmp * damp2) + (filterstore * damp1);
             buffer[bufidx]   = input + (filterstore * feedback);
             if (++bufidx >= bufsize)
@@ -99,11 +97,11 @@ class Reverb {
       void update();
       void init();
 
-      fluid_real_t roomsize;
-      fluid_real_t damp;
-      fluid_real_t wet, wet1, wet2;
-      fluid_real_t width;
-      fluid_real_t gain;
+      float roomsize;
+      float damp;
+      float wet, wet1, wet2;
+      float width;
+      float gain;
       /*
        The following are all declared inline
        to remove the need for dynamic allocation
@@ -118,19 +116,19 @@ class Reverb {
 
    public:
       Reverb();
-      void process(float* in, float* left_out, float* right_out);
+      void process(int n, float* in, float* left_out, float* right_out);
 
       void reset() { init(); }
 
-      void setroomsize(fluid_real_t value) { roomsize = (value * scaleroom) + offsetroom; }
-      void setdamp(fluid_real_t value)     { damp = value * scaledamp; }
-      void setlevel(fluid_real_t value)    { wet = value * scalewet;   }
-      void setwidth(fluid_real_t value)    { width = value;            }
-      void setmode(fluid_real_t value);
-      fluid_real_t getroomsize() const     { return (roomsize - offsetroom) / scaleroom; }
-      fluid_real_t getdamp() const         { return damp / scaledamp; }
-      fluid_real_t getlevel() const        { return wet / scalewet;   }
-      fluid_real_t getwidth()              { return width; }
+      void setroomsize(float value) { roomsize = (value * scaleroom) + offsetroom; }
+      void setdamp(float value)     { damp = value * scaledamp; }
+      void setlevel(float value)    { wet = value * scalewet;   }
+      void setwidth(float value)    { width = value;            }
+      void setmode(float value);
+      float getroomsize() const     { return (roomsize - offsetroom) / scaleroom; }
+      float getdamp() const         { return damp / scaledamp; }
+      float getlevel() const        { return wet / scalewet;   }
+      float getwidth()              { return width; }
 
       bool setPreset(int);
       };
@@ -141,10 +139,10 @@ class Reverb {
 
 struct ReverbPreset {
       const char* name;
-      fluid_real_t roomsize;
-      fluid_real_t damp;
-      fluid_real_t width;
-      fluid_real_t level;
+      float roomsize;
+      float damp;
+      float width;
+      float level;
       };
 }
 #endif /* _FLUID_REV_H */

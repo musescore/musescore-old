@@ -31,7 +31,7 @@ static ReverbPreset revmodel_preset[] = {
 
 void Allpass::setbuffer(int size)
       {
-      buffer  = new fluid_real_t[size];
+      buffer  = new float[size];
       bufsize = size;
       bufidx  = 0;
       }
@@ -50,7 +50,7 @@ void Comb::setbuffer(int size)
       {
       filterstore = 0;
       bufidx      = 0;
-      buffer      = new fluid_real_t[size];
+      buffer      = new float[size];
       bufsize     = size;
       }
 
@@ -60,7 +60,7 @@ void Comb::init()
             buffer[i] = DC_OFFSET;  // This is not 100 % correct.
       }
 
-void Comb::setdamp(fluid_real_t val)
+void Comb::setdamp(float val)
       {
       damp1 = val;
       damp2 = 1 - val;
@@ -125,12 +125,12 @@ void Reverb::init()
 //   process
 //---------------------------------------------------------
 
-void Reverb::process(float* in, float* left_out, float* right_out)
+void Reverb::process(int n, float* in, float* left_out, float* right_out)
       {
-      for (int k = 0; k < FLUID_BUFSIZE; k++) {
+      for (int k = 0; k < n; k++) {
             float outL = 0.0, outR = 0.0;
 
-            fluid_real_t input = (in[k] + DC_OFFSET) * gain;
+            float input = (in[k] + DC_OFFSET) * gain;
 
             for (int i = 0; i < numcombs; i++) {      // Accumulate comb filters in parallel
                   outL += combL[i].process(input);

@@ -87,6 +87,10 @@
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hungary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -105,25 +109,6 @@
     <message>
         <source>Revision: 628</source>
         <translation>修訂：628</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;Werner Schweer 等人版權所有 (C) 1999-2009&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;新版本與更多資訊請參觀 http://www.musescore.org &lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;依據 GNU 公用授權條款發行&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -992,10 +977,6 @@ p, li { white-space: pre-wrap; }
         <translation>縮小的</translation>
     </message>
     <message>
-        <source>no stem</source>
-        <translation>沒有符幹</translation>
-    </message>
-    <message>
         <source>additional leading space </source>
         <translation>附加的前導間隔</translation>
     </message>
@@ -1409,10 +1390,6 @@ failed: </source>
         <translation>編輯鼓組...</translation>
     </message>
     <message>
-        <source>Slash Style</source>
-        <translation>簡化樣式</translation>
-    </message>
-    <message>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1671,10 +1648,6 @@ failed: </source>
         <translation>使用德國式名稱</translation>
     </message>
     <message>
-        <source>use symbols</source>
-        <translation>使用記號</translation>
-    </message>
-    <message>
         <source>Apply</source>
         <translation>套用</translation>
     </message>
@@ -1777,10 +1750,6 @@ failed: </source>
     <message>
         <source>ledger line width</source>
         <translation>加線寬度</translation>
-    </message>
-    <message>
-        <source>use jazz font</source>
-        <translation>使用爵士字型</translation>
     </message>
     <message>
         <source>sp</source>
@@ -2699,10 +2668,6 @@ failed: </source>
     <message>
         <source>Visible</source>
         <translation>顯示</translation>
-    </message>
-    <message>
-        <source>SlashStyle</source>
-        <translation>簡化樣式</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -6451,6 +6416,10 @@ Please select a single note or rest and retry operation
         <source>MuseScore: Load chord list failed:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MuseScore: Open chord list failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6679,20 +6648,12 @@ failed: </source>
         <translation> 失敗</translation>
     </message>
     <message>
-        <source>renaming file &lt;</source>
-        <translation>重新命名檔案 &lt;</translation>
-    </message>
-    <message>
         <source>&gt; to backup &lt;</source>
         <translation>&gt; 做備份 &lt;</translation>
     </message>
     <message>
         <source>&gt; failed</source>
         <translation>&gt; 失敗</translation>
-    </message>
-    <message>
-        <source>renaming &lt;</source>
-        <translation>重新命名 &lt;</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
