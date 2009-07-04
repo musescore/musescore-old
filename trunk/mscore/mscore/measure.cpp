@@ -3153,6 +3153,11 @@ bool Measure::createEndBarLines()
                   //TODO: crash when exchange staves in a piano system,
                   //      staffIdx >= staves
 
+                  int idx = staffIdx + span - 1;
+                  if (idx >= score()->nstaves()) {
+                        printf("idx > nstaves, span %d  staff %p\n", span, staff);
+                        }
+
                   bl->setSpan(span);
                   if (!system()->staff(staffIdx + span - 1)->show()) {
                         //

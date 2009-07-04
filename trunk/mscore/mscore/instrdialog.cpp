@@ -550,6 +550,7 @@ void MuseScore::editInstrList()
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
                         ++rstaff;
                         }
+printf("set bar line span %d %p\n", part->nstaves(), part->staves()->front());
                   part->staves()->front()->setBarLineSpan(part->nstaves());
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
@@ -798,14 +799,14 @@ void Score::adjustBracketsIns(int sidx, int eidx)
                   int span = staff->bracketSpan(i);
                   if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
                         continue;
-                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                  if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
                         undoChangeBracketSpan(staff, i, span + (eidx-sidx));
 //                  else {
 //                        printf("TODO: adjust brackets\n");
 //                        }
                   }
             int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
                   undoChangeBarLineSpan(staff, span + (eidx-sidx));
             }
       }
