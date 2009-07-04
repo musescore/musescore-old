@@ -1,3 +1,5 @@
+4.jun (ws)
+      - fix crash when inserting instrument
 2.jun (la)
       - correct typo in mac specific part of portmidi code
       - change cmake process for resources handling
