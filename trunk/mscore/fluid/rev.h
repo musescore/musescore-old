@@ -84,16 +84,16 @@ class Comb {
             }
       };
 
+static const float scaleroom = 0.28f;
+static const float offsetroom = 0.7f;
+static const float scalewet = 3.0f;
+static const float scaledamp = 1.0f;
+
 //---------------------------------------------------------
 //   Reverb
 //---------------------------------------------------------
 
 class Reverb {
-      static const float scaleroom = 0.28f;
-      static const float offsetroom = 0.7f;
-      static const float scalewet = 3.0f;
-      static const float scaledamp = 1.0f;
-
       void update();
       void init();
 
