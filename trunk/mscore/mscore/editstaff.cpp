@@ -47,6 +47,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
       slashStyle->setChecked(staff->slashStyle());
+      invisible->setChecked(staff->invisible());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
@@ -100,8 +101,10 @@ void EditStaff::apply()
       int l        = lines->value();
       bool s       = small->isChecked();
       bool noStems = slashStyle->isChecked();
-      if (l != staff->lines() || s != staff->small() || noStems != staff->slashStyle())
-            score->undo()->push(new ChangeStaff(staff, l, s, noStems));
+      bool inv     = invisible->isChecked();
+      if (l != staff->lines() || s != staff->small() || noStems != staff->slashStyle()
+         || inv != staff->invisible())
+            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv));
       }
 
 //---------------------------------------------------------

@@ -1027,11 +1027,12 @@ class ChangeStaff : public UndoCommand {
       int lines;
       bool small;
       bool noStems;
+      bool invisible;
 
       void flip();
 
    public:
-      ChangeStaff(Staff*, int lines, bool small, bool noStems);
+      ChangeStaff(Staff*, int lines, bool small, bool noStems, bool invisible);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

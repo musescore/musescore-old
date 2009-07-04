@@ -1985,12 +1985,13 @@ void ChangePageFormat::flip()
 //   ChangeStaff
 //---------------------------------------------------------
 
-ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems)
+ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems, bool _invisible)
       {
       staff   = _staff;
       lines   = _lines;
       small   = _small;
       noStems = _noStems;
+      invisible = _invisible;
       }
 
 //---------------------------------------------------------
@@ -2000,25 +2001,30 @@ ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems)
 void ChangeStaff::flip()
       {
       bool linesChanged = staff->lines() != lines;
+      bool invisibleChanged = staff->invisible() != invisible;
 
       int oldLines   = staff->lines();
       int oldSmall   = staff->small();
-      int oldNoStems = staff->slashStyle();
+      bool oldNoStems = staff->slashStyle();
+      bool oldInvisible = staff->invisible();
 
       staff->setLines(lines);
       staff->setSmall(small);
       staff->setSlashStyle(noStems);
+      staff->setInvisible(invisible);
 
       lines   = oldLines;
       small   = oldSmall;
       noStems = oldNoStems;
+      invisible = oldInvisible;
 
-      if (linesChanged) {
+      if (linesChanged || invisibleChanged) {
             Score* score = staff->score();
             int staffIdx = score->staffIdx(staff);
             for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                   MStaff* mstaff = m->mstaff(staffIdx);
                   mstaff->lines->setLines(staff->lines());
+                  mstaff->lines->setVisible(!staff->invisible());
                   }
             }
       }
