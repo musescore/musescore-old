@@ -1192,7 +1192,7 @@ void Score::setNoteEntry(bool val)
       if (val) {
             Note* note  = 0;
             Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
-            if (el == 0) {
+            if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
                   int track = _is.track == -1 ? 0 : _is.track;
                   el = static_cast<ChordRest*>(searchNote(_is.pos(), track));
                   if (el == 0) {
