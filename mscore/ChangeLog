@@ -1,4 +1,5 @@
 4.jun (ws)
+      - add staff property "invisible" to make staff lines invisible
       - fix crash on note shortctu when text selected
       - fix crash when inserting instrument
 2.jun (la)

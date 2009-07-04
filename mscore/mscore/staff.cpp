@@ -140,6 +140,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _small        = false;
       _slashStyle   = false;
       _barLineSpan  = 1;
+      _invisible    = false;
       }
 
 //---------------------------------------------------------
@@ -183,6 +184,8 @@ void Staff::write(Xml& xml) const
             xml.tag("lines", lines());
       if (small())
             xml.tag("small", small());
+      if (invisible())
+            xml.tag("invisible", invisible());
       if (slashStyle())
             xml.tag("slashStyle", slashStyle());
       _clefList->write(xml, "cleflist");
@@ -205,12 +208,15 @@ void Staff::read(QDomElement e)
       setSmall(false);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
+            int v = e.text().toInt();
             if (tag == "lines")
-                  setLines(e.text().toInt());
+                  setLines(v);
             else if (tag == "small")
-                  setSmall(e.text().toInt());
+                  setSmall(v);
+            else if (tag == "invisible")
+                  setInvisible(v);
             else if (tag == "slashStyle")
-                  setSlashStyle(e.text().toInt());
+                  setSlashStyle(v);
             else if (tag == "cleflist")
                   _clefList->read(e, _score);
             else if (tag == "keylist")
@@ -222,7 +228,7 @@ void Staff::read(QDomElement e)
                   _brackets.append(b);
                   }
             else if (tag == "barLineSpan")
-                  _barLineSpan = e.text().toInt();
+                  _barLineSpan = v;
             else
                   domError(e);
             }

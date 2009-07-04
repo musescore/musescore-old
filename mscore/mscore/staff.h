@@ -74,6 +74,7 @@ class Staff {
       bool _show;             ///< derived from part->show()
       bool _small;
       bool _slashStyle;
+      bool _invisible;
 
    public:
       Staff(Score*, Part*, int);
@@ -109,6 +110,8 @@ class Staff {
       void setShow(bool val)         { _show = val;         }
       bool small() const             { return _small;       }
       void setSmall(bool val)        { _small = val;        }
+      bool invisible() const         { return _invisible;   }
+      void setInvisible(bool val)    { _invisible = val;    }
       void setSlashStyle(bool val)   { _slashStyle = val;   }
       int lines() const              { return _lines;       }
       void setLines(int val)         { _lines = val;        }
