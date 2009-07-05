@@ -804,7 +804,7 @@ QByteArray Selection::staffMimeData() const
                         break;
                   foreach(Element* e, *m->el()) {
                         if (e->type() == HARMONY) {
-                              if (e->tick() < seg1->tick())
+                              if ((e->staffIdx() != staffIdx) || (e->tick() < seg1->tick()))
                                     continue;
                               if (seg2 && (e->tick() >= seg2->tick()))
                                     continue;
