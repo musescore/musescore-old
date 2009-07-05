@@ -1,4 +1,5 @@
 6.jul (ws)
+      - after tuplet creation set input duration to tuplet base len
       - fix "chordname copy-paste to multiple staves"
 5.jul (db)
       - fix MIDI instrument sounds for sarabande (bach) and scales demos

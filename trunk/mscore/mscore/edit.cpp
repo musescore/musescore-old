@@ -1359,6 +1359,8 @@ void Score::cmdTuplet(int n)
       if (el) {
             select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
+            _is.len = baseLen;
+            setPadState();
             }
       }
 
