@@ -677,11 +677,11 @@ void Selection::updateState()
                   setState(SEL_SINGLE);
                   Element* e = element();
                   if (e->type() == NOTE || e->type() == REST) {
-                        if (!e->score()->noteEntryMode())
-                              e->score()->setPadState(e);
+                        if (!_score->noteEntryMode())
+                              _score->setPadState(e);
                         if (e->type() == NOTE)
                               e = e->parent();
-                        e->score()->setInputTrack(e->track());
+                        _score->setInputTrack(e->track());
                         }
                   }
             else
