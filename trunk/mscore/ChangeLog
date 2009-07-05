@@ -1,8 +1,10 @@
-4.jun (ws)
+5.jul (db)
+      - fix MIDI instrument sounds for sarabande (bach) and scales demos
+4.jul (ws)
       - add staff property "invisible" to make staff lines invisible
       - fix crash on note shortctu when text selected
       - fix crash when inserting instrument
-2.jun (la)
+2.jul (la)
       - correct typo in mac specific part of portmidi code
       - change cmake process for resources handling
       - add specific code for getShareDir for mac
