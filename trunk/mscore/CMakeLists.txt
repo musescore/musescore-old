@@ -39,9 +39,11 @@ if (MINGW)
 endif (MINGW)
 
 if (APPLE)
-      set(HAS_AUDIOFILE FALSE)            # requires libsndfile
+      set(HAS_AUDIOFILE TRUE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
       set(CMAKE_OSX_ARCHITECTURES i386 ppc)   # build universal library
+      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required
       find_library(AudioToolboxFW NAMES AudioToolbox)
       find_library(AudioUnitFW NAMES AudioUnit)
       find_library(CoreAudioFW NAMES CoreAudio)
