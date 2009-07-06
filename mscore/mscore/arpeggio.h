@@ -28,6 +28,9 @@
 //---------------------------------------------------------
 
 class Arpeggio : public Element {
+      Spatium _userLen1;
+      Spatium _userLen2;
+
       double _height;
 
    public:
@@ -35,11 +38,12 @@ class Arpeggio : public Element {
       virtual Arpeggio* clone() const { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
       virtual QRectF bbox() const;
-
       virtual void draw(QPainter&) const;
-      virtual void layout();
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual bool startEdit(Viewer*, const QPointF&) { return true; }
+      virtual void editDrag(int, const QPointF&);
+      virtual void updateGrips(int*, QRectF*) const;
+      void read(QDomElement e);
+      void write(Xml& xml) const;
 
       void setHeight(double);
       };

@@ -56,6 +56,7 @@ class Selection;
 class TextB;
 class Channel;
 struct PageFormat;
+class TextStyle;
 
 class UndoGroup;
 
@@ -1057,6 +1058,23 @@ class ChangePart : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
+
+//---------------------------------------------------------
+//   ChangeTextStyles
+//---------------------------------------------------------
+
+class ChangeTextStyles : public UndoCommand {
+      Score* score;
+      QVector<TextStyle*> styles;
+      void flip();
+
+   public:
+      ChangeTextStyles(Score*, const QVector<TextStyle*>& styles);
+      ~ChangeTextStyles();
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 
 #endif
 

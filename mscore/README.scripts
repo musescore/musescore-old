@@ -148,7 +148,7 @@ Objects
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
             time        double   in ms
-            tick        int         
+            tick        int
 
 
 
@@ -211,5 +211,3 @@ Global Variables
                   }
             cursor.next();
             }
-
-

@@ -159,7 +159,7 @@ int Voice::dsp_float_interpolate_none()
             /* go back to loop start */
             if (dsp_phase_index > end_index) {
                   dsp_phase -= (voice->loopend - voice->loopstart);
-                  voice->has_looped = 1;
+                  voice->has_looped = true;
                   }
 
             /* break out if filled buffer */
@@ -251,7 +251,7 @@ int Voice::dsp_float_interpolate_linear()
             /* go back to loop start (if past */
             if (dsp_phase_index > end_index) {
                   dsp_phase -= (voice->loopend - voice->loopstart);
-                  voice->has_looped = 1;
+                  voice->has_looped = true;
                   }
 
             /* break out if filled buffer */
@@ -389,7 +389,7 @@ int Voice::dsp_float_interpolate_4th_order()
                   phase -= (loopend - loopstart);
 
                   if (!has_looped) {
-                        has_looped = 1;
+                        has_looped = true;
                         start_index = loopstart;
                         start_point = dsp_data[loopend - 1];
                         }
@@ -620,7 +620,7 @@ int Voice::dsp_float_interpolate_7th_order()
                   dsp_phase -= (voice->loopend - voice->loopstart);
 
                   if (!voice->has_looped) {
-                        voice->has_looped = 1;
+                        voice->has_looped = true;
                         start_index = voice->loopstart;
                         start_points[0] = dsp_data[voice->loopend - 1];
                         start_points[1] = dsp_data[voice->loopend - 2];

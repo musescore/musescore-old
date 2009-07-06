@@ -32,11 +32,12 @@ Arpeggio::Arpeggio(Score* s)
       }
 
 //---------------------------------------------------------
-//   layout
+//   setHeight
 //---------------------------------------------------------
 
-void Arpeggio::layout()
+void Arpeggio::setHeight(double h)
       {
+      _height = h;
       }
 
 //---------------------------------------------------------
@@ -47,6 +48,10 @@ void Arpeggio::write(Xml& xml) const
       {
       xml.stag("Arpeggio");
       Element::writeProperties(xml);
+      if (_userLen1.val() != 0.0)
+            xml.tag("userLen1", _userLen1);
+      if (_userLen2.val() != 0.0)
+            xml.tag("userLen2", _userLen2);
       xml.etag();
       }
 
@@ -57,18 +62,14 @@ void Arpeggio::write(Xml& xml) const
 void Arpeggio::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+            QString tag(e.tagName());
+            if (tag == "userLen1")
+                  _userLen1 = Spatium(e.text().toDouble());
+            else if (tag == "userLen2")
+                  _userLen2 = Spatium(e.text().toDouble());
+            else if (!Element::readProperties(e))
                   domError(e);
             }
-      }
-
-//---------------------------------------------------------
-//   setHeight
-//---------------------------------------------------------
-
-void Arpeggio::setHeight(double h)
-      {
-      _height = h;
       }
 
 //---------------------------------------------------------
@@ -77,8 +78,6 @@ void Arpeggio::setHeight(double h)
 
 QRectF Arpeggio::bbox() const
       {
-//      QRectF b = symbols[arpeggioSym].bboxX(magS());
-//      printf("====%f %f %f %f\n", b.x(), b.y(), b.height(), b.width());
       return QRectF(0.0, 0.0, symbols[arpeggioSym].width(magS()), _height);
       }
 
@@ -88,26 +87,54 @@ QRectF Arpeggio::bbox() const
 
 void Arpeggio::draw(QPainter& p) const
       {
-      double y;
+      double _spatium = spatium();
 
-      double h1, h2, h3;
-
-      h1 = h2 = h3 = spatium();
-
+      double y1 = _spatium - _userLen1.val() * _spatium;
+      double y2 = _height + _spatium * .5 + _userLen2.val() * _spatium;
       switch(subtype()) {
             case 0:
-                  for (y = h1; y < _height+h1; y += h1)
+                  for (double y = y1; y < y2; y += _spatium)
                         symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case 1:
-                  symbols[arpeggioarrowupSym].draw(p, 1.0, 0.0, h2);
-                  for (y = h2 + h1; y < _height + h1; y += h1)
+                  symbols[arpeggioarrowupSym].draw(p, 1.0, 0.0, y1);
+                  for (double y = y1 + _spatium; y < y2; y += _spatium)
                         symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case 2:
-                  for (y = h1; y < _height + h1 - h3; y += h1)
+                  {
+                  double y = y1;
+                  for (; y < y2 - _spatium; y += _spatium)
                         symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   symbols[arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
+                  }
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Arpeggio::updateGrips(int* grips, QRectF* grip) const
+      {
+      double _spatium = spatium();
+      *grips   = 2;
+      QPointF p1(0.0, -_userLen1.val() * _spatium);
+      QPointF p2(0.0, _height + _userLen2.val() * _spatium);
+      grip[0].translate(canvasPos() + p1);
+      grip[1].translate(canvasPos() + p2);
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Arpeggio::editDrag(int n, const QPointF& delta)
+      {
+      Spatium d(delta.y() / spatium());
+      if (n == 0)
+            _userLen1 -= d;
+      else if (n == 1)
+            _userLen2 += d;
       }

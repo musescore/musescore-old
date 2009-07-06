@@ -689,6 +689,7 @@ class Score : public QObject {
       TextStyle* textStyle(int idx) { return idx < 0 ? 0 : _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }
       void setTextStyles(const QVector<TextStyle*>&s);
+      QVector<TextStyle*> swapTextStyles(QVector<TextStyle*> s);
       bool loadStyle(QFile* qf);
       void loadStyle();
       void saveStyle();
