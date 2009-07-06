@@ -1529,6 +1529,17 @@ void Score::setTextStyles(const QVector<TextStyle*>& s)
       }
 
 //---------------------------------------------------------
+//   swapTextStyles
+//---------------------------------------------------------
+
+QVector<TextStyle*> Score::swapTextStyles(QVector<TextStyle*> s)
+      {
+      QVector<TextStyle*> tmp = _textStyles;
+      _textStyles = s;
+      return tmp;
+      }
+
+//---------------------------------------------------------
 //   setCopyright
 //---------------------------------------------------------
 

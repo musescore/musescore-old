@@ -221,6 +221,8 @@ Chord::Chord(Score* s)
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       _noStem        = false;
+      minSpace       = 0.0;
+      extraSpace     = 0.0;
       }
 
 Chord::Chord(const Chord& c)
@@ -259,6 +261,8 @@ Chord::Chord(const Chord& c)
       _stemDirection = c._stemDirection;
       _tremolo       = 0;
       _noteType      = c._noteType;
+      minSpace       = c.minSpace;
+      extraSpace     = c.extraSpace;
       }
 
 //---------------------------------------------------------
@@ -601,138 +605,6 @@ void Chord::addLedgerLines(double x, int move)
             }
       for (int i = downpos & ~1; i >= 10; i -= 2)
             addLedgerLine(x, idx, i, dlr);
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Chord::layout()
-      {
-      if (notes.empty())
-            return;
-
-      double _spatium  = spatium();
-
-      if (!segment()) {
-            //
-            // hack for use in palette
-            //
-            for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  Note* note = in->second;
-                  note->layout();
-
-                  double x = 0.0;
-                  double y = note->line() * _spatium * .5;
-                  note->setPos(x, y);
-                  }
-            return;
-            }
-
-      Note* upnote     = upNote();
-      double headWidth = upnote->headWidth();
-
-      //-----------------------------------------
-      //  process notes
-      //    - position
-      //-----------------------------------------
-
-      int minMove = 1;
-      int maxMove = -1;
-
-      double lx = 0.0;
-      _dotPosX  = 0.0;
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
-            note->layout();
-
-            double x = 0.0;
-
-            int move = note->staffMove();
-            if (move < minMove)
-                  minMove = move;
-            if (move > maxMove)
-                  maxMove = move;
-
-            double y = note->line() * _spatium * .5;
-
-            bool stemUp = isUp();
-            if (note->staffMove() == -1) {
-                  stemUp = false;
-                  }
-            else if (note->staffMove() == 1) {
-                  stemUp = true;
-                  }
-            if (note->mirror())
-                  x += stemUp ? headWidth : - headWidth;
-
-            note->setPos(x, y);
-            double xx = x + headWidth;
-            if (xx > _dotPosX)
-                  _dotPosX = xx;
-
-            Accidental* accidental = note->accidental();
-            if (accidental) {
-                  x = accidental->x() * mag();
-                  if (x < lx)
-                        lx = x;
-                  }
-            }
-
-      //-----------------------------------------
-      //  process ledger lines
-      //-----------------------------------------
-
-      foreach(const LedgerLine* l, _ledgerLines)
-            delete l;
-      _ledgerLines.clear();
-
-      //---------------------------------------------------
-      //    create ledger lines for notes moved to
-      //    upper staff
-      //---------------------------------------------------
-
-      double x  = upnote->pos().x();
-      if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
-            x += headWidth;
-
-      addLedgerLines(x, -1);     // notes moved to upper staff
-      addLedgerLines(x, 0);
-      addLedgerLines(x, 1);      // notes moved to lower staff
-
-      foreach(LedgerLine* l, _ledgerLines)
-            l->layout();
-
-      layoutArticulations();
-
-      //-----------------------------------------
-      //  Fingering
-      //-----------------------------------------
-
-#if 0 // TODO
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
-            QList<Text*>& fingering = note->fingering();
-            double x = _spatium * 0.8 + note->headWidth();
-            foreach(const Text* f, fingering) {
-                  f->setPos(x, 0.0);
-                  // TODO: x += _spatium;
-                  // if we have two fingerings and move the first,
-                  // the second will also change position because their
-                  // position in this list changes
-                  }
-            }
-#endif
-
-      if (_arpeggio) {
-            double headHeight = upnote->headHeight();
-            _arpeggio->layout();
-            lx -= _arpeggio->width() + _spatium * .5;
-            double y = upNote()->pos().y() - headHeight * .5;
-            double h = downNote()->pos().y() - y;
-            _arpeggio->setHeight(h);
-            _arpeggio->setPos(lx, y);
-            }
       }
 
 //-----------------------------------------------------------------------------
@@ -1085,52 +957,6 @@ void Chord::dump() const
       }
 
 //---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-void Chord::space(double& min, double& extra) const
-      {
-      extra         = 0.0; // point(score()->style()->minNoteDistance);
-      double mirror = 0.0;
-      double hw     = 0.0;
-
-      double _spatium = spatium();
-      if (_arpeggio)
-            extra = _arpeggio->width() + _spatium * .5;
-      if (_glissando)
-            extra += _spatium * .5;
-
-      for (ciNote i = notes.begin(); i != notes.end(); ++i) {
-            Note* note = i->second;
-            double lhw = note->headWidth();
-            if (lhw > hw)
-                  hw = lhw;
-            double prefixWidth  = 0.0;
-            if (note->accidental()) {
-                  prefixWidth = -note->accidental()->pos().x();
-                  if (prefixWidth > extra)
-                        extra = prefixWidth;
-                  }
-            if (note->mirror()) {
-                  if (up()) {
-                        // note head on the right side of stem
-                        mirror = lhw;
-                        }
-                  else {
-                        // note head on left side of stem
-                        if ((lhw + prefixWidth) > extra)
-                              extra = lhw + prefixWidth;
-                        }
-                  }
-            }
-      min = mirror + hw;
-      if (up() && _hook)
-            min += _hook->width();
-      extra += point(_extraLeadingSpace);
-      min   += point(_extraTrailingSpace);
-      }
-
-//---------------------------------------------------------
 //   find
 //---------------------------------------------------------
 
@@ -1452,4 +1278,168 @@ void Chord::layout2()
                   }
             }
       }
+
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+void Chord::space(double& min, double& extra) const
+      {
+      min   = minSpace;
+      extra = extraSpace;
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Chord::layout()
+      {
+      if (notes.empty())
+            return;
+
+      double _spatium  = spatium();
+
+      if (!segment()) {
+            //
+            // hack for use in palette
+            //
+            for (iNote in = notes.begin(); in != notes.end(); ++in) {
+                  Note* note = in->second;
+                  note->layout();
+
+                  double x = 0.0;
+                  double y = note->line() * _spatium * .5;
+                  note->setPos(x, y);
+                  }
+            return;
+            }
+
+      Note* upnote     = upNote();
+      double headWidth = upnote->headWidth();
+
+      //-----------------------------------------
+      //  process notes
+      //    - position
+      //-----------------------------------------
+
+      int minMove = 1;
+      int maxMove = -1;
+
+      double lx = 0.0;
+      _dotPosX  = 0.0;
+      for (iNote in = notes.begin(); in != notes.end(); ++in) {
+            Note* note = in->second;
+            note->layout();
+
+            double x = 0.0;
+
+            int move = note->staffMove();
+            if (move < minMove)
+                  minMove = move;
+            if (move > maxMove)
+                  maxMove = move;
+
+            double y = note->line() * _spatium * .5;
+
+            bool stemUp = isUp();
+            if (note->staffMove() == -1) {
+                  stemUp = false;
+                  }
+            else if (note->staffMove() == 1) {
+                  stemUp = true;
+                  }
+            if (note->mirror())
+                  x += stemUp ? headWidth : - headWidth;
+
+            note->setPos(x, y);
+            double xx = x + headWidth;
+            if (xx > _dotPosX)
+                  _dotPosX = xx;
+
+            Accidental* accidental = note->accidental();
+            if (accidental)
+                  x = accidental->x() * mag();
+            if (x < lx)
+                  lx = x;
+            }
+
+      //-----------------------------------------
+      //  process ledger lines
+      //-----------------------------------------
+
+      foreach(const LedgerLine* l, _ledgerLines)
+            delete l;
+      _ledgerLines.clear();
+
+      //---------------------------------------------------
+      //    create ledger lines for notes moved to
+      //    upper staff
+      //---------------------------------------------------
+
+      double x  = upnote->pos().x();
+      if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
+            x += headWidth;
+
+      addLedgerLines(x, -1);     // notes moved to upper staff
+      addLedgerLines(x, 0);
+      addLedgerLines(x, 1);      // notes moved to lower staff
+
+      foreach(LedgerLine* l, _ledgerLines)
+            l->layout();
+
+      layoutArticulations();
+
+      //-----------------------------------------
+      //  Fingering
+      //-----------------------------------------
+
+#if 0 // TODO
+      for (iNote in = notes.begin(); in != notes.end(); ++in) {
+            Note* note = in->second;
+            QList<Text*>& fingering = note->fingering();
+            double x = _spatium * 0.8 + note->headWidth();
+            foreach(const Text* f, fingering) {
+                  f->setPos(x, 0.0);
+                  // TODO: x += _spatium;
+                  // if we have two fingerings and move the first,
+                  // the second will also change position because their
+                  // position in this list changes
+                  }
+            }
+#endif
+
+      if (_arpeggio) {
+            double headHeight = upnote->headHeight();
+            _arpeggio->layout();
+            lx -= _arpeggio->width() + _spatium * .5;
+            double y = upNote()->pos().y() - headHeight * .5;
+            double h = downNote()->pos().y() - y;
+            _arpeggio->setHeight(h);
+            _arpeggio->setPos(lx, y);
+            }
+
+      extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
+      double mirror = 0.0;
+      double hw     = 0.0;
+      minSpace      = 0.0;
+
+      if (_glissando)
+            extraSpace += _spatium * .5;
+
+      for (ciNote i = notes.begin(); i != notes.end(); ++i) {
+            Note* note = i->second;
+            double lhw = note->headWidth();
+            if (note->mirror() && up() && (mirror < lhw))  // note head on the right side of stem
+                  mirror = lhw;
+            else if (lhw > hw)
+                  hw = lhw;
+            }
+      minSpace += mirror + hw + _extraTrailingSpace.val() * _spatium;
+      if (up() && _hook)
+            minSpace += _hook->width();
+      extraSpace += point(_extraLeadingSpace);
+      }
+
+
 

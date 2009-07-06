@@ -24,6 +24,7 @@
 #include "score.h"
 #include "canvas.h"
 #include "textproperties.h"
+#include "undo.h"
 
 static const int INTERNAL_STYLES = 2;     // do not present first two styles to user
 
@@ -60,7 +61,8 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(bb, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
       connect(textNames, SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
 
-      current = -1;
+      current   = -1;
+      undoLevel = 0;
       textNames->setCurrentItem(textNames->item(0));
       }
 
@@ -106,13 +108,18 @@ void TextStyleDialog::buttonClicked(QAbstractButton* b)
       switch (bb->standardButton(b)) {
             case QDialogButtonBox::Apply:
                   apply();
+                  ++undoLevel;
                   break;
             case QDialogButtonBox::Ok:
                   apply();
                   done(1);
                   break;
             default:
+                  while (undoLevel--)
+                        cs->undo()->undo();
                   done(0);
+            cs->setLayoutAll(true);
+            cs->end();
             }
       }
 
@@ -123,10 +130,8 @@ void TextStyleDialog::buttonClicked(QAbstractButton* b)
 void TextStyleDialog::apply()
       {
       cs->startCmd();
-      saveStyle(current);
-      cs->textStyleChanged(styles);
-      cs->setTextStyles(styles);
-      cs->setLayoutAll(true);
+      saveStyle(current);                 // update local copy of style list
+      cs->undo()->push(new ChangeTextStyles(cs, styles));
       cs->endCmd();
       cs->setDirty(true);
       }

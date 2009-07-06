@@ -2069,3 +2069,30 @@ void ChangePart::flip()
       part->score()->setInstrumentNames();
       }
 
+//---------------------------------------------------------
+//   ChangeTextStyles
+//---------------------------------------------------------
+
+ChangeTextStyles::ChangeTextStyles(Score* s, const QVector<TextStyle*>& st)
+      {
+      score = s;
+      foreach(TextStyle* s, st)
+            styles.append(new TextStyle(*s));
+      }
+
+ChangeTextStyles::~ChangeTextStyles()
+      {
+      foreach(TextStyle* s, styles)
+            delete s;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeTextStyles::flip()
+      {
+      score->textStyleChanged(styles);
+      styles = score->swapTextStyles(styles);
+      }
+

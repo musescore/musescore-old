@@ -33,11 +33,13 @@ class TextProp;
 class TextStyleDialog : public QDialog {
       Q_OBJECT
       TextProp* tp;
-      QVector<TextStyle*> styles;
+      QVector<TextStyle*> styles;   // local copy of text style
       Score* cs;
       QListWidget* textNames;
       int current;
       QDialogButtonBox* bb;
+
+      int undoLevel;
 
       void saveStyle(int);
       void apply();

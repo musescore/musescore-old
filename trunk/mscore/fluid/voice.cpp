@@ -26,6 +26,9 @@
 
 namespace FluidS {
 
+#define FLUID_SAMPLESANITY_CHECK (1 << 0)
+#define FLUID_SAMPLESANITY_STARTUP (1 << 1)
+
 #define fluid_clip(_val, _min, _max) \
    { (_val) = ((_val) < (_min))? (_min) : (((_val) > (_max))? (_max) : (_val)); }
 
@@ -114,7 +117,7 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       sample         = _sample;
       ticks          = 0;
       debug          = 0;
-      has_looped     = 0;     // Will be set during voice_write when the 2nd loop point is reached
+      has_looped     = false; // Will be set during voice_write when the 2nd loop point is reached
       last_fres      = -1;    // The filter coefficients have to be calculated later in the DSP loop.
       filter_startup = 1;     // Set the filter immediately, don't fade between old and new settings
       interp_method  = _channel->getInterpMethod();

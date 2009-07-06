@@ -152,9 +152,10 @@ class Chord : public ChordRest {
       Arpeggio* _arpeggio;
       Tremolo* _tremolo;
       Glissando* _glissando;
-      NoteType _noteType;     ///< mark grace notes: acciaccatura and appoggiatura
+      NoteType _noteType;           ///< mark grace notes: acciaccatura and appoggiatura
       bool _noStem;
       double _dotPosX;
+      double minSpace, extraSpace;  ///< cached values
 
       virtual qreal upPos()   const;
       virtual qreal downPos() const;

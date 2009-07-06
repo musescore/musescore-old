@@ -85,7 +85,7 @@ class Voice
 	Generator gen[GEN_LAST];
 	Mod mod[FLUID_NUM_MOD];
 	int mod_count;
-	int has_looped;                 /* Flag that is set as soon as the first loop is completed. */
+	bool has_looped;                /* Flag that is set as soon as the first loop is completed. */
 	Sample* sample;
 	int check_sample_sanity_flag;   /* Flag that initiates, that sample-related parameters
 					           have to be checked. */
@@ -243,10 +243,6 @@ class Voice
       int dsp_float_interpolate_4th_order();
       int dsp_float_interpolate_7th_order();
       };
-
-#define FLUID_SAMPLESANITY_CHECK (1 << 0)
-#define FLUID_SAMPLESANITY_STARTUP (1 << 1)
-
 }
 
 
