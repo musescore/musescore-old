@@ -191,6 +191,13 @@ struct XmlChordExtension {
       const char* xmlName;
       };
 
+enum {
+      NoSystem          = 0,
+      TopSystem         = 1,
+      NewSystem         = 2,
+      NewPage           = 3
+      };
+
 extern const XmlChordExtension chordExtensions[];
 
 #endif

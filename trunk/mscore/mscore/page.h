@@ -67,9 +67,9 @@ struct PageFormat {
       double height() const;        // height in inch
       QString name() const;
       void read(QDomElement);
-      void readMusicXML(QDomElement);
+      void readMusicXML(QDomElement, double);
       void write(Xml&);
-      void writeMusicXML(Xml&);
+      void writeMusicXML(Xml&, double);
       };
 
 //---------------------------------------------------------
