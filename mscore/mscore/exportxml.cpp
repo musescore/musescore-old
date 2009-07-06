@@ -32,6 +32,7 @@
 //  Evaluate paramenter handling between the various classes, could be simplified
 //=========================================================
 
+#include <math.h>
 #include "config.h"
 #include "mscore.h"
 #include "file.h"
@@ -75,6 +76,8 @@
 #include "utils.h"
 #include "articulation.h"
 #include "page.h"
+#include "system.h"
+#include "element.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -206,6 +209,8 @@ class ExportMusicXml {
       Attributes attr;
       TextLine* bracket[MAX_BRACKETS];
       int div;
+      double millimeters;
+      int tenths;
 
       int findBracket(const TextLine* tl) const;
       void chord(Chord* chord, int staff, const LyricsList* ll);
@@ -220,10 +225,14 @@ class ExportMusicXml {
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
       void calcDivisions();
+      double getTenthsFromInches(double);
+      double getTenthsFromDots(double);
 
    public:
-      ExportMusicXml(Score* s) { score = s; tick = 0; div = 1; }
+      ExportMusicXml(Score* s) { score = s; tick = 0; div = 1; tenths = 40;
+            millimeters = score->spatium() * tenths / (10 * DPMM);}
       void write(QIODevice* dev);
+      void credits(Xml& xml);
       void moveToTick(int t);
       void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
@@ -363,6 +372,7 @@ void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
                   slur[i] = 0;
                   started[i] = false;
                   notations.tag(xml);
+
                   xml.tagE("slur type=\"start\"%s number=\"%d\"", s->slurDirection() == UP ? " placement=\"above\"" : "", i + 1);
                   }
             else {
@@ -931,17 +941,15 @@ void ExportMusicXml::calcDivisions()
 
 // _spatium = DPMM * (millimeter * 10.0 / tenths);
 
-static void defaults(Xml& xml, Score* s)
+static void defaults(Xml& xml, Score* s, double& millimeters, const int& tenths)
       {
-      const int tenths = 40;
-      double millimeters = s->spatium() * tenths / (10 * DPMM);
       xml.stag("defaults");
       xml.stag("scaling");
       xml.tag("millimeters", millimeters);
-      xml.tag("tenths", 40);
+      xml.tag("tenths", tenths);
       xml.etag();
       PageFormat* pf = s->pageFormat();
-      if (pf) pf->writeMusicXML(xml);
+      if (pf) pf->writeMusicXML(xml, INCH / millimeters * tenths);
       xml.etag();
       }
 
@@ -968,11 +976,11 @@ static void creditWords(Xml& xml, double x, double y, int fs, QString just, QStr
 //   credits
 //---------------------------------------------------------
 
-static void credits(Xml& xml, Score* s)
+void ExportMusicXml::credits(Xml& xml)
       {
       // debug
       printf("credits:\n");
-      const MeasureBase* measure = s->measures()->first();
+      const MeasureBase* measure = score->measures()->first();
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
@@ -1003,19 +1011,20 @@ static void credits(Xml& xml, Score* s)
                                        );
                   }
             }
-      if (s->copyright()) printf("copyright '%s'\n", s->copyright()->getText().toUtf8().data());
+      if (score->copyright()) printf("copyright '%s'\n", score->copyright()->getText().toUtf8().data());
       printf("end credits\n");
       // determine formatting
-      PageFormat* pf = s->pageFormat();
+      PageFormat* pf = score->pageFormat();
       if (!pf) return;
-      const double t  = 2 * PPI * 10 / 9;
-      const double h  = pf->height() * t;
-      const double w  = pf->width() * t;
-      const double lm = pf->oddLeftMargin * t;
-      const double rm = pf->oddRightMargin * t;
-      const double tm = pf->oddTopMargin * t;
-      const double bm = pf->oddBottomMargin * t;
-      printf("t=%g h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", t, h, w, lm, rm, tm, bm);
+      //const double t  = 2 * PPI * 10 / 9;
+      //const double t  = INCH / millimeters * tenths;
+      const double h  = getTenthsFromInches(pf->height());
+      const double w  = getTenthsFromInches(pf->width());
+      const double lm = getTenthsFromInches(pf->oddLeftMargin);
+      const double rm = getTenthsFromInches(pf->oddRightMargin);
+      const double tm = getTenthsFromInches(pf->oddTopMargin);
+      const double bm = getTenthsFromInches(pf->oddBottomMargin);
+      printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
 /**/
       // write the credits
       // TODO add real font size
@@ -1023,11 +1032,11 @@ static void credits(Xml& xml, Score* s)
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   printf("x=%g, y=%g fs=%d\n",
-                         text->canvasPos().x() * t / DPI,
-                         h - text->canvasPos().y() * t / DPI,
+                         text->canvasPos().x(),
+                         h - text->canvasPos().y(),
                          text->defaultFont().pointSize()
                         );
-                  const double ty = h - text->canvasPos().y() * t / DPI;
+                  const double ty = h - getTenthsFromDots(text->canvasPos().y());
                   const int fs = text->defaultFont().pointSize();
                   switch (text->subtype()) {
                         case TEXT_TITLE:
@@ -1050,9 +1059,9 @@ static void credits(Xml& xml, Score* s)
                         }
                   }
             }
-      if (s->copyright()) {
-            const int fs = s->copyright()->defaultFont().pointSize();
-            creditWords(xml, w / 2, bm, fs, "center", "bottom", s->copyright()->getText());
+      if (score->copyright()) {
+            const int fs = score->copyright()->defaultFont().pointSize();
+            creditWords(xml, w / 2, bm, fs, "center", "bottom", score->copyright()->getText());
             }
 /**/
       }
@@ -1598,12 +1607,27 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
       {
       NoteList* nl = chord->noteList();
 
+      PageFormat* pf = score->pageFormat();
+      const double pageHeight  = getTenthsFromInches(pf->height());
+      const double pageWidth  = getTenthsFromInches(pf->width());
+
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
             QString val;
             Note* note = i->second;
 
             attr.doAttr(xml, false);
-            xml.stag("note");
+            QString noteTag = QString("note");
+
+            if (pf) {
+                double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
+                double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
+                double noteX = getTenthsFromDots(note->canvasPos().x());
+                double noteY = pageHeight - getTenthsFromDots(note->canvasPos().y());
+
+                noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
+                noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
+            }
+            xml.stag(noteTag);
 
             if (i != nl->begin())
                   xml.tagE("chord");
@@ -1631,12 +1655,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
 
-          // voice
+            // voice
             // for a single-staff part, staff is 0, which needs to be corrected
             // to calculate the correct voice number
             int voice = (staff-1) * VOICES + note->chord()->voice() + 1;
             if (staff == 0)
-                  voice += VOICES;
+                voice += VOICES;
 
             xml.tag("voice", voice);
 
@@ -2520,8 +2544,8 @@ foreach(Element* el, *(score->gel())) {
       // to keep most regression testfiles simple, write defaults and credits
       // in convertmode only when already present in the input file
       if (!converterMode || score->creditsRead()) {
-            defaults(xml, score);
-            credits(xml, score);
+            defaults(xml, score, millimeters, tenths);
+            credits(xml);
       }
 
       xml.stag("part-list");
@@ -2605,6 +2629,8 @@ foreach(Element* el, *(score->gel())) {
             }
       xml.etag();
 
+      staffCount = 0;
+
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
             tick = 0;
@@ -2621,10 +2647,14 @@ foreach(Element* el, *(score->gel())) {
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
             int pickupMeasureNo = 1;    // number of next pickup measure
+
             for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
+                  PageFormat* pf = score->pageFormat();
+
+
                   // printf("measureNo=%d\n", measureNo);
                   // pickup and other irregular measures need special care
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
@@ -2635,13 +2665,73 @@ foreach(Element* el, *(score->gel())) {
                         xml.stag(QString("measure number=\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++));
                         }
                   else {
-                        xml.stag(QString("measure number=\"%1\"").arg(measureNo++));
+                        xml.stag(QString("measure number=\"%1\" width=\"%2\"").arg(measureNo++).arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2))); // added measure width
                         }
 
-                  if (m->prev() && ((Measure*)m->prev())->lineBreak())  // TODO: MeasureBase
-                        xml.tagE("print new-system=\"yes\"");
-                  if (measureNo > 2 && ((Measure*)m->prev())->pageBreak())    // TODO: MeasureBase
-                        xml.tagE("print new-page=\"yes\"");
+                  int currentSystem = NoSystem;
+                  Measure* previousMeasure;
+
+                  for (MeasureBase* currentMeasureB = m->prev(); currentMeasureB; currentMeasureB = currentMeasureB->prev()){
+                      if (currentMeasureB->type() == MEASURE) {
+                          previousMeasure = (Measure*) currentMeasureB;
+                          break;
+                          }
+                      }
+
+                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4)
+                        currentSystem = TopSystem;
+                  else if ((measureNo > 2 && int(m->canvasPos().x() / DPI / pf->width()) != int(previousMeasure->canvasPos().x() / DPI / pf->width())))    // TODO: MeasureBase
+                        currentSystem = NewPage;
+                  else if (previousMeasure &&
+                        m->canvasPos().y() > (previousMeasure->canvasPos().y()))  // TODO: MeasureBase
+                        currentSystem = NewSystem;
+
+                  if (currentSystem != NoSystem ){
+                      const double pageHeight  = getTenthsFromInches(pf->height());
+                      const double pageWidth  = getTenthsFromInches(pf->width());
+                      const double lm = getTenthsFromInches(pf->oddLeftMargin);
+                      const double rm = getTenthsFromInches(pf->oddRightMargin);
+                      const double tm = getTenthsFromInches(pf->oddTopMargin);
+
+                      if (currentSystem == TopSystem)
+                          xml.stag("print");
+                      else if (currentSystem == NewSystem)
+                          xml.stag("print new-system=\"yes\"");
+                      else if (currentSystem == NewPage)
+                          xml.stag("print new-page=\"yes\"");
+
+                      // System Layout
+                      // Put the system print suggestions only for the first part in a score...
+                      if (idx == 0){
+
+                          double systemLM = getTenthsFromInches(fmod(m->canvasPos().x() / DPI, pf->width())) - lm;
+
+                          double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
+                          // Find the right margin of the system.
+
+                          xml.stag("system-layout");
+                          xml.stag("system-margins");
+                          xml.tag("left-margin", QString("%1").arg(QString::number(systemLM,'f',2)));
+                          xml.tag("right-margin", QString("%1").arg(QString::number(systemRM,'f',2)) );
+                          xml.etag();
+
+                          if (currentSystem == NewPage || currentSystem == TopSystem)
+                              xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y()) - tm,'f',2)) );
+                          else if (currentSystem == NewSystem)
+                              xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y() - previousMeasure->canvasPos().y() - previousMeasure->bbox().height()),'f',2)));
+
+                          xml.etag();
+                      }
+                      // Staff layout elements.
+                      for (int staffIdx = (staffCount == 0) ? 1 : 0; staffIdx < staves; staffIdx++) {
+                          xml.stag(QString("staff-layout number=\"%1\"").arg(staffIdx + 1));
+                          xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distance())),'f',2)));
+                          xml.etag();
+                      }
+
+                      xml.etag();
+
+                  }
 
                   attr.start();
                   dh.buildDirectionsList(m, false, part, strack, etrack);
@@ -2877,6 +2967,7 @@ foreach(Element* el, *(score->gel())) {
                   barlineRight(m);
                   xml.etag();
                   }
+            staffCount += staves;
             xml.etag();
             }
 
@@ -2985,6 +3076,15 @@ bool Score::saveMxl(const QString& name)
 
       return true;
       }
+
+double ExportMusicXml::getTenthsFromInches(double inches){
+    return inches * INCH / millimeters * tenths;
+}
+
+double ExportMusicXml::getTenthsFromDots(double dots){
+    return dots / DPMM / millimeters * tenths;
+}
+
 
 //---------------------------------------------------------
 //   harmony

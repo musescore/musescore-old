@@ -402,7 +402,7 @@ void PageFormat::read(QDomElement e)
 //    sizes are given in units of 1/10 spatium; t
 //---------------------------------------------------------
 
-void PageFormat::readMusicXML(QDomElement e)
+void PageFormat::readMusicXML(QDomElement e, double conversion)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -418,8 +418,9 @@ void PageFormat::readMusicXML(QDomElement e)
                   double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-//                        double val = ee.text().toDouble() * (18/4)/ PPI  * .1;
-                        double val = ee.text().toDouble() * 0.45 / PPI;
+                        //double val = ee.text().toDouble() * (18/4)/ PPI  * .1;
+                        //double val = ee.text().toDouble() * 0.45 / PPI; OLD!!!
+                        double val = ee.text().toDouble() * conversion;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")
@@ -447,11 +448,11 @@ void PageFormat::readMusicXML(QDomElement e)
                   }
             else if (tag == "page-height") {
                   size = paperSizeNameToIndex("Custom");
-                  _height = val.toDouble() * 0.45 / PPI;
+                  _height = val.toDouble() * conversion;
                   }
             else if (tag == "page-width") {
                   size = paperSizeNameToIndex("Custom");
-                  _width = val.toDouble() * 0.45 / PPI;
+                  _width = val.toDouble() * conversion;
                   }
             else
                   domError(e);
@@ -506,30 +507,30 @@ void PageFormat::write(Xml& xml)
 //   writeMusicXML
 //---------------------------------------------------------
 
-void PageFormat::writeMusicXML(Xml& xml)
+void PageFormat::writeMusicXML(Xml& xml, double conversion )
       {
       xml.stag("page-layout");
 
-      double t = 2 * PPI * 10 / 9;
+      //double t = 2 * PPI * 10 / 9;
 
-      xml.tag("page-height", height() * t);
-      xml.tag("page-width", width() * t);
+      xml.tag("page-height", height() * conversion);
+      xml.tag("page-width", width() * conversion);
       QString type("both");
       if (twosided) {
             type = "even";
             xml.stag(QString("page-margins type=\"%1\"").arg(type));
-            xml.tag("left-margin",   evenLeftMargin * t);
-            xml.tag("right-margin",  evenRightMargin * t);
-            xml.tag("top-margin",    evenTopMargin * t);
-            xml.tag("bottom-margin", evenBottomMargin * t);
+            xml.tag("left-margin",   evenLeftMargin * conversion);
+            xml.tag("right-margin",  evenRightMargin * conversion);
+            xml.tag("top-margin",    evenTopMargin * conversion);
+            xml.tag("bottom-margin", evenBottomMargin * conversion);
             xml.etag();
             type = "odd";
             }
       xml.stag(QString("page-margins type=\"%1\"").arg(type));
-      xml.tag("left-margin",   oddLeftMargin * t);
-      xml.tag("right-margin",  oddRightMargin * t);
-      xml.tag("top-margin",    oddTopMargin * t);
-      xml.tag("bottom-margin", oddBottomMargin * t);
+      xml.tag("left-margin",   oddLeftMargin * conversion);
+      xml.tag("right-margin",  oddRightMargin * conversion);
+      xml.tag("top-margin",    oddTopMargin * conversion);
+      xml.tag("bottom-margin", oddBottomMargin * conversion);
       xml.etag();
 
       xml.etag();

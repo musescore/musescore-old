@@ -573,66 +573,74 @@ void MusicXml::scorePartwise(QDomElement ee)
                         }
                   }
             else if (tag == "defaults") {
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        if (tag == "scaling") {
-                              double millimeter = score->spatium()/10.0;
-                              double tenths = 1.0;
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    if (tag == "millimeters")
-                                          millimeter = eee.text().toDouble();
-                                    else if (tag == "tenths")
-                                          tenths = eee.text().toDouble();
-                                    else
-                                          domError(eee);
-                                    }
-                              double _spatium = DPMM * (millimeter * 10.0 / tenths);
-                              score->setSpatium(_spatium);
-                              }
-                        else if (tag == "page-layout"){
-                              score->pageFormat()->readMusicXML(ee);
-                              }
-                        else if (tag == "system-layout") {
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    Spatium val(eee.text().toDouble() / 10.0);
-                                    if (tag == "system-margins")
-                                          ;
-                                    else if (tag == "system-distance") {
-                                          score->style().set(ST_systemDistance, val);
-                                          printf("system distance %f\n", val.val());
-                                          }
-                                    else if (tag == "top-system-distance")
-                                          ;
-                                    else
-                                          domError(eee);
-                                    }
-                              }
-                        else if (tag == "staff-layout") {
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    Spatium val(eee.text().toDouble() / 10.0);
-                                    if (tag == "staff-distance")
-                                          score->style().set(ST_staffDistance, val);
-                                    else
-                                          domError(eee);
-                                    }
-                              }
-                        else if (tag == "music-font")
-                              domNotImplemented(ee);
-                        else if (tag == "word-font")
-                              domNotImplemented(ee);
-                        else if (tag == "lyric-font")
-                              domNotImplemented(ee);
-                        else
-                              domError(ee);
+                double millimeter = score->spatium()/10.0;
+                double tenths = 1.0;
+                QDomElement pageLayoutElement;
+                for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                    QString tag(ee.tagName());
+                    if (tag == "scaling") {
+                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                            QString tag(eee.tagName());
+                            if (tag == "millimeters")
+                                millimeter = eee.text().toDouble();
+                            else if (tag == "tenths")
+                                tenths = eee.text().toDouble();
+                            else
+                                domError(eee);
                         }
-                  }
+                        double _spatium = DPMM * (millimeter * 10.0 / tenths);
+                        score->setSpatium(_spatium);
+                    }
+                    else if (tag == "page-layout"){
+                        pageLayoutElement = ee;
+                    }
+                    else if (tag == "system-layout") {
+                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                            QString tag(eee.tagName());
+                            Spatium val(eee.text().toDouble() / 10.0);
+                            if (tag == "system-margins")
+                                ;
+                            else if (tag == "system-distance") {
+                                score->style().set(ST_systemDistance, val);
+                                printf("system distance %f\n", val.val());
+                            }
+                            else if (tag == "top-system-distance")
+                                ;
+                            else
+                                domError(eee);
+                        }
+                    }
+                    else if (tag == "staff-layout") {
+                        for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                            QString tag(eee.tagName());
+                            Spatium val(eee.text().toDouble() / 10.0);
+                            if (tag == "staff-distance")
+                                score->style().set(ST_staffDistance, val);
+                            else
+                                domError(eee);
+                        }
+                    }
+                    else if (tag == "music-font")
+                        domNotImplemented(ee);
+                    else if (tag == "word-font")
+                        domNotImplemented(ee);
+                    else if (tag == "lyric-font")
+                        domNotImplemented(ee);
+                    else
+                        domError(ee);
+                }
+
+                /*QMessageBox::warning(0,
+                                     QWidget::tr("MuseScore: load XML"),
+                                     QString("Val: ") + QString("%1").arg(QString::number(tenths,'f',2)) + " " + QString("%1").arg(QString::number(millimeter,'f',2)) + " " + QString("%1").arg(QString::number(INCH,'f',2)),
+                                     QString::null, QWidget::tr("Quit"), QString::null, 0, 1);*/
+                score->pageFormat()->readMusicXML(ee, millimeter / (tenths * INCH) );
+            }
             else if (tag == "movement-number")
                   score->setMovementNumber(e.text());
             else if (tag == "movement-title")
-                  score->setMovementTitle(e.text());
+                ;
+                  //score->setMovementTitle(e.text());
             else if (tag == "credit") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());

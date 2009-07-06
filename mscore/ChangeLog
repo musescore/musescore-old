@@ -1,4 +1,7 @@
-6.jul (ws)
+6.jul (la)
+      - MusicXML import/export enhancements by Raffaele Russi 
+          http://tinyurl.com/qw5kfs 
+      (ws)
       - after tuplet creation set input duration to tuplet base len
       - fix "chordname copy-paste to multiple staves"
 5.jul (db)
