@@ -240,49 +240,52 @@ void Score::setSpatium(double v)
 
 Score::Score(const Style& s)
       {
-      _spatium = preferences.spatium * DPI;     // ::_spatium;
-
-      _systems.clear();
-      _pages.clear();
-      _needLayout  = false;
-      _pageFormat  = new PageFormat;
-      _paintDevice = 0;
-      startLayout  = 0;
-
-      info.setFile("");
-
-      _undo = new UndoStack();
-      connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
-
-      _magIdx = MAG_100;
-      _mag    = 1.0;
-      _xoff   = 0.0;
-      _yoff   = 0.0;
+      _spatium        = preferences.spatium * DPI;
+      _pageFormat     = new PageFormat;
+      _paintDevice    = 0;
+      _needLayout     = false;
+      startLayout     = 0;
+      _undo           = new UndoStack();
+      _magIdx         = MAG_100;
+      _mag            = 1.0;
+      _xoff           = 0.0;
+      _yoff           = 0.0;
+      _repeatList       = new RepeatList(this);
       _style  = s;
-
       // deep copy of defaultTextStyles:
       for (int i = 0; i < TEXT_STYLES; ++i)
             _textStyles.append(new TextStyle(defaultTextStyles[i]));
 
-      tempomap          = new TempoList;
-      sigmap            = new SigList;
-      _selection        = new Selection(this);
-      _dirty            = false;
-      _saved            = false;
-      editObject        = 0;
-      _dragObject       = 0;
-      keyState          = 0;
-      editTempo         = 0;
-      updateAll         = false;
-      _pageOffset       = 0;
-      _fileDivision     = division;
-      _printing         = false;
-      _playlistDirty    = false;
-      rights            = 0;
-      _state            = STATE_NORMAL;
-      _repeatList       = new RepeatList(this);
+      _created        = false;
+      updateAll       = false;
+      layoutStart     = 0;
+      layoutAll       = false;
+      keyState        = 0;
+      _showInvisible  = true;
+      _showFrames     = true;
+      editTempo       = 0;
+      _dragObject     = 0;
+      _printing       = false;
+      _playlistDirty  = false;
+      _dirty          = false;
+      _saved          = false;
+      _playPos        = 0;
+      _fileDivision   = division;
+      _creditsRead    = false;
+      _selection      = new Selection(this);
 
-      clear();
+      rights          = 0;
+      rights          = 0;
+      _pageOffset     = 0;
+      tempomap        = new TempoList;
+      sigmap          = new SigList;
+      sigmap->add(0, 4, 4);
+      _state          = STATE_NORMAL;
+      _prevState      = STATE_NORMAL;
+      origEditObject  = 0;
+      editObject      = 0;
+
+      connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
 //---------------------------------------------------------
@@ -291,15 +294,12 @@ Score::Score(const Style& s)
 
 Score::~Score()
       {
-      if (_pageFormat)
-            delete _pageFormat;
-      if (rights)
-            delete rights;
+      delete _pageFormat;
+      delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete tempomap;
       delete sigmap;
-      if (_selection)
-            delete _selection;
+      delete _selection;
       delete _repeatList;
       }
 
@@ -326,56 +326,6 @@ Canvas* Score::canvas() const
       if (viewer.isEmpty())
             return 0;
       return static_cast<Canvas*>(viewer[0]);
-      }
-
-//---------------------------------------------------------
-//   clear
-//---------------------------------------------------------
-
-void Score::clear()
-      {
-      foreach(Excerpt* e, _excerpts)
-            delete e;
-      _excerpts.clear();
-
-      _is.pitch = 60;
-      info.setFile("");
-      _dirty          = false;
-      _saved          = false;
-      _created        = false;
-      if (rights)
-            delete rights;
-      rights          = 0;
-      _movementNumber.clear();
-      _movementTitle.clear();
-      _workNumber.clear();
-      _workTitle.clear();
-      _source.clear();
-      _rights.clear();
-      _creators.clear();
-      _creditsRead = false;
-
-      _pageOffset     = 0;
-      _playPos        = 0;
-
-      foreach(Staff* staff, _staves)
-            delete staff;
-      _staves.clear();
-      _measures.clear();
-      foreach(Part* p, _parts)
-            delete p;
-      _parts.clear();
-
-      sigmap->clear();
-      sigmap->add(0, 4, 4);
-      tempomap->clear();
-
-      _pages.clear();
-      _systems.clear();
-
-      _selection->clear();
-      _showInvisible = true;
-      _showFrames = true;
       }
 
 //---------------------------------------------------------
@@ -2315,8 +2265,7 @@ int Score::utime2utick(double utime)
 
 void Score::setSelection(Selection* s)
       {
-      if (_selection)
-            delete _selection;
+      delete _selection;
       _selection = s;
       }
 

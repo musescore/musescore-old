@@ -271,16 +271,11 @@ Chord::Chord(const Chord& c)
 
 Chord::~Chord()
       {
-      if (_arpeggio)
-            delete _arpeggio;
-      if (_tremolo)
-            delete _tremolo;
-      if (_glissando)
-            delete _glissando;
-      if (_stemSlash)
-            delete _stemSlash;
-      if (_stem)
-            delete _stem;
+      delete _arpeggio;
+      delete _tremolo;
+      delete _glissando;
+      delete _stemSlash;
+      delete _stem;
       }
 
 //---------------------------------------------------------
@@ -289,8 +284,7 @@ Chord::~Chord()
 
 void Chord::setHook(Hook* f)
       {
-      if (_hook)
-            delete _hook;
+      delete _hook;
       _hook = f;
       if (_hook) {
             _hook->setParent(this);
@@ -306,8 +300,7 @@ void Chord::setHook(Hook* f)
 
 void Chord::setStem(Stem* s)
       {
-      if (_stem)
-            delete _stem;
+      delete _stem;
       _stem = s;
       if (_stem) {
             _stem->setParent(this);
@@ -493,7 +486,7 @@ void Chord::layoutStem1()
             _stemSlash->setMag(mag());
             _stemSlash->setParent(this);
             }
-      else if (_stemSlash) {
+      else {
             delete _stemSlash;
             _stemSlash = 0;
             }

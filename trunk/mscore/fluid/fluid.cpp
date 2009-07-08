@@ -271,10 +271,8 @@ Fluid::~Fluid()
       delete[] fx_buf[0];
       delete[] fx_buf[1];
 
-      if (reverb)
-            delete reverb;
-      if (chorus)
-            delete chorus;
+      delete reverb;
+      delete chorus;
 
       /* free the tunings, if any */
       if (tuning) {

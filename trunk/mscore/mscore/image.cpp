@@ -205,8 +205,7 @@ SvgImage::SvgImage(Score* s)
 
 SvgImage::~SvgImage()
       {
-      if (doc)
-            delete doc;
+      delete doc;
       }
 
 SvgImage* SvgImage::clone() const

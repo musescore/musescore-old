@@ -41,8 +41,7 @@ PagePreview::PagePreview(QWidget* parent)
 
 void PagePreview::setScore(Score* s)
       {
-      if (_score)
-            delete _score;
+      delete _score;
       _score  = s->clone();
       if (_score == 0)
             return;
@@ -55,8 +54,7 @@ void PagePreview::setScore(Score* s)
 
 PagePreview::~PagePreview()
       {
-      if (_score)
-            delete _score;
+      delete _score;
       }
 
 //---------------------------------------------------------

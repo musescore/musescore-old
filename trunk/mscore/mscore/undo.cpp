@@ -360,10 +360,8 @@ SaveState::SaveState(Score* s)
 
 SaveState::~SaveState()
       {
-      if (undoSelection)
-            delete undoSelection;
-      if (redoSelection)
-            delete redoSelection;
+      delete undoSelection;
+      delete redoSelection;
       }
 
 void SaveState::undo()
@@ -2095,4 +2093,25 @@ void ChangeTextStyles::flip()
       score->textStyleChanged(styles);
       styles = score->swapTextStyles(styles);
       }
+
+//---------------------------------------------------------
+//   ChangeStretch
+//---------------------------------------------------------
+
+ChangeStretch::ChangeStretch(Measure* m, double s)
+   : measure(m), stretch(s)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeStretch::flip()
+      {
+      double oStretch = measure->userStretch();
+      measure->setUserStretch(stretch);
+      stretch = oStretch;
+      }
+
 

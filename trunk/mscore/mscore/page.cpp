@@ -44,11 +44,9 @@
 //---------------------------------------------------------
 
 Page::Page(Score* s)
-   : Element(s)
+   : Element(s),
+   _no(0), _pageNo(0), _copyright(0)
       {
-      _no        = 0;
-      _pageNo    = 0;
-      _copyright = 0;
       }
 
 //---------------------------------------------------------
@@ -131,7 +129,7 @@ void Page::layout()
             _pageNo->setText(QString("%1").arg(n));
             _pageNo->layout();
             }
-      else if (_pageNo) {
+      else {
             delete _pageNo;
             _pageNo = 0;
             }
@@ -149,7 +147,7 @@ void Page::layout()
                         }
                   _copyright->layout();
                   }
-            else if (_copyright) {
+            else {
                   delete _copyright;
                   _copyright = 0;
                   }
@@ -261,20 +259,20 @@ void Page::collectElements(QList<const Element*>& el) const
 //---------------------------------------------------------
 
 PageFormat::PageFormat()
+   : size(preferences.paperSize),
+   _width(preferences.paperWidth),
+   _height(preferences.paperHeight),
+   evenLeftMargin(10.0 / INCH),
+   evenRightMargin(10.0 / INCH),
+   evenTopMargin(10.0 / INCH),
+   evenBottomMargin(20.0 / INCH),
+   oddLeftMargin(10.0 / INCH),
+   oddRightMargin(10.0 / INCH),
+   oddTopMargin(10.0 / INCH),
+   oddBottomMargin(20.0 / INCH),
+   landscape(false),
+   twosided(false)
       {
-      size             = preferences.paperSize;
-      _width           = preferences.paperWidth;
-      _height          = preferences.paperHeight;
-      evenLeftMargin   = 10.0 / INCH;
-      evenRightMargin  = 10.0 / INCH;
-      evenTopMargin    = 10.0 / INCH;
-      evenBottomMargin = 20.0 / INCH;
-      oddLeftMargin    = 10.0 / INCH;
-      oddRightMargin   = 10.0 / INCH;
-      oddTopMargin     = 10.0 / INCH;
-      oddBottomMargin  = 20.0 / INCH;
-      landscape        = false;
-      twosided         = false;
       }
 
 //---------------------------------------------------------

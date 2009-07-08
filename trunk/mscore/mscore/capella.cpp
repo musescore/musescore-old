@@ -66,12 +66,9 @@ Capella::Capella()
 
 Capella::~Capella()
       {
-      if (author)
-            delete[] author;
-      if (keywords)
-            delete[] keywords;
-      if (comment)
-            delete[] comment;
+      delete[] author;
+      delete[] keywords;
+      delete[] comment;
       }
 
 //---------------------------------------------------------

@@ -1075,6 +1075,21 @@ class ChangeTextStyles : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeStretch
+//---------------------------------------------------------
+
+class ChangeStretch : public UndoCommand {
+      Measure* measure;
+      double stretch;
+      void flip();
+
+   public:
+      ChangeStretch(Measure*, double);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 
 #endif
 

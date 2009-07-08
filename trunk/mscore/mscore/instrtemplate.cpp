@@ -69,8 +69,7 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
 
 InstrumentTemplate::~InstrumentTemplate()
       {
-      if (drumset)
-            delete drumset;
+      delete drumset;
       foreach(Channel* c, channel)
             delete c;
       }

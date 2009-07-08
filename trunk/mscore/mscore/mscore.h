@@ -264,6 +264,14 @@ class MuseScore : public QMainWindow {
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
       void startPageListEditor();
+      void midiinToggled(bool);
+      void speakerToggled(bool);
+      void undo();
+      void redo();
+      void showPalette(bool);
+      void showPlayPanel(bool);
+      void showNavigator(bool);
+      void showMixer(bool);
 
    private slots:
       void autoSaveTimerTimeout();
@@ -275,7 +283,6 @@ class MuseScore : public QMainWindow {
       void selectScore(QAction*);
       void selectionChanged(int);
       void startPreferenceDialog();
-      void showMixer(bool);
       void startExcerptsDialog();
       void preferencesChanged();
       void editStyle();
@@ -293,23 +300,16 @@ class MuseScore : public QMainWindow {
       void showLayoutBreakPalette();
       void magChanged(int);
       void showPageSettings();
-      void midiinToggled(bool);
-      void speakerToggled(bool);
       void removeTab(int);
       void removeTab();
       void cmd(QAction*);
       void clipboardChanged();
       void drumPaletteSelected(int);
-      void undo();
-      void redo();
       void endSearch();
       void setSaveFilters(QFileDialog* d) const;
 
    public slots:
       void setCurrentScore(int);
-      void showPlayPanel(bool);
-      void showPalette(bool);
-      void showNavigator(bool);
       void dirtyChanged(Score*);
       void changeState(int);
       void setPos(int tick);
@@ -320,7 +320,6 @@ class MuseScore : public QMainWindow {
    public:
       MuseScore();
       bool checkDirty(Score*);
-      void clearScore();
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
       void appendScore(Score*);
@@ -362,6 +361,7 @@ extern MuseScore* mscore;
 extern QString dataPath;
 
 extern Shortcut* getShortcut(const char* id);
+extern QAction* getAction(Shortcut*);
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 extern Shortcut* midiActionMap[128];

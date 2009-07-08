@@ -74,8 +74,7 @@ Event::Event(const Event& e)
 
 Event::~Event()
       {
-      if (_data)
-            delete[] _data;
+      delete[] _data;
       }
 
 //---------------------------------------------------------

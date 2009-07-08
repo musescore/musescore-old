@@ -94,10 +94,8 @@ MStaff::MStaff()
 
 MStaff::~MStaff()
       {
-      if (lines)
-            delete lines;
-      if (_vspacer)
-            delete _vspacer;
+      delete lines;
+      delete _vspacer;
       }
 
 //---------------------------------------------------------
@@ -149,8 +147,7 @@ Measure::Measure(Score* s)
 
 Measure::~Measure()
       {
-      if (_noText)
-            delete _noText;
+      delete _noText;
       }
 
 //---------------------------------------------------------
@@ -915,7 +912,7 @@ void Measure::layout2()
                   }
             _noText->setText(s);
             }
-      else if (_noText) {
+      else {
             delete _noText;
             _noText = 0;
             }

@@ -1854,7 +1854,6 @@ void Score::moveDown(Note* note)
 
 //---------------------------------------------------------
 //   cmdAddStretch
-//    TODO: cmdAddStretch: undo
 //---------------------------------------------------------
 
 void Score::cmdAddStretch(double val)
@@ -1863,16 +1862,14 @@ void Score::cmdAddStretch(double val)
             return;
       int startTick = selection()->startSegment()->tick();
       int endTick   = selection()->endSegment()->tick();
-      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
-            if (m->type() != MEASURE)
-                  continue;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             if (m->tick() < startTick)
                   continue;
             if (m->tick() >= endTick)
                   break;
-            double stretch = ((Measure*)m)->userStretch();
+            double stretch = m->userStretch();
             stretch += val;
-            ((Measure*)m)->setUserStretch(stretch);
+            _undo->push(new ChangeStretch(m, stretch));
             }
       layoutAll = true;
       }

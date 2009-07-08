@@ -474,7 +474,6 @@ void Canvas::modifyElement(Element* el)
       {
       if (el == 0) {
             printf("modifyElement: el==0\n");
-            delete el;
             return;
             }
       Score* cs = el->score();

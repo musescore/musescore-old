@@ -61,15 +61,11 @@ SysStaff::SysStaff()
 
 SysStaff::~SysStaff()
       {
-      foreach(Bracket* b, brackets) {
-            if (b)
-                  delete b;
-            }
+      foreach(Bracket* b, brackets)
+            delete b;
       brackets.clear();
-      if (instrumentName) {
-            delete instrumentName;
-            instrumentName = 0;
-            }
+      delete instrumentName;
+      instrumentName = 0;
       }
 
 //---------------------------------------------------------
@@ -92,8 +88,7 @@ System::System(Score* s)
 
 System::~System()
       {
-      if (barLine)
-            delete barLine;
+      delete barLine;
       }
 
 //---------------------------------------------------------
@@ -177,8 +172,7 @@ void System::layout(double xo1)
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {
                         Bracket* b = ss->brackets.takeLast();
-                        if (b)
-                              delete b;
+                        delete b;
                         }
                   }
             else if (bracketLevels > ss->brackets.size()) {
@@ -188,10 +182,8 @@ void System::layout(double xo1)
             for (int i = 0; i < bracketLevels; ++i) {
                   Bracket* b = ss->brackets[i];
                   if (s->bracket(i) == NO_BRACKET) {
-                        if (b) {
-                              delete b;
-                              ss->brackets[i] = 0;
-                              }
+                        delete b;
+                        ss->brackets[i] = 0;
                         }
                   else {
                         if (b == 0) {

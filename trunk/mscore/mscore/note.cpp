@@ -191,8 +191,7 @@ void Note::setTpc(int v)
 
 Note::~Note()
       {
-      if (_accidental)
-            delete _accidental;
+      delete _accidental;
       }
 
 //---------------------------------------------------------
@@ -471,7 +470,7 @@ void Note::setAccidentalType(int pre)
                   }
             _accidental->setSubtype(pre);
             }
-      else if (_accidental) {
+      else {
             delete _accidental;
             _accidental = 0;
             }

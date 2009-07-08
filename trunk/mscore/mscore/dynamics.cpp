@@ -283,9 +283,8 @@ void Dynamic::propertyAction(const QString& s)
             Text* nText = new Text(*this);
             TextProperties tp(nText, 0);
             int rv = tp.exec();
-            if (rv) {
+            if (rv)
                   score()->undoChangeElement(this, nText);
-                  }
             else
                   delete nText;
             }

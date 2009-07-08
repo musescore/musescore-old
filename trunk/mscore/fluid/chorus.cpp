@@ -153,10 +153,8 @@ void Chorus::reset()
 
 Chorus::~Chorus()
       {
-      if (chorusbuf)
-            delete[] chorusbuf;
-      if (lookup_tab)
-            delete[] lookup_tab;
+      delete[] chorusbuf;
+      delete[] lookup_tab;
       }
 
 //---------------------------------------------------------
