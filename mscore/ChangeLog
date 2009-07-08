@@ -1,3 +1,6 @@
+8.jul (la)
+      - (mac) fix bug with dotted line selection
+      - set back "backspace" as undo during note entry on all platforms 
 6.jul (la)
       - MusicXML import/export enhancements by Raffaele Russi
           http://tinyurl.com/qw5kfs
