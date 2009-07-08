@@ -1933,7 +1933,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NOTE_ENTRY,
          "backspace",
          QT_TR_NOOP("backspace"),
-         QKeySequence::Back,        // QKeySequence(Qt::Key_Backspace),
+		 QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
          Qt::WindowShortcut,
          QT_TR_NOOP("backspace"),
          QT_TR_NOOP("backspace")
