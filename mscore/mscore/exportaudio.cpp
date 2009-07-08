@@ -37,7 +37,7 @@
 
 bool Score::saveAudio(const QString& name, int format)
       {
-      int sampleRate = 44100;
+      static const int sampleRate = 44100;
 
       Synth* synth = new FluidS::Fluid();
       synth->init(sampleRate);

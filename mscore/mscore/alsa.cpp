@@ -576,10 +576,8 @@ int AlsaAudio::sampleRate() const
 
 AlsaAudio::~AlsaAudio()
       {
-      if (synth)
-            delete synth;
-      if (alsa)
-            delete alsa;
+      delete synth;
+      delete alsa;
       }
 
 //---------------------------------------------------------

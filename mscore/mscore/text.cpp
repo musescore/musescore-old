@@ -143,8 +143,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
 
 void TextBase::setDoc(const QTextDocument& d)
       {
-      if (_doc)
-            delete _doc;
+      delete _doc;
       _doc = d.clone(0);
       }
 
@@ -451,13 +450,14 @@ TextC::~TextC()
 void TextC::baseChanged()
       {
       if (editMode) {
-            if (cursor)
-                  delete cursor;
+            delete cursor;
             cursor = new QTextCursor(textBase()->doc());
             cursor->setPosition(cursorPos);
             }
-      else
+      else {
+            delete cursor;
             cursor = 0;
+            }
       }
 
 //---------------------------------------------------------
@@ -626,10 +626,8 @@ void TextB::setSubtype(const QString& s)
 void TextB::resetMode()
       {
       editMode = 0;
-      if (cursor) {
-            delete cursor;
-            cursor = 0;
-            }
+      delete cursor;
+      cursor = 0;
       }
 
 //---------------------------------------------------------

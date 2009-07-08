@@ -119,8 +119,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
 
 ChordEdit::~ChordEdit()
       {
-      if (_harmony)
-            delete _harmony;
+      delete _harmony;
       }
 
 //---------------------------------------------------------

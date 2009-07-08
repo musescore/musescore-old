@@ -323,10 +323,8 @@ void Channel::read(QDomElement e)
 void Channel::updateInitList() const
       {
       for (int i = 0; i < A_INIT_COUNT; ++i) {
-            if (init[i]) {
-                  delete init[i];
-                  init[i] = 0;
-                  }
+            delete init[i];
+            init[i] = 0;
             }
       Event* e;
       if (program != -1) {

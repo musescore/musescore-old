@@ -52,8 +52,7 @@ JackAudio::~JackAudio()
                      strerror(errno));
                   }
             }
-      if (synth)
-            delete synth;
+      delete synth;
       }
 
 //---------------------------------------------------------

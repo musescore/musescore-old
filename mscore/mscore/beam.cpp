@@ -235,10 +235,8 @@ Beam::~Beam()
       //
       foreach(ChordRest* cr, _elements)
             cr->setBeam(0);
-      for (iBeamSegment i = beamSegments.begin();
-         i != beamSegments.end(); ++i) {
+      for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
             delete *i;
-            }
       }
 
 //---------------------------------------------------------

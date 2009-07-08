@@ -278,6 +278,8 @@ class Score : public QObject {
       int textUndoLevel;
       Selection* _selection;
 
+      //------------------
+
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
       ChordRest* prevMeasure(ChordRest* element);
       void cmdSetBeamMode(int);
@@ -434,7 +436,6 @@ class Score : public QObject {
 
       Score* clone();
 
-      void clear();
       void write(Xml&, bool autosave);
       bool read(QDomElement);
 

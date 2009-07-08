@@ -122,10 +122,7 @@ Preset::Preset(SFont* s)
 
 Preset::~Preset()
       {
-      if (_global_zone) {
-            delete _global_zone;
-            _global_zone = 0;
-            }
+      delete _global_zone;
       foreach(PresetZone* z, zones)
             delete z;
       }
@@ -448,8 +445,7 @@ PresetZone::~PresetZone()
             m = m->next;
             delete tmp;
             }
-      if (inst)
-            delete inst;
+      delete inst;
       }
 
 //---------------------------------------------------------
@@ -620,8 +616,7 @@ Inst::Inst()
 
 Inst::~Inst()
       {
-      if (global_zone)
-            delete global_zone;
+      delete global_zone;
       foreach(InstZone* z, zone)
             delete z;
       }
@@ -871,8 +866,7 @@ Sample::Sample(SFont* s)
 
 Sample::~Sample()
       {
-      if (data)
-            delete[] data;
+      delete[] data;
       }
 
 //---------------------------------------------------------

@@ -209,7 +209,7 @@ void TextLineSegment::layout()
                               _text->setParent(this);
                               }
                         }
-                  else if (_text) {
+                  else {
                         delete _text;
                         _text = 0;
                         }
@@ -223,7 +223,7 @@ void TextLineSegment::layout()
                               _text->setParent(this);
                               }
                         }
-                  else if (_text) {
+                  else {
                         delete _text;
                         _text = 0;
                         }
@@ -239,10 +239,8 @@ void TextLineSegment::layout()
 
 void TextLineSegment::clearText()
       {
-      if (_text) {
-            delete _text;
-            _text = 0;
-            }
+      delete _text;
+      _text = 0;
       }
 
 //---------------------------------------------------------

@@ -129,8 +129,22 @@ void TextStyleDialog::buttonClicked(QAbstractButton* b)
 
 void TextStyleDialog::apply()
       {
-      cs->startCmd();
       saveStyle(current);                 // update local copy of style list
+
+      bool styleChanged = false;
+      int n = cs->textStyles().size();
+      for (int i = 0; i < n; ++i) {
+            TextStyle* os = cs->textStyle(i);
+            TextStyle* ns = styles[i];
+            if (*os != *ns) {
+                  styleChanged = true;
+                  break;
+                  }
+            }
+      if (!styleChanged)
+            return;
+
+      cs->startCmd();
       cs->undo()->push(new ChangeTextStyles(cs, styles));
       cs->endCmd();
       cs->setDirty(true);

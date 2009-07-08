@@ -108,27 +108,7 @@ class TextStyle {
       QFont fontPx(double spatium) const;
       QRectF bbox(double space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
       QFontMetricsF fontMetrics(double space) const { return QFontMetricsF(font(space)); }
-      bool operator!=(const TextStyle& s) const {
-            return s.name != name
-                || s.family != family
-                || s.size != size
-                || s.bold != bold
-                || s.italic != italic
-                || s.underline != underline
-                || s.align != align
-                || s.xoff   != xoff
-                || s.yoff   != yoff
-                || s.rxoff != rxoff
-                || s.ryoff != ryoff
-                || s.offsetType != offsetType
-                || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
-                || s.frameWidth != frameWidth
-                || s.paddingWidth != paddingWidth
-                || s.frameRound != frameRound
-                || s.frameColor != frameColor
-                || s.circle != circle
-                || s.systemFlag != systemFlag;
-            }
+      bool operator!=(const TextStyle& s) const;
       };
 
 //---------------------------------------------------------

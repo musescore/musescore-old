@@ -359,67 +359,16 @@ MuseScore::MuseScore()
 
       _progressBar = 0;
 
-      QAction* a;
-
       // otherwise unused actions:
       //   must be added somewere to work
 
       QActionGroup* ag = new QActionGroup(this);
       ag->setExclusive(false);
-      QStringList sl;
-      sl << "page-prev" << "page-next" << "page-top" << "page-end"
-         << "add-slur" << "add-hairpin" << "add-hairpin-reverse"
-         << "escape" << "delete" << "rest" << "pitch-up" << "pitch-down"
-         << "rest-1" << "rest-2" << "rest-4" << "rest-8"
-         << "pitch-up-octave" << "pitch-down-octave"
-         << "move-up" << "move-down" << "up-chord" << "down-chord"
-         << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
-         << "select-next-chord" << "select-prev-chord" << "select-next-measure" << "select-prev-measure"
-         << "select-begin-line" << "select-end-line"
-         << "select-begin-score" << "select-end-score"
-         << "select-staff-above" << "select-staff-below"
-         << "next-measure" << "prev-measure" << "print"
-         << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
-         << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
-         << "duplet" << "triplet" << "quadruplet" << "quintuplet" << "sextuplet"
-         << "septuplet" << "octuplet" << "nonuplet" << "tuplet-dialog"
-         << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
-         << "note-a" << "note-b"
-         << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
-         << "chord-a" << "chord-b"
-         << "stretch+" << "stretch-"
-         << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
-         << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
-         << "rehearsalmark-text" << "copyright-text"
-         << "lyrics" << "fingering" << "system-text" << "staff-text" << "tempo"
-         << "cut" << "copy" << "paste"
-         << "file-open" << "file-new" << "file-save" << "file-save-as"
-         << "file-save-a-copy" << "file-reload" << "file-close"
-         << "quit"
-         << "toggle-statusbar" << "note-input" << "pitch-spell"
-         << "rewind" << "play" << "pause" <<"repeat"
-         << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
-         << "seek-begin" << "seek-end"
-         << "load-style" << "save-style" << "select-all" << "transpose" << "concert-pitch"
-         << "reset-beammode"
-         << "clef-violin" << "clef-bass"
-	   << "add-staccato" << "add-trill"
-         << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
-         << "repeat-cmd"
-         << "edit-meta"
-         << "harmony-properties"
-         << "system-break" << "page-break"
-         << "edit-element"
-         << "mag" << "reset-positions" << "inspector" << "script-debug"
-         << "backspace" << "find" << "zoomin" << "zoomout" << "mirror-note"
-         ;
-
-      foreach(const QString& s, sl) {
-            QAction* a = getAction(s.toLatin1().data());
+      foreach(Shortcut* s, shortcuts) {
+            QAction* a = getAction(s);
             addAction(a);
             ag->addAction(a);
             }
-
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
       QWidget* mainWindow = new QWidget;
@@ -443,24 +392,20 @@ MuseScore::MuseScore()
       //    Transport Action
       //---------------------------------------------------
 
+      QAction* a;
 #ifdef HAS_MIDI
       a  = getAction("midi-on");
       a->setCheckable(true);
       a->setEnabled(preferences.enableMidiInput);
       a->setChecked(_midiinEnabled);
-      connect(a, SIGNAL(triggered(bool)), SLOT(midiinToggled(bool)));
 #endif
-
       a = getAction("sound-on");
       a->setCheckable(true);
       a->setEnabled(preferences.playNotes);
       a->setChecked(_speakerEnabled);
-      connect(a, SIGNAL(triggered(bool)), SLOT(speakerToggled(bool)));
 
-      a = getAction("play");
-      a->setCheckable(true);
-      a = getAction("pause");
-      a->setCheckable(true);
+      getAction("play")->setCheckable(true);
+      getAction("pause")->setCheckable(true);
       a = getAction("repeat");
       a->setCheckable(true);
       a->setChecked(true);
@@ -486,13 +431,11 @@ MuseScore::MuseScore()
       a = getAction("undo");
       a->setEnabled(false);
       connect(_undoGroup, SIGNAL(canUndoChanged(bool)), a, SLOT(setEnabled(bool)));
-      connect(a, SIGNAL(triggered()), SLOT(undo()));
       fileTools->addAction(a);
 
       a = getAction("redo");
       a->setEnabled(false);
       connect(_undoGroup, SIGNAL(canRedoChanged(bool)), a, SLOT(setEnabled(bool)));
-      connect(a, SIGNAL(triggered()), SLOT(redo()));
       fileTools->addAction(a);
 
       fileTools->addSeparator();
@@ -547,10 +490,8 @@ MuseScore::MuseScore()
             QAction* a = getAction(s.toLatin1().data());
             if (s != "tie")
                   a->setCheckable(true);
-            ag->addAction(a);
             nb->setDefaultAction(a);
             entryTools->addWidget(nb);
-            // entryTools->addAction(a);
             if (s == "tie" || s == "pad-rest")
                   entryTools->addSeparator();
             }
@@ -563,11 +504,9 @@ MuseScore::MuseScore()
       foreach(const QString& s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
-            ag->addAction(a);
             }
 
       a = getAction("flip");
-      ag->addAction(a);
       entryTools->addAction(a);
       entryTools->addSeparator();
 
@@ -686,7 +625,6 @@ MuseScore::MuseScore()
             char buffer[16];
             sprintf(buffer, "interval%d", i);
             a = getAction(buffer);
-            ag->addAction(a);
             menuAddInterval->addAction(a);
             }
       menuAddInterval->addSeparator();
@@ -694,7 +632,6 @@ MuseScore::MuseScore()
             char buffer[16];
             sprintf(buffer, "interval-%d", i);
             a = getAction(buffer);
-            ag->addAction(a);
             menuAddInterval->addAction(a);
             }
       menuNotes->addMenu(menuAddInterval);
@@ -755,22 +692,18 @@ MuseScore::MuseScore()
 
       a = getAction("toggle-palette");
       a->setCheckable(true);
-      connect(a, SIGNAL(toggled(bool)), SLOT(showPalette(bool)));
       menuDisplay->addAction(a);
 
       playId = getAction("toggle-playpanel");
       playId->setCheckable(true);
-      connect(playId, SIGNAL(toggled(bool)), SLOT(showPlayPanel(bool)));
       menuDisplay->addAction(playId);
 
       a = getAction("toggle-navigator");
       a->setCheckable(true);
-      connect(a, SIGNAL(toggled(bool)), SLOT(showNavigator(bool)));
       menuDisplay->addAction(a);
 
       a = getAction("toggle-mixer");
       a->setCheckable(true);
-      connect(a, SIGNAL(toggled(bool)), SLOT(showMixer(bool)));
       menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
@@ -825,6 +758,10 @@ MuseScore::MuseScore()
       connect(seq, SIGNAL(started()), SLOT(seqStarted()));
       connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));
       loadScoreList();
+
+      showPlayPanel(preferences.showPlayPanel);
+      if (getPlayPanel())
+            getPlayPanel()->move(preferences.playPanelPos);
 
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
@@ -1791,10 +1728,6 @@ int main(int argc, char* argv[])
             currentScore = 0;
       mscore->setCurrentScore(currentScore);
 
-      mscore->showPlayPanel(preferences.showPlayPanel);
-      if (mscore->getPlayPanel())
-            mscore->getPlayPanel()->move(preferences.playPanelPos);
-
       if (pluginMode) {
             QString pn(pluginName);
             bool res = false;
@@ -1973,9 +1906,27 @@ void MuseScore::cmd(QAction* a)
             incMag();
       else if (cmd == "zoomout")
             decMag();
+      else if (cmd == "midi-on")
+            midiinToggled(a->isChecked());
+      else if (cmd == "sound-on")
+            speakerToggled(a->isChecked());
+      else if (cmd == "undo")
+            undo();
+      else if (cmd == "redo")
+            redo();
+      else if (cmd == "toggle-palette")
+            showPalette(a->isChecked());
+      else if (cmd == "toggle-playpanel")
+            showPlayPanel(a->isChecked());
+      else if (cmd == "toggle-navigator")
+            showNavigator(a->isChecked());
+      else if (cmd == "toggle-mixer")
+            showMixer(a->isChecked());
       else {
             if (cs)
                   cs->cmd(cmd);
+            else
+                  printf("unknown cmd <%s>\n", qPrintable(cmd));
             }
       }
 

@@ -176,10 +176,8 @@ bool Canvas::event(QEvent* ev)
 Canvas::~Canvas()
       {
       delete lasso;
-      if (cursor)
-            delete cursor;
-      if (shadowNote)
-            delete shadowNote;
+      delete cursor;
+      delete shadowNote;
       }
 
 //---------------------------------------------------------
@@ -848,18 +846,15 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
 
 void Canvas::setBackground(QPixmap* pm)
       {
-      if (bgPixmap)
-            delete bgPixmap;
+      delete bgPixmap;
       bgPixmap = pm;
       update();
       }
 
 void Canvas::setBackground(const QColor& color)
       {
-      if (bgPixmap) {
-            delete bgPixmap;
-            bgPixmap = 0;
-            }
+      delete bgPixmap;
+      bgPixmap = 0;
       _bgColor = color;
       update();
       }
@@ -870,18 +865,15 @@ void Canvas::setBackground(const QColor& color)
 
 void Canvas::setForeground(QPixmap* pm)
       {
-      if (fgPixmap)
-            delete fgPixmap;
+      delete fgPixmap;
       fgPixmap = pm;
       update();
       }
 
 void Canvas::setForeground(const QColor& color)
       {
-      if (fgPixmap) {
-            delete fgPixmap;
-            fgPixmap = 0;
-            }
+      delete fgPixmap;
+      fgPixmap = 0;
       _fgColor = color;
       update();
       }
@@ -1538,10 +1530,8 @@ bool Canvas::dragAboveSystem(const QPointF& pos)
 void Canvas::dragEnterEvent(QDragEnterEvent* event)
       {
       double _spatium = score()->spatium();
-      if (dragElement) {
-            delete dragElement;
-            dragElement = 0;
-            }
+      delete dragElement;
+      dragElement = 0;
 
       const QMimeData* data = event->mimeData();
 

@@ -438,10 +438,8 @@ Style::Style(const Style& s)
 
 Style& Style::operator=(const Style& s)
       {
-      if (_chordList) {
-            delete _chordList;
-            _chordList = 0;
-            }
+      delete _chordList;
+      _chordList = 0;
       foreach(const StyleVal& sv, s)
             set(sv);
       return *this;
@@ -453,8 +451,7 @@ Style& Style::operator=(const Style& s)
 
 Style::~Style()
       {
-      if (_chordList)
-            delete _chordList;
+      delete _chordList;
       }
 
 //---------------------------------------------------------
@@ -482,6 +479,33 @@ TextStyle::TextStyle(
 #else
 	family = _family;
 #endif
+      }
+
+//---------------------------------------------------------
+//   operator!=
+//---------------------------------------------------------
+
+bool TextStyle::operator!=(const TextStyle& s) const
+      {
+      return s.name                   != name
+          || s.family                 != family
+          || s.size                   != size
+          || s.bold                   != bold
+          || s.italic                 != italic
+          || s.underline              != underline
+          || s.align                  != align
+          || s.xoff                   != xoff
+          || s.yoff                   != yoff
+          || s.rxoff                  != rxoff
+          || s.ryoff                  != ryoff
+          || s.offsetType             != offsetType
+          || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
+          || s.frameWidth             != frameWidth
+          || s.paddingWidth           != paddingWidth
+          || s.frameRound             != frameRound
+          || s.frameColor             != frameColor
+          || s.circle                 != circle
+          || s.systemFlag             != systemFlag;
       }
 
 //---------------------------------------------------------

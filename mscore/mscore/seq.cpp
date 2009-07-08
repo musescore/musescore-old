@@ -94,8 +94,7 @@ Seq::Seq()
 
 Seq::~Seq()
       {
-      if (driver)
-            delete driver;
+      delete driver;
       }
 
 //---------------------------------------------------------

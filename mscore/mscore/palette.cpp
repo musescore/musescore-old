@@ -332,8 +332,7 @@ void Palette::add(int idx, Element* s, const QString& name)
       PaletteCell* cell = new PaletteCell;
 
       if (idx < cells.size()) {
-            if (cells[idx])
-                  delete cells[idx];
+            delete cells[idx];
             }
       else {
             for (int i = cells.size(); i <= idx; ++i)

@@ -150,7 +150,7 @@ void Preferences::init()
       showStatusBar      = true;
       playPanelPos       = QPoint(100, 300);
 
-#if defined(Q_WS_MAC) || defined(__MINGW32__) 
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = false;
       useJackAudio       = false;
       usePortaudioAudio  = true;
@@ -1163,6 +1163,11 @@ Shortcut* getShortcut(const char* id)
 QAction* getAction(const char* id)
       {
       Shortcut* s = getShortcut(id);
+      return getAction(s);
+      }
+
+QAction* getAction(Shortcut* s)
+      {
       if (s == 0)
             return 0;
       if (s->action == 0) {

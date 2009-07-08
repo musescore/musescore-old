@@ -115,8 +115,7 @@ PageSettings::PageSettings(QWidget* parent)
 
 PageSettings::~PageSettings()
       {
-      if (preview)
-            delete preview;
+      delete preview;
       }
 
 //---------------------------------------------------------
