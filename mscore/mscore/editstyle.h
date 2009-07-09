@@ -43,10 +43,11 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void getValues();
       void setValues();
 
-   private slots:
-      void ok();
       void apply();
+
+   private slots:
       void selectChordDescriptionFile();
+      void buttonClicked(QAbstractButton*);
 
    public:
       EditStyle(Score*, QWidget*);

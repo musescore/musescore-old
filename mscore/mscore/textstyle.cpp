@@ -62,7 +62,6 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(textNames, SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
 
       current   = -1;
-      undoLevel = 0;
       textNames->setCurrentItem(textNames->item(0));
       }
 
@@ -108,18 +107,16 @@ void TextStyleDialog::buttonClicked(QAbstractButton* b)
       switch (bb->standardButton(b)) {
             case QDialogButtonBox::Apply:
                   apply();
-                  ++undoLevel;
                   break;
             case QDialogButtonBox::Ok:
                   apply();
                   done(1);
                   break;
             default:
-                  while (undoLevel--)
-                        cs->undo()->undo();
+                  cs->undo()->current()->unwind();
+                  cs->setLayoutAll(true);
                   done(0);
-            cs->setLayoutAll(true);
-            cs->end();
+                  break;
             }
       }
 
@@ -143,10 +140,8 @@ void TextStyleDialog::apply()
             }
       if (!styleChanged)
             return;
-
-      cs->startCmd();
       cs->undo()->push(new ChangeTextStyles(cs, styles));
-      cs->endCmd();
-      cs->setDirty(true);
+      cs->setLayoutAll(true);
+      cs->end();
       }
 

@@ -285,8 +285,6 @@ class MuseScore : public QMainWindow {
       void startPreferenceDialog();
       void startExcerptsDialog();
       void preferencesChanged();
-      void editStyle();
-      void editTextStyle();
       void seqStarted();
       void seqStopped();
       void closePlayPanel();

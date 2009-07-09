@@ -1976,6 +1976,24 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("mirror note head"),
          &flipIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "edit-style",
+         QT_TR_NOOP("Edit Style..."),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("edit style"),
+         QT_TR_NOOP("edit style")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "edit-text-style",
+         QT_TR_NOOP("Edit Text Style..."),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("edit text style"),
+         QT_TR_NOOP("edit text style")
+         ),
       Shortcut(0, "", "", QKeySequence::UnknownKey),
       };
 

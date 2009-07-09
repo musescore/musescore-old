@@ -31,6 +31,7 @@
 #include "sig.h"
 #include "tempo.h"
 #include "input.h"
+#include "style.h"
 
 class ElementList;
 class Element;
@@ -68,10 +69,12 @@ class UndoCommand {
       QList<UndoCommand*> childList;
 
    public:
+      ~UndoCommand();
       virtual void undo();
       virtual void redo();
       void appendChild(UndoCommand* cmd) { childList.append(cmd);   }
       int childCount() const             { return childList.size(); }
+      void unwind();
       };
 
 //---------------------------------------------------------
@@ -95,16 +98,16 @@ class UndoStack : public QObject {
       UndoStack();
       ~UndoStack();
 
-      bool active() const                   { return curCmd != 0; }
+      bool active() const           { return curCmd != 0; }
       void beginMacro();
       void endMacro(bool rollback);
       void push(UndoCommand*);
       void setClean();
-      bool canUndo() const                  { return curIdx > 0;           }
-      bool canRedo() const                  { return curIdx < list.size(); }
-      bool isClean() const                  { return cleanIdx == curIdx;   }
-      void setGroup(UndoGroup* g)           { group = g;                   }
-      const UndoCommand* current() const    { return curCmd;               }
+      bool canUndo() const          { return curIdx > 0;           }
+      bool canRedo() const          { return curIdx < list.size(); }
+      bool isClean() const          { return cleanIdx == curIdx;   }
+      void setGroup(UndoGroup* g)   { group = g;                   }
+      UndoCommand* current() const  { return curCmd;               }
       void undo();
       void redo();
       };
@@ -1090,6 +1093,20 @@ class ChangeStretch : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeStyle
+//---------------------------------------------------------
+
+class ChangeStyle : public UndoCommand {
+      Score* score;
+      Style style;
+      void flip();
+
+   public:
+      ChangeStyle(Score*, const Style&);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
 
 #endif
 

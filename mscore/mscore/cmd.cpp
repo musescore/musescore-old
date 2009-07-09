@@ -71,6 +71,8 @@
 #include "measure.h"
 #include "tempo.h"
 #include "undo.h"
+#include "editstyle.h"
+#include "textstyle.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -2445,6 +2447,14 @@ void Score::cmd(const QString& cmd)
                   resetUserStretch();
             else if (cmd == "mirror-note")
                   cmdMirrorNoteHead();
+            else if (cmd == "edit-style") {
+                  EditStyle es(this, 0);
+                  es.exec();
+                  }
+            else if (cmd == "edit-text-style") {
+                  TextStyleDialog es(0, this);
+                  es.exec();
+                  }
             else if (cmd == "")
                   ;
             else
