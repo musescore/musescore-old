@@ -1292,9 +1292,19 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
+      if (noteEntryMode())
+            cmdEnterRest();
+
       ChordRest* cr = getSelectedChordRest();
       if (cr == 0)
             return;
+
+      int ticks = cr->tickLen();
+      if (ticks == 0)
+            ticks = cr->measure()->tickLen();
+      int tick = cr->tick();
+      int tz, tn;
+      getSigmap()->timesig(tick, tz, tn);
 
       int normalNotes=2, actualNotes=3;
       switch (n) {
@@ -1311,8 +1321,14 @@ void Score::cmdTuplet(int n)
                   actualNotes = 4;
                   break;
             case 5:                       // quintuplet
-                  normalNotes = 4;
+                  {
+                  // HACK: whole measure rest with time signature 6/8
+                  if (ticks == (3 * division) &&  tz == 6 && tn == 8)
+                        normalNotes = 6;
+                  else
+                        normalNotes = 4;
                   actualNotes = 5;
+                  }
                   break;
             case 6:                       // sextuplet
                   normalNotes = 4;
@@ -1335,14 +1351,13 @@ void Score::cmdTuplet(int n)
                   return;
             }
 
-      int baseLen    = cr->tickLen() / normalNotes;
-
+      int baseLen = ticks / normalNotes;
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
       tuplet->setTrack(cr->track());
-      tuplet->setTick(cr->tick());
+      tuplet->setTick(tick);
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
       cmdCreateTuplet(cr, tuplet);

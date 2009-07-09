@@ -26,6 +26,7 @@
 #include "sym.h"
 #include "icons.h"
 #include "mscore.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   EditStyle
@@ -54,8 +55,6 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       stemGroups[3]->addButton(voice4Down);
 
       pageList->setCurrentRow(0);
-      connect(buttonOk, SIGNAL(clicked()), this, SLOT(ok()));
-      connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
 
       articulationTable->verticalHeader()->setVisible(false);
       articulationTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -78,17 +77,30 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
             articulationTable->setCellWidget(i, 1, cb);
             }
       setValues();
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
       connect(chordDescriptionFileButton, SIGNAL(clicked()), SLOT(selectChordDescriptionFile()));
       }
 
 //---------------------------------------------------------
-//   ok
+//   buttonClicked
 //---------------------------------------------------------
 
-void EditStyle::ok()
+void EditStyle::buttonClicked(QAbstractButton* b)
       {
-      apply();
-      close();
+      switch (buttonBox->standardButton(b)) {
+            case QDialogButtonBox::Apply:
+                  apply();
+                  break;
+            case QDialogButtonBox::Ok:
+                  apply();
+                  done(1);
+                  break;
+            default:
+                  cs->undo()->current()->unwind();
+                  cs->setLayoutAll(true);
+                  done(0);
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -98,17 +110,9 @@ void EditStyle::ok()
 void EditStyle::apply()
       {
       getValues();
-      if (cs->styleB(ST_concertPitch) != lstyle[ST_concertPitch].toBool()) {
-            cs->startCmd();
-            cs->cmdConcertPitchChanged(lstyle[ST_concertPitch].toBool());
-            cs->endCmd();
-            }
-      cs->setStyle(lstyle);
-      cs->startCmd();
-      cs->textStyleChanged(cs->textStyles());
+      cs->undo()->push(new ChangeStyle(cs, lstyle));
       cs->setLayoutAll(true);
-      cs->endCmd();
-      cs->setClean(false);
+      cs->end();
       }
 
 //---------------------------------------------------------

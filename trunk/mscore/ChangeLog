@@ -1,3 +1,14 @@
+9.jul (ws)
+      - extended tuplet entry in note edit mode: its not necessary anymore to first create
+        a chord/rest of the total tuplet duration. Instead you can create the tuplet directly after
+        selecting the total duration.
+      - use button box in style dialog instead of single buttons
+      - add "apply" button to style dialog
+      - style changes are now undoable
+      - fixed missing initialization for dynamics type (bug was: part dynamics do not
+        affect playback)
+      - added special case for 5:6 tuplet in 6/8 timesig
+      - fixed changing a whole measure rest into a tuplet
 8.jul (ws)
       - "change stretch" is now undoable
       - various cleanups

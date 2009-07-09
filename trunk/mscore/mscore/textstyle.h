@@ -39,8 +39,6 @@ class TextStyleDialog : public QDialog {
       int current;
       QDialogButtonBox* bb;
 
-      int undoLevel;
-
       void saveStyle(int);
       void apply();
 

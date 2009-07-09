@@ -61,6 +61,16 @@
 extern Measure* tick2measure(int tick);
 
 //---------------------------------------------------------
+//   UndoCommand
+//---------------------------------------------------------
+
+UndoCommand::~UndoCommand()
+      {
+      foreach(UndoCommand* c, childList)
+            delete c;
+      }
+
+//---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
 
@@ -81,6 +91,20 @@ void UndoCommand::redo()
       for (int i = 0; i < n; ++i)
             childList[i]->redo();
       }
+
+//---------------------------------------------------------
+//   unwind
+//---------------------------------------------------------
+
+void UndoCommand::unwind()
+      {
+      while (!childList.isEmpty()) {
+            UndoCommand* c = childList.takeLast();
+            c->undo();
+            delete c;
+            }
+      }
+
 
 //---------------------------------------------------------
 //   UndoStack
@@ -2112,6 +2136,31 @@ void ChangeStretch::flip()
       double oStretch = measure->userStretch();
       measure->setUserStretch(stretch);
       stretch = oStretch;
+      }
+
+//---------------------------------------------------------
+//   ChangeStyle
+//---------------------------------------------------------
+
+ChangeStyle::ChangeStyle(Score* s, const Style& st)
+   : score(s), style(st)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeStyle::flip()
+      {
+      Style tmp = score->style();
+
+      if (score->styleB(ST_concertPitch) != style[ST_concertPitch].toBool())
+            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool());
+
+      score->setStyle(style);
+      style = tmp;
+      score->textStyleChanged(score->textStyles());
       }
 
 

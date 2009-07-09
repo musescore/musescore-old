@@ -677,8 +677,8 @@ MuseScore::MuseScore()
 
       menuStyle = mb->addMenu(tr("&Style"));
       menuStyle->setObjectName("Style");
-      menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
-      menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
+      menuStyle->addAction(getAction("edit-style"));
+      menuStyle->addAction(getAction("edit-text-style"));
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));
@@ -991,16 +991,6 @@ static void usage(const char* prog, const char*)
       }
 
 //---------------------------------------------------------
-//   editTextStyle
-//---------------------------------------------------------
-
-void MuseScore::editTextStyle()
-      {
-      TextStyleDialog dialog(this, cs);
-      dialog.exec();
-      }
-
-//---------------------------------------------------------
 //   loadScoreList
 //    read list of "Recent Scores"
 //---------------------------------------------------------
@@ -1200,16 +1190,6 @@ void MuseScore::showElementContext(Element* el)
       {
       startPageListEditor();
       pageListEdit->setElement(el);
-      }
-
-//---------------------------------------------------------
-//   editStyle
-//---------------------------------------------------------
-
-void MuseScore::editStyle()
-      {
-      EditStyle es(cs, this);
-      es.exec();
       }
 
 //---------------------------------------------------------

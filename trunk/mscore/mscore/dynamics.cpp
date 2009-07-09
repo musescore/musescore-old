@@ -71,12 +71,15 @@ Dynamic::Dynamic(Score* s)
       {
       _velocity = -1;
       setTextStyle(TEXT_STYLE_DYNAMICS);
+      _dynType  = DYNAMIC_PART;
       }
 
 Dynamic::Dynamic(const Dynamic& d)
    : Text(d)
       {
       setSubtype(subtype());
+      _velocity = d._velocity;
+      _dynType  = d._dynType;
       }
 
 //---------------------------------------------------------
