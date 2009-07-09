@@ -1441,12 +1441,12 @@ void Score::printFile()
       printerDev->setDoubleSidedPrinting(pageFormat()->twosided);
       printerDev->setOutputFormat(QPrinter::NativeFormat);
 
-#ifndef __MINGW32__
+#if defined(Q_WS_MAC) || defined(__MINGW32__) 
+      printerDev->setOutputFileName("");
+#else
       // when setting this on windows platform, pd.exec() does not
       // show dialog
-      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");
-#else
-      printerDev->setOutputFileName("");
+      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");      
 #endif
 
       QPrintDialog pd(printerDev, 0);
