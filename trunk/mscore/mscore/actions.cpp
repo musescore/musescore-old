@@ -1982,8 +1982,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Edit Style..."),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("edit style"),
-         QT_TR_NOOP("edit style")
+         QT_TR_NOOP("Edit Style..."),
+         QT_TR_NOOP("Edit Style...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1991,8 +1991,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Edit Text Style..."),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("edit text style"),
-         QT_TR_NOOP("edit text style")
+         QT_TR_NOOP("Edit Text Style..."),
+         QT_TR_NOOP("Edit Text Style...")
          ),
       Shortcut(0, "", "", QKeySequence::UnknownKey),
       };

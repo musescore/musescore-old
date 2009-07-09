@@ -9,6 +9,9 @@
         affect playback)
       - added special case for 5:6 tuplet in 6/8 timesig
       - fixed changing a whole measure rest into a tuplet
+      (db)
+      - fix capitalization on Style menu items
+      - add the PDF handbook script
 8.jul (ws)
       - "change stretch" is now undoable
       - various cleanups
