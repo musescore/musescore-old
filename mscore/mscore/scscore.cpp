@@ -158,6 +158,7 @@ QScriptValue ScScore::newInstance(const QString& name)
             s = mscore->createDefaultName();
       ns->setName(s);
       mscore->appendScore(ns);
+      ns->startCmd();
       return newInstance(ns);
       }
 
@@ -296,13 +297,13 @@ bool ScScorePrototype::savePng(const QString& name)
 
 bool ScScorePrototype::savePng(const QString& name, bool screenshot, bool transparent, double convDpi, bool grayscale)
       {
-      
+
       QImage::Format f;
       if (grayscale)
           f = QImage::Format_Indexed8;
       else
           f = QImage::Format_ARGB32_Premultiplied;
-          
+
       return thisScore()->savePng(name, screenshot, transparent, convDpi, f);
       }
 
@@ -345,7 +346,7 @@ bool ScScorePrototype::saveWav(const QString& name, const QString& soundFont)
       if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
         QString save = preferences.soundFont;
         preferences.soundFont = soundFont;
-        result = thisScore()->saveWav(name); 
+        result = thisScore()->saveWav(name);
         preferences.soundFont = save;
       }
       return result;
@@ -371,12 +372,12 @@ bool ScScorePrototype::saveOgg(const QString& name, const QString& soundFont)
       if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
         QString save = preferences.soundFont;
         preferences.soundFont = soundFont;
-        result = thisScore()->saveOgg(name); 
+        result = thisScore()->saveOgg(name);
         preferences.soundFont = save;
       }
       return result;
       }
-      
+
 //---------------------------------------------------------
 //   saveFlac
 //---------------------------------------------------------
@@ -397,7 +398,7 @@ bool ScScorePrototype::saveFlac(const QString& name, const QString& soundFont)
       if(soundFont.endsWith(".sf2",Qt::CaseInsensitive)){
         QString save = preferences.soundFont;
         preferences.soundFont = soundFont;
-        result = thisScore()->saveFlac(name); 
+        result = thisScore()->saveFlac(name);
         preferences.soundFont = save;
       }
       return result;
@@ -410,7 +411,7 @@ bool ScScorePrototype::saveFlac(const QString& name, const QString& soundFont)
 
 void ScScorePrototype::setExpandRepeat(bool expandRepeat)
       {
-      getAction("repeat")->setChecked(expandRepeat); 
+      getAction("repeat")->setChecked(expandRepeat);
       preferences.midiExpandRepeats = expandRepeat;
       thisScore()->updateRepeatList(expandRepeat);
       }
