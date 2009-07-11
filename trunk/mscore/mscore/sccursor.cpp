@@ -49,10 +49,12 @@ SCursor::SCursor(Score* s)
 
 ChordRest* SCursor::cr() const
       {
-      int track = _staffIdx * VOICES + _voice;
-      Element* e = _segment->element(track);
-      if (e->isChordRest())
-            return static_cast<ChordRest*>(e);
+      if (_segment) {
+            int track = _staffIdx * VOICES + _voice;
+            Element* e = _segment->element(track);
+            if (e->isChordRest())
+                  return static_cast<ChordRest*>(e);
+            }
       return 0;
       }
 
