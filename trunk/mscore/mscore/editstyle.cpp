@@ -110,6 +110,8 @@ void EditStyle::buttonClicked(QAbstractButton* b)
 void EditStyle::apply()
       {
       getValues();
+      if (cs->style(ST_chordDescriptionFile).toString() != lstyle[ST_chordDescriptionFile].toString())
+            lstyle.clearChordList();
       cs->undo()->push(new ChangeStyle(cs, lstyle));
       cs->setLayoutAll(true);
       cs->end();
@@ -317,15 +319,15 @@ void EditStyle::setValues()
 
 void EditStyle::selectChordDescriptionFile()
       {
+      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(chordDescriptionFile->text());
       QString fn = QFileDialog::getOpenFileName(
          0, QWidget::tr("MuseScore: Load Chord Description"),
-         QString("%1styles/").arg(mscoreGlobalShare),
-            QWidget::tr("MuseScore Chord Description (*.xml);;"
-            "All Files (*)"
-            )
+         path,
+         QWidget::tr("MuseScore Chord Description (*.xml);;All Files (*)")
          );
       if (fn.isEmpty())
             return;
-      chordDescriptionFile->setText(fn);
+      QFileInfo fi(fn);
+      chordDescriptionFile->setText(fi.fileName());
       }
 

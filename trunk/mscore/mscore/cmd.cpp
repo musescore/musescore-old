@@ -1299,7 +1299,7 @@ void Score::cmdAddChordName2()
             const Harmony* h = ce.harmony();
             s->setRootTpc(h->rootTpc());
             s->setBaseTpc(h->baseTpc());
-            s->setDescr(h->descr());
+            s->setId(h->id());
             s->clearDegrees();
             for (int i = 0; i < h->numberOfDegrees(); i++)
                   s->addDegree(h->degree(i));
