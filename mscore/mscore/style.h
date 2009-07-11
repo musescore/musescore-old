@@ -321,6 +321,7 @@ class Style : public QVector<StyleVal> {
       bool isDefault(int);
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
+      void clearChordList();
       void set(const StyleVal&);
       void set(StyleIdx t, Spatium val)     { set(StyleVal(t, val)); }
       void set(StyleIdx t, double val)      { set(StyleVal(t, val)); }

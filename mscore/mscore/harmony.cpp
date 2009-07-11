@@ -294,7 +294,7 @@ QString Harmony::harmonyName() const
       {
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
 
-      HChord hc = _descr ? _descr->chord : HChord();
+      HChord hc = descr() ? descr()->chord : HChord();
       QString s;
 
       if (!_degreeList.isEmpty()) {
@@ -318,9 +318,9 @@ QString Harmony::harmonyName() const
             } // end if (degreeList ...
       else {
             s = tpc2name(_rootTpc, germanNames);
-            if (_descr) {
+            if (descr()) {
                   s += " ";
-                  s += _descr->name;
+                  s += descr()->name;
                   }
             }
       if (_baseTpc != INVALID_TPC) {
@@ -341,7 +341,7 @@ void Harmony::resolveDegreeList()
       if (_degreeList.isEmpty())
             return;
 
-      HChord hc = _descr ? _descr->chord : HChord();
+      HChord hc = descr() ? descr()->chord : HChord();
 
       hc.add(_degreeList);
 
@@ -354,7 +354,7 @@ void Harmony::resolveDegreeList()
       foreach(const ChordDescription* cd, *cl) {
             if ((cd->chord == hc) && !cd->name.isEmpty()) {
 printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->name));
-                  _descr = cd;
+                  _id = cd->id;
                   _degreeList.clear();
                   return;
                   }
@@ -374,7 +374,7 @@ Harmony::Harmony(Score* score)
 
       _rootTpc   = INVALID_TPC;
       _baseTpc   = INVALID_TPC;
-      _descr     = 0;
+      _id        = -1;
       }
 
 Harmony::Harmony(const Harmony& h)
@@ -382,7 +382,7 @@ Harmony::Harmony(const Harmony& h)
       {
       _rootTpc    = h._rootTpc;
       _baseTpc    = h._baseTpc;
-      _descr      = h._descr;
+      _id         = h._id;
       _degreeList = h._degreeList;
       }
 
@@ -438,8 +438,8 @@ void Harmony::write(Xml& xml) const
       xml.stag("Harmony");
       if (_rootTpc != INVALID_TPC) {
             xml.tag("root", _rootTpc);
-            if (_descr)
-                  xml.tag("extension", _descr->id);
+            if (_id != -1)
+                  xml.tag("extension", _id);
             if (_baseTpc != INVALID_TPC)
                   xml.tag("base", _baseTpc);
             for (int i = 0; i < _degreeList.size(); i++) {
@@ -492,7 +492,7 @@ void Harmony::read(QDomElement e)
                         setBaseTpc(table[i-1]);    // obsolete
                   }
             else if (tag == "extension")
-                  setChordId(i);
+                  setId(i);
             else if (tag == "root") {
                   if (score()->mscVersion() >= 106)
                         setRootTpc(i);
@@ -617,19 +617,21 @@ static int convertRoot(const QString& s, bool germanNames)
 //    return ChordDescription
 //---------------------------------------------------------
 
-const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int* base)
+void Harmony::parseHarmony(const QString& ss, int* root, int* base)
       {
+      _id = -1;
       QString s = ss.simplified();
+      _userName = s;
       int n = s.size();
       if (n < 1) {
             printf("harmony is empty %d\n", tick());
-            return 0;
+            return;
             }
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
             printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
-            return 0;
+            return;
             }
       *root = r;
       int idx = ((n > 1) && ((s[1] == 'b') || (s[1] == '#'))) ? 2 : 1;
@@ -640,17 +642,18 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
             s     = s.mid(idx, slash - idx);
             *base = convertRoot(bs, germanNames);
             }
-      else {
+      else
             s = s.mid(idx).simplified();
-            }
       s = s.toLower();
       ChordList* cl = score()->style().chordList();
       foreach(const ChordDescription* cd, *cl) {
-            if (cd->name.toLower() == s)
-                  return cd;
+            if (cd->name.toLower() == s) {
+                  _id = cd->id;
+                  return;
+                  }
             }
+      _userName = s;
       printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -675,11 +678,10 @@ void Harmony::endEdit()
       Text::endEdit();
 
       int r, b;
-      const ChordDescription* e = parseHarmony(getText(), &r, &b);
-      if (e) {
+      parseHarmony(getText(), &r, &b);
+      if (_id != -1) {
             setRootTpc(r);
             setBaseTpc(b);
-            setDescr(e);
             render();
             }
       else {
@@ -690,7 +692,7 @@ void Harmony::endEdit()
 
             setRootTpc(INVALID_TPC);
             setBaseTpc(INVALID_TPC);
-            setDescr(0);
+            _id = -1;
             }
       }
 
@@ -770,12 +772,12 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
       }
 
 //---------------------------------------------------------
-//   setChordId
+//   descr
 //---------------------------------------------------------
 
-void Harmony::setChordId(int id)
+const ChordDescription* Harmony::descr() const
       {
-      _descr = score()->style().chordDescription(id);
+      return score()->style().chordDescription(_id);
       }
 
 //---------------------------------------------------------
@@ -956,6 +958,19 @@ void ChordDescription::read(QDomElement e)
                   readRenderList(val, renderList);
             else
                   domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   ~ChordList
+//---------------------------------------------------------
+
+ChordList::~ChordList()
+      {
+      QMapIterator<int, const ChordDescription*> i(*this);
+      while(i.hasNext()) {
+            i.next();
+            delete i.value();
             }
       }
 
@@ -1148,10 +1163,6 @@ void Harmony::render(const TextStyle* st)
             if (cf.family.isEmpty() || cf.family == "default")
                   fontList.append(st->fontPx(spatium() * cf.mag));
             else {
-//No more needed ?
-//#ifdef Q_WS_MAC
-//                  s += " 20";
-//#endif
                   QFont ff(st->fontPx(spatium() * cf.mag));
                   ff.setFamily(cf.family);
                   fontList.append(ff);
@@ -1166,8 +1177,8 @@ void Harmony::render(const TextStyle* st)
 
       double x = 0.0, y = 0.0;
       render(chordList->renderListRoot, x, y, _rootTpc);
-      if (_descr)
-            render(_descr->renderList, x, y, 0);
+      if (descr())
+            render(descr()->renderList, x, y, 0);
       if (_baseTpc != INVALID_TPC)
             render(chordList->renderListBase, x, y, _baseTpc);
       }

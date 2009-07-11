@@ -2803,7 +2803,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
             d = ha->fromXml(kind);
             if (d) {
-                  ha->setDescr(d);
+                  ha->setId(d->id);
                   foreach(const HDegree& d, degreeList)
                         ha->addDegree(d);
                   ha->resolveDegreeList();
@@ -2816,7 +2816,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   }
             }
       else {
-            ha->setDescr(d);
+            ha->setId(d->id);
 //            ha->resolveDegreeList();
             ha->render();
             }

@@ -1902,6 +1902,8 @@ void MuseScore::cmd(QAction* a)
             showNavigator(a->isChecked());
       else if (cmd == "toggle-mixer")
             showMixer(a->isChecked());
+      else if (cmd == "show-keys")
+            ;
       else {
             if (cs)
                   cs->cmd(cmd);

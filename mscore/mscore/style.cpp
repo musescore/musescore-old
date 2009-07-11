@@ -837,3 +837,13 @@ void Style::set(const StyleVal& val)
       (*this)[val.getIdx()] = val;
       }
 
+//---------------------------------------------------------
+//   clearChordList
+//---------------------------------------------------------
+
+void Style::clearChordList()
+      {
+      delete _chordList;
+      _chordList = 0;
+      }
+

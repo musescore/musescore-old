@@ -131,7 +131,7 @@ void ChordEdit::setHarmony(const Harmony* h)
       _harmony = h->clone();
       setRoot(h->rootTpc());
       setBase(h->baseTpc());
-      setExtension(h->chordId());
+      setExtension(h->id());
 
       for (int i = 0; i < h->numberOfDegrees(); ++i)
             addDegree(h->degree(i));
@@ -298,7 +298,7 @@ void ChordEdit::chordChanged()
             _harmony->addDegree(degree(i));
       _harmony->setRootTpc(root());
       _harmony->setBaseTpc(base());
-      _harmony->setDescr(extension());
+      _harmony->setId(extension()->id);
       QString s = _harmony->harmonyName();
       chordLabel->setText(s);
       }

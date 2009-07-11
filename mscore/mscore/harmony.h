@@ -53,7 +53,6 @@ class HDegree {
 //---------------------------------------------------------
 
 class HChord {
-//      static const HChord C0;
       QString str;
 
    protected:
@@ -159,6 +158,7 @@ class ChordList : public QMap<int, const ChordDescription*> {
       QList<RenderAction> renderListBase;
 
       ChordList() {}
+      ~ChordList();
       bool read(const QString& path);
       void read(QDomElement);
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }
@@ -205,11 +205,11 @@ class Harmony : public Text {
       int _rootTpc;                       // root note for chord
       int _baseTpc;                       // bass note or chord base; used for "slash" chords
                                           // or notation of base note in chord
-      const ChordDescription* _descr;     // chord description
+      int _id;
+      QString _userName;
 
       QList<HDegree> _degreeList;
-
-      QList<QFont> fontList;               // temp values used in render()
+      QList<QFont> fontList;              // temp values used in render()
       QList<TextSegment*> textList;       // rendered chord
 
       virtual void draw(QPainter&) const;
@@ -223,8 +223,10 @@ class Harmony : public Text {
       virtual ElementType type() const         { return HARMONY; }
       Measure* measure()                       { return (Measure*)parent(); }
 
-      void setDescr(const ChordDescription* d) { _descr = d; }
-      const ChordDescription* descr() const    { return _descr; }
+      void setId(int d)                        { _id = d; }
+      int id() const                           { return _id;           }
+
+      const ChordDescription* descr() const;
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
@@ -237,7 +239,6 @@ class Harmony : public Text {
       void setBaseTpc(int val)                 { _baseTpc = val;       }
       int rootTpc() const                      { return _rootTpc;      }
       void setRootTpc(int val)                 { _rootTpc = val;       }
-      int chordId() const                      { return _descr ? _descr->id : 0; }
       void addDegree(const HDegree& d)         { _degreeList << d;            }
       int numberOfDegrees() const              { return _degreeList.size();   }
       HDegree degree(int i) const              { return _degreeList.value(i); }
@@ -247,15 +248,15 @@ class Harmony : public Text {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       QString harmonyName() const;
-      QString extensionName() const        { return _descr ? _descr->name : QString(); }
       void render(const TextStyle* ts = 0);
 
-      const ChordDescription* parseHarmony(const QString& s, int* root, int* base);
-      QString xmlKind() const          { return _descr ? _descr->xmlKind : QString(); }
-      QStringList xmlDegrees() const   { return _descr ? _descr->xmlDegrees : QStringList(); }
+      void parseHarmony(const QString& s, int* root, int* base);
+
+      QString extensionName() const    { return _id != -1 ? descr()->name       : _userName;     }
+      QString xmlKind() const          { return _id != -1 ? descr()->xmlKind    : QString();     }
+      QStringList xmlDegrees() const   { return _id != -1 ? descr()->xmlDegrees : QStringList(); }
 
       void resolveDegreeList();
-      void setChordId(int id);
 
       virtual void textStyleChanged(const QVector<TextStyle*>&s);
       virtual bool isEmpty() const;
