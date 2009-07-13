@@ -1393,6 +1393,10 @@ fallou:</translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1694,18 +1698,6 @@ fallou:</translation>
     <message>
         <source>Voice 4</source>
         <translation>Voz 4</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Aplicar</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>Aceptar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
     </message>
     <message>
         <source>System</source>
@@ -5167,6 +5159,14 @@ antes de fechar?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: Gardar unha copia</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

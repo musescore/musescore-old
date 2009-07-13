@@ -1,3 +1,6 @@
+13.jul (ws)
+      - fix: could not set start repeat barline to first measure if first measure was preceeded by
+        a horizontal box
 9.jul (ws)
       - extended tuplet entry in note edit mode: its not necessary anymore to first create
         a chord/rest of the total tuplet duration. Instead you can create the tuplet directly after

@@ -1393,6 +1393,10 @@ fejl:</translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1694,18 +1698,6 @@ fejl:</translation>
     <message>
         <source>Voice 4</source>
         <translation>Stemme 4</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Indsæt</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Fortryd</translation>
     </message>
     <message>
         <source>System</source>
@@ -5165,6 +5157,14 @@ før lukning?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Gem en kopi</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

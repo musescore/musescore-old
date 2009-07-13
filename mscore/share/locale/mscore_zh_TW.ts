@@ -1393,6 +1393,10 @@ failed: </source>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1646,18 +1650,6 @@ failed: </source>
     <message>
         <source>use german names</source>
         <translation>使用德國式名稱</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>套用</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
     </message>
     <message>
         <source>System</source>
@@ -5177,6 +5169,14 @@ before closing?</source>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore：儲存副本</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

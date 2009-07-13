@@ -1394,6 +1394,10 @@ feilet:</translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1736,18 +1740,6 @@ feilet:</translation>
     <message>
         <source>Voice 4</source>
         <translation>Stemme 4</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Bruk</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Avbryt</translation>
     </message>
     <message>
         <source>accidental note distance</source>
@@ -5164,6 +5156,14 @@ før lukking?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Lagre en kopi</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

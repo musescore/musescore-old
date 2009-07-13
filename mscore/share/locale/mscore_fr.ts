@@ -1402,6 +1402,10 @@ failed: </source>
         <source>Stemless</source>
         <translation>Sans hampe</translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1647,18 +1651,6 @@ failed: </source>
     <message>
         <source>use german names</source>
         <translation>Utiliser les noms allemands</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
@@ -5176,6 +5168,14 @@ avant de fermer ?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore : Enregistrer une copie</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
