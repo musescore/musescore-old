@@ -5,7 +5,7 @@
 set (CMAKE_SYSTEM_NAME "Windows")
 
 set (CROSS C:/mingw)
-set (CROSSQT C:/Qt/2009.02/qt)
+set (CROSSQT C:/Qt/2009.03/qt)
 
 set (CMAKE_C_COMPILER     ${CROSS}/bin/gcc.exe)
 set (CMAKE_CXX_COMPILER   ${CROSS}/bin/g++.exe)
