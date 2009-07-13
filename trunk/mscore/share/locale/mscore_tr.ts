@@ -1392,6 +1392,10 @@ yapılamadı:</translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1693,18 +1697,6 @@ yapılamadı:</translation>
     <message>
         <source>Voice 4</source>
         <translation>Ses 4</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Uygula</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>TMM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>İptal</translation>
     </message>
     <message>
         <source>System</source>
@@ -5166,6 +5158,14 @@ kaydetmek ister misiniz?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Bir Kopyasını Kaydet</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

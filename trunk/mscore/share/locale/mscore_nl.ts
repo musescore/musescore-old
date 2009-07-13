@@ -1402,6 +1402,10 @@ failed: </source>
         <source>Stemless</source>
         <translation>Zonder stok</translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1656,18 +1660,6 @@ toonhoogte</translation>
     <message>
         <source>use german names</source>
         <translation>gebruik duitse namen</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Toepassen</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
@@ -5177,6 +5169,14 @@ voor dat u afsluit?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: Sla een kopie op</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

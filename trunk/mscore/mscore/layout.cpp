@@ -777,18 +777,22 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             //
             //    compute repeat bar lines
             //
+            bool firstMeasure = true;
             for (int i = 0; i < n; ++i) {
                   MeasureBase* mb = ml[i];
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
 
+                  // first measure repeat?
+                  bool fmr = firstMeasure && (m->repeatFlags() & RepeatStart);
+
                   if (i == (n-1)) {       // last measure in system?
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);
                         else if (m->endBarLineGenerated())
                               m->setEndBarLineType(NORMAL_BAR, true);
-                        needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
+                        needRelayout |= m->setStartRepeatBarLine(fmr);
                         }
                   else {
                         MeasureBase* mb = m->next();
@@ -798,7 +802,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         if (mb->type() == MEASURE)
                               nm = (Measure*)mb;
 
-                        needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
+                        needRelayout |= m->setStartRepeatBarLine(fmr);
                         if (m->repeatFlags() & RepeatEnd) {
                               if (nm && (nm->repeatFlags() & RepeatStart))
                                     m->setEndBarLineType(END_START_REPEAT, true);
@@ -811,6 +815,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   needRelayout |= m->createEndBarLines();
+                  firstMeasure = false;
                   }
             }
 

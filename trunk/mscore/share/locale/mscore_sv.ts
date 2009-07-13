@@ -1393,6 +1393,10 @@ misslyckades: </translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1735,18 +1739,6 @@ misslyckades: </translation>
     <message>
         <source>Voice 4</source>
         <translation>Stämma 4</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Verkställ</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Avbryt</translation>
     </message>
     <message>
         <source>accidental note distance</source>
@@ -5163,6 +5155,14 @@ före stängning?</translation>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Spara en kopia</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

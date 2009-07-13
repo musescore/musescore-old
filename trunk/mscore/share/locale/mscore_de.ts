@@ -1395,6 +1395,10 @@ fehlgeschlagen: </translation>
         <source>Stemless</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1460,18 +1464,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>every system</source>
         <translation>jedes System</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>interval</source>
@@ -5170,6 +5162,14 @@ before closing?</source>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Eine Kopie sichern</translation>
+    </message>
+    <message>
+        <source>edit style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>edit text style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
