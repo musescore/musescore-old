@@ -28,7 +28,6 @@
 #include "sccursor.h"
 #include "scnote.h"
 #include "scharmony.h"
-#include "scstyle.h"
 #include "sctext.h"
 #include "scbytearray.h"
 #include "scmeasure.h"
@@ -218,9 +217,6 @@ ScriptEngine::ScriptEngine()
 
       ScHarmony* harmonyClass = new ScHarmony(this);
       globalObject().setProperty("Harmony", harmonyClass->constructor());
-
-      ScStyle* styleClass = new ScStyle(this);
-      globalObject().setProperty("Style", styleClass->constructor());
 
       ScText* textClass = new ScText(this);
       globalObject().setProperty("Text", textClass->constructor());
