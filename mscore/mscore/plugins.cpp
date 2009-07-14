@@ -24,8 +24,11 @@
 #include "config.h"
 #include "scscore.h"
 #include "scchord.h"
+#include "screst.h"
 #include "sccursor.h"
 #include "scnote.h"
+#include "scharmony.h"
+#include "scstyle.h"
 #include "sctext.h"
 #include "scbytearray.h"
 #include "scmeasure.h"
@@ -161,11 +164,11 @@ void MuseScore::loadPlugins()
 bool MuseScore::loadPlugin(const QString& filename)
       {
       bool result = false;
-    
+
       QDir pluginDir(mscoreGlobalShare + "plugins");
       if (debugMode)
             printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
-      
+
       if (filename.endsWith(".js")){
         QFileInfo fi(pluginDir, filename);
         if (fi.exists()){
@@ -176,7 +179,7 @@ bool MuseScore::loadPlugin(const QString& filename)
         }
         return result;
       }
-      
+
 //---------------------------------------------------------
 //   ScriptEngine
 //---------------------------------------------------------
@@ -207,8 +210,17 @@ ScriptEngine::ScriptEngine()
       ScChord* chordClass = new ScChord(this);
       globalObject().setProperty("Chord", chordClass->constructor());
 
+      ScRest* restClass = new ScRest(this);
+      globalObject().setProperty("Rest", restClass->constructor());
+
       ScNote* noteClass = new ScNote(this);
       globalObject().setProperty("Note", noteClass->constructor());
+
+      ScHarmony* harmonyClass = new ScHarmony(this);
+      globalObject().setProperty("Harmony", harmonyClass->constructor());
+
+      ScStyle* styleClass = new ScStyle(this);
+      globalObject().setProperty("Style", styleClass->constructor());
 
       ScText* textClass = new ScText(this);
       globalObject().setProperty("Text", textClass->constructor());

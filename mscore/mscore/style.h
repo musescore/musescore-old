@@ -301,6 +301,7 @@ class StyleVal {
       const char* toString() const    { return v.s;  }
       Direction toDirection() const   { return v.d;  }
       StyleIdx getIdx() const         { return idx;  }
+      StyleVal(const QString& name, const QString& val);
       };
 
 //---------------------------------------------------------

@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id:$
 //
 //  Copyright (C) 2009 Werner Schweer and others
 //
@@ -18,34 +18,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCSCORE_H__
-#define __SCSCORE_H__
+#ifndef __SCHARMONY_H__
+#define __SCHARMONY_H__
 
-#include "score.h"
-
-typedef Score* ScorePtr;
+class Harmony;
+class Score;
+typedef Harmony* HarmonyPtr;
 
 //---------------------------------------------------------
-//   ScScore
-//    script proxy class for Score
+//   ScHarmony
 //---------------------------------------------------------
 
-class ScScore : public QObject, public QScriptClass {
+class ScHarmony : public QObject, public QScriptClass {
       static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const ScorePtr& ba);
-      static void fromScriptValue(const QScriptValue &obj, ScorePtr& ba);
+      static QScriptValue toScriptValue(QScriptEngine *eng, const HarmonyPtr& ba);
+      static void fromScriptValue(const QScriptValue &obj, HarmonyPtr& ba);
 
-      QScriptString scoreName, scoreStaves;
       QScriptValue proto;
       QScriptValue ctor;
 
    public:
-      ScScore(QScriptEngine* se);
-      ~ScScore() {}
+      ScHarmony(QScriptEngine* se);
+      ~ScHarmony() {}
 
       QScriptValue constructor() { return ctor; }
-      QScriptValue newInstance(const QString&);
-      QScriptValue newInstance(const ScorePtr&);
+      QScriptValue newInstance(Score*);
+      QScriptValue newInstance(const HarmonyPtr&);
       QueryFlags queryProperty(const QScriptValue& object,
          const QScriptString& name, QueryFlags flags, uint* id);
       QScriptValue property(const QScriptValue& obhect,
@@ -55,53 +53,40 @@ class ScScore : public QObject, public QScriptClass {
       QScriptValue::PropertyFlags propertyFlags(
          const QScriptValue& object, const QScriptString& name, uint id);
       QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
-      QString name() const           { return QLatin1String("Score"); }
+      QString name() const           { return QLatin1String("Harmony"); }
       QScriptValue prototype() const { return proto; }
       };
 
 //---------------------------------------------------------
-//   ScScorePrototype
+//   ScHarmonyPrototype
 //---------------------------------------------------------
 
-class ScScorePrototype : public QObject, public QScriptable
+class ScHarmonyPrototype : public QObject, public QScriptable
       {
       Q_OBJECT
-      Score* thisScore() const;
-      Q_PROPERTY(QString title READ title WRITE setTitle SCRIPTABLE true)
+      Q_PROPERTY(int id READ getId WRITE setId SCRIPTABLE true)
+      Q_PROPERTY(int root READ getRoot WRITE setRoot SCRIPTABLE true)
+      Q_PROPERTY(int base READ getBase WRITE setBase SCRIPTABLE true)
+
+      Harmony* thisHarmony() const;
 
    public:
-      ScScorePrototype(QObject *parent = 0) : QObject(parent) {}
-      ~ScScorePrototype() {}
+      ScHarmonyPrototype(QObject *parent = 0) : QObject(parent) {}
+      ~ScHarmonyPrototype() {}
+      int getId() const;
+      void setId(int);
+      int getRoot() const;
+      void setRoot(int);
+      int getBase() const;
+      void setBase(int);
 
    public slots:
-      bool saveXml(const QString& name);
-      bool saveMxl(const QString&);
-      bool saveMidi(const QString&);
-      bool savePng(const QString&);
-      bool savePng(const QString&, bool, bool, double, bool);
-      bool saveSvg(const QString&);
-      bool saveLilypond(const QString&);
-#ifdef HAS_AUDIOFILE
-      bool saveWav(const QString&);
-      bool saveWav(const QString&, const QString&);
-      bool saveFlac(const QString&);
-      bool saveFlac(const QString&, const QString&);
-      bool saveOgg(const QString&);
-      bool saveOgg(const QString&, const QString&);
-#endif
-      void setExpandRepeat(bool);
-      void appendPart(const QString& name);
-      void appendMeasures(int n);
-      void setTitle(const QString&);
-      QString title() const { return QString("dummy"); }
-      void startUndo()      { thisScore()->startCmd(); }
-      void endUndo()        { thisScore()->endCmd();   }
-      void setStyle(const QString& name, const QString& value);
       };
 
-Q_DECLARE_METATYPE(ScorePtr)
-Q_DECLARE_METATYPE(ScorePtr*)
-Q_DECLARE_METATYPE(ScScore*)
+Q_DECLARE_METATYPE(HarmonyPtr)
+Q_DECLARE_METATYPE(HarmonyPtr*)
+Q_DECLARE_METATYPE(ScHarmony*)
 
 #endif
+
 

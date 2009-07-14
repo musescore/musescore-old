@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,6 +23,8 @@
 #include "style.h"
 #include "sym.h"
 #include "drumset.h"
+#include "clef.h"
+#include "bracket.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
 
@@ -32,7 +34,18 @@ QList<InstrumentTemplate*> instrumentTemplates;
 
 InstrumentTemplate::InstrumentTemplate()
       {
-      drumset = 0;
+      staves        = 1;
+      clefIdx[0]    = CLEF_G;
+      staffLines[0] = 5;
+      smallStaff[0] = false;
+      bracket       = NO_BRACKET;
+      minPitchA     = 0;
+      maxPitchA     = 127;
+      minPitchP     = 0;
+      maxPitchP     = 127;
+      transpose     = 0;
+      useDrumset    = false;
+      drumset       = 0;
       }
 
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
@@ -189,23 +202,13 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             smallStaff[i] = false;
             }
       bracket    = -1;
-      minPitchA   = 0;
-      maxPitchA   = 127;
-      minPitchP   = 0;
-      maxPitchP   = 127;
+      minPitchA  = 0;
+      maxPitchA  = 127;
+      minPitchP  = 0;
+      maxPitchP  = 127;
       transpose  = 0;
       useDrumset = false;
 
-#ifdef Q_WS_MAC
-      QFont font("MScore1 20");
-#else
-      QFont font("MScore1");
-#endif
-#if 0       // TODOX
-      double extraMag = 1.0;
-      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
-      font.setPointSizeF(12.0 * mag);     // TODO: get from style
-#endif
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

@@ -23,12 +23,14 @@
 
 class Score;
 class Chord;
+class Rest;
 class Segment;
 class SCursor;
 class ChordRest;
 class Text;
 class Measure;
 
+typedef Rest* RestPtr;
 typedef Chord* ChordPtr;
 typedef Measure* MeasurePtr;
 typedef Text* TextPtr;
@@ -116,6 +118,7 @@ class ScSCursorPrototype : public QObject, public QScriptable
       void putStaffText(TextPtr);
       bool isChord() const;
       void addChord(ChordPtr);
+      void addRest(RestPtr);
       };
 
 Q_DECLARE_METATYPE(SCursor)
