@@ -1,3 +1,6 @@
+14.jul (ws)
+      - new plugin script to create score with all known chords
+      - some scripting extensions
 13.jul (ws)
       - fix: could not set start repeat barline to first measure if first measure was preceeded by
         a horizontal box

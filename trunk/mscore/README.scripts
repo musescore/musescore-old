@@ -83,6 +83,11 @@ Objects
             bool saveFlac(string path, string soundfontPath)
             setExpandRepeat(bool)
             appendPart(string partname)
+                  Append a new part to the score.
+                  "partname" refers to an instrument name in the file instruments.xml.
+                  The part will be initialized from the named instrument in this file.
+                  If "partname" is empty, a default part will be appended.
+
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
             endUndo()                     end undoable operations
@@ -104,6 +109,7 @@ Objects
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
             addChord(Chord)
+            addRest(Rest)
             measure()               return the current measure
             next()                  go to next segment
             nextMeasure()           go to first chord/rest of next measure
@@ -121,6 +127,15 @@ Objects
             removeNote(integer n)   remove note at index n
             integer notes()         return number of notes in chord
 
+   Rest
+         create:   var a = Rest()
+
+         Properties:
+            tickLen     integer
+
+         Functions:
+            addHarmony(Harmony)
+
    Note
          create:   var a = Note()
 
@@ -137,6 +152,18 @@ Objects
             text           string         the displayed text
             defaultFont    QFont
             color          QColor         text foreground color
+
+   Harmony
+         create:    var a = Harmony();
+
+         Properties:
+            id             int
+            root           int
+            base           int
+
+   Style
+
+   HarmonyInfo
 
    Measure
 

@@ -26,6 +26,7 @@
 
 #include "chordrest.h"
 #include "chord.h"
+#include "rest.h"
 #include "note.h"
 #include "stafftext.h"
 #include "text.h"
@@ -457,6 +458,40 @@ void ScSCursorPrototype::addChord(ChordPtr c)
       for (iNote in = nl->begin(); in != nl->end(); ++in)
             in->second->setScore(score);
 
+      cursor->setSegment(seg);
+      c->setParent(seg);
+      c->setTrack(track);
+      score->undoAddElement(c);
+      }
+
+//---------------------------------------------------------
+//   addRest
+//---------------------------------------------------------
+
+void ScSCursorPrototype::addRest(RestPtr c)
+      {
+      SCursor* cursor = thisSCursor();
+      ChordRest* cr   = cursor->cr();
+      int tick        = cr->tick();
+      int staffIdx    = cursor->staffIdx();
+      int voice       = cursor->voice();
+      int len         = c->tickLen();
+      Score* score    = cursor->score();
+
+      int track       = staffIdx * VOICES + voice;
+      int gap         = score->makeGap(tick, track, len);
+      if (gap < len) {
+            printf("cannot make gap\n");
+            return;
+            }
+      Measure* measure = score->tick2measure(tick);
+      Segment::SegmentType st = Segment::SegChordRest;
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            score->undoAddElement(seg);
+            }
+      c->setScore(score);
       cursor->setSegment(seg);
       c->setParent(seg);
       c->setTrack(track);

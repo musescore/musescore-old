@@ -29,6 +29,7 @@
 #include "text.h"
 #include "box.h"
 #include "preferences.h"
+#include "style.h"
 
 //---------------------------------------------------------
 //   ScScorePropertyIterator
@@ -431,6 +432,7 @@ void ScScorePrototype::appendMeasures(int n)
 
 void ScScorePrototype::appendPart(const QString& name)
       {
+      static InstrumentTemplate defaultInstrument;
       InstrumentTemplate* t = 0;
       foreach(InstrumentTemplate* it, instrumentTemplates) {
             if (it->trackName == name) {
@@ -438,8 +440,20 @@ void ScScorePrototype::appendPart(const QString& name)
                   break;
                   }
             }
-      if (t == 0)
-            return;
+      if (t == 0) {
+            t = &defaultInstrument;
+            if (t->channel.isEmpty()) {
+                  Channel* a      = new Channel();
+                  a->chorus       = 0;
+                  a->reverb       = 0;
+                  a->name         = "normal";
+                  a->program      = 0;
+                  a->bank         = 0;
+                  a->volume       = 100;
+                  a ->pan         = 60;
+                  t->channel.append(a);
+                  }
+            }
       Part* part = new Part(thisScore());
       part->initFromInstrTemplate(t);
       for (int i = 0; i < t->staves; ++i) {
@@ -481,5 +495,16 @@ void ScScorePrototype::setTitle(const QString& text)
       s->setParent(measure);
       s->setText(text);
       thisScore()->undoAddElement(s);
+      }
+
+//---------------------------------------------------------
+//   setStyle
+//---------------------------------------------------------
+
+void ScScorePrototype::setStyle(const QString& name, const QString& val)
+      {
+printf("score setStyle %s %s\n", qPrintable(name), qPrintable(val));
+      StyleVal sv(name, val);
+      thisScore()->setStyle(sv.getIdx(), sv);
       }
 

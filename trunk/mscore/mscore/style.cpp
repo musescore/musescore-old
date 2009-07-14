@@ -847,3 +847,36 @@ void Style::clearChordList()
       _chordList = 0;
       }
 
+StyleVal::StyleVal(const QString& name, const QString& val)
+      {
+      for (int i = 0; i < ST_STYLES; ++i) {
+            if (styleTypes[i].name() != name)
+                  continue;
+            idx = StyleIdx(i);
+            switch(styleTypes[i].valueType()) {
+                  case ST_DOUBLE:
+                  case ST_SPATIUM:
+                        v.dbl = val.toDouble();
+                        break;
+                  case ST_BOOL:
+                        v.b  = val.toInt();
+                        break;
+                  case ST_INT:
+                        v.i = val.toInt();
+                        break;
+                  case ST_DIRECTION:
+                        v.d = Direction(val.toInt());
+                        break;
+                  case ST_STRING:
+                        {
+                        const char* p = qPrintable(val);
+                        int n = strlen(p) + 1;
+                        v.s = new char[n];
+                        memcpy(v.s, p, n);
+                        }
+                        break;
+                  }
+            break;
+            }
+      }
+

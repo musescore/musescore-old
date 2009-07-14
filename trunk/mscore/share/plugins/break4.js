@@ -59,11 +59,12 @@ function run()
       var i = 1;
       while (!cursor.eos()) {
             var m = cursor.measure();
-            if (i % 4 == 0){
-              m.lineBreak = true;
-			      }else{
-			        m.lineBreak = false;
-            }
+            if (i % 4 == 0) {
+                  m.lineBreak = true;
+                  }
+            else {
+                  m.lineBreak = false;
+                  }
             cursor.nextMeasure();
             i++;
             }

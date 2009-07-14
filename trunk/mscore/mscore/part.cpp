@@ -138,6 +138,8 @@ void Part::read(QDomElement e)
 
 static void parseInstrName(QTextDocument* doc, const QString& name)
       {
+      if (name.isEmpty())
+            return;
       QTextCursor cursor(doc);
       QTextCharFormat f = cursor.charFormat();
       QTextCharFormat sf(f);

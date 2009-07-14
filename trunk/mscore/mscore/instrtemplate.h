@@ -42,7 +42,7 @@ struct InstrumentTemplate {
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
-      int smallStaff[MAX_STAVES];
+      bool smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
 
       char minPitchA;         // pitch range playable by an amateur
