@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
+        <translation>Ø§ÙØ¹Ø±Ø¨ÙØ© - Arabe</translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation>Hungary - Hongrois</translation>
     </message>
 </context>
 <context>
@@ -108,8 +108,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1880 revised JLWaltener 23/06/2009 - QT Linguist v4.5.1</translatorcomment>
-        <translation>Révision : 1880</translation>
+        <translatorcomment>r1927 revised JLWaltener 14/07/2009 - QT Linguist v4.5.2</translatorcomment>
+        <translation>Révision : 1927</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1404,7 +1404,7 @@ failed: </source>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Invisible</translation>
     </message>
 </context>
 <context>
@@ -5171,11 +5171,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>edit style</source>
-        <translation type="unfinished"></translation>
+        <translation>éditer le style</translation>
     </message>
     <message>
         <source>edit text style</source>
-        <translation type="unfinished"></translation>
+        <translation>éditer les styles de texte</translation>
     </message>
 </context>
 <context>
@@ -6417,7 +6417,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Echec de l&apos;ouverture de la liste d&apos;accords :</translation>
     </message>
 </context>
 <context>
