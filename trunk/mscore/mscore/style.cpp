@@ -379,7 +379,7 @@ Style::Style()
 
             StyleVal(ST_useGermanNoteNames, false),
             StyleVal(ST_warnPitchRange, true),
-/*72*/      StyleVal(ST_chordDescriptionFile, "chords.xml"),
+/*72*/      StyleVal(ST_chordDescriptionFile, QString("chords.xml")),
             StyleVal(ST_concertPitch,false),
             StyleVal(ST_createMultiMeasureRests,false),
             StyleVal(ST_minEmptyMeasures,2),
@@ -687,7 +687,7 @@ void Style::load(QDomElement e, int /*version*/)
                               case ST_BOOL:      set(i, bool(val.toInt()));         break;
                               case ST_INT:       set(i, val.toInt());               break;
                               case ST_DIRECTION: set(i, Direction(val.toInt()));    break;
-                              case ST_STRING:    set(i, qPrintable(val));           break;
+                              case ST_STRING:    set(i, val);                       break;
                               }
                         break;
                         }
@@ -713,7 +713,7 @@ bool Style::isDefault(int idx)
             case ST_DIRECTION:
                   return at(idx).toInt() == defaultStyle[idx].toInt();
             case ST_STRING:
-                  return strcmp(at(idx).toString(), defaultStyle[idx].toString()) == 0;
+                  return at(idx).toString() == defaultStyle[idx].toString();
             }
       return false;
       }
@@ -795,36 +795,24 @@ StyleVal::StyleVal(StyleIdx t, Direction val)
       v.d   = val;
       }
 
-StyleVal::StyleVal(StyleIdx t, const char* val)
+StyleVal::StyleVal(StyleIdx t, const QString& val)
       {
       idx  = t;
-      int n = strlen(val) + 1;
-      v.s = new char[n];
-      memcpy(v.s, val, n);
+      s    = val;
       }
 
 StyleVal::StyleVal(const StyleVal& val)
       {
       idx = val.idx;
+      s   = val.s;
       v   = val.v;
-      if (styleTypes[idx].valueType() == ST_STRING && v.s) {
-            int n = strlen(val.v.s) + 1;
-            v.s = new char[n];
-            memcpy(v.s, val.v.s, n);
-            }
       }
 
 StyleVal& StyleVal::operator=(const StyleVal& val)
       {
-      if (styleTypes[idx].valueType() == ST_STRING && v.s)
-            delete v.s;
       idx = val.idx;
-      v    = val.v;
-      if (styleTypes[idx].valueType() == ST_STRING && v.s) {
-            int n = strlen(val.v.s) + 1;
-            v.s = new char[n];
-            memcpy(v.s, val.v.s, n);
-            }
+      s   = val.s;
+      v   = val.v;
       return *this;
       }
 
@@ -868,12 +856,7 @@ StyleVal::StyleVal(const QString& name, const QString& val)
                         v.d = Direction(val.toInt());
                         break;
                   case ST_STRING:
-                        {
-                        const char* p = qPrintable(val);
-                        int n = strlen(p) + 1;
-                        v.s = new char[n];
-                        memcpy(v.s, p, n);
-                        }
+                        s = val;
                         break;
                   }
             break;

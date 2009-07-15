@@ -108,8 +108,8 @@ Objects
             measure()               return measure at current position
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
-            addChord(Chord)
-            addRest(Rest)
+            add(Chord)
+            add(Rest)
             measure()               return the current measure
             next()                  go to next segment
             nextMeasure()           go to first chord/rest of next measure
@@ -126,6 +126,7 @@ Objects
             addNote(Note)
             removeNote(integer n)   remove note at index n
             integer notes()         return number of notes in chord
+            addHarmony(Harmony)
 
    Rest
          create:   var a = Rest()
@@ -157,9 +158,9 @@ Objects
          create:    var a = Harmony();
 
          Properties:
-            id             int
-            root           int
-            base           int
+            id             integer
+            root           integer
+            base           integer
 
    Style
 

@@ -44,7 +44,7 @@ function addNote(cursor, pitch, duration)
       note.pitch    = pitch;
 
       chord.addNote(note);
-      cursor.addChord(chord);
+      cursor.add(chord);
       cursor.next();
       };
 

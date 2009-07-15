@@ -21,6 +21,8 @@
 #ifndef __SCCHORD_H__
 #define __SCCHORD_H__
 
+#include "scchordrest.h"
+
 class Chord;
 class Note;
 class Score;
@@ -34,8 +36,8 @@ class Note;
 
 class ScChord : public QObject, public QScriptClass {
       static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const ChordPtr& ba);
-      static void fromScriptValue(const QScriptValue &obj, ChordPtr& ba);
+      static QScriptValue toScriptValue(QScriptEngine *eng, const ChordRestPtr& ba);
+      static void fromScriptValue(const QScriptValue &obj, ChordRestPtr& ba);
 
       QScriptValue proto;
       QScriptValue ctor;
@@ -46,7 +48,7 @@ class ScChord : public QObject, public QScriptClass {
 
       QScriptValue constructor() { return ctor; }
       QScriptValue newInstance(Score*);
-      QScriptValue newInstance(const ChordPtr&);
+      QScriptValue newInstance(const ChordRestPtr&);
       QueryFlags queryProperty(const QScriptValue& object,
          const QScriptString& name, QueryFlags flags, uint* id);
       QScriptValue property(const QScriptValue& obhect,
@@ -64,11 +66,10 @@ class ScChord : public QObject, public QScriptClass {
 //   ScChordPrototype
 //---------------------------------------------------------
 
-class ScChordPrototype : public QObject, public QScriptable
+class ScChordPrototype : public ScChordRestPrototype
       {
       Q_OBJECT
       Chord* thisChord() const;
-      Q_PROPERTY(int tickLen READ getTickLen WRITE setTickLen SCRIPTABLE true)
 
    public slots:
       NotePtr topNote() const;
@@ -78,11 +79,8 @@ class ScChordPrototype : public QObject, public QScriptable
       NotePtr note(int) const;
 
    public:
-      ScChordPrototype(QObject *parent = 0) : QObject(parent) {}
+      ScChordPrototype(QObject *parent = 0) : ScChordRestPrototype(parent) {}
       ~ScChordPrototype() {}
-
-      int getTickLen() const;
-      void setTickLen(int v);
       };
 
 Q_DECLARE_METATYPE(ChordPtr)

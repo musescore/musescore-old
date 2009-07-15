@@ -298,7 +298,7 @@ void ChordEdit::chordChanged()
             _harmony->addDegree(degree(i));
       _harmony->setRootTpc(root());
       _harmony->setBaseTpc(base());
-      _harmony->setId(extension()->id);
+      _harmony->setId(extension() ? extension()->id : 0);
       QString s = _harmony->harmonyName();
       chordLabel->setText(s);
       }

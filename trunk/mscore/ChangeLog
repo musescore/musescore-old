@@ -1,3 +1,6 @@
+15.jul (ws)
+      - fix memory corruption after deleting ChordList
+      - small changes in script interface
 14.jul (ws)
       - new plugin script to create score with all known chords
       - some scripting extensions
