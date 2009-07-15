@@ -22,6 +22,7 @@ echo       %1/share/locale/mscore_pt.ts \
 echo       %1/share/locale/mscore_sv.ts \
 echo       %1/share/locale/mscore_no.ts \
 echo       %1/share/locale/mscore_en_GB.ts \
+echo       %1/share/locale/mscore_en_US.ts \
 echo       %1/share/locale/mscore_zh_Hant.ts \
 echo       %1/share/locale/mscore_zh_TW.ts \
 echo       %1/share/locale/mscore_uk.ts \

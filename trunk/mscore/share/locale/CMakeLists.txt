@@ -51,14 +51,14 @@ install(FILES
       mscore_pt_BR.qm
       mscore_en_GB.ts
       mscore_en_GB.qm
+      mscore_en_US.ts
+      mscore_en_US.qm
       mscore_sv.ts
       mscore_sv.qm
       mscore_no.ts
       mscore_no.qm
       mscore_uk.ts
       mscore_uk.qm
-      mscore_ar.ts
-      mscore_ar.qm
       mscore_af.ts
       mscore_af.qm
       mscore_hu.ts
