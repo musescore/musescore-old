@@ -53,13 +53,10 @@ class ScRestPropertyIterator : public QScriptClassPropertyIterator
 ScRest::ScRest(QScriptEngine* engine)
    : QObject(engine), QScriptClass(engine)
       {
-      qScriptRegisterMetaType<RestPtr>(engine, toScriptValue, fromScriptValue);
+      qScriptRegisterMetaType<ChordRestPtr>(engine, toScriptValue, fromScriptValue);
 
       proto = engine->newQObject(new ScRestPrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
+         QScriptEngine::QtOwnership, QScriptEngine::SkipMethodsInEnumeration);
       QScriptValue global = engine->globalObject();
       proto.setPrototype(global.property("Object").property("prototype"));
 
@@ -74,10 +71,9 @@ ScRest::ScRest(QScriptEngine* engine)
 QScriptClass::QueryFlags ScRest::queryProperty(const QScriptValue &object,
    const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
       {
-      RestPtr* sp = qscriptvalue_cast<RestPtr*>(object.data());
+      Rest** sp = (Rest**)qscriptvalue_cast<ChordRestPtr*>(object.data());
       if (!sp)
             return 0;
-
       return 0;   // qscript handles property
       }
 
@@ -86,10 +82,10 @@ QScriptClass::QueryFlags ScRest::queryProperty(const QScriptValue &object,
 //---------------------------------------------------------
 
 QScriptValue ScRest::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
+   const QScriptString& /*name*/, uint /*id*/)
       {
-      RestPtr* score = qscriptvalue_cast<RestPtr*>(object.data());
-      if (!score)
+      Rest** rest = (Rest**)qscriptvalue_cast<ChordRestPtr*>(object.data());
+      if (!rest)
             return QScriptValue();
       return QScriptValue();
       }
@@ -101,8 +97,8 @@ QScriptValue ScRest::property(const QScriptValue& object,
 void ScRest::setProperty(QScriptValue &object,
    const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
       {
-      RestPtr* score = qscriptvalue_cast<RestPtr*>(object.data());
-      if (!score)
+      Rest** rest = (Rest**)qscriptvalue_cast<ChordRestPtr*>(object.data());
+      if (!rest)
             return;
       }
 
@@ -116,7 +112,7 @@ QScriptValue::PropertyFlags ScRest::propertyFlags(
       return QScriptValue::Undeletable;
       }
 
-QScriptClassPropertyIterator *ScRest::newIterator(const QScriptValue &object)
+QScriptClassPropertyIterator* ScRest::newIterator(const QScriptValue &object)
       {
       return new ScRestPropertyIterator(object);
       }
@@ -128,13 +124,13 @@ QScriptClassPropertyIterator *ScRest::newIterator(const QScriptValue &object)
 QScriptValue ScRest::newInstance(Score* score)
       {
 // printf("ScRest::newInstance\n");
-      Rest* chord = new Rest(score);
-      return newInstance(chord);
+      Rest* rest = new Rest(score);
+      return newInstance(rest);
       }
 
-QScriptValue ScRest::newInstance(const RestPtr& score)
+QScriptValue ScRest::newInstance(const ChordRestPtr& cr)
       {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(score));
+      QScriptValue data = engine()->newVariant(qVariantFromValue(cr));
       return engine()->newObject(this, data);
       }
 
@@ -152,18 +148,18 @@ QScriptValue ScRest::construct(QScriptContext *ctx, QScriptEngine *)
       return cls->newInstance(sp ? *sp : 0);
       }
 
-QScriptValue ScRest::toScriptValue(QScriptEngine* eng, const RestPtr& ba)
+QScriptValue ScRest::toScriptValue(QScriptEngine* eng, const ChordRestPtr& ba)
       {
       QScriptValue ctor = eng->globalObject().property("Rest");
       ScRest* cls = qscriptvalue_cast<ScRest*>(ctor.data());
       if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
+            return eng->newVariant(qVariantFromValue((ChordRestPtr&)ba));
       return cls->newInstance(ba);
       }
 
-void ScRest::fromScriptValue(const QScriptValue& obj, RestPtr& ba)
+void ScRest::fromScriptValue(const QScriptValue& obj, ChordRestPtr& ba)
       {
-      RestPtr* cp = qscriptvalue_cast<RestPtr*>(obj.data());
+      Rest** cp = (Rest**)qscriptvalue_cast<ChordRestPtr*>(obj.data());
       ba = cp ? *cp : 0;
       }
 
@@ -179,7 +175,6 @@ ScRestPropertyIterator::ScRestPropertyIterator(const QScriptValue &object)
 
 bool ScRestPropertyIterator::hasNext() const
       {
-//      Rest* ba = qscriptvalue_cast<Rest*>(object().data());
       return m_index < 1;     // TODO ba->size();
       }
 
@@ -208,7 +203,6 @@ void ScRestPropertyIterator::toFront()
 
 void ScRestPropertyIterator::toBack()
       {
-//      RestPtr* ba = qscriptvalue_cast<RestPtr*>(object().data());
       m_index = 0; // ba->size();
       m_last = -1;
       }
@@ -219,7 +213,17 @@ void ScRestPropertyIterator::toBack()
 
 Rest* ScRestPrototype::thisRest() const
       {
-      RestPtr* cp = qscriptvalue_cast<RestPtr*>(thisObject().data());
+      Rest** cp = (Rest**)qscriptvalue_cast<ChordRestPtr*>(thisObject().data());
+      if (cp)
+            return *cp;
+      return 0;
+      }
+
+ChordRest* ScChordRestPrototype::thisChordRest() const
+      {
+      QScriptValue sv(thisObject().data());
+      ChordRestPtr* cp = qscriptvalue_cast<ChordRestPtr*>(sv);
+
       if (cp)
             return *cp;
       return 0;
@@ -229,37 +233,39 @@ Rest* ScRestPrototype::thisRest() const
 //   getTickLen
 //---------------------------------------------------------
 
-int ScRestPrototype::getTickLen() const
+int ScChordRestPrototype::getTickLen() const
       {
-      Rest* rest = thisRest();
-      return rest->tickLen();
+      ChordRest* cr = thisChordRest();
+      return cr->tickLen();
       }
 
 //---------------------------------------------------------
 //   setTickLen
 //---------------------------------------------------------
 
-void ScRestPrototype::setTickLen(int v)
+void ScChordRestPrototype::setTickLen(int v)
       {
-      Rest* rest = thisRest();
-      rest->setLen(v);
+      ChordRest* cr = thisChordRest();
+      cr->setLen(v);
       }
 
 //---------------------------------------------------------
 //   addHarmony
 //---------------------------------------------------------
 
-void ScRestPrototype::addHarmony(HarmonyPtr h)
+void ScChordRestPrototype::addHarmony(HarmonyPtr h)
       {
-      h->setParent(thisRest()->measure());
-      h->setTick(thisRest()->tick());
-      Score* score = thisRest()->score();
+      ChordRest* cr = thisChordRest();
+
+      h->setParent(cr->measure());
+      h->setTick(cr->tick());
+      Score* score = cr->score();
       if (score) {
             h->setScore(score);
-            thisRest()->score()->undoAddElement(h);
+            cr->score()->undoAddElement(h);
             }
       else
-            thisRest()->measure()->add(h);
+            cr->measure()->add(h);
       h->render();
       }
 

@@ -274,12 +274,12 @@ enum StyleIdx {
 
 class StyleVal {
       StyleIdx idx;
+      QString   s;
       union {
             double  dbl;
             bool      b;
             int       i;
             Direction d;
-            char*     s;
             } v;
 
    public:
@@ -292,13 +292,13 @@ class StyleVal {
       StyleVal(StyleIdx t, bool val);
       StyleVal(StyleIdx t, int val);
       StyleVal(StyleIdx t, Direction val);
-      StyleVal(StyleIdx t, const char* val);
+      StyleVal(StyleIdx t, const QString& val);
 
       Spatium toSpatium() const       { return Spatium(v.dbl); }
       double toDouble() const         { return v.dbl;  }
       bool toBool() const             { return v.b;  }
       int toInt() const               { return v.i;  }
-      const char* toString() const    { return v.s;  }
+      QString toString() const        { return s;    }
       Direction toDirection() const   { return v.d;  }
       StyleIdx getIdx() const         { return idx;  }
       StyleVal(const QString& name, const QString& val);
@@ -329,7 +329,7 @@ class Style : public QVector<StyleVal> {
       void set(StyleIdx t, bool val)        { set(StyleVal(t, val)); }
       void set(StyleIdx t, int val)         { set(StyleVal(t, val)); }
       void set(StyleIdx t, Direction val)   { set(StyleVal(t, val)); }
-      void set(StyleIdx t, const char* val) { set(StyleVal(t, val)); }
+      void set(StyleIdx t, const QString& v) { set(StyleVal(t, v)); }
       };
 
 extern QVector<TextStyle> defaultTextStyles;

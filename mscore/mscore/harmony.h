@@ -158,7 +158,7 @@ class ChordList : public QMap<int, const ChordDescription*> {
       QList<RenderAction> renderListBase;
 
       ChordList() {}
-      ~ChordList();
+      virtual ~ChordList();
       bool read(const QString& path);
       void read(QDomElement);
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }

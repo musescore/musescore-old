@@ -53,16 +53,11 @@ class ScChordPropertyIterator : public QScriptClassPropertyIterator
 ScChord::ScChord(QScriptEngine* engine)
    : QObject(engine), QScriptClass(engine)
       {
-      qScriptRegisterMetaType<ChordPtr>(engine, toScriptValue, fromScriptValue);
-
-      //scoreName   = engine->toStringHandle(QLatin1String("name"));
-      //scoreStaves = engine->toStringHandle(QLatin1String("staves"));
+      qScriptRegisterMetaType<ChordRestPtr>(engine, toScriptValue, fromScriptValue);
 
       proto = engine->newQObject(new ScChordPrototype(this),
          QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
+         QScriptEngine::SkipMethodsInEnumeration);
       QScriptValue global = engine->globalObject();
       proto.setPrototype(global.property("Object").property("prototype"));
 
@@ -77,7 +72,7 @@ ScChord::ScChord(QScriptEngine* engine)
 QScriptClass::QueryFlags ScChord::queryProperty(const QScriptValue &object,
    const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
       {
-      ChordPtr* sp = qscriptvalue_cast<ChordPtr*>(object.data());
+      Chord** sp = (Chord**)qscriptvalue_cast<ChordRestPtr*>(object.data());
       if (!sp)
             return 0;
 
@@ -89,10 +84,9 @@ QScriptClass::QueryFlags ScChord::queryProperty(const QScriptValue &object,
 //---------------------------------------------------------
 
 QScriptValue ScChord::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
+   const QScriptString& /*name*/, uint /*id*/)
       {
-printf("property <%s>\n", qPrintable(name.toString()));
-      ChordPtr* score = qscriptvalue_cast<ChordPtr*>(object.data());
+      Chord** score = (Chord**)qscriptvalue_cast<ChordRestPtr*>(object.data());
       if (!score)
             return QScriptValue();
       return QScriptValue();
@@ -105,7 +99,7 @@ printf("property <%s>\n", qPrintable(name.toString()));
 void ScChord::setProperty(QScriptValue &object,
    const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
       {
-      ChordPtr* score = qscriptvalue_cast<ChordPtr*>(object.data());
+      Chord** score = (Chord**)qscriptvalue_cast<ChordRestPtr*>(object.data());
       if (!score)
             return;
       }
@@ -117,11 +111,6 @@ void ScChord::setProperty(QScriptValue &object,
 QScriptValue::PropertyFlags ScChord::propertyFlags(
    const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
       {
-/*      if (name == scoreName)
-            return QScriptValue::Undeletable;
-      else if (name == scoreStaves)
-            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
-      */
       return QScriptValue::Undeletable;
       }
 
@@ -136,12 +125,11 @@ QScriptClassPropertyIterator *ScChord::newIterator(const QScriptValue &object)
 
 QScriptValue ScChord::newInstance(Score* score)
       {
-// printf("ScChord::newInstance\n");
       Chord* chord = new Chord(score);
       return newInstance(chord);
       }
 
-QScriptValue ScChord::newInstance(const ChordPtr& score)
+QScriptValue ScChord::newInstance(const ChordRestPtr& score)
       {
       QScriptValue data = engine()->newVariant(qVariantFromValue(score));
       return engine()->newObject(this, data);
@@ -161,7 +149,7 @@ QScriptValue ScChord::construct(QScriptContext *ctx, QScriptEngine *)
       return cls->newInstance(sp ? *sp : 0);
       }
 
-QScriptValue ScChord::toScriptValue(QScriptEngine* eng, const ChordPtr& ba)
+QScriptValue ScChord::toScriptValue(QScriptEngine* eng, const ChordRestPtr& ba)
       {
       QScriptValue ctor = eng->globalObject().property("Chord");
       ScChord* cls = qscriptvalue_cast<ScChord*>(ctor.data());
@@ -170,9 +158,9 @@ QScriptValue ScChord::toScriptValue(QScriptEngine* eng, const ChordPtr& ba)
       return cls->newInstance(ba);
       }
 
-void ScChord::fromScriptValue(const QScriptValue& obj, ChordPtr& ba)
+void ScChord::fromScriptValue(const QScriptValue& obj, ChordRestPtr& ba)
       {
-      ChordPtr* cp = qscriptvalue_cast<ChordPtr*>(obj.data());
+      Chord** cp = (Chord**)qscriptvalue_cast<ChordRestPtr*>(obj.data());
       ba = cp ? *cp : 0;
       }
 
@@ -217,7 +205,6 @@ void ScChordPropertyIterator::toFront()
 
 void ScChordPropertyIterator::toBack()
       {
-//      ChordPtr* ba = qscriptvalue_cast<ChordPtr*>(object().data());
       m_index = 0; // ba->size();
       m_last = -1;
       }
@@ -228,7 +215,7 @@ void ScChordPropertyIterator::toBack()
 
 Chord* ScChordPrototype::thisChord() const
       {
-      ChordPtr* cp = qscriptvalue_cast<ChordPtr*>(thisObject().data());
+      Chord** cp = (Chord**)qscriptvalue_cast<ChordRestPtr*>(thisObject().data());
       if (cp)
             return *cp;
       return 0;
@@ -261,32 +248,11 @@ void ScChordPrototype::addNote(NotePtr note)
       }
 
 //---------------------------------------------------------
-//   getTickLen
-//---------------------------------------------------------
-
-int ScChordPrototype::getTickLen() const
-      {
-      Chord* chord = thisChord();
-      return chord->tickLen();
-      }
-
-//---------------------------------------------------------
-//   setTickLen
-//---------------------------------------------------------
-
-void ScChordPrototype::setTickLen(int v)
-      {
-      Chord* chord = thisChord();
-      chord->setLen(v);
-      }
-
-//---------------------------------------------------------
 //   removeNote
 //---------------------------------------------------------
 
 void ScChordPrototype::removeNote(int idx)
       {
-printf("remove note %d\n", idx);
       Chord* chord = thisChord();
       NoteList* nl = chord->noteList();
       if (idx < 0 || idx >= int(nl->size()))

@@ -21,12 +21,11 @@
 #ifndef __SCREST_H__
 #define __SCREST_H__
 
+#include "scchordrest.h"
+
 class Rest;
 class Score;
 typedef Rest* RestPtr;
-
-class Harmony;
-typedef Harmony* HarmonyPtr;
 
 //---------------------------------------------------------
 //   ScRest
@@ -34,8 +33,8 @@ typedef Harmony* HarmonyPtr;
 
 class ScRest : public QObject, public QScriptClass {
       static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const RestPtr& ba);
-      static void fromScriptValue(const QScriptValue &obj, RestPtr& ba);
+      static QScriptValue toScriptValue(QScriptEngine *eng, const ChordRestPtr& ba);
+      static void fromScriptValue(const QScriptValue &obj, ChordRestPtr& ba);
 
       QScriptValue proto;
       QScriptValue ctor;
@@ -46,7 +45,7 @@ class ScRest : public QObject, public QScriptClass {
 
       QScriptValue constructor() { return ctor; }
       QScriptValue newInstance(Score*);
-      QScriptValue newInstance(const RestPtr&);
+      QScriptValue newInstance(const ChordRestPtr&);
       QueryFlags queryProperty(const QScriptValue& object,
          const QScriptString& name, QueryFlags flags, uint* id);
       QScriptValue property(const QScriptValue& obhect,
@@ -64,27 +63,18 @@ class ScRest : public QObject, public QScriptClass {
 //   ScRestPrototype
 //---------------------------------------------------------
 
-class ScRestPrototype : public QObject, public QScriptable
+class ScRestPrototype : public ScChordRestPrototype
       {
       Q_OBJECT
       Rest* thisRest() const;
-      Q_PROPERTY(int tickLen READ getTickLen WRITE setTickLen SCRIPTABLE true)
 
    public slots:
-      void addHarmony(HarmonyPtr h);
 
    public:
-      ScRestPrototype(QObject *parent = 0) : QObject(parent) {}
+      ScRestPrototype(QObject *parent = 0) : ScChordRestPrototype(parent) {}
       ~ScRestPrototype() {}
-
-      int getTickLen() const;
-      void setTickLen(int v);
       };
 
-Q_DECLARE_METATYPE(RestPtr)
-Q_DECLARE_METATYPE(RestPtr*)
 Q_DECLARE_METATYPE(ScRest*)
 
 #endif
-
-

@@ -99,7 +99,6 @@ QScriptClass::QueryFlags ScScore::queryProperty(const QScriptValue &object,
 QScriptValue ScScore::property(const QScriptValue& object,
    const QScriptString& name, uint /*id*/)
       {
-printf("property <%s>\n", qPrintable(name.toString()));
       ScorePtr* score = qscriptvalue_cast<ScorePtr*>(object.data());
       if (!score)
             return QScriptValue();
@@ -151,8 +150,6 @@ QScriptClassPropertyIterator *ScScore::newIterator(const QScriptValue &object)
 
 QScriptValue ScScore::newInstance(const QString& name)
       {
-      printf("ScScore::newInstance(name)\n");
-
       QString s(name);
       Score* ns = new Score(defaultStyle);
       if (s.isEmpty())
@@ -165,8 +162,6 @@ QScriptValue ScScore::newInstance(const QString& name)
 
 QScriptValue ScScore::newInstance(const ScorePtr& score)
       {
-      printf("ScScore::newInstance(ScorePtr)\n");
-
       QScriptValue data = engine()->newVariant(qVariantFromValue(score));
       return engine()->newObject(this, data);
       }
@@ -503,7 +498,6 @@ void ScScorePrototype::setTitle(const QString& text)
 
 void ScScorePrototype::setStyle(const QString& name, const QString& val)
       {
-printf("score setStyle %s %s\n", qPrintable(name), qPrintable(val));
       StyleVal sv(name, val);
       thisScore()->setStyle(sv.getIdx(), sv);
       }

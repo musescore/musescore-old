@@ -967,10 +967,12 @@ void ChordDescription::read(QDomElement e)
 
 ChordList::~ChordList()
       {
-      QMapIterator<int, const ChordDescription*> i(*this);
-      while(i.hasNext()) {
-            i.next();
-            delete i.value();
+      if (isDetached()) {
+            QMapIterator<int, const ChordDescription*> i(*this);
+            while(i.hasNext()) {
+                  i.next();
+                  delete i.value();
+                  }
             }
       }
 
@@ -1026,9 +1028,11 @@ void ChordList::read(QDomElement e)
 
 bool ChordList::read(const QString& name)
       {
+      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
+      if (debugMode)
+            printf("read chordlist from <%s>\n", qPrintable(path));
       if (name.isEmpty())
             return false;
-      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
       QFile f(path);
       if (!f.open(QIODevice::ReadOnly)) {
             QString error = QString("cannot open chord description: %1\n").arg(f.fileName());

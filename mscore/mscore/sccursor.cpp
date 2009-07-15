@@ -427,10 +427,10 @@ void ScSCursorPrototype::putStaffText(TextPtr s)
       }
 
 //---------------------------------------------------------
-//   addChord
+//   add
 //---------------------------------------------------------
 
-void ScSCursorPrototype::addChord(ChordPtr c)
+void ScSCursorPrototype::add(ChordRestPtr c)
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr   = cursor->cr();
@@ -454,44 +454,13 @@ void ScSCursorPrototype::addChord(ChordPtr c)
             score->undoAddElement(seg);
             }
       c->setScore(score);
-      NoteList* nl = c->noteList();
-      for (iNote in = nl->begin(); in != nl->end(); ++in)
-            in->second->setScore(score);
-
-      cursor->setSegment(seg);
-      c->setParent(seg);
-      c->setTrack(track);
-      score->undoAddElement(c);
-      }
-
-//---------------------------------------------------------
-//   addRest
-//---------------------------------------------------------
-
-void ScSCursorPrototype::addRest(RestPtr c)
-      {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr   = cursor->cr();
-      int tick        = cr->tick();
-      int staffIdx    = cursor->staffIdx();
-      int voice       = cursor->voice();
-      int len         = c->tickLen();
-      Score* score    = cursor->score();
-
-      int track       = staffIdx * VOICES + voice;
-      int gap         = score->makeGap(tick, track, len);
-      if (gap < len) {
-            printf("cannot make gap\n");
-            return;
+      if (c->type() == CHORD) {
+            Chord* chord = static_cast<Chord*>(c);
+            NoteList* nl = chord->noteList();
+            for (iNote in = nl->begin(); in != nl->end(); ++in)
+                  in->second->setScore(score);
             }
-      Measure* measure = score->tick2measure(tick);
-      Segment::SegmentType st = Segment::SegChordRest;
-      Segment* seg = measure->findSegment(st, tick);
-      if (seg == 0) {
-            seg = measure->createSegment(st, tick);
-            score->undoAddElement(seg);
-            }
-      c->setScore(score);
+
       cursor->setSegment(seg);
       c->setParent(seg);
       c->setTrack(track);

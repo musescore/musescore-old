@@ -266,7 +266,7 @@ void EditStyle::setValues()
       genCourtesyTimesig->setChecked(lstyle[ST_genCourtesyTimesig].toBool());
 
       useGermanNoteNames->setChecked(lstyle[ST_useGermanNoteNames].toBool());
-      const char* s = lstyle[ST_chordDescriptionFile].toString();
+      QString s(lstyle[ST_chordDescriptionFile].toString());
       chordDescriptionFile->setText(s);
       concertPitch->setChecked(lstyle[ST_concertPitch].toBool());
 
