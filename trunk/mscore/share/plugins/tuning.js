@@ -43,6 +43,8 @@ function init()
       // print("test script init");
       }
 
+var form;
+
 //-------------------------------------------------------------------
 //    run
 //    this function will be called when activating the
@@ -53,7 +55,27 @@ function init()
 //-------------------------------------------------------------------
 
 function run()
-  {
+      {
+      
+      var loader = new QUiLoader(null);
+      var file   = new QFile(pluginPath + "/tuning.ui");
+      file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
+      form = loader.load(file, null);
+      form.buttonBox.accepted.connect(accept);
+      form.show();
+      /**/
+      }
+
+
+//---------------------------------------------------------
+//    accept
+//    called when user presses "Accept" button
+//---------------------------------------------------------
+
+function accept()
+    {
+      var value = form.tuningSpinBox.value;
+      
       var cursor = new Cursor(curScore);
       for (var staff = 0; staff < curScore.staves; ++staff) {
             cursor.staff = staff;
@@ -65,7 +87,7 @@ function run()
                     if (cursor.isChord()) {
                           for (var i = 0; i < cursor.chord().notes(); i++) {
                                 var note = cursor.chord().note(i);
-                                note.color = new QColor(colors[note.pitch % 12]);
+                                note.tuning = value;
                           }
                     }
                     cursor.next();
@@ -74,13 +96,14 @@ function run()
        }
     }
 
+
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed
 //           in the MuseScore menu structure
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.Color Notes',
+      menu: 'Plugins.Tuning',
       init: init,
       run:  run
       };

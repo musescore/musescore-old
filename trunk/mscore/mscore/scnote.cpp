@@ -257,6 +257,24 @@ void ScNotePrototype::setPitch(int v)
       {
       thisNote()->setPitch(v);
       }
+      
+//---------------------------------------------------------
+//   getTuning
+//---------------------------------------------------------
+
+double ScNotePrototype::getTuning() const
+      {
+      return thisNote()->tuning();
+      }
+
+//---------------------------------------------------------
+//   setTuning
+//---------------------------------------------------------
+
+void ScNotePrototype::setTuning(double v)
+      {
+      thisNote()->setTuning(v);
+      }
 
 //---------------------------------------------------------
 //   getColor
