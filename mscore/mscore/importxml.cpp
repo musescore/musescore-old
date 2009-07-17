@@ -2352,7 +2352,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (rest) {
             // whole measure rests do not have a "type" element
             int len = ticks;
-            if (durationType.val() == Duration::V_INVALID) {
+            if (durationType.type() == Duration::V_INVALID) {
                   durationType.setType(Duration::V_MEASURE);
                   len = 0;
                   }
@@ -2410,7 +2410,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         cr->setTickLen(ticks);
-                        if (durationType.val() == Duration::V_INVALID)
+                        if (durationType.type() == Duration::V_INVALID)
                               durationType.setType(Duration::V_QUARTER);
                         cr->setDuration(durationType);
                         }

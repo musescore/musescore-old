@@ -55,7 +55,7 @@ ScChord::ScChord(QScriptEngine* engine)
       {
       qScriptRegisterMetaType<ChordRestPtr>(engine, toScriptValue, fromScriptValue);
 
-      proto = engine->newQObject(new ScChordPrototype(this),
+      proto = engine->newQObject(new ScChordRestPrototype(this),
          QScriptEngine::QtOwnership,
          QScriptEngine::SkipMethodsInEnumeration);
       QScriptValue global = engine->globalObject();
@@ -209,6 +209,7 @@ void ScChordPropertyIterator::toBack()
       m_last = -1;
       }
 
+#if 0
 //---------------------------------------------------------
 //   thisChord
 //---------------------------------------------------------
@@ -304,4 +305,5 @@ NotePtr ScChordPrototype::note(int idx) const
       return 0;
       }
 
+#endif
 

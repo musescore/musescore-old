@@ -26,7 +26,6 @@
 class Chord;
 class Note;
 class Score;
-typedef Chord* ChordPtr;
 typedef Note* NotePtr;
 class Note;
 
@@ -62,6 +61,7 @@ class ScChord : public QObject, public QScriptClass {
       QScriptValue prototype() const { return proto; }
       };
 
+#if 0
 //---------------------------------------------------------
 //   ScChordPrototype
 //---------------------------------------------------------
@@ -82,9 +82,8 @@ class ScChordPrototype : public ScChordRestPrototype
       ScChordPrototype(QObject *parent = 0) : ScChordRestPrototype(parent) {}
       ~ScChordPrototype() {}
       };
+#endif
 
-Q_DECLARE_METATYPE(ChordPtr)
-Q_DECLARE_METATYPE(ChordPtr*)
 Q_DECLARE_METATYPE(ScChord*)
 
 #endif

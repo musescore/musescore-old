@@ -37,15 +37,16 @@ class Duration {
    public:
       Duration() : _val(V_INVALID) {}
       Duration(DurationType t) : _val(t)    {};
-      DurationType val() const              { return _val; }
+      DurationType type() const             { return _val; }
       bool isValid() const                  { return _val != V_INVALID; }
       void setVal(int tick);
       void setVal(const QString&);
       void setType(DurationType t)          { _val = t; }
 
       int ticks() const;
-      int ticks(int) const;
+      int ticks(int dots) const;
       bool operator==(const Duration& t) const { return t._val == _val; }
+      bool operator==(const DurationType& t) const { return t == _val; }
       bool operator!=(const Duration& t) const { return t._val != _val; }
       static const int types = 12;
       QString name() const;

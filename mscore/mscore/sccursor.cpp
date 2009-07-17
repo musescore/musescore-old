@@ -325,13 +325,13 @@ bool ScSCursorPrototype::eos() const
 //    get chord at current position
 //---------------------------------------------------------
 
-ChordPtr ScSCursorPrototype::chord()
+ChordRestPtr ScSCursorPrototype::chord()
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr = cursor->cr();
       if (cr == 0 || cr->type() != CHORD)
             return 0;
-      return static_cast<Chord*>(cr);
+      return static_cast<ChordRestPtr>(cr);
       }
 
 //---------------------------------------------------------

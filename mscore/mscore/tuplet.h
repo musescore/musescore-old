@@ -51,14 +51,14 @@ class Tuplet : public DurationElement {
       int _bracketType;
       bool _hasBracket;
 
-      int _baseLen;     // tick len of a "normal note"
+      int _baseLen;           // tick len of a "normal note"
       int _normalNotes;
       int _actualNotes;
 
       bool _userModified;
       QPointF p1, p2;
       QPointF _p1, _p2;
-      mutable int _id;          // used during read/write
+      mutable int _id;        // used during read/write
 
       Text* _number;
       QPointF bracketL[4];
@@ -97,7 +97,7 @@ class Tuplet : public DurationElement {
       int baseLen() const           { return _baseLen;      }
       int normalNotes() const       { return _normalNotes;  }
       int actualNotes() const       { return _actualNotes;  }
-      int normalLen() const         { return _baseLen / _normalNotes; }
+//      int normalLen() const         { return _baseLen / _normalNotes; }
       int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
       const QList<DurationElement*>& elements() const   { return _elements; }
       void clear()                  { _elements.clear(); }
