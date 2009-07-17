@@ -86,11 +86,11 @@
     </message>
     <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation>Hongaars</translation>
     </message>
 </context>
 <context>
@@ -1013,7 +1013,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>stem direction</source>
         <translatorcomment>stokrichting</translatorcomment>
-        <translation></translation>
+        <translation>stokrichting</translation>
     </message>
     <message>
         <source>auto</source>
@@ -1021,8 +1021,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up</source>
-        <translatorcomment>omhoog</translatorcomment>
-        <translation>up</translation>
+        <translation>omhoog</translation>
     </message>
     <message>
         <source>down</source>
@@ -1404,7 +1403,7 @@ failed: </source>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Onzichtbaar</translation>
     </message>
 </context>
 <context>
@@ -5172,11 +5171,11 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>edit style</source>
-        <translation type="unfinished"></translation>
+        <translation>bewerk stijl</translation>
     </message>
     <message>
         <source>edit text style</source>
-        <translation type="unfinished"></translation>
+        <translation>bewerk tekststijl</translation>
     </message>
 </context>
 <context>
@@ -6415,7 +6414,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Musescore: Openen van akkoordlijst is mislukt:</translation>
     </message>
 </context>
 <context>

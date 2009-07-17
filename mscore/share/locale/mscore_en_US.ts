@@ -161,7 +161,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Action</translation>
     </message>
 </context>
 <context>
@@ -191,7 +191,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Left:</translation>
     </message>
     <message>
         <source>mm</source>
@@ -199,15 +199,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Right:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bottom:</translation>
     </message>
 </context>
 <context>
@@ -222,7 +222,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished">Edit Drumkit...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -230,7 +230,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished">Bar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -407,11 +407,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished">9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished">13</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7b9</source>
@@ -487,7 +487,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7+</source>
@@ -503,7 +503,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(blues)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Blues)</translation>
     </message>
     <message>
         <source>7(Blues)</source>
@@ -946,11 +946,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>Small</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>Additional Leading Space</translation>
     </message>
     <message>
         <source>sp</source>
@@ -959,7 +959,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>Additional Trailing Space</translation>
     </message>
     <message>
         <source>Note Properties</source>
@@ -967,7 +967,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuning Offset</translation>
     </message>
     <message>
         <source>cent</source>
@@ -976,35 +976,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stem direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Stem Direction</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>Up</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>Down</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation type="unfinished"></translation>
+        <translation>Note Head Positon </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>Left of Stem</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>Right of Stem</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Stemless</translation>
     </message>
 </context>
 <context>
@@ -1062,7 +1062,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Midi Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Properties...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -1177,7 +1177,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1303,7 +1303,7 @@ failed: </source>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Program</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -1539,7 +1539,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>keysig left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Key Sig. Left Margin</translation>
     </message>
     <message>
         <source>timesig left margin</source>
@@ -1563,7 +1563,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>all staffs</source>
-        <translation type="unfinished"></translation>
+        <translation>All Staffs</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1591,7 +1591,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>max. slope</source>
-        <translation type="unfinished">Max. Slope</translation>
+        <translation>Max. Slope</translation>
     </message>
     <message>
         <source>beam width units</source>
@@ -1965,7 +1965,7 @@ space unit</extracomment>
     <name>GreendotButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Record</translation>
     </message>
 </context>
 <context>
@@ -2582,11 +2582,11 @@ failed: </source>
     </message>
     <message>
         <source>previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Previous</translation>
     </message>
     <message>
         <source>next</source>
-        <translation type="unfinished"></translation>
+        <translation>Next</translation>
     </message>
 </context>
 <context>
@@ -5164,11 +5164,11 @@ before closing?</source>
     </message>
     <message>
         <source>Create new score from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Create New Score from Template</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation type="unfinished"></translation>
+        <translation>Create New Score from Scratch</translation>
     </message>
     <message>
         <source>MuseScore: Create New Score</source>
@@ -5257,11 +5257,11 @@ before closing?</source>
     </message>
     <message>
         <source>head index</source>
-        <translation type="unfinished"></translation>
+        <translation>Head Index</translation>
     </message>
     <message>
         <source>note head group</source>
-        <translation type="unfinished"></translation>
+        <translation>Note Head Group</translation>
     </message>
     <message>
         <source>Note</source>
@@ -5891,7 +5891,7 @@ before closing?</source>
     </message>
     <message>
         <source>Midi Remote Control</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Remote Control</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -6380,7 +6380,7 @@ Please select a single note or rest and retry operation
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Record</translation>
     </message>
 </context>
 <context>
@@ -6402,7 +6402,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Set specials for</source>
-        <translation type="unfinished"></translation>
+        <translation>Set Specials for</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -6418,15 +6418,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Destination number</source>
-        <translation type="unfinished"></translation>
+        <translation>Destination Number</translation>
     </message>
     <message>
         <source>Cycles to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Cycles to Play</translation>
     </message>
     <message>
         <source>cycle numbers, example: 1,3,5</source>
-        <translation type="unfinished"></translation>
+        <translation>Cycle Numbers (Ex. 1,3,5)</translation>
     </message>
 </context>
 <context>
@@ -6554,7 +6554,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Open Style File</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -6566,7 +6566,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Transpose</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
@@ -6723,31 +6723,31 @@ failed: </source>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam Begin</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam Mid</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam End</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation>No Beam</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin 1/32</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">s</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6769,27 +6769,27 @@ failed: </source>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam Begin</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam Mid</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation type="unfinished"></translation>
+        <translation>Beam End</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation>No Beam</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin 1/32</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -6872,7 +6872,7 @@ failed: </source>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
@@ -6884,7 +6884,7 @@ failed: </source>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Action</translation>
     </message>
 </context>
 <context>
@@ -7405,15 +7405,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>has number</source>
-        <translation type="unfinished"></translation>
+        <translation>Has Number</translation>
     </message>
     <message>
         <source>has line</source>
-        <translation type="unfinished"></translation>
+        <translation>Has Line</translation>
     </message>
     <message>
         <source>base len</source>
-        <translation type="unfinished"></translation>
+        <translation>Base Len.</translation>
     </message>
     <message>
         <source>normal notes</source>
@@ -8157,7 +8157,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dot</translation>
     </message>
     <message>
         <source>longa up</source>
