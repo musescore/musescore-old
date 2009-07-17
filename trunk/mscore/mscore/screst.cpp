@@ -21,9 +21,11 @@
 #include "mscore.h"
 #include "screst.h"
 #include "rest.h"
+#include "chord.h"
 #include "harmony.h"
 #include "scscore.h"
 #include "measure.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   ScRestPropertyIterator
@@ -268,4 +270,102 @@ void ScChordRestPrototype::addHarmony(HarmonyPtr h)
             cr->measure()->add(h);
       h->render();
       }
+
+//---------------------------------------------------------
+//   topNote
+//---------------------------------------------------------
+
+NotePtr ScChordRestPrototype::topNote() const
+      {
+      ChordRest* cr = thisChordRest();
+      return cr->type() == CHORD ? static_cast<Chord*>(cr)->upNote() : 0;
+      }
+
+//---------------------------------------------------------
+//   addNote
+//---------------------------------------------------------
+
+void ScChordRestPrototype::addNote(NotePtr note)
+      {
+      ChordRest* cr = thisChordRest();
+      if (cr->type() != CHORD)
+            return;
+      Chord* chord = static_cast<Chord*>(cr);
+      note->setParent(chord);
+      Score* score = chord->score();
+      if (score) {
+            note->setScore(score);
+            chord->score()->undoAddElement(note);
+            }
+      else
+            chord->add(note);
+      }
+
+//---------------------------------------------------------
+//   removeNote
+//---------------------------------------------------------
+
+void ScChordRestPrototype::removeNote(int idx)
+      {
+      ChordRest* cr = thisChordRest();
+      if (cr->type() != CHORD)
+            return;
+      Chord* chord = static_cast<Chord*>(cr);
+
+      NoteList* nl = chord->noteList();
+      if (idx < 0 || idx >= int(nl->size()))
+            return;
+      Score* score = chord->score();
+      if (score) {
+            NotePtr n = note(idx);
+            score->undoRemoveElement(n);
+            }
+      else {
+            int k = 0;
+            for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                  if (k == idx) {
+                        nl->erase(i);
+                        break;
+                        }
+                  ++k;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   notes
+//---------------------------------------------------------
+
+int ScChordRestPrototype::notes() const
+      {
+      ChordRest* cr = thisChordRest();
+      if (cr->type() != CHORD)
+            return 0;
+      Chord* chord = static_cast<Chord*>(cr);
+      const NoteList* nl = chord->noteList();
+      return nl->size();
+      }
+
+//---------------------------------------------------------
+//   note
+//---------------------------------------------------------
+
+NotePtr ScChordRestPrototype::note(int idx) const
+      {
+      ChordRest* cr = thisChordRest();
+      if (cr->type() != CHORD)
+            return 0;
+      Chord* chord = static_cast<Chord*>(cr);
+      const NoteList* nl = chord->noteList();
+      if (idx < 0 || idx >= int(nl->size()))
+            return 0;
+      int k = 0;
+      for (ciNote i = nl->begin(); i != nl->end(); ++i) {
+            if (k == idx)
+                  return i->second;
+            ++k;
+            }
+      return 0;
+      }
+
 

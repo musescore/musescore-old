@@ -22,6 +22,7 @@
 #define __INPUT_H__
 
 #include "globals.h"
+#include "durationtype.h"
 
 class Slur;
 class ChordRest;
@@ -34,8 +35,8 @@ struct Drumset;
 class InputState {
    public:
       int dots;
-      int len;
-      int tickLen;  // len + len * (dot ? .5 : 0)
+//      int len;
+      Duration duration;      // currently selected duration
       bool rest;
       int pad;
       int pitch;
@@ -54,6 +55,7 @@ class InputState {
       void setPos(ChordRest* cr);
 
       int voice() const { return track % VOICES; }
+      int tickLen() { return duration.ticks(dots); }
       };
 
 #endif

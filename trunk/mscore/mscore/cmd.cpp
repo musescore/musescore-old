@@ -523,10 +523,10 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
       expandVoice();
 
       // insert note
-      int len = _is.tickLen;
+      int len = _is.tickLen();
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
-            n = (Note*)(setTupletChordRest(cr, pitch, len));
+            n = (Note*)setTupletChordRest(cr, pitch, len);
             len = cr->tuplet()->actualTickLen(len);
             }
       else {

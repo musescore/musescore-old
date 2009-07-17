@@ -32,7 +32,6 @@ class Measure;
 
 typedef Rest* RestPtr;
 typedef ChordRest* ChordRestPtr;
-typedef Chord* ChordPtr;
 typedef Measure* MeasurePtr;
 typedef Text* TextPtr;
 
@@ -112,7 +111,7 @@ class ScSCursorPrototype : public QObject, public QScriptable
    public slots:
       void rewind();
       bool eos() const;
-      ChordPtr chord();
+      ChordRestPtr chord();
       MeasurePtr measure();
       bool next();
       bool nextMeasure();

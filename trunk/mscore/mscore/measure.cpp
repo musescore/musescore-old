@@ -3311,7 +3311,7 @@ bool Measure::isMeasureRest(int staffIdx)
                   if (e && e->type() == REST) {
                         Rest* r = static_cast<Rest*>(e);
                         Duration d = r->duration();
-                        if (d.val() == Duration::V_MEASURE)
+                        if (d.type() == Duration::V_MEASURE)
                               return true;
                         }
                   }

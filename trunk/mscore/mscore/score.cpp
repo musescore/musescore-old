@@ -91,8 +91,7 @@ InputState::InputState()
       slur          = 0;
       cr            = 0;
       dots          = 0;
-      len           = division;
-      tickLen       = division;
+      duration.setType(Duration::V_INVALID);
       rest          = false;
       pad           = 0;
       pitch         = 60;

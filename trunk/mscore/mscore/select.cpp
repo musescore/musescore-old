@@ -291,7 +291,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             if (e == 0) {
                   selState = SEL_NONE;
                   if (!noteEntryMode())
-                        _is.len = 0;
+                        _is.duration.setVal(Duration::V_INVALID);
                   updateAll = true;
                   }
             else {
@@ -338,7 +338,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   updateAll = true;
                   selState = SEL_SYSTEM;
                   updateSelectedElements(selState);
-                  _is.len = 0;
+                  _is.duration.setVal(Duration::V_INVALID);
                   }
             else {
                   if (_selection->state() == SEL_STAFF || _selection->state() == SEL_SYSTEM) {
@@ -348,7 +348,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   else {
                         refresh |= e->abbox();
                         _selection->add(e);
-                        _is.len = 0;
+                        _is.duration.setVal(Duration::V_INVALID);
                         selState = SEL_MULT;
                         }
                   }
@@ -519,7 +519,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
             selState = SEL_STAFF;
             updateSelectedElements(selState);
-            _is.len = 0;
+            _is.duration.setVal(Duration::V_INVALID);
             }
       _selection->setState(selState);
       emit selectionChanged(int(_selection->state()));

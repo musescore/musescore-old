@@ -363,7 +363,7 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
-      int len  = _is.tickLen;
+      int len  = _is.tickLen();
       Position p;
       if (!getPosition(&p, pos, _is.voice())) {
             printf("cannot put note here, get position failed\n");
@@ -1299,10 +1299,13 @@ void Score::cmdTuplet(int n)
       if (cr == 0)
             return;
 
-      int ticks = cr->tickLen();
-      if (ticks == 0)
-            ticks = cr->measure()->tickLen();
+      Duration duration = cr->duration();
+      // TODO: Check for whole measure
+
+printf("duration %d\n", int(duration.type()));
       int tick = cr->tick();
+      int ticks = duration.type() != Duration::V_MEASURE ? cr->tickLen() : cr->measure()->tickLen();
+
       int tz, tn;
       getSigmap()->timesig(tick, tz, tn);
 
@@ -1315,6 +1318,7 @@ void Score::cmdTuplet(int n)
             case 3:                       // triplet
                   normalNotes = 2;
                   actualNotes = 3;
+                  duration = duration.shift(1);
                   break;
             case 4:                       // quadruplet
                   normalNotes = 6;
@@ -1333,14 +1337,17 @@ void Score::cmdTuplet(int n)
             case 6:                       // sextuplet
                   normalNotes = 4;
                   actualNotes = 6;
+                  duration = duration.shift(1);
                   break;
             case 7:                       // septuplet
                   normalNotes = 4;        // (sometimes 6)
                   actualNotes = 7;
+                  duration = duration.shift(1);
                   break;
             case 8:                       // octuplet
                   normalNotes = 6;
                   actualNotes = 8;
+                  duration = duration.shift(1);
                   break;
             case 9:                       // nonuplet
                   normalNotes = 8;        // (sometimes 6)
@@ -1351,8 +1358,11 @@ void Score::cmdTuplet(int n)
                   return;
             }
 
+printf("   duration %d\n", int(duration.type()));
       int baseLen = ticks / normalNotes;
       Tuplet* tuplet = new Tuplet(this);
+      tuplet->setDuration(cr->duration());
+
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
@@ -1373,7 +1383,7 @@ void Score::cmdTuplet(int n)
       if (el) {
             select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
-            _is.len = baseLen;
+            _is.duration = duration;
             setPadState();
             }
       }
@@ -1740,10 +1750,10 @@ void Score::cmdEnterRest()
 
       ChordRest* cr = _is.cr;
       if (cr->tuplet()) {
-            setTupletChordRest(cr, -1, _is.tickLen);
+            setTupletChordRest(cr, -1, _is.tickLen());
             }
       else {
-            setRest(_is.pos(), _is.track, _is.tickLen, _is.dots);
+            setRest(_is.pos(), _is.track, _is.tickLen(), _is.dots);
 
             // go to next ChordRest
             cr = nextChordRest(_is.cr);
