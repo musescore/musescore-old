@@ -1,3 +1,8 @@
+17.jul (la)
+      - Less warning on undo. Patch by perholjeess
+        http://musescore.org/en/node/2054 
+      - New plugin to modify tuning of all notes
+      - Fix color notes plugin to modify all voices
 15.jul (ws)
       - fix memory corruption after deleting ChordList
       - small changes in script interface

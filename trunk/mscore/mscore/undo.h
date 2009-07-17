@@ -69,7 +69,7 @@ class UndoCommand {
       QList<UndoCommand*> childList;
 
    public:
-      ~UndoCommand();
+      virtual ~UndoCommand();
       virtual void undo();
       virtual void redo();
       void appendChild(UndoCommand* cmd) { childList.append(cmd);   }
