@@ -29,5 +29,7 @@ install(FILES
       removenotes.ui
       break4.js
       chordchart.js
+      tuning.js
+      tuning.ui
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
