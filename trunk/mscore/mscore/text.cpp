@@ -1010,9 +1010,18 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
                         }
                         break;
                   }
-            if (key != Qt::Key_Space && key != Qt::Key_Minus)
+            #ifndef Q_WS_MAC
+			if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
-            }
+			#endif
+            
+			}
+	  #ifdef Q_WS_MAC
+		else if(modifiers == Qt::AltModifier){
+			if (key != Qt::Key_Space && key != Qt::Key_Minus)
+                  return true;
+		}
+	  #endif		
       QTextCursor::MoveMode mm = (modifiers & Qt::ShiftModifier)
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {

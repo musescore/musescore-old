@@ -68,7 +68,11 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             }
       if (e->type() == LYRICS) {
             int found = false;
-            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+            #ifdef Q_WS_MAC
+			if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::AltModifier)) {
+			#else
+			if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+			#endif
                   // TODO: shift+tab events are filtered by qt
                   _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier, true);
                   found = true;
@@ -91,11 +95,19 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   _score->lyricsReturn();
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::ControlModifier)) {
+            #ifdef Q_WS_MAC
+			else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::AltModifier)) {
+			#else
+			else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::ControlModifier)) {
+			#endif
                   _score->lyricsMinus();
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::ControlModifier)) {
+            #ifdef Q_WS_MAC
+			else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::AltModifier)) {
+			#else
+			else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::ControlModifier)) {
+			#endif
                   _score->lyricsUnderscore();
                   found = true;
                   }
@@ -105,7 +117,11 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   }
             }
       if (e->type() == HARMONY) {
-            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+			#ifdef Q_WS_MAC
+			if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::AltModifier)) {
+			#else
+			if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+			#endif
                   _score->chordTab(ev->modifiers() & Qt::ShiftModifier);
                   ev->accept();
                   return;
