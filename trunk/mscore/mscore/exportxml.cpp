@@ -1682,13 +1682,6 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   nrmNotes = t->normalNotes();
                   }
 
-            if (t) {
-                  xml.stag("time-modification");
-                  xml.tag("actual-notes", actNotes);
-                  xml.tag("normal-notes", nrmNotes);
-                  xml.etag();
-                  }
-
             QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
@@ -1697,18 +1690,6 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             xml.tag("type", s);
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
-
-            if (note->headGroup()==5){
-            	xml.tag("notehead", "slash");
-            }else if (note->headGroup()==3){
-            	xml.tag("notehead", "triangle");
-            }else if(note->headGroup()==4){
-            	xml.tag("notehead", "diamond");
-            }else if(note->headGroup()==1){
-            	xml.tag("notehead", "x");
-            }else if(note->headGroup()==6){
-            	xml.tag("notehead", "circle-x");
-            }
 
             // accidental
             // Note: in Binchois.xml two accidentals have parentheses which are encoded
@@ -1747,12 +1728,31 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                         xml.tag("accidental", s);
                   }
 
+            if (t) {
+                  xml.stag("time-modification");
+                  xml.tag("actual-notes", actNotes);
+                  xml.tag("normal-notes", nrmNotes);
+                  xml.etag();
+                  }
+
             // no stem for whole notes and beyond
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
             	xml.tag("stem", QString("none"));
             }
             else if (note->chord()->tickLen() < 4*division){
             	xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
+            }
+
+            if (note->headGroup()==5){
+                xml.tag("notehead", "slash");
+            }else if (note->headGroup()==3){
+                xml.tag("notehead", "triangle");
+            }else if(note->headGroup()==4){
+                xml.tag("notehead", "diamond");
+            }else if(note->headGroup()==1){
+                xml.tag("notehead", "x");
+            }else if(note->headGroup()==6){
+                xml.tag("notehead", "circle-x");
             }
 
             // LVIFIX: check move() handling
@@ -2666,11 +2666,11 @@ foreach(Element* el, *(score->gel())) {
                   // printf("measureNo=%d\n", measureNo);
                   // pickup and other irregular measures need special care
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
-                        xml.stag("measure number=\"0\" implicit=\"yes\"");
+                        xml.stag(QString("measure number=\"0\" implicit=\"yes\" width=\"%2\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2)));
                         pickupMeasureNo++;
                         }
                   else if (m->irregular()) {
-                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++));
+                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\" width=\"%2\"").arg(irregularMeasureNo++).arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2)));
                         }
                   else {
                         xml.stag(QString("measure number=\"%1\" width=\"%2\"").arg(measureNo++).arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2))); // added measure width
@@ -2712,7 +2712,7 @@ foreach(Element* el, *(score->gel())) {
                       // Put the system print suggestions only for the first part in a score...
                       if (idx == 0){
 
-                          double systemLM = getTenthsFromInches(fmod(m->canvasPos().x() / DPI, pf->width())) - lm;
+                          double systemLM = getTenthsFromDots(m->canvasPos().x() - m->system()->page()->canvasPos().x()) - lm;
 
                           double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
                           // Find the right margin of the system.

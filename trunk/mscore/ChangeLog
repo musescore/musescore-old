@@ -1,3 +1,7 @@
+22.jul (la)
+      - Replace Ctrl by Alt for insertion of space, hyphen and underscore in lyrics on mac
+      - MusicXML export enhancement. Patch by Raffaele Russi. (including: order in <note>
+      to please Finale import, deal with page2/3 space, measure width)
 17.jul (la)
       - Less warning on undo. Patch by perholjeess
         http://musescore.org/en/node/2054 
