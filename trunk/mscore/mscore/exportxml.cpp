@@ -1087,13 +1087,21 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       static int table2[7] = { 5, 4, 2, 0, 11, 9, 7 };
       int npitch = table2[step] + (octave + 1) * 12;
       alter      = note->pitch() - npitch;
-
+      
+      //deal with Cb and B#
       if (alter > 2) {
             printf("pitch2xml problem: alter %d step %d(line %d) octave %d\n",
                alter, step, note->line(), octave);
 //HACK:
             alter  -= 12;
             octave += 1;
+            }
+      if (alter < -2) {
+            printf("pitch2xml problem: alter %d step %d(line %d) octave %d\n",
+               alter, step, note->line(), octave);
+//HACK:
+            alter  += 12;
+            octave -= 1;
             }
       }
 
