@@ -524,6 +524,15 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
 
       // insert note
       int len = _is.tickLen();
+	  //no note value selected
+	  if(len==0){
+			Measure* measure = tick2measure(_is.pos());
+			len = measure->tickLen();
+			_is.duration.setVal(len);
+			len = _is.tickLen();
+			setPadState();
+			}
+		 
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
             n = (Note*)setTupletChordRest(cr, pitch, len);
