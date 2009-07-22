@@ -369,6 +369,15 @@ void Score::putNote(const QPointF& pos, bool replace)
             printf("cannot put note here, get position failed\n");
             return;
             }
+	  
+	  
+	  //no note value selected
+	  if(len==0){
+			len = p.measure->tickLen();
+			_is.duration.setVal(len);
+			len = _is.tickLen();
+			setPadState();
+			}
 
       int tick                = p.tick;
       int staffIdx            = p.staffIdx;
