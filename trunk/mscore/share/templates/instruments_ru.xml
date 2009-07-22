@@ -11,9 +11,9 @@
       <gateTime>100%</gateTime>
       </Articulation>
 
-   <instrument-group name="ÐÐµÑÐµÐ²ÑÐ½Ð½ÑÐµ Ð´ÑÑÐ¾Ð²ÑÐµ">
+   <instrument-group name="Деревянные духовые">
       <instrument>
-         <name>Ð¤Ð»ÐµÐ¹ÑÐ°-Ð¿Ð¸ÐºÐºÐ¾Ð»Ð¾</name>
+         <name>Флейта-пикколо</name>
          <short-name>Picc.</short-name>
          <transposition>12</transposition>
          <clef>0</clef>
@@ -22,14 +22,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¤Ð»ÐµÐ¹ÑÐ°</name>
+         <name>Флейта</name>
          <short-name>Fl.</short-name>
          <channel>
             <program>73</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»ÑÑÐ¾Ð²Ð°Ñ ÑÐ»ÐµÐ¹ÑÐ°</name>
+         <name>Альтовая флейта</name>
          <short-name>Alt. Fl.</short-name>
          <transposition>-5</transposition>
          <channel>
@@ -37,7 +37,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°ÑÐ¾Ð²Ð°Ñ ÑÐ»ÐµÐ¹ÑÐ°</name>
+         <name>Басовая флейта</name>
          <short-name>Bs. Fl.</short-name>
          <transposition>-12</transposition>
          <channel>
@@ -45,14 +45,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¤Ð»ÐµÐ¹ÑÐ° ÐÐ°Ð½Ð°</name>
+         <name>Флейта Пана</name>
          <short-name>Pan Fl.</short-name>
          <channel>
             <program>75</program>
             </channel>
          </instrument>
       <instrument>
-           <name>Ð¡Ð¾Ð¿ÑÐ°Ð½Ð¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <name>Сопрановая блокфлейта</name>
            <short-name>S.</short-name>
            <clef>1</clef>
            <channel>
@@ -60,21 +60,21 @@
            </channel>
          </instrument>
       <instrument>
-           <name>ÐÐ»ÑÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <name>Альтовая блокфлейта</name>
            <short-name>A.</short-name>
            <channel>
              <program>74</program>
            </channel>
          </instrument>
       <instrument>
-           <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <name>Теноровая блокфлейта</name>
            <short-name>T.</short-name>
            <channel>
              <program>74</program>
            </channel>
          </instrument>
       <instrument>
-           <name>ÐÐ°ÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <name>Басовая блокфлейта</name>
            <short-name>B.</short-name>
            <transposition>12</transposition>
            <clef>4</clef>
@@ -83,14 +83,14 @@
            </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð±Ð¾Ð¹</name>
+         <name>Гобой</name>
          <short-name>Ob.</short-name>
          <channel>
             <program>68</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸Ð¹ ÑÐ¾Ð¶Ð¾Ðº</name>
+         <name>Английский рожок</name>
          <short-name>Eng. Hn.</short-name>
          <transposition>-7</transposition>
          <channel>
@@ -98,7 +98,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <name>Кларнет в строе си-бемоль</name>
          <short-name>B<symbol name="flat"/>Cl.</short-name>
          <transposition>-2</transposition>
          <channel>
@@ -106,7 +106,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ Ð¼Ð¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <name>Кларнет в строе ми-бемоль</name>
          <short-name>E<symbol name="flat"/>Cl.</short-name>
          <transposition>3</transposition>
          <channel>
@@ -114,7 +114,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ Ð»Ñ</name>
+         <name>Кларнет в строе ля</name>
          <short-name>A Cl.</short-name>
          <transposition>-3</transposition>
          <channel>
@@ -122,7 +122,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°Ñ-ÐºÐ»Ð°ÑÐ½ÐµÑ</name>
+         <name>Бас-кларнет</name>
          <short-name>Bs. Cl.</short-name>
          <transposition>-14</transposition>
          <channel>
@@ -130,7 +130,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¤Ð°Ð³Ð¾Ñ</name>
+         <name>Фагот</name>
          <short-name>Bsn.</short-name>
          <clef>4</clef>
          <channel>
@@ -138,7 +138,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð½ÑÑÐ°ÑÐ°Ð³Ð¾Ñ</name>
+         <name>Контрафагот</name>
          <short-name>Cbsn.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
@@ -147,7 +147,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¡Ð°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <name>Саксофон</name>
          <short-name>Sax.</short-name>
          <transposition>-9</transposition>
          <channel>
@@ -155,7 +155,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¡Ð°ÐºÑÐ¾ÑÐ¾Ð½-ÑÐ¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <name>Саксофон-сопрано</name>
          <short-name>Sop. Sax.</short-name>
          <transposition>-2</transposition>
          <channel>
@@ -163,7 +163,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»ÑÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <name>Альтовый саксофон</name>
          <short-name>Alt. Sax.</short-name>
          <transposition>-9</transposition>
          <channel>
@@ -171,7 +171,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <name>Теноровый саксофон</name>
          <short-name>Ten. Sax.</short-name>
          <transposition>-14</transposition>
          <clef>0</clef>
@@ -180,7 +180,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°ÑÐ¸ÑÐ¾Ð½Ð¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <name>Баритоновый саксофон</name>
          <short-name>Bar. Sax.</short-name>
          <transposition>-21</transposition>
          <channel>
@@ -188,7 +188,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°ÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <name>Басовый саксофон</name>
          <short-name>Bs. Sax.</short-name>
          <transposition>-26</transposition>
          <channel>
@@ -197,9 +197,9 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="ÐÐµÐ´Ð½ÑÐµ Ð´ÑÑÐ¾Ð²ÑÐµ">
+   <instrument-group name="Медные духовые">
       <instrument>
-         <name>ÐÐ°Ð»ÑÐ¾ÑÐ½Ð°</name>
+         <name>Валторна</name>
          <short-name>F Hn.</short-name>
          <transposition>-7</transposition>
          <channel>
@@ -207,7 +207,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <name>Труба в строе си-бемоль</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <transposition>-2</transposition>
          <channel>
@@ -215,7 +215,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ ÑÐµ</name>
+         <name>Труба в строе ре</name>
          <short-name>D Tpt.</short-name>
          <transposition>2</transposition>
          <channel>
@@ -223,14 +223,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ Ð´Ð¾</name>
+         <name>Труба в строе до</name>
          <short-name>C Tpt.</short-name>
          <channel>
             <program>56</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ Ð¼Ð¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <name>Труба в строе ми-бемоль</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
          <transposition>3</transposition>
          <channel>
@@ -238,14 +238,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÑÐ±Ð° Ñ ÑÑÑÐ´Ð¸Ð½Ð¾Ð¹</name>
+         <name>Труба с сурдиной</name>
          <short-name>Mt. Tpt.</short-name>
          <channel>
             <program>59</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <name>Корнет в строе си-бемоль</name>
          <short-name>B<symbol name="flat"/> Cnt.</short-name>
          <transposition>-2</transposition>
          <channel>
@@ -253,7 +253,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¤Ð»ÑÐ³ÐµÐ»ÑÐ³Ð¾ÑÐ½</name>
+         <name>Флюгельгорн</name>
          <short-name>Flghn.</short-name>
          <transposition>-2</transposition>
          <channel>
@@ -261,7 +261,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <name>Тромбон</name>
          <short-name>Trb.</short-name>
          <clef>4</clef>
          <channel>
@@ -269,7 +269,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²ÑÐ¹ ÑÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <name>Теноровый тромбон</name>
          <short-name>Ten. Trb.</short-name>
          <clef>4</clef>
          <channel>
@@ -277,7 +277,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°ÑÐ¾Ð²ÑÐ¹ ÑÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <name>Басовый тромбон</name>
          <short-name>Bs. Trb.</short-name>
          <clef>4</clef>
          <channel>
@@ -285,7 +285,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÐ±Ð°</name>
+         <name>Туба</name>
          <short-name>Tba.</short-name>
          <clef>4</clef>
          <channel>
@@ -293,7 +293,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð­ÑÑÐ¾Ð½Ð¸ÑÐ¼</name>
+         <name>Эуфониум</name>
          <short-name>Euph.</short-name>
          <clef>4</clef>
          <channel>
@@ -302,10 +302,10 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="ÐÐµÑÐºÑÑÑÐ¸Ñ">
+   <instrument-group name="Перкуссия">
       <instrument>
-         <name>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ</name>
-         <description>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ Ð² ÑÑÐ¸ Ð»Ð¸Ð½ÐµÐ¹ÐºÐ¸</description>
+         <name>Набор ударных</name>
+         <description>Набор ударных в три линейки</description>
          <short-name>Drm.</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
@@ -315,8 +315,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ</name>
-         <description>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ Ð² Ð¿ÑÑÑ Ð»Ð¸Ð½ÐµÐµÐº</description>
+         <name>Набор ударных</name>
+         <description>Набор ударных в пять линеек</description>
          <short-name>Drm.</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
@@ -366,21 +366,21 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+         <name>Треугольник</name>
          <short-name>Trgl.</short-name>
          <drumset>1</drumset>
          <Drum pitch="80">
             <head>1</head>
             <line>4</line>
             <voice>0</voice>
-            <name>ÐÑÐ¸Ð³Ð»ÑÑÑÐ½Ð½ÑÐ¹ ÑÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+            <name>Приглушённый треугольник</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="81">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>ÐÑÐºÑÑÑÑÐ¹ ÑÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+            <name>Открытый треугольник</name>
             <stem>2</stem>
             </Drum>
          <clef>14</clef>
@@ -545,7 +545,7 @@
 
    <instrument-group name="Pitched Percussion">
       <instrument>
-         <name>ÐÐ¸ÑÐ°Ð²ÑÑ</name>
+         <name>Литавры</name>
          <short-name>Tymp.</short-name>
          <clef>4</clef>
          <channel>
@@ -594,9 +594,9 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="ÐÐ¸ÑÐ°ÑÑ">
+   <instrument-group name="Гитары">
       <instrument>
-         <name>ÐÐ¸ÑÐ°ÑÐ°</name>
+         <name>Гитара</name>
          <short-name>Guit.</short-name>
          <clef>3</clef>
          <channel>
@@ -604,7 +604,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð­Ð»ÐµÐºÑÑÐ¾Ð³Ð¸ÑÐ°ÑÐ°</name>
+         <name>Электрогитара</name>
          <short-name>El. Guit.</short-name>
          <clef>3</clef>
          <channel>
@@ -612,7 +612,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°Ñ-Ð³Ð¸ÑÐ°ÑÐ°</name>
+         <name>Бас-гитара</name>
          <short-name>B. Guit.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
@@ -622,50 +622,50 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="ÐÐ¾ÐºÐ°Ð»">
+   <instrument-group name="Вокал">
       <instrument>
-         <name>ÐÐ¾Ð»Ð¾Ñ</name>
+         <name>Голос</name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¡Ð¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <name>Сопрано</name>
          <short-name>S.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐµÑÑÐ¾-ÑÐ¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <name>Меццо-сопрано</name>
          <short-name>Messo.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð½ÑÑÐ°Ð»ÑÑÐ¾</name>
+         <name>Контральто</name>
          <short-name>CAlt.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»ÑÑ</name>
+         <name>Альт</name>
          <short-name>A</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð½ÑÑÑÐµÐ½Ð¾Ñ</name>
+         <name>Контртенор</name>
          <short-name>CTen.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Ð¢ÐµÐ½Ð¾Ñ</name>
+         <name>Тенор</name>
          <short-name>T.</short-name>
          <clef>3</clef>
          <channel>
@@ -673,7 +673,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°ÑÐ¸ÑÐ¾Ð½</name>
+         <name>Баритон</name>
          <short-name>Bar.</short-name>
          <clef>4</clef>
          <channel>
@@ -681,7 +681,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ°Ñ</name>
+         <name>Бас</name>
          <short-name>B.</short-name>
          <clef>4</clef>
          <channel>
@@ -690,9 +690,9 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="ÐÐ»Ð°Ð²Ð¸ÑÐ½ÑÐµ">
+   <instrument-group name="Клавишные">
       <instrument>
-         <name>Ð¤Ð¾ÑÑÐµÐ¿Ð¸Ð°Ð½Ð¾</name>
+         <name>Фортепиано</name>
          <short-name>Pno.</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
@@ -703,7 +703,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»Ð°Ð²Ð¸ÐºÐ¾ÑÐ´</name>
+         <name>Клавикорд</name>
          <short-name>Hchd.</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
@@ -714,7 +714,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÑÐ³Ð°Ð½</name>
+         <name>Орган</name>
          <short-name>Or.</short-name>
          <staves>3</staves>
          <clef staff="1">0</clef>
@@ -726,7 +726,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Ð Ð¾Ðº-Ð¾ÑÐ³Ð°Ð½</name>
+         <name>Рок-орган</name>
          <short-name>Rk. Org.</short-name>
          <staves>3</staves>
          <clef staff="1">0</clef>
@@ -738,7 +738,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐºÐºÐ¾ÑÐ´ÐµÐ¾Ð½</name>
+         <name>Аккордеон</name>
          <short-name>Acc.</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
@@ -750,9 +750,9 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Ð¡ÑÑÑÐ½Ð½Ð¾-ÑÐ¸Ð¿ÐºÐ¾Ð²ÑÐµ">
+   <instrument-group name="Струнно-щипковые">
       <instrument>
-         <name>ÐÑÑÐ°</name>
+         <name>Арфа</name>
          <short-name>Hrp.</short-name>
          <staves>2</staves>
          <clef staff="1">0</clef>
@@ -764,36 +764,36 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Ð¡ÑÑÑÐ½Ð½Ð¾-ÑÐ¼ÑÑÐºÐ¾Ð²ÑÐµ">
+   <instrument-group name="Струнно-смычковые">
       <instrument>
-         <name>Ð¡ÐºÑÐ¸Ð¿ÐºÐ°</name>
+         <name>Скрипка</name>
          <short-name>Vln.</short-name>
          <channel>
             <program>40</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐµÑÐ²ÑÐµ ÑÐºÑÐ¸Ð¿ÐºÐ¸</name>
+         <name>Первые скрипки</name>
          <short-name>Vlns. 1</short-name>
          <channel>
            <program value="48"/>
             </channel>
-         <channel name="Ð¿Ð¸ÑÑÐ¸ÐºÐ°ÑÐ¾">
+         <channel name="пиццикато">
            <program value="45"/>
            </channel>
-         <channel name="ÑÑÐµÐ¼Ð¾Ð»Ð¾">
+         <channel name="тремоло">
            <program value="44"/>
            </channel>
          </instrument>
       <instrument>
-         <name>ÐÑÐ¾ÑÑÐµ ÑÐºÑÐ¸Ð¿ÐºÐ¸</name>
+         <name>Вторые скрипки</name>
          <short-name>Vlns. 2</short-name>
          <channel>
             <program>48</program>
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»ÑÑ</name>
+         <name>Альт</name>
          <short-name>Vla.</short-name>
          <clef>11</clef>
          <channel>
@@ -801,7 +801,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ»ÑÑÑ</name>
+         <name>Альты</name>
          <short-name>Vlas.</short-name>
          <clef>11</clef>
          <channel>
@@ -809,7 +809,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¸Ð¾Ð»Ð¾Ð½ÑÐµÐ»Ñ</name>
+         <name>Виолончель</name>
          <short-name>Vlc.</short-name>
          <clef>4</clef>
          <channel>
@@ -817,7 +817,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¸Ð¾Ð»Ð¾Ð½ÑÐµÐ»Ð¸</name>
+         <name>Виолончели</name>
          <short-name>Vlcs.</short-name>
          <clef>4</clef>
          <channel>
@@ -825,7 +825,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°Ñ</name>
+         <name>Контрабас</name>
          <short-name>D.B.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
@@ -834,7 +834,7 @@
             </channel>
          </instrument>
       <instrument>
-         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°Ñ</name>
+         <name>Контрабас</name>
          <short-name>C.B.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
@@ -843,7 +843,7 @@
             </channel>
          </instrument>
        <instrument>
-         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°ÑÑ</name>
+         <name>Контрабасы</name>
          <short-name>Cbs.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
