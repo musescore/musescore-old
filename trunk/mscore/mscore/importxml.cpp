@@ -1625,7 +1625,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         QPointF userOff = b->userOff();
                         b->add(b->createLineSegment());
-                        b->layout();
+                        
                         b->setUserOff(QPointF()); // restore the offset
                         b->setMxmlOff2(offset);
                         LineSegment* ls1 = b->lineSegments().front();
