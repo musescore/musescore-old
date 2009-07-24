@@ -1403,7 +1403,7 @@ void setMscoreLocale(QString localeName)
       //
       shortcuts.clear();
       for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml[0] == 0)
+            if (MuseScore::sc[i].xml == 0)
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
@@ -2404,7 +2404,7 @@ QFileDialog* MuseScore::saveAsDialog()
             _saveAsDialog->setWindowTitle(tr("MuseScore: Save As"));
             setSaveFilters(_saveAsDialog);
             QSettings settings;
-        
+
             if (settings.contains("saveAs")) {
                   QByteArray ba = settings.value("saveAs").toByteArray();
                   if (!_saveAsDialog->restoreState(ba))
