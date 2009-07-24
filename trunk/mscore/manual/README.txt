@@ -30,6 +30,9 @@ To create all the language handbooks at once use "all" as the command line argum
 
 CHANGE LOG
 
+* Compatibility update: remove "www." from handbook links (HTML from website changed)
+* Update CSS for release of version 0.9.5 and to embed DejaVuSans font for Mac shortcut symbols
+
 Version 1.2 (9 July 2009):
 * Style sheet designed for pisa 3.0.31 (no longer designed for 3.0.27)
 * Hides breadcrumb links

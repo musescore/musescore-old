@@ -361,29 +361,29 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     internal = ''
     
     if language_code == 'en':
-        url = 'http://www.musescore.org/en/print/book/export/html/51'
-        internal = 'http://www.musescore.org/en/handbook'
+        url = 'http://musescore.org/en/print/book/export/html/51'
+        internal = 'http://musescore.org/en/handbook'
     elif language_code == 'nl':
-        url = 'http://www.musescore.org/nl/print/book/export/html/375'
-        internal = 'http://www.musescore.org/nl/handboek'
+        url = 'http://musescore.org/nl/print/book/export/html/375'
+        internal = 'http://musescore.org/nl/handboek'
     elif language_code == 'de':
-        url = 'http://www.musescore.org/de/print/book/export/html/98'
-        internal = 'http://www.musescore.org/de/handbuch'
+        url = 'http://musescore.org/de/print/book/export/html/98'
+        internal = 'http://musescore.org/de/handbuch'
     elif language_code == 'es':
-        url = 'http://www.musescore.org/es/print/book/export/html/137'
-        internal = 'http://www.musescore.org/es/manual'
+        url = 'http://musescore.org/es/print/book/export/html/137'
+        internal = 'http://musescore.org/es/manual'
     elif language_code == 'gl':
-        url = 'http://www.musescore.org/gl/print/book/export/html/534'
-        internal = 'http://www.musescore.org/gl/manual-galego'
+        url = 'http://musescore.org/gl/print/book/export/html/534'
+        internal = 'http://musescore.org/gl/manual-galego'
     elif language_code == 'fi':
-        url = 'http://www.musescore.org/fi/print/book/export/html/1057'
-        internal = 'http://www.musescore.org/fi/käsikirja' #k%e4sikirja'
+        url = 'http://musescore.org/fi/print/book/export/html/1057'
+        internal = 'http://musescore.org/fi/käsikirja' #k%e4sikirja'
     elif language_code == 'fr':
-        url = 'http://www.musescore.org/fr/print/book/export/html/115'
-        internal = 'http://www.musescore.org/fr/manuel'
+        url = 'http://musescore.org/fr/print/book/export/html/115'
+        internal = 'http://musescore.org/fr/manuel'
     elif language_code == 'it':
-        url = 'http://www.musescore.org/it/print/book/export/html/772'
-        internal = 'http://www.musescore.org/it/manuale'
+        url = 'http://musescore.org/it/print/book/export/html/772'
+        internal = 'http://musescore.org/it/manuale'
 
     print "Create handbook for",language_code
 

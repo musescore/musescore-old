@@ -1,3 +1,31 @@
+/* Normal */
+@font-face {
+   font-family: DejaVuSans;
+   src: url(font/DejaVuSans.ttf);
+}
+
+/* Bold */
+@font-face {
+   font-family: DejaVuSans;
+   src: url(font/DejaVuSans-Bold.ttf);
+   font-weight: bold;
+}
+
+/* Italic */
+@font-face {
+   font-family: DejaVuSans;
+   src: url(font/DejaVuSans-Oblique.ttf);
+   font-style: italic;
+}
+
+/* Bold and italic */
+@font-face {
+   font-family: DejaVuSans;
+   src: url(font/DejaVuSans-BoldOblique.ttf);
+   font-weight: bold;
+   font-style: italic;
+}
+
 h1 {
   -pdf-outline: true;
   -pdf-level: 0;
@@ -57,20 +85,24 @@ h2 {margin:2.5em 0 0.5em 0; font-size:1.5em;}
 h3,h4,h5,h6 {margin:1em 0 0 0}
 h3+p, h3+br {margin-top:0.5em}
 
+kbd {
+  font-family: DejaVuSans, sans-serif;
+  font-style:italic;
+  font-size:0.9em;
+}
 kbd kbd {
   border: 1pt solid black;
-  font-family:sans-serif;
-  font-size:0.85em;
+  font-family: DejaVuSans, sans-serif;
   font-style:italic;
   margin:0pt;
   padding:0pt 4pt;
 }
 samp.mode {
-  font-family:sans-serif;
+  font-family: DejaVuSans, sans-serif;
 }
 kbd samp {
   border:0pt none;
-  font-family:sans-serif;
+  font-family: DejaVuSans, sans-serif;
   margin:0pt;
   padding:1pt;
 }
@@ -78,6 +110,7 @@ kbd samp {
 del, del a, del a:link, del a:visited {color:grey; text-decoration:line-through}
 
 /*Version specific info*/
-.v0-9-2 { display:none }
-.v0-9-3 { display:none }
-.v0-9-4 .label, .latest .label { display:none }
+.v0-9-2 {display:none}
+.v0-9-3 {display:none}
+.v0-9-4 {display:none}
+.v0-9-5.label, .latest .label {display:none}
