@@ -1255,7 +1255,7 @@ void PreferenceDialog::resetAllValues()
             delete sc;
       localShortcuts.clear();
       for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0 || MuseScore::sc[i].xml == "")
+            if (MuseScore::sc[i].xml == 0)
                   break;
             localShortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
