@@ -241,12 +241,6 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       if (preferences.dirty)
             preferences.write();
 
-      if (_saveAsDialog) {
-            QByteArray ba = _saveAsDialog->saveState();
-            settings.setValue("saveAs", ba);
-            int idx = _saveAsDialog->nameFilters().indexOf(_saveAsDialog->selectedNameFilter());
-            settings.setValue("saveAsFilter", idx);
-            }
       if (_saveCopyDialog) {
             settings.setValue("saveCopy", _saveCopyDialog->saveState());
             int idx = _saveCopyDialog->nameFilters().indexOf(_saveCopyDialog->selectedNameFilter());
@@ -2410,8 +2404,7 @@ QFileDialog* MuseScore::saveAsDialog()
             _saveAsDialog->setWindowTitle(tr("MuseScore: Save As"));
             setSaveFilters(_saveAsDialog);
             QSettings settings;
-            _saveAsDialog->selectNameFilter(_saveAsDialog->nameFilters().value(settings.value("saveAsFilter", 0).toInt()));
-
+        
             if (settings.contains("saveAs")) {
                   QByteArray ba = settings.value("saveAs").toByteArray();
                   if (!_saveAsDialog->restoreState(ba))
