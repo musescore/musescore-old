@@ -1994,6 +1994,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Edit Text Style..."),
          QT_TR_NOOP("Edit Text Style...")
          ),
-      Shortcut(0, "", "", QKeySequence::UnknownKey),
+      // xml==0  marks end of list
+      Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };
 
