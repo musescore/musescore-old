@@ -2413,7 +2413,7 @@ QFileDialog* MuseScore::saveAsDialog()
             else
                   _saveAsDialog->setDirectory(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation));
             }
-	  _saveAsDialog->selectNameFilter(0);
+	  _saveAsDialog->selectNameFilter(_saveAsDialog->nameFilters().value(0));
       return _saveAsDialog;
       }
 
