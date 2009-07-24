@@ -29,7 +29,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer e outros. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Vexa &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; para versións máis recentes e&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;máis información.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publicado baixo a Licenza Pública Xeral de GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -920,7 +928,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"></translation>
+        <translation>desviación da afinación</translation>
     </message>
     <message>
         <source>cent</source>
@@ -941,7 +949,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>sen plica</translation>
     </message>
 </context>
 <context>
@@ -1146,11 +1154,11 @@ fallou:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Abaixo</translation>
+        <translation>Baixar</translation>
     </message>
     <message>
         <source>Default Voice:</source>
@@ -1300,11 +1308,11 @@ fallou:</translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Sen plica</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Invisíbel</translation>
     </message>
 </context>
 <context>
@@ -1676,23 +1684,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>marxe dereita</translation>
     </message>
     <message>
         <source>clef-key distance</source>
-        <translation type="unfinished"></translation>
+        <translation>distancia clave-armadura</translation>
     </message>
     <message>
         <source>clef-barline distance</source>
-        <translation type="unfinished"></translation>
+        <translation>distancia clave-barra</translation>
     </message>
     <message>
         <source>chord description file</source>
-        <translation type="unfinished"></translation>
+        <translation>ficheiro de descrición do acorde</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -1840,7 +1848,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Seleccionar parte:</translation>
+        <translation>Seleccione unha parte:</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1852,7 +1860,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Modificar parte:</translation>
+        <translation>Modificar unha parte:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1868,7 +1876,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Crear parte</translation>
+        <translation>Crear unha parte</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2583,7 +2591,7 @@ fallou:</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation>estender a disposición</translation>
+        <translation>anchear</translation>
     </message>
     <message>
         <source>repeat count:</source>
@@ -2591,7 +2599,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Sen plica</translation>
     </message>
 </context>
 <context>
@@ -2648,7 +2656,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Source:</source>
-        <translation>Orixe:</translation>
+        <translation>Fonte:</translation>
     </message>
 </context>
 <context>
@@ -2795,7 +2803,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Abrir &amp;Recente</translation>
+        <translation>Abrir unha &amp;recente</translation>
     </message>
     <message>
         <source>Parts...</source>
@@ -2815,11 +2823,11 @@ fallou:</translation>
     </message>
     <message>
         <source>Add Note</source>
-        <translation>Engadir nota</translation>
+        <translation>Engadir unha nota</translation>
     </message>
     <message>
         <source>Add Interval</source>
-        <translation>Engadir intervalo</translation>
+        <translation>Engadir un intervalo</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -2887,7 +2895,7 @@ fallou:</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
-        <translation>MuseScore: Cargar partitura</translation>
+        <translation>MuseScore: Cargar unha partitura</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3317,7 +3325,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>broken</source>
-        <translation>rachado</translation>
+        <translation>discontinua</translation>
     </message>
     <message>
         <source>End Bar</source>
@@ -3527,18 +3535,18 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>Creasr unha partitura nova desde cero</translation>
+        <translation>Crear unha partitura nova desde cero</translation>
     </message>
     <message>
         <source>MuseScore: Create New Score</source>
-        <translation>MuseScore: Crear unha partitura nova</translation>
+        <translation>MuseScore: Creación dunha partitura nova</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage1</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear unha partitura nova</translation>
+        <translation>Creación dunha partitura nova</translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
@@ -3553,7 +3561,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Definir un conxunto de instrumentos. Cada instrumento represéntase con un ou máis pentagramas</translation>
+        <translation>Defina un conxunto de instrumentos. Cada instrumento represéntase con un ou máis pentagramas</translation>
     </message>
 </context>
 <context>
@@ -3564,7 +3572,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crear marca de tempo</translation>
+        <translation>Cree a marca de tempo</translation>
     </message>
 </context>
 <context>
@@ -3699,11 +3707,11 @@ antes de fechar?</translation>
     <message>
         <source>Subelements:</source>
         <comment>do not translate</comment>
-        <translation>Subelementos</translation>
+        <translation>Subelementos:</translation>
     </message>
     <message>
         <source>Velo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Velo</translation>
     </message>
     <message>
         <source>Mirror Automatic</source>
@@ -4285,7 +4293,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Export Midi</source>
-        <translation>Exportar midi</translation>
+        <translation>Exportar a midi</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4465,7 +4473,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>use style file:</source>
-        <translation>empregar ficheiro de estilo:</translation>
+        <translation type="unfinished">empregar este ficheiro de estilo:</translation>
     </message>
     <message>
         <source>Export</source>
@@ -4723,19 +4731,19 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Cargar a descrición do acorde</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrición de acordes de MuseScore (*.xml);;Todos os ficheiros (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fallou a carga da lista de acordes:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fallou a apertura da lista de acordes:</translation>
     </message>
 </context>
 <context>
@@ -4929,12 +4937,12 @@ fallou:</translation>
     <message>
         <source>Open Style File
 </source>
-        <translation>Abrir ficheiro de estilo
+        <translation type="unfinished">Abrir un ficheiro de estilo
 </translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Abrir ficheiro de estilo</translation>
+        <translation type="unfinished">MuseScore: Abrir un ficheiro de estilo</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -4978,20 +4986,21 @@ fallou:</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fallou o gardado do ficheiro:</translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>mudanza de nome do ficheiro antigo &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>mudanza de nome do ficheiro temporal &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; fallou:
+</translation>
     </message>
 </context>
 <context>
@@ -5339,32 +5348,32 @@ fallou:</translation>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Texto:</translation>
+        <translation>Texto:</translation>
     </message>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Desprazamento:</translation>
+        <translation>Desprazamento:</translation>
     </message>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Abs.:</translation>
+        <translation>Abs.:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Rel.:</translation>
+        <translation>Rel.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5667,7 +5676,7 @@ fallou:</translation>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: TimeSignature</source>
-        <translation>MuseScore: MarcaDeTempo</translation>
+        <translation>MuseScore: Marca de tempo</translation>
     </message>
 </context>
 <context>
@@ -5678,7 +5687,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Create TimeSignature</source>
-        <translation>Crear MarcaDeTempo</translation>
+        <translation>Crear unha marca de tempo</translation>
     </message>
     <message>
         <source>+</source>
@@ -5701,7 +5710,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Introducir a marca de tempo:</translation>
+        <translation>Introduza a marca de tempo:</translation>
     </message>
     <message>
         <source>Time Signature: </source>
@@ -5721,7 +5730,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
-        <translation>Introducir o número de compases:</translation>
+        <translation type="unfinished">Introduza o número de compases:</translation>
     </message>
     <message>
         <source>Measures:</source>
@@ -5758,7 +5767,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Propiedades de grupo artificial...</translation>
+        <translation>Propiedades do grupo artificial...</translation>
     </message>
 </context>
 <context>
@@ -6199,7 +6208,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lasso</source>
-        <translation type="unfinished">Lazo</translation>
+        <translation>Lazo</translation>
     </message>
     <message>
         <source>ShadowNote</source>
@@ -6207,7 +6216,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>RubberBand</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Elástico</translatorcomment>
+        <translation>Goma elástica</translation>
     </message>
     <message>
         <source>HairPin</source>
@@ -6239,7 +6249,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Compound</source>
-        <translation type="unfinished"></translation>
+        <translation>Composto</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -6301,31 +6311,31 @@ p, li { white-space: pre-wrap; }
     <name>symbol</name>
     <message>
         <source>clef eight</source>
-        <translation type="unfinished"></translation>
+        <translation>clave de do</translation>
     </message>
     <message>
         <source>clef one</source>
-        <translation type="unfinished"></translation>
+        <translation>clave de sol</translation>
     </message>
     <message>
         <source>clef five</source>
-        <translation type="unfinished"></translation>
+        <translation>clave de sol</translation>
     </message>
     <message>
         <source>plus</source>
-        <translation type="unfinished"></translation>
+        <translation>máis</translation>
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished"></translation>
+        <translation>cero</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished"></translation>
+        <translation>un</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished"></translation>
+        <translation>dous</translation>
     </message>
     <message>
         <source>three</source>
@@ -6357,27 +6367,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>f</source>
-        <translation type="unfinished"></translation>
+        <translation>f</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished">menor</translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
     <message>
         <source>r</source>
-        <translation type="unfinished"></translation>
+        <translation>r</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>z</source>
-        <translation type="unfinished"></translation>
+        <translation>z</translation>
     </message>
     <message>
         <source>whole rest</source>
@@ -6389,15 +6399,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>fóra do silencio de redonda</translation>
+        <translation>silencio de redonda fóra</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>fóra do silencio de branca</translation>
+        <translation>silencio de branca fóra</translation>
     </message>
     <message>
         <source>rest M3</source>
-        <translation type="unfinished"></translation>
+        <translation>silencio M3</translation>
     </message>
     <message>
         <source>longa rest</source>
@@ -6665,19 +6675,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upedal heel</source>
-        <translation type="unfinished"></translation>
+        <translation>giù arco arriba</translation>
     </message>
     <message>
         <source>dpedalheel</source>
-        <translation type="unfinished"></translation>
+        <translation>giù arco abaixo</translation>
     </message>
     <message>
         <source>upedal toe</source>
-        <translation type="unfinished"></translation>
+        <translation>sull&apos;arco arriba</translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation type="unfinished"></translation>
+        <translation>sull&apos;arco abaixo</translation>
     </message>
     <message>
         <source>flageolet</source>
@@ -6693,7 +6703,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished"></translation>
+        <translation>coda variada</translation>
     </message>
     <message>
         <source>rcomma</source>
@@ -6757,7 +6767,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>down mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>mordente abaixo</translation>
     </message>
     <message>
         <source>prall up</source>
@@ -6809,7 +6819,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alto clef</source>
-        <translation type="unfinished">clave de do en terceira</translation>
+        <translation>clave de do en terceira</translation>
     </message>
     <message>
         <source>calto clef</source>

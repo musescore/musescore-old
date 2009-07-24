@@ -2,6 +2,10 @@
       - fix bug on pasting full measure rest
       - do not save format on save as anymore
       - fix crash on reset preferences to default
+      (db)
+      - add indent to first line of piano template
+      - update Galician from Xosé
+      - update all handbooks plus fixes to handbook scripts
 22.jul (la)
       - Replace Ctrl by Alt for insertion of space, hyphen and underscore in lyrics on mac
       - MusicXML export enhancement. Patch by Raffaele Russi. (including: order in <note>
