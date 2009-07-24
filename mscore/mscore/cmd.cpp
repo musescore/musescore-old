@@ -2637,7 +2637,13 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
-
+							  
+							  //deal with full measure rest case
+							  if(cr->duration().type() == Duration::V_MEASURE){
+								Measure* m1 = tick2measure(curTick);
+								cr->setTickLen(m1->tickLen());
+								}
+							  
                               curTick  = cr->tick() + cr->tickLen();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
