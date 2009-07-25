@@ -1134,8 +1134,8 @@ void Measure::add(Element* el)
                               //
                               // place breath _after_ chord
                               //
-                              if (st == Segment::SegBreath)
-                                    s = s->next();
+                              if (s && st == Segment::SegBreath)
+									 s = s->next();
                               }
                         }
                   insert(static_cast<Segment*>(el), s);
