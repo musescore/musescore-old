@@ -1,3 +1,5 @@
+26,jul (ws)
+      - fix invisible staff lines property
 24.jul (la)
       - fix bug on pasting full measure rest
       - do not save format on save as anymore
@@ -12,7 +14,7 @@
       to please Finale import, deal with page2/3 space, measure width)
 17.jul (la)
       - Less warning on undo. Patch by perholjeess
-        http://musescore.org/en/node/2054 
+        http://musescore.org/en/node/2054
       - New plugin to modify tuning of all notes
       - Fix color notes plugin to modify all voices
 15.jul (ws)

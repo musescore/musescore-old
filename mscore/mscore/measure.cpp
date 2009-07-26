@@ -120,6 +120,7 @@ Measure::Measure(Score* s)
             s->lines->setTrack(staffIdx * VOICES);
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
+            s->lines->setVisible(!staff->invisible());
             staves.push_back(s);
             }
 
@@ -1982,6 +1983,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             ms->lines->setTrack(i * VOICES);
             ms->lines->setLines(staff->lines());
             ms->lines->setParent(this);
+            ms->lines->setVisible(!staff->invisible());
 
             _score->undo()->push(new InsertMStaff(this, ms, i));
 
@@ -2054,6 +2056,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
       ms->distance = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+      ms->lines->setVisible(!staff->invisible());
       insertMStaff(ms, staffIdx);
       }
 
@@ -2635,6 +2638,7 @@ void Measure::read(QDomElement e, int idx)
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
             s->distance = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+            s->lines->setVisible(!staff->invisible());
             staves.append(s);
             }
 
