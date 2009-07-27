@@ -2692,6 +2692,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                           int len  = measureEnd - c->tick();
                                           rest    -= len;
                                           c->setLen(len);
+										  c->setTickLen(len);
                                           undoAddElement(c);
                                           while (rest) {
                                                 int tick = c->tick() + c->tickLen();
@@ -2701,7 +2702,9 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                                 Chord* c2 = static_cast<Chord*>(c->clone());
                                                 c2->setTick(tick);
                                                 len = measure->tickLen() > rest ? rest : measure->tickLen();
-                                                rest -= len;
+                                                c2->setLen(len);
+												c2->setTickLen(len);
+												rest -= len;
                                                 s     = measure->findSegment(Segment::SegChordRest, tick);
                                                 if (s == 0) {
                                                       s = measure->createSegment(Segment::SegChordRest, tick);
@@ -2738,6 +2741,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                           int len  = measureEnd - r->tick();
                                           rest    -= len;
                                           r->setLen(len);
+										  r->setTickLen(len);
                                           undoAddElement(r);
                                           while (rest) {
                                                 Rest* r2 = static_cast<Rest*>(r->clone());
@@ -2745,7 +2749,9 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                                 r2->setTick(tick);
                                                 measure = tick2measure(tick);
                                                 len = measure->tickLen() > rest ? rest : measure->tickLen();
-                                                rest -= len;
+                                                r2->setLen(len);
+												r2->setTickLen(len);
+												rest -= len;
                                                 s     = measure->findSegment(Segment::SegChordRest, tick);
                                                 if (s == 0) {
                                                       s = measure->createSegment(Segment::SegChordRest, tick);
