@@ -915,10 +915,16 @@ static bool preset_compare (SFPreset* a, SFPreset* b)
 void SFont::readchunk(SFChunk* var)
       {
 	safe_fread(var, 8);
-#ifdef WORDS_BIGENDIAN
-      var->size = GUINT32_FROM_BE(var->size);
+#ifdef Q_WS_MAC
+	if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+		var->size = GUINT32_FROM_BE(var->size);
+		}
 #else
+	#ifdef WORDS_BIGENDIAN
+      var->size = GUINT32_FROM_BE(var->size);
+	#else
       var->size = GUINT32_FROM_LE(var->size);
+	#endif
 #endif
       }
 
@@ -944,7 +950,7 @@ bool SFont::load()
             if (chunkid (chunk.id) != SFBK_ID)        /* error if not SFBK_ID */
                   throw(QString("Not a sound font file"));
             if (chunk.size != f.size() - 8)
-                  throw(QString("Sound font file size mismatch"));
+                  throw(QString("Sound font file size mismatch %1 %2").arg(chunk.size).arg(f.size() - 8));
 
             /* Process INFO block */
             read_listchunk(&chunk);
@@ -986,10 +992,19 @@ unsigned short SFont::READW()
       {
 	unsigned short _temp;
 	safe_fread(&_temp, 2);
-#ifdef WORDS_BIGENDIAN
+#ifdef Q_WS_MAC
+	if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+		return GINT16_FROM_BE(_temp);
+		}
+	else{
+	    return GINT16_FROM_LE(_temp);
+	    }
+#else	
+  #ifdef WORDS_BIGENDIAN
       return GINT16_FROM_BE(_temp);
-#else
+  #else
       return GINT16_FROM_LE(_temp);
+  #endif
 #endif
       }
 
@@ -1001,10 +1016,19 @@ void SFont::READD(unsigned int& var)
       {
       unsigned int _temp;
 	safe_fread(&_temp, 4);
-#ifdef WORDS_BIGENDIAN
-	var = GINT32_FROM_BE(_temp);
+#ifdef Q_WS_MAC
+	if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+		var = GINT32_FROM_BE(_temp);
+		}
+	else{
+	    var = GINT32_FROM_LE(_temp);
+	    }
 #else
-      var = GINT32_FROM_LE(_temp);
+  #ifdef WORDS_BIGENDIAN
+	var = GINT32_FROM_BE(_temp);
+  #else
+	var = GINT32_FROM_LE(_temp);
+  #endif
 #endif
       }
 
