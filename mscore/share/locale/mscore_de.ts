@@ -6,91 +6,91 @@
     <message>
         <source>system</source>
         <translatorcomment>System</translatorcomment>
-        <translation type="unfinished">System</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Dansk</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Nederlands</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Norsk</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>EspaÃ±ol</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>FranÃ§ais</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Galego</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Deutsch</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Italiano</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Brasilian PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Svenska</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>TÃ¼rkÃ§e</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ukrajina</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -121,7 +121,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -972,19 +972,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished">Eigenschaften Noten</translation>
+        <translation>Eigenschaften Noten</translation>
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished">Stimmung</translation>
+        <translation>Stimmung</translation>
     </message>
     <message>
         <source>cent</source>
-        <translation type="unfinished">cent</translation>
+        <translation>cent</translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translation type="unfinished">Notenhalsrichtung</translation>
+        <translation>Notenhalsrichtung</translation>
     </message>
     <message>
         <source>auto</source>
@@ -3601,7 +3601,7 @@ before closing?</source>
     </message>
     <message>
         <source>file save a copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Kopie sichern...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
@@ -3673,15 +3673,15 @@ before closing?</source>
     </message>
     <message>
         <source>redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückgängig machen</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückgängig machen</translation>
     </message>
     <message>
         <source>redo last undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <source>cut</source>
@@ -3793,11 +3793,11 @@ before closing?</source>
     </message>
     <message>
         <source>pitch spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorzeichenwahl</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorzeichenwahl</translation>
     </message>
     <message>
         <source>enter unison above</source>
@@ -5356,15 +5356,15 @@ before closing?</source>
     </message>
     <message>
         <source>Mirror Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">automatisch Spiegeln</translation>
     </message>
     <message>
         <source>Head Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopf links</translation>
     </message>
     <message>
         <source>Head Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopf rechts</translation>
     </message>
 </context>
 <context>
@@ -6251,11 +6251,11 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation type="unfinished">Ersetze (C) durch Symbol in Copyrighttext</translation>
+        <translation>Ersetze (C) durch Symbol in Copyrighttext</translation>
     </message>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
-        <translation type="unfinished">Ersetze 1/2 durch Symbol</translation>
+        <translation>Ersetze 1/2 durch Symbol</translation>
     </message>
 </context>
 <context>
@@ -6368,23 +6368,23 @@ Bitte wählen sie eine Note oder Pause aus und versuchen es nochmal.
     </message>
     <message>
         <source>MuseScore: file not found:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Datei nicht gefunden:</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Akkordbeschreibungen laden</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Akkordbeschreibungen (*.xml);;Alle Dateien (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fehler beim Laden der Akkorbeschreibungsdatei</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim öffnen der Akkordbeschreibungsdatei</translation>
     </message>
 </context>
 <context>
@@ -6626,20 +6626,20 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fehler beim Datei sichern</translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen allte Datei &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen Temp. Datei &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; Fehlgeschlagen:</translation>
     </message>
 </context>
 <context>
@@ -7092,214 +7092,214 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished">Zeichensatz:</translation>
+        <translation>Zeichensatz:</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation type="unfinished">Fontfamilie</translation>
+        <translation>Fontfamilie</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Größe:</translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished">Fontgröße</translation>
+        <translation>Fontgröße</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished">Stil:</translation>
+        <translation>Stil:</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished">fett</translation>
+        <translation>fett</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished">kursiv</translation>
+        <translation>kursiv</translation>
     </message>
     <message>
         <source>I</source>
-        <translation type="unfinished">I</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation type="unfinished">unterstrichen</translation>
+        <translation>unterstrichen</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished">U</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished">Ausrichten:</translation>
+        <translation>Ausrichten:</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished">Linke Seite des Textes an Referenzpunkt ausrichten</translation>
+        <translation>Linke Seite des Textes an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished">Text an Referenzpunkt zentrieren</translation>
+        <translation>Text an Referenzpunkt zentrieren</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished">Rechte Textseite an Referenzpunkt ausrichten</translation>
+        <translation>Rechte Textseite an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished">Textoberkante an Referenzpunkt ausrichten</translation>
+        <translation>Textoberkante an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished">Text vertikal an Referenzpunkt zentrieren</translation>
+        <translation>Text vertikal an Referenzpunkt zentrieren</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished">Textunterkante an Referenzpunkt ausrichten</translation>
+        <translation>Textunterkante an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Farbe:</translation>
+        <translation>Farbe:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished">Textfarbe</translation>
+        <translation>Textfarbe</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Offset</translation>
+        <translation>Offset</translation>
     </message>
     <message>
         <source>X:</source>
-        <translation type="unfinished">X:</translation>
+        <translation>X:</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished">Horizontaler Referenzpunktoffset</translation>
+        <translation>Horizontaler Referenzpunktoffset</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished">relX:</translation>
+        <translation>relX:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished">Referenzpunktverschiebung in % der Elternbreite</translation>
+        <translation>Referenzpunktverschiebung in % der Elternbreite</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished">Vertikaler Referenzpunktoffset</translation>
+        <translation>Vertikaler Referenzpunktoffset</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished">relY:</translation>
+        <translation>relY:</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished">Referenzpunktverschiebung in % der Elternhöhe</translation>
+        <translation>Referenzpunktverschiebung in % der Elternhöhe</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Einheit:</translation>
+        <translation>Einheit:</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation type="unfinished">Offset ist Absolut</translation>
+        <translation>Offset ist Absolut</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation type="unfinished">Offset in Sptium-Einheiten</translation>
+        <translation>Offset in Spatium-Einheiten</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Spatium</translation>
+        <translation>Spatium</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished">Textrahmen zeigen</translation>
+        <translation>Textrahmen zeigen</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished">Rahmen</translation>
+        <translation>Rahmen</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation type="unfinished">Kreisrahmen</translation>
+        <translation>Kreisrahmen</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished">Kreis</translation>
+        <translation>Kreis</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation type="unfinished">eckigen Rahmen zeichnen</translation>
+        <translation>eckigen Rahmen zeichnen</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished">Kasten</translation>
+        <translation>Kasten</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Breite:</translation>
+        <translation>Breite:</translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation type="unfinished">Rahmenlinienbreite</translation>
+        <translation>Rahmenlinienbreite</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation type="unfinished">Rand:</translation>
+        <translation>Rand:</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation type="unfinished">innerer Rahmenabstand</translation>
+        <translation>innerer Rahmenabstand</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation type="unfinished">Rundung:</translation>
+        <translation>Rundung:</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation type="unfinished">Eckabrundung</translation>
+        <translation>Eckabrundung</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished">Rahmenfarbe</translation>
+        <translation>Rahmenfarbe</translation>
     </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation type="unfinished">MuseScore: Text Style Editor</translation>
+        <translation>MuseScore: Text Style Editor</translation>
     </message>
 </context>
 <context>
@@ -7925,7 +7925,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulation</translation>
     </message>
 </context>
 <context>
@@ -8212,55 +8212,55 @@ linke Klammer</translation>
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganzer Dreieckskopf</translation>
     </message>
     <message>
         <source>half triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Halber Dreieckskopf</translation>
     </message>
     <message>
         <source>triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreieckskopf</translation>
     </message>
     <message>
         <source>whole slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganzer Schrägstrichkopf</translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Halber Schrägstrichkopf</translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Viertel Schrägstrichkopf</translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganzer Kreuzkopf</translation>
     </message>
     <message>
         <source>half cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Halber Kreuzkopf</translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreuzkopf</translation>
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished"></translation>
+        <translation>x-Kreiskopf</translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermate oben</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermate unten</translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -8268,11 +8268,11 @@ linke Klammer</translation>
     </message>
     <message>
         <source>espressivo</source>
-        <translation type="unfinished"></translation>
+        <translation>Espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished">Staccato</translation>
+        <translation>Staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
@@ -8284,23 +8284,23 @@ linke Klammer</translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished"></translation>
+        <translation>Portato oben</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished"></translation>
+        <translation>Portato unten</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcato oben</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcato unten</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -8308,15 +8308,15 @@ linke Klammer</translation>
     </message>
     <message>
         <source>plus stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus-Stop</translation>
     </message>
     <message>
         <source>up bow</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogen nach oben</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogen nach unten</translation>
     </message>
     <message>
         <source>reverse turn</source>
@@ -8328,7 +8328,7 @@ linke Klammer</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished">Triller</translation>
+        <translation>Triller</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -8352,15 +8352,15 @@ linke Klammer</translation>
     </message>
     <message>
         <source>segno</source>
-        <translation type="unfinished"></translation>
+        <translation>Segno</translation>
     </message>
     <message>
         <source>coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Coda</translation>
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Coda Variante</translation>
     </message>
     <message>
         <source>rcomma</source>
@@ -8372,11 +8372,11 @@ linke Klammer</translation>
     </message>
     <message>
         <source>arpeggio</source>
-        <translation type="unfinished">Arpeggio</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>trillelement</source>
-        <translation type="unfinished"></translation>
+        <translation>Trillerelement</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
@@ -8388,7 +8388,7 @@ linke Klammer</translation>
     </message>
     <message>
         <source>trill element</source>
-        <translation type="unfinished"></translation>
+        <translation>Trillerelement</translation>
     </message>
     <message>
         <source>prall</source>
@@ -8396,7 +8396,7 @@ linke Klammer</translation>
     </message>
     <message>
         <source>mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordent</translation>
     </message>
     <message>
         <source>prall prall</source>
