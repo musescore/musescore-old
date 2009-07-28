@@ -1030,7 +1030,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Annen noteoppdeling</translation>
+        <translatorcomment>Jeg mener det bør gå an å kalle dette tuplett på norsk, selv om vi burde hatt et bedre begrep. Det omfatter jo triol, kvartol, kvintol osv, &quot;Annen noteoppdeling&quot; blir litt lite intuitivt synes jeg.</translatorcomment>
+        <translation>Tuplett</translation>
     </message>
     <message>
         <source>Attributes:</source>
@@ -2558,7 +2559,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Tuplets:</source>
-        <translation>Andre noteoppdelinger:</translation>
+        <translation>Tupletter:</translation>
     </message>
     <message>
         <source>Segments:</source>
@@ -3290,7 +3291,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation>Andre noteoppdelinger</translation>
+        <translation>Tupletter</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -4486,27 +4487,27 @@ før lukking?</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation></translation>
+        <translation>Duol</translation>
     </message>
     <message>
         <source>Triplet</source>
-        <translation></translation>
+        <translation>Triol</translation>
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation></translation>
+        <translation>Kvadrol</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation></translation>
+        <translation>Kvintol</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation></translation>
+        <translation>Sekstol</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation></translation>
+        <translation>Septol</translation>
     </message>
     <message>
         <source>Octuplet</source>
@@ -4518,7 +4519,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Annen noteoppdeling</translation>
+        <translation>Andre tupletter</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -5239,15 +5240,15 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation>Annen noteoppdeling...</translation>
+        <translation>Tuplett...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for annen noteoppdeling...</translation>
+        <translation>Egenskaper for tuplett...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation>Slett annen noteoppdeling</translation>
+        <translation>Slett tuplett</translation>
     </message>
 </context>
 <context>
@@ -6620,20 +6621,20 @@ feilet:</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fillagring feilet: </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>omdøper gammel fil &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>omdøper midlertidig fil &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; feilet:</translation>
     </message>
 </context>
 <context>
@@ -7401,7 +7402,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for annen noteoppdeling...</translation>
+        <translation>Egenskaper for tuplett...</translation>
     </message>
 </context>
 <context>
@@ -7412,7 +7413,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Annen noteoppdeling</translation>
+        <translation>Tuplett</translation>
     </message>
     <message>
         <source>has number</source>
@@ -7459,7 +7460,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: Opprett annen noteoppdeling</translation>
+        <translation>MuseScore: Opprett tuplett</translation>
     </message>
     <message>
         <source>Type</source>
@@ -7510,7 +7511,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Egenskaper for annen noteoppdeling</translation>
+        <translation>MuseScore: Egenskaper for tuplett</translation>
     </message>
     <message>
         <source>Number</source>
@@ -7758,7 +7759,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Annen noteoppdeling</translation>
+        <translation>Tuplett</translation>
     </message>
     <message>
         <source>Tempo</source>
