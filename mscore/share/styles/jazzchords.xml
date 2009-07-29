@@ -154,7 +154,8 @@
     </chord>
   <chord id="14">
     <name>69</name>
-    <xml>maj69</xml>
+    <xml>major-sixth</xml>
+    <degree>add9</degree>
     <voicing>C D E G A</voicing>
     <render>6 9</render>
     </chord>
@@ -1202,7 +1203,8 @@
     </chord>
   <chord id="191">
     <name>6add9</name>
-    <xml>maj69</xml>
+    <xml>major-sixth</xml>
+    <degree>add9</degree>
     <voicing>C E G A D</voicing>
     <render>6 add 9</render>
     </chord>
