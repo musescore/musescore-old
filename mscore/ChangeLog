@@ -1,3 +1,5 @@
+29.jul (db)
+      - update all handbooks plus add Norwegian handbook
 28.jul (la)
       - fix soundfont loading on mac PPC. Endianness problem.
       - fix note entry crash after changing measure duration 
