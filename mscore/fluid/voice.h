@@ -70,12 +70,11 @@ class Voice
       Fluid* _fluid;
       double _noteTuning;             // +/- in midicent
 
-      void effects(int count,float* dsp_left_buf, float* dsp_right_buf,
-         float* dsp_reverb_buf, float* dsp_chorus_buf);
+      void effects(int count, float* left, float* right, float* reverb, float* chorus);
 
    public:
 	unsigned int id;                // the id is incremented for every new noteon.
-					           // it's used for noteoff's
+					        // it's used for noteoff's
 	unsigned char status;
 	unsigned char chan;             // the channel number, quick access for channel messages
 	unsigned char key;              // the key, quick acces for noteoff
@@ -84,6 +83,7 @@ class Voice
 	Channel* channel;
 	Generator gen[GEN_LAST];
 	Mod mod[FLUID_NUM_MOD];
+
 	int mod_count;
 	bool has_looped;                /* Flag that is set as soon as the first loop is completed. */
 	Sample* sample;
@@ -111,9 +111,6 @@ class Voice
 	int end;
 	int loopstart;
 	int loopend;
-
-	/* master gain */
-	float synth_gain;
 
 	/* vol env */
 	fluid_env_data_t volenv_data[FLUID_VOICE_ENVLAST];
@@ -195,14 +192,12 @@ class Voice
       Channel* get_channel() const    { return channel; }
       void voice_start();
       void off();
-      void init(Sample*, Channel*, int key, int vel, unsigned int id,
-         float _gain, double tuning);
+      void init(Sample*, Channel*, int key, int vel, unsigned int id, double tuning);
       void gen_incr(int i, float val);
       void gen_set(int i, float val);
       float gen_get(int gen);
       unsigned int get_id() const { return id; }
       bool isPlaying()            { return ((status == FLUID_VOICE_ON) || (status == FLUID_VOICE_SUSTAINED)); }
-      void set_gain(float gain);
       void set_param(int gen, float nrpn_value, int abs);
 
       // Update all the synthesis parameters, which depend on generator
@@ -215,7 +210,7 @@ class Voice
       double GEN(int n) { return gen[n].val + gen[n].mod + gen[n].nrpn; }
 
       void modulate_all();
-      void modulate(int _cc, int _ctrl);
+      void modulate(bool _cc, int _ctrl);
       float get_lower_boundary_for_attenuation();
       void check_sample_sanity();
       void noteoff();

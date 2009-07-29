@@ -101,6 +101,8 @@ void Channel::setcc(int num, int value)
       {
       cc[num] = value;
 
+// printf("setcc %d %d\n", num, value);
+
       switch (num) {
             case SUSTAIN_SWITCH:
                   if (value < 64)
@@ -179,7 +181,7 @@ void Channel::setcc(int num, int value)
                   break;
 
             default:
-                  synth->modulate_voices(channum, 1, num);
+                  synth->modulate_voices(channum, true, num);
             }
       }
 
@@ -199,7 +201,7 @@ int Channel::getCC(int num)
 void Channel::pitchBend(int val)
       {
       pitch_bend = val;
-      synth->modulate_voices(channum, 0, FLUID_MOD_PITCHWHEEL);
+      synth->modulate_voices(channum, false, FLUID_MOD_PITCHWHEEL);
       }
 
 //---------------------------------------------------------
@@ -209,7 +211,7 @@ void Channel::pitchBend(int val)
 void Channel::pitchWheelSens(int val)
       {
       pitch_wheel_sensitivity = val;
-      synth->modulate_voices(channum, 0, FLUID_MOD_PITCHWHEELSENS);
+      synth->modulate_voices(channum, false, FLUID_MOD_PITCHWHEELSENS);
       }
 
 //---------------------------------------------------------

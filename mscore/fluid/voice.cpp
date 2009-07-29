@@ -100,7 +100,7 @@ Voice::Voice(Fluid* f)
 //---------------------------------------------------------
 
 void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
-   unsigned int _id, float _gain, double tuning)
+   unsigned int _id, double tuning)
       {
       // Note: The voice parameters will be initialized later, when the
       // generators have been retrieved from the sound font. Here, only
@@ -122,7 +122,7 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       filter_startup = 1;     // Set the filter immediately, don't fade between old and new settings
       interp_method  = _channel->getInterpMethod();
 
-      /* vol env initialization */
+      // vol env initialization
       volenv_count   = 0;
       volenv_section = 0;
       volenv_val     = 0.0f;
@@ -130,7 +130,7 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
                               // calculate the volume increment during
                               // processing
 
-      /* mod env initialization*/
+      // mod env initialization
       modenv_count   = 0;
       modenv_section = 0;
       modenv_val     = 0.0f;
@@ -155,18 +155,16 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
        */
       fluid_gen_init(&gen[0], channel);
 
-      synth_gain = _gain;
-      /* avoid division by zero later*/
-      if (synth_gain < 0.0000001)
-            synth_gain = 0.0000001;
-
      /* For a looped sample, this value will be overwritten as soon as the
       * loop parameters are initialized (they may depend on modulators).
       * This value can be kept, it is a worst-case estimate.
       */
 
-      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR / synth_gain;
-      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR / synth_gain;
+      double g = _fluid->gain();
+      if (g == 0.0)
+            g = 0.0000001;
+      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR / g;
+      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR / g;
       }
 
 //---------------------------------------------------------
@@ -199,7 +197,7 @@ float Voice::gen_get(int g)
       }
 
 //-----------------------------------------------------------------------------
-// fluid_voice_write
+// write
 //
 // This is where it all happens. This function is called by the
 // synthesizer to generate the sound samples. The synthesizer passes
@@ -668,11 +666,11 @@ void Voice::calculate_runtime_synthesis_parameters()
       */
 
       for (int i = 0; i < mod_count; i++) {
-            Mod* m = &mod[i];
-            float modval = fluid_mod_get_value(m, channel, this);
-            int dest_gen_index = m->dest;
+            Mod* m              = &mod[i];
+            float modval        = fluid_mod_get_value(m, channel, this);
+            int dest_gen_index  = m->dest;
             Generator* dest_gen = &gen[dest_gen_index];
-            dest_gen->mod += modval;
+            dest_gen->mod      += modval;
             }
 
      /* The GEN_PITCH is a hack to fit the pitch bend controller into the
@@ -791,12 +789,13 @@ void Voice::update_param(int _gen)
       float y;
       unsigned int count;
 
+      double gain = _fluid->gain() / 32768.0f;
       switch (_gen) {
             case GEN_PAN:
                   /* range checking is done in the fluid_pan function */
                   pan       = GEN(GEN_PAN);
-                  amp_left  = fluid_pan(pan, 1) * synth_gain / 32768.0f;
-                  amp_right = fluid_pan(pan, 0) * synth_gain / 32768.0f;
+                  amp_left  = fluid_pan(pan, 1) * gain;
+                  amp_right = fluid_pan(pan, 0) * gain;
                   break;
 
             case GEN_ATTENUATION:
@@ -821,16 +820,18 @@ void Voice::update_param(int _gen)
 
             case GEN_REVERBSEND:
                   /* The generator unit is 'tenths of a percent'. */
-                  reverb_send = GEN(GEN_REVERBSEND) / 1000.0f;
-                  fluid_clip(reverb_send, 0.0, 1.0);
-                  amp_reverb = reverb_send * synth_gain / 32768.0f;
+                  // reverb_send = GEN(GEN_REVERBSEND) / 1000.0f;
+                  reverb_send = float(channel->cc[EFFECTS_DEPTH1]) / 128.0;
+                  // fluid_clip(reverb_send, 0.0, 1.0);
+                  // amp_reverb = reverb_send * _fluid->gain();
+                  amp_reverb = reverb_send * gain;
                   break;
 
             case GEN_CHORUSSEND:
                   /* The generator unit is 'tenths of a percent'. */
                   chorus_send = GEN(GEN_CHORUSSEND) / 1000.0f;
                   fluid_clip(chorus_send, 0.0, 1.0);
-                  amp_chorus = chorus_send * synth_gain / 32768.0f;
+                  amp_chorus = chorus_send * gain;
                   break;
 
             case GEN_OVERRIDEROOTKEY:
@@ -1209,14 +1210,9 @@ void Voice::update_param(int _gen)
  *
  * - For every changed generator, convert its value to the correct
  * unit of the corresponding DSP parameter
- *
- * @fn int fluid_voice_modulate(Voice* voice, int cc, int ctrl, int val)
- * @param voice the synthesis voice
- * @param cc flag to distinguish between a continous control and a channel control (pitch bend, ...)
- * @param ctrl the control number
  * */
 
-void Voice::modulate(int _cc, int _ctrl)
+void Voice::modulate(bool _cc, int _ctrl)
       {
       for (int i = 0; i < mod_count; i++) {
             Mod* m = &mod[i];
@@ -1224,7 +1220,7 @@ void Voice::modulate(int _cc, int _ctrl)
             /* step 1: find all the modulators that have the changed controller
              * as input source.
              */
-            if (fluid_mod_has_source(m, _cc, _ctrl)) {
+            if (m->has_source(_cc, _ctrl)) {
                   int g = fluid_mod_get_dest(m);
                   float modval = 0.0;
 
@@ -1236,7 +1232,7 @@ void Voice::modulate(int _cc, int _ctrl)
                               modval += fluid_mod_get_value(&mod[k], channel, this);
                               }
                         }
-                  fluid_gen_set_mod(&gen[g], modval);
+                  gen[g].set_mod(modval);
 
                   /* step 3: now that we have the new value of the generator,
                    * recalculate the parameter values that are derived from the
@@ -1278,7 +1274,7 @@ void Voice::modulate_all()
                         }
                   }
 
-            fluid_gen_set_mod(&gen[g], modval);
+            gen[g].set_mod(modval);
 
             /* Update the parameter values that are depend on the generator
              * 'gen'
@@ -1385,56 +1381,52 @@ void Voice::off()
  * mode == FLUID_VOICE_DEFAULT: This is a default modulator, there can be no identical modulator.
  *                             Don't check.
  */
-void Voice::add_mod(Mod* mod, int mode)
+void Voice::add_mod(Mod* _mod, int mode)
       {
-      Voice* voice = this;
-      int i;
-
       /*
        * Some soundfonts come with a huge number of non-standard
        * controllers, because they have been designed for one particular
        * sound card.  Discard them, maybe print a warning.
        */
 
-      if (((mod->flags1 & FLUID_MOD_CC) == 0)
-         && ((mod->src1 != 0)      /* SF2.01 section 8.2.1: Constant value */
-	   && (mod->src1 != 2)       /* Note-on velocity */
-	   && (mod->src1 != 3)       /* Note-on key number */
-	   && (mod->src1 != 10)      /* Poly pressure */
-	   && (mod->src1 != 13)      /* Channel pressure */
-	   && (mod->src1 != 14)      /* Pitch wheel */
-	   && (mod->src1 != 16))) {  /* Pitch wheel sensitivity */
-            _fluid->log("Ignoring invalid controller, using non-CC source %i.", mod->src1);
+      if (((_mod->flags1 & FLUID_MOD_CC) == 0)
+         && ((_mod->src1 != 0)      /* SF2.01 section 8.2.1: Constant value */
+	   && (_mod->src1 != 2)       /* Note-on velocity */
+	   && (_mod->src1 != 3)       /* Note-on key number */
+	   && (_mod->src1 != 10)      /* Poly pressure */
+	   && (_mod->src1 != 13)      /* Channel pressure */
+	   && (_mod->src1 != 14)      /* Pitch wheel */
+	   && (_mod->src1 != 16))) {  /* Pitch wheel sensitivity */
+            _fluid->log("Ignoring invalid controller, using non-CC source %i.", _mod->src1);
             return;
             }
 
       if (mode == FLUID_VOICE_ADD) {
             /* if identical modulator exists, add them */
-            for (i = 0; i < voice->mod_count; i++) {
-                  if (test_identity(&voice->mod[i], mod)) {
+            for (int i = 0; i < mod_count; i++) {
+                  if (test_identity(&mod[i], _mod)) {
                         //		printf("Adding modulator...\n");
-                        voice->mod[i].amount += mod->amount;
+                        mod[i].amount += _mod->amount;
                         return;
                         }
                   }
             }
       else if (mode == FLUID_VOICE_OVERWRITE) {
             /* if identical modulator exists, replace it (only the amount has to be changed) */
-            for (i = 0; i < voice->mod_count; i++) {
-                  if (test_identity(&voice->mod[i], mod)) {
+            for (int i = 0; i < mod_count; i++) {
+                  if (test_identity(&mod[i], _mod)) {
                         //  printf("Replacing modulator...amount is %f\n",mod->amount);
-                        voice->mod[i].amount = mod->amount;
+                        mod[i].amount = _mod->amount;
                         return;
                         }
                   }
             }
-
       /* Add a new modulator (No existing modulator to add / overwrite).
          Also, default modulators (FLUID_VOICE_DEFAULT) are added without
          checking, if the same modulator already exists.
          */
-      if (voice->mod_count < FLUID_NUM_MOD)
-            mod->clone(&voice->mod[voice->mod_count++]);
+      if (mod_count < FLUID_NUM_MOD)
+            _mod->clone(&mod[mod_count++]);
       }
 
 /*
@@ -1571,8 +1563,12 @@ void Voice::check_sample_sanity()
              */
             if ((int)loopstart >= (int)sample->loopstart && (int)loopend <= (int)sample->loopend){
 	            /* Is there a valid peak amplitude available for the loop? */
-	            if (sample->amplitude_that_reaches_noise_floor_is_valid)
-	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor / synth_gain;
+	            if (sample->amplitude_that_reaches_noise_floor_is_valid) {
+                        double g = _fluid->gain();
+                        if (g == 0.0)
+                              g = 0.0000001;
+	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor / g;
+                        }
                   else
 	                  /* Worst case */
 	                  amplitude_that_reaches_noise_floor_loop = amplitude_that_reaches_noise_floor_nonloop;
@@ -1631,23 +1627,6 @@ void Voice::set_param(int g, float nrpn_value, int abs)
       gen[g].nrpn = nrpn_value;
       gen[g].flags = (abs)? GEN_ABS_NRPN : GEN_SET;
       update_param(g);
-      }
-
-//---------------------------------------------------------
-//   set_gain
-//---------------------------------------------------------
-
-void Voice::set_gain(float gain)
-      {
-      /* avoid division by zero*/
-      if (gain < 0.0000001)
-            gain = 0.0000001;
-
-      synth_gain = gain;
-      amp_left   = fluid_pan(pan, 1) * gain / 32768.0f;
-      amp_right  = fluid_pan(pan, 0) * gain / 32768.0f;
-      amp_reverb = reverb_send * gain / 32768.0f;
-      amp_chorus = chorus_send * gain / 32768.0f;
       }
 
   /** If the peak volume during the loop is known, then the voice can
@@ -1734,7 +1713,6 @@ void Sample::optimize()
  * - voice holds the voice structure
  *
  * A couple of variables are used internally, their results are discarded:
- * - dsp_i: Index through the output buffer
  * - dsp_phase_fractional: The fractional part of dsp_phase
  * - dsp_coeff: A table of four coefficients, depending on the fractional phase.
  *              Used to interpolate between samples.
@@ -1744,127 +1722,82 @@ void Sample::optimize()
  * - dsp_hist2: same
  *
  */
-void Voice::effects(int count,
-   float* dsp_left_buf, float* dsp_right_buf,
-   float* dsp_reverb_buf, float* dsp_chorus_buf)
+void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float* reverb, float* chorus)
       {
-      Voice* voice = this;
+      float dsp_centernode;
+      float v;
 
-        /* IIR filter sample history */
-        float dsp_hist1 = voice->hist1;
-        float dsp_hist2 = voice->hist2;
+      /* filter (implement the voice filter according to SoundFont standard) */
 
-        /* IIR filter coefficients */
-        float dsp_a1 = voice->a1;
-        float dsp_a2 = voice->a2;
-        float dsp_b02 = voice->b02;
-        float dsp_b1 = voice->b1;
-        float dsp_a1_incr = voice->a1_incr;
-        float dsp_a2_incr = voice->a2_incr;
-        float dsp_b02_incr = voice->b02_incr;
-        float dsp_b1_incr = voice->b1_incr;
-        int dsp_filter_coeff_incr_count = voice->filter_coeff_incr_count;
+      /* Check for denormal number (too close to zero). */
+      if (fabs (hist1) < 1e-20)
+            hist1 = 0.0f;             /* FIXME JMG - Is this even needed? */
 
-        float *dsp_buf = voice->dsp_buf;
+      /* Two versions of the filter loop. One, while the filter is
+       * changing towards its new setting. The other, if the filter
+       * doesn't change.
+       */
 
-        float dsp_centernode;
-        int dsp_i;
-        float v;
+      if (filter_coeff_incr_count > 0) {
+            /* Increment is added to each filter coefficient filter_coeff_incr_count times. */
+            for (int i = 0; i < count; i++) {
+                  /* The filter is implemented in Direct-II form. */
+                  dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  dsp_buf[i] = b02 * (dsp_centernode + hist2) + b1 * hist1;
+                  hist2 = hist1;
+                  hist1 = dsp_centernode;
 
-        /* filter (implement the voice filter according to SoundFont standard) */
+                  if (filter_coeff_incr_count-- > 0) {
+                        a1  += a1_incr;
+                        a2  += a2_incr;
+                        b02 += b02_incr;
+                        b1  += b1_incr;
+                        }
+                  }
+            }
+      else { /* The filter parameters are constant.  This is duplicated to save time. */
+            for (int i = 0; i < count; i++) {   // The filter is implemented in Direct-II form.
+                  dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  dsp_buf[i]     = b02 * (dsp_centernode + hist2) + b1 * hist1;
+                  hist2          = hist1;
+                  hist1          = dsp_centernode;
+                  }
+            }
 
-        /* Check for denormal number (too close to zero). */
-        if (fabs (dsp_hist1) < 1e-20) dsp_hist1 = 0.0f;  /* FIXME JMG - Is this even needed? */
+      /* pan (Copy the signal to the left and right output buffer) The voice
+       * panning generator has a range of -500 .. 500.  If it is centered,
+       * it's close to 0.  amp_left and amp_right are then the
+       * same, and we can save one multiplication per voice and sample.
+       */
+      if ((-0.5 < pan) && (pan < 0.5)) {
+            /* The voice is centered. Use amp_left twice. */
+            for (int i = 0; i < count; i++) {
+                  v = amp_left * dsp_buf[i];
+                  dsp_left_buf[i]  += v;
+                  dsp_right_buf[i] += v;
+                  }
+            }
+      else {     /* The voice is not centered. Stereo samples have one side zero. */
+            if (amp_left != 0.0) {
+                  for (int i = 0; i < count; i++)
+                        dsp_left_buf[i] += amp_left * dsp_buf[i];
+                  }
 
-        /* Two versions of the filter loop. One, while the filter is
-        * changing towards its new setting. The other, if the filter
-        * doesn't change.
-        */
+            if (amp_right != 0.0) {
+                  for (int i = 0; i < count; i++)
+                        dsp_right_buf[i] += amp_right * dsp_buf[i];
+                  }
+            }
 
-        if (dsp_filter_coeff_incr_count > 0)
-              {
-                /* Increment is added to each filter coefficient filter_coeff_incr_count times. */
-                for (dsp_i = 0; dsp_i < count; dsp_i++)
-                      {
-                        /* The filter is implemented in Direct-II form. */
-                        dsp_centernode = dsp_buf[dsp_i] - dsp_a1 * dsp_hist1 - dsp_a2 * dsp_hist2;
-                        dsp_buf[dsp_i] = dsp_b02 * (dsp_centernode + dsp_hist2) + dsp_b1 * dsp_hist1;
-                        dsp_hist2 = dsp_hist1;
-                        dsp_hist1 = dsp_centernode;
+      if (amp_reverb != 0.0) {
+            for (int i = 0; i < count; i++)
+                  reverb[i] += amp_reverb * dsp_buf[i];
+            }
 
-                        if (dsp_filter_coeff_incr_count-- > 0)
-                              {
-                              dsp_a1 += dsp_a1_incr;
-                              dsp_a2 += dsp_a2_incr;
-                              dsp_b02 += dsp_b02_incr;
-                              dsp_b1 += dsp_b1_incr;
-                              }
-                      } /* for dsp_i */
-              }
-        else /* The filter parameters are constant.  This is duplicated to save time. */
-              {
-                for (dsp_i = 0; dsp_i < count; dsp_i++)
-                      { /* The filter is implemented in Direct-II form. */
-                        dsp_centernode = dsp_buf[dsp_i] - dsp_a1 * dsp_hist1 - dsp_a2 * dsp_hist2;
-                        dsp_buf[dsp_i] = dsp_b02 * (dsp_centernode + dsp_hist2) + dsp_b1 * dsp_hist1;
-                        dsp_hist2 = dsp_hist1;
-                        dsp_hist1 = dsp_centernode;
-                      }
-              }
-
-        /* pan (Copy the signal to the left and right output buffer) The voice
-        * panning generator has a range of -500 .. 500.  If it is centered,
-        * it's close to 0.  voice->amp_left and voice->amp_right are then the
-        * same, and we can save one multiplication per voice and sample.
-        */
-        if ((-0.5 < voice->pan) && (voice->pan < 0.5))
-              {
-                /* The voice is centered. Use voice->amp_left twice. */
-                for (dsp_i = 0; dsp_i < count; dsp_i++)
-                      {
-                        v = voice->amp_left * dsp_buf[dsp_i];
-                        dsp_left_buf[dsp_i] += v;
-                        dsp_right_buf[dsp_i] += v;
-                      }
-              }
-        else      /* The voice is not centered. Stereo samples have one side zero. */
-              {
-                if (voice->amp_left != 0.0)
-                      {
-                        for (dsp_i = 0; dsp_i < count; dsp_i++)
-                              dsp_left_buf[dsp_i] += voice->amp_left * dsp_buf[dsp_i];
-                      }
-
-                if (voice->amp_right != 0.0)
-                      {
-                        for (dsp_i = 0; dsp_i < count; dsp_i++)
-                              dsp_right_buf[dsp_i] += voice->amp_right * dsp_buf[dsp_i];
-                      }
-              }
-
-        /* reverb send. Buffer may be NULL. */
-        if ((dsp_reverb_buf != NULL) && (voice->amp_reverb != 0.0))
-              {
-                for (dsp_i = 0; dsp_i < count; dsp_i++)
-                        dsp_reverb_buf[dsp_i] += voice->amp_reverb * dsp_buf[dsp_i];
-              }
-
-        /* chorus send. Buffer may be NULL. */
-        if ((dsp_chorus_buf != NULL) && (voice->amp_chorus != 0))
-              {
-                for (dsp_i = 0; dsp_i < count; dsp_i++)
-                        dsp_chorus_buf[dsp_i] += voice->amp_chorus * dsp_buf[dsp_i];
-              }
-
-        voice->hist1 = dsp_hist1;
-        voice->hist2 = dsp_hist2;
-        voice->a1 = dsp_a1;
-        voice->a2 = dsp_a2;
-        voice->b02 = dsp_b02;
-        voice->b1 = dsp_b1;
-        voice->filter_coeff_incr_count = dsp_filter_coeff_incr_count;
-
-        fluid_check_fpe ("voice_effects");
+      if (amp_chorus != 0) {
+            for (int i = 0; i < count; i++)
+                  chorus[i] += amp_chorus * dsp_buf[i];
+            }
       }
 
 

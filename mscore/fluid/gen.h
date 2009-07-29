@@ -37,9 +37,6 @@ class GenInfo {
 	float def;		/* The default value (cfr. fluid_gen_set_default_values()) */
       };
 
-#define fluid_gen_set_mod(_gen, _val)  { (_gen)->mod = (double) (_val); }
-#define fluid_gen_set_nrpn(_gen, _val) { (_gen)->nrpn = (double) (_val); }
-
 float fluid_gen_scale(int gen, float value);
 float fluid_gen_scale_nrpn(int gen, int nrpn);
 void fluid_gen_init(Generator* gen, Channel* channel);

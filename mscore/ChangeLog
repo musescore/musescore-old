@@ -1,10 +1,11 @@
-29.jul (db)
+29.jul (ws)
+      - reduce default reverb volume
+      (db)
       - update all handbooks plus add Norwegian handbook
 28.jul (la)
       - fix soundfont loading on mac PPC. Endianness problem.
-      - fix note entry crash after changing measure duration 
-      - fix splitting of note and rest across barline on paste 
-26.jul (ws)
+      - fix note entry crash after changing measure duration
+      - fix splitting of note and rest across barline on paste
       - fix invisible staff lines property
 24.jul (la)
       - fix bug on pasting full measure rest

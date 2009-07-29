@@ -57,14 +57,13 @@ class SysStaff {
       QList<Bracket*> brackets;
       TextC* instrumentName;
 
-      const QRectF& bbox() const      { return _bbox; }
-      double y() const                { return _bbox.y(); }
-      double right() const            { return _bbox.right(); }
-      void setbbox(const QRectF& r)   { _bbox = r; }
+      const QRectF& bbox() const     { return _bbox; }
+      double y() const               { return _bbox.y(); }
+      double right() const           { return _bbox.right(); }
+      void setbbox(const QRectF& r)  { _bbox = r; }
       void move(double x, double y);
 
-      Spatium distance() const        { return _distance; }
-//      void setDistance(double v)     { _distance.set(v); }
+      Spatium distance() const       { return _distance; }
       void setDistance(Spatium v)    { _distance = v; }
 
       bool show() const              { return _show; }

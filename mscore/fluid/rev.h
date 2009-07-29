@@ -84,10 +84,10 @@ class Comb {
             }
       };
 
-static const float scaleroom = 0.28f;
+static const float scaleroom  = 0.28f;
 static const float offsetroom = 0.7f;
-static const float scalewet = 3.0f;
-static const float scaledamp = 1.0f;
+static const float scalewet   = 3.0f;
+static const float scaledamp  = 0.4f;
 
 //---------------------------------------------------------
 //   Reverb
@@ -121,14 +121,15 @@ class Reverb {
       void reset() { init(); }
 
       void setroomsize(float value) { roomsize = (value * scaleroom) + offsetroom; }
-      void setdamp(float value)     { damp = value * scaledamp; }
-      void setlevel(float value)    { wet = value * scalewet;   }
-      void setwidth(float value)    { width = value;            }
+      void setdamp(float value)     { damp = value * scaledamp;  }
+      void setlevel(float value)    { wet = value * scalewet;    }
+      void setLevel(float value)    { setlevel(value); update(); }
+      void setwidth(float value)    { width = value;             }
       void setmode(float value);
       float getroomsize() const     { return (roomsize - offsetroom) / scaleroom; }
       float getdamp() const         { return damp / scaledamp; }
       float getlevel() const        { return wet / scalewet;   }
-      float getwidth()              { return width; }
+      float getwidth()              { return width;            }
 
       bool setPreset(int);
       };
