@@ -17,7 +17,7 @@ namespace FluidS {
 
 static ReverbPreset revmodel_preset[] = {
       // name           roomsize       damp      width        level
-      { "Default",         0.5f,      0.2f,       1.0f,       0.9f },
+      { "Default",         0.5f,      0.5f,       1.0f,       0.2f },
       { "Test 2",          0.4f,      0.2f,       0.5f,       0.8f },
       { "Test 3",          0.6f,      0.4f,       0.5f,       0.7f },
       { "Test 4",          0.8f,      0.7f,       0.5f,       0.6f },
@@ -125,12 +125,13 @@ void Reverb::init()
 //   process
 //---------------------------------------------------------
 
-void Reverb::process(int n, float* in, float* left_out, float* right_out)
+void Reverb::process(int n, float* in, float* l, float* r)
       {
       for (int k = 0; k < n; k++) {
-            float outL = 0.0, outR = 0.0;
+            float outL = 0.0;
+            float outR = 0.0;
 
-            float input = (in[k] + DC_OFFSET) * gain;
+            float input = (in[k] * 2.0 + DC_OFFSET) * gain;
 
             for (int i = 0; i < numcombs; i++) {      // Accumulate comb filters in parallel
                   outL += combL[i].process(input);
@@ -146,8 +147,8 @@ void Reverb::process(int n, float* in, float* left_out, float* right_out)
             outR -= DC_OFFSET;
 
             /* Calculate output MIXING with anything already there */
-            left_out[k]  += outL * wet1 + outR * wet2;
-            right_out[k] += outR * wet1 + outL * wet2;
+            l[k] += outL * wet1 + outR * wet2;
+            r[k] += outR * wet1 + outL * wet2;
             }
       }
 
@@ -159,6 +160,7 @@ void Reverb::process(int n, float* in, float* left_out, float* right_out)
 void Reverb::update()
       {
       /* Recalculate internal values after parameter change */
+
       wet1 = wet * (width / 2 + 0.5f);
       wet2 = wet * ((1 - width) / 2);
 

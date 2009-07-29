@@ -334,7 +334,7 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
             v2 = 1.0f;
 
       /* it's as simple as that: */
-      return (float) mod->amount * v1 * v2;
+      return mod->amount * v1 * v2;
       }
 
 /*
@@ -359,15 +359,21 @@ int test_identity(Mod * mod1, Mod * mod2)
       return 1;
       }
 
-/* debug function: Prints the contents of a modulator */
-void fluid_dump_modulator(Mod * mod)
+//---------------------------------------------------------
+//   dump
+//    debug function: Prints the contents of a modulator
+//---------------------------------------------------------
+
+void Mod::dump() const
       {
-      int src1=mod->src1;
-      int dest=mod->dest;
-      int src2=mod->src2;
-      int flags1=mod->flags1;
-      int flags2=mod->flags2;
-      float amount=(float)mod->amount;
+      const Mod* mod = this;
+
+      int src1     = mod->src1;
+      int dest     = mod->dest;
+      int src2     = mod->src2;
+      int flags1   = mod->flags1;
+      int flags2   = mod->flags2;
+      float amount = (float)mod->amount;
 
       printf("Src: ");
       if (flags1 & FLUID_MOD_CC){

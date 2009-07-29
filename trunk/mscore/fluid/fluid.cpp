@@ -234,7 +234,7 @@ void Fluid::init(int sr)
 
       sample_rate = double(sr);
       sfont_id    = 0;
-      gain        = .2;
+      _gain       = .1;
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
       tuning      = 0;
@@ -469,7 +469,7 @@ const MidiPatch* Fluid::getPatchInfo(bool onlyDrums, const MidiPatch* pp) const
  * tell all synthesis processes on this channel to update their
  * synthesis parameters after a control change.
  */
-void Fluid::modulate_voices(int chan, int is_cc, int ctrl)
+void Fluid::modulate_voices(int chan, bool is_cc, int ctrl)
       {
       foreach(Voice* v, activeVoices) {
             if (v->chan == chan)
@@ -662,18 +662,6 @@ void Fluid::update_presets()
       }
 
 /*
- * fluid_synth_set_gain
- */
-void Fluid::set_gain(float g)
-      {
-      g = qBound(0.0f, g, 10.0f);
-      gain = g;
-
-      foreach(Voice* v, activeVoices)
-            v->set_gain(g);
-      }
-
-/*
  * fluid_synth_program_reset
  *
  * Resend a bank select and a program change for every channel. This
@@ -760,7 +748,6 @@ void Fluid::one_block()
             foreach(Voice* v, activeVoices)
                   v->write(left_buf, right_buf, fx_buf[0], fx_buf[1]);
             }
-
       if (silentBlocks > 0) {
             reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
             chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
@@ -862,7 +849,7 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
       if (chan >= 0)
             c = channel[chan];
 
-      v->init(sample, c, key, vel, id, gain, vt);
+      v->init(sample, c, key, vel, id, vt);
 
       /* add the default modulators to the synthesis process. */
       v->add_mod(&default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */

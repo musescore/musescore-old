@@ -456,13 +456,17 @@ void System::setInstrumentName(int staffIdx)
       if (isVbox())                 // ignore vbox
             return;
 
-      Score* cs  = score();
-      Staff* s   = cs->staff(staffIdx);
+      Staff* s   = score()->staff(staffIdx);
       Part* part = s->part();
 
       if (!s->isTop())
             return;
       SysStaff* staff = _staves[staffIdx];
+      // debug:
+      if (staff->instrumentName) {
+            delete staff->instrumentName;
+            staff->instrumentName = 0;
+            }
       if (staff->instrumentName == 0) {
             if (_firstSystem)
                   staff->instrumentName = new TextC(*part->longName());

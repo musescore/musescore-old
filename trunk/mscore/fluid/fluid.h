@@ -110,7 +110,7 @@ class Fluid : public Synth {
 
       unsigned int sfont_id;
 
-      double gain;                        // master gain
+      double _gain;                       // master gain
       QList<Channel*> channel;            // the channels
 
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
@@ -143,7 +143,7 @@ class Fluid : public Synth {
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
       void all_notes_off(int chan);
       void all_sounds_off(int chan);
-      void modulate_voices(int chan, int is_cc, int ctrl);
+      void modulate_voices(int chan, bool is_cc, int ctrl);
       void modulate_voices_all(int chan);
       void damp_voices(int chan);
       int kill_voice(Voice * voice);
@@ -191,8 +191,8 @@ class Fluid : public Synth {
       void set_reverb(double roomsize, double damping, double width, double level);
       void program_reset();
 
-      float get_gain()          { return gain;  }
-      void set_gain(float g);
+      double gain() const          { return _gain;  }
+
       bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
       bool program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num);
       void get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num);
@@ -423,11 +423,15 @@ enum fluid_gen_type {
 /**
  * SoundFont generator structure.
  */
-struct Generator {
+class Generator {
+   public:
       unsigned char flags; /**< Is the generator set or not (#fluid_gen_flags) */
       double val;          /**< The nominal value           */
       double mod;          /**< Change by modulators        */
       double nrpn;         /**< Change by NRPN messages     */
+
+      void set_mod(double _val)  { mod  = _val; }
+      void set_nrpn(double _val) { nrpn = _val; }
       };
 
 /**
@@ -536,8 +540,9 @@ enum fluid_midi_control_change {
 //   Channel
 //---------------------------------------------------------
 
-class Channel
-      {
+class Channel {
+      Fluid* synth;
+
       unsigned int sfontnum;
       unsigned int banknum;
       unsigned int prognum;
@@ -545,7 +550,6 @@ class Channel
 
    public:
       int channum;
-      Fluid* synth;
       short key_pressure;
       short channel_pressure;
       short pitch_bend;
@@ -621,28 +625,6 @@ struct fluid_interp_coeff_t {
       float a0, a1, a2, a3;
       };
 
-//---------------------------------------------------------
-//   Mod
-//---------------------------------------------------------
-
-struct Mod
-      {
-      unsigned char dest;
-      unsigned char src1;
-      unsigned char flags1;
-      unsigned char src2;
-      unsigned char flags2;
-      double amount;
-      /* The 'next' field allows to link modulators into a list.  It is
-       * not used in fluid_voice.c, there each voice allocates memory for a
-       * fixed number of modulators.  Since there may be a huge number of
-       * different zones, this is more efficient.
-       */
-      Mod * next;
-
-      void clone(Mod* mod) const;
-      };
-
 /* Flags telling the polarity of a modulator.  Compare with SF2.01
    section 8.2. Note: The numbers of the bits are different!  (for
    example: in the flags of a SF modulator, the polarity bit is bit
@@ -659,6 +641,36 @@ enum fluid_mod_flags {
       FLUID_MOD_SWITCH   = 12,
       FLUID_MOD_GC       = 0,
       FLUID_MOD_CC       = 16
+      };
+
+//---------------------------------------------------------
+//   Mod
+//---------------------------------------------------------
+
+struct Mod
+      {
+      unsigned char dest;
+      unsigned char src1;
+      unsigned char flags1;
+      unsigned char src2;
+      unsigned char flags2;
+
+      double amount;
+      /* The 'next' field allows to link modulators into a list.  It is
+       * not used in fluid_voice.c, there each voice allocates memory for a
+       * fixed number of modulators.  Since there may be a huge number of
+       * different zones, this is more efficient.
+       */
+      Mod * next;
+
+      void clone(Mod* mod) const;
+      void dump() const;
+      int has_source(bool cc, int ctrl) {
+            return (((src1 == ctrl) && (flags1 & FLUID_MOD_CC)    && cc)
+                || (((src1 == ctrl) && (!(flags1 & FLUID_MOD_CC)) && !cc)))
+                || (((src2 == ctrl) && (flags2 & FLUID_MOD_CC)    && cc)
+                || (((src2 == ctrl) && (!(flags2 & FLUID_MOD_CC)) && !cc)));
+            }
       };
 
 /* Flags telling the source of a modulator.  This corresponds to
