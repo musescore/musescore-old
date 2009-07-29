@@ -27,11 +27,32 @@ To create all the language handbooks at once use "all" as the command line argum
 
 *********************************
 
+INSTRUCTIONS FOR ADDING NEW LANGUAGE
+
+1. In chapterHeading() add the translation for "Chapter". For example:
+
+    elif language_code == 'nb':
+        chapter = 'Kapittel'
+
+2. In createHandbook() add the URL for the print version of the handbook and the top-level URL for the handbook on the website. Make sure the internal URL using Unicode characters rather than escaped charaters ('http://musescore.org/nb/håndbok' instead of 'http://musescore.org/nb/h%C3%A5ndbok'). For example
+
+    elif language_code == 'nb':
+        url = 'http://musescore.org/nb/print/book/export/html/2122'
+        internal = 'http://musescore.org/nb/håndbok'
+
+3. In main() add a extra line to the "Create handbooks for all languages" section. For example
+
+    createHandbook('nb', 'missing', pdf, verbose, heading_switch)
+
+
+*********************************
+
 
 CHANGE LOG
 
 * Compatibility update: remove "www." from handbook links (HTML from website changed)
 * Update CSS for release of version 0.9.5 and to embed DejaVuSans font for Mac shortcut symbols
+* Add Norwegian and wrote instructions for adding new languages
 
 Version 1.2 (9 July 2009):
 * Style sheet designed for pisa 3.0.31 (no longer designed for 3.0.27)

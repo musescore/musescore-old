@@ -86,12 +86,14 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Cap&iacute;tulo'
     elif language_code == 'gl':
         chapter = 'Cap&iacute;tulo'
+    elif language_code == 'fi':
+        chapter = 'Luku'
     elif language_code == 'fr':
         chapter = 'Chapitre'
     elif language_code == 'it':
         chapter = 'Capitolo'
-    elif language_code == 'fi':
-        chapter = 'Luku'
+    elif language_code == 'nb':
+        chapter = 'Kapittel'
 
 
     html_source = html_source.replace('<h1 class="print-title"></h1>','') #remove empty header
@@ -160,7 +162,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
                     print " * WARNING: English language link: ", internal_href
                 elif internal_href.find('freelinking') > -1: #if url contains the "freelinking" text it means there is no matching page in the handbook
                     print " * WARNING: page does not exist: ", internal_href
-            elif internal_href[0:7] != 'mailto:':
+            elif internal_href[0:7] != 'mailto:' and internal_href[0:19] != 'https://help.ubuntu':
                 print " * WARNING: no anchor tag corresponding to ", internal_href
 
     html_source = 'href="'.join(split)
@@ -384,6 +386,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'it':
         url = 'http://musescore.org/it/print/book/export/html/772'
         internal = 'http://musescore.org/it/manuale'
+    elif language_code == 'nb':
+        url = 'http://musescore.org/nb/print/book/export/html/2122'
+        internal = 'http://musescore.org/nb/håndbok' #h%C3%A5ndbok'
 
     print "Create handbook for",language_code
 
@@ -466,6 +471,7 @@ def main():
         createHandbook('fi', 'missing', pdf, verbose, heading_switch)
         createHandbook('fr', 'missing', pdf, verbose, heading_switch)
         createHandbook('it', 'missing', pdf, verbose, heading_switch)
+        createHandbook('nb', 'missing', pdf, verbose, heading_switch)
 
     # Create Handbook for specific language
     else:
