@@ -1,6 +1,7 @@
 30.jul (la)
       - force workingdir on first load of saveas and savecopy dialog
       - fix crash on removing staff when selected
+      - force workingdir on save if new file
 29.jul (ws)
       - reduce default reverb volume
       (db)
