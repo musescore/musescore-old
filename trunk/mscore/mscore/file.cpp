@@ -232,7 +232,7 @@ bool Score::saveFile(bool autosave)
             QString f2 = tr("MuseScore File (*.mscx)");
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("./%1.mscz").arg(info.baseName()),
+               QString("%1/%2.mscz").arg(preferences.workingDirectory).arg(info.baseName()),
                f1 + ";;" + f2,
                &selectedFilter
                );
