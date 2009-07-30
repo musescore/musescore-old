@@ -250,37 +250,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>تراكب</translation>
     </message>
     <message>
         <source>Stem</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>ساق</translation>
     </message>
     <message>
         <source>Hook</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>خطاف</translation>
     </message>
     <message>
         <source>Grace Note</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>نغمة مخطوفة</translation>
     </message>
     <message>
         <source>Stem Direction</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>اتجاه الساق</translation>
     </message>
     <message>
         <source>Notes:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>نغمات:</translation>
     </message>
     <message>
         <source>Help Lines:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>سطر مساعدة:</translation>
     </message>
 </context>
 <context>
@@ -1057,7 +1057,7 @@ p, li { white-space: pre-wrap; }
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>شدّة الأداء</translation>
+        <translation>شِدّة الأداء</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -1084,7 +1084,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamic</source>
-        <translation>شدّة الأداء</translation>
+        <translation>شِدّة أداء</translation>
     </message>
     <message>
         <source>SubType:</source>
@@ -1171,12 +1171,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Open File
 </source>
-        <translation>فتح ملف</translation>
+        <translation>فتح ملف
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>لم يتم بنجاح:</translation>
+        <translation>
+لم يتم بنجاح:</translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
@@ -1475,7 +1477,7 @@ failed: </source>
     </message>
     <message>
         <source>akkolade distance</source>
-        <translation>بُعد الحلية</translation>
+        <translation>بُعد قوس البيانو</translation>
     </message>
     <message>
         <source>system distance</source>
@@ -1627,11 +1629,11 @@ failed: </source>
     </message>
     <message>
         <source>Height</source>
-        <translation>علوّ</translation>
+        <translation>ارتفاع</translation>
     </message>
     <message>
         <source>Continue Height</source>
-        <translation>استمرار العلوّ</translation>
+        <translation>استمرار الارتفاع</translation>
     </message>
     <message>
         <source>use german names</source>
@@ -1818,62 +1820,62 @@ failed: </source>
     <message>
         <source>Element</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>عنصر</translation>
     </message>
     <message>
         <source>selected</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>معيّن</translation>
     </message>
     <message>
         <source>generated</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>مخلّق</translation>
     </message>
     <message>
         <source>visible</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>مرئى</translation>
     </message>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>مجموعة</translation>
     </message>
     <message>
         <source>subtype</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>طراز فرعى</translation>
     </message>
     <message>
         <source>Voice</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>صوت</translation>
     </message>
     <message>
         <source>Staff</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>مدرج</translation>
     </message>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>التوقيع</translation>
     </message>
     <message>
         <source>Len</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>طول</translation>
     </message>
     <message>
         <source>Color</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>اللون</translation>
     </message>
     <message>
         <source>Pos</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>موضع</translation>
     </message>
     <message>
         <source>CPos</source>
@@ -1883,17 +1885,17 @@ failed: </source>
     <message>
         <source>Offset</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>بُعد البداية</translation>
     </message>
     <message>
         <source>BBox</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>حدود الإحاطة</translation>
     </message>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>تكبير</translation>
     </message>
 </context>
 <context>
@@ -1987,7 +1989,7 @@ failed: </source>
     </message>
     <message>
         <source>Hairpin</source>
-        <translation>تدريجة</translation>
+        <translation>شِدّة تدريجية</translation>
     </message>
     <message>
         <source>Tick1:</source>
@@ -2024,7 +2026,7 @@ failed: </source>
     </message>
     <message>
         <source>lock aspect ratio</source>
-        <translation>ثبت نسب الرسم</translation>
+        <translation>تثبيت نسب الرسم</translation>
     </message>
 </context>
 <context>
@@ -2039,27 +2041,27 @@ failed: </source>
     </message>
     <message>
         <source>1/4</source>
-        <translation></translation>
+        <translation>1\4</translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation></translation>
+        <translation>1\8</translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation></translation>
+        <translation>1\16</translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation></translation>
+        <translation>1\32</translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation></translation>
+        <translation>1\64</translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation></translation>
+        <translation>1\128</translation>
     </message>
 </context>
 <context>
@@ -2070,7 +2072,7 @@ failed: </source>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation>احشر موازير فارغة:</translation>
+        <translation>حشر موازير فارغة:</translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
@@ -2148,7 +2150,7 @@ failed: </source>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>ميوزسكور: قائمة الآلات عند الفصل</translation>
+        <translation>ميوزسكور: قائمة المستقطعات</translation>
     </message>
 </context>
 <context>
@@ -2223,12 +2225,14 @@ failed: </source>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>فتح ملف آﻻت</translation>
+        <translation>فتح ملف آﻻت
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>لم يتم بنجاح:</translation>
+        <translation>
+لم يتم بنجاح:</translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2345,7 +2349,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
@@ -2617,7 +2621,7 @@ failed: </source>
     </message>
     <message>
         <source>/</source>
-        <translation></translation>
+        <translation>\</translation>
     </message>
     <message>
         <source>actual</source>
@@ -2664,7 +2668,7 @@ failed: </source>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation>إضافة موازير خالية:</translation>
+        <translation>إلحاق موازير خالية:</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
@@ -2683,7 +2687,7 @@ failed: </source>
     <name>MenuNotes</name>
     <message>
         <source>Notes</source>
-        <translation>ملاحظات</translation>
+        <translation>نغمات</translation>
     </message>
 </context>
 <context>
@@ -2761,7 +2765,7 @@ failed: </source>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>شدّة الأداء</translation>
+        <translation>شِدّة الأداء</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -3061,11 +3065,11 @@ failed: </source>
     </message>
     <message>
         <source>undo</source>
-        <translation>استرجاع</translation>
+        <translation>رجوع عن فعل</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>استرجاع</translation>
+        <translation>رجوع عن فعل</translation>
     </message>
     <message>
         <source>undo last change</source>
@@ -3073,11 +3077,11 @@ failed: </source>
     </message>
     <message>
         <source>redo</source>
-        <translation>إعادة</translation>
+        <translation>إعادة تفعيل</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>إعادة</translation>
+        <translation>إعادة تفعيل</translation>
     </message>
     <message>
         <source>redo last undo</source>
@@ -3993,7 +3997,7 @@ failed: </source>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation></translation>
+        <translation>سبّاقة</translation>
     </message>
     <message>
         <source>grace-4</source>
@@ -4073,7 +4077,7 @@ failed: </source>
     </message>
     <message>
         <source>Mixer</source>
-        <translation></translation>
+        <translation>ميكسر</translation>
     </message>
     <message>
         <source>Transport Toolbar</source>
@@ -4245,11 +4249,11 @@ failed: </source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>رجوع</translation>
+        <translation>إرجاع</translation>
     </message>
     <message>
         <source>rewind to start position</source>
-        <translation>رجوع لوضع البداية</translation>
+        <translation>إرجاع لوضع البداية</translation>
     </message>
     <message>
         <source>seek to end</source>
@@ -4541,15 +4545,15 @@ failed: </source>
     </message>
     <message>
         <source>arpeggio</source>
-        <translation></translation>
+        <translation>أربيج</translation>
     </message>
     <message>
         <source>glissando</source>
-        <translation></translation>
+        <translation>انزلاق</translation>
     </message>
     <message>
         <source>Arpeggio/Glissando</source>
-        <translation></translation>
+        <translation>أربيج\انزلاق</translation>
     </message>
     <message>
         <source>breath</source>
@@ -4565,7 +4569,7 @@ failed: </source>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>علامات الأداء والحليات</translation>
+        <translation>أدائيات، حليات</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -4963,7 +4967,7 @@ before closing?</source>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation>حلية</translation>
+        <translation>قوس بيانو</translation>
     </message>
     <message>
         <source>normal</source>
@@ -5030,7 +5034,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
-        <translation>ميوزسكور: شدّة الأداء</translation>
+        <translation>ميوزسكور: شِدّة الأداء</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
@@ -5267,12 +5271,12 @@ before closing?</source>
     <message>
         <source>Note</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>نغمة</translation>
     </message>
     <message>
         <source>Pitch</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>درجة</translation>
     </message>
     <message>
         <source>Head</source>
@@ -5307,7 +5311,7 @@ before closing?</source>
     <message>
         <source>Move</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>تحريك</translation>
     </message>
     <message>
         <source>Tie Back</source>
@@ -5322,7 +5326,7 @@ before closing?</source>
     <message>
         <source>Mirror Head</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>رأس معكوسة</translation>
     </message>
     <message>
         <source>S-Channel</source>
@@ -5418,7 +5422,7 @@ before closing?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation>علوّ</translation>
+        <translation>ارتفاع</translation>
     </message>
     <message>
         <source>Width</source>
@@ -5601,7 +5605,7 @@ before closing?</source>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation>مسوزسكور: لوح العزف</translation>
+        <translation>ميوزسكور: لوح العزف</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -5637,7 +5641,7 @@ before closing?</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>رجوع</translation>
+        <translation>إرجاع</translation>
     </message>
     <message>
         <source>Pause</source>
@@ -5847,7 +5851,7 @@ before closing?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation>علوّ</translation>
+        <translation>ارتفاع</translation>
     </message>
     <message>
         <source>Note Entry:</source>
@@ -5959,7 +5963,7 @@ before closing?</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>رجوع</translation>
+        <translation>إرجاع</translation>
     </message>
     <message>
         <source>Play</source>
@@ -6119,7 +6123,7 @@ before closing?</source>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>عمل لقط للشاشة</translation>
+        <translation>أخذ لقطة للشاشة</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -6324,7 +6328,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: load failed:</source>
-        <translation>ميوزسكور: إخفاق فى التحميل</translation>
+        <translation>ميوزسكور: إخفاق فى التحميل:</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
@@ -6336,7 +6340,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
-        <translation>ميوزسكور: إخفاق فى تحميل طراز</translation>
+        <translation>ميوزسكور: إخفاق فى تحميل طراز:</translation>
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
@@ -6344,7 +6348,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation>ميوزسكور: إخفاق فى تحميل البالتات</translation>
+        <translation>ميوزسكور: إخفاق فى تحميل البالتات:</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -6372,7 +6376,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>ميوزسكور: إخفاق فى تحميل قائمة تراكبات</translation>
+        <translation>ميوزسكور: إخفاق فى تحميل قائمة التراكبات:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
@@ -6541,12 +6545,14 @@ please select a measure and try again</source>
     <message>
         <source>Open Temp File
 </source>
-        <translation>فتح ملف نمطى</translation>
+        <translation>فتح ملف نمطى
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation>لم يتم بنجاح:</translation>
+        <translation>
+لم يتم بنجاح:</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -6568,7 +6574,8 @@ failed: </source>
     <message>
         <source>Open Style File
 </source>
-        <translation>فتح ملف طراز</translation>
+        <translation>فتح ملف طراز
+</translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
@@ -6703,7 +6710,7 @@ failed: </source>
     </message>
     <message>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation>رجاء الضغط على 4 مفاتيح على الأكثر لإدراج تسلسل الاختصار</translation>
+        <translation>رجاء الضغط على 4 مفاتيح على الأكثر لإدراج تسلسل الاختصار!</translation>
     </message>
     <message>
         <source>Old shortcut:</source>
@@ -6834,7 +6841,7 @@ failed: </source>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
-        <translation>حالة التحديد</translation>
+        <translation>طور التحديد</translation>
     </message>
 </context>
 <context>
@@ -6928,7 +6935,7 @@ failed: </source>
     </message>
     <message>
         <source>BPM</source>
-        <translation></translation>
+        <translation>نقرة فى الدقيقة</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
@@ -6978,32 +6985,32 @@ failed: </source>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>النصّ</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>النص:</translation>
     </message>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>بُعد البداية:</translation>
     </message>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>مطلق:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>نسبىّ:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation></translation>
+        <translation>طراز النصّ:</translation>
     </message>
 </context>
 <context>
@@ -7207,7 +7214,7 @@ failed: </source>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation>بُعد النقطة المرجعية كنسبة مئوية من علوّ الإطار</translation>
+        <translation>بُعد النقطة المرجعية كنسبة مئوية من ارتفاع الإطار</translation>
     </message>
     <message>
         <source>Unit:</source>
@@ -7675,7 +7682,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation></translation>
+        <translation>أربيج</translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -7727,7 +7734,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamic</source>
-        <translation>شدّة الأداء</translation>
+        <translation>شِدّة أداء</translation>
     </message>
     <message>
         <source>Page</source>
@@ -7775,7 +7782,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairpinSegment</source>
-        <translation>قطعة شدّة تدريجية</translation>
+        <translation>قطعة شِدّة تدريجية</translation>
     </message>
     <message>
         <source>OttavaSegment</source>
@@ -7835,7 +7842,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lasso</source>
-        <translation></translation>
+        <translation>مستطيل متقطّع</translation>
     </message>
     <message>
         <source>ShadowNote</source>
