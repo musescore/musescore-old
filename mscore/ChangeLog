@@ -1,3 +1,5 @@
+31.jul (ws)
+      - save measure number offset
 30.jul (la)
       - force workingdir on first load of saveas and savecopy dialog
       - fix crash on removing staff when selected
