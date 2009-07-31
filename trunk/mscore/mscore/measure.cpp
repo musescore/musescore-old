@@ -2506,6 +2506,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tag("stretch", _userStretch);
             if (_noText)
                   _noText->write(xml);
+            if (_noOffset)
+                  xml.tag("noOffset", _noOffset);
             }
 
       MStaff* mstaff = staves[staff];
@@ -2858,6 +2860,8 @@ void Measure::read(QDomElement e, int idx)
                   lb->read(e);
                   add(lb);
                   }
+            else if (tag == "noOffset")
+                  _noOffset = val.toInt();
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "breakMultiMeasureRest")
