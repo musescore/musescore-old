@@ -524,7 +524,7 @@ void Note::draw(QPainter& p) const
       if (chord()) {
             double _spatium = spatium();
             int dots = chord()->dots();
-            double x = chord()->dotPosX() - pos().x();
+            double x = chord()->dotPosX() - ipos().x();
             if (dots) {
                   double d  = point(score()->styleS(ST_dotNoteDistance));
                   double dd = point(score()->styleS(ST_dotDotDistance));

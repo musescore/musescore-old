@@ -1,4 +1,5 @@
 1.aug (ws)
+      - move dots with notehead when editing notehead position
       - fix edit mode for cross staff beams (wrong position of handles)
 31.jul (ws)
       - save measure number offset
