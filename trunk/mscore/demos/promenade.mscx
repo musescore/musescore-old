@@ -97,6 +97,8 @@
     <trackName>Piano</trackName>
     <Instrument>
       <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
         <program value="0"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="60"/>
@@ -182,7 +184,6 @@
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-5.03286" y="0"/>
-        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <style>14</style>
         <text>Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</text>
@@ -194,33 +195,33 @@
         </TimeSig>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="0.196899" y="0.0992187"/>
-          </Attribute>
+          </Articulation>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="1">
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="1"/>
         <Beam>1</Beam>
         <Note pitch="72" tpc="14"/>
@@ -232,9 +233,9 @@
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="1"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -252,9 +253,9 @@
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="2"/>
         <Beam>2</Beam>
         <Note pitch="72" tpc="14"/>
@@ -266,38 +267,38 @@
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="2"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <BarLine>
@@ -481,32 +482,32 @@
         </TimeSig>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Beam id="5">
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="5"/>
         <Beam>5</Beam>
         <Note pitch="65" tpc="13"/>
@@ -518,9 +519,9 @@
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="5"/>
         <Note pitch="60" tpc="14"/>
         </Chord>
@@ -538,9 +539,9 @@
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="6"/>
         <Beam>6</Beam>
         <Note pitch="67" tpc="15"/>
@@ -552,9 +553,9 @@
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="6"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -617,32 +618,32 @@
         </TimeSig>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Beam id="8">
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="8"/>
         <Beam>8</Beam>
         <Note pitch="65" tpc="13"/>
@@ -654,9 +655,9 @@
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
-          </Attribute>
+          </Articulation>
         <Slur type="stop" number="8"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -677,10 +678,10 @@
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Attribute>
+        <Articulation>
           <subtype>tenuto</subtype>
           <offset x="-0.0142169" y="-0.0302857"/>
-          </Attribute>
+          </Articulation>
         <Slur type="start" number="9"/>
         <Beam>9</Beam>
         <StemDirection>down</StemDirection>
