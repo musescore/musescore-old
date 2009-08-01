@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
   <Mag>1.60624</Mag>
-  <xoff>-1360.44</xoff>
-  <yoff>32.1645</yoff>
+  <xoff>-828.203</xoff>
+  <yoff>12.1935</yoff>
   <Spatium>1.6</Spatium>
   <Division>480</Division>
   <Style>
@@ -6364,8 +6364,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Beam id="101">
         <track>1</track>
-        <y1>597.642</y1>
-        <y2>717.243</y2>
+        <y1>723.107</y1>
+        <y2>740.055</y2>
         </Beam>
       <Chord>
         <track>1</track>
@@ -10544,7 +10544,7 @@ p, li { white-space: pre-wrap; }
           <pitch>63</pitch>
           <tpc>11</tpc>
           <Tie>
-            <SlurSegment no="1">
+            <SlurSegment no="0">
               <offset x="-0.301781" y="0.0754452"/>
               </SlurSegment>
             <up>2</up>
@@ -26055,5 +26055,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>

@@ -1032,9 +1032,10 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
 // printf(" = %f   %f %f\n", mY, yu2, yo1);
             p1.ry() = mY;
             p2.ry() = mY;
-            _p1 = p1;
-            _p2 = p2;
             }
+      _p1 = p1;
+      _p2 = p2;
+
       const Style s(score()->style());
       double bd(s[ST_beamDistance].toDouble());
       Spatium bw(s[ST_beamWidth].toSpatium());
