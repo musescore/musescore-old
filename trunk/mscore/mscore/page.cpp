@@ -385,10 +385,8 @@ void PageFormat::read(QDomElement e)
 //---------------------------------------------------------
 //   read
 //  <page-layout>
-//	  <page-height>
-//	  <page-width>
-//      <pageFormat>A6</pageFormat>
-//      <landscape>1</landscape>
+//      <page-height>
+//      <page-width>
 //      <page-margins>
 //         <left-margin>28.3465</left-margin>
 //         <right-margin>28.3465</right-margin>
@@ -397,7 +395,7 @@ void PageFormat::read(QDomElement e)
 //         </page-margins>
 //      </page-layout>
 //
-//    sizes are given in units of 1/10 spatium; t
+//    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
 void PageFormat::readMusicXML(QDomElement e, double conversion)
@@ -405,13 +403,7 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            int i = val.toInt();
-            if (tag == "pageFormat") {
-                  size = paperSizeNameToIndex(val);
-                  }
-            else if (tag == "landscape")
-                  landscape = i;
-            else if (tag == "page-margins") {
+            if (tag == "page-margins") {
                   QString type = e.attribute("type","both");
                   double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -455,6 +447,11 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
             else
                   domError(e);
             }
+      printf("PageFormat::readMusicXML size=%d, height=%g, width=%g\n",
+      size, _height, _width);
+      int match = paperSizeSizeToIndex(_width, _height);
+      printf("PageFormat::readMusicXML match=%d\n", match);
+      if (match >= 0) size = match;
       }
 
 //---------------------------------------------------------

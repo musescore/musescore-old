@@ -1,4 +1,6 @@
-1.aug (ws)
+1.aug (lv)
+      - fix MusicXML import of page size, including recognizing the size
+      (ws)
       - move dots with notehead when editing notehead position
       - fix edit mode for cross staff beams (wrong position of handles)
 31.jul (ws)

@@ -118,5 +118,6 @@ class Page : public Element {
 
 extern const PaperSize paperSizes[];
 extern int paperSizeNameToIndex(const QString&);
+extern int paperSizeSizeToIndex(const double wi, const double hi);
 
 #endif

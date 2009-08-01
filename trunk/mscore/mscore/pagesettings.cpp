@@ -80,6 +80,33 @@ int paperSizeNameToIndex(const QString& name)
       }
 
 //---------------------------------------------------------
+//   paperSizeSizeToIndex
+//---------------------------------------------------------
+
+static const double minSize = 0.1;      // minimum paper size for sanity check
+static const double maxError = 0.01;    // max allowed error when matching sizes
+
+static double sizeError(const double si, const double sref)
+      {
+      double relErr = (si - sref) / sref;
+      return relErr > 0 ? relErr : -relErr;
+      }
+
+int paperSizeSizeToIndex(const double wi, const double hi)
+      {
+      if (wi < minSize || hi < minSize) return -1;
+      int i;
+      for (i = 0;;++i) {
+            if (paperSizes[i].name == 0)
+                  break;
+            if (sizeError(wi, paperSizes[i].w) < maxError && sizeError(hi, paperSizes[i].h) < maxError)
+                  return i;
+            }
+      printf("unknown paper size\n");
+      return -1;
+      }
+
+//---------------------------------------------------------
 //   PageSettings
 //---------------------------------------------------------
 
