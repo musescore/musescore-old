@@ -1031,8 +1031,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translatorcomment>Jeg mener det bør gå an å kalle dette tuplett på norsk, selv om vi burde hatt et bedre begrep. Det omfatter jo triol, kvartol, kvintol osv, &quot;Annen noteoppdeling&quot; blir litt lite intuitivt synes jeg.</translatorcomment>
-        <translation>Tuplett</translation>
+        <translatorcomment>Jeg trekker tilbake &quot;tuplett&quot;-ideen og bruker heller begrepet &quot;annendeling&quot;, som foreslått av Magnus Johansson.</translatorcomment>
+        <translation>Annendeling</translation>
     </message>
     <message>
         <source>Attributes:</source>
@@ -2560,7 +2560,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Tuplets:</source>
-        <translation>Tupletter:</translation>
+        <translation>Annendeling:</translation>
     </message>
     <message>
         <source>Segments:</source>
@@ -3116,7 +3116,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Repeats</source>
-        <translation>Gjentagelser</translation>
+        <translation>Repetisjoner</translation>
     </message>
     <message>
         <source>repeat measure</source>
@@ -3292,7 +3292,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation>Tupletter</translation>
+        <translation>Annendeling</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -4512,15 +4512,15 @@ før lukking?</translation>
     </message>
     <message>
         <source>Octuplet</source>
-        <translation></translation>
+        <translation>Oktol</translation>
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation></translation>
+        <translation>Novemol</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Andre tupletter</translation>
+        <translation>Annen noteoppdeling</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -5241,15 +5241,15 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation>Tuplett...</translation>
+        <translation>Annendeling...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for tuplett...</translation>
+        <translation>Egenskaper for annendeling...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation>Slett tuplett</translation>
+        <translation>Slett annendeling</translation>
     </message>
 </context>
 <context>
@@ -7403,7 +7403,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for tuplett...</translation>
+        <translation>Egenskaper for annendeling...</translation>
     </message>
 </context>
 <context>
@@ -7414,7 +7414,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Tuplett</translation>
+        <translation>Annendeling</translation>
     </message>
     <message>
         <source>has number</source>
@@ -7461,7 +7461,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: Opprett tuplett</translation>
+        <translation>MuseScore: Opprett annendeling</translation>
     </message>
     <message>
         <source>Type</source>
@@ -7512,7 +7512,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Egenskaper for tuplett</translation>
+        <translation>MuseScore: Egenskaper for annendeling</translation>
     </message>
     <message>
         <source>Number</source>
@@ -7760,7 +7760,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Tuplett</translation>
+        <translation>Annendeling</translation>
     </message>
     <message>
         <source>Tempo</source>
