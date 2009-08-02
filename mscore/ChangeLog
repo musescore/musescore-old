@@ -1,4 +1,5 @@
 2.aug (ws)
+      - fix staff when copy-paste chordnames
       - make cross staff movement of note undoable
 1.aug (lv)
       - fix MusicXML import of page size, including recognizing the size

@@ -245,6 +245,7 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
             case HARMONY:
                   e->setParent(measure());
                   e->setTick(tick());
+                  e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
