@@ -1,3 +1,5 @@
+2.aug (ws)
+      - make cross staff movement of note undoable
 1.aug (lv)
       - fix MusicXML import of page size, including recognizing the size
       (ws)

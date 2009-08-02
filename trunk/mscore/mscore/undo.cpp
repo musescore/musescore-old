@@ -2163,4 +2163,20 @@ void ChangeStyle::flip()
       score->textStyleChanged(score->textStyles());
       }
 
+//---------------------------------------------------------
+//   ChangeNoteStaffMove
+//---------------------------------------------------------
+
+ChangeNoteStaffMove::ChangeNoteStaffMove(Note* n, int v)
+   : note(n), staffMove(v)
+      {
+      }
+
+void ChangeNoteStaffMove::flip()
+      {
+      int v = note->staffMove();
+      note->setStaffMove(staffMove);
+      staffMove = v;
+      }
+
 

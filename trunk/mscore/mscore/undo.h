@@ -1108,5 +1108,20 @@ class ChangeStyle : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeNoteStaffMove
+//---------------------------------------------------------
+
+class ChangeNoteStaffMove : public UndoCommand {
+      Note* note;
+      int staffMove;
+      void flip();
+
+   public:
+      ChangeNoteStaffMove(Note*, int);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 

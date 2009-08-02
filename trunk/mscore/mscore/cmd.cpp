@@ -532,7 +532,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
 			len = _is.tickLen();
 			setPadState();
 			}
-		 
+
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
             n = (Note*)setTupletChordRest(cr, pitch, len);
@@ -1831,13 +1831,9 @@ void Score::moveUp(Note* note)
       {
       int rstaff = note->staff()->rstaff();
 
-      if (note->staffMove() == -1)
+      if ((note->staffMove() == -1) || (rstaff + note->staffMove() <= 0))
             return;
-      if (rstaff + note->staffMove() <= 0)
-            return;
-
-      note->setStaffMove(note->staffMove() - 1);
-      layoutAll = true;
+      _undo->push(new ChangeNoteStaffMove(note, note->staffMove()-1));
       }
 
 //---------------------------------------------------------
@@ -1851,13 +1847,9 @@ void Score::moveDown(Note* note)
       int rstaff   = staff->rstaff();
       int rstaves  = part->nstaves();
 
-      if (note->staffMove() == 1) {
+      if ((note->staffMove() == 1) || (rstaff + note->staffMove() >= rstaves-1))
             return;
-            }
-      if (rstaff + note->staffMove() >= rstaves-1) {
-            return;
-            }
-      note->setStaffMove(note->staffMove() + 1);
+      _undo->push(new ChangeNoteStaffMove(note, note->staffMove()+1));
       layoutAll = true;
       }
 
@@ -2637,13 +2629,13 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
-							  
+
 							  //deal with full measure rest case
 							  if(cr->duration().type() == Duration::V_MEASURE){
 								Measure* m1 = tick2measure(curTick);
 								cr->setTickLen(m1->tickLen());
 								}
-							  
+
                               curTick  = cr->tick() + cr->tickLen();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
