@@ -931,6 +931,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
             case HARMONY:
                   e->setParent(chord()->measure());
                   e->setTick(chord()->tick());
+                  e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
