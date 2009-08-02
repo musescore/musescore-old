@@ -1,4 +1,5 @@
 2.aug (ws)
+      - fix midi rendering of grace notes
       - fix staff when copy-paste chordnames
       - make cross staff movement of note undoable
 1.aug (lv)
