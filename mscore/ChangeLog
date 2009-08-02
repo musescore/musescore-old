@@ -1,4 +1,6 @@
 2.aug (ws)
+      - new menu entry: edit->delete-selected-measures; alternate method to
+        delete measures
       - fix midi rendering of grace notes
       - fix staff when copy-paste chordnames
       - make cross staff movement of note undoable

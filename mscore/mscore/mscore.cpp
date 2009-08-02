@@ -241,9 +241,9 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       if (preferences.dirty)
             preferences.write();
 
-	  if (_saveAsDialog) { 	 
-			QByteArray ba = _saveAsDialog->saveState(); 	 
-			settings.setValue("saveAs", ba); 	 
+	  if (_saveAsDialog) {
+			QByteArray ba = _saveAsDialog->saveState();
+			settings.setValue("saveAs", ba);
 		    }
 
       if (_saveCopyDialog) {
@@ -566,6 +566,9 @@ MuseScore::MuseScore()
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
       menuEdit->addAction(getAction("find"));
+      menuEdit->addSeparator();
+
+      menuEdit->addAction(getAction("delete-measures"));
       menuEdit->addSeparator();
 
       QMenu* menuVoices = new QMenu(tr("Voices"));
@@ -2443,7 +2446,7 @@ QFileDialog* MuseScore::saveCopyDialog()
             _saveCopyDialog->selectNameFilter(_saveCopyDialog->nameFilters().value(settings.value("saveCopyFilter", 0).toInt()));
             if (settings.contains("saveCopy"))
                   _saveCopyDialog->restoreState(settings.value("saveCopy").toByteArray());
-            //HACK at time of writing restoreState seems to ignore the previous path (la) 
+            //HACK at time of writing restoreState seems to ignore the previous path (la)
 			_saveCopyDialog->setDirectory(preferences.workingDirectory);
             }
       return _saveCopyDialog;

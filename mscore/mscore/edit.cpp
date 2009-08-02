@@ -369,8 +369,8 @@ void Score::putNote(const QPointF& pos, bool replace)
             printf("cannot put note here, get position failed\n");
             return;
             }
-	  
-	  
+
+
 	  //no note value selected
 	  if(len==0){
 			len = p.measure->tickLen();
@@ -1069,6 +1069,48 @@ void Score::cmdRemoveTime(int tick, int len)
       undoFixTicks();
       }
 
+//---------------------------------------------------------
+//   cmdDeleteSelectedMeasures
+//---------------------------------------------------------
+
+void Score::cmdDeleteSelectedMeasures()
+      {
+      MeasureBase* is = selection()->startSegment()->measure();
+      bool createEndBar = false;
+      if (is->next()) {
+            MeasureBase* ie = selection()->endSegment()->measure();
+            if (ie) {
+                  if (ie->tick() < selection()->endSegment()->tick()) {
+                        // if last measure is selected
+                        deleteItem(ie);
+                        createEndBar = true;
+                        }
+                  do {
+                        ie = ie->prev();
+                        deleteItem(ie);
+                        } while (ie != is);
+                  }
+            }
+      else {
+            createEndBar = true;
+            deleteItem(is);
+            }
+
+      if (createEndBar) {
+            MeasureBase* mb = _measures.last();
+            while (mb && mb->type() != MEASURE)
+                  mb = mb->prev();
+            if (mb) {
+                  Measure* lastMeasure = static_cast<Measure*>(mb);
+                  if (lastMeasure->endBarLineType() == NORMAL_BAR) {
+                        undoChangeEndBarLineType(lastMeasure, END_BAR);
+                        }
+                  }
+            }
+      selection()->elements()->clear();
+      select(0, SELECT_SINGLE, 0);
+      layoutAll = true;
+      }
 
 //---------------------------------------------------------
 //   cmdDeleteSelection
@@ -1077,40 +1119,11 @@ void Score::cmdRemoveTime(int tick, int len)
 void Score::cmdDeleteSelection()
       {
       if (selection()->state() == SEL_SYSTEM) {
-            MeasureBase* is = selection()->startSegment()->measure();
-            bool createEndBar = false;
-            if (is->next()) {
-                  MeasureBase* ie = selection()->endSegment()->measure();
-                  if (ie) {
-                        if (ie->tick() < selection()->endSegment()->tick()) {
-                              // if last measure is selected
-                              deleteItem(ie);
-                              createEndBar = true;
-                              }
-                        do {
-                              ie = ie->prev();
-                              deleteItem(ie);
-                              } while (ie != is);
-                        }
-                  }
-            else {
-                  createEndBar = true;
-                  deleteItem(is);
-                  }
-
-            if (createEndBar) {
-                  MeasureBase* mb = _measures.last();
-                  while (mb && mb->type() != MEASURE)
-                        mb = mb->prev();
-                  if (mb) {
-                        Measure* lastMeasure = static_cast<Measure*>(mb);
-                        if (lastMeasure->endBarLineType() == NORMAL_BAR) {
-                              undoChangeEndBarLineType(lastMeasure, END_BAR);
-                              }
-                        }
-                  }
+            cmdDeleteSelectedMeasures();
+            return;
             }
-      else if (selection()->state() == SEL_STAFF) {
+
+      if (selection()->state() == SEL_STAFF) {
             Segment* s1 = selection()->startSegment();
             Segment* s2 = selection()->endSegment();
             int track1  = selection()->staffStart * VOICES;
