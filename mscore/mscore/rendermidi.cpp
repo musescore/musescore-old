@@ -179,7 +179,7 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
             ev->setNote(note);
             events->insertMulti(tick + i * arpeggioOffset, ev);
 
-            Event* evo = new Event(ME_NOTEOFF);
+            Event* evo = new Event(ME_NOTEON);
             evo->setChannel(idx);
             evo->setPitch(pitch);
             evo->setVelo(0);
@@ -315,8 +315,6 @@ void Score::fixPpitch()
 
 void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
-// printf("collect %d-%d\n", m->tick(), m->tick() + m->tickLen());
-
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
 
