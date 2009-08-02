@@ -536,6 +536,7 @@ class Score : public QObject {
       Note* addNote(Chord*, int pitch);
 
       void deleteItem(Element*);
+      void cmdDeleteSelectedMeasures();
       void cmdDeleteSelection();
       void toggleInvisible(Element* obj);
 

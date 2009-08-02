@@ -881,6 +881,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL,
+         "delete-measures",
+         QT_TR_NOOP("delete selected measures"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Delete Selected Measures"),
+         QT_TR_NOOP("Delete Selected Measures")
+         ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-measure",
          QT_TR_NOOP("append measure"),

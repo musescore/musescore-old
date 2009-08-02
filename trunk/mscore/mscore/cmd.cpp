@@ -2073,6 +2073,8 @@ void Score::cmd(const QString& cmd)
                   cmdAddHairpin(true);
             else if (cmd == "delete")
                   cmdDeleteSelection();
+            else if (cmd == "delete-measures")
+                  cmdDeleteSelectedMeasures();
             else if (cmd == "rest")
                   cmdEnterRest();
             else if (cmd == "rest-1")
