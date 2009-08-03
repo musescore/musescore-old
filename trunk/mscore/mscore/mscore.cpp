@@ -568,8 +568,9 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
-      menuEdit->addAction(getAction("delete-measures"));
-      menuEdit->addSeparator();
+// postponed to 0.9.6
+//      menuEdit->addAction(getAction("delete-measures"));
+//      menuEdit->addSeparator();
 
       QMenu* menuVoices = new QMenu(tr("Voices"));
       menuVoices->addAction(getAction("voice-x12"));
