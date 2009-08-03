@@ -679,6 +679,7 @@ void Selection::updateState()
                   if (e->type() == NOTE || e->type() == REST) {
                         if (!_score->noteEntryMode())
                               _score->setPadState(e);
+                        e->setSelected(true);
                         if (e->type() == NOTE)
                               e = e->parent();
                         _score->setInputTrack(e->track());
