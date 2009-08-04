@@ -208,6 +208,8 @@ class TextB : public Element {
 //---------------------------------------------------------
 
 class Text : public TextB {
+      Q_DECLARE_TR_FUNCTIONS(Text)
+
       TextBase* _tb;
 
    public:

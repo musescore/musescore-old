@@ -110,7 +110,7 @@
         <source>Revision: 628</source>
         <translation>مراجعة: 628</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -5139,6 +5139,14 @@ before closing?</source>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

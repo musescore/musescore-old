@@ -252,7 +252,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hook</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ligadura</translation>
     </message>
     <message>
         <source>Grace Note</source>
@@ -5127,6 +5127,14 @@ before closing?</source>
         <source>Edit Text Style...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -7717,7 +7725,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ligadura</translation>
     </message>
     <message>
         <source>Lyrics</source>

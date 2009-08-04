@@ -5141,6 +5141,14 @@ avant de fermer ?</translation>
         <source>Edit Text Style...</source>
         <translation>Editer les styles de texte...</translation>
     </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
