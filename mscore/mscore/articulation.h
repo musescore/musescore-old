@@ -85,6 +85,8 @@ struct ArticulationInfo {
 //---------------------------------------------------------
 
 class Articulation : public Symbol {
+      Q_DECLARE_TR_FUNCTIONS(Articulation)
+
       QString _channelName;
       ArticulationAnchor _anchor;
 

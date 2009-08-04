@@ -29,6 +29,7 @@
 //---------------------------------------------------------
 
 class TempoText : public Text  {
+      Q_DECLARE_TR_FUNCTIONS(TempoText)
       double _tempo;     // beats per second
 
    public:

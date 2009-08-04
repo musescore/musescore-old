@@ -248,30 +248,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation>和弦</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>符幹</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>符尾</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <translation>裝飾音</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <translation>符幹方向</translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <translation>加線：</translation>
-    </message>
-    <message>
-        <source>Chord</source>
         <comment>do not translate</comment>
         <translation></translation>
     </message>
@@ -304,10 +280,6 @@ p, li { white-space: pre-wrap; }
         <source>Help Lines:</source>
         <comment>do not translate</comment>
         <translation></translation>
-    </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation>音符屬性：</translation>
     </message>
 </context>
 <context>
@@ -5178,12 +5150,12 @@ before closing?</source>
         <translation>MuseScore：儲存副本</translation>
     </message>
     <message>
-        <source>edit style</source>
-        <translation>編輯樣式</translation>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>edit text style</source>
-        <translation>編輯文字樣式</translation>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

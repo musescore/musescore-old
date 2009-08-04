@@ -43,6 +43,8 @@ enum DynamicType { DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM };
 //---------------------------------------------------------
 
 class Dynamic : public Text {
+      Q_DECLARE_TR_FUNCTIONS(Dynamic)
+
       mutable QPointF dragOffset;
       int _velocity;          // associated midi velocity 0-127
       DynamicType _dynType;

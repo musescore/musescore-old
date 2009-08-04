@@ -5138,6 +5138,14 @@ før lukking?</translation>
         <source>Edit Text Style...</source>
         <translation>Rediger tekststil...</translation>
     </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>

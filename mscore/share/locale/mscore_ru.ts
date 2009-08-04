@@ -242,56 +242,28 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation>Аккорд</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>Штиль</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>Хвостик</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <translation>Форшлаг</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <translation>Направление штиля</translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Аккорд</translation>
     </message>
     <message>
         <source>Stem</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Штиль</translation>
     </message>
     <message>
         <source>Hook</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Хвостик</translation>
     </message>
     <message>
         <source>Grace Note</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Форшлаг</translation>
     </message>
     <message>
         <source>Stem Direction</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Направление штиля</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -1047,7 +1019,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Группа</translation>
     </message>
     <message>
         <source>Tuplet</source>
@@ -1105,7 +1077,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Динамика</translation>
     </message>
     <message>
         <source>SubType:</source>
@@ -1116,7 +1088,7 @@ p, li { white-space: pre-wrap; }
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore: Свойства текста</translation>
     </message>
     <message>
         <source>Midi Values</source>
@@ -1403,7 +1375,7 @@ failed: </source>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Символ</translation>
     </message>
     <message>
         <source>Anchor</source>
@@ -5162,11 +5134,11 @@ before closing?</source>
         <translation>MuseScore: Сохранить копию</translation>
     </message>
     <message>
-        <source>edit style</source>
+        <source>delete selected measures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>edit text style</source>
+        <source>Delete Selected Measures</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7881,7 +7853,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Октава</translation>
     </message>
     <message>
         <source>Pedal</source>

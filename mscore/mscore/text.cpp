@@ -957,6 +957,8 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
       {
       if (debugMode)
             printf("TextB::edit\n");
+      if (!editMode || !cursor)
+            return false;
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       qreal w = 8.0 / view->matrix().m11();
@@ -1014,14 +1016,14 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
 			if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
 			#endif
-            
+
 			}
 	  #ifdef Q_WS_MAC
 		else if(modifiers == Qt::AltModifier){
 			if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
 		}
-	  #endif		
+	  #endif
       QTextCursor::MoveMode mm = (modifiers & Qt::ShiftModifier)
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
@@ -1089,7 +1091,8 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
 //   replaceSpecialChars
 //---------------------------------------------------------
 
-bool TextB::replaceSpecialChars() {
+bool TextB::replaceSpecialChars()
+      {
       QTextCursor startCur = *cursor;
       foreach (const char* s, charReplaceMap.keys()) {
             SymCode sym = *charReplaceMap.value(s);
@@ -1144,6 +1147,10 @@ void TextB::moveCursor(int col)
 
 void TextB::endEdit()
       {
+      if (!editMode || !cursor) {
+            printf("endEdit: not in edit mode or no cursor: %d %p\n", editMode, cursor);
+            return;
+            }
       cursorPos = cursor->position();
       if (textPalette)
             textPalette->hide();

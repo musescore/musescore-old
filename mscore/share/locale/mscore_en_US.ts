@@ -1833,7 +1833,7 @@ Failed: </translation>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">System</translation>
     </message>
     <message>
         <source>subtype</source>
@@ -5132,6 +5132,14 @@ before closing?</source>
         <source>Edit Text Style...</source>
         <translation>Edit text style...</translation>
     </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6595,7 +6603,7 @@ Failed: </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> Failed</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -6647,7 +6655,7 @@ Failed: </translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Time signature:</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -6748,7 +6756,7 @@ Failed: </translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">s</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6967,7 +6975,7 @@ Failed: </translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Space:</translation>
     </message>
     <message>
         <source>Text</source>
@@ -7221,7 +7229,7 @@ Failed: </translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Space:</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -8088,7 +8096,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sharp</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8108,11 +8116,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Natural</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Flat</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -8156,7 +8164,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dot</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -8256,7 +8264,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
@@ -8312,7 +8320,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trill</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -8356,7 +8364,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arpeggio</translation>
     </message>
     <message>
         <source>trillelement</source>
@@ -8468,7 +8476,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bass clef</translation>
     </message>
     <message>
         <source>cbass clef</source>
@@ -8548,7 +8556,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flip stem</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Flip stem</translation>
     </message>
     <message>
         <source>whole diamond2 head</source>
