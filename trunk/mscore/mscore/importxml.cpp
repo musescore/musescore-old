@@ -1116,14 +1116,14 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
                                           volta->endings().append(iEendingNumber);
-                                          score->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
-                                                lastVolta->setTick2(tick);
-                                                lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-                                                lastVolta = 0;
+												lastVolta->setTick2(tick);
+												lastVolta->setSubtype(Volta::VOLTA_CLOSED);             
+                                                score->add(lastVolta);
+												lastVolta = 0;
                                                 }
                                           else {
                                                 printf("lastVolta == 0 on stop\n");
@@ -1133,6 +1133,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           if (lastVolta) {
                                                 lastVolta->setTick2(tick);
                                                 lastVolta->setSubtype(Volta::VOLTA_OPEN);
+												score->add(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
