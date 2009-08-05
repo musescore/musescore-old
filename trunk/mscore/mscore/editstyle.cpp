@@ -170,8 +170,7 @@ void EditStyle::getValues()
       lstyle.set(ST_genTimesig,              genTimesig->isChecked());
       lstyle.set(ST_genCourtesyTimesig,      genCourtesyTimesig->isChecked());
 
-      QFileInfo fi(chordDescriptionFile->text());
-      lstyle.set(ST_chordDescriptionFile,    qPrintable(fi.fileName()));
+      lstyle.set(ST_chordDescriptionFile,   chordDescriptionFile->text());
 
       lstyle.set(ST_concertPitch,            concertPitch->isChecked());
       lstyle.set(ST_createMultiMeasureRests, multiMeasureRests->isChecked());
