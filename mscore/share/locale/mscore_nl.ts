@@ -3065,7 +3065,7 @@ Toonhoogte</translation>
     </message>
     <message>
         <source>start subbeam</source>
-        <translation>einde enkele- en begin waardestreep</translation>
+        <translation>einde enkele- en begin dubbele waardestreep</translation>
     </message>
     <message>
         <source>Beam Properties</source>
@@ -3802,203 +3802,203 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>Eenstemmig</translation>
+        <translation>Eenstemmig (Prime)</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Eenstemming</translation>
+        <translation>Interval Eenstemming (Prime) toevoegen</translation>
     </message>
     <message>
         <source>enter second above</source>
-        <translation>tweede er boven</translation>
+        <translation>interval 2e er boven (secunde) toevoegen</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation>Tweede er boven</translation>
+        <translation>2e er boven (Secunde)</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation>Tweede er boven</translation>
+        <translation>Interval 2e er boven (secunde) toevoegen</translation>
     </message>
     <message>
         <source>enter third above</source>
-        <translation>derde er boven</translation>
+        <translation>interval 3e er boven (terts) toevoegen</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation>Derde er boven</translation>
+        <translation>3e er boven (Terts)</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation>Derde er boven</translation>
+        <translation>Interval 3e er boven (terts) toevoegen</translation>
     </message>
     <message>
         <source>enter fourth above</source>
-        <translation>vierde er boven invoegen</translation>
+        <translation>interval 4e er boven (quart) toevoegen</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation>Vierde er boven</translation>
+        <translation>4e er boven (Quart)</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation>Vierde er boven invoegen</translation>
+        <translation>Interval 4e er boven (quart) toevoegen</translation>
     </message>
     <message>
         <source>enter fifth above</source>
-        <translation>vijfde er boven invoegen</translation>
+        <translation>interval 5e er boven (quint) toevoegen</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation>Vijfde er boven</translation>
+        <translation>5e er boven (Quint)</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation>Vijfde er boven invoegen</translation>
+        <translation>Interval 5e er boven (quint) toevoegen</translation>
     </message>
     <message>
         <source>enter sixth above</source>
-        <translation>zesde er boven</translation>
+        <translation>interval 6e er boven (sext) toevoegen</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation>Zesde er boven</translation>
+        <translation>6e er boven (Sext)</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation>Zesde er boven</translation>
+        <translation>Interval 6e er boven (sext) toevoegen</translation>
     </message>
     <message>
         <source>enter seventh above</source>
-        <translation>zevende er boven</translation>
+        <translation>interval 7e er boven (septime) toevoegen</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation>Zevende er boven</translation>
+        <translation>7e er boven (Septime)</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation>Zevende er boven</translation>
+        <translation>Interval 7e er boven (septime) toevoegen</translation>
     </message>
     <message>
         <source>enter octave above</source>
-        <translation>octaaf hoger</translation>
+        <translation>interval octaaf hoger toevoegen</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation>Octaaf hoger</translation>
+        <translation>8e er boven (Octaaf)</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation>Octaaf hoger</translation>
+        <translation>Interval 8e er boven (Octaaf) toevoegen</translation>
     </message>
     <message>
         <source>enter ninth above</source>
-        <translation>negende er boven invoegen</translation>
+        <translation>interval 9e er boven invoegen</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation>Negende er boven</translation>
+        <translation>9e er boven</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation>Negende er boven invoegen</translation>
+        <translation>9e er boven toevoegen</translation>
     </message>
     <message>
         <source>enter second below</source>
-        <translation>tweede er onder</translation>
+        <translation>interval 2e er onder toevoegen</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation>Tweede er onder</translation>
+        <translation>2e er onder (Secunde)</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation>Tweede er onder</translation>
+        <translation>Interval 2e er onder (seconde) toevoegen</translation>
     </message>
     <message>
         <source>enter third below</source>
-        <translation>derde er onder</translation>
+        <translation>interval 3e er onder toevoegen</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation>Derde er onder</translation>
+        <translation>3e er onder (Terts)</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation>Derde er onder</translation>
+        <translation>Interval 3e er onder (terts) toevoegen</translation>
     </message>
     <message>
         <source>enter fourth below</source>
-        <translation>vierde er onder invoegen</translation>
+        <translation>interval 4e er onder toevoegen</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation>Vierde er onder</translation>
+        <translation>4e er onder (Quart)</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation>Vierde er onder invoegen</translation>
+        <translation>Interval 4e er onder (quart) toevoegen</translation>
     </message>
     <message>
         <source>enter fifth below</source>
-        <translation>vijfde er onder invoegen</translation>
+        <translation>interval 5e er onder toevoegen</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation>Vijfde er onder</translation>
+        <translation>5e er onder (Quint)</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation>Vijfde er onder invoegen</translation>
+        <translation>Interval 5e er onder (quint) toevoegen</translation>
     </message>
     <message>
         <source>enter sixth below</source>
-        <translation>zesde er onder</translation>
+        <translation>interval 6e er onder toevoegen</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation>Zesde er onder</translation>
+        <translation>6e er onder (Sext)</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation>Zesde er onder</translation>
+        <translation>Interval 6e er onder (sext) toevoegen</translation>
     </message>
     <message>
         <source>enter seventh below</source>
-        <translation>zevende er onder</translation>
+        <translation>interval 7e er onder</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation>Zevende er onder</translation>
+        <translation>7e er onder (Septime)</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation>Zevende er onder</translation>
+        <translation>Interval 7e er onder (septime) toevoegen</translation>
     </message>
     <message>
         <source>enter octave below</source>
-        <translation>octaaf lager</translation>
+        <translation>interval octaaf lager toevoegen</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation>Octaaf lager</translation>
+        <translation>8e er onder (Octaaf)</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation>Octaaf lager</translation>
+        <translation>Interval 8e er onder (Octaaf) toevoegen </translation>
     </message>
     <message>
         <source>enter ninth below</source>
-        <translation>negende er onder invoegen</translation>
+        <translation>interval 9e er onder invoegen</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation>negende er onder</translation>
+        <translation>9e er onder</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation>Negende er onder invoegen</translation>
+        <translation>Interval 9e er onder toevoegen</translation>
     </message>
     <message>
         <source>enter note a</source>
@@ -4202,7 +4202,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation>Vergroot afstanden</translation>
+        <translation>Afstanden vergroten</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
@@ -5047,7 +5047,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation>Standaard Afstanden</translation>
+        <translation>Afstanden standaard waarden</translation>
     </message>
     <message>
         <source>show invisible</source>
@@ -5143,11 +5143,11 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijder geselecteerde maten</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder geselecteerde maten</translation>
     </message>
 </context>
 <context>
