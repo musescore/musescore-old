@@ -30,6 +30,7 @@
 //---------------------------------------------------------
 
 class StaffText : public Text  {
+      Q_DECLARE_TR_FUNCTIONS(StaffText)
       QString _channelName;
       QString _midiActionName;
 

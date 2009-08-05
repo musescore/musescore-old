@@ -32,6 +32,7 @@ class ImagePath;
 //---------------------------------------------------------
 
 class Image : public BSymbol {
+   Q_DECLARE_TR_FUNCTIONS(Image)
    protected:
       ImagePath* _ip;
       mutable QPixmap buffer;        ///< cached rendering

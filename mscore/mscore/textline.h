@@ -34,7 +34,9 @@ class Element;
 //---------------------------------------------------------
 
 class TextLineSegment : public LineSegment {
-      TextC* _text;
+   Q_DECLARE_TR_FUNCTIONS(TextLineSegment)
+  
+   TextC* _text;
 
    protected:
 
