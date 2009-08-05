@@ -976,7 +976,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tuning offset</source>
-        <translation>Tonehøyde-justering:</translation>
+        <translation>Tonehøyde-justering</translation>
     </message>
     <message>
         <source>cent</source>
@@ -984,7 +984,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stem direction</source>
-        <translation>Retning på notehals:</translation>
+        <translation>Retning på notehals</translation>
     </message>
     <message>
         <source>auto</source>
@@ -1121,7 +1121,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>part</source>
-        <translation>Del</translation>
+        <translation>Stemme</translation>
     </message>
     <message>
         <source>system</source>
@@ -1369,7 +1369,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Endre trommesett</translation>
+        <translation>Endre trommesett...</translation>
     </message>
     <message>
         <source>Stemless</source>
@@ -1904,11 +1904,11 @@ feilet:</translation>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Del av partitur</translation>
+        <translation>MuseScore: Stemmer i partitur</translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Velg del av partitur:</translation>
+        <translation>Velg stemme fra partitur:</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1920,7 +1920,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Endre del:</translation>
+        <translation>Endre stemme:</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1936,7 +1936,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Opprett del</translation>
+        <translation>Opprett stemme</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1980,7 +1980,7 @@ feilet:</translation>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>Egenskaper for horisontal boks</translation>
+        <translation>Egenskaper for horisontal boks...</translation>
     </message>
 </context>
 <context>
@@ -2152,7 +2152,7 @@ feilet:</translation>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Liste over deler av partitur</translation>
+        <translation>MuseScore: Liste over stemmer i  partitur</translation>
     </message>
 </context>
 <context>
@@ -2552,7 +2552,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Staves:</source>
-        <translation>Notesystemer</translation>
+        <translation>Notesystemer:</translation>
     </message>
     <message>
         <source>NoOffset:</source>
@@ -2674,7 +2674,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation>Antall takter:</translation>
+        <translation>Antall takter å legge til</translation>
     </message>
     <message>
         <source>OK</source>
@@ -3268,7 +3268,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Deler...</translation>
+        <translation>Stemmer...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -4568,35 +4568,35 @@ før lukking?</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>Åttendedelsnote</translation>
+        <translation>Åttedelsnote</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation>Åttendedelsnote</translation>
+        <translation>Åttedelsnote</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>16-delsnote</translation>
+        <translation>Sekstendelsnote</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation>16-delsnote</translation>
+        <translation>Sekstendelsnote</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>32-delsnote</translation>
+        <translation>Trettitodelsnote</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation>32-delsnote</translation>
+        <translation>Trettitodelsnote</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>64-delsnote</translation>
+        <translation>Sekstifiredelsnote</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation>64-delsnote</translation>
+        <translation>Sekstifiredelsnote</translation>
     </message>
     <message>
         <source>pad dot</source>
@@ -5080,19 +5080,19 @@ før lukking?</translation>
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation>Legg til heltaktspause</translation>
+        <translation>Legg til helpause</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation>Heltaktspause</translation>
+        <translation>Helpause</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>Legg til halvtaktspause</translation>
+        <translation>Legg til halvpause</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation>1/2-taktspause</translation>
+        <translation>Halvpause</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
@@ -5104,11 +5104,11 @@ før lukking?</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>Legg til åttendelspause</translation>
+        <translation>Legg til åttedelspause</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation>Åttendelspause</translation>
+        <translation>Åttedelspause</translation>
     </message>
     <message>
         <source>backspace</source>
@@ -5140,11 +5140,11 @@ før lukking?</translation>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>slett valgte takter</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett valgte takter</translation>
     </message>
 </context>
 <context>
@@ -5552,7 +5552,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation>Delnavn</translation>
+        <translation>Stemmenavn</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -5604,7 +5604,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>Midi-lyd for del</translation>
+        <translation>Midi-lyd for stemme</translation>
     </message>
 </context>
 <context>
@@ -5917,7 +5917,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Misc.</source>
-        <translation>Forskjellig</translation>
+        <translation>Diverse</translation>
     </message>
     <message>
         <source>Proximity for selecting elements</source>
@@ -5925,7 +5925,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>
-        <translation>Deaktiver utjevnede skrifttyper</translation>
+        <translation>Deaktiver skriftutjevning</translation>
     </message>
     <message>
         <source>uncheck this to speed up drawing</source>
@@ -5933,7 +5933,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Draw Antialiased</source>
-        <translation>Bruk utjevnede skrifttyper</translation>
+        <translation>Bruk skriftutjevning</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5941,7 +5941,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Autocorrection</source>
-        <translation>Automatisk endring</translation>
+        <translation>Automatisk retting</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -6626,7 +6626,7 @@ feilet:</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Ingenting valgt. Transponer hele notesystemet?</translation>
+        <translation>Ingenting valgt. Transponere hele notesystemet?</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
@@ -8054,11 +8054,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole rest</source>
-        <translation>Helnotepause</translation>
+        <translation>Helpause</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation>Halvnotepause</translation>
+        <translation>Halvpause</translation>
     </message>
     <message>
         <source>outside whole rest</source>
@@ -8082,20 +8082,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>quart rest</source>
-        <translation>Fjerdedelspause</translation>
+        <translation>Firedelspause</translation>
     </message>
     <message>
         <source>clas quart rest</source>
-        <translatorcomment>Very hard to find any reference to this symbol, which has the appearance of a mirrored eight rest. The translation is therefore most probably not correct.</translatorcomment>
-        <translation>clas firedels pause</translation>
+        <translatorcomment>This is an alternative notation for a quart rest. I am unaware of any proper norwegian term for this.</translatorcomment>
+        <translation>Firedelspause (alternativ)</translation>
     </message>
     <message>
         <source>eight rest</source>
-        <translation>Åttendelspause</translation>
+        <translation>Åttedelspause</translation>
     </message>
     <message>
         <source>16&apos; rest</source>
-        <translation>Sekstendedelspause</translation>
+        <translation>Sekstendelspause</translation>
     </message>
     <message>
         <source>32&apos;  rest</source>
@@ -8103,11 +8103,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>64&apos; rest</source>
-        <translation>Sekstifjerdedelspause</translation>
+        <translation>Sekstifiredelspause</translation>
     </message>
     <message>
         <source>128&apos; rest</source>
-        <translation>Hundreogtjueåttendedelspause</translation>
+        <translation>Hundreogtjueåttedelspause</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -8203,7 +8203,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>quart head</source>
-        <translation>Fjerdedelsnotehode</translation>
+        <translation>Firedelsnotehode</translation>
     </message>
     <message>
         <source>whole diamond head</source>
@@ -8239,7 +8239,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>quart slash head</source>
-        <translation>Fjerdedelsnotehode skrå</translation>
+        <translation>Firedelsnotehode skrå</translation>
     </message>
     <message>
         <source>whole cross head</source>
@@ -8443,11 +8443,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>eight flag</source>
-        <translation>Åttendedelsfane</translation>
+        <translation>Åttedelsfane</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation>Sekstendedelsfane</translation>
+        <translation>Sekstendelsfane</translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
@@ -8455,11 +8455,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation>Sekstifjerdedelsfane</translation>
+        <translation>Sekstifiredelsfane</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation>Åttendedelsfane ned</translation>
+        <translation>Åttedelsfane ned</translation>
     </message>
     <message>
         <source>grace dash</source>
@@ -8471,7 +8471,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dsixteenth flag</source>
-        <translation>Sekstendedelsfane ned</translation>
+        <translation>Sekstendelsfane ned</translation>
     </message>
     <message>
         <source>dthirtysecond flag</source>
@@ -8479,7 +8479,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dsixtyfourth flag</source>
-        <translation>Sekstifjerdedelsfane ned</translation>
+        <translation>Sekstifiredelsfane ned</translation>
     </message>
     <message>
         <source>alto clef</source>
@@ -8523,7 +8523,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>four four meter</source>
-        <translation>Fire fjerdedeler</translation>
+        <translation>Fire firedels takt</translation>
     </message>
     <message>
         <source>allabreve</source>
