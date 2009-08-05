@@ -31,6 +31,7 @@ class Note;
 //---------------------------------------------------------
 
 class Glissando : public Element {
+      Q_DECLARE_TR_FUNCTIONS(Glissando)
       QLineF line;
       QString _text;
       bool _showText;
