@@ -108,8 +108,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1950 revised JLWaltener 27/07/2009 - QT Linguist v4.5.2</translatorcomment>
-        <translation>Révision : 1950</translation>
+        <translatorcomment>r1992 revised JLWaltener 05/08/2009 - QT Linguist v4.5.2</translatorcomment>
+        <translation>Révision : 1992</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5143,11 +5143,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>supprimer les mesures sélectionnées</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les mesures sélectionnées</translation>
     </message>
 </context>
 <context>
