@@ -19,50 +19,52 @@
 #=============================================================================
 
 install(FILES
-      mscore_ar.qm
+      mscore_af.ts
+      mscore_af.qm
       mscore_ar.ts
-      mscore_da.qm
-      mscore_da.ts
-      mscore_de.qm
-      mscore_de.ts
-      mscore_it.qm
-      mscore_it.ts
-      mscore_pt.qm
-      mscore_pt.ts
-      mscore_ru.qm
-      mscore_ru.ts
-      mscore_es.qm
-      mscore_es.ts
-      mscore_fi.qm
-      mscore_fi.ts
-      mscore_fr.qm
-      mscore_fr.ts
-      mscore_nl.qm
-      mscore_nl.ts
-      mscore_cs.qm
+      mscore_ar.qm
       mscore_cs.ts
-      mscore_gl.ts
-      mscore_gl.qm
-      mscore_tr.ts
-      mscore_tr.qm
-      mscore_hi_IN.ts
-      mscore_hi_IN.qm
-      mscore_pt_BR.ts
-      mscore_pt_BR.qm
+      mscore_cs.qm
+      mscore_da.ts
+      mscore_da.qm
+      mscore_de.ts
+      mscore_de.qm
       mscore_en_GB.ts
       mscore_en_GB.qm
       mscore_en_US.ts
       mscore_en_US.qm
-      mscore_sv.ts
-      mscore_sv.qm
-      mscore_no.ts
-      mscore_no.qm
-      mscore_uk.ts
-      mscore_uk.qm
-      mscore_af.ts
-      mscore_af.qm
+      mscore_es.ts
+      mscore_es.qm
+      mscore_fi.ts
+      mscore_fi.qm
+      mscore_fr.ts
+      mscore_fr.qm
+      mscore_gl.ts
+      mscore_gl.qm
+      mscore_hi_IN.ts
+      mscore_hi_IN.qm
       mscore_hu.ts
       mscore_hu.qm
+      mscore_it.ts
+      mscore_it.qm
+      mscore_nl.ts
+      mscore_nl.qm
+      mscore_no.ts
+      mscore_no.qm
+      mscore_pt.ts
+      mscore_pt.qm
+      mscore_pt_BR.ts
+      mscore_pt_BR.qm
+      mscore_ru.ts
+      mscore_ru.qm
+      mscore_sv.ts
+      mscore_sv.qm
+      mscore_tr.ts
+      mscore_tr.qm
+      mscore_uk.ts
+      mscore_uk.qm
+      mscore_zh_TW.ts
+      mscore_zh_TW.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 
