@@ -498,7 +498,7 @@ void MuseScore::editInstrList()
       //
       cs->startCmd();
 	  //TODO check if current selection is in a removed staff?
-	  cs->selection()->setState(SEL_NONE);
+	  cs->selection()->clear();
 
       QTreeWidget* pl = instrList->partiturList;
       Part* part   = 0;
