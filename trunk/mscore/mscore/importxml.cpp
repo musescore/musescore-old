@@ -639,8 +639,7 @@ void MusicXml::scorePartwise(QDomElement ee)
             else if (tag == "movement-number")
                   score->setMovementNumber(e.text());
             else if (tag == "movement-title")
-                ;
-                  //score->setMovementTitle(e.text());
+                  score->setMovementTitle(e.text());
             else if (tag == "credit") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
