@@ -5151,11 +5151,11 @@ before closing?</source>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除選取的小節</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除選取的小節</translation>
     </message>
 </context>
 <context>
@@ -8070,7 +8070,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest M3</source>
-        <translation type="unfinished">休止符 M3</translation>
+        <translatorcomment>maxima rest</translatorcomment>
+        <translation>最長休止符</translation>
     </message>
     <message>
         <source>longa rest</source>
@@ -8086,7 +8087,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation type="unfinished">古典四分休止符</translation>
+        <translation>古典四分休止符</translation>
     </message>
     <message>
         <source>eight rest</source>
@@ -8602,7 +8603,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished">手風琴 - 舊式 ee</translation>
+        <translation>手風琴 - 舊式</translation>
     </message>
     <message>
         <source>flip stem</source>
