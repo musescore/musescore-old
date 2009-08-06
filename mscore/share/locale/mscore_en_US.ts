@@ -5134,11 +5134,11 @@ before closing?</source>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Delete selected measures</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5286,37 +5286,37 @@ before closing?</source>
     <message>
         <source>Subelements:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>TPC</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>HGrp.</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Line</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Tie Forw.</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Move</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Tie Back</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -5326,22 +5326,22 @@ before closing?</source>
     <message>
         <source>Mirror Head</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>S-Channel</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hidden</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>User-Acc</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ppitch</source>
@@ -5641,15 +5641,15 @@ before closing?</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>volume</source>
@@ -6283,29 +6283,29 @@ before closing?</source>
     <name>QMessageBox</name>
     <message>
         <source>MuseScore:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -6599,7 +6599,7 @@ Failed: </translation>
     </message>
     <message>
         <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Removing old backup file </translation>
     </message>
     <message>
         <source> failed</source>
@@ -6690,7 +6690,7 @@ Failed: </translation>
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Undefined</source>
@@ -6717,15 +6717,15 @@ Failed: </translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -6756,15 +6756,15 @@ Failed: </translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">s</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
