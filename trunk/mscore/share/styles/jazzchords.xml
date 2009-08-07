@@ -217,7 +217,8 @@
     </chord>
   <chord id="24">
     <name>m#5</name>
-    <xml>minor alt#5</xml>
+    <xml>minor</xml>
+    <degree>alt#5</degree>
     <voicing>C Eb G#</voicing>
     <render>m s# 5</render>
     </chord>

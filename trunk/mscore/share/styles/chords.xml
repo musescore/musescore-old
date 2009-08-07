@@ -211,7 +211,8 @@
     </chord>
   <chord id="24">
     <name>m#5</name>
-    <xml>minor alt#5</xml>
+    <xml>minor</xml>
+    <degree>alt#5</degree>
     <voicing>C Eb G#</voicing>
     <render>m#5</render>
     </chord>
@@ -1197,7 +1198,8 @@
     </chord>
   <chord id="191">
     <name>6add9</name>
-    <xml>maj69</xml>
+    <xml>major-sixth</xml>
+    <degree>add9</degree>
     <voicing>C E G A D</voicing>
     <render>6add9</render>
     </chord>
