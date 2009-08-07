@@ -331,11 +331,11 @@ int MidiFile::readShort()
       short format;
       read(&format, 2);
 #ifdef Q_WS_MAC
-	    if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
-		    return format;
+	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+		return format;
       }else{
         return BE_SHORT(format);
-      }
+        }
 #else
       return BE_SHORT(format);
 #endif
@@ -348,16 +348,18 @@ int MidiFile::readShort()
 void MidiFile::writeShort(int i)
       {
 #ifdef Q_WS_MAC
-	    int format;
+	  short format;
       if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
-		    format = i;
+		format = (short)i;
       }else{
         format = BE_SHORT(i);
       }
+	  write(&format, 2);
 #else
       int format = BE_SHORT(i);
+	  write(&format, 2);
 #endif      
-      write(&format, 2);
+      
       }
 
 //---------------------------------------------------------
@@ -370,8 +372,8 @@ int MidiFile::readLong()
       int format;
       read(&format, 4);
 #ifdef Q_WS_MAC
-	    if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
-		    return format;
+	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+		return format;
       }else{
         return BE_LONG(format);
       }
@@ -387,9 +389,9 @@ int MidiFile::readLong()
 void MidiFile::writeLong(int i)
       {
 #ifdef Q_WS_MAC
-	    int format;
+	  int format;
       if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
-		    format = i;
+		format = i;
       }else{
         format = BE_LONG(i);
       }
