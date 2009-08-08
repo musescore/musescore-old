@@ -1368,7 +1368,7 @@
          </instrument>
       <instrument>
          <name>F Alto Ophicleide</name>
-         <short-name>E<symbol name="flat"/> A. Oph.</short-name>
+         <short-name>F A. Oph.</short-name>
          <clef>0</clef>
          <aPitchRange>52-81</aPitchRange>
          <pPitchRange>52-84</pPitchRange>
