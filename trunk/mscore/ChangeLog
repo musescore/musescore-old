@@ -1,3 +1,8 @@
+8.aug (db)
+      - Remove "prerelease" notice from splash screen
+      - fix incorrect abbreviation for F Alto Ophicleide
+      - update instruments_zh_TW.xml from benice 
+      - update handbooks
 2.aug (ws)
       - new menu entry: edit->delete-selected-measures; alternate method to
         delete measures
