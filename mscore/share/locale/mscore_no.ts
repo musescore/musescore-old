@@ -1031,8 +1031,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translatorcomment>Jeg trekker tilbake &quot;tuplett&quot;-ideen og bruker heller begrepet &quot;annendeling&quot;, som foreslått av Magnus Johansson.</translatorcomment>
-        <translation>Annendeling</translation>
+        <translatorcomment>Changed after discussion with Dag Henning Sørbø</translatorcomment>
+        <translation>Noteoppdeling</translation>
     </message>
     <message>
         <source>Attributes:</source>
@@ -2560,7 +2560,7 @@ feilet:</translation>
     </message>
     <message>
         <source>Tuplets:</source>
-        <translation>Annendeling:</translation>
+        <translation>Noteoppdelinger:</translation>
     </message>
     <message>
         <source>Segments:</source>
@@ -3292,7 +3292,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation>Annendeling</translation>
+        <translation>Noteoppdelinger</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -4520,7 +4520,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Annen noteoppdeling</translation>
+        <translation>Andre noteoppdelinger</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -5249,15 +5249,15 @@ før lukking?</translation>
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation>Annendeling...</translation>
+        <translation>Noteoppdeling...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for annendeling...</translation>
+        <translation>Egenskaper for noteoppdeling...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation>Slett annendeling</translation>
+        <translation>Slett noteoppdeling</translation>
     </message>
 </context>
 <context>
@@ -7411,7 +7411,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Egenskaper for annendeling...</translation>
+        <translation>Egenskaper for noteoppdeling...</translation>
     </message>
 </context>
 <context>
@@ -7422,7 +7422,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Annendeling</translation>
+        <translation>Noteoppdeling</translation>
     </message>
     <message>
         <source>has number</source>
@@ -7469,7 +7469,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: Opprett annendeling</translation>
+        <translation>MuseScore: Opprett noteoppdeling</translation>
     </message>
     <message>
         <source>Type</source>
@@ -7520,7 +7520,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Egenskaper for annendeling</translation>
+        <translation>MuseScore: Egenskaper for noteoppdeling</translation>
     </message>
     <message>
         <source>Number</source>
@@ -7768,7 +7768,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Annendeling</translation>
+        <translation>Noteoppdeling</translation>
     </message>
     <message>
         <source>Tempo</source>
