@@ -1543,6 +1543,8 @@ MeasureBase* Score::appendMeasure(int type)
       else if (type == VBOX)
             mb = new VBox(this);
       mb->setTick(tick);
+      if(!last)
+        sigmap->add(tick, 4, 4);
 
       if (type == MEASURE) {
             Measure* measure = (Measure*)mb;
