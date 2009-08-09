@@ -1516,7 +1516,7 @@ fejl:</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Opret hjælp ved taktartskift</translation>
+        <translation>Opret hjælptaktart ved taktartskift</translation>
     </message>
     <message>
         <source>spacing (1=tight)</source>
@@ -4196,7 +4196,7 @@ før lukning?</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation>tilføj mere spredning til de valgte takter</translation>
+        <translation>Tilføj mere spredning til den valgte takt</translation>
     </message>
     <message>
         <source>less stretch</source>
@@ -4208,7 +4208,7 @@ før lukning?</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation>Tilføj mindre spredning til de valgte takter</translation>
+        <translation>Tilføj mindre spredning til den valgt takt</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>

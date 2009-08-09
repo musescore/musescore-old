@@ -1,3 +1,6 @@
+9.aug (db)
+      - limit templates to one measure (except leadsheet.mscx)
+      - update Norwegian and Danish translations
 8.aug (db)
       - Remove "prerelease" notice from splash screen
       - fix incorrect abbreviation for F Alto Ophicleide

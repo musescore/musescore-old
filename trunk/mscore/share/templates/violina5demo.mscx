@@ -58,23 +58,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <BarLine/>
       </Measure>
-    <Measure number="2">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
-      <BarLine/>
-      </Measure>
-    <Measure number="3">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
-      <BarLine/>
-      </Measure>
-    <Measure number="4">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
-      <BarLine/>
-      </Measure>
     </Staff>
   </museScore>

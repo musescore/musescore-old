@@ -71,53 +71,6 @@
       <Rest>
         </Rest>
       </Measure>
-    <Measure number="2">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="3">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="4">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="5">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="6">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="7">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="8">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="9">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="10">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="11">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="12">
-      <Rest>
-        </Rest>
-      <BarLine>
-        <subtype>5</subtype>
-        </BarLine>
-      </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
@@ -128,53 +81,6 @@
         </TimeSig>
       <Rest>
         </Rest>
-      </Measure>
-    <Measure number="2">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="3">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="4">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="5">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="6">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="7">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="8">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="9">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="10">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="11">
-      <Rest>
-        </Rest>
-      </Measure>
-    <Measure number="12">
-      <Rest>
-        </Rest>
-      <BarLine>
-        <subtype>5</subtype>
-        </BarLine>
       </Measure>
     </Staff>
   <cursorTrack>-1</cursorTrack>
