@@ -625,7 +625,7 @@ void PreferenceDialog::updateValues(Preferences* p)
                   break;
             ++idx;
             }
-      if (idx >= sl.size())
+      if (idx > sl.size())
             idx = 0;
       styleCombo->setCurrentIndex(idx);
 
