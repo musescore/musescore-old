@@ -3197,7 +3197,7 @@ failed: </source>
     </message>
     <message>
         <source>toggle note input mode N</source>
-        <translation>تبديل طور إدراج النغمات لا</translation>
+        <translation>تبديل طور إدراج النغمات</translation>
     </message>
     <message>
         <source>pitch spell</source>
