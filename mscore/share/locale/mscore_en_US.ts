@@ -4214,7 +4214,7 @@ before closing?</source>
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Reset beam mode</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Reset Beam Mode of selected measures</source>
@@ -4466,19 +4466,19 @@ before closing?</source>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>Insert horizontal fram</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>Insert vertical frame</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation>Append horizontal frame</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>Append vertical frame</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -4682,7 +4682,7 @@ before closing?</source>
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Play panel</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -4706,7 +4706,7 @@ before closing?</source>
     </message>
     <message>
         <source>Status Bar</source>
-        <translation>Status bar</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Quit</source>
@@ -4746,7 +4746,7 @@ before closing?</source>
     </message>
     <message>
         <source>System Text</source>
-        <translation>System text</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add Staff Text</source>
@@ -4754,7 +4754,7 @@ before closing?</source>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation>Staff text</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add Text</source>
@@ -4942,27 +4942,27 @@ before closing?</source>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
-        <translation>Exchange voice 1-2</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exchange Voice 1-3</source>
-        <translation>Exchange voice 1-3</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exchange Voice 1-4</source>
-        <translation>Exchange voice 1-4</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exchange Voice 2-3</source>
-        <translation>Exchange voice 2-3</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exchange Voice 2-4</source>
-        <translation>Exchange voice 2-4</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exchange Voice 3-4</source>
-        <translation>Exchange voice 3-4</translation>
+        <translation></translation>
     </message>
     <message>
         <source>display in concert pitch</source>
@@ -5126,11 +5126,11 @@ before closing?</source>
     </message>
     <message>
         <source>Edit Style...</source>
-        <translation>Edit style...</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
-        <translation>Edit text style...</translation>
+        <translation></translation>
     </message>
     <message>
         <source>delete selected measures</source>
@@ -5764,7 +5764,7 @@ before closing?</source>
     </message>
     <message>
         <source>Play Panel:</source>
-        <translation>Play panel:</translation>
+        <translation></translation>
     </message>
     <message>
         <source>show</source>
@@ -6952,11 +6952,11 @@ Failed: </translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Set invisible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set visible</translation>
+        <translation></translation>
     </message>
 </context>
 <context>

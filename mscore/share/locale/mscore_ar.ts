@@ -91,6 +91,10 @@
         <source>Hungary</source>
         <translation></translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -110,7 +114,7 @@
         <source>Revision: 628</source>
         <translation>مراجعة: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -4637,7 +4641,7 @@ failed: </source>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>حتى القفلة</translation>
+        <translation>إلى القفلة</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -5142,11 +5146,11 @@ before closing?</source>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>إزالة الموازير المعيّنة</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>إزالة الموازير المعيّنة</translation>
     </message>
 </context>
 <context>
@@ -8120,7 +8124,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation></translation>
+        <translation>نصف دييز2</translation>
     </message>
     <message>
         <source>sharp slash3</source>
@@ -8128,7 +8132,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation>دييز ونصف</translation>
+        <translation>دييز ونصف2</translation>
     </message>
     <message>
         <source>natural</source>
@@ -8144,19 +8148,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat slash2</source>
-        <translation></translation>
+        <translation>نصف بيمول2</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation></translation>
+        <translation>بيمول معكوسة2</translation>
     </message>
     <message>
         <source>mirrored flat</source>
-        <translation>نصف بيمول</translation>
+        <translation>بيمول معكوسة</translation>
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation></translation>
+        <translation>نصف بيمول معكوسة</translation>
     </message>
     <message>
         <source>flat flat</source>
