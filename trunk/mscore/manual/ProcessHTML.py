@@ -176,8 +176,9 @@ def removeBaseTag(html_source, language_code='en'):
     from BeautifulSoup import BeautifulSoup
     BeautifulSoup.NESTABLE_TAGS.update({'kbd':[]}) # add 'kbd' to list of nestable tags
     html_soup = BeautifulSoup(html_source)
-    
-    html_soup('base')[0].extract() # remove base tag from document
+
+    if (html_soup.find('base') > -1):   
+        html_soup('base')[0].extract() # remove base tag from document
 
     html_source = str(html_soup)
     
@@ -208,9 +209,11 @@ def addCustomStyles(html_source, verbose):
             if verbose:
                 print ' * ' + str(i) + " " + html_soup('style')[i].name
             html_soup('style')[i].extract() # remove style from document
-    html_soup('link')[1].extract()
-    if verbose:
-        print ' * 1 external style'
+
+    if (html_soup.find('link') > -1):
+        html_soup('link')[1].extract()
+        if verbose:
+            print ' * 1 external style'
 
     html_source = str(html_soup)
 
@@ -243,8 +246,12 @@ def downloadImages(html_source, verbose, download_images='all'):
     file_name = ""
 
     if not os.path.isdir('files'):
-        os.mkdir('files')
+        os.mkdir('files') 
 
+    broken_image = html_source.find('NOT FOUND:') #indicates a broken image on the website
+    if broken_image > -1:
+        broken_image_name = html_source[broken_image+11:html_source.find('</span>',broken_image)]
+        print ' * WARNING: At least one broken image (' + broken_image_name + ')'
         
     while html_source[i:].find('src="') > -1:
         i = html_source[i:].index('src="') + i + 5
