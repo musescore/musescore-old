@@ -26,7 +26,7 @@ cmake_policy(SET CMP0003 NEW)
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
+set(MSCORE_UNSTABLE  FALSE)                # mark as unstable
 
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
