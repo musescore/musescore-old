@@ -53,6 +53,8 @@ CHANGE LOG
 * Compatibility update: remove "www." from handbook links (HTML from website changed)
 * Update CSS for release of version 0.9.5 and to embed DejaVuSans font for Mac shortcut symbols
 * Add Norwegian and wrote instructions for adding new languages
+* Check for broken images
+* Check for base and link tags before processing them
 
 Version 1.2 (9 July 2009):
 * Style sheet designed for pisa 3.0.31 (no longer designed for 3.0.27)
