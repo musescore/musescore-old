@@ -18,8 +18,6 @@
  * 02111-1307, USA
  */
 
-#include <math.h>
-
 #include "event.h"
 #include "fluid.h"
 #include "sfont.h"
@@ -44,16 +42,24 @@ bool Fluid::initialized = false;
  * explicitly overridden by the sound font in order to turn them off.
  */
 
-Mod default_vel2att_mod;        /* SF2.01 section 8.4.1  */
-Mod default_vel2filter_mod;     /* SF2.01 section 8.4.2  */
-Mod default_at2viblfo_mod;      /* SF2.01 section 8.4.3  */
-Mod default_mod2viblfo_mod;     /* SF2.01 section 8.4.4  */
-Mod default_att_mod;            /* SF2.01 section 8.4.5  */
-Mod default_pan_mod;            /* SF2.01 section 8.4.6  */
-Mod default_expr_mod;           /* SF2.01 section 8.4.7  */
-Mod default_reverb_mod;         /* SF2.01 section 8.4.8  */
-Mod default_chorus_mod;         /* SF2.01 section 8.4.9  */
-Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
+static const Mod defaultMod[] = {
+      { GEN_ATTENUATION, FLUID_MOD_VELOCITY, FLUID_MOD_GC | FLUID_MOD_CONCAVE | FLUID_MOD_UNIPOLAR | FLUID_MOD_NEGATIVE, 0, 0, 960.0 },
+      { GEN_FILTERFC,
+         FLUID_MOD_VELOCITY, FLUID_MOD_GC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_NEGATIVE,
+         FLUID_MOD_VELOCITY, FLUID_MOD_GC | FLUID_MOD_SWITCH | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE,
+         -2400 },
+      { GEN_VIBLFOTOPITCH, FLUID_MOD_CHANNELPRESSURE, FLUID_MOD_GC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE, 0, 0, 50 },
+      { GEN_VIBLFOTOPITCH, 1, FLUID_MOD_CC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE, 0, 0, 50 },
+      { GEN_ATTENUATION, 7, FLUID_MOD_CC | FLUID_MOD_CONCAVE | FLUID_MOD_UNIPOLAR | FLUID_MOD_NEGATIVE, 0, 0, 960.0 },
+      { GEN_PAN, 10, FLUID_MOD_CC | FLUID_MOD_LINEAR | FLUID_MOD_BIPOLAR | FLUID_MOD_POSITIVE, 0, 0, 500.0 },
+      { GEN_ATTENUATION, 11, FLUID_MOD_CC | FLUID_MOD_CONCAVE | FLUID_MOD_UNIPOLAR | FLUID_MOD_NEGATIVE, 0, 0, 960.0 },
+      { GEN_REVERBSEND, 91, FLUID_MOD_CC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE, 0, 0, 200 },
+      { GEN_CHORUSSEND, 93, FLUID_MOD_CC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE, 0, 0, 200 },
+      { GEN_PITCH,
+           FLUID_MOD_PITCHWHEEL,     FLUID_MOD_GC | FLUID_MOD_LINEAR | FLUID_MOD_BIPOLAR  | FLUID_MOD_POSITIVE,
+           FLUID_MOD_PITCHWHEELSENS, FLUID_MOD_GC | FLUID_MOD_LINEAR | FLUID_MOD_UNIPOLAR | FLUID_MOD_POSITIVE,
+        12700.0 },
+      };
 
 //---------------------------------------------------------
 //   Fluid
@@ -61,13 +67,12 @@ Mod default_pitch_bend_mod;     /* SF2.01 section 8.4.10 */
 
 Fluid::Fluid()
       {
-      left_buf   = new float[FLUID_BUFSIZE];
-      right_buf  = new float[FLUID_BUFSIZE];
-      fx_buf[0]  = new float[FLUID_BUFSIZE];
-      fx_buf[1]  = new float[FLUID_BUFSIZE];
-      reverb     = 0;
-      chorus     = 0;
-      tuning     = 0;
+      left_buf  = new float[FLUID_BUFSIZE];
+      right_buf = new float[FLUID_BUFSIZE];
+      fx_buf[0] = new float[FLUID_BUFSIZE];
+      fx_buf[1] = new float[FLUID_BUFSIZE];
+      reverb    = 0;
+      chorus    = 0;
       }
 
 //---------------------------------------------------------
@@ -80,146 +85,6 @@ void Fluid::init()
       initialized = true;
       fluid_conversion_config();
       Voice::dsp_float_config();
-
-      /* SF2.01 page 53 section 8.4.1: MIDI Note-On Velocity to Initial Attenuation */
-      fluid_mod_set_source1(&default_vel2att_mod, /* The modulator we are programming here */
-		       FLUID_MOD_VELOCITY,    /* Source. VELOCITY corresponds to 'index=2'. */
-		       FLUID_MOD_GC           /* Not a MIDI continuous controller */
-		       | FLUID_MOD_CONCAVE    /* Curve shape. Corresponds to 'type=1' */
-		       | FLUID_MOD_UNIPOLAR   /* Polarity. Corresponds to 'P=0' */
-		       | FLUID_MOD_NEGATIVE   /* Direction. Corresponds to 'D=1' */
-		       );
-      fluid_mod_set_source2(&default_vel2att_mod, 0, 0); /* No 2nd source */
-      fluid_mod_set_dest(&default_vel2att_mod, GEN_ATTENUATION);  /* Target: Initial attenuation */
-      fluid_mod_set_amount(&default_vel2att_mod, 960.0);          /* Modulation amount: 960 */
-
-
-
-     /* SF2.01 page 53 section 8.4.2: MIDI Note-On Velocity to Filter Cutoff
-      * Have to make a design decision here. The specs don't make any sense this way or another.
-      * One sound font, 'Kingston Piano', which has been praised for its quality, tries to
-      * override this modulator with an amount of 0 and positive polarity (instead of what
-      * the specs say, D=1) for the secondary source.
-      * So if we change the polarity to 'positive', one of the best free sound fonts works...
-      */
-      fluid_mod_set_source1(&default_vel2filter_mod, FLUID_MOD_VELOCITY, /* Index=2 */
-		       FLUID_MOD_GC                        /* CC=0 */
-		       | FLUID_MOD_LINEAR                  /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                /* P=0 */
-                       | FLUID_MOD_NEGATIVE                /* D=1 */
-		       );
-      fluid_mod_set_source2(&default_vel2filter_mod, FLUID_MOD_VELOCITY, /* Index=2 */
-		       FLUID_MOD_GC                                 /* CC=0 */
-		       | FLUID_MOD_SWITCH                           /* type=3 */
-		       | FLUID_MOD_UNIPOLAR                         /* P=0 */
-		       // do not remove       | FLUID_MOD_NEGATIVE                         /* D=1 */
-		       | FLUID_MOD_POSITIVE                         /* D=0 */
-		       );
-      fluid_mod_set_dest(&default_vel2filter_mod, GEN_FILTERFC);        /* Target: Initial filter cutoff */
-      fluid_mod_set_amount(&default_vel2filter_mod, -2400);
-
-      /* SF2.01 page 53 section 8.4.3: MIDI Channel pressure to Vibrato LFO pitch depth */
-      fluid_mod_set_source1(&default_at2viblfo_mod, FLUID_MOD_CHANNELPRESSURE, /* Index=13 */
-		       FLUID_MOD_GC                        /* CC=0 */
-		       | FLUID_MOD_LINEAR                  /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                /* P=0 */
-		       | FLUID_MOD_POSITIVE                /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_at2viblfo_mod, 0,0); /* no second source */
-      fluid_mod_set_dest(&default_at2viblfo_mod, GEN_VIBLFOTOPITCH);        /* Target: Vib. LFO => pitch */
-      fluid_mod_set_amount(&default_at2viblfo_mod, 50);
-
-      /* SF2.01 page 53 section 8.4.4: Mod wheel (Controller 1) to Vibrato LFO pitch depth */
-      fluid_mod_set_source1(&default_mod2viblfo_mod, 1, /* Index=1 */
-		       FLUID_MOD_CC                        /* CC=1 */
-		       | FLUID_MOD_LINEAR                  /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                /* P=0 */
-		       | FLUID_MOD_POSITIVE                /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_mod2viblfo_mod, 0,0); /* no second source */
-      fluid_mod_set_dest(&default_mod2viblfo_mod, GEN_VIBLFOTOPITCH);        /* Target: Vib. LFO => pitch */
-      fluid_mod_set_amount(&default_mod2viblfo_mod, 50);
-
-      /* SF2.01 page 55 section 8.4.5: MIDI continuous controller 7 to initial attenuation*/
-      fluid_mod_set_source1(&default_att_mod, 7,                     /* index=7 */
-		       FLUID_MOD_CC                              /* CC=1 */
-		       | FLUID_MOD_CONCAVE                       /* type=1 */
-		       | FLUID_MOD_UNIPOLAR                      /* P=0 */
-		       | FLUID_MOD_NEGATIVE                      /* D=1 */
-		       );
-      fluid_mod_set_source2(&default_att_mod, 0, 0);                 /* No second source */
-      fluid_mod_set_dest(&default_att_mod, GEN_ATTENUATION);         /* Target: Initial attenuation */
-      fluid_mod_set_amount(&default_att_mod, 960.0);                 /* Amount: 960 */
-
-      /* SF2.01 page 55 section 8.4.6 MIDI continuous controller 10 to Pan Position */
-      fluid_mod_set_source1(&default_pan_mod, 10,                    /* index=10 */
-		       FLUID_MOD_CC                              /* CC=1 */
-		       | FLUID_MOD_LINEAR                        /* type=0 */
-		       | FLUID_MOD_BIPOLAR                       /* P=1 */
-		       | FLUID_MOD_POSITIVE                      /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_pan_mod, 0, 0);                 /* No second source */
-      fluid_mod_set_dest(&default_pan_mod, GEN_PAN);                 /* Target: pan */
-  /* Amount: 500. The SF specs $8.4.6, p. 55 syas: "Amount = 1000
-     tenths of a percent". The center value (64) corresponds to 50%,
-     so it follows that amount = 50% x 1000/% = 500. */
-      fluid_mod_set_amount(&default_pan_mod, 500.0);
-
-
-      /* SF2.01 page 55 section 8.4.7: MIDI continuous controller 11 to initial attenuation*/
-      fluid_mod_set_source1(&default_expr_mod, 11,                     /* index=11 */
-		       FLUID_MOD_CC                              /* CC=1 */
-		       | FLUID_MOD_CONCAVE                       /* type=1 */
-		       | FLUID_MOD_UNIPOLAR                      /* P=0 */
-		       | FLUID_MOD_NEGATIVE                      /* D=1 */
-		       );
-      fluid_mod_set_source2(&default_expr_mod, 0, 0);                 /* No second source */
-      fluid_mod_set_dest(&default_expr_mod, GEN_ATTENUATION);         /* Target: Initial attenuation */
-      fluid_mod_set_amount(&default_expr_mod, 960.0);                 /* Amount: 960 */
-
-
-
-      /* SF2.01 page 55 section 8.4.8: MIDI continuous controller 91 to Reverb send */
-      fluid_mod_set_source1(&default_reverb_mod, 91,                 /* index=91 */
-		       FLUID_MOD_CC                              /* CC=1 */
-		       | FLUID_MOD_LINEAR                        /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                      /* P=0 */
-		       | FLUID_MOD_POSITIVE                      /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_reverb_mod, 0, 0);              /* No second source */
-      fluid_mod_set_dest(&default_reverb_mod, GEN_REVERBSEND);       /* Target: Reverb send */
-      fluid_mod_set_amount(&default_reverb_mod, 200);                /* Amount: 200 ('tenths of a percent') */
-
-
-
-      /* SF2.01 page 55 section 8.4.9: MIDI continuous controller 93 to Reverb send */
-      fluid_mod_set_source1(&default_chorus_mod, 93,                 /* index=93 */
-		       FLUID_MOD_CC                              /* CC=1 */
-		       | FLUID_MOD_LINEAR                        /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                      /* P=0 */
-		       | FLUID_MOD_POSITIVE                      /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_chorus_mod, 0, 0);              /* No second source */
-      fluid_mod_set_dest(&default_chorus_mod, GEN_CHORUSSEND);       /* Target: Chorus */
-      fluid_mod_set_amount(&default_chorus_mod, 200);                /* Amount: 200 ('tenths of a percent') */
-
-
-
-      /* SF2.01 page 57 section 8.4.10 MIDI Pitch Wheel to Initial Pitch ... */
-      fluid_mod_set_source1(&default_pitch_bend_mod, FLUID_MOD_PITCHWHEEL, /* Index=14 */
-		       FLUID_MOD_GC                              /* CC =0 */
-		       | FLUID_MOD_LINEAR                        /* type=0 */
-		       | FLUID_MOD_BIPOLAR                       /* P=1 */
-		       | FLUID_MOD_POSITIVE                      /* D=0 */
-		       );
-      fluid_mod_set_source2(&default_pitch_bend_mod, FLUID_MOD_PITCHWHEELSENS,  /* Index = 16 */
-		       FLUID_MOD_GC                                        /* CC=0 */
-		       | FLUID_MOD_LINEAR                                  /* type=0 */
-		       | FLUID_MOD_UNIPOLAR                                /* P=0 */
-		       | FLUID_MOD_POSITIVE                                /* D=0 */
-		       );
-      fluid_mod_set_dest(&default_pitch_bend_mod, GEN_PITCH);                 /* Destination: Initial pitch */
-      fluid_mod_set_amount(&default_pitch_bend_mod, 12700.0);                 /* Amount: 12700 cents */
       }
 
 //---------------------------------------------------------
@@ -237,7 +102,9 @@ void Fluid::init(int sr)
       _gain       = .1;
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
-      tuning      = 0;
+      for (int i = 0; i < 128; ++i)
+            _tuning[i] = i * 100.0;
+      _masterTuning = 440.0;
 
       for (int i = 0; i < 256; i++)
             freeVoices.append(new Voice(this));
@@ -273,20 +140,6 @@ Fluid::~Fluid()
 
       delete reverb;
       delete chorus;
-
-      /* free the tunings, if any */
-      if (tuning) {
-            for (int i = 0; i < 128; i++) {
-                  if (tuning[i] != 0) {
-                        for (int k = 0; k < 128; k++) {
-                              if (tuning[i][k] != 0)
-                                    free(tuning[i][k]);
-                              }
-                        free(tuning[i]);
-                        }
-                  }
-            free(tuning);
-            }
       }
 
 //---------------------------------------------------------
@@ -380,15 +233,6 @@ void Fluid::damp_voices(int chan)
             if ((v->chan == chan) && v->SUSTAINED())
                   v->noteoff();
             }
-      }
-
-//---------------------------------------------------------
-//   get_cc
-//---------------------------------------------------------
-
-int Fluid::get_cc(int chan, int num)
-      {
-      return channel[chan]->cc[num];
       }
 
 //---------------------------------------------------------
@@ -510,20 +354,6 @@ void Fluid::pitch_wheel_sens(int chan, int val)
       }
 
 /*
- * fluid_synth_get_pitch_wheel_sens
- *
- * Note : this function was added after version 1.0 API freeze.
- * So its API is not in the synth.h file. It should be added in some later
- * version of fluidsynth. Maybe v2.0 ? -- Antoine Schmitt May 2003
- */
-
-void Fluid::get_pitch_wheel_sens(int chan, int* pval)
-      {
-      // get the pitch-bend value in the channel
-      *pval = channel[chan]->pitch_wheel_sensitivity;
-      }
-
-/*
  * fluid_synth_get_preset
  */
 Preset* Fluid::get_preset(unsigned int sfontnum, unsigned banknum, unsigned prognum)
@@ -579,22 +409,6 @@ void Fluid::program_change(int chan, int prognum)
       unsigned sfont_id = preset? preset->sfont->id() : 0;
       c->setSfontnum(sfont_id);
       c->setPreset(preset);
-      }
-
-/*
- * fluid_synth_bank_select
- */
-void Fluid::bank_select(int chan, unsigned int bank)
-      {
-      channel[chan]->setBanknum(bank);
-      }
-
-/*
- * fluid_synth_sfont_select
- */
-void Fluid::sfont_select(int chan, unsigned int sfont_id)
-      {
-      channel[chan]->setSfontnum(sfont_id);
       }
 
 /*
@@ -737,9 +551,8 @@ void Fluid::one_block()
       /* clean the audio buffers */
       memset(left_buf,  0, byte_size);
       memset(right_buf, 0, byte_size);
-
-      for (int i = 0; i < 2; i++)
-            memset(fx_buf[i], 0, byte_size);
+      memset(fx_buf[0], 0, byte_size);
+      memset(fx_buf[1], 0, byte_size);
 
       if (activeVoices.isEmpty())
             --silentBlocks;
@@ -852,16 +665,8 @@ Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int ve
       v->init(sample, c, key, vel, id, vt);
 
       /* add the default modulators to the synthesis process. */
-      v->add_mod(&default_vel2att_mod, FLUID_VOICE_DEFAULT);    /* SF2.01 $8.4.1  */
-      v->add_mod(&default_vel2filter_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.2  */
-      v->add_mod(&default_at2viblfo_mod, FLUID_VOICE_DEFAULT);  /* SF2.01 $8.4.3  */
-      v->add_mod(&default_mod2viblfo_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.4  */
-      v->add_mod(&default_att_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.5  */
-      v->add_mod(&default_pan_mod, FLUID_VOICE_DEFAULT);        /* SF2.01 $8.4.6  */
-      v->add_mod(&default_expr_mod, FLUID_VOICE_DEFAULT);       /* SF2.01 $8.4.7  */
-      v->add_mod(&default_reverb_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.8  */
-      v->add_mod(&default_chorus_mod, FLUID_VOICE_DEFAULT);     /* SF2.01 $8.4.9  */
-      v->add_mod(&default_pitch_bend_mod, FLUID_VOICE_DEFAULT); /* SF2.01 $8.4.10 */
+      for (unsigned i = 0; i < sizeof(defaultMod)/sizeof(*defaultMod); ++i)
+            v->add_mod(&defaultMod[i],  FLUID_VOICE_DEFAULT);
       return v;
       }
 
@@ -1054,14 +859,6 @@ SFont* Fluid::get_sfont_by_name(const QString& name)
       return 0;
       }
 
-/*
- * fluid_synth_get_channel_preset
- */
-Preset* Fluid::get_channel_preset(int chan)
-      {
-      return channel[chan]->preset();
-      }
-
 /* Sets the interpolation method to use on channel chan.
  * If chan is < 0, then set the interpolation method on all channels.
  */
@@ -1071,134 +868,6 @@ void Fluid::set_interp_method(int chan, int interp_method)
             if (chan < 0 || c->getNum() == chan)
                   c->setInterpMethod(interp_method);
             }
-      }
-
-Tuning* Fluid::get_tuning(int bank, int prog)
-      {
-      if ((bank < 0) || (bank >= 128)) {
-            log("Bank number out of range");
-            return 0;
-            }
-      if ((prog < 0) || (prog >= 128)) {
-            log("Program number out of range");
-            return 0;
-            }
-      if ((tuning == 0) || (tuning[bank] == 0) || (tuning[bank][prog] == 0)) {
-            log("No tuning at bank %d, prog %d", bank, prog);
-            return 0;
-            }
-      return tuning[bank][prog];
-      }
-
-Tuning* Fluid::create_tuning(int bank, int prog, char* name)
-      {
-      if ((bank < 0) || (bank >= 128)) {
-            log("Bank number out of range");
-            return 0;
-            }
-      if ((prog < 0) || (prog >= 128)) {
-            log("Program number out of range");
-            return 0;
-            }
-      if (tuning == 0) {
-            tuning = new Tuning**[128];
-            memset(tuning, 0, 128 * sizeof(Tuning**));
-            }
-      if (tuning[bank] == 0) {
-            tuning[bank] = new Tuning*[128];
-            memset(tuning[bank], 0, 128 * sizeof(Tuning*));
-            }
-      if (tuning[bank][prog] == 0)
-            tuning[bank][prog] = new Tuning(name, bank, prog);
-      if (tuning[bank][prog]->name() != name)
-            tuning[bank][prog]->setName(name);
-      return tuning[bank][prog];
-      }
-
-void Fluid::create_key_tuning(int bank, int prog, char* name, double* pitch)
-      {
-      Tuning* tuning = create_tuning(bank, prog, name);
-      if (pitch)
-            tuning->setAll(pitch);
-      }
-
-void Fluid::create_octave_tuning(int bank, int prog, char* name, double* pitch)
-      {
-      Tuning* tuning = create_tuning(bank, prog, name);
-      tuning->setOctave(pitch);
-      }
-
-bool Fluid::tune_notes(int bank, int prog, int len, int *key, double* pitch)
-      {
-      Tuning* tuning = get_tuning(bank, prog);
-      if (tuning == 0)
-            return false;
-      for (int i = 0; i < len; i++)
-            tuning->setPitch(key[i], pitch[i]);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   fluid_synth_select_tuning
-//---------------------------------------------------------
-
-bool Fluid::select_tuning(int chan, int bank, int prog)
-      {
-      Tuning* t = get_tuning(bank, prog);
-
-      if (t == 0)
-            return false;
-
-      channel[chan]->setTuning(t);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   fluid_synth_reset_tuning
-//---------------------------------------------------------
-
-void Fluid::reset_tuning(int chan)
-      {
-      channel[chan]->setTuning(0);
-      }
-
-void Fluid::tuning_iteration_start()
-      {
-      cur_tuning = 0;
-      }
-
-int Fluid::tuning_iteration_next(int* bank, int* prog)
-      {
-      int b = 0, p = 0;
-
-      if (tuning == 0)
-            return 0;
-
-      if (cur_tuning != 0) {
-            /* get the next program number */
-            b = cur_tuning->getBank();
-            p = 1 + cur_tuning->getProg();
-            if (p >= 128) {
-                  p = 0;
-                  b++;
-                  }
-            }
-      while (b < 128) {
-            if (tuning[b] != 0) {
-                  while (p < 128) {
-                        if (tuning[b][p] != 0) {
-                              cur_tuning = tuning[b][p];
-                              *bank = b;
-                              *prog = p;
-                              return 1;
-                              }
-                        p++;
-                        }
-                  }
-            p = 0;
-            b++;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -1257,20 +926,6 @@ float Fluid::get_gen(int chan, int param)
       return channel[chan]->getGen(param);
       }
 
-#if 0
-bool Fluid::stop(unsigned int id)
-      {
-      bool status = false;
-      foreach(Voice* v, activeVoices) {
-            if (v->get_id() == id) {
-                  v->noteoff();
-                  status = true;
-                  }
-            }
-      return status;
-      }
-#endif
-
 BankOffset* Fluid::get_bank_offset0(int sfont_id) const
       {
       foreach(BankOffset* offset, bank_offsets) {
@@ -1327,31 +982,4 @@ bool Fluid::log(const char* fmt, ...)
       return false;
       }
 
-Tuning::Tuning(const QString& n, int b, int p)
-      {
-      _name = n;
-      bank = b;
-      prog = p;
-
-      for (int i = 0; i < 128; i++)
-            pitch[i] = i * 100.0;
-      }
-
-void Tuning::setOctave(double* pitch_deriv)
-      {
-      for (int i = 0; i < 128; i++)
-            pitch[i] = i * 100.0 + pitch_deriv[i % 12];
-      }
-
-void Tuning::setAll(double* p)
-      {
-      for (int i = 0; i < 128; i++)
-            pitch[i] = p[i];
-      }
-
-void Tuning::setPitch(int k, double p)
-      {
-      if ((k >= 0) && (k < 128))
-            pitch[k] = p;
-      }
 }

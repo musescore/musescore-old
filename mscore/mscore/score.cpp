@@ -90,25 +90,15 @@ InputState::InputState()
       noteEntryMode = false;
       slur          = 0;
       cr            = 0;
-      dots          = 0;
       duration.setType(Duration::V_INVALID);
       rest          = false;
       pad           = 0;
-      pitch         = 60;
+      pitch         = 72;
       prefix        = 0;
       noteType      = NOTE_NORMAL;
       beamMode      = BEAM_AUTO;
       drumNote      = -1;
       drumset       = 0;
-      }
-
-//---------------------------------------------------------
-//   pos
-//---------------------------------------------------------
-
-int InputState::pos() const
-      {
-      return cr ? cr->tick() : 0;
       }
 
 //---------------------------------------------------------
@@ -1143,7 +1133,7 @@ void Score::setNoteEntry(bool val)
             Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
             if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
                   int track = _is.track == -1 ? 0 : _is.track;
-                  el = static_cast<ChordRest*>(searchNote(_is.pos(), track));
+                  el = static_cast<ChordRest*>(searchNote(0, track));
                   if (el == 0) {
                         printf("no note or rest selected 1\n");
                         return;
@@ -2015,7 +2005,7 @@ void Score::addElement(Element* element)
       {
       if (debugMode)
             printf("   Score::addElement %p %s parent %s\n",
-               element, element->name(), element->parent()->name());
+               element, element->name(), element->parent() ? element->parent()->name() : "null");
 
       if (element->type() == MEASURE
          || (element->type() == HBOX && element->parent()->type() != VBOX)
@@ -2296,5 +2286,10 @@ int Score::styleI(StyleIdx idx) const
 void Score::setStyle(StyleIdx idx, const StyleVal& v)
       {
       _style[idx] = v;
+      }
+
+int Score::inputPos() const
+      {
+      return _is.cr ? _is.cr->tick() : 0;
       }
 

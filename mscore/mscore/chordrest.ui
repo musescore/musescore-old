@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ChordRestBase</class>
- <widget class="QWidget" name="ChordRestBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ChordRestBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,41 +10,50 @@
     <height>220</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string>ChordRest</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="toolTip">
+      <string notr="true"/>
      </property>
-     <property name="flat" >
+     <property name="title">
+      <string notr="true">ChordRest</string>
+     </property>
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" >
-      <item rowspan="2" row="0" column="0" >
-       <layout class="QVBoxLayout" >
+     <layout class="QGridLayout">
+      <item row="0" column="0" rowspan="2">
+       <layout class="QVBoxLayout">
         <item>
-         <widget class="QPushButton" name="beamButton" >
-          <property name="text" >
-           <string>Beam</string>
+         <widget class="QPushButton" name="beamButton">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">Beam</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="tupletButton" >
-          <property name="text" >
-           <string>Tuplet</string>
+         <widget class="QPushButton" name="tupletButton">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">Tuplet</string>
           </property>
          </widget>
         </item>
         <item>
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
             <height>40</height>
@@ -53,79 +63,118 @@
         </item>
        </layout>
       </item>
-      <item row="0" column="1" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
-         <string>Attributes:</string>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">Attributes:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="QListWidget" name="attributes" />
+      <item row="1" column="1">
+       <widget class="QListWidget" name="attributes"/>
       </item>
-      <item row="2" column="0" colspan="2" >
-       <layout class="QHBoxLayout" >
-        <property name="spacing" >
+      <item row="2" column="0" colspan="2">
+       <layout class="QHBoxLayout">
+        <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin" >
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="label_3" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string notr="true">duration:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="duration"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="text" >
-           <string>Dots:</string>
+          <property name="text">
+           <string notr="true">dots:</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="dots" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+         <widget class="QSpinBox" name="dots">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="readOnly" >
+          <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="maximum" >
+          <property name="maximum">
            <number>3</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="upFlag" >
-          <property name="text" >
-           <string>Up</string>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string notr="true">ticks:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="isUpFlag" >
-          <property name="text" >
-           <string>isUp</string>
+         <widget class="QSpinBox" name="ticks">
+          <property name="maximum">
+           <number>9999999</number>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label" >
-          <property name="text" >
-           <string>Beam Mode:</string>
+         <widget class="QCheckBox" name="upFlag">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">Up</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="beamMode" />
+         <widget class="QCheckBox" name="isUpFlag">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">isUp</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">Beam Mode:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="beamMode"/>
         </item>
        </layout>
       </item>

@@ -235,13 +235,9 @@ void MuseData::readNote(Part* part, const QString& s)
                   else {
                         tuplet = new Tuplet(score);
                         tuplet->setTrack(gstaff * VOICES);
-                        tuplet->setBaseLen(ticks * a / b);
                         tuplet->setTick(tick);
-
                         ntuplet = a;
-                        tuplet->setNormalNotes(b);
-                        tuplet->setActualNotes(a);
-
+                        tuplet->setRatio(a, b);
                         measure->add(tuplet);
                         }
                   }
@@ -261,7 +257,9 @@ void MuseData::readNote(Part* part, const QString& s)
             tuplet->add(chord);
             --ntuplet;
             }
-      chord->setTickLen(ticks);
+      Duration d;
+      d.setVal(ticks);
+      chord->setDuration(d);
 
       Segment* segment = measure->getSegment(chord);
 
@@ -445,7 +443,9 @@ void MuseData::readRest(Part* part, const QString& s)
       Staff* staff = part->staff(staffIdx);
       int gstaff   = staff->idx();
 
-      Rest* rest = new Rest(score, tick, ticks);
+      Duration d;
+      d.setVal(ticks);
+      Rest* rest = new Rest(score, tick, d);
       chordRest = rest;
       rest->setTrack(staffIdx * VOICES);
       Segment* segment = measure->getSegment(rest);

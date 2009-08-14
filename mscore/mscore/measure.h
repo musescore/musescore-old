@@ -62,6 +62,8 @@ struct MStaff {
 
       MStaff();
       ~MStaff();
+      bool visible() const      { return _visible; }
+      void setVisible(bool val) { _visible = val;  }
       };
 
 enum {
@@ -157,6 +159,7 @@ class Measure : public MeasureBase {
 
       Segment* first() const           { return _first;      }
       Segment* last() const            { return _last;       }
+      Segment* firstCRSegment() const;
       void remove(Segment*);
 
       double userStretch() const       { return _userStretch; }
@@ -206,9 +209,10 @@ class Measure : public MeasureBase {
 
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
-      int endBarLineType() const { return _endBarLineType; }
+      int endBarLineType() const       { return _endBarLineType; }
       bool setStartRepeatBarLine(bool);
       bool endBarLineGenerated() const { return _endBarLineGenerated; }
+      bool endBarLineVisible() const   { return _endBarLineVisible;   }
 
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<const Element*>& el) const;
@@ -224,6 +228,8 @@ class Measure : public MeasureBase {
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
       bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest | _breakMMRest; }
+      bool breakMMRest() const                { return _breakMMRest; }
+      bool getBreakMultiMeasureRest() const   { return _breakMultiMeasureRest; }
       void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
       bool isEmpty() const;
       int multiMeasure() const                { return _multiMeasure; }

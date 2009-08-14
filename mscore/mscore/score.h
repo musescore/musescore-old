@@ -34,6 +34,7 @@
 #include "config.h"
 #include "element.h"
 #include "bsp.h"
+#include "fraction.h"
 
 class System;
 class TextStyle;
@@ -420,9 +421,8 @@ class Score : public QObject {
       void transpose(Note* n, int diff);
 
       void cmdEnterRest();
-      void cmdEnterRest(Duration::DurationType d);
+      void cmdEnterRest(const Duration& d);
 
-      Rest* addRest(int tick, int len, int track);
       void lyricsEndEdit();
       void harmonyEndEdit();
 
@@ -476,7 +476,7 @@ class Score : public QObject {
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
-      void undoChangeChordRestLen(ChordRest* cr, int len);
+      void undoChangeChordRestLen(ChordRest* cr, const Duration&);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
@@ -496,19 +496,21 @@ class Score : public QObject {
       void undoChangePageFormat(PageFormat*, double spatium);
       void undoChangeUserMirror(Note*, DirectionH);
 
-      Note* setNote(int tick, int track, int pitch, int len, int headGroup = 0,
-         Direction stemDirection = AUTO);
-      void changeCRlen(ChordRest* cr, int len);
-      int makeGap(int tick, int track, int len);
-      int makeGap1(int tick, int staff, int len);
-      void cloneCR(ChordRest* cr, int tick, int len, int track);
-
-      Element* setTupletChordRest(ChordRest* cr, int pitch, int len);
-
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
-      Rest* setRest(int tick, int len, int track);
-      bool setRest(int tick, int track, int len, bool useDots);
+
+      Segment* setNoteRest(ChordRest*, int track, int pitch, const Duration&, int headGroup = 0,
+         Direction stemDirection = AUTO);
+      void changeCRlen(ChordRest* cr, const Duration&);
+
+      Fraction makeGap(ChordRest*, const Fraction&);
+      Fraction makeGap1(ChordRest*, Fraction);
+
+      Rest* addRest(int tick, int track, Duration);
+      ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
+      void setRest(int tick,  int track, Fraction);
+      void setRest(int tick,  int track, Fraction, bool useDots);
+
       Canvas* canvas() const;
 
       void select(Element* obj, SelectType, int staff);
@@ -539,8 +541,6 @@ class Score : public QObject {
       void cmdDeleteSelectedMeasures();
       void cmdDeleteSelection();
       void toggleInvisible(Element* obj);
-
-      void changeRest(Rest* rest, int tick, int len);
 
       void putNote(const QPointF& pos, bool replace);
       void setPadState();
@@ -682,7 +682,7 @@ class Score : public QObject {
       void setPlayPos(int val)                 { _playPos = val;     }
 
       bool noteEntryMode() const               { return _is.noteEntryMode; }
-      int inputPos() const                     { return _is.pos();   }
+      int inputPos() const;
       int inputTrack() const                   { return _is.track;   }
       InputState& inputState()                 { return _is;        }
       void setInputState(const InputState& st) { _is = st;          }
@@ -698,7 +698,7 @@ class Score : public QObject {
       void textStyleChanged(const QVector<TextStyle*>&s);
       void spatiumChanged(double oldValue, double newValue);
 
-      void pasteStaff(QDomElement, int dstTick, int staffIdx);
+      void pasteStaff(QDomElement, ChordRest* dst);
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events);
       void toEList(EventMap* events, int staffIdx);
@@ -789,7 +789,7 @@ class Score : public QObject {
       void updateRepeatList(bool expandRepeats);
       void fixPpitch();
 
-      void nextInputPos(ChordRest* cr);
+      void nextInputPos(ChordRest* cr, bool);
       void setInputPos(ChordRest* cr);
       void cmdMirrorNoteHead();
 

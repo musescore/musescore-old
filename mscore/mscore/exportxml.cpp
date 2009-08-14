@@ -629,8 +629,9 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
                   if (!el)
                         continue;
                   if (el->isChordRest() && el->staff() == stf) {
+                        ChordRest* cr = static_cast<ChordRest*>(el);
                         if (   ( start && el->tick() == tick)
-                            || (!start && (el->tick() + el->tickLen()) == tick)) {
+                            || (!start && (el->tick() + cr->tickLen()) == tick)) {
                               return new DirectionsAnchor(el, start, tick);
                               }
                         }
@@ -902,9 +903,10 @@ void ExportMusicXml::calcDivisions()
                                     calcDivMoveToTick(el->tick());
                                     }
                               if (el->isChordRest()) {
-                                    printf("chordrest %d\n", el->tickLen());
-                                    addInteger(el->tickLen());
-                                    tick += el->tickLen();
+                                    int l = static_cast<ChordRest*>(el)->ticks();
+                                    printf("chordrest %d\n", l);
+                                    addInteger(l);
+                                    tick += l;
                                     }
 
 //                              dh.handleElement(this, el, sstaff, true);
@@ -1113,7 +1115,8 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 static QString tick2xml(const int ticks, int* dots)
       {
       Duration t;
-      headType(ticks, &t, dots);
+      t.setVal(ticks);
+      *dots = t.dots();
       return t.name();
       }
 
@@ -2876,7 +2879,7 @@ foreach(Element* el, *(score->gel())) {
                                     moveToTick(el->tick());
                                     }
                               if (el->isChordRest())
-                                    tick += el->tickLen();
+                                    tick += static_cast<ChordRest*>(el)->ticks();
 
                               dh.handleElement(this, el, sstaff, true);
                               switch (el->type()) {

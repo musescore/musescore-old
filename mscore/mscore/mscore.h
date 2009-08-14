@@ -37,7 +37,7 @@ class MidiFile;
 class TextStyleDialog;
 class PlayPanel;
 class InstrumentListEditor;
-class PageListEditor;
+class Inspector;
 class MeasureListEditor;
 class Score;
 class PageSettings;
@@ -201,7 +201,7 @@ class MuseScore : public QMainWindow {
 
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
-      PageListEditor* pageListEdit;
+      Inspector* inspector;
       MeasureListEditor* measureListEdit;
       PageSettings* pageSettings;
 
@@ -238,8 +238,6 @@ class MuseScore : public QMainWindow {
 
       QTimer* autoSaveTimer;
       QSignalMapper* pluginMapper;
-      QFileDialog* _saveAsDialog;
-      QFileDialog* _saveCopyDialog;
 
       //---------------------
 
@@ -263,7 +261,7 @@ class MuseScore : public QMainWindow {
       void newFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
-      void startPageListEditor();
+      void startInspector();
       void midiinToggled(bool);
       void speakerToggled(bool);
       void undo();
@@ -304,7 +302,6 @@ class MuseScore : public QMainWindow {
       void clipboardChanged();
       void drumPaletteSelected(int);
       void endSearch();
-      void setSaveFilters(QFileDialog* d) const;
 
    public slots:
       void setCurrentScore(int);
@@ -352,6 +349,9 @@ class MuseScore : public QMainWindow {
       void updateRecentScores(Score*);
       QFileDialog* saveAsDialog();
       QFileDialog* saveCopyDialog();
+
+      QString lastSaveCopyDirectory;
+      QString lastSaveDirectory;
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

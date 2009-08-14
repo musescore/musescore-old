@@ -208,29 +208,21 @@ float Voice::gen_get(int g)
 // dsp parameters). The dsp routine is #included in several places (fluid_dsp_core.c).
 //-----------------------------------------------------------------------------
 
-void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
-   float* dsp_reverb_buf, float* dsp_chorus_buf)
+void Voice::write(float* left, float* right, float* reverb, float* chorus)
       {
-      float target_amp;    /* target amplitude */
-      int count;
-
-      fluid_env_data_t* env_data;
-      float x;
-
-      float _fres;
-
       /* make sure we're playing and that we have sample data */
       if (!PLAYING())
             return;
-
-      /******************* sample **********************/
-
       if (!sample) {
             off();
             return;
             }
 
-      fluid_check_fpe ("voice_write startup");
+      float target_amp;    /* target amplitude */
+      int count;
+      fluid_env_data_t* env_data;
+      float x;
+      float _fres;
 
       /* Range checking for sample- and loop-related parameters
        * Initial phase is calculated here*/
@@ -408,12 +400,11 @@ void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
        * through the original waveform with each step in the output
        * buffer. It is the ratio between the frequencies of original
        * waveform and output waveform.*/
-      phase_incr = fluid_ct2hz_real
-         (pitch + modlfo_val * modlfo_to_pitch
-         + viblfo_val * viblfo_to_pitch
-         + modenv_val * modenv_to_pitch) / root_pitch;
 
-      fluid_check_fpe ("voice_write phase calculation");
+      {
+      float cent = pitch + modlfo_val * modlfo_to_pitch + viblfo_val * viblfo_to_pitch + modenv_val * modenv_to_pitch;
+      phase_incr = _fluid->ct2hz_real(cent) / root_pitch;
+      }
 
       /* if phase_incr is not advancing, set it to the minimum fraction value (prevent stuckage) */
       if (phase_incr == 0)
@@ -422,7 +413,7 @@ void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
       /*************** resonant filter ******************/
 
       /* calculate the frequency of the resonant filter in Hz */
-      _fres = fluid_ct2hz(fres
+      _fres = _fluid->ct2hz_real(fres
                        + modlfo_val * modlfo_to_fc
                        + modenv_val * modenv_to_fc);
 
@@ -544,10 +535,8 @@ void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
                   break;
             }
 
-      fluid_check_fpe ("voice_write interpolation");
-
       if (count > 0)
-            effects(count, dsp_left_buf, dsp_right_buf, dsp_reverb_buf, dsp_chorus_buf);
+            effects(count, left, right, reverb, chorus);
 
       /* turn off voice if short count (sample ended and not looping) */
       if (count < FLUID_BUFSIZE)
@@ -555,8 +544,6 @@ void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
 
    post_process:
       ticks += FLUID_BUFSIZE;
-      fluid_check_fpe ("voice_write postprocess");
-      return;
       }
 
 //---------------------------------------------------------
@@ -566,33 +553,19 @@ void Voice::write(float* dsp_left_buf, float* dsp_right_buf,
 void Voice::voice_start()
       {
       /* The maximum volume of the loop is calculated and cached once for each
-      * sample with its nominal loop settings. This happens, when the sample is used
-      * for the first time.*/
+       * sample with its nominal loop settings. This happens, when the sample is used
+       * for the first time.*/
 
-      calculate_runtime_synthesis_parameters();
+      /*
+       * in this function we calculate the values of all the parameters. the
+       * parameters are converted to their most useful unit for the DSP
+       * algorithm, for example, number of samples instead of
+       * timecents. Some parameters keep their "perceptual" unit and
+       * conversion will be done in the DSP function. This is the case, for
+       * example, for the pitch since it is modulated by the controllers in
+       * cents. */
 
-      /* Force setting of the phase at the first DSP loop run
-       * This cannot be done earlier, because it depends on modulators.
-       */
-      check_sample_sanity_flag = FLUID_SAMPLESANITY_STARTUP;
-
-      status = FLUID_VOICE_ON;
-      }
-
-/*
- * fluid_voice_calculate_runtime_synthesis_parameters
- *
- * in this function we calculate the values of all the parameters. the
- * parameters are converted to their most useful unit for the DSP
- * algorithm, for example, number of samples instead of
- * timecents. Some parameters keep their "perceptual" unit and
- * conversion will be done in the DSP function. This is the case, for
- * example, for the pitch since it is modulated by the controllers in
- * cents. */
-
-void Voice::calculate_runtime_synthesis_parameters()
-      {
-      static int list_of_generators_to_initialize[35] = {
+      static const int list_of_generators_to_initialize[35] = {
             GEN_STARTADDROFS,                    // SF2.01 page 48 #0
             GEN_ENDADDROFS,                      //                #1
             GEN_STARTLOOPADDROFS,                //                #2
@@ -667,7 +640,7 @@ void Voice::calculate_runtime_synthesis_parameters()
 
       for (int i = 0; i < mod_count; i++) {
             Mod* m              = &mod[i];
-            float modval        = fluid_mod_get_value(m, channel, this);
+            float modval        = m->get_value(channel, this);
             int dest_gen_index  = m->dest;
             Generator* dest_gen = &gen[dest_gen_index];
             dest_gen->mod      += modval;
@@ -681,13 +654,8 @@ void Voice::calculate_runtime_synthesis_parameters()
       * one key remains fixed. Here C3 (MIDI number 60) is used.
       */
 
-      if (channel->hasTuning()) {
-            Tuning* t = channel->getTuning();
-            gen[GEN_PITCH].val = _noteTuning + t->getPitch(60) + (gen[GEN_SCALETUNE].val * .01 *
-               (t->getPitch(key) - t->getPitch(60)));
-            }
-      else
-            gen[GEN_PITCH].val = _noteTuning + gen[GEN_SCALETUNE].val * (key - 60.0) + 100.0 * 60.0;
+      gen[GEN_PITCH].val = _noteTuning + _fluid->getPitch(60) + (gen[GEN_SCALETUNE].val * .01 *
+               (_fluid->getPitch(key) - _fluid->getPitch(60)));
 
      /* Now the generators are initialized, nominal and modulation value.
       * The voice parameters (which depend on generators) are calculated
@@ -708,6 +676,14 @@ void Voice::calculate_runtime_synthesis_parameters()
 
       /* Make an estimate on how loud this voice can get at any time (attenuation). */
       min_attenuation_cB = get_lower_boundary_for_attenuation();
+
+
+      /* Force setting of the phase at the first DSP loop run
+       * This cannot be done earlier, because it depends on modulators.
+       */
+      check_sample_sanity_flag = FLUID_SAMPLESANITY_STARTUP;
+
+      status = FLUID_VOICE_ON;
       }
 
 /*
@@ -847,7 +823,7 @@ void Voice::update_param(int _gen)
                   else {
                         root_pitch = sample->origpitch * 100.0f - sample->pitchadj;
                         }
-                  root_pitch = fluid_ct2hz(root_pitch);
+                  root_pitch = _fluid->ct2hz(root_pitch);
                   if (sample != 0)
                         root_pitch *= (float) _fluid->sample_rate / sample->samplerate;
                   break;
@@ -1221,7 +1197,7 @@ void Voice::modulate(bool _cc, int _ctrl)
              * as input source.
              */
             if (m->has_source(_cc, _ctrl)) {
-                  int g = fluid_mod_get_dest(m);
+                  int g = m->get_dest();
                   float modval = 0.0;
 
                   /* step 2: for every changed modulator, calculate the modulation
@@ -1229,7 +1205,7 @@ void Voice::modulate(bool _cc, int _ctrl)
                    */
                   for (int k = 0; k < mod_count; k++) {
                         if (fluid_mod_has_dest(&mod[k], g)) {
-                              modval += fluid_mod_get_value(&mod[k], channel, this);
+                              modval += mod[k].get_value(channel, this);
                               }
                         }
                   gen[g].set_mod(modval);
@@ -1262,16 +1238,15 @@ void Voice::modulate_all()
 
       for (int i = 0; i < mod_count; i++) {
             Mod* m       = &mod[i];
-            int g        = fluid_mod_get_dest(m);
+            int g        = m->get_dest();
             float modval = 0.0;
 
             /* Accumulate the modulation values of all the modulators with
              * destination generator 'gen'
              */
             for (int k = 0; k < mod_count; k++) {
-                  if (fluid_mod_has_dest(&mod[k], g)) {
-                        modval += fluid_mod_get_value(&mod[k], channel, this);
-                        }
+                  if (fluid_mod_has_dest(&mod[k], g))
+                        modval += mod[k].get_value(channel, this);
                   }
 
             gen[g].set_mod(modval);
@@ -1381,7 +1356,7 @@ void Voice::off()
  * mode == FLUID_VOICE_DEFAULT: This is a default modulator, there can be no identical modulator.
  *                             Don't check.
  */
-void Voice::add_mod(Mod* _mod, int mode)
+void Voice::add_mod(const Mod* _mod, int mode)
       {
       /*
        * Some soundfonts come with a huge number of non-standard
@@ -1451,7 +1426,7 @@ float Voice::get_lower_boundary_for_attenuation()
 
             /* Modulator has attenuation as target and can change over time? */
             if ((m->dest == GEN_ATTENUATION) && ((m->flags1 & FLUID_MOD_CC) || (m->flags2 & FLUID_MOD_CC))) {
-                  float current_val = fluid_mod_get_value(m, channel, this);
+                  float current_val = m->get_value(channel, this);
                   float v = fabs(m->amount);
 
                   if ((m->src1 == FLUID_MOD_PITCHWHEEL)
@@ -1699,19 +1674,6 @@ void Sample::optimize()
  * - mixes the processed sample to left and right output using the pan setting
  * - sends the processed sample to chorus and reverb
  *
- * Variable description:
- * - dsp_data: Pointer to the original waveform data
- * - dsp_left_buf: The generated signal goes here, left channel
- * - dsp_right_buf: right channel
- * - dsp_reverb_buf: Send to reverb unit
- * - dsp_chorus_buf: Send to chorus unit
- * - dsp_a1: Coefficient for the filter
- * - dsp_a2: same
- * - dsp_b0: same
- * - dsp_b1: same
- * - dsp_b2: same
- * - voice holds the voice structure
- *
  * A couple of variables are used internally, their results are discarded:
  * - dsp_phase_fractional: The fractional part of dsp_phase
  * - dsp_coeff: A table of four coefficients, depending on the fractional phase.
@@ -1722,11 +1684,8 @@ void Sample::optimize()
  * - dsp_hist2: same
  *
  */
-void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float* reverb, float* chorus)
+void Voice::effects(int count, float* left, float* right, float* reverb, float* chorus)
       {
-      float dsp_centernode;
-      float v;
-
       /* filter (implement the voice filter according to SoundFont standard) */
 
       /* Check for denormal number (too close to zero). */
@@ -1742,7 +1701,7 @@ void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float*
             /* Increment is added to each filter coefficient filter_coeff_incr_count times. */
             for (int i = 0; i < count; i++) {
                   /* The filter is implemented in Direct-II form. */
-                  dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  float dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
                   dsp_buf[i] = b02 * (dsp_centernode + hist2) + b1 * hist1;
                   hist2 = hist1;
                   hist1 = dsp_centernode;
@@ -1757,7 +1716,7 @@ void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float*
             }
       else { /* The filter parameters are constant.  This is duplicated to save time. */
             for (int i = 0; i < count; i++) {   // The filter is implemented in Direct-II form.
-                  dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
+                  float dsp_centernode = dsp_buf[i] - a1 * hist1 - a2 * hist2;
                   dsp_buf[i]     = b02 * (dsp_centernode + hist2) + b1 * hist1;
                   hist2          = hist1;
                   hist1          = dsp_centernode;
@@ -1772,20 +1731,20 @@ void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float*
       if ((-0.5 < pan) && (pan < 0.5)) {
             /* The voice is centered. Use amp_left twice. */
             for (int i = 0; i < count; i++) {
-                  v = amp_left * dsp_buf[i];
-                  dsp_left_buf[i]  += v;
-                  dsp_right_buf[i] += v;
+                  float v = amp_left * dsp_buf[i];
+                  left[i]  += v;
+                  right[i] += v;
                   }
             }
       else {     /* The voice is not centered. Stereo samples have one side zero. */
             if (amp_left != 0.0) {
                   for (int i = 0; i < count; i++)
-                        dsp_left_buf[i] += amp_left * dsp_buf[i];
+                        left[i] += amp_left * dsp_buf[i];
                   }
 
             if (amp_right != 0.0) {
                   for (int i = 0; i < count; i++)
-                        dsp_right_buf[i] += amp_right * dsp_buf[i];
+                        right[i] += amp_right * dsp_buf[i];
                   }
             }
 
@@ -1799,7 +1758,6 @@ void Voice::effects(int count, float* dsp_left_buf, float* dsp_right_buf, float*
                   chorus[i] += amp_chorus * dsp_buf[i];
             }
       }
-
 
 }
 

@@ -290,8 +290,9 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             refresh |= _selection->deselectAll(this);
             if (e == 0) {
                   selState = SEL_NONE;
-                  if (!noteEntryMode())
+                  if (!noteEntryMode()) {
                         //_is.duration.setVal(Duration::V_INVALID);
+                        }
                   updateAll = true;
                   }
             else {
@@ -311,7 +312,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   if (e->type() == NOTE || e->type() == REST) {
                         _is.cr = static_cast<ChordRest*>(e->type() == NOTE ? e->parent() : e);
-                        emit posChanged(_is.pos());
+                        emit posChanged(_is.cr->tick());
                         }
                   }
             }
@@ -391,9 +392,12 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         Segment* seg = 0;
                         Element* oe = _selection->element();
                         bool reverse = false;
+                        int ticks = 0;
+                        if (oe->isChordRest())
+                              ticks = static_cast<ChordRest*>(oe)->ticks();
                         if (tick < oe->tick())
                               seg = m->first();
-                        else if (etick >= oe->tick() + oe->tickLen()) {
+                        else if (etick >= oe->tick() + ticks) {
                               seg = m->last();
                               reverse = true;
                               }

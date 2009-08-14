@@ -35,6 +35,7 @@ class Channel;
 class Mod;
 class Reverb;
 class Chorus;
+class Fluid;
 
 #define FLUID_BUFSIZE           256  // 64
 #define FLUID_NUM_PROGRAMS      129
@@ -61,405 +62,6 @@ struct BankOffset {
       int sfont_id;
       int offset;
       };
-
-//---------------------------------------------------------
-//   Tuning
-//---------------------------------------------------------
-
-class Tuning {
-      QString _name;
-      int bank;
-      int prog;
-      double pitch[128];      // the pitch of every key, in cents
-
-    public:
-      Tuning(const QString& name, int bank, int prog);
-      int getBank() const            { return bank; }
-      int getProg() const            { return prog; }
-      double getPitch(int k) const   { return pitch[k]; }
-      QString name() const           { return _name; }
-      void setName(const QString& p) { _name = p;  }
-      void setKey(int k, double p)   { pitch[k] = p; }
-
-      void setPitch(int key, double pitch);
-      void setOctave(double* pitch_deriv);
-      void setAll(double* pitch);
-      };
-
-//---------------------------------------------------------
-//   Fluid
-//---------------------------------------------------------
-
-class Fluid : public Synth {
-      static const int SILENT_BLOCKS = 32;
-      int silentBlocks;
-
-      QList<SFont*> sfonts;               // the loaded soundfonts
-      QList<BankOffset*> bank_offsets;    // the offsets of the soundfont banks
-      QList<Voice*> freeVoices;           // unused synthesis processes
-      QList<Voice*> activeVoices;         // active synthesis processes
-      QString _error;                     // last error message
-
-      static bool initialized;
-      static void init();
-
-
-   protected:
-      double sample_rate;                 // The sample rate
-      int state;                          // the synthesizer state
-
-      unsigned int sfont_id;
-
-      double _gain;                       // master gain
-      QList<Channel*> channel;            // the channels
-
-      unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
-
-      float* left_buf;
-      float* right_buf;
-      float* fx_buf[2];
-
-      Reverb* reverb;
-      Chorus* chorus;
-      int cur;                            // the current sample in the audio buffers to be output
-
-      Tuning*** tuning;                   // 128 banks of 128 programs for the tunings
-      Tuning* cur_tuning;                 // current tuning in the iteration
-
-   public:
-      Fluid();
-      ~Fluid();
-      virtual void init(int sr);
-      virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
-      virtual void play(const Event&);
-      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
-
-      bool log(const char* fmt, ...);
-
-      bool set_reverb_preset(int num);
-      void one_block();
-
-      Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
-      Preset* find_preset(unsigned int banknum, unsigned int prognum);
-      void all_notes_off(int chan);
-      void all_sounds_off(int chan);
-      void modulate_voices(int chan, bool is_cc, int ctrl);
-      void modulate_voices_all(int chan);
-      void damp_voices(int chan);
-      int kill_voice(Voice * voice);
-      void print_voice();
-
-      /** This function assures that every MIDI channels has a valid preset
-       *  (NULL is okay). This function is called after a SoundFont is
-       *  unloaded or reloaded. */
-      void update_presets();
-
-      BankOffset* get_bank_offset0(int sfont_id) const;
-      void remove_bank_offset(int sfont_id);
-
-      int get_cc(int chan, int num);
-      void system_reset();
-      void program_change(int chan, int prognum);
-      int tuning_iteration_next(int* bank, int* prog);
-      void tuning_iteration_start();
-
-      int get_bank_offset(int sfont_id);
-      int set_bank_offset(int sfont_id, int offset);
-      void set_gen2(int chan, int param, float value, int absolute, int normalized);
-      float get_gen(int chan, int param);
-      void set_gen(int chan, int param, float value);
-      void set_interp_method(int chan, int interp_method);
-
-      Preset* get_channel_preset(int chan);
-      SFont* get_sfont_by_name(const QString& name);
-      SFont* get_sfont_by_id(unsigned int id);
-      SFont* get_sfont(unsigned int num)  { return sfonts[num];   }
-      int sfcount() const                 { return sfonts.size(); }
-      void remove_sfont(SFont* sf);
-      int add_sfont(SFont* sf);
-      int sfreload(unsigned int id);
-      bool sfunload(unsigned int id, int reset_presets);
-      int sfload(const QString& filename, int reset_presets);
-
-      void start_voice(Voice* voice);
-      Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);
-      Voice* free_voice_by_kill();
-
-      virtual void process(unsigned len, float* lout, float* rout, int stride);
-
-      void set_chorus(int nr, double level, double speed, double depth_ms, int type);
-      void set_reverb(double roomsize, double damping, double width, double level);
-      void program_reset();
-
-      double gain() const          { return _gain;  }
-
-      bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
-      bool program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num);
-      void get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num);
-      void sfont_select(int chan, unsigned int sfont_id);
-      void bank_select(int chan, unsigned int bank);
-      Preset* get_preset(char* sfont_name, unsigned banknum, unsigned prognum);
-      void get_pitch_wheel_sens(int chan, int* pval);
-      void pitch_wheel_sens(int chan, int val);
-      void get_pitch_bend(int chan, int* ppitch_bend);
-
-      void freeVoice(Voice* v);
-
-      void reset_tuning(int chan);
-      bool select_tuning(int chan, int bank, int prog);
-      bool tune_notes(int bank, int prog, int len, int *key, double* pitch);
-      Tuning* get_tuning(int bank, int prog);
-      void create_octave_tuning(int bank, int prog, char* name, double* pitch);
-      void create_key_tuning(int bank, int prog, char* name, double* pitch);
-      Tuning* create_tuning(int bank, int prog, char* name);
-
-      QString error() const { return _error; }
-
-      friend class Voice;
-      };
-
-  /*
-   *
-   * Chorus
-   *
-   */
-
-enum fluid_chorus_mod {
-      FLUID_CHORUS_MOD_SINE = 0,
-      FLUID_CHORUS_MOD_TRIANGLE = 1
-      };
-
-/* Those are the default settings for the chorus. */
-#define FLUID_CHORUS_DEFAULT_N      3
-#define FLUID_CHORUS_DEFAULT_LEVEL  2.0f
-#define FLUID_CHORUS_DEFAULT_SPEED  0.3f
-#define FLUID_CHORUS_DEFAULT_DEPTH  8.0f
-#define FLUID_CHORUS_DEFAULT_TYPE   FLUID_CHORUS_MOD_SINE
-
-
-  /*
-   *
-   * Synthesis parameters
-   *
-   */
-
-  /* Flags to choose the interpolation method */
-enum fluid_interp {
-      /* no interpolation: Fastest, but questionable audio quality */
-      FLUID_INTERP_NONE     = 0,
-      /* Straight-line interpolation: A bit slower, reasonable audio quality */
-      FLUID_INTERP_LINEAR   = 1,
-      /* Fourth-order interpolation: Requires 50 % of the whole DSP processing time, good quality
-       * Default. */
-      FLUID_INTERP_DEFAULT  = 4,
-      FLUID_INTERP_4THORDER = 4,
-      FLUID_INTERP_7THORDER = 7,
-      FLUID_INTERP_HIGHEST  = 7
-      };
-
-#if 0
-  /*
-   *
-   * Tuning
-   *
-   */
-
-  /** Request a note tuning changes. Both they 'keys' and 'pitches'
-      arrays should be of length 'num_pitches'. If 'apply' is non-zero,
-      the changes should be applied in real-time, i.e. sounding notes
-      will have their pitch updated. 'APPLY' IS CURRENTLY IGNORED. The
-      changes will be available for newly triggered notes only.
-
-      \param synth The synthesizer object
-      \param tuning_bank The tuning bank number [0-127]
-      \param tuning_prog The tuning program number [0-127]
-      \param len The length of the keys and pitch arrays
-      \param keys The array of keys values.
-      \param pitch The array of pitch values.
-      \param apply Flag to indicate whether to changes should be applied in real-time.
-  */
-int Fluidune_notes(Fluid* synth, int tuning_bank, int tuning_prog,
-			  int len, int *keys, double* pitch, int apply);
-
-  /** Select a tuning for a channel.
-
-  \param synth The synthesizer object
-  \param chan The channel number [0-max channels]
-  \param tuning_bank The tuning bank number [0-127]
-  \param tuning_prog The tuning program number [0-127]
-  */
-int fluid_synth_select_tuning(Fluid* synth, int chan, int tuning_bank, int tuning_prog);
-
-  /** Set the tuning to the default well-tempered tuning on a channel.
-
-  \param synth The synthesizer object
-  \param chan The channel number [0-max channels]
-  */
-int fluid_synth_reset_tuning(Fluid* synth, int chan);
-
-  /** Start the iteration throught the list of available tunings.
-
-  \param synth The synthesizer object
-  */
-void Fluiduning_iteration_start(Fluid* synth);
-
-
-  /** Get the next tuning in the iteration. This functions stores the
-      bank and program number of the next tuning in the pointers given as
-      arguments.
-
-      \param synth The synthesizer object
-      \param bank Pointer to an int to store the bank number
-      \param prog Pointer to an int to store the program number
-      \returns 1 if there is a next tuning, 0 otherwise
-  */
-int Fluiduning_iteration_next(Fluid* synth, int* bank, int* prog);
-#endif
-
-#define fluid_sample_refcount(_sample) ((_sample)->refcount)
-
-
-/** Sample types */
-
-#define FLUID_SAMPLETYPE_MONO	      1
-#define FLUID_SAMPLETYPE_RIGHT	2
-#define FLUID_SAMPLETYPE_LEFT	      4
-#define FLUID_SAMPLETYPE_LINKED	8
-#define FLUID_SAMPLETYPE_ROM	      0x8000
-
-/* Sets the sound data of the sample
- *     Warning : if copy_data is FALSE, data should have 8 unused frames at start
- *     and 8 unused frames at the end.
- */
-int fluid_sample_set_sound_data(Sample* sample, short *data,
-			       unsigned int nbframes, short copy_data, int rootkey);
-
-/*
- *
- *  Utility functions
- */
-
-  /* Maximum number of modulators in a voice */
-#define FLUID_NUM_MOD           64
-
-/**
- * @file gen.h
- * @brief Functions and defines for SoundFont generator effects.
- */
-
-/**
- * Generator (effect) numbers (Soundfont 2.01 specifications section 8.1.3)
- */
-enum fluid_gen_type {
-  GEN_STARTADDROFS,		/**< Sample start address offset (0-32767) */
-  GEN_ENDADDROFS,		      /**< Sample end address offset (-32767-0) */
-  GEN_STARTLOOPADDROFS,		/**< Sample loop start address offset (-32767-32767) */
-  GEN_ENDLOOPADDROFS,		/**< Sample loop end address offset (-32767-32767) */
-  GEN_STARTADDRCOARSEOFS,	/**< Sample start address coarse offset (X 32768) */
-  GEN_MODLFOTOPITCH,		/**< Modulation LFO to pitch */
-  GEN_VIBLFOTOPITCH,		/**< Vibrato LFO to pitch */
-  GEN_MODENVTOPITCH,		/**< Modulation envelope to pitch */
-  GEN_FILTERFC,			/**< Filter cutoff */
-  GEN_FILTERQ,			/**< Filter Q */
-  GEN_MODLFOTOFILTERFC,		/**< Modulation LFO to filter cutoff */
-  GEN_MODENVTOFILTERFC,		/**< Modulation envelope to filter cutoff */
-  GEN_ENDADDRCOARSEOFS,		/**< Sample end address coarse offset (X 32768) */
-  GEN_MODLFOTOVOL,		/**< Modulation LFO to volume */
-  GEN_UNUSED1,			/**< Unused */
-  GEN_CHORUSSEND,		      /**< Chorus send amount */
-  GEN_REVERBSEND,		      /**< Reverb send amount */
-  GEN_PAN,			      /**< Stereo panning */
-  GEN_UNUSED2,			/**< Unused */
-  GEN_UNUSED3,			/**< Unused */
-  GEN_UNUSED4,			/**< Unused */
-  GEN_MODLFODELAY,		/**< Modulation LFO delay */
-  GEN_MODLFOFREQ,		      /**< Modulation LFO frequency */
-  GEN_VIBLFODELAY,		/**< Vibrato LFO delay */
-  GEN_VIBLFOFREQ,		      /**< Vibrato LFO frequency */
-  GEN_MODENVDELAY,		/**< Modulation envelope delay */
-  GEN_MODENVATTACK,		/**< Modulation envelope attack */
-  GEN_MODENVHOLD,		      /**< Modulation envelope hold */
-  GEN_MODENVDECAY,		/**< Modulation envelope decay */
-  GEN_MODENVSUSTAIN,		/**< Modulation envelope sustain */
-  GEN_MODENVRELEASE,		/**< Modulation envelope release */
-  GEN_KEYTOMODENVHOLD,		/**< Key to modulation envelope hold */
-  GEN_KEYTOMODENVDECAY,		/**< Key to modulation envelope decay */
-  GEN_VOLENVDELAY,		/**< Volume envelope delay */
-  GEN_VOLENVATTACK,		/**< Volume envelope attack */
-  GEN_VOLENVHOLD,		      /**< Volume envelope hold */
-  GEN_VOLENVDECAY,		/**< Volume envelope decay */
-  GEN_VOLENVSUSTAIN,		/**< Volume envelope sustain */
-  GEN_VOLENVRELEASE,		/**< Volume envelope release */
-  GEN_KEYTOVOLENVHOLD,		/**< Key to volume envelope hold */
-  GEN_KEYTOVOLENVDECAY,		/**< Key to volume envelope decay */
-  GEN_INSTRUMENT,		      /**< Instrument ID (shouldn't be set by user) */
-  GEN_RESERVED1,		      /**< Reserved */
-  GEN_KEYRANGE,			/**< MIDI note range */
-  GEN_VELRANGE,			/**< MIDI velocity range */
-  GEN_STARTLOOPADDRCOARSEOFS,	/**< Sample start loop address coarse offset (X 32768) */
-  GEN_KEYNUM,			/**< Fixed MIDI note number */
-  GEN_VELOCITY,			/**< Fixed MIDI velocity value */
-  GEN_ATTENUATION,		/**< Initial volume attenuation */
-  GEN_RESERVED2,		      /**< Reserved */
-  GEN_ENDLOOPADDRCOARSEOFS,	/**< Sample end loop address coarse offset (X 32768) */
-  GEN_COARSETUNE,		      /**< Coarse tuning */
-  GEN_FINETUNE,			/**< Fine tuning */
-  GEN_SAMPLEID,			/**< Sample ID (shouldn't be set by user) */
-  GEN_SAMPLEMODE,		      /**< Sample mode flags */
-  GEN_RESERVED3,		      /**< Reserved */
-  GEN_SCALETUNE,		      /**< Scale tuning */
-  GEN_EXCLUSIVECLASS,		/**< Exclusive class number */
-  GEN_OVERRIDEROOTKEY,		/**< Sample root note override */
-
-  /* the initial pitch is not a "standard" generator. It is not
-   * mentioned in the list of generator in the SF2 specifications. It
-   * is used, however, as the destination for the default pitch wheel
-   * modulator. */
-  GEN_PITCH,			/**< Pitch (NOTE: Not a real SoundFont generator) */
-  GEN_LAST			      /**< Value defines the count of generators (#fluid_gen_type) */
-      };
-
-
-/**
- * SoundFont generator structure.
- */
-class Generator {
-   public:
-      unsigned char flags; /**< Is the generator set or not (#fluid_gen_flags) */
-      double val;          /**< The nominal value           */
-      double mod;          /**< Change by modulators        */
-      double nrpn;         /**< Change by NRPN messages     */
-
-      void set_mod(double _val)  { mod  = _val; }
-      void set_nrpn(double _val) { nrpn = _val; }
-      };
-
-/**
- * Enum value for 'flags' field of #_Generator (not really flags).
- */
-enum fluid_gen_flags {
-      GEN_UNUSED,		/**< Generator value is not set */
-      GEN_SET,		/**< Generator value is set     */
-      GEN_ABS_NRPN	/**< DOCME                      */
-      };
-
-void fluid_gen_set_default_values(Generator* gen);
-  /*
-   *  The interface to the synthesizer's voices
-   *  Examples on using them can be found in fluid_defsfont.c
-   */
-
-  /* for fluid_voice_add_mod */
-enum fluid_voice_add_mod {
-      FLUID_VOICE_OVERWRITE,
-      FLUID_VOICE_ADD,
-      FLUID_VOICE_DEFAULT
-      };
-
-/* Disable FPE exception check */
-#define fluid_check_fpe(expl)
-
-unsigned int fluid_check_fpe_i386(char * explanation_in_case_of_fpe);
 
 enum fluid_midi_control_change {
       BANK_SELECT_MSB = 0x00,
@@ -536,6 +138,78 @@ enum fluid_midi_control_change {
       POLY_ON = 0x7F
       };
 
+/**
+ * Generator (effect) numbers (Soundfont 2.01 specifications section 8.1.3)
+ */
+enum fluid_gen_type {
+  GEN_STARTADDROFS,		/**< Sample start address offset (0-32767) */
+  GEN_ENDADDROFS,		      /**< Sample end address offset (-32767-0) */
+  GEN_STARTLOOPADDROFS,		/**< Sample loop start address offset (-32767-32767) */
+  GEN_ENDLOOPADDROFS,		/**< Sample loop end address offset (-32767-32767) */
+  GEN_STARTADDRCOARSEOFS,	/**< Sample start address coarse offset (X 32768) */
+  GEN_MODLFOTOPITCH,		/**< Modulation LFO to pitch */
+  GEN_VIBLFOTOPITCH,		/**< Vibrato LFO to pitch */
+  GEN_MODENVTOPITCH,		/**< Modulation envelope to pitch */
+  GEN_FILTERFC,			/**< Filter cutoff */
+  GEN_FILTERQ,			/**< Filter Q */
+  GEN_MODLFOTOFILTERFC,		/**< Modulation LFO to filter cutoff */
+  GEN_MODENVTOFILTERFC,		/**< Modulation envelope to filter cutoff */
+  GEN_ENDADDRCOARSEOFS,		/**< Sample end address coarse offset (X 32768) */
+  GEN_MODLFOTOVOL,		/**< Modulation LFO to volume */
+  GEN_UNUSED1,			/**< Unused */
+  GEN_CHORUSSEND,		      /**< Chorus send amount */
+  GEN_REVERBSEND,		      /**< Reverb send amount */
+  GEN_PAN,			      /**< Stereo panning */
+  GEN_UNUSED2,			/**< Unused */
+  GEN_UNUSED3,			/**< Unused */
+  GEN_UNUSED4,			/**< Unused */
+  GEN_MODLFODELAY,		/**< Modulation LFO delay */
+  GEN_MODLFOFREQ,		      /**< Modulation LFO frequency */
+  GEN_VIBLFODELAY,		/**< Vibrato LFO delay */
+  GEN_VIBLFOFREQ,		      /**< Vibrato LFO frequency */
+  GEN_MODENVDELAY,		/**< Modulation envelope delay */
+  GEN_MODENVATTACK,		/**< Modulation envelope attack */
+  GEN_MODENVHOLD,		      /**< Modulation envelope hold */
+  GEN_MODENVDECAY,		/**< Modulation envelope decay */
+  GEN_MODENVSUSTAIN,		/**< Modulation envelope sustain */
+  GEN_MODENVRELEASE,		/**< Modulation envelope release */
+  GEN_KEYTOMODENVHOLD,		/**< Key to modulation envelope hold */
+  GEN_KEYTOMODENVDECAY,		/**< Key to modulation envelope decay */
+  GEN_VOLENVDELAY,		/**< Volume envelope delay */
+  GEN_VOLENVATTACK,		/**< Volume envelope attack */
+  GEN_VOLENVHOLD,		      /**< Volume envelope hold */
+  GEN_VOLENVDECAY,		/**< Volume envelope decay */
+  GEN_VOLENVSUSTAIN,		/**< Volume envelope sustain */
+  GEN_VOLENVRELEASE,		/**< Volume envelope release */
+  GEN_KEYTOVOLENVHOLD,		/**< Key to volume envelope hold */
+  GEN_KEYTOVOLENVDECAY,		/**< Key to volume envelope decay */
+  GEN_INSTRUMENT,		      /**< Instrument ID (shouldn't be set by user) */
+  GEN_RESERVED1,		      /**< Reserved */
+  GEN_KEYRANGE,			/**< MIDI note range */
+  GEN_VELRANGE,			/**< MIDI velocity range */
+  GEN_STARTLOOPADDRCOARSEOFS,	/**< Sample start loop address coarse offset (X 32768) */
+  GEN_KEYNUM,			/**< Fixed MIDI note number */
+  GEN_VELOCITY,			/**< Fixed MIDI velocity value */
+  GEN_ATTENUATION,		/**< Initial volume attenuation */
+  GEN_RESERVED2,		      /**< Reserved */
+  GEN_ENDLOOPADDRCOARSEOFS,	/**< Sample end loop address coarse offset (X 32768) */
+  GEN_COARSETUNE,		      /**< Coarse tuning */
+  GEN_FINETUNE,			/**< Fine tuning */
+  GEN_SAMPLEID,			/**< Sample ID (shouldn't be set by user) */
+  GEN_SAMPLEMODE,		      /**< Sample mode flags */
+  GEN_RESERVED3,		      /**< Reserved */
+  GEN_SCALETUNE,		      /**< Scale tuning */
+  GEN_EXCLUSIVECLASS,		/**< Exclusive class number */
+  GEN_OVERRIDEROOTKEY,		/**< Sample root note override */
+
+  /* the initial pitch is not a "standard" generator. It is not
+   * mentioned in the list of generator in the SF2 specifications. It
+   * is used, however, as the destination for the default pitch wheel
+   * modulator. */
+  GEN_PITCH,			/**< Pitch (NOTE: Not a real SoundFont generator) */
+  GEN_LAST			      /**< Value defines the count of generators (#fluid_gen_type) */
+      };
+
 //---------------------------------------------------------
 //   Channel
 //---------------------------------------------------------
@@ -560,9 +234,6 @@ class Channel {
       /* cached values of last MSB values of MSB/LSB controllers */
       unsigned char bank_msb;
       int interp_method;
-
-      /* the micro-tuning */
-      Tuning* tuning;
 
       /* NRPN system */
       short nrpn_select;
@@ -589,9 +260,6 @@ class Channel {
    public:
       Channel(Fluid* synth, int num);
 
-      void setTuning(Tuning* t)           { tuning = t; }
-      bool hasTuning() const              { return tuning != 0; }
-      Tuning* getTuning() const           { return tuning; }
       bool sustained() const              { return cc[SUSTAIN_SWITCH] >= 64; }
       void setGen(int n, float v, char a) { gen[n] = v; gen_abs[n] = a; }
       float getGen(int n) const           { return gen[n]; }
@@ -617,6 +285,245 @@ class Channel {
       void setInterpMethod(int m)         { interp_method = m; }
       int getInterpMethod() const         { return interp_method; }
       };
+
+//---------------------------------------------------------
+//   Fluid
+//---------------------------------------------------------
+
+class Fluid : public Synth {
+      static const int SILENT_BLOCKS = 32;
+      int silentBlocks;
+
+      QList<SFont*> sfonts;               // the loaded soundfonts
+      QList<BankOffset*> bank_offsets;    // the offsets of the soundfont banks
+      QList<Voice*> freeVoices;           // unused synthesis processes
+      QList<Voice*> activeVoices;         // active synthesis processes
+      QString _error;                     // last error message
+
+      static bool initialized;
+      static void init();
+
+      double sample_rate;                 // The sample rate
+      float _masterTuning;                // usually 440.0
+      double _tuning[128];                // the pitch of every key, in cents
+
+   protected:
+      int state;                          // the synthesizer state
+
+      unsigned int sfont_id;
+
+      double _gain;                       // master gain
+      QList<Channel*> channel;            // the channels
+
+      unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
+
+      float* left_buf;
+      float* right_buf;
+      float* fx_buf[2];
+
+      Reverb* reverb;
+      Chorus* chorus;
+      int cur;                            // the current sample in the audio buffers to be output
+
+   public:
+      Fluid();
+      ~Fluid();
+      virtual void init(int sr);
+      virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
+      virtual void play(const Event&);
+      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
+
+      bool log(const char* fmt, ...);
+
+      bool set_reverb_preset(int num);
+      void one_block();
+
+      Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
+      Preset* find_preset(unsigned int banknum, unsigned int prognum);
+      void all_notes_off(int chan);
+      void all_sounds_off(int chan);
+      void modulate_voices(int chan, bool is_cc, int ctrl);
+      void modulate_voices_all(int chan);
+      void damp_voices(int chan);
+      int kill_voice(Voice * voice);
+      void print_voice();
+
+      /** This function assures that every MIDI channels has a valid preset
+       *  (NULL is okay). This function is called after a SoundFont is
+       *  unloaded or reloaded. */
+      void update_presets();
+
+      BankOffset* get_bank_offset0(int sfont_id) const;
+      void remove_bank_offset(int sfont_id);
+
+      int get_cc(int chan, int num) const { return channel[chan]->cc[num]; }
+
+      void system_reset();
+      void program_change(int chan, int prognum);
+
+      int get_bank_offset(int sfont_id);
+      int set_bank_offset(int sfont_id, int offset);
+      void set_gen2(int chan, int param, float value, int absolute, int normalized);
+      float get_gen(int chan, int param);
+      void set_gen(int chan, int param, float value);
+      void set_interp_method(int chan, int interp_method);
+
+      Preset* get_channel_preset(int chan) const { return channel[chan]->preset(); }
+      SFont* get_sfont_by_name(const QString& name);
+      SFont* get_sfont_by_id(unsigned int id);
+      SFont* get_sfont(unsigned int num)         { return sfonts[num];   }
+      int sfcount() const                        { return sfonts.size(); }
+      void remove_sfont(SFont* sf);
+      int add_sfont(SFont* sf);
+      int sfreload(unsigned int id);
+      bool sfunload(unsigned int id, int reset_presets);
+      int sfload(const QString& filename, int reset_presets);
+
+      void start_voice(Voice* voice);
+      Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);
+      Voice* free_voice_by_kill();
+
+      virtual void process(unsigned len, float* lout, float* rout, int stride);
+
+      void set_chorus(int nr, double level, double speed, double depth_ms, int type);
+      void set_reverb(double roomsize, double damping, double width, double level);
+      void program_reset();
+
+      double gain() const          { return _gain;  }
+
+      bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
+      bool program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num);
+      void get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num);
+      void sfont_select(int chan, unsigned int sfont_id)    { channel[chan]->setSfontnum(sfont_id); }
+      void bank_select(int chan, unsigned int bank)         { channel[chan]->setBanknum(bank); }
+
+      Preset* get_preset(char* sfont_name, unsigned banknum, unsigned prognum);
+      void get_pitch_wheel_sens(int chan, int* pval);
+      void pitch_wheel_sens(int chan, int val);
+      void get_pitch_bend(int chan, int* ppitch_bend);
+
+      void freeVoice(Voice* v);
+
+      double getPitch(int k) const   { return _tuning[k]; }
+//      float ct2hz_real(float c)      { return (_masterTuning/440.0) * 8.176 * pow(2.0, (double) c / 1200.0); }
+      float ct2hz_real(float cents)  { return powf(2.0f, (cents - 6900.0f) / 1200.0f) * _masterTuning; }
+
+      float act2hz(float c)     { return 8.176 * pow(2.0, (double) c / 1200.0); }
+      float ct2hz(float cents)  { return act2hz(qBound(1500.0f, cents, 13500.0f)); }
+
+      float masterTuning() const     { return _masterTuning; }
+      virtual void setMasterTuning(float f)  { _masterTuning = f; }
+
+      QString error() const { return _error; }
+
+      friend class Voice;
+      };
+
+  /*
+   *
+   * Chorus
+   *
+   */
+
+enum fluid_chorus_mod {
+      FLUID_CHORUS_MOD_SINE = 0,
+      FLUID_CHORUS_MOD_TRIANGLE = 1
+      };
+
+/* Those are the default settings for the chorus. */
+#define FLUID_CHORUS_DEFAULT_N      3
+#define FLUID_CHORUS_DEFAULT_LEVEL  2.0f
+#define FLUID_CHORUS_DEFAULT_SPEED  0.3f
+#define FLUID_CHORUS_DEFAULT_DEPTH  8.0f
+#define FLUID_CHORUS_DEFAULT_TYPE   FLUID_CHORUS_MOD_SINE
+
+
+  /*
+   *
+   * Synthesis parameters
+   *
+   */
+
+  /* Flags to choose the interpolation method */
+enum fluid_interp {
+      /* no interpolation: Fastest, but questionable audio quality */
+      FLUID_INTERP_NONE     = 0,
+      /* Straight-line interpolation: A bit slower, reasonable audio quality */
+      FLUID_INTERP_LINEAR   = 1,
+      /* Fourth-order interpolation: Requires 50 % of the whole DSP processing time, good quality
+       * Default. */
+      FLUID_INTERP_DEFAULT  = 4,
+      FLUID_INTERP_4THORDER = 4,
+      FLUID_INTERP_7THORDER = 7,
+      FLUID_INTERP_HIGHEST  = 7
+      };
+
+#define fluid_sample_refcount(_sample) ((_sample)->refcount)
+
+
+/** Sample types */
+
+#define FLUID_SAMPLETYPE_MONO	      1
+#define FLUID_SAMPLETYPE_RIGHT	2
+#define FLUID_SAMPLETYPE_LEFT	      4
+#define FLUID_SAMPLETYPE_LINKED	8
+#define FLUID_SAMPLETYPE_ROM	      0x8000
+
+/* Sets the sound data of the sample
+ *     Warning : if copy_data is FALSE, data should have 8 unused frames at start
+ *     and 8 unused frames at the end.
+ */
+int fluid_sample_set_sound_data(Sample* sample, short *data,
+			       unsigned int nbframes, short copy_data, int rootkey);
+
+/*
+ *
+ *  Utility functions
+ */
+
+  /* Maximum number of modulators in a voice */
+#define FLUID_NUM_MOD           64
+
+/**
+ * SoundFont generator structure.
+ */
+class Generator {
+   public:
+      unsigned char flags; /**< Is the generator set or not (#fluid_gen_flags) */
+      double val;          /**< The nominal value           */
+      double mod;          /**< Change by modulators        */
+      double nrpn;         /**< Change by NRPN messages     */
+
+      void set_mod(double _val)  { mod  = _val; }
+      void set_nrpn(double _val) { nrpn = _val; }
+      };
+
+/**
+ * Enum value for 'flags' field of #_Generator (not really flags).
+ */
+enum fluid_gen_flags {
+      GEN_UNUSED,		/**< Generator value is not set */
+      GEN_SET,		/**< Generator value is set     */
+      GEN_ABS_NRPN	/**< DOCME                      */
+      };
+
+void fluid_gen_set_default_values(Generator* gen);
+  /*
+   *  The interface to the synthesizer's voices
+   *  Examples on using them can be found in fluid_defsfont.c
+   */
+
+  /* for fluid_voice_add_mod */
+enum fluid_voice_add_mod {
+      FLUID_VOICE_OVERWRITE,
+      FLUID_VOICE_ADD,
+      FLUID_VOICE_DEFAULT
+      };
+
+/* Disable FPE exception check */
+#define fluid_check_fpe(expl)
+
+unsigned int fluid_check_fpe_i386(char * explanation_in_case_of_fpe);
 
 /*
  * interpolation data
@@ -654,14 +561,7 @@ struct Mod
       unsigned char flags1;
       unsigned char src2;
       unsigned char flags2;
-
       double amount;
-      /* The 'next' field allows to link modulators into a list.  It is
-       * not used in fluid_voice.c, there each voice allocates memory for a
-       * fixed number of modulators.  Since there may be a huge number of
-       * different zones, this is more efficient.
-       */
-      Mod * next;
 
       void clone(Mod* mod) const;
       void dump() const;
@@ -671,6 +571,17 @@ struct Mod
                 || (((src2 == ctrl) && (flags2 & FLUID_MOD_CC)    && cc)
                 || (((src2 == ctrl) && (!(flags2 & FLUID_MOD_CC)) && !cc)));
             }
+      void set_source1(int src, int flags);
+      void set_source2(int src, int flags);
+      void set_dest(int val)                    { dest = val;    }
+      void set_amount(double val)               { amount = val;  }
+      int get_source1() const                   { return src1;   }
+      int get_flags1() const                    { return flags1; }
+      int get_source2() const                   { return src2;   }
+      int get_flags2() const                    { return flags2; }
+      int get_dest() const                      { return dest;   }
+      double get_amount() const                 { return amount; }
+      float get_value(Channel* chan, Voice* voice);
       };
 
 /* Flags telling the source of a modulator.  This corresponds to
@@ -686,24 +597,10 @@ enum fluid_mod_src {
       FLUID_MOD_PITCHWHEELSENS   = 16
       };
 
-void fluid_mod_set_source1(Mod* mod, int src, int flags);
-void fluid_mod_set_source2(Mod* mod, int src, int flags);
-void fluid_mod_set_dest(Mod* mod, int dst);
-void fluid_mod_set_amount(Mod* mod, double amount);
-
-int fluid_mod_get_source1(Mod* mod);
-int fluid_mod_get_flags1(Mod* mod);
-int fluid_mod_get_source2(Mod* mod);
-int fluid_mod_get_flags2(Mod* mod);
-int fluid_mod_get_dest(Mod* mod);
-double fluid_mod_get_amount(Mod* mod);
-
-
 /* Determines, if two modulators are 'identical' (all parameters
    except the amount match) */
-int test_identity(Mod * mod1, Mod * mod2);
+bool test_identity(const Mod * mod1, const Mod * mod2);
 
-float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice);
 void fluid_dump_modulator(Mod * mod);
 
 #define fluid_mod_has_source(mod,cc,ctrl)  \

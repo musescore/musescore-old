@@ -21,8 +21,6 @@
 #ifndef __DRIVER_H__
 #define __DRIVER_H__
 
-// #include "event.h"
-
 class Seq;
 class MidiPatch;
 class Synth;

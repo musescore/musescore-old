@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>878</width>
-    <height>557</height>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1617,8 +1617,8 @@
          </property>
          <layout class="QVBoxLayout">
           <item>
-           <layout class="QHBoxLayout">
-            <item>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
              <widget class="QLabel" name="label_8">
               <property name="text">
                <string>Sound Font</string>
@@ -1628,10 +1628,10 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item row="0" column="1" colspan="2">
              <widget class="QLineEdit" name="soundFont"/>
             </item>
-            <item>
+            <item row="0" column="3">
              <widget class="QToolButton" name="sfButton">
               <property name="text">
                <string>...</string>
@@ -1639,6 +1639,45 @@
               <property name="icon">
                <iconset resource="mscore.qrc">
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_39">
+              <property name="text">
+               <string>Master Tuning</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="masterTuning">
+              <property name="suffix">
+               <string extracomment="Frequency Herz">Hz</string>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>300.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>600.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>440.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -2109,10 +2148,10 @@
          <property name="itemsExpandable">
           <bool>true</bool>
          </property>
-         <property name="allColumnsShowFocus">
+         <property name="sortingEnabled">
           <bool>true</bool>
          </property>
-         <property name="sortingEnabled">
+         <property name="allColumnsShowFocus">
           <bool>true</bool>
          </property>
          <column>

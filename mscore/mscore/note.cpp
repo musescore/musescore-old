@@ -1087,13 +1087,15 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
-                  int len       = score()->inputState().tickLen();
                   Direction dir = c->stemDirection();
                   int t         = (staffIdx() * VOICES) + (n->voice() % VOICES);
                   score()->select(0, SELECT_SINGLE, 0);
-                  int tick      = chord()->tick();
-                  n             = score()->setNote(tick, t, n->pitch(), len, headGroup, dir);
-                  score()->nextInputPos(n->chord());
+                  Segment* seg = score()->setNoteRest(chord(), t, n->pitch(),
+                     score()->inputState().duration,
+                     headGroup, dir);
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
+                  if (cr)
+                        score()->nextInputPos(cr, true);
                   delete e;
                   }
                   break;

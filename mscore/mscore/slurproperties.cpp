@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: voltaproperties.cpp 1840 2009-05-20 11:57:51Z wschweer $
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,47 +18,35 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PADSTATE_H__
-#define __PADSTATE_H__
-
-#include "globals.h"
-
-struct Drumset;
+#include "slurproperties.h"
 
 //---------------------------------------------------------
-//   PadState
-//    keyboard & pad note entry state
+//   SlurProperties
 //---------------------------------------------------------
 
-struct PadState {
-      int dots;
-      int len;
-      int tickLen;  // len + len * (dot ? .5 : 0)
-      bool rest;
-      int pad;
-      int voice;
-      int pitch;
-      int prefix;
-      NoteType noteType;
-      BeamMode beamMode;
-      int drumNote;
-      Drumset* drumset;
+SlurProperties::SlurProperties(QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      }
 
-      PadState() {
-            dots     = 0;
-            len      = division;
-            tickLen  = division;
-            rest     = false;
-            pad      = 0;
-            voice    = 0;
-            pitch    = 60;
-            prefix   = 0;
-            noteType = NOTE_NORMAL;
-            beamMode = BEAM_AUTO;
-            drumNote = -1;
-            drumset  = 0;
-            }
-      };
+//---------------------------------------------------------
+//   getLineType
+//---------------------------------------------------------
 
-#endif
+int SlurProperties::getLineType() const
+      {
+      return dotted->isChecked() ? 1 : 0;
+      }
 
+//---------------------------------------------------------
+//   setLineType
+//---------------------------------------------------------
+
+void SlurProperties::setLineType(int val)
+      {
+      if (val == 0)
+            solid->setChecked(true);
+      else
+            dotted->setChecked(true);
+      }

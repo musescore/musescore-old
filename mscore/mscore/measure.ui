@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
-    <height>355</height>
+    <width>664</width>
+    <height>422</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QGroupBox" name="MeasureBase_2">
      <property name="title">
-      <string>Measure</string>
+      <string notr="true">Measure</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -33,40 +33,75 @@
        <number>9</number>
       </property>
       <item row="5" column="0" colspan="6">
-       <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>6</number>
-        </property>
+       <layout class="QGridLayout" name="gridLayout">
         <property name="margin">
          <number>0</number>
         </property>
-        <item>
+        <item row="0" column="0">
          <widget class="QCheckBox" name="lineBreak">
           <property name="text">
-           <string>Line Break</string>
+           <string notr="true">Line Break</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QCheckBox" name="pageBreak">
-          <property name="text">
-           <string>Page Break</string>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QCheckBox" name="irregular">
           <property name="text">
-           <string>Irregular</string>
+           <string notr="true">Irregular</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QCheckBox" name="startRepeat">
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="pageBreak">
           <property name="text">
-           <string>StartRepeat</string>
+           <string notr="true">Page Break</string>
           </property>
          </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="startRepeat">
+          <property name="text">
+           <string notr="true">StartRepeat</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" colspan="2">
+         <widget class="QCheckBox" name="breakMultiMeasureRest">
+          <property name="text">
+           <string>breakMultiMeasureRest</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2" colspan="2">
+         <widget class="QCheckBox" name="breakMMRest">
+          <property name="text">
+           <string notr="true">breakMMRest</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="endBarLineGenerated">
+          <property name="text">
+           <string notr="true">endBarLineGenerated</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="endBarLineVisible">
+          <property name="text">
+           <string notr="true">endBarLineVisible</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string notr="true">endBarLineType</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QSpinBox" name="endBarLineType"/>
         </item>
        </layout>
       </item>
@@ -76,7 +111,7 @@
       <item row="2" column="4">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>No.:</string>
+         <string notr="true">No.:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -86,7 +121,7 @@
       <item row="1" column="4">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Beams:</string>
+         <string notr="true">Beams:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -105,7 +140,7 @@
       <item row="3" column="2">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Stretch:</string>
+         <string notr="true">Stretch:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -118,7 +153,7 @@
       <item row="2" column="2">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>PageElem:</string>
+         <string notr="true">PageElem:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -128,7 +163,7 @@
       <item row="1" column="2">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Staves:</string>
+         <string notr="true">Staves:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -144,7 +179,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>NoOffset:</string>
+         <string notr="true">NoOffset:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -154,7 +189,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Tuplets:</string>
+         <string notr="true">Tuplets:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -167,7 +202,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Segments:</string>
+         <string notr="true">Segments:</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -180,7 +215,7 @@
       <item row="3" column="4">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>EndRep:</string>
+         <string notr="true">EndRep:</string>
         </property>
        </widget>
       </item>
@@ -194,21 +229,24 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_13">
         <property name="text">
-         <string>RepeatFLags:</string>
+         <string notr="true">RepeatFLags:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="prevButton">
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
         <property name="text">
-         <string>previous</string>
+         <string notr="true">previous</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="nextButton">
         <property name="text">
-         <string>next</string>
+         <string notr="true">next</string>
         </property>
        </widget>
       </item>
@@ -218,7 +256,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>Elements:</string>
+      <string notr="true">Elements:</string>
      </property>
     </widget>
    </item>
@@ -226,12 +264,12 @@
     <widget class="QTreeWidget" name="sel">
      <column>
       <property name="text">
-       <string>Element</string>
+       <string notr="true">Element</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Subtype</string>
+       <string notr="true">Subtype</string>
       </property>
      </column>
     </widget>

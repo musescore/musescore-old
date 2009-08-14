@@ -18,9 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __LISTEDIT_H__
-#define __LISTEDIT_H__
+#ifndef __INSPECTOR_H__
+#define __INSPECTOR_H__
 
+#include "ui_inspector.h"
 #include "ui_element.h"
 #include "ui_note.h"
 #include "ui_page.h"
@@ -49,18 +50,16 @@ class BSymbol;
 class ElementItem;
 
 class ShowNoteWidget;
-// class QSplitter;
 
 //---------------------------------------------------------
-//   PageListEditor
+//   Inspector
 //---------------------------------------------------------
 
-class PageListEditor : public QWidget {
+class Inspector : public QDialog, public Ui::InspectorBase {
       Q_OBJECT;
 
-      QStackedWidget* stack;
-      QTreeWidget* list;
-      QSplitter* split;
+      QStack<Element*>backStack;
+      QStack<Element*>forwardStack;
 
       ShowElementBase* pagePanel;
       ShowElementBase* systemPanel;
@@ -86,20 +85,25 @@ class PageListEditor : public QWidget {
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
+      void updateElement(Element*);
 
    protected:
       Score* cs;
+      Element* curElement;
 
    private slots:
-      void itemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
+      void itemClicked(QTreeWidgetItem*, int);
       void itemExpanded(QTreeWidgetItem*);
       void layoutScore();
+      void backClicked();
+      void forwardClicked();
 
    public slots:
       void setElement(Element*);
+      void reloadClicked();
 
    public:
-      PageListEditor(QWidget* parent = 0);
+      Inspector(QWidget* parent = 0);
       void writeSettings();
 	void updateList(Score*);
       };
@@ -402,8 +406,6 @@ class TupletView : public ShowElementBase {
    private slots:
       void numberClicked();
       void elementClicked(QTreeWidgetItem*);
-      void hasNumberToggled(bool);
-      void hasLineToggled(bool);
 
    public:
       TupletView();

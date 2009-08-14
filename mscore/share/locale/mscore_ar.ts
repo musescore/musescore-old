@@ -253,38 +253,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation>تراكب</translation>
+        <translation type="unfinished">تراكب</translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation>ساق</translation>
+        <translation type="unfinished">ساق</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation>خطاف</translation>
+        <translation type="unfinished">خطاف</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation>نغمة مخطوفة</translation>
+        <translation type="unfinished">نغمة مخطوفة</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation>اتجاه الساق</translation>
+        <translation type="unfinished">اتجاه الساق</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation>نغمات:</translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation>سطر مساعدة:</translation>
+        <translation type="unfinished">سطر مساعدة:</translation>
     </message>
 </context>
 <context>
@@ -1024,38 +1017,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>سياق</translation>
     </message>
-    <message>
-        <source>ChordRest</source>
-        <translation>سكتة تراكب</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>تربيط</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>ثلثية وخلافه</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>مواصفات:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>لأعلى</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>هو لأعلى</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>طريقة التربيط:</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>نقاط:</translation>
-    </message>
 </context>
 <context>
     <name>Dynamic</name>
@@ -1085,14 +1046,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>سياق</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>شِدّة أداء</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>طراز فرعى:</translation>
     </message>
 </context>
 <context>
@@ -1810,96 +1763,8 @@ failed: </source>
         <translation>سياق</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>الأصل</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>لا يصلح</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation>عنصر</translation>
-    </message>
-    <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation>معيّن</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation>مخلّق</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation>مرئى</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation>مجموعة</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation>طراز فرعى</translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation>صوت</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation>مدرج</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation>التوقيع</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation>طول</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation>اللون</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation>موضع</translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation>بُعد البداية</translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation>حدود الإحاطة</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation>تكبير</translation>
     </message>
 </context>
 <context>
@@ -5085,64 +4950,12 @@ before closing?</source>
         <translation>ذهاب إلى:</translation>
     </message>
     <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation></translation>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation></translation>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>delete selected measures</source>
@@ -5279,101 +5092,6 @@ before closing?</source>
     <message>
         <source>note head group</source>
         <translation>مجموعة رؤوس النغمات</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation>نغمة</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation>درجة</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation>الخط</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation>تحريك</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation>رأس معكوسة</translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation>مخفىّ</translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation>درجة</translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation>شدّة</translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation>انعكاس آلى</translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation>رأس لليسار</translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation>رأس لليمين</translation>
     </message>
 </context>
 <context>
@@ -6265,6 +5983,14 @@ before closing?</source>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>استبدال 1\2 ... بالرمز ...</translation>
     </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6651,6 +6377,62 @@ failed: </source>
         <translation>&gt; لم يتم بنجاح:
 </translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6850,10 +6632,33 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">خواص إعادة</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">مصمت</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>طور التحديد</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6861,30 +6666,6 @@ failed: </source>
     <message>
         <source>Form</source>
         <translation>سياق</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>قوس-رباط</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>قطعة قوس</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>لأعلى</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>الاتجاه:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>آليًّا</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>لأسفل</translation>
     </message>
 </context>
 <context>
@@ -7425,50 +7206,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>سياق</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>ثلثية وخلافه</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>مع رقم</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>مع خط</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>طول القاعدة</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>نغمات عادية</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>نغمات فعلية</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>قائمة التراكبات/السكتات:</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>عنصر نصّى</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>عنصر</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation>إشارة</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>طول</translation>
     </message>
 </context>
 <context>

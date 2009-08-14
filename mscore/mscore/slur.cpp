@@ -33,6 +33,8 @@
 #include "navigate.h"
 #include "canvas.h"
 #include "articulation.h"
+#include "slurproperties.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -72,7 +74,8 @@ void SlurSegment::updatePath()
 
       path.moveTo(pp[0]);
       path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
-      path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
+      if (slurTie()->lineType() == 0)
+            path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
       }
 
 //---------------------------------------------------------
@@ -92,7 +95,17 @@ void SlurSegment::move(const QPointF& s)
 
 void SlurSegment::draw(QPainter& p) const
       {
-      p.setBrush(curColor());
+      if (slurTie()->lineType() == 0) {
+            p.setBrush(curColor());
+            }
+      else {
+            QPen pen(p.pen());
+            qreal lw = point(score()->styleS(ST_barWidth));
+            pen.setWidthF(lw);
+            // pen.setStyle(Qt::DashLine);
+            pen.setStyle(Qt::DotLine);
+            p.setPen(pen);
+            }
       p.drawPath(path);
       }
 
@@ -126,6 +139,7 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
       {
       if (slurTie()->type() != SLUR)
             return false;
+
       Slur* sl = static_cast<Slur*>(slurTie());
 
       if (key == Qt::Key_X) {
@@ -398,8 +412,32 @@ bool SlurSegment::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Edit Mode"));
       a->setData("edit");
+      a = popup->addAction(tr("Slur Properties..."));
+      a->setData("props");
       return true;
       }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void SlurSegment::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            SlurProperties sp(0);
+            sp.setLineType(slurTie()->lineType());
+            int rv = sp.exec();
+            if (rv) {
+                  int lt = sp.getLineType();
+                  if (lt != slurTie()->lineType()) {
+                        score()->undo()->push(new ChangeSlurProperties(slurTie(), lt));
+                        }
+                  }
+            }
+      else
+            Element::propertyAction(s);
+      }
+
 
 //---------------------------------------------------------
 //   SlurTie
@@ -413,6 +451,7 @@ SlurTie::SlurTie(Score* s)
       _startElement  = 0;
       _endElement    = 0;
       _len           = 0;
+      _lineType      = 0;     // default is solid
       }
 
 SlurTie::SlurTie(const SlurTie& t)
@@ -423,6 +462,7 @@ SlurTie::SlurTie(const SlurTie& t)
       _startElement  = t._startElement;
       _endElement    = t._endElement;
       _len           = t._len;
+      _lineType      = t._lineType;
 
       delSegments    = t.delSegments;
 
@@ -612,6 +652,8 @@ void SlurTie::writeProperties(Xml& xml) const
             ss->write(xml, idx++);
       if (_slurDirection)
             xml.tag("up", _slurDirection);
+      if (_lineType)
+            xml.tag("lineType", _lineType);
       }
 
 //---------------------------------------------------------
@@ -641,6 +683,8 @@ bool SlurTie::readProperties(QDomElement e)
             }
       else if (tag == "up")
             _slurDirection = Direction(val.toInt());
+      else if (tag == "lineType")
+            _lineType = val.toInt();
       else if (!Element::readProperties(e))
             return false;
       return true;

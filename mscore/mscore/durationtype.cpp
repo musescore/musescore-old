@@ -40,6 +40,7 @@ static int getDots(int base, int rest, int* dots)
       return rest;
       }
 
+#if 0
 //---------------------------------------------------------
 //   headType
 //    return for a given tickLen the baselen of a note
@@ -49,33 +50,34 @@ static int getDots(int base, int rest, int* dots)
 //    return the remaining ticks if any
 //---------------------------------------------------------
 
-int headType(int tickLen, Duration* type, int* dots)
+static int headType(int tickLen, Duration* type)
       {
       if (tickLen == 0) {
             *type = Duration(Duration::V_MEASURE);
-            *dots = 0;
             return 0;
             }
       Duration dt;
-      for (int i = 0; i < Duration::types - 1; ++i) {
+      for (int i = 0; i < Duration::V_ZERO; ++i) {
             dt.setType(Duration::DurationType(i));
             int ticks = dt.ticks();
             if (tickLen / ticks) {
                   int remain = tickLen % ticks;
                   if ((ticks - remain) < (ticks/4)) {
-                        *dots = 0;
                         *type = Duration(Duration::DurationType(i-1));
                         return 0;
                         }
                   *type = dt;
-                  return getDots(ticks, remain, dots);
+                  int dots;
+                  int rest = getDots(ticks, remain, &dots);
+                  dt.setDots(dots);
+                  return rest;
                   }
             }
 printf("1: no duration type for ticks %d\n", tickLen);
       *type = Duration(Duration::V_QUARTER);
-      *dots = 0;
       return 0;
       }
+#endif
 
 //---------------------------------------------------------
 //   setVal
@@ -83,20 +85,21 @@ printf("1: no duration type for ticks %d\n", tickLen);
 
 void Duration::setVal(int ticks)
       {
-      if (ticks == 0) {
+      if (ticks == 0)
             _val = V_MEASURE;
-            }
       else {
             Duration dt;
-            for (int i = 0; i < Duration::types - 1; ++i) {
+            for (int i = 0; i < Duration::V_ZERO; ++i) {
                   dt.setType(Duration::DurationType(i));
                   int t = dt.ticks();
                   if (ticks / t) {
                         int remain = ticks % t;
-                        if ((t - remain) < (t/4))
+                        if ((t - remain) < (t/4)) {
                               _val = DurationType(i - 1);
-                        else
-                              _val = DurationType(i);
+                              return;
+                              }
+                        _val = DurationType(i);
+                        getDots(t, remain, &_dots);
                         return;
                         }
                   }
@@ -111,31 +114,29 @@ void Duration::setVal(int ticks)
 
 int Duration::ticks() const
       {
+      int t;
       switch(_val) {
-            case V_QUARTER:   return division;
-            case V_EIGHT:     return division / 2;
-            case V_256TH:     return division / 64;
-            case V_128TH:     return division / 32;
-            case V_64TH:      return division / 16;
-            case V_32ND:      return division / 8;
-            case V_16TH:      return division / 4;
-            case V_HALF:      return division * 2;
-            case V_WHOLE:     return division * 4;
-            case V_BREVE:     return division * 8;
-            case V_LONG:      return division * 16;
-            case V_MEASURE:   return 0;
+            case V_QUARTER:   t = division;        break;
+            case V_EIGHT:     t = division / 2;    break;
+            case V_256TH:     t = division / 64;   break;
+            case V_128TH:     t = division / 32;   break;
+            case V_64TH:      t = division / 16;   break;
+            case V_32ND:      t = division / 8;    break;
+            case V_16TH:      t = division / 4;    break;
+            case V_HALF:      t = division * 2;    break;
+            case V_WHOLE:     t = division * 4;    break;
+            case V_BREVE:     t = division * 8;    break;
+            case V_LONG:      t = division * 16;   break;
+            case V_ZERO:
+            case V_MEASURE:
+                  return 0;
             default:
-            case V_INVALID:   return -1;
+            case V_INVALID:
+                  return -1;
             }
-      }
-
-int Duration::ticks(int dots) const
-      {
-      int t = ticks();
-	  int tmp = t;
-      for (int i = 0; i < dots; ++i) {
+      int tmp = t;
+      for (int i = 0; i < _dots; ++i)
             tmp += (t >> (i+1));
-            }
       return tmp;
       }
 
@@ -154,11 +155,13 @@ QString Duration::name() const
             case V_32ND:      return "32nd";
             case V_16TH:      return "16th";
             case V_HALF:      return "half";
-            case V_WHOLE:
-            case V_MEASURE:   return "whole";
+            case V_WHOLE:     return "whole";
+            case V_MEASURE:   return "measure";
             case V_BREVE:     return "breve";
             case V_LONG:      return "long";
             default:
+printf("Duration::name(): invalid duration type %d\n", _val);
+            case V_ZERO:
             case V_INVALID:   return "";
             }
       }
@@ -195,6 +198,7 @@ int Duration::headType() const
                   break;
             default:
             case V_INVALID:
+            case V_ZERO:
                   headType = 2;
                   break;
             }
@@ -210,8 +214,8 @@ int Duration::hooks() const
       static const int table[] = {
          // V_LONG, V_BREVE, V_WHOLE, V_HALF, V_QUARTER, V_EIGHT, V_16TH,
             0,      0,       0,       0,      0,         1,       2,
-         // V_32ND, V_64TH, V_128TH, V_256TH, V_MEASURE, V_INVALID
-            3,      4,       5,       6,      0,         0
+         // V_32ND, V_64TH, V_128TH, V_256TH, V_MEASURE, V_ZERO, V_INVALID
+            3,      4,       5,       6,      0,         0,       0
             };
       return table[_val];
       }
@@ -242,7 +246,7 @@ bool Duration::hasStem() const
 //   setVal
 //---------------------------------------------------------
 
-void Duration::setVal(const QString& s)
+Duration::Duration(const QString& s)
       {
       if (s == "quarter")
             _val = V_QUARTER;
@@ -266,8 +270,13 @@ void Duration::setVal(const QString& s)
             _val = V_BREVE;
       else if (s == "long")
             _val = V_LONG;
-      else
-            printf("unknown duration type <%s>\n", qPrintable(s));
+      else if (s == "measure")
+            _val = V_MEASURE;
+      else {
+            _val = V_INVALID;
+            printf("Duration::setVal(%s): unknown\n", qPrintable(s));
+            }
+      _dots = 0;
       }
 
 //---------------------------------------------------------
@@ -276,11 +285,186 @@ void Duration::setVal(const QString& s)
 
 Duration Duration::shift(int v)
       {
-      if (_val == V_MEASURE || _val == V_INVALID)
+      if (_val == V_MEASURE || _val == V_INVALID || _val == V_ZERO)
             return Duration();
       int newValue = _val + v;
       if ((newValue < 0) || (newValue > V_256TH))
             return Duration();
       return Duration(DurationType(newValue));
+      }
+
+//---------------------------------------------------------
+//   operator<
+//---------------------------------------------------------
+
+bool Duration::operator<(const Duration& t) const
+      {
+      if (t._val < _val)
+            return true;
+      if (t._val == _val) {
+            if (_dots < t._dots)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   operator>=
+//---------------------------------------------------------
+
+bool Duration::operator>=(const Duration& t) const
+      {
+      if (t._val > _val)
+            return true;
+      if (t._val == _val) {
+            if (_dots >= t._dots)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   operator<=
+//---------------------------------------------------------
+
+bool Duration::operator<=(const Duration& t) const
+      {
+      if (t._val < _val)
+            return true;
+      if (t._val == _val) {
+            if (_dots <= t._dots)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   operator>
+//---------------------------------------------------------
+
+bool Duration::operator>(const Duration& t) const
+      {
+      if (t._val > _val)
+            return true;
+      if (t._val == _val) {
+            if (_dots > t._dots)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   fraction
+//---------------------------------------------------------
+
+Fraction Duration::fraction() const
+      {
+      int z = 1;
+      unsigned n;
+      switch(_val) {
+            case V_256TH:     n = 256;      break;
+            case V_128TH:     n = 128;      break;
+            case V_64TH:      n = 64;       break;
+            case V_32ND:      n = 32;       break;
+            case V_16TH:      n = 16;       break;
+            case V_EIGHT:     n = 8;        break;
+            case V_QUARTER:   n = 4;        break;
+            case V_HALF:      n = 2;        break;
+            case V_WHOLE:     n = 1;        break;
+            case V_BREVE:     z = 2; n = 1; break;
+            case V_LONG:      z = 4; n = 1; break;
+            case V_ZERO:      z = 0; n = 1; break;
+            default:          n = 0;        break;
+            }
+      Fraction a(z, n);
+      for (int i = 0; i < _dots; ++i) {
+            n *= 2;
+            a += Fraction(1, n);
+            }
+      return a;
+      }
+
+Duration::Duration(const Fraction& f)
+      {
+      _dots = 0;
+      if (f.zaehler() == 0) {
+            _val  = V_ZERO;
+            _dots = 0;
+            return;
+            }
+      switch(f.nenner()) {
+            case 1:     _val = V_WHOLE; break;
+            case 2:     _val = V_HALF; break;
+            case 4:     _val = V_QUARTER; break;
+            case 8:     _val = V_EIGHT; break;
+            case 16:    _val = V_16TH; break;
+            case 32:    _val = V_32ND; break;
+            case 64:    _val = V_64TH; break;
+            case 128:   _val = V_128TH; break;
+            case 256:   _val = V_256TH; break;
+            default:    _val = V_INVALID; break;
+            }
+      if (f.zaehler() != 1) {
+            switch(f.zaehler()) {
+                  case 3:
+                        _val = DurationType(_val - 1);
+                        _dots = 1;
+                        break;
+                  case 7:
+                        _val = DurationType(_val - 2);
+                        _dots = 2;
+                        break;
+                  default:
+                        printf("Duration(%d/%d): not implemented\n", f.zaehler(), f.nenner());
+                        abort();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   operator -=
+//---------------------------------------------------------
+
+Duration& Duration::operator-=(const Duration& t)
+      {
+      Fraction f1 = fraction() - t.fraction();
+      Duration d(f1);
+      _val  = d._val;
+      _dots = d._dots;
+      return *this;
+      }
+
+//---------------------------------------------------------
+//   operator +=
+//---------------------------------------------------------
+
+Duration& Duration::operator+=(const Duration& t)
+      {
+      Fraction f1 = fraction() + t.fraction();
+      Duration d(f1);
+      _val  = d._val;
+      _dots = d._dots;
+      return *this;
+      }
+
+
+//---------------------------------------------------------
+//   toDurationList
+//---------------------------------------------------------
+
+QList<Duration> toDurationList(Fraction l)
+      {
+      QList<Duration> dList;
+      while (!l.isZero()) {
+            for (Duration d = Duration(Duration::V_LONG); !d.isZero(); d = d.shift(1)) {
+                  Fraction ff(l - d.fraction());
+                  if (ff.zaehler() < 0)
+                        continue;
+                  dList.append(d);
+                  l -= d.fraction();
+                  break;
+                  }
+            }
+      return dList;
       }
 

@@ -160,6 +160,7 @@ void Xml::tag(const QString& name, QVariant data)
             case QVariant::Bool:
             case QVariant::Char:
             case QVariant::Int:
+            case QVariant::UInt:
                   *this << "<" << name << ">";
                   *this << data.toInt();
                   *this << "</" << ename << ">\n";
@@ -200,6 +201,7 @@ void Xml::tag(const QString& name, QVariant data)
                   break;
             default:
                   printf("Xml::tag: unsupported type %d\n", data.type());
+                  // abort();
                   break;
             }
       }

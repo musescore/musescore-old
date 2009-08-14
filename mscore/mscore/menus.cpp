@@ -1192,7 +1192,6 @@ void MuseScore::updateDrumset()
                               up = line > 4;
 
                         Chord* chord = new Chord(gscore);
-                        chord->setTickLen(division);
                         chord->setDuration(Duration::V_QUARTER);
                         chord->setStemDirection(dir);
                         chord->setTrack(voice);

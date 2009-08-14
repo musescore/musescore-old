@@ -217,6 +217,7 @@ void Preferences::init()
       landscape               = false;
       twosided                = true;
       spatium                 = SPATIUM20;
+      tuning                  = 440.0f;
 
       defaultPlayDuration     = 300;      // ms
       };
@@ -306,6 +307,7 @@ void Preferences::write()
       s.setValue("landscape", landscape);
       s.setValue("twosided", twosided);
       s.setValue("spatium", spatium);
+      s.setValue("tuning", tuning);
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
@@ -398,6 +400,7 @@ void Preferences::read()
       landscape              = s.value("landscape", false).toBool();
       twosided               = s.value("twosided", true).toBool();
       spatium                = s.value("spatium", SPATIUM20).toDouble();
+      tuning                 = s.value("tuning", 440.0).toDouble();
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
@@ -689,6 +692,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       twosided->setChecked(p->twosided);
       spatiumEntry->setValue(p->spatium * INCH);
+      masterTuning->setValue(p->tuning);
       landscape->setChecked(p->landscape);
 
       defaultPlayDuration->setValue(p->defaultPlayDuration);
@@ -1031,6 +1035,18 @@ void PreferenceDialog::apply()
       double f  = mmUnit ? 1.0/INCH : 1.0;
       preferences.twosided    = twosided->isChecked();
       preferences.spatium     = spatiumEntry->value() / INCH;
+      if (preferences.tuning != masterTuning->value()) {
+            preferences.tuning = masterTuning->value();
+            if (seq) {
+                  Driver* driver = seq->getDriver();
+                  if (driver) {
+                        Synth* synth = driver->getSynth();
+                        if (synth) {
+                              synth->setMasterTuning(preferences.tuning);
+                              }
+                        }
+                  }
+            }
       preferences.landscape   = landscape->isChecked();
       preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
       preferences.paperHeight = paperHeight->value() * f;

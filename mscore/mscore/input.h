@@ -34,8 +34,6 @@ struct Drumset;
 
 class InputState {
    public:
-      int dots;
-//      int len;
       Duration duration;      // currently selected duration
       bool rest;
       int pad;
@@ -51,11 +49,8 @@ class InputState {
       ChordRest* cr;
 
       InputState();
-      int pos() const;
-      void setPos(ChordRest* cr);
-
-      int voice() const { return track % VOICES; }
-      int tickLen() { return duration.ticks(dots); }
+      int voice() const { return track % VOICES;   }
+      int tickLen()     { return duration.ticks(); }
       };
 
 #endif

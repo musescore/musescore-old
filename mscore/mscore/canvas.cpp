@@ -150,7 +150,12 @@ bool Canvas::event(QEvent* ev)
       {
       if (ev->type() == QEvent::KeyPress) {
             QKeyEvent* ke = (QKeyEvent*) ev;
-            if ((state == EDIT) && (ke->key() == Qt::Key_Tab)) {
+            if (debugMode) {
+                  printf("key key:%x modifiers:%x text:<%s>\n", ke->key(),
+                     int(ke->modifiers()), qPrintable(ke->text()));
+                  }
+            int k = ke->key();
+            if ((state == EDIT) && ((k == Qt::Key_Tab) || (k == Qt::Key_Backtab))) {
                   keyPressEvent(ke);
                   return true;
                   }
@@ -1366,7 +1371,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   // HACK for whole measure rest:
                   if (ns == 0 || ns == es) {    // last segment?
                         Element* e = s->element(staffStart * VOICES);
-                        if (e && e->type() == REST && static_cast<Rest*>(e)->tickLen() == 0)
+                        if (e && e->type() == REST && static_cast<Rest*>(e)->duration().type() == Duration::V_MEASURE)
                               x2 = s->measure()->abbox().right() - _spatium;
                         }
 
@@ -2032,8 +2037,13 @@ if (debugMode)
             _score->startCmd();
             System* s = measure->system();
             int idx   = s->y2staff(pos.y());
-            if (idx != -1)
-                  score()->pasteStaff(doc.documentElement(), measure->tick(), idx);
+            if (idx != -1) {
+                  Segment* seg = measure->first();
+                  // assume there is always a ChordRest segment
+                  while (seg->subtype() != Segment::SegChordRest)
+                        seg = seg->next();
+                  score()->pasteStaff(doc.documentElement(), (ChordRest*)(seg->element(idx)));
+                  }
             event->acceptProposedAction();
             _score->setLayoutAll(true);
             _score->endCmd();

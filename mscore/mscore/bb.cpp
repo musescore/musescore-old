@@ -418,7 +418,7 @@ bool Score::importBB(const QString& name)
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
-                  Rest* rest = new Rest(this, measure->tick(), 0);
+                  Rest* rest = new Rest(this, measure->tick(), Duration(Duration::V_MEASURE));
                   rest->setTrack(0);
                   Segment* s = measure->getSegment(rest);
                   s->add(rest);
@@ -549,7 +549,9 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       Chord* chord = new Chord(this);
       chord->setTick(tick);
       chord->setTrack(track);
-      chord->setLen(len);
+      Duration d;
+      d.setVal(len);
+      chord->setDuration(d);
       Segment* s = measure->getSegment(chord);
       s->add(chord);
 
@@ -684,7 +686,9 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                                           break;
                                           }
                                     }
-                              Rest* rest = new Rest(this, ctick, len);
+                              Duration d;
+                              d.setVal(len);
+                              Rest* rest = new Rest(this, ctick, d);
                               rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest);
                               s->add(rest);

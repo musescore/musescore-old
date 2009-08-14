@@ -23,6 +23,8 @@
 
 #include "chordrest.h"
 
+class Duration;
+
 //---------------------------------------------------------
 //   Rest
 //---------------------------------------------------------
@@ -46,7 +48,7 @@ class Rest : public ChordRest {
 
    public:
       Rest(Score*);
-      Rest(Score*, int tick, int len);
+      Rest(Score*, int tick, const Duration&);
       virtual Rest* clone() const      { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
 

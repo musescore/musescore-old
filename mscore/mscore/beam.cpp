@@ -161,7 +161,7 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
                   }
             return false;
             }
-      int l = cr->tickLen();
+      int l = cr->ticks();
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
             if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
@@ -385,7 +385,7 @@ void Measure::layoutBeams1()
                         // end beam if there are chords/rests missing
                         // in voice:
                         ChordRest* le = beam->elements().back();
-                        if (le->tick() + le->tickLen() != cr->tick()) {
+                        if (le->tick() + le->ticks() != cr->tick()) {
                               if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet())) {
                                     beamEnd = true;
                                     }
@@ -607,7 +607,7 @@ void Beam::layout()
                   if (c2->staffMove())
                         move = c2->staffMove() * -1;
                   }
-            int tl = cr->tuplet() ? cr->duration().ticks() : cr->tickLen();
+            int tl = cr->tuplet() ? cr->duration().ticks() : cr->ticks();
             if (tl > maxTickLen)
                   maxTickLen = tl;
             }
@@ -1092,7 +1092,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                         continue;
                   Chord* chord = (Chord*)(cr);
                   _up = chord->up();
-                  int tl = chord->tickLen();
+                  int tl = chord->ticks();
                   if (tl > l) {
                         if (nn2) {
                               // create short segment

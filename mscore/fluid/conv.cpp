@@ -23,33 +23,25 @@
 namespace FluidS {
 
 /* conversion tables */
-float fluid_ct2hz_tab[FLUID_CENTS_HZ_SIZE];
-float fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
-float fluid_atten2amp_tab[FLUID_ATTEN_AMP_SIZE];
-float fluid_posbp_tab[128];
-float fluid_concave_tab[128];
-float fluid_convex_tab[128];
-float fluid_pan_tab[FLUID_PAN_SIZE];
+static float fluid_cb2amp_tab[FLUID_CB_AMP_SIZE];
+static float fluid_atten2amp_tab[FLUID_ATTEN_AMP_SIZE];
+static float fluid_concave_tab[128];
+static float fluid_convex_tab[128];
+static float fluid_pan_tab[FLUID_PAN_SIZE];
 
 /*
  * void fluid_synth_init
  *
  * Does all the initialization for this module.
  */
-void fluid_conversion_config(void)
+void fluid_conversion_config()
       {
-      int i;
-      double x;
-
-      for (i = 0; i < FLUID_CENTS_HZ_SIZE; i++)
-            fluid_ct2hz_tab[i] = (float) pow(2.0, (double) i / 1200.0);
-
       /* centibels to amplitude conversion
        * Note: SF2.01 section 8.1.3: Initial attenuation range is
        * between 0 and 144 dB. Therefore a negative attenuation is
        * not allowed.
        */
-      for (i = 0; i < FLUID_CB_AMP_SIZE; i++)
+      for (int i = 0; i < FLUID_CB_AMP_SIZE; i++)
             fluid_cb2amp_tab[i] = (float) pow(10.0, (double) i / -200.0);
 
       /* NOTE: EMU8k and EMU10k devices don't conform to the SoundFont
@@ -58,7 +50,7 @@ void fluid_conversion_config(void)
        * cb_to_amp_table[] in tables.c of the TiMidity++ source, which I'm told
        * was generated from device testing.  By the spec this should be centibels.
        */
-      for (i = 0; i < FLUID_ATTEN_AMP_SIZE; i++)
+      for (int i = 0; i < FLUID_ATTEN_AMP_SIZE; i++)
             fluid_atten2amp_tab[i] = (float) pow(10.0, (double) i / FLUID_ATTEN_POWER_FACTOR);
 
       /* initialize the conversion tables (see fluid_mod.c
@@ -71,69 +63,20 @@ void fluid_conversion_config(void)
       /* convex unipolar positive transform curve */
       fluid_convex_tab[0] = 0;
       fluid_convex_tab[127] = 1.0;
-      x = log10(128.0 / 127.0);
 
       /* There seems to be an error in the specs. The equations are
          implemented according to the pictures on SF2.01 page 73. */
 
-      for (i = 1; i < 127; i++) {
-            x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
+      for (int i = 1; i < 127; i++) {
+            double x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
             fluid_convex_tab[i] = (float) (1.0 - x);
             fluid_concave_tab[127 - i] = (float) x;
             }
 
       /* initialize the pan conversion table */
-      x = M_PI / 2.0 / (FLUID_PAN_SIZE - 1.0);
-      for (i = 0; i < FLUID_PAN_SIZE; i++)
+      double x = M_PI / 2.0 / (FLUID_PAN_SIZE - 1.0);
+      for (int i = 0; i < FLUID_PAN_SIZE; i++)
             fluid_pan_tab[i] = (float) sin(i * x);
-      }
-
-/*
- * fluid_ct2hz
- */
-float fluid_ct2hz_real(float cents)
-      {
-      if (cents < 0)
-            return (float) 1.0;
-      else if (cents < 900)
-            return (float) 6.875 * fluid_ct2hz_tab[(int) (cents + 300)];
-      else if (cents < 2100)
-            return (float) 13.75 * fluid_ct2hz_tab[(int) (cents - 900)];
-      else if (cents < 3300)
-            return (float) 27.5 * fluid_ct2hz_tab[(int) (cents - 2100)];
-      else if (cents < 4500)
-            return (float) 55.0 * fluid_ct2hz_tab[(int) (cents - 3300)];
-      else if (cents < 5700)
-            return (float) 110.0 * fluid_ct2hz_tab[(int) (cents - 4500)];
-      else if (cents < 6900)
-            return (float) 220.0 * fluid_ct2hz_tab[(int) (cents - 5700)];
-      else if (cents < 8100)
-            return (float) 440.0 * fluid_ct2hz_tab[(int) (cents - 6900)];
-      else if (cents < 9300)
-            return (float) 880.0 * fluid_ct2hz_tab[(int) (cents - 8100)];
-      else if (cents < 10500)
-            return (float) 1760.0 * fluid_ct2hz_tab[(int) (cents - 9300)];
-      else if (cents < 11700)
-            return (float) 3520.0 * fluid_ct2hz_tab[(int) (cents - 10500)];
-      else if (cents < 12900)
-            return (float) 7040.0 * fluid_ct2hz_tab[(int) (cents - 11700)];
-      else if (cents < 14100)
-            return (float) 14080.0 * fluid_ct2hz_tab[(int) (cents - 12900)];
-      else
-            return (float) 1.0; /* some loony trying to make you deaf */
-      }
-
-/*
- * fluid_ct2hz
- */
-float fluid_ct2hz(float cents)
-      {
-      /* Filter fc limit: SF2.01 page 48 # 8 */
-      if (cents >= 13500)
-            cents = 13500;             /* 20 kHz */
-      else if (cents < 1500)
-            cents = 1500;              /* 20 Hz */
-      return fluid_ct2hz_real(cents);
       }
 
 /*
@@ -251,16 +194,6 @@ float fluid_tc2sec_release(float tc)
 float fluid_act2hz(float c)
       {
       return (float) (8.176 * pow(2.0, (double) c / 1200.0));
-      }
-
-/*
- * fluid_hz2ct
- *
- * Convert from Hertz to cents
- */
-float fluid_hz2ct(float f)
-      {
-      return (float) (6900 + 1200 * log(f / 440.0) / log(2.0));
       }
 
 /*

@@ -51,8 +51,6 @@ class ChordRest : public DurationElement {
       Spatium _extraLeadingSpace;
       Spatium _extraTrailingSpace;
 
-      int _dots;
-
    public:
       ChordRest(Score*);
       ChordRest(const ChordRest&);
@@ -61,8 +59,8 @@ class ChordRest : public DurationElement {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
-      Segment* segment() const                  { return (Segment*)parent(); }
-      virtual Measure* measure() const          { return (Measure*)(parent()->parent()); }
+      Segment* segment() const                   { return (Segment*)parent(); }
+      virtual Measure* measure() const           { return (Measure*)(parent()->parent()); }
 
       virtual void read(QDomElement, const QList<Tuplet*>&, const QList<Beam*>&) = 0;
       void writeProperties(Xml& xml) const;
@@ -101,9 +99,6 @@ class ChordRest : public DurationElement {
       const QList<Slur*> slurFor() const        { return _slurFor; }
       const QList<Slur*> slurBack() const       { return _slurBack; }
 
-      void setDots(int n)                       { _dots = n; }
-      int dots() const                          { return _dots; }
-      void setLen(int ticks);
       void layoutArticulations();
       Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
       void setExtraLeadingSpace(Spatium v)      { _extraLeadingSpace = v;     }

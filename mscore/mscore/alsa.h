@@ -52,6 +52,8 @@ class AlsaDriver {
       int setSwpar(snd_pcm_t* handle, snd_pcm_sw_params_t* swpar);
       int recover();
 
+      bool rwAccess;
+
       unsigned int           _rate;
       snd_pcm_uframes_t      _frsize;
       unsigned int           _nfrags;

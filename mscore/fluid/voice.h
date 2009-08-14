@@ -192,7 +192,7 @@ class Voice
       Channel* get_channel() const    { return channel; }
       void voice_start();
       void off();
-      void init(Sample*, Channel*, int key, int vel, unsigned int id, double tuning);
+      void init(Sample*, Channel*, int key, int vel, unsigned id, double tuning);
       void gen_incr(int i, float val);
       void gen_set(int i, float val);
       float gen_get(int gen);
@@ -216,8 +216,6 @@ class Voice
       void noteoff();
       void kill_excl();
       int calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_decay);
-      void calculate_runtime_synthesis_parameters();
-
 
       /* A voice is 'ON', if it has not yet received a noteoff
        * event. Sending a noteoff event will advance the envelopes to
@@ -230,7 +228,7 @@ class Voice
       int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
 
       void write(float* l, float* r, float* reverb_buf, float* chorus_buf);
-      void add_mod(Mod* mod, int mode);
+      void add_mod(const Mod* mod, int mode);
 
       static void dsp_float_config();
       int dsp_float_interpolate_none();

@@ -104,6 +104,7 @@ struct Preferences {
       bool landscape;
       bool twosided;
       double spatium;
+      float tuning;                 // synthesizer master tuning offset (440Hz)
       int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
 

@@ -524,7 +524,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   score->staves().push_back(staff);
                   }
             }
-      for (QDomElement e = ee;!e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = ee; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "part-list")
                   xmlPartList(e.firstChildElement());
@@ -2040,7 +2040,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "duration")
                   duration = s.toInt();
             else if (tag == "type")
-                  durationType.setVal(s);
+                  durationType = Duration(s);
             else if (tag == "chord")
                   tick -= lastLen;
             else if (tag == "voice")
@@ -2356,8 +2356,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   durationType.setType(Duration::V_MEASURE);
                   len = 0;
                   }
-            cr = new Rest(score, tick, len);
-            cr->setDuration(durationType);
+            cr = new Rest(score, tick, durationType);
             cr->setDots(dots);
 
             // TODO: try to find out if this rest is part of a beam
@@ -2405,11 +2404,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
                         cr->setTick(tick - (division / 2));
-                        cr->setLen(division / 2); // to get a hook
+                        cr->setDuration(Duration::V_EIGHT);
                         st = Segment::SegGrace;
                         }
                   else {
-                        cr->setTickLen(ticks);
                         if (durationType.type() == Duration::V_INVALID)
                               durationType.setType(Duration::V_QUARTER);
                         cr->setDuration(durationType);
@@ -2562,19 +2560,16 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
                   tuplet->setTrack((staff + relStaff) * VOICES);
-                  tuplet->setNormalNotes(normalNotes);
-                  tuplet->setActualNotes(actualNotes);
+                  tuplet->setRatio(actualNotes, normalNotes);
                   tuplet->setTick(tick);
                   // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
                   // avoid rounding errors:
-                  int bl = duration * actualNotes / normalNotes;
-                  tuplet->setBaseLen((::division * bl) / divisions);
+                  // int bl = duration * actualNotes / normalNotes;
+                  // tuplet->setBaseLen((::division * bl) / divisions);
 
                   // type, placement
 
                   measure->add(tuplet);
-//                  cr->setTuplet(tuplet);
-//                  tuplet->add(cr);
                   }
             else if (tupletType == "stop") {
                   if (tuplet) {
