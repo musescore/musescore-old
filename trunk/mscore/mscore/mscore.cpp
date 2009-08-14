@@ -857,7 +857,7 @@ void MuseScore::helpBrowser1()
             printf("open online manual for language <%s>\n", qPrintable(lang));
       QString help("http://musescore.org/en/handbook");
       if (lang == "de")
-            help = QString::fromUtf8("http://musescore.org/de/handbuch");
+            help = QString::fromUtf8("http://musescore.org/de/handbuch/handbuch");
       else if (lang == "nl")
             help = QString::fromUtf8("http://musescore.org/nl/handboek");
       else if (lang == "fr")
