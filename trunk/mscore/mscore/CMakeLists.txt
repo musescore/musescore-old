@@ -84,11 +84,11 @@ QT4_WRAP_UI (ui_headers
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
-      dynamicproperties.ui textline.ui
+      dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       )
 
 QT4_WRAP_CPP (mocs
-      canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h listedit.h
+      canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
       mscore.h navigator.h pagesettings.h palette.h partedit.h playpanel.h
       preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
@@ -100,6 +100,7 @@ QT4_WRAP_CPP (mocs
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h scscore.h scnote.h scchord.h sctext.h scmeasure.h scbytearray.h
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
+      slurproperties.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -155,7 +156,7 @@ add_executable ( ${ExecutableName}
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp element.cpp exportxml.cpp file.cpp
       hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
-      key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
+      key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp inspector.cpp
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
       navigate.cpp navigator.cpp note.cpp ottava.cpp
       page.cpp pagesettings.cpp palette.cpp part.cpp
@@ -181,7 +182,7 @@ add_executable ( ${ExecutableName}
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scmeasure.cpp scbytearray.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
-      screst.cpp scharmony.cpp
+      screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp
       ${AUDIO}
       )
 

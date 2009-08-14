@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -42,8 +42,6 @@ Tuplet::Tuplet(Score* s)
       _number       = 0;
       _hasBracket   = false;
       _userModified = false;
-      _p1           = QPointF();
-      _p2           = QPointF();
       }
 
 //---------------------------------------------------------
@@ -85,9 +83,9 @@ void Tuplet::layout()
                   _number->setParent(this);
                   }
             if (_numberType == SHOW_NUMBER)
-                  _number->setText(QString("%1").arg(_actualNotes));
+                  _number->setText(QString("%1").arg(_ratio.zaehler()));
             else
-                  _number->setText(QString("%1:%2").arg(_actualNotes).arg(_normalNotes));
+                  _number->setText(QString("%1:%2").arg(_ratio.zaehler()).arg(_ratio.nenner()));
             }
       else {
             if (_number) {
@@ -130,7 +128,12 @@ void Tuplet::layout()
             }
 
       const DurationElement* cr1 = _elements.front();
+      while (cr1->type() == TUPLET)
+            cr1 = static_cast<const Tuplet*>(cr1)->elements().front();
       const DurationElement* cr2 = _elements.back();
+      while (cr2->type() == TUPLET)
+            cr2 = static_cast<const Tuplet*>(cr2)->elements().back();
+
       if (cr1->beam()) {
             if (_bracketType == AUTO_BRACKET)
                   _hasBracket = false;
@@ -149,7 +152,6 @@ void Tuplet::layout()
                         p1 = QPointF(stem->abbox().topLeft());
                   else
                         p1 = QPointF(cr1->abbox().topLeft());
-
                   }
             else {
                   p1 = QPointF(cr1->abbox().topLeft());
@@ -339,17 +341,22 @@ void Tuplet::draw(QPainter& p) const
 void Tuplet::write(Xml& xml) const
       {
       xml.stag(QString("Tuplet id=\"%1\"").arg(_id));
+      if (tuplet())
+            xml.tag("Tuplet", tuplet()->id());
+      Element::writeProperties(xml);
       xml.tag("numberType", _numberType);
       xml.tag("bracketType", _bracketType);
-      xml.tag("baseLen", _baseLen);
-      xml.tag("normalNotes", _normalNotes);
-      xml.tag("actualNotes", _actualNotes);
+      xml.tag("normalNotes", _ratio.nenner());
+      xml.tag("actualNotes", _ratio.zaehler());
+      xml.tag("baseNote",    _baseLen.name());
       if (_number)
             _number->write(xml, "Number");
       if (_userModified) {
             xml.tag("p1", _p1);
             xml.tag("p2", _p2);
             }
+      if (!userOff().isNull())
+            xml.tag("offset", userOff() / spatium());
       xml.etag();
       }
 
@@ -373,12 +380,17 @@ void Tuplet::read(QDomElement e)
                   _numberType = i;
             else if (tag == "bracketType")
                   _bracketType = i;
-            else if (tag == "baseLen")
-                  _baseLen = i;
+            else if (tag == "baseLen") {          // obsolete
+                  Duration d;
+                  d.setVal(i);
+                  _baseLen = d;
+                  }
+            else if (tag == "baseNote")
+                  _baseLen = Duration(e.text());
             else if (tag == "normalNotes")
-                  _normalNotes = i;
+                  _ratio.setNenner(i);
             else if (tag == "actualNotes")
-                  _actualNotes = i;
+                  _ratio.setZaehler(i);
             else if (tag == "Number") {
                   _number = new Text(score());
                   _number->setParent(this);
@@ -394,9 +406,22 @@ void Tuplet::read(QDomElement e)
                   _userModified = true;
                   _p2 = readPoint(e);
                   }
+            else if (tag == "Tuplet") {
+                  setTuplet(0);
+                  foreach(Tuplet* t, *measure()->tuplets()) {
+                        if (t->id() == i) {
+                              setTuplet(t);
+                              break;
+                              }
+                        }
+                  if (tuplet() == 0)
+                        printf("Tuplet id %d not found\n", i);
+                  }
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      Fraction f(_ratio.nenner(), _baseLen.fraction().nenner());
+      setDuration(Duration(f));
       }
 
 //---------------------------------------------------------
@@ -445,6 +470,7 @@ void Tuplet::add(Element* e)
 
 void Tuplet::remove(Element* e)
       {
+      printf("Tuplet(%p): remove %s %p\n", this, e->name(), e);
       switch(e->type()) {
             case TEXT:
                   if (e == _number)
@@ -453,8 +479,10 @@ void Tuplet::remove(Element* e)
             case CHORD:
             case REST:
             case TUPLET:
-                  if (!_elements.removeOne(static_cast<DurationElement*>(e)))
+                  if (!_elements.removeOne(static_cast<DurationElement*>(e))) {
                         printf("Tuplet::remove: cannot find element\n");
+                        printf("  elements %d\n", _elements.size());
+                        }
                   break;
             default:
                   printf("Tuplet::remove: unknown element\n");
@@ -502,12 +530,7 @@ void Score::tupletDialog()
       if (!td.exec())
             return;
 
-      int len        = cr->tickLen();
-      if (cr->type() == REST && len == 0)
-            len = cr->measure()->tickLen();
-      int baseLen    = len / td.getNormalNotes();
       Tuplet* tuplet = new Tuplet(this);
-      tuplet->setBaseLen(baseLen);
       tuplet->setTrack(cr->track());
       tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
@@ -534,8 +557,7 @@ TupletDialog::TupletDialog(QWidget* parent)
 
 void TupletDialog::setupTuplet(Tuplet* tuplet)
       {
-      tuplet->setNormalNotes(normalNotes->value());
-      tuplet->setActualNotes(actualNotes->value());
+      tuplet->setRatio(actualNotes->value(), normalNotes->value());
       if (number->isChecked())
             tuplet->setNumberType(Tuplet::SHOW_NUMBER);
       else if (relation->isChecked())
@@ -649,5 +671,16 @@ void Tuplet::toDefault()
       _p1           = QPointF();
       _p2           = QPointF();
       setGenerated(true);
+      }
+
+//---------------------------------------------------------
+//   dump
+//---------------------------------------------------------
+
+void Tuplet::dump() const
+      {
+      Element::dump();
+      printf("ratio %d/%d  baseLen %s\n",
+         _ratio.zaehler(), _ratio.nenner(), qPrintable(_baseLen.name()));
       }
 

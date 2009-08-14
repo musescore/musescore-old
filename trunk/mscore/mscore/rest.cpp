@@ -48,19 +48,15 @@ Rest::Rest(Score* s)
       _sym       = quartrestSym;
       }
 
-Rest::Rest(Score* s, int tick, int len)
+Rest::Rest(Score* s, int tick, const Duration& d)
   : ChordRest(s)
       {
       _beamMode  = BEAM_NO;
       _staffMove = 0;
-      _dots      = 0;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
       _sym       = quartrestSym;
       setTick(tick);
-      setTickLen(len);
-      Duration d;
-      d.setVal(len);
       setDuration(d);
       }
 
@@ -101,9 +97,10 @@ void Rest::draw(QPainter& p) const
             }
       else {
             symbols[_sym].draw(p, magS());
-            if (_dots) {
+            int dots = duration().dots();
+            if (dots) {
                   double y = dotline * _spatium * .5;
-                  for (int i = 1; i <= _dots; ++i) {
+                  for (int i = 1; i <= dots; ++i) {
                         double x = symbols[_sym].width(magS())
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
                         symbols[dotSym].draw(p, magS(), x, y);
@@ -233,12 +230,15 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
-                  int len       = score()->inputState().tickLen();
                   Direction dir = c->stemDirection();
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);
-                  n             = score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
-                  score()->nextInputPos(n->chord());
+                  Segment* seg = score()->setNoteRest(this, t, n->pitch(),
+                     score()->inputState().duration,
+                     headGroup, dir);
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
+                  if (cr)
+                        score()->nextInputPos(cr, true);
                   delete e;
                   }
                   break;
@@ -274,23 +274,17 @@ void Rest::write(Xml& xml) const
 
 void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
-      setTickLen(0);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "len")       // obsolete ?!
-                  setTickLen(i);
-            else if (tag == "move")
+            if (tag == "move")
                   _staffMove = i;
             else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
-      if (!duration().isValid()) {
-            Duration dt;
-            headType(tickLen(), &dt, &_dots);
-            setDuration(dt);
-            }
+      if (!duration().isValid())
+            setDuration(Duration(Duration::V_MEASURE));
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
       }
@@ -350,6 +344,7 @@ void Rest::layout()
                   break;
             case Duration::V_INVALID:
             case Duration::V_QUARTER:
+            case Duration::V_ZERO:
                   _sym = quartrestSym;
                   break;
             case Duration::V_EIGHT:

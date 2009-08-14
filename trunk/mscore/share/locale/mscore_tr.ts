@@ -241,37 +241,30 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Akor</translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Nota-gövdesi</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Nota-çengeli</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Süs Notası</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Nota Gövdesi Yönü </translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Notalar: </translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Yardım Çubukları:</translation>
     </message>
 </context>
@@ -1012,38 +1005,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Form</translation>
     </message>
-    <message>
-        <source>ChordRest</source>
-        <translation>Akor Esi (!!!)</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Nota-kirişi</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Kesirleme</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>Nitelikler:</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>Süre-noktaları:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Yukarı</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>Yukarda mı</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>Nota-kirişi Modu:</translation>
-    </message>
 </context>
 <context>
     <name>Dynamic</name>
@@ -1073,14 +1034,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Form</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Nüans İşareti</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>Alt Tip:</translation>
     </message>
 </context>
 <context>
@@ -1797,96 +1750,8 @@ yapılamadı:</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>Ata(sı) (!!!Parent!!!)</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="unfinished">0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>geçersiz</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Öğe</translation>
-    </message>
-    <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">çesildi</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">oluşturuldu</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">görünür</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">sistem</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">alt tip</translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Ses</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Porte</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Zaman</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Uzakık</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Renk</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Pozisyon</translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Konum</translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Büyütme</translation>
     </message>
 </context>
 <context>
@@ -3490,66 +3355,6 @@ kaydetmek ister misiniz?</translation>
     <message>
         <source>Go To: </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Sıkıştırılmış MuseScore Formatı (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">MusicXML Formatı (*xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">Sıkıştırılmış MusicXML Formatı (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">Standart MIDI Dosyası (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF Dosyası (*pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">PostScript Dosyası (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG Bitmap Grafiği (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Ölçeklendirilebilir Vektörel Grafik (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond Formatı (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation type="unfinished">MuseScore: Farklı Kaydet</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore: Bir Kopyasını Kaydet</translation>
     </message>
     <message>
         <source>file open</source>
@@ -5267,101 +5072,6 @@ kaydetmek ister misiniz?</translation>
         <source>note head group</source>
         <translation>nota-başı grubu</translation>
     </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Perde</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota-başı</translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Çizgi</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">İleriyle Bağla</translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Taşı</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Geriyle Bağla</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Arıza</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -6252,6 +5962,14 @@ kaydetmek ister misiniz?</translation>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6638,6 +6356,62 @@ başarısız:</translation>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished">Sıkıştırılmış MuseScore Formatı (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">MusicXML Formatı (*xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">Sıkıştırılmış MusicXML Formatı (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">Standart MIDI Dosyası (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF Dosyası (*pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript Dosyası (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG Bitmap Grafiği (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">Ölçeklendirilebilir Vektörel Grafik (*.svg)</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Lilypond Formatı (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore: Bir Kopyasını Kaydet</translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6837,10 +6611,33 @@ başarısız:</translation>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">Dolap Özellikleri</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">tek parça</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>Düzenleme Modu</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6848,30 +6645,6 @@ başarısız:</translation>
     <message>
         <source>Form</source>
         <translation>Form</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>Bağ</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>Bağ Kesiti</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Yukarı</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>Yön:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>Otomatik</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Aşağı</translation>
     </message>
 </context>
 <context>
@@ -7409,50 +7182,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Form</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Kesirleme</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>numara var mı</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>çizgi var mı</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>taban uzunluğu</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>normal notalar</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>mevcut notalar</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>Akor/Es listesi:</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>Metin Öğesi</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Öğe</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation>Gürlük</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Uzunluk</translation>
     </message>
 </context>
 <context>

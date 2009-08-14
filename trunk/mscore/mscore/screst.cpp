@@ -248,7 +248,9 @@ int ScChordRestPrototype::getTickLen() const
 void ScChordRestPrototype::setTickLen(int v)
       {
       ChordRest* cr = thisChordRest();
-      cr->setLen(v);
+      Duration d;
+      d.setVal(v);
+      cr->setDuration(d);
       }
 
 //---------------------------------------------------------

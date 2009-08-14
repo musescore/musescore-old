@@ -101,28 +101,22 @@ int Score::pos()
       }
 
 //---------------------------------------------------------
-//   changeRest
-//---------------------------------------------------------
-
-void Score::changeRest(Rest* rest, int /*tick*/, int len)
-      {
-      rest->setLen(len);
-      }
-
-//---------------------------------------------------------
 //   addRest
-//    create one Rest at tick with len
+//    create one Rest at tick with duration d
 //    create segment if necessary
 //---------------------------------------------------------
 
-Rest* Score::addRest(int tick, int len, int track)
+Rest* Score::addRest(int tick, int track, Duration d)
       {
       Measure* measure = tick2measure(tick);
-      if (measure->tickLen() == len && (len < (division * 8)))    // whole measure rest?
-            len = 0;
-      Rest* rest = new Rest(this, tick, len);
+      if (measure->tickLen() == d.ticks() && (d < Duration(Duration::V_BREVE))) {
+            printf("  addRest: change to whole measure Rest\n");
+            d.setType(Duration::V_MEASURE);
+            }
+
+      Rest* rest = new Rest(this, tick, d);
       rest->setTrack(track);
-      Segment::SegmentType st = Segment::segmentType(rest->type());
+      Segment::SegmentType st = Segment::SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
@@ -134,57 +128,159 @@ Rest* Score::addRest(int tick, int len, int track)
       }
 
 //---------------------------------------------------------
-//   setRest
-//    create one or more rests to fill "len" ticks
+//   addClone
 //---------------------------------------------------------
 
-Rest* Score::setRest(int tick, int len, int track)
+ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       {
-// printf("setRest tick %d len %d track %d\n", tick, len, track);
-      if (len == 0)
-            return 0;
-      Measure* measure = tick2measure(tick);
+      ChordRest* newcr = (ChordRest*)cr->clone();
+      newcr->setDuration(d);
+      newcr->setTuplet(cr->tuplet());
+      newcr->setTick(tick);
+      Segment* seg = cr->measure()->findSegment(Segment::SegChordRest, tick);
+      if (seg == 0) {
+            seg = cr->measure()->createSegment(Segment::SegChordRest, tick);
+            undoAddElement(seg);
+            }
+      newcr->setParent(seg);
+      undoAddElement(newcr);
+      return newcr;
+      }
 
+//---------------------------------------------------------
+//   setRest
+//    create one or more rests to fill "l"
+//---------------------------------------------------------
+
+void Score::setRest(int tick, int track, Fraction l)
+      {
       //
-      // set whole measure rest if
-      //    - rest covers whole measure
-      //    - len < brevis
-      if ((measure->tickLen() == len) && (len < (division * 8)))
-            return addRest(tick, len, track);
+      // compute list of durations which will fit l
+      //
+      QList<Duration> dList = toDurationList(l);
+      if (dList.isEmpty())
+            return;
 
-      QList<int> restList;
-      while (len > 0) {
-            Duration dt;
-            for (int i = 0; i < Duration::types - 1; ++i) {
-                  dt.setType(Duration::DurationType(i));
-                  int ticks = dt.ticks();
-                  if ((len - ticks) >= 0) {
-                        restList.append(ticks);
-                        len -= ticks;
-                        break;
-                        }
-                  }
-            }
-      if (restList.isEmpty()) {
-            printf("setRest at %d len %d failed\n", tick, len);
-            return 0;
-            }
-      Rest* rest = 0;
-      if (((measure->tick() - tick) % restList[0]) == 0) {
-            foreach(int len, restList) {
-                  rest = addRest(tick, len, track);
-                  tick += len;
-                  }
+      Measure* measure = tick2measure(tick);
+      if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
+            foreach(Duration d, dList)
+                  tick += addRest(tick, track, d)->ticks();
             }
       else {
-            for (int i = restList.size() - 1; i >= 0; --i) {
-                  int len = restList[i];
-                  rest = addRest(tick, len, track);
-                  tick += len;
-                  }
+            for (int i = dList.size() - 1; i >= 0; --i)
+                  tick += addRest(tick, track, dList[i])->ticks();
             }
-      return rest;
       }
+
+//---------------------------------------------------------
+//   setRest
+//---------------------------------------------------------
+
+/**
+ Set rest(\a len) at position \a tick / \a track
+ return false if rest could not be set
+*/
+
+void Score::setRest(int tick, int track, Fraction l, bool useDots)
+      {
+printf("setRest at %d(%d) len %d/%d useDots %d\n", tick, track, l.zaehler(), l.nenner(), useDots);
+      setRest(tick, track, l);
+#if 0 // TODO-Z
+      int stick = tick;
+      Measure* measure = tick2measure(stick);
+      if (measure == 0 || (measure->tick() + measure->tickLen()) == tick) {
+            printf("setRest(%d,%d,%d,%d):  ...measure not found (%p)\n", tick, track, int(len.type()), useDots, measure);
+            return false;
+            }
+      int measureEndTick = measure->tick() + measure->tickLen();
+      if (tick + len > measureEndTick)
+            len -= (tick + len) - measureEndTick;
+      if (len <= 0)
+            return false;
+
+      setLayout(measure);
+      Segment* segment = measure->first();
+      int noteLen      = 0;
+      while (segment) {
+            for (; segment; segment = segment->next()) {
+                  if (segment->tick() >= stick)
+                        break;
+                  }
+            if (segment == 0 || segment->tick() != stick) {
+                  printf("setRest: ..no segment at tick %d found\n", stick);
+                  return false;
+                  }
+            Element* element = segment->element(track);
+            int l = 0;
+            if (element && element->isChordRest()) {
+                  ChordRest* cr = static_cast<ChordRest*>(element);
+                  if (cr->tuplet()) {
+                        l = cr->tuplet()->tickLen();
+                        cmdDeleteTuplet(cr->tuplet(), false);
+                        }
+                  else {
+                        l = cr->tickLen();
+                        if (l == 0)
+                              l = measure->tickLen();
+                        undoRemoveElement(element);
+                        if (segment->isEmpty())
+                              undoRemoveElement(segment);
+                        }
+                  }
+            // do not count len of grace note
+            if (segment->subtype() == Segment::SegGrace) {
+                  l = 0;
+                  segment = segment->next();
+                  }
+            else {
+                  segment = segment->next();
+                  if (l == 0) {
+                        if (segment == 0)
+                              l = measure->tick() + measure->tickLen() - stick;
+                        else
+                              l = segment->tick() - stick;
+                        }
+                  }
+            noteLen += l;
+            stick   += l;
+            if (noteLen >= len)     // collected enough time?
+                  break;
+            }
+      if (noteLen < len)
+            printf("setRest: cannot find segment! rest: %d\n", len - noteLen);
+
+      Rest* rest = 0;
+      Duration d;
+      d.setVal(len);
+      if (useDots) {
+            rest = new Rest(this);
+            rest->setTick(tick);
+            rest->setDuration(d);
+            rest->setTrack(track);
+            Segment::SegmentType st = Segment::SegChordRest;
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoAddElement(seg);
+                  }
+            rest->setParent(seg);
+            undoAddElement(rest);
+            }
+      else {
+            rest = setRest(tick, d, track);
+            }
+      if (rest)
+            select(rest, SELECT_SINGLE, 0);
+      int restLen = noteLen - len;
+      if (restLen > 0) {
+            Duration d;
+            d.setVal(restLen);
+            setRest(tick + len, d, track);
+            }
+      layoutAll = true;
+#endif
+      }
+
 
 //---------------------------------------------------------
 //   addNote
@@ -363,21 +459,20 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
-      int len  = _is.tickLen();
       Position p;
       if (!getPosition(&p, pos, _is.voice())) {
             printf("cannot put note here, get position failed\n");
             return;
             }
-
-
-	  //no note value selected
-	  if(len==0){
-			len = p.measure->tickLen();
-			_is.duration.setVal(len);
-			len = _is.tickLen();
-			setPadState();
-			}
+#if 0  // TODO: CHECK
+      // no note value selected
+      if (len == 0) {
+            len = p.measure->tickLen();
+            _is.duration.setVal(len);
+            len = _is.tickLen();
+            setPadState();
+            }
+#endif
 
       int tick                = p.tick;
       int staffIdx            = p.staffIdx;
@@ -415,18 +510,15 @@ void Score::putNote(const QPointF& pos, bool replace)
                   printf("cannot put note here, not at measure start (track %d)\n", track);
                   return;
                   }
-            _is.cr = setRest(tick, m->tickLen(), _is.track);
+            _is.cr = addRest(tick, _is.track, Duration(Duration::V_MEASURE));
             }
       ChordRest* cr = _is.cr;
       if (cr == 0)
             return;
 
       bool addToChord = false;
-      int tl          = len;
 
-      if (cr->tuplet())
-            tl = cr->tickLen();
-      if (!replace && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
+      if (!replace && (cr->duration() == _is.duration) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
             if (note) {
@@ -442,34 +534,19 @@ void Score::putNote(const QPointF& pos, bool replace)
                   Note* note = addNote(static_cast<Chord*>(cr), pitch);
                   select(note, SELECT_SINGLE, 0);
                   }
-            else {
-                  if (cr->tuplet())
-                        setTupletChordRest(cr, pitch, len);
-                  else
-                        setNote(tick, track, pitch, len, headGroup, stemDirection);
-                  }
+            else
+                  setNoteRest(cr, track, pitch, _is.duration, headGroup, stemDirection);
             }
       else {
             // replace chord
-            if (cr && cr->tuplet())
-                  setTupletChordRest(cr, pitch, len);
-            else {
-                  if (_is.rest)
-                        setRest(tick, track, len, _is.dots);
-                  else
-                        setNote(tick, track, pitch, len, headGroup, stemDirection);
-                  }
+            if (_is.rest)
+                  pitch = -1;
+            setNoteRest(cr, track, pitch, _is.duration, headGroup, stemDirection);
             }
 
-      int nextTick = _is.cr->tick() + _is.cr->tickLen();
       _is.cr = nextChordRest(_is.cr);
-      if ((_is.cr == 0) && (_is.track % VOICES)) {
-            Segment* s = tick2segment(nextTick);
-            int track = (_is.track / VOICES) * VOICES;
-            _is.cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
-            }
       if (_is.cr)
-            emit posChanged(_is.pos());
+            emit posChanged(_is.cr->tick());
 
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
@@ -594,13 +671,11 @@ void Score::cmdAddTie()
             }
       Chord* chord  = note->chord();
       if (noteEntryMode()) {
-            if (_is.pos() == 0) {
+            if (_is.cr == 0) {
                   printf("cmdAddTie: no pos\n");
                   return;
                   }
-// printf("cmdAdd Tie pos %d cr %p\n", _is.pos(), _is.cr);
             Note* n = cmdAddPitch1(note->pitch(), false);
-// printf("cmdAdd Tie %p %p %d-%d\n", note, n, note->chord()->tick(), n->chord()->tick());
             if (n) {
                   Tie* tie = new Tie(this);
                   tie->setStartNote(note);
@@ -924,7 +999,8 @@ void Score::deleteItem(Element* el)
                   // replace with rest if voice 0 or if in tuplet
                   Tuplet* tuplet = chord->tuplet();
                   if ((el->voice() == 0 || tuplet) && (chord->noteType() == NOTE_NORMAL)) {
-                        Rest* rest = new Rest(this, chord->tick(), chord->tickLen());
+                        Rest* rest = new Rest(this, chord->tick(), chord->duration());
+                        rest->setDuration(chord->duration());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
                         undoAddElement(rest);
@@ -1128,20 +1204,27 @@ void Score::cmdDeleteSelection()
             Segment* s2 = selection()->endSegment();
             int track1  = selection()->staffStart * VOICES;
             int track2  = selection()->staffEnd * VOICES;
+printf("delete staff %d-%d\n", track1, track2);
             for (Segment* s = s1; s != s2; s = s->next1()) {
                   if (s->subtype() != Segment::SegChordRest)
                         continue;
                   for (int track = track1; track < track2; ++track) {
-                        if (track % VOICES == 0)
-                              continue;
+//                        if (track % VOICES == 0)
+//                              continue;
                         if (s->element(track)) {
-                              Element* e = s->element(track);
-                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                               if (cr->tuplet()) {
-                                    cmdDeleteTuplet(cr->tuplet(), false);
+                                    //
+                                    // remove top level tuplet
+                                    //
+                                    Tuplet* t = cr->tuplet();
+                                    while (t->tuplet())
+                                          t = t->tuplet();
+                                    cmdDeleteTuplet(t, false);
                                     continue;
                                     }
-                              undoRemoveElement(s->element(track));
+printf("  delete %s %s\n", cr->name(), qPrintable(cr->duration().name()));
+                              undoRemoveElement(cr);
                               }
                         }
                   if (s->isEmpty())
@@ -1163,8 +1246,12 @@ void Score::cmdDeleteSelection()
                   while (gapLen) {
                         Measure* m = tick2measure(tick);
                         int maxGap = m->tick() + m->tickLen() - tick;
-                        int len = gapLen > maxGap ? maxGap : gapLen;
-                        setRest(tick, staffIdx * VOICES, len, false);
+                        int len    = gapLen > maxGap ? maxGap : gapLen;
+                        Duration d;
+                        d.setVal(len);
+                        Fraction f = d.fraction();
+printf("  setRest ticks %d  %d/%d\n", len, f.zaehler(), f.nenner());
+                        setRest(tick, staffIdx * VOICES, f, false);
                         gapLen -= len;
                         tick   += len;
                         }
@@ -1174,6 +1261,7 @@ void Score::cmdDeleteSelection()
             return;
             }
       else {
+printf("delete elements\n");
             // deleteItem modifies selection()->elements() list,
             // so we need a local copy:
             foreach(Element* e, *selection()->elements()) {
@@ -1321,77 +1409,122 @@ void Score::cmdTuplet(int n)
       if (cr == 0)
             return;
 
-      Duration duration = cr->duration();
-      // TODO: Check for whole measure
-
-printf("duration %d\n", int(duration.type()));
       int tick = cr->tick();
-      int ticks = duration.type() != Duration::V_MEASURE ? cr->tickLen() : cr->measure()->tickLen();
+      Duration duration = cr->duration();
+      if (duration.type() == Duration::V_MEASURE) {
+            int tz, tn;
+            getSigmap()->timesig(tick, tz, tn);
+            Fraction f(tz, tn);
+            duration = Duration(f);
+            }
+      if (duration.dots() > 1) {
+            printf("cannot create tuplet for this duration\n");
+            return;
+            }
+      Fraction f(duration.fraction());
 
-      int tz, tn;
-      getSigmap()->timesig(tick, tz, tn);
+      Tuplet* tuplet = new Tuplet(this);
+      Tuplet* ot = cr->tuplet();
 
-      int normalNotes=2, actualNotes=3;
-      switch (n) {
-            case 2:                       // duplet
-                  normalNotes = 3;
-                  actualNotes = 2;
-                  break;
-            case 3:                       // triplet
-                  normalNotes = 2;
-                  actualNotes = 3;
-                  duration = duration.shift(1);
-                  break;
-            case 4:                       // quadruplet
-                  normalNotes = 6;
-                  actualNotes = 4;
-                  break;
-            case 5:                       // quintuplet
-                  {
-                  // HACK: whole measure rest with time signature 6/8
-                  if (ticks == (3 * division) &&  tz == 6 && tn == 8)
-                        normalNotes = 6;
-                  else
-                        normalNotes = 4;
-                  actualNotes = 5;
+      if (duration.dots() == 0) {
+            switch (n) {
+                  case 2:                       // duplet
+                  case 4:                       // quadruplet
+                  case 8:                       // octuplet
+                        printf("this does not create a tuplet\n");
+                        return;
+                  case 3:                       // triplet
+                        tuplet->setRatio(3, 2);
+                        duration = duration.shift(1);
+                        break;
+                  case 5:                       // quintuplet
+                        {
+                        // HACK: whole measure rest with time signature 6/8
+                        int tz, tn;
+                        getSigmap()->timesig(tick, tz, tn);
+                        int ticks = duration.type() != Duration::V_MEASURE ? cr->ticks() : cr->measure()->tickLen();
+                        if (ticks == (3 * division) &&  tz == 6 && tn == 8)
+                              tuplet->setRatio(5, 6);
+                        else {
+                              //duration = duration.shift(1);
+                              //tuplet->setRatio(5, 2);
+                              // alternativ:
+                              duration = duration.shift(2);
+                              tuplet->setRatio(5, 4);
+                              }
+                        }
+                        break;
+                  case 6:                       // sextuplet
+                        tuplet->setRatio(6, 4);
+                        duration = duration.shift(1);
+                        break;
+                  case 7:                       // septuplet
+                        tuplet->setRatio(7, 4);
+                        // tuplet->setRatio(6, 4);  alternative
+                        duration = duration.shift(2);
+                        break;
+                  case 9:                       // nonuplet
+                        tuplet->setRatio(9, 8);
+                        duration = duration.shift(3);
+                        break;
                   }
-                  break;
-            case 6:                       // sextuplet
-                  normalNotes = 4;
-                  actualNotes = 6;
-                  duration = duration.shift(1);
-                  break;
-            case 7:                       // septuplet
-                  normalNotes = 4;        // (sometimes 6)
-                  actualNotes = 7;
-                  duration = duration.shift(1);
-                  break;
-            case 8:                       // octuplet
-                  normalNotes = 6;
-                  actualNotes = 8;
-                  duration = duration.shift(1);
-                  break;
-            case 9:                       // nonuplet
-                  normalNotes = 8;        // (sometimes 6)
-                  actualNotes = 9;
-                  break;
-            default:
-                  printf("illegal tuplet %d\n", n);
-                  return;
+            }
+      else {
+            duration.setDots(0);
+            switch (n) {
+                  case 3:                       // triplet
+                  case 6:                       // sextuplet
+                        printf("this does not create a tuplet\n");
+                        return;
+                  case 2:                       // duplet
+                        tuplet->setRatio(4, 3);
+                        duration = duration.shift(1);
+                        break;
+                  case 4:                       // quadruplet
+                        tuplet->setRatio(4, 3);
+                        duration = duration.shift(1);
+                        break;
+                  case 5:                       // quintuplet
+                        tuplet->setRatio(5, 3);
+                        duration = duration.shift(1);
+                        break;
+                  case 7:                       // septuplet
+                        tuplet->setRatio(7, 6);
+                        duration = duration.shift(2);
+                        break;
+                  case 8:                       // octuplet
+                        tuplet->setRatio(8, 6);
+                        duration = duration.shift(1);
+                        break;
+                  case 9:                       // nonuplet
+                        tuplet->setRatio(9, 6);
+                        duration = duration.shift(2);
+                        break;
+                  }
             }
 
-printf("   duration %d\n", int(duration.type()));
-      int baseLen = ticks / normalNotes;
-      Tuplet* tuplet = new Tuplet(this);
-      tuplet->setDuration(cr->duration());
+      //
+      // "duration" is the duration of one tuple element
+      //
+      // "tuplet time" is "normal time" / tuplet->ratio()
+      //    Example: an 1/8 has 240 midi ticks, in an 1/8 triplet the note
+      //             has a tick duration of 240 / (3/2) = 160 ticks
+      //
 
-      tuplet->setNormalNotes(normalNotes);
-      tuplet->setActualNotes(actualNotes);
-      tuplet->setBaseLen(baseLen);
+      tuplet->setDuration(cr->duration());
+      tuplet->setBaseLen(duration);
+
+      printf("cmdTuplet: "); tuplet->dump();
+
       tuplet->setTrack(cr->track());
       tuplet->setTick(tick);
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
+
+      if (ot) {
+//            ot->add(tuplet);
+            tuplet->setTuplet(ot);
+            }
       cmdCreateTuplet(cr, tuplet);
 
       const QList<DurationElement*>& cl = tuplet->elements();
@@ -1405,69 +1538,51 @@ printf("   duration %d\n", int(duration.type()));
       if (el) {
             select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
-            _is.duration = duration;
+            _is.duration = duration;      // ??
             setPadState();
             }
       }
 
 //---------------------------------------------------------
 //   cmdCreateTuplet
+//    replace cr with tuplet
 //---------------------------------------------------------
 
 void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
       {
-      int normalNotes  = tuplet->normalNotes();
-      int actualNotes  = tuplet->actualNotes();
+printf("createTuplet\n");
+
       int track        = cr->track();
       Measure* measure = cr->measure();
-
-      int len = cr->tickLen();
-      if (cr->type() == REST && len == 0)
-            len = cr->measure()->tickLen();
-
-      int baseLen = len / normalNotes;
-      if (len % normalNotes) {
-            printf("cannot handle tuplet (rest %d)\n", len % normalNotes);
-            return;
-            }
-
-      //---------------------------------------------------
-      //    - remove rest/note
-      //    - replace with note + (actualNotes-1) rests
-      //    - add 2 rests of 1/d2 duration as placeholder
-      //---------------------------------------------------
-
-      int tick = cr->tick();
+      int tick         = cr->tick();
       Segment* segment = cr->segment();
+
+printf("  remove %p\n", cr);
       undoRemoveElement(cr);
       if (segment->isEmpty())
             undoRemoveElement(segment);
-
       undoAddElement(tuplet);
-
-      int ticks = tuplet->actualTickLen(baseLen);
 
       if (cr->type() == CHORD) {
             cr = new Chord(this);
-            cr->setTick(tick);
-            cr->setTuplet(tuplet);
-            cr->setTrack(track);
             Note* note = new Note(this);
             note->setPitch(getSelectedNote()->pitch());
             note->setTpc(getSelectedNote()->tpc());
             note->setTrack(track);
             cr->add(note);
             }
-      else {
+      else
             cr = new Rest(this);
-            cr->setTick(tick);
-            cr->setTuplet(tuplet);
-            cr->setTrack(track);
-            }
-      cr->setTickLen(ticks);
-      Duration dt;
-      dt.setVal(baseLen);
-      cr->setDuration(dt);
+
+      int actualNotes  = tuplet->actualNotes();
+
+      cr->setTick(tick);
+      cr->setTuplet(tuplet);
+      cr->setTrack(track);
+      cr->setDuration(tuplet->baseLen());
+
+printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
+      qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
 
       Segment::SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
@@ -1478,16 +1593,15 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
       cr->setParent(seg);
       undoAddElement(cr);
 
+      int ticks = cr->ticks();
+
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
             Rest* rest = new Rest(this);
             rest->setTick(tick);
             rest->setTuplet(tuplet);
             rest->setTrack(track);
-            rest->setTickLen(ticks);
-            Duration dt;
-            dt.setVal(baseLen);
-            rest->setDuration(dt);
+            rest->setDuration(tuplet->baseLen());
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -1599,229 +1713,33 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
       }
 
 //---------------------------------------------------------
-//   setTupletChordRest
-//    if pitch == -1 set rest
-//---------------------------------------------------------
-
-Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
-      {
-// printf("setTupletChordRest %d %d\n", pitch, len);
-
-      Tuplet* tuplet = cr->tuplet();
-      int bl         = tuplet->baseLen();
-
-      if (len < bl) {
-            int i = 2;
-            for (i = 2; i < 256; i <<= 1) {
-                  if (len * i == bl)
-                        break;
-                  }
-            if (i >= 256) {
-                  printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
-                  return 0;
-                  }
-            }
-
-      //---------------------------------------------------
-      //    make gap for new note/rest
-      //---------------------------------------------------
-
-      const QList<DurationElement*>& crl = tuplet->elements();
-      int n = crl.size();
-      int i = 0;
-      for (; i < n; ++i) {
-            if (crl[i] == cr)
-                  break;
-            }
-      if (i == n) {
-            printf("setTupletChordRest: cr not found in tuplet\n");
-            return 0;
-            }
-      int remaining = len;
-      int ii = i;
-      for (; ii < n; ++ii) {
-            remaining -= crl[ii]->duration().ticks();
-            if (remaining <= 0)
-                  break;
-            }
-      if (remaining > 0) {
-            printf("setTupletChordRest: note/rest does not fit\n");
-            return 0;
-            }
-      remaining = len;
-      ii   = i;
-      Measure* measure = cr->measure();
-      setLayout(measure);
-
-      for (; ii < n; ++ii) {
-            DurationElement* el = crl[ii];
-            undoRemoveElement(el);
-            if (el->isChordRest())
-                  measure->cmdRemoveEmptySegment(static_cast<Segment*>(el->parent()));
-            --n;
-            --ii;
-            remaining -= el->duration().ticks();
-            if (remaining <= 0)
-                  break;
-            }
-
-      //---------------------------------------------------
-      //    set new note/rest
-      //---------------------------------------------------
-
-      Duration dt;
-      int dots;
-      headType(len, &dt, &dots);
-
-      int tick = cr->tick();
-      int tl   = tuplet->actualTickLen(len);
-
-      Element* el = 0;
-      if (pitch != -1) {
-            Note* note = new Note(this);
-            el = note;
-            note->setPitch(pitch);
-            note->setTrack(cr->track());
-            mscore->play(note);
-            Chord* chord = new Chord(this);
-            chord->setTick(tick);
-            chord->add(note);
-            chord->setTickLen(tl);
-            chord->setDuration(dt);
-            chord->setDots(dots);
-            chord->setTrack(cr->track());
-            Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
-            if (segment == 0) {
-                  segment = measure->createSegment(Segment::SegChordRest, tick);
-                  undoAddElement(segment);
-                  }
-            chord->setParent(segment);
-            undoAddElement(chord);
-            tuplet->add(chord);
-            chord->setTuplet(tuplet);
-            select(note, SELECT_SINGLE, cr->track()); // sets _is.cr
-            spell(note);
-            }
-      else {
-            Rest* rest = new Rest(this);
-            el = rest;
-            rest->setTrack(cr->track());
-            rest->setTick(tick);
-            rest->setTickLen(tl);
-            rest->setDuration(dt);
-            rest->setDots(dots);
-            Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
-            if (segment == 0) {
-                  segment = measure->createSegment(Segment::SegChordRest, tick);
-                  undoAddElement(segment);
-                  }
-            rest->setParent(segment);
-            undoAddElement(rest);
-            rest->setTuplet(tuplet);
-            tuplet->add(rest);
-            select(rest, SELECT_SINGLE, cr->track()); // sets _is.cr
-            }
-
-      //---------------------------------------------------
-      //    fill gap with rest(s)
-      //---------------------------------------------------
-
-      if (remaining < 0) {
-            remaining = -remaining;
-            tick += tl;
-printf("fill gap at %d len %d\n", tick, remaining);
-            while (remaining > 0) {
-                  Duration dt;
-                  dt.setVal(remaining);
-                  int tl = tuplet->actualTickLen(dt.ticks());
-                  Rest* rest = new Rest(this);
-                  rest->setTrack(cr->track());
-                  rest->setTick(tick);
-                  rest->setTickLen(tl);
-                  rest->setDuration(dt);
-                  Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
-                  if (segment == 0) {
-                        segment = measure->createSegment(Segment::SegChordRest, tick);
-                        undoAddElement(segment);
-                        }
-                  rest->setParent(segment);
-                  undoAddElement(rest);
-                  rest->setTuplet(tuplet);
-                  tuplet->add(rest);
-                  remaining -= dt.ticks();
-                  tick += tl;
-                  }
-            }
-      return el;
-      }
-
-//---------------------------------------------------------
 //   cmdEnterRest
 //---------------------------------------------------------
 
 void Score::cmdEnterRest()
       {
-      if (!noteEntryMode())
-            setNoteEntry(true);
-      if (_is.cr == 0) {
-            printf("cannot enter rest here\n");
-            return;
-            }
-
-      expandVoice();
-
-      ChordRest* cr = _is.cr;
-      if (cr->tuplet()) {
-            setTupletChordRest(cr, -1, _is.tickLen());
-            }
-      else {
-            setRest(_is.pos(), _is.track, _is.tickLen(), _is.dots);
-
-            // go to next ChordRest
-            cr = nextChordRest(_is.cr);
-            if ((cr == 0) && (_is.track % VOICES)) {
-                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
-                  int track = (_is.track / VOICES) * VOICES;
-                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
-                  }
-            _is.cr = cr;
-            if (_is.cr)
-                  emit posChanged(_is.pos());
-            }
-      _is.rest = false;  // continue with normal note entry
+      cmdEnterRest(_is.duration);
       }
 
 //---------------------------------------------------------
 //   cmdEnterRest
 //---------------------------------------------------------
 
-void Score::cmdEnterRest(Duration::DurationType d)
+void Score::cmdEnterRest(const Duration& d)
       {
+printf("cmdEnterRest %s\n", qPrintable(d.name()));
       if (!noteEntryMode())
             setNoteEntry(true);
       if (_is.cr == 0) {
             printf("cannot enter rest here\n");
             return;
             }
-      ChordRest* cr = _is.cr;
-      int ticks = Duration(d).ticks();
-      if (cr->tuplet()) {
-            setTupletChordRest(cr, -1, ticks);
-            }
-      else {
-            setRest(_is.pos(), _is.track, ticks, 0);
 
-            // go to next ChordRest
-            cr = nextChordRest(_is.cr);
-            if ((cr == 0) && (_is.track % VOICES)) {
-                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
-                  int track = (_is.track / VOICES) * VOICES;
-                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
-                  }
-            _is.cr = cr;
-            if (_is.cr)
-                  emit posChanged(_is.pos());
-            }
+      int track = _is.cr->track();
+      Segment* seg = setNoteRest(_is.cr, track, -1, d, 0, AUTO);
+      ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+      if (cr)
+            nextInputPos(cr, false);
       _is.rest = false;  // continue with normal note entry
       }
 
@@ -1859,46 +1777,37 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
 
 void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       {
-      Measure* measure = tuplet->measure();
       foreach(DurationElement* de, tuplet->elements()) {
             if (de->type() == CHORD || de->type() == REST)
                   removeChordRest(static_cast<ChordRest*>(de), true);
-            else if (de->type() == TUPLET)
-                  cmdDeleteTuplet(static_cast<Tuplet*>(de), replaceWithRest);
             else
-                  printf("cmdDeleteTuplet: unknown type %s\n", de->name());
+                  cmdDeleteTuplet(static_cast<Tuplet*>(de), false);
             }
       undoRemoveElement(tuplet);
-      int len  = tuplet->tickLen();
-      if (!replaceWithRest)
-            return;
-
-      int tick = tuplet->tick();
-      Rest* rest = new Rest(this, tick, len);
-      rest->setTrack(tuplet->track());
-      Segment::SegmentType st = Segment::SegChordRest;
-      Segment* seg = measure->findSegment(st, tick);
-      if (seg == 0) {
-            seg = measure->createSegment(st, tick);
-            undoAddElement(seg);
+      if (replaceWithRest) {
+            Rest* rest = addRest(tuplet->tick(), tuplet->track(), tuplet->duration());
+            if (tuplet->tuplet()) {
+                  rest->setTuplet(tuplet->tuplet());
+                  tuplet->tuplet()->add(rest);
+                  }
             }
-      rest->setParent(seg);
-      undoAddElement(rest);
       }
 
 //---------------------------------------------------------
 //   nextInputPos
 //---------------------------------------------------------
 
-void Score::nextInputPos(ChordRest* cr)
+void Score::nextInputPos(ChordRest* cr, bool doSelect)
       {
       ChordRest* ncr = nextChordRest(cr);
       if ((ncr == 0) && (_is.track % VOICES)) {
-            Segment* s = tick2segment(cr->tick() + cr->tickLen());
+            Segment* s = tick2segment(cr->tick() + cr->ticks());
             int track = (cr->track() / VOICES) * VOICES;
             ncr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
       _is.cr = ncr;
+      if (doSelect)
+            select(ncr, SELECT_SINGLE, 0);
       if (ncr)
             emit posChanged(ncr->tick());
       }

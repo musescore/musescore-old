@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
+    <width>681</width>
     <height>348</height>
    </rect>
   </property>
@@ -22,8 +22,11 @@
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox">
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
      <property name="title">
-      <string comment="do not translate">Element</string>
+      <string notr="true" comment="do not translate">Element</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -40,7 +43,7 @@
         <item>
          <widget class="QPushButton" name="parentButton">
           <property name="text">
-           <string>Parent</string>
+           <string notr="true">Parent</string>
           </property>
          </widget>
         </item>
@@ -59,50 +62,43 @@
         </item>
         <item>
          <widget class="QLabel" name="address">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>0</string>
+           <string notr="true">0</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>6</number>
-        </property>
+       <layout class="QGridLayout" name="gridLayout_2">
         <property name="margin">
          <number>0</number>
         </property>
-        <item>
+        <item row="0" column="0">
          <widget class="QCheckBox" name="selected">
           <property name="text">
-           <string comment="do not translate">selected</string>
+           <string notr="true" comment="do not translate">selected</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="2">
          <widget class="QCheckBox" name="generated">
           <property name="text">
-           <string comment="do not translate">generated</string>
+           <string notr="true" comment="do not translate">generated</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="3">
          <widget class="QCheckBox" name="visible">
           <property name="text">
-           <string comment="do not translate">visible</string>
+           <string notr="true" comment="do not translate">visible</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QCheckBox" name="systemFlag">
-          <property name="text">
-           <string comment="do not translate">system</string>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="0" column="5">
          <widget class="QLabel" name="label_4">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -110,21 +106,27 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string comment="do not translate">subtype</string>
+           <string notr="true" comment="do not translate">subtype</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight</set>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="6">
          <widget class="QSpinBox" name="subtype">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -134,18 +136,46 @@
           </property>
          </widget>
         </item>
-        <item>
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="selectable">
+          <property name="text">
+           <string>selectable</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>221</width>
-            <height>20</height>
-           </size>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QCheckBox" name="droptarget">
+          <property name="text">
+           <string>droptarget</string>
           </property>
-         </spacer>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QCheckBox" name="systemFlag">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true" comment="do not translate">system</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QDoubleSpinBox" name="mag">
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string notr="true" comment="do not translate">Mag</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -159,8 +189,11 @@
         </property>
         <item>
          <widget class="QLabel" name="label">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string comment="do not translate">Voice</string>
+           <string notr="true" comment="do not translate">Track</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -171,12 +204,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="voice">
+         <widget class="QSpinBox" name="track">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -190,35 +226,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string comment="do not translate">Staff</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="staff">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="specialValueText">
-           <string>invalid</string>
-          </property>
-          <property name="minimum">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string comment="do not translate">Time</string>
+           <string notr="true" comment="do not translate">Tick</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -235,6 +245,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -254,38 +267,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string comment="do not translate">Len</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::PlainText</enum>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="duration">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-          <property name="maximum">
-           <number>999999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_3">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string comment="do not translate">Color</string>
+           <string notr="true" comment="do not translate">Color</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -315,7 +302,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string comment="do not translate">Pos</string>
+           <string notr="true" comment="do not translate">Pos</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -360,7 +347,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string comment="do not translate">CPos</string>
+           <string notr="true" comment="do not translate">CPos</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -375,6 +362,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true">canvas x position</string>
+          </property>
           <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
@@ -388,6 +378,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true">canvas y position</string>
+          </property>
           <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
@@ -396,7 +389,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string comment="do not translate">Offset</string>
+           <string notr="true" comment="do not translate">Offset</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -459,7 +452,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string comment="do not translate">BBox</string>
+           <string notr="true" comment="do not translate">BBox</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -533,23 +526,6 @@
           </property>
           <property name="maximum">
            <double>100000.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string comment="do not translate">Mag</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QDoubleSpinBox" name="mag">
-          <property name="value">
-           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>

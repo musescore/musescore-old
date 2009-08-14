@@ -361,27 +361,56 @@ bool Score::saveFile(bool autosave)
 
 bool Score::saveAs(bool saveCopy)
       {
-      QFileDialog* saveAs = saveCopy ? mscore->saveCopyDialog() : mscore->saveAsDialog();
+      QStringList fl;
+      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
+      fl.append(tr("MuseScore Format (*.mscx)"));
+      fl.append(tr("MusicXML Format (*.xml)"));
+      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
+      fl.append(tr("Standard MIDI File (*.mid)"));
+      fl.append(tr("PDF File (*.pdf)"));
+      fl.append(tr("PostScript File (*.ps)"));
+      fl.append(tr("PNG Bitmap Graphic (*.png)"));
+      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      fl.append(tr("Lilypond Format (*.ly)"));
+#ifdef HAS_AUDIOFILE
+      fl.append(tr("Wave Audio (*.wav)"));
+      fl.append(tr("Flac Audio (*.flac)"));
+      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
+#endif
 
-      if (!saveAs->exec())
-            return false;
+      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
+                                           tr("MuseScore: Save As");
 
-      QStringList sl = saveAs->selectedFiles();
-      if (sl.isEmpty())
-            return false;
-      QString fn = sl[0];
+      QSettings settings;
+      if (mscore->lastSaveCopyDirectory.isEmpty())
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory").toString();
+      if (mscore->lastSaveDirectory.isEmpty())
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory").toString();
+      QString saveDirectory = saveCopy ?
+            mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
+
+      QString selectedFilter;
+      QString fn = QFileDialog::getSaveFileName(
+               0,
+               saveDialogTitle,
+               saveDirectory,
+               fl.join(";;"),
+               &selectedFilter
+               );
       if (fn.isEmpty())
             return false;
 
-      QString selectedFilter = saveAs->selectedNameFilter();
-
-// printf("  return selected <%s>\n", qPrintable(selectedFilter));
+printf("  return selected <%s>\n", qPrintable(selectedFilter));
 
       QFileInfo fi(fn);
+      if (saveCopy)
+            mscore->lastSaveCopyDirectory = fi.absolutePath();
+      else
+            mscore->lastSaveDirectory = fi.absolutePath();
+
       QString ext = fi.suffix();
 
       bool rv = false;
-      QStringList fl = saveAs->nameFilters();
       if (ext == "mscx" || ext == "mscz" || selectedFilter == fl[0] || selectedFilter == fl[1]) {
             // save as mscore *.msc[xz] file
             if (selectedFilter == fl[0] && (ext != "mscz"))
@@ -630,7 +659,7 @@ void MuseScore::newFile()
             Measure* measure = static_cast<Measure*>(mb);
             int ticks = sigmap->ticksMeasure(tick);
 	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
-                  int len = 0;
+                  Duration d(Duration::V_MEASURE);
                   if (tick == 0) {
                         TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
                         ts->setTick(0);
@@ -660,9 +689,9 @@ void MuseScore::newFile()
                                     }
                               }
                         if (pickupMeasure)
-	                        len = ticks;
+	                        d.setVal(ticks);
                         }
-		      Rest* rest = new Rest(score, tick, len);
+		      Rest* rest = new Rest(score, tick, d);
       	      rest->setTrack(staffIdx * VOICES);
 	      	Segment* s = measure->getSegment(rest);
 		      s->add(rest);
@@ -1441,12 +1470,12 @@ void Score::printFile()
       printerDev->setDoubleSidedPrinting(pageFormat()->twosided);
       printerDev->setOutputFormat(QPrinter::NativeFormat);
 
-#if defined(Q_WS_MAC) || defined(__MINGW32__) 
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
       printerDev->setOutputFileName("");
 #else
       // when setting this on windows platform, pd.exec() does not
       // show dialog
-      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");      
+      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");
 #endif
 
       QPrintDialog pd(printerDev, 0);

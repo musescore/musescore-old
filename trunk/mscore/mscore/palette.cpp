@@ -33,6 +33,9 @@
 #include "chord.h"
 #include "clef.h"
 #include "segment.h"
+#include "preferences.h"
+#include "seq.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -126,6 +129,22 @@ void Palette::mousePressEvent(QMouseEvent* ev)
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
                   emit boxClicked(i);
+                  }
+            if (_drumPalette && mscore->playEnabled()) {
+                  Score* cs    = mscore->currentScore();
+                  int staffIdx = cs->inputTrack() / VOICES;
+                  Part* part   = cs->part(staffIdx);
+
+                  PaletteCell* cell = cells[i];
+                  Chord* ch         = static_cast<Chord*>(cell->element);
+                  Note* note        = ch->noteList()->front();
+
+                  Instrument* instr = part->instrument();
+                  Channel* channel  = instr->channel[0];
+
+                  int ticks   = preferences.defaultPlayDuration;
+                  int pitch   = note->pitch();
+                  seq->startNote(channel, pitch, 80, ticks, 0.0);
                   }
             }
       }

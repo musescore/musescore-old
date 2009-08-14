@@ -21,6 +21,8 @@
 #ifndef __DURATIONTYPE_H__
 #define __DURATIONTYPE_H__
 
+#include "fraction.h"
+
 //---------------------------------------------------------
 //   Duration
 //---------------------------------------------------------
@@ -29,34 +31,46 @@ class Duration {
    public:
       enum DurationType {
             V_LONG, V_BREVE, V_WHOLE, V_HALF, V_QUARTER, V_EIGHT, V_16TH,
-            V_32ND, V_64TH, V_128TH, V_256TH, V_MEASURE, V_INVALID
+            V_32ND, V_64TH, V_128TH, V_256TH, V_ZERO, V_MEASURE,  V_INVALID
             };
    private:
       DurationType _val;
+      int _dots;
 
    public:
-      Duration() : _val(V_INVALID) {}
-      Duration(DurationType t) : _val(t)    {};
+      Duration() : _val(V_INVALID), _dots(0) {}
+      Duration(const Fraction&);
+      Duration(const QString&);
+      Duration(DurationType t) : _val(t), _dots(0) {};
       DurationType type() const             { return _val; }
       bool isValid() const                  { return _val != V_INVALID; }
+      bool isZero() const                   { return _val == V_ZERO; }
       void setVal(int tick);
-      void setVal(const QString&);
       void setType(DurationType t)          { _val = t; }
 
       int ticks() const;
-      int ticks(int dots) const;
-      bool operator==(const Duration& t) const { return t._val == _val; }
+      bool operator==(const Duration& t) const     { return t._val == _val && t._dots == _dots; }
       bool operator==(const DurationType& t) const { return t == _val; }
-      bool operator!=(const Duration& t) const { return t._val != _val; }
-      static const int types = 12;
+      bool operator!=(const Duration& t) const     { return t._val != _val || t._dots != _dots; }
+      bool operator<(const Duration& t) const;
+      bool operator>(const Duration& t) const;
+      bool operator>=(const Duration& t) const;
+      bool operator<=(const Duration& t) const;
+      Duration& operator-=(const Duration& t);
+      Duration operator-(const Duration& t) const { return Duration(*this) -= t; }
+      Duration& operator+=(const Duration& t);
+      Duration operator+(const Duration& t) const { return Duration(*this) += t; }
+
       QString name() const;
       int headType() const;               // note head type
       int hooks() const;
       bool hasStem() const;
       Duration shift(int val);
+      int dots() const    { return _dots; }
+      void setDots(int v) { _dots = v; }
+      Fraction fraction() const;
       };
 
-extern int headType(int tickLen, Duration* type, int* dots);
-
+extern QList<Duration> toDurationList(Fraction);
 #endif
 

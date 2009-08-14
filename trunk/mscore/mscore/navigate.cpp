@@ -44,23 +44,13 @@ ChordRest* nextChordRest(ChordRest* cr)
       {
       if (!cr)
             return 0;
-      int tick = cr->tick() + cr->ticks();
-      Segment* seg = cr->segment();
       int track = cr->track();
-
-      for (;;) {
-            seg = seg->next1();
-            if (!seg)
-                  break;
+      for (Segment* seg = cr->segment()->next1(); seg; seg = seg->next1()) {
             if (seg->measure()->multiMeasure() < 0)
                   continue;
             Element* e = seg->element(track);
-            if (e && e->isChordRest() && e->tick()) {
-                  if (e->tick() == tick)
-                        return static_cast<ChordRest*>(e);
-                  else if (e->tick() > tick)
-                        return 0;
-                  }
+            if (e && e->isChordRest())
+                  return static_cast<ChordRest*>(e);
             }
       return 0;
       }
@@ -74,13 +64,8 @@ ChordRest* prevChordRest(ChordRest* cr)
       {
       if (!cr)
             return 0;
-      Segment* seg = cr->segment();
-      int track = cr->staffIdx() * VOICES + cr->voice();
-
-      for (;;) {
-            seg = seg->prev1();
-            if (!seg)
-                  break;
+      int track = cr->track();
+      for (Segment* seg = cr->segment()->prev1(); seg; seg = seg->prev1()) {
             if (seg->measure()->multiMeasure() < 0)
                   continue;
             Element* e = seg->element(track);

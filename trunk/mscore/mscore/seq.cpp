@@ -238,6 +238,7 @@ bool Seq::init()
                   driver = 0;
                   return false;
                   }
+            synth->setMasterTuning(preferences.tuning);
             }
 
       if (!driver->start()) {

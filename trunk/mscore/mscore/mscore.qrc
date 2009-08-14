@@ -1,6 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
    <qresource>
+      <file>data/reload.png</file>
+      <file>data/previous.png</file>
+      <file>data/next.png</file>
       <file>data/repeat.svg</file>
       <file>data/paper1.png</file>
       <file>data/paper2.png</file>

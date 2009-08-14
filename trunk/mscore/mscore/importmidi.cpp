@@ -1093,7 +1093,9 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         chord->setTrack(staffIdx * VOICES + voice);
-                        chord->setLen(len);
+                        Duration d;
+                        d.setVal(len);
+                        chord->setDuration(d);
                         Segment* s = measure->getSegment(chord);
                         s->add(chord);
 
@@ -1151,7 +1153,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               if ((ctick + len) > measure->tick() + measure->tickLen()) {
                                     len = measure->tick() + measure->tickLen() - ctick;
                                     }
-                              Rest* rest = new Rest(this, ctick, len);
+                              Duration d;
+                              d.setVal(len);
+                              Rest* rest = new Rest(this, ctick, d);
                               rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest);
                               s->add(rest);
@@ -1195,7 +1199,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
-                  chord->setLen(len);
+                  Duration d;
+                  d.setVal(len);
+                  chord->setDuration(d);
             	foreach (MNote* n, notes) {
                         foreach(Event* mn, n->mc->notes()) {
                   		Note* note = new Note(this);
@@ -1220,7 +1226,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   //
                   int restLen = measure->tick() + measure->tickLen() - ctick;
                   if (restLen > 0 && voice == 0) {
-                        Rest* rest = new Rest(this, ctick, restLen);
+                        Duration d;
+                        d.setVal(restLen);
+                        Rest* rest = new Rest(this, ctick, d);
             		Measure* measure = tick2measure(ctick);
                         rest->setTrack(staffIdx * VOICES + voice);
                         Segment* s = measure->getSegment(rest);

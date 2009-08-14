@@ -1,3 +1,15 @@
+14.aug (ws)
+      - added "back" "forward" and "update" buttons to inspector
+      - renamed "listedit" to "inspector"
+      - apply "add interval" to all selected notes
+      - advance input position after dropping of drum note. This allows inputting of drum
+        notes via double click in drum palette
+      - play drum note on select in drum palette
+      - slur edit mode: shift tab moves to previous handle
+      - masterTuning for synthesizer in preferences
+      - new slur properties dialog; new feature: dotted slurs
+      - nested tuplets!
+      - lots of internal changes: changed note duration from tick values to Fraction()
 13.aug (db)
       - patch from Toby Smithe updates version number for English handbook
         and fixes code intended to remove external style sheets
@@ -11,7 +23,7 @@
 8.aug (db)
       - Remove "prerelease" notice from splash screen
       - fix incorrect abbreviation for F Alto Ophicleide
-      - update instruments_zh_TW.xml from benice 
+      - update instruments_zh_TW.xml from benice
       - update handbooks
 2.aug (ws)
       - new menu entry: edit->delete-selected-measures; alternate method to
@@ -40,6 +52,7 @@
       - fix soundfont loading on mac PPC. Endianness problem.
       - fix note entry crash after changing measure duration
       - fix splitting of note and rest across barline on paste
+26,jul (ws)
       - fix invisible staff lines property
 24.jul (la)
       - fix bug on pasting full measure rest

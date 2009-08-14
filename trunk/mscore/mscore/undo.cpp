@@ -353,7 +353,8 @@ bool UndoGroup::isClean() const
 
 void Score::endUndoRedo()
       {
-      emit posChanged(_is.pos());
+      if (_is.cr)
+            emit posChanged(_is.cr->tick());
 
       if (!noteEntryMode()) {
             // no input state
@@ -496,9 +497,9 @@ void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
 //   undoChangeChordRestLen
 //---------------------------------------------------------
 
-void Score::undoChangeChordRestLen(ChordRest* cr, int len)
+void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
       {
-      _undo->push(new ChangeChordRestLen(cr, len));
+      _undo->push(new ChangeChordRestLen(cr, d));
       }
 
 //---------------------------------------------------------
@@ -821,10 +822,10 @@ RemoveElement::RemoveElement(Element* e)
       {
       element = e;
 
+      Score* score = element->score();
       if (element->isChordRest()) {
-            Score* score = element->score();
             // remove any slurs pointing to this chor/rest
-            ChordRest* cr = (ChordRest*)element;
+            ChordRest* cr = static_cast<ChordRest*>(element);
             foreach(Slur* slur, cr->slurFor()) {
                   score->undoRemoveElement(slur);
                   }
@@ -833,6 +834,11 @@ RemoveElement::RemoveElement(Element* e)
                   }
             if (cr->tuplet() && cr->tuplet()->elements().empty())
                   score->undoRemoveElement(cr->tuplet());
+            }
+      else if (element->type() == TUPLET) {
+            Tuplet* tuplet = static_cast<Tuplet*>(element);
+            if (tuplet->tuplet() && tuplet->tuplet()->elements().empty())
+                  score->undoRemoveElement(tuplet->tuplet());
             }
       }
 
@@ -1852,17 +1858,16 @@ void ChangeInstrumentLong::flip()
 //   ChangeChordRestLen
 //---------------------------------------------------------
 
-ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, int l)
+ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, const Duration& _d)
+   : cr(c), d(_d)
       {
-      cr = c;
-      len = l;
       }
 
 void ChangeChordRestLen::flip()
       {
-      int oldLen = cr->tickLen();
-      cr->setLen(len);
-      len = oldLen;
+      Duration od = cr->duration();
+      cr->setDuration(d);
+      d   = od;
       }
 
 //---------------------------------------------------------
@@ -2164,6 +2169,26 @@ void ChangeStyle::flip()
       }
 
 //---------------------------------------------------------
+//   ChangeSlurProperties
+//---------------------------------------------------------
+
+ChangeSlurProperties::ChangeSlurProperties(SlurTie* _st, int lt)
+   : st(_st), lineType(lt)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeSlurProperties::flip()
+      {
+      int ols = st->lineType();
+      st->setLineType(lineType);
+      lineType = ols;
+      }
+
+//---------------------------------------------------------
 //   ChangeNoteStaffMove
 //---------------------------------------------------------
 
@@ -2178,5 +2203,4 @@ void ChangeNoteStaffMove::flip()
       note->setStaffMove(staffMove);
       staffMove = v;
       }
-
 

@@ -241,37 +241,30 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Acorde</translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Haste</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Colchete</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Apoggiatura</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Direcção da haste</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Notas:</translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Linhas de ajuda:</translation>
     </message>
 </context>
@@ -1012,38 +1005,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Forma</translation>
     </message>
-    <message>
-        <source>ChordRest</source>
-        <translation>Pausa no Acorde</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Linha(s) de união</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Quiáltera</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>Atributos:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Cima</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>Modo de Linha(s) de união:</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>Está Acima</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>Pontos:</translation>
-    </message>
 </context>
 <context>
     <name>Dynamic</name>
@@ -1073,14 +1034,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Forma</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Dinâmica</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>SubTipo:</translation>
     </message>
 </context>
 <context>
@@ -1796,96 +1749,8 @@ failed: </source>
         <translation>Forma</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>Parecido</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>Inválido</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Elemento</translation>
-    </message>
-    <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Seleccionado</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Concluído</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Visível</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">sistema</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">SubTipo</translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Voz</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Pauta</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Tempo</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Duração</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Cor</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Pos</translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Cpos</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Offset</translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">BBox</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Mag</translation>
     </message>
 </context>
 <context>
@@ -3487,66 +3352,6 @@ antes de fechar?</translation>
     <message>
         <source>Go To: </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Formato MuseScore comprimido (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">Formato MusicXML (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">Formato MusicXML comprimido (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">Formato MIDI pré-definido (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">Ficheiro PDF (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">Ficheiro PostScript (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">Imagem PNG (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Imagem Scalable Vector (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Formato Lilypond (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation type="unfinished">MuseScore: Guardar como</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">Guardar uma Cópia</translation>
     </message>
     <message>
         <source>file open</source>
@@ -5264,101 +5069,6 @@ antes de fechar?</translation>
         <source>note head group</source>
         <translation>Grupo das Cabeças das notas</translation>
     </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Altura</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Cabeça</translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">TPC</translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">HGrp.</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Linha</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Ligadura com nota seguinte</translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Mover</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Ligadura com nota anterior</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Acidente</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Espelho da Cabeça</translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Canal-S</translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Esconder</translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">User-Acc</translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Subelementos:</translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -6249,6 +5959,14 @@ antes de fechar?</translation>
         <source>mm</source>
         <translation type="unfinished">mm</translation>
     </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6628,6 +6346,62 @@ Falhou: </translation>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished">Formato MuseScore comprimido (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">Formato MusicXML (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">Formato MusicXML comprimido (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">Formato MIDI pré-definido (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">Ficheiro PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">Ficheiro PostScript (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">Imagem PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">Imagem Scalable Vector (*.svg)</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Formato Lilypond (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">Guardar uma Cópia</translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6827,10 +6601,33 @@ Falhou: </translation>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">Propriedades da Repetição</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">sólido</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>Modo de edição</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6838,30 +6635,6 @@ Falhou: </translation>
     <message>
         <source>Form</source>
         <translation>Forma</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>Ligadura de expressão</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>Segmento da Ligadura</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Cima</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>Direcção:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>Auto</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Baixo</translation>
     </message>
 </context>
 <context>
@@ -7402,50 +7175,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Forma</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Quiáltera</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>tem número</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>tem linha</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>comprimento base</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>notas normais</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>notas actuais</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>Lista de Acorde/Pausa:</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>Elemento de texto</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Elemento</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation>Guia</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Duração</translation>
     </message>
 </context>
 <context>

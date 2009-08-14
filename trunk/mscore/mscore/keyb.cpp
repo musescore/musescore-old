@@ -47,11 +47,6 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       Qt::KeyboardModifiers modifiers = ev->modifiers();
       QString s                       = ev->text();
 
-      if (debugMode) {
-            printf("key key:%x modifiers:%x text:<%s>\n", key,
-               int(modifiers), qPrintable(s));
-            }
-
       if (state != EDIT && state != DRAG_EDIT) {
             ev->ignore();
             if (debugMode)
@@ -74,7 +69,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 		if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
 #endif
                   // TODO: shift+tab events are filtered by qt
-                  _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier, true);
+                  _score->lyricsTab(modifiers & Qt::ShiftModifier, true);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
@@ -122,22 +117,24 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 #else
             if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
 #endif
-                  _score->chordTab(ev->modifiers() & Qt::ShiftModifier);
+                  _score->chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
                   return;
                   }
             }
-      if (e->edit(this, curGrip, key, modifiers, s)) {
-            updateGrips();
-            ev->accept();
-            _score->end();
-            return;
+      if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
+            if (e->edit(this, curGrip, key, modifiers, s)) {
+                  updateGrips();
+                  ev->accept();
+                  _score->end();
+                  return;
+                  }
             }
       QPointF delta;
       qreal val = 10.0;
-      if (ev->modifiers() & Qt::ControlModifier)
+      if (modifiers & Qt::ControlModifier)
             val = 1.0;
-      else if (ev->modifiers() & Qt::AltModifier)
+      else if (modifiers & Qt::AltModifier)
             val = 0.1;
       switch (ev->key()) {
             case Qt::Key_Left:
@@ -153,10 +150,15 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   delta = QPointF(0, val);
                   break;
             case Qt::Key_Tab:
-                  if (curGrip < (grips-1))
-                        ++curGrip;
-                  else
+                  curGrip += 1;
+                  if (curGrip >= grips)
                         curGrip = 0;
+                  val = 0.0;
+                  break;
+            case Qt::Key_Backtab:
+                  curGrip -= 1;
+                  if (curGrip < 0)
+                        curGrip = grips -1;
                   val = 0.0;
                   break;
             default:
@@ -209,16 +211,16 @@ void Score::padToggle(int n)
                   _is.rest = !_is.rest;
                   break;
             case PAD_DOT:
-                  if (_is.dots == 1)
-                        _is.dots = 0;
+                  if (_is.duration.dots() == 1)
+                        _is.duration.setDots(0);
                   else
-                        _is.dots = 1;
+                        _is.duration.setDots(1);
                   break;
             case PAD_DOTDOT:
-                  if (_is.dots == 2)
-                        _is.dots = 0;
+                  if (_is.duration.dots() == 2)
+                        _is.duration.setDots(0);
                   else
-                        _is.dots = 2;
+                        _is.duration.setDots(2);
                   break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
@@ -238,7 +240,7 @@ void Score::padToggle(int n)
             return;
 
       if (n >= PAD_NOTE00 && n <= PAD_NOTE64) {
-            _is.dots = 0;
+            _is.duration.setDots(0);
             //
             // if in "note enter" mode, reset
             // rest flag
@@ -259,28 +261,14 @@ void Score::padToggle(int n)
             return;
 
       ChordRest* cr = static_cast<ChordRest*>(el);
-      int tick      = cr->tick();
-      int len       = _is.tickLen();
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setTickLen(len);
+            cr->setDuration(_is.duration);
             }
-      else {
-            if (cr->tuplet()) {
-                  int pitch = _is.rest ? -1 : _is.pitch;
-                  setTupletChordRest(cr, pitch, len);
-                  }
-            else {
-                  if (_is.rest) {
-                        setRest(tick, _is.track, len, _is.dots);
-                        }
-                  else {
-                        changeCRlen(cr, len);
-                        }
-                  }
-            }
+      else
+            changeCRlen(cr, _is.duration);
       }
 
 //---------------------------------------------------------
@@ -296,7 +284,8 @@ void Score::setPadState(Element* e)
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
             _is.duration  = chord->duration();
-            _is.dots      = chord->dots();
+            if (_is.duration.type() == Duration::V_MEASURE)
+                  _is.duration.setVal(chord->measure()->tickLen());
             _is.prefix    = note->accidentalType();
             _is.rest      = false;
             _is.track     = note->track();
@@ -307,7 +296,6 @@ void Score::setPadState(Element* e)
       else if (e->type() == REST) {
             Rest* rest   = static_cast<Rest*>(e);
             _is.duration = rest->duration();
-            _is.dots     = rest->dots();
             _is.prefix   = 0;
             _is.rest     = true;
             _is.track    = rest->track();
@@ -315,7 +303,7 @@ void Score::setPadState(Element* e)
             }
       else {
             _is.rest     = false;
-            _is.dots     = 0;
+            _is.duration.setDots(0);
             _is.duration = Duration::V_INVALID;
             _is.prefix   = 0;
             _is.noteType = NOTE_INVALID;
@@ -341,8 +329,8 @@ void Score::setPadState(Element* e)
 void Score::setPadState()
       {
       getAction("pad-rest")->setChecked(_is.rest);
-      getAction("pad-dot")->setChecked(_is.dots == 1);
-      getAction("pad-dotdot")->setChecked(_is.dots == 2);
+      getAction("pad-dot")->setChecked(_is.duration.dots() == 1);
+      getAction("pad-dotdot")->setChecked(_is.duration.dots() == 2);
 
       getAction("note-longa")->setChecked(_is.duration  == Duration::V_LONG);
       getAction("note-breve")->setChecked(_is.duration  == Duration::V_BREVE);

@@ -1334,7 +1334,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                           Segment* s = m->getSegment(Segment::SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(this);
                                           rest->setTick(tick + i * ft);
-                                          rest->setLen(0);
+                                          rest->setDuration(Duration(Duration::V_MEASURE));
                                           rest->setTrack(staffIdx * VOICES + voice);
                                           s->add(rest);
                                           }
@@ -1344,7 +1344,9 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               Segment* s = m->getSegment(Segment::SegChordRest, tick);
                               Rest* rest = new Rest(this);
                               rest->setTick(tick);
-                              rest->setLen(ticks);
+                              Duration d;
+                              d.setVal(ticks);
+                              rest->setDuration(d);
                               rest->setTrack(track);
                               s->add(rest);
                               }
@@ -1360,7 +1362,9 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         Segment* s = m->getSegment(Segment::SegChordRest, tick);
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
-                        chord->setLen(ticks);
+                        Duration d;
+                        d.setVal(ticks);
+                        chord->setDuration(d);
                         chord->setTrack(track);
                         switch (o->stemDir) {
                               case -1:    // down

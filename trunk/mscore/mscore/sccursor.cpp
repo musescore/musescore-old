@@ -437,11 +437,11 @@ void ScSCursorPrototype::add(ChordRestPtr c)
       int tick        = cr->tick();
       int staffIdx    = cursor->staffIdx();
       int voice       = cursor->voice();
-      int len         = c->tickLen();
       Score* score    = cursor->score();
 
+      Fraction len(c->duration().fraction());
       int track       = staffIdx * VOICES + voice;
-      int gap         = score->makeGap(tick, track, len);
+      Fraction gap    = score->makeGap(cr, len);
       if (gap < len) {
             printf("cannot make gap\n");
             return;

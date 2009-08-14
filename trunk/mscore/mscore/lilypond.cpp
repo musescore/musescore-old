@@ -284,7 +284,9 @@ void Lilypond::addNote(const LNote& lnote)
       Chord* chord = new Chord(score);
       chord->setTrack(staff->idx() * VOICES);
       chord->setParent(segment);
-      chord->setTickLen(lnote.len);
+      Duration d;
+      d.setVal(lnote.len);
+      chord->setDuration(d);
       chord->setTick(tick);
 
       segment->add(chord);
@@ -314,7 +316,9 @@ void Lilypond::addRest()
       Rest* rest = new Rest(score);
       rest->setTrack(staff->idx() * VOICES);
       rest->setParent(segment);
-      rest->setTickLen(curLen);
+      Duration d;
+      d.setVal(curLen);
+      rest->setDuration(d);
       rest->setTick(tick);
 
       segment->add(rest);

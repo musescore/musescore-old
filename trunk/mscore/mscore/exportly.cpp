@@ -185,8 +185,7 @@ class ExportLy {
   void writeBarline(Measure *);
   int  voltaCheckBar(Measure *, int);
   void writeVolta(int, int);
-  void findTuplets(Note *);
-  void findTuplets(Rest *);
+  void findTuplets(ChordRest*);
   void writeArticulation(Chord*);
   void writeScoreBlock();
   void checkSlur(Chord* chord);
@@ -1005,75 +1004,29 @@ void ExportLy::indentF()
 // Find tuplets Note
 //-------------------------------------
 
-void ExportLy::findTuplets(Note* note)
+void ExportLy::findTuplets(ChordRest* cr)
+      {
+      Tuplet* t = cr->tuplet();
 
-{
-  Tuplet* t = note->chord()->tuplet();
-  int actNotes = 1;
-  int nrmNotes = 1;
-  int baselength=0;
-  int thislength=0;
+      // TODO: Tuplet() has changed; please check
 
-  if (t)
-    {
-      if (tupletcount == 0)
-	{
-	  actNotes = t->actualNotes();
-	  nrmNotes = t->normalNotes();
-	  baselength = t->baseLen();
-	  thislength=note->chord()->tickLen();
-	  tupletcount=nrmNotes * baselength - thislength;
-	  out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
-	}
-      else if (tupletcount>1)
-	{
-	  thislength=note->chord()->tickLen();
-	  tupletcount=tupletcount-thislength;
-	  if (tupletcount==0) tupletcount=-1;
-	}
-    }
-
-}//end of find-tuplets
-
-
-
-//-------------------------------------
-// Find tuplets REST. not very elegant to have two functions for the same thing
-// So please fix this you more competent people.(O.G.)
-//-------------------------------------
-
-void ExportLy::findTuplets(Rest* rest)
-{
-  Tuplet* t = rest->tuplet();
-  int actNotes = 1;
-  int nrmNotes = 1;
-  int baselength=0;
-  int thislength=0;
-
-  if (t)
-    {
-      if (tupletcount == 0)
-	{
-	  actNotes = t->actualNotes();
-	  nrmNotes = t->normalNotes();
-	  baselength = t->baseLen();
-	  thislength=rest->tickLen();
-	  tupletcount=nrmNotes * baselength - thislength;
-	  out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
-	}
-      else if (tupletcount>1)
-	{
-	  thislength=rest->tickLen();
-	  tupletcount=tupletcount-thislength;
-	  if (tupletcount==0) tupletcount=-1;
-	}
-    }
-
-}//end of find-tuplets REST
-
-
-
-
+      if (t) {
+            if (tupletcount == 0) {
+                  int actNotes   = t->actualNotes();
+                  int nrmNotes   = t->normalNotes();
+                  int baselength = t->ticks() / nrmNotes;
+                  int thislength = cr->ticks();
+                  tupletcount    = nrmNotes * baselength - thislength;
+                  out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
+                  }
+            else if (tupletcount > 1) {
+                  int thislength = cr->ticks();
+                  tupletcount    = tupletcount - thislength;
+                  if (tupletcount == 0)
+                        tupletcount = -1;
+                  }
+            }
+      }
 
 //-----------------------------------------------------
 //  voltaCheckBar
@@ -1604,7 +1557,7 @@ void ExportLy::writeChord(Chord* c)
 	} //end of switch(gracen)
 
 
-      findTuplets(n); //probably causes trouble here, Must be put outside of notelist?
+      findTuplets(n->chord()); //probably causes trouble here, Must be put outside of notelist?
 
       if (gracecount==2) out << " [ ";
       out << tpc2name(n->tpc());
@@ -2116,14 +2069,14 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	    tick += ntick;
 	    measuretick=measuretick+ntick;
 	    writeChord((Chord*)e);
-	    tick += e->tickLen();
-	    measuretick=measuretick+e->tickLen();
+	    tick += ((Chord*)e)->ticks();
+	    measuretick=measuretick+((Chord*)e)->ticks();
 	  }
 	  break;
 	case REST:
 	  {
-	    findTuplets((Rest *) e);
-	    int l = e->tickLen();
+	    findTuplets((ChordRest *) e);
+	    int l = ((Rest*)e)->ticks();
 	    int mlen=((Rest*)e)->segment()->measure()->tickLen();
 	    //	    printf("pauselengde: %d, taktlengde %d \n",l, mlen );
 	    if ((l==mlen) or (l==0))

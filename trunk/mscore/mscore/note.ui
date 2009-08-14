@@ -23,7 +23,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string comment="do not translate">Note</string>
+      <string notr="true" comment="do not translate">Note</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -35,7 +35,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string comment="do not translate">Pitch</string>
+         <string notr="true" comment="do not translate">Pitch</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -58,7 +58,7 @@
       <item row="0" column="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string comment="do not translate">Head</string>
+         <string notr="true" comment="do not translate">Head</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -75,7 +75,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string comment="do not translate">TPC</string>
+         <string notr="true" comment="do not translate">TPC</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -88,7 +88,7 @@
       <item row="2" column="2">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string comment="do not translate">HGrp.</string>
+         <string notr="true" comment="do not translate">HGrp.</string>
         </property>
        </widget>
       </item>
@@ -108,7 +108,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string comment="do not translate">Line</string>
+         <string notr="true" comment="do not translate">Line</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -131,14 +131,14 @@
       <item row="3" column="2" colspan="2">
        <widget class="QPushButton" name="tieFor">
         <property name="text">
-         <string comment="do not translate">Tie Forw.</string>
+         <string notr="true" comment="do not translate">Tie Forw.</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string comment="do not translate">Move</string>
+         <string notr="true" comment="do not translate">Move</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -157,28 +157,28 @@
       <item row="4" column="2" colspan="2">
        <widget class="QPushButton" name="tieBack">
         <property name="text">
-         <string comment="do not translate">Tie Back</string>
+         <string notr="true" comment="do not translate">Tie Back</string>
         </property>
        </widget>
       </item>
       <item row="5" column="2" colspan="2">
        <widget class="QPushButton" name="accidental">
         <property name="text">
-         <string comment="do not translate">Accidental</string>
+         <string notr="true" comment="do not translate">Accidental</string>
         </property>
        </widget>
       </item>
       <item row="7" column="0" colspan="2">
        <widget class="QCheckBox" name="mirror">
         <property name="text">
-         <string comment="do not translate">Mirror Head</string>
+         <string notr="true" comment="do not translate">Mirror Head</string>
         </property>
        </widget>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string comment="do not translate">S-Channel</string>
+         <string notr="true" comment="do not translate">S-Channel</string>
         </property>
        </widget>
       </item>
@@ -188,14 +188,14 @@
       <item row="7" column="2" colspan="2">
        <widget class="QCheckBox" name="hidden">
         <property name="text">
-         <string comment="do not translate">Hidden</string>
+         <string notr="true" comment="do not translate">Hidden</string>
         </property>
        </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string comment="do not translate">User-Acc</string>
+         <string notr="true" comment="do not translate">User-Acc</string>
         </property>
        </widget>
       </item>
@@ -205,7 +205,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Ppitch</string>
+         <string notr="true">Ppitch</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -215,7 +215,7 @@
       <item row="1" column="4">
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string comment="do not translate">Subelements:</string>
+         <string notr="true" comment="do not translate">Subelements:</string>
         </property>
        </widget>
       </item>
@@ -229,7 +229,7 @@
       <item row="1" column="2">
        <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>Velo</string>
+         <string notr="true">Velo</string>
         </property>
        </widget>
       </item>
@@ -244,17 +244,17 @@
        <widget class="QComboBox" name="userMirror">
         <item>
          <property name="text">
-          <string>Mirror Automatic</string>
+          <string notr="true">Mirror Automatic</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Head Left</string>
+          <string notr="true">Head Left</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Head Right</string>
+          <string notr="true">Head Right</string>
          </property>
         </item>
        </widget>

@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "listedit.h"
+#include "inspector.h"
 #include "mscore.h"
 #include "element.h"
 #include "page.h"
@@ -110,36 +110,16 @@ void ElementItem::init()
       }
 
 //---------------------------------------------------------
-//   PageListEditor
+//   Inspector
 //---------------------------------------------------------
 
-PageListEditor::PageListEditor(QWidget* parent)
-   : QWidget(parent)
+Inspector::Inspector(QWidget* parent)
+   : QDialog(parent)
       {
-      setWindowFlags(Qt::Dialog);
+      setupUi(this);
       setWindowTitle(tr("MuseScore: Object Inspector"));
-      QHBoxLayout* hbox = new QHBoxLayout;
-      setLayout(hbox);
 
-      split = new QSplitter;
-      split->setOpaqueResize(true);
-
-      hbox->addWidget(split);
-      list = new QTreeWidget;
-      list->setColumnCount(1);
-      split->addWidget(list);
-      split->setStretchFactor(0, 10);
-
-      list->setSelectionMode(QAbstractItemView::SingleSelection);
-      list->setRootIsDecorated(true);
-      list->setColumnCount(1);
-      list->setHeaderLabels(QStringList("Element"));
-      list->setSortingEnabled(false);
-      list->setUniformRowHeights(true);
-
-      stack = new QStackedWidget;
-      split->addWidget(stack);
-
+      curElement   = 0;
       pagePanel    = new ShowPageWidget;
       systemPanel  = new ShowSystemWidget;
       measurePanel = new MeasureView;
@@ -208,8 +188,7 @@ PageListEditor::PageListEditor(QWidget* parent)
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
-      connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
-         SLOT(itemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+      connect(list, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemClicked(QTreeWidgetItem*,int)));
       connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       list->resizeColumnToContents(0);
@@ -221,13 +200,18 @@ PageListEditor::PageListEditor(QWidget* parent)
             move(settings.value("pos", QPoint(10, 10)).toPoint());
             settings.endGroup();
             }
+      back->setEnabled(false);
+      forward->setEnabled(false);
+      connect(back,    SIGNAL(clicked()), SLOT(backClicked()));
+      connect(forward, SIGNAL(clicked()), SLOT(forwardClicked()));
+      connect(reload,  SIGNAL(clicked()), SLOT(reloadClicked()));
       }
 
 //---------------------------------------------------------
 //   writeSettings
 //---------------------------------------------------------
 
-void PageListEditor::writeSettings()
+void Inspector::writeSettings()
       {
       QSettings settings;
       settings.beginGroup("Inspector");
@@ -241,7 +225,7 @@ void PageListEditor::writeSettings()
 //   layoutScore
 //---------------------------------------------------------
 
-void PageListEditor::layoutScore()
+void Inspector::layoutScore()
       {
       cs->setLayoutAll(true);
       cs->end();
@@ -251,7 +235,7 @@ void PageListEditor::layoutScore()
 //   addSymbol
 //---------------------------------------------------------
 
-void PageListEditor::addSymbol(ElementItem* parent, BSymbol* bs)
+void Inspector::addSymbol(ElementItem* parent, BSymbol* bs)
       {
       const QList<Element*>el = bs->getLeafs();
       ElementItem* i = new ElementItem(parent, bs);
@@ -278,9 +262,16 @@ static void addMeasureBaseToList(ElementItem* mi, MeasureBase* mb)
 //   updateList
 //---------------------------------------------------------
 
-void PageListEditor::updateList(Score* s)
+void Inspector::updateList(Score* s)
       {
+      if (cs != s) {
+            backStack.clear();
+            forwardStack.clear();
+            back->setEnabled(false);
+            forward->setEnabled(false);
+            }
       cs = s;
+      curElement = 0;
       list->clear();
 
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
@@ -422,7 +413,7 @@ void PageListEditor::updateList(Score* s)
 //   searchElement
 //---------------------------------------------------------
 
-bool PageListEditor::searchElement(QTreeWidgetItem* pi, Element* el)
+bool Inspector::searchElement(QTreeWidgetItem* pi, Element* el)
       {
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = pi->child(i);
@@ -448,13 +439,56 @@ bool PageListEditor::searchElement(QTreeWidgetItem* pi, Element* el)
 //   setElement
 //---------------------------------------------------------
 
-void PageListEditor::setElement(Element* el)
+void Inspector::setElement(Element* el)
+      {
+      if (curElement) {
+            backStack.push(curElement);
+            back->setEnabled(true);
+            forwardStack.clear();
+            forward->setEnabled(false);
+            }
+      updateElement(el);
+      }
+
+//---------------------------------------------------------
+//   itemExpanded
+//---------------------------------------------------------
+
+void Inspector::itemExpanded(QTreeWidgetItem*)
+      {
+      list->resizeColumnToContents(0);
+      }
+
+//---------------------------------------------------------
+//   itemClicked
+//---------------------------------------------------------
+
+void Inspector::itemClicked(QTreeWidgetItem* i, int)
+      {
+      if (i == 0)
+            return;
+      if (i->type() == INVALID)
+            return;
+      Element* el = static_cast<ElementItem*>(i)->element();
+      if (curElement) {
+            backStack.push(curElement);
+            back->setEnabled(true);
+            forwardStack.clear();
+            forward->setEnabled(false);
+            }
+      updateElement(el);
+      }
+
+//---------------------------------------------------------
+//   updateElement
+//---------------------------------------------------------
+
+void Inspector::updateElement(Element* el)
       {
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = list->topLevelItem(i);
             if (item == 0) {
-                  printf("PageListEditor::Element not found %s %p\n",
-                    el->name(), el);
+                  printf("Inspector::Element not found %s %p\n", el->name(), el);
                   break;
                   }
             ElementItem* ei = (ElementItem*)item;
@@ -469,28 +503,6 @@ void PageListEditor::setElement(Element* el)
                   break;
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   itemExpanded
-//---------------------------------------------------------
-
-void PageListEditor::itemExpanded(QTreeWidgetItem*)
-      {
-      list->resizeColumnToContents(0);
-      }
-
-//---------------------------------------------------------
-//   itemChanged
-//---------------------------------------------------------
-
-void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
-      {
-      if (i == 0)
-            return;
-      if (i->type() == INVALID)
-            return;
-      Element* el = static_cast<ElementItem*>(i)->element();
       setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
       ShowElementBase* ew = 0;
       switch (el->type()) {
@@ -522,6 +534,7 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
                   ew = elementView;
                   break;
             }
+      curElement = el;
       ew->setElement(el);
       stack->setCurrentWidget(ew);
       }
@@ -641,6 +654,12 @@ void MeasureView::setElement(Element* e)
       mb.irregular->setChecked(m->irregular());
       mb.endRepeat->setValue(m->repeatCount());
       mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));
+      mb.breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
+      mb.breakMMRest->setChecked(m->breakMMRest());
+      mb.endBarLineType->setValue(m->endBarLineType());
+      mb.endBarLineGenerated->setChecked(m->endBarLineGenerated());
+      mb.endBarLineVisible->setChecked(m->endBarLineVisible());
+
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -765,6 +784,8 @@ void ShowChordWidget::setElement(Element* e)
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
       crb.isUpFlag->setChecked(chord->isUp());
       crb.dots->setValue(chord->dots());
+      crb.ticks->setValue(chord->ticks());
+      crb.duration->setValue(int(chord->duration().type()));
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
@@ -1000,6 +1021,8 @@ void ShowRestWidget::setElement(Element* e)
       crb.beamMode->setCurrentIndex(int(rest->beamMode()));
       crb.attributes->clear();
       crb.dots->setValue(rest->dots());
+      crb.ticks->setValue(rest->ticks());
+      crb.duration->setValue(int(rest->duration().type()));
 
       foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
@@ -1270,30 +1293,6 @@ TupletView::TupletView()
 
       connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
       connect(tb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
-      connect(tb.hasNumber, SIGNAL(toggled(bool)), SLOT(hasNumberToggled(bool)));
-      connect(tb.hasLine, SIGNAL(toggled(bool)), SLOT(hasLineToggled(bool)));
-      }
-
-//---------------------------------------------------------
-//   hasNumberToggled
-//---------------------------------------------------------
-
-void TupletView::hasNumberToggled(bool /*val*/)
-      {
-//      Tuplet* tuplet = (Tuplet*)element();
-//      tuplet->setHasNumber(val);
-//      emit scoreChanged();
-      }
-
-//---------------------------------------------------------
-//   hasLineToggled
-//---------------------------------------------------------
-
-void TupletView::hasLineToggled(bool /*val*/)
-      {
-//      Tuplet* tuplet = (Tuplet*)element();
-//      tuplet->setHasLine(val);
-//      emit scoreChanged();
       }
 
 //---------------------------------------------------------
@@ -1323,11 +1322,9 @@ void TupletView::setElement(Element* e)
       {
       ShowElementBase::setElement(e);
       Tuplet* tuplet = (Tuplet*)e;
-//      tb.hasNumber->setChecked(tuplet->hasNumber());
-//      tb.hasLine->setChecked(tuplet->hasLine());
-      tb.baseLen->setValue(tuplet->baseLen());
-      tb.normalNotes->setValue(tuplet->normalNotes());
-      tb.actualNotes->setValue(tuplet->actualNotes());
+      tb.baseLen->setText(tuplet->baseLen().name());
+      tb.ratioZ->setValue(tuplet->ratio().zaehler());
+      tb.ratioN->setValue(tuplet->ratio().nenner());
       tb.number->setEnabled(tuplet->number());
       tb.elements->clear();
       foreach(DurationElement* e, tuplet->elements()) {
@@ -1416,12 +1413,12 @@ void ShowElementBase::setElement(Element* e)
 
       eb.subtype->setValue(e->subtype());
       eb.selected->setChecked(e->selected());
+      eb.selectable->setChecked(e->selectable());
+      eb.droptarget->setChecked(e->dropTarget());
       eb.generated->setChecked(e->generated());
       eb.visible->setChecked(e->visible());
-      eb.voice->setValue(e->voice() + 1);    // show 1-4
-      eb.staff->setValue(e->staffIdx() + 1); // show 1-n
+      eb.track->setValue(e->track());
       eb.time->setValue(e->tick());
-      eb.duration->setValue(e->tickLen());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
       eb.cposx->setValue(e->canvasPos().x());
@@ -1727,4 +1724,41 @@ void LyricsView::setElement(Element* e)
       lb.syllabic->setCurrentIndex(l->syllabic());
       }
 
+//---------------------------------------------------------
+//   backClicked
+//---------------------------------------------------------
 
+void Inspector::backClicked()
+      {
+      if (backStack.isEmpty())
+            return;
+      forwardStack.push(curElement);
+      forward->setEnabled(true);
+      updateElement(backStack.pop());
+      back->setEnabled(!backStack.isEmpty());
+      }
+
+//---------------------------------------------------------
+//   forwardClicked
+//---------------------------------------------------------
+
+void Inspector::forwardClicked()
+      {
+      if (forwardStack.isEmpty())
+            return;
+      backStack.push(curElement);
+      back->setEnabled(true);
+      updateElement(forwardStack.pop());
+      forward->setEnabled(!forwardStack.isEmpty());
+      }
+
+//---------------------------------------------------------
+//   reloadClicked
+//---------------------------------------------------------
+
+void Inspector::reloadClicked()
+      {
+      Element* e = curElement;
+	updateList(cs);
+      updateElement(e);
+      }

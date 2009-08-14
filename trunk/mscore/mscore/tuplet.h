@@ -22,6 +22,7 @@
 #define __TUPLET_H__
 
 #include "duration.h"
+
 #include "ui_tupletdialog.h"
 #include "ui_tupletproperties.h"
 
@@ -51,9 +52,8 @@ class Tuplet : public DurationElement {
       int _bracketType;
       bool _hasBracket;
 
-      int _baseLen;           // tick len of a "normal note"
-      int _normalNotes;
-      int _actualNotes;
+      Fraction _ratio;
+      Duration _baseLen;      // 1/8 for a triplet of 1/8
 
       bool _userModified;
       QPointF p1, p2;
@@ -85,22 +85,21 @@ class Tuplet : public DurationElement {
 
       virtual Measure* measure() const { return (Measure*)parent(); }
 
-      int numberType() const        { return _numberType;   }
-      int bracketType() const       { return _bracketType;  }
-      void setNumberType(int val)   { _numberType = val;    }
-      void setBracketType(int val)  { _bracketType = val;   }
-      bool hasBracket() const       { return _hasBracket;   }
+      int numberType() const        { return _numberType;       }
+      int bracketType() const       { return _bracketType;      }
+      void setNumberType(int val)   { _numberType = val;        }
+      void setBracketType(int val)  { _bracketType = val;       }
+      bool hasBracket() const       { return _hasBracket;       }
 
-      void setBaseLen(int val)      { _baseLen = val;       }
-      void setNormalNotes(int val)  { _normalNotes = val;   }
-      void setActualNotes(int val)  { _actualNotes = val;   }
-      int baseLen() const           { return _baseLen;      }
-      int normalNotes() const       { return _normalNotes;  }
-      int actualNotes() const       { return _actualNotes;  }
-//      int normalLen() const         { return _baseLen / _normalNotes; }
-      int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
-      const QList<DurationElement*>& elements() const   { return _elements; }
+      Fraction ratio() const        { return _ratio;            }
+      void setRatio(const Fraction& r) { _ratio = r;            }
+      void setRatio(int z, int n)   { _ratio = Fraction(z,n);   }
+      int normalNotes() const       { return _ratio.nenner();   }
+      int actualNotes() const       { return _ratio.zaehler();  }
+
+      const QList<DurationElement*>& elements() const { return _elements; }
       void clear()                  { _elements.clear(); }
+
       virtual void layout();
       Text* number() const { return _number; }
 
@@ -110,12 +109,12 @@ class Tuplet : public DurationElement {
       virtual void toDefault();
 
       virtual void draw(QPainter&) const;
-      int id() const                  { return _id; }
-      void setId(int i) const         { _id = i;                                }
-      virtual int tickLen() const     { return _baseLen * _normalNotes;         }
-      int actualTickLen(int l) const  { return l * _normalNotes / _actualNotes; }
+      int id() const                       { return _id;          }
+      void setId(int i) const              { _id = i;             }
+      Duration baseLen() const             { return _baseLen;     }
+      void setBaseLen(const Duration& d)   { _baseLen = d;        }
+      virtual void dump() const;
       };
-
 
 //---------------------------------------------------------
 //   TupletDialog

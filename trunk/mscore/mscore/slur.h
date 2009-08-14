@@ -74,6 +74,7 @@ class SlurSegment : public Element {
       virtual void move(const QPointF& s);
 
       virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
 
       SlurTie* slurTie() const     { return (SlurTie*)parent(); }
 
@@ -92,6 +93,7 @@ class SlurSegment : public Element {
 class SlurTie : public Element {
       Element* _startElement;
       Element* _endElement;
+      int _lineType;          // 0 = solid, 1 = dotted
 
    protected:
       double _len;
@@ -134,6 +136,8 @@ class SlurTie : public Element {
       Element* endElement() const         { return _endElement;   }
       virtual void toDefault();
       void setLen(double v)               { _len = v; }
+      int lineType() const                { return _lineType; }
+      void setLineType(int val)           { _lineType = val;  }
       };
 
 //---------------------------------------------------------

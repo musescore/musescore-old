@@ -36,7 +36,7 @@
 #include "sym.h"
 #include "padids.h"
 #include "pagesettings.h"
-#include "listedit.h"
+#include "inspector.h"
 #include "editstyle.h"
 #include "playpanel.h"
 #include "page.h"
@@ -227,9 +227,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             ++idx;
             }
 
+      settings.setValue("lastSaveCopyDirctory", lastSaveCopyDirectory);
+      settings.setValue("lastSaveDirectory", lastSaveDirectory);
+
       writeSettings();
-      if (pageListEdit)
-            pageListEdit->writeSettings();
+      if (inspector)
+            inspector->writeSettings();
 
       seq->stop();
 #ifndef __MINGW32__
@@ -240,17 +243,6 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-
-	  if (_saveAsDialog) {
-			QByteArray ba = _saveAsDialog->saveState();
-			settings.setValue("saveAs", ba);
-		    }
-
-      if (_saveCopyDialog) {
-            settings.setValue("saveCopy", _saveCopyDialog->saveState());
-            int idx = _saveCopyDialog->nameFilters().indexOf(_saveCopyDialog->selectedNameFilter());
-            settings.setValue("saveCopyFilter", idx);
-            }
 
       //
       // close all toplevel windows (on mac it crashes on quit with these lines)
@@ -314,7 +306,7 @@ MuseScore::MuseScore()
       measuresDialog        = 0;
       insertMeasuresDialog  = 0;
       iledit                = 0;
-      pageListEdit          = 0;
+      inspector             = 0;
       measureListEdit       = 0;
       symbolDialog          = 0;
       clefPalette           = 0;
@@ -337,8 +329,6 @@ MuseScore::MuseScore()
       drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
-      _saveAsDialog         = 0;
-      _saveCopyDialog       = 0;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -365,9 +355,9 @@ MuseScore::MuseScore()
       ag->setExclusive(false);
       foreach(Shortcut* s, shortcuts) {
             QAction* a = getAction(s);
-            addAction(a);
             ag->addAction(a);
             }
+      addActions(ag->actions());
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
       QWidget* mainWindow = new QWidget;
@@ -1172,17 +1162,17 @@ void MuseScore::showPageSettings()
       }
 
 //---------------------------------------------------------
-//   startPageListEditor
+//   startInspector
 //---------------------------------------------------------
 
-void MuseScore::startPageListEditor()
+void MuseScore::startInspector()
       {
       if (!cs)
             return;
-      if (pageListEdit == 0)
-            pageListEdit = new PageListEditor(this);
-      pageListEdit->updateList(cs);
-      pageListEdit->show();
+      if (inspector == 0)
+            inspector = new Inspector(this);
+      inspector->updateList(cs);
+      inspector->show();
       }
 
 //---------------------------------------------------------
@@ -1191,8 +1181,8 @@ void MuseScore::startPageListEditor()
 
 void MuseScore::showElementContext(Element* el)
       {
-      startPageListEditor();
-      pageListEdit->setElement(el);
+      startInspector();
+      inspector->setElement(el);
       }
 
 //---------------------------------------------------------
@@ -1879,7 +1869,7 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "insert-measures")
             cmdInsertMeasures();
       else if (cmd == "inspector")
-            startPageListEditor();
+            startInspector();
       else if (cmd == "script-debug") {
             scriptDebug = a->isChecked();
             }
@@ -1913,6 +1903,8 @@ void MuseScore::cmd(QAction* a)
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             }
+      if (inspector)
+            inspector->reloadClicked();
       }
 
 //---------------------------------------------------------
@@ -1971,9 +1963,8 @@ void MuseScore::changeState(int val)
             case STATE_DISABLED:
                   _modeText->setText(tr("no score"));
                   _modeText->show();
-                  if (pageListEdit)
-                        pageListEdit->hide();
-
+                  if (inspector)
+                        inspector->hide();
                   break;
             case STATE_NORMAL:
                   _modeText->hide();
@@ -2369,87 +2360,3 @@ void MuseScore::handleMessage(const QString& message)
       lastOpenPath = score->fileInfo()->path();
       setCurrentScore(score);
       }
-
-//---------------------------------------------------------
-//   setSaveFilters
-//---------------------------------------------------------
-
-void MuseScore::setSaveFilters(QFileDialog* d) const
-      {
-      QStringList fl;
-      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
-      fl.append(tr("MuseScore Format (*.mscx)"));
-      fl.append(tr("MusicXML Format (*.xml)"));
-      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
-      fl.append(tr("Standard MIDI File (*.mid)"));
-      fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("PostScript File (*.ps)"));
-      fl.append(tr("PNG Bitmap Graphic (*.png)"));
-      fl.append(tr("Scalable Vector Graphic (*.svg)"));
-      fl.append(tr("Lilypond Format (*.ly)"));
-#ifdef HAS_AUDIOFILE
-      fl.append(tr("Wave Audio (*.wav)"));
-      fl.append(tr("Flac Audio (*.flac)"));
-      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
-#endif
-      d->setNameFilters(fl);
-      }
-
-//---------------------------------------------------------
-//   saveAsDialog
-//---------------------------------------------------------
-
-QFileDialog* MuseScore::saveAsDialog()
-      {
-      if (_saveAsDialog == 0) {
-            _saveAsDialog = new QFileDialog(mscore);
-#if  defined(Q_WS_MAC) || defined(Q_WS_WIN)
-            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, false);
-#else
-            _saveAsDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-#endif
-            _saveAsDialog->setAcceptMode(QFileDialog::AcceptSave);
-            _saveAsDialog->setFileMode(QFileDialog::AnyFile);
-            _saveAsDialog->setWindowTitle(tr("MuseScore: Save As"));
-            setSaveFilters(_saveAsDialog);
-            QSettings settings;
-
-            if (settings.contains("saveAs")) {
-                  QByteArray ba = settings.value("saveAs").toByteArray();
-                  if (!_saveAsDialog->restoreState(ba))
-                        printf("restore failed\n");
-                  }
-            //HACK at time of writing restoreState seems to ignore the previous path (la)
-			_saveAsDialog->setDirectory(preferences.workingDirectory);
-			}
-	  _saveAsDialog->selectNameFilter(_saveAsDialog->nameFilters().value(0));
-      return _saveAsDialog;
-      }
-
-//---------------------------------------------------------
-//   saveCopyDialog
-//---------------------------------------------------------
-
-QFileDialog* MuseScore::saveCopyDialog()
-      {
-      if (_saveCopyDialog == 0) {
-            _saveCopyDialog = new QFileDialog(mscore);
-#if  defined(Q_WS_MAC) || defined(Q_WS_WIN)
-            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, false);
-#else
-            _saveCopyDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-#endif
-            _saveCopyDialog->setAcceptMode(QFileDialog::AcceptSave);
-            _saveCopyDialog->setFileMode(QFileDialog::AnyFile);
-            _saveCopyDialog->setWindowTitle(tr("MuseScore: Save a Copy"));
-            setSaveFilters(_saveCopyDialog);
-            QSettings settings;
-            _saveCopyDialog->selectNameFilter(_saveCopyDialog->nameFilters().value(settings.value("saveCopyFilter", 0).toInt()));
-            if (settings.contains("saveCopy"))
-                  _saveCopyDialog->restoreState(settings.value("saveCopy").toByteArray());
-            //HACK at time of writing restoreState seems to ignore the previous path (la)
-			_saveCopyDialog->setDirectory(preferences.workingDirectory);
-            }
-      return _saveCopyDialog;
-      }
-

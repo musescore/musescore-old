@@ -249,38 +249,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation>Akkoord</translation>
+        <translation type="unfinished">Akkoord</translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation>Stok</translation>
+        <translation type="unfinished">Stok</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation>Haak</translation>
+        <translation type="unfinished">Haak</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation>Korte Voorslag</translation>
+        <translation type="unfinished">Korte Voorslag</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation>Stokrichting</translation>
+        <translation type="unfinished">Stokrichting</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation>Notities:</translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation>Hulplijnen:</translation>
+        <translation type="unfinished">Hulplijnen:</translation>
     </message>
 </context>
 <context>
@@ -1021,38 +1014,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
-    <message>
-        <source>ChordRest</source>
-        <translation>AkkoordRust</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Waardestreep</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Tuplet</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>Attributen:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Omhoog</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>Is omhoog</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>Waardestreep Modus:</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>Punten:</translation>
-    </message>
 </context>
 <context>
     <name>Dynamic</name>
@@ -1082,14 +1043,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Dynamiek</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>Sub Type:</translation>
     </message>
 </context>
 <context>
@@ -1806,96 +1759,8 @@ toonhoogte</translation>
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>Huidige</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>ongeldig</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation>Element</translation>
-    </message>
-    <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation>geselecteerde</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation>gegenereerde</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation>zichtbaar</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation>systeem</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation>Stem</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation>Notenbalk</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation>Maatsoorten</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation>Kleur</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation>Compensatie</translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation>Keuze menu</translation>
     </message>
 </context>
 <context>
@@ -3499,66 +3364,6 @@ voor dat u afsluit?</translation>
     <message>
         <source>Go To: </source>
         <translation>Ga Naar:</translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScoreformaat (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML Formaat (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Gecomprimeerd MusicXML Formaat (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>Standaard MIDI File (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>PDF Bestand (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>PostScript Bestand (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG Bitmap Grafisch (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond Formaat (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation>MuseScore: Opslaan Als</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Kopie opslaan</translation>
     </message>
     <message>
         <source>file open</source>
@@ -5278,101 +5083,6 @@ voor dat u afsluit?</translation>
         <source>note head group</source>
         <translation>notenhoofden groep</translation>
     </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation>Noot</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation>Toonhoogte</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation>Hoofd</translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation>Subelementen:</translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation>HGrp.</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation>Lijn</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation>Boog Voorwaarts.</translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation>Verwijder</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation>Boog Achterwaarts</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation>Voorteken</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation>Spiegel Hoofd</translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation>S-Kanaal</translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation>Verbergen</translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation>Gebruiker-Acc</translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation>Toonhoogte</translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation>Mirror Automatisch</translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation>Hoofd Links</translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation>Hoofd Rechts</translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -6263,6 +5973,14 @@ voor dat u afsluit?</translation>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Vervang 1/2 ... with symbol ...</translation>
     </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6644,6 +6362,62 @@ failed: </source>
 </source>
         <translation>&gt; Mislukt:</translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished">Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished">MuseScoreformaat (*.mscx)</translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">MusicXML Formaat (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">Gecomprimeerd MusicXML Formaat (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">Standaard MIDI File (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF Bestand (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript Bestand (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG Bitmap Grafisch (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Lilypond Formaat (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore: Kopie opslaan</translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6843,10 +6617,33 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">Volta Eigenschappen</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">vast</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>Bewerkingsmodus</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6854,30 +6651,6 @@ failed: </source>
     <message>
         <source>Form</source>
         <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>Verbindingsboog</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>Verbindings Segment</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Boven</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>Richting:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>Automatisch</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Beneden</translation>
     </message>
 </context>
 <context>
@@ -7415,50 +7188,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Vorm</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Tuplet</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>heeft nummer</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>heeft lijn</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>basis len</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>normale noten</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>actuele noten</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>Akkoord/Rust lijst:</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>Tekst Element</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Element</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation>Tik</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Lengte</translation>
     </message>
 </context>
 <context>

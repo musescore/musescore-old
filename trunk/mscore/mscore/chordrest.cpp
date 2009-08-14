@@ -64,7 +64,15 @@ DurationElement::DurationElement(const DurationElement& e)
 
 int DurationElement::ticks() const
       {
-      return _tickLen == 0 ? measure()->tickLen() : _tickLen;
+      if (_duration.type() == Duration::V_MEASURE)    // whole measure rest?
+            return static_cast<Measure*>(parent()->parent())->tickLen();
+      int ticks = duration().ticks();
+// printf("DurationElement::ticks: %d\n", ticks);
+      for (Tuplet* t = tuplet(); t; t = t->tuplet()) {
+            ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
+// printf("    * %d / %d = %d\n", t->ratio().nenner(), t->ratio().zaehler(), ticks);
+            }
+      return ticks;
       }
 
 //---------------------------------------------------------
@@ -91,7 +99,6 @@ ChordRest::ChordRest(Score* s)
       _beam     = 0;
       _small    = false;
       _beamMode = BEAM_AUTO;
-      _dots     = 0;
       _up       = true;
       }
 
@@ -102,7 +109,6 @@ ChordRest::ChordRest(const ChordRest& cr)
       _up                 = cr._up;
       _small              = cr._small;
       _beamMode           = cr._beamMode;
-      _dots               = cr._dots;
       _extraLeadingSpace  = cr._extraLeadingSpace;
       _extraTrailingSpace = cr._extraTrailingSpace;
 
@@ -145,7 +151,7 @@ QPointF ChordRest::canvasPos() const
 //   properties
 //---------------------------------------------------------
 
-QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
+QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
       {
       QList<Prop> pl = Element::properties(xml);
       //
@@ -167,8 +173,6 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
                   }
             pl.append(Prop("BeamMode", s));
             }
-      if (_tickLen)
-            pl.append(Prop("ticklen", _tickLen));
       if (tuplet())
             pl.append(Prop("Tuplet", tuplet()->id()));
       if (_small)
@@ -177,13 +181,9 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
             pl.append(Prop("leadingSpace", _extraLeadingSpace.val()));
       if (_extraTrailingSpace.val() != 0.0)
             pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
-      if (!clipboardmode) {
-            if (tickLen() != duration().ticks(_dots)) {
-                  if (_dots)
-                        pl.append(Prop("dots", _dots));
-                  pl.append(Prop("durationType", duration().name()));
-                  }
-            }
+      if (duration().dots())
+            pl.append(Prop("dots", duration().dots()));
+      pl.append(Prop("durationType", duration().name()));
       return pl;
       }
 
@@ -205,10 +205,7 @@ void ChordRest::writeProperties(Xml& xml) const
             }
       if (!xml.clipboardmode && _beam)
             xml.tag("Beam", _beam->id());
-      int len = tickLen();
-      if (type() == REST && len == 0)
-            len = measure()->tickLen();
-      xml.curTick = tick() + len;
+      xml.curTick = tick() + ticks();
       }
 
 //---------------------------------------------------------
@@ -257,8 +254,6 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
                   }
             if (tuplet() == 0)
                   printf("Tuplet id %d not found\n", i);
-            else
-                  setTickLen(tickLen());  // set right symbol + dots
             }
       else if (tag == "leadingSpace")
             _extraLeadingSpace = Spatium(val.toDouble());
@@ -303,17 +298,15 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
                   printf("Note::read(): Slur not found\n");
                   }
             }
-      else if (tag == "durationType") {
+      else if (tag == "durationType")
+            setDuration(Duration(val));
+      else if (tag == "ticklen") {  // obsolete
             Duration d;
-            d.setVal(val);
+            d.setVal(i);
             setDuration(d);
             }
-      else if (tag == "ticklen")
-            setTickLen(i);
-      else if (tag == "tickLen")    // debug
-            setTickLen(i);
       else if (tag == "dots")
-            _dots = i;
+            setDots(i);
       else
             return false;
       return true;
@@ -494,20 +487,6 @@ void ChordRest::removeSlurBack(Slur* s)
             return;
             }
       _slurBack.removeAt(idx);
-      }
-
-//---------------------------------------------------------
-//   setLen
-//---------------------------------------------------------
-
-void ChordRest::setLen(int ticks)
-      {
-      setTickLen(ticks);
-      Duration dt;
-      int dts;
-      headType(ticks, &dt, &dts);
-      setDuration(dt);
-      setDots(dts);
       }
 
 //---------------------------------------------------------

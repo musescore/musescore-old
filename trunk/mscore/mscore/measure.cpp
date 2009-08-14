@@ -878,14 +878,11 @@ void Measure::layout2()
 
       layoutBeams();
 
-      foreach(const MStaff* ms, staves) {
-            StaffLines* lines = ms->lines;
-            lines->setWidth(width());
-            }
+      foreach(const MStaff* ms, staves)
+            ms->lines->setWidth(width());
 
-      foreach(Element* element, _el) {
+      foreach(Element* element, _el)
             element->layout();
-            }
 
       //
       //   set measure number
@@ -1148,6 +1145,8 @@ void Measure::add(Element* el)
                   _tuplets.append(tuplet);
                   foreach(DurationElement* cr, tuplet->elements())
                         cr->setTuplet(tuplet);
+                  if (tuplet->tuplet())
+                        tuplet->tuplet()->add(tuplet);
                   }
                   break;
             case LAYOUT_BREAK:
@@ -1230,6 +1229,8 @@ void Measure::remove(Element* el)
                         printf("Measure remove: Tuplet not found\n");
                         return;
                         }
+                  if (tuplet->tuplet())
+                        tuplet->tuplet()->remove(tuplet);
                   }
                   break;
 
@@ -1776,10 +1777,7 @@ printf("\n");
                         continue;
                   ElementType t = e->type();
                   if (t == REST) {
-                        //
-                        // center symbol if its a whole measure rest
-                        //
-                        if (!_irregular && ((e->tickLen() == 0) || (e->tickLen() == tickLen()))) {
+                        if (static_cast<Rest*>(e)->duration() == Duration::V_MEASURE) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
                               double xx = 0;
@@ -1987,7 +1985,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
             _score->undo()->push(new InsertMStaff(this, ms, i));
 
-            Rest* rest = new Rest(score(), tick(), 0);
+            Rest* rest = new Rest(score(), tick(), Duration(Duration::V_MEASURE));
             rest->setTrack(i * VOICES);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             if (s == 0) {
@@ -2425,7 +2423,7 @@ void Measure::adjustToLen(int ol, int nl)
                   }
             // printf("rests = %d\n", rests);
             if (rests == 1 && chords == 0) {
-                  rest->setTickLen(0);    // whole measure rest
+                  rest->setDuration(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
                   int strack = staffIdx * VOICES;
@@ -2438,8 +2436,8 @@ void Measure::adjustToLen(int ol, int nl)
                               for (Segment* segment = last(); segment;) {
                                     Segment* pseg = segment->prev();
                                     Element* e = segment->element(trk);
-                                    if (e && (e->type() == CHORD || e->type() == REST)) {
-                                          n += e->tickLen();
+                                    if (e && e->isChordRest()) {
+                                          n += static_cast<ChordRest*>(e)->ticks();
                                           score()->undoRemoveElement(e);
                                           if (segment->isEmpty())
                                                 score()->undoRemoveElement(segment);
@@ -2459,7 +2457,9 @@ void Measure::adjustToLen(int ol, int nl)
                                     seg = createSegment(Segment::SegChordRest, rtick);
                                     score()->undoAddElement(seg);
                                     }
-                              rest = new Rest(score(), rtick, n);
+                              Duration d;
+                              d.setVal(n);
+                              rest = new Rest(score(), rtick, d);
                               rest->setTrack(staffIdx * VOICES + voice);
                               seg->add(rest);
                               }
@@ -2523,25 +2523,36 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   el->write(xml);
                   }
             }
-
+      foreach(Tuplet* tuplet, _tuplets) {             // pass1: generate tupletId's
+            if (tuplet->staffIdx() == staff)
+                  tuplet->setId(xml.tupletId++);
+            }
+      for (int level = 0; true; level++) {                // pass2: write tuplets
+            bool found = false;
+            foreach(Tuplet* tuplet, _tuplets) {
+                  if (tuplet->staffIdx() == staff) {
+                        int l = 0;
+                        for (Tuplet* t = tuplet->tuplet(); t; t = t->tuplet())
+                              ++l;
+                        if (l == level) {
+                              tuplet->write(xml);
+                              found = true;
+                              }
+                        }
+                  }
+            if (!found)
+                  break;
+            }
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
                   if (e && !e->generated()) {
-                        if (e->isDurationElement()) {
-                              DurationElement* de = static_cast<DurationElement*>(e);
-                              Tuplet* tuplet = de->tuplet();
-                              if (tuplet && tuplet->elements().front() == de) {
-                                    tuplet->setId(xml.tupletId++);
-                                    tuplet->write(xml);
-                                    }
-                              if (de->isChordRest()) {
-                                    ChordRest* cr = static_cast<ChordRest*>(de);
-                                    Beam* beam = cr->beam();
-                                    if (beam && beam->elements().front() == cr) {
-                                          beam->setId(xml.beamId++);
-                                          beam->write(xml);
-                                          }
+                        if (e->isChordRest()) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              Beam* beam = cr->beam();
+                              if (beam && beam->elements().front() == cr) {
+                                    beam->setId(xml.beamId++);
+                                    beam->write(xml);
                                     }
                               }
                         e->write(xml);
@@ -2869,6 +2880,9 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Tuplet") {
                   Tuplet* tuplet = new Tuplet(score());
                   tuplet->setTrack(score()->curTrack);
+                  tuplet->setTick(score()->curTick);
+                  tuplet->setTrack(score()->curTrack);
+                  tuplet->setParent(this);      // tuplet read needs access to measure
                   tuplet->read(e);
                   add(tuplet);
                   }
@@ -3054,7 +3068,7 @@ void Measure::createVoice(int track)
             if (s->subtype() != Segment::SegChordRest)
                   continue;
             if (s->element(track) == 0) {
-                  Rest* rest = new Rest(score(), tick(), 0);
+                  Rest* rest = new Rest(score(), tick(), Duration(Duration::V_MEASURE));
                   rest->setTrack(track);
                   rest->setParent(s);
                   score()->undoAddElement(rest);
@@ -3356,5 +3370,18 @@ bool Measure::isEmpty() const
             s = s->next();
             }
       return empty && (n < 2);
+      }
+
+//---------------------------------------------------------
+//   firstCRSegment
+//---------------------------------------------------------
+
+Segment* Measure::firstCRSegment() const
+      {
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() == Segment::SegChordRest)
+                  return s;
+            }
+      return 0;
       }
 

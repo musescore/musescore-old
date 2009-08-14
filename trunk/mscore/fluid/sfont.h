@@ -29,11 +29,11 @@ class Xml;
 
 namespace FluidS {
 
-struct SFInst;
-struct SFPreset;
-struct SFZone;
 class Preset;
 class Sample;
+class Instrument;
+struct SFGen;
+struct SFMod;
 
 struct SFChunk;
 
@@ -43,11 +43,7 @@ struct SFChunk;
 
 struct SFVersion {            // version structure
       unsigned short major, minor;
-
-      SFVersion() {
-            major = 0;
-            minor = 0;
-            }
+      SFVersion();
       };
 
 //---------------------------------------------------------
@@ -59,19 +55,21 @@ class SFont {
       QFile f;
       unsigned samplepos;           // the position in the file at which the sample data starts
       unsigned samplesize;          // the size of the sample data
+
+      QList<Instrument*> instruments;
       QList<Preset*> presets;
       QList<Sample*> sample;
+
       unsigned _id;
       SFVersion version;		// sound font version
       SFVersion romver;		      // ROM version
-      QList<unsigned char*> info;	// list of info strings (1st byte is ID)
-      QList<SFPreset*> preset;      // list of preset info
-      QList<SFInst*> inst;
+      QList<unsigned char*> infos;	// list of info strings (1st byte is ID)
 
       void read_listchunk(SFChunk* chunk);
       void process_info(int size);
       void process_sdta(int size);
       void pdtahelper(unsigned int expid, unsigned int reclen, SFChunk* chunk, int* size);
+
       void process_pdta(int size);
       void load_phdr(int size);
       void load_pbag(int size);
@@ -82,6 +80,7 @@ class SFont {
       void load_imod(int size);
       void load_igen(int size);
       void load_shdr(int size);
+
       void fixup_pgen();
       void fixup_igen();
       void fixup_sample();
@@ -106,10 +105,9 @@ class SFont {
       Preset* get_preset(int bank, int prenum);
 
       bool read(const QString& file);
-      void write(Xml&);
+      void write(Xml&) const;
 
       Sample* get_sample(char*);
-      void add_preset(Preset* preset)           { presets.append(preset); }
       int load_sampledata();
       unsigned int samplePos() const            { return samplepos;  }
       unsigned id() const                       { return _id; }
@@ -160,65 +158,54 @@ class Sample {
       };
 
 //---------------------------------------------------------
-//   InstZone
+//   Zone
 //---------------------------------------------------------
 
-class InstZone {
-      InstZone* _next;
-
-   public:
-      char* name;
-      Sample* sample;
-      int keylo, keyhi, vello, velhi;
-      Generator gen[GEN_LAST];
-      Mod* mod;   /* List of modulators */
-
-      InstZone(const char* name);
-      ~InstZone();
-      InstZone* next() const { return _next; }
-      bool import_sfont(SFZone *sfzone, SFont* sfont);
-      int inside_range(int key, int vel);
-      Sample* get_sample() const { return sample; }
-      };
-
-//---------------------------------------------------------
-//   Inst
-//---------------------------------------------------------
-
-class Inst {
-   public:
-      char name[21];
-      InstZone* global_zone;
-      QList<InstZone*> zone;
-
-      Inst();
-      ~Inst();
-      void set_global_zone(InstZone* z) { global_zone = z; }
-      InstZone* get_global_zone() const { return global_zone; }
-      QList<InstZone*> get_zone()       { return zone; }
-      bool import_sfont(SFInst*, SFont*);
-      };
-
-//---------------------------------------------------------
-//   PresetZone
-//---------------------------------------------------------
-
-class PresetZone {
+class Zone {
    public:
       QString name;
-      Inst* inst;
-      int keylo;
-      int keyhi;
-      int vello;
-      int velhi;
-      Generator gen[GEN_LAST];
-      Mod* mod;        // List of modulators
 
-      PresetZone(const QString&);
-      ~PresetZone();
-      bool importSfont(SFZone* sfzone, SFont* sfont);
+      union {
+            Sample* sample;
+            int sampIdx;
+            Instrument* instrument;
+            int instIdx;
+            };
+
+      QList<SFGen*> gen;
+      QList<SFMod*> mod;
+
+      int keylo, keyhi, vello, velhi;
+      Generator   genlist[GEN_LAST];
+      QList<Mod*> modlist;        // List of modulators
+
+   public:
+      Zone();
+      ~Zone();
+      bool importZone();
       bool inside_range(int key, int vel) const;
-      Inst* get_inst() const { return inst; }
+      Instrument* get_inst()     const          { return instrument; }
+      Sample* get_sample() const                { return sample; }
+      void write(Xml&, const char*) const;
+      };
+
+//---------------------------------------------------------
+//   Instrument
+//---------------------------------------------------------
+
+class Instrument {
+   public:
+      QString name;
+
+      Zone* global_zone;
+      QList<Zone*> zones;
+
+   public:
+      Instrument();
+      ~Instrument();
+      Zone* get_global_zone() const     { return global_zone; }
+      QList<Zone*> get_zone()           { return zones; }
+      bool import_sfont();
       };
 
 //---------------------------------------------------------
@@ -226,30 +213,31 @@ class PresetZone {
 //---------------------------------------------------------
 
 class Preset {
+   public:
       QString name;                 // the name of the preset
+      SFont* sfont;
       int bank;                     // the bank number
       int num;                      // the preset number
-      PresetZone* _global_zone;     // the global zone of the preset
-      QList<PresetZone*> zones;
+
+      Zone* _global_zone;           // the global zone of the preset
+      QList<Zone*> zones;
 
    public:
       Preset(SFont* sfont);
       ~Preset();
-
-      SFont* sfont;
 
       QString get_name() const                  { return name; }
       int get_banknum() const                   { return bank; }
       int get_num() const                       { return num;  }
       bool noteon(Fluid*, unsigned id, int chan, int key, int vel, double nt);
 
-      void setGlobalZone(PresetZone* z)         { _global_zone = z;   }
-      bool importSfont(SFPreset*, SFont*);
+      void setGlobalZone(Zone* z)               { _global_zone = z;   }
+      bool importSfont();
 
-      void add_zone(PresetZone* z)         { zones.prepend(z);  }
-      PresetZone* global_zone()            { return _global_zone; }
+      Zone* global_zone()                       { return _global_zone; }
       void loadSamples();
-      QList<PresetZone*> getZones()        { return zones; }
+      QList<Zone*> getZones()                   { return zones; }
+      void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -283,47 +271,6 @@ struct SFGen {				/* Generator structure  */
       SFGenAmount amount;		/* generator value      */
       };
 
-//---------------------------------------------------------
-//   SFZone
-//---------------------------------------------------------
-
-struct SFZone {                     /* Sample/instrument zone structure */
-      union {
-            Sample* samp;
-            int sampIdx;
-            SFInst* inst;
-            int instIdx;
-            };
-
-      QList<SFGen*> gen;
-      QList<SFMod*> mod;
-
-      SFZone() {}
-      ~SFZone();
-      };
-
-//---------------------------------------------------------
-//   SFInst
-//---------------------------------------------------------
-
-struct SFInst {                     // Instrument structure
-      char name[21];		      // Name of instrument
-      QList<SFZone*> zone;		// list of instrument zones
-      };
-
-//---------------------------------------------------------
-//   SFPreset
-//---------------------------------------------------------
-
-struct SFPreset {                   // Preset structure
-      char name[21];		      // preset name
-      unsigned short prenum;		// preset number
-      unsigned short bank;		// bank number
-      unsigned int libr;		// Not used (preserved)
-      unsigned int genre;		// Not used (preserved)
-      unsigned int morph;		// Not used (preserved)
-      QList<SFZone*> zone;          // list of preset zones
-      };
 
 /* NOTE: sffd is also used to determine if sound font is new (NULL) */
 

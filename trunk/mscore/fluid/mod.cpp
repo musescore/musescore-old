@@ -44,73 +44,27 @@ void Mod::clone(Mod* mod) const
 /*
  * fluid_mod_set_source1
  */
-void fluid_mod_set_source1(Mod* mod, int src, int flags)
+void Mod::set_source1(int src, int flags)
       {
-      mod->src1 = src;
-      mod->flags1 = flags;
+      src1   = src;
+      flags1 = flags;
       }
 
 /*
  * fluid_mod_set_source2
  */
-void fluid_mod_set_source2(Mod* mod, int src, int flags)
+void Mod::set_source2(int src, int flags)
       {
-      mod->src2 = src;
-      mod->flags2 = flags;
+      src2 = src;
+      flags2 = flags;
       }
-
-/*
- * fluid_mod_set_dest
- */
-void fluid_mod_set_dest(Mod* mod, int dest)
-      {
-      mod->dest = dest;
-      }
-
-/*
- * fluid_mod_set_amount
- */
-void fluid_mod_set_amount(Mod* mod, double amount)
-      {
-      mod->amount = (double) amount;
-      }
-
-int fluid_mod_get_source1(Mod* mod)
-      {
-      return mod->src1;
-      }
-
-int fluid_mod_get_flags1(Mod* mod)
-      {
-      return mod->flags1;
-      }
-
-int fluid_mod_get_source2(Mod* mod)
-      {
-      return mod->src2;
-      }
-
-int fluid_mod_get_flags2(Mod* mod)
-      {
-      return mod->flags2;
-      }
-
-int fluid_mod_get_dest(Mod* mod)
-      {
-      return mod->dest;
-      }
-
-double fluid_mod_get_amount(Mod* mod)
-      {
-      return (float) mod->amount;
-      }
-
 
 /*
  * fluid_mod_get_value
  */
-float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
+float Mod::get_value(Channel* chan, Voice* voice)
       {
+      Mod* mod = this;
       float v1 = 0.0, v2 = 1.0;
       float range1 = 127.0, range2 = 127.0;
 
@@ -344,19 +298,13 @@ float fluid_mod_get_value(Mod* mod, Channel* chan, Voice* voice)
  * Checks, if two modulators are identical.
  *  SF2.01 section 9.5.1 page 69, 'bullet' 3 defines 'identical'.
  */
-int test_identity(Mod * mod1, Mod * mod2)
+bool test_identity(const Mod * mod1, const Mod * mod2)
       {
-      if (mod1->dest != mod2->dest)
-            return 0;
-      if (mod1->src1 != mod2->src1)
-            return 0;
-      if (mod1->src2 != mod2->src2)
-            return 0;
-      if (mod1->flags1 != mod2->flags1)
-            return 0;
-      if (mod1->flags2 != mod2->flags2)
-            return 0;
-      return 1;
+      return (mod1->dest != mod2->dest)
+            || (mod1->src1 != mod2->src1)
+            || (mod1->src2 != mod2->src2)
+            || (mod1->flags1 != mod2->flags1)
+            || (mod1->flags2 != mod2->flags2);
       }
 
 //---------------------------------------------------------

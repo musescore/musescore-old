@@ -275,9 +275,9 @@ int Voice::dsp_float_interpolate_linear()
 int Voice::dsp_float_interpolate_4th_order()
       {
       Phase dsp_phase_incr; // end_phase;
-      short int *dsp_data = sample->data;
-      float dsp_amp_incr = amp_incr;
-      unsigned int dsp_i = 0;
+      short int* dsp_data = sample->data;
+      float dsp_amp_incr  = amp_incr;
+      unsigned int dsp_i  = 0;
       unsigned int dsp_phase_index;
       unsigned int start_index, end_index;
       short int start_point, end_point1, end_point2;

@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.11"
+#define MSC_VERSION     "1.12"
 
-static const int MSCVERSION = 111;
+static const int MSCVERSION = 112;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -34,6 +34,7 @@ static const int MSCVERSION = 111;
 //    1.9   image size stored in mm instead of pixel
 //    1.10  TextLine properties changed
 //    1.11  Instrument name in part saved as TextC
+//    1.12  use durationType, remove tickLen
 
 extern int division;
 

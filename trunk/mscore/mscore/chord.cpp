@@ -715,19 +715,6 @@ Note* Chord::selectedNote() const
 
 void Chord::write(Xml& xml, int startTick, int endTick) const
       {
-#if 0
-      int oldTickLen = tickLen();
-      int totalLen   = oldTickLen;
-      if (xml.clipboardmode) {
-            const Chord* c = this;
-            while (c->downNote()->tieFor()) {
-                  c = c->downNote()->tieFor()->endNote()->chord();
-                  totalLen += c->tickLen();
-                  }
-            }
-      setTickLen(totalLen);   // set temporary new tickLen
-#endif
-
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
       if (_noteType != NOTE_NORMAL) {
@@ -773,12 +760,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
       if (_tremolo)
             _tremolo->write(xml);
       xml.etag();
-      xml.curTick = tick() + tickLen();
-#if 0
-      xml.curTick = tick() + totalLen;
-      if (xml.clipboardmode)
-            setTickLen(oldTickLen);
-#endif
+      xml.curTick = tick() + ticks();
       }
 
 //---------------------------------------------------------
@@ -792,8 +774,11 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
       int ticks  = e.attribute("ticks", "-1").toInt();
       int tpc    = e.attribute("tpc", "-1").toInt();
 
-      if (ticks != -1)
-            setTickLen(ticks);
+      if (ticks != -1) {
+            Duration d;
+            d.setVal(ticks);
+            setDuration(d);
+            }
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -839,11 +824,6 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
             note->setPitch(ptch);
       if (tpc != -1)
             note->setTpc(tpc);
-      if (!duration().isValid()) {
-            Duration dt;
-            headType(tickLen(), &dt, &_dots);
-            setDuration(dt);
-            }
       add(note);
       }
 
@@ -876,8 +856,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
                   note->read(e);
                   notes.add(note);
                   }
-//            else if (tag == "GraceNote")
-//                  _noteType = NOTE_APPOGGIATURA;
             else if (tag == "appoggiatura")
                   _noteType = NOTE_APPOGGIATURA;
             else if (tag == "acciaccatura")
@@ -926,14 +904,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
             else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
-      int len = tickLen();
-      if (tuplet())
-            len = (len * (tuplet()->actualNotes()) + (tuplet()->normalNotes()/2)) / tuplet()->normalNotes();
-      if (!duration().isValid()) {
-            Duration dt;
-            headType(len, &dt, &_dots);
-            setDuration(dt);
-            }
       for (iNote i = notes.begin(); i != notes.end(); ++i) {
             Note* note = i->second;
             note->setType(duration());
@@ -946,7 +916,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
 
 void Chord::dump() const
       {
-      printf("Chord tick %d  len %d\n", tick(), tickLen());
+      printf("Chord tick %d  len %d\n", tick(), ticks());
       }
 
 //---------------------------------------------------------

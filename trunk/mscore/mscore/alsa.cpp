@@ -283,12 +283,19 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
       if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_NONINTERLEAVED)) < 0)
          && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_INTERLEAVED)) < 0)) {
             fprintf (stderr, "Alsa_driver: the interface doesn't support mmap-based access.\n");
-            return -1;
+            rwAccess = true;
+//            if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
+//               && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0)) {
+//                  fprintf (stderr, "Alsa_driver: the interface doesn't support rw-based access.\n");
+                  return -1;
+//                  }
             }
+      else
+            rwAccess = false;
 
-      if (((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S16)) < 0)
-         && ((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S24_3LE)) < 0)
-         && ((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S32)) < 0)) {
+      if (((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S16)) < 0)
+         && ((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S24_3LE)) < 0)
+         && ((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S32)) < 0)) {
             fprintf (stderr, "Alsa_driver: the interface doesn't support 32, 24 or 16 bit access.\n.");
             return -1;
             }

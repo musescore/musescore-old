@@ -844,11 +844,11 @@ class ChangeInstrumentLong : public UndoCommand {
 
 class ChangeChordRestLen : public UndoCommand {
       ChordRest* cr;
-      int len;
+      Duration d;
       void flip();
 
    public:
-      ChangeChordRestLen(ChordRest*, int len);
+      ChangeChordRestLen(ChordRest*, const Duration& d);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
@@ -1104,6 +1104,21 @@ class ChangeStyle : public UndoCommand {
 
    public:
       ChangeStyle(Score*, const Style&);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   ChangeSlurProperties
+//---------------------------------------------------------
+
+class ChangeSlurProperties : public UndoCommand {
+      SlurTie* st;
+      int lineType;
+      void flip();
+
+   public:
+      ChangeSlurProperties(SlurTie*, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

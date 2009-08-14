@@ -694,10 +694,6 @@ void StaffLines::draw(QPainter& p) const
       QPointF _pos(0.0, 0.0);
       double _spatium = spatium();
 
-//      p.save();
-//      p.setRenderHint(QPainter::Antialiasing, false);
-//      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
-
       QPen pen(p.pen());
       pen.setWidthF(point(score()->styleS(ST_staffLineWidth)));
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
@@ -737,7 +733,6 @@ void StaffLines::draw(QPainter& p) const
                         }
                   break;
             }
-//      p.restore();
       }
 
 //---------------------------------------------------------

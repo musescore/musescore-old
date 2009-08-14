@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: voltaproperties.h 1840 2009-05-20 11:57:51Z wschweer $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -18,38 +18,22 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SYNTI_H__
-#define __SYNTI_H__
+#ifndef __VOLTAPROPERTIES_H__
+#define __VOLTAPROPERTIES_H__
 
-struct MidiPatch;
-class Event;
-
-//---------------------------------------------------------
-//   MidiPatch
-//---------------------------------------------------------
-
-struct MidiPatch {
-      bool drum;
-      int bank, prog;
-      QString name;
-      };
+#include "ui_slurproperties.h"
 
 //---------------------------------------------------------
-//   Synth
+//   SlurProperties
 //---------------------------------------------------------
 
-class Synth {
+class SlurProperties : public QDialog, public Ui::SlurPropertyBase {
+      Q_OBJECT
 
    public:
-      Synth() {}
-      virtual ~Synth() {}
-      virtual void init(int sampleRate) = 0;
-      virtual void setMasterTuning(float) {}
-      virtual bool loadSoundFont(const QString&) = 0;
-      virtual void process(unsigned, float*, float*, int) = 0;
-      virtual void play(const Event&) = 0;
-      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const = 0;
+      SlurProperties(QWidget* parent = 0);
+      int getLineType() const;
+      void setLineType(int val);
       };
 
 #endif
-
