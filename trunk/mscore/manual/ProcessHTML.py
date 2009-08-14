@@ -177,7 +177,7 @@ def removeBaseTag(html_source, language_code='en'):
     BeautifulSoup.NESTABLE_TAGS.update({'kbd':[]}) # add 'kbd' to list of nestable tags
     html_soup = BeautifulSoup(html_source)
 
-    if (html_soup.find('base') > -1):   
+    if (html_source.find('base') > -1):   
         html_soup('base')[0].extract() # remove base tag from document
 
     html_source = str(html_soup)
@@ -210,10 +210,13 @@ def addCustomStyles(html_source, verbose):
                 print ' * ' + str(i) + " " + html_soup('style')[i].name
             html_soup('style')[i].extract() # remove style from document
 
-    if (html_soup.find('link') > -1):
-        html_soup('link')[1].extract()
-        if verbose:
-            print ' * 1 external style'
+    for i in range(0, len(html_soup('link'))):
+        if html_soup('link')[i].get("rel", None) == "stylesheet":
+            try:
+                print ' * external stylesheet: %s' % html_soup('link')[i].get("href")
+            except:
+                print ' * external stylesheet'
+            html_soup('link')[i].extract()
 
     html_source = str(html_soup)
 
@@ -311,7 +314,7 @@ def addCoverPage(html_source, verbose):
         '''
         <div style="text-align:center">
         <h1 style="border:0; padding-top:3cm">MuseScore Handbook</h1>
-        <h2>MuseScore 0.9.4</h2>
+        <h2>MuseScore 0.9.5</h2>
         <p style="padding-top:12cm">English handbook written by Werner Schweer and David Bolton. Contributions by Thomas Bonte, Toby Smithe, and others. </p>
         <p>Copyright &copy; 2002-2009. Licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0</a> license</p>
         </div>

@@ -1,3 +1,8 @@
+13.aug (db)
+      - patch from Toby Smithe updates version number for English handbook
+        and fixes code intended to remove external style sheets
+      - fix base tag removal in processHTML.py
+      - update English and German handbooks
 9.aug (db)
       - limit templates to one measure (except leadsheet.mscx)
       - fix articulation distances in templates
