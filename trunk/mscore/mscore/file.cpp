@@ -646,6 +646,7 @@ void MuseScore::newFile()
             sigmap->add(0, SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
             int tick = score->getSigmap()->ticksMeasure(0);
             sigmap->add(tick, SigEvent(timesigZ, timesigN));
+            score->firstMeasure()->setIrregular(true);
             }
       else {
             sigmap->add(0, SigEvent(timesigZ, timesigN));

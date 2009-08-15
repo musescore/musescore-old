@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2008 by Werner Schweer and others
+#  Copyright (C) 2002-2009 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -60,7 +60,7 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR  "0")
 SET(Mscore_VERSION_MINOR  "9")
-SET(Mscore_VERSION_PATCH  "5")
+SET(Mscore_VERSION_PATCH  "6")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
@@ -212,7 +212,7 @@ include_directories(
    ${PROJECT_BINARY_DIR}/mscore
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
-   ${PORTAUDIO_INCDIR}   
+   ${PORTAUDIO_INCDIR}
 )
 
 ##

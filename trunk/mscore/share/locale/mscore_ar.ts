@@ -976,6 +976,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>سنت</translation>
     </message>
     <message>
@@ -1422,6 +1423,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>مسافة</translation>
     </message>
     <message>
@@ -1766,6 +1772,14 @@ failed: </source>
         <source>invalid</source>
         <translation>لا يصلح</translation>
     </message>
+    <message>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
@@ -1954,6 +1968,32 @@ failed: </source>
     <message>
         <source>Cancel</source>
         <translation>إلغاء</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished">ميوزسكور: مراقب المكوّنات</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">سياق</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2382,84 +2422,8 @@ failed: </source>
         <translation>سياق</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>مازورة</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>نهاية سطر</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>نهاية صفحة</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>غير منتظم</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation>بداية إعادة</translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>رقم:</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>تربيطات:</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>تمديد:</translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation>مكونات الصفحة:</translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>مدرجات:</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation>دون بداية:</translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>ثلثية وخلافه:</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>أجزاء:</translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation>نهاية إعادة:</translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation>اختيارات إعادة:</translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>مكونات:</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>عنصر</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation>طراز فرعى</translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation>سابق</translation>
-    </message>
-    <message>
-        <source>next</source>
-        <translation>لاحق</translation>
+        <source>breakMultiMeasureRest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4951,19 +4915,11 @@ before closing?</source>
     </message>
     <message>
         <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">إزالة الموازير المعيّنة</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation>إزالة الموازير المعيّنة</translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation>إزالة الموازير المعيّنة</translation>
+        <translation type="unfinished">إزالة الموازير المعيّنة</translation>
     </message>
 </context>
 <context>
@@ -5107,13 +5063,6 @@ before closing?</source>
     <message>
         <source>Page No.:</source>
         <translation>رقم الصفحة:</translation>
-    </message>
-</context>
-<context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>ميوزسكور: مراقب المكوّنات</translation>
     </message>
 </context>
 <context>
@@ -5973,6 +5922,7 @@ before closing?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>ملليمتر</translation>
     </message>
     <message>
@@ -5989,6 +5939,7 @@ before closing?</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6975,6 +6926,7 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>س:</translation>
     </message>
     <message>
@@ -6995,6 +6947,7 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>ص:</translation>
     </message>
     <message>

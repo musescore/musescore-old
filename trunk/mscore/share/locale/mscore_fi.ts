@@ -91,6 +91,10 @@
         <source>Ukrajina</source>
         <translation>Ukraina</translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -241,38 +245,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation>Sointu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation>Varsi</translation>
+        <translation type="unfinished">Varsi</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation>Haka</translation>
+        <translation type="unfinished">Haka</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation>Koristenuotti</translation>
+        <translation type="unfinished">Koristenuotti</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation>Varren suunta</translation>
+        <translation type="unfinished">Varren suunta</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation>Nuotit:</translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation>Apuviivat:</translation>
+        <translation type="unfinished">Apuviivat:</translation>
     </message>
 </context>
 <context>
@@ -1013,73 +1010,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Muoto</translation>
     </message>
-    <message>
-        <source>ChordRest</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Palkki</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Tupletti</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>Atribuutit:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Ylös</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>Palkkimuoto:</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>Pisteet:</translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialogi</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Etsi kolminuottisia sointuja ja</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>poista alin nuotti</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>poista keskimmäinen nuotti</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>poista ylin nuotti</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Valitse viritys</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Viritys</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>Dynamic</name>
@@ -1109,14 +1039,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Muoto</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Dynamiikka</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>Alatyyppi:</translation>
     </message>
 </context>
 <context>
@@ -1838,96 +1760,16 @@ space unit</extracomment>
         <translation>Muoto</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>Vanhempi</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>epäkelpo</translation>
     </message>
     <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2117,6 +1959,32 @@ space unit</extracomment>
     <message>
         <source>Cancel</source>
         <translation>Peruuta</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished">MuseScore: Objektin tarkastaja</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Muoto</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2543,84 +2411,8 @@ failed: </source>
         <translation>Muoto</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>Tahti</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>Rivin vaihto</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>Sivun vaihto</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>Epäsäännöllinen</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>Nro.:</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>Palkit:</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>Venytys:</translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>Viivastot:</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>Tupletit:</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>Segmentit:</translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>Elementit:</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Elementti</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation>edellinen</translation>
-    </message>
-    <message>
-        <source>next</source>
-        <translation>seuraava</translation>
+        <source>breakMultiMeasureRest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3529,66 +3321,6 @@ ennen sulkemista?</translation>
     <message>
         <source>Go To: </source>
         <translation>Siirry:</translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Pakattu MuseScore-formaatti (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore formaatti (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML-formaatti (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Pakattu MusicXML-formaatti (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>Standardi MIDI-tiedosto (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>PDF-tiedosto (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>PostScript-tiedosto (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG-bittikarttagrafiikka (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation>Skaalattava vektorigrafiikka</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond-formaatti (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation>Wave Audio (*.wav)</translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation>MuseScore: Tallenna nimellä</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Tallenna kopio</translation>
     </message>
     <message>
         <source>file open</source>
@@ -5171,6 +4903,14 @@ ennen sulkemista?</translation>
         <source>Edit Text Style...</source>
         <translation>Muokkaa tekstityyliä...</translation>
     </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5299,101 +5039,6 @@ ennen sulkemista?</translation>
         <source>note head group</source>
         <translation>nuotin pääryhmä</translation>
     </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation>Pää</translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation>Viiva</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation>Siirrä</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation>Tilapäinen etumerkintä</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation>Piilotettu</translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -5408,13 +5053,6 @@ ennen sulkemista?</translation>
     <message>
         <source>Page No.:</source>
         <translation>Sivu Nro.:</translation>
-    </message>
-</context>
-<context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Objektin tarkastaja</translation>
     </message>
 </context>
 <context>
@@ -6285,6 +5923,15 @@ ennen sulkemista?</translation>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Korvaa 1/2 .. symbolilla ...</translation>
     </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6670,6 +6317,62 @@ epäonnistui:</translation>
         <translation>&gt; epäonnistui:
 </translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished">Pakattu MuseScore-formaatti (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished">MuseScore formaatti (*.mscx)</translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">MusicXML-formaatti (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">Pakattu MusicXML-formaatti (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">Standardi MIDI-tiedosto (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF-tiedosto (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript-tiedosto (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG-bittikarttagrafiikka (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">Skaalattava vektorigrafiikka</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Lilypond-formaatti (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished">Wave Audio (*.wav)</translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore: Tallenna kopio</translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6869,10 +6572,33 @@ epäonnistui:</translation>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">Maalin ominaisuudet</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">kiinteä</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>Muokkaustila</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6880,30 +6606,6 @@ epäonnistui:</translation>
     <message>
         <source>Form</source>
         <translation>Muoto</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>Yhdyskaari</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>Kaaren segmentti</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>Ylös</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>Suunta:</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>Automaattinen</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>Alas</translation>
     </message>
 </context>
 <context>
@@ -7447,50 +7149,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Muoto</translation>
     </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Tupletit</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>numero</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>viiva</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>peruspituus</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>normaalit nuotit</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>varsinaiset nuotit</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>Sointu / taukoluettelo:</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>Tekstielementti</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Elementti</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Pituus</translation>
-    </message>
 </context>
 <context>
     <name>TupletDialog</name>
@@ -7579,77 +7237,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP-pakkaus onnistui.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>zlib -kirjaston alustus ja lataus epäonnistui.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib -kirjastovirhe.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Tiedoston luonti tai avaus epäonnistui.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Osittain vioittunut arkisto. Jotkin tiedostot saattavat toimia.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Vioittunut arkisto.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Väärä salasana.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Arkistoa ei vielä luotu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Tiedostoa tai hakemistoa ei ole.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Tiedoston lukuvirhe.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Tiedoston kirjoitusvirhe.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Tiedoston hakuvirhe.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Hakemiston luonti epäonnistui.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Väärä laite.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Virheellinen tai yhteensopimattomasta zip-arkisto.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Epäyhtenäinset otsikot. Arkisto saattaa olla vioittunut.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Tuntematon virhe.</translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -7673,49 +7260,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Toistolista:</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP-pakkaus onnistui.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>zlib -kirjaston alustus ja lataus epäonnistui.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib -kirjastovirhe.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Tiedoston luonti tai avaus epäonnistui.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Arkistoa ei vielä luotu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Tiedostoa tai hakemistoa ei ole.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Tiedoston lukuvirhe.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Tiedoston kirjoitusvirhe.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Tiedoston hakuvirhe.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Tuntematon virhe.</translation>
     </message>
 </context>
 <context>

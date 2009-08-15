@@ -91,6 +91,10 @@
         <source>Ukrajina</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -110,7 +114,7 @@
         <source>Revision: 628</source>
         <translation>Revisión: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -988,6 +992,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>cent</translation>
     </message>
     <message>
@@ -1417,6 +1422,11 @@ fallou:</translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -1761,6 +1771,14 @@ fallou:</translation>
         <source>invalid</source>
         <translation>non válido</translation>
     </message>
+    <message>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
@@ -1949,6 +1967,32 @@ fallou:</translation>
     <message>
         <source>Cancel</source>
         <translation>Cancelar</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished">MuseScore: Inspector de obxectos</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formulario</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2377,84 +2421,8 @@ fallou:</translation>
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>Compás</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>Salto de liña</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>Salto de páxina</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>Irregular</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation>ComezarRepetición</translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>Nº:</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>Unións:</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>Anchura dos compases:</translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation>ElementoDaPáxina:</translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>Pentagramas:</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation>SenDesprazamento:</translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>Grupos artificiais:</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>Fragmentos:</translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation>RepatarRepetición:</translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation>BandeirasRepetición:</translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>Elementos:</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Elemento</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation>Subtipo</translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation>anterior</translation>
-    </message>
-    <message>
-        <source>next</source>
-        <translation>seguinte</translation>
+        <source>breakMultiMeasureRest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5097,13 +5065,6 @@ antes de fechar?</translation>
     </message>
 </context>
 <context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Inspector de obxectos</translation>
-    </message>
-</context>
-<context>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
@@ -5968,6 +5929,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -5976,6 +5938,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6962,6 +6925,7 @@ fallou:</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -6982,6 +6946,7 @@ fallou:</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
