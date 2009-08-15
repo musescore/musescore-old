@@ -91,6 +91,10 @@
         <source>Hungary</source>
         <translation>匈牙利語</translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -110,7 +114,7 @@
         <source>Revision: 628</source>
         <translation>修訂：628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -248,38 +252,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished">符幹</translation>
     </message>
     <message>
         <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -994,6 +991,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> 百分比</translation>
     </message>
     <message>
@@ -1018,38 +1016,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>ChordRest</source>
-        <translation>和弦與休止符</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>符槓</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>連音符</translation>
-    </message>
-    <message>
-        <source>Attributes:</source>
-        <translation>屬性：</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>向上</translation>
-    </message>
-    <message>
-        <source>isUp</source>
-        <translation>是向上</translation>
-    </message>
-    <message>
-        <source>Beam Mode:</source>
-        <translation>符槓類型：</translation>
-    </message>
-    <message>
-        <source>Dots:</source>
-        <translation>附點：</translation>
     </message>
 </context>
 <context>
@@ -1080,14 +1046,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>力度</translation>
-    </message>
-    <message>
-        <source>SubType:</source>
-        <translation>次類型：</translation>
     </message>
 </context>
 <context>
@@ -1456,6 +1414,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -1805,96 +1768,16 @@ failed: </source>
         <translation>表單</translation>
     </message>
     <message>
-        <source>Parent</source>
-        <translation>上一層</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>無作用</translation>
     </message>
     <message>
-        <source>Element</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>selected</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>system</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <comment>do not translate</comment>
-        <translation></translation>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2085,6 +1968,32 @@ failed: </source>
     <message>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished">MuseScore：元件檢查器</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">表單</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2513,85 +2422,8 @@ failed: </source>
         <translation>表單</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>小節</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>斷列</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>斷頁</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>非正規的</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation>開始反復</translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>編號：</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>符槓：</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>延伸：</translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translatorcomment>pageElements</translatorcomment>
-        <translation>頁面元件</translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>譜表：</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation>無偏移：</translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>連音符：</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>區段：</translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation>結束反復：</translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation>反復旗標：</translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>元件：</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>元件</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation>次類型</translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation>上一小節</translation>
-    </message>
-    <message>
-        <source>next</source>
-        <translation>下一小節</translation>
+        <source>breakMultiMeasureRest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5090,66 +4922,6 @@ before closing?</source>
         <translation>到：</translation>
     </message>
     <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>壓縮的 MuseScore 格式 (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore 格式 (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML 格式 (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>壓縮的 MusicXML 格式 (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>標準 MIDI 檔案 (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>PDF 檔案 (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>PostScript 檔案 (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG 點陣圖 (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation>可變動向量繪圖 (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond 格式 (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation>Wave 音訊檔 (*.wav)</translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation>Flac 音訊檔 (*.flac)</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Ogg Vorbis 音訊檔 (*.ogg)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation>MuseScore：另存新檔</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore：儲存副本</translation>
-    </message>
-    <message>
         <source>delete selected measures</source>
         <translation>刪除選取的小節</translation>
     </message>
@@ -5285,101 +5057,6 @@ before closing?</source>
         <source>note head group</source>
         <translation>符頭群組</translation>
     </message>
-    <message>
-        <source>Note</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>S-Channel</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>User-Acc</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ppitch</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Subelements:</source>
-        <comment>do not translate</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Velo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mirror Automatic</source>
-        <translation>自動反轉</translation>
-    </message>
-    <message>
-        <source>Head Left</source>
-        <translation>符頭在左側</translation>
-    </message>
-    <message>
-        <source>Head Right</source>
-        <translation>符頭在右側</translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -5394,13 +5071,6 @@ before closing?</source>
     <message>
         <source>Page No.:</source>
         <translation>頁碼：</translation>
-    </message>
-</context>
-<context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore：元件檢查器</translation>
     </message>
 </context>
 <context>
@@ -6268,7 +5938,17 @@ before closing?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>毫米</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6656,6 +6336,62 @@ failed: </source>
         <translation>&gt; 失敗：
 </translation>
     </message>
+    <message>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished">壓縮的 MuseScore 格式 (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished">MuseScore 格式 (*.mscx)</translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">MusicXML 格式 (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">壓縮的 MusicXML 格式 (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">標準 MIDI 檔案 (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF 檔案 (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript 檔案 (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG 點陣圖 (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">可變動向量繪圖 (*.svg)</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Lilypond 格式 (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished">Wave 音訊檔 (*.wav)</translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished">Flac 音訊檔 (*.flac)</translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished">Ogg Vorbis 音訊檔 (*.ogg)</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore：儲存副本</translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6855,10 +6591,33 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <source>Volta Properties</source>
+        <translation type="unfinished">反復記號屬性</translation>
+    </message>
+    <message>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished">────── (實線)</translation>
+    </message>
+    <message>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
         <translation>編輯模式</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6866,30 +6625,6 @@ failed: </source>
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>SlurTie</source>
-        <translation>圓滑連結線</translation>
-    </message>
-    <message>
-        <source>Slur Segment</source>
-        <translation>圓滑線區段</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>向上</translation>
-    </message>
-    <message>
-        <source>Direction:</source>
-        <translation>方向：</translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation>自動</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>向下</translation>
     </message>
 </context>
 <context>
@@ -7199,6 +6934,7 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -7219,6 +6955,7 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -7430,50 +7167,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>連音符</translation>
-    </message>
-    <message>
-        <source>has number</source>
-        <translation>含數字</translation>
-    </message>
-    <message>
-        <source>has line</source>
-        <translation>含括線</translation>
-    </message>
-    <message>
-        <source>base len</source>
-        <translation>基本長度</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>正規音符</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>實際音符</translation>
-    </message>
-    <message>
-        <source>Chord/Rest list:</source>
-        <translation>和弦 / 休止符 列表：</translation>
-    </message>
-    <message>
-        <source>Text Element</source>
-        <translation>文字元件</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>元件</translation>
-    </message>
-    <message>
-        <source>Tick</source>
-        <translation>勾線</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>長度</translation>
     </message>
 </context>
 <context>

@@ -91,6 +91,10 @@
         <source>Ukrajina</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -110,7 +114,7 @@
         <source>Revision: 628</source>
         <translation>Revision 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -964,6 +968,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1414,6 +1419,11 @@ misslyckades: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>mellanrum</translation>
     </message>
     <message>
@@ -1754,6 +1764,14 @@ misslyckades: </translation>
         <source>invalid</source>
         <translation>ogiltig</translation>
     </message>
+    <message>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
@@ -1942,6 +1960,32 @@ misslyckades: </translation>
     <message>
         <source>Cancel</source>
         <translation>Avbryt</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished">MuseScore: Objektinspektor</translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2370,83 +2414,7 @@ misslyckades: </translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>Takt</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>Radbrytning</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>Sidbrytning</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>Oregelbunden</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation>Framåtvänt repristecken</translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>Nr.:</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>Balkar:</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>Sträckning:</translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation>Sidelement:</translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>System:</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation>Ingen förskjutning:</translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>Annandelning:</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>Segment:</translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation>Bakåtvänt repristecken:</translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation>Reprisflaggor:</translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation>Element:</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Element</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation>Undertyp</translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>next</source>
+        <source>breakMultiMeasureRest</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5086,13 +5054,6 @@ före stängning?</translation>
     </message>
 </context>
 <context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Objektinspektor</translation>
-    </message>
-</context>
-<context>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
@@ -5949,6 +5910,7 @@ före stängning?</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation type="unfinished">mm</translation>
     </message>
     <message>
@@ -5965,6 +5927,7 @@ före stängning?</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6951,6 +6914,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished">X:</translation>
     </message>
     <message>
@@ -6971,6 +6935,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished">Y:</translation>
     </message>
     <message>

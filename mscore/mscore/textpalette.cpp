@@ -71,12 +71,12 @@ TextTools::TextTools(QWidget* parent)
       typefaceItalic->setCheckable(true);
       typefaceUnderline->setCheckable(true);
       tb->addSeparator();
-      leftAlign   = tb->addAction(QIcon(":/data/text_left.svg"), "");
+      leftAlign   = tb->addAction(QIcon(":/data/text_left.svg"),   "");
       centerAlign = tb->addAction(QIcon(":/data/text_center.svg"), "");
-      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"), "");
+      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"),  "");
       leftAlign->setCheckable(true);
       centerAlign->setCheckable(true);
-      leftAlign->setCheckable(true);
+      rightAlign->setCheckable(true);
       typefaceSubscript   = tb->addAction(QIcon(":/data/subscript.svg"), "");
       typefaceSuperscript = tb->addAction(QIcon(":/data/superscript.svg"), "");
       typefaceSubscript->setCheckable(true);
@@ -142,12 +142,9 @@ void TextTools::setCharFormat(const QTextCharFormat& cf)
 void TextTools::setBlockFormat(const QTextBlockFormat& bf)
       {
       bformat = bf;
-      if (bf.alignment() & Qt::AlignHCenter)
-            centerAlign->setChecked(true);
-      else if (bf.alignment() & Qt::AlignLeft)
-            leftAlign->setChecked(true);
-      else if (bf.alignment() & Qt::AlignRight)
-            rightAlign->setChecked(true);
+      centerAlign->setChecked(bf.alignment() & Qt::AlignHCenter);
+      leftAlign->setChecked  (bf.alignment() & Qt::AlignLeft);
+      rightAlign->setChecked (bf.alignment() & Qt::AlignRight);
       }
 
 //---------------------------------------------------------
@@ -222,6 +219,7 @@ void TextTools::setHCenterAlign()
       {
       bformat.setAlignment(Qt::AlignHCenter);
       _textElement->setBlockFormat(bformat);
+      setBlockFormat(bformat);
       moveFocus();
       }
 
@@ -233,6 +231,7 @@ void TextTools::setLeftAlign()
       {
       bformat.setAlignment(Qt::AlignLeft);
       _textElement->setBlockFormat(bformat);
+      setBlockFormat(bformat);
       moveFocus();
       }
 
@@ -244,6 +243,7 @@ void TextTools::setRightAlign()
       {
       bformat.setAlignment(Qt::AlignRight);
       _textElement->setBlockFormat(bformat);
+      setBlockFormat(bformat);
       moveFocus();
       }
 

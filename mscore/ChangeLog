@@ -1,4 +1,7 @@
-15.aug (la)
+15.aug (ws)
+      - mark pickup measure generated with new wizard as "irregular"
+      - fix text block alignment
+      (la)
       - revert change of german handbook path. Fixed on musescore.org
       - revert edit->delete-selected-measures
       - change splash screen for 0.9.6 prerelease

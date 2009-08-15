@@ -91,6 +91,10 @@
         <source>Ukrajina</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -110,7 +114,7 @@
         <source>Revision: 628</source>
         <translation>Модифікація: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -980,6 +984,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1511,6 +1516,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1755,6 +1765,14 @@ failed: </source>
         <source>invalid</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
@@ -1943,6 +1961,32 @@ failed: </source>
     <message>
         <source>Cancel</source>
         <translation>Відміна</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -2370,83 +2414,7 @@ failed: </source>
         <translation>Форма</translation>
     </message>
     <message>
-        <source>Measure</source>
-        <translation>Такт</translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation>Нерегулярний</translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation>Розрив сторінки</translation>
-    </message>
-    <message>
-        <source>Line Break</source>
-        <translation>Розрив рядка</translation>
-    </message>
-    <message>
-        <source>No.:</source>
-        <translation>№:</translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation>Груп:</translation>
-    </message>
-    <message>
-        <source>Stretch:</source>
-        <translation>Розтяжка: </translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation>Нотон осьців:</translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation>Без зміщення:</translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation>Тріольоподібні фігури:</translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation>Сегментів:</translation>
-    </message>
-    <message>
-        <source>StartRepeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>EndRep:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation type="unfinished">Елемент</translation>
-    </message>
-    <message>
-        <source>Subtype</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RepeatFLags:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Elements:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>previous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>next</source>
+        <source>breakMultiMeasureRest</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5085,13 +5053,6 @@ before closing?</source>
     </message>
 </context>
 <context>
-    <name>PageListEditor</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>PageSettingsBase</name>
     <message>
         <source>Top Margin</source>
@@ -5928,6 +5889,7 @@ before closing?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation type="unfinished">мм</translation>
     </message>
     <message>
@@ -5964,6 +5926,7 @@ before closing?</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6943,6 +6906,7 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished">X:</translation>
     </message>
     <message>
@@ -6963,6 +6927,7 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished">Y:</translation>
     </message>
     <message>
