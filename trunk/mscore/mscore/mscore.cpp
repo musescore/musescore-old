@@ -558,9 +558,8 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
-// postponed to 0.9.6
-//      menuEdit->addAction(getAction("delete-measures"));
-//      menuEdit->addSeparator();
+      menuEdit->addAction(getAction("delete-measures"));
+      menuEdit->addSeparator();
 
       QMenu* menuVoices = new QMenu(tr("Voices"));
       menuVoices->addAction(getAction("voice-x12"));
@@ -847,7 +846,7 @@ void MuseScore::helpBrowser1()
             printf("open online manual for language <%s>\n", qPrintable(lang));
       QString help("http://musescore.org/en/handbook");
       if (lang == "de")
-            help = QString::fromUtf8("http://musescore.org/de/handbuch/handbuch");
+            help = QString::fromUtf8("http://musescore.org/de/handbuch");
       else if (lang == "nl")
             help = QString::fromUtf8("http://musescore.org/nl/handboek");
       else if (lang == "fr")

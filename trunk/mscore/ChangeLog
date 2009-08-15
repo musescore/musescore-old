@@ -1,3 +1,9 @@
+15.aug (la)
+      - revert change of german handbook path. Fixed on musescore.org
+      - revert edit->delete-selected-measures
+      - change splash screen for 0.9.6 prerelease
+      - change makefiles for 0.9.6
+      - add mscore_pl.ts for Polish translation
 14.aug (ws)
       - added "back" "forward" and "update" buttons to inspector
       - renamed "listedit" to "inspector"
@@ -15,6 +21,7 @@
         and fixes code intended to remove external style sheets
       - fix base tag removal in processHTML.py
       - update English and German handbooks
+      ======== Version 0.9.5 released =============
 9.aug (db)
       - limit templates to one measure (except leadsheet.mscx)
       - fix articulation distances in templates

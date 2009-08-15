@@ -17,6 +17,7 @@ echo       %1/share/locale/mscore_cs.ts \
 echo       %1/share/locale/mscore_gl.ts \
 echo       %1/share/locale/mscore_tr.ts \
 echo       %1/share/locale/mscore_hi_IN.ts \
+echo       %1/share/locale/mscore_pl.ts \
 echo       %1/share/locale/mscore_pt_BR.ts \
 echo       %1/share/locale/mscore_pt.ts \
 echo       %1/share/locale/mscore_sv.ts \
