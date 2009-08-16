@@ -183,7 +183,7 @@ void MuseScore::loadFile()
             "MIDI Files (*.mid *.kar);;"
             "Muse Data Files (*.md);;"
             "Capella Files (*.cap);;"
-            "LilyPond Files <experimental> (*.ly);;"
+//            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
             "All Files (*)"
             )
