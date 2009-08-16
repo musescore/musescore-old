@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -253,31 +253,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Akkoord</translation>
+        <translation>Akkoord</translation>
     </message>
     <message>
         <source>Stem</source>
-        <translation type="unfinished">Stok</translation>
+        <translation>Stok</translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished">Haak</translation>
+        <translation>Haak</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <translation type="unfinished">Korte Voorslag</translation>
+        <translation>Korte Voorslag</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <translation type="unfinished">Stokrichting</translation>
+        <translation>Stokrichting</translation>
     </message>
     <message>
         <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Noten Attributen:</translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <translation type="unfinished">Hulplijnen:</translation>
+        <translation>Hulplijnen:</translation>
     </message>
 </context>
 <context>
@@ -1158,7 +1158,7 @@ failed: </source>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation>Noten Hoofd:</translation>
+        <translation>Notenkop:</translation>
     </message>
     <message>
         <source>Staff Line:</source>
@@ -1774,11 +1774,12 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"></translation>
+        <translation>selecteerbaar</translation>
     </message>
     <message>
         <source>droptarget</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>weet ff het verband niet waarin het wordt gebruikt...</translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1974,26 +1975,26 @@ space unit</extracomment>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished">MuseScore: Object Inspecteren</translation>
+        <translation>MuseScore: Object Inspecteren</translation>
     </message>
 </context>
 <context>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Vorm</translation>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2421,7 +2422,7 @@ failed: </source>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbreken Meerdere maten rust</translation>
     </message>
 </context>
 <context>
@@ -3156,7 +3157,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Noten</translation>
+        <translation>Voorslagnoten</translation>
     </message>
     <message>
         <source>NoteHeads</source>
@@ -5937,12 +5938,12 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofd Stemming</translation>
     </message>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -6327,59 +6328,59 @@ failed: </source>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
+        <translation>Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">MuseScoreformaat (*.mscx)</translation>
+        <translation>MuseScoreformaat (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">MusicXML Formaat (*.xml)</translation>
+        <translation>MusicXML Formaat (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">Gecomprimeerd MusicXML Formaat (*.mxl)</translation>
+        <translation>Gecomprimeerd MusicXML Formaat (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">Standaard MIDI File (*.mid)</translation>
+        <translation>Standaard MIDI Bestand (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF Bestand (*.pdf)</translation>
+        <translation>PDF Bestand (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">PostScript Bestand (*.ps)</translation>
+        <translation>PostScript Bestand (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG Bitmap Grafisch (*.png)</translation>
+        <translation>PNG Bitmap Grafisch (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond Formaat (*.ly)</translation>
+        <translation>Lilypond Formaat (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore: Kopie opslaan</translation>
+        <translation>MuseScore: Kopie opslaan</translation>
     </message>
 </context>
 <context>
@@ -6583,19 +6584,19 @@ failed: </source>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished">Volta Eigenschappen</translation>
+        <translation>Volta Eigenschappen</translation>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog Eigenschappen</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation type="unfinished">vast</translation>
+        <translation>vast</translation>
     </message>
     <message>
         <source>dotted</source>
-        <translation type="unfinished"></translation>
+        <translation>stippel</translation>
     </message>
 </context>
 <context>
@@ -6606,7 +6607,7 @@ failed: </source>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog Eigenschappen...</translation>
     </message>
 </context>
 <context>
