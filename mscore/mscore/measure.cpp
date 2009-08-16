@@ -887,7 +887,7 @@ void Measure::layout2()
       //
       //   set measure number
       //
-      int pn    = _no + _noOffset;
+      int pn    = _no;
       QString s = QString("%1").arg(pn + 1);
 
       QString ns;
