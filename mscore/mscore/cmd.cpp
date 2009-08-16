@@ -730,11 +730,11 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
                   printf("cannot get gap at %d type: %s\n", tick, qPrintable(d.name()));
                   break;
                   }
-            ChordRest* cr;
+            ChordRest* ncr;
             if (pitch == -1) {
                   nr = new Rest(this);
                   nr->setTrack(track);
-                  cr = (Rest*)nr;
+                  ncr = (Rest*)nr;
                   }
             else {
                   Note* note = new Note(this);
@@ -755,7 +755,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
                   chord->setTuplet(cr->tuplet());
                   chord->setStemDirection(stemDirection);
                   chord->add(note);
-                  cr = chord;
+                  ncr = chord;
                   }
             Measure* measure = tick2measure(tick);
             Segment::SegmentType st = Segment::SegChordRest;
@@ -764,8 +764,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
                   seg = measure->createSegment(st, tick);
                   undoAddElement(seg);
                   }
-            cr->setParent(seg);
-            undoAddElement(cr);
+            ncr->setParent(seg);
+            undoAddElement(ncr);
 
             if (nr->type() == NOTE)
                   spell((Note*)nr);
@@ -781,8 +781,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
                   }
             tick = measure->tick();
             seg  = measure->findSegment(st, tick);
-            cr   = static_cast<ChordRest*>(seg->element(track));
-            if (cr == 0) {
+            ncr   = static_cast<ChordRest*>(seg->element(track));
+            if (ncr == 0) {
                   printf("no rest in voice %d\n", track % VOICES);
                   break;
                   }
