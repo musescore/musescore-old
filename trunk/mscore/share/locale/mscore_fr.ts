@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation type="unfinished"></translation>
+        <translation>ç¹é«ä¸­æ (å°ç£) -Polonais</translation>
     </message>
 </context>
 <context>
@@ -108,12 +108,12 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Version : 0.9.5</translation>
+        <translation>Version : 0.9.6</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1992 revised JLWaltener 05/08/2009 - QT Linguist v4.5.2</translatorcomment>
-        <translation>Révision : 1992</translation>
+        <translatorcomment>r2020 translated JLWaltener - 15/08/2009 - QT Linguist v4.5.2</translatorcomment>
+        <translation>Révision : 2020</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -254,31 +254,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Accord</translation>
+        <translation>Accord</translation>
     </message>
     <message>
         <source>Stem</source>
-        <translation type="unfinished">Hampe</translation>
+        <translation>Hampe</translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished">Crochet</translation>
+        <translation>Crochet</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Fioriture</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Direction de la hampe</translation>
     </message>
     <message>
         <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attributs de la note :</translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lignes d&apos;aide :</translation>
     </message>
 </context>
 <context>
@@ -1718,7 +1718,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>chord description file</source>
-        <translation>Fichier de déscription d&apos;accord</translation>
+        <translation>Fichier de description d&apos;accord</translation>
     </message>
     <message>
         <source>...</source>
@@ -1775,11 +1775,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"></translation>
+        <translation>sélectionnable</translation>
     </message>
     <message>
         <source>droptarget</source>
-        <translation type="unfinished"></translation>
+        <translation>cible</translation>
     </message>
 </context>
 <context>
@@ -1975,26 +1975,26 @@ space unit</extracomment>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished">MuseScore : Inspecteur d&apos;objet</translation>
+        <translation>MuseScore : Inspecteur d&apos;objet</translation>
     </message>
 </context>
 <context>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Précédent</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Suivant</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2424,7 +2424,7 @@ failed: </source>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les pauses multi mesures</translation>
     </message>
 </context>
 <context>
@@ -5928,20 +5928,20 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Remplacer (C) ... par le symbole © ... dans le texte de Copyright</translation>
+        <translation>Remplacer (C)... par le symbole ©... dans le texte de Copyright</translation>
     </message>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Remplacer 1/2 ... par le symble ½ ...</translation>
+        <translation>Remplacer 1/2... par le symbole ½...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Fréquence d&apos;accord de référence</translation>
     </message>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -6058,11 +6058,11 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>MuseScore : Ouvrir fichier de déscription d&apos;accord</translation>
+        <translation>MuseScore : Ouvrir fichier de description d&apos;accord</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>Déscription d&apos;accord MuseScore (*.xml);;Tous les fichiers (*)</translation>
+        <translation>Description d&apos;accord MuseScore (*.xml);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
@@ -6331,59 +6331,59 @@ failed: </source>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Format MuseScore compressé (*.mscz)</translation>
+        <translation>Format MuseScore compressé (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">Format MuseScore (*.mscx)</translation>
+        <translation>Format MuseScore (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">Format MusicXML (*.xml)</translation>
+        <translation>Format MusicXML (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">Format MusicXML Compressé (*.mxl)</translation>
+        <translation>Format MusicXML Compressé (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">Fichier Midi Standard (*.mid)</translation>
+        <translation>Fichier Midi Standard (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">Fichier PDF  (*.pdf)</translation>
+        <translation>Fichier PDF  (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">Fichier PostScript (*.ps)</translation>
+        <translation>Fichier PostScript (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">Image Bitmap Graphic PNG (*.png)</translation>
+        <translation>Image Bitmap Graphic PNG (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Image Scalable Vector Graphic (*.svg)</translation>
+        <translation>Image Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Format Lilypond (*.ly)</translation>
+        <translation>Format Lilypond (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished">Format Audio Wave (*.wav)</translation>
+        <translation>Format Audio Wave (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished">Format Audio Flac (*.flac)</translation>
+        <translation>Format Audio Flac (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished">Format Audio Ogg Vorbis (*.ogg)</translation>
+        <translation>Format Audio Ogg Vorbis (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore : Enregistrer une copie</translation>
+        <translation>MuseScore : Enregistrer une copie</translation>
     </message>
 </context>
 <context>
@@ -6587,19 +6587,19 @@ failed: </source>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished">Propriétés de la reprise</translation>
+        <translation>Propriétés de la reprise</translation>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du legato</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation type="unfinished">plein</translation>
+        <translation>plein</translation>
     </message>
     <message>
         <source>dotted</source>
-        <translation type="unfinished"></translation>
+        <translation>pointillé</translation>
     </message>
 </context>
 <context>
@@ -6610,7 +6610,7 @@ failed: </source>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du legato...</translation>
     </message>
 </context>
 <context>
