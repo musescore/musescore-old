@@ -448,6 +448,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      shortcutsChanged        = false;
 
 #ifndef USE_JACK
       jackDriver->setEnabled(false);

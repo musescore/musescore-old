@@ -1,3 +1,5 @@
+17.aug (ws)
+      - misc fixes & cleanups for note entry
 16.aug (ws)
       - fix calculation of measure number after setting measure number offset
       - removed lilypond files (*.ly) from import list

@@ -27,6 +27,7 @@
 class Slur;
 class ChordRest;
 struct Drumset;
+class Segment;
 
 //---------------------------------------------------------
 //   InputState
@@ -44,13 +45,15 @@ class InputState {
       int drumNote;
       Drumset* drumset;
       int track;
+      Segment* _segment;
       bool noteEntryMode;
       Slur* slur;
-      ChordRest* cr;
 
       InputState();
-      int voice() const { return track % VOICES;   }
-      int tickLen()     { return duration.ticks(); }
+      int voice() const     { return track % VOICES;   }
+      int tickLen() const   { return duration.ticks(); }
+      ChordRest* cr() const;
+      int tick() const;
       };
 
 #endif
