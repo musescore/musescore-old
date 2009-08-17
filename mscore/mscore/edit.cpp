@@ -109,20 +109,28 @@ int Score::pos()
 Rest* Score::addRest(int tick, int track, Duration d)
       {
       Measure* measure = tick2measure(tick);
-      if (measure->tickLen() == d.ticks() && (d < Duration(Duration::V_BREVE))) {
-            printf("  addRest: change to whole measure Rest\n");
-            d.setType(Duration::V_MEASURE);
-            }
-
-      Rest* rest = new Rest(this, tick, d);
-      rest->setTrack(track);
       Segment::SegmentType st = Segment::SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
             undoAddElement(seg);
             }
-      rest->setParent(seg);
+      return addRest(seg, track, d);
+      }
+
+//---------------------------------------------------------
+//   addRest
+//---------------------------------------------------------
+
+Rest* Score::addRest(Segment* s, int track, Duration d)
+      {
+      Measure* m = s->measure();
+      int tick = s->tick();
+      if ((m->tick() == tick) && (m->tickLen() == d.ticks()) && (d < Duration(Duration::V_BREVE)))
+            d.setType(Duration::V_MEASURE);
+      Rest* rest = new Rest(this, tick, d);
+      rest->setTrack(track);
+      rest->setParent(s);
       cmdAdd(rest);
       return rest;
       }
@@ -503,16 +511,9 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
             }
 
-      _is.cr = static_cast<ChordRest*>(segment->element(track));
-      if (_is.cr == 0) {
-            Measure* m = segment->measure();
-            if (m->tick() != tick) {
-                  printf("cannot put note here, not at measure start (track %d)\n", track);
-                  return;
-                  }
-            _is.cr = addRest(tick, _is.track, Duration(Duration::V_MEASURE));
-            }
-      ChordRest* cr = _is.cr;
+      _is._segment = segment;
+      expandVoice();
+      ChordRest* cr = _is.cr();
       if (cr == 0)
             return;
 
@@ -544,9 +545,10 @@ void Score::putNote(const QPointF& pos, bool replace)
             setNoteRest(cr, track, pitch, _is.duration, headGroup, stemDirection);
             }
 
-      _is.cr = nextChordRest(_is.cr);
-      if (_is.cr)
-            emit posChanged(_is.cr->tick());
+      ChordRest* ncr = nextChordRest(_is.cr());
+      _is._segment = ncr ? cr->segment() : 0;
+      if (_is._segment)
+            emit posChanged(_is.tick());
 
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
@@ -671,7 +673,7 @@ void Score::cmdAddTie()
             }
       Chord* chord  = note->chord();
       if (noteEntryMode()) {
-            if (_is.cr == 0) {
+            if (_is.cr() == 0) {
                   printf("cmdAddTie: no pos\n");
                   return;
                   }
@@ -1620,41 +1622,23 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
 
 void Score::changeVoice(int voice)
       {
-      if ((_is.track % VOICES) != voice) {
-            _is.track = (_is.track / VOICES) * VOICES + voice;
-            //
-            // in note entry mode search for a valid input
-            // position
-            //
-            if (_is.noteEntryMode && _is.cr) {
-                  Segment* seg = _is.cr->segment();
-                  while (seg) {
-                        if (seg->element(_is.track)) {
-                              _is.cr = static_cast<ChordRest*>(seg->element(_is.track));
-                              break;
-                              }
-                        Segment* nseg = seg;
-                        while (nseg) {
-                              nseg = nseg->prev();
-                              if (!nseg || nseg->subtype() == Segment::SegChordRest)
-                                    break;
-                              }
-                        if (nseg == 0) {
-                              //
-                              // no segment found
-                              //    this can happen for voices > 0, when there
-                              //    is no chord/rest for this voice
-                              int track = (_is.track / VOICES) * VOICES;
-                              _is.cr = static_cast<ChordRest*>(seg->element(track));
-                              break;
-                              }
-                        seg = nseg;
-                        }
-                  foreach(Viewer* v, viewer)
-                        v->moveCursor();
-                  }
-            updateAll = true;
-            }
+      if ((_is.track % VOICES) == voice)
+            return;
+
+      _is.track = (_is.track / VOICES) * VOICES + voice;
+      //
+      // in note entry mode search for a valid input
+      // position
+      //
+      if (!_is.noteEntryMode || _is.cr())
+            return;
+
+      _is._segment = _is._segment->measure()->firstCRSegment();
+      emit posChanged(_is._segment->tick());
+
+//      foreach(Viewer* v, viewer)
+//            v->moveCursor();
+      updateAll = true;
       }
 
 //---------------------------------------------------------
@@ -1730,13 +1714,13 @@ void Score::cmdEnterRest(const Duration& d)
 printf("cmdEnterRest %s\n", qPrintable(d.name()));
       if (!noteEntryMode())
             setNoteEntry(true);
-      if (_is.cr == 0) {
+      if (_is.cr() == 0) {
             printf("cannot enter rest here\n");
             return;
             }
 
-      int track = _is.cr->track();
-      Segment* seg = setNoteRest(_is.cr, track, -1, d, 0, AUTO);
+      int track = _is.track;
+      Segment* seg = setNoteRest(_is.cr(), track, -1, d, 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
       if (cr)
             nextInputPos(cr, false);
@@ -1805,21 +1789,9 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
             int track = (cr->track() / VOICES) * VOICES;
             ncr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
-      _is.cr = ncr;
+      _is._segment = ncr ? ncr->segment() : 0;
       if (doSelect)
             select(ncr, SELECT_SINGLE, 0);
       if (ncr)
             emit posChanged(ncr->tick());
       }
-
-//---------------------------------------------------------
-//   setPos
-//---------------------------------------------------------
-
-void Score::setInputPos(ChordRest* cr)
-      {
-      _is.cr = cr;
-      emit posChanged(cr ? cr->tick() : 0);
-      }
-
-

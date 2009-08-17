@@ -84,21 +84,39 @@ bool showRubberBand  = true;
 //   InputState
 //---------------------------------------------------------
 
-InputState::InputState()
+InputState::InputState() :
+   duration(Duration::V_INVALID),
+   rest(false),
+   pad(0),
+   pitch(72),
+   prefix(0),
+   noteType(NOTE_NORMAL),
+   beamMode(BEAM_AUTO),
+   drumNote(-1),
+   drumset(0),
+   track(0),
+   _segment(0),
+   noteEntryMode(false),
+   slur(0)
       {
-      track         = 0;
-      noteEntryMode = false;
-      slur          = 0;
-      cr            = 0;
-      duration.setType(Duration::V_INVALID);
-      rest          = false;
-      pad           = 0;
-      pitch         = 72;
-      prefix        = 0;
-      noteType      = NOTE_NORMAL;
-      beamMode      = BEAM_AUTO;
-      drumNote      = -1;
-      drumset       = 0;
+      }
+
+//---------------------------------------------------------
+//   cr
+//---------------------------------------------------------
+
+ChordRest* InputState::cr() const
+      {
+      _segment->element(track);
+      }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int InputState::tick() const
+      {
+      return _segment ? _segment->tick() : 0;
       }
 
 //---------------------------------------------------------
@@ -1127,7 +1145,7 @@ void Score::endDrag()
 
 void Score::setNoteEntry(bool val)
       {
-      _is.cr = 0;
+      _is._segment = 0;
       if (val) {
             Note* note  = 0;
             Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
@@ -1147,7 +1165,7 @@ void Score::setNoteEntry(bool val)
                   el = note;
                   }
             select(el, SELECT_SINGLE, 0);
-            setInputTrack(_is.cr->track());
+            setInputTrack(_is.track);
             _is.noteEntryMode = true;
             canvas()->moveCursor();
             _is.rest = false;
@@ -1780,6 +1798,10 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
       if (segment == 0) {
             if (voice) {
+                  //
+                  // first chord/rest segment of measure is a valid position
+                  // for voice > 0 even if there is no chord/rest
+                  //
                   for (segment = pos->measure->first(); segment;) {
                         if (segment->subtype() == Segment::SegChordRest)
                               break;
@@ -2290,6 +2312,6 @@ void Score::setStyle(StyleIdx idx, const StyleVal& v)
 
 int Score::inputPos() const
       {
-      return _is.cr ? _is.cr->tick() : 0;
+      return _is.tick();
       }
 

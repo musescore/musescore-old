@@ -311,8 +311,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         selState = SEL_SINGLE;
                         }
                   if (e->type() == NOTE || e->type() == REST) {
-                        _is.cr = static_cast<ChordRest*>(e->type() == NOTE ? e->parent() : e);
-                        emit posChanged(_is.cr->tick());
+                        _is._segment = e->type() == NOTE ? static_cast<Note*>(e)->chord()->segment() : static_cast<Rest*>(e)->segment();
+                        emit posChanged(_is.tick());
                         }
                   }
             }

@@ -306,6 +306,7 @@ class Score : public QObject {
       void convertTrack(BBTrack*, int);
 
       void move(const QString& cmd);
+      void moveInputPos(Segment* s);
       void selectMove(const QString& cmd);
 
       void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
@@ -507,6 +508,8 @@ class Score : public QObject {
       Fraction makeGap1(ChordRest*, Fraction);
 
       Rest* addRest(int tick, int track, Duration);
+      Rest* addRest(Segment* seg, int track, Duration d);
+
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
       void setRest(int tick,  int track, Fraction);
       void setRest(int tick,  int track, Fraction, bool useDots);
@@ -790,7 +793,6 @@ class Score : public QObject {
       void fixPpitch();
 
       void nextInputPos(ChordRest* cr, bool);
-      void setInputPos(ChordRest* cr);
       void cmdMirrorNoteHead();
 
       void layout()                           { _needLayout = true; }

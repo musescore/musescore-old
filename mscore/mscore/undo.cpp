@@ -353,8 +353,8 @@ bool UndoGroup::isClean() const
 
 void Score::endUndoRedo()
       {
-      if (_is.cr)
-            emit posChanged(_is.cr->tick());
+      if (_is.cr())
+            emit posChanged(_is.tick());
 
       if (!noteEntryMode()) {
             // no input state

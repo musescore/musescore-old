@@ -434,14 +434,17 @@ void Score::cmdAddPitch(int note, bool addFlag)
       {
       if (!noteEntryMode())
             setNoteEntry(true);
-      if (_is.cr == 0 && _is.voice() == 0) {
+
+      expandVoice();
+      if (_is.cr() == 0) {
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
+
       int key = 0;
 
       if (!preferences.alternateNoteEntryMethod)
-            key = staff(_is.track / VOICES)->keymap()->key(_is.cr->tick());
+            key = staff(_is.track / VOICES)->keymap()->key(_is.tick());
       int pitch;
       Drumset* ds = _is.drumset;
       if (ds) {
@@ -485,13 +488,12 @@ void Score::cmdAddPitch(int note, bool addFlag)
 
 void Score::expandVoice()
       {
-      if (_is.cr->voice() != _is.voice()) {
-            // voice is empty, fill with rest
-            int tick = _is.cr->tick();
-            if (tick == _is.cr->measure()->tick()) {
-                  Rest* rest = addRest(tick, _is.track, Duration(Duration::V_MEASURE));
-                  _is.cr = rest;
-                  }
+      if (_is.voice() && (_is.cr() == 0)) {
+            //
+            // if there is no chord/rest at current position for voice > 0
+            // then there is no chord/rest for this voice at all in this measure
+            //
+            addRest(_is._segment, _is.track, Duration(Duration::V_MEASURE));
             }
       }
 
@@ -506,12 +508,10 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             Note* on = getSelectedNote();
             if (on == 0)
                   return 0;
-            ChordRest* cr = _is.cr;
             Note* n = addNote(on->chord(), pitch);
             select(n, SELECT_SINGLE, 0);
             setLayoutAll(false);
             setLayoutStart(on->chord()->measure());
-            _is.cr = cr;
             return n;
             }
       expandVoice();
@@ -546,11 +546,11 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             }
 #endif
 
-      Segment* seg = setNoteRest(_is.cr, track, pitch, _is.duration, headGroup, stemDirection);
+      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration, headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
 
       if (_is.slur) {
-            Element* e = searchNote(_is.cr->tick(), _is.track);
+            Element* e = searchNote(_is.tick(), _is.track);
             if (e) {
                   if (e->type() == NOTE)
                         e = e->parent();
@@ -573,8 +573,8 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   break;
             Element* e = seg->element(track);
             if (e && e->isChordRest()) {
-                  _is.cr = static_cast<ChordRest*>(e);
-                  emit posChanged(_is.cr->tick());
+                  _is._segment = seg;
+                  emit posChanged(seg->tick());
                   break;
                   }
             }
@@ -714,7 +714,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
    int headGroup, Direction stemDirection)
       {
       int tick = cr->tick();
-// printf("setNote at %d type: %s track %d\n", tick, qPrintable(d.name()), track);
+printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), track);
       Element* nr   = 0;
       Tie* tie      = 0;
 
@@ -780,11 +780,15 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
                   break;
                   }
             tick = measure->tick();
-            seg  = measure->findSegment(st, tick);
-            ncr   = static_cast<ChordRest*>(seg->element(track));
-            if (ncr == 0) {
-                  printf("no rest in voice %d\n", track % VOICES);
-                  break;
+            seg  = measure->firstCRSegment();
+            cr   = static_cast<ChordRest*>(seg->element(track));
+            if (cr == 0) {
+                  if (track % VOICES)
+                        cr = addRest(seg, track, Duration(Duration::V_MEASURE));
+                  else {
+                        printf("no rest in voice %d\n", track % VOICES);
+                        break;
+                        }
                   }
             //
             //  Note does not fit on current measure, create Tie to
@@ -815,7 +819,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration&
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd)
       {
-printf("makeGap %d/%d\n", _sd.zaehler(), _sd.nenner());
+printf("makeGap %d/%d at %d\n", _sd.zaehler(), _sd.nenner(), cr->tick());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -841,7 +845,7 @@ printf("makeGap %d/%d\n", _sd.zaehler(), _sd.nenner());
                   _td = Duration(Fraction(z, n));
                   }
             Fraction td = _td.fraction();
-printf("  makeGap: remove %d/%d\n", td.zaehler(), td.nenner());
+printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick());
             undoRemoveElement(cr);
             if (seg->isEmpty())
                   undoRemoveElement(seg);
@@ -858,13 +862,16 @@ printf("  makeGap: removed %d/%d too much\n", rd.zaehler(), rd.nenner());
                   if (dList.isEmpty())
                         return akkumulated;
                   int ticks = _sd.ticks();
+printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
                   int tick = cr->tick() + ticks;
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
-                        foreach(Duration d, dList)
+                        foreach(Duration d, dList) {
+                              printf("   addClone %d\n", tick);
                               tick += addClone(cr, tick, d)->ticks();
+                              }
                         }
                   else {
                         for (int i = dList.size() - 1; i >= 0; --i)
@@ -2738,7 +2745,28 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
       }
 
 //---------------------------------------------------------
+//   moveInputPos
+//---------------------------------------------------------
+
+void Score::moveInputPos(Segment* s)
+      {
+      if (s == 0)
+            return;
+      _is._segment = s;
+      emit posChanged(s->tick());
+      Element* el;
+      if (s->element(_is.track))
+            el = s->element(_is.track);
+      else
+            el = s->element(_is.track / VOICES * VOICES);
+      if (el->type() == CHORD)
+            el = static_cast<Chord*>(el)->upNote();
+      adjustCanvasPosition(el, false);
+      }
+
+//---------------------------------------------------------
 //   move
+//    move current selection
 //---------------------------------------------------------
 
 void Score::move(const QString& cmd)
@@ -2748,62 +2776,61 @@ void Score::move(const QString& cmd)
             cr = selection()->activeCR();
       if (!cr)
             return;
-      if (noteEntryMode()) {
-            Element* el = 0;
-            if (cmd == "prev-chord") {
-                  el = prevChordRest(cr);
-                  if (el) {
-                        if (el->type() == CHORD)
-                              el = static_cast<Chord*>(el)->upNote();
-                        select(el, SELECT_SINGLE, 0);
-                        }
-                  setInputPos(cr);
-                  }
-            else if (cmd == "next-chord") {
-                  el = nextChordRest(cr);
-                  if (el) {
-                        if (el->type() == CHORD)
-                              el = static_cast<Chord*>(el)->upNote();
-                        select(el, SELECT_SINGLE, 0);
-                        }
-                  setInputPos(nextChordRest(_is.cr));
-                  }
-            else if (cmd == "next-measure") {
-                  el = nextMeasure(cr);
-                  if (el) {
-                        if (el->type() == CHORD)
-                              el = static_cast<Chord*>(el)->upNote();
-                        select(el, SELECT_SINGLE, 0);
-                        }
-                  }
-            else if (cmd == "prev-measure") {
-                  el = prevMeasure(cr);
-                  if (el) {
-                        if (el->type() == CHORD)
-                              el = static_cast<Chord*>(el)->upNote();
-                        select(el, SELECT_SINGLE, 0);
-                        }
-                  }
-            if (el)
-                  adjustCanvasPosition(el, false);
-            return;
-            }
 
       Element* el = 0;
-      if (cmd == "next-chord")
-            el = nextChordRest(cr);
-      else if (cmd == "prev-chord")
-            el = prevChordRest(cr);
+      if (cmd == "next-chord") {
+            if (noteEntryMode()) {
+                  Segment* s = _is._segment;
+                  Measure* m = s->measure();
+                  int track  = _is.track;
+                  for (s = s->next1(); s; s = s->next1()) {
+                        if (s->subtype() != Segment::SegChordRest)
+                              continue;
+                        if (s->element(track) || s->measure() != m)
+                              break;
+                        }
+                  moveInputPos(s);
+                  return;
+                  }
+            else
+                  el = nextChordRest(cr);
+            }
+      else if (cmd == "prev-chord") {
+            if (noteEntryMode()) {
+                  Segment* s = _is._segment->prev1();
+                  //
+                  // if _is._segment is first chord/rest segment in measure
+                  // make sure "m" points to previous measure
+                  //
+                  while (s && s->subtype() != Segment::SegChordRest)
+                        s = s->prev1();
+                  if (s == 0)
+                        return;
+                  Measure* m = s->measure();
+
+                  int track  = _is.track;
+                  for (; s; s = s->prev1()) {
+                        if (s->subtype() != Segment::SegChordRest)
+                              continue;
+                        if (s->element(track) || s->measure() != m)
+                              break;
+                        }
+                  if (s && !s->element(track))
+                        s = m->firstCRSegment();
+                  moveInputPos(s);
+                  return;
+                  }
+            else
+                  el = prevChordRest(cr);
+            }
       else if (cmd == "next-measure")
             el = nextMeasure(cr);
       else if (cmd == "prev-measure")
             el = prevMeasure(cr);
       if (el) {
-            Note* note = 0;
             if (el->type() == CHORD) {
-                  note = static_cast<Chord*>(el)->upNote();
-                  mscore->play(note);
-                  el = note;
+                  el = static_cast<Chord*>(el)->upNote();
+                  mscore->play(static_cast<Note*>(el));
                   }
             select(el, SELECT_SINGLE, 0);
             adjustCanvasPosition(el, false);
