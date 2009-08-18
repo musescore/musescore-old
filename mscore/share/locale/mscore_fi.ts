@@ -95,6 +95,14 @@
         <source>ç¹é«ä¸­æ (å°ç£)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Polski</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RomÃ¢nÄ</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -3160,10 +3168,6 @@ ennen sulkemista?</translation>
         <translation>Ottava</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Kaikki tuetut tiedostot (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore-tiedostot (*.mscz *.mscx *.msc);;MusicXML-tiedostot (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data -tiedostot (*.md);;Capella Files (*.cap);;LilyPond-tiedostot &lt;experimental&gt; (*.ly);;BB-tiedostot &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Kaikki tiedostot (*)</translation>
-    </message>
-    <message>
         <source>Lyrics odd lines</source>
         <translation>Laulutekstin parittomat rivit</translation>
     </message>
@@ -4909,6 +4913,10 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7260,6 +7268,113 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Toistolista:</translation>
+    </message>
+</context>
+<context>
+    <name>accidental</name>
+    <message>
+        <source>none</source>
+        <translation type="unfinished">tyhjä</translation>
+    </message>
+    <message>
+        <source>sharp</source>
+        <translation type="unfinished">korotus</translation>
+    </message>
+    <message>
+        <source>flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double sharp</source>
+        <translation type="unfinished">kaksoiskorotus</translation>
+    </message>
+    <message>
+        <source>double flat</source>
+        <translation type="unfinished">kaksoisalennus</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">palautus</translation>
+    </message>
+    <message>
+        <source>(sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(double sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(natural)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[natural]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

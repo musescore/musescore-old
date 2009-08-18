@@ -403,12 +403,12 @@ void MuseScore::showPalette(bool visible)
             for (int i = 1; i < 11; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, s->name());
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             for (int i = 16; i < 26; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, s->name());
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             paletteBox->addPalette(sp);
 
@@ -980,7 +980,7 @@ void MuseScore::accidentalsMenu()
             for (int i = 0; i < 16+6+4; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, s->name());
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             }
       accidentalsPalette->show();

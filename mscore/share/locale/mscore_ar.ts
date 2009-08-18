@@ -95,6 +95,14 @@
         <source>ç¹é«ä¸­æ (å°ç£)</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Polski</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RomÃ¢nÄ</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -4687,10 +4695,6 @@ before closing?</source>
         <translation>إظهار لوحة المفاتيح</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>كل الملفات المدعومة (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;ملفات ميوزسكور (*.mscz *.mscx *.msc);;ملفاتMusicXML (*.xml *.mxl);;ملفات ميدى (*.mid *.kar);;ملفات بيانات Muse (*.md);;ملفات Capella (*.cap);;ملفات LilyPond &lt;تجريبىl&gt; (*.ly);;BB Files &lt;تجريبى&gt; (*.mgu *.MGU *.sgu *.SGU);;كل الملفات (*)</translation>
-    </message>
-    <message>
         <source>Lyrics odd lines</source>
         <translation>سطور فردية للكلمات</translation>
     </message>
@@ -4920,6 +4924,10 @@ before closing?</source>
     <message>
         <source>Delete Selected Measures</source>
         <translation type="unfinished">إزالة الموازير المعيّنة</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7271,6 +7279,113 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>قائمة إعادات:</translation>
+    </message>
+</context>
+<context>
+    <name>accidental</name>
+    <message>
+        <source>none</source>
+        <translation type="unfinished">لا شىء</translation>
+    </message>
+    <message>
+        <source>sharp</source>
+        <translation type="unfinished">دييز</translation>
+    </message>
+    <message>
+        <source>flat</source>
+        <translation type="unfinished">بيمول</translation>
+    </message>
+    <message>
+        <source>double sharp</source>
+        <translation type="unfinished">دوبل دييز</translation>
+    </message>
+    <message>
+        <source>double flat</source>
+        <translation type="unfinished">دوبل بيمول</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">بيكار</translation>
+    </message>
+    <message>
+        <source>(sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(double sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(natural)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[natural]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
