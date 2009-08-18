@@ -248,6 +248,16 @@ bool Duration::hasStem() const
 
 Duration::Duration(const QString& s)
       {
+      setType(s);
+      _dots = 0;
+      }
+
+//---------------------------------------------------------
+//   setType
+//---------------------------------------------------------
+
+void Duration::setType(const QString& s)
+      {
       if (s == "quarter")
             _val = V_QUARTER;
       else if (s == "eighth")
@@ -276,7 +286,6 @@ Duration::Duration(const QString& s)
             _val = V_INVALID;
             printf("Duration::setVal(%s): unknown\n", qPrintable(s));
             }
-      _dots = 0;
       }
 
 //---------------------------------------------------------

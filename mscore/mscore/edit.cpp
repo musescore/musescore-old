@@ -472,15 +472,6 @@ void Score::putNote(const QPointF& pos, bool replace)
             printf("cannot put note here, get position failed\n");
             return;
             }
-#if 0  // TODO: CHECK
-      // no note value selected
-      if (len == 0) {
-            len = p.measure->tickLen();
-            _is.duration.setVal(len);
-            len = _is.tickLen();
-            setPadState();
-            }
-#endif
 
       int tick                = p.tick;
       int staffIdx            = p.staffIdx;
@@ -490,8 +481,8 @@ void Score::putNote(const QPointF& pos, bool replace)
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key);
       Instrument* instr       = st->part()->instrument();
-      int voice               = _is.voice();
-      int track               = staffIdx * VOICES + voice;
+      _is.track               = staffIdx * VOICES + (_is.track % VOICES);
+      _is.pitch               = pitch;
       int headGroup           = 0;
       Direction stemDirection = AUTO;
 
@@ -500,18 +491,17 @@ void Score::putNote(const QPointF& pos, bool replace)
             pitch         = _is.drumNote;
             if (pitch < 0)
                   return;
-            voice         = ds->voice(pitch);
+            // voice         = ds->voice(pitch);
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
             }
 
-      Segment* segment = p.measure->tick2segment(tick);
-      if (segment == 0) {
+      Segment* s = p.measure->tick2segment(tick);
+      if (s == 0) {
             printf("cannot put note here, no segment found\n");
             return;
             }
-
-      _is._segment = segment;
+      _is._segment = s;
       expandVoice();
       ChordRest* cr = _is.cr();
       if (cr == 0)
@@ -536,22 +526,15 @@ void Score::putNote(const QPointF& pos, bool replace)
                   select(note, SELECT_SINGLE, 0);
                   }
             else
-                  setNoteRest(cr, track, pitch, _is.duration, headGroup, stemDirection);
+                  setNoteRest(cr, _is.track, pitch, _is.duration, headGroup, stemDirection);
             }
       else {
             // replace chord
             if (_is.rest)
                   pitch = -1;
-            setNoteRest(cr, track, pitch, _is.duration, headGroup, stemDirection);
+            setNoteRest(cr, _is.track, pitch, _is.duration, headGroup, stemDirection);
             }
-
-      ChordRest* ncr = nextChordRest(_is.cr());
-      _is._segment = ncr ? cr->segment() : 0;
-      if (_is._segment)
-            emit posChanged(_is.tick());
-
-      setInputTrack(staffIdx * VOICES + voice);
-      _is.pitch = pitch;
+      moveToNextInputPos();
       }
 
 //---------------------------------------------------------
@@ -1258,9 +1241,6 @@ printf("  setRest ticks %d  %d/%d\n", len, f.zaehler(), f.nenner());
                         tick   += len;
                         }
                   }
-
-            layoutAll = true;
-            return;
             }
       else {
 printf("delete elements\n");
@@ -1404,21 +1384,26 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      if (noteEntryMode())
-            cmdEnterRest();
+      ChordRest* cr;
+      Duration duration;
 
-      ChordRest* cr = getSelectedChordRest();
-      if (cr == 0)
-            return;
-
-      int tick = cr->tick();
-      Duration duration = cr->duration();
-      if (duration.type() == Duration::V_MEASURE) {
-            int tz, tn;
-            getSigmap()->timesig(tick, tz, tn);
-            Fraction f(tz, tn);
-            duration = Duration(f);
+      if (noteEntryMode()) {
+            cr       = _is.cr();
+            duration = _is.duration;
             }
+      else {
+            cr = getSelectedChordRest();
+            if (cr == 0)
+                  return;
+            duration = cr->duration();
+            if (duration.type() == Duration::V_MEASURE) {
+                  int tz, tn;
+                  getSigmap()->timesig(cr->tick(), tz, tn);
+                  Fraction f(tz, tn);
+                  duration = Duration(f);
+                  }
+            }
+      int tick = cr->tick();
       if (duration.dots() > 1) {
             printf("cannot create tuplet for this duration\n");
             return;
@@ -1504,6 +1489,10 @@ void Score::cmdTuplet(int n)
                         break;
                   }
             }
+      if (noteEntryMode() && (duration != cr->duration())) {
+            cmdEnterRest();
+            cr = getSelectedChordRest();
+            }
 
       //
       // "duration" is the duration of one tuple element
@@ -1523,10 +1512,8 @@ void Score::cmdTuplet(int n)
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
 
-      if (ot) {
-//            ot->add(tuplet);
+      if (ot)
             tuplet->setTuplet(ot);
-            }
       cmdCreateTuplet(cr, tuplet);
 
       const QList<DurationElement*>& cl = tuplet->elements();

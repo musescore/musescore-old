@@ -117,6 +117,8 @@ void Score::endCmd()
             return;
             }
       _undo->endMacro(_undo->current()->childCount() <= 1);
+      foreach(Element* e, *selection()->elements())
+            e->setSelected(true);
       end();
       }
 
@@ -528,24 +530,6 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
             }
 
-#if 0       // CHECK
-      int len = _is.tickLen();
-	  //no note value selected
-	  if(len==0){
-			Measure* measure = tick2measure(_is.pos());
-			len = measure->tickLen();
-			_is.duration.setVal(len);
-			len = _is.tickLen();
-			setPadState();
-			}
-
-      ChordRest* cr = _is.cr;
-      if (cr && cr->tuplet()) {
-            n = (Note*)setTupletChordRest(cr, pitch, len);
-            len = cr->tuplet()->actualTickLen(len);
-            }
-#endif
-
       Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration, headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
 
@@ -561,23 +545,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   }
             setLayoutAll(true);
             }
-
-      // go to next ChordRest
-      // TODO: special case: note is first note of tie: goto to last note of tie
-
-      for (;;) {
-            seg = seg->next1();
-            if (!seg)
-                  break;
-            if (seg->measure()->multiMeasure() < 0)
-                  break;
-            Element* e = seg->element(track);
-            if (e && e->isChordRest()) {
-                  _is._segment = seg;
-                  emit posChanged(seg->tick());
-                  break;
-                  }
-            }
+      moveToNextInputPos();
       return note;
       }
 
@@ -657,6 +625,7 @@ void Score::cmdAddInterval(int val)
             select(n, SELECT_SINGLE, 0);
             _is.pitch = n->pitch();
             }
+      moveToNextInputPos();
       }
 
 //---------------------------------------------------------
@@ -793,7 +762,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
             //
             //  Note does not fit on current measure, create Tie to
             //  next part of note
-            if (pitch < 0) {
+            if (pitch != -1) {
                   tie = new Tie(this);
                   tie->setStartNote((Note*)nr);
                   tie->setTrack(nr->track());
@@ -1769,12 +1738,12 @@ void Score::cmdMove(Element* e, QPointF delta)
 //   cmd
 //---------------------------------------------------------
 
-void Score::cmd(const QString& cmd)
+void Score::cmd(const QAction* a)
       {
+      QString cmd(a ? a->data().toString() : "");
       if (debugMode)
-            printf("cmd <%s>\n", cmd.toLatin1().data());
+            printf("Score::cmd <%s>\n", cmd.toLatin1().data());
 
-      QAction* a = getAction(cmd.toLatin1().data());
       if (editObject) {                          // in edit mode?
             if (cmd == "paste") {
                   if (editObject->isTextB())
@@ -2765,6 +2734,25 @@ void Score::moveInputPos(Segment* s)
       }
 
 //---------------------------------------------------------
+//   moveToNextInputPos
+//   TODO: special case: note is first note of tie: goto to last note of tie
+//---------------------------------------------------------
+
+void Score::moveToNextInputPos()
+      {
+      Segment* s = _is._segment;
+      Measure* m = s->measure();
+      int track  = _is.track;
+      for (s = s->next1(); s; s = s->next1()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            if (s->element(track) || s->measure() != m)
+                  break;
+            }
+      moveInputPos(s);
+      }
+
+//---------------------------------------------------------
 //   move
 //    move current selection
 //---------------------------------------------------------
@@ -2780,16 +2768,7 @@ void Score::move(const QString& cmd)
       Element* el = 0;
       if (cmd == "next-chord") {
             if (noteEntryMode()) {
-                  Segment* s = _is._segment;
-                  Measure* m = s->measure();
-                  int track  = _is.track;
-                  for (s = s->next1(); s; s = s->next1()) {
-                        if (s->subtype() != Segment::SegChordRest)
-                              continue;
-                        if (s->element(track) || s->measure() != m)
-                              break;
-                        }
-                  moveInputPos(s);
+                  moveToNextInputPos();
                   return;
                   }
             else

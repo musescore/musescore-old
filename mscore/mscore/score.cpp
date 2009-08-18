@@ -107,7 +107,7 @@ InputState::InputState() :
 
 ChordRest* InputState::cr() const
       {
-      _segment->element(track);
+      return static_cast<ChordRest*>(_segment->element(track));
       }
 
 //---------------------------------------------------------
@@ -1148,9 +1148,11 @@ void Score::setNoteEntry(bool val)
       _is._segment = 0;
       if (val) {
             Note* note  = 0;
+printf("setNoteEntry: activeCR %p\n", _selection->activeCR());
             Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
             if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
                   int track = _is.track == -1 ? 0 : _is.track;
+printf("setNoteEntry: nothing selected, searchNote\n");
                   el = static_cast<ChordRest*>(searchNote(0, track));
                   if (el == 0) {
                         printf("no note or rest selected 1\n");
@@ -1159,17 +1161,22 @@ void Score::setNoteEntry(bool val)
                   }
             if (el->type() == CHORD) {
                   Chord* c = static_cast<Chord*>(el);
+printf("setNoteEntry chord at %d\n", c->tick());
                   note = c->selectedNote();
                   if (note == 0)
                         note = c->upNote();
                   el = note;
                   }
+printf("setNoteEntry %s\n", el->name());
+
             select(el, SELECT_SINGLE, 0);
-            setInputTrack(_is.track);
             _is.noteEntryMode = true;
             canvas()->moveCursor();
             _is.rest = false;
             getAction("pad-rest")->setChecked(false);
+            //
+            // TODO: check for valid duration
+            //
             }
       else {
             _is.noteEntryMode = false;
@@ -1197,10 +1204,8 @@ void Score::midiNoteReceived(int pitch, bool chord)
       ev.chord = chord;
 
       midiInputQueue.enqueue(ev);
-      QString emptyCmd;
-
       if (!_undo->active())
-            cmd(emptyCmd);
+            cmd(0);
       }
 
 //---------------------------------------------------------

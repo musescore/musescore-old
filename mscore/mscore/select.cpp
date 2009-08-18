@@ -115,10 +115,14 @@ ChordRest* Selection::activeCR() const
       {
       if ((_state != SEL_STAFF && _state != SEL_SYSTEM) || !_activeSegment)
             return 0;
-      if (_activeSegment == _startSegment)
+printf("activeCR: el size %d   _activeSegment %p  startSegment %p\n", _el.size(),
+      _activeSegment, _startSegment);
+      if (_activeSegment == _startSegment) {
             return firstChordRest(activeTrack);
-      else
+            }
+      else {
             return lastChordRest(activeTrack);
+            }
       }
 
 //---------------------------------------------------------
@@ -281,8 +285,9 @@ void Score::updateSelectedElements(SelState state)
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
-// printf("select element <%s> type %d(state %d) staff %d\n",
-//   e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
+      if (debugMode)
+            printf("select element <%s> type %d(state %d) staff %d\n",
+               e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
 
       SelState selState = _selection->state();
 
@@ -554,11 +559,11 @@ void Score::lassoSelect(const QRectF& bbox)
 
 void Selection::setRange(Segment* a, Segment* b, int c, int d)
       {
-      _startSegment = a;
-      _endSegment   = b;
+      _startSegment  = a;
+      _endSegment    = b;
       _activeSegment = b;
-      staffStart = c;
-      staffEnd   = d;
+      staffStart     = c;
+      staffEnd       = d;
       }
 
 //---------------------------------------------------------

@@ -47,6 +47,7 @@ class Duration {
       bool isZero() const                   { return _val == V_ZERO; }
       void setVal(int tick);
       void setType(DurationType t)          { _val = t; }
+      void setType(const QString&);
 
       int ticks() const;
       bool operator==(const Duration& t) const     { return t._val == _val && t._dots == _dots; }

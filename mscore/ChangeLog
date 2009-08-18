@@ -1,7 +1,12 @@
-18.aug (db)
-      - LilyPond export: add quotes around unparsed markup (staff text, etc.) since 
+18.aug (ws)
+      - fix save/restore of dotted notes
+      - fix: add interval backsteps input cursor
+      - fix: note input associated with wrong staff
+      - fix: note entry cursor on wrong side for mouse input
+      (db)
+      - LilyPond export: add quotes around unparsed markup (staff text, etc.) since
         it can contain special characters
-      - LilyPond export: commented out the indent=0 since instrument names can be 
+      - LilyPond export: commented out the indent=0 since instrument names can be
         larger than the margin
       - LilyPond export: fix spelling mistake for octave markings ("set-octaviation")
         and correctly detect the type of ottava (8va, 15va, 8va, 15vb)

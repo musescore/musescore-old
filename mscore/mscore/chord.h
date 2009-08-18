@@ -179,8 +179,6 @@ class Chord : public ChordRest {
       virtual void setSelected(bool f);
       virtual void dump() const;
 
-      virtual void setDuration(Duration t);
-
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
       Direction stemDirection() const        { return _stemDirection; }
