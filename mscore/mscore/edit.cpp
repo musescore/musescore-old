@@ -1148,6 +1148,8 @@ void Score::cmdDeleteSelectedMeasures()
                         }
                   do {
                         ie = ie->prev();
+                        if (ie == 0)
+                              break;
                         deleteItem(ie);
                         } while (ie != is);
                   }

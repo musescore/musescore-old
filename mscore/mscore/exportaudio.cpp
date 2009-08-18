@@ -91,6 +91,7 @@ bool Score::saveAudio(const QString& name, int format)
       foreach(const Part* part, _parts) {
             const Instrument* instr = part->instrument();
             foreach(const Channel* a, instr->channel) {
+                  a->updateInitList();
                   foreach(Event* e, a->init) {
                         if (e == 0)
                               continue;

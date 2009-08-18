@@ -1,4 +1,6 @@
 18.aug (ws)
+      - fix "delete selected measures"
+      - fix: use current instrument settings when exporting audio
       - fix save/restore of dotted notes
       - fix: add interval backsteps input cursor
       - fix: note input associated with wrong staff
