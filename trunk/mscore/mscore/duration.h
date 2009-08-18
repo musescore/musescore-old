@@ -41,10 +41,13 @@ class DurationElement : public Element {
       DurationElement(Score* s);
       DurationElement(const DurationElement& e);
 
-      virtual Measure* measure() const           { return (Measure*)(parent()); }
+      virtual Measure* measure() const               { return (Measure*)(parent()); }
 
-      Duration duration() const                  { return _duration; }
-      virtual void setDuration(const Duration t) { _duration = t;    }
+      const Duration& duration() const               { return _duration;        }
+      void setDurationType(Duration::DurationType t) { _duration.setType(t);    }
+      void setDurationType(const QString& s)         { _duration.setType(s);    }
+      void setDurationVal(int ticks)                 { _duration.setVal(ticks); }
+      void setDuration(const Duration& v)            { _duration = v;           }
 
       void setTuplet(Tuplet* t)                  { _tuplet = t;      }
       Tuplet* tuplet() const                     { return _tuplet;   }
@@ -56,6 +59,4 @@ class DurationElement : public Element {
       };
 
 #endif
-
-
 

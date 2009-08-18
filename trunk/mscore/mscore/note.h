@@ -121,7 +121,6 @@ class Note : public Element {
       virtual void setTrack(int val);
 
       int totalTicks() const;
-      void setType(Duration);
 
       double headWidth() const;
       double headHeight() const;

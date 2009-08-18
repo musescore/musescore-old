@@ -299,12 +299,9 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
                   }
             }
       else if (tag == "durationType")
-            setDuration(Duration(val));
-      else if (tag == "ticklen") {  // obsolete
-            Duration d;
-            d.setVal(i);
-            setDuration(d);
-            }
+            setDurationType(val);
+      else if (tag == "ticklen")  // obsolete
+            setDurationVal(i);
       else if (tag == "dots")
             setDots(i);
       else

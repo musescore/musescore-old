@@ -1793,9 +1793,13 @@ int main(int argc, char* argv[])
 
 void MuseScore::cmd(QAction* a)
       {
-      static QString lastCmd;
+      static QAction* lastCmd;
 
       QString cmd(a->data().toString());
+
+      if (debugMode)
+            printf("MuseScore::cmd <%s>\n", cmd.toLatin1().data());
+
       Shortcut* sc = getShortcut(cmd.toAscii().data());
       if (sc == 0) {
             printf("unknown action <%s>\n", qPrintable(cmd));
@@ -1809,12 +1813,13 @@ void MuseScore::cmd(QAction* a)
             return;
             }
       if (cmd == "repeat-cmd") {
-            cmd = lastCmd;
-            if (cmd.isEmpty())
+            a = lastCmd;
+            if (a == 0)
                   return;
+            cmd = a->data().toString();
             }
       else
-            lastCmd = cmd;
+            lastCmd = a;
       if (cmd == "instruments")
             editInstrList();
       else if (cmd == "clefs")
@@ -1898,7 +1903,7 @@ void MuseScore::cmd(QAction* a)
             ;
       else {
             if (cs)
-                  cs->cmd(cmd);
+                  cs->cmd(a);
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             }

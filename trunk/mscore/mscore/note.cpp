@@ -480,15 +480,6 @@ void Note::setAccidentalType(int pre)
       }
 
 //---------------------------------------------------------
-//   setType
-//---------------------------------------------------------
-
-void Note::setType(Duration t)
-      {
-      _head = noteHeads[int(_headGroup)][t.headType()];
-      }
-
-//---------------------------------------------------------
 //   setHeadGroup
 //---------------------------------------------------------
 
@@ -1170,6 +1161,7 @@ void Note::layout()
       {
       if (parent() == 0)
             return;
+      _head = noteHeads[int(_headGroup)][chord()->duration().headType()];
       if (_accidental)
             _accidental->setMag(mag());
       foreach(Element* e, _el) {

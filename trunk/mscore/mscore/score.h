@@ -307,6 +307,7 @@ class Score : public QObject {
 
       void move(const QString& cmd);
       void moveInputPos(Segment* s);
+      void moveToNextInputPos();
       void selectMove(const QString& cmd);
 
       void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
@@ -641,7 +642,7 @@ class Score : public QObject {
       bool playlistDirty();
       void changeTimeSig(int tick, int st);
 
-      void cmd(const QString&);
+      void cmd(const QAction*);
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       bool saveFile(bool autosave);
       void adjustTime(int tick, MeasureBase*);

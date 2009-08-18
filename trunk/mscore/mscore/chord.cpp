@@ -345,7 +345,6 @@ void Chord::add(Element* e)
                   if (note->tieFor()->endNote())
                         note->tieFor()->endNote()->setTieBack(note->tieFor());
                   }
-            note->setType(duration());
             }
       else if (e->type() == ARTICULATION)
             articulations.push_back(static_cast<Articulation*>(e));
@@ -354,7 +353,8 @@ void Chord::add(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
             if (tr->twoNotes()) {
-                  Duration d  = duration().shift(-1);
+                  Duration d = duration();
+                  d  = d.shift(-1);
                   if (tr->chord1())
                         tr->chord1()->setDuration(d);
                   if (tr->chord2())
@@ -403,7 +403,8 @@ void Chord::remove(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tremolo = static_cast<Tremolo*>(e);
             if (tremolo->twoNotes()) {
-                  Duration d       = duration().shift(1);
+                  Duration d = duration();
+                  d          = d.shift(1);
                   if (tremolo->chord1())
                         tremolo->chord1()->setDuration(d);
                   if (tremolo->chord2())
@@ -904,10 +905,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
             else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
-      for (iNote i = notes.begin(); i != notes.end(); ++i) {
-            Note* note = i->second;
-            note->setType(duration());
-            }
       }
 
 //---------------------------------------------------------
@@ -1027,18 +1024,6 @@ void Chord::setTrack(int val)
 
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->setTrack(val);
-      }
-
-//---------------------------------------------------------
-//   setDuration
-//---------------------------------------------------------
-
-void Chord::setDuration(Duration t)
-      {
-      DurationElement::setDuration(t);
-      NoteList* nl = noteList();
-      for (iNote in = nl->begin(); in != nl->end(); ++in)
-            in->second->setType(t);
       }
 
 //---------------------------------------------------------
