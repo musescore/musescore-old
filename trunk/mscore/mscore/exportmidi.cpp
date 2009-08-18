@@ -211,8 +211,6 @@ bool ExportMidi::write(const QString& name)
 
       writeHeader();
 
-//      SigList* sigmap = cs->sigmap;
-
       cs->updateRepeatList(preferences.midiExpandRepeats);
 
       foreach (Staff* staff, cs->staves()) {

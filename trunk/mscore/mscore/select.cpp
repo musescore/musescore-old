@@ -115,14 +115,10 @@ ChordRest* Selection::activeCR() const
       {
       if ((_state != SEL_STAFF && _state != SEL_SYSTEM) || !_activeSegment)
             return 0;
-printf("activeCR: el size %d   _activeSegment %p  startSegment %p\n", _el.size(),
-      _activeSegment, _startSegment);
-      if (_activeSegment == _startSegment) {
+      if (_activeSegment == _startSegment)
             return firstChordRest(activeTrack);
-            }
-      else {
+      else
             return lastChordRest(activeTrack);
-            }
       }
 
 //---------------------------------------------------------
