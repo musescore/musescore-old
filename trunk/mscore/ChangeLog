@@ -1,4 +1,5 @@
 18.aug (ws)
+      - make accidental names translatable
       - fix "delete selected measures"
       - fix: use current instrument settings when exporting audio
       - fix save/restore of dotted notes

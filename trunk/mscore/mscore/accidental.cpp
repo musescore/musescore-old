@@ -23,6 +23,49 @@
 #include "sym.h"
 
 //---------------------------------------------------------
+//   Acc
+//---------------------------------------------------------
+
+struct Acc {
+      const char* tag;
+      int offset;
+      Acc(const char* t, int o) : tag(t), offset(o) {}
+      };
+
+Acc accList[] = {
+      Acc(QT_TRANSLATE_NOOP("accidental", "none"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp"), 1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat"), -1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "double sharp"), 2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "double flat"), -2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural"), 0),
+
+      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(natural)"), 0),
+
+      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"), 0),
+
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash2"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat-slash"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"), 0),
+
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"), 0)
+      };
+
+//---------------------------------------------------------
 //   Accidental
 //---------------------------------------------------------
 
@@ -32,18 +75,47 @@ Accidental::Accidental(Score* sc)
       }
 
 //---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+const QString Accidental::subtypeName() const
+      {
+      return accList[subtype()].tag;
+      }
+
+//---------------------------------------------------------
+//   subTypeName
+//---------------------------------------------------------
+
+const char* Accidental::subTypeName() const
+      {
+      return accList[subtype()].tag;
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void Accidental::setSubtype(const QString& tag)
+      {
+      int n = sizeof(accList)/sizeof(*accList);
+      for (int i = 0; i < n; ++i) {
+            if (accList[i].tag == tag) {
+                  setSubtype(i);
+                  return;
+                  }
+            }
+      Element::setSubtype(0);
+      }
+
+//---------------------------------------------------------
 //   setSubtype
 //    0 - no accidental
-//    1 - sharp
-//    2 - flat
-//    3 - double sharp
-//    4 - double flat
-//    5 - natural
-//    6 - (sharp)          11 - [sharp]
-//    7 - (flat)           12 - [flat]
-//    8 - (double sharp)   13 - [double sharp]
-//    9 - (double flat)    14 - [double flat]
-//    10 - (natural)       15 - [natural]
+//    1 - sharp          6  - (sharp)          11 - [sharp]
+//    2 - flat           7  - (flat)           12 - [flat]
+//    3 - double sharp   8  - (double sharp)   13 - [double sharp]
+//    4 - double flat    9  - (double flat)    14 - [double flat]
+//    5 - natural        10 - (natural)        15 - [natural]
 //
 //    16 - flat-slash
 //    17 - flat-slash2

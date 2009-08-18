@@ -45,7 +45,10 @@ class Accidental : public Compound {
       virtual ElementType type() const  { return ACCIDENTAL; }
       virtual void setSubtype(int v);
       virtual void setMag(double val);
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
 
+      const char* subTypeName() const;
       static int subtype2value(int);      // return effective pitch offset
       static int value2subtype(int);
       };
