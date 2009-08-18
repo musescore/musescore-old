@@ -433,7 +433,7 @@ void ExportLy::instructionMarker(Marker* m)
   else
     printf("marker type=%d not implemented\n", mtp);
   if (words=="")
-    out << "\\mark \\markup { \\musicglyph #\"scripts." << type<<"\"}";
+    out << "\\mark \\markup { \\musicglyph #\"scripts." << type<<"\"} ";
   else
     out << "\\mark \"" << words << "\"";
 
@@ -465,7 +465,7 @@ void ExportLy::symbol(Symbol* sym)
 
 void ExportLy::tempoText(TempoText* text)
       {
-	out << "^\\markup {" << text->getText() << "}";
+	out << "^\\markup {\"" << text->getText() << "\"} ";
       }
 
 
@@ -492,7 +492,7 @@ void ExportLy::words(Text* text)
 	      }
 	  }
 	else
-	  out << "^\\markup {" << text->getText() << "}";
+	  out << "^\\markup {\"" << text->getText() << "\"} ";
       }
 
 
@@ -528,26 +528,26 @@ void ExportLy::ottava(Ottava* ot, int tick)
             const char* sz = 0;
             switch(st) {
                   case 0:
-                        sz = "-1";
-                        break;
-                  case 1:
-                        sz = "-2";
-                        break;
-                  case 2:
                         sz = "1";
                         break;
-                  case 3:
+                  case 1:
                         sz = "2";
+                        break;
+                  case 2:
+                        sz = "-1";
+                        break;
+                  case 3:
+                        sz = "-2";
                         break;
                   default:
                         printf("ottava subtype %d not understood\n", st);
                   }
             if (sz)
-	      out << "#(set-octaviation " << sz << ") ";
+	      out << "#(set-octavation  " << sz << ") ";
             }
       else {
 	if (st == 0)
-	  out << "#(set-octaviation 0)";
+	  out << "#(set-octavation  0)";
             }
       }
 
@@ -586,7 +586,7 @@ void ExportLy::dynamic(Dynamic* dyn)
       out << "\\"<< t.toLatin1().data() << " ";
     }
     else
-      out << "_\\markup{"<< t.toLatin1().data() << "} ";
+      out << "_\\markup{\""<< t.toLatin1().data() << "\"} ";
 }//end dynamic
 
 
@@ -2521,7 +2521,7 @@ bool ExportLy::write(const QString& name)
   os <<  "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n";
   os <<  "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n";
   os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
-  os <<  "  indent = 0 \\mm \n";
+  os <<  "  %%indent = 0 \\mm \n";
   os <<  "  %%set to ##t if your score is less than one page: \n";
   os <<  "  ragged-last-bottom = ##f \n";
   os <<  "  ragged-bottom = ##f  \n";
@@ -2587,7 +2587,12 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------- NEWS and HISTORY:--------------------  */
 
-/* mar. 2009 always explicit end-bar -> no need to declare last bar as
+/* 
+   17.aug.2009 (db) add quotes around unparsed markup (since it can 
+   contain special characters), commented out the indent=0, fix spelling
+   mistake for octave markings ("set-octaviation"), fix type of ottava
+   
+   mar. 2009 always explicit end-bar -> no need to declare last bar as
    incomplete, but writes to end-bars when last bar is complete. This
    doesn't show in print.
 

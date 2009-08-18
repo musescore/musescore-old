@@ -1,3 +1,10 @@
+18.aug (db)
+      - LilyPond export: add quotes around unparsed markup (staff text, etc.) since 
+        it can contain special characters
+      - LilyPond export: commented out the indent=0 since instrument names can be 
+        larger than the margin
+      - LilyPond export: fix spelling mistake for octave markings ("set-octaviation")
+        and correctly detect the type of ottava (8va, 15va, 8va, 15vb)
 17.aug (ws)
       - misc fixes & cleanups for note entry
 16.aug (ws)
