@@ -31,7 +31,7 @@ class Text;
 //------------------------------------------------------------------------
 //   Tuplet
 //     Example of 1/8 triplet:
-//       _baseLen     = 192   (division/2 == 1/8 duration)
+//       _baseLen     = 1/8
 //       _actualNotes = 3
 //       _normalNotes = 2     (3 notes played in the time of 2/8)
 //

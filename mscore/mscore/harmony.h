@@ -149,7 +149,7 @@ struct ChordFont {
 //   ChordList
 //---------------------------------------------------------
 
-class ChordList : public QMap<int, const ChordDescription*> {
+class ChordList : public QMap<int, ChordDescription*> {
       QHash<QString, ChordSymbol> symbols;
 
    public:

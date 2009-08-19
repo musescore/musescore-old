@@ -968,7 +968,7 @@ void ChordDescription::read(QDomElement e)
 ChordList::~ChordList()
       {
       if (isDetached()) {
-            QMapIterator<int, const ChordDescription*> i(*this);
+            QMapIterator<int, ChordDescription*> i(*this);
             while(i.hasNext()) {
                   i.next();
                   delete i.value();
@@ -1008,9 +1008,12 @@ void ChordList::read(QDomElement e)
                   ++fontIdx;
                   }
             else if (tag == "chord") {
-                  ChordDescription* cd = new ChordDescription();
+                  int id = e.attribute("id").toInt();
+                  ChordDescription* cd = take(id);
+                  if (cd == 0)
+                        cd = new ChordDescription();
                   cd->read(e);
-                  insert(cd->id, cd);
+                  insert(id, cd);
                   }
             else if (tag == "renderRoot")
                   readRenderList(val, renderListRoot);

@@ -379,7 +379,7 @@ Style::Style()
 
             StyleVal(ST_useGermanNoteNames, false),
             StyleVal(ST_warnPitchRange, true),
-/*72*/      StyleVal(ST_chordDescriptionFile, QString("chords.xml")),
+/*72*/      StyleVal(ST_chordDescriptionFile, QString("stdchords.xml")),
             StyleVal(ST_concertPitch,false),
             StyleVal(ST_createMultiMeasureRests,false),
             StyleVal(ST_minEmptyMeasures,2),
@@ -760,6 +760,7 @@ ChordList* Style::chordList()  const
       {
       if (_chordList == 0) {
             _chordList = new ChordList();
+            _chordList->read("chords.xml");
             _chordList->read(value(ST_chordDescriptionFile).toString());
             }
       return _chordList;

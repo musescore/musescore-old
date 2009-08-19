@@ -366,6 +366,7 @@ void Tuplet::write(Xml& xml) const
 
 void Tuplet::read(QDomElement e)
       {
+      int bl = -1;
       _id = e.attribute("id", "0").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -380,11 +381,8 @@ void Tuplet::read(QDomElement e)
                   _numberType = i;
             else if (tag == "bracketType")
                   _bracketType = i;
-            else if (tag == "baseLen") {          // obsolete
-                  Duration d;
-                  d.setVal(i);
-                  _baseLen = d;
-                  }
+            else if (tag == "baseLen")            // obsolete
+                  bl = i;
             else if (tag == "baseNote")
                   _baseLen = Duration(e.text());
             else if (tag == "normalNotes")
@@ -422,6 +420,15 @@ void Tuplet::read(QDomElement e)
             }
       Fraction f(_ratio.nenner(), _baseLen.fraction().nenner());
       setDuration(Duration(f));
+      if (bl != -1) {
+            Duration d;
+            d.setVal(bl);
+            _baseLen = d;
+printf("Tuplet base len %d/%d\n", d.fraction().zaehler(), d.fraction().nenner());
+printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.zaehler(), _ratio.nenner());
+            d.setVal(bl * _ratio.nenner());
+            setDuration(d);
+            }
       }
 
 //---------------------------------------------------------

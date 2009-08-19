@@ -1136,6 +1136,8 @@ void Score::cmdRemoveTime(int tick, int len)
 
 void Score::cmdDeleteSelectedMeasures()
       {
+      if (selection()->state() != SEL_STAFF && selection()->state() != SEL_SYSTEM)
+            return;
       MeasureBase* is = selection()->startSegment()->measure();
       bool createEndBar = false;
       if (is->next()) {
@@ -1143,15 +1145,18 @@ void Score::cmdDeleteSelectedMeasures()
             if (ie) {
                   if (ie->tick() < selection()->endSegment()->tick()) {
                         // if last measure is selected
+                        if (ie->type() == MEASURE)
+                              createEndBar = static_cast<Measure*>(ie)->endBarLineType() != END_BAR;
                         deleteItem(ie);
-                        createEndBar = true;
                         }
-                  do {
-                        ie = ie->prev();
-                        if (ie == 0)
-                              break;
-                        deleteItem(ie);
-                        } while (ie != is);
+                  if (ie != is) {
+                        do {
+                              ie = ie->prev();
+                              if (ie == 0)
+                                    break;
+                              deleteItem(ie);
+                              } while (ie != is);
+                        }
                   }
             }
       else {
