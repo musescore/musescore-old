@@ -36,6 +36,8 @@ class DurationElement : public Element {
       Tuplet* _tuplet;
 
    protected:
+      int _ticks;       // for reading obsolete scores version < 1.12
+                        // must be converted to _duration
 
    public:
       DurationElement(Score* s);
@@ -49,13 +51,14 @@ class DurationElement : public Element {
       void setDurationVal(int ticks)                 { _duration.setVal(ticks); }
       void setDuration(const Duration& v)            { _duration = v;           }
 
-      void setTuplet(Tuplet* t)                  { _tuplet = t;      }
-      Tuplet* tuplet() const                     { return _tuplet;   }
-      virtual Beam* beam() const                 { return 0;         }
+      void setTuplet(Tuplet* t)                      { _tuplet = t;      }
+      Tuplet* tuplet() const                         { return _tuplet;   }
+      virtual Beam* beam() const                     { return 0;         }
       int ticks() const;
       int tickLen() const { return ticks(); }
-      void setDots(int n)                        { _duration.setDots(n); }
-      int dots() const                           { return _duration.dots(); }
+      void setDots(int n)                            { _duration.setDots(n); }
+      int dots() const                               { return _duration.dots(); }
+      void convertTicks();   // for scores version < 1.12
       };
 
 #endif

@@ -45,6 +45,7 @@ DurationElement::DurationElement(Score* s)
    : Element(s)
       {
       _tuplet = 0;
+      _ticks   = -1;
       }
 
 //---------------------------------------------------------
@@ -67,12 +68,24 @@ int DurationElement::ticks() const
       if (_duration.type() == Duration::V_MEASURE)    // whole measure rest?
             return static_cast<Measure*>(parent()->parent())->tickLen();
       int ticks = duration().ticks();
-// printf("DurationElement::ticks: %d\n", ticks);
-      for (Tuplet* t = tuplet(); t; t = t->tuplet()) {
+      for (Tuplet* t = tuplet(); t; t = t->tuplet())
             ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
-// printf("    * %d / %d = %d\n", t->ratio().nenner(), t->ratio().zaehler(), ticks);
-            }
       return ticks;
+      }
+
+//---------------------------------------------------------
+//   convertTicks
+//---------------------------------------------------------
+
+void DurationElement::convertTicks()
+      {
+      if (_ticks < 0)
+            return;
+      if (_tuplet == 0)
+            _duration.setVal(_ticks);
+      else {
+            ;
+            }
       }
 
 //---------------------------------------------------------
@@ -300,8 +313,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             }
       else if (tag == "durationType")
             setDurationType(val);
-      else if (tag == "ticklen")  // obsolete
-            setDurationVal(i);
+      else if (tag == "ticklen")      // obsolete (version < 1.12)
+            _ticks = i;
       else if (tag == "dots")
             setDots(i);
       else

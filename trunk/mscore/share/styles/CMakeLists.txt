@@ -21,6 +21,7 @@
 install(FILES
       leadsheet.mss
       chords.xml
+      stdchords.xml
       jazzchords.xml
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
       )

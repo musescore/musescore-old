@@ -837,6 +837,7 @@ void Chord::read(QDomElement e)
       QList<Tuplet*> tl;
       QList<Beam*> bl;
       read(e, tl, bl);
+      convertTicks();
       }
 
 //---------------------------------------------------------
@@ -905,6 +906,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
             else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
+      convertTicks();
       }
 
 //---------------------------------------------------------

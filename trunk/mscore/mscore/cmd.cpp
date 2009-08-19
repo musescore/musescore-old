@@ -807,13 +807,14 @@ printf("makeGap %d/%d at %d\n", _sd.zaehler(), _sd.nenner(), cr->tick());
                   break;
                   }
 
-            Duration _td = cr->duration();
-            if (_td.type() == Duration::V_MEASURE) {
+            Fraction td;
+            if (cr->duration().type() == Duration::V_MEASURE) {
                   int z, n;
                   sigmap->timesig(cr->tick(), z, n);
-                  _td = Duration(Fraction(z, n));
+                  td = Fraction(z, n);
                   }
-            Fraction td = _td.fraction();
+            else
+                  td = cr->duration().fraction();
 printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick());
             undoRemoveElement(cr);
             if (seg->isEmpty())
@@ -822,10 +823,10 @@ printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick())
                   //
                   // we removed too much
                   //
-                  akkumulated = sd;
+                  akkumulated = _sd;
                   Fraction rd = td - sd;
 
-printf("  makeGap: removed %d/%d too much\n", rd.zaehler(), rd.nenner());
+printf("  makeGap: %d/%d removed %d/%d too much\n", sd.zaehler(), sd.nenner(), rd.zaehler(), rd.nenner());
 
                   QList<Duration> dList = toDurationList(rd);
                   if (dList.isEmpty())
@@ -846,6 +847,7 @@ printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                         for (int i = dList.size() - 1; i >= 0; --i)
                               tick += addClone(cr, tick, dList[i])->ticks();
                         }
+printf("  return %d/%d\n", akkumulated.zaehler(), akkumulated.nenner());
                   return akkumulated;
                   }
             akkumulated += td;

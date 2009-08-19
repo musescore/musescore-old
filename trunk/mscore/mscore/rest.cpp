@@ -287,6 +287,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
             setDuration(Duration(Duration::V_MEASURE));
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
+      convertTicks();
       }
 
 //---------------------------------------------------------

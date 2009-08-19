@@ -1,3 +1,10 @@
+19.aug (ws)
+      - reorganize chord description files into one file which contains the list of known chords
+        and different files which describe only the rendering
+      - fix: reading tuplets from mscore 0.9.5 scores
+      - fix: "note entry in 5/4 time crashes"
+      - fix: "delete measure removes all measure before current selection of notes"
+      - fix: "note entry of dotted quarter notes skips beats"
 18.aug (ws)
       - make accidental names translatable
       - fix "delete selected measures"
