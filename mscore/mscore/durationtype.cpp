@@ -292,7 +292,7 @@ void Duration::setType(const QString& s)
 //   shift
 //---------------------------------------------------------
 
-Duration Duration::shift(int v)
+Duration Duration::shift(int v) const
       {
       if (_val == V_MEASURE || _val == V_INVALID || _val == V_ZERO)
             return Duration();

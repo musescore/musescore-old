@@ -23,6 +23,7 @@
 
 #include "chordlist.h"
 #include "element.h"
+#include "durationtype.h"
 
 class Viewer;
 class Chord;
@@ -89,8 +90,6 @@ class Beam : public Element {
       bool _userModified;
       QPointF _p1, _p2;
       mutable int _id;          // used in read()/write()
-
-      void layoutCrossStaff(int, int, Chord*, Chord*);
 
    public:
       Beam(Score* s);
