@@ -66,7 +66,7 @@ class Duration {
       int headType() const;               // note head type
       int hooks() const;
       bool hasStem() const;
-      Duration shift(int val);
+      Duration shift(int val) const;
       int dots() const    { return _dots; }
       void setDots(int v) { _dots = v; }
       Fraction fraction() const;

@@ -831,7 +831,7 @@ printf("  makeGap: %d/%d removed %d/%d too much\n", sd.zaehler(), sd.nenner(), r
                   QList<Duration> dList = toDurationList(rd);
                   if (dList.isEmpty())
                         return akkumulated;
-                  int ticks = _sd.ticks();
+                  int ticks = sd.ticks();
 printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
@@ -1633,6 +1633,7 @@ void Score::moveUp(Note* note)
       if ((note->staffMove() == -1) || (rstaff + note->staffMove() <= 0))
             return;
       _undo->push(new ChangeNoteStaffMove(note, note->staffMove()-1));
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
