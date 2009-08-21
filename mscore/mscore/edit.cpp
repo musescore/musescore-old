@@ -126,8 +126,10 @@ Rest* Score::addRest(Segment* s, int track, Duration d)
       {
       Measure* m = s->measure();
       int tick = s->tick();
-      if ((m->tick() == tick) && (m->tickLen() == d.ticks()) && (d < Duration(Duration::V_BREVE)))
+      if ((m->tick() == tick) && (m->tickLen() == d.ticks()) && (d < Duration(Duration::V_BREVE))) {
             d.setType(Duration::V_MEASURE);
+            d.setDots(0);
+            }
       Rest* rest = new Rest(this, tick, d);
       rest->setTrack(track);
       rest->setParent(s);
@@ -1123,10 +1125,16 @@ void Score::cmdDeleteSelection()
                         Measure* m = tick2measure(tick);
                         int maxGap = m->tick() + m->tickLen() - tick;
                         int len    = gapLen > maxGap ? maxGap : gapLen;
+
                         Duration d;
                         d.setVal(len);
-                        Fraction f = d.fraction();
-                        setRest(tick, staffIdx * VOICES, f, false);
+                        if ((m->tick() == tick) && (m->tickLen() == len) && (len < Duration(Duration::V_BREVE).ticks())) {
+                              addRest(tick, staffIdx * VOICES, d);
+                              }
+                        else {
+                              Fraction f = d.fraction();
+                              setRest(tick, staffIdx * VOICES, f, false);
+                              }
                         gapLen -= len;
                         tick   += len;
                         }
