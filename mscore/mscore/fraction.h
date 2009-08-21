@@ -29,16 +29,16 @@
 
 class Fraction {
       int _zaehler;
-      unsigned int _nenner;
+      int _nenner;
 
       void kuerzen();
 
    public:
-      Fraction(int z = 0, unsigned int n = 1);
+      Fraction(int z = 0, int n = 1);
       int zaehler() const        { return _zaehler;           }
-      unsigned nenner() const    { return _nenner;            }
+      int nenner() const         { return _nenner;            }
       void setZaehler(int v)     { _zaehler = v;              }
-      void setNenner(unsigned v) { _nenner = v;               }
+      void setNenner(int v)      { _nenner = v;               }
       void set(int z, int n)     { _zaehler = z; _nenner = n; }
       bool isZero() const        { return _zaehler == 0;      }
 

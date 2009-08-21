@@ -608,7 +608,7 @@ void Beam::layout()
       double p1x  = c1->upNote()->canvasPos().x();
       double p2x  = c2->upNote()->canvasPos().x();
 
-      qreal slope;
+      qreal slope = 0.0;
       double beamY;  // y position of main beam start
       int cut = 0;
 
@@ -620,7 +620,6 @@ void Beam::layout()
             if (cross) {
                   double y1   = -100000;
                   double y2   = 100000;
-
                   foreach(ChordRest* cr, _elements) {
                         if (cr->type() != CHORD)
                               continue;
@@ -714,22 +713,23 @@ void Beam::layout()
             //
             // compute final y position position of 1/8 beam
             //
-            double yDownMax   = -100000;
-            double yUpMin = 100000;
 
-            double y;
-            foreach(ChordRest* cr, _elements) {
-                  if (cr->type() != CHORD)
-                        continue;
-                  bool _up = cr->up();
-                  y = cr->stemPos(!cr->up(), false).y();
-                  if (_up)
-                        yUpMin = qMin(y, yUpMin);
-                  else
-                        yDownMax = qMax(y, yDownMax);
-                  }
-            if (cross)
+            if (cross) {
+                  double yDownMax   = -100000;
+                  double yUpMin = 100000;
+                  foreach(ChordRest* cr, _elements) {
+                        if (cr->type() != CHORD)
+                              continue;
+                        double y;
+                        bool _up = cr->up();
+                        y = cr->stemPos(!cr->up(), false).y();
+                        if (_up)
+                              yUpMin = qMin(y, yUpMin);
+                        else
+                              yDownMax = qMax(y, yDownMax);
+                        }
                   _p1.ry() = _p2.ry() = yUpMin + (yDownMax - yUpMin) * .5;
+                  }
             else {
                   QPointF p1s(c1->stemPos(c1->up(), false));
                   QPointF p2s(c2->stemPos(c2->up(), false));
@@ -745,8 +745,7 @@ void Beam::layout()
                         _p2.ry() = p2s.y();
                         _p1.ry() = _p2.y() - ys;
                         }
-                  // _p1.ry()    = _p2.ry() = y;
-                  double min = 1000.0;
+                  double min =  1000.0;
                   double max = -1000.0;
                   foreach(ChordRest* cr, _elements) {
                         if (cr->type() != CHORD)
@@ -902,7 +901,7 @@ void Beam::layout()
             double x2 = npos.x();
             double y1 = npos.y();
 
-            double y  = _up ? _p1.y() : p1d.y();
+            double y  = (_up || !cross) ? _p1.y() : p1d.y();
             double y2 = y + (x2 - x1) * slope;
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);

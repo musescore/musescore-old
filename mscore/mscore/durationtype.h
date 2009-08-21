@@ -72,6 +72,6 @@ class Duration {
       Fraction fraction() const;
       };
 
-extern QList<Duration> toDurationList(Fraction);
+extern QList<Duration> toDurationList(Fraction, bool useDottedValues);
 #endif
 

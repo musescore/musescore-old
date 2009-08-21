@@ -1,3 +1,8 @@
+21.aug (ws)
+      - fixes for beams & note entry
+20.aug (ws)
+      - enhanced cross staff beams
+      - fix: "note entry of dotted eight notes skips beats"
 19.aug (ws)
       - reorganize chord description files into one file which contains the list of known chords
         and different files which describe only the rendering

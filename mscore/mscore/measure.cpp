@@ -220,6 +220,18 @@ void Measure::setTick(int t)
 
 void Measure::remove(Segment* el)
       {
+      // debug:
+      bool found = false;
+      for (Segment* s = _first; s; s = s->next()) {
+            if (el == s) {
+                  found = true;
+                  break;
+                  }
+            }
+      if (!found) {
+            printf("Measure::remove segment: not found %p\n", el);
+            abort();
+            }
       --_size;
       if (el == _first) {
             _first = _first->next();
@@ -1459,7 +1471,7 @@ if (debugMode)
             }
 
       int nstaves = _score->nstaves();
-      int segs    = size();
+      int segs    = _size;
 
       if (nstaves == 0 || segs == 0) {
             _mw = MeasureWidth(1.0, 0.0);
