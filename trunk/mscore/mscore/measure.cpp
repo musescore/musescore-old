@@ -601,12 +601,12 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 
       foreach(const AcEl e, aclist) {
             Note* note = e.note;
-            double x = e.x;
-            if (moveLeft) {
+            double x    = e.x;
+//            if (moveLeft) {
                   Chord* chord = note->chord();
                   if (((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
                         x -= note->headWidth();
-                  }
+//                  }
             note->accidental()->setPos(x, 0);
             }
       }
