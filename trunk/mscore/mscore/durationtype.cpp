@@ -461,17 +461,45 @@ Duration& Duration::operator+=(const Duration& t)
 //   toDurationList
 //---------------------------------------------------------
 
-QList<Duration> toDurationList(Fraction l)
+QList<Duration> toDurationList(Fraction l, bool useDottedValues)
       {
       QList<Duration> dList;
-      while (!l.isZero()) {
-            for (Duration d = Duration(Duration::V_LONG); !d.isZero(); d = d.shift(1)) {
+      if (useDottedValues) {
+            for (Duration d = Duration(Duration::V_LONG); (d.type() != Duration::V_ZERO) && (l.zaehler() != 0);) {
+                  d.setDots(2);
                   Fraction ff(l - d.fraction());
-                  if (ff.zaehler() < 0)
+                  if (ff.zaehler() >= 0) {
+                        dList.append(d);
+                        l -= d.fraction();
                         continue;
-                  dList.append(d);
+                        }
+                  d.setDots(1);
+                  ff = l - d.fraction();
+                  if (ff.zaehler() >= 0) {
+                        dList.append(d);
+                        l -= d.fraction();
+                        continue;
+                        }
+                  d.setDots(0);
+                  ff = l - d.fraction();
+                  if (ff.zaehler() < 0) {
+                        d = d.shift(1);
+                        }
+                  else {
+                        l -= d.fraction();
+                        dList.append(d);
+                        }
+                  }
+            }
+      else {
+            for (Duration d = Duration(Duration::V_LONG); !d.isZero() && (l.zaehler() != 0);) {
+                  Fraction ff(l - d.fraction());
+                  if (ff.zaehler() < 0) {
+                        d = d.shift(1);
+                        continue;
+                        }
                   l -= d.fraction();
-                  break;
+                  dList.append(d);
                   }
             }
       return dList;

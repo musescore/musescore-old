@@ -477,7 +477,6 @@ void Tuplet::add(Element* e)
 
 void Tuplet::remove(Element* e)
       {
-      printf("Tuplet(%p): remove %s %p\n", this, e->name(), e);
       switch(e->type()) {
             case TEXT:
                   if (e == _number)

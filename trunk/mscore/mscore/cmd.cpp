@@ -691,6 +691,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
          Fraction::fromTicks(cr->measure()->tickLen()) : d.fraction();
 
       Segment* seg = 0;
+      Measure* measure;
       while (true) {
             // the returned gap ends at the measure boundary or at tuplet end
             Fraction dd = makeGap(cr, sd);
@@ -699,45 +700,59 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
                   printf("cannot get gap at %d type: %s\n", tick, qPrintable(d.name()));
                   break;
                   }
-            ChordRest* ncr;
-            if (pitch == -1) {
-                  nr = new Rest(this);
-                  nr->setTrack(track);
-                  ncr = (Rest*)nr;
-                  }
-            else {
-                  Note* note = new Note(this);
-                  nr = note;
-                  note->setPitch(pitch);
-                  note->setHeadGroup(headGroup);
-                  note->setTrack(track);
-                  mscore->play(note);
+            QList<Duration> dl = toDurationList(dd, true);
 
-                  if (tie) {
-                        tie->setEndNote(note);
-                        note->setTieBack(tie);
+            int n = dl.size();
+            for (int i = 0; i < n; ++i) {
+                  Duration d = dl[i];
+
+                  ChordRest* ncr;
+                  if (pitch == -1) {
+                        nr = new Rest(this);
+                        nr->setTrack(track);
+                        ncr = (Rest*)nr;
                         }
-                  Chord* chord = new Chord(this);
-                  chord->setTick(tick);
-                  chord->setTrack(track);
-                  chord->setDuration(Duration(dd));
-                  chord->setTuplet(cr->tuplet());
-                  chord->setStemDirection(stemDirection);
-                  chord->add(note);
-                  ncr = chord;
-                  }
-            Measure* measure = tick2measure(tick);
-            Segment::SegmentType st = Segment::SegChordRest;
-            seg = measure->findSegment(st, tick);
-            if (seg == 0) {
-                  seg = measure->createSegment(st, tick);
-                  undoAddElement(seg);
-                  }
-            ncr->setParent(seg);
-            undoAddElement(ncr);
+                  else {
+                        Note* note = new Note(this);
+                        nr = note;
+                        note->setPitch(pitch);
+                        note->setHeadGroup(headGroup);
+                        note->setTrack(track);
+                        mscore->play(note);
 
-            if (nr->type() == NOTE)
-                  spell((Note*)nr);
+                        if (tie) {
+                              tie->setEndNote(note);
+                              note->setTieBack(tie);
+                              }
+                        Chord* chord = new Chord(this);
+                        chord->setTick(tick);
+                        chord->setTrack(track);
+                        chord->setDuration(d);
+                        chord->setTuplet(cr->tuplet());
+                        chord->setStemDirection(stemDirection);
+                        chord->add(note);
+                        ncr = chord;
+                        if (i+1 < n) {
+                              tie = new Tie(this);
+                              tie->setStartNote((Note*)nr);
+                              tie->setTrack(nr->track());
+                              note->setTieFor(tie);
+                              }
+                        }
+                  measure = tick2measure(tick);
+                  Segment::SegmentType st = Segment::SegChordRest;
+                  seg = measure->findSegment(st, tick);
+                  if (seg == 0) {
+                        seg = measure->createSegment(st, tick);
+                        undoAddElement(seg);
+                        }
+                  ncr->setParent(seg);
+                  undoAddElement(ncr);
+
+                  if (nr->type() == NOTE)
+                        spell((Note*)nr);
+                  tick += ncr->ticks();
+                  }
 
             sd -= dd;
             if (sd.isZero())
@@ -755,7 +770,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
                   if (track % VOICES)
                         cr = addRest(seg, track, Duration(Duration::V_MEASURE));
                   else {
-                        printf("no rest in voice %d\n", track % VOICES);
+                        printf("no rest in voice 0\n");
                         break;
                         }
                   }
@@ -828,7 +843,7 @@ printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick())
 
 printf("  makeGap: %d/%d removed %d/%d too much\n", sd.zaehler(), sd.nenner(), rd.zaehler(), rd.nenner());
 
-                  QList<Duration> dList = toDurationList(rd);
+                  QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
                         return akkumulated;
                   int ticks = sd.ticks();
@@ -923,7 +938,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                   }
             Fraction f = cr->duration().fraction() - d.fraction();
             undoChangeChordRestLen(cr, d);
-            setRest(cr->tick() + cr->ticks(), cr->track(), f);
+            setRest(cr->tick() + cr->ticks(), cr->track(), f, false);
             }
       else {
             Measure* m = cr->measure();

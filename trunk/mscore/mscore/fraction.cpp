@@ -25,18 +25,19 @@
 //    greatest common divisor
 //---------------------------------------------------------
 
-static unsigned ggT(unsigned a, unsigned b)
+static int ggT(int a, int b)
       {
       if (b == 0)
-            return a;
+            return a < 0 ? -a : a;
       return ggT(b, a % b);
       }
 
 //---------------------------------------------------------
 //   kgV
+//    least common divisor
 //---------------------------------------------------------
 
-static unsigned kgV(unsigned a, unsigned b)
+static unsigned kgV(int a, int b)
       {
       return a * b / ggT(a, b);
       }
@@ -45,7 +46,7 @@ static unsigned kgV(unsigned a, unsigned b)
 //   Fraction
 //---------------------------------------------------------
 
-Fraction::Fraction(int z, unsigned n)
+Fraction::Fraction(int z, int n)
    : _zaehler(z), _nenner(n)
       {
       kuerzen();
@@ -57,7 +58,7 @@ Fraction::Fraction(int z, unsigned n)
 
 void Fraction::kuerzen()
       {
-      const unsigned tmp = ggT(_zaehler, _nenner);
+      int tmp = ggT(_zaehler, _nenner);
       _zaehler /= tmp;
       _nenner  /= tmp;
       }
