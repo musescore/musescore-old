@@ -501,7 +501,8 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         mirror = !mirror;
                   }
             note->setMirror(mirror);
-            if (mirror && !note->chord()->isUp())
+//            if (mirror && !note->chord()->isUp())
+            if (mirror)
                   moveLeft = true;
 
             move1    = move;
@@ -602,11 +603,11 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       foreach(const AcEl e, aclist) {
             Note* note = e.note;
             double x    = e.x;
-//            if (moveLeft) {
+            if (moveLeft) {
                   Chord* chord = note->chord();
                   if (((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
                         x -= note->headWidth();
-//                  }
+                  }
             note->accidental()->setPos(x, 0);
             }
       }
