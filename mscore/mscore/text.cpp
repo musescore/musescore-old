@@ -69,6 +69,7 @@ TextBase::TextBase()
 
 TextBase::TextBase(const TextBase& t)
       {
+      _refCount     = 1;
       _doc          = t._doc->clone(0);
       _frameWidth   = t._frameWidth;
       _paddingWidth = t._paddingWidth;
@@ -76,9 +77,9 @@ TextBase::TextBase(const TextBase& t)
       _frameRound   = t._frameRound;
       _circle       = t._circle;
       _hasFrame     = t._hasFrame;
+      _layoutWidth  = t._layoutWidth;
       frame         = t.frame;
       _bbox         = t._bbox;
-      _layoutWidth  = t._layoutWidth;
       _doc->documentLayout()->setPaintDevice(pdev);
       layout(_layoutWidth);
       }
@@ -93,8 +94,11 @@ TextBase::TextBase(const TextBase& t)
 
 bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       {
+      if (!style)
+            return false;
+
       if (_doc->blockCount() > 1) {
-            //printf("blocks > 1: %s\n", qPrintable(getText()));
+            printf(" blocks > 1\n");
             return false;
             }
 
@@ -105,35 +109,16 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
             if (i.fragment().isValid())
                   ++fragments;
             if (fragments > 1) {
+                  printf("  fragments > 1\n");
                   return false;
                   }
             cf = i.fragment().charFormat();
             }
-      if (!style) {
-            // printf("no style: %s\n", qPrintable(getText()));
-            return false;
-            }
-      //
-      // the style font has another size than the actual
-      // font used in cf (due to rounding errors?), but
-      // QFontInfo gives the right size
-      //
-
-      QFontInfo fi(style->font(spatium));
-
-      QFont f(cf.font());
-      if (fi.family() == f.family()
-         && fi.pointSize() == f.pointSize()
-         && fi.bold() == f.bold()
-         && style->font(spatium).underline() == f.underline()
-         && fi.italic() == f.italic())
+      double d = fabs(style->font(spatium).pointSizeF() - cf.font().pointSizeF());
+      if (d < 0.1)
             return true;
-
-//      printf("bad font: %s %f <%s><%s> %d %d\n", qPrintable(getText()), spatium,
-//         qPrintable(fi.family()), qPrintable(f.family()), fi.pointSize(), f.pointSize());
-//      printf("%s\n", qPrintable(style->font(spatium).toString()));
-//      printf("%s\n", qPrintable(f.toString()));
-
+      printf("  font changed from style %f -> %f\n", style->font(spatium).pointSizeF(),
+         cf.font().pointSizeF());
       return false;
       }
 
@@ -147,12 +132,20 @@ void TextBase::setDoc(const QTextDocument& d)
       _doc = d.clone(0);
       }
 
+//---------------------------------------------------------
+//   swapDoc
+//---------------------------------------------------------
+
 QTextDocument* TextBase::swapDoc(QTextDocument* d)
       {
       QTextDocument* od = _doc;
       _doc = d;
       return od;
       }
+
+//---------------------------------------------------------
+//   defaultFont
+//---------------------------------------------------------
 
 QFont TextBase::defaultFont() const
       {
@@ -161,12 +154,15 @@ QFont TextBase::defaultFont() const
       return cursor.charFormat().font();
       }
 
+//---------------------------------------------------------
+//   setDefaultFont
+//---------------------------------------------------------
+
 void TextBase::setDefaultFont(QFont f)
       {
       _doc->setDefaultFont(f);
       QTextCursor cursor(_doc);
-      cursor.movePosition(QTextCursor::Start);
-      cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+      cursor.select(QTextCursor::Document);
       QTextCharFormat cf = cursor.charFormat();
       cf.setFont(f);
       cursor.setCharFormat(cf);
@@ -798,52 +794,6 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
       }
 
 //---------------------------------------------------------
-//   textStyleChanged
-//    do not touch values which are modified by user
-//    (== different from old style)
-//---------------------------------------------------------
-
-void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
-      {
-      if (_textStyle < 0)
-            return;
-      TextStyle* ns = styles[_textStyle];
-      TextStyle* os = score()->textStyle(_textStyle);
-
-      if (_align == os->align)
-            _align = ns->align;
-      if (_xoff == os->xoff)
-            _xoff = ns->xoff;
-      if (_yoff == os->yoff)
-            _yoff = ns->yoff;
-      if (_rxoff == os->rxoff)
-            _rxoff = ns->rxoff;
-      if (_ryoff == os->ryoff)
-            _ryoff = ns->ryoff;
-      if (_offsetType == os->offsetType)
-            _offsetType = ns->offsetType;
-      if (_sizeIsSpatiumDependent == os->sizeIsSpatiumDependent)
-            _sizeIsSpatiumDependent = ns->sizeIsSpatiumDependent;
-      if (frameWidth() == os->frameWidth)
-            setFrameWidth(ns->frameWidth);
-      if (paddingWidth() == os->paddingWidth)
-            setPaddingWidth(ns->paddingWidth);
-      if (frameRound() == os->frameRound)
-            setFrameRound(ns->frameRound);
-      if (frameColor() == os->frameColor)
-            setFrameColor(ns->frameColor);
-      if (circle() == os->circle)
-            setCircle(ns->circle);
-      if (systemFlag() == os->systemFlag)
-            setSystemFlag(ns->systemFlag);
-      double _spatium = spatium();
-      if (textBase()->isSimpleText(os, _spatium))
-            setDefaultFont(ns->font(_spatium));
-      if (textBase()->hasFrame() == os->hasFrame)
-            textBase()->setHasFrame(ns->hasFrame);
-      }
-
-//---------------------------------------------------------
 //   spatiumChanged
 //---------------------------------------------------------
 
@@ -1338,14 +1288,27 @@ bool Text::genPropertyMenu(QMenu* popup) const
 void Text::propertyAction(const QString& s)
       {
       if (s == "props") {
-            Text* nText = new Text(*this);
+            Text* nText = clone();
             TextProperties tp(nText, 0);
             int rv = tp.exec();
             if (rv) {
+                  QList<Element*> el;
                   score()->undoChangeElement(this, nText);
+                  el.append(nText);
+
+                  if (tp.applyToAll()) {
+                        foreach(Element* e, *score()->selection()->elements()) {
+                              if ((e != this) && (e->type() == type()) && (e->subtype() == subtype())) {
+                                    Text* tt = nText->clone();
+                                    el.append(tt);
+                                    score()->undoChangeElement(e, tt);
+                                    }
+                              }
+                        }
+                  score()->select(0, SELECT_SINGLE, 0);
+                  foreach(Element* e, el)
+                        score()->select(e, SELECT_ADD, 0);
                   }
-            else
-                  delete nText;
             }
       else
             Element::propertyAction(s);
@@ -1395,15 +1358,20 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       {
       setWindowTitle(tr("MuseScore: Text Properties"));
       QGridLayout* layout = new QGridLayout;
-      tp = new TextProp;
+      tp                  = new TextProp;
       layout->addWidget(tp, 0, 1);
       QLabel* l = new QLabel;
       l->setPixmap(QPixmap(":/data/bg1.jpg"));
       layout->addWidget(l, 0, 0, 2, 1);
-      QDialogButtonBox* bb = new QDialogButtonBox(
-         QDialogButtonBox::Ok | QDialogButtonBox::Cancel
-         );
-      layout->addWidget(bb, 1, 0, 1, 2);
+      QHBoxLayout* hb = new QHBoxLayout;
+      cb = new QCheckBox;
+      cb->setText(tr("apply to all selected"));
+      if (qApp->keyboardModifiers() & Qt::ControlModifier)
+            cb->setChecked(true);
+      hb->addWidget(cb);
+      QDialogButtonBox* bb = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+      hb->addWidget(bb);
+      layout->addLayout(hb, 1, 1);
       setLayout(layout);
 
       tb = t;

@@ -103,6 +103,7 @@
 #include <QtGui/QUndoStack>
 #include <QtGui/QProgressBar>
 #include <QtGui/QDialogButtonBox>
+#include <QtGui/QCheckBox>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

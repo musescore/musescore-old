@@ -2117,7 +2117,6 @@ ChangeTextStyles::~ChangeTextStyles()
 
 void ChangeTextStyles::flip()
       {
-      score->textStyleChanged(styles);
       styles = score->swapTextStyles(styles);
       }
 
@@ -2163,7 +2162,6 @@ void ChangeStyle::flip()
 
       score->setStyle(style);
       style = tmp;
-      score->textStyleChanged(score->textStyles());
       }
 
 //---------------------------------------------------------

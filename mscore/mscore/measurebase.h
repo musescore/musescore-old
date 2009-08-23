@@ -105,7 +105,6 @@ class MeasureBase : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
       void setDirty()                        { _dirty = true; }
-      virtual void textStyleChanged(const QVector<TextStyle*>&);
       virtual void spatiumChanged(double oldValue, double newValue);
       };
 

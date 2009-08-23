@@ -796,18 +796,6 @@ void Score::harmonyEndEdit()
       }
 
 //---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
-      {
-      TextB::textStyleChanged(s);
-      TextStyle* ns = s[_textStyle];
-      setDefaultFont(ns->font(spatium()));   // force
-      render(ns);
-      }
-
-//---------------------------------------------------------
 //   isEmpty
 //---------------------------------------------------------
 

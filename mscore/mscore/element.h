@@ -232,10 +232,7 @@ class Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void change(Element* o, Element* n) {
-            remove(o);
-            add(n);
-            }
+      virtual void change(Element* o, Element* n);
 
       virtual void layout();
       virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
@@ -347,8 +344,6 @@ class Element {
                 || type() == STAFF_TEXT
                 || type() == TEMPO_TEXT;
             }
-      virtual void textStyleChanged(const QVector<TextStyle*>&) {}
-
       double point(const Spatium sp) const { return sp.val() * spatium(); }
 
       //

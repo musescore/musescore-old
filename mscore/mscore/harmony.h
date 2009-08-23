@@ -258,7 +258,6 @@ class Harmony : public Text {
 
       void resolveDegreeList();
 
-      virtual void textStyleChanged(const QVector<TextStyle*>&s);
       virtual bool isEmpty() const;
       virtual qreal baseLine() const;
 

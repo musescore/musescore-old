@@ -134,43 +134,6 @@ Measure* MeasureBase::prevMeasure()
       }
 
 //---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void MeasureBase::textStyleChanged(const QVector<TextStyle*>& style)
-      {
-      foreach(Element* e, _el)
-            e->textStyleChanged(style);
-      if (type() == MEASURE) {
-            Measure* m = static_cast<Measure*>(this);
-            if (m->noText())
-                  m->noText()->textStyleChanged(style);
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
-                        LyricsList* ll = s->lyricsList(staffIdx);
-                        foreach(Lyrics* l, *ll) {
-                              if (l)
-                                    l->textStyleChanged(style);
-                              }
-                        }
-                  for (int track = 0; track < score()->nstaves()*VOICES; ++track) {
-                        Element* e = s->element(track);
-                        if ((e == 0) || (e->type() != CHORD))
-                              continue;
-                        Chord* ch = static_cast<Chord*>(e);
-                        NoteList* nl = ch->noteList();
-                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                              ElementList* el = i->second->el();
-                              foreach(Element* e, *el) {
-                                    e->textStyleChanged(style);
-                                    }
-                              }
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   spatiumChanged
 //---------------------------------------------------------
 

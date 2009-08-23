@@ -244,15 +244,6 @@ void TextLineSegment::clearText()
       }
 
 //---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void TextLineSegment::textStyleChanged(const QVector<TextStyle*>& style)
-      {
-      _text->textStyleChanged(style);
-      }
-
-//---------------------------------------------------------
 //   TextLine
 //---------------------------------------------------------
 
@@ -769,17 +760,4 @@ void LineProperties::continueTextProperties()
                   }
             }
       }
-
-//---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void TextLine::textStyleChanged(const QVector<TextStyle*>& style)
-      {
-      if (continueText())
-            continueText()->textStyleChanged(style);
-      if (beginText())
-            beginText()->textStyleChanged(style);
-      }
-
 
