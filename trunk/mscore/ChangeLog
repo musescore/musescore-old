@@ -1,3 +1,8 @@
+23.aug (ws)
+      - Changing the text style does not change existing text anymore. In older versions all
+        text not modified by the user was changed to new style.
+      - new feature: "change all selected" checkbox in text property dialog
+      - fix: change text properties of lyrics
 21.aug (ws)
       - fixes for beams & note entry
 20.aug (ws)

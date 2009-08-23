@@ -698,7 +698,6 @@ class Score : public QObject {
       bool loadStyle(QFile* qf);
       void loadStyle();
       void saveStyle();
-      void textStyleChanged(const QVector<TextStyle*>&s);
       void spatiumChanged(double oldValue, double newValue);
 
       void pasteStaff(QDomElement, ChordRest* dst);

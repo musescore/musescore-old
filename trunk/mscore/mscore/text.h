@@ -197,7 +197,6 @@ class TextB : public Element {
       bool replaceSpecialChars();
       QTextCursor* getCursor() const { return cursor; }
 
-      virtual void textStyleChanged(const QVector<TextStyle*>&s);
       virtual void spatiumChanged(double oldValue, double newValue);
       virtual void setTextStyle(int);
       int textStyle() const                 { return _textStyle; }
@@ -250,12 +249,14 @@ class TextProperties : public QDialog {
       Q_OBJECT
       TextProp* tp;
       TextB* tb;
+      QCheckBox* cb;
 
    private slots:
       virtual void accept();
 
    public:
       TextProperties(TextB*, QWidget* parent = 0);
+      bool applyToAll() const { return cb->isChecked(); }
       };
 
 #endif
