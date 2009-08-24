@@ -2107,6 +2107,7 @@ void MuseScore::writeSettings()
       settings.beginGroup("MainWindow");
       settings.setValue("size", size());
       settings.setValue("pos", pos());
+      settings.setValue("maximized", isMaximized());
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.endGroup();
@@ -2128,6 +2129,9 @@ void MuseScore::readSettings()
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 800)).toSize());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
+      bool max = ;
+      if(settings.value("maximized", "0").toBool())
+        showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());
       settings.endGroup();
