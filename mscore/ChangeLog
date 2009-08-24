@@ -1,4 +1,7 @@
-24.aug (la)
+24.aug (ws)
+      - new style element "show repeat bar line tip"
+      - allow beaming of mix of tuplets and normal notes
+      (la)
       - Save and restore maximized state of main window
 23.aug (ws)
       - Changing the text style does not change existing text anymore. In older versions all

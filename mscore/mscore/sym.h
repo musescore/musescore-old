@@ -103,8 +103,11 @@ enum {
 
       rest_M3,
       varcodaSym,
-      brackettipsUp,
-      brackettipsDown,
+
+      brackettipsRightUp,
+      brackettipsRightDown,
+      brackettipsLeftUp,
+      brackettipsLeftDown,
 
       zeroSym,
       oneSym,

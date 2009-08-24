@@ -3203,6 +3203,7 @@ bool Measure::createEndBarLines()
                                     }
                               }
                         }
+                  staffIdx += (span - 1);
                   }
             }
 
