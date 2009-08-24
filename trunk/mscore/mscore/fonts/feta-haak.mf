@@ -8,7 +8,7 @@
 
 fet_begingroup ("brackettips");
 
-def draw_bracket (expr thick_sharp, width_sharp, updown) =
+def draw_bracket (expr thick_sharp, width_sharp, updown, leftright) =
 begingroup;
 	save p, thin, thick, flattening, width, hair, flare;
  	path p;
@@ -21,11 +21,18 @@ begingroup;
 
 	define_pixels (thick, width, flare);
 	if updown = 1:
-	        set_char_box (0, width#,
-			      .5 thick#, flare#);
+              if  leftright = 1:
+	            set_char_box (0, width#, .5 thick#, flare#);
+              else:
+	            set_char_box (-width#, 0, .5 thick#, flare#);
+              fi;
+
 	else:
-	        set_char_box (0, width#,
-			      flare#, .5 thick#);
+              if leftright = 1:
+	            set_char_box (0, width#, flare#, .5 thick#);
+              else:
+	            set_char_box (-width#, 0, flare#, .5 thick#);
+              fi;
 	fi;
 
 	thin = 2 linethickness;
@@ -71,7 +78,7 @@ begingroup;
 	      ..tension 1.1.. z7{left}
 	      & z7
 	      -- z1
-	      & cycle) yscaled updown;
+	      & cycle) yscaled updown xscaled leftright;
 
 	if updown = 1:
 		penlabels (1, 2, 3, 4, 5, 6, 7, 8);
@@ -80,13 +87,13 @@ endgroup;
 enddef;
 
 
-fet_beginchar ("bracket tip up", "up");
-	draw_bracket (0.45 staff_space#, 1.9 staff_space#, 1);
+fet_beginchar ("bracket tip right up", "right up");
+	draw_bracket (0.45 staff_space#, 1.9 staff_space#, 1, 1);
 fet_endchar;
 
-
-fet_beginchar ("bracket tip down", "down");
-	draw_bracket (0.45 staff_space#, 1.9 staff_space#, -1);
+fet_beginchar ("bracket tip right down", "right down");
+	draw_bracket (0.45 staff_space#, 1.9 staff_space#, -1, 1);
 fet_endchar;
+
 
 fet_endgroup ("brackettips");

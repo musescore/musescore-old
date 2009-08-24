@@ -154,6 +154,8 @@ enum StyleIdx {
       ST_endBarWidth,
       ST_doubleBarDistance,
       ST_endBarDistance,
+      ST_repeatBarTips,
+
       ST_bracketWidth,
       ST_bracketDistance,
       ST_clefLeftMargin,

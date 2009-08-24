@@ -132,6 +132,9 @@ void EditStyle::getValues()
       lstyle.set(ST_lyricsMinBottomDistance, Spatium(lyricsMinBottomDistance->value()));
       lstyle.set(ST_systemFrameDistance,     Spatium(systemFrameDistance->value()));
       lstyle.set(ST_frameSystemDistance,     Spatium(frameSystemDistance->value()));
+
+      lstyle.set(ST_repeatBarTips,           showRepeatBarTips->isChecked());
+
       lstyle.set(ST_bracketDistance,         Spatium(bracketDistance->value()));
       lstyle.set(ST_measureSpacing,          measureSpacing->value());
       lstyle.set(ST_minNoteDistance,         Spatium(minNoteDistance->value()));
@@ -217,6 +220,9 @@ void EditStyle::setValues()
       lyricsMinBottomDistance->setValue(lstyle[ST_lyricsMinBottomDistance].toSpatium().val());
       systemFrameDistance->setValue(lstyle[ST_systemFrameDistance].toSpatium().val());
       frameSystemDistance->setValue(lstyle[ST_frameSystemDistance].toSpatium().val());
+
+      showRepeatBarTips->setChecked(lstyle[ST_repeatBarTips].toBool());
+
       bracketDistance->setValue(lstyle[ST_bracketDistance].toSpatium().val());
 
       measureSpacing->setValue(lstyle[ST_measureSpacing].toDouble());

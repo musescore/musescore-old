@@ -111,10 +111,6 @@ void BarLine::draw(QPainter& p) const
                   {
                   QPen pen(p.pen());
                   pen.setStyle(Qt::DashLine);
-/*                  QVector<qreal> dashes;
-                  dashes << ld * .5 << ld * .5;
-                  pen.setDashPattern(dashes);
- */
                   p.setPen(pen);
                   }
 
@@ -132,7 +128,6 @@ void BarLine::draw(QPainter& p) const
                   p.setPen(pen);
                   qreal x = d + lw2 * .5 + lw;
                   p.drawLine(QLineF(x, y1, x, y2));
-                  lw = lw + d + lw2;
                   }
                   break;
 
@@ -147,19 +142,17 @@ void BarLine::draw(QPainter& p) const
                   p.drawLine(QLineF(x, y1, x, y2));
                   x += d + lw;
                   p.drawLine(QLineF(x, y1, x, y2));
-                  lw = 2 * lw + d;
                   }
                   break;
 
             case START_REPEAT:
                   {
                   qreal lw2  = point(score()->styleS(ST_endBarWidth));
-                  qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
-                  qreal dotw = symbols[dotSym].width(mags);
-                  qreal x2   =  dotw/2;
-                  qreal x1   =  dotw + d1 + lw/2;
-                  qreal x0   =  dotw + d1 + lw + d1 + lw22;
+
+                  qreal x2   =  lw2 * .5;                               // thick line (lw2)
+                  qreal x1   =  lw2 + d1 + lw * .5;                     // thin line (lw)
+                  qreal x0   =  lw2 + d1 + lw + d1;                     // dot position
 
                   symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
                   symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
@@ -169,37 +162,43 @@ void BarLine::draw(QPainter& p) const
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
+
                   pen.setWidthF(lw2);
                   p.setPen(pen);
                   p.drawLine(QLineF(x2, y1, x2, y2));
-                  lw = x2;
+
+                  if (score()->styleB(ST_repeatBarTips)) {
+                        symbols[brackettipsRightUp].draw(p, mags, 0.0, y1);
+                        symbols[brackettipsRightDown].draw(p, mags, 0.0, y2);
+                        }
                   }
                   break;
 
             case END_REPEAT:
                   {
                   qreal lw2  = point(score()->styleS(ST_endBarWidth));
-                  qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
-
                   qreal dotw = symbols[dotSym].width(mags);
-                  qreal x0   =  dotw/2;
-                  qreal x1   =  dotw + d1 + lw/2;
-                  qreal x2   =  dotw + d1 + lw + d1 + lw22;
 
-                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
+                  qreal x1   =  dotw + d1 + lw/2;
+                  qreal x2   =  dotw + d1 + lw + d1 + lw2*.5;
+
+                  symbols[dotSym].draw(p, mags, 0.0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
                   if (_span == 2) {
-                        symbols[dotSym].draw(p, mags, x0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, x0, y2 - 2.5 * ld);
+                        symbols[dotSym].draw(p, mags, 0.0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, 0.0, y2 - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
-
                   pen.setWidthF(lw2);
                   p.setPen(pen);
                   p.drawLine(QLineF(x2, y1, x2, y2));
-                  lw = x2;
+                  if (score()->styleB(ST_repeatBarTips)) {
+                        double x = x2 + lw2 * .5;
+                        symbols[brackettipsLeftUp].draw(p, mags, x, y1);
+                        symbols[brackettipsLeftDown].draw(p, mags, x, y2);
+                        }
                   }
                   break;
 
@@ -236,11 +235,9 @@ void BarLine::draw(QPainter& p) const
                   pen.setWidthF(lw);
                   p.setPen(pen);
                   p.drawLine(QLineF(x3, y1, x3, y2));
-                  lw = x2;
                   }
                   break;
             }
-      setbbox(QRectF(0.0, y1, lw, y2).adjusted(-lw * .5, 0.0, lw, 0.0));
       }
 
 //---------------------------------------------------------
@@ -284,8 +281,11 @@ QRectF BarLine::bbox() const
                   dw = point(w);
                   break;
             case START_REPEAT:
+                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
+                  dw = point(w) + symbols[dotSym].width(magS());
+                  break;
             case END_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 2 * score()->styleS(ST_endBarDistance);
+                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
                   dw = point(w) + symbols[dotSym].width(magS());
                   break;
             case END_BAR:
@@ -304,7 +304,22 @@ QRectF BarLine::bbox() const
                   printf("illegal bar line type\n");
                   break;
             }
-      return QRectF(0.0, y1, dw, y2);
+      QRectF r(0.0, y1, dw, y2);
+
+      if (score()->styleB(ST_repeatBarTips)) {
+            double mags = magS();
+            switch(subtype()) {
+                  case START_REPEAT:
+                        r |= symbols[brackettipsRightUp].bbox(mags).translated(0.0, y1);
+                        r |= symbols[brackettipsRightDown].bbox(mags).translated(0.0, y2);
+                        break;
+                  case END_REPEAT:
+                        r |= symbols[brackettipsLeftUp].bbox(mags).translated(dw, y1);
+                        r |= symbols[brackettipsLeftDown].bbox(mags).translated(dw, y2);
+                        break;
+                  }
+            }
+      return r;
       }
 
 

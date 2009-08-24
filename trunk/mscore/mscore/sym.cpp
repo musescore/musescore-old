@@ -187,6 +187,8 @@ Sym::Sym(const char* name, const QChar& c, int fid)
       {
       _font = new QFont(fontId2font(fontId));
       QFontMetricsF fm(*_font);
+      if (!fm.inFont(_code))
+            printf("Sym: character 0x%x <%s> are not in font <%s>\n", _code.unicode(), _name, qPrintable(_font->family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
       }
@@ -513,16 +515,18 @@ void initSymbols()
       symbols[pedaleSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedale"),                   0xe1ab, 0);
       symbols[pedalPedSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedal ped"),                0xe1ac, 0);
 
-      symbols[brackettipsUp]              = Sym(QT_TRANSLATE_NOOP("symbol", "bracket ticks up"),         0xe1ad, 0);
-      symbols[brackettipsDown]            = Sym(QT_TRANSLATE_NOOP("symbol", "bracket ticks down"),       0xe1ae, 0);
+      symbols[brackettipsRightUp]         = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right up"),    0xe1ad, 0);
+      symbols[brackettipsRightDown]       = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right down"),  0xe1ae, 0);
+      symbols[brackettipsLeftUp]          = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left up"),     0xe1b5, 0);
+      symbols[brackettipsLeftDown]        = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left down"),   0xe1b6, 0);
 
       symbols[accDiscantSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc discant"),              0xe1af, 0);
       symbols[accDotSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "acc dot"),                  0xe1b0, 0);
       symbols[accFreebaseSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "acc freebase"),             0xe1b1, 0);
       symbols[accStdbaseSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc stdbase"),              0xe1b2, 0);
       symbols[accBayanbaseSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "acc bayanbase"),            0xe1b3, 0);
-
       symbols[accOldEESym]                = Sym(QT_TRANSLATE_NOOP("symbol", "acc old ee"),               0xe1b4, 0);
+
       symbols[flipSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "flip stem"),                0xe0fd, 0);
 
       symbols[wholediamond2headSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond2 head"),      0xe147, 0);

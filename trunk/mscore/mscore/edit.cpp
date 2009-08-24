@@ -1281,35 +1281,24 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      ChordRest* cr;
-      Fraction f;
+      ChordRest* cr = noteEntryMode() ? _is.cr() : getSelectedChordRest();
+      if (cr == 0)
+            return;
 
-      if (noteEntryMode()) {
-            cr = _is.cr();
-            f  = _is.duration.fraction();
-            }
-      else {
-            cr = getSelectedChordRest();
-            if (cr == 0)
-                  return;
-            if (cr->duration().type() == Duration::V_MEASURE) {
-                  int tz, tn;
-                  getSigmap()->timesig(cr->tick(), tz, tn);
-                  f.set(tz, tn);
-                  }
-            }
       int tick = cr->tick();
-//      if (duration.dots() > 1) {
-//            printf("cannot create tuplet for this duration\n");
-//            return;
-//            }
-//      Fraction f(duration.fraction());
-
-      Duration duration(f);
+      Fraction f;
+      if (cr->duration().type() == Duration::V_MEASURE) {
+            int tz, tn;
+            getSigmap()->timesig(cr->tick(), tz, tn);
+            f.set(tz, tn);
+            }
+      else
+            f = cr->duration().fraction();
 
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot = cr->tuplet();
 
+      Duration duration(f);
       if (duration.dots() == 0) {
             switch (n) {
                   case 2:                       // duplet
@@ -1443,7 +1432,6 @@ printf("createTuplet\n");
       int tick         = cr->tick();
       Segment* segment = cr->segment();
 
-printf("  remove %p\n", cr);
       undoRemoveElement(cr);
       if (segment->isEmpty())
             undoRemoveElement(segment);

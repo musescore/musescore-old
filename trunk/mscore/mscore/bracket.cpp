@@ -95,8 +95,8 @@ void Bracket::layout()
             qreal w = point(score()->styleS(ST_bracketWidth));
 
             TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
-            QChar up = symbols[brackettipsUp].code();
-            QChar down = symbols[brackettipsDown].code();
+            QChar up = symbols[brackettipsRightUp].code();
+            QChar down = symbols[brackettipsRightDown].code();
 
             QFont f(s->family, lrint(2.0 * _spatium));
 

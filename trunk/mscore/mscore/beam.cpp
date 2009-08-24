@@ -382,15 +382,8 @@ void Measure::layoutBeams1()
                         }
                   bool beamEnd = false;
                   if (beam) {
-                        // end beam if there are chords/rests missing
-                        // in voice:
                         ChordRest* le = beam->elements().back();
-                        if (le->tick() + le->ticks() != cr->tick()) {
-                              if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet())) {
-                                    beamEnd = true;
-                                    }
-                              }
-                        if ((le->tuplet() != cr->tuplet()) || (bm == BEAM_BEGIN)) {
+                        if (((bm != BEAM_MID) && (le->tuplet() != cr->tuplet())) || (bm == BEAM_BEGIN)) {
                               beamEnd = true;
                               }
                         else if (bm != BEAM_MID) {
