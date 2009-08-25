@@ -15,7 +15,8 @@
       <instrument>
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
-         <clef>1</clef>
+         <transposition>12</transposition>
+         <clef>0</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
          <channel>
@@ -68,7 +69,8 @@
       <instrument>
          <name>Bass Flute</name>
          <short-name>B. Fl.</short-name>
-         <clef>3</clef>
+         <transposition>-12</transposition>
+         <clef>0</clef>
          <aPitchRange>48-77</aPitchRange>
          <pPitchRange>48-81</pPitchRange>
          <channel>
@@ -120,7 +122,7 @@
       <instrument>
          <name>Hypobass Flute</name>
          <short-name>Hb. Fl.</short-name>
-         <clef>6</clef>
+         <clef>18</clef>
          <aPitchRange>12-48</aPitchRange>
          <pPitchRange>12-45</pPitchRange>
          <channel>
@@ -777,7 +779,8 @@
       <instrument>
          <name>Contrabasson</name>
          <short-name>Cbsn.</short-name>
-         <clef>5</clef>
+         <transposition>-12</transposition>
+         <clef>4</clef>
          <aPitchRange>22-57</aPitchRange>
          <pPitchRange>22-60</pPitchRange>
          <channel>
@@ -1161,8 +1164,8 @@
          <name>C Trumpet</name>
          <short-name>C Tpt.</short-name>
          <clef>0</clef>
-         <aPitchRange>55-82</aPitchRange>
-         <pPitchRange>55-85</pPitchRange>
+         <aPitchRange>54-82</aPitchRange>
+         <pPitchRange>54-85</pPitchRange>
          <channel>
             <program>56</program>
             </channel>
@@ -1175,8 +1178,8 @@
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <clef>0</clef>
          <transposition>-2</transposition>
-         <aPitchRange>53-80</aPitchRange>
-         <pPitchRange>53-83</pPitchRange>
+         <aPitchRange>52-80</aPitchRange>
+         <pPitchRange>52-85</pPitchRange>
          <channel>
             <program>56</program>
             </channel>
@@ -1365,7 +1368,7 @@
          </instrument>
       <instrument>
          <name>F Alto Ophicleide</name>
-         <short-name>E<symbol name="flat"/> A. Oph.</short-name>
+         <short-name>F A. Oph.</short-name>
          <clef>0</clef>
          <aPitchRange>52-81</aPitchRange>
          <pPitchRange>52-84</pPitchRange>
@@ -3198,16 +3201,6 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Guitar</name>
-         <short-name>B. Guit.</short-name>
-         <clef>5</clef>
-         <aPitchRange>28-83</aPitchRange>
-         <pPitchRange>28-83</pPitchRange>
-         <channel>
-            <program>24</program>
-            </channel>
-         </instrument>
-      <instrument>
          <name>11-string Alto Guitar</name>
          <short-name>11-str. A. Guit.</short-name>
          <staves>2</staves>
@@ -3259,18 +3252,41 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Electric Bass Guitar</name>
+         <name>Bass Guitar</name>
+         <short-name>B. Guit.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <aPitchRange>28-83</aPitchRange>
+         <pPitchRange>28-83</pPitchRange>
+         <channel>
+            <program>34</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Acoustic Bass</name>
+         <short-name>B. Guit.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <aPitchRange>28-83</aPitchRange>
+         <pPitchRange>28-83</pPitchRange>
+         <channel>
+            <program>32</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Electric Bass</name>
          <short-name>El. B. Guit.</short-name>
          <transposition>-12</transposition>
-         <clef>5</clef>
+         <clef>4</clef>
          <channel>
             <program>33</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Fretless Electric Bass Guitar</name>
-         <short-name>Frtl. El. B. Guit.</short-name>
-         <clef>5</clef>
+         <name>Fretless Electric Bass</name>
+         <short-name>Frtl. El. B.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
          <channel>
             <program>35</program>
             </channel>
@@ -3696,7 +3712,8 @@
       <instrument>
          <name>Contrabass</name>
          <short-name>Cb.</short-name>
-         <clef>5</clef>
+         <transposition>-12</transposition>
+         <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
          <channel>
@@ -3712,7 +3729,8 @@
        <instrument>
          <name>Contrabasses</name>
          <short-name>Cbs.</short-name>
-         <clef>5</clef>
+         <transposition>-12</transposition>
+         <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
          <channel>
