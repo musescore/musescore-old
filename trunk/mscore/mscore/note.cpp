@@ -507,7 +507,7 @@ void Note::draw(QPainter& p) const
                   if (i < in->minPitchP || i > in->maxPitchP)
                         p.setPen(Qt::red);
                   else if (i < in->minPitchA || i > in->maxPitchA)
-                        p.setPen(Qt::yellow);
+                        p.setPen(Qt::darkYellow);
                   }
             symbols[_head].draw(p, magS());
             }
