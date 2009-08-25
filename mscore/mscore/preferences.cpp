@@ -56,7 +56,7 @@ struct LanguageItem {
       };
 
 LanguageItem languages[] = {
-      LanguageItem("",      QT_TR_NOOP("system")),
+      LanguageItem("",      QT_TR_NOOP("System")),
       LanguageItem("ar",    QT_TR_NOOP("العربية")),
       LanguageItem("cs",    QT_TR_NOOP("Czech")),
       LanguageItem("da",    QT_TR_NOOP("Dansk")),
@@ -135,10 +135,14 @@ void Preferences::init()
       fgColor.setRgb(50, 50, 50);
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
-      selectColor[0] = Qt::blue;
-      selectColor[1] = Qt::green;
-      selectColor[2] = Qt::yellow;
-      selectColor[3] = Qt::magenta;
+      //selectColor[0] = Qt::blue;
+      //selectColor[1] = Qt::green;
+      //selectColor[2] = Qt::yellow;
+      //selectColor[3] = Qt::magenta;
+      selectColor[0].setRgb(0, 0, 255);     //blue
+      selectColor[1].setRgb(0, 150, 0);     //green
+      selectColor[2].setRgb(230, 180, 50);  //yellow
+      selectColor[3].setRgb(200, 0, 200);   //purple
       dropColor      = Qt::red;
       defaultColor   = Qt::black;
 
@@ -202,7 +206,7 @@ void Preferences::init()
       autoSave                 = false;
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
-      language                 = "system";
+      language                 = "System";
       iconWidth                = 24;
       iconHeight               = 24;
       noteEntryIconWidth       = ICON_WIDTH;
@@ -336,10 +340,11 @@ void Preferences::read()
       fgColor         = s.value("fgColor", QColor(50,50,50)).value<QColor>();
       bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
 
-      selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();
-      selectColor[1]  = s.value("selectColor2", QColor(Qt::green)).value<QColor>();
-      selectColor[2]  = s.value("selectColor3", QColor(Qt::yellow)).value<QColor>();
-      selectColor[3]  = s.value("selectColor4", QColor(Qt::magenta)).value<QColor>();
+      selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();     //blue
+      selectColor[1]  = s.value("selectColor2", QColor(0, 150, 0)).value<QColor>();    //green
+      selectColor[2]  = s.value("selectColor3", QColor(230, 180, 50)).value<QColor>(); //yellow
+      selectColor[3]  = s.value("selectColor4", QColor(200, 0, 200)).value<QColor>();  //purple
+
       defaultColor    = s.value("defaultColor", QColor(Qt::black)).value<QColor>();
       dropColor       = s.value("dropColor",    QColor(Qt::red)).value<QColor>();
 
@@ -839,7 +844,7 @@ void PreferenceDialog::selectSoundFont()
       {
       QString s = QFileDialog::getOpenFileName(
          this,
-         tr("Choose Synthesizer Sound Font"),
+         tr("Choose Synthesizer SoundFont"),
          soundFont->text(),
          tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
          );
@@ -857,7 +862,7 @@ void PreferenceDialog::selectWorkingDirectory()
       {
       QString s = QFileDialog::getExistingDirectory(
          this,
-         tr("Choose WorkingDirectory"),
+         tr("Choose Working Directory"),
          workingDirectory->text()
          );
       if (!s.isNull())
@@ -872,7 +877,7 @@ void PreferenceDialog::selectInstrumentList()
       {
       QString s = QFileDialog::getOpenFileName(
          this,
-         tr("Choose default Instrument List"),
+         tr("Choose Instrument List"),
          instrumentList->text(),
          tr("Instrument List (*.xml);;All (*)")
          );
@@ -888,7 +893,7 @@ void PreferenceDialog::selectStartWith()
       {
       QString s = QFileDialog::getOpenFileName(
          this,
-         tr("Choose score to start with"),
+         tr("Choose Starting Score"),
          sessionScore->text(),
          tr("MuseScore file (*.msc);;All (*)")
          );

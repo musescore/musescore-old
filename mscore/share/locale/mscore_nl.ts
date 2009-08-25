@@ -97,11 +97,11 @@
     </message>
     <message>
         <source>Polski</source>
-        <translation type="unfinished"></translation>
+        <translation>Pools</translation>
     </message>
     <message>
         <source>RomÃ¢nÄ</source>
-        <translation type="unfinished"></translation>
+        <translation>Roemeens</translation>
     </message>
 </context>
 <context>
@@ -2205,7 +2205,7 @@ failed: </source>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
-        <translation>MuseScore: Notenbalk Eigenschappen</translation>
+        <translation>MuseScore: Lijn Eigenschappen</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4929,7 +4929,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Bestanden (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;BB Bestanden &lt;experimenteel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
     </message>
 </context>
 <context>
@@ -7280,107 +7280,107 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">niets</translation>
+        <translation>geen</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">kruis</translation>
+        <translation>kruis</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">mol</translation>
+        <translation>mol</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">dubbele kruis</translation>
+        <translation>dubbele kruis</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">dubbele mol</translation>
+        <translation>dubbele mol</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">herstelling</translation>
+        <translation>herstelling</translation>
     </message>
     <message>
         <source>(sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation>(kruis)</translation>
     </message>
     <message>
         <source>(flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>(mol)</translation>
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation>(dubbele kruis)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>(dubbele mol)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation type="unfinished"></translation>
+        <translation>(herstelling)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation type="unfinished"></translation>
+        <translation>[kruis]</translation>
     </message>
     <message>
         <source>[flat]</source>
-        <translation type="unfinished"></translation>
+        <translation>[mol]</translation>
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation type="unfinished"></translation>
+        <translation>[dubbele kruis]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation type="unfinished"></translation>
+        <translation>[dubbele mol]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation type="unfinished"></translation>
+        <translation>[herstelling]</translation>
     </message>
     <message>
         <source>flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>mol schuin</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>mol schuin2</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
+        <translation>gespiegelde mol2</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
+        <translation>gespiegelde mol</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>gespiegelde mol schuin</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>dubbele mol schuin</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>kruis schuin</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>kruis schuin2</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
+        <translation>kruis schuin3</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
+        <translation>kruis schuin4</translation>
     </message>
 </context>
 <context>
