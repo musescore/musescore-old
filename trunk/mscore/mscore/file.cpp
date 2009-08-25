@@ -1499,9 +1499,9 @@ void Score::print(QPrinter* printer)
       double mag = printer->logicalDpiX() / DPI;
       p.scale(mag, mag);
 
-      QList<const Element*> el;
-      foreach (const Element* element, _gel)
-            element->collectElements(el);
+      QList<Element*> el;
+      foreach (Element* element, _gel)
+            element->scanElements(&el, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
@@ -1509,7 +1509,7 @@ void Score::print(QPrinter* printer)
                   if (mm->multiMeasure() < 0)
                         continue;
                   }
-            m->collectElements(el);
+            m->scanElements(&el, collectElements);
             }
 
       for (int copy = 0; copy < printer->numCopies(); ++copy) {
@@ -1529,10 +1529,10 @@ void Score::print(QPrinter* printer)
                         printer->newPage();
                         }
                   firstPage = false;
-                  const Page* page = pl.at(n);
-                  page->collectElements(el);
+                  Page* page = pl.at(n);
+                  page->scanElements(&el, collectElements);
                   for (int i = 0; i < el.size(); ++i) {
-                        const Element* e = el[i];
+                        Element* e = el[i];
                         if (!e->visible())
                               continue;
                         QPointF ap(e->canvasPos() - page->pos());
@@ -1595,9 +1595,9 @@ bool Score::saveSvg(const QString& saveName)
       double mag = converterDpi / DPI;
       p.scale(mag, mag);
 
-      QList<const Element*> eel;
-      foreach (const Element* element, _gel)
-            element->collectElements(eel);
+      QList<Element*> eel;
+      foreach (Element* element, _gel)
+            element->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
@@ -1605,12 +1605,12 @@ bool Score::saveSvg(const QString& saveName)
                   if (mm->multiMeasure() < 0)
                         continue;
                   }
-            m->collectElements(eel);
+            m->scanElements(&eel, collectElements);
             }
       QList<const Element*> el;
-      foreach(const Page* page, pages()) {
+      foreach(Page* page, pages()) {
             el.clear();
-            page->collectElements(el);
+            page->scanElements(&el, collectElements);
             foreach(const Element* e, eel) {
                   if (!e->visible())
                         continue;
@@ -1705,9 +1705,9 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             const QList<Page*>& pl = pages();
             int pages = pl.size();
 
-            QList<const Element*> eel;
-            foreach (const Element* element, _gel)
-                  element->collectElements(eel);
+            QList<Element*> eel;
+            foreach (Element* element, _gel)
+                  element->scanElements(&eel, collectElements);
             for (MeasureBase* m = _measures.first(); m; m = m->next()) {
                   // skip multi measure rests
                   if (m->type() == MEASURE) {
@@ -1715,13 +1715,11 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                         if (mm->multiMeasure() < 0)
                               continue;
                         }
-                  m->collectElements(eel);
+                  m->scanElements(&eel, collectElements);
                   }
 
             for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
-                  const Page* page = pl.at(pageNumber);
-                  QList<const Element*> el;
-                  page->collectElements(el);
+                  Page* page = pl.at(pageNumber);
 
                   QRectF r = page->abbox();
                   int w = lrint(r.width()  * convDpi / DPI);
@@ -1750,6 +1748,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                         p.translate(-ap);
                         }
 
+                  QList<Element*> el;
+                  page->scanElements(&el, collectElements);
                   foreach(const Element* e, el) {
                         if (!e->visible())
                               continue;

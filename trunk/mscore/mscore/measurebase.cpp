@@ -56,22 +56,22 @@ MeasureBase::MeasureBase(const MeasureBase& m)
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void MeasureBase::collectElements(QList<const Element*>& el) const
+void MeasureBase::scanElements(void* data, void (*func)(void*, Element*))
       {
       if (type() == MEASURE) {
             foreach(Element* e, _el) {
                   if ((e->track() == -1) || ((Measure*)this)->visible(e->staffIdx()))
-                        e->collectElements(el);
+                        e->scanElements(data, func);
                   }
             }
       else {
             foreach(Element* e, _el)
-                  e->collectElements(el);
+                  e->scanElements(data, func);
             }
-      el.append(this);
+      func(data, this);
       }
 
 //---------------------------------------------------------

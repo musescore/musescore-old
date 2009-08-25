@@ -117,7 +117,7 @@ class Note : public Element {
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 
       int totalTicks() const;

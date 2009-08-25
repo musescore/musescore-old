@@ -1405,3 +1405,14 @@ Element* Element::name2Element(const QString& s, Score* sc)
             return 0;
       return Element::create(type, sc);
       }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void collectElements(void* data, Element* e)
+      {
+      QList<Element*>* el = static_cast<QList<Element*>*>(data);
+      el->append(e);
+      }
+

@@ -305,7 +305,7 @@ class Element {
       mutable int itemDiscovered;     ///< helper flag for bsp
 
       virtual QList<Prop> properties(Xml&, const Element* proto = 0) const;
-      virtual void collectElements(QList<const Element*>& el) const { el.append(this); }
+      virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
 
       virtual void toDefault() {  setUserOff(QPointF()); }
 
@@ -536,6 +536,8 @@ class Icon : public Element {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       };
+
+extern void collectElements(void*, Element*);
 
 #endif
 

@@ -39,7 +39,7 @@ class BSymbol : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout();

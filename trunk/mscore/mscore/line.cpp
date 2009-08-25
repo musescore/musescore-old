@@ -546,13 +546,13 @@ void SLine::setLen(double l)
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void SLine::collectElements(QList<const Element*>& el) const
+void SLine::scanElements(void* data, void (*func)(void*, Element*))
       {
-      foreach(const LineSegment* seg, segments)
-            seg->collectElements(el);
+      foreach(LineSegment* seg, segments)
+            seg->scanElements(data, func);
       }
 
 //---------------------------------------------------------

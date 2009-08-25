@@ -1292,23 +1292,68 @@ void Text::propertyAction(const QString& s)
             TextProperties tp(nText, 0);
             int rv = tp.exec();
             if (rv) {
-                  QList<Element*> el;
-                  score()->undoChangeElement(this, nText);
-                  el.append(nText);
-
-                  if (tp.applyToAll()) {
-                        foreach(Element* e, *score()->selection()->elements()) {
-                              if ((e != this) && (e->type() == type()) && (e->subtype() == subtype())) {
-                                    Text* tt = nText->clone();
-                                    el.append(tt);
-                                    score()->undoChangeElement(e, tt);
-                                    }
+                  QList<Element*> sl;
+                  if (tp.applyToAll())
+                        score()->scanElements(&sl, collectElements);
+                  else
+                        sl = *score()->selection()->elements();
+                  QList<Element*> selectedElements;
+                  foreach(Element* e, sl) {
+                        if ((e->type() != type()) || (e->subtype() != subtype()))
+                              continue;
+                        Text* t  = static_cast<Text*>(e);
+                        Text* tt = t->clone();
+                        if (nText->textBase()->hasFrame() != textBase()->hasFrame())
+                              tt->textBase()->setHasFrame(nText->textBase()->hasFrame());
+                        if (nText->frameWidth() != frameWidth())
+                              tt->setFrameWidth(nText->frameWidth());
+                        if (nText->paddingWidth() != paddingWidth())
+                              tt->setPaddingWidth(nText->paddingWidth());
+                        if (nText->frameColor() != frameColor())
+                              tt->setFrameColor(nText->frameColor());
+                        if (nText->frameRound() != frameRound())
+                              tt->setFrameRound(nText->frameRound());
+                        if (nText->circle() != circle())
+                              tt->setCircle(nText->circle());
+                        if (nText->color() != color())
+                              tt->setColor(nText->color());
+                        if (nText->defaultFont() != defaultFont()) {      // was font changed?
+                              QFont a = nText->defaultFont();
+                              QFont b = defaultFont();
+                              QFont f = t->defaultFont();
+                              if (a.pointSizeF() != b.pointSizeF())
+                                    f.setPointSizeF(a.pointSizeF());
+                              if (a.bold() != b.bold())
+                                    f.setBold(a.bold());
+                              if (a.italic() != b.italic())
+                                    f.setItalic(a.italic());
+                              if (a.underline() != b.underline())
+                                    f.setUnderline(a.underline());
+                              tt->setDefaultFont(f);
                               }
+                        if (nText->align() != align())
+                              tt->setAlign(nText->align());
+                        if (nText->xoff() != xoff())
+                              tt->setXoff(nText->xoff());
+                        if (nText->yoff() != yoff())
+                              tt->setYoff(nText->yoff());
+                        if (nText->rxoff() != rxoff())
+                              tt->setRXoff(nText->rxoff());
+                        if (nText->ryoff() != ryoff())
+                              tt->setRYoff(nText->ryoff());
+                        if (nText->offsetType() != offsetType())
+                              tt->setOffsetType(nText->offsetType());
+
+                        tt->doc()->setModified(true);
+                        if (t->selected())
+                              selectedElements.append(tt);
+                        score()->undoChangeElement(t, tt);
                         }
                   score()->select(0, SELECT_SINGLE, 0);
-                  foreach(Element* e, el)
+                  foreach(Element* e, selectedElements)
                         score()->select(e, SELECT_ADD, 0);
                   }
+            delete nText;
             }
       else
             Element::propertyAction(s);
@@ -1365,9 +1410,7 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       layout->addWidget(l, 0, 0, 2, 1);
       QHBoxLayout* hb = new QHBoxLayout;
       cb = new QCheckBox;
-      cb->setText(tr("apply to all selected"));
-      if (qApp->keyboardModifiers() & Qt::ControlModifier)
-            cb->setChecked(true);
+      cb->setText(tr("apply to all elements of same type"));
       hb->addWidget(cb);
       QDialogButtonBox* bb = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
       hb->addWidget(bb);

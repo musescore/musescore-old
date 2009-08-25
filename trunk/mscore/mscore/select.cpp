@@ -613,19 +613,17 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
 /**
  Rebuild list of selected Elements.
 */
+static void collectSelectedElements(void* data, Element* e)
+      {
+      QList<const Element*>* l = static_cast<QList<const Element*>*>(data);
+      if (e->selected())
+            l->append(e);
+      }
 
 void Score::searchSelectedElements()
       {
-      QList<const Element*> l;
-      for(MeasureBase* m = first(); m; m = m->next())
-            m->collectElements(l);
-      foreach(const Page* page, pages())
-            page->collectElements(l);
       _selection->clear();
-      foreach(const Element* e, l) {
-            if (e->selected())
-                  _selection->append(const_cast<Element*>(e));
-            }
+      scanElements(_selection->elements(), collectSelectedElements);
       _selection->updateState();
       emit selectionChanged(int(_selection->state()));
       }

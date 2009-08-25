@@ -771,25 +771,25 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //    collect all visible elements
 //---------------------------------------------------------
 
-void System::collectElements(QList<const Element*>& el) const
+void System::scanElements(void* data, void (*func)(void*, Element*))
       {
       if (isVbox())
             return;
       if (barLine)
-            el.append(barLine);
+            func(data, barLine);
       foreach(SysStaff* st, _staves) {
             if (!st->show())
                   continue;
             foreach(Bracket* b, st->brackets) {
                   if (b)
-                        el.append(b);
+                        func(data, b);
                   }
             if (st->instrumentName)
-                  el.append(st->instrumentName);
+                  func(data, st->instrumentName);
             }
       }
 

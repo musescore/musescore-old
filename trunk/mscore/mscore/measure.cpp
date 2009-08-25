@@ -3000,13 +3000,13 @@ bool Measure::slashStyle(int staffIdx) const
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void Measure::collectElements(QList<const Element*>& el) const
+void Measure::scanElements(void* data, void (*func)(void*, Element*))
       {
-      MeasureBase::collectElements(el);
-      el.append(this);     // to make measure clickable
+      MeasureBase::scanElements(data, func);
+      func(data, this);                         // to make measure clickable
 
       int nstaves = score()->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -3014,9 +3014,9 @@ void Measure::collectElements(QList<const Element*>& el) const
                   continue;
             MStaff* ms = staves[staffIdx];
             if (ms->lines)
-                  el.append(ms->lines);
+                  func(data, ms->lines);
             if (ms->_vspacer)
-                  el.append(ms->_vspacer);
+                  func(data, ms->_vspacer);
             }
 
       int tracks = nstaves * VOICES;
@@ -3027,7 +3027,7 @@ void Measure::collectElements(QList<const Element*>& el) const
                   LyricsList* ll = s->lyricsList(staffIdx);
                   foreach(Lyrics* l, *ll) {
                         if (l)
-                              el.append(l);
+                              func(data, l);
                         }
                   }
             for (int track = 0; track < tracks; ++track) {
@@ -3040,31 +3040,31 @@ void Measure::collectElements(QList<const Element*>& el) const
                         continue;
                   if (e->isChordRest()) {
                         if (e->type() == CHORD)
-                              e->collectElements(el);
+                              e->scanElements(data, func);
                         else
-                              el.append(e);
+                              func(data, e);
                         ChordRest* cr = (ChordRest*)e;
                         QList<Articulation*>* al = cr->getArticulations();
                         for (ciArticulation i = al->begin(); i != al->end(); ++i) {
                               Articulation* a = *i;
-                              el.append(a);
+                              func(data, a);
                               }
                         }
                   else
-                        el.append(e);
+                        func(data, e);
                   }
             }
       foreach(Beam* b, _beams) {
             if (visible(b->staffIdx()))
-                  el.append(b);
+                  func(data, b);
             }
       foreach(Tuplet* tuplet, _tuplets) {
             if (visible(tuplet->staffIdx()))
-                  el.append(tuplet);
+                  func(data, tuplet);
             }
 
       if (noText())
-            el.append(noText());
+            func(data, noText());
       }
 
 //---------------------------------------------------------

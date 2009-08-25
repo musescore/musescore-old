@@ -1,3 +1,7 @@
+25.aug (ws)
+      - Changes in the text property dialog are now always applied to all selected elements of same
+        type. Semantic and text of the checkbox "change all selected" is changed to
+        "change all elements of same type".
 24.aug (ws)
       - new style element "show repeat bar line tip"
       - allow beaming of mix of tuplets and normal notes

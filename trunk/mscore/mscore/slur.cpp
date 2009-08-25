@@ -691,13 +691,13 @@ bool SlurTie::readProperties(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void SlurTie::collectElements(QList<const Element*>& el) const
+void SlurTie::scanElements(void* data, void (*func)(void*, Element*))
       {
-      foreach(const SlurSegment* seg, segments)
-            el.append(seg);
+      foreach(SlurSegment* seg, segments)
+            func(data, seg);
       }
 
 //---------------------------------------------------------
