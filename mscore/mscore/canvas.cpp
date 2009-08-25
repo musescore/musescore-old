@@ -1183,6 +1183,19 @@ QSizeF Canvas::fsize() const
       }
 
 //---------------------------------------------------------
+//   paintElement
+//---------------------------------------------------------
+
+static void paintElement(void* data, Element* e)
+      {
+      QPainter* p = static_cast<QPainter*>(data);
+      p->save();
+      p->translate(e->canvasPos());
+      e->draw(*p);
+      p->restore();
+      }
+
+//---------------------------------------------------------
 //   paintEvent
 //    Note: desktop background and paper background are not
 //    scaled
@@ -1244,24 +1257,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
             p.drawLine(dropAnchor);
             }
       if (dragElement) {
-            QList<const Element*> el;
-            dragElement->collectElements(el);
             p.setPen(preferences.defaultColor);
-            foreach(const Element* e, el) {
-                  p.save();
-                  p.translate(e->canvasPos());
-                  e->draw(p);
-                  p.restore();
-#if 0
-                  if (debugMode) {
-                        //
-                        //  draw bounding box rectangle
-                        //
-                        p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                        p.drawRect(e->abbox());
-                        }
-#endif
-                  }
+            dragElement->scanElements(&p, paintElement);
             }
       }
 

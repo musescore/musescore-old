@@ -246,7 +246,6 @@ void Segment::add(Element* el)
             case LYRICS:
                   {
                   Lyrics* l = static_cast<Lyrics*>(el);
-printf("Segment::%p add Lyrics %p\n", this, l);
                   LyricsList* ll = &_lyrics[staffIdx];
                   int size = ll->size();
                   if (l->no() >= size) {
@@ -298,7 +297,6 @@ void Segment::remove(Element* el)
       switch(el->type()) {
             case LYRICS:
                   {
-printf("Segment::%p remove Lyrics %p\n", this, el);
                   int staffIdx = el->staffIdx();
                   LyricsList& ll = _lyrics[staffIdx];
                   for (int i = 0; i < ll.size(); ++i) {

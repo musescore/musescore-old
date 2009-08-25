@@ -974,31 +974,29 @@ qreal Chord::centerX() const
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void Chord::collectElements(QList<const Element*>& el) const
+void Chord::scanElements(void* data, void (*func)(void*, Element*))
       {
       if (_hook)
-            el.append(_hook);
+            func(data, _hook);
       if (_stem)
-            el.append(_stem);
+            func(data, _stem);
       if (_stemSlash)
-            el.append(_stemSlash);
+            func(data, _stemSlash);
       if (_arpeggio)
-            el.append(_arpeggio);
-      if (_tremolo) {
-            QRectF r(_tremolo->abbox());
-            el.append(_tremolo);
-            }
+            func(data, _arpeggio);
+      if (_tremolo)
+            func(data, _tremolo);
       if (_glissando)
-            el.append(_glissando);
+            func(data, _glissando);
 
-      foreach(const LedgerLine* h, _ledgerLines)
-            el.append(h);
+      foreach(LedgerLine* h, _ledgerLines)
+            func(data, h);
 
-      for (ciNote in = notes.begin(); in != notes.end(); ++in)
-            in->second->collectElements(el);
+      for (iNote in = notes.begin(); in != notes.end(); ++in)
+            in->second->scanElements(data, func);
       }
 
 //---------------------------------------------------------

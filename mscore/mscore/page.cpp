@@ -240,18 +240,17 @@ void Page::draw(QPainter& p) const
       }
 
 //---------------------------------------------------------
-//   collectElements
-//    collect all visible elements
+//   scanElements
 //---------------------------------------------------------
 
-void Page::collectElements(QList<const Element*>& el) const
+void Page::scanElements(void* data, void (*func)(void*, Element*))
       {
       if (_copyright)
-            el.append(_copyright);
+            func(data, _copyright);
       if (_pageNo)
-            el.append(_pageNo);
-      foreach(const System* s, _systems)
-            s->collectElements(el);
+            func(data, _pageNo);
+      foreach(System* s, _systems)
+            s->scanElements(data, func);
       }
 
 //---------------------------------------------------------

@@ -118,6 +118,7 @@ void TextProp::get(TextB* tb)
       tb->setFrameColor(frameColor->color());
       tb->setFrameRound(frameRound->value());
       tb->setCircle(circleButton->isChecked());
+
       QFont f = fontSelect->currentFont();
       double ps = fontSize->value();
       f.setPointSizeF(ps);

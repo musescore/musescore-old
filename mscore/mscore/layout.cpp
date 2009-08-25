@@ -51,17 +51,17 @@
 void Score::rebuildBspTree()
       {
       QRectF r;
-      QList<const Element*> el;
-      for (const MeasureBase* m = first(); m; m = m->next()) {
+      QList<Element*> el;
+      for (MeasureBase* m = first(); m; m = m->next()) {
             if (m->type() == MEASURE && static_cast<const Measure*>(m)->multiMeasure() < 0)
                   continue;
-            m->collectElements(el);
+            m->scanElements(&el, collectElements);
             }
-      foreach(const Page* page, _pages) {
+      foreach(Page* page, _pages) {
             r |= page->abbox();
-            page->collectElements(el);
+            page->scanElements(&el, collectElements);
             }
-      foreach (const Element* element, _gel) {
+      foreach (Element* element, _gel) {
             if (element->track() != -1) {
                   if (element->staffIdx() < 0 || element->staffIdx() >= nstaves()) {
                         printf("element %s bad staffIdx %d(track:%d) >= staves(%d)\n",
@@ -71,15 +71,13 @@ void Score::rebuildBspTree()
                   if (!element->staff()->show())
                         continue;
                   }
-            element->collectElements(el);
+            element->scanElements(&el, collectElements);
             }
 
-      bspTree.initialize(r, el.size());
-      for (int i = 0; i < el.size(); ++i) {
-            const Element* e = el.at(i);
-            if (e)                              // DEBUG
-                  bspTree.insert(e);
-            }
+      int n = el.size();
+      bspTree.initialize(r, n);
+      for (int i = 0; i < n; ++i)
+            bspTree.insert(el.at(i));
       }
 
 //---------------------------------------------------------

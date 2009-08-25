@@ -89,7 +89,7 @@ class MeasureBase : public Element {
       virtual int tickLen() const            { return 0;       }
       virtual void write(Xml&, int, bool) const = 0;
 
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       MeasureWidth& layoutWidth()            { return _mw;        }
       ElementList* el()                      { return &_el; }
       const ElementList* el() const          { return &_el; }

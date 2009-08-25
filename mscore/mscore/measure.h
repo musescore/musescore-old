@@ -215,7 +215,7 @@ class Measure : public MeasureBase {
       bool endBarLineVisible() const   { return _endBarLineVisible;   }
 
       void cmdRemoveEmptySegment(Segment* s);
-      void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       void createVoice(int track);
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }

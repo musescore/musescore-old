@@ -371,6 +371,19 @@ void Palette::add(int idx, Element* s, const QString& name)
       }
 
 //---------------------------------------------------------
+//   paintPaletteElement
+//---------------------------------------------------------
+
+static void paintPaletteElement(void* data, Element* e)
+      {
+      QPainter* p = static_cast<QPainter*>(data);
+      p->save();
+      p->translate(e->pos());
+      e->draw(*p);
+      p->restore();
+      }
+
+//---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
@@ -461,15 +474,7 @@ void Palette::paintEvent(QPaintEvent*)
 
                   p.setPen(QPen(palette().brush(QPalette::Normal,
                      (idx == selectedIdx) ? QPalette::HighlightedText : QPalette::Text).color()));
-
-                  QList<const Element*> elist;
-                  el->collectElements(elist);
-                  foreach(const Element* e, elist) {
-                        p.save();
-                        p.translate(e->pos());
-                        e->draw(p);
-                        p.restore();
-                        }
+                  el->scanElements(&p, paintPaletteElement);
                   p.restore();
                   }
             else {

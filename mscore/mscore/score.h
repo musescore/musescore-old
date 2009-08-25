@@ -821,6 +821,8 @@ class Score : public QObject {
       virtual void add(Element*);
       virtual void remove(Element*);
       double point(const Spatium sp) const { return sp.val() * _spatium; }
+
+      void scanElements(void* data, void (*func)(void*, Element*));
       };
 
 extern Score* gscore;

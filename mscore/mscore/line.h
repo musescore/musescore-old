@@ -98,7 +98,7 @@ class SLine : public Element {
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;
       void setLen(double l);
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);

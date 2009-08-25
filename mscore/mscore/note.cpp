@@ -1204,18 +1204,18 @@ QPointF Note::canvasPos() const
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void Note::collectElements(QList<const Element*>& elist) const
+void Note::scanElements(void* data, void (*func)(void*, Element*))
       {
-      elist.append(this);
+      func(data, this);
       if (_tieFor)
-            _tieFor->collectElements(elist);
+            _tieFor->scanElements(data, func);
       foreach(Element* e, _el)
-            e->collectElements(elist);
+            e->scanElements(data, func);
       if (_accidental)
-            elist.append(_accidental);
+            func(data, _accidental);
       }
 
 //---------------------------------------------------------

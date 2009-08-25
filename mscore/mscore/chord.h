@@ -220,7 +220,7 @@ class Chord : public ChordRest {
       NoteType noteType() const         { return _noteType; }
       void setNoteType(NoteType t)      { _noteType = t; }
 
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
 
       virtual int staffMove() const;
       virtual void setTrack(int val);

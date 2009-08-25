@@ -112,7 +112,7 @@ class Page : public Element {
       void layout();
 
       virtual void draw(QPainter&p) const;
-      void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       void clear();
       };
 

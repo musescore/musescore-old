@@ -2294,3 +2294,17 @@ int Score::inputPos() const
       return _is.tick();
       }
 
+//---------------------------------------------------------
+//   scanElements
+//    scan all elements
+//---------------------------------------------------------
+
+void Score::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      for(MeasureBase* m = first(); m; m = m->next())
+            m->scanElements(data, func);
+      foreach(Page* page, pages())
+            page->scanElements(data, func);
+      }
+
+

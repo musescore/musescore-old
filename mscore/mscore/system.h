@@ -106,7 +106,7 @@ class System : public Element {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
 
-      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
 
       Page* page() const                 { return (Page*)parent(); }
 
@@ -122,7 +122,6 @@ class System : public Element {
       SysStaff* staff(int n) const         { return _staves[n]; }
 
       Spatium distance(int n) const        { return _staves[n]->distance(); }
-//      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
       bool pageBreak() const               { return _pageBreak; }
       void setPageBreak(bool val)          { _pageBreak = val; }
 

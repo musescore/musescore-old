@@ -73,14 +73,14 @@ void BSymbol::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   collectElements
+//   scanElements
 //---------------------------------------------------------
 
-void BSymbol::collectElements(QList<const Element*>& el) const
+void BSymbol::scanElements(void* data, void (*func)(void*, Element*))
       {
-      el.append(this);
+      func(data, this);
       foreach (Element* e, _leafs)
-            e->collectElements(el);
+            e->scanElements(data, func);
       }
 
 //---------------------------------------------------------
