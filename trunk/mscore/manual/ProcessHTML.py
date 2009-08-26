@@ -94,8 +94,11 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Capitolo'
     elif language_code == 'nb':
         chapter = 'Kapittel'
-
-
+    elif language_code == 'pl':
+        chapter = 'Rozdział'
+    elif language_code == 'ru':
+        chapter = 'Глава'
+        
     html_source = html_source.replace('<h1 class="print-title"></h1>','') #remove empty header
 
     counter = 1
@@ -399,6 +402,12 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'nb':
         url = 'http://musescore.org/nb/print/book/export/html/2122'
         internal = 'http://musescore.org/nb/håndbok' #h%C3%A5ndbok'
+    elif language_code == 'pl':
+        url = 'http://www.musescore.org/pl/print/book/export/html/2495'
+        internal = 'http://www.musescore.org/pl/podręcznik' #podr%C4%99cznik'
+    elif language_code == 'ru':
+        url = 'http://www.musescore.org/ru/print/book/export/html/2517'
+        internal = 'http://www.musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
 
     print "Create handbook for",language_code
 
@@ -482,6 +491,8 @@ def main():
         createHandbook('fr', 'missing', pdf, verbose, heading_switch)
         createHandbook('it', 'missing', pdf, verbose, heading_switch)
         createHandbook('nb', 'missing', pdf, verbose, heading_switch)
+        #createHandbook('pl', 'missing', pdf, verbose, heading_switch)
+        #createHandbook('ru', 'missing', pdf, verbose, heading_switch)
 
     # Create Handbook for specific language
     else:
