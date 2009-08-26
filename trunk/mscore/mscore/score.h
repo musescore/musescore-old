@@ -823,6 +823,8 @@ class Score : public QObject {
       double point(const Spatium sp) const { return sp.val() * _spatium; }
 
       void scanElements(void* data, void (*func)(void*, Element*));
+      void selectSimilar(Element*, bool);
+      void selectElementDialog(Element* e);
       };
 
 extern Score* gscore;

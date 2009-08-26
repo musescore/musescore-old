@@ -2003,6 +2003,24 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Edit Text Style..."),
          QT_TR_NOOP("Edit Text Style...")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "select-all",
+         QT_TR_NOOP("Select all similar elements"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Select all similar elements"),
+         QT_TR_NOOP("Select all similar elements")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "select-staff",
+         QT_TR_NOOP("Select all similar elements in same staff"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Select all similar elements in same staff"),
+         QT_TR_NOOP("Select all similar elements in same staff")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

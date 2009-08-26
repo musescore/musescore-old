@@ -15,8 +15,7 @@
       <instrument>
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
-         <transposition>12</transposition>
-         <clef>0</clef>
+         <clef>1</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
          <channel>
@@ -69,8 +68,7 @@
       <instrument>
          <name>Bass Flute</name>
          <short-name>B. Fl.</short-name>
-         <transposition>-12</transposition>
-         <clef>0</clef>
+         <clef>3</clef>
          <aPitchRange>48-77</aPitchRange>
          <pPitchRange>48-81</pPitchRange>
          <channel>
@@ -122,7 +120,7 @@
       <instrument>
          <name>Hypobass Flute</name>
          <short-name>Hb. Fl.</short-name>
-         <clef>18</clef>
+         <clef>6</clef>
          <aPitchRange>12-48</aPitchRange>
          <pPitchRange>12-45</pPitchRange>
          <channel>
@@ -303,7 +301,6 @@
          <name>C Alto Ocarina</name>
          <short-name>C A. Oc.</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-76</pPitchRange>
          <channel>
@@ -428,6 +425,7 @@
          <name>Oboe da caccia</name>
          <short-name>Ob. d. ca.</short-name>
          <clef>0</clef>
+         <transposition>-7</transposition>
          <aPitchRange>53-79</aPitchRange>
          <pPitchRange>53-81</pPitchRange>
          <channel>
@@ -780,7 +778,7 @@
          <name>Contrabasson</name>
          <short-name>Cbsn.</short-name>
          <transposition>-12</transposition>
-         <clef>4</clef>
+         <clef>5</clef>
          <aPitchRange>22-57</aPitchRange>
          <pPitchRange>22-60</pPitchRange>
          <channel>
@@ -3712,8 +3710,7 @@
       <instrument>
          <name>Contrabass</name>
          <short-name>Cb.</short-name>
-         <transposition>-12</transposition>
-         <clef>4</clef>
+         <clef>5</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
          <channel>
@@ -3729,8 +3726,7 @@
        <instrument>
          <name>Contrabasses</name>
          <short-name>Cbs.</short-name>
-         <transposition>-12</transposition>
-         <clef>4</clef>
+         <clef>5</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
          <channel>
@@ -3825,7 +3821,9 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="link-test">
+   <instrument-group name="Group-Test">
       <ref>Violone</ref>
+      <ref>Piccolo</ref>
       </instrument-group>
    </museScore>
+

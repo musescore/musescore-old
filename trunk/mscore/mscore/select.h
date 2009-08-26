@@ -21,7 +21,7 @@
 #ifndef __SELECT_H__
 #define __SELECT_H__
 
-class Score;
+#include "ui_select.h"
 
 //---------------------------------------------------------
 //   SelState
@@ -35,6 +35,7 @@ enum SelState {
       SEL_SYSTEM,       // a system range ("passage") is selected
       };
 
+class Score;
 class Page;
 class System;
 class ChordRest;
@@ -95,6 +96,25 @@ class Selection {
       int tickStart() const;
       int tickEnd() const;
       QList<Note*> noteList() const;
+      };
+
+struct ElementPattern;
+
+//---------------------------------------------------------
+//   SelectDialog
+//---------------------------------------------------------
+
+class SelectDialog : public QDialog, Ui::SelectDialog {
+      Q_OBJECT
+      const Element* e;
+
+   public:
+      SelectDialog(const Element* e, QWidget* parent);
+      void setPattern(ElementPattern* p);
+      bool doReplace() const       { return replace->isChecked();       }
+      bool doAdd() const           { return add->isChecked();           }
+      bool doSubtract() const      { return subtract->isChecked();      }
+      bool doFromSelection() const { return fromSelection->isChecked(); }
       };
 
 #endif

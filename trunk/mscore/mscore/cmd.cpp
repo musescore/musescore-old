@@ -2339,9 +2339,9 @@ void Score::cmdPaste()
             }
       else if ((selection()->state() == SEL_STAFF || selection()->state() == SEL_SINGLE)
          && ms->hasFormat(mimeStaffListFormat)) {
-            ChordRest* cr;
+            ChordRest* cr = 0;
             if (selection()->state() == SEL_STAFF) {
-                  cr = static_cast<ChordRest*>(selection()->startSegment()->element(selection()->staffStart));
+                  cr = selection()->firstChordRest();
                   }
             else if (selection()->state() == SEL_SINGLE) {
                   Element* e = selection()->element();
@@ -2353,8 +2353,8 @@ void Score::cmdPaste()
                         e = static_cast<Note*>(e)->chord();
                   cr  = static_cast<ChordRest*>(e);
                   }
-            else {
-                  printf("invalid selection state %d\n", selection()->state());
+            if (cr == 0) {
+                  printf("no destination for paste\n");
                   return;
                   }
 
