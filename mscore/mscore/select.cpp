@@ -130,18 +130,17 @@ ChordRest* Selection::firstChordRest(int track) const
       ChordRest* cr = 0;
       for (ciElement i = _el.begin(); i != _el.end(); ++i) {
             Element* el = *i;
-            if (el->type() == NOTE) {
-                  el = ((Note*)el)->chord();
-                  }
+            if (el->type() == NOTE)
+                  el = el->parent();
             if (el->isChordRest()) {
                   if (track != -1 && el->track() != track)
                         continue;
                   if (cr) {
-                        if (((ChordRest*)el)->tick() < cr->tick())
-                              cr = (ChordRest*)el;
+                        if (el->tick() < cr->tick())
+                              cr = static_cast<ChordRest*>(el);
                         }
                   else
-                        cr = (ChordRest*)el;
+                        cr = static_cast<ChordRest*>(el);
                   }
             }
       return cr;
@@ -857,5 +856,134 @@ QList<Note*> Selection::noteList() const
                   }
             }
       return nl;
+      }
+
+//---------------------------------------------------------
+//   ElementPattern
+//---------------------------------------------------------
+
+struct ElementPattern {
+      QList<Element*> el;
+      int type;
+      int subtype;
+      int staff;
+      int voice;
+      const System* system;
+      };
+
+//---------------------------------------------------------
+//   collectMatch
+//---------------------------------------------------------
+
+static void collectMatch(void* data, Element* e)
+      {
+      ElementPattern* p = static_cast<ElementPattern*>(data);
+      if (p->type != e->type() || p->subtype != e->subtype())
+            return;
+      if (p->staff != -1 && p->staff != e->staffIdx())
+            return;
+      if (e->type() == NOTE)
+            e = e->parent();
+      if (e->type() == CHORD || e->type() == REST) {
+            ChordRest* cr = static_cast<ChordRest*>(e);
+            if (p->voice != -1 && p->voice != cr->voice())
+                  return;
+            }
+      if (p->system) {
+            Element* ee = e;
+            do {
+                  if (ee->type() == SYSTEM) {
+                        if (p->system != ee)
+                              return;
+                        break;
+                        }
+                  ee = ee->parent();
+                  } while (ee);
+            }
+      p->el.append(e);
+      }
+
+//---------------------------------------------------------
+//   selectSimilar
+//---------------------------------------------------------
+
+void Score::selectSimilar(Element* e, bool sameStaff)
+      {
+      printf("selectSimilar %s\n", e->name());
+
+      ElementPattern pattern;
+      pattern.type    = e->type();
+      pattern.subtype = e->subtype();
+      pattern.staff   = sameStaff ? e->staffIdx() : -1;
+      pattern.voice   = -1;
+      pattern.system  = 0;
+
+      scanElements(&pattern, collectMatch);
+
+      select(0, SELECT_SINGLE, 0);
+      foreach(Element* e, pattern.el)
+            select(e, SELECT_ADD, 0);
+      }
+
+//---------------------------------------------------------
+//   SelectDialog
+//---------------------------------------------------------
+
+SelectDialog::SelectDialog(const Element* _e, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      e = _e;
+      type->setText(e->name());
+      }
+
+//---------------------------------------------------------
+//   setPattern
+//---------------------------------------------------------
+
+void SelectDialog::setPattern(ElementPattern* p)
+      {
+      p->type    = e->type();
+      p->subtype = e->subtype();
+      p->staff   = sameStaff->isChecked() ? e->staffIdx() : -1;
+      p->voice   = sameVoice->isChecked() ? e->voice() : -1;
+      p->system  = 0;
+      if (sameSystem->isChecked()) {
+            do {
+                  if (e->type() == SYSTEM) {
+                        p->system = static_cast<const System*>(e);
+                        break;
+                        }
+                  e = e->parent();
+                  } while (e);
+            }
+      }
+
+//---------------------------------------------------------
+//   selectElementDialog
+//---------------------------------------------------------
+
+void Score::selectElementDialog(Element* e)
+      {
+      SelectDialog sd(e, 0);
+      if (sd.exec()) {
+            ElementPattern pattern;
+            sd.setPattern(&pattern);
+            scanElements(&pattern, collectMatch);
+            if (sd.doReplace())
+                  select(0, SELECT_SINGLE, 0);
+            else if (sd.doSubtract()) {
+                  QList<Element*> sl(*selection()->elements());
+                  foreach(Element* ee, pattern.el)
+                        sl.removeOne(ee);
+                  select(0, SELECT_SINGLE, 0);
+                  foreach(Element* ee, sl)
+                        select(ee, SELECT_ADD, 0);
+                  }
+            else {
+                  foreach(Element* ee, pattern.el)
+                        select(ee, SELECT_ADD, 0);
+                  }
+            }
       }
 

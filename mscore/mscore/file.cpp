@@ -257,6 +257,12 @@ bool Score::saveFile(bool autosave)
             info.setFile(s);
             }
 
+      if (info.exists() && !info.isWritable()) {
+            QString s(tr("file %1 is not writable"));
+            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s.arg(info.filePath()));
+            return false;
+            }
+
       // if file was already saved in this session
       // save but don't overwrite backup again
 

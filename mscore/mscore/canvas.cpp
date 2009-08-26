@@ -223,6 +223,12 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
       popup->addSeparator();
+      QMenu* selMenu = popup->addMenu(tr("Select..."));
+      selMenu->addAction(getAction("select-all"));
+      selMenu->addAction(getAction("select-staff"));
+      a = selMenu->addAction(tr("more..."));
+      a->setData("select-dialog");
+      popup->addSeparator();
       obj->genPropertyMenu(popup);
       popup->addSeparator();
       a = popup->addAction(tr("Object Inspector"));
@@ -242,6 +248,12 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             if (startEdit(obj))
                   return;
             }
+      else if (cmd == "select-all")
+            score()->selectSimilar(obj, false);
+      else if (cmd == "select-staff")
+            score()->selectSimilar(obj, true);
+      else if (cmd == "select-dialog")
+            score()->selectElementDialog(obj);
       else
             obj->propertyAction(cmd);
       _score->endCmd();

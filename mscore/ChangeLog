@@ -1,3 +1,8 @@
+26.aug (ws)
+      - new selection dialog: element-properties->select->other
+      - Before saving a file check for write permission. This gives a better error message
+        when trying to save the demo score.
+      - fix: "pasting to selected measure crashes"
 25.aug (ws)
       - updated instruments.xml from Magnus Johansson
       - Changes in the text property dialog are now always applied to all selected elements of same
