@@ -29,6 +29,7 @@ QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
+      SymCode(0xe10e, 1),    //natural
       SymCode(0xe10c, 1),    // sharp
       SymCode(0xe10d, 1),    // flat
       SymCode(0xe104, 1),    // note2_Sym
@@ -42,7 +43,6 @@ SymCode pSymbols[] = {
       SymCode(0xe167, 1),    // coda
       SymCode(0xe168, 1),    // varcoda
       SymCode(0xe169, 1),    // segno
-      SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),
       SymCode(0x00c0, -1),

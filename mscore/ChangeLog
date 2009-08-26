@@ -3,6 +3,11 @@
       - Before saving a file check for write permission. This gives a better error message
         when trying to save the demo score.
       - fix: "pasting to selected measure crashes"
+      (db)
+      - add natural sign to mscore1-20.ttf and text palette
+      - fix width and kerning of "f" in mscore1-20.ttf for better looking dynamics
+      - add more numbers to MuseJazz font
+      - preparations for Russian and Polish handbooks
 25.aug (ws)
       - updated instruments.xml from Magnus Johansson
       - Changes in the text property dialog are now always applied to all selected elements of same
