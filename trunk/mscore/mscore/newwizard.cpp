@@ -670,6 +670,7 @@ NewWizard::NewWizard(QWidget* parent)
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));
+	  setOption(QWizard::NoCancelButton, false);
 
       p1 = new NewWizardPage1;
       p2 = new NewWizardPage2;
