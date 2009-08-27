@@ -768,13 +768,18 @@ fet_endchar;
 
 ligtable "m":
 	"p" kern 0.2 ex#,
-	"f" kern -0.1 ex#;
+	"f" kern -0.4 ex#;     % -0.1
 
 ligtable "f":
-	"f" kern -0.9 ex#;
+	"f" kern -0.9 ex#,
+	"z" kern -0.4 ex#,      % new
+	"p" kern -0.4 ex#;      % new
+
+ligtable "s":
+	"f" kern -0.3 ex#;
 
 ligtable "r":
-	"f" kern 0.1 ex#;
+	"f" kern -0.2 ex#;       % 0.1
 
 
 %% notes from old dyn code.
