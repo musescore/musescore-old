@@ -151,14 +151,12 @@ void Dynamic::setSubtype(int idx)
             if (ts->sizeIsSpatiumDependent)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
-
-#ifdef Q_WS_MAC
-            QFont font("MScore1 20");
-#else
             QFont font("MScore1");
-#endif
             font.setPixelSize(lrint(m));
+            font.setKerning(true);
             tf.setFont(font);
+            tf.setProperty(QTextFormat::FontKerning, true);
+            tf.setProperty(QTextFormat::FontLetterSpacing, 100);
             cursor.setBlockCharFormat(tf);
             cursor.insertText(dynList[idx].tag);
             }
@@ -207,7 +205,6 @@ bool Dynamic::startEdit(Viewer* v, const QPointF& p)
 void Dynamic::endEdit()
       {
       Text::endEdit();
-//      setSubtype(0);
       }
 
 //---------------------------------------------------------
