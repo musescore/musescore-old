@@ -73,3 +73,7 @@ cd ./out && /usr/bin/fontforge -script mscore1-20.pe
 # fontforge feta20.pfb
 mv emmentaler-20.ttf ../mscore-20.ttf
 mv mscore1-20.ttf ..
+
+cd ..
+/usr/bin/fontforge -script gen-jazz.pe
+
