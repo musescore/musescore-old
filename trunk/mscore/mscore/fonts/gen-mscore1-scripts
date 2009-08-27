@@ -52,11 +52,11 @@ MergeFonts("mscore1-%(design_size)d.pfb");
 i = 0;
 while (i < CharCnt())
       Select(i);
-      if (i == 0x10e)
+      if (i == 0x10f)
             SetUnicodeValue(0xE167, 0);
-      elseif (i == 0x10f)
-            SetUnicodeValue(0xE168, 0);
       elseif (i == 0x110)
+            SetUnicodeValue(0xE168, 0);
+      elseif (i == 0x111)
             SetUnicodeValue(0xE169, 0);
       else
             SetUnicodeValue(i + 0xE000, 0);
