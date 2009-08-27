@@ -784,15 +784,14 @@ void Beam::layout()
             bs->move(0, beamDist * i);
             beamSegments.push_back(bs);
             }
-      QPointF p1d = _p1;
-      p1d.ry()   += beamDist * (n-1);
+      double p1dy = _p1.y() + beamDist * (n-1);
 
       //---------------------------------------------
       //   create broken/short beam segments
       //---------------------------------------------
 
       for (Duration d(maxDuration.shift(1)); d >= Duration(Duration::V_64TH); d = d.shift(1)) {
-            int n = d.hooks() - 1;
+            int nn = d.hooks() - n;
 
             Chord* nn1 = 0;
             Chord* nn2 = 0;
@@ -803,10 +802,14 @@ void Beam::layout()
                         continue;
                   Chord* chord = static_cast<Chord*>(cr);
                   bool cup = chord->up();
-                  if (cross)
-                        y1 = _p1.y() + beamDist * n * (cup ? 1.0 : -1.0);
+                  if (cross) {
+                        if (!cup)
+                              y1 = _p1.y() - beamDist * nn;
+                        else
+                              y1 = p1dy    + beamDist * nn;
+                        }
                   else
-                        y1 = _p1.y() + beamDist * n;
+                        y1 = p1dy + beamDist * nn;
 
                   if (chord->duration() > d) {
                         if (nn2) {
@@ -893,8 +896,7 @@ void Beam::layout()
 
             double x2 = npos.x();
             double y1 = npos.y();
-
-            double y  = (_up || !cross) ? _p1.y() : p1d.y();
+            double y  = _up ? qMin(p1dy, _p1.y()) : qMax(p1dy, _p1.y());
             double y2 = y + (x2 - x1) * slope;
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);

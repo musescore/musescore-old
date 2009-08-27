@@ -1,3 +1,5 @@
+27.aug (ws)
+      - fixes for cross stave beams
 26.aug (ws)
       - new selection dialog: element-properties->select->other
       - Before saving a file check for write permission. This gives a better error message
