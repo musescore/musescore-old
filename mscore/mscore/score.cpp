@@ -2301,6 +2301,8 @@ int Score::inputPos() const
 
 void Score::scanElements(void* data, void (*func)(void*, Element*))
       {
+      foreach (Element* element, _gel)
+            element->scanElements(data, func);
       for(MeasureBase* m = first(); m; m = m->next())
             m->scanElements(data, func);
       foreach(Page* page, pages())

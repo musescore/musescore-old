@@ -4,10 +4,6 @@
 <context>
     <name></name>
     <message>
-        <source>system</source>
-        <translation>system</translation>
-    </message>
-    <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation></translation>
     </message>
@@ -80,10 +76,6 @@
         <translation>Brazylijski portugalski</translation>
     </message>
     <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Svenska</source>
         <translation>Szwedski</translation>
     </message>
@@ -98,6 +90,18 @@
     <message>
         <source>ç¹é«ä¸­æ (å°ç£)</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">System</translation>
+    </message>
+    <message>
+        <source>RomÃ¢nÄ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -248,12 +252,48 @@ p, li { white-space: pre-wrap; }
         <source>Measure</source>
         <translation>Takt</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
         <translation>Forma</translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Akord</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished">Laseczka</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Hak</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -997,41 +1037,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Okno dialogowe</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Znajdź trójdźwięku i</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>usuń najniższy dźwięk</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>usuń środkowy dźwięk</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>usuń najwyższy dźwięk</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Wybierz odstrojenie</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Odstrojenie</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cent</translation>
-    </message>
-</context>
-<context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
@@ -1733,6 +1738,10 @@ space unit</extracomment>
     <message>
         <source>Voice 4</source>
         <translation>Głos 4</translation>
+    </message>
+    <message>
+        <source>show repeat bar tips</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4239,10 +4248,6 @@ before closing?</source>
         <translation>MuseScore: Wczytaj partyturę</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Wszystkie obsługiwane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation>Bez tytułu</translation>
     </message>
@@ -4925,6 +4930,26 @@ before closing?</source>
         <source>Ottava</source>
         <translation>Ottava</translation>
     </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5366,32 +5391,32 @@ before closing?</source>
         <translation>Wybierz tapetę tła</translation>
     </message>
     <message>
-        <source>Choose Synthesizer Sound Font</source>
-        <translation>Wybierz Sound Font syntezatora</translation>
-    </message>
-    <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
         <translation>Pliki SoundFont (*.sf2*.SF2);;All(*)</translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation>Wybierz katalog roboczy</translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
-        <translation>Wybierz domyślną listę instrumentów</translation>
     </message>
     <message>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Lista instrumentów (*.xml);;All(*)</translation>
     </message>
     <message>
-        <source>Choose score to start with</source>
-        <translation>Wybierz partyturę początkową</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>pliki MuseScore (*.msc);;All (*)</translation>
+    </message>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6385,6 +6410,12 @@ failed: </source>
         <translation>Nic nie zostało zaznaczone. 
 Czy przetransponować całą partyturę?</translation>
     </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6435,6 +6466,53 @@ Czy przetransponować całą partyturę?</translation>
     <message>
         <source>Segment Type:</source>
         <translation>Typ segmentu:</translation>
+    </message>
+</context>
+<context>
+    <name>SelectDialog</name>
+    <message>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished">Akcja</translation>
+    </message>
+    <message>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6829,6 +6907,10 @@ Czy przetransponować całą partyturę?</translation>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Właściwości tekstu</translation>
+    </message>
+    <message>
+        <source>apply to all elements of same type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7249,77 +7331,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>operacja ZIP zakończona sukcesem.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Nie udało się zainicjować lub wczytać biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>błąd biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Nie udało się stworzyć lub otworzyć pliku.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Archiwum częściowo uszkodzone. Niektóre pliki mogą być rozpakowane.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Archiwum uszkodzone.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Nieprawidłowe hasło.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Nie utworzono jeszcze żadnego archiwum.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Plik lub katalog nie istnieje.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Błąd wczytywania pliku.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Błąd zapisywania pliku.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Błąd poszukiwania pliku.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Nie można utworzyć katalogu.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Niewłaściwe urządzenie.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Nieprawidłowe lub niekompatybilne archiwum zip.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Sprzeczne nagłówki. Archiwum może być uszkodzone.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Nieznany błąd.</translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -7346,46 +7357,110 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Zip</name>
+    <name>accidental</name>
     <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>operacja ZIP zakończona sukcesem.</translation>
+        <source>none</source>
+        <translation type="unfinished">brak</translation>
     </message>
     <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Nie udało się zainicjować lub wczytać biblioteki zlib.</translation>
+        <source>sharp</source>
+        <translation type="unfinished">krzyżyk</translation>
     </message>
     <message>
-        <source>zlib library error.</source>
-        <translation>błąd biblioteki zlib.</translation>
+        <source>flat</source>
+        <translation type="unfinished">bemol</translation>
     </message>
     <message>
-        <source>Unable to create or open file.</source>
-        <translation>Nie udało się stworzyć lub otworzyć pliku.</translation>
+        <source>double sharp</source>
+        <translation type="unfinished">podwójny krzyżyk</translation>
     </message>
     <message>
-        <source>No archive has been created yet.</source>
-        <translation>Nie utworzono jeszcze żadnego archiwum.</translation>
+        <source>double flat</source>
+        <translation type="unfinished">podwójny bemol</translation>
     </message>
     <message>
-        <source>File or directory does not exist.</source>
-        <translation>Plik lub katalog nie istnieje.</translation>
+        <source>natural</source>
+        <translation type="unfinished">kasownik</translation>
     </message>
     <message>
-        <source>File read error.</source>
-        <translation>Błąd wczytywania pliku.</translation>
+        <source>(sharp)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File write error.</source>
-        <translation>Błąd zapisywania pliku.</translation>
+        <source>(flat)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File seek error.</source>
-        <translation>Błąd poszukiwania pliku.</translation>
+        <source>(double sharp)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown error.</source>
-        <translation>Nieznany błąd.</translation>
+        <source>(double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(natural)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[natural]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8348,14 +8423,6 @@ p, li { white-space: pre-wrap; }
         <translation>pedał ped</translation>
     </message>
     <message>
-        <source>bracket ticks up</source>
-        <translation>klamra znak w górę</translation>
-    </message>
-    <message>
-        <source>bracket ticks down</source>
-        <translation>klamra znak w dół</translation>
-    </message>
-    <message>
         <source>acc discant</source>
         <translation>acc discant</translation>
     </message>
@@ -8422,6 +8489,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>dot dot</source>
         <translation>dwie kropki</translation>
+    </message>
+    <message>
+        <source>bracket tips right up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

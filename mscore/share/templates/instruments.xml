@@ -1448,7 +1448,7 @@
          </instrument>
       <instrument>
          <name>F Mellophone</name>
-         <short-name>F Mln.</short-name>
+         <short-name>F Mph.</short-name>
          <clef>0</clef>
          <transposition>-7</transposition>
          <aPitchRange>47-74</aPitchRange>
@@ -1459,7 +1459,7 @@
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Mellophone</name>
-         <short-name>E<symbol name="flat"/> Mln.</short-name>
+         <short-name>E<symbol name="flat"/> Mph.</short-name>
          <clef>0</clef>
          <transposition>-9</transposition>
          <aPitchRange>45-72</aPitchRange>
@@ -1470,7 +1470,7 @@
          </instrument>
       <instrument>
          <name>F Mellophonium</name>
-         <short-name>F Mlm.</short-name>
+         <short-name>F Mpm.</short-name>
          <clef>0</clef>
          <transposition>-7</transposition>
          <aPitchRange>47-74</aPitchRange>
@@ -1481,7 +1481,7 @@
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Mellophonium</name>
-         <short-name>E<symbol name="flat"/> Mlm.</short-name>
+         <short-name>E<symbol name="flat"/> Mpm.</short-name>
          <clef>0</clef>
          <transposition>-9</transposition>
          <aPitchRange>45-72</aPitchRange>
@@ -3172,8 +3172,8 @@
          <name>Soprano Guitar</name>
          <short-name>S. Guit.</short-name>
          <clef>0</clef>
-         <aPitchRange>52-107</aPitchRange>
-         <pPitchRange>52-107</pPitchRange>
+         <aPitchRange>52-93</aPitchRange>
+         <pPitchRange>52-93</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3192,8 +3192,8 @@
          <name>Guitar</name>
          <short-name>Guit.</short-name>
          <clef>3</clef>
-         <aPitchRange>40-95</aPitchRange>
-         <pPitchRange>40-95</pPitchRange>
+         <aPitchRange>40-83</aPitchRange>
+         <pPitchRange>40-83</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3205,8 +3205,8 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <aPitchRange>34-98</aPitchRange>
-         <pPitchRange>34-98</pPitchRange>
+         <aPitchRange>34-86</aPitchRange>
+         <pPitchRange>34-86</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3215,8 +3215,8 @@
          <name>Steel string Guitar</name>
          <short-name>St. str. Guit.</short-name>
          <clef>3</clef>
-         <aPitchRange>40-95</aPitchRange>
-         <pPitchRange>40-95</pPitchRange>
+         <aPitchRange>40-83</aPitchRange>
+         <pPitchRange>40-83</pPitchRange>
          <channel>
             <program>25</program>
             </channel>
@@ -3225,8 +3225,8 @@
          <name>12-string Guitar</name>
          <short-name>12-str. Guit.</short-name>
          <clef>3</clef>
-         <aPitchRange>40-95</aPitchRange>
-         <pPitchRange>40-95</pPitchRange>
+         <aPitchRange>40-83</aPitchRange>
+         <pPitchRange>40-83</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3235,8 +3235,8 @@
          <name>Pedal steel Guitar</name>
          <short-name>Ped. st. Guit.</short-name>
          <clef>13</clef>
-         <aPitchRange>35-87</aPitchRange>
-         <pPitchRange>35-87</pPitchRange>
+         <aPitchRange>35-84</aPitchRange>
+         <pPitchRange>35-84</pPitchRange>
          <channel>
             <program>25</program>
             </channel>
@@ -3245,6 +3245,8 @@
          <name>Electric Guitar</name>
          <short-name>El. Guit.</short-name>
          <clef>3</clef>
+         <aPitchRange>40-86</aPitchRange>
+         <pPitchRange>40-86</pPitchRange>
          <channel>
             <program>27</program>
             </channel>
@@ -3252,10 +3254,9 @@
       <instrument>
          <name>Bass Guitar</name>
          <short-name>B. Guit.</short-name>
-         <transposition>-12</transposition>
-         <clef>4</clef>
-         <aPitchRange>28-83</aPitchRange>
-         <pPitchRange>28-83</pPitchRange>
+         <clef>5</clef>
+         <aPitchRange>28-65</aPitchRange>
+         <pPitchRange>28-65</pPitchRange>
          <channel>
             <program>34</program>
             </channel>
@@ -3265,8 +3266,8 @@
          <short-name>B. Guit.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
-         <aPitchRange>28-83</aPitchRange>
-         <pPitchRange>28-83</pPitchRange>
+         <aPitchRange>28-65</aPitchRange>
+         <pPitchRange>28-65</pPitchRange>
          <channel>
             <program>32</program>
             </channel>
@@ -3274,8 +3275,9 @@
       <instrument>
          <name>Electric Bass</name>
          <short-name>El. B. Guit.</short-name>
-         <transposition>-12</transposition>
-         <clef>4</clef>
+         <clef>5</clef>
+         <aPitchRange>28-65</aPitchRange>
+         <pPitchRange>28-65</pPitchRange>
          <channel>
             <program>33</program>
             </channel>
@@ -3283,8 +3285,9 @@
       <instrument>
          <name>Fretless Electric Bass</name>
          <short-name>Frtl. El. B.</short-name>
-         <transposition>-12</transposition>
-         <clef>4</clef>
+         <clef>5</clef>
+         <aPitchRange>28-65</aPitchRange>
+         <pPitchRange>28-65</pPitchRange>
          <channel>
             <program>35</program>
             </channel>
@@ -3293,8 +3296,8 @@
          <name>Mandolin</name>
          <short-name>Mdn.</short-name>
          <clef>0</clef>
-         <aPitchRange>65-85</aPitchRange>
-         <pPitchRange>65-85</pPitchRange>
+         <aPitchRange>55-85</aPitchRange>
+         <pPitchRange>55-85</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3303,8 +3306,18 @@
          <name>Ukulele</name>
          <short-name>Uk.</short-name>
          <clef>0</clef>
-         <aPitchRange>60-93</aPitchRange>
-         <pPitchRange>60-93</pPitchRange>
+         <aPitchRange>60-81</aPitchRange>
+         <pPitchRange>60-81</pPitchRange>
+         <channel>
+            <program>24</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Baritone Ukulele</name>
+         <short-name>Bar. Uk.</short-name>
+         <clef>0</clef>
+         <aPitchRange>50-76</aPitchRange>
+         <pPitchRange>50-76</pPitchRange>
          <channel>
             <program>24</program>
             </channel>
@@ -3313,8 +3326,8 @@
          <name>Banjo</name>
          <short-name>Bj.</short-name>
          <clef>3</clef>
-         <aPitchRange>48-86</aPitchRange>
-         <pPitchRange>48-86</pPitchRange>
+         <aPitchRange>48-87</aPitchRange>
+         <pPitchRange>48-87</pPitchRange>
          <channel>
             <program>105</program>
             </channel>
@@ -3324,7 +3337,7 @@
          <short-name>T. Bj.</short-name>
          <clef>3</clef>
          <aPitchRange>48-83</aPitchRange>
-         <pPitchRange>40-83</pPitchRange>
+         <pPitchRange>48-83</pPitchRange>
          <channel>
             <program>105</program>
             </channel>

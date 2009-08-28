@@ -1350,7 +1350,7 @@ void Score::cmdTuplet(int n)
                         printf("this does not create a tuplet\n");
                         return;
                   case 2:                       // duplet
-                        tuplet->setRatio(4, 3);
+                        tuplet->setRatio(2, 3);
                         duration = duration.shift(1);
                         break;
                   case 4:                       // quadruplet

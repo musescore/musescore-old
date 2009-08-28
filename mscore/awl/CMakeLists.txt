@@ -18,9 +18,9 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
+# set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
+# set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 QT4_WRAP_CPP (mocs
       aslider.h
@@ -42,7 +42,7 @@ add_custom_command(
 add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
    COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -fno-exceptions -Wall
+     -g -Wextra -Wall
      -I${QT_INCLUDE_DIR}
      -o all.h.pch all.h
    DEPENDS ${PROJECT_BINARY_DIR}/all.h

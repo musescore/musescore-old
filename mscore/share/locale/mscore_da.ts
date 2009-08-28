@@ -4,10 +4,6 @@
 <context>
     <name></name>
     <message>
-        <source>system</source>
-        <translation>System</translation>
-    </message>
-    <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation></translation>
     </message>
@@ -102,6 +98,10 @@
     <message>
         <source>RomÃ¢nÄ</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">System</translation>
     </message>
 </context>
 <context>
@@ -243,6 +243,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Measure</source>
         <translation>Takt</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1722,6 +1730,10 @@ space unit</extracomment>
     <message>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <source>show repeat bar tips</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4920,6 +4932,22 @@ før lukning?</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5361,24 +5389,8 @@ før lukning?</translation>
         <translation>Vælg baggrund</translation>
     </message>
     <message>
-        <source>Choose Synthesizer Sound Font</source>
-        <translation>Vælg synthesizer sound font</translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation>Vælg arbejdsmappe</translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
-        <translation>Vælg standard instrument liste</translation>
-    </message>
-    <message>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Instrument liste (*.xml);; Alle (*)</translation>
-    </message>
-    <message>
-        <source>Choose score to start with</source>
-        <translation>Vælg nodeark</translation>
     </message>
     <message>
         <source>MuseScore file (*.msc);;All (*)</source>
@@ -5387,6 +5399,22 @@ før lukning?</translation>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
         <translation>Instrument lyd fil (*sf2 *,SF2);;Alle(*)</translation>
+    </message>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6383,6 +6411,12 @@ fejl:</translation>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Gem en kopi</translation>
     </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6433,6 +6467,53 @@ fejl:</translation>
     <message>
         <source>Segment Type:</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>SelectDialog</name>
+    <message>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished">Handling</translation>
+    </message>
+    <message>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6827,6 +6908,10 @@ fejl:</translation>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Tekst egenskaber</translation>
+    </message>
+    <message>
+        <source>apply to all elements of same type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8360,14 +8445,6 @@ p, li { white-space: pre-wrap; }
         <translation>pedal ped</translation>
     </message>
     <message>
-        <source>bracket ticks up</source>
-        <translation>klamme tik op</translation>
-    </message>
-    <message>
-        <source>bracket ticks down</source>
-        <translation>klamme tik ned</translation>
-    </message>
-    <message>
         <source>acc old ee</source>
         <translation>acc gl. ee</translation>
     </message>
@@ -8414,6 +8491,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>dot dot</source>
         <translation>dobbeltpunktering</translation>
+    </message>
+    <message>
+        <source>bracket tips right up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

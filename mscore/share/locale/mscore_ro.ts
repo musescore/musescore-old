@@ -4,10 +4,6 @@
 <context>
     <name></name>
     <message>
-        <source>system</source>
-        <translation>sistem</translation>
-    </message>
-    <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translatorcomment>this string mustn&apos;t be translated</translatorcomment>
         <translation></translation>
@@ -102,11 +98,6 @@
         <translation>Română</translation>
     </message>
     <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translatorcomment>this string mustn&apos;t be translated</translatorcomment>
-        <translation></translation>
-    </message>
-    <message>
         <source>Svenska</source>
         <translatorcomment>this string mustn&apos;t be translated</translatorcomment>
         <translation></translation>
@@ -125,6 +116,14 @@
         <source>ç¹é«ä¸­æ (å°ç£)</source>
         <translatorcomment>this string mustn&apos;t be translated</translatorcomment>
         <translation></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">Sistem</translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -277,6 +276,14 @@ p, li { white-space: pre-wrap; }
         <source>Measure</source>
         <translation>Măsură</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordBase</name>
@@ -284,6 +291,34 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translatorcomment>no idea what this means in this context</translatorcomment>
         <translation>Formă</translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Eticheta acordului</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1027,41 +1062,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Fereastră de dialog</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Caută toate acordurile de trei sunete şi</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>elimină nota din bas</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>elimina nota din mijloc</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>elimină nota din discant</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Ajustează acordajul</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Ajustare acordaj</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cenţi</translation>
-    </message>
-</context>
-<context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
@@ -1765,6 +1765,10 @@ space unit</extracomment>
         <source>Voice 4</source>
         <translation>Vocea a 4-a</translation>
     </message>
+    <message>
+        <source>show repeat bar tips</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1797,7 +1801,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arată</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -1808,7 +1812,7 @@ space unit</extracomment>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -1820,7 +1824,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lipsă</translation>
     </message>
 </context>
 <context>
@@ -1910,7 +1914,7 @@ space unit</extracomment>
     <name>HairpinBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Hairpin</source>
@@ -1947,7 +1951,7 @@ space unit</extracomment>
     <name>ImageProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Acord</translation>
     </message>
     <message>
         <source>lock aspect ratio</source>
@@ -2023,7 +2027,7 @@ space unit</extracomment>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2108,7 +2112,7 @@ space unit</extracomment>
     <name>InstrumentWizard</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>0</source>
@@ -2250,7 +2254,7 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sp</translation>
     </message>
     <message>
         <source>Line style:</source>
@@ -2286,7 +2290,7 @@ failed: </source>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Început</translation>
     </message>
     <message>
         <source>Text</source>
@@ -2294,7 +2298,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>place:</source>
@@ -2338,14 +2342,14 @@ failed: </source>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sfârşit</translation>
     </message>
 </context>
 <context>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>LineSegment</source>
@@ -2384,7 +2388,7 @@ failed: </source>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -2459,7 +2463,7 @@ failed: </source>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
@@ -2553,21 +2557,21 @@ failed: </source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Renunţă</translation>
     </message>
 </context>
 <context>
     <name>MenuNotes</name>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Note</translation>
     </message>
 </context>
 <context>
     <name>MetaEditDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fereastră de dialog</translation>
     </message>
     <message>
         <source>Work Title:</source>
@@ -3038,7 +3042,7 @@ failed: </source>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A (la)</translation>
     </message>
     <message>
         <source>Enter Note A</source>
@@ -3050,7 +3054,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">B (si)</translation>
     </message>
     <message>
         <source>Enter Note B</source>
@@ -3062,7 +3066,7 @@ failed: </source>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">C (do)</translation>
     </message>
     <message>
         <source>Enter Note C</source>
@@ -3074,7 +3078,7 @@ failed: </source>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">D (re)</translation>
     </message>
     <message>
         <source>Enter Note D</source>
@@ -3086,7 +3090,7 @@ failed: </source>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">E (mi)</translation>
     </message>
     <message>
         <source>Enter Note E</source>
@@ -3098,7 +3102,7 @@ failed: </source>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F (fa)</translation>
     </message>
     <message>
         <source>Enter Note F</source>
@@ -3110,7 +3114,7 @@ failed: </source>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">G (sol)</translation>
     </message>
     <message>
         <source>Enter Note G</source>
@@ -3270,7 +3274,7 @@ failed: </source>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">în sus</translation>
     </message>
     <message>
         <source>up+ctrl</source>
@@ -3306,7 +3310,7 @@ failed: </source>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">în jos</translation>
     </message>
     <message>
         <source>pitch down octave</source>
@@ -3802,7 +3806,7 @@ failed: </source>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versuri</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -4046,7 +4050,7 @@ failed: </source>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transpozitoriu</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -4090,7 +4094,7 @@ failed: </source>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Afişează partitura in Do (unde sună)</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -4351,7 +4355,7 @@ before closing?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Note</translation>
     </message>
     <message>
         <source>Drums</source>
@@ -4383,7 +4387,7 @@ before closing?</source>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">normal</translation>
     </message>
     <message>
         <source>broken</source>
@@ -4503,7 +4507,7 @@ before closing?</source>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Moduri de atac, ornamente</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -4511,7 +4515,7 @@ before closing?</source>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nuanţă</translation>
     </message>
     <message>
         <source>fingering %1</source>
@@ -4528,7 +4532,7 @@ before closing?</source>
     <message>
         <source>normal</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">normal</translation>
     </message>
     <message>
         <source>crossed</source>
@@ -4782,7 +4786,7 @@ before closing?</source>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voci</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -4918,11 +4922,11 @@ before closing?</source>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sistem</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Portativ</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -4956,6 +4960,22 @@ before closing?</source>
         <source>Ottava</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4965,11 +4985,11 @@ before closing?</source>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titlu:</translation>
     </message>
     <message>
         <source>Subtitle:</source>
@@ -5074,7 +5094,7 @@ before closing?</source>
     <name>NoteBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>head index</source>
@@ -5089,11 +5109,11 @@ before closing?</source>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pagină</translation>
     </message>
     <message>
         <source>Page No.:</source>
@@ -5120,7 +5140,7 @@ before closing?</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Renunţă</translation>
     </message>
     <message>
         <source>Page Size</source>
@@ -5136,7 +5156,7 @@ before closing?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Înâlţime</translation>
     </message>
     <message>
         <source>Width</source>
@@ -5152,7 +5172,7 @@ before closing?</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>inch</source>
@@ -5225,7 +5245,7 @@ before closing?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nume:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -5256,7 +5276,7 @@ before closing?</source>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Part Name</source>
@@ -5397,19 +5417,7 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose Synthesizer Sound Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5417,11 +5425,23 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose score to start with</source>
+        <source>MuseScore file (*.msc);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore file (*.msc);;All (*)</source>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Starting Score</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5457,7 +5477,7 @@ before closing?</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>show splash screen</source>
@@ -5589,7 +5609,7 @@ before closing?</source>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Înâlţime</translation>
     </message>
     <message>
         <source>Note Entry:</source>
@@ -5761,7 +5781,7 @@ before closing?</source>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Partitură</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
@@ -5786,7 +5806,7 @@ before closing?</source>
     <message>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -5963,7 +5983,7 @@ before closing?</source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Scurtătură</translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -6131,7 +6151,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Etichetă</translation>
     </message>
     <message>
         <source>Cycles</source>
@@ -6169,7 +6189,7 @@ Please select a single note or rest and retry operation
     <name>RestPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Acord</translation>
     </message>
     <message>
         <source>Rest Properties</source>
@@ -6177,27 +6197,27 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mic</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">spaţiu adiţional stânga</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">spaţiu adiţional dreapta</translation>
     </message>
 </context>
 <context>
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>SLine</source>
@@ -6269,7 +6289,7 @@ please select a measure and try again</source>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">eroare:</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
@@ -6371,7 +6391,7 @@ failed: </source>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Deschide fişier</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
@@ -6392,7 +6412,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore: Scriitură</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -6406,12 +6426,18 @@ failed: </source>
         <source>There is nothing selected. Transpose whole score?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -6459,6 +6485,53 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>SelectDialog</name>
+    <message>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
@@ -6497,14 +6570,14 @@ failed: </source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Renunţă</translation>
     </message>
 </context>
 <context>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">automată</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -6528,7 +6601,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Automată</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6550,7 +6623,7 @@ failed: </source>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">automată</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -6581,7 +6654,7 @@ failed: </source>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -6638,7 +6711,7 @@ failed: </source>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
 </context>
 <context>
@@ -6652,7 +6725,7 @@ failed: </source>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">normal</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
@@ -6660,11 +6733,11 @@ failed: </source>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Canal MIDI</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Acţiune MIDI</translation>
     </message>
 </context>
 <context>
@@ -6678,7 +6751,7 @@ failed: </source>
     <name>SymbolDialogBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>System Flag</source>
@@ -6686,7 +6759,7 @@ failed: </source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Şterge</translation>
     </message>
 </context>
 <context>
@@ -6719,22 +6792,22 @@ failed: </source>
     <name>Text</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ascunde</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arată</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modifică textul...</translation>
     </message>
 </context>
 <context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Text</source>
@@ -6744,7 +6817,7 @@ failed: </source>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Text:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -6783,7 +6856,7 @@ failed: </source>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -6806,11 +6879,11 @@ failed: </source>
     <name>TextLineSegment</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ascunde</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arată</translation>
     </message>
     <message>
         <source>Line Properties...</source>
@@ -6837,18 +6910,22 @@ failed: </source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sp</translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
+        <translation type="unfinished">MuseScore: Configurare nuanţă</translation>
+    </message>
+    <message>
+        <source>apply to all elements of same type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6856,7 +6933,7 @@ failed: </source>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -6884,7 +6961,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">B (si)</translation>
     </message>
     <message>
         <source>italic</source>
@@ -6912,7 +6989,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>center text on reference point</source>
@@ -7038,7 +7115,7 @@ failed: </source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -7086,7 +7163,7 @@ failed: </source>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Create TimeSignature</source>
@@ -7102,14 +7179,14 @@ failed: </source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adaugă</translation>
     </message>
 </context>
 <context>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
@@ -7151,7 +7228,7 @@ p, li { white-space: pre-wrap; }
     <name>TransposeDialogBase</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fereastră de dialog</translation>
     </message>
     <message>
         <source>Semitones:</source>
@@ -7177,7 +7254,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formă</translation>
     </message>
 </context>
 <context>
@@ -7267,81 +7344,10 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adaugă</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -7356,7 +7362,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Text:</translation>
     </message>
     <message>
         <source>Repeat List:</source>
@@ -7364,45 +7370,109 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Zip</name>
+    <name>accidental</name>
     <message>
-        <source>ZIP operation completed successfully.</source>
+        <source>none</source>
+        <translation type="unfinished">niciuna</translation>
+    </message>
+    <message>
+        <source>sharp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to initialize or load zlib library.</source>
+        <source>flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>zlib library error.</source>
+        <source>double sharp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to create or open file.</source>
+        <source>double flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No archive has been created yet.</source>
+        <source>natural</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File or directory does not exist.</source>
+        <source>(sharp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File read error.</source>
+        <source>(flat)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File write error.</source>
+        <source>(double sharp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File seek error.</source>
+        <source>(double flat)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown error.</source>
+        <source>(natural)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[double flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[natural]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mirrored-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp-slash4</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7489,7 +7559,7 @@ p, li { white-space: pre-wrap; }
     <name>elementName</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Simbol</translation>
     </message>
     <message>
         <source>Text</source>
@@ -7501,7 +7571,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bară de masură</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -7525,7 +7595,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nota</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -7561,7 +7631,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Imagine</translation>
     </message>
     <message>
         <source>Tie</source>
@@ -7577,7 +7647,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pagină</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -7589,7 +7659,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versuri</translation>
     </message>
     <message>
         <source>Marker</source>
@@ -7665,7 +7735,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Măsură</translation>
     </message>
     <message>
         <source>StaffLines</source>
@@ -7717,7 +7787,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sistem</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -7725,7 +7795,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eticheta acordului</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -8366,14 +8436,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket ticks up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket ticks down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>acc discant</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8439,6 +8501,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left down</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
