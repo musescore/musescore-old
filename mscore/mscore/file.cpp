@@ -258,7 +258,7 @@ bool Score::saveFile(bool autosave)
             }
 
       if (info.exists() && !info.isWritable()) {
-            QString s(tr("file %1 is not writable"));
+            QString s(tr("The following file is locked: \n%1 \nTry saving to a different location."));
             QMessageBox::critical(mscore, tr("MuseScore: Save File"), s.arg(info.filePath()));
             return false;
             }

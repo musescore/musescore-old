@@ -2005,21 +2005,21 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "select-all",
+         "select-similar",
          QT_TR_NOOP("Select all similar elements"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Select all similar elements"),
-         QT_TR_NOOP("Select all similar elements")
+         QT_TR_NOOP("All Similar Elements"),
+         QT_TR_NOOP("All Similar Elements")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "select-staff",
+         "select-similar-staff",
          QT_TR_NOOP("Select all similar elements in same staff"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Select all similar elements in same staff"),
-         QT_TR_NOOP("Select all similar elements in same staff")
+         QT_TR_NOOP("All Similar Elements in Same Staff"),
+         QT_TR_NOOP("All Similar Elements in Same Staff")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),

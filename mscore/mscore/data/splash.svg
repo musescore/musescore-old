@@ -17,7 +17,7 @@
    version="1.0"
    sodipodi:docname="splash.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="C:\Users\lasconic\Desktop\splash1.png"
+   inkscape:export-filename="e:\m\mscore\mscore\data\splash.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <sodipodi:namedview
@@ -30,16 +30,16 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="353.84522"
-     inkscape:cy="186.30029"
+     inkscape:zoom="1.3571429"
+     inkscape:cx="311"
+     inkscape:cy="160.68723"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="708"
-     inkscape:window-x="115"
-     inkscape:window-y="115"
+     inkscape:window-x="0"
+     inkscape:window-y="-16"
      showborder="true"
      borderlayer="true" />
   <defs
@@ -302,18 +302,18 @@
          sodipodi:role="line"
          x="310.95898"
          y="369"
-         style="font-size:12px;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1"
-         id="tspan3753">Copyright © 2002-2009 Werner Schweer and Others. Published under the GNU Public License</tspan><tspan
+         style="font-size:11;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1"
+         id="tspan3753">Copyright © 2002-2009 Werner Schweer and Others. Published under the GNU General Public License</tspan><tspan
          sodipodi:role="line"
          x="310.95898"
          y="384"
          id="tspan4895"
-         style="font-size:12px;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1" /><tspan
+         style="font-size:11;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1" /><tspan
          sodipodi:role="line"
          x="310.95898"
          y="399"
          id="tspan4897"
-         style="font-size:12px;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1" /></text>
+         style="font-size:11;text-align:center;text-anchor:middle;fill:#150e08;fill-opacity:1" /></text>
     <rect
        style="opacity:0.65;fill:#c8b880;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4899"
@@ -528,23 +528,23 @@
        transform="translate(-65,-281)" />
     <text
        xml:space="preserve"
-       style="font-size:104.09825897px;font-style:normal;font-weight:normal;opacity:0.81999972;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="-161.47888"
-       y="367.54095"
+       style="font-size:82.00000763px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;opacity:0.81999972;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="170.51559"
+       y="276.2038"
        id="text2445"
-       transform="matrix(1.0201689,-0.7369466,0.6784752,0.4901149,0,0)"
        inkscape:export-filename="C:\Users\lasconic\Desktop\splash1.jpg.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-ydpi="90"
+       transform="matrix(0.8780434,-0.478581,0.478581,0.8780434,0,0)"><tspan
          sodipodi:role="line"
          id="tspan2447"
-         x="-161.47888"
-         y="367.54095"
-         style="font-size:82.46215057px;fill:#808080">Unstable </tspan><tspan
+         x="184.7695"
+         y="276.2038"
+         style="font-size:82.00000763px;font-weight:bold;text-align:center;text-anchor:middle;fill:#808080;-inkscape-font-specification:Bitstream Vera Sans Bold">Unstable </tspan><tspan
          sodipodi:role="line"
-         x="-161.47888"
-         y="470.61865"
+         x="170.51558"
+         y="378.7038"
          id="tspan2449"
-         style="font-size:82.46215057px;fill:#808080">Prerelease</tspan></text>
+         style="font-size:82.00000763px;font-weight:bold;text-align:center;text-anchor:middle;fill:#808080;-inkscape-font-specification:Bitstream Vera Sans Bold">Prerelease</tspan></text>
   </g>
 </svg>
