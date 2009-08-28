@@ -1,5 +1,9 @@
 27.aug (ws)
       - fixes for cross stave beams
+      (db)
+      - fix capitalization for new strings
+      - fix issue with Edit > Select All
+      - minor changes to splash screen
 26.aug (ws)
       - new selection dialog: element-properties->select->other
       - Before saving a file check for write permission. This gives a better error message

@@ -223,10 +223,10 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
       popup->addSeparator();
-      QMenu* selMenu = popup->addMenu(tr("Select..."));
-      selMenu->addAction(getAction("select-all"));
-      selMenu->addAction(getAction("select-staff"));
-      a = selMenu->addAction(tr("more..."));
+      QMenu* selMenu = popup->addMenu(tr("Select"));
+      selMenu->addAction(getAction("select-similar"));
+      selMenu->addAction(getAction("select-similar-staff"));
+      a = selMenu->addAction(tr("More..."));
       a->setData("select-dialog");
       popup->addSeparator();
       obj->genPropertyMenu(popup);
