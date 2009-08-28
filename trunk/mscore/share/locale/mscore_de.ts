@@ -4,11 +4,6 @@
 <context>
     <name></name>
     <message>
-        <source>system</source>
-        <translatorcomment>System</translatorcomment>
-        <translation>System</translation>
-    </message>
-    <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation></translation>
     </message>
@@ -103,6 +98,10 @@
     <message>
         <source>RomÃ¢nÄ</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">System</translation>
     </message>
 </context>
 <context>
@@ -252,6 +251,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Staff Properties...</source>
         <translation>Eigenschaften Notenzeile</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1734,6 +1741,10 @@ space unit</extracomment>
     <message>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <source>show repeat bar tips</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4406,7 +4417,7 @@ before closing?</source>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">doppelkreuz</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -4418,7 +4429,7 @@ before closing?</source>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">doppel-b</translation>
     </message>
     <message>
         <source>voice 1</source>
@@ -4932,6 +4943,22 @@ before closing?</source>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5369,28 +5396,12 @@ before closing?</source>
         <translation>Wähle Hintergrundtapete</translation>
     </message>
     <message>
-        <source>Choose Synthesizer Sound Font</source>
-        <translation>Wähle Soundfont für Synthesizer</translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
-        <translation>Standard Instrumentenliste auswählen</translation>
-    </message>
-    <message>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Instrumentenliste (*.xml);;All (*)</translation>
     </message>
     <message>
-        <source>Choose score to start with</source>
-        <translation>Auswahl der Partitur, mit der MuseScore startet</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore Datei (*.msc);;All (*)</translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation>Auswählen des Arbeitsverzeichnis</translation>
     </message>
     <message>
         <source>default</source>
@@ -5399,6 +5410,22 @@ before closing?</source>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
         <translation>Soundfont Dateien (*.sf2 *.SF2);;Alle (*)</translation>
+    </message>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6394,6 +6421,12 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Eine Kopie sichern</translation>
     </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6444,6 +6477,53 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>Time Signature Announce</source>
         <translation>Taktart Ankündigung</translation>
+    </message>
+</context>
+<context>
+    <name>SelectDialog</name>
+    <message>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished">Aktion</translation>
+    </message>
+    <message>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6838,6 +6918,10 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Eigenschaften Text</translation>
+    </message>
+    <message>
+        <source>apply to all elements of same type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8368,14 +8452,6 @@ linke Klammer</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket ticks up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket ticks down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>acc old ee</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8422,6 +8498,22 @@ linke Klammer</translation>
     <message>
         <source>dot dot</source>
         <translation>Punkt Punkt</translation>
+    </message>
+    <message>
+        <source>bracket tips right up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

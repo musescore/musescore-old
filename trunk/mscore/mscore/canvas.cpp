@@ -248,9 +248,9 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             if (startEdit(obj))
                   return;
             }
-      else if (cmd == "select-all")
+      else if (cmd == "select-similar")
             score()->selectSimilar(obj, false);
-      else if (cmd == "select-staff")
+      else if (cmd == "select-similar-staff")
             score()->selectSimilar(obj, true);
       else if (cmd == "select-dialog")
             score()->selectElementDialog(obj);

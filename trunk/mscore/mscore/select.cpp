@@ -878,6 +878,9 @@ struct ElementPattern {
 static void collectMatch(void* data, Element* e)
       {
       ElementPattern* p = static_cast<ElementPattern*>(data);
+/*      if (p->type == e->type() && p->subtype != e->subtype())
+            printf("%s subtype %d does not match\n", e->name(), e->subtype());
+      */
       if (p->type != e->type() || p->subtype != e->subtype())
             return;
       if (p->staff != -1 && p->staff != e->staffIdx())
@@ -909,8 +912,6 @@ static void collectMatch(void* data, Element* e)
 
 void Score::selectSimilar(Element* e, bool sameStaff)
       {
-      printf("selectSimilar %s\n", e->name());
-
       ElementPattern pattern;
       pattern.type    = e->type();
       pattern.subtype = e->subtype();
@@ -970,8 +971,12 @@ void Score::selectElementDialog(Element* e)
             ElementPattern pattern;
             sd.setPattern(&pattern);
             scanElements(&pattern, collectMatch);
-            if (sd.doReplace())
+            if (sd.doReplace()) {
                   select(0, SELECT_SINGLE, 0);
+printf("select %d elements\n", pattern.el.size());
+                  foreach(Element* ee, pattern.el)
+                        select(ee, SELECT_ADD, 0);
+                  }
             else if (sd.doSubtract()) {
                   QList<Element*> sl(*selection()->elements());
                   foreach(Element* ee, pattern.el)
@@ -980,7 +985,7 @@ void Score::selectElementDialog(Element* e)
                   foreach(Element* ee, sl)
                         select(ee, SELECT_ADD, 0);
                   }
-            else {
+            else if (sd.doAdd()) {
                   foreach(Element* ee, pattern.el)
                         select(ee, SELECT_ADD, 0);
                   }

@@ -18,6 +18,12 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+if (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-fexceptions -g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+else (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-fexceptions -g -Wall -Wextra -Winvalid-pch")
+endif (GCC_VISIBILITY)
+
 QT4_WRAP_CPP (mocs
       qtsingleapplication.h
       qtlocalpeer.h

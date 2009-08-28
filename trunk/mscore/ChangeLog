@@ -1,3 +1,8 @@
+28.aug (ws)
+      - fix chord table (root name was displayed twice)
+      - fix select mode "replace selection"
+      - fix "select similar" for slur
+      - fix duplet creation
 27.aug (ws)
       - fixes for cross stave beams
       (db)

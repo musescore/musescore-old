@@ -183,12 +183,11 @@ QFont fontId2font(int fontId)
 //---------------------------------------------------------
 
 Sym::Sym(const char* name, const QChar& c, int fid)
-   : _code(c), fontId(fid), _name(name)
+   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
       {
-      _font = new QFont(fontId2font(fontId));
-      QFontMetricsF fm(*_font);
+      QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
-            printf("Sym: character 0x%x <%s> are not in font <%s>\n", _code.unicode(), _name, qPrintable(_font->family()));
+            printf("Sym: character 0x%x <%s> are not in font <%s>\n", _code.unicode(), _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
       }
@@ -223,7 +222,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-      painter.setFont(*_font);
+      painter.setFont(_font);
       painter.drawText(QPointF(x, y) * imag, QString(_code));
       painter.scale(imag, imag);
       }
@@ -236,7 +235,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       {
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-      painter.setFont(*_font);
+      painter.setFont(_font);
       painter.drawText(QPointF(x, y) * imag, QString(n, _code));
       painter.scale(imag, imag);
       }

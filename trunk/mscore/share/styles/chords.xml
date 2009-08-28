@@ -36,9 +36,6 @@
          voicing  example voicing of chord
 -->
 
-  <renderRoot>:n m:0:-1 :a m:.5:1</renderRoot>
-  <renderBase>m:0:2 / :n :a</renderBase>
-
   <chord id="1">
     <name></name>
     <xml>major</xml>
