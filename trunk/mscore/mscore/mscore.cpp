@@ -394,7 +394,7 @@ MuseScore::MuseScore()
       a->setChecked(_speakerEnabled);
 
       getAction("play")->setCheckable(true);
-      getAction("pause")->setCheckable(true);
+      //getAction("pause")->setCheckable(true);
       a = getAction("repeat");
       a->setCheckable(true);
       a->setChecked(true);
@@ -437,7 +437,6 @@ MuseScore::MuseScore()
 #endif
       transportTools->addSeparator();
       transportTools->addAction(getAction("rewind"));
-      transportTools->addAction(getAction("pause"));
       transportTools->addAction(getAction("play"));
       transportTools->addSeparator();
       a = getAction("repeat");

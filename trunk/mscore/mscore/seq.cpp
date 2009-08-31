@@ -317,9 +317,7 @@ void Seq::start()
       QAction* a = getAction("play");
       if (!a->isChecked()) {
             if (pauseState) {
-                  guiStop();
-                  QAction* a = getAction("pause");
-                  a->setChecked(false);
+                  guiStop();                  
                   pauseState = false;
                   state = STOP;
                   }
