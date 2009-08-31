@@ -378,30 +378,30 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     if language_code == 'en':
         url = 'http://musescore.org/en/print/book/export/html/51'
         internal = 'http://musescore.org/en/handbook'
-    elif language_code == 'nl':
-        url = 'http://musescore.org/nl/print/book/export/html/375'
-        internal = 'http://musescore.org/nl/handboek'
     elif language_code == 'de':
         url = 'http://musescore.org/de/print/book/export/html/98'
         internal = 'http://musescore.org/de/handbuch'
     elif language_code == 'es':
         url = 'http://musescore.org/es/print/book/export/html/137'
         internal = 'http://musescore.org/es/manual'
-    elif language_code == 'gl':
-        url = 'http://musescore.org/gl/print/book/export/html/534'
-        internal = 'http://musescore.org/gl/manual-galego'
     elif language_code == 'fi':
         url = 'http://musescore.org/fi/print/book/export/html/1057'
         internal = 'http://musescore.org/fi/käsikirja' #k%e4sikirja'
     elif language_code == 'fr':
         url = 'http://musescore.org/fr/print/book/export/html/115'
         internal = 'http://musescore.org/fr/manuel'
+    elif language_code == 'gl':
+        url = 'http://musescore.org/gl/print/book/export/html/534'
+        internal = 'http://musescore.org/gl/manual-galego'
     elif language_code == 'it':
         url = 'http://musescore.org/it/print/book/export/html/772'
         internal = 'http://musescore.org/it/manuale'
     elif language_code == 'nb':
         url = 'http://musescore.org/nb/print/book/export/html/2122'
         internal = 'http://musescore.org/nb/håndbok' #h%C3%A5ndbok'
+    elif language_code == 'nl':
+        url = 'http://musescore.org/nl/print/book/export/html/375'
+        internal = 'http://musescore.org/nl/handboek'
     elif language_code == 'pl':
         url = 'http://www.musescore.org/pl/print/book/export/html/2495'
         internal = 'http://www.musescore.org/pl/podręcznik' #podr%C4%99cznik'

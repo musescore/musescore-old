@@ -728,8 +728,8 @@ MuseScore::MuseScore()
       QMenu* menuHelp = mb->addMenu(tr("&Help"));
       menuHelp->setObjectName("Help");
 
-      menuHelp->addAction(tr("Local Manual"),  this, SLOT(helpBrowser()), Qt::Key_F1);
-      menuHelp->addAction(tr("Online Manual"), this, SLOT(helpBrowser1()));
+      menuHelp->addAction(tr("Local &Handbook"),  this, SLOT(helpBrowser()), Qt::Key_F1);
+      menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
       menuHelp->addSeparator();
@@ -808,7 +808,7 @@ void MuseScore::helpBrowser()
       else
             lang = localeName.left(2);
       if (debugMode)
-            printf("open manual for language <%s>\n", qPrintable(lang));
+            printf("open handbook for language <%s>\n", qPrintable(lang));
 
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
@@ -817,8 +817,9 @@ void MuseScore::helpBrowser()
                   }
             mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
             if (!mscoreHelp.isReadable()) {
-                  QString info(tr("MuseScore online manual not found at: "));
+                  QString info(tr("MuseScore handbook not found at: \n"));
                   info += mscoreHelp.filePath();
+                  info += tr("\n\nFrom the \"Help\" menu try choosing \"Online Handbook\" instead.");
                   QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
                   return;
                   }
@@ -842,26 +843,32 @@ void MuseScore::helpBrowser1()
       else
             lang = localeName.left(2);
       if (debugMode)
-            printf("open online manual for language <%s>\n", qPrintable(lang));
-      QString help("http://musescore.org/en/handbook");
+            printf("open online handbook for language <%s>\n", qPrintable(lang));
+      QString help("http://www.musescore.org/en/handbook");
       if (lang == "de")
-            help = QString::fromUtf8("http://musescore.org/de/handbuch");
-      else if (lang == "nl")
-            help = QString::fromUtf8("http://musescore.org/nl/handboek");
-      else if (lang == "fr")
-            help = QString::fromUtf8("http://musescore.org/fr/manuel");
-      else if (lang == "gl")
-            help = QString::fromUtf8("http://musescore.org/gl/manual");
-      else if (lang == "it")
-            help = QString::fromUtf8("http://musescore.org/it/manuale-0");
-      else if (lang == "pt")
-            help = QString::fromUtf8("http://musescore.org/pt-br/manual");
-      else if (lang == "ru")
-            help = QString::fromUtf8("http://musescore.org/ru/cправочник");
+            help = QString::fromUtf8("http://www.musescore.org/de/handbuch");
       else if (lang == "es")
-            help = QString::fromUtf8("http://musescore.org/es/manual");
+            help = QString::fromUtf8("http://www.musescore.org/es/manual");
+      else if (lang == "fi")
+            help = QString::fromUtf8("http://www.musescore.org/fi/käsikirja");
+      else if (lang == "fr")
+            help = QString::fromUtf8("http://www.musescore.org/fr/manuel");
+      else if (lang == "gl")
+            help = QString::fromUtf8("http://www.musescore.org/gl/manual");
+      else if (lang == "it")
+            help = QString::fromUtf8("http://www.musescore.org/it/manuale");
+      else if (lang == "nb")
+            help = QString::fromUtf8("http://www.musescore.org/nb/håndbok");
+      else if (lang == "nl")
+            help = QString::fromUtf8("http://www.musescore.org/nl/handboek");
+      else if (lang == "pl")
+            help = QString::fromUtf8("http://www.musescore.org/pl/podręcznik");
+      else if (lang == "pt")
+            help = QString::fromUtf8("http://www.musescore.org/pt-br/manual");
+      else if (lang == "ru")
+            help = QString::fromUtf8("http://www.musescore.org/ru/cправочник");
       else if (lang == "tr")
-            help = QString::fromUtf8("http://musescore.org/tr/kullanım-0");
+            help = QString::fromUtf8("http://www.musescore.org/tr/kullanım");
       QUrl url(help);
       QDesktopServices::openUrl(url);
       }
@@ -1532,6 +1539,7 @@ int main(int argc, char* argv[])
       if (!converterMode && !pluginMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
+            sc->setWindowTitle(QString("MuseScore Startup"));
             sc->setWindowFlags(Qt::FramelessWindowHint);
             sc->show();
             app.processEvents();
