@@ -1,3 +1,6 @@
+30.aug (db)
+      - remove pause button (equivalent functionality already in play button)
+      - add Ctrl+Space shortcut for start and stopping playback
 28.aug (ws)
       - fix chord table (root name was displayed twice)
       - fix select mode "replace selection"

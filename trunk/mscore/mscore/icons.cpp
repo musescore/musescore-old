@@ -58,7 +58,7 @@ QIcon noteEntryIcon;
 
 QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
-QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon, repeatIcon;
+QIcon midiinIcon, speakerIcon, startIcon, playIcon, repeatIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon, abeamIcon;
 QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 QIcon exitIcon, viewmagIcon;
@@ -165,7 +165,6 @@ void genIcons()
       speakerIcon    = QIcon(":/data/speaker.svg");
       startIcon      = QIcon(":/data/start.svg");
       playIcon       = QIcon(":/data/play.svg");
-      pauseIcon      = QIcon(":/data/pause.svg");
       sbeamIcon      = QIcon(":/data/sbeam.svg");
       mbeamIcon      = QIcon(":/data/mbeam.svg");
       nbeamIcon      = QIcon(":/data/nbeam.svg");

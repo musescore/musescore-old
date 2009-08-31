@@ -1792,8 +1792,6 @@ void Score::cmd(const QAction* a)
             }
       else if (cmd == "mag")
             canvas()->magCanvas();
-      else if (cmd == "pause")
-            seq->pause();
       else if (cmd == "play")
             seq->start();
       else if (cmd == "repeat")
