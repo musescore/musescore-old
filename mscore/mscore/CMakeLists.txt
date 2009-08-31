@@ -315,7 +315,7 @@ endif (QT45)
 
 endif (MINGW)
 
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
 # command line utilities are not build for windows
 #
 #======================================
@@ -341,4 +341,4 @@ if (NOT MINGW)
    set_target_properties( xml2smf
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
-endif (NOT MINGW)
+endif (NOT MINGW AND NOT APPLE)
