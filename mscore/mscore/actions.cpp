@@ -1583,21 +1583,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
          QT_TR_NOOP("player play"),
-         0,
+         Qt::CTRL + Qt::Key_Space,
          Qt::WindowShortcut,
          QT_TR_NOOP("Play"),
-         QT_TR_NOOP("start sequencer play"),
+         QT_TR_NOOP("Start or stop playback"),
          &playIcon
-         ),
-      Shortcut(
-         STATE_PLAY,
-         "pause",
-         QT_TR_NOOP("toggle pause"),
-         Qt::Key_Space,
-         Qt::ApplicationShortcut,
-         QT_TR_NOOP("Pause"),
-         QT_TR_NOOP("toggle pause"),
-         &pauseIcon
          ),
       Shortcut(
          STATE_PLAY,

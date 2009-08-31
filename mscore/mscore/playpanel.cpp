@@ -46,7 +46,6 @@ PlayPanel::PlayPanel(QWidget* parent)
       volumeSlider->setPageStep(lineStep * 10);
       volumeSlider->setInvertedAppearance(true);  // cannot be set from designer
 
-      pauseButton->setDefaultAction(getAction("pause"));
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
 
