@@ -380,8 +380,12 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       bool b1 = ev->button() == Qt::LeftButton;
       bool b3 = ev->button() == Qt::RightButton;
 
-      if (ev->buttons() != ev->button()) {
-            if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
+      if (ev->buttons() != ev->button()) {			
+#ifdef Q_WS_MAC			
+			//allow control click
+			if (! (b3 && ev->buttons() == (Qt::LeftButton))){
+#endif
+			if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
                   ++level;
                   mouseReleaseEvent(ev);
                   b1 = true;
@@ -390,6 +394,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             else
                   return;
             }
+#ifdef Q_WS_MAC			
+			}
+#endif
 
       if (state == MAG) {
             if (b1)
@@ -416,7 +423,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       //-----------------------------------------
       //  context menus
       //-----------------------------------------
-
       if (b3) {
             if (dragObject) {
                   ElementType type = dragObject->type();
