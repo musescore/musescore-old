@@ -711,6 +711,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
                         nr = new Rest(this);
                         nr->setTrack(track);
                         ncr = (Rest*)nr;
+                        ncr->setDuration(d);
                         }
                   else {
                         Note* note = new Note(this);

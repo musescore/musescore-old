@@ -2397,7 +2397,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
-                  cr->setDots(dots);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
@@ -2412,6 +2411,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               durationType.setType(Duration::V_QUARTER);
                         cr->setDuration(durationType);
                         }
+                  cr->setDots(dots);
                   Segment* s = measure->getSegment(st, cr->tick());
                   s->add(cr);
                   }
