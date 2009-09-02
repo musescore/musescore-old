@@ -670,7 +670,11 @@ NewWizard::NewWizard(QWidget* parent)
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));
-	  setOption(QWizard::NoCancelButton, false);
+    setOption(QWizard::NoCancelButton, false);
+    setOption(QWizard::CancelButtonOnLeft, true);
+    setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
+    setOption(QWizard::HaveNextButtonOnLastPage, true);
+    
 
       p1 = new NewWizardPage1;
       p2 = new NewWizardPage2;
@@ -683,9 +687,10 @@ NewWizard::NewWizard(QWidget* parent)
       setPage(Page_Template, p4);
       setPage(Page_Timesig, p3);
       setPage(Page_Keysig, p5);
+      p2->setFinalPage(true);
       p3->setFinalPage(true);
-      p4->setFinalPage(false);
-      p5->setFinalPage(false);
+      p4->setFinalPage(true);
+      p5->setFinalPage(true);
       resize(700, 500);
       }
 
@@ -703,7 +708,7 @@ int NewWizard::nextId() const
             case Page_Keysig:
                   return Page_Timesig;
             case Page_Template:
-                  return Page_Timesig;
+                  return Page_Keysig;
             case Page_Timesig:
             default:
                   return -1;
