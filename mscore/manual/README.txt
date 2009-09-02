@@ -50,6 +50,10 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+* Compatibility update: add "www." back to handbook links (HTML from website changed)
+* Add "./" to start of image src's so that OpenOffice.org can understand
+
+Version 1.3 (August 2009):
 * Compatibility update: remove "www." from handbook links (HTML from website changed)
 * Update CSS for release of version 0.9.5 and to embed DejaVuSans font for Mac shortcut symbols
 * Add Norwegian and wrote instructions for adding new languages

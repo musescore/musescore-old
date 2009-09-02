@@ -1,3 +1,7 @@
+1.sep (db)
+      - allow early finish of new score wizard
+      - fix missing key signature page after template page in new score wizard
+      - compatibility updates for handbook script (website and OpenOffice.org)
 31.aug (db)
       - fixes for handbook menu items
       - add window title during splash screen
