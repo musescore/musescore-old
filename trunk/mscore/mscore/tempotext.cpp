@@ -55,8 +55,13 @@ void TempoText::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "tempo")
-                  setTempo(e.text().toDouble());
+            if (tag == "tempo"){
+                  double tpo = e.text().toDouble();
+                  setTempo(tpo);
+                  TempoList* tl   = score()->tempomap;
+                  if(tl)
+                    tl->addTempo(tick(), tpo);
+            }
             else if (!Text::readProperties(e))
                   domError(e);
             }
