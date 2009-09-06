@@ -5,103 +5,103 @@
     <name></name>
     <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation>Ø§ÙØ¹Ø±Ø¨ÙØ© - Arabe</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Czech - Tchèque</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Dansk</source>
-        <translation>Dansk - Danois</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Nederlands</source>
-        <translation>Nederlands - Néerlandais</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Norsk</source>
-        <translation>Norsk - Norvégien</translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation>English (GB) - Anglais (GB)</translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation>English (US) - Anglais (US)</translation>
+        <translation></translation>
     </message>
     <message>
         <source>EspaÃ±ol</source>
-        <translation>Español - Espagnol</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Finnish</source>
-        <translation>Finnish - Finnois</translation>
+        <translation></translation>
     </message>
     <message>
         <source>FranÃ§ais</source>
-        <translation>Français</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Galego</source>
-        <translation>Galego - Galicien</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Deutsch</source>
-        <translation>Deutsch - Allemand</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation>Hindi - Hindi</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation>Hungary - Hongrois</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Italiano</source>
-        <translation>Italiano - Italien</translation>
+        <translation></translation>
     </message>
     <message>
         <source>PortuguÃªs</source>
-        <translation>Português - Portuguais</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Brasilian PortuguÃªs</source>
-        <translation>Brasileiro - Brésilien</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation>Русский - Russe</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Svenska</source>
-        <translation>Svenska - Suédois</translation>
+        <translation></translation>
     </message>
     <message>
         <source>TÃ¼rkÃ§e</source>
-        <translation>Türk - Turc</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ukrajina</source>
-        <translation>Ukrajina - Ukrainien</translation>
+        <translation></translation>
     </message>
     <message>
         <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation>ç¹é«ä¸­æ (å°ç£) -Polonais</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Polski</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>RomÃ¢nÄ</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Système</translation>
+        <translation>Système</translation>
     </message>
 </context>
 <context>
@@ -120,8 +120,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r2020 translated JLWaltener - 15/08/2009 - QT Linguist v4.5.2</translatorcomment>
-        <translation>Révision : 2020</translation>
+        <translatorcomment>r2054 translated JLWaltener - 06/09/2009 - QT Linguist v4.5.2</translatorcomment>
+        <translation>Révision : 2054</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -255,11 +255,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus...</translation>
     </message>
 </context>
 <context>
@@ -1613,7 +1613,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Articulations, Ornements</translation>
+        <translation>Articulations / Ornements</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1742,7 +1742,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show repeat bar tips</source>
-        <translation type="unfinished"></translation>
+        <translation>montrer les pointes des barres de répétition</translation>
     </message>
 </context>
 <context>
@@ -3087,7 +3087,7 @@ failed: </source>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Articulations, Ornements</translation>
+        <translation>Articulations / Ornements</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
@@ -4940,23 +4940,23 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers supportés (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;Fichiers MuseScore (*.mscz *.mscx *.msc);;Fichiers MusicXML (*.xml *.mxl);;Fichiers MIDI (*.mid *.kar);;Fichiers Muse Data (*.md);;Fichiers Capella (*.cap);;Fichiers BB &lt;expérimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner tous les éléments similaires</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les éléments similaires</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner tous les éléments similaires de la même portée</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les éléments similaires de la même portée</translation>
     </message>
 </context>
 <context>
@@ -5146,7 +5146,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Métrique</translation>
+        <translation>Echelle</translation>
     </message>
     <message>
         <source>Space</source>
@@ -5412,19 +5412,19 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la SoundFont du synthétiseur</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le répertoire de travail</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la liste d&apos;instruments</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la partition de démarrage</translation>
     </message>
 </context>
 <context>
@@ -5623,7 +5623,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Sound Font</source>
-        <translation>Sound Font</translation>
+        <translation>SoundFont</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -5951,7 +5951,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Métrique</translation>
+        <translation>Echelle</translation>
     </message>
     <message>
         <source>Space</source>
@@ -5977,6 +5977,7 @@ avant de fermer ?</translation>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
+        <translatorcomment>Frequency measure = Hz = Heinrich Hertz - German physician - 1857 / 1894</translatorcomment>
         <translation>Hz</translation>
     </message>
 </context>
@@ -6425,7 +6426,9 @@ failed: </source>
         <source>The following file is locked: 
 %1 
 Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier suivant est verrouillé :
+%1 
+Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
 </context>
 <context>
@@ -6483,47 +6486,47 @@ Try saving to a different location.</source>
     <name>SelectDialog</name>
     <message>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Sélection</translation>
     </message>
     <message>
         <source>Search for</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type d&apos;élément :</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>même portée</translation>
     </message>
     <message>
         <source>same voice</source>
-        <translation type="unfinished"></translation>
+        <translation>même voix</translation>
     </message>
     <message>
         <source>same system</source>
-        <translation type="unfinished"></translation>
+        <translation>même système</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation type="unfinished">Action</translation>
+        <translation>Action</translation>
     </message>
     <message>
         <source>replace selection</source>
-        <translation type="unfinished"></translation>
+        <translation>remplacer la sélection</translation>
     </message>
     <message>
         <source>add to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>ajouter à la sélection</translation>
     </message>
     <message>
         <source>search in selection</source>
-        <translation type="unfinished"></translation>
+        <translation>rechercher dans la sélection</translation>
     </message>
     <message>
         <source>subtract from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>retirer de la sélection</translation>
     </message>
 </context>
 <context>
@@ -6921,7 +6924,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation type="unfinished"></translation>
+        <translation>appliquer à tous les éléments de même type</translation>
     </message>
 </context>
 <context>
@@ -7371,107 +7374,107 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">Aucune</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">dièse</translation>
+        <translation>dièse</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">bémol</translation>
+        <translation>bémol</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">double dièse</translation>
+        <translation>double dièse</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">double bémol</translation>
+        <translation>double bémol</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">bécarre</translation>
+        <translation>bécarre</translation>
     </message>
     <message>
         <source>(sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation>(dièse)</translation>
     </message>
     <message>
         <source>(flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>(bémol)</translation>
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation>(double dièse)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>(double bémol)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation type="unfinished"></translation>
+        <translation>(bécarre)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation type="unfinished"></translation>
+        <translation>[dièse]</translation>
     </message>
     <message>
         <source>[flat]</source>
-        <translation type="unfinished"></translation>
+        <translation>[bémol]</translation>
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation type="unfinished"></translation>
+        <translation>[double dièse]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation type="unfinished"></translation>
+        <translation>[double bémol]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation type="unfinished"></translation>
+        <translation>[bécarre]</translation>
     </message>
     <message>
         <source>flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-slash</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-slash 2</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-miroir 2</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-miroir</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-miroir-slash</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>bémol-bémol-slash</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>dièse-slash</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>dièse-slash 2</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
+        <translation>dièse-slash 3</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
+        <translation>dièse-slash 4</translation>
     </message>
 </context>
 <context>
@@ -8503,19 +8506,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket tips right up</source>
-        <translation type="unfinished"></translation>
+        <translation>pointe de crochet en haut à droite</translation>
     </message>
     <message>
         <source>bracket tips right down</source>
-        <translation type="unfinished"></translation>
+        <translation>pointe de crochet en bas à droite</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished"></translation>
+        <translation>pointe de crochet en haut à gauche</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished"></translation>
+        <translation>pointe de crochet en bas à gauche</translation>
     </message>
 </context>
 </TS>
