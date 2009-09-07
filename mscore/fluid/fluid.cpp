@@ -99,7 +99,10 @@ void Fluid::init(int sr)
 
       sample_rate = double(sr);
       sfont_id    = 0;
-      _gain       = .1;
+      _gain       = .2;
+      _reverbGain = .2;
+      _chorusGain = .2;
+
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
       for (int i = 0; i < 128; ++i)
@@ -562,6 +565,10 @@ void Fluid::one_block()
                   v->write(left_buf, right_buf, fx_buf[0], fx_buf[1]);
             }
       if (silentBlocks > 0) {
+            for (int i = 0; i < FLUID_BUFSIZE; ++i) {
+                  fx_buf[0][i] *= _reverbGain;
+                  fx_buf[1][i] *= _chorusGain;
+                  }
             reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
             chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
             }
@@ -962,6 +969,11 @@ void Fluid::remove_bank_offset(int sfont_id)
 	BankOffset* bank_offset = get_bank_offset0(sfont_id);
 	if (bank_offset)
 		bank_offsets.removeAll(bank_offset);
+      }
+
+QString Fluid::soundFont() const
+      {
+      return get_sfont(0)->get_name();
       }
 
 /**

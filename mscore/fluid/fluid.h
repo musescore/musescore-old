@@ -313,6 +313,9 @@ class Fluid : public Synth {
       unsigned int sfont_id;
 
       double _gain;                       // master gain
+      double _chorusGain;
+      double _reverbGain;
+
       QList<Channel*> channel;            // the channels
 
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
@@ -328,10 +331,17 @@ class Fluid : public Synth {
    public:
       Fluid();
       ~Fluid();
-      virtual void init(int sr);
+      virtual void init(int sampleRate);
       virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
+      virtual QString soundFont() const;
       virtual void play(const Event&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
+      virtual double masterGain() const      { return _gain; }
+      virtual void setMasterGain(double val) { _gain = val;  }
+      virtual double chorusGain() const      { return _chorusGain; }
+      virtual void setChorusGain(double val) { _chorusGain = val;  }
+      virtual double reverbGain() const      { return _reverbGain; }
+      virtual void setReverbGain(double val) { _reverbGain = val;  }
 
       bool log(const char* fmt, ...);
 
@@ -371,8 +381,9 @@ class Fluid : public Synth {
       Preset* get_channel_preset(int chan) const { return channel[chan]->preset(); }
       SFont* get_sfont_by_name(const QString& name);
       SFont* get_sfont_by_id(unsigned int id);
-      SFont* get_sfont(unsigned int num)         { return sfonts[num];   }
-      int sfcount() const                        { return sfonts.size(); }
+      SFont* get_sfont(unsigned int num)             { return sfonts[num];   }
+      const SFont* get_sfont(unsigned int num) const { return sfonts[num];   }
+      int sfcount() const                            { return sfonts.size(); }
       void remove_sfont(SFont* sf);
       int add_sfont(SFont* sf);
       int sfreload(unsigned int id);
@@ -411,8 +422,8 @@ class Fluid : public Synth {
       float act2hz(float c)     { return 8.176 * pow(2.0, (double) c / 1200.0); }
       float ct2hz(float cents)  { return act2hz(qBound(1500.0f, cents, 13500.0f)); }
 
-      float masterTuning() const     { return _masterTuning; }
-      virtual void setMasterTuning(float f)  { _masterTuning = f; }
+      virtual double masterTuning() const     { return _masterTuning; }
+      virtual void setMasterTuning(double f)  { _masterTuning = f;    }
 
       QString error() const { return _error; }
 

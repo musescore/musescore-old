@@ -239,6 +239,9 @@ bool Seq::init()
                   return false;
                   }
             synth->setMasterTuning(preferences.tuning);
+            synth->setMasterGain(preferences.masterGain);
+            synth->setChorusGain(preferences.chorusGain);
+            synth->setReverbGain(preferences.reverbGain);
             }
 
       if (!driver->start()) {
@@ -317,7 +320,7 @@ void Seq::start()
       QAction* a = getAction("play");
       if (!a->isChecked()) {
             if (pauseState) {
-                  guiStop();                  
+                  guiStop();
                   pauseState = false;
                   state = STOP;
                   }

@@ -118,6 +118,48 @@ class ColorLabelPlugin : public QObject, public AwlPlugin {
       };
 
 //---------------------------------------------------------
+//   SliderPlugin
+//---------------------------------------------------------
+
+class SliderPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      SliderPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/slider.h"; }
+      QString name() const { return "Awl::Slider"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
+//   VolSliderPlugin
+//---------------------------------------------------------
+
+class VolSliderPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      VolSliderPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/volslider.h"; }
+      QString name() const { return "Awl::VolSlider"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
+//   MeterSliderPlugin
+//---------------------------------------------------------
+
+class MeterSliderPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      MeterSliderPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/mslider.h"; }
+      QString name() const { return "Awl::MeterSlider"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
 //   AwlPlugins
 //---------------------------------------------------------
 

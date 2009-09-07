@@ -1,3 +1,6 @@
+7.sep (ws)
+      - new control panel for synthesizer featuring an audio mixer for reverb/chorus/master
+        volume; no restart necessary anymore after soundfont changes
 2.sep (la)
       - fix tempo import from mscx/mscz. Visible on midi export
 1.sep (db)
@@ -10,7 +13,7 @@
       - fixes for handbook menu items
       - add window title during splash screen
        (la)
-      - fix dynamics display on mac (mscore1 *20*) 
+      - fix dynamics display on mac (mscore1 *20*)
 30.aug (db)
       - remove pause button (equivalent functionality already in play button)
       - add Ctrl+Space shortcut for start and stopping playback

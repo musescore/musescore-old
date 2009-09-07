@@ -49,6 +49,7 @@ class Xml;
 class MagBox;
 class NewWizard;
 class ExcerptsDialog;
+class SynthControl;
 
 class QScriptEngineDebugger;
 
@@ -201,6 +202,7 @@ class MuseScore : public QMainWindow {
 
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
+      SynthControl* synthControl;
       Inspector* inspector;
       MeasureListEditor* measureListEdit;
       PageSettings* pageSettings;
@@ -270,6 +272,7 @@ class MuseScore : public QMainWindow {
       void showPlayPanel(bool);
       void showNavigator(bool);
       void showMixer(bool);
+      void showSynthControl(bool);
 
    private slots:
       void autoSaveTimerTimeout();
@@ -302,6 +305,7 @@ class MuseScore : public QMainWindow {
       void clipboardChanged();
       void drumPaletteSelected(int);
       void endSearch();
+      void closeSynthControl();
 
    public slots:
       void setCurrentScore(int);

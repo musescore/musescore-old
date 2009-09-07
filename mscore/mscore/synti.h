@@ -44,11 +44,20 @@ class Synth {
       Synth() {}
       virtual ~Synth() {}
       virtual void init(int sampleRate) = 0;
-      virtual void setMasterTuning(float) {}
+      virtual void setMasterTuning(double) {}
+      virtual double masterTuning() const { return 440.0; }
       virtual bool loadSoundFont(const QString&) = 0;
+      virtual QString soundFont() const = 0;
       virtual void process(unsigned, float*, float*, int) = 0;
       virtual void play(const Event&) = 0;
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const = 0;
+
+      virtual double masterGain() const { return 1.0; }
+      virtual void setMasterGain(double) {}
+      virtual double chorusGain() const { return 1.0; }
+      virtual void setChorusGain(double) {}
+      virtual double reverbGain() const { return 1.0; }
+      virtual void setReverbGain(double) {}
       };
 
 #endif

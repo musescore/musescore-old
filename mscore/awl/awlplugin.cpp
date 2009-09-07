@@ -23,6 +23,8 @@
 #include "panknob.h"
 #include "midipanknob.h"
 #include "colorlabel.h"
+#include "volslider.h"
+#include "mslider.h"
 
 #include <QtCore/QtPlugin>
 #include <QtDesigner/QDesignerCustomWidgetInterface>
@@ -49,6 +51,18 @@ QWidget* ColorLabelPlugin::createWidget(QWidget* parent)
       w->setGeometry(0, 0, 50, 50);
       return w;
       }
+QWidget* SliderPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::Slider(parent);
+      }
+QWidget* VolSliderPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::VolSlider(parent);
+      }
+QWidget* MeterSliderPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::MeterSlider(parent);
+      }
 
 //---------------------------------------------------------
 //   customWidgets
@@ -62,6 +76,9 @@ QList<QDesignerCustomWidgetInterface*> AwlPlugins::customWidgets() const
                << new PanKnobPlugin
                << new MidiPanKnobPlugin
                << new KnobPlugin
+               << new SliderPlugin
+               << new VolSliderPlugin
+               << new MeterSliderPlugin
                << new ColorLabelPlugin
                ;
       return plugins;

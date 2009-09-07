@@ -53,6 +53,7 @@
 #include "voiceselector.h"
 #include "sig.h"
 #include "undo.h"
+#include "synthcontrol.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -230,6 +231,9 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       settings.setValue("lastSaveCopyDirctory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
 
+      if (synthControl)
+            synthControl->updatePreferences();
+
       writeSettings();
       if (inspector)
             inspector->writeSettings();
@@ -247,12 +251,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       //
       // close all toplevel windows (on mac it crashes on quit with these lines)
       //
-	  #ifndef Q_WS_MAC
-	  foreach(QWidget* w, qApp->topLevelWidgets()) {
+#ifndef Q_WS_MAC
+      foreach(QWidget* w, qApp->topLevelWidgets()) {
             if (w != this)
                   w->close();
             }
-	  #endif
+#endif
       }
 
 //---------------------------------------------------------
@@ -306,6 +310,7 @@ MuseScore::MuseScore()
       measuresDialog        = 0;
       insertMeasuresDialog  = 0;
       iledit                = 0;
+      synthControl          = 0;
       inspector             = 0;
       measureListEdit       = 0;
       symbolDialog          = 0;
@@ -694,6 +699,10 @@ MuseScore::MuseScore()
       menuDisplay->addAction(a);
 
       a = getAction("toggle-mixer");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
+
+      a = getAction("synth-control");
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
@@ -1906,6 +1915,8 @@ void MuseScore::cmd(QAction* a)
             showNavigator(a->isChecked());
       else if (cmd == "toggle-mixer")
             showMixer(a->isChecked());
+      else if (cmd == "synth-control")
+            showSynthControl(a->isChecked());
       else if (cmd == "show-keys")
             ;
       else {
@@ -1957,6 +1968,10 @@ void MuseScore::changeState(int val)
                   s->action->setEnabled(cs && cs->selection()->state());
             else if (strcmp(s->xml, "copy") == 0)
                   s->action->setEnabled(cs && cs->selection()->state());
+            else if (strcmp(s->xml, "synth-control") == 0) {
+                  Driver* driver = seq->getDriver();
+                  s->action->setEnabled(driver && driver->getSynth());
+                  }
             else
                   s->action->setEnabled(s->state & val);
             if (val == STATE_DISABLED) {
