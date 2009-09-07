@@ -2011,6 +2011,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("All Similar Elements in Same Staff"),
          QT_TR_NOOP("All Similar Elements in Same Staff")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "synth-control",
+         QT_TR_NOOP("Synthesizer"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Synthesizer"),
+         QT_TR_NOOP("Synthesizer Control")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

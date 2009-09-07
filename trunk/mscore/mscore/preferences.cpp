@@ -100,7 +100,8 @@ QString appStyleSheet()
       "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
-      "PlayPanel QLabel#timeLabel  { font-size: 28pt; font-family: \"San Serif\" }\n"
+      "PlayPanel QLabel#timeLabel      { font-size: 28pt; font-family: \"San Serif\" }\n"
+      "SynthControl QLabel#titleLabel  { font-size: 24pt; font-family: \"San Serif\" }\n"
       "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#relTempo   { font-size: 10pt; font-family: \"San Serif\" }\n"
@@ -224,6 +225,9 @@ void Preferences::init()
       twosided                = true;
       spatium                 = SPATIUM20;
       tuning                  = 440.0f;
+      masterGain              = 0.2;
+      chorusGain              = 0.5;
+      reverbGain              = 0.5;
 
       defaultPlayDuration     = 300;      // ms
       };
@@ -314,6 +318,9 @@ void Preferences::write()
       s.setValue("twosided", twosided);
       s.setValue("spatium", spatium);
       s.setValue("tuning", tuning);
+      s.setValue("masterGain", masterGain);
+      s.setValue("chorusGain", chorusGain);
+      s.setValue("reverbGain", reverbGain);
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
@@ -408,6 +415,9 @@ void Preferences::read()
       twosided               = s.value("twosided", true).toBool();
       spatium                = s.value("spatium", SPATIUM20).toDouble();
       tuning                 = s.value("tuning", 440.0).toDouble();
+      masterGain             = s.value("masterGain", 0.2).toDouble();
+      chorusGain             = s.value("chorusGain", 0.5).toDouble();
+      reverbGain             = s.value("reverbGain", 0.5).toDouble();
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
@@ -701,6 +711,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       twosided->setChecked(p->twosided);
       spatiumEntry->setValue(p->spatium * INCH);
       masterTuning->setValue(p->tuning);
+
       landscape->setChecked(p->landscape);
 
       defaultPlayDuration->setValue(p->defaultPlayDuration);

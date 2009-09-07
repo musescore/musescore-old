@@ -18,10 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
-# set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-# set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
-
 QT4_WRAP_CPP (mocs
       aslider.h
       knob.h
@@ -29,6 +25,9 @@ QT4_WRAP_CPP (mocs
       volknob.h
       midipanknob.h
       colorlabel.h
+      slider.h
+      volslider.h
+      mslider.h
       )
 
 add_custom_command(
@@ -66,6 +65,9 @@ add_library (
       volknob.cpp
       midipanknob.cpp
       colorlabel.cpp
+      slider.cpp
+      volslider.cpp
+      mslider.cpp
       )
 
 set_target_properties( awl
@@ -82,6 +84,9 @@ QT4_WRAP_CPP (mocs2
       midipanknob.h
       awlplugin.h
       colorlabel.h
+      slider.h
+      volslider.h
+      mslider.h
       )
 
 add_library (
@@ -96,6 +101,9 @@ add_library (
       volknob.cpp
       midipanknob.cpp
       colorlabel.cpp
+      slider.cpp
+      volslider.cpp
+      mslider.cpp
       )
 
 ##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
@@ -107,5 +115,9 @@ set_target_properties( awlplugin
       )
 
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
+
+add_executable(ltest ltest.cpp)
+target_link_libraries (ltest awlplugin ${QT_LIBRARIES})
+
 
 endif (NOT MINGW AND NOT APPLE)

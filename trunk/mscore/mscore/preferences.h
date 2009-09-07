@@ -66,11 +66,13 @@ struct Preferences {
       bool useAlsaAudio;
       bool useJackAudio;
       bool usePortaudioAudio;
+
       QString alsaDevice;
       int alsaSampleRate;
       int alsaPeriodSize;
       int alsaFragments;
       int portaudioDevice;
+
       QColor layoutBreakColor;
       bool antialiasedDrawing;
       SessionStart sessionStart;
@@ -104,7 +106,12 @@ struct Preferences {
       bool landscape;
       bool twosided;
       double spatium;
+
       float tuning;                 // synthesizer master tuning offset (440Hz)
+      double masterGain;            // synthesizer master gain
+      double chorusGain;
+      double reverbGain;
+
       int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
 
