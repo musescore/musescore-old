@@ -227,6 +227,7 @@ void TimeSig::layout()
       {
       double _spatium = spatium();
       QRectF bb;
+
       int st = subtype();
       if (st == 0)
             bb = QRectF(0, 0,0, 0);
@@ -246,9 +247,8 @@ void TimeSig::layout()
                   sz += QString("+%1").arg(z4);
             sn = QString("%1").arg(n);
 
-            // QFont f(symbols[allabreveSym].font());
-            QFont f = fontId2font(0);
-            QFontMetricsF fm(f, pdev);
+            // QFontMetricsF fm(fontId2font(0), pdev);
+            QFontMetricsF fm(fontId2font(0));
             QRectF rz = fm.tightBoundingRect(sz);
             QRectF rn = fm.tightBoundingRect(sn);
 
