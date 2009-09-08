@@ -3,25 +3,47 @@
    font-family: DejaVuSans;
    src: url(font/DejaVuSans.ttf);
 }
-
 /* Bold */
 @font-face {
    font-family: DejaVuSans;
    src: url(font/DejaVuSans-Bold.ttf);
    font-weight: bold;
 }
-
 /* Italic */
 @font-face {
    font-family: DejaVuSans;
    src: url(font/DejaVuSans-Oblique.ttf);
    font-style: italic;
 }
-
 /* Bold and italic */
 @font-face {
    font-family: DejaVuSans;
    src: url(font/DejaVuSans-BoldOblique.ttf);
+   font-weight: bold;
+   font-style: italic;
+}
+
+/* Normal */
+@font-face {
+   font-family: DejaVuSerif;
+   src: url(font/DejaVuSerif.ttf);
+}
+/* Bold */
+@font-face {
+   font-family: DejaVuSerif;
+   src: url(font/DejaVuSerif-Bold.ttf);
+   font-weight: bold;
+}
+/* Italic */
+@font-face {
+   font-family: DejaVuSerif;
+   src: url(font/DejaVuSerif-Italic.ttf);
+   font-style: italic;
+}
+/* Bold and italic */
+@font-face {
+   font-family: DejaVuSerif;
+   src: url(font/DejaVuSerif-BoldItalic.ttf);
    font-weight: bold;
    font-style: italic;
 }
@@ -68,7 +90,10 @@ img {zoom: 80%; margin:0}
 .print-breadcrumb {display:none}
 
 @page {margin: 2cm 3cm 2cm 4cm;}
-body {font-family:serif; font-size:10pt;}
+body {font-family:DejaVuSerif,serif; font-size:10pt;}
+
+/*Expanded font for non-latin alphabets body {font-family:DejaVuSans}*/
+
 p {margin-left: 0em;}
 ul, ol, dl {margin:1em 0 1em 1em;}
 li, dd {margin:.2em 0 .2em 1em;}
@@ -76,7 +101,7 @@ li, dd {margin:.2em 0 .2em 1em;}
 /*img+br,br+img {padding: .2em 0 .2em 0;}*/
 
 span.chapter {page-break-before:always;}
-span.chapter, h1, h2, h3, h4, h5, h6 {font-family:sans-serif; page-break-after:avoid;}
+span.chapter, h1, h2, h3, h4, h5, h6 {font-family:DejaVuSans,sans-serif; page-break-after:avoid;}
 
 span.chapter {display:block; font-size:2em; padding-top:5em; padding-bottom:0.5em; font-weight:bold}
 h1 {font-size:2.5em; margin-bottom:1.5em; line-height:1em}

@@ -1,6 +1,10 @@
 7.sep (ws)
       - new control panel for synthesizer featuring an audio mixer for reverb/chorus/master
         volume; no restart necessary anymore after soundfont changes
+      (db)
+      - reduced default height of main window to fit on 1280 x 768 display
+      - added Russian handbook and updated other handbooks
+      - handbooks use DeJaVu font (which contains Russian characters)
 2.sep (la)
       - fix tempo import from mscx/mscz. Visible on midi export
 1.sep (db)

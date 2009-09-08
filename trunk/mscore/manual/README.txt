@@ -50,6 +50,10 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+* Repress information about external CSS unless versbose output requested
+* Check whether URL's in handbook match language of handbook
+* Use DeJaVu font for all text (allows non-latin characters for Russian handbook)
+* Add Russian, Brazillian Portuguese, and Polish
 * Compatibility update: add "www." back to handbook links (HTML from website changed)
 * Add "./" to start of image src's so that OpenOffice.org can understand
 

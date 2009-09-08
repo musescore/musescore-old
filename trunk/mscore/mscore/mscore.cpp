@@ -2149,7 +2149,7 @@ void MuseScore::readSettings()
             }
       QSettings settings;
       settings.beginGroup("MainWindow");
-      resize(settings.value("size", QSize(950, 800)).toSize());
+      resize(settings.value("size", QSize(950, 700)).toSize());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();
