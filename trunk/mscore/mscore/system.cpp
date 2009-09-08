@@ -457,18 +457,19 @@ void System::setInstrumentName(int staffIdx)
             return;
 
       Staff* s   = score()->staff(staffIdx);
-      Part* part = s->part();
-
       if (!s->isTop())
             return;
+
       SysStaff* staff = _staves[staffIdx];
 
-      if (staff->instrumentName == 0) {
-            if (_firstSystem)
-                  staff->instrumentName = new TextC(*part->longName());
-            else
-                  staff->instrumentName = new TextC(*part->shortName());
-            }
+      //
+      // instrument name can change after inserting/deleting parts
+      //
+      if (staff->instrumentName)
+            delete staff->instrumentName;
+      Part* part = s->part();
+      staff->instrumentName = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+
       staff->instrumentName->setParent(this);
       staff->instrumentName->setTrack(staffIdx * VOICES);
       }

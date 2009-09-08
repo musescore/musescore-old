@@ -566,7 +566,6 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       int nstaves = Score::nstaves();
       bool isFirstMeasure = true;
-//      MeasureBase* firstMeasure = curMeasure;
 
       for (; curMeasure;) {
             if (curMeasure->type() == MEASURE) {

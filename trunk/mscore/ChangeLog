@@ -1,4 +1,5 @@
 8.sep (ws)
+      - fix crash after removing instruments
       - connect meter display in synthesizer control panel
 7.sep (ws)
       - new control panel for synthesizer featuring an audio mixer for reverb/chorus/master

@@ -676,13 +676,12 @@ void Score::cmdRemovePart(Part* part)
 
 // printf("cmdRemovePart %d-%d\n", sidx, eidx);
 
-//      int strack = sidx * VOICES;
-//      int etrack = eidx * VOICES;
-
       //
       //    remove/adjust slurs in _gel
       //
 #if 0
+      int strack = sidx * VOICES;
+      int etrack = eidx * VOICES;
       foreach(Element* e, _gel) {
             if (e->type() != SLUR) {
                   printf("gel element %s %d\n", e->name(), e->track());
@@ -703,12 +702,8 @@ void Score::cmdRemovePart(Part* part)
       //
       //    adjust measures
       //
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->cmdRemoveStaves(sidx, eidx);
-            }
 
       for (int i = 0; i < n; ++i)
             cmdRemoveStaff(sidx);
