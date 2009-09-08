@@ -228,7 +228,7 @@ void Score::fixPpitch()
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             velo[staffIdx].setVelo(0, 80);
-            Part* prt = part(staffIdx);
+            Part* prt      = part(staffIdx);
             int partStaves = prt->nstaves();
             int partStaff  = Score::staffIdx(prt);
 
@@ -257,7 +257,7 @@ void Score::fixPpitch()
                   }
             }
 
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
             int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
 
             for (Segment* seg = firstMeasure()->first(); seg; seg = seg->next1()) {

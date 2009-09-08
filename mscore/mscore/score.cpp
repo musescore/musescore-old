@@ -2064,7 +2064,7 @@ void Score::addElement(Element* element)
             ((ChordRest*)s->endElement())->addSlurBack(s);
             }
       else if ((element->type() == OTTAVA) || (element->type() == DYNAMIC)) {
-            fixPpitch();
+            _playlistDirty = true;
             }
       }
 
@@ -2104,7 +2104,7 @@ void Score::removeElement(Element* element)
       switch(element->type()) {
             case OTTAVA:
             case DYNAMIC:
-                  fixPpitch();
+                  _playlistDirty = true;
                   break;
 
             case CHORD:

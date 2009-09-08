@@ -1949,10 +1949,8 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
             if (e->track() == -1)
                   continue;
             int staffIdx = e->staffIdx();
-            if (staffIdx >= sStaff && staffIdx < eStaff) {
-printf("remove %s\n", e->name());
+            if (staffIdx >= sStaff && staffIdx < eStaff)
                   _score->undoRemoveElement(e);
-                  }
             }
       foreach(Beam* e, _beams) {
             int staffIdx = e->staffIdx();
