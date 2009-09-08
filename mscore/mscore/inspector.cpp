@@ -1323,8 +1323,8 @@ void TupletView::setElement(Element* e)
       ShowElementBase::setElement(e);
       Tuplet* tuplet = (Tuplet*)e;
       tb.baseLen->setText(tuplet->baseLen().name());
-      tb.ratioZ->setValue(tuplet->ratio().zaehler());
-      tb.ratioN->setValue(tuplet->ratio().nenner());
+      tb.ratioZ->setValue(tuplet->ratio().numerator());
+      tb.ratioN->setValue(tuplet->ratio().denominator());
       tb.number->setEnabled(tuplet->number());
       tb.elements->clear();
       foreach(DurationElement* e, tuplet->elements()) {

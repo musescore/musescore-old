@@ -69,7 +69,7 @@ int DurationElement::ticks() const
             return static_cast<Measure*>(parent()->parent())->tickLen();
       int ticks = duration().ticks();
       for (Tuplet* t = tuplet(); t; t = t->tuplet())
-            ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
+            ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
       return ticks;
       }
 

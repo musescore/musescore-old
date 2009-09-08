@@ -1281,19 +1281,30 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      ChordRest* cr = noteEntryMode() ? _is.cr() : getSelectedChordRest();
+      ChordRest* cr;
+      Duration dur;
+      if(noteEntryMode()){ 
+         cr = _is.cr();
+         dur = _is.duration;
+      }
+      else{
+        cr = getSelectedChordRest();
+        dur = cr->duration();
+      }
+        
       if (cr == 0)
             return;
-
+      if(dur.type() == Duration::V_INVALID)
+            return;
+      
       int tick = cr->tick();
       Fraction f;
-      if (cr->duration().type() == Duration::V_MEASURE) {
-            int tz, tn;
-            getSigmap()->timesig(cr->tick(), tz, tn);
-            f.set(tz, tn);
+      if (dur.type() == Duration::V_MEASURE) {
+            dur.setVal(cr->measure()->tickLen());
             }
-      else
-            f = cr->duration().fraction();
+      
+      
+      f = dur.fraction();
 
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot = cr->tuplet();

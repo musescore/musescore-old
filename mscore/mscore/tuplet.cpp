@@ -83,9 +83,9 @@ void Tuplet::layout()
                   _number->setParent(this);
                   }
             if (_numberType == SHOW_NUMBER)
-                  _number->setText(QString("%1").arg(_ratio.zaehler()));
+                  _number->setText(QString("%1").arg(_ratio.numerator()));
             else
-                  _number->setText(QString("%1:%2").arg(_ratio.zaehler()).arg(_ratio.nenner()));
+                  _number->setText(QString("%1:%2").arg(_ratio.numerator()).arg(_ratio.denominator()));
             }
       else {
             if (_number) {
@@ -346,8 +346,8 @@ void Tuplet::write(Xml& xml) const
       Element::writeProperties(xml);
       xml.tag("numberType", _numberType);
       xml.tag("bracketType", _bracketType);
-      xml.tag("normalNotes", _ratio.nenner());
-      xml.tag("actualNotes", _ratio.zaehler());
+      xml.tag("normalNotes", _ratio.denominator());
+      xml.tag("actualNotes", _ratio.numerator());
       xml.tag("baseNote",    _baseLen.name());
       if (_number)
             _number->write(xml, "Number");
@@ -386,9 +386,9 @@ void Tuplet::read(QDomElement e)
             else if (tag == "baseNote")
                   _baseLen = Duration(e.text());
             else if (tag == "normalNotes")
-                  _ratio.setNenner(i);
+                  _ratio.setDenominator(i);
             else if (tag == "actualNotes")
-                  _ratio.setZaehler(i);
+                  _ratio.setNumerator(i);
             else if (tag == "Number") {
                   _number = new Text(score());
                   _number->setParent(this);
@@ -418,15 +418,15 @@ void Tuplet::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      Fraction f(_ratio.nenner(), _baseLen.fraction().nenner());
+      Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());
       setDuration(Duration(f));
       if (bl != -1) {
             Duration d;
             d.setVal(bl);
             _baseLen = d;
-printf("Tuplet base len %d/%d\n", d.fraction().zaehler(), d.fraction().nenner());
-printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.zaehler(), _ratio.nenner());
-            d.setVal(bl * _ratio.nenner());
+printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
+            d.setVal(bl * _ratio.denominator());
             setDuration(d);
             }
       }
@@ -687,6 +687,6 @@ void Tuplet::dump() const
       {
       Element::dump();
       printf("ratio %d/%d  baseLen %s\n",
-         _ratio.zaehler(), _ratio.nenner(), qPrintable(_baseLen.name()));
+         _ratio.numerator(), _ratio.denominator(), qPrintable(_baseLen.name()));
       }
 
