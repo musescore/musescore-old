@@ -58,6 +58,8 @@ class Synth {
       virtual void setChorusGain(double) {}
       virtual double reverbGain() const { return 1.0; }
       virtual void setReverbGain(double) {}
+      virtual double meterValue(int /*channel*/) const     { return 0.0; }
+      virtual double meterPeakValue(int /*channel*/) const { return 0.0; }
       };
 
 #endif

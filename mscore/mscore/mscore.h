@@ -356,6 +356,7 @@ class MuseScore : public QMainWindow {
 
       QString lastSaveCopyDirectory;
       QString lastSaveDirectory;
+      SynthControl* getSynthControl() const { return synthControl; }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

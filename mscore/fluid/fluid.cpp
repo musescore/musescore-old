@@ -97,11 +97,15 @@ void Fluid::init(int sr)
       if (!initialized) // initialize all the conversion tables and other stuff
             init();
 
-      sample_rate = double(sr);
-      sfont_id    = 0;
-      _gain       = .2;
-      _reverbGain = .2;
-      _chorusGain = .2;
+      sample_rate        = double(sr);
+      sfont_id           = 0;
+      _gain              = .2;
+      _reverbGain        = .2;
+      _chorusGain        = .2;
+      _meterValue[0]     = 0.0;
+      _meterValue[1]     = 0.0;
+      _meterPeakValue[0] = 0.0;
+      _meterPeakValue[1] = 0.0;
 
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
@@ -571,6 +575,16 @@ void Fluid::one_block()
                   }
             reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
             chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
+            double lm = 0.0;
+            double rm = 0.0;
+            for (int i = 0; i < FLUID_BUFSIZE; ++i) {
+                  lm += fabs(left_buf[i]);
+                  rm += fabs(right_buf[i]);
+                  }
+            lm /= FLUID_BUFSIZE;
+            rm /= FLUID_BUFSIZE;
+            _meterValue[0] = lm;
+            _meterValue[1] = rm;
             }
       }
 

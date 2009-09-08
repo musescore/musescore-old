@@ -50,6 +50,7 @@
 #include "ottava.h"
 #include "utils.h"
 #include "repeatlist.h"
+#include "synthcontrol.h"
 
 Seq* seq;
 
@@ -450,6 +451,8 @@ void Seq::seqMessage(int msg)
             case '0':         // STOP
                   guiStop();
                   heartBeatTimer->stop();
+                  if (driver && driver->getSynth() && mscore->getSynthControl())
+                        mscore->getSynthControl()->stop();
                   break;
 
             case '1':         // PLAY
@@ -759,6 +762,9 @@ void Seq::heartBeat()
       if (state != PLAY)
             return;
 
+      SynthControl* sc = mscore->getSynthControl();
+      if (sc && driver && driver->getSynth())
+            sc->heartBeat(driver->getSynth());
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
       if (pp)

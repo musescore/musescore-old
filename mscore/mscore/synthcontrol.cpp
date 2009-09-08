@@ -152,3 +152,23 @@ void SynthControl::masterTuningChanged(double val)
       synth->setMasterTuning(val);
       }
 
+//---------------------------------------------------------
+//   heartBeat
+//---------------------------------------------------------
+
+void SynthControl::heartBeat(Synth* synth)
+      {
+      gain->setMeterVal(0, synth->meterValue(0), synth->meterPeakValue(0));
+      gain->setMeterVal(1, synth->meterValue(1), synth->meterPeakValue(1));
+      }
+
+//---------------------------------------------------------
+//   stop
+//---------------------------------------------------------
+
+void SynthControl::stop()
+      {
+      gain->setMeterVal(0, .0, .0);
+      gain->setMeterVal(1, .0, .0);
+      }
+
