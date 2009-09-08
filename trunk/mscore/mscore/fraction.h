@@ -28,21 +28,21 @@
 //---------------------------------------------------------
 
 class Fraction {
-      int _zaehler;
-      int _nenner;
+      int _numerator;
+      int _denominator;
 
-      void kuerzen();
+      void reduce();
 
    public:
       Fraction(int z = 0, int n = 1);
-      int zaehler() const        { return _zaehler;           }
-      int nenner() const         { return _nenner;            }
-      void setZaehler(int v)     { _zaehler = v;              }
-      void setNenner(int v)      { _nenner = v;               }
-      void set(int z, int n)     { _zaehler = z; _nenner = n; }
-      bool isZero() const        { return _zaehler == 0;      }
+      int numerator() const        { return _numerator;           }
+      int denominator() const         { return _denominator;            }
+      void setNumerator(int v)     { _numerator = v;              }
+      void setDenominator(int v)      { _denominator = v;               }
+      void set(int z, int n)     { _numerator = z; _denominator = n; }
+      bool isZero() const        { return _numerator == 0;      }
 
-      int ticks() const          { return (_zaehler * division * 4 + (_nenner/2)) / _nenner; }
+      int ticks() const          { return (_numerator * division * 4 + (_denominator/2)) / _denominator; }
       static Fraction fromTicks(int v);
 
       Fraction& operator+=(const Fraction&);

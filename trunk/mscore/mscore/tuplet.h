@@ -94,8 +94,8 @@ class Tuplet : public DurationElement {
       Fraction ratio() const        { return _ratio;            }
       void setRatio(const Fraction& r) { _ratio = r;            }
       void setRatio(int z, int n)   { _ratio = Fraction(z,n);   }
-      int normalNotes() const       { return _ratio.nenner();   }
-      int actualNotes() const       { return _ratio.zaehler();  }
+      int normalNotes() const       { return _ratio.denominator();   }
+      int actualNotes() const       { return _ratio.numerator();  }
 
       const QList<DurationElement*>& elements() const { return _elements; }
       void clear()                  { _elements.clear(); }

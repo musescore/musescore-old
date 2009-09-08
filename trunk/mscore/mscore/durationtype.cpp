@@ -396,12 +396,12 @@ Fraction Duration::fraction() const
 Duration::Duration(const Fraction& f)
       {
       _dots = 0;
-      if (f.zaehler() == 0) {
+      if (f.numerator() == 0) {
             _val  = V_ZERO;
             _dots = 0;
             return;
             }
-      switch(f.nenner()) {
+      switch(f.denominator()) {
             case 1:     _val = V_WHOLE; break;
             case 2:     _val = V_HALF; break;
             case 4:     _val = V_QUARTER; break;
@@ -413,8 +413,8 @@ Duration::Duration(const Fraction& f)
             case 256:   _val = V_256TH; break;
             default:    _val = V_INVALID; break;
             }
-      if (f.zaehler() != 1) {
-            switch(f.zaehler()) {
+      if (f.numerator() != 1) {
+            switch(f.numerator()) {
                   case 3:
                         _val = DurationType(_val - 1);
                         _dots = 1;
@@ -424,7 +424,7 @@ Duration::Duration(const Fraction& f)
                         _dots = 2;
                         break;
                   default:
-                        printf("Duration(%d/%d): not implemented\n", f.zaehler(), f.nenner());
+                        printf("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
                         abort();
                   }
             }
@@ -465,24 +465,24 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
       {
       QList<Duration> dList;
       if (useDottedValues) {
-            for (Duration d = Duration(Duration::V_LONG); (d.type() != Duration::V_ZERO) && (l.zaehler() != 0);) {
+            for (Duration d = Duration(Duration::V_LONG); (d.type() != Duration::V_ZERO) && (l.numerator() != 0);) {
                   d.setDots(2);
                   Fraction ff(l - d.fraction());
-                  if (ff.zaehler() >= 0) {
+                  if (ff.numerator() >= 0) {
                         dList.append(d);
                         l -= d.fraction();
                         continue;
                         }
                   d.setDots(1);
                   ff = l - d.fraction();
-                  if (ff.zaehler() >= 0) {
+                  if (ff.numerator() >= 0) {
                         dList.append(d);
                         l -= d.fraction();
                         continue;
                         }
                   d.setDots(0);
                   ff = l - d.fraction();
-                  if (ff.zaehler() < 0) {
+                  if (ff.numerator() < 0) {
                         d = d.shift(1);
                         }
                   else {
@@ -492,9 +492,9 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
                   }
             }
       else {
-            for (Duration d = Duration(Duration::V_LONG); !d.isZero() && (l.zaehler() != 0);) {
+            for (Duration d = Duration(Duration::V_LONG); !d.isZero() && (l.numerator() != 0);) {
                   Fraction ff(l - d.fraction());
-                  if (ff.zaehler() < 0) {
+                  if (ff.numerator() < 0) {
                         d = d.shift(1);
                         continue;
                         }

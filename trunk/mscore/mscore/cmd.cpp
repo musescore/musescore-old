@@ -804,7 +804,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd)
       {
-printf("makeGap %d/%d at %d\n", _sd.zaehler(), _sd.nenner(), cr->tick());
+printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -831,7 +831,7 @@ printf("makeGap %d/%d at %d\n", _sd.zaehler(), _sd.nenner(), cr->tick());
                   }
             else
                   td = cr->duration().fraction();
-printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick());
+printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
             undoRemoveElement(cr);
             if (seg->isEmpty())
                   undoRemoveElement(seg);
@@ -842,7 +842,7 @@ printf("  makeGap: remove %d/%d at %d\n", td.zaehler(), td.nenner(), cr->tick())
                   akkumulated = _sd;
                   Fraction rd = td - sd;
 
-printf("  makeGap: %d/%d removed %d/%d too much\n", sd.zaehler(), sd.nenner(), rd.zaehler(), rd.nenner());
+printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
 
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
@@ -850,7 +850,7 @@ printf("  makeGap: %d/%d removed %d/%d too much\n", sd.zaehler(), sd.nenner(), r
                   int ticks = sd.ticks();
 printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
-                        ticks = ticks * t->ratio().nenner() / t->ratio().zaehler();
+                        ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
                   int tick = cr->tick() + ticks;
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
@@ -863,13 +863,13 @@ printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                         for (int i = dList.size() - 1; i >= 0; --i)
                               tick += addClone(cr, tick, dList[i])->ticks();
                         }
-printf("  return %d/%d\n", akkumulated.zaehler(), akkumulated.nenner());
+printf("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
                   return akkumulated;
                   }
             akkumulated += td;
-printf("  akkumulated %d/%d\n", akkumulated.zaehler(), akkumulated.nenner());
+printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
             sd          -= td;
-            if (sd.zaehler() == 0)
+            if (sd.numerator() == 0)
                   break;
             }
       return akkumulated;
@@ -947,8 +947,8 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
 
             int len = d.ticks();
             for (Tuplet* t = cr->tuplet(); t; t = t->tuplet()) {
-                  int z = t->ratio().zaehler();
-                  int n = t->ratio().nenner();
+                  int z = t->ratio().numerator();
+                  int n = t->ratio().denominator();
                   len = len * n / z;
                   }
             if (cr->tuplet() && cr->tuplet()->elements().last() == cr) {
@@ -1015,7 +1015,7 @@ printf("changeCRlen: gap starts in next measure\n");
                         }
                   Fraction gapD = makeGap(ncr, gap);
 
-printf("get gap %d/%d\n", gapD.zaehler(), gapD.nenner());
+printf("get gap %d/%d\n", gapD.numerator(), gapD.denominator());
 
                   if (!gapD.isZero()) {
                         Fraction dd = gapD > gap ? gap : gapD;
@@ -2409,7 +2409,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   Fraction gap = makeGap1(dst, len);
                   if (gap != len)
                         printf("cannot make gap %d/%d at %d (got %d/%d) staff %d\n",
-                           len.zaehler(), len.nenner(), tickLen, gap.zaehler(), gap.nenner(), staffIdx);
+                           len.numerator(), len.denominator(), tickLen, gap.numerator(), gap.denominator(), staffIdx);
                   }
 
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
