@@ -96,6 +96,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Kapittel'
     elif language_code == 'pl':
         chapter = 'Rozdział'
+    elif language_code == 'pt-br':
+        chapter = 'Capítulo'
     elif language_code == 'ru':
         chapter = 'Глава'
         
@@ -132,6 +134,7 @@ def insertH3Anchors(html_source, anchors, verbose):
 # Fix links so that they link to headings within the document
 def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
     import urllib2
+    import re
     
     if verbose:
         print 'Link to internal anchors'
@@ -157,6 +160,8 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
         
 ##        if internal_href[:3] == '../':
 ##            internal_href = 'http://musescore.org/en/' + internal_href[3:]
+
+        url_language = re.search('/[a-z]{2}(-[a-z]{2})?/',internal_href)
         
         split[i] = split[i].replace(original_href, internal_href)
         if internal_href[1:] not in anchors:
@@ -165,6 +170,9 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
                     print " * WARNING: English language link: ", internal_href
                 elif internal_href.find('freelinking') > -1: #if url contains the "freelinking" text it means there is no matching page in the handbook
                     print " * WARNING: page does not exist: ", internal_href
+                elif url_language:
+                    if internal_href[url_language.start()+1:url_language.end()-1] != language_code: #check whether url language code and handbook language code match
+                        print " * WARNING: Language does not match handbook ", internal_href
             elif internal_href[0:7] != 'mailto:' and internal_href[0:19] != 'https://help.ubuntu':
                 print " * WARNING: no anchor tag corresponding to ", internal_href
 
@@ -216,9 +224,11 @@ def addCustomStyles(html_source, verbose):
     for i in range(0, len(html_soup('link'))):
         if html_soup('link')[i].get("rel", None) == "stylesheet":
             try:
-                print ' * external stylesheet: %s' % html_soup('link')[i].get("href")
+                if verbose:
+                    print ' * external stylesheet: %s' % html_soup('link')[i].get("href")
             except:
-                print ' * external stylesheet'
+                if verbose:
+                    print ' * external stylesheet'
             html_soup('link')[i].extract()
 
     html_source = str(html_soup)
@@ -374,6 +384,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
     url = ''
     internal = ''
+    language_code = language_code.lower()
     
     if language_code == 'en':
         url = 'http://www.musescore.org/en/print/book/export/html/51'
@@ -405,6 +416,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'pl':
         url = 'http://www.musescore.org/pl/print/book/export/html/2495'
         internal = 'http://www.musescore.org/pl/podręcznik' #podr%C4%99cznik'
+    elif language_code == 'pt-br':
+        url = 'http://www.musescore.org/pt-br/print/book/export/html/1248'
+        internal = 'http://www.musescore.org/pt-br/manual' #podr%C4%99cznik'
     elif language_code == 'ru':
         url = 'http://www.musescore.org/ru/print/book/export/html/2517'
         internal = 'http://www.musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
@@ -491,8 +505,9 @@ def main():
         createHandbook('fr', 'missing', pdf, verbose, heading_switch)
         createHandbook('it', 'missing', pdf, verbose, heading_switch)
         createHandbook('nb', 'missing', pdf, verbose, heading_switch)
+        createHandbook('ru', 'missing', pdf, verbose, heading_switch)
         #createHandbook('pl', 'missing', pdf, verbose, heading_switch)
-        #createHandbook('ru', 'missing', pdf, verbose, heading_switch)
+        #createHandbook('pt-BR', 'missing', pdf, verbose, heading_switch)
 
     # Create Handbook for specific language
     else:
