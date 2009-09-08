@@ -3180,12 +3180,14 @@ bool Measure::createEndBarLines()
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
 
-                  //TODO: crash when exchange staves in a piano system,
+                  //TODO: crash when exchange staves in part with multi staff bar line,
                   //      staffIdx >= staves
 
                   int idx = staffIdx + span - 1;
                   if (idx >= score()->nstaves()) {
                         printf("idx > nstaves, span %d  staff %p\n", span, staff);
+                        span = score()->nstaves() - staffIdx;
+                        staff->setBarLineSpan(span);        // HACK
                         }
 
                   bl->setSpan(span);

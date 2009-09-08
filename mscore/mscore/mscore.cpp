@@ -1608,12 +1608,13 @@ int main(int argc, char* argv[])
       DPI  = pdev->logicalDpiX();      // logical drawing resolution
 
 
-      // sanity checks for DPI and PDPI
+      // sanity check for DPI
 
-      if (DPI == 0)           // this happens on windows if there is no printer installed
-            DPI = 1200.0;
-      if (PDPI == 0)
-            PDPI = 300.0;
+      if (DPI == 0) {           // this happens on windows if there is no printer installed
+            delete pdev;
+            pdev  = &wi;
+            DPI   = PDPI;
+            }
       DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {
