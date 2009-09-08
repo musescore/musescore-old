@@ -306,6 +306,8 @@ class Fluid : public Synth {
       double sample_rate;                 // The sample rate
       float _masterTuning;                // usually 440.0
       double _tuning[128];                // the pitch of every key, in cents
+      double _meterValue[2];
+      mutable double _meterPeakValue[2];
 
    protected:
       int state;                          // the synthesizer state
@@ -336,12 +338,18 @@ class Fluid : public Synth {
       virtual QString soundFont() const;
       virtual void play(const Event&);
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
-      virtual double masterGain() const      { return _gain; }
-      virtual void setMasterGain(double val) { _gain = val;  }
-      virtual double chorusGain() const      { return _chorusGain; }
-      virtual void setChorusGain(double val) { _chorusGain = val;  }
-      virtual double reverbGain() const      { return _reverbGain; }
-      virtual void setReverbGain(double val) { _reverbGain = val;  }
+      virtual double masterGain() const            { return _gain; }
+      virtual void setMasterGain(double val)       { _gain = val;  }
+      virtual double chorusGain() const            { return _chorusGain; }
+      virtual void setChorusGain(double val)       { _chorusGain = val;  }
+      virtual double reverbGain() const            { return _reverbGain; }
+      virtual void setReverbGain(double val)       { _reverbGain = val;  }
+      virtual double meterValue(int channel) const { return _meterValue[channel]; }
+      virtual double meterPeakValue(int channel) const {
+            double v = _meterPeakValue[channel];
+            _meterPeakValue[channel] = 0.0;
+            return v;
+            }
 
       bool log(const char* fmt, ...);
 

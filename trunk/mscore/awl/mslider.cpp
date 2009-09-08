@@ -162,17 +162,17 @@ void MeterSlider::resizeEvent(QResizeEvent* /*ev*/)
 
 void MeterSlider::paintEvent(QPaintEvent* ev)
       {
-      int pixel    = height() - sliderSize().height();
+      int h  = height();
+      int kh = sliderSize().height();
+      int mh = h - kh;
+
       double range = maxValue() - minValue();
-      int ppos     = int(pixel * (_value - minValue()) / range);
+      int ppos     = int(mh * (_value - minValue()) / range);
       if (_invert)
-            ppos = pixel - ppos;
+            ppos = mh - ppos;
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, false);
-
-      int h  = height();
-      int kh = sliderSize().height();
 
       //---------------------------------------------------
       //    draw meter
@@ -183,7 +183,6 @@ void MeterSlider::paintEvent(QPaintEvent* ev)
       int y1 = kh / 2;
       int y3 = h - y1;
 
-      int mh  = h - kh;
       p.setPen(QPen(Qt::white, 2));
 
       for (int i = 0; i < _channel; ++i) {
@@ -193,8 +192,8 @@ void MeterSlider::paintEvent(QPaintEvent* ev)
             else if (h > mh)
                   h = mh;
 
-	      p.drawPixmap(x, y1+mh-h, mw, h,    onPm,  0, y1+mh-h, mw, h);
-	      p.drawPixmap(x, y1,      mw, mh-h, offPm, 0, y1,      mw, mh-h);
+	      p.drawPixmap(x, y1+mh-h, mw, h,    onPm,  0, mh-h, mw, h);
+	      p.drawPixmap(x, y1,      mw, mh-h, offPm, 0, 0,    mw, mh-h);
 
             //---------------------------------------------------
             //    draw peak line

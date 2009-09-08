@@ -50,6 +50,8 @@ class SynthControl : public QWidget, Ui::SynthControl {
       Synth* getSynth() const { return synth; }
       SynthControl(Synth*, QWidget* parent);
       void updatePreferences();
+      void heartBeat(Synth*);
+      void stop();
       };
 
 #endif

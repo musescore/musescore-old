@@ -37,6 +37,7 @@
 #include "articulation.h"
 #include "sig.h"
 #include "measure.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   musicalAttribute
@@ -62,8 +63,16 @@ void MuseData::musicalAttribute(QString s, Part* part)
                         }
                   int z = tl[0].toInt();
                   int n = tl[1].toInt();
-                  if ((z > 0) && (n > 0))
+                  if ((z > 0) && (n > 0)) {
                         score->sigmap->add(curTick, z, n);
+                        TimeSig* ts = new TimeSig(score);
+                        ts->setTick(curTick);
+                        Staff* staff = part->staff(0);
+                        ts->setTrack(staff->idx() * VOICES);
+                        Measure* measure = score->tick2measure(curTick);
+                        Segment* s = measure->getSegment(ts);
+                        s->add(ts);
+                        }
                   }
             else if (item.startsWith("X:"))
                   ;
@@ -150,8 +159,7 @@ void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
       slur[idx] = new Slur(score);
       slur[idx]->setStart(tick, staffIdx * VOICES + voice);
       slur[idx]->setTrack(staffIdx * VOICES + voice);
-//      slur[idx]->setParent(score->layout());
-      score->addElement(slur[idx]);
+      score->add(slur[idx]);
       }
 
 //---------------------------------------------------------
@@ -446,7 +454,7 @@ void MuseData::readRest(Part* part, const QString& s)
       Duration d;
       d.setVal(ticks);
       Rest* rest = new Rest(score, tick, d);
-      chordRest = rest;
+      chordRest  = rest;
       rest->setTrack(staffIdx * VOICES);
       Segment* segment = measure->getSegment(rest);
 

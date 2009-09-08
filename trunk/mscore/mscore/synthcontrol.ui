@@ -152,6 +152,9 @@ p, li { white-space: pre-wrap; }
        <property name="statusTip">
         <string>master volume</string>
        </property>
+       <property name="channel">
+        <number>2</number>
+       </property>
       </widget>
      </item>
      <item>
