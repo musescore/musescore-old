@@ -138,7 +138,6 @@ StyleType styleTypes[] = {
 
       StyleType("gateTime",                ST_INT),           // 0-100%
       StyleType("tenutoGateTime",          ST_INT),
-
       StyleType("staccatoGateTime",        ST_INT),
       StyleType("slurGateTime",            ST_INT),
 
@@ -392,9 +391,9 @@ Style::Style()
             StyleVal(ST_hideEmptyStaves,false),
             StyleVal(ST_stemDir1,UP),
             StyleVal(ST_stemDir2,DOWN),
-
             StyleVal(ST_stemDir3,UP),
             StyleVal(ST_stemDir4,DOWN),
+
             StyleVal(ST_gateTime,85),
             StyleVal(ST_tenutoGateTime,100),
             StyleVal(ST_staccatoGateTime,50),

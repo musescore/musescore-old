@@ -348,9 +348,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               Slur* slur = static_cast<Slur*>(e);
                               if (slur->startElement()->staffIdx() != staffIdx)
                                     continue;
-                              int tick1 = slur->tick();
-                              int tick2 = slur->tick2();
-                              if (tick >= tick1 && tick < tick2 && slur->track() == track) {
+                              int tick1 = slur->startElement()->tick();
+                              int tick2 = slur->endElement()->tick();
+                              int strack = slur->startElement()->track();
+                              if ((tick >= tick1) && (tick < tick2) && (strack == track)) {
                                     gateTime = _style[ST_slurGateTime].toInt();
                                     }
                               }
