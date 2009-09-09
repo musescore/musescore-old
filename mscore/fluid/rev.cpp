@@ -103,6 +103,7 @@ Reverb::Reverb()
       gain = 0.30;      // input gain
       setPreset(0);
       init();     // Clear all buffers
+      parameterChanged = false;
       }
 
 //---------------------------------------------------------
@@ -127,6 +128,14 @@ void Reverb::init()
 
 void Reverb::process(int n, float* in, float* l, float* r)
       {
+      if (parameterChanged) {
+            roomsize = newRoomsize;
+            damp     = newDamp;
+            width    = newWidth;
+            gain     = newGain;
+            update();
+            parameterChanged = false;
+            }
       for (int k = 0; k < n; k++) {
             float outL = 0.0;
             float outR = 0.0;
@@ -159,10 +168,8 @@ void Reverb::process(int n, float* in, float* l, float* r)
 
 void Reverb::update()
       {
-      /* Recalculate internal values after parameter change */
-
-      wet1 = wet * (width / 2 + 0.5f);
-      wet2 = wet * ((1 - width) / 2);
+      wet1 = wet * (width * .5 + 0.5f);
+      wet2 = wet * ((1.0 - width) * .5);
 
       for (int i = 0; i < numcombs; i++) {
             combL[i].setfeedback(roomsize);
@@ -186,8 +193,38 @@ bool Reverb::setPreset(int nr)
       setdamp(revmodel_preset[nr].damp);
       setwidth(revmodel_preset[nr].width);
       setlevel(revmodel_preset[nr].level);
+      newRoomsize = roomsize;
+      newDamp     = damp;
+      newWidth    = width;
 
       update();
       return true;
       }
+
+void Reverb::setParameter(int idx, double value)
+      {
+      switch (idx) {
+            case 0:     newRoomsize = value; break;
+            case 1:     newDamp     = value; break;
+            case 2:     newWidth    = value; break;
+            case 3:     newGain     = value; break;
+            }
+      parameterChanged = true;
+      }
+
+//---------------------------------------------------------
+//   parameter
+//---------------------------------------------------------
+
+double Reverb::parameter(int idx) const
+      {
+      switch (idx) {
+            case 0:     return roomsize;
+            case 1:     return damp;
+            case 2:     return width;
+            case 3:     return gain;
+            }
+      }
+
+
 }

@@ -54,12 +54,12 @@ class Synth {
 
       virtual double masterGain() const { return 1.0; }
       virtual void setMasterGain(double) {}
-      virtual double chorusGain() const { return 1.0; }
-      virtual void setChorusGain(double) {}
-      virtual double reverbGain() const { return 1.0; }
-      virtual void setReverbGain(double) {}
-      virtual double meterValue(int /*channel*/) const     { return 0.0; }
-      virtual double meterPeakValue(int /*channel*/) const { return 0.0; }
+
+      virtual double meterValue(int /*channel*/) const                                 { return 0.0; }
+      virtual double meterPeakValue(int /*channel*/) const                             { return 0.0; }
+
+      virtual double effectParameter(int /*effect*/, int /*parameter*/)                { return 0.0; }
+      virtual void setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ ) { }
       };
 
 #endif

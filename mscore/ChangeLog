@@ -1,3 +1,5 @@
+9.sep (ws)
+      - add reverb parameter to synthesizer control
 8.sep (ws)
       - fix crash after removing instruments
       - connect meter display in synthesizer control panel

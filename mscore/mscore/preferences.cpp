@@ -228,6 +228,9 @@ void Preferences::init()
       masterGain              = 0.2;
       chorusGain              = 0.5;
       reverbGain              = 0.5;
+      reverbRoomSize          = 0.5;
+      reverbDamp              = 0.5;
+      reverbWidth             = 1.0;
 
       defaultPlayDuration     = 300;      // ms
       };
@@ -321,6 +324,9 @@ void Preferences::write()
       s.setValue("masterGain", masterGain);
       s.setValue("chorusGain", chorusGain);
       s.setValue("reverbGain", reverbGain);
+      s.setValue("reverbRoomSize", reverbRoomSize);
+      s.setValue("reverbDamp", reverbDamp);
+      s.setValue("reverbWidth", reverbWidth);
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
@@ -418,6 +424,9 @@ void Preferences::read()
       masterGain             = s.value("masterGain", 0.2).toDouble();
       chorusGain             = s.value("chorusGain", 0.5).toDouble();
       reverbGain             = s.value("reverbGain", 0.5).toDouble();
+      reverbRoomSize         = s.value("reverbRoomSize", 0.5).toDouble();
+      reverbDamp             = s.value("reverbDamp", 0.5).toDouble();
+      reverbWidth            = s.value("reverbWidth", 1.0).toDouble();
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
@@ -495,7 +504,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
-      connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
@@ -548,13 +556,6 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       enableMidiInput->setChecked(p->enableMidiInput);
       playNotes->setChecked(p->playNotes);
-
-      if (!p->soundFont.isEmpty())
-            soundFont->setText(p->soundFont);
-      else {
-            const char* pp = getenv("DEFAULT_SOUNDFONT");
-            soundFont->setText(QString(pp ? pp : ""));
-            }
 
       if (seq->isRunning()) {
             QList<QString> sl = seq->inputPorts();
@@ -710,7 +711,6 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       twosided->setChecked(p->twosided);
       spatiumEntry->setValue(p->spatium * INCH);
-      masterTuning->setValue(p->tuning);
 
       landscape->setChecked(p->landscape);
 
@@ -848,24 +848,6 @@ void PreferenceDialog::selectBgWallpaper()
       }
 
 //---------------------------------------------------------
-//   selectSoundFont
-//---------------------------------------------------------
-
-void PreferenceDialog::selectSoundFont()
-      {
-      QString s = QFileDialog::getOpenFileName(
-         this,
-         tr("Choose Synthesizer SoundFont"),
-         soundFont->text(),
-         tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
-         );
-      if (!s.isNull()) {
-            sfChanged = soundFont->text() != s;
-            soundFont->setText(s);
-            }
-      }
-
-//---------------------------------------------------------
 //   selectWorkingDirectory
 //---------------------------------------------------------
 
@@ -976,7 +958,6 @@ void PreferenceDialog::apply()
       preferences.fgUseColor  = fgColorButton->isChecked();
       preferences.enableMidiInput = enableMidiInput->isChecked();
       preferences.playNotes   = playNotes->isChecked();
-      preferences.soundFont   = soundFont->text();
       if (preferences.lPort != jackLPort->currentText()
          || preferences.rPort != jackRPort->currentText()) {
             // TODO: change ports
@@ -1054,18 +1035,6 @@ void PreferenceDialog::apply()
       double f  = mmUnit ? 1.0/INCH : 1.0;
       preferences.twosided    = twosided->isChecked();
       preferences.spatium     = spatiumEntry->value() / INCH;
-      if (preferences.tuning != masterTuning->value()) {
-            preferences.tuning = masterTuning->value();
-            if (seq) {
-                  Driver* driver = seq->getDriver();
-                  if (driver) {
-                        Synth* synth = driver->getSynth();
-                        if (synth) {
-                              synth->setMasterTuning(preferences.tuning);
-                              }
-                        }
-                  }
-            }
       preferences.landscape   = landscape->isChecked();
       preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
       preferences.paperHeight = paperHeight->value() * f;

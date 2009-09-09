@@ -33,17 +33,38 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       {
       setupUi(this);
       synth = s;
+
+      reverbRoomSize->setId(0);
+      reverbDamp->setId(1);
+      reverbWidth->setId(2);
+      reverb->setId(3);
+      chorus->setId(4);
+
       soundFont->setText(synth->soundFont());
       masterTuning->setValue(synth->masterTuning());
       gain->setValue(synth->masterGain());
-      reverb->setValue(synth->reverbGain());
-      chorus->setValue(synth->chorusGain());
+
+      reverb->setValue(synth->effectParameter(0, 3));
+      roomSizeBox->setValue(synth->effectParameter(0, 0));
+      dampBox->setValue(synth->effectParameter(0, 1));
+      widthBox->setValue(synth->effectParameter(0, 2));
+
+      chorus->setValue(synth->effectParameter(1, 4));
+      chorusSpeed->setValue(synth->effectParameter(1, 1));
+      chorusDepth->setValue(synth->effectParameter(1, 2));
 
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
       connect(gain,     SIGNAL(valueChanged(double, int)), SLOT(masterGainChanged(double, int)));
-      connect(reverb,   SIGNAL(valueChanged(double, int)), SLOT(reverbGainChanged(double, int)));
-      connect(chorus,   SIGNAL(valueChanged(double, int)), SLOT(chorusGainChanged(double, int)));
-      connect(masterTuning, SIGNAL(valueChanged(double)), SLOT(masterTuningChanged(double)));
+      connect(masterTuning, SIGNAL(valueChanged(double)),       SLOT(masterTuningChanged(double)));
+
+      connect(reverb,         SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+      connect(reverbRoomSize, SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+      connect(reverbDamp, SIGNAL(valueChanged(double,int)),     SLOT(reverbValueChanged(double,int)));
+      connect(reverbWidth, SIGNAL(valueChanged(double,int)),    SLOT(reverbValueChanged(double,int)));
+
+      connect(chorus,      SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(chorusSpeed, SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(chorusDepth, SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
       }
 
 //---------------------------------------------------------
@@ -87,16 +108,23 @@ void SynthControl::updatePreferences()
       if ((preferences.soundFont != soundFont->text())
          || (preferences.tuning != masterTuning->value())
          || (preferences.masterGain != gain->value())
-         || (preferences.chorusGain != chorus->value())
+         || (preferences.reverbRoomSize != reverbRoomSize->value())
+         || (preferences.reverbDamp != reverbDamp->value())
+         || (preferences.reverbWidth != reverbWidth->value())
          || (preferences.reverbGain != reverb->value())
+         || (preferences.chorusGain != chorus->value())
          ) {
             preferences.dirty  = true;
             }
       preferences.soundFont  = soundFont->text();
       preferences.tuning     = masterTuning->value();
       preferences.masterGain = gain->value();
-      preferences.chorusGain = chorus->value();
-      preferences.reverbGain = reverb->value();
+
+      preferences.reverbRoomSize = reverbRoomSize->value();
+      preferences.reverbDamp     = reverbDamp->value();
+      preferences.reverbWidth    = reverbWidth->value();
+      preferences.reverbGain     = reverb->value();
+      preferences.chorusGain     = chorus->value();
       }
 
 //---------------------------------------------------------
@@ -126,24 +154,6 @@ void SynthControl::masterGainChanged(double val, int)
       }
 
 //---------------------------------------------------------
-//   chorusGainChanged
-//---------------------------------------------------------
-
-void SynthControl::chorusGainChanged(double val, int)
-      {
-      synth->setChorusGain(val);
-      }
-
-//---------------------------------------------------------
-//   reverbGainChanged
-//---------------------------------------------------------
-
-void SynthControl::reverbGainChanged(double val, int)
-      {
-      synth->setReverbGain(val);
-      }
-
-//---------------------------------------------------------
 //   masterTuningChanged
 //---------------------------------------------------------
 
@@ -170,5 +180,23 @@ void SynthControl::stop()
       {
       gain->setMeterVal(0, .0, .0);
       gain->setMeterVal(1, .0, .0);
+      }
+
+//---------------------------------------------------------
+//   reverbValueChanged
+//---------------------------------------------------------
+
+void SynthControl::reverbValueChanged(double val, int idx)
+      {
+      synth->setEffectParameter(0, idx, val);
+      }
+
+//---------------------------------------------------------
+//   chorusValueChanged
+//---------------------------------------------------------
+
+void SynthControl::chorusValueChanged(double val, int idx)
+      {
+      synth->setEffectParameter(1, idx, val);
       }
 

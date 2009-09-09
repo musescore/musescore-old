@@ -100,8 +100,6 @@ void Fluid::init(int sr)
       sample_rate        = double(sr);
       sfont_id           = 0;
       _gain              = .2;
-      _reverbGain        = .2;
-      _chorusGain        = .2;
       _meterValue[0]     = 0.0;
       _meterValue[1]     = 0.0;
       _meterPeakValue[0] = 0.0;
@@ -569,10 +567,6 @@ void Fluid::one_block()
                   v->write(left_buf, right_buf, fx_buf[0], fx_buf[1]);
             }
       if (silentBlocks > 0) {
-            for (int i = 0; i < FLUID_BUFSIZE; ++i) {
-                  fx_buf[0][i] *= _reverbGain;
-                  fx_buf[1][i] *= _chorusGain;
-                  }
             reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
             chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
             double lm = 0.0;
@@ -988,6 +982,23 @@ void Fluid::remove_bank_offset(int sfont_id)
 QString Fluid::soundFont() const
       {
       return get_sfont(0)->get_name();
+      }
+
+double Fluid::effectParameter(int effect, int parameter)
+      {
+      if (effect == 0)
+            return reverb->parameter(parameter);
+      else if (effect == 1)
+            return chorus->parameter(parameter);
+      return 0.0;
+      }
+
+void Fluid::setEffectParameter(int effect, int parameter, double value)
+      {
+      if (effect == 0)
+            reverb->setParameter(parameter, value);
+      else if (effect == 1)
+            chorus->setParameter(parameter, value);
       }
 
 /**

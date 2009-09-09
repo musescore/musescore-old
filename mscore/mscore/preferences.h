@@ -108,9 +108,12 @@ struct Preferences {
       double spatium;
 
       float tuning;                 // synthesizer master tuning offset (440Hz)
-      double masterGain;            // synthesizer master gain
-      double chorusGain;
-      double reverbGain;
+      float masterGain;            // synthesizer master gain
+      float chorusGain;
+      float reverbGain;
+      float reverbRoomSize;
+      float reverbDamp;
+      float reverbWidth;
 
       int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
@@ -145,7 +148,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void fgClicked(bool);
       void selectFgWallpaper();
       void selectBgWallpaper();
-      void selectSoundFont();
       void selectWorkingDirectory();
       void selectInstrumentList();
       void selectStartWith();

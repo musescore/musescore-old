@@ -241,8 +241,12 @@ bool Seq::init()
                   }
             synth->setMasterTuning(preferences.tuning);
             synth->setMasterGain(preferences.masterGain);
-            synth->setChorusGain(preferences.chorusGain);
-            synth->setReverbGain(preferences.reverbGain);
+            synth->setEffectParameter(0, 0, preferences.reverbRoomSize);
+            synth->setEffectParameter(0, 1, preferences.reverbDamp);
+            synth->setEffectParameter(0, 2, preferences.reverbWidth);
+            synth->setEffectParameter(0, 3, preferences.reverbGain);
+
+            synth->setEffectParameter(1, 4, preferences.chorusGain);
             }
 
       if (!driver->start()) {
