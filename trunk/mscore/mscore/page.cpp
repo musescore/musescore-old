@@ -269,8 +269,8 @@ PageFormat::PageFormat()
    oddRightMargin(10.0 / INCH),
    oddTopMargin(10.0 / INCH),
    oddBottomMargin(20.0 / INCH),
-   landscape(false),
-   twosided(false)
+   landscape(preferences.landscape),
+   twosided(preferences.twosided)
       {
       }
 
@@ -327,6 +327,7 @@ double PageFormat::height() const
 
 void PageFormat::read(QDomElement e)
       {
+      landscape = false;      // for compatibility with old versions
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -399,6 +400,7 @@ void PageFormat::read(QDomElement e)
 
 void PageFormat::readMusicXML(QDomElement e, double conversion)
       {
+      landscape = false;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

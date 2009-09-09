@@ -1,4 +1,5 @@
 9.sep (ws)
+      - fix landscape page format preset
       - fix playback of slurs
       - fix portaudio configuration (device list always showed api 0 devices)
       - portaudio: fallback to default device on open error
