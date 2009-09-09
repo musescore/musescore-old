@@ -164,6 +164,7 @@ class ExportLy {
   void buildInstructionList(Part* p, int strack, int etrack);
   void buildInstructionList(Measure* m, int strack, int etrack);
   void handleElement(Element* el, bool start);
+  void handlePreInstruction(Element * el);
   void instructionJump(Jump*);
   void instructionMarker(Marker*);
 
@@ -476,23 +477,10 @@ void ExportLy::tempoText(TempoText* text)
 
 void ExportLy::words(Text* text)
      {
-       char* c;
-       char a;
+      
        //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
-	if (text->subtypeName()== "RehearsalMark")
-	  {
-	    out << "\\mark\\default ";
-	    //There must be an easier way to check if QString is number????
-	    //is there a .toInteger()????
-	    c=text->getText().toAscii().data();
-	    a=(char)c[0];
-	    if ((a>= 48) && (a<= 57))
-	      {
-		rehearsalnumbers=true;
-	      }
-	  }
-	else
-	  out << "^\\markup {\"" << text->getText() << "\"} ";
+       if (!(text->subtypeName()== "RehearsalMark"))
+	 out << "^\\markup {\"" << text->getText() << "\"} ";
       }
 
 
@@ -719,8 +707,54 @@ void ExportLy::storeAnchor(struct InstructionAnchor a)
       }
 
 
+//-----------------------------------------------------------------
+// handlePreInstruction -- handle the instructions attached to one
+// specific element and which are to be exported BEFORE the element
+// itself.
+// -----------------------------------------------------------------
+
+void ExportLy::handlePreInstruction(Element * el)
+{
+  int i = 0;
+  char* c;
+  char a;
+  Text* text;
+  for (i = 0; i <= nextAnchor; i++) //run thru anchorlist
+    {
+      if  ((anchors[i].anchor != 0) && (anchors[i].anchor == el))
+	{
+	  Element * instruction = anchors[i].instruct;
+	  ElementType instructiontype = instruction ->type();
+	  
+	  switch(instructiontype)
+	    {
+	    case STAFF_TEXT:
+	    case TEXT:
+	      text = (Text*) instruction; 
+	      if (text->subtypeName()== "RehearsalMark")
+		{
+		  out << "\\mark\\default ";
+		  //There must be an easier way to check if QString is number????
+		  //is there a .toInteger()????
+		  c=text->getText().toAscii().data();
+		  a=(char)c[0];
+		  if ((a>= 48) && (a<= 57))
+		    {
+		      rehearsalnumbers=true;
+		    }
+		}
+	      break;
+	    default: break;
+	    }//end switch
+	}//end if anchors
+    }//end for (i...)
+}//End of handlePreInstructiion
+
+
+
 //---------------------------------------------------------
-//   handleElement -- handle all instructions attached to one specific element
+//   handleElement -- handle all instructions attached to one specific
+//   element and which are to be exported AFTER the element itself.
 //---------------------------------------------------------
 
 void ExportLy::handleElement(Element* el, bool start)
@@ -728,7 +762,7 @@ void ExportLy::handleElement(Element* el, bool start)
   int i = 0;
   for (i = 0; i<=nextAnchor; i++)//run thru filled part of list
     {
-      //anchored to start of this element:
+      //anchored to start of this element: (possibly obsolete)
       if (anchors[i].anchor != 0 and anchors[i].anchor==el && anchors[i].start == start)
        {
 	  Element* instruction = anchors[i].instruct;
@@ -973,7 +1007,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	  //else if (!found) printf("element not anchored?!: %d\n", instruction->type());
 	  break;
 	default:
-	  printf("Intet measurerelevant anker\n");
+	  printf("no anchor relevant for measure\n");
 	}
     }
 }
@@ -2010,6 +2044,8 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
       if (!(e == 0 || e->generated()))  voiceActive[voice] = true;
       else  continue;
 
+      handlePreInstruction(e); // Handle instructions which are to be printed before the element itself
+
       switch(e->type())
 	{
 	case CLEF:
@@ -2588,12 +2624,14 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /* 
+   12.sep.2009 (Olav) Improved export of rehearsalmarks.
+   
    17.aug.2009 (db) add quotes around unparsed markup (since it can 
    contain special characters), commented out the indent=0, fix spelling
    mistake for octave markings ("set-octaviation"), fix type of ottava
    
    mar. 2009 always explicit end-bar -> no need to declare last bar as
-   incomplete, but writes to end-bars when last bar is complete. This
+   incomplete, but writes two end-bars when last bar is complete. This
    doesn't show in print.
 
    12.feb.2009. - Removed bug: double instrument definitions in pieces
