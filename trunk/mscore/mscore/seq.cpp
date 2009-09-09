@@ -267,6 +267,8 @@ void Seq::exit()
             if (debugMode)
                   printf("Stop I/O\n");
             driver->stop();
+            delete driver;
+            driver = 0;
             }
       }
 

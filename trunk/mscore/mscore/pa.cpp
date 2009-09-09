@@ -69,8 +69,9 @@ Portaudio::Portaudio(Seq* s)
 
 Portaudio::~Portaudio()
       {
-      if (initialized)
-            Pa_Terminate();
+      if (initialized) {
+            // Pa_Terminate();      // DEBUG: crashes
+            }
       }
 
 //---------------------------------------------------------
@@ -87,11 +88,9 @@ bool Portaudio::init()
             }
 
       initialized = true;
+      printf("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       PaDeviceIndex idx = preferences.portaudioDevice;
-
-//      const PaHostApiInfo* info = Pa_GetHostApiInfo(apiIdx);
-//      info->deviceCount
 
       if (idx < 0)
             idx = Pa_GetDefaultOutputDevice();
@@ -227,6 +226,7 @@ bool Portaudio::start()
       {
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
+            printf("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
@@ -240,6 +240,7 @@ bool Portaudio::stop()
       {
       PaError err = Pa_StopStream(stream);
       if (err != paNoError) {
+            printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
       return true;
