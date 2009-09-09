@@ -663,7 +663,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             portaudioApi->addItems(apis);
             portaudioApi->setCurrentIndex(audio->currentApi());
 
-            QStringList devices = audio->deviceList(0);
+            QStringList devices = audio->deviceList(audio->currentApi());
             portaudioDevice->addItems(devices);
             portaudioDevice->setCurrentIndex(audio->currentDevice());
 

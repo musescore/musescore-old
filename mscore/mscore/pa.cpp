@@ -89,6 +89,10 @@ bool Portaudio::init()
       initialized = true;
 
       PaDeviceIndex idx = preferences.portaudioDevice;
+
+//      const PaHostApiInfo* info = Pa_GetHostApiInfo(apiIdx);
+//      info->deviceCount
+
       if (idx < 0)
             idx = Pa_GetDefaultOutputDevice();
 
@@ -110,7 +114,7 @@ bool Portaudio::init()
 
       if (err != paNoError) {
             // fall back to default device:
-            out.device = -1;
+            out.device = Pa_GetDefaultOutputDevice();
             err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
             if (err != paNoError)
                   printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
@@ -329,6 +333,7 @@ int Portaudio::currentApi() const
                         return api;
                   }
             }
+      printf("Portaudio: no current api found for device %d\n", idx);
       return -1;
       }
 
@@ -350,6 +355,7 @@ int Portaudio::currentDevice() const
                         return k;
                   }
             }
+      printf("Portaudio: no current ApiDevice found for device %d\n", idx);
       return -1;
       }
 

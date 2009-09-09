@@ -1,4 +1,6 @@
 9.sep (ws)
+      - fix portaudio configuration (device list always showed api 0 devices)
+      - portaudio: fallback to default device on open error
       - add reverb parameter to synthesizer control
 8.sep (ws)
       - fix crash after removing instruments
