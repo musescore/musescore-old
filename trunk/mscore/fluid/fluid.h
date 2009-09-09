@@ -315,9 +315,6 @@ class Fluid : public Synth {
       unsigned int sfont_id;
 
       double _gain;                       // master gain
-      double _chorusGain;
-      double _reverbGain;
-
       QList<Channel*> channel;            // the channels
 
       unsigned int noteid;                // the id is incremented for every new note. it's used for noteoff's
@@ -340,16 +337,14 @@ class Fluid : public Synth {
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
       virtual double masterGain() const            { return _gain; }
       virtual void setMasterGain(double val)       { _gain = val;  }
-      virtual double chorusGain() const            { return _chorusGain; }
-      virtual void setChorusGain(double val)       { _chorusGain = val;  }
-      virtual double reverbGain() const            { return _reverbGain; }
-      virtual void setReverbGain(double val)       { _reverbGain = val;  }
       virtual double meterValue(int channel) const { return _meterValue[channel]; }
       virtual double meterPeakValue(int channel) const {
             double v = _meterPeakValue[channel];
             _meterPeakValue[channel] = 0.0;
             return v;
             }
+      virtual double effectParameter(int effect, int parameter);
+      virtual void setEffectParameter(int ffect, int parameter, double value);
 
       bool log(const char* fmt, ...);
 

@@ -39,9 +39,9 @@ class SynthControl : public QWidget, Ui::SynthControl {
    private slots:
       void selectSoundFont();
       void masterGainChanged(double, int);
-      void reverbGainChanged(double, int);
-      void chorusGainChanged(double, int);
       void masterTuningChanged(double);
+      void reverbValueChanged(double val, int idx);
+      void chorusValueChanged(double val, int idx);
 
    signals:
       void closed();

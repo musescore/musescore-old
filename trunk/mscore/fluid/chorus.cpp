@@ -71,9 +71,8 @@
 
 namespace FluidS {
 
-#define MAX_CHORUS	99
-#define MAX_DELAY	100
-#define MAX_DEPTH	10
+#define MAX_DELAY	      100
+#define MAX_DEPTH	      10
 #define MIN_SPEED_HZ	0.29
 #define MAX_SPEED_HZ    5
 
@@ -289,7 +288,7 @@ void Chorus::process(int n, float *in, float *left_out, float *right_out)
             d_out *= level;
 
             /* Add the chorus sum d_out to output */
-            left_out[sample_index] += d_out;
+            left_out[sample_index]  += d_out;
             right_out[sample_index] += d_out;
 
             /* Move forward in circular buffer */
@@ -334,4 +333,36 @@ void Chorus::triangle(int *buf, int len, int depth)
             buf[ii--] = (int) val2;
             }
       }
+
+//---------------------------------------------------------
+//   setParameter
+//---------------------------------------------------------
+
+void Chorus::setParameter(int idx, double value)
+      {
+      switch (idx) {
+            case 0: type = lrint(value); break;
+            case 1: speed_Hz = value * MAX_SPEED_HZ + MIN_SPEED_HZ; break;
+            case 2: depth_ms = value * MAX_DEPTH; break;
+            case 3: number_blocks = lrint(value * 100.0); break;
+            case 4: new_level = value; break;
+            }
+      }
+
+//---------------------------------------------------------
+//   parameter
+//---------------------------------------------------------
+
+double Chorus::parameter(int idx) const
+      {
+      switch (idx) {
+            case 0:     return type;
+            case 1:     return (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ;
+            case 2:     return depth_ms / MAX_DEPTH;
+            case 3:     return number_blocks / 100.0;
+            case 4:     return level;
+            }
+      return 0.0;
+      }
+
 }

@@ -94,14 +94,21 @@ static const float scaledamp  = 0.4f;
 //---------------------------------------------------------
 
 class Reverb {
-      void update();
       void init();
+      void update();
 
       float roomsize;
       float damp;
       float wet, wet1, wet2;
       float width;
       float gain;
+
+      float newRoomsize;
+      float newDamp;
+      float newWidth;
+      float newGain;
+      bool parameterChanged;
+
       /*
        The following are all declared inline
        to remove the need for dynamic allocation
@@ -122,7 +129,7 @@ class Reverb {
 
       void setroomsize(float value) { roomsize = (value * scaleroom) + offsetroom; }
       void setdamp(float value)     { damp = value * scaledamp;  }
-      void setlevel(float value)    { wet = value * scalewet;    }
+      void setlevel(float value)    { wet  = value * scalewet;   }
       void setLevel(float value)    { setlevel(value); update(); }
       void setwidth(float value)    { width = value;             }
       void setmode(float value);
@@ -130,6 +137,9 @@ class Reverb {
       float getdamp() const         { return damp / scaledamp; }
       float getlevel() const        { return wet / scalewet;   }
       float getwidth()              { return width;            }
+
+      void setParameter(int parameter, double value);
+      double parameter(int idx) const;
 
       bool setPreset(int);
       };
