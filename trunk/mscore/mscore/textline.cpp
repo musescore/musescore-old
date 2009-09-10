@@ -638,12 +638,12 @@ void LineProperties::accept()
       if (beginTextRb->isChecked())
             tl->setBeginText(beginText->text());
       else
-            tl->setBeginText("");
+            tl->setBeginText(0);
 
       if (continueTextRb->isChecked())
             tl->setContinueText(continueText->text());
       else
-            tl->setContinueText("");
+            tl->setContinueText(0);
 
       int sym = beginSymbol->itemData(beginSymbol->currentIndex()).toInt();
       tl->setBeginSymbol(beginSymbolRb->isChecked() ? sym : -1);
@@ -759,5 +759,25 @@ void LineProperties::continueTextProperties()
                   t->setColor(tl->continueText()->color());
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   setBeginText
+//---------------------------------------------------------
+
+void TextLine::setBeginText(TextC* v)
+      {
+      delete _beginText;
+      _beginText = v;
+      }
+
+//---------------------------------------------------------
+//   setContinueText
+//---------------------------------------------------------
+
+void TextLine::setContinueText(TextC* v)
+      {
+      delete _continueText;
+      _continueText = v;
       }
 

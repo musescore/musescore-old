@@ -1,4 +1,5 @@
 10.sep (ws)
+      - fix editing of simple text line element
       - use smaller beams for grace notes
       - fix input of rests with space key for voices > 1
 9.sep (ws)
