@@ -864,7 +864,7 @@
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Duduk</name>
-        <short-name>B<symbol name=flat/> Du.</short-name>
+        <short-name>B<symbol name="flat"/> Du.</short-name>
         <clef>0</clef>
         <aPitchRange>67-82</aPitchRange>
         <pPitchRange>67-82</pPitchRange>

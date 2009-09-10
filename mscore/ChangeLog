@@ -1,3 +1,6 @@
+10.sep (ws)
+      - use smaller beams for grace notes
+      - fix input of rests with space key for voices > 1
 9.sep (ws)
       - updated instruments.xml from Magnus Johansson
       - fix landscape page format preset
