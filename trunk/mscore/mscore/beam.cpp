@@ -287,7 +287,7 @@ void Beam::draw(QPainter& p) const
 
             QPointF ip1 = bs->p1;
             QPointF ip2 = bs->p2;
-            qreal lw2   = point(score()->styleS(ST_beamWidth)) * .5;
+            qreal lw2   = point(score()->styleS(ST_beamWidth)) * .5 * mag();
 
             QPolygonF a(4);
             a[0] = QPointF(ip1.x(), ip1.y()-lw2);
@@ -698,9 +698,11 @@ void Beam::layout()
       const Style s(score()->style());
       double bd(s[ST_beamDistance].toDouble());
       Spatium bw(s[ST_beamWidth].toSpatium());
-      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
       double beamMinLen = point(s[ST_beamMinLen].toSpatium());
       double graceMag   = score()->styleD(ST_graceNoteMag);
+      double beamDist   = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      if (isGrace)
+            beamDist *= graceMag;
 
       if (!_userModified) {
             //

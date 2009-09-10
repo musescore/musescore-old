@@ -1283,7 +1283,7 @@ void Score::cmdTuplet(int n)
       {
       ChordRest* cr;
       Duration dur;
-      if(noteEntryMode()){ 
+      if(noteEntryMode()){
          cr = _is.cr();
          dur = _is.duration;
       }
@@ -1291,19 +1291,19 @@ void Score::cmdTuplet(int n)
         cr = getSelectedChordRest();
         dur = cr->duration();
       }
-        
+
       if (cr == 0)
             return;
       if(dur.type() == Duration::V_INVALID)
             return;
-      
+
       int tick = cr->tick();
       Fraction f;
       if (dur.type() == Duration::V_MEASURE) {
             dur.setVal(cr->measure()->tickLen());
             }
-      
-      
+
+
       f = dur.fraction();
 
       Tuplet* tuplet = new Tuplet(this);
@@ -1597,6 +1597,7 @@ void Score::cmdEnterRest(const Duration& d)
 printf("cmdEnterRest %s\n", qPrintable(d.name()));
       if (!noteEntryMode())
             setNoteEntry(true);
+      expandVoice();
       if (_is.cr() == 0) {
             printf("cannot enter rest here\n");
             return;
