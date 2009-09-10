@@ -105,9 +105,9 @@ class TextLine : public SLine {
       void setBeginText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
       void setContinueText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
       TextC* beginText() const                { return _beginText;            }
-      void setBeginText(TextC* v)             { _beginText = v;               }
+      void setBeginText(TextC* v);
       TextC* continueText() const             { return _continueText;         }
-      void setContinueText(TextC* v)          { _continueText = v;            }
+      void setContinueText(TextC* v);
       Placement beginTextPlace() const        { return _beginTextPlace;       }
       void setBeginTextPlace(Placement p)     { _beginTextPlace = p;          }
       Placement continueTextPlace() const     { return _continueTextPlace;    }
