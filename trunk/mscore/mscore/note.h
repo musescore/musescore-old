@@ -106,6 +106,7 @@ class Note : public Element {
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
+//      virtual void editDrag(int, const QPointF&);
 
    public:
       Note(Score*);

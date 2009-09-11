@@ -500,7 +500,7 @@ void Note::setHeadGroup(int val)
 
 void Note::draw(QPainter& p) const
       {
-      if (!_hidden) {
+      if (!_hidden || !userOff().isNull()) {
             if (staff() && !selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
                   Instrument* in = staff()->part()->instrument();
                   int i = ppitch();
@@ -1258,4 +1258,15 @@ void Note::setMag(double val)
             _accidental->setMag(val);
       }
 
+#if 0
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Note::editDrag(int, const QPointF& delta)
+      {
+      setUserOff(userOff() + delta);
+      _hidden = false;
+      }
+#endif
 
