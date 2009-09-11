@@ -14,14 +14,14 @@ failures=0
 
 rwtest() {
       echo -n "testing load/save $1";
-      $MSCORE $1 -o mops.msc &> /dev/null
-      if diff -q $1 mops.msc &> /dev/null; then
+      $MSCORE $1 -o mops.mscx &> /dev/null
+      if diff -q $1 mops.mscx &> /dev/null; then
             echo -e "\r\t\t\t\t\t\t...OK";
       else
             echo -e "\r\t\t\t\t\t\t...FAILED";
             failures=$(($failures+1));
             echo "+++++++++DIFF++++++++++++++"
-            diff $1 mops.msc
+            diff $1 mops.mscx
             echo "+++++++++++++++++++++++++++"
       fi
       testcount=$(($testcount+1))
@@ -109,6 +109,7 @@ rwtestAllXml() {
 
 usage() {
       echo "usage: $0 [demos | msc | xml]"
+      echo "or: $0 [msc | xml] <file>"
       echo
       exit 1
       }
@@ -127,7 +128,15 @@ elif [ $# -eq 1 ]; then
       else
             usage
       fi
-elif [ $# -ge 2 ]; then
+elif [ $# -eq 2 ]; then
+      if [ "$1" == "msc" ]; then
+            rwtest $2
+      elif [ "$1" == "xml" ]; then
+            rwtestXml $2
+      else
+            usage
+      fi
+elif [ $# -ge 3 ]; then
       usage
 fi
 
