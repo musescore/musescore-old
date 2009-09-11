@@ -1689,7 +1689,7 @@ static Segment* getNextCRSegment(Segment* s, int staffIdx)
 bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       {
       const Page* page = searchPage(p);
-      if (page == 0)
+      if (page == 0 || voice == -1)
             return false;
       //
       //    search system

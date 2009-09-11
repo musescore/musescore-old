@@ -265,65 +265,6 @@ void BarLine::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF BarLine::bbox() const
-      {
-      qreal y1, y2;
-      getY(&y1, &y2);
-      Spatium w = score()->styleS(ST_barWidth);
-      qreal dw  = 0.0;
-
-      switch(subtype()) {
-            case DOUBLE_BAR:
-                  w  = score()->styleS(ST_doubleBarWidth) * 2 + score()->styleS(ST_doubleBarDistance);
-                  dw = point(w);
-                  break;
-            case START_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + symbols[dotSym].width(magS());
-                  break;
-            case END_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + symbols[dotSym].width(magS());
-                  break;
-            case END_BAR:
-                  w += score()->styleS(ST_endBarWidth) + score()->styleS(ST_endBarDistance);
-                  dw = point(w);
-                  break;
-            case  END_START_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 3 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + 2 * symbols[dotSym].width(magS());
-                  break;
-            case BROKEN_BAR:
-            case NORMAL_BAR:
-                  dw = point(w);
-                  break;
-            default:
-                  printf("illegal bar line type\n");
-                  break;
-            }
-      QRectF r(0.0, y1, dw, y2);
-
-      if (score()->styleB(ST_repeatBarTips)) {
-            double mags = magS();
-            switch(subtype()) {
-                  case START_REPEAT:
-                        r |= symbols[brackettipsRightUp].bbox(mags).translated(0.0, y1);
-                        r |= symbols[brackettipsRightDown].bbox(mags).translated(0.0, y2);
-                        break;
-                  case END_REPEAT:
-                        r |= symbols[brackettipsLeftUp].bbox(mags).translated(dw, y1);
-                        r |= symbols[brackettipsLeftDown].bbox(mags).translated(dw, y2);
-                        break;
-                  }
-            }
-      return r;
-      }
-
-
-//---------------------------------------------------------
 //   space
 //---------------------------------------------------------
 
@@ -459,5 +400,65 @@ void BarLine::endEditDrag()
             _span = newSpan;
             staff()->setBarLineSpan(_span);
             }
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void BarLine::layout()
+      {
+      _span = staff()->barLineSpan();
+
+      qreal y1, y2;
+      getY(&y1, &y2);
+      Spatium w = score()->styleS(ST_barWidth);
+      qreal dw  = 0.0;
+
+      switch(subtype()) {
+            case DOUBLE_BAR:
+                  w  = score()->styleS(ST_doubleBarWidth) * 2 + score()->styleS(ST_doubleBarDistance);
+                  dw = point(w);
+                  break;
+            case START_REPEAT:
+                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
+                  dw = point(w) + symbols[dotSym].width(magS());
+                  break;
+            case END_REPEAT:
+                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
+                  dw = point(w) + symbols[dotSym].width(magS());
+                  break;
+            case END_BAR:
+                  w += score()->styleS(ST_endBarWidth) + score()->styleS(ST_endBarDistance);
+                  dw = point(w);
+                  break;
+            case  END_START_REPEAT:
+                  w  += score()->styleS(ST_endBarWidth) + 3 * score()->styleS(ST_endBarDistance);
+                  dw = point(w) + 2 * symbols[dotSym].width(magS());
+                  break;
+            case BROKEN_BAR:
+            case NORMAL_BAR:
+                  dw = point(w);
+                  break;
+            default:
+                  printf("illegal bar line type\n");
+                  break;
+            }
+      QRectF r(0.0, y1, dw, y2);
+
+      if (score()->styleB(ST_repeatBarTips)) {
+            double mags = magS();
+            switch(subtype()) {
+                  case START_REPEAT:
+                        r |= symbols[brackettipsRightUp].bbox(mags).translated(0.0, y1);
+                        r |= symbols[brackettipsRightDown].bbox(mags).translated(0.0, y2);
+                        break;
+                  case END_REPEAT:
+                        r |= symbols[brackettipsLeftUp].bbox(mags).translated(dw, y1);
+                        r |= symbols[brackettipsLeftDown].bbox(mags).translated(dw, y2);
+                        break;
+                  }
+            }
+      setbbox(r);
       }
 

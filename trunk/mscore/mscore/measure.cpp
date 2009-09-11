@@ -933,14 +933,18 @@ void Measure::layout2()
       for (Segment* s = first(); s; s = s->next()) {
             for (int track = 0; track < tracks; ++track) {
                   Element* el = s->element(track);
-                  if (el && (el->type() == CHORD)) {
-                        Chord* a = static_cast<Chord*>(el);
-                        const NoteList* nl = a->noteList();
-                        for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                              Tie* tie = in->second->tieFor();
-                              if (tie)
-                                    tie->layout();
+                  if (el) {
+                        if (el->type() == CHORD) {
+                              Chord* a = static_cast<Chord*>(el);
+                              const NoteList* nl = a->noteList();
+                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                    Tie* tie = in->second->tieFor();
+                                    if (tie)
+                                          tie->layout();
+                                    }
                               }
+                        else if (el->type() == BAR_LINE)
+                              el->layout();
                         }
                   }
             }
@@ -3127,9 +3131,6 @@ bool Measure::setStartRepeatBarLine(bool val)
                   seg->add(bl);
                   changed = true;
                   }
-            if (bl) {
-                  bl->setSpan(staff->barLineSpan());
-                  }
             }
       return changed;
       }
@@ -3168,6 +3169,7 @@ bool Measure::createEndBarLines()
                         Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
                         seg->add(bl);
                         changed = true;
+                        bl->layout();
                         }
                   }
             if (bl) {
@@ -3179,18 +3181,7 @@ bool Measure::createEndBarLines()
                   bl->setGenerated(_endBarLineGenerated);
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
-
-                  //TODO: crash when exchange staves in part with multi staff bar line,
-                  //      staffIdx >= staves
-
-                  int idx = staffIdx + span - 1;
-                  if (idx >= score()->nstaves()) {
-                        printf("idx > nstaves, span %d  staff %p\n", span, staff);
-                        span = score()->nstaves() - staffIdx;
-                        staff->setBarLineSpan(span);        // HACK
-                        }
-
-                  bl->setSpan(span);
+                  span = staff->barLineSpan();
                   if (!system()->staff(staffIdx + span - 1)->show()) {
                         //
                         // if the barline ends on an invisible staff
