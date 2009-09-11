@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -552,7 +552,6 @@ void MuseScore::editInstrList()
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
                         ++rstaff;
                         }
-printf("set bar line span %d %p\n", part->nstaves(), part->staves()->front());
                   part->staves()->front()->setBarLineSpan(part->nstaves());
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
@@ -637,6 +636,24 @@ printf("set bar line span %d %p\n", part->nstaves(), part->staves()->front());
             }
       if (sort)
             cs->undo()->push(new SortStaves(cs, dl));
+
+      //
+      // check for valid barLineSpan and bracketSpan
+      // in all staves
+      //
+
+      int n = cs->nstaves();
+      for (int i = 0; i < n; ++i) {
+            Staff* staff = cs->staff(i);
+            if (staff->barLineSpan() > (n - i))
+                  cs->undoChangeBarLineSpan(staff, n - i);
+            QList<BracketItem> brackets = staff->brackets();
+            int nn = brackets.size();
+            for (int ii = 0; ii < nn; ++ii) {
+                  if ((brackets[ii]._bracket != -1) && (brackets[ii]._bracketSpan > (n - i)))
+                        cs->undoChangeBracketSpan(staff, ii, n - i);
+                  }
+            }
 
       cs->setLayoutAll(true);
       cs->endCmd();

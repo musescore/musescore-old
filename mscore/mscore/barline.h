@@ -50,9 +50,9 @@ class BarLine : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void draw(QPainter&) const;
-      virtual QRectF bbox() const;
       virtual void space(double& min, double& extra) const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual void layout();
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);

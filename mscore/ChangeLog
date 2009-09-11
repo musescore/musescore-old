@@ -1,3 +1,5 @@
+11.sep (ws)
+      - fix crash after removing instrument
 10.sep (ws)
       - fix editing of simple text line element
       - use smaller beams for grace notes

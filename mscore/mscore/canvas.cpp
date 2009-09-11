@@ -380,8 +380,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       bool b1 = ev->button() == Qt::LeftButton;
       bool b3 = ev->button() == Qt::RightButton;
 
-      if (ev->buttons() != ev->button()) {			
-#ifdef Q_WS_MAC			
+      if (ev->buttons() != ev->button()) {
+#ifdef Q_WS_MAC
 			//allow control click
 			if (! (b3 && ev->buttons() == (Qt::LeftButton))){
 #endif
@@ -394,7 +394,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             else
                   return;
             }
-#ifdef Q_WS_MAC			
+#ifdef Q_WS_MAC
 			}
 #endif
 
@@ -1932,7 +1932,8 @@ void Canvas::dropEvent(QDropEvent* event)
                         Element* dropElement = el->drop(pos, dragOffset, dragElement);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
-                              _score->select(dropElement, SELECT_SINGLE, 0);
+                              if (!_score->noteEntryMode())
+                                    _score->select(dropElement, SELECT_SINGLE, 0);
                               _score->addRefresh(dropElement->abbox());
                               }
                         event->acceptProposedAction();

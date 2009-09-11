@@ -95,6 +95,7 @@ class Staff {
       void setBracketSpan(int idx, int val);
       int bracketLevels() const      { return _brackets.size(); }
       void addBracket(BracketItem);
+      QList <BracketItem> brackets() const { return _brackets; }
 
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clefList() const     { return _clefList;    }
