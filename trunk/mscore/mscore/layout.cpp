@@ -524,7 +524,8 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
       int n       = 0;
       while (m->isEmpty()) {
             MeasureBase* mb = m->next();
-            if (m->breakMultiMeasureRest() && n)
+//            if (m->breakMultiMeasureRest() && n)
+            if (m->breakMultiMeasureRest())
                   break;
             ++n;
             if (!mb || (mb->type() != MEASURE))
@@ -533,12 +534,13 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
             }
       m = sm;
       if (n >= styleI(ST_minEmptyMeasures)) {
-            for (int i = 0; i < (n-1); ++i) {
+            m->setMultiMeasure(n);  // first measure is presented as multi measure rest
+            m->setSystem(system);
+            for (int i = 1; i < n; ++i) {
+                  m = static_cast<Measure*>(m->next());
                   m->setMultiMeasure(-1);
                   m->setSystem(system);
-                  m = static_cast<Measure*>(m->next());
                   }
-            m->setMultiMeasure(n);  // last measure is presented as multi measure rest
             }
       else
             m->setMultiMeasure(0);
@@ -568,13 +570,19 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       bool isFirstMeasure = true;
 
       for (; curMeasure;) {
+            MeasureBase* nextMeasure;
             if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (styleB(ST_createMultiMeasureRests))
-                        curMeasure = skipEmptyMeasures(m, system);
-                  else
+                  if (styleB(ST_createMultiMeasureRests)) {
+                        nextMeasure = skipEmptyMeasures(m, system)->next();
+                        }
+                  else {
                         m->setMultiMeasure(0);
+                        nextMeasure = curMeasure->next();
+                        }
                   }
+            else
+                  nextMeasure = curMeasure->next();
 
             System* oldSystem = curMeasure->system();
             curMeasure->setSystem(system);
@@ -644,11 +652,11 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             system->measures().append(curMeasure);
             if (continueFlag || curMeasure->pageBreak() || curMeasure->lineBreak() || (curMeasure->next() && curMeasure->next()->type() == VBOX)) {
                   system->setPageBreak(curMeasure->pageBreak());
-                  curMeasure = curMeasure->next();
+                  curMeasure = nextMeasure;
                   break;
                   }
             else
-                  curMeasure = curMeasure->next();
+                  curMeasure = nextMeasure;
             }
 
       //
