@@ -644,6 +644,10 @@ void Measure::layout0(int staffIdx)
                         }
                   }
             }
+      foreach(Element* e, _el) {
+            if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
+                  _breakMMRest = true;
+            }
       int track = staffIdx * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() == Segment::SegKeySig
@@ -3329,7 +3333,6 @@ bool Measure::isMeasureRest(int staffIdx)
       {
       int strack = staffIdx * VOICES;
       int etrack = staffIdx * VOICES + VOICES;
-//??      staves[staffIdx]->hasVoices = false;
       for (Segment* s = first(); s; s = s->next()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;

@@ -659,6 +659,7 @@ void MeasureView::setElement(Element* e)
       mb.endBarLineType->setValue(m->endBarLineType());
       mb.endBarLineGenerated->setChecked(m->endBarLineGenerated());
       mb.endBarLineVisible->setChecked(m->endBarLineVisible());
+      mb.multiMeasure->setValue(m->multiMeasure());
 
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {

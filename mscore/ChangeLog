@@ -1,4 +1,6 @@
 11.sep (ws)
+      - fix measure numbers when using multi measure rests
+      - break multi measure rest on rehearsal mark
       - fix crash after removing instrument
 10.sep (ws)
       - fix editing of simple text line element
