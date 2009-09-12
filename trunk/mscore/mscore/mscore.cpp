@@ -755,8 +755,10 @@ MuseScore::MuseScore()
 
       loadInstrumentTemplates(preferences.instrumentList);
       preferencesChanged();
-      connect(seq, SIGNAL(started()), SLOT(seqStarted()));
-      connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));
+      if (seq) {
+            connect(seq, SIGNAL(started()), SLOT(seqStarted()));
+            connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));
+            }
       loadScoreList();
 
       showPlayPanel(preferences.showPlayPanel);
@@ -1102,7 +1104,8 @@ void MuseScore::setCurrentScore(Score* score)
 
 
       setWindowTitle("MuseScore: " + cs->name());
-      seq->setScore(cs);
+      if (seq)
+            seq->setScore(cs);
       if (playPanel)
             playPanel->setScore(cs);
 
@@ -1433,27 +1436,6 @@ int main(int argc, char* argv[])
       revision = QString(f.readAll());
       f.close();
 
-      QtSingleApplication app("mscore", argc, argv);
-
-//      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-//      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-      QSettings::setDefaultFormat(QSettings::IniFormat);
-
-      for (int i = 0; i < 128; ++i)
-            midiActionMap[i] = 0;
-
-//      QApplication app(argc, argv);
-      QCoreApplication::setOrganizationName("MusE");
-      QCoreApplication::setOrganizationDomain("muse.org");
-      QCoreApplication::setApplicationName("MuseScore");
-      qApp->setWindowIcon(windowIcon);
-
-      dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-      QDir dataPathDir;
-      dataPathDir.mkpath(dataPath);
-
-      setDefaultStyle();
-
       int c;
       while ((c = getopt(argc, argv, "vdLsmiIOo:p:r:S:DF")) != EOF) {
             switch (c) {
@@ -1505,25 +1487,41 @@ int main(int argc, char* argv[])
                         return -1;
                   }
             }
+
       argc -= optind;
-      if (argc > 0) {
-            int ok = true;
-            for (int i = 0; i < argc; ++i) {
-                  QString message = QString::fromLocal8Bit(argv[optind + i]);
-                  QFileInfo fi(message);
-                  if (!app.sendMessage(fi.absoluteFilePath())) {
-                        ok = false;
-                        break;
+
+      QtSingleApplication* app = new QtSingleApplication("mscore", argc, argv);
+      QSettings::setDefaultFormat(QSettings::IniFormat);
+
+      for (int i = 0; i < 128; ++i)
+            midiActionMap[i] = 0;
+
+      QCoreApplication::setOrganizationName("MusE");
+      QCoreApplication::setOrganizationDomain("muse.org");
+      QCoreApplication::setApplicationName("MuseScore");
+
+      if (!converterMode) {
+            qApp->setWindowIcon(windowIcon);
+            if (argc > 0) {
+                  int ok = true;
+                  for (int i = 0; i < argc; ++i) {
+                        QString message = QString::fromLocal8Bit(argv[optind + i]);
+                        QFileInfo fi(message);
+                        if (!app->sendMessage(fi.absoluteFilePath())) {
+                              ok = false;
+                              break;
+                              }
                         }
+                  if (ok)
+                        return 0;
                   }
-            if (ok)
-                  return 0;
+            else
+                  app->sendMessage("");
             }
-      else
-            app.sendMessage("");
-      ++argc;
 
 /**/
+      dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+      setDefaultStyle();
       mscoreGlobalShare = getSharePath();
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
@@ -1551,7 +1549,7 @@ int main(int argc, char* argv[])
             sc->setWindowTitle(QString("MuseScore Startup"));
             sc->setWindowFlags(Qt::FramelessWindowHint);
             sc->show();
-            app.processEvents();
+            qApp->processEvents();
             }
 
       if (!useFactorySettings && !converterMode) {
@@ -1580,10 +1578,12 @@ int main(int argc, char* argv[])
                   exit(-1);
             }
 
-      seq = new Seq();
-      if (converterMode)
+      if (converterMode) {
             noSeq = true;
+            seq = 0;
+            }
       else {
+            seq = new Seq();
             if (!noSeq) {
                   if (!seq->init()) {
                         printf("sequencer init failed\n");
@@ -1632,16 +1632,18 @@ int main(int argc, char* argv[])
 //      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
-      genIcons();
+      if (!converterMode)
+            genIcons();
       initDrumset();
 
-      mscore = new MuseScore();
       gscore = new Score(defaultStyle);
-      mscore->readSettings();
-
-      QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
-         mscore, SLOT(handleMessage(const QString&)));
-      app.setActivationWindow(mscore, false);
+      mscore = new MuseScore();
+      if (!converterMode) {
+            mscore->readSettings();
+            QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
+               mscore, SLOT(handleMessage(const QString&)));
+            static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
+            }
 
       //-------------------------------
       //  load scores
@@ -1649,6 +1651,7 @@ int main(int argc, char* argv[])
 
       Score* currentScore = 0;
       bool scoreCreated = false;
+      ++argc;
       if (argc < 2) {
             switch (preferences.sessionStart) {
                   case LAST_SESSION:
@@ -1794,6 +1797,7 @@ int main(int argc, char* argv[])
                   }
             exit(rv ? 0 : -1);
             }
+
       mscore->loadPlugins();
       mscore->show();
       if (sc)
@@ -1801,7 +1805,7 @@ int main(int argc, char* argv[])
       if (debugMode)
             printf("start event loop...\n");
 
-      return app.exec();
+      return qApp->exec();
       }
 
 //---------------------------------------------------------
@@ -1970,7 +1974,7 @@ void MuseScore::changeState(int val)
             else if (strcmp(s->xml, "copy") == 0)
                   s->action->setEnabled(cs && cs->selection()->state());
             else if (strcmp(s->xml, "synth-control") == 0) {
-                  Driver* driver = seq->getDriver();
+                  Driver* driver = seq ? seq->getDriver() : 0;
                   s->action->setEnabled(driver && driver->getSynth());
                   }
             else
