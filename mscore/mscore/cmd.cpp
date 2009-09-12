@@ -2449,15 +2449,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
 
-#if 0 // TODO: CHECK
-                              //deal with full measure rest case
-                              if (cr->duration().type() == Duration::V_MEASURE) {
-                                    Measure* m1 = tick2measure(curTick);
-						cr->setTickLen(m1->tickLen());
-						}
-#endif
-
-                              curTick  = cr->tick() + cr->tickLen();
+                              curTick  = cr->tick();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
 
@@ -2496,6 +2488,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           }
                                     }
                               cr->setParent(s);
+                              curTick  += cr->ticks();
+
                               int measureEnd = measure->tick() + measure->tickLen();
                               if (!isGrace && (cr->tick() + cr->tickLen() > measureEnd)) {
                                     if (cr->type() == CHORD) {
