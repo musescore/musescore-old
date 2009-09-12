@@ -1258,15 +1258,3 @@ void Note::setMag(double val)
             _accidental->setMag(val);
       }
 
-#if 0
-//---------------------------------------------------------
-//   editDrag
-//---------------------------------------------------------
-
-void Note::editDrag(int, const QPointF& delta)
-      {
-      setUserOff(userOff() + delta);
-      _hidden = false;
-      }
-#endif
-

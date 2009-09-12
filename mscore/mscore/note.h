@@ -106,7 +106,6 @@ class Note : public Element {
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
-//      virtual void editDrag(int, const QPointF&);
 
    public:
       Note(Score*);
@@ -183,18 +182,18 @@ class Note : public Element {
 
       bool isSimple(Xml&) const;
 
-      bool hidden() const           { return _hidden; }
-      void setHidden(bool val)      { _hidden = val;  }
+      bool hidden() const              { return _hidden; }
+      void setHidden(bool val)         { _hidden = val;  }
 
       NoteType noteType() const;
-      int staffMove() const         { return _staffMove; }
-      void setStaffMove(int val)    { _staffMove = val; }
+      int staffMove() const            { return _staffMove; }
+      void setStaffMove(int val)       { _staffMove = val; }
 
-      ElementList* el()             { return &_el; }
-      const ElementList* el() const { return &_el; }
+      ElementList* el()                { return &_el; }
+      const ElementList* el() const    { return &_el; }
 
-      int subchannel() const        { return _subchannel; }
-      void setSubchannel(int val)   { _subchannel = val;  }
+      int subchannel() const           { return _subchannel; }
+      void setSubchannel(int val)      { _subchannel = val;  }
 
       DirectionH userMirror() const    { return _userMirror; }
       void setUserMirror(DirectionH d) { _userMirror = d; }
