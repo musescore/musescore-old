@@ -279,6 +279,7 @@ Score::Score(const Style& s)
       _playPos        = 0;
       _fileDivision   = division;
       _creditsRead    = false;
+      _defaultsRead   = false;
       _selection      = new Selection(this);
 
       rights          = 0;

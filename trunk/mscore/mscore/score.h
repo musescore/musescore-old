@@ -275,6 +275,7 @@ class Score : public QObject {
       QString _rights;
       QList<MusicXmlCreator*> _creators;
       bool _creditsRead;             ///< credits were read at MusicXML import
+      bool _defaultsRead;            ///< defaults were read at MusicXML import, allow export of defaults in convertermode
 
       int textUndoLevel;
       Selection* _selection;
@@ -736,6 +737,7 @@ class Score : public QObject {
       QString source() const                         { return _source;          }
       QString mxmlRights() const                     { return _rights;          }
       bool creditsRead() const                       { return _creditsRead;     }
+      bool defaultsRead() const                      { return _defaultsRead;    }
       void setMovementNumber(const QString& s)       { _movementNumber = s;     }
       void setMovementTitle(const QString& s)        { _movementTitle = s;      }
       void setWorkNumber(const QString& s)           { _workNumber = s;         }
@@ -743,6 +745,7 @@ class Score : public QObject {
       void setSource(const QString& s)               { _source = s;             }
       void setmxmlRights(const QString& s)           { _rights = s;             }
       void setCreditsRead(bool b)                    { _creditsRead = b;        }
+      void setDefaultsRead(bool b)                   { _defaultsRead = b;       }
       void addCreator(MusicXmlCreator* c)            { _creators.append(c);     }
       const MusicXmlCreator* getCreator(int i) const { return _creators.at(i);  }
       int numberOfCreators() const                   { return _creators.size(); }
