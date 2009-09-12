@@ -286,7 +286,7 @@ bool Score::saveFile(bool autosave)
       // the original file in case of "disc full"
       //
 
-      QString tempName = info.fileName() + QString(".temp");
+      QString tempName = info.filePath() + QString(".temp");
       QFile temp(tempName);
       if (!temp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open Temp File\n") + tempName + tr("\nfailed: ")
