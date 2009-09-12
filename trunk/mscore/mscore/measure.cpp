@@ -1366,6 +1366,9 @@ void Measure::moveTicks(int diff)
                   for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
                         if (*i)
                               (*i)->setTick((*i)->tick() + diff);
+                              if((*i)->endTick() != 0){
+                                (*i)->setEndTick((*i)->endTick() + diff);
+                              }
                         }
                   }
             }
