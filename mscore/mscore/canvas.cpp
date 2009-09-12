@@ -2058,7 +2058,7 @@ if (debugMode)
                   // assume there is always a ChordRest segment
                   while (seg->subtype() != Segment::SegChordRest)
                         seg = seg->next();
-                  score()->pasteStaff(doc.documentElement(), (ChordRest*)(seg->element(idx)));
+                  score()->pasteStaff(doc.documentElement(), (ChordRest*)(seg->element(idx * VOICES)));
                   }
             event->acceptProposedAction();
             _score->setLayoutAll(true);

@@ -1283,26 +1283,23 @@ void Score::cmdTuplet(int n)
       {
       ChordRest* cr;
       Duration dur;
-      if(noteEntryMode()){
-         cr = _is.cr();
-         dur = _is.duration;
-      }
-      else{
-        cr = getSelectedChordRest();
-        dur = cr->duration();
-      }
 
-      if (cr == 0)
-            return;
-      if(dur.type() == Duration::V_INVALID)
+      if (noteEntryMode()) {
+            cr  = _is.cr();
+            dur = _is.duration;
+            }
+      else {
+            cr = getSelectedChordRest();
+            if (cr)
+                  dur = cr->duration();
+            }
+      if (cr == 0 || dur.type() == Duration::V_INVALID)
             return;
 
       int tick = cr->tick();
       Fraction f;
-      if (dur.type() == Duration::V_MEASURE) {
+      if (dur.type() == Duration::V_MEASURE)
             dur.setVal(cr->measure()->tickLen());
-            }
-
 
       f = dur.fraction();
 
