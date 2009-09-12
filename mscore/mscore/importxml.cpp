@@ -635,6 +635,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                      QString("Val: ") + QString("%1").arg(QString::number(tenths,'f',2)) + " " + QString("%1").arg(QString::number(millimeter,'f',2)) + " " + QString("%1").arg(QString::number(INCH,'f',2)),
                                      QString::null, QWidget::tr("Quit"), QString::null, 0, 1);*/
                 score->pageFormat()->readMusicXML(pageLayoutElement, millimeter / (tenths * INCH) );
+                score->setDefaultsRead(true); // TODO only if actually succeeded ?
             }
             else if (tag == "movement-number")
                   score->setMovementNumber(e.text());

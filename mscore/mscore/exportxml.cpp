@@ -1629,7 +1629,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             attr.doAttr(xml, false);
             QString noteTag = QString("note");
 
-            if (pf) {
+            if (pf && (!converterMode || score->defaultsRead()) ) {
                 double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
                 double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
                 double noteX = getTenthsFromDots(note->canvasPos().x());
@@ -2553,11 +2553,11 @@ foreach(Element* el, *(score->gel())) {
       xml.etag();
 
       // to keep most regression testfiles simple, write defaults and credits
-      // in convertmode only when already present in the input file
-      if (!converterMode || score->creditsRead()) {
+      // in convertermode only when already present in the input file
+      if (!converterMode || score->defaultsRead())
             defaults(xml, score, millimeters, tenths);
+      if (!converterMode || score->creditsRead())
             credits(xml);
-      }
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();
@@ -2668,16 +2668,18 @@ foreach(Element* el, *(score->gel())) {
 
                   // printf("measureNo=%d\n", measureNo);
                   // pickup and other irregular measures need special care
+                  QString measureTag = "measure number=";
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
-                        xml.stag(QString("measure number=\"0\" implicit=\"yes\" width=\"%2\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2)));
+                        measureTag += "\"0\" implicit=\"yes\"";
                         pickupMeasureNo++;
                         }
-                  else if (m->irregular()) {
-                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\" width=\"%2\"").arg(irregularMeasureNo++).arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2)));
-                        }
-                  else {
-                        xml.stag(QString("measure number=\"%1\" width=\"%2\"").arg(measureNo++).arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2))); // added measure width
-                        }
+                  else if (m->irregular())
+                        measureTag += QString("\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++);
+                  else
+                        measureTag += QString("\"%1\"").arg(measureNo++);
+                  if (!converterMode || score->defaultsRead())
+                        measureTag += QString(" width=\"%1\"").arg(QString::number(m->bbox().width() / DPMM / millimeters * tenths,'f',2));
+                  xml.stag(measureTag);
 
                   int currentSystem = NoSystem;
                   Measure* previousMeasure;
@@ -2697,7 +2699,8 @@ foreach(Element* el, *(score->gel())) {
                         m->canvasPos().y() > (previousMeasure->canvasPos().y()))  // TODO: MeasureBase
                         currentSystem = NewSystem;
 
-                  if (currentSystem != NoSystem ){
+                  if (currentSystem != NoSystem
+                      && (!converterMode || score->defaultsRead()) ){
                       const double pageHeight  = getTenthsFromInches(pf->height());
                       const double pageWidth  = getTenthsFromInches(pf->width());
                       const double lm = getTenthsFromInches(pf->oddLeftMargin);
