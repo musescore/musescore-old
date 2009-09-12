@@ -408,7 +408,7 @@ void BarLine::endEditDrag()
 
 void BarLine::layout()
       {
-      _span = staff()->barLineSpan();
+      _span = staff() ? staff()->barLineSpan() : 1;
 
       qreal y1, y2;
       getY(&y1, &y2);
