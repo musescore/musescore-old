@@ -180,8 +180,8 @@ void BarLine::draw(QPainter& p) const
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
                   qreal dotw = symbols[dotSym].width(mags);
 
-                  qreal x1   =  dotw + d1 + lw/2;
-                  qreal x2   =  dotw + d1 + lw + d1 + lw2*.5;
+                  qreal x1   =  dotw + d1 + lw * .5;
+                  qreal x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
                   symbols[dotSym].draw(p, mags, 0.0, 1.5 * ld);
                   symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
@@ -205,25 +205,23 @@ void BarLine::draw(QPainter& p) const
             case END_START_REPEAT:
                   {
                   qreal lw2  = point(score()->styleS(ST_endBarWidth));
-                  qreal lw22 = point(score()->styleS(ST_endBarWidth));
                   qreal d1   = point(score()->styleS(ST_endBarDistance));
-
                   qreal dotw = symbols[dotSym].width(mags);
-                  qreal x0   =  dotw/2;
-                  qreal x1   =  dotw + d1 + lw/2;
-                  qreal x2   =  dotw + d1 + lw + d1 + lw22;
-                  qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw/2;
-                  qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1 - dotw/2;
 
-                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
+                  qreal x1   =  dotw + d1 + lw * .5;                                // thin bar
+                  qreal x2   =  dotw + d1 + lw + d1 + lw2 * .5;                     // thick bar
+                  qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw * .5;           // thin bar
+                  qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + dotw * .5;    // dots
+
+                  symbols[dotSym].draw(p, mags, .0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mags, .0, 2.5 * ld);
                   symbols[dotSym].draw(p, mags, x4, 1.5 * ld);
                   symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
                   if (_span == 2) {
-                        symbols[dotSym].draw(p, mags, x0, y2 - ld);
-                        symbols[dotSym].draw(p, mags, x0, y2 - ld);
-                        symbols[dotSym].draw(p, mags, x4, y2 - ld);
-                        symbols[dotSym].draw(p, mags, x4, y2 - ld);
+                        symbols[dotSym].draw(p, mags, .0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, .0, y2 - 2.5 * ld);
+                        symbols[dotSym].draw(p, mags, x4, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, x4, y2 - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
