@@ -649,6 +649,8 @@ void Measure::layout0(int staffIdx)
       foreach(Element* e, _el) {
             if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
                   _breakMMRest = true;
+            else if (e->type() == TEMPO_TEXT)
+                  _breakMMRest = true;
             }
       int track = staffIdx * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -1156,7 +1158,7 @@ void Measure::add(Element* el)
                               // place breath _after_ chord
                               //
                               if (s && st == Segment::SegBreath)
-									 s = s->next();
+                                    s = s->next();
                               }
                         }
                   insert(static_cast<Segment*>(el), s);
@@ -1212,7 +1214,7 @@ void Measure::add(Element* el)
                         }
                   else {
                       if (el->staff() != 0 ){
-                      	el->setMag(el->staff()->mag());
+                        el->setMag(el->staff()->mag());
                       }
                       _el.append(el);
                       }

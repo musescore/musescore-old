@@ -1,5 +1,8 @@
 12.sep (lv)
       - partially fix MusicXML regression test by suppressing layout info in convertermode
+      (db)
+      - break multi-measure rest on tempo text
+      - initial work towards supporting Japanese handbook
 11.sep (ws)
       - fix measure numbers when using multi measure rests
       - break multi measure rest on rehearsal mark
