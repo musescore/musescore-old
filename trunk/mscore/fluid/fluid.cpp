@@ -104,6 +104,8 @@ void Fluid::init(int sr)
       _meterValue[1]     = 0.0;
       _meterPeakValue[0] = 0.0;
       _meterPeakValue[1] = 0.0;
+      meterValues[0]     = 0;
+      meterValues[1]     = 0;
 
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
@@ -114,7 +116,6 @@ void Fluid::init(int sr)
       for (int i = 0; i < 256; i++)
             freeVoices.append(new Voice(this));
 
-      cur    = FLUID_BUFSIZE;
       reverb = new Reverb();
       chorus = new Chorus(sample_rate);
       reverb->setPreset(0);
@@ -533,25 +534,7 @@ void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int 
 
 void Fluid::process(unsigned len, float* lout, float* rout, int stride)
       {
-      for (unsigned int i = 0; i < len; i++, cur++) {
-            if (cur == FLUID_BUFSIZE) {
-                  one_block();
-                  cur = 0;
-                  }
-            *lout = left_buf[cur];
-            *rout = right_buf[cur];
-            lout += stride;
-            rout += stride;
-            }
-      }
-
-//---------------------------------------------------------
-//   one_block
-//---------------------------------------------------------
-
-void Fluid::one_block()
-      {
-      static const int byte_size = FLUID_BUFSIZE * sizeof(float);
+      const int byte_size = len * sizeof(float);
 
       /* clean the audio buffers */
       memset(left_buf,  0, byte_size);
@@ -563,23 +546,48 @@ void Fluid::one_block()
             --silentBlocks;
       else {
             silentBlocks = SILENT_BLOCKS;
-            foreach(Voice* v, activeVoices)
-                  v->write(left_buf, right_buf, fx_buf[0], fx_buf[1]);
+            foreach (Voice* v, activeVoices)
+                  v->write(len, left_buf, right_buf, fx_buf[0], fx_buf[1]);
             }
       if (silentBlocks > 0) {
-            reverb->process(FLUID_BUFSIZE, fx_buf[0], left_buf, right_buf);
-            chorus->process(FLUID_BUFSIZE, fx_buf[1], left_buf, right_buf);
-            double lm = 0.0;
-            double rm = 0.0;
-            for (int i = 0; i < FLUID_BUFSIZE; ++i) {
-                  lm += fabs(left_buf[i]);
-                  rm += fabs(right_buf[i]);
+            reverb->process(len, fx_buf[0], left_buf, right_buf);
+            chorus->process(len, fx_buf[1], left_buf, right_buf);
+            for (unsigned i = 0; i < len; ++i) {
+                  _meterValue[0] += fabs(left_buf[i]);
+                  _meterValue[1] += fabs(right_buf[i]);
                   }
-            lm /= FLUID_BUFSIZE;
-            rm /= FLUID_BUFSIZE;
-            _meterValue[0] = lm;
-            _meterValue[1] = rm;
+            meterValues[0] += len;
+            meterValues[1] += len;
             }
+      for (unsigned i = 0; i < len; i++) {
+            *lout = left_buf[i];
+            *rout = right_buf[i];
+            lout += stride;
+            rout += stride;
+            }
+      }
+
+//---------------------------------------------------------
+//   meterValue
+//---------------------------------------------------------
+
+double Fluid::meterValue(int channel) const
+      {
+      float f = _meterValue[channel] / meterValues[channel];
+      meterValues[channel] = 0;
+      _meterValue[channel] = 0.0;
+      return f;
+      }
+
+//---------------------------------------------------------
+//   meterPeakValue
+//---------------------------------------------------------
+
+double Fluid::meterPeakValue(int channel) const
+      {
+      double v = _meterPeakValue[channel];
+      _meterPeakValue[channel] = 0.0;
+      return v;
       }
 
 /*

@@ -75,9 +75,11 @@ ChordRest* Score::getSelectedChordRest() const
       Element* el = selection()->element();
       if (el) {
             if (el->type() == NOTE)
-                  return ((Note*)el)->chord();
+                  return static_cast<Note*>(el)->chord();
             else if (el->type() == REST || el->type() == REPEAT_MEASURE)
-                  return (Rest*)el;
+                  return static_cast<Rest*>(el);
+            else if (el->type() == CHORD)
+                  return static_cast<Chord*>(el);
             }
       selectNoteRestMessage();
       return 0;
@@ -1399,7 +1401,7 @@ void Score::cmdTuplet(int n)
       tuplet->setDuration(cr->duration());
       tuplet->setBaseLen(duration);
 
-      printf("cmdTuplet: "); tuplet->dump();
+printf("cmdTuplet: "); tuplet->dump();
 
       tuplet->setTrack(cr->track());
       tuplet->setTick(tick);
@@ -1431,25 +1433,26 @@ void Score::cmdTuplet(int n)
 //    replace cr with tuplet
 //---------------------------------------------------------
 
-void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
+void Score::cmdCreateTuplet(ChordRest* ocr, Tuplet* tuplet)
       {
-printf("createTuplet\n");
+printf("createTuplet at %d <%s>\n", ocr->tick(), ocr->name());
 
-      int track        = cr->track();
-      Measure* measure = cr->measure();
-      int tick         = cr->tick();
-      Segment* segment = cr->segment();
+      int track        = ocr->track();
+      Measure* measure = ocr->measure();
+      int tick         = ocr->tick();
+      Segment* segment = ocr->segment();
 
-      undoRemoveElement(cr);
+      undoRemoveElement(ocr);
       if (segment->isEmpty())
             undoRemoveElement(segment);
       undoAddElement(tuplet);
 
-      if (cr->type() == CHORD) {
+      ChordRest* cr;
+      if (ocr->type() == CHORD) {
             cr = new Chord(this);
             Note* note = new Note(this);
-            note->setPitch(getSelectedNote()->pitch());
-            note->setTpc(getSelectedNote()->tpc());
+            note->setPitch(static_cast<Chord*>(ocr)->upNote()->pitch());
+            note->setTpc(static_cast<Chord*>(ocr)->upNote()->tpc());
             note->setTrack(track);
             cr->add(note);
             }

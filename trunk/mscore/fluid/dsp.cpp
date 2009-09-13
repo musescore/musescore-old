@@ -114,7 +114,7 @@ void Voice::dsp_float_config()
 //    efficient.
 //-------------------------------------------------------------------
 
-int Voice::dsp_float_interpolate_none()
+int Voice::dsp_float_interpolate_none(unsigned n)
       {
       Voice* voice = this;
 
@@ -143,7 +143,7 @@ int Voice::dsp_float_interpolate_none()
             dsp_phase_index = dsp_phase.index_round();      // round to nearest point
 
             /* interpolate sequence of sample points */
-            for ( ; dsp_i < FLUID_BUFSIZE && dsp_phase_index <= end_index; dsp_i++) {
+            for ( ; dsp_i < n && dsp_phase_index <= end_index; dsp_i++) {
                   dsp_buf[dsp_i] = dsp_amp * dsp_data[dsp_phase_index];
 
                   /* increment phase and amplitude */
@@ -163,7 +163,7 @@ int Voice::dsp_float_interpolate_none()
                   }
 
             /* break out if filled buffer */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
             }
 
@@ -179,7 +179,7 @@ int Voice::dsp_float_interpolate_none()
 //    smaller if end of sample occurs).
 //---------------------------------------------------------
 
-int Voice::dsp_float_interpolate_linear()
+int Voice::dsp_float_interpolate_linear(unsigned n)
       {
       Voice* voice = this;
       Phase dsp_phase = voice->phase;
@@ -216,7 +216,7 @@ int Voice::dsp_float_interpolate_linear()
             dsp_phase_index = dsp_phase.index();
 
             /* interpolate the sequence of sample points */
-            for ( ; dsp_i < FLUID_BUFSIZE && dsp_phase_index <= end_index; dsp_i++) {
+            for ( ; dsp_i < n && dsp_phase_index <= end_index; dsp_i++) {
                   coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (dsp_phase)];
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * dsp_data[dsp_phase_index]
 				  + coeffs[1] * dsp_data[dsp_phase_index+1]);
@@ -228,13 +228,13 @@ int Voice::dsp_float_interpolate_linear()
                   }
 
             /* break out if buffer filled */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
 
             end_index++;	/* we're now interpolating the last point */
 
             /* interpolate within last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = interp_coeff_linear[fluid_phase_fract_to_tablerow (dsp_phase)];
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * dsp_data[dsp_phase_index]
                      + coeffs[1] * point);
@@ -255,7 +255,7 @@ int Voice::dsp_float_interpolate_linear()
                   }
 
             /* break out if filled buffer */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
             end_index--;	/* set end back to second to last sample point */
             }
@@ -272,7 +272,7 @@ int Voice::dsp_float_interpolate_linear()
 //    smaller if end of sample occurs).
 //-----------------------------------------------------------------------------
 
-int Voice::dsp_float_interpolate_4th_order()
+int Voice::dsp_float_interpolate_4th_order(unsigned n)
       {
       Phase dsp_phase_incr; // end_phase;
       short int* dsp_data = sample->data;
@@ -318,7 +318,7 @@ int Voice::dsp_float_interpolate_4th_order()
             dsp_phase_index = phase.index();
 
             /* interpolate first sample point (start or loop start) if needed */
-            for ( ; dsp_phase_index == start_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for ( ; dsp_phase_index == start_index && dsp_i < n; dsp_i++) {
                   coeffs = interp_coeff[fluid_phase_fract_to_tablerow (phase)];
                   dsp_buf[dsp_i] = amp * (coeffs[0] * start_point
 				  + coeffs[1] * dsp_data[dsp_phase_index]
@@ -332,7 +332,7 @@ int Voice::dsp_float_interpolate_4th_order()
                   }
 
             /* interpolate the sequence of sample points */
-            for ( ; dsp_i < FLUID_BUFSIZE && dsp_phase_index <= end_index; dsp_i++) {
+            for ( ; dsp_i < n && dsp_phase_index <= end_index; dsp_i++) {
                   coeffs = interp_coeff[fluid_phase_fract_to_tablerow (phase)];
                   dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[dsp_phase_index-1]
 				  + coeffs[1] * dsp_data[dsp_phase_index]
@@ -346,13 +346,13 @@ int Voice::dsp_float_interpolate_4th_order()
                   }
 
             /* break out if buffer filled */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
 
             end_index++;	/* we're now interpolating the 2nd to last point */
 
             /* interpolate within 2nd to last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = interp_coeff[fluid_phase_fract_to_tablerow (phase)];
                   dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[dsp_phase_index-1]
 				  + coeffs[1] * dsp_data[dsp_phase_index]
@@ -368,7 +368,7 @@ int Voice::dsp_float_interpolate_4th_order()
             end_index++;	/* we're now interpolating the last point */
 
             /* interpolate within the last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = interp_coeff[fluid_phase_fract_to_tablerow (phase)];
                   dsp_buf[dsp_i] = amp * (coeffs[0] * dsp_data[dsp_phase_index-1]
 				  + coeffs[1] * dsp_data[dsp_phase_index]
@@ -395,7 +395,7 @@ int Voice::dsp_float_interpolate_4th_order()
                         }
                   }
             /* break out if filled buffer */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
             end_index -= 2;	/* set end back to third to last sample point */
             }
@@ -409,7 +409,7 @@ int Voice::dsp_float_interpolate_4th_order()
 //    smaller if end of sample occurs).
 //-----------------------------------------------------------------------------
 
-int Voice::dsp_float_interpolate_7th_order()
+int Voice::dsp_float_interpolate_7th_order(unsigned n)
       {
       Voice* voice = this;
 
@@ -471,7 +471,7 @@ int Voice::dsp_float_interpolate_7th_order()
             dsp_phase_index = dsp_phase.index();
 
             /* interpolate first sample point (start or loop start) if needed */
-            for ( ; dsp_phase_index == start_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for ( ; dsp_phase_index == start_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)start_points[2]
@@ -491,7 +491,7 @@ int Voice::dsp_float_interpolate_7th_order()
             start_index++;
 
             /* interpolate 2nd to first sample point (start or loop start) if needed */
-            for ( ; dsp_phase_index == start_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for ( ; dsp_phase_index == start_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)start_points[1]
@@ -511,7 +511,7 @@ int Voice::dsp_float_interpolate_7th_order()
             start_index++;
 
             /* interpolate 3rd to first sample point (start or loop start) if needed */
-            for ( ; dsp_phase_index == start_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for ( ; dsp_phase_index == start_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)start_points[0]
@@ -531,7 +531,7 @@ int Voice::dsp_float_interpolate_7th_order()
             start_index -= 2;	/* set back to original start index */
 
             /* interpolate the sequence of sample points */
-            for ( ; dsp_i < FLUID_BUFSIZE && dsp_phase_index <= end_index; dsp_i++) {
+            for ( ; dsp_i < n && dsp_phase_index <= end_index; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)dsp_data[dsp_phase_index-3]
@@ -549,13 +549,13 @@ int Voice::dsp_float_interpolate_7th_order()
                   }
 
             /* break out if buffer filled */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
 
             end_index++;	/* we're now interpolating the 3rd to last point */
 
             /* interpolate within 3rd to last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)dsp_data[dsp_phase_index-3]
@@ -575,7 +575,7 @@ int Voice::dsp_float_interpolate_7th_order()
             end_index++;	/* we're now interpolating the 2nd to last point */
 
             /* interpolate within 2nd to last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)dsp_data[dsp_phase_index-3]
@@ -595,7 +595,7 @@ int Voice::dsp_float_interpolate_7th_order()
             end_index++;	/* we're now interpolating the last point */
 
             /* interpolate within last point */
-            for (; dsp_phase_index <= end_index && dsp_i < FLUID_BUFSIZE; dsp_i++) {
+            for (; dsp_phase_index <= end_index && dsp_i < n; dsp_i++) {
                   coeffs = sinc_table7[fluid_phase_fract_to_tablerow (dsp_phase)];
 
                   dsp_buf[dsp_i] = dsp_amp * (coeffs[0] * (float)dsp_data[dsp_phase_index-3]
@@ -629,7 +629,7 @@ int Voice::dsp_float_interpolate_7th_order()
                   }
 
             /* break out if filled buffer */
-            if (dsp_i >= FLUID_BUFSIZE)
+            if (dsp_i >= n)
                   break;
             end_index -= 3;	/* set end back to 4th to last sample point */
             }

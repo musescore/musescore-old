@@ -227,14 +227,14 @@ class Voice
       bool ON() const          { return (status == FLUID_VOICE_ON) && (volenv_section < FLUID_VOICE_ENVRELEASE); }
       int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
 
-      void write(float* l, float* r, float* reverb_buf, float* chorus_buf);
+      void write(unsigned n, float* l, float* r, float* reverb_buf, float* chorus_buf);
       void add_mod(const Mod* mod, int mode);
 
       static void dsp_float_config();
-      int dsp_float_interpolate_none();
-      int dsp_float_interpolate_linear();
-      int dsp_float_interpolate_4th_order();
-      int dsp_float_interpolate_7th_order();
+      int dsp_float_interpolate_none(unsigned);
+      int dsp_float_interpolate_linear(unsigned);
+      int dsp_float_interpolate_4th_order(unsigned);
+      int dsp_float_interpolate_7th_order(unsigned);
       };
 }
 
