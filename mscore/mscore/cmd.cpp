@@ -1030,7 +1030,6 @@ printf("get gap %d/%d\n", gapD.numerator(), gapD.denominator());
                                     }
                               }
                         undoChangeChordRestLen(cr, cr->duration().fraction() + dd);
-                        select(cr, SELECT_SINGLE, 0);
                         if (gapD > gap) {
                               int tick = cr->tick() + cr->ticks();
                               Measure* measure = tick2measure(tick);

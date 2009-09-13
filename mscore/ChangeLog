@@ -1,3 +1,5 @@
+13.sep (ws)
+      - remove buffer layer from fluid resulting in less midi jitter
 12.sep (lv)
       - partially fix MusicXML regression test by suppressing layout info in convertermode
       (db)

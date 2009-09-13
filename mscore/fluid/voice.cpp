@@ -208,7 +208,7 @@ float Voice::gen_get(int g)
 // dsp parameters). The dsp routine is #included in several places (fluid_dsp_core.c).
 //-----------------------------------------------------------------------------
 
-void Voice::write(float* left, float* right, float* reverb, float* chorus)
+void Voice::write(unsigned n, float* left, float* right, float* reverb, float* chorus)
       {
       /* make sure we're playing and that we have sample data */
       if (!PLAYING())
@@ -388,7 +388,7 @@ void Voice::write(float* left, float* right, float* reverb, float* chorus)
             }
 
       /* Volume increment to go from voice->amp to target_amp in FLUID_BUFSIZE steps */
-      amp_incr = (target_amp - amp) / FLUID_BUFSIZE;
+      amp_incr = (target_amp - amp) / n;
 
       fluid_check_fpe ("voice_write amplitude calculation");
 
@@ -495,7 +495,7 @@ void Voice::write(float* left, float* right, float* reverb, float* chorus)
                          * at will.
                          */
 
-                  #define FILTER_TRANSITION_SAMPLES (FLUID_BUFSIZE)
+                  #define FILTER_TRANSITION_SAMPLES 256     // (FLUID_BUFSIZE)
 
                         a1_incr = (a1_temp - a1) / FILTER_TRANSITION_SAMPLES;
                         a2_incr = (a2_temp - a2) / FILTER_TRANSITION_SAMPLES;
@@ -517,21 +517,21 @@ void Voice::write(float* left, float* right, float* reverb, float* chorus)
          * Depending on the position in the loop and the loop size, this
          * may require several runs. */
 
-      float l_dsp_buf[FLUID_BUFSIZE];
+      float l_dsp_buf[n];
       dsp_buf = l_dsp_buf;
       switch (interp_method) {
             case FLUID_INTERP_NONE:
-                  count = dsp_float_interpolate_none();
+                  count = dsp_float_interpolate_none(n);
                   break;
             case FLUID_INTERP_LINEAR:
-                  count = dsp_float_interpolate_linear();
+                  count = dsp_float_interpolate_linear(n);
                   break;
             case FLUID_INTERP_4THORDER:
             default:
-                  count = dsp_float_interpolate_4th_order();
+                  count = dsp_float_interpolate_4th_order(n);
                   break;
             case FLUID_INTERP_7THORDER:
-                  count = dsp_float_interpolate_7th_order();
+                  count = dsp_float_interpolate_7th_order(n);
                   break;
             }
 
@@ -539,11 +539,11 @@ void Voice::write(float* left, float* right, float* reverb, float* chorus)
             effects(count, left, right, reverb, chorus);
 
       /* turn off voice if short count (sample ended and not looping) */
-      if (count < FLUID_BUFSIZE)
+      if (count < n)
             off();
 
    post_process:
-      ticks += FLUID_BUFSIZE;
+      ticks += n;
       }
 
 //---------------------------------------------------------
@@ -1748,14 +1748,10 @@ void Voice::effects(int count, float* left, float* right, float* reverb, float* 
                   }
             }
 
-      if (amp_reverb != 0.0) {
-            for (int i = 0; i < count; i++)
-                  reverb[i] += amp_reverb * dsp_buf[i];
-            }
-
-      if (amp_chorus != 0) {
-            for (int i = 0; i < count; i++)
-                  chorus[i] += amp_chorus * dsp_buf[i];
+      for (int i = 0; i < count; i++) {
+            float v = dsp_buf[i];
+            reverb[i] += amp_reverb * v;
+            chorus[i] += amp_chorus * v;
             }
       }
 

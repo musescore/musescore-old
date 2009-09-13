@@ -104,6 +104,7 @@ Element* Selection::element() const
       {
       if (_state == SEL_SINGLE)
             return _el.front();
+printf("Selection::element: bad state %d\n", int(_state));
       return 0;
       }
 
@@ -310,8 +311,10 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _is.track = e->track();
                         selState = SEL_SINGLE;
                         }
-                  if (e->type() == NOTE || e->type() == REST) {
-                        _is._segment = e->type() == NOTE ? static_cast<Note*>(e)->chord()->segment() : static_cast<Rest*>(e)->segment();
+                  if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
+                        if (e->type() == NOTE)
+                              e = e->parent();
+                        _is._segment = static_cast<ChordRest*>(e)->segment();
                         emit posChanged(_is.tick());
                         }
                   }

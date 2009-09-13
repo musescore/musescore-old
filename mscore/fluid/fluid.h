@@ -37,7 +37,7 @@ class Reverb;
 class Chorus;
 class Fluid;
 
-#define FLUID_BUFSIZE           256  // 64
+#define FLUID_BUFSIZE           4096
 #define FLUID_NUM_PROGRAMS      129
 
 enum fluid_loop {
@@ -306,7 +306,8 @@ class Fluid : public Synth {
       double sample_rate;                 // The sample rate
       float _masterTuning;                // usually 440.0
       double _tuning[128];                // the pitch of every key, in cents
-      double _meterValue[2];
+      mutable double _meterValue[2];
+      mutable double meterValues[2];
       mutable double _meterPeakValue[2];
 
    protected:
@@ -325,7 +326,6 @@ class Fluid : public Synth {
 
       Reverb* reverb;
       Chorus* chorus;
-      int cur;                            // the current sample in the audio buffers to be output
 
    public:
       Fluid();
@@ -337,19 +337,14 @@ class Fluid : public Synth {
       virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
       virtual double masterGain() const            { return _gain; }
       virtual void setMasterGain(double val)       { _gain = val;  }
-      virtual double meterValue(int channel) const { return _meterValue[channel]; }
-      virtual double meterPeakValue(int channel) const {
-            double v = _meterPeakValue[channel];
-            _meterPeakValue[channel] = 0.0;
-            return v;
-            }
+      virtual double meterValue(int channel) const;
+      virtual double meterPeakValue(int channel) const;
       virtual double effectParameter(int effect, int parameter);
       virtual void setEffectParameter(int ffect, int parameter, double value);
 
       bool log(const char* fmt, ...);
 
       bool set_reverb_preset(int num);
-      void one_block();
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
