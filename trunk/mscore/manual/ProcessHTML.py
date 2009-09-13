@@ -84,14 +84,16 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Kapitel'
     elif language_code == 'es':
         chapter = 'Cap&iacute;tulo'
-    elif language_code == 'gl':
-        chapter = 'Cap&iacute;tulo'
     elif language_code == 'fi':
         chapter = 'Luku'
     elif language_code == 'fr':
         chapter = 'Chapitre'
+    elif language_code == 'gl':
+        chapter = 'Cap&iacute;tulo'
     elif language_code == 'it':
         chapter = 'Capitolo'
+    elif language_code == 'ja':
+        chapter = '章'
     elif language_code == 'nb':
         chapter = 'Kapittel'
     elif language_code == 'pl':
@@ -197,13 +199,45 @@ def removeBaseTag(html_source, language_code='en'):
 
 
 # Link pdfstyle.css and remove css from website
-def addCustomStyles(html_source, verbose):
+def addCustomStyles(html_source, verbose, language_code='en'):
+
+    # Allow for language-specific fonts
+    def externalFonts(full_css, language_code='en'):
+        import re
+
+        external_fonts = 'default'
+        
+        if (language_code == 'ja'):
+            external_fonts = '''/* Normal */
+                    @font-face {
+                       font-family: "Sazanami Gothic";
+                       src: url(font/sazanami-20040629/sazanami-gothic.ttf);
+                    }
+                    /* Normal */
+                    @font-face {
+                       font-family: "Sazanami Mincho";
+                       src: url(font/sazanami-20040629/sazanami-mincho.ttf);
+                    }
+                    '''
+            full_css = re.sub('DejaVu Sans','Sazanami Gothic',full_css)
+            full_css = re.sub('DejaVu Serif','Sazanami Mincho',full_css)
+
+        if (external_fonts != 'default'):
+            pattern = re.compile(r'/\* Begin External Fonts \*/.*/\* End External Fonts \*/',re.DOTALL)
+            full_css = re.sub(pattern, external_fonts, full_css)
+
+        return full_css
+
+    
+    
     if verbose:
         print 'Add custom styles'
 
     css_file = open("pdfstyle.css","r")
     sock = css_file.read()
     css_file.close()
+
+    sock = externalFonts(sock,language_code)
 
     html_source = html_source.replace('</head>','<style type="text/css" media="all">\n'
                                       + sock + '</style>\n</head>')
@@ -407,6 +441,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'it':
         url = 'http://www.musescore.org/it/print/book/export/html/772'
         internal = 'http://www.musescore.org/it/manuale'
+    elif language_code == 'ja':
+        url = 'http://www.musescore.org/ja/print/book/export/html/2696'
+        internal = 'http://www.musescore.org/ja/ハンドブック' #%E3%83%8F%E3%83%B3%E3%83%89%E3%83%96%E3%83%83%E3%82%AF'
     elif language_code == 'nb':
         url = 'http://www.musescore.org/nb/print/book/export/html/2122'
         internal = 'http://www.musescore.org/nb/håndbok' #h%C3%A5ndbok'
@@ -440,7 +477,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     html, anchors = insertH3Anchors(html, anchors, verbose)
     html = fixLinks(html, anchors, verbose, internal, language_code)
     html = removeBaseTag(html, language_code)
-    html = addCustomStyles(html, verbose)
+    html = addCustomStyles(html, verbose, language_code)
     html = addPageNumbers(html, verbose)
 
     if download_images != 'local':
@@ -500,10 +537,11 @@ def main():
         createHandbook('nl', 'missing', pdf, verbose, heading_switch) # download only missing images for translations
         createHandbook('de', 'missing', pdf, verbose, heading_switch)
         createHandbook('es', 'missing', pdf, verbose, heading_switch)
-        createHandbook('gl', 'missing', pdf, verbose, heading_switch)
         createHandbook('fi', 'missing', pdf, verbose, heading_switch)
         createHandbook('fr', 'missing', pdf, verbose, heading_switch)
+        createHandbook('gl', 'missing', pdf, verbose, heading_switch)
         createHandbook('it', 'missing', pdf, verbose, heading_switch)
+        #createHandbook('ja', 'missing', pdf, verbose, heading_switch)
         createHandbook('nb', 'missing', pdf, verbose, heading_switch)
         createHandbook('ru', 'missing', pdf, verbose, heading_switch)
         #createHandbook('pl', 'missing', pdf, verbose, heading_switch)
