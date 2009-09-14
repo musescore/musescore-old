@@ -828,6 +828,7 @@ class Score : public QObject {
       void scanElements(void* data, void (*func)(void*, Element*));
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
+      QList<Element*> buildCanonical(int track);
       };
 
 extern Score* gscore;

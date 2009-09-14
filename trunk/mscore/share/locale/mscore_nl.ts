@@ -4,10 +4,6 @@
 <context>
     <name></name>
     <message>
-        <source>system</source>
-        <translation>systeem</translation>
-    </message>
-    <message>
         <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation></translation>
     </message>
@@ -104,6 +100,10 @@
     <message>
         <source>RomÃ¢nÄ</source>
         <translation>Roemeens</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">Systeem</translation>
     </message>
 </context>
 <context>
@@ -259,6 +259,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Measure</source>
         <translation>Maat</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1798,6 +1806,10 @@ space unit</extracomment>
         <source>...</source>
         <translation>...</translation>
     </message>
+    <message>
+        <source>show repeat bar tips</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -3121,24 +3133,12 @@ failed: </source>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <source>Local Manual</source>
-        <translation>Lokaal Handboek</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Online Handboek</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;Over MuseScore</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
         <translation>Over&amp;Qt</translation>
-    </message>
-    <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>MuseScore online handleiding niet gevonden op:</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -4750,18 +4750,6 @@ voordat u afsluit?</translation>
         <translation>Afspelen</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>start sequencer afspelen</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>pauze aan / uit</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Pauze</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>linker akkoord</translation>
     </message>
@@ -5060,6 +5048,53 @@ voordat u afsluit?</translation>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Bestanden (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;BB Bestanden &lt;experimenteel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5478,10 +5513,6 @@ voordat u afsluit?</translation>
         <translation>Terugspoelen</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Pauze</translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation>Afspelen</translation>
     </message>
@@ -5515,25 +5546,9 @@ voordat u afsluit?</translation>
         <translation>Kies Achtergrond</translation>
     </message>
     <message>
-        <source>Choose Synthesizer Sound Font</source>
-        <translation>Kies Synthesizer Sound Font</translation>
-    </message>
-    <message>
-        <source>Choose WorkingDirectory</source>
-        <translation>Kies Werkmap</translation>
-    </message>
-    <message>
-        <source>Choose default Instrument List</source>
-        <translation>Kies standaard Instrumentenlijst</translation>
-    </message>
-    <message>
         <source>Instrument List (*.xml);;All (*)</source>
         <translatorcomment>1 woord</translatorcomment>
         <translation>Instrumentenlijst (*.xml);;Alle (*)</translation>
-    </message>
-    <message>
-        <source>Choose score to start with</source>
-        <translation>Kies partituur waarmee MuseScore moet starten</translation>
     </message>
     <message>
         <source>MuseScore file (*.msc);;All (*)</source>
@@ -5545,9 +5560,16 @@ voordat u afsluit?</translation>
         <translation>standaard</translation>
     </message>
     <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translatorcomment>All -&gt; Alle</translatorcomment>
-        <translation>SoundFont Bestanden (*.sf2 *.SF2);;Alle (*)</translation>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5790,10 +5812,6 @@ voordat u afsluit?</translation>
     <message>
         <source>Use internal synthesizer</source>
         <translation>Gebruik interne synthesizer</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation></translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -6112,15 +6130,6 @@ voordat u afsluit?</translation>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Vervang 1/2 ... with symbol ...</translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation>Hoofd Stemming</translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -6578,6 +6587,13 @@ mislukt:</translation>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: Kopie opslaan</translation>
     </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -6630,6 +6646,53 @@ mislukt:</translation>
     <message>
         <source>Segment Type:</source>
         <translation>Segment Type:</translation>
+    </message>
+</context>
+<context>
+    <name>SelectDialog</name>
+    <message>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished">Actie</translation>
+    </message>
+    <message>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6870,6 +6933,110 @@ mislukt:</translation>
     </message>
 </context>
 <context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">SoundFont Bestanden (*.sf2 *.SF2);;Alle (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished">Hoofd Stemming</translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished">Galm</translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breedte:</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished">Chorus (breder of dieper geluid)</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Type:</translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
@@ -7038,6 +7205,10 @@ mislukt:</translation>
     <message>
         <source>MuseScore: Text Properties</source>
         <translation>MuseScore: Tekst-eigenschappen</translation>
+    </message>
+    <message>
+        <source>apply to all elements of same type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8594,14 +8765,6 @@ p, li { white-space: pre-wrap; }
         <translation>pedaal ped</translation>
     </message>
     <message>
-        <source>bracket ticks up</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>bracket ticks down</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>acc old ee</source>
         <translation>acc oude ee</translation>
     </message>
@@ -8649,6 +8812,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>dot dot</source>
         <translation>dubbele punt</translation>
+    </message>
+    <message>
+        <source>bracket tips right up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips right down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bracket tips left down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

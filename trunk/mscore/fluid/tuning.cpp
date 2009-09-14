@@ -93,7 +93,7 @@ float Tuning::getnotefreq(int note, int keyshift)
             return pow(2.0,(note - aNote + keyshift) / 12.0) * aFreq * globalfinedetunerap;
             }
 
-      int scaleshift = (scaleshift - 64 + octavesize * 100) % octavesize;
+      int lscaleshift = (scaleshift - 64 + octavesize * 100) % octavesize;
 
       //compute the keyshift
       float rap_keyshift = 1.0;
@@ -146,7 +146,7 @@ float Tuning::getnotefreq(int note, int keyshift)
                   degoct=-degoct;
                   }
             //compute the frequency of the note
-            degkey =  degkey+scaleshift;
+            degkey =  degkey+lscaleshift;
             degoct += degkey/octavesize;
             degkey %= octavesize;
 
@@ -155,7 +155,7 @@ float Tuning::getnotefreq(int note, int keyshift)
             freq *= aFreq/rap_anote_middlenote;
             }
       else {      //if the mapping is disabled
-            int nt     = note - aNote + scaleshift;
+            int nt     = note - aNote + lscaleshift;
             int ntkey  = (nt + octavesize * 100) % octavesize;
             int ntoct  = (nt-ntkey) / octavesize;
             float oct  = octave[octavesize - 1].tuning;
@@ -163,7 +163,7 @@ float Tuning::getnotefreq(int note, int keyshift)
             if (ntkey == 0)
                   freq /= oct;
             }
-      if (scaleshift)
+      if (lscaleshift)
             freq /= octave[scaleshift-1].tuning;
       freq *= globalfinedetunerap;
       return freq * rap_keyshift;

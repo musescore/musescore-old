@@ -66,6 +66,8 @@ Rest::Rest(Score* s, int tick, const Duration& d)
 
 void Rest::draw(QPainter& p) const
       {
+      if (generated())
+            return;
       double _spatium = spatium();
 
       Measure* m = measure();

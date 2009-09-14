@@ -228,7 +228,6 @@ class Voice
       int SAMPLEMODE() const   { return ((int)gen[GEN_SAMPLEMODE].val); }
 
       void write(unsigned n, float* l, float* r, float* reverb_buf, float* chorus_buf);
-      void post_process(unsigned n);
       void add_mod(const Mod* mod, int mode);
 
       static void dsp_float_config();

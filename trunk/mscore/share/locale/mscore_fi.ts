@@ -3006,24 +3006,12 @@ failed: </source>
         <translation>&amp;Ohje</translation>
     </message>
     <message>
-        <source>Local Manual</source>
-        <translation>Paikallinen manuaali</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Online-manuaali</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;Tietoja</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
         <translation>Tietoja &amp;Qt:stä</translation>
-    </message>
-    <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>MuseScore Online-manuaalia ei löytynyt: </translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -4623,18 +4611,6 @@ ennen sulkemista?</translation>
         <translation>Toista</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>aloita toisto</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>keskeytä</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Keskeytä</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>vasen sointu</translation>
     </message>
@@ -4945,6 +4921,37 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5349,10 +5356,6 @@ ennen sulkemista?</translation>
         <translation>Takaisin</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Keskeytä</translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation>Toista</translation>
     </message>
@@ -5394,14 +5397,6 @@ ennen sulkemista?</translation>
     <message>
         <source>default</source>
         <translation>oletus</translation>
-    </message>
-    <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>SoundFont-tiedostot (*.sf2 *.SF2);;Kaikki (*)</translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -5645,10 +5640,6 @@ ennen sulkemista?</translation>
     <message>
         <source>Use internal synthesizer</source>
         <translation>Käytä sisäistä syntetisaattoria</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation>Sound Font</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -5958,15 +5949,6 @@ ennen sulkemista?</translation>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Korvaa 1/2 .. symbolilla ...</translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6412,6 +6394,7 @@ epäonnistui:</translation>
     <message>
         <source>The following file is locked: 
 %1 
+
 Try saving to a different location.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6743,6 +6726,110 @@ Try saving to a different location.</source>
     <message>
         <source>Delete</source>
         <translation>Poista</translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">SoundFont-tiedostot (*.sf2 *.SF2);;Kaikki (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished">Voima</translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished">Sound Font</translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Leveys:</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished">Kuoro</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

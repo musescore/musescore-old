@@ -2789,24 +2789,12 @@ failed: </source>
         <translation>&amp;عون</translation>
     </message>
     <message>
-        <source>Local Manual</source>
-        <translation>الكتيّب من جهازك</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>الكتيّب من الإنترنت</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;بيان</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
         <translation>عن &amp;Qt</translation>
-    </message>
-    <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>لم يُعثر على كتيّب ميوزسكور على اﻹنترنت فى:</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -4073,18 +4061,6 @@ failed: </source>
         <translation>عزف</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>بدء تشغيل المعزف</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>تبديل السكوت</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>سكوت</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>التراكب الأيسر</translation>
     </message>
@@ -4957,6 +4933,37 @@ before closing?</source>
         <source>All Similar Elements in Same Staff</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5359,10 +5366,6 @@ before closing?</source>
         <translation>إرجاع</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>سكوت</translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation>عزف</translation>
     </message>
@@ -5404,14 +5407,6 @@ before closing?</source>
     <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>ملف ميوزسكور (*.msc);;الكلّ (*)</translation>
-    </message>
-    <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>ملفات أصوات مخلّقة (*.sf2 *.SF2);;الكلّ (*)</translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -5705,10 +5700,6 @@ before closing?</source>
         <translation>استعمال المخلّق الضمنىّ</translation>
     </message>
     <message>
-        <source>Sound Font</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>JACK Audio Server</source>
         <translation></translation>
     </message>
@@ -5968,15 +5959,6 @@ before closing?</source>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>استبدال 1\2 ... بالرمز ...</translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6423,6 +6405,7 @@ failed: </source>
     <message>
         <source>The following file is locked: 
 %1 
+
 Try saving to a different location.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6754,6 +6737,110 @@ Try saving to a different location.</source>
     <message>
         <source>Delete</source>
         <translation>مسح</translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">ملفات أصوات مخلّقة (*.sf2 *.SF2);;الكلّ (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">الاتساع:</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">طراز:</translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

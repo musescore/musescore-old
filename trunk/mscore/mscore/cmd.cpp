@@ -691,7 +691,7 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
          Fraction::fromTicks(cr->measure()->tickLen()) : d.fraction();
 
       Segment* seg = 0;
-      Measure* measure;
+      Measure* measure = 0;
       while (true) {
             // the returned gap ends at the measure boundary or at tuplet end
             Fraction dd = makeGap(cr, sd);

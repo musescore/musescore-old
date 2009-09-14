@@ -602,7 +602,7 @@ void Beam::layout()
       double p2x  = c2->upNote()->canvasPos().x();
 
       qreal slope = 0.0;
-      double beamY;  // y position of main beam start
+      double beamY = 0.0;  // y position of main beam start
       int cut = 0;
 
       if (_userModified) {
@@ -798,7 +798,7 @@ void Beam::layout()
             Chord* nn1 = 0;
             Chord* nn2 = 0;
             bool nn1r  = false;
-            double y1;
+            double y1  = 0.0;
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;

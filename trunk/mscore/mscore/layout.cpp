@@ -1047,10 +1047,9 @@ bool Score::doReLayout()
       MeasureBase* m = 0;
       foreach(m, system->measures()) {
             double ww;
-            if (m->type() == HBOX) {
+            if (m->type() == HBOX)
                   ww = point(static_cast<Box*>(m)->boxWidth());
-                  }
-            else if (m->type() == MEASURE) {
+            else {            // MEASURE
                   Measure* measure = static_cast<Measure*>(m);
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
                         measure->layout0(staffIdx);

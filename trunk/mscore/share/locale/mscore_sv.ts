@@ -3166,24 +3166,12 @@ före stängning?</translation>
         <translation>&amp;Hjälp</translation>
     </message>
     <message>
-        <source>Local Manual</source>
-        <translation>Lokal handbok</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Internethandbok</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;Om</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
         <translation>Om &amp;Qt</translation>
-    </message>
-    <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>MuseScores internethandbok icke funnen vid: </translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -4630,18 +4618,6 @@ före stängning?</translation>
         <translation>Spela</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>starta spelare</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>paus av/på</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Paus</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>vänster ackord</translation>
     </message>
@@ -4951,6 +4927,37 @@ före stängning?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5355,10 +5362,6 @@ före stängning?</translation>
         <translation>Bakåt</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Paus</translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation>Spela</translation>
     </message>
@@ -5394,20 +5397,12 @@ före stängning?</translation>
         <translation>Välj bakgrund</translation>
     </message>
     <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>Ljudfontfiler (*.sf2 *.SF2);;Alla (*)</translation>
-    </message>
-    <message>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Instrumentlista (*.xml);;Alla (*)</translation>
     </message>
     <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore-fil (*.msc);;Alla (*)</translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -5785,10 +5780,6 @@ före stängning?</translation>
         <translation>Använd intern synt</translation>
     </message>
     <message>
-        <source>Sound Font</source>
-        <translation>Ljudfont</translation>
-    </message>
-    <message>
         <source>JACK Audio Server</source>
         <translation>Ljudservern JACK</translation>
     </message>
@@ -5964,15 +5955,6 @@ före stängning?</translation>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Ersätt 1/2 ... med symbol ...</translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6362,12 +6344,6 @@ misslyckades: </translation>
 </translation>
     </message>
     <message>
-        <source>The following file is locked: 
-%1 
-Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation type="unfinished">Komprimerat MuseScore-format (*.mscz)</translation>
     </message>
@@ -6422,6 +6398,13 @@ Try saving to a different location.</source>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation type="unfinished">MuseScore: Spara en kopia</translation>
+    </message>
+    <message>
+        <source>The following file is locked: 
+%1 
+
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6751,6 +6734,110 @@ Try saving to a different location.</source>
     <message>
         <source>Delete</source>
         <translation>Radera</translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">Ljudfontfiler (*.sf2 *.SF2);;Alla (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished">Eko</translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished">Kor</translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished">Vol</translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished">Ljudfont</translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished">Eko</translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Bredd:</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished">Korus</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Typ:</translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

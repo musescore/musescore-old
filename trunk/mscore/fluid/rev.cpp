@@ -224,6 +224,7 @@ double Reverb::parameter(int idx) const
             case 2:     return width;
             case 3:     return gain;
             }
+      return 0.0;
       }
 
 
