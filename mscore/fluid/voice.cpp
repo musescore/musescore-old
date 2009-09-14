@@ -219,7 +219,6 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       float target_amp;    /* target amplitude */
-      int count;
       fluid_env_data_t* env_data;
       float x;
       float _fres;
@@ -334,10 +333,10 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
        * - amplitude envelope
        */
 
-      if (volenv_section == FLUID_VOICE_ENVDELAY){
-            post_process(n);  /* The volume amplitude is in hold phase. No sound is produced. */
-            return;
-      }
+      if (volenv_section == FLUID_VOICE_ENVDELAY) {
+            ticks += n;
+            return;     /* The volume amplitude is in hold phase. No sound is produced. */
+            }
 
       if (volenv_section == FLUID_VOICE_ENVATTACK) {
             /* the envelope is in the attack section: ramp linearly to max value.
@@ -385,7 +384,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
              * can safely turn off the voice. Duh. */
             if (amp_max < amplitude_that_reaches_noise_floor) {
                   off();
-                  post_process(n); 
+                  ticks += n;
                   return;
                   }
             }
@@ -396,10 +395,11 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
       fluid_check_fpe ("voice_write amplitude calculation");
 
       /* no volume and not changing? - No need to process */
-      if ((amp == 0.0f) && (amp_incr == 0.0f)){
-            post_process(n); 
+
+      if ((amp == 0.0f) && (amp_incr == 0.0f)) {
+            ticks += n;
             return;
-      }
+            }
 
       /* Calculate the number of samples, that the DSP loop advances
        * through the original waveform with each step in the output
@@ -524,6 +524,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
 
       float l_dsp_buf[n];
       dsp_buf = l_dsp_buf;
+      unsigned count;
       switch (interp_method) {
             case FLUID_INTERP_NONE:
                   count = dsp_float_interpolate_none(n);
@@ -546,16 +547,9 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
       /* turn off voice if short count (sample ended and not looping) */
       if (count < n)
             off();
-  }
 
-
-//---------------------------------------------------------
-//   post_process
-//---------------------------------------------------------
-void Voice::post_process(unsigned n)
-      {
       ticks += n;
-  }
+      }
 
 
 //---------------------------------------------------------

@@ -2994,10 +2994,6 @@ failed: </source>
         <translation>A propos de &amp;Qt</translation>
     </message>
     <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>Le manuel de MuseScore n&apos;a pas été trouvé à : </translation>
-    </message>
-    <message>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore : Ouvrir l&apos;aide</translation>
     </message>
@@ -3108,14 +3104,6 @@ failed: </source>
     <message>
         <source>Parts...</source>
         <translation>Parties...</translation>
-    </message>
-    <message>
-        <source>Local Manual</source>
-        <translation>Manuel local</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Manuel en ligne</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -4635,18 +4623,6 @@ avant de fermer ?</translation>
         <translation>Jouer</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>démarrer la lecture</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>Lecture / Pause</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Pause</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>accord gauche</translation>
     </message>
@@ -4957,6 +4933,37 @@ avant de fermer ?</translation>
     <message>
         <source>All Similar Elements in Same Staff</source>
         <translation>Tous les éléments similaires de la même portée</translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5340,10 +5347,6 @@ avant de fermer ?</translation>
         <translation>Retour rapide</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Pause</translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation>Jouer</translation>
     </message>
@@ -5405,14 +5408,6 @@ avant de fermer ?</translation>
     <message>
         <source>default</source>
         <translation>Défaut</translation>
-    </message>
-    <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>Fichiers SoundFont (*.sf2 *.SF2);;All (*)</translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation>Choisir la SoundFont du synthétiseur</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -5620,10 +5615,6 @@ avant de fermer ?</translation>
     <message>
         <source>Use internal synthesizer</source>
         <translation>Utiliser le synthétiseur interne</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation>SoundFont</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -5969,16 +5960,6 @@ avant de fermer ?</translation>
     <message>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Remplacer 1/2... par le symbole ½...</translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation>Fréquence d&apos;accord de référence</translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translatorcomment>Frequency measure = Hz = Heinrich Hertz - German physician - 1857 / 1894</translatorcomment>
-        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -6425,10 +6406,9 @@ failed: </source>
     <message>
         <source>The following file is locked: 
 %1 
+
 Try saving to a different location.</source>
-        <translation>Le fichier suivant est verrouillé :
-%1 
-Essayez de sauvegarder à un autre emplacement.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6758,6 +6738,110 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <message>
         <source>Delete</source>
         <translation>Supprimer</translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished">Choisir la SoundFont du synthétiseur</translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">Fichiers SoundFont (*.sf2 *.SF2);;All (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished">Rev</translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished">Cho</translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished">Vol</translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished">Fréquence d&apos;accord de référence</translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished">Hz</translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished">SoundFont</translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished">Réverbération</translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Largeur :</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished">Chorus</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Type :</translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

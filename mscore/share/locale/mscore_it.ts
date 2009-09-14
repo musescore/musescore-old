@@ -2989,10 +2989,6 @@ fallito: </translation>
         <translation>Do maggiore, La minore</translation>
     </message>
     <message>
-        <source>MuseScore online manual not found at: </source>
-        <translation>Manuale In-Linea di MuseScore non trovato a:</translation>
-    </message>
-    <message>
         <source>15ma</source>
         <translation>15ma</translation>
     </message>
@@ -3107,14 +3103,6 @@ fallito: </translation>
     <message>
         <source>Parts...</source>
         <translation>Seleziona Parti...</translation>
-    </message>
-    <message>
-        <source>Local Manual</source>
-        <translation>Manuale Locale</translation>
-    </message>
-    <message>
-        <source>Online Manual</source>
-        <translation>Manuale On-Line</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -4634,18 +4622,6 @@ prima di chiudere?</translation>
         <translation>Riproduci</translation>
     </message>
     <message>
-        <source>start sequencer play</source>
-        <translation>avvia riproduzione</translation>
-    </message>
-    <message>
-        <source>toggle pause</source>
-        <translation>interruttore pausa</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation>Pausa</translation>
-    </message>
-    <message>
         <source>left chord</source>
         <translation>accordo sinistra</translation>
     </message>
@@ -4955,6 +4931,37 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5351,10 +5358,6 @@ prima di chiudere?</translation>
         <translation>100%</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Pausa</translation>
-    </message>
-    <message>
         <source>measure.beat</source>
         <translation>misura.battito</translation>
     </message>
@@ -5404,14 +5407,6 @@ prima di chiudere?</translation>
     <message>
         <source>default</source>
         <translation>Predefinito</translation>
-    </message>
-    <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation>File SoundFont (*.sf2 *.SF2);;All (*)</translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -5483,10 +5478,6 @@ prima di chiudere?</translation>
     <message>
         <source>Colors</source>
         <translation>Colori</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation>Suono sintetizzatore</translation>
     </message>
     <message>
         <source>Program Start</source>
@@ -5969,15 +5960,6 @@ prima di chiudere?</translation>
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Sostituisci 1/2 ... con il simbolo ...</translation>
     </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6426,6 +6408,7 @@ selezionare una battuta e riprovare</translation>
     <message>
         <source>The following file is locked: 
 %1 
+
 Try saving to a different location.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6757,6 +6740,110 @@ Try saving to a different location.</source>
     <message>
         <source>System Flag</source>
         <translation>Marcatore di Sistema</translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished">File SoundFont (*.sf2 *.SF2);;All (*)</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rev</source>
+        <translation type="unfinished">Riv</translation>
+    </message>
+    <message>
+        <source>Cho</source>
+        <translation type="unfinished">Cho</translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>loaded sound font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Font</source>
+        <translation type="unfinished">Suono sintetizzatore</translation>
+    </message>
+    <message>
+        <source>Reverb</source>
+        <translation type="unfinished">Riverbero</translation>
+    </message>
+    <message>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Spessore:</translation>
+    </message>
+    <message>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chorus</source>
+        <translation type="unfinished">Chorus</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Tipo:</translation>
+    </message>
+    <message>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

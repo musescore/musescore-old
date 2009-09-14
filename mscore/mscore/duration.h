@@ -55,7 +55,7 @@ class DurationElement : public Element {
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }
       int ticks() const;
-      int tickLen() const { return ticks(); }
+      int tickLen() const                            { return ticks(); }
       void setDots(int n)                            { _duration.setDots(n); }
       int dots() const                               { return _duration.dots(); }
       void convertTicks();   // for scores version < 1.12
