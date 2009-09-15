@@ -332,17 +332,14 @@ void ExportLy::findBrackets()
 
 
 void ExportLy::bracktest()
-{
-  int i=0;
-  for (i=0; i<10; i++)
-    {
-      cout << "stavnr: " << i << "   braceno: " << (int)lybracks[i].braceno << "   brackno: " << (int)lybracks[i].brakno;
-      cout << "   bracestart: " << (int)lybracks[i].bracestart << "   brakstart: " << (int)lybracks[i].brakstart;
-      cout << "   braceend: " << (int)lybracks[i].braceend << "   brackend: " << (int) lybracks[i].brakend << "\n";
-    }
-}
-
-
+      {
+      for (int i = 0; i < 10; i++) {
+            printf("stavnr: %d braceno: %d brackno %d\n", i, lybracks[i].braceno, lybracks[i].brakno);
+// TODO: change to printf
+//            cout << "   bracestart: " << (int)lybracks[i].bracestart << "   brakstart: " << (int)lybracks[i].brakstart;
+//            cout << "   braceend: " << (int)lybracks[i].braceend << "   brackend: " << (int) lybracks[i].brakend << "\n";
+            }
+      }
 
 //-------------------------------------------------------
 // instructionJump
@@ -477,7 +474,7 @@ void ExportLy::tempoText(TempoText* text)
 
 void ExportLy::words(Text* text)
      {
-      
+
        //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
        if (!(text->subtypeName()== "RehearsalMark"))
 	 out << "^\\markup {\"" << text->getText() << "\"} ";
@@ -725,12 +722,12 @@ void ExportLy::handlePreInstruction(Element * el)
 	{
 	  Element * instruction = anchors[i].instruct;
 	  ElementType instructiontype = instruction ->type();
-	  
+
 	  switch(instructiontype)
 	    {
 	    case STAFF_TEXT:
 	    case TEXT:
-	      text = (Text*) instruction; 
+	      text = (Text*) instruction;
 	      if (text->subtypeName()== "RehearsalMark")
 		{
 		  out << "\\mark\\default ";
@@ -2623,13 +2620,13 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------- NEWS and HISTORY:--------------------  */
 
-/* 
+/*
    12.sep.2009 (Olav) Improved export of rehearsalmarks.
-   
-   17.aug.2009 (db) add quotes around unparsed markup (since it can 
+
+   17.aug.2009 (db) add quotes around unparsed markup (since it can
    contain special characters), commented out the indent=0, fix spelling
    mistake for octave markings ("set-octaviation"), fix type of ottava
-   
+
    mar. 2009 always explicit end-bar -> no need to declare last bar as
    incomplete, but writes two end-bars when last bar is complete. This
    doesn't show in print.

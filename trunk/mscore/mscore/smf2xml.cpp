@@ -23,9 +23,6 @@
 #include "xml.h"
 #include "midifile.h"
 
-QTextStream cout(stdout);
-QTextStream eout(stderr);
-
 static const char versionString[] = "0.1";
 
 int division         = 480;

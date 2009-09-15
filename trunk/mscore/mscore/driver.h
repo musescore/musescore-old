@@ -51,7 +51,6 @@ class Driver {
       virtual void putEvent(const Event&) = 0;
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
-      virtual const MidiPatch* getPatchInfo(bool /*onlyDrums*/, const MidiPatch*) { return 0; }
 
       Synth* getSynth() const { return synth; }
       };

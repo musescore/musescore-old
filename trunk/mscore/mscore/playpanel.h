@@ -38,11 +38,11 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       virtual void closeEvent(QCloseEvent*);
 
    private slots:
-      void volumeChanged(int);
+      void volumeChanged(double,int);
       void posChanged(int);
 
    signals:
-      void relTempoChanged(int);
+      void relTempoChanged(double,int);
       void posChange(int);
       void volChange(float);
       void closed();

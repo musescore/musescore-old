@@ -48,10 +48,10 @@ extern bool midiOutputTrace;  ///< debug option: dump midi output
 extern bool converterMode;
 extern double converterDpi;
 
-static const QString mimeSymbolFormat("application/mscore/symbol");
-static const QString mimeSymbolListFormat("application/mscore/symbollist");
-static const QString mimeStaffListFormat("application/mscore/stafflist");
-static const QString mimeMeasureListFormat("application/mscore/measurelist");
+static const char mimeSymbolFormat[]      = "application/mscore/symbol";
+static const char mimeSymbolListFormat[]  = "application/mscore/symbollist";
+static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
+static const char mimeMeasureListFormat[] = "application/mscore/measurelist";
 
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;           // printer points per inch
@@ -78,13 +78,13 @@ enum LineSegmentType {
       };
 
 enum AlignmentFlags {
-             ALIGN_LEFT     = 0,
-             ALIGN_RIGHT    = 1,
-             ALIGN_HCENTER  = 2,
-             ALIGN_TOP      = 0,
-             ALIGN_BOTTOM   = 4,
-             ALIGN_VCENTER  = 8,
-             ALIGN_BASELINE = 16
+      ALIGN_LEFT     = 0,
+      ALIGN_RIGHT    = 1,
+      ALIGN_HCENTER  = 2,
+      ALIGN_TOP      = 0,
+      ALIGN_BOTTOM   = 4,
+      ALIGN_VCENTER  = 8,
+      ALIGN_BASELINE = 16
       };
 
 Q_DECLARE_FLAGS(Align, AlignmentFlags);
@@ -126,10 +126,5 @@ static const int MAX_STAVES = 4;
 static const qreal DPMM_DISPLAY = 4;   // 100 DPI
 static const qreal PALETTE_SPATIUM = 1.9 * DPMM_DISPLAY;
 
-extern QString language;
-
-extern QTextStream cout, eout;
-
-// extern QPrinter* pdev;
 extern QPaintDevice* pdev;
 #endif

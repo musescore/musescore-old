@@ -100,12 +100,6 @@ void Fluid::init(int sr)
       sample_rate        = double(sr);
       sfont_id           = 0;
       _gain              = .2;
-      _meterValue[0]     = 0.0;
-      _meterValue[1]     = 0.0;
-      _meterPeakValue[0] = 0.0;
-      _meterPeakValue[1] = 0.0;
-      meterValues[0]     = 0;
-      meterValues[1]     = 0;
 
       state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
@@ -281,36 +275,6 @@ void Fluid::system_reset()
             c->reset();
       chorus->reset();
       reverb->reset();
-      }
-
-//---------------------------------------------------------
-//   getPatchInfo
-//---------------------------------------------------------
-
-const MidiPatch* Fluid::getPatchInfo(bool onlyDrums, const MidiPatch* pp) const
-      {
-      static MidiPatch patch;
-
-      foreach(const SFont* sf, sfonts) {
-            BankOffset* bo = get_bank_offset0(sf->id());
-            int bankOffset = bo ? bo->offset : 0;
-            foreach (Preset* p, sf->getPresets()) {
-                  int bank = p->get_banknum() + bankOffset;
-                  if (onlyDrums && p->get_banknum() != 128)
-                        continue;
-                  int program = p->get_num();
-                  if (pp == 0) {
-                        patch.name = p->get_name();
-                        patch.bank = bank;
-                        patch.prog = program;
-                        patch.drum = onlyDrums;
-                        return &patch;
-                        }
-                  if (pp->name == p->get_name() && pp->bank == bank && pp->prog == program)
-                        pp = 0;
-                  }
-            }
-      return 0;
       }
 
 /*
@@ -552,12 +516,6 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
       if (silentBlocks > 0) {
             reverb->process(len, fx_buf[0], left_buf, right_buf);
             chorus->process(len, fx_buf[1], left_buf, right_buf);
-            for (unsigned i = 0; i < len; ++i) {
-                  _meterValue[0] += fabs(left_buf[i]);
-                  _meterValue[1] += fabs(right_buf[i]);
-                  }
-            meterValues[0] += len;
-            meterValues[1] += len;
             }
       for (unsigned i = 0; i < len; i++) {
             *lout = left_buf[i];
@@ -565,29 +523,6 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
             lout += stride;
             rout += stride;
             }
-      }
-
-//---------------------------------------------------------
-//   meterValue
-//---------------------------------------------------------
-
-double Fluid::meterValue(int channel) const
-      {
-      float f = _meterValue[channel] / meterValues[channel];
-      meterValues[channel] = 0;
-      _meterValue[channel] = 0.0;
-      return f;
-      }
-
-//---------------------------------------------------------
-//   meterPeakValue
-//---------------------------------------------------------
-
-double Fluid::meterPeakValue(int channel) const
-      {
-      double v = _meterPeakValue[channel];
-      _meterPeakValue[channel] = 0.0;
-      return v;
       }
 
 /*
@@ -773,7 +708,32 @@ int Fluid::sfload(const QString& filename, int reset_presets)
       if (reset_presets)
             program_reset();
 
+      updatePatchList();
       return (int) sf->id();
+      }
+
+//---------------------------------------------------------
+//   updatePatchList
+//---------------------------------------------------------
+
+void Fluid::updatePatchList()
+      {
+      foreach(MidiPatch* p, patches)
+            delete p;
+      patches.clear();
+
+      foreach(const SFont* sf, sfonts) {
+            BankOffset* bo = get_bank_offset0(sf->id());
+            int bankOffset = bo ? bo->offset : 0;
+            foreach (Preset* p, sf->getPresets()) {
+                  MidiPatch* patch = new MidiPatch;
+                  patch->name = p->get_name();
+                  patch->bank = p->get_banknum() + bankOffset;
+                  patch->prog = p->get_num();
+                  patch->drum = (p->get_banknum() == 128);
+                  patches.append(patch);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -797,6 +757,7 @@ bool Fluid::sfunload(unsigned int id, int reset_presets)
       else
             update_presets();
       delete sf;
+      updatePatchList();
       return true;
       }
 

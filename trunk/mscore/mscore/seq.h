@@ -82,9 +82,13 @@ class Seq : public QObject {
 
       Driver* driver;
 
+      double _meterValue[2];
+      double meterValues;
+      double _meterPeakValue[2];
+
       EventMap events;                    // playlist
 
-      QList<const Event*> activeNotes;   // notes sounding
+      QList<const Event*> activeNotes;    // notes sounding
       double playTime;
       double startTime;
 
@@ -95,8 +99,6 @@ class Seq : public QObject {
       int endTick;
       int curTick;
       int curUtick;
-
-      float _volume;
 
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
@@ -122,8 +124,8 @@ class Seq : public QObject {
       void midiInputReady();
 
    public slots:
-      void setVolume(float);
-      void setRelTempo(int);
+      void setRelTempo(double);
+      void setMasterVolume(float);
       void seek(int);
       void stopNotes();
 
@@ -160,7 +162,6 @@ class Seq : public QObject {
       QList<QString> inputPorts();
       int sampleRate() const;
       int getEndTick() const    { return endTick;  }
-      float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
       void startNote(Channel*, int, int, int, double nt);
@@ -170,10 +171,11 @@ class Seq : public QObject {
       Score* score() const { return cs; }
       void initInstruments();
 
-      const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p);
+      const QList<MidiPatch*>& getPatchInfo() const;
       Driver* getDriver()  { return driver; }
       int getCurTime();
       void getCurTick(int*, int*);
+      float masterVolume() const;
       };
 
 extern Seq* seq;

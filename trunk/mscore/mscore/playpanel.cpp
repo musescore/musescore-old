@@ -38,20 +38,20 @@ PlayPanel::PlayPanel(QWidget* parent)
       cachedTickPosition = -1;
       cachedTimePosition = -1;
       setupUi(this);
-      volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
-      tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
+      // volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
+//      tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
 
-      int lineStep = (MAX_VOL - MIN_VOL) * 10;
-      volumeSlider->setSingleStep(lineStep);
-      volumeSlider->setPageStep(lineStep * 10);
-      volumeSlider->setInvertedAppearance(true);  // cannot be set from designer
+      // int lineStep = (MAX_VOL - MIN_VOL) * 10;
+      // volumeSlider->setSingleStep(lineStep);
+      // volumeSlider->setPageStep(lineStep * 10);
+      // volumeSlider->setInvertedAppearance(true);  // cannot be set from designer
 
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
 
-      connect(volumeSlider, SIGNAL(sliderMoved(int)), SLOT(volumeChanged(int)));
+      connect(volumeSlider, SIGNAL(valueChanged(double,int)), SLOT(volumeChanged(double,int)));
       connect(posSlider,    SIGNAL(sliderMoved(int)),  SLOT(posChanged(int)));
-      connect(tempoSlider,  SIGNAL(valueChanged(int)), SIGNAL(relTempoChanged(int)));
+      connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SIGNAL(relTempoChanged(double,int)));
       }
 
 //---------------------------------------------------------
@@ -111,26 +111,16 @@ void PlayPanel::setRelTempo(int val)
 
 void PlayPanel::setVolume(float val)
       {
-      int vol = int(log10(val)*20000.0);
-      volumeSlider->setValue((MAX_VOL + MIN_VOL)*1000 - vol);
+      volumeSlider->setValue(val);
       }
 
 //---------------------------------------------------------
 //   volumeChanged
 //---------------------------------------------------------
 
-void PlayPanel::volumeChanged(int val)
+void PlayPanel::volumeChanged(double val, int)
       {
-      float volume;
-      val = (MAX_VOL + MIN_VOL) * 1000 - val;
-
-      if (val <= MIN_VOL * 1000)
-            volume = 0.0;
-      else {
-            float fval = float(val)/20000.0;
-            volume = pow(10.0, fval);
-            }
-      emit volChange(volume);
+      emit volChange(val);
       }
 
 //---------------------------------------------------------

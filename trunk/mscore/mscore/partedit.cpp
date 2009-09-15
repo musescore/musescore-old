@@ -123,14 +123,12 @@ void InstrumentListEditor::updateAll(Score* score)
       foreach (const MidiMapping& m, *mm) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            const MidiPatch* p = 0;
-            for (;;) {
-                  p = seq->getPatchInfo(m.part->useDrumset(), p);
-                  if (p == 0)
-                        break;
-                  pe->patch->addItem(p->name);
+            bool drum = m.part->useDrumset();
+            const QList<MidiPatch*> pl = seq->getPatchInfo();
+            foreach(const MidiPatch* p, pl) {
+                  if (p->drum == drum)
+                        pe->patch->addItem(p->name, QVariant::fromValue<void*>((void*)p));
                   }
-            ++idx;
             pe->setPart(m.part, m.articulation);
             }
       }
@@ -153,20 +151,11 @@ void MuseScore::showMixer(bool val)
 
 void PartEdit::patchChanged(int n)
       {
-      const MidiPatch* p = 0;
-      for (int idx = 0;; ++idx) {
-            p = seq->getPatchInfo(part->useDrumset(), p);
-            if (p == 0)
-                  break;
-            if (idx == n) {
-                  Score* score = part->score();
-                  score->startCmd();
-                  score->undo()->push(new ChangePatch(part, channel, p->prog, p->bank));
-                  score->endCmd();
-                  return;
-                  }
-            }
-      printf("patch %d not found\n", n);
+      MidiPatch* p = (MidiPatch*)patch->itemData(n, Qt::UserRole).value<void*>();
+      Score* score = part->score();
+      score->startCmd();
+      score->undo()->push(new ChangePatch(part, channel, p->prog, p->bank));
+      score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -258,12 +247,10 @@ void PartEdit::drumsetToggled(bool val)
       {
       part->setUseDrumset(val);
       patch->clear();
-      const MidiPatch* p = 0;
-      for (;;) {
-            p = seq->getPatchInfo(val, p);
-            if (p == 0)
-                  break;
-            patch->addItem(p->name);
+      const QList<MidiPatch*> pl = seq->getPatchInfo();
+      foreach(MidiPatch* p, pl) {
+            if (val == p->drum)
+                  patch->addItem(p->name, QVariant::fromValue<void*>((void*)p));
             }
       patch->setCurrentIndex(channel->program);
       }

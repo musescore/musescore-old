@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>389</width>
-    <height>247</height>
+    <width>400</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -2645,91 +2645,55 @@
      <property name="spacing">
       <number>6</number>
      </property>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font/>
-       </property>
-       <property name="toolTip">
-        <string>volume</string>
-       </property>
-       <property name="text">
-        <string>Vol</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::PlainText</enum>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
-      <widget class="QSlider" name="volumeSlider">
+      <widget class="Awl::VolSlider" name="volumeSlider">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font/>
-       </property>
-       <property name="toolTip">
-        <string>relative tempo</string>
-       </property>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Tmp</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::PlainText</enum>
+        <string>Vol</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QSlider" name="tempoSlider">
+      <widget class="Awl::Slider" name="tempoSlider">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimum">
-        <number>50</number>
-       </property>
-       <property name="maximum">
-        <number>250</number>
-       </property>
        <property name="value">
-        <number>100</number>
+        <double>100.000000000000000</double>
        </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+       <property name="scaleWidth">
+        <number>7</number>
        </property>
-       <property name="invertedControls">
-        <bool>false</bool>
+       <property name="minValue">
+        <double>50.000000000000000</double>
+       </property>
+       <property name="maxValue">
+        <double>250.000000000000000</double>
+       </property>
+       <property name="lineStep">
+        <double>5.000000000000000</double>
+       </property>
+       <property name="pageStep">
+        <double>20.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Tmp</string>
        </property>
       </widget>
      </item>
@@ -2737,6 +2701,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Awl::Slider</class>
+   <extends>QWidget</extends>
+   <header>awl/slider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Awl::VolSlider</class>
+   <extends>Awl::Slider</extends>
+   <header>awl/volslider.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="mscore.qrc"/>
  </resources>

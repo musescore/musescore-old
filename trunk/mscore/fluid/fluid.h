@@ -296,6 +296,8 @@ class Fluid : public Synth {
 
       QList<SFont*> sfonts;               // the loaded soundfonts
       QList<BankOffset*> bank_offsets;    // the offsets of the soundfont banks
+      QList<MidiPatch*> patches;
+
       QList<Voice*> freeVoices;           // unused synthesis processes
       QList<Voice*> activeVoices;         // active synthesis processes
       QString _error;                     // last error message
@@ -306,9 +308,8 @@ class Fluid : public Synth {
       double sample_rate;                 // The sample rate
       float _masterTuning;                // usually 440.0
       double _tuning[128];                // the pitch of every key, in cents
-      mutable double _meterValue[2];
-      mutable double meterValues[2];
-      mutable double _meterPeakValue[2];
+
+      void updatePatchList();
 
    protected:
       int state;                          // the synthesizer state
@@ -331,14 +332,15 @@ class Fluid : public Synth {
       Fluid();
       ~Fluid();
       virtual void init(int sampleRate);
+
       virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
       virtual QString soundFont() const;
+
       virtual void play(const Event&);
-      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*) const;
+      virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
+
       virtual double masterGain() const            { return _gain; }
       virtual void setMasterGain(double val)       { _gain = val;  }
-      virtual double meterValue(int channel) const;
-      virtual double meterPeakValue(int channel) const;
       virtual double effectParameter(int effect, int parameter);
       virtual void setEffectParameter(int ffect, int parameter, double value);
 
@@ -398,8 +400,6 @@ class Fluid : public Synth {
       void set_reverb(double roomsize, double damping, double width, double level);
       void program_reset();
 
-      double gain() const          { return _gain;  }
-
       bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
       bool program_select(int chan, unsigned sfont_id, unsigned bank_num, unsigned preset_num);
       void get_program(int chan, unsigned* sfont_id, unsigned* bank_num, unsigned* preset_num);
@@ -414,7 +414,6 @@ class Fluid : public Synth {
       void freeVoice(Voice* v);
 
       double getPitch(int k) const   { return _tuning[k]; }
-//      float ct2hz_real(float c)      { return (_masterTuning/440.0) * 8.176 * pow(2.0, (double) c / 1200.0); }
       float ct2hz_real(float cents)  { return powf(2.0f, (cents - 6900.0f) / 1200.0f) * _masterTuning; }
 
       float act2hz(float c)     { return 8.176 * pow(2.0, (double) c / 1200.0); }
