@@ -25,9 +25,6 @@
 #include "drumset.h"
 #include "utils.h"
 
-extern QTextStream cout;
-extern QTextStream eout;
-
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
 #ifdef __i486__
 #define BE_LONG(x) \
@@ -287,10 +284,9 @@ bool MidiFile::readTrack()
             track->append(event);
             }
       if (curPos != endPos) {
-            eout << "bad track len: " << endPos << " != " << curPos
-               << ", " << (endPos - curPos) << " bytes too much\n";
+            qWarning("bad track len: %lld != %lld, %lld bytes too much\n", endPos, curPos, endPos - curPos);
             if (curPos < endPos) {
-                  eout << "  skip " << (endPos-curPos) << "\n";
+                  qWarning("  skip %lld\n", endPos-curPos);
                   skip(endPos - curPos);
                   }
             }
@@ -331,7 +327,7 @@ int MidiFile::readShort()
       short format;
       read(&format, 2);
 #ifdef Q_WS_MAC
-	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
 		return format;
       }else{
         return BE_SHORT(format);
@@ -349,7 +345,7 @@ void MidiFile::writeShort(int i)
       {
 #ifdef Q_WS_MAC
 	  short format;
-      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
 		format = (short)i;
       }else{
         format = BE_SHORT(i);
@@ -358,8 +354,8 @@ void MidiFile::writeShort(int i)
 #else
       int format = BE_SHORT(i);
 	  write(&format, 2);
-#endif      
-      
+#endif
+
       }
 
 //---------------------------------------------------------
@@ -372,7 +368,7 @@ int MidiFile::readLong()
       int format;
       read(&format, 4);
 #ifdef Q_WS_MAC
-	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
 		return format;
       }else{
         return BE_LONG(format);
@@ -390,7 +386,7 @@ void MidiFile::writeLong(int i)
       {
 #ifdef Q_WS_MAC
 	  int format;
-      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) { 
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
 		format = i;
       }else{
         format = BE_LONG(i);

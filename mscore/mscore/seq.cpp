@@ -69,13 +69,18 @@ Seq::Seq()
       endTick  = 0;
       state    = STOP;
       driver   = 0;
-      _volume  = 1.0;
       playPos  = events.constBegin();
 
       playTime = 0.0;
       startTime = 0.0;
       curTick   = 0;
       curUtick  = 0;
+
+      _meterValue[0]     = 0.0;
+      _meterValue[1]     = 0.0;
+      _meterPeakValue[0] = 0.0;
+      _meterPeakValue[1] = 0.0;
+      meterValues        = 0;
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
@@ -457,8 +462,14 @@ void Seq::seqMessage(int msg)
             case '0':         // STOP
                   guiStop();
                   heartBeatTimer->stop();
-                  if (driver && driver->getSynth() && mscore->getSynthControl())
-                        mscore->getSynthControl()->stop();
+                  if (driver && driver->getSynth() && mscore->getSynthControl()) {
+                        _meterValue[0]     = .0f;
+                        _meterValue[1]     = .0f;
+                        meterValues        = 0;
+                        _meterPeakValue[0] = .0f;
+                        _meterPeakValue[1] = .0f;
+                        mscore->getSynthControl()->setMeter(0.0, 0.0, 0.0, 0.0);
+                        }
                   break;
 
             case '1':         // PLAY
@@ -687,12 +698,19 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
             driver->process(frames, l, r, stride);
 
       // apply volume:
+      int k = 0;
       for (unsigned i = 0; i < n; ++i) {
-            *lbuffer *= _volume;
-            *rbuffer *= _volume;
-            lbuffer += stride;
-            rbuffer += stride;
+            float val = fabs(lbuffer[k]);
+            _meterValue[0] += val;
+            if (_meterPeakValue[0] < val)
+                  _meterPeakValue[0] = val;
+            val = fabs(rbuffer[k]);
+            _meterValue[1] += val;
+            if (_meterPeakValue[1] < val)
+                  _meterPeakValue[1] = val;
+            k += stride;
             }
+      meterValues += n;
       }
 
 //---------------------------------------------------------
@@ -769,8 +787,18 @@ void Seq::heartBeat()
             return;
 
       SynthControl* sc = mscore->getSynthControl();
-      if (sc && driver && driver->getSynth())
-            sc->heartBeat(driver->getSynth());
+      if (sc && driver && driver->getSynth()) {
+            float l            = _meterValue[0] / meterValues;
+            float r            = _meterValue[1] / meterValues;
+            float pl           = _meterPeakValue[0];
+            float pr           = _meterPeakValue[1];
+            meterValues        = 0;
+            _meterValue[0]     = 0.0f;
+            _meterValue[1]     = 0.0f;
+            // _meterPeakValue[0] = 0.0f;
+            // _meterPeakValue[1] = 0.0f;
+            sc->setMeter(l, r, pl, pr);
+            }
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
       if (pp)
@@ -817,22 +845,13 @@ void Seq::heartBeat()
       }
 
 //---------------------------------------------------------
-//   setVolume
-//---------------------------------------------------------
-
-void Seq::setVolume(float val)
-      {
-      _volume = val;
-      }
-
-//---------------------------------------------------------
 //   setRelTempo
 //---------------------------------------------------------
 
-void Seq::setRelTempo(int relTempo)
+void Seq::setRelTempo(double relTempo)
       {
       SeqMsg msg;
-      msg.data = relTempo;
+      msg.data = lrint(relTempo);
       msg.id   = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
@@ -1105,11 +1124,12 @@ void Seq::guiToSeq(const SeqMsg& msg)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* Seq::getPatchInfo(bool onlyDrums, const MidiPatch* p)
+const QList<MidiPatch*>& Seq::getPatchInfo() const
       {
-      if (driver)
-            return driver->getPatchInfo(onlyDrums, p);
-      return 0;
+      static QList<MidiPatch*> pl;
+      if (driver && driver->getSynth())
+            return driver->getSynth()->getPatchInfo();
+      return pl;
       }
 
 //---------------------------------------------------------
@@ -1156,4 +1176,26 @@ SeqMsg SeqMsgFifo::dequeue()
       pop();
       return msg;
       }
+
+//---------------------------------------------------------
+//   setMasterVolume
+//---------------------------------------------------------
+
+void Seq::setMasterVolume(float gain)
+      {
+      if (driver && driver->getSynth())
+            return driver->getSynth()->setMasterGain(gain);
+      }
+
+//---------------------------------------------------------
+//   masterVolume
+//---------------------------------------------------------
+
+float Seq::masterVolume() const
+      {
+      if (driver && driver->getSynth())
+            return driver->getSynth()->masterGain();
+      return 0;
+      }
+
 

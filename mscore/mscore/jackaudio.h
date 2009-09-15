@@ -67,7 +67,6 @@ class JackAudio : public Driver {
       virtual int sampleRate() const { return _sampleRate; }
       virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int);
-      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch*);
       virtual void midiRead();
       };
 

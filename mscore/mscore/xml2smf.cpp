@@ -25,9 +25,6 @@
 
 static const char versionString[] = "0.1";
 
-QTextStream cout(stdout);
-QTextStream eout(stderr);
-
 int division         = 480;
 bool debugMode       = false;
 bool noRunningStatus = false;

@@ -775,16 +775,5 @@ void AlsaAudio::midiRead()
       midiDriver->read();
       }
 
-//---------------------------------------------------------
-//   getPatchInfo
-//---------------------------------------------------------
-
-const MidiPatch* AlsaAudio::getPatchInfo(bool onlyDrums, const MidiPatch* p)
-      {
-      if (synth)
-            return synth->getPatchInfo(onlyDrums, p);
-      return 0;
-      }
-
 #endif
 

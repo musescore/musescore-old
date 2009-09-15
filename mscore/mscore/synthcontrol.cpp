@@ -54,7 +54,7 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       chorusDepth->setValue(synth->effectParameter(1, 2));
 
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(gain,     SIGNAL(valueChanged(double, int)), SLOT(masterGainChanged(double, int)));
+      connect(gain,     SIGNAL(valueChanged(double,int)), SLOT(masterGainChanged(double,int)));
       connect(masterTuning, SIGNAL(valueChanged(double)),       SLOT(masterTuningChanged(double)));
 
       connect(reverb,         SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
@@ -144,6 +144,7 @@ void SynthControl::selectSoundFont()
             synth->loadSoundFont(s);
             }
       }
+
 //---------------------------------------------------------
 //   masterGainChanged
 //---------------------------------------------------------
@@ -163,13 +164,13 @@ void SynthControl::masterTuningChanged(double val)
       }
 
 //---------------------------------------------------------
-//   heartBeat
+//   setMeter
 //---------------------------------------------------------
 
-void SynthControl::heartBeat(Synth* synth)
+void SynthControl::setMeter(float l, float r, float left_peak, float right_peak)
       {
-      gain->setMeterVal(0, synth->meterValue(0), synth->meterPeakValue(0));
-      gain->setMeterVal(1, synth->meterValue(1), synth->meterPeakValue(1));
+      gain->setMeterVal(0, l, left_peak);
+      gain->setMeterVal(1, r, right_peak);
       }
 
 //---------------------------------------------------------

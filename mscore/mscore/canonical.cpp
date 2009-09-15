@@ -27,6 +27,7 @@
       - no measures
       - each track(voice) is filled with rests
       - tick position is invalid
+      - tied notes over bar lines are concatenated
 */
 
 #include "score.h"

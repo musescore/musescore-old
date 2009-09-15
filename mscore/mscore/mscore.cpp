@@ -70,11 +70,7 @@ QPaintDevice* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;
 
-QTextStream cout(stdout);
-QTextStream eout(stderr);
-
 QString mscoreGlobalShare;
-
 static QStringList recentScores;
 
 Shortcut* midiActionMap[128];
@@ -172,11 +168,10 @@ static QString getSharePath()
 static void printVersion(const char* prog)
       {
 #ifdef MSCORE_UNSTABLE
-      cout << prog << ": Linux Music Score Editor\nUnstable Prerelease for Version " << VERSION
-           << "; Build " << revision << endl;
+      printf("%s: Music Score Editor\nUnstable Prerelease for Version %s; Build %s\n",
+         prog, VERSION, qPrintable(revision));
 #else
-      cout << prog << ": Linux Music Score Editor; Version " << VERSION
-           << "  Build " << revision << endl;
+     printf("%s: Music Score Editor; Version %s; Build %s\n", prog, VERSION, qPrintable(revision));
 #endif
       }
 
@@ -1215,12 +1210,12 @@ void MuseScore::showPlayPanel(bool visible)
             if (!visible)
                   return;
             playPanel = new PlayPanel(this);
-            connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setVolume(float)));
-            connect(playPanel, SIGNAL(relTempoChanged(int)),seq, SLOT(setRelTempo(int)));
+            connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setMasterVolume(float)));
+            connect(playPanel, SIGNAL(relTempoChanged(double,int)),seq, SLOT(setRelTempo(double)));
             connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(seek(int)));
             connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
 
-            playPanel->setVolume(seq->volume());
+            playPanel->setVolume(seq->masterVolume());
             playPanel->setTempo(cs->tempomap->tempo(0));
             playPanel->setRelTempo(cs->tempomap->relTempo());
             playPanel->setEndpos(seq->getEndTick());

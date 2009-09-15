@@ -2033,8 +2033,8 @@ if (debugMode)
       int line, column;
       QString err;
       if (!doc.setContent(data, &err, &line, &column)) {
-            cout << "error reading drag data at " << line << "/" << column << ":"
-                  << err << "\n" << data << "\n";
+            qWarning("error reading drag data at %d/%d: %s\n   %s\n",
+               line, column, qPrintable(err), data.data());
             return;
             }
       docName = "--";

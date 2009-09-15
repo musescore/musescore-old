@@ -71,7 +71,6 @@ class Portaudio : public Driver {
       virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
-      const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p);
       };
 
 #endif
