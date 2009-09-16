@@ -82,9 +82,9 @@ class Seq : public QObject {
 
       Driver* driver;
 
-      double _meterValue[2];
-      double meterValues;
-      double _meterPeakValue[2];
+      double meterValue[2];
+      double meterPeakValue[2];
+      int peakTimer[2];
 
       EventMap events;                    // playlist
 
@@ -133,6 +133,7 @@ class Seq : public QObject {
       void started();
       void stopped();
       int toGui(int);
+      void masterVolumeChanged(float);
 
    public:
       enum { STOP, PLAY, START_PLAY };

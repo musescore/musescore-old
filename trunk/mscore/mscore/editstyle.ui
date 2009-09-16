@@ -572,20 +572,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2" colspan="2">
-        <widget class="QCheckBox" name="genTimesig">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Create time signatures</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0" colspan="2">
+       <item row="8" column="0" colspan="2">
         <widget class="QCheckBox" name="genKeysig">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -595,6 +582,32 @@
          </property>
          <property name="text">
           <string>Create key sig for all systems</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>137</width>
+           <height>21</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <widget class="QCheckBox" name="genTimesig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Create time signatures</string>
          </property>
         </widget>
        </item>
@@ -611,18 +624,12 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
-        <spacer>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="8" column="2" colspan="2">
+        <widget class="QCheckBox" name="genCourtesyKeysig">
+         <property name="text">
+          <string>Create courtesy key signatures</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>137</width>
-           <height>21</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
       </layout>
      </widget>

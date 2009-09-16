@@ -453,7 +453,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
       int lastHead  = -1;
-      QPointF lastUserOff;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
@@ -466,7 +465,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             if ((note->chord()->isUp() != isLeft) || conflict)
                   isLeft = !isLeft;
             int nmirror   = note->chord()->isUp() != isLeft;
-            bool sameHead = (ll == line) && (head == lastHead) && note->userOff().isNull() && lastUserOff.isNull();
+            bool sameHead = (ll == line) && (head == lastHead);
 
             Chord* chord = note->chord();
             if (conflict && (nmirror == mirror) && idx) {
@@ -477,7 +476,10 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                               note->setHidden(false);
                               }
                         else {
-                              note->setHidden(true);
+                              if (note->userOff().isNull())
+                                    note->setHidden(true);
+                              else
+                                    note->setHidden(false);
                               }
                         }
                   else {
@@ -502,14 +504,12 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         mirror = !mirror;
                   }
             note->setMirror(mirror);
-//            if (mirror && !note->chord()->isUp())
             if (mirror)
                   moveLeft = true;
 
             move1    = move;
             ll       = line;
             lastHead = head;
-            lastUserOff = note->userOff();
             }
 
       //---------------------------------------------------

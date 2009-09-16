@@ -707,13 +707,11 @@ MuseScore::MuseScore()
       transportId->setCheckable(true);
       transportId->setChecked(true);
       menuDisplay->addAction(transportId);
-      connect(transportId, SIGNAL(toggled(bool)), transportTools, SLOT(setVisible(bool)));
 
       inputId = getAction("toggle-noteinput");
       inputId->setCheckable(true);
       inputId->setChecked(true);
       menuDisplay->addAction(inputId);
-      connect(inputId, SIGNAL(toggled(bool)), entryTools, SLOT(setVisible(bool)));
 
       a = getAction("toggle-statusbar");
       a->setCheckable(true);
@@ -1214,6 +1212,7 @@ void MuseScore::showPlayPanel(bool visible)
             connect(playPanel, SIGNAL(relTempoChanged(double,int)),seq, SLOT(setRelTempo(double)));
             connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(seek(int)));
             connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
+            connect(seq,       SIGNAL(masterVolumeChanged(float)), playPanel, SLOT(setVolume(float)));
 
             playPanel->setVolume(seq->masterVolume());
             playPanel->setTempo(cs->tempomap->tempo(0));
@@ -1814,11 +1813,11 @@ void MuseScore::cmd(QAction* a)
       QString cmd(a->data().toString());
 
       if (debugMode)
-            printf("MuseScore::cmd <%s>\n", cmd.toLatin1().data());
+            printf("MuseScore::cmd <%s>\n", cmd.toAscii().data());
 
       Shortcut* sc = getShortcut(cmd.toAscii().data());
       if (sc == 0) {
-            printf("unknown action <%s>\n", qPrintable(cmd));
+            printf("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmd));
             return;
             }
       if (cs && (sc->state & cs->state()) == 0) {
@@ -1919,6 +1918,10 @@ void MuseScore::cmd(QAction* a)
             showSynthControl(a->isChecked());
       else if (cmd == "show-keys")
             ;
+      else if (cmd == "toggle-transport")
+            transportTools->setVisible(!transportTools->isVisible());
+      else if (cmd == "toggle-noteinput")
+            entryTools->setVisible(!entryTools->isVisible());
       else {
             if (cs)
                   cs->cmd(a);

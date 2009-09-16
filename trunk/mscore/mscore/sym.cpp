@@ -526,8 +526,6 @@ void initSymbols()
       symbols[accBayanbaseSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "acc bayanbase"),            0xe1b3, 0);
       symbols[accOldEESym]                = Sym(QT_TRANSLATE_NOOP("symbol", "acc old ee"),               0xe1b4, 0);
 
-      symbols[flipSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "flip stem"),                0xe0fd, 0);
-
       symbols[wholediamond2headSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond2 head"),      0xe147, 0);
       symbols[halfdiamond2headSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond2 head"),       0xe148, 0);
       symbols[diamond2headSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "diamond2 head"),            0xe149, 0);

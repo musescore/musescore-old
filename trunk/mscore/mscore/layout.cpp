@@ -744,7 +744,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
       foreach(System* system, sl) {
             //
-            //    add cautionary time signatures if needed
+            //    add cautionary time/key signatures if needed
             //
 
             if (system->measures().isEmpty()) {
@@ -752,15 +752,17 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   abort();
                   }
             MeasureBase* lm = system->measures().back();
+            while (lm && lm->type() != MEASURE)
+                  lm = lm->prev();
+            Measure* m = (Measure*)lm;
             int tick        = lm->tick() + lm->tickLen();
             SigEvent sig1   = sigmap->timesig(tick - 1);
             SigEvent sig2   = sigmap->timesig(tick);
 
-            if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
-                  while (lm && lm->type() != MEASURE)
-                        lm = lm->prev();
-                  if (lm) {
-                        Measure* m = (Measure*)lm;
+            bool hasCourtesyKeysig = false;
+
+            if (m) {
+                  if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
                         Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
@@ -774,10 +776,39 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     }
                               }
                         }
+                  if (styleB(ST_genCourtesyKeysig)) {
+                        int n = _staves.size();
+                        for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
+                              Staff* staff = _staves[staffIdx];
+                              int key1 = staff->key(tick - 1);
+                              int key2 = staff->key(tick);
+                              if (key1 != key2) {
+                                    hasCourtesyKeysig = true;
+                                    Segment* s  = m->getSegment(Segment::SegKeySigAnnounce, tick);
+                                    int track = staffIdx * VOICES;
+                                    if (!s->element(track)) {
+                                          KeySig* ks = new KeySig(this);
+                                          ks->setSig(key1, key2);
+                                          ks->setTrack(track);
+                                          ks->setGenerated(true);
+                                          ks->setMag(staff->mag());
+                                          s->add(ks);
+                                          needRelayout = true;
+                                          }
+                                    // change bar line to double bar line
+                                    m->setEndBarLineType(DOUBLE_BAR, true);
+                                    }
+                              }
+                        }
                   }
 
             const QList<MeasureBase*>& ml = system->measures();
             int n                         = ml.size();
+            while (n >= 0) {
+                  if (ml[n-1]->type() == MEASURE)
+                        break;
+                  --n;
+                  }
 
             //
             //    compute repeat bar lines
@@ -793,10 +824,16 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   bool fmr = firstMeasure && (m->repeatFlags() & RepeatStart);
 
                   if (i == (n-1)) {       // last measure in system?
+                        //
+                        // if last bar has a courtesy key signature,
+                        // create a double bar line as end bar line
+                        //
+                        int bl = (hasCourtesyKeysig && (i == (n-1))) ? DOUBLE_BAR : NORMAL_BAR;
+
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);
                         else if (m->endBarLineGenerated())
-                              m->setEndBarLineType(NORMAL_BAR, true);
+                              m->setEndBarLineType(bl, true);
                         needRelayout |= m->setStartRepeatBarLine(fmr);
                         }
                   else {

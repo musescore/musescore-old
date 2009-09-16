@@ -42,7 +42,7 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
 
       soundFont->setText(synth->soundFont());
       masterTuning->setValue(synth->masterTuning());
-      gain->setValue(synth->masterGain());
+      setMasterGain(synth->masterGain());
 
       reverb->setValue(synth->effectParameter(0, 3));
       roomSizeBox->setValue(synth->effectParameter(0, 0));
@@ -68,6 +68,15 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   setMasterGain
+//---------------------------------------------------------
+
+void SynthControl::setMasterGain(float val)
+      {
+      gain->setValue(val);
+      }
+
+//---------------------------------------------------------
 //   closeEvent
 //---------------------------------------------------------
 
@@ -86,6 +95,8 @@ void MuseScore::showSynthControl(bool val)
       if (synthControl == 0) {
             synthControl = new SynthControl(seq->getDriver()->getSynth(), 0);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
+            connect(seq, SIGNAL(masterVolumeChanged(float)), synthControl, SLOT(setMasterGain(float)));
+            connect(synthControl, SIGNAL(masterGainChanged(float)), seq, SLOT(setMasterVolume(float)));
             }
       synthControl->setShown(val);
       }
@@ -151,7 +162,7 @@ void SynthControl::selectSoundFont()
 
 void SynthControl::masterGainChanged(double val, int)
       {
-      synth->setMasterGain(val);
+      emit masterGainChanged(val);
       }
 
 //---------------------------------------------------------
