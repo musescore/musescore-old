@@ -67,13 +67,17 @@ class Segment : public Element {
 
    public:
       enum SegmentType {
-            SegClef, SegKeySig, SegTimeSig,
+            SegClef,
+            SegKeySig,
+            SegTimeSig,
             SegStartRepeatBarLine,
             SegBarLine,
             SegGrace,
             SegChordRest,
             SegBreath,
-            SegEndBarLine, SegTimeSigAnnounce
+            SegEndBarLine,
+            SegTimeSigAnnounce,
+            SegKeySigAnnounce
             };
       static const char* segmentTypeNames[];
 

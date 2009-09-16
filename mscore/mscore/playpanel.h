@@ -47,6 +47,9 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void volChange(float);
       void closed();
 
+   public slots:
+      void setVolume(float);
+
    public:
       PlayPanel(QWidget* parent = 0);
       void heartBeat(int rpos, int apos);
@@ -55,7 +58,6 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void setTempo(double);
       void setRelTempo(int);
 
-      void setVolume(float);
       void setEndpos(int);
       void setScore(Score* s);
       };

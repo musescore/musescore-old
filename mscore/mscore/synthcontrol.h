@@ -45,6 +45,10 @@ class SynthControl : public QWidget, Ui::SynthControl {
 
    signals:
       void closed();
+      void masterGainChanged(float);
+
+   public slots:
+      void setMasterGain(float);
 
    public:
       Synth* getSynth() const { return synth; }

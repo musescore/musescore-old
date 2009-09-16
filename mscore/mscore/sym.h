@@ -249,7 +249,6 @@ enum {
       letterzSym,
 
       plusSym,
-      flipSym,
       note2Sym,
       note4Sym,
       note8Sym,

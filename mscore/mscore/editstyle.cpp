@@ -172,6 +172,7 @@ void EditStyle::getValues()
       lstyle.set(ST_genKeysig,               genKeysig->isChecked());
       lstyle.set(ST_genTimesig,              genTimesig->isChecked());
       lstyle.set(ST_genCourtesyTimesig,      genCourtesyTimesig->isChecked());
+      lstyle.set(ST_genCourtesyKeysig,       genCourtesyKeysig->isChecked());
 
       lstyle.set(ST_chordDescriptionFile,   chordDescriptionFile->text());
 
@@ -269,6 +270,7 @@ void EditStyle::setValues()
       genKeysig->setChecked(lstyle[ST_genKeysig].toBool());
       genTimesig->setChecked(lstyle[ST_genTimesig].toBool());
       genCourtesyTimesig->setChecked(lstyle[ST_genCourtesyTimesig].toBool());
+      genCourtesyKeysig->setChecked(lstyle[ST_genCourtesyKeysig].toBool());
 
       useGermanNoteNames->setChecked(lstyle[ST_useGermanNoteNames].toBool());
       QString s(lstyle[ST_chordDescriptionFile].toString());

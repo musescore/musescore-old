@@ -54,6 +54,10 @@
 
 Seq* seq;
 
+static const int guiRefresh   = 20;         // Hz
+static const int peakHoldTime = 1400;     // msec
+static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
+
 //---------------------------------------------------------
 //   Seq
 //---------------------------------------------------------
@@ -76,11 +80,12 @@ Seq::Seq()
       curTick   = 0;
       curUtick  = 0;
 
-      _meterValue[0]     = 0.0;
-      _meterValue[1]     = 0.0;
-      _meterPeakValue[0] = 0.0;
-      _meterPeakValue[1] = 0.0;
-      meterValues        = 0;
+      meterValue[0]     = 0.0;
+      meterValue[1]     = 0.0;
+      meterPeakValue[0] = 0.0;
+      meterPeakValue[1] = 0.0;
+      peakTimer[0]       = 0;
+      peakTimer[1]       = 0;
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
@@ -463,18 +468,19 @@ void Seq::seqMessage(int msg)
                   guiStop();
                   heartBeatTimer->stop();
                   if (driver && driver->getSynth() && mscore->getSynthControl()) {
-                        _meterValue[0]     = .0f;
-                        _meterValue[1]     = .0f;
-                        meterValues        = 0;
-                        _meterPeakValue[0] = .0f;
-                        _meterPeakValue[1] = .0f;
+                        meterValue[0]     = .0f;
+                        meterValue[1]     = .0f;
+                        meterPeakValue[0] = .0f;
+                        meterPeakValue[1] = .0f;
+                        peakTimer[0]       = 0;
+                        peakTimer[1]       = 0;
                         mscore->getSynthControl()->setMeter(0.0, 0.0, 0.0, 0.0);
                         }
                   break;
 
             case '1':         // PLAY
                   emit started();
-                  heartBeatTimer->start(100);
+                  heartBeatTimer->start(1000/guiRefresh);
                   break;
 
             default:
@@ -697,20 +703,31 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       else
             driver->process(frames, l, r, stride);
 
-      // apply volume:
+      //
+      // metering
+      //
       int k = 0;
+      float lv = 0.0f;
+      float rv = 0.0f;
       for (unsigned i = 0; i < n; ++i) {
             float val = fabs(lbuffer[k]);
-            _meterValue[0] += val;
-            if (_meterPeakValue[0] < val)
-                  _meterPeakValue[0] = val;
+            if (lv < val)
+                  lv = val;
             val = fabs(rbuffer[k]);
-            _meterValue[1] += val;
-            if (_meterPeakValue[1] < val)
-                  _meterPeakValue[1] = val;
+            if (rv < val)
+                  rv = val;
             k += stride;
             }
-      meterValues += n;
+      meterValue[0] = lv;
+      meterValue[1] = rv;
+      if (meterPeakValue[0] < lv) {
+            meterPeakValue[0] = lv;
+            peakTimer[0] = 0;
+            }
+      if (meterPeakValue[1] < rv) {
+            meterPeakValue[1] = rv;
+            peakTimer[1] = 0;
+            }
       }
 
 //---------------------------------------------------------
@@ -778,7 +795,7 @@ void Seq::getCurTick(int* tick, int* utick)
 
 //---------------------------------------------------------
 //   heartBeat
-//    paint currently sounding notes
+//    update GUI
 //---------------------------------------------------------
 
 void Seq::heartBeat()
@@ -788,16 +805,11 @@ void Seq::heartBeat()
 
       SynthControl* sc = mscore->getSynthControl();
       if (sc && driver && driver->getSynth()) {
-            float l            = _meterValue[0] / meterValues;
-            float r            = _meterValue[1] / meterValues;
-            float pl           = _meterPeakValue[0];
-            float pr           = _meterPeakValue[1];
-            meterValues        = 0;
-            _meterValue[0]     = 0.0f;
-            _meterValue[1]     = 0.0f;
-            // _meterPeakValue[0] = 0.0f;
-            // _meterPeakValue[1] = 0.0f;
-            sc->setMeter(l, r, pl, pr);
+            if (++peakTimer[0] >= peakHold)
+                  meterPeakValue[0] *= .7f;
+            if (++peakTimer[1] >= peakHold)
+                  meterPeakValue[1] *= .7f;
+            sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
             }
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
@@ -1183,8 +1195,10 @@ SeqMsg SeqMsgFifo::dequeue()
 
 void Seq::setMasterVolume(float gain)
       {
-      if (driver && driver->getSynth())
+      if (driver && driver->getSynth()) {
+            emit masterVolumeChanged(gain);
             return driver->getSynth()->setMasterGain(gain);
+            }
       }
 
 //---------------------------------------------------------
