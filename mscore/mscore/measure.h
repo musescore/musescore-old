@@ -227,11 +227,14 @@ class Measure : public MeasureBase {
       bool isMeasureRest(int staffIdx);
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
+
       bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest | _breakMMRest; }
       bool breakMMRest() const                { return _breakMMRest; }
       bool getBreakMultiMeasureRest() const   { return _breakMultiMeasureRest; }
       void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
+
       bool isEmpty() const;
+
       int multiMeasure() const                { return _multiMeasure; }
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
       };

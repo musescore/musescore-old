@@ -56,12 +56,8 @@ TextTools::TextTools(QWidget* parent)
       QToolBar* tb = new QToolBar(tr("Text Edit"));
       // tb->setObjectName("text-tools");
 
-#if 0
-      showKeyboard = tb->addAction("K");
-#else
       showKeyboard = getAction("show-keys");
       tb->addAction(showKeyboard);
-#endif
       showKeyboard->setCheckable(true);
 
       typefaceBold      = tb->addAction(QIcon(":/data/text_bold.svg"), "");
@@ -155,6 +151,8 @@ void TextTools::sizeChanged(double value)
       {
       format.setFontPointSize(value);
       _textElement->setCharFormat(format);
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->endCmd();
       moveFocus();
       }
 
@@ -175,6 +173,8 @@ void TextTools::fontChanged(const QFont& f)
       {
       format.setFontFamily(f.family());
       _textElement->setCharFormat(format);
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->endCmd();
       moveFocus();
       }
 
@@ -186,6 +186,8 @@ void TextTools::boldClicked(bool val)
       {
       format.setFontWeight(val ? QFont::Bold : QFont::Normal);
       _textElement->setCharFormat(format);
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->endCmd();
       moveFocus();
       }
 
@@ -197,6 +199,8 @@ void TextTools::underlineClicked(bool val)
       {
       format.setFontUnderline(val);
       _textElement->setCharFormat(format);
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->endCmd();
       moveFocus();
       }
 
@@ -208,6 +212,8 @@ void TextTools::italicClicked(bool val)
       {
       format.setFontItalic(val);
       _textElement->setCharFormat(format);
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->endCmd();
       moveFocus();
       }
 

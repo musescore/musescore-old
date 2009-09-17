@@ -233,12 +233,10 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
                   Direction dir = c->stemDirection();
-                  int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);
-                  Segment* seg = score()->setNoteRest(this, t, n->pitch(),
-                     score()->inputState().duration,
-                     headGroup, dir);
-                  ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
+                  Segment* seg = score()->setNoteRest(this, track(), n->pitch(),
+                     c->duration(), headGroup, dir);
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
                   if (cr)
                         score()->nextInputPos(cr, true);
                   delete e;

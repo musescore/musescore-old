@@ -36,6 +36,7 @@
 #include "articulation.h"
 #include "tempo.h"
 #include "tempotext.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -568,8 +569,18 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   }
                   break;
 
+            case NOTE:
+                  {
+                  Note* note = static_cast<Note*>(e);
+                  score()->setNoteRest(this, track(), note->pitch(),
+                     Duration(Duration::V_QUARTER), note->headGroup(), AUTO);
+                  delete e;
+                  }
+                  break;
+
             default:
                   printf("cannot drop %s\n", e->name());
+                  delete e;
                   return 0;
             }
       return 0;

@@ -1568,7 +1568,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             QByteArray a = data->data(mimeSymbolFormat);
 
             if (debugMode)
-                  printf("DRAG<%s>\n", a.data());
+                  printf("Canvas::dragEnterEvent: <%s>\n", a.data());
 
             QDomDocument doc;
             int line, column;
@@ -2246,7 +2246,7 @@ Element* Canvas::elementNear(const QPointF& p)
       qSort(ll.begin(), ll.end(), elementLower);
 
 #if 0
-      printf("elementNear ========= %f %f\n", _spatium, w);
+      printf("elementNear ========= %f\n", w);
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif

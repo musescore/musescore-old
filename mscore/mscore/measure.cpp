@@ -416,7 +416,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         line = 127 - line - 82 + clefTable[clef].yOffset;
                         note->setLine(line);
                         }
-                  chord->computeUp();
                   }
             cr->setMag(m);
             }
@@ -471,16 +470,17 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
                         chord->setXpos(0.0);
-                        if (ticks > notes[idx-1]->chord()->tickLen()) {
-                              notes[idx-1]->setHidden(true);
-                              note->setHidden(false);
-                              }
-                        else {
-                              if (note->userOff().isNull())
-                                    note->setHidden(true);
-                              else
+                        if (note->userOff().isNull() && notes[idx-1]->userOff().isNull()) {
+                              if (ticks > notes[idx-1]->chord()->tickLen()) {
+                                    notes[idx-1]->setHidden(true);
                                     note->setHidden(false);
+                                    }
+                              else {
+                                    note->setHidden(true);
+                                    }
                               }
+                        else
+                              note->setHidden(false);
                         }
                   else {
                         if ((line > ll) || !chord->up())
@@ -614,15 +614,12 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             }
       }
 
-//---------------------------------------------------------
-//   layout0
-//    first pass in layout
-//---------------------------------------------------------
-
-/**
- For \a staff set line & accidental & mirror for notes depending
- on context.
-*/
+//-------------------------------------------------------------------
+//    layout0
+///   First pass in layout measure.
+///   For \a staff set line & accidental & mirror for notes
+///   depending on context.
+//-------------------------------------------------------------------
 
 void Measure::layout0(int staffIdx)
       {
@@ -653,6 +650,7 @@ void Measure::layout0(int staffIdx)
                   _breakMMRest = true;
             }
       int track = staffIdx * VOICES;
+
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() == Segment::SegKeySig
                || segment->subtype() == Segment::SegStartRepeatBarLine
@@ -3371,20 +3369,23 @@ Spatium Measure::userDistance(int i) const
 
 bool Measure::isEmpty() const
       {
+      if (_irregular)
+            return false;
       int n = 0;
       const Segment* s = _first;
-      bool empty = true;
       for (int i = 0; i < _size; ++i) {
             if (s->subtype() == Segment::SegChordRest) {
                   for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
                         if (s->element(staffIdx) && s->element(staffIdx)->type() != REST)
-                              empty = false;
+                              return false;
                         }
+                  if (n >= 2)
+                        return false;
                   ++n;
                   }
             s = s->next();
             }
-      return empty && (n < 2);
+      return true;
       }
 
 //---------------------------------------------------------

@@ -88,7 +88,8 @@ bool Portaudio::init()
             }
 
       initialized = true;
-      printf("using PortAudio Version: %s\n", Pa_GetVersionText());
+      if (debugMode)
+            printf("using PortAudio Version: %s\n", Pa_GetVersionText());
 
       PaDeviceIndex idx = preferences.portaudioDevice;
 

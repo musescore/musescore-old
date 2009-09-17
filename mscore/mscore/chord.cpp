@@ -464,10 +464,10 @@ QRectF Chord::bbox() const
 void Chord::layoutStem1()
       {
       int istaff = staffIdx();
-      System* s  = segment()->measure()->system();
+/*      System* s  = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
-
+  */
       //-----------------------------------------
       //  process stem
       //-----------------------------------------

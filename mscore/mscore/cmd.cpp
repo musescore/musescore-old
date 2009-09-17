@@ -2129,6 +2129,8 @@ void Score::cmd(const QAction* a)
                   if (!mimeType.isEmpty()) {
                         QMimeData* mimeData = new QMimeData;
                         mimeData->setData(mimeType, selection()->mimeData());
+                        if (debugMode)
+                              printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
                         QApplication::clipboard()->setMimeData(mimeData);
                         }
                   }
@@ -2308,7 +2310,7 @@ void Score::cmdPaste()
             }
       if (selection()->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
-// printf("paste <%s>\n", data.data());
+printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
