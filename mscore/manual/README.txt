@@ -50,6 +50,8 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+* Drop unimportant words (such as "a") from anchors to match URLs on website
+* Repress pisa warnings unless verbos output requested 
 * Repress information about external CSS unless versbose output requested
 * Check whether URL's in handbook match language of handbook
 * Use DejaVu font for all text (allows non-latin characters for Russian handbook)

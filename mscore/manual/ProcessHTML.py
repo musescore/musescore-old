@@ -30,6 +30,7 @@ def insertH1Anchors(html_source, anchors, verbose):
 
         name = name.replace("&#039;","") #remove HTML encoding for French apostrophe
         name = name.replace(",","").replace("(","").replace(")","") #remove punctuation
+        name = name.replace("-a-","-") #drop unnessary words
         name = urllib2.quote(name).lower() #percent encode name to match URLs
         name = name.replace('%c3%89','%c3%a9') #work-around for text encoding bug
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
@@ -398,12 +399,16 @@ def saveHTML(html_source, language_code='en'):
 
 
 # Generate and save PDF file
-def generatePDF(html_source, language_code='en', pdf_parameter='openpdf'):
+def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf'):
     file_name = 'MuseScore-' + language_code + '.pdf'
     print 'Create PDF handbook:',file_name
 
     import ho.pisa as pisa
-    pisa.showLogging()
+    if verbose:
+        pisa.showLogging()
+
+    import re
+    #html_source = re.sub('(.)','\\1 ',html_source)
 
     pdf = pisa.CreatePDF(
         html_source,
@@ -455,7 +460,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
         internal = 'http://www.musescore.org/pl/podręcznik' #podr%C4%99cznik'
     elif language_code == 'pt-br':
         url = 'http://www.musescore.org/pt-br/print/book/export/html/1248'
-        internal = 'http://www.musescore.org/pt-br/manual' #podr%C4%99cznik'
+        internal = 'http://www.musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
     elif language_code == 'ru':
         url = 'http://www.musescore.org/ru/print/book/export/html/2517'
         internal = 'http://www.musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
@@ -489,7 +494,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     
     saveHTML(html, language_code)
     if pdf != 'nopdf':
-        generatePDF(html, language_code, pdf)
+        generatePDF(html, verbose, language_code, pdf)
 
     print ''
 
@@ -545,7 +550,7 @@ def main():
         createHandbook('nb', 'missing', pdf, verbose, heading_switch)
         createHandbook('ru', 'missing', pdf, verbose, heading_switch)
         #createHandbook('pl', 'missing', pdf, verbose, heading_switch)
-        #createHandbook('pt-BR', 'missing', pdf, verbose, heading_switch)
+        createHandbook('pt-BR', 'missing', pdf, verbose, heading_switch)
 
     # Create Handbook for specific language
     else:
