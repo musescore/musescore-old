@@ -3,6 +3,8 @@
       - fix track display in inspector
       - expose style parameter "show courtesy key signatures" in gui
       - generate courtesy key signatures
+      (db)
+      - add Brazilian Portuguese handbook
 13.sep (ws)
       - remove buffer layer from fluid resulting in less midi jitter
 12.sep (lv)

@@ -27,5 +27,6 @@ install(FILES
       MuseScore-it.pdf
       MuseScore-nl.pdf
       MuseScore-fi.pdf
+      MuseScore-pt-br.pdf
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
       )
