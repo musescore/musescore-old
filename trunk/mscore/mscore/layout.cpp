@@ -187,10 +187,8 @@ void Score::doLayout()
                   mb->setDirty();
                   if (mb->type() == MEASURE) {
                         Measure* m = static_cast<Measure*>(mb);
-#if 1 // CS1
                         if (staffIdx == 0)
                               m->layoutBeams1();  // find hooks / stem direction
-#endif
                         m->layout0(staffIdx);
                         }
                   }
@@ -524,8 +522,8 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
       int n       = 0;
       while (m->isEmpty()) {
             MeasureBase* mb = m->next();
-//            if (m->breakMultiMeasureRest() && n)
-            if (m->breakMultiMeasureRest())
+            if (m->breakMultiMeasureRest() && n)
+//            if (m->breakMultiMeasureRest())
                   break;
             ++n;
             if (!mb || (mb->type() != MEASURE))
@@ -630,7 +628,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                         }
 
                   m->createEndBarLines();
-                  m->layoutBeams1();  // find hooks
+//                  m->layoutBeams1();  // find hooks
 
                   m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;

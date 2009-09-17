@@ -334,6 +334,8 @@ void Measure::layoutBeams1()
                      || e == 0 || !e->isChordRest())
                         continue;
                   ChordRest* cr = static_cast<ChordRest*>(e);
+                  if (cr->type() == CHORD)
+                        static_cast<Chord*>(cr)->computeUp();
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();
                         if (nseg && nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
@@ -557,12 +559,6 @@ void Beam::layout1()
             }
       else
             _up = _direction == UP;
-
-      // done twice for beamed chords:
-#if 0 // CS1
-      foreach(ChordRest* cr, _elements)
-            cr->layoutArticulations();
-#endif
       }
 
 //---------------------------------------------------------

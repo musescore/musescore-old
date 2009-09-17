@@ -29,6 +29,8 @@
 
 #include "xml.h"
 
+extern bool debugMode;
+
 namespace FluidS {
 
 //---------------------------------------------------------
@@ -997,9 +999,8 @@ void SFont::load_phdr (int size)
                   while (i2--)
                         pr->zones.prepend(0);
                   }
-            else if (zndx > 0) {      /* 1st preset, warn if ofs >0 */
+            else if (zndx > 0)      /* 1st preset, warn if ofs >0 */
                   qWarning("%d preset zones not referenced, discarding", zndx);
-                  }
             pr = p;			/* update preset ptr */
             pzndx = zndx;
             }
@@ -1259,7 +1260,6 @@ void SFont::load_pgen (int size)
 	                  if (!drop)
 		                  ++i;
 	                  else {
-                              printf("drop\n");
 		                  z->gen.removeAt(i);     // drop place holder
                               }
 	                  }
@@ -1557,7 +1557,7 @@ void SFont::load_igen (int size)
                         z->gen.removeAt(i);
 	                  }
                   }
-            if (discarded)
+            if (discarded && debugMode)
                   qWarning("Instrumentrument \"%s\": Some invalid generators were discarded", qPrintable(instr->name));
             }
       /* for those non-terminal record cases, grr! */

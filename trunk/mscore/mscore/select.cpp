@@ -104,7 +104,6 @@ Element* Selection::element() const
       {
       if (_state == SEL_SINGLE)
             return _el.front();
-printf("Selection::element: bad state %d\n", int(_state));
       return 0;
       }
 

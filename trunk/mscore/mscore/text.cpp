@@ -242,13 +242,9 @@ void TextBase::writeProperties(Xml& xml, TextStyle* ts, double spatium, bool wri
                   xml.tag("circle", _circle);
             }
       if (writeText) {
-            if (isSimpleText(ts, spatium))
-                  xml.tag("text", _doc->toPlainText());
-            else {
-                  xml.stag("html-data");
-                  xml.writeHtml(_doc->toHtml("utf-8"));
-                  xml.etag();
-                  }
+            xml.stag("html-data");
+            xml.writeHtml(_doc->toHtml("utf-8"));
+            xml.etag();
             }
       }
 
@@ -962,18 +958,17 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
                         }
                         break;
                   }
-            #ifndef Q_WS_MAC
-			if (key != Qt::Key_Space && key != Qt::Key_Minus)
+#ifndef Q_WS_MAC
+            if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
-			#endif
-
-			}
-	  #ifdef Q_WS_MAC
-		else if(modifiers == Qt::AltModifier){
-			if (key != Qt::Key_Space && key != Qt::Key_Minus)
+#endif
+            }
+#ifdef Q_WS_MAC
+      else if (modifiers == Qt::AltModifier) {
+	      if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
-		}
-	  #endif
+            }
+#endif
       QTextCursor::MoveMode mm = (modifiers & Qt::ShiftModifier)
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
