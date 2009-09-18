@@ -1881,10 +1881,34 @@ void ExportMusicXml::rest(Rest* rest, int staff)
 static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       {
       attr.doAttr(xml, false);
-      if (el)
-            xml.stag(QString("direction placement=\"%1\"").arg((el->userOff().y() > 0.0) ? "below" : "above"));
-      else
-            xml.stag("direction");
+      QString tagname = QString("direction");
+      if (el) {
+            // xml.stag(QString("direction placement=\"%1\"").arg((el->userOff().y() > 0.0) ? "below" : "above"));
+            printf("directionTag()\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+                   el->type(), el->subtype(),
+                   el->name(), el->subtypeName().toUtf8().data(),
+                   el->x(), el->y(),
+                   el->width(), el->height(),
+                   el->userOff().y());
+            Element* pel = el->parent();
+            if (pel) {
+            printf("prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+                   pel->type(), pel->subtype(),
+                   pel->name(), pel->subtypeName().toUtf8().data(),
+                   pel->x(), pel->y(),
+                   pel->width(), pel->height(),
+                   pel->userOff().y());
+                  }
+            if (pel && pel->type() == MEASURE) {
+                  // element is above the staff if center of bbox is above center of staff
+                  printf("center diff=%g\n", el->y() + el->height() / 2 - pel->height() / 2);
+                  if (el->y() + el->height() / 2 < pel->height() / 2)
+                        tagname += " placement=\"above\"";
+                  else
+                        tagname += " placement=\"below\"";
+                  }
+            }
+      xml.stag(tagname);
       xml.stag("direction-type");
       }
 
@@ -2799,8 +2823,8 @@ foreach(Element* el, *(score->gel())) {
                         }
                   // output attribute at start of measure: clef
                   for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        printf("segment %s %s at tick %d\n",
-                               seg->name(), seg->subtypeName().toUtf8().data(), seg->tick());
+//                        printf("segment %s %s at tick %d\n",
+//                               seg->name(), seg->subtypeName().toUtf8().data(), seg->tick());
                         if (seg->tick() > m->tick())
                               break;
                         Element* el = seg->element(strack);
