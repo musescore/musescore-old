@@ -224,6 +224,8 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
             nDrumset.drum[pitch].stemDirection = Direction(stemDirection->currentIndex());
             previous->setText(COL_NAME, nDrumset.name(pitch));
             }
+      if (current == 0)
+            return;
       name->blockSignals(true);
       staffLine->blockSignals(true);
       voice->blockSignals(true);

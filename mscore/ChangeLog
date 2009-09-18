@@ -1,3 +1,6 @@
+18.sep (ws)
+      - enhanced full measure rest layout
+      - fix loading of drumset
 17.sep (ws)
       - fix: "Two voices on same tone - render bug when repositioning"
       - changed the behaviour of multi measure rests

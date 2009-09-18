@@ -1797,32 +1797,39 @@ printf("\n");
       seg = 1;
       for (Segment* s = first(); s; s = s->next(), ++seg) {
             s->setPos(xpos[seg], 0.0);
-            for (int staff = 0; staff < tracks; ++staff) {
-                  Element* e = s->element(staff);
+            for (int track = 0; track < tracks; ++track) {
+                  Element* e = s->element(track);
                   if (e == 0)
                         continue;
                   ElementType t = e->type();
                   if (t == REST) {
-                        if (static_cast<Rest*>(e)->duration() == Duration::V_MEASURE) {
+                        Rest* rest = static_cast<Rest*>(e);
+                        if (rest->duration() == Duration::V_MEASURE) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
-                              double xx = 0;
                               if (_multiMeasure > 0) {
-                                    Rest* rest = static_cast<Rest*>(e);
-                                    if (seg == 1) {
+                                    if (seg == 1)
                                           rest->setMMWidth(xpos[segs] - 2 * s->x());
-                                          }
-                                    else {
+                                    else
                                           rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
-                                          }
+                                    e->setXpos(0.0);
                                     }
                               else {
-                                    if (seg == 1)
-                                          xx = (stretch - e->width()) * .5 - point(score()->styleS(ST_barNoteDistance));
+                                    double x1;
+                                    if (seg <= 1)
+                                          x1 = 0.0;
                                     else
-                                          xx = (stretch - s->x() - e->width()) * .5 - _spatium * .5;
+                                          x1 = xpos[seg] - point(score()->styleS(ST_clefKeyRightMargin));
+                                    double x2 = xpos[seg + 1];    // bar line position
+                                    Element* ne = s->next()->element(track/VOICES);
+                                    if (ne && ne->type() == CLEF)
+                                          x2 -= ne->width();
+
+                                    // xx = x2 - e->width();                   // right aligned
+                                    // xx = x1;                                // left aligned
+                                    // xx = (x2 - x1 - e->width()) * .5 + x1;  // centered
+                                    e->setXpos((x2 - x1 - e->width()) * .5 + x1 - s->x());
                                     }
-                              e->setXpos(xx);
                               }
                         }
                   else if (t == CHORD) {
@@ -1836,7 +1843,7 @@ printf("\n");
                         }
                   else {
                         double y = 0.0;
-                        double xo = spaces[seg][staff/VOICES].extra();
+                        double xo = spaces[seg][track/VOICES].extra();
                         if (t == CLEF)
                               e->setPos(-e->bbox().x() - xo + point(score()->styleS(ST_clefLeftMargin)), y);
                         else if (t == TIMESIG)
@@ -1853,7 +1860,7 @@ printf("\n");
                               e->setPos(0.0, y);
                               }
                         else
-                              e->setPos(- e->bbox().x() - xo, y);
+                              e->setPos(-e->bbox().x() - xo, y);
                         }
                   }
             }

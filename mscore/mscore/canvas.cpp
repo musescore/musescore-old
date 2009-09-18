@@ -2294,6 +2294,13 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                         p.restore();
                         p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
                         p.drawRect(e->parent()->abbox());
+                        if (e->parent()->type() == SEGMENT) {
+                              qreal w = 7.0 / p.matrix().m11();
+                              QPointF pt = e->parent()->canvasPos();
+                              p.setPen(QPen(Qt::blue, 2, Qt::SolidLine));
+                              p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
+                              p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
+                              }
                         continue;
                         }
                   }
