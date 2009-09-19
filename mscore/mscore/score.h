@@ -412,6 +412,7 @@ class Score : public QObject {
       void readStaff(QDomElement);
 
       void cmdTuplet(int);
+      void cmdTuplet(int n, ChordRest* cr, Duration dur);
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);

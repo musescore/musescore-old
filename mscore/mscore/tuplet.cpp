@@ -516,7 +516,16 @@ void Tuplet::propertyAction(const QString& s)
       {
       if (s == "props") {
             TupletProperties vp(this);
-            vp.exec();
+            if (vp.exec()) {
+                  //
+                  // apply changes to all selected tuplets
+                  //
+                  QList<Element*>* sl = score()->selection()->elements();
+                  foreach(Element* e, *sl) {
+                        if (e->type() == TUPLET)
+                              vp.changeTuplet(static_cast<Tuplet*>(e));
+                        }
+                  }
             }
       else
             Element::propertyAction(s);
@@ -612,24 +621,23 @@ TupletProperties::TupletProperties(Tuplet* t, QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   accept
+//   changeTuplet
 //---------------------------------------------------------
 
-void TupletProperties::accept()
+void TupletProperties::changeTuplet(Tuplet* t)
       {
       if (number->isChecked())
-            tuplet->setNumberType(Tuplet::SHOW_NUMBER);
+            t->setNumberType(Tuplet::SHOW_NUMBER);
       else if (relation->isChecked())
-            tuplet->setNumberType(Tuplet::SHOW_RELATION);
+            t->setNumberType(Tuplet::SHOW_RELATION);
       else if (noNumber->isChecked())
-            tuplet->setNumberType(Tuplet::NO_TEXT);
+            t->setNumberType(Tuplet::NO_TEXT);
       if (autoBracket->isChecked())
-            tuplet->setBracketType(Tuplet::AUTO_BRACKET);
+            t->setBracketType(Tuplet::AUTO_BRACKET);
       else if (bracket->isChecked())
-            tuplet->setBracketType(Tuplet::SHOW_BRACKET);
+            t->setBracketType(Tuplet::SHOW_BRACKET);
       else if (noBracket->isChecked())
-            tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
-      QDialog::accept();
+            t->setBracketType(Tuplet::SHOW_NO_BRACKET);
       }
 
 //---------------------------------------------------------
