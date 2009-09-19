@@ -326,12 +326,11 @@ struct AcEl {
       };
 
 //---------------------------------------------------------
-//   layoutChords
+//   layoutChords0
 //    only called from layout0
-//    - calculate displaced note heads
 //---------------------------------------------------------
 
-void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
+void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
       {
       int staffIdx     = startTrack/VOICES;
       Staff* staff     = score()->staff(staffIdx);
@@ -340,16 +339,13 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 
       if (staff->part()->useDrumset())
             drumset = staff->part()->drumset();
-      QList<Note*> notes;
       int tick = segment->tick();
 
       int endTrack = startTrack + VOICES;
-      int voices = 0;
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e)
                  continue;
-            ++voices;
             ChordRest* cr = static_cast<ChordRest*>(e);
             double m = staffMag;
             if (cr->small())
@@ -362,7 +358,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                   NoteList* nl = chord->noteList();
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note = in->second;
-                        notes.append(note);
 
                         int pitch = note->pitch();
                         if (drumset) {
@@ -410,8 +405,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         //
                         // calculate the real note line depending on clef
                         //
-                        int move     = note->staffMove();
-                        int staffIdx = note->staffIdx() + move;
+                        int staffIdx = note->staffIdx() + note->staffMove();
                         int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
                         line = 127 - line - 82 + clefTable[clef].yOffset;
                         note->setLine(line);
@@ -419,12 +413,41 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                   }
             cr->setMag(m);
             }
+      }
 
-      if (drumset || notes.isEmpty())
+//---------------------------------------------------------
+//   layoutChords
+//    only called from layout0
+//    - calculate displaced note heads
+//---------------------------------------------------------
+
+void Measure::layoutChords1(Segment* segment, int staffIdx)
+      {
+      Staff* staff = score()->staff(staffIdx);
+
+      if (staff->part()->drumset())
+            return;
+
+      int startTrack = staffIdx * VOICES;
+      int endTrack = startTrack + VOICES;
+      int voices   = 0;
+      QList<Note*> notes;
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (!e)
+                 continue;
+            ++voices;
+            if (e->type() == CHORD) {
+                  Chord* chord = static_cast<Chord*>(e);
+                  NoteList* nl = chord->noteList();
+                  for (iNote in = nl->begin(); in != nl->end(); ++in)
+                        notes.append(in->second);
+                  }
+            }
+      if (notes.isEmpty())
             return;
 
       int startIdx, endIdx, incIdx;
-
       if (notes[0]->chord()->isUp() || voices > 1) {
             startIdx = 0;
             incIdx   = 1;
@@ -621,46 +644,67 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 ///   depending on context.
 //-------------------------------------------------------------------
 
-void Measure::layout0(int staffIdx)
+void Measure::layout0()
       {
-      char tversatz[74];      // list of already set accidentals for this measure
+      foreach(Beam* beam, _beams)
+            beam->clear();
 
-      Staff* staff    = _score->staff(staffIdx);
-      int key         = staff->keymap()->key(tick());
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+            char tversatz[74];      // list of already set accidentals for this measure
 
-      initLineList(tversatz, key);
+            Staff* staff    = _score->staff(staffIdx);
+            int key         = staff->keymap()->key(tick());
 
-      _breakMMRest = false;
-      if (score()->styleB(ST_createMultiMeasureRests)) {
-            // TODO: this is slow!
-            foreach(const Element* el, *score()->gel()) {
-                  if (el->type() == VOLTA) {
-                        const Volta* volta = static_cast<const Volta*>(el);
-                        if (tick() >= volta->tick() && tick() <= volta->tick2()) {
-                              _breakMMRest = true;
-                              break;
+            initLineList(tversatz, key);
+
+            _breakMMRest = false;
+            if (score()->styleB(ST_createMultiMeasureRests)) {
+                  // TODO: this is slow!
+                  foreach(const Element* el, *score()->gel()) {
+                        if (el->type() == VOLTA) {
+                              const Volta* volta = static_cast<const Volta*>(el);
+                              if (tick() >= volta->tick() && tick() <= volta->tick2()) {
+                                    _breakMMRest = true;
+                                    break;
+                                    }
                               }
                         }
                   }
-            }
-      foreach(Element* e, _el) {
-            if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                  _breakMMRest = true;
-            else if (e->type() == TEMPO_TEXT)
-                  _breakMMRest = true;
-            }
-      int track = staffIdx * VOICES;
-
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            if (segment->subtype() == Segment::SegKeySig
-               || segment->subtype() == Segment::SegStartRepeatBarLine
-               || segment->subtype() == Segment::SegTimeSig) {
-                  if (segment->element(track) && !segment->element(track)->generated())
+            foreach(Element* e, _el) {
+                  if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
+                        _breakMMRest = true;
+                  else if (e->type() == TEMPO_TEXT)
                         _breakMMRest = true;
                   }
-            if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
-                  continue;
-            layoutChords(segment, staffIdx * VOICES, tversatz);
+            int track = staffIdx * VOICES;
+
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  if (segment->subtype() == Segment::SegKeySig
+                     || segment->subtype() == Segment::SegStartRepeatBarLine
+                     || segment->subtype() == Segment::SegTimeSig) {
+                        if (segment->element(track) && !segment->element(track)->generated())
+                              _breakMMRest = true;
+                        }
+                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
+                        layoutChords0(segment, staffIdx * VOICES, tversatz);
+                  }
+
+            int startTrack = staffIdx * VOICES;
+            int endTrack   = startTrack + VOICES;
+
+            for (int track = startTrack; track < endTrack; ++track)
+                  layoutBeams1(track);
+
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
+                        layoutChords1(segment, staffIdx);
+                  }
+            }
+      foreach(Beam* beam, _beams) {
+            if (beam->elements().isEmpty()) {
+                  remove(beam);
+                  delete beam;
+                  }
             }
       }
 

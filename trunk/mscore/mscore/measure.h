@@ -117,6 +117,8 @@ class Measure : public MeasureBase {
       void push_back(Segment* e);
       void push_front(Segment* e);
       void layoutBeams();
+      void layoutChords0(Segment* segment, int startTrack, char* tversatz);
+      void layoutChords1(Segment* segment, int startTrack);
 
    public:
       Measure(Score*);
@@ -178,9 +180,8 @@ class Measure : public MeasureBase {
       void insertMStaff(MStaff* staff, int idx);
       void removeMStaff(MStaff* staff, int idx);
 
-      void layoutBeams1();
-      void layoutChords(Segment* segment, int startTrack, char* tversatz);
-      void layout0(int staff);
+      void layoutBeams1(int track);
+      void layout0();
 
       virtual void moveTicks(int diff);
       void insert(Segment* ns, Segment* s);

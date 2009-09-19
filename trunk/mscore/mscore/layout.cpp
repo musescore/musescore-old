@@ -182,16 +182,10 @@ void Score::doLayout()
       //             on context
       //-----------------------------------------------------------------------
 
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-                  mb->setDirty();
-                  if (mb->type() == MEASURE) {
-                        Measure* m = static_cast<Measure*>(mb);
-                        if (staffIdx == 0)
-                              m->layoutBeams1();  // find hooks / stem direction
-                        m->layout0(staffIdx);
-                        }
-                  }
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            mb->setDirty();
+            if (mb->type() == MEASURE)
+                  static_cast<Measure*>(mb)->layout0();
             }
 
       //-----------------------------------------
@@ -1067,10 +1061,8 @@ void Score::reLayout(Measure* m)
 bool Score::doReLayout()
       {
 #if 0
-      if (startLayout->type() == MEASURE) {
-            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
-                  static_cast<Measure*>(startLayout)->layout0(staffIdx);
-            }
+      if (startLayout->type() == MEASURE)
+            static_cast<Measure*>(startLayout)->layout0();
 #endif
       System* system  = startLayout->system();
       qreal sysWidth  = system->width();
@@ -1086,9 +1078,8 @@ bool Score::doReLayout()
                   ww = point(static_cast<Box*>(m)->boxWidth());
             else {            // MEASURE
                   Measure* measure = static_cast<Measure*>(m);
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
-                        measure->layout0(staffIdx);
-                  measure->layoutBeams1();
+                  measure->layout0();
+//TODO            measure->layoutBeams1();
                   measure->layoutX(1.0);
                   ww      = measure->layoutWidth().stretchable;
                   double stretch = measure->userStretch() * styleD(ST_measureSpacing);
