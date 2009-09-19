@@ -1283,21 +1283,31 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      ChordRest* cr;
-      Duration dur;
-
-      if (noteEntryMode()) {
-            cr  = _is.cr();
-            dur = _is.duration;
-            }
+      if (noteEntryMode())
+            cmdTuplet(n, _is.cr(), _is.duration);
       else {
-            cr = getSelectedChordRest();
-            if (cr)
-                  dur = cr->duration();
+            QList<Element*>* sl = selection()->elements();
+            foreach(Element* e, *sl) {
+                  if (e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        cmdTuplet(n, cr, cr->duration());
+                        }
+                  else if (e->type() == NOTE) {
+                        Chord* chord = static_cast<Chord*>(e->parent());
+                        cmdTuplet(n, static_cast<ChordRest*>(chord), chord->duration());
+                        }
+                  }
             }
+      }
+
+//---------------------------------------------------------
+//   cmdTuplet
+//---------------------------------------------------------
+
+void Score::cmdTuplet(int n, ChordRest* cr, Duration dur)
+      {
       if (cr == 0 || dur.type() == Duration::V_INVALID)
             return;
-
       int tick = cr->tick();
       Fraction f;
       if (dur.type() == Duration::V_MEASURE)

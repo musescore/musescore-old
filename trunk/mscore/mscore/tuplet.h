@@ -137,10 +137,10 @@ class TupletProperties : public QDialog, public Ui::TupletProperties {
       Tuplet* tuplet;
 
    public slots:
-      virtual void accept();
 
    public:
       TupletProperties(Tuplet* tuplet, QWidget* parent = 0);
+      void changeTuplet(Tuplet*);
       };
 
 #endif

@@ -425,6 +425,13 @@ bool Rest::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Rest"));
+      if (tuplet()) {
+            QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
+            a = menuTuplet->addAction(tr("Tuplet Properties..."));
+            a->setData("tupletProps");
+            a = menuTuplet->addAction(tr("Delete Tuplet"));
+            a->setData("tupletDelete");
+            }
       a = popup->addAction(tr("Rest Properties..."));
       a->setData("props");
       return true;
@@ -447,6 +454,30 @@ void Rest::propertyAction(const QString& s)
                      || r.extraTrailingSpace() != extraTrailingSpace()) {
                         score()->undoChangeChordRestSpace(this, r.extraLeadingSpace(),
                            r.extraTrailingSpace());
+                        }
+                  }
+            }
+      else if (s == "tupletProps") {
+            TupletProperties vp(tuplet());
+            if (vp.exec()) {
+                  vp.changeTuplet(tuplet());
+                  QList<Element*>* sl = score()->selection()->elements();
+                  foreach(Element* e, *sl) {
+                        if (e->type() == REST) {
+                              Rest* r = static_cast<Rest*>(e);
+                              if (r->tuplet())
+                                    vp.changeTuplet(r->tuplet());
+                              }
+                        }
+                  }
+            }
+      else if (s == "tupletDelete") {
+            QList<Element*>* sl = score()->selection()->elements();
+            foreach(Element* e, *sl) {
+                  if (e->type() == REST) {
+                        Rest* r = static_cast<Rest*>(e);
+                        if (r->tuplet())
+                              score()->cmdDeleteTuplet(r->tuplet(), true);
                         }
                   }
             }

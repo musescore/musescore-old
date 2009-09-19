@@ -1145,7 +1145,8 @@ void Note::propertyAction(const QString& s)
             }
       else if (s == "tupletProps") {
             TupletProperties vp(chord()->tuplet());
-            vp.exec();
+            if (vp.exec())
+                  vp.changeTuplet(chord()->tuplet());
             }
       else if (s == "tupletDelete")
             score()->cmdDeleteTuplet(chord()->tuplet(), true);
