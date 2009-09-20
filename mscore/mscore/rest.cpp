@@ -33,6 +33,7 @@
 #include "chord.h"
 #include "note.h"
 #include "measure.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -460,13 +461,18 @@ void Rest::propertyAction(const QString& s)
       else if (s == "tupletProps") {
             TupletProperties vp(tuplet());
             if (vp.exec()) {
-                  vp.changeTuplet(tuplet());
+                  int bracketType = vp.bracketType();
+                  int numberType  = vp.numberType();
+
                   QList<Element*>* sl = score()->selection()->elements();
                   foreach(Element* e, *sl) {
                         if (e->type() == REST) {
                               Rest* r = static_cast<Rest*>(e);
-                              if (r->tuplet())
-                                    vp.changeTuplet(r->tuplet());
+                              if (r->tuplet()) {
+                                    Tuplet* tuplet = r->tuplet();
+                                    if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
+                                          score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                                    }
                               }
                         }
                   }

@@ -1145,8 +1145,13 @@ void Note::propertyAction(const QString& s)
             }
       else if (s == "tupletProps") {
             TupletProperties vp(chord()->tuplet());
-            if (vp.exec())
-                  vp.changeTuplet(chord()->tuplet());
+            if (vp.exec()) {
+                  Tuplet* tuplet = chord()->tuplet();
+                  int bracketType = vp.bracketType();
+                  int numberType  = vp.numberType();
+                  if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
+                        score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                  }
             }
       else if (s == "tupletDelete")
             score()->cmdDeleteTuplet(chord()->tuplet(), true);

@@ -29,6 +29,7 @@
 #include "element.h"
 #include "utils.h"
 #include "measure.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -520,10 +521,15 @@ void Tuplet::propertyAction(const QString& s)
                   //
                   // apply changes to all selected tuplets
                   //
+                  int bracketType = vp.bracketType();
+                  int numberType  = vp.numberType();
                   QList<Element*>* sl = score()->selection()->elements();
                   foreach(Element* e, *sl) {
-                        if (e->type() == TUPLET)
-                              vp.changeTuplet(static_cast<Tuplet*>(e));
+                        if (e->type() == TUPLET) {
+                              Tuplet* tuplet = static_cast<Tuplet*>(e);
+                              if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
+                                    score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                              }
                         }
                   }
             }
@@ -621,23 +627,31 @@ TupletProperties::TupletProperties(Tuplet* t, QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   changeTuplet
+//   numberType
 //---------------------------------------------------------
 
-void TupletProperties::changeTuplet(Tuplet* t)
+int TupletProperties::numberType() const
       {
       if (number->isChecked())
-            t->setNumberType(Tuplet::SHOW_NUMBER);
+            return Tuplet::SHOW_NUMBER;
       else if (relation->isChecked())
-            t->setNumberType(Tuplet::SHOW_RELATION);
-      else if (noNumber->isChecked())
-            t->setNumberType(Tuplet::NO_TEXT);
+            return Tuplet::SHOW_RELATION;
+      else /* if (noNumber->isChecked()) */
+            return Tuplet::NO_TEXT;
+      }
+
+//---------------------------------------------------------
+//   bracketType
+//---------------------------------------------------------
+
+int TupletProperties::bracketType() const
+      {
       if (autoBracket->isChecked())
-            t->setBracketType(Tuplet::AUTO_BRACKET);
+            return Tuplet::AUTO_BRACKET;
       else if (bracket->isChecked())
-            t->setBracketType(Tuplet::SHOW_BRACKET);
-      else if (noBracket->isChecked())
-            t->setBracketType(Tuplet::SHOW_NO_BRACKET);
+            return Tuplet::SHOW_BRACKET;
+      else /* if (noBracket->isChecked()) */
+            return Tuplet::SHOW_NO_BRACKET;
       }
 
 //---------------------------------------------------------
