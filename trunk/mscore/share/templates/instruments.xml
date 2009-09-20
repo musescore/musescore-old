@@ -3633,17 +3633,6 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Acoustic Bass</name>
-        <short-name>B. Guit.</short-name>
-        <transposition>-12</transposition>
-        <clef>4</clef>
-        <aPitchRange>28-65</aPitchRange>
-        <pPitchRange>28-65</pPitchRange>
-        <channel>
-           <program>32</program>
-           </channel>
-        </instrument>
-     <instrument>
         <name>Electric Bass</name>
         <short-name>El. B. Guit.</short-name>
         <clef>5</clef>
@@ -4171,7 +4160,7 @@
            <program>43</program>
            </channel>
         <channel name="pizzicato">
-          <program value="45"/>
+          <program value="32"/>
           </channel>
         <channel name="tremolo">
           <program value="44"/>
