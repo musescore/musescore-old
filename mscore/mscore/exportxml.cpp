@@ -1620,7 +1620,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
       PageFormat* pf = score->pageFormat();
       const double pageHeight  = getTenthsFromInches(pf->height());
-      const double pageWidth  = getTenthsFromInches(pf->width());
+//      const double pageWidth  = getTenthsFromInches(pf->width());
 
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
             QString val;
@@ -1890,6 +1890,38 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                    el->x(), el->y(),
                    el->width(), el->height(),
                    el->userOff().y());
+            if (el->type() == HAIRPIN || el->type() == OTTAVA) {
+                   SLine* sl = static_cast<const SLine*>(el);
+            printf("slin segsz=%d", sl->lineSegments().size());
+                   if (sl->lineSegments().size() > 0) {
+                         LineSegment* seg = sl->lineSegments().at(0);
+                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
+                         seg->x(), seg->y(),
+                         seg->width(), seg->height(),
+                         seg->canvasPos().x(), seg->canvasPos().y(),
+                         seg->userOff().y());
+                   System* sys = 0;
+                   QPointF pnt = sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
+                   if (sys) {
+                         QRectF bb = sys->staff(el->staffIdx())->bbox();
+            printf("syst x=%g y=%g cpx=%g cpy=%g\n",
+                   sys->pos().x(),  sys->pos().y(),
+                   sys->canvasPos().x(),
+                   sys->canvasPos().y()
+                  );
+            printf("staf x=%g y=%g w=%g h=%g\n",
+                   bb.x(), bb.y(),
+                   bb.width(), bb.height());
+                         // for the line type elements the reference point is vertically centered
+                         // actual position info is in the segments
+                         // compare the segment's canvas ypos with the staff's center height
+                         if (seg->canvasPos().y() < sys->canvasPos().y() + bb.y() + bb.height() / 2)
+                               tagname += " placement=\"above\"";
+                         else
+                               tagname += " placement=\"below\"";
+                         }
+                   }
+                         }
             Element* pel = el->parent();
             if (pel) {
             printf("prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
@@ -1899,6 +1931,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                    pel->width(), pel->height(),
                    pel->userOff().y());
                   }
+            printf("\n");
             if (pel && pel->type() == MEASURE) {
                   // element is above the staff if center of bbox is above center of staff
                   printf("center diff=%g\n", el->y() + el->height() / 2 - pel->height() / 2);
@@ -2706,7 +2739,7 @@ foreach(Element* el, *(score->gel())) {
                   xml.stag(measureTag);
 
                   int currentSystem = NoSystem;
-                  Measure* previousMeasure;
+                  Measure* previousMeasure = 0;
 
                   for (MeasureBase* currentMeasureB = m->prev(); currentMeasureB; currentMeasureB = currentMeasureB->prev()){
                       if (currentMeasureB->type() == MEASURE) {
@@ -2725,7 +2758,7 @@ foreach(Element* el, *(score->gel())) {
 
                   if (currentSystem != NoSystem
                       && (!converterMode || score->defaultsRead()) ){
-                      const double pageHeight  = getTenthsFromInches(pf->height());
+//                      const double pageHeight  = getTenthsFromInches(pf->height());
                       const double pageWidth  = getTenthsFromInches(pf->width());
                       const double lm = getTenthsFromInches(pf->oddLeftMargin);
                       const double rm = getTenthsFromInches(pf->oddRightMargin);
