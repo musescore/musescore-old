@@ -20,6 +20,9 @@
 
 #include "arpeggio.h"
 #include "sym.h"
+#include "chord.h"
+#include "note.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -78,7 +81,22 @@ void Arpeggio::read(QDomElement e)
 
 QRectF Arpeggio::bbox() const
       {
-      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(magS()), _height);
+      double _spatium = spatium();
+      double y1 = -_userLen1.val() * _spatium;
+      double y2 = _height + _userLen2.val() * _spatium;
+      switch (subtype()) {
+            case 0:
+            case 1:
+            case 2:
+            default:
+                  return QRectF(0.0, y1, symbols[arpeggioSym].width(magS()), y2-y1);
+            case 3:
+                  {
+                  double lw = score()->styleS(ST_ArpeggioLineWidth).val() * _spatium;
+                  double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
+                  return QRectF(-lw * .5, y1 - lw * .5, w + lw, y2 - y1 + lw);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -90,8 +108,8 @@ void Arpeggio::draw(QPainter& p) const
       double _spatium = spatium();
 
       double y1 = _spatium - _userLen1.val() * _spatium;
-      double y2 = _height + _spatium * .5 + _userLen2.val() * _spatium;
-      switch(subtype()) {
+      double y2 = _height + (_userLen2.val() + .5) * _spatium;
+      switch (subtype()) {
             case 0:
                   for (double y = y1; y < y2; y += _spatium)
                         symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
@@ -107,6 +125,25 @@ void Arpeggio::draw(QPainter& p) const
                   for (; y < y2 - _spatium; y += _spatium)
                         symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
                   symbols[arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
+                  }
+                  break;
+            case 3:
+                  {
+                  y1 = - _userLen1.val() * _spatium;
+                  y2 = _height + _userLen2.val() * _spatium;
+                  p.save();
+
+                  QPen pen(p.pen());
+                  pen.setWidthF(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
+                  pen.setCapStyle(Qt::RoundCap);
+                  p.setPen(pen);
+
+                  double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
+                  p.drawLine(0.0, y1, 0.0, y2);
+                  p.drawLine(0.0, y1, w, y1);
+                  p.drawLine(0.0, y2, w, y2);
+
+                  p.restore();
                   }
                   break;
             }
@@ -138,3 +175,16 @@ void Arpeggio::editDrag(int n, const QPointF& delta)
       else if (n == 1)
             _userLen2 += d;
       }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Arpeggio::dragAnchor() const
+      {
+      Chord* chord = static_cast<Chord*>(parent());
+      if (chord)
+            return QLineF(canvasPos(), chord->upNote()->canvasPos());
+      return QLineF();
+      }
+

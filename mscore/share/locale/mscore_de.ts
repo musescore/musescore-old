@@ -1720,7 +1720,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>shortest stem</source>
-        <translation>küzester Hals</translation>
+        <translation>kürzester Hals</translation>
     </message>
     <message>
         <source>right margin</source>
@@ -4956,7 +4956,7 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore handbook not found at: 
+        <source>MuseScore handbook not found at:
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -6404,8 +6404,8 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation type="unfinished">MuseScore: Eine Kopie sichern</translation>
     </message>
     <message>
-        <source>The following file is locked: 
-%1 
+        <source>The following file is locked:
+%1
 
 Try saving to a different location.</source>
         <translation type="unfinished"></translation>

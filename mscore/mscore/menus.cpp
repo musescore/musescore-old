@@ -325,16 +325,14 @@ void MuseScore::showPalette(bool visible)
             sp->setName(tr("Arpeggio/Glissando"));
             sp->setGrid(27, 60);
 
-            for (int i = 0; i < 3; ++i) {
+            for (int i = 0; i < 4; ++i) {
                   Arpeggio* a = new Arpeggio(gscore);
                   a->setSubtype(i);
-                  // a->setHeight(_spatium * 4);
                   sp->append(a, tr("arpeggio"));
                   }
             for (int i = 0; i < 2; ++i) {
                   Glissando* a = new Glissando(gscore);
                   a->setSubtype(i);
-                  // a->setSize(QSizeF(_spatium * 2, _spatium * 4));
                   sp->append(a, tr("glissando"));
                   }
             paletteBox->addPalette(sp);

@@ -30,8 +30,10 @@
 class Arpeggio : public Element {
       Spatium _userLen1;
       Spatium _userLen2;
-
       double _height;
+
+      virtual bool isMovable() const          { return true; }
+      virtual QLineF dragAnchor() const;
 
    public:
       Arpeggio(Score* s);

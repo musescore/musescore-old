@@ -172,7 +172,11 @@ StyleType styleTypes[] = {
       StyleType("UpPrallAnchor",           ST_INT),
       StyleType("DownPrallAnchor",         ST_INT),
       StyleType("UpMordentAnchor",         ST_INT),
-      StyleType("DownMordentAnchor",       ST_INT)
+      StyleType("DownMordentAnchor",       ST_INT),
+
+      StyleType("ArpeggioNoteDistance",    ST_SPATIUM),
+      StyleType("ArpeggioLineWidth",       ST_SPATIUM),
+      StyleType("ArpeggioHookLen",         ST_SPATIUM)
       };
 
 //---------------------------------------------------------
@@ -427,6 +431,9 @@ Style::Style()
             StyleVal(ST_DownPrallAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_ArpeggioNoteDistance, Spatium(.5)),
+            StyleVal(ST_ArpeggioLineWidth, Spatium(.15)),
+            StyleVal(ST_ArpeggioHookLen, Spatium(.8)),
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)
