@@ -32,7 +32,7 @@ install(FILES
       promenade.mscx
       scales.mscx
       sonata16.mscx
-      italian-1.mscx
+      italian-1.mscz
       golliwogg.mscx
       Estudio-No1-Tarrega.mscx
       PlanxtyCarolan.mscx

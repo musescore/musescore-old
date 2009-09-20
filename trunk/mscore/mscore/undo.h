@@ -58,7 +58,7 @@ class TextB;
 class Channel;
 struct PageFormat;
 class TextStyle;
-
+class Tuplet;
 class UndoGroup;
 
 //---------------------------------------------------------
@@ -1134,6 +1134,22 @@ class ChangeNoteStaffMove : public UndoCommand {
 
    public:
       ChangeNoteStaffMove(Note*, int);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   ChangeTupletProperties
+//---------------------------------------------------------
+
+class ChangeTupletProperties : public UndoCommand {
+      Tuplet* tuplet;
+      int numberType;
+      int bracketType;
+      void flip();
+
+   public:
+      ChangeTupletProperties(Tuplet*, int numberType, int bracketType);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

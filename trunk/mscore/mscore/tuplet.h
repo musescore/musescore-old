@@ -140,7 +140,8 @@ class TupletProperties : public QDialog, public Ui::TupletProperties {
 
    public:
       TupletProperties(Tuplet* tuplet, QWidget* parent = 0);
-      void changeTuplet(Tuplet*);
+      int bracketType() const;
+      int numberType() const;
       };
 
 #endif

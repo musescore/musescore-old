@@ -2200,3 +2200,25 @@ void ChangeNoteStaffMove::flip()
       staffMove = v;
       }
 
+//---------------------------------------------------------
+//   ChangeTupletProperties
+//---------------------------------------------------------
+
+ChangeTupletProperties::ChangeTupletProperties(Tuplet* t, int nt, int bt)
+   : tuplet(t), numberType(nt), bracketType(bt)
+      {
+      }
+
+void ChangeTupletProperties::flip()
+      {
+      int nt = tuplet->numberType();
+      int bt = tuplet->bracketType();
+      tuplet->setNumberType(numberType);
+      tuplet->setBracketType(bracketType);
+      numberType = nt;
+      bracketType = bt;
+      }
+
+
+
+

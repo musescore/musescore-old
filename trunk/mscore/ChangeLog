@@ -1,4 +1,5 @@
 20.sep (ws)
+      - implement undo for tuplet properties change
       - updated instruments.xml from Magnus Johansson
       - new style values for arpeggios
       - allow to drag arpeggios
