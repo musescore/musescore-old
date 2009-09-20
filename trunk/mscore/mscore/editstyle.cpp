@@ -200,6 +200,10 @@ void EditStyle::getValues()
       lstyle.set(ST_shortStemProgression,    Spatium(shortStemProgression->value()));
       lstyle.set(ST_shortestStem,            Spatium(shortestStem->value()));
 
+      lstyle.set(ST_ArpeggioNoteDistance,    Spatium(arpeggioNoteDistance->value()));
+      lstyle.set(ST_ArpeggioLineWidth,       Spatium(arpeggioLineWidth->value()));
+      lstyle.set(ST_ArpeggioHookLen,         Spatium(arpeggioHookLen->value()));
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
@@ -305,6 +309,9 @@ void EditStyle::setValues()
       shortenStem->setChecked(lstyle[ST_shortenStem].toBool());
       shortStemProgression->setValue(lstyle[ST_shortStemProgression].toSpatium().val());
       shortestStem->setValue(lstyle[ST_shortestStem].toSpatium().val());
+      arpeggioNoteDistance->setValue(lstyle[ST_ArpeggioNoteDistance].toSpatium().val());
+      arpeggioLineWidth->setValue(lstyle[ST_ArpeggioLineWidth].toSpatium().val());
+      arpeggioHookLen->setValue(lstyle[ST_ArpeggioHookLen].toSpatium().val());
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));

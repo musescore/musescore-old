@@ -288,7 +288,6 @@ void Chord::setHook(Hook* f)
       _hook = f;
       if (_hook) {
             _hook->setParent(this);
-//            _hook->setMag(mag());
             if (_stem)        // should always be true
                   _hook->setVisible(_stem->visible());
             }
@@ -464,10 +463,7 @@ QRectF Chord::bbox() const
 void Chord::layoutStem1()
       {
       int istaff = staffIdx();
-/*      System* s  = segment()->measure()->system();
-      if (s == 0)       //DEBUG
-            return;
-  */
+
       //-----------------------------------------
       //  process stem
       //-----------------------------------------
@@ -567,7 +563,7 @@ void Chord::addLedgerLines(double x, int move)
       int uppos = 1000;
       int ulr   = 0;
       int idx   = staffIdx() + move;
-      // for (criNote in = notes.rbegin(); in != notes.rend(); ++in) {
+
       for (riNote in = notes.rbegin(); in != notes.rend(); ++in) {
             const Note* note = in->second;
             if (note->staffMove() != move)
@@ -1358,9 +1354,10 @@ void Chord::layout()
 #endif
 
       if (_arpeggio) {
+            double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
             double headHeight = upnote->headHeight();
             _arpeggio->layout();
-            lx -= _arpeggio->width() + _spatium * .5;
+            lx -= _arpeggio->width() + distance;
             double y = upNote()->pos().y() - headHeight * .5;
             double h = downNote()->pos().y() - y;
             _arpeggio->setHeight(h);

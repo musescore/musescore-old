@@ -1,3 +1,7 @@
+20.sep (ws)
+      - new style values for arpeggios
+      - allow to drag arpeggios
+      - added vertical bracket line to arpeggio palette ("no arpeggio")
 19.sep (ws)
       - Tuplet Properties: apply changes to all selected tuplets
 18.sep (ws)

@@ -267,6 +267,10 @@ enum StyleIdx {
       ST_UpMordentAnchor,
       ST_DownMordentAnchor,
 
+      ST_ArpeggioNoteDistance,
+      ST_ArpeggioLineWidth,
+      ST_ArpeggioHookLen,
+
       ST_STYLES
       };
 
