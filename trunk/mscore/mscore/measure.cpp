@@ -1864,8 +1864,8 @@ printf("\n");
                                           x1 = 0.0;
                                     else
                                           x1 = xpos[seg] - point(score()->styleS(ST_clefKeyRightMargin));
-                                    double x2 = xpos[seg + 1];    // bar line position
-                                    Element* ne = s->next()->element(track/VOICES);
+                                    double x2 = xpos[segs];    // bar line position
+                                    Element* ne = last()->element(track/VOICES);
                                     if (ne && ne->type() == CLEF)
                                           x2 -= ne->width();
 

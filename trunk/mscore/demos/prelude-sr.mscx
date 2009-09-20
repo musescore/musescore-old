@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.12">
-  <Mag>0.719933</Mag>
-  <xoff>3.5899</xoff>
-  <yoff>5.34341</yoff>
+  <Mag>1.08069</Mag>
+  <xoff>-435.752</xoff>
+  <yoff>-140.749</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -35,10 +35,16 @@
   <showFrames>1</showFrames>
   <page-layout>
     <pageFormat>A4</pageFormat>
-    <page-margins type="both">
+    <page-margins type="even">
+      <left-margin>28.3465</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>85.0394</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    <page-margins type="odd">
       <left-margin>56.6929</left-margin>
       <right-margin>28.3465</right-margin>
-      <top-margin>39.685</top-margin>
+      <top-margin>85.0394</top-margin>
       <bottom-margin>113.386</bottom-margin>
       </page-margins>
     </page-layout>
@@ -75,6 +81,7 @@
       <cleflist>
         <clef tick="0" idx="4"/>
         <clef tick="64320" idx="0"/>
+        <clef tick="72000" idx="4"/>
         </cleflist>
       <keylist>
         <key tick="0" idx="4"/>
@@ -394,13 +401,23 @@
       </SlurSegment>
     </Slur>
   <Slur id="85">
+    <SlurSegment no="0">
+      <offset x="0.0972948" y="-1.70266"/>
+      </SlurSegment>
     </Slur>
   <Slur id="86">
+    <SlurSegment no="0">
+      <offset x="0" y="-1.45942"/>
+      </SlurSegment>
     </Slur>
   <Slur id="87">
     </Slur>
   <Slur id="88">
     <up>2</up>
+    </Slur>
+  <Slur id="89">
+    </Slur>
+  <Slur id="90">
     </Slur>
   <Staff id="1">
     <VBox>
@@ -485,7 +502,16 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="2">
+      <Tuplet id="1">
+        <tick>70080</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Chord>
+        <tick>960</tick>
         <durationType>whole</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
@@ -676,7 +702,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-930</tick>
+        <tick>-926</tick>
         </LayoutBreak>
       <Chord>
         <tick>4800</tick>
@@ -2182,27 +2208,8 @@ p, li { white-space: pre-wrap; }
         <offset x="-4.20406" y="2.96117"/>
         <style>12</style>
         </Dynamic>
-      <Tuplet id="1">
-        <track>1</track>
-        <numberType>0</numberType>
-        <bracketType>0</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        <Number>
-          <subtype>Tuplet</subtype>
-          <style>21</style>
-          <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
-            </html-data>
-          </Number>
-        </Tuplet>
       <Tuplet id="2">
         <track>1</track>
-        <tick>26400</tick>
         <numberType>0</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2221,7 +2228,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="3">
         <track>1</track>
-        <tick>26880</tick>
+        <tick>26400</tick>
         <numberType>0</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2239,6 +2246,25 @@ p, li { white-space: pre-wrap; }
           </Number>
         </Tuplet>
       <Tuplet id="4">
+        <track>1</track>
+        <tick>26880</tick>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <style>21</style>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Tuplet id="5">
         <track>1</track>
         <tick>27360</tick>
         <numberType>0</numberType>
@@ -2289,7 +2315,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>25920</tick>
-        <Tuplet>1</Tuplet>
+        <Tuplet>2</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="start" number="35"/>
         <Beam>16</Beam>
@@ -2302,7 +2328,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>1</Tuplet>
+        <Tuplet>2</Tuplet>
         <durationType>eighth</durationType>
         <Beam>16</Beam>
         <Note>
@@ -2313,7 +2339,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>1</Tuplet>
+        <Tuplet>2</Tuplet>
         <durationType>eighth</durationType>
         <Beam>16</Beam>
         <Note>
@@ -2327,7 +2353,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>2</Tuplet>
+        <Tuplet>3</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
@@ -2344,7 +2370,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>2</Tuplet>
+        <Tuplet>3</Tuplet>
         <durationType>eighth</durationType>
         <Beam>17</Beam>
         <Note>
@@ -2355,7 +2381,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>2</Tuplet>
+        <Tuplet>3</Tuplet>
         <durationType>eighth</durationType>
         <Beam>17</Beam>
         <Note>
@@ -2369,7 +2395,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>3</Tuplet>
+        <Tuplet>4</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
@@ -2386,7 +2412,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>3</Tuplet>
+        <Tuplet>4</Tuplet>
         <durationType>eighth</durationType>
         <Beam>18</Beam>
         <Note>
@@ -2397,7 +2423,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>3</Tuplet>
+        <Tuplet>4</Tuplet>
         <durationType>eighth</durationType>
         <Beam>18</Beam>
         <Note>
@@ -2411,7 +2437,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>4</Tuplet>
+        <Tuplet>5</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
@@ -2429,7 +2455,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>4</Tuplet>
+        <Tuplet>5</Tuplet>
         <durationType>eighth</durationType>
         <Beam>19</Beam>
         <Note>
@@ -2440,7 +2466,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>4</Tuplet>
+        <Tuplet>5</Tuplet>
         <durationType>eighth</durationType>
         <Beam>19</Beam>
         <Note>
@@ -2462,17 +2488,8 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">simile</span></p></body></html>
           </html-data>
         </StaffText>
-      <Tuplet id="5">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>0</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="6">
         <track>1</track>
-        <tick>28320</tick>
         <numberType>2</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2481,7 +2498,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="7">
         <track>1</track>
-        <tick>28800</tick>
+        <tick>28320</tick>
         <numberType>2</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2489,6 +2506,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="8">
+        <track>1</track>
+        <tick>28800</tick>
+        <numberType>2</numberType>
+        <bracketType>0</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="9">
         <track>1</track>
         <tick>29280</tick>
         <numberType>2</numberType>
@@ -2533,7 +2559,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>27840</tick>
-        <Tuplet>5</Tuplet>
+        <Tuplet>6</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="start" number="36"/>
         <Beam>20</Beam>
@@ -2546,7 +2572,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>5</Tuplet>
+        <Tuplet>6</Tuplet>
         <durationType>eighth</durationType>
         <Beam>20</Beam>
         <Note>
@@ -2557,7 +2583,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>5</Tuplet>
+        <Tuplet>6</Tuplet>
         <durationType>eighth</durationType>
         <Beam>20</Beam>
         <Note>
@@ -2571,7 +2597,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>6</Tuplet>
+        <Tuplet>7</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
@@ -2588,7 +2614,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>6</Tuplet>
+        <Tuplet>7</Tuplet>
         <durationType>eighth</durationType>
         <Beam>21</Beam>
         <Note>
@@ -2599,7 +2625,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>6</Tuplet>
+        <Tuplet>7</Tuplet>
         <durationType>eighth</durationType>
         <Beam>21</Beam>
         <Note>
@@ -2613,7 +2639,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>7</Tuplet>
+        <Tuplet>8</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
@@ -2630,7 +2656,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>7</Tuplet>
+        <Tuplet>8</Tuplet>
         <durationType>eighth</durationType>
         <Beam>22</Beam>
         <Note>
@@ -2641,7 +2667,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>7</Tuplet>
+        <Tuplet>8</Tuplet>
         <durationType>eighth</durationType>
         <Beam>22</Beam>
         <Note>
@@ -2655,7 +2681,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>8</Tuplet>
+        <Tuplet>9</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="36"/>
         <Beam>23</Beam>
@@ -2668,7 +2694,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>8</Tuplet>
+        <Tuplet>9</Tuplet>
         <durationType>eighth</durationType>
         <Beam>23</Beam>
         <Note>
@@ -2679,7 +2705,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>8</Tuplet>
+        <Tuplet>9</Tuplet>
         <durationType>eighth</durationType>
         <Beam>23</Beam>
         <Note>
@@ -2705,7 +2731,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">cresc.</span></p></body></html>
           </html-data>
         </Dynamic>
-      <Tuplet id="9">
+      <Tuplet id="10">
         <track>1</track>
         <tick>29760</tick>
         <numberType>2</numberType>
@@ -2714,7 +2740,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="10">
+      <Tuplet id="11">
         <track>1</track>
         <tick>30240</tick>
         <numberType>2</numberType>
@@ -2723,7 +2749,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="11">
+      <Tuplet id="12">
         <track>1</track>
         <tick>30720</tick>
         <numberType>2</numberType>
@@ -2732,7 +2758,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="12">
+      <Tuplet id="13">
         <track>1</track>
         <tick>31200</tick>
         <numberType>2</numberType>
@@ -2764,7 +2790,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>29760</tick>
-        <Tuplet>9</Tuplet>
+        <Tuplet>10</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="start" number="37"/>
         <Beam>24</Beam>
@@ -2777,7 +2803,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>9</Tuplet>
+        <Tuplet>10</Tuplet>
         <durationType>eighth</durationType>
         <Beam>24</Beam>
         <Note>
@@ -2788,7 +2814,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>9</Tuplet>
+        <Tuplet>10</Tuplet>
         <durationType>eighth</durationType>
         <Beam>24</Beam>
         <Note>
@@ -2802,7 +2828,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>10</Tuplet>
+        <Tuplet>11</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="37"/>
         <Beam>25</Beam>
@@ -2815,7 +2841,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>10</Tuplet>
+        <Tuplet>11</Tuplet>
         <durationType>eighth</durationType>
         <Beam>25</Beam>
         <Note>
@@ -2826,7 +2852,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>10</Tuplet>
+        <Tuplet>11</Tuplet>
         <durationType>eighth</durationType>
         <Beam>25</Beam>
         <Note>
@@ -2840,7 +2866,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>11</Tuplet>
+        <Tuplet>12</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="start" number="38"/>
         <Beam>26</Beam>
@@ -2853,7 +2879,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>11</Tuplet>
+        <Tuplet>12</Tuplet>
         <durationType>eighth</durationType>
         <Beam>26</Beam>
         <Note>
@@ -2864,7 +2890,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>11</Tuplet>
+        <Tuplet>12</Tuplet>
         <durationType>eighth</durationType>
         <Beam>26</Beam>
         <Note>
@@ -2878,7 +2904,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>12</Tuplet>
+        <Tuplet>13</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="38"/>
         <Beam>27</Beam>
@@ -2891,7 +2917,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>12</Tuplet>
+        <Tuplet>13</Tuplet>
         <durationType>eighth</durationType>
         <Beam>27</Beam>
         <Note>
@@ -2902,7 +2928,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>12</Tuplet>
+        <Tuplet>13</Tuplet>
         <durationType>eighth</durationType>
         <Beam>27</Beam>
         <Note>
@@ -2924,16 +2950,8 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">dim.</span></p></body></html>
           </html-data>
         </Dynamic>
-      <Tuplet id="13">
-        <tick>31680</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="14">
-        <tick>32640</tick>
+        <tick>31680</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -2941,17 +2959,16 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="15">
-        <track>1</track>
-        <tick>31680</tick>
+        <tick>32640</tick>
         <numberType>2</numberType>
-        <bracketType>0</bracketType>
+        <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="16">
         <track>1</track>
-        <tick>32160</tick>
+        <tick>31680</tick>
         <numberType>2</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2960,7 +2977,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="17">
         <track>1</track>
-        <tick>32640</tick>
+        <tick>32160</tick>
         <numberType>2</numberType>
         <bracketType>0</bracketType>
         <normalNotes>2</normalNotes>
@@ -2968,6 +2985,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="18">
+        <track>1</track>
+        <tick>32640</tick>
+        <numberType>2</numberType>
+        <bracketType>0</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="19">
         <track>1</track>
         <tick>33120</tick>
         <numberType>2</numberType>
@@ -2978,13 +3004,13 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Chord>
         <tick>31680</tick>
-        <Tuplet>13</Tuplet>
+        <Tuplet>14</Tuplet>
         <durationType>quarter</durationType>
         <Slur type="start" number="23"/>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
-        <Tuplet>13</Tuplet>
+        <Tuplet>14</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="23"/>
         <Note pitch="64" tpc="18"/>
@@ -2994,13 +3020,13 @@ p, li { white-space: pre-wrap; }
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
-        <Tuplet>14</Tuplet>
+        <Tuplet>15</Tuplet>
         <durationType>quarter</durationType>
         <Slur type="start" number="24"/>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
-        <Tuplet>14</Tuplet>
+        <Tuplet>15</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="24"/>
         <Note pitch="63" tpc="23"/>
@@ -3016,7 +3042,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>31680</tick>
-        <Tuplet>15</Tuplet>
+        <Tuplet>16</Tuplet>
         <durationType>eighth</durationType>
         <Beam>28</Beam>
         <Note>
@@ -3027,7 +3053,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>15</Tuplet>
+        <Tuplet>16</Tuplet>
         <durationType>eighth</durationType>
         <Beam>28</Beam>
         <Note>
@@ -3038,7 +3064,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>15</Tuplet>
+        <Tuplet>16</Tuplet>
         <durationType>eighth</durationType>
         <Beam>28</Beam>
         <Note>
@@ -3053,7 +3079,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>16</Tuplet>
+        <Tuplet>17</Tuplet>
         <durationType>eighth</durationType>
         <Beam>29</Beam>
         <Note>
@@ -3064,7 +3090,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>16</Tuplet>
+        <Tuplet>17</Tuplet>
         <durationType>eighth</durationType>
         <Beam>29</Beam>
         <Note>
@@ -3075,7 +3101,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>16</Tuplet>
+        <Tuplet>17</Tuplet>
         <durationType>eighth</durationType>
         <Beam>29</Beam>
         <Note>
@@ -3090,7 +3116,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>17</Tuplet>
+        <Tuplet>18</Tuplet>
         <durationType>eighth</durationType>
         <Beam>30</Beam>
         <Note>
@@ -3101,7 +3127,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>17</Tuplet>
+        <Tuplet>18</Tuplet>
         <durationType>eighth</durationType>
         <Beam>30</Beam>
         <Note>
@@ -3112,7 +3138,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>17</Tuplet>
+        <Tuplet>18</Tuplet>
         <durationType>eighth</durationType>
         <Beam>30</Beam>
         <Note>
@@ -3127,7 +3153,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>18</Tuplet>
+        <Tuplet>19</Tuplet>
         <durationType>eighth</durationType>
         <Beam>31</Beam>
         <Note>
@@ -3138,7 +3164,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>18</Tuplet>
+        <Tuplet>19</Tuplet>
         <durationType>eighth</durationType>
         <Beam>31</Beam>
         <Note>
@@ -3149,7 +3175,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>18</Tuplet>
+        <Tuplet>19</Tuplet>
         <durationType>eighth</durationType>
         <Beam>31</Beam>
         <Note>
@@ -3166,7 +3192,7 @@ p, li { white-space: pre-wrap; }
         <offset x="-0.142295" y="3.6332"/>
         <style>12</style>
         </Dynamic>
-      <Tuplet id="19">
+      <Tuplet id="20">
         <track>1</track>
         <numberType>2</numberType>
         <bracketType>0</bracketType>
@@ -3174,7 +3200,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="20">
+      <Tuplet id="21">
         <track>1</track>
         <tick>34080</tick>
         <numberType>2</numberType>
@@ -3183,7 +3209,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="21">
+      <Tuplet id="22">
         <track>1</track>
         <tick>34560</tick>
         <numberType>2</numberType>
@@ -3192,7 +3218,7 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <baseNote>eighth</baseNote>
         </Tuplet>
-      <Tuplet id="22">
+      <Tuplet id="23">
         <track>1</track>
         <tick>35040</tick>
         <numberType>2</numberType>
@@ -3243,7 +3269,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>33600</tick>
-        <Tuplet>19</Tuplet>
+        <Tuplet>20</Tuplet>
         <durationType>eighth</durationType>
         <Beam>32</Beam>
         <Note>
@@ -3254,7 +3280,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>19</Tuplet>
+        <Tuplet>20</Tuplet>
         <durationType>eighth</durationType>
         <Beam>32</Beam>
         <Note>
@@ -3265,7 +3291,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>19</Tuplet>
+        <Tuplet>20</Tuplet>
         <durationType>eighth</durationType>
         <Beam>32</Beam>
         <Note>
@@ -3280,7 +3306,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>20</Tuplet>
+        <Tuplet>21</Tuplet>
         <durationType>eighth</durationType>
         <Beam>33</Beam>
         <Note>
@@ -3291,7 +3317,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>20</Tuplet>
+        <Tuplet>21</Tuplet>
         <durationType>eighth</durationType>
         <Beam>33</Beam>
         <Note>
@@ -3302,7 +3328,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>20</Tuplet>
+        <Tuplet>21</Tuplet>
         <durationType>eighth</durationType>
         <Beam>33</Beam>
         <Note>
@@ -3317,7 +3343,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>21</Tuplet>
+        <Tuplet>22</Tuplet>
         <durationType>eighth</durationType>
         <Beam>34</Beam>
         <Note>
@@ -3328,7 +3354,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>21</Tuplet>
+        <Tuplet>22</Tuplet>
         <durationType>eighth</durationType>
         <Beam>34</Beam>
         <Note>
@@ -3339,7 +3365,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>21</Tuplet>
+        <Tuplet>22</Tuplet>
         <durationType>eighth</durationType>
         <Beam>34</Beam>
         <Note>
@@ -3354,7 +3380,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>22</Tuplet>
+        <Tuplet>23</Tuplet>
         <durationType>eighth</durationType>
         <Beam>35</Beam>
         <Note>
@@ -3365,7 +3391,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>22</Tuplet>
+        <Tuplet>23</Tuplet>
         <durationType>eighth</durationType>
         <Beam>35</Beam>
         <Note>
@@ -3376,7 +3402,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>22</Tuplet>
+        <Tuplet>23</Tuplet>
         <durationType>eighth</durationType>
         <Beam>35</Beam>
         <Note>
@@ -3391,17 +3417,8 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
-      <Tuplet id="23">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="24">
         <track>1</track>
-        <tick>36000</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3410,7 +3427,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="25">
         <track>1</track>
-        <tick>36480</tick>
+        <tick>36000</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3418,6 +3435,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="26">
+        <track>1</track>
+        <tick>36480</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="27">
         <track>1</track>
         <tick>36960</tick>
         <numberType>2</numberType>
@@ -3472,7 +3498,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>35520</tick>
-        <Tuplet>23</Tuplet>
+        <Tuplet>24</Tuplet>
         <durationType>eighth</durationType>
         <Beam>36</Beam>
         <Note>
@@ -3483,7 +3509,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>23</Tuplet>
+        <Tuplet>24</Tuplet>
         <durationType>eighth</durationType>
         <Beam>36</Beam>
         <Note>
@@ -3494,7 +3520,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>23</Tuplet>
+        <Tuplet>24</Tuplet>
         <durationType>eighth</durationType>
         <Beam>36</Beam>
         <Note>
@@ -3509,7 +3535,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>24</Tuplet>
+        <Tuplet>25</Tuplet>
         <durationType>eighth</durationType>
         <Beam>37</Beam>
         <Note>
@@ -3520,7 +3546,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>24</Tuplet>
+        <Tuplet>25</Tuplet>
         <durationType>eighth</durationType>
         <Beam>37</Beam>
         <Note>
@@ -3531,7 +3557,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>24</Tuplet>
+        <Tuplet>25</Tuplet>
         <durationType>eighth</durationType>
         <Beam>37</Beam>
         <Note>
@@ -3546,7 +3572,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>25</Tuplet>
+        <Tuplet>26</Tuplet>
         <durationType>eighth</durationType>
         <Beam>38</Beam>
         <Note>
@@ -3557,7 +3583,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>25</Tuplet>
+        <Tuplet>26</Tuplet>
         <durationType>eighth</durationType>
         <Beam>38</Beam>
         <Note>
@@ -3568,7 +3594,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>25</Tuplet>
+        <Tuplet>26</Tuplet>
         <durationType>eighth</durationType>
         <Beam>38</Beam>
         <Note>
@@ -3583,7 +3609,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>26</Tuplet>
+        <Tuplet>27</Tuplet>
         <durationType>eighth</durationType>
         <Beam>39</Beam>
         <Note>
@@ -3594,7 +3620,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>26</Tuplet>
+        <Tuplet>27</Tuplet>
         <durationType>eighth</durationType>
         <Beam>39</Beam>
         <Note>
@@ -3605,7 +3631,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>26</Tuplet>
+        <Tuplet>27</Tuplet>
         <durationType>eighth</durationType>
         <Beam>39</Beam>
         <Note>
@@ -3616,17 +3642,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="21">
-      <Tuplet id="27">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="28">
         <track>1</track>
-        <tick>37920</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3635,7 +3652,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="29">
         <track>1</track>
-        <tick>38400</tick>
+        <tick>37920</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3643,6 +3660,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="30">
+        <track>1</track>
+        <tick>38400</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="31">
         <track>1</track>
         <tick>38880</tick>
         <numberType>2</numberType>
@@ -3678,7 +3704,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>37440</tick>
-        <Tuplet>27</Tuplet>
+        <Tuplet>28</Tuplet>
         <durationType>eighth</durationType>
         <Beam>40</Beam>
         <Note>
@@ -3689,7 +3715,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>27</Tuplet>
+        <Tuplet>28</Tuplet>
         <durationType>eighth</durationType>
         <Beam>40</Beam>
         <Note>
@@ -3700,7 +3726,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>27</Tuplet>
+        <Tuplet>28</Tuplet>
         <durationType>eighth</durationType>
         <Beam>40</Beam>
         <Note>
@@ -3714,7 +3740,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>28</Tuplet>
+        <Tuplet>29</Tuplet>
         <durationType>eighth</durationType>
         <Beam>41</Beam>
         <Note>
@@ -3725,7 +3751,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>28</Tuplet>
+        <Tuplet>29</Tuplet>
         <durationType>eighth</durationType>
         <Beam>41</Beam>
         <Note>
@@ -3736,7 +3762,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>28</Tuplet>
+        <Tuplet>29</Tuplet>
         <durationType>eighth</durationType>
         <Beam>41</Beam>
         <Note>
@@ -3750,7 +3776,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>29</Tuplet>
+        <Tuplet>30</Tuplet>
         <durationType>eighth</durationType>
         <Beam>42</Beam>
         <Note>
@@ -3761,7 +3787,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>29</Tuplet>
+        <Tuplet>30</Tuplet>
         <durationType>eighth</durationType>
         <Beam>42</Beam>
         <Note>
@@ -3772,7 +3798,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>29</Tuplet>
+        <Tuplet>30</Tuplet>
         <durationType>eighth</durationType>
         <Beam>42</Beam>
         <Note>
@@ -3786,7 +3812,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>30</Tuplet>
+        <Tuplet>31</Tuplet>
         <durationType>eighth</durationType>
         <Beam>43</Beam>
         <Note>
@@ -3797,7 +3823,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>30</Tuplet>
+        <Tuplet>31</Tuplet>
         <durationType>eighth</durationType>
         <Beam>43</Beam>
         <Note>
@@ -3808,7 +3834,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>30</Tuplet>
+        <Tuplet>31</Tuplet>
         <durationType>eighth</durationType>
         <Beam>43</Beam>
         <Note>
@@ -3819,17 +3845,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
-      <Tuplet id="31">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="32">
         <track>1</track>
-        <tick>39840</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3838,7 +3855,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="33">
         <track>1</track>
-        <tick>40320</tick>
+        <tick>39840</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -3846,6 +3863,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="34">
+        <track>1</track>
+        <tick>40320</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="35">
         <track>1</track>
         <tick>40800</tick>
         <numberType>2</numberType>
@@ -3881,7 +3907,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>39360</tick>
-        <Tuplet>31</Tuplet>
+        <Tuplet>32</Tuplet>
         <durationType>eighth</durationType>
         <Beam>44</Beam>
         <Note>
@@ -3892,7 +3918,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>31</Tuplet>
+        <Tuplet>32</Tuplet>
         <durationType>eighth</durationType>
         <Beam>44</Beam>
         <Note>
@@ -3903,7 +3929,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>31</Tuplet>
+        <Tuplet>32</Tuplet>
         <durationType>eighth</durationType>
         <Beam>44</Beam>
         <Note>
@@ -3917,7 +3943,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>32</Tuplet>
+        <Tuplet>33</Tuplet>
         <durationType>eighth</durationType>
         <Beam>45</Beam>
         <Note>
@@ -3928,7 +3954,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>32</Tuplet>
+        <Tuplet>33</Tuplet>
         <durationType>eighth</durationType>
         <Beam>45</Beam>
         <Note>
@@ -3939,7 +3965,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>32</Tuplet>
+        <Tuplet>33</Tuplet>
         <durationType>eighth</durationType>
         <Beam>45</Beam>
         <Note>
@@ -3953,7 +3979,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>33</Tuplet>
+        <Tuplet>34</Tuplet>
         <durationType>eighth</durationType>
         <Beam>46</Beam>
         <Note>
@@ -3964,7 +3990,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>33</Tuplet>
+        <Tuplet>34</Tuplet>
         <durationType>eighth</durationType>
         <Beam>46</Beam>
         <Note>
@@ -3975,7 +4001,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>33</Tuplet>
+        <Tuplet>34</Tuplet>
         <durationType>eighth</durationType>
         <Beam>46</Beam>
         <Note>
@@ -3989,7 +4015,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>34</Tuplet>
+        <Tuplet>35</Tuplet>
         <durationType>eighth</durationType>
         <Beam>47</Beam>
         <Note>
@@ -4000,7 +4026,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>34</Tuplet>
+        <Tuplet>35</Tuplet>
         <durationType>eighth</durationType>
         <Beam>47</Beam>
         <Note>
@@ -4011,7 +4037,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>34</Tuplet>
+        <Tuplet>35</Tuplet>
         <durationType>eighth</durationType>
         <Beam>47</Beam>
         <Note>
@@ -4026,17 +4052,8 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
-      <Tuplet id="35">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="36">
         <track>1</track>
-        <tick>41760</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4045,7 +4062,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="37">
         <track>1</track>
-        <tick>42240</tick>
+        <tick>41760</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4053,6 +4070,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="38">
+        <track>1</track>
+        <tick>42240</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="39">
         <track>1</track>
         <tick>42720</tick>
         <numberType>2</numberType>
@@ -4088,7 +4114,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>41280</tick>
-        <Tuplet>35</Tuplet>
+        <Tuplet>36</Tuplet>
         <durationType>eighth</durationType>
         <Beam>48</Beam>
         <Note>
@@ -4099,7 +4125,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>35</Tuplet>
+        <Tuplet>36</Tuplet>
         <durationType>eighth</durationType>
         <Beam>48</Beam>
         <Note>
@@ -4110,7 +4136,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>35</Tuplet>
+        <Tuplet>36</Tuplet>
         <durationType>eighth</durationType>
         <Beam>48</Beam>
         <Note>
@@ -4125,7 +4151,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>36</Tuplet>
+        <Tuplet>37</Tuplet>
         <durationType>eighth</durationType>
         <Beam>49</Beam>
         <Note>
@@ -4136,7 +4162,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>36</Tuplet>
+        <Tuplet>37</Tuplet>
         <durationType>eighth</durationType>
         <Beam>49</Beam>
         <Note>
@@ -4147,7 +4173,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>36</Tuplet>
+        <Tuplet>37</Tuplet>
         <durationType>eighth</durationType>
         <Beam>49</Beam>
         <Note>
@@ -4161,7 +4187,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>37</Tuplet>
+        <Tuplet>38</Tuplet>
         <durationType>eighth</durationType>
         <Beam>50</Beam>
         <Note>
@@ -4172,7 +4198,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>37</Tuplet>
+        <Tuplet>38</Tuplet>
         <durationType>eighth</durationType>
         <Beam>50</Beam>
         <Note>
@@ -4183,7 +4209,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>37</Tuplet>
+        <Tuplet>38</Tuplet>
         <durationType>eighth</durationType>
         <Beam>50</Beam>
         <Note>
@@ -4197,7 +4223,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>38</Tuplet>
+        <Tuplet>39</Tuplet>
         <durationType>eighth</durationType>
         <Beam>51</Beam>
         <Note>
@@ -4208,7 +4234,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>38</Tuplet>
+        <Tuplet>39</Tuplet>
         <durationType>eighth</durationType>
         <Beam>51</Beam>
         <Note>
@@ -4219,7 +4245,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>38</Tuplet>
+        <Tuplet>39</Tuplet>
         <durationType>eighth</durationType>
         <Beam>51</Beam>
         <Note>
@@ -4230,17 +4256,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="24">
-      <Tuplet id="39">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="40">
         <track>1</track>
-        <tick>43680</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4249,7 +4266,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="41">
         <track>1</track>
-        <tick>44160</tick>
+        <tick>43680</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4257,6 +4274,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="42">
+        <track>1</track>
+        <tick>44160</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="43">
         <track>1</track>
         <tick>44640</tick>
         <numberType>2</numberType>
@@ -4292,7 +4318,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>43200</tick>
-        <Tuplet>39</Tuplet>
+        <Tuplet>40</Tuplet>
         <durationType>eighth</durationType>
         <Beam>52</Beam>
         <Note>
@@ -4303,7 +4329,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>39</Tuplet>
+        <Tuplet>40</Tuplet>
         <durationType>eighth</durationType>
         <Beam>52</Beam>
         <Note>
@@ -4314,7 +4340,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>39</Tuplet>
+        <Tuplet>40</Tuplet>
         <durationType>eighth</durationType>
         <Beam>52</Beam>
         <Note>
@@ -4328,7 +4354,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>40</Tuplet>
+        <Tuplet>41</Tuplet>
         <durationType>eighth</durationType>
         <Beam>53</Beam>
         <Note>
@@ -4339,7 +4365,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>40</Tuplet>
+        <Tuplet>41</Tuplet>
         <durationType>eighth</durationType>
         <Beam>53</Beam>
         <Note>
@@ -4350,7 +4376,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>40</Tuplet>
+        <Tuplet>41</Tuplet>
         <durationType>eighth</durationType>
         <Beam>53</Beam>
         <Note>
@@ -4364,7 +4390,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>41</Tuplet>
+        <Tuplet>42</Tuplet>
         <durationType>eighth</durationType>
         <Beam>54</Beam>
         <Note>
@@ -4375,7 +4401,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>41</Tuplet>
+        <Tuplet>42</Tuplet>
         <durationType>eighth</durationType>
         <Beam>54</Beam>
         <Note>
@@ -4386,7 +4412,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>41</Tuplet>
+        <Tuplet>42</Tuplet>
         <durationType>eighth</durationType>
         <Beam>54</Beam>
         <Note>
@@ -4400,7 +4426,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>42</Tuplet>
+        <Tuplet>43</Tuplet>
         <durationType>eighth</durationType>
         <Beam>55</Beam>
         <Note>
@@ -4411,7 +4437,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>42</Tuplet>
+        <Tuplet>43</Tuplet>
         <durationType>eighth</durationType>
         <Beam>55</Beam>
         <Note>
@@ -4422,7 +4448,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>42</Tuplet>
+        <Tuplet>43</Tuplet>
         <durationType>eighth</durationType>
         <Beam>55</Beam>
         <Note>
@@ -4433,17 +4459,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
-      <Tuplet id="43">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="44">
         <track>1</track>
-        <tick>45600</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4452,7 +4469,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="45">
         <track>1</track>
-        <tick>46080</tick>
+        <tick>45600</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4460,6 +4477,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="46">
+        <track>1</track>
+        <tick>46080</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="47">
         <track>1</track>
         <tick>46560</tick>
         <numberType>2</numberType>
@@ -4495,7 +4521,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>45120</tick>
-        <Tuplet>43</Tuplet>
+        <Tuplet>44</Tuplet>
         <durationType>eighth</durationType>
         <Beam>56</Beam>
         <Note>
@@ -4506,7 +4532,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>43</Tuplet>
+        <Tuplet>44</Tuplet>
         <durationType>eighth</durationType>
         <Beam>56</Beam>
         <Note>
@@ -4517,7 +4543,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>43</Tuplet>
+        <Tuplet>44</Tuplet>
         <durationType>eighth</durationType>
         <Beam>56</Beam>
         <Note>
@@ -4531,7 +4557,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>44</Tuplet>
+        <Tuplet>45</Tuplet>
         <durationType>eighth</durationType>
         <Beam>57</Beam>
         <Note>
@@ -4542,7 +4568,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>44</Tuplet>
+        <Tuplet>45</Tuplet>
         <durationType>eighth</durationType>
         <Beam>57</Beam>
         <Note>
@@ -4553,7 +4579,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>44</Tuplet>
+        <Tuplet>45</Tuplet>
         <durationType>eighth</durationType>
         <Beam>57</Beam>
         <Note>
@@ -4567,7 +4593,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>45</Tuplet>
+        <Tuplet>46</Tuplet>
         <durationType>eighth</durationType>
         <Beam>58</Beam>
         <Note>
@@ -4578,7 +4604,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>45</Tuplet>
+        <Tuplet>46</Tuplet>
         <durationType>eighth</durationType>
         <Beam>58</Beam>
         <Note>
@@ -4589,7 +4615,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>45</Tuplet>
+        <Tuplet>46</Tuplet>
         <durationType>eighth</durationType>
         <Beam>58</Beam>
         <Note>
@@ -4603,7 +4629,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>46</Tuplet>
+        <Tuplet>47</Tuplet>
         <durationType>eighth</durationType>
         <Beam>59</Beam>
         <Note>
@@ -4614,7 +4640,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>46</Tuplet>
+        <Tuplet>47</Tuplet>
         <durationType>eighth</durationType>
         <Beam>59</Beam>
         <Note>
@@ -4625,7 +4651,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>46</Tuplet>
+        <Tuplet>47</Tuplet>
         <durationType>eighth</durationType>
         <Beam>59</Beam>
         <Note>
@@ -4640,17 +4666,8 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
-      <Tuplet id="47">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="48">
         <track>1</track>
-        <tick>47520</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4659,7 +4676,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="49">
         <track>1</track>
-        <tick>48000</tick>
+        <tick>47520</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4667,6 +4684,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="50">
+        <track>1</track>
+        <tick>48000</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="51">
         <track>1</track>
         <tick>48480</tick>
         <numberType>2</numberType>
@@ -4702,7 +4728,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>47040</tick>
-        <Tuplet>47</Tuplet>
+        <Tuplet>48</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
@@ -4718,7 +4744,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>47</Tuplet>
+        <Tuplet>48</Tuplet>
         <durationType>eighth</durationType>
         <Beam>60</Beam>
         <Note>
@@ -4729,7 +4755,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>47</Tuplet>
+        <Tuplet>48</Tuplet>
         <durationType>eighth</durationType>
         <Beam>60</Beam>
         <Note>
@@ -4743,7 +4769,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>48</Tuplet>
+        <Tuplet>49</Tuplet>
         <durationType>eighth</durationType>
         <Beam>61</Beam>
         <Note>
@@ -4754,7 +4780,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>48</Tuplet>
+        <Tuplet>49</Tuplet>
         <durationType>eighth</durationType>
         <Beam>61</Beam>
         <Note>
@@ -4765,7 +4791,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>48</Tuplet>
+        <Tuplet>49</Tuplet>
         <durationType>eighth</durationType>
         <Beam>61</Beam>
         <Note>
@@ -4779,7 +4805,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>49</Tuplet>
+        <Tuplet>50</Tuplet>
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
@@ -4795,7 +4821,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>49</Tuplet>
+        <Tuplet>50</Tuplet>
         <durationType>eighth</durationType>
         <Beam>62</Beam>
         <Note>
@@ -4806,7 +4832,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>49</Tuplet>
+        <Tuplet>50</Tuplet>
         <durationType>eighth</durationType>
         <Beam>62</Beam>
         <Note>
@@ -4820,7 +4846,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>50</Tuplet>
+        <Tuplet>51</Tuplet>
         <durationType>eighth</durationType>
         <Beam>63</Beam>
         <Note>
@@ -4831,7 +4857,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>50</Tuplet>
+        <Tuplet>51</Tuplet>
         <durationType>eighth</durationType>
         <Beam>63</Beam>
         <Note>
@@ -4842,7 +4868,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>50</Tuplet>
+        <Tuplet>51</Tuplet>
         <durationType>eighth</durationType>
         <Beam>63</Beam>
         <Note>
@@ -4853,17 +4879,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="27">
-      <Tuplet id="51">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="52">
         <track>1</track>
-        <tick>49440</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4872,7 +4889,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="53">
         <track>1</track>
-        <tick>49920</tick>
+        <tick>49440</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -4880,6 +4897,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="54">
+        <track>1</track>
+        <tick>49920</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="55">
         <track>1</track>
         <tick>50400</tick>
         <numberType>2</numberType>
@@ -4923,7 +4949,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>48960</tick>
-        <Tuplet>51</Tuplet>
+        <Tuplet>52</Tuplet>
         <durationType>eighth</durationType>
         <Beam>64</Beam>
         <Note>
@@ -4934,7 +4960,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>51</Tuplet>
+        <Tuplet>52</Tuplet>
         <durationType>eighth</durationType>
         <Beam>64</Beam>
         <Note>
@@ -4945,7 +4971,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>51</Tuplet>
+        <Tuplet>52</Tuplet>
         <durationType>eighth</durationType>
         <Beam>64</Beam>
         <Note>
@@ -4959,7 +4985,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>52</Tuplet>
+        <Tuplet>53</Tuplet>
         <durationType>eighth</durationType>
         <Beam>65</Beam>
         <Note>
@@ -4970,7 +4996,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>52</Tuplet>
+        <Tuplet>53</Tuplet>
         <durationType>eighth</durationType>
         <Beam>65</Beam>
         <Note>
@@ -4981,7 +5007,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>52</Tuplet>
+        <Tuplet>53</Tuplet>
         <durationType>eighth</durationType>
         <Beam>65</Beam>
         <Note>
@@ -4995,7 +5021,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>53</Tuplet>
+        <Tuplet>54</Tuplet>
         <durationType>eighth</durationType>
         <Beam>66</Beam>
         <Note>
@@ -5006,7 +5032,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>53</Tuplet>
+        <Tuplet>54</Tuplet>
         <durationType>eighth</durationType>
         <Beam>66</Beam>
         <Note>
@@ -5017,7 +5043,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>53</Tuplet>
+        <Tuplet>54</Tuplet>
         <durationType>eighth</durationType>
         <Beam>66</Beam>
         <Note>
@@ -5031,7 +5057,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>54</Tuplet>
+        <Tuplet>55</Tuplet>
         <durationType>eighth</durationType>
         <Beam>67</Beam>
         <Note>
@@ -5042,7 +5068,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>54</Tuplet>
+        <Tuplet>55</Tuplet>
         <durationType>eighth</durationType>
         <Beam>67</Beam>
         <Note>
@@ -5053,7 +5079,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>54</Tuplet>
+        <Tuplet>55</Tuplet>
         <durationType>eighth</durationType>
         <Beam>67</Beam>
         <Note>
@@ -5069,17 +5095,8 @@ p, li { white-space: pre-wrap; }
         <offset x="-0.619946" y="0.267219"/>
         <style>12</style>
         </Dynamic>
-      <Tuplet id="55">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="56">
         <track>1</track>
-        <tick>51360</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5088,7 +5105,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="57">
         <track>1</track>
-        <tick>51840</tick>
+        <tick>51360</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5096,6 +5113,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="58">
+        <track>1</track>
+        <tick>51840</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="59">
         <track>1</track>
         <tick>52320</tick>
         <numberType>2</numberType>
@@ -5145,7 +5171,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>50880</tick>
-        <Tuplet>55</Tuplet>
+        <Tuplet>56</Tuplet>
         <durationType>eighth</durationType>
         <Beam>68</Beam>
         <Note>
@@ -5156,7 +5182,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>55</Tuplet>
+        <Tuplet>56</Tuplet>
         <durationType>eighth</durationType>
         <Beam>68</Beam>
         <Note>
@@ -5167,7 +5193,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>55</Tuplet>
+        <Tuplet>56</Tuplet>
         <durationType>eighth</durationType>
         <Beam>68</Beam>
         <Note>
@@ -5181,7 +5207,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>56</Tuplet>
+        <Tuplet>57</Tuplet>
         <durationType>eighth</durationType>
         <Beam>69</Beam>
         <Note>
@@ -5192,7 +5218,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>56</Tuplet>
+        <Tuplet>57</Tuplet>
         <durationType>eighth</durationType>
         <Beam>69</Beam>
         <Note>
@@ -5203,7 +5229,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>56</Tuplet>
+        <Tuplet>57</Tuplet>
         <durationType>eighth</durationType>
         <Beam>69</Beam>
         <Note>
@@ -5217,7 +5243,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>57</Tuplet>
+        <Tuplet>58</Tuplet>
         <durationType>eighth</durationType>
         <Beam>70</Beam>
         <Note>
@@ -5228,7 +5254,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>57</Tuplet>
+        <Tuplet>58</Tuplet>
         <durationType>eighth</durationType>
         <Beam>70</Beam>
         <Note>
@@ -5239,7 +5265,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>57</Tuplet>
+        <Tuplet>58</Tuplet>
         <durationType>eighth</durationType>
         <Beam>70</Beam>
         <Note>
@@ -5253,7 +5279,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>58</Tuplet>
+        <Tuplet>59</Tuplet>
         <durationType>eighth</durationType>
         <Beam>71</Beam>
         <Note>
@@ -5264,7 +5290,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>58</Tuplet>
+        <Tuplet>59</Tuplet>
         <durationType>eighth</durationType>
         <Beam>71</Beam>
         <Note>
@@ -5275,7 +5301,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>58</Tuplet>
+        <Tuplet>59</Tuplet>
         <durationType>eighth</durationType>
         <Beam>71</Beam>
         <Note>
@@ -5290,17 +5316,8 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
-      <Tuplet id="59">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="60">
         <track>1</track>
-        <tick>53280</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5309,7 +5326,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="61">
         <track>1</track>
-        <tick>53760</tick>
+        <tick>53280</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5317,6 +5334,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="62">
+        <track>1</track>
+        <tick>53760</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="63">
         <track>1</track>
         <tick>54240</tick>
         <numberType>2</numberType>
@@ -5370,7 +5396,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>52800</tick>
-        <Tuplet>59</Tuplet>
+        <Tuplet>60</Tuplet>
         <durationType>eighth</durationType>
         <Beam>72</Beam>
         <Note>
@@ -5381,7 +5407,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>59</Tuplet>
+        <Tuplet>60</Tuplet>
         <durationType>eighth</durationType>
         <Beam>72</Beam>
         <Note>
@@ -5392,7 +5418,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>59</Tuplet>
+        <Tuplet>60</Tuplet>
         <durationType>eighth</durationType>
         <Beam>72</Beam>
         <Note>
@@ -5406,7 +5432,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>60</Tuplet>
+        <Tuplet>61</Tuplet>
         <durationType>eighth</durationType>
         <Beam>73</Beam>
         <Note>
@@ -5417,7 +5443,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>60</Tuplet>
+        <Tuplet>61</Tuplet>
         <durationType>eighth</durationType>
         <Beam>73</Beam>
         <Note>
@@ -5428,7 +5454,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>60</Tuplet>
+        <Tuplet>61</Tuplet>
         <durationType>eighth</durationType>
         <Beam>73</Beam>
         <Note>
@@ -5442,7 +5468,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>61</Tuplet>
+        <Tuplet>62</Tuplet>
         <durationType>eighth</durationType>
         <Beam>74</Beam>
         <Note>
@@ -5453,7 +5479,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>61</Tuplet>
+        <Tuplet>62</Tuplet>
         <durationType>eighth</durationType>
         <Beam>74</Beam>
         <Note>
@@ -5464,7 +5490,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>61</Tuplet>
+        <Tuplet>62</Tuplet>
         <durationType>eighth</durationType>
         <Beam>74</Beam>
         <Note>
@@ -5478,7 +5504,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>62</Tuplet>
+        <Tuplet>63</Tuplet>
         <durationType>eighth</durationType>
         <Beam>75</Beam>
         <Note>
@@ -5489,7 +5515,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>62</Tuplet>
+        <Tuplet>63</Tuplet>
         <durationType>eighth</durationType>
         <Beam>75</Beam>
         <Note>
@@ -5500,7 +5526,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>62</Tuplet>
+        <Tuplet>63</Tuplet>
         <durationType>eighth</durationType>
         <Beam>75</Beam>
         <Note>
@@ -5511,17 +5537,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
-      <Tuplet id="63">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="64">
         <track>1</track>
-        <tick>55200</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5530,7 +5547,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="65">
         <track>1</track>
-        <tick>55680</tick>
+        <tick>55200</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5538,6 +5555,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="66">
+        <track>1</track>
+        <tick>55680</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="67">
         <track>1</track>
         <tick>56160</tick>
         <numberType>2</numberType>
@@ -5573,7 +5599,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>54720</tick>
-        <Tuplet>63</Tuplet>
+        <Tuplet>64</Tuplet>
         <durationType>eighth</durationType>
         <Beam>76</Beam>
         <Note>
@@ -5584,7 +5610,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>63</Tuplet>
+        <Tuplet>64</Tuplet>
         <durationType>eighth</durationType>
         <Beam>76</Beam>
         <Note>
@@ -5595,7 +5621,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>63</Tuplet>
+        <Tuplet>64</Tuplet>
         <durationType>eighth</durationType>
         <Beam>76</Beam>
         <Note>
@@ -5609,7 +5635,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>64</Tuplet>
+        <Tuplet>65</Tuplet>
         <durationType>eighth</durationType>
         <Beam>77</Beam>
         <Note>
@@ -5620,7 +5646,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>64</Tuplet>
+        <Tuplet>65</Tuplet>
         <durationType>eighth</durationType>
         <Beam>77</Beam>
         <Note>
@@ -5631,7 +5657,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>64</Tuplet>
+        <Tuplet>65</Tuplet>
         <durationType>eighth</durationType>
         <Beam>77</Beam>
         <Note>
@@ -5645,7 +5671,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>65</Tuplet>
+        <Tuplet>66</Tuplet>
         <durationType>eighth</durationType>
         <Beam>78</Beam>
         <Note>
@@ -5656,7 +5682,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>65</Tuplet>
+        <Tuplet>66</Tuplet>
         <durationType>eighth</durationType>
         <Beam>78</Beam>
         <Note>
@@ -5667,7 +5693,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>65</Tuplet>
+        <Tuplet>66</Tuplet>
         <durationType>eighth</durationType>
         <Beam>78</Beam>
         <Note>
@@ -5681,7 +5707,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>66</Tuplet>
+        <Tuplet>67</Tuplet>
         <durationType>eighth</durationType>
         <Beam>79</Beam>
         <Note>
@@ -5692,7 +5718,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>66</Tuplet>
+        <Tuplet>67</Tuplet>
         <durationType>eighth</durationType>
         <Beam>79</Beam>
         <Note>
@@ -5703,7 +5729,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>66</Tuplet>
+        <Tuplet>67</Tuplet>
         <durationType>eighth</durationType>
         <Beam>79</Beam>
         <Note>
@@ -5714,17 +5740,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="31">
-      <Tuplet id="67">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="68">
         <track>1</track>
-        <tick>57120</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5733,7 +5750,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="69">
         <track>1</track>
-        <tick>57600</tick>
+        <tick>57120</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5742,7 +5759,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="70">
         <track>1</track>
-        <tick>58080</tick>
+        <tick>57600</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5750,7 +5767,8 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="71">
-        <tick>56640</tick>
+        <track>1</track>
+        <tick>58080</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5758,6 +5776,14 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="72">
+        <tick>56640</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="73">
         <tick>57600</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -5767,13 +5793,13 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Chord>
         <tick>56640</tick>
-        <Tuplet>71</Tuplet>
+        <Tuplet>72</Tuplet>
         <durationType>quarter</durationType>
         <Slur type="start" number="77"/>
         <Note pitch="78" tpc="20"/>
         </Chord>
       <Chord>
-        <Tuplet>71</Tuplet>
+        <Tuplet>72</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="77"/>
         <Note pitch="76" tpc="18"/>
@@ -5783,13 +5809,13 @@ p, li { white-space: pre-wrap; }
         <Note pitch="78" tpc="20"/>
         </Chord>
       <Chord>
-        <Tuplet>72</Tuplet>
+        <Tuplet>73</Tuplet>
         <durationType>quarter</durationType>
         <Slur type="start" number="78"/>
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
-        <Tuplet>72</Tuplet>
+        <Tuplet>73</Tuplet>
         <durationType>eighth</durationType>
         <Slur type="stop" number="78"/>
         <Note pitch="75" tpc="23"/>
@@ -5804,7 +5830,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>56640</tick>
-        <Tuplet>67</Tuplet>
+        <Tuplet>68</Tuplet>
         <durationType>eighth</durationType>
         <Beam>80</Beam>
         <Note>
@@ -5815,7 +5841,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>67</Tuplet>
+        <Tuplet>68</Tuplet>
         <durationType>eighth</durationType>
         <Beam>80</Beam>
         <Note>
@@ -5826,7 +5852,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>67</Tuplet>
+        <Tuplet>68</Tuplet>
         <durationType>eighth</durationType>
         <Beam>80</Beam>
         <Note>
@@ -5840,7 +5866,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>68</Tuplet>
+        <Tuplet>69</Tuplet>
         <durationType>eighth</durationType>
         <Beam>81</Beam>
         <Note>
@@ -5851,7 +5877,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>68</Tuplet>
+        <Tuplet>69</Tuplet>
         <durationType>eighth</durationType>
         <Beam>81</Beam>
         <Note>
@@ -5862,7 +5888,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>68</Tuplet>
+        <Tuplet>69</Tuplet>
         <durationType>eighth</durationType>
         <Beam>81</Beam>
         <Note>
@@ -5876,7 +5902,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>69</Tuplet>
+        <Tuplet>70</Tuplet>
         <durationType>eighth</durationType>
         <Beam>82</Beam>
         <Note>
@@ -5887,7 +5913,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>69</Tuplet>
+        <Tuplet>70</Tuplet>
         <durationType>eighth</durationType>
         <Beam>82</Beam>
         <Note>
@@ -5898,7 +5924,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>69</Tuplet>
+        <Tuplet>70</Tuplet>
         <durationType>eighth</durationType>
         <Beam>82</Beam>
         <Note>
@@ -5912,7 +5938,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>70</Tuplet>
+        <Tuplet>71</Tuplet>
         <durationType>eighth</durationType>
         <Beam>83</Beam>
         <Note>
@@ -5923,7 +5949,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>70</Tuplet>
+        <Tuplet>71</Tuplet>
         <durationType>eighth</durationType>
         <Beam>83</Beam>
         <Note>
@@ -5934,7 +5960,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>70</Tuplet>
+        <Tuplet>71</Tuplet>
         <durationType>eighth</durationType>
         <Beam>83</Beam>
         <Note>
@@ -5949,17 +5975,8 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
-      <Tuplet id="73">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="74">
         <track>1</track>
-        <tick>59040</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5968,7 +5985,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="75">
         <track>1</track>
-        <tick>59520</tick>
+        <tick>59040</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -5976,6 +5993,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="76">
+        <track>1</track>
+        <tick>59520</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="77">
         <track>1</track>
         <tick>60000</tick>
         <numberType>2</numberType>
@@ -6025,7 +6051,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>58560</tick>
-        <Tuplet>73</Tuplet>
+        <Tuplet>74</Tuplet>
         <durationType>eighth</durationType>
         <Beam>84</Beam>
         <Note>
@@ -6036,7 +6062,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>73</Tuplet>
+        <Tuplet>74</Tuplet>
         <durationType>eighth</durationType>
         <Beam>84</Beam>
         <Note>
@@ -6047,7 +6073,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>73</Tuplet>
+        <Tuplet>74</Tuplet>
         <durationType>eighth</durationType>
         <Beam>84</Beam>
         <Note>
@@ -6061,7 +6087,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>74</Tuplet>
+        <Tuplet>75</Tuplet>
         <durationType>eighth</durationType>
         <Beam>85</Beam>
         <Note>
@@ -6072,7 +6098,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>74</Tuplet>
+        <Tuplet>75</Tuplet>
         <durationType>eighth</durationType>
         <Beam>85</Beam>
         <Note>
@@ -6083,7 +6109,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>74</Tuplet>
+        <Tuplet>75</Tuplet>
         <durationType>eighth</durationType>
         <Beam>85</Beam>
         <Note>
@@ -6097,7 +6123,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>75</Tuplet>
+        <Tuplet>76</Tuplet>
         <durationType>eighth</durationType>
         <Beam>86</Beam>
         <Note>
@@ -6108,7 +6134,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>75</Tuplet>
+        <Tuplet>76</Tuplet>
         <durationType>eighth</durationType>
         <Beam>86</Beam>
         <Note>
@@ -6119,7 +6145,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>75</Tuplet>
+        <Tuplet>76</Tuplet>
         <durationType>eighth</durationType>
         <Beam>86</Beam>
         <Note>
@@ -6133,7 +6159,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>76</Tuplet>
+        <Tuplet>77</Tuplet>
         <durationType>eighth</durationType>
         <Beam>87</Beam>
         <Note>
@@ -6144,7 +6170,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>76</Tuplet>
+        <Tuplet>77</Tuplet>
         <durationType>eighth</durationType>
         <Beam>87</Beam>
         <Note>
@@ -6155,7 +6181,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>76</Tuplet>
+        <Tuplet>77</Tuplet>
         <durationType>eighth</durationType>
         <Beam>87</Beam>
         <Note>
@@ -6166,17 +6192,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="33">
-      <Tuplet id="77">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="78">
         <track>1</track>
-        <tick>60960</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6185,7 +6202,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="79">
         <track>1</track>
-        <tick>61440</tick>
+        <tick>60960</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6193,6 +6210,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="80">
+        <track>1</track>
+        <tick>61440</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="81">
         <track>1</track>
         <tick>61920</tick>
         <numberType>2</numberType>
@@ -6246,7 +6272,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>60480</tick>
-        <Tuplet>77</Tuplet>
+        <Tuplet>78</Tuplet>
         <durationType>eighth</durationType>
         <Beam>88</Beam>
         <Note>
@@ -6257,7 +6283,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>77</Tuplet>
+        <Tuplet>78</Tuplet>
         <durationType>eighth</durationType>
         <Beam>88</Beam>
         <Note>
@@ -6268,7 +6294,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>77</Tuplet>
+        <Tuplet>78</Tuplet>
         <durationType>eighth</durationType>
         <Beam>88</Beam>
         <Note>
@@ -6282,7 +6308,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>78</Tuplet>
+        <Tuplet>79</Tuplet>
         <durationType>eighth</durationType>
         <Beam>89</Beam>
         <Note>
@@ -6293,7 +6319,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>78</Tuplet>
+        <Tuplet>79</Tuplet>
         <durationType>eighth</durationType>
         <Beam>89</Beam>
         <Note>
@@ -6304,7 +6330,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>78</Tuplet>
+        <Tuplet>79</Tuplet>
         <durationType>eighth</durationType>
         <Beam>89</Beam>
         <Note>
@@ -6318,7 +6344,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>79</Tuplet>
+        <Tuplet>80</Tuplet>
         <durationType>eighth</durationType>
         <Beam>90</Beam>
         <Note>
@@ -6329,7 +6355,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>79</Tuplet>
+        <Tuplet>80</Tuplet>
         <durationType>eighth</durationType>
         <Beam>90</Beam>
         <Note>
@@ -6340,7 +6366,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>79</Tuplet>
+        <Tuplet>80</Tuplet>
         <durationType>eighth</durationType>
         <Beam>90</Beam>
         <Note>
@@ -6354,7 +6380,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>80</Tuplet>
+        <Tuplet>81</Tuplet>
         <durationType>eighth</durationType>
         <Beam>91</Beam>
         <Note>
@@ -6365,7 +6391,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>80</Tuplet>
+        <Tuplet>81</Tuplet>
         <durationType>eighth</durationType>
         <Beam>91</Beam>
         <Note>
@@ -6376,7 +6402,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>80</Tuplet>
+        <Tuplet>81</Tuplet>
         <durationType>eighth</durationType>
         <Beam>91</Beam>
         <Note>
@@ -6387,17 +6413,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="34">
-      <Tuplet id="81">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Tuplet id="82">
         <track>1</track>
-        <tick>62880</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6406,7 +6423,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="83">
         <track>1</track>
-        <tick>63360</tick>
+        <tick>62880</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6414,6 +6431,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="84">
+        <track>1</track>
+        <tick>63360</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="85">
         <track>1</track>
         <tick>63840</tick>
         <numberType>2</numberType>
@@ -6449,7 +6475,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>62400</tick>
-        <Tuplet>81</Tuplet>
+        <Tuplet>82</Tuplet>
         <durationType>eighth</durationType>
         <Beam>92</Beam>
         <Note>
@@ -6460,7 +6486,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>81</Tuplet>
+        <Tuplet>82</Tuplet>
         <durationType>eighth</durationType>
         <Beam>92</Beam>
         <Note>
@@ -6471,7 +6497,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>81</Tuplet>
+        <Tuplet>82</Tuplet>
         <durationType>eighth</durationType>
         <Beam>92</Beam>
         <Note>
@@ -6485,7 +6511,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>82</Tuplet>
+        <Tuplet>83</Tuplet>
         <durationType>eighth</durationType>
         <Beam>93</Beam>
         <Note>
@@ -6496,7 +6522,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>82</Tuplet>
+        <Tuplet>83</Tuplet>
         <durationType>eighth</durationType>
         <Beam>93</Beam>
         <Note>
@@ -6507,7 +6533,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>82</Tuplet>
+        <Tuplet>83</Tuplet>
         <durationType>eighth</durationType>
         <Beam>93</Beam>
         <Note>
@@ -6521,7 +6547,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>83</Tuplet>
+        <Tuplet>84</Tuplet>
         <durationType>eighth</durationType>
         <Beam>94</Beam>
         <Note>
@@ -6532,7 +6558,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>83</Tuplet>
+        <Tuplet>84</Tuplet>
         <durationType>eighth</durationType>
         <Beam>94</Beam>
         <Note>
@@ -6543,7 +6569,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>83</Tuplet>
+        <Tuplet>84</Tuplet>
         <durationType>eighth</durationType>
         <Beam>94</Beam>
         <Note>
@@ -6557,7 +6583,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>84</Tuplet>
+        <Tuplet>85</Tuplet>
         <durationType>eighth</durationType>
         <Beam>95</Beam>
         <Note>
@@ -6568,7 +6594,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>84</Tuplet>
+        <Tuplet>85</Tuplet>
         <durationType>eighth</durationType>
         <Beam>95</Beam>
         <Note>
@@ -6579,7 +6605,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>84</Tuplet>
+        <Tuplet>85</Tuplet>
         <durationType>eighth</durationType>
         <Beam>95</Beam>
         <Note>
@@ -6604,17 +6630,11 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">cresc.</span></p></body></html>
           </html-data>
         </Dynamic>
-      <Tuplet id="85">
-        <track>1</track>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Tuplet id="86">
         <track>1</track>
-        <tick>64800</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6623,7 +6643,7 @@ p, li { white-space: pre-wrap; }
         </Tuplet>
       <Tuplet id="87">
         <track>1</track>
-        <tick>65280</tick>
+        <tick>64800</tick>
         <numberType>2</numberType>
         <bracketType>2</bracketType>
         <normalNotes>2</normalNotes>
@@ -6631,6 +6651,15 @@ p, li { white-space: pre-wrap; }
         <baseNote>eighth</baseNote>
         </Tuplet>
       <Tuplet id="88">
+        <track>1</track>
+        <tick>65280</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="89">
         <track>1</track>
         <tick>65760</tick>
         <numberType>2</numberType>
@@ -6674,7 +6703,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>64320</tick>
-        <Tuplet>85</Tuplet>
+        <Tuplet>86</Tuplet>
         <durationType>eighth</durationType>
         <Beam>96</Beam>
         <Note>
@@ -6685,7 +6714,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>85</Tuplet>
+        <Tuplet>86</Tuplet>
         <durationType>eighth</durationType>
         <Beam>96</Beam>
         <Note>
@@ -6696,7 +6725,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>85</Tuplet>
+        <Tuplet>86</Tuplet>
         <durationType>eighth</durationType>
         <Beam>96</Beam>
         <Note>
@@ -6710,7 +6739,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>86</Tuplet>
+        <Tuplet>87</Tuplet>
         <durationType>eighth</durationType>
         <Beam>97</Beam>
         <Note>
@@ -6721,7 +6750,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>86</Tuplet>
+        <Tuplet>87</Tuplet>
         <durationType>eighth</durationType>
         <Beam>97</Beam>
         <Note>
@@ -6732,7 +6761,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>86</Tuplet>
+        <Tuplet>87</Tuplet>
         <durationType>eighth</durationType>
         <Beam>97</Beam>
         <Note>
@@ -6746,7 +6775,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>87</Tuplet>
+        <Tuplet>88</Tuplet>
         <durationType>eighth</durationType>
         <Beam>98</Beam>
         <Note>
@@ -6757,7 +6786,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>87</Tuplet>
+        <Tuplet>88</Tuplet>
         <durationType>eighth</durationType>
         <Beam>98</Beam>
         <Note>
@@ -6768,7 +6797,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>87</Tuplet>
+        <Tuplet>88</Tuplet>
         <durationType>eighth</durationType>
         <Beam>98</Beam>
         <Note>
@@ -6782,7 +6811,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <track>1</track>
-        <Tuplet>88</Tuplet>
+        <Tuplet>89</Tuplet>
         <durationType>eighth</durationType>
         <Beam>99</Beam>
         <Note>
@@ -6793,7 +6822,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>88</Tuplet>
+        <Tuplet>89</Tuplet>
         <durationType>eighth</durationType>
         <Beam>99</Beam>
         <Note>
@@ -6804,7 +6833,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <Tuplet>88</Tuplet>
+        <Tuplet>89</Tuplet>
         <durationType>eighth</durationType>
         <Beam>99</Beam>
         <Note>
@@ -6815,21 +6844,626 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="36">
+      <stretch>0.9</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Dynamic>
+        <subtype>fff</subtype>
+        <offset x="-3.55612" y="1.2063"/>
+        <tick>67200</tick>
+        <style>12</style>
+        </Dynamic>
+      <Tuplet id="90">
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="91">
+        <tick>67680</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="92">
+        <track>1</track>
+        <tick>66240</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="93">
+        <track>1</track>
+        <tick>66720</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Chord>
+        <tick>66240</tick>
+        <durationType>quarter</durationType>
+        <Slur type="start" number="90"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>90</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Slur type="stop" number="90"/>
+        <Note pitch="88" tpc="18"/>
+        </Chord>
+      <Beam id="100">
+        </Beam>
+      <Chord>
+        <Tuplet>90</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.20342" y="-6.40772"/>
+          </Articulation>
+        <Beam>100</Beam>
+        <Note pitch="84" tpc="26"/>
+        <Note pitch="90" tpc="20"/>
+        <Note pitch="93" tpc="17"/>
+        </Chord>
+      <Chord>
+        <Tuplet>90</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>100</Beam>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>23</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>20</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>90</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>100</Beam>
+        <Note pitch="84" tpc="26"/>
+        <Note pitch="90" tpc="20"/>
+        <Note pitch="93" tpc="17"/>
+        </Chord>
+      <Beam id="101">
+        </Beam>
+      <Chord>
+        <Tuplet>91</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-3.34683e-07" y="14.0359"/>
+          </Articulation>
+        <Beam>101</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>80</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>91</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>101</Beam>
+        <Note pitch="85" tpc="21"/>
+        <Note pitch="88" tpc="18"/>
+        <Note pitch="92" tpc="22"/>
+        </Chord>
+      <Chord>
+        <Tuplet>91</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>101</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>80</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Beam id="102">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <tick>66240</tick>
+        <Tuplet>92</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>102</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>90</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <Tuplet>92</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>102</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <Tuplet>92</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>102</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>87</pitch>
+          <tpc>23</tpc>
+          <userAccidental>1</userAccidental>
+          </Note>
+        </Chord>
+      <Beam id="103">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <Tuplet>93</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>103</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>88</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <Tuplet>93</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>103</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>80</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <Tuplet>93</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>103</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>85</pitch>
+          <tpc>21</tpc>
+          </Note>
+        </Chord>
       <Rest>
-        <durationType>measure</durationType>
+        <track>1</track>
+        <visible>0</visible>
+        <durationType>half</durationType>
         </Rest>
       </Measure>
     <Measure number="37">
-      <Rest>
-        <durationType>measure</durationType>
-        </Rest>
+      <stretch>0.9</stretch>
+      <Tuplet id="94">
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="95">
+        <tick>68640</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="96">
+        <tick>69120</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="97">
+        <tick>69600</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Beam id="104">
+        </Beam>
+      <Chord>
+        <tick>68160</tick>
+        <Tuplet>94</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Beam>104</Beam>
+        <Note pitch="81" tpc="17"/>
+        <Note pitch="87" tpc="23"/>
+        <Note pitch="90" tpc="20"/>
+        </Chord>
+      <Chord>
+        <Tuplet>94</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>104</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>26</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>23</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>94</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>104</Beam>
+        <Note pitch="81" tpc="17"/>
+        <Note pitch="87" tpc="23"/>
+        <Note pitch="90" tpc="20"/>
+        </Chord>
+      <Beam id="105">
+        </Beam>
+      <Chord>
+        <Tuplet>95</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.305129" y="18.0026"/>
+          </Articulation>
+        <Beam>105</Beam>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>21</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>95</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>105</Beam>
+        <Note pitch="80" tpc="22"/>
+        <Note pitch="85" tpc="21"/>
+        <Note pitch="88" tpc="18"/>
+        </Chord>
+      <Chord>
+        <Tuplet>95</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>105</Beam>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>21</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Beam id="106">
+        </Beam>
+      <Chord>
+        <Tuplet>96</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Beam>106</Beam>
+        <Note pitch="77" tpc="25"/>
+        <Note>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        <Note pitch="86" tpc="16"/>
+        </Chord>
+      <Chord>
+        <Tuplet>96</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>106</Beam>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>96</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>106</Beam>
+        <Note pitch="77" tpc="25"/>
+        <Note pitch="83" tpc="19"/>
+        <Note pitch="86" tpc="16"/>
+        </Chord>
+      <Beam id="107">
+        </Beam>
+      <Chord>
+        <Tuplet>97</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.10171" y="19.5283"/>
+          </Articulation>
+        <Beam>107</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>21</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>97</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>107</Beam>
+        <Note pitch="78" tpc="20"/>
+        <Note pitch="81" tpc="17"/>
+        <Note pitch="85" tpc="21"/>
+        </Chord>
+      <Chord>
+        <Tuplet>97</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>107</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>21</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="38">
-      <Rest>
-        <durationType>measure</durationType>
-        </Rest>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Tuplet id="98">
+        <tick>70560</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="99">
+        <tick>71040</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Tuplet id="100">
+        <tick>71520</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
+      <Beam id="108">
+        </Beam>
+      <Chord>
+        <tick>70080</tick>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Beam>108</Beam>
+        <Note pitch="74" tpc="16"/>
+        <Note pitch="80" tpc="22"/>
+        <Note pitch="83" tpc="19"/>
+        </Chord>
+      <Chord>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>108</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>25</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>108</Beam>
+        <Note pitch="74" tpc="16"/>
+        <Note pitch="80" tpc="22"/>
+        <Note pitch="83" tpc="19"/>
+        </Chord>
+      <Beam id="109">
+        </Beam>
+      <Chord>
+        <Tuplet>98</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-3.34683e-07" y="14.7419"/>
+          </Articulation>
+        <Beam>109</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>98</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>109</Beam>
+        <Note pitch="73" tpc="21"/>
+        <Note pitch="78" tpc="20"/>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <Tuplet>98</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>109</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Beam id="110">
+        </Beam>
+      <Chord>
+        <Tuplet>99</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Beam>110</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>26</tpc>
+          <userAccidental>1</userAccidental>
+          </Note>
+        <Note pitch="78" tpc="20"/>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <Tuplet>99</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>110</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>23</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          <userAccidental>1</userAccidental>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>99</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>110</Beam>
+        <Note pitch="71" tpc="19"/>
+        <Note pitch="78" tpc="20"/>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Beam id="111">
+        </Beam>
+      <Chord>
+        <Tuplet>100</Tuplet>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.30513" y="14.6462"/>
+          </Articulation>
+        <Beam>111</Beam>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <Tuplet>100</Tuplet>
+        <durationType>eighth</durationType>
+        <Beam>111</Beam>
+        <Note pitch="73" tpc="21"/>
+        <Note pitch="76" tpc="18"/>
+        <Note pitch="80" tpc="22"/>
+        </Chord>
+      <Chord>
+        <Tuplet>100</Tuplet>
+        <trailingSpace>2</trailingSpace>
+        <durationType>eighth</durationType>
+        <Beam>111</Beam>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
+          <move>1</move>
+          </Note>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="39">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Rest>
         <durationType>measure</durationType>
         </Rest>
@@ -7076,7 +7710,7 @@ p, li { white-space: pre-wrap; }
         <tick>2880</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="100">
+      <Beam id="112">
         <track>5</track>
         </Beam>
       <Chord>
@@ -7086,7 +7720,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>100</Beam>
+        <Beam>112</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -7110,7 +7744,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>100</Beam>
+        <Beam>112</Beam>
         <Note>
           <track>5</track>
           <pitch>56</pitch>
@@ -7134,7 +7768,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>100</Beam>
+        <Beam>112</Beam>
         <Note>
           <track>5</track>
           <pitch>55</pitch>
@@ -7246,7 +7880,7 @@ p, li { white-space: pre-wrap; }
         <tick>4800</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="101">
+      <Beam id="113">
         <track>5</track>
         </Beam>
       <Chord>
@@ -7256,7 +7890,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>101</Beam>
+        <Beam>113</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -7280,7 +7914,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>101</Beam>
+        <Beam>113</Beam>
         <Note>
           <track>5</track>
           <pitch>56</pitch>
@@ -7304,7 +7938,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>101</Beam>
+        <Beam>113</Beam>
         <Note>
           <track>5</track>
           <pitch>55</pitch>
@@ -7408,7 +8042,7 @@ p, li { white-space: pre-wrap; }
         <tick>6720</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="102">
+      <Beam id="114">
         <track>5</track>
         </Beam>
       <Chord>
@@ -7418,7 +8052,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>102</Beam>
+        <Beam>114</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -7442,7 +8076,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>102</Beam>
+        <Beam>114</Beam>
         <Note>
           <track>5</track>
           <pitch>59</pitch>
@@ -7466,7 +8100,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>102</Beam>
+        <Beam>114</Beam>
         <Note>
           <track>5</track>
           <pitch>57</pitch>
@@ -7568,7 +8202,7 @@ p, li { white-space: pre-wrap; }
         <tick>8640</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="103">
+      <Beam id="115">
         <track>5</track>
         <StemDirection>down</StemDirection>
         </Beam>
@@ -7579,7 +8213,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>103</Beam>
+        <Beam>115</Beam>
         <Note>
           <track>5</track>
           <pitch>56</pitch>
@@ -7603,7 +8237,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>103</Beam>
+        <Beam>115</Beam>
         <Note>
           <track>5</track>
           <pitch>63</pitch>
@@ -7627,7 +8261,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>103</Beam>
+        <Beam>115</Beam>
         <Note>
           <track>5</track>
           <pitch>61</pitch>
@@ -7706,11 +8340,11 @@ p, li { white-space: pre-wrap; }
         <offset x="0.209591" y="-3"/>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="104">
+      <Beam id="116">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>104</Beam>
+        <Beam>116</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="59" tpc="19"/>
         <Note pitch="63" tpc="23"/>
@@ -7718,23 +8352,23 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>104</Beam>
+        <Beam>116</Beam>
         <Note pitch="61" tpc="21"/>
         <Note pitch="64" tpc="18"/>
         <Note pitch="73" tpc="21"/>
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>104</Beam>
+        <Beam>116</Beam>
         <Note pitch="57" tpc="17"/>
         <Note pitch="61" tpc="21"/>
         <Note pitch="69" tpc="17"/>
         </Chord>
-      <Beam id="105">
+      <Beam id="117">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>105</Beam>
+        <Beam>117</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="59" tpc="19"/>
         <Note pitch="63" tpc="23"/>
@@ -7742,21 +8376,21 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>105</Beam>
+        <Beam>117</Beam>
         <Note pitch="56" tpc="22"/>
         <Note pitch="59" tpc="19"/>
         <Note pitch="68" tpc="22"/>
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>105</Beam>
+        <Beam>117</Beam>
         <Note pitch="57" tpc="17"/>
         <Note pitch="61" tpc="21"/>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>105</Beam>
+        <Beam>117</Beam>
         <Note pitch="54" tpc="20"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="66" tpc="20"/>
@@ -7784,7 +8418,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="8">
-      <Beam id="106">
+      <Beam id="118">
         <track>5</track>
         <y1>221.931</y1>
         <y2>291.799</y2>
@@ -7795,7 +8429,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>106</Beam>
+        <Beam>118</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="56" tpc="22"/>
         <Note pitch="59" tpc="19"/>
@@ -7807,7 +8441,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="start" number="10"/>
-        <Beam>106</Beam>
+        <Beam>118</Beam>
         <Note pitch="56" tpc="22"/>
         <Note pitch="59" tpc="19"/>
         <Note pitch="68" tpc="22"/>
@@ -7818,7 +8452,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="stop" number="10"/>
-        <Beam>106</Beam>
+        <Beam>118</Beam>
         <Note pitch="57" tpc="17"/>
         <Note pitch="61" tpc="21"/>
         <Note pitch="69" tpc="17"/>
@@ -7829,12 +8463,12 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="start" number="11"/>
-        <Beam>106</Beam>
+        <Beam>118</Beam>
         <Note pitch="54" tpc="20"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="66" tpc="20"/>
         </Chord>
-      <Beam id="107">
+      <Beam id="119">
         <track>5</track>
         <y1>316.914</y1>
         <y2>375.137</y2>
@@ -7846,7 +8480,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="stop" number="11"/>
-        <Beam>107</Beam>
+        <Beam>119</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="56" tpc="22"/>
         <Note pitch="59" tpc="19"/>
@@ -7858,7 +8492,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="start" number="12"/>
-        <Beam>107</Beam>
+        <Beam>119</Beam>
         <Note pitch="52" tpc="18"/>
         <Note pitch="56" tpc="22"/>
         <Note pitch="64" tpc="18"/>
@@ -7869,7 +8503,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="stop" number="12"/>
-        <Beam>107</Beam>
+        <Beam>119</Beam>
         <Note pitch="54" tpc="20"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="66" tpc="20"/>
@@ -7880,7 +8514,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           </Articulation>
         <Slur type="start" number="5"/>
-        <Beam>107</Beam>
+        <Beam>119</Beam>
         <Note pitch="51" tpc="23"/>
         <Note pitch="54" tpc="20"/>
         <Note pitch="63" tpc="23"/>
@@ -7967,7 +8601,7 @@ p, li { white-space: pre-wrap; }
           <tpc>18</tpc>
           </Note>
         </Chord>
-      <Beam id="108">
+      <Beam id="120">
         <track>5</track>
         <y1>378.545</y1>
         <y2>339.106</y2>
@@ -7980,7 +8614,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>108</Beam>
+        <Beam>120</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -8004,7 +8638,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>108</Beam>
+        <Beam>120</Beam>
         <Note>
           <track>5</track>
           <pitch>56</pitch>
@@ -8028,7 +8662,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>108</Beam>
+        <Beam>120</Beam>
         <Note>
           <track>5</track>
           <pitch>55</pitch>
@@ -8122,7 +8756,7 @@ p, li { white-space: pre-wrap; }
         <tick>16320</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="109">
+      <Beam id="121">
         <track>5</track>
         </Beam>
       <Chord>
@@ -8132,7 +8766,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>109</Beam>
+        <Beam>121</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -8156,7 +8790,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>109</Beam>
+        <Beam>121</Beam>
         <Note>
           <track>5</track>
           <pitch>59</pitch>
@@ -8180,7 +8814,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>109</Beam>
+        <Beam>121</Beam>
         <Note>
           <track>5</track>
           <pitch>57</pitch>
@@ -8258,7 +8892,7 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="110">
+      <Beam id="122">
         <y1>323.346</y1>
         <y2>375.118</y2>
         <StemDirection>down</StemDirection>
@@ -8268,7 +8902,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>110</Beam>
+        <Beam>122</Beam>
         <Note pitch="52" tpc="18"/>
         <Note pitch="56" tpc="22"/>
         <Note pitch="64" tpc="18"/>
@@ -8278,7 +8912,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>110</Beam>
+        <Beam>122</Beam>
         <Note pitch="54" tpc="20"/>
         <Note pitch="57" tpc="17"/>
         <Note pitch="66" tpc="20"/>
@@ -8288,12 +8922,12 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>110</Beam>
+        <Beam>122</Beam>
         <Note pitch="50" tpc="16"/>
         <Note pitch="54" tpc="20"/>
         <Note pitch="62" tpc="16"/>
         </Chord>
-      <Beam id="111">
+      <Beam id="123">
         <y1>419.628</y1>
         <y2>471.399</y2>
         <StemDirection>down</StemDirection>
@@ -8303,7 +8937,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>111</Beam>
+        <Beam>123</Beam>
         <Note pitch="52" tpc="18"/>
         <Note pitch="56" tpc="22"/>
         <Note pitch="64" tpc="18"/>
@@ -8313,7 +8947,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>111</Beam>
+        <Beam>123</Beam>
         <Note pitch="49" tpc="21"/>
         <Note pitch="52" tpc="18"/>
         <Note pitch="61" tpc="21"/>
@@ -8323,7 +8957,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>111</Beam>
+        <Beam>123</Beam>
         <Note pitch="50" tpc="16"/>
         <Note pitch="54" tpc="20"/>
         <Note pitch="62" tpc="16"/>
@@ -8333,7 +8967,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>111</Beam>
+        <Beam>123</Beam>
         <Note pitch="47" tpc="19"/>
         <Note pitch="54" tpc="20"/>
         <Note pitch="59" tpc="19"/>
@@ -8375,7 +9009,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="54" tpc="20"/>
         <Note pitch="61" tpc="21"/>
         </Chord>
-      <Beam id="112">
+      <Beam id="124">
         <y1>397.373</y1>
         <y2>397.373</y2>
         <StemDirection>down</StemDirection>
@@ -8385,7 +9019,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>112</Beam>
+        <Beam>124</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="49" tpc="21"/>
         <Note pitch="54" tpc="20"/>
@@ -8396,7 +9030,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>112</Beam>
+        <Beam>124</Beam>
         <Note>
           <offset x="0.359977" y="0"/>
           <pitch>52</pitch>
@@ -8420,7 +9054,7 @@ p, li { white-space: pre-wrap; }
         <Articulation>
           <subtype>tenuto</subtype>
           </Articulation>
-        <Beam>112</Beam>
+        <Beam>124</Beam>
         <Note pitch="50" tpc="16"/>
         <Note pitch="54" tpc="20"/>
         <Note pitch="62" tpc="16"/>
@@ -8554,7 +9188,7 @@ p, li { white-space: pre-wrap; }
         <tick>22080</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="113">
+      <Beam id="125">
         <track>5</track>
         <y1>642.188</y1>
         <y2>642.188</y2>
@@ -8567,7 +9201,7 @@ p, li { white-space: pre-wrap; }
           <track>5</track>
           </Articulation>
         <Slur type="start" number="15"/>
-        <Beam>113</Beam>
+        <Beam>125</Beam>
         <Note>
           <track>5</track>
           <pitch>44</pitch>
@@ -8581,7 +9215,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>113</Beam>
+        <Beam>125</Beam>
         <Note>
           <track>5</track>
           <pitch>47</pitch>
@@ -8596,7 +9230,7 @@ p, li { white-space: pre-wrap; }
           <track>5</track>
           </Articulation>
         <Slur type="stop" number="15"/>
-        <Beam>113</Beam>
+        <Beam>125</Beam>
         <Note>
           <track>5</track>
           <pitch>46</pitch>
@@ -8638,7 +9272,7 @@ p, li { white-space: pre-wrap; }
         <tick>24000</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="114">
+      <Beam id="126">
         <track>5</track>
         </Beam>
       <Chord>
@@ -8649,7 +9283,7 @@ p, li { white-space: pre-wrap; }
           <track>5</track>
           </Articulation>
         <Slur type="start" number="16"/>
-        <Beam>114</Beam>
+        <Beam>126</Beam>
         <Note>
           <track>5</track>
           <pitch>44</pitch>
@@ -8663,7 +9297,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>114</Beam>
+        <Beam>126</Beam>
         <Note>
           <track>5</track>
           <pitch>47</pitch>
@@ -8678,7 +9312,7 @@ p, li { white-space: pre-wrap; }
           <track>5</track>
           </Articulation>
         <Slur type="stop" number="16"/>
-        <Beam>114</Beam>
+        <Beam>126</Beam>
         <Note>
           <track>5</track>
           <pitch>46</pitch>
@@ -8789,11 +9423,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>quarter</durationType>
         <Slur type="start" number="18"/>
-        <Note>
-          <selected>1</selected>
-          <pitch>40</pitch>
-          <tpc>18</tpc>
-          </Note>
+        <Note pitch="40" tpc="18"/>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -9212,6 +9842,12 @@ p, li { white-space: pre-wrap; }
           </Articulation>
         <Slur type="start" number="65"/>
         <Note pitch="59" tpc="19"/>
+        <Arpeggio>
+          <subtype>3</subtype>
+          <offset x="0.389179" y="0"/>
+          <userLen1>0.486474</userLen1>
+          <userLen2>7.97817</userLen2>
+          </Arpeggio>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -9258,6 +9894,12 @@ p, li { white-space: pre-wrap; }
           </Articulation>
         <Slur type="start" number="66"/>
         <Note pitch="59" tpc="19"/>
+        <Arpeggio>
+          <subtype>3</subtype>
+          <offset x="0.486474" y="-0.0486474"/>
+          <userLen1>0.827006</userLen1>
+          <userLen2>8.07547</userLen2>
+          </Arpeggio>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -9383,6 +10025,12 @@ p, li { white-space: pre-wrap; }
           </Articulation>
         <Slur type="start" number="73"/>
         <Note pitch="59" tpc="19"/>
+        <Arpeggio>
+          <subtype>3</subtype>
+          <offset x="0.437827" y="-0.0486474"/>
+          <userLen1>0.583769</userLen1>
+          <userLen2>7.68629</userLen2>
+          </Arpeggio>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -9429,6 +10077,12 @@ p, li { white-space: pre-wrap; }
           </Articulation>
         <Slur type="start" number="84"/>
         <Note pitch="59" tpc="19"/>
+        <Arpeggio>
+          <subtype>3</subtype>
+          <offset x="0.437827" y="-0.243237"/>
+          <userLen1>1.07024</userLen1>
+          <userLen2>8.07547</userLen2>
+          </Arpeggio>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -9551,24 +10205,48 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>quarter</durationType>
         <Slur type="stop" number="88"/>
+        <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         <Note pitch="73" tpc="21"/>
         </Chord>
       </Measure>
     <Measure number="36">
+      <Chord>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.10171" y="-1.32223"/>
+          </Articulation>
+        <Slur type="start" number="89"/>
+        <Note pitch="72" tpc="26"/>
+        <Note pitch="75" tpc="23"/>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Slur type="stop" number="89"/>
+        <Note pitch="73" tpc="21"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
       <Rest>
-        <durationType>measure</durationType>
+        <visible>0</visible>
+        <durationType>half</durationType>
         </Rest>
       </Measure>
     <Measure number="37">
       <Rest>
+        <visible>0</visible>
         <durationType>measure</durationType>
         </Rest>
       </Measure>
     <Measure number="38">
       <Rest>
+        <visible>0</visible>
         <durationType>measure</durationType>
         </Rest>
+      <Clef>
+        <subtype>4</subtype>
+        <offset x="0" y="1"/>
+        </Clef>
       </Measure>
     <Measure number="39">
       <Rest>
@@ -9691,5 +10369,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
