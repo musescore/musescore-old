@@ -432,7 +432,7 @@ Style::Style()
             StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_ArpeggioNoteDistance, Spatium(.5)),
-            StyleVal(ST_ArpeggioLineWidth, Spatium(.15)),
+            StyleVal(ST_ArpeggioLineWidth, Spatium(.18)),
             StyleVal(ST_ArpeggioHookLen, Spatium(.8)),
             };
 
