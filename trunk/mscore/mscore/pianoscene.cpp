@@ -20,6 +20,26 @@
 
 #include "pianoscene.h"
 #include "staff.h"
+#include "piano.h"
+#include "measure.h"
+#include "chord.h"
+#include "score.h"
+#include "note.h"
+
+//---------------------------------------------------------
+//   pitch2y
+//---------------------------------------------------------
+
+static int pitch2y(int pitch)
+      {
+      static int tt[] = {
+            12, 19, 25, 32, 38, 51, 58, 64, 71, 77, 84, 90
+            };
+      int y = (75 * keyHeight) - (tt[pitch % 12] + (7 * keyHeight) * (pitch / 12));
+      if (y < 0)
+            y = 0;
+      return y;
+      }
 
 //---------------------------------------------------------
 //   PianoScene
@@ -32,6 +52,28 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
       _score = staff->score();
       _timeType = TICKS;
       metronomeRulerMag = 0;
+      Measure* m = _score->firstMeasure();
+      int staffIdx = staff->idx();
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+      for (Segment* s = m->first(); s; s = s->next1()) {
+            for (int track = startTrack; track < endTrack; ++track) {
+                  Element* e = s->element(track);
+                  if (e == 0 || e->type() != CHORD)
+                        continue;
+                  Chord* chord = static_cast<Chord*>(e);
+                  NoteList* nl = chord->noteList();
+                  int tick = chord->tick();
+                  int len  = chord->tickLen();
+                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                        Note* n = in->second;
+                        int pitch = n->pitch();
+                        int y = pitch2y(pitch) + keyHeight/4;
+                        QGraphicsRectItem* ri = addRect(tick, y,
+                           len, keyHeight/2, QPen(), QBrush(QColor(Qt::blue)));
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------
