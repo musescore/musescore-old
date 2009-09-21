@@ -20,7 +20,7 @@
 
 #include "ruler.h"
 
-static const int MAP_OFFSET = 0;
+static const int MAP_OFFSET = 3;
 
 //---------------------------------------------------------
 //   Ruler

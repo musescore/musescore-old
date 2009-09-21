@@ -21,7 +21,10 @@
 #ifndef __PIANOSCENE_H__
 #define __PIANOSCENE_H__
 
+#include "pos.h"
+
 class Staff;
+class Score;
 
 //---------------------------------------------------------
 //   PianoScene
@@ -31,8 +34,13 @@ class PianoScene : public QGraphicsScene {
       Q_OBJECT
 
       Staff* staff;
+      Score* _score;
+      int metronomeRulerMag;
+      TType _timeType;
 
       virtual void drawBackground(QPainter* painter, const QRectF& rect);
+      Pos pix2pos(int x) const;
+      int pos2pix(const Pos& p) const;
 
    public:
       PianoScene(Staff* staff, QWidget* parent = 0);
