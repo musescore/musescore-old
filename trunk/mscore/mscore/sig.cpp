@@ -394,3 +394,78 @@ void SigList::insertTime(int tick, int len)
       normalize();
       }
 
+//---------------------------------------------------------
+//   raster
+//---------------------------------------------------------
+
+unsigned SigList::raster(unsigned t, int raster) const
+      {
+      if (raster == 1)
+            return t;
+      ciSigEvent e = upper_bound(t);
+      if (e == end()) {
+            printf("SigList::raster(%x,)\n", t);
+            // abort();
+            return t;
+            }
+      int delta  = t - e->first;
+      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      if (raster == 0)
+            raster = ticksM;
+      int rest   = delta % ticksM;
+      int bb     = (delta/ticksM)*ticksM;
+      return  e->first + bb + ((rest + raster/2)/raster)*raster;
+      }
+
+//---------------------------------------------------------
+//   raster1
+//    round down
+//---------------------------------------------------------
+
+unsigned SigList::raster1(unsigned t, int raster) const
+      {
+      if (raster == 1)
+            return t;
+      ciSigEvent e = upper_bound(t);
+
+      int delta  = t - e->first;
+      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      if (raster == 0)
+            raster = ticksM;
+      int rest   = delta % ticksM;
+      int bb     = (delta/ticksM)*ticksM;
+      return  e->first + bb + (rest/raster)*raster;
+      }
+
+//---------------------------------------------------------
+//   raster2
+//    round up
+//---------------------------------------------------------
+
+unsigned SigList::raster2(unsigned t, int raster) const
+      {
+      if (raster == 1)
+            return t;
+      ciSigEvent e = upper_bound(t);
+
+      int delta  = t - e->first;
+      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      if (raster == 0)
+            raster = ticksM;
+      int rest   = delta % ticksM;
+      int bb     = (delta/ticksM)*ticksM;
+      return  e->first + bb + ((rest+raster-1)/raster)*raster;
+      }
+
+//---------------------------------------------------------
+//   rasterStep
+//---------------------------------------------------------
+
+int SigList::rasterStep(unsigned t, int raster) const
+      {
+      if (raster == 0) {
+            ciSigEvent e = upper_bound(t);
+            return ticks_beat(e->second.denominator) * e->second.nominator;
+            }
+      return raster;
+      }

@@ -63,6 +63,9 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
+bool debugMode          = false;
+bool enableExperimental = false;
+
 QString dataPath;
 int division = 480;     // 480 midi ticks represent a quarter note
 
@@ -989,6 +992,7 @@ static void usage(const char* prog, const char*)
         "   -S style  load style file\n"
         "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
+        "   -e        enable experimental features\n"
         );
       }
 
@@ -1431,7 +1435,7 @@ int main(int argc, char* argv[])
       f.close();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:p:r:S:DF")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:p:r:S:DFe")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1474,6 +1478,9 @@ int main(int argc, char* argv[])
                         break;
                   case 'F':
                         useFactorySettings = true;
+                        break;
+                  case 'e':
+                        enableExperimental = true;
                         break;
 
                   default:
