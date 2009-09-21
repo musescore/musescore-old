@@ -55,6 +55,8 @@
 #include "system.h"
 #include "magbox.h"
 #include "measure.h"
+#include "pianoroll.h"
+#include "drumroll.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -287,6 +289,18 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       a = popup->addAction(tr("Edit Drumset..."));
       a->setData("edit-drumset");
       a->setEnabled(staff->part()->drumset() != 0);
+
+      if (enableExperimental) {
+            if (staff->part()->drumset()) {
+                  a = popup->addAction(tr("Drumroll Editor..."));
+                  a->setData("drumroll");
+                  }
+            else {
+                  a = popup->addAction(tr("Pianoroll Editor..."));
+                  a->setData("pianoroll");
+                  }
+            }
+
       a = popup->addAction(tr("Staff Properties..."));
       a->setData("staff-properties");
 
@@ -325,6 +339,14 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       else if (cmd == "edit-drumset") {
             EditDrumset drumsetEdit(staff->part()->drumset(), this);
             drumsetEdit.exec();
+            }
+      else if (cmd == "drumroll") {
+            DrumrollEditor drumrollEditor(staff);
+            drumrollEditor.exec();
+            }
+      else if (cmd == "pianoroll") {
+            PianorollEditor pianorollEditor(staff);
+            pianorollEditor.exec();
             }
       else if (cmd == "staff-properties") {
             EditStaff staffEdit(staff, this);

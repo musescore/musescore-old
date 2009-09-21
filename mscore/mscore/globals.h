@@ -39,6 +39,7 @@ static const int MSCVERSION = 112;
 extern int division;
 
 extern bool debugMode;
+extern bool enableExperimental;
 extern bool scriptDebug;
 extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.

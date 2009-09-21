@@ -42,6 +42,7 @@ struct SigEvent {
       SigEvent() { nominator = 0; }
       SigEvent(int z, int n);                         ///< set regular event
       SigEvent(int z1, int n1, int z2, int n2);       ///< set irregular event
+
       bool operator==(const SigEvent& e) const;
       bool valid() const { return nominator > 0; }
       QString print() const {
@@ -89,6 +90,10 @@ class SigList : public std::map<const int, SigEvent > {
       void removeTime(int start, int len);
       void insertTime(int start, int len);
       int serial() const { return _serial; }
+      unsigned raster(unsigned tick, int raster) const;
+      unsigned raster1(unsigned tick, int raster) const;    // round down
+      unsigned raster2(unsigned tick, int raster) const;    // round up
+      int rasterStep(unsigned tick, int raster) const;
       };
 
 extern int ticks_measure(int Z, int N);

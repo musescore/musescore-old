@@ -101,7 +101,8 @@ QT4_WRAP_CPP (mocs
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h scscore.h scnote.h sctext.h scmeasure.h scbytearray.h
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
-      slurproperties.h select.h synthcontrol.h
+      slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
+      pianoscene.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -184,7 +185,8 @@ add_executable ( ${ExecutableName}
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scmeasure.cpp scbytearray.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
-      canonical.cpp
+      canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
+      pos.cpp
       ${AUDIO}
       )
 

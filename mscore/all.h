@@ -48,6 +48,7 @@
 
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>
+#include <QtGui/QScrollBar>
 #include <QtGui/QToolBar>
 #include <QtGui/QWhatsThis>
 #include <QtGui/QBitmap>
@@ -104,6 +105,8 @@
 #include <QtGui/QProgressBar>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QCheckBox>
+#include <QtGui/QGraphicsView>
+#include <QtGui/QGraphicsScene>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
