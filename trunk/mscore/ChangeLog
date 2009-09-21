@@ -1,3 +1,6 @@
+21.sep (la)
+      - first release of ABC import plugin. It calls a webservice
+      - Change brasilian portuguese language name
 20.sep (ws)
       - implement undo for tuplet properties change
       - updated instruments.xml from Magnus Johansson
