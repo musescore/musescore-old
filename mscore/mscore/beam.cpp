@@ -203,7 +203,8 @@ Beam::Beam(Score* s)
       {
       _direction    = AUTO;
       _up           = -1;
-      _userModified = false;
+      _userModified[0] = false;
+      _userModified[1] = false;
       }
 
 //---------------------------------------------------------
@@ -216,12 +217,14 @@ Beam::Beam(const Beam& b)
       _elements     = b._elements;
       foreach(BeamSegment* bs, b.beamSegments)
             beamSegments.append(new BeamSegment(*bs));
-//      beamSegments  = b.beamSegments;
-      _direction    = b._direction;
-      _up           = b._up;
-      _userModified = b._userModified;
-      _p1           = b._p1;
-      _p2           = b._p2;
+      _direction       = b._direction;
+      _up              = b._up;
+      _userModified[0] = b._userModified[0];
+      _userModified[1] = b._userModified[1];
+      _p1[0]           = b._p1[0];
+      _p1[1]           = b._p1[1];
+      _p2[0]           = b._p2[0];
+      _p2[1]           = b._p2[1];
       }
 
 //---------------------------------------------------------
@@ -590,9 +593,10 @@ void Beam::layout()
       double beamY = 0.0;  // y position of main beam start
       int cut = 0;
 
-      if (_userModified) {
-            beamY = _p1.y() + c1->upNote()->chord()->canvasPos().y();
-            slope = (_p2.y() - _p1.y()) / (p2x - p1x);
+      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
+      if (_userModified[idx]) {
+            beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
+            slope = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
             }
       else {
             if (cross) {
@@ -611,8 +615,8 @@ void Beam::layout()
                   else
                         beamY = _up ? y2 : y1;
                   slope    = 0.0;
-                  _p1.ry() = beamY;
-                  _p2.ry() = beamY;
+                  _p1[idx].ry() = beamY;
+                  _p2[idx].ry() = beamY;
                   }
             else {
                   foreach(ChordRest* cr, _elements)
@@ -658,7 +662,7 @@ void Beam::layout()
       //
       // set stem direction for every chord
       //
-      if (_userModified || cross) {
+      if (_userModified[idx] || cross) {
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
@@ -677,8 +681,8 @@ void Beam::layout()
       double xoffRight = xoffLeft;
       double x1        = c1->stemPos(c1->up(), false).x() - xoffLeft;
       double x2        = c2->stemPos(c2->up(), false).x() + xoffRight;
-      _p1.rx()         = x1;
-      _p2.rx()         = x2;
+      _p1[idx].rx()    = x1;
+      _p2[idx].rx()    = x2;
 
       const Style s(score()->style());
       double bd(s[ST_beamDistance].toDouble());
@@ -689,7 +693,7 @@ void Beam::layout()
       if (isGrace)
             beamDist *= graceMag;
 
-      if (!_userModified) {
+      if (!_userModified[idx]) {
             //
             // compute final y position position of 1/8 beam
             //
@@ -708,7 +712,7 @@ void Beam::layout()
                         else
                               yDownMax = qMax(y, yDownMax);
                         }
-                  _p1.ry() = _p2.ry() = yUpMin + (yDownMax - yUpMin) * .5;
+                  _p1[idx].ry() = _p2[idx].ry() = yUpMin + (yDownMax - yUpMin) * .5;
                   }
             else {
                   QPointF p1s(c1->stemPos(c1->up(), false));
@@ -717,13 +721,13 @@ void Beam::layout()
 
                   if (cut >= 0) {
                         // left dot is reference
-                        _p1.ry() = p1s.y();
-                        _p2.ry() = _p1.y() + ys;
+                        _p1[idx].ry() = p1s.y();
+                        _p2[idx].ry() = _p1[idx].y() + ys;
                         }
                   else {
                         // right dot is reference
-                        _p2.ry() = p2s.y();
-                        _p1.ry() = _p2.y() - ys;
+                        _p2[idx].ry() = p2s.y();
+                        _p1[idx].ry() = _p2[idx].y() - ys;
                         }
                   double min =  1000.0;
                   double max = -1000.0;
@@ -735,7 +739,7 @@ void Beam::layout()
                         // grow beams with factor 0.5
                         double bd      = (chord->beams() - 1) * beamDist * .5 * (_up ? 1.0 : -1.0);
                         double y1      = npos.y();
-                        double y2      = _p1.y() + (npos.x() - x1) * slope;
+                        double y2      = _p1[idx].y() + (npos.x() - x1) * slope;
                         double stemLen = _up ? (y1 - y2) : (y2 - y1);
                         stemLen -= bd;
                         if (stemLen < min)
@@ -752,8 +756,8 @@ void Beam::layout()
                   double diff = n * _spatium - min;
                   if (_up)
                         diff = -diff;
-                  _p1.ry() += diff;
-                  _p2.ry() += diff;
+                  _p1[idx].ry() += diff;
+                  _p2[idx].ry() += diff;
                   }
             }
 
@@ -767,11 +771,11 @@ void Beam::layout()
 
       int n = maxDuration.hooks();
       for (int i = 0; i < n; ++i) {
-            BeamSegment* bs = new BeamSegment(_p1, _p2);
+            BeamSegment* bs = new BeamSegment(_p1[idx], _p2[idx]);
             bs->move(0, beamDist * i);
             beamSegments.push_back(bs);
             }
-      double p1dy = _p1.y() + beamDist * (n-1);
+      double p1dy = _p1[idx].y() + beamDist * (n-1);
 
       //---------------------------------------------
       //   create broken/short beam segments
@@ -791,7 +795,7 @@ void Beam::layout()
                   bool cup = chord->up();
                   if (cross) {
                         if (!cup)
-                              y1 = _p1.y() - beamDist * nn;
+                              y1 = _p1[idx].y() - beamDist * nn;
                         else
                               y1 = p1dy    + beamDist * nn;
                         }
@@ -883,7 +887,7 @@ void Beam::layout()
 
             double x2 = npos.x();
             double y1 = npos.y();
-            double y  = _up ? qMin(p1dy, _p1.y()) : qMax(p1dy, _p1.y());
+            double y  = _up ? qMin(p1dy, _p1[idx].y()) : qMax(p1dy, _p1[idx].y());
             double y2 = y + (x2 - x1) * slope;
 
             double stemLen = _up ? (y1 - y2) : (y2 - y1);
@@ -922,14 +926,20 @@ void Beam::write(Xml& xml) const
       {
       xml.stag(QString("Beam id=\"%1\"").arg(_id));
       Element::writeProperties(xml);
-      if (_userModified) {
-            xml.tag("y1", _p1.y());
-            xml.tag("y2", _p2.y());
-            }
       switch(_direction) {
-            case UP:   xml.tag("StemDirection", QVariant("up")); break;
-            case DOWN: xml.tag("StemDirection", QVariant("down")); break;
-            case AUTO: break;
+            case UP:
+                  xml.tag("StemDirection", QVariant("up"));
+                  break;
+            case DOWN:
+                  xml.tag("StemDirection", QVariant("down"));
+                  break;
+            case AUTO:
+                  break;
+            }
+      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
+      if (_userModified[idx]) {
+            xml.tag("y1", _p1[idx].y());
+            xml.tag("y2", _p2[idx].y());
             }
       xml.etag();
       }
@@ -940,17 +950,19 @@ void Beam::write(Xml& xml) const
 
 void Beam::read(QDomElement e)
       {
+      QPointF p1, p2;
+      bool modified = false;
       _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "y1") {
-                  _userModified = true;
-                  _p1 = QPointF(0.0, val.toDouble());
+                  modified = true;
+                  p1 = QPointF(0.0, val.toDouble());
                   }
             else if (tag == "y2") {
-                  _userModified = true;
-                  _p2 = QPointF(0.0, val.toDouble());
+                  modified = true;
+                  p2 = QPointF(0.0, val.toDouble());
                   }
             else if (tag == "StemDirection") {
                   if (val == "up") {
@@ -967,6 +979,12 @@ void Beam::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      if (modified) {
+            int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
+            _userModified[idx] = true;
+            _p1[idx] = p1;
+            _p2[idx] = p2;
+            }
       }
 
 //---------------------------------------------------------
@@ -975,11 +993,12 @@ void Beam::read(QDomElement e)
 
 void Beam::editDrag(int grip, const QPointF& delta)
       {
+      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       QPointF d(0.0, delta.y());
       if (grip == 0)
-            _p1 += d;
-      _p2 += d;
-      _userModified = true;
+            _p1[idx] += d;
+      _p2[idx] += d;
+      _userModified[idx] = true;
       setGenerated(false);
       score()->setLayoutAll(true);
       }
@@ -991,8 +1010,9 @@ void Beam::editDrag(int grip, const QPointF& delta)
 void Beam::updateGrips(int* grips, QRectF* grip) const
       {
       *grips = 2;
-      grip[0].translate(canvasPos() + _p1);
-      grip[1].translate(canvasPos() + _p2);
+      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
+      grip[0].translate(canvasPos() + _p1[idx]);
+      grip[1].translate(canvasPos() + _p2[idx]);
       }
 
 //---------------------------------------------------------
@@ -1019,7 +1039,8 @@ void Beam::toDefault()
       {
       _direction = AUTO;
       _up        = -1;
-      _userModified = false;
+      _userModified[0] = false;
+      _userModified[1] = false;
       setGenerated(true);
       }
 

@@ -25,6 +25,8 @@
 #include "staff.h"
 #include "score.h"
 #include "measure.h"
+#include "voiceselector.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -35,33 +37,73 @@ PianorollEditor::PianorollEditor(Staff* s, QWidget* parent)
       {
       staff = s;
       QGridLayout* layout = new QGridLayout;
+      layout->setSpacing(0);
 
-      Measure* lm = s->score()->lastMeasure();
-      int ticks = lm->tick() + lm->tickLen();
+      QToolBar* tb = new QToolBar;
+      layout->addWidget(tb, 0, 0, 1, 2);
+      VoiceSelector* vs = new VoiceSelector;
+      tb->addWidget(vs);
+      tb->addSeparator();
+      tb->addWidget(new QLabel(tr("velocity:")));
+      velocity = new QSpinBox;
+      velocity->setRange(-1, 127);
+      velocity->setSpecialValueText("--");
+      tb->addWidget(velocity);
+      tb->addWidget(new QLabel(tr("pitch:")));
+      pitch = new QSpinBox;
+      pitch->setRange(-1, 127);
+      pitch->setSpecialValueText("--");
 
-      double xmag = .1;
-      QGraphicsScene* scene = new PianoScene(s);
-      scene->setSceneRect(0.0, 0.0, double(ticks), keyHeight * 75);
-      QGraphicsView* gv     = new QGraphicsView(scene);
+      tb->addWidget(pitch);
+
+      double xmag    = .1;
+      gv  = new PianoView(s);
       gv->scale(xmag, 1.0);
-      layout->addWidget(gv, 1, 1);
+      layout->addWidget(gv, 2, 1);
 
       Ruler* ruler = new Ruler(s->score());
       ruler->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       ruler->setFixedHeight(rulerHeight);
-      ruler->setXmag(xmag);
+      ruler->setMag(xmag, 1.0);
 
-      layout->addWidget(ruler, 0, 1);
+      layout->addWidget(ruler, 1, 1);
 
       Piano* piano = new Piano;
       piano->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
       piano->setFixedWidth(pianoWidth);
-      layout->addWidget(piano, 1, 0);
+      layout->addWidget(piano, 2, 0);
 
       setLayout(layout);
 
       connect(gv->verticalScrollBar(), SIGNAL(valueChanged(int)), piano, SLOT(setYpos(int)));
       connect(gv->horizontalScrollBar(), SIGNAL(valueChanged(int)), ruler, SLOT(setXpos(int)));
+      connect(gv, SIGNAL(xposChanged(int)), ruler, SLOT(setXpos(int)));
+      connect(gv, SIGNAL(magChanged(double,double)), ruler, SLOT(setMag(double,double)));
+
+      connect(gv->scene(), SIGNAL(selectionChanged()), SLOT(selectionChanged()));
       resize(800, 400);
+      }
+
+//---------------------------------------------------------
+//   selectionChanged
+//---------------------------------------------------------
+
+void PianorollEditor::selectionChanged()
+      {
+      QList<QGraphicsItem*> items = gv->scene()->selectedItems();
+      if (items.size() == 1) {
+            QGraphicsItem* item = items[0];
+            Note* note = (Note*)item->data(0).value<void*>();
+            velocity->setValue(note->velocity());
+            pitch->setValue(note->pitch());
+            }
+      else if (items.size() == 0) {
+            velocity->setValue(-1);
+            pitch->setValue(-1);
+            }
+      else {
+            velocity->setValue(0);
+            pitch->setValue(0);
+            }
       }
 

@@ -20,7 +20,7 @@
 
 #include "ruler.h"
 
-static const int MAP_OFFSET = 3;
+static const int MAP_OFFSET = 2;
 
 //---------------------------------------------------------
 //   Ruler
@@ -30,7 +30,7 @@ Ruler::Ruler(Score* s, QWidget* parent)
    : QWidget(parent), _score(s), _cursor(s, 480*3)
       {
       _showCursor = false;
-      metronomeRulerMag = 0;
+      magStep = 0;
       _xpos = 0;
       _xmag = 0.1;
       _timeType = TICKS;
@@ -43,10 +43,27 @@ Ruler::Ruler(Score* s, QWidget* parent)
 //   setXmag
 //---------------------------------------------------------
 
-void Ruler::setXmag(double val)
+void Ruler::setMag(double x, double /*y*/)
       {
-      _xmag = val;
-      update();
+      if (_xmag != x) {
+            _xmag = x;
+
+            int tpix  = (480 * 4) * _xmag;
+            magStep = 0;
+            if (tpix < 64)
+                  magStep = 1;
+            if (tpix < 32)
+                  magStep = 2;
+            if (tpix <= 16)
+                  magStep = 3;
+            if (tpix < 8)
+                  magStep = 4;
+            if (tpix <= 4)
+                  magStep = 5;
+            if (tpix <= 2)
+                  magStep = 6;
+            update();
+            }
       }
 
 //---------------------------------------------------------
@@ -65,7 +82,7 @@ void Ruler::setXpos(int val)
 
 Pos Ruler::pix2pos(int x) const
       {
-      int val = lrint((x + _xpos - MAP_OFFSET)/_xmag);
+      int val = lrint((x + _xpos - MAP_OFFSET)/_xmag - 480);
       if (val < 0)
             val = 0;
       return Pos(_score, val, _timeType);
@@ -77,7 +94,7 @@ Pos Ruler::pix2pos(int x) const
 
 int Ruler::pos2pix(const Pos& p) const
       {
-      return lrint(p.time(_timeType) * _xmag) + MAP_OFFSET - _xpos;
+      return lrint((p.time(_timeType)+480) * _xmag) + MAP_OFFSET - _xpos;
       }
 
 //---------------------------------------------------------
@@ -120,7 +137,7 @@ void Ruler::paintEvent(QPaintEvent* e)
       pos1.mbt(&bar1, &beat, &tick);
       pos2.mbt(&bar2, &beat, &tick);
 
-      int n = mag[metronomeRulerMag];
+      int n = mag[magStep];
 
       bar1 = (bar1 / n) * n;        // round down
       if (bar1 && n >= 2)
@@ -129,7 +146,7 @@ void Ruler::paintEvent(QPaintEvent* e)
 
       for (int bar = bar1; bar <= bar2;) {
             Pos stick(_score, bar, 0, 0);
-            if (metronomeRulerMag) {
+            if (magStep) {
                   p.setFont(_font2);
                   int x = pos2pix(stick);
                   QString s;

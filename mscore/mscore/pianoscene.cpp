@@ -26,6 +26,8 @@
 #include "score.h"
 #include "note.h"
 
+static const int MAP_OFFSET = 480;
+
 //---------------------------------------------------------
 //   pitch2y
 //---------------------------------------------------------
@@ -48,10 +50,14 @@ static int pitch2y(int pitch)
 PianoScene::PianoScene(Staff* s, QWidget* parent)
    : QGraphicsScene(parent)
       {
-      staff = s;
-      _score = staff->score();
+      staff       = s;
+      _score      = staff->score();
+      Measure* lm = s->score()->lastMeasure();
+      ticks       = lm->tick() + lm->tickLen();
+      setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
+
       _timeType = TICKS;
-      metronomeRulerMag = 0;
+      magStep = 0;
       Measure* m = _score->firstMeasure();
       int staffIdx = staff->idx();
       int startTrack = staffIdx * VOICES;
@@ -63,14 +69,16 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
                   NoteList* nl = chord->noteList();
-                  int tick = chord->tick();
-                  int len  = chord->tickLen();
+                  int x        = chord->tick() + 480;
+                  int len      = chord->tickLen();
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* n = in->second;
                         int pitch = n->pitch();
                         int y = pitch2y(pitch) + keyHeight/4;
-                        QGraphicsRectItem* ri = addRect(tick, y,
+                        QGraphicsRectItem* ri = addRect(x, y,
                            len, keyHeight/2, QPen(), QBrush(QColor(Qt::blue)));
+                        ri->setFlags(ri->flags() | QGraphicsItem::ItemIsSelectable);
+                        ri->setData(0, QVariant::fromValue<void*>(n));
                         }
                   }
             }
@@ -82,6 +90,7 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
 
 Pos PianoScene::pix2pos(int x) const
       {
+      x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
       return Pos(_score, x, _timeType);
@@ -93,7 +102,7 @@ Pos PianoScene::pix2pos(int x) const
 
 int PianoScene::pos2pix(const Pos& p) const
       {
-      return lrint(p.time(_timeType));
+      return lrint(p.time(_timeType) + MAP_OFFSET);
       }
 
 //---------------------------------------------------------
@@ -102,9 +111,18 @@ int PianoScene::pos2pix(const Pos& p) const
 
 void PianoScene::drawBackground(QPainter* p, const QRectF& r)
       {
-      p->fillRect(r, QColor(0x71, 0x8d, 0xbe));
+      QRectF r1;
+      r1.setCoords(-1000000.0, 0.0, 480.0, 1000000.0);
+      QRectF r2;
+      r2.setCoords(ticks + 480, 0.0, 1000000.0, 1000000.0);
+      QColor bg(0x71, 0x8d, 0xbe);
 
-// printf("draw %f %f  %f %f\n", r.x(), r.y(), r.width(), r.height());
+      p->fillRect(r, bg);
+      if (r.intersects(r1))
+            p->fillRect(r.intersected(r1), bg.darker(150));
+      if (r.intersects(r2))
+            p->fillRect(r.intersected(r2), bg.darker(150));
+
       //
       // draw horizontal grid lines
       //
@@ -144,7 +162,7 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
       pos1.mbt(&bar1, &beat, &tick);
       pos2.mbt(&bar2, &beat, &tick);
 
-      int n = mag[metronomeRulerMag];
+      int n = mag[magStep];
 
       bar1 = (bar1 / n) * n;           // round down
       if (bar1 && n >= 2)
@@ -153,7 +171,7 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
 
       for (int bar = bar1; bar <= bar2;) {
             Pos stick(_score, bar, 0, 0);
-            if (metronomeRulerMag) {
+            if (magStep) {
                   int x = pos2pix(stick);
                   if (x > 0) {
                         p->setPen(Qt::lightGray);
@@ -185,6 +203,78 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
                   bar += (n-1);
             else
                   bar += n;
+            }
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void PianoScene::setMag(double mag)
+      {
+      int tpix  = (480 * 4) * mag;
+      magStep = 0;
+      if (tpix < 64)
+            magStep = 1;
+      if (tpix < 32)
+            magStep = 2;
+      if (tpix <= 16)
+            magStep = 3;
+      if (tpix < 8)
+            magStep = 4;
+      if (tpix <= 4)
+            magStep = 5;
+      if (tpix <= 2)
+            magStep = 6;
+      }
+
+//---------------------------------------------------------
+//   PianoView
+//---------------------------------------------------------
+
+PianoView::PianoView(Staff* s)
+   : QGraphicsView()
+      {
+      setScene(new PianoScene(s));
+      }
+
+//---------------------------------------------------------
+//   wheelEvent
+//---------------------------------------------------------
+
+void PianoView::wheelEvent(QWheelEvent* event)
+      {
+      int step = event->delta() / 120;
+      double xmag = transform().m11();
+      double ymag = transform().m22();
+      if (event->modifiers() & Qt::ControlModifier) {
+            if (step > 0) {
+                  for (int i = 0; i < step; ++i) {
+                        if (xmag > 10.0)
+                              break;
+                        scale(1.1, 1.0);
+                        xmag *= 1.1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i < -step; ++i) {
+                        if (xmag < 0.001)
+                              break;
+                        scale(.9, 1.0);
+                        xmag *= .9;
+                        }
+                  }
+            emit magChanged(xmag, ymag);
+            static_cast<PianoScene*>(scene())->setMag(xmag);
+
+            //
+            // if xpos <= 0, then the scene is centered
+            // there is no scroll bar anymore sending
+            // change signals, so we have to do it here:
+            //
+            double xpos = -(mapFromScene(QPointF()).x());
+            if (xpos <= 0)
+                  emit xposChanged(xpos);
             }
       }
 
