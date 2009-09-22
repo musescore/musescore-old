@@ -68,10 +68,6 @@
         <translation>PortuguÃªs - Portoghese</translation>
     </message>
     <message>
-        <source>Brasilian PortuguÃªs</source>
-        <translation>Brasilian PortuguÃªs - Portoghese Brasiliano</translation>
-    </message>
-    <message>
         <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
         <translation>Ð ÑÑÑÐºÐ¸Ð¹ - Russo</translation>
     </message>
@@ -102,6 +98,14 @@
     <message>
         <source>System</source>
         <translation type="unfinished">Accollatura</translation>
+    </message>
+    <message>
+        <source>PortuguÃªs brasileiro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japanese</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -258,6 +262,14 @@ p, li { white-space: pre-wrap; }(new line)
     </message>
     <message>
         <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pianoroll Editor...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1744,6 +1756,30 @@ space unit</extracomment>
         <source>show repeat bar tips</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Arpeggios</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color notes which extend the usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create courtesy key signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>distance to note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hook len</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1925,12 +1961,12 @@ space unit</extracomment>
 <context>
     <name>ImageProperties</name>
     <message>
-        <source>Chord Properties</source>
-        <translation>Proprietà accordo</translation>
-    </message>
-    <message>
         <source>lock aspect ratio</source>
         <translation>blocca le proporzioni</translation>
+    </message>
+    <message>
+        <source>Image Properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5324,6 +5360,17 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
 </context>
 <context>
+    <name>PianorollEditor</name>
+    <message>
+        <source>velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
@@ -5376,10 +5423,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>relative tempo</source>
         <translation>Tempo Relativo</translation>
-    </message>
-    <message>
-        <source>volume</source>
-        <translation>Volume</translation>
     </message>
 </context>
 <context>
@@ -5960,6 +6003,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>Replace 1/2 ... with symbol ...</source>
         <translation>Sostituisci 1/2 ... con il simbolo ...</translation>
     </message>
+    <message>
+        <source>color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6152,6 +6199,18 @@ selezionare una nota o una pausa e ripetere l&apos;operazione
     <message>
         <source>Rest Properties...</source>
         <translation>Proprietà Pausa...</translation>
+    </message>
+    <message>
+        <source>Tuplet...</source>
+        <translation type="unfinished">Gruppi irregolari...</translation>
+    </message>
+    <message>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished">Proprietà gruppi irregolari...</translation>
+    </message>
+    <message>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished">Cancella gruppo irregolare</translation>
     </message>
 </context>
 <context>
@@ -8545,10 +8604,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>acc old ee</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>rovescia asta</translation>
     </message>
     <message>
         <source>whole diamond2 head</source>

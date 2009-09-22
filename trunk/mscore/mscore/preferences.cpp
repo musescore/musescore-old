@@ -80,7 +80,8 @@ LanguageItem languages[] = {
       LanguageItem("sv",    QT_TR_NOOP("Svenska")),
       LanguageItem("tr",    QT_TR_NOOP("Türkçe")),
       LanguageItem("uk",    QT_TR_NOOP("Ukrajina")),
-      LanguageItem("zh_TW",    QT_TR_NOOP("繁體中文 (台灣)")),
+      LanguageItem("zh_TW", QT_TR_NOOP("繁體中文 (台灣)")),
+      LanguageItem("ja",    QT_TR_NOOP("Japanese")),
       };
 
 //---------------------------------------------------------

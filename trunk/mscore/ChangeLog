@@ -1,4 +1,5 @@
 22.sep (ws)
+      - preparation for Japanese translation
       - add style "warnPitchRange" to style editor
       - fix image properties dialog title
       - fix: "flip stem doesn't work after editing the beam"

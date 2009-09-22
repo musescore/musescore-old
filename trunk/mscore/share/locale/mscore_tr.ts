@@ -68,10 +68,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Brasilian PortuguÃªs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,6 +98,14 @@
     <message>
         <source>System</source>
         <translation type="unfinished">Sistem</translation>
+    </message>
+    <message>
+        <source>PortuguÃªs brasileiro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japanese</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -250,6 +254,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pianoroll Editor...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1734,6 +1746,30 @@ space unit</extracomment>
         <source>show repeat bar tips</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Arpeggios</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color notes which extend the usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create courtesy key signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>distance to note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hook len</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1915,12 +1951,12 @@ space unit</extracomment>
 <context>
     <name>ImageProperties</name>
     <message>
-        <source>Chord Properties</source>
-        <translation>Porte Özellikleri</translation>
-    </message>
-    <message>
         <source>lock aspect ratio</source>
         <translation>en/boy oranını kilitle</translation>
+    </message>
+    <message>
+        <source>Image Properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5315,6 +5351,17 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
 </context>
 <context>
+    <name>PianorollEditor</name>
+    <message>
+        <source>velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
@@ -5359,10 +5406,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>Play</source>
         <translation>Oynat</translation>
-    </message>
-    <message>
-        <source>volume</source>
-        <translation>ses</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -5951,6 +5994,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>Replace 1/2 ... with symbol ...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6143,6 +6190,18 @@ Lütfen bir nota veya es seçin ve son yaptığınız işlemi tekrarlayın
     <message>
         <source>Rest Properties...</source>
         <translation>Es Özellikleri...</translation>
+    </message>
+    <message>
+        <source>Tuplet...</source>
+        <translation type="unfinished">Kesirleme...</translation>
+    </message>
+    <message>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished">Kesirleme Özellikleri...</translation>
+    </message>
+    <message>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished">Kesirlemeyi Sil</translation>
     </message>
 </context>
 <context>
@@ -8530,10 +8589,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>acc old ee</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation type="unfinished">nota-gövdesini çevir</translation>
     </message>
     <message>
         <source>whole diamond2 head</source>
