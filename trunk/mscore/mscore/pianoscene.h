@@ -35,8 +35,9 @@ class PianoScene : public QGraphicsScene {
 
       Staff* staff;
       Score* _score;
-      int metronomeRulerMag;
+      int magStep;
       TType _timeType;
+      int ticks;
 
       virtual void drawBackground(QPainter* painter, const QRectF& rect);
       Pos pix2pos(int x) const;
@@ -44,9 +45,26 @@ class PianoScene : public QGraphicsScene {
 
    public:
       PianoScene(Staff* staff, QWidget* parent = 0);
+      void setMag(double);
       };
 
+//---------------------------------------------------------
+//   PianoView
+//---------------------------------------------------------
+
+class PianoView : public QGraphicsView {
+      Q_OBJECT
+
+   protected:
+      void wheelEvent(QWheelEvent* event);
+
+   signals:
+      void magChanged(double, double);
+      void xposChanged(int);
+
+   public:
+      PianoView(Staff*);
+      };
+
+
 #endif
-
-
-

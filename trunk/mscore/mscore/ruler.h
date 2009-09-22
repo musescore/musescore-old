@@ -35,7 +35,7 @@ class Ruler : public QWidget {
       Score* _score;
       Pos _cursor;
       bool _showCursor;
-      int metronomeRulerMag;
+      int magStep;
       double _xmag;
       int _xpos;
       TType _timeType;
@@ -50,10 +50,10 @@ class Ruler : public QWidget {
 
    public slots:
       void setXpos(int);
+      void setMag(double xmag, double ymag);
 
    public:
       Ruler(Score*, QWidget* parent = 0);
-      void setXmag(double);
       };
 
 

@@ -85,10 +85,10 @@ class Beam : public Element {
       QList<ChordRest*> _elements;
       BeamSegmentList beamSegments;
       Direction _direction;
-      int _up;                // -1: unknown  0: down   1: up
+      int _up;                  // -1: unknown  0: down   1: up
 
-      bool _userModified;
-      QPointF _p1, _p2;
+      bool _userModified[2];    // 0: auto/down  1: up
+      QPointF _p1[2], _p2[2];
       mutable int _id;          // used in read()/write()
 
    public:

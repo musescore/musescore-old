@@ -107,6 +107,7 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
+#include <QtGui/QGraphicsRectItem>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

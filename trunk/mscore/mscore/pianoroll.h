@@ -22,6 +22,7 @@
 #define __PIANOROLL_H__
 
 class Staff;
+class PianoView;
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -30,7 +31,13 @@ class Staff;
 class PianorollEditor : public QDialog {
       Q_OBJECT
 
+      PianoView* gv;
       Staff* staff;
+      QSpinBox* pitch;
+      QSpinBox* velocity;
+
+   private slots:
+      void selectionChanged();
 
    public:
       PianorollEditor(Staff* staff, QWidget* parent = 0);

@@ -1,3 +1,7 @@
+22.sep (ws)
+      - add style "warnPitchRange" to style editor
+      - fix image properties dialog title
+      - fix: "flip stem doesn't work after editing the beam"
 21.sep (ws)
       - added experimental extension "pianoroll" and "drumroll"
       - added command line switch for experimental extensions: "-e"
