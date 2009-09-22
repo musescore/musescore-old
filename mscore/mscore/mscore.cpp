@@ -1373,7 +1373,8 @@ void setMscoreLocale(QString localeName)
             qApp->removeTranslator(t);
             delete t;
             }
-
+      translatorList.clear();
+      
       if (debugMode)
             printf("configured localeName <%s>\n", qPrintable(localeName));
       if (localeName.toLower() == "system") {
