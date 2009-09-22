@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Chord Properties</string>
+   <string>Image Properties</string>
   </property>
   <layout class="QVBoxLayout" >
    <item>

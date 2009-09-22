@@ -314,12 +314,12 @@ QString Harmony::harmonyName() const
             else
                   // not in table, fallback to using HChord.name()
                   s = hc.name(_rootTpc);
-            s += " ";
+            //s += " ";
             } // end if (degreeList ...
       else {
             s = tpc2name(_rootTpc, germanNames);
             if (descr()) {
-                  s += " ";
+                  //s += " ";
                   s += descr()->name;
                   }
             }
