@@ -591,7 +591,7 @@ MuseScore::MuseScore()
       //    Menu Notes
       //---------------------
 
-      menuNotes = mb->addMenu(qApp->translate("MenuNotes", "Notes"));
+      menuNotes = mb->addMenu(qApp->translate("MenuNotes", "&Notes"));
       menuNotes->setObjectName("Notes");
 
       menuNotes->addAction(getAction("note-input"));

@@ -6,20 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>878</width>
-    <height>686</height>
+    <width>829</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MuseScore: Preferences</string>
   </property>
+  <property name="accessibleName">
+   <string>MuseScore Preferences</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
     <widget class="QTabWidget" name="General">
+     <property name="accessibleName">
+      <string/>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>General</string>
       </attribute>
@@ -74,8 +83,11 @@
             </item>
             <item>
              <widget class="QToolButton" name="startWithButton">
+              <property name="accessibleName">
+               <string/>
+              </property>
               <property name="text">
-               <string>...</string>
+               <string>Browse...</string>
               </property>
               <property name="icon">
                <iconset resource="mscore.qrc">
@@ -284,7 +296,7 @@
           <item row="0" column="2">
            <widget class="QToolButton" name="instrumentListButton">
             <property name="text">
-             <string>...</string>
+             <string>Browse...</string>
             </property>
             <property name="icon">
              <iconset resource="mscore.qrc">
@@ -305,7 +317,7 @@
           <item row="1" column="2">
            <widget class="QToolButton" name="workingDirectoryButton">
             <property name="text">
-             <string>...</string>
+             <string>Browse...</string>
             </property>
             <property name="icon">
              <iconset resource="mscore.qrc">
@@ -365,7 +377,7 @@
           <item row="0" column="4">
            <widget class="QToolButton" name="playPanelCur">
             <property name="text">
-             <string>Cur</string>
+             <string>Use Current Dimensions</string>
             </property>
            </widget>
           </item>
@@ -639,6 +651,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab2">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Canvas</string>
       </attribute>
@@ -692,7 +707,7 @@
             <item>
              <widget class="QToolButton" name="bgWallpaperSelect">
               <property name="text">
-               <string>...</string>
+               <string>Browse...</string>
               </property>
               <property name="icon">
                <iconset resource="mscore.qrc">
@@ -747,7 +762,7 @@
             <item>
              <widget class="QToolButton" name="fgWallpaperSelect">
               <property name="text">
-               <string>...</string>
+               <string>Browse...</string>
               </property>
               <property name="icon">
                <iconset resource="mscore.qrc">
@@ -861,6 +876,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Text</string>
       </attribute>
@@ -908,6 +926,9 @@
       </widget>
      </widget>
      <widget class="QWidget" name="tab3">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Colors</string>
       </attribute>
@@ -1059,6 +1080,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab4">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Note Entry</string>
       </attribute>
@@ -1167,7 +1191,7 @@
        <item>
         <widget class="QCheckBox" name="colorOutOfRangeNotes">
          <property name="text">
-          <string>color notes outside of usable pitch range</string>
+          <string>Color notes outside of usable pitch range</string>
          </property>
         </widget>
        </item>
@@ -1193,7 +1217,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Export Midi</string>
+          <string>Export MIDI</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -1215,7 +1239,7 @@
           <string>enable midi remote control</string>
          </property>
          <property name="title">
-          <string>Midi Remote Control</string>
+          <string>MIDI Remote Control</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -1357,6 +1381,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Score</string>
       </attribute>
@@ -1536,6 +1563,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>I/O</string>
       </attribute>
@@ -1961,6 +1991,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Import">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Import</string>
       </attribute>
@@ -1996,7 +2029,7 @@
             <item>
              <widget class="QToolButton" name="styleFileButton">
               <property name="text">
-               <string>...</string>
+               <string>Browse...</string>
               </property>
               <property name="icon">
                <iconset resource="mscore.qrc">
@@ -2025,6 +2058,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Export">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Export</string>
       </attribute>
@@ -2064,6 +2100,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
+      <property name="accessibleName">
+       <string/>
+      </property>
       <attribute name="title">
        <string>Shortcuts</string>
       </attribute>
