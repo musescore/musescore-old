@@ -20,7 +20,9 @@
 
 #include "sig.h"
 #include "xml.h"
-#include "globals.h"
+#include "al.h"
+
+namespace AL {
 
 //---------------------------------------------------------
 //   ticks_beat
@@ -28,8 +30,8 @@
 
 static int ticks_beat(int n)
       {
-      int m = (division * 4) / n;
-      if ((division * 4) % n) {
+      int m = (AL::division * 4) / n;
+      if ((AL::division * 4) % n) {
             fprintf(stderr, "Mscore: ticks_beat(): bad divisor %d\n", n);
             abort();
             }
@@ -42,8 +44,8 @@ static int ticks_beat(int n)
 
 int ticks_measure(int z, int n)
       {
-      int m = (division * 4 * z) / n;
-      if ((division * 4 * z) % n) {
+      int m = (AL::division * 4 * z) / n;
+      if ((AL::division * 4 * z) % n) {
             fprintf(stderr, "Mscore: ticks_measure(%d, %d): bad divisor\n", z, n);
             abort();
             }
@@ -123,22 +125,22 @@ void SigList::add(int tick, int ticks, int z2, int n2)
             printf("illegal signature %d/%d\n", z2, n2);
             }
       int z = 1, n = 4;
-      if ((ticks % division) == 0) {
-            z = ticks / division;
+      if ((ticks % AL::division) == 0) {
+            z = ticks / AL::division;
             n = 4;
             }
-      else if ((ticks % (division/2)) == 0) {
-            z = ticks / (division/2);
+      else if ((ticks % (AL::division/2)) == 0) {
+            z = ticks / (AL::division/2);
             n = 8;
             }
-      else if ((ticks % (division/4)) == 0) {
-            z = ticks / (division/4);
+      else if ((ticks % (AL::division/4)) == 0) {
+            z = ticks / (AL::division/4);
             n = 16;
             }
       else {
             printf("SigList::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
                tick, ticks, z2, n2);
-            if (debugMode)
+            if (debugMsg)
                   abort();
             }
 
@@ -190,9 +192,9 @@ int SigList::ticksMeasure(int tick) const
       ciSigEvent i = upper_bound(tick);
       if (empty() || i == begin()) {
             printf("SigList::ticksMeasure(): timesig(%d): not found\n", tick);
-            if (debugMode)
+            if (debugMsg)
                   abort();
-            return 4 * division;
+            return 4 * AL::division;
             }
       --i;
       return i->second.ticks;
@@ -289,13 +291,13 @@ void SigList::write(Xml& xml) const
 //   SigList::read
 //---------------------------------------------------------
 
-void SigList::read(QDomElement e, int division, int fileDivision)
+void SigList::read(QDomElement e, int fileDivision)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
-                  int tick = t.read(e, division, fileDivision);
+                  int tick = t.read(e, fileDivision);
                   (*this)[tick] = t;
                   }
             else
@@ -324,10 +326,10 @@ void SigEvent::write(Xml& xml, int tick) const
 //   SigEvent::read
 //---------------------------------------------------------
 
-int SigEvent::read(QDomElement e, int division, int fileDivision)
+int SigEvent::read(QDomElement e, int fileDivision)
       {
       int tick  = e.attribute("tick", "0").toInt();
-      tick      = tick * division / fileDivision;
+      tick      = tick * AL::division / fileDivision;
 
       denominator2 = -1;
       nominator2   = -1;
@@ -469,3 +471,5 @@ int SigList::rasterStep(unsigned t, int raster) const
             }
       return raster;
       }
+}     // namespace AL
+

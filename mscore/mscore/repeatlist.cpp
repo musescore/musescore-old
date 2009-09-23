@@ -22,7 +22,7 @@
 #include "score.h"
 #include "measure.h"
 #include "repeat.h"
-#include "tempo.h"
+#include "al/tempo.h"
 
 //---------------------------------------------------------
 //   RepeatLoop
@@ -79,7 +79,7 @@ RepeatList::RepeatList(Score* s)
 
 void RepeatList::update()
       {
-      const TempoList* tl = _score->getTempomap();
+      const AL::TempoList* tl = _score->getTempomap();
 
       int utick = 0;
       double t  = 0;

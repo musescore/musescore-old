@@ -23,7 +23,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="accessibleName">
@@ -1189,7 +1189,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="colorOutOfRangeNotes">
+        <widget class="QCheckBox" name="warnPitchRange">
          <property name="text">
           <string>Color notes outside of usable pitch range</string>
          </property>

@@ -257,7 +257,7 @@ void BarLine::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!Element::readProperties(e))
-                  domError(e);
+                  AL::domError(e);
             }
       setSubtype(subtype());
       }

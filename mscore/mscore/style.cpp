@@ -119,7 +119,7 @@ StyleType styleTypes[] = {
       StyleType("genCourtesyTimesig",      ST_BOOL),
       StyleType("genCourtesyKeysig",       ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
-      StyleType("warnPitchRange",          ST_BOOL),
+      // StyleType("warnPitchRange",          ST_BOOL),
       StyleType("chordDescriptionFile",    ST_STRING),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
 
@@ -353,7 +353,7 @@ Style::Style()
             StyleVal(ST_beamMinSlope,0.05),
 
             StyleVal(ST_beamMaxSlope,0.2),
-            StyleVal(ST_maxBeamTicks,division),
+            StyleVal(ST_maxBeamTicks, AL::division),
             StyleVal(ST_dotNoteDistance,Spatium(0.35)),
             StyleVal(ST_dotRestDistance,Spatium(0.25)),
             StyleVal(ST_dotDotDistance,Spatium(0.5)),
@@ -386,8 +386,8 @@ Style::Style()
             StyleVal(ST_genCourtesyKeysig, true),
 
             StyleVal(ST_useGermanNoteNames, false),
-            StyleVal(ST_warnPitchRange, true),
-/*72*/      StyleVal(ST_chordDescriptionFile, QString("stdchords.xml")),
+//            StyleVal(ST_warnPitchRange, true),
+            StyleVal(ST_chordDescriptionFile, QString("stdchords.xml")),
             StyleVal(ST_concertPitch,false),
             StyleVal(ST_createMultiMeasureRests,false),
             StyleVal(ST_minEmptyMeasures,2),

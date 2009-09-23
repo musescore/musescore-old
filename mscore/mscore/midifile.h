@@ -21,7 +21,7 @@
 #ifndef __MIDIFILE_H__
 #define __MIDIFILE_H__
 
-#include "sig.h"
+#include "al/sig.h"
 #include "event.h"
 
 const int MIDI_CHANNEL = 16;
@@ -36,9 +36,8 @@ enum MidiType {
 
 class MidiFile;
 class Xml;
-
-class MidiFile;
 class Staff;
+class Score;
 
 //---------------------------------------------------------
 //   MidiTrack
@@ -87,7 +86,7 @@ class MidiTrack {
       void changeDivision(int newDivision);
       void move(int ticks);
       bool isDrumTrack() const;
-      void extractTimeSig(SigList* sig);
+      void extractTimeSig(AL::SigList* sig);
       void quantize(int startTick, int endTick, EventList* dst);
       int getInitProgram();
       void findChords();
@@ -109,7 +108,7 @@ class MidiTrack {
 //---------------------------------------------------------
 
 class MidiFile {
-      SigList _siglist;
+      AL::SigList _siglist;
       QIODevice* fp;
       QList<MidiTrack*> _tracks;
       int _division;
@@ -163,7 +162,7 @@ class MidiFile {
       void sortTracks();
       void separateChannel();
       void move(int ticks);
-      SigList siglist() const         { return _siglist;         }
+      AL::SigList siglist() const     { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
       void processMeta(Score*, MidiTrack* track, Event* e);

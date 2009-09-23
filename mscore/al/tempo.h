@@ -18,11 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TEMPO_H__
-#define __TEMPO_H__
+#ifndef __AL_TEMPO_H__
+#define __AL_TEMPO_H__
 
+namespace AL {
 class Xml;
-class Score;
 
 //---------------------------------------------------------
 //   Tempo Event
@@ -75,7 +75,7 @@ class TempoList : public std::map<int, TEvent> {
       TempoList();
       void clear();
 
-      void read(QDomElement, Score*);
+      void read(QDomElement, int sourceDivision);
       void write(Xml&) const;
       void dump() const;
 
@@ -101,4 +101,5 @@ class TempoList : public std::map<int, TEvent> {
       void insertTime(int start, int len);
       };
 
+}     // namespace AL
 #endif

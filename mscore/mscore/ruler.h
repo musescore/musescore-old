@@ -21,7 +21,9 @@
 #ifndef __RULER_H__
 #define __RULER_H__
 
-#include "pos.h"
+#include "al/pos.h"
+
+class Score;
 
 static const int rulerHeight = 28;
 
@@ -33,20 +35,20 @@ class Ruler : public QWidget {
       Q_OBJECT
 
       Score* _score;
-      Pos _cursor;
+      AL::Pos _cursor;
       bool _showCursor;
       int magStep;
       double _xmag;
       int _xpos;
-      TType _timeType;
+      AL::TType _timeType;
       QFont _font1, _font2;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
 
-      Pos pix2pos(int x) const;
-      int pos2pix(const Pos& p) const;
+      AL::Pos pix2pos(int x) const;
+      int pos2pix(const AL::Pos& p) const;
 
    public slots:
       void setXpos(int);

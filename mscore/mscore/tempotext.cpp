@@ -20,7 +20,7 @@
 
 #include "score.h"
 #include "tempotext.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "system.h"
 
 //---------------------------------------------------------
@@ -58,7 +58,7 @@ void TempoText::read(QDomElement e)
             if (tag == "tempo"){
                   double tpo = e.text().toDouble();
                   setTempo(tpo);
-                  TempoList* tl   = score()->tempomap;
+                  AL::TempoList* tl   = score()->tempomap;
                   if(tl)
                     tl->addTempo(tick(), tpo);
             }
@@ -118,14 +118,14 @@ void TempoProperties::saveValues()
       if (newTempo == tempoText->tempo())
             return;
       int tick        = tempoText->tick();
-      TempoList* tl   = score->tempomap;
+      AL::TempoList* tl   = score->tempomap;
 
-      iTEvent o = tl->find(tick);
+      AL::iTEvent o = tl->find(tick);
       if (o == tl->end()) {
             printf("TempoProperties: cannot find tempo at %d\n", tick);
             return;
             }
-      TEvent n(newTempo);
+      AL::TEvent n(newTempo);
       score->undoChangeTempo(tick, o->second, n);
       TempoText* ntt = new TempoText(*tempoText);
       ntt->setTempo(newTempo);

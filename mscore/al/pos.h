@@ -23,7 +23,12 @@
 
 #include "sig.h"
 
+namespace AL {
+
+class TempoList;
+class SigList;
 class Xml;
+
 enum TType { TICKS, FRAMES };
 
 //---------------------------------------------------------
@@ -35,23 +40,22 @@ enum TType { TICKS, FRAMES };
 //---------------------------------------------------------
 
 class Pos {
-   public:
-
-   private:
       TType _type;
       mutable int sn;
       mutable unsigned _tick;
       mutable unsigned _frame;
 
    protected:
-      Score* _score;
+      TempoList* tempo;
+      SigList*  sig;
 
    public:
-      Pos(Score*);
-      Pos(Score*, int measure, int beat, int tick);
-      Pos(Score*, int minute, int sec, int frame, int subframe);
-      Pos(Score*, unsigned, TType type = TICKS);
-      Pos(Score*, const QString&);
+      Pos(TempoList*, SigList*);
+      Pos(TempoList*, SigList*, int measure, int beat, int tick);
+      Pos(TempoList*, SigList*, int minute, int sec, int frame, int subframe);
+      Pos(TempoList*, SigList*, unsigned, TType type = TICKS);
+      Pos(TempoList*, SigList*, const QString&);
+
       void dump(int n = 0) const;
 
       unsigned time(TType t) const { return t == TICKS ? tick() : frame(); }
@@ -107,7 +111,7 @@ class PosLen : public Pos {
       mutable int sn;
 
    public:
-      PosLen(Score*);
+      PosLen(TempoList*, SigList*);
       PosLen(const PosLen&);
       void dump(int n = 0) const;
 
@@ -125,4 +129,5 @@ class PosLen : public Pos {
       bool operator==(const PosLen& s) const;
       };
 
+}     // namespace AL
 #endif

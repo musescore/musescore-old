@@ -160,6 +160,6 @@ Fraction& Fraction::operator/=(const Fraction& val)
 
 Fraction Fraction::fromTicks(int ticks)
       {
-      return Fraction(ticks, 1) / Fraction(division * 4, 1);
+      return Fraction(ticks, 1) / Fraction(AL::division * 4, 1);
       }
 

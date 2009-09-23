@@ -219,7 +219,7 @@ enum StyleIdx {
 
       // 70
       ST_useGermanNoteNames,
-      ST_warnPitchRange,
+      //
       ST_chordDescriptionFile,
       ST_concertPitch,
       ST_createMultiMeasureRests,

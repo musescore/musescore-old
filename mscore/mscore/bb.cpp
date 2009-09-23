@@ -338,7 +338,7 @@ bool BBFile::read(const QString& name)
                               continue;
                               }
                         Event* note = new Event(ME_NOTE);
-                        note->setOntime((tick * division) / bbDivision);
+                        note->setOntime((tick * AL::division) / bbDivision);
                         note->setPitch(a[idx + 5]);
                         note->setVelo(a[idx + 6]);
                         note->setChannel(channel);
@@ -352,7 +352,7 @@ bool BBFile::read(const QString& name)
                               len = lastLen;
                               }
                         lastLen = len;
-                        note->setDuration((len * division) / bbDivision);
+                        note->setDuration((len * AL::division) / bbDivision);
                         track->append(note);
                         }
                   else if (type == 0xb0) {
@@ -459,7 +459,7 @@ bool Score::importBB(const QString& name)
             };
       const QList<BBChord> cl = bb.chords();
       foreach(BBChord c, cl) {
-            int tick = c.beat * division;
+            int tick = c.beat * AL::division;
             Measure* m = tick2measure(tick);
             if (m == 0) {
                   printf("import BB: measure for tick %d not found\n", tick);
@@ -723,7 +723,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
 
 void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       {
-      int mintick = division * 64;
+      int mintick = AL::division * 64;
       iEvent i = _events.begin();
       for (; i != _events.end(); ++i) {
             if ((*i)->ontime() >= startTick)
@@ -737,25 +737,25 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             if (e->type() == ME_NOTE && (e->duration() < mintick))
                   mintick = e->duration();
             }
-      if (mintick <= division / 16)        // minimum duration is 1/64
-            mintick = division / 16;
-      else if (mintick <= division / 8)
-            mintick = division / 8;
-      else if (mintick <= division / 4)
-            mintick = division / 4;
-      else if (mintick <= division / 2)
-            mintick = division / 2;
-      else if (mintick <= division)
-            mintick = division;
-      else if (mintick <= division * 2)
-            mintick = division * 2;
-      else if (mintick <= division * 4)
-            mintick = division * 4;
-      else if (mintick <= division * 8)
-            mintick = division * 8;
+      if (mintick <= AL::division / 16)        // minimum duration is 1/64
+            mintick = AL::division / 16;
+      else if (mintick <= AL::division / 8)
+            mintick = AL::division / 8;
+      else if (mintick <= AL::division / 4)
+            mintick = AL::division / 4;
+      else if (mintick <= AL::division / 2)
+            mintick = AL::division / 2;
+      else if (mintick <= AL::division)
+            mintick = AL::division;
+      else if (mintick <= AL::division * 2)
+            mintick = AL::division * 2;
+      else if (mintick <= AL::division * 4)
+            mintick = AL::division * 4;
+      else if (mintick <= AL::division * 8)
+            mintick = AL::division * 8;
       int raster;
-      if (mintick > division)
-            raster = division;
+      if (mintick > AL::division)
+            raster = AL::division;
       else
             raster = mintick;
 
@@ -799,7 +799,7 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
                         }
                   }
             if (nntick == -1)
-                  len = quantizeLen(division, len, raster);
+                  len = quantizeLen(AL::division, len, raster);
             else {
                   int diff = nntick - ntick;
                   if (diff > 0) {
@@ -807,13 +807,13 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
                         if (diff <= raster)
                               len = nntick - tick;
                         else
-                              len = quantizeLen(division, len, raster);
+                              len = quantizeLen(AL::division, len, raster);
                         }
                   else {
                         if (diff > -raster)
                               len = nntick - tick;
                         else
-                              len = quantizeLen(division, len, raster);
+                              len = quantizeLen(AL::division, len, raster);
                         }
                   }
             note->setDuration(len);

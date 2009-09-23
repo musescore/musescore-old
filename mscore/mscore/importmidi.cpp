@@ -25,8 +25,8 @@
 #include "score.h"
 #include "key.h"
 #include "clef.h"
-#include "sig.h"
-#include "tempo.h"
+#include "al/sig.h"
+#include "al/tempo.h"
 #include "note.h"
 #include "chord.h"
 #include "rest.h"
@@ -788,7 +788,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       {
       mf->separateChannel();
       mf->process1();
-      mf->changeDivision(division);
+      mf->changeDivision(AL::division);
 
       *sigmap = mf->siglist();
 
@@ -1011,8 +1011,8 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                   convertTrack(track);
             }
 
-      for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-            SigEvent se = is->second;
+      for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
+            AL::SigEvent se = is->second;
             int tick    = is->first;
             Measure* m  = tick2measure(tick);
             if (!m)
@@ -1273,15 +1273,15 @@ ImportMidiDialog::ImportMidiDialog(QWidget* parent)
 int ImportMidiDialog::shortestNote() const
       {
       switch(shortestNoteCombo->currentIndex()) {
-            case 0:     return division;
-            case 1:     return division / 2;
-            case 2:     return division / 4;
-            case 3:     return division / 8;
-            case 4:     return division / 16;
+            case 0:     return AL::division;
+            case 1:     return AL::division / 2;
+            case 2:     return AL::division / 4;
+            case 3:     return AL::division / 8;
+            case 4:     return AL::division / 16;
 
             default:
             case 5:
-                  return division / 32;
+                  return AL::division / 32;
             }
       }
 
@@ -1293,15 +1293,15 @@ void ImportMidiDialog::setShortestNote(int val)
       {
       int idx;
 
-      if (val == division)
+      if (val == AL::division)
             idx = 0;
-      else if (val == division/2)
+      else if (val == AL::division/2)
             idx = 1;
-      else if (val == division/4)
+      else if (val == AL::division/4)
             idx = 2;
-      else if (val == division/8)
+      else if (val == AL::division/8)
             idx = 3;
-      else if (val == division/16)
+      else if (val == AL::division/16)
             idx = 4;
       else
             idx = 5;
@@ -1336,7 +1336,7 @@ bool Score::importMidi(const QString& name)
             }
       fp.close();
 
-      int shortestNote = division / 16;
+      int shortestNote = AL::division / 16;
       if (!converterMode) {
             ImportMidiDialog id(0);
             id.setShortestNote(shortestNote);

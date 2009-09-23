@@ -75,7 +75,7 @@ void Stem::write(Xml& xml) const
       xml.stag("Stem");
       Element::writeProperties(xml);
       if (_userLen.val() != 0.0)
-            xml.tag("userLen", _userLen);
+            xml.sTag("userLen", _userLen);
       xml.etag();
       }
 

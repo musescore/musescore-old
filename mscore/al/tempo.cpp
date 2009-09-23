@@ -20,7 +20,9 @@
 
 #include "tempo.h"
 #include "xml.h"
-#include "score.h"
+#include "al.h"
+
+namespace AL {
 
 //---------------------------------------------------------
 //   TempoList
@@ -335,7 +337,7 @@ void TempoList::write(Xml& xml) const
 //   TempoList::read
 //---------------------------------------------------------
 
-void TempoList::read(QDomElement e, Score* cs)
+void TempoList::read(QDomElement e, int sourceDivision)
       {
       _tempo = e.attribute("fix","2.0").toDouble();
 
@@ -343,7 +345,7 @@ void TempoList::read(QDomElement e, Score* cs)
             if (e.tagName() == "tempo") {
                   TEvent t;
                   unsigned tick = t.read(e);
-                  tick = cs->fileDivision(tick);
+                  tick = (tick * division + sourceDivision/2) / sourceDivision;
                   iTEvent pos = find(tick);
                   if (pos != end())
                         erase(pos);
@@ -419,4 +421,6 @@ void TempoList::insertTime(int tick, int len)
       normalize();
       ++_tempoSN;
       }
+}     // namespace al
+
 

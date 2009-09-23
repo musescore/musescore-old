@@ -208,7 +208,7 @@ void EditStyle::getValues()
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
             }
-      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
+//      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
       }
 
 //---------------------------------------------------------
@@ -326,7 +326,7 @@ void EditStyle::setValues()
                   idx = 2;
             cb->setCurrentIndex(idx);
             }
-      warnPitchRange->setChecked(lstyle[ST_warnPitchRange].toBool());
+//      warnPitchRange->setChecked(lstyle[ST_warnPitchRange].toBool());
       }
 
 //---------------------------------------------------------

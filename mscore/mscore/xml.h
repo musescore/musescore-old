@@ -23,28 +23,21 @@
 
 #include "globals.h"
 #include "spatium.h"
+#include "al/xml.h"
 
-//---------------------------------------------------------
-//   Property
-//---------------------------------------------------------
-
-class Prop {
-   public:
-      const char* name;
-      QVariant data;
-      Prop() {}
-      Prop(const char* n, const QVariant& d) : name(n), data(d) {}
-      };
+using AL::Prop;
+using AL::docName;
+using AL::readPoint;
+using AL::readSize;
+using AL::readColor;
+using AL::domError;
+using AL::domNotImplemented;
 
 //---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
 
-class Xml : public QTextStream {
-      static const int BS = 2048;
-
-      QList<QString> stack;
-      void putLevel();
+class Xml : public AL::Xml {
 
    public:
       int curTick;            // used to optimize output
@@ -56,44 +49,13 @@ class Xml : public QTextStream {
       int tupletId;
       int beamId;
 
-      Xml(QIODevice*);
+      Xml(QIODevice* dev);
       Xml();
 
-      void header();
-
-      void stag(const QString&);
-      void etag();
-
-      void tagE(const QString&);
-      void tagE(const char* format, ...);
-      void ntag(const char* name);
-      void netag(const char* name);
-
-      void prop(const Prop& p)  { tag(p.name, p.data); }
-      void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
-
-      void tag(const QString& name, QVariant data);
-      void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
-      void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
-      void tag(const char* name, Spatium sp)       { tag(name, QVariant(sp.val())); }
-      void tag(const char* name, const QWidget*);
-      void tag(const char* name, Placement);
-
-      void writeHtml(const QString& s);
-
-      void dump(int len, const unsigned char* p);
-
-      static QString xmlString(const QString&);
-      static void htmlToString(QDomElement, int level, QString*);
-      static QString htmlToString(QDomElement);
+      void sTag(const char* name, Spatium sp) { AL::Xml::tag(name, QVariant(sp.val())); }
+      void pTag(const char* name, Placement);
       };
 
-extern QString docName;
-extern QPointF readPoint(QDomElement);
-extern QSizeF readSize(QDomElement);
-extern QColor readColor(QDomElement e);
-extern void domError(QDomElement node);
-extern void domNotImplemented(QDomElement node);
 extern Placement readPlacement(QDomElement e);
 #endif
 

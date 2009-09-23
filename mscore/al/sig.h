@@ -18,11 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SIG_H__
-#define __SIG_H__
+#ifndef __AL_SIG_H__
+#define __AL_SIG_H__
 
+namespace AL {
 class Xml;
-class Score;
 
 //---------------------------------------------------------
 //   Time Signature Event
@@ -36,7 +36,7 @@ struct SigEvent {
       int bar;                      ///< precomputed value
       int ticks;                    ///< ticks per measure, precomputed value
 
-      int read(QDomElement, int division, int fileDivision);
+      int read(QDomElement, int fileDivision);
       void write(Xml&, int) const;
 
       SigEvent() { nominator = 0; }
@@ -76,7 +76,7 @@ class SigList : public std::map<const int, SigEvent > {
 
       void del(int tick);
 
-      void read(QDomElement, int div = 1, int fileDiv = 1);
+      void read(QDomElement, int fileDiv);
       void write(Xml&) const;
 
       void timesig(int tick, int& z, int& n) const;
@@ -96,6 +96,7 @@ class SigList : public std::map<const int, SigEvent > {
       int rasterStep(unsigned tick, int raster) const;
       };
 
-extern int ticks_measure(int Z, int N);
+extern int ticks_measure(int nominator, int denominator);
 
+}     // namespace AL
 #endif

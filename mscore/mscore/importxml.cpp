@@ -29,7 +29,7 @@
 #include "score.h"
 #include "rest.h"
 #include "chord.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "clef.h"
 #include "note.h"
@@ -980,7 +980,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               int val = ee.text().toInt();
                               if (val == 0)     // neuratron scanner produces sometimes 0 !?
                                     val = 1;
-                              val = (val * ::division) / divisions;
+                              val = (val * AL::division) / divisions;
                               tick -= val;
                               lastLen = val;    // ?
                               }
@@ -1022,7 +1022,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             else if (e.tagName() == "forward") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "duration") {
-                              int val = (ee.text().toInt() * ::division)/divisions;
+                              int val = (ee.text().toInt() * AL::division)/divisions;
                               tick += val;
                               if (tick > maxtick)
                                     maxtick = tick;
@@ -1121,7 +1121,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
 												lastVolta->setTick2(tick);
-												lastVolta->setSubtype(Volta::VOLTA_CLOSED);             
+												lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                                                 score->add(lastVolta);
 												lastVolta = 0;
                                                 }
@@ -1158,16 +1158,16 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       int measureLen = maxtick - measure->tick();
 
       if (lastMeasureLen != measureLen) {
-            SigList* sigmap = score->sigmap;
+            AL::SigList* sigmap = score->sigmap;
             int tick        = measure->tick();
-            SigEvent se = sigmap->timesig(tick);
+            AL::SigEvent se = sigmap->timesig(tick);
 
             if (measureLen != sigmap->ticksMeasure(tick)) {
-                  SigEvent se = sigmap->timesig(tick);
+                  AL::SigEvent se = sigmap->timesig(tick);
 
 // printf("Add Sig %d  len %d  %d / %d\n", tick, measureLen, z, n);
                   score->sigmap->add(tick, measureLen, se.nominator2, se.denominator2);
-                  int tm = ticks_measure(se.nominator, se.denominator);
+                  int tm = AL::ticks_measure(se.nominator, se.denominator);
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
                             /* MusicXML's implicit means "don't print measure number",
@@ -1345,7 +1345,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   tempo = e.attribute("tempo");
                   }
             else if (e.tagName() == "offset")
-                  offset = (e.text().toInt() * ::division)/divisions;
+                  offset = (e.text().toInt() * AL::division)/divisions;
             else if (e.tagName() == "staff") {
                   // DEBUG: <staff>0</staff>
                   rstaff = e.text().toInt() - 1;
@@ -1626,7 +1626,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         QPointF userOff = b->userOff();
                         b->add(b->createLineSegment());
-                        
+
                         b->setUserOff(QPointF()); // restore the offset
                         b->setMxmlOff2(offset);
                         LineSegment* ls1 = b->lineSegments().front();
@@ -2339,7 +2339,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             }
-      int ticks = (::division * duration) / divisions;
+      int ticks = (AL::division * duration) / divisions;
 
       if (tick + ticks > maxtick)
             maxtick = tick + ticks;
@@ -2403,7 +2403,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         if (graceSlash == "yes")
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
-                        cr->setTick(tick - (division / 2));
+                        cr->setTick(tick - (AL::division / 2));
                         cr->setDuration(Duration::V_EIGHT);
                         st = Segment::SegGrace;
                         }
@@ -2566,7 +2566,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
                   // avoid rounding errors:
                   // int bl = duration * actualNotes / normalNotes;
-                  // tuplet->setBaseLen((::division * bl) / divisions);
+                  // tuplet->setBaseLen((AL::division * bl) / divisions);
 
                   // type, placement
 

@@ -20,30 +20,30 @@
 
 #include "pos.h"
 #include "xml.h"
-
 #include "sig.h"
 #include "tempo.h"
-#include "score.h"
+#include "al.h"
 
-static int mtcType = 0;
-static int sampleRate = 44100;      // DEBUG
+namespace AL {
 
 //---------------------------------------------------------
 //   Pos
 //---------------------------------------------------------
 
-Pos::Pos(Score* s)
+Pos::Pos(TempoList* tl, SigList* sl)
       {
-      _score  = s;
+      tempo  = tl;
+      sig    = sl;
       _type   = TICKS;
       _tick   = 0;
       _frame  = 0;
       sn      = -1;
       }
 
-Pos::Pos(Score* s, unsigned t, TType timeType)
+Pos::Pos(TempoList* tl, SigList* sl, unsigned t, TType timeType)
       {
-      _score = s;
+      tempo  = tl;
+      sig    = sl;
  	_type = timeType;
       if (_type == TICKS)
             _tick   = t;
@@ -52,27 +52,30 @@ Pos::Pos(Score* s, unsigned t, TType timeType)
       sn = -1;
       }
 
-Pos::Pos(Score* sc, const QString& s)
+Pos::Pos(TempoList* tl, SigList* sl, const QString& s)
       {
-      _score = sc;
+      tempo  = tl;
+      sig    = sl;
       int m, b, t;
       sscanf(s.toLatin1().data(), "%04d.%02d.%03d", &m, &b, &t);
-      _tick = _score->getSigmap()->bar2tick(m, b, t);
+      _tick = sig->bar2tick(m, b, t);
       _type = TICKS;
       sn    = -1;
       }
 
-Pos::Pos(Score* s, int measure, int beat, int tick)
+Pos::Pos(TempoList* tl, SigList* sl, int measure, int beat, int tick)
       {
-      _score = s;
-      _tick  = _score->getSigmap()->bar2tick(measure, beat, tick);
+      tempo  = tl;
+      sig    = sl;
+      _tick  = sig->bar2tick(measure, beat, tick);
       _type  = TICKS;
       sn     = -1;
       }
 
-Pos::Pos(Score* s, int min, int sec, int frame, int subframe)
+Pos::Pos(TempoList* tl, SigList* sl, int min, int sec, int frame, int subframe)
       {
-      _score = s;
+      tempo  = tl;
+      sig    = sl;
       double time = min * 60.0 + sec;
 
       double f = frame + subframe/100.0;
@@ -106,11 +109,11 @@ void Pos::setType(TType t)
 
       if (_type == TICKS) {
             // convert from ticks to frames
-            _frame = _score->getTempomap()->tick2time(_tick, _frame, &sn) * sampleRate;
+            _frame = tempo->tick2time(_tick, _frame, &sn) * sampleRate;
             }
       else {
             // convert from frames to ticks
-            _tick = _score->getTempomap()->time2tick(_frame / sampleRate, _tick, &sn);
+            _tick = tempo->time2tick(_frame / sampleRate, _tick, &sn);
             }
       _type = t;
       }
@@ -250,7 +253,7 @@ bool Pos::operator!=(const Pos& s) const
 unsigned Pos::tick() const
       {
       if (_type == FRAMES)
-            _tick = _score->getTempomap()->time2tick(_frame / sampleRate, _tick, &sn);
+            _tick = tempo->time2tick(_frame / sampleRate, _tick, &sn);
       return _tick;
       }
 
@@ -261,7 +264,7 @@ unsigned Pos::tick() const
 unsigned Pos::frame() const
       {
 	if (_type == TICKS)
-            _frame = _score->getTempomap()->tick2time(_tick, _frame, &sn) * sampleRate;
+            _frame = tempo->tick2time(_tick, _frame, &sn) * sampleRate;
       return _frame;
       }
 
@@ -274,7 +277,7 @@ void Pos::setTick(unsigned pos)
       _tick = pos;
       sn    = -1;
       if (_type == FRAMES)
-            _frame = _score->getTempomap()->tick2time(pos, &sn) * sampleRate;
+            _frame = tempo->tick2time(pos, &sn) * sampleRate;
       }
 
 //---------------------------------------------------------
@@ -286,7 +289,7 @@ void Pos::setFrame(unsigned pos)
       _frame = pos;
       sn     = -1;
       if (_type == TICKS)
-            _tick = _score->getTempomap()->time2tick(pos/sampleRate, &sn);
+            _tick = tempo->time2tick(pos/sampleRate, &sn);
       }
 
 
@@ -329,8 +332,8 @@ void Pos::read(QDomNode node)
 //   PosLen
 //---------------------------------------------------------
 
-PosLen::PosLen(Score* s)
-   : Pos(s)
+PosLen::PosLen(TempoList* tl, SigList* sl)
+   : Pos(tl, sl)
       {
       _lenTick  = 0;
       _lenFrame = 0;
@@ -425,7 +428,7 @@ void PosLen::setLenTick(unsigned len)
       _lenTick = len;
       sn       = -1;
       if (type() == FRAMES)
-            _lenFrame = _score->getTempomap()->tick2time(len, &sn) * sampleRate;
+            _lenFrame = tempo->tick2time(len, &sn) * sampleRate;
       else
             _lenTick = len;
       }
@@ -438,7 +441,7 @@ void PosLen::setLenFrame(unsigned len)
       {
       sn      = -1;
       if (type() == TICKS)
-            _lenTick = _score->getTempomap()->time2tick(len/sampleRate, &sn);
+            _lenTick = tempo->time2tick(len/sampleRate, &sn);
       else
             _lenFrame = len;
       }
@@ -450,7 +453,7 @@ void PosLen::setLenFrame(unsigned len)
 unsigned PosLen::lenTick() const
       {
       if (type() == FRAMES)
-            _lenTick = _score->getTempomap()->time2tick(_lenFrame/sampleRate, _lenTick, &sn);
+            _lenTick = tempo->time2tick(_lenFrame/sampleRate, _lenTick, &sn);
       return _lenTick;
       }
 
@@ -461,7 +464,7 @@ unsigned PosLen::lenTick() const
 unsigned PosLen::lenFrame() const
       {
       if (type() == TICKS)
-            _lenFrame = _score->getTempomap()->tick2time(_lenTick, _lenFrame, &sn) * sampleRate;
+            _lenFrame = tempo->tick2time(_lenTick, _lenFrame, &sn) * sampleRate;
       return _lenFrame;
       }
 
@@ -517,7 +520,7 @@ bool PosLen::operator==(const PosLen& pl) const {
 
 void Pos::mbt(int* bar, int* beat, int* tk) const
       {
-      _score->getSigmap()->tickValues(tick(), bar, beat, tk);
+      sig->tickValues(tick(), bar, beat, tk);
       }
 
 //---------------------------------------------------------
@@ -581,9 +584,9 @@ void Pos::msf(int* min, int* sec, int* fr, int* subFrame) const
 //   timesig
 //---------------------------------------------------------
 
-SigEvent Pos::timesig() const
+AL::SigEvent Pos::timesig() const
       {
-      return _score->getSigmap()->timesig(tick());
+      return sig->timesig(tick());
       }
 
 //---------------------------------------------------------
@@ -595,31 +598,32 @@ SigEvent Pos::timesig() const
 
 void Pos::snap(int raster)
       {
-      setTick(_score->getSigmap()->raster(tick(), raster));
+      setTick(sig->raster(tick(), raster));
       }
 
 void Pos::upSnap(int raster)
       {
-      setTick(_score->getSigmap()->raster2(tick(), raster));
+      setTick(sig->raster2(tick(), raster));
       }
 
 void Pos::downSnap(int raster)
       {
-      setTick(_score->getSigmap()->raster1(tick(), raster));
+      setTick(sig->raster1(tick(), raster));
       }
 
 Pos Pos::snaped(int raster) const
       {
-      return Pos(_score, _score->getSigmap()->raster(tick(), raster));
+      return Pos(tempo, sig, sig->raster(tick(), raster));
       }
 
 Pos Pos::upSnaped(int raster) const
       {
-      return Pos(_score, _score->getSigmap()->raster2(tick(), raster));
+      return Pos(tempo, sig, sig->raster2(tick(), raster));
       }
 
 Pos Pos::downSnaped(int raster) const
       {
-      return Pos(_score, _score->getSigmap()->raster1(tick(), raster));
+      return Pos(tempo, sig, sig->raster1(tick(), raster));
       }
+}     // namespace AL
 

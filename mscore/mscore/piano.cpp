@@ -328,8 +328,22 @@ void Piano::paintEvent(QPaintEvent* event)
 
 void Piano::setYpos(int val)
       {
-      _ypos = val;
-      update();
+      if (_ypos != val) {
+            _ypos = val;
+            update();
+            }
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Piano::setMag(double, double ym)
+      {
+      if (_ymag != ym) {
+            _ymag = ym;
+            update();
+            }
       }
 
 //---------------------------------------------------------

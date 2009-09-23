@@ -36,8 +36,6 @@ static const int MSCVERSION = 112;
 //    1.11  Instrument name in part saved as TextC
 //    1.12  use durationType, remove tickLen
 
-extern int division;
-
 extern bool debugMode;
 extern bool enableExperimental;
 extern bool scriptDebug;

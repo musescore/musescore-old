@@ -21,10 +21,10 @@
 #include "score.h"
 #include "part.h"
 #include "staff.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "midifile.h"
 #include "event.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "preferences.h"
 #include "text.h"
@@ -111,9 +111,9 @@ void ExportMidi::writeHeader()
       //    write time signature
       //--------------------------------------------
 
-      SigList* sigmap = cs->sigmap;
-      for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-            SigEvent se   = is->second;
+      AL::SigList* sigmap = cs->sigmap;
+      for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
+            AL::SigEvent se   = is->second;
             unsigned char* data = new unsigned char[4];
             data[0] = se.nominator;
             int n;
@@ -169,8 +169,8 @@ void ExportMidi::writeHeader()
       //    write tempo changes
       //--------------------------------------------
 
-      TempoList* tempomap = cs->tempomap;
-      for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
+      AL::TempoList* tempomap = cs->tempomap;
+      for (AL::iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
             Event* ev = new Event(ME_META);
             ev->setOntime(it->first);
             //
@@ -201,7 +201,7 @@ bool ExportMidi::write(const QString& name)
       if (!f.open(QIODevice::WriteOnly))
             return false;
 
-      mf.setDivision(::division);
+      mf.setDivision(AL::division);
       mf.setFormat(1);
       QList<MidiTrack*>* tracks = mf.tracks();
       int nstaves = cs->nstaves();

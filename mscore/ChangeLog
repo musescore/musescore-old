@@ -1,3 +1,7 @@
+23.sep (ws)
+      -
+      - created new "audio library" al subdirectory
+      - moved warnPitchRange from style to preferences
 22.sep (ws)
       - preparation for Japanese translation
       - add style "warnPitchRange" to style editor

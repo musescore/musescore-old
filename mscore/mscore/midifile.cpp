@@ -24,6 +24,7 @@
 #include "note.h"
 #include "drumset.h"
 #include "utils.h"
+#include "al/al.h"
 
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
 #ifdef __i486__
@@ -117,7 +118,7 @@ MidiFile::MidiFile()
       _format          = 1;
       _midiType        = MT_UNKNOWN;
       _noRunningStatus = false;
-      _shortestNote    = ::division /32;       // 1/128
+      _shortestNote    = AL::division /32;       // 1/128
       }
 
 //---------------------------------------------------------
@@ -915,7 +916,7 @@ void MidiTrack::setOutChannel(int n)
 //   extractTimeSig
 //---------------------------------------------------------
 
-void MidiTrack::extractTimeSig(SigList* sigmap)
+void MidiTrack::extractTimeSig(AL::SigList* sigmap)
       {
       EventList el;
 
@@ -1102,10 +1103,10 @@ void MidiFile::changeDivision(int newDivision)
       foreach (MidiTrack* t, _tracks)
             t->changeDivision(newDivision);
 
-      SigList sl;
-      for (iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
+      AL::SigList sl;
+      for (AL::iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
             int tick    = (is->first * newDivision + _division/2) / _division;
-            SigEvent se = is->second;
+            AL::SigEvent se = is->second;
             sl.add(tick, se);
             }
       _siglist = sl;

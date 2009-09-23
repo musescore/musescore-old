@@ -21,7 +21,7 @@
 #ifndef __FRACTION_H__
 #define __FRACTION_H__
 
-#include "globals.h"
+#include "al/al.h"
 
 //---------------------------------------------------------
 //   Fraction
@@ -35,14 +35,14 @@ class Fraction {
 
    public:
       Fraction(int z = 0, int n = 1);
-      int numerator() const        { return _numerator;           }
-      int denominator() const         { return _denominator;            }
-      void setNumerator(int v)     { _numerator = v;              }
-      void setDenominator(int v)      { _denominator = v;               }
+      int numerator() const      { return _numerator;           }
+      int denominator() const    { return _denominator;            }
+      void setNumerator(int v)   { _numerator = v;              }
+      void setDenominator(int v) { _denominator = v;               }
       void set(int z, int n)     { _numerator = z; _denominator = n; }
       bool isZero() const        { return _numerator == 0;      }
 
-      int ticks() const          { return (_numerator * division * 4 + (_denominator/2)) / _denominator; }
+      int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
       static Fraction fromTicks(int v);
 
       Fraction& operator+=(const Fraction&);

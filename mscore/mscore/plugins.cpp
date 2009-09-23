@@ -224,7 +224,7 @@ ScriptEngine::ScriptEngine()
       ScMeasure* measureClass = new ScMeasure(this);
       globalObject().setProperty("Measure", measureClass->constructor());
 
-      QScriptValue v = newVariant(division);
+      QScriptValue v = newVariant(AL::division);
       globalObject().setProperty("division", v);
       }
 
