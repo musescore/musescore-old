@@ -87,6 +87,17 @@ void PosLabel::setValue(const AL::Pos& val, bool enable)
       updateValue();
       }
 
+void PosLabel::setValue(int val)
+      {
+      if (val < 0) {
+            setEnabled(false);
+            return;
+            }
+      setEnabled(true);
+      pos.setTick(unsigned(val));
+      updateValue();
+      }
+
 //---------------------------------------------------------
 //   setSmpte
 //---------------------------------------------------------

@@ -97,9 +97,9 @@ void PitchLabel::setInt(int val)
 
 void PitchLabel::setPitch(int val)
       {
-      if (!_pitchMode) {
+      if (!_pitchMode)
             setPitchMode(true);
-            }
+      setEnabled(val != -1);
       setValue(val);
       }
 }

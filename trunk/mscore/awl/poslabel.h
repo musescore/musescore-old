@@ -46,6 +46,7 @@ class PosLabel : public QLabel {
 
    public slots:
       void setValue(const AL::Pos&, bool);
+      void setValue(int tick);
 
    public:
       PosLabel(AL::TempoList*, AL::SigList*, QWidget* parent = 0);
