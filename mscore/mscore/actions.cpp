@@ -1932,7 +1932,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NOTE_ENTRY,
          "backspace",
          QT_TR_NOOP("backspace"),
-		 QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
+         QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
          Qt::WindowShortcut,
          QT_TR_NOOP("backspace"),
          QT_TR_NOOP("backspace")
@@ -1978,11 +1978,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "edit-style",
-         QT_TR_NOOP("Edit Style..."),
+         QT_TR_NOOP("Edit General Style..."),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Edit Style..."),
-         QT_TR_NOOP("Edit Style...")
+         QT_TR_NOOP("Edit General Style..."),
+         QT_TR_NOOP("Edit General Style...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
