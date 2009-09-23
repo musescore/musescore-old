@@ -32,7 +32,7 @@
 #include "slur.h"
 #include "system.h"
 #include "select.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "utils.h"
 #include "text.h"
 #include "segment.h"

@@ -39,7 +39,7 @@
 #include "score.h"
 #include "rest.h"
 #include "chord.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "clef.h"
 #include "note.h"
@@ -854,7 +854,7 @@ void ExportMusicXml::calcDivisions()
       // init
       integers.clear();
       primes.clear();
-      integers.append(division);
+      integers.append(AL::division);
       primes.append(2);
       primes.append(3);
       primes.append(5);
@@ -933,7 +933,7 @@ void ExportMusicXml::calcDivisions()
                   }
             }
 
-      div = division / integers[0];
+      div = AL::division / integers[0];
       printf("divisions=%d div=%d\n", integers[0], div);
       }
 
@@ -1089,7 +1089,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       static int table2[7] = { 5, 4, 2, 0, 11, 9, 7 };
       int npitch = table2[step] + (octave + 1) * 12;
       alter      = note->pitch() - npitch;
-      
+
       //deal with Cb and B#
       if (alter > 2) {
             printf("pitch2xml problem: alter %d step %d(line %d) octave %d\n",
@@ -1742,7 +1742,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
             	xml.tag("stem", QString("none"));
             }
-            else if (note->chord()->tickLen() < 4*division){
+            else if (note->chord()->tickLen() < 4*AL::division){
             	xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
@@ -2813,7 +2813,7 @@ foreach(Element* el, *(score->gel())) {
                   // output attributes with the first actual measure (pickup or regular)
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                         attr.doAttr(xml, true);
-                        xml.tag("divisions", division / div);
+                        xml.tag("divisions", AL::division / div);
                         }
                   // output attributes at start of measure: key, time
                   KeySig* ksig = 0;

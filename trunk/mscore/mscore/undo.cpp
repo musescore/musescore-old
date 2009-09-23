@@ -43,7 +43,7 @@
 #include "clef.h"
 #include "staff.h"
 #include "chord.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "mscore.h"
 #include "canvas.h"
@@ -623,7 +623,7 @@ void Score::undoMove(Element* e, const QPointF& pt)
 //   undoChangeSig
 //---------------------------------------------------------
 
-void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
+void Score::undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n)
       {
       _undo->push(new ChangeSig(this, tick, o, n));
       }
@@ -641,7 +641,7 @@ void Score::undoSigInsertTime(int tick, int len)
 //   undoChangeTempo
 //---------------------------------------------------------
 
-void Score::undoChangeTempo(int tick, const TEvent& o, const TEvent& n)
+void Score::undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n)
       {
       _undo->push(new ChangeTempo(this, tick, o, n));
       }
@@ -1421,7 +1421,7 @@ void ChangeKey::redo()
 //   ChangeSig
 //---------------------------------------------------------
 
-ChangeSig::ChangeSig(Score* s, int _tick, const SigEvent& _o, const SigEvent& _n)
+ChangeSig::ChangeSig(Score* s, int _tick, const AL::SigEvent& _o, const AL::SigEvent& _n)
       {
       score = s;
       tick  = _tick;
@@ -1431,7 +1431,7 @@ ChangeSig::ChangeSig(Score* s, int _tick, const SigEvent& _o, const SigEvent& _n
 
 void ChangeSig::undo()
       {
-      SigList* sigmap = score->getSigmap();
+      AL::SigList* sigmap = score->getSigmap();
       if (n.valid())
             sigmap->del(tick);
       if (o.valid())
@@ -1440,7 +1440,7 @@ void ChangeSig::undo()
 
 void ChangeSig::redo()
       {
-      SigList* sigmap = score->getSigmap();
+      AL::SigList* sigmap = score->getSigmap();
       if (o.valid())
             sigmap->del(tick);
       if (n.valid())
@@ -1460,7 +1460,7 @@ void FixTicks::flip()
 //   ChangeTempo
 //---------------------------------------------------------
 
-ChangeTempo::ChangeTempo(Score* s, int t, const TEvent& _o, const TEvent& _n)
+ChangeTempo::ChangeTempo(Score* s, int t, const AL::TEvent& _o, const AL::TEvent& _n)
       {
       score = s;
       tick  = t;
@@ -1470,7 +1470,7 @@ ChangeTempo::ChangeTempo(Score* s, int t, const TEvent& _o, const TEvent& _n)
 
 void ChangeTempo::undo()
       {
-      TempoList* tempomap = score->getTempomap();
+      AL::TempoList* tempomap = score->getTempomap();
       if (n.valid())
             tempomap->delTempo(tick);
       if (o.valid())
@@ -1479,7 +1479,7 @@ void ChangeTempo::undo()
 
 void ChangeTempo::redo()
       {
-      TempoList* tempomap = score->getTempomap();
+      AL::TempoList* tempomap = score->getTempomap();
       if (o.valid())
             tempomap->delTempo(tick);
       if (n.valid())
@@ -1552,7 +1552,7 @@ SigInsertTime::SigInsertTime(Score* s, int t, int l)
 
 void SigInsertTime::flip()
       {
-      SigList* sigmap = score->getSigmap();
+      AL::SigList* sigmap = score->getSigmap();
       if (len < 0)
             sigmap->removeTime(tick, -len);
       else

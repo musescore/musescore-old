@@ -63,10 +63,9 @@ set_source_files_properties(
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
-      ${PROJECT_SOURCE_DIR}/awl
+      ${PROJECT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/osdabzip
-      ${PROJECT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/fluid
       )
 
@@ -164,9 +163,9 @@ add_executable ( ${ExecutableName}
       page.cpp pagesettings.cpp palette.cpp part.cpp
       partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
-      seq.cpp sig.cpp slur.cpp staff.cpp style.cpp
+      seq.cpp slur.cpp staff.cpp style.cpp
       sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
-      system.cpp tempo.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
+      system.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
@@ -186,7 +185,6 @@ add_executable ( ${ExecutableName}
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
-      pos.cpp
       ${AUDIO}
       )
 
@@ -219,6 +217,7 @@ if (MINGW)
       )
    target_link_libraries(mscore
       fluid
+      al
       awl
       osdabzip
       rtf2html
@@ -285,6 +284,7 @@ else (MINGW)
       ${ALSA_LIB}
       ${JACK_LIB}
       ${PORTAUDIO_LIB}
+      al
       awl
       osdabzip
       rtf2html
@@ -326,9 +326,9 @@ if (NOT MINGW AND NOT APPLE)
 #======================================
 
    add_executable(
-      smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+      smf2xml smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
       )
-   target_link_libraries(smf2xml ${QT_LIBRARIES} )
+   target_link_libraries(smf2xml al ${QT_LIBRARIES} )
    set_target_properties( smf2xml
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
@@ -338,9 +338,9 @@ if (NOT MINGW AND NOT APPLE)
 #======================================
 
    add_executable(
-      xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+      xml2smf xml2smf.cpp midifile.cpp event.cpp drumset.cpp
       )
-   target_link_libraries(xml2smf ${QT_LIBRARIES} )
+   target_link_libraries(xml2smf al ${QT_LIBRARIES} )
    set_target_properties( xml2smf
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )

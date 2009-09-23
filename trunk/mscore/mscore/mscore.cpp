@@ -32,7 +32,7 @@
 #include "xml.h"
 #include "seq.h"
 #include "icons.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "sym.h"
 #include "padids.h"
 #include "pagesettings.h"
@@ -51,7 +51,7 @@
 #include "harmony.h"
 #include "magbox.h"
 #include "voiceselector.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "undo.h"
 #include "synthcontrol.h"
 
@@ -67,8 +67,6 @@ bool debugMode          = false;
 bool enableExperimental = false;
 
 QString dataPath;
-int division = 480;     // 480 midi ticks represent a quarter note
-
 QPaintDevice* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;
@@ -1374,7 +1372,7 @@ void setMscoreLocale(QString localeName)
             delete t;
             }
       translatorList.clear();
-      
+
       if (debugMode)
             printf("configured localeName <%s>\n", qPrintable(localeName));
       if (localeName.toLower() == "system") {
@@ -2308,7 +2306,7 @@ void MuseScore::setPos(int t)
       {
       if (cs == 0 || t < 0)
             return;
-      SigList* s = cs->sigmap;
+      AL::SigList* s = cs->sigmap;
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
       _positionLabel->setText(QString("Bar %1 Beat %2.%3")

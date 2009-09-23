@@ -201,7 +201,7 @@ public:
   {
     score  = s;
     level  = 0;
-    curTicks = division;
+    curTicks = AL::division;
     slur   = false;
     stemDirection = AUTO;
   }
@@ -1696,78 +1696,78 @@ void ExportLy::writeChord(Chord* c)
 int ExportLy::getLen(int l, int* dots)
 {
   int len  = 4;
-  if (l == 16 * division) //longa, whole measure of 4/2-time
+  if (l == 16 * AL::division) //longa, whole measure of 4/2-time
     len=-2;
-  else if (l == 12 * division) // "6/2" "dotted brevis" used for whole-measure rest in 6/2 time.
+  else if (l == 12 * AL::division) // "6/2" "dotted brevis" used for whole-measure rest in 6/2 time.
     len=-3;
-  else if (l == 10 * division) // "5/2"- time, used for whole-measure rest.
+  else if (l == 10 * AL::division) // "5/2"- time, used for whole-measure rest.
     len=-4;
-  else if (l == 8 * division) //brevis
+  else if (l == 8 * AL::division) //brevis
     len = -1;
-  else if      (l == 6 * division) //dotted whole
+  else if      (l == 6 * AL::division) //dotted whole
     {
       len  = 1;
       *dots = 1;
     }
-  else if (l == 5 * division) //doubledotted whole
+  else if (l == 5 * AL::division) //doubledotted whole
     {
       len = 1;
       *dots = 2;
     }
-  else if (l == 4 * division) //whole
+  else if (l == 4 * AL::division) //whole
     len = 1;
-  else if (l == 3 * division) // dotted half
+  else if (l == 3 * AL::division) // dotted half
     {
       len = 2;
       *dots = 1;
     }
-  else if (l == ((division/2)*7)) // double-dotted half: 7/8 used for \partial bar.
+  else if (l == ((AL::division/2)*7)) // double-dotted half: 7/8 used for \partial bar.
     {
       len = 2;
       *dots=2;
     }
-  else if (l == 2 * division)
+  else if (l == 2 * AL::division)
     len = 2;
-  else if (l == division)
+  else if (l == AL::division)
     len = 4;
-  else if (l == division *3 /2)
+  else if (l == AL::division *3 /2)
     {
       len=4;
       *dots=1;
     }
-  else if (l == division / 2)
+  else if (l == AL::division / 2)
     len = 8;
-  else if (l == division*3 /4) //dotted 8th
+  else if (l == AL::division*3 /4) //dotted 8th
     {
       len = 8;
       *dots=1;
     }
-  else if (l == division / 4)
+  else if (l == AL::division / 4)
     len = 16;
-  else if (l == division / 8)
+  else if (l == AL::division / 8)
     len = 32;
-  else if (l == division * 3 /8) //dotted 16th.
+  else if (l == AL::division * 3 /8) //dotted 16th.
     {
       len = 16;
       *dots = 1;
     }
-  else if (l == division / 16)
+  else if (l == AL::division / 16)
     len = 64;
-  else if (l == division /32)
+  else if (l == AL::division /32)
     len = 128;
   //triplets, lily uses nominal value surrounded by \times 2/3 {  }
   //so we set len equal to nominal value
-  else if (l == division * 4 /3)
+  else if (l == AL::division * 4 /3)
     len = 2;
-  else if (l == (division * 2)/3)
+  else if (l == (AL::division * 2)/3)
     len = 4;
-  else if (l == division /3)
+  else if (l == AL::division /3)
     len = 8;
-  else if (l == division /(3*2))
+  else if (l == AL::division /(3*2))
     len = 16;
-  else if (l == division /3*4)
+  else if (l == AL::division /3*4)
     len = 32;
-  else printf("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/division, l % division);
+  else printf("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/AL::division, l % AL::division);
   return len;
 }
 
@@ -2054,7 +2054,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	    writeTimeSig((TimeSig*)e);
 	    out << "\n";
 	    barlen=m->tickLen();
-	    int nombarlen=z1*division;
+	    int nombarlen=z1*AL::division;
 	    if (n==8) nombarlen=nombarlen/2;
 	    if ((barlen<nombarlen) and (measurenumber==1))
 	      {

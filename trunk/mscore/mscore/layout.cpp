@@ -20,7 +20,7 @@
 
 #include <fenv.h>
 #include "page.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "clef.h"
 #include "score.h"
@@ -748,8 +748,8 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   lm = lm->prev();
             Measure* m = (Measure*)lm;
             int tick        = lm->tick() + lm->tickLen();
-            SigEvent sig1   = sigmap->timesig(tick - 1);
-            SigEvent sig2   = sigmap->timesig(tick);
+            AL::SigEvent sig1   = sigmap->timesig(tick - 1);
+            AL::SigEvent sig2   = sigmap->timesig(tick);
 
             bool hasCourtesyKeysig = false;
 

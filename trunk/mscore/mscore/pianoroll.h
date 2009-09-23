@@ -23,6 +23,9 @@
 
 class Staff;
 class PianoView;
+namespace Awl {
+      class PitchEdit;
+      };
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -33,7 +36,7 @@ class PianorollEditor : public QDialog {
 
       PianoView* gv;
       Staff* staff;
-      QSpinBox* pitch;
+      Awl::PitchEdit* pitch;
       QSpinBox* velocity;
 
    private slots:

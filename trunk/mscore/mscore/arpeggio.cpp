@@ -52,9 +52,9 @@ void Arpeggio::write(Xml& xml) const
       xml.stag("Arpeggio");
       Element::writeProperties(xml);
       if (_userLen1.val() != 0.0)
-            xml.tag("userLen1", _userLen1);
+            xml.sTag("userLen1", _userLen1);
       if (_userLen2.val() != 0.0)
-            xml.tag("userLen2", _userLen2);
+            xml.sTag("userLen2", _userLen2);
       xml.etag();
       }
 

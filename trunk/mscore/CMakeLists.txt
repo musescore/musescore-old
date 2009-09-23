@@ -32,6 +32,7 @@ set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
+set(USE_SSE true)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
@@ -195,7 +196,7 @@ if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
 
-set (subdirs awl osdabzip rtf2html mscore share manual demos
+set (subdirs al awl osdabzip rtf2html mscore share manual demos
      scriptgen singleapp fluid)
 
 if (MINGW OR APPLE)

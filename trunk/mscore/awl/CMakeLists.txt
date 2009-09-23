@@ -28,6 +28,10 @@ QT4_WRAP_CPP (mocs
       slider.h
       volslider.h
       mslider.h
+      pitchedit.h
+      pitchlabel.h
+#      posedit.h
+      poslabel.h
       )
 
 add_custom_command(
@@ -68,6 +72,11 @@ add_library (
       slider.cpp
       volslider.cpp
       mslider.cpp
+      pitchedit.cpp
+      pitchlabel.cpp
+      poslabel.cpp
+#      posedit.cpp
+      utils.cpp
       )
 
 set_target_properties( awl

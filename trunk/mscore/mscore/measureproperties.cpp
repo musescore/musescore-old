@@ -20,7 +20,7 @@
 
 #include "measureproperties.h"
 #include "measure.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "score.h"
 #include "repeat.h"
 
@@ -33,7 +33,7 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       {
       m = _m;
       setupUi(this);
-      const SigEvent ev(m->score()->sigmap->timesig(m->tick()));
+      const AL::SigEvent ev(m->score()->sigmap->timesig(m->tick()));
 
       actualZ->setValue(ev.nominator);
       actualN->setValue(ev.denominator);
@@ -119,9 +119,9 @@ bool MeasureProperties::slashStyle(int staffIdx)
 //   sig
 //---------------------------------------------------------
 
-SigEvent MeasureProperties::sig() const
+AL::SigEvent MeasureProperties::sig() const
       {
-      SigEvent e(actualZ->value(), actualN->value(),
+      AL::SigEvent e(actualZ->value(), actualN->value(),
          nominalZ->value(), nominalN->value());
       return e;
       }
@@ -167,16 +167,16 @@ void MeasureProperties::apply()
 
       score->setDirty();
       score->select(0, SELECT_SINGLE, 0);
-      SigList* sl = score->sigmap;
+      AL::SigList* sl = score->sigmap;
 
-      SigEvent oev = sl->timesig(m->tick());
-      SigEvent newEvent = sig();
+      AL::SigEvent oev = sl->timesig(m->tick());
+      AL::SigEvent newEvent = sig();
       if (!(oev == newEvent)) {
             int oldLen = oev.ticks;
             int newLen = newEvent.ticks;
 
-            SigEvent oldEvent;
-            iSigEvent i = sl->find(m->tick());
+            AL::SigEvent oldEvent;
+            AL::iSigEvent i = sl->find(m->tick());
             if (i != sl->end())
                   oldEvent = i->second;
 
@@ -188,7 +188,7 @@ void MeasureProperties::apply()
             //
             i = sl->find(m->tick() + oldLen);
             if (i == sl->end()) {
-                  score->undoChangeSig(m->tick() + newLen, SigEvent(), oev);
+                  score->undoChangeSig(m->tick() + newLen, AL::SigEvent(), oev);
                   }
             m->adjustToLen(oldLen, newLen);
             score->fixTicks();

@@ -27,7 +27,7 @@
 #include "measure.h"
 #include "segment.h"
 #include "score.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "key.h"
 #include "xml.h"
 #include "clef.h"

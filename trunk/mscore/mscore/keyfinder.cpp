@@ -60,7 +60,7 @@
 #include <math.h>
 #include "keyfinder.h"
 #include "midifile.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "midifile.h"
 #include "pitchspelling.h"
 
@@ -810,7 +810,7 @@ static void best_key_analysis()
 //   findKey
 //---------------------------------------------------------
 
-int findKey(MidiTrack* mt, SigList* sigmap)
+int findKey(MidiTrack* mt, AL::SigList* sigmap)
       {
       int tpc_found, npc_found;
 

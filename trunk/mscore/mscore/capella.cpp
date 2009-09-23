@@ -38,7 +38,7 @@
 #include "slur.h"
 #include "box.h"
 #include "measure.h"
-#include "sig.h"
+#include "al/sig.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -1169,16 +1169,16 @@ int BasicDurationalObj::ticks() const
             return 0;
       int len;
       switch (t) {
-            case D1:          len = 4 * division; break;
-            case D2:          len = 2 * division; break;
-            case D4:          len = division; break;
-            case D8:          len = division >> 1; break;
-            case D16:         len = division >> 2; break;
-            case D32:         len = division >> 3; break;
-            case D64:         len = division >> 4; break;
-            case D128:        len = division >> 5; break;
-            case D256:        len = division >> 6; break;
-            case D_BREVE:     len = division * 8; break;
+            case D1:          len = 4 * AL::division; break;
+            case D2:          len = 2 * AL::division; break;
+            case D4:          len = AL::division; break;
+            case D8:          len = AL::division >> 1; break;
+            case D16:         len = AL::division >> 2; break;
+            case D32:         len = AL::division >> 3; break;
+            case D64:         len = AL::division >> 4; break;
+            case D128:        len = AL::division >> 5; break;
+            case D256:        len = AL::division >> 6; break;
+            case D_BREVE:     len = AL::division * 8; break;
             }
       int slen = len;
       int dots = nDots;
@@ -1481,8 +1481,8 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         CapMeter* o = static_cast<CapMeter*>(no);
                         if (o->log2Denom > 7)
                               break;
-                        SigEvent se = sigmap->timesig(tick);
-                        SigEvent ne(o->numerator, 1 << o->log2Denom);
+                        AL::SigEvent se = sigmap->timesig(tick);
+                        AL::SigEvent ne(o->numerator, 1 << o->log2Denom);
                         if (!(se == ne))
                               sigmap->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);

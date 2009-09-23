@@ -29,8 +29,8 @@
 #include "page.h"
 #include "text.h"
 #include "slur.h"
-#include "sig.h"
-#include "tempo.h"
+#include "al/sig.h"
+#include "al/tempo.h"
 
 //---------------------------------------------------------
 //   read
@@ -153,7 +153,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
 
 void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
       {
-      xml.tag("Division", division);
+      xml.tag("Division", AL::division);
       xml.tag("Spatium", _spatium / DPMM);
       xml.curTrack  = -1;
       xml.trackDiff = 0;

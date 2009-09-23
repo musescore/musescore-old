@@ -36,7 +36,7 @@
 #include "chord.h"
 #include "segment.h"
 #include "text.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "staff.h"
 #include "part.h"
 #include "style.h"
@@ -69,7 +69,8 @@
 #include "lyrics.h"
 #include "pitchspelling.h"
 #include "measure.h"
-#include "tempo.h"
+#include "al/al.h"
+#include "al/tempo.h"
 #include "undo.h"
 #include "editstyle.h"
 #include "textstyle.h"
@@ -402,9 +403,9 @@ void Score::cmdRemove(Element* e)
             case TEMPO_TEXT:
                   {
                   int tick = e->tick();
-                  iTEvent i = tempomap->find(tick);
+                  AL::iTEvent i = tempomap->find(tick);
                   if (i != tempomap->end())
-                        undoChangeTempo(tick, i->second, TEvent());
+                        undoChangeTempo(tick, i->second, AL::TEvent());
                   else
                         printf("remove tempotext: tempo event at %d not found\n", tick);
                   undoRemoveElement(e);
@@ -1471,10 +1472,10 @@ void Score::insertMeasures(int n, int type)
 	      undoInsertMeasure(m);
             if (type == MEASURE) {
                   if (tick == 0) {
-                        SigEvent e1 = sigmap->timesig(tick);
-                        undoChangeSig(0, e1, SigEvent());
+                        AL::SigEvent e1 = sigmap->timesig(tick);
+                        undoChangeSig(0, e1, AL::SigEvent());
                         undoSigInsertTime(tick, ticks);
-                        undoChangeSig(tick, SigEvent(), e1);
+                        undoChangeSig(tick, AL::SigEvent(), e1);
                         // TODO: move time signature
                         }
                   undoInsertTime(tick, ticks);
@@ -2406,7 +2407,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   int staffIdx = i + dstStaffStart;
                   if (staffIdx >= nstaves())
                         break;
-                  Fraction len = Fraction(tickLen, 1) / Fraction(division * 4, 1);
+                  Fraction len = Fraction(tickLen, 1) / Fraction(AL::division * 4, 1);
                   Fraction gap = makeGap1(dst, len);
                   if (gap != len)
                         printf("cannot make gap %d/%d at %d (got %d/%d) staff %d\n",

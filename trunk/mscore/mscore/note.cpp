@@ -501,7 +501,11 @@ void Note::setHeadGroup(int val)
 void Note::draw(QPainter& p) const
       {
       if (!_hidden || !userOff().isNull()) {
-            if (staff() && !selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
+            //
+            // warn if pitch extends usable range of instrument
+            // by coloring the note head
+            //
+            if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
                   Instrument* in = staff()->part()->instrument();
                   int i = ppitch();
                   if (i < in->minPitchP || i > in->maxPitchP)
@@ -974,19 +978,19 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   {
                   switch(e->subtype()) {
                         case ICON_ACCIACCATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, AL::division/2);
                               break;
                         case ICON_APPOGGIATURA:
-                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, AL::division/2);
                               break;
                         case ICON_GRACE4:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, division/1);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, AL::division);
                               break;
                         case ICON_GRACE16:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, division/4);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, AL::division/4);
                               break;
                         case ICON_GRACE32:
-                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, division/8);
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, AL::division/8);
                               break;
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(ch, BEAM_BEGIN);

@@ -35,14 +35,20 @@
 #include "element.h"
 #include "bsp.h"
 #include "fraction.h"
+#include "al/al.h"
+
+namespace AL {
+      class TempoList;
+      struct TEvent;
+      struct SigEvent;
+      class SigList;
+      };
 
 class System;
 class TextStyle;
 class Page;
-class SigList;
 class PageFormat;
 class ElementList;
-class TempoList;
 class Selection;
 class Segment;
 class Rest;
@@ -83,9 +89,6 @@ class Instrument;
 class UndoStack;
 class RepeatList;
 class MusicXmlCreator;
-
-struct SigEvent;
-struct TEvent;
 
 extern bool showRubberBand;
 
@@ -318,6 +321,7 @@ class Score : public QObject {
       void insertMeasures(int, int);
 
       void cmdAddPitch(int note, bool addFlag);
+
       Note* cmdAddPitch1(int pitch, bool addFlag);
       void cmdAddInterval(int);
 
@@ -382,8 +386,8 @@ class Score : public QObject {
 
       int _pageOffset;              ///< Offset for page numbers.
 
-      SigList*   sigmap;
-      TempoList* tempomap;
+      AL::SigList*   sigmap;
+      AL::TempoList* tempomap;
 
       //---------------------------------------------------
       //    state information
@@ -459,9 +463,9 @@ class Score : public QObject {
 
       void addViewer(Viewer* v);
 
-      void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
+      void undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n);
       void undoChangeKeySig(Staff* staff, int tick, int o, int n);
-      void undoChangeTempo(int tick, const TEvent& o, const TEvent& n);
+      void undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n);
       void undoChangeKey(Staff* staff, int tick, int o, int n);
       void undoChangeClef(Staff* staff, int tick, int o, int n);
       void undoAddElement(Element* element);
@@ -644,7 +648,7 @@ class Score : public QObject {
       void changeTimeSig(int tick, int st);
 
       void cmd(const QAction*);
-      int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
+      int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
       bool saveFile(bool autosave);
       void adjustTime(int tick, MeasureBase*);
 
@@ -709,7 +713,7 @@ class Score : public QObject {
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
-      SigList*   getSigmap()  { return sigmap; }
+      AL::SigList*   getSigmap()  { return sigmap; }
       MeasureBase* appendMeasure(int type);
       void addLyrics(int tick, int staffIdx, const QString&);
 
@@ -729,7 +733,7 @@ class Score : public QObject {
       void updateChannel();
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
-      TempoList* getTempomap() const { return tempomap; }
+      AL::TempoList* getTempomap() const { return tempomap; }
 
       QString movementNumber() const                 { return _movementNumber;  }
       QString movementTitle() const                  { return _movementTitle;   }
@@ -830,6 +834,7 @@ class Score : public QObject {
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
       QList<Element*> buildCanonical(int track);
+      int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       };
 
 extern Score* gscore;

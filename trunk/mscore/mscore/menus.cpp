@@ -30,7 +30,7 @@
 #include "mscore.h"
 #include "edittempo.h"
 #include "select.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "segment.h"
 #include "undo.h"
 #include "icons.h"

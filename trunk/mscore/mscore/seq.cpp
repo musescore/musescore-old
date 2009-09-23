@@ -40,7 +40,7 @@
 #include "segment.h"
 #include "note.h"
 #include "chord.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "canvas.h"
 #include "playpanel.h"
 #include "staff.h"

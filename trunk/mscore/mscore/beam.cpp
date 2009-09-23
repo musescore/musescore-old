@@ -26,13 +26,14 @@
 #include "score.h"
 #include "chord.h"
 #include "preferences.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "style.h"
 #include "note.h"
 #include "tuplet.h"
 #include "system.h"
 #include "tremolo.h"
 #include "measure.h"
+#include "al/al.h"
 
 //---------------------------------------------------------
 //   startBeam
@@ -167,18 +168,18 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
             if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
                   continue;
             if (h.noteLenZ) {
-                  int len = (4 * h.noteLenZ * division)/ h.noteLenN;
+                  int len = (4 * h.noteLenZ * AL::division)/ h.noteLenN;
                   if (len != l)
                         continue;
                   }
             if (h.posZ) {
-                  int pos = (4 * h.posZ * division) / h.posN;
+                  int pos = (4 * h.posZ * AL::division) / h.posN;
                   if (pos != p)
                         continue;
                   }
             if (h.posZ == 0) {
                   // stop on every beat
-                  int len = (4 * division) / h.timeSigN;
+                  int len = (4 * AL::division) / h.timeSigN;
                   if (p % len)
                         continue;
                   }
@@ -367,7 +368,7 @@ void Measure::layoutBeams1(int track)
             BeamMode bm = cr->beamMode();
             int len     = cr->duration().ticks();
 
-            if ((len >= division) || (bm == BEAM_NO)) {
+            if ((len >= AL::division) || (bm == BEAM_NO)) {
                   if (beam) {
                         beam->layout1();
                         beam = 0;

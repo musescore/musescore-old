@@ -39,7 +39,7 @@
 #include "arpeggio.h"
 #include "durationtype.h"
 #include "measure.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "repeatlist.h"
 #include "velo.h"
 #include "dynamics.h"

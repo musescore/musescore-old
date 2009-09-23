@@ -28,8 +28,8 @@
 
 #include "spatium.h"
 #include "globals.h"
-#include "sig.h"
-#include "tempo.h"
+#include "al/sig.h"
+#include "al/tempo.h"
 #include "input.h"
 #include "style.h"
 
@@ -46,7 +46,6 @@ class Score;
 class Note;
 class Chord;
 class ChordRest;
-class TEvent;
 class Harmony;
 class SlurTie;
 class Beam;
@@ -478,11 +477,11 @@ class ChangeClef : public UndoCommand {
 class ChangeSig : public UndoCommand {
       Score* score;
       int tick;
-      SigEvent o;
-      SigEvent n;
+      AL::SigEvent o;
+      AL::SigEvent n;
 
    public:
-      ChangeSig(Score*, int tick, const SigEvent& o, const SigEvent& n);
+      ChangeSig(Score*, int tick, const AL::SigEvent& o, const AL::SigEvent& n);
       virtual void undo();
       virtual void redo();
       };
@@ -494,11 +493,11 @@ class ChangeSig : public UndoCommand {
 class ChangeTempo : public UndoCommand {
       Score* score;
       int tick;
-      TEvent o;
-      TEvent n;
+      AL::TEvent o;
+      AL::TEvent n;
 
    public:
-      ChangeTempo(Score*, int tick, const TEvent& o, const TEvent& n);
+      ChangeTempo(Score*, int tick, const AL::TEvent& o, const AL::TEvent& n);
       virtual void undo();
       virtual void redo();
       };

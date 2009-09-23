@@ -24,7 +24,7 @@
 #include "event.h"
 #include "driver.h"
 #include "fifo.h"
-#include "tempo.h"
+#include "al/tempo.h"
 
 class Note;
 class QTimer;

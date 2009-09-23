@@ -25,9 +25,9 @@
 
 #include "score.h"
 #include "key.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "clef.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "measure.h"
 #include "page.h"
 #include "undo.h"
@@ -276,7 +276,7 @@ Score::Score(const Style& s)
       _dirty          = false;
       _saved          = false;
       _playPos        = 0;
-      _fileDivision   = division;
+      _fileDivision   = AL::division;
       _creditsRead    = false;
       _defaultsRead   = false;
       _selection      = new Selection(this);
@@ -284,8 +284,8 @@ Score::Score(const Style& s)
       rights          = 0;
       rights          = 0;
       _pageOffset     = 0;
-      tempomap        = new TempoList;
-      sigmap          = new SigList;
+      tempomap        = new AL::TempoList;
+      sigmap          = new AL::SigList;
       sigmap->add(0, 4, 4);
       _state          = STATE_NORMAL;
       _prevState      = STATE_NORMAL;
@@ -453,7 +453,7 @@ bool Score::read(QString name)
 void Score::write(Xml& xml, bool autosave)
       {
       xml.tag("Spatium", _spatium / DPMM);
-      xml.tag("Division", division);
+      xml.tag("Division", AL::division);
       xml.curTrack = -1;
       if (!autosave && editObject) {                          // in edit mode?
             endCmd();

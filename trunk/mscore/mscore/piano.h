@@ -51,6 +51,7 @@ class Piano : public QWidget {
 
    public slots:
       void setYpos(int val);
+      void setMag(double, double);
 
    public:
       Piano(QWidget* parent = 0);

@@ -234,6 +234,7 @@ void Preferences::init()
       reverbWidth             = 1.0;
 
       defaultPlayDuration     = 300;      // ms
+      warnPitchRange          = true;
       };
 
 //---------------------------------------------------------
@@ -331,6 +332,7 @@ void Preferences::write()
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
+      s.setValue("warnPitchRange", warnPitchRange);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -431,6 +433,7 @@ void Preferences::read()
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
+      warnPitchRange         = s.value("warnPitchRange", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -719,6 +722,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       importStyleFile->setText(p->importStyleFile);
       useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
       useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
+      warnPitchRange->setChecked(p->warnPitchRange);
 
       language->clear();
       int curIdx = 0;
@@ -1047,6 +1051,8 @@ void PreferenceDialog::apply()
             preferences.importStyleFile = importStyleFile->text();
       else
             preferences.importStyleFile.clear();
+
+      preferences.warnPitchRange = warnPitchRange->isChecked();
 
       if (languageChanged) {
             setMscoreLocale(preferences.language);

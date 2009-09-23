@@ -22,7 +22,7 @@
 #define __MEASUREPROPERTIES_H__
 
 #include "ui_measureproperties.h"
-#include "sig.h"
+#include "al/sig.h"
 
 class Measure;
 
@@ -35,7 +35,7 @@ class MeasureProperties : public QDialog, private Ui::MeasurePropertiesBase {
       Measure* m;
 
       void apply();
-      SigEvent sig() const;
+      AL::SigEvent sig() const;
       bool isIrregular() const;
       int repeatCount() const;
       bool visible(int staffIdx);

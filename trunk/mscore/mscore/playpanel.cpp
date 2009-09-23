@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "playpanel.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "score.h"
 #include "seq.h"
 #include "mscore.h"

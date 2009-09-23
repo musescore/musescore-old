@@ -30,7 +30,7 @@
 #include "element.h"
 #include "note.h"
 #include "rest.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "clef.h"
 #include "key.h"
 #include "instrdialog.h"
@@ -39,7 +39,7 @@
 #include "dynamics.h"
 #include "file.h"
 #include "style.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "select.h"
 #include "preferences.h"
 #include "input.h"
@@ -647,15 +647,15 @@ void MuseScore::newFile()
       if (lastMeasure && (lastMeasure->endBarLineType() == NORMAL_BAR))
             lastMeasure->setEndBarLineType(END_BAR, false);
 
-      SigList* sigmap = score->getSigmap();
+      AL::SigList* sigmap = score->getSigmap();
       if (pickupMeasure) {
-            sigmap->add(0, SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
+            sigmap->add(0, AL::SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
             int tick = score->getSigmap()->ticksMeasure(0);
-            sigmap->add(tick, SigEvent(timesigZ, timesigN));
+            sigmap->add(tick, AL::SigEvent(timesigZ, timesigN));
             score->firstMeasure()->setIrregular(true);
             }
       else {
-            sigmap->add(0, SigEvent(timesigZ, timesigN));
+            sigmap->add(0, AL::SigEvent(timesigZ, timesigN));
             }
 
       int tick = 0;
@@ -1198,9 +1198,9 @@ bool Score::read(QDomElement e)
                   if (tag == "Staff")
                         readStaff(ee);
                   else if (tag == "siglist")
-                        sigmap->read(ee, division, _fileDivision);
+                        sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")
-                        tempomap->read(ee, this);
+                        tempomap->read(ee, _fileDivision);
                   else if (tag == "Mag") {
                         _mag = val.toDouble();
                         _magIdx = MAG_FREE;
@@ -1348,7 +1348,7 @@ bool Score::read(QDomElement e)
 
       searchSelectedElements();
 
-      _fileDivision = division;
+      _fileDivision = AL::division;
 
       //
       //    sanity check for barLineSpan

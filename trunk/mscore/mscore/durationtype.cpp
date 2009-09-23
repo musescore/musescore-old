@@ -20,8 +20,6 @@
 
 #include "durationtype.h"
 
-extern int division;
-
 //---------------------------------------------------------
 //   dots
 //---------------------------------------------------------
@@ -116,17 +114,17 @@ int Duration::ticks() const
       {
       int t;
       switch(_val) {
-            case V_QUARTER:   t = division;        break;
-            case V_EIGHT:     t = division / 2;    break;
-            case V_256TH:     t = division / 64;   break;
-            case V_128TH:     t = division / 32;   break;
-            case V_64TH:      t = division / 16;   break;
-            case V_32ND:      t = division / 8;    break;
-            case V_16TH:      t = division / 4;    break;
-            case V_HALF:      t = division * 2;    break;
-            case V_WHOLE:     t = division * 4;    break;
-            case V_BREVE:     t = division * 8;    break;
-            case V_LONG:      t = division * 16;   break;
+            case V_QUARTER:   t = AL::division;        break;
+            case V_EIGHT:     t = AL::division / 2;    break;
+            case V_256TH:     t = AL::division / 64;   break;
+            case V_128TH:     t = AL::division / 32;   break;
+            case V_64TH:      t = AL::division / 16;   break;
+            case V_32ND:      t = AL::division / 8;    break;
+            case V_16TH:      t = AL::division / 4;    break;
+            case V_HALF:      t = AL::division * 2;    break;
+            case V_WHOLE:     t = AL::division * 4;    break;
+            case V_BREVE:     t = AL::division * 8;    break;
+            case V_LONG:      t = AL::division * 16;   break;
             case V_ZERO:
             case V_MEASURE:
                   return 0;

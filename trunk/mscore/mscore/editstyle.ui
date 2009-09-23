@@ -201,13 +201,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="warnPitchRange">
-         <property name="text">
-          <string>color notes which extend the usable pitch range</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

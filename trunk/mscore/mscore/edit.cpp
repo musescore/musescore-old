@@ -23,7 +23,7 @@
 #include "rest.h"
 #include "chord.h"
 #include "key.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "clef.h"
 #include "score.h"
 #include "slur.h"
@@ -48,7 +48,7 @@
 #include "articulation.h"
 #include "drumset.h"
 #include "measure.h"
-#include "tempo.h"
+#include "al/tempo.h"
 #include "undo.h"
 
 //---------------------------------------------------------
@@ -257,18 +257,18 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             return;
             }
 
-      SigEvent oSig;
-      SigEvent nSig;
-      iSigEvent i = sigmap->find(tick);
+      AL::SigEvent oSig;
+      AL::SigEvent nSig;
+      AL::iSigEvent i = sigmap->find(tick);
       if (i != sigmap->end()) {
             oSig = i->second;
-            SigEvent e = sigmap->timesig(tick - 1);
+            AL::SigEvent e = sigmap->timesig(tick - 1);
             if ((tick == 0) || (e.nominator != z) || (e.denominator != n)) {
-                  nSig = SigEvent(z, n);
+                  nSig = AL::SigEvent(z, n);
                   }
             }
       else {
-            nSig = SigEvent(z, n);
+            nSig = AL::SigEvent(z, n);
             }
 
       undoChangeSig(tick, oSig, nSig);
@@ -293,7 +293,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                   }
             int etick = segment->tick();
             if (etick >= tick) {
-                  iSigEvent i = sigmap->find(segment->tick());
+                  AL::iSigEvent i = sigmap->find(segment->tick());
                   if ((etick > tick) && (i->second.nominator != z || i->second.denominator != n))
                         break;
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
@@ -990,23 +990,23 @@ void Score::cmdRemoveTime(int tick, int len)
             }
 
       //-----------------
-      SigEvent e1 = sigmap->timesig(tick + len);
-      for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
+      AL::SigEvent e1 = sigmap->timesig(tick + len);
+      for (AL::ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
             if (i->first >= tick && (i->first < tick2))
-                  undoChangeSig(i->first, i->second, SigEvent());
+                  undoChangeSig(i->first, i->second, AL::SigEvent());
             }
       undoSigInsertTime(tick, -len);
-      SigEvent e2 = sigmap->timesig(tick);
+      AL::SigEvent e2 = sigmap->timesig(tick);
       if (!(e1 == e2)) {
-            ciSigEvent i = sigmap->find(tick);
+            AL::ciSigEvent i = sigmap->find(tick);
             if (i == sigmap->end())
-                  undoChangeSig(tick, SigEvent(), e1);
+                  undoChangeSig(tick, AL::SigEvent(), e1);
             }
       //-----------------
 
-      for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
+      for (AL::ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
             if (i->first >= tick && (i->first < tick2))
-                  undoChangeTempo(i->first, i->second, TEvent());
+                  undoChangeTempo(i->first, i->second, AL::TEvent());
             }
       foreach(Staff* staff, _staves) {
             ClefList* cl = staff->clefList();
@@ -1336,7 +1336,7 @@ void Score::cmdTuplet(int n, ChordRest* cr, Duration dur)
                         int tz, tn;
                         getSigmap()->timesig(tick, tz, tn);
                         int ticks = duration.type() != Duration::V_MEASURE ? cr->ticks() : cr->measure()->tickLen();
-                        if (ticks == (3 * division) &&  tz == 6 && tn == 8)
+                        if (ticks == (3 * AL::division) &&  tz == 6 && tn == 8)
                               tuplet->setRatio(5, 6);
                         else {
                               //duration = duration.shift(1);

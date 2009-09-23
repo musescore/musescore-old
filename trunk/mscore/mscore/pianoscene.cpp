@@ -56,7 +56,7 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
       ticks       = lm->tick() + lm->tickLen();
       setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
 
-      _timeType = TICKS;
+      _timeType = AL::TICKS;
       magStep = 0;
       Measure* m = _score->firstMeasure();
       int staffIdx = staff->idx();
@@ -88,19 +88,19 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
 //   pix2pos
 //---------------------------------------------------------
 
-Pos PianoScene::pix2pos(int x) const
+AL::Pos PianoScene::pix2pos(int x) const
       {
       x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
-      return Pos(_score, x, _timeType);
+      return AL::Pos(_score->getTempomap(), _score->getSigmap(), x, _timeType);
       }
 
 //---------------------------------------------------------
 //   pos2pix
 //---------------------------------------------------------
 
-int PianoScene::pos2pix(const Pos& p) const
+int PianoScene::pos2pix(const AL::Pos& p) const
       {
       return lrint(p.time(_timeType) + MAP_OFFSET);
       }
@@ -151,8 +151,8 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
             1, 1, 2, 5, 10, 20, 50
             };
 
-      Pos pos1 = pix2pos(x1);
-      Pos pos2 = pix2pos(x2);
+      AL::Pos pos1 = pix2pos(x1);
+      AL::Pos pos2 = pix2pos(x2);
 
       //---------------------------------------------------
       //    draw raster
@@ -170,7 +170,7 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-            Pos stick(_score, bar, 0, 0);
+            AL::Pos stick(_score->getTempomap(), _score->getSigmap(), bar, 0, 0);
             if (magStep) {
                   int x = pos2pix(stick);
                   if (x > 0) {
@@ -185,7 +185,7 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
             else {
                   int z = stick.timesig().nominator;
                   for (int beat = 0; beat < z; beat++) {
-                        Pos xx(_score, bar, beat, 0);
+                        AL::Pos xx(_score->getTempomap(), _score->getSigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);
                         if (xp < 0)
                               continue;
@@ -247,7 +247,8 @@ void PianoView::wheelEvent(QWheelEvent* event)
       int step = event->delta() / 120;
       double xmag = transform().m11();
       double ymag = transform().m22();
-      if (event->modifiers() & Qt::ControlModifier) {
+
+      if (event->modifiers() == Qt::ControlModifier) {
             if (step > 0) {
                   for (int i = 0; i < step; ++i) {
                         if (xmag > 10.0)
@@ -275,6 +276,32 @@ void PianoView::wheelEvent(QWheelEvent* event)
             double xpos = -(mapFromScene(QPointF()).x());
             if (xpos <= 0)
                   emit xposChanged(xpos);
+            }
+      else if (event->modifiers() == Qt::ShiftModifier) {
+            QWheelEvent we(event->pos(), event->delta(), event->buttons(), 0, Qt::Horizontal);
+            QGraphicsView::wheelEvent(&we);
+            }
+      else if (event->modifiers() == 0) {
+            QGraphicsView::wheelEvent(event);
+            }
+      else if (event->modifiers() == (Qt::ShiftModifier | Qt::ControlModifier)) {
+            if (step > 0) {
+                  for (int i = 0; i < step; ++i) {
+                        if (ymag > 3.0)
+                              break;
+                        scale(1.0, 1.1);
+                        ymag *= 1.1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i < -step; ++i) {
+                        if (ymag < 0.4)
+                              break;
+                        scale(1.0, .9);
+                        ymag *= .9;
+                        }
+                  }
+            emit magChanged(xmag, ymag);
             }
       }
 

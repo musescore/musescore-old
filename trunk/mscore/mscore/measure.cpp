@@ -34,7 +34,7 @@
 #include "key.h"
 #include "dynamics.h"
 #include "slur.h"
-#include "sig.h"
+#include "al/sig.h"
 #include "beam.h"
 #include "tuplet.h"
 #include "system.h"

@@ -108,6 +108,7 @@
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsRectItem>
+#include <QtGui/QLabel>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

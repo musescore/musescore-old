@@ -22,7 +22,11 @@
 #define __KEYFINDER_H__
 
 class MidiTrack;
-class SigList;
-extern int findKey(MidiTrack*, SigList*);
+
+namespace AL {
+      class SigList;
+      };
+
+extern int findKey(MidiTrack*, AL::SigList*);
 #endif
 
