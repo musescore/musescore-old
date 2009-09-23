@@ -55,12 +55,18 @@ class PianoScene : public QGraphicsScene {
 class PianoView : public QGraphicsView {
       Q_OBJECT
 
+      int y2pitch(int y) const;
+
    protected:
-      void wheelEvent(QWheelEvent* event);
+      virtual void wheelEvent(QWheelEvent* event);
+      virtual void mouseMoveEvent(QMouseEvent* event);
+      virtual void leaveEvent(QEvent*);
 
    signals:
       void magChanged(double, double);
       void xposChanged(int);
+      void pitchChanged(int);
+      void posChanged(int);
 
    public:
       PianoView(Staff*);

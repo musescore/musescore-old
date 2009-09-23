@@ -236,6 +236,7 @@ PianoView::PianoView(Staff* s)
    : QGraphicsView()
       {
       setScene(new PianoScene(s));
+      setMouseTracking(true);
       }
 
 //---------------------------------------------------------
@@ -304,4 +305,57 @@ void PianoView::wheelEvent(QWheelEvent* event)
             emit magChanged(xmag, ymag);
             }
       }
+
+//---------------------------------------------------------
+//   y2pitch
+//---------------------------------------------------------
+
+int PianoView::y2pitch(int y) const
+      {
+      int pitch;
+      const int total = (10 * 7 + 5) * keyHeight;       // 75 Ganztonschritte
+      y = total - y;
+      int oct = (y / (7 * keyHeight)) * 12;
+      static const char kt[] = {
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1, 1, 1, 1, 1,
+            2, 2, 2, 2, 2, 2,
+            3, 3, 3, 3, 3, 3, 3,
+            4, 4, 4, 4, 4, 4, 4, 4, 4,
+            5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+            6, 6, 6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7, 7,
+            8, 8, 8, 8, 8, 8, 8,
+            9, 9, 9, 9, 9, 9,
+            10, 10, 10, 10, 10, 10, 10,
+            11, 11, 11, 11, 11, 11, 11, 11, 11, 11
+            };
+      pitch = kt[y % 91] + oct;
+      if (pitch < 0 || pitch > 127)
+            pitch = -1;
+      return pitch;
+      }
+
+//---------------------------------------------------------
+//   mouseMoveEvent
+//---------------------------------------------------------
+
+void PianoView::mouseMoveEvent(QMouseEvent* event)
+      {
+      QPointF p(mapToScene(event->pos()));
+      int pitch = y2pitch(int(p.y()));
+      emit pitchChanged(pitch);
+      emit posChanged(int(p.x())-480);
+      }
+
+//---------------------------------------------------------
+//   leaveEvent
+//---------------------------------------------------------
+
+void PianoView::leaveEvent(QEvent*)
+      {
+      emit pitchChanged(-1);
+      emit posChanged(-1);
+      }
+
 

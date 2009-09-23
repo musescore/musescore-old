@@ -28,6 +28,7 @@
 #cmakedefine HAS_MIDI
 #cmakedefine STATIC_SCRIPT_BINDINGS
 #cmakedefine HAS_AUDIOFILE
+#cmakedefine USE_SSE
 
 #define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"

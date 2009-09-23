@@ -56,7 +56,6 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       Awl::PitchLabel* pl = new Awl::PitchLabel();
       tb->addWidget(pl);
 
-
       tb->addSeparator();
       tb->addWidget(new QLabel(tr("Velocity:")));
       velocity = new QSpinBox;
@@ -94,6 +93,8 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       connect(gv, SIGNAL(xposChanged(int)), ruler, SLOT(setXpos(int)));
       connect(gv, SIGNAL(magChanged(double,double)), ruler, SLOT(setMag(double,double)));
       connect(gv, SIGNAL(magChanged(double,double)), piano, SLOT(setMag(double,double)));
+      connect(gv, SIGNAL(pitchChanged(int)), pl, SLOT(setPitch(int)));
+      connect(gv, SIGNAL(posChanged(int)), pos, SLOT(setValue(int)));
 
       connect(gv->scene(), SIGNAL(selectionChanged()), SLOT(selectionChanged()));
       resize(800, 400);

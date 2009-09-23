@@ -32,7 +32,7 @@ set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
-set(USE_SSE true)
+set(USE_SSE FALSE)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
