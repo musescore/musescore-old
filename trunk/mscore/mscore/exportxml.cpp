@@ -2888,7 +2888,21 @@ foreach(Element* el, *(score->gel())) {
                                           }
                                     }
                         }
-
+                   // output attributes with the first actual measure (pickup or regular) only     
+                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {       
+                      for (int i = 0; i < staves; i++) {
+                        Staff* st = part->staff(i);
+                        if(st->lines() != 5){
+                            if (staves > 1)
+                                xml.stag(QString("staff-details number=\"%1\"").arg(i+1));
+                            else
+                                xml.stag("staff-details");
+                            xml.tag("staff-lines", st->lines());
+                            xml.etag();
+                          } 
+                        }   
+                      }
+                  
                   // output attribute at start of measure: measure-style
                   measureStyle(xml, attr, m, inMultiMeasureRest);
 
