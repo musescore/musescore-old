@@ -86,7 +86,7 @@ class MidiTrack {
       void changeDivision(int newDivision);
       void move(int ticks);
       bool isDrumTrack() const;
-      void extractTimeSig(AL::SigList* sig);
+      void extractTimeSig(AL::TimeSigMap* sig);
       void quantize(int startTick, int endTick, EventList* dst);
       int getInitProgram();
       void findChords();
@@ -108,7 +108,7 @@ class MidiTrack {
 //---------------------------------------------------------
 
 class MidiFile {
-      AL::SigList _siglist;
+      AL::TimeSigMap _siglist;
       QIODevice* fp;
       QList<MidiTrack*> _tracks;
       int _division;
@@ -162,7 +162,7 @@ class MidiFile {
       void sortTracks();
       void separateChannel();
       void move(int ticks);
-      AL::SigList siglist() const     { return _siglist;         }
+      AL::TimeSigMap siglist() const     { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
       void processMeta(Score*, MidiTrack* track, Event* e);

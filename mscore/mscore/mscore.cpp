@@ -1217,8 +1217,8 @@ void MuseScore::showPlayPanel(bool visible)
             connect(seq,       SIGNAL(masterVolumeChanged(float)), playPanel, SLOT(setVolume(float)));
 
             playPanel->setVolume(seq->masterVolume());
-            playPanel->setTempo(cs->tempomap->tempo(0));
-            playPanel->setRelTempo(cs->tempomap->relTempo());
+            playPanel->setTempo(cs->tempomap()->tempo(0));
+            playPanel->setRelTempo(cs->tempomap()->relTempo());
             playPanel->setEndpos(seq->getEndTick());
             playPanel->setScore(cs);
             int tick, utick;
@@ -2306,7 +2306,7 @@ void MuseScore::setPos(int t)
       {
       if (cs == 0 || t < 0)
             return;
-      AL::SigList* s = cs->sigmap;
+      AL::TimeSigMap* s = cs->sigmap();
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
       _positionLabel->setText(QString("Bar %1 Beat %2.%3")

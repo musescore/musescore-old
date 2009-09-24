@@ -703,7 +703,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   {
                   unsigned tempo = data[2] + (data[1] << 8) + (data[0] <<16);
                   double t = 1000000.0 / double(tempo);
-                  cs->tempomap->addTempo(tick, t);
+                  cs->tempomap()->addTempo(tick, t);
                   }
                   break;
 
@@ -769,7 +769,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   {
                   int z = data[0];
                   int n = 1 << data[1];
-                  cs->sigmap->add(tick, z, n);
+                  cs->sigmap()->add(tick, z, n);
                   }
                   break;
 
@@ -790,7 +790,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       mf->process1();
       mf->changeDivision(AL::division);
 
-      *sigmap = mf->siglist();
+      *_sigmap = mf->siglist();
 
       QList<MidiTrack*>* tracks = mf->tracks();
 
@@ -899,12 +899,12 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       //---------------------------------------------------
 
       int startBar, endBar, beat, tick;
-      sigmap->tickValues(lastTick, &endBar, &beat, &tick);
+      sigmap()->tickValues(lastTick, &endBar, &beat, &tick);
       if (beat || tick)
             ++endBar;
       for (startBar = 0; startBar < endBar; ++startBar) {
-            int tick1 = sigmap->bar2tick(startBar, 0, 0);
-            int tick2 = sigmap->bar2tick(startBar + 1, 0, 0);
+            int tick1 = sigmap()->bar2tick(startBar, 0, 0);
+            int tick2 = sigmap()->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
                   if (midiTrack->staffIdx() == -1)
@@ -925,7 +925,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                   break;
             }
 
-      tick = sigmap->bar2tick(startBar, 0, 0);
+      tick = sigmap()->bar2tick(startBar, 0, 0);
       if (tick)
             printf("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
@@ -948,7 +948,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                   }
             }
       int bars;
-      sigmap->tickValues(lastTick, &bars, &beat, &tick);
+      sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)
             ++bars;
 
@@ -958,7 +958,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
 
       for (int i = 0; i < bars; ++i) {
             Measure* measure  = new Measure(this);
-            int tick = sigmap->bar2tick(i, 0, 0);
+            int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
       	add(measure);
@@ -1011,7 +1011,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                   convertTrack(track);
             }
 
-      for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
+      for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {
             AL::SigEvent se = is->second;
             int tick    = is->first;
             Measure* m  = tick2measure(tick);
@@ -1049,7 +1049,7 @@ struct MNote {
 
 void Score::convertTrack(MidiTrack* midiTrack)
 	{
-      int key      = findKey(midiTrack, sigmap);
+      int key      = findKey(midiTrack, sigmap());
       int staffIdx = midiTrack->staffIdx();
       midiTrack->findChords();
 

@@ -133,7 +133,7 @@ class BBFile {
       char* _styleName;
       QList<BBTrack*> _tracks;
       int _measures;
-      AL::SigList _siglist;
+      AL::TimeSigMap _siglist;
 
       QByteArray ba;
       const unsigned char* a;
@@ -147,15 +147,15 @@ class BBFile {
       BBFile();
       ~BBFile();
       bool read(const QString&);
-      QList<BBTrack*>* tracks()   { return &_tracks;     }
-      int measures() const        { return _measures;    }
-      const char* title() const   { return _title;       }
-      AL::SigList siglist() const     { return _siglist;     }
-      QList<BBChord> chords()     { return _chords;      }
-      int startChorus() const     { return _startChorus; }
-      int endChorus() const       { return _endChorus;   }
-      int repeats() const         { return _repeats;     }
-      int key() const             { return _key;         }
+      QList<BBTrack*>* tracks()      { return &_tracks;     }
+      int measures() const           { return _measures;    }
+      const char* title() const      { return _title;       }
+      AL::TimeSigMap siglist() const { return _siglist;     }
+      QList<BBChord> chords()        { return _chords;      }
+      int startChorus() const        { return _startChorus; }
+      int endChorus() const          { return _endChorus;   }
+      int repeats() const            { return _repeats;     }
+      int key() const                { return _key;         }
       };
 
 #endif

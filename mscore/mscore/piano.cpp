@@ -33,6 +33,7 @@ QPixmap* Piano::mk4;
 Piano::Piano(QWidget* parent)
    : QWidget(parent)
       {
+      setMouseTracking(true);
       _ymag = 1.0;
       setAttribute(Qt::WA_NoSystemBackground);
       setAttribute(Qt::WA_StaticContents);
@@ -280,6 +281,37 @@ int Piano::pitch2y(int pitch) const
       }
 
 //---------------------------------------------------------
+//   y2pitch
+//    y = 0 == origin of rCanvasA
+//---------------------------------------------------------
+
+int Piano::y2pitch(int y) const
+      {
+      y = lrint((y + _ypos) / _ymag);
+      static const int total = (10 * 7 + 5) * keyHeight;     // 75 steps
+      y = total - y;
+      int oct = (y / (7 * keyHeight)) * 12;
+      static const char kt[] = {
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1, 1, 1, 1, 1,
+            2, 2, 2, 2, 2, 2,
+            3, 3, 3, 3, 3, 3, 3,
+            4, 4, 4, 4, 4, 4, 4, 4, 4,
+            5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+            6, 6, 6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7, 7,
+            8, 8, 8, 8, 8, 8, 8,
+            9, 9, 9, 9, 9, 9,
+            10, 10, 10, 10, 10, 10, 10,
+            11, 11, 11, 11, 11, 11, 11, 11, 11, 11
+            };
+      int pitch = kt[y % 91] + oct;
+      if (pitch < 0 || pitch > 127)
+            pitch = -1;
+      return pitch;
+      }
+
+//---------------------------------------------------------
 //   paint
 //---------------------------------------------------------
 
@@ -347,6 +379,18 @@ void Piano::setMag(double, double ym)
       }
 
 //---------------------------------------------------------
+//   setPitch
+//---------------------------------------------------------
+
+void Piano::setPitch(int val)
+      {
+      if (curPitch != val) {
+            curPitch = val;
+            update();
+            }
+      }
+
+//---------------------------------------------------------
 //   mousePressEvent
 //---------------------------------------------------------
 
@@ -361,4 +405,32 @@ void Piano::mousePressEvent(QMouseEvent*)
 void Piano::mouseReleaseEvent(QMouseEvent*)
       {
       }
+
+//---------------------------------------------------------
+//   mouseMoveEvent
+//---------------------------------------------------------
+
+void Piano::mouseMoveEvent(QMouseEvent* event)
+      {
+      int pitch = y2pitch(event->pos().y());
+      if (pitch != curPitch) {
+            curPitch = pitch;
+            emit pitchChanged(curPitch);
+            update();
+            }
+      }
+
+//---------------------------------------------------------
+//   leaveEvent
+//---------------------------------------------------------
+
+void Piano::leaveEvent(QEvent*)
+      {
+      if (curPitch != -1) {
+            curPitch = -1;
+            emit pitchChanged(-1);
+            update();
+            }
+      }
+
 

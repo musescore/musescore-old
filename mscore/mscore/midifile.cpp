@@ -916,7 +916,7 @@ void MidiTrack::setOutChannel(int n)
 //   extractTimeSig
 //---------------------------------------------------------
 
-void MidiTrack::extractTimeSig(AL::SigList* sigmap)
+void MidiTrack::extractTimeSig(AL::TimeSigMap* sigmap)
       {
       EventList el;
 
@@ -1103,7 +1103,7 @@ void MidiFile::changeDivision(int newDivision)
       foreach (MidiTrack* t, _tracks)
             t->changeDivision(newDivision);
 
-      AL::SigList sl;
+      AL::TimeSigMap sl;
       for (AL::iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
             int tick    = (is->first * newDivision + _division/2) / _division;
             AL::SigEvent se = is->second;

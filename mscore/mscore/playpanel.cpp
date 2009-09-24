@@ -146,7 +146,7 @@ void PlayPanel::heartBeat(int tick, int utick)
       cachedTickPosition = utick;
 
       int bar, beat, t;
-      cs->sigmap->tickValues(tick, &bar, &beat, &t);
+      cs->sigmap()->tickValues(tick, &bar, &beat, &t);
 
       char buffer[32];
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);

@@ -33,7 +33,7 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       {
       m = _m;
       setupUi(this);
-      const AL::SigEvent ev(m->score()->sigmap->timesig(m->tick()));
+      const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
 
       actualZ->setValue(ev.nominator);
       actualN->setValue(ev.denominator);
@@ -167,7 +167,7 @@ void MeasureProperties::apply()
 
       score->setDirty();
       score->select(0, SELECT_SINGLE, 0);
-      AL::SigList* sl = score->sigmap;
+      AL::TimeSigMap* sl = score->sigmap();
 
       AL::SigEvent oev = sl->timesig(m->tick());
       AL::SigEvent newEvent = sig();

@@ -25,8 +25,8 @@
 
 namespace AL {
 
-class TempoList;
-class SigList;
+class TempoMap;
+class TimeSigMap;
 class Xml;
 
 enum TType { TICKS, FRAMES };
@@ -41,21 +41,24 @@ enum TType { TICKS, FRAMES };
 
 class Pos {
       TType _type;
+      bool _valid;
       mutable int sn;
       mutable unsigned _tick;
       mutable unsigned _frame;
 
    protected:
-      TempoList* tempo;
-      SigList*  sig;
+      TempoMap* tempo;
+      TimeSigMap*  sig;
 
    public:
-      Pos(TempoList*, SigList*);
-      Pos(TempoList*, SigList*, int measure, int beat, int tick);
-      Pos(TempoList*, SigList*, int minute, int sec, int frame, int subframe);
-      Pos(TempoList*, SigList*, unsigned, TType type = TICKS);
-      Pos(TempoList*, SigList*, const QString&);
+      Pos();
+      Pos(TempoMap*, TimeSigMap*);
+      Pos(TempoMap*, TimeSigMap*, int measure, int beat, int tick);
+      Pos(TempoMap*, TimeSigMap*, int minute, int sec, int frame, int subframe);
+      Pos(TempoMap*, TimeSigMap*, unsigned, TType type = TICKS);
+      Pos(TempoMap*, TimeSigMap*, const QString&);
 
+      void setContext(TempoMap* t, TimeSigMap* s) { tempo = t; sig = s; }
       void dump(int n = 0) const;
 
       unsigned time(TType t) const { return t == TICKS ? tick() : frame(); }
@@ -98,7 +101,8 @@ class Pos {
 
       void write(Xml&, const char*) const;
       void read(QDomNode);
-      bool isValid() const { return true; }
+      bool valid() const { return _valid;  }
+      void setInvalid()  { _valid = false; }
       };
 
 //---------------------------------------------------------
@@ -111,7 +115,7 @@ class PosLen : public Pos {
       mutable int sn;
 
    public:
-      PosLen(TempoList*, SigList*);
+      PosLen(TempoMap*, TimeSigMap*);
       PosLen(const PosLen&);
       void dump(int n = 0) const;
 

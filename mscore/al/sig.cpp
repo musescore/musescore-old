@@ -83,10 +83,10 @@ bool SigEvent::operator==(const SigEvent& e) const
       }
 
 //---------------------------------------------------------
-//   SigList
+//   TimeSigMap
 //---------------------------------------------------------
 
-SigList::SigList()
+TimeSigMap::TimeSigMap()
       {
       _serial = 0;
       }
@@ -95,7 +95,7 @@ SigList::SigList()
 //   add
 //---------------------------------------------------------
 
-void SigList::add(int tick, int z, int n)
+void TimeSigMap::add(int tick, int z, int n)
       {
       if (z == 0 || n == 0) {
             printf("illegal signature %d/%d\n", z, n);
@@ -104,7 +104,7 @@ void SigList::add(int tick, int z, int n)
       normalize();
       }
 
-void SigList::add(int tick, int z, int n, int z2, int n2)
+void TimeSigMap::add(int tick, int z, int n, int z2, int n2)
       {
       if (z == 0 || n == 0 || z2 == 0 || n2 == 0) {
             printf("illegal signature %d/%d\n", z, n);
@@ -113,13 +113,13 @@ void SigList::add(int tick, int z, int n, int z2, int n2)
       normalize();
       }
 
-void SigList::add(int tick, const SigEvent& ev)
+void TimeSigMap::add(int tick, const SigEvent& ev)
       {
       (*this)[tick] = ev;
       normalize();
       }
 
-void SigList::add(int tick, int ticks, int z2, int n2)
+void TimeSigMap::add(int tick, int ticks, int z2, int n2)
       {
       if (z2 == 0 || n2 == 0) {
             printf("illegal signature %d/%d\n", z2, n2);
@@ -138,7 +138,7 @@ void SigList::add(int tick, int ticks, int z2, int n2)
             n = 16;
             }
       else {
-            printf("SigList::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
+            printf("TimeSigMap::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
                tick, ticks, z2, n2);
             if (debugMsg)
                   abort();
@@ -152,17 +152,17 @@ void SigList::add(int tick, int ticks, int z2, int n2)
 //   del
 //---------------------------------------------------------
 
-void SigList::del(int tick)
+void TimeSigMap::del(int tick)
       {
       erase(tick);
       normalize();
       }
 
 //---------------------------------------------------------
-//   SigList::normalize
+//   TimeSigMap::normalize
 //---------------------------------------------------------
 
-void SigList::normalize()
+void TimeSigMap::normalize()
       {
       int z    = 4;
       int n    = 4;
@@ -187,11 +187,11 @@ void SigList::normalize()
 //   ticksMeasure
 //---------------------------------------------------------
 
-int SigList::ticksMeasure(int tick) const
+int TimeSigMap::ticksMeasure(int tick) const
       {
       ciSigEvent i = upper_bound(tick);
       if (empty() || i == begin()) {
-            printf("SigList::ticksMeasure(): timesig(%d): not found\n", tick);
+            printf("TimeSigMap::ticksMeasure(): timesig(%d): not found\n", tick);
             if (debugMsg)
                   abort();
             return 4 * AL::division;
@@ -204,7 +204,7 @@ int SigList::ticksMeasure(int tick) const
 //   timesig
 //---------------------------------------------------------
 
-void SigList::timesig(int tick, int& z, int& n) const
+void TimeSigMap::timesig(int tick, int& z, int& n) const
       {
       if (empty()) {
             z = 4;
@@ -218,7 +218,7 @@ void SigList::timesig(int tick, int& z, int& n) const
       n = i->second.denominator;
       }
 
-SigEvent SigList::timesig(int tick) const
+SigEvent TimeSigMap::timesig(int tick) const
       {
       if (empty())
             return SigEvent(4, 4);
@@ -232,7 +232,7 @@ SigEvent SigList::timesig(int tick) const
 //   tickValues
 //---------------------------------------------------------
 
-void SigList::tickValues(int t, int* bar, int* beat, int* tick) const
+void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
       {
       ciSigEvent e = upper_bound(t);
       if (empty() || e == begin()) {
@@ -253,7 +253,7 @@ void SigList::tickValues(int t, int* bar, int* beat, int* tick) const
 //   bar2tick
 //---------------------------------------------------------
 
-int SigList::bar2tick(int bar, int beat, int tick) const
+int TimeSigMap::bar2tick(int bar, int beat, int tick) const
       {
       ciSigEvent e;
 
@@ -262,7 +262,7 @@ int SigList::bar2tick(int bar, int beat, int tick) const
                   break;
             }
       if (empty() || e == begin()) {
-            fprintf(stderr, "SigList::bar2tick(): not found(%d,%d,%d) not found\n",
+            fprintf(stderr, "TimeSigMap::bar2tick(): not found(%d,%d,%d) not found\n",
                bar, beat, tick);
             if (empty())
                   fprintf(stderr, "   list is empty\n");
@@ -276,10 +276,10 @@ int SigList::bar2tick(int bar, int beat, int tick) const
       }
 
 //---------------------------------------------------------
-//   SigList::write
+//   TimeSigMap::write
 //---------------------------------------------------------
 
-void SigList::write(Xml& xml) const
+void TimeSigMap::write(Xml& xml) const
       {
       xml.stag("siglist");
       for (ciSigEvent i = begin(); i != end(); ++i)
@@ -288,10 +288,10 @@ void SigList::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   SigList::read
+//   TimeSigMap::read
 //---------------------------------------------------------
 
-void SigList::read(QDomElement e, int fileDivision)
+void TimeSigMap::read(QDomElement e, int fileDivision)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -360,9 +360,9 @@ int SigEvent::read(QDomElement e, int fileDivision)
 //   remove
 //---------------------------------------------------------
 
-void SigList::removeTime(int tick, int len)
+void TimeSigMap::removeTime(int tick, int len)
       {
-      SigList tmp;
+      TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
             if (i->first >= tick) {
                   if (i->first >= tick + len)
@@ -382,9 +382,9 @@ void SigList::removeTime(int tick, int len)
 //   insert
 //---------------------------------------------------------
 
-void SigList::insertTime(int tick, int len)
+void TimeSigMap::insertTime(int tick, int len)
       {
-      SigList tmp;
+      TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
             if (i->first >= tick)
                   tmp.add(i->first + len, i->second);
@@ -400,13 +400,13 @@ void SigList::insertTime(int tick, int len)
 //   raster
 //---------------------------------------------------------
 
-unsigned SigList::raster(unsigned t, int raster) const
+unsigned TimeSigMap::raster(unsigned t, int raster) const
       {
       if (raster == 1)
             return t;
       ciSigEvent e = upper_bound(t);
       if (e == end()) {
-            printf("SigList::raster(%x,)\n", t);
+            printf("TimeSigMap::raster(%x,)\n", t);
             // abort();
             return t;
             }
@@ -424,7 +424,7 @@ unsigned SigList::raster(unsigned t, int raster) const
 //    round down
 //---------------------------------------------------------
 
-unsigned SigList::raster1(unsigned t, int raster) const
+unsigned TimeSigMap::raster1(unsigned t, int raster) const
       {
       if (raster == 1)
             return t;
@@ -444,7 +444,7 @@ unsigned SigList::raster1(unsigned t, int raster) const
 //    round up
 //---------------------------------------------------------
 
-unsigned SigList::raster2(unsigned t, int raster) const
+unsigned TimeSigMap::raster2(unsigned t, int raster) const
       {
       if (raster == 1)
             return t;
@@ -463,7 +463,7 @@ unsigned SigList::raster2(unsigned t, int raster) const
 //   rasterStep
 //---------------------------------------------------------
 
-int SigList::rasterStep(unsigned t, int raster) const
+int TimeSigMap::rasterStep(unsigned t, int raster) const
       {
       if (raster == 0) {
             ciSigEvent e = upper_bound(t);

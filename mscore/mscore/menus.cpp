@@ -1108,7 +1108,7 @@ void Score::addTempo()
       int rv = editTempo->exec();
       if (rv == 1) {
             double bps = editTempo->bpm() / 60.0;
-            tempomap->addTempo(tick, bps);
+            _tempomap->addTempo(tick, bps);
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
             tt->setTrack(cr->track());

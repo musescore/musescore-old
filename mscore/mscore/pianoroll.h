@@ -23,6 +23,9 @@
 
 class Staff;
 class PianoView;
+
+#include "al/pos.h"
+
 namespace Awl {
       class PitchEdit;
       };
@@ -38,6 +41,7 @@ class PianorollEditor : public QDialog {
       Staff* staff;
       Awl::PitchEdit* pitch;
       QSpinBox* velocity;
+      AL::Pos locator[3];
 
    private slots:
       void selectionChanged();

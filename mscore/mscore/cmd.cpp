@@ -403,8 +403,8 @@ void Score::cmdRemove(Element* e)
             case TEMPO_TEXT:
                   {
                   int tick = e->tick();
-                  AL::iTEvent i = tempomap->find(tick);
-                  if (i != tempomap->end())
+                  AL::iTEvent i = _tempomap->find(tick);
+                  if (i != _tempomap->end())
                         undoChangeTempo(tick, i->second, AL::TEvent());
                   else
                         printf("remove tempotext: tempo event at %d not found\n", tick);
@@ -827,7 +827,7 @@ printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
             Fraction td;
             if (cr->duration().type() == Duration::V_MEASURE) {
                   int z, n;
-                  sigmap->timesig(cr->tick(), z, n);
+                  _sigmap->timesig(cr->tick(), z, n);
                   td = Fraction(z, n);
                   }
             else
@@ -1357,7 +1357,7 @@ MeasureBase* Score::appendMeasure(int type)
             mb = new VBox(this);
       mb->setTick(tick);
       if(!last)
-        sigmap->add(tick, 4, 4);
+        _sigmap->add(tick, 4, 4);
 
       if (type == MEASURE) {
             Measure* measure = (Measure*)mb;
@@ -1448,7 +1448,7 @@ void Score::insertMeasures(int n, int type)
             }
 
 	int tick  = selection()->startSegment()->tick();
-	int ticks = sigmap->ticksMeasure(tick);
+	int ticks = _sigmap->ticksMeasure(tick);
 
 	for (int ino = 0; ino < n; ++ino) {
 		MeasureBase* m = 0;
@@ -1472,7 +1472,7 @@ void Score::insertMeasures(int n, int type)
 	      undoInsertMeasure(m);
             if (type == MEASURE) {
                   if (tick == 0) {
-                        AL::SigEvent e1 = sigmap->timesig(tick);
+                        AL::SigEvent e1 = _sigmap->timesig(tick);
                         undoChangeSig(0, e1, AL::SigEvent());
                         undoSigInsertTime(tick, ticks);
                         undoChangeSig(tick, AL::SigEvent(), e1);

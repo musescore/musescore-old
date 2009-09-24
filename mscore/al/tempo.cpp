@@ -25,10 +25,10 @@
 namespace AL {
 
 //---------------------------------------------------------
-//   TempoList
+//   TempoMap
 //---------------------------------------------------------
 
-TempoList::TempoList()
+TempoMap::TempoMap()
       {
       _tempo    = 2.0;
       _tempoSN  = 1;
@@ -40,7 +40,7 @@ TempoList::TempoList()
 //   add
 //---------------------------------------------------------
 
-void TempoList::add(int tick, double tempo)
+void TempoMap::add(int tick, double tempo)
       {
       iTEvent e = find(tick);
       if (e != end())
@@ -50,17 +50,17 @@ void TempoList::add(int tick, double tempo)
       normalize();
       }
 
-void TempoList::add(int tick, const TEvent& ev)
+void TempoMap::add(int tick, const TEvent& ev)
       {
       (*this)[tick] = ev;
       normalize();
       }
 
 //---------------------------------------------------------
-//   TempoList::normalize
+//   TempoMap::normalize
 //---------------------------------------------------------
 
-void TempoList::normalize()
+void TempoMap::normalize()
       {
       double time  = 0;
       int tick     = 0;
@@ -75,12 +75,12 @@ void TempoList::normalize()
       }
 
 //---------------------------------------------------------
-//   TempoList::dump
+//   TempoMap::dump
 //---------------------------------------------------------
 
-void TempoList::dump() const
+void TempoMap::dump() const
       {
-      printf("\nTempoList:\n");
+      printf("\nTempoMap:\n");
       for (ciTEvent i = begin(); i != end(); ++i)
             printf("%6d tempo: %f time: %f\n",
                i->first, i->second.tempo, i->second.time);
@@ -90,7 +90,7 @@ void TempoList::dump() const
 //   clear
 //---------------------------------------------------------
 
-void TempoList::clear()
+void TempoMap::clear()
       {
       std::map<int,TEvent>::clear();
       ++_tempoSN;
@@ -100,7 +100,7 @@ void TempoList::clear()
 //   tempo
 //---------------------------------------------------------
 
-double TempoList::tempo(int tick) const
+double TempoMap::tempo(int tick) const
       {
       if (!useList)
             return _tempo;
@@ -123,17 +123,17 @@ double TempoList::tempo(int tick) const
 //   del
 //---------------------------------------------------------
 
-void TempoList::del(int tick)
+void TempoMap::del(int tick)
       {
       iTEvent e = find(tick);
       if (e == end()) {
-            printf("TempoList::del event at (%d): not found\n", tick);
+            printf("TempoMap::del event at (%d): not found\n", tick);
             return;
             }
       del(e);
       }
 
-void TempoList::del(iTEvent e)
+void TempoMap::del(iTEvent e)
       {
       erase(e);
       normalize();
@@ -144,7 +144,7 @@ void TempoList::del(iTEvent e)
 //   change
 //---------------------------------------------------------
 
-void TempoList::change(int tick, double newTempo)
+void TempoMap::change(int tick, double newTempo)
       {
       iTEvent e = find(tick);
       e->second.tempo = newTempo;
@@ -158,7 +158,7 @@ void TempoList::change(int tick, double newTempo)
 //    & slave mode tempo changes
 //---------------------------------------------------------
 
-void TempoList::setTempo(int tick, double newTempo)
+void TempoMap::setTempo(int tick, double newTempo)
       {
       if (useList)
             add(tick, newTempo);
@@ -171,7 +171,7 @@ void TempoList::setTempo(int tick, double newTempo)
 //   setRelTempo
 //---------------------------------------------------------
 
-void TempoList::setRelTempo(int val)
+void TempoMap::setRelTempo(int val)
       {
       _relTempo = val;
       ++_tempoSN;
@@ -182,13 +182,13 @@ void TempoList::setRelTempo(int val)
 //   addTempo
 //---------------------------------------------------------
 
-void TempoList::addTempo(int t, double tempo)
+void TempoMap::addTempo(int t, double tempo)
       {
       add(t, tempo);
       ++_tempoSN;
       }
 
-void TempoList::addTempo(int tick, const TEvent& ev)
+void TempoMap::addTempo(int tick, const TEvent& ev)
       {
       add(tick, ev);
       ++_tempoSN;
@@ -198,7 +198,7 @@ void TempoList::addTempo(int tick, const TEvent& ev)
 //   delTempo
 //---------------------------------------------------------
 
-void TempoList::delTempo(int tick)
+void TempoMap::delTempo(int tick)
       {
       del(tick);
       ++_tempoSN;
@@ -208,7 +208,7 @@ void TempoList::delTempo(int tick)
 //   changeTempo
 //---------------------------------------------------------
 
-void TempoList::changeTempo(int tick, double newTempo)
+void TempoMap::changeTempo(int tick, double newTempo)
       {
       change(tick, newTempo);
       ++_tempoSN;
@@ -218,7 +218,7 @@ void TempoList::changeTempo(int tick, double newTempo)
 //   setMasterFlag
 //---------------------------------------------------------
 
-bool TempoList::setMasterFlag(int /*tick*/, bool val)
+bool TempoMap::setMasterFlag(int /*tick*/, bool val)
       {
       if (useList != val) {
             useList = val;
@@ -232,7 +232,7 @@ bool TempoList::setMasterFlag(int /*tick*/, bool val)
 //   tick2time
 //---------------------------------------------------------
 
-double TempoList::tick2time(int tick, double time, int* sn) const
+double TempoMap::tick2time(int tick, double time, int* sn) const
       {
       return (*sn == _tempoSN) ? time : tick2time(tick, sn);
       }
@@ -242,7 +242,7 @@ double TempoList::tick2time(int tick, double time, int* sn) const
 //    return cached value t if list did not change
 //---------------------------------------------------------
 
-int TempoList::time2tick(double time, int t, int* sn) const
+int TempoMap::time2tick(double time, int t, int* sn) const
       {
       return (*sn == _tempoSN) ? t : time2tick(time, sn);
       }
@@ -251,7 +251,7 @@ int TempoList::time2tick(double time, int t, int* sn) const
 //   tick2time
 //---------------------------------------------------------
 
-double TempoList::tick2time(int tick, int* sn) const
+double TempoMap::tick2time(int tick, int* sn) const
       {
       double time  = 0.0;
       double delta = double(tick);
@@ -295,7 +295,7 @@ double TempoList::tick2time(int tick, int* sn) const
 //   time2tick
 //---------------------------------------------------------
 
-int TempoList::time2tick(double time, int* sn) const
+int TempoMap::time2tick(double time, int* sn) const
       {
       int tick     = 0;
       double delta = time;
@@ -320,10 +320,10 @@ int TempoList::time2tick(double time, int* sn) const
       }
 
 //---------------------------------------------------------
-//   TempoList::write
+//   TempoMap::write
 //---------------------------------------------------------
 
-void TempoList::write(Xml& xml) const
+void TempoMap::write(Xml& xml) const
       {
       xml.stag(QString("tempolist fix=\"%1\"").arg(_tempo));
       if (_relTempo != 100)
@@ -334,10 +334,10 @@ void TempoList::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   TempoList::read
+//   TempoMap::read
 //---------------------------------------------------------
 
-void TempoList::read(QDomElement e, int sourceDivision)
+void TempoMap::read(QDomElement e, int sourceDivision)
       {
       _tempo = e.attribute("fix","2.0").toDouble();
 
@@ -384,9 +384,9 @@ int TEvent::read(QDomElement e)
 //   remove
 //---------------------------------------------------------
 
-void TempoList::removeTime(int tick, int len)
+void TempoMap::removeTime(int tick, int len)
       {
-      TempoList tmp;
+      TempoMap tmp;
       for (ciTEvent i = begin(); i != end(); ++i) {
             if ((i->first >= tick) && (tick != 0)) {
                   if (i->first >= tick + len)
@@ -407,9 +407,9 @@ void TempoList::removeTime(int tick, int len)
 //   insert
 //---------------------------------------------------------
 
-void TempoList::insertTime(int tick, int len)
+void TempoMap::insertTime(int tick, int len)
       {
-      TempoList tmp;
+      TempoMap tmp;
       for (ciTEvent i = begin(); i != end(); ++i) {
             if ((i->first >= tick) && (tick != 0))
                   tmp.add(i->first + len, i->second);

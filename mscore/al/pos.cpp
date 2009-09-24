@@ -30,7 +30,18 @@ namespace AL {
 //   Pos
 //---------------------------------------------------------
 
-Pos::Pos(TempoList* tl, SigList* sl)
+Pos::Pos()
+      {
+      tempo  = 0;
+      sig    = 0;
+      _type  = TICKS;
+      _tick  = 0;
+      _frame = 0;
+      sn     = -1;
+      _valid = false;
+      }
+
+Pos::Pos(TempoMap* tl, TimeSigMap* sl)
       {
       tempo  = tl;
       sig    = sl;
@@ -38,9 +49,10 @@ Pos::Pos(TempoList* tl, SigList* sl)
       _tick   = 0;
       _frame  = 0;
       sn      = -1;
+      _valid  = false;
       }
 
-Pos::Pos(TempoList* tl, SigList* sl, unsigned t, TType timeType)
+Pos::Pos(TempoMap* tl, TimeSigMap* sl, unsigned t, TType timeType)
       {
       tempo  = tl;
       sig    = sl;
@@ -50,9 +62,10 @@ Pos::Pos(TempoList* tl, SigList* sl, unsigned t, TType timeType)
       else
             _frame = t;
       sn = -1;
+      _valid = true;
       }
 
-Pos::Pos(TempoList* tl, SigList* sl, const QString& s)
+Pos::Pos(TempoMap* tl, TimeSigMap* sl, const QString& s)
       {
       tempo  = tl;
       sig    = sl;
@@ -61,18 +74,20 @@ Pos::Pos(TempoList* tl, SigList* sl, const QString& s)
       _tick = sig->bar2tick(m, b, t);
       _type = TICKS;
       sn    = -1;
+      _valid = true;
       }
 
-Pos::Pos(TempoList* tl, SigList* sl, int measure, int beat, int tick)
+Pos::Pos(TempoMap* tl, TimeSigMap* sl, int measure, int beat, int tick)
       {
       tempo  = tl;
       sig    = sl;
       _tick  = sig->bar2tick(measure, beat, tick);
       _type  = TICKS;
       sn     = -1;
+      _valid = true;
       }
 
-Pos::Pos(TempoList* tl, SigList* sl, int min, int sec, int frame, int subframe)
+Pos::Pos(TempoMap* tl, TimeSigMap* sl, int min, int sec, int frame, int subframe)
       {
       tempo  = tl;
       sig    = sl;
@@ -96,6 +111,7 @@ Pos::Pos(TempoList* tl, SigList* sl, int min, int sec, int frame, int subframe)
       _type  = FRAMES;
       _frame = lrint(time * sampleRate);
       sn     = -1;
+      _valid = true;
       }
 
 //---------------------------------------------------------
@@ -278,6 +294,7 @@ void Pos::setTick(unsigned pos)
       sn    = -1;
       if (_type == FRAMES)
             _frame = tempo->tick2time(pos, &sn) * sampleRate;
+      _valid = true;
       }
 
 //---------------------------------------------------------
@@ -290,8 +307,8 @@ void Pos::setFrame(unsigned pos)
       sn     = -1;
       if (_type == TICKS)
             _tick = tempo->time2tick(pos/sampleRate, &sn);
+      _valid = true;
       }
-
 
 //---------------------------------------------------------
 //   write
@@ -332,7 +349,7 @@ void Pos::read(QDomNode node)
 //   PosLen
 //---------------------------------------------------------
 
-PosLen::PosLen(TempoList* tl, SigList* sl)
+PosLen::PosLen(TempoMap* tl, TimeSigMap* sl)
    : Pos(tl, sl)
       {
       _lenTick  = 0;
@@ -529,32 +546,6 @@ void Pos::mbt(int* bar, int* beat, int* tk) const
 
 void Pos::msf(int* min, int* sec, int* fr, int* subFrame) const
       {
-#if 0
-      //double has been replaced by float because it prevents (mysteriously)
-      //from a segfault that occurs at the launching of muse
-      /*double*/ float time = double(frame()) / double(sampleRate);
-      *min  = int(time) / 60;
-      *sec  = int(time) % 60;
-      //double has been replaced by float because it prevents (mysteriously)
-      //from a segfault that occurs at the launching of muse
-      /*double*/ float rest = time - (*min * 60 + *sec);
-      switch(mtcType) {
-            case 0:     // 24 frames sec
-                  rest *= 24;
-                  break;
-            case 1:     // 25
-                  rest *= 25;
-                  break;
-            case 2:     // 30 drop frame
-                  rest *= 30;
-                  break;
-            case 3:     // 30 non drop frame
-                  rest *= 30;
-                  break;
-            }
-      *fr = int(rest);
-      *subFrame = int((rest- *fr)*100);
-#else
       // for further testing:
 
       double time = double(frame()) / double(sampleRate);
@@ -577,7 +568,6 @@ void Pos::msf(int* min, int* sec, int* fr, int* subFrame) const
             }
       *fr       = lrint(rest);
       *subFrame = lrint((rest - (*fr)) * 100.0);
-#endif
       }
 
 //---------------------------------------------------------

@@ -111,7 +111,7 @@ void ExportMidi::writeHeader()
       //    write time signature
       //--------------------------------------------
 
-      AL::SigList* sigmap = cs->sigmap;
+      AL::TimeSigMap* sigmap = cs->sigmap();
       for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
             AL::SigEvent se   = is->second;
             unsigned char* data = new unsigned char[4];
@@ -169,7 +169,7 @@ void ExportMidi::writeHeader()
       //    write tempo changes
       //--------------------------------------------
 
-      AL::TempoList* tempomap = cs->tempomap;
+      AL::TempoMap* tempomap = cs->tempomap();
       for (AL::iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
             Event* ev = new Event(ME_META);
             ev->setOntime(it->first);

@@ -27,7 +27,7 @@ namespace Awl {
 //   PosLabel
 //---------------------------------------------------------
 
-PosLabel::PosLabel(AL::TempoList* tl, AL::SigList* sl, QWidget* parent)
+PosLabel::PosLabel(AL::TempoMap* tl, AL::TimeSigMap* sl, QWidget* parent)
    : 	QLabel(parent), pos(tl, sl)
       {
       _smpte = false;
@@ -80,21 +80,10 @@ void PosLabel::updateValue()
 //   setValue
 //---------------------------------------------------------
 
-void PosLabel::setValue(const AL::Pos& val, bool enable)
+void PosLabel::setValue(const AL::Pos& val)
       {
-      setEnabled(enable);
       pos = val;
-      updateValue();
-      }
-
-void PosLabel::setValue(int val)
-      {
-      if (val < 0) {
-            setEnabled(false);
-            return;
-            }
-      setEnabled(true);
-      pos.setTick(unsigned(val));
+      setEnabled(pos.valid());
       updateValue();
       }
 

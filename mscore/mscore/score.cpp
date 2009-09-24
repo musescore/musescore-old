@@ -284,9 +284,9 @@ Score::Score(const Style& s)
       rights          = 0;
       rights          = 0;
       _pageOffset     = 0;
-      tempomap        = new AL::TempoList;
-      sigmap          = new AL::SigList;
-      sigmap->add(0, 4, 4);
+      _tempomap        = new AL::TempoMap;
+      _sigmap          = new AL::TimeSigMap;
+      _sigmap->add(0, 4, 4);
       _state          = STATE_NORMAL;
       _prevState      = STATE_NORMAL;
       origEditObject  = 0;
@@ -304,8 +304,8 @@ Score::~Score()
       delete _pageFormat;
       delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
-      delete tempomap;
-      delete sigmap;
+      delete _tempomap;
+      delete _sigmap;
       delete _selection;
       delete _repeatList;
       }
@@ -480,8 +480,8 @@ void Score::write(Xml& xml, bool autosave)
       if (!_source.isEmpty())
             xml.tag("source", _source);
 
-      sigmap->write(xml);
-      tempomap->write(xml);
+      _sigmap->write(xml);
+      _tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
       foreach(const Excerpt* excerpt, _excerpts)
@@ -504,7 +504,7 @@ void Score::write(Xml& xml, bool autosave)
                   if (m->type() == MEASURE || staffIdx == 0)
                         m->write(xml, staffIdx, staffIdx == 0);
                   if (m->type() == MEASURE)
-                        xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
+                        xml.curTick = m->tick() + _sigmap->ticksMeasure(m->tick());
                   }
             xml.etag();
             }
@@ -557,7 +557,7 @@ void Score::insertTime(int tick, int len)
             // remove time
             //
             len = -len;
-            tempomap->removeTime(tick, len);
+            _tempomap->removeTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clefList()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
@@ -585,7 +585,7 @@ void Score::insertTime(int tick, int len)
             //
             // insert time
             //
-            tempomap->insertTime(tick, len);
+            _tempomap->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clefList()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
@@ -641,7 +641,7 @@ void Score::fixTicks()
                   ++number;
             int mtick = m->tick();
             int diff  = tick - mtick;
-            int measureTicks = sigmap->ticksMeasure(tick);
+            int measureTicks = _sigmap->ticksMeasure(tick);
 // printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, measureTicks);
             tick += measureTicks;
             m->moveTicks(diff);
@@ -1984,7 +1984,7 @@ Measure* Score::getCreateMeasure(int tick)
       while (tick >= lastTick) {
             Measure* m = new Measure(this);
             m->setTick(lastTick);
-            int ticks = sigmap->ticksMeasure(lastTick);
+            int ticks = _sigmap->ticksMeasure(lastTick);
             add(m);
             lastTick += ticks;
             }
