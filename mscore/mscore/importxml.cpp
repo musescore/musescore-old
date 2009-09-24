@@ -925,6 +925,8 @@ void MusicXml::xmlPart(QDomElement e, QString id)
 Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       {
       int staves = score->nstaves();
+      int staff = score->staffIdx(part);
+      
       if (staves == 0) {
             printf("no staves!\n");
             return 0;
@@ -953,7 +955,13 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure->setTick(tick);
             measure->setNo(number);
             score->measures()->add(measure);
+      }else{
+            int pstaves = part->nstaves();
+            for (int i = 0; i < pstaves; ++i) {  
+                Staff* reals = score->staff(staff+i);        
+                measure->mstaff(staff+i)->lines->setLines(reals->lines());
             }
+      }
 
       // initialize voice list
       // for (int i = 0; i < part->nstaves(); ++i) {
@@ -968,7 +976,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       if (implicit == "yes")
             measure->setIrregular(true);
 
-      int staff = score->staffIdx(part);
+      
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "attributes")
                   xmlAttributes(measure, staff, e.firstChildElement());
@@ -1815,8 +1823,30 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               (*score->staff(staff+i)->keymap())[tick] = key;
                         }
                   }
-            else if (e.tagName() == "staff-details")
-                  domNotImplemented(e);
+            else if (e.tagName() == "staff-details"){
+                  int number  = e.attribute(QString("number"), "-1").toInt();
+                  int staffIdx = staff;
+                  if (number != -1)
+                        staffIdx += number - 1;
+                  int stafflines = 5;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "staff-lines")
+                              stafflines = ee.text().toInt();
+                        else 
+                              domNotImplemented(ee);
+                  }
+                        
+                  if (number == -1){
+                      int staves = score->part(staff)->nstaves();
+                      for (int i = 0; i < staves; ++i) {
+                            score->staff(staffIdx+i)->setLines(stafflines);
+                            measure->mstaff(staffIdx+i)->lines->setLines(stafflines);
+                      }
+                  }else{
+                      score->staff(staffIdx)->setLines(stafflines);
+                      measure->mstaff(staffIdx)->lines->setLines(stafflines);
+                  }
+            }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose")

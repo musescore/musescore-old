@@ -1,3 +1,5 @@
+24.sep (la)
+      - add support for staff line count in MusicXML import & export
 23.sep (ws)
       -
       - created new "audio library" al subdirectory
