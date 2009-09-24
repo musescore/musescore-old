@@ -552,7 +552,7 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
             case TEMPO_TEXT:
                   {
                   TempoText* tt = static_cast<TempoText*>(e);
-                  score()->tempomap->addTempo(tick(), tt->tempo());
+                  score()->tempomap()->addTempo(tick(), tt->tempo());
                   tt->setTick(tick());
                   tt->setTrack(0);
                   tt->setParent(m);

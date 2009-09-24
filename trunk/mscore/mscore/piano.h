@@ -46,12 +46,19 @@ class Piano : public QWidget {
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
+      virtual void mouseMoveEvent(QMouseEvent* event);
+      virtual void leaveEvent(QEvent*);
 
       int pitch2y(int pitch) const;
+      int y2pitch(int y) const;
+
+   signals:
+      void pitchChanged(int);
 
    public slots:
       void setYpos(int val);
       void setMag(double, double);
+      void setPitch(int);
 
    public:
       Piano(QWidget* parent = 0);

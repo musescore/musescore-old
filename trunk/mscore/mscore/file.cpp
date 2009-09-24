@@ -647,10 +647,10 @@ void MuseScore::newFile()
       if (lastMeasure && (lastMeasure->endBarLineType() == NORMAL_BAR))
             lastMeasure->setEndBarLineType(END_BAR, false);
 
-      AL::SigList* sigmap = score->getSigmap();
+      AL::TimeSigMap* sigmap = score->sigmap();
       if (pickupMeasure) {
             sigmap->add(0, AL::SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
-            int tick = score->getSigmap()->ticksMeasure(0);
+            int tick = score->sigmap()->ticksMeasure(0);
             sigmap->add(tick, AL::SigEvent(timesigZ, timesigN));
             score->firstMeasure()->setIrregular(true);
             }
@@ -1198,9 +1198,9 @@ bool Score::read(QDomElement e)
                   if (tag == "Staff")
                         readStaff(ee);
                   else if (tag == "siglist")
-                        sigmap->read(ee, _fileDivision);
+                        _sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")
-                        tempomap->read(ee, _fileDivision);
+                        _tempomap->read(ee, _fileDivision);
                   else if (tag == "Mag") {
                         _mag = val.toDouble();
                         _magIdx = MAG_FREE;

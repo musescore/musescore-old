@@ -810,7 +810,7 @@ static void best_key_analysis()
 //   findKey
 //---------------------------------------------------------
 
-int findKey(MidiTrack* mt, AL::SigList* sigmap)
+int findKey(MidiTrack* mt, AL::TimeSigMap* sigmap)
       {
       int tpc_found, npc_found;
 

@@ -58,7 +58,7 @@ void TempoText::read(QDomElement e)
             if (tag == "tempo"){
                   double tpo = e.text().toDouble();
                   setTempo(tpo);
-                  AL::TempoList* tl   = score()->tempomap;
+                  AL::TempoMap* tl   = score()->tempomap();
                   if(tl)
                     tl->addTempo(tick(), tpo);
             }
@@ -118,7 +118,7 @@ void TempoProperties::saveValues()
       if (newTempo == tempoText->tempo())
             return;
       int tick        = tempoText->tick();
-      AL::TempoList* tl   = score->tempomap;
+      AL::TempoMap* tl   = score->tempomap();
 
       AL::iTEvent o = tl->find(tick);
       if (o == tl->end()) {

@@ -764,18 +764,18 @@ QFont Capella::readFont()
       int index = readUnsigned();
       if (index == 0) {
             int lfHeight           = readLong();
-            int lfWidth            = readLong();
-            int lfEscapement       = readLong();
-            int lfOrientation      = readLong();
+            /*int lfWidth            =*/ readLong();
+            /*int lfEscapement       =*/ readLong();
+            /*int lfOrientation      =*/ readLong();
             int lfWeight           = readLong();
             uchar lfItalic         = readByte();
             uchar lfUnderline      = readByte();
             uchar lfStrikeOut      = readByte();
-            uchar lfCharSet        = readByte();
-            uchar lfOutPrecision   = readByte();
-            uchar lfClipPrecision  = readByte();
-            uchar lfQuality        = readByte();
-            uchar lfPitchAndFamily = readByte();
+            /*uchar lfCharSet        =*/ readByte();
+            /*uchar lfOutPrecision   =*/ readByte();
+            /*uchar lfClipPrecision  =*/ readByte();
+            /*uchar lfQuality        =*/ readByte();
+            /*uchar lfPitchAndFamily =*/ readByte();
             QColor color           = readColor();
             char* face             = readString();
 
@@ -1481,10 +1481,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         CapMeter* o = static_cast<CapMeter*>(no);
                         if (o->log2Denom > 7)
                               break;
-                        AL::SigEvent se = sigmap->timesig(tick);
+                        AL::SigEvent se = sigmap()->timesig(tick);
                         AL::SigEvent ne(o->numerator, 1 << o->log2Denom);
                         if (!(se == ne))
-                              sigmap->add(tick, ne);
+                              sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
                         ts->setSig(1 << o->log2Denom, o->numerator);
                         ts->setTick(tick);
@@ -1599,7 +1599,7 @@ void Score::convertCapella(Capella* cap)
       int staves   = cap->systems[0]->staves.size();
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
-            sigmap->add(0, cs->numerator, 1 << cs->log2Denom);
+            sigmap()->add(0, cs->numerator, 1 << cs->log2Denom);
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {

@@ -23,14 +23,91 @@
 
 static const int MAP_OFFSET = 2;
 
+QPixmap* Ruler::markIcon[3];
+
+static const char* rmark_xpm[]={
+      "18 18 2 1",
+      "# c #0000ff",
+      ". c None",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "........##########",
+      "........#########.",
+      "........########..",
+      "........#######...",
+      "........######....",
+      "........#####.....",
+      "........####......",
+      "........###.......",
+      "........##........",
+      "........##........",
+      "........##........"};
+static const char* lmark_xpm[]={
+      "18 18 2 1",
+      "# c #0000ff",
+      ". c None",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "##########........",
+      ".#########........",
+      "..########........",
+      "...#######........",
+      "....######........",
+      ".....#####........",
+      "......####........",
+      ".......###........",
+      "........##........",
+      "........##........",
+      "........##........"};
+static const char* cmark_xpm[]={
+      "18 18 2 1",
+      "# c #ff0000",
+      ". c None",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "..................",
+      "##################",
+      ".################.",
+      "..##############..",
+      "...############...",
+      "....##########....",
+      ".....########.....",
+      "......######......",
+      ".......####.......",
+      "........##........",
+      "........##........",
+      "........##........"};
+
+
 //---------------------------------------------------------
 //   Ruler
 //---------------------------------------------------------
 
-Ruler::Ruler(Score* s, QWidget* parent)
-   : QWidget(parent), _score(s), _cursor(s->getTempomap(), s->getSigmap(), 480*3)
+Ruler::Ruler(Score* s, AL::Pos* lc, QWidget* parent)
+   : QWidget(parent), _score(s),
+     _cursor(s->tempomap(), s->sigmap()),
+     _locator(lc)
       {
-      _showCursor = false;
+      if (markIcon[0] == 0) {
+            markIcon[0] = new QPixmap(cmark_xpm);
+            markIcon[1] = new QPixmap(lmark_xpm);
+            markIcon[2] = new QPixmap(rmark_xpm);
+            }
+      setMouseTracking(true);
       magStep = 0;
       _xpos = 0;
       _xmag = 0.1;
@@ -86,7 +163,7 @@ AL::Pos Ruler::pix2pos(int x) const
       int val = lrint((x + _xpos - MAP_OFFSET)/_xmag - 480);
       if (val < 0)
             val = 0;
-      return AL::Pos(_score->getTempomap(), _score->getSigmap(), val, _timeType);
+      return AL::Pos(_score->tempomap(), _score->sigmap(), val, _timeType);
       }
 
 //---------------------------------------------------------
@@ -146,7 +223,7 @@ void Ruler::paintEvent(QPaintEvent* e)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-            AL::Pos stick(_score->getTempomap(), _score->getSigmap(), bar, 0, 0);
+            AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep) {
                   p.setFont(_font2);
                   int x = pos2pix(stick);
@@ -165,7 +242,7 @@ void Ruler::paintEvent(QPaintEvent* e)
                   AL::SigEvent sig = stick.timesig();
                   int z = sig.nominator;
                   for (int beat = 0; beat < z; beat++) {
-                        AL::Pos xx(_score->getTempomap(), _score->getSigmap(), bar, beat, 0);
+                        AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);
                         if (xp < 0)
                               continue;
@@ -202,10 +279,23 @@ void Ruler::paintEvent(QPaintEvent* e)
       //  draw mouse cursor marker
       //
       p.setPen(Qt::black);
-      if (_showCursor) {
+      if (_cursor.valid()) {
             int xp = pos2pix(_cursor);
             if (xp >= x && xp < x+w)
                   p.drawLine(xp, 0, xp, rulerHeight-1);
+            }
+      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
+      for (int i = 0; i < 3; ++i) {
+            if (!_locator[i].valid())
+                  continue;
+            p.setPen(lcColors[i]);
+            int xp      = pos2pix(_locator[i]);
+            QPixmap* pm = markIcon[i];
+            int pw = (pm->width() + 1) / 2;
+            int x1 = x - pw;
+            int x2 = x + w + pw;
+            if (xp >= x1 && xp < x2)
+                  p.drawPixmap(xp - pw, y-2, *pm);
             }
       }
 
@@ -213,8 +303,23 @@ void Ruler::paintEvent(QPaintEvent* e)
 //   mousePressEvent
 //---------------------------------------------------------
 
-void Ruler::mousePressEvent(QMouseEvent*)
+void Ruler::mousePressEvent(QMouseEvent* e)
       {
+      if (e->buttons() & Qt::LeftButton) {
+            _locator[0] = pix2pos(e->pos().x());
+            emit locatorMoved(0);
+            update();
+            }
+      else if (e->buttons() & Qt::MidButton) {
+            _locator[1] = pix2pos(e->pos().x());
+            emit locatorMoved(1);
+            update();
+            }
+      else if (e->buttons() & Qt::RightButton) {
+            _locator[2] = pix2pos(e->pos().x());
+            emit locatorMoved(2);
+            update();
+            }
       }
 
 //---------------------------------------------------------
@@ -223,5 +328,53 @@ void Ruler::mousePressEvent(QMouseEvent*)
 
 void Ruler::mouseReleaseEvent(QMouseEvent*)
       {
+      }
+
+//---------------------------------------------------------
+//   mouseMoveEvent
+//---------------------------------------------------------
+
+void Ruler::mouseMoveEvent(QMouseEvent* event)
+      {
+      if (event->buttons() == 0) {
+            _cursor = pix2pos(event->pos().x());
+            emit posChanged(_cursor);
+            }
+      else if (event->buttons() & Qt::LeftButton) {
+            _locator[0] = pix2pos(event->pos().x());
+            emit locatorMoved(0);
+            }
+      else if (event->buttons() & Qt::MidButton) {
+            _locator[1] = pix2pos(event->pos().x());
+            emit locatorMoved(1);
+            }
+      else if (event->buttons() & Qt::RightButton) {
+            _locator[2] = pix2pos(event->pos().x());
+            emit locatorMoved(2);
+            }
+      update();
+      }
+
+//---------------------------------------------------------
+//   leaveEvent
+//---------------------------------------------------------
+
+void Ruler::leaveEvent(QEvent*)
+      {
+      _cursor.setInvalid();
+      emit posChanged(_cursor);
+      update();
+      }
+
+//---------------------------------------------------------
+//   setPos
+//---------------------------------------------------------
+
+void Ruler::setPos(const AL::Pos& pos)
+      {
+      if (_cursor != pos) {
+            _cursor = pos;
+            update();
+            }
       }
 

@@ -390,7 +390,7 @@ void Measure::layoutBeams1(int track)
                         }
                   else if (bm != BEAM_MID) {
                         int z, n;
-                        _score->sigmap->timesig(cr->tick(), z, n);
+                        _score->sigmap()->timesig(cr->tick(), z, n);
                         if (endBeam(z, n, cr, cr->tick() - tick()))
                               beamEnd = true;
                         }
@@ -443,7 +443,7 @@ void Measure::layoutBeams1(int track)
                         a1 = cr;
                   else {
                         int z, n;
-                        _score->sigmap->timesig(cr->tick(), z, n);
+                        _score->sigmap()->timesig(cr->tick(), z, n);
                         if (bm != BEAM_MID
                            &&
                              (endBeam(z, n, cr, cr->tick() - tick())

@@ -24,8 +24,8 @@
 #include "al/pos.h"
 
 namespace AL {
-      class TempoList;
-      class SigList;
+      class TempoMap;
+      class TimeSigMap;
       };
 
 namespace Awl {
@@ -45,11 +45,10 @@ class PosLabel : public QLabel {
       QSize sizeHint() const;
 
    public slots:
-      void setValue(const AL::Pos&, bool);
-      void setValue(int tick);
+      void setValue(const AL::Pos&);
 
    public:
-      PosLabel(AL::TempoList*, AL::SigList*, QWidget* parent = 0);
+      PosLabel(AL::TempoMap*, AL::TimeSigMap*, QWidget* parent = 0);
       AL::Pos value() const { return pos; }
 
       void setSmpte(bool);

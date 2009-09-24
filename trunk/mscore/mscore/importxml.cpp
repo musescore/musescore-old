@@ -1166,7 +1166,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       int measureLen = maxtick - measure->tick();
 
       if (lastMeasureLen != measureLen) {
-            AL::SigList* sigmap = score->sigmap;
+            AL::TimeSigMap* sigmap = score->sigmap();
             int tick        = measure->tick();
             AL::SigEvent se = sigmap->timesig(tick);
 
@@ -1174,7 +1174,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   AL::SigEvent se = sigmap->timesig(tick);
 
 // printf("Add Sig %d  len %d  %d / %d\n", tick, measureLen, z, n);
-                  score->sigmap->add(tick, measureLen, se.nominator2, se.denominator2);
+                  score->sigmap()->add(tick, measureLen, se.nominator2, se.denominator2);
                   int tm = AL::ticks_measure(se.nominator, se.denominator);
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
@@ -1915,7 +1915,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   int n;
                   int z;
                   TimeSig::getSig(st, &n, &z);
-                  score->sigmap->add(tick, z, n);
+                  score->sigmap()->add(tick, z, n);
                   Part* part = score->part(staff);
                   int staves = part->nstaves();
                   for (int i = 0; i < staves; ++i) {

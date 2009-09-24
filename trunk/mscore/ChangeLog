@@ -1,7 +1,9 @@
-24.sep (la)
+24.sep (ws)
+      - fix: drop symbol to palette
+      - more code for pianoroll editor
+      (la)
       - add support for staff line count in MusicXML import & export
 23.sep (ws)
-      -
       - created new "audio library" al subdirectory
       - moved warnPitchRange from style to preferences
 22.sep (ws)

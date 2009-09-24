@@ -24,9 +24,9 @@
 class MidiTrack;
 
 namespace AL {
-      class SigList;
+      class TimeSigMap;
       };
 
-extern int findKey(MidiTrack*, AL::SigList*);
+extern int findKey(MidiTrack*, AL::TimeSigMap*);
 #endif
 

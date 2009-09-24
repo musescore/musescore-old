@@ -220,7 +220,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             }
 
       int oz, on;
-      sigmap->timesig(tick, oz, on);
+      _sigmap->timesig(tick, oz, on);
 
       int z, n;
       TimeSig::getSig(timeSigSubtype, &n, &z);
@@ -259,10 +259,10 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
       AL::SigEvent oSig;
       AL::SigEvent nSig;
-      AL::iSigEvent i = sigmap->find(tick);
-      if (i != sigmap->end()) {
+      AL::iSigEvent i = _sigmap->find(tick);
+      if (i != _sigmap->end()) {
             oSig = i->second;
-            AL::SigEvent e = sigmap->timesig(tick - 1);
+            AL::SigEvent e = _sigmap->timesig(tick - 1);
             if ((tick == 0) || (e.nominator != z) || (e.denominator != n)) {
                   nSig = AL::SigEvent(z, n);
                   }
@@ -293,7 +293,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                   }
             int etick = segment->tick();
             if (etick >= tick) {
-                  AL::iSigEvent i = sigmap->find(segment->tick());
+                  AL::iSigEvent i = _sigmap->find(segment->tick());
                   if ((etick > tick) && (i->second.nominator != z || i->second.denominator != n))
                         break;
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
@@ -318,7 +318,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = static_cast<Measure*>(mb);
-            int newLen = sigmap->ticksMeasure(ctick);
+            int newLen = _sigmap->ticksMeasure(ctick);
             ctick += newLen;
             int oldLen = tickLens[j];
             ++j;
@@ -990,21 +990,21 @@ void Score::cmdRemoveTime(int tick, int len)
             }
 
       //-----------------
-      AL::SigEvent e1 = sigmap->timesig(tick + len);
-      for (AL::ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
+      AL::SigEvent e1 = _sigmap->timesig(tick + len);
+      for (AL::ciSigEvent i = _sigmap->begin(); i != _sigmap->end(); ++i) {
             if (i->first >= tick && (i->first < tick2))
                   undoChangeSig(i->first, i->second, AL::SigEvent());
             }
       undoSigInsertTime(tick, -len);
-      AL::SigEvent e2 = sigmap->timesig(tick);
+      AL::SigEvent e2 = _sigmap->timesig(tick);
       if (!(e1 == e2)) {
-            AL::ciSigEvent i = sigmap->find(tick);
-            if (i == sigmap->end())
+            AL::ciSigEvent i = _sigmap->find(tick);
+            if (i == _sigmap->end())
                   undoChangeSig(tick, AL::SigEvent(), e1);
             }
       //-----------------
 
-      for (AL::ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
+      for (AL::ciTEvent i = _tempomap->begin(); i != _tempomap->end(); ++i) {
             if (i->first >= tick && (i->first < tick2))
                   undoChangeTempo(i->first, i->second, AL::TEvent());
             }
@@ -1334,7 +1334,7 @@ void Score::cmdTuplet(int n, ChordRest* cr, Duration dur)
                         {
                         // HACK: whole measure rest with time signature 6/8
                         int tz, tn;
-                        getSigmap()->timesig(tick, tz, tn);
+                        _sigmap->timesig(tick, tz, tn);
                         int ticks = duration.type() != Duration::V_MEASURE ? cr->ticks() : cr->measure()->tickLen();
                         if (ticks == (3 * AL::division) &&  tz == 6 && tn == 8)
                               tuplet->setRatio(5, 6);

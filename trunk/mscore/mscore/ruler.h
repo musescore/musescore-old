@@ -36,26 +36,36 @@ class Ruler : public QWidget {
 
       Score* _score;
       AL::Pos _cursor;
-      bool _showCursor;
+      AL::Pos* _locator;
+
       int magStep;
       double _xmag;
       int _xpos;
       AL::TType _timeType;
       QFont _font1, _font2;
 
+      static QPixmap* markIcon[3];
+
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
+      virtual void mouseMoveEvent(QMouseEvent* event);
+      virtual void leaveEvent(QEvent*);
 
       AL::Pos pix2pos(int x) const;
       int pos2pix(const AL::Pos& p) const;
 
+   signals:
+      void posChanged(const AL::Pos&);
+      void locatorMoved(int);
+
    public slots:
       void setXpos(int);
       void setMag(double xmag, double ymag);
+      void setPos(const AL::Pos&);
 
    public:
-      Ruler(Score*, QWidget* parent = 0);
+      Ruler(Score*, AL::Pos* locator, QWidget* parent = 0);
       };
 
 

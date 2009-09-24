@@ -38,10 +38,10 @@
 #include "al/al.h"
 
 namespace AL {
-      class TempoList;
+      class TempoMap;
       struct TEvent;
       struct SigEvent;
-      class SigList;
+      class TimeSigMap;
       };
 
 class System;
@@ -218,9 +218,12 @@ class Score : public QObject {
 
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
+
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
       RepeatList* _repeatList;
+      AL::TimeSigMap* _sigmap;
+      AL::TempoMap* _tempomap;
 
       InputState _is;
 
@@ -385,9 +388,6 @@ class Score : public QObject {
       TextC* rights;                ///< Copyright printed at bottom of page
 
       int _pageOffset;              ///< Offset for page numbers.
-
-      AL::SigList*   sigmap;
-      AL::TempoList* tempomap;
 
       //---------------------------------------------------
       //    state information
@@ -713,7 +713,7 @@ class Score : public QObject {
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
-      AL::SigList*   getSigmap()  { return sigmap; }
+      AL::TimeSigMap* sigmap()  { return _sigmap; }
       MeasureBase* appendMeasure(int type);
       void addLyrics(int tick, int staffIdx, const QString&);
 
@@ -733,7 +733,7 @@ class Score : public QObject {
       void updateChannel();
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
-      AL::TempoList* getTempomap() const { return tempomap; }
+      AL::TempoMap* tempomap() const { return _tempomap; }
 
       QString movementNumber() const                 { return _movementNumber;  }
       QString movementTitle() const                  { return _movementTitle;   }

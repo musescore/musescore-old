@@ -647,7 +647,7 @@ void Palette::dropEvent(QDropEvent* event)
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
                         )
-                        image = new RasterImage(0);
+                        image = new RasterImage(gscore);
                   else {
                         printf("unknown image format <%s>\n", path.toLatin1().data());
                         }
@@ -657,7 +657,7 @@ void Palette::dropEvent(QDropEvent* event)
                         }
                   }
             else if (type == SYMBOL) {
-                  Symbol* s = new Symbol(0);
+                  Symbol* s = new Symbol(gscore);
                   s->read(el);
                   e = s;
                   }

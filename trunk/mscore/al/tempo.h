@@ -50,7 +50,7 @@ struct TEvent {
       };
 
 //---------------------------------------------------------
-//   TempoList
+//   Tempomap
 //---------------------------------------------------------
 
 typedef std::map<int, TEvent>::iterator iTEvent;
@@ -58,7 +58,7 @@ typedef std::map<int, TEvent>::const_iterator ciTEvent;
 typedef std::map<int, TEvent>::reverse_iterator riTEvent;
 typedef std::map<int, TEvent>::const_reverse_iterator criTEvent;
 
-class TempoList : public std::map<int, TEvent> {
+class TempoMap : public std::map<int, TEvent> {
       int _tempoSN;           // serial no to track tempo changes
       bool useList;
       double _tempo;          // tempo if not using tempo list (beats per second)
@@ -72,7 +72,7 @@ class TempoList : public std::map<int, TEvent> {
       void add(int t, const TEvent&);
 
    public:
-      TempoList();
+      TempoMap();
       void clear();
 
       void read(QDomElement, int sourceDivision);

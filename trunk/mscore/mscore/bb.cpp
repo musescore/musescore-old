@@ -401,7 +401,7 @@ bool Score::importBB(const QString& name)
 
       for (int i = 0; i < bb.measures(); ++i) {
             Measure* measure  = new Measure(this);
-            int tick = sigmap->bar2tick(i, 0, 0);
+            int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
       	add(measure);
             }

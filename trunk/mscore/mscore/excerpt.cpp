@@ -180,8 +180,8 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
       if (!_movementTitle.isEmpty())
             xml.tag("movement-title", _movementTitle);
 
-      sigmap->write(xml);
-      tempomap->write(xml);
+      sigmap()->write(xml);
+      tempomap()->write(xml);
       foreach(const Part* part, _parts) {
             int idx = excerpt->parts()->indexOf((Part*)part);
             if (idx != -1)
@@ -246,7 +246,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
                   if (isFirstStaff || m->type() == MEASURE)
                         m->write(xml, staffIdx, isFirstStaff);
                   if (m->type() == MEASURE)
-                        xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
+                        xml.curTick = m->tick() + sigmap()->ticksMeasure(m->tick());
                   }
             xml.etag();
             isFirstStaff = false;

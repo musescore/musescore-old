@@ -2846,7 +2846,7 @@ foreach(Element* el, *(score->gel())) {
                         keysig(0);
                   if (tsig) {
                         int z, n;
-                        score->sigmap->timesig(tsig->tick(), z, n);
+                        score->sigmap()->timesig(tsig->tick(), z, n);
                         timesig(tsig);
                         }
                   // output attributes with the first actual measure (pickup or regular) only
@@ -2993,7 +2993,7 @@ foreach(Element* el, *(score->gel())) {
                                           // output only for staff 0
                                           if (st == 0) {
                                                 int z, n;
-                                                score->sigmap->timesig(el->tick(), z, n);
+                                                score->sigmap()->timesig(el->tick(), z, n);
                                                 timesig(z, n);
                                                 }
                                           */

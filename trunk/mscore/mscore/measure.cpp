@@ -196,9 +196,9 @@ void Measure::dump() const
 
 int Measure::tickLen() const
       {
-      unsigned ss = _score->getSigmap()->serial();
+      unsigned ss = _score->sigmap()->serial();
       if (_tickLen == -1 || sigSerial != ss) {
-            _tickLen = _score->getSigmap()->ticksMeasure(tick());
+            _tickLen = _score->sigmap()->ticksMeasure(tick());
             sigSerial = ss;
             }
       return _tickLen;
@@ -896,7 +896,7 @@ double Measure::tick2pos(int tck) const
             }
       if (s == 0) {
             x2    = width();
-            tick2 = tick() + _score->sigmap->ticksMeasure(tick());
+            tick2 = tick() + _score->sigmap()->ticksMeasure(tick());
             }
       double x = 0;
       if (tick2 > tick1) {

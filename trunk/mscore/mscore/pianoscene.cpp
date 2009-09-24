@@ -47,18 +47,10 @@ static int pitch2y(int pitch)
 //   PianoScene
 //---------------------------------------------------------
 
-PianoScene::PianoScene(Staff* s, QWidget* parent)
+PianoScene::PianoScene(Staff* staff, QWidget* parent)
    : QGraphicsScene(parent)
       {
-      staff       = s;
-      _score      = staff->score();
-      Measure* lm = s->score()->lastMeasure();
-      ticks       = lm->tick() + lm->tickLen();
-      setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
-
-      _timeType = AL::TICKS;
-      magStep = 0;
-      Measure* m = _score->firstMeasure();
+      Measure* m = staff->score()->firstMeasure();
       int staffIdx = staff->idx();
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
@@ -88,29 +80,31 @@ PianoScene::PianoScene(Staff* s, QWidget* parent)
 //   pix2pos
 //---------------------------------------------------------
 
-AL::Pos PianoScene::pix2pos(int x) const
+AL::Pos PianoView::pix2pos(int x) const
       {
       x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
-      return AL::Pos(_score->getTempomap(), _score->getSigmap(), x, _timeType);
+      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
       }
 
 //---------------------------------------------------------
 //   pos2pix
 //---------------------------------------------------------
 
-int PianoScene::pos2pix(const AL::Pos& p) const
+int PianoView::pos2pix(const AL::Pos& p) const
       {
-      return lrint(p.time(_timeType) + MAP_OFFSET);
+      return p.time(_timeType) + MAP_OFFSET;
       }
 
 //---------------------------------------------------------
 //   drawBackground
 //---------------------------------------------------------
 
-void PianoScene::drawBackground(QPainter* p, const QRectF& r)
+void PianoView::drawBackground(QPainter* p, const QRectF& r)
       {
+      Score* _score = staff->score();
+
       QRectF r1;
       r1.setCoords(-1000000.0, 0.0, 480.0, 1000000.0);
       QRectF r2;
@@ -170,9 +164,9 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-            AL::Pos stick(_score->getTempomap(), _score->getSigmap(), bar, 0, 0);
+            AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep) {
-                  int x = pos2pix(stick);
+                  double x = double(pos2pix(stick));
                   if (x > 0) {
                         p->setPen(Qt::lightGray);
                         p->drawLine(x, y1, x, y2);
@@ -185,7 +179,7 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
             else {
                   int z = stick.timesig().nominator;
                   for (int beat = 0; beat < z; beat++) {
-                        AL::Pos xx(_score->getTempomap(), _score->getSigmap(), bar, beat, 0);
+                        AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);
                         if (xp < 0)
                               continue;
@@ -207,36 +201,45 @@ void PianoScene::drawBackground(QPainter* p, const QRectF& r)
       }
 
 //---------------------------------------------------------
-//   setMag
+//   drawForeground
 //---------------------------------------------------------
 
-void PianoScene::setMag(double mag)
+void PianoView::drawForeground(QPainter* painter, const QRectF& rect)
       {
-      int tpix  = (480 * 4) * mag;
-      magStep = 0;
-      if (tpix < 64)
-            magStep = 1;
-      if (tpix < 32)
-            magStep = 2;
-      if (tpix <= 16)
-            magStep = 3;
-      if (tpix < 8)
-            magStep = 4;
-      if (tpix <= 4)
-            magStep = 5;
-      if (tpix <= 2)
-            magStep = 6;
+      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
+
+      qreal x1 = rect.x();
+      qreal x2 = x1 + rect.width();
+      for (int i = 0; i < 3; ++i) {
+            if (!_locator[i].valid())
+                  continue;
+            painter->setPen(lcColors[i]);
+            qreal xp = qreal(pos2pix(_locator[i]));
+            if (xp >= x1 && xp < x2)
+                  painter->drawLine(QLineF(xp, rect.top(), xp, rect.bottom()));
+            }
       }
 
 //---------------------------------------------------------
 //   PianoView
 //---------------------------------------------------------
 
-PianoView::PianoView(Staff* s)
-   : QGraphicsView()
+PianoView::PianoView(Staff* s, AL::Pos* l)
+   : QGraphicsView(),
+   staff(s),
+   pos(s->score()->tempomap(), s->score()->sigmap()),
+   _locator(l)
       {
       setScene(new PianoScene(s));
+      setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+      setResizeAnchor(QGraphicsView::AnchorUnderMouse);
       setMouseTracking(true);
+      _timeType = AL::TICKS;
+      magStep   = 0;
+
+      Measure* lm = s->score()->lastMeasure();
+      ticks       = lm->tick() + lm->tickLen();
+      scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
       }
 
 //---------------------------------------------------------
@@ -267,7 +270,22 @@ void PianoView::wheelEvent(QWheelEvent* event)
                         }
                   }
             emit magChanged(xmag, ymag);
-            static_cast<PianoScene*>(scene())->setMag(xmag);
+
+            int tpix  = (480 * 4) * xmag;
+            magStep = 0;
+            if (tpix < 64)
+                  magStep = 1;
+            if (tpix < 32)
+                  magStep = 2;
+            if (tpix <= 16)
+                  magStep = 3;
+            if (tpix < 8)
+                  magStep = 4;
+            if (tpix <= 4)
+                  magStep = 5;
+            if (tpix <= 2)
+                  magStep = 6;
+
 
             //
             // if xpos <= 0, then the scene is centered
@@ -345,7 +363,15 @@ void PianoView::mouseMoveEvent(QMouseEvent* event)
       QPointF p(mapToScene(event->pos()));
       int pitch = y2pitch(int(p.y()));
       emit pitchChanged(pitch);
-      emit posChanged(int(p.x())-480);
+      int tick = int(p.x()) -480;
+      if (tick < 0) {
+            tick = 0;
+            pos.setTick(tick);
+            pos.setInvalid();
+            }
+      else
+            pos.setTick(tick);
+      emit posChanged(pos);
       }
 
 //---------------------------------------------------------
@@ -355,7 +381,8 @@ void PianoView::mouseMoveEvent(QMouseEvent* event)
 void PianoView::leaveEvent(QEvent*)
       {
       emit pitchChanged(-1);
-      emit posChanged(-1);
+      pos.setInvalid();
+      emit posChanged(pos);
       }
 
 
