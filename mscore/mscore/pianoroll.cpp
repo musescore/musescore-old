@@ -32,6 +32,7 @@
 #include "awl/pitchedit.h"
 #include "awl/poslabel.h"
 #include "mscore.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -41,10 +42,10 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
    : QDialog(parent)
       {
       staff = st;
-      Score* s = staff->score();
+      score = staff->score();
 
-      AL::TempoMap* tl = s->tempomap();
-      AL::TimeSigMap*  sl = s->sigmap();
+      AL::TempoMap* tl = score->tempomap();
+      AL::TimeSigMap*  sl = score->sigmap();
       for (int i = 0; i < 3; ++i)
             locator[i].setContext(tl, sl);
 
@@ -67,16 +68,7 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       tb->addAction(getAction("rewind"));
       tb->addAction(getAction("play"));
       tb->addSeparator();
-
       layout->addWidget(tb, 0, 0, 1, 2);
-
-      // undo
-      // redo
-
-      // loop
-      // rewind
-      // play
-
 
       tb = new QToolBar;
       layout->addWidget(tb, 1, 0, 1, 2);
@@ -92,6 +84,12 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
 
       tb->addSeparator();
       tb->addWidget(new QLabel(tr("Velocity:")));
+      veloType = new QComboBox;
+      veloType->addItem(tr("auto"),   0);
+      veloType->addItem(tr("user"),   1);
+      veloType->addItem(tr("offset"), 2);
+      tb->addWidget(veloType);
+
       velocity = new QSpinBox;
       velocity->setRange(-1, 127);
       velocity->setSpecialValueText("--");
@@ -108,7 +106,7 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       gv->scale(xmag, 1.0);
       layout->addWidget(gv, 3, 1);
 
-      Ruler* ruler = new Ruler(s, locator);
+      Ruler* ruler = new Ruler(score, locator);
       ruler->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       ruler->setFixedHeight(rulerHeight);
       ruler->setMag(xmag, 1.0);
@@ -134,7 +132,8 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       connect(gv,    SIGNAL(posChanged(const AL::Pos&)), ruler, SLOT(setPos(const AL::Pos&)));
       connect(ruler, SIGNAL(posChanged(const AL::Pos&)), pos,   SLOT(setValue(const AL::Pos&)));
       connect(ruler, SIGNAL(locatorMoved(int)),          gv->scene(), SLOT(update()));
-
+      connect(veloType,    SIGNAL(activated(int)),     SLOT(veloTypeChanged(int)));
+      connect(velocity,    SIGNAL(valueChanged(int)),  SLOT(velocityChanged(int)));
       connect(gv->scene(), SIGNAL(selectionChanged()), SLOT(selectionChanged()));
       resize(800, 400);
       }
@@ -149,23 +148,116 @@ void PianorollEditor::selectionChanged()
       if (items.size() == 1) {
             QGraphicsItem* item = items[0];
             Note* note = (Note*)item->data(0).value<void*>();
-            velocity->setEnabled(true);
-            velocity->setValue(note->velocity());
             pitch->setEnabled(true);
             pitch->setValue(note->pitch());
+            veloType->setEnabled(true);
+            velocity->setEnabled(true);
+            updateVelocity(note);
             }
       else if (items.size() == 0) {
             velocity->setValue(0);
             velocity->setEnabled(false);
             pitch->setValue(0);
             pitch->setEnabled(false);
+            veloType->setEnabled(false);
+            veloType->setCurrentIndex(int(AUTO_VAL));
             }
       else {
             velocity->setEnabled(true);
             velocity->setValue(0);
+            velocity->setReadOnly(false);
             pitch->setEnabled(true);
             pitch->setDeltaMode(true);
             pitch->setValue(0);
+            veloType->setEnabled(true);
+            veloType->setCurrentIndex(int(OFFSET_VAL));
             }
+      }
+
+//---------------------------------------------------------
+//   veloTypeChanged
+//---------------------------------------------------------
+
+void PianorollEditor::veloTypeChanged(int val)
+      {
+      QList<QGraphicsItem*> items = gv->scene()->selectedItems();
+      if (items.size() != 1)
+            return;
+      QGraphicsItem* item = items[0];
+      Note* note = (Note*)item->data(0).value<void*>();
+      if (ValueType(val) == note->veloType())
+            return;
+
+      score->undo()->beginMacro();
+      score->undo()->push(new ChangeVelocity(note, ValueType(val), note->velocity(), note->veloOffset()));
+      score->undo()->endMacro(score->undo()->current()->childCount() == 0);
+      updateVelocity(note);
+      }
+
+//---------------------------------------------------------
+//   updateVelocity
+//---------------------------------------------------------
+
+void PianorollEditor::updateVelocity(Note* note)
+      {
+      ValueType vt = note->veloType();
+      if (vt != ValueType(veloType->currentIndex())) {
+            veloType->setCurrentIndex(int(vt));
+            switch(vt) {
+                  case AUTO_VAL:
+                        velocity->setReadOnly(true);
+                        velocity->setSuffix("");
+                        velocity->setRange(0, 127);
+                        break;
+                  case USER_VAL:
+                        velocity->setReadOnly(false);
+                        velocity->setSuffix("");
+                        velocity->setRange(0, 127);
+                        break;
+                  case OFFSET_VAL:
+                        velocity->setReadOnly(false);
+                        velocity->setSuffix("%");
+                        velocity->setRange(-200, 200);
+                        break;
+                  }
+            }
+      switch(vt) {
+            case AUTO_VAL:
+            case USER_VAL:
+                  velocity->setValue(note->velocity());
+                  break;
+            case OFFSET_VAL:
+                  velocity->setValue(note->veloOffset());
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   velocityChanged
+//---------------------------------------------------------
+
+void PianorollEditor::velocityChanged(int val)
+      {
+      QList<QGraphicsItem*> items = gv->scene()->selectedItems();
+      if (items.size() != 1)
+            return;
+      QGraphicsItem* item = items[0];
+      Note* note = (Note*)item->data(0).value<void*>();
+      ValueType vt = note->veloType();
+
+      if (vt == AUTO_VAL)
+            return;
+
+      int velocity = note->velocity();
+      int offset   = note->veloOffset();
+
+      if (vt == USER_VAL)
+            velocity = val;
+      else
+            offset = val;
+
+      score->undo()->beginMacro();
+      score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
+      score->undo()->endMacro(score->undo()->current()->childCount() == 0);
       }
 

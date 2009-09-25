@@ -1,3 +1,6 @@
+25.sep (ws)
+      - note velocity can now be edited in note properties dialog and pianoroll editor
+      - forward flip command for beamed chords to beam
 24.sep (db)
       - add Polish handbook
       - add default shortcuts for staff text and system text

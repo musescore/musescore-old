@@ -345,6 +345,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             drumrollEditor.exec();
             }
       else if (cmd == "pianoroll") {
+            _score->endCmd();
             PianorollEditor pianorollEditor(staff);
             pianorollEditor.exec();
             }

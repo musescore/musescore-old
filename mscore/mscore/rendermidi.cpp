@@ -301,7 +301,20 @@ void Score::fixPpitch()
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
                               Note* note = in->second;
                               note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
-                              note->setVelocity(velocity);
+                              switch (note->veloType()) {
+                                    case OFFSET_VAL:
+                                          velocity += (velocity * note->veloOffset()) / 100;
+                                          if (velocity > 127)
+                                                velocity = 127;
+                                          else if (velocity < 1)
+                                                velocity = 1;
+                                          // fall through
+                                    case AUTO_VAL:
+                                          note->setVelocity(velocity);
+                                          break;
+                                    case USER_VAL:
+                                          break;
+                                    }
                               }
                         }
                   }

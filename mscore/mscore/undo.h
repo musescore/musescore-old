@@ -1153,5 +1153,22 @@ class ChangeTupletProperties : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeVelocity
+//---------------------------------------------------------
+
+class ChangeVelocity : public UndoCommand {
+      Note* note;
+      ValueType veloType;
+      int velocity;
+      int veloOffset;
+      void flip();
+
+   public:
+      ChangeVelocity(Note*, ValueType, int, int);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 
