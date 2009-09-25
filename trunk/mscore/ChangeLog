@@ -1,4 +1,7 @@
-24.sep (ws)
+24.sep (db)
+      - add Polish handbook
+      - add default shortcuts for staff text and system text
+      (ws)
       - fix: drop symbol to palette
       - more code for pianoroll editor
       (la)

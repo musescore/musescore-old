@@ -407,7 +407,7 @@ def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf
     if verbose:
         pisa.showLogging()
 
-    import re
+    #import re
     #html_source = re.sub('(.)','\\1 ',html_source)
 
     pdf = pisa.CreatePDF(
@@ -549,7 +549,7 @@ def main():
         #createHandbook('ja', 'missing', pdf, verbose, heading_switch)
         createHandbook('nb', 'missing', pdf, verbose, heading_switch)
         createHandbook('ru', 'missing', pdf, verbose, heading_switch)
-        #createHandbook('pl', 'missing', pdf, verbose, heading_switch)
+        createHandbook('pl', 'missing', pdf, verbose, heading_switch)
         createHandbook('pt-BR', 'missing', pdf, verbose, heading_switch)
 
     # Create Handbook for specific language
