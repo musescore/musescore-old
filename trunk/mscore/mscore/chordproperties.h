@@ -22,6 +22,7 @@
 #define __CHORDPROPERTIES_H__
 
 #include "ui_chordproperties.h"
+#include "globals.h"
 
 class Note;
 
@@ -32,6 +33,13 @@ class Note;
 class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       Q_OBJECT
 
+      int _velo;
+      int _userVelocity;
+      int _veloOffset;
+
+   private slots:
+      void veloTypeChanged(int);
+
    public:
       ChordProperties(const Note* c, QWidget* parent = 0);
       bool small() const;
@@ -41,6 +49,10 @@ class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       double tuning() const;
       int getUserMirror() const;
       int getStemDirection() const;
+      ValueType getVeloType() const { return ValueType(veloType->currentIndex()); }
+      int velo() const              { return _velo;                       }
+      int userVelocity() const      { return _userVelocity;               }
+      int veloOffset() const        { return _veloOffset;                 }
       };
 
 #endif

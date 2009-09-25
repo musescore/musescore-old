@@ -21,8 +21,10 @@
 #ifndef __PIANOROLL_H__
 #define __PIANOROLL_H__
 
+class Score;
 class Staff;
 class PianoView;
+class Note;
 
 #include "al/pos.h"
 
@@ -38,13 +40,19 @@ class PianorollEditor : public QDialog {
       Q_OBJECT
 
       PianoView* gv;
+      Score* score;
       Staff* staff;
       Awl::PitchEdit* pitch;
       QSpinBox* velocity;
       AL::Pos locator[3];
+      QComboBox* veloType;
+
+      void updateVelocity(Note* note);
 
    private slots:
       void selectionChanged();
+      void veloTypeChanged(int);
+      void velocityChanged(int);
 
    public:
       PianorollEditor(Staff* staff, QWidget* parent = 0);

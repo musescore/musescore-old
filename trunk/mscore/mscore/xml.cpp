@@ -69,13 +69,13 @@ void Xml::pTag(const char* name, Placement place)
 Placement readPlacement(QDomElement e)
       {
       QString s(e.text());
-      if (s == "auto")
+      if (s == "auto" || s == "0")
             return PLACE_AUTO;
-      if (s == "above")
+      if (s == "above" || s == "1")
             return PLACE_ABOVE;
-      if (s == "below")
+      if (s == "below" || s == "2")
             return PLACE_BELOW;
-      if (s == "left")
+      if (s == "left" || s == "3")
             return PLACE_LEFT;
       printf("unknown placement value <%s>\n", qPrintable(s));
       return PLACE_AUTO;

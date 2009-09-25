@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>485</width>
-    <height>384</height>
+    <width>590</width>
+    <height>476</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -202,6 +202,42 @@
                 </property>
                </item>
               </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>velocity type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="veloType">
+               <item>
+                <property name="text">
+                 <string extracomment="velocity type">auto</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string extracomment="velocity type">user</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string extracomment="velocity type">offset</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>velocity (0-127)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="velocity"/>
              </item>
             </layout>
            </item>

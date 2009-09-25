@@ -68,6 +68,9 @@ enum Direction  { AUTO, UP, DOWN };
 // used for note head mirror
 enum DirectionH { DH_AUTO, DH_LEFT, DH_RIGHT };
 
+// used for Note->velocity
+enum ValueType { AUTO_VAL, USER_VAL, OFFSET_VAL };
+
 enum Placement {
       PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW, PLACE_LEFT
       };

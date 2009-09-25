@@ -653,41 +653,14 @@ void Score::cmdFlip()
       foreach(Element* e, *el) {
             if (e->type() == NOTE) {
                   Chord* chord = static_cast<Note*>(e)->chord();
-
-                  Direction dir = chord->stemDirection();
-
-                  if (dir == AUTO)
-                        dir = chord->up() ? DOWN : UP;
-                  else
-                        dir = dir == UP ? DOWN : UP;
-
-                  _undo->push(new SetStemDirection(chord, dir));
-
-                  Beam* beam = chord->beam();
-                  if (beam) {
-                        bool set = false;
-                        QList<ChordRest*> elements = beam->elements();
-                        for (int i = 0; i < elements.size(); ++i) {
-                              ChordRest* cr = elements[i];
-                              if (!set) {
-                                    if (cr->type() == CHORD) {
-                                          Chord* chord = static_cast<Chord*>(cr);
-                                          if (chord->stemDirection() != dir)
-                                                _undo->push(new SetStemDirection(chord, dir));
-                                          set = true;
-                                          }
-                                    }
-                              else {
-                                    if (cr->type() == CHORD) {
-                                          Chord* chord = static_cast<Chord*>(cr);
-                                          if (chord->stemDirection() != AUTO)
-                                                _undo->push(new SetStemDirection(chord, AUTO));
-                                          }
-                                    }
-                              }
-
-                        }
+                  if (chord->beam())
+                        _undo->push(new FlipBeamDirection(chord->beam()));
                   else {
+                        Direction dir = chord->stemDirection();
+                        if (dir == AUTO)
+                              dir = chord->up() ? DOWN : UP;
+                        else
+                              dir = dir == UP ? DOWN : UP;
                         _undo->push(new SetStemDirection(chord, dir));
                         }
                   }

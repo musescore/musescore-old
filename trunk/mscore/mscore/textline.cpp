@@ -374,9 +374,9 @@ void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
       if (proto == 0 || proto->lineColor() != _lineColor)
             xml.tag("lineColor", _lineColor);
       if (proto == 0 || proto->beginTextPlace() != _beginTextPlace)
-            xml.tag("beginTextPlace",    _beginTextPlace);
+            xml.pTag("beginTextPlace", _beginTextPlace);
       if (proto == 0 || proto->continueTextPlace() != _continueTextPlace)
-            xml.tag("continueTextPlace", _continueTextPlace);
+            xml.pTag("continueTextPlace", _continueTextPlace);
 
       SLine::writeProperties(xml);
       if (_beginText) {

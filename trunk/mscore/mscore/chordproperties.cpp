@@ -38,6 +38,41 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       tuningSpinBox->setValue(note->tuning());
       userMirror->setCurrentIndex(int(note->userMirror()));
       stemDirection->setCurrentIndex(int(chord->stemDirection()));
+      ValueType vt = note->veloType();
+      veloType->setCurrentIndex(int(vt));
+      _velo         = note->velocity();
+      _userVelocity = note->velocity();
+      _veloOffset   = note->veloOffset();
+      veloTypeChanged(vt);
+      connect(veloType, SIGNAL(activated(int)), SLOT(veloTypeChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   veloTypeChanged
+//---------------------------------------------------------
+
+void ChordProperties::veloTypeChanged(int vt)
+      {
+      switch(vt) {
+            case AUTO_VAL:
+                  velocity->setReadOnly(true);
+                  velocity->setSuffix("");
+                  velocity->setRange(0, 127);
+                  velocity->setValue(_velo);
+                  break;
+            case USER_VAL:
+                  velocity->setReadOnly(false);
+                  velocity->setSuffix("");
+                  velocity->setRange(0, 127);
+                  velocity->setValue(_userVelocity);
+                  break;
+            case OFFSET_VAL:
+                  velocity->setReadOnly(false);
+                  velocity->setSuffix("%");
+                  velocity->setRange(-200, 200);
+                  velocity->setValue(_veloOffset);
+                  break;
+            }
       }
 
 //---------------------------------------------------------

@@ -76,14 +76,18 @@ class Note : public Element {
       int _subchannel;        ///< articulation
       int _line;              ///< y-Position; 0 - top line.
 
-      char _pitch;             ///< Note pitch as midi value (0 - 127).
-      char _ppitch;            ///< played pitch (honor voltas etc.); cached value
-      double _tuning;          ///< pitch offset in cent, playable only by internal synthesizer
-      char _velocity;          ///< midi playback velocity (0 - 127); cached value
-      char _tpc;               ///< tonal pitch class
-      char _staffMove;         ///< -1, 0, +1, used for crossbeaming
+      char _pitch;            ///< Note pitch as midi value (0 - 127).
+      char _ppitch;           ///< played pitch (honor voltas etc.); cached value
+      double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
-      char _userAccidental;    ///< editorial accidental type (0-15)
+      ValueType _veloType;
+      char _velocity;         ///< midi playback velocity (0 - 127);
+      int _veloOffset;        ///< velocity user offset in promille
+
+      char _tpc;              ///< tonal pitch class
+      char _staffMove;        ///< -1, 0, +1, used for crossbeaming
+
+      char _userAccidental;   ///< editorial accidental type (0-15)
       char _headGroup;
 
       bool _mirror;           ///< True if note is mirrored at stem.
@@ -134,8 +138,6 @@ class Note : public Element {
       void setPpitch(int v)           { _ppitch = v;      }
       double tuning() const           { return _tuning;   }
       void setTuning(double v)        { _tuning = v;      }
-      int velocity() const            { return _velocity; }
-      void setVelocity(int v)         { _velocity = v;    }
 
       int tpc() const                 { return _tpc;      }
       void setTpc(int v);
@@ -200,6 +202,13 @@ class Note : public Element {
 
       virtual void toDefault();
       virtual void setMag(double val);
+
+      ValueType veloType() const    { return _veloType;   }
+      void setVeloType(ValueType v) { _veloType = v;      }
+      int velocity() const          { return _velocity;   }
+      void setVelocity(int v)       { _velocity = v;      }
+      int veloOffset() const        { return _veloOffset; }
+      void setVeloOffset(int v)     { _veloOffset = v;    }
       };
 
 //---------------------------------------------------------

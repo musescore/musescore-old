@@ -92,7 +92,9 @@ Note::Note(Score* s)
       _pitch          = 0;
       _ppitch         = 0;
       _tuning         = 0.0;
+      _veloType       = AUTO_VAL;
       _velocity       = 80;
+      _veloOffset     = 0;
       _accidental     = 0;
       _mirror         = false;
       _userMirror     = DH_AUTO;
@@ -117,7 +119,9 @@ Note::Note(const Note& n)
       _pitch          = n._pitch;
       _ppitch         = n._ppitch;
       _tuning         = n._tuning;
+      _veloType       = n._veloType;
       _velocity       = n._velocity;
+      _veloOffset     = n._veloOffset;
       _tpc            = n._tpc;
       _line           = n._line;
       _staffMove      = n._staffMove;
@@ -602,7 +606,6 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
                (!_accidental->userOff().isNull() || !_accidental->visible())
                )
                   _accidental->write(xml);
-
             _el.write(xml);
             if (_tieFor) {
                   // in clipboardmode write tie only if the next note is < endTick
@@ -615,6 +618,17 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
                   xml.tag("head", _headGroup);
             if (_userMirror != DH_AUTO)
                   xml.tag("mirror", _userMirror);
+            if (_veloType != AUTO_VAL) {
+                  const char* s;
+                  switch(_veloType) {
+                        case AUTO_VAL:   s = "auto"; break;
+                        case USER_VAL:   s = "user"; break;
+                        case OFFSET_VAL: s = "offset"; break;
+                        }
+                  xml.tag("veloType", s);
+                  int val = _veloType == USER_VAL ? _velocity : _veloOffset;
+                  xml.tag("velocity", val);
+                  }
             xml.etag();
             }
       }
@@ -712,6 +726,26 @@ void Note::read(QDomElement e)
                   _staffMove = i;
             else if (tag == "mirror")
                   _userMirror = DirectionH(i);
+            else if (tag == "veloType") {
+                  if (val == "auto")
+                        _veloType = AUTO_VAL;
+                  else if (val == "user")
+                        _veloType = USER_VAL;
+                  else if (val == "offset")
+                        _veloType = OFFSET_VAL;
+                  else {
+                        _veloType = AUTO_VAL;
+                        printf("Warning: invalid velocity type %s\n", qPrintable(val));
+                        }
+                  }
+            else if (tag == "velocity") {
+                  if (_veloType == USER_VAL)
+                        _velocity = i;
+                  else if (_veloType == OFFSET_VAL)
+                        _veloOffset = i;
+                  // else
+                  //      ignore value;
+                  }
             else if (Element::readProperties(e))
                   ;
             else

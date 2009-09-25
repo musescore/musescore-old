@@ -2219,6 +2219,25 @@ void ChangeTupletProperties::flip()
       bracketType = bt;
       }
 
+//---------------------------------------------------------
+//   ChangeVelocity
+//---------------------------------------------------------
 
+ChangeVelocity::ChangeVelocity(Note* n, ValueType t, int v, int o)
+   : note(n), veloType(t), velocity(v), veloOffset(o)
+      {
+      }
 
+void ChangeVelocity::flip()
+      {
+      ValueType t = note->veloType();
+      int v       = note->velocity();
+      int o       = note->veloOffset();
+      note->setVeloType(veloType);
+      note->setVelocity(velocity);
+      note->setVeloOffset(veloOffset);
+      veloType   = t;
+      velocity   = v;
+      veloOffset = o;
+      }
 
