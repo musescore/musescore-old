@@ -1,4 +1,6 @@
 27.sep (ws)
+      - change sematic of pitch up/down functions: "up" uses always sharps and
+        "down" flats
       - add two new functions for note edit mode: "q" reduces the duration of
         the last entered note/rest by half, "w" doubles it
 25.sep (ws)
