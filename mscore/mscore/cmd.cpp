@@ -2272,6 +2272,10 @@ void Score::cmd(const QAction* a)
                   TextStyleDialog es(0, this);
                   es.exec();
                   }
+            else if (cmd == "double-duration")
+                  cmdDoubleDuration();
+            else if (cmd == "half-duration")
+                  cmdHalfDuration();
             else if (cmd == "")
                   ;
             else
@@ -2899,5 +2903,57 @@ void Score::cmdMirrorNoteHead()
       else
             d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
       undoChangeUserMirror(note, d);
+      }
+
+//---------------------------------------------------------
+//   cmdHalfDuration
+//---------------------------------------------------------
+
+void Score::cmdHalfDuration()
+      {
+      Element* el = selection()->element();
+      if (el->type() == NOTE)
+            el = el->parent();
+      if (!el->isChordRest())
+            return;
+
+      ChordRest* cr = static_cast<ChordRest*>(el);
+      Duration d = _is.duration.shift(1);
+      if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
+            //
+            // handle appoggiatura and acciaccatura
+            //
+            cr->setDuration(d);
+            }
+      else
+            changeCRlen(cr, d);
+      _is.duration = d;
+      nextInputPos(cr, false);
+      }
+
+//---------------------------------------------------------
+//   cmdDoubleDuration
+//---------------------------------------------------------
+
+void Score::cmdDoubleDuration()
+      {
+      Element* el = selection()->element();
+      if (el->type() == NOTE)
+            el = el->parent();
+      if (!el->isChordRest())
+            return;
+
+      ChordRest* cr = static_cast<ChordRest*>(el);
+      Duration d = _is.duration.shift(-1);
+      if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
+            //
+            // handle appoggiatura and acciaccatura
+            //
+            cr->setDuration(d);
+            }
+      else
+            changeCRlen(cr, d);
+      _is.duration = d;
+      nextInputPos(cr, false);
       }
 

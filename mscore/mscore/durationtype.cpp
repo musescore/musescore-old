@@ -288,6 +288,7 @@ void Duration::setType(const QString& s)
 
 //---------------------------------------------------------
 //   shift
+//    this discardes any dots
 //---------------------------------------------------------
 
 Duration Duration::shift(int v) const
