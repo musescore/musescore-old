@@ -2020,6 +2020,24 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Synthesizer"),
          QT_TR_NOOP("Synthesizer Control")
          ),
+      Shortcut(
+         STATE_NOTE_ENTRY,
+         "double-duration",
+         QT_TR_NOOP("double duration"),
+         QKeySequence(Qt::Key_W),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("double duration"),
+         QT_TR_NOOP("double duration")
+         ),
+      Shortcut(
+         STATE_NOTE_ENTRY,
+         "half-duration",
+         QT_TR_NOOP("half duration"),
+         QKeySequence(Qt::Key_Q),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("half duration"),
+         QT_TR_NOOP("half duration")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

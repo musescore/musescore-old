@@ -1663,3 +1663,4 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
       if (ncr)
             emit posChanged(ncr->tick());
       }
+
