@@ -2922,6 +2922,8 @@ void Score::cmdHalfDuration()
 
       ChordRest* cr = static_cast<ChordRest*>(el);
       Duration d = _is.duration.shift(1);
+      if (!d.isValid())
+            return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //
             // handle appoggiatura and acciaccatura
@@ -2948,6 +2950,8 @@ void Score::cmdDoubleDuration()
 
       ChordRest* cr = static_cast<ChordRest*>(el);
       Duration d = _is.duration.shift(-1);
+      if (!d.isValid())
+            return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //
             // handle appoggiatura and acciaccatura
