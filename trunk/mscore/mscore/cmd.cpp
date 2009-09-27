@@ -1030,6 +1030,9 @@ printf("get gap %d/%d\n", gapD.numerator(), gapD.denominator());
                                     undoRemoveElement(beam);
                                     }
                               }
+                        //
+                        // TODO: Duration can be of non integral type -> abort()
+                        //
                         undoChangeChordRestLen(cr, cr->duration().fraction() + dd);
                         if (gapD > gap) {
                               int tick = cr->tick() + cr->ticks();
@@ -1243,7 +1246,7 @@ void Score::cmdAddText(int subtype)
 
 void Score::upDown(bool up, bool octave)
       {
-      layoutAll = false;
+      layoutAll   = false;
       layoutStart = 0;        // DEBUG
       ElementList el;
 
@@ -1276,12 +1279,12 @@ void Score::upDown(bool up, bool octave)
       if (el.empty())
             return;
 
-      int newPitch = _is.pitch;
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
-            Part* part = oNote->staff()->part();
+            Part* part  = oNote->staff()->part();
             int pitch   = oNote->pitch();
             int newTpc;
+            int newPitch;
             if (part->useDrumset()) {
                   Drumset* ds = part->drumset();
                   newPitch    = up ? ds->prevPitch(pitch) : ds->nextPitch(pitch);
@@ -1294,7 +1297,7 @@ void Score::upDown(bool up, bool octave)
                         }
                   else {
                         newPitch = up ? pitch+1 : pitch-1;
-                        newTpc   = pitch2tpc(newPitch);
+                        newTpc   = pitch2tpc2(newPitch, up);
                         }
                   }
             if (newPitch < 0) {
@@ -1312,7 +1315,7 @@ void Score::upDown(bool up, bool octave)
             if (playNotes)
                   mscore->play(oNote);
             }
-      _is.pitch = newPitch;
+//      _is.pitch = newPitch;
       selection()->updateState();     // accidentals may have changed
       }
 

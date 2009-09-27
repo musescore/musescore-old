@@ -36,6 +36,8 @@ inline static int pitch2tpc(int pitch)
       return (((((pitch % 12) * 7) % 12) + 5) % 12) + 9;
       }
 
+int pitch2tpc2(int pitch, bool preferSharp);
+
 const int INVALID_TPC = -2;
 
 extern int pitch2tpc(int pitch, int key);

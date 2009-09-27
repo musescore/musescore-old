@@ -101,7 +101,7 @@ void TextObj::read()
       cap->read(txt, size);
       txt[size] = 0;
       text = QString(txt);
-// printf("read textObj len %d <%s>\n", size, txt);
+printf("read textObj len %d <%s>\n", size, txt);
       }
 
 //---------------------------------------------------------
@@ -115,8 +115,8 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-// printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
-//      relPos.x(), relPos.y(), strlen(text), text, text[0]);
+printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
+      relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
 //---------------------------------------------------------
@@ -126,10 +126,11 @@ void SimpleTextObj::read()
 void LineObj::read()
       {
       BasicDrawObj::read();
-      pt1 = cap->readPoint();
-      pt2 = cap->readPoint();
-      color = cap->readColor();
+      pt1       = cap->readPoint();
+      pt2       = cap->readPoint();
+      color     = cap->readColor();
       lineWidth = cap->readByte();
+printf("LineObj: %d:%d  %d:%d  width %d\n", pt1.x(), pt1.y(), pt2.x(), pt2.y(), lineWidth);
       }
 
 //---------------------------------------------------------
@@ -151,7 +152,6 @@ void GroupObj::read()
       {
       BasicDrawObj::read();
       relPos = cap->readPoint();
-printf("read group object\n");
       objects = cap->readDrawObjectArray();
       }
 
@@ -164,9 +164,11 @@ void TransposableObj::read()
       BasicDrawObj::read();
       relPos = cap->readPoint();
       b = cap->readByte();
-      assert(b == 12 || b == 21);
-printf("read transposable object\n");
+      if (b != 12 && b != 21)
+            printf("TransposableObj::read: warning: unknown drawObjectArray size of %d\n", b);
       variants = cap->readDrawObjectArray();
+      if (variants.size() != b)
+            printf("variants.size %d, expected %d\n", variants.size(), b);
       assert(variants.size() == b);
       }
 
@@ -306,10 +308,20 @@ void TrillObj::read()
 
 QList<BasicDrawObj*> Capella::readDrawObjectArray()
       {
+      static int level = 0;
+
       QList<BasicDrawObj*> ol;
       int n = readUnsigned();       // draw obj array
+for (int k = 0; k < level; ++k)
+      printf("   ");
+printf("readDRawObjectArray %d elements\n", n);
+      ++level;
       for (int i = 0; i < n; ++i) {
             unsigned char type = readByte();
+
+            for (int k = 0; k < level; ++k)
+                  printf("   ");
+printf("readDrawObject %d of %d, type %d\n", i, n, type);
             switch (type) {
                   case  0: {
                         GroupObj* o = new GroupObj(this);
@@ -408,11 +420,12 @@ QList<BasicDrawObj*> Capella::readDrawObjectArray()
                         }
                         break;
                   default:
-printf("readDrawObjectArray bad type %d\n", type);
-                        abort();
+printf("readDrawObjectArray unsupported type %d\n", type);
+                        // abort();
                         break;
                   }
             }
+      --level;
       return ol;
       }
 
@@ -615,6 +628,8 @@ void ChordObj::read()
 
 void Capella::read(void* p, qint64 len)
       {
+      if (len == 0)
+            return;
       qint64 rv = f->read((char*)p, len);
       if (rv != len)
             throw CAP_EOF;
@@ -684,17 +699,16 @@ unsigned Capella::readUnsigned()
       {
       unsigned char c;
       read(&c, 1);
-      if (c >= 254) {
-            if (c == 254) {
-                  unsigned short s;
-                  read(&s, 2);
-                  return s;
-                  }
-            else {
-                  unsigned s;
-                  read(&s, 4);
-                  return s;
-                  }
+printf("Unsigned %d\n", c);
+      if (c == 254) {
+            unsigned short s;
+            read(&s, 2);
+            return s;
+            }
+      else if (c == 255) {
+            unsigned s;
+            read(&s, 4);
+            return s;
             }
       else
             return c;
@@ -741,16 +755,36 @@ char* Capella::readString()
 
 QColor Capella::readColor()
       {
+      static const int colors[] = {
+            0x000000, // schwarz
+            0x000080, // dunkelrot
+            0x008000, // dunkelgrün
+            0x008080, // ocker
+            0x800000, // dunkelblau
+            0x800080, // purpurrot
+            0x808000, // blaugün
+            0x808080, // grau
+            0xC0C0C0, // hellgrau
+            0x0000FF, // rot
+            0x00FF00, // grün
+            0x00FFFF, // gelb
+            0xFF0000, // blau
+            0xFF00FF, // lila
+            0xFFFF00, // aquamarin
+            0xFFFFFF  // weiß
+            };
+
       QColor c;
       unsigned char b = readByte();
       if (b >= 16) {
+            assert(b == 255);
             int r = readByte();
             int g = readByte();
             int b = readByte();
             c = QColor(r, g, b);
             }
       else {
-            c = Qt::black;
+            c = QColor(colors[b]);
             }
       return c;
       }
@@ -917,6 +951,8 @@ void Capella::readLayout()
 void Capella::readExtra()
       {
       unsigned char n = readByte();
+      if (n)
+            printf("Capella::readExtra(%d)\n", n);
       for (int i = 0; i < n; ++i)
             readByte();
       }
@@ -1209,10 +1245,13 @@ void Capella::read(QFile* fp)
       f      = fp;
       curPos = 0;
 
-      char signature[8];
+      char signature[9];
       read(signature, 8);
+      signature[8] = 0;
       if (memcmp(signature, "cap3-v:", 7) != 0)
             throw CAP_BAD_SIG;
+
+      printf("read Capella file signature <%s>\n", signature);
 
       // TODO: test for signature[7] = a-z
 
@@ -1237,19 +1276,25 @@ void Capella::read(QFile* fp)
       beamRelMax0 = readByte();
       beamRelMax1 = readByte();
 
+printf("======1\n");
       readExtra();
 
+printf("======2\n");
       readDrawObjectArray();
 
       unsigned n = readUnsigned();
+      if (n) {
+            printf("Gallery objects\n");
+            }
       for (unsigned int i = 0; i < n; ++i) {
             /*char* s =*/ readString();       // names of galerie objects
 //            printf("Galerie: <%s>\n", s);
             }
 
+printf("======3\n");
       backgroundChord = new ChordObj(this);
       backgroundChord->read();            // contains graphic objects on the page background
-
+printf("======4\n");
       bShowBarCount    = readByte();        // Taktnumerierung zeigen
       barNumberFrame   = readByte();        // 0=kein, 1=Rechteck, 2=Ellipse
       nBarDistX        = readByte();
@@ -1262,8 +1307,10 @@ void Capella::read(QFile* fp)
       btmPageMargins   = readUnsigned();
 
       unsigned nSystems  = readUnsigned();
-      for (unsigned i = 0; i < nSystems; i++)
+      for (unsigned i = 0; i < nSystems; i++) {
+            printf("readSystem %d of %d\n", i, nSystems);
             readSystem();
+            }
       char esig[4];
       read(esig, 4);
       if (memcmp (esig, "\0\0\0\0", 4) != 0)
