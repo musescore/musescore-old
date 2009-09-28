@@ -1,4 +1,6 @@
 28.sep (ws)
+      - fix: in shortcut editor check conflicts against local changed shortcuts
+      - fix: add hardcoded F1 shortcut to shortcut editor
       - fix: "Change time signature for single measure"
       - fix: Key signatures do not include natural signs if added in reverse order
 27.sep (ws)

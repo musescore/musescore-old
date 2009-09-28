@@ -29,6 +29,15 @@
 Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         "local-help",
+         QT_TR_NOOP("local help"),
+         Qt::Key_F1,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Local &Handbook..."),
+         QT_TR_NOOP("Show local Handbook")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-open",
          QT_TR_NOOP("file open"),
          QKeySequence::Open,

@@ -41,12 +41,13 @@ class ShortcutCaptureDialog : public QDialog, public Ui::ShortcutCaptureDialogBa
       Shortcut* s;
       void keyPressEvent(QKeyEvent* e);
       QKeySequence key;
+      QMap<QString, Shortcut*> localShortcuts;
 
     private slots:
       void clearClicked();
 
     public:
-      ShortcutCaptureDialog(Shortcut* s = 0, QWidget* parent = 0);
+      ShortcutCaptureDialog(Shortcut* s, QMap<QString, Shortcut*> localShortcuts, QWidget* parent = 0);
       ~ShortcutCaptureDialog();
       QKeySequence getKey() const { return key; }
       };
