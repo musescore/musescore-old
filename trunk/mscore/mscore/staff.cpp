@@ -236,9 +236,9 @@ void Staff::read(QDomElement e)
 
 //---------------------------------------------------------
 //   changeKeySig
-//
-// change key signature at tick into subtype st for all staves
-// in response to gui command (drop keysig on measure or keysig)
+///   Change key signature.
+/// change key signature at tick into subtype st for all staves
+/// in response to gui command (drop keysig on measure or keysig)
 //---------------------------------------------------------
 
 void Staff::changeKeySig(int tick, int st)
@@ -283,6 +283,7 @@ void Staff::changeKeySig(int tick, int st)
                   int cst = char(e->subtype() & 0xff);
                   if ((cst != st) && (etick > tick)) {
                         found = true;
+                        e->setSig(st, cst);     // fix natural signs if necessary
                         break;
                         }
                   _score->undoRemoveElement(e);

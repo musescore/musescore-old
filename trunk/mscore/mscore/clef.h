@@ -53,6 +53,7 @@ class Clef : public Compound {
       virtual ElementType type() const { return CLEF; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Segment* segment() const         { return (Segment*)parent(); }
+      Measure* measure() const         { return (Measure*)parent()->parent(); }
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);

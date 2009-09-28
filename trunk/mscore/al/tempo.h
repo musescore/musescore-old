@@ -99,6 +99,7 @@ class TempoMap : public std::map<int, TEvent> {
       int relTempo() const { return _relTempo; }
       void removeTime(int start, int len);
       void insertTime(int start, int len);
+      TEvent getTempo(int tick) const;
       };
 
 }     // namespace AL

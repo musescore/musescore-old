@@ -71,9 +71,11 @@
 #include "measure.h"
 #include "al/al.h"
 #include "al/tempo.h"
+#include "al/sig.h"
 #include "undo.h"
 #include "editstyle.h"
 #include "textstyle.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -278,6 +280,99 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       }
 
 //---------------------------------------------------------
+//   cmdRemoveClef
+//---------------------------------------------------------
+
+void Score::cmdRemoveClef(Clef* clef)
+      {
+      Staff* staff  = clef->staff();
+      ClefList* cl  = staff->clefList();
+      int tick      = clef->tick();
+      iClefEvent ki = cl->find(tick);
+      if (ki == cl->end()) {
+            printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
+            return;
+            }
+      int oval = (*cl)[tick];
+      iClefEvent nki = ki;
+      ++nki;
+
+      undoChangeClef(staff, tick, oval, NO_CLEF);
+      undoRemoveElement(clef);
+      Segment* segment = clef->segment();
+      segment->measure()->cmdRemoveEmptySegment(segment);
+
+      oval = cl->clef(tick);
+      if (nki->second != oval)
+            return;
+
+      undoChangeClef(staff, nki->first, oval, NO_CLEF);
+
+      int track = clef->track();
+      for (segment = segment->next1(); segment; segment = segment->next1()) {
+            if (segment->subtype() != Segment::SegClef)
+                  continue;
+            //
+            // we assume clefs are only in first track (voice 0)
+            //
+            Clef* e = static_cast<Clef*>(segment->element(track));
+            if (e) {
+                  int cst = e->subtype();
+                  if (cst == oval) {
+                        undoRemoveElement(e);
+                        e->measure()->cmdRemoveEmptySegment(segment);
+                        }
+                  return;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveKeySig
+//---------------------------------------------------------
+
+void Score::cmdRemoveKeySig(KeySig* ks)
+      {
+      Staff* staff = ks->staff();
+      KeyList* kl  = staff->keymap();
+      int tick     = ks->tick();
+      iKeyEvent ki = kl->find(tick);
+      if (ki == kl->end()) {
+            printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
+            return;
+            }
+      int oval = (*kl)[tick];
+      iKeyEvent nki = ki;
+      ++nki;
+
+      undoChangeKeySig(staff, tick, oval, NO_KEY);
+
+      undoRemoveElement(ks);
+      Segment* segment = ks->segment()->next1();
+      ks->measure()->cmdRemoveEmptySegment(ks->segment());
+
+      oval = kl->key(tick);
+      if (nki->second == oval)
+            undoChangeKeySig(staff, nki->first, oval, NO_KEY);
+
+      int track = ks->track();
+      for (; segment; segment = segment->next1()) {
+            if (segment->subtype() != Segment::SegKeySig)
+                  continue;
+            KeySig* e = static_cast<KeySig*>(segment->element(track));
+            if (e) {
+                  int cst = char(e->subtype() & 0xff);
+                  if (cst == oval) {
+                        // remove redundant key signature
+                        undoRemoveElement(e);
+                        segment->measure()->cmdRemoveEmptySegment(segment);
+                        }
+                  return;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   cmdRemove
 //---------------------------------------------------------
 
@@ -285,121 +380,14 @@ void Score::cmdRemove(Element* e)
       {
       switch(e->type()) {
             case CLEF:
-                  {
-                  Clef* clef    = (Clef*)e;
-                  Staff* staff  = clef->staff();
-                  ClefList* cl  = staff->clefList();
-                  int tick      = clef->tick();
-                  iClefEvent ki = cl->find(tick);
-                  if (ki == cl->end()) {
-                        printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
-                        return;
-                        }
-                  int oval = (*cl)[tick];
-                  iClefEvent nki = ki;
-                  ++nki;
-                  cl->erase(ki);
-
-                  undoChangeClef(staff, tick, oval, -1000);
-                  undoRemoveElement(clef);
-
-                  Measure* measure = tick2measure(tick);
-                  measure->cmdRemoveEmptySegment((Segment*)(clef->parent()));
-
-                  oval = cl->clef(tick);
-                  if (nki->second != oval)
-                        break;
-
-                  undoChangeClef(staff, nki->first, oval, -1000);
-
-                  tick = nki->first;
-                  for (MeasureBase* mb = measure; mb; mb = mb->next()) {
-                        if (mb->type() != MEASURE)
-                              continue;
-                        Measure* m = (Measure*)mb;
-                        bool found = false;
-                        for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                              if (segment->subtype() != Segment::SegClef)
-                                    continue;
-                              //
-                              // we assume keySigs are only in first track (voice 0)
-                              //
-                              int track = staff->idx() * VOICES;
-                              Clef* e = (Clef*)segment->element(track);
-                              int etick = segment->tick();
-                              if (!e || (etick != tick))
-                                    continue;
-                              if (etick > tick)
-                                    break;
-                              undoRemoveElement(e);
-                              m->cmdRemoveEmptySegment(segment);
-                              found = true;
-                              break;
-                              }
-                        if (found)
-                              break;
-                        }
-                  }
+                  cmdRemoveClef(static_cast<Clef*>(e));
                   break;
-
             case KEYSIG:
-                  {
-                  KeySig* ks   = (KeySig*)e;
-                  Staff* staff = ks->staff();
-                  KeyList* kl  = staff->keymap();
-                  int tick     = ks->tick();
-                  iKeyEvent ki = kl->find(tick);
-                  if (ki == kl->end()) {
-                        printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
-                        return;
-                        }
-                  int oval = (*kl)[tick];
-                  iKeyEvent nki = ki;
-                  ++nki;
-                  kl->erase(ki);
-
-                  undoChangeKeySig(staff, tick, oval, NO_KEY);
-                  undoRemoveElement(ks);
-
-                  Measure* measure = tick2measure(tick);
-                  measure->cmdRemoveEmptySegment((Segment*)(ks->parent()));
-
-                  oval = kl->key(tick);
-                  if (nki->second != oval)
-                        break;
-
-                  undoChangeKeySig(staff, nki->first, oval, NO_KEY);
-
-                  tick = nki->first;
-                  for (MeasureBase* mb = measure; mb; mb = mb->next()) {
-                        if (mb->type() != MEASURE)
-                              continue;
-                        Measure* m = (Measure*)mb;
-                        bool found = false;
-                        for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                              if (segment->subtype() != Segment::SegKeySig)
-                                    continue;
-                              //
-                              // we assume keySigs are only in first track (voice 0)
-                              //
-                              int track = staff->idx() * VOICES;
-                              KeySig* e = (KeySig*)segment->element(track);
-                              int etick = segment->tick();
-                              if (!e || (etick != tick))
-                                    continue;
-                              if (etick > tick)
-                                    break;
-                              undoRemoveElement(e);
-                              m->cmdRemoveEmptySegment(segment);
-                              found = true;
-                              break;
-                              }
-                        if (found)
-                              break;
-                        }
-                  }
+                  cmdRemoveKeySig(static_cast<KeySig*>(e));
                   break;
-
+            case TIMESIG:
+                  cmdRemoveTimeSig(static_cast<TimeSig*>(e));
+                  break;
             case TEMPO_TEXT:
                   {
                   int tick = e->tick();

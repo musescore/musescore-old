@@ -210,50 +210,40 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       {
       undoFixTicks();
 
-      // record old tickLens, since they will be modified when time is added/removed
+      // record old tick lengths, since they will be modified when time is added/removed
       QVector<int> tickLens;
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = static_cast<Measure*>(mb);
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             tickLens.append(m->tickLen());
-            }
 
       int oz, on;
       _sigmap->timesig(tick, oz, on);
-
       int z, n;
       TimeSig::getSig(timeSigSubtype, &n, &z);
+
       if ((oz == z) && (on == n)) {
             //
             // check if there is already a time signature symbol
             //
-            Segment* ts = 0;
-            for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
+            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                  if (s->subtype() != Segment::SegTimeSig)
                         continue;
-                  Measure* m = (Measure*)mb;
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        if (segment->subtype() != Segment::SegTimeSig)
-                              continue;
-                        int etick = segment->tick();
-                        if (etick == tick) {
-                              ts = segment;
-                              break;
-                              }
-                        }
-                  if (ts) {
+                  int etick = s->tick();
+                  if (etick > tick)
+                        break;
+                  if (etick == tick) {
                         for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                               int track = staffIdx * VOICES;
-                              Element* e = ts->element(track);
+                              Element* e = s->element(track);
                               if (e && e->subtype() != timeSigSubtype)
                                     undoChangeSubtype(e, timeSigSubtype);
                               }
                         return;
                         }
                   }
-            // no: we have to add a symbol
+            // no TimeSig: we have to add a symbol
             addTimeSig(tick, timeSigSubtype);
+            AL::SigEvent nSig(z, n);
+            undoChangeSig(tick, AL::SigEvent(), nSig);
             return;
             }
 
@@ -278,14 +268,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       //---------------------------------------------
 
       int staves = nstaves();
-      Segment* segment = 0;
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() == MEASURE) {
-                  segment = ((Measure*)mb)->first();
-                  break;
-                  }
-            }
-      for (; segment;) {
+      for (Segment* segment = firstMeasure()->first(); segment;) {
             Segment* nseg = segment->next1();
             if (segment->subtype() != Segment::SegTimeSig) {
                   segment = nseg;
@@ -301,7 +284,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                         if (e)
                               undoRemoveElement(e);
                         }
-                  undoRemoveElement(segment);
+                  undoRemoveElement(segment);   // segment is now empty
                   if (etick > tick)
                         break;
                   }
@@ -314,10 +297,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
       int j = 0;
       int ctick = 0;
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = static_cast<Measure*>(mb);
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             int newLen = _sigmap->ticksMeasure(ctick);
             ctick += newLen;
             int oldLen = tickLens[j];
@@ -328,6 +308,73 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             }
       if (nSig.valid())
             addTimeSig(tick, timeSigSubtype);
+      undoFixTicks();
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveTimeSig
+//---------------------------------------------------------
+
+void Score::cmdRemoveTimeSig(TimeSig* ts)
+      {
+      undoFixTicks();
+      // record old tick lengths, since they will be modified when time is added/removed
+      QVector<int> tickLens;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            tickLens.append(m->tickLen());
+
+      int tick = ts->tick();
+      AL::iSigEvent si = _sigmap->find(tick);
+      if (si == _sigmap->end()) {
+            printf("cmdRemoveTimeSig: cannot find SigEvent at %d\n", tick);
+            return;
+            }
+      AL::SigEvent oval = (*_sigmap)[tick];
+      AL::iSigEvent nsi = si;
+      ++nsi;
+
+      undoRemoveElement(ts->segment());
+      undoChangeSig(tick, oval, AL::SigEvent());
+
+      oval = _sigmap->timesig(tick);
+      if (nsi->second == oval)
+            undoChangeSig(nsi->first, oval, AL::SigEvent());
+
+      int z = oval.nominator;
+      int n = oval.denominator;
+
+      Segment* s = ts->segment()->next1();;
+      for (; s; s = s->next1()) {
+            if (s->subtype() != Segment::SegTimeSig)
+                  continue;
+            TimeSig* e = static_cast<TimeSig*>(s->element(0));
+            if (e) {
+                  int nz, nn;
+                  e->getSig(&nn, &nz);
+                  if (nz != z || nn != n)
+                        s = 0;
+                  break;
+                  }
+            }
+      if (s)
+            undoRemoveElement(s);
+
+
+      //---------------------------------------------
+      // modify measures
+      //---------------------------------------------
+
+      int j = 0;
+      int ctick = 0;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            int newLen = _sigmap->ticksMeasure(ctick);
+            ctick += newLen;
+            int oldLen = tickLens[j];
+            ++j;
+            if (newLen == oldLen)
+                  continue;
+            m->adjustToLen(oldLen, newLen);
+            }
       undoFixTicks();
       }
 

@@ -89,6 +89,8 @@ class Instrument;
 class UndoStack;
 class RepeatList;
 class MusicXmlCreator;
+class TimeSig;
+class Clef;
 
 extern bool showRubberBand;
 
@@ -564,6 +566,9 @@ class Score : public QObject {
 
       void cmdAdd(Element*);
       void cmdRemove(Element*);
+      void cmdRemoveClef(Clef*);
+      void cmdRemoveKeySig(KeySig*);
+      void cmdRemoveTimeSig(TimeSig*);
 
       void setUpdateAll()              { updateAll = true; }
       void setLayoutAll(bool val)      { layoutAll = val;  }
@@ -653,7 +658,6 @@ class Score : public QObject {
       void cmd(const QAction*);
       int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
       bool saveFile(bool autosave);
-      void adjustTime(int tick, MeasureBase*);
 
       QString filePath() const       { return info.filePath(); }
       QFileInfo* fileInfo()          { return &info; }
@@ -793,8 +797,6 @@ class Score : public QObject {
       void setCopyrightHtml(const QString& s);
       void endUndoRedo();
       void search(const QString& s);
-      Measure* firstMeasure() const;
-      Measure* lastMeasure() const;
       Measure* searchLabel(const QString& s, Measure* start = 0);
       RepeatList* repeatList() { return _repeatList; }
       double utick2utime(int tick) const;
@@ -817,6 +819,8 @@ class Score : public QObject {
 
       MeasureBase* first() const;
       MeasureBase* last()  const;
+      Measure* firstMeasure() const;
+      Measure* lastMeasure() const;
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
       QPaintDevice* paintDevice() const             { return _paintDevice; }

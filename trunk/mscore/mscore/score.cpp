@@ -64,6 +64,7 @@
 #include "textpalette.h"
 #include "preferences.h"
 #include "repeatlist.h"
+#include "keysig.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1278,24 +1279,6 @@ bool Score::playlistDirty()
       }
 
 //---------------------------------------------------------
-//   adjustTime
-//    change all time positions starting with measure
-//    according to new start time
-//---------------------------------------------------------
-
-void Score::adjustTime(int tick, MeasureBase* m)
-      {
-      int delta = tick - m->tick();
-      if (delta == 0)
-            return;
-      while (m) {
-            m->moveTicks(delta);
-            tick += m->tickLen();
-            m = m->next();
-            }
-      }
-
-//---------------------------------------------------------
 //   pos2TickAnchor
 //    Calculates anchor position and tick for a
 //    given position+staff in global coordinates.
@@ -2054,8 +2037,25 @@ void Score::addElement(Element* element)
       else if (element->type() == KEYSIG) {
             // FIXME: update keymap here (and remove that from Score::changeKeySig)
             // but only after fixing redo for elements contained in segments
-
             // fixup all accidentals
+
+            KeySig* ks = static_cast<KeySig*>(element);
+            int oval   = char(ks->subtype() & 0xff);
+            int track  = ks->track();
+            for (Segment* s = ks->segment()->next1(); s; s = s->next1()) {
+                  if (s->subtype() != Segment::SegKeySig)
+                        continue;
+                  KeySig* e = static_cast<KeySig*>(s->element(track));
+                  if (e) {
+                        int cst = char(e->subtype() & 0xff);
+                        if (cst != oval) {
+                              // fix natural signs if necessary
+                              e->setSig(oval, cst);
+                              }
+                        return;
+                        }
+                  }
+
             layoutAll = true;
             }
       else if (element->type() == SLUR) {
@@ -2070,14 +2070,10 @@ void Score::addElement(Element* element)
 
 //---------------------------------------------------------
 //   removeElement
+///   Remove \a element from its parent.
+///   Several elements (clef, keysig, timesig) need special handling, as they may cause
+///   changes throughout the score.
 //---------------------------------------------------------
-
-/**
- Remove \a element from its parent.
-
- Several elements (clef, keysig, timesig) need special handling, as they may cause
- changes throughout the score.
-*/
 
 void Score::removeElement(Element* element)
       {
@@ -2148,7 +2144,25 @@ void Score::removeElement(Element* element)
                   }
                   break;
             case KEYSIG:
+                  {
+                  KeySig* ks = static_cast<KeySig*>(element);
+                  int oval   = ks->staff()->key(ks->tick());
+                  int track = ks->track();
+                  for (Segment* s = ks->segment()->next1(); s; s = s->next1()) {
+                        if (s->subtype() != Segment::SegKeySig)
+                              continue;
+                        KeySig* e = static_cast<KeySig*>(s->element(track));
+                        if (e) {
+                              int cst = char(e->subtype() & 0xff);
+                              if (cst != oval) {
+                                    // fix natural signs if necessary
+                                    e->setSig(oval, cst);
+                                    }
+                              return;
+                              }
+                        }
                   layoutAll = true;
+                  }
                   break;
             case SLUR:
                   {

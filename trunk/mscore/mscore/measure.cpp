@@ -1165,8 +1165,25 @@ void Measure::add(Element* el)
                   break;
             case SEGMENT:
                   {
-// printf("measure add Segment(%d, %d, %s)\n", el->tick(), el->track(), el->name());
+                  Segment* seg = static_cast<Segment*>(el);
+// printf("measure add Segment(%d, %s) %p %p\n", el->tick(), seg->subTypeName(), seg->next(), seg->prev());
+// printf("   measure %d %d\n", tick(), tickLen());
 
+                  if (seg->prev() || seg->next()) {
+                        //
+                        // undo operation
+                        //
+                        if (seg->prev())
+                              seg->prev()->setNext(seg);
+                        else
+                              _first = seg;
+                        if (seg->next())
+                              seg->next()->setPrev(seg);
+                        else
+                              _last = seg;
+                        ++_size;
+                        break;
+                        }
                   int st = el->subtype();
                   if (st == Segment::SegGrace) {
                         Segment* s;
@@ -1176,7 +1193,7 @@ void Measure::add(Element* el)
                               for (; s && s->subtype() != Segment::SegChordRest; s = s->next())
                                     ;
                               }
-                        insert(static_cast<Segment*>(el), s);
+                        insert(seg, s);
                         break;
                         }
                   Segment* s;
@@ -1203,7 +1220,7 @@ void Measure::add(Element* el)
                                     s = s->next();
                               }
                         }
-                  insert(static_cast<Segment*>(el), s);
+                  insert(seg, s);
                   }
                   break;
             case TUPLET:
@@ -2230,11 +2247,10 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
 
 //---------------------------------------------------------
 //   drop
+///   Drop element.
+///   Handle a dropped element at position \a pos of given
+///   element \a type and \a subtype.
 //---------------------------------------------------------
-
-/**
- Handle a dropped element at position \a pos of given element \a type and \a subtype.
-*/
 
 Element* Measure::drop(const QPointF& p, const QPointF& dragOffset, Element* e)
       {
@@ -2287,16 +2303,8 @@ printf("drop staffList\n");
                   break;
 
             case KEYSIG:
-                  {
-                  KeySig* ks = (KeySig*)e;
-                  char newSig = ks->subtype() & 0xff;
-                  if (newSig < -7 || newSig > 7) {
-                        printf("illegal keysig %d\n", newSig);
-                        abort();
-                        }
-                  staff->changeKeySig(tick(), newSig);
-                  delete ks;
-                  }
+                  staff->changeKeySig(tick(), e->subtype() & 0xff);
+                  delete e;
                   break;
 
             case TIMESIG:
