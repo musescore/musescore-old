@@ -40,6 +40,7 @@
 #include "durationtype.h"
 #include "measure.h"
 #include "al/tempo.h"
+#include "al/sig.h"
 #include "repeatlist.h"
 #include "velo.h"
 #include "dynamics.h"
@@ -442,6 +443,21 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         arpeggioOffset = arpeggioNoteDistance;
 
                   int i = 0;
+                  
+                  double swingCoeff= swingRatio();
+                  
+                  //deal with odd measure in anacrusis
+                  int offSet = 0;
+                  if(!sigmap()->timesig(m->tick()).nominalEqualActual() && m->tickLen()%480 !=0){
+                      offSet = 480 - m->tickLen()%480;
+                  } 
+                  
+                  bool swing = ((tick - m->tick()+offSet)%AL::division >= 240);
+                  
+                  if(swing){
+                            tick += (swingCoeff * AL::division /2);
+                  }
+                  
                   for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
                         Note* note = in->second;
                         if (note->hidden() || note->tieBack())       // do not play overlapping notes
@@ -466,6 +482,13 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
                         else
                               len = (len * gateTime) / 100 - 1;
+
+                        //swing
+                        
+                        if(swing){
+                            len *= (1-swingCoeff);
+                        }    
+                           
 
                         Event* ev = new Event(ME_NOTEON);
                         int pitch = note->ppitch();

@@ -3,6 +3,8 @@
       - fix: add hardcoded F1 shortcut to shortcut editor
       - fix: "Change time signature for single measure"
       - fix: Key signatures do not include natural signs if added in reverse order
+       (la)
+      - add first support for swing playback
 27.sep (ws)
       - change implementation of pitch up/down functions: "up" uses always sharps and
         "down" flats instead of guessing the right pitch spelling

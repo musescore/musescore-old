@@ -267,6 +267,8 @@ class Score : public QObject {
                         ///< save a backup file will be created, subsequent
                         ///< saves will not overwrite the backup file.
       int _playPos;     ///< sequencer seek position
+      
+      double _swingRatio; ///< Swing ratio
 
       bool _foundPlayPosAfterRepeats; ///< Temporary used during playback rendering
                                       ///< indicating if playPos after expanded repeats
@@ -741,6 +743,9 @@ class Score : public QObject {
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
       AL::TempoMap* tempomap() const { return _tempomap; }
+
+      double swingRatio()                            { return _swingRatio;}
+      void setSwingRatio(double d)                   { _swingRatio = d;}
 
       QString movementNumber() const                 { return _movementNumber;  }
       QString movementTitle() const                  { return _movementTitle;   }
