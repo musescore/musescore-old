@@ -1329,8 +1329,10 @@ void ChangeKeySig::redo()
       KeyList* kl = staff->keymap();
       if (oldKeySig != NO_KEY) {
             iKeyEvent ik = kl->find(tick);
-            if (ik == kl->end())
+            if (ik == kl->end()) {
                   printf("ChangeKeySig::redo: cannot find key at tick %d\n", tick);
+                  abort();
+                  }
             else
                   kl->erase(ik);
             }

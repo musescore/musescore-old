@@ -120,6 +120,29 @@ double TempoMap::tempo(int tick) const
       }
 
 //---------------------------------------------------------
+//   tempo
+//---------------------------------------------------------
+
+TEvent TempoMap::getTempo(int tick) const
+      {
+      if (!useList)
+            return TEvent(_tempo);
+      if (empty())
+            return TEvent(2.0);
+      ciTEvent i = lower_bound(tick);
+      if (i == end()) {
+            --i;
+            return i->second;
+            }
+      if (i->first == tick)
+            return i->second;
+      if (i == begin())
+            return TEvent(2.0);
+      --i;
+      return i->second;
+      }
+
+//---------------------------------------------------------
 //   del
 //---------------------------------------------------------
 

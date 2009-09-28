@@ -1,3 +1,6 @@
+28.sep (ws)
+      - fix: "Change time signature for single measure"
+      - fix: Key signatures do not include natural signs if added in reverse order
 27.sep (ws)
       - change implementation of pitch up/down functions: "up" uses always sharps and
         "down" flats instead of guessing the right pitch spelling
