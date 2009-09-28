@@ -637,7 +637,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       //
       foreach(Shortcut* s, shortcuts) {
             Shortcut* ns = new Shortcut(*s);
-            ns->action = 0;
+            ns->action   = 0;
             localShortcuts[s->xml] = ns;
             }
       updateSCListView();
@@ -811,7 +811,7 @@ void PreferenceDialog::defineShortcutClicked()
       if (str.isEmpty())
             return;
       Shortcut* s = localShortcuts[str];
-      ShortcutCaptureDialog sc(s, this);
+      ShortcutCaptureDialog sc(s, localShortcuts, this);
       if (sc.exec()) {
             s->key = sc.getKey();
             active->setText(1, s->key.toString(QKeySequence::NativeText));

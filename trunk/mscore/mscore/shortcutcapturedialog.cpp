@@ -26,10 +26,11 @@
 //   ShortcutCaptureDialog
 //---------------------------------------------------------
 
-ShortcutCaptureDialog::ShortcutCaptureDialog(Shortcut* _s, QWidget* parent)
+ShortcutCaptureDialog::ShortcutCaptureDialog(Shortcut* _s, QMap<QString, Shortcut*> ls, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      localShortcuts = ls;
       s = _s;
 
       oshrtLabel->setText(s->key.toString(QKeySequence::NativeText));
@@ -73,7 +74,8 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       // Check against conflicting shortcuts
       bool conflict = false;
       QString msgString;
-      foreach (Shortcut* ss, shortcuts) {
+
+      foreach (Shortcut* ss, localShortcuts) {
             if ((s != ss) && (ss->key == key)) {
                   msgString = tr("Shortcut conflicts with ") + ss->descr;
                   conflict = true;

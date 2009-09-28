@@ -273,10 +273,10 @@ class MuseScore : public QMainWindow {
       void showNavigator(bool);
       void showMixer(bool);
       void showSynthControl(bool);
+      void helpBrowser();
 
    private slots:
       void autoSaveTimerTimeout();
-      void helpBrowser();
       void helpBrowser1();
       void about();
       void aboutQt();

@@ -731,7 +731,7 @@ MuseScore::MuseScore()
       QMenu* menuHelp = mb->addMenu(tr("&Help"));
       menuHelp->setObjectName("Help");
 
-      menuHelp->addAction(tr("Local &Handbook"),  this, SLOT(helpBrowser()), Qt::Key_F1);
+      menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
@@ -1928,6 +1928,8 @@ void MuseScore::cmd(QAction* a)
             transportTools->setVisible(!transportTools->isVisible());
       else if (cmd == "toggle-noteinput")
             entryTools->setVisible(!entryTools->isVisible());
+      else if (cmd == "local-help")
+            helpBrowser();
       else {
             if (cs)
                   cs->cmd(a);
