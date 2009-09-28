@@ -99,15 +99,15 @@
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Systeem</translation>
+        <translation>Systeem</translation>
     </message>
     <message>
         <source>PortuguÃªs brasileiro</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugees brasileiro</translation>
     </message>
     <message>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japans</translation>
     </message>
 </context>
 <context>
@@ -266,19 +266,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Meer...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1820,31 +1820,32 @@ space unit</extracomment>
     </message>
     <message>
         <source>show repeat bar tips</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>kan dit in het programma niet teruig vinden, dus even een worp gedaan... ;-)</translatorcomment>
+        <translation>toon herhaal maatstreep einde</translation>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebroken Akkoord</translation>
     </message>
     <message>
         <source>color notes which extend the usable pitch range</source>
-        <translation type="unfinished"></translation>
+        <translation>kleur de noten buiten het bruikbare toonhoogte bereik</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Creëer courtesy-sleutels</translation>
     </message>
     <message>
         <source>distance to note</source>
-        <translation type="unfinished"></translation>
+        <translation>afstand tot noot</translation>
     </message>
     <message>
         <source>line width</source>
-        <translation type="unfinished"></translation>
+        <translation>lijnbreedte</translation>
     </message>
     <message>
         <source>hook len</source>
-        <translation type="unfinished"></translation>
+        <translation>haaklengte</translation>
     </message>
 </context>
 <context>
@@ -2039,7 +2040,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeeldings Eigenschappen</translation>
     </message>
 </context>
 <context>
@@ -3081,7 +3082,7 @@ failed: </source>
     <message>
         <source>Note Attributes...</source>
         <translatorcomment>er stond Articulaties/Versieringen, maar die vertaling is niet letterlijk</translatorcomment>
-        <translation>Noot-attributen</translation>
+        <translation>Noot-attributen...</translation>
     </message>
     <message>
         <source>Accidentals...</source>
@@ -5087,50 +5088,52 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Start of stop afspelen</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer alle overeenkomstige elementen</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Overeenkomstige Elementen</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer alle soortgelijke elementen in dezelfde notenbalk</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle soortgelijke elementen in dezelfde notenbalk</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Synthesizer Bediening</translation>
     </message>
     <message>
         <source>Local &amp;Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaal &amp;Handboek</translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Online Handboek</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore handboek niet gevonden in:</translation>
     </message>
     <message>
         <source>
 
 From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;.</translation>
     </message>
 </context>
 <context>
@@ -5510,11 +5513,11 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <name>PianorollEditor</name>
     <message>
         <source>velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>snelheid:</translation>
     </message>
     <message>
         <source>pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>toonhoogte:</translation>
     </message>
 </context>
 <context>
@@ -5604,15 +5607,15 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies Wekmap</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies Instrumentenlijst</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies Start Partituur</translation>
     </message>
 </context>
 <context>
@@ -6176,7 +6179,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>color notes outside of usable pitch range</source>
-        <translation type="unfinished"></translation>
+        <translation>kleur de noten buiten het bruikbare toonhoogte bereik</translation>
     </message>
 </context>
 <context>
@@ -6379,15 +6382,15 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation type="unfinished">Tuplet...</translation>
+        <translation>Tuplet...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished">Tuplet-eigenschappen...</translation>
+        <translation>Tuplet-eigenschappen...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation type="unfinished">Verwijder Tuplet</translation>
+        <translation>Verwijder Tuplet</translation>
     </message>
 </context>
 <context>
@@ -6651,7 +6654,10 @@ mislukt:</translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het volgende bestand is vergrendeld: 
+%1 
+
+Probeer op een andere locatie op te slaan.</translation>
     </message>
 </context>
 <context>
@@ -6711,47 +6717,47 @@ Try saving to a different location.</source>
     <name>SelectDialog</name>
     <message>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Selecteer</translation>
     </message>
     <message>
         <source>Search for</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken naar</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>zelfde notenbalk</translation>
     </message>
     <message>
         <source>same voice</source>
-        <translation type="unfinished"></translation>
+        <translation>zelfde stem</translation>
     </message>
     <message>
         <source>same system</source>
-        <translation type="unfinished"></translation>
+        <translation>zelfde systeem</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation type="unfinished">Actie</translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <source>replace selection</source>
-        <translation type="unfinished"></translation>
+        <translation>vervangen selectie</translation>
     </message>
     <message>
         <source>add to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>voeg toe aan selectie</translation>
     </message>
     <message>
         <source>search in selection</source>
-        <translation type="unfinished"></translation>
+        <translation>zoek in selectie</translation>
     </message>
     <message>
         <source>subtract from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>onttrek van selectie</translation>
     </message>
 </context>
 <context>
@@ -6995,104 +7001,104 @@ Try saving to a different location.</source>
     <name>SynthControl</name>
     <message>
         <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies Synthesizer SoundFont</translation>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished">SoundFont Bestanden (*.sf2 *.SF2);;Alle (*)</translation>
+        <translation>SoundFont Bestanden (*.sf2 *.SF2);;Alle (*)</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation type="unfinished"></translation>
+        <translation>Galm</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished"></translation>
+        <translation>hoofdvolume</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>loaded sound font</source>
-        <translation type="unfinished"></translation>
+        <translation>geladen sound font</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished">Hoofd Stemming</translation>
+        <translation>Hoofd Stemming</translation>
     </message>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Sound Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Sound Font</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="unfinished">Galm</translation>
+        <translation>Galm</translation>
     </message>
     <message>
         <source>Room Size:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Damp:</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperen:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Breedte:</translation>
+        <translation>Breedte:</translation>
     </message>
     <message>
         <source>Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vooraf instellen:</translation>
     </message>
     <message>
         <source>not implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>niet uitgevoerd</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="unfinished">Chorus (breder of dieper geluid)</translation>
+        <translation>Chorus (breder of dieper geluid)</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Type:</translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Sine</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer:</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo:</translation>
     </message>
     <message>
         <source>Depth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Diepte:</translation>
     </message>
 </context>
 <context>
@@ -7267,7 +7273,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation type="unfinished"></translation>
+        <translation>toepassen op alle elementen van hetzelfde type</translation>
     </message>
 </context>
 <context>
@@ -7385,7 +7391,7 @@ Try saving to a different location.</source>
         <source>reference point offset in percent of parent width</source>
         <translatorcomment>TODO mss &apos;inspringen&apos; van maken? Ook &apos;parent width zou anders vertaald moeten als &apos;breedte van onderliggend element&apos; of zo.
 </translatorcomment>
-        <translation type="unfinished">compensatie referentiepunt in procenten van de standaardbreedte</translation>
+        <translation>compensatie referentiepunt in procenten van de standaardbreedte</translation>
     </message>
     <message>
         <source>%</source>
@@ -8870,19 +8876,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket tips right up</source>
-        <translation type="unfinished"></translation>
+        <translation>haak einde rechts omhoog</translation>
     </message>
     <message>
         <source>bracket tips right down</source>
-        <translation type="unfinished"></translation>
+        <translation>haak einde rechts omlaag</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished"></translation>
+        <translation>haak einde links omhoog</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished"></translation>
+        <translation>haak einde links omlaag</translation>
     </message>
 </context>
 </TS>
