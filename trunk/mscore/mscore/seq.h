@@ -105,7 +105,7 @@ class Seq : public QObject {
 
       QList<Event*> eventList;
 
-      void collectEvents();
+      
       void collectMeasureEvents(Measure*, int staffIdx);
 
       void stopTransport();
@@ -113,7 +113,6 @@ class Seq : public QObject {
       void setPos(int);
       void playEvent(const Event*);
       void playEvent(const Event&);
-      void guiStop();
       void guiToSeq(const SeqMsg& msg);
       void startNote(Channel*, int, int, double nt);
 
@@ -149,6 +148,9 @@ class Seq : public QObject {
       void nextChord();
       void prevMeasure();
       void prevChord();
+      
+      void collectEvents();
+      void guiStop();
 
       bool loadSoundFont(const QString&);
       bool init();

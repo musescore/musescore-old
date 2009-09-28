@@ -259,6 +259,7 @@ Score::Score(const Style& s)
       _yoff           = 0.0;
       _repeatList       = new RepeatList(this);
       _style  = s;
+      _swingRatio     = 0.0;
       // deep copy of defaultTextStyles:
       for (int i = 0; i < TEXT_STYLES; ++i)
             _textStyles.append(new TextStyle(defaultTextStyles[i]));

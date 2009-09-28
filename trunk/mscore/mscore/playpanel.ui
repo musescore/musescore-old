@@ -2617,6 +2617,38 @@
         </spacer>
        </item>
        <item>
+        <widget class="QComboBox" name="swingStyle">
+         <item>
+          <property name="text">
+           <string>Straight</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Swing</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Shuffle</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QToolButton" name="rewindButton">
          <property name="text">
           <string>Rewind</string>

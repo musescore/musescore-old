@@ -54,6 +54,9 @@ struct SigEvent {
       bool nominalEqual(const SigEvent& e) const {
             return (e.nominator2 == nominator2) && (e.denominator2 == denominator2);
             }
+      bool nominalEqualActual() const {
+            return (nominator == nominator2) && (denominator == denominator2);
+            }
       };
 
 //---------------------------------------------------------
