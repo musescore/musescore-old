@@ -265,8 +265,8 @@ enum {
       };
 
 extern const Sym* findSymbol(QChar code, int fontId);
-extern QString symToHtml(const Sym&);
-extern QString symToHtml(const Sym&, const Sym&);
+extern QString symToHtml(const Sym&, int leftMargin=0);
+extern QString symToHtml(const Sym&, const Sym&, int leftMargin=0);
 extern QFont fontId2font(int id);
 #endif
 
