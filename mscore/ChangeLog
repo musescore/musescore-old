@@ -1,4 +1,5 @@
 29.sep (ws)
+      - fix: Measure repeat sign always on top when dragged from palette
       - fix capella import crash
       - hack to fix MusicXml export of drum clef
 28.sep (ws)

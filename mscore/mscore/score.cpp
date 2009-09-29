@@ -1996,7 +1996,7 @@ void Score::addElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (Segment* segment = firstMeasure->first(); segment; segment = segment->next1()) {
+            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
                   for (int track = startTrack; track < endTrack; ++track) {
@@ -2009,8 +2009,6 @@ void Score::addElement(Element* element)
                   if (endFound)
                         break;
                   }
-            if (endFound)
-                  break;
             }
       else if (element->type() == KEYSIG) {
             // FIXME: update keymap here (and remove that from Score::changeKeySig)
@@ -2099,7 +2097,7 @@ void Score::removeElement(Element* element)
                   //-----------------------------------------------
 
                   bool endFound = false;
-                  for (Segment* segment = firstMeasure->first(); segment; segment = segment->next1()) {
+                  for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
                         int startTrack = staffIdx * VOICES;
                         int endTrack   = startTrack + VOICES;
                         for (int track = startTrack; track < endTrack; ++track) {
@@ -2112,8 +2110,6 @@ void Score::removeElement(Element* element)
                         if (endFound)
                               break;
                         }
-                  if (endFound)
-                        break;
                   }
                   break;
             case KEYSIG:
