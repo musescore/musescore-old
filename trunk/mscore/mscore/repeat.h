@@ -41,7 +41,7 @@ class RepeatMeasure : public Rest {
       virtual ElementType type() const      { return REPEAT_MEASURE; }
       virtual void draw(QPainter&) const;
       virtual void layout();
-//      virtual QPointF canvasPos() const;
+      virtual QPointF canvasPos() const;
       virtual void read(QDomElement e)   { Element::read(e);    }
       virtual void write(Xml& xml) const { Element::write(xml); }
       virtual QRectF bbox() const        { return _bbox;        }
