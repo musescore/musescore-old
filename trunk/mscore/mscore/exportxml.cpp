@@ -213,7 +213,7 @@ class ExportMusicXml {
       int tenths;
 
       int findBracket(const TextLine* tl) const;
-      void chord(Chord* chord, int staff, const LyricsList* ll);
+      void chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset);
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
@@ -221,6 +221,7 @@ class ExportMusicXml {
       void barlineLeft(Measure* m);
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
+      void unpitch2xml(Note* note, char& c, int& octave);
       void lyrics(const LyricsList* ll);
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
@@ -1121,6 +1122,21 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
             }
       }
 
+void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
+      {
+          static char table1[]  = "FEDCBAG";
+
+          int tick   = note->chord()->tick();
+          Staff* i   = note->staff();
+          int offset = clefTable[i->clefList()->clef(tick)].yOffset;
+    
+          int step   = (note->line() - offset + 700) % 7;
+          c          = table1[step];
+          
+          int tmp = (note->line() - offset);
+          octave =(3-tmp+700)/7 + 5 - 100; 
+      }
+
 //---------------------------------------------------------
 //   tick2xml
 //    set type + dots depending on tick len
@@ -1628,7 +1644,7 @@ static void arpeggiate(Arpeggio * arp, Xml& xml)
  For a single-staff part, \a staff equals zero, suppressing the <staff> element.
  */
 
-void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
+void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
       NoteList* nl = chord->noteList();
 
@@ -1652,27 +1668,45 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                 noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
                 noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
             }
+
+            if(! note->visible() ){
+              noteTag += QString(" print-object=\"no\"");
+            }
+                     
             xml.stag(noteTag);
 
             if (i != nl->begin())
                   xml.tagE("chord");
+            
             char c;
             int alter;
             int octave;
-            pitch2xml(note, c, alter, octave);
-
-          // pitch
-            xml.stag("pitch");
+           
             char buffer[2];
-            buffer[0] = c;
-            buffer[1] = 0;
-            xml.tag("step", QString(buffer));
-            if (alter)
-                  xml.tag("alter", alter);
-            xml.tag("octave", octave);
-            xml.etag();
+  
+            if(!useDrumset){
+                pitch2xml(note, c, alter, octave);
+                buffer[0] = c;
+                buffer[1] = 0;
+                // pitch
+                xml.stag("pitch");
+                xml.tag("step", QString(buffer));
+                if (alter)
+                      xml.tag("alter", alter);
+                xml.tag("octave", octave);
+                xml.etag();
+            }else{
+                // unpitched
+                unpitch2xml(note, c, octave);
+                buffer[0] = c;
+                buffer[1] = 0;
+                xml.stag("unpitched");
+                xml.tag("display-step", QString(buffer));
+                xml.tag("display-octave", octave);
+                xml.etag();
+            }
 
-          // duration
+            // duration
             xml.tag("duration", note->chord()->tickLen() / div);
 
             if (note->tieBack())
@@ -1842,7 +1876,13 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
       attr.doAttr(xml, false);
-      xml.stag("note");
+      
+      QString noteTag = QString("note");
+      if(! rest->visible() ){
+          noteTag += QString(" print-object=\"no\"");
+      }
+      
+      xml.stag(noteTag);
       xml.tagE("rest");
 
       Duration d = rest->duration();
@@ -3020,7 +3060,7 @@ foreach(Element* el, *(score->gel())) {
                                           // (too) simple solution: output lyrics only for the first voice
                                           const LyricsList* ll = 0;
                                           if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
-                                          chord((Chord*)el, sstaff, ll);
+                                          chord((Chord*)el, sstaff, ll, part->useDrumset());
                                           break;
                                           }
                                     case REST:
