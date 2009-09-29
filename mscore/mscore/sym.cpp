@@ -264,7 +264,7 @@ void Sym::draw(QPainter& painter, double mag) const
 //    for QDocument->setHtml()
 //---------------------------------------------------------
 
-QString symToHtml(const Sym& s)
+QString symToHtml(const Sym& s, int leftMargin)
       {
       double size    = s.font().pixelSize() * 72.0 / DPI;
       QString family = s.font().family();
@@ -279,15 +279,15 @@ QString symToHtml(const Sym& s)
               "</style>"
             "</head>"
           "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                "&#%3;"
+            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                "&#%4;"
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(family).arg(size).arg(s.code().unicode());
+      "</data>").arg(family).arg(size).arg(leftMargin).arg(s.code().unicode());
       }
 
-QString symToHtml(const Sym& s1, const Sym& s2)
+QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
       QFont f        = s1.font();
       double size    = s1.font().pixelSize() * 72.0 / DPI;
@@ -304,12 +304,12 @@ QString symToHtml(const Sym& s1, const Sym& s2)
               "</style>"
             "</head>"
           "<body style=\" font-family:'%1'; font-size:%2pt;\">"
-            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                "&#%3;&#%4;"
+            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                "&#%4;&#%5;"
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(family).arg(size).arg(s1.code().unicode()).arg(s2.code().unicode());
+      "</data>").arg(family).arg(size).arg(leftMargin).arg(s1.code().unicode()).arg(s2.code().unicode());
       }
 
 //---------------------------------------------------------
