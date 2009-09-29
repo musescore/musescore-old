@@ -60,7 +60,7 @@ Note* Score::getSelectedNote()
       Element* el = selection()->element();
       if (el) {
             if (el->type() == NOTE)
-                  return (Note*)el;
+                  return static_cast<Note*>(el);
             }
       selectNoteMessage();
       return 0;
@@ -497,9 +497,9 @@ void Canvas::modifyElement(Element* el)
       Element* e = cs->selection()->element();
       Chord* chord;
       if (e->type() == CHORD)
-            chord = (Chord*) e;
+            chord = static_cast<Chord*>(e);
       else if (e->type() == NOTE)
-            chord = ((Note*)e)->chord();
+            chord = static_cast<Note*>(e)->chord();
       else {
             printf("modifyElement: no note/Chord selected:\n  ");
             e->dump();
@@ -508,7 +508,7 @@ void Canvas::modifyElement(Element* el)
             }
       switch (el->type()) {
             case ARTICULATION:
-                  chord->add((Articulation*)el);
+                  chord->add(static_cast<Articulation*>(el));
                   break;
             default:
                   printf("modifyElement: %s not ARTICULATION\n", el->name());
@@ -1548,9 +1548,6 @@ void Score::changeVoice(int voice)
 
       _is._segment = _is._segment->measure()->firstCRSegment();
       emit posChanged(_is._segment->tick());
-
-//      foreach(Viewer* v, viewer)
-//            v->moveCursor();
       updateAll = true;
       }
 

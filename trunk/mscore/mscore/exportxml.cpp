@@ -1078,7 +1078,8 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       int tick   = note->chord()->tick();
       Staff* i   = note->staff();
-      int offset = clefTable[i->clefList()->clef(tick)].yOffset;
+      int clef   = i->clefList()->clef(tick);
+      int offset = clefTable[clef].yOffset;
 
       int step   = (note->line() - offset + 700) % 7;
       c          = table1[step];
@@ -1088,19 +1089,32 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       static int table2[7] = { 5, 4, 2, 0, 11, 9, 7 };
       int npitch = table2[step] + (octave + 1) * 12;
-      alter      = note->pitch() - npitch;
+
+      //
+      // HACK:
+      // On percussion clefs there is no relationship between
+      // note->pitch() and note->line()
+      // note->line() is determined by drumMap
+      //
+      if (clef == CLEF_PERC || clef == CLEF_PERC2) {
+            alter = 0;
+            pitch = line2pitch(note->line(), clef, 0);
+            octave = (pitch / 12) - 1;
+            }
+      else
+            alter = note->pitch() - npitch;
 
       //deal with Cb and B#
       if (alter > 2) {
-            printf("pitch2xml problem: alter %d step %d(line %d) octave %d\n",
-               alter, step, note->line(), octave);
+            printf("pitch2xml problem: alter %d step %d(line %d) octave %d clef %d(offset %d)\n",
+               alter, step, note->line(), octave, clef, offset);
 //HACK:
             alter  -= 12;
             octave += 1;
             }
       if (alter < -2) {
-            printf("pitch2xml problem: alter %d step %d(line %d) octave %d\n",
-               alter, step, note->line(), octave);
+            printf("pitch2xml problem: alter %d step %d(line %d) octave %d clef %d(offset %d)\n",
+               alter, step, note->line(), octave, clef, offset);
 //HACK:
             alter  += 12;
             octave -= 1;
@@ -2888,8 +2902,8 @@ foreach(Element* el, *(score->gel())) {
                                           }
                                     }
                         }
-                   // output attributes with the first actual measure (pickup or regular) only     
-                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {       
+                   // output attributes with the first actual measure (pickup or regular) only
+                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                       for (int i = 0; i < staves; i++) {
                         Staff* st = part->staff(i);
                         if(st->lines() != 5){
@@ -2899,10 +2913,10 @@ foreach(Element* el, *(score->gel())) {
                                 xml.stag("staff-details");
                             xml.tag("staff-lines", st->lines());
                             xml.etag();
-                          } 
-                        }   
+                          }
+                        }
                       }
-                  
+
                   // output attribute at start of measure: measure-style
                   measureStyle(xml, attr, m, inMultiMeasureRest);
 

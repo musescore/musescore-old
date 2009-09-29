@@ -38,13 +38,6 @@ PlayPanel::PlayPanel(QWidget* parent)
       cachedTickPosition = -1;
       cachedTimePosition = -1;
       setupUi(this);
-      // volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
-//      tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
-
-      // int lineStep = (MAX_VOL - MIN_VOL) * 10;
-      // volumeSlider->setSingleStep(lineStep);
-      // volumeSlider->setPageStep(lineStep * 10);
-      // volumeSlider->setInvertedAppearance(true);  // cannot be set from designer
 
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
@@ -150,7 +143,7 @@ void PlayPanel::swingStyleChanged(int index)
           case 2:
             cs->setSwingRatio(0.5);
           break;
-        
+
         }
         if (seq->isRunning()){
           if(seq->isStopped()){
