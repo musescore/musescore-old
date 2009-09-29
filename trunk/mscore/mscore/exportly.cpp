@@ -127,7 +127,11 @@ class ExportLy {
 
   QString cleannote, prevnote;
 
-  struct InstructionAnchor
+  struct InstructionAnchor  // Even if it is exactly the same thing as
+			    // "direction", the word "instruction" is
+			    // used in this file, so as not to cause
+			    // confusion with "direction" of the
+			    // exportxml-file.
   {
     Element* instruct;  // the element containing the instruction
     Element* anchor;    // the element it is attached to
@@ -150,7 +154,8 @@ class ExportLy {
   bool findMatchInMeasure(int, Staff*, Measure*, int, int);
   bool findMatchInPart(int, Staff*, Score*, Part*, int, int);
   bool findSpecificMatchInPart(int, Staff*, Score*, int, int);
-
+  void jumpAtMeasureStop(Measure*);
+  void markerAtMeasureStart(Measure*);
 
   void symbol(Symbol * sym);
   void tempoText(TempoText *);
@@ -240,7 +245,7 @@ void ExportLy::initBrackets()
 
 //----------------------------------------------------------------
 //   brackRegister register where partGroup Start, and whether brace,
-//   bracket or pianostaff
+//   bracket or pianostaff.
 //----------------------------------------------------------------
 
 void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start, bool end)
@@ -335,9 +340,6 @@ void ExportLy::bracktest()
       {
       for (int i = 0; i < 10; i++) {
             printf("stavnr: %d braceno: %d brackno %d\n", i, lybracks[i].braceno, lybracks[i].brakno);
-// TODO: change to printf
-//            cout << "   bracestart: " << (int)lybracks[i].bracestart << "   brakstart: " << (int)lybracks[i].brakstart;
-//            cout << "   braceend: " << (int)lybracks[i].braceend << "   brackend: " << (int) lybracks[i].brakend << "\n";
             }
       }
 
@@ -349,7 +351,7 @@ void ExportLy::instructionJump(Jump* jp)
 {
   int jtp = jp->jumpType();
   QString words = "";
-
+  
   if (jtp == JUMP_DC)
     {
       if (jp->getText() == "")
@@ -384,17 +386,14 @@ void ExportLy::instructionJump(Jump* jp)
 	words = "D.S. al Fine";
       else
 	words = jp->getText();
-      if (jp->jumpTo() == "") {
-             }
-	}
+    }
   else if (jtp == JUMP_DS)
     {
       words = "D.S.";
     }
   else
     printf("jump type=%d not implemented\n", jtp);
-
-  out << "\\mark " << "\" << words << \" ";
+  out << "\\once \\override Score.RehearsalMark #'self-alignment-X = #RIGHT  " <<   "\\mark " << "\"" << words << "\"" ;
 }
 
 
@@ -408,18 +407,28 @@ void ExportLy::instructionMarker(Marker* m)
   int mtp = m->markerType();
   QString words = "";
   QString type  = "";
-
+  printf("printing marker\n");
   if (mtp == MARKER_CODA)
     {
-      type = "coda";
+      printf("printing coda\n");
+      type = "\\codasign";
     }
+  else if (mtp == MARKER_CODETTA)
+    {
+     	words = "codetta";
+     }
   else if (mtp == MARKER_SEGNO)
     {
-      type = "segno";
+      printf("printing segno\n");
+      type = "\\segnosign";
     }
   else if (mtp == MARKER_FINE)
     {
-      words = "Fine";
+      printf("printing fine\n");
+      if (m->getText() == "")
+	words = "fine";
+      else 
+	words = m->getText();
     }
   else if (mtp == MARKER_TOCODA)
     {
@@ -428,10 +437,24 @@ void ExportLy::instructionMarker(Marker* m)
       else
 	words = m->getText();
     }
+  else if (mtp == MARKER_VARCODA)
+    {
+	type = "\\varcodasign";
+    }
+  else if (mtp == MARKER_TOCODA)
+      if (m->getText() == "")
+	words = "To Coda";
+      else words = m->getText();
+  else if (mtp == MARKER_USER)
+    {
+      if (m->getText() =="" )
+	printf("unknown user marker\n");
+      else words = m->getText();
+    } 
   else
     printf("marker type=%d not implemented\n", mtp);
   if (words=="")
-    out << "\\mark \\markup { \\musicglyph #\"scripts." << type<<"\"} ";
+    out <<  type ;
   else
     out << "\\mark \"" << words << "\"";
 
@@ -487,7 +510,8 @@ void ExportLy::words(Text* text)
 //---------------------------------------------------------
 
 void ExportLy::hairpin(Hairpin* hp, int tick)
-      {
+{ // todo: find exact mscore-position of hairpin start and end and not
+  // only anchorpoint, and position accordingly in lily.
 	int art=2;
 	art=hp->subtype();
 	if (hp->tick() == tick)
@@ -501,40 +525,46 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
       }
 
 //---------------------------------------------------------
-//   ottava
-// <octave-shift type="down" size="8" relative-y="14"/>
-// <octave-shift type="stop" size="8"/>
+//  start ottava
 //---------------------------------------------------------
 
 void ExportLy::ottava(Ottava* ot, int tick)
-      {
-      int st = ot->subtype();
-      if (ot->tick() == tick) {
-            const char* sz = 0;
-            switch(st) {
-                  case 0:
-                        sz = "1";
-                        break;
-                  case 1:
-                        sz = "2";
-                        break;
-                  case 2:
-                        sz = "-1";
-                        break;
-                  case 3:
-                        sz = "-2";
-                        break;
-                  default:
-                        printf("ottava subtype %d not understood\n", st);
-                  }
-            if (sz)
-	      out << "#(set-octavation  " << sz << ") ";
-            }
-      else {
-	if (st == 0)
-	  out << "#(set-octavation  0)";
-            }
+{
+  int st = ot->subtype();
+  if (ot->tick() == tick) 
+    {
+      switch(st) {
+      case 0:
+	out << "\\okt ";
+	break;
+      case 1:
+	out << "\\okt \\once\\override TextSpanner #'(bound-details left text) = \"15va\""; 
+	break;
+      case 2:
+	out << "\\okt \\once \\override TextSpanner #'(bound-details left text) = \"8vb\"  \n"; 
+	indent();
+	out << "\\once \\override TextSpanner #'direction =#-1\n"; 
+	indent();
+	out << "\\once \\override TextSpanner #'(bound-details right text) = \\markup{ \\draw-line #'(0 . 1) } \n";
+	indent();
+	break;
+      case 3:
+	out << "\\okt \\once override TextSpanner #'(bound-details left text) = \"15vb\"  \n";
+	indent();
+	out << " \\once\\override TextSpanner #'direction =#-1  \n";
+	indent();
+	out <<  "\\once\\override TextSpanner #'(bound-details right text) = \\markup{ \\draw-line #'(0 .  1) } \n";
+	indent();
+	break;
+      default:
+	printf("ottava subtype %d not understood\n", st);
       }
+    }
+  else {
+     	  out << "\\oktend ";
+        }
+}
+
 
 //---------------------------------------------------------
 //   pedal
@@ -560,7 +590,8 @@ void ExportLy::dynamic(Dynamic* dyn)
 {
   QString t = dyn->getText();
   if (t == "p" || t == "pp" || t == "ppp" || t == "pppp" || t == "ppppp" || t == "pppppp"
-      || t == "f" || t == "ff" || t == "fff" || t == "ffff" || t == "fffff" || t == "ffffff"
+      || t == "f" ||
+      t == "ff" || t == "fff" || t == "ffff" || t == "fffff" || t == "ffffff"
       || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
       || t == "rf" || t == "rfz" || t == "sfz" || t == "sffz" || t == "fz" || t == "sff")
     {
@@ -694,7 +725,7 @@ void ExportLy::removeAnchor(int ankind)
 
 void ExportLy::storeAnchor(struct InstructionAnchor a)
       {
-      if (nextAnchor < 512)
+      if (nextAnchor < 1024)
 	{
 	  anchors[nextAnchor++] = a;
 	}
@@ -741,6 +772,10 @@ void ExportLy::handlePreInstruction(Element * el)
 		    }
 		}
 	      break;
+	      case OTTAVA:
+		printf("ottava in pre-handle\n");
+		ottava((Ottava*) instruction, anchors[i].tick);
+		break;
 	    default: break;
 	    }//end switch
 	}//end if anchors
@@ -789,15 +824,10 @@ void ExportLy::handleElement(Element* el, bool start)
 	      words((Text*) instruction);
 	      break;
 	    case DYNAMIC:
-	      printf("funnet DYNAMIC i ankerliste\n");
 	      dynamic((Dynamic*) instruction);
 	      break;
 	    case HAIRPIN:
-	      printf("funnet HÅRNÅL i ankerliste\n");
 	      hairpin((Hairpin*) instruction, anchors[i].tick);
-	      break;
-	    case OTTAVA:
-	      ottava((Ottava*) instruction, anchors[i].tick);
 	      break;
 	    case PEDAL:
 	      pedal((Pedal*) instruction, anchors[i].tick);
@@ -805,32 +835,69 @@ void ExportLy::handleElement(Element* el, bool start)
 	    case TEXTLINE:
 	      textLine((TextLine*) instruction, anchors[i].tick);
 	      break;
+	    case OTTAVA:
+	      break;
 	    default:
-	      printf("InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
-		     Element::name(instruction->type()), anchors[i].tick);
+	      printf("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
+	                    Element::name(instruction->type()), anchors[i].tick);
 	      break;
 	    }
 	  removeAnchor(i);
-	  //	  resetAnchor(anchors[i]); //discard used anchors to avoid unnecessary doubles.
 	}
     } //foreach position i anchor-array.
 }
 
 
-// void ExportLy::anchorJumporMarker(Measure* m, int tick)
-// {
-//   int i=0, j=0;
-//   measurenumber=m->no()+1;
-//   if (tick==m-tick()) //start of measure: register last in previous
-//     {
-//       while (voltarray[i]<measurenumber-1) i++;
-//       for (j=lastind, j>=i, j--)
-// 	{
-// 	  voltarray[j+1]=voltarray[j];
-// 	}
-//       voltarray[i].voltart=none;
-//       voltarray[i].barno=0;
-// }
+void ExportLy::markerAtMeasureStart(Measure* m)
+{ 
+   for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) 
+     {
+       Element* dir = *ci;
+       int tp = dir->type();
+       if (tp == MARKER) 
+  	 { //only markers are used at measure start.
+	   Marker* ma = (Marker*) dir;
+	   int mtp = ma->markerType();
+	   //sort out markers which belong at measure end:
+	   if (!(mtp == MARKER_FINE || mtp == MARKER_TOCODA))
+	     {
+	       printf("marker found at measure start\n");
+	       instructionMarker(ma);
+	     }
+  	 }
+     }
+}
+
+//---------------------------------------------------------
+//  jumpAtMeasureStop -- write jumps at end of measure
+//---------------------------------------------------------
+
+void ExportLy::jumpAtMeasureStop( Measure* m)
+      {
+	// loop over all measure relative elements in this measure
+	// looking for JUMPS and MARKERS
+	for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) 
+	  {
+	    Element* dir = *ci;
+	    int tp = dir->type();
+	    if (tp == JUMP) {
+	      // all jumps are handled at measure end
+	      printf("found jump at measure stop\n");
+	      Jump* jp = (Jump*) dir;
+	      instructionJump(jp);
+	    }
+	    else if (tp == MARKER) 
+	      {
+		printf("found marker at measure stop\n");
+		Marker* ma = (Marker*) dir;
+		int mtp = ma->markerType();
+		//only print markers which belong at measure end:
+		if (mtp == MARKER_FINE || mtp == MARKER_TOCODA) 
+		  instructionMarker(ma);
+	      }
+	  }
+      }
+
 
 //---------------------------------------------------------
 //   findSpecificMatchInMeasure -- find chord or rest in measure
@@ -905,7 +972,7 @@ bool ExportLy::findMatchInPart(int tick, Staff* st, Score* sc, Part*, int strack
       }
 
 //---------------------------------------------------------
-//   buildInstructionList -- associate instruction (measure relative elements)
+//     buildInstructionList -- associate instruction (measure relative elements)
 //     with elements in segments to enable writing at the correct position
 //     in the output stream. Called once for every part to handle all part-level elements.
 //---------------------------------------------------------
@@ -980,12 +1047,6 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
       Element* instruction = *ci;
       switch(instruction->type())
 	{
-	case JUMP:
-	  printf("measure JUMP foundat tick: %d\n", instruction->tick());
-	case MARKER:
-	  printf("measure MARKER foundat tick: %d\n", instruction->tick());
-	  //	  anchorJumpOrMarker(m,instruction);
-	  break;
 	case DYNAMIC:
 	case SYMBOL:
 	case TEMPO_TEXT:
@@ -999,7 +1060,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	    {
 	      anker.instruct=instruction;
 	      storeAnchor(anker);
-	      printf("put instruction type %d in anchorlist\n", instruction->type());
+	      //	      printf("put instruction type %d in anchorlist\n", instruction->type());
 	    }
 	  //else if (!found) printf("element not anchored?!: %d\n", instruction->type());
 	  break;
@@ -1037,9 +1098,19 @@ void ExportLy::indentF()
 
 void ExportLy::findTuplets(ChordRest* cr)
       {
-      Tuplet* t = cr->tuplet();
+	//explanation from tuplet.h:
+//------------------------------------------------------------------------
+//   Tuplet
+//     Example of 1/8 triplet:
+//       _baseLen     = 1/8
+//       _actualNotes = 3
+//       _normalNotes = 2     (3 notes played in the time of 2/8)
+//
+//    the tuplet has a len of _baseLen * _normalNotes
+//    a tuplet note has len of _baseLen * _normalNotes / _actualNotes
+//------------------------------------------------------------------------
 
-      // TODO: Tuplet() has changed; please check
+      Tuplet* t = cr->tuplet();
 
       if (t) {
             if (tupletcount == 0) {
@@ -1047,13 +1118,13 @@ void ExportLy::findTuplets(ChordRest* cr)
                   int nrmNotes   = t->normalNotes();
                   int baselength = t->ticks() / nrmNotes;
                   int thislength = cr->ticks();
-                  tupletcount    = nrmNotes * baselength - thislength;
+		  tupletcount    = nrmNotes * baselength - thislength;
                   out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
                   }
             else if (tupletcount > 1) {
                   int thislength = cr->ticks();
                   tupletcount    = tupletcount - thislength;
-                  if (tupletcount == 0)
+                  if (tupletcount <= 0)
                         tupletcount = -1;
                   }
             }
@@ -1068,9 +1139,9 @@ void ExportLy::findTuplets(ChordRest* cr)
 int ExportLy::voltaCheckBar(Measure* meas, int i)
 {
 
-  int blt = meas->endBarLineType();
+  int barlinetype = meas->endBarLineType();
 
-  switch(blt)
+  switch(barlinetype)
     {
     case START_REPEAT:
       i++;
@@ -1096,16 +1167,18 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
       i++;
       voltarray[i].voltart=doublebar;
       voltarray[i].barno=taktnr;
+      break;
     case BROKEN_BAR:
       i++;
       voltarray[i].voltart=brokenbar;
       voltarray[i].barno=taktnr;
+      break;
     default:
       break;
     }//switch
 
   bool rs = meas->repeatFlags() & RepeatStart;
-  if (rs)
+  if ((rs) and (taktnr == 1))
     {
       i++;
       voltarray[i].voltart=startrepeat;
@@ -1152,7 +1225,7 @@ void  ExportLy::findVolta()
 		  i++;
 		  //  if (v->subtype() == Volta::VOLTA_CLOSED)
 		  // 		    {//lilypond developers have "never seen" last ending closed.
-		  // 		      //So they are reluctant to implement it. Final ending is always "open" in lilypond.
+		  //                 //So they are reluctant to implement it. Final ending is always "open" in lilypond.
 		  // 		    }
 		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN)
 		  // 		    {
@@ -1179,8 +1252,23 @@ void  ExportLy::findVolta()
     }//for all measures
   lastind=i;
 
-  //  for (i=0; i<lastind; i++)
-  //  cout << "voltatest: " << voltarray[i].barno << "  " << voltarray[i].voltart <<"\n";
+   // for (i=0; i<lastind; i++)
+   //   {
+   //     switch (voltarray[i].voltart)
+   // 	 {
+   // 	 case startending: printf("startending \n"); break;
+   // 	 case endending:   printf("endending \n"); break;
+   // 	 case startrepeat: printf("startrepeat \n"); break;
+   // 	 case endrepeat:   printf("endrepeat \n"); break;
+   // 	 case bothrepeat:  printf("bothrepeat \n"); break;
+   // 	 case doublebar:   printf("doublebar \n"); break;
+   // 	 case brokenbar:   printf("brokenbar \n"); break;
+   // 	 case endbar:      printf("endbar \n"); break;
+   // 	 case none:        printf("none \n"); break;
+   // 	 default:          printf("absolutely none \n"); break;
+   // 	 }
+   //   } //end voltatest
+
 }// end findvolta
 
 
@@ -1856,11 +1944,12 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	  switch(voltarray[i].voltart)
 	    {
 	    case startrepeat:
-	      indent();
-	      out << "\\repeat volta 2 {";
-	      firstalt=false;
-	      secondalt=false;
-	      break;
+		  indent();
+		  out << "\\repeat volta 2 { %startrep \n";
+		  firstalt=false;
+		  secondalt=false;
+		  repeatactive=true;
+		  break;
 	    case endrepeat:
 	      if ((repeatactive==true) and (secondalt==false))
 		{
@@ -1872,9 +1961,9 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	    case bothrepeat:
 	      if (firstalt==false)
 		{
-		  out << "} % end of repeat\n";
+		  out << "} % end of repeat (both)\n";
 		  indent();
-		  out << "\\repeat volta 2 {";
+		  out << "\\repeat volta 2 { % bothrep \n";
 		  firstalt=false;
 		  secondalt=false;
 		  repeatactive=true;
@@ -1948,7 +2037,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 {
   int i=0;
   char cvoicenum, cstaffnum;
-  if (m->no() >0) out << " | % " << m->no() << "\n" ; //barchecksign and barnumber for previous measure
+  if (m->no() > 0) out << " | % " << m->no() << "\n" ; //print barchecksign and barnumber for previous measure
   measurenumber=m->no()+1;
 
    if (m->irregular())
@@ -1957,7 +2046,8 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
      }
 
 
-  if ((measurenumber==1) and (donefirst==false))
+   if ((measurenumber==1) and (donefirst==false)) 
+     // ^^^^if clause: to prevent doing these things for both pickup and first full measure
     {
       donefirst=true;
       level=0;
@@ -2031,7 +2121,6 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
   int tick = m->tick();
   int measuretick=0;
   Element* e;
-
 
   for(Segment* s = m->first(); s; s = s->next())
     {
@@ -2134,9 +2223,6 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  break;
 	case BREATH:
 	  out << "\\breathe ";
-	  break;
-	case JUMP:
-	  printf("ordinary elements: Jump found\n");
 	  break;
 	default:
 	  //printf("Export Lilypond: unsupported element <%s>\n", e->name());
@@ -2309,7 +2395,9 @@ void ExportLy::writeScore()
 		{
 		  if (m->type() != MEASURE)
 		    continue;
-		    writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
+		  if (staffInd == 0)  markerAtMeasureStart( (Measure*) m );
+		  writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
+		  if (staffInd == 0) jumpAtMeasureStop( (Measure*) m);
 		}
 	      level--;
 	      indent();
@@ -2524,6 +2612,44 @@ bool ExportLy::write(const QString& name)
     "\n"
     "\\version \"2.12.0\"\n\n";     // target lilypond version
 
+  os << "\n\n";
+
+  os << " %%---------------mscore's lilypond macros: -------------------------\n\n"
+    " %%-----------------replacement for the \\ottava command--------------------\n\n";
+
+  //The lilypond \ottava command moves the visual notes one octave
+  //down, so that they will sound at their correct pitch when we take
+  //account of the 8va instruction. Mscore only adds the
+  //8va-instruction. In order to make the lilypond code exported from
+  //mscore reflect mscore behavior, it was necessary to construct the
+  //macros \okt and \oktend as substitutes for \ottava. A more elegant
+  //solution would be to prevent \ottava from temporarily resetting
+  //the middleCPosition, but I did not understand how to do
+  //that. (olav)
+
+  os << "okt =\n  "
+"{  %% for explanation, see mscore source file exportly.cpp \n"
+"  \\once\\override TextSpanner #'(bound-details left text) = \"8va\"\n"
+"  \\once\\override TextSpanner #'dash-period = #1\n"
+"  \\once\\override TextSpanner #'dash-fraction = #0.5\n"
+"  \\once \\override TextSpanner #'(bound-details right padding) = #-1\n"
+"  \\once\\override TextSpanner #'(bound-details right text) = \\markup{ \\draw-line #'(0 . -1) }\n"
+"  #(ly:export (make-event-chord (list (make-span-event 'TextSpanEvent START)))) \n"
+"}\n"
+"\n"
+"oktend ={#(ly:export (make-event-chord (list (make-span-event 'TextSpanEvent STOP))))} \n \n"
+
+"%%------------------end okt--oktend--macros -----------------\n\n"
+
+"%%------------------coda---segno---macros--------------------\n"
+"   codasign = \\mark \\markup {\\musicglyph #\"scrips.coda\"}   \n"
+"   segnosign = \\mark \\markup {\\musicglyph #\"scripts.segno\"} \n"
+"   varcodasign = \\mark \\markup  {\\musicglyph #\"scripts.varcoda\"} \n"
+"%% -------------------end-of-coda-segno-macros------------------\n"
+
+"%% --------------end mscore lilypond-macros------------------\n\n";
+
+
   //---------------------------------------------------
   //    Page format
   //---------------------------------------------------
@@ -2544,6 +2670,7 @@ bool ExportLy::write(const QString& name)
   if (pf->landscape) os << " 'landscape";
 
   os << ")\n\n";
+
 
   // TODO/O.G.: better choose between standard formats and specified paper
   // dimensions. We normally don't need both.
@@ -2703,7 +2830,19 @@ bool ExportLy::write(const QString& name)
    13. cross-staff beaming in pianostaff
    14. Real multimeasure rests (for now only one-measure rests are exported).
    18. lacking fermata above/below rest.
-   -  big problems with hairpins.
+
+   - big problems with hairpins: Beginning of hairpin and end of
+      hairpin are anchored to different notes. This is done
+      automatically when you drop an hairpin in the appropriate place
+      in the score. exportly find these anchors and insert \< and \!
+      after these notes. But the start of the hairpin protrudes to the
+      left of the anchor. And often the end of the hairpin is anchored
+      to a note which is to far to the right. The placement of the
+      lily-symbols must take regard for the placement on the canvas
+      and not to the anchorpoints alone. Check the procedure in the
+      main program to see how the anchorpoints and the canvas-position
+      is made and compensate for this when exporting the lily-symbols.
+
    ExportLy::symbol(): rcomma not supported
    - etc.etc.etc.etc........
 */
