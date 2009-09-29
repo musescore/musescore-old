@@ -2035,11 +2035,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int tremolo = 0;
       int headGroup = 0;
       bool noStem = false;
-
+      
+      QString printObject(e.attribute("print-object", "yes"));
+      
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
-
+            
             if (tag == "pitch") {
                   step   = "C";
                   alter  = 0;
@@ -2394,7 +2396,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             cr = new Rest(score, tick, durationType);
             cr->setDots(dots);
-
             // TODO: try to find out if this rest is part of a beam
             cr->setBeamMode(BEAM_NO);
 //            cr->setBeamMode(BEAM_AUTO);
@@ -2402,12 +2403,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             ((Rest*)cr)->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
             s->add(cr);
+            cr->setVisible(printObject == "yes");
             }
       else {
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
             note->setHeadGroup(headGroup);
-
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
             note->setStaffMove(move);
@@ -2469,6 +2470,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
             ((Chord*)cr)->setStemDirection(sd);
+            
+            note->setVisible(printObject == "yes");
             }
       if (!fermataType.isEmpty()) {
             Articulation* f = new Articulation(score);
