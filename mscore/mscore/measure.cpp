@@ -1093,9 +1093,9 @@ Segment* Measure::findSegment(Segment::SegmentType st, int t)
 //   createSegment
 //---------------------------------------------------------
 
-Segment* Measure::createSegment(Segment::SegmentType st, int t)
+Segment* Measure::createSegment(Segment::SegmentType st, int tick)
       {
-      Segment* newSegment = new Segment(this, t);
+      Segment* newSegment = new Segment(this, tick);
       newSegment->setSubtype(st);
       return newSegment;
       }

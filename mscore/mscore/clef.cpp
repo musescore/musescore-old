@@ -42,7 +42,7 @@
 
 const ClefInfo clefTable[] = {
 //               MusicXml
-//             name line octave  yoffset pitchoffset  name
+//      name line octave  yoffset pitchoffset  name
       { "G",   2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Treble clef")

@@ -187,6 +187,10 @@ void Note::setPitch(int val)
 
 void Note::setTpc(int v)
       {
+      if (v < 0 || v > 33) {
+            printf("Note::setTpc: bad tpc %d\n", v);
+            abort();
+            }
       _tpc = v;
       _userAccidental = 0;
       }

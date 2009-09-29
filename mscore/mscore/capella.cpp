@@ -170,6 +170,7 @@ void TransposableObj::read()
       if (variants.size() != b)
             printf("variants.size %d, expected %d\n", variants.size(), b);
       assert(variants.size() == b);
+      /*int nRefNote =*/ cap->readInt();
       }
 
 //---------------------------------------------------------
@@ -699,7 +700,6 @@ unsigned Capella::readUnsigned()
       {
       unsigned char c;
       read(&c, 1);
-printf("Unsigned %d\n", c);
       if (c == 254) {
             unsigned short s;
             read(&s, 2);
@@ -1276,10 +1276,8 @@ void Capella::read(QFile* fp)
       beamRelMax0 = readByte();
       beamRelMax1 = readByte();
 
-printf("======1\n");
       readExtra();
 
-printf("======2\n");
       readDrawObjectArray();
 
       unsigned n = readUnsigned();
@@ -1291,16 +1289,14 @@ printf("======2\n");
 //            printf("Galerie: <%s>\n", s);
             }
 
-printf("======3\n");
       backgroundChord = new ChordObj(this);
-      backgroundChord->read();            // contains graphic objects on the page background
-printf("======4\n");
+      backgroundChord->read();              // contains graphic objects on the page background
       bShowBarCount    = readByte();        // Taktnumerierung zeigen
       barNumberFrame   = readByte();        // 0=kein, 1=Rechteck, 2=Ellipse
       nBarDistX        = readByte();
       nBarDistY        = readByte();
       QFont barNumFont = readFont();
-      nFirstPage       = readUnsigned();         // Versatz fuer Seitenzaehlung
+      nFirstPage       = readUnsigned();    // Versatz fuer Seitenzaehlung
       leftPageMargins  = readUnsigned();    // Seitenraender
       topPageMargins   = readUnsigned();
       rightPageMargins = readUnsigned();
@@ -1470,9 +1466,9 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     pitch = 0;
 
                               note->setPitch(pitch);
-                              int alter1 = tpc2alter(note->tpc());
+                              /*int alter1 =*/ tpc2alter(note->tpc());
                               int _tpc = pitch2tpc(note->pitch(), 0);
-                              int alter2 = tpc2alter(_tpc);
+                              /*int alter2 =*/ tpc2alter(_tpc);
 
 // printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
                               // note->setTpc(tpc);

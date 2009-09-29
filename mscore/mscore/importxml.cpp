@@ -926,7 +926,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       {
       int staves = score->nstaves();
       int staff = score->staffIdx(part);
-      
+
       if (staves == 0) {
             printf("no staves!\n");
             return 0;
@@ -957,8 +957,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             score->measures()->add(measure);
       }else{
             int pstaves = part->nstaves();
-            for (int i = 0; i < pstaves; ++i) {  
-                Staff* reals = score->staff(staff+i);        
+            for (int i = 0; i < pstaves; ++i) {
+                Staff* reals = score->staff(staff+i);
                 measure->mstaff(staff+i)->lines->setLines(reals->lines());
             }
       }
@@ -976,7 +976,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       if (implicit == "yes")
             measure->setIrregular(true);
 
-      
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "attributes")
                   xmlAttributes(measure, staff, e.firstChildElement());
@@ -1832,10 +1832,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "staff-lines")
                               stafflines = ee.text().toInt();
-                        else 
+                        else
                               domNotImplemented(ee);
                   }
-                        
+
                   if (number == -1){
                       int staves = score->part(staff)->nstaves();
                       for (int i = 0; i < staves; ++i) {
@@ -2047,8 +2047,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "step")          // A-G
                               step = ee.text();
-                        else if (ee.tagName() == "alter")    // -1=flat 1=sharp (0.5=quarter sharp)
+                        else if (ee.tagName() == "alter") {    // -1=flat 1=sharp (0.5=quarter sharp)
                               alter = ee.text().toInt();
+                              if (alter < -2 || alter > 2) {
+                                    printf("ImportXml: bad 'alter' value: %d at line %d col %d\n", alter, ee.lineNumber(), ee.columnNumber());
+                                    alter = 0;
+                                    }
+                              }
                         else if (ee.tagName() == "octave")   // 0-9 4=middle C
                               octave = ee.text().toInt();
                         else

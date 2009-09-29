@@ -344,10 +344,7 @@ Canvas* Score::canvas() const
 void Score::renumberMeasures()
       {
       int measureNo = 0;
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* measure = static_cast<Measure*>(mb);
+      for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
             measureNo += measure->noOffset();
             measure->setNo(measureNo);
             if (!measure->irregular())
@@ -827,7 +824,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
                   foreach(MeasureBase* mb, s->measures()) {
                         if (mb->type() != MEASURE)
                               continue;
-                        Measure* m = (Measure*)mb;
+                        Measure* m = static_cast<Measure*>(mb);
                         if (ppp.x() > (m->x() + m->bbox().width()))
                               continue;
                         double sy1 = 0;
@@ -1150,11 +1147,9 @@ void Score::setNoteEntry(bool val)
       _is._segment = 0;
       if (val) {
             Note* note  = 0;
-printf("setNoteEntry: activeCR %p\n", _selection->activeCR());
             Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
             if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
                   int track = _is.track == -1 ? 0 : _is.track;
-printf("setNoteEntry: nothing selected, searchNote\n");
                   el = static_cast<ChordRest*>(searchNote(0, track));
                   if (el == 0) {
                         printf("no note or rest selected 1\n");
@@ -1163,13 +1158,11 @@ printf("setNoteEntry: nothing selected, searchNote\n");
                   }
             if (el->type() == CHORD) {
                   Chord* c = static_cast<Chord*>(el);
-printf("setNoteEntry chord at %d\n", c->tick());
                   note = c->selectedNote();
                   if (note == 0)
                         note = c->upNote();
                   el = note;
                   }
-printf("setNoteEntry %s\n", el->name());
 
             select(el, SELECT_SINGLE, 0);
             _is.noteEntryMode = true;
@@ -1309,22 +1302,17 @@ void Score::spell()
       {
       for (int i = 0; i < nstaves(); ++i) {
             QList<Note*> notes;
-            for(MeasureBase* mb = first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = static_cast<Measure*>(mb);
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        int strack = i * VOICES;
-                        int etrack = strack + VOICES;
-                        for (int track = strack; track < etrack; ++track) {
-                              Element* e = s->element(track);
-                              if (e && e->type() == CHORD) {
-                                    Chord* chord = static_cast<Chord*>(e);
-                                    const NoteList* nl = chord->noteList();
-                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = in->second;
-                                          notes.append(note);
-                                          }
+            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                  int strack = i * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* e = s->element(track);
+                        if (e && e->type() == CHORD) {
+                              Chord* chord = static_cast<Chord*>(e);
+                              const NoteList* nl = chord->noteList();
+                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                    Note* note = in->second;
+                                    notes.append(note);
                                     }
                               }
                         }
@@ -1337,22 +1325,17 @@ void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* 
       {
       for (int i = startStaff; i < endStaff; ++i) {
             QList<Note*> notes;
-            for(MeasureBase* mb = first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  // Measure* m = static_cast<Measure*>(mb);
-                  for (Segment* s = startSegment; s && s != endSegment; s = s->next()) {
-                        int strack = i * VOICES;
-                        int etrack = strack + VOICES;
-                        for (int track = strack; track < etrack; ++track) {
-                              Element* e = s->element(track);
-                              if (e && e->type() == CHORD) {
-                                    Chord* chord = static_cast<Chord*>(e);
-                                    const NoteList* nl = chord->noteList();
-                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = in->second;
-                                          notes.append(note);
-                                          }
+            for (Segment* s = startSegment; s && s != endSegment; s = s->next()) {
+                  int strack = i * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* e = s->element(track);
+                        if (e && e->type() == CHORD) {
+                              Chord* chord = static_cast<Chord*>(e);
+                              const NoteList* nl = chord->noteList();
+                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                    Note* note = in->second;
+                                    notes.append(note);
                                     }
                               }
                         }
@@ -1360,7 +1343,6 @@ void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* 
             spellNotelist(notes);
             }
       }
-
 
 //---------------------------------------------------------
 //   prevNote
@@ -2014,26 +1996,21 @@ void Score::addElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* measure = (Measure*)mb;
-                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                        int startTrack = staffIdx * VOICES;
-                        int endTrack   = startTrack + VOICES;
-                        for (int track = startTrack; track < endTrack; ++track) {
-                              Element* ie = segment->element(track);
-                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
-                                    endFound = true;
-                                    break;
-                                    }
-                              }
-                        if (endFound)
+            for (Segment* segment = firstMeasure->first(); segment; segment = segment->next1()) {
+                  int startTrack = staffIdx * VOICES;
+                  int endTrack   = startTrack + VOICES;
+                  for (int track = startTrack; track < endTrack; ++track) {
+                        Element* ie = segment->element(track);
+                        if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                              endFound = true;
                               break;
+                              }
                         }
                   if (endFound)
                         break;
                   }
+            if (endFound)
+                  break;
             }
       else if (element->type() == KEYSIG) {
             // FIXME: update keymap here (and remove that from Score::changeKeySig)
@@ -2122,26 +2099,21 @@ void Score::removeElement(Element* element)
                   //-----------------------------------------------
 
                   bool endFound = false;
-                  for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-                        if (mb->type() != MEASURE)
-                              continue;
-                        Measure* measure = static_cast<Measure*>(mb);
-                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                              int startTrack = staffIdx * VOICES;
-                              int endTrack   = startTrack + VOICES;
-                              for (int track = startTrack; track < endTrack; ++track) {
-                                    Element* ie = segment->element(track);
-                                    if (ie && ie->type() == CLEF && ie->tick() > tick) {
-                                          endFound = true;
-                                          break;
-                                          }
-                                    }
-                              if (endFound)
+                  for (Segment* segment = firstMeasure->first(); segment; segment = segment->next1()) {
+                        int startTrack = staffIdx * VOICES;
+                        int endTrack   = startTrack + VOICES;
+                        for (int track = startTrack; track < endTrack; ++track) {
+                              Element* ie = segment->element(track);
+                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                                    endFound = true;
                                     break;
+                                    }
                               }
                         if (endFound)
                               break;
                         }
+                  if (endFound)
+                        break;
                   }
                   break;
             case KEYSIG:
@@ -2190,35 +2162,31 @@ void Score::search(const QString& s)
             return;
 
       int i = 0;
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
+      for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
+            if (++i < n)
                   continue;
-            ++i;
-            if (i == n) {
-                  Measure* measure = static_cast<Measure*>(mb);
-                  adjustCanvasPosition(measure, true);
-                  int tracks = nstaves() * VOICES;
-                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                        if (segment->subtype() != Segment::SegChordRest)
-                              continue;
-                        int track;
-                        for (track = 0; track < tracks; ++track) {
-                              ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
-                              if (cr) {
-                                    if (cr->type() == CHORD)
-                                          select(static_cast<Chord*>(cr)->upNote(), SELECT_SINGLE, 0);
-                                    else
-                                          select(cr, SELECT_SINGLE, 0);
-                                    break;
-                                    }
-                              }
-                        if (track != tracks)
+            adjustCanvasPosition(measure, true);
+            int tracks = nstaves() * VOICES;
+            for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                  if (segment->subtype() != Segment::SegChordRest)
+                        continue;
+                  int track;
+                  for (track = 0; track < tracks; ++track) {
+                        ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                        if (cr) {
+                              if (cr->type() == CHORD)
+                                    select(static_cast<Chord*>(cr)->upNote(), SELECT_SINGLE, 0);
+                              else
+                                    select(cr, SELECT_SINGLE, 0);
                               break;
+                              }
                         }
-                  updateAll = true;
-                  end();
-                  break;
+                  if (track != tracks)
+                        break;
                   }
+            updateAll = true;
+            end();
+            break;
             }
       }
 
@@ -2323,5 +2291,4 @@ void Score::scanElements(void* data, void (*func)(void*, Element*))
       foreach(Page* page, pages())
             page->scanElements(data, func);
       }
-
 

@@ -1,3 +1,6 @@
+29.sep (ws)
+      - fix capella import crash
+      - hack to fix MusicXml export of drum clef
 28.sep (ws)
       - fix: in shortcut editor check conflicts against local changed shortcuts
       - fix: add hardcoded F1 shortcut to shortcut editor
