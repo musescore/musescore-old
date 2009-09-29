@@ -2,6 +2,9 @@
       - fix: Measure repeat sign always on top when dragged from palette
       - fix capella import crash
       - hack to fix MusicXml export of drum clef
+       (la)
+      - add support for unpitched percussion in MusicXML export
+      - add support for invisible rest/note in MusicXML export
 28.sep (ws)
       - fix: in shortcut editor check conflicts against local changed shortcuts
       - fix: add hardcoded F1 shortcut to shortcut editor
