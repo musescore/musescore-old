@@ -130,6 +130,7 @@ void InstrumentListEditor::updateAll(Score* score)
                         pe->patch->addItem(p->name, QVariant::fromValue<void*>((void*)p));
                   }
             pe->setPart(m.part, m.articulation);
+            idx++;
             }
       }
 
