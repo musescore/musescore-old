@@ -43,7 +43,6 @@ class Xml : public AL::Xml {
       int curTick;            // used to optimize output
       int curTrack;
       int trackDiff;          // saved track is curTrack-trackDiff
-      bool noSlurs;           // dont write slur info in ChordRest; used for drag&drop
       bool clipboardmode;     // used to modify write() behaviour
 
       int tupletId;

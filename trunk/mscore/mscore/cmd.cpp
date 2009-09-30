@@ -2306,7 +2306,7 @@ void Score::cmdPaste()
             }
       if (selection()->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
-printf("paste <%s>\n", data.data());
+// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2385,6 +2385,11 @@ printf("paste <%s>\n", data.data());
 
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
+      foreach(Element* el, _gel) {
+            if (el->type() == SLUR)
+                  static_cast<Slur*>(el)->setId(0);
+            }
+
       int dstStaffStart = dst->staffIdx();
       curTick = 0;
       int dstTick = dst->tick();
@@ -2432,6 +2437,13 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               tuplet->read(eee);
                               tuplets.append(tuplet);
                               undoAddElement(tuplet);
+                              }
+                        else if (tag == "Slur") {
+                              Slur* slur = new Slur(this);
+                              slur->read(eee);
+                              slur->setTrack(-1);
+                              slur->setTick(-1);
+                              undoAddElement(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest") {
                               ChordRest* cr;

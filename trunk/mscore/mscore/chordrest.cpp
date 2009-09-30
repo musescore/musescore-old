@@ -221,12 +221,10 @@ void ChordRest::writeProperties(Xml& xml) const
       xml.prop(pl);
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
-      if (!xml.noSlurs) {
-            foreach(Slur* s, _slurFor)
-                  xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
-            foreach(Slur* s, _slurBack)
-                  xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
-            }
+      foreach(Slur* s, _slurFor)
+            xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
+      foreach(Slur* s, _slurBack)
+            xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
       if (!xml.clipboardmode && _beam)
             xml.tag("Beam", _beam->id());
       xml.curTick = tick() + ticks();

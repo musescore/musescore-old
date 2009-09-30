@@ -486,7 +486,7 @@ void Score::write(Xml& xml, bool autosave)
       foreach(const Excerpt* excerpt, _excerpts)
             excerpt->write(xml);
 
-      // to serialize slurs, the get an id; this id is referenced
+      // to serialize slurs, they need an id; this id is referenced
       // in begin-end elements
       int slurId = 0;
       foreach(Element* el, _gel) {
@@ -2036,8 +2036,10 @@ void Score::addElement(Element* element)
             }
       else if (element->type() == SLUR) {
             Slur* s = static_cast<Slur*>(element);
-            static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
-            static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
+            if (s->startElement())
+                  static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
+            if (s->endElement())
+                  static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
             }
       else if ((element->type() == OTTAVA) || (element->type() == DYNAMIC)) {
             _playlistDirty = true;
