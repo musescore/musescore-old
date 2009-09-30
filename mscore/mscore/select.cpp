@@ -751,9 +751,13 @@ QByteArray Selection::staffMimeData() const
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
       xml.header();
-      xml.noSlurs = true;
       xml.clipboardmode = true;
 
+      int slurId = 1;
+      foreach(Element* el, *_score->gel()) {
+            if (el->type() == SLUR)
+                  static_cast<Slur*>(el)->setId(slurId++);
+            }
       int ticks  = tickEnd() - tickStart();
       int staves = staffEnd - staffStart;
       xml.stag(QString("StaffList tick=\"%1\" len=\"%2\" staff=\"%3\" staves=\"%4\"").arg(tickStart()).arg(ticks).arg(staffStart).arg(staves));
@@ -779,6 +783,15 @@ QByteArray Selection::staffMimeData() const
                               if (tuplet && tuplet->elements().front() == cr) {
                                     tuplet->setId(xml.tupletId++);
                                     tuplet->write(xml);
+                                    }
+                              foreach(Slur* slur, cr->slurFor()) {
+printf("slur %d-%d  %d-%d\n", tickStart(), tickEnd(), slur->startElement()->tick(),
+   slur->endElement()->tick());
+                                    if (slur->startElement()->tick() >= tickStart()
+                                       && slur->endElement()->tick() < tickEnd()) {
+printf("   write slur\n");
+                                          slur->write(xml);
+                                          }
                                     }
                               }
                         if (e->type() == CHORD) {
