@@ -1,5 +1,6 @@
 30.sep (la)
       - fix "Mixer only works for first instrument"
+      - fix "Instrument sounds not imported from MusicXML"
 29.sep (ws)
       - fix boundingRectangle of segno and coda symbols
       - fix: Measure repeat sign always on top when dragged from palette
