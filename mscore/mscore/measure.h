@@ -62,8 +62,10 @@ struct MStaff {
 
       MStaff();
       ~MStaff();
-      bool visible() const      { return _visible; }
-      void setVisible(bool val) { _visible = val;  }
+      bool visible() const         { return _visible;    }
+      void setVisible(bool val)    { _visible = val;     }
+      bool slashStyle() const      { return _slashStyle; }
+      void setSlashStyle(bool val) { _slashStyle = val;  }
       };
 
 enum {

@@ -2035,9 +2035,9 @@ void Score::addElement(Element* element)
             layoutAll = true;
             }
       else if (element->type() == SLUR) {
-            Slur* s = (Slur*)element;
-            ((ChordRest*)s->startElement())->addSlurFor(s);
-            ((ChordRest*)s->endElement())->addSlurBack(s);
+            Slur* s = static_cast<Slur*>(element);
+            static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
+            static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
             }
       else if ((element->type() == OTTAVA) || (element->type() == DYNAMIC)) {
             _playlistDirty = true;
@@ -2280,8 +2280,11 @@ int Score::inputPos() const
 
 void Score::scanElements(void* data, void (*func)(void*, Element*))
       {
-      foreach (Element* element, _gel)
+      foreach (Element* element, _gel) {
+            if (element->type() == SLUR)
+                  continue;
             element->scanElements(data, func);
+            }
       for(MeasureBase* m = first(); m; m = m->next())
             m->scanElements(data, func);
       foreach(Page* page, pages())

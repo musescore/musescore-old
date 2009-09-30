@@ -2243,3 +2243,26 @@ void ChangeVelocity::flip()
       veloOffset = o;
       }
 
+//---------------------------------------------------------
+//   ChangeMStaffProperties
+//---------------------------------------------------------
+
+ChangeMStaffProperties::ChangeMStaffProperties(MStaff* ms, bool v, bool s)
+   : mstaff(ms), visible(v), slashStyle(s)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeMStaffProperties::flip()
+      {
+      bool v = mstaff->visible();
+      bool s = mstaff->slashStyle();
+      mstaff->setVisible(visible);
+      mstaff->setSlashStyle(slashStyle);
+      visible    = v;
+      slashStyle = s;
+      }
+

@@ -135,6 +135,16 @@ ChordRest::ChordRest(const ChordRest& cr)
       }
 
 //---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      foreach(Slur* slur, _slurFor)
+            slur->scanElements(data, func);
+      }
+
+//---------------------------------------------------------
 //   isUp
 //---------------------------------------------------------
 

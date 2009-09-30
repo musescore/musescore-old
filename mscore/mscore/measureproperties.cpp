@@ -23,6 +23,7 @@
 #include "al/sig.h"
 #include "score.h"
 #include "repeat.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   MeasureProperties
@@ -50,18 +51,22 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       Score* score = m->score();
       int rows = score->nstaves();
       staves->setRowCount(rows);
+      staves->setColumnCount(3);
 
       for (int staffIdx = 0; staffIdx < rows; ++staffIdx) {
-            // Staff* staff = score->staff(staffIdx);
             QTableWidgetItem* item = new QTableWidgetItem(QString("%1").arg(staffIdx+1));
             staves->setItem(staffIdx, 0, item);
             MStaff* ms = m->mstaff(staffIdx);
-            item = new QTableWidgetItem();
+
+            item = new QTableWidgetItem(tr("visible"));
+            item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
             item->setCheckState(ms->_visible ? Qt::Checked : Qt::Unchecked);
             if (rows == 1)                // cannot be invisible if only one row
                   item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
             staves->setItem(staffIdx, 1, item);
-            item = new QTableWidgetItem();
+
+            item = new QTableWidgetItem(tr("stemless"));
+            item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
             item->setCheckState(ms->_slashStyle ? Qt::Checked : Qt::Unchecked);
             staves->setItem(staffIdx, 2, item);
             }
@@ -154,11 +159,13 @@ void MeasureProperties::apply()
 
       for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
             MStaff* ms = m->mstaff(staffIdx);
-            ms->_visible = visible(staffIdx);
-            ms->_slashStyle = slashStyle(staffIdx);
+            bool v = visible(staffIdx);
+            bool s = slashStyle(staffIdx);
+            if (ms->visible() != v || ms->slashStyle() != s)
+                  score->undo()->push(new ChangeMStaffProperties(ms, v, s));
             }
 
-      m->setIrregular(isIrregular());     // TODO: shall we make this undoable?
+      m->setIrregular(isIrregular());
       m->setBreakMultiMeasureRest(breakMultiMeasureRest->isChecked());
 
       m->setRepeatCount(repeatCount());

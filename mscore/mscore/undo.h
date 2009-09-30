@@ -1170,5 +1170,21 @@ class ChangeVelocity : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeMStaffProperties
+//---------------------------------------------------------
+
+class ChangeMStaffProperties : public UndoCommand {
+      MStaff* mstaff;
+      bool visible;
+      bool slashStyle;
+      void flip();
+
+   public:
+      ChangeMStaffProperties(MStaff*, bool visible, bool slashStyle);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 

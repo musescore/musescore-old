@@ -1,4 +1,9 @@
-30.sep (la)
+30.sep (ws)
+      - make "add bracket" undoable
+      - fix glissando font size
+      - dont show slurs which start in invisible Measure/Staff
+      - make changing of MStaff properties undoable
+      (la)
       - fix "Mixer only works for first instrument"
       - fix "Instrument sounds not imported from MusicXML"
 29.sep (ws)

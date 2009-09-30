@@ -884,8 +884,12 @@ void Slur::layout()
             return;
             }
       switch (_slurDirection) {
-            case UP:    up = true; break;
-            case DOWN:  up = false; break;
+            case UP:
+                  up = true;
+                  break;
+            case DOWN:
+                  up = false;
+                  break;
             case AUTO:
                   {
                   ChordRest* cr1 = (ChordRest*)startElement();

@@ -1607,18 +1607,15 @@ int main(int argc, char* argv[])
       PDPI = wi.logicalDpiX();         // physical resolution
       DPI  = pdev->logicalDpiX();      // logical drawing resolution
 
-
       // sanity check for DPI
 
       if (DPI == 0) {           // this happens on windows if there is no printer installed
-            delete pdev;
-            pdev  = &wi;
-            DPI   = PDPI;
+            DPI = PDPI;
             }
       DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {
-            printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
+            printf("printer DPI %f(%d) display PDPI %f(%d) DPMM %f\n",
                DPI, pdev->physicalDpiX(),
                PDPI, wi.physicalDpiX(),
                DPMM);
@@ -1629,7 +1626,7 @@ int main(int argc, char* argv[])
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
-//      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
+      //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
       if (!converterMode)
