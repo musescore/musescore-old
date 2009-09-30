@@ -62,12 +62,9 @@ void Score::rebuildBspTree()
             page->scanElements(&el, collectElements);
             }
       foreach (Element* element, _gel) {
+            if (element->type() == SLUR)
+                  continue;
             if (element->track() != -1) {
-                  if (element->staffIdx() < 0 || element->staffIdx() >= nstaves()) {
-                        printf("element %s bad staffIdx %d(track:%d) >= staves(%d)\n",
-                           element->name(), element->staffIdx(), element->track(), nstaves());
-                        continue;
-                        }
                   if (!element->staff()->show())
                         continue;
                   }
@@ -1158,14 +1155,3 @@ bool Score::doReLayout()
       return true;
       }
 
-//---------------------------------------------------------
-//   clear
-//---------------------------------------------------------
-
-#if 0
-void Score::clear()
-      {
-      _pages.clear();
-      _systems.clear();
-      }
-#endif

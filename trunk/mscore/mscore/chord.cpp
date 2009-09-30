@@ -993,6 +993,7 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
 
       for (iNote in = notes.begin(); in != notes.end(); ++in)
             in->second->scanElements(data, func);
+      ChordRest::scanElements(data, func);
       }
 
 //---------------------------------------------------------

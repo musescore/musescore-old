@@ -102,13 +102,9 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   QMenu* menu = qobject_cast<QMenu*>(o);
                   if (!menu)
                         continue;
-                  if (debugMode)
-                        printf("check menu <%s><%s>\n", qPrintable(menu->objectName()), qPrintable(m));
                   if (menu->objectName() == m) {
                         curMenu = menu;
                         found = true;
-                        if (debugMode)
-                              printf("  found\n");
                         break;
                         }
                   }

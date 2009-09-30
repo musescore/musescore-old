@@ -1371,20 +1371,21 @@ bool Score::read(QDomElement e)
 
 //---------------------------------------------------------
 //   connectSlurs
-//    helper routine for old msc versions and MusicXml import
+//    helper routine for old msc versions
+//    and MusicXml and Capella import
 //---------------------------------------------------------
 
 void Score::connectSlurs()
       {
-      foreach(Element* e, _gel) {
+      foreach (Element* e, _gel) {
             if (e->type() != SLUR)
                   continue;
-            Slur* s = (Slur*)e;
+            Slur* s = static_cast<Slur*>(e);
             Element* n1 = searchNote(s->tick(), s->track());
             Element* n2 = searchNote(s->tick2(), s->track2());
             if (n1 == 0 || n2 == 0) {
-                  printf("  not found\n");
-                  // TODO: remove SLur
+                  printf("connectSlurs: position not found\n");
+                  // remove in checkSlurs
                   }
             else {
                   if (n1->isChordRest()) {
@@ -1398,7 +1399,7 @@ void Score::connectSlurs()
                         s->setEndElement(n2);
                         }
                   else
-                        printf("   n2 is %s\n", n2->name());
+                        printf("connectSlurs: n2 is %s\n", n2->name());
                   }
             }
       }
@@ -1441,10 +1442,7 @@ void Score::checkSlurs()
 
 void Score::checkTuplets()
       {
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* t, *m->tuplets()) {
                   if (t->elements().empty()) {
                         printf("empty tuplet: removing\n");

@@ -2293,8 +2293,12 @@ printf("drop staffList\n");
                   break;
 
             case BRACKET:
-                  staff->addBracket(BracketItem(e->subtype(), 1));
-                  delete e;
+                  {
+                  Bracket* b = static_cast<Bracket*>(e);
+                  b->setTrack(staffIdx * VOICES);
+                  b->setParent(system());
+                  score()->cmdAdd(b);
+                  }
                   break;
 
             case CLEF:

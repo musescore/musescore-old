@@ -516,7 +516,7 @@ void System::add(Element* el)
       else if (el->type() == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b   = static_cast<Bracket*>(el);
-            int level = b->level();
+            int level    = b->level();
             while (level >= ss->brackets.size())
                   ss->brackets.append(0);
             ss->brackets[level] = b;

@@ -153,9 +153,10 @@ void Glissando::draw(QPainter& p) const
             }
       if (_showText) {
             TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);
-            QRectF r      = st->bbox(_spatium, _text);
+            QFont f = st->fontPx(_spatium);
+            QRectF r = QFontMetricsF(f).boundingRect(_text);
             if (r.width() < l) {
-                  QFont f = st->font(_spatium);
+                  QFont f = st->fontPx(_spatium);
                   p.setFont(f);
                   double x = (l - r.width()) * .5;
                   p.drawText(x, -_spatium * .5, _text);
