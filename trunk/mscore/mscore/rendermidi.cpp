@@ -44,6 +44,7 @@
 #include "repeatlist.h"
 #include "velo.h"
 #include "dynamics.h"
+#include "navigate.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -444,6 +445,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                   int i = 0;
                   
+                  // -- swing -- //
                   double swingCoeff= swingRatio();
                   
                   //deal with odd measure in anacrusis
@@ -452,11 +454,26 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                       offSet = 480 - m->tickLen()%480;
                   } 
                   
-                  bool swing = ((tick - m->tick()+offSet)%AL::division >= 240);
+                  //detect 8th on the offbeat	
+                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
                   
                   if(swing){
                             tick += (swingCoeff * AL::division /2);
                   }
+                  
+                  //on the beat and a 8th
+                  bool swingBeat = ((tick - m->tick()+offSet)%AL::division == 0 && chord->tickLen() == 240);
+                  if(swingBeat){
+                    //find chord on counter beat and verify it's an 8th
+                     ChordRest* ncr = nextChordRest(chord);
+                     if(ncr){
+                        swingBeat = ((ncr->tick() == tick + 240) && (ncr->tickLen() == 240));
+                     }
+                     else
+                        swingBeat = false; 
+                  }
+                  
+                  // -- end swing -- //
                   
                   for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
                         Note* note = in->second;
@@ -485,9 +502,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                         //swing
                         
-                        if(swing){
+                        if(swing)
                             len *= (1-swingCoeff);
-                        }    
+                        if (swingBeat)
+                            len *= (1+swingCoeff);    
                            
 
                         Event* ev = new Event(ME_NOTEON);
