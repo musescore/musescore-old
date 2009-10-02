@@ -267,7 +267,7 @@ class Score : public QObject {
                         ///< save a backup file will be created, subsequent
                         ///< saves will not overwrite the backup file.
       int _playPos;     ///< sequencer seek position
-      
+
       double _swingRatio; ///< Swing ratio
 
       bool _foundPlayPosAfterRepeats; ///< Temporary used during playback rendering
@@ -377,7 +377,7 @@ class Score : public QObject {
       bool doReLayout();
       void rebuildBspTree();
       Measure* skipEmptyMeasures(Measure*, System*);
-
+      void cmdRepeatSelection();
 
    private slots:
       void textUndoLevelAdded();

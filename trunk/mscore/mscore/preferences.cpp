@@ -163,10 +163,14 @@ void Preferences::init()
       useAlsaAudio       = false;
       useJackAudio       = false;
       usePortaudioAudio  = true;
+      useJackMidi        = false;
+      useAlsaMidi        = false;
 #else
       useAlsaAudio       = true;
       useJackAudio       = false;
       usePortaudioAudio  = false;
+      useJackMidi        = true;
+      useAlsaMidi        = false;
 #endif
       alsaDevice         = "default";
       alsaSampleRate     = 48000;
@@ -586,6 +590,9 @@ void PreferenceDialog::updateValues(Preferences* p)
       alsaDriver->setChecked(p->useAlsaAudio);
       jackDriver->setChecked(p->useJackAudio);
       portaudioDriver->setChecked(p->usePortaudioAudio);
+      useJackMidi->setChecked(p->useJackMidi);
+      useAlsaMidi->setChecked(p->useAlsaMidi);
+
       alsaDevice->setText(p->alsaDevice);
 
       int index = alsaSampleRate->findText(QString("%1").arg(p->alsaSampleRate));
@@ -609,7 +616,6 @@ void PreferenceDialog::updateValues(Preferences* p)
       alternateInput->setChecked(p->alternateNoteEntryMethod);
 
       midiPorts->setValue(p->midiPorts);
-      midiAutoConnect->setChecked(p->midiAutoConnect);
       proximity->setValue(p->proximity);
       autoSave->setChecked(p->autoSave);
       autoSaveTime->setValue(p->autoSaveTime);
@@ -976,6 +982,8 @@ void PreferenceDialog::apply()
       preferences.useAlsaAudio       = alsaDriver->isChecked();
       preferences.useJackAudio       = jackDriver->isChecked();
       preferences.usePortaudioAudio  = portaudioDriver->isChecked();
+      preferences.useJackMidi        = useJackMidi->isChecked();
+      preferences.useAlsaMidi        = useAlsaMidi->isChecked();
       preferences.alsaDevice         = alsaDevice->text();
       preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();
       preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
@@ -1003,7 +1011,6 @@ void PreferenceDialog::apply()
 
       preferences.useMidiOutput      = useMidiOutput->isChecked();
       preferences.midiPorts          = midiPorts->value();
-      preferences.midiAutoConnect    = midiAutoConnect->isChecked();
       preferences.proximity          = proximity->value();
       preferences.autoSave           = autoSave->isChecked();
       preferences.autoSaveTime       = autoSaveTime->value();

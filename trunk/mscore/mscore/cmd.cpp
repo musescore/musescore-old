@@ -1296,6 +1296,7 @@ void Score::upDown(bool up, bool octave)
                   newPitch = 127;
                   newTpc   = pitch2tpc(newPitch);
                   }
+            _is.pitch = newPitch;
 
             undoChangePitch(oNote, newPitch, newTpc, 0);
 
@@ -1303,7 +1304,6 @@ void Score::upDown(bool up, bool octave)
             if (playNotes)
                   mscore->play(oNote);
             }
-//      _is.pitch = newPitch;
       selection()->updateState();     // accidentals may have changed
       }
 
@@ -2267,6 +2267,8 @@ void Score::cmd(const QAction* a)
                   cmdDoubleDuration();
             else if (cmd == "half-duration")
                   cmdHalfDuration();
+            else if (cmd == "repeat-sel")
+                  cmdRepeatSelection();
             else if (cmd == "")
                   ;
             else
@@ -2962,5 +2964,46 @@ void Score::cmdDoubleDuration()
             changeCRlen(cr, d);
       _is.duration = d;
       nextInputPos(cr, false);
+      }
+
+//---------------------------------------------------------
+//   cmdRepeatSelection
+//---------------------------------------------------------
+
+void Score::cmdRepeatSelection()
+      {
+      if (selection()->state() != SEL_STAFF && selection()->state() != SEL_SYSTEM)
+            return;
+
+      QString mimeType = selection()->mimeType();
+      if (mimeType.isEmpty())
+            return;
+      QMimeData* mimeData = new QMimeData;
+      mimeData->setData(mimeType, selection()->mimeData());
+      if (debugMode)
+            printf("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
+      QApplication::clipboard()->setMimeData(mimeData);
+
+      QByteArray data(mimeData->data(mimeType));
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(data, &err, &line, &column)) {
+            printf("error reading paste data at line %d column %d: %s\n",
+               line, column, qPrintable(err));
+            printf("%s\n", data.data());
+            return;
+            }
+      docName = "--";
+
+      int dStaff = selection()->staffStart;
+      Segment* endSegment = selection()->endSegment();
+      if (endSegment && endSegment->element(dStaff)) {
+            Element* e = endSegment->element(dStaff * VOICES);
+            if (e && e->isChordRest()) {
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  pasteStaff(doc.documentElement(), cr);
+                  }
+            }
       }
 
