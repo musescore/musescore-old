@@ -450,6 +450,11 @@ void Score::putNote(const QPointF& pos, bool replace)
 
       bool addToChord = false;
 
+      //
+      // TODO: if _is.duration != cr->duration then
+      //       add a note with cr->duration tied to another note which adds
+      //       to a total duration of _is.duration
+      //
       if (!replace && (cr->duration() == _is.duration) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);

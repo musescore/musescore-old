@@ -63,9 +63,12 @@ struct Preferences {
       bool showPlayPanel;
       bool showStatusBar;
       QPoint playPanelPos;
+
       bool useAlsaAudio;
       bool useJackAudio;
       bool usePortaudioAudio;
+      bool useAlsaMidi;
+      bool useJackMidi;
 
       QString alsaDevice;
       int alsaSampleRate;
@@ -79,10 +82,12 @@ struct Preferences {
       QString startScore;
       QString workingDirectory;
       bool showSplashScreen;
+
       MidiRemote rewind, play, stop;
       MidiRemote len1, len2, len4, len8, len16, len32;
       MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
+
       bool playRepeats;
       QString instrumentList;  // file path of instrument templates
       bool alternateNoteEntryMethod;

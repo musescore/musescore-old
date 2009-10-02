@@ -1795,7 +1795,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "repeat-cmd",
          QT_TR_NOOP("repeat last command"),
-         Qt::Key_R,
+         0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Repeat last command"),
          QT_TR_NOOP("Repeat last command"),
@@ -2046,6 +2046,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TR_NOOP("half duration"),
          QT_TR_NOOP("half duration")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "repeat-sel",
+         QT_TR_NOOP("repeat selection"),
+         Qt::Key_R,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Repeat selection"),
+         QT_TR_NOOP("Repeat selection"),
+         &fileOpenIcon
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),

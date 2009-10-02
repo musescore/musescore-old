@@ -446,6 +446,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       //-----------------------------------------
       //  context menus
       //-----------------------------------------
+
       if (b3) {
             if (dragObject) {
                   ElementType type = dragObject->type();

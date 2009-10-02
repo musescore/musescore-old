@@ -1,3 +1,7 @@
+1.oct (ws)
+      - new command: repeat selection: copies current selection and paste it to the
+        end of the current selection. Reassigned the shortcut "R" to this command
+        (was: repeat last command, which is not that useful)
 30.sep (ws)
       - implement copy/paste slurs
       - make "add bracket" undoable
