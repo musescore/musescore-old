@@ -979,7 +979,7 @@ int CapClef::clef() const
       switch(idx) {
             case FORM_G + (LINE_2 << 3) + (OCT_NULL << 5):  return CLEF_G;
             case FORM_G + (LINE_2 << 3) + (OCT_ALTA << 5):  return CLEF_G1;
-            case FORM_G + (LINE_2 << 3) + (OCT_BASSA << 5): return CLEF_G1;
+            case FORM_G + (LINE_2 << 3) + (OCT_BASSA << 5): return CLEF_G3;
 
             case FORM_C + (LINE_1 << 3) + (OCT_NULL << 5):  return CLEF_C1;
             case FORM_C + (LINE_2 << 3) + (OCT_NULL << 5):  return CLEF_C2;
