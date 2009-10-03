@@ -703,6 +703,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       else
             driver->process(frames, l, r, stride);
 
+      if (lbuffer == 0 || rbuffer == 0)   // midi only?
+            return;
       //
       // metering
       //

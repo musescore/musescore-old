@@ -64,11 +64,18 @@ JackAudio::~JackAudio()
 
 int JackAudio::registerPort(const QString& name, bool input, bool midi)
       {
+printf("JackAudio:: register port input %d midi %d\n", input, midi);
       int portFlag         = input ? JackPortIsInput : JackPortIsOutput;
       const char* portType = midi ? JACK_DEFAULT_MIDI_TYPE : JACK_DEFAULT_AUDIO_TYPE;
       jack_port_t* port = jack_port_register(client, qPrintable(name), portType, portFlag, 0);
-      ports.append(port);
-      return ports.size() - 1;
+      if (midi) {
+            midiPorts.append(port);
+            return midiPorts.size() - 1;
+            }
+      else {
+            ports.append(port);
+            return ports.size() - 1;
+            }
       }
 
 //---------------------------------------------------------
@@ -154,26 +161,28 @@ bool JackAudio::start()
             fprintf (stderr, "JACK: cannot activate client\n");
             return false;
             }
-      /* connect the ports. Note: you can't do this before
-         the client is activated, because we can't allow
-         connections to be made to clients that aren't
-         running.
-       */
-      QString lport = preferences.lPort;
-      QString rport = preferences.rPort;
+      if (preferences.useJackAudio) {
+            /* connect the ports. Note: you can't do this before
+               the client is activated, because we can't allow
+               connections to be made to clients that aren't
+               running.
+             */
+            QString lport = preferences.lPort;
+            QString rport = preferences.rPort;
 
-      const char* src = jack_port_name(portL);
-      int rv;
-      rv = jack_connect(client, src, lport.toLatin1().data());
-      if (rv) {
-            fprintf(stderr, "jack connect <%s> - <%s> failed: %d\n",
-               src, lport.toLatin1().data(), rv);
-            }
-      src = jack_port_name(portR);
-      if (!rport.isEmpty()) {
-            if (jack_connect(client, src, rport.toLatin1().data())) {
-                  fprintf(stderr, "jack connect <%s> - <%s> failed\n",
-                     src, rport.toLatin1().data());
+            const char* src = jack_port_name(ports[0]);
+            int rv;
+            rv = jack_connect(client, src, qPrintable(lport));
+            if (rv) {
+                  fprintf(stderr, "jack connect <%s> - <%s> failed: %d\n",
+                     src, qPrintable(lport), rv);
+                  }
+            src = jack_port_name(ports[1]);
+            if (!rport.isEmpty()) {
+                  if (jack_connect(client, src, qPrintable(rport))) {
+                        fprintf(stderr, "jack connect <%s> - <%s> failed: %d\n",
+                           src, qPrintable(rport), rv);
+                        }
                   }
             }
       return true;
@@ -246,9 +255,21 @@ static int graph_callback(void*)
 int JackAudio::processAudio(jack_nframes_t frames, void* p)
       {
       JackAudio* audio = (JackAudio*)p;
-      float* lbuffer = (float*)jack_port_get_buffer(audio->portL, frames);
-      float* rbuffer = (float*)jack_port_get_buffer(audio->portR, frames);
-      audio->seq->process((unsigned)frames, lbuffer, rbuffer, 1);
+      float* l;
+      float* r;
+      if (preferences.useJackAudio) {
+            l = (float*)jack_port_get_buffer(audio->ports[0], frames);
+            r = (float*)jack_port_get_buffer(audio->ports[1], frames);
+            }
+      else {
+            foreach(jack_port_t* port, audio->midiPorts) {
+                  void* portBuffer = jack_port_get_buffer(port, frames);
+                  jack_midi_clear_buffer(portBuffer);
+                  }
+            l = 0;
+            r = 0;
+            }
+      audio->seq->process((unsigned)frames, l, r, 1);
       audio->_frameCounter += frames;
       return 0;
       }
@@ -288,8 +309,6 @@ bool JackAudio::init()
       {
       jack_set_error_function(noJackError);
 
-      portL  = 0;
-      portR  = 0;
       client = 0;
       int i  = 0;
       for (i = 0; i < 5; ++i) {
@@ -312,37 +331,44 @@ bool JackAudio::init()
       _segmentSize  = jack_get_buffer_size(client);
 
       // register mscore left/right output ports
-      portL = jack_port_register(client, "left",  JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
-      portR = jack_port_register(client, "right", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
+      if (preferences.useJackAudio) {
+            registerPort("left", false, false);
+            registerPort("left", false, false);
 
-      // connect mscore output ports to jack input ports
-      QString lport = preferences.lPort;
-      QString rport = preferences.rPort;
-      QList<QString> ports = inputPorts();
-      QList<QString>::iterator pi = ports.begin();
-      if (lport.isEmpty()) {
-            if (pi != ports.end()) {
-                  preferences.lPort = *pi;
-                  ++pi;
+            // connect mscore output ports to jack input ports
+            QString lport = preferences.lPort;
+            QString rport = preferences.rPort;
+            QList<QString> ports = inputPorts();
+            QList<QString>::iterator pi = ports.begin();
+            if (lport.isEmpty()) {
+                  if (pi != ports.end()) {
+                        preferences.lPort = *pi;
+                        ++pi;
+                        }
+                  else {
+                        fprintf(stderr, "no jack ports found\n");
+                        jack_client_close(client);
+                        client = 0;
+                        return false;
+                        }
                   }
-            else {
-                  fprintf(stderr, "no jack ports found\n");
-                  jack_client_close(client);
-                  client = 0;
-                  return false;
+            if (rport.isEmpty()) {
+                  if (pi != ports.end()) {
+                        preferences.rPort = *pi;
+                        }
+                  else {
+                        fprintf(stderr, "no jack port for right channel found!\n");
+                        }
                   }
-            }
-      if (rport.isEmpty()) {
-            if (pi != ports.end()) {
-                  preferences.rPort = *pi;
-                  }
-            else {
-                  fprintf(stderr, "no jack port for right channel found!\n");
-                  }
+
+            synth = new FluidS::Fluid();
+            synth->init(_sampleRate);
             }
 
-      synth = new FluidS::Fluid();
-      synth->init(_sampleRate);
+      if (preferences.useJackMidi) {
+            for (int i = 0; i < preferences.midiPorts; ++i)
+                  registerPort(QString("mscore-midi-%1").arg(i+1), false, true);
+            }
       return true;
       }
 
@@ -395,6 +421,7 @@ void JackAudio::putEvent(const Event& e)
       int portIdx = e.channel() / 16;
       int chan    = e.channel() % 16;
 
+printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
       if (portIdx < 0 || portIdx >= midiPorts.size()) {
             printf("JackAudio::putEvent: invalid port %d\n", portIdx);
             return;
