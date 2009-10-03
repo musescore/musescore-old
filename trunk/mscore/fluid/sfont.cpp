@@ -61,10 +61,10 @@ SFont::~SFont()
       foreach(Preset* p, presets)
             delete p;
       foreach(unsigned char* p, infos)
-            delete p;
+            delete[] p;
       foreach(Instrument* i, instruments) {
-            foreach(Zone* z, i->zones)
-                  delete z;
+//            foreach(Zone* z, i->zones)
+//                  delete z;
             delete i;
             }
       }
@@ -173,45 +173,6 @@ void Preset::loadSamples()
             foreach(Zone* iz, i->zones)
                   iz->sample->load();
             }
-      }
-
-//---------------------------------------------------------
-//   load
-//---------------------------------------------------------
-
-void Sample::load()
-      {
-      if (!_valid || data)
-            return;
-      QFile fd(sf->get_name());
-      if (!fd.open(QIODevice::ReadOnly))
-            return;
-      if (!fd.seek(sf->samplePos() + start * sizeof(short)))
-            return;
-      unsigned int size = end - start;
-      data              = new short[size];
-      size              *= sizeof(short);
-
-      if (fd.read((char*)data, size) != size)
-            return;
-
-      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
-            unsigned char hi, lo;
-            unsigned int i, j;
-            short s;
-            unsigned char* cbuf = (unsigned char*) data;
-            for (i = 0, j = 0; j < size; i++) {
-                  lo = cbuf[j++];
-                  hi = cbuf[j++];
-                  s = (hi << 8) | lo;
-                  data[i] = s;
-                  }
-            }
-      end       -= start - 1;       // marks last sample, contrary to SF spec.
-      loopstart -= start;
-      loopend   -= start;
-      start      = 0;
-      optimize();
       }
 
 //---------------------------------------------------------
@@ -467,7 +428,6 @@ Zone::~Zone()
       {
       foreach(Mod* m, modlist)
             delete m;
-      delete sample;
       foreach(SFGen* p, gen)
             delete p;
       foreach(SFMod* p, mod)
@@ -526,7 +486,7 @@ bool Zone::importZone()
 
       // Import the modulators (only SF2.1 and higher)
       foreach(SFMod* mod_src, mod) {
-            Mod * mod_dest = new Mod;
+            Mod* mod_dest = new Mod;
             int type;
             // mod_dest->next = 0; /* pointer to next modulator, this is the end of the list now.*/
 
@@ -661,6 +621,45 @@ Sample::Sample(SFont* s)
 Sample::~Sample()
       {
       delete[] data;
+      }
+
+//---------------------------------------------------------
+//   load
+//---------------------------------------------------------
+
+void Sample::load()
+      {
+      if (!_valid || data)
+            return;
+      QFile fd(sf->get_name());
+      if (!fd.open(QIODevice::ReadOnly))
+            return;
+      if (!fd.seek(sf->samplePos() + start * sizeof(short)))
+            return;
+      unsigned int size = end - start;
+      data              = new short[size];
+      size              *= sizeof(short);
+
+      if (fd.read((char*)data, size) != size)
+            return;
+
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            unsigned char hi, lo;
+            unsigned int i, j;
+            short s;
+            unsigned char* cbuf = (unsigned char*) data;
+            for (i = 0, j = 0; j < size; i++) {
+                  lo = cbuf[j++];
+                  hi = cbuf[j++];
+                  s = (hi << 8) | lo;
+                  data[i] = s;
+                  }
+            }
+      end       -= start - 1;       // marks last sample, contrary to SF spec.
+      loopstart -= start;
+      loopend   -= start;
+      start      = 0;
+      optimize();
       }
 
 //---------------------------------------------------------
