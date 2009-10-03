@@ -690,16 +690,16 @@ bool AlsaAudio::stop()
 //   registerPort
 //---------------------------------------------------------
 
-void* AlsaAudio::registerPort(const char* /*name*/)
+int AlsaAudio::registerPort(const QString&, bool, bool)
       {
-      return 0;
+      return -1;
       }
 
 //---------------------------------------------------------
 //   unregisterPort
 //---------------------------------------------------------
 
-void AlsaAudio::unregisterPort(void*)
+void AlsaAudio::unregisterPort(int)
       {
       }
 

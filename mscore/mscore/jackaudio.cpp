@@ -29,6 +29,8 @@
 #include "alsa.h"
 #include "alsamidi.h"
 
+#include <jack/midiport.h>
+
 //---------------------------------------------------------
 //   JackAudio
 //---------------------------------------------------------
@@ -36,8 +38,9 @@
 JackAudio::JackAudio(Seq* s)
    : Driver(s)
       {
-      client = 0;
-      synth  = 0;
+      client        = 0;
+      synth         = 0;
+      _frameCounter = 0;
       }
 
 //---------------------------------------------------------
@@ -59,18 +62,23 @@ JackAudio::~JackAudio()
 //   registerPort
 //---------------------------------------------------------
 
-void* JackAudio::registerPort(const char* name)
+int JackAudio::registerPort(const QString& name, bool input, bool midi)
       {
-      return jack_port_register(client, name, JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput, 0);
+      int portFlag         = input ? JackPortIsInput : JackPortIsOutput;
+      const char* portType = midi ? JACK_DEFAULT_MIDI_TYPE : JACK_DEFAULT_AUDIO_TYPE;
+      jack_port_t* port = jack_port_register(client, qPrintable(name), portType, portFlag, 0);
+      ports.append(port);
+      return ports.size() - 1;
       }
 
 //---------------------------------------------------------
 //   unregisterPort
 //---------------------------------------------------------
 
-void JackAudio::unregisterPort(void* p)
+void JackAudio::unregisterPort(int port)
       {
-      jack_port_unregister(client, (jack_port_t*)p);
+      jack_port_unregister(client, ports[port]);
+      ports[port] = 0;
       }
 
 //---------------------------------------------------------
@@ -238,9 +246,10 @@ static int graph_callback(void*)
 int JackAudio::processAudio(jack_nframes_t frames, void* p)
       {
       JackAudio* audio = (JackAudio*)p;
-      float* lbuffer = audio->getLBuffer(frames);
-      float* rbuffer = audio->getRBuffer(frames);
+      float* lbuffer = (float*)jack_port_get_buffer(audio->portL, frames);
+      float* rbuffer = (float*)jack_port_get_buffer(audio->portR, frames);
       audio->seq->process((unsigned)frames, lbuffer, rbuffer, 1);
+      audio->_frameCounter += frames;
       return 0;
       }
 
@@ -334,13 +343,6 @@ bool JackAudio::init()
 
       synth = new FluidS::Fluid();
       synth->init(_sampleRate);
-
-      midiDriver = new AlsaMidiDriver(seq);
-      if (!midiDriver->init()) {
-            delete midiDriver;
-            midiDriver = 0;
-            return false;
-            }
       return true;
       }
 
@@ -386,7 +388,84 @@ int JackAudio::getState()
 
 void JackAudio::putEvent(const Event& e)
       {
-      synth->play(e);
+      if (!preferences.useMidiOutput) {
+            synth->play(e);
+            return;
+            }
+      int portIdx = e.channel() / 16;
+      int chan    = e.channel() % 16;
+
+      if (portIdx < 0 || portIdx >= midiPorts.size()) {
+            printf("JackAudio::putEvent: invalid port %d\n", portIdx);
+            return;
+            }
+      jack_port_t* port = midiPorts[portIdx];
+      if (midiOutputTrace) {
+            const char* portName = jack_port_name(port);
+            printf("MidiOut<%s>: jackMidi: ", portName);
+            // e.dump();
+            }
+      void* pb = jack_port_get_buffer(port, _segmentSize);
+      int ft   = e.ontime() - _frameCounter;
+      if (ft < 0)
+            ft = 0;
+      if (ft >= int(_segmentSize)) {
+            printf("JackAudio::putEvent: time out of range %d(seg=%d)\n", ft, _segmentSize);
+            if (ft > int(_segmentSize))
+                  ft = _segmentSize - 1;
+            }
+      switch(e.type()) {
+            case ME_NOTEON:
+            case ME_NOTEOFF:
+            case ME_POLYAFTER:
+            case ME_CONTROLLER:
+            case ME_PITCHBEND:
+                  {
+                  unsigned char* p = jack_midi_event_reserve(pb, ft, 3);
+                  if (p == 0) {
+                        fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
+                        return;
+                        }
+                  p[0] = e.type() | chan;
+                  p[1] = e.dataA();
+                  p[2] = e.dataB();
+                  }
+                  break;
+
+            case ME_PROGRAM:
+            case ME_AFTERTOUCH:
+                  {
+                  unsigned char* p = jack_midi_event_reserve(pb, ft, 2);
+                  if (p == 0) {
+                        fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
+                        return;
+                        }
+                  p[0] = e.type() | chan;
+                  p[1] = e.dataA();
+                  }
+                  break;
+            case ME_SYSEX:
+                  {
+                  const unsigned char* data = e.data();
+                  int len = e.len();
+                  unsigned char* p = jack_midi_event_reserve(pb, ft, len+2);
+                  if (p == 0) {
+                        fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
+                        return;
+                        }
+                  p[0]     = 0xf0;
+                  p[len+1] = 0xf7;
+                  memcpy(p+1, data, len);
+                  }
+                  break;
+            case ME_SONGPOS:
+            case ME_CLOCK:
+            case ME_START:
+            case ME_CONTINUE:
+            case ME_STOP:
+                  printf("JackMidi: event type %x not supported\n", e.type());
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -395,7 +474,10 @@ void JackAudio::putEvent(const Event& e)
 
 void JackAudio::process(int n, float* l, float* r, int stride)
       {
-      synth->process(n, l, r, stride);
+      if (preferences.useMidiOutput) {
+            }
+      else
+            synth->process(n, l, r, stride);
       }
 
 //---------------------------------------------------------
@@ -404,6 +486,6 @@ void JackAudio::process(int n, float* l, float* r, int stride)
 
 void JackAudio::midiRead()
       {
-      midiDriver->read();
+//      midiDriver->read();
       }
 

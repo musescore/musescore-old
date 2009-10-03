@@ -121,8 +121,6 @@ class AlsaAudio : public Driver {
       AlsaAudio(Seq*);
       virtual ~AlsaAudio();
       virtual bool init();
-      void* registerPort(const char* name);
-      void unregisterPort(void* p);
       virtual QList<QString> inputPorts();
       virtual bool start();
       virtual bool stop();
@@ -141,6 +139,9 @@ class AlsaAudio : public Driver {
       virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
+
+      virtual int registerPort(const QString& name, bool input, bool midi);
+      virtual void unregisterPort(int);
       };
 
 #endif

@@ -69,6 +69,10 @@ struct Preferences {
       bool usePortaudioAudio;
       bool useAlsaMidi;
       bool useJackMidi;
+      bool useMidiOutput;
+      int midiPorts;
+      bool midiAutoConnect;
+      int rtcTicks;
 
       QString alsaDevice;
       int alsaSampleRate;
@@ -91,10 +95,6 @@ struct Preferences {
       bool playRepeats;
       QString instrumentList;  // file path of instrument templates
       bool alternateNoteEntryMethod;
-      bool useMidiOutput;
-      int midiPorts;
-      bool midiAutoConnect;
-      int rtcTicks;
       int proximity;    // proximity for selecting elements on canvas
       bool autoSave;
       int autoSaveTime;
