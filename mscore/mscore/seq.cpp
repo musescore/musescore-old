@@ -906,6 +906,8 @@ void Seq::setPos(int utick)
 
 void Seq::seek(int tick)
       {
+      if (cs == 0)
+            return;
       Segment* seg = cs->tick2segment(tick);
       if (seg) {
             foreach(Viewer* v, cs->getViewer())

@@ -38,6 +38,7 @@
 JackAudio::JackAudio(Seq* s)
    : Driver(s)
       {
+printf("JackAudio() midi %d audio %d\n", preferences.useJackMidi, preferences.useJackAudio);
       client        = 0;
       synth         = 0;
       _frameCounter = 0;
@@ -49,6 +50,7 @@ JackAudio::JackAudio(Seq* s)
 
 JackAudio::~JackAudio()
       {
+printf("~JackAudio()\n");
       if (client) {
             if (jack_client_close(client)) {
                   fprintf(stderr, "jack_client_close() failed: %s\n",
@@ -68,6 +70,10 @@ printf("JackAudio:: register port input %d midi %d\n", input, midi);
       int portFlag         = input ? JackPortIsInput : JackPortIsOutput;
       const char* portType = midi ? JACK_DEFAULT_MIDI_TYPE : JACK_DEFAULT_AUDIO_TYPE;
       jack_port_t* port = jack_port_register(client, qPrintable(name), portType, portFlag, 0);
+      if (port == 0) {
+            printf("JackAudio:registerPort(%s) failed\n", qPrintable(name));
+            return -1;
+            }
       if (midi) {
             midiPorts.append(port);
             return midiPorts.size() - 1;
@@ -195,8 +201,9 @@ bool JackAudio::start()
 
 bool JackAudio::stop()
       {
-      jack_client_close(client);
-#if 0
+printf("JackAudio::stop\n");
+//      jack_client_close(client);
+#if 1
       if (jack_deactivate(client)) {
             fprintf (stderr, "cannot deactivate client");
             return false;
@@ -262,12 +269,14 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
             r = (float*)jack_port_get_buffer(audio->ports[1], frames);
             }
       else {
+            l = 0;
+            r = 0;
+            }
+      if (preferences.useJackMidi) {
             foreach(jack_port_t* port, audio->midiPorts) {
                   void* portBuffer = jack_port_get_buffer(port, frames);
                   jack_midi_clear_buffer(portBuffer);
                   }
-            l = 0;
-            r = 0;
             }
       audio->seq->process((unsigned)frames, l, r, 1);
       audio->_frameCounter += frames;
@@ -307,6 +316,7 @@ static void noJackError(const char* /* s */)
 
 bool JackAudio::init()
       {
+printf("JackAudio()::init()\n");
       jack_set_error_function(noJackError);
 
       client = 0;
@@ -317,8 +327,10 @@ bool JackAudio::init()
             if (client)
                   break;
             }
-      if (client == 0)
+      if (client == 0) {
+            printf("JackAudio()::init(): failed\n");
             return false;
+            }
       jack_set_error_function(jackError);
       jack_set_process_callback(client, processAudio, this);
       jack_on_shutdown(client, processShutdown, this);
@@ -333,7 +345,7 @@ bool JackAudio::init()
       // register mscore left/right output ports
       if (preferences.useJackAudio) {
             registerPort("left", false, false);
-            registerPort("left", false, false);
+            registerPort("right", false, false);
 
             // connect mscore output ports to jack input ports
             QString lport = preferences.lPort;
@@ -414,10 +426,11 @@ int JackAudio::getState()
 
 void JackAudio::putEvent(const Event& e)
       {
-      if (!preferences.useMidiOutput) {
+      if (preferences.useJackAudio)
             synth->play(e);
+      if (!preferences.useJackMidi)
             return;
-            }
+
       int portIdx = e.channel() / 16;
       int chan    = e.channel() % 16;
 
@@ -433,6 +446,7 @@ printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
             // e.dump();
             }
       void* pb = jack_port_get_buffer(port, _segmentSize);
+#if 0
       int ft   = e.ontime() - _frameCounter;
       if (ft < 0)
             ft = 0;
@@ -441,6 +455,9 @@ printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
             if (ft > int(_segmentSize))
                   ft = _segmentSize - 1;
             }
+#endif
+      int ft = 0;
+
       switch(e.type()) {
             case ME_NOTEON:
             case ME_NOTEOFF:
@@ -501,9 +518,7 @@ printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
 
 void JackAudio::process(int n, float* l, float* r, int stride)
       {
-      if (preferences.useMidiOutput) {
-            }
-      else
+      if (preferences.useJackAudio)
             synth->process(n, l, r, stride);
       }
 
