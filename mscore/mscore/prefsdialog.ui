@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>893</width>
-    <height>686</height>
+    <width>696</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="accessibleName">
@@ -1571,9 +1571,9 @@
       </attribute>
       <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="useMidiOutput">
+        <widget class="QGroupBox" name="useJackMidi">
          <property name="title">
-          <string>Use midi output</string>
+          <string>Use JACK midi output</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -1624,20 +1624,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="useAlsaMidi">
-            <property name="text">
-             <string>Alsa Midi</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="useJackMidi">
-            <property name="text">
-             <string>Jack Midi</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>

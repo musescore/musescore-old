@@ -164,19 +164,18 @@ void Preferences::init()
       useJackAudio       = false;
       usePortaudioAudio  = true;
       useJackMidi        = false;
-      useAlsaMidi        = false;
 #else
       useAlsaAudio       = true;
       useJackAudio       = false;
       usePortaudioAudio  = false;
-      useJackMidi        = true;
-      useAlsaMidi        = false;
+      useJackMidi        = false;
 #endif
       alsaDevice         = "default";
       alsaSampleRate     = 48000;
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
       portaudioDevice    = -1;
+      midiPorts          = 2;
 
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
@@ -204,10 +203,6 @@ void Preferences::init()
       instrumentList           = ":/data/instruments.xml";
 
       alternateNoteEntryMethod = false;
-      useMidiOutput            = false;
-      midiPorts                = 1;
-      midiAutoConnect          = true;
-      rtcTicks                 = 1024;    // 1ms midi resolution
       proximity                = 6;
       autoSave                 = false;
       autoSaveTime             = 2;       // minutes
@@ -302,10 +297,7 @@ void Preferences::write()
       s.setValue("instrumentList", instrumentList);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
-      s.setValue("useMidiOutput",      useMidiOutput);
       s.setValue("midiPorts",          midiPorts);
-      s.setValue("midiAutoConnect",    midiAutoConnect);
-      s.setValue("rtcTicks",           rtcTicks);
       s.setValue("proximity",          proximity);
       s.setValue("autoSave",           autoSave);
       s.setValue("autoSaveTime",       autoSaveTime);
@@ -382,12 +374,10 @@ void Preferences::read()
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
-      useMidiOutput      = s.value("useMidiOutput", false).toBool();
 #else
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
-      useMidiOutput      = s.value("useMidiOutput", false).toBool();
 #endif
 
       alsaDevice         = s.value("alsaDevice", "default").toString();
@@ -406,7 +396,6 @@ void Preferences::read()
       playRepeats              = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
       midiPorts                = s.value("midiPorts", 1).toInt();
-      midiAutoConnect          = s.value("midiAutoConnect", true).toBool();
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", false).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
@@ -492,9 +481,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #ifndef USE_PORTAUDIO
       portaudioDriver->setEnabled(false);
 #endif
-#if defined(Q_WS_MAC) || defined(__MINGW32__)
-      useMidiOutput->setEnabled(false);
-#endif
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
       fgButtons->setExclusive(true);
@@ -520,8 +506,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
       connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
-      connect(useMidiOutput, SIGNAL(clicked()), SLOT(useMidiOutputClicked()));
-      connect(useSynthesizer, SIGNAL(clicked()), SLOT(useSynthesizerClicked()));
       connect(resetToDefault, SIGNAL(clicked()), SLOT(resetAllValues()));
 
       connect(paperHeight, SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
@@ -538,9 +522,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
 void PreferenceDialog::updateValues(Preferences* p)
       {
-      useMidiOutput->setChecked(p->useMidiOutput);
-      useSynthesizer->setChecked(!p->useMidiOutput);
-
       fgWallpaper->setText(p->fgWallpaper);
       bgWallpaper->setText(p->bgWallpaper);
 
@@ -591,7 +572,6 @@ void PreferenceDialog::updateValues(Preferences* p)
       jackDriver->setChecked(p->useJackAudio);
       portaudioDriver->setChecked(p->usePortaudioAudio);
       useJackMidi->setChecked(p->useJackMidi);
-      useAlsaMidi->setChecked(p->useAlsaMidi);
 
       alsaDevice->setText(p->alsaDevice);
 
@@ -983,7 +963,6 @@ void PreferenceDialog::apply()
          || (preferences.useJackAudio != jackDriver->isChecked())
          || (preferences.usePortaudioAudio != portaudioDriver->isChecked())
          || (preferences.useJackMidi != useJackMidi->isChecked())
-         || (preferences.useAlsaMidi != useAlsaMidi->isChecked())
          || (preferences.alsaDevice != alsaDevice->text())
          || (preferences.alsaSampleRate != alsaSampleRate->currentText().toInt())
          || (preferences.alsaPeriodSize != alsaPeriodSize->currentText().toInt())
@@ -999,7 +978,6 @@ void PreferenceDialog::apply()
             preferences.useJackAudio       = jackDriver->isChecked();
             preferences.usePortaudioAudio  = portaudioDriver->isChecked();
             preferences.useJackMidi        = useJackMidi->isChecked();
-            preferences.useAlsaMidi        = useAlsaMidi->isChecked();
             preferences.alsaDevice         = alsaDevice->text();
             preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();
             preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
@@ -1030,7 +1008,6 @@ void PreferenceDialog::apply()
       preferences.instrumentList     = instrumentList->text();
       preferences.alternateNoteEntryMethod = alternateInput->isChecked();
 
-      preferences.useMidiOutput      = useMidiOutput->isChecked();
       preferences.midiPorts          = midiPorts->value();
       preferences.proximity          = proximity->value();
       preferences.autoSave           = autoSave->isChecked();
@@ -1251,34 +1228,6 @@ QAction* getAction(Shortcut* s)
                   a->setIcon(*s->icon);
             }
       return s->action;
-      }
-
-//---------------------------------------------------------
-//   setUseMidiOutput
-//---------------------------------------------------------
-
-void PreferenceDialog::setUseMidiOutput(bool flag)
-      {
-      useMidiOutput->setChecked(flag);
-      useSynthesizer->setChecked(!flag);
-      }
-
-//---------------------------------------------------------
-//   useMidiOutputClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::useMidiOutputClicked()
-      {
-      setUseMidiOutput(useMidiOutput->isChecked());
-      }
-
-//---------------------------------------------------------
-//   useSynthesizerClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::useSynthesizerClicked()
-      {
-      setUseMidiOutput(!useSynthesizer->isChecked());
       }
 
 //---------------------------------------------------------

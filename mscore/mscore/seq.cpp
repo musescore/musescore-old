@@ -27,8 +27,7 @@
 #endif
 #ifdef USE_ALSA
 #include "alsa.h"
-#include "mididriver.h"
-#include "midiseq.h"
+// #include "mididriver.h"
 #endif
 #ifdef USE_PORTAUDIO
 #include "pa.h"
@@ -162,16 +161,11 @@ bool Seq::init()
       bool useJackFlag      = preferences.useJackAudio || preferences.useJackMidi;
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
-      bool useMidiOutFlag   = preferences.useMidiOutput;
-
-      if (useMidiOutFlag) {
-            useJackFlag      = preferences.useJackMidi;
-            useAlsaFlag      = false;
-            usePortaudioFlag = false;
-            }
 
 #ifdef USE_JACK
       if (useJackFlag) {
+            useAlsaFlag      = false;
+            usePortaudioFlag = false;
             driver = new JackAudio(this);
             if (!driver->init()) {
                   printf("no JACK server found\n");
@@ -192,14 +186,6 @@ bool Seq::init()
                   }
             else
                   useALSA = true;
-            }
-      if (useMidiOutFlag && preferences.useAlsaMidi) {
-            driver = new AlsaMidi(this);
-            if (!driver->init()) {
-                  printf("init AlsaMidi failed\n");
-                  delete driver;
-                  driver = 0;
-                  }
             }
 #endif
 #ifdef USE_PORTAUDIO

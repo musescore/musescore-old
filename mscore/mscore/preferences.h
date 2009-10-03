@@ -67,12 +67,8 @@ struct Preferences {
       bool useAlsaAudio;
       bool useJackAudio;
       bool usePortaudioAudio;
-      bool useAlsaMidi;
       bool useJackMidi;
-      bool useMidiOutput;     // do not use internal synthesizer
       int midiPorts;
-      bool midiAutoConnect;
-      int rtcTicks;
 
       QString alsaDevice;
       int alsaSampleRate;
@@ -162,8 +158,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void clearShortcutClicked();
       void defineShortcutClicked();
       void portaudioApiActivated(int idx);
-      void useMidiOutputClicked();
-      void useSynthesizerClicked();
       void resetAllValues();
       void paperSizeChanged(double);
       void pageFormatSelected(int);

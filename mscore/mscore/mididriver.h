@@ -29,7 +29,6 @@
 #include "driver.h"
 
 class Event;
-class MidiSeq;
 class Seq;
 
 //---------------------------------------------------------
@@ -85,44 +84,6 @@ class MidiDriver {
 struct AlsaPort {
       unsigned char _alsaPort;
       unsigned char _alsaClient;
-      };
-
-//---------------------------------------------------------
-//   AlsaMidi
-//---------------------------------------------------------
-
-class AlsaMidi : public Driver {
-      float* buffer;
-      int realTimePriority;
-      MidiSeq* midiSeq;
-      MidiDriver* midiDriver;
-
-      static void* loop(void* pa);
-
-   public:
-      int state;
-      bool seekflag;
-      unsigned pos;
-
-      AlsaMidi(Seq*);
-      virtual ~AlsaMidi() {}
-
-      virtual bool init();
-      virtual bool start();
-      virtual bool stop();
-      virtual QList<QString> inputPorts();
-      virtual void startTransport();
-      virtual void stopTransport();
-
-      virtual int getState()          { return state; }
-      virtual int sampleRate() const  { return 10000; }
-      virtual bool isRealtime() const { return false; }
-      virtual void putEvent(const Event&);
-      virtual void process(int, float*, float*, int) {}
-      virtual void midiRead();
-
-      virtual int registerPort(const QString& /*name*/, bool /*input*/, bool /*midi*/) { return -1; }
-      virtual void unregisterPort(int) {}
       };
 
 #endif

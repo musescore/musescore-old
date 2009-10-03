@@ -112,7 +112,7 @@ class AlsaAudio : public Driver {
       bool seekflag;
       double startTime;
 
-      Port midiInPort;
+//      Port midiInPort;
       MidiDriver* midiDriver;
 
       void registerClient();
