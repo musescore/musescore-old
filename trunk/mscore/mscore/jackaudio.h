@@ -41,8 +41,6 @@ class JackAudio : public Driver {
 
       jack_client_t* client;
       char _jackName[8];
-      jack_port_t* portR;
-      jack_port_t* portL;
 
       QList<jack_port_t*> ports;
       QList<jack_port_t*> midiPorts;
