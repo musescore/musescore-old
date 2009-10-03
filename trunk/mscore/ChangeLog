@@ -1,9 +1,12 @@
+3.oct (ws)
+      - removed alsa midi output
+      - added jack midi output
 1.oct (ws)
       - new command: repeat selection: copies current selection and paste it to the
         end of the current selection. Reassigned the shortcut "R" to this command
         (was: repeat last command, which is not that useful)
       (la)
-      - More work on swing. First 8th is lenghtened. 
+      - More work on swing. First 8th is lenghtened.
        Second 8th of a group is shortened and shifted.
 30.sep (ws)
       - implement copy/paste slurs
