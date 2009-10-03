@@ -25,6 +25,7 @@
 #ifndef __MIDIDRIVER_H__
 #define __MIDIDRIVER_H__
 
+#include "config.h"
 #include "driver.h"
 
 class Event;
@@ -69,8 +70,6 @@ class MidiDriver {
       MidiDriver(Seq* s) { seq = s; }
       virtual ~MidiDriver() {}
       virtual bool init() = 0;
-      virtual Port registerOutPort(const QString& name) = 0;
-      virtual Port registerInPort(const QString& name) = 0;
       virtual void getInputPollFd(struct pollfd**, int* n) = 0;
       virtual void getOutputPollFd(struct pollfd**, int* n) = 0;
       virtual void read() = 0;
@@ -78,6 +77,16 @@ class MidiDriver {
       };
 
 #ifdef USE_ALSA
+
+//---------------------------------------------------------
+//   AlsaPort
+//---------------------------------------------------------
+
+struct AlsaPort {
+      unsigned char _alsaPort;
+      unsigned char _alsaClient;
+      };
+
 //---------------------------------------------------------
 //   AlsaMidi
 //---------------------------------------------------------
@@ -111,6 +120,9 @@ class AlsaMidi : public Driver {
       virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int) {}
       virtual void midiRead();
+
+      virtual int registerPort(const QString& /*name*/, bool /*input*/, bool /*midi*/) { return -1; }
+      virtual void unregisterPort(int) {}
       };
 
 #endif

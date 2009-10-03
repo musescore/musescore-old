@@ -159,13 +159,13 @@ bool Seq::init()
       {
       driver = 0;
 
-      bool useJackFlag      = preferences.useJackAudio;
+      bool useJackFlag      = preferences.useJackAudio || preferences.useJackMidi;
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
       bool useMidiOutFlag   = preferences.useMidiOutput;
 
       if (useMidiOutFlag) {
-            useJackFlag      = false;
+            useJackFlag      = preferences.useJackMidi;
             useAlsaFlag      = false;
             usePortaudioFlag = false;
             }
@@ -193,7 +193,7 @@ bool Seq::init()
             else
                   useALSA = true;
             }
-      if (useMidiOutFlag) {
+      if (useMidiOutFlag && preferences.useAlsaMidi) {
             driver = new AlsaMidi(this);
             if (!driver->init()) {
                   printf("init AlsaMidi failed\n");

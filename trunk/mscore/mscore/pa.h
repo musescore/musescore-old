@@ -46,31 +46,31 @@ class Portaudio : public Driver {
       Portaudio(Seq*);
       virtual ~Portaudio();
       virtual bool init();
-      void* registerPort(const char* name);
-      void unregisterPort(void* p);
-      virtual QList<QString> inputPorts();
       virtual bool start();
       virtual bool stop();
+      virtual QList<QString> inputPorts();
+      virtual void startTransport();
+      virtual void stopTransport();
+      virtual int getState();
+      virtual int sampleRate() const { return _sampleRate; }
+      virtual int registerPort(const QString& name, bool input, bool midi);
+      virtual void unregisterPort(int);
+      virtual void putEvent(const Event&);
+      virtual void process(int, float*, float*, int);
+      virtual void midiRead();
+
       int framePos() const;
       void connect(void*, void*);
       void disconnect(void* src, void* dst);
       float* getLBuffer(long n);
       float* getRBuffer(long n);
       virtual bool isRealtime() const   { return false; }
-      virtual void startTransport();
-      virtual void stopTransport();
-      virtual int getState();
-      virtual int sampleRate() const { return _sampleRate; }
 
       QStringList apiList() const;
       QStringList deviceList(int apiIdx);
       int deviceIndex(int apiIdx, int apiDevIdx);
       int currentApi() const;
       int currentDevice() const;
-
-      virtual void putEvent(const Event&);
-      virtual void process(int, float*, float*, int);
-      virtual void midiRead();
       };
 
 #endif

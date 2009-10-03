@@ -37,12 +37,15 @@ class JackAudio : public Driver {
       int _sampleRate;
       int _segmentSize;
 
+      jack_nframes_t _frameCounter;
+
       jack_client_t* client;
       char _jackName[8];
       jack_port_t* portR;
       jack_port_t* portL;
 
-      MidiDriver* midiDriver;
+      QList<jack_port_t*> ports;
+      QList<jack_port_t*> midiPorts;
 
       static int processAudio(jack_nframes_t, void*);
 
@@ -50,26 +53,25 @@ class JackAudio : public Driver {
       JackAudio(Seq*);
       virtual ~JackAudio();
       virtual bool init();
-      void* registerPort(const char* name);
-      void unregisterPort(void* p);
       virtual QList<QString> inputPorts();
       virtual bool start();
       virtual bool stop();
       int framePos() const;
       void connect(void*, void*);
       void disconnect(void* src, void* dst);
-      float* getLBuffer(long n) { return (float*)jack_port_get_buffer(portL, n); }
-      float* getRBuffer(long n) { return (float*)jack_port_get_buffer(portR, n); }
       virtual bool isRealtime() const   { return jack_is_realtime(client); }
       virtual void startTransport();
       virtual void stopTransport();
       virtual int getState();
-      virtual int sampleRate() const { return _sampleRate; }
+      virtual int sampleRate() const    { return _sampleRate; }
       virtual void putEvent(const Event&);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
+      virtual unsigned frameTime() const { return _frameCounter; }
+
+      virtual int registerPort(const QString& name, bool input, bool midi);
+      virtual void unregisterPort(int);
       };
 
 #endif
-
 

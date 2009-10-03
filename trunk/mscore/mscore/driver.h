@@ -47,7 +47,8 @@ class Driver {
       virtual void startTransport() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
-
+      virtual int registerPort(const QString& name, bool input, bool midi) = 0;
+      virtual void unregisterPort(int) = 0;
       virtual void putEvent(const Event&) = 0;
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
