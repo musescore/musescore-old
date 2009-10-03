@@ -31,7 +31,6 @@
 #include "midifile.h"
 #include "globals.h"
 #include "seq.h"
-#include "midiseq.h"
 #include "utils.h"
 #include "score.h"
 
@@ -532,101 +531,6 @@ bool AlsaMidiDriver::putEvent(snd_seq_event_t* event)
                      error, len, snd_strerror(error));
             } while (error == -12);
       return true;
-      }
-
-//---------------------------------------------------------
-//   AlsaMidi
-//---------------------------------------------------------
-
-AlsaMidi::AlsaMidi(Seq* s)
-   : Driver(s)
-      {
-      state     = Seq::STOP;
-      seekflag  = false;
-      realTimePriority = 40;
-      midiDriver       = 0;
-      }
-
-//---------------------------------------------------------
-//   init
-//    return false on error
-//---------------------------------------------------------
-
-bool AlsaMidi::init()
-      {
-      midiDriver = new AlsaMidiDriver(seq);
-      if (!midiDriver->init()) {
-            delete midiDriver;
-            midiDriver = 0;
-            return false;
-            }
-      midiSeq = new MidiSeq("Midi");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   start
-//---------------------------------------------------------
-
-bool AlsaMidi::start()
-      {
-      return !midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
-      }
-
-//---------------------------------------------------------
-//   stop
-//---------------------------------------------------------
-
-bool AlsaMidi::stop()
-      {
-      midiSeq->stop(true);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   inputPorts
-//---------------------------------------------------------
-
-QList<QString> AlsaMidi::inputPorts()
-      {
-      QList<QString> clientList;
-      return clientList;
-      }
-
-//---------------------------------------------------------
-//   startTransport
-//---------------------------------------------------------
-
-void AlsaMidi::startTransport()
-      {
-      state = Seq::PLAY;
-      }
-
-//---------------------------------------------------------
-//   stopTransport
-//---------------------------------------------------------
-
-void AlsaMidi::stopTransport()
-      {
-      state = Seq::STOP;
-      }
-
-//---------------------------------------------------------
-//   putEvent
-//---------------------------------------------------------
-
-void AlsaMidi::putEvent(const Event& e)
-      {
-      midiDriver->write(e);
-      }
-
-//---------------------------------------------------------
-//   midiRead
-//---------------------------------------------------------
-
-void AlsaMidi::midiRead()
-      {
-      midiDriver->read();
       }
 
 #endif /* USE_ALSA */

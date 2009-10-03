@@ -25,7 +25,7 @@
 
 #include "portmidi/porttime/porttime.h"
 
-#include "mididriver.h"
+// #include "mididriver.h"
 #include "pm.h"
 #include "mscore.h"
 #include "seq.h"

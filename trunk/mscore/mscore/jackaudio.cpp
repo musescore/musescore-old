@@ -26,8 +26,6 @@
 #include "mscore.h"
 #include "seq.h"
 #include "fluid.h"
-#include "alsa.h"
-#include "alsamidi.h"
 
 #include <jack/midiport.h>
 
@@ -434,7 +432,7 @@ void JackAudio::putEvent(const Event& e)
       int portIdx = e.channel() / 16;
       int chan    = e.channel() % 16;
 
-printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
+// printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
       if (portIdx < 0 || portIdx >= midiPorts.size()) {
             printf("JackAudio::putEvent: invalid port %d\n", portIdx);
             return;

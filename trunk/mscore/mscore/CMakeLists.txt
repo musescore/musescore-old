@@ -118,8 +118,7 @@ else (MINGW)
             set (AUDIO ${AUDIO} jackaudio.cpp)
       endif (USE_JACK)
       if (USE_ALSA)
-            set (AUDIO ${AUDIO} alsa.cpp midiseq.cpp rtctimer.cpp
-               thread.cpp mididriver.cpp)
+            set (AUDIO ${AUDIO} alsa.cpp mididriver.cpp)
       endif (USE_ALSA)
 endif (MINGW)
 

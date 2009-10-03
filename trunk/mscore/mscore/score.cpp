@@ -57,7 +57,7 @@
 #include "barline.h"
 #include "box.h"
 #include "utils.h"
-#include "mididriver.h"
+// #include "mididriver.h"
 #include "excerpt.h"
 #include "stafftext.h"
 #include "magbox.h"
