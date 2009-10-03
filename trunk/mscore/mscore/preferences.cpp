@@ -958,17 +958,15 @@ void PreferenceDialog::apply()
       preferences.selectColor[3] = selectColorLabel4->color();
       preferences.dropColor      = selectColorDrop->color();
       preferences.defaultColor   = selectColorDefault->color();
+      preferences.fgWallpaper    = fgWallpaper->text();
+      preferences.bgWallpaper    = bgWallpaper->text();
+      preferences.fgColor        = fgColorLabel->color();
+      preferences.bgColor        = bgColorLabel->color();
 
-      preferences.fgWallpaper = fgWallpaper->text();
-      preferences.bgWallpaper = bgWallpaper->text();
-
-      preferences.fgColor = fgColorLabel->color();
-      preferences.bgColor = bgColorLabel->color();
-
-      preferences.bgUseColor  = bgColorButton->isChecked();
-      preferences.fgUseColor  = fgColorButton->isChecked();
+      preferences.bgUseColor     = bgColorButton->isChecked();
+      preferences.fgUseColor     = fgColorButton->isChecked();
       preferences.enableMidiInput = enableMidiInput->isChecked();
-      preferences.playNotes   = playNotes->isChecked();
+      preferences.playNotes      = playNotes->isChecked();
       if (preferences.lPort != jackLPort->currentText()
          || preferences.rPort != jackRPort->currentText()) {
             // TODO: change ports
@@ -978,22 +976,45 @@ void PreferenceDialog::apply()
       preferences.showNavigator      = navigatorShow->isChecked();
       preferences.showPlayPanel      = playPanelShow->isChecked();
       preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
-
-      preferences.useAlsaAudio       = alsaDriver->isChecked();
-      preferences.useJackAudio       = jackDriver->isChecked();
-      preferences.usePortaudioAudio  = portaudioDriver->isChecked();
-      preferences.useJackMidi        = useJackMidi->isChecked();
-      preferences.useAlsaMidi        = useAlsaMidi->isChecked();
-      preferences.alsaDevice         = alsaDevice->text();
-      preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();
-      preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
-      preferences.alsaFragments      = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
+
+      if (
+         (preferences.useAlsaAudio != alsaDriver->isChecked())
+         || (preferences.useJackAudio != jackDriver->isChecked())
+         || (preferences.usePortaudioAudio != portaudioDriver->isChecked())
+         || (preferences.useJackMidi != useJackMidi->isChecked())
+         || (preferences.useAlsaMidi != useAlsaMidi->isChecked())
+         || (preferences.alsaDevice != alsaDevice->text())
+         || (preferences.alsaSampleRate != alsaSampleRate->currentText().toInt())
+         || (preferences.alsaPeriodSize != alsaPeriodSize->currentText().toInt())
+         || (preferences.alsaFragments != alsaFragments->value())
+            ) {
+            seq->stop();
+#ifndef __MINGW32__
+            while(!seq->isStopped())
+                  usleep(50000);
+#endif
+            seq->exit();
+            preferences.useAlsaAudio       = alsaDriver->isChecked();
+            preferences.useJackAudio       = jackDriver->isChecked();
+            preferences.usePortaudioAudio  = portaudioDriver->isChecked();
+            preferences.useJackMidi        = useJackMidi->isChecked();
+            preferences.useAlsaMidi        = useAlsaMidi->isChecked();
+            preferences.alsaDevice         = alsaDevice->text();
+            preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();
+            preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
+            preferences.alsaFragments      = alsaFragments->value();
+            if (!seq->init()) {
+                  printf("sequencer init failed\n");
+                  }
+            }
+
 #ifdef USE_PORTAUDIO
       Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
       preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
          portaudioDevice->currentIndex());
 #endif
+
       if (lastSession->isChecked())
             preferences.sessionStart = LAST_SESSION;
       else if (newSession->isChecked())

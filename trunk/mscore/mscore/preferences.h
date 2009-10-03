@@ -69,7 +69,7 @@ struct Preferences {
       bool usePortaudioAudio;
       bool useAlsaMidi;
       bool useJackMidi;
-      bool useMidiOutput;
+      bool useMidiOutput;     // do not use internal synthesizer
       int midiPorts;
       bool midiAutoConnect;
       int rtcTicks;
