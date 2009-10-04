@@ -1307,8 +1307,8 @@ void Measure::remove(Element* el)
             case TUPLET:
                   {
                   Tuplet* tuplet = static_cast<Tuplet*>(el);
-                  foreach(DurationElement* cr, tuplet->elements())
-                        cr->setTuplet(0);
+                  foreach(DurationElement* de, tuplet->elements())
+                        de->setTuplet(0);
                   if (!_tuplets.removeOne(tuplet)) {
                         printf("Measure remove: Tuplet not found\n");
                         return;

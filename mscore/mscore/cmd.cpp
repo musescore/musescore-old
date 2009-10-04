@@ -811,7 +811,6 @@ printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
                   printf("makeGap: end of tuplet reached\n");
                   break;
                   }
-
             Fraction td;
             if (cr->duration().type() == Duration::V_MEASURE) {
                   int z, n;
@@ -820,10 +819,40 @@ printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
                   }
             else
                   td = cr->duration().fraction();
-printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
-            undoRemoveElement(cr);
-            if (seg->isEmpty())
-                  undoRemoveElement(seg);
+
+
+            Tuplet* ltuplet = cr->tuplet();
+            Tuplet* t = ltuplet;
+            while (t && t->elements().first()->type() == TUPLET)
+                  t = static_cast<Tuplet*>(t->elements().first());
+            if (ltuplet && t->elements().first() == cr) {
+                  //
+                  // Current location points to the start of a tuplet.
+                  // We have to remove the complete tuplet.
+
+                  t = ltuplet;
+                  while (t->elements().last()->type() == TUPLET)
+                        t = static_cast<Tuplet*>(t->elements().last());
+                  seg = static_cast<ChordRest*>(t->elements().last())->segment();
+
+                  td = ltuplet->duration().fraction();
+                  cmdDeleteTuplet(ltuplet, false);
+                  tuplet = 0;
+                  }
+            else {
+                  if (cr->duration().type() == Duration::V_MEASURE) {
+                        int z, n;
+                        _sigmap->timesig(cr->tick(), z, n);
+                        td = Fraction(z, n);
+                        }
+                  else
+                        td = cr->duration().fraction();
+                  printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
+                  undoRemoveElement(cr);
+                  if (seg->isEmpty())
+                        undoRemoveElement(seg);
+                  }
+
             if (sd < td) {
                   //
                   // we removed too much
