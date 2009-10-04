@@ -2420,6 +2420,12 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(0);
             }
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(Tuplet* tuplet, *m->tuplets())
+                  tuplet->setId(-1);
+            foreach(Beam* beam, *m->beams())
+                  beam->setId(-1);
+            }
 
       int dstStaffStart = dst->staffIdx();
       curTick = 0;
@@ -3014,6 +3020,9 @@ void Score::cmdRepeatSelection()
       QApplication::clipboard()->setMimeData(mimeData);
 
       QByteArray data(mimeData->data(mimeType));
+
+printf("repeat <%s>\n", data.data());
+
       QDomDocument doc;
       int line, column;
       QString err;
