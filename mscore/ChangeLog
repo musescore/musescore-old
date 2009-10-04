@@ -1,3 +1,6 @@
+4.oct (ws)
+      - fix crash when drag&drop a picture from external browser to symbol palette
+      - fix: crash when deleted symbol inserted
 3.oct (ws)
       - removed alsa midi output
       - added jack midi output

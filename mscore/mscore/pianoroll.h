@@ -53,6 +53,8 @@ class PianorollEditor : public QDialog {
       void selectionChanged();
       void veloTypeChanged(int);
       void velocityChanged(int);
+      void keyPressed(int);
+      void keyReleased(int);
 
    public:
       PianorollEditor(Staff* staff, QWidget* parent = 0);

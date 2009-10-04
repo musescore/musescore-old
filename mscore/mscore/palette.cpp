@@ -185,6 +185,8 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       QList<Element*>* el = sel->elements();
       QMimeData* mimeData = new QMimeData;
       Element* element    = cells[i]->element;
+      if (element == 0)
+            return;
       Viewer* viewer      = score->canvas();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
@@ -600,12 +602,12 @@ void Palette::dropEvent(QDropEvent* event)
                   Image* s = 0;
                   QString suffix(fi.suffix().toLower());
                   if (suffix == "svg")
-                        s = new SvgImage(0);
+                        s = new SvgImage(gscore);
                   else if (suffix == "jpg"
                      || suffix == "png"
                      || suffix == "xpm"
                         )
-                        s = new RasterImage(0);
+                        s = new RasterImage(gscore);
                   else
                         return;
                   qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
@@ -642,7 +644,7 @@ void Palette::dropEvent(QDropEvent* event)
                   Image* image = 0;
                   QString s(path.toLower());
                   if (s.endsWith(".svg"))
-                        image = new SvgImage(0);
+                        image = new SvgImage(gscore);
                   else if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")

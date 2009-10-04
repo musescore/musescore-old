@@ -36,6 +36,7 @@ class Piano : public QWidget {
 
       int yRange;
       int curPitch;
+      int curKeyPressed;
 
       static QPixmap* octave;
       static QPixmap* mk1;
@@ -54,6 +55,8 @@ class Piano : public QWidget {
 
    signals:
       void pitchChanged(int);
+      void keyPressed(int pitch);
+      void keyReleased(int pitch);
 
    public slots:
       void setYpos(int val);
