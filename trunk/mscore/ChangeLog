@@ -1,4 +1,5 @@
 4.oct (ws)
+      - fixes for note entry mode: makeGap() can now remove tuplets
       - fix crash when drag&drop a picture from external browser to symbol palette
       - fix: crash when deleted symbol inserted
 3.oct (ws)
