@@ -44,6 +44,7 @@
 #include "lyrics.h"
 #include "limits.h"
 #include "tuplet.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   Selection
@@ -758,6 +759,15 @@ QByteArray Selection::staffMimeData() const
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(slurId++);
             }
+      int tupletId = 0;
+      int beamId = 0;
+      for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(Tuplet* tuplet, *m->tuplets())
+                  tuplet->setId(tupletId++);
+            foreach(Beam* beam, *m->beams())
+                  beam->setId(beamId);
+            }
+
       int ticks  = tickEnd() - tickStart();
       int staves = staffEnd - staffStart;
       xml.stag(QString("StaffList tick=\"%1\" len=\"%2\" staff=\"%3\" staves=\"%4\"").arg(tickStart()).arg(ticks).arg(staffStart).arg(staves));

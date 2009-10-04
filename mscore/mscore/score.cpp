@@ -1111,7 +1111,11 @@ void Score::startDrag(Element* e)
       {
       _dragObject = e;
       _startDragPosition = e->userOff();
-      removeBsp(e);
+
+      QList<Element*> el;
+      e->scanElements(&el, collectElements);
+      foreach(Element* e, el)
+            removeBsp(e);
       }
 
 //---------------------------------------------------------

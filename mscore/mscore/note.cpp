@@ -287,8 +287,10 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
+      Staff* estaff = score()->staff(staffIdx() + staffMove());
+
       int tick = chord()->tick();
-      int clef = staff()->clef(tick);
+      int clef = estaff->clef(tick);
       int step = clefTable[clef].pitchOffset - _line;
       while (step < 0)        // ??
             step += 7;
@@ -770,6 +772,7 @@ QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2.0 / spatium());
+
       score()->setLayoutStart(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }
@@ -977,7 +980,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   return e;
             case ACCIDENTAL:
                   {
-                  Accidental* a = (Accidental*)e;
+                  Accidental* a = static_cast<Accidental*>(e);
                   int subtype = a->subtype();
                   delete a;
                   score()->addAccidental(this, subtype);
