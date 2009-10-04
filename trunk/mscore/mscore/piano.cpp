@@ -394,8 +394,10 @@ void Piano::setPitch(int val)
 //   mousePressEvent
 //---------------------------------------------------------
 
-void Piano::mousePressEvent(QMouseEvent*)
+void Piano::mousePressEvent(QMouseEvent* event)
       {
+      curKeyPressed = y2pitch(event->pos().y());
+      emit keyPressed(curKeyPressed);
       }
 
 //---------------------------------------------------------
@@ -404,6 +406,8 @@ void Piano::mousePressEvent(QMouseEvent*)
 
 void Piano::mouseReleaseEvent(QMouseEvent*)
       {
+      emit keyReleased(curKeyPressed);
+      curKeyPressed = -1;
       }
 
 //---------------------------------------------------------
@@ -416,6 +420,11 @@ void Piano::mouseMoveEvent(QMouseEvent* event)
       if (pitch != curPitch) {
             curPitch = pitch;
             emit pitchChanged(curPitch);
+            if (curKeyPressed != -1 && curKeyPressed != pitch) {
+                  emit keyReleased(curKeyPressed);
+                  curKeyPressed = pitch;
+                  emit keyPressed(curKeyPressed);
+                  }
             update();
             }
       }

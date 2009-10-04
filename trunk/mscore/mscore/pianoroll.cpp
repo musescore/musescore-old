@@ -33,6 +33,10 @@
 #include "awl/poslabel.h"
 #include "mscore.h"
 #include "undo.h"
+#include "part.h"
+#include "instrument.h"
+#include "seq.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   PianorollEditor
@@ -128,6 +132,8 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       connect(gv,    SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
       connect(gv,    SIGNAL(pitchChanged(int)),          piano, SLOT(setPitch(int)));
       connect(piano, SIGNAL(pitchChanged(int)),          pl,    SLOT(setPitch(int)));
+      connect(piano, SIGNAL(keyPressed(int)),                   SLOT(keyPressed(int)));
+      connect(piano, SIGNAL(keyReleased(int)),                  SLOT(keyReleased(int)));
       connect(gv,    SIGNAL(posChanged(const AL::Pos&)), pos,   SLOT(setValue(const AL::Pos&)));
       connect(gv,    SIGNAL(posChanged(const AL::Pos&)), ruler, SLOT(setPos(const AL::Pos&)));
       connect(ruler, SIGNAL(posChanged(const AL::Pos&)), pos,   SLOT(setValue(const AL::Pos&)));
@@ -259,5 +265,24 @@ void PianorollEditor::velocityChanged(int val)
       score->undo()->beginMacro();
       score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
       score->undo()->endMacro(score->undo()->current()->childCount() == 0);
+      }
+
+//---------------------------------------------------------
+//   keyPressed
+//---------------------------------------------------------
+
+void PianorollEditor::keyPressed(int pitch)
+      {
+      Instrument* i = staff->part()->instrument();
+      seq->startNote(i->channel[0], pitch, 80,
+          preferences.defaultPlayDuration, 0.0);
+      }
+
+//---------------------------------------------------------
+//   keyReleased
+//---------------------------------------------------------
+
+void PianorollEditor::keyReleased(int pitch)
+      {
       }
 
