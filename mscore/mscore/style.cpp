@@ -398,7 +398,7 @@ Style::Style()
             StyleVal(ST_stemDir3,UP),
             StyleVal(ST_stemDir4,DOWN),
 
-            StyleVal(ST_gateTime,85),
+            StyleVal(ST_gateTime,100),
             StyleVal(ST_tenutoGateTime,100),
             StyleVal(ST_staccatoGateTime,50),
             StyleVal(ST_slurGateTime,100),

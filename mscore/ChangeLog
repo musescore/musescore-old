@@ -1,6 +1,9 @@
 5.oct (ws)
       - jack midi and audio support for windows. Jack 1.9.3 required and installed
        in default location to build. Toggle USE_JACK to disable it.
+      (db)
+      - change normal gateTime to 100%
+      - updates for Polish handbook
 4.oct (ws)
       - fix to copy/paste of tuplets
       - fixes for note entry mode: makeGap() can now remove tuplets
