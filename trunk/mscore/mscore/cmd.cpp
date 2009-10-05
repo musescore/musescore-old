@@ -290,7 +290,7 @@ void Score::cmdRemoveClef(Clef* clef)
       int tick      = clef->tick();
       iClefEvent ki = cl->find(tick);
       if (ki == cl->end()) {
-            printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
+            printf("cmdRemove(Clef): cannot find clef at %d\n", tick);
             return;
             }
       int oval = (*cl)[tick];
@@ -825,7 +825,7 @@ printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
             Tuplet* t = ltuplet;
             while (t && t->elements().first()->type() == TUPLET)
                   t = static_cast<Tuplet*>(t->elements().first());
-            if (ltuplet && t->elements().first() == cr) {
+            if (ltuplet && (t->elements().first() == cr) && (sd >= ltuplet->duration().fraction())) {
                   //
                   // Current location points to the start of a tuplet.
                   // We have to remove the complete tuplet.
@@ -2466,12 +2466,14 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         const QString& tag(eee.tagName());
                         if (tag == "Tuplet") {
-                              Tuplet* tuplet   = new Tuplet(this);
-                              int tick         = curTick - tickStart + dstTick;
+                              Tuplet* tuplet = new Tuplet(this);
+                              tuplet->setTrack(curTrack);
+                              tuplet->setTick(curTick);
+                              tuplet->read(eee);
+                              curTick  = tuplet->tick();
+                              int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
-                              tuplet->setTrack(curTrack);
-                              tuplet->read(eee);
                               tuplets.append(tuplet);
                               undoAddElement(tuplet);
                               }
@@ -3021,7 +3023,7 @@ void Score::cmdRepeatSelection()
 
       QByteArray data(mimeData->data(mimeType));
 
-printf("repeat <%s>\n", data.data());
+// printf("repeat <%s>\n", data.data());
 
       QDomDocument doc;
       int line, column;

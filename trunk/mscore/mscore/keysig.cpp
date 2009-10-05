@@ -266,4 +266,12 @@ void KeySig::setSig(int old, int newSig)
       setSubtype(((old & 0xff) << 8) | (newSig & 0xff));
       }
 
+//---------------------------------------------------------
+//   setOldSig
+//---------------------------------------------------------
 
+void KeySig::setOldSig(int old)
+      {
+      int newSig = subtype() & 0xff;
+      setSubtype(((old & 0xff) << 8) | (newSig & 0xff));
+      }

@@ -234,6 +234,8 @@ PianoView::PianoView(Staff* s, AL::Pos* l)
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
       setMouseTracking(true);
+      setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
+      setDragMode(QGraphicsView::RubberBandDrag);
       _timeType = AL::TICKS;
       magStep   = 0;
 
@@ -372,17 +374,19 @@ void PianoView::mouseMoveEvent(QMouseEvent* event)
       else
             pos.setTick(tick);
       emit posChanged(pos);
+      QGraphicsView::mouseMoveEvent(event);
       }
 
 //---------------------------------------------------------
 //   leaveEvent
 //---------------------------------------------------------
 
-void PianoView::leaveEvent(QEvent*)
+void PianoView::leaveEvent(QEvent* event)
       {
       emit pitchChanged(-1);
       pos.setInvalid();
       emit posChanged(pos);
+      QGraphicsView::leaveEvent(event);
       }
 
 

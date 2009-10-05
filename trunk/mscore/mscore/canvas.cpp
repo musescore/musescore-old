@@ -1263,8 +1263,6 @@ void Canvas::paintEvent(QPaintEvent* ev)
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
-//            if (score()->noteEntryMode())
-//                  moveCursor();
             }
       else
             region = ev->region();
@@ -1272,20 +1270,6 @@ void Canvas::paintEvent(QPaintEvent* ev)
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
             paint(r, p);
-
-#if 0
-      foreach (const Page* page, _score->pages()) {
-            QRect pr = _matrix.mapRect(page->abbox()).toAlignedRect();
-            int o = pr.width() / 100;
-            int x = pr.x();
-            int y = pr.y();
-            int w = pr.width();
-            int h = pr.height();
-            QColor dc(80, 80, 80, 120);
-            p.fillRect(QRect(x+w, y+o, o, h), dc);
-            p.fillRect(QRect(x+o, y+h, w, o), dc);
-            }
-#endif
 
       p.setMatrix(_matrix);
       p.setClipping(false);
