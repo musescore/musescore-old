@@ -106,27 +106,26 @@ QT4_WRAP_CPP (mocs
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
+set (AUDIO "")
 if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
-      set (AUDIO pa.cpp pm.cpp)
 else (MINGW)
-      set (AUDIO "")
-      if (USE_PORTAUDIO)
-            set (AUDIO ${AUDIO} pa.cpp)
-      endif (USE_PORTAUDIO)
-      if (USE_JACK)
-            set (AUDIO ${AUDIO} jackaudio.cpp)
-      endif (USE_JACK)
       if (USE_ALSA)
             set (AUDIO ${AUDIO} alsa.cpp mididriver.cpp)
       endif (USE_ALSA)
 endif (MINGW)
 
-if (APPLE)
-  if (USE_PORTMIDI)
-    set (AUDIO ${AUDIO} pm.cpp)
-  endif (USE_PORTMIDI)
-endif (APPLE)
+if (USE_PORTAUDIO)
+      set (AUDIO ${AUDIO} pa.cpp)
+endif (USE_PORTAUDIO)
+
+if (USE_PORTMIDI)
+      set (AUDIO ${AUDIO} pm.cpp)
+endif (USE_PORTMIDI)
+
+if (USE_JACK)
+      set (AUDIO ${AUDIO} jackaudio.cpp)
+endif (USE_JACK)
 
 if (APPLE)
 	set (ExecutableName mscore MACOSX_BUNDLE)
@@ -225,6 +224,7 @@ if (MINGW)
       portaudio
       portmidi
       winmm
+      jack
       )
 
    if (HAS_AUDIOFILE)
