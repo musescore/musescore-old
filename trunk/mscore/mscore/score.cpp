@@ -499,7 +499,7 @@ void Score::write(Xml& xml, bool autosave)
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(tupletId++);
             foreach(Beam* beam, *m->beams())
-                  beam->setId(beamId);
+                  beam->setId(beamId++);
             }
 
       foreach(Element* el, _gel)
