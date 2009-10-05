@@ -33,6 +33,7 @@ def insertH1Anchors(html_source, anchors, verbose):
         name = name.replace("-a-","-") #drop unnessary words
         name = urllib2.quote(name).lower() #percent encode name to match URLs
         name = name.replace('%c3%89','%c3%a9') #work-around for text encoding bug
+        name = name.replace('%c5%81','%c5%82') #manually convert to lower case (Python doesn't seem know the lowercase equivalent of this charaternvert this character
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
         anchors.append(name)
         
@@ -151,7 +152,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
         internal_href = original_href.replace(handbook_url + '/','#').replace('%20','-').replace('%2520','-').lower()
         if internal_href[:1] == '#':
             internal_href = '#' + urllib2.quote(internal_href[1:]).lower() #percent encode URL to match anchor names
-
+        
         # Fix links to h3 anchors
         if 'print/book/export/html/' in internal_href:
             internal_href = internal_href[internal_href.index('#'):]
