@@ -1,4 +1,5 @@
 5.oct (ws)
+      - fix "Cursor position after chord on wrong side of note"
       - another attempt at "Key signature do not include natural signs if added in
         reverse order"
       - fix another issue with copy/paste of tuplets
