@@ -22,9 +22,7 @@
 #include "seq.h"
 #include "mscore.h"
 
-#ifdef USE_JACK
-#include "jackaudio.h"
-#endif
+
 #ifdef USE_ALSA
 #include "alsa.h"
 // #include "mididriver.h"
@@ -50,6 +48,10 @@
 #include "utils.h"
 #include "repeatlist.h"
 #include "synthcontrol.h"
+
+#ifdef USE_JACK
+#include "jackaudio.h"
+#endif
 
 Seq* seq;
 

@@ -22,7 +22,6 @@
 
 #include "preferences.h"
 #include "synti.h"
-#include "score.h"
 #include "mscore.h"
 #include "seq.h"
 #include "fluid.h"
