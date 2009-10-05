@@ -503,46 +503,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="2">
-      <Tuplet id="1">
-        <tick>72000</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
-      <Tuplet id="2">
-        <tick>73920</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
-      <Tuplet id="3">
-        <tick>75840</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
-      <Tuplet id="4">
-        <tick>77760</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
-      <Tuplet id="5">
-        <tick>79680</tick>
-        <numberType>2</numberType>
-        <bracketType>2</bracketType>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <baseNote>eighth</baseNote>
-        </Tuplet>
       <Chord>
         <tick>960</tick>
         <durationType>whole</durationType>
@@ -7628,6 +7588,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="39">
+      <Tuplet id="1">
+        <tick>72000</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Tuplet id="106">
         <tick>72480</tick>
         <numberType>2</numberType>
@@ -7824,6 +7792,14 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
+      <Tuplet id="2">
+        <tick>73920</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Tuplet id="109">
         <tick>74400</tick>
         <numberType>2</numberType>
@@ -8019,6 +7995,14 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <style>17</style>
         </Text>
+      <Tuplet id="3">
+        <tick>75840</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Tuplet id="112">
         <tick>76320</tick>
         <numberType>2</numberType>
@@ -8209,6 +8193,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="42">
+      <Tuplet id="4">
+        <tick>77760</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Tuplet id="115">
         <tick>78240</tick>
         <numberType>2</numberType>
@@ -8402,6 +8394,14 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
+      <Tuplet id="5">
+        <tick>79680</tick>
+        <numberType>2</numberType>
+        <bracketType>2</bracketType>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <baseNote>eighth</baseNote>
+        </Tuplet>
       <Tuplet id="118">
         <tick>80160</tick>
         <numberType>2</numberType>

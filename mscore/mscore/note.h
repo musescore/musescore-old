@@ -76,6 +76,7 @@ class Note : public Element {
       int _subchannel;        ///< articulation
       int _line;              ///< y-Position; 0 - top line.
 
+      bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
       char _ppitch;           ///< played pitch (honor voltas etc.); cached value
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer

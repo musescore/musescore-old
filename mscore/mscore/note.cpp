@@ -89,6 +89,7 @@ void NoteHead::write(Xml& xml) const
 Note::Note(Score* s)
    : Element(s)
       {
+      dragMode        = false;
       _pitch          = 0;
       _ppitch         = 0;
       _tuning         = 0.0;
@@ -115,6 +116,7 @@ Note::Note(Score* s)
 Note::Note(const Note& n)
    : Element(n)
       {
+      dragMode        = n.dragMode;
       _subchannel     = n._subchannel;
       _pitch          = n._pitch;
       _ppitch         = n._ppitch;
@@ -170,7 +172,7 @@ void Note::setPitch(int val)
       _pitch          = val;
       int pitchOffset = 0;
       if (score()) {
-            Part* part      = score()->part(staffIdx());
+            Part* part = score()->part(staffIdx());
             if (part) {
                   Instrument* instr = part->instrument();
                   pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
@@ -770,6 +772,7 @@ void Note::read(QDomElement e)
 
 QRectF Note::drag(const QPointF& s)
       {
+      dragMode = true;
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2.0 / spatium());
 
@@ -785,16 +788,16 @@ void Note::endDrag()
       {
       if (_lineOffset == 0)
             return;
-
       _line      += _lineOffset;
-      _lineOffset = 0;
-
+      _lineOffset  = 0;
+      dragMode     = false;
       int staffIdx = chord()->staffIdx() + _staffMove;
       Staff* staff = score()->staff(staffIdx);
-      int clef     = staff->clefList()->clef(chord()->tick());
-      int key      = staff->keymap()->key(chord()->tick());
+      int tick     = chord()->tick();
+      int clef     = staff->clef(tick);
+      int key      = staff->key(tick);
       int npitch   = line2pitch(_line, clef, key);
-      score()->undoChangePitch(this, npitch, pitch2tpc(npitch), 0);
+      score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
       }
 
 //---------------------------------------------------------
@@ -1265,7 +1268,7 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
             _tieFor->scanElements(data, func);
       foreach(Element* e, _el)
             e->scanElements(data, func);
-      if (_accidental)
+      if (!dragMode && _accidental)
             func(data, _accidental);
       }
 

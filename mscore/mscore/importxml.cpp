@@ -1729,8 +1729,18 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       QString timeSymbol = "";
 
       for (;!e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "divisions")
-                  divisions = e.text().toInt();
+            if (e.tagName() == "divisions") {
+                  bool ok;
+                  divisions = e.text().toInt(&ok);
+                  if (!ok) {
+                        printf("MusicXml-Import: bad division value: <%s>\n",
+                           qPrintable(e.text()));
+                        // audiveris outputs float values:
+                        divisions = int(e.text().toDouble(&ok));
+                        if (!ok)
+                              divisions = 4;
+                        }
+                  }
             else if (e.tagName() == "key") {
                   int number  = e.attribute(QString("number"), "-1").toInt();
                   int staffIdx = staff;
@@ -2035,13 +2045,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int tremolo = 0;
       int headGroup = 0;
       bool noStem = false;
-      
+
       QString printObject(e.attribute("print-object", "yes"));
-      
+
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString s(e.text());
-            
+
             if (tag == "pitch") {
                   step   = "C";
                   alter  = 0;
@@ -2075,8 +2085,18 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (tag == "duration")
-                  duration = s.toInt();
+            else if (tag == "duration") {
+                  bool ok;
+                  duration = s.toInt(&ok);
+                  if (!ok) {
+                        printf("MusicXml-Import: bad duration value: <%s>\n",
+                           qPrintable(s));
+                        // audiveris outputs float values:
+                        duration = int(s.toDouble(&ok));
+                        if (!ok)
+                              duration = 1;
+                        }
+                  }
             else if (tag == "type")
                   durationType = Duration(s);
             else if (tag == "chord")
@@ -2470,7 +2490,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
             ((Chord*)cr)->setStemDirection(sd);
-            
+
             note->setVisible(printObject == "yes");
             }
       if (!fermataType.isEmpty()) {

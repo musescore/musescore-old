@@ -268,32 +268,22 @@ void Staff::changeKeySig(int tick, int st)
       if (m->prevMeasure())
             m = m->prevMeasure();
       int track = idx() * VOICES;
-      for (Measure* m = measure; m; m = m->nextMeasure()) {
-            bool found = false;
-            for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != Segment::SegKeySig)
-                        continue;
-                  //
-                  // we assume keySigs are only in first track (voice 0)
-                  //
-                  KeySig* e = static_cast<KeySig*>(segment->element(track));
-                  int etick = segment->tick();
-                  if (!e || (etick < tick))
-                        continue;
-                  int cst = char(e->subtype() & 0xff);
-                  if ((cst != st) && (etick > tick)) {
-                        found = true;
-                        e->setSig(st, cst);     // fix natural signs if necessary
-                        break;
-                        }
-                  _score->undoRemoveElement(e);
-                  m->cmdRemoveEmptySegment(segment);
-                  if (etick > tick) {
-                        found = true;
-                        break;
-                        }
-                  }
-            if (found)
+      for (Segment* segment = measure->first(); segment; segment = segment->next1()) {
+            if (segment->subtype() != Segment::SegKeySig)
+                  continue;
+            //
+            // we assume keySigs are only in first track (voice 0)
+            //
+            KeySig* e = static_cast<KeySig*>(segment->element(track));
+            int etick = segment->tick();
+            if (!e || (etick < tick))
+                  continue;
+            int cst = char(e->subtype() & 0xff);
+            if ((cst != st) && (etick > tick))
+                  break;
+            _score->undoRemoveElement(e);
+            m->cmdRemoveEmptySegment(segment);
+            if (etick > tick)
                   break;
             }
 
@@ -305,8 +295,7 @@ void Staff::changeKeySig(int tick, int st)
             KeySig* keysig = new KeySig(_score);
             keysig->setTrack(idx() * VOICES);
             keysig->setTick(tick);
-            int oldKey = _keymap->key(tick-1);
-            keysig->setSig(oldKey, st);
+            keysig->setSig(0, st);
 
             Segment::SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);

@@ -57,7 +57,6 @@
 #include "barline.h"
 #include "box.h"
 #include "utils.h"
-// #include "mididriver.h"
 #include "excerpt.h"
 #include "stafftext.h"
 #include "magbox.h"
@@ -65,6 +64,7 @@
 #include "preferences.h"
 #include "repeatlist.h"
 #include "keysig.h"
+#include "beam.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -486,13 +486,22 @@ void Score::write(Xml& xml, bool autosave)
       foreach(const Excerpt* excerpt, _excerpts)
             excerpt->write(xml);
 
-      // to serialize slurs, they need an id; this id is referenced
+      // to serialize slurs/tuplets/beams, they need an id; this id is referenced
       // in begin-end elements
-      int slurId = 0;
+      int slurId   = 0;
+      int tupletId = 0;
+      int beamId   = 0;
       foreach(Element* el, _gel) {
             if (el->type() == SLUR)
-                  ((Slur*)el)->setId(slurId++);
+                  static_cast<Slur*>(el)->setId(slurId++);
             }
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(Tuplet* tuplet, *m->tuplets())
+                  tuplet->setId(tupletId++);
+            foreach(Beam* beam, *m->beams())
+                  beam->setId(beamId);
+            }
+
       foreach(Element* el, _gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
@@ -2014,30 +2023,8 @@ void Score::addElement(Element* element)
                         break;
                   }
             }
-      else if (element->type() == KEYSIG) {
-            // FIXME: update keymap here (and remove that from Score::changeKeySig)
-            // but only after fixing redo for elements contained in segments
-            // fixup all accidentals
-
-            KeySig* ks = static_cast<KeySig*>(element);
-            int oval   = char(ks->subtype() & 0xff);
-            int track  = ks->track();
-            for (Segment* s = ks->segment()->next1(); s; s = s->next1()) {
-                  if (s->subtype() != Segment::SegKeySig)
-                        continue;
-                  KeySig* e = static_cast<KeySig*>(s->element(track));
-                  if (e) {
-                        int cst = char(e->subtype() & 0xff);
-                        if (cst != oval) {
-                              // fix natural signs if necessary
-                              e->setSig(oval, cst);
-                              }
-                        return;
-                        }
-                  }
-
+      else if (element->type() == KEYSIG)
             layoutAll = true;
-            }
       else if (element->type() == SLUR) {
             Slur* s = static_cast<Slur*>(element);
             if (s->startElement())
@@ -2119,25 +2106,7 @@ void Score::removeElement(Element* element)
                   }
                   break;
             case KEYSIG:
-                  {
-                  KeySig* ks = static_cast<KeySig*>(element);
-                  int oval   = ks->staff()->key(ks->tick());
-                  int track = ks->track();
-                  for (Segment* s = ks->segment()->next1(); s; s = s->next1()) {
-                        if (s->subtype() != Segment::SegKeySig)
-                              continue;
-                        KeySig* e = static_cast<KeySig*>(s->element(track));
-                        if (e) {
-                              int cst = char(e->subtype() & 0xff);
-                              if (cst != oval) {
-                                    // fix natural signs if necessary
-                                    e->setSig(oval, cst);
-                                    }
-                              return;
-                              }
-                        }
                   layoutAll = true;
-                  }
                   break;
             case SLUR:
                   {

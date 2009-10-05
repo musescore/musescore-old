@@ -957,8 +957,10 @@ void Seq::startNote(Channel* a, int pitch, int velo, int duration, double nt)
       {
       stopNotes();
       startNote(a, pitch, velo, nt);
-      noteTimer->setInterval(duration);
-      noteTimer->start();
+      if (duration) {
+            noteTimer->setInterval(duration);
+            noteTimer->start();
+            }
       }
 
 //---------------------------------------------------------

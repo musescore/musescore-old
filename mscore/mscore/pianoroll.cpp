@@ -274,8 +274,7 @@ void PianorollEditor::velocityChanged(int val)
 void PianorollEditor::keyPressed(int pitch)
       {
       Instrument* i = staff->part()->instrument();
-      seq->startNote(i->channel[0], pitch, 80,
-          preferences.defaultPlayDuration, 0.0);
+      seq->startNote(i->channel[0], pitch, 80, 0, 0.0);
       }
 
 //---------------------------------------------------------
@@ -284,5 +283,6 @@ void PianorollEditor::keyPressed(int pitch)
 
 void PianorollEditor::keyReleased(int pitch)
       {
+      seq->stopNotes();
       }
 

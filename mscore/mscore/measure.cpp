@@ -679,14 +679,19 @@ void Measure::layout0()
             int track = staffIdx * VOICES;
 
             for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
                   if (segment->subtype() == Segment::SegKeySig
                      || segment->subtype() == Segment::SegStartRepeatBarLine
                      || segment->subtype() == Segment::SegTimeSig) {
-                        if (segment->element(track) && !segment->element(track)->generated())
+                        if (e && !e->generated())
                               _breakMMRest = true;
                         }
                   if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
                         layoutChords0(segment, staffIdx * VOICES, tversatz);
+                  if (e && e->type() == KEYSIG) {
+                        int oval = staff->keymap()->key(e->tick() - 1);
+                        static_cast<KeySig*>(e)->setOldSig(oval);
+                        }
                   }
 
             int startTrack = staffIdx * VOICES;
@@ -2610,11 +2615,7 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   el->write(xml);
                   }
             }
-      foreach(Tuplet* tuplet, _tuplets) {             // pass1: generate tupletId's
-            if (tuplet->staffIdx() == staff)
-                  tuplet->setId(xml.tupletId++);
-            }
-      for (int level = 0; true; level++) {                // pass2: write tuplets
+      for (int level = 0; true; level++) {                // write tuplets
             bool found = false;
             foreach(Tuplet* tuplet, _tuplets) {
                   if (tuplet->staffIdx() == staff) {
@@ -2637,10 +2638,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                         if (e->isChordRest()) {
                               ChordRest* cr = static_cast<ChordRest*>(e);
                               Beam* beam = cr->beam();
-                              if (beam && beam->elements().front() == cr) {
-                                    beam->setId(xml.beamId++);
+                              if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
-                                    }
                               }
                         e->write(xml);
                         }
@@ -2751,7 +2750,6 @@ void Measure::read(QDomElement e, int idx)
       else {
             setTick(score()->curTick);
             }
-      Staff* staff     = _score->staff(idx);
       score()->curTick = tick();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -2852,9 +2850,8 @@ void Measure::read(QDomElement e, int idx)
                   ks->setTrack(score()->curTrack);
                   ks->setTick(score()->curTick);
                   ks->read(e);
-                  char oldSig = staff->keymap()->key(score()->curTick - 1);
                   char newSig = ks->subtype() & 0xff;
-                  ks->setSig(oldSig, newSig);
+                  ks->setSig(0, newSig);
                   Segment* s = getSegment(ks);
                   s->add(ks);
                   score()->curTick = ks->tick();

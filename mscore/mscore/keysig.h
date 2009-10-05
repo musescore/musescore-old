@@ -53,6 +53,7 @@ class KeySig : public Element {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout();
       void setSig(int oldSig, int newSig);
+      void setOldSig(int oldSig);
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
       };
