@@ -503,6 +503,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             select(n, SELECT_SINGLE, 0);
             setLayoutAll(false);
             setLayoutStart(on->chord()->measure());
+            moveToNextInputPos();
             return n;
             }
       expandVoice();
