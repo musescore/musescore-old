@@ -84,6 +84,7 @@ class PianoView : public QGraphicsView {
    public:
       PianoView();
       void setStaff(Staff*, AL::Pos* locator);
+      void ensureVisible(int tick);
       };
 
 

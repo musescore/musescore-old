@@ -234,6 +234,7 @@ void Preferences::init()
 
       defaultPlayDuration     = 300;      // ms
       warnPitchRange          = true;
+      followSong              = true;
       };
 
 //---------------------------------------------------------
@@ -329,6 +330,7 @@ void Preferences::write()
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
       s.setValue("warnPitchRange", warnPitchRange);
+      s.setValue("followSong", followSong);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -427,6 +429,7 @@ void Preferences::read()
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
+      followSong             = s.value("followSong", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
