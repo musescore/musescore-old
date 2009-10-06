@@ -50,6 +50,8 @@ class MagBox;
 class NewWizard;
 class ExcerptsDialog;
 class SynthControl;
+class PianorollEditor;
+class Staff;
 
 class QScriptEngineDebugger;
 
@@ -241,6 +243,9 @@ class MuseScore : public QMainWindow {
       QTimer* autoSaveTimer;
       QSignalMapper* pluginMapper;
 
+      PianorollEditor* pianorollEditor;
+
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -357,6 +362,8 @@ class MuseScore : public QMainWindow {
       QString lastSaveCopyDirectory;
       QString lastSaveDirectory;
       SynthControl* getSynthControl() const { return synthControl; }
+      void editInPianoroll(Staff* staff);
+      PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

@@ -97,10 +97,8 @@ static const char* cmark_xpm[]={
 //   Ruler
 //---------------------------------------------------------
 
-Ruler::Ruler(Score* s, AL::Pos* lc, QWidget* parent)
-   : QWidget(parent), _score(s),
-     _cursor(s->tempomap(), s->sigmap()),
-     _locator(lc)
+Ruler::Ruler(QWidget* parent)
+   : QWidget(parent)
       {
       if (markIcon[0] == 0) {
             markIcon[0] = new QPixmap(cmark_xpm);
@@ -109,12 +107,23 @@ Ruler::Ruler(Score* s, AL::Pos* lc, QWidget* parent)
             }
       setMouseTracking(true);
       magStep = 0;
-      _xpos = 0;
-      _xmag = 0.1;
+      _xpos   = 0;
+      _xmag   = 0.1;
       _timeType = AL::TICKS;
       _font2.setPixelSize(14);
       _font2.setBold(true);
       _font1.setPixelSize(10);
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Ruler::setScore(Score* s, AL::Pos* lc)
+      {
+      _score = s;
+      _locator = lc;
+      _cursor.setContext(s->tempomap(), s->sigmap());
       }
 
 //---------------------------------------------------------

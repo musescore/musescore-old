@@ -44,12 +44,41 @@ static int pitch2y(int pitch)
       }
 
 //---------------------------------------------------------
+//   PianoItem
+//---------------------------------------------------------
+
+PianoItem::PianoItem(Note* n)
+   : QGraphicsRectItem()
+      {
+      setFlags(flags() | QGraphicsItem::ItemIsSelectable);
+      int pitch    = n->pitch();
+      Chord* chord = n->chord();
+      int x        = chord->tick() + 480;
+      int len      = chord->tickLen();
+      int y        = pitch2y(pitch) + keyHeight/4;
+      setRect(x, y, len, keyHeight/2);
+      setBrush(QColor(Qt::blue));
+      setPen(QPen());
+      setSelected(n->selected());
+      setData(0, QVariant::fromValue<void*>(n));
+      }
+
+//---------------------------------------------------------
 //   PianoScene
 //---------------------------------------------------------
 
-PianoScene::PianoScene(Staff* staff, QWidget* parent)
+PianoScene::PianoScene(QWidget* parent)
    : QGraphicsScene(parent)
       {
+      }
+
+//---------------------------------------------------------
+//   setStaff
+//---------------------------------------------------------
+
+void PianoScene::setStaff(Staff* staff)
+      {
+      clear();
       Measure* m = staff->score()->firstMeasure();
       int staffIdx = staff->idx();
       int startTrack = staffIdx * VOICES;
@@ -61,17 +90,8 @@ PianoScene::PianoScene(Staff* staff, QWidget* parent)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
                   NoteList* nl = chord->noteList();
-                  int x        = chord->tick() + 480;
-                  int len      = chord->tickLen();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        Note* n = in->second;
-                        int pitch = n->pitch();
-                        int y = pitch2y(pitch) + keyHeight/4;
-                        QGraphicsRectItem* ri = addRect(x, y,
-                           len, keyHeight/2, QPen(), QBrush(QColor(Qt::blue)));
-                        ri->setFlags(ri->flags() | QGraphicsItem::ItemIsSelectable);
-                        ri->setData(0, QVariant::fromValue<void*>(n));
-                        }
+                  for (iNote in = nl->begin(); in != nl->end(); ++in)
+                        addItem(new PianoItem(in->second));
                   }
             }
       }
@@ -224,13 +244,10 @@ void PianoView::drawForeground(QPainter* painter, const QRectF& rect)
 //   PianoView
 //---------------------------------------------------------
 
-PianoView::PianoView(Staff* s, AL::Pos* l)
-   : QGraphicsView(),
-   staff(s),
-   pos(s->score()->tempomap(), s->score()->sigmap()),
-   _locator(l)
+PianoView::PianoView()
+   : QGraphicsView()
       {
-      setScene(new PianoScene(s));
+      setScene(new PianoScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
       setMouseTracking(true);
@@ -238,10 +255,34 @@ PianoView::PianoView(Staff* s, AL::Pos* l)
       setDragMode(QGraphicsView::RubberBandDrag);
       _timeType = AL::TICKS;
       magStep   = 0;
+      }
+
+//---------------------------------------------------------
+//   setStaff
+//---------------------------------------------------------
+
+void PianoView::setStaff(Staff* s, AL::Pos* l)
+      {
+      staff    = s;
+      _locator = l;
+      pos.setContext(s->score()->tempomap(), s->score()->sigmap());
+
+      scene()->blockSignals(true);
+      static_cast<PianoScene*>(scene())->setStaff(s);
+      scene()->blockSignals(false);
 
       Measure* lm = s->score()->lastMeasure();
       ticks       = lm->tick() + lm->tickLen();
       scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
+
+      //
+      // move to something interesting
+      //
+      QList<QGraphicsItem*> items = scene()->selectedItems();
+      QRectF boundingRect;
+      foreach(QGraphicsItem* item, items)
+            boundingRect |= item->boundingRect();
+      centerOn(boundingRect.center());
       }
 
 //---------------------------------------------------------

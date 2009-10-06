@@ -25,11 +25,14 @@ class Score;
 class Staff;
 class PianoView;
 class Note;
+class Ruler;
+class Seq;
 
 #include "al/pos.h"
 
 namespace Awl {
       class PitchEdit;
+      class PosLabel;
       };
 
 //---------------------------------------------------------
@@ -40,14 +43,17 @@ class PianorollEditor : public QDialog {
       Q_OBJECT
 
       PianoView* gv;
-      Score* score;
+      Score* _score;
       Staff* staff;
       Awl::PitchEdit* pitch;
       QSpinBox* velocity;
       AL::Pos locator[3];
       QComboBox* veloType;
+      Awl::PosLabel* pos;
+      Ruler* ruler;
 
       void updateVelocity(Note* note);
+      void updateSelection();
 
    private slots:
       void selectionChanged();
@@ -56,8 +62,14 @@ class PianorollEditor : public QDialog {
       void keyPressed(int);
       void keyReleased(int);
 
+   public slots:
+      void changeSelection(int);
+
    public:
-      PianorollEditor(Staff* staff, QWidget* parent = 0);
+      PianorollEditor(QWidget* parent = 0);
+      void setStaff(Staff* staff);
+      Score* score() const { return _score; }
+      void heartBeat(Seq*);
       };
 
 #endif

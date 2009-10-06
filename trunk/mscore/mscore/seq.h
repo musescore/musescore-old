@@ -105,7 +105,7 @@ class Seq : public QObject {
 
       QList<Event*> eventList;
 
-      
+
       void collectMeasureEvents(Measure*, int staffIdx);
 
       void stopTransport();
@@ -148,7 +148,7 @@ class Seq : public QObject {
       void nextChord();
       void prevMeasure();
       void prevChord();
-      
+
       void collectEvents();
       void guiStop();
 
@@ -177,6 +177,7 @@ class Seq : public QObject {
       const QList<MidiPatch*>& getPatchInfo() const;
       Driver* getDriver()  { return driver; }
       int getCurTime();
+      int getCurTick();
       void getCurTick(int*, int*);
       float masterVolume() const;
       };

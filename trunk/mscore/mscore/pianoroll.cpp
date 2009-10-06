@@ -37,26 +37,15 @@
 #include "instrument.h"
 #include "seq.h"
 #include "preferences.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   PianorollEditor
 //---------------------------------------------------------
 
-PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
+PianorollEditor::PianorollEditor(QWidget* parent)
    : QDialog(parent)
       {
-      staff = st;
-      score = staff->score();
-
-      AL::TempoMap* tl = score->tempomap();
-      AL::TimeSigMap*  sl = score->sigmap();
-      for (int i = 0; i < 3; ++i)
-            locator[i].setContext(tl, sl);
-
-      locator[0].setTick(480 * 5 + 240);
-      locator[1].setTick(480 * 3 + 240);
-      locator[2].setTick(480 * 12 + 240);
-
       QGridLayout* layout = new QGridLayout;
       layout->setSpacing(0);
 
@@ -81,7 +70,7 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
 
       tb->addSeparator();
       tb->addWidget(new QLabel(tr("Cursor:")));
-      Awl::PosLabel* pos = new Awl::PosLabel(tl, sl);
+      pos = new Awl::PosLabel;
       tb->addWidget(pos);
       Awl::PitchLabel* pl = new Awl::PitchLabel();
       tb->addWidget(pl);
@@ -106,11 +95,11 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       tb->addWidget(pitch);
 
       double xmag = .1;
-      gv  = new PianoView(staff, locator);
+      gv  = new PianoView;
       gv->scale(xmag, 1.0);
       layout->addWidget(gv, 3, 1);
 
-      Ruler* ruler = new Ruler(score, locator);
+      ruler = new Ruler;
       ruler->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       ruler->setFixedHeight(rulerHeight);
       ruler->setMag(xmag, 1.0);
@@ -145,15 +134,40 @@ PianorollEditor::PianorollEditor(Staff* st, QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   selectionChanged
+//   setStaff
 //---------------------------------------------------------
 
-void PianorollEditor::selectionChanged()
+void PianorollEditor::setStaff(Staff* st)
+      {
+      staff = st;
+      _score = staff->score();
+      setWindowTitle(QString(tr("MuseScore: <%1> Staff: %2")).arg(_score->name()).arg(st->idx()));
+
+      AL::TempoMap* tl = _score->tempomap();
+      AL::TimeSigMap*  sl = _score->sigmap();
+      for (int i = 0; i < 3; ++i)
+            locator[i].setContext(tl, sl);
+
+      locator[0].setTick(480 * 5 + 240);
+      locator[1].setTick(480 * 3 + 240);
+      locator[2].setTick(480 * 12 + 240);
+
+      gv->setStaff(staff, locator);
+      ruler->setScore(_score, locator);
+      pos->setContext(tl, sl);
+      updateSelection();
+      }
+
+//---------------------------------------------------------
+//   updateSelection
+//---------------------------------------------------------
+
+void PianorollEditor::updateSelection()
       {
       QList<QGraphicsItem*> items = gv->scene()->selectedItems();
       if (items.size() == 1) {
             QGraphicsItem* item = items[0];
-            Note* note = (Note*)item->data(0).value<void*>();
+            Note* note = static_cast<Note*>(item->data(0).value<void*>());
             pitch->setEnabled(true);
             pitch->setValue(note->pitch());
             veloType->setEnabled(true);
@@ -181,6 +195,51 @@ void PianorollEditor::selectionChanged()
       }
 
 //---------------------------------------------------------
+//   selectionChanged
+//---------------------------------------------------------
+
+void PianorollEditor::selectionChanged()
+      {
+      updateSelection();
+      _score->blockSignals(true);
+      QList<QGraphicsItem*> items = gv->scene()->selectedItems();
+      if (items.size() == 1) {
+            QGraphicsItem* item = items[0];
+            Note* note = static_cast<Note*>(item->data(0).value<void*>());
+            _score->select(note, SELECT_SINGLE, 0);
+            }
+      else if (items.size() == 0) {
+            _score->select(0, SELECT_SINGLE, 0);
+            }
+      else {
+            _score->select(0, SELECT_SINGLE, 0);
+            foreach(QGraphicsItem* item, items) {
+                  Note* note = static_cast<Note*>(item->data(0).value<void*>());
+                  _score->select(note, SELECT_ADD, 0);
+                  }
+            }
+      _score->setUpdateAll();
+      _score->end();
+      _score->blockSignals(false);
+      }
+
+//---------------------------------------------------------
+//   changeSelection
+//---------------------------------------------------------
+
+void PianorollEditor::changeSelection(int)
+      {
+      gv->scene()->blockSignals(true);
+      gv->scene()->clearSelection();
+      QList<QGraphicsItem*> il = gv->scene()->items();
+      foreach(QGraphicsItem* item, il) {
+            Note* note = static_cast<Note*>(item->data(0).value<void*>());
+            item->setSelected(note->selected());
+            }
+      gv->scene()->blockSignals(false);
+      }
+
+//---------------------------------------------------------
 //   veloTypeChanged
 //---------------------------------------------------------
 
@@ -194,9 +253,9 @@ void PianorollEditor::veloTypeChanged(int val)
       if (ValueType(val) == note->veloType())
             return;
 
-      score->undo()->beginMacro();
-      score->undo()->push(new ChangeVelocity(note, ValueType(val), note->velocity(), note->veloOffset()));
-      score->undo()->endMacro(score->undo()->current()->childCount() == 0);
+      _score->undo()->beginMacro();
+      _score->undo()->push(new ChangeVelocity(note, ValueType(val), note->velocity(), note->veloOffset()));
+      _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       updateVelocity(note);
       }
 
@@ -262,9 +321,9 @@ void PianorollEditor::velocityChanged(int val)
       else
             offset = val;
 
-      score->undo()->beginMacro();
-      score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
-      score->undo()->endMacro(score->undo()->current()->childCount() == 0);
+      _score->undo()->beginMacro();
+      _score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
+      _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       }
 
 //---------------------------------------------------------
@@ -281,8 +340,20 @@ void PianorollEditor::keyPressed(int pitch)
 //   keyReleased
 //---------------------------------------------------------
 
-void PianorollEditor::keyReleased(int pitch)
+void PianorollEditor::keyReleased(int /*pitch*/)
       {
       seq->stopNotes();
+      }
+
+//---------------------------------------------------------
+//   heartBeat
+//---------------------------------------------------------
+
+void PianorollEditor::heartBeat(Seq* seq)
+      {
+      int t = seq->getCurTick();
+      locator[0].setTick(t);
+      gv->scene()->update();
+      ruler->update();
       }
 

@@ -54,6 +54,7 @@
 #include "al/sig.h"
 #include "undo.h"
 #include "synthcontrol.h"
+#include "pianoroll.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -330,6 +331,7 @@ MuseScore::MuseScore()
       drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
+      pianorollEditor       = 0;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -2397,3 +2399,19 @@ void MuseScore::handleMessage(const QString& message)
       lastOpenPath = score->fileInfo()->path();
       setCurrentScore(score);
       }
+
+//---------------------------------------------------------
+//   editInPianoroll
+//---------------------------------------------------------
+
+void MuseScore::editInPianoroll(Staff* staff)
+      {
+      if (pianorollEditor == 0)
+            pianorollEditor = new PianorollEditor;
+      else
+            disconnect(pianorollEditor->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+      pianorollEditor->setStaff(staff);
+      pianorollEditor->show();
+      connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+      }
+
