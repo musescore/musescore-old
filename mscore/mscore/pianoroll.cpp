@@ -57,6 +57,12 @@ PianorollEditor::PianorollEditor(QWidget* parent)
 #ifdef HAS_MIDI
       tb->addAction(getAction("midi-on"));
 #endif
+      QAction* a = getAction("follow");
+      a->setCheckable(true);
+      a->setChecked(preferences.followSong);
+
+      tb->addAction(a);
+
       tb->addSeparator();
       tb->addAction(getAction("rewind"));
       tb->addAction(getAction("play"));
@@ -352,8 +358,12 @@ void PianorollEditor::keyReleased(int /*pitch*/)
 void PianorollEditor::heartBeat(Seq* seq)
       {
       int t = seq->getCurTick();
-      locator[0].setTick(t);
-      gv->scene()->update();
-      ruler->update();
+      if (locator[0].tick() != t) {
+            locator[0].setTick(t);
+            gv->scene()->update();
+            ruler->update();
+            if (preferences.followSong)
+                  gv->ensureVisible(t);
+            }
       }
 

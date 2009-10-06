@@ -430,4 +430,11 @@ void PianoView::leaveEvent(QEvent* event)
       QGraphicsView::leaveEvent(event);
       }
 
+void PianoView::ensureVisible(int tick)
+      {
+      tick += MAP_OFFSET;
+      QPointF pt = mapToScene(0, height() / 2);
+      QGraphicsView::ensureVisible(qreal(tick), pt.y(), 240.0, 1.0);
+      }
+
 

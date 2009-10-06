@@ -2057,6 +2057,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Repeat selection"),
          &fileOpenIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "follow",
+         QT_TR_NOOP("follow song"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("F"),
+         QT_TR_NOOP("Follow Song")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

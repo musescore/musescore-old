@@ -1929,6 +1929,8 @@ void MuseScore::cmd(QAction* a)
             entryTools->setVisible(!entryTools->isVisible());
       else if (cmd == "local-help")
             helpBrowser();
+      else if (cmd == "follow")
+            preferences.followSong = a->isChecked();
       else {
             if (cs)
                   cs->cmd(a);
