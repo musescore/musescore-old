@@ -291,9 +291,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             refresh |= _selection->deselectAll(this);
             if (e == 0) {
                   selState = SEL_NONE;
-                  if (!noteEntryMode()) {
-                        //_is.duration.setVal(Duration::V_INVALID);
-                        }
                   updateAll = true;
                   }
             else {

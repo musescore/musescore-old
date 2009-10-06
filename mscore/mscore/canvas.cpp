@@ -55,7 +55,6 @@
 #include "system.h"
 #include "magbox.h"
 #include "measure.h"
-#include "pianoroll.h"
 #include "drumroll.h"
 
 //---------------------------------------------------------
@@ -346,8 +345,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             }
       else if (cmd == "pianoroll") {
             _score->endCmd();
-            PianorollEditor pianorollEditor(staff);
-            pianorollEditor.exec();
+            mscore->editInPianoroll(staff);
             }
       else if (cmd == "staff-properties") {
             EditStaff staffEdit(staff, this);

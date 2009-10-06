@@ -101,7 +101,7 @@ class Pos {
 
       void write(Xml&, const char*) const;
       void read(QDomNode);
-      bool valid() const { return _valid;  }
+      bool valid() const { return _valid && tempo && sig;  }
       void setInvalid()  { _valid = false; }
       };
 

@@ -65,7 +65,8 @@ class Ruler : public QWidget {
       void setPos(const AL::Pos&);
 
    public:
-      Ruler(Score*, AL::Pos* locator, QWidget* parent = 0);
+      Ruler(QWidget* parent = 0);
+      void setScore(Score*, AL::Pos* locator);
       };
 
 

@@ -25,7 +25,6 @@
 
 #ifdef USE_ALSA
 #include "alsa.h"
-// #include "mididriver.h"
 #endif
 #ifdef USE_PORTAUDIO
 #include "pa.h"
@@ -48,6 +47,7 @@
 #include "utils.h"
 #include "repeatlist.h"
 #include "synthcontrol.h"
+#include "pianoroll.h"
 
 #ifdef USE_JACK
 #include "jackaudio.h"
@@ -783,6 +783,11 @@ void Seq::getCurTick(int* tick, int* utick)
       *utick = curUtick;
       }
 
+int Seq::getCurTick()
+      {
+      return cs->utime2utick(curTime() - startTime);
+      }
+
 //---------------------------------------------------------
 //   heartBeat
 //    update GUI
@@ -801,6 +806,7 @@ void Seq::heartBeat()
                   meterPeakValue[1] *= .7f;
             sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
             }
+
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
       if (pp)
@@ -843,6 +849,9 @@ void Seq::heartBeat()
                   pp->heartBeat(curTick, curUtick);
             mscore->setPos(curTick);
             }
+      PianorollEditor* pre = mscore->getPianorollEditor();
+      if (pre && pre->isVisible())
+            pre->heartBeat(this);
       cs->end();
       }
 

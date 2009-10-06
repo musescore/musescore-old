@@ -39,6 +39,27 @@ PosLabel::PosLabel(AL::TempoMap* tl, AL::TimeSigMap* sl, QWidget* parent)
       updateValue();
       }
 
+PosLabel::PosLabel(QWidget* parent)
+   : 	QLabel(parent)
+      {
+      _smpte = false;
+      setFrameStyle(WinPanel | Sunken);
+      setLineWidth(2);
+      setMidLineWidth(3);
+      int fw = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+      setIndent(fw);
+      updateValue();
+      }
+
+//---------------------------------------------------------
+//   setContext
+//---------------------------------------------------------
+
+void PosLabel::setContext(AL::TempoMap* tl, AL::TimeSigMap* sl)
+      {
+      pos.setContext(tl, sl);
+      }
+
 //---------------------------------------------------------
 //   sizeHint
 //---------------------------------------------------------
@@ -62,6 +83,8 @@ QSize PosLabel::sizeHint() const
 
 void PosLabel::updateValue()
       {
+      if (!pos.valid())
+            return;
       QString s;
       if (_smpte) {
             int min, sec, frame, subframe;

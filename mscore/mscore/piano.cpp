@@ -262,6 +262,7 @@ Piano::Piano(QWidget* parent)
       yRange   = keyHeight * 75;
       curPitch = -1;
       _ypos    = 0;
+      curKeyPressed = -1;
       }
 
 //---------------------------------------------------------
@@ -420,7 +421,7 @@ void Piano::mouseMoveEvent(QMouseEvent* event)
       if (pitch != curPitch) {
             curPitch = pitch;
             emit pitchChanged(curPitch);
-            if (curKeyPressed != -1 && curKeyPressed != pitch) {
+            if ((curKeyPressed != -1) && (curKeyPressed != pitch)) {
                   emit keyReleased(curKeyPressed);
                   curKeyPressed = pitch;
                   emit keyPressed(curKeyPressed);

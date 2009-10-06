@@ -25,6 +25,17 @@
 
 class Staff;
 class Score;
+class Note;
+
+//---------------------------------------------------------
+//   PianoItem
+//---------------------------------------------------------
+
+class PianoItem : public QGraphicsRectItem {
+
+   public:
+      PianoItem(Note*);
+      };
 
 //---------------------------------------------------------
 //   PianoScene
@@ -34,7 +45,8 @@ class PianoScene : public QGraphicsScene {
       Q_OBJECT
 
    public:
-      PianoScene(Staff* staff, QWidget* parent = 0);
+      PianoScene(QWidget* parent = 0);
+      void setStaff(Staff*);
       };
 
 //---------------------------------------------------------
@@ -70,7 +82,8 @@ class PianoView : public QGraphicsView {
       void posChanged(const AL::Pos&);
 
    public:
-      PianoView(Staff*, AL::Pos* locator);
+      PianoView();
+      void setStaff(Staff*, AL::Pos* locator);
       };
 
 
