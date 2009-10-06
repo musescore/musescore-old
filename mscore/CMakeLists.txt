@@ -151,21 +151,17 @@ endif (APPLE OR MINGW)
 ## find jack >= 0.98.0
 ##
 
-if (APPLE OR MINGW)
-      if (MINGW)
-        set (USE_JACK 1)
-        set (JACK_INCDIR "C:/Program Files/Jack v1.9.3/includes")
-        set (JACK_LIB "C:/Program Files/Jack v1.9.3/lib")
-      else (MINGW)
-        set (USE_JACK 0)
-      endif(MINGW)
-else (APPLE OR MINGW)
+if (MINGW)     
+      set (USE_JACK 1)
+      set (JACK_INCDIR "C:/Program Files/Jack v1.9.3/includes")
+      set (JACK_LIB "C:/Program Files/Jack v1.9.3/lib/libjack.a")
+else (MINGW)
       PKGCONFIG (jack 0.98.0 JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP )
       if (JACK_INCDIR)
 	        message("Jack detected")
           set (USE_JACK 1)
       endif (JACK_INCDIR)
-endif (APPLE OR MINGW)
+endif (MINGW)
 
 
 ##
