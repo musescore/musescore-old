@@ -224,7 +224,7 @@ if (MINGW)
       portaudio
       portmidi
       winmm
-      jack
+      ${JACK_LIB}
       )
 
    if (HAS_AUDIOFILE)
@@ -237,6 +237,7 @@ if (MINGW)
       ${CROSS}/bin/mingwm10.dll
       ${CROSS}/bin/portaudio.dll
       ${CROSS}/bin/libsndfile-1.dll
+      "C:/Windows/System32/libjack.dll"
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
