@@ -752,7 +752,7 @@ int AlsaAudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void AlsaAudio::putEvent(const Event& e)
+void AlsaAudio::putEvent(const Event& e, unsigned /* framePos */)
       {
       synth->play(e);
       }

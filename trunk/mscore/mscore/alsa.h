@@ -136,7 +136,7 @@ class AlsaAudio : public Driver {
       void alsaLoop();
       void write(int n, void* l, void* r);
 
-      virtual void putEvent(const Event&);
+      virtual void putEvent(const Event&, unsigned framePos);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
 

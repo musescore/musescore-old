@@ -902,9 +902,11 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
-            printf("TextB::edit\n");
-      if (!editMode || !cursor)
+            printf("TextB::edit(%p)\n", this);
+      if (!editMode || !cursor) {
+            printf("TextB::edit: not in edit mode: %d %p\n", editMode, cursor);
             return false;
+            }
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       qreal w = 8.0 / view->matrix().m11();
@@ -986,12 +988,12 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
 
             case Qt::Key_Left:
                   if (!cursor->movePosition(QTextCursor::Left, mm))
-                        return false;
+                        return true;
                   break;
 
             case Qt::Key_Right:
                   if (!cursor->movePosition(QTextCursor::Right, mm))
-                        return false;
+                        return true;
                   break;
 
             case Qt::Key_Up:
@@ -1093,7 +1095,7 @@ void TextB::moveCursor(int col)
 void TextB::endEdit()
       {
       if (!editMode || !cursor) {
-            printf("endEdit: not in edit mode or no cursor: %d %p\n", editMode, cursor);
+            printf("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, editMode, cursor);
             return;
             }
       cursorPos = cursor->position();
@@ -1219,7 +1221,8 @@ bool TextB::setCursor(const QPointF& p)
       int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
-      cursor->setPosition(idx);
+      if (cursor)
+            cursor->setPosition(idx);
       return true;
       }
 

@@ -37,7 +37,8 @@ TextTools* MuseScore::textTools()
       {
       if (!_textTools) {
             _textTools = new TextTools(this);
-            addDockWidget(Qt::TopDockWidgetArea, _textTools);
+            // addDockWidget(Qt::TopDockWidgetArea, _textTools);
+            addDockWidget(Qt::BottomDockWidgetArea, _textTools);
             }
       return _textTools;
       }
@@ -112,11 +113,33 @@ void TextTools::setText(TextB* te)
       }
 
 //---------------------------------------------------------
+//   blockAllSignals
+//---------------------------------------------------------
+
+void TextTools::blockAllSignals(bool val)
+      {
+      typefaceSize->blockSignals(val);
+      typefaceFamily->blockSignals(val);
+      typefaceBold->blockSignals(val);
+      typefaceItalic->blockSignals(val);
+      typefaceUnderline->blockSignals(val);
+      typefaceSubscript->blockSignals(val);
+      typefaceSuperscript->blockSignals(val);
+      typefaceFamily->blockSignals(val);
+      leftAlign->blockSignals(val);
+      rightAlign->blockSignals(val);
+      centerAlign->blockSignals(val);
+      showKeyboard->blockSignals(val);
+      }
+
+//---------------------------------------------------------
 //   setCharFormat
 //---------------------------------------------------------
 
 void TextTools::setCharFormat(const QTextCharFormat& cf)
       {
+      blockAllSignals(true);
+
       format = cf;
       QFont f(cf.font());
       typefaceFamily->setCurrentFont(f);
@@ -129,6 +152,8 @@ void TextTools::setCharFormat(const QTextCharFormat& cf)
       typefaceUnderline->setChecked(cf.fontUnderline());
       typefaceSubscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSubScript);
       typefaceSuperscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSuperScript);
+
+      blockAllSignals(false);
       }
 
 //---------------------------------------------------------
@@ -137,10 +162,12 @@ void TextTools::setCharFormat(const QTextCharFormat& cf)
 
 void TextTools::setBlockFormat(const QTextBlockFormat& bf)
       {
+      blockAllSignals(true);
       bformat = bf;
       centerAlign->setChecked(bf.alignment() & Qt::AlignHCenter);
       leftAlign->setChecked  (bf.alignment() & Qt::AlignLeft);
       rightAlign->setChecked (bf.alignment() & Qt::AlignRight);
+      blockAllSignals(false);
       }
 
 //---------------------------------------------------------
@@ -149,10 +176,11 @@ void TextTools::setBlockFormat(const QTextBlockFormat& bf)
 
 void TextTools::sizeChanged(double value)
       {
+printf("sizeChanged\n");
       format.setFontPointSize(value);
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
-      _textElement->score()->endCmd();
+//      _textElement->score()->end();
       moveFocus();
       }
 
@@ -174,7 +202,7 @@ void TextTools::fontChanged(const QFont& f)
       format.setFontFamily(f.family());
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
-      _textElement->score()->endCmd();
+      _textElement->score()->end();
       moveFocus();
       }
 
@@ -187,7 +215,7 @@ void TextTools::boldClicked(bool val)
       format.setFontWeight(val ? QFont::Bold : QFont::Normal);
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
-      _textElement->score()->endCmd();
+      _textElement->score()->end();
       moveFocus();
       }
 
@@ -200,7 +228,7 @@ void TextTools::underlineClicked(bool val)
       format.setFontUnderline(val);
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
-      _textElement->score()->endCmd();
+      _textElement->score()->end();
       moveFocus();
       }
 
@@ -213,7 +241,7 @@ void TextTools::italicClicked(bool val)
       format.setFontItalic(val);
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
-      _textElement->score()->endCmd();
+      _textElement->score()->end();
       moveFocus();
       }
 

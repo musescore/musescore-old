@@ -123,6 +123,7 @@ class Canvas : public QFrame, public Viewer {
       bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
+      void zoom(int step, const QPoint& pos);
 
    public slots:
       void cmdCut();

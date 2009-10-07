@@ -705,6 +705,9 @@ MuseScore::MuseScore()
       menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
+      menuDisplay->addAction(getAction("zoomin"));
+      menuDisplay->addAction(getAction("zoomout"));
+      menuDisplay->addSeparator();
 
       transportId = getAction("toggle-transport");
       transportId->setCheckable(true);

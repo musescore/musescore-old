@@ -491,7 +491,7 @@ void Seq::stopTransport()
                   continue;
             Event ee(*e);
             ee.setVelo(0);
-            driver->putEvent(ee);
+            driver->putEvent(ee, 0);
             }
       activeNotes.clear();
       emit toGui('0');
@@ -508,8 +508,8 @@ void Seq::startTransport()
       {
       if (!pauseState)
             emit toGui('1');
-      startTime = curTime() - playTime;
-      state     = PLAY;
+      startTime  = curTime() - playTime;
+      state      = PLAY;
       }
 
 //---------------------------------------------------------
@@ -517,7 +517,7 @@ void Seq::startTransport()
 //    send one event to the synthesizer
 //---------------------------------------------------------
 
-void Seq::playEvent(const Event* event)
+void Seq::playEvent(const Event* event, unsigned framePos)
       {
       int type = event->type();
       if (type == ME_NOTEON) {
@@ -534,7 +534,7 @@ void Seq::playEvent(const Event* event)
 
             if (event->velo()) {
                   if (!mute) {
-                        driver->putEvent(*event);
+                        driver->putEvent(*event, framePos);
                         activeNotes.append(event);
                         }
                   }
@@ -545,14 +545,14 @@ void Seq::playEvent(const Event* event)
                               Event ee(*l);
                               ee.setVelo(0);
                               activeNotes.erase(k);
-                              driver->putEvent(ee);
+                              driver->putEvent(ee, framePos);
                               break;
                               }
                         }
                   }
             }
       else if (type == ME_CONTROLLER)
-            driver->putEvent(*event);
+            driver->putEvent(*event, framePos);
       }
 
 //---------------------------------------------------------
@@ -580,50 +580,11 @@ void Seq::processMessages()
                         }
                         break;
                   case SEQ_PLAY:
-                        driver->putEvent(msg.event);
+                        driver->putEvent(msg.event, 0);
                         break;
                   case SEQ_SEEK:
                         setPos(msg.data);
                         break;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   processMidi
-//---------------------------------------------------------
-
-void Seq::processMidi()
-      {
-      int driverState = driver->getState();
-      if (driverState != state) {
-            if (state == START_PLAY && driverState == PLAY)
-                  startTransport();
-            else if (state == PLAY && driverState == STOP)
-                  stopTransport();
-            else if (state == START_PLAY && driverState == STOP)
-                  stopTransport();
-            else if (state == STOP && driverState == PLAY)
-                  startTransport();
-            else if (state != driverState)
-                  printf("Seq: state transition %d -> %d ?\n",
-                     state, driverState);
-            }
-
-      processMessages();
-
-      if (state == PLAY) {
-            double endTime = curTime();
-            for (; playPos != events.constEnd(); ++playPos) {
-                  playTime = cs->utick2utime(playPos.key());
-                  double t = startTime + playTime;
-                  if (t >= endTime)
-                        break;
-                  playEvent(playPos.value());
-                  }
-            if (playPos == events.constEnd()) {
-                  driver->stopTransport();
-                  rewindStart();
                   }
             }
       }
@@ -634,7 +595,7 @@ void Seq::processMidi()
 
 void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       {
-      int frames = n;
+      unsigned frames = n;
       int driverState = driver->getState();
 
       if (driverState != state) {
@@ -658,8 +619,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
       if (state == PLAY) {
             //
-            // collect events for one segment
+            // play events for one segment
             //
+            unsigned framePos = 0;
             double endTime = playTime + double(frames)/double(sampleRate());
             for (; playPos != events.constEnd(); ++playPos) {
                   double f = cs->utick2utime(playPos.key());
@@ -677,7 +639,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   playTime += double(n)/double(sampleRate());
 
                   frames    -= n;
-                  playEvent(playPos.value());
+                  framePos  += n;
+                  playEvent(playPos.value(), framePos);
                   }
             if (frames) {
                   driver->process(frames, l, r, stride);
@@ -887,7 +850,7 @@ void Seq::setPos(int utick)
       foreach(const Event* n, activeNotes) {
             Event e(*n);
             e.setVelo(0);
-            driver->putEvent(e);
+            driver->putEvent(e, 0);
             }
       activeNotes.clear();
       playTime  = cs->utick2utime(utick);

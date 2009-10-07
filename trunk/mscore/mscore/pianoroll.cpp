@@ -357,7 +357,7 @@ void PianorollEditor::keyReleased(int /*pitch*/)
 
 void PianorollEditor::heartBeat(Seq* seq)
       {
-      int t = seq->getCurTick();
+      unsigned t = seq->getCurTick();
       if (locator[0].tick() != t) {
             locator[0].setTick(t);
             gv->scene()->update();

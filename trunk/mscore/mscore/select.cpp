@@ -574,24 +574,34 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
       int endStaff          = 0;
       int endTrack          = 0;
 
+      QList<Element*>* el = _selection->elements();
+      if (el->size() == 0) {
+            _selection->setState(SEL_NONE);
+            return;
+            }
+      if (el->size() == 1) {
+            _selection->setState(SEL_SINGLE);
+            return;
+            }
+
       foreach(const Element* e, *(_selection->elements())) {
-            if (e->type() == NOTE || e->type() == REST) {
-                  ++noteRestCount;
-                  if (e->type() == NOTE)
-                        e = e->parent();
-                  Segment* seg = static_cast<const ChordRest*>(e)->segment();
-                  if ((startSegment == 0) || (e->tick() < startSegment->tick()))
-                        startSegment = seg;
-                  if ((endSegment == 0) || (e->tick() > endSegment->tick())) {
-                        endSegment = seg;
-                        endTrack = e->track();
-                        }
-                  int idx = e->staffIdx();
-                  if (idx < startStaff)
-                        startStaff = idx;
-                  if (idx > endStaff)
-                        endStaff = idx;
+            if (e->type() != NOTE && e->type() != REST)
+                  continue;
+            ++noteRestCount;
+            if (e->type() == NOTE)
+                  e = e->parent();
+            Segment* seg = static_cast<const ChordRest*>(e)->segment();
+            if ((startSegment == 0) || (e->tick() < startSegment->tick()))
+                  startSegment = seg;
+            if ((endSegment == 0) || (e->tick() > endSegment->tick())) {
+                  endSegment = seg;
+                  endTrack = e->track();
                   }
+            int idx = e->staffIdx();
+            if (idx < startStaff)
+                  startStaff = idx;
+            if (idx > endStaff)
+                  endStaff = idx;
             }
       if (noteRestCount > 0) {
             endSegment = endSegment->nextCR(endTrack);

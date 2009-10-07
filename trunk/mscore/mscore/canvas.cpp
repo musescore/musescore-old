@@ -420,10 +420,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 #endif
 
       if (state == MAG) {
-            if (b1)
-                  mscore->incMag();
-            else if (b3)
-                  mscore->decMag();
+            zoom(b1 ? 2 : -1, ev->pos());
             return;
             }
 
@@ -599,10 +596,10 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 
       if (dragObject) {
             _score->startCmd();
-
             _score->setLayoutAll(false);
-            if (!startEdit(dragObject))
+            if (!startEdit(dragObject)) {
                   _score->endCmd();
+                  }
             }
       else
             mousePressEvent(ev);
@@ -944,7 +941,7 @@ void Canvas::setState(State action)
       };
 
       if (debugMode)
-            printf("switch from %s to %s\n", stateNames[state], stateNames[action]);
+            printf("Canvas::setState: switch from %s to %s\n", stateNames[state], stateNames[action]);
 
       switch(stateTable[state][action]) {
             default:
@@ -1098,7 +1095,7 @@ bool Canvas::startEdit(Element* element, int startGrip)
                   curGrip = startGrip;
             // startGrip == -2  -> do not change curGrip
 
-            update();         // DEBUG
+            // update();         // DEBUG
             return true;
             }
       return false;
@@ -2091,6 +2088,55 @@ void Canvas::dragLeaveEvent(QDragLeaveEvent*)
       }
 
 //---------------------------------------------------------
+//   zoom
+//---------------------------------------------------------
+
+void Canvas::zoom(int step, const QPoint& pos)
+      {
+      QPointF p1 = imatrix.map(QPointF(pos));
+      //
+      //    magnify
+      //
+      qreal _mag = mag();
+
+      if (step > 0) {
+            for (int i = 0; i < step; ++i)
+                  _mag *= 1.1;
+            }
+      else {
+            for (int i = 0; i < -step; ++i)
+                  _mag *= 0.9;
+            }
+      if (_mag > 16.0)
+            _mag = 16.0;
+      else if (_mag < 0.05)
+            _mag = 0.05;
+
+      mscore->setMag(_mag);
+
+      QPointF p2 = imatrix.map(QPointF(pos));
+      QPointF p3 = p2 - p1;
+
+      double m = _mag * PDPI/DPI;
+
+      int dx    = lrint(p3.x() * m);
+      int dy    = lrint(p3.y() * m);
+
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      imatrix = _matrix.inverted();
+      scroll(dx, dy, QRect(0, 0, width(), height()));
+
+      if ((dx > 0 || dy < 0) && navigatorVisible()) {
+	      QRect r(navigator->geometry());
+      	r.translate(dx, dy);
+      	update(r);
+            }
+      updateNavigator(false);
+      update();
+      }
+
+//---------------------------------------------------------
 //   wheelEvent
 //---------------------------------------------------------
 
@@ -2098,48 +2144,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
       {
       if (event->modifiers() & Qt::ControlModifier) {
             QApplication::sendPostedEvents(this, 0);
-            QPointF p1 = imatrix.map(QPointF(event->pos()));
-            //
-            //    magnify
-            //
-            int step = event->delta() / 120;
-            qreal _mag = mag();
-
-            if (step > 0) {
-                  for (int i = 0; i < step; ++i)
-                        _mag *= 1.1;
-                  }
-            else {
-                  for (int i = 0; i < -step; ++i)
-                        _mag *= 0.9;
-                  }
-            if (_mag > 16.0)
-                  _mag = 16.0;
-            else if (_mag < 0.05)
-                  _mag = 0.05;
-
-            mscore->setMag(_mag);
-
-            QPointF p2 = imatrix.map(QPointF(event->pos()));
-            QPointF p3 = p2 - p1;
-
-            double m = _mag * PDPI/DPI;
-
-            int dx    = lrint(p3.x() * m);
-            int dy    = lrint(p3.y() * m);
-
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
-            imatrix = _matrix.inverted();
-            scroll(dx, dy, QRect(0, 0, width(), height()));
-
-            if ((dx > 0 || dy < 0) && navigatorVisible()) {
-	            QRect r(navigator->geometry());
-            	r.translate(dx, dy);
-            	update(r);
-                  }
-            updateNavigator(false);
-            update();
+            zoom(event->delta() / 120, event->pos());
             return;
             }
       int dx = 0;

@@ -86,6 +86,29 @@ ChordRest* Score::getSelectedChordRest() const
       }
 
 //---------------------------------------------------------
+//   getSelectedChordRest2
+//---------------------------------------------------------
+
+void Score::getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const
+      {
+      *cr1 = 0;
+      *cr2 = 0;
+      foreach(Element* e, *selection()->elements()) {
+            if (e->type() == NOTE)
+                  e = e->parent();
+            if (e->isChordRest()) {
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  if (*cr1 == 0 || (*cr1)->tick() > cr->tick())
+                        *cr1 = cr;
+                  if (*cr2 == 0 || (*cr2)->tick() < cr->tick())
+                        *cr2 = cr;
+                  }
+            }
+      if (*cr1 == 0)
+            selectNoteRestMessage();
+      }
+
+//---------------------------------------------------------
 //   pos
 //---------------------------------------------------------
 
@@ -539,20 +562,28 @@ void Score::cmdAddSlur()
             _is.slur = 0;
             return;
             }
-      Note* note = getSelectedNote();
-      if (!note)
+      QList<Note*> nl = _selection->noteList();
+      Note* firstNote = 0;
+      Note* lastNote = 0;
+      foreach(Note* n, nl) {
+            if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
+                  firstNote = n;
+            if (lastNote == 0 || lastNote->chord()->tick() < n->chord()->tick())
+                  lastNote = n;
+            }
+      if (!firstNote)
             return;
-      cmdAddSlur(note);
+      cmdAddSlur(firstNote, lastNote);
       }
 
 //---------------------------------------------------------
 //   addSlur
 //---------------------------------------------------------
 
-void Score::cmdAddSlur(Note* note)
+void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
       {
-      ChordRest* cr1 = note->chord();
-      ChordRest* cr2 = nextChordRest(cr1);
+      ChordRest* cr1 = firstNote->chord();
+      ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
 
       if (cr2 == 0) {
             printf("cannot create slur: at end\n");
@@ -576,9 +607,9 @@ void Score::cmdAddSlur(Note* note)
             }
       else {
             //
-            // start slur in edit mode
+            // start slur in edit mode if lastNote is not given
             //
-            if (!el->isEmpty()) {
+            if ((lastNote == 0) && !el->isEmpty()) {
                   SlurSegment* ss = el->front();
                   canvas()->startEdit(ss);
                   }
@@ -654,24 +685,27 @@ void Score::cmdAddTie()
 
 void Score::cmdAddHairpin(bool decrescendo)
       {
-      ChordRest* cr = getSelectedChordRest();
-      if (!cr)
+      ChordRest* cr1;
+      ChordRest* cr2;
+      getSelectedChordRest2(&cr1, &cr2);
+      if (!cr1)
             return;
 
-      int tick1 = cr->tick();
+      int tick1 = cr1->tick();
 
-      ChordRest* cr2 = nextChordRest(cr);
+      if (cr2 == 0)
+            cr2 = nextChordRest(cr1);
       int tick2;
       if (cr2)
             tick2 = cr2->tick();
       else
-            tick2 = cr->measure()->tick() + cr->measure()->tickLen();
+            tick2 = cr1->measure()->tick() + cr1->measure()->tickLen();
 
       Hairpin* pin = new Hairpin(this);
       pin->setTick(tick1);
       pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
-      pin->setTrack(cr->track());
+      pin->setTrack(cr1->track());
       pin->layout();
       cmdAdd(pin);
       if (!noteEntryMode())
@@ -1065,7 +1099,7 @@ void Score::cmdDeleteSelectedMeasures()
                   if (ie->tick() < selection()->endSegment()->tick()) {
                         // if last measure is selected
                         if (ie->type() == MEASURE)
-                              createEndBar = static_cast<Measure*>(ie)->endBarLineType() != END_BAR;
+                              createEndBar = static_cast<Measure*>(ie)->endBarLineType() == END_BAR;
                         deleteItem(ie);
                         }
                   if (ie != is) {

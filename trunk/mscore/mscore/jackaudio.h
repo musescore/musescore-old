@@ -34,10 +34,7 @@ class MidiDriver;
 //---------------------------------------------------------
 
 class JackAudio : public Driver {
-      int _sampleRate;
-      int _segmentSize;
-
-      jack_nframes_t _frameCounter;
+      unsigned _segmentSize;
 
       jack_client_t* client;
       char _jackName[8];
@@ -61,11 +58,10 @@ class JackAudio : public Driver {
       virtual void startTransport();
       virtual void stopTransport();
       virtual int getState();
-      virtual int sampleRate() const    { return _sampleRate; }
-      virtual void putEvent(const Event&);
+      virtual int sampleRate() const    { return jack_get_sample_rate(client); }
+      virtual void putEvent(const Event&, unsigned framePos);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
-      virtual unsigned frameTime() const { return _frameCounter; }
 
       virtual int registerPort(const QString& name, bool input, bool midi);
       virtual void unregisterPort(int);

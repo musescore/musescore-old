@@ -67,6 +67,8 @@ class TextTools : public QDockWidget {
       QAction* typefaceSuperscript;
       QAction* showKeyboard;
 
+      void blockAllSignals(bool val);
+
    private slots:
       void sizeChanged(double value);
       void moveFocus();

@@ -38,7 +38,6 @@ JackAudio::JackAudio(Seq* s)
 printf("JackAudio() midi %d audio %d\n", preferences.useJackMidi, preferences.useJackAudio);
       client        = 0;
       synth         = 0;
-      _frameCounter = 0;
       }
 
 //---------------------------------------------------------
@@ -276,7 +275,6 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
                   }
             }
       audio->seq->process((unsigned)frames, l, r, 1);
-      audio->_frameCounter += frames;
       return 0;
       }
 
@@ -336,7 +334,6 @@ printf("JackAudio()::init()\n");
       jack_set_port_registration_callback(client, registration_callback, this);
       jack_set_graph_order_callback(client, graph_callback, this);
       jack_set_freewheel_callback (client, freewheel_callback, this);
-      _sampleRate   = jack_get_sample_rate(client);
       _segmentSize  = jack_get_buffer_size(client);
 
       // register mscore left/right output ports
@@ -371,7 +368,7 @@ printf("JackAudio()::init()\n");
                   }
 
             synth = new FluidS::Fluid();
-            synth->init(_sampleRate);
+            synth->init(sampleRate());
             }
 
       if (preferences.useJackMidi) {
@@ -421,7 +418,7 @@ int JackAudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void JackAudio::putEvent(const Event& e)
+void JackAudio::putEvent(const Event& e, unsigned framePos)
       {
       if (preferences.useJackAudio)
             synth->play(e);
@@ -431,7 +428,7 @@ void JackAudio::putEvent(const Event& e)
       int portIdx = e.channel() / 16;
       int chan    = e.channel() % 16;
 
-// printf("JackAudio::putEvent %d:%d\n", portIdx, chan);
+// printf("JackAudio::putEvent %d:%d  pos %d\n", portIdx, chan, framePos);
       if (portIdx < 0 || portIdx >= midiPorts.size()) {
             printf("JackAudio::putEvent: invalid port %d\n", portIdx);
             return;
@@ -443,17 +440,12 @@ void JackAudio::putEvent(const Event& e)
             // e.dump();
             }
       void* pb = jack_port_get_buffer(port, _segmentSize);
-#if 0
-      int ft   = e.ontime() - _frameCounter;
-      if (ft < 0)
-            ft = 0;
-      if (ft >= int(_segmentSize)) {
-            printf("JackAudio::putEvent: time out of range %d(seg=%d)\n", ft, _segmentSize);
-            if (ft > int(_segmentSize))
-                  ft = _segmentSize - 1;
+
+      if (framePos >= _segmentSize) {
+            printf("JackAudio::putEvent: time out of range %d(seg=%d)\n", framePos, _segmentSize);
+            if (framePos > _segmentSize)
+                  framePos = _segmentSize - 1;
             }
-#endif
-      int ft = 0;
 
       switch(e.type()) {
             case ME_NOTEON:
@@ -462,7 +454,7 @@ void JackAudio::putEvent(const Event& e)
             case ME_CONTROLLER:
             case ME_PITCHBEND:
                   {
-                  unsigned char* p = jack_midi_event_reserve(pb, ft, 3);
+                  unsigned char* p = jack_midi_event_reserve(pb, framePos, 3);
                   if (p == 0) {
                         fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
                         return;
@@ -476,7 +468,7 @@ void JackAudio::putEvent(const Event& e)
             case ME_PROGRAM:
             case ME_AFTERTOUCH:
                   {
-                  unsigned char* p = jack_midi_event_reserve(pb, ft, 2);
+                  unsigned char* p = jack_midi_event_reserve(pb, framePos, 2);
                   if (p == 0) {
                         fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
                         return;
@@ -489,7 +481,7 @@ void JackAudio::putEvent(const Event& e)
                   {
                   const unsigned char* data = e.data();
                   int len = e.len();
-                  unsigned char* p = jack_midi_event_reserve(pb, ft, len+2);
+                  unsigned char* p = jack_midi_event_reserve(pb, framePos, len+2);
                   if (p == 0) {
                         fprintf(stderr, "JackMidi: buffer overflow, event lost\n");
                         return;

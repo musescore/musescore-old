@@ -464,14 +464,16 @@ void System::setInstrumentName(int staffIdx)
 
       //
       // instrument name can change after inserting/deleting parts
+      //    do not delete if in edit mode
       //
-      if (staff->instrumentName)
-            delete staff->instrumentName;
-      Part* part = s->part();
-      staff->instrumentName = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
-
-      staff->instrumentName->setParent(this);
-      staff->instrumentName->setTrack(staffIdx * VOICES);
+      if (!score()->editObject) {
+            if (staff->instrumentName)
+                  delete staff->instrumentName;
+            Part* part = s->part();
+            staff->instrumentName = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            staff->instrumentName->setParent(this);
+            staff->instrumentName->setTrack(staffIdx * VOICES);
+            }
       }
 
 //---------------------------------------------------------
@@ -517,9 +519,22 @@ void System::add(Element* el)
             SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b   = static_cast<Bracket*>(el);
             int level    = b->level();
-            while (level >= ss->brackets.size())
-                  ss->brackets.append(0);
-            ss->brackets[level] = b;
+            if (level == -1) {
+                  level = ss->brackets.size() - 1;
+                  if (ss->brackets.last() == 0) {
+                        level = ss->brackets.size() - 1;
+                        ss->brackets[level] = b;
+                        }
+                  else {
+                        ss->brackets.append(b);
+                        level = ss->brackets.size() - 1;
+                        }
+                  }
+            else {
+                  while (level >= ss->brackets.size())
+                        ss->brackets.append(0);
+                  ss->brackets[level] = b;
+                  }
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
             }
