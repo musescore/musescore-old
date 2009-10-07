@@ -2302,6 +2302,7 @@ printf("drop staffList\n");
                   Bracket* b = static_cast<Bracket*>(e);
                   b->setTrack(staffIdx * VOICES);
                   b->setParent(system());
+                  b->setLevel(-1);  // add bracket
                   score()->cmdAdd(b);
                   }
                   break;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.12">
   <Mag>0.496356</Mag>
-  <xoff>-275.459</xoff>
-  <yoff>12.1377</yoff>
+  <xoff>-123.88</xoff>
+  <yoff>7.19182</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -18,7 +18,7 @@
     <barNoteDistance>1</barNoteDistance>
     <noteBarDistance>0.5</noteBarDistance>
     <measureSpacing>1.1</measureSpacing>
-    <pageFillLimit>0.85</pageFillLimit>
+    <pageFillLimit>0.7</pageFillLimit>
     <smallNoteMag>0.7</smallNoteMag>
     <graceNoteMag>0.7</graceNoteMag>
     <smallStaffMag>0.7</smallStaffMag>
@@ -738,7 +738,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <tick>-916</tick>
+        <tick>-915</tick>
         </LayoutBreak>
       <Chord>
         <tick>4800</tick>
@@ -8682,9 +8682,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="45">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Chord>
         <durationType>whole</durationType>
         <Note pitch="56" tpc="22"/>
@@ -8722,10 +8719,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Rest>
         <durationType>eighth</durationType>
         </Rest>
@@ -11727,11 +11720,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="49" tpc="21"/>
         <Note pitch="52" tpc="18"/>
         <Note pitch="56" tpc="22"/>
-        <Note>
-          <selected>1</selected>
-          <pitch>61</pitch>
-          <tpc>21</tpc>
-          </Note>
+        <Note pitch="61" tpc="21"/>
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
@@ -12728,5 +12717,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>4</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

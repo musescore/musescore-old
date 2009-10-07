@@ -1,3 +1,18 @@
+7.oct (ws)
+      - Moved text toolbar to the bottom of the main window. This avoids moving of the
+        canvas content when entering text edit mode.
+      - New Hairpin input method: similar to slur.
+      - New slur input method: select two or more notes and press S to create a slur
+        between first and last note. Slur does start in edit mode if only one note
+        is selected.
+      - fix: copy/paste of lyrics (if one lyrics item was selected with lasso select)
+      - fix: Removing 2 last measures remove the end bar line
+      - fix midi event timing for JACK midi
+      - fix: Cannot add 2 brackets to same staff
+      - fix: Click on Instrument staff text crash
+      - Change implementation of zoom mode: the clicked canvas position is now center of
+        zoom in/out as if you zoom with the mouse wheel.
+      - add zoom-in and zoom-out to "Windows" pulldown menu
 6.oct (ws)
       - pianoroll editor: attach selections
 5.oct (ws)

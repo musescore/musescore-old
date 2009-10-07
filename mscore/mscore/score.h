@@ -428,7 +428,7 @@ class Score : public QObject {
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
       void cmdAddSlur();
-      void cmdAddSlur(Note* note);
+      void cmdAddSlur(Note* firstNote, Note* lastNote);
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
@@ -643,6 +643,8 @@ class Score : public QObject {
       bool saveAudio(const QString& name, int format);
 #endif
       ChordRest* getSelectedChordRest() const;
+      void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
+
       Element* getSelectedElement() const { return _selection->element(); }
       Selection* selection() const        { return _selection; }
       void setSelection(Selection* s);

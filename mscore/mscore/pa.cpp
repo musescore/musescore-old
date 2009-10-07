@@ -287,7 +287,7 @@ int Portaudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void Portaudio::putEvent(const Event& e)
+void Portaudio::putEvent(const Event& e, unsigned /* framePos*/)
       {
       synth->play(e);
       }
