@@ -162,7 +162,6 @@ class Seq : public QObject {
       void processMessages();
       void process(unsigned, float*, float*, int stride);
       QList<QString> inputPorts();
-      int sampleRate() const;
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;

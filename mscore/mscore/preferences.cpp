@@ -271,7 +271,9 @@ void Preferences::write()
 
       s.setValue("useAlsaAudio",       useAlsaAudio);
       s.setValue("useJackAudio",       useJackAudio);
+      s.setValue("useJackMidi",        useJackMidi);
       s.setValue("usePortaudioAudio",  usePortaudioAudio);
+      s.setValue("midiPorts",          midiPorts);
 
       s.setValue("alsaDevice",         alsaDevice);
       s.setValue("alsaSampleRate",     alsaSampleRate);
@@ -298,7 +300,6 @@ void Preferences::write()
       s.setValue("instrumentList", instrumentList);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
-      s.setValue("midiPorts",          midiPorts);
       s.setValue("proximity",          proximity);
       s.setValue("autoSave",           autoSave);
       s.setValue("autoSaveTime",       autoSaveTime);
@@ -375,10 +376,12 @@ void Preferences::read()
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
+      useJackMidi        = s.value("useJackMidi",  false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
 #else
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
+      useJackMidi        = s.value("useJackMidi",  false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
 #endif
 
@@ -397,7 +400,7 @@ void Preferences::read()
       midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();
       playRepeats              = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
-      midiPorts                = s.value("midiPorts", 1).toInt();
+      midiPorts                = s.value("midiPorts", 2).toInt();
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", false).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
