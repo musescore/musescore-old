@@ -271,17 +271,6 @@ void Seq::exit()
       }
 
 //---------------------------------------------------------
-//   sampleRate
-//---------------------------------------------------------
-
-int Seq::sampleRate() const
-      {
-      if (driver)
-            return driver->sampleRate();
-      return 44100;
-      }
-
-//---------------------------------------------------------
 //   inputPorts
 //---------------------------------------------------------
 
@@ -622,21 +611,20 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
             // play events for one segment
             //
             unsigned framePos = 0;
-            double endTime = playTime + double(frames)/double(sampleRate());
+            double endTime = playTime + double(frames)/double(AL::sampleRate);
             for (; playPos != events.constEnd(); ++playPos) {
                   double f = cs->utick2utime(playPos.key());
                   if (f >= endTime)
                         break;
-                  int n = lrint((f - playTime) * sampleRate());
+                  int n = lrint((f - playTime) * AL::sampleRate);
 
                   if (n < 0) {
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
-                        abort();
                         }
                   driver->process(n, l, r, stride);
                   l         += n * stride;
                   r         += n * stride;
-                  playTime += double(n)/double(sampleRate());
+                  playTime += double(n)/double(AL::sampleRate);
 
                   frames    -= n;
                   framePos  += n;
@@ -644,7 +632,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   }
             if (frames) {
                   driver->process(frames, l, r, stride);
-                  playTime += double(frames)/double(sampleRate());
+                  playTime += double(frames)/double(AL::sampleRate);
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();

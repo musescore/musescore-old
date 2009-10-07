@@ -25,6 +25,7 @@
 #include "mscore.h"
 #include "seq.h"
 #include "fluid.h"
+#include "al/al.h"
 
 #include <jack/midiport.h>
 
@@ -336,6 +337,7 @@ printf("JackAudio()::init()\n");
       jack_set_freewheel_callback (client, freewheel_callback, this);
       _segmentSize  = jack_get_buffer_size(client);
 
+      AL::sampleRate = sampleRate();
       // register mscore left/right output ports
       if (preferences.useJackAudio) {
             registerPort("left", false, false);
@@ -428,7 +430,8 @@ void JackAudio::putEvent(const Event& e, unsigned framePos)
       int portIdx = e.channel() / 16;
       int chan    = e.channel() % 16;
 
-// printf("JackAudio::putEvent %d:%d  pos %d\n", portIdx, chan, framePos);
+// printf("JackAudio::putEvent %d:%d  pos %d(%d)\n", portIdx, chan, framePos, _segmentSize);
+
       if (portIdx < 0 || portIdx >= midiPorts.size()) {
             printf("JackAudio::putEvent: invalid port %d\n", portIdx);
             return;
