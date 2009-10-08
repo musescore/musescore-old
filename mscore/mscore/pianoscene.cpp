@@ -258,8 +258,11 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       //
       QList<QGraphicsItem*> items = scene()->selectedItems();
       QRectF boundingRect;
-      foreach(QGraphicsItem* item, items)
-            boundingRect |= item->boundingRect();
+      foreach(QGraphicsItem* item, items) {
+            Note* note = static_cast<Note*>(item->data(0).value<void*>());
+            if (note)
+                  boundingRect |= item->boundingRect();
+            }
       centerOn(boundingRect.center());
       }
 
