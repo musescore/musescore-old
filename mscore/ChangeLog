@@ -1,3 +1,8 @@
+8.oct (olavgun) 
+      - liypond export: Tremolo. Segno and Coda. Correct insertion of s-rests
+        in demo: adeste.
+      (la)
+      - add donate link to about box, links are now clickable. Need translation
 7.oct (ws)
       - Moved text toolbar to the bottom of the main window. This avoids moving of the
         canvas content when entering text edit mode.
