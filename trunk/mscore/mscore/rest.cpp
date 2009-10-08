@@ -365,7 +365,8 @@ void Rest::layout()
                   _sym = hundredtwentyeighthrestSym;
                   break;
             case Duration::V_256TH:
-                  _sym = quartrestSym;    // TODO
+printf("Rest: no symbol for 1/256\n");
+                  _sym = hundredtwentyeighthrestSym;  // TODO
                   break;
             }
       layoutArticulations();

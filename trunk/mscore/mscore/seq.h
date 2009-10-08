@@ -76,7 +76,6 @@ class Seq : public QObject {
       bool running;                       // true if sequencer is available
       int state;                          // STOP, PLAY, START_PLAY
       bool playlistChanged;
-      bool pauseState;
 
       SeqMsgFifo toSeq;
 
@@ -141,7 +140,6 @@ class Seq : public QObject {
       ~Seq();
       void start();
       void stop();
-      void pause();
       void rewindStart();
       void seekEnd();
       void nextMeasure();

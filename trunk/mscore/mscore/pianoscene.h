@@ -38,18 +38,6 @@ class PianoItem : public QGraphicsRectItem {
       };
 
 //---------------------------------------------------------
-//   PianoScene
-//---------------------------------------------------------
-
-class PianoScene : public QGraphicsScene {
-      Q_OBJECT
-
-   public:
-      PianoScene(QWidget* parent = 0);
-      void setStaff(Staff*);
-      };
-
-//---------------------------------------------------------
 //   PianoView
 //---------------------------------------------------------
 
@@ -59,12 +47,12 @@ class PianoView : public QGraphicsView {
       Staff* staff;
       AL::Pos pos;
       AL::Pos* _locator;
+      QGraphicsLineItem* locatorLines[3];
       int ticks;
       AL::TType _timeType;
       int magStep;
 
       virtual void drawBackground(QPainter* painter, const QRectF& rect);
-      virtual void drawForeground(QPainter* painter, const QRectF& rect);
 
       int y2pitch(int y) const;
       AL::Pos pix2pos(int x) const;
@@ -80,6 +68,9 @@ class PianoView : public QGraphicsView {
       void xposChanged(int);
       void pitchChanged(int);
       void posChanged(const AL::Pos&);
+
+   public slots:
+      void moveLocator(int);
 
    public:
       PianoView();

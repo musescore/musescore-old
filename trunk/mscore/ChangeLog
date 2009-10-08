@@ -1,4 +1,9 @@
-8.oct (olavgun) 
+8.oct (ws)
+      - fix: Lasso select last measures, delete measures, causes crash
+      - do not automatically create whole measure rests in pickup measure
+      - limit "half duration" command to 1/64 minimum duration
+      - limit "double duration" command to 1/1 maximum duration
+      (olavgun)
       - liypond export: Tremolo. Segno and Coda. Correct insertion of s-rests
         in demo: adeste.
       (la)

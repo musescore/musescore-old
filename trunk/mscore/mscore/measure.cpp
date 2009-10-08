@@ -2515,7 +2515,7 @@ void Measure::adjustToLen(int ol, int nl)
                         }
                   }
             // printf("rests = %d\n", rests);
-            if (rests == 1 && chords == 0) {
+            if (rests == 1 && chords == 0 && !_irregular) {
                   rest->setDuration(Duration::V_MEASURE);    // whole measure rest
                   }
             else {

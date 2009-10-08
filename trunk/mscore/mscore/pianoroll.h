@@ -61,6 +61,7 @@ class PianorollEditor : public QDialog {
       void velocityChanged(int);
       void keyPressed(int);
       void keyReleased(int);
+      void moveLocator(int);
 
    public slots:
       void changeSelection(int);

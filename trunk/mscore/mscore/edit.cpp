@@ -106,6 +106,8 @@ void Score::getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const
             }
       if (*cr1 == 0)
             selectNoteRestMessage();
+      if (*cr1 == *cr2)
+            *cr2 = 0;
       }
 
 //---------------------------------------------------------
@@ -151,7 +153,11 @@ Rest* Score::addRest(Segment* s, int track, Duration d)
       {
       Measure* m = s->measure();
       int tick = s->tick();
-      if ((m->tick() == tick) && (m->tickLen() == d.ticks()) && (d < Duration(Duration::V_BREVE))) {
+      const AL::SigEvent ev(sigmap()->timesig(tick));
+      if ((ev.nominator == ev.nominator2)       // not in pickup measure
+         && (m->tick() == tick)
+         && (m->tickLen() == d.ticks())
+         && (d < Duration(Duration::V_BREVE))) {
             d.setType(Duration::V_MEASURE);
             d.setDots(0);
             }
@@ -573,6 +579,8 @@ void Score::cmdAddSlur()
             }
       if (!firstNote)
             return;
+      if (firstNote == lastNote)
+            lastNote = 0;
       cmdAddSlur(firstNote, lastNote);
       }
 
@@ -1094,9 +1102,10 @@ void Score::cmdDeleteSelectedMeasures()
       MeasureBase* is = selection()->startSegment()->measure();
       bool createEndBar = false;
       if (is->next()) {
-            MeasureBase* ie = selection()->endSegment()->measure();
+            Segment* seg = selection()->endSegment();
+            MeasureBase* ie = seg ? seg->measure() : lastMeasure();
             if (ie) {
-                  if (ie->tick() < selection()->endSegment()->tick()) {
+                  if ((seg == 0) || (ie->tick() < selection()->endSegment()->tick())) {
                         // if last measure is selected
                         if (ie->type() == MEASURE)
                               createEndBar = static_cast<Measure*>(ie)->endBarLineType() == END_BAR;
