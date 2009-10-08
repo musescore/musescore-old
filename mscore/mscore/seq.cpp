@@ -65,11 +65,9 @@ static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
 Seq::Seq()
       {
-      running    = false;
-      pauseState = false;
-
+      running         = false;
       playlistChanged = false;
-      cs = 0;
+      cs              = 0;
 
       endTick  = 0;
       state    = STOP;
@@ -312,16 +310,8 @@ void Seq::start()
       if (cs->noteEntryMode())
             cs->setNoteEntry(false);
       QAction* a = getAction("play");
-      if (!a->isChecked()) {
-            if (pauseState) {
-                  guiStop();
-                  pauseState = false;
-                  state = STOP;
-                  }
-            else {
-                  driver->stopTransport();
-                  }
-            }
+      if (!a->isChecked())
+            driver->stopTransport();
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
@@ -331,10 +321,7 @@ void Seq::start()
                   return;
                   }
             seek(cs->playPos());
-            if (!pauseState)
-                  driver->startTransport();
-            else
-                  emit started();
+            driver->startTransport();
             }
       }
 
@@ -348,26 +335,6 @@ void Seq::stop()
       if (!driver)
             return;
       driver->stopTransport();
-      }
-
-//---------------------------------------------------------
-//   pause
-//    called from gui thread
-//---------------------------------------------------------
-
-void Seq::pause()
-      {
-      if (!driver)
-            return;
-      QAction* a = getAction("pause");
-      int pstate = a->isChecked();
-      a = getAction("play");
-      int playState = a->isChecked();
-      if (state == PLAY && pstate)
-            driver->stopTransport();
-      else if (state == STOP && pauseState && playState)
-            driver->startTransport();
-      pauseState = pstate;
       }
 
 //---------------------------------------------------------
@@ -413,10 +380,8 @@ void Seq::guiStop()
       {
       if (!cs)
             return;
-      if (!pauseState) {
-            QAction* a = getAction("play");
-            a->setChecked(false);
-            }
+      QAction* a = getAction("play");
+      a->setChecked(false);
 
       //
       // deselect all selected notes
@@ -428,8 +393,7 @@ void Seq::guiStop()
       markedNotes.clear();
       cs->setPlayPos(cs->utime2utick(playTime));
       cs->end();
-      if (!pauseState)
-            emit stopped();
+      emit stopped();
       }
 
 //---------------------------------------------------------
@@ -495,8 +459,7 @@ void Seq::stopTransport()
 
 void Seq::startTransport()
       {
-      if (!pauseState)
-            emit toGui('1');
+      emit toGui('1');
       startTime  = curTime() - playTime;
       state      = PLAY;
       }

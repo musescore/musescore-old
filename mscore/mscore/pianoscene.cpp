@@ -64,39 +64,6 @@ PianoItem::PianoItem(Note* n)
       }
 
 //---------------------------------------------------------
-//   PianoScene
-//---------------------------------------------------------
-
-PianoScene::PianoScene(QWidget* parent)
-   : QGraphicsScene(parent)
-      {
-      }
-
-//---------------------------------------------------------
-//   setStaff
-//---------------------------------------------------------
-
-void PianoScene::setStaff(Staff* staff)
-      {
-      clear();
-      Measure* m = staff->score()->firstMeasure();
-      int staffIdx = staff->idx();
-      int startTrack = staffIdx * VOICES;
-      int endTrack   = startTrack + VOICES;
-      for (Segment* s = m->first(); s; s = s->next1()) {
-            for (int track = startTrack; track < endTrack; ++track) {
-                  Element* e = s->element(track);
-                  if (e == 0 || e->type() != CHORD)
-                        continue;
-                  Chord* chord = static_cast<Chord*>(e);
-                  NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
-                        addItem(new PianoItem(in->second));
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   pix2pos
 //---------------------------------------------------------
 
@@ -221,33 +188,15 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
       }
 
 //---------------------------------------------------------
-//   drawForeground
-//---------------------------------------------------------
-
-void PianoView::drawForeground(QPainter* painter, const QRectF& rect)
-      {
-      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
-
-      qreal x1 = rect.x();
-      qreal x2 = x1 + rect.width();
-      for (int i = 0; i < 3; ++i) {
-            if (!_locator[i].valid())
-                  continue;
-            painter->setPen(lcColors[i]);
-            qreal xp = qreal(pos2pix(_locator[i]));
-            if (xp >= x1 && xp < x2)
-                  painter->drawLine(QLineF(xp, rect.top(), xp, rect.bottom()));
-            }
-      }
-
-//---------------------------------------------------------
 //   PianoView
 //---------------------------------------------------------
 
 PianoView::PianoView()
    : QGraphicsView()
       {
-      setScene(new PianoScene);
+      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
+
+      setScene(new QGraphicsScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
       setMouseTracking(true);
@@ -255,6 +204,14 @@ PianoView::PianoView()
       setDragMode(QGraphicsView::RubberBandDrag);
       _timeType = AL::TICKS;
       magStep   = 0;
+      for (int i = 0; i < 3; ++i) {
+            locatorLines[i] = new QGraphicsLineItem(QLineF(0.0, 0.0, 0.0, keyHeight * 75.0));
+            QPen pen(lcColors[i]);
+            pen.setWidth(2);
+            locatorLines[i]->setPen(pen);
+            locatorLines[i]->setZValue(1000+i);       // set stacking order
+            locatorLines[i]->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+            }
       }
 
 //---------------------------------------------------------
@@ -268,13 +225,34 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       pos.setContext(s->score()->tempomap(), s->score()->sigmap());
 
       scene()->blockSignals(true);
-      static_cast<PianoScene*>(scene())->setStaff(s);
+
+      scene()->clear();
+      for (int i = 0; i < 3; ++i)
+            scene()->addItem(locatorLines[i]);
+
+      Measure* m = staff->score()->firstMeasure();
+      int staffIdx = staff->idx();
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+      for (Segment* s = m->first(); s; s = s->next1()) {
+            for (int track = startTrack; track < endTrack; ++track) {
+                  Element* e = s->element(track);
+                  if (e == 0 || e->type() != CHORD)
+                        continue;
+                  Chord* chord = static_cast<Chord*>(e);
+                  NoteList* nl = chord->noteList();
+                  for (iNote in = nl->begin(); in != nl->end(); ++in)
+                        scene()->addItem(new PianoItem(in->second));
+                  }
+            }
       scene()->blockSignals(false);
 
-      Measure* lm = s->score()->lastMeasure();
+      Measure* lm = staff->score()->lastMeasure();
       ticks       = lm->tick() + lm->tickLen();
       scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
 
+      for (int i = 0; i < 3; ++i)
+            moveLocator(i);
       //
       // move to something interesting
       //
@@ -283,6 +261,21 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       foreach(QGraphicsItem* item, items)
             boundingRect |= item->boundingRect();
       centerOn(boundingRect.center());
+      }
+
+//---------------------------------------------------------
+//   moveLocator
+//---------------------------------------------------------
+
+void PianoView::moveLocator(int i)
+      {
+      if (_locator[i].valid()) {
+            locatorLines[i]->setVisible(true);
+            qreal x = qreal(pos2pix(_locator[i]));
+            locatorLines[i]->setPos(QPointF(x, 0.0));
+            }
+      else
+            locatorLines[i]->setVisible(false);
       }
 
 //---------------------------------------------------------
@@ -429,6 +422,10 @@ void PianoView::leaveEvent(QEvent* event)
       emit posChanged(pos);
       QGraphicsView::leaveEvent(event);
       }
+
+//---------------------------------------------------------
+//   ensureVisible
+//---------------------------------------------------------
 
 void PianoView::ensureVisible(int tick)
       {

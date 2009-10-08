@@ -60,8 +60,14 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
       if (k == 0 || k == Qt::Key_Shift || k == Qt::Key_Control ||
          k == Qt::Key_Meta || k == Qt::Key_Alt || k == Qt::Key_AltGr
          || k == Qt::Key_CapsLock || k == Qt::Key_NumLock
-         || k == Qt::Key_ScrollLock)
+         || k == Qt::Key_ScrollLock || k == Qt::Key_unknown)
             return;
+
+printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x\n", k,
+      int(e->modifiers()),
+      int(e->nativeVirtualKey()),
+      int(e->nativeScanCode())
+      );
 
       k += e->modifiers();
       switch(key.count()) {

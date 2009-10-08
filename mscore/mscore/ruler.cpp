@@ -382,8 +382,15 @@ void Ruler::leaveEvent(QEvent*)
 void Ruler::setPos(const AL::Pos& pos)
       {
       if (_cursor != pos) {
+            int x1 = pos2pix(_cursor);
+            int x2 = pos2pix(pos);
+            if (x1 > x2) {
+                  int tmp = x2;
+                  x2 = x1;
+                  x1 = tmp;
+                  }
+            update(QRect(x1-1, 0, x2-x1+2, height()));
             _cursor = pos;
-            update();
             }
       }
 
