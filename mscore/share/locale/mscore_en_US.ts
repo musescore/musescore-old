@@ -1047,11 +1047,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Set invisible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set visible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Midi Properties...</source>
@@ -1093,15 +1093,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>staff</source>
-        <translation>Staff</translation>
+        <translation></translation>
     </message>
     <message>
         <source>part</source>
-        <translation>Part</translation>
+        <translation></translation>
     </message>
     <message>
         <source>system</source>
-        <translation>System</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4915,11 +4915,11 @@ before closing?</source>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Zoom in</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Zoom out</translation>
+        <translation></translation>
     </message>
     <message>
         <source>mirror note head</source>
@@ -4947,15 +4947,15 @@ before closing?</source>
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
@@ -4963,34 +4963,34 @@ before closing?</source>
     </message>
     <message>
         <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Local &amp;Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>
 
 From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation type="unfinished"></translation>
+        <translation=></translation>
     </message>
 </context>
 <context>
