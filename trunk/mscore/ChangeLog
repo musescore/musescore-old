@@ -1,3 +1,6 @@
+9.oct (db)
+      - capitalization fixes
+      - added .midi extension to open dialog
 8.oct (ws)
       - fix: Lasso select last measures, delete measures, causes crash
       - do not automatically create whole measure rests in pickup measure

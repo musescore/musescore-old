@@ -1303,8 +1303,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("midi input in"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Enable Midi Input"),
-         QT_TR_NOOP("Enable Midi Input"),
+         QT_TR_NOOP("Enable MIDI Input"),
+         QT_TR_NOOP("Enable MIDI Input"),
          &midiinIcon
          ),
       Shortcut(

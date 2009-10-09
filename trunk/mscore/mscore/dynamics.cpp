@@ -270,7 +270,7 @@ bool Dynamic::genPropertyMenu(QMenu* popup) const
       else
             a = popup->addAction(tr("Set Visible"));
       a->setData("invisible");
-      a = popup->addAction(tr("Midi Properties..."));
+      a = popup->addAction(tr("MIDI Properties..."));
       a->setData("dynamics");
       a = popup->addAction(tr("Text Properties..."));
       a->setData("props");
