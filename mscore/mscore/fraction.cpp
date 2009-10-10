@@ -162,4 +162,3 @@ Fraction Fraction::fromTicks(int ticks)
       {
       return Fraction(ticks, 1) / Fraction(AL::division * 4, 1);
       }
-
