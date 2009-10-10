@@ -2830,12 +2830,9 @@ void Score::move(const QString& cmd)
 
       Element* el = 0;
       if (cmd == "next-chord") {
-            if (noteEntryMode()) {
+            if (noteEntryMode())
                   moveToNextInputPos();
-                  return;
-                  }
-            else
-                  el = nextChordRest(cr);
+            el = nextChordRest(cr);
             }
       else if (cmd == "prev-chord") {
             if (noteEntryMode()) {
@@ -2860,10 +2857,8 @@ void Score::move(const QString& cmd)
                   if (s && !s->element(track))
                         s = m->firstCRSegment();
                   moveInputPos(s);
-                  return;
                   }
-            else
-                  el = prevChordRest(cr);
+            el = prevChordRest(cr);
             }
       else if (cmd == "next-measure")
             el = nextMeasure(cr);
