@@ -54,6 +54,8 @@ struct InstrumentTemplate {
       bool useDrumset;
       Drumset* drumset;
       QList<NamedEventList> midiActions;
+      QList<MidiArticulation*> articulation;
+
       QList<Channel*> channel;
 
       InstrumentTemplate();
@@ -66,6 +68,8 @@ struct InstrumentTemplate {
       };
 
 extern QList<InstrumentTemplate*> instrumentTemplates;
+extern QList<MidiArticulation*> articulation;
+
 extern bool loadInstrumentTemplates(const QString& instrTemplates);
 
 //---------------------------------------------------------

@@ -167,27 +167,57 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
       int i = 0;
       for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
             Note* note = in->second;
-            if (note->hidden())       // do not play overlapping notes
-                  continue;
-            if (note->tieBack())
-                  continue;
-            int idx    = instr->channel[note->subchannel()]->channel;
-            int pitch  = note->ppitch();
-            Event* ev = new Event(ME_NOTEON);
-            ev->setChannel(idx);
-            ev->setPitch(pitch);
-            ev->setVelo(note->velocity());
-            ev->setTuning(note->tuning());
-            ev->setNote(note);
-            events->insertMulti(tick + i * arpeggioOffset, ev);
-
-            Event* evo = new Event(ME_NOTEON);
-            evo->setChannel(idx);
-            evo->setPitch(pitch);
-            evo->setVelo(0);
-            evo->setNote(note);
-            events->insertMulti(tick + len, evo);
+            int channel = instr->channel[note->subchannel()]->channel;
+            collectNote(events, channel, note, tick + i * arpeggioOffset, len);
             }
+      }
+
+//---------------------------------------------------------
+//   collectNote
+//---------------------------------------------------------
+
+void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, int len)
+      {
+      int noteTick    = note->chord()->tick();
+      int noteOffTick = noteTick + note->chord()->tickLen();
+
+      if (note->onTimeType() == AUTO_VAL)
+            note->setOnTimeOffset(onTime - noteTick);
+      else if (note->onTimeType() == USER_VAL)
+            onTime = noteTick + note->onTimeOffset();
+      else {
+            note->setOnTimeOffset(onTime - noteTick);
+            onTime += note->onTimeUserOffset();
+            }
+      int offTime = onTime + len;
+      if (note->offTimeType() == AUTO_VAL)
+            note->setOffTimeOffset(offTime - noteOffTick);
+      else if (note->offTimeType() == USER_VAL)
+            offTime = noteOffTick + note->offTimeOffset();
+      else  {
+            note->setOffTimeOffset(offTime - noteOffTick);
+            offTime += note->offTimeUserOffset();
+            }
+
+      if (note->hidden() || note->tieBack())       // do not play overlapping notes
+            return;
+
+      int pitch  = note->ppitch();
+
+      Event* ev = new Event(ME_NOTEON);
+      ev->setChannel(channel);
+      ev->setPitch(pitch);
+      ev->setVelo(note->velocity());
+      ev->setTuning(note->tuning());
+      ev->setNote(note);
+      events->insertMulti(onTime, ev);
+
+      Event* evo = new Event(ME_NOTEON);
+      evo->setChannel(channel);
+      evo->setPitch(pitch);
+      evo->setVelo(0);
+      evo->setNote(note);
+      events->insertMulti(offTime, evo);
       }
 
 //---------------------------------------------------------
@@ -282,17 +312,7 @@ void Score::fixPpitch()
                         int velocity = velo[staffIdx].velo(chord->tick());
 
                         foreach(Articulation* a, *chord->getArticulations()) {
-                              switch(a->subtype()) {
-                                    case SforzatoaccentSym:
-                                          velocity = velocity + (velocity * 100)/50;
-                                          break;
-                                    case UmarcatoSym:
-                                    case DmarcatoSym:
-                                          velocity = velocity + (velocity * 100)/30;
-                                          break;
-                                    default:
-                                          break;
-                                    }
+                              velocity = velocity * a->relVelocity() / 100;
                               }
                         if (velocity > 127)
                               velocity = 127;
@@ -343,7 +363,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   Element* el = seg->element(track);
                   if (!el || el->type() != CHORD)
                         continue;
-                  Chord* chord = (Chord*)el;
+                  Chord* chord = static_cast<Chord*>(el);
                   if (chord->noteType() != NOTE_NORMAL) {
                         if (chord->noteType() == NOTE_ACCIACCATURA)
                               sv.append(chord);
@@ -351,14 +371,13 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               lv.append(chord);
                         continue;
                         }
-
-                  int gateTime = _style[ST_gateTime].toInt();  // 100 - legato (100%)
+                  int gateTime = 100;
                   int tick     = chord->tick();
                   if (playExpandRepeats && !_foundPlayPosAfterRepeats && tick == playPos()) {
                         setPlayPos(tick + tickOffset);
                         _foundPlayPosAfterRepeats = true;
                         }
-                  foreach(Element* e, *m->score()->gel()) {
+                  foreach (Element* e, *m->score()->gel()) {
                         if (e->type() == SLUR) {
                               Slur* slur = static_cast<Slur*>(e);
                               if (slur->startElement()->staffIdx() != staffIdx)
@@ -371,22 +390,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                                     }
                               }
                         }
-                  foreach(Articulation* a, *chord->getArticulations()) {
-                        switch(a->subtype()) {
-                              case TenutoSym:
-                                    gateTime = _style[ST_tenutoGateTime].toInt();
-                                    break;
-                              case StaccatoSym:
-                                    gateTime = _style[ST_staccatoGateTime].toInt();
-                                    break;
-                              case UmarcatoSym:
-                              case DmarcatoSym:
-                                    gateTime = _style[ST_staccatoGateTime].toInt();
-                                    break;
-                              default:
-                                    break;
-                              }
-                        }
+                  foreach (Articulation* a, *chord->getArticulations())
+                        gateTime = (gateTime * a->relGateTime()) / 100;
 
                   // compute len of chord
 
@@ -444,23 +449,22 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         arpeggioOffset = arpeggioNoteDistance;
 
                   int i = 0;
-                  
+
                   // -- swing -- //
                   double swingCoeff= swingRatio();
-                  
+
                   //deal with odd measure in anacrusis
                   int offSet = 0;
                   if(!sigmap()->timesig(m->tick()).nominalEqualActual() && m->tickLen()%480 !=0){
                       offSet = 480 - m->tickLen()%480;
-                  } 
-                  
-                  //detect 8th on the offbeat	
-                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
-                  
-                  if(swing){
-                            tick += (swingCoeff * AL::division /2);
                   }
-                  
+
+                  //detect 8th on the offbeat
+                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
+
+                  if (swing)
+                        tick += (swingCoeff * AL::division /2);
+
                   //on the beat and a 8th
                   bool swingBeat = ((tick - m->tick()+offSet)%AL::division == 0 && chord->tickLen() == 240);
                   if(swingBeat){
@@ -470,18 +474,17 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         swingBeat = ((ncr->tick() == tick + 240) && (ncr->tickLen() == 240));
                      }
                      else
-                        swingBeat = false; 
+                        swingBeat = false;
                   }
-                  
+
                   // -- end swing -- //
-                  
+
                   for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
                         Note* note = in->second;
-                        if (note->hidden() || note->tieBack())       // do not play overlapping notes
-                              continue;
-                        int idx = instr->channel[note->subchannel()]->channel;
+                        int channel = instr->channel[note->subchannel()]->channel;
 
-                        int len = note->chord()->tickLen();
+                        int tickLen = note->chord()->tickLen();
+                        int len     = note->chord()->tickLen();
                         bool tiedNote = false;
                         int lastNoteLen = len;
                         if (note->tieFor()) {
@@ -501,28 +504,26 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               len = (len * gateTime) / 100 - 1;
 
                         //swing
-                        
-                        if(swing)
+
+                        if (swing)
                             len *= (1-swingCoeff);
                         if (swingBeat)
-                            len *= (1+swingCoeff);    
-                           
+                            len *= (1+swingCoeff);
 
-                        Event* ev = new Event(ME_NOTEON);
-                        int pitch = note->ppitch();
-                        ev->setPitch(pitch);
-                        ev->setTuning(note->tuning());
-                        ev->setVelo(note->velocity());
-                        ev->setNote(note);
-                        ev->setChannel(idx);
-                        events->insertMulti(tick + i * arpeggioOffset, ev);
+                        int noteLen;
+                        if (note->offTimeType() == AUTO_VAL) {
+                              note->setOffTimeOffset(tickLen - len);
+                              noteLen = len;
+                              }
+                        else if (note->offTimeType() == USER_VAL)
+                              noteLen = tickLen + note->offTimeOffset();
+                        else  {
+                              note->setOffTimeOffset(tickLen - len);
+                              noteLen = tickLen + note->offTimeOffset() + note->offTimeUserOffset();
+                              }
 
-                        ev = new Event(ME_NOTEON);
-                        ev->setPitch(pitch);
-                        ev->setVelo(0);
-                        ev->setNote(note);
-                        ev->setChannel(idx);
-                        events->insertMulti(tick + len, ev);
+                        int onTime = tick + i * arpeggioOffset;
+                        collectNote(events, channel, note, onTime, noteLen);
                         }
                   }
                   lv.clear();

@@ -321,6 +321,7 @@ class Score : public QObject {
       void moveToNextInputPos();
       void selectMove(const QString& cmd);
 
+      void collectNote(EventMap* events, int channel, Note* note, int onTime, int len);
       void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
       void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
 

@@ -32,6 +32,9 @@ class Note;
 //---------------------------------------------------------
 
 class PianoItem : public QGraphicsRectItem {
+      Note* note;
+
+      virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
    public:
       PianoItem(Note*);

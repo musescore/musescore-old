@@ -61,6 +61,21 @@ void Xml::pTag(const char* name, Placement place)
       }
 
 //---------------------------------------------------------
+//   valueTypeTag
+//---------------------------------------------------------
+
+void Xml::valueTypeTag(const char* name, ValueType t)
+      {
+      const char* s;
+      switch(t) {
+            case AUTO_VAL:   s = "auto"; break;
+            case USER_VAL:   s = "user"; break;
+            case OFFSET_VAL: s = "offset"; break;
+            }
+      tag(name, s);
+      }
+
+//---------------------------------------------------------
 //   readPlacement
 //---------------------------------------------------------
 
@@ -78,3 +93,18 @@ Placement readPlacement(QDomElement e)
       printf("unknown placement value <%s>\n", qPrintable(s));
       return PLACE_AUTO;
       }
+
+//---------------------------------------------------------
+//   readValueType
+//---------------------------------------------------------
+
+ValueType readValueType(QDomElement e)
+      {
+      QString s(e.text());
+      if (s == "offset")
+            return OFFSET_VAL;
+      if (s == "user")
+            return USER_VAL;
+      return AUTO_VAL;
+      }
+

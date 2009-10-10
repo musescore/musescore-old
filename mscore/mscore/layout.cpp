@@ -793,7 +793,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
             const QList<MeasureBase*>& ml = system->measures();
             int n                         = ml.size();
-            while (n >= 0) {
+            while (n > 0) {
                   if (ml[n-1]->type() == MEASURE)
                         break;
                   --n;

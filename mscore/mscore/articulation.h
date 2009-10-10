@@ -76,6 +76,8 @@ enum ArticulationAnchor {
 struct ArticulationInfo {
       int sym;
       QString name;
+      int relVelocity;        // add velocity to note/chord in percent
+      int relGateTime;        // add to gateTime in percent;
       static int name2index();
       };
 
@@ -103,6 +105,8 @@ class Articulation : public Symbol {
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       QString name() const { return articulationList[subtype()].name; }
+      int relGateTime() const { return articulationList[subtype()].relGateTime; }
+      int relVelocity() const { return articulationList[subtype()].relVelocity; }
 
       static ArticulationInfo articulationList[];
 

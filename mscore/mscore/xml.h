@@ -53,8 +53,10 @@ class Xml : public AL::Xml {
 
       void sTag(const char* name, Spatium sp) { AL::Xml::tag(name, QVariant(sp.val())); }
       void pTag(const char* name, Placement);
+      void valueTypeTag(const char* name, ValueType t);
       };
 
 extern Placement readPlacement(QDomElement e);
+extern ValueType readValueType(QDomElement e);
 #endif
 

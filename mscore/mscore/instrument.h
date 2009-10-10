@@ -82,6 +82,8 @@ struct Channel {
       bool solo;
       bool soloMute;
 
+      QList<MidiArticulation*> articulation;
+
       Channel();
       void write(Xml&) const;
       void read(QDomElement);
@@ -101,6 +103,7 @@ struct Instrument {
 
       QList<NamedEventList> midiActions;
       QList<Channel*> channel;      // at least one entry
+      QList<MidiArticulation*> articulation;
 
       Instrument();
       void read(QDomElement);

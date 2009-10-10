@@ -93,9 +93,6 @@ Note::Note(Score* s)
       _pitch          = 0;
       _ppitch         = 0;
       _tuning         = 0.0;
-      _veloType       = AUTO_VAL;
-      _velocity       = 80;
-      _veloOffset     = 0;
       _accidental     = 0;
       _mirror         = false;
       _userMirror     = DH_AUTO;
@@ -111,6 +108,18 @@ Note::Note(Score* s)
       _subchannel     = 0;
       _head           = noteHeads[0][2];
       _accidentalType = ACC_NONE;
+
+      _veloType          = AUTO_VAL;
+      _velocity          = 80;
+      _veloOffset        = 0;
+
+      _onTimeType        = AUTO_VAL;
+      _onTimeOffset      = 0;
+      _onTimeUserOffset  = 0;
+
+      _offTimeType       = AUTO_VAL;
+      _offTimeOffset     = 0;
+      _offTimeUserOffset = 0;
       }
 
 Note::Note(const Note& n)
@@ -121,9 +130,6 @@ Note::Note(const Note& n)
       _pitch          = n._pitch;
       _ppitch         = n._ppitch;
       _tuning         = n._tuning;
-      _veloType       = n._veloType;
-      _velocity       = n._velocity;
-      _veloOffset     = n._veloOffset;
       _tpc            = n._tpc;
       _line           = n._line;
       _staffMove      = n._staffMove;
@@ -140,11 +146,23 @@ Note::Note(const Note& n)
       foreach(Element* e, n._el)
             add(e->clone());
 
-      _tieFor         = 0;
-      _tieBack        = 0;
+      _tieFor            = 0;
+      _tieBack           = 0;
 
-      _lineOffset     = n._lineOffset;
-      _hidden         = n._hidden;
+      _lineOffset        = n._lineOffset;
+      _hidden            = n._hidden;
+
+      _veloType          = n._veloType;
+      _velocity          = n._velocity;
+      _veloOffset        = n._veloOffset;
+
+      _onTimeType        = n._onTimeType;
+      _onTimeOffset      = n._onTimeOffset;
+      _onTimeUserOffset  = n._onTimeUserOffset;
+
+      _offTimeType       = n._offTimeType;
+      _offTimeOffset     = n._offTimeOffset;
+      _offTimeUserOffset = n._offTimeUserOffset;
       }
 
 //---------------------------------------------------------
@@ -571,74 +589,53 @@ QRectF Note::bbox() const
       }
 
 //---------------------------------------------------------
-//   isSimple
-//---------------------------------------------------------
-
-bool Note::isSimple(Xml& xml) const
-      {
-      QList<Prop> pl = Element::properties(xml);
-      if (_accidental && (!_accidental->userOff().isNull() || !_accidental->visible()))
-            return false;
-      return (_tuning == 0.0
-         && pl.empty()
-         && _el.empty()
-         && _tieFor == 0
-         && _staffMove == 0
-         && _headGroup == 0
-         && _userAccidental == 0
-         && _userMirror == DH_AUTO
-         );
-      }
-
-//---------------------------------------------------------
 //   Note::write
 //---------------------------------------------------------
 
 void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       {
-      if (isSimple(xml)) {
-            xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\"").arg(pitch()).arg(tpc()));
-            }
-      else {
-            xml.stag("Note");
-            QList<Prop> pl = Element::properties(xml);
-            xml.prop(pl);
-            xml.tag("pitch", pitch());
-            if (_tuning != 0.0)
-                  xml.tag("tuning", _tuning);
-            xml.tag("tpc", tpc());
+      xml.stag("Note");
+      QList<Prop> pl = Element::properties(xml);
+      xml.prop(pl);
+      xml.tag("pitch", pitch());
+      if (_tuning != 0.0)
+            xml.tag("tuning", _tuning);
+      xml.tag("tpc", tpc());
 
-            if (_userAccidental)
-                  xml.tag("userAccidental", _userAccidental);
-            if (_accidental &&
-               (!_accidental->userOff().isNull() || !_accidental->visible())
-               )
-                  _accidental->write(xml);
-            _el.write(xml);
-            if (_tieFor) {
-                  // in clipboardmode write tie only if the next note is < endTick
-                  if (!xml.clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
-                        _tieFor->write(xml);
-                  }
-            if (_staffMove)
-                  xml.tag("move", _staffMove);
-            if (_headGroup != 0)
-                  xml.tag("head", _headGroup);
-            if (_userMirror != DH_AUTO)
-                  xml.tag("mirror", _userMirror);
-            if (_veloType != AUTO_VAL) {
-                  const char* s;
-                  switch(_veloType) {
-                        case AUTO_VAL:   s = "auto"; break;
-                        case USER_VAL:   s = "user"; break;
-                        case OFFSET_VAL: s = "offset"; break;
-                        }
-                  xml.tag("veloType", s);
-                  int val = _veloType == USER_VAL ? _velocity : _veloOffset;
-                  xml.tag("velocity", val);
-                  }
-            xml.etag();
+      if (_userAccidental)
+            xml.tag("userAccidental", _userAccidental);
+      if (_accidental &&
+         (!_accidental->userOff().isNull() || !_accidental->visible())
+         )
+            _accidental->write(xml);
+      _el.write(xml);
+      if (_tieFor) {
+            // in clipboardmode write tie only if the next note is < endTick
+            if (!xml.clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
+                  _tieFor->write(xml);
             }
+      if (_staffMove)
+            xml.tag("move", _staffMove);
+      if (_headGroup != 0)
+            xml.tag("head", _headGroup);
+      if (_userMirror != DH_AUTO)
+            xml.tag("mirror", _userMirror);
+      if (_veloType != AUTO_VAL) {
+            xml.valueTypeTag("veloType", _veloType);
+            int val = _veloType == USER_VAL ? _velocity : _veloOffset;
+            xml.tag("velocity", val);
+            }
+      if (_onTimeType != AUTO_VAL) {
+            xml.valueTypeTag("onTimeType", _onTimeType);
+            int val = _onTimeType == USER_VAL ? _onTimeOffset : _onTimeUserOffset;
+            xml.tag("onTimeOffset", val);
+            }
+      if (_offTimeType != AUTO_VAL) {
+            xml.valueTypeTag("offTimeType", _offTimeType);
+            int val = _offTimeType == USER_VAL ? _offTimeOffset : _offTimeUserOffset;
+            xml.tag("offTimeOffset", val);
+            }
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -734,18 +731,8 @@ void Note::read(QDomElement e)
                   _staffMove = i;
             else if (tag == "mirror")
                   _userMirror = DirectionH(i);
-            else if (tag == "veloType") {
-                  if (val == "auto")
-                        _veloType = AUTO_VAL;
-                  else if (val == "user")
-                        _veloType = USER_VAL;
-                  else if (val == "offset")
-                        _veloType = OFFSET_VAL;
-                  else {
-                        _veloType = AUTO_VAL;
-                        printf("Warning: invalid velocity type %s\n", qPrintable(val));
-                        }
-                  }
+            else if (tag == "veloType")
+                  _veloType = readValueType(e);
             else if (tag == "velocity") {
                   if (_veloType == USER_VAL)
                         _velocity = i;
@@ -754,6 +741,23 @@ void Note::read(QDomElement e)
                   // else
                   //      ignore value;
                   }
+            else if (tag == "onTimeType")
+                  _onTimeType = readValueType(e);
+            else if (tag == "onTimeOffset") {
+                  if (_onTimeType == USER_VAL)
+                        _onTimeOffset = i;
+                  else if (_onTimeType == OFFSET_VAL)
+                        _onTimeUserOffset = i;
+                  }
+            else if (tag == "offTimeType")
+                  _offTimeType = readValueType(e);
+            else if (tag == "offTimeOffset") {
+                  if (_offTimeType == USER_VAL)
+                        _offTimeOffset = i;
+                  else if (_offTimeType == OFFSET_VAL)
+                        _offTimeUserOffset = i;
+                  }
+
             else if (Element::readProperties(e))
                   ;
             else

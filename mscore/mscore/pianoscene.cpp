@@ -48,19 +48,49 @@ static int pitch2y(int pitch)
 //---------------------------------------------------------
 
 PianoItem::PianoItem(Note* n)
-   : QGraphicsRectItem()
+   : QGraphicsRectItem(), note(n)
       {
       setFlags(flags() | QGraphicsItem::ItemIsSelectable);
       int pitch    = n->pitch();
       Chord* chord = n->chord();
-      int x        = chord->tick() + 480;
       int len      = chord->tickLen();
-      int y        = pitch2y(pitch) + keyHeight/4;
-      setRect(x, y, len, keyHeight/2);
-      setBrush(QColor(Qt::blue));
-      setPen(QPen());
+      setRect(0, 0, len, keyHeight/2);
+      setBrush(QBrush());
       setSelected(n->selected());
       setData(0, QVariant::fromValue<void*>(n));
+
+      setPos(chord->tick() + 480, pitch2y(pitch) + keyHeight / 4);
+      }
+
+//---------------------------------------------------------
+//   paint
+//---------------------------------------------------------
+
+void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* w)
+      {
+      QGraphicsRectItem::paint(painter, option, w);
+
+      Chord* chord = note->chord();
+      int x1        = note->onTimeOffset();
+      if (note->onTimeType() == OFFSET_VAL)
+            x1 += note->onTimeUserOffset();
+      int len = chord->tickLen();
+      int x2 = len + note->offTimeOffset();
+      if (note->offTimeType() == OFFSET_VAL)
+            x2 += note->offTimeUserOffset();
+      painter->setPen(pen());
+      painter->setBrush(Qt::blue);
+      painter->drawRect(x1, 0.0, x2-x1, keyHeight / 2);
+      if (x1 > 0) {
+            painter->setBrush(Qt::gray);
+            painter->drawRect(0.0, 0.0, x1, keyHeight / 2);
+            }
+      if (x2 < chord->tickLen()) {
+            painter->setBrush(Qt::gray);
+            painter->drawRect(x2, 0.0, len - x2, keyHeight / 2);
+            }
+
+      QGraphicsRectItem::paint(painter, option, w);
       }
 
 //---------------------------------------------------------
@@ -194,8 +224,6 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
 PianoView::PianoView()
    : QGraphicsView()
       {
-      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
-
       setScene(new QGraphicsScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -204,14 +232,6 @@ PianoView::PianoView()
       setDragMode(QGraphicsView::RubberBandDrag);
       _timeType = AL::TICKS;
       magStep   = 0;
-      for (int i = 0; i < 3; ++i) {
-            locatorLines[i] = new QGraphicsLineItem(QLineF(0.0, 0.0, 0.0, keyHeight * 75.0));
-            QPen pen(lcColors[i]);
-            pen.setWidth(2);
-            locatorLines[i]->setPen(pen);
-            locatorLines[i]->setZValue(1000+i);       // set stacking order
-            locatorLines[i]->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
-            }
       }
 
 //---------------------------------------------------------
@@ -220,6 +240,8 @@ PianoView::PianoView()
 
 void PianoView::setStaff(Staff* s, AL::Pos* l)
       {
+      static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
+
       staff    = s;
       _locator = l;
       pos.setContext(s->score()->tempomap(), s->score()->sigmap());
@@ -227,8 +249,15 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       scene()->blockSignals(true);
 
       scene()->clear();
-      for (int i = 0; i < 3; ++i)
+      for (int i = 0; i < 3; ++i) {
+            locatorLines[i] = new QGraphicsLineItem(QLineF(0.0, 0.0, 0.0, keyHeight * 75.0));
+            QPen pen(lcColors[i]);
+            pen.setWidth(2);
+            locatorLines[i]->setPen(pen);
+            locatorLines[i]->setZValue(1000+i);       // set stacking order
+            locatorLines[i]->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
             scene()->addItem(locatorLines[i]);
+            }
 
       Measure* m = staff->score()->firstMeasure();
       int staffIdx = staff->idx();
@@ -261,9 +290,9 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       foreach(QGraphicsItem* item, items) {
             Note* note = static_cast<Note*>(item->data(0).value<void*>());
             if (note)
-                  boundingRect |= item->boundingRect();
+                  boundingRect |= item->mapToScene(item->boundingRect()).boundingRect();
             }
-      centerOn(boundingRect.center());
+      centerOn(mapFromScene(boundingRect).boundingRect().center());
       }
 
 //---------------------------------------------------------
