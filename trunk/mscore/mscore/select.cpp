@@ -364,7 +364,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   activeTrack = staffIdx * VOICES;
                   if (_selection->state() == SEL_NONE) {
                         _selection->staffStart = staffIdx;
-                        _selection->staffEnd = staffIdx + 1;
+                        _selection->staffEnd   = staffIdx + 1;
                         _selection->setStartSegment(m->tick2segment(tick, true));
                         _selection->setEndSegment(tick2segment(etick));
                         }

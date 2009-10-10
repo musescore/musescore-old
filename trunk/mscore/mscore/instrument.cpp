@@ -169,6 +169,11 @@ void Instrument::read(QDomElement e)
                   a.read(e);
                   midiActions.append(a);
                   }
+            else if (tag == "Articulation") {
+                  MidiArticulation* a = new MidiArticulation;
+                  a->read(e);
+                  articulation.append(a);
+                  }
             else if (tag == "Channel" || tag == "channel") {
                   Channel* a = new Channel();
                   a->read(e);
@@ -310,6 +315,11 @@ void Channel::read(QDomElement e)
                               break;
                         }
                   }
+            else if (tag == "Articulation") {
+                  MidiArticulation* a = new MidiArticulation;
+                  a->read(e);
+                  articulation.append(a);
+                  }
             else
                   domError(e);
             }
@@ -388,7 +398,7 @@ int Instrument::channelIdx(const QString& s) const
 
 void MidiArticulation::write(Xml& xml) const
       {
-      xml.stag(QString("Articulation name=\"%1\"").arg(Articulation::idx2name(idx)));
+      xml.stag(QString("Articulation name=\"%1\"").arg(name));
       xml.tag("velocity", velocity);
       xml.tag("gateTime", gateTime);
       xml.etag();
@@ -400,8 +410,7 @@ void MidiArticulation::write(Xml& xml) const
 
 void MidiArticulation::read(QDomElement e)
       {
-      QString name = e.attribute("name");
-      idx = Articulation::name2idx(name);
+      name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "velocity")
@@ -410,6 +419,29 @@ void MidiArticulation::read(QDomElement e)
                   gateTime = e.text().toInt();
             else
                   domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   updateVelocity
+//---------------------------------------------------------
+
+void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& name)
+      {
+      Channel* c = channel[channelIdx];
+      foreach(MidiArticulation* a, c->articulation) {
+            if (a->name == name) {
+                  *velocity = *velocity * a->velocity / 100;
+                  printf("UpdateVelocity: found channel data\n");
+                  return;
+                  }
+            }
+      foreach(MidiArticulation* a, articulation) {
+            if (a->name == name) {
+                  *velocity = *velocity * a->velocity / 100;
+                  printf("UpdateVelocity: found instrument data\n");
+                  return;
+                  }
             }
       }
 

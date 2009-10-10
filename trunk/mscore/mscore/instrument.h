@@ -47,7 +47,7 @@ struct NamedEventList {
 //---------------------------------------------------------
 
 struct MidiArticulation {
-      int idx;                // Articulation index (subtype())
+      QString name;
       int velocity;           // velocity change: -100% - +100%
       int gateTime;           // gate time change: -100% - +100%
       void write(Xml&) const;
@@ -110,6 +110,7 @@ struct Instrument {
       void write(Xml& xml) const;
       NamedEventList* midiAction(const QString& s) const;
       int channelIdx(const QString& s) const;
+      void updateVelocity(int* velocity, int channel, const QString& name);
       };
 
 #endif

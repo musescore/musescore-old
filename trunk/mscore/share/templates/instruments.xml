@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <museScore version="1.0">
 
-  <gateTime>100%</gateTime>
-  <velocity>100%</velocity>
-
+  <Articulation>
+     <gateTime>100%</gateTime>
+     <velocity>100%</velocity>
+     </Articulation>
   <Articulation name="staccato">
      <gateTime>50%</gateTime>
      </Articulation>
@@ -3840,7 +3841,10 @@
         <bracket>1</bracket>
         <aPitchRange>21-108</aPitchRange>
         <pPitchRange>21-108</pPitchRange>
-        <gateTime>70%</gateTime>
+        <Articulation>
+           <gateTime>70%</gateTime>
+           <velocity>100%</velocity>
+           </Articulation>
         <Articulation name="staccato">
            <gateTime>40%</gateTime>
            </Articulation>

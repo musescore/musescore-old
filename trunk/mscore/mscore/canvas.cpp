@@ -1344,17 +1344,17 @@ void Canvas::paint(const QRect& rr, QPainter& p)
             QPen pen(QColor(Qt::blue));
             pen.setWidthF(2.0 / p.matrix().m11());
 
-            if (sel->state() == SEL_SYSTEM){
+            if (sel->state() == SEL_SYSTEM) {
                   pen.setStyle(Qt::DotLine);
-				  #ifdef Q_WS_MAC
-				  //TODO: remove if qt fix. This is a workaround for a qt bug on mac apparenlty
-				  //For dotline the spaces are not proportional to the line width except for custom dash
-				  QVector<qreal> dashes;
-				  qreal space = 2;
-				  dashes << 2 << space << 2;
-				  pen.setDashPattern(dashes);
-				  #endif
-				  }
+#ifdef Q_WS_MAC
+                  //TODO: remove if qt fix. This is a workaround for a qt bug on mac apparenlty
+			//For dotline the spaces are not proportional to the line width except for custom dash
+			QVector<qreal> dashes;
+			qreal space = 2;
+			dashes << 2 << space << 2;
+			pen.setDashPattern(dashes);
+#endif
+			}
             else
                   pen.setStyle(Qt::SolidLine);
 

@@ -29,6 +29,7 @@
 #include "element.h"
 #include "segment.h"
 #include "measurebase.h"
+#include "fraction.h"
 
 class Xml;
 class Beam;
@@ -240,6 +241,7 @@ class Measure : public MeasureBase {
 
       int multiMeasure() const                { return _multiMeasure; }
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
+      Fraction fraction() const;
       };
 
 #endif

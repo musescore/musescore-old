@@ -272,6 +272,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   a->read(e);
                   channel.append(a);
                   }
+            else if (tag == "Articulation") {
+                  MidiArticulation* a = new MidiArticulation;
+                  a->read(e);
+                  articulation.append(a);
+                  }
             else
                   domError(e);
             }

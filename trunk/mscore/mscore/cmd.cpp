@@ -938,9 +938,13 @@ Fraction Score::makeGap1(ChordRest* cr, Fraction len)
 
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
-      if (cr->duration() == d)
+      Duration crd(cr->duration());
+      Fraction srcF = crd.type() == Duration::V_MEASURE ? cr->measure()->fraction() : crd.fraction();
+      Fraction dstF(d.fraction());
+
+      if (srcF == dstF)
             return;
-      if (cr->duration() > d) {
+      if (srcF > dstF) {
             //
             // make shorter and fill with rest
             //
@@ -956,9 +960,8 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                               undoRemoveElement(n->tieFor());
                         }
                   }
-            Fraction f = cr->duration().fraction() - d.fraction();
             undoChangeChordRestLen(cr, d);
-            setRest(cr->tick() + cr->ticks(), cr->track(), f, false);
+            setRest(cr->tick() + cr->ticks(), cr->track(), srcF - dstF, false);
             }
       else {
             Measure* m = cr->measure();

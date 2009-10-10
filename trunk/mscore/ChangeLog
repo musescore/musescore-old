@@ -1,3 +1,6 @@
+10.oct (ws)
+      - fix: incomplete measure show whole rests
+      - fix: clicking duration changes next measure count
 9.oct (db)
       - capitalization fixes
       - added .midi extension to open dialog

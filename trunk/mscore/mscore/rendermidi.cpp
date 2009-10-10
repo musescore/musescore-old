@@ -231,120 +231,6 @@ struct OttavaShiftSegment {
       };
 
 //---------------------------------------------------------
-//   fixPpitch
-//    calculate play pitch and velocity for all notes
-//---------------------------------------------------------
-
-void Score::fixPpitch()
-      {
-      int ns = nstaves();
-      QList<OttavaShiftSegment> osl[ns];
-
-      //
-      //    collect ottavas
-      //
-      foreach(Element* e, _gel) {
-            if (e->type() == OTTAVA) {
-                  Ottava* ottava = static_cast<Ottava*>(e);
-                  OttavaShiftSegment ss;
-                  ss.stick = ottava->tick();
-                  ss.etick = ottava->tick2();
-                  ss.shift = ottava->pitchShift();
-                  osl[e->staffIdx()].append(ss);
-                  }
-            }
-      //
-      //    collect Dynamics
-      //
-      VeloList velo[ns];
-
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            velo[staffIdx].setVelo(0, 80);
-            Part* prt      = part(staffIdx);
-            int partStaves = prt->nstaves();
-            int partStaff  = Score::staffIdx(prt);
-
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                  foreach(const Element* e, *m->el()) {
-                        if (e->type() != DYNAMIC)
-                              continue;
-                        const Dynamic* d = static_cast<const Dynamic*>(e);
-                        int v = d->velocity();
-                        if (v < 1)     //  illegal value
-                              continue;
-                        switch(d->dynType()) {
-                              case DYNAMIC_STAFF:
-                                    velo[staffIdx].setVelo(d->tick(), v);
-                                    break;
-                              case DYNAMIC_PART:
-                                    for (int i = partStaff; i < partStaff+partStaves; ++i)
-                                          velo[i].setVelo(d->tick(), v);
-                                    break;
-                              case DYNAMIC_SYSTEM:
-                                    for (int i = 0; i < nstaves(); ++i)
-                                          velo[i].setVelo(d->tick(), v);
-                                    break;
-                              }
-                        }
-                  }
-            }
-
-      for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
-            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
-
-            for (Segment* seg = firstMeasure()->first(); seg; seg = seg->next1()) {
-                  if (seg->subtype() != Segment::SegChordRest)
-                        continue;
-                  int ottavaShift = 0;
-                  foreach(const OttavaShiftSegment& ss, osl[staffIdx]) {
-                        if (seg->tick() >= ss.stick && seg->tick() < ss.etick) {
-                              ottavaShift = ss.shift;
-                              break;
-                              }
-                        }
-                  int strack = staffIdx * VOICES;
-                  int etrack = strack + VOICES;
-                  for (int track = strack; track < etrack; ++track) {
-                        Element* el = seg->element(track);
-                        if (!el || el->type() != CHORD)
-                              continue;
-                        Chord* chord = static_cast<Chord*>(el);
-                        int velocity = velo[staffIdx].velo(chord->tick());
-
-                        foreach(Articulation* a, *chord->getArticulations()) {
-                              velocity = velocity * a->relVelocity() / 100;
-                              }
-                        if (velocity > 127)
-                              velocity = 127;
-                        else if (velocity < 1)
-                              velocity = 1;
-
-                        NoteList* nl = chord->noteList();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              Note* note = in->second;
-                              note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
-                              switch (note->veloType()) {
-                                    case OFFSET_VAL:
-                                          velocity += (velocity * note->veloOffset()) / 100;
-                                          if (velocity > 127)
-                                                velocity = 127;
-                                          else if (velocity < 1)
-                                                velocity = 1;
-                                          // fall through
-                                    case AUTO_VAL:
-                                          note->setVelocity(velocity);
-                                          break;
-                                    case USER_VAL:
-                                          break;
-                                    }
-                              }
-                        }
-                  }
-
-            }
-      }
-
-//---------------------------------------------------------
 //   collectMeasureEvents
 //---------------------------------------------------------
 
@@ -632,4 +518,127 @@ void Score::toEList(EventMap* events)
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
             toEList(events, staffIdx);
       }
+
+//---------------------------------------------------------
+//   fixPpitch
+//    calculate play pitch and velocity for all notes
+//---------------------------------------------------------
+
+void Score::fixPpitch()
+      {
+      int ns = nstaves();
+      QList<OttavaShiftSegment> osl[ns];
+
+      //
+      //    collect ottavas
+      //
+      foreach(Element* e, _gel) {
+            if (e->type() == OTTAVA) {
+                  Ottava* ottava = static_cast<Ottava*>(e);
+                  OttavaShiftSegment ss;
+                  ss.stick = ottava->tick();
+                  ss.etick = ottava->tick2();
+                  ss.shift = ottava->pitchShift();
+                  osl[e->staffIdx()].append(ss);
+                  }
+            }
+      //
+      //    collect Dynamics
+      //
+      VeloList velo[ns];
+
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            velo[staffIdx].setVelo(0, 80);
+            Part* prt      = part(staffIdx);
+            int partStaves = prt->nstaves();
+            int partStaff  = Score::staffIdx(prt);
+
+            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                  foreach(const Element* e, *m->el()) {
+                        if (e->type() != DYNAMIC)
+                              continue;
+                        const Dynamic* d = static_cast<const Dynamic*>(e);
+                        int v = d->velocity();
+                        if (v < 1)     //  illegal value
+                              continue;
+                        switch(d->dynType()) {
+                              case DYNAMIC_STAFF:
+                                    velo[staffIdx].setVelo(d->tick(), v);
+                                    break;
+                              case DYNAMIC_PART:
+                                    for (int i = partStaff; i < partStaff+partStaves; ++i)
+                                          velo[i].setVelo(d->tick(), v);
+                                    break;
+                              case DYNAMIC_SYSTEM:
+                                    for (int i = 0; i < nstaves(); ++i)
+                                          velo[i].setVelo(d->tick(), v);
+                                    break;
+                              }
+                        }
+                  }
+            }
+
+      for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
+            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
+            Instrument* instr = part(staffIdx)->instrument();
+
+            for (Segment* seg = firstMeasure()->first(); seg; seg = seg->next1()) {
+                  if (seg->subtype() != Segment::SegChordRest)
+                        continue;
+                  int ottavaShift = 0;
+                  foreach(const OttavaShiftSegment& ss, osl[staffIdx]) {
+                        if (seg->tick() >= ss.stick && seg->tick() < ss.etick) {
+                              ottavaShift = ss.shift;
+                              break;
+                              }
+                        }
+                  int strack = staffIdx * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* el = seg->element(track);
+                        if (!el || el->type() != CHORD)
+                              continue;
+                        Chord* chord = static_cast<Chord*>(el);
+
+                        //
+                        // get velocity depending on dynamic marks as "p" of "sfz"
+                        // crescendo and diminuendo
+                        //
+                        int velocity = velo[staffIdx].velo(chord->tick());
+
+                        NoteList* nl = chord->noteList();
+                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                              Note* note = in->second;
+
+                              //
+                              // adjust velocity for instrument, channel and
+                              // depending on articulation marks
+                              //
+                              int channel = note->subchannel();
+                              instr->updateVelocity(&velocity, channel, "");
+                              foreach(Articulation* a, *chord->getArticulations())
+                                    instr->updateVelocity(&velocity, channel, a->subtypeName());
+
+                              note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
+                              switch (note->veloType()) {
+                                    case OFFSET_VAL:
+                                          velocity += (velocity * note->veloOffset()) / 100;
+                                          // fall through
+
+                                    case AUTO_VAL:
+                                          if (velocity > 127)
+                                                velocity = 127;
+                                          else if (velocity < 1)
+                                                velocity = 1;
+                                          note->setVelocity(velocity);
+                                          break;
+                                    case USER_VAL:
+                                          break;
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+
 
