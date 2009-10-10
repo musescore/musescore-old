@@ -151,17 +151,7 @@ Rest* Score::addRest(int tick, int track, Duration d)
 
 Rest* Score::addRest(Segment* s, int track, Duration d)
       {
-      Measure* m = s->measure();
-      int tick = s->tick();
-      const AL::SigEvent ev(sigmap()->timesig(tick));
-      if ((ev.nominator == ev.nominator2)       // not in pickup measure
-         && (m->tick() == tick)
-         && (m->tickLen() == d.ticks())
-         && (d < Duration(Duration::V_BREVE))) {
-            d.setType(Duration::V_MEASURE);
-            d.setDots(0);
-            }
-      Rest* rest = new Rest(this, tick, d);
+      Rest* rest = new Rest(this, s->tick(), d);
       rest->setTrack(track);
       rest->setParent(s);
       cmdAdd(rest);
@@ -193,24 +183,38 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
 //    create one or more rests to fill "l"
 //---------------------------------------------------------
 
-void Score::setRest(int tick, int track, Fraction l, bool useDots)
+Rest* Score::setRest(int tick, int track, Fraction l, bool useDots)
       {
+      Measure* measure = tick2measure(tick);
+
+      const AL::SigEvent ev(sigmap()->timesig(tick));
+      if ((ev.nominator == ev.nominator2)       // not in pickup measure
+         && (measure->tick() == tick)
+         && (measure->tickLen() == l.ticks())
+         && (l < Duration(Duration::V_BREVE).fraction())) {
+            return addRest(tick, track, Duration(Duration::V_MEASURE));
+            }
       //
       // compute list of durations which will fit l
       //
       QList<Duration> dList = toDurationList(l, useDots);
       if (dList.isEmpty())
-            return;
+            return 0;
 
-      Measure* measure = tick2measure(tick);
+      Rest* rest = 0;
       if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
-            foreach(Duration d, dList)
-                  tick += addRest(tick, track, d)->ticks();
+            foreach(Duration d, dList) {
+                  rest = addRest(tick, track, d);
+                  tick += rest->ticks();
+                  }
             }
       else {
-            for (int i = dList.size() - 1; i >= 0; --i)
-                  tick += addRest(tick, track, dList[i])->ticks();
+            for (int i = dList.size() - 1; i >= 0; --i) {
+                  rest = addRest(tick, track, dList[i]);
+                  tick += rest->ticks();
+                  }
             }
+      return rest;
       }
 
 //---------------------------------------------------------
@@ -1196,16 +1200,7 @@ void Score::cmdDeleteSelection()
                         Measure* m = tick2measure(tick);
                         int maxGap = m->tick() + m->tickLen() - tick;
                         int len    = gapLen > maxGap ? maxGap : gapLen;
-
-                        Duration d;
-                        d.setVal(len);
-                        if ((m->tick() == tick) && (m->tickLen() == len) && (len < Duration(Duration::V_BREVE).ticks())) {
-                              addRest(tick, staffIdx * VOICES, d);
-                              }
-                        else {
-                              Fraction f = d.fraction();
-                              setRest(tick, staffIdx * VOICES, f, false);
-                              }
+                        setRest(tick, staffIdx * VOICES, Fraction::fromTicks(len), false);
                         gapLen -= len;
                         tick   += len;
                         }
@@ -1730,7 +1725,7 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
             }
       undoRemoveElement(tuplet);
       if (replaceWithRest) {
-            Rest* rest = addRest(tuplet->tick(), tuplet->track(), tuplet->duration());
+            Rest* rest = setRest(tuplet->tick(), tuplet->track(), tuplet->duration().fraction(), true);
             if (tuplet->tuplet()) {
                   rest->setTuplet(tuplet->tuplet());
                   tuplet->tuplet()->add(rest);

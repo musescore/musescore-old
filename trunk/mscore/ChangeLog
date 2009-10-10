@@ -1,4 +1,5 @@
 10.oct (ws)
+      - fix: failed creating whole measure rests in 5/4
       - changed note input behaviour: selected note follows cursor back/forward
       - fix: incomplete measure show whole rests
       - fix: clicking duration changes next measure count
