@@ -43,6 +43,7 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       _velo         = note->velocity();
       _userVelocity = note->velocity();
       _veloOffset   = note->veloOffset();
+
       veloTypeChanged(vt);
       connect(veloType, SIGNAL(activated(int)), SLOT(veloTypeChanged(int)));
       }

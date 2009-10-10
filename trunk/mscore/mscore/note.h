@@ -85,6 +85,14 @@ class Note : public Element {
       char _velocity;         ///< midi playback velocity (0 - 127);
       int _veloOffset;        ///< velocity user offset in promille
 
+      ValueType _onTimeType;
+      int _onTimeOffset;      ///< start note offset in ticks
+      int _onTimeUserOffset;  ///< start note user offset
+
+      ValueType _offTimeType;
+      int _offTimeOffset;     ///< stop note offset in ticks
+      int _offTimeUserOffset; ///< stop note user offset
+
       char _tpc;              ///< tonal pitch class
       char _staffMove;        ///< -1, 0, +1, used for crossbeaming
 
@@ -183,8 +191,6 @@ class Note : public Element {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      bool isSimple(Xml&) const;
-
       bool hidden() const              { return _hidden; }
       void setHidden(bool val)         { _hidden = val;  }
 
@@ -204,12 +210,24 @@ class Note : public Element {
       virtual void toDefault();
       virtual void setMag(double val);
 
-      ValueType veloType() const    { return _veloType;   }
-      void setVeloType(ValueType v) { _veloType = v;      }
-      int velocity() const          { return _velocity;   }
-      void setVelocity(int v)       { _velocity = v;      }
-      int veloOffset() const        { return _veloOffset; }
-      void setVeloOffset(int v)     { _veloOffset = v;    }
+      ValueType veloType() const       { return _veloType;   }
+      void setVeloType(ValueType v)    { _veloType = v;      }
+      int velocity() const             { return _velocity;   }
+      void setVelocity(int v)          { _velocity = v;      }
+      int veloOffset() const           { return _veloOffset; }
+      void setVeloOffset(int v)        { _veloOffset = v;    }
+
+      ValueType onTimeType() const     { return _onTimeType;    }
+      int onTimeOffset() const         { return _onTimeOffset;  }
+      void setOnTimeOffset(int v)      { _onTimeOffset = v;  }
+      int onTimeUserOffset() const     { return _onTimeOffset;  }
+      void setOnUserTimeOffset(int v)  { _onTimeOffset = v;  }
+
+      ValueType offTimeType() const    { return _offTimeType;    }
+      int offTimeOffset() const        { return _offTimeOffset;  }
+      void setOffTimeOffset(int v)     { _offTimeOffset = v;  }
+      int offTimeUserOffset() const    { return _offTimeOffset;  }
+      void setOffUserTimeOffset(int v) { _offTimeOffset = v;  }
       };
 
 //---------------------------------------------------------

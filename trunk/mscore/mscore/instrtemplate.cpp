@@ -27,6 +27,7 @@
 #include "bracket.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
+QList<MidiArticulation*> articulation;                // global articulations
 
 //---------------------------------------------------------
 //   InstrumentTemplate
@@ -371,7 +372,9 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                         if (tag == "instrument-group" || tag == "InstrumentGroup")
                               readInstrumentGroup(ee);
                         else if (tag == "Articulation") {
-                              //TODO
+                              MidiArticulation* a = new MidiArticulation;
+                              a->read(ee);
+                              articulation.append(a);
                               }
                         else
                               domError(ee);
