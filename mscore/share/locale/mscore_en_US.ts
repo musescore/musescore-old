@@ -4990,7 +4990,7 @@ before closing?</source>
         <source>
 
 From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation=></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
