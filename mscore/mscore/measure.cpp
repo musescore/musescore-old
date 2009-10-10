@@ -2508,14 +2508,15 @@ void Measure::adjustToLen(int ol, int nl)
                         Element* e = segment->element(track);
                         if (e && e->type() == REST) {
                               ++rests;
-                              rest = (Rest*)e;
+                              rest = static_cast<Rest*>(e);
                               }
                         else if (e && e->type() == CHORD)
                               ++chords;
                         }
                   }
             // printf("rests = %d\n", rests);
-            if (rests == 1 && chords == 0 && !_irregular) {
+            const AL::SigEvent ev(score()->sigmap()->timesig(tick()));
+            if ((ev.nominator == ev.nominator2) && (rests == 1) && (chords == 0) && !_irregular) {
                   rest->setDuration(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
@@ -2530,7 +2531,11 @@ void Measure::adjustToLen(int ol, int nl)
                                     Segment* pseg = segment->prev();
                                     Element* e = segment->element(trk);
                                     if (e && e->isChordRest()) {
-                                          n += static_cast<ChordRest*>(e)->ticks();
+                                          ChordRest* cr = static_cast<ChordRest*>(e);
+                                          if (cr->duration() == Duration::V_MEASURE)
+                                                n = nl;
+                                          else
+                                                n += cr->ticks();
                                           score()->undoRemoveElement(e);
                                           if (segment->isEmpty())
                                                 score()->undoRemoveElement(segment);
@@ -2554,7 +2559,8 @@ void Measure::adjustToLen(int ol, int nl)
                               d.setVal(n);
                               rest = new Rest(score(), rtick, d);
                               rest->setTrack(staffIdx * VOICES + voice);
-                              seg->add(rest);
+                              rest->setParent(seg);
+                              score()->undoAddElement(rest);
                               }
                         }
                   }
@@ -3460,5 +3466,16 @@ Segment* Measure::firstCRSegment() const
                   return s;
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   fraction
+//---------------------------------------------------------
+
+Fraction Measure::fraction() const
+      {
+      int z, n;
+      score()->sigmap()->timesig(tick(), z, n);
+      return Fraction(z, n);
       }
 

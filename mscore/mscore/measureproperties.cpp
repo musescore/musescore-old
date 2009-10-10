@@ -197,13 +197,13 @@ void MeasureProperties::apply()
             if (i == sl->end()) {
                   score->undoChangeSig(m->tick() + newLen, AL::SigEvent(), oev);
                   }
+            // score->select(0, SELECT_SINGLE, 0);
             m->adjustToLen(oldLen, newLen);
             score->fixTicks();
-            score->select(m, SELECT_SINGLE, 0);
+            score->select(m, SELECT_RANGE, 0);
             }
       score->renumberMeasures();
       score->setLayoutAll(true);
       score->end();
-      qApp->processEvents();
       }
 

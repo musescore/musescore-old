@@ -181,7 +181,14 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="actualZ"/>
+           <widget class="QSpinBox" name="actualZ">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>9999</number>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_4">
@@ -194,7 +201,14 @@
            </widget>
           </item>
           <item row="1" column="3">
-           <widget class="QSpinBox" name="actualN"/>
+           <widget class="QSpinBox" name="actualN">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>256</number>
+            </property>
+           </widget>
           </item>
           <item row="0" column="4">
            <spacer>
