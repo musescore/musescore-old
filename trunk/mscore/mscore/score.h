@@ -524,6 +524,7 @@ class Score : public QObject {
 
       Rest* addRest(int tick, int track, Duration);
       Rest* addRest(Segment* seg, int track, Duration d);
+      Chord* addChord(int tick, Duration d, Chord* oc);
 
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
       Rest* setRest(int tick,  int track, Fraction, bool useDots);

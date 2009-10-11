@@ -159,6 +159,47 @@ Rest* Score::addRest(Segment* s, int track, Duration d)
       }
 
 //---------------------------------------------------------
+//   addChord
+//    create one Chord at tick with duration d
+//    create segment if necessary
+//    Use chord "oc" as prototype and tie to all notes
+//---------------------------------------------------------
+
+Chord* Score::addChord(int tick, Duration d, Chord* oc)
+      {
+      Measure* measure = tick2measure(tick);
+      Segment::SegmentType st = Segment::SegChordRest;
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoAddElement(seg);
+            }
+      Chord* chord = new Chord(this);
+
+      NoteList* nl = oc->noteList();
+      for (iNote i = nl->begin(); i != nl->end(); ++i) {
+            Note* n = i->second;
+            Note* nn = new Note(this);
+            nn->setPitch(n->pitch());
+            nn->setTpc(n->tpc());
+            chord->add(nn);
+
+            Tie* tie = new Tie(this);
+            tie->setStartNote(n);
+            tie->setEndNote(nn);
+            tie->setTrack(n->track());
+
+            undoAddElement(tie);
+            }
+      chord->setTrack(oc->track());
+      chord->setDuration(d);
+      chord->setTick(tick);
+      chord->setParent(seg);
+      undoAddElement(chord);
+      return chord;
+      }
+
+//---------------------------------------------------------
 //   addClone
 //---------------------------------------------------------
 
