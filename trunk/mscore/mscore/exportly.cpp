@@ -39,6 +39,7 @@
 #include "dynamics.h"
 #include "globals.h"
 #include "hairpin.h"
+#include "harmony.h"
 #include "key.h"
 #include "keysig.h"
 #include "measure.h"
@@ -47,6 +48,7 @@
 #include "page.h"
 #include "part.h"
 #include "pedal.h"
+#include "pitchspelling.h"
 #include "repeat.h"
 #include "rest.h"
 #include "score.h"
@@ -92,7 +94,7 @@ class ExportLy {
   bool graceswitch, gracebeam;
   int gracecount;
   int prevpitch, staffpitch, chordpitch, oktavdiff;
-  int measurenumber, lastind, taktnr;
+  int measurenumber, lastind, taktnr, staffInd;
   bool repeatactive;
   bool firstalt,secondalt;
   enum voltatype {startending, endending, startrepeat, endrepeat, bothrepeat, doublebar, brokenbar, endbar, none};
@@ -146,6 +148,31 @@ class ExportLy {
 
   QString voicebuffer;
   QTextStream out;
+  bool nochord;
+  int chordcount;
+  void chordName(struct InstructionAnchor chordanchor);
+
+  struct chordData{QString chrName; QString extName; int alt; QString bsnName; int bsnAlt; int ticklen; int tickpos;};
+  struct chordData thisHarmony;
+  struct chordData prevHarmony;
+  void resetChordData(struct chordData&);
+  QString chord2Name(int ch);
+
+  struct chordPost //element of a list to store hamonies.
+  {
+    struct chordData cd;
+    struct chordPost * next;
+    struct chordPost * prev;
+  };
+  struct chordPost cp;
+  struct chordPost * chordHead;
+  struct chordPost * chordThis;
+ 
+  void storeChord(struct InstructionAnchor chAnk);
+  void chordInsertList(chordPost *);
+  void printChordList();
+  void cleanupChordList();
+
 
   struct jumpOrMarkerLM
   {
@@ -408,36 +435,19 @@ void ExportLy::instructionMarker(Marker* m)
   int mtp = m->markerType();
   QString words = "";
   if (mtp == MARKER_CODA)
-    {
-      printf("printing coda\n");
       words = "\\theCoda ";
-    }
   else if (mtp == MARKER_CODETTA)
-    {
      	words = "\\codetta";
-     }
   else if (mtp == MARKER_SEGNO)
-    {
-      printf("printing segno\n");
       words = "\\thesegno";
-    }
   else if (mtp == MARKER_FINE)
-    {
-      printf("printing fine\n");
 	words = "\\fine";
-    }
   else if (mtp == MARKER_TOCODA)
-    {
 	words = "\\gotocoda ";
-    }
   else if (mtp == MARKER_VARCODA)
-    {
 	words = "\\varcodasign ";
-    }
   else if (mtp == MARKER_USER)
-    {
 	printf("unknown user marker\n");
-    } 
   else
     printf("marker type=%d not implemented\n", mtp);
     out << words ;
@@ -464,6 +474,256 @@ void ExportLy::symbol(Symbol* sym)
       }
 
 
+void ExportLy::resetChordData(struct chordData &CD)
+{
+  CD.chrName="";
+  CD.extName="";
+  CD.alt=0;
+  CD.bsnName="";
+  CD.tickpos=0;
+  CD.bsnAlt=0;
+  CD.ticklen=0;
+}
+
+
+void ExportLy::cleanupChordList()
+{
+  chordPost * next;
+  chordThis = chordHead;
+  next = chordThis->next;
+
+  while (next !=NULL)
+    {
+      next->prev = NULL;
+      delete chordThis;
+      chordThis = next;
+      next = next->next;
+    }
+  delete chordThis;
+}
+
+
+void ExportLy::printChordList()
+{
+  printf("printchordlist 1 \n");
+  chordThis = chordHead;
+  struct chordPost * next;
+  next = chordThis->next;
+  int i=0;
+  int dots=0;
+  int lilylen=0;
+
+  while (next != NULL) 
+    {
+      i++;
+      if ((i==1) and (chordThis->cd.tickpos > 0)) 
+	{
+	  printf("chordThis tickpos: %d\n", chordThis->cd.tickpos);
+	   //insert silent rests before first chord here.......
+	  // works at least if denominator is 4:
+	  int measnum = chordThis->cd.tickpos / (z1 * AL::division);  
+	  printf("antall hele takter = %d\n", measnum);
+	  int rest = chordThis->cd.tickpos % AL::division;
+	  if (measnum == 0) rest = chordThis->cd.tickpos;
+	  printf("antall ticks til rest: %d\n", rest);
+	  level++;
+	  indentF();
+	  if (rest > 0)
+	    {
+	      lilylen= getLen(rest, &dots);
+	      printf("lilylen %d, dots: %d\n", lilylen, dots);
+	      level++;
+	      indentF();
+	      os << "s" << lilylen;
+	      while (dots>0)
+		{
+		  os<< ".";
+		  dots--;
+		}
+	    } 
+	  os << " ";
+	  if (measnum >0 ) os << "s1*" << measnum<< " \n";
+	}// end if firstone is not on tick 0 print silent rest.
+
+      printf("computing ticklengths %d\n", i);;
+      chordThis->cd.ticklen =  next->cd.tickpos - chordThis->cd.tickpos;
+      chordThis=next;
+      next=next->next;
+    }//while note end of list.
+
+  if (next == NULL)
+     chordThis->cd.ticklen= 480;
+
+
+  chordThis = chordHead;
+  next = chordThis;
+  i=0;
+  indentF();
+
+  while (next != NULL)
+    {
+      next=next->next;
+      dots=0;
+      lilylen=0;
+      i++;
+      printf("printing chordlist %d\n", i);
+      lilylen = getLen(chordThis->cd.ticklen, &dots);
+      os << chordThis->cd.chrName << lilylen;
+      printf("chordname: %s\n", chordThis->cd.chrName.toLatin1().data());
+
+      while (dots > 0)
+	{
+	  os << ".";
+	  dots--;
+	}
+      
+      if (chordThis->cd.extName !="")
+	os << ":" << chordThis->cd.extName;
+      
+      if (chordThis->cd.bsnName !="")
+	os << "/" << chordThis->cd.bsnName;
+      if (chordThis->cd.bsnAlt > 0)
+	os << chordThis->cd.bsnAlt;
+      os << " ";
+      chordThis=next;
+    }//end of while chordthis...
+  os << "}%%end of chordlist \n\n";  
+}//end of printChordList
+
+QString ExportLy::chord2Name(int ch)
+      {
+      const char names[] = "fcgdaeb";
+      return QString(names[(ch + 1) % 7]);
+      }
+
+
+//----------------------------------------------------------
+// chordInsertList
+//----------------------------------------------------------
+void ExportLy::chordInsertList(chordPost * newchord)
+{
+
+  if (chordHead == NULL) //first element: make head of list.
+    {
+      chordcount++;
+      printf("first element %d\n", chordcount);
+      chordHead = newchord;
+      newchord->prev = NULL;
+      newchord->next = NULL;
+    }
+  else //at least one previous existent element
+    {
+      chordcount++;
+	printf("some previous element %d\n", chordcount);
+      chordThis = chordHead;
+      printf("newtick: %d, thistick: %d\n", newchord->cd.tickpos, chordThis->cd.tickpos);
+      while ((newchord->cd.tickpos >= chordThis->cd.tickpos) && (chordThis->next != NULL))
+	{
+	  chordThis = chordThis->next;
+	  printf("1b:  newtick: %d, thistick: %d\n", newchord->cd.tickpos, chordThis->cd.tickpos);
+	  if  (chordThis->next == NULL) printf("Null, reached end of list 1\n");
+	}
+      printf("2:  newtick: %d, thistick: %d\n", newchord->cd.tickpos, chordThis->cd.tickpos);
+      if ((chordThis->next == NULL) && (chordThis->cd.tickpos <= newchord->cd.tickpos)) //we have reached end of list
+	{
+	  printf("Null, reached end of list 2\n");
+	  printf("insert new element as tail\n");
+	  //insert new element as tail
+	  chordThis->next = newchord;
+	  printf("tail 1\n");
+	  newchord->prev = chordThis;
+	  printf("tail 2\n");
+	}
+      else 
+	//insert somewhere in the middle
+	{
+	  printf("3:  newtick: %d, thistick: %d\n", newchord->cd.tickpos, chordThis->cd.tickpos);
+	  printf("insert somewhere in middle\n");
+	  newchord->next = chordThis;
+	  printf("middle 1\n");
+	  newchord->prev = chordThis->prev;
+	  printf("middle 2\n");
+	  if (chordHead != chordThis)
+	    {
+	      printf("middle2b\n");
+	      chordThis = chordThis->prev;
+	      chordThis->next = newchord;
+	    }
+	  else // the middle is immediately after head and before the tail.
+	    {
+	      chordThis->prev = newchord;
+	      printf("middle 3\n");
+	      chordHead = newchord;
+	    }
+	}//middle 
+    }//at least one previous
+}//end of chordInsertList
+
+//-----------------------------------------------------------------
+// storeChord
+//-----------------------------------------------------------------
+void ExportLy::storeChord(struct InstructionAnchor chordanchor)
+{
+  //first create new element
+  chordPost * aux;
+  aux = new chordPost();
+  resetChordData(aux->cd);
+  aux->next = NULL;
+  aux->prev = NULL;
+
+  //then fill it
+  Harmony* harmelm = (Harmony*) chordanchor.instruct;
+  int  chordroot = harmelm->rootTpc();
+  QString n, app;
+
+  if (chordroot != INVALID_TPC)
+    {
+      aux->cd.chrName = chord2Name(chordroot); 
+      n=thisHarmony.chrName;
+      
+      aux->cd.tickpos = harmelm->tick();
+      if (!harmelm->xmlKind().isEmpty()) 
+	{
+	  aux->cd.extName = harmelm->extensionName();
+	  aux->cd.extName = aux->cd.extName.toLower();
+	}
+
+      int alter = tpc2alter(chordroot);
+      if (alter==1) app = "is";
+      else 
+	{
+	  if (alter == -1)
+	    {
+	      if (n == "e") app = "s"; 
+	      else app = "es";
+	    }
+	}
+      aux->cd.chrName = aux->cd.chrName + app;
+
+      int  bassnote = harmelm->baseTpc();
+      if (bassnote != INVALID_TPC)
+	{
+	  aux->cd.bsnName = chord2Name(bassnote); 
+	  int alter = tpc2alter(bassnote);
+	  n=aux->cd.bsnName;
+	  
+	  if (alter==1) app = "is";
+	  else if (alter == -1)
+	  {
+	    if (n=="e")  app =  "s"; else app = "es";
+	  }
+	  
+	  aux->cd.bsnName = n + app;
+	  aux->cd.bsnAlt=alter;  
+	} //end if bassnote
+      //and at last insert it in list:
+      chordInsertList(aux);
+    }//end if chordroot
+  else
+    storeAnchor(anker);
+}
+
+
 //---------------------------------------------------------
 //   tempoText
 //---------------------------------------------------------
@@ -482,11 +742,12 @@ void ExportLy::tempoText(TempoText* text)
 
 void ExportLy::words(Text* text)
      {
-
+       QString tekst = text->getText();
        //todo: find exact mscore-position of text and not only anchorpoint, and position accordingly in lily.
-       if (!(text->subtypeName()== "RehearsalMark"))
-	 if (text->getText() != "")
-	   out << "^\\markup {\"" << text->getText() << "\"} ";
+     if ((text->subtypeName() != "RehearsalMark"))
+       // if (text->getText() != "")  
+       out << "^\\markup {\"" << text->getText() << "\"} ";
+     printf("tekst %s\n", tekst.toLatin1().data());
       }
 
 
@@ -502,7 +763,6 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
   // accordingly in lily.
 	int art=2;
 	art=hp->subtype();
-	printf("writing hairpin, subtype %d\n", art);
 	if (hp->tick() == tick)
 	  {
 	    if (art == 0) //diminuendo
@@ -673,7 +933,9 @@ void ExportLy::textLine(TextLine* /*tl*/, int /*tick*/)
       }
 
 
-
+//---------------------------------------------------------------------
+// anchortest
+//---------------------------------------------------------------------
 void ExportLy::anchortest()
 {
       int i;
@@ -710,14 +972,12 @@ void ExportLy::anchortest()
 	    case DYNAMIC:
 	      printf("Dynamic\n");
 	      break;
-	    case HAIRPIN:
-	      {
-	      printf("anchortest hairpin\n");
-	      Hairpin* hp = (Hairpin *) instruction;
-	      int hptype=hp->subtype();
-	      printf("hairpin subtype: %d\n", hptype);
+	    case HARMONY:
+	      printf("akkordnavn. \n");
 	      break;
-	      }
+	    case HAIRPIN:
+	      printf("hairpin \n");
+	      break;
 	    case PEDAL:
 	      printf("pedal\n");
 	      break;
@@ -776,9 +1036,6 @@ void ExportLy::removeAnchor(int ankind)
 
 void ExportLy::storeAnchor(struct InstructionAnchor a)
       {
-
-	Text* text =  (Text*) a.instruct;
-	if (text->subtypeName() == "rehearsalMark") printf("Legger rehearsal i ankerliste\n");
 	if (nextAnchor < 1024)
 	  {
 	    anchors[nextAnchor++] = a;
@@ -813,7 +1070,6 @@ void ExportLy::handlePreInstruction(Element * el)
 	      text = (Text*) instruction;
 	      if (instruction->subtypeName()== "RehearsalMark")
 		{
-		  printf("skriver rehearsalmark\n");
 		  out << "\\mark\\default ";
 		  bool ok = false;
 		  int dec=0;
@@ -825,7 +1081,6 @@ void ExportLy::handlePreInstruction(Element * el)
 		}
 	      break;
 	      case OTTAVA:
-		printf("ottava in pre-handle\n");
 		ottava((Ottava*) instruction, anchors[i].tick);
 		removeAnchor(i);
 		break;
@@ -874,15 +1129,17 @@ void ExportLy::handleElement(Element* el)
 	    case STAFF_TEXT:
 	    case TEXT:
 	      printf("TEXT\n");
-	      if (instruction->subtypeName() == "rehearsalMark") printf("posthandle rehearsal\n");
-	      words((Text*) instruction);
+	       words((Text*) instruction);
 	      break;
 	    case DYNAMIC:
 	      dynamic((Dynamic*) instruction);
 	      break;
 	    case HAIRPIN:
-	      printf("handleelement hairpin\n");
 	      hairpin((Hairpin*) instruction, anchors[i].tick);
+	      break;
+	    case HARMONY:
+	      printf("handleelement harmony\n");
+	      words((Text*) instruction);
 	      break;
 	    case PEDAL:
 	      pedal((Pedal*) instruction, anchors[i].tick);
@@ -1007,7 +1264,6 @@ void ExportLy::markerAtMeasureStart(Measure* m)
 	   //discard markers which belong at measure end:
 	   if (!(mtp == MARKER_FINE || mtp == MARKER_TOCODA))
 	     {
-	       printf("marker found at measure start\n");
 	       instructionMarker(ma);
 	       preserveJumpOrMarker(dir, measurenumber, false);
 	     }
@@ -1034,7 +1290,6 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
 	    if (tp == JUMP) 
 	      {
 		// all jumps are handled at measure end
-		printf("found jump at measure stop\n");
 		Jump* jp = (Jump*) dir;
 		//writing the jump-mark in part one of the score:
 		instructionJump(jp);
@@ -1049,7 +1304,6 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
 	      }
 	    else if (tp == MARKER) 
 	      {
-		printf("found marker at measure stop\n");
 		Marker* ma = (Marker*) dir;
 		int mtp = ma->markerType();
 		//only print markers which belong at measure end:
@@ -1137,6 +1391,7 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	case MARKER:
 	    printf("score MARKER found at tick: %d\n", instruction->tick());
 	case HAIRPIN:
+	case HARMONY:
 	case OTTAVA:
 	case PEDAL:
 	case DYNAMIC:
@@ -1201,12 +1456,12 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case TEMPO_TEXT:
 	case TEXT: 
 	case HAIRPIN:
+	  //case HARMONY: 
 	case OTTAVA:
 	case PEDAL:
 	case STAFF_TEXT:
 	  {
-	  int measurenr = m->no()+1;
-	  found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsalmark);
+	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsalmark);
 	  if (found)
 	    {
 	      anker.instruct=instruction;
@@ -1214,8 +1469,23 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	    }
 	  break;
 	  }
-	default:
-	  break;
+	case HARMONY: 
+	  {
+	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
+	    if ((found) && (staffInd == 0)) //only save chords in first staff.
+	      {
+		if (nochord) 
+		  {
+		    nochord = false;
+		  }
+		anker.instruct=instruction;
+		storeChord(anker);
+		resetAnchor(anker);
+	      }
+	    break;
+	  }
+	 default:
+	   break;
 	}
     }
 }// end buildinstructionlist(measure)
@@ -2396,7 +2666,6 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	      {	
 		if (wholemeasurerest > 0) 
 		  {
-		    printf("wholes REST: %d\n", wholemeasurerest);
 		    wholemeasurerest++;
 		  }
 		else
@@ -2493,7 +2762,7 @@ void ExportLy::writeScore()
   char  cpartnum;
   chordpitch=41;
   repeatactive=false;
-  int staffInd = 0;
+  staffInd = 0;
   //int np = score->parts()->size();
   graceswitch=false;
   int voice=0;
@@ -2525,7 +2794,7 @@ void ExportLy::writeScore()
       
 
       //ANCHORTEST: print instructionlist
-      anchortest();
+       anchortest();
 
 
       foreach(Staff* staff, *part->staves())
@@ -2684,16 +2953,24 @@ void ExportLy::writeScore()
 // -------------------------------------------------------------------
 void ExportLy::writeScoreBlock()
 {
+  
+  if (nochord==false)  // output the chords as a separate staff before the score-block
+    {  
+      os  << "theChords = \\chordmode { \n";
+      printChordList();
+      cleanupChordList();
+      level--;
+    }  
+
   //  bracktest();
+  
   level=0;
   os << "\n\\score { \n";
   level++;
   indentF();
-  os << "\\relative << \n";
-
+  os << "<< \n";
 
   indx=0;
-
   while (staffname[indx].staffid!="laststaff")
     {
 
@@ -2717,6 +2994,13 @@ void ExportLy::writeScoreBlock()
 	    }
 	  else
 	  os << "\\context GrandStaff = " << (char)(lybracks[indx].braceno + 64) << "<< \n";
+	}
+
+
+      if ((nochord == false) && (indx==0)) //insert chords as the first staff.
+	{
+	  indentF();
+	  os << "\\new ChordNames { \\theChords } \n";
 	}
 
       ++level;
@@ -2795,6 +3079,16 @@ if (rehearsalnumbers)
   os << "\\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n";
   indentF();
   os << "%% remove previous line to get cut-time/alla breve or common time \n";
+  indentF();
+  os << "%% lilypond chordname font, like mscore jazzfont, is both far too big and extremely ugly (olagunde@start.no):\n";
+  indentF();
+  os << "\\override Score.ChordName #'font-family = #'roman \n";
+  indentF();
+  os << "\\override Score.ChordName #'font-size =#0 \n";
+  indentF();
+  os << "%% In my experience the normal thing in printed scores is maj7 and not the triangle. (olagunde):\n";
+  indentF();
+  os << "\\set Score.majorSevenSymbol = \\markup {maj7}\n";
   --level;
   indentF();
   os << ">>\n";
@@ -2826,6 +3120,9 @@ bool ExportLy::write(const QString& name)
   os.setDevice(&f);
   os.setCodec("utf8");
   out.setString(&voicebuffer);
+  chordHead=NULL;
+  chordcount = 0;
+
   os << "%=============================================\n"
     "%   created by MuseScore Version: " << VERSION << "\n"
     "%          " << QDate::currentDate().toString(Qt::SystemLocaleLongDate);
@@ -3006,6 +3303,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+   11.oct. 2009 (olav) started on lilypond \chordmode
+
    08.okt.  (olav) Tremolo. Segno and Coda. Correct insertion of s-rests
           in demo: adeste.
 
@@ -3109,7 +3408,6 @@ bool ExportLy::write(const QString& name)
    -- massive failure on gollywog and Bilder
    -- metronome marks must be given as \tempo 4 = 60 and not as markups.
    -- close second volta.
-   -- Chord symbols.
    -- Coda/Segno symbols collides with rehearsalmarks, which accordingly are not printed.
    -- The macros for 8va and Coda/Segno take up much space and are ugly, so they 
       should not be printed if they were not used in the score.
@@ -3120,3 +3418,4 @@ bool ExportLy::write(const QString& name)
    -- barcheck fails in Bilder etc.etc.
 
  */
+
