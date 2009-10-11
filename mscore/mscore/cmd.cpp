@@ -988,45 +988,38 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                         return;
                         }
 printf("changeCRlen: gap starts in next measure\n");
-                  Fraction d = Fraction::fromTicks(len - cr->ticks());
-                  Segment* seg = m->nextMeasure()->firstCRSegment();
+                  Fraction d     = Fraction::fromTicks(len - cr->ticks());
+                  Segment* seg   = m->nextMeasure()->firstCRSegment();
                   ChordRest* cr2 = static_cast<ChordRest*>(seg->element(cr->track()));
-                  Fraction gap  = makeGap(cr2, d);
+                  Fraction gap   = makeGap(cr2, d);
+
                   ChordRest* newcr;
                   if (cr->type() == REST)
-                        newcr = new Rest(this);
+                        setRest(tick, cr->track(), gap, false);
                   else {
                         Chord* oc = static_cast<Chord*>(cr);
-                        Chord* chord = new Chord(this);
 
-                        NoteList* nl = oc->noteList();
-                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                              Note* n = i->second;
-                              Note* nn = new Note(this);
-                              nn->setPitch(n->pitch());
-                              nn->setTpc(n->tpc());
-                              chord->add(nn);
-
-                              Tie* tie = new Tie(this);
-                              tie->setStartNote(n);
-                              tie->setEndNote(nn);
-                              tie->setTrack(n->track());
-
-                              undoAddElement(tie);
+                        //
+                        // compute list of durations which will fit l
+                        //
+                        QList<Duration> dList = toDurationList(gap, true);
+                        Measure* measure = tick2measure(tick);
+                        if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
+                              foreach(Duration d, dList) {
+                                    Chord* c = addChord(tick, d, oc);
+                                    tick += c->ticks();
+                                    oc = c;
+                                    }
                               }
-                        newcr = chord;
+                        else {
+                              for (int i = dList.size() - 1; i >= 0; --i) {
+                                    Chord* c = addChord(tick, dList[i], oc);
+                                    tick += c->ticks();
+                                    oc = c;
+                                    }
+                              }
+                        connectTies();
                         }
-                  newcr->setTrack(cr->track());
-                  newcr->setDuration(Duration(gap));
-                  newcr->setTick(tick);
-                  Measure* measure = tick2measure(tick);
-                  seg = measure->findSegment(Segment::SegChordRest, tick);
-                  if (seg == 0) {
-                        seg = measure->createSegment(Segment::SegChordRest, tick);
-                        undoAddElement(seg);
-                        }
-                  newcr->setParent(seg);
-                  undoAddElement(newcr);
                   }
             else {
                   Fraction gap   = (d - cr->duration()).fraction();
