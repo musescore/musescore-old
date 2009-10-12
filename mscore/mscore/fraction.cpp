@@ -69,7 +69,7 @@ void Fraction::reduce()
 
 Fraction& Fraction::operator+=(const Fraction& val)
       {
-      const unsigned tmp = lcm(_denominator, val._denominator);
+      const int tmp = lcm(_denominator, val._denominator);
       _numerator = _numerator * (tmp / _denominator) + val._numerator * (tmp / val._denominator);
       _denominator  = tmp;
       reduce();
@@ -78,26 +78,26 @@ Fraction& Fraction::operator+=(const Fraction& val)
 
 bool Fraction::operator<(const Fraction& val) const
       {
-      const unsigned v = lcm(_denominator, val._denominator);
+      const int v = lcm(_denominator, val._denominator);
       return _numerator * (v / _denominator) < val._numerator * (v / val._denominator);
       }
 
 bool Fraction::operator<=(const Fraction& val) const
       {
-      const unsigned v = lcm(_denominator, val._denominator);
+      const int v = lcm(_denominator, val._denominator);
       return _numerator * (v / _denominator) <= val._numerator * (v / val._denominator);
       }
 
 bool Fraction::operator>=(const Fraction& val) const
       {
-      const unsigned v = lcm(_denominator, val._denominator);
+      const int v = lcm(_denominator, val._denominator);
       return _numerator * (v / _denominator) >= val._numerator * (v / val._denominator);
       }
 
 bool Fraction::operator>(const Fraction& val) const
       {
-      const unsigned v = lcm(_denominator, val._denominator);
-      return _numerator * (v / _denominator) > val._numerator * (v / val._denominator);
+      const int v = lcm(_denominator, val._denominator);
+      return (_numerator * (v / _denominator)) > (val._numerator * (v / val._denominator));
       }
 
 bool Fraction::operator==(const Fraction& val) const
@@ -151,6 +151,12 @@ Fraction& Fraction::operator/=(const Fraction& val)
       _numerator *= val._denominator;
       _denominator  *= val._numerator;
       reduce();
+      return *this;
+      }
+
+Fraction& Fraction::operator/=(int val)
+      {
+      _denominator  *= val;
       return *this;
       }
 

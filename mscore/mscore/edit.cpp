@@ -133,7 +133,7 @@ int Score::pos()
 //    create segment if necessary
 //---------------------------------------------------------
 
-Rest* Score::addRest(int tick, int track, Duration d)
+Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       Segment::SegmentType st = Segment::SegChordRest;
@@ -142,30 +142,32 @@ Rest* Score::addRest(int tick, int track, Duration d)
             seg = measure->createSegment(st, tick);
             undoAddElement(seg);
             }
-      return addRest(seg, track, d);
+      return addRest(seg, track, d, tuplet);
       }
 
 //---------------------------------------------------------
 //   addRest
 //---------------------------------------------------------
 
-Rest* Score::addRest(Segment* s, int track, Duration d)
+Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
       Rest* rest = new Rest(this, s->tick(), d);
       rest->setTrack(track);
       rest->setParent(s);
+      rest->setTuplet(tuplet);
       cmdAdd(rest);
       return rest;
       }
 
 //---------------------------------------------------------
 //   addChord
-//    create one Chord at tick with duration d
-//    create segment if necessary
-//    Use chord "oc" as prototype and tie to all notes
+//    Create one Chord at tick with duration d
+//    - create segment if necessary.
+//    - Use chord "oc" as prototype;
+//    - if "genTie" then tie to chord "oc"
 //---------------------------------------------------------
 
-Chord* Score::addChord(int tick, Duration d, Chord* oc)
+Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       Segment::SegmentType st = Segment::SegChordRest;
@@ -183,14 +185,15 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc)
             nn->setPitch(n->pitch());
             nn->setTpc(n->tpc());
             chord->add(nn);
-
-            Tie* tie = new Tie(this);
-            tie->setStartNote(n);
-            tie->setEndNote(nn);
-            tie->setTrack(n->track());
-
-            undoAddElement(tie);
+            if (genTie) {
+                  Tie* tie = new Tie(this);
+                  tie->setStartNote(n);
+                  tie->setEndNote(nn);
+                  tie->setTrack(n->track());
+                  undoAddElement(tie);
+                  }
             }
+      chord->setTuplet(tuplet);
       chord->setTrack(oc->track());
       chord->setDuration(d);
       chord->setTick(tick);
@@ -224,7 +227,7 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
 //    create one or more rests to fill "l"
 //---------------------------------------------------------
 
-Rest* Score::setRest(int tick, int track, Fraction l, bool useDots)
+Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
 
@@ -233,7 +236,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots)
          && (measure->tick() == tick)
          && (measure->tickLen() == l.ticks())
          && (l < Duration(Duration::V_BREVE).fraction())) {
-            return addRest(tick, track, Duration(Duration::V_MEASURE));
+            return addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
             }
       //
       // compute list of durations which will fit l
@@ -245,13 +248,13 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots)
       Rest* rest = 0;
       if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
             foreach(Duration d, dList) {
-                  rest = addRest(tick, track, d);
+                  rest = addRest(tick, track, d, tuplet);
                   tick += rest->ticks();
                   }
             }
       else {
             for (int i = dList.size() - 1; i >= 0; --i) {
-                  rest = addRest(tick, track, dList[i]);
+                  rest = addRest(tick, track, dList[i], tuplet);
                   tick += rest->ticks();
                   }
             }
@@ -1241,7 +1244,7 @@ void Score::cmdDeleteSelection()
                         Measure* m = tick2measure(tick);
                         int maxGap = m->tick() + m->tickLen() - tick;
                         int len    = gapLen > maxGap ? maxGap : gapLen;
-                        setRest(tick, staffIdx * VOICES, Fraction::fromTicks(len), false);
+                        setRest(tick, staffIdx * VOICES, Fraction::fromTicks(len), false, 0);
                         gapLen -= len;
                         tick   += len;
                         }
@@ -1389,17 +1392,17 @@ void Score::addLyrics()
 void Score::cmdTuplet(int n)
       {
       if (noteEntryMode())
-            cmdTuplet(n, _is.cr(), _is.duration);
+            cmdTuplet(n, _is.cr(), _is.duration.fraction());
       else {
             QList<Element*>* sl = selection()->elements();
             foreach(Element* e, *sl) {
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
-                        cmdTuplet(n, cr, cr->duration());
+                        cmdTuplet(n, cr, cr->fraction());
                         }
                   else if (e->type() == NOTE) {
                         Chord* chord = static_cast<Chord*>(e->parent());
-                        cmdTuplet(n, static_cast<ChordRest*>(chord), chord->duration());
+                        cmdTuplet(n, static_cast<ChordRest*>(chord), chord->fraction());
                         }
                   }
             }
@@ -1409,112 +1412,87 @@ void Score::cmdTuplet(int n)
 //   cmdTuplet
 //---------------------------------------------------------
 
-void Score::cmdTuplet(int n, ChordRest* cr, Duration dur)
+void Score::cmdTuplet(int n, ChordRest* cr, Fraction f)
       {
-      if (cr == 0 || dur.type() == Duration::V_INVALID)
+      if (cr == 0 || !f.isValid())
             return;
-      int tick = cr->tick();
-      Fraction f;
-      if (dur.type() == Duration::V_MEASURE)
-            dur.setVal(cr->measure()->tickLen());
-
-      f = dur.fraction();
-
+      int tick       = cr->tick();
       Tuplet* tuplet = new Tuplet(this);
-      Tuplet* ot = cr->tuplet();
+      Tuplet* ot     = cr->tuplet();
 
-      Duration duration(f);
-      if (duration.dots() == 0) {
-            switch (n) {
-                  case 2:                       // duplet
-                  case 4:                       // quadruplet
-                  case 8:                       // octuplet
-                        printf("this does not create a tuplet\n");
-                        return;
-                  case 3:                       // triplet
-                        tuplet->setRatio(3, 2);
-                        duration = duration.shift(1);
-                        break;
-                  case 5:                       // quintuplet
-                        {
-                        // HACK: whole measure rest with time signature 6/8
-                        int tz, tn;
-                        _sigmap->timesig(tick, tz, tn);
-                        int ticks = duration.type() != Duration::V_MEASURE ? cr->ticks() : cr->measure()->tickLen();
-                        if (ticks == (3 * AL::division) &&  tz == 6 && tn == 8)
-                              tuplet->setRatio(5, 6);
-                        else {
-                              //duration = duration.shift(1);
-                              //tuplet->setRatio(5, 2);
-                              // alternativ:
-                              duration = duration.shift(2);
-                              tuplet->setRatio(5, 4);
-                              }
+      Fraction fr = f;
+      switch (n) {
+            case 2:                       // duplet
+                  tuplet->setRatio(2, 3);
+                  fr /= 2;
+                  break;
+            case 3:                       // triplet
+                  tuplet->setRatio(3, 2);
+                  fr /= 2;
+                  break;
+            case 4:                       // quadruplet
+                  tuplet->setRatio(4, 3);
+                  fr /= 2;
+                  break;
+            case 5:                       // quintuplet
+                  // tuplet->setRatio(5, 3);
+                  // duration = duration.shift(1);
+
+                  {
+                  // HACK: whole measure rest with time signature 6/8
+                  int tz, tn;
+                  _sigmap->timesig(tick, tz, tn);
+                  int ticks = cr->ticks();
+                  if (ticks == (3 * AL::division) &&  tz == 6 && tn == 8)
+                        tuplet->setRatio(5, 6);
+                  else {
+                        //duration = duration.shift(1);
+                        //tuplet->setRatio(5, 2);
+                        // alternativ:
+                        fr /= 4;
+                        tuplet->setRatio(5, 4);
                         }
-                        break;
-                  case 6:                       // sextuplet
-                        tuplet->setRatio(6, 4);
-                        duration = duration.shift(1);
-                        break;
-                  case 7:                       // septuplet
-                        tuplet->setRatio(7, 4);
-                        // tuplet->setRatio(6, 4);  alternative
-                        duration = duration.shift(2);
-                        break;
-                  case 9:                       // nonuplet
-                        tuplet->setRatio(9, 8);
-                        duration = duration.shift(3);
-                        break;
                   }
+                  break;
+            case 6:                       // sextuplet
+                  tuplet->setRatio(6, 4);
+                  fr /= 2;
+                  break;
+            case 7:                       // septuplet
+                  tuplet->setRatio(7, 4);
+                  // tuplet->setRatio(6, 4);  alternative
+                  fr /= 4;
+            //      tuplet->setRatio(7, 6);
+            //      duration = duration.shift(2);
+                  break;
+            case 8:                       // octuplet
+                  tuplet->setRatio(8, 6);
+                  fr /= 2;
+                  break;
+            case 9:                       // nonuplet
+                  tuplet->setRatio(9, 8);
+                  fr /= 8;
+            //      tuplet->setRatio(9, 6);
+            //      duration = duration.shift(2);
+                  break;
             }
-      else {
-            duration.setDots(0);
-            switch (n) {
-                  case 3:                       // triplet
-                  case 6:                       // sextuplet
-                        printf("this does not create a tuplet\n");
-                        return;
-                  case 2:                       // duplet
-                        tuplet->setRatio(2, 3);
-                        duration = duration.shift(1);
-                        break;
-                  case 4:                       // quadruplet
-                        tuplet->setRatio(4, 3);
-                        duration = duration.shift(1);
-                        break;
-                  case 5:                       // quintuplet
-                        tuplet->setRatio(5, 3);
-                        duration = duration.shift(1);
-                        break;
-                  case 7:                       // septuplet
-                        tuplet->setRatio(7, 6);
-                        duration = duration.shift(2);
-                        break;
-                  case 8:                       // octuplet
-                        tuplet->setRatio(8, 6);
-                        duration = duration.shift(1);
-                        break;
-                  case 9:                       // nonuplet
-                        tuplet->setRatio(9, 6);
-                        duration = duration.shift(2);
-                        break;
-                  }
-            }
-      if (noteEntryMode() && (duration != cr->duration())) {
+
+      if (noteEntryMode() && (fr != cr->fraction())) {
             cmdEnterRest();
             cr = getSelectedChordRest();
             }
 
       //
-      // "duration" is the duration of one tuple element
+      // "fr" is the fraction value of one tuple element
       //
       // "tuplet time" is "normal time" / tuplet->ratio()
       //    Example: an 1/8 has 240 midi ticks, in an 1/8 triplet the note
       //             has a tick duration of 240 / (3/2) = 160 ticks
       //
 
-      tuplet->setDuration(cr->duration());
-      tuplet->setBaseLen(duration);
+      tuplet->setFraction(f);
+      Duration baseLen(fr);
+      tuplet->setBaseLen(baseLen);
 
 printf("cmdTuplet: "); tuplet->dump();
 
@@ -1538,7 +1516,7 @@ printf("cmdTuplet: "); tuplet->dump();
       if (el) {
             select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
-            _is.duration = duration;      // ??
+            _is.duration = baseLen;
             setPadState();
             }
       }
@@ -1766,7 +1744,7 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
             }
       undoRemoveElement(tuplet);
       if (replaceWithRest) {
-            Rest* rest = setRest(tuplet->tick(), tuplet->track(), tuplet->duration().fraction(), true);
+            Rest* rest = setRest(tuplet->tick(), tuplet->track(), tuplet->fraction(), true, 0);
             if (tuplet->tuplet()) {
                   rest->setTuplet(tuplet->tuplet());
                   tuplet->tuplet()->add(rest);

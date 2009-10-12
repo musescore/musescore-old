@@ -485,6 +485,8 @@ void Inspector::itemClicked(QTreeWidgetItem* i, int)
 
 void Inspector::updateElement(Element* el)
       {
+      if (el == 0)
+            return;
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = list->topLevelItem(i);
             if (item == 0) {

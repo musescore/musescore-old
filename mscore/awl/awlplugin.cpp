@@ -25,6 +25,7 @@
 #include "colorlabel.h"
 #include "volslider.h"
 #include "mslider.h"
+#include "denomspinbox.h"
 
 #include <QtCore/QtPlugin>
 #include <QtDesigner/QDesignerCustomWidgetInterface>
@@ -63,6 +64,10 @@ QWidget* MeterSliderPlugin::createWidget(QWidget* parent)
       {
       return new Awl::MeterSlider(parent);
       }
+QWidget* DenominatorSpinBoxPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::DenominatorSpinBox(parent);
+      }
 
 //---------------------------------------------------------
 //   customWidgets
@@ -80,6 +85,7 @@ QList<QDesignerCustomWidgetInterface*> AwlPlugins::customWidgets() const
                << new VolSliderPlugin
                << new MeterSliderPlugin
                << new ColorLabelPlugin
+               << new DenominatorSpinBoxPlugin
                ;
       return plugins;
 	}

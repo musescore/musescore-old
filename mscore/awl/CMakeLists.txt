@@ -32,6 +32,7 @@ QT4_WRAP_CPP (mocs
       pitchlabel.h
 #      posedit.h
       poslabel.h
+      denomspinbox.h
       )
 
 add_custom_command(
@@ -77,6 +78,7 @@ add_library (
       poslabel.cpp
 #      posedit.cpp
       utils.cpp
+      denomspinbox.cpp
       )
 
 set_target_properties( awl
@@ -96,6 +98,7 @@ QT4_WRAP_CPP (mocs2
       slider.h
       volslider.h
       mslider.h
+      denomspinbox.h
       )
 
 add_library (
@@ -113,6 +116,7 @@ add_library (
       slider.cpp
       volslider.cpp
       mslider.cpp
+      denomspinbox.cpp
       )
 
 ##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"

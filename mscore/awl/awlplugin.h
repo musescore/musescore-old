@@ -160,6 +160,20 @@ class MeterSliderPlugin : public QObject, public AwlPlugin {
       };
 
 //---------------------------------------------------------
+//   DenominatorSpinBox
+//---------------------------------------------------------
+
+class DenominatorSpinBoxPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      DenominatorSpinBoxPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/denomspinbox.h"; }
+      QString name() const { return "Awl::DenominatorSpinBox"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
 //   AwlPlugins
 //---------------------------------------------------------
 
@@ -170,6 +184,7 @@ class AwlPlugins : public QObject, public QDesignerCustomWidgetCollectionInterfa
    public:
       QList<QDesignerCustomWidgetInterface*> customWidgets() const;
       };
+
 
 #endif
 

@@ -46,7 +46,7 @@ DurationElement::DurationElement(Score* s)
    : Element(s)
       {
       _tuplet = 0;
-      _ticks   = -1;
+      _ticks  = -1;
       }
 
 //---------------------------------------------------------
@@ -56,7 +56,6 @@ DurationElement::DurationElement(Score* s)
 DurationElement::DurationElement(const DurationElement& e)
    : Element(e)
       {
-      _duration = e._duration;
       _tuplet   = e._tuplet;
       }
 
@@ -66,9 +65,7 @@ DurationElement::DurationElement(const DurationElement& e)
 
 int DurationElement::ticks() const
       {
-      if (_duration.type() == Duration::V_MEASURE)    // whole measure rest?
-            return static_cast<Measure*>(parent()->parent())->tickLen();
-      int ticks = duration().ticks();
+      int ticks = fraction().ticks();
       for (Tuplet* t = tuplet(); t; t = t->tuplet())
             ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
       return ticks;
@@ -83,7 +80,7 @@ void DurationElement::convertTicks()
       if (_ticks < 0)
             return;
       if (_tuplet == 0)
-            _duration.setVal(_ticks);
+            setFraction(Fraction::fromTicks(_ticks));
       else {
             ;
             }
@@ -119,6 +116,7 @@ ChordRest::ChordRest(Score* s)
 ChordRest::ChordRest(const ChordRest& cr)
    : DurationElement(cr)
       {
+      _duration           = cr._duration;
       _beam               = 0;
       _up                 = cr._up;
       _small              = cr._small;
@@ -611,5 +609,23 @@ void ChordRest::toDefault()
       {
       score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
+      }
+
+//---------------------------------------------------------
+//   fraction
+//---------------------------------------------------------
+
+Fraction ChordRest::fraction() const
+      {
+      return _duration.type() == Duration::V_MEASURE ? measure()->fraction() : _duration.fraction();
+      }
+
+//---------------------------------------------------------
+//   setFraction
+//---------------------------------------------------------
+
+void ChordRest::setFraction(const Fraction& f)
+      {
+      _duration = Duration(f);
       }
 

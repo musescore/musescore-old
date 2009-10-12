@@ -40,6 +40,8 @@ class Text;
 //------------------------------------------------------------------------
 
 class Tuplet : public DurationElement {
+      Fraction _fraction;
+
    public:
       enum { SHOW_NUMBER, SHOW_RELATION, NO_TEXT };
       enum { AUTO_BRACKET, SHOW_BRACKET, SHOW_NO_BRACKET };
@@ -114,6 +116,9 @@ class Tuplet : public DurationElement {
       Duration baseLen() const             { return _baseLen;     }
       void setBaseLen(const Duration& d)   { _baseLen = d;        }
       virtual void dump() const;
+
+      void setFraction(const Fraction& f)  { _fraction = f; }
+      virtual Fraction fraction() const    { return _fraction; }
       };
 
 //---------------------------------------------------------

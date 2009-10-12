@@ -464,7 +464,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
       {
       QList<Duration> dList;
       if (useDottedValues) {
-            for (Duration d = Duration(Duration::V_LONG); (d.type() != Duration::V_ZERO) && (l.numerator() != 0);) {
+            for (Duration d = Duration(Duration::V_LONG); d.isValid() && (l.numerator() != 0);) {
                   d.setDots(2);
                   Fraction ff(l - d.fraction());
                   if (ff.numerator() >= 0) {
@@ -491,7 +491,7 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
                   }
             }
       else {
-            for (Duration d = Duration(Duration::V_LONG); !d.isZero() && (l.numerator() != 0);) {
+            for (Duration d = Duration(Duration::V_LONG); d.isValid() && (l.numerator() != 0);) {
                   Fraction ff(l - d.fraction());
                   if (ff.numerator() < 0) {
                         d = d.shift(1);
@@ -501,6 +501,8 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
                   dList.append(d);
                   }
             }
+      if (l != Fraction())
+            printf("toDurationList:: rest remains %d/%d\n", l.numerator(), l.denominator());
       return dList;
       }
 
