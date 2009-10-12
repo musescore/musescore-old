@@ -678,6 +678,7 @@ void ExportLy::storeChord(struct InstructionAnchor chordanchor)
 
   if (chordroot != INVALID_TPC)
     {
+      if (nochord == true) nochord = false;
       aux->cd.chrName = chord2Name(chordroot); 
       n=thisHarmony.chrName;
       
@@ -1474,10 +1475,6 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
 	    if ((found) && (staffInd == 0)) //only save chords in first staff.
 	      {
-		if (nochord) 
-		  {
-		    nochord = false;
-		  }
 		anker.instruct=instruction;
 		storeChord(anker);
 		resetAnchor(anker);
@@ -2954,7 +2951,7 @@ void ExportLy::writeScore()
 void ExportLy::writeScoreBlock()
 {
   
-  if (nochord==false)  // output the chords as a separate staff before the score-block
+  if ((nochord==false))// && (chordThis->next !=NULL))   // output the chords as a separate staff before the score-block
     {  
       os  << "theChords = \\chordmode { \n";
       printChordList();
@@ -2997,7 +2994,7 @@ void ExportLy::writeScoreBlock()
 	}
 
 
-      if ((nochord == false) && (indx==0)) //insert chords as the first staff.
+      if ((nochord == false) && (indx==0))// && (chordThis->next !=NULL)   ) //insert chords as the first staff.
 	{
 	  indentF();
 	  os << "\\new ChordNames { \\theChords } \n";
