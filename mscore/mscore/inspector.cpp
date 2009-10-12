@@ -1759,7 +1759,8 @@ void Inspector::forwardClicked()
 
 void Inspector::reloadClicked()
       {
-      Element* e = curElement;
-	updateList(cs);
-      updateElement(e);
+		Element* e = curElement;
+		updateList(cs);
+		if(e)
+			updateElement(e);
       }
