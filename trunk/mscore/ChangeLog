@@ -1,3 +1,6 @@
+11.oct (ws)
+      - move flexible splitting of note durations
+      - restrict denominator values to 2^^n
 10.oct (ws)
       - fix: failed creating whole measure rests in 5/4
       - changed note input behaviour: selected note follows cursor back/forward

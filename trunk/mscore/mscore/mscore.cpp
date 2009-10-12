@@ -1198,6 +1198,8 @@ void MuseScore::startInspector()
 
 void MuseScore::showElementContext(Element* el)
       {
+      if (el == 0)
+            return;
       startInspector();
       inspector->setElement(el);
       }

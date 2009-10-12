@@ -41,6 +41,7 @@ class Fraction {
       void setDenominator(int v) { _denominator = v;               }
       void set(int z, int n)     { _numerator = z; _denominator = n; }
       bool isZero() const        { return _numerator == 0;      }
+      bool isValid() const       { return _denominator != 0;    }
       void setTicks(int n);
 
       int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
@@ -51,12 +52,14 @@ class Fraction {
       Fraction& operator*=(const Fraction&);
       Fraction& operator*=(int);
       Fraction& operator/=(const Fraction&);
+      Fraction& operator/=(int);
 
       Fraction operator+(const Fraction& v) const { return Fraction(*this) += v; }
       Fraction operator-(const Fraction& v) const { return Fraction(*this) -= v; }
       Fraction operator*(const Fraction& v) const { return Fraction(*this) *= v; }
       Fraction operator*(int v)             const { return Fraction(*this) *= v; }
       Fraction operator/(const Fraction& v) const { return Fraction(*this) /= v; }
+      Fraction operator/(int v)             const { return Fraction(*this) /= v; }
 
       bool operator<(const Fraction&) const;
       bool operator<=(const Fraction&) const;

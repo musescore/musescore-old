@@ -420,7 +420,7 @@ void Tuplet::read(QDomElement e)
                   domError(e);
             }
       Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());
-      setDuration(Duration(f));
+      setFraction(f);
       if (bl != -1) {
             Duration d;
             d.setVal(bl);
@@ -428,7 +428,7 @@ void Tuplet::read(QDomElement e)
 printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
 printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
             d.setVal(bl * _ratio.denominator());
-            setDuration(d);
+            setFraction(d.fraction());
             }
       }
 

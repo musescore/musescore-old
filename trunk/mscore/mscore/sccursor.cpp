@@ -441,7 +441,7 @@ void ScSCursorPrototype::add(ChordRestPtr c)
 
       Fraction len(c->duration().fraction());
       int track       = staffIdx * VOICES + voice;
-      Fraction gap    = score->makeGap(cr, len);
+      Fraction gap    = score->makeGap(cr, len, cr->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");
             return;

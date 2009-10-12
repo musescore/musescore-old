@@ -32,7 +32,6 @@ class Beam;
 //---------------------------------------------------------
 
 class DurationElement : public Element {
-      Duration _duration;
       Tuplet* _tuplet;
 
    protected:
@@ -44,21 +43,15 @@ class DurationElement : public Element {
       DurationElement(const DurationElement& e);
 
       virtual Measure* measure() const               { return (Measure*)(parent()); }
-
-      const Duration& duration() const               { return _duration;        }
-      void setDurationType(Duration::DurationType t) { _duration.setType(t);    }
-      void setDurationType(const QString& s)         { _duration.setType(s);    }
-      void setDurationVal(int ticks)                 { _duration.setVal(ticks); }
-      void setDuration(const Duration& v)            { _duration = v;           }
-
       void setTuplet(Tuplet* t)                      { _tuplet = t;      }
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }
       int ticks() const;
       int tickLen() const                            { return ticks(); }
-      void setDots(int n)                            { _duration.setDots(n); }
-      int dots() const                               { return _duration.dots(); }
       void convertTicks();   // for scores version < 1.12
+
+      virtual Fraction fraction() const = 0;
+      virtual void setFraction(const Fraction&) = 0;
       };
 
 #endif

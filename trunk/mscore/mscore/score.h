@@ -424,7 +424,7 @@ class Score : public QObject {
       void readStaff(QDomElement);
 
       void cmdTuplet(int);
-      void cmdTuplet(int n, ChordRest* cr, Duration dur);
+      void cmdTuplet(int n, ChordRest* cr, Fraction);
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
@@ -519,15 +519,15 @@ class Score : public QObject {
          Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, const Duration&);
 
-      Fraction makeGap(ChordRest*, const Fraction&);
+      Fraction makeGap(ChordRest*, const Fraction&, Tuplet*);
       Fraction makeGap1(ChordRest*, Fraction);
 
-      Rest* addRest(int tick, int track, Duration);
-      Rest* addRest(Segment* seg, int track, Duration d);
-      Chord* addChord(int tick, Duration d, Chord* oc);
+      Rest* addRest(int tick, int track, Duration, Tuplet*);
+      Rest* addRest(Segment* seg, int track, Duration d, Tuplet*);
+      Chord* addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet);
 
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
-      Rest* setRest(int tick,  int track, Fraction, bool useDots);
+      Rest* setRest(int tick,  int track, Fraction, bool useDots, Tuplet* tuplet);
 
       Canvas* canvas() const;
 

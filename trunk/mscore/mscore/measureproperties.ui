@@ -148,6 +148,12 @@
             <property name="readOnly">
              <bool>true</bool>
             </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>9999</number>
+            </property>
            </widget>
           </item>
           <item row="0" column="2">
@@ -157,13 +163,6 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QSpinBox" name="nominalN">
-            <property name="readOnly">
-             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -200,17 +199,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="actualN">
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>256</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4">
+          <item row="0" column="5">
            <spacer>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -222,6 +211,22 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="1" column="3">
+           <widget class="Awl::DenominatorSpinBox" name="actualN"/>
+          </item>
+          <item row="0" column="3">
+           <widget class="QSpinBox" name="nominalN">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>256</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -338,6 +343,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Awl::DenominatorSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>awl/denomspinbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="mscore.qrc"/>
  </resources>
