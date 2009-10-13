@@ -764,33 +764,35 @@ void Score::insertStaff(Staff* staff, int idx)
       staff->part()->insertStaff(staff);
 
       int track = idx * VOICES;
-      foreach(Element* e, _gel) {
-        switch(e->type()) {
-          case SLUR:
-            Slur* slur = (Slur*)e;
-            if (slur->track() >= track) {
-                  slur->setTrack(slur->track() + VOICES);
+      foreach (Element* e, _gel) {
+            switch(e->type()) {
+                  case SLUR:
+                        {
+                        Slur* slur = static_cast<Slur*>(e);
+                        if (slur->track() >= track)
+                              slur->setTrack(slur->track() + VOICES);
+                        if (slur->track2() >= track)
+                              slur->setTrack2(slur->track2() + VOICES);
+                        }
+                        break;
+                  case VOLTA: //volta alway attached to top staff
+                        break;
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        if (line->track() >= track)
+                              line->setTrack(line->track() + VOICES);
+                        }
+                        break;
+                  default:
+                        break;
                   }
-            if (slur->track2() >= track)
-                  slur->setTrack2(slur->track2() + VOICES);
-            break;
-          case VOLTA: //volta alway attached to top staff
-            break;
-          case OTTAVA:
-          case TRILL:
-          case PEDAL:
-          case HAIRPIN:
-          case TEXTLINE:
-            SLine* line = (SLine*)e;
-            if (line->track() >= track) {
-              line->setTrack(line->track() + VOICES);
             }
-            break;
-          default:
-            break;
-        }
       }
-  }
 
 //---------------------------------------------------------
 //   adjustBracketsDel
@@ -888,30 +890,33 @@ void Score::removeStaff(Staff* staff)
       int track = idx * VOICES;
       foreach(Element* e, _gel) {
             switch(e->type()) {
-          case SLUR:
-            Slur* slur = (Slur*)e;
-            if (slur->track() > track)
-                  slur->setTrack(slur->track() - VOICES);
-            if (slur->track2() > track)
-                  slur->setTrack2(slur->track2() - VOICES);
-            break;
-          case VOLTA:  //volta alway attached to top staff
-            break;
-          case OTTAVA:
-          case TRILL:
-          case PEDAL:
-          case HAIRPIN:
-          case TEXTLINE:
-            SLine* line = (SLine*)e;
-            if (line->track() > track) {
-              line->setTrack(line->track() - VOICES);
+                  case SLUR:
+                        {
+                        Slur* slur = static_cast<Slur*>(e);
+                        if (slur->track() > track)
+                              slur->setTrack(slur->track() - VOICES);
+                        if (slur->track2() > track)
+                              slur->setTrack2(slur->track2() - VOICES);
+                        }
+                        break;
+                  case VOLTA:  //volta alway attached to top staff
+                        break;
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        if (line->track() > track)
+                              line->setTrack(line->track() - VOICES);
+                        }
+                        break;
+                  default:
+                        break;
+                  }
             }
-            break;
-          default:
-            break;
-        }
       }
-  }
 
 //---------------------------------------------------------
 //   sortStaves
