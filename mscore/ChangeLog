@@ -1,3 +1,5 @@
+12.oct (la)
+      - fix issues with lines and remove/add instrument
 11.oct (ws)
       - move flexible splitting of note durations
       - restrict denominator values to 2^^n

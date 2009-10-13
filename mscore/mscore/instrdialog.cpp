@@ -765,16 +765,32 @@ void Score::insertStaff(Staff* staff, int idx)
 
       int track = idx * VOICES;
       foreach(Element* e, _gel) {
-            if (e->type() == SLUR) {
-                  Slur* slur = (Slur*)e;
-                  if (slur->track() >= track) {
-                        slur->setTrack(slur->track() + VOICES);
-                        }
-                  if (slur->track2() >= track)
-                        slur->setTrack2(slur->track2() + VOICES);
+        switch(e->type()) {
+          case SLUR:
+            Slur* slur = (Slur*)e;
+            if (slur->track() >= track) {
+                  slur->setTrack(slur->track() + VOICES);
                   }
+            if (slur->track2() >= track)
+                  slur->setTrack2(slur->track2() + VOICES);
+            break;
+          case VOLTA: //volta alway attached to top staff
+            break;
+          case OTTAVA:
+          case TRILL:
+          case PEDAL:
+          case HAIRPIN:
+          case TEXTLINE:
+            SLine* line = (SLine*)e;
+            if (line->track() >= track) {
+              line->setTrack(line->track() + VOICES);
             }
+            break;
+          default:
+            break;
+        }
       }
+  }
 
 //---------------------------------------------------------
 //   adjustBracketsDel
@@ -833,9 +849,13 @@ void Score::cmdRemoveStaff(int staffIdx)
       {
       foreach(Element* e, _gel) {
             switch(e->type()) {
-                  case VOLTA:
+                  case VOLTA: //volta alway attached to top staff
+                    break;
+                  case OTTAVA:
                   case TRILL:
                   case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
                         if (e->staffIdx() == staffIdx) {
                               undoRemoveElement(e);
                               }
@@ -867,15 +887,31 @@ void Score::removeStaff(Staff* staff)
       staff->part()->removeStaff(staff);
       int track = idx * VOICES;
       foreach(Element* e, _gel) {
-            if (e->type() == SLUR) {
-                  Slur* slur = (Slur*)e;
-                  if (slur->track() > track)
-                        slur->setTrack(slur->track() - VOICES);
-                  if (slur->track2() > track)
-                        slur->setTrack2(slur->track2() - VOICES);
-                  }
+            switch(e->type()) {
+          case SLUR:
+            Slur* slur = (Slur*)e;
+            if (slur->track() > track)
+                  slur->setTrack(slur->track() - VOICES);
+            if (slur->track2() > track)
+                  slur->setTrack2(slur->track2() - VOICES);
+            break;
+          case VOLTA:  //volta alway attached to top staff
+            break;
+          case OTTAVA:
+          case TRILL:
+          case PEDAL:
+          case HAIRPIN:
+          case TEXTLINE:
+            SLine* line = (SLine*)e;
+            if (line->track() > track) {
+              line->setTrack(line->track() - VOICES);
             }
+            break;
+          default:
+            break;
+        }
       }
+  }
 
 //---------------------------------------------------------
 //   sortStaves
