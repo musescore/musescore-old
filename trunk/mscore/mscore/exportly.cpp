@@ -2029,7 +2029,6 @@ void ExportLy::writeTremolo(Chord * chord)
 
 void ExportLy::writeChord(Chord* c)
 {
-  bool graceslur=false;
   int  purepitch;
   QString purename, chordnote;
   int pitchlist[12];
@@ -2061,10 +2060,9 @@ void ExportLy::writeChord(Chord* c)
   bool tie=false;
   NoteList* nl = c->noteList();
 
-  if (nl->size() > 1)
-    {
-    out << "<";
-    }
+  bool chordstart=false;
+
+  if (nl->size() > 1) chordstart = true;
 
   j=0;
 
@@ -2076,14 +2074,19 @@ void ExportLy::writeChord(Chord* c)
       switch(gracen)
 	{
 	case NOTE_INVALID:
-	case NOTE_NORMAL: if (graceswitch==true)
+	case NOTE_NORMAL: 
+	  if (graceswitch==true)
 	    {
 	      graceswitch=false;
-	      graceslur=true;
 	      gracebeam=false;
 	      if (gracecount > 1) out << " ] "; //single graces are not beamed
 	      out << " } \\stemNeutral "; //end of grace
 	      gracecount=0;
+	    }
+	  if (chordstart)
+	    {
+	      out << "<";
+	      chordstart=false;
 	    }
 	  break;
 	case NOTE_ACCIACCATURA:
@@ -2173,11 +2176,6 @@ void ExportLy::writeChord(Chord* c)
   writeLen(c->tickLen());
   writeTremolo(c);
 
-  if (graceswitch)
-    {
-      out << " ( "; //gracenotes always slurred. Remove by hand in lilyfile otherwise.
-    }
-
   if (tie)
     {
       out << "~";
@@ -2193,12 +2191,6 @@ void ExportLy::writeChord(Chord* c)
       tupletcount=0;
     }
 
-  if (graceslur==true)
-    {
-      out << " ) ";
-      graceslur=false;
-    }
-
   out << " ";
 
 }// end of writechord
@@ -2211,6 +2203,7 @@ void ExportLy::writeChord(Chord* c)
 int ExportLy::getLen(int l, int* dots)
 {
   int len  = 4;
+
   if (l == 16 * AL::division) //longa, whole measure of 4/2-time
     len=-2;
   else if (l == 12 * AL::division) // "6/2" "dotted brevis" used for whole-measure rest in 6/2 time.
@@ -2219,16 +2212,18 @@ int ExportLy::getLen(int l, int* dots)
     len=-4;
   else if (l == 8 * AL::division) //brevis
     len = -1;
-  else if      (l == 6 * AL::division) //dotted whole
-    {
-      len  = 1;
-      *dots = 1;
-    }
-  else if (l == 5 * AL::division) //doubledotted whole
+  else if (l == 7 * AL::division) //doubledotted whole
     {
       len = 1;
       *dots = 2;
     }
+  else if (l == 6 * AL::division) //dotted whole
+    {
+      len  = 1;
+      *dots = 1;
+    }
+  else if (l == 5 * AL::division) // whole measure of 5/4-time
+      len = -5;
   else if (l == 4 * AL::division) //whole
     len = 1;
   else if (l == 3 * AL::division) // dotted half
@@ -2299,6 +2294,9 @@ void ExportLy::writeLen(int ticks)
     {
       switch (len)
 	{
+	case -5:
+	  out << "1*5/4";
+	  break;
 	case -4:
 	  out << "2*5 ";
 	  break;
@@ -2951,7 +2949,7 @@ void ExportLy::writeScore()
 void ExportLy::writeScoreBlock()
 {
   
-  if ((nochord==false))// && (chordThis->next !=NULL))   // output the chords as a separate staff before the score-block
+  if (nochord==false) // output the chords as a separate staff before the score-block
     {  
       os  << "theChords = \\chordmode { \n";
       printChordList();
@@ -2994,7 +2992,7 @@ void ExportLy::writeScoreBlock()
 	}
 
 
-      if ((nochord == false) && (indx==0))// && (chordThis->next !=NULL)   ) //insert chords as the first staff.
+      if ((nochord == false) && (indx==0)) //insert chords as the first staff.
 	{
 	  indentF();
 	  os << "\\new ChordNames { \\theChords } \n";
@@ -3300,7 +3298,9 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
-   11.oct. 2009 (olav) started on lilypond \chordmode
+   13.oct fixed grace-note-troubles on demos: golliwogg and troubles
+   with wholemeasure rests in the shifting timesignatures in
+   promenade. Started on lilypond \chordmode
 
    08.okt.  (olav) Tremolo. Segno and Coda. Correct insertion of s-rests
           in demo: adeste.
@@ -3400,9 +3400,10 @@ bool ExportLy::write(const QString& name)
       main program to see how the anchorpoints and the canvas-position
       is made and compensate for this when exporting the lily-symbols.
 
+   -- Arpeggio.
    -- ExportLy::symbol(): rcomma not supported
    -- 8vabassa
-   -- massive failure on gollywog and Bilder
+   -- octave-trouble in golliwogg.
    -- metronome marks must be given as \tempo 4 = 60 and not as markups.
    -- close second volta.
    -- Coda/Segno symbols collides with rehearsalmarks, which accordingly are not printed.
@@ -3412,7 +3413,8 @@ bool ExportLy::write(const QString& name)
    -- Lyrics (low priority in relation to music itself)
    -- Collisions in crowded multi-voice staffs (e.g. cello-suite).
    -- General tuplets
-   -- barcheck fails in Bilder etc.etc.
+   -- massive failure on demos: prelude_sr.mscz
+
 
  */
 
