@@ -48,6 +48,8 @@ class PortMidiDriver : public MidiDriver {
       virtual void getOutputPollFd(struct pollfd**, int* n);
       virtual void read();
       virtual void write(const Event&);
+      QStringList deviceInList() const;
+      int getDeviceIn(char* name);
       };
 
 #endif

@@ -29,7 +29,7 @@ cmake_policy(SET CMP0003 NEW)
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
-set(HAS_AUDIOFILE FALSE)                   # requires libsndfile
+set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
