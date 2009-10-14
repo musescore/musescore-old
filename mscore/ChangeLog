@@ -1,7 +1,10 @@
+14.oct (tb)
+      - update Spanish translation by alkayata
+      - update Danish translation by Morton Poulson
 13.oct (og) 
-	-- exportly: 13.oct fixed grace-note-troubles on demos: golliwogg
-	and troubles with wholemeasure rests in the shifting
-	timesignatures in promenade. Started on lilypond \chordmode
+	    - exportly: 13.oct fixed grace-note-troubles on demos: golliwogg
+	      and troubles with wholemeasure rests in the shifting
+	      timesignatures in promenade. Started on lilypond \chordmode
 12.oct (la)
       - fix issues with lines and remove/add instrument
 11.oct (ws)
