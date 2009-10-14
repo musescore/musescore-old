@@ -130,7 +130,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -668,6 +668,9 @@
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <layout class="QFormLayout" name="formLayout">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_52">
               <property name="text">
@@ -696,6 +699,23 @@
                <double>1000.000000000000000</double>
               </property>
              </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_29">
+              <property name="text">
+               <string>Fix Number of Measures/System:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="fixMeasureWidth">
+              <property name="text">
+               <string>Fix Measure Width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="fixNumberMeasures"/>
             </item>
            </layout>
           </item>

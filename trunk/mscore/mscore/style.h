@@ -271,6 +271,9 @@ enum StyleIdx {
       ST_ArpeggioLineWidth,
       ST_ArpeggioHookLen,
 
+      ST_FixMeasureNumbers,
+      ST_FixMeasureWidth,
+
       ST_STYLES
       };
 
