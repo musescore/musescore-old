@@ -1,7 +1,10 @@
-14.oct (tb)
+14.oct (ws)
+      - new style option to create a fixed number of measures/system optional
+        of equal width
+      (tb)
       - update Spanish translation by alkayata
       - update Danish translation by Morton Poulson
-13.oct (og) 
+13.oct (og)
 	    - exportly: 13.oct fixed grace-note-troubles on demos: golliwogg
 	      and troubles with wholemeasure rests in the shifting
 	      timesignatures in promenade. Started on lilypond \chordmode

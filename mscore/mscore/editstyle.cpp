@@ -204,6 +204,9 @@ void EditStyle::getValues()
       lstyle.set(ST_ArpeggioLineWidth,       Spatium(arpeggioLineWidth->value()));
       lstyle.set(ST_ArpeggioHookLen,         Spatium(arpeggioHookLen->value()));
 
+      lstyle.set(ST_FixMeasureNumbers,       fixNumberMeasures->value());
+      lstyle.set(ST_FixMeasureWidth,         fixMeasureWidth->isChecked());
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
@@ -327,6 +330,9 @@ void EditStyle::setValues()
             cb->setCurrentIndex(idx);
             }
 //      warnPitchRange->setChecked(lstyle[ST_warnPitchRange].toBool());
+
+      fixNumberMeasures->setValue(lstyle[ST_FixMeasureNumbers].toInt());
+      fixMeasureWidth->setChecked(lstyle[ST_FixMeasureWidth].toBool());
       }
 
 //---------------------------------------------------------

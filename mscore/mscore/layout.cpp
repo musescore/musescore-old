@@ -639,7 +639,11 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
             minWidth += ww;
             system->measures().append(curMeasure);
-            if (continueFlag || curMeasure->pageBreak() || curMeasure->lineBreak() || (curMeasure->next() && curMeasure->next()->type() == VBOX)) {
+            int n = styleI(ST_FixMeasureNumbers);
+            if ((n && system->measures().size() >= n)
+               || continueFlag || curMeasure->pageBreak()
+               || curMeasure->lineBreak()
+               || (curMeasure->next() && curMeasure->next()->type() == VBOX)) {
                   system->setPageBreak(curMeasure->pageBreak());
                   curMeasure = nextMeasure;
                   break;
@@ -884,8 +888,13 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               }
                         mb->setPos(pos);
                         Measure* m    = static_cast<Measure*>(mb);
-                        double weight = m->tickLen() * m->userStretch();
-                        ww            = m->layoutWidth().stretchable + rest * weight;
+                        if (styleB(ST_FixMeasureWidth)) {
+                              ww = rowWidth / system->measures().size();
+                              }
+                        else {
+                              double weight = m->tickLen() * m->userStretch();
+                              ww            = m->layoutWidth().stretchable + rest * weight;
+                              }
                         m->layout(ww);
                         }
                   else if (mb->type() == HBOX) {
