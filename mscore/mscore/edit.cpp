@@ -268,8 +268,9 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
 Note* Score::addNote(Chord* chord, int pitch)
       {
       Note* note = new Note(this);
-      note->setPitch(pitch);
       note->setParent(chord);
+      note->setTrack(chord->track());
+      note->setPitch(pitch);
       cmdAdd(note);
       spell(note);
       mscore->play(note);

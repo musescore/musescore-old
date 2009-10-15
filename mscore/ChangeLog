@@ -5,6 +5,7 @@
 	    - Move lines with staff
 	    - fix crash on playback with 8th and 16th
 	    - fix crash with note entry and remove part
+	    - fix transposing instruments playback wrong
 14.oct (ws)
       - new style option to create a fixed number of measures/system optional
         of equal width

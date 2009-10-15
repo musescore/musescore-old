@@ -705,9 +705,9 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
                   else {
                         Note* note = new Note(this);
                         nr = note;
+                        note->setTrack(track);
                         note->setPitch(pitch);
                         note->setHeadGroup(headGroup);
-                        note->setTrack(track);
                         mscore->play(note);
 
                         if (tie) {
