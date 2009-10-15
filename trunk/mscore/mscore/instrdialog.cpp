@@ -889,7 +889,7 @@ void Score::removeStaff(Staff* staff)
       int idx = staff->idx();
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
-      int track = idx * VOICES;      
+      int track = idx * VOICES;
       foreach(Element* e, _gel) {
             switch(e->type()) {
                   case SLUR:
@@ -950,14 +950,16 @@ void Score::sortStaves(QList<int>& dst)
             }
       foreach(Element* e, _gel) {
             switch(e->type()) {
-                  case SLUR: 
-                    Slur* slur    = static_cast<Slur*>(e);
-                    int staffIdx  = slur->startElement()->staffIdx();
-                    int voice     = slur->startElement()->voice();
-                    int staffIdx2 = slur->endElement()->staffIdx();
-                    int voice2    = slur->endElement()->voice();
-                    slur->setTrack(dst[staffIdx] * VOICES + voice);
-                    slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                  case SLUR:
+                        {
+                        Slur* slur    = static_cast<Slur*>(e);
+                        int staffIdx  = slur->startElement()->staffIdx();
+                        int voice     = slur->startElement()->voice();
+                        int staffIdx2 = slur->endElement()->staffIdx();
+                        int voice2    = slur->endElement()->voice();
+                        slur->setTrack(dst[staffIdx] * VOICES + voice);
+                        slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                        }
                     break;
                   case VOLTA:  //volta always attached to top staff
                         break;
@@ -966,15 +968,17 @@ void Score::sortStaves(QList<int>& dst)
                   case PEDAL:
                   case HAIRPIN:
                   case TEXTLINE:
+                        {
                         SLine* line = static_cast<SLine*>(e);
-                        voice    = line->voice();
-                        staffIdx = line->staffIdx();
+                        int voice    = line->voice();
+                        int staffIdx = line->staffIdx();
                         int idx = dst.indexOf(staffIdx);
                         line->setTrack(idx * VOICES + voice);
+                        }
                         break;
                   default:
                         break;
-                }                  
+                }
             }
       }
 
