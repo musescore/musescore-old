@@ -292,7 +292,7 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
             if (note)
                   boundingRect |= item->mapToScene(item->boundingRect()).boundingRect();
             }
-      centerOn(mapFromScene(boundingRect).boundingRect().center());
+      centerOn(boundingRect.center());
       }
 
 //---------------------------------------------------------

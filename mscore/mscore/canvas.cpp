@@ -289,15 +289,15 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       a->setData("edit-drumset");
       a->setEnabled(staff->part()->drumset() != 0);
 
-      if (enableExperimental) {
-            if (staff->part()->drumset()) {
+      if (staff->part()->drumset()) {
+            if (enableExperimental) {
                   a = popup->addAction(tr("Drumroll Editor..."));
                   a->setData("drumroll");
                   }
-            else {
-                  a = popup->addAction(tr("Pianoroll Editor..."));
-                  a->setData("pianoroll");
-                  }
+            }
+      else {
+            a = popup->addAction(tr("Pianoroll Editor..."));
+            a->setData("pianoroll");
             }
 
       a = popup->addAction(tr("Staff Properties..."));

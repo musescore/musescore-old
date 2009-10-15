@@ -154,7 +154,7 @@ void PianorollEditor::setStaff(Staff* st)
       for (int i = 0; i < 3; ++i)
             locator[i].setContext(tl, sl);
 
-      locator[0].setTick(480 * 5 + 240);
+      locator[0].setTick(480 * 5 + 240);  // some random test values
       locator[1].setTick(480 * 3 + 240);
       locator[2].setTick(480 * 12 + 240);
 
