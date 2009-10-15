@@ -583,6 +583,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
                   if (n < 0) {
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
+						n=0;
                         }
                   driver->process(n, l, r, stride);
                   l         += n * stride;
