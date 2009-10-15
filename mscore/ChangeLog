@@ -1,3 +1,6 @@
+15.oct. (og)
+	- conditional output of exportly's lilypond macros (\okt and
+	\segno). bugfix for repeats.
 14.oct (ws)
       - new style option to create a fixed number of measures/system optional
         of equal width
