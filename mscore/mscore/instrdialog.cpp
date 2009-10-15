@@ -851,7 +851,7 @@ void Score::cmdRemoveStaff(int staffIdx)
       {
       foreach(Element* e, _gel) {
             switch(e->type()) {
-                  case VOLTA: //volta alway attached to top staff
+                  case VOLTA: //volta always attached to top staff
                     break;
                   case OTTAVA:
                   case TRILL:
@@ -887,7 +887,7 @@ void Score::removeStaff(Staff* staff)
       int idx = staff->idx();
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
-      int track = idx * VOICES;
+      int track = idx * VOICES;      
       foreach(Element* e, _gel) {
             switch(e->type()) {
                   case SLUR:
@@ -899,7 +899,7 @@ void Score::removeStaff(Staff* staff)
                               slur->setTrack2(slur->track2() - VOICES);
                         }
                         break;
-                  case VOLTA:  //volta alway attached to top staff
+                  case VOLTA:  //volta always attached to top staff
                         break;
                   case OTTAVA:
                   case TRILL:
@@ -947,15 +947,32 @@ void Score::sortStaves(QList<int>& dst)
             m->sortStaves(dst);
             }
       foreach(Element* e, _gel) {
-            if (e->type() == SLUR) {
-                  Slur* slur    = static_cast<Slur*>(e);
-                  int staffIdx  = slur->startElement()->staffIdx();
-                  int voice     = slur->startElement()->voice();
-                  int staffIdx2 = slur->endElement()->staffIdx();
-                  int voice2    = slur->endElement()->voice();
-                  slur->setTrack(dst[staffIdx] * VOICES + voice);
-                  slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
-                  }
+            switch(e->type()) {
+                  case SLUR: 
+                    Slur* slur    = static_cast<Slur*>(e);
+                    int staffIdx  = slur->startElement()->staffIdx();
+                    int voice     = slur->startElement()->voice();
+                    int staffIdx2 = slur->endElement()->staffIdx();
+                    int voice2    = slur->endElement()->voice();
+                    slur->setTrack(dst[staffIdx] * VOICES + voice);
+                    slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                    break;
+                  case VOLTA:  //volta always attached to top staff
+                        break;
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        SLine* line = static_cast<SLine*>(e);
+                        voice    = line->voice();
+                        staffIdx = line->staffIdx();
+                        int idx = dst.indexOf(staffIdx);
+                        line->setTrack(idx * VOICES + voice);
+                        break;
+                  default:
+                        break;
+                }                  
             }
       }
 
