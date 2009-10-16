@@ -165,7 +165,7 @@ p, li { white-space: pre-wrap; }
     <name>ArticulationProperties</name>
     <message>
         <source>normal</source>
-        <translation>Normal</translation>
+        <translation type="unfinished">normal</translation>
     </message>
     <message>
         <source>MuseScore: Articulations Properties</source>
@@ -1800,11 +1800,11 @@ space unit</extracomment>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Set invisible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set visible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Color...</source>
@@ -3216,7 +3216,7 @@ before closing?</source>
     </message>
     <message>
         <source>normal</source>
-        <translation>Normal</translation>
+        <translation type="unfinished">Normal</translation>
     </message>
     <message>
         <source>broken</source>
@@ -6748,7 +6748,7 @@ Try saving to a different location.</source>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation>Normal</translation>
+        <translation type="unfinished">normal</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
@@ -7010,11 +7010,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Set invisible</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set visible</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
