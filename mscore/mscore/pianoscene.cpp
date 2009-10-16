@@ -173,7 +173,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
       pos1.mbt(&bar1, &beat, &tick);
       pos2.mbt(&bar2, &beat, &tick);
 
-      int n = mag[magStep];
+      int n = mag[magStep < 0 ? 0 : magStep];
 
       bar1 = (bar1 / n) * n;           // round down
       if (bar1 && n >= 2)
@@ -182,7 +182,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
 
       for (int bar = bar1; bar <= bar2;) {
             AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
-            if (magStep) {
+            if (magStep > 0) {
                   double x = double(pos2pix(stick));
                   if (x > 0) {
                         p->setPen(Qt::lightGray);
@@ -196,17 +196,53 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
             else {
                   int z = stick.timesig().nominator;
                   for (int beat = 0; beat < z; beat++) {
-                        AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
-                        int xp = pos2pix(xx);
-                        if (xp < 0)
-                              continue;
-                        if (xp > 0) {
-                              p->setPen(beat == 0 ? Qt::lightGray : Qt::gray);
-                              p->drawLine(xp, y1, xp, y2);
+                        if (magStep == 0) {
+                              AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
+                              int xp = pos2pix(xx);
+                              if (xp < 0)
+                                    continue;
+                              if (xp > 0) {
+                                    p->setPen(beat == 0 ? Qt::lightGray : Qt::gray);
+                                    p->drawLine(xp, y1, xp, y2);
+                                    }
+                              else {
+                                    p->setPen(Qt::black);
+                                    p->drawLine(xp, y1, xp, y2);
+                                    }
+                              }
+                        else if (magStep == -1) {
+                              int n = (AL::division * 4) / stick.timesig().denominator;
+                              for (int i = 0; i < 2; ++i) {
+                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ 2);
+                                    int xp = pos2pix(xx);
+                                    if (xp < 0)
+                                          continue;
+                                    if (xp > 0) {
+                                          p->setPen(i == 0 && beat == 0 ? Qt::lightGray : Qt::gray);
+                                          p->drawLine(xp, y1, xp, y2);
+                                          }
+                                    else {
+                                          p->setPen(Qt::black);
+                                          p->drawLine(xp, y1, xp, y2);
+                                          }
+                                    }
                               }
                         else {
-                              p->setPen(Qt::black);
-                              p->drawLine(xp, y1, xp, y2);
+                              int n = (AL::division * 4) / stick.timesig().denominator;
+                              for (int i = 0; i < 4; ++i) {
+                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ 4);
+                                    int xp = pos2pix(xx);
+                                    if (xp < 0)
+                                          continue;
+                                    if (xp > 0) {
+                                          p->setPen(i == 0 && beat == 0 ? Qt::lightGray : Qt::gray);
+                                          p->drawLine(xp, y1, xp, y2);
+                                          }
+                                    else {
+                                          p->setPen(Qt::black);
+                                          p->drawLine(xp, y1, xp, y2);
+                                          }
+                                    }
                               }
                         }
                   }
@@ -340,20 +376,25 @@ void PianoView::wheelEvent(QWheelEvent* event)
             emit magChanged(xmag, ymag);
 
             int tpix  = (480 * 4) * xmag;
-            magStep = 0;
-            if (tpix < 64)
+            magStep = -3;
+            if (tpix <= 1000)
+                  magStep = -2;
+            if (tpix <= 500)
+                  magStep = -1;
+            if (tpix <= 128)
+                  magStep = 0;
+            if (tpix <= 64)
                   magStep = 1;
-            if (tpix < 32)
+            if (tpix <= 32)
                   magStep = 2;
             if (tpix <= 16)
                   magStep = 3;
-            if (tpix < 8)
+            if (tpix <= 8)
                   magStep = 4;
             if (tpix <= 4)
                   magStep = 5;
             if (tpix <= 2)
                   magStep = 6;
-
 
             //
             // if xpos <= 0, then the scene is centered

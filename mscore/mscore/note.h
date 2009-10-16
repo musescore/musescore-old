@@ -218,16 +218,18 @@ class Note : public Element {
       void setVeloOffset(int v)        { _veloOffset = v;    }
 
       ValueType onTimeType() const     { return _onTimeType;    }
+      void setOnTimeType(ValueType v)  { _onTimeType = v;       }
       int onTimeOffset() const         { return _onTimeOffset;  }
-      void setOnTimeOffset(int v)      { _onTimeOffset = v;  }
+      void setOnTimeOffset(int v)      { _onTimeOffset = v;     }
       int onTimeUserOffset() const     { return _onTimeOffset;  }
-      void setOnUserTimeOffset(int v)  { _onTimeOffset = v;  }
+      void setOnUserTimeOffset(int v)  { _onTimeOffset = v;     }
 
-      ValueType offTimeType() const    { return _offTimeType;    }
-      int offTimeOffset() const        { return _offTimeOffset;  }
-      void setOffTimeOffset(int v)     { _offTimeOffset = v;  }
-      int offTimeUserOffset() const    { return _offTimeOffset;  }
-      void setOffUserTimeOffset(int v) { _offTimeOffset = v;  }
+      ValueType offTimeType() const    { return _offTimeType;   }
+      void setOffTimeType(ValueType v) { _offTimeType = v;      }
+      int offTimeOffset() const        { return _offTimeOffset; }
+      void setOffTimeOffset(int v)     { _offTimeOffset = v;    }
+      int offTimeUserOffset() const    { return _offTimeOffset; }
+      void setOffUserTimeOffset(int v) { _offTimeOffset = v;    }
       };
 
 //---------------------------------------------------------

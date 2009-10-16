@@ -310,7 +310,7 @@ class Score : public QObject {
       void moveUp(Note*);
       void moveDown(Note*);
 
-      void convertMidi(MidiFile*, int);
+      void convertMidi(MidiFile*);
       void convertCapella(Capella* cap);
       int readCapVoice(CapVoice* cvoice, int staffIdx, int tick);
       void convertTrack(MidiTrack*);

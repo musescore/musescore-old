@@ -1010,6 +1010,8 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
             if (e->type() == ME_NOTE) {
 	            int len  = quantizeLen(division, e->duration(), raster);
       	      int tick = (e->ontime() / raster) * raster;
+                  e->setNoquantOntime(e->ontime());
+                  e->setNoquantDuration(e->duration());
 	            e->setOntime(tick);
       	      e->setDuration(len);
                   }

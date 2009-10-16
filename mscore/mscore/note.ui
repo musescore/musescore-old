@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>660</width>
-    <height>325</height>
+    <width>733</width>
+    <height>284</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -101,9 +101,6 @@
          <number>5</number>
         </property>
        </widget>
-      </item>
-      <item row="2" column="4" rowspan="4">
-       <widget class="QListWidget" name="fingering"/>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_3">
@@ -216,13 +213,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="4">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string notr="true" comment="do not translate">Subelements:</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="ppitch">
         <property name="maximum">
@@ -244,7 +234,109 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="4">
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>OnTimeType:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QComboBox" name="onTimeType">
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>User</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Offset</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QSpinBox" name="onTimeOffset">
+        <property name="minimum">
+         <number>-999999</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QSpinBox" name="onTimeUserOffset">
+        <property name="minimum">
+         <number>-999999</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>OffTimeType:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QComboBox" name="offTimeType">
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>User</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Offset</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QSpinBox" name="offTimeOffset">
+        <property name="minimum">
+         <number>-999999</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <widget class="QSpinBox" name="offTimeUserOffset">
+        <property name="minimum">
+         <number>-999999</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string notr="true" comment="do not translate">Subelements:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5" rowspan="4" colspan="3">
+       <widget class="QListWidget" name="fingering"/>
+      </item>
+      <item row="7" column="5">
        <widget class="QComboBox" name="userMirror">
         <item>
          <property name="text">

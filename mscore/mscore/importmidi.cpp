@@ -784,10 +784,10 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
 //   convertMidi
 //---------------------------------------------------------
 
-void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
+void Score::convertMidi(MidiFile* mf)
       {
       mf->separateChannel();
-      mf->process1();
+      mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
       mf->changeDivision(AL::division);
 
       *_sigmap = mf->siglist();
@@ -967,7 +967,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
 	foreach (MidiTrack* midiTrack, *tracks) {
             if (midiTrack->staffIdx() == -1)
                   continue;
-            midiTrack->cleanup();
+            midiTrack->cleanup();   // quantize
             }
 
       //---------------------------------------------------
@@ -1109,6 +1109,11 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         		note->setTrack(chord->track());
                   	      	chord->add(note);
                                     note->setTick(tick);
+                                    note->setOnTimeType(USER_VAL);
+                                    note->setOnTimeOffset(mn->noquantOntime() - tick);
+                                    note->setOffTimeType(USER_VAL);
+                                    int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                                    note->setOffTimeOffset(ot);
 
                                     if (useDrumset) {
                                           if (!drumset->isValid(mn->pitch())) {
@@ -1210,6 +1215,11 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               note->setTick(tick);
                               note->setTpc(mn->tpc());
             	      	chord->add(note);
+                              note->setOnTimeType(USER_VAL);
+                              note->setOnTimeOffset(tick - mn->noquantOntime() - tick);
+                              note->setOffTimeType(USER_VAL);
+                              int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                              note->setOffTimeOffset(ot);
                               }
                         n->mc->setDuration(n->mc->duration() - len);
                         if (n->mc->duration() <= 0) {
@@ -1346,7 +1356,7 @@ bool Score::importMidi(const QString& name)
       mf.setShortestNote(shortestNote);
 
       _saved = false;
-      convertMidi(&mf, shortestNote);
+      convertMidi(&mf);
       _created = true;
       return true;
       }
