@@ -685,7 +685,7 @@ void Measure::layout0()
                      || segment->subtype() == Segment::SegTimeSig) {
                         if (e && !e->generated())
                               _breakMMRest = true;
-                        }
+                        }      
                   if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
                         layoutChords0(segment, staffIdx * VOICES, tversatz);
                   if (e && e->type() == KEYSIG) {
@@ -705,6 +705,14 @@ void Measure::layout0()
                         layoutChords1(segment, staffIdx);
                   }
             }
+            
+            MeasureBase* mb = prev();
+            if (mb && mb->type() == MEASURE){
+                  Measure* prev = static_cast<Measure*>(mb);
+                  if (prev->endBarLineType() != NORMAL_BAR)
+                        _breakMMRest = true;
+              }
+            
       foreach(Beam* beam, _beams) {
             if (beam->elements().isEmpty()) {
                   remove(beam);

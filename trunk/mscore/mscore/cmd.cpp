@@ -269,7 +269,6 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
                   uo -= QPointF(0.0, dyn->ipos().y());
                   dyn->setUserOff(uo);
-                  fixPpitch();      // recalculate all velocities
                   }
                   break;
             default:
