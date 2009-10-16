@@ -133,6 +133,9 @@ class Event {
       int _type;
 
       int _ontime;
+      int _noquantOntime;
+      int _noquantDuration;
+
       int _channel;     // mscore channel number, not midi channel
       int _a, _b;
       double _tuning;
@@ -142,8 +145,8 @@ class Event {
       int _voice;
       QList<Event*> _notes;
 
-      int _len;
       unsigned char* _data;
+      int _len;
       int _metaType;
 
       Note* _note;
@@ -159,6 +162,11 @@ class Event {
       void read(QDomElement);
 
       bool isChannelEvent() const;
+
+      int noquantOntime() const      { return _noquantOntime;       }
+      void setNoquantOntime(int v)   { _noquantOntime = v;          }
+      int noquantDuration() const    { return _noquantDuration;     }
+      void setNoquantDuration(int v) { _noquantDuration = v;        }
 
       int type() const               { return _type;                }
       void setType(int v)            { _type = v;                   }
