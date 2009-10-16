@@ -1,4 +1,6 @@
-15.oct. (og)
+15.oct (tb)
+      - correcting Norwegian iso code from no to nb 
+15.oct (og)
 	    - conditional output of exportly's lilypond macros (\okt and
 	       \segno). bugfix for repeats.
 	   (la)
