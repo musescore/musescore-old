@@ -61,7 +61,7 @@ LanguageItem languages[] = {
       LanguageItem("cs",    QT_TR_NOOP("Czech")),
       LanguageItem("da",    QT_TR_NOOP("Dansk")),
       LanguageItem("nl",    QT_TR_NOOP("Nederlands")),
-      LanguageItem("no",    QT_TR_NOOP("Norsk")),
+      LanguageItem("nb",    QT_TR_NOOP("Norsk")),
       LanguageItem("en_GB", QT_TR_NOOP("English (GB)")),
       LanguageItem("en",    QT_TR_NOOP("English (US)")),
       LanguageItem("es",    QT_TR_NOOP("Español")),
