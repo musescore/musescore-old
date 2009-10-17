@@ -1,5 +1,7 @@
 17.oct (ws)
       - remove cursor when leaving note entry mode
+      (la)
+      - add catalan translation mscore_ca.ts
 15.oct (tb)
       - correcting Norwegian iso code from no to nb
       (og)

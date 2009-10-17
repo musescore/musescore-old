@@ -23,6 +23,8 @@ install(FILES
       mscore_af.qm
       mscore_ar.ts
       mscore_ar.qm
+      mscore_ca.ts
+      mscore_ca.qm
       mscore_cs.ts
       mscore_cs.qm
       mscore_da.ts
