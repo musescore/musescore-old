@@ -187,6 +187,7 @@ void MeasureProperties::apply()
             if (i != sl->end())
                   oldEvent = i->second;
 
+            score->undoFixTicks();
             score->undoChangeSig(m->tick(), oldEvent, newEvent);
 
             //
@@ -199,7 +200,7 @@ void MeasureProperties::apply()
                   }
             // score->select(0, SELECT_SINGLE, 0);
             m->adjustToLen(oldLen, newLen);
-            score->fixTicks();
+            score->undoFixTicks();
             score->select(m, SELECT_RANGE, 0);
             }
       score->renumberMeasures();
