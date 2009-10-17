@@ -38,7 +38,7 @@ enum fluid_voice_status {
  * envelope data
  */
 struct fluid_env_data_t {
-	unsigned int count;
+	unsigned int count;     // sample count
 	float coeff;
 	float incr;
 	float min;
@@ -215,7 +215,7 @@ class Voice
       void check_sample_sanity();
       void noteoff();
       void kill_excl();
-      int calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_decay);
+      int calculate_hold_decay_frames(int gen_base, int gen_key2base, int is_decay);
 
       /* A voice is 'ON', if it has not yet received a noteoff
        * event. Sending a noteoff event will advance the envelopes to

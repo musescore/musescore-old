@@ -37,7 +37,7 @@ class Reverb;
 class Chorus;
 class Fluid;
 
-#define FLUID_BUFSIZE           4096
+#define FLUID_MAX_BUFSIZE       4096
 #define FLUID_NUM_PROGRAMS      129
 
 enum fluid_loop {
