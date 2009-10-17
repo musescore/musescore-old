@@ -29,7 +29,7 @@ cmake_policy(SET CMP0003 NEW)
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
-set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
+set(HAS_AUDIOFILE FALSE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
@@ -151,7 +151,7 @@ endif (APPLE OR MINGW)
 ## find jack >= 0.98.0
 ##
 
-if (MINGW)     
+if (MINGW)
       set (USE_JACK 1)
       set (JACK_INCDIR "C:/Program Files/Jack v1.9.3/includes")
       set (JACK_LIB "C:/Program Files/Jack v1.9.3/lib/libjack.a")
