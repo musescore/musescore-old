@@ -1192,10 +1192,11 @@ void Score::setNoteEntry(bool val)
                   QList<SlurSegment*>* el = _is.slur->slurSegments();
                   if (!el->isEmpty())
                         el->front()->setSelected(false);
-                  ((ChordRest*)_is.slur->startElement())->addSlurFor(_is.slur);
-                  ((ChordRest*)_is.slur->endElement())->addSlurBack(_is.slur);
+                  static_cast<ChordRest*>(_is.slur->startElement())->addSlurFor(_is.slur);
+                  static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
                   _is.slur = 0;
                   }
+            canvas()->moveCursor();
             }
       canvas()->setState(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
       setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
@@ -2070,7 +2071,7 @@ void Score::removeElement(Element* element)
       switch(element->type()) {
             case OTTAVA:
             case DYNAMIC:
-                  fixPpitch();  
+                  fixPpitch();
                   _playlistDirty = true;
                   break;
 
