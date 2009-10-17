@@ -2149,7 +2149,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
             }
       int dx = 0;
       int dy = 0;
-      if (event->modifiers() & Qt::ShiftModifier) {
+      if (event->modifiers() & Qt::ShiftModifier || event->orientation() == Qt::Horizontal) {
             //
             //    scroll horizontal
             //
