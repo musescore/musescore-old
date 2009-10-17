@@ -279,21 +279,20 @@ int Voice::dsp_float_interpolate_4th_order(unsigned n)
       float dsp_amp_incr  = amp_incr;
       unsigned int dsp_i  = 0;
       unsigned int dsp_phase_index;
-      unsigned int start_index, end_index;
+      unsigned int start_index;
       short int start_point, end_point1, end_point2;
       float *coeffs;
-      int looping;
 
       /* Convert playback "speed" floating point value to phase index/fract */
       dsp_phase_incr.setFloat(phase_incr);
 
       /* voice is currently looping? */
-      looping = SAMPLEMODE() == FLUID_LOOP_DURING_RELEASE
+      int looping = SAMPLEMODE() == FLUID_LOOP_DURING_RELEASE
          || (SAMPLEMODE() == FLUID_LOOP_UNTIL_RELEASE
          && volenv_section < FLUID_VOICE_ENVRELEASE);
 
       /* last index before 4th interpolation point must be specially handled */
-      end_index = (looping ? loopend - 1 : end) - 2;
+      unsigned int end_index = (looping ? loopend - 1 : end) - 2;
 
       if (has_looped) {	/* set start_index and start point if looped or not */
             start_index = loopstart;
@@ -387,7 +386,6 @@ int Voice::dsp_float_interpolate_4th_order(unsigned n)
             /* go back to loop start */
             if (dsp_phase_index > end_index) {
                   phase -= (loopend - loopstart);
-
                   if (!has_looped) {
                         has_looped = true;
                         start_index = loopstart;

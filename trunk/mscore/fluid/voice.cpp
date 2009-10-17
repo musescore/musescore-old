@@ -214,6 +214,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
       if (!PLAYING())
             return;
       if (!sample) {
+            printf("!sample\n");
             off();
             return;
             }
@@ -242,7 +243,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       /* calculate the envelope value and check for valid range */
-      x = env_data->coeff * volenv_val + env_data->incr;
+      x = env_data->coeff * volenv_val + env_data->incr * n;
       if (x < env_data->min) {
             x = env_data->min;
             volenv_section++;
@@ -255,7 +256,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       volenv_val = x;
-      volenv_count++;
+      volenv_count += n;
 
       if (volenv_section == FLUID_VOICE_ENVFINISHED) {
             off();
@@ -275,7 +276,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       /* calculate the envelope value and check for valid range */
-      x = env_data->coeff * modenv_val + env_data->incr;
+      x = env_data->coeff * modenv_val + env_data->incr * n;
 
       if (x < env_data->min) {
             x = env_data->min;
@@ -289,13 +290,13 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
             }
 
       modenv_val = x;
-      modenv_count++;
+      modenv_count += n;
       fluid_check_fpe ("voice_write mod env");
 
       /******************* mod lfo **********************/
 
       if (ticks >= modlfo_delay) {
-            modlfo_val += modlfo_incr;
+            modlfo_val += modlfo_incr * n;
 
             if (modlfo_val > 1.0) {
                   modlfo_incr = -modlfo_incr;
@@ -312,7 +313,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
       /******************* vib lfo **********************/
 
       if (ticks >= viblfo_delay) {
-            viblfo_val += viblfo_incr;
+            viblfo_val += viblfo_incr * n;
 
             if (viblfo_val > (float) 1.0) {
                   viblfo_incr = -viblfo_incr;
@@ -500,7 +501,7 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
                          * at will.
                          */
 
-                  #define FILTER_TRANSITION_SAMPLES 256     // (FLUID_BUFSIZE)
+                  #define FILTER_TRANSITION_SAMPLES 64     // (FLUID_BUFSIZE)
 
                         a1_incr = (a1_temp - a1) / FILTER_TRANSITION_SAMPLES;
                         a2_incr = (a2_temp - a2) / FILTER_TRANSITION_SAMPLES;
@@ -693,9 +694,9 @@ void Voice::voice_start()
       }
 
 /*
- * calculate_hold_decay_buffers
+ * calculate_hold_decay_frames
  */
-int Voice::calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_decay)
+int Voice::calculate_hold_decay_frames(int gen_base, int gen_key2base, int is_decay)
       {
       /* Purpose:
        *
@@ -735,14 +736,7 @@ int Voice::calculate_hold_decay_buffers(int gen_base, int gen_key2base, int is_d
             timecents = -12000.0;
 
       float seconds = fluid_tc2sec(timecents);
-
-      /* Each DSP loop processes FLUID_BUFSIZE samples. */
-
-      /* round to next full number of buffers */
-      int buffers = (int)(((float)_fluid->sample_rate * seconds)
-         / (float)FLUID_BUFSIZE +0.5);
-
-      return buffers;
+      return (int)((float)_fluid->sample_rate * seconds);
       }
 
 /*
@@ -918,23 +912,23 @@ void Voice::update_param(int _gen)
                   break;
 
             case GEN_MODLFOFREQ:
-                  /* - the frequency is converted into a delta value, per buffer of FLUID_BUFSIZE samples
+                  /* - the frequency is converted into a delta value, per frame
                    * - the delay into a sample delay
                    */
                   x = GEN(GEN_MODLFOFREQ);
                   fluid_clip(x, -16000.0f, 4500.0f);
-                  modlfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / _fluid->sample_rate);
+                  modlfo_incr = (4.0f * fluid_act2hz(x) / _fluid->sample_rate);
                   break;
 
             case GEN_VIBLFOFREQ:
                   /* vib lfo
                    *
-                   * - the frequency is converted into a delta value, per buffer of FLUID_BUFSIZE samples
+                   * - the frequency is converted into a delta value per frame
                    * - the delay into a sample delay
                    */
                   x = GEN(GEN_VIBLFOFREQ);
                   fluid_clip(x, -16000.0f, 4500.0f);
-                  viblfo_incr = (4.0f * FLUID_BUFSIZE * fluid_act2hz(x) / _fluid->sample_rate);
+                  viblfo_incr = (4.0f * fluid_act2hz(x) / _fluid->sample_rate);
                   break;
 
             case GEN_VIBLFODELAY:
@@ -1045,9 +1039,9 @@ void Voice::update_param(int _gen)
                   break;
 
     /* Conversion functions differ in range limit */
-#define NUM_BUFFERS_DELAY(_v)   (unsigned int) (_fluid->sample_rate * fluid_tc2sec_delay(_v) / FLUID_BUFSIZE)
-#define NUM_BUFFERS_ATTACK(_v)  (unsigned int) (_fluid->sample_rate * fluid_tc2sec_attack(_v) / FLUID_BUFSIZE)
-#define NUM_BUFFERS_RELEASE(_v) (unsigned int) (_fluid->sample_rate * fluid_tc2sec_release(_v) / FLUID_BUFSIZE)
+#define NUM_FRAMES_DELAY(_v)   (unsigned int) (_fluid->sample_rate * fluid_tc2sec_delay(_v))
+#define NUM_FRAMES_ATTACK(_v)  (unsigned int) (_fluid->sample_rate * fluid_tc2sec_attack(_v))
+#define NUM_FRAMES_RELEASE(_v) (unsigned int) (_fluid->sample_rate * fluid_tc2sec_release(_v))
 
            /* volume envelope
             *
@@ -1059,7 +1053,7 @@ void Voice::update_param(int _gen)
             case GEN_VOLENVDELAY:                /* SF2.01 section 8.1.3 # 33 */
                   x = GEN(GEN_VOLENVDELAY);
                   fluid_clip(x, -12000.0f, 5000.0f);
-                  count = NUM_BUFFERS_DELAY(x);
+                  count = NUM_FRAMES_DELAY(x);
                   volenv_data[FLUID_VOICE_ENVDELAY].count = count;
                   volenv_data[FLUID_VOICE_ENVDELAY].coeff = 0.0f;
                   volenv_data[FLUID_VOICE_ENVDELAY].incr = 0.0f;
@@ -1070,7 +1064,7 @@ void Voice::update_param(int _gen)
             case GEN_VOLENVATTACK:               /* SF2.01 section 8.1.3 # 34 */
                   x = GEN(GEN_VOLENVATTACK);
                   fluid_clip(x, -12000.0f, 8000.0f);
-                  count = 1 + NUM_BUFFERS_ATTACK(x);
+                  count = 1 + NUM_FRAMES_ATTACK(x);
                   volenv_data[FLUID_VOICE_ENVATTACK].count = count;
                   volenv_data[FLUID_VOICE_ENVATTACK].coeff = 1.0f;
                   volenv_data[FLUID_VOICE_ENVATTACK].incr = count ? 1.0f / count : 0.0f;
@@ -1080,7 +1074,7 @@ void Voice::update_param(int _gen)
 
             case GEN_VOLENVHOLD:                 /* SF2.01 section 8.1.3 # 35 */
             case GEN_KEYTOVOLENVHOLD:            /* SF2.01 section 8.1.3 # 39 */
-                  count = calculate_hold_decay_buffers(GEN_VOLENVHOLD, GEN_KEYTOVOLENVHOLD, 0); /* 0 means: hold */
+                  count = calculate_hold_decay_frames(GEN_VOLENVHOLD, GEN_KEYTOVOLENVHOLD, 0); /* 0 means: hold */
                   volenv_data[FLUID_VOICE_ENVHOLD].count = count;
                   volenv_data[FLUID_VOICE_ENVHOLD].coeff = 1.0f;
                   volenv_data[FLUID_VOICE_ENVHOLD].incr = 0.0f;
@@ -1093,7 +1087,7 @@ void Voice::update_param(int _gen)
             case GEN_KEYTOVOLENVDECAY:          /* SF2.01 section 8.1.3 # 40 */
                   y = 1.0f - 0.001f * GEN(GEN_VOLENVSUSTAIN);
                   fluid_clip(y, 0.0f, 1.0f);
-                  count = calculate_hold_decay_buffers(GEN_VOLENVDECAY, GEN_KEYTOVOLENVDECAY, 1); /* 1 for decay */
+                  count = calculate_hold_decay_frames(GEN_VOLENVDECAY, GEN_KEYTOVOLENVDECAY, 1); /* 1 for decay */
                   volenv_data[FLUID_VOICE_ENVDECAY].count = count;
                   volenv_data[FLUID_VOICE_ENVDECAY].coeff = 1.0f;
                   volenv_data[FLUID_VOICE_ENVDECAY].incr = count ? -1.0f / count : 0.0f;
@@ -1104,7 +1098,7 @@ void Voice::update_param(int _gen)
             case GEN_VOLENVRELEASE:             /* SF2.01 section 8.1.3 # 38 */
                   x = GEN(GEN_VOLENVRELEASE);
                   fluid_clip(x, FLUID_MIN_VOLENVRELEASE, 8000.0f);
-                  count = 1 + NUM_BUFFERS_RELEASE(x);
+                  count = 1 + NUM_FRAMES_RELEASE(x);
                   volenv_data[FLUID_VOICE_ENVRELEASE].count = count;
                   volenv_data[FLUID_VOICE_ENVRELEASE].coeff = 1.0f;
                   volenv_data[FLUID_VOICE_ENVRELEASE].incr = count ? -1.0f / count : 0.0f;
@@ -1116,7 +1110,7 @@ void Voice::update_param(int _gen)
             case GEN_MODENVDELAY:               /* SF2.01 section 8.1.3 # 25 */
                   x = GEN(GEN_MODENVDELAY);
                   fluid_clip(x, -12000.0f, 5000.0f);
-                  modenv_data[FLUID_VOICE_ENVDELAY].count = NUM_BUFFERS_DELAY(x);
+                  modenv_data[FLUID_VOICE_ENVDELAY].count = NUM_FRAMES_DELAY(x);
                   modenv_data[FLUID_VOICE_ENVDELAY].coeff = 0.0f;
                   modenv_data[FLUID_VOICE_ENVDELAY].incr = 0.0f;
                   modenv_data[FLUID_VOICE_ENVDELAY].min = -1.0f;
@@ -1126,7 +1120,7 @@ void Voice::update_param(int _gen)
             case GEN_MODENVATTACK:               /* SF2.01 section 8.1.3 # 26 */
                   x = GEN(GEN_MODENVATTACK);
                   fluid_clip(x, -12000.0f, 8000.0f);
-                  count = 1 + NUM_BUFFERS_ATTACK(x);
+                  count = 1 + NUM_FRAMES_ATTACK(x);
                   modenv_data[FLUID_VOICE_ENVATTACK].count = count;
                   modenv_data[FLUID_VOICE_ENVATTACK].coeff = 1.0f;
                   modenv_data[FLUID_VOICE_ENVATTACK].incr = count ? 1.0f / count : 0.0f;
@@ -1136,7 +1130,7 @@ void Voice::update_param(int _gen)
 
             case GEN_MODENVHOLD:               /* SF2.01 section 8.1.3 # 27 */
             case GEN_KEYTOMODENVHOLD:          /* SF2.01 section 8.1.3 # 31 */
-                  count = calculate_hold_decay_buffers(GEN_MODENVHOLD, GEN_KEYTOMODENVHOLD, 0); /* 1 means: hold */
+                  count = calculate_hold_decay_frames(GEN_MODENVHOLD, GEN_KEYTOMODENVHOLD, 0); /* 1 means: hold */
                   modenv_data[FLUID_VOICE_ENVHOLD].count = count;
                   modenv_data[FLUID_VOICE_ENVHOLD].coeff = 1.0f;
                   modenv_data[FLUID_VOICE_ENVHOLD].incr = 0.0f;
@@ -1147,7 +1141,7 @@ void Voice::update_param(int _gen)
             case GEN_MODENVDECAY:                                   /* SF 2.01 section 8.1.3 # 28 */
             case GEN_MODENVSUSTAIN:                                 /* SF 2.01 section 8.1.3 # 29 */
             case GEN_KEYTOMODENVDECAY:                              /* SF 2.01 section 8.1.3 # 32 */
-                  count = calculate_hold_decay_buffers(GEN_MODENVDECAY, GEN_KEYTOMODENVDECAY, 1); /* 1 for decay */
+                  count = calculate_hold_decay_frames(GEN_MODENVDECAY, GEN_KEYTOMODENVDECAY, 1); /* 1 for decay */
                   y = 1.0f - 0.001f * GEN(GEN_MODENVSUSTAIN);
                   fluid_clip(y, 0.0f, 1.0f);
                   modenv_data[FLUID_VOICE_ENVDECAY].count = count;
@@ -1160,7 +1154,7 @@ void Voice::update_param(int _gen)
             case GEN_MODENVRELEASE:                                  /* SF 2.01 section 8.1.3 # 30 */
                   x = GEN(GEN_MODENVRELEASE);
                   fluid_clip(x, -12000.0f, 8000.0f);
-                  count = 1 + NUM_BUFFERS_RELEASE(x);
+                  count = 1 + NUM_FRAMES_RELEASE(x);
                   modenv_data[FLUID_VOICE_ENVRELEASE].count = count;
                   modenv_data[FLUID_VOICE_ENVRELEASE].coeff = 1.0f;
                   modenv_data[FLUID_VOICE_ENVRELEASE].incr = count ? -1.0f / count : 0.0;

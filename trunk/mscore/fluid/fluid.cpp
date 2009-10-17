@@ -67,10 +67,10 @@ static const Mod defaultMod[] = {
 
 Fluid::Fluid()
       {
-      left_buf  = new float[FLUID_BUFSIZE];
-      right_buf = new float[FLUID_BUFSIZE];
-      fx_buf[0] = new float[FLUID_BUFSIZE];
-      fx_buf[1] = new float[FLUID_BUFSIZE];
+      left_buf  = new float[FLUID_MAX_BUFSIZE];
+      right_buf = new float[FLUID_MAX_BUFSIZE];
+      fx_buf[0] = new float[FLUID_MAX_BUFSIZE];
+      fx_buf[1] = new float[FLUID_MAX_BUFSIZE];
       reverb    = 0;
       chorus    = 0;
       }
