@@ -613,8 +613,7 @@ void Score::cmdAddSlur()
             QList<SlurSegment*>* el = _is.slur->slurSegments();
             if (!el->isEmpty())
                   el->front()->setSelected(false);
-            ((ChordRest*)_is.slur->startElement())->addSlurFor(_is.slur);
-            ((ChordRest*)_is.slur->endElement())->addSlurBack(_is.slur);
+            static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
             _is.slur = 0;
             return;
             }
@@ -660,8 +659,10 @@ void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
             _is.slur = slur;
             if (!el->isEmpty())
                   el->front()->setSelected(true);
-            ((ChordRest*)slur->startElement())->removeSlurFor(slur); // set again when leaving slur mode
-            ((ChordRest*)slur->endElement())->removeSlurBack(slur);
+            else
+                  printf("addSlur: no segment\n");
+            // set again when leaving slur mode:
+            static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
             }
       else {
             //

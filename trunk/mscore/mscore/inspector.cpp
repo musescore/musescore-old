@@ -748,6 +748,8 @@ ShowChordWidget::ShowChordWidget()
       connect(crb.upFlag, SIGNAL(toggled(bool)), SLOT(upChanged(bool)));
       connect(crb.beamMode, SIGNAL(activated(int)), SLOT(beamModeChanged(int)));
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
       // chord
       QWidget* ch = new QWidget;
@@ -802,6 +804,21 @@ void ShowChordWidget::setElement(Element* e)
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
             crb.attributes->addItem(item);
             }
+      crb.slurFor->clear();
+      foreach(Slur* slur, chord->slurFor()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurFor->addItem(item);
+            }
+      crb.slurBack->clear();
+      foreach(Slur* slur, chord->slurBack()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurBack->addItem(item);
+            }
+
       cb.helplineList->clear();
       foreach(LedgerLine* h, *chord->ledgerLines()) {
             QString s;
@@ -1000,6 +1017,9 @@ ShowRestWidget::ShowRestWidget()
       crb.beamMode->addItem(tr("begin 1/32"));
       connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
       connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
+      connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
       QFrame* line = new QFrame(this);
       line->setFrameStyle(QFrame::HLine | QFrame::Raised);
@@ -1033,6 +1053,21 @@ void ShowRestWidget::setElement(Element* e)
       crb.dots->setValue(rest->dots());
       crb.ticks->setValue(rest->ticks());
       crb.duration->setValue(int(rest->duration().type()));
+
+      crb.slurFor->clear();
+      foreach(Slur* slur, rest->slurFor()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurFor->addItem(item);
+            }
+      crb.slurBack->clear();
+      foreach(Slur* slur, rest->slurBack()) {
+            QString s;
+            s.setNum(long(slur), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            crb.slurBack->addItem(item);
+            }
 
       foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
@@ -1518,6 +1553,26 @@ SlurView::SlurView()
       layout->addWidget(slur);
       layout->addStretch(10);
       connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      connect(st.startElement,   SIGNAL(clicked()), SLOT(startClicked()));
+      connect(st.endElement,   SIGNAL(clicked()), SLOT(endClicked()));
+      }
+
+//---------------------------------------------------------
+//   startClicked
+//---------------------------------------------------------
+
+void SlurView::startClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   endClicked
+//---------------------------------------------------------
+
+void SlurView::endClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->endElement());
       }
 
 //---------------------------------------------------------
@@ -1539,6 +1594,8 @@ void SlurView::setElement(Element* e)
             }
       st.upFlag->setChecked(slur->isUp());
       st.direction->setCurrentIndex(slur->slurDirection());
+      st.startElement->setEnabled(slur->startElement());
+      st.endElement->setEnabled(slur->endElement());
 
       sb.tick2->setValue(slur->tick2());
       sb.staff2->setValue(slur->track2() / VOICES);

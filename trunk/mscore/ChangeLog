@@ -1,4 +1,5 @@
 17.oct (ws)
+      - fix: Slurs not visible till completion in note entry mode
       - remove cursor when leaving note entry mode
       (la)
       - add catalan translation mscore_ca.ts

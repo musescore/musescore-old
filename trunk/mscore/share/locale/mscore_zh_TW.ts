@@ -126,24 +126,18 @@
         <source>Revision: 628</source>
         <translation>修訂：628</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;Werner Schweer 等人版權所有 (C) 1999-2009&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;新版本與更多資訊請參觀 http://www.musescore.org &lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;依據 GNU 公用授權條款發行&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1019,7 +1013,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> 百分比</translation>
     </message>
     <message>
@@ -1037,6 +1030,38 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>stemless</source>
         <translation>無符幹的</translation>
+    </message>
+    <message>
+        <source>velocity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>velocity (0-127)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1061,12 +1086,12 @@ p, li { white-space: pre-wrap; }
         <translation>取消隱藏</translation>
     </message>
     <message>
-        <source>Midi Properties...</source>
-        <translation>Midi 屬性...</translation>
-    </message>
-    <message>
         <source>Text Properties...</source>
         <translation>文字屬性...</translation>
+    </message>
+    <message>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1083,16 +1108,8 @@ p, li { white-space: pre-wrap; }
         <translation>MuseScore：文字屬性</translation>
     </message>
     <message>
-        <source>Midi Values</source>
-        <translation>Midi 數值</translation>
-    </message>
-    <message>
         <source>Velocity:</source>
         <translation>力度：</translation>
-    </message>
-    <message>
-        <source>valid for:</source>
-        <translation>有效範圍：</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1109,6 +1126,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>align left</source>
         <translation>靠左對齊</translation>
+    </message>
+    <message>
+        <source>MIDI Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1442,11 +1467,6 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -1759,10 +1779,6 @@ space unit</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>color notes which extend the usable pitch range</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create courtesy key signatures</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1776,6 +1792,14 @@ space unit</extracomment>
     </message>
     <message>
         <source>hook len</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fix Number of Measures/System:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fix Measure Width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2482,6 +2506,17 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>MeasureProperties</name>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>stemless</source>
+        <translation type="unfinished">無符幹的</translation>
+    </message>
+</context>
+<context>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
@@ -2547,6 +2582,22 @@ failed: </source>
         <source>Stemless</source>
         <translation>無符幹的</translation>
     </message>
+    <message>
+        <source>New Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MeasuresDialogBase</name>
@@ -2574,8 +2625,8 @@ failed: </source>
 <context>
     <name>MenuNotes</name>
     <message>
-        <source>Notes</source>
-        <translation>音符</translation>
+        <source>&amp;Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3404,10 +3455,6 @@ failed: </source>
         <translation>啟用 MIDI 輸入</translation>
     </message>
     <message>
-        <source>Enable Midi Input</source>
-        <translation>啟用 MIDI 輸入</translation>
-    </message>
-    <message>
         <source>editing sound on</source>
         <translation>編輯時開啟聲音</translation>
     </message>
@@ -4161,10 +4208,6 @@ failed: </source>
     <message>
         <source>&amp;Style</source>
         <translation>樣式(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Edit Style...</source>
-        <translation>編輯樣式...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
@@ -4957,10 +5000,6 @@ before closing?</source>
         <translation>刪除選取的小節</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select all similar elements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4989,10 +5028,6 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local &amp;Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Online Handbook</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5005,6 +5040,54 @@ before closing?</source>
         <source>
 
 From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show local Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable MIDI Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit General Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>half duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>follow song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Follow Song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5134,6 +5217,26 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>note head group</source>
         <translation>符頭群組</translation>
+    </message>
+    <message>
+        <source>OnTimeType:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">自動</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">偏移</translation>
+    </message>
+    <message>
+        <source>OffTimeType:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5369,11 +5472,31 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>PianorollEditor</name>
     <message>
-        <source>velocity:</source>
+        <source>Cursor:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pitch:</source>
+        <source>Velocity:</source>
+        <translation type="unfinished">力度：</translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">自動</translation>
+    </message>
+    <message>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5430,6 +5553,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>Tmp</source>
         <translation>速度</translation>
+    </message>
+    <message>
+        <source>Straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5528,10 +5663,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>show</source>
         <translation>顯示</translation>
-    </message>
-    <message>
-        <source>Cur</source>
-        <translation>目前位置</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -5642,20 +5773,12 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>使用「替代輸入方法」</translation>
     </message>
     <message>
-        <source>Export Midi</source>
-        <translation>輸出 MIDI 檔案</translation>
-    </message>
-    <message>
         <source>Expand Repeats</source>
         <translation>展開反復記號</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
         <translation>啟用 MIDI 遠端控制</translation>
-    </message>
-    <message>
-        <source>Midi Remote Control</source>
-        <translation>MIDI 遠端控制</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -5686,16 +5809,8 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>I/O</translation>
     </message>
     <message>
-        <source>Use midi output</source>
-        <translation>使用 MIDI 輸出</translation>
-    </message>
-    <message>
         <source>Ports</source>
         <translation>連接埠</translation>
-    </message>
-    <message>
-        <source>Auto Connect</source>
-        <translation>自動連接</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
@@ -6007,11 +6122,34 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation>毫米</translation>
     </message>
     <message>
-        <source>color notes outside of usable pitch range</source>
+        <source>MuseScore Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Current Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIDI Remote Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK midi output</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6849,7 +6987,6 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7172,7 +7309,6 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -7193,7 +7329,6 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>

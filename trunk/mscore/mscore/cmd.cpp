@@ -523,15 +523,24 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
 
       if (_is.slur) {
+            //
+            // extend slur
+            //
             Element* e = searchNote(_is.tick(), _is.track);
             if (e) {
                   if (e->type() == NOTE)
                         e = e->parent();
-                  if (_is.slur->startElement()->tick() == e->tick())
+                  if (_is.slur->startElement()->tick() == e->tick()) {
+                        if (_is.slur->startElement())
+                              static_cast<ChordRest*>(_is.slur->startElement())->removeSlurFor(_is.slur);
                         _is.slur->setStartElement(e);
+                        static_cast<ChordRest*>(e)->addSlurFor(_is.slur);
+                        }
                   else
                         _is.slur->setEndElement(e);
                   }
+            else
+                  printf("cmdAddPitch1: cannot find slur note\n");
             setLayoutAll(true);
             }
       moveToNextInputPos();

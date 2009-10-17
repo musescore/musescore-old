@@ -28,14 +28,8 @@
      <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout">
-      <property name="margin">
-       <number>9</number>
-      </property>
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <item row="0" column="0" rowspan="4">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
        <widget class="QTreeWidget" name="segments">
         <property name="indentation">
          <number>0</number>
@@ -60,50 +54,72 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QCheckBox" name="upFlag">
-        <property name="text">
-         <string notr="true">Up</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="labelx">
-        <property name="text">
-         <string notr="true">Direction:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QComboBox" name="direction">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <property name="text">
-          <string notr="true">Auto</string>
-         </property>
+         <widget class="QCheckBox" name="upFlag">
+          <property name="text">
+           <string notr="true">Up</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string notr="true">Up</string>
-         </property>
+         <widget class="QLabel" name="labelx">
+          <property name="text">
+           <string notr="true">Direction:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string notr="true">Down</string>
-         </property>
+         <widget class="QComboBox" name="direction">
+          <item>
+           <property name="text">
+            <string notr="true">Auto</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string notr="true">Up</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string notr="true">Down</string>
+           </property>
+          </item>
+         </widget>
         </item>
-       </widget>
+        <item>
+         <spacer>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
-      <item row="3" column="1">
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="startElement">
+          <property name="text">
+           <string extracomment="do not translate">startElement</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="endElement">
+          <property name="text">
+           <string extracomment="do not translate - only for debugging">endElement</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
