@@ -911,13 +911,13 @@ PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(tr("Palettes"), parent)
       {
       setObjectName("palette-box");
-      setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);
       vbox->setSpacing(0);
       mainWidget->setLayout(vbox);
       vbox->addStretch(1);
+      mainWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Ignored);
       setWidget(mainWidget);
       _dirty = false;
       }

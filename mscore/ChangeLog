@@ -1,4 +1,5 @@
 17.oct (ws)
+      - expanding palettes does not resize main window anymore
       - fix: Slurs not visible till completion in note entry mode
       - remove cursor when leaving note entry mode
       (la)

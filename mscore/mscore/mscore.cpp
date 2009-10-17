@@ -296,6 +296,7 @@ MuseScore::MuseScore()
       {
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
+
       setAcceptDrops(true);
       _undoGroup            = new UndoGroup();
       cs                    = 0;
