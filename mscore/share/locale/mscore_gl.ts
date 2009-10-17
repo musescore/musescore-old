@@ -1,8 +1,10 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
-        <source>&#xd8;&#xa7;&#xd9;&#x84;&#xd8;&#xb9;&#xd8;&#xb1;&#xd8;&#xa8;&#xd9;&#x8a;&#xd8;&#xa9;</source>
+        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -30,7 +32,7 @@
         <translation>Inglés americano</translation>
     </message>
     <message>
-        <source>Espa&#xc3;&#xb1;ol</source>
+        <source>EspaÃ±ol</source>
         <translation>Español</translation>
     </message>
     <message>
@@ -38,7 +40,7 @@
         <translation>Finlandés</translation>
     </message>
     <message>
-        <source>Fran&#xc3;&#xa7;ais</source>
+        <source>FranÃ§ais</source>
         <translation>Francés</translation>
     </message>
     <message>
@@ -62,11 +64,11 @@
         <translation>Italiano</translation>
     </message>
     <message>
-        <source>Portugu&#xc3;&#xaa;s</source>
+        <source>PortuguÃªs</source>
         <translation>Portugués</translation>
     </message>
     <message>
-        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -74,7 +76,7 @@
         <translation>Sueco</translation>
     </message>
     <message>
-        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
+        <source>TÃ¼rkÃ§e</source>
         <translation>Turco</translation>
     </message>
     <message>
@@ -82,7 +84,7 @@
         <translation>Ucraíno</translation>
     </message>
     <message>
-        <source>&#xe7;&#xb9;&#x81;&#xe9;&#xab;&#x94;&#xe4;&#xb8;&#xad;&#xe6;&#x96;&#x87; (&#xe5;&#x8f;&#xb0;&#xe7;&#x81;&#xa3;)</source>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -90,7 +92,7 @@
         <translation>Polaco</translation>
     </message>
     <message>
-        <source>Rom&#xc3;&#xa2;n&#xc4;&#x83;</source>
+        <source>RomÃ¢nÄ</source>
         <translation>Romeno</translation>
     </message>
     <message>
@@ -98,7 +100,7 @@
         <translation>Sistema</translation>
     </message>
     <message>
-        <source>Portugu&#xc3;&#xaa;s brasileiro</source>
+        <source>PortuguÃªs brasileiro</source>
         <translation>Portugués brasileiro</translation>
     </message>
     <message>
@@ -106,7 +108,7 @@
         <translation>Xaponés</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -124,25 +126,18 @@
         <source>Revision: 628</source>
         <translation>Revisión: 628</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer e outros. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Vexa &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; para versións máis recentes e&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;máis información.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publicado baixo a Licenza Pública Xeral de GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1036,6 +1031,38 @@ p, li { white-space: pre-wrap; }
         <source>stemless</source>
         <translation>sen plica</translation>
     </message>
+    <message>
+        <source>velocity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>velocity (0-127)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1059,12 +1086,12 @@ p, li { white-space: pre-wrap; }
         <translation>Facer visíbel</translation>
     </message>
     <message>
-        <source>Midi Properties...</source>
-        <translation>Propiedades de MIDI...</translation>
-    </message>
-    <message>
         <source>Text Properties...</source>
         <translation>Propiedades do texto...</translation>
+    </message>
+    <message>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1081,16 +1108,8 @@ p, li { white-space: pre-wrap; }
         <translation>MuseScore: Propiedades do texto</translation>
     </message>
     <message>
-        <source>Midi Values</source>
-        <translation>Valores de MIDI</translation>
-    </message>
-    <message>
         <source>Velocity:</source>
         <translation>Velocidade:</translation>
-    </message>
-    <message>
-        <source>valid for:</source>
-        <translation>válido para:</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1107,6 +1126,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>align left</source>
         <translation>aliñar á esquerda</translation>
+    </message>
+    <message>
+        <source>MIDI Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1751,10 +1778,6 @@ fallou:</translation>
         <translation>Arpexos</translation>
     </message>
     <message>
-        <source>color notes which extend the usable pitch range</source>
-        <translation>colorir as notas que se estenden fóra da tesitura</translation>
-    </message>
-    <message>
         <source>Create courtesy key signatures</source>
         <translation>Crear armaduras de cortesía</translation>
     </message>
@@ -1769,6 +1792,14 @@ fallou:</translation>
     <message>
         <source>hook len</source>
         <translation>lonxitude do corchete</translation>
+    </message>
+    <message>
+        <source>Fix Number of Measures/System:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2474,6 +2505,17 @@ fallou:</translation>
     </message>
 </context>
 <context>
+    <name>MeasureProperties</name>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>stemless</source>
+        <translation type="unfinished">sen plica</translation>
+    </message>
+</context>
+<context>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
@@ -2539,6 +2581,22 @@ fallou:</translation>
         <source>Stemless</source>
         <translation>Sen plica</translation>
     </message>
+    <message>
+        <source>New Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MeasuresDialogBase</name>
@@ -2566,8 +2624,8 @@ fallou:</translation>
 <context>
     <name>MenuNotes</name>
     <message>
-        <source>Notes</source>
-        <translation>Notas</translation>
+        <source>&amp;Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4465,10 +4523,6 @@ antes de fechar?</translation>
         <translation>entrada de midi</translation>
     </message>
     <message>
-        <source>Enable Midi Input</source>
-        <translation>Activar a entrada de midi</translation>
-    </message>
-    <message>
         <source>editing sound on</source>
         <translation>son de edición activado</translation>
     </message>
@@ -4925,10 +4979,6 @@ antes de fechar?</translation>
         <translation>espellar a cabeza da nota</translation>
     </message>
     <message>
-        <source>Edit Style...</source>
-        <translation>Modificar o estilo...</translation>
-    </message>
-    <message>
         <source>Edit Text Style...</source>
         <translation>Modificar o estilo do texto...</translation>
     </message>
@@ -4939,10 +4989,6 @@ antes de fechar?</translation>
     <message>
         <source>Delete Selected Measures</source>
         <translation>Eliminar os compases seleccionados</translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Todos os ficheiros coñecidos (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;Ficheiros do MuseScore (*.mscz *.mscx *.msc);;Ficheiros MusicXML (*.xml *.mxl);;Ficheiros MIDI (*.mid *.kar);;Ficheiros de datos do Muse (*.md);;Ficheiros do Capella (*.cap);;Ficheiros do BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Todos os ficheiros (*)</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -4973,10 +5019,6 @@ antes de fechar?</translation>
         <translation>Control do sintetizador</translation>
     </message>
     <message>
-        <source>Local &amp;Handbook</source>
-        <translation>&amp;Manual local</translation>
-    </message>
-    <message>
         <source>Online Handbook</source>
         <translation>Manual en liña</translation>
     </message>
@@ -4993,6 +5035,54 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>
 
 No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.</translation>
+    </message>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show local Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable MIDI Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit General Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>half duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>follow song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Follow Song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5121,6 +5211,26 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
     <message>
         <source>note head group</source>
         <translation>grupo de cabezas</translation>
+    </message>
+    <message>
+        <source>OnTimeType:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Desprazamento</translation>
+    </message>
+    <message>
+        <source>OffTimeType:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5356,12 +5466,32 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
 <context>
     <name>PianorollEditor</name>
     <message>
-        <source>velocity:</source>
-        <translation>velocidade:</translation>
+        <source>Cursor:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pitch:</source>
-        <translation>altura:</translation>
+        <source>Velocity:</source>
+        <translation type="unfinished">Velocidade:</translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">automático</translation>
+    </message>
+    <message>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5417,6 +5547,18 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
     <message>
         <source>Tmp</source>
         <translation>Tmp</translation>
+    </message>
+    <message>
+        <source>Straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5561,10 +5703,6 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>mostrar</translation>
     </message>
     <message>
-        <source>Cur</source>
-        <translation>Actual</translation>
-    </message>
-    <message>
         <source>Navigator</source>
         <translation>Navegador</translation>
     </message>
@@ -5677,20 +5815,12 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>Se se emprega o método de entrada normal, a altura da nota que se cree dependerá da armadura actual. Por exemplo, ao premer fa en sol maior créase un fa sostenido. Se se activa o método de entrada alternativo, a armadura actual é irrelevante. Por exemplo, ao premer fa sempre se crea un fa natural.</translation>
     </message>
     <message>
-        <source>Export Midi</source>
-        <translation>Exportar a midi</translation>
-    </message>
-    <message>
         <source>Expand Repeats</source>
         <translation>Expandir as repeticións</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
         <translation>activar o control remoto do midi</translation>
-    </message>
-    <message>
-        <source>Midi Remote Control</source>
-        <translation>Control remoto do midi</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -5721,16 +5851,8 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>E/S</translation>
     </message>
     <message>
-        <source>Use midi output</source>
-        <translation>Empregar a saída midi</translation>
-    </message>
-    <message>
         <source>Ports</source>
         <translation>Portos</translation>
-    </message>
-    <message>
-        <source>Auto Connect</source>
-        <translation>Conexión automática</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
@@ -5997,8 +6119,32 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>mm</translation>
     </message>
     <message>
-        <source>color notes outside of usable pitch range</source>
-        <translation>colorir as notas que se estendan fóra da tesitura</translation>
+        <source>MuseScore Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Current Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIDI Remote Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

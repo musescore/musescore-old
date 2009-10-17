@@ -1192,7 +1192,6 @@ void Score::setNoteEntry(bool val)
                   QList<SlurSegment*>* el = _is.slur->slurSegments();
                   if (!el->isEmpty())
                         el->front()->setSelected(false);
-                  static_cast<ChordRest*>(_is.slur->startElement())->addSlurFor(_is.slur);
                   static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
                   _is.slur = 0;
                   }
