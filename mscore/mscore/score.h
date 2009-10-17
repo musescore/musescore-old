@@ -339,7 +339,6 @@ class Score : public QObject {
       void addMetronome();
 
       void undoSigInsertTime(int, int);
-      void undoFixTicks();
 
       void cmdAddText(int style);
       void cmdAddChordName();
@@ -422,6 +421,8 @@ class Score : public QObject {
       void removeMeasure(MeasureBase*);
       void appendMeasures(int, int);
       void readStaff(QDomElement);
+
+      void undoFixTicks();
 
       void cmdTuplet(int);
       void cmdTuplet(int n, ChordRest* cr, Fraction);
