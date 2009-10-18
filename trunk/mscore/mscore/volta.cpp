@@ -154,6 +154,19 @@ LineSegment* Volta::createLineSegment()
       }
 
 //---------------------------------------------------------
+//   hasEnding
+//---------------------------------------------------------
+
+bool Volta::hasEnding(int repeat) const
+      {
+      foreach(int ending, endings()) {
+            if (ending == repeat)
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   genPropertyMenu
 //---------------------------------------------------------
 

@@ -23,6 +23,7 @@
 #include "measure.h"
 #include "repeat.h"
 #include "al/tempo.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   RepeatLoop
@@ -45,6 +46,7 @@ struct RepeatLoop {
       RepeatLoop(const QString s, const QString c)
          : stop(s), cont(c)
             {
+            m    = 0;
             type = LOOP_JUMP;
             }
       };
@@ -200,10 +202,9 @@ void RepeatList::unwind()
             if (m->repeatFlags() & RepeatEnd)
                   --loopCount;
             }
-      if (loopCount == -1) {
+      bool implicitRepeat = loopCount == -1;
+      if (implicitRepeat)
             rstack.push(RepeatLoop(_score->firstMeasure()));
-            printf("implicit start repeat at first measure\n");
-            }
       else if (loopCount != 0)
             printf("unbalanced repeat start-end\n");
 
@@ -214,38 +215,38 @@ void RepeatList::unwind()
       rs->timeOffset = 0.0;
 
       for (Measure* m = _score->firstMeasure(); m;) {
-            bool inLoop = !rstack.isEmpty();
             int flags = m->repeatFlags();
             //
             //  check for repeat start
             //
-            if ((flags & RepeatStart)
-               && (!inLoop || rstack.top().m != m)
-               && (!inLoop || rstack.top().type != RepeatLoop::LOOP_JUMP)
-               ) {
+            if ((flags & RepeatStart) && (rstack.isEmpty() || rstack.top().m != m)) {
+                  printf("startRepeat\n");
                   rstack.push(RepeatLoop(m));
                   }
-
-            int n = inLoop ? rstack.top().count + 1 : 1;
 
             //
             // Voltas outside of loops are ignored.
             // Voltas on first measure of a loop are also ignored. Its
             // assumed that they belong to a previous loop.
             //
-            if (inLoop && !(flags & RepeatStart) && !_score->isVolta(m->tick(), n)) {
-                  tickOffset -= m->tickLen();   // skip this measure
-
-                  rs->len = m->tick() - rs->tick;
-                  if (rs->len) {
-                        append(rs);
-                        rs = new RepeatSegment;
+            if (!rstack.isEmpty() && !(flags & RepeatStart)) {
+                  Volta* volta = _score->searchVolta(m->tick());
+                  int n = rstack.top().count + 1;
+                  if (volta && (rstack.size() > 1 || !volta->hasEnding(n))
+                     && (rstack.top().type == RepeatLoop::LOOP_REPEAT))
+                        {
+                        tickOffset -= m->tickLen();   // skip this measure
+                        rs->len = m->tick() - rs->tick;
+                        if (rs->len) {
+                              append(rs);
+                              rs = new RepeatSegment;
+                              }
+                        rs->tick  = m->tick() + m->tickLen();
+                        rs->utick = rs->tick + tickOffset;
                         }
-                  rs->tick  = m->tick() + m->tickLen();
-                  rs->utick = rs->tick + tickOffset;
                   }
 
-            if (!inLoop) {
+            if (rstack.isEmpty()) {
                   // Jumps are only accepted outside of other repeats
                   if (flags & RepeatJump) {
                         Jump* s = 0;
@@ -269,6 +270,9 @@ void RepeatList::unwind()
                                     rs->utick = rs->tick + tickOffset;
 
                                     m = nmb;
+                                    if (implicitRepeat && m == _score->firstMeasure()) {
+                                          rstack.push(RepeatLoop(m));
+                                          }
                                     continue;
                                     }
                               else
@@ -294,6 +298,12 @@ void RepeatList::unwind()
                               if (rstack[n-2].count)
                                     nestedRepeat = true;
                               }
+                        //
+                        // do not repeat in a jump (d.c. al fine etc.)
+                        //
+                        if (n > 1 && rstack[n-2].type == RepeatLoop::LOOP_JUMP) {
+                              nestedRepeat = true;
+                              }
                         if (!nestedRepeat && (++rstack.top().count < m->repeatCount())) {
                               //
                               // goto start of loop, fix tickOffset
@@ -313,18 +323,18 @@ void RepeatList::unwind()
                               m = nm;
                               continue;
                               }
-                        if (inLoop)
+                        if (!rstack.isEmpty())
                               rstack.pop();     // end this loop
                         else
                               printf("repeatStack:: cannot pop\n");
                         }
                   }
-            else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
+            if (!rstack.isEmpty() && (rstack.top().type == RepeatLoop::LOOP_JUMP)) {
                   Measure* nm = _score->searchLabel(rstack.top().stop);
                   if (nm == 0)
-                        printf("LOOP_JUMP: label not found\n");
+                        printf("LOOP_JUMP: stop label <%s> not found\n", qPrintable(rstack.top().stop));
                   if (nm == m) {
-                        if (nm->nextMeasure() == 0)
+                        if (m->nextMeasure() == 0)
                               break;
                         Measure* nmb = _score->searchLabel(rstack.top().cont, nm->nextMeasure());
                         if (nmb) {
@@ -336,10 +346,15 @@ void RepeatList::unwind()
                               rs->utick = rs->tick + tickOffset;
                               }
                         else if (!rstack.top().cont.isEmpty())
-                              printf("Cont label not found: <%s>\n", qPrintable(rstack.top().cont));
+                              printf("Cont label <%s> not found\n", qPrintable(rstack.top().cont));
+                        else {
+                              rs->len = m->tick() + m->tickLen() - rs->tick;
+                              append(rs);
+                              rs = 0;
+                              }
 
                         m = nmb;
-                        if (inLoop)
+                        if (!rstack.isEmpty())
                               rstack.pop();     // end this loop
                         else
                               printf("repeatStack:: cannot pop\n");
@@ -357,11 +372,13 @@ void RepeatList::unwind()
             }
 
       Measure* lm = _score->lastMeasure();
-      rs->len = lm->tick() - rs->tick + lm->tickLen();
-      if (rs->len)
-            append(rs);
-      else
-            delete rs;
+      if (rs) {
+            rs->len = lm->tick() - rs->tick + lm->tickLen();
+            if (rs->len)
+                  append(rs);
+            else
+                  delete rs;
+            }
       update();
       }
 

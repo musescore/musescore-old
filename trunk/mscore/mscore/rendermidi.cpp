@@ -129,25 +129,33 @@ void Score::updateChannel()
       }
 
 //---------------------------------------------------------
+//   searchVolta
+//    return volta at tick
+//---------------------------------------------------------
+
+Volta* Score::searchVolta(int tick) const
+      {
+      foreach(Element* el, *gel()) {
+            if (el->type() == VOLTA) {
+                  Volta* volta = (Volta*)el;
+                  if (tick >= volta->tick() && tick < volta->tick2())
+                        return volta;
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   isVolta
 //    return true if no volta found
 //---------------------------------------------------------
 
 bool Score::isVolta(int tick, int repeat) const
       {
-      foreach(const Element* el, *gel()) {
-            if (el->type() == VOLTA) {
-                  const Volta* volta = (Volta*)el;
-                  if (tick >= volta->tick() && tick < volta->tick2()) {
-                        foreach(int ending, volta->endings()) {
-                              if (ending == repeat)
-                                    return true;
-                              }
-                        return false;
-                        }
-                  }
-            }
-      return true;
+      Volta* volta = searchVolta(tick);
+      if (volta == 0)
+            return true;
+      return volta->hasEnding(repeat);
       }
 
 //---------------------------------------------------------
