@@ -1,4 +1,5 @@
 18.oct (ws)
+      - fix: Acciaccaturas in transposing instruments get wrong pitch
       - fix: Playback of D.C. al Fine and volta
       - fix volta playback bug
       - fix: Start repeat does not appear on selected bar line
