@@ -68,6 +68,7 @@ class Volta : public TextLine {
       void setText(const QString& s);
       QString text() const;
       virtual void setSubtype(int val);
+      bool hasEnding(int repeat) const;
       };
 
 #endif
