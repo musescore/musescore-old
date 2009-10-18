@@ -49,6 +49,11 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       slashStyle->setChecked(staff->slashStyle());
       invisible->setChecked(staff->invisible());
 
+      aPitchMin->setValue(part->minPitchA());
+      aPitchMax->setValue(part->maxPitchA());
+      pPitchMin->setValue(part->minPitchP());
+      pPitchMax->setValue(part->maxPitchP());
+
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
       }
@@ -88,15 +93,28 @@ void EditStaff::apply()
       Score* score = staff->score();
       Part* part   = staff->part();
 
-      bool ud = useDrumset->isChecked();
-      int  po = transposition->value();
+      bool ud                 = useDrumset->isChecked();
+      int  po                 = transposition->value();
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
 
       bool snd = sn->toHtml() != part->shortName()->doc()->toHtml();
       bool lnd = ln->toHtml() != part->longName()->doc()->toHtml();
-      if ((ud != part->useDrumset()) || (po != part->pitchOffset()) || snd || lnd)
-            score->undo()->push(new ChangePart(part, ud, po, ln, sn));
+      int aMin = aPitchMin->value();
+      int aMax = aPitchMax->value();
+      int pMin = pPitchMin->value();
+      int pMax = pPitchMax->value();
+
+      if ((ud != part->useDrumset())
+         || (po != part->pitchOffset())
+         || snd || lnd
+         || aMin != part->minPitchA()
+         || aMax != part->maxPitchA()
+         || pMin != part->minPitchP()
+         || pMax != part->maxPitchP()
+         ) {
+            score->undo()->push(new ChangePart(part, ud, po, ln, sn, aMin, aMax, pMin, pMax));
+            }
 
       int l        = lines->value();
       bool s       = small->isChecked();
