@@ -2513,8 +2513,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     //
                                     Chord* c = static_cast<Chord*>(cr);
                                     NoteList* nl = c->noteList();
+                                    Part* part = cr->staff()->part();
                                     for (iNote i = nl->begin(); i != nl->end(); ++i) {
                                           Note* n = i->second;
+                                          n->setPitch(n->pitch() - part->pitchOffset());
                                           n->setTrack(track);
                                           int nn = (track / VOICES) + n->staffMove();
                                           if (nn < 0 || nn >= nstaves())

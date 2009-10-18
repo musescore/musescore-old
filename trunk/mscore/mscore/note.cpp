@@ -597,7 +597,11 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       xml.stag("Note");
       QList<Prop> pl = Element::properties(xml);
       xml.prop(pl);
-      xml.tag("pitch", pitch());
+      //
+      // get real pitch for clipboard (copy/paste)
+      //
+      xml.tag("pitch", xml.clipboardmode ? ppitch() : pitch());
+
       if (_tuning != 0.0)
             xml.tag("tuning", _tuning);
       xml.tag("tpc", tpc());
