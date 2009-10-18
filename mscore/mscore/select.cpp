@@ -802,11 +802,8 @@ QByteArray Selection::staffMimeData() const
                                     tuplet->write(xml);
                                     }
                               foreach(Slur* slur, cr->slurFor()) {
-printf("slur %d-%d  %d-%d\n", tickStart(), tickEnd(), slur->startElement()->tick(),
-   slur->endElement()->tick());
                                     if (slur->startElement()->tick() >= tickStart()
                                        && slur->endElement()->tick() < tickEnd()) {
-printf("   write slur\n");
                                           slur->write(xml);
                                           }
                                     }

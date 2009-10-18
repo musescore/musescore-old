@@ -1,4 +1,6 @@
 18.oct (ws)
+      - fix: Make copy/paste between transposing instruments preserve
+        concert pitch
       - fix: Acciaccaturas in transposing instruments get wrong pitch
       - fix: Playback of D.C. al Fine and volta
       - fix volta playback bug
