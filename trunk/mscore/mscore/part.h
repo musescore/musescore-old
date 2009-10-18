@@ -88,15 +88,19 @@ class Part {
             _instrument.maxPitchP = b;
             }
 
-      void setDrumset(Drumset* ds)             { _instrument.drumset = ds;       }
-      Drumset* drumset() const                 { return _instrument.drumset;     }
-      bool useDrumset() const                  { return _instrument.useDrumset;  }
+      void setDrumset(Drumset* ds)             { _instrument.drumset = ds;      }
+      Drumset* drumset() const                 { return _instrument.drumset;    }
+      bool useDrumset() const                  { return _instrument.useDrumset; }
       void setUseDrumset(bool val);
 
-      int minPitchP() const                    { return _instrument.minPitchP;    }
-      int maxPitchP() const                    { return _instrument.maxPitchP;    }
-      int minPitchA() const                    { return _instrument.minPitchA;    }
-      int maxPitchA() const                    { return _instrument.maxPitchA;    }
+      int minPitchP() const                    { return _instrument.minPitchP;  }
+      int maxPitchP() const                    { return _instrument.maxPitchP;  }
+      int minPitchA() const                    { return _instrument.minPitchA;  }
+      int maxPitchA() const                    { return _instrument.maxPitchA;  }
+      void setMinPitchP(int v)                 { _instrument.minPitchP = v;     }
+      void setMaxPitchP(int v)                 { _instrument.maxPitchP = v;     }
+      void setMinPitchA(int v)                 { _instrument.minPitchA = v;     }
+      void setMaxPitchA(int v)                 { _instrument.maxPitchA = v;     }
 
       int volume() const;
       int reverb() const;

@@ -1,3 +1,5 @@
+18.oct (ws)
+      - "usable pitch range" is now editable in part properties dialog
 17.oct (ws)
       - expanding palettes does not resize main window anymore
       - fix: Slurs not visible till completion in note entry mode
