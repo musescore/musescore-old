@@ -298,6 +298,13 @@ Element* BarLine::drop(const QPointF& p1, const QPointF& p2, Element* e)
             return 0;
             }
       Measure* m = segment()->measure();
+      if (st == START_REPEAT) {
+            m = m->nextMeasure();
+            if (m == 0) {
+                  delete e;
+                  return 0;
+                  }
+            }
       m->drop(p1, p2, e);
       return 0;
       }
