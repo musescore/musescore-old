@@ -188,9 +188,24 @@ void RepeatList::unwind()
       clear();
 
       QStack<RepeatLoop> rstack;
-      int tickOffset         = 0;
-      int overallRepeatCount = 0;
-      int repeatEnd          = -1;
+      int tickOffset = 0;
+
+      //
+      // check for necessary implicit repeat start
+      //
+      int loopCount = 0;
+      for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
+            if (m->repeatFlags() & RepeatStart)
+                  ++ loopCount;
+            if (m->repeatFlags() & RepeatEnd)
+                  --loopCount;
+            }
+      if (loopCount == -1) {
+            rstack.push(RepeatLoop(_score->firstMeasure()));
+            printf("implicit start repeat at first measure\n");
+            }
+      else if (loopCount != 0)
+            printf("unbalanced repeat start-end\n");
 
       RepeatSegment* rs = new RepeatSegment;
       rs->tick       = 0;
@@ -199,17 +214,26 @@ void RepeatList::unwind()
       rs->timeOffset = 0.0;
 
       for (Measure* m = _score->firstMeasure(); m;) {
-            if (
-                  (m->repeatFlags() & RepeatStart)
-               && (rstack.isEmpty() || (rstack.top().m != m))
-               && (rstack.isEmpty() || (rstack.top().type != RepeatLoop::LOOP_JUMP))
-               && (repeatEnd == -1)
-               )
+            bool inLoop = !rstack.isEmpty();
+            int flags = m->repeatFlags();
+            //
+            //  check for repeat start
+            //
+            if ((flags & RepeatStart)
+               && (!inLoop || rstack.top().m != m)
+               && (!inLoop || rstack.top().type != RepeatLoop::LOOP_JUMP)
+               ) {
                   rstack.push(RepeatLoop(m));
+                  }
 
-            int n = !rstack.isEmpty() ? rstack.top().count + 1 : overallRepeatCount + 1;
+            int n = inLoop ? rstack.top().count + 1 : 1;
 
-            if ((!rstack.isEmpty() || overallRepeatCount) && !_score->isVolta(m->tick(), n)) {
+            //
+            // Voltas outside of loops are ignored.
+            // Voltas on first measure of a loop are also ignored. Its
+            // assumed that they belong to a previous loop.
+            //
+            if (inLoop && !(flags & RepeatStart) && !_score->isVolta(m->tick(), n)) {
                   tickOffset -= m->tickLen();   // skip this measure
 
                   rs->len = m->tick() - rs->tick;
@@ -221,9 +245,9 @@ void RepeatList::unwind()
                   rs->utick = rs->tick + tickOffset;
                   }
 
-            if (rstack.isEmpty()) {
+            if (!inLoop) {
                   // Jumps are only accepted outside of other repeats
-                  if (m->repeatFlags() & RepeatJump) {
+                  if (flags & RepeatJump) {
                         Jump* s = 0;
                         foreach(Element* e, *m->el()) {
                               if (e->type() == JUMP) {
@@ -254,38 +278,9 @@ void RepeatList::unwind()
                         else
                               printf("Jump not found\n");
                         }
-                  else if (m->repeatFlags() & RepeatEnd) {
-                        // this is a end repeat without start repeat:
-                        //    repeat from beginning
-                        //
-                        // dont repeat inside a repeat
-
-                        if (repeatEnd < 0 || repeatEnd == m->tick()) {
-                              ++overallRepeatCount;
-                              if (overallRepeatCount < m->repeatCount()) {
-                                    repeatEnd = m->tick();
-                                    Measure* nm = _score->firstMeasure();
-                                    tickOffset += m->tick() + m->tickLen() - nm->tick();
-
-                                    rs->len = m->tick() + m->tickLen() - rs->tick;
-                                    append(rs);
-                                    rs = new RepeatSegment;
-                                    rs->tick  = nm->tick();
-                                    rs->utick = rs->tick + tickOffset;
-
-                                    m = nm;
-                                    continue;
-                                    }
-                              else {
-                                    overallRepeatCount = 0;
-                                    repeatEnd = -1;
-                                    }
-                              }
-
-                        }
                   }
             else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {
-                  if (m->repeatFlags() & RepeatEnd) {
+                  if (flags & RepeatEnd) {
                         //
                         // increment repeat count
                         //
@@ -318,7 +313,10 @@ void RepeatList::unwind()
                               m = nm;
                               continue;
                               }
-                        rstack.pop();     // end this loop
+                        if (inLoop)
+                              rstack.pop();     // end this loop
+                        else
+                              printf("repeatStack:: cannot pop\n");
                         }
                   }
             else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
@@ -341,7 +339,10 @@ void RepeatList::unwind()
                               printf("Cont label not found: <%s>\n", qPrintable(rstack.top().cont));
 
                         m = nmb;
-                        rstack.pop();     // end this loop
+                        if (inLoop)
+                              rstack.pop();     // end this loop
+                        else
+                              printf("repeatStack:: cannot pop\n");
                         continue;
                         }
                   }
