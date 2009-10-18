@@ -153,3 +153,54 @@ LineSegment* Volta::createLineSegment()
       return new VoltaSegment(score());
       }
 
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool VoltaSegment::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addAction(tr("Volta Properties..."));
+      a->setData("props");
+      a = popup->addAction(tr("Line Properties..."));
+      a->setData("lprops");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void VoltaSegment::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            VoltaProperties vp;
+            vp.setText(volta()->text());
+            vp.setEndings(volta()->endings());
+            int rv = vp.exec();
+            if (rv) {
+                  QString txt  = vp.getText();
+                  QList<int> l = vp.getEndings();
+                  if (txt != volta()->text())
+                        score()->undoChangeVoltaText(volta(), txt);
+                  if (l != volta()->endings())
+                        score()->undoChangeVoltaEnding(volta(), l);
+                  }
+            }
+      else if (s == "lprops") {
+            TextLine* nTl  = textLine()->clone();
+            LineProperties lp(nTl);
+            if (lp.exec()) {
+                  score()->undoChangeElement(textLine(), nTl);
+                  // force new text
+                  foreach(LineSegment* l, nTl->lineSegments()) {
+                        static_cast<TextLineSegment*>(l)->clearText();
+                        }
+                  }
+            else
+                  delete nTl;
+            }
+      else
+            Element::propertyAction(s);
+      }
+

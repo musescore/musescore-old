@@ -39,6 +39,8 @@ class VoltaSegment : public TextLineSegment {
       virtual ElementType type() const     { return VOLTA_SEGMENT; }
       virtual VoltaSegment* clone() const  { return new VoltaSegment(*this); }
       Volta* volta() const                 { return (Volta*)parent(); }
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 //---------------------------------------------------------

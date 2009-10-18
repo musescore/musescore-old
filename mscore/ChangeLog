@@ -1,4 +1,5 @@
 18.oct (ws)
+      - reanimated volta properties
       - "usable pitch range" is now editable in part properties dialog
 17.oct (ws)
       - expanding palettes does not resize main window anymore
