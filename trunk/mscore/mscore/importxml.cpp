@@ -1524,8 +1524,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
             t->setTick(tick);
             t->setText(rehearsal);
-            t->setAbove(placement == "above");
-            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+            if (hasYoffset) t->setYoff(yoffset);
+            else t->setAbove(placement == "above");
+            t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
@@ -1568,8 +1569,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         s->setSym(pedalasteriskSym);
                   else
                         printf("unknown pedal %s\n", type.toLatin1().data());
-                  s->setAbove(placement == "above");
-                  s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                  if (hasYoffset) s->setYoff(yoffset);
+                  else s->setAbove(placement == "above");
+                  s->setUserOff(QPointF(rx, ry));
                   s->setMxmlOff(offset);
                   s->setTrack((staff + rstaff) * VOICES);
                   measure->add(s);
@@ -1581,8 +1583,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
-                  dyn->setAbove(placement == "above");
-                  dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                  if (hasYoffset) dyn->setYoff(yoffset);
+                  else dyn->setAbove(placement == "above");
+                  dyn->setUserOff(QPointF(rx, ry));
                   dyn->setMxmlOff(offset);
 
                   dyn->setTrack((staff + rstaff) * VOICES);
