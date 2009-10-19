@@ -1252,16 +1252,18 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       QString type;
       QString txt;
       QString lang;
-      QString weight;
+      QString fontWeight = "";
+      QString fontStyle = "";
+      QString fontSize = "";
       int offset = 0;
       int rstaff = 0;
       QStringList dynamics;
       int spread = 0;
       qreal rx = 0.0;
       qreal ry = 0.0;
-      qreal yoffset = 0.0;
+      qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
-      qreal size = score->textStyle(TEXT_STYLE_TECHNIK)->size;
+      bool hasYoffset = false;
       QString tempo = "";
       QString rehearsal = "";
       QString sndCapo = "";
@@ -1283,20 +1285,16 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             if (e.tagName() == "direction-type") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         dirType = ee.tagName();
-                        //
-                        // TODO: whats the difference between relative-x and default-x
-                        //       in handling?
-                        //
                         ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
                         rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
-                        yoffset = ee.attribute("default-y", "0.0").toDouble() * -0.1;
+                        yoffset = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
                         xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                         if (dirType == "words") {
-                              txt    = ee.text();
-                              lang   = ee.attribute(QString("xml:lang"), "it");
-                              weight = ee.attribute(QString("font-weight"));
-                              if (ee.hasAttribute("font-size"))
-                                    size = ee.attribute("font-size").toDouble();
+                              txt        = ee.text();
+                              lang       = ee.attribute(QString("xml:lang"), "it");
+                              fontWeight = ee.attribute(QString("font-weight"));
+                              fontSize   = ee.attribute(QString("font-size"));
+                              fontStyle  = ee.attribute(QString("font-style"));
                               }
                         else if (dirType == "rehearsal") {
                               rehearsal = ee.text();
@@ -1477,8 +1475,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             }
 
       if (dirType == "words" && (txt != "" || tempo != "")) {
-            // LVIFIX: tempotext font is incorrect
-            // printf("words txt='%s' tempo='%s'\n", txt.toLatin1().data(), tempo.toLatin1().data());
+            printf("words txt='%s' tempo='%s' pl='%s' hasyoffs=%d fsz='%s' fst='%s' fw='%s'\n",
+                    txt.toUtf8().data(),
+                    tempo.toUtf8().data(),
+                    placement.toUtf8().data(),
+                    hasYoffset,
+                    fontSize.toUtf8().data(),
+                    fontStyle.toUtf8().data(),
+                    fontWeight.toUtf8().data()
+                  );
             Text* t;
             if (tempo != "") {
                   t = new TempoText(score);
@@ -1489,16 +1494,26 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
             t->setTick(tick);
-            if (weight == "bold") {
+            if (fontSize != "" || fontStyle != "" || fontWeight != "") {
                   QFont f = t->defaultFont();
-                  f.setBold(true);
+                  if (fontSize != "") {
+                        bool ok = true;
+                        float size = fontSize.toFloat();
+                        if (ok) f.setPointSizeF(size);
+                        }
+                  f.setItalic(fontStyle == "italic");
+                  f.setBold(fontWeight == "bold");
                   t->setDefaultFont(f);
-                  t->setText(txt);
                   }
-            else
-                  t->setText(txt);
-            t->setAbove(placement == "above");
-            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+            t->setText(txt);
+// previous implementation
+//            t->setAbove(placement == "above");
+//            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+// new
+            if (hasYoffset) t->setYoff(yoffset);
+            else t->setAbove(placement == "above");
+            t->setUserOff(QPointF(rx, ry));
+// end
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
