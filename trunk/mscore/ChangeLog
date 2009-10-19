@@ -1,3 +1,5 @@
+19.oct (lv)
+      - fix import of MusicXML <words> vertical placement and font
 18.oct (ws)
       - fix: Make copy/paste between transposing instruments preserve
         concert pitch
