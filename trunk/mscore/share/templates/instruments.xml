@@ -6,7 +6,7 @@
      <velocity>100%</velocity>
      </Articulation>
   <Articulation name="staccato">
-     <gateTime>50%</gateTime>
+     <gateTime>85%</gateTime>
      </Articulation>
   <Articulation name="tenuto">
      <gateTime>100%</gateTime>
@@ -904,6 +904,16 @@
         <pPitchRange>54-69</pPitchRange>
         <channel>
            <program>71</program>
+           </channel>
+        </instrument>
+     <instrument>
+        <name>Shanai</name>
+        <short-name>Sha.</short-name>
+        <clef>0</clef>
+        <aPitchRange>62-84</aPitchRange>
+        <pPitchRange>62-84</pPitchRange>
+        <channel>
+           <program>111</program>
            </channel>
         </instrument>
      <instrument>
@@ -3607,6 +3617,16 @@
            </channel>
         </instrument>
      <instrument>
+        <name>Bass Guitar</name>
+        <short-name>B. Guit.</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-65</aPitchRange>
+        <pPitchRange>28-65</pPitchRange>
+        <channel>
+           <program>34</program>
+           </channel>
+        </instrument>
+     <instrument>
         <name>Pedal steel Guitar</name>
         <short-name>Ped. st. Guit.</short-name>
         <clef>13</clef>
@@ -3627,18 +3647,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Bass Guitar</name>
-        <short-name>B. Guit.</short-name>
-        <clef>5</clef>
-        <aPitchRange>28-65</aPitchRange>
-        <pPitchRange>28-65</pPitchRange>
-        <channel>
-           <program>34</program>
-           </channel>
-        </instrument>
-     <instrument>
         <name>Electric Bass</name>
-        <short-name>El. B. Guit.</short-name>
+        <short-name>El. B.</short-name>
         <clef>5</clef>
         <aPitchRange>28-65</aPitchRange>
         <pPitchRange>28-65</pPitchRange>
@@ -3734,6 +3744,36 @@
         <pPitchRange>48-83</pPitchRange>
         <channel>
            <program>105</program>
+           </channel>
+        </instrument>
+     <instrument>
+        <name>Hosozao Shamisen</name>
+        <short-name>Ho. Sh.</short-name>
+        <clef>3</clef>
+        <aPitchRange>50-83</aPitchRange>
+        <pPitchRange>50-83</pPitchRange>
+        <channel>
+           <program>106</program>
+           </channel>
+        </instrument>
+     <instrument>
+        <name>Hutozao Shamisen</name>
+        <short-name>Hu. Sh.</short-name>
+        <clef>3</clef>
+        <aPitchRange>43-76</aPitchRange>
+        <pPitchRange>43-76</pPitchRange>
+        <channel>
+           <program>106</program>
+           </channel>
+        </instrument>
+     <instrument>
+        <name>Sitar</name>
+        <short-name>Si.</short-name>
+        <clef>0</clef>
+        <aPitchRange>36-84</aPitchRange>
+        <pPitchRange>36-84</pPitchRange>
+        <channel>
+           <program>104</program>
            </channel>
         </instrument>
      </instrument-group>
@@ -4052,6 +4092,16 @@
            <program>46</program>
            </channel>
         </instrument>
+     <instrument>
+        <name>Koto</name>
+        <short-name>Ko.</short-name>
+        <clef>0</clef>
+        <aPitchRange>43-83</aPitchRange>
+        <pPitchRange>43-83</pPitchRange>
+        <channel>
+           <program>107</program>
+           </channel>
+        </instrument>
      </instrument-group>
 
   <instrument-group name="Strings">
@@ -4140,7 +4190,7 @@
         <short-name>Vlc.</short-name>
         <clef>4</clef>
         <aPitchRange>36-67</aPitchRange>
-        <pPitchRange>36-72</pPitchRange>
+        <pPitchRange>36-90</pPitchRange>
         <channel>
            <program>42</program>
            </channel>
@@ -4156,7 +4206,7 @@
         <short-name>Vlcs.</short-name>
         <clef>4</clef>
         <aPitchRange>36-67</aPitchRange>
-        <pPitchRange>36-72</pPitchRange>
+        <pPitchRange>36-90</pPitchRange>
         <channel>
            <program>49</program>
            </channel>
@@ -4201,7 +4251,7 @@
         </instrument>
      <instrument>
         <name>Soprano Viola da gamba</name>
-        <short-name>S. Vla. d. ga.</short-name>
+        <short-name>S. Vla. d. g.</short-name>
         <clef>9</clef>
         <aPitchRange>50-86</aPitchRange>
         <pPitchRange>50-93</pPitchRange>
@@ -4217,7 +4267,7 @@
         </instrument>
      <instrument>
         <name>Alto Viola da gamba</name>
-        <short-name>A. Vla. d. ga.</short-name>
+        <short-name>A. Vla. d. g.</short-name>
         <clef>11</clef>
         <aPitchRange>45-81</aPitchRange>
         <pPitchRange>45-88</pPitchRange>
@@ -4249,7 +4299,7 @@
         </instrument>
      <instrument>
         <name>Viola da gamba</name>
-        <short-name>Vla. </short-name>
+        <short-name>Vla. d. g.</short-name>
         <clef>4</clef>
         <aPitchRange>38-74</aPitchRange>
         <pPitchRange>38-81</pPitchRange>
