@@ -151,11 +151,8 @@ void Dynamic::setSubtype(int idx)
             if (ts->sizeIsSpatiumDependent)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
-#ifdef Q_WS_MAC
-            QFont font("MScore1 20");
-#else
+			
             QFont font("MScore1");
-#endif
             font.setPixelSize(lrint(m));
             font.setKerning(true);
             tf.setFont(font);

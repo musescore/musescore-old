@@ -490,11 +490,7 @@ TextStyle::TextStyle(
    frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag)
       {
       hasFrame = fw != 0.0;
-#ifdef Q_WS_MAC
-      family = _family + " 20";
-#else
-	family = _family;
-#endif
+	  family = _family;
       }
 
 //---------------------------------------------------------

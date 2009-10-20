@@ -1,6 +1,10 @@
 20.oct (db)
       - remove the "All files" option from "Choose Instruments List"
       - correct misspelling in en_US
+	(la)
+      - remove Mac font hack
+      - Mac has know the same default font than Windows and Linux
+      - fix chordname input with stdchords on Mac
 19.oct (lv)
       - fix import of MusicXML <dynamics> and <pedal> vertical placement
       - fix import of MusicXML <words> vertical placement and font
