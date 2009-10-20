@@ -79,8 +79,9 @@ void DurationElement::convertTicks()
       {
       if (_ticks < 0)
             return;
-      if (_tuplet == 0)
+      if (_tuplet == 0) {
             setFraction(Fraction::fromTicks(_ticks));
+            }
       else {
             ;
             }
