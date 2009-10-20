@@ -5639,7 +5639,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation>Instrement list:</translation>
+        <translation>Instrument list:</translation>
     </message>
     <message>
         <source>Working Directory:</source>

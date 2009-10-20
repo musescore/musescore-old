@@ -870,7 +870,7 @@ void PreferenceDialog::selectInstrumentList()
          this,
          tr("Choose Instrument List"),
          instrumentList->text(),
-         tr("Instrument List (*.xml);;All (*)")
+         tr("Instrument List (*.xml)")
          );
       if (!s.isNull())
             instrumentList->setText(s);

@@ -1,3 +1,6 @@
+20.oct (db)
+      - remove the "All files" option from "Choose Instruments List"
+      - correct misspelling in en_US
 19.oct (lv)
       - fix import of MusicXML <dynamics> and <pedal> vertical placement
       - fix import of MusicXML <words> vertical placement and font
@@ -19,13 +22,13 @@
 15.oct (tb)
       - correcting Norwegian iso code from no to nb
       (og)
-	- conditional output of exportly's lilypond macros (\okt and
-	  \segno). bugfix for repeats.
-	(la)
-	- Move lines with staff
-	- fix crash on playback with 8th and 16th
-	- fix crash with note entry and remove part
-	- fix transposing instruments playback wrong
+      - conditional output of exportly's lilypond macros (\okt and
+        \segno). bugfix for repeats.
+      (la)
+      - Move lines with staff
+      - fix crash on playback with 8th and 16th
+      - fix crash with note entry and remove part
+      - fix transposing instruments playback wrong
 14.oct (ws)
       - new style option to create a fixed number of measures/system optional
         of equal width
@@ -33,9 +36,9 @@
       - update Spanish translation by alkayata
       - update Danish translation by Morton Poulson
 13.oct (og)
-	    - exportly: 13.oct fixed grace-note-troubles on demos: golliwogg
-	      and troubles with wholemeasure rests in the shifting
-	      timesignatures in promenade. Started on lilypond \chordmode
+      - exportly: 13.oct fixed grace-note-troubles on demos: golliwogg
+        and troubles with wholemeasure rests in the shifting
+        timesignatures in promenade. Started on lilypond \chordmode
 12.oct (la)
       - fix issues with lines and remove/add instrument
 11.oct (ws)
