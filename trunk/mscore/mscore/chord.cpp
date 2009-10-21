@@ -41,6 +41,7 @@
 #include "staff.h"
 #include "utils.h"
 #include "articulation.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -739,7 +740,8 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
       if (_noStem)
             xml.tag("noStem", _noStem);
       else if (_stem) {
-            if (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible())
+            
+            if (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != preferences.defaultColor))
                   _stem->write(xml);
             }
       switch(_stemDirection) {
