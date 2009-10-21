@@ -56,6 +56,8 @@ StyleType styleTypes[] = {
       StyleType("doubleBarDistance",       ST_SPATIUM),
       StyleType("endBarDistance",          ST_SPATIUM),
       StyleType("repeatBarTips",           ST_BOOL),
+      StyleType("startBarlineSingle",           ST_BOOL),
+      StyleType("startBarlineMultiple",           ST_BOOL),
 
       StyleType("bracketWidth",            ST_SPATIUM),     // system bracket width
       StyleType("bracketDistance",         ST_SPATIUM),     // system bracket distance
@@ -325,6 +327,8 @@ Style::Style()
             StyleVal(ST_doubleBarDistance, Spatium(0.30)),
             StyleVal(ST_endBarDistance, Spatium(0.30)),
             StyleVal(ST_repeatBarTips, false),
+            StyleVal(ST_startBarlineSingle, false),
+            StyleVal(ST_startBarlineMultiple, true),
 
             StyleVal(ST_bracketWidth, Spatium(0.35)),
             StyleVal(ST_bracketDistance, Spatium(0.25)),
