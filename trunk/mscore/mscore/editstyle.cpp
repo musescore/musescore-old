@@ -134,6 +134,8 @@ void EditStyle::getValues()
       lstyle.set(ST_frameSystemDistance,     Spatium(frameSystemDistance->value()));
 
       lstyle.set(ST_repeatBarTips,           showRepeatBarTips->isChecked());
+      lstyle.set(ST_startBarlineSingle,      showStartBarlineSingle->isChecked());
+      lstyle.set(ST_startBarlineMultiple,    showStartBarlineMultiple->isChecked());
 
       lstyle.set(ST_bracketDistance,         Spatium(bracketDistance->value()));
       lstyle.set(ST_measureSpacing,          measureSpacing->value());
@@ -231,6 +233,8 @@ void EditStyle::setValues()
       frameSystemDistance->setValue(lstyle[ST_frameSystemDistance].toSpatium().val());
 
       showRepeatBarTips->setChecked(lstyle[ST_repeatBarTips].toBool());
+      showStartBarlineSingle->setChecked(lstyle[ST_startBarlineSingle].toBool());
+      showStartBarlineMultiple->setChecked(lstyle[ST_startBarlineMultiple].toBool());
 
       bracketDistance->setValue(lstyle[ST_bracketDistance].toSpatium().val());
 

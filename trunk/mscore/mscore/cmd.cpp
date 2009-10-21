@@ -1476,25 +1476,25 @@ void Score::insertMeasures(int n, int type)
 	int ticks = _sigmap->ticksMeasure(tick);
 
 	for (int ino = 0; ino < n; ++ino) {
-		MeasureBase* m = 0;
+			MeasureBase* m = 0;
             if (type == MEASURE)
                   m = new Measure(this);
             else if (type == HBOX)
                   m = new HBox(this);
             else if (type == VBOX)
                   m = new VBox(this);
-		m->setTick(tick);
+		    m->setTick(tick);
             if (type == MEASURE) {
-      		Measure* measure = static_cast<Measure*>(m);
-	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-		      	Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
-	      		rest->setTrack(staffIdx * VOICES);
-		      	Segment* s = measure->getSegment(rest);
-			      s->add(rest);
+      		    Measure* measure = static_cast<Measure*>(m);
+	      	    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+    		      	    Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
+        	      		rest->setTrack(staffIdx * VOICES);
+        		      	Segment* s = measure->getSegment(rest);
+        			      s->add(rest);
 		            }
-                  undoFixTicks();
-		      }
-	      undoInsertMeasure(m);
+              	undoFixTicks();
+		          }
+            undoInsertMeasure(m);
             if (type == MEASURE) {
                   if (tick == 0) {
                         AL::SigEvent e1 = _sigmap->timesig(tick);
@@ -1506,9 +1506,9 @@ void Score::insertMeasures(int n, int type)
                   undoInsertTime(tick, ticks);
                   undoFixTicks();
                   }
-            }
-      select(0, SELECT_SINGLE, 0);
-	layoutAll = true;
+        }
+        select(0, SELECT_SINGLE, 0);
+        layoutAll = true;
       }
 
 //---------------------------------------------------------
