@@ -1,11 +1,13 @@
 21.oct (lv)
       - fix import of MusicXML <wedge> vertical placement
+      (db)
+      - remove ts files from installer
 20.oct (ws)
       - updated instruments.xml from Magnus Johansson
       (db)
       - remove the "All files" option from "Choose Instruments List"
       - correct misspelling in en_US
-	(la)
+      (la)
       - remove Mac font hack
       - Mac has know the same default font than Windows and Linux
       - fix chordname input with stdchords on Mac
