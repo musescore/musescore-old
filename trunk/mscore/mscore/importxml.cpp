@@ -1506,14 +1506,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t->setDefaultFont(f);
                   }
             t->setText(txt);
-// previous implementation
-//            t->setAbove(placement == "above");
-//            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
-// new
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx, ry));
-// end
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
@@ -1596,11 +1591,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       else if (dirType == "wedge") {
             bool above = (placement == "above");
             if (type == "crescendo")
-                  addWedge(0, tick, rx, ry, above, 0);
+                  addWedge(0, tick, rx, ry, above, hasYoffset, yoffset, 0);
             else if (type == "stop")
                   genWedge(0, tick, measure, staff+rstaff);
             else if (type == "diminuendo")
-                  addWedge(0, tick, rx, ry, above, 1);
+                  addWedge(0, tick, rx, ry, above, hasYoffset, yoffset, 1);
             else
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
             }
@@ -2690,7 +2685,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
  Called when the wedge start is read. Stores all wedge parameters known at this time.
  */
 
-void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, int subType)
+void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType)
       {
       MusicXmlWedge wedge;
       wedge.number = no;
@@ -2698,6 +2693,8 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, i
       wedge.rx = rx;
       wedge.ry = ry;
       wedge.above = above;
+      wedge.hasYoffset = hasYoffset;
+      wedge.yoffset = yoffset;
       wedge.subType = subType;
 
       if (int(wedgeList.size()) > no)
@@ -2723,6 +2720,8 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       hp->setTick(wedgeList[no].startTick);
       hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
+      if (wedgeList[no].hasYoffset) hp->setYoff(wedgeList[no].yoffset);
+      else hp->setYoff(wedgeList[no].above ? -3 : 8);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
       score->add(hp);

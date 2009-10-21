@@ -50,8 +50,11 @@ struct MusicXmlWedge {
       int number;
       int startTick;
       int subType;
-      qreal rx, ry;
+      qreal rx;
+      qreal ry;
       bool above;
+      bool hasYoffset;
+      qreal yoffset;
       };
 
 //---------------------------------------------------------
@@ -162,7 +165,7 @@ class MusicXml {
 
       //-----------------------------
 
-      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, int subType);
+      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType);
       void genWedge(int no, int endPos, Measure*, int staff);
       void doCredits();
       void direction(Measure* measure, int staff, QDomElement node);

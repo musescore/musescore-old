@@ -1938,7 +1938,8 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       QString tagname = QString("direction");
       if (el) {
             // xml.stag(QString("direction placement=\"%1\"").arg((el->userOff().y() > 0.0) ? "below" : "above"));
-            printf("directionTag()\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+            printf("directionTag() spatium=%g\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+                   el->spatium(),
                    el->type(), el->subtype(),
                    el->name(), el->subtypeName().toUtf8().data(),
                    el->x(), el->y(),
@@ -2062,6 +2063,9 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 
 void ExportMusicXml::words(Text* text, int staff)
       {
+      printf("words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
+             text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
+             text->getText().toUtf8().data());
       directionTag(xml, attr, text);
       if (text->subtypeName() == "RehearsalMark")
             xml.tag("rehearsal", text->getText());
