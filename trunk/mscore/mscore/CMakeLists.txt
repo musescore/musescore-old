@@ -36,7 +36,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
 endif (NOT MINGW)
 
 
-SET_SOURCE_FILES_PROPERTIES(revsion.h PROPERTIES GENERATED TRUE)
+SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
 
 add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h
@@ -208,11 +208,20 @@ if (MINGW)
       PROPERTIES generated true
       )
    # Windows: add -mconsole to LINK_FLAGS to get a console window for debug output
-   set_target_properties( mscore
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
-         LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
-      )
+   if(CMAKE_BUILD_TYPE MATCHES "Debug")
+     set_target_properties( mscore
+        PROPERTIES
+           COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
+           LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
+        )
+   else(CMAKE_BUILD_TYPE MATCHES "Debug")
+     set_target_properties( mscore
+          PROPERTIES
+             COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
+             LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
+          )
+   endif(CMAKE_BUILD_TYPE MATCHES "Debug")
+   
    target_link_libraries(mscore
       fluid
       al
@@ -315,7 +324,6 @@ endif (QT45)
      install( FILES   data/mscore.png DESTINATION share/pixmaps)
      install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
    endif (APPLE)
-
 endif (MINGW)
 
 if (NOT MINGW AND NOT APPLE)
