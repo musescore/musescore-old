@@ -201,6 +201,8 @@ class ExportLy {
   void printJumpOrMarker(int mnum, bool start);
 
   void anchortest();
+  void voltatest();
+  void jumptest();
   void storeAnchor(struct InstructionAnchor);
   void initAnchors();
   void removeAnchor(int);
@@ -244,6 +246,7 @@ class ExportLy {
   void writeChord(Chord*);
   void writeRest(int, int);
   void findVolta();
+  void findStartRepNoBarline(int &i, Measure*);
   void writeBarline(Measure *);
   int  voltaCheckBar(Measure *, int);
   void writeVolta(int, int);
@@ -955,6 +958,7 @@ void ExportLy::anchortest()
 	    case MARKER:
 	      printf("MARKER\n");
 	      instructionMarker((Marker*) instruction);
+	      break;
 	    case JUMP:
 	      printf("JUMP\n");
 	      break;
@@ -986,6 +990,74 @@ void ExportLy::anchortest()
 	    }
 	}
 }//end anchortest
+
+
+
+
+
+//---------------------------------------------------------------------
+// jumptest
+//---------------------------------------------------------------------
+void ExportLy::jumptest()
+{
+      int i;
+      for (i=0; i<lastJumpOrMarker; i++)
+	{
+	  Element * merke = jumpOrMarkerList[i].marker;
+	  ElementType instructiontype = merke ->type();
+	  Text* text = (Text*) merke;
+	  printf("marker nr: %d ", i);
+	  switch(instructiontype)
+	    {
+	    case STAFF_TEXT:
+	      printf("STAFF_TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      printf("\n");
+	      break;
+	    case TEXT:
+	      printf("TEXT ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      printf("\n");
+	      break;
+	    case MARKER:
+	      printf("MARKER\n");
+	      instructionMarker((Marker*) merke);
+	      break;
+	    case JUMP:
+	      printf("JUMP\n");
+	      break;
+	    case SYMBOL:
+	      printf("SYMBOL\n");
+	      break;
+	    case TEMPO_TEXT:
+	      printf("TEMPOTEXT MEASURE\n");
+	      break;
+	    case DYNAMIC:
+	      printf("Dynamic\n");
+	      break;
+	    case HARMONY:
+	      printf("akkordnavn. \n");
+	      break;
+	    case HAIRPIN:
+	      printf("hairpin \n");
+	      break;
+	    case PEDAL:
+	      printf("pedal\n");
+	      break;
+	    case TEXTLINE:
+	      printf("textline\n");
+	      break;
+	    case OTTAVA:
+	      printf("ottava\n");
+	      break;
+	    default: break;
+	    }
+	}
+}//end jumptest
+
+
+
+
 
 
 
@@ -1050,7 +1122,7 @@ void ExportLy::storeAnchor(struct InstructionAnchor a)
 void ExportLy::handlePreInstruction(Element * el)
 {
   int i = 0;
-  Text* text;
+  Text* tekst;
   for (i = 0; i <= nextAnchor; i++) //run thru anchorlist
     {
       if  ((anchors[i].anchor != 0) && (anchors[i].anchor == el))
@@ -1062,19 +1134,22 @@ void ExportLy::handlePreInstruction(Element * el)
 	    {
 	    case STAFF_TEXT:
 	    case TEXT:
-	      text = (Text*) instruction;
-	      if (instruction->subtypeName()== "RehearsalMark")
-		{
-		  out << "\\mark\\default ";
-		  bool ok = false;
-		  int dec=0;
-		  QString c;
-		  c=text->getText();
-		  dec = c.toInt(&ok, 10);
-		  if (ok) rehearsalnumbers=true;
-		  removeAnchor(i);
-		}
-	      break;
+	      {
+		tekst = (Text*) instruction;
+		if (instruction->subtypeName() == "System") printf("pre instruction systemtekst\n");
+		if (instruction->subtypeName() == "RehearsalMark")
+		  {
+		    out << "\\mark\\default ";
+		    bool ok = false;
+		    int dec=0;
+		    QString c;
+		    c=tekst->getText();
+		    dec = c.toInt(&ok, 10);
+		    if (ok) rehearsalnumbers=true;
+		    removeAnchor(i);
+		  }
+		break;
+	      }
 	      case OTTAVA:
 		ottvaswitch=true;
 		ottava((Ottava*) instruction, anchors[i].tick);
@@ -1323,14 +1398,18 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
 
 bool ExportLy::findMatchInMeasure(int tick, Staff* stf, Measure* m, int strack, int etrack, bool rehearsalmark)
 {
+  int iter=0;
   bool  found = false;
+  
   for (int st = strack; st < etrack; ++st)
     {
       for (Segment* seg = m->first(); seg; seg = seg->next())
 	{
+	  iter ++;
 	  Element* el = seg->element(st);
 	  if (!el) continue;
-	  if ((el->isChordRest()) && ((el->staff() == stf) || rehearsalmark ) && ((el->tick() >= tick)))
+	  
+	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((el->tick() >= tick)))
 	    {
 	      if (el->tick() > tick) tick=prevElTick;
 	      anker.anchor=el;
@@ -1375,12 +1454,13 @@ return found;
 
 void ExportLy::buildInstructionListPart(int strack, int etrack)
 {
-  bool rehearsalm=false;
+
   // part-level elements stored in the score layout
   prevElTick=0;
   foreach(Element* instruction, *(score->gel()))
     {
       bool found=false;
+      bool rehearsalm=false;
       switch(instruction->type())
 	{
 	case JUMP:
@@ -1396,7 +1476,14 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	case TEXTLINE:
 	  {
 	    SLine* sl = (SLine*) instruction;
-	    if (instruction->subtypeName() == "RehearsalMark") rehearsalm=true;
+	    Text* tekst = (Text*) instruction;
+	    if (tekst->subtypeName() == "System") printf("Systemtekst in part\n");
+	    if (tekst->subtypeName() == "Staff")  printf("Stafftest in part\n");
+	    if (tekst->subtypeName() == "RehearsalMark") 
+	      {
+		rehearsalm=true;
+		printf("found rehearsalmark in part\n");
+	      }
 	    //start of instruction:
 	    found=findMatchInPart(sl->tick(), sl->staff(), score, strack, etrack, rehearsalm);
 	    if (found)
@@ -1440,11 +1527,12 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 {
 
-  bool found=false;
-  bool rehearsalmark=false;
   // loop over all measure relative elements in this measure
   for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci)
     {
+      bool found=false;
+      bool rehearsal=false;
+
       Element* instruction = *ci;
       switch(instruction->type())
 	{
@@ -1457,8 +1545,11 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case OTTAVA:
 	case PEDAL:
 	case STAFF_TEXT:
-	  {
-	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsalmark);
+	  { 
+	    if (instruction->subtypeName() == "Staff") printf("stafftekst i measure\n");
+	    if (instruction->subtypeName() == "System") printf("systemtekst i measure\n");
+	    if (instruction->subtypeName() == "RehearsalMark") rehearsal=true;
+	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsal);
 	  if (found)
 	    {
 	      anker.instruct=instruction;
@@ -1557,6 +1648,7 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
   switch(barlinetype)
     {
     case START_REPEAT:
+      printf("startrepeat endbarlinetype  takt: %d\n", taktnr);
       i++;
       voltarray[i].voltart=startrepeat;
       voltarray[i].barno=taktnr;
@@ -1565,6 +1657,7 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
       i++;
       voltarray[i].voltart=endrepeat;
       voltarray[i].barno=taktnr;
+      printf("endrepeat endbarlinetype takt %d\n", taktnr);
       break;
     case END_START_REPEAT:
       i++;
@@ -1590,19 +1683,46 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
       break;
     }//switch
 
-  bool rs = meas->repeatFlags() & RepeatStart;
-  if ((rs)) 
-    // happens if repeat from beginning of score, or if start-repeat
-    // is at the beginning of a new line, so that start-repeat is not
-    // the last barline in a measure, but the first.
-    {
-      i++;
-      voltarray[i].voltart=startrepeat;
-      voltarray[i].barno=taktnr-1; //set as last element in previous measure.
+  // find startrepeat which does not exist as endbarline: If
+  // startrepeat is at beginning of line, and endrepeatbar ends this
+  // first measure of the line, repeatFlag is not set to RepeatStart,
+  // then this does not help, and I need "findStartRepNoBarline"
+  if (meas->repeatFlags() == RepeatStart)
+    {   printf("startrepeatflag\n");
+      // we have to exclude startrepeats found as endbarlines in previous measure
+      if ((voltarray[i].barno != taktnr-1) and (voltarray[i].voltart != startrepeat) and ( voltarray[i].voltart != bothrepeat ))
+	{
+	  printf("startrepeat ?  taktnr: %d\n", taktnr);
+	  i++;
+	  voltarray[i].voltart=startrepeat;
+	  voltarray[i].barno=taktnr-1; //set as last element in previous measure.
+	}
     }
-
+  
   return i;
 }//end voltacheckbarline
+
+//------------------------------------------------------------------------
+// findStartRepNoBarline
+// helper routine for findVolta. 
+//------------------------------------------------------------------------
+
+void ExportLy::findStartRepNoBarline(int &i, Measure* m)
+{
+ // loop over all measure relative segments in this measure
+  for (Segment* seg = m->first(); seg; seg = seg->next())
+    {
+      
+      if (seg->subtype() == Segment::SegStartRepeatBarLine) 
+	{
+	  printf("segstartrepeatbarline\n");
+	  i++; // insert at next slot of voltarray
+	  voltarray[i].voltart = startrepeat;
+	  voltarray[i].barno = taktnr-1;
+	  break;
+	}
+    }
+}
 
 
 
@@ -1630,29 +1750,34 @@ void  ExportLy::findVolta()
       if (m->type() !=MEASURE )
 	continue;
       ++taktnr;
+
+      //needed because of problems with repeatflag and because there
+      //are no readymade functions for finding startbarlines, and
+      //because startbarlines are not at the global level:
+      Measure* meas = (Measure*)m;
+      findStartRepNoBarline(i,meas);
+
       foreach(Element* el, *(m->score()->gel()))
-	//walk thru all elements of measure
-	{
+	//for each element at the global level relevant for this measure
+	{ 
 	  if (el->type() == VOLTA)
 	    {
 	      Volta* v = (Volta*) el;
-
+	      
 	      if (v->tick() == m->tick()) //If we are at the beginning of the measure
 		{
 		  i++;
 		  //  if (v->subtype() == Volta::VOLTA_CLOSED)
-		  // 		    {//lilypond developers have "never seen" last ending closed.
-		  //                 //So they are reluctant to implement it. Final ending is always "open" in lilypond.
-		  //                 
- 		  //                 PS: 
-		  //                 After the discussion that I read some years ago they have implemented 
-		  //                 second volta closed for all kinds of thin-tick or tick-thin double bars
+		  // 		    {
+		  //                 Lilypond has second volta closed for all kinds of thin-tick or tick-thin double bars
 		  //                 with or without repeat dots. But not for thin-thin double bar or single barline.
 		  //                 The only way I know of to make volta closed for thin-thin double bar
-		  //                 is to put the following line in the source code, the file 
+		  //                 and single bar is to put the following lines in the source code, the file 
 		  //                 volta-bracket.cc, at approx line 133, and recompile Lilypond
 		  //                	&& str != "||"
-		  //                 But there must be some \override or \set which fixes this stubbornness of the
+		  //                        && str != "|"
+		  //                 But then closing becomes hardcoded and we have no choice. 
+		  //                 There must be some \override or \set which fixes this stubbornness of the
 		  //                 Lilypond developers?? (olagunde@start.no)
 		  // 		    }
 		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN)
@@ -1672,15 +1797,50 @@ void  ExportLy::findVolta()
 		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN)
 		  // 		    {// see comment above.
 		  // 		    }
-
 		}
-	    }
-	}// for all elements
+	    }//if volta
+	}// for all global elements
       i=voltaCheckBar((Measure *) m, i);
     }//for all measures
   lastind=i;
-
+  
 }// end findvolta
+
+void ExportLy::voltatest()
+{
+  int i=0;
+  for (i=0; i<lastind; i++)
+    {
+      printf("iter: %d\n", i);
+      switch(voltarray[i].voltart)
+	{
+	case startrepeat:
+	  printf("startrepeat, bar %d\n", voltarray[i].barno);
+	  break;
+	case endrepeat:
+	  printf("endrepeat, bar %d\n", voltarray[i].barno);
+	  break;
+	case bothrepeat:
+	  printf("bothrepeat, bar %d\n", voltarray[i].barno);
+	  break;
+	case endbar:
+	  printf("endbar, bar %d\n", voltarray[i].barno);
+	  break;
+	case doublebar:
+	  printf("doublebar, bar %d\n", voltarray[i].barno);
+	  break;
+	case startending:
+	  printf("startending, bar %d\n", voltarray[i].barno);
+	  break;
+	case endending:
+	  printf("endending, bar %d\n", voltarray[i].barno);
+	  break;
+	default:
+	  break;
+	}
+      
+    }
+}
 
 
 //---------------------------------------------------------
@@ -2481,6 +2641,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 		}
 	      else
 		{
+		  if (wholemeasurerest > 0) writeMeasuRestNum();//should not happen?
 		  out << "{ ";
 		  indent();
 		  firstalt=false;
@@ -2510,11 +2671,11 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	    case endbar:
 	      if (wholemeasurerest > 0) writeMeasuRestNum();
 	      out << "\\bar \"|.\"";
-		  curTicks=-1;
+	      curTicks=-1;
 	      break;
           default:
 	    // case none: printf("strange voltarraycontents?\n");
-	      break;
+	    break;
 	    }//end switch
 
 	  if (voltarray[i+1].barno==measurenumber)
@@ -2843,6 +3004,7 @@ void ExportLy::writeScore()
 
       //ANCHORTEST: print instructionlist
        anchortest();
+       jumptest();
 
       foreach(Staff* staff, *part->staves())
 	{
@@ -2898,6 +3060,8 @@ void ExportLy::writeScore()
 	  staffname[staffInd].staffid.remove(QChar(' '));
 
 	  findVolta();
+	  
+	  voltatest();
 
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
 
@@ -3401,7 +3565,9 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
-   - conditional output of exportly's lilypond macros (\okt and
+  
+
+   22.oct  conditional output of exportly's lilypond macros (\okt and
      \segno). bugfix for repeats.
   
    13.oct fixed grace-note-troubles on demos: golliwogg and troubles
@@ -3486,31 +3652,38 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
+
   
-   -- Determine whether text goes above or below staff.
-   -- fingerings
-   -- correct indentation in score-block.
-   -- cross-staff beaming in pianostaff
-   -- cross-voice slurs!?!?!? seems _very_ complex to implement
-      (example demos:promenade, bar 6)
-   -- fermata above/below rest.
-   -- difficult problem with hairpins: Beginning of hairpin and end of
-      hairpin are anchored to different notes. This is done
-      automatically when you drop an hairpin in the appropriate place
-      in the score. exportly find these anchors and insert \< and \!
-      after these notes. But the start of the hairpin protrudes to the
-      left of the anchor. And often the end of the hairpin is anchored
-      to a note which is too far to the right. The placement of the
-      lily-symbols must take regard for the placement on the canvas
-      and not to the anchorpoints alone. Check the procedure in the
-      main program to see how the anchorpoints and the canvas-position
-      is made and compensate for this when exporting the lily-symbols.
+   -- Determine whether text goes above or below staff. fingerings
+
+   -- correct indentation in score-block. cross-staff beaming in
+      pianostaff cross-voice slurs!?!?!? seems _very_ complex to
+      implement (example demos:promenade, bar 6) fermata above/below
+      rest.
+
+   -- difficult problem with hairpins: Beginning of hairpin and
+   -- end of hairpin are anchored to different notes. This is done
+   -- automatically when you drop an hairpin in the appropriate place
+   -- in the score. exportly find these anchors and insert \< and \!
+   -- after these notes. But the start of the hairpin protrudes to the
+   -- left of the anchor. And often the end of the hairpin is anchored
+   -- to a note which is too far to the right. The placement of the
+   -- lily-symbols must take regard for the placement on the canvas
+   -- and not to the anchorpoints alone. Check the procedure in the
+   -- main program to see how the anchorpoints and the canvas-position
+   -- is made and compensate for this when exporting the
+   -- lily-symbols. -- check \set Score.hairpinToBarline = ##t
 
    -- Arpeggio.
+
    -- 8vabassa
+
    -- octave-trouble in golliwogg.
+
    -- metronome marks must be given as \tempo 4 = 60 and not as markups.
-   -- close second volta: doesn't seem possible.
+
+   -- close second volta: doesn't seem possible for single and
+      thin-thin double barlines
 
    -- Coda/Segno symbols collides with rehearsalmarks, which accordingly are not printed.
 
@@ -3519,11 +3692,15 @@ bool ExportLy::write(const QString& name)
       score. Solution: buffer outputstream in a string, so that write
       to file is postponed until we know whether we need the macros.
 
-   -- Lyrics (low priority in relation to music itself)
-   -- Collisions in crowded multi-voice staffs (e.g. cello-suite).
-   -- General tuplets
-   -- massive failure on demos: prelude_sr.mscz
+   -- Lyrics (low priority in relation to music itself) 
 
+   --Collisions in crowded multi-voice staffs
+     (e.g. cello-suite). check \override RestCollision
+     #'positioning-done = #'merge-rests-on-positioning. Use
+     \partcombine instead of ord. polyphony
+
+
+   -- General tuplets massive failure on demos: prelude_sr.mscz
 
    -- Many of the demos have voice 2 as the upper one =>
       trouble. Exportly.cpp must be made to identify the uppermost
