@@ -1,3 +1,5 @@
+22.oct (lv)
+      - fix export of MusicXML <direction> placement attribute for multi-staff systems
 21.oct (lv)
       - fix import of MusicXML <wedge> vertical placement
       (db)
