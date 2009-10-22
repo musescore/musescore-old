@@ -1507,13 +1507,14 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
+      QStringList argv2 =  QCoreApplication::arguments(); 
 
       if (!converterMode) {
             qApp->setWindowIcon(windowIcon);
             if (argc > 0) {
                   int ok = true;
                   for (int i = 0; i < argc; ++i) {
-                        QString message = QString::fromLocal8Bit(argv[optind + i]);
+                        QString message = argv2.at(optind + i); //QString::fromLocal8Bit(argv[optind + i]);
                         QFileInfo fi(message);
                         if (!app->sendMessage(fi.absoluteFilePath())) {
                               ok = false;
@@ -1689,9 +1690,9 @@ int main(int argc, char* argv[])
                         break;
                   }
             }
-      else {
+      else { 
             while (argc > 1) {
-                  QString name = QString::fromLocal8Bit(argv[optind++]);
+                  QString name = argv2.at(optind++);
                   --argc;
                   if (!name.isEmpty()) {
                         Score* score = new Score(defaultStyle);
