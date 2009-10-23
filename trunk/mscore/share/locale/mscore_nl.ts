@@ -139,7 +139,16 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Bezoek &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; voor nieuwe versies en meer informatie.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Ondersteun MuseScore met &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;uw donatie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer en Anderen. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Gepubliseerd onder de GNU Generale Publieke Licensie&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1065,35 +1074,36 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>velocity type</source>
-        <translation type="unfinished"></translation>
+        <translation>type luidheid</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"></translation>
+        <translation>luidheid (0-127)</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruiker</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"></translation>
+        <translation>compensatie</translation>
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation type="unfinished"></translation>
+        <translation>ontime compensatietype</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished"></translation>
+        <translation>ontime compensatie</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Offtime kan hier na wat gesnuffeld op internet even geen nederlandse vertaling bij vinden... heb ook geen ervaring met MIDI</translatorcomment>
+        <translation>offtime compensatietype</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1124,7 +1134,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -1163,11 +1173,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Waarden</translation>
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassen op:</translation>
     </message>
 </context>
 <context>
@@ -1863,11 +1873,11 @@ failed: </source>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig Nummer van Maat/Systeem:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig Maat Breedte</translation>
     </message>
 </context>
 <context>
@@ -2595,11 +2605,11 @@ failed: </source>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished"></translation>
+        <translation>zichtbaar</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished">zonder stok</translation>
+        <translation>zonder stok</translation>
     </message>
 </context>
 <context>
@@ -2672,19 +2682,19 @@ failed: </source>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe Rij</translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished"></translation>
+        <translation>a</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished"></translation>
+        <translation>zichtbaar</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished"></translation>
+        <translation>c</translation>
     </message>
 </context>
 <context>
@@ -2714,7 +2724,7 @@ failed: </source>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noten</translation>
     </message>
 </context>
 <context>
@@ -3590,7 +3600,8 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Afsluiten</translation>
+        <translatorcomment>Staat 2 keer Afsluiten in het rijtje (partituur bij vermeld om verwarring te voorkomen)</translatorcomment>
+        <translation>Afsluiten partituur</translation>
     </message>
     <message>
         <source>Close Current Score</source>
@@ -5169,51 +5180,51 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>local help</source>
-        <translation type="unfinished"></translation>
+        <translation>locaal help</translation>
     </message>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaal &amp;Handboek...</translation>
     </message>
     <message>
         <source>Show local Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon lokale handboek</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Input Inschakelen</translation>
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk Algemene Stijl...</translation>
     </message>
     <message>
         <source>double duration</source>
-        <translation type="unfinished"></translation>
+        <translation>dubbele duur</translation>
     </message>
     <message>
         <source>half duration</source>
-        <translation type="unfinished"></translation>
+        <translation>halve duur</translation>
     </message>
     <message>
         <source>repeat selection</source>
-        <translation type="unfinished"></translation>
+        <translation>herhaal selectie</translation>
     </message>
     <message>
         <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhaal selectie</translation>
     </message>
     <message>
         <source>follow song</source>
-        <translation type="unfinished"></translation>
+        <translation>volg lied</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation type="unfinished"></translation>
+        <translation>Volg Lied</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Bestanden (*.mid *.midi *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;</translation>
     </message>
 </context>
 <context>
@@ -5352,23 +5363,23 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>OnTimeType:</source>
-        <translation type="unfinished"></translation>
+        <translation>OnTime Type:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automatisch</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Compensatie</translation>
+        <translation>Compensatie</translation>
     </message>
     <message>
         <source>OffTimeType:</source>
-        <translation type="unfinished"></translation>
+        <translation>OffTime Type:</translation>
     </message>
 </context>
 <context>
@@ -5613,31 +5624,31 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cursor:</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Luidheid (velocity):</translation>
+        <translation>Luidheid (velocity):</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">automatisch</translation>
+        <translation>automatisch</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"></translation>
+        <translation>gebruiker</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"></translation>
+        <translation>compensatie</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toonhoogte:</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: &lt;%1&gt; Notenbalk: %2</translation>
     </message>
 </context>
 <context>
@@ -5698,15 +5709,15 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>Straight</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -6290,31 +6301,31 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Voorkeuren</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Blader...</translation>
     </message>
     <message>
         <source>Use Current Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidige Dimensies</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur de noten welke buiten het berijk van het instrument liggen</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer MIDI</translation>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI Afstandsbediening</translation>
     </message>
     <message>
         <source>Use JACK midi output</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik JACK midi-uitgang</translation>
     </message>
 </context>
 <context>
