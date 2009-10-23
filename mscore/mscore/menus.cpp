@@ -90,7 +90,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             notePalette = new Palette;
-            notePalette->setName(tr("Notes"));
+            notePalette->setName(tr("Grace Notes"));
             notePalette->setGrid(27, 40);
             notePalette->setDrawGrid(true);
 
