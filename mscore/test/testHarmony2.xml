@@ -49,7 +49,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -59,7 +59,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -72,17 +72,22 @@
         <root>
           <root-step>C</root-step>
           </root>
-        <kind text="">major</kind>
+        <kind text="omit5">major</kind>
         <degree>
-          <degree-value>7</degree-value>
+          <degree-value>5</degree-value>
           <degree-alter>0</degree-alter>
-          <degree-type>add</degree-type>
+          <degree-type>subtract</degree-type>
           </degree>
         </harmony>
+      <direction placement="below">
+        <direction-type>
+          <words>maj(sub5)</words>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -92,7 +97,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -103,19 +108,24 @@
     <measure number="3">
       <harmony print-frame="no">
         <root>
-          <root-step>D</root-step>
+          <root-step>C</root-step>
           </root>
-        <kind text="">major</kind>
+        <kind text="2">major</kind>
         <degree>
-          <degree-value>7</degree-value>
+          <degree-value>2</degree-value>
           <degree-alter>0</degree-alter>
           <degree-type>add</degree-type>
           </degree>
         </harmony>
+      <direction placement="below">
+        <direction-type>
+          <words>maj(add2)</words>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -125,7 +135,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -138,17 +148,22 @@
         <root>
           <root-step>C</root-step>
           </root>
-        <kind text="Maj7">major-seventh</kind>
+        <kind text="Maj7#5">major-seventh</kind>
         <degree>
-          <degree-value>7</degree-value>
-          <degree-alter>-1</degree-alter>
+          <degree-value>5</degree-value>
+          <degree-alter>1</degree-alter>
           <degree-type>alter</degree-type>
           </degree>
         </harmony>
+      <direction placement="below">
+        <direction-type>
+          <words>maj7(alt#5)</words>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -158,7 +173,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -169,20 +184,30 @@
     <measure number="5">
       <harmony print-frame="no">
         <root>
-          <root-step>D</root-step>
+          <root-step>E</root-step>
           <root-alter>-1</root-alter>
           </root>
-        <kind text="sus4">suspended-fourth</kind>
+        <kind text="9sus">suspended-fourth</kind>
         <degree>
           <degree-value>7</degree-value>
           <degree-alter>0</degree-alter>
           <degree-type>add</degree-type>
           </degree>
+        <degree>
+          <degree-value>9</degree-value>
+          <degree-alter>0</degree-alter>
+          <degree-type>add</degree-type>
+          </degree>
         </harmony>
+      <direction placement="below">
+        <direction-type>
+          <words>Eb9sus4</words>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
@@ -192,7 +217,7 @@
       <note>
         <pitch>
           <step>C</step>
-          <octave>4</octave>
+          <octave>5</octave>
           </pitch>
         <duration>2</duration>
         <voice>1</voice>
