@@ -25,6 +25,12 @@
 // C or C++, I have to resort to techniques well known in standard
 // Pascal as it was known in 1983, when I got my very short
 // programming education in the "Programming for Poets" course.
+
+// I have written a primitive program that takes a full score output
+// from exportly and adds separate parts to it:
+// http://home.online.no/~olagu2/lyparts.cpp
+// It does not work with other lilypond files.
+
 // Olav.
 
 
@@ -85,8 +91,9 @@ class ExportLy {
   Direction stemDirection;
   int indx;
 
-  int  n, z1, z2, z3, z4; //timesignatures
+  int  timedenom, z1, z2, z3, z4; //timesignatures
   int barlen, wholemeasurerest;
+  QString wholemeasuretext;
   bool pickup;
   bool rehearsalnumbers;
   bool donefirst; //to prevent doing things in first ordinary bar which are already done in pickupbar
@@ -235,6 +242,7 @@ class ExportLy {
   void indentF(); //file
   int getLen(int ticks, int* dots);
   void writeLen(int);
+  void writeChordLen(int ticks);
   QString tpc2name(int tpc);
   QString tpc2purename(int tpc);
 
@@ -519,6 +527,36 @@ void ExportLy::cleanupChordList()
 }
 
 
+void ExportLy::writeChordLen(int ticks)
+{
+  int dots = 0;
+  int len = getLen(ticks, &dots);
+  
+  switch (len)
+    {
+    case -5:
+      os << "1*5/4"; // 5/4
+      break;
+    case -4:
+      os << "2*5 "; // 5/2 ??
+      break;
+    case -3:
+      os << "1.*2 ";
+      break;
+    case -2://longa 16/4
+      os << "1*4 ";
+      break;
+    case -1: //brevis 8/4
+      os << "1*2";
+      break;
+    default:
+      os << len;
+      for (int i = 0; i < dots; ++i)
+	os << ".";
+      break;
+    }
+}
+
 void ExportLy::printChordList()
 {
   chordThis = chordHead;
@@ -531,18 +569,22 @@ void ExportLy::printChordList()
   while (next != NULL) 
     {
       i++;
+
+      //insert spacer rests before first chord:
       if ((i==1) and (chordThis->cd.tickpos > 0))
-	//insert spacer rests before first chord
 	{
+	  int factor=1;
 	  // works at least if denominator is 4:
-	  int measnum = chordThis->cd.tickpos / (z1 * AL::division);  
-	  int rest = chordThis->cd.tickpos % AL::division;
-	  if (measnum == 0) rest = chordThis->cd.tickpos;
+	  if (timedenom == 2) factor=2; else factor = 1;
+	  int measnum = chordThis->cd.tickpos / (z1 * AL::division * factor);  
+	  printf("Measnum chord: \n");
+	  int surplus = chordThis->cd.tickpos % AL::division;
+	  if (measnum == 0) surplus = chordThis->cd.tickpos;
 	  level++;
 	  indentF();
-	  if (rest > 0)
+	  if (surplus > 0)
 	    {
-	      lilylen= getLen(rest, &dots);
+	      lilylen= getLen(surplus, &dots);
 	      level++;
 	      indentF();
 	      os << "s" << lilylen;
@@ -554,11 +596,15 @@ void ExportLy::printChordList()
 	      os << " ";
 	    } 
 	  if (measnum > 0 ) os << "s1*" << measnum<< " \n";
-	}// end if firstone is not on tick 0 print silent rest.
-      chordThis->cd.ticklen =  next->cd.tickpos - chordThis->cd.tickpos;
-      chordThis=next;
-      next=next->next;
-    }//while note end of list.
+	}// end if firstone is not on tick 0 print spacer rest.
+      else
+	{
+	  //compute ticklen for the rest of the chords:
+	  chordThis->cd.ticklen =  next->cd.tickpos - chordThis->cd.tickpos;
+	  chordThis=next;
+	  next=next->next;
+	}
+    }//while not end of list.
 
   if (next == NULL)
      chordThis->cd.ticklen= 480;
@@ -570,14 +616,18 @@ void ExportLy::printChordList()
   
   indentF();
 
+
   while (next != NULL)
     {
       next=next->next;
       dots=0;
       lilylen=0;
       i++;
-      lilylen = getLen(chordThis->cd.ticklen, &dots);
-      os << chordThis->cd.chrName << lilylen;
+      //      lilylen = getLen(chordThis->cd.ticklen, &dots);
+      os << chordThis->cd.chrName;
+      curTicks=0;
+
+      writeChordLen(chordThis->cd.ticklen); //<< lilylen;
 
       while (dots > 0)
 	{
@@ -728,8 +778,10 @@ void ExportLy::storeChord(struct InstructionAnchor chordanchor)
 
 void ExportLy::tempoText(TempoText* text)
       {
-	//todo: print metronome value.
-	out << "^\\markup {\"" << text->getText() << "\"} ";
+	QString temptekst = text->getText();
+	double met = text->tempo();
+	met = met * 60;
+	out << "\\tempo \""  << text->getText() << "\" " <<  timedenom << " = " << met << "  ";
       }
 
 
@@ -745,7 +797,7 @@ void ExportLy::words(Text* text)
      if ((text->subtypeName() != "RehearsalMark"))
        // if (text->getText() != "")  
        out << "^\\markup {\"" << text->getText() << "\"} ";
-     printf("tekst %s\n", tekst.toLatin1().data());
+     //     printf("tekst %s\n", tekst.toLatin1().data());
       }
 
 
@@ -947,17 +999,16 @@ void ExportLy::anchortest()
 	    {
 	    case STAFF_TEXT:
 	      printf("STAFF_TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal STAFF ");
 	      printf("\n");
 	      break;
 	    case TEXT:
 	      printf("TEXT ");
-	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal ");
+	      if (text->subtypeName()== "RehearsalMark") printf(" rehearsal MEASURE");
 	      printf("\n");
 	      break;
 	    case MARKER:
 	      printf("MARKER\n");
-	      instructionMarker((Marker*) instruction);
 	      break;
 	    case JUMP:
 	      printf("JUMP\n");
@@ -989,6 +1040,7 @@ void ExportLy::anchortest()
 	    default: break;
 	    }
 	}
+      printf("Anchortest finished\n");
 }//end anchortest
 
 
@@ -1000,12 +1052,17 @@ void ExportLy::anchortest()
 //---------------------------------------------------------------------
 void ExportLy::jumptest()
 {
+  printf("at jumptest A lastjump %d\n", lastJumpOrMarker);
       int i;
       for (i=0; i<lastJumpOrMarker; i++)
-	{
+	{  
+	  printf("jumptest 1\n");
 	  Element * merke = jumpOrMarkerList[i].marker;
-	  ElementType instructiontype = merke ->type();
+	  printf("jumptest 2\n");
+	  ElementType instructiontype = merke->type();
+	  printf("jumptest 3\n");
 	  Text* text = (Text*) merke;
+	  printf("jumptest 4\n");
 	  printf("marker nr: %d ", i);
 	  switch(instructiontype)
 	    {
@@ -1021,7 +1078,6 @@ void ExportLy::jumptest()
 	      break;
 	    case MARKER:
 	      printf("MARKER\n");
-	      instructionMarker((Marker*) merke);
 	      break;
 	    case JUMP:
 	      printf("JUMP\n");
@@ -1050,7 +1106,8 @@ void ExportLy::jumptest()
 	    case OTTAVA:
 	      printf("ottava\n");
 	      break;
-	    default: break;
+	    default: 
+	      break;
 	    }
 	}
 }//end jumptest
@@ -1128,7 +1185,7 @@ void ExportLy::handlePreInstruction(Element * el)
       if  ((anchors[i].anchor != 0) && (anchors[i].anchor == el))
 	{
 	  Element * instruction = anchors[i].instruct;
-	  ElementType instructiontype = instruction ->type();
+	  ElementType instructiontype = instruction->type();
 
 	  switch(instructiontype)
 	    {
@@ -1150,11 +1207,14 @@ void ExportLy::handlePreInstruction(Element * el)
 		  }
 		break;
 	      }
-	      case OTTAVA:
-		ottvaswitch=true;
-		ottava((Ottava*) instruction, anchors[i].tick);
-		removeAnchor(i);
-		break;
+	    case OTTAVA:
+	      ottvaswitch=true;
+	      ottava((Ottava*) instruction, anchors[i].tick);
+	      removeAnchor(i);
+	      break;
+	    case TEMPO_TEXT:
+	      tempoText((TempoText*) instruction);
+	      break;
 	    default: break;
 	    }//end switch
 	}//end if anchors
@@ -1186,7 +1246,6 @@ void ExportLy::handleElement(Element* el)
 	      instructionMarker((Marker*) instruction);
 	      break;
 	    case JUMP:
-	      jumpswitch=true;
 	      printf("JUMP\n");
 	      instructionJump((Jump*) instruction);
 	      break;
@@ -1194,13 +1253,19 @@ void ExportLy::handleElement(Element* el)
 	      printf("SYMBOL\n");
 	      symbol((Symbol *) instruction);
 	      break;
-	    case TEMPO_TEXT:
-	      printf("TEMPOTEXT MEASURE\n");
-	      tempoText((TempoText*) instruction);
-	      break;
+	      case TEMPO_TEXT:
+	    //   printf("TEMPOTEXT MEASURE\n");
+	    //   tempoText((TempoText*) instruction);
+	       break;
 	    case STAFF_TEXT:
 	    case TEXT:
 	      printf("TEXT\n");
+	      if (wholemeasurerest) 
+		{
+		  Text* wmtx = (Text*) instruction;
+		  wholemeasuretext = wmtx->getText();
+		}
+	      else
 	       words((Text*) instruction);
 	      break;
 	    case DYNAMIC:
@@ -1210,7 +1275,6 @@ void ExportLy::handleElement(Element* el)
 	      hairpin((Hairpin*) instruction, anchors[i].tick);
 	      break;
 	    case HARMONY:
-	      printf("handleelement harmony\n");
 	      words((Text*) instruction);
 	      break;
 	    case PEDAL:
@@ -1223,7 +1287,7 @@ void ExportLy::handleElement(Element* el)
 	      break;
 	    default:
 	      printf("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
-	                    Element::name(instruction->type()), anchors[i].tick);
+		     Element::name(instruction->type()), anchors[i].tick);
 	      break;
 	    }
 	  removeAnchor(i);
@@ -1274,6 +1338,7 @@ void ExportLy::removeJumpOrMarkerLM(int markerind)
 
 void ExportLy::preserveJumpOrMarker(Element* dir, int mnum, bool start)
 {
+  jumpswitch=true;
   jumpOrMarkerLM mlm;
   Marker* ma = (Marker*) dir;
   mlm.marker = ma;
@@ -1477,8 +1542,8 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	  {
 	    SLine* sl = (SLine*) instruction;
 	    Text* tekst = (Text*) instruction;
-	    if (tekst->subtypeName() == "System") printf("Systemtekst in part\n");
-	    if (tekst->subtypeName() == "Staff")  printf("Stafftest in part\n");
+	    //	    if (tekst->subtypeName() == "System") printf("Systemtekst in part\n");
+	    //      if (tekst->subtypeName() == "Staff")  printf("Stafftest in part\n");
 	    if (tekst->subtypeName() == "RehearsalMark") 
 	      {
 		rehearsalm=true;
@@ -1546,8 +1611,8 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case PEDAL:
 	case STAFF_TEXT:
 	  { 
-	    if (instruction->subtypeName() == "Staff") printf("stafftekst i measure\n");
-	    if (instruction->subtypeName() == "System") printf("systemtekst i measure\n");
+	    //	    if (instruction->subtypeName() == "Staff") printf("stafftekst i measure\n");
+	    //   if (instruction->subtypeName() == "System") printf("systemtekst i measure\n");
 	    if (instruction->subtypeName() == "RehearsalMark") rehearsal=true;
 	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, rehearsal);
 	  if (found)
@@ -1648,7 +1713,6 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
   switch(barlinetype)
     {
     case START_REPEAT:
-      printf("startrepeat endbarlinetype  takt: %d\n", taktnr);
       i++;
       voltarray[i].voltart=startrepeat;
       voltarray[i].barno=taktnr;
@@ -1657,7 +1721,6 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
       i++;
       voltarray[i].voltart=endrepeat;
       voltarray[i].barno=taktnr;
-      printf("endrepeat endbarlinetype takt %d\n", taktnr);
       break;
     case END_START_REPEAT:
       i++;
@@ -1688,11 +1751,10 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
   // first measure of the line, repeatFlag is not set to RepeatStart,
   // then this does not help, and I need "findStartRepNoBarline"
   if (meas->repeatFlags() == RepeatStart)
-    {   printf("startrepeatflag\n");
+    { 
       // we have to exclude startrepeats found as endbarlines in previous measure
       if ((voltarray[i].barno != taktnr-1) and (voltarray[i].voltart != startrepeat) and ( voltarray[i].voltart != bothrepeat ))
 	{
-	  printf("startrepeat ?  taktnr: %d\n", taktnr);
 	  i++;
 	  voltarray[i].voltart=startrepeat;
 	  voltarray[i].barno=taktnr-1; //set as last element in previous measure.
@@ -1712,7 +1774,6 @@ void ExportLy::findStartRepNoBarline(int &i, Measure* m)
  // loop over all measure relative segments in this measure
   for (Segment* seg = m->first(); seg; seg = seg->next())
     {
-      
       if (seg->subtype() == Segment::SegStartRepeatBarLine) 
 	{
 	  printf("segstartrepeatbarline\n");
@@ -1888,16 +1949,16 @@ void ExportLy::writeClef(int clef)
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
   int st = sig->subtype();
-  sig->getSig(&n, &z1, &z2, &z3, &z4);
+  sig->getSig(&timedenom, &z1, &z2, &z3, &z4);
   //lilypond writes 4/4 as C by default, so only check for cut.
   if (st == TSIG_ALLA_BREVE)
     {
       z1=2;
-      n=2;
+      timedenom=2;
       // 2/2 automatically written as alla breve by lily.
     }
   indent();
-  out << "\\time " << z1 << "/" << n << " ";
+  out << "\\time " << z1 << "/" << timedenom << " ";
 }
 
 //---------------------------------------------------------
@@ -2488,6 +2549,8 @@ int ExportLy::getLen(int l, int* dots)
     len = 16;
   else if (l == AL::division /3*4)
     len = 32;
+  else if (l == 0)
+    len = 1;
   else printf("measure: %d, unsupported len %d (%d,%d)\n", measurenumber, l, l/AL::division, l % AL::division);
   return len;
 }
@@ -2567,8 +2630,10 @@ void ExportLy::writeRest(int l, int type)
 //-------------------------------------------------------------
 void ExportLy::writeMeasuRestNum()
 {
-  if (wholemeasurerest >1) out << "*" << wholemeasurerest << "  \n";
-		    wholemeasurerest=0;
+  if (wholemeasurerest >1) out << "*" << wholemeasurerest << " ";
+  if (wholemeasuretext != "") out << "^\\markup{" << wholemeasuretext << "}\n";
+  wholemeasurerest=0;
+  wholemeasuretext= "";
 }
 
 //--------------------------------------------------------
@@ -2750,8 +2815,8 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  indent();
 	  //done in first measure anyway: ??
 	  writeKeySig(staff->keymap()->key(0));
-// 	  score->sigmap->timesig(0, z1, n);
-// 	  out << "\\time " << z1<< "/" << n << " \n";
+// 	  score->sigmap->timesig(0, z1, timedenom);
+// 	  out << "\\time " << z1<< "/" << timedenom << " \n";
 	}
 
       switch(voice)
@@ -2822,7 +2887,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	    out << "\n";
 	   
 	    int nombarlen=z1*AL::division;
-	    if (n==8) nombarlen=nombarlen/2;
+	    if (timedenom==8) nombarlen=nombarlen/2;
 	    
 	    if ((barlen<nombarlen) and (measurenumber==1))
 	      {
@@ -2981,6 +3046,7 @@ void ExportLy::writeScore()
   donefirst=false;
   lastJumpOrMarker = 0;
   initJumpOrMarkerLMs();
+  wholemeasuretext = "";
 
 
   foreach(Part* part, *score->parts())
@@ -3003,8 +3069,10 @@ void ExportLy::writeScore()
       
 
       //ANCHORTEST: print instructionlist
-       anchortest();
-       jumptest();
+      //printf("anchortest\n");
+      //anchortest();
+      //      printf("jumptest\n");
+      //      jumptest(); segfaults!?!?
 
       foreach(Staff* staff, *part->staves())
 	{
@@ -3060,8 +3128,8 @@ void ExportLy::writeScore()
 	  staffname[staffInd].staffid.remove(QChar(' '));
 
 	  findVolta();
-	  
-	  voltatest();
+	  //printf("voltatest\n");
+	  //	  voltatest();
 
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
 
@@ -3322,7 +3390,7 @@ if (rehearsalnumbers)
 
 void ExportLy::writeLilyMacros()
 {
-  if ((jumpswitch) || ottvaswitch)
+  if ((jumpswitch) || (ottvaswitch))
     {
       os<< " %%---------------MSCORE'S LILYPOND MACROS: -------------------------\n\n";
     }
@@ -3511,7 +3579,7 @@ void ExportLy::writeScoreTitles()
 
 //---------------------------------------------------------
 //---------------------------------------------------------
-//  WRITE =  the main function of exportly
+//  WRITE  =  the main function of exportly
 //---------------------------------------------------------
 //---------------------------------------------------------
 
@@ -3565,12 +3633,12 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
-  
+   24.oct Support for metronome marks. 
 
    22.oct  conditional output of exportly's lilypond macros (\okt and
      \segno). bugfix for repeats.
   
-   13.oct fixed grace-note-troubles on demos: golliwogg and troubles
+   13.oct fixed grace-note-troubles on demos: golliwogg, and troubles
    with wholemeasure rests in the shifting timesignatures in
    promenade. Started on lilypond \chordmode
 
@@ -3653,8 +3721,36 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------
 
+  -- choose cut-time if timesig is 2/2 or 4/2, numerical timesig if
+      odd time-sigs like 7/4 and 6/4. For 4/4 an automatic decision is
+      difficult.
+
+      -- fingerings
+
+      -- odd noteheads and percussion staffs.
+
+      -- breaks and spacers
+
+      -- accordion symbols.
+      
+   -- Arpeggios and glissandos
+
+   -- 8vabassa, lefthandposition (roman numbers: violin, guitar), trill, pedal and
+      general lines with/out text.
+
+   -- Coda/Segno symbols collides with rehearsalmarks, which
+      accordingly are not printed.
+
+   -- Lyrics (low priority in relation to music itself) 
+
+   -- become clear on the difference between system text and staff
+      text.
+
+   -- octave-trouble in golliwogg.
+
+   -- provide for more than one pianostaff in a score.
   
-   -- Determine whether text goes above or below staff. fingerings
+   -- Determine whether text goes above or below staff. 
 
    -- correct indentation in score-block. cross-staff beaming in
       pianostaff cross-voice slurs!?!?!? seems _very_ complex to
@@ -3674,37 +3770,24 @@ bool ExportLy::write(const QString& name)
    -- is made and compensate for this when exporting the
    -- lily-symbols. -- check \set Score.hairpinToBarline = ##t
 
-   -- Arpeggio.
-
-   -- 8vabassa
-
-   -- octave-trouble in golliwogg.
-
-   -- metronome marks must be given as \tempo 4 = 60 and not as markups.
-
    -- close second volta: doesn't seem possible for single and
       thin-thin double barlines
-
-   -- Coda/Segno symbols collides with rehearsalmarks, which accordingly are not printed.
-
-   -- The macros for 8va and Coda/Segno take up much space and are
-      ugly, so they should not be printed if they were not used in the
-      score. Solution: buffer outputstream in a string, so that write
-      to file is postponed until we know whether we need the macros.
-
-   -- Lyrics (low priority in relation to music itself) 
 
    --Collisions in crowded multi-voice staffs
      (e.g. cello-suite). check \override RestCollision
      #'positioning-done = #'merge-rests-on-positioning. Use
      \partcombine instead of ord. polyphony
 
-
    -- General tuplets massive failure on demos: prelude_sr.mscz
 
    -- Many of the demos have voice 2 as the upper one =>
       trouble. Exportly.cpp must be made to identify the uppermost
-      voice as lilypond voice 1, whatever number it has in mscore.
+      voice as lilypond voice 1, whatever number it has in
+      mscore. will \partcombine resolve this?
+
+  -- Markups belonging to a multimeasure rest should be
+     left-adjusted to the left bar, and not centered over the
+     rest. No good solutions found.
    
  */
 
