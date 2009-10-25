@@ -1,5 +1,6 @@
 25.oct
       (ws)
+      - add missing window title for text tools
       - implemented mouse selection of text in text edit mode
       - changed appearance of selected text from underline to more common
         inverse colors
