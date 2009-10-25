@@ -1,4 +1,5 @@
 25.oct (lv)
+      - fix export of MusicXML <octave-shift>
       - fix export of MusicXML <rest>
       - update MusicXML regression testfiles
       (og)
