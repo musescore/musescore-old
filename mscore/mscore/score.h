@@ -354,6 +354,7 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void cmdExchangeVoice(int, int);
+      void cmdCopy();
       void cmdPaste();
 
       void updateSelectedElements(SelState);
