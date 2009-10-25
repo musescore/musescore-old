@@ -2,113 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ar_EG">
 <context>
-    <name></name>
-    <message>
-        <source>Czech</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">مجموعة</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -126,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>مراجعة: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -997,6 +890,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>سنت</translation>
     </message>
     <message>
@@ -1005,6 +899,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>آليًّا</translation>
     </message>
     <message>
@@ -1041,10 +936,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1069,6 +966,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>سياق</translation>
+    </message>
+    <message>
+        <source>SlurFor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1387,6 +1292,22 @@ failed: </source>
         <source>Invisible</source>
         <translation>غير مرئى</translation>
     </message>
+    <message>
+        <source>Usable Pitch Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amateur:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1475,6 +1396,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>مسافة</translation>
     </message>
     <message>
@@ -1800,6 +1726,18 @@ failed: </source>
     </message>
     <message>
         <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of single staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of multiple staves</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2683,10 +2621,6 @@ failed: </source>
         <translation>شاعر</translation>
     </message>
     <message>
-        <source>Lyrics</source>
-        <translation>كلمات</translation>
-    </message>
-    <message>
         <source>Fingering</source>
         <translation>ترقيم للأصابع</translation>
     </message>
@@ -2839,14 +2773,6 @@ failed: </source>
         <translation>إعدادات الصفحة...</translation>
     </message>
     <message>
-        <source>Reset Positions</source>
-        <translation>أوضاع أصلية</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>تمديد أصلى</translation>
-    </message>
-    <message>
         <source>Breaks...</source>
         <translation>فواصل...</translation>
     </message>
@@ -2855,16 +2781,8 @@ failed: </source>
         <translation>&amp;طراز</translation>
     </message>
     <message>
-        <source>Edit Text Style...</source>
-        <translation>تحديد طراز النص...</translation>
-    </message>
-    <message>
         <source>&amp;Display</source>
         <translation>&amp;عرض</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>إظهار المختفى</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -2907,1012 +2825,8 @@ failed: </source>
         <translation>دون اسم</translation>
     </message>
     <message>
-        <source>file open</source>
-        <translation>فتح ملف</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>فتح...</translation>
-    </message>
-    <message>
-        <source>Load Score from File</source>
-        <translation>تحميل مدوّنة من ملف</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>حفظ ملف</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>حفظ</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>حفظ مدوّنة فى ملف</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>حفظ ملف باسم</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>حفظ باسم...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File</source>
-        <translation>حفظ مدوّنة فى ملف مسمّى</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>حفظ نسخة من ملف</translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation>حفظ نسخة...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>حفظ مدوّنة فى ملف مسمّى، مع الاحتفاظ بالاسم الحالى</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>إغلاق ملف</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>إغلاق</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>إغلاق المدوّنة الحالية</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>ملف جديد</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>تخليق مدوّنة جديدة</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation>طباعة</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>طباعة...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>طباعة مدوّنة</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>رجوع عن فعل</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>رجوع عن فعل</translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>إلغاء آخر تعديل</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>إعادة تفعيل</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>إعادة تفعيل</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>إعادة آخر إلغاء</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>قصّ</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>قصّ</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>نسخ</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>نسخ</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>لصق</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>لصق</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>إظهار محاورة الآلات</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>الآلات...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>إظهار محاورة الآلات</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>إظهار بالتة المفاتيح</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>المفاتيح...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>إظهار بالتة المفاتيح</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>إظهار بالتة أدلة المقامات</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>أدلة المقامات...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>إظهار بالتة أدلة المقامات</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>إظهار بالتة الرموز</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>الرموز...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>إظهار بالتة الرموز</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>إظهار بالتة أدلة التوقيع</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>أدلة التوقيع...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>إظهار بالتة أدلة التوقيع</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>إظهار بالتة رموز الشدّة</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>رموز الشدّة...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>إظهار بالتة رموز الشدّة</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>إدراج النغمات</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>إدراج النغمات</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>تبديل طور إدراج النغمات</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>تسمية النغمات</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>تسمية النغمات</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>إدراج نفس النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>نفس النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>إدراج نفس النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>إدراج ثانية من أعلى</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>ثانية من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>إدراج ثانية من أعلى</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>إدراج ثالثة من أعلى</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>ثالثة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>إدراج ثالثة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>إدراج رابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>رابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>إدراج رابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>إدراج خامسة من أعلى</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>خامسة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>إدراج خامسة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>إدراج سادسة من أعلى</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>سادسة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>إدراج سادسة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>إدراج سابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>سابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>إدراج سابعة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation>إدراج أوكتاف النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>أوكتاف النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>إدراج أوكتاف النغمة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>إدراج تاسعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>تاسعة من أعلى</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>إدراج تاسعة من أعلى</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>إدراج ثانية من أسفل</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>ثانية من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>إدراج ثانية من أسفل</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>إدراج ثالثة من أسفل</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>ثالثة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>إدراج ثالثة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>إدراج رابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>رابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>إدراج رابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>إدراج خامسة من أسفل</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>خامسة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>إدراج خامسة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>إدراج سادسة من أسفل</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>سادسة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>إدراج سادسة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>إدراج سابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>سابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>إدراج سابعة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>إدراج أوكتاف النغمة من أسفل</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>أوكتاف النغمة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>إدراج أوكتاف النغمة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>إدراج تاسعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>تاسعة من أسفل</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>إدراج تاسعة من أسفل</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>إدراج نغمة لا</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation>لا</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>إدراج نغمة لا</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>إدراج نغمة سى</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>سى</translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>إدراج نغمة سى</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>إدراج نغمة دو</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation>دو</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>إدراج نغمة دو</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>إدراج نغمة رى</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>رى</translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>إدراج نغمة رى</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>إدراج نغمة مى</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation>مى</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>إدراج نغمة مى</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>إدراج نغمة فا</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation>فا</translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>إدراج نغمة فا</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>إدراج نغمة صول</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation>صول</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>إدراج نغمة صول</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>إضافة لا للتراكب</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>إضافة لا</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>إضافة نغمة لا للتراكب</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>إضافة سى للتراكب</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>إضافة سى</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>إضافة نغمة سى للتراكب</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>إضافة دو للتراكب</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>إضافة دو</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>إضافة نغمة دو للتراكب</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>إضافة رى للتراكب</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>إضافة رى</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>إضافة نغمة رى للتراكب</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>إضافة مى للتراكب</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>إضافة مى</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>إضافة نغمة مى للتراكب</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>إضافة فا للتراكب</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>إضافة فا</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>إضافة نغمة فا للتراكب</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>إضافة صول للتراكب</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>إضافة صول</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>إضافة نغمة صول للتراكب</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>إدراج سكتة</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>سكتة</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>إضافة قـَطع</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>قـَطع</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>بيمول</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>إضافة زغردة</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>زغردة</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>تمديد أكثر</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>إضافة تمديد أكثر</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>إضافة تمديد أكثر للمازورة المعيّنة</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>تمديد أقلّ</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>إضافة تمديد أقلّ</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>إضافة تمديد أقلّ للمازورة المعيّنة</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>طور التربيط الأصلى</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>إعادة طور تربيط الموازير المعيّنة للأصل</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>عكس اتجاه الساق</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>عكس الاتجاه</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>لأعلى</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation>فوق+تحكّم</translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>نغمة أعلى فى التراكب</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>الذهاب إلى أحدّ نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>الذهاب إلى أعلى نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>أعلى نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>التحرّك لأعلى</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation>فوق+إزاحة+تحكّم</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>نغمة لتحت</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>لأسفل</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>نغمة لتحت بأوكتاف</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>تحت+تحكّم</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>نغمة أسفل فى التراكب</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>الذهاب إلى أغلظ نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>الذهاب إلى أسفل نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>أسفل نغمة فى التراكب</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>التحرّك لأسفل</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation>تحت+إزاحة+تحكّم</translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>التراكب السابق</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>يسار</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>المازورة السابقة</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation>يسار+تحكّم</translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>التراكب اللاحق</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>يمين</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>المازورة اللاحقة</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>يمين+تحكّم</translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>إضافة التراكب السابق للتعيين</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation>يسار+إزاحة</translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>تعيين حتى بداية المازورة</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>إضافة التراكب اللاحق للتعيين</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation>يمين+إزاحة</translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>تعيين حتى نهاية المازورة</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation>يمين+إزاحة+تحكّم</translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation>تعيين حتى بداية السطر</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation>إزاحة+بداية</translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>تعيين حتى نهاية السطر</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation>إزاحة+نهاية</translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>تعيين حتى بداية المدوّنة</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation>تحكّم+إزاحة+بداية</translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>تعيين حتى نهاية المدوّنة</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation>تحكّم+إزاحة+نهاية</translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>إضافة المدرج أعلاه للتعيين</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>إضافة المدرج أدناه للتعيين</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>صفحة سابقة</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>صفحة لاحقة</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>أوّل الصفحة</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>آخر الصفحة</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>إضافة قوس</translation>
-    </message>
-    <message>
         <source>crescendo</source>
         <translation>أقوى تدريجيًا</translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation>أهدأ تدريجيًا</translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation>هروب</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>مسح</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>إلحاق مازورة</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>إلحاق مازورة</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>إلحاق موازير</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>إلحاق موازير...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>تحشير مازورة</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>تحشير مازورة</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>تحشير موازير</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>تحشير موازير...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>إدراج إطار أفقى</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>إدراج إطار رأسى</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>إلحاق إطار أفقى</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>إلحاق إطار رأسى</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>ثنائية</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>ثلثية</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>ربعية</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>خمسية</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>سدسية</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>سبعية</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>ثمنية</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>تسعية</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>جزئيات أخرى</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation>إحاطة نغمة 1\1</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation>إحاطة نغمة 1\2</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation>إحاطة نغمة 1\4</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation>إحاطة نغمة 1\8</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation>إحاطة نغمة 1\16</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation>إحاطة نغمة 1\32</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation>إحاطة نغمة 1\64</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation>إحاطة نقطة</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation>رباط</translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation>إحاطة سكتة</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>دوبل دييز</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>دييز</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>بيكار</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>دوبل بيمول</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -3935,376 +2849,12 @@ failed: </source>
         <translation>نغمة مخطوفة-32</translation>
     </message>
     <message>
-        <source>voice 1</source>
-        <translation>صوت 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>صوت 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>صوت 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>صوت 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation>مدخل الميدى فى</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>الاستماع أثناء الكتابة مفعّل</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>تفعيل الاستماع أثناء الكتابة</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>بداية تربيط</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>وسط تربيط</translation>
-    </message>
-    <message>
         <source>no beam</source>
         <translation>دون تربيط</translation>
     </message>
     <message>
-        <source>beam 32</source>
-        <translation>تربيط 32</translation>
-    </message>
-    <message>
         <source>auto beam</source>
         <translation>تربيط آلىّ</translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation>بالتة</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>لوحة العزف</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>أداة التنقّل</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>ميكسر</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>لوح أداوت الاستماع</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>الاستماع</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>لوح إدراج النغمات</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation>لوح الحالة</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>مغادرة</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation>تكبير</translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>اقتراب من الورقة</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>بالتة ترقيم الأصابع</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>ترقيم للأصابع...</translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation>بالتة السرعات</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation>السرعات...</translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation>إضافة نصّ أساسى</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>نصّ أساسى</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>إضافة نصّ للمدرج</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>نصّ للمدرج</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>إضافة نصّ</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>نصّ للإطار</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>إضافة عنوان</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>إضافة نصّ للعنوان</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>إضافة عنوان فرعى</translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation>إضافة نصّ لعنوان فرعى</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>إضافة مؤلف</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>إضافة نصّ للمؤلف</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>إضافة شاعر</translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation>إضافة نصّ للشاعر</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>إضافة حقوق الطبع</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>إضافة نصّ لحقوق الطبع</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>إضافة اسم تراكب</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>اسم التراكب</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>إضافة نصّ للتراكب</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>إظهار خواص التناغم لتراكب</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>خواص التناغم</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>إضافة علامة تقسيمية</translation>
-    </message>
-    <message>
-        <source>player play</source>
-        <translation>تشغيل الشريط</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>عزف</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation>التراكب الأيسر</translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>مازورة سابقة</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation>الذهاب للبداية</translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>إعادة الشريط</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>إرجاع</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>إرجاع لوضع البداية</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation>الذهاب للنهاية</translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>عزف الإعادات مفعّل</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>تكرار</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>عزف الإعادات نعم\لا</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>تحميل طراز</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>تحميل طراز...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>تحميل طراز</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>حفظ طراز</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>حفظ طراز...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>حفظ طراز</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>تعيين الكلّ</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>تعيين الكلّ</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>تصوير</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>تصوير...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>تصوير</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>مفتاح الكمان</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>مفتاح الباص</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>تبديل الأصوات 1-2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>تبديل الأصوات 1-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>تبديل الأصوات 1-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>تبديل الأصوات 2-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>تبديل الأصوات 2-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>تبديل الأصوات 3-4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>عرض فى الطبقة القياسية</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>عرض فى الطبقة القياسية</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>تكرار آخر أمر</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>تكرار آخر أمر</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>تحرير بيانات عن بيانات المدوّنة</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>بيانات عن البيانات...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>بيانات عن البيانات</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>تبديل فاصل مجموعة</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>تبديل فاصل مجموعة</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>تبديل فاصل صفحة</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>تبديل فاصل صفحة</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>تفاصيل عنصر</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>تفاصيل عنصر</translation>
     </message>
     <message>
         <source>G major, E minor</source>
@@ -4627,44 +3177,8 @@ failed: </source>
         <translation>ميوزسكور: دليل المقام</translation>
     </message>
     <message>
-        <source>reset positions</source>
-        <translation>أوضاع أصلية</translation>
-    </message>
-    <message>
         <source>no score</source>
         <translation>لا مدوّنات</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>إظهار المراقب</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>المراقب</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>إعادة تحميل ملف</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>إعادة التحميل</translation>
-    </message>
-    <message>
-        <source>Reload Score from File</source>
-        <translation>إعادة تحميل مدوّنة من ملف</translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation>نغمة مطوّلة</translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation>إعادة تمديد مازورة للأصل</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation>نغمة مطوّلة جدًا</translation>
     </message>
     <message>
         <source>Save changes to the score &quot;%1&quot;
@@ -4673,76 +3187,8 @@ before closing?</source>
 قبل الإغلاق؟</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>جديد...</translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation>نغمة مطوّلة جدًا</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>ضعف الروند (نغمة مطوّلة)</translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>روند</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>بلانش</translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>نوار</translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>كروش</translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>دوبل كروش</translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>تريبل كروش</translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>كادريبل كروش</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>نقطة</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation>إحاطة نقطتين</translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>نقتطان</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>نغمات</translation>
-    </message>
-    <message>
         <source>NoteHeads</source>
         <translation>رؤوس النغمات</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>إظهار المختفى</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>إظهار الأطر</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>إظهار الأطر</translation>
     </message>
     <message>
         <source></source>
@@ -4753,32 +3199,12 @@ before closing?</source>
         <translation>أوكتاف</translation>
     </message>
     <message>
-        <source>show keyboard</source>
-        <translation>إظهار لوحة المفاتيح</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>إظهار لوحة المفاتيح</translation>
-    </message>
-    <message>
         <source>Lyrics odd lines</source>
         <translation>سطور فردية للكلمات</translation>
     </message>
     <message>
         <source>Lyrics even lines</source>
         <translation>سطور زوجية للكلمات</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation>خلافه...</translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation></translation>
     </message>
     <message>
         <source>normal</source>
@@ -4833,38 +3259,6 @@ before closing?</source>
         <translation>بين النغمات 3</translation>
     </message>
     <message>
-        <source>enter 1/1 rest</source>
-        <translation>إدراج سكتة 1\1</translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation>سكتة 1\1</translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation>إدراج سكتة 1\2</translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation>سكتة 1\2</translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation>إدراج سكتة 1\4</translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation>سكتة 1\4</translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation>إدراج سكتة 1\8</translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation>سكتة 1\8</translation>
-    </message>
-    <message>
         <source>Bracket</source>
         <translation>قوس</translation>
     </message>
@@ -4912,10 +3306,6 @@ before closing?</source>
         <translation>قوس</translation>
     </message>
     <message>
-        <source>backspace</source>
-        <translation>مسح للوراء</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>بحث</translation>
     </message>
@@ -4952,10 +3342,6 @@ before closing?</source>
         <translation>ميوزسكور: فواصل التنسيق</translation>
     </message>
     <message>
-        <source>search</source>
-        <translation>بحث</translation>
-    </message>
-    <message>
         <source>MuseScore: failure</source>
         <translation>ميوزسكور: إخفاق</translation>
     </message>
@@ -4968,56 +3354,8 @@ before closing?</source>
         <translation>لم يتم بنجاح</translation>
     </message>
     <message>
-        <source>Zoom In</source>
-        <translation>اقتراب</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>ابتعاد</translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation>رأس نغمة معكوسة</translation>
-    </message>
-    <message>
         <source>Go To: </source>
         <translation>ذهاب إلى:</translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation type="unfinished">إزالة الموازير المعيّنة</translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation type="unfinished">إزالة الموازير المعيّنة</translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -5035,51 +3373,11 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>local help</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show local Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>follow song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow Song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Grace Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5578,10 +3876,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>اختيار ورق الخلفية</translation>
     </message>
     <message>
-        <source>Instrument List (*.xml);;All (*)</source>
-        <translation>قائمة آﻻت (*.xml);;الكلّ (*)</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>ملف ميوزسكور (*.msc);;الكلّ (*)</translation>
     </message>
@@ -5595,6 +3889,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6106,6 +4404,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>ملليمتر</translation>
     </message>
     <message>
@@ -6286,45 +4585,6 @@ Please select a single note or rest and retry operation
     <message>
         <source>Setup...</source>
         <translation>تخصيص...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatPropertiesBase</name>
-    <message>
-        <source>MuseScore: Repeat Properties</source>
-        <translation>ميوزسكور: خواص الإعادة</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>اسم طراز الإعادة</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>تحديد مخصصات لـ</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>لافتة نصّية</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>دورات</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>رقم</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>الرقم المستهدف</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>الدورات المطلوب عزفها</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>أرقام الدورات، مثلاً: 1،3،5</translation>
     </message>
 </context>
 <context>
@@ -6886,6 +5146,16 @@ Try saving to a different location.</source>
         <source>Form</source>
         <translation>سياق</translation>
     </message>
+    <message>
+        <source>startElement</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StaffText</name>
@@ -6979,6 +5249,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7301,6 +5572,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>س:</translation>
     </message>
     <message>
@@ -7321,6 +5593,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>ص:</translation>
     </message>
     <message>
@@ -7647,6 +5920,17 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>VoltaSegment</name>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">خواص خط...</translation>
+    </message>
+</context>
+<context>
     <name>accidental</name>
     <message>
         <source>none</source>
@@ -7750,6 +6034,121 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>articulation</name>
+    <message id="============================================================================">
+        <source>ufermata</source>
+        <translation type="unfinished">مدّة من أعلى</translation>
+    </message>
+    <message>
+        <source>dfermata</source>
+        <translation type="unfinished">مدّة من أسفل</translation>
+    </message>
+    <message>
+        <source>thumb</source>
+        <translation type="unfinished">إبهام</translation>
+    </message>
+    <message>
+        <source>sforzato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>espressivo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished">قـَطع</translation>
+    </message>
+    <message>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tenuto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>umarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dmarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ouvert</source>
+        <translation type="unfinished">وتر مطلق</translation>
+    </message>
+    <message>
+        <source>plusstop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverseturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished">زغردة</translation>
+    </message>
+    <message>
+        <source>prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downmordent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

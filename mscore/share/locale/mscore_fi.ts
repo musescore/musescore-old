@@ -2,113 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fi_FI" sourcelanguage="en_US">
 <context>
-    <name></name>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation>Tšekki</translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation>Tanska</translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation>Hollanti</translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation>Norja</translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation>Englanti (GB)</translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation>Englanti (US)</translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation>Espanja</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation>Suomi</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>Ranska</translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation>Calicia</translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation>Saksa</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation>Hindi</translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation>Unkari</translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation>Italia</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation>Portugali</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation>Ruotsi</translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>Turkki</translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation>Ukraina</translation>
-    </message>
-    <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -126,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Tarkistus: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -997,6 +890,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -1005,6 +899,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>automaattinen</translation>
     </message>
     <message>
@@ -1041,10 +936,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1069,6 +966,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Muoto</translation>
+    </message>
+    <message>
+        <source>SlurFor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1386,6 +1291,22 @@ epäonnistui:</translation>
         <source>Invisible</source>
         <translation>Näkymätön</translation>
     </message>
+    <message>
+        <source>Usable Pitch Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amateur:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1466,6 +1387,11 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -1799,6 +1725,18 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of single staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of multiple staves</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3218,10 +3156,6 @@ ennen sulkemista?</translation>
         <translation>Nimeämätön</translation>
     </message>
     <message>
-        <source>Notes</source>
-        <translation>Nuotit</translation>
-    </message>
-    <message>
         <source>Drums</source>
         <translation>Rummut</translation>
     </message>
@@ -3421,1603 +3355,6 @@ ennen sulkemista?</translation>
         <translation>Siirry:</translation>
     </message>
     <message>
-        <source>file open</source>
-        <translation>avaa tiedosto</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Avaa...</translation>
-    </message>
-    <message>
-        <source>Load Score from File</source>
-        <translation>Lataa partituuri tiedostosta</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>tallenna tiedosto</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Tallenna</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>Tallenna partituuri tiedostoksi</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>tallenna tiedosto nimellä</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Tallenna nimellä...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File</source>
-        <translation>Tallenna partituuli nimettyyn tiedostoon</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>tallenna tiedoston kopio</translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation>Tallenna kopio...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>Tallenna partituuli nimettyyn tiedostoon, mutta pidä nykyinen nimi</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>lataa tiedosto uudelleen</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Lataa uudelleen</translation>
-    </message>
-    <message>
-        <source>Reload Score from File</source>
-        <translation>Lataa partituuri uudelleen tiedostosta</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>sulje tiedosto</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Sulje</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Sulje nykyinen partituuri</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>uusi tiedosto</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Uusi...</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>Luo uusi partituuri</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation>tulosta</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Tulosta...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Tulosta partituuri</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>kumoa</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Kumoa</translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>kumoa viimeinen muutos</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>tee uudelleen</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>Tee uudelleen</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>tee uudelleen edellinen kumous</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>leikkaa</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Leikkaa</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>kopioi</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopioi</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>liitä</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>Liitä</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>näytä instrumentit</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>Instrumentit...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Näytä instrumentit</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>näytä nuottiavainpaletti</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Nuottiavain...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Näytä nuottiavainpaletti</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>näytä etumerkintäpaletti</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Etumerkintä...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Näytä etumerkkipaletti</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>näytä symbolipaletti</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Symbolit...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>Näytä symbolipaletti</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>näytä tahtilajipaletti</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Tahtilaji...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Näytä tahtilajipaletti</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>näytä dynamiikkapaletti</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Dynamiikat...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Näytä dynamiikkapaletti</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>nuotin syöttö</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>Nuotinsyöttö</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>Nuotinsyöttötila</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>sävelen oikeinkirjoitus</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Sävelen oikeinkirjoitus</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>kirjoita unisono</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>Unisono</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>Kirjoita unisono</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>kirjoita sekunti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>Sekunti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>Kirjoita sekunti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>kirjoita terssi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>Terssi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>Kirjoita terssi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>kirjoita kvartti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>Kvartti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>Kirjoita kvartti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>kirjoita kvintti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>Kvintti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>Kirjoita kvintti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>kirjoita seksti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>Seksti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>Kirjoita seksti yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>kirjoita septimi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>Septimi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>Kirjoita septimi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>Oktaavi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>Kirjoita oktaavi yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>kirjoita nooni yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>Nooni yläpuolelle</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>Kirjoita nooni yläpuolelle</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>kirjoita sekunti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>Sekunti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>Kirjoita sekunti alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>kirjoita terssi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>Terssi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>Kirjoita terssi alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>kirjoita kvartti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>Kvartti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>Kirjoita kvartti alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>kirjoita kvintti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>Kvintti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>Kirjoita kvintti alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>kirjoita seksti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>Seksti alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>Kirjoita seksti alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>kirjoita septimi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>Septimi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>Kirjoita septimi alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>kirjoita oktaavi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>Oktaavi alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>Kirjoita oktaavi alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>kirjoita nooni alapuolelle</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>Nooni alapuolelle</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>Kirjoita nooni alapuolelle</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>kirjoita nuotti a</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Kkirjoita nuotti A</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>kirjoita nuotti b</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>Kirjoita nuotti B</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>kirjoita nuotti c</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Kirjoita nuotti C</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>kirjoita nuotti d</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>Kirjoita nuotti D</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>kirjoita nuotti e</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Kirjoita nuotti E</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>kirjoita nuotti f</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>Kirjoita nuotti F</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>kirjoita nuotti g</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Kirjoita nuotti G</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>lisää a sointuun</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>Lisää A</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>Lisää nuotti A sointuun</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>lisää b sointuun</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>Lisää B</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>Lisää nuotti B sointuun</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>lisää c sointuun</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>Lisää C</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>Lisää nuotti C sointuun</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>lisää d sointuun</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>Lisää D</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>Lisää nuotti D sointuun</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>lisää e sointuun</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>Lisää E</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>Lisää nuotti E sointuun</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>lisää f sointuun</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>Lisää F</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>Lisää nuotti F sointuun</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>lisää g sointuun</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>Lisää G</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>Lisää nuotti G sointuun</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>kirjoita tauko</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>tauko</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>lisää staccato</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>staccato</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>Alennus</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>lisää trilli</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>Trilli</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>lisää venytystä</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>Lisää venytystä</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>Lisää venytystä valittuun tahtiin</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>vähennä venytystä</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Vähennä venytystä</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>Vähennä venytystä valitussa tahdissa</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>Palauta palkkimuoto</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Palauta palkkimuoto valittuihin tahteihin</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>vaihda stemma</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>vaihda suunta</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>ylös</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation>ylös+ctrl</translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>soinnun ylänuotti</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>siirry soinnun ylempään nuottiin</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>siirry soinnun ylimpään nuottiin</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>ylin nuotti soinnussa</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>siirrä ylös</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation>ylös+shift+ctrl</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>laske säveltasoa</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>alas</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>laske sävetasoa oktaavilla</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>alas+ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>soinnun alanuotti</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>siirry soinnun alempaan nuottiin</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>siirry soinnun alimpaan nuottiin</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>soinnun alin nuotti</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>siirrä alas</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation>alas+shift+ctrl</translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>edellinen sointu</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>vasen</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>edellinen tahti</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation>vasen+ctrl</translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>seuraava sointu</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>oikea</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>seuraava tahti</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>oikea+ctrl</translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>lisää edellinen sointu valintaan</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation>vasen+shift</translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>valitse tahdin alkuun</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>lisää seuraava sointu valintaan</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation>oikea+shift</translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>valitse tahdin loppuun</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation>oikea+ctrl+shift</translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation>valitse rivin alkuun</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation>shift+home</translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>valitse rivin loppuun</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation>shift+end</translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>valitse partituurin alkuun</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation>ctrl+shift+home</translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>valitse partituurin loppuun</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>lisää viivasto valinnan yläpuolelle</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>lisää viivasto valinnan alapuolelle</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>edellinen sivu</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>seuraava sivu</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>sivu ylös</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>sivu alas</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>lisää kaari</translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation>ESC</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>poista</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>lisää tahti loppuun</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>Lisää tahti loppuun</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>lisää tahteja loppuun</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>Lisää tahteja loppuun...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>lisää tahti väliin</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>Lisää tahti väliin</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>lisää tahteja väliin</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>Lisää tahteja väliin...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>Lisää horisontaalinen kehys väliin</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>Lisää verikaalinen kehys väliin</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>Lisää horisontaalinen kehys loppuun</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>Lisää vertikaalinen kehys loppuun</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>Duoli</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>Trioli</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>Kvartoli</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>Kvintoli</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>Sekstoli</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>Septoli</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>Oktoli</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>Nontoli</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>Muut tupletit</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation>Muu...</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation>longa</translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation>Longa</translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation>kaksoiskokonuotti</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>Kaksoiskokonuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation>1/1 nuotti</translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>Kokonuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation>1/2 nuotti</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>Puolinuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation>1/4 nuotti</translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>1/4 nuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation>1/8 nuotti</translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>1/8 nuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation>1/16 nuotti</translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>1/16 nuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation>1/32 nuotti</translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>1/32 nuotti</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation>1/64 nuotti</translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>1/64 nuotti</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation>piste</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Piste</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation>kaksoispiste</translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>Kaksoispiste</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation>yhdyskaari</translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation>tauko</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>kaksoiskorotus</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>korotus</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>palautus</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>kaksoisalennus</translation>
-    </message>
-    <message>
-        <source>voice 1</source>
-        <translation>stemma 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>stemma 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>stemma 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>stemma 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation>midi sisään</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>ääni muokattaessa</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>Salli ääni muokattaessa</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>palkki alkaa</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>palkki keskellä</translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation>palkki 32</translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation>Paletti</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>Toistopaneeli</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navigaattori</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>Mikseri</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>Toistopainikke työkalut</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>Toistopainikkeet</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>Nuotin kirjoitus</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation>Tilarivi</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Lopeta</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>Zoomaus</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Lauluteksti</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>Sormituspaletti</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>Sormitus...</translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation>Tempopaletti</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation>Tempo...</translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation>Lisää viivastojen teksti</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>Viivastojen teksti</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>Lisää viivastoteksti</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>Viivastoteksti</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Lisää teksti</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>Kehysteksti</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>Lisää otsikko</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>Lisää otsikkoteksti</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>Lisää alaotsikko</translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation>Lisää alaotsikkoteksti</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>Lisää säveltäjä</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>Lisää säveltäjäteksti</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>Lisää runoilija</translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation>Lisää runoilijateksti</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>Lisää Copyright</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>Lisää Copyright-teksti</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>Lisää sointumerkintä</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>Sointumerkintä</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>Lisää sointumerkintäteksti</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>näytä soinnun ominaisuudet</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>Harmonian ominaisuudet</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>Lisää harjoitusmerkki</translation>
-    </message>
-    <message>
-        <source>player play</source>
-        <translation>soita soitinta</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Toista</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation>vasen sointu</translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>edellinen tahti</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation>hae alkuun</translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>soitin taaksepäin</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Taksepäin</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>taaksepäin aloituspisteeseen</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation>hae loppuun</translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>toistokertaukset päällä</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>Kertaa</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>kertaukset päälle/pois</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>lataa tyyli</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>Lataa tyyli...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>Lataa tyyli</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>tallenna tyyli</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Tallenna tyyli...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>Tallenna tyyli</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>valitse kaikki</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Valitse kaikki</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>transponoi</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>Transponoi...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>Transponoi</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>viulun nuottiavain</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translatorcomment>bassoavain</translatorcomment>
-        <translation>bassoavain</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>Vaihda stemma 1-2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>Vaihda stemma 1-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>Vaihda stemma 1-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>Vaihda stemma 2-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>Vaihda stemma 2-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>Vaihda stemma 3-4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>näytä soiva sävelkorkeus</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Näytä soiva sävelkorkeus</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>kertaa viimeinen komento</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>Kertaa viimeinen komento</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>muokkaa partituurin meta-tietoja</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>Meta-tiedot...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>Meta-tiedot</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>viivastojen vaihto</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>Viivastojen vaihto</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>sivunvaihto</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>Sivunvaihto</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>muokkaa elementtiä</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>Muokkaa elementtiä</translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation>palauta asettelut</translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation>Palauta asettelut</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>näytä tarkastaja</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Tarkastaja</translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation>palauta tahdin venytys</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>Palauta venytys</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>näytä näkymättömät</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>Näytä näkymättömät</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>näytä kehykset</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>Näytä kehykset</translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation>näytä näppäimistö</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>Näytä näppäimistö</translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation>salli Script Debugger</translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation>Salli Script Debugger</translation>
-    </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation>syötä 1/1 tauko</translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation>1/1 tauko</translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation>syöötä 1/2 tauko</translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation>1/2 tauko</translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation>syötä 1/4 tauko</translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation>1/4 tauko</translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation>syötä 1/8 tauko</translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation>1/8 tauko</translation>
-    </message>
-    <message>
-        <source>backspace</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation>hae</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation>Zoomaa sisään</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>Zoomaa ulos</translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation>peilaa nuotinpää</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Muokkaa tekstityyliä...</translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Online Handbook</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5033,51 +3370,11 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>local help</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show local Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>follow song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow Song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Grace Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5572,10 +3869,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Valitse taustapaperi</translation>
     </message>
     <message>
-        <source>Instrument List (*.xml);;All (*)</source>
-        <translation>Instrumenttiluettelo (*.xml);;Kaikki (*)</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore-tiedosto (*.msc);;Kaikki (*)</translation>
     </message>
@@ -5593,6 +3886,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6104,6 +4401,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -6284,45 +4582,6 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     <message>
         <source>Setup...</source>
         <translation>Asennus...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatPropertiesBase</name>
-    <message>
-        <source>MuseScore: Repeat Properties</source>
-        <translation>MuseScore: Toisto-ominaisuudet</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>Tekstietiketti</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Numero</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Kohdenumero</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -6883,6 +5142,16 @@ Try saving to a different location.</source>
         <source>Form</source>
         <translation>Muoto</translation>
     </message>
+    <message>
+        <source>startElement</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StaffText</name>
@@ -6976,6 +5245,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7298,6 +5568,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -7318,6 +5589,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -7644,6 +5916,17 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>VoltaSegment</name>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">Viivan ominaisuudet...</translation>
+    </message>
+</context>
+<context>
     <name>accidental</name>
     <message>
         <source>none</source>
@@ -7747,6 +6030,121 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>articulation</name>
+    <message id="============================================================================">
+        <source>ufermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>thumb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sforzato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>espressivo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished">staccato</translation>
+    </message>
+    <message>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tenuto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>umarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dmarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ouvert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>plusstop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverseturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished">Trilli</translation>
+    </message>
+    <message>
+        <source>prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downmordent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

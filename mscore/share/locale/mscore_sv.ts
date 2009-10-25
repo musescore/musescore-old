@@ -2,113 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="sv_SE" sourcelanguage="en_GB">
 <context>
-    <name></name>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation>Ø§ÙØ¹Ø±Ø¨ÙØ©</translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation>Tjeckiska</translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation>Danska</translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation>Holländska</translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation>Norska</translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation>Engelska (Brittisk)</translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation>Engelska (Amerikansk)</translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation>Spanska</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation>Finska</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>Franska</translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation>Galicisiska</translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation>Tyska</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation>Hindi</translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation>Ungerska</translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation>Italienska</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation>Portugisiska</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation>Ð ÑÑÑÐºÐ¸Ð¹</translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation>Svenska</translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>Turkiska</translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation>Ukrainska</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation>Polska</translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation>Romani</translation>
-    </message>
-    <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation>ç¹é«ä¸­æ (å°ç£)</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation>Brasiliansk portugisiska</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation>Japanska</translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -131,20 +24,13 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Kopieringsrätt &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer och andra. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; för nya versioner och&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;mer information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Offentliggjort enligt GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1013,6 +899,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -1039,12 +926,54 @@ p, li { white-space: pre-wrap; }
         <source>stemless</source>
         <translation>skaftlös</translation>
     </message>
+    <message>
+        <source>velocity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>velocity (0-127)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user</source>
+        <extracomment>velocity type</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <extracomment>velocity type</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ontime offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offtime</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
         <translation>Form</translation>
+    </message>
+    <message>
+        <source>SlurFor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1062,12 +991,12 @@ p, li { white-space: pre-wrap; }
         <translation>Gör synlig</translation>
     </message>
     <message>
-        <source>Midi Properties...</source>
-        <translation>MIDI-egenskaper ...</translation>
-    </message>
-    <message>
         <source>Text Properties...</source>
         <translation>Textegenskaper ...</translation>
+    </message>
+    <message>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1084,20 +1013,12 @@ p, li { white-space: pre-wrap; }
         <translation>MuseScore: Textegenskaper</translation>
     </message>
     <message>
-        <source>Midi Values</source>
-        <translation>MIDI-värden</translation>
-    </message>
-    <message>
         <source>Velocity:</source>
         <translation>Hastighet:</translation>
     </message>
     <message>
         <source>align left</source>
         <translation>vänsterjustera</translation>
-    </message>
-    <message>
-        <source>valid for:</source>
-        <translation>giltig för:</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1110,6 +1031,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>system</source>
         <translation>ackolad</translation>
+    </message>
+    <message>
+        <source>MIDI Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1362,6 +1291,22 @@ misslyckades: </translation>
     <message>
         <source>Invisible</source>
         <translation>osynlig</translation>
+    </message>
+    <message>
+        <source>Usable Pitch Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amateur:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1760,10 +1705,6 @@ space unit</extracomment>
         <translation>Arpeggion</translation>
     </message>
     <message>
-        <source>color notes which extend the usable pitch range</source>
-        <translation>färga noter som överskrider spelbart omfång</translation>
-    </message>
-    <message>
         <source>Create courtesy key signatures</source>
         <translation>Skapa förvarnande tonartssignaturer</translation>
     </message>
@@ -1778,6 +1719,26 @@ space unit</extracomment>
     <message>
         <source>hook len</source>
         <translation>haklängd</translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fix Number of Measures/System:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of single staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of multiple staves</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2483,6 +2444,17 @@ misslyckades: </translation>
     </message>
 </context>
 <context>
+    <name>MeasureProperties</name>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>stemless</source>
+        <translation type="unfinished">skaftlös</translation>
+    </message>
+</context>
+<context>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
@@ -2548,6 +2520,22 @@ misslyckades: </translation>
         <source>Stemless</source>
         <translation>Skaftlös</translation>
     </message>
+    <message>
+        <source>New Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MeasuresDialogBase</name>
@@ -2575,8 +2563,8 @@ misslyckades: </translation>
 <context>
     <name>MenuNotes</name>
     <message>
-        <source>Notes</source>
-        <translation>Noter</translation>
+        <source>&amp;Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2757,10 +2745,6 @@ före stängning?</translation>
     <message>
         <source>C major, A minor</source>
         <translation>C-dur, a-moll</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Noter</translation>
     </message>
     <message>
         <source>Drums</source>
@@ -3370,1618 +3354,6 @@ före stängning?</translation>
         <translation>Gå till: </translation>
     </message>
     <message>
-        <source>file open</source>
-        <translation>öppen fil</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Öppna ...</translation>
-    </message>
-    <message>
-        <source>Load Score from File</source>
-        <translation>Ladda dokument från fil</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>filsparning</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Spara</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>Spara dokument till fil</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>filsparning som</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Spara som ...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File</source>
-        <translation>Spara dokument till namngiven fil</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>fil spara en kopia</translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation>Spara en kopia ...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>Spara dokument till namngiven fil, men behåll nuvarande namn</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>filomladdning</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Ladda om</translation>
-    </message>
-    <message>
-        <source>Reload Score from File</source>
-        <translation>Ladda om dokument från fil</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>fil stäng</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Stäng</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Stäng aktuellt dokument</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>fil ny</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Ny ...</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>Skapa nytt dokument</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation>skriv ut</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Skriv ut ...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Skriv ut dokument</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>ångra</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Ångra</translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>ångra senaste ändring</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>gör om</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>Gör om</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>gör om senaste ångran</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>klipp ut</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Klipp ut</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>kopiera</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopiera</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>klistra in</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>Klistra in</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>visa instrumentdialogfönstret</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>Instrument ...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Visa instrumentdialogfönstret</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>visa klavpaletten</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Klav ...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Visa klavpaletten</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>visa paletten för fasta förtecken</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Fasta förtecken ...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Visa paletten för fasta förtecken</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>visa symbolpaletten</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Symboler ...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>Visa symbolpaletten</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>visa taktartspaletten</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Taktart ...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Visa taktartspaletten</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>visa dynamikpaletten</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Dynamikbeteckningar ...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Visa dynamikpaletten</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>notinmatning</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>Notinmatning</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>Notinmatning av/på</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>tonstavning</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Tonstavning</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>skriv unison ovanför</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>Unison ovanför</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>Skriv unison ovanför</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>skriv sekund ovanför</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>Sekund ovanför</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>Skriv sekund ovanför</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>skriv ters ovanför</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>Ters ovanför</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>Skriv ters ovanför</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>skriv kvart ovanför</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>Kvart ovanför</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>Skriv kvart ovanför</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>skriv kvint ovanför</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>Kvint ovanför</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>Skriv kvint ovanför</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>skriv sext ovanför</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>Sext ovanför</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>Skriv sext ovanför</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>skriv septima ovanför</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>Septima ovanför</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>Skriv septima ovanför</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation>skriv oktav ovanför</translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>Oktav ovanför</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>skiv oktav ovanför</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>skriv nona ovanför</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>Nona ovanför</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>Skriv nona ovanför</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>skriv sekund nedanför</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>Sekund nedanför</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>Skriv sekund nedanför</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>skriv ters nedanför</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>Ters nedanför</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>Skriv ters nedanför</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>skriv kvart nedanför</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>Kvart nedanför</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>Skriv kvart nedanför</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>skriv kvit nedanför</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>Kvint nedanför</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>Skriv kvint nedanför</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>skriv sext nedanför</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>Sext nedanför</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>Skriv sext nedanför</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>skriv septima nedanför</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>Septima nedanför</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>Skriv septima nedanför</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>skriv oktav nedanför</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>Oktav nedanför</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>Skriv oktav nedanför</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>skriv nona nedanför</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>Nona nedanför</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>Skriv nona nedanför</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>skriv tonen a</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Skriv tonen a</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>skriv tonen h</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>H</translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>Skriv tonen h</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>skriv tonen c</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Skriv tonen c</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>skriv tonen d</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>Skriv tonen d</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>skriv tonen e</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Skriv tonen e</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>skriv tonen f</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>Skriv tonen f</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>skriv tonen g</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Skriv tonen g</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>lägg ett a till ackordet</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>Lägg till a</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>Lägg tonen a till ackordet</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>lägg b till ackordet</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>Lägg till h</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>Lägg tonen h till ackordet</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>lägg c till ackordet</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>Lägg till c</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>Lägg tonen c till ackordet</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>lägg d till ackordet</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>Lägg till d</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>Lägg tonen d till ackordet</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>lägg e till ackordet</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>Lägg till e</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>Lägg tonen e till ackordet</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>lägg f till ackordet</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>Lägg till f</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>Lägg tonen f till ackordet</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>lägg g till ackordet</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>Lägg till g</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>Lägg tonen g till ackordet</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>skriv paus</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>paus</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>lägg till staccato</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>staccato</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>b-förtecken</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>lägg till drill</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>drill</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>mera sträckning</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>Lägg till mera sträckning</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>Lägg mera sträckning till markerad takt</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>mindre sträckning</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Lägg till mindre sträckning</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>Lägg mindre sträckning till markerad takt</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>Återställ balkläge</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Återställ balkläge för markerade takter</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>tippa skaft</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>tippriktning</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>upp</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation>upp+ctrl</translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>upp en not i ackord</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>gå till högre ton i ackord</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>gå till högsta ackordton</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>högsta ackordton</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>flytta upp</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation>upp+skift+ctrl</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>tonhöjd ner</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>ner</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>ner en oktav</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>ner+ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>ner en ton i ackord</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>gå till lägre not i ackord</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>gå till lägsta ton i ackord</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>lägsta ton i ackord</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>flytta ner</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation>ner+skift+ctrl</translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>föregående ackord</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>vänster</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>föregående takt</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation>vänsterpil+ctrl</translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>nästa ackord</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>högerpil</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>nästa takt</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>högerpil+ctrl</translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>lägg föregående ackord till markering</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation>vänsterpil+skift</translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>markera till början av takten</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>lägg nästa ackord till markering</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation>högerpil+skift</translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>markera till slutet av takten</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation>högerpil+ctrl+skift</translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation>markera till början av raden</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation>skift+home</translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>markera till slutet av raden</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation>skift+end</translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>markera till början av stycket</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation>ctrl+skift+home</translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>markera till slutet av stycket</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation>ctrl+skift+end</translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>lägg till system ovanför till markering</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>lägg till system nedanför till markering</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>föregående sida</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>nästa sida</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>sidtopp</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>sidslut</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>lägg till legatobåge</translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation>decrescendo</translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation>AVBRYT</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>radera</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>foga till takt</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>Foga till takt</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>foga till takter</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>Foga till takter ...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>infoga takt</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>Infoga takt</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>infoga takter</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>Infoga takter ...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>Infoga vågrät ram</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>Infoga lodrät ram</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>Foga till vågrät ram</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>Foga till lodrät ram</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>Duol</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>Triol</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>Kvartol</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>Kvintol</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>Sextol</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>Septol</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>Oktol</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>Novemol</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>Andra annandelningar</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation>Andra ...</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation>longanot</translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation>Longa</translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation>brevisnot</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>Brevis</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation>utfyllnadsnot 1/1</translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>Helnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation>utfyllnadsnot 1/2</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>Halvnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation>utfyllnadsnot 1/4</translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>Fjärdedelsnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation>utfyllnadsnot 1/8</translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>Åttondedelsnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation>utfyllnadsnot 1/16</translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>Sextondedelsnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation>utfyllnadsnot 1/32</translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>Trettioandradelsnot</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation>utfyllnadsnot 1/64</translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>Sextiofjärdedelsnot</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation>utfyllnadspunkt</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Punkt</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation>dubbla utfyllnadspunkter</translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>Dubbelpunkt</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation>bindebåge</translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation>utfyllnadspaus</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>dubbelkorsförtecken</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>korsförtecken</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>återställningstecken</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>dubbel-b-förtecken</translation>
-    </message>
-    <message>
-        <source>voice 1</source>
-        <translation>stämma 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>stämma 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>stämma 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>stämma 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation>MIDI-inmatning till</translation>
-    </message>
-    <message>
-        <source>Enable Midi Input</source>
-        <translation>Aktivera MIDI-inmatning</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>redigeringsljud på</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>Aktivera ljud under redigering</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>balkstart</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>balkmitt</translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation>balk 32</translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation>Palett</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>Spelkontrollpanel</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navigator</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>Mixer</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>Spelkontrollist</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>Spelkontroll</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>Notinmatningslist</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation>Statuslist</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Avsluta</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation>Mag</translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>Zooma Duk</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Sångtext</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>Fingersättningspalett</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>Fingersättning ...</translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation>Tempopalett</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation>Tempo ...</translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation>Lägg till ackoladtext</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>Ackoladtext</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>Lägg till systemtext</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>Systemtext</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Lägg till text</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>Rama in text</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>Lägg till titel</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>Lägg till titeltext</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>Lägg till undertitel</translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation>Lägg till undertiteltext</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>Lägg till tonsättare</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>Lägg till tonsättartext</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>Lägg till textförfattare</translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation>Lägg till textförfattartext</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>Lägg till uppgift om kopieringsrätt</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>Lägg till kopieringsrättstext</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>Lägg till ackordnamn</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>Ackordnamn</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>Lägg till ackordtext</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>visa harmoniegenskaper för ackord</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>Harmoniegenskaper</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>Lägg till orienteringstecken</translation>
-    </message>
-    <message>
-        <source>player play</source>
-        <translation>spelare spela</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Spela</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation>vänster ackord</translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>föregående takt</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation>sök till början</translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>backspolning</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Bakåt</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>spola tillbaka till startposition</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation>sök till slutet</translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>återuppspelning på</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>Återuppspelning</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>återuppspelning på/av</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>laddningsstil</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>Laddningsstil ...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>Laddningsstil</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>spara stil</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Spara stil ...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>Spara stil</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>markera alla</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Markera alla</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>transponera</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>Transponera ...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>Transponera</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>violinklav</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>basklav</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>Växla stämmor 1 och 2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>Växla stämmor 1 och 3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>Växla stämmor 1 och 4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>Växla stämmor 2 och 3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>Växla stämmor 2 och 4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>Växla stämmor 3 och 4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>visa klingande notation</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Visa klingande notation</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>repetera senaste kommando</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>Repetera senaste kommando</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>redigera partiturets metadata</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>Metadata ...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>Metadata</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>ackoladbrytning på/av</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>Ackoladbrytning på/av</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>sidbrytning på/av</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>Sidbrytning på/av</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>redigera element</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>Redigera element</translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation>återställ positioner</translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation>Återställ positioner</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>visa inspektor</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Inspektor</translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation>återställ taktsträckning</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>Återställ sträckning</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>visa osynliga</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>Visa osynliga</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>visa ramar</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>Visa ramar</translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation>visa klaviatur</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>Visa klaviatur</translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation>aktivera skriptavlusare</translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation>Aktivera skriptavlusare</translation>
-    </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation>skriv helpaus</translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation>helpaus</translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation>skriv halvpaus</translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation>Halvpaus</translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation>skriv fjärdedelspaus</translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation>Fjärdedelspaus</translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation>skriv åttondedelspaus</translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation>Åttondedelspaus</translation>
-    </message>
-    <message>
-        <source>backspace</source>
-        <translation>backsteg</translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation>sök</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation>Zomma in</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>Zomma ut</translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation>spegla nothuvud</translation>
-    </message>
-    <message>
-        <source>Edit Style...</source>
-        <translation>Redigera stil ...</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Redigera textstil</translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation>radera markerade takter</translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation>Radera markerade takter</translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation>Markera alla liknande element</translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation>Alla liknande element</translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation>Markera alla liknande element i samma system</translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation>Alla liknande element i samma system</translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alla stödda filformat (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore-filer (*.mscz *.mscx *.msc);;MusicXML-filer (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella-filer (*.cap);;BB-filer &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alla filer (*)</translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation>Starta eller stoppa uppspelning</translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation>Syntetisator</translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation>Syntetisatorkontroll</translation>
-    </message>
-    <message>
-        <source>Local &amp;Handbook</source>
-        <translation>Lokal &amp;handbok</translation>
-    </message>
-    <message>
         <source>Online Handbook</source>
         <translation>Internethandbok</translation>
     </message>
@@ -4998,6 +3370,14 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>
 
 Försök istället välja Internethandbok från menyn Hjälp.</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5126,6 +3506,26 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     <message>
         <source>note head group</source>
         <translation>nothuvudgrupp</translation>
+    </message>
+    <message>
+        <source>OnTimeType:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">Auto</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Förskjutning</translation>
+    </message>
+    <message>
+        <source>OffTimeType:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5361,12 +3761,32 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
 <context>
     <name>PianorollEditor</name>
     <message>
-        <source>velocity:</source>
-        <translation>hastighet:</translation>
+        <source>Cursor:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pitch:</source>
-        <translation>tonhöjd:</translation>
+        <source>Velocity:</source>
+        <translation type="unfinished">Hastighet:</translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">auto</translation>
+    </message>
+    <message>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5423,6 +3843,18 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <source>Tmp</source>
         <translation>Tmp</translation>
     </message>
+    <message>
+        <source>Straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
@@ -5443,10 +3875,6 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>Välj bakgrund</translation>
     </message>
     <message>
-        <source>Instrument List (*.xml);;All (*)</source>
-        <translation>Instrumentlista (*.xml);;Alla (*)</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore-fil (*.msc);;Alla (*)</translation>
     </message>
@@ -5461,6 +3889,10 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     <message>
         <source>Choose Starting Score</source>
         <translation>Välj startpartitur</translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5588,10 +4020,6 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     <message>
         <source>show</source>
         <translation>visa</translation>
-    </message>
-    <message>
-        <source>Cur</source>
-        <translation>Mar</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -5750,20 +4178,12 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>Om du använder standardinmatning kommer tonartsignaturen att bestämma alterering; om du trycker F i G-dur skrivs ett fiss. Om alternativ inmatning används skrivs alltid stamtonen.</translation>
     </message>
     <message>
-        <source>Export Midi</source>
-        <translation>Exportera MIDI</translation>
-    </message>
-    <message>
         <source>Expand Repeats</source>
         <translation>Utvidga repriser</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
         <translation>aktivera MIDI-fjärrkontroll</translation>
-    </message>
-    <message>
-        <source>Midi Remote Control</source>
-        <translation>MIDI-fjärrkontroll</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -5810,16 +4230,8 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>I/O</translation>
     </message>
     <message>
-        <source>Use midi output</source>
-        <translation>Använd MIDI-utmatning</translation>
-    </message>
-    <message>
         <source>Ports</source>
         <translation>Portar</translation>
-    </message>
-    <message>
-        <source>Auto Connect</source>
-        <translation>Autoanslut</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
@@ -6003,8 +4415,32 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>Ersätt 1/2 ... med symbol ...</translation>
     </message>
     <message>
-        <source>color notes outside of usable pitch range</source>
-        <translation>färga noter utanför användbart tonomfång</translation>
+        <source>MuseScore Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Current Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIDI Remote Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6148,45 +4584,6 @@ Vänligen markera ett not- eller paustecken och försök igen
     <message>
         <source>Setup...</source>
         <translation>Inställningar ...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatPropertiesBase</name>
-    <message>
-        <source>MuseScore: Repeat Properties</source>
-        <translation>MuseScore: Reprisegenskaper</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>repristypnamn</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>Ange specialiteter för</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>Textetikett</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>Cykler</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Nummer</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Destinationsnummer</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>Cykler att spela</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>cykelnummer; exempel: 1,3,5</translation>
     </message>
 </context>
 <context>
@@ -6751,6 +5148,16 @@ Försök spara på annan plats.</translation>
     <message>
         <source>Form</source>
         <translation>Form</translation>
+    </message>
+    <message>
+        <source>startElement</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7516,6 +5923,17 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>VoltaSegment</name>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">Radegenskaper ...</translation>
+    </message>
+</context>
+<context>
     <name>accidental</name>
     <message>
         <source>none</source>
@@ -7620,6 +6038,121 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>sharp-slash4</source>
         <translation>stunget korsförtecken 4</translation>
+    </message>
+</context>
+<context>
+    <name>articulation</name>
+    <message id="============================================================================">
+        <source>ufermata</source>
+        <translation type="unfinished">upp-fermat</translation>
+    </message>
+    <message>
+        <source>dfermata</source>
+        <translation type="unfinished">ner-fermat</translation>
+    </message>
+    <message>
+        <source>thumb</source>
+        <translation type="unfinished">tumme</translation>
+    </message>
+    <message>
+        <source>sforzato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>espressivo</source>
+        <translation type="unfinished">espressivo</translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished">staccato</translation>
+    </message>
+    <message>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished">upp-staccatissimo</translation>
+    </message>
+    <message>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tenuto</source>
+        <translation type="unfinished">tenuto</translation>
+    </message>
+    <message>
+        <source>uportato</source>
+        <translation type="unfinished">u-portato</translation>
+    </message>
+    <message>
+        <source>dportato</source>
+        <translation type="unfinished">d-portato</translation>
+    </message>
+    <message>
+        <source>umarcato</source>
+        <translation type="unfinished">u-marcato</translation>
+    </message>
+    <message>
+        <source>dmarcato</source>
+        <translation type="unfinished">d-marcato</translation>
+    </message>
+    <message>
+        <source>ouvert</source>
+        <translation type="unfinished">öppen</translation>
+    </message>
+    <message>
+        <source>plusstop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverseturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>turn</source>
+        <translation type="unfinished">dubbelslag</translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished">drill</translation>
+    </message>
+    <message>
+        <source>prall</source>
+        <translation type="unfinished">pralldrill</translation>
+    </message>
+    <message>
+        <source>mordent</source>
+        <translation type="unfinished">mordent</translation>
+    </message>
+    <message>
+        <source>prallprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downmordent</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

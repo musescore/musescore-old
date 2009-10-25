@@ -2,113 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
-    <name></name>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation>Checo</translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation>Dinamarqués</translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation>Holandés</translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation>Noruegués</translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation>Inglés británico</translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation>Inglés americano</translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation>Español</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation>Finlandés</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>Francés</translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation>Galego</translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation>Alemán</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation>Hindi</translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation>Húngaro</translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation>Italiano</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation>Portugués</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation>Sueco</translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>Turco</translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation>Ucraíno</translation>
-    </message>
-    <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation>Polaco</translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation>Romeno</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation>Portugués brasileiro</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation>Xaponés</translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -126,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revisión: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -993,6 +886,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>automático</translation>
     </message>
     <message>
@@ -1013,6 +907,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>cent</translation>
     </message>
     <message>
@@ -1041,10 +936,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1069,6 +966,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Formulario</translation>
+    </message>
+    <message>
+        <source>SlurFor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1386,6 +1291,22 @@ fallou:</translation>
         <source>Invisible</source>
         <translation>Invisíbel</translation>
     </message>
+    <message>
+        <source>Usable Pitch Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amateur:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1474,6 +1395,11 @@ fallou:</translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -1799,6 +1725,18 @@ fallou:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of single staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline at start of multiple staves</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3296,10 +3234,6 @@ antes de fechar?</translation>
         <translation>fallou</translation>
     </message>
     <message>
-        <source>Notes</source>
-        <translation>Notas</translation>
-    </message>
-    <message>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -3423,1602 +3357,6 @@ antes de fechar?</translation>
         <translation>Octava</translation>
     </message>
     <message>
-        <source>file open</source>
-        <translation>abrir un ficheiro</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Abrir...</translation>
-    </message>
-    <message>
-        <source>Load Score from File</source>
-        <translation>Cargar unha partitura dun ficheiro</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>gardar un ficheiro</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Gardar</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>Gardar a partitura nun ficheiro</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>gardar o ficheiro como</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Gardar como...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File</source>
-        <translation>Gardar a partitura nun ficheiro chamado</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>gardar unha copia do ficheiro</translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation>Gardar unha copia...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>Gardar a partitura no ficheiro con este nome, mais conservar o actual</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>recargar un ficheiro</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Recargar</translation>
-    </message>
-    <message>
-        <source>Reload Score from File</source>
-        <translation>Cargar de novo a partitura desde o ficheiro</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>fechar o ficheiro</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Fechar</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Fechar esta partitura</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>novo ficheiro</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Nova...</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>Crear unha partitura nova</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation>imprimir</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Imprimir...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Imprimir a partitura</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>desfacer</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Desfacer</translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>desfacer a última modificación</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>refacer</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>Refacer</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>refacer o último que se desfixo</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>recortar</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Recortar</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>copiar</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Copiar</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>apegar</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>Apegar</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>mostrar o diálogo dos instrumentos</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>Instrumentos...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Mostrar o diálogo dos instrumentos</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>mostrar a paleta das claves</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Clave...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Mostrar a paleta das claves</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>mostrar a paleta das claves</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Armadura...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Mostrar a paleta das armaduras</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>mostrar a paleta dos símbolos</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Símbolos...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>Mostrar a paleta dos símbolos</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>mostrar a paleta do tempo</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Tempo...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Mostrar a paleta do tempo</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>mostrar a paleta da expresión</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Expresión...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Mostrar a paleta da expresión</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>introdución de notas</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>Introdución de notas</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>alternar o mode de introdución de notas N</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>expresión da altura</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Expresión da altura</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>introducir un unísono por riba</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>Unísono por riba</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>Introducir un unísono por riba</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>introducir unha segunda por riba</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>Segunda por riba</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>Intrdoucir unha segunda por riba</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>introducir unha terza por riba</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>Terza por riba</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>Introducir unha terza por riba</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>introducir unha cuarta por riba</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>Cuarta por riba</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>Introducir unha cuarta por riba</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>introducir quinta por riba</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>Quinta por riba</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>Introducir unha quinta por riba</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>introducir unha sexa por riba</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>Sexta por riba</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>Introducir unha sexta por riba</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>introducir unha sétima por riba</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>Sétima por riba</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>Introducir unha sétima por riba</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation>introducir unha octava por riba</translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>Oitava por riba</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>Introducir unha oitava por riba</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>introducir unha novena por riba</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>Novena por riba</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>Introducir unha novena por riba</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>introducir unha segunda por baixo</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>Segunda por baixo</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>Introducir unha segunda por baixo</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>introducir unha terza por baixo</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>Terza por baixo</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>Introducir unha terza por baixo</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>introducir unha cuarta por baixo</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>Cuarta por baixo</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>Introducir unha cuarta por baixo</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>introducir unha quinta por baixo</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>Quinta por baixo</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>Introducir unha quinta por baixo</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>introducir unha sexta por baixo</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>Sexta por baixo</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>Introducir unha sexta por baixo</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>introducir unha sétima por baixo</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>Sétima por baixo</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>Introducir unha sétima por baixo</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>introducir unha oitava por baixo</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>Oitava por baixo</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>Introducir unha oitava por baixo</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>introducir unha novena por baixo</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>Novena por baixo</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>Introducir unha novena por baixo</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>introducir a nota la</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation>la</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Introducir a nota la</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>introducir a nota si</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation>si</translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>Introducir a nota si</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>introducir a nota do</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation>do</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Introducir a nota do</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>introducir a nota re</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>re</translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>Introducir a nota re</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>introducir a nota mi</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation>mi</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Introducir a nota mi</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>introducir a nota fa</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation>fa</translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>Introducir a nota fa</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>introducir a nota sol</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation>sol</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Introducir a nota sol</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>engadir la ao acorde</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>Engadir la</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>Engadir a nota la ao acorde</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>engadir si ao acorde</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>Engadir si</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>Engadir a nota si ao acorde</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>engadir do ao acorde</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>Engadir do</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>Engadir a nota do ao acorde</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>engadir re ao acorde</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>Engadir re</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>Engadir a nota re ao acorde</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>engadir mi ao acorde</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>Engadir mi</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>Engadir a nota mi ao acorde</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>engadir fa ao acorde</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>Engadir fa</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>Engadir a nota fa ao acorde</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>engadir sol ao acorde</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>Engadir sol</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>Engadir a nota sol ao acorde</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>introducir un silencio</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>silencio</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>engadir staccato</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>staccato</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>bemol</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>engadir trino</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>trino</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>anchear</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>Anchear</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>Anchear o compás seleccionado</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>acurtar</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Acurtar</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>Acurtar o compás seleccionado</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>Reiniciar o modo das barras de unión</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Reiniciar o modo das barras de unión dos compases seleccionados</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>inverter a plica</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>inverter a dirección</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>arriba</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation>arriba+ctrl</translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>nota arriba no acorde</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>ir á nota máis aguda do acorde</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>ir á nota superior do acorde</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>nota superior do acorde</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>subir</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation>arriba+maiúsculas+ctrl</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>altura abaixo</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>abaixo</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>baixar unha oitava</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>abaixo+ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>nota abaixo no acorde</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>ir á nota máis grave do acorde</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>ir á nota inferior do acorde</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>nota inferior do acorde</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>baixar</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation>abaixo+maiúsculas+ctrl</translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>acorde anterior</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>esquerda</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>compás anterior</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation>esquerda+ctrl</translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>acorde seguinte</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>dereita</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>compás seguinte</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>dereita+ctrl</translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>engadir o acorde anterior á selección</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation>esquerda+maiúsculas</translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>seleccionar até o inicio do compás</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>engadir o acorde seguinte á selección</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation>dereita+maiúsculas</translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>seleccionar até o fin do compás</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation>dereita+ctrl+maiúsculas</translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation>seleccionar até o principio da liña</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation>maiúsculas+inicio</translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>seleccionar até o fin da liña</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation>maiúsculas+fin</translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>seleccionar até o principio da partitura</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation>ctrl+maiúsculas+inicio</translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>seleccionar até o fin da partitura</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation>ctrl+maiúsculas+fin</translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>engadir o pentagrama de riba á selección</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>engadir o pentagrama de abaixo á selección</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>páxina-anterior</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>páxina-seguinte</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>páxina-arriba</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>páxina-final</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>engadir unha ligadura de expresión</translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation>decrescendo</translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation>ESCAPE</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>eliminar</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>engadir un compás</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>Engadir un compás</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>engadir compases</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>Engadir compases...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>Inserir un compás</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>Inserir un compás</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>Inserir compases</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>Inserir compases...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>Inserir unha moldura horizontal</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>Inserir unha moldura vertical</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>Engadir unha moldura horizontal</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>Engadir unha moldura vertical</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>Dosillo</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>Tresillo</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>Cuadrillo</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>Cinquillo</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>Seisillo</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>Septillo</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>Octillo</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>Nonillo</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>Outros grupos artificiais</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation>Outros...</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation>nota longa</translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation>Longa</translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation>redonda</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>Redonda</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation>encher con longas</translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>Redonda</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation>encher con redondas</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>Negra</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation>encher con negras</translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>Negra</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation>encher con corcheas</translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>Corchea</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation>encher con semicorcheas</translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>Semicorchea</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation>encher con fusas</translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>Fusa</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation>encher con semifusas</translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>Semifusa</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation>encher con puntillo</translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Puntillo</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation>encher con duplo puntillo</translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>Duplo puntillo</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation>ligadura</translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation>encher con silencio</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>duplo sostenido</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>sostenido</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>becuadro</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>duplo bemol</translation>
-    </message>
-    <message>
-        <source>voice 1</source>
-        <translation>voz 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>voz 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>voz 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>voz 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation>entrada de midi</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>son de edición activado</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>Activar o son mentres se escribe</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>inicio de ligadura</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>centro de ligadura</translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation>ligadura de fusa</translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation>Paleta</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>Panel de reprodución</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navegador</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>Misturador</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>Barra de ferramentas de transporte</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>Transporte</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>Barra de ferramentas de introdución de notas</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation>Barra de estado</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Saír</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation>Aumentar</translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>Ampliación do lenzo</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Letra</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>Paleta de dixitacións</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>Dixitación...</translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation>Paleta do tempo</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation>Tempo...</translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation>Engadir texto do sistema</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>Texto do sistema</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>Engadir texto do pentagrama</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>Texto do pentagrama</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Engadir texto</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>Texto da moldura</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>Engadir un título</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>Engadir o texto do título</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>Engadir un subtítulo</translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation>Engadir o texto do subtítulo</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>Engadir o compositor</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>Engadir o texto do compositor</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>Engadir o letrista</translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation>Engadir o texto do letrista</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>Engadir o copyright</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>Engadir o texto do copyright</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>Engadir o nome do acorde</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>Nome do acorde</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>Engadir o texto do acorde</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>mostrar as propiedades de harmonía do acorde</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>Propiedades de harmonía</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>Engadir unha marca de ensaio</translation>
-    </message>
-    <message>
-        <source>player play</source>
-        <translation>reprodución</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Reproducir</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation>acorde da esquerda</translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>compás anterior</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation>procurar até o principio</translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>recuar no reprodutor</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Ir ao comezo</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>recuar até a posición inicial</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation>procurar até o final</translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>as repeticións están activadas</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>Repetir</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>repeticións activadas/desactivadas</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>cargar un estilo</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>Cargar un estilo...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>Cargar un estilo</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>gardar o estilo</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Gardar o estilo...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>Gardar o estilo</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>seleccionalo todo</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Seleccionalo todo</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>transpor</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>Transpor...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>Transpor</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>clave de sol en primeira</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>clave de fa</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>Intercambiar as voces 1 e 2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>Intercambiar as voces 1 e 3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>Intercambiar as voces 1 e 4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>Intercambiar as voces 2 e 3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>Intercambiar as voces 2 e 4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>Intercambiar as voces 3 e 4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>mostrar en diapasón de concerto</translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Mostrar en diapasón de concerto</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>repetir a última instrución</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>Repetir a última instrución</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>modificar os metadatos da partitura</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>Metadatos...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>Metadatos</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>alternar o salto de sistema</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>Alternar o salto de sistema</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>alternar o salto de páxina</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>Alternar o salto de páxina</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>modificar o elemento</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>Modificar o elmento</translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation>reiniciar as posicións</translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation>Reiniciar as posicións</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>mostrar o inspector</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Inspector</translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation>reiniciar a anchura do compás</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>Reiniciar a anchura</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>mostrar o invisíbel</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>Mostrar o invisíbel</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>mostrar as molduras</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>Mostrar as molduras</translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation>mostrar o teclado</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>Mostrar o teclado</translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation>activar o depurador de scripts</translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation>Activar o depurador de scripts</translation>
-    </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation>introducir un silencio de redonda</translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation>silencio de redonda</translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation>introducir un silencio de branca</translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation>silencio de branca</translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation>introducir un silencio de negra</translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation>silencio de negra</translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation>introducir un silencio de corchea</translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation>silencio de corchea</translation>
-    </message>
-    <message>
-        <source>backspace</source>
-        <translation>retroceso</translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation>procurar</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation>Achegar</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>Afastar</translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation>espellar a cabeza da nota</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Modificar o estilo do texto...</translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation>eliminar os compases seleccionados</translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation>Eliminar os compases seleccionados</translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation>Seleccionar todos os elementos semellantes</translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation>Todos sos elementos semellantes</translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation>Seleccionar todos os elementos semellantes do mesmo pentagrama</translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation>Todos os elementos semellantes do mesmo pentagrama</translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation>Iniciar ou parar de reproducir</translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation>Sintetizador</translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation>Control do sintetizador</translation>
-    </message>
-    <message>
         <source>Online Handbook</source>
         <translation>Manual en liña</translation>
     </message>
@@ -5037,51 +3375,11 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.</translation>
     </message>
     <message>
-        <source>local help</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show local Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>follow song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow Song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Grace Notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5580,10 +3878,6 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>Escoller o papel para o fondo da aplicación</translation>
     </message>
     <message>
-        <source>Instrument List (*.xml);;All (*)</source>
-        <translation>Lista de instrumentos (*.xml);;Todos (*)</translation>
-    </message>
-    <message>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>Ficheiro de MuseScore (*.msc);;Todos (*)</translation>
     </message>
@@ -5598,6 +3892,10 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
     <message>
         <source>Choose Starting Score</source>
         <translation>Escoller a partitura inicial</translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6116,6 +4414,7 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -6288,45 +4587,6 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     <message>
         <source>Setup...</source>
         <translation>Configuración...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatPropertiesBase</name>
-    <message>
-        <source>MuseScore: Repeat Properties</source>
-        <translation>MuseScore: Propiedades da repetición</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>NomeTipoRep</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>Indicar especiais para</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>EtiquetaDeTexto</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>Ciclos</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Número</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Número de destino</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>Ciclos a reproducir</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>números de ciclos, exemplo: 1, 3, 5</translation>
     </message>
 </context>
 <context>
@@ -6891,6 +5151,16 @@ Tente gardar nun sitio diferente.</translation>
         <source>Form</source>
         <translation>Formulario</translation>
     </message>
+    <message>
+        <source>startElement</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StaffText</name>
@@ -6984,6 +5254,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -7306,6 +5577,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -7326,6 +5598,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -7649,6 +5922,17 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>VoltaSegment</name>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">Propiedades da liña...</translation>
+    </message>
+</context>
+<context>
     <name>accidental</name>
     <message>
         <source>none</source>
@@ -7752,6 +6036,121 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>articulation</name>
+    <message id="============================================================================">
+        <source>ufermata</source>
+        <translation type="unfinished">fermata arriba</translation>
+    </message>
+    <message>
+        <source>dfermata</source>
+        <translation type="unfinished">fermata abaixo</translation>
+    </message>
+    <message>
+        <source>thumb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sforzato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>espressivo</source>
+        <translation type="unfinished">espressivo</translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished">staccato</translation>
+    </message>
+    <message>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished">staccatissimo arriba</translation>
+    </message>
+    <message>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tenuto</source>
+        <translation type="unfinished">tenuto</translation>
+    </message>
+    <message>
+        <source>uportato</source>
+        <translation type="unfinished">portato arriba</translation>
+    </message>
+    <message>
+        <source>dportato</source>
+        <translation type="unfinished">portato abaixo</translation>
+    </message>
+    <message>
+        <source>umarcato</source>
+        <translation type="unfinished">marcato arriba</translation>
+    </message>
+    <message>
+        <source>dmarcato</source>
+        <translation type="unfinished">marcato abaixo</translation>
+    </message>
+    <message>
+        <source>ouvert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>plusstop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverseturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished">trino</translation>
+    </message>
+    <message>
+        <source>prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mordent</source>
+        <translation type="unfinished">mordente</translation>
+    </message>
+    <message>
+        <source>prallprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downmordent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
