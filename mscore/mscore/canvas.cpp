@@ -624,6 +624,14 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
                   return;
                   }
             }
+      Element* e = _score->editObject;
+      if (QApplication::mouseButtons() == Qt::LeftButton && e && e->isTextB()) {
+            TextB* text = static_cast<TextB*>(e);
+            QPointF pt   = imatrix.map(QPointF(ev->pos()));
+            text->dragTo(pt);
+            return;
+            }
+
       mouseMoveEvent1(ev);
       if (dragCanvasState)
            return;

@@ -1,5 +1,6 @@
 25.oct
       (ws)
+      - implemented mouse selection of text in text edit mode
       - changed appearance of selected text from underline to more common
         inverse colors
       - new function for text edit mode: Ctrl+a selects whole text
