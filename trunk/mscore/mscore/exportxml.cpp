@@ -1105,6 +1105,21 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
       else
             alter = note->pitch() - npitch;
 
+      // correct for ottava lines
+      int ottava = 0;
+      switch (note->ppitch() - note->pitch()) {
+            case  24: ottava =  2; break;
+            case  12: ottava =  1; break;
+            case   0: ottava =  0; break;
+            case -12: ottava = -1; break;
+            case -24: ottava = -2; break;
+            default:  printf("pitch2xml() tick=%d pitch()=%d ppitch()=%dd\n",
+                             tick, note->pitch(), note->ppitch());
+            }
+      octave += ottava;
+      printf("pitch2xml() tick=%d offset=%d step=%d pitch()=%d ppitch()=%d npitch=%d alter=%d ottava=%d\n",
+             tick, offset, step, note->pitch(), note->ppitch(), npitch, alter, ottava);
+
       //deal with Cb and B#
       if (alter > 2) {
             printf("pitch2xml problem: alter %d step %d(line %d) octave %d clef %d(offset %d)\n",
@@ -1129,10 +1144,10 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
           int tick   = note->chord()->tick();
           Staff* i   = note->staff();
           int offset = clefTable[i->clefList()->clef(tick)].yOffset;
-    
+
           int step   = (note->line() - offset + 700) % 7;
           c          = table1[step];
-          
+
           int tmp = (note->line() - offset);
           octave =(3-tmp+700)/7 + 5 - 100; 
       }
