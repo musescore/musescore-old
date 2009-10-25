@@ -1219,7 +1219,7 @@ void TextB::setBlockFormat(const QTextBlockFormat& bf)
 //   setCursor
 //---------------------------------------------------------
 
-bool TextB::setCursor(const QPointF& p)
+bool TextB::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       {
       QPointF pt  = p - canvasPos();
       if (!bbox().contains(pt))
@@ -1228,7 +1228,7 @@ bool TextB::setCursor(const QPointF& p)
       if (idx == -1)
             return true;
       if (cursor)
-            cursor->setPosition(idx);
+            cursor->setPosition(idx, mode);
       return true;
       }
 
@@ -1241,7 +1241,6 @@ bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
       {
       if (!setCursor(p))
             return false;
-
       if (ev->button() == Qt::MidButton)
             paste();
       return true;
@@ -1435,5 +1434,16 @@ void TextProperties::accept()
       {
       tp->get(tb);
       QDialog::accept();
+      }
+
+//---------------------------------------------------------
+//   dragTo
+//---------------------------------------------------------
+
+void TextB::dragTo(const QPointF& p)
+      {
+      setCursor(p, QTextCursor::KeepAnchor);
+      score()->setUpdateAll();
+      score()->end();
       }
 
