@@ -1,4 +1,9 @@
-25.oct (lv)
+25.oct
+      (ws)
+      - changed appearance of selected text from underline to more common
+        inverse colors
+      - new function for text edit mode: Ctrl+a selects whole text
+      (lv)
       - fix export of MusicXML <octave-shift>
       - fix export of MusicXML <rest>
       - update MusicXML regression testfiles

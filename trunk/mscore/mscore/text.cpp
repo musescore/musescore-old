@@ -345,11 +345,14 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
       if (cursor) {
+            if (cursor->hasSelection()) {
+                  QAbstractTextDocumentLayout::Selection selection;
+                  selection.cursor = *cursor;
+                  selection.format.setBackground(c.palette.brush(QPalette::Active, QPalette::Highlight));
+                  selection.format.setForeground(c.palette.brush(QPalette::Active, QPalette::HighlightedText));
+                  c.selections.append(selection);
+                  }
             c.cursorPosition = cursor->position();
-            QAbstractTextDocumentLayout::Selection sel;
-            sel.cursor = *cursor;
-            sel.format.setFontUnderline(true);
-            c.selections.append(sel);
             }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
@@ -914,6 +917,9 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
 
       if (modifiers == Qt::ControlModifier) {
             switch (key) {
+                  case Qt::Key_A:   // select all
+                        cursor->select(QTextCursor::Document);
+                        break;
                   case Qt::Key_B:   // toggle bold face
                         {
                         QTextCharFormat f = cursor->charFormat();
