@@ -1242,7 +1242,8 @@ bool TextB::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
 
 bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
       {
-      if (!setCursor(p))
+      bool shift = ev->modifiers() & Qt::ShiftModifier;
+      if (!setCursor(p, shift ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor))
             return false;
       if (ev->button() == Qt::MidButton)
             paste();
