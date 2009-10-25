@@ -44,6 +44,8 @@
 #include "config.h"
 #include "dynamics.h"
 #include "globals.h"
+#include <iostream>
+using std::cout;
 #include "hairpin.h"
 #include "harmony.h"
 #include "key.h"
@@ -185,8 +187,9 @@ class ExportLy {
   void chordInsertList(chordPost *);
   void printChordList();
   void cleanupChordList();
-
-
+  void writeFingering (int&, QString fingering[5]);
+  void writeStringInstruction(int &, QString stringarr[10]);
+  void findFingerAndStringno(Note* note, int&, int&, QString (&finger)[5], QString (&strng)[10]);
   struct jumpOrMarkerLM
   {
     Marker* marker;
@@ -1259,7 +1262,6 @@ void ExportLy::handleElement(Element* el)
 	       break;
 	    case STAFF_TEXT:
 	    case TEXT:
-	      printf("TEXT\n");
 	      if (wholemeasurerest) 
 		{
 		  Text* wmtx = (Text*) instruction;
@@ -1776,7 +1778,6 @@ void ExportLy::findStartRepNoBarline(int &i, Measure* m)
     {
       if (seg->subtype() == Segment::SegStartRepeatBarLine) 
 	{
-	  printf("segstartrepeatbarline\n");
 	  i++; // insert at next slot of voltarray
 	  voltarray[i].voltart = startrepeat;
 	  voltarray[i].barno = taktnr-1;
@@ -2295,6 +2296,62 @@ void ExportLy::writeTremolo(Chord * chord)
     }
 }
 
+
+//-------------------------------------------------------------------------------------------
+//  findFingerAndStringno
+//------------------------------------------------------------------------------------------
+
+void ExportLy::findFingerAndStringno(Note* note, int &fingix, int &stringix, QString (&fingarray)[5], QString (&stringarray)[10])
+{
+  foreach (const Element* e, *note->el()) 
+    {
+      if (e->type() == TEXT)
+	{
+	  if ( e->subtype() == TEXT_FINGERING) 
+	    {
+	      fingix++;
+	      Text* f = (Text*)e;
+	      fingarray[fingix] = f->getText();
+	    }
+	  if (e->subtype() == TEXT_STRING_NUMBER)
+	    {
+	      stringix++;
+	      Text * s = (Text*)e;
+	      stringarray[stringix] = s->getText();
+	    }
+	}
+    }
+}//end findfingerandstringno
+
+
+void ExportLy::writeStringInstruction(int &strgix, QString stringarr[10])
+{
+  if (strgix > 0)  
+    {  //there should be only one stringinstruction, so this is possibly redundant.
+      for (int i=0; i < strgix; i++)
+	out << "\\" << stringarr[strgix];
+    }
+  strgix = 0;
+}
+
+
+//---------------------------------------------------------
+//  writeFingering
+//---------------------------------------------------------
+void ExportLy::writeFingering (int &fingr,   QString fingering[5])
+{
+  if (fingr > 0)
+	{
+	  if (fingr == 1) out << "-" << fingering[1] << " ";
+	  else if (fingr >1)
+	    {
+	      out << "^\\markup {\\finger \"";
+	      out << fingering[1] << " - " << fingering[2] << "\"} ";
+	    }
+	}
+  fingr=0;
+}
+
 //---------------------------------------------------------
 //   writeChord
 //---------------------------------------------------------
@@ -2304,6 +2361,10 @@ void ExportLy::writeChord(Chord* c)
   int  purepitch;
   QString purename, chordnote;
   int pitchlist[12];
+  QString fingering[5];
+  QString stringno[10];
+  
+
   int j=0;
   for (j=0; j<12; j++) pitchlist[j]=0;
 
@@ -2333,6 +2394,8 @@ void ExportLy::writeChord(Chord* c)
   NoteList* nl = c->noteList();
 
   bool chordstart=false;
+  int fing=0;
+  int streng=0;
 
   if (nl->size() > 1) chordstart = true;
 
@@ -2342,6 +2405,18 @@ void ExportLy::writeChord(Chord* c)
     {
       Note* n = i->second;
       NoteType gracen;
+
+      //if fingering found on _previous_ chordnote, now is the time for writing it:
+      if (fing>0)  writeFingering(fing,fingering);
+      if (streng>0) writeStringInstruction(streng,stringno);
+      
+      //Find fingerings and string number: string number must be
+      //written inside chord bracks, even if there is only a single
+      //note and not a chord e.g. <g4\3> . Therefore we look for
+      //stringnos before we write the first note, so as to be able to
+      //write begin-chord brack "<".
+      findFingerAndStringno(n, fing, streng, fingering, stringno);
+
       gracen = n->noteType();
       switch(gracen)
 	{
@@ -2355,7 +2430,7 @@ void ExportLy::writeChord(Chord* c)
 	      out << " } \\stemNeutral "; //end of grace
 	      gracecount=0;
 	    }
-	  if (chordstart)
+	  if ((chordstart) or (streng > 0))
 	    {
 	      out << "<";
 	      chordstart=false;
@@ -2378,11 +2453,14 @@ void ExportLy::writeChord(Chord* c)
 	} //end of switch(gracen)
 
 
-      findTuplets(n->chord()); //probably causes trouble here, Must be put outside of notelist?
+      findTuplets(n->chord()); 
 
       if (gracecount==2) out << " [ ";
-      out << tpc2name(n->tpc());
+
+      out << tpc2name(n->tpc());  //the notename.
+      
       if (n->tieFor()) tie=true;
+     
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());  //with -es or -is
       prevnote=cleannote;             //without -es or -is
@@ -2429,12 +2507,16 @@ void ExportLy::writeChord(Chord* c)
       out << " ";
     } //end of notelist = end of chord
 
-  if (nl->size() > 1)
+
+  if ((nl->size() > 1) or (streng > 0))
     {
-    out << ">"; //endofchord sign
-    cleannote=chordnote;
-    //if this is a chord, use first note of chord as previous note
-    //instead of actual previous note.
+      //if fingering found on previous chordnote, now is the time for writing it:
+      if (fing   > 0) writeFingering(fing, fingering);
+      if (streng > 0) writeStringInstruction(streng,stringno);
+      out << ">"; //endofchord sign
+      cleannote=chordnote;
+      //if this is a chord, use first note of chord as previous note
+      //instead of actual previous note.
     }
 
   j=0;
@@ -2446,17 +2528,22 @@ void ExportLy::writeChord(Chord* c)
      }
 
   writeLen(c->tickLen());
-  writeTremolo(c);
 
+  //if fingering found on a single note, now is the time for writing it:
+  if (nl->size() == 1)
+    writeFingering(fing, fingering);
+  
+  writeTremolo(c);
+  
   if (tie)
     {
       out << "~";
       tie=false;
     }
-
+  
   writeArticulation(c);
   checkSlur(c);
-
+  
   if (tupletcount==-1)
     {
       out << " } ";
@@ -3354,7 +3441,9 @@ if (rehearsalnumbers)
      os << "\\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
    }
   indentF();
-  os << "\\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n";
+ if (timedenom == 2)
+   os << "%%";
+     os << "\\numericTimeSignature \n";
   indentF();
   os << "%% remove previous line to get cut-time/alla breve or common time \n";
   indentF();
@@ -3633,6 +3722,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+   25.oct. Implemented fingering and guitar string-number
+
    24.oct Support for metronome marks. 
 
    22.oct  conditional output of exportly's lilypond macros (\okt and
@@ -3721,26 +3812,20 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------
 
-  -- choose cut-time if timesig is 2/2 or 4/2, numerical timesig if
-      odd time-sigs like 7/4 and 6/4. For 4/4 an automatic decision is
-      difficult.
+     -- Arpeggios and glissandos
 
-      -- fingerings
+     -- 8vabassa, lefthandposition (roman numbers: violin, guitar), trill, pedal and
+      general lines with/out text.
 
+      -- Coda/Segno symbols collides with rehearsalmarks, which
+      accordingly are not printed.
+      
       -- odd noteheads and percussion staffs.
-
+      
       -- breaks and spacers
 
       -- accordion symbols.
       
-   -- Arpeggios and glissandos
-
-   -- 8vabassa, lefthandposition (roman numbers: violin, guitar), trill, pedal and
-      general lines with/out text.
-
-   -- Coda/Segno symbols collides with rehearsalmarks, which
-      accordingly are not printed.
-
    -- Lyrics (low priority in relation to music itself) 
 
    -- become clear on the difference between system text and staff
