@@ -82,9 +82,9 @@ bool converterMode = false;
 static bool pluginMode = false;
 double converterDpi = 300;
 
-static const char* outFileName;
-static const char* pluginName;
-static const char* styleFile;
+static QString outFileName;
+static QString pluginName;
+static QString styleFile;
 static QString localeName;
 bool useFactorySettings = false;
 
@@ -979,10 +979,10 @@ void MuseScore::updateTabNames()
 //   usage
 //---------------------------------------------------------
 
-static void usage(const char* prog, const char*)
+static void usage()
       {
-      printVersion(prog);
-      fprintf(stderr, "usage: %s flags scorefile\n   Flags:\n", prog);
+      printVersion("MuseScore");
+      fprintf(stderr, "usage: mscore flags scorefile\n   Flags:\n");
       fprintf(stderr, "   -v        print version\n"
         "   -d        debug mode\n"
         "   -D        enable plugin script debugger\n"
@@ -998,6 +998,7 @@ static void usage(const char* prog, const char*)
         "   -F        use factory settings\n"
         "   -e        enable experimental features\n"
         );
+      exit(-1);
       }
 
 //---------------------------------------------------------
@@ -1434,18 +1435,27 @@ void setMscoreLocale(QString localeName)
 //   main
 //---------------------------------------------------------
 
-int main(int argc, char* argv[])
+int main(int argc, char* av[])
       {
       QFile f(":/revision.h");
       f.open(QIODevice::ReadOnly);
       revision = QString(f.readAll());
       f.close();
 
-      int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:p:r:S:DFe")) != EOF) {
-            switch (c) {
+      QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
+
+      QStringList argv =  QCoreApplication::arguments();
+      argv.removeFirst();
+
+      for (int i = 0; i < argv.size();) {
+            QString s = argv[i];
+            if (s[0] != '-') {
+                  ++i;
+                  continue;
+                  }
+            switch(s[1].toAscii()) {
                   case 'v':
-                        printVersion(argv[0]);
+                        printVersion("MuseScore");
                         return 0;
                    case 'd':
                         debugMode = true;
@@ -1468,17 +1478,25 @@ int main(int argc, char* argv[])
                         break;
                   case 'o':
                         converterMode = true;
-                        outFileName = optarg;
+                        if (argv.size() - i < 2)
+                              usage();
+                        outFileName = argv.takeAt(i + 1);
                         break;
                   case 'p':
                         pluginMode = true;
-                        pluginName = optarg;
+                        if (argv.size() - i < 2)
+                              usage();
+                        pluginName = argv.takeAt(i + 1);
                         break;
                   case 'r':
-                        converterDpi = atof(optarg);
+                        if (argv.size() - i < 2)
+                              usage();
+                        converterDpi = argv.takeAt(i + 1).toDouble();
                         break;
                   case 'S':
-                        styleFile = optarg;
+                        if (argv.size() - i < 2)
+                              usage();
+                        styleFile = argv.takeAt(i + 1);
                         break;
                   case 'D':
                         scriptDebug = true;
@@ -1489,16 +1507,12 @@ int main(int argc, char* argv[])
                   case 'e':
                         enableExperimental = true;
                         break;
-
                   default:
-                        usage(argv[0], "bad argument");
-                        return -1;
+                        usage();
                   }
+            argv.removeAt(i);
             }
 
-      argc -= optind;
-
-      QtSingleApplication* app = new QtSingleApplication("mscore", argc, argv);
       QSettings::setDefaultFormat(QSettings::IniFormat);
 
       for (int i = 0; i < 128; ++i)
@@ -1507,14 +1521,12 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
-      QStringList argv2 =  QCoreApplication::arguments(); 
 
       if (!converterMode) {
             qApp->setWindowIcon(windowIcon);
-            if (argc > 0) {
+            if (!argv.isEmpty()) {
                   int ok = true;
-                  for (int i = 0; i < argc; ++i) {
-                        QString message = argv2.at(optind + i); //QString::fromLocal8Bit(argv[optind + i]);
+                  foreach(QString message, argv) {
                         QFileInfo fi(message);
                         if (!app->sendMessage(fi.absoluteFilePath())) {
                               ok = false;
@@ -1657,8 +1669,7 @@ int main(int argc, char* argv[])
 
       Score* currentScore = 0;
       bool scoreCreated = false;
-      ++argc;
-      if (argc < 2) {
+      if (argv.isEmpty()) {
             switch (preferences.sessionStart) {
                   case LAST_SESSION:
                         {
@@ -1690,10 +1701,8 @@ int main(int argc, char* argv[])
                         break;
                   }
             }
-      else { 
-            while (argc > 1) {
-                  QString name = argv2.at(optind++);
-                  --argc;
+      else {
+            foreach(QString name, argv) {
                   if (!name.isEmpty()) {
                         Score* score = new Score(defaultStyle);
                         score->addViewer(new Canvas);
@@ -1731,7 +1740,7 @@ int main(int argc, char* argv[])
             bool res = false;
             if (mscore->loadPlugin(pn)){
                   Score* cs = mscore->currentScore();
-                  if (styleFile) {
+                  if (!styleFile.isEmpty()) {
                         QFile f(styleFile);
                         if (f.open(QIODevice::ReadOnly))
                               cs->loadStyle(&f);
@@ -1747,7 +1756,7 @@ int main(int argc, char* argv[])
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();
-            if (styleFile) {
+            if (!styleFile.isEmpty()) {
                   QFile f(styleFile);
                   if (f.open(QIODevice::ReadOnly))
                         cs->loadStyle(&f);
@@ -1798,7 +1807,7 @@ int main(int argc, char* argv[])
                   rv = cs->saveFlac(fn);
 #endif
             else {
-                  fprintf(stderr, "dont know how to convert to %s\n", outFileName);
+                  fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
                   rv = false;
                   }
             exit(rv ? 0 : -1);
