@@ -1,5 +1,8 @@
-25.oct (og)
-	exportly: support for fingerings and string-numbers
+25.oct (lv)
+      - fix export of MusicXML <rest>
+      - update MusicXML regression testfiles
+      (og)
+        exportly: support for fingerings and string-numbers
 24.oct (og)
       - fix MusicXML <harmony> testfiles
       - exportly: support for metronome marks.

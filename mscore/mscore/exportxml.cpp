@@ -1270,18 +1270,22 @@ void ExportMusicXml::barlineRight(Measure* m)
 
 void ExportMusicXml::moveToTick(int t)
       {
+      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
+            printf(" -> backup");
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
+            printf(" -> forward");
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", (t - tick) / div);
             xml.etag();
             }
+      printf("\n");
       tick = t;
       }
 
@@ -1646,6 +1650,9 @@ static void arpeggiate(Arpeggio * arp, Xml& xml)
 
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
+      printf("ExportMusicXml::chord() oldtick=%d", tick);
+      tick += chord->ticks();
+      printf(" newtick=%d\n", tick);
       NoteList* nl = chord->noteList();
 
       PageFormat* pf = score->pageFormat();
@@ -1672,18 +1679,17 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             if(! note->visible() ){
               noteTag += QString(" print-object=\"no\"");
             }
-                     
+
             xml.stag(noteTag);
 
             if (i != nl->begin())
                   xml.tagE("chord");
-            
+
             char c;
             int alter;
             int octave;
-           
             char buffer[2];
-  
+
             if(!useDrumset){
                 pitch2xml(note, c, alter, octave);
                 buffer[0] = c;
@@ -1723,7 +1729,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
             xml.tag("voice", voice);
 
-          // type
+            // type
             int dots = 0;
             Tuplet* t = note->chord()->tuplet();
             int actNotes = 1;
@@ -1875,22 +1881,25 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
+      printf("ExportMusicXml::rest() oldtick=%d", tick);
       attr.doAttr(xml, false);
-      
+
       QString noteTag = QString("note");
       if(! rest->visible() ){
           noteTag += QString(" print-object=\"no\"");
       }
-      
+
       xml.stag(noteTag);
       xml.tagE("rest");
 
       Duration d = rest->duration();
       int tickLen = rest->tickLen();
       if (d.type() == Duration::V_MEASURE){
-    	  tickLen = rest->measure()->tickLen();
-          tick += tickLen; // to avoid forward since rest->ticklen=0 in this case.
-		  }
+            // to avoid forward since rest->ticklen=0 in this case.
+            tickLen = rest->measure()->tickLen();
+            }
+      tick += tickLen;
+      printf(" tickLen=%d newtick=%d\n", tickLen, tick);
 
       xml.tag("duration", tickLen / div);
 
@@ -1937,7 +1946,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       attr.doAttr(xml, false);
       QString tagname = QString("direction");
       if (el) {
-            // xml.stag(QString("direction placement=\"%1\"").arg((el->userOff().y() > 0.0) ? "below" : "above"));
+/*
             printf("directionTag() spatium=%g\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
                    el->spatium(),
                    el->type(), el->subtype(),
@@ -1945,20 +1954,24 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                    el->x(), el->y(),
                    el->width(), el->height(),
                    el->userOff().y());
+*/
             if (el->type() == HAIRPIN || el->type() == OTTAVA) {
                   SLine* sl = static_cast<const SLine*>(el);
-                  printf("slin segsz=%d", sl->lineSegments().size());
+//                  printf("slin segsz=%d", sl->lineSegments().size());
                   if (sl->lineSegments().size() > 0) {
                         LineSegment* seg = sl->lineSegments().at(0);
+/*
                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
                                seg->x(), seg->y(),
                                seg->width(), seg->height(),
                                seg->canvasPos().x(), seg->canvasPos().y(),
                                seg->userOff().y());
+*/
                         System* sys = 0;
                         QPointF pnt = sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
                         if (sys) {
                               QRectF bb = sys->staff(el->staffIdx())->bbox();
+/*
                               printf("syst x=%g y=%g cpx=%g cpy=%g\n",
                                      sys->pos().x(),  sys->pos().y(),
                                      sys->canvasPos().x(),
@@ -1967,6 +1980,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                               printf("staf x=%g y=%g w=%g h=%g\n",
                                      bb.x(), bb.y(),
                                      bb.width(), bb.height());
+*/
                               // for the line type elements the reference point is vertically centered
                               // actual position info is in the segments
                               // compare the segment's canvas ypos with the staff's center height
@@ -1979,18 +1993,21 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                   }
             Element* pel = el->parent();
             if (pel) {
+/*
                   printf("prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
                          pel->type(), pel->subtype(),
                          pel->name(), pel->subtypeName().toUtf8().data(),
                          pel->x(), pel->y(),
                          pel->width(), pel->height(),
                          pel->userOff().y());
+*/
                   }
             // printf("\n");
             if (pel && pel->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(pel);
                   System* sys = m->system();
                   QRectF bb = sys->staff(el->staffIdx())->bbox();
+/*
                   printf("syst x=%g y=%g cpx=%g cpy=%g\n",
                          sys->pos().x(),  sys->pos().y(),
                          sys->canvasPos().x(),
@@ -2001,12 +2018,13 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                          bb.width(), bb.height());
                   // element is above the staff if center of bbox is above center of staff
                   printf("center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
+*/
                   if (el->y() + el->height() / 2 < bb.y() + bb.height() / 2)
                         tagname += " placement=\"above\"";
                   else
                         tagname += " placement=\"below\"";
                   }
-            printf("\n");
+//            printf("\n");
             }
       xml.stag(tagname);
       xml.stag("direction-type");
@@ -2573,35 +2591,15 @@ static bool elementRighter(const Element* e1, const Element* e2)
 // note: the measure count is stored in the last measure
 // see measure.h _multiMeasure
 
-static void measureStyle(Xml& xml, Attributes& attr, Measure* m, bool& inMMR)
+static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
       {
-//      printf("measureStyle(inMMR=%d)", inMMR);
-      if (m->multiMeasure() == -1 && !inMMR) {
-            // found first measure of multi-measure rest
-            inMMR = true;
-            // search for last measure
-            int measureCount = 0;
-            for (MeasureBase* mb = m->next(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = (Measure*)mb;
-                  measureCount = m->multiMeasure();
-                  if (measureCount >= 0)
-                        // found end of multi-measure rest
-                        break;
-                  } // for
-//            printf(" count=%d", measureCount);
-            if (measureCount > 0) {
-                  attr.doAttr(xml, true);
-                  xml.stag("measure-style");
-                  xml.tag("multiple-rest", measureCount);
-                  xml.etag();
-                  }
-            } // if (m->multi...
-      else if (m->multiMeasure() >= 0)
-            // in regular measure or last measure of multi-measure rest
-            inMMR = false;
-
+//      printf("measureStyle() multiMeasure=%d", m->multiMeasure());
+      if (m->multiMeasure() > 0) {
+            attr.doAttr(xml, true);
+            xml.stag("measure-style");
+            xml.tag("multiple-rest", m->multiMeasure());
+            xml.etag();
+            }
 //      printf("\n");
       }
 
@@ -2772,7 +2770,6 @@ foreach(Element* el, *(score->gel())) {
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
             tick = 0;
-            bool inMultiMeasureRest = false;
             xml.stag(QString("part id=\"P%1\"").arg(idx+1));
 
             int staves = part->nstaves();
@@ -2974,7 +2971,7 @@ foreach(Element* el, *(score->gel())) {
                       }
 
                   // output attribute at start of measure: measure-style
-                  measureStyle(xml, attr, m, inMultiMeasureRest);
+                  measureStyle(xml, attr, m);
 
                   // MuseScore limitation: repeats are always in the first part
                   // and are implicitly placed at either measure start or stop
@@ -3022,9 +3019,13 @@ foreach(Element* el, *(score->gel())) {
                                     attr.doAttr(xml, false);
                                     moveToTick(el->tick());
                                     }
-                              if (el->isChordRest())
+/*
+                              if (el->isChordRest()) {
+                                    printf("isChordRest oldtick=%d", tick);
                                     tick += static_cast<ChordRest*>(el)->ticks();
-
+                                    printf(" newtick=%d\n", tick);
+                                    }
+*/
                               dh.handleElement(this, el, sstaff, true);
                               switch (el->type()) {
                                     case CLEF:
@@ -3114,6 +3115,7 @@ foreach(Element* el, *(score->gel())) {
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
+                  printf("end of measure\n");
                   moveToTick(m->tick() + m->tickLen());
                   if (idx == 0)
                         repeatAtMeasureStop(xml, m);
