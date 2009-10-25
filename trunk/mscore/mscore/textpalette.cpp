@@ -52,6 +52,7 @@ TextTools::TextTools(QWidget* parent)
       {
       _textElement = 0;
       setObjectName("text-tools");
+      setWindowTitle(tr("Text Tools"));
       setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
 
       QToolBar* tb = new QToolBar(tr("Text Edit"));
