@@ -126,9 +126,6 @@ class Canvas : public QFrame, public Viewer {
       void zoom(int step, const QPoint& pos);
 
    public slots:
-      void cmdCut();
-      void cmdCopy();
-      void cmdPaste();
       void setViewRect(const QRectF&);
 
    public:

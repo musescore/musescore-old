@@ -1794,6 +1794,10 @@ void Score::cmd(const QAction* a)
                         static_cast<TextB*>(editObject)->paste();
                   return;
                   }
+            else if (cmd == "copy") {
+                  cmdCopy();
+                  return;
+                  }
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             endCmd();
             }
@@ -2150,16 +2154,8 @@ void Score::cmd(const QAction* a)
                         deleteItem(el);
                         }
                   }
-            else if (cmd == "copy") {
-                  QString mimeType = selection()->mimeType();
-                  if (!mimeType.isEmpty()) {
-                        QMimeData* mimeData = new QMimeData;
-                        mimeData->setData(mimeType, selection()->mimeData());
-                        if (debugMode)
-                              printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
-                        QApplication::clipboard()->setMimeData(mimeData);
-                        }
-                  }
+            else if (cmd == "copy")
+                  cmdCopy();
             else if (cmd == "paste")
                   cmdPaste();
             else if (cmd == "lyrics")
@@ -2326,6 +2322,33 @@ void Score::cmd(const QAction* a)
                         endCmd();
                         }
                   }
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdCopy
+//---------------------------------------------------------
+
+void Score::cmdCopy()
+      {
+      if (editObject && editObject->isTextB()) {
+            //
+            // store selection as plain text
+            //
+            TextB* text = static_cast<TextB*>(editObject);
+            QTextCursor* cursor = text->getCursor();
+            if (cursor && cursor->hasSelection())
+                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Clipboard);
+            return;
+            }
+
+      QString mimeType = selection()->mimeType();
+      if (!mimeType.isEmpty()) {
+            QMimeData* mimeData = new QMimeData;
+            mimeData->setData(mimeType, selection()->mimeData());
+            if (debugMode)
+                  printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
+            QApplication::clipboard()->setMimeData(mimeData);
             }
       }
 

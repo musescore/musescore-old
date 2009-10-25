@@ -1227,8 +1227,11 @@ bool TextB::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
-      if (cursor)
+      if (cursor) {
             cursor->setPosition(idx, mode);
+            if (cursor->hasSelection())
+                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Selection);
+            }
       return true;
       }
 
