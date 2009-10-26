@@ -1,3 +1,5 @@
+26.oct (ws)
+      - fix: shift deletes selection in text edit mode
 25.oct
       (ws)
       - add missing window title for text tools

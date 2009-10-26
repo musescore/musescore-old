@@ -905,7 +905,7 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
-            printf("TextB::edit(%p)\n", this);
+            printf("TextB::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
       if (!editMode || !cursor) {
             printf("TextB::edit: not in edit mode: %d %p\n", editMode, cursor);
             return false;
@@ -1025,9 +1025,20 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
             case Qt::Key_Minus:
                   cursor->insertText("-");
                   break;
-
+#if 0
+            case Qt::Key_Shift:
+            case Qt::Key_Control:
+            case Qt::Key_Meta:
+            case Qt::Key_Alt:
+            case Qt::Key_AltGr:
+            case Qt::Key_CapsLock:
+            case Qt::Key_NumLock:
+            case Qt::Key_ScrollLock:
+                  break;
+#endif
             default:
-                  cursor->insertText(s);
+                  if (!s.isEmpty())
+                        cursor->insertText(s);
                   break;
             }
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
