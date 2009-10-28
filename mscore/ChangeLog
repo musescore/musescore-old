@@ -1,5 +1,6 @@
 28.oct  (og)
-	exportly.cpp: Arpeggios and glissandos.
+	exportly.cpp: Arpeggios and glissandos. - Fixed issue of 6.may in
+	the issue tracker: incorrect export of polyphony.
 26.oct (ws)
       - fix: shift deletes selection in text edit mode
 25.oct
