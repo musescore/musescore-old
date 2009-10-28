@@ -3418,24 +3418,26 @@ void ExportLy::writeScore()
 	    {
 	      level=0;
 	      indent();
-	      out << staffname[staffInd].staffid << " = \\simultaneous{\n";
+	      out << staffname[staffInd].staffid << " =  << \n";
 	      staffname[staffInd].simultaneousvoices=true;
 	      level++;
 	      indent();
-	      out << "\\override Staff.NoteCollision  #'merge-differently-headed = ##t\n";
+	      out << "\\mergeDifferentlyHeadedOn\n";
 	      indent();
-              out << "\\override Staff.NoteCollision  #'merge-differently-dotted = ##t\n";
+              out << "\\mergeDifferentlyDottedOn \n";
 	      ++level;
 	      for (voice = 0; voice < VOICES; ++voice)
 		{
 		  if (voiceActive[voice])
 		    {
 		      indent();
-		      out << "\\context Voice = \"" << staffname[staffInd].voicename[voice];
-		      out << "\" \\" << staffname[staffInd].voicename[voice]  << "\n";
+		      out << "\\" << staffname[staffInd].voicename[voice];
+		      if (voice < VOICES) out << "\\\\ \n";
+		      else out <<"\n";
 		    }
 		}
-	      out << "} \n";
+	      indent();
+	      out << ">> \n";
 	      level=0;
 	      indent();
 	      scorout<< voicebuffer;
@@ -3510,10 +3512,10 @@ void ExportLy::writeScoreBlock()
 
       ++level;
       indentF();
-      os << "\\context Staff = O" << staffname[indx].staffid << "G" << "  << \n";
+      os << "\\context Staff = " << staffname[indx].staffid << " << \n";
       ++level;
       indentF();
-      os << "\\context Voice = O" << staffname[indx].staffid << "G \\";
+      os << "\\";// << staffname[indx].staffid << "\\";
 
       if (staffname[indx].simultaneousvoices)
 	os << staffname[indx].staffid << "\n";
@@ -3528,7 +3530,7 @@ void ExportLy::writeScoreBlock()
 	  os << "\\set Staff.shortInstrumentName = #\"\"\n";
 	}
 
-      --level;
+      // --level;
       indentF();
       os << ">>\n";
 
@@ -3862,7 +3864,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
-   28.oct. Arpeggios and glissandos.
+   28.oct. Arpeggios and glissandos. Fixed issue of 6.may in the issue
+   tracker: incorrect export of polyphony.
   
    25.oct. Implemented fingering and guitar string-number
 
