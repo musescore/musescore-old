@@ -43,6 +43,7 @@
 #include "clef.h"
 #include "config.h"
 #include "dynamics.h"
+#include "glissando.h"
 #include "globals.h"
 #include <iostream>
 using std::cout;
@@ -101,7 +102,7 @@ class ExportLy {
   bool donefirst; //to prevent doing things in first ordinary bar which are already done in pickupbar
   bool graceswitch, gracebeam;
   int gracecount;
-  int prevpitch, staffpitch, chordpitch, oktavdiff;
+  int prevpitch, staffpitch, chordpitch;
   int measurenumber, lastind, taktnr, staffInd;
   bool repeatactive;
   bool firstalt,secondalt;
@@ -142,11 +143,10 @@ class ExportLy {
 
   QString cleannote, prevnote;
 
-  struct InstructionAnchor  // Even if it is exactly the same thing as
-			    // "direction", the word "instruction" is
-			    // used in this file, so as not to cause
-			    // confusion with "direction" of the
-			    // exportxml-file.
+  struct InstructionAnchor  
+// Even if it is exactly the same thing as "direction" of music-xml,
+// the word "instruction" is used in this file, so as not to cause
+// confusion with "direction" of the exportxml-file.
   {
     Element* instruct;  // the element containing the instruction
     Element* anchor;    // the element it is attached to
@@ -157,6 +157,16 @@ class ExportLy {
   int nextAnchor;
   struct InstructionAnchor anker;
   struct InstructionAnchor anchors[1024];
+
+  struct glisstablelem
+  {
+    Chord* chord;
+    int tick;
+    QString glisstext;
+    int type;
+  };
+  int glisscount;
+  struct glisstablelem glisstable[99];
 
   QString voicebuffer;
   QTextStream out;
@@ -188,6 +198,11 @@ class ExportLy {
   void printChordList();
   void cleanupChordList();
   void writeFingering (int&, QString fingering[5]);
+  void findGraceNotes(Note*,bool&, int);
+  void setOctave(int&, int&, int (&foo)[12]);
+  bool arpeggioTest(Chord* chord);
+  bool glissandotest(Chord*);
+  void buildGlissandoList(int strack, int etrack);
   void writeStringInstruction(int &, QString stringarr[10]);
   void findFingerAndStringno(Note* note, int&, int&, QString (&finger)[5], QString (&strng)[10]);
   struct jumpOrMarkerLM
@@ -250,6 +265,7 @@ class ExportLy {
   QString tpc2purename(int tpc);
 
   void writeScore();
+  void stemDir(Chord *);
   void writeVoiceMeasure(Measure*, Staff*, int, int);
   void writeKeySig(int);
   void writeTimeSig(TimeSig*);
@@ -1458,11 +1474,11 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
       }
 
 
+
 //---------------------------------------------------------
 //   findMatchInMeasure -- find chord or rest in measure
 //     starting or ending at tick
 //---------------------------------------------------------
-
 bool ExportLy::findMatchInMeasure(int tick, Staff* stf, Measure* m, int strack, int etrack, bool rehearsalmark)
 {
   int iter=0;
@@ -1475,7 +1491,7 @@ bool ExportLy::findMatchInMeasure(int tick, Staff* stf, Measure* m, int strack, 
 	  iter ++;
 	  Element* el = seg->element(st);
 	  if (!el) continue;
-	  
+	
 	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((el->tick() >= tick)))
 	    {
 	      if (el->tick() > tick) tick=prevElTick;
@@ -1522,7 +1538,7 @@ return found;
 void ExportLy::buildInstructionListPart(int strack, int etrack)
 {
 
-  // part-level elements stored in the score layout
+  // part-level elements stored in the score layout: at the global level
   prevElTick=0;
   foreach(Element* instruction, *(score->gel()))
     {
@@ -1640,6 +1656,47 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	}
     }
 }// end buildinstructionlist(measure)
+
+
+void ExportLy::buildGlissandoList(int strack, int etrack)
+{ 
+  //seems to be overkill to go thru entire score first to find
+  //glissandos. Alternative would be to back up to the previous chord
+  //in writeChordMeasure(). But I don't know how to do that. So I steal the
+  //buildinstructionlist-functions to make a parallell
+  //buildglissandolist-function. (og)
+  for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next())
+    {
+      if (mb->type() != MEASURE)
+	continue;
+      Measure* m = (Measure*)mb;
+      for (int st = strack; st < etrack; ++st)
+       	{
+	  for (Segment* seg = m->first(); seg; seg = seg->next())
+	    {
+	      Element* el = seg->element(st);//(st);
+	      if (!el) continue;
+	      
+	      if (el->type() == CHORD)
+		{ 
+		 Chord* cd = (Chord*)el;
+		  if (cd->glissando())
+		    {
+		      glisscount++;
+		      Element* prevel = seg->prev()->element(st); //(st);
+		      Chord* prevchord = (Chord*)prevel;
+		      glisstable[glisscount].chord = prevchord;
+		      glisstable[glisscount].type = cd->glissando()->subtype();
+		      glisstable[glisscount].glisstext = cd->glissando()->text();
+		      glisstable[glisscount].tick = prevchord->tick();
+		    }
+		}
+	    }
+	 }
+    }
+}
+
+
 
 //---------------------------------------------------------
 //   indent  -- scorebuffer
@@ -2352,6 +2409,150 @@ void ExportLy::writeFingering (int &fingr,   QString fingering[5])
   fingr=0;
 }
 
+//----------------------------------------------------------------
+// stemDirection
+//----------------------------------------------------------------
+
+void ExportLy::stemDir(Chord * chord)
+{
+  // For now, we only export stem directions for gracenotes.
+  if (chord->beam() == 0 || chord->beam()->elements().front() == chord)
+    {
+      Direction d = chord->stemDirection();
+      if (d != stemDirection)
+	{
+	  stemDirection = d;
+	  if ((d == UP) and (graceswitch == true))
+	    out << "\\stemUp ";
+	  else if ((d == DOWN)  and (graceswitch == true))
+	    out << "\\stemDown ";
+	  //   else if (d == AUTO)
+	  // 	    {
+	  // 	      if (graceswitch == true)
+	  // 		{
+	  // 		  out << "\\stemNeutral "; // we set this at the end of graces anyway.
+	  // 		}
+	  // 	    }
+	}
+    }
+}//end stemDirection
+
+//-------------------------------------------------------------
+// findGraceNotes
+//--------------------------------------------------------------
+void ExportLy::findGraceNotes(Note *note, bool &chordstart, int streng)
+{
+  NoteType gracen;
+  gracen = note->noteType();
+  switch(gracen)
+    {
+    case NOTE_INVALID:
+    case NOTE_NORMAL: 
+      if (graceswitch==true)
+	{
+	  graceswitch=false;
+	  gracebeam=false;
+	  if (gracecount > 1) out << " ] "; //single graces are not beamed
+	  out << " } \\stemNeutral "; //end of grace
+	  gracecount=0;
+	}
+      if ((chordstart) or (streng > 0))
+	{
+	  out << "<";
+	  chordstart=false;
+	}
+      break;
+    case NOTE_ACCIACCATURA:
+    case NOTE_APPOGGIATURA:
+    case NOTE_GRACE4:
+    case NOTE_GRACE16:
+    case NOTE_GRACE32:
+      if (graceswitch==false)
+	{
+	  out << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
+	  graceswitch=true;
+	  gracebeam=false;
+	  gracecount=0;
+	}
+      gracecount++;
+      break;
+    } //end of switch(gracen)
+}//end findGraceNotes
+
+//---------------------------------------------------------------------------
+//   setOctave
+//---------------------------------------------------------------------------
+void ExportLy::setOctave(int &purepitch, int &pitchidx, int (&pitchlist)[12])
+{
+  int oktavdiff=prevpitch - purepitch;
+  int oktreit=numval(oktavdiff);
+  while (oktreit > 0)
+    {
+      if ((oktavdiff < -6) or ((prevnote=="b") and (oktavdiff < -5)))
+	{ //up
+	  out << "'";
+	  oktavdiff=oktavdiff+12;
+	}
+      else if ((oktavdiff > 6)  or ((prevnote=="f") and (oktavdiff > 5)))
+	{//down
+	  out << ",";
+	  oktavdiff=oktavdiff-12;
+	}
+      oktreit=oktreit-12;
+    }
+  prevpitch=purepitch;
+  pitchlist[pitchidx]=purepitch;
+  pitchidx++;
+}//end setOctave
+
+
+bool ExportLy::arpeggioTest(Chord* chord)
+{
+  bool arp=false;
+  if (chord->arpeggio())
+    {
+      arp=true;
+      int subtype = chord->arpeggio()->subtype();
+      switch (subtype) 
+	{
+	case 0:
+	  out << "\\arpeggioNormal ";
+	  break;
+	case 1:
+	  out << "\\arpeggioArrowUp ";
+	  break;
+	case 2:
+	  out << "\\arpeggioArrowDown ";
+	  break;
+	default:
+	  printf("unknown arpeggio subtype %d\n", subtype);
+	  break;
+	}
+    }
+  return arp;
+}
+
+
+bool ExportLy::glissandotest(Chord* chord)
+{
+  bool gliss=false;
+  int i=0;
+  for (i=0; i < glisscount; i++)
+    {
+      if (glisstable[i].chord == chord) 
+	{
+	  if (glisstable[i].type == 1)
+	    {
+	      out << "\\once\\override Glissando #'style = #'trill \n";
+	      indent();
+	    }
+	  gliss=true;
+	}
+    }
+  return gliss;
+}
+
+
 //---------------------------------------------------------
 //   writeChord
 //---------------------------------------------------------
@@ -2363,101 +2564,42 @@ void ExportLy::writeChord(Chord* c)
   int pitchlist[12];
   QString fingering[5];
   QString stringno[10];
-  
+  bool tie=false;
+  NoteList* nl = c->noteList();
+  bool chordstart=false;
+  int fing=0;
+  int streng=0;
+  bool gliss=false;
+  QString glisstext;
 
   int j=0;
   for (j=0; j<12; j++) pitchlist[j]=0;
 
-  // We only export stem directions for gracenotes.
-
-  if (c->beam() == 0 || c->beam()->elements().front() == c)
-    {
-      Direction d = c->stemDirection();
-      if (d != stemDirection)
-	{
-	  stemDirection = d;
-	  if ((d == UP) and (graceswitch == true))
-	    out << "\\stemUp ";
-	  else if ((d == DOWN)  and (graceswitch == true))
-	    out << "\\stemDown ";
-	//   else if (d == AUTO)
-// 	    {
-// 	      if (graceswitch == true)
-// 		{
-// 		  out << "\\stemNeutral "; // we set this at the end of graces anyway.
-// 		}
-// 	    }
-	}
-    }
-
-  bool tie=false;
-  NoteList* nl = c->noteList();
-
-  bool chordstart=false;
-  int fing=0;
-  int streng=0;
+  stemDir(c);
 
   if (nl->size() > 1) chordstart = true;
 
-  j=0;
+  int  pitchidx=0;
+  bool arpeggioswitch=false;
+  arpeggioswitch=arpeggioTest(c);
 
-  for (iNote i = nl->begin();;)
+  gliss = glissandotest(c);
+
+  for (iNote notesinchord = nl->begin();;)
     {
-      Note* n = i->second;
-      NoteType gracen;
-
+      Note* n = notesinchord->second;
       //if fingering found on _previous_ chordnote, now is the time for writing it:
       if (fing>0)  writeFingering(fing,fingering);
       if (streng>0) writeStringInstruction(streng,stringno);
       
-      //Find fingerings and string number: string number must be
-      //written inside chord bracks, even if there is only a single
-      //note and not a chord e.g. <g4\3> . Therefore we look for
-      //stringnos before we write the first note, so as to be able to
-      //write begin-chord brack "<".
       findFingerAndStringno(n, fing, streng, fingering, stringno);
 
-      gracen = n->noteType();
-      switch(gracen)
-	{
-	case NOTE_INVALID:
-	case NOTE_NORMAL: 
-	  if (graceswitch==true)
-	    {
-	      graceswitch=false;
-	      gracebeam=false;
-	      if (gracecount > 1) out << " ] "; //single graces are not beamed
-	      out << " } \\stemNeutral "; //end of grace
-	      gracecount=0;
-	    }
-	  if ((chordstart) or (streng > 0))
-	    {
-	      out << "<";
-	      chordstart=false;
-	    }
-	  break;
-	case NOTE_ACCIACCATURA:
-	case NOTE_APPOGGIATURA:
-	case NOTE_GRACE4:
-	case NOTE_GRACE16:
-	case NOTE_GRACE32:
-	  if (graceswitch==false)
-	    {
-	      out << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
-	      graceswitch=true;
-	      gracebeam=false;
-	      gracecount=0;
-	    }
-	  gracecount++;
-	  break;
-	} //end of switch(gracen)
-
-
+      findGraceNotes(n, chordstart, streng);//also writes start of chord symbol if necessary
       findTuplets(n->chord()); 
 
       if (gracecount==2) out << " [ ";
 
-      out << tpc2name(n->tpc());  //the notename.
+      out << tpc2name(n->tpc());  //Output of The Notename Itself
       
       if (n->tieFor()) tie=true;
      
@@ -2471,38 +2613,16 @@ void ExportLy::writeChord(Chord* c)
       else if (purename.contains("isis")==1) purepitch=purepitch-2;
       else if (purename.contains("is")==1) purepitch=purepitch-1;
 
-      oktavdiff=prevpitch - purepitch;
-      int oktreit=numval(oktavdiff);
+      setOctave(purepitch, pitchidx, pitchlist);
 
-
-      while (oktreit > 0)
-	{
-	  if ((oktavdiff < -6) or ((prevnote=="b") and (oktavdiff < -5)))
-	    { //up
-		out << "'";
-		oktavdiff=oktavdiff+12;
-	    }
-	    else if ((oktavdiff > 6)  or ((prevnote=="f") and (oktavdiff > 5)))
-	      {//down
-		out << ",";
-		oktavdiff=oktavdiff-12;
-	      }
-	  oktreit=oktreit-12;
-	}
-
-
-      prevpitch=purepitch;
-      pitchlist[j]=purepitch;
-      j++;
-
-      if (i == nl->begin())
+      if (notesinchord == nl->begin())
 	{
 	  chordpitch=prevpitch;
 	  chordnote=cleannote;
 	}
 
-      ++i; //number of notes in chord, we progress to next chordnote
-      if (i == nl->end())
+      ++notesinchord; //number of notes in chord, we progress to next chordnote
+      if (notesinchord == nl->end())
 	break;
       out << " ";
     } //end of notelist = end of chord
@@ -2519,15 +2639,22 @@ void ExportLy::writeChord(Chord* c)
       //instead of actual previous note.
     }
 
-  j=0;
+  int ix=0;
   prevpitch=pitchlist[0];
-   while (pitchlist[j] !=0)
+   while (pitchlist[ix] !=0)
      {
-       if (pitchlist[j]<prevpitch) prevpitch=pitchlist[j];
-       j++;
+       if (pitchlist[ix]<prevpitch) prevpitch=pitchlist[ix];
+       ix++;
      }
 
   writeLen(c->tickLen());
+
+  if (arpeggioswitch)
+    {
+      out << "\\arpeggio ";
+      arpeggioswitch=false;
+    }
+  
 
   //if fingering found on a single note, now is the time for writing it:
   if (nl->size() == 1)
@@ -2535,6 +2662,14 @@ void ExportLy::writeChord(Chord* c)
   
   writeTremolo(c);
   
+  if (gliss)
+    {
+      out << "\\glissando ";
+      if (glisstable[glisscount].glisstext !="") 
+	out << "^\\markup{" << glisstable[glisscount].glisstext << "} ";
+      //todo: make glisstext follow glissline
+    }
+
   if (tie)
     {
       out << "~";
@@ -2718,7 +2853,11 @@ void ExportLy::writeRest(int l, int type)
 void ExportLy::writeMeasuRestNum()
 {
   if (wholemeasurerest >1) out << "*" << wholemeasurerest << " ";
-  if (wholemeasuretext != "") out << "^\\markup{" << wholemeasuretext << "}\n";
+  if (wholemeasuretext != "")
+    {
+      out << "^\\markup{" << wholemeasuretext << "}\n";
+      indent();
+    }
   wholemeasurerest=0;
   wholemeasuretext= "";
 }
@@ -2998,11 +3137,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  break;
 	case CHORD:
 	  {
-
-	    if (wholemeasurerest >=1) 
-	      {
-		writeMeasuRestNum();
-	      }
+	    if (wholemeasurerest >=1) writeMeasuRestNum();
 
 	    int ntick = e->tick() - tick;
 	    if (ntick > 0)
@@ -3010,6 +3145,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 		writeRest(ntick, 2);//invisible rest: s
 		curTicks=-1;
 	      }
+
 	    tick += ntick;
 	    measuretick=measuretick+ntick;
 	    writeChord((Chord*)e);
@@ -3134,6 +3270,7 @@ void ExportLy::writeScore()
   lastJumpOrMarker = 0;
   initJumpOrMarkerLMs();
   wholemeasuretext = "";
+  glisscount = 0;
 
 
   foreach(Part* part, *score->parts())
@@ -3153,7 +3290,7 @@ void ExportLy::writeScore()
       int etrack = strack + n* VOICES;
 
       buildInstructionListPart(strack, etrack);
-      
+      buildGlissandoList(strack,etrack);
 
       //ANCHORTEST: print instructionlist
       //printf("anchortest\n");
@@ -3244,11 +3381,14 @@ void ExportLy::writeScore()
 		{
 		  if (m->type() != MEASURE)
 		    continue;
+
 		  if (staffInd == 0)  
 		    markerAtMeasureStart( (Measure*) m );
 		  else
 		    printJumpOrMarker(measurenumber, true);
+
 		  writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
+
 		  if (staffInd == 0) 
 		    jumpAtMeasureStop( (Measure*) m);
 		  else
@@ -3722,6 +3862,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+   28.oct. Arpeggios and glissandos.
+  
    25.oct. Implemented fingering and guitar string-number
 
    24.oct Support for metronome marks. 
@@ -3812,10 +3954,11 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------
 
-     -- Arpeggios and glissandos
+     -- 8vabassa place the ugly stuff in macros, to make the voices as
+      clean as possible, 
 
-     -- 8vabassa, lefthandposition (roman numbers: violin, guitar), trill, pedal and
-      general lines with/out text.
+      -- lefthandposition (roman numbers: violin,
+      guitar), trill, pedal and general lines with/out text.
 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed.
@@ -3837,10 +3980,11 @@ bool ExportLy::write(const QString& name)
   
    -- Determine whether text goes above or below staff. 
 
-   -- correct indentation in score-block. cross-staff beaming in
-      pianostaff cross-voice slurs!?!?!? seems _very_ complex to
-      implement (example demos:promenade, bar 6) fermata above/below
-      rest.
+   -- correct indentation in score-block. 
+
+   -- cross-staff beaming in pianostaff cross-voice slurs!?!?!? seems
+      _very_ complex to implement (example demos:promenade, bar 6)
+      fermata above/below rest. Will \partcombine do it?
 
    -- difficult problem with hairpins: Beginning of hairpin and
    -- end of hairpin are anchored to different notes. This is done
@@ -3871,7 +4015,7 @@ bool ExportLy::write(const QString& name)
       mscore. will \partcombine resolve this?
 
   -- Markups belonging to a multimeasure rest should be
-     left-adjusted to the left bar, and not centered over the
+     left-adjusted to the left barline, and not centered over the
      rest. No good solutions found.
    
  */
