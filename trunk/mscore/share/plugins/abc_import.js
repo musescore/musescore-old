@@ -77,7 +77,7 @@ function run()
           //print(content);
           
           //encode file content for url
-          var encodedContent = QUrl.toPercentEncoding(content).toLatin1String();
+          var encodedContent = QUrl.toPercentEncoding(content).toString();
           
           var url = "/abcrenderer?abc=" + encodedContent;
                     
@@ -127,7 +127,11 @@ function finished(id ,error){
   }
 }
 
-
+QByteArray.prototype.toString = function()
+{
+   ts = new QTextStream( this, QIODevice.ReadOnly );
+   return ts.readAll();
+}
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed
