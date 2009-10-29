@@ -2983,6 +2983,11 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
+                        if(part->pitchOffset()!=0){
+                          xml.stag("transpose");
+                          xml.tag("chromatic", part->pitchOffset());
+                          xml.etag();
+                        }
                       }
 
                   // output attribute at start of measure: measure-style
