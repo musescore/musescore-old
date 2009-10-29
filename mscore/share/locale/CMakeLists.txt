@@ -25,6 +25,7 @@ install(FILES
       mscore_cs.qm
       mscore_da.qm
       mscore_de.qm
+      mscore_el.qm
       mscore_en_GB.qm
       mscore_en_US.qm
       mscore_es.qm
@@ -34,18 +35,19 @@ install(FILES
       mscore_hi_IN.qm
       mscore_hu.qm
       mscore_it.qm
+      mscore_ja.qm
       mscore_nl.qm
       mscore_nb.qm
       mscore_pl.qm
       mscore_pt.qm
       mscore_pt_BR.qm
-      mscore_ru.qm
       mscore_ro.qm
+      mscore_ru.qm
       mscore_sv.qm
+      mscore_th.qm
       mscore_tr.qm
       mscore_uk.qm
       mscore_zh_TW.qm
-      mscore_ja.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 

@@ -193,9 +193,6 @@ ScriptEngine::ScriptEngine()
                   }
             }
 
-      baClass = new ByteArrayClass(this);
-      globalObject().setProperty("ByteArray", baClass->constructor());
-
       scoreClass = new ScScore(this);
       globalObject().setProperty("Score", scoreClass->constructor());
 
