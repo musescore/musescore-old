@@ -1218,6 +1218,29 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       }
 
 //---------------------------------------------------------
+//   setSLinePlacement -- helper for direction
+//---------------------------------------------------------
+
+static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYoff, qreal yoff)
+      {
+      printf("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g\n",
+             s, qPrintable(pl), hasYoff, yoff
+            );
+      float offs = 0.0;
+      if (hasYoff) offs = yoff;
+      else {
+            if (pl == "above")
+                  offs = -3;
+            else if (pl == "below")
+                  offs = 8;
+            else
+                  printf("setSLinePlacement invalid placement '%s'\n", qPrintable(pl));
+            }
+      LineSegment* ls = sli->lineSegments().front();
+      ls->setUserOff(QPointF(0, offs * s));
+      }
+
+//---------------------------------------------------------
 //   direction
 //---------------------------------------------------------
 
@@ -1538,6 +1561,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               pedal = new Pedal(score);
                               pedal->setTrack((staff + rstaff) * VOICES);
                               pedal->setTick(tick);
+                              if (placement == "") placement = "below";
+                              setSLinePlacement(pedal,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
                               }
                         }
                   else if (type == "stop") {
@@ -1684,6 +1711,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               delete ottava;
                               ottava = 0;
                               }
+                        if (placement == "") placement = "above"; // set default
+                        if (ottava) setSLinePlacement(ottava,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
                         }
                   }
             else if (type == "up") {
@@ -1705,6 +1736,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               delete ottava;
                               ottava = 0;
                               }
+                        if (placement == "") placement = "below"; // set default
+                        if (ottava) setSLinePlacement(ottava,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
                         }
                   }
             else if (type == "stop") {
@@ -2313,7 +2348,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               fermataType = ee.attribute(QString("type"));
                               }
                         else if (ee.tagName() == "ornaments") {
-					//	<trill-mark placement="above"/>
+                              // <trill-mark placement="above"/>
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     if (eee.tagName() == "trill-mark")
                                           trillMark = true;

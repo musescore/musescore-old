@@ -1,4 +1,7 @@
-29.oct (la)
+29.oct (lv)
+      - fix import of MusicXML <octave-shift> and <pedal> vertical placement
+      - update MusicXML regression testfiles
+      (la)
       - remove ByteArray from plugin framework to have access to QByteArray
       - fix abc_import.js to use QByteArray
       - add language files for thai and greek translators
