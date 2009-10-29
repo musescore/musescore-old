@@ -2,6 +2,7 @@
       - remove ByteArray from plugin framework to have access to QByteArray
       - fix abc_import.js to use QByteArray
       - add language files for thai and greek translators
+      - export transpose info in MusicXML
 28.oct (og)
 	    - exportly.cpp: Arpeggios and glissandos. - Fixed issue of 6.may in
 	       the issue tracker: incorrect export of polyphony.
