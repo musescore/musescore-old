@@ -25,6 +25,7 @@
 #include "seq.h"
 #include "undo.h"
 #include "synti.h"
+#include "synthcontrol.h"
 
 //---------------------------------------------------------
 //   PartEdit
@@ -34,14 +35,14 @@ PartEdit::PartEdit(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
-      connect(patch,    SIGNAL(activated(int)),    SLOT(patchChanged(int)));
+      connect(patch,    SIGNAL(activated(int)),           SLOT(patchChanged(int)));
       connect(volume,   SIGNAL(valueChanged(double,int)), SLOT(volChanged(double)));
       connect(pan,      SIGNAL(valueChanged(double,int)), SLOT(panChanged(double)));
       connect(chorus,   SIGNAL(valueChanged(double,int)), SLOT(chorusChanged(double)));
       connect(reverb,   SIGNAL(valueChanged(double,int)), SLOT(reverbChanged(double)));
-      connect(mute,     SIGNAL(toggled(bool)),     SLOT(muteChanged(bool)));
-      connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloToggled(bool)));
-      connect(drumset,  SIGNAL(toggled(bool)),     SLOT(drumsetToggled(bool)));
+      connect(mute,     SIGNAL(toggled(bool)),            SLOT(muteChanged(bool)));
+      connect(solo,     SIGNAL(toggled(bool)),            SLOT(soloToggled(bool)));
+      connect(drumset,  SIGNAL(toggled(bool)),            SLOT(drumsetToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -118,13 +119,24 @@ void InstrumentListEditor::updateAll(Score* score)
             vb->addWidget(pe);
             --n;
             }
+      patchListChanged();
+      }
+
+//---------------------------------------------------------
+//   patchListChanged
+//---------------------------------------------------------
+
+void InstrumentListEditor::patchListChanged()
+      {
       QString s;
       int idx = 0;
+      QList<MidiMapping>* mm = cs->midiMapping();
       foreach (const MidiMapping& m, *mm) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            bool drum = m.part->useDrumset();
+            bool drum       = m.part->useDrumset();
             const QList<MidiPatch*> pl = seq->getPatchInfo();
+            pe->patch->clear();
             foreach(const MidiPatch* p, pl) {
                   if (p->drum == drum)
                         pe->patch->addItem(p->name, QVariant::fromValue<void*>((void*)p));
@@ -140,8 +152,13 @@ void InstrumentListEditor::updateAll(Score* score)
 
 void MuseScore::showMixer(bool val)
       {
-      if (iledit == 0)
+      if (iledit == 0) {
             iledit = new InstrumentListEditor(0);
+            if (synthControl) {
+                  connect(synthControl, SIGNAL(soundFontChanged()), iledit,
+                     SLOT(patchListChanged()));
+                  }
+            }
       iledit->updateAll(cs);
       iledit->setShown(val);
       }

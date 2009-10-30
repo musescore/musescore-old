@@ -5698,6 +5698,10 @@ Try saving to a different location.</source>
         <source>Text Edit</source>
         <translation>تحرير نصّ</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>

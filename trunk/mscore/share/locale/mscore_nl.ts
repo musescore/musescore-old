@@ -5885,6 +5885,10 @@ Probeer op een andere locatie op te slaan.</translation>
         <source>Text Edit</source>
         <translation>Tekst Bewerken</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>

@@ -1,4 +1,8 @@
-30.oct (lv)
+30.oct.
+      (ws)
+      - fix crash when unloadable soundfont was configured
+      - synthesizer: remove old soundfont before loading new one
+      (lv)
       - write MusicXML <direction> stop at end of note instead of at start
         of next note
       - fixed all MusicXML regression testfiles
@@ -16,7 +20,7 @@
       - export transpose info in MusicXML
       (db)
       - in Parts dialog renamed "Name" and "Title" to "File Name" and "Part Title"
-      - better wording in Preferences > Text 
+      - better wording in Preferences > Text
 28.oct (og)
       - exportly.cpp: Arpeggios and glissandos. - Fixed issue of 6.may in
         the issue tracker: incorrect export of polyphony.

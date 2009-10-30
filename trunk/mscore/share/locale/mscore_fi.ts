@@ -5694,6 +5694,10 @@ Try saving to a different location.</source>
         <source>Text Edit</source>
         <translation>Tekstin muokkaus</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
@@ -5938,7 +5942,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alennus</translation>
     </message>
     <message>
         <source>double sharp</source>

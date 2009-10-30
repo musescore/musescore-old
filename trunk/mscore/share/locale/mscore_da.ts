@@ -5699,6 +5699,10 @@ Prøv af gemme den et andet sted</translation>
         <source>Text Edit</source>
         <translation>Rediger tekst</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>

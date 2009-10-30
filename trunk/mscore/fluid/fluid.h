@@ -333,7 +333,7 @@ class Fluid : public Synth {
       ~Fluid();
       virtual void init(int sampleRate);
 
-      virtual bool loadSoundFont(const QString& s) { return sfload(s, true); }
+      virtual bool loadSoundFont(const QString& s);
       virtual QString soundFont() const;
 
       virtual void play(const Event&);

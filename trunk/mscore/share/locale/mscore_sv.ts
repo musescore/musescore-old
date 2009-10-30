@@ -5701,6 +5701,10 @@ Försök spara på annan plats.</translation>
         <source>Text Edit</source>
         <translation>Textredigering</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
