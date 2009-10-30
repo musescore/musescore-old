@@ -1,5 +1,6 @@
 30.oct.
       (ws)
+      - note property dialog: apply changes to all selected notes
       - fixed misplaced middle slur segment
       - fix: Cello in Unison.sf2 plays out of tune
       - fix crash when unloadable soundfont was configured

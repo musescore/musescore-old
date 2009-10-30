@@ -1182,21 +1182,29 @@ void Note::propertyAction(const QString& s)
             ChordProperties vp(this);
             int rv = vp.exec();
             if (rv) {
-                  if (vp.small() != chord()->small())
-                        score()->undoChangeChordRestSize(chord(), vp.small());
-                  if (Spatium(vp.leadingSpace()) != chord()->extraLeadingSpace()
-                     || Spatium(vp.trailingSpace()) != chord()->extraTrailingSpace()) {
-                        score()->undoChangeChordRestSpace(chord(), Spatium(vp.leadingSpace()),
-                           Spatium(vp.trailingSpace()));
+                  QList<Element*> sl = *score()->selection()->elements();
+                  foreach(Element* e, sl) {
+                        if (e->type() != NOTE)
+                              continue;
+                        Note* note = static_cast<Note*>(e);
+                        Chord* chord = note->chord();
+
+                        if (vp.small() != chord->small())
+                              score()->undoChangeChordRestSize(chord, vp.small());
+                        if (Spatium(vp.leadingSpace()) != chord->extraLeadingSpace()
+                           || Spatium(vp.trailingSpace()) != chord->extraTrailingSpace()) {
+                              score()->undoChangeChordRestSpace(chord, Spatium(vp.leadingSpace()),
+                                 Spatium(vp.trailingSpace()));
+                              }
+                        if (vp.noStem() != chord->noStem())
+                              score()->undoChangeChordNoStem(chord, vp.noStem());
+                        if (vp.getStemDirection() != chord->stemDirection())
+                              score()->undo()->push(new SetStemDirection(chord, Direction(vp.getStemDirection())));
+                        if (vp.tuning() != note->tuning())
+                              score()->undoChangeTuning(note, vp.tuning());
+                        if (DirectionH(vp.getUserMirror()) != note->userMirror())
+                              score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
                         }
-                  if (vp.noStem() != chord()->noStem())
-                        score()->undoChangeChordNoStem(chord(), vp.noStem());
-                  if (vp.getStemDirection() != chord()->stemDirection())
-                        score()->undo()->push(new SetStemDirection(chord(), Direction(vp.getStemDirection())));
-                  if (vp.tuning() != tuning())
-                        score()->undoChangeTuning(this, vp.tuning());
-                  if (DirectionH(vp.getUserMirror()) != userMirror())
-                        score()->undoChangeUserMirror(this, DirectionH(vp.getUserMirror()));
                   }
             }
       else if (s == "tupletProps") {
