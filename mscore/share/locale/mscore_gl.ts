@@ -5703,6 +5703,10 @@ Tente gardar nun sitio diferente.</translation>
         <source>Text Edit</source>
         <translation>Modificar o texto</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>

@@ -74,6 +74,9 @@ class InstrumentListEditor : public QScrollArea
    private slots:
       void updateSolo();
 
+   public slots:
+      void patchListChanged();
+
    signals:
       void soloChanged();
 

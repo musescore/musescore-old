@@ -23,6 +23,7 @@
 #include "seq.h"
 #include "synti.h"
 #include "preferences.h"
+#include "partedit.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -97,6 +98,11 @@ void MuseScore::showSynthControl(bool val)
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
             connect(seq, SIGNAL(masterVolumeChanged(float)), synthControl, SLOT(setMasterGain(float)));
             connect(synthControl, SIGNAL(masterGainChanged(float)), seq, SLOT(setMasterVolume(float)));
+
+            if (iledit) {
+                  connect(synthControl, SIGNAL(soundFontChanged()), iledit,
+                     SLOT(patchListChanged()));
+                  }
             }
       synthControl->setShown(val);
       }
@@ -153,6 +159,7 @@ void SynthControl::selectSoundFont()
       if (!s.isNull()) {
             soundFont->setText(s);
             synth->loadSoundFont(s);
+            emit soundFontChanged();
             }
       }
 

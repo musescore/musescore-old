@@ -5694,6 +5694,10 @@ Try saving to a different location.</source>
         <source>Text Edit</source>
         <translation>Endring av tekst</translation>
     </message>
+    <message>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
@@ -6057,7 +6061,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>

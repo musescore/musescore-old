@@ -46,6 +46,7 @@ class SynthControl : public QWidget, Ui::SynthControl {
    signals:
       void closed();
       void masterGainChanged(float);
+      void soundFontChanged();
 
    public slots:
       void setMasterGain(float);

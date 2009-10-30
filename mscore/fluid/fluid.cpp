@@ -681,6 +681,17 @@ void Fluid::start_voice(Voice* voice)
       }
 
 //---------------------------------------------------------
+//   loadSoundFont
+//---------------------------------------------------------
+
+bool Fluid::loadSoundFont(const QString& s)
+      {
+      foreach(SFont* sf, sfonts)
+            sfunload(sf->id(), true);
+      return sfload(s, true);
+      }
+
+//---------------------------------------------------------
 //   sfload
 //---------------------------------------------------------
 
@@ -950,7 +961,9 @@ void Fluid::remove_bank_offset(int sfont_id)
 
 QString Fluid::soundFont() const
       {
-      return get_sfont(0)->get_name();
+      if (sfonts.isEmpty())
+            return "";
+      return sfonts[0]->get_name();
       }
 
 double Fluid::effectParameter(int effect, int parameter)
