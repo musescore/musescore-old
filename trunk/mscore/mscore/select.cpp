@@ -910,15 +910,18 @@ static void collectMatch(void* data, Element* e)
 /*      if (p->type == e->type() && p->subtype != e->subtype())
             printf("%s subtype %d does not match\n", e->name(), e->subtype());
       */
-      if (p->type != e->type() || p->subtype != e->subtype())
+      if ((p->type != e->type()) || (p->subtype != e->subtype()))
             return;
-      if (p->staff != -1 && p->staff != e->staffIdx())
+      if ((p->staff != -1) && (p->staff != e->staffIdx()))
             return;
-      if (e->type() == NOTE)
-            e = e->parent();
       if (e->type() == CHORD || e->type() == REST) {
             ChordRest* cr = static_cast<ChordRest*>(e);
             if (p->voice != -1 && p->voice != cr->voice())
+                  return;
+            }
+      if (e->type() == NOTE) {
+            Note* n = static_cast<Note*>(e);
+            if (p->voice != -1 && p->voice != n->voice())
                   return;
             }
       if (p->system) {
