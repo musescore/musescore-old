@@ -408,7 +408,9 @@ void Voice::write(unsigned n, float* left, float* right, float* reverb, float* c
        * waveform and output waveform.*/
 
       {
-      float cent = pitch + modlfo_val * modlfo_to_pitch + viblfo_val * viblfo_to_pitch + modenv_val * modenv_to_pitch;
+      float cent = pitch + modlfo_val * modlfo_to_pitch
+                   + viblfo_val * viblfo_to_pitch
+                   + modenv_val * modenv_to_pitch;
       phase_incr = _fluid->ct2hz_real(cent) / root_pitch;
       }
 

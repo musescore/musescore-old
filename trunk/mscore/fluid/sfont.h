@@ -91,6 +91,7 @@ class SFont {
       void FSKIP(int size)    {  return safe_fseek(size); }
       void FSKIPW();
       unsigned char READB();
+      char READC();
       void READSTR(char*);
 
       void safe_fread(void *buf, int count);
@@ -155,6 +156,7 @@ class Sample {
       void load();
       bool valid() const    { return _valid; }
       void setValid(bool v) { _valid = v; }
+      void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -186,7 +188,7 @@ class Zone {
       bool inside_range(int key, int vel) const;
       Instrument* get_inst()     const          { return instrument; }
       Sample* get_sample() const                { return sample; }
-      void write(Xml&, const char*) const;
+      void write(Xml&, const char*, bool hasInstrument) const;
       };
 
 //---------------------------------------------------------
@@ -206,6 +208,7 @@ class Instrument {
       Zone* get_global_zone() const     { return global_zone; }
       QList<Zone*> get_zone()           { return zones; }
       bool import_sfont();
+      void write(Xml&) const;
       };
 
 //---------------------------------------------------------

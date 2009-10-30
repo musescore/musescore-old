@@ -810,6 +810,17 @@ unsigned char SFont::READB()
       }
 
 //---------------------------------------------------------
+//   READC
+//---------------------------------------------------------
+
+char SFont::READC()
+      {
+      char var;
+      safe_fread(&var, 1);
+      return var;
+      }
+
+//---------------------------------------------------------
 //   FSKIPW
 //---------------------------------------------------------
 
@@ -1597,7 +1608,7 @@ void SFont::load_shdr (int size)
             READD (p->loopend);
             READD (p->samplerate);
             p->origpitch = READB();
-            p->pitchadj  = READB();
+            p->pitchadj  = READC();
             FSKIPW ();		      // skip sample link
             p->sampletype = READW();
             if (p->sampletype & FLUID_SAMPLETYPE_ROM) {
@@ -1695,6 +1706,10 @@ void SFont::write(Xml& xml) const
       xml.stag("MSound");
       foreach(Preset* p, presets)
             p->write(xml);
+      foreach(Instrument* p, instruments)
+            p->write(xml);
+      foreach(Sample* p, sample)
+            p->write(xml);
 
       xml.etag();
       }
@@ -1705,14 +1720,13 @@ void SFont::write(Xml& xml) const
 
 void Preset::write(Xml& xml) const
       {
-      xml.stag("Preset");
-      xml.tag("name", name);
+      xml.stag(QString("Preset name=\"%1\"").arg(name));
       xml.tag("bank", bank);
       xml.tag("num", num);
       if (_global_zone)
-            _global_zone->write(xml, "GlobalZone");
+            _global_zone->write(xml, "GlobalZone", true);
       foreach(Zone* z, zones)
-            z->write(xml, "Zone");
+            z->write(xml, "Zone", true);
       xml.etag();
       }
 
@@ -1720,13 +1734,47 @@ void Preset::write(Xml& xml) const
 //   write
 //---------------------------------------------------------
 
-void Zone::write(Xml& xml, const char* p) const
+void Zone::write(Xml& xml, const char* p, bool hasInstrument) const
       {
-      xml.stag(p);
+      xml.stag(QString("%1 name=\"%2\"").arg(p).arg(name));
       xml.tag("range", QString("%1-%2 %3-%4").arg(keylo).arg(keyhi).arg(vello).arg(velhi));
-      if (instrument)
-            xml.tag("inst", instrument->name);
+      if (hasInstrument && instrument)
+            instrument->write(xml);
+      else if (!hasInstrument && sample)
+            sample->write(xml);
       xml.tag("mods", modlist.size());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Instrument::write(Xml& xml) const
+      {
+      xml.stag(QString("Instrument name=\"%1\"").arg(name));
+      if (global_zone)
+            global_zone->write(xml, "GlobalZone", false);
+      foreach(Zone* z, zones)
+            z->write(xml, "Zone", false);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Sample::write(Xml& xml) const
+      {
+      xml.stag(QString("Sample name=\"%1\"").arg(name));
+      xml.tag("start",      start);
+      xml.tag("end",        end);
+      xml.tag("loopstart",  loopstart);
+      xml.tag("loopend",    loopend);
+      xml.tag("samplerate", samplerate);
+      xml.tag("origpitch",  origpitch);
+      xml.tag("pitchadj",   pitchadj);
+      xml.tag("sampletype", sampletype);
       xml.etag();
       }
 }
