@@ -1,6 +1,11 @@
-30.oct. (og)
-	- exportly: Unterminated slurs: \laissezVibrer. Whole notes as part of
-	triplets.
+30.oct (lv)
+      - write MusicXML <direction> stop at end of note instead of at start
+        of next note
+      - fixed all MusicXML regression testfiles
+      - new testfile testWedge2.xml
+      (og)
+      - exportly: Unterminated slurs: \laissezVibrer. Whole notes as part of
+        triplets.
 29.oct (lv)
       - fix import of MusicXML <octave-shift> and <pedal> vertical placement
       - update MusicXML regression testfiles

@@ -104,6 +104,7 @@ rwtestAllXml() {
       rwtestXml testVoicePiano1.xml
       rwtestXml testVolta1.xml
       rwtestXml testWedge1.xml
+      rwtestXml testWedge2.xml
       rwtestXml testWords1.xml
       }
 

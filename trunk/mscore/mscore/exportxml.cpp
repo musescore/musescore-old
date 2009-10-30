@@ -679,15 +679,22 @@ static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start
 
 //---------------------------------------------------------
 //   findMatchInPart -- find chord or rest in part
+//     if start is true, try to find a match at start first
+//     if start is false, try to find a match at end first
 //---------------------------------------------------------
 
-static DirectionsAnchor* findMatchInPart(int tick, Staff* st, Score* sc, Part* p, int strack, int etrack)
+static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score* sc, Part* p, int strack, int etrack)
       {
-      DirectionsAnchor* da;
-      da = findSpecificMatchInPart(tick, st, true, sc, strack, etrack);
+      DirectionsAnchor* da = 0;
+      if (start)
+            da = findSpecificMatchInPart(tick, st, true, sc, strack, etrack);
       if (da)
             return da;
       da = findSpecificMatchInPart(tick, st, false, sc, strack, etrack);
+      if (da)
+            return da;
+      if (!start)
+            da = findSpecificMatchInPart(tick, st, true, sc, strack, etrack);
       if (da)
             return da;
       return (st->part() == p) ? new DirectionsAnchor(tick) : 0;
@@ -711,12 +718,12 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
                   case TEXTLINE:
                         {
                         SLine* sl = (SLine*) dir;
-                        da = findMatchInPart(sl->tick(), sl->staff(), cs, p, strack, etrack);
+                        da = findMatchInPart(sl->tick(), sl->staff(), true, cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
                               }
-                        da = findMatchInPart(sl->tick2(), sl->staff(), cs, p, strack, etrack);
+                        da = findMatchInPart(sl->tick2(), sl->staff(), false, cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
