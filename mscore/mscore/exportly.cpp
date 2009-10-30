@@ -3039,57 +3039,85 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
   
   while (!(nextseg->subtype() == Segment::SegEndBarLine))//  and !(nextseg->subtype() == Segment::SegEndBarLine)))
     {
-      if (nextseg->isChordRest())	break;
+      //go to next segment, check if it is chord or end of measure.
+      if (nextseg->isChordRest())	break; 
       cout << nextseg->subTypeName() << "\n";
       nextseg = nextseg->next();
-      nextelem = nextseg->element(track);
+      nextelem = nextseg->element(track); //check if it is on this track
     }
   
-  if ((nextelem==0) and (!(nextseg->subtype() == Segment::SegEndBarLine)))
-    //try one more:
+  int ni=0;
+  //if it is not on this track, continue until end we find segment
+  //containing element of this track, or end of measure
+  while ((nextelem==0) and (!(nextseg->subtype() == Segment::SegEndBarLine)))
     {
-      cout << "NULL\n";
+      ni++;
+      cout << "NULL: " << ni << " \n";
       nextseg = nextseg->next();
+      cout << "test 1 \n";
       nextelem = nextseg->element(track);
+      cout << "test 2 \n";
     }  
-  
+  // if next segment contains element of this track, check for end of
+  // measure and chororrest.
   if ((nextseg->subTypeName() != "EndBarLine") &&  (nextseg->isChordRest()))
     {
-      if ((!(nextelem == 0 || nextelem->generated())))
+      cout << "test 3 \n";
+      // probably superfluous as we have previously checked for
+      // element on this track (!=0)
+      if ((!(nextelem == 0 || nextelem->generated()))) 
 	{
+	  cout << "test 4 \n";
 	  if (nextelem->type() == REST)
 	    {
+	      cout << "test 5 \n";
 	      nextisrest=true;
 	    }
+	  cout << "test 6 \n";
 	}
     }
   else // if we have reached end of measure
     {
+      cout << "test 7 \n";
       // go to next measure:
-      mb = mb->next();
-      if (mb->type() == MEASURE)
-  	{
-  	  Measure* meas = (Measure*) mb;
-  	  for(Segment* s = meas->first(); s; s = s->next())
-  	    {       
-  	      if (s->isChordRest())
-  		{
-  		  Element* elem = s->element(track);
-  		  if (!(elem == 0 ||  elem->generated()))
-  		    { 
-  		      if (elem->type() == REST) 
-  			{
-  			  nextisrest=true;
-  			}
-  		      else if (elem->type() == CHORD)
-  			{
-  			  //relax
-  			}
-  		    }
-  		  break;
-  		}
-  	    }
-  	}
+      if (mb->next()) 
+	{
+	  mb = mb->next();
+	  cout << "test 8  \n";
+	  if (mb->type() == MEASURE)
+	    {
+	      cout << "test 9 \n";
+	      Measure* meas = (Measure*) mb;
+	      cout << "test 10  measurenumber: " <<  meas->no()+1 << "\n";
+	      for(Segment* s = meas->first(); s; s = s->next())
+		{
+		  cout << "test 11 \n";
+		  if (s->isChordRest())
+		    {
+		      cout << "test 12 \n";
+		      Element* elem = s->element(track);
+		      cout << "test 13 \n";
+		      if (!(elem == 0 ||  elem->generated()))
+			{ 
+			  cout << "test 14 \n";
+			  if (elem->type() == REST) 
+			    {
+			      cout << "test 15 \n";
+			      nextisrest=true;
+			    }
+			  else if (elem->type() == CHORD)
+			    {
+			      cout << "test 16 \n";
+			      //relax
+			    }
+			}
+		      cout << "test 17 \n";
+		      break;
+		    }
+		}
+	    }
+	}
+      else nextisrest=false;
     }
 }
 
@@ -3993,7 +4021,7 @@ bool ExportLy::write(const QString& name)
 
 /*
    30.oct. Unterminated slurs: \laissezVibrer. Whole notes as part of
-   triplets.
+   triplets. Flageolets as symbol connected to the note.
 
    28.oct. Arpeggios and glissandos. Fixed issue of 6.may in the issue
    tracker: incorrect export of polyphony.
@@ -4087,6 +4115,9 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
+
+  -- all kinds of symbols at the notelevel. More symbols on the
+     measurelevel
 
      -- 8vabassa place the ugly stuff in macros, to make the voices as
       clean as possible, 
