@@ -982,7 +982,10 @@ void Slur::layout()
             System* system  = *is;
             SlurSegment* segment = segments[i];
             segment->setSystem(system);
+            ChordRest* cr1 = (ChordRest*)startElement();
+            SysStaff* ss = system->staff(cr1->staffIdx());
             QPointF sp(system->canvasPos());
+            sp.ry() += ss->y();
 
             // case 1: one segment
             if (s1 == s2) {

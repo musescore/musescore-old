@@ -1,5 +1,6 @@
 30.oct.
       (ws)
+      - fixed misplaced middle slur segment
       - fix: Cello in Unison.sf2 plays out of tune
       - fix crash when unloadable soundfont was configured
       - synthesizer: remove old soundfont before loading new one
