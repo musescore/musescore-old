@@ -1,3 +1,6 @@
+30.oct. (og)
+	- exportly: Unterminated slurs: \laissezVibrer. Whole notes as part of
+	triplets.
 29.oct (lv)
       - fix import of MusicXML <octave-shift> and <pedal> vertical placement
       - update MusicXML regression testfiles
