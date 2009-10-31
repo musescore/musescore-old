@@ -1821,14 +1821,6 @@ space unit</extracomment>
         <translation>Endre stemme:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Navn:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Tittel:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrument:</translation>
     </message>
@@ -1837,8 +1829,16 @@ space unit</extracomment>
         <translation>Opprett stemme</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4111,10 +4111,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Tekst</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Automatisk retting</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Farger</translation>
     </message>
@@ -4404,14 +4400,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Erstatt (C) ... med symbol ... i rettighetstekst</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Erstatt 1/2 ... med symbl ...</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4437,6 +4425,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

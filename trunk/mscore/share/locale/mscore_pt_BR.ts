@@ -1818,14 +1818,6 @@ space unit</extracomment>
         <translation>Novo</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nome:</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
         <source>MuseScore: Parts</source>
         <translation>Musescore: Partes</translation>
     </message>
@@ -1846,8 +1838,16 @@ space unit</extracomment>
         <translation>Criar Partes:</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>Título:</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4339,10 +4339,6 @@ Ao invés disso, experimente selecionar &quot;Manual Online&quot; no menu &quot;
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Autocorreção</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Cores dos elementos da partitura</translation>
     </message>
@@ -4420,14 +4416,6 @@ Ao invés disso, experimente selecionar &quot;Manual Online&quot; no menu &quot;
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Substituir (C) ... por símbolo ... em Texto de Copyright</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Substituir 1/2 ... por símbolo ...</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation>Configurações do MuseScore</translation>
     </message>
@@ -4454,6 +4442,18 @@ Ao invés disso, experimente selecionar &quot;Manual Online&quot; no menu &quot;
     <message>
         <source>Use JACK midi output</source>
         <translation>Usar saída midi do JACK</translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1826,14 +1826,6 @@ space unit</extracomment>
         <translation>Proprietăţi ştimă nouă/selectată:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nume:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Titlu:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrumente incluse:</translation>
     </message>
@@ -1842,8 +1834,16 @@ space unit</extracomment>
         <translation>Extrage ştima selectată</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>Salvează şi închide</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4113,18 +4113,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished">Text</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4439,6 +4427,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

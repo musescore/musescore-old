@@ -1807,14 +1807,6 @@ space unit</extracomment>
         <translation>Novo</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nome:</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
         <source>MuseScore: Parts</source>
         <translation>MuseScore: Partes</translation>
     </message>
@@ -1835,8 +1827,16 @@ space unit</extracomment>
         <translation>Criar Parte</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>Título:</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4315,10 +4315,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Correcção Automática</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Cor dos elementos da partitura</translation>
     </message>
@@ -4391,14 +4387,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Scaling</source>
         <translation type="unfinished">Modificar Tamanho</translation>
     </message>
@@ -4437,6 +4425,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

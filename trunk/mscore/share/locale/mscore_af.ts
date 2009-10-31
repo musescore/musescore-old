@@ -2345,12 +2345,17 @@ space unit</extracomment>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
-        <source>Name:</source>
+        <source>File Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
-        <source>Title:</source>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="133"/>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2361,11 +2366,6 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="113"/>
         <source>Create Part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="133"/>
-        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2652,7 +2652,7 @@ space unit</extracomment>
 <context>
     <name>InstrumentListEditor</name>
     <message>
-        <location filename="../../mscore/partedit.cpp" line="76"/>
+        <location filename="../../mscore/partedit.cpp" line="77"/>
         <source>MuseScore: Part List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4904,48 +4904,48 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="856"/>
+        <location filename="../../mscore/preferences.cpp" line="859"/>
         <source>Choose Working Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="871"/>
+        <location filename="../../mscore/preferences.cpp" line="874"/>
         <source>Choose Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="873"/>
+        <location filename="../../mscore/preferences.cpp" line="876"/>
         <source>Instrument List (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="887"/>
+        <location filename="../../mscore/preferences.cpp" line="890"/>
         <source>Choose Starting Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="639"/>
+        <location filename="../../mscore/preferences.cpp" line="642"/>
         <source>default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="824"/>
+        <location filename="../../mscore/preferences.cpp" line="827"/>
         <source>Choose Notepaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="826"/>
-        <location filename="../../mscore/preferences.cpp" line="842"/>
+        <location filename="../../mscore/preferences.cpp" line="829"/>
+        <location filename="../../mscore/preferences.cpp" line="845"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="840"/>
+        <location filename="../../mscore/preferences.cpp" line="843"/>
         <source>Choose Background Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="889"/>
+        <location filename="../../mscore/preferences.cpp" line="892"/>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5272,21 +5272,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="895"/>
-        <source>Autocorrection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="910"/>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="923"/>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/prefsdialog.ui" line="933"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
@@ -5369,6 +5354,21 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1229"/>
         <source>Expand Repeats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/prefsdialog.ui" line="895"/>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="../../mscore/prefsdialog.ui" line="910"/>
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="../../mscore/prefsdialog.ui" line="923"/>
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5769,13 +5769,13 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="909"/>
-        <location filename="../../mscore/preferences.cpp" line="1313"/>
+        <location filename="../../mscore/preferences.cpp" line="1316"/>
         <source>MuseScore: Load Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="911"/>
-        <location filename="../../mscore/preferences.cpp" line="1315"/>
+        <location filename="../../mscore/preferences.cpp" line="1318"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5964,14 +5964,14 @@ Try saving to a different location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1412"/>
+        <location filename="../../mscore/cmd.cpp" line="1413"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1470"/>
+        <location filename="../../mscore/cmd.cpp" line="1471"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation type="unfinished"></translation>
@@ -6603,12 +6603,12 @@ failed: </source>
 <context>
     <name>SynthControl</name>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="149"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="155"/>
         <source>Choose Synthesizer SoundFont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="151"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="157"/>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>

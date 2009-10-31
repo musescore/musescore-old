@@ -1807,14 +1807,6 @@ space unit</extracomment>
         <translation>Nuevo</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nombre:</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
         <source>MuseScore: Parts</source>
         <translation>MuseScore: Partes</translation>
     </message>
@@ -1827,16 +1819,24 @@ space unit</extracomment>
         <translation>Editar Parte:</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>Título</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrumento:</translation>
     </message>
     <message>
         <source>Create Part</source>
         <translation>Crear Parte</translation>
+    </message>
+    <message>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4333,10 +4333,6 @@ Desde el menu de &quot;Ayuda. Intenta usar el &quot;Manual en &quot;Internet.</t
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Autocorreción</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Colores de los elementos de la partitura</translation>
     </message>
@@ -4406,14 +4402,6 @@ Desde el menu de &quot;Ayuda. Intenta usar el &quot;Manual en &quot;Internet.</t
         <translation type="unfinished">mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4439,6 +4427,18 @@ Desde el menu de &quot;Ayuda. Intenta usar el &quot;Manual en &quot;Internet.</t
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
