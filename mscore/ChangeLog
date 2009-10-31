@@ -1,3 +1,10 @@
+31.oct. (ws)
+      - additional commands for lyrics edit mode:
+            - Ctrl+left:  go to previous lyrics
+            - Ctrl+right: go to next lyrics
+            - Ctrl+up:    go verse up
+            - Ctrl+down:  go verse down
+      - fix: right/left go to next/prev lyrics if at end/beginning
 30.oct.
       (ws)
       - note property dialog: apply changes to all selected notes

@@ -583,6 +583,7 @@ class Score : public QObject {
 
       void chordTab(bool back);
       void lyricsTab(bool back, bool end);
+      void lyricsUpDown(bool up, bool end);
       void lyricsReturn();
       void lyricsMinus();
       void lyricsUnderscore();
