@@ -994,12 +994,12 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
 
             case Qt::Key_Left:
                   if (!cursor->movePosition(QTextCursor::Left, mm))
-                        return true;
+                        return false;
                   break;
 
             case Qt::Key_Right:
                   if (!cursor->movePosition(QTextCursor::Right, mm))
-                        return true;
+                        return false;
                   break;
 
             case Qt::Key_Up:

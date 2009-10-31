@@ -61,6 +61,8 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             ev->accept();
             return;
             }
+      bool ctrl = ev->modifiers() == Qt::ControlModifier;
+
       if (e->type() == LYRICS) {
             int found = false;
 #ifdef Q_WS_MAC
@@ -73,17 +75,25 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
-                  if (e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        _score->lyricsTab(true, true);
+                        _score->lyricsTab(true, true);      // go to previous lyrics
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        _score->lyricsTab(false, false);
+                        _score->lyricsTab(false, false);    // go to next lyrics
+                  found = true;
+                  }
+            else if (ctrl && (ev->key() == Qt::Key_Up)) {
+                  _score->lyricsUpDown(true, true);
+                  found = true;
+                  }
+            else if (ctrl && (ev->key() == Qt::Key_Down)) {
+                  _score->lyricsUpDown(false, true);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Return) {
@@ -125,6 +135,11 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
             if (e->edit(this, curGrip, key, modifiers, s)) {
                   updateGrips();
+                  ev->accept();
+                  _score->end();
+                  return;
+                  }
+            if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
                   return;

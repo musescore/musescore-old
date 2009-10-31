@@ -145,6 +145,46 @@ QPointF Lyrics::canvasPos() const
       }
 
 //---------------------------------------------------------
+//   lyricsUpDown
+//---------------------------------------------------------
+
+void Score::lyricsUpDown(bool up, bool end)
+      {
+      Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
+      Segment* segment = lyrics->segment();
+      int verse        = lyrics->no();
+      LyricsList* ll   = segment->lyricsList(staffIdx);
+
+      if (up) {
+            if (verse == 0)
+                  return;
+            --verse;
+            }
+      else {
+            ++verse;
+            if (verse >= ll->size())
+                  return;
+            }
+
+      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
+      endCmd();
+      startCmd();
+      lyrics = ll->value(verse);
+
+      select(lyrics, SELECT_SINGLE, 0);
+      canvas()->startEdit(lyrics);
+      adjustCanvasPosition(lyrics, false);
+      if (end)
+            ((Lyrics*)editObject)->moveCursorToEnd();
+      else
+            ((Lyrics*)editObject)->moveCursor(0);
+
+      layoutAll = true;
+      }
+
+//---------------------------------------------------------
 //   lyricsTab
 //---------------------------------------------------------
 
