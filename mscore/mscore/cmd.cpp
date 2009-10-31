@@ -1188,6 +1188,7 @@ void Score::cmdAddText(int subtype)
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
                         measure = new VBox(this);
+                        measure->setNext(ml.front());
                         measure->setTick(0);
                         undoInsertMeasure(measure);
                         }

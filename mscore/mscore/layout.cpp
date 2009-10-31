@@ -747,14 +747,13 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             MeasureBase* lm = system->measures().back();
             while (lm && lm->type() != MEASURE)
                   lm = lm->prev();
-            Measure* m = (Measure*)lm;
-            int tick        = lm->tick() + lm->tickLen();
-            AL::SigEvent sig1   = _sigmap->timesig(tick - 1);
-            AL::SigEvent sig2   = _sigmap->timesig(tick);
-
+            Measure* m = static_cast<Measure*>(lm);
             bool hasCourtesyKeysig = false;
 
             if (m) {
+                  int tick            = lm->tick() + lm->tickLen();
+                  AL::SigEvent sig1   = _sigmap->timesig(tick - 1);
+                  AL::SigEvent sig2   = _sigmap->timesig(tick);
                   if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
                         Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
