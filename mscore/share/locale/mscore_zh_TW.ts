@@ -1821,10 +1821,6 @@ space unit</extracomment>
         <translation>編輯分譜：</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>名稱：</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>樂器：</translation>
     </message>
@@ -1833,12 +1829,16 @@ space unit</extracomment>
         <translation>建立分譜</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>確定</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>標題：</translation>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4339,10 +4339,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>文字</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>自動更正</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>樂譜元素顏色</translation>
     </message>
@@ -4399,14 +4395,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>橫向</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>以符號 ... 取代 1/2 ...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>以符號 ... 取代版權文字中的 (C) ...</translation>
-    </message>
-    <message>
         <source>Scaling</source>
         <translation>比例</translation>
     </message>
@@ -4445,6 +4433,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

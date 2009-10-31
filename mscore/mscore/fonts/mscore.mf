@@ -479,7 +479,7 @@ save dot_diam;
 2 dot_diam# = staff_space# - stafflinethickness#;
 define_whole_blacker_pixels (dot_diam);
 
-fet_beginchar ("duration dot dot", "dotdot");
+fet_beginchar ("duration dot", "dot");
 	pickup pencircle scaled dot_diam;
 
 	lft x0 = 0;
@@ -504,7 +504,7 @@ fet_beginchar ("duration dot dot", "dotdot");
 	top y0 = vround (.5 dot_diam);
 
 	drawdot z0 + (0, staff_space / 2);
-	drawdot z0 + (staff_space / 2, staff_space / 2);
+	drawdot z0 + (2 staff_space / 2, staff_space / 2);
 
 	set_char_box (0, dot_diam# * 2 + staff_space# / 2, .5 dot_diam#, .5 dot_diam#);
 fet_endchar;

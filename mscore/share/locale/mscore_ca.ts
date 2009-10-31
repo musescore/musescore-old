@@ -1809,14 +1809,6 @@ space unit</extracomment>
         <translation>Nou</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nom:</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>D&apos;acord</translation>
-    </message>
-    <message>
         <source>MuseScore: Parts</source>
         <translation>MuseScore: Parts</translation>
     </message>
@@ -1829,16 +1821,24 @@ space unit</extracomment>
         <translation>Edita part:</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>Títol:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrument:</translation>
     </message>
     <message>
         <source>Create Part</source>
         <translation>Crea part</translation>
+    </message>
+    <message>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4335,10 +4335,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Text</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Correcció automàtica</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Colors d&apos;elements de la partitura</translation>
     </message>
@@ -4409,14 +4405,6 @@ Si habilites el mètode d&apos;entrada alternatiu llavors l&apos;armadura actual
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Reemplaça (C) ... amb el símbol ... en el text de Copyright</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Reemplaça 1/2 ... amb el símbol ...</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4442,6 +4430,18 @@ Si habilites el mètode d&apos;entrada alternatiu llavors l&apos;armadura actual
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

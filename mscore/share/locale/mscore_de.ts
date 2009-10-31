@@ -1812,14 +1812,6 @@ space unit</extracomment>
         <translation>Neu</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Name:</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
         <source>MuseScore: Parts</source>
         <translation>MuseScore: Parts</translation>
     </message>
@@ -1840,8 +1832,16 @@ space unit</extracomment>
         <translation>Erzeuge Part</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation>Titel:</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4330,10 +4330,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>Text</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Autokorrektur</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Farbe der Partiturelemente</translation>
     </message>
@@ -4411,14 +4407,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Ersetze (C) durch Symbol in Copyrighttext</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Ersetze 1/2 durch Symbol</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4444,6 +4432,18 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

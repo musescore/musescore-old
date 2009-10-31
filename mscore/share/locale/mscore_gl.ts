@@ -1820,14 +1820,6 @@ space unit</extracomment>
         <translation>Modificar unha parte:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nome:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Título:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrumento:</translation>
     </message>
@@ -1836,8 +1828,16 @@ space unit</extracomment>
         <translation>Crear unha parte</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>Aceptar</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4341,18 +4341,6 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Corrección automática</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Substituír 1/2... polo símbolo...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Substituír (C)... polo símbolo... no texto con copyright</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Cores dos elementos da partitura</translation>
     </message>
@@ -4443,6 +4431,18 @@ No canto disto, escoller &quot;Manual en liña&quot; no menú &quot;Axuda&quot;.
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

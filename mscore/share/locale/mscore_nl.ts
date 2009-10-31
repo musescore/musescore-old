@@ -1901,14 +1901,6 @@ space unit</extracomment>
         <translation>Bewerk Partij:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Naam:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Titel:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrument:</translation>
     </message>
@@ -1917,8 +1909,16 @@ space unit</extracomment>
         <translation>Creëer Partij</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4467,10 +4467,6 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <translation>Tekst</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Automatische Correctie</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translatorcomment>&apos;start met&apos; toegevoegd</translatorcomment>
         <translation>start met leeg blad</translation>
@@ -4556,14 +4552,6 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Vervang (C) ... met symbool ... in Copyright Tekst</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Vervang 1/2 ... with symbol ...</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation>MuseScore Voorkeuren</translation>
     </message>
@@ -4590,6 +4578,18 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     <message>
         <source>Use JACK midi output</source>
         <translation>Gebruik JACK midi-uitgang</translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

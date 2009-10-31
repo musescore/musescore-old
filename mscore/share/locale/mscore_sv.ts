@@ -1821,14 +1821,6 @@ space unit</extracomment>
         <translation>Bearbeta stämma:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Namn:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Titel:</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Instrument:</translation>
     </message>
@@ -1837,8 +1829,16 @@ space unit</extracomment>
         <translation>Skapa stämma</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4114,10 +4114,6 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>Text</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Autokorrigering</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Färger</translation>
     </message>
@@ -4407,14 +4403,6 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <translation>mm</translation>
     </message>
     <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Ersätt (C) ... med symbol ... i kopieringsrättstext</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Ersätt 1/2 ... med symbol ...</translation>
-    </message>
-    <message>
         <source>MuseScore Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4440,6 +4428,18 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Use JACK midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
