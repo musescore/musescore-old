@@ -541,7 +541,8 @@ Part* Score::part(int n)
 
 void Score::addMeasure(MeasureBase* m)
       {
-      m->setNext(tick2measureBase(m->tick()));
+      if (!m->next())
+            m->setNext(tick2measureBase(m->tick()));
       _measures.add(m);
       }
 

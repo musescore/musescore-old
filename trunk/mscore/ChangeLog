@@ -1,4 +1,5 @@
 31.oct. (ws)
+      - fix: adding title to template lead to crash
       - fix setting of global AL::sampleRate
       - additional commands for lyrics edit mode:
             - Ctrl+left:  go to previous lyrics
