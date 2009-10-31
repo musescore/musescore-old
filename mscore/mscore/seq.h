@@ -111,7 +111,6 @@ class Seq : public QObject {
       void startTransport();
       void setPos(int);
       void playEvent(const Event*, unsigned framePos);
-//      void playEvent(const Event&);
       void guiToSeq(const SeqMsg& msg);
       void startNote(Channel*, int, int, double nt);
 
