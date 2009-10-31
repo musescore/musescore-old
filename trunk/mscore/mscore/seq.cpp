@@ -184,8 +184,9 @@ bool Seq::init()
                   delete driver;
                   driver = 0;
                   }
-            else
+            else {
                   useALSA = true;
+                  }
             }
 #endif
 #ifdef USE_PORTAUDIO
@@ -209,6 +210,7 @@ bool Seq::init()
             printf("init audio driver failed\n");
             return false;
             }
+      AL::sampleRate = driver->sampleRate();
       Synth* synth = driver->getSynth();
       if (synth) {
             QString p;
@@ -833,6 +835,10 @@ void Seq::seek(int tick)
       msg.id   = SEQ_SEEK;
       guiToSeq(msg);
       mscore->setPos(tick);
+      foreach(Note* n, markedNotes) {
+            n->setSelected(false);
+            cs->addRefresh(n->abbox());
+            }
       }
 
 //---------------------------------------------------------
