@@ -56,6 +56,7 @@ class KeySig : public Element {
       void setOldSig(int oldSig);
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
+      int keySignature() const { return char(subtype() & 0xff); }    // -7 - +7
       };
 
 extern const char* keyNames[15];
