@@ -79,6 +79,7 @@ class PianoView : public QGraphicsView {
       PianoView();
       void setStaff(Staff*, AL::Pos* locator);
       void ensureVisible(int tick);
+      QList<QGraphicsItem*> items() { return scene()->selectedItems(); }
       };
 
 

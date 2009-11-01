@@ -1,3 +1,5 @@
+1.nov. (ws)
+      - applied patch from strohel: Make build of jack support optional
 31.oct. (ws)
       - fix: dot distance in toolbar double dot is now 2/3 space instead of 1/2
       - fix: adding title to template lead to crash

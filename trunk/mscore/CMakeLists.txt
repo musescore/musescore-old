@@ -147,21 +147,35 @@ else (APPLE OR MINGW)
       endif (NOT ALSA_INCDIR)
 endif (APPLE OR MINGW)
 
+
 ##
-## find jack >= 0.98.0
+## find jack >= JACK_MIN_VERSION
 ##
 
-if (MINGW)
-      set (USE_JACK 1)
-      set (JACK_INCDIR "C:/Program Files/Jack v1.9.3/includes")
-      set (JACK_LIB "C:/Program Files/Jack v1.9.3/lib/libjack.a")
-else (MINGW)
-      PKGCONFIG (jack 0.98.0 JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP )
-      if (JACK_INCDIR)
-	        message("Jack detected")
-          set (USE_JACK 1)
-      endif (JACK_INCDIR)
-endif (MINGW)
+SET(JACK_LONGNAME "jack (jack audio connection kit)")
+SET(JACK_MIN_VERSION "0.98.0")
+
+SET(BUILD_JACK AUTO CACHE STRING "Build with support for ${JACK_LONGNAME}. jack >= ${JACK_MIN_VERSION} will be needed. [ON/OFF/AUTO]")
+IF(BUILD_JACK)
+     IF(MINGW)
+           set (USE_JACK 1)
+           set (JACK_INCDIR "C:/Program Files/Jack v1.9.3/includes")
+           set (JACK_LIB "C:/Program Files/Jack v1.9.3/lib/libjack.a")
+     ELSE(MINGW)
+           PKGCONFIG(jack ${JACK_MIN_VERSION} JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP)
+           IF(JACK_INCDIR)
+                 MESSAGE(STATUS "${JACK_LONGNAME} >= ${JACK_MIN_VERSION} found")
+                 SET(USE_JACK 1)
+           ELSE(JACK_INCDIR)
+                 MESSAGE(STATUS "${JACK_LONGNAME} >= ${JACK_MIN_VERSION} not found")
+                 IF(NOT BUILD_JACK STREQUAL AUTO)
+                       MESSAGE(SEND_ERROR "Error: jack support requested but not found (BUILD_JACK=${BUILD_JACK})")
+                 ENDIF()
+           ENDIF(JACK_INCDIR)
+     ENDIF(MINGW)
+ELSE(BUILD_JACK)
+     MESSAGE(STATUS "${JACK_LONGNAME} support disabled")
+ENDIF(BUILD_JACK)
 
 
 ##

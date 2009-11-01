@@ -174,6 +174,34 @@ class DenominatorSpinBoxPlugin : public QObject, public AwlPlugin {
       };
 
 //---------------------------------------------------------
+//   PitchLabelPlugin
+//---------------------------------------------------------
+
+class PitchLabelPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      PitchLabelPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/pitchlabel.h"; }
+      QString name() const { return "Awl::PitchLabel"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
+//   PitchEditPlugin
+//---------------------------------------------------------
+
+class PitchEditPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+      PitchEditPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/pitchedit.h"; }
+      QString name() const { return "Awl::PitchEdit"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
 //   AwlPlugins
 //---------------------------------------------------------
 

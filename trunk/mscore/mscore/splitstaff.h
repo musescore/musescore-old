@@ -1,9 +1,9 @@
 //=============================================================================
-//  Awl
-//  Audio Widget Library
-//  $Id:$
+//  MuseScore
+//  Linux Music Score Editor
+//  $Id: editstaff.h 1840 2009-05-20 11:57:51Z wschweer $
 //
-//  Copyright (C) 2002-2006 by Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,34 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __AWLPITCHLABEL_H__
-#define __AWLPITCHLABEL_H__
+#ifndef __SPLITSTAFF_H__
+#define __SPLITSTAFF_H__
 
-namespace Awl {
+#include "ui_splitstaff.h"
+
+class Staff;
 
 //---------------------------------------------------------
-//   PitchLabel
+//   SplitStaff
+//    edit staff and part properties
 //---------------------------------------------------------
 
-class PitchLabel : public QLabel {
-      bool _pitchMode;
-      int _value;
+class SplitStaff : public QDialog, private Ui::SplitStaff {
       Q_OBJECT
 
-   protected:
-      QSize sizeHint() const;
-
-   public slots:
-      void setValue(int);
-      void setInt(int);
-      void setPitch(int);
+   private slots:
 
    public:
-      PitchLabel(QWidget* parent = 0);
-      int value() const { return _value; }
-      void setPitchMode(bool val);
-      bool pitchMode() const { return _pitchMode; }
+      SplitStaff(QWidget* parent = 0);
+      int getSplitPoint() const { return splitPoint->value(); }
       };
-}
 
 #endif
+

@@ -137,6 +137,14 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       connect(piano,       SIGNAL(keyPressed(int)),                         SLOT(keyPressed(int)));
       connect(piano,       SIGNAL(keyReleased(int)),                        SLOT(keyReleased(int)));
       resize(800, 400);
+
+      QActionGroup* ag = new QActionGroup(this);
+      a = new QAction(this);
+      a->setData("delete");
+      a->setShortcut(Qt::Key_Delete);
+      ag->addAction(a);
+      addActions(ag->actions());
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
       }
 
 //---------------------------------------------------------
@@ -384,4 +392,24 @@ void PianorollEditor::moveLocator(int i)
             }
       }
 
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void PianorollEditor::cmd(QAction* a)
+      {
+      score()->startCmd();
+      if (a->data() == "delete") {
+            QList<QGraphicsItem*> items = gv->items();
+            foreach(QGraphicsItem* item, items) {
+                  Note* note = static_cast<Note*>(item->data(0).value<void*>());
+                  if (note) {
+                        score()->deleteItem(note);
+                        }
+                  }
+            }
+
+      gv->setStaff(staff, locator);
+      score()->endCmd();
+      }
 
