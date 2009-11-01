@@ -24,6 +24,8 @@
 #include "clef.h"
 #include "measure.h"
 #include "part.h"
+#include "note.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -63,6 +65,23 @@ void Score::splitStaff(int staffIdx, int splitPoint)
 
       //
       // move notes
+      //    for now we only move notes from voice 0
       //
+      select(0, SELECT_SINGLE, 0);
+      for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            ChordRest* cr = static_cast<ChordRest*>(s->element(staffIdx * VOICES));
+            if (cr == 0 || cr->type() == REST)
+                  continue;
+            Chord* c = static_cast<Chord*>(cr);
+            NoteList* nl = c->noteList();
+            for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                  Note* n = i->second;
+                  if (n->pitch() < splitPoint) {
+                        deleteItem(n);
+                        }
+                  }
+            }
       }
 

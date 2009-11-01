@@ -523,8 +523,7 @@ void System::add(Element* el)
             int level    = b->level();
             if (level == -1) {
                   level = ss->brackets.size() - 1;
-                  if (ss->brackets.last() == 0) {
-                        level = ss->brackets.size() - 1;
+                  if (level >= 0 && ss->brackets.last() == 0) {
                         ss->brackets[level] = b;
                         }
                   else {
