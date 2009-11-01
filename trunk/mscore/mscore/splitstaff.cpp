@@ -26,6 +26,8 @@
 #include "part.h"
 #include "note.h"
 #include "chord.h"
+#include "bracket.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -62,6 +64,14 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);
       ns->changeKeySig(0, s->key(0));
+
+      Bracket* b = new Bracket(this);
+      b->setSubtype(BRACKET_AKKOLADE);
+      b->setTrack(staffIdx * VOICES);
+      b->setParent(firstMeasure()->system());
+      b->setLevel(-1);  // add bracket
+      b->setSpan(2);
+      cmdAdd(b);
 
       //
       // move notes

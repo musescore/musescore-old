@@ -1017,12 +1017,17 @@ printf("List:\n");
       ChordRest* cr1 = cr;
       Chord* oc      = 0;
 
+      bool first = true;
       foreach (Fraction f2, flist) {
             f  -= f2;
             makeGap(cr1, f2, tuplet);
 
             if (cr->type() == REST) {
-                  setRest(tick, track, f2, false, tuplet);
+                  Rest* r = setRest(tick, track, f2, false, tuplet);
+                  if (first) {
+                        select(r, SELECT_SINGLE, 0);
+                        first = false;
+                        }
                   tick += f2.ticks();
                   }
             else {
@@ -1045,6 +1050,10 @@ printf("   sublist:\n");
                                     cc = static_cast<Chord*>(cr);
                                     }
                               oc = addChord(tick, d, cc, genTie, tuplet);
+                              if (first) {
+                                    select(oc, SELECT_SINGLE, 0);
+                                    first = false;
+                                    }
                               tick += oc->ticks();
                               }
                         }
@@ -1061,6 +1070,10 @@ printf("   sublist:\n");
                                     cc = static_cast<Chord*>(cr);
                                     }
                               oc = addChord(tick, dList[i], cc, genTie, tuplet);
+                              if (first) {
+                                    select(oc, SELECT_SINGLE, 0);
+                                    first = false;
+                                    }
                               tick += oc->ticks();
                               }
                         }
@@ -2980,6 +2993,8 @@ void Score::cmdMirrorNoteHead()
 void Score::cmdHalfDuration()
       {
       Element* el = selection()->element();
+      if (el == 0)
+            return;
       if (el->type() == NOTE)
             el = el->parent();
       if (!el->isChordRest())
@@ -3008,6 +3023,8 @@ void Score::cmdHalfDuration()
 void Score::cmdDoubleDuration()
       {
       Element* el = selection()->element();
+      if (el == 0)
+            return;
       if (el->type() == NOTE)
             el = el->parent();
       if (!el->isChordRest())
