@@ -28,6 +28,7 @@
 #include "chord.h"
 #include "bracket.h"
 #include "system.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -43,6 +44,13 @@ SplitStaff::SplitStaff(QWidget* parent)
 //---------------------------------------------------------
 //   splitStaff
 //---------------------------------------------------------
+
+struct SNote {
+      int tick;
+      int pitch;
+      Fraction fraction;
+      Note* note;
+      };
 
 void Score::splitStaff(int staffIdx, int splitPoint)
       {
@@ -73,25 +81,77 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       b->setSpan(2);
       cmdAdd(b);
 
+      rebuildMidiMapping();
+      seq->initInstruments();
+      startLayout = 0;
+      doLayout();
+
+      QList<SNote>notes;
+
       //
       // move notes
       //    for now we only move notes from voice 0
       //
       select(0, SELECT_SINGLE, 0);
+      int strack = staffIdx * VOICES;
+      int dtrack = (staffIdx + 1) * VOICES;
       for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;
-            ChordRest* cr = static_cast<ChordRest*>(s->element(staffIdx * VOICES));
+            ChordRest* cr = static_cast<ChordRest*>(s->element(strack));
             if (cr == 0 || cr->type() == REST)
                   continue;
             Chord* c = static_cast<Chord*>(cr);
             NoteList* nl = c->noteList();
             for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                  Note* n = i->second;
-                  if (n->pitch() < splitPoint) {
-                        deleteItem(n);
+                  Note* note = i->second;
+                  if (note->pitch() < splitPoint) {
+                        SNote n;
+                        n.tick     = c->tick();
+                        n.pitch    = note->pitch();
+                        n.fraction = c->duration().fraction();
+                        n.note     = note;
+                        notes.append(n);
                         }
                   }
             }
+      int ctick  = 0;
+      foreach(SNote n, notes) {
+            Measure* m = n.note->chord()->measure();
+            if (ctick < m->tick())
+                  ctick = m->tick();
+            Duration d(n.fraction);
+            if (n.tick > ctick) {
+                  Segment* s = m->tick2segment(ctick);
+                  if (s == 0) {
+                        printf("no segment at %d - measure %d\n", ctick, m->tick());
+                        continue;
+                        }
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+                  if (cr == 0) {
+                        printf("no cr at %d - measure %d\n", ctick, m->tick());
+                        continue;
+                        }
+                  Fraction f = Fraction::fromTicks(n.tick - ctick);
+                  f = makeGap(cr, f, 0);
+
+                  setRest(ctick, dtrack, f, false, 0);
+                  }
+            ctick = n.tick;
+            Segment* s = m->tick2segment(n.tick);
+            if (s == 0) {
+                  printf("no segment at %d - measure %d\n", n.tick, m->tick());
+                  continue;
+                  }
+            ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+            if (cr == 0) {
+                  printf("no cr at %d - measure %d\n", ctick, m->tick());
+                  continue;
+                  }
+            setNoteRest(cr, dtrack, n.pitch, d, 0, AUTO);
+            ctick += d.ticks();
+            }
+      foreach(SNote n, notes)
+            deleteItem(n.note);
       }
 

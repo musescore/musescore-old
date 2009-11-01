@@ -42,7 +42,7 @@ class Fraction {
       void set(int z, int n)     { _numerator = z; _denominator = n; }
       bool isZero() const        { return _numerator == 0;      }
       bool isValid() const       { return _denominator != 0;    }
-      void setTicks(int n);
+//      void setTicks(int n);
 
       int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
       static Fraction fromTicks(int v);
