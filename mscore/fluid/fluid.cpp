@@ -506,16 +506,19 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
       memset(fx_buf[0], 0, byte_size);
       memset(fx_buf[1], 0, byte_size);
 
-      if (activeVoices.isEmpty())
-            --silentBlocks;
-      else {
-            silentBlocks = SILENT_BLOCKS;
-            foreach (Voice* v, activeVoices)
-                  v->write(len, left_buf, right_buf, fx_buf[0], fx_buf[1]);
-            }
-      if (silentBlocks > 0) {
-            reverb->process(len, fx_buf[0], left_buf, right_buf);
-            chorus->process(len, fx_buf[1], left_buf, right_buf);
+      if (mutex.tryLock()) {
+            if (activeVoices.isEmpty())
+                  --silentBlocks;
+            else {
+                  silentBlocks = SILENT_BLOCKS;
+                  foreach (Voice* v, activeVoices)
+                        v->write(len, left_buf, right_buf, fx_buf[0], fx_buf[1]);
+                  }
+            if (silentBlocks > 0) {
+                  reverb->process(len, fx_buf[0], left_buf, right_buf);
+                  chorus->process(len, fx_buf[1], left_buf, right_buf);
+                  }
+            mutex.unlock();
             }
       for (unsigned i = 0; i < len; i++) {
             *lout = left_buf[i];
@@ -686,9 +689,13 @@ void Fluid::start_voice(Voice* voice)
 
 bool Fluid::loadSoundFont(const QString& s)
       {
+      mutex.lock();
+      system_reset();
       foreach(SFont* sf, sfonts)
             sfunload(sf->id(), true);
-      return sfload(s, true);
+      bool rv = sfload(s, true);
+      mutex.unlock();
+      return rv;
       }
 
 //---------------------------------------------------------

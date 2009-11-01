@@ -309,6 +309,7 @@ class Fluid : public Synth {
       float _masterTuning;                // usually 440.0
       double _tuning[128];                // the pitch of every key, in cents
 
+      QMutex mutex;
       void updatePatchList();
 
    protected:
