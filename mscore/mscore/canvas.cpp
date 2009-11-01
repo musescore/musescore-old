@@ -50,6 +50,7 @@
 #include "part.h"
 #include "editdrumset.h"
 #include "editstaff.h"
+#include "splitstaff.h"
 #include "repeatflag.h"
 #include "barline.h"
 #include "system.h"
@@ -302,6 +303,8 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
 
       a = popup->addAction(tr("Staff Properties..."));
       a->setData("staff-properties");
+      a = popup->addAction(tr("Split Staff..."));
+      a->setData("staff-split");
 
       a = popup->addSeparator();
       a->setText(tr("Measure"));
@@ -348,8 +351,13 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             mscore->editInPianoroll(staff);
             }
       else if (cmd == "staff-properties") {
-            EditStaff staffEdit(staff, this);
-            staffEdit.exec();
+            EditStaff editStaff(staff, this);
+            editStaff.exec();
+            }
+      else if (cmd == "staff-split") {
+            SplitStaff splitStaff(this);
+            if (splitStaff.exec())
+                  _score->splitStaff(staffIdx, splitStaff.getSplitPoint());
             }
       else
             obj->propertyAction(cmd);

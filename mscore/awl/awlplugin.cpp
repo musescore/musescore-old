@@ -3,7 +3,7 @@
 //  Audio Widget Library
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 by Werner Schweer and others
+//  Copyright (C) 2002-2009 by Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,8 @@
 #include "volslider.h"
 #include "mslider.h"
 #include "denomspinbox.h"
+#include "pitchedit.h"
+#include "pitchlabel.h"
 
 #include <QtCore/QtPlugin>
 #include <QtDesigner/QDesignerCustomWidgetInterface>
@@ -68,6 +70,14 @@ QWidget* DenominatorSpinBoxPlugin::createWidget(QWidget* parent)
       {
       return new Awl::DenominatorSpinBox(parent);
       }
+QWidget* PitchLabelPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::PitchLabel(parent);
+      }
+QWidget* PitchEditPlugin::createWidget(QWidget* parent)
+      {
+      return new Awl::PitchEdit(parent);
+      }
 
 //---------------------------------------------------------
 //   customWidgets
@@ -86,6 +96,8 @@ QList<QDesignerCustomWidgetInterface*> AwlPlugins::customWidgets() const
                << new MeterSliderPlugin
                << new ColorLabelPlugin
                << new DenominatorSpinBoxPlugin
+               << new PitchLabelPlugin
+               << new PitchEditPlugin
                ;
       return plugins;
 	}

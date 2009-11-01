@@ -84,7 +84,7 @@ QT4_WRAP_UI (ui_headers
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
-      select.ui synthcontrol.ui
+      select.ui synthcontrol.ui splitstaff.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -101,7 +101,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h scscore.h scnote.h sctext.h scmeasure.h scbytearray.h
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
-      pianoscene.h
+      pianoscene.h splitstaff.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -183,6 +183,7 @@ add_executable ( ${ExecutableName}
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
+      splitstaff.cpp
       ${AUDIO}
       )
 
@@ -221,7 +222,7 @@ if (MINGW)
              LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
           )
    endif(CMAKE_BUILD_TYPE MATCHES "Debug")
-   
+
    target_link_libraries(mscore
       fluid
       al

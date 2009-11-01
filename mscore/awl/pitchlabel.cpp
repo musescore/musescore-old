@@ -28,7 +28,8 @@ namespace Awl {
 //   PitchLabel
 //---------------------------------------------------------
 
-PitchLabel::PitchLabel()
+PitchLabel::PitchLabel(QWidget* parent)
+   : QLabel(parent)
       {
       _pitchMode = true;
       _value = -1;

@@ -99,6 +99,8 @@ QT4_WRAP_CPP (mocs2
       volslider.h
       mslider.h
       denomspinbox.h
+      pitchedit.h
+      pitchlabel.h
       )
 
 add_library (
@@ -117,6 +119,9 @@ add_library (
       volslider.cpp
       mslider.cpp
       denomspinbox.cpp
+      pitchedit.cpp
+      pitchlabel.cpp
+      utils.cpp
       )
 
 ##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"

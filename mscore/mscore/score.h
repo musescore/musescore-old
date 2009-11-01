@@ -855,6 +855,7 @@ class Score : public QObject {
       void selectElementDialog(Element* e);
       QList<Element*> buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
+      void splitStaff(int staffIdx, int splitPoint);
       };
 
 extern Score* gscore;
