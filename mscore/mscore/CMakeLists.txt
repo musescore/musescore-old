@@ -170,7 +170,7 @@ add_executable ( ${ExecutableName}
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       glissando.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      lilypond.cpp exportly.cpp repeatflag.cpp
+      lilypond.cpp exportly.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       box.cpp measurebase.cpp
       instrtemplate.cpp boxproperties.cpp

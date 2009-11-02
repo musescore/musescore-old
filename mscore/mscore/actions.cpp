@@ -30,1938 +30,1939 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "local-help",
-         QT_TR_NOOP("local help"),
+         QT_TRANSLATE_NOOP("action","local help"),
          Qt::Key_F1,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Local &Handbook..."),
-         QT_TR_NOOP("Show local Handbook")
+         QT_TRANSLATE_NOOP("action","Local &Handbook..."),
+         QT_TRANSLATE_NOOP("action","Show local Handbook")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-open",
-         QT_TR_NOOP("file open"),
+         QT_TRANSLATE_NOOP("action","file open"),
          QKeySequence::Open,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Open..."),
-         QT_TR_NOOP("Load Score from File"),
+         QT_TRANSLATE_NOOP("action","Open..."),
+         QT_TRANSLATE_NOOP("action","Load Score from File"),
          &fileOpenIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-save",
-         QT_TR_NOOP("file save"),
+         QT_TRANSLATE_NOOP("action","file save"),
          QKeySequence::Save,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save"),
-         QT_TR_NOOP("Save Score to File"),
+         QT_TRANSLATE_NOOP("action","Save"),
+         QT_TRANSLATE_NOOP("action","Save Score to File"),
          &fileSaveIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-save-as",
-         QT_TR_NOOP("file save as"),
+         QT_TRANSLATE_NOOP("action","file save as"),
          QKeySequence::SaveAs,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save As..."),
-         QT_TR_NOOP("Save Score to named File"),
+         QT_TRANSLATE_NOOP("action","Save As..."),
+         QT_TRANSLATE_NOOP("action","Save Score to named File"),
          &fileSaveIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-save-a-copy",
-         QT_TR_NOOP("file save a copy"),
+         QT_TRANSLATE_NOOP("action","file save a copy"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save a Copy..."),
-         QT_TR_NOOP("Save Score to named File, but keep current name")
+         QT_TRANSLATE_NOOP("action","Save a Copy..."),
+         QT_TRANSLATE_NOOP("action","Save Score to named File, but keep current name")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-reload",
-         QT_TR_NOOP("file reload"),
+         QT_TRANSLATE_NOOP("action","file reload"),
          0,                         // no shortcut, its an destructive non undoable operation
          Qt::WindowShortcut,
-         QT_TR_NOOP("Reload"),
-         QT_TR_NOOP("Reload Score from File")
+         QT_TRANSLATE_NOOP("action","Reload"),
+         QT_TRANSLATE_NOOP("action","Reload Score from File")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-close",
-         QT_TR_NOOP("file close"),
+         QT_TRANSLATE_NOOP("action","file close"),
          QKeySequence::Close,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Close"),
-         QT_TR_NOOP("Close Current Score"),
+         QT_TRANSLATE_NOOP("action","Close"),
+         QT_TRANSLATE_NOOP("action","Close Current Score"),
          &fileSaveIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-new",
-         QT_TR_NOOP("file new"),
+         QT_TRANSLATE_NOOP("action","file new"),
          Qt::CTRL+Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TR_NOOP("New..."),
-         QT_TR_NOOP("Create new score"),
+         QT_TRANSLATE_NOOP("action","New..."),
+         QT_TRANSLATE_NOOP("action","Create new score"),
          &fileNewIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "print",
-         QT_TR_NOOP("print"),
+         QT_TRANSLATE_NOOP("action","print"),
          Qt::CTRL+Qt::Key_P,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Print..."),
-         QT_TR_NOOP("Print Score"),
+         QT_TRANSLATE_NOOP("action","Print..."),
+         QT_TRANSLATE_NOOP("action","Print Score"),
          &printIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "undo",
-         QT_TR_NOOP("undo"),
+         QT_TRANSLATE_NOOP("action","undo"),
          QKeySequence::Undo,      // Qt::CTRL+Qt::Key_Z, // QKeySequence::Undo,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Undo"),
-         QT_TR_NOOP("undo last change"),
+         QT_TRANSLATE_NOOP("action","Undo"),
+         QT_TRANSLATE_NOOP("action","undo last change"),
          &undoIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "redo",
-         QT_TR_NOOP("redo"),
+         QT_TRANSLATE_NOOP("action","redo"),
          QKeySequence::Redo,      // Qt::CTRL+Qt::SHIFT+Qt::Key_Z,    // QKeySequence::Redo,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Redo"),
-         QT_TR_NOOP("redo last undo"),
+         QT_TRANSLATE_NOOP("action","Redo"),
+         QT_TRANSLATE_NOOP("action","redo last undo"),
          &redoIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "cut",
-         QT_TR_NOOP("cut"),
+         QT_TRANSLATE_NOOP("action","cut"),
          Qt::CTRL+Qt::Key_X,        // QKeySequence::Cut,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Cut"),
-         QT_TR_NOOP(""),
+         QT_TRANSLATE_NOOP("action","Cut"),
+         QT_TRANSLATE_NOOP("action",""),
          &cutIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "copy",
-         QT_TR_NOOP("copy"),
+         QT_TRANSLATE_NOOP("action","copy"),
          Qt::CTRL+Qt::Key_C,        // QKeySequence::Copy,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Copy"),
-         QT_TR_NOOP(""),
+         QT_TRANSLATE_NOOP("action","Copy"),
+         QT_TRANSLATE_NOOP("action",""),
          &copyIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "paste",
-         QT_TR_NOOP("paste"),
+         QT_TRANSLATE_NOOP("action","paste"),
          Qt::CTRL+Qt::Key_V,        //  QKeySequence::Paste,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("Paste"),
-         QT_TR_NOOP(""),
+         QT_TRANSLATE_NOOP("action","Paste"),
+         QT_TRANSLATE_NOOP("action",""),
          &pasteIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "instruments",
-         QT_TR_NOOP("show instruments dialog"),
+         QT_TRANSLATE_NOOP("action","show instruments dialog"),
          Qt::Key_I,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Instruments..."),
-         QT_TR_NOOP("Show Instruments Dialog")
+         QT_TRANSLATE_NOOP("action","Instruments..."),
+         QT_TRANSLATE_NOOP("action","Show Instruments Dialog")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "clefs",
-         QT_TR_NOOP("show clefs palette"),
+         QT_TRANSLATE_NOOP("action","show clefs palette"),
          Qt::Key_Y,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Clef..."),
-         QT_TR_NOOP("Show Clefs Palette"),
+         QT_TRANSLATE_NOOP("action","Clef..."),
+         QT_TRANSLATE_NOOP("action","Show Clefs Palette"),
          &clefIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "keys",
-         QT_TR_NOOP("show keys palette"),
+         QT_TRANSLATE_NOOP("action","show keys palette"),
          Qt::Key_K,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Key..."),
-         QT_TR_NOOP("Show Keys Palette"),
+         QT_TRANSLATE_NOOP("action","Key..."),
+         QT_TRANSLATE_NOOP("action","Show Keys Palette"),
          &sharpIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "symbols",
-         QT_TR_NOOP("show symbols palette"),
+         QT_TRANSLATE_NOOP("action","show symbols palette"),
          Qt::Key_Z,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Symbols..."),
-         QT_TR_NOOP("Show Symbols Palette")
+         QT_TRANSLATE_NOOP("action","Symbols..."),
+         QT_TRANSLATE_NOOP("action","Show Symbols Palette")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "times",
-         QT_TR_NOOP("show time palette"),
+         QT_TRANSLATE_NOOP("action","show time palette"),
          Qt::Key_T,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Time..."),
-         QT_TR_NOOP("Show Time Palette")
+         QT_TRANSLATE_NOOP("action","Time..."),
+         QT_TRANSLATE_NOOP("action","Show Time Palette")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "dynamics",
-         QT_TR_NOOP("show dynamics palette"),
+         QT_TRANSLATE_NOOP("action","show dynamics palette"),
          Qt::Key_L,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Dynamics..."),
-         QT_TR_NOOP("Show Dynamics Palette")
+         QT_TRANSLATE_NOOP("action","Dynamics..."),
+         QT_TRANSLATE_NOOP("action","Show Dynamics Palette")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-input",
-         QT_TR_NOOP("note input"),
+         QT_TRANSLATE_NOOP("action","note input"),
          Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Note Input"),
-         QT_TR_NOOP("toggle note input mode N"),
+         QT_TRANSLATE_NOOP("action","Note Input"),
+         QT_TRANSLATE_NOOP("action","toggle note input mode N"),
          &noteEntryIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-spell",
-         QT_TR_NOOP("pitch spell"),
+         QT_TRANSLATE_NOOP("action","pitch spell"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Pitch Spell"),
-         QT_TR_NOOP("Pitch Spell")
+         QT_TRANSLATE_NOOP("action","Pitch Spell"),
+         QT_TRANSLATE_NOOP("action","Pitch Spell")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval1",
-         QT_TR_NOOP("enter unison above"),
+         QT_TRANSLATE_NOOP("action","enter unison above"),
          Qt::ALT + Qt::Key_1,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Unison Above"),
-         QT_TR_NOOP("Enter unison above")
+         QT_TRANSLATE_NOOP("action","Unison Above"),
+         QT_TRANSLATE_NOOP("action","Enter unison above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval2",
-         QT_TR_NOOP("enter second above"),
+         QT_TRANSLATE_NOOP("action","enter second above"),
          Qt::ALT + Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Second Above"),
-         QT_TR_NOOP("Enter second above")
+         QT_TRANSLATE_NOOP("action","Second Above"),
+         QT_TRANSLATE_NOOP("action","Enter second above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval3",
-         QT_TR_NOOP("enter third above"),
+         QT_TRANSLATE_NOOP("action","enter third above"),
          Qt::ALT + Qt::Key_3,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Third Above"),
-         QT_TR_NOOP("Enter third above")
+         QT_TRANSLATE_NOOP("action","Third Above"),
+         QT_TRANSLATE_NOOP("action","Enter third above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval4",
-         QT_TR_NOOP("enter fourth above"),
+         QT_TRANSLATE_NOOP("action","enter fourth above"),
          Qt::ALT + Qt::Key_4,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Fourth Above"),
-         QT_TR_NOOP("Enter fourth above")
+         QT_TRANSLATE_NOOP("action","Fourth Above"),
+         QT_TRANSLATE_NOOP("action","Enter fourth above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval5",
-         QT_TR_NOOP("enter fifth above"),
+         QT_TRANSLATE_NOOP("action","enter fifth above"),
          Qt::ALT + Qt::Key_5,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Fifth Above"),
-         QT_TR_NOOP("Enter fifth above")
+         QT_TRANSLATE_NOOP("action","Fifth Above"),
+         QT_TRANSLATE_NOOP("action","Enter fifth above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval6",
-         QT_TR_NOOP("enter sixth above"),
+         QT_TRANSLATE_NOOP("action","enter sixth above"),
          Qt::ALT + Qt::Key_6,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Sixth Above"),
-         QT_TR_NOOP("Enter sixth above")
+         QT_TRANSLATE_NOOP("action","Sixth Above"),
+         QT_TRANSLATE_NOOP("action","Enter sixth above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval7",
-         QT_TR_NOOP("enter seventh above"),
+         QT_TRANSLATE_NOOP("action","enter seventh above"),
          Qt::ALT + Qt::Key_7,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Seventh Above"),
-         QT_TR_NOOP("Enter seventh above")
+         QT_TRANSLATE_NOOP("action","Seventh Above"),
+         QT_TRANSLATE_NOOP("action","Enter seventh above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval8",
-         QT_TR_NOOP("enter octave above"),
+         QT_TRANSLATE_NOOP("action","enter octave above"),
          Qt::ALT + Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Octave Above"),
-         QT_TR_NOOP("Enter octave above")
+         QT_TRANSLATE_NOOP("action","Octave Above"),
+         QT_TRANSLATE_NOOP("action","Enter octave above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval9",
-         QT_TR_NOOP("enter ninth above"),
+         QT_TRANSLATE_NOOP("action","enter ninth above"),
          Qt::ALT + Qt::Key_9,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Ninth Above"),
-         QT_TR_NOOP("Enter ninth above")
+         QT_TRANSLATE_NOOP("action","Ninth Above"),
+         QT_TRANSLATE_NOOP("action","Enter ninth above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-2",
-         QT_TR_NOOP("enter second below"),
+         QT_TRANSLATE_NOOP("action","enter second below"),
          Qt::SHIFT + Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Second Below"),
-         QT_TR_NOOP("Enter second below")
+         QT_TRANSLATE_NOOP("action","Second Below"),
+         QT_TRANSLATE_NOOP("action","Enter second below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-3",
-         QT_TR_NOOP("enter third below"),
+         QT_TRANSLATE_NOOP("action","enter third below"),
          Qt::SHIFT + Qt::Key_3,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Third Below"),
-         QT_TR_NOOP("Enter third below")
+         QT_TRANSLATE_NOOP("action","Third Below"),
+         QT_TRANSLATE_NOOP("action","Enter third below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-4",
-         QT_TR_NOOP("enter fourth below"),
+         QT_TRANSLATE_NOOP("action","enter fourth below"),
          Qt::SHIFT + Qt::Key_4,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Fourth Below"),
-         QT_TR_NOOP("Enter fourth below")
+         QT_TRANSLATE_NOOP("action","Fourth Below"),
+         QT_TRANSLATE_NOOP("action","Enter fourth below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-5",
-         QT_TR_NOOP("enter fifth below"),
+         QT_TRANSLATE_NOOP("action","enter fifth below"),
          Qt::SHIFT + Qt::Key_5,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Fifth Below"),
-         QT_TR_NOOP("Enter fifth below")
+         QT_TRANSLATE_NOOP("action","Fifth Below"),
+         QT_TRANSLATE_NOOP("action","Enter fifth below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-6",
-         QT_TR_NOOP("enter sixth below"),
+         QT_TRANSLATE_NOOP("action","enter sixth below"),
          Qt::SHIFT + Qt::Key_6,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Sixth Below"),
-         QT_TR_NOOP("Enter sixth below")
+         QT_TRANSLATE_NOOP("action","Sixth Below"),
+         QT_TRANSLATE_NOOP("action","Enter sixth below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-7",
-         QT_TR_NOOP("enter seventh below"),
+         QT_TRANSLATE_NOOP("action","enter seventh below"),
          Qt::SHIFT + Qt::Key_7,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Seventh Below"),
-         QT_TR_NOOP("Enter seventh below")
+         QT_TRANSLATE_NOOP("action","Seventh Below"),
+         QT_TRANSLATE_NOOP("action","Enter seventh below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-8",
-         QT_TR_NOOP("enter octave below"),
+         QT_TRANSLATE_NOOP("action","enter octave below"),
          Qt::SHIFT + Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Octave Below"),
-         QT_TR_NOOP("Enter octave below")
+         QT_TRANSLATE_NOOP("action","Octave Below"),
+         QT_TRANSLATE_NOOP("action","Enter octave below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval-9",
-         QT_TR_NOOP("enter ninth below"),
+         QT_TRANSLATE_NOOP("action","enter ninth below"),
          Qt::SHIFT + Qt::Key_9,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Ninth Below"),
-         QT_TR_NOOP("Enter ninth below")
+         QT_TRANSLATE_NOOP("action","Ninth Below"),
+         QT_TRANSLATE_NOOP("action","Enter ninth below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-a",
-         QT_TR_NOOP("enter note a"),
+         QT_TRANSLATE_NOOP("action","enter note a"),
          Qt::Key_A,
          Qt::WindowShortcut,
-         QT_TR_NOOP("A"),
-         QT_TR_NOOP("Enter Note A")
+         QT_TRANSLATE_NOOP("action","A"),
+         QT_TRANSLATE_NOOP("action","Enter Note A")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-b",
-         QT_TR_NOOP("enter note b"),
+         QT_TRANSLATE_NOOP("action","enter note b"),
          Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("B"),
-         QT_TR_NOOP("Enter Note B")
+         QT_TRANSLATE_NOOP("action","B"),
+         QT_TRANSLATE_NOOP("action","Enter Note B")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-c",
-         QT_TR_NOOP("enter note c"),
+         QT_TRANSLATE_NOOP("action","enter note c"),
          Qt::Key_C,
          Qt::WindowShortcut,
-         QT_TR_NOOP("C"),
-         QT_TR_NOOP("Enter Note C")
+         QT_TRANSLATE_NOOP("action","C"),
+         QT_TRANSLATE_NOOP("action","Enter Note C")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-d",
-         QT_TR_NOOP("enter note d"),
+         QT_TRANSLATE_NOOP("action","enter note d"),
          Qt::Key_D,
          Qt::WindowShortcut,
-         QT_TR_NOOP("D"),
-         QT_TR_NOOP("Enter Note D")
+         QT_TRANSLATE_NOOP("action","D"),
+         QT_TRANSLATE_NOOP("action","Enter Note D")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-e",
-         QT_TR_NOOP("enter note e"),
+         QT_TRANSLATE_NOOP("action","enter note e"),
          Qt::Key_E,
          Qt::WindowShortcut,
-         QT_TR_NOOP("E"),
-         QT_TR_NOOP("Enter Note E")
+         QT_TRANSLATE_NOOP("action","E"),
+         QT_TRANSLATE_NOOP("action","Enter Note E")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-f",
-         QT_TR_NOOP("enter note f"),
+         QT_TRANSLATE_NOOP("action","enter note f"),
          Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TR_NOOP("F"),
-         QT_TR_NOOP("Enter Note F")
+         QT_TRANSLATE_NOOP("action","F"),
+         QT_TRANSLATE_NOOP("action","Enter Note F")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-g",
-         QT_TR_NOOP("enter note g"),
+         QT_TRANSLATE_NOOP("action","enter note g"),
          Qt::Key_G,
          Qt::WindowShortcut,
-         QT_TR_NOOP("G"),
-         QT_TR_NOOP("Enter Note G")
+         QT_TRANSLATE_NOOP("action","G"),
+         QT_TRANSLATE_NOOP("action","Enter Note G")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-a",
-         QT_TR_NOOP("add a to chord"),
+         QT_TRANSLATE_NOOP("action","add a to chord"),
          Qt::SHIFT + Qt::Key_A,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add A"),
-         QT_TR_NOOP("Add note A to chord")
+         QT_TRANSLATE_NOOP("action","Add A"),
+         QT_TRANSLATE_NOOP("action","Add note A to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-b",
-         QT_TR_NOOP("add b to chord"),
+         QT_TRANSLATE_NOOP("action","add b to chord"),
          Qt::SHIFT + Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add B"),
-         QT_TR_NOOP("Add note B to chord")
+         QT_TRANSLATE_NOOP("action","Add B"),
+         QT_TRANSLATE_NOOP("action","Add note B to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-c",
-         QT_TR_NOOP("add c to chord"),
+         QT_TRANSLATE_NOOP("action","add c to chord"),
          Qt::SHIFT + Qt::Key_C,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add C"),
-         QT_TR_NOOP("Add note C to chord")
+         QT_TRANSLATE_NOOP("action","Add C"),
+         QT_TRANSLATE_NOOP("action","Add note C to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-d",
-         QT_TR_NOOP("add d to chord"),
+         QT_TRANSLATE_NOOP("action","add d to chord"),
          Qt::SHIFT + Qt::Key_D,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add D"),
-         QT_TR_NOOP("Add note D to chord")
+         QT_TRANSLATE_NOOP("action","Add D"),
+         QT_TRANSLATE_NOOP("action","Add note D to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-e",
-         QT_TR_NOOP("add e to chord"),
+         QT_TRANSLATE_NOOP("action","add e to chord"),
          Qt::SHIFT + Qt::Key_E,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add E"),
-         QT_TR_NOOP("Add note E to chord")
+         QT_TRANSLATE_NOOP("action","Add E"),
+         QT_TRANSLATE_NOOP("action","Add note E to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-f",
-         QT_TR_NOOP("add f to chord"),
+         QT_TRANSLATE_NOOP("action","add f to chord"),
          Qt::SHIFT + Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add F"),
-         QT_TR_NOOP("Add note F to chord")
+         QT_TRANSLATE_NOOP("action","Add F"),
+         QT_TRANSLATE_NOOP("action","Add note F to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-g",
-         QT_TR_NOOP("add g to chord"),
+         QT_TRANSLATE_NOOP("action","add g to chord"),
          Qt::SHIFT + Qt::Key_G,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add G"),
-         QT_TR_NOOP("Add note G to chord")
+         QT_TRANSLATE_NOOP("action","Add G"),
+         QT_TRANSLATE_NOOP("action","Add note G to chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest",
-         QT_TR_NOOP("enter rest"),
+         QT_TRANSLATE_NOOP("action","enter rest"),
          Qt::Key_Space,
          Qt::WindowShortcut,
-         QT_TR_NOOP("rest"),
-         QT_TR_NOOP("enter rest")
+         QT_TRANSLATE_NOOP("action","rest"),
+         QT_TRANSLATE_NOOP("action","enter rest"),
+         &quartrestIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-staccato",
-         QT_TR_NOOP("add staccato"),
+         QT_TRANSLATE_NOOP("action","add staccato"),
          Qt::SHIFT+Qt::Key_Period,
          Qt::WindowShortcut,
-         QT_TR_NOOP("staccato"),
-         QT_TR_NOOP("staccato")
+         QT_TRANSLATE_NOOP("action","staccato"),
+         QT_TRANSLATE_NOOP("action","staccato")
          ),
        Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-flat",
-         QT_TR_NOOP("flat"),
+         QT_TRANSLATE_NOOP("action","flat"),
          Qt::Key_Minus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("flat"),
-         QT_TR_NOOP("flat"),
+         QT_TRANSLATE_NOOP("action","flat"),
+         QT_TRANSLATE_NOOP("action","flat"),
          &flatIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-trill",
-         QT_TR_NOOP("add trill"),
+         QT_TRANSLATE_NOOP("action","add trill"),
 	   0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("trill"),
-         QT_TR_NOOP("trill")
+         QT_TRANSLATE_NOOP("action","trill"),
+         QT_TRANSLATE_NOOP("action","trill")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "stretch+",
-         QT_TR_NOOP("more stretch"),
+         QT_TRANSLATE_NOOP("action","more stretch"),
          Qt::SHIFT + Qt::Key_Plus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add More Stretch"),
-         QT_TR_NOOP("Add more stretch to selected measure")
+         QT_TRANSLATE_NOOP("action","Add More Stretch"),
+         QT_TRANSLATE_NOOP("action","Add more stretch to selected measure")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "stretch-",
-         QT_TR_NOOP("less stretch"),
+         QT_TRANSLATE_NOOP("action","less stretch"),
          Qt::SHIFT + Qt::Key_Minus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add Less Stretch"),
-         QT_TR_NOOP("Add less stretch to selected measure")
+         QT_TRANSLATE_NOOP("action","Add Less Stretch"),
+         QT_TRANSLATE_NOOP("action","Add less stretch to selected measure")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "reset-beammode",
-         QT_TR_NOOP("Reset Beam Mode"),
+         QT_TRANSLATE_NOOP("action","Reset Beam Mode"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Reset Beam Mode"),
-         QT_TR_NOOP("Reset Beam Mode of selected measures")
+         QT_TRANSLATE_NOOP("action","Reset Beam Mode"),
+         QT_TRANSLATE_NOOP("action","Reset Beam Mode of selected measures")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "flip",
-         QT_TR_NOOP("flip stem"),
+         QT_TRANSLATE_NOOP("action","flip stem"),
          Qt::Key_X,
          Qt::WindowShortcut,
-         QT_TR_NOOP("flip direction"),
-         QT_TR_NOOP("flip direction"),
+         QT_TRANSLATE_NOOP("action","flip direction"),
+         QT_TRANSLATE_NOOP("action","flip direction"),
          &flipIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-up",
-         QT_TR_NOOP("up"),
+         QT_TRANSLATE_NOOP("action","up"),
          Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("up"),
-         QT_TR_NOOP("up")
+         QT_TRANSLATE_NOOP("action","up"),
+         QT_TRANSLATE_NOOP("action","up")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-up-octave",
-         QT_TR_NOOP("up+ctrl"),
+         QT_TRANSLATE_NOOP("action","up+ctrl"),
          Qt::CTRL + Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("up+ctrl"),
-         QT_TR_NOOP("up+ctrl")
+         QT_TRANSLATE_NOOP("action","up+ctrl"),
+         QT_TRANSLATE_NOOP("action","up+ctrl")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "up-chord",
-         QT_TR_NOOP("up note in chord"),
+         QT_TRANSLATE_NOOP("action","up note in chord"),
          Qt::ALT+Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("up note in chord"),
-         QT_TR_NOOP("goto higher pitched note in chord")
+         QT_TRANSLATE_NOOP("action","up note in chord"),
+         QT_TRANSLATE_NOOP("action","goto higher pitched note in chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "top-chord",
-         QT_TR_NOOP("goto top note in chord"),
+         QT_TRANSLATE_NOOP("action","goto top note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("top note in chord"),
-         QT_TR_NOOP("goto top note in chord")
+         QT_TRANSLATE_NOOP("action","top note in chord"),
+         QT_TRANSLATE_NOOP("action","goto top note in chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "move-up",
-         QT_TR_NOOP("move up"),
+         QT_TRANSLATE_NOOP("action","move up"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("up+shift+ctrl"),
-         QT_TR_NOOP("up+shift+ctrl")
+         QT_TRANSLATE_NOOP("action","up+shift+ctrl"),
+         QT_TRANSLATE_NOOP("action","up+shift+ctrl")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-down",
-         QT_TR_NOOP("pitch down"),
+         QT_TRANSLATE_NOOP("action","pitch down"),
          Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("down"),
-         QT_TR_NOOP("down")
+         QT_TRANSLATE_NOOP("action","down"),
+         QT_TRANSLATE_NOOP("action","down")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-down-octave",
-         QT_TR_NOOP("pitch down octave"),
+         QT_TRANSLATE_NOOP("action","pitch down octave"),
          Qt::CTRL + Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("down+ctrl"),
-         QT_TR_NOOP("down+ctrl")
+         QT_TRANSLATE_NOOP("action","down+ctrl"),
+         QT_TRANSLATE_NOOP("action","down+ctrl")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "down-chord",
-         QT_TR_NOOP("down note in chord"),
+         QT_TRANSLATE_NOOP("action","down note in chord"),
          Qt::ALT+Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("down note in chord"),
-         QT_TR_NOOP("goto lower pitched note in chord")
+         QT_TRANSLATE_NOOP("action","down note in chord"),
+         QT_TRANSLATE_NOOP("action","goto lower pitched note in chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "bottom-chord",
-         QT_TR_NOOP("goto bottom note in chord"),
+         QT_TRANSLATE_NOOP("action","goto bottom note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("bottom note in chord"),
-         QT_TR_NOOP("goto bottom note in chord")
+         QT_TRANSLATE_NOOP("action","bottom note in chord"),
+         QT_TRANSLATE_NOOP("action","goto bottom note in chord")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "move-down",
-         QT_TR_NOOP("move down"),
+         QT_TRANSLATE_NOOP("action","move down"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("down+shift+ctrl"),
-         QT_TR_NOOP("down+shift+ctrl")
+         QT_TRANSLATE_NOOP("action","down+shift+ctrl"),
+         QT_TRANSLATE_NOOP("action","down+shift+ctrl")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "prev-chord",
-         QT_TR_NOOP("previous chord"),
+         QT_TRANSLATE_NOOP("action","previous chord"),
          Qt::Key_Left,
          Qt::WindowShortcut,
-         QT_TR_NOOP("left"),
-         QT_TR_NOOP("left")
+         QT_TRANSLATE_NOOP("action","left"),
+         QT_TRANSLATE_NOOP("action","left")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "prev-measure",
-         QT_TR_NOOP("previous measure"),
+         QT_TRANSLATE_NOOP("action","previous measure"),
          Qt::CTRL+Qt::Key_Left,
          Qt::WindowShortcut,
-         QT_TR_NOOP("left+ctrl"),
-         QT_TR_NOOP("left+ctrl")
+         QT_TRANSLATE_NOOP("action","left+ctrl"),
+         QT_TRANSLATE_NOOP("action","left+ctrl")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "next-chord",
-         QT_TR_NOOP("next chord"),
+         QT_TRANSLATE_NOOP("action","next chord"),
          Qt::Key_Right,
          Qt::WindowShortcut,
-         QT_TR_NOOP("right"),
-         QT_TR_NOOP("right")
+         QT_TRANSLATE_NOOP("action","right"),
+         QT_TRANSLATE_NOOP("action","right")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "next-measure",
-         QT_TR_NOOP("next measure"),
+         QT_TRANSLATE_NOOP("action","next measure"),
          Qt::CTRL+Qt::Key_Right,
          Qt::WindowShortcut,
-         QT_TR_NOOP("right+ctrl"),
-         QT_TR_NOOP("right+ctrl")
+         QT_TRANSLATE_NOOP("action","right+ctrl"),
+         QT_TRANSLATE_NOOP("action","right+ctrl")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-prev-chord",
-         QT_TR_NOOP("add previous chord to selection"),
+         QT_TRANSLATE_NOOP("action","add previous chord to selection"),
          Qt::SHIFT+Qt::Key_Left,
          Qt::WindowShortcut,
-         QT_TR_NOOP("left+shift"),
-         QT_TR_NOOP("left+shift")
+         QT_TRANSLATE_NOOP("action","left+shift"),
+         QT_TRANSLATE_NOOP("action","left+shift")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-prev-measure",
-         QT_TR_NOOP("select to beginning of measure"),
+         QT_TRANSLATE_NOOP("action","select to beginning of measure"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Left,
          Qt::WindowShortcut,
-         QT_TR_NOOP("left+ctrl"),
-         QT_TR_NOOP("left+ctrl")
+         QT_TRANSLATE_NOOP("action","left+ctrl"),
+         QT_TRANSLATE_NOOP("action","left+ctrl")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-next-chord",
-         QT_TR_NOOP("add next chord to selection"),
+         QT_TRANSLATE_NOOP("action","add next chord to selection"),
          Qt::SHIFT+Qt::Key_Right,
          Qt::WindowShortcut,
-         QT_TR_NOOP("right+shift"),
-         QT_TR_NOOP("right+shift")
+         QT_TRANSLATE_NOOP("action","right+shift"),
+         QT_TRANSLATE_NOOP("action","right+shift")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-next-measure",
-         QT_TR_NOOP("select to end of measure"),
+         QT_TRANSLATE_NOOP("action","select to end of measure"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Right,
          Qt::WindowShortcut,
-         QT_TR_NOOP("right+ctrl+shift"),
-         QT_TR_NOOP("right+ctrl+shift")
+         QT_TRANSLATE_NOOP("action","right+ctrl+shift"),
+         QT_TRANSLATE_NOOP("action","right+ctrl+shift")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-begin-line",
-         QT_TR_NOOP("select to beginning of line"),
+         QT_TRANSLATE_NOOP("action","select to beginning of line"),
          Qt::SHIFT+Qt::Key_Home,
          Qt::WindowShortcut,
-         QT_TR_NOOP("shift+home"),
-         QT_TR_NOOP("shift+home")
+         QT_TRANSLATE_NOOP("action","shift+home"),
+         QT_TRANSLATE_NOOP("action","shift+home")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-end-line",
-         QT_TR_NOOP("select to end of line"),
+         QT_TRANSLATE_NOOP("action","select to end of line"),
          Qt::SHIFT+Qt::Key_End,
          Qt::WindowShortcut,
-         QT_TR_NOOP("shift+end"),
-         QT_TR_NOOP("shift+end")
+         QT_TRANSLATE_NOOP("action","shift+end"),
+         QT_TRANSLATE_NOOP("action","shift+end")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-begin-score",
-         QT_TR_NOOP("select to beginning of score"),
+         QT_TRANSLATE_NOOP("action","select to beginning of score"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Home,
          Qt::WindowShortcut,
-         QT_TR_NOOP("ctrl+shift+home"),
-         QT_TR_NOOP("ctrl+shift+home")
+         QT_TRANSLATE_NOOP("action","ctrl+shift+home"),
+         QT_TRANSLATE_NOOP("action","ctrl+shift+home")
          ),
       Shortcut(
          STATE_NORMAL,
          "select-end-score",
-         QT_TR_NOOP("select to end of score"),
+         QT_TRANSLATE_NOOP("action","select to end of score"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_End,
          Qt::WindowShortcut,
-         QT_TR_NOOP("ctrl+shift+end"),
-         QT_TR_NOOP("ctrl+shift+end")
+         QT_TRANSLATE_NOOP("action","ctrl+shift+end"),
+         QT_TRANSLATE_NOOP("action","ctrl+shift+end")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-staff-above",
-         QT_TR_NOOP("add staff above to selection"),
+         QT_TRANSLATE_NOOP("action","add staff above to selection"),
          Qt::SHIFT+Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TR_NOOP("add staff above to selection"),
-         QT_TR_NOOP("add staff above to selection")
+         QT_TRANSLATE_NOOP("action","add staff above to selection"),
+         QT_TRANSLATE_NOOP("action","add staff above to selection")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-staff-below",
-         QT_TR_NOOP("add staff below to selection"),
+         QT_TRANSLATE_NOOP("action","add staff below to selection"),
          Qt::SHIFT+Qt::Key_Down,
          Qt::WindowShortcut,
-         QT_TR_NOOP("add staff below to selection"),
-         QT_TR_NOOP("add staff below to selection")
+         QT_TRANSLATE_NOOP("action","add staff below to selection"),
+         QT_TRANSLATE_NOOP("action","add staff below to selection")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-prev",
-         QT_TR_NOOP("page-prev"),
+         QT_TRANSLATE_NOOP("action","page-prev"),
          Qt::Key_PageUp,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-next",
-         QT_TR_NOOP("page-next"),
+         QT_TRANSLATE_NOOP("action","page-next"),
          Qt::Key_PageDown,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-top",
-         QT_TR_NOOP("page-top"),
+         QT_TRANSLATE_NOOP("action","page-top"),
          Qt::Key_Home,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-end",
-         QT_TR_NOOP("page-end"),
+         QT_TRANSLATE_NOOP("action","page-end"),
          Qt::Key_End,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-slur",
-         QT_TR_NOOP("add slur"),
+         QT_TRANSLATE_NOOP("action","add slur"),
          Qt::Key_S,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-hairpin",
-         QT_TR_NOOP("crescendo"),
+         QT_TRANSLATE_NOOP("action","crescendo"),
          Qt::Key_H,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-hairpin-reverse",
-         QT_TR_NOOP("decrescendo"),
+         QT_TRANSLATE_NOOP("action","decrescendo"),
          Qt::SHIFT+Qt::Key_H,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH,
          "escape",
-         QT_TR_NOOP("ESCAPE"),
+         QT_TRANSLATE_NOOP("action","ESCAPE"),
          Qt::Key_Escape,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "delete",
-         QT_TR_NOOP("delete"),
+         QT_TRANSLATE_NOOP("action","delete"),
          Qt::Key_Delete,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL,
          "delete-measures",
-         QT_TR_NOOP("delete selected measures"),
+         QT_TRANSLATE_NOOP("action","delete selected measures"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Delete Selected Measures"),
-         QT_TR_NOOP("Delete Selected Measures")
+         QT_TRANSLATE_NOOP("action","Delete Selected Measures"),
+         QT_TRANSLATE_NOOP("action","Delete Selected Measures")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-measure",
-         QT_TR_NOOP("append measure"),
+         QT_TRANSLATE_NOOP("action","append measure"),
          Qt::CTRL+Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append Measure")
+         QT_TRANSLATE_NOOP("action","Append Measure")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-measures",
-         QT_TR_NOOP("append measures"),
+         QT_TRANSLATE_NOOP("action","append measures"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append Measures...")
+         QT_TRANSLATE_NOOP("action","Append Measures...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-measure",
-         QT_TR_NOOP("insert measure"),
+         QT_TRANSLATE_NOOP("action","insert measure"),
          Qt::Key_Insert,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert Measure")
+         QT_TRANSLATE_NOOP("action","Insert Measure")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-measures",
-         QT_TR_NOOP("insert measures"),
+         QT_TRANSLATE_NOOP("action","insert measures"),
          Qt::CTRL+Qt::Key_Insert,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert Measures...")
+         QT_TRANSLATE_NOOP("action","Insert Measures...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-hbox",
-         QT_TR_NOOP("Insert Horizontal Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Horizontal Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert Horizontal Frame")
+         QT_TRANSLATE_NOOP("action","Insert Horizontal Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-vbox",
-         QT_TR_NOOP("Insert Vertical Frame"),
+         QT_TRANSLATE_NOOP("action","Insert Vertical Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert Vertical Frame")
+         QT_TRANSLATE_NOOP("action","Insert Vertical Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-hbox",
-         QT_TR_NOOP("Append Horizontal Frame"),
+         QT_TRANSLATE_NOOP("action","Append Horizontal Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append Horizontal Frame")
+         QT_TRANSLATE_NOOP("action","Append Horizontal Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-vbox",
-         QT_TR_NOOP("Append Vertical Frame"),
+         QT_TRANSLATE_NOOP("action","Append Vertical Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append Vertical Frame")
+         QT_TRANSLATE_NOOP("action","Append Vertical Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "duplet",
-         QT_TR_NOOP("Duplet"),
+         QT_TRANSLATE_NOOP("action","Duplet"),
          Qt::CTRL+Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Duplet")
+         QT_TRANSLATE_NOOP("action","Duplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "triplet",
-         QT_TR_NOOP("Triplet"),
+         QT_TRANSLATE_NOOP("action","Triplet"),
          Qt::CTRL+Qt::Key_3,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Triplet")
+         QT_TRANSLATE_NOOP("action","Triplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "quadruplet",
-         QT_TR_NOOP("Quadruplet"),
+         QT_TRANSLATE_NOOP("action","Quadruplet"),
          Qt::CTRL+Qt::Key_4,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Quadruplet")
+         QT_TRANSLATE_NOOP("action","Quadruplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "quintuplet",
-         QT_TR_NOOP("Quintuplet"),
+         QT_TRANSLATE_NOOP("action","Quintuplet"),
          Qt::CTRL+Qt::Key_5,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Quintuplet")
+         QT_TRANSLATE_NOOP("action","Quintuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "sextuplet",
-         QT_TR_NOOP("Sextuplet"),
+         QT_TRANSLATE_NOOP("action","Sextuplet"),
          Qt::CTRL+Qt::Key_6,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Sextuplet")
+         QT_TRANSLATE_NOOP("action","Sextuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "septuplet",
-         QT_TR_NOOP("Septuplet"),
+         QT_TRANSLATE_NOOP("action","Septuplet"),
          Qt::CTRL+Qt::Key_7,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Septuplet")
+         QT_TRANSLATE_NOOP("action","Septuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "octuplet",
-         QT_TR_NOOP("Octuplet"),
+         QT_TRANSLATE_NOOP("action","Octuplet"),
          Qt::CTRL+Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Octuplet")
+         QT_TRANSLATE_NOOP("action","Octuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "nonuplet",
-         QT_TR_NOOP("Nonuplet"),
+         QT_TRANSLATE_NOOP("action","Nonuplet"),
          Qt::CTRL+Qt::Key_9,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Nonuplet")
+         QT_TRANSLATE_NOOP("action","Nonuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "tuplet-dialog",
-         QT_TR_NOOP("Other Tuplets"),
+         QT_TRANSLATE_NOOP("action","Other Tuplets"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Other...")
+         QT_TRANSLATE_NOOP("action","Other...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-longa",
-         QT_TR_NOOP("note longa"),
+         QT_TRANSLATE_NOOP("action","note longa"),
          Qt::Key_9,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Longa"),
-         QT_TR_NOOP("Longa"),
+         QT_TRANSLATE_NOOP("action","Longa"),
+         QT_TRANSLATE_NOOP("action","Longa"),
          &longaUpIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-breve",
-         QT_TR_NOOP("note breve"),
+         QT_TRANSLATE_NOOP("action","note breve"),
          Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Double whole note (breve)"),
-         QT_TR_NOOP("Double whole note (breve)"),
+         QT_TRANSLATE_NOOP("action","Double whole note (breve)"),
+         QT_TRANSLATE_NOOP("action","Double whole note (breve)"),
          &brevisIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-1",
-         QT_TR_NOOP("pad note 1/1"),
+         QT_TRANSLATE_NOOP("action","pad note 1/1"),
          Qt::Key_7,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Whole note (semibreve)"),
-         QT_TR_NOOP("Whole note (semibreve)"),
+         QT_TRANSLATE_NOOP("action","Whole note (semibreve)"),
+         QT_TRANSLATE_NOOP("action","Whole note (semibreve)"),
          &noteIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-2",
-         QT_TR_NOOP("pad note 1/2"),
+         QT_TRANSLATE_NOOP("action","pad note 1/2"),
          Qt::Key_6,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Half note (minim)"),
-         QT_TR_NOOP("Half note (minim)"),
+         QT_TRANSLATE_NOOP("action","Half note (minim)"),
+         QT_TRANSLATE_NOOP("action","Half note (minim)"),
          &note2Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-4",
-         QT_TR_NOOP("pad note 1/4"),
+         QT_TRANSLATE_NOOP("action","pad note 1/4"),
          Qt::Key_5,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Quarter note (crochet)"),
-         QT_TR_NOOP("Quarter note (crochet)"),
+         QT_TRANSLATE_NOOP("action","Quarter note (crochet)"),
+         QT_TRANSLATE_NOOP("action","Quarter note (crochet)"),
          &note4Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-8",
-         QT_TR_NOOP("pad note 1/8"),
+         QT_TRANSLATE_NOOP("action","pad note 1/8"),
          Qt::Key_4,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Eighth note (quaver)"),
-         QT_TR_NOOP("Eighth note (quaver)"),
+         QT_TRANSLATE_NOOP("action","Eighth note (quaver)"),
+         QT_TRANSLATE_NOOP("action","Eighth note (quaver)"),
          &note8Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-16",
-         QT_TR_NOOP("pad note 1/16"),
+         QT_TRANSLATE_NOOP("action","pad note 1/16"),
          Qt::Key_3,
          Qt::WindowShortcut,
-         QT_TR_NOOP("16th note (semiquaver)"),
-         QT_TR_NOOP("16th note (semiquaver)"),
+         QT_TRANSLATE_NOOP("action","16th note (semiquaver)"),
+         QT_TRANSLATE_NOOP("action","16th note (semiquaver)"),
          &note16Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-32",
-         QT_TR_NOOP("pad note 1/32"),
+         QT_TRANSLATE_NOOP("action","pad note 1/32"),
          Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("32nd note (demi-semiquaver)"),
-         QT_TR_NOOP("32nd note (demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
          &note32Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-64",
-         QT_TR_NOOP("pad note 1/64"),
+         QT_TRANSLATE_NOOP("action","pad note 1/64"),
          Qt::Key_1,
          Qt::WindowShortcut,
-         QT_TR_NOOP("64th note (semi-demi-semiquaver)"),
-         QT_TR_NOOP("64th note (semi-demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
          &note64Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dot",
-         QT_TR_NOOP("pad dot"),
+         QT_TRANSLATE_NOOP("action","pad dot"),
          Qt::Key_Period,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Dot"),
-         QT_TR_NOOP("Dot"),
+         QT_TRANSLATE_NOOP("action","Dot"),
+         QT_TRANSLATE_NOOP("action","Dot"),
          &dotIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dotdot",
-         QT_TR_NOOP("pad double dot"),
+         QT_TRANSLATE_NOOP("action","pad double dot"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Double dot"),
-         QT_TR_NOOP("Double dot"),
+         QT_TRANSLATE_NOOP("action","Double dot"),
+         QT_TRANSLATE_NOOP("action","Double dot"),
          &dotdotIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "tie",
-         QT_TR_NOOP("tie"),
+         QT_TRANSLATE_NOOP("action","tie"),
          Qt::Key_Plus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("tie"),
-         QT_TR_NOOP("tie"),
+         QT_TRANSLATE_NOOP("action","tie"),
+         QT_TRANSLATE_NOOP("action","tie"),
          &plusIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-rest",
-         QT_TR_NOOP("pad rest"),
+         QT_TRANSLATE_NOOP("action","pad rest"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("rest"),
-         QT_TR_NOOP("rest"),
+         QT_TRANSLATE_NOOP("action","rest"),
+         QT_TRANSLATE_NOOP("action","rest"),
          &quartrestIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-sharp2",
-         QT_TR_NOOP("double sharp"),
+         QT_TRANSLATE_NOOP("action","double sharp"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("double sharp"),
-         QT_TR_NOOP("double sharp"),
+         QT_TRANSLATE_NOOP("action","double sharp"),
+         QT_TRANSLATE_NOOP("action","double sharp"),
          &sharpsharpIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-sharp",
-         QT_TR_NOOP("sharp"),
+         QT_TRANSLATE_NOOP("action","sharp"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("sharp"),
-         QT_TR_NOOP("sharp"),
+         QT_TRANSLATE_NOOP("action","sharp"),
+         QT_TRANSLATE_NOOP("action","sharp"),
          &sharpIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-nat",
-         QT_TR_NOOP("natural"),
+         QT_TRANSLATE_NOOP("action","natural"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("natural"),
-         QT_TR_NOOP("natural"),
+         QT_TRANSLATE_NOOP("action","natural"),
+         QT_TRANSLATE_NOOP("action","natural"),
          &naturalIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-flat2",
-         QT_TR_NOOP("double flat"),
+         QT_TRANSLATE_NOOP("action","double flat"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("double flat"),
-         QT_TR_NOOP("double flat"),
+         QT_TRANSLATE_NOOP("action","double flat"),
+         QT_TRANSLATE_NOOP("action","double flat"),
          &flatflatIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-acciaccatura",
-         QT_TR_NOOP("acciaccatura"),
+         QT_TRANSLATE_NOOP("action","acciaccatura"),
          Qt::Key_NumberSign,
          Qt::WindowShortcut,
-         QT_TR_NOOP("acciaccatura"),
-         QT_TR_NOOP("acciaccatura"),
+         QT_TRANSLATE_NOOP("action","acciaccatura"),
+         QT_TRANSLATE_NOOP("action","acciaccatura"),
          &acciaccaturaIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-appoggiatura",
-         QT_TR_NOOP("appoggiatura"),
+         QT_TRANSLATE_NOOP("action","appoggiatura"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("appoggiatura"),
-         QT_TR_NOOP("appoggiatura"),
+         QT_TRANSLATE_NOOP("action","appoggiatura"),
+         QT_TRANSLATE_NOOP("action","appoggiatura"),
          &appoggiaturaIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
 	 /* no stroke: 4th*/
         "pad-grace4",
-        QT_TR_NOOP("grace-4"),
+        QT_TRANSLATE_NOOP("action","grace-4"),
         0,
         Qt::WindowShortcut,
-        QT_TR_NOOP("grace-4"),
-        QT_TR_NOOP("grace-4"),
+        QT_TRANSLATE_NOOP("action","grace-4"),
+        QT_TRANSLATE_NOOP("action","grace-4"),
         &grace4Icon
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
       /* no stroke: 16th*/
         "pad-grace16",
-        QT_TR_NOOP("grace-16"),
+        QT_TRANSLATE_NOOP("action","grace-16"),
         0,
         Qt::WindowShortcut,
-        QT_TR_NOOP("grace-16"),
-        QT_TR_NOOP("grace-16"),
+        QT_TRANSLATE_NOOP("action","grace-16"),
+        QT_TRANSLATE_NOOP("action","grace-16"),
         &grace16Icon
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
       /* no stroke: 32th*/
         "pad-grace32",
-        QT_TR_NOOP("grace-32"),
+        QT_TRANSLATE_NOOP("action","grace-32"),
         0,
         Qt::WindowShortcut,
-        QT_TR_NOOP("grace-32"),
-        QT_TR_NOOP("grace-32"),
+        QT_TRANSLATE_NOOP("action","grace-32"),
+        QT_TRANSLATE_NOOP("action","grace-32"),
         &grace32Icon
         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-1",
-         QT_TR_NOOP("voice 1"),
+         QT_TRANSLATE_NOOP("action","voice 1"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_1),
          Qt::WindowShortcut,
-         QT_TR_NOOP("voice 1"),
-         QT_TR_NOOP("voice 1"),
+         QT_TRANSLATE_NOOP("action","voice 1"),
+         QT_TRANSLATE_NOOP("action","voice 1"),
          &voiceIcons[0]
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-2",
-         QT_TR_NOOP("voice 2"),
+         QT_TRANSLATE_NOOP("action","voice 2"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_2),
          Qt::WindowShortcut,
-         QT_TR_NOOP("voice 2"),
-         QT_TR_NOOP("voice 2"),
+         QT_TRANSLATE_NOOP("action","voice 2"),
+         QT_TRANSLATE_NOOP("action","voice 2"),
          &voiceIcons[1]
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-3",
-         QT_TR_NOOP("voice 3"),
+         QT_TRANSLATE_NOOP("action","voice 3"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_3),
          Qt::WindowShortcut,
-         QT_TR_NOOP("voice 3"),
-         QT_TR_NOOP("voice 3"),
+         QT_TRANSLATE_NOOP("action","voice 3"),
+         QT_TRANSLATE_NOOP("action","voice 3"),
          &voiceIcons[2]
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-4",
-         QT_TR_NOOP("voice 4"),
+         QT_TRANSLATE_NOOP("action","voice 4"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_4),
          Qt::WindowShortcut,
-         QT_TR_NOOP("voice 4"),
-         QT_TR_NOOP("voice 4"),
+         QT_TRANSLATE_NOOP("action","voice 4"),
+         QT_TRANSLATE_NOOP("action","voice 4"),
          &voiceIcons[3]
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "midi-on",
-         QT_TR_NOOP("midi input in"),
+         QT_TRANSLATE_NOOP("action","midi input in"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Enable MIDI Input"),
-         QT_TR_NOOP("Enable MIDI Input"),
+         QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
+         QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
          &midiinIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "sound-on",
-         QT_TR_NOOP("editing sound on"),
+         QT_TRANSLATE_NOOP("action","editing sound on"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Enable sound while editing"),
-         QT_TR_NOOP("Enable sound while editing"),
+         QT_TRANSLATE_NOOP("action","Enable sound while editing"),
+         QT_TRANSLATE_NOOP("action","Enable sound while editing"),
          &speakerIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "beam-start",
-         QT_TR_NOOP("beam start"),
+         QT_TRANSLATE_NOOP("action","beam start"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("beam start"),
-         QT_TR_NOOP("beam start"),
+         QT_TRANSLATE_NOOP("action","beam start"),
+         QT_TRANSLATE_NOOP("action","beam start"),
          &sbeamIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "beam-mid",
-         QT_TR_NOOP("beam mid"),
+         QT_TRANSLATE_NOOP("action","beam mid"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("beam mid"),
-         QT_TR_NOOP("beam mid"),
+         QT_TRANSLATE_NOOP("action","beam mid"),
+         QT_TRANSLATE_NOOP("action","beam mid"),
          &mbeamIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "no-beam",
-         QT_TR_NOOP("no beam"),
+         QT_TRANSLATE_NOOP("action","no beam"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("no beam"),
-         QT_TR_NOOP("no beam"),
+         QT_TRANSLATE_NOOP("action","no beam"),
+         QT_TRANSLATE_NOOP("action","no beam"),
          &nbeamIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "beam32",
-         QT_TR_NOOP("beam 32"),
+         QT_TRANSLATE_NOOP("action","beam 32"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("beam 32"),
-         QT_TR_NOOP("beam 32"),
+         QT_TRANSLATE_NOOP("action","beam 32"),
+         QT_TRANSLATE_NOOP("action","beam 32"),
          &beam32Icon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "auto-beam",
-         QT_TR_NOOP("auto beam"),
+         QT_TRANSLATE_NOOP("action","auto beam"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("auto beam"),
-         QT_TR_NOOP("auto beam"),
+         QT_TRANSLATE_NOOP("action","auto beam"),
+         QT_TRANSLATE_NOOP("action","auto beam"),
          &abeamIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
-         QT_TR_NOOP("Palette"),
+         QT_TRANSLATE_NOOP("action","Palette"),
          Qt::Key_F9,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("Palette"),
-         QT_TR_NOOP("Palette")
+         QT_TRANSLATE_NOOP("action","Palette"),
+         QT_TRANSLATE_NOOP("action","Palette")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-playpanel",
-         QT_TR_NOOP("Play Panel"),
+         QT_TRANSLATE_NOOP("action","Play Panel"),
          Qt::Key_F11,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("Play Panel"),
-         QT_TR_NOOP("Play Panel")
+         QT_TRANSLATE_NOOP("action","Play Panel"),
+         QT_TRANSLATE_NOOP("action","Play Panel")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-navigator",
-         QT_TR_NOOP("Navigator"),
+         QT_TRANSLATE_NOOP("action","Navigator"),
          Qt::Key_F12,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("Navigator"),
-         QT_TR_NOOP("Navigator")
+         QT_TRANSLATE_NOOP("action","Navigator"),
+         QT_TRANSLATE_NOOP("action","Navigator")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-mixer",
-         QT_TR_NOOP("Mixer"),
+         QT_TRANSLATE_NOOP("action","Mixer"),
          Qt::Key_F10,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("Mixer"),
-         QT_TR_NOOP("Mixer")
+         QT_TRANSLATE_NOOP("action","Mixer"),
+         QT_TRANSLATE_NOOP("action","Mixer")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-transport",
-         QT_TR_NOOP("Transport Toolbar"),
+         QT_TRANSLATE_NOOP("action","Transport Toolbar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Transport"),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action","Transport"),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-noteinput",
-         QT_TR_NOOP("Note Input Toolbar"),
+         QT_TRANSLATE_NOOP("action","Note Input Toolbar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Note Input"),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action","Note Input"),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-statusbar",
-         QT_TR_NOOP("Status Bar"),
+         QT_TRANSLATE_NOOP("action","Status Bar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Status Bar"),
-         QT_TR_NOOP("Status Bar")
+         QT_TRANSLATE_NOOP("action","Status Bar"),
+         QT_TRANSLATE_NOOP("action","Status Bar")
          ),
 
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "quit",
-         QT_TR_NOOP("Quit"),
+         QT_TRANSLATE_NOOP("action","Quit"),
          Qt::CTRL + Qt::Key_Q,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Quit"),
-         QT_TR_NOOP("Quit"),
+         QT_TRANSLATE_NOOP("action","Quit"),
+         QT_TRANSLATE_NOOP("action","Quit"),
          &exitIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "mag",
-         QT_TR_NOOP("Mag"),
+         QT_TRANSLATE_NOOP("action","Mag"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Mag"),
-         QT_TR_NOOP("Zoom Canvas"),
+         QT_TRANSLATE_NOOP("action","Mag"),
+         QT_TRANSLATE_NOOP("action","Zoom Canvas"),
          &viewmagIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "lyrics",
-         QT_TR_NOOP("Lyrics"),
+         QT_TRANSLATE_NOOP("action","Lyrics"),
          Qt::CTRL + Qt::Key_L,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Lyrics"),
-         QT_TR_NOOP("Lyrics")
+         QT_TRANSLATE_NOOP("action","Lyrics"),
+         QT_TRANSLATE_NOOP("action","Lyrics")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "fingering",
-         QT_TR_NOOP("Fingering Palette"),
+         QT_TRANSLATE_NOOP("action","Fingering Palette"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Fingering..."),
-         QT_TR_NOOP("Fingering")
+         QT_TRANSLATE_NOOP("action","Fingering..."),
+         QT_TRANSLATE_NOOP("action","Fingering")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "tempo",
-         QT_TR_NOOP("Tempo Palette"),
+         QT_TRANSLATE_NOOP("action","Tempo Palette"),
          Qt::CTRL+Qt::ALT + Qt::Key_T,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Tempo..."),
-         QT_TR_NOOP("Tempo")
+         QT_TRANSLATE_NOOP("action","Tempo..."),
+         QT_TRANSLATE_NOOP("action","Tempo")
          ),
 #if 0
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "metronome",
-         QT_TR_NOOP("Metronome"),
+         QT_TRANSLATE_NOOP("action","Metronome"),
          Qt::CTRL+Qt::ALT + Qt::Key_M,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Metronome"),
-         QT_TR_NOOP("Metronome")
+         QT_TRANSLATE_NOOP("action","Metronome"),
+         QT_TRANSLATE_NOOP("action","Metronome")
          ),
 #endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "system-text",
-         QT_TR_NOOP("Add System Text"),
+         QT_TRANSLATE_NOOP("action","Add System Text"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_T,
          Qt::WindowShortcut,
-         QT_TR_NOOP("System Text"),
-         QT_TR_NOOP("Add System Text")
+         QT_TRANSLATE_NOOP("action","System Text"),
+         QT_TRANSLATE_NOOP("action","Add System Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "staff-text",
-         QT_TR_NOOP("Add Staff Text"),
+         QT_TRANSLATE_NOOP("action","Add Staff Text"),
          Qt::CTRL + Qt::Key_T,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Staff Text"),
-         QT_TR_NOOP("Add Staff Text")
+         QT_TRANSLATE_NOOP("action","Staff Text"),
+         QT_TRANSLATE_NOOP("action","Add Staff Text")
          ),
       Shortcut(
          STATE_NORMAL,
          "frame-text",
-         QT_TR_NOOP("Add Text"),
+         QT_TRANSLATE_NOOP("action","Add Text"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Frame Text"),
-         QT_TR_NOOP("Add Text")
+         QT_TRANSLATE_NOOP("action","Frame Text"),
+         QT_TRANSLATE_NOOP("action","Add Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "title-text",
-         QT_TR_NOOP("Add Title"),
+         QT_TRANSLATE_NOOP("action","Add Title"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Title"),
-         QT_TR_NOOP("Add Title Text")
+         QT_TRANSLATE_NOOP("action","Title"),
+         QT_TRANSLATE_NOOP("action","Add Title Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "subtitle-text",
-         QT_TR_NOOP("Add Subtitle"),
+         QT_TRANSLATE_NOOP("action","Add Subtitle"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Subtitle"),
-         QT_TR_NOOP("Add Subtitle Text")
+         QT_TRANSLATE_NOOP("action","Subtitle"),
+         QT_TRANSLATE_NOOP("action","Add Subtitle Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "composer-text",
-         QT_TR_NOOP("Add Composer"),
+         QT_TRANSLATE_NOOP("action","Add Composer"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Composer"),
-         QT_TR_NOOP("Add Composer Text")
+         QT_TRANSLATE_NOOP("action","Composer"),
+         QT_TRANSLATE_NOOP("action","Add Composer Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "poet-text",
-         QT_TR_NOOP("Add Poet"),
+         QT_TRANSLATE_NOOP("action","Add Poet"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Poet"),
-         QT_TR_NOOP("Add Poet Text")
+         QT_TRANSLATE_NOOP("action","Poet"),
+         QT_TRANSLATE_NOOP("action","Add Poet Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "copyright-text",
-         QT_TR_NOOP("Add Copyright"),
+         QT_TRANSLATE_NOOP("action","Add Copyright"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Copyright"),
-         QT_TR_NOOP("Add Copyright Text")
+         QT_TRANSLATE_NOOP("action","Copyright"),
+         QT_TRANSLATE_NOOP("action","Add Copyright Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-text",
-         QT_TR_NOOP("Add Chord Name"),
+         QT_TRANSLATE_NOOP("action","Add Chord Name"),
          Qt::CTRL + Qt::Key_K,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Chord Name"),
-         QT_TR_NOOP("Add Chord Text")
+         QT_TRANSLATE_NOOP("action","Chord Name"),
+         QT_TRANSLATE_NOOP("action","Add Chord Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "harmony-properties",
-         QT_TR_NOOP("show harmony properties for chord"),
+         QT_TRANSLATE_NOOP("action","show harmony properties for chord"),
          Qt::SHIFT+Qt::Key_K,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Harmony Properties"),
-         QT_TR_NOOP("Harmony Properties")
+         QT_TRANSLATE_NOOP("action","Harmony Properties"),
+         QT_TRANSLATE_NOOP("action","Harmony Properties")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rehearsalmark-text",
-         QT_TR_NOOP("Add Rehearsal Mark"),
+         QT_TRANSLATE_NOOP("action","Add Rehearsal Mark"),
          Qt::CTRL + Qt::Key_M,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Rehearsal Mark"),
-         QT_TR_NOOP("Add Rehearsal Mark")
+         QT_TRANSLATE_NOOP("action","Rehearsal Mark"),
+         QT_TRANSLATE_NOOP("action","Add Rehearsal Mark")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
-         QT_TR_NOOP("player play"),
+         QT_TRANSLATE_NOOP("action","player play"),
          Qt::CTRL + Qt::Key_Space,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Play"),
-         QT_TR_NOOP("Start or stop playback"),
+         QT_TRANSLATE_NOOP("action","Play"),
+         QT_TRANSLATE_NOOP("action","Start or stop playback"),
          &playIcon
          ),
       Shortcut(
          STATE_PLAY,
          "play-prev-chord",
-         QT_TR_NOOP("previous chord"),
+         QT_TRANSLATE_NOOP("action","previous chord"),
          Qt::Key_Left,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("left chord"),
-         QT_TR_NOOP("left chord")
+         QT_TRANSLATE_NOOP("action","left chord"),
+         QT_TRANSLATE_NOOP("action","left chord")
          ),
       Shortcut(
          STATE_PLAY,
          "play-prev-measure",
-         QT_TR_NOOP("previous measure"),
+         QT_TRANSLATE_NOOP("action","previous measure"),
          Qt::CTRL+Qt::Key_Left,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("previous measure"),
-         QT_TR_NOOP("prev measure")
+         QT_TRANSLATE_NOOP("action","previous measure"),
+         QT_TRANSLATE_NOOP("action","prev measure")
          ),
       Shortcut(
          STATE_PLAY,
          "play-next-chord",
-         QT_TR_NOOP("next chord"),
+         QT_TRANSLATE_NOOP("action","next chord"),
          Qt::Key_Right,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("next chord"),
-         QT_TR_NOOP("next chord")
+         QT_TRANSLATE_NOOP("action","next chord"),
+         QT_TRANSLATE_NOOP("action","next chord")
          ),
       Shortcut(
          STATE_PLAY,
          "play-next-measure",
-         QT_TR_NOOP("next measure"),
+         QT_TRANSLATE_NOOP("action","next measure"),
          Qt::CTRL+Qt::Key_Right,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP("next measure"),
-         QT_TR_NOOP("next measure")
+         QT_TRANSLATE_NOOP("action","next measure"),
+         QT_TRANSLATE_NOOP("action","next measure")
          ),
       Shortcut(
          STATE_PLAY,
          "seek-begin",
-         QT_TR_NOOP("seek to begin"),
+         QT_TRANSLATE_NOOP("action","seek to begin"),
          Qt::Key_Home,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "rewind",
-         QT_TR_NOOP("player rewind"),
+         QT_TRANSLATE_NOOP("action","player rewind"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Rewind"),
-         QT_TR_NOOP("rewind to start position"),
+         QT_TRANSLATE_NOOP("action","Rewind"),
+         QT_TRANSLATE_NOOP("action","rewind to start position"),
          &startIcon
          ),
       Shortcut(
          STATE_PLAY,
          "seek-end",
-         QT_TR_NOOP("seek to end"),
+         QT_TRANSLATE_NOOP("action","seek to end"),
          Qt::Key_End,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TRANSLATE_NOOP("action",""),
+         QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
          STATE_NORMAL,
          "repeat",
-         QT_TR_NOOP("play repeats on"),
+         QT_TRANSLATE_NOOP("action","play repeats on"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Repeat"),
-         QT_TR_NOOP("play repeats on/off"),
+         QT_TRANSLATE_NOOP("action","Repeat"),
+         QT_TRANSLATE_NOOP("action","play repeats on/off"),
          &repeatIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "load-style",
-         QT_TR_NOOP("load style"),
+         QT_TRANSLATE_NOOP("action","load style"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Load Style..."),
-         QT_TR_NOOP("Load Style"),
+         QT_TRANSLATE_NOOP("action","Load Style..."),
+         QT_TRANSLATE_NOOP("action","Load Style"),
          &fileOpenIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "save-style",
-         QT_TR_NOOP("save style"),
+         QT_TRANSLATE_NOOP("action","save style"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save Style..."),
-         QT_TR_NOOP("Save Style"),
+         QT_TRANSLATE_NOOP("action","Save Style..."),
+         QT_TRANSLATE_NOOP("action","Save Style"),
          &fileSaveIcon
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "select-all",
-         QT_TR_NOOP("select all"),
+         QT_TRANSLATE_NOOP("action","select all"),
          Qt::CTRL+Qt::Key_A,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Select All"),
-         QT_TR_NOOP("Select All")
+         QT_TRANSLATE_NOOP("action","Select All"),
+         QT_TRANSLATE_NOOP("action","Select All")
          ),
       Shortcut (
          STATE_NORMAL,
          "transpose",
-         QT_TR_NOOP("transpose"),
+         QT_TRANSLATE_NOOP("action","transpose"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Transpose..."),
-         QT_TR_NOOP("Transpose")
+         QT_TRANSLATE_NOOP("action","Transpose..."),
+         QT_TRANSLATE_NOOP("action","Transpose")
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "clef-violin",
-         QT_TR_NOOP("violin clef"),
+         QT_TRANSLATE_NOOP("action","violin clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_1),
          Qt::WindowShortcut,
-         QT_TR_NOOP("violin clef"),
-         QT_TR_NOOP("violin clef")
+         QT_TRANSLATE_NOOP("action","violin clef"),
+         QT_TRANSLATE_NOOP("action","violin clef")
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "clef-bass",
-         QT_TR_NOOP("bass clef"),
+         QT_TRANSLATE_NOOP("action","bass clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_2),
          Qt::WindowShortcut,
-         QT_TR_NOOP("bass clef"),
-         QT_TR_NOOP("bass clef")
+         QT_TRANSLATE_NOOP("action","bass clef"),
+         QT_TRANSLATE_NOOP("action","bass clef")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x12",
-         QT_TR_NOOP("Exchange Voice 1-2"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-2"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 1-2"),
-         QT_TR_NOOP("Exchange Voice 1-2")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-2"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-2")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x13",
-         QT_TR_NOOP("Exchange Voice 1-3"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-3"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 1-3"),
-         QT_TR_NOOP("Exchange Voice 1-3")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-3"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-3")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x14",
-         QT_TR_NOOP("Exchange Voice 1-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 1-4"),
-         QT_TR_NOOP("Exchange Voice 1-4")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 1-4")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x23",
-         QT_TR_NOOP("Exchange Voice 2-3"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-3"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 2-3"),
-         QT_TR_NOOP("Exchange Voice 2-3")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-3"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-3")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x24",
-         QT_TR_NOOP("Exchange Voice 2-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 2-4"),
-         QT_TR_NOOP("Exchange Voice 2-4")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 2-4")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x34",
-         QT_TR_NOOP("Exchange Voice 3-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 3-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Exchange Voice 3-4"),
-         QT_TR_NOOP("Exchange Voice 3-4")
+         QT_TRANSLATE_NOOP("action","Exchange Voice 3-4"),
+         QT_TRANSLATE_NOOP("action","Exchange Voice 3-4")
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "concert-pitch",
-         QT_TR_NOOP("display in concert pitch"),
+         QT_TRANSLATE_NOOP("action","display in concert pitch"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Concert Pitch"),
-         QT_TR_NOOP("Display in Concert Pitch")
+         QT_TRANSLATE_NOOP("action","Concert Pitch"),
+         QT_TRANSLATE_NOOP("action","Display in Concert Pitch")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "repeat-cmd",
-         QT_TR_NOOP("repeat last command"),
+         QT_TRANSLATE_NOOP("action","repeat last command"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Repeat last command"),
-         QT_TR_NOOP("Repeat last command"),
+         QT_TRANSLATE_NOOP("action","Repeat last command"),
+         QT_TRANSLATE_NOOP("action","Repeat last command"),
          &fileOpenIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "edit-meta",
-         QT_TR_NOOP("edit score meta data"),
+         QT_TRANSLATE_NOOP("action","edit score meta data"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Meta Data..."),
-         QT_TR_NOOP("Meta Data")
+         QT_TRANSLATE_NOOP("action","Meta Data..."),
+         QT_TRANSLATE_NOOP("action","Meta Data")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "system-break",
-         QT_TR_NOOP("toggle system break"),
+         QT_TRANSLATE_NOOP("action","toggle system break"),
          Qt::Key_Return,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Toggle System Break"),
-         QT_TR_NOOP("Toggle System Break")
+         QT_TRANSLATE_NOOP("action","Toggle System Break"),
+         QT_TRANSLATE_NOOP("action","Toggle System Break")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-break",
-         QT_TR_NOOP("toggle page break"),
+         QT_TRANSLATE_NOOP("action","toggle page break"),
          Qt::CTRL+Qt::Key_Return,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Toggle Page Break"),
-         QT_TR_NOOP("Toggle Page Break")
+         QT_TRANSLATE_NOOP("action","Toggle Page Break"),
+         QT_TRANSLATE_NOOP("action","Toggle Page Break")
          ),
       Shortcut(
          STATE_NORMAL,
          "edit-element",
-         QT_TR_NOOP("edit element"),
+         QT_TRANSLATE_NOOP("action","edit element"),
          Qt::CTRL+Qt::Key_E,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Edit Element"),
-         QT_TR_NOOP("Edit Element")
+         QT_TRANSLATE_NOOP("action","Edit Element"),
+         QT_TRANSLATE_NOOP("action","Edit Element")
          ),
       Shortcut(
          STATE_NORMAL,
          "reset-positions",
-         QT_TR_NOOP("reset positions"),
+         QT_TRANSLATE_NOOP("action","reset positions"),
          Qt::CTRL+Qt::Key_R,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Reset Positions"),
-         QT_TR_NOOP("Reset Positions")
+         QT_TRANSLATE_NOOP("action","Reset Positions"),
+         QT_TRANSLATE_NOOP("action","Reset Positions")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "inspector",
-         QT_TR_NOOP("show inspector"),
+         QT_TRANSLATE_NOOP("action","show inspector"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Inspector"),
-         QT_TR_NOOP("Inspector")
+         QT_TRANSLATE_NOOP("action","Inspector"),
+         QT_TRANSLATE_NOOP("action","Inspector")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "reset-stretch",
-         QT_TR_NOOP("reset measure stretch"),
+         QT_TRANSLATE_NOOP("action","reset measure stretch"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Reset Stretch"),
-         QT_TR_NOOP("Reset Stretch")
+         QT_TRANSLATE_NOOP("action","Reset Stretch"),
+         QT_TRANSLATE_NOOP("action","Reset Stretch")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "show-invisible",
-         QT_TR_NOOP("show invisible"),
+         QT_TRANSLATE_NOOP("action","show invisible"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Show Invisible"),
-         QT_TR_NOOP("Show Invisible")
+         QT_TRANSLATE_NOOP("action","Show Invisible"),
+         QT_TRANSLATE_NOOP("action","Show Invisible")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "show-frames",
-         QT_TR_NOOP("show frames"),
+         QT_TRANSLATE_NOOP("action","show frames"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Show Frames"),
-         QT_TR_NOOP("Show Frames")
+         QT_TRANSLATE_NOOP("action","Show Frames"),
+         QT_TRANSLATE_NOOP("action","Show Frames")
          ),
       Shortcut(
          STATE_EDIT,
          "show-keys",
-         QT_TR_NOOP("show keyboard"),
+         QT_TRANSLATE_NOOP("action","show keyboard"),
          Qt::Key_F2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Show Keyboard"),
-         QT_TR_NOOP("Show Keyboard"),
+         QT_TRANSLATE_NOOP("action","Show Keyboard"),
+         QT_TRANSLATE_NOOP("action","Show Keyboard"),
          &keysIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "script-debug",
-         QT_TR_NOOP("enable script debugger"),
+         QT_TRANSLATE_NOOP("action","enable script debugger"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Enable Script Debugger"),
-         QT_TR_NOOP("Enable Script Debugger")
+         QT_TRANSLATE_NOOP("action","Enable Script Debugger"),
+         QT_TRANSLATE_NOOP("action","Enable Script Debugger")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-1",
-         QT_TR_NOOP("enter 1/1 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/1 rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_S),
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/1 rest"),
-         QT_TR_NOOP("enter 1/1 rest")
+         QT_TRANSLATE_NOOP("action","1/1 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/1 rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-2",
-         QT_TR_NOOP("enter 1/2 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/2 rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_M),
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/2 rest"),
-         QT_TR_NOOP("enter 1/2 rest")
+         QT_TRANSLATE_NOOP("action","1/2 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/2 rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-4",
-         QT_TR_NOOP("enter 1/4 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/4 rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_R),
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/4 rest"),
-         QT_TR_NOOP("enter 1/4 rest")
+         QT_TRANSLATE_NOOP("action","1/4 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/4 rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-8",
-         QT_TR_NOOP("enter 1/8 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/8 rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_Q),
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/8 rest"),
-         QT_TR_NOOP("enter 1/8 rest")
+         QT_TRANSLATE_NOOP("action","1/8 rest"),
+         QT_TRANSLATE_NOOP("action","enter 1/8 rest")
          ),
       Shortcut(                     // mapped to undo in note entry mode
          STATE_NOTE_ENTRY,
          "backspace",
-         QT_TR_NOOP("backspace"),
+         QT_TRANSLATE_NOOP("action","backspace"),
          QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
          Qt::WindowShortcut,
-         QT_TR_NOOP("backspace"),
-         QT_TR_NOOP("backspace")
+         QT_TRANSLATE_NOOP("action","backspace"),
+         QT_TRANSLATE_NOOP("action","backspace")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "find",
-         QT_TR_NOOP("search"),
+         QT_TRANSLATE_NOOP("action","search"),
          QKeySequence::Find,        // Qt::CTRL + Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Search"),
-         QT_TR_NOOP("Search")
+         QT_TRANSLATE_NOOP("action","Search"),
+         QT_TRANSLATE_NOOP("action","Search")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "zoomin",
-         QT_TR_NOOP("Zoom In"),
+         QT_TRANSLATE_NOOP("action","Zoom In"),
          QKeySequence::ZoomIn,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Zoom In")
+         QT_TRANSLATE_NOOP("action","Zoom In")
          ),
       Shortcut(
          // conflicts with Ctrl+- in edit mode to enter lyrics hyphen
@@ -1969,102 +1970,102 @@ Shortcut MuseScore::sc[] = {
 
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "zoomout",
-         QT_TR_NOOP("Zoom Out"),
+         QT_TRANSLATE_NOOP("action","Zoom Out"),
          QKeySequence::ZoomOut,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Zoom Out")
+         QT_TRANSLATE_NOOP("action","Zoom Out")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "mirror-note",
-         QT_TR_NOOP("mirror note head"),
+         QT_TRANSLATE_NOOP("action","mirror note head"),
          Qt::SHIFT + Qt::Key_X,
          Qt::WindowShortcut,
-         QT_TR_NOOP("mirror note head"),
-         QT_TR_NOOP("mirror note head"),
+         QT_TRANSLATE_NOOP("action","mirror note head"),
+         QT_TRANSLATE_NOOP("action","mirror note head"),
          &flipIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "edit-style",
-         QT_TR_NOOP("Edit General Style..."),
+         QT_TRANSLATE_NOOP("action","Edit General Style..."),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Edit General Style..."),
-         QT_TR_NOOP("Edit General Style...")
+         QT_TRANSLATE_NOOP("action","Edit General Style..."),
+         QT_TRANSLATE_NOOP("action","Edit General Style...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "edit-text-style",
-         QT_TR_NOOP("Edit Text Style..."),
+         QT_TRANSLATE_NOOP("action","Edit Text Style..."),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Edit Text Style..."),
-         QT_TR_NOOP("Edit Text Style...")
+         QT_TRANSLATE_NOOP("action","Edit Text Style..."),
+         QT_TRANSLATE_NOOP("action","Edit Text Style...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-similar",
-         QT_TR_NOOP("Select all similar elements"),
+         QT_TRANSLATE_NOOP("action","Select all similar elements"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("All Similar Elements"),
-         QT_TR_NOOP("All Similar Elements")
+         QT_TRANSLATE_NOOP("action","All Similar Elements"),
+         QT_TRANSLATE_NOOP("action","All Similar Elements")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-similar-staff",
-         QT_TR_NOOP("Select all similar elements in same staff"),
+         QT_TRANSLATE_NOOP("action","Select all similar elements in same staff"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("All Similar Elements in Same Staff"),
-         QT_TR_NOOP("All Similar Elements in Same Staff")
+         QT_TRANSLATE_NOOP("action","All Similar Elements in Same Staff"),
+         QT_TRANSLATE_NOOP("action","All Similar Elements in Same Staff")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "synth-control",
-         QT_TR_NOOP("Synthesizer"),
+         QT_TRANSLATE_NOOP("action","Synthesizer"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Synthesizer"),
-         QT_TR_NOOP("Synthesizer Control")
+         QT_TRANSLATE_NOOP("action","Synthesizer"),
+         QT_TRANSLATE_NOOP("action","Synthesizer Control")
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
          "double-duration",
-         QT_TR_NOOP("double duration"),
+         QT_TRANSLATE_NOOP("action","double duration"),
          QKeySequence(Qt::Key_W),
          Qt::WindowShortcut,
-         QT_TR_NOOP("double duration"),
-         QT_TR_NOOP("double duration")
+         QT_TRANSLATE_NOOP("action","double duration"),
+         QT_TRANSLATE_NOOP("action","double duration")
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
          "half-duration",
-         QT_TR_NOOP("half duration"),
+         QT_TRANSLATE_NOOP("action","half duration"),
          QKeySequence(Qt::Key_Q),
          Qt::WindowShortcut,
-         QT_TR_NOOP("half duration"),
-         QT_TR_NOOP("half duration")
+         QT_TRANSLATE_NOOP("action","half duration"),
+         QT_TRANSLATE_NOOP("action","half duration")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "repeat-sel",
-         QT_TR_NOOP("repeat selection"),
+         QT_TRANSLATE_NOOP("action","repeat selection"),
          Qt::Key_R,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Repeat selection"),
-         QT_TR_NOOP("Repeat selection"),
+         QT_TRANSLATE_NOOP("action","Repeat selection"),
+         QT_TRANSLATE_NOOP("action","Repeat selection"),
          &fileOpenIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "follow",
-         QT_TR_NOOP("follow song"),
+         QT_TRANSLATE_NOOP("action","follow song"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("F"),
-         QT_TR_NOOP("Follow Song")
+         QT_TRANSLATE_NOOP("action","F"),
+         QT_TRANSLATE_NOOP("action","Follow Song")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),

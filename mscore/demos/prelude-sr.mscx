@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.12">
-  <Mag>0.612373</Mag>
-  <xoff>1.8966</xoff>
-  <yoff>0.834969</yoff>
+  <Mag>0.473849</Mag>
+  <xoff>-182.508</xoff>
+  <yoff>3.49945</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
     <staffUpperBorder>3</staffUpperBorder>
     <staffLowerBorder>1</staffLowerBorder>
-    <staffDistance>12</staffDistance>
+    <staffDistance>15</staffDistance>
     <akkoladeDistance>11</akkoladeDistance>
     <systemDistance>8</systemDistance>
-    <frameSystemDistance>0</frameSystemDistance>
+    <frameSystemDistance>-1</frameSystemDistance>
     <bracketDistance>0.2</bracketDistance>
     <clefLeftMargin>0.4</clefLeftMargin>
     <clefKeyRightMargin>1</clefKeyRightMargin>
@@ -44,15 +44,15 @@
     <pageFormat>A4</pageFormat>
     <page-margins type="even">
       <left-margin>28.3465</left-margin>
-      <right-margin>56.6929</right-margin>
+      <right-margin>85.0394</right-margin>
       <top-margin>85.0394</top-margin>
-      <bottom-margin>113.386</bottom-margin>
+      <bottom-margin>141.732</bottom-margin>
       </page-margins>
     <page-margins type="odd">
       <left-margin>56.6929</left-margin>
-      <right-margin>28.3465</right-margin>
+      <right-margin>85.0394</right-margin>
       <top-margin>85.0394</top-margin>
-      <bottom-margin>113.386</bottom-margin>
+      <bottom-margin>141.732</bottom-margin>
       </page-margins>
     </page-layout>
   <siglist>
@@ -520,7 +520,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Lento</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Lento</p></body></html>
           </html-data>
         </Tempo>
       <Dynamic>
@@ -581,9 +581,6 @@ p, li { white-space: pre-wrap; }
         <offset x="2.49" y="-0.55"/>
         <style>12</style>
         </Dynamic>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Chord>
         <durationType>half</durationType>
         <StemDirection>down</StemDirection>
@@ -758,10 +755,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="4">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Chord>
         <durationType>half</durationType>
         <StemDirection>down</StemDirection>
@@ -938,6 +934,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="5">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Chord>
         <durationType>half</durationType>
         <StemDirection>down</StemDirection>
@@ -1113,9 +1113,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="6">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Chord>
         <durationType>half</durationType>
         <StemDirection>down</StemDirection>
@@ -1291,10 +1288,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Dynamic>
         <velocity>80</velocity>
         <dynType>2</dynType>
@@ -1302,6 +1295,9 @@ p, li { white-space: pre-wrap; }
         <offset x="-1.20861" y="1.46183"/>
         <style>12</style>
         </Dynamic>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Rest>
         <offset x="0" y="-1"/>
         <durationType>eighth</durationType>
@@ -1475,6 +1471,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="8">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Beam id="12">
         <y1>-193.571</y1>
         <y2>-193.571</y2>
@@ -1689,9 +1689,6 @@ p, li { white-space: pre-wrap; }
         <offset x="-0.434804" y="0.984281"/>
         <style>12</style>
         </Dynamic>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Chord>
         <BeamMode>no</BeamMode>
         <durationType>eighth</durationType>
@@ -1861,10 +1858,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="10">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Rest>
         <offset x="0.0698636" y="-1"/>
         <durationType>eighth</durationType>
@@ -2020,6 +2016,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="11">
       <stretch>0.8</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Rest>
         <durationType>eighth</durationType>
         </Rest>
@@ -2196,9 +2196,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="12">
       <stretch>0.8</stretch>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Chord>
         <BeamMode>no</BeamMode>
         <durationType>eighth</durationType>
@@ -2389,10 +2386,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="13">
       <stretch>0.8</stretch>
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Dynamic>
         <velocity>16</velocity>
         <dynType>2</dynType>
@@ -2537,6 +2530,9 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="14">
       <stretch>0.8</stretch>
+      <LayoutBreak>
+        <selected>1</selected>
+        </LayoutBreak>
       <Rest>
         <offset x="-0.371931" y="-4"/>
         <durationType>eighth</durationType>
@@ -2674,6 +2670,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="15">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Dynamic>
         <velocity>80</velocity>
         <dynType>2</dynType>
@@ -2691,12 +2691,9 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12.0008pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Agitato</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Agitato</p></body></html>
           </html-data>
         </Tempo>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        </LayoutBreak>
       <Tuplet id="0">
         <track>1</track>
         <numberType>0</numberType>
@@ -2790,7 +2787,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">5</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2853,7 +2850,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2876,7 +2873,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2908,7 +2905,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2931,7 +2928,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2954,7 +2951,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -2986,7 +2983,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -3009,7 +3006,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -3032,7 +3029,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -3065,7 +3062,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -3088,7 +3085,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
               </html-data>
             </Text>
           </Note>
@@ -3111,17 +3108,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
               </html-data>
             </Text>
           </Note>
         </Chord>
       </Measure>
     <Measure number="16">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <StaffText>
         <subtype>Staff</subtype>
         <offset x="0" y="13.7752"/>
@@ -3130,7 +3123,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.0006pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">simile</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">simile</p></body></html>
           </html-data>
         </StaffText>
       <Tuplet id="4">
@@ -3601,6 +3594,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="18">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Dynamic>
         <offset x="-4.18967" y="4.00411"/>
         <tick>32000</tick>
@@ -3866,10 +3863,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Dynamic>
         <dynType>1321</dynType>
         <subtype>mf</subtype>
@@ -4343,6 +4336,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="21">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="26">
         <track>1</track>
         <numberType>2</numberType>
@@ -4558,10 +4555,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="30">
         <track>1</track>
         <numberType>2</numberType>
@@ -4993,6 +4986,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="24">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="38">
         <track>1</track>
         <numberType>2</numberType>
@@ -5208,10 +5205,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="42">
         <track>1</track>
         <numberType>2</numberType>
@@ -5652,6 +5645,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="27">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="50">
         <track>1</track>
         <numberType>2</numberType>
@@ -5875,10 +5872,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="28">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-0.619946" y="0.267219"/>
@@ -6343,6 +6336,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="62">
         <track>1</track>
         <numberType>2</numberType>
@@ -6558,10 +6555,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="31">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="66">
         <track>1</track>
         <numberType>2</numberType>
@@ -7040,6 +7033,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="33">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="76">
         <track>1</track>
         <numberType>2</numberType>
@@ -7270,10 +7267,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="34">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="80">
         <track>1</track>
         <numberType>2</numberType>
@@ -7723,6 +7716,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="36">
       <stretch>0.9</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Dynamic>
         <subtype>fff</subtype>
         <offset x="-3.55612" y="1.2063"/>
@@ -7800,6 +7797,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>93</pitch>
           <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.483365" y="-2.65851"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -7809,11 +7817,33 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>75</pitch>
           <tpc>23</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.725047" y="3.46412"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>78</pitch>
           <tpc>20</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.805608" y="3.06131"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -7841,17 +7871,39 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-3.34683e-07" y="14.0359"/>
+          <offset x="0.0805605" y="2.91851"/>
           </Articulation>
         <Beam>115</Beam>
         <Note>
           <pitch>76</pitch>
           <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.703522" y="3.12589"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>80</pitch>
           <tpc>22</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.644487" y="2.41682"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -7870,6 +7922,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>92</pitch>
           <tpc>22</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.644487" y="-1.36953"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -7969,10 +8032,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="37">
       <stretch>0.9</stretch>
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="92">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -8025,6 +8084,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>90</pitch>
           <tpc>20</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.725047" y="-2.90019"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8034,11 +8104,33 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>72</pitch>
           <tpc>26</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.499347" y="3.13144"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>75</pitch>
           <tpc>23</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.483365" y="2.73907"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8066,7 +8158,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.305129" y="18.0026"/>
+          <offset x="-0.205046" y="6.9245"/>
           </Articulation>
         <Beam>119</Beam>
         <Note>
@@ -8095,6 +8187,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>88</pitch>
           <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.805608" y="-1.77234"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8142,11 +8245,33 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>68</pitch>
           <tpc>22</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="3.2797"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
-          <pitch>71</pitch>
-          <tpc>19</tpc>
+          <pitch>72</pitch>
+          <tpc>26</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="2.76952"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8174,17 +8299,39 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.10171" y="19.5283"/>
+          <offset x="0.10171" y="7.20249"/>
           </Articulation>
         <Beam>121</Beam>
         <Note>
           <pitch>69</pitch>
           <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="3.86276"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>73</pitch>
           <tpc>21</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.728822" y="3.35258"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8203,6 +8350,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>85</pitch>
           <tpc>21</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.644487" y="-1.53066"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8274,6 +8432,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>83</pitch>
           <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.874587" y="-2.98817"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8283,11 +8452,33 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>65</pitch>
           <tpc>25</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.583058" y="3.13394"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>68</pitch>
           <tpc>22</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.728822" y="2.69664"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8315,17 +8506,39 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-3.34683e-07" y="14.7419"/>
+          <offset x="-3.34683e-07" y="2.57721"/>
           </Articulation>
         <Beam>123</Beam>
         <Note>
           <pitch>66</pitch>
           <tpc>20</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="3.35258"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>69</pitch>
           <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.583058" y="2.84241"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8344,6 +8557,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>81</pitch>
           <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.728822" y="-1.60341"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8382,6 +8606,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>81</pitch>
           <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.801704" y="-2.91529"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8391,12 +8626,34 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>63</pitch>
           <tpc>23</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="2.84241"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         <Note>
           <pitch>66</pitch>
           <tpc>20</tpc>
           <userAccidental>1</userAccidental>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="2.478"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
           <move>1</move>
           </Note>
         </Chord>
@@ -8424,7 +8681,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.30513" y="14.6462"/>
+          <offset x="0.224569" y="3.04544"/>
           </Articulation>
         <Beam>125</Beam>
         <Note>
@@ -8453,6 +8710,17 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>80</pitch>
           <tpc>22</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.65594" y="-1.82206"/>
+            <style>8</style>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.0005pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -8473,6 +8741,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="39">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="100">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -8566,7 +8838,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.146859" y="18.4868"/>
+          <offset x="0.0662982" y="9.94735"/>
           </Articulation>
         <Beam>127</Beam>
         <Note>
@@ -8675,7 +8947,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.158271" y="18.4645"/>
+          <offset x="-0.0834115" y="10.0862"/>
           </Articulation>
         <Beam>129</Beam>
         <Note>
@@ -8724,10 +8996,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="40">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="104">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -8822,7 +9090,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.220288" y="18.4868"/>
+          <offset x="0.220288" y="10.2511"/>
           </Articulation>
         <Beam>131</Beam>
         <Note>
@@ -8931,7 +9199,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.2317" y="18.0974"/>
+          <offset x="0.377464" y="9.78883"/>
           </Articulation>
         <Beam>133</Beam>
         <Note>
@@ -9074,7 +9342,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.0734299" y="19.368"/>
+          <offset x="-0.219194" y="10.5493"/>
           </Articulation>
         <Beam>135</Beam>
         <Note>
@@ -9182,7 +9450,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.158271" y="20.0066"/>
+          <offset x="-0.133258" y="9.73021"/>
           </Articulation>
         <Beam>137</Beam>
         <Note>
@@ -9231,6 +9499,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="42">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="112">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -9325,7 +9597,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-3.1871e-07" y="19.5149"/>
+          <offset x="-0.0728825" y="10.6962"/>
           </Articulation>
         <Beam>139</Beam>
         <Note>
@@ -9433,7 +9705,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.158271" y="20.0066"/>
+          <offset x="0.4498" y="10.5319"/>
           </Articulation>
         <Beam>141</Beam>
         <Note>
@@ -9482,10 +9754,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="43">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="116">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -9580,7 +9848,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.146859" y="19.7352"/>
+          <offset x="0.438388" y="10.4063"/>
           </Articulation>
         <Beam>143</Beam>
         <Note>
@@ -9688,7 +9956,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.158271" y="20.0066"/>
+          <offset x="0.304035" y="10.5319"/>
           </Articulation>
         <Beam>145</Beam>
         <Note>
@@ -11166,7 +11434,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         <Note>
-          <selected>1</selected>
           <pitch>66</pitch>
           <tpc>20</tpc>
           </Note>
@@ -16028,7 +16295,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>153</Beam>
         <Note>
@@ -16052,7 +16318,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>153</Beam>
         <Note>
@@ -16076,7 +16341,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>153</Beam>
         <Note>
@@ -16103,7 +16367,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>58</pitch>
@@ -16129,7 +16392,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>58</pitch>
@@ -16159,7 +16421,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>156</Beam>
         <Note>
@@ -16183,7 +16444,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>156</Beam>
         <Note>
@@ -16207,7 +16467,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>156</Beam>
         <Note>
@@ -16233,7 +16492,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>157</Beam>
         <Note>
@@ -16257,7 +16515,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>157</Beam>
         <Note>
@@ -16281,7 +16538,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>157</Beam>
         <Note>
@@ -16305,7 +16561,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>157</Beam>
         <Note>
@@ -16333,7 +16588,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>160</Beam>
         <Note>
@@ -16357,7 +16611,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>160</Beam>
         <Note>
@@ -16381,7 +16634,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>160</Beam>
         <Note>
@@ -16405,7 +16657,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>160</Beam>
         <Note>
@@ -16431,7 +16682,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>161</Beam>
         <Note>
@@ -16455,7 +16705,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>161</Beam>
         <Note>
@@ -16479,7 +16728,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>161</Beam>
         <Note>
@@ -16503,7 +16751,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>161</Beam>
         <Note>
@@ -16535,7 +16782,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>163</Beam>
         <Note>
@@ -16563,7 +16809,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>163</Beam>
         <Note>
@@ -16587,7 +16832,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>163</Beam>
         <Note>
@@ -16611,7 +16855,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>163</Beam>
         <Note>
@@ -16638,7 +16881,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>54</pitch>
@@ -16664,7 +16906,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>51</pitch>
@@ -16696,7 +16937,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>165</Beam>
         <Note>
@@ -16720,7 +16960,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>165</Beam>
         <Note>
@@ -16744,7 +16983,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>165</Beam>
         <Note>
@@ -16771,7 +17009,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>54</pitch>
@@ -16797,7 +17034,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>51</pitch>
@@ -16823,7 +17059,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>0</track>
           </Articulation>
         <Note>
           <pitch>52</pitch>
@@ -16852,7 +17087,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>168</Beam>
         <Note>
@@ -16872,7 +17106,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>168</Beam>
         <Note>
@@ -16892,7 +17125,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>168</Beam>
         <Note>
@@ -16914,7 +17146,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>169</Beam>
         <Note>
@@ -16934,7 +17165,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>169</Beam>
         <Note>
@@ -16954,7 +17184,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>169</Beam>
         <Note>
@@ -16974,7 +17203,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>tenuto</subtype>
-          <track>0</track>
           </Articulation>
         <Beam>169</Beam>
         <Note>
@@ -17723,7 +17951,6 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>28</pitch>
@@ -17746,7 +17973,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>40</pitch>
@@ -17761,7 +17987,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>39</pitch>
@@ -17840,7 +18065,6 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>25</pitch>
@@ -17855,7 +18079,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>33</pitch>
@@ -17872,7 +18095,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>32</pitch>
@@ -17889,7 +18111,6 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>25</pitch>
@@ -17912,7 +18133,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>33</pitch>
@@ -17927,7 +18147,6 @@ p, li { white-space: pre-wrap; }
         <durationType>quarter</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>32</pitch>
@@ -17944,7 +18163,6 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <track>4</track>
           </Articulation>
         <Note>
           <pitch>25</pitch>
@@ -18123,5 +18341,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

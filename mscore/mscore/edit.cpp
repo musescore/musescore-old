@@ -1617,6 +1617,33 @@ void Score::changeVoice(int voice)
       }
 
 //---------------------------------------------------------
+//   toggleInvisible
+//---------------------------------------------------------
+
+void Score::toggleInvisible(Element* e)
+      {
+      undoToggleInvisible(e);
+
+      e->setGenerated(false);
+      refresh |= e->abbox();
+      if (e->type() == BAR_LINE) {
+            Element* pe = e->parent();
+            if (pe->type() == SEGMENT && pe->subtype() == Segment::SegEndBarLine) {
+                  Measure* m = static_cast<Segment*>(pe)->measure();
+                  m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
+                  }
+            }
+      else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
+            Part* part = e->staff()->part();
+            part->shortName()->setVisible(e->visible());
+            }
+      else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG) {
+            Part* part = e->staff()->part();
+            part->longName()->setVisible(e->visible());
+            }
+      }
+
+//---------------------------------------------------------
 //   colorItem
 //---------------------------------------------------------
 
@@ -1638,6 +1665,14 @@ void Score::colorItem(Element* element)
                               Measure* m = static_cast<Segment*>(ep)->measure();
                               m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
                               }
+                        }
+                  else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
+                        Part* part = e->staff()->part();
+                        part->shortName()->setColor(e->color());
+                        }
+                  else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG) {
+                        Part* part = e->staff()->part();
+                        part->longName()->setColor(e->color());
                         }
                   }
             }

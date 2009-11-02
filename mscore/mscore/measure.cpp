@@ -66,7 +66,6 @@
 #include "tremolo.h"
 #include "drumset.h"
 #include "repeat.h"
-#include "repeatflag.h"
 #include "box.h"
 #include "harmony.h"
 #include "tempotext.h"

@@ -151,13 +151,13 @@ void Dynamic::setSubtype(int idx)
             if (ts->sizeIsSpatiumDependent)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
-			
+
             QFont font("MScore1");
             font.setPixelSize(lrint(m));
             font.setKerning(true);
             tf.setFont(font);
             tf.setProperty(QTextFormat::FontKerning, true);
-            tf.setProperty(QTextFormat::FontLetterSpacing, 100);
+            // tf.setProperty(QTextFormat::FontLetterSpacing, 100);
             cursor.setBlockCharFormat(tf);
             cursor.insertText(dynList[idx].tag);
             }

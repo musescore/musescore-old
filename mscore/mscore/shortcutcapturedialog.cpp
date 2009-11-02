@@ -63,12 +63,6 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
          || k == Qt::Key_ScrollLock || k == Qt::Key_unknown)
             return;
 
-printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x\n", k,
-      int(e->modifiers()),
-      int(e->nativeVirtualKey()),
-      int(e->nativeScanCode())
-      );
-
       k += e->modifiers();
       switch(key.count()) {
             case 0: key = QKeySequence(k); break;
@@ -91,6 +85,16 @@ printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x\n", k,
       messageLabel->setText(msgString);
       okButton->setEnabled(conflict == false);
       nshrtLabel->setText(key.toString(QKeySequence::NativeText));
+
+printf("capture key 0x%x  modifiers 0x%x virt 0x%x scan 0x%x <%s><%s>\n",
+      k,
+      int(e->modifiers()),
+      int(e->nativeVirtualKey()),
+      int(e->nativeScanCode()),
+      qPrintable(key.toString(QKeySequence::NativeText)),
+      qPrintable(key.toString(QKeySequence::PortableText))
+      );
+
       }
 
 //---------------------------------------------------------

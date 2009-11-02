@@ -1626,25 +1626,6 @@ void Score::addArticulation(Element* el, Articulation* atr)
       }
 
 //---------------------------------------------------------
-//   toggleInvisible
-//---------------------------------------------------------
-
-void Score::toggleInvisible(Element* obj)
-      {
-      undoToggleInvisible(obj);
-
-      obj->setGenerated(false);
-      refresh |= obj->abbox();
-      if (obj->type() == BAR_LINE) {
-            Element* e = obj->parent();
-            if (e->type() == SEGMENT && e->subtype() == Segment::SegEndBarLine) {
-                  Measure* m = static_cast<Segment*>(e)->measure();
-                  m->setEndBarLineType(obj->subtype(), false, obj->visible(), obj->color());
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   resetUserOffsets
 //---------------------------------------------------------
 

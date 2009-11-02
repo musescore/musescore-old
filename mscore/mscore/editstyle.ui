@@ -135,7 +135,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -482,6 +482,9 @@
          <property name="decimals">
           <number>1</number>
          </property>
+         <property name="minimum">
+          <double>-100.000000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="4" column="2">
@@ -510,6 +513,9 @@
          </property>
          <property name="decimals">
           <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>-100.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -971,54 +977,46 @@
             </item>
            </layout>
           </item>
-          </layout>
+         </layout>
         </widget>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_barlines">
-     <layout class="QVBoxLayout" name="verticalLayout_17">
-     <item>
-      <widget class="QGroupBox" name="groupBox_8">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>401</width>
-         <height>421</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Barlines</string>
-       </property>
-       <layout class="QFormLayout" name="formLayout_8">
-        <item row="0" column="0">
-         <widget class="QCheckBox" name="showRepeatBarTips">
-          <property name="text">
-           <string>show repeat bar tips</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="showStartBarlineSingle">
-          <property name="text">
-           <string>Barline at start of single staff</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QCheckBox" name="showStartBarlineMultiple">
-          <property name="text">
-           <string>Barline at start of multiple staves</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      </item>
+      <layout class="QVBoxLayout" name="verticalLayout_17">
+       <item>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Barlines</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_8">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="showRepeatBarTips">
+            <property name="text">
+             <string>show repeat bar tips</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="showStartBarlineSingle">
+            <property name="text">
+             <string>Barline at start of single staff</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="showStartBarlineMultiple">
+            <property name="text">
+             <string>Barline at start of multiple staves</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_note">
