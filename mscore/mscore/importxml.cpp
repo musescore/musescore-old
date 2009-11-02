@@ -1349,6 +1349,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               lineType  = ee.attribute(QString("line-type"), "solid");
                               }
                         else if (dirType == "metronome")
+/*
+          <metronome parentheses="yes">
+            <beat-unit>quarter</beat-unit>
+            <beat-unit-dot/>
+            <per-minute>50</per-minute>
+            </metronome>
+*/
                               domNotImplemented(ee);
                         else if (dirType == "octave-shift") {
                               type       = ee.attribute(QString("type"));
