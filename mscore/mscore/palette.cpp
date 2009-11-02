@@ -103,6 +103,45 @@ void Palette::setReadOnly(bool val)
       }
 
 //---------------------------------------------------------
+//   contextMenuEvent
+//---------------------------------------------------------
+
+void Palette::contextMenuEvent(QContextMenuEvent* event)
+      {
+      if (_readOnly)
+            return;
+      int i = idx(event->pos());
+      if (i == -1)
+            return;
+      QMenu menu;
+      QAction* deleteAction = menu.addAction(tr("Delete Contents"));
+      QAction* contextAction = menu.addAction(tr("Properties..."));
+      QAction* action = menu.exec(mapToGlobal(event->pos()));
+      if (action == deleteAction) {
+            PaletteCell* cell = cells[i];
+            if (cell)
+                  delete cell->element;
+            delete cell;
+            cells[i] = 0;
+            update();
+            emit changed();
+            }
+      else if (action == contextAction) {
+            PaletteCell* c = cells[i];
+            if (c == 0)
+                  return;
+            PaletteCell cell(*c);
+            PaletteCellProperties props(&cell);
+            if (props.exec()) {
+printf("change props\n");
+                  *cells[i] = cell;
+                  update();
+                  emit changed();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   setGrid
 //---------------------------------------------------------
 
@@ -328,6 +367,8 @@ void Palette::append(Element* s, const QString& name)
       cell->element   = s;
       cell->name      = name;
       cell->drawStaff = needsStaff(s);
+      cell->xoffset   = 0;
+      cell->yoffset   = 0;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -363,6 +404,8 @@ void Palette::add(int idx, Element* s, const QString& name)
       cell->element   = s;
       cell->name      = name;
       cell->drawStaff = needsStaff(s);
+      cell->xoffset   = 0;
+      cell->yoffset   = 0;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -454,8 +497,8 @@ void Palette::paintEvent(QPaintEvent*)
 
                   double gw = hgrid / mag;
                   double gh = vgrid / mag;
-                  double gx = column * gw;
-                  double gy = row    * gh;
+                  double gx = column * gw + cells[idx]->xoffset / mag;
+                  double gy = row    * gh + cells[idx]->yoffset / mag;
 
                   double sw = el->width();
                   double sh = el->height();
@@ -730,6 +773,10 @@ void Palette::write(Xml& xml, const QString& name) const
                         xml.stag("Cell");
                   if (cells[i]->drawStaff)
                         xml.tag("staff", cells[i]->drawStaff);
+                  if (cells[i]->xoffset)
+                        xml.tag("xoffset", cells[i]->xoffset);
+                  if (cells[i]->yoffset)
+                        xml.tag("yoffset", cells[i]->yoffset);
                   cells[i]->element->write(xml);
                   xml.etag();
                   }
@@ -765,10 +812,16 @@ void Palette::read(QDomElement e)
                   else {
                         QString name = e.attribute("name", "");
                         bool drawStaff = false;
+                        int xoffset = 0;
+                        int yoffset = 0;
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                               QString tag(ee.tagName());
                               if (tag == "staff")
                                     drawStaff = ee.text().toInt();
+                              else if (tag == "xoffset")
+                                    xoffset = ee.text().toInt();
+                              else if (tag == "yoffset")
+                                    yoffset = ee.text().toInt();
                               else if (tag == "Image") {
                                     // look ahead for image type
                                     QString path;
@@ -794,20 +847,23 @@ void Palette::read(QDomElement e)
                                     if (image) {
                                           image->read(ee);
                                           append(image, name);
-                                          cells.back()->drawStaff = drawStaff;
                                           }
                                     }
                               else {
                                     Element* element = Element::name2Element(tag, gscore);
-                                    if (element == 0)
+                                    if (element == 0) {
                                           domError(ee);
+                                          return;
+                                          }
                                     else {
                                           element->read(ee);
                                           append(element, name);
-                                          cells.back()->drawStaff = drawStaff;
                                           }
                                     }
                               }
+                        cells.back()->drawStaff = drawStaff;
+                        cells.back()->xoffset   = xoffset;
+                        cells.back()->yoffset   = yoffset;
                         }
                   }
             else
@@ -1220,6 +1276,30 @@ void PaletteProperties::accept()
       palette->setDrawGrid(showGrid->isChecked());
       palette->setYOffset(elementOffset->value());
       palette->setMag(mag->value());
+      QDialog::accept();
+      }
+
+//---------------------------------------------------------
+//   PaletteCellProperties
+//---------------------------------------------------------
+
+PaletteCellProperties::PaletteCellProperties(PaletteCell* p, QWidget* parent)
+   : QDialog(parent)
+      {
+      cell = p;
+      setupUi(this);
+      xoffset->setValue(cell->xoffset);
+      yoffset->setValue(cell->yoffset);
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void PaletteCellProperties::accept()
+      {
+      cell->xoffset = xoffset->value();
+      cell->yoffset = yoffset->value();
       QDialog::accept();
       }
 

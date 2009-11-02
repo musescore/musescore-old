@@ -589,6 +589,12 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   }
                   break;
 
+            case STAFF_TEXT:
+                  e->setTick(tick());
+                  e->setTrack(staffIdx() * VOICES);
+                  e->setParent(m);
+                  score()->undoAddElement(e);
+                  break;
             default:
                   printf("cannot drop %s\n", e->name());
                   delete e;

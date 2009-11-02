@@ -174,6 +174,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == CHORD)
          || (type == DYNAMIC)
          || (type == HARMONY)
+         || (type == STAFF_TEXT)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -290,7 +291,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
             setDuration(Duration(Duration::V_MEASURE));
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
-      
+
       }
 
 //---------------------------------------------------------
