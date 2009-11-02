@@ -1,56 +1,57 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>PaletteProperties</class>
- <widget class="QDialog" name="PaletteProperties" >
-  <property name="geometry" >
+ <widget class="QDialog" name="PaletteProperties">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>298</width>
+    <height>174</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MuseScore: Palette Properties</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QFormLayout" name="formLayout_4" >
-     <item row="0" column="0" >
-      <widget class="QLabel" name="label" >
-       <property name="text" >
+    <layout class="QFormLayout" name="formLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
         <string>Name:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1" >
-      <widget class="QLineEdit" name="name" />
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="name"/>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_2" >
-       <property name="text" >
+      <widget class="QLabel" name="label_2">
+       <property name="text">
         <string>Cell Size:</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QFormLayout" name="formLayout_2" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_3" >
-         <property name="text" >
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
           <string>w:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QSpinBox" name="cellWidth" >
-         <property name="minimum" >
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="cellWidth">
+         <property name="minimum">
           <number>1</number>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <number>1000</number>
          </property>
         </widget>
@@ -58,20 +59,20 @@
       </layout>
      </item>
      <item>
-      <layout class="QFormLayout" name="formLayout_3" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_4" >
-         <property name="text" >
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
           <string>h:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QSpinBox" name="cellHeight" >
-         <property name="minimum" >
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="cellHeight">
+         <property name="minimum">
           <number>1</number>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <number>1000</number>
          </property>
         </widget>
@@ -81,25 +82,25 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="showGrid" >
-     <property name="text" >
+    <widget class="QCheckBox" name="showGrid">
+     <property name="text">
       <string>Show Grid</string>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <layout class="QFormLayout" name="formLayout" >
-       <property name="fieldGrowthPolicy" >
+      <layout class="QFormLayout" name="formLayout">
+       <property name="fieldGrowthPolicy">
         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
        </property>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="elementOffset" />
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="elementOffset"/>
        </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_5" >
-         <property name="text" >
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
           <string>Element Offset</string>
          </property>
         </widget>
@@ -107,23 +108,23 @@
       </layout>
      </item>
      <item>
-      <layout class="QFormLayout" name="formLayout_5" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_6" >
-         <property name="text" >
+      <layout class="QFormLayout" name="formLayout_5">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
           <string>Scale:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="mag" >
-         <property name="minimum" >
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="mag">
+         <property name="minimum">
           <double>0.010000000000000</double>
          </property>
-         <property name="singleStep" >
+         <property name="singleStep">
           <double>0.100000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>1.000000000000000</double>
          </property>
         </widget>
@@ -133,11 +134,11 @@
     </layout>
    </item>
    <item>
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>107</height>
@@ -146,11 +147,11 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -165,11 +166,11 @@
    <receiver>PaletteProperties</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -181,11 +182,11 @@
    <receiver>PaletteProperties</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

@@ -27,6 +27,19 @@ class Xml;
 class Palette;
 
 #include "ui_palette.h"
+#include "ui_cellproperties.h"
+
+//---------------------------------------------------------
+//   PaletteCell
+//---------------------------------------------------------
+
+struct PaletteCell {
+      Element* element;
+      QString name;
+      bool drawStaff;
+      double x, y;
+      int xoffset, yoffset;
+      };
 
 //---------------------------------------------------------
 //   PaletteProperties
@@ -40,6 +53,20 @@ class PaletteProperties : public QDialog, private Ui::PaletteProperties {
 
    public:
       PaletteProperties(Palette* p, QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   PaletteCellProperties
+//---------------------------------------------------------
+
+class PaletteCellProperties : public QDialog, private Ui::PaletteCellProperties {
+      Q_OBJECT
+
+      PaletteCell* cell;
+      virtual void accept();
+
+   public:
+      PaletteCellProperties(PaletteCell* p, QWidget* parent = 0);
       };
 
 //---------------------------------------------------------
@@ -110,17 +137,6 @@ class PaletteBox : public QDockWidget {
       };
 
 //---------------------------------------------------------
-//   PaletteCell
-//---------------------------------------------------------
-
-struct PaletteCell {
-      Element* element;
-      QString name;
-      bool drawStaff;
-      double x, y;
-      };
-
-//---------------------------------------------------------
 //   PaletteScrollArea
 //---------------------------------------------------------
 
@@ -170,6 +186,7 @@ class Palette : public QWidget {
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
+      virtual void contextMenuEvent(QContextMenuEvent*);
 
       int idx(const QPoint&) const;
       QRect idxRect(int);

@@ -84,7 +84,7 @@ QT4_WRAP_UI (ui_headers
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
-      select.ui synthcontrol.ui splitstaff.ui
+      select.ui synthcontrol.ui splitstaff.ui cellproperties.ui
       )
 
 QT4_WRAP_CPP (mocs

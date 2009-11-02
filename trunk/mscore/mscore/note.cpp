@@ -928,6 +928,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == BAR_LINE)
          || (type == GLISSANDO)
          || (type == SLUR)
+         || (type == STAFF_TEXT)
          ) {
             viewer->setDropTarget(this);
             return true;
