@@ -1,4 +1,5 @@
 2.nov. (ws)
+      - script extensions: cursor.isRest(), cursor.rest()
       - fix: tie after accidental creates wrong pitch note
       - save color and invisible attribute for instrument names
 1.nov. (ws)

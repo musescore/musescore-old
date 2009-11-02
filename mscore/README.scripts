@@ -105,6 +105,8 @@ Objects
             nextMeasure()           goto first chord/rest in next measure
             isChord()               return true if cursor points to a chord
             chord()                 return chord at current position
+            isRest()                return true if cursor points to a rest
+            rest()                  return rest at current position
             measure()               return measure at current position
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
