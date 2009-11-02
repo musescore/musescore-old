@@ -1,4 +1,6 @@
-2.nov. (ws)
+2.nov. (lv)
+      - new testfile testTempo1.xml
+       (ws)
       - implement palette cell properties dialog
       - implement "delete palette entry"
       - script extensions: cursor.isRest(), cursor.rest()
