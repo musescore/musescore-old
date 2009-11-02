@@ -698,6 +698,8 @@ void Score::cmdAddTie()
                   }
             Note* n = cmdAddPitch1(note->pitch(), false);
             if (n) {
+                  n->setLine(note->line());
+                  n->setTpc(note->tpc());
                   Tie* tie = new Tie(this);
                   tie->setStartNote(note);
                   tie->setEndNote(n);

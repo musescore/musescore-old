@@ -1,5 +1,7 @@
-1.nov. (ws)
+2.nov. (ws)
+      - fix: tie after accidental creates wrong pitch note
       - save color and invisible attribute for instrument names
+1.nov. (ws)
       - simple version of a "split measure" function
       - fix half/double duration (w/q keys)
       - fix crash when drag/drop a bracket
