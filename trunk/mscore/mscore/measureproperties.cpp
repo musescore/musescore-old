@@ -41,7 +41,7 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       nominalZ->setValue(ev.nominator2);
       nominalN->setValue(ev.denominator2);
       irregular->setChecked(m->irregular());
-      breakMultiMeasureRest->setChecked(m->breakMultiMeasureRest());
+      breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
       int n  = m->repeatCount();
       count->setValue(n);
       count->setEnabled(m->repeatFlags() & RepeatEnd);

@@ -146,8 +146,8 @@ fet_beginchar ("dynamic f", "f");
 	save p;
 	path p;
 
-%	set_char_box (0, 1.1 ex#, descender#, ex# + ascender#);
-	set_char_box (0, 1.9 ex#, descender#, ex# + ascender#);
+	set_char_box (0, 1.1 ex#, descender#, ex# + ascender#);
+%ws	set_char_box (0, 1.9 ex#, descender#, ex# + ascender#);
 
 	bulb_diam = 7.5 / 40 ex;
 	bulb_thick = 8.5 / 40 ex;

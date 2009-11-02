@@ -32,6 +32,8 @@ class Volta;
 //---------------------------------------------------------
 
 class VoltaSegment : public TextLineSegment {
+      Q_DECLARE_TR_FUNCTIONS(VoltaSegment)
+
    protected:
 
    public:

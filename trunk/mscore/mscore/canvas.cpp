@@ -51,7 +51,6 @@
 #include "editdrumset.h"
 #include "editstaff.h"
 #include "splitstaff.h"
-#include "repeatflag.h"
 #include "barline.h"
 #include "system.h"
 #include "magbox.h"
