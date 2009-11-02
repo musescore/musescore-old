@@ -335,6 +335,20 @@ ChordRestPtr ScSCursorPrototype::chord()
       }
 
 //---------------------------------------------------------
+//   rest
+//    get rest at current position
+//---------------------------------------------------------
+
+ChordRestPtr ScSCursorPrototype::rest()
+      {
+      SCursor* cursor = thisSCursor();
+      ChordRest* cr = cursor->cr();
+      if (cr == 0 || cr->type() != REST)
+            return 0;
+      return static_cast<ChordRestPtr>(cr);
+      }
+
+//---------------------------------------------------------
 //   measure
 //    get measure at current position
 //---------------------------------------------------------
@@ -357,6 +371,17 @@ bool ScSCursorPrototype::isChord() const
       SCursor* cursor = thisSCursor();
       ChordRest* cr = cursor->cr();
       return cr && (cr->type() == CHORD);
+      }
+
+//---------------------------------------------------------
+//   isChord
+//---------------------------------------------------------
+
+bool ScSCursorPrototype::isRest() const
+      {
+      SCursor* cursor = thisSCursor();
+      ChordRest* cr = cursor->cr();
+      return cr && (cr->type() == REST);
       }
 
 //---------------------------------------------------------
