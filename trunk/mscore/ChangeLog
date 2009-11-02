@@ -1,6 +1,7 @@
 2.nov. (lv)
       - new testfile testTempo1.xml
        (ws)
+      - allow change of text properties for staff text
       - implement palette cell properties dialog
       - implement "delete palette entry"
       - script extensions: cursor.isRest(), cursor.rest()

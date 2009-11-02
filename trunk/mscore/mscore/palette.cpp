@@ -713,6 +713,7 @@ void Palette::dropEvent(QDropEvent* event)
                   }
             }
       if (e) {
+            e->setSelected(false);
             bool ok = false;
             if (event->source() == this) {
                   int i = idx(event->pos());
@@ -1072,6 +1073,7 @@ void PaletteBox::paletteCmd(int cmd, int slot)
             case PALETTE_NEW:
                   {
                   Palette* p = new Palette;
+                  p->setReadOnly(false);
                   PaletteScrollArea* sa = new PaletteScrollArea(p);
                   PaletteBoxButton* b   = new PaletteBoxButton(sa, p);
                   sa->setVisible(false);
