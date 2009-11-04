@@ -749,6 +749,15 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 #endif
 
 //---------------------------------------------------------
+//   ShortcutITem
+//---------------------------------------------------------
+
+bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
+      {
+      return QString::localeAwareCompare(text(0).toLower(), item.text(0).toLower()) < 0;
+      }
+
+//---------------------------------------------------------
 //   updateSCListView
 //---------------------------------------------------------
 
@@ -758,7 +767,7 @@ void PreferenceDialog::updateSCListView()
       foreach (Shortcut* s, localShortcuts) {
             if (!s)
                   continue;
-            QTreeWidgetItem* newItem = new QTreeWidgetItem;
+            ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
             newItem->setIcon(0, *s->icon);
             QKeySequence seq = s->key;

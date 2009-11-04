@@ -1,4 +1,5 @@
 4.nov. (ws)
+      - change sorting of shortcuts
       - fix cursor height for systems with hidden staves
       - Fix score->pos2measure(): did not work with hidden staves.
         In prelude-sr.mscx example it was not possible to drag dynamics
