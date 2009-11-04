@@ -1707,13 +1707,6 @@ if (debugMode)
       //    move extra space to previous cells
       //---------------------------------------------------
 
-#if 0
-printf("move space1:");
-for (int i = 0; i < segs; ++i)
-     printf(" %f-%f", spaces[i][0].min(), spaces[i][0].extra());
-printf("\n");
-#endif
-
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             for (int seg = segs; seg > 0; --seg) {    // seg 0 cannot move any space
                   double extra = spaces[seg][staffIdx].extra();
@@ -1730,11 +1723,24 @@ printf("\n");
                   }
             }
 
+      //---------------------------------------------------
+      //    move min space to next cell
+      //---------------------------------------------------
 #if 0
-printf("move space2:");
-for (int i = 0; i < segs; ++i)
-     printf(" %f-%f", spaces[i][0].min(), spaces[i][0].extra());
-printf("\n");
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            for (int seg = 0; seg < segs - 1; ++seg) {
+                  if (types[seg] != Segment::SegChordRest)
+                        continue;
+                  double min = spaces[seg][staffIdx].min();
+                  if (min < 0.00001)
+                        continue;
+                  if (types[seg+1] != Segment::SegChordRest)
+                        continue;
+                  if (spaces[seg+1][staffIdx].valid())
+                        continue;
+                  spaces[seg][staffIdx].setMin(spaces[seg][staffIdx].min() * .5);
+                  }
+            }
 #endif
       //---------------------------------------------------
       //    populate width[] array

@@ -997,12 +997,15 @@ void Score::connectTies()
                               if (!tie)
                                     continue;
                               Note* nnote = searchTieNote(in->second, s, i);
-                              if (nnote == 0)
-                                    printf("next note at %d(measure %d) voice %d for tie not found\n",
+                              if (nnote == 0) {
+                                    printf("next note at %d(measure %d) voice %d for tie not found; delete tie\n",
                                        in->second->chord()->tick(),
                                        m->no(),
                                        in->second->chord()->voice()
                                        );
+                                    in->second->setTieFor(0);
+                                    delete tie;
+                                    }
                               else {
                                     tie->setEndNote(nnote);
                                     nnote->setTieBack(tie);
