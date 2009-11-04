@@ -117,9 +117,10 @@ class System : public Element {
       QList<MeasureBase*>& measures()      { return ml; }
 
       QRectF bboxStaff(int staff) const;
-      QList<SysStaff*>* staves()           { return &_staves;   }
+      QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
-      SysStaff* staff(int n) const         { return _staves[n]; }
+      double staffY(int staffIdx)            { return _staves[staffIdx]->y(); }
+      SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
 
       Spatium distance(int n) const        { return _staves[n]->distance(); }
       bool pageBreak() const               { return _pageBreak; }
