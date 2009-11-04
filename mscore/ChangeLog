@@ -1,3 +1,7 @@
+4.nov. (ws)
+      - Fix score->pos2measure(): did not work with hidden staves.
+        In prelude-sr.mscx example it was not possible to drag dynamics
+        to the second staff;
 2.nov. (lv)
       - new testfile testTempo1.xml
        (ws)

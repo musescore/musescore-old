@@ -122,7 +122,10 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             if (cell)
                   delete cell->element;
             delete cell;
-            cells[i] = 0;
+            if (cells.size() == i+1)
+                  cells.removeAt(i);
+            else
+                  cells[i] = 0;
             update();
             emit changed();
             }
@@ -133,7 +136,6 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             PaletteCell cell(*c);
             PaletteCellProperties props(&cell);
             if (props.exec()) {
-printf("change props\n");
                   *cells[i] = cell;
                   update();
                   emit changed();
@@ -884,6 +886,55 @@ void Palette::clear()
       }
 
 //---------------------------------------------------------
+//   rows
+//---------------------------------------------------------
+
+int Palette::rows() const
+      {
+      int c = columns();
+      if (c == 0)
+            return 0;
+      return (cells.size() + c - 1) / c;
+      }
+
+//---------------------------------------------------------
+//   resizeWidth
+//---------------------------------------------------------
+
+int Palette::resizeWidth(int w)
+      {
+      int c = w / hgrid;
+      if (c <= 0)
+            c = 1;
+      int r = (cells.size() + c - 1) / c;
+      if (r <= 0)
+            r = 1;
+      int h = r * vgrid;
+      setFixedSize(w, h);
+      return h;
+      }
+
+//---------------------------------------------------------
+//   actionToggled
+//---------------------------------------------------------
+
+void Palette::actionToggled(bool /*val*/)
+      {
+      selectedIdx = -1;
+      int nn = cells.size();
+      for (int n = 0; n < nn; ++n) {
+            Element* e = cells[n]->element;
+            if (e && e->type() == ICON) {
+                  if (static_cast<Icon*>(e)->action()->isChecked()) {
+                        selectedIdx = n;
+                        break;
+                        }
+                  }
+            }
+      update();
+      }
+
+//---------------------------------------------------------
 //   PaletteBoxButton
 //---------------------------------------------------------
 
@@ -961,25 +1012,6 @@ void PaletteBoxButton::paintEvent(QPaintEvent* e)
       }
 
 //---------------------------------------------------------
-//   PaletteBox
-//---------------------------------------------------------
-
-PaletteBox::PaletteBox(QWidget* parent)
-   : QDockWidget(tr("Palettes"), parent)
-      {
-      setObjectName("palette-box");
-      QWidget* mainWidget = new QWidget;
-      vbox = new QVBoxLayout;
-      vbox->setMargin(0);
-      vbox->setSpacing(0);
-      mainWidget->setLayout(vbox);
-      vbox->addStretch(1);
-      mainWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Ignored);
-      setWidget(mainWidget);
-      _dirty = false;
-      }
-
-//---------------------------------------------------------
 //   PaletteScrollArea
 //---------------------------------------------------------
 
@@ -1006,20 +1038,22 @@ void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       }
 
 //---------------------------------------------------------
-//   resizeWidth
+//   PaletteBox
 //---------------------------------------------------------
 
-int Palette::resizeWidth(int w)
+PaletteBox::PaletteBox(QWidget* parent)
+   : QDockWidget(tr("Palettes"), parent)
       {
-      int c = w / hgrid;
-      if (c <= 0)
-            c = 1;
-      int r = (cells.size() + c - 1) / c;
-      if (r <= 0)
-            r = 1;
-      int h = r * vgrid;
-      setFixedSize(w, h);
-      return h;
+      setObjectName("palette-box");
+      QWidget* mainWidget = new QWidget;
+      vbox = new QVBoxLayout;
+      vbox->setMargin(0);
+      vbox->setSpacing(0);
+      mainWidget->setLayout(vbox);
+      vbox->addStretch(1);
+      mainWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Ignored);
+      setWidget(mainWidget);
+      _dirty = false;
       }
 
 //---------------------------------------------------------
@@ -1147,38 +1181,6 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
       {
       emit paletteVisible(false);
       QWidget::closeEvent(ev);
-      }
-
-//---------------------------------------------------------
-//   actionToggled
-//---------------------------------------------------------
-
-void Palette::actionToggled(bool /*val*/)
-      {
-      selectedIdx = -1;
-      int nn = cells.size();
-      for (int n = 0; n < nn; ++n) {
-            Element* e = cells[n]->element;
-            if (e && e->type() == ICON) {
-                  if (static_cast<Icon*>(e)->action()->isChecked()) {
-                        selectedIdx = n;
-                        break;
-                        }
-                  }
-            }
-      update();
-      }
-
-//---------------------------------------------------------
-//   rows
-//---------------------------------------------------------
-
-int Palette::rows() const
-      {
-      int c = columns();
-      if (c == 0)
-            return 0;
-      return (cells.size() + c - 1) / c;
       }
 
 //---------------------------------------------------------

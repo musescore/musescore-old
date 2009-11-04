@@ -311,7 +311,7 @@ void System::layout2()
       if (isVbox())                 // ignore vbox
             return;
 
-      int nstaves = _staves.size();
+      int nstaves     = _staves.size();
       double _spatium = spatium();
 
       qreal y = 0.0;
@@ -336,7 +336,7 @@ void System::layout2()
                   setDistance(staffIdx, Spatium(dist/_spatium));
             SysStaff* s = _staves[staffIdx];
             if (!s->show()) {
-                  s->setbbox(QRectF());
+                  s->setbbox(QRectF());  // already done in layout() ?
                   continue;
                   }
             double sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;

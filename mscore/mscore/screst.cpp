@@ -125,7 +125,6 @@ QScriptClassPropertyIterator* ScRest::newIterator(const QScriptValue &object)
 
 QScriptValue ScRest::newInstance(Score* score)
       {
-// printf("ScRest::newInstance\n");
       Rest* rest = new Rest(score);
       return newInstance(rest);
       }
@@ -359,8 +358,10 @@ NotePtr ScChordRestPrototype::note(int idx) const
             return 0;
       Chord* chord = static_cast<Chord*>(cr);
       const NoteList* nl = chord->noteList();
-      if (idx < 0 || idx >= int(nl->size()))
+      if (idx < 0 || idx >= int(nl->size())) {
+            printf("ScChordRest::note(%d): index out of range\n", idx);
             return 0;
+            }
       int k = 0;
       for (ciNote i = nl->begin(); i != nl->end(); ++i) {
             if (k == idx)

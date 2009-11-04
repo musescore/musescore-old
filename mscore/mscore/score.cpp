@@ -670,7 +670,6 @@ void Score::fixTicks()
 MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
-      int voice = 0;
       foreach (const Page* page, pages()) {
             if (!page->abbox().contains(p))
                   continue;
@@ -698,16 +697,26 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                               continue;
                         if (mb->type() != MEASURE)
                               return mb;
-                        Measure* m = (Measure*)mb;
+                        Measure* m = static_cast<Measure*>(mb);
                         double sy1 = 0;
                         if (rst && *rst == -1) {
                               for (int i = 0; i < nstaves();) {
-                                    double sy2;
-
                                     SysStaff* staff = s->staff(i);
-                                    ++i;
-                                    if (i != nstaves()) {
-                                          SysStaff* nstaff = s->staff(i);
+                                    if (!staff->show()) {
+                                          ++i;
+                                          continue;
+                                          }
+
+                                    int ni = i;
+                                    for (;;) {
+                                          ++ni;
+                                          if (ni == nstaves() || s->staff(ni)->show())
+                                                break;
+                                          }
+
+                                    double sy2;
+                                    if (ni != nstaves()) {
+                                          SysStaff* nstaff = s->staff(ni);
                                           double s1y2 = staff->bbox().y() + staff->bbox().height();
                                           sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
                                           }
@@ -715,22 +724,32 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                           sy2 = y2 - s->pos().y();   // s->height();
                                     if (ppp.y() > sy2) {
                                           sy1 = sy2;
+                                          i = ni;
                                           continue;
                                           }
                                     // search for segment + offset
                                     QPointF pppp = ppp - m->pos();
-                                    int track = (i-1) * VOICES + voice;
+                                    int track = i * VOICES;
                                     for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                          if (segment->subtype() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
+                                          if (segment->subtype() != Segment::SegChordRest)
                                                 continue;
-                                                }
+                                          if ((segment->element(track) == 0)
+                                             && (segment->element(track+1) == 0)
+                                             && (segment->element(track+2) == 0)
+                                             && (segment->element(track+3) == 0)
+                                             )
+                                                continue;
                                           Segment* ns = segment->next();
                                           for (; ns; ns = ns->next()) {
-                                                if (ns->subtype() == Segment::SegChordRest && (ns->element(track) || voice))
+                                                if (ns->subtype() != Segment::SegChordRest)
+                                                      continue;
+                                                if (ns->element(track)
+                                                   || ns->element(track+1)
+                                                   || ns->element(track+2)
+                                                   || ns->element(track+3))
                                                       break;
                                                 }
                                           if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
-                                                i -= 1;
                                                 *rst = i;
                                                 if (tick)
                                                       *tick = segment->tick();
@@ -761,7 +780,6 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                     Segment* ns = segment->next();
                                     while (ns && ns->subtype() != Segment::SegChordRest)
                                           ns = ns->next();
-
                                     if (ns) {
                                           double x1 = segment->x();
                                           double x2 = ns->x();

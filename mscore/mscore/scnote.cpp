@@ -26,27 +26,6 @@
 #include "undo.h"
 
 //---------------------------------------------------------
-//   ScNotePropertyIterator
-//---------------------------------------------------------
-
-class ScNotePropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
-
-   public:
-      ScNotePropertyIterator(const QScriptValue &object);
-      ~ScNotePropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
-      };
-
-//---------------------------------------------------------
 //   ScNote
 //---------------------------------------------------------
 
@@ -59,73 +38,13 @@ ScNote::ScNote(QScriptEngine* engine)
          QScriptEngine::QtOwnership,
          QScriptEngine::SkipMethodsInEnumeration
           | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
+          | QScriptEngine::ExcludeSuperClassProperties
+         );
       QScriptValue global = engine->globalObject();
       proto.setPrototype(global.property("Object").property("prototype"));
 
       ctor = engine->newFunction(construct);
       ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   queryProperty
-//---------------------------------------------------------
-
-QScriptClass::QueryFlags ScNote::queryProperty(const QScriptValue &object,
-   const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
-      {
-      NotePtr* sp = qscriptvalue_cast<NotePtr*>(object.data());
-      if (!sp)
-            return 0;
-
-      return 0;   // qscript handles property
-      }
-
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-QScriptValue ScNote::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
-      {
-printf("property <%s>\n", qPrintable(name.toString()));
-      NotePtr* score = qscriptvalue_cast<NotePtr*>(object.data());
-      if (!score)
-            return QScriptValue();
-      return QScriptValue();
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScNote::setProperty(QScriptValue& /*object*/ , const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
-      {
-/*      NotePtr* score = qscriptvalue_cast<NotePtr*>(object.data());
-      if (!score)
-            return;
-      */
-      }
-
-//---------------------------------------------------------
-//   propertyFlags
-//---------------------------------------------------------
-
-QScriptValue::PropertyFlags ScNote::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
-      {
-#if 0
-      if (name == scoreName)
-            return QScriptValue::Undeletable;
-      else if (name == scoreStaves)
-            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
-#endif
-      return QScriptValue::Undeletable;
-      }
-
-QScriptClassPropertyIterator *ScNote::newIterator(const QScriptValue &object)
-      {
-      return new ScNotePropertyIterator(object);
       }
 
 //---------------------------------------------------------
@@ -174,52 +93,6 @@ void ScNote::fromScriptValue(const QScriptValue& obj, NotePtr& ba)
       }
 
 //---------------------------------------------------------
-//   ScNotePropertyIterator
-//---------------------------------------------------------
-
-ScNotePropertyIterator::ScNotePropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScNotePropertyIterator::hasNext() const
-      {
-//      Note* ba = qscriptvalue_cast<Note*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScNotePropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScNotePropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScNotePropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScNotePropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScNotePropertyIterator::toBack()
-      {
-//      NotePtr* ba = qscriptvalue_cast<NotePtr*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
 //   thisNote
 //---------------------------------------------------------
 
@@ -257,7 +130,7 @@ void ScNotePrototype::setPitch(int v)
       {
       thisNote()->setPitch(v);
       }
-      
+
 //---------------------------------------------------------
 //   getTuning
 //---------------------------------------------------------
@@ -289,10 +162,11 @@ QColor ScNotePrototype::getColor() const
 //   setColor
 //---------------------------------------------------------
 
-void ScNotePrototype::setColor(QColor c)
+void ScNotePrototype::setColor(const QColor& c)
       {
       Note* note = thisNote();
       Score* score = note->score();
+printf("Note: setColor score %p %d %d %d\n", score, c.red(), c.green(), c.blue());
       if (score)
             score->undo()->push(new ChangeColor(note, c));
       else

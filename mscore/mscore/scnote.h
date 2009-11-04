@@ -41,20 +41,11 @@ class ScNote : public QObject, public QScriptClass {
       ScNote(QScriptEngine* se);
       ~ScNote() {}
 
-      QScriptValue constructor() { return ctor; }
+      QScriptValue prototype() const { return proto; }
+      QScriptValue constructor()     { return ctor; }
+      QString name() const           { return QLatin1String("Note"); }
       QScriptValue newInstance(Score*);
       QScriptValue newInstance(const NotePtr&);
-      QueryFlags queryProperty(const QScriptValue& object,
-         const QScriptString& name, QueryFlags flags, uint* id);
-      QScriptValue property(const QScriptValue& obhect,
-         const QScriptString& name, uint id);
-      virtual void setProperty(QScriptValue& object, const QScriptString& name,
-         uint id, const QScriptValue& value);
-      QScriptValue::PropertyFlags propertyFlags(
-         const QScriptValue& object, const QScriptString& name, uint id);
-      QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
-      QString name() const           { return QLatin1String("Note"); }
-      QScriptValue prototype() const { return proto; }
       };
 
 //---------------------------------------------------------
@@ -64,26 +55,26 @@ class ScNote : public QObject, public QScriptClass {
 class ScNotePrototype : public QObject, public QScriptable
       {
       Q_OBJECT
-      Q_PROPERTY(QString name READ getName SCRIPTABLE true)
-      Q_PROPERTY(int pitch READ getPitch WRITE setPitch SCRIPTABLE true)
-      Q_PROPERTY(double tuning READ getTuning WRITE setTuning SCRIPTABLE true)
-      Q_PROPERTY(QColor color READ getColor WRITE setColor SCRIPTABLE true)
+      Q_PROPERTY(QString name   READ getName)
+      Q_PROPERTY(int     pitch  READ getPitch  WRITE setPitch  SCRIPTABLE true)
+      Q_PROPERTY(double  tuning READ getTuning WRITE setTuning SCRIPTABLE true)
+      Q_PROPERTY(QColor  color  READ getColor  WRITE setColor  SCRIPTABLE true)
 
       Note* thisNote() const;
+
+   public slots:
+      void setColor(const QColor& c);
+      void setTuning(double v);
+      void setPitch(int v);
+
+      QString getName() const;
+      int     getPitch() const;
+      double  getTuning() const;
+      QColor  getColor() const;
 
    public:
       ScNotePrototype(QObject *parent = 0) : QObject(parent) {}
       ~ScNotePrototype() {}
-
-      QString getName() const;
-      int getPitch() const;
-      void setPitch(int v);
-      double getTuning() const;
-      void setTuning(double v);
-      QColor getColor() const;
-      void setColor(QColor c);
-
-   public slots:
       };
 
 Q_DECLARE_METATYPE(NotePtr)

@@ -817,6 +817,7 @@ ShadowNote::ShadowNote(Score* s)
       {
       _line = 1000;
       _headGroup = 0;
+      _head      = 2;   // 1/4 note
       }
 
 void ShadowNote::setHeadGroup(int val)
@@ -849,15 +850,15 @@ void ShadowNote::draw(QPainter& p) const
       else
             voice = ps.voice();
 
-      QPen pen(preferences.selectColor[voice].light(160));
+      QPen pen(preferences.selectColor[voice].light(140));  // was 160
       pen.setWidthF(lw);
       p.setPen(pen);
 
-      symbols[noteHeads[_headGroup][2]].draw(p, magS());
+      symbols[noteHeads[_headGroup][_head]].draw(p, magS());
 
       double ms = spatium();
 
-      double x1 = symbols[quartheadSym].width(magS())*.5 - ms;
+      double x1 = symbols[noteHeads[_headGroup][_head]].width(magS())*.5 - ms;
       double x2 = x1 + 2 * ms;
 
       ms *= .5;
@@ -880,7 +881,7 @@ void ShadowNote::draw(QPainter& p) const
 
 QRectF ShadowNote::bbox() const
       {
-      QRectF b = symbols[quartheadSym].bbox(magS());
+      QRectF b = symbols[noteHeads[_headGroup][_head]].bbox(magS());
       double _spatium = spatium();
       double x  = b.width()/2 - _spatium;
       double lw = point(score()->styleS(ST_ledgerLineWidth));
