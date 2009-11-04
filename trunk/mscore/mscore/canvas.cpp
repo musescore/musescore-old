@@ -1141,19 +1141,30 @@ void Canvas::moveCursor(Segment* segment, int staffIdx)
             return;
             }
       cursor->setSegment(segment);
-      int idx   = staffIdx == -1 ? 0 : staffIdx;
-      double x  = segment->canvasPos().x();
-      double y  = system->bboxStaff(idx).y() + system->canvasPos().y();
-      double y2 = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
-
+      int idx         = staffIdx == -1 ? 0 : staffIdx;
+      double systemY  = system->canvasPos().y();
+      double x        = segment->canvasPos().x();
+      double y        = system->staffY(idx) + systemY;
       double _spatium = cursor->spatium();
-      double d = _spatium * .5;
+      double d        = _spatium * .5;
+
       _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setPos(x - _spatium, y - _spatium);
-      if (staffIdx == -1)
-            cursor->setHeight(y2 - y + 6.0 * _spatium);
-      else
-            cursor->setHeight(6.0 * _spatium);
+      double h = 6.0 * _spatium;
+      if (staffIdx == -1) {
+            //
+            // set cursor height for whole system
+            //
+            double y2;
+            for (int i = 0; i < _score->nstaves(); ++i) {
+                  SysStaff* ss = system->staff(i);
+                  if (!ss->show())
+                        continue;
+                  y2 = ss->y();
+                  }
+            h += y2;
+            }
+      cursor->setHeight(h);
       _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setTick(segment->tick());
       }
