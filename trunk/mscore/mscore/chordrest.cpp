@@ -352,6 +352,8 @@ void ChordRest::setSmall(bool val)
 
 void ChordRest::layoutArticulations()
       {
+      if (parent() == 0)
+            return;
       double _spatium  = spatium();
       Measure* m       = measure();
       System* s        = m->system();
@@ -628,7 +630,12 @@ void ChordRest::toDefault()
 
 Fraction ChordRest::fraction() const
       {
-      return _duration.type() == Duration::V_MEASURE ? measure()->fraction() : _duration.fraction();
+      if (_duration.type() == Duration::V_MEASURE) {
+            if (parent() == 0)
+                  return AL::division * 4;
+            return measure()->fraction();
+            }
+      return _duration.fraction();
       }
 
 //---------------------------------------------------------

@@ -382,16 +382,13 @@ printf("Rest: no symbol for 1/256\n");
 
 QRectF Rest::bbox() const
       {
-      Measure* m = measure();
-      if (m && m->multiMeasure()) {
+      Segment* s = segment();
+      if (s && s->measure() && s->measure()->multiMeasure()) {
             double h = spatium() * 6.5;
             double w = point(score()->styleS(ST_minMMRestWidth));
             return QRectF(-w * .5, -h + 2 * spatium(), w, h);
             }
-      else {
-            QRectF b = symbols[_sym].bbox(mag());
-            return b;
-            }
+      return symbols[_sym].bbox(mag());
       }
 
 //---------------------------------------------------------

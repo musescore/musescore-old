@@ -244,6 +244,7 @@ class Note : public Element {
 class ShadowNote : public Element {
       int _line;
       int _headGroup;
+      int _head;
 
    public:
       ShadowNote(Score*);
@@ -255,6 +256,8 @@ class ShadowNote : public Element {
       virtual void draw(QPainter& p) const;
       int headGroup() const           { return _headGroup; }
       void setHeadGroup(int val);
+      void setHead(int val)            { _head = val; }
+      int head() const                 { return _head; }
       };
 
 extern const int noteHeads[HEAD_GROUPS][4];

@@ -1184,19 +1184,22 @@ void Canvas::setShadowNote(const QPointF& p)
       Staff* staff      = score()->staff(pos.staffIdx);
       shadowNote->setMag(staff->mag());
       Instrument* instr = staff->part()->instrument();
-      int notehead      = 0;
+      int noteheadGroup = 0;
       int line          = pos.line;
+      int noteHead      = score()->inputState().duration.headType();
+
 
       if (instr->useDrumset) {
             Drumset* ds  = instr->drumset;
             int pitch    = score()->inputState().drumNote;
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
-                  notehead = ds->noteHead(pitch);
+                  noteheadGroup = ds->noteHead(pitch);
                   }
             }
       shadowNote->setLine(line);
-      shadowNote->setHeadGroup(notehead);
+      shadowNote->setHeadGroup(noteheadGroup);
+      shadowNote->setHead(noteHead);
       shadowNote->setPos(pos.pos);
       }
 
@@ -1446,11 +1449,10 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       int tick;
       MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
       if (mb && mb->type() == MEASURE) {
-            Measure* m = (Measure*)mb;
+            Measure* m = static_cast<Measure*>(mb);
             System* s  = m->system();
-            QRectF sb(s->staff(staffIdx)->bbox());
-            sb.translate(s->pos() + s->page()->pos());
-            QPointF anchor(seg->abbox().x(), sb.topLeft().y());
+            qreal y    = s->staff(staffIdx)->y() + s->pos().y() + s->page()->pos().y();
+            QPointF anchor(seg->abbox().x(), y);
             setDropAnchor(QLineF(pos, anchor));
             dragElement->setTrack(staffIdx * VOICES);
             dragElement->setTick(tick);
