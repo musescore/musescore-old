@@ -130,6 +130,18 @@ struct Preferences {
       };
 
 //---------------------------------------------------------
+//   ShortcutItem
+//---------------------------------------------------------
+
+class ShortcutItem : public QTreeWidgetItem {
+
+      bool operator<(const QTreeWidgetItem&) const;
+
+   public:
+      ShortcutItem() : QTreeWidgetItem() {}
+      };
+
+//---------------------------------------------------------
 //   PreferenceDialog
 //---------------------------------------------------------
 
