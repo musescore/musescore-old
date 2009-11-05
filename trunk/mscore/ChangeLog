@@ -1,3 +1,6 @@
+5.nov. (ws)
+      - optimize spacing of special case: triplets with notes moved to
+        a different staff (as seen in example prelude-sr)
 4.nov. (ws)
       - change sorting of shortcuts
       - fix cursor height for systems with hidden staves

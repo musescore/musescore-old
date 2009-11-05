@@ -504,6 +504,53 @@ void Measure::layoutBeams()
                         }
                   }
             }
+      //
+      //    Experimental
+      //    check for special case:
+      //    - triplet with middle chord in different staff
+      //      (cross staff beam)
+      //    Apply optical correction
+      //
+      double _spatium = spatium();
+      for (int track = 0; track < tracks; ++track) {
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
+                  if (e && e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        if (!cr->beam() || !cr->tuplet())
+                              continue;
+                        Tuplet* tuplet = cr->tuplet();
+                        const QList<DurationElement*> el = tuplet->elements();
+
+                        if ((el.size() == 3)
+                           && (el[0]->isChordRest())
+                           && (el[1]->isChordRest())
+                           && (el[2]->isChordRest())
+                           && (
+                              static_cast<ChordRest*>(el[0])->staffMove()
+                              || static_cast<ChordRest*>(el[1])->staffMove()
+                              || static_cast<ChordRest*>(el[2])->staffMove()
+                              )
+                           ) {
+                              int m0 = static_cast<ChordRest*>(el[0])->staffMove();
+                              int m1 = static_cast<ChordRest*>(el[1])->staffMove();
+                              int m2 = static_cast<ChordRest*>(el[2])->staffMove();
+                              //
+                              //  todo: use note head width instead of _spatium
+                              //
+                              if (m1 && (m0 == 0) && (m2 == 0))
+                                    el[1]->setUserXoffset(m1 > 0 ? -_spatium : _spatium);
+                              else if (m0 && m2 && (m1 == 0) && (m0 == m2))
+                                    el[1]->setUserXoffset(m0 > 0 ? _spatium : -_spatium);
+                              }
+
+                        // skip tuplet
+                        while (tuplet->elements().back()->type() == TUPLET)
+                              tuplet = static_cast<Tuplet*>(tuplet->elements().back());
+                        segment = static_cast<ChordRest*>(tuplet->elements().back())->segment();
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------
