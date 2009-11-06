@@ -837,7 +837,7 @@ void Score::cmdFlip()
                               a->setAnchor(A_TOP_CHORD);
                         else if (a->anchor() == A_CHORD) {
                               ChordRest* cr = static_cast<ChordRest*>(a->parent());
-                              a->setAnchor(cr->isUp() ? A_TOP_CHORD : A_BOTTOM_CHORD);
+                              a->setAnchor(cr->up() ? A_TOP_CHORD : A_BOTTOM_CHORD);
                               }
                         }
                   if (newSubtype != -1)

@@ -745,7 +745,7 @@ ShowChordWidget::ShowChordWidget()
       layout->addWidget(chr);
       connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
       connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
-      connect(crb.upFlag, SIGNAL(toggled(bool)), SLOT(upChanged(bool)));
+      connect(crb.upFlag,   SIGNAL(toggled(bool)), SLOT(upChanged(bool)));
       connect(crb.beamMode, SIGNAL(activated(int)), SLOT(beamModeChanged(int)));
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
@@ -787,7 +787,6 @@ void ShowChordWidget::setElement(Element* e)
       crb.tupletButton->setEnabled(chord->tuplet());
       crb.upFlag->setChecked(chord->up());
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
-      crb.isUpFlag->setChecked(chord->isUp());
       crb.dots->setValue(chord->dots());
       crb.ticks->setValue(chord->ticks());
       crb.duration->setValue(int(chord->duration().type()));

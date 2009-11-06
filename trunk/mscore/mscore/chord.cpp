@@ -964,11 +964,11 @@ qreal Chord::downPos() const
 
 qreal Chord::centerX() const
       {
-      const Note* note = isUp() ? upNote() : downNote();
+      const Note* note = up() ? upNote() : downNote();
       qreal x = note->pos().x();
       x += note->headWidth() * .5;
       if (note->mirror()) {
-            x += note->headWidth() * (isUp() ? -1.0 : 1.0);
+            x += note->headWidth() * (up() ? -1.0 : 1.0);
             }
       return x;
       }
@@ -1288,9 +1288,7 @@ void Chord::layout()
             if (move > maxMove)
                   maxMove = move;
 
-            double y = note->line() * _spatium * .5;
-
-            bool stemUp = isUp();
+            bool stemUp = up();
             if (note->staffMove() == -1) {
                   stemUp = false;
                   }
@@ -1300,7 +1298,7 @@ void Chord::layout()
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
 
-            note->setPos(x, y);
+            note->setXpos(x);       // y is initialized in setLine()
             double xx = x + headWidth;
             if (xx > _dotPosX)
                   _dotPosX = xx;

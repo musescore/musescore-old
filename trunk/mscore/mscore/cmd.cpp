@@ -2961,7 +2961,7 @@ void Score::cmdMirrorNoteHead()
       Note* note = static_cast<Note*>(e);
       DirectionH d = note->userMirror();
       if (d == DH_AUTO)
-            d = note->chord()->isUp() ? DH_RIGHT : DH_LEFT;
+            d = note->chord()->up() ? DH_RIGHT : DH_LEFT;
       else
             d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
       undoChangeUserMirror(note, d);

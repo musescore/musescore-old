@@ -428,8 +428,8 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             return;
 
       int startTrack = staffIdx * VOICES;
-      int endTrack = startTrack + VOICES;
-      int voices   = 0;
+      int endTrack   = startTrack + VOICES;
+      int voices     = 0;
       QList<Note*> notes;
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
@@ -447,14 +447,15 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             return;
 
       int startIdx, endIdx, incIdx;
-      if (notes[0]->chord()->isUp() || voices > 1) {
+
+      if (notes[0]->chord()->up() || voices > 1) {
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
             for (int i = 0; i < endIdx-1; ++i) {
                   if ((notes[i]->line() == notes[i+1]->line())
                      && (notes[i]->track() != notes[i+1]->track())
-                     && (!notes[i]->chord()->isUp() && notes[i+1]->chord()->isUp())
+                     && (!notes[i]->chord()->up() && notes[i+1]->chord()->up())
                      ) {
                         Note* n = notes[i];
                         notes[i] = notes[i+1];
@@ -470,25 +471,25 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 
       bool moveLeft = false;
       int ll        = 1000;      // line distance to previous note head
-      bool isLeft   = notes[startIdx]->chord()->isUp();
+      bool isLeft   = notes[startIdx]->chord()->up();
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
       int lastHead  = -1;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
-            Note* note = notes[idx];
-            int move   = note->staffMove();
-            int line   = note->line();
-            int ticks  = note->chord()->tickLen();
-            int head   = note->noteHead();      // symbol number or note head
+            Note* note   = notes[idx];
+            Chord* chord = note->chord();
+            int move     = note->staffMove();
+            int line     = note->line();
+            int ticks    = chord->tickLen();
+            int head     = note->noteHead();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
-            if ((note->chord()->isUp() != isLeft) || conflict)
+            if ((chord->up() != isLeft) || conflict)
                   isLeft = !isLeft;
-            int nmirror   = note->chord()->isUp() != isLeft;
+            bool nmirror  = chord->up() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
 
-            Chord* chord = note->chord();
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
                         chord->setXpos(0.0);
@@ -505,10 +506,12 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
                               note->setHidden(false);
                         }
                   else {
-                        if ((line > ll) || !chord->up())
+                        if ((line > ll) || !chord->up()) {
                               note->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
-                        else
+                              }
+                        else {
                               notes[idx-incIdx]->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
+                              }
                         moveLeft = true;
                         }
                   }
@@ -521,12 +524,12 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
                   mirror = nmirror;
                   }
             else {
-                  mirror = note->chord()->isUp();
+                  mirror = note->chord()->up();
                   if (note->userMirror() == DH_LEFT)
                         mirror = !mirror;
                   }
             note->setMirror(mirror);
-            if (mirror)
+            if (mirror)                   //??
                   moveLeft = true;
 
             move1    = move;
@@ -629,7 +632,7 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             double x    = e.x;
             if (moveLeft) {
                   Chord* chord = note->chord();
-                  if (((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
+                  if (((note->mirror() && chord->up()) || (!note->mirror() && !chord->up())))
                         x -= note->headWidth();
                   }
             note->accidental()->setPos(x, 0);
