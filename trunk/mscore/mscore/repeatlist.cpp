@@ -327,6 +327,7 @@ void RepeatList::unwind()
                               rstack.pop();     // end this loop
                         else
                               printf("repeatStack:: cannot pop\n");
+                        continue;
                         }
                   }
             if (!rstack.isEmpty() && (rstack.top().type == RepeatLoop::LOOP_JUMP)) {
