@@ -1,3 +1,9 @@
+6.nov. (ws)
+      - fix crash when removing key signature when there is only one
+      - fix layout of measure repeat
+      - measure repeat symbol was not drawn in palette
+      - note spacing function reimplemented; simpler and hopefully faster
+        and more flexible
 5.nov. (ws)
       - optimize spacing of special case: triplets with notes moved to
         a different staff (as seen in example prelude-sr)

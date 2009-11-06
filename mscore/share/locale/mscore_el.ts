@@ -2,129 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="el_GR">
 <context>
-    <name></name>
-    <message>
-        <source>System</source>
-        <translation>Σύστημα</translation>
-    </message>
-    <message>
-        <source>Afrikaans</source>
-        <translation>Afrikaans</translation>
-    </message>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation>Ø§ÙØ¹Ø±Ø¨ÙØ©</translation>
-    </message>
-    <message>
-        <source>CatalÃ </source>
-        <translation>CatalÃ </translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation>Czech</translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation>Dansk</translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation>Deutsch</translation>
-    </message>
-    <message>
-        <source>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</source>
-        <translation>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation>English (GB) - Αγγλικά (ΜΒ)</translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation>English (US) - Αγγλικά (ΗΠΑ)</translation>
-    </message>
-    <message>
-        <source>EspaÃ±ol</source>
-        <translation>EspaÃ±ol</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation>Finnish</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>FranÃ§ais</translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation>Galego</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation>Hindi</translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation>Hungary</translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation>Italiano</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation>Japanese</translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation>Nederlands</translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation>Norsk</translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation>Polski</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs</source>
-        <translation>PortuguÃªs</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation>PortuguÃªs brasileiro</translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation>RomÃ¢nÄ</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation>Ð ÑÑÑÐºÐ¸Ð¹</translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation>Svenska</translation>
-    </message>
-    <message>
-        <source>à¸ à¸²à¸©à¸²à¹à¸à¸¢</source>
-        <translation>à¸ à¸²à¸©à¸²à¹à¸à¸¢</translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>TÃ¼rkÃ§e</translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation>Ukrajina</translation>
-    </message>
-    <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation>ç¹é«ä¸­æ (å°ç£)</translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -290,11 +167,43 @@ p, li { white-space: pre-wrap; }
         <source>Measure</source>
         <translation>Μέτρο</translation>
     </message>
+    <message>
+        <source>Split Staff...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished">Γραμμή Φθογγοσήμου</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Άγκυστρο</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -995,7 +904,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation>αυτόματος</translation>
     </message>
     <message>
@@ -1016,7 +927,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <extracomment>100 cent = 1 semitone intervall
+----------
+100 cent = 1 semitone intervall</extracomment>
         <translation>cent</translation>
     </message>
     <message>
@@ -1029,12 +942,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation>χρήστης</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation>απόκλιση</translation>
     </message>
     <message>
@@ -1079,41 +996,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>SlurBack:</source>
         <translation>ΠροσωδίαΠίσω:</translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Διάλογος</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Ψάξε για τρίφωνες συγχωρδίες και</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>αφαίρεσε την κάτω νότα</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>αφαίρεσε τη μεσαία νότα</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>αφαίρεσε την κορυφαία νότα</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Διάλεξε απόκλιση τονικότητας</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Απόκλιση Τονικότητας</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cent</translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1441,12 @@ failed: </source>
 ----------
 space unit
 ----------
+space unit
+----------
+spatium unit
+----------
+space unit
+----------
 space unit</extracomment>
         <translation>sp</translation>
     </message>
@@ -1970,14 +1858,6 @@ space unit</extracomment>
         <translation>Επεξεργασία Μέρους:</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Όνομα:</translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation>Τίτλος</translation>
-    </message>
-    <message>
         <source>Instrument:</source>
         <translation>Όργανο</translation>
     </message>
@@ -1986,8 +1866,16 @@ space unit</extracomment>
         <translation>Δημιουργία Μέρους</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>ΟΚ</translation>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Κλείσιμο</translation>
     </message>
 </context>
 <context>
@@ -2202,7 +2090,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <source>Load</source>
@@ -2264,7 +2152,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <source>Instrument List</source>
@@ -2440,7 +2328,7 @@ failed: </source>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ped (Pedal)</translation>
     </message>
     <message>
         <source>x:</source>
@@ -2651,7 +2539,7 @@ failed: </source>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
     <message>
         <source>actual</source>
@@ -2746,1108 +2634,8 @@ failed: </source>
 <context>
     <name>MuseScore</name>
     <message>
-        <source>local help</source>
-        <translation>τοπική βοήθεια</translation>
-    </message>
-    <message>
-        <source>Local &amp;Handbook...</source>
-        <translation>Τοπικό &amp;Εγχειρίδιο Χρήσης...</translation>
-    </message>
-    <message>
-        <source>Show local Handbook</source>
-        <translation>Εμφάνιση τοπικού Εγχειριδίου Χρήσης</translation>
-    </message>
-    <message>
-        <source>file open</source>
-        <translation>άνοιγμα αρχείου</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Άνοιγμα...</translation>
-    </message>
-    <message>
-        <source>Load Score from File</source>
-        <translation>Φόρτωση Παρτιτούρας από Αρχείο</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>αποθήκευση αρχείου</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Αποθήκευση</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>Αποθήκευση Παρτιτούρας σε Αρχείο</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>αποθήκευση αρχείου ως</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Αποθήκευση ως...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File</source>
-        <translation>Αποθήκευση Παρτιτούρας σε ονομασμένο Αρχείο</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>αποθήκευση αντιγράφου αρχείου</translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation>Αποθήκευση Αντιγράφου...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>Αποθήκευση Παρτιτούρας σε ονομασμένο Αρχείο, αλλά κράτηση του τρέχον ονόματος</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>επαναφόρτωση αρχείου</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation>Επαναφόρτωση</translation>
-    </message>
-    <message>
-        <source>Reload Score from File</source>
-        <translation>Επαναφόρτωση Παρτιτούρας από Αρχείο</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>κλείσιμο αρχείου</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Κλείσιμο</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Κλείσιμο Τρέχουσας Παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation>νέο αρχείο</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Νέο...</translation>
-    </message>
-    <message>
-        <source>Create new score</source>
-        <translation>Δημιουργία νέας παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>print</source>
-        <translation>εκτύπωση</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Εκτύπωση...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Εκτύπωση Παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>αναίρεση</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation>Αναίρεση</translation>
-    </message>
-    <message>
-        <source>undo last change</source>
-        <translation>αναίρεση τελευταίας αλλαγής</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>επανεκτέλεση</translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation>Επανεκτέλεση</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>ακύρωση τελευταίας αναίρεσης</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>αποκοπή</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Αποκοπή</translation>
-    </message>
-    <message>
-        <source>copy</source>
-        <translation>αντιγραφή</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Αντιγραφή</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>επικόλληση</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation>Επικόλληση</translation>
-    </message>
-    <message>
-        <source>show instruments dialog</source>
-        <translation>Εμφάνιση διαλόγου οργάνων</translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation>Όργανα...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Εμφάνιση Διαλόγου Οργάνων</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>εμφάνιση παλέτας κλειδιών</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Κλειδιά...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Εμφάνιση Παλέτας Κλειδιών</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>εμφάνιση παλέτας κλιμάκων</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Κλίμακα...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Εμφάνιση Παλέτας Κλιμάκων</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>εμφάνιση παλέτας συμβόλων</translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation>Σύμβολα...</translation>
-    </message>
-    <message>
-        <source>Show Symbols Palette</source>
-        <translation>Εμφάνιση Παλέτας Συμβόλων</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>εμφάνιση παλέτας χρόνου</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Χρόνος...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Εμφάνιση Παλέτας Χρόνου</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>εμφάνιση παλέτας δυναμικών</translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation>Δυναμικές</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Εμφάνιση Παλέτας Δυναμικών</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>εισαγωγή νότας</translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation>Εισαγωγή Νότας</translation>
-    </message>
-    <message>
-        <source>toggle note input mode N</source>
-        <translation>εναλλαγή κατάστασης εισαγωγής νότας Ν</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>διόρθωση τονικότητας</translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation>Διόρθωση Τονικότητας</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>εισαγωγή ταυτοφωνίας πάνω</translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation>Ταυτοφωνία Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation>Εισαγωγή ταυτοφωνίας πάνω</translation>
-    </message>
-    <message>
-        <source>enter second above</source>
-        <translation>εισαγωγή δεύτερης πάνω</translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation>Δεύτερη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation>Εισαγωγή δεύτερης πάνω</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>εισαγωγή τρίτης πάνω</translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation>Τρίτη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation>Εισαγωγή τρίτης πάνω</translation>
-    </message>
-    <message>
-        <source>enter fourth above</source>
-        <translation>εισαγωγή τέταρτης πάνω</translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation>Τέταρτη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation>Εισαγωγή τέταρτης πάνω</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>εισαγωγή πέμπτης πάνω</translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation>Πέμπτη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation>Εισαγωγή πέμπτης πάνω</translation>
-    </message>
-    <message>
-        <source>enter sixth above</source>
-        <translation>εισαγωγή έκτης πάνω</translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation>Έκτη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation>Εισαγωγή έκτης πάνω</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>εισαγωγή έβδομης πάνω</translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation>Έβδομη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation>Εισαγωγή έβδομης πάνω</translation>
-    </message>
-    <message>
-        <source>enter octave above</source>
-        <translation>εισαγωγή οκτάβας πάνω</translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation>Οκτάβα πάνω</translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation>Εισαγωγή οκτάβας πάνω</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>Εισαγωγή ένατης πάνω</translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation>Ένατη Πάνω</translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation>Εισαγωγή ένατης πάνω</translation>
-    </message>
-    <message>
-        <source>enter second below</source>
-        <translation>εισαγωγή δεύτερης κάτω</translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation>Δεύτερη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation>Εισαγωγή δεύτερης κάτω</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>εισαγωγή τρίτης κάτω</translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation>Τρίτη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation>Εισαγωγή τρίτης κάτω</translation>
-    </message>
-    <message>
-        <source>enter fourth below</source>
-        <translation>εισαγωγή τέταρτης κάτω</translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation>Τέταρτη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation>Εισαγωγή τέταρτης κάτω</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>εισαγωγή πέμπτης κάτω</translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation>Πέμπτη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation>Εισαγωγή πέμπτης κάτω</translation>
-    </message>
-    <message>
-        <source>enter sixth below</source>
-        <translation>εισαγωγή έκτης κάτω</translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation>Έκτη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation>εισαγωγή έκτης κάτω</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>εισαγωγή έβδομης κάτω</translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation>Έβδομη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation>Εισαγωγή έβδομης κάτω</translation>
-    </message>
-    <message>
-        <source>enter octave below</source>
-        <translation>εισαγωγή οκτάβας κάτω</translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation>Οκτάβα Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation>Εισαγωγή οκτάβας κάτω</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>εισαγωγή ένατης κάτω</translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation>Ένατη Κάτω</translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation>Εισαγωγή ένατης κάτω</translation>
-    </message>
-    <message>
-        <source>enter note a</source>
-        <translation>εισαγωγή νότας a</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Εισαγωγή νότας A</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>Εισαγωγή νότας b</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note B</source>
-        <translation>Εισαγωγή Νότας Β</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>εισαγωγή νότας c</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Εισαγωγή Νότας C</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>εισαγωγή νότας d</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note D</source>
-        <translation>Εισαγωγή Νότας D</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>εισαγωγή νότας e</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Εισαγωγή Νότας E</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>εισαγωγή νότας f</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note F</source>
-        <translation>Εισαγωγή Νότας F</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>εισαγωγή νότας g</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Εισαγωγή Νότας G</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>προσθήκη a σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation>Προσθήκη Α</translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation>Προσθήκη νότας A σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add b to chord</source>
-        <translation>προσθήκη b σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation>Προσθήκη B</translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation>Προσθήκη νότας B σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>προσθήκη c σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation>Προσθήκη C</translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation>Προσθήκη νότας C σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add d to chord</source>
-        <translation>προσθήκη d σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation>Προσθήκη D</translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation>Προσθήκη νότας D σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>προσθήκη e σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation>Προσθήκη E</translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation>Προσθήκη νότας E σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add f to chord</source>
-        <translation>προσθήκη f σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation>Προσθήκη F</translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation>Προσθήκη νότας F σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>προσθήκη g σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation>Προσθήκη G</translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation>Προσθήκη νότας G σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>enter rest</source>
-        <translation>εισαγωγή παύσης</translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation>παύση</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>προσθήκη staccato</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>ύφεση</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>εισαγωγή τρύλλου</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>τρύλλος</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>περισσότερη έκταση</translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation>Προσθήκη Περισσότερης Έκτασης</translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation>Προσθήκη περισσότερης έκτασης στο επιλεγμένο μέτρο</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>λιγότερη έκταση</translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation>Προσθήκη Λιγότερης Έκτασης</translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation>Προσθήκη λιγότερης έκτασης στο επιλεγμένο μέτρο</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation>Επαναφορά Κατάστασης Ενοτικών Γραμμών</translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Επαναφορά Κατάστασης Ενοτικών Γραμμών για τα επιλεγμένα μέτρα</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>αναστροφή γραμμής φθογγοσήμου</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>αλλαγή κατεύθυνσης</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>πάνω νότα σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>πήγαινε στη νότα της συγχωρδίας με την υψηλότερη οξύτητα</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>πήγαινε στην κορυφαία νότα στη συγχωρδία</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>κορυφαία νότα στη συγχωρδία</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>μετακίνηση πάνω</translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>οξύτητα κάτω</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>κάτω</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>οξύτητα κατά μία οκτάβα κάτω</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>κάτω+ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>κάτω νότα σε συγχωρδία</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>πήγαινε στη νότα της συγχωρδίας με τη χαμηλότερη τονικότητα</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>πήγαινε στην κάτω νότα στη συχωρδία</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>κάτω νότα στη συγχωρδία</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>κίνηση κάτω</translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>previous chord</source>
-        <translation>προηγούμενη συγχωρδία</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>Αριστερά</translation>
-    </message>
-    <message>
-        <source>previous measure</source>
-        <translation>προηγούμενο μέτρο</translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>next chord</source>
-        <translation>επόμενη συγχωρδία</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation>Δεξιά</translation>
-    </message>
-    <message>
-        <source>next measure</source>
-        <translation>επόμενο μέτρο</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation>προσθήκη προηγούμενης συγχωρδίας στην επιλογή</translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation>επιλογή στην αρχή του μέτρου</translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation>προσθήκη επόμενης συγχωρδίας στην επιλογή</translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation>επιλέξτε για τέλος του μέτρου</translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation>επιλέξτε για αρχή γραμμής</translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation>επιλέξτε για τέλος γραμμής</translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation>επιλέξτε για αρχή παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation>επιλέξτε για τέλος μέτρου</translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation>προσθήκη πενταγράμμου πάνω από επιλογή</translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation>προσθήκη πενταγράμμου κάτω από επιλογή</translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation>σελίδα-προηγ.</translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation>σελίδα-επόμενη</translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation>σελίδα-κορυφή</translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation>σελίδα-τέλος</translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation>προσθήκη σύζευξης προσωδίας</translation>
-    </message>
-    <message>
         <source>crescendo</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation>διαγραφή</translation>
-    </message>
-    <message>
-        <source>delete selected measures</source>
-        <translation>διαγραφή επιλεγμένων μέτρων</translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation>Διαγραφή Επιλεγμένων Μέτρων</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>προσθήκη μέτρου</translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation>Προσθήκη Μέτρου</translation>
-    </message>
-    <message>
-        <source>append measures</source>
-        <translation>προσθήκη μέτρων</translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation>Προσθήκη Μέτρων...</translation>
-    </message>
-    <message>
-        <source>insert measure</source>
-        <translation>εισαγωγή μέτρου</translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation>Εισαγωγή Μέτρου</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>εισαγωγή μέτρων</translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation>Εισαγωγή Μέτρων...</translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation>Εισαγωγή Οριζόντιου Πλαισίου</translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation>Εισαγωγή Κατακόρυφου Πλαισίου</translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation>Προσθήκη Οριζόντιου Πλαισίου</translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation>Προσθήκη Κατακόρυφου Πλαισίου</translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation>Δίηχο</translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation>Τρίηο</translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation>Τετράηχο</translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation>Πεντάηχο</translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation>Εξάηχο</translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation>Επτάηχο</translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation>Οκτάηχο</translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation>Εννιάηχο</translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation>Άλλες υποδιαιρέσεις χρόνου</translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation>Άλλα...</translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation>νότα breve</translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation>Διπλή ολόκληρη νότα (breve)</translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation>Ολόκληρο (semibreve)</translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation>Μισό</translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation>Τέταρτο</translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation>Αξία ογδόου (όγδοο)</translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation>αξία 16ου (δεκάτο έκτο)</translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation>αξία 32ου (τριακοστό δεύτερο)</translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation>αξία 64ου (εξηκοστό τέταρτο)</translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Τελεία</translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation>Διπλή τελεία</translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>διπλή δίεση</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>δίεση</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>φυσικό</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>διπλή ύφεση</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -3870,596 +2658,56 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>voice 1</source>
-        <translation>φωνή 1</translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation>φωνή 2</translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation>φωνή 3</translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation>φωνή 4</translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation>θύρα εισόδου midi</translation>
-    </message>
-    <message>
-        <source>Enable MIDI Input</source>
-        <translation>Ενεργοποίηση Εισόδου MIDI</translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation>επεξεργασία ήχου σε</translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation>Ενεργοποίηση ήχου κατά την επεξεργασία</translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation>αρχή ενοτ. γραμμής</translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation>μέσο ενοτ. γραμμής</translation>
-    </message>
-    <message>
         <source>no beam</source>
         <translation>δίχως ενοτ. γραμμή</translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation>ενοτ. γραμμή 32ου</translation>
     </message>
     <message>
         <source>auto beam</source>
         <translation>Αυτόματη γραμμή φθογγοσήμων</translation>
     </message>
     <message>
-        <source>Palette</source>
-        <translation>Παλέτα</translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation>Πίνακας Αναπαραγωγής</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Πλοηγός</translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation>Μείκτης</translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation>Εργαλειοθήκη Τρανσπόρτου</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation>Τρανσπόρτο</translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation>Εργαλειοθήκη Εισαγωγής Νοτών</translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation>Γραμμή Κατάστασης</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Έξοδος</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation>Εστίαση Κανβά</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Στίχοι</translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation>Παλέτα δακτυλισμών</translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation>Δακτυλισμοί...</translation>
-    </message>
-    <message>
         <source>Fingering</source>
         <translation>Δακτυλισμοί</translation>
     </message>
     <message>
-        <source>Tempo Palette</source>
-        <translation>Παλέτα Tempo</translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>
         <translation>Μετρονόμος</translation>
     </message>
     <message>
-        <source>Add System Text</source>
-        <translation>Προσθήκη Κειμένου Συστήματος</translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation>Κείμενο Συστήματος</translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation>Προσθήκη Κειμένου Πενταγράμμου</translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation>Κείμενο Πενταγράμμου</translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation>Προσθήκη Κειμένου</translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation>Κείμενο Πλαισίου</translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation>Προσθήκη Τίτλου</translation>
-    </message>
-    <message>
         <source>Title</source>
         <translation>Τίτλος</translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation>Προσθήκη Κειμένου Τίτλου</translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation>Προσθήκη Υπότιτλου</translation>
     </message>
     <message>
         <source>Subtitle</source>
         <translation>Υπότιτλος</translation>
     </message>
     <message>
-        <source>Add Subtitle Text</source>
-        <translation>Προσθήκη Κειμένου Υπότιτλου</translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation>Προσθήκη Συνθέτη</translation>
-    </message>
-    <message>
         <source>Composer</source>
         <translation>Συνθέτης</translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation>Προσθήκη Κειμένου Συνθέτη</translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation>Προσθήκη Ποιητή</translation>
     </message>
     <message>
         <source>Poet</source>
         <translation>Ποιητής</translation>
     </message>
     <message>
-        <source>Add Poet Text</source>
-        <translation>Προσθήκη Κειμένου Ποιητή</translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation>Προσθήκη Πνευματικών Δικαιωμάτων (Copyright)</translation>
-    </message>
-    <message>
         <source>Copyright</source>
         <translation>Πνευματικά Δικαιώματα</translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation>Προσθήκη Κειμένου Πνευματικών Δικαιωμάτων (Copyright)</translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation>Προσθήκη Ονόματος Συγχωρδίας</translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation>Όνομα Συγχωρδίας</translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation>Προσθήκη Κειμένου Συγχωρδίας</translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation>προβολή ιδιοτήτων αρμονίας για συγχωρδία</translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation>Ιδιότητες Αρμονίας</translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation>Προσθήκη Σημείου Πρόβας</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
         <translation>Σημείο Πρόβας</translation>
     </message>
     <message>
-        <source>player play</source>
-        <translation>αναπαραγωγέας αναπαραγωγή</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Αναπαραγωγή</translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation>Αρχή ή σταμάτημα αναπαραγωγής</translation>
-    </message>
-    <message>
-        <source>left chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prev measure</source>
-        <translation>προηγ. μέτρο</translation>
-    </message>
-    <message>
-        <source>seek to begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>player rewind</source>
-        <translation>αναπαραγωγέας γρήγορη κίνηση πίσω</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Γρήγορη κίνηση πίσω</translation>
-    </message>
-    <message>
-        <source>rewind to start position</source>
-        <translation>επαναφορά στη θέση αρχής</translation>
-    </message>
-    <message>
-        <source>seek to end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>play repeats on</source>
-        <translation>ενεργοποιημένη αναπαραγωγή με επαναλήψεις</translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation>Επανάληψη</translation>
-    </message>
-    <message>
-        <source>play repeats on/off</source>
-        <translation>ενεργοποίηση/απενεργοποίηση αναπαραγωγής με επαναλήψεις</translation>
-    </message>
-    <message>
-        <source>load style</source>
-        <translation>φόρτωση στυλ</translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation>Φόρτωση Στυλ...</translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation>Φόρτωση Στυλ</translation>
-    </message>
-    <message>
-        <source>save style</source>
-        <translation>αποθήκευση στυλ</translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation>Αποθήκευση Στυλ...</translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation>Αποθήκευση Στυλ</translation>
-    </message>
-    <message>
-        <source>select all</source>
-        <translation>επιλογή όλων</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Επιλογή Όλων</translation>
-    </message>
-    <message>
-        <source>transpose</source>
-        <translation>τονική μεταφορά</translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation>Τονική Μεταφορά...</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation>Τονική Μεταφορά</translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation>κλειδί βιολιού</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>κλειδί μπάσου</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation>Ανταλλαγή Φωνής 1-2</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation>Ανταλλαγή Φωνής 1-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation>Ανταλλαγή Φωνής 1-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation>Ανταλλαγή Φωνής 2-3</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation>Ανταλλαγή Φωνής 2-4</translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation>Ανταλλαγή Φωνής 3-4</translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation>εμφάνιση σε πραγματική τονικότητα</translation>
-    </message>
-    <message>
         <source>Concert Pitch</source>
         <translation>Πραγματική Τονικότητα</translation>
     </message>
     <message>
-        <source>Display in Concert Pitch</source>
-        <translation>Εμφάνιση σε Πραγματική Τονικότητα</translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation>επανάληψη τελευταίας εντολής</translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation>Επανάληψη τελευταίας εντολής</translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation>επεξεργασία meta δεδομένων παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation>Δεδομένα Meta...</translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation>Δεδομένα Meta</translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation>εναλλαγή διαχωρισμού συστήματος</translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation>Εναλλαγή Διαχωρισμού Συστήματος</translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation>εναλλαγή αλλαγής σελίδας</translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation>Εναλλαγή Αλλαγής Σελίδας</translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation>επεξεργασία στοιχείου</translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation>Επεξεργασία Στοιχείου</translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation>επαναφορά θέσεων</translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation>Επαναφορά Θέσεων</translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation>εμφάνιση επιθεωρητή</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation>Επιθεωρητής</translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation>επαναφοράς έκτασης μέτρου</translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation>Επαναφορά Έκτασης</translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation>προβολή πλαισίων</translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation>Προβολή Πλαισίων</translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation>εμφάνιση πληκτρολογίου</translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation>Εμφάνιση Πληκτρολογίου</translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation>ενεργοποίηση αποσφαλαματωτή σεναρίων</translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation>Ενεργοποίηση Αποσφαλματωτή Σεναρίων</translation>
-    </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation>εισαγωγή παύσης 1/1</translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation>παύση 1/1</translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation>εισαγωγή παύσης 1/2</translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation>παύση 1/2</translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation>εισαγωγή παύσης 1/4</translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation>παύση 1/4</translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation>εισαγωγή παύσης 1/8</translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation>παύση 1/8</translation>
-    </message>
-    <message>
-        <source>backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation>αναζήτηση</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Αναζήτηση</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation>Μεγέθυνση</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation>Σμύκρυνση</translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation>καθρεπτισμός κεφαλής νότας</translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation>Επεξεργασία Γενικού Στυλ...</translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation>Επεξεργασία Στυλ Κειμένου...</translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation>Επιλογή όλων των ομοίων αντικειμένων</translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation>Όλα τα Πρόμοια Στοιχεία</translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation>Επιλογή όλων των ομοίων αντικειμένων στο ίδιο πεντάγραμμο</translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation>Όλα τα Παρόμοια Στοιχεία στο ίδιο Πεντάγραμμο</translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation>Έλεγχος Synthesizer</translation>
-    </message>
-    <message>
-        <source>double duration</source>
-        <translation>διπλή διάρκεια</translation>
-    </message>
-    <message>
-        <source>half duration</source>
-        <translation>μισή διάρκεια</translation>
-    </message>
-    <message>
-        <source>repeat selection</source>
-        <translation>επανάληψη επιλογής</translation>
-    </message>
-    <message>
-        <source>Repeat selection</source>
-        <translation>Επανάληψη επιλογής</translation>
-    </message>
-    <message>
-        <source>follow song</source>
-        <translation>ακολούθα το τραγούδι</translation>
-    </message>
-    <message>
-        <source>Follow Song</source>
-        <translation>Ακολούθα το Τραγούδι</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -5385,7 +3633,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>inch</source>
@@ -5414,6 +3662,17 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>Odd Page Margins</source>
         <translation>Περιθόρια Μονών Σελίδων</translation>
+    </message>
+</context>
+<context>
+    <name>Palette</name>
+    <message>
+        <source>Delete Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5448,6 +3707,29 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>Delete Palette</source>
         <translation>Διαγραφή Παλέτας</translation>
+    </message>
+</context>
+<context>
+    <name>PaletteCellProperties</name>
+    <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished">Ιδιότητες Συγχωρδίας</translation>
+    </message>
+    <message>
+        <source>Palette Cell Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5915,18 +4197,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Κείμενο</translation>
     </message>
     <message>
-        <source>Autocorrection</source>
-        <translation>Αυτόματη Διόρθωση</translation>
-    </message>
-    <message>
-        <source>Replace 1/2 ... with symbol ...</source>
-        <translation>Αντικατάσταση 1/2 ... με σύμβολο ...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with symbol ... in Copyright Text</source>
-        <translation>Αντικατάσταση του (C) ... με σύμβολο... σε Κείμενο με Πνευματικά Δικαιώματα</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Χρώματα</translation>
     </message>
@@ -6016,7 +4286,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>record</source>
@@ -6060,8 +4330,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
-        <translation type="unfinished"></translation>
+        <extracomment>millimeter
+----------
+millimeter</extracomment>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -6235,6 +4507,18 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>Define...</source>
         <translation>Ορισμός...</translation>
     </message>
+    <message>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6373,14 +4657,6 @@ Please select a single note or rest and retry operation
     </message>
 </context>
 <context>
-    <name>RepeatFlag</name>
-    <message>
-        <source>Setup...</source>
-        <translatorcomment>It could be &apos;ρύθμιση&apos; too...</translatorcomment>
-        <translation>Εγκατάσταση...</translation>
-    </message>
-</context>
-<context>
     <name>Rest</name>
     <message>
         <source>Rest</source>
@@ -6467,7 +4743,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
 </context>
 <context>
@@ -6811,27 +5087,27 @@ failed: </source>
     </message>
     <message>
         <source>beam begin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">αρχή ενοτ. γραμμής</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">μέσο ενοτ. γραμμής</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τέλος ενοτ. γραμμής</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">δίχως ενοτ. γραμμή</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αρχή 1/32</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αυτόματο</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6839,7 +5115,7 @@ failed: </source>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κάτω</translation>
     </message>
 </context>
 <context>
@@ -6945,12 +5221,31 @@ failed: </source>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
+        <extracomment>do not translate
+----------
+do not translate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
+        <extracomment>do not translate - only for debugging
+----------
+do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SplitStaff</name>
+    <message>
+        <source>MuseScore: Edit Staff/Part Properties</source>
+        <translation type="unfinished">MuseScore: Επεξεργασία Πενταγράμμου/Ιδιότητες Μερών</translation>
+    </message>
+    <message>
+        <source>Split Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7038,7 +5333,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -7046,7 +5341,9 @@ failed: </source>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
+        <extracomment>Frequency Herz
+----------
+Frequency Herz</extracomment>
         <translatorcomment>I know what Hz means! 1/T = N Hz</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
@@ -7158,12 +5455,12 @@ failed: </source>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -7307,7 +5604,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>italic</source>
@@ -7371,7 +5668,9 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
+        <extracomment>coordinate
+----------
+coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7392,7 +5691,9 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
+        <extracomment>coordinate
+----------
+coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7461,7 +5762,7 @@ failed: </source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -7521,7 +5822,7 @@ failed: </source>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">+</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -7697,77 +5998,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Λειτουργία ZIP ολοκληρώθηκε επιτυχώς.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Αποτυχία αρχικοποίησης ή φόρτωσης της βιβλιοθήκης zlib</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>σφάλμα βιβλιοθήκης zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Ανικανότητα δημιουργίας ή ανοίγματος αρχείου.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Μερικώς διεφθαρμένο αρχείο. Κάποια αρχεία ίσως αποσυμπιεστούν</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Εσφαλμένη αρχειοθήκη (archive).</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Λάθος συνθηματικό</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Δεν έχει δημιουργηθή αρχείο ακόμα.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Το αρχείο ή ο κατάλογος δεν υπάρχει.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Σφάλμα ανάγνωσης αρχείου.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Σφάλμα εγγραφής αρχείου.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Σφάλμα seek σε αρχείο.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Ανικανότητα δημιουργίας καταλόγου.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Άκυρη συσκευή.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Άκυρη ή ασύμβατη αρχείο zip</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Ασυνεπής κεφαλίδες. Η Αρχειοθήκη (archive) ίσως να έχει διεφθαρθεί</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Άγνωστο σφάλμα.</translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -7802,50 +6032,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Ιδιότητες Γραμμής...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Η Λειτουργία ZIP ολοκληρώθηκε επιτυχώς.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Αποτυχία αρχικοποίησης ή φόρτωσης της βιβλιοθήκης zlib</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>σφάλμα βιβλιοθήκης zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Ανικανότητα δημιουργίς ή ανάγνωσης αρχίου.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Δεν έχει δημιουργηθεί αρχειοθήκη (archive) ακόμα.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Το αρχείο ή ο κατάλογος δεν υπάρχει.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Σφάλμα ανάγνωσης αρχείου.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Σφάλμα εγγραφής αρχείου.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translatorcomment>seek = και αναζήτηση αλλά έτσι δε θα γίνεται κατανοητό το σφάλμα.</translatorcomment>
-        <translation>Σφάλμα seek σε αρχείο.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Άγνωστο Σφάλμα.</translation>
     </message>
 </context>
 <context>
@@ -7956,6 +6142,1725 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>action</name>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished">τοπική βοήθεια</translation>
+    </message>
+    <message>
+        <source>Local &amp;Handbook...</source>
+        <translation type="unfinished">Τοπικό &amp;Εγχειρίδιο Χρήσης...</translation>
+    </message>
+    <message>
+        <source>Show local Handbook</source>
+        <translation type="unfinished">Εμφάνιση τοπικού Εγχειριδίου Χρήσης</translation>
+    </message>
+    <message>
+        <source>file open</source>
+        <translation type="unfinished">άνοιγμα αρχείου</translation>
+    </message>
+    <message>
+        <source>Open...</source>
+        <translation type="unfinished">Άνοιγμα...</translation>
+    </message>
+    <message>
+        <source>Load Score from File</source>
+        <translation type="unfinished">Φόρτωση Παρτιτούρας από Αρχείο</translation>
+    </message>
+    <message>
+        <source>file save</source>
+        <translation type="unfinished">αποθήκευση αρχείου</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Αποθήκευση</translation>
+    </message>
+    <message>
+        <source>Save Score to File</source>
+        <translation type="unfinished">Αποθήκευση Παρτιτούρας σε Αρχείο</translation>
+    </message>
+    <message>
+        <source>file save as</source>
+        <translation type="unfinished">αποθήκευση αρχείου ως</translation>
+    </message>
+    <message>
+        <source>Save As...</source>
+        <translation type="unfinished">Αποθήκευση ως...</translation>
+    </message>
+    <message>
+        <source>Save Score to named File</source>
+        <translation type="unfinished">Αποθήκευση Παρτιτούρας σε ονομασμένο Αρχείο</translation>
+    </message>
+    <message>
+        <source>file save a copy</source>
+        <translation type="unfinished">αποθήκευση αντιγράφου αρχείου</translation>
+    </message>
+    <message>
+        <source>Save a Copy...</source>
+        <translation type="unfinished">Αποθήκευση Αντιγράφου...</translation>
+    </message>
+    <message>
+        <source>Save Score to named File, but keep current name</source>
+        <translation type="unfinished">Αποθήκευση Παρτιτούρας σε ονομασμένο Αρχείο, αλλά κράτηση του τρέχον ονόματος</translation>
+    </message>
+    <message>
+        <source>file reload</source>
+        <translation type="unfinished">επαναφόρτωση αρχείου</translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation type="unfinished">Επαναφόρτωση</translation>
+    </message>
+    <message>
+        <source>Reload Score from File</source>
+        <translation type="unfinished">Επαναφόρτωση Παρτιτούρας από Αρχείο</translation>
+    </message>
+    <message>
+        <source>file close</source>
+        <translation type="unfinished">κλείσιμο αρχείου</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Κλείσιμο</translation>
+    </message>
+    <message>
+        <source>Close Current Score</source>
+        <translation type="unfinished">Κλείσιμο Τρέχουσας Παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>file new</source>
+        <translation type="unfinished">νέο αρχείο</translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished">Νέο...</translation>
+    </message>
+    <message>
+        <source>Create new score</source>
+        <translation type="unfinished">Δημιουργία νέας παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>print</source>
+        <translation type="unfinished">εκτύπωση</translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation type="unfinished">Εκτύπωση...</translation>
+    </message>
+    <message>
+        <source>Print Score</source>
+        <translation type="unfinished">Εκτύπωση Παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>undo</source>
+        <translation type="unfinished">αναίρεση</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Αναίρεση</translation>
+    </message>
+    <message>
+        <source>undo last change</source>
+        <translation type="unfinished">αναίρεση τελευταίας αλλαγής</translation>
+    </message>
+    <message>
+        <source>redo</source>
+        <translation type="unfinished">επανεκτέλεση</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished">Επανεκτέλεση</translation>
+    </message>
+    <message>
+        <source>redo last undo</source>
+        <translation type="unfinished">ακύρωση τελευταίας αναίρεσης</translation>
+    </message>
+    <message>
+        <source>cut</source>
+        <translation type="unfinished">αποκοπή</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">Αποκοπή</translation>
+    </message>
+    <message>
+        <source>copy</source>
+        <translation type="unfinished">αντιγραφή</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Αντιγραφή</translation>
+    </message>
+    <message>
+        <source>paste</source>
+        <translation type="unfinished">επικόλληση</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished">Επικόλληση</translation>
+    </message>
+    <message>
+        <source>show instruments dialog</source>
+        <translation type="unfinished">Εμφάνιση διαλόγου οργάνων</translation>
+    </message>
+    <message>
+        <source>Instruments...</source>
+        <translation type="unfinished">Όργανα...</translation>
+    </message>
+    <message>
+        <source>Show Instruments Dialog</source>
+        <translation type="unfinished">Εμφάνιση Διαλόγου Οργάνων</translation>
+    </message>
+    <message>
+        <source>show clefs palette</source>
+        <translation type="unfinished">εμφάνιση παλέτας κλειδιών</translation>
+    </message>
+    <message>
+        <source>Clef...</source>
+        <translation type="unfinished">Κλειδιά...</translation>
+    </message>
+    <message>
+        <source>Show Clefs Palette</source>
+        <translation type="unfinished">Εμφάνιση Παλέτας Κλειδιών</translation>
+    </message>
+    <message>
+        <source>show keys palette</source>
+        <translation type="unfinished">εμφάνιση παλέτας κλιμάκων</translation>
+    </message>
+    <message>
+        <source>Key...</source>
+        <translation type="unfinished">Κλίμακα...</translation>
+    </message>
+    <message>
+        <source>Show Keys Palette</source>
+        <translation type="unfinished">Εμφάνιση Παλέτας Κλιμάκων</translation>
+    </message>
+    <message>
+        <source>show symbols palette</source>
+        <translation type="unfinished">εμφάνιση παλέτας συμβόλων</translation>
+    </message>
+    <message>
+        <source>Symbols...</source>
+        <translation type="unfinished">Σύμβολα...</translation>
+    </message>
+    <message>
+        <source>Show Symbols Palette</source>
+        <translation type="unfinished">Εμφάνιση Παλέτας Συμβόλων</translation>
+    </message>
+    <message>
+        <source>show time palette</source>
+        <translation type="unfinished">εμφάνιση παλέτας χρόνου</translation>
+    </message>
+    <message>
+        <source>Time...</source>
+        <translation type="unfinished">Χρόνος...</translation>
+    </message>
+    <message>
+        <source>Show Time Palette</source>
+        <translation type="unfinished">Εμφάνιση Παλέτας Χρόνου</translation>
+    </message>
+    <message>
+        <source>show dynamics palette</source>
+        <translation type="unfinished">εμφάνιση παλέτας δυναμικών</translation>
+    </message>
+    <message>
+        <source>Dynamics...</source>
+        <translation type="unfinished">Δυναμικές</translation>
+    </message>
+    <message>
+        <source>Show Dynamics Palette</source>
+        <translation type="unfinished">Εμφάνιση Παλέτας Δυναμικών</translation>
+    </message>
+    <message>
+        <source>note input</source>
+        <translation type="unfinished">εισαγωγή νότας</translation>
+    </message>
+    <message>
+        <source>Note Input</source>
+        <translation type="unfinished">Εισαγωγή Νότας</translation>
+    </message>
+    <message>
+        <source>toggle note input mode N</source>
+        <translation type="unfinished">εναλλαγή κατάστασης εισαγωγής νότας Ν</translation>
+    </message>
+    <message>
+        <source>pitch spell</source>
+        <translation type="unfinished">διόρθωση τονικότητας</translation>
+    </message>
+    <message>
+        <source>Pitch Spell</source>
+        <translation type="unfinished">Διόρθωση Τονικότητας</translation>
+    </message>
+    <message>
+        <source>enter unison above</source>
+        <translation type="unfinished">εισαγωγή ταυτοφωνίας πάνω</translation>
+    </message>
+    <message>
+        <source>Unison Above</source>
+        <translation type="unfinished">Ταυτοφωνία Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter unison above</source>
+        <translation type="unfinished">Εισαγωγή ταυτοφωνίας πάνω</translation>
+    </message>
+    <message>
+        <source>enter second above</source>
+        <translation type="unfinished">εισαγωγή δεύτερης πάνω</translation>
+    </message>
+    <message>
+        <source>Second Above</source>
+        <translation type="unfinished">Δεύτερη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter second above</source>
+        <translation type="unfinished">Εισαγωγή δεύτερης πάνω</translation>
+    </message>
+    <message>
+        <source>enter third above</source>
+        <translation type="unfinished">εισαγωγή τρίτης πάνω</translation>
+    </message>
+    <message>
+        <source>Third Above</source>
+        <translation type="unfinished">Τρίτη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter third above</source>
+        <translation type="unfinished">Εισαγωγή τρίτης πάνω</translation>
+    </message>
+    <message>
+        <source>enter fourth above</source>
+        <translation type="unfinished">εισαγωγή τέταρτης πάνω</translation>
+    </message>
+    <message>
+        <source>Fourth Above</source>
+        <translation type="unfinished">Τέταρτη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter fourth above</source>
+        <translation type="unfinished">Εισαγωγή τέταρτης πάνω</translation>
+    </message>
+    <message>
+        <source>enter fifth above</source>
+        <translation type="unfinished">εισαγωγή πέμπτης πάνω</translation>
+    </message>
+    <message>
+        <source>Fifth Above</source>
+        <translation type="unfinished">Πέμπτη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter fifth above</source>
+        <translation type="unfinished">Εισαγωγή πέμπτης πάνω</translation>
+    </message>
+    <message>
+        <source>enter sixth above</source>
+        <translation type="unfinished">εισαγωγή έκτης πάνω</translation>
+    </message>
+    <message>
+        <source>Sixth Above</source>
+        <translation type="unfinished">Έκτη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter sixth above</source>
+        <translation type="unfinished">Εισαγωγή έκτης πάνω</translation>
+    </message>
+    <message>
+        <source>enter seventh above</source>
+        <translation type="unfinished">εισαγωγή έβδομης πάνω</translation>
+    </message>
+    <message>
+        <source>Seventh Above</source>
+        <translation type="unfinished">Έβδομη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter seventh above</source>
+        <translation type="unfinished">Εισαγωγή έβδομης πάνω</translation>
+    </message>
+    <message>
+        <source>enter octave above</source>
+        <translation type="unfinished">εισαγωγή οκτάβας πάνω</translation>
+    </message>
+    <message>
+        <source>Octave Above</source>
+        <translation type="unfinished">Οκτάβα πάνω</translation>
+    </message>
+    <message>
+        <source>Enter octave above</source>
+        <translation type="unfinished">Εισαγωγή οκτάβας πάνω</translation>
+    </message>
+    <message>
+        <source>enter ninth above</source>
+        <translation type="unfinished">Εισαγωγή ένατης πάνω</translation>
+    </message>
+    <message>
+        <source>Ninth Above</source>
+        <translation type="unfinished">Ένατη Πάνω</translation>
+    </message>
+    <message>
+        <source>Enter ninth above</source>
+        <translation type="unfinished">Εισαγωγή ένατης πάνω</translation>
+    </message>
+    <message>
+        <source>enter second below</source>
+        <translation type="unfinished">εισαγωγή δεύτερης κάτω</translation>
+    </message>
+    <message>
+        <source>Second Below</source>
+        <translation type="unfinished">Δεύτερη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter second below</source>
+        <translation type="unfinished">Εισαγωγή δεύτερης κάτω</translation>
+    </message>
+    <message>
+        <source>enter third below</source>
+        <translation type="unfinished">εισαγωγή τρίτης κάτω</translation>
+    </message>
+    <message>
+        <source>Third Below</source>
+        <translation type="unfinished">Τρίτη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter third below</source>
+        <translation type="unfinished">Εισαγωγή τρίτης κάτω</translation>
+    </message>
+    <message>
+        <source>enter fourth below</source>
+        <translation type="unfinished">εισαγωγή τέταρτης κάτω</translation>
+    </message>
+    <message>
+        <source>Fourth Below</source>
+        <translation type="unfinished">Τέταρτη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter fourth below</source>
+        <translation type="unfinished">Εισαγωγή τέταρτης κάτω</translation>
+    </message>
+    <message>
+        <source>enter fifth below</source>
+        <translation type="unfinished">εισαγωγή πέμπτης κάτω</translation>
+    </message>
+    <message>
+        <source>Fifth Below</source>
+        <translation type="unfinished">Πέμπτη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter fifth below</source>
+        <translation type="unfinished">Εισαγωγή πέμπτης κάτω</translation>
+    </message>
+    <message>
+        <source>enter sixth below</source>
+        <translation type="unfinished">εισαγωγή έκτης κάτω</translation>
+    </message>
+    <message>
+        <source>Sixth Below</source>
+        <translation type="unfinished">Έκτη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter sixth below</source>
+        <translation type="unfinished">εισαγωγή έκτης κάτω</translation>
+    </message>
+    <message>
+        <source>enter seventh below</source>
+        <translation type="unfinished">εισαγωγή έβδομης κάτω</translation>
+    </message>
+    <message>
+        <source>Seventh Below</source>
+        <translation type="unfinished">Έβδομη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter seventh below</source>
+        <translation type="unfinished">Εισαγωγή έβδομης κάτω</translation>
+    </message>
+    <message>
+        <source>enter octave below</source>
+        <translation type="unfinished">εισαγωγή οκτάβας κάτω</translation>
+    </message>
+    <message>
+        <source>Octave Below</source>
+        <translation type="unfinished">Οκτάβα Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter octave below</source>
+        <translation type="unfinished">Εισαγωγή οκτάβας κάτω</translation>
+    </message>
+    <message>
+        <source>enter ninth below</source>
+        <translation type="unfinished">εισαγωγή ένατης κάτω</translation>
+    </message>
+    <message>
+        <source>Ninth Below</source>
+        <translation type="unfinished">Ένατη Κάτω</translation>
+    </message>
+    <message>
+        <source>Enter ninth below</source>
+        <translation type="unfinished">Εισαγωγή ένατης κάτω</translation>
+    </message>
+    <message>
+        <source>enter note a</source>
+        <translation type="unfinished">εισαγωγή νότας a</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished">A</translation>
+    </message>
+    <message>
+        <source>Enter Note A</source>
+        <translation type="unfinished">Εισαγωγή νότας A</translation>
+    </message>
+    <message>
+        <source>enter note b</source>
+        <translation type="unfinished">Εισαγωγή νότας b</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <source>Enter Note B</source>
+        <translation type="unfinished">Εισαγωγή Νότας Β</translation>
+    </message>
+    <message>
+        <source>enter note c</source>
+        <translation type="unfinished">εισαγωγή νότας c</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished">C</translation>
+    </message>
+    <message>
+        <source>Enter Note C</source>
+        <translation type="unfinished">Εισαγωγή Νότας C</translation>
+    </message>
+    <message>
+        <source>enter note d</source>
+        <translation type="unfinished">εισαγωγή νότας d</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>Enter Note D</source>
+        <translation type="unfinished">Εισαγωγή Νότας D</translation>
+    </message>
+    <message>
+        <source>enter note e</source>
+        <translation type="unfinished">εισαγωγή νότας e</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished">E</translation>
+    </message>
+    <message>
+        <source>Enter Note E</source>
+        <translation type="unfinished">Εισαγωγή Νότας E</translation>
+    </message>
+    <message>
+        <source>enter note f</source>
+        <translation type="unfinished">εισαγωγή νότας f</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished">F</translation>
+    </message>
+    <message>
+        <source>Enter Note F</source>
+        <translation type="unfinished">Εισαγωγή Νότας F</translation>
+    </message>
+    <message>
+        <source>enter note g</source>
+        <translation type="unfinished">εισαγωγή νότας g</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished">G</translation>
+    </message>
+    <message>
+        <source>Enter Note G</source>
+        <translation type="unfinished">Εισαγωγή Νότας G</translation>
+    </message>
+    <message>
+        <source>add a to chord</source>
+        <translation type="unfinished">προσθήκη a σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add A</source>
+        <translation type="unfinished">Προσθήκη Α</translation>
+    </message>
+    <message>
+        <source>Add note A to chord</source>
+        <translation type="unfinished">Προσθήκη νότας A σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add b to chord</source>
+        <translation type="unfinished">προσθήκη b σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add B</source>
+        <translation type="unfinished">Προσθήκη B</translation>
+    </message>
+    <message>
+        <source>Add note B to chord</source>
+        <translation type="unfinished">Προσθήκη νότας B σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add c to chord</source>
+        <translation type="unfinished">προσθήκη c σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add C</source>
+        <translation type="unfinished">Προσθήκη C</translation>
+    </message>
+    <message>
+        <source>Add note C to chord</source>
+        <translation type="unfinished">Προσθήκη νότας C σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add d to chord</source>
+        <translation type="unfinished">προσθήκη d σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add D</source>
+        <translation type="unfinished">Προσθήκη D</translation>
+    </message>
+    <message>
+        <source>Add note D to chord</source>
+        <translation type="unfinished">Προσθήκη νότας D σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add e to chord</source>
+        <translation type="unfinished">προσθήκη e σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add E</source>
+        <translation type="unfinished">Προσθήκη E</translation>
+    </message>
+    <message>
+        <source>Add note E to chord</source>
+        <translation type="unfinished">Προσθήκη νότας E σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add f to chord</source>
+        <translation type="unfinished">προσθήκη f σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add F</source>
+        <translation type="unfinished">Προσθήκη F</translation>
+    </message>
+    <message>
+        <source>Add note F to chord</source>
+        <translation type="unfinished">Προσθήκη νότας F σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>add g to chord</source>
+        <translation type="unfinished">προσθήκη g σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Add G</source>
+        <translation type="unfinished">Προσθήκη G</translation>
+    </message>
+    <message>
+        <source>Add note G to chord</source>
+        <translation type="unfinished">Προσθήκη νότας G σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>enter rest</source>
+        <translation type="unfinished">εισαγωγή παύσης</translation>
+    </message>
+    <message>
+        <source>rest</source>
+        <translation type="unfinished">παύση</translation>
+    </message>
+    <message>
+        <source>add staccato</source>
+        <translation type="unfinished">προσθήκη staccato</translation>
+    </message>
+    <message>
+        <source>staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat</source>
+        <translation type="unfinished">ύφεση</translation>
+    </message>
+    <message>
+        <source>add trill</source>
+        <translation type="unfinished">εισαγωγή τρύλλου</translation>
+    </message>
+    <message>
+        <source>trill</source>
+        <translation type="unfinished">τρύλλος</translation>
+    </message>
+    <message>
+        <source>more stretch</source>
+        <translation type="unfinished">περισσότερη έκταση</translation>
+    </message>
+    <message>
+        <source>Add More Stretch</source>
+        <translation type="unfinished">Προσθήκη Περισσότερης Έκτασης</translation>
+    </message>
+    <message>
+        <source>Add more stretch to selected measure</source>
+        <translation type="unfinished">Προσθήκη περισσότερης έκτασης στο επιλεγμένο μέτρο</translation>
+    </message>
+    <message>
+        <source>less stretch</source>
+        <translation type="unfinished">λιγότερη έκταση</translation>
+    </message>
+    <message>
+        <source>Add Less Stretch</source>
+        <translation type="unfinished">Προσθήκη Λιγότερης Έκτασης</translation>
+    </message>
+    <message>
+        <source>Add less stretch to selected measure</source>
+        <translation type="unfinished">Προσθήκη λιγότερης έκτασης στο επιλεγμένο μέτρο</translation>
+    </message>
+    <message>
+        <source>Reset Beam Mode</source>
+        <translation type="unfinished">Επαναφορά Κατάστασης Ενοτικών Γραμμών</translation>
+    </message>
+    <message>
+        <source>Reset Beam Mode of selected measures</source>
+        <translation type="unfinished">Επαναφορά Κατάστασης Ενοτικών Γραμμών για τα επιλεγμένα μέτρα</translation>
+    </message>
+    <message>
+        <source>flip stem</source>
+        <translation type="unfinished">αναστροφή γραμμής φθογγοσήμου</translation>
+    </message>
+    <message>
+        <source>flip direction</source>
+        <translation type="unfinished">αλλαγή κατεύθυνσης</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up note in chord</source>
+        <translation type="unfinished">πάνω νότα σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>goto higher pitched note in chord</source>
+        <translation type="unfinished">πήγαινε στη νότα της συγχωρδίας με την υψηλότερη οξύτητα</translation>
+    </message>
+    <message>
+        <source>goto top note in chord</source>
+        <translation type="unfinished">πήγαινε στην κορυφαία νότα στη συγχωρδία</translation>
+    </message>
+    <message>
+        <source>top note in chord</source>
+        <translation type="unfinished">κορυφαία νότα στη συγχωρδία</translation>
+    </message>
+    <message>
+        <source>move up</source>
+        <translation type="unfinished">μετακίνηση πάνω</translation>
+    </message>
+    <message>
+        <source>up+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pitch down</source>
+        <translation type="unfinished">οξύτητα κάτω</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">κάτω</translation>
+    </message>
+    <message>
+        <source>pitch down octave</source>
+        <translation type="unfinished">οξύτητα κατά μία οκτάβα κάτω</translation>
+    </message>
+    <message>
+        <source>down+ctrl</source>
+        <translation type="unfinished">κάτω+ctrl</translation>
+    </message>
+    <message>
+        <source>down note in chord</source>
+        <translation type="unfinished">κάτω νότα σε συγχωρδία</translation>
+    </message>
+    <message>
+        <source>goto lower pitched note in chord</source>
+        <translation type="unfinished">πήγαινε στη νότα της συγχωρδίας με τη χαμηλότερη τονικότητα</translation>
+    </message>
+    <message>
+        <source>goto bottom note in chord</source>
+        <translation type="unfinished">πήγαινε στην κάτω νότα στη συχωρδία</translation>
+    </message>
+    <message>
+        <source>bottom note in chord</source>
+        <translation type="unfinished">κάτω νότα στη συγχωρδία</translation>
+    </message>
+    <message>
+        <source>move down</source>
+        <translation type="unfinished">κίνηση κάτω</translation>
+    </message>
+    <message>
+        <source>down+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous chord</source>
+        <translation type="unfinished">προηγούμενη συγχωρδία</translation>
+    </message>
+    <message>
+        <source>left</source>
+        <translation type="unfinished">Αριστερά</translation>
+    </message>
+    <message>
+        <source>previous measure</source>
+        <translation type="unfinished">προηγούμενο μέτρο</translation>
+    </message>
+    <message>
+        <source>left+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next chord</source>
+        <translation type="unfinished">επόμενη συγχωρδία</translation>
+    </message>
+    <message>
+        <source>right</source>
+        <translation type="unfinished">Δεξιά</translation>
+    </message>
+    <message>
+        <source>next measure</source>
+        <translation type="unfinished">επόμενο μέτρο</translation>
+    </message>
+    <message>
+        <source>right+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add previous chord to selection</source>
+        <translation type="unfinished">προσθήκη προηγούμενης συγχωρδίας στην επιλογή</translation>
+    </message>
+    <message>
+        <source>left+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of measure</source>
+        <translation type="unfinished">επιλογή στην αρχή του μέτρου</translation>
+    </message>
+    <message>
+        <source>add next chord to selection</source>
+        <translation type="unfinished">προσθήκη επόμενης συγχωρδίας στην επιλογή</translation>
+    </message>
+    <message>
+        <source>right+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of measure</source>
+        <translation type="unfinished">επιλέξτε για τέλος του μέτρου</translation>
+    </message>
+    <message>
+        <source>right+ctrl+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of line</source>
+        <translation type="unfinished">επιλέξτε για αρχή γραμμής</translation>
+    </message>
+    <message>
+        <source>shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of line</source>
+        <translation type="unfinished">επιλέξτε για τέλος γραμμής</translation>
+    </message>
+    <message>
+        <source>shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to beginning of score</source>
+        <translation type="unfinished">επιλέξτε για αρχή παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>ctrl+shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select to end of score</source>
+        <translation type="unfinished">επιλέξτε για τέλος μέτρου</translation>
+    </message>
+    <message>
+        <source>ctrl+shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add staff above to selection</source>
+        <translation type="unfinished">προσθήκη πενταγράμμου πάνω από επιλογή</translation>
+    </message>
+    <message>
+        <source>add staff below to selection</source>
+        <translation type="unfinished">προσθήκη πενταγράμμου κάτω από επιλογή</translation>
+    </message>
+    <message>
+        <source>page-prev</source>
+        <translation type="unfinished">σελίδα-προηγ.</translation>
+    </message>
+    <message>
+        <source>page-next</source>
+        <translation type="unfinished">σελίδα-επόμενη</translation>
+    </message>
+    <message>
+        <source>page-top</source>
+        <translation type="unfinished">σελίδα-κορυφή</translation>
+    </message>
+    <message>
+        <source>page-end</source>
+        <translation type="unfinished">σελίδα-τέλος</translation>
+    </message>
+    <message>
+        <source>add slur</source>
+        <translation type="unfinished">προσθήκη σύζευξης προσωδίας</translation>
+    </message>
+    <message>
+        <source>crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>decrescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ESCAPE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>delete</source>
+        <translation type="unfinished">διαγραφή</translation>
+    </message>
+    <message>
+        <source>delete selected measures</source>
+        <translation type="unfinished">διαγραφή επιλεγμένων μέτρων</translation>
+    </message>
+    <message>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished">Διαγραφή Επιλεγμένων Μέτρων</translation>
+    </message>
+    <message>
+        <source>append measure</source>
+        <translation type="unfinished">προσθήκη μέτρου</translation>
+    </message>
+    <message>
+        <source>Append Measure</source>
+        <translation type="unfinished">Προσθήκη Μέτρου</translation>
+    </message>
+    <message>
+        <source>append measures</source>
+        <translation type="unfinished">προσθήκη μέτρων</translation>
+    </message>
+    <message>
+        <source>Append Measures...</source>
+        <translation type="unfinished">Προσθήκη Μέτρων...</translation>
+    </message>
+    <message>
+        <source>insert measure</source>
+        <translation type="unfinished">εισαγωγή μέτρου</translation>
+    </message>
+    <message>
+        <source>Insert Measure</source>
+        <translation type="unfinished">Εισαγωγή Μέτρου</translation>
+    </message>
+    <message>
+        <source>insert measures</source>
+        <translation type="unfinished">εισαγωγή μέτρων</translation>
+    </message>
+    <message>
+        <source>Insert Measures...</source>
+        <translation type="unfinished">Εισαγωγή Μέτρων...</translation>
+    </message>
+    <message>
+        <source>Insert Horizontal Frame</source>
+        <translation type="unfinished">Εισαγωγή Οριζόντιου Πλαισίου</translation>
+    </message>
+    <message>
+        <source>Insert Vertical Frame</source>
+        <translation type="unfinished">Εισαγωγή Κατακόρυφου Πλαισίου</translation>
+    </message>
+    <message>
+        <source>Append Horizontal Frame</source>
+        <translation type="unfinished">Προσθήκη Οριζόντιου Πλαισίου</translation>
+    </message>
+    <message>
+        <source>Append Vertical Frame</source>
+        <translation type="unfinished">Προσθήκη Κατακόρυφου Πλαισίου</translation>
+    </message>
+    <message>
+        <source>Duplet</source>
+        <translation type="unfinished">Δίηχο</translation>
+    </message>
+    <message>
+        <source>Triplet</source>
+        <translation type="unfinished">Τρίηο</translation>
+    </message>
+    <message>
+        <source>Quadruplet</source>
+        <translation type="unfinished">Τετράηχο</translation>
+    </message>
+    <message>
+        <source>Quintuplet</source>
+        <translation type="unfinished">Πεντάηχο</translation>
+    </message>
+    <message>
+        <source>Sextuplet</source>
+        <translation type="unfinished">Εξάηχο</translation>
+    </message>
+    <message>
+        <source>Septuplet</source>
+        <translation type="unfinished">Επτάηχο</translation>
+    </message>
+    <message>
+        <source>Octuplet</source>
+        <translation type="unfinished">Οκτάηχο</translation>
+    </message>
+    <message>
+        <source>Nonuplet</source>
+        <translation type="unfinished">Εννιάηχο</translation>
+    </message>
+    <message>
+        <source>Other Tuplets</source>
+        <translation type="unfinished">Άλλες υποδιαιρέσεις χρόνου</translation>
+    </message>
+    <message>
+        <source>Other...</source>
+        <translation type="unfinished">Άλλα...</translation>
+    </message>
+    <message>
+        <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note breve</source>
+        <translation type="unfinished">νότα breve</translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished">Διπλή ολόκληρη νότα (breve)</translation>
+    </message>
+    <message>
+        <source>pad note 1/1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished">Ολόκληρο (semibreve)</translation>
+    </message>
+    <message>
+        <source>pad note 1/2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished">Μισό</translation>
+    </message>
+    <message>
+        <source>pad note 1/4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished">Τέταρτο</translation>
+    </message>
+    <message>
+        <source>pad note 1/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished">Αξία ογδόου (όγδοο)</translation>
+    </message>
+    <message>
+        <source>pad note 1/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished">αξία 16ου (δεκάτο έκτο)</translation>
+    </message>
+    <message>
+        <source>pad note 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished">αξία 32ου (τριακοστό δεύτερο)</translation>
+    </message>
+    <message>
+        <source>pad note 1/64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished">αξία 64ου (εξηκοστό τέταρτο)</translation>
+    </message>
+    <message>
+        <source>pad dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished">Τελεία</translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished">Διπλή τελεία</translation>
+    </message>
+    <message>
+        <source>tie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>double sharp</source>
+        <translation type="unfinished">διπλή δίεση</translation>
+    </message>
+    <message>
+        <source>sharp</source>
+        <translation type="unfinished">δίεση</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">φυσικό</translation>
+    </message>
+    <message>
+        <source>double flat</source>
+        <translation type="unfinished">διπλή ύφεση</translation>
+    </message>
+    <message>
+        <source>acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grace-32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>voice 1</source>
+        <translation type="unfinished">φωνή 1</translation>
+    </message>
+    <message>
+        <source>voice 2</source>
+        <translation type="unfinished">φωνή 2</translation>
+    </message>
+    <message>
+        <source>voice 3</source>
+        <translation type="unfinished">φωνή 3</translation>
+    </message>
+    <message>
+        <source>voice 4</source>
+        <translation type="unfinished">φωνή 4</translation>
+    </message>
+    <message>
+        <source>midi input in</source>
+        <translation type="unfinished">θύρα εισόδου midi</translation>
+    </message>
+    <message>
+        <source>Enable MIDI Input</source>
+        <translation type="unfinished">Ενεργοποίηση Εισόδου MIDI</translation>
+    </message>
+    <message>
+        <source>editing sound on</source>
+        <translation type="unfinished">επεξεργασία ήχου σε</translation>
+    </message>
+    <message>
+        <source>Enable sound while editing</source>
+        <translation type="unfinished">Ενεργοποίηση ήχου κατά την επεξεργασία</translation>
+    </message>
+    <message>
+        <source>beam start</source>
+        <translation type="unfinished">αρχή ενοτ. γραμμής</translation>
+    </message>
+    <message>
+        <source>beam mid</source>
+        <translation type="unfinished">μέσο ενοτ. γραμμής</translation>
+    </message>
+    <message>
+        <source>no beam</source>
+        <translation type="unfinished">δίχως ενοτ. γραμμή</translation>
+    </message>
+    <message>
+        <source>beam 32</source>
+        <translation type="unfinished">ενοτ. γραμμή 32ου</translation>
+    </message>
+    <message>
+        <source>auto beam</source>
+        <translation type="unfinished">Αυτόματη γραμμή φθογγοσήμων</translation>
+    </message>
+    <message>
+        <source>Palette</source>
+        <translation type="unfinished">Παλέτα</translation>
+    </message>
+    <message>
+        <source>Play Panel</source>
+        <translation type="unfinished">Πίνακας Αναπαραγωγής</translation>
+    </message>
+    <message>
+        <source>Navigator</source>
+        <translation type="unfinished">Πλοηγός</translation>
+    </message>
+    <message>
+        <source>Mixer</source>
+        <translation type="unfinished">Μείκτης</translation>
+    </message>
+    <message>
+        <source>Transport Toolbar</source>
+        <translation type="unfinished">Εργαλειοθήκη Τρανσπόρτου</translation>
+    </message>
+    <message>
+        <source>Transport</source>
+        <translation type="unfinished">Τρανσπόρτο</translation>
+    </message>
+    <message>
+        <source>Note Input Toolbar</source>
+        <translation type="unfinished">Εργαλειοθήκη Εισαγωγής Νοτών</translation>
+    </message>
+    <message>
+        <source>Status Bar</source>
+        <translation type="unfinished">Γραμμή Κατάστασης</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished">Έξοδος</translation>
+    </message>
+    <message>
+        <source>Mag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom Canvas</source>
+        <translation type="unfinished">Εστίαση Κανβά</translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished">Στίχοι</translation>
+    </message>
+    <message>
+        <source>Fingering Palette</source>
+        <translation type="unfinished">Παλέτα δακτυλισμών</translation>
+    </message>
+    <message>
+        <source>Fingering...</source>
+        <translation type="unfinished">Δακτυλισμοί...</translation>
+    </message>
+    <message>
+        <source>Fingering</source>
+        <translation type="unfinished">Δακτυλισμοί</translation>
+    </message>
+    <message>
+        <source>Tempo Palette</source>
+        <translation type="unfinished">Παλέτα Tempo</translation>
+    </message>
+    <message>
+        <source>Tempo...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo</source>
+        <translation type="unfinished">Tempo</translation>
+    </message>
+    <message>
+        <source>Metronome</source>
+        <translation type="unfinished">Μετρονόμος</translation>
+    </message>
+    <message>
+        <source>Add System Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Συστήματος</translation>
+    </message>
+    <message>
+        <source>System Text</source>
+        <translation type="unfinished">Κείμενο Συστήματος</translation>
+    </message>
+    <message>
+        <source>Add Staff Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Πενταγράμμου</translation>
+    </message>
+    <message>
+        <source>Staff Text</source>
+        <translation type="unfinished">Κείμενο Πενταγράμμου</translation>
+    </message>
+    <message>
+        <source>Add Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου</translation>
+    </message>
+    <message>
+        <source>Frame Text</source>
+        <translation type="unfinished">Κείμενο Πλαισίου</translation>
+    </message>
+    <message>
+        <source>Add Title</source>
+        <translation type="unfinished">Προσθήκη Τίτλου</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Τίτλος</translation>
+    </message>
+    <message>
+        <source>Add Title Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Τίτλου</translation>
+    </message>
+    <message>
+        <source>Add Subtitle</source>
+        <translation type="unfinished">Προσθήκη Υπότιτλου</translation>
+    </message>
+    <message>
+        <source>Subtitle</source>
+        <translation type="unfinished">Υπότιτλος</translation>
+    </message>
+    <message>
+        <source>Add Subtitle Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Υπότιτλου</translation>
+    </message>
+    <message>
+        <source>Add Composer</source>
+        <translation type="unfinished">Προσθήκη Συνθέτη</translation>
+    </message>
+    <message>
+        <source>Composer</source>
+        <translation type="unfinished">Συνθέτης</translation>
+    </message>
+    <message>
+        <source>Add Composer Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Συνθέτη</translation>
+    </message>
+    <message>
+        <source>Add Poet</source>
+        <translation type="unfinished">Προσθήκη Ποιητή</translation>
+    </message>
+    <message>
+        <source>Poet</source>
+        <translation type="unfinished">Ποιητής</translation>
+    </message>
+    <message>
+        <source>Add Poet Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Ποιητή</translation>
+    </message>
+    <message>
+        <source>Add Copyright</source>
+        <translation type="unfinished">Προσθήκη Πνευματικών Δικαιωμάτων (Copyright)</translation>
+    </message>
+    <message>
+        <source>Copyright</source>
+        <translation type="unfinished">Πνευματικά Δικαιώματα</translation>
+    </message>
+    <message>
+        <source>Add Copyright Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Πνευματικών Δικαιωμάτων (Copyright)</translation>
+    </message>
+    <message>
+        <source>Add Chord Name</source>
+        <translation type="unfinished">Προσθήκη Ονόματος Συγχωρδίας</translation>
+    </message>
+    <message>
+        <source>Chord Name</source>
+        <translation type="unfinished">Όνομα Συγχωρδίας</translation>
+    </message>
+    <message>
+        <source>Add Chord Text</source>
+        <translation type="unfinished">Προσθήκη Κειμένου Συγχωρδίας</translation>
+    </message>
+    <message>
+        <source>show harmony properties for chord</source>
+        <translation type="unfinished">προβολή ιδιοτήτων αρμονίας για συγχωρδία</translation>
+    </message>
+    <message>
+        <source>Harmony Properties</source>
+        <translation type="unfinished">Ιδιότητες Αρμονίας</translation>
+    </message>
+    <message>
+        <source>Add Rehearsal Mark</source>
+        <translation type="unfinished">Προσθήκη Σημείου Πρόβας</translation>
+    </message>
+    <message>
+        <source>Rehearsal Mark</source>
+        <translation type="unfinished">Σημείο Πρόβας</translation>
+    </message>
+    <message>
+        <source>player play</source>
+        <translation type="unfinished">αναπαραγωγέας αναπαραγωγή</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished">Αναπαραγωγή</translation>
+    </message>
+    <message>
+        <source>Start or stop playback</source>
+        <translation type="unfinished">Αρχή ή σταμάτημα αναπαραγωγής</translation>
+    </message>
+    <message>
+        <source>left chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prev measure</source>
+        <translation type="unfinished">προηγ. μέτρο</translation>
+    </message>
+    <message>
+        <source>seek to begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>player rewind</source>
+        <translation type="unfinished">αναπαραγωγέας γρήγορη κίνηση πίσω</translation>
+    </message>
+    <message>
+        <source>Rewind</source>
+        <translation type="unfinished">Γρήγορη κίνηση πίσω</translation>
+    </message>
+    <message>
+        <source>rewind to start position</source>
+        <translation type="unfinished">επαναφορά στη θέση αρχής</translation>
+    </message>
+    <message>
+        <source>seek to end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>play repeats on</source>
+        <translation type="unfinished">ενεργοποιημένη αναπαραγωγή με επαναλήψεις</translation>
+    </message>
+    <message>
+        <source>Repeat</source>
+        <translation type="unfinished">Επανάληψη</translation>
+    </message>
+    <message>
+        <source>play repeats on/off</source>
+        <translation type="unfinished">ενεργοποίηση/απενεργοποίηση αναπαραγωγής με επαναλήψεις</translation>
+    </message>
+    <message>
+        <source>load style</source>
+        <translation type="unfinished">φόρτωση στυλ</translation>
+    </message>
+    <message>
+        <source>Load Style...</source>
+        <translation type="unfinished">Φόρτωση Στυλ...</translation>
+    </message>
+    <message>
+        <source>Load Style</source>
+        <translation type="unfinished">Φόρτωση Στυλ</translation>
+    </message>
+    <message>
+        <source>save style</source>
+        <translation type="unfinished">αποθήκευση στυλ</translation>
+    </message>
+    <message>
+        <source>Save Style...</source>
+        <translation type="unfinished">Αποθήκευση Στυλ...</translation>
+    </message>
+    <message>
+        <source>Save Style</source>
+        <translation type="unfinished">Αποθήκευση Στυλ</translation>
+    </message>
+    <message>
+        <source>select all</source>
+        <translation type="unfinished">επιλογή όλων</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">Επιλογή Όλων</translation>
+    </message>
+    <message>
+        <source>transpose</source>
+        <translation type="unfinished">τονική μεταφορά</translation>
+    </message>
+    <message>
+        <source>Transpose...</source>
+        <translation type="unfinished">Τονική Μεταφορά...</translation>
+    </message>
+    <message>
+        <source>Transpose</source>
+        <translation type="unfinished">Τονική Μεταφορά</translation>
+    </message>
+    <message>
+        <source>violin clef</source>
+        <translation type="unfinished">κλειδί βιολιού</translation>
+    </message>
+    <message>
+        <source>bass clef</source>
+        <translation type="unfinished">κλειδί μπάσου</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-2</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 1-2</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-3</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 1-3</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 1-4</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 1-4</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 2-3</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 2-3</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 2-4</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 2-4</translation>
+    </message>
+    <message>
+        <source>Exchange Voice 3-4</source>
+        <translation type="unfinished">Ανταλλαγή Φωνής 3-4</translation>
+    </message>
+    <message>
+        <source>display in concert pitch</source>
+        <translation type="unfinished">εμφάνιση σε πραγματική τονικότητα</translation>
+    </message>
+    <message>
+        <source>Concert Pitch</source>
+        <translation type="unfinished">Πραγματική Τονικότητα</translation>
+    </message>
+    <message>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat last command</source>
+        <translation type="unfinished">επανάληψη τελευταίας εντολής</translation>
+    </message>
+    <message>
+        <source>Repeat last command</source>
+        <translation type="unfinished">Επανάληψη τελευταίας εντολής</translation>
+    </message>
+    <message>
+        <source>edit score meta data</source>
+        <translation type="unfinished">επεξεργασία meta δεδομένων παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>Meta Data...</source>
+        <translation type="unfinished">Δεδομένα Meta...</translation>
+    </message>
+    <message>
+        <source>Meta Data</source>
+        <translation type="unfinished">Δεδομένα Meta</translation>
+    </message>
+    <message>
+        <source>toggle system break</source>
+        <translation type="unfinished">εναλλαγή διαχωρισμού συστήματος</translation>
+    </message>
+    <message>
+        <source>Toggle System Break</source>
+        <translation type="unfinished">Εναλλαγή Διαχωρισμού Συστήματος</translation>
+    </message>
+    <message>
+        <source>toggle page break</source>
+        <translation type="unfinished">εναλλαγή αλλαγής σελίδας</translation>
+    </message>
+    <message>
+        <source>Toggle Page Break</source>
+        <translation type="unfinished">Εναλλαγή Αλλαγής Σελίδας</translation>
+    </message>
+    <message>
+        <source>edit element</source>
+        <translation type="unfinished">επεξεργασία στοιχείου</translation>
+    </message>
+    <message>
+        <source>Edit Element</source>
+        <translation type="unfinished">Επεξεργασία Στοιχείου</translation>
+    </message>
+    <message>
+        <source>reset positions</source>
+        <translation type="unfinished">επαναφορά θέσεων</translation>
+    </message>
+    <message>
+        <source>Reset Positions</source>
+        <translation type="unfinished">Επαναφορά Θέσεων</translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished">εμφάνιση επιθεωρητή</translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished">Επιθεωρητής</translation>
+    </message>
+    <message>
+        <source>reset measure stretch</source>
+        <translation type="unfinished">επαναφοράς έκτασης μέτρου</translation>
+    </message>
+    <message>
+        <source>Reset Stretch</source>
+        <translation type="unfinished">Επαναφορά Έκτασης</translation>
+    </message>
+    <message>
+        <source>show invisible</source>
+        <translation type="unfinished">Όρισε Αόρατο</translation>
+    </message>
+    <message>
+        <source>Show Invisible</source>
+        <translation type="unfinished">Όρισε Αόρατο</translation>
+    </message>
+    <message>
+        <source>show frames</source>
+        <translation type="unfinished">προβολή πλαισίων</translation>
+    </message>
+    <message>
+        <source>Show Frames</source>
+        <translation type="unfinished">Προβολή Πλαισίων</translation>
+    </message>
+    <message>
+        <source>show keyboard</source>
+        <translation type="unfinished">εμφάνιση πληκτρολογίου</translation>
+    </message>
+    <message>
+        <source>Show Keyboard</source>
+        <translation type="unfinished">Εμφάνιση Πληκτρολογίου</translation>
+    </message>
+    <message>
+        <source>enable script debugger</source>
+        <translation type="unfinished">ενεργοποίηση αποσφαλαματωτή σεναρίων</translation>
+    </message>
+    <message>
+        <source>Enable Script Debugger</source>
+        <translation type="unfinished">Ενεργοποίηση Αποσφαλματωτή Σεναρίων</translation>
+    </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished">εισαγωγή παύσης 1/1</translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished">παύση 1/1</translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished">εισαγωγή παύσης 1/2</translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished">παύση 1/2</translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished">εισαγωγή παύσης 1/4</translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished">παύση 1/4</translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished">εισαγωγή παύσης 1/8</translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished">παύση 1/8</translation>
+    </message>
+    <message>
+        <source>backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search</source>
+        <translation type="unfinished">αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">Μεγέθυνση</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">Σμύκρυνση</translation>
+    </message>
+    <message>
+        <source>mirror note head</source>
+        <translation type="unfinished">καθρεπτισμός κεφαλής νότας</translation>
+    </message>
+    <message>
+        <source>Edit General Style...</source>
+        <translation type="unfinished">Επεξεργασία Γενικού Στυλ...</translation>
+    </message>
+    <message>
+        <source>Edit Text Style...</source>
+        <translation type="unfinished">Επεξεργασία Στυλ Κειμένου...</translation>
+    </message>
+    <message>
+        <source>Select all similar elements</source>
+        <translation type="unfinished">Επιλογή όλων των ομοίων αντικειμένων</translation>
+    </message>
+    <message>
+        <source>All Similar Elements</source>
+        <translation type="unfinished">Όλα τα Πρόμοια Στοιχεία</translation>
+    </message>
+    <message>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished">Επιλογή όλων των ομοίων αντικειμένων στο ίδιο πεντάγραμμο</translation>
+    </message>
+    <message>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished">Όλα τα Παρόμοια Στοιχεία στο ίδιο Πεντάγραμμο</translation>
+    </message>
+    <message>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished">Έλεγχος Synthesizer</translation>
+    </message>
+    <message>
+        <source>double duration</source>
+        <translation type="unfinished">διπλή διάρκεια</translation>
+    </message>
+    <message>
+        <source>half duration</source>
+        <translation type="unfinished">μισή διάρκεια</translation>
+    </message>
+    <message>
+        <source>repeat selection</source>
+        <translation type="unfinished">επανάληψη επιλογής</translation>
+    </message>
+    <message>
+        <source>Repeat selection</source>
+        <translation type="unfinished">Επανάληψη επιλογής</translation>
+    </message>
+    <message>
+        <source>follow song</source>
+        <translation type="unfinished">ακολούθα το τραγούδι</translation>
+    </message>
+    <message>
+        <source>Follow Song</source>
+        <translation type="unfinished">Ακολούθα το Τραγούδι</translation>
+    </message>
+</context>
+<context>
     <name>articulation</name>
     <message>
         <source>ufermata</source>
@@ -8035,7 +7940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τρύλλος</translation>
     </message>
     <message>
         <source>prall</source>
@@ -8157,7 +8062,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο</translation>
     </message>
     <message>
         <source>SlurSegment</source>
@@ -8377,7 +8282,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Τμήμα</translation>
     </message>
     <message>
         <source>System</source>
@@ -8426,6 +8331,129 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon</source>
         <translation>Εικονίδιο</translation>
+    </message>
+</context>
+<context>
+    <name>language</name>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">Σύστημα</translation>
+    </message>
+    <message>
+        <source>Afrikaans</source>
+        <translation type="unfinished">Afrikaans</translation>
+    </message>
+    <message>
+        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
+        <translation type="unfinished">Ø§ÙØ¹Ø±Ø¨ÙØ©</translation>
+    </message>
+    <message>
+        <source>CatalÃ </source>
+        <translation type="unfinished">CatalÃ </translation>
+    </message>
+    <message>
+        <source>Czech</source>
+        <translation type="unfinished">Czech</translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished">Dansk</translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished">Deutsch</translation>
+    </message>
+    <message>
+        <source>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</source>
+        <translation type="unfinished">ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</translation>
+    </message>
+    <message>
+        <source>English (GB)</source>
+        <translation type="unfinished">English (GB) - Αγγλικά (ΜΒ)</translation>
+    </message>
+    <message>
+        <source>English (US)</source>
+        <translation type="unfinished">English (US) - Αγγλικά (ΗΠΑ)</translation>
+    </message>
+    <message>
+        <source>EspaÃ±ol</source>
+        <translation type="unfinished">EspaÃ±ol</translation>
+    </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished">Finnish</translation>
+    </message>
+    <message>
+        <source>FranÃ§ais</source>
+        <translation type="unfinished">FranÃ§ais</translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished">Galego</translation>
+    </message>
+    <message>
+        <source>Hindi</source>
+        <translation type="unfinished">Hindi</translation>
+    </message>
+    <message>
+        <source>Hungary</source>
+        <translation type="unfinished">Hungary</translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished">Italiano</translation>
+    </message>
+    <message>
+        <source>Japanese</source>
+        <translation type="unfinished">Japanese</translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
+        <translation type="unfinished">Nederlands</translation>
+    </message>
+    <message>
+        <source>Norsk</source>
+        <translation type="unfinished">Norsk</translation>
+    </message>
+    <message>
+        <source>Polski</source>
+        <translation type="unfinished">Polski</translation>
+    </message>
+    <message>
+        <source>PortuguÃªs</source>
+        <translation type="unfinished">PortuguÃªs</translation>
+    </message>
+    <message>
+        <source>PortuguÃªs brasileiro</source>
+        <translation type="unfinished">PortuguÃªs brasileiro</translation>
+    </message>
+    <message>
+        <source>RomÃ¢nÄ</source>
+        <translation type="unfinished">RomÃ¢nÄ</translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished">Ð ÑÑÑÐºÐ¸Ð¹</translation>
+    </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished">Svenska</translation>
+    </message>
+    <message>
+        <source>à¸ à¸²à¸©à¸²à¹à¸à¸¢</source>
+        <translation type="unfinished">à¸ à¸²à¸©à¸²à¹à¸à¸¢</translation>
+    </message>
+    <message>
+        <source>TÃ¼rkÃ§e</source>
+        <translation type="unfinished">TÃ¼rkÃ§e</translation>
+    </message>
+    <message>
+        <source>Ukrajina</source>
+        <translation type="unfinished">Ukrajina</translation>
+    </message>
+    <message>
+        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <translation type="unfinished">ç¹é«ä¸­æ (å°ç£)</translation>
     </message>
 </context>
 <context>
@@ -8507,7 +8535,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <source>p</source>
@@ -8583,7 +8611,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">δίεση</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8603,11 +8631,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">φυσικό</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ύφεση</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -8651,7 +8679,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τελείες</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -8807,7 +8835,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τρύλλος</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -8963,7 +8991,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">κλειδί μπάσου</translation>
     </message>
     <message>
         <source>cbass clef</source>

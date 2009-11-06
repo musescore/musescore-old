@@ -42,7 +42,7 @@ class Spacer : public Element {
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       void setSpace(const Spatium& sp) { _space = sp;   }
-      Spatium space() const            { return _space; }
+      Spatium getSpace() const         { return _space; }
       virtual void layout();
       virtual void draw(QPainter&) const;
       virtual bool startEdit(Viewer*, const QPointF&);

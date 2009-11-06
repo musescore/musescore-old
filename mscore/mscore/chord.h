@@ -214,7 +214,7 @@ class Chord : public ChordRest {
 
       virtual int upLine() const;
       virtual int downLine() const;
-      virtual void space(double& min, double& extra) const;
+      virtual Space space() const;
       void readNote(QDomElement node, const QList<Tuplet*>&, const QList<Beam*>&);
 
       NoteType noteType() const         { return _noteType; }

@@ -101,6 +101,7 @@ void RepeatMeasure::layout()
       {
       double sp  = spatium();
 
+      double y   = sp;
       double w   = sp * 2.0;
       double h   = sp * 2.0;
       double lw  = sp * .30;  // line width
@@ -108,31 +109,15 @@ void RepeatMeasure::layout()
 
       path       = QPainterPath();
 
-      path.moveTo(w - lw, 0.0);
-      path.lineTo(w,  0.0);
-      path.lineTo(lw,  h);
-      path.lineTo(0.0, h);
+      path.moveTo(w - lw, y);
+      path.lineTo(w,  y);
+      path.lineTo(lw,  h+y);
+      path.lineTo(0.0, h+y);
       path.closeSubpath();
-      path.addEllipse(QRectF(w * .25 - r, h * .25 - r, r * 2.0, r * 2.0 ));
-      path.addEllipse(QRectF(w * .75 - r, h * .75 - r, r * 2.0, r * 2.0 ));
+      path.addEllipse(QRectF(w * .25 - r, y+h * .25 - r, r * 2.0, r * 2.0 ));
+      path.addEllipse(QRectF(w * .75 - r, y+h * .75 - r, r * 2.0, r * 2.0 ));
 
       setbbox(path.boundingRect());
-      }
-
-//---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-
-QPointF RepeatMeasure::canvasPos() const
-      {
-      if (parent() == 0)
-            return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
       }
 
 //---------------------------------------------------------

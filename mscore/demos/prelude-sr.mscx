@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.12">
-  <Mag>1.70239</Mag>
-  <xoff>-313.075</xoff>
-  <yoff>16.0525</yoff>
+  <Mag>0.80193</Mag>
+  <xoff>5.85934</xoff>
+  <yoff>0.0759161</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -479,7 +479,6 @@
       </Segment>
     </HairPin>
   <Slur id="92">
-    <tick>0</tick>
     <up>1</up>
     </Slur>
   <Slur id="93">
@@ -875,7 +874,7 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="2">
+      <Beam id="1">
         <track>2</track>
         </Beam>
       <Chord>
@@ -887,7 +886,7 @@ p, li { white-space: pre-wrap; }
           <offset x="-0.159903" y="-8.63475"/>
           <track>2</track>
           </Articulation>
-        <Beam>2</Beam>
+        <Beam>1</Beam>
         <Note>
           <track>2</track>
           <pitch>62</pitch>
@@ -941,7 +940,7 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>2</Beam>
+        <Beam>1</Beam>
         </Rest>
       <Chord>
         <track>2</track>
@@ -951,7 +950,7 @@ p, li { white-space: pre-wrap; }
           <offset x="0.55966" y="-9.19441"/>
           <track>2</track>
           </Articulation>
-        <Beam>2</Beam>
+        <Beam>1</Beam>
         <Note>
           <track>2</track>
           <pitch>60</pitch>
@@ -8784,6 +8783,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>88</Tuplet>
         <durationType>eighth</durationType>
         <Beam>115</Beam>
@@ -8881,6 +8881,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>89</Tuplet>
         <durationType>eighth</durationType>
         <Beam>116</Beam>
@@ -9071,6 +9072,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>92</Tuplet>
         <durationType>eighth</durationType>
         <Beam>119</Beam>
@@ -9146,6 +9148,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>93</Tuplet>
         <durationType>eighth</durationType>
         <Beam>120</Beam>
@@ -9212,6 +9215,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>94</Tuplet>
         <durationType>eighth</durationType>
         <Beam>121</Beam>
@@ -9309,6 +9313,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>95</Tuplet>
         <durationType>eighth</durationType>
         <Beam>122</Beam>
@@ -9419,6 +9424,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>96</Tuplet>
         <durationType>eighth</durationType>
         <Beam>123</Beam>
@@ -9516,6 +9522,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>97</Tuplet>
         <durationType>eighth</durationType>
         <Beam>124</Beam>
@@ -9593,6 +9600,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>98</Tuplet>
         <durationType>eighth</durationType>
         <Beam>125</Beam>
@@ -9669,6 +9677,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>99</Tuplet>
         <durationType>eighth</durationType>
         <Beam>126</Beam>
@@ -9784,6 +9793,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>100</Tuplet>
         <durationType>eighth</durationType>
         <Beam>127</Beam>
@@ -9859,6 +9869,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>101</Tuplet>
         <durationType>eighth</durationType>
         <Beam>128</Beam>
@@ -9937,6 +9948,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>102</Tuplet>
         <durationType>eighth</durationType>
         <Beam>129</Beam>
@@ -10012,6 +10024,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>103</Tuplet>
         <durationType>eighth</durationType>
         <Beam>130</Beam>
@@ -10124,6 +10137,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>104</Tuplet>
         <durationType>eighth</durationType>
         <Beam>131</Beam>
@@ -10199,6 +10213,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>105</Tuplet>
         <durationType>eighth</durationType>
         <Beam>132</Beam>
@@ -10265,6 +10280,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>106</Tuplet>
         <durationType>eighth</durationType>
         <Beam>133</Beam>
@@ -10341,6 +10357,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>107</Tuplet>
         <durationType>eighth</durationType>
         <Beam>134</Beam>
@@ -10386,6 +10403,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="41">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Tuplet id="108">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -10453,6 +10474,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>108</Tuplet>
         <durationType>eighth</durationType>
         <Beam>135</Beam>
@@ -10506,6 +10528,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>109</Tuplet>
         <durationType>eighth</durationType>
         <Beam>136</Beam>
@@ -10583,6 +10606,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>110</Tuplet>
         <durationType>eighth</durationType>
         <Beam>137</Beam>
@@ -10658,6 +10682,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>111</Tuplet>
         <durationType>eighth</durationType>
         <Beam>138</Beam>
@@ -10703,10 +10728,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="42">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <style>17</style>
-        </Text>
       <Tuplet id="112">
         <numberType>2</numberType>
         <bracketType>2</bracketType>
@@ -10774,6 +10795,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>112</Tuplet>
         <durationType>eighth</durationType>
         <Beam>139</Beam>
@@ -10849,6 +10871,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>113</Tuplet>
         <durationType>eighth</durationType>
         <Beam>140</Beam>
@@ -10915,6 +10938,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>114</Tuplet>
         <durationType>eighth</durationType>
         <Beam>141</Beam>
@@ -10968,6 +10992,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>115</Tuplet>
         <durationType>eighth</durationType>
         <Beam>142</Beam>
@@ -11069,6 +11094,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>116</Tuplet>
         <durationType>eighth</durationType>
         <Beam>143</Beam>
@@ -11144,6 +11170,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>117</Tuplet>
         <durationType>eighth</durationType>
         <Beam>144</Beam>
@@ -11210,6 +11237,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="-1" y="0"/>
         <Tuplet>118</Tuplet>
         <durationType>eighth</durationType>
         <Beam>145</Beam>
@@ -11263,6 +11291,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
+        <offset x="1" y="0"/>
         <Tuplet>119</Tuplet>
         <durationType>eighth</durationType>
         <Beam>146</Beam>
@@ -11297,6 +11326,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="44">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
       <Dynamic>
         <offset x="-0.0623004" y="2.99218"/>
         <style>12</style>
@@ -11304,7 +11337,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.0006pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-style:normal;">sfff</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:10pt; font-style:normal;">sfff</span></p></body></html>
           </html-data>
         </Dynamic>
       <Dynamic>
@@ -11369,7 +11402,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.0006pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-style:normal;">sfff</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:10pt; font-style:normal;">sfff</span></p></body></html>
           </html-data>
         </Dynamic>
       <Dynamic>
@@ -11449,7 +11482,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.0006pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-style:normal;">fff</span><span style=" font-family:'Century Schoolbook L';">  con forza</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:10pt; font-style:normal;">fff</span><span style=" font-family:'Century Schoolbook L'; font-size:10pt;">  con forza</span></p></body></html>
           </html-data>
         </Dynamic>
       <Rest>
@@ -13177,7 +13210,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.0006pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Century Schoolbook L'; font-style:italic;">una corda</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Century Schoolbook L'; font-size:10pt; font-style:italic;">una corda</span></p></body></html>
           </html-data>
         </StaffText>
       <Chord>
@@ -13228,7 +13261,7 @@ p, li { white-space: pre-wrap; }
         <tick>2880</tick>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="1">
+      <Beam id="2">
         <track>5</track>
         </Beam>
       <Chord>
@@ -13238,7 +13271,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>1</Beam>
+        <Beam>2</Beam>
         <Note>
           <track>5</track>
           <pitch>52</pitch>
@@ -13262,7 +13295,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>1</Beam>
+        <Beam>2</Beam>
         <Note>
           <track>5</track>
           <pitch>56</pitch>
@@ -13286,7 +13319,7 @@ p, li { white-space: pre-wrap; }
           <subtype>tenuto</subtype>
           <track>5</track>
           </Articulation>
-        <Beam>1</Beam>
+        <Beam>2</Beam>
         <Note>
           <track>5</track>
           <pitch>55</pitch>

@@ -83,6 +83,26 @@ enum ElementType {
       };
 
 //---------------------------------------------------------
+///   \brief Unit of horizontal measure
+//---------------------------------------------------------
+
+class Space {
+      double _lw;       // space needed to the left
+      double _rw;       // space needed to the right
+
+   public:
+      Space()                       { _lw = 0.0; _rw = 0.0; }
+      Space(double a, double b)     { _lw = a; _rw = b; }
+      double lw() const             { return _lw; }
+      double rw() const             { return _rw; }
+      double& rLw()                 { return _lw; }
+      double& rRw()                 { return _rw; }
+      void setLw(double e)          { _lw = e; }
+      void setRw(double m)          { _rw = m; }
+      inline void max(const Space& s);
+      };
+
+//---------------------------------------------------------
 ///   \brief base class of score layout elements
 ///
 ///   The Element class is the virtual base class of all
@@ -249,10 +269,7 @@ class Element {
       int tick() const                { return _tick;         }
       virtual void setTick(int t)     { _tick = t;            }
 
-      virtual void space(double& min, double& extra) const {
-            min   = width();
-            extra = 0.0;
-            }
+      virtual Space space() const     { return Space(0.0, width()); }
 
       QColor color() const            { return _color; }
       QColor curColor() const;

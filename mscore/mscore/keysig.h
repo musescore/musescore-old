@@ -57,6 +57,7 @@ class KeySig : public Element {
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
       int keySignature() const { return char(subtype() & 0xff); }    // -7 - +7
+      Space space() const;
       };
 
 extern const char* keyNames[15];

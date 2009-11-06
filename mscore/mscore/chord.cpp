@@ -740,7 +740,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
       if (_noStem)
             xml.tag("noStem", _noStem);
       else if (_stem) {
-            
+
             if (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != preferences.defaultColor))
                   _stem->write(xml);
             }
@@ -1232,10 +1232,9 @@ void Chord::layout2()
 //   space
 //---------------------------------------------------------
 
-void Chord::space(double& min, double& extra) const
+Space Chord::space() const
       {
-      min   = minSpace;
-      extra = extraSpace;
+      return Space(extraSpace, minSpace);
       }
 
 //---------------------------------------------------------

@@ -169,10 +169,9 @@ void Glissando::draw(QPainter& p) const
 //   space
 //---------------------------------------------------------
 
-void Glissando::space(double& min, double& extra) const
+Space Glissando::space() const
       {
-      min   = spatium() * 2;
-      extra = 0.0;
+      return Space(0.0, spatium() * 2.0);
       }
 
 //---------------------------------------------------------
