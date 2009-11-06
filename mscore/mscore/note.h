@@ -161,7 +161,7 @@ class Note : public Element {
       void changeAccidental(int);
 
       int line() const                { return _line + _lineOffset;   }
-      void setLine(int n)             { _line = n;      }
+      void setLine(int n);
 
       virtual void add(Element*);
       virtual void remove(Element*);

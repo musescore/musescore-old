@@ -101,7 +101,7 @@ void Tremolo::layout()
       y += (h - bbox().height()) * .5;
       if (!twoNotes()) {
             if (_chord2->hook())
-                  y -= spatium() * .5 * (_chord2->isUp() ? -1.0 : 1.0);
+                  y -= spatium() * .5 * (_chord2->up() ? -1.0 : 1.0);
             setPos(x, y);
             return;
             }
@@ -120,7 +120,7 @@ void Tremolo::layout()
       double x1     = anchor1->canvasPos().x();
       double x2     = anchor2->canvasPos().x();
       x             = anchor2->pos().x() + (x1 - x2) * .5;
-      if (_chord1->isUp())
+      if (_chord1->up())
             x += anchor1->headWidth();
       setPos(x, y);
       }

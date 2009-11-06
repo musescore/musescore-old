@@ -91,6 +91,15 @@ class Beam : public Element {
       QPointF _p1[2], _p2[2];
       mutable int _id;          // used in read()/write()
 
+      int minMove;            // set in layout1()
+      int maxMove ;
+      Chord* c1;
+      Chord* c2;
+      bool isGrace;
+      bool cross;
+      Duration maxDuration;
+      qreal slope;
+
    public:
       Beam(Score* s);
       Beam(const Beam&);

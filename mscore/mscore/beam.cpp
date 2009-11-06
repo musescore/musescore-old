@@ -599,24 +599,13 @@ void Beam::layout1()
             }
       else
             _up = _direction == UP;
-      }
 
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Beam::layout()
-      {
-      Duration maxDuration;
-      double _spatium      = spatium();
-      const ChordRest* a1  = _elements.front();
-      const ChordRest* a2  = _elements.back();
-
-      Chord* c1   = 0;
-      Chord* c2   = 0;
-      int minMove = 1000;
-      int maxMove = -1000;
-      bool isGrace = false;
+      maxDuration.setType(Duration::V_INVALID);
+      c1       = 0;
+      c2       = 0;
+      minMove  = 1000;
+      maxMove  = -1000;
+      isGrace = false;
       foreach(ChordRest* cr, _elements) {
             if (cr->type() == CHORD) {
                   c2 = static_cast<Chord*>(cr);
@@ -633,84 +622,51 @@ void Beam::layout()
             if (!maxDuration.isValid() || (maxDuration < cr->duration()))
                   maxDuration = cr->duration();
             }
-      bool cross  = minMove < maxMove;
-      double p1x  = c1->upNote()->canvasPos().x();
-      double p2x  = c2->upNote()->canvasPos().x();
+      cross   = minMove < maxMove;
+      int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
+      slope   = 0.0;
+      if (cross && !_userModified[idx]) {
+            //
+            // guess stem direction for every chord
+            //
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  Chord* c  = static_cast<Chord*>(cr);
+                  int move = c->staffMove();
+                  if (move == 0)
+                        c->setUp(maxMove ? false : true);
+                  else if (move > 0)
+                        c->setUp(true);
+                  else if (move < 0)
+                        c->setUp(false);
+                  }
+            _up = -1;
+            }
+      else {
+            foreach(ChordRest* cr, _elements)
+                  cr->setUp(_up);
+            }
+      }
 
-      qreal slope = 0.0;
-      double beamY = 0.0;  // y position of main beam start
-      int cut = 0;
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Beam::layout()
+      {
+      double _spatium = spatium();
+      double p1x      = c1->upNote()->canvasPos().x();
+      double p2x      = c2->upNote()->canvasPos().x();
+      int cut         = 0;
 
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
-            beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
+            double beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
             slope = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
-            }
-      else {
-            if (cross) {
-                  double y1   = -100000;
-                  double y2   = 100000;
-                  foreach(ChordRest* cr, _elements) {
-                        if (cr->type() != CHORD)
-                              continue;
-                        Chord* c = static_cast<Chord*>(cr);
-                        double y = c->upNote()->canvasPos().y();
-                        y1       = qMax(y1, y);
-                        y2       = qMin(y2, y);
-                        }
-                  if (y1 > y2)
-                        beamY = y2 + (y1 - y2) * .5;
-                  else
-                        beamY = _up ? y2 : y1;
-                  slope    = 0.0;
-                  _p1[idx].ry() = beamY;
-                  _p2[idx].ry() = beamY;
-                  }
-            else {
-                  foreach(ChordRest* cr, _elements)
-                        cr->setUp(_up);
-                  bool concave = false;
-                  for (int i = 0; i < _elements.size() - 2; ++i) {
-                        int l1 = _elements[i]->line(_up);
-                        int l  = _elements[i+1]->line(_up);
-                        int l2 = _elements[i+2]->line(_up);
-
-                        concave = ((l1 < l2) && ((l < l1) || (l > l2)))
-                          || ((l1 > l2) && ((l > l1) || (l < l2)));
-                        if (concave)
-                              break;
-                        }
-                  int l1 = _elements.front()->line(_up);
-                  int l2 = _elements.back()->line(_up);
-
-                  if (!concave) {
-                        double dx = (a2->pos().x() + a2->segment()->pos().x())
-                                - (a1->pos().x() + a1->segment()->pos().x());
-                        double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
-                        if (dx) {
-                              slope = (l2 - l1) * _spatium * .5 / dx;
-                              if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
-                                    cut = slope > 0.0 ? 0 : -1;
-                                    slope = 0;
-                                    }
-                              else if (slope > maxSlope) {
-                                    slope = maxSlope;
-                                    cut = 1;
-                                    }
-                              else if (-slope > maxSlope) {
-                                    slope = -maxSlope;
-                                    cut = -1;
-                                    }
-                              }
-                        }
-                  cut *= (_up ? 1 : -1);
-                  }
-            }
-
-      //
-      // set stem direction for every chord
-      //
-      if (_userModified[idx] || cross) {
+            //
+            // set stem direction for every chord
+            //
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
@@ -719,6 +675,77 @@ void Beam::layout()
                   double y1 = beamY + (p.x() - p1x) * slope;
                   cr->setUp(y1 < p.y());
                   }
+            _up = -1;
+            }
+      else if (cross) {
+            double beamY   = 0.0;  // y position of main beam start
+            double y1   = -100000;
+            double y2   = 100000;
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  Chord* c = static_cast<Chord*>(cr);
+                  double y = c->upNote()->canvasPos().y();
+                  y1       = qMax(y1, y);
+                  y2       = qMin(y2, y);
+                  }
+            if (y1 > y2)
+                  beamY = y2 + (y1 - y2) * .5;
+            else
+                  beamY = _up ? y2 : y1;
+            _p1[idx].ry() = beamY;
+            _p2[idx].ry() = beamY;
+            //
+            // set stem direction for every chord
+            //
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  Chord* c  = static_cast<Chord*>(cr);
+                  double y  = c->upNote()->canvasPos().y();
+                  int move = c->staffMove();
+                  c->setUp(beamY < y);
+                  }
+            _up = -1;
+            }
+      else {
+            bool concave = false;
+            for (int i = 0; i < _elements.size() - 2; ++i) {
+                  int l1 = _elements[i]->line(_up);
+                  int l  = _elements[i+1]->line(_up);
+                  int l2 = _elements[i+2]->line(_up);
+
+                  concave = ((l1 < l2) && ((l < l1) || (l > l2)))
+                    || ((l1 > l2) && ((l > l1) || (l < l2)));
+                  if (concave)
+                        break;
+                  }
+            int l1 = _elements.front()->line(_up);
+            int l2 = _elements.back()->line(_up);
+
+            if (!concave) {
+                  const ChordRest* a1 = _elements.front();
+                  const ChordRest* a2 = _elements.back();
+                  double dx = (a2->pos().x() + a2->segment()->pos().x())
+                          - (a1->pos().x() + a1->segment()->pos().x());
+                  double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
+                  if (dx) {
+                        slope = (l2 - l1) * _spatium * .5 / dx;
+                        if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
+                              cut = slope > 0.0 ? 0 : -1;
+                              slope = 0;
+                              }
+                        else if (slope > maxSlope) {
+                              slope = maxSlope;
+                              cut = 1;
+                              }
+                        else if (-slope > maxSlope) {
+                              slope = -maxSlope;
+                              cut = -1;
+                              }
+                        }
+                  }
+            cut *= (_up ? 1 : -1);
             }
 
       //---------------------------------------------------

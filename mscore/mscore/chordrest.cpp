@@ -144,15 +144,6 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
       }
 
 //---------------------------------------------------------
-//   isUp
-//---------------------------------------------------------
-
-bool ChordRest::isUp() const
-      {
-      return _beam ? (_beam->up() != -1 ? _beam->up() : _up) : _up;
-      }
-
-//---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
 
@@ -389,7 +380,7 @@ void ChordRest::layoutArticulations()
             if (sh > (_spatium * .5))   // hack
                   dy += sh * .5;
             qreal y;
-            if (isUp()) {
+            if (up()) {
                   y = chordBotY + dy;
                   //
                   // check for collision with staff line

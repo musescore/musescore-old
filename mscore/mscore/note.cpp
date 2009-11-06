@@ -1330,3 +1330,9 @@ void Note::setMag(double val)
             _accidental->setMag(val);
       }
 
+void Note::setLine(int n)
+      {
+      _line = n;
+      setYpos(_line * spatium() * .5);
+      }
+
