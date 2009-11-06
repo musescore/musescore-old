@@ -109,7 +109,7 @@
      <item row="0" column="1" colspan="2">
       <widget class="QLineEdit" name="soundFont">
        <property name="statusTip">
-        <string>loaded sound font</string>
+        <string>Loaded SoundFont</string>
        </property>
        <property name="text">
         <string/>
@@ -169,7 +169,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_8">
        <property name="text">
-        <string>Sound Font</string>
+        <string>SoundFont</string>
        </property>
        <property name="textFormat">
         <enum>Qt::PlainText</enum>
