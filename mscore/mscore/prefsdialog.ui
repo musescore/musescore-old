@@ -1988,7 +1988,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_7">
          <property name="title">
-          <string>Style used for import</string>
+          <string>Style Used for Import</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -1997,7 +1997,7 @@
           <item>
            <widget class="QRadioButton" name="useImportBuildinStyle">
             <property name="text">
-             <string>build in style</string>
+             <string>Built in style</string>
             </property>
            </widget>
           </item>
@@ -2006,7 +2006,7 @@
             <item>
              <widget class="QRadioButton" name="useImportStyleFile">
               <property name="text">
-               <string>use style file:</string>
+               <string>Use style file:</string>
               </property>
              </widget>
             </item>

@@ -399,6 +399,44 @@ def saveHTML(html_source, language_code='en'):
     out_file.close()
 
 
+# Add spaces between characters so Japanese wraps
+def insertSpaces(html_source):
+    import re
+
+    h = html_source
+
+    cnt = 0
+    space = " " # thin space
+    space = " " # normal space
+    space = "~" # alternate
+    text_pattern = re.compile('>[^'+space+'<\n]([^<]+)<')
+
+    try:
+        while (re.search(text_pattern,h)) and (cnt < 99999):
+            s = re.search(text_pattern,h)
+            text = s.group(0)
+            spaced_text = re.sub("(.)",space+"\\1",text)
+            #print text+'\n'
+            #print spaced_text+'\n'
+            h = h.replace(text, spaced_text, 1)
+            #print h[h.find(text)-100:h.find(text)+100],'\n'
+            cnt = cnt + 1
+            #print cnt,'\n\n'
+    except:
+        print "fail"
+        raise
+
+
+    h = re.sub(space+'>','>',h)
+    h = re.sub('>'+space,'>',h)
+    h = re.sub(space+'<','<',h)
+    h = re.sub(space,' ',h)
+    print h
+    
+    html_source = h
+    
+    return html_source
+
 # Generate and save PDF file
 def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf'):
     file_name = 'MuseScore-' + language_code + '.pdf'
@@ -410,6 +448,11 @@ def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf
 
     #import re
     #html_source = re.sub('(.)','\\1 ',html_source)
+    #m = re.search(">([^<]*)<",h)
+    #m.group(0)
+
+    if (language_code == 'ja'):
+        html_source = insertSpaces(html_source)
 
     pdf = pisa.CreatePDF(
         html_source,
@@ -502,6 +545,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 def main():
     language_code = 'en'
+    language_code = 'ja'
     download_images = 'missing'
     pdf = 'default'
     heading_switch = True
