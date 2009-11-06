@@ -340,7 +340,7 @@ void Score::cmdRemoveKeySig(KeySig* ks)
             printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
             return;
             }
-      int oval = (*kl)[tick];
+      int oval = ki->second;
       iKeyEvent nki = ki;
       ++nki;
 
@@ -351,7 +351,7 @@ void Score::cmdRemoveKeySig(KeySig* ks)
       ks->measure()->cmdRemoveEmptySegment(ks->segment());
 
       oval = kl->key(tick);
-      if (nki->second == oval)
+      if ((nki != kl->end()) && (nki->second == oval))
             undoChangeKeySig(staff, nki->first, oval, NO_KEY);
 
       int track = ks->track();

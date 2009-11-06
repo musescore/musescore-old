@@ -496,9 +496,8 @@ void Rest::propertyAction(const QString& s)
 //   space
 //---------------------------------------------------------
 
-void Rest::space(double& min, double& extra) const
+Space Rest::space() const
       {
-      min   = width() + point(_extraTrailingSpace);
-      extra = point(_extraLeadingSpace);
+      return Space(point(_extraLeadingSpace), width() + point(_extraTrailingSpace));
       }
 

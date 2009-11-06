@@ -2070,7 +2070,7 @@ void Score::removeElement(Element* element)
 
       if (debugMode)
             printf("   Score::removeElement %p %s parent %p %s\n",
-               element, element->name(), parent, parent->name());
+               element, element->name(), parent, parent ? parent->name() : "");
 
       // special for MEASURE, HBOX, VBOX
       // their parent is not static

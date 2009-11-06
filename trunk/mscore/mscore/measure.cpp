@@ -1448,504 +1448,6 @@ void Measure::moveTicks(int diff)
       }
 
 //---------------------------------------------------------
-//   Space
-//---------------------------------------------------------
-
-/**
- Unit of horizontal measure.
-*/
-
-class Space {
-      double _min;      // minimum width
-      double _extra;    // left bearing
-      bool _valid;
-
-   public:
-      Space()                       { _valid = false; _min = 0.0; _extra = 0.0; }
-      bool valid() const            { return _valid; }
-      void setValid(bool val)       { _valid = val; }
-      double min() const            { return _min; }
-      double extra() const          { return _extra; }
-      void setExtra(double e)       { _extra = e; }
-      void setMin(double m)         { _min = m; }
-      void addMin(double m)         { _min += m; }
-      void addExtra(double m)       { _extra += m; }
-      void max(const Space& s) {
-            if (s._min > _min) {
-                  _min = s._min;
-                  }
-            if (s._extra > _extra)
-                  _extra = s._extra;
-            }
-      void maxMin(Space v) {
-            if (_min < v._min) {
-                  _min = v._min;
-                  }
-            }
-      };
-
-//---------------------------------------------------------
-//   Spring
-//---------------------------------------------------------
-
-struct Spring {
-      int seg;
-      double stretch;
-      double fix;
-      Spring(int i, double s, double f) : seg(i), stretch(s), fix(f) {}
-      };
-
-typedef std::multimap<double, Spring, std::less<double> > SpringMap;
-typedef SpringMap::iterator iSpring;
-
-static SpringMap springs;
-
-//---------------------------------------------------------
-//   sff
-//    compute 1/Force for a given Extend
-//---------------------------------------------------------
-
-static double sff(double x, double xMin)
-      {
-      if (x <= xMin)
-            return 0.0;
-      iSpring i = springs.begin();
-      double c  = i->second.stretch;
-      if (c == 0.0)           //DEBUG
-            c = 1.1;
-      double f = 0.0;
-      for (; i != springs.end();) {
-            xMin -= i->second.fix;
-            f = (x - xMin) / c;
-            ++i;
-            if (i == springs.end() || f <= i->first)
-                  break;
-            c += i->second.stretch;
-            }
-      return f;
-      }
-
-//---------------------------------------------------------
-//   Measure::layoutX
-//---------------------------------------------------------
-
-/**
- Return width of measure (in MeasureWidth), taking into account \a stretch.
- In the layout process this method is called twice, first with stretch==1
- to find out the minimal width of the measure.
-*/
-
-void Measure::layoutX(double stretch)
-      {
-      if (!_dirty && (stretch == 1.0))
-            return;
-
-      double _spatium = spatium();
-
-      //-----------------------------------------------------------------------
-      //    remove empty segments
-      //    ** this should not be necessary **
-      //-----------------------------------------------------------------------
-
-again:
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->isEmpty()) {
-if (debugMode)
-      printf("Measure::layoutX(): note: remove empty segment %p %s %s\n", s, s->name(), s->subTypeName());
-                  remove(s);
-                  goto again;
-                  }
-            }
-
-      int nstaves = _score->nstaves();
-      int segs    = _size;
-
-      if (nstaves == 0 || segs == 0) {
-            _mw = MeasureWidth(1.0, 0.0);
-            _dirty = false;
-            return;
-            }
-
-      int tracks   = nstaves * VOICES;
-
-      //-----------------------------------------------------------------------
-      //    fill array of Spaces for all segments and staves
-      //    spaces[0]      - left margin
-      //-----------------------------------------------------------------------
-
-      Space spaces[segs+1][nstaves];
-      double width[segs+1];
-      Segment::SegmentType types[segs];
-
-      int seg = 1;
-      bool notesSeg = first()->subtype() == Segment::SegChordRest
-         || first()->subtype() == Segment::SegGrace;
-
-      bool firstNoteRest = true;
-      const Segment* ls = 0;
-      for (const Segment* s = first(); s; ls = s, s = s->next(), ++seg) {
-            types[seg-1] = Segment::SegmentType(s->subtype());
-            //
-            // add extra space between clef/key/timesig and first notes
-            //
-            double additionalMin   = 0.0;
-            double additionalExtra = 0.0;
-            if (!notesSeg && s->next()
-               && (s->next()->subtype() == Segment::SegChordRest
-                  || s->next()->subtype() == Segment::SegGrace)
-               ) {
-                  additionalMin = point(score()->styleS(ST_clefKeyRightMargin));
-                  notesSeg = true;
-                  }
-            if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace) {
-                  if (firstNoteRest)
-                        firstNoteRest = false;
-                  else {
-                        if (s->subtype() == Segment::SegGrace)
-                              additionalExtra = point(score()->styleS(ST_minNoteDistance)) * score()->styleD(ST_graceNoteMag);
-                        else
-                              additionalExtra = point(score()->styleS(ST_minNoteDistance));
-                        }
-                  }
-            else if (s->subtype() == Segment::SegClef)
-                  additionalExtra = point(score()->styleS(ST_clefLeftMargin));
-            else if (s->subtype() == Segment::SegTimeSig)
-                  additionalExtra = point(score()->styleS(ST_timesigLeftMargin));
-            else if (s->subtype() == Segment::SegKeySig)
-                  additionalExtra = point(score()->styleS(ST_keysigLeftMargin));
-            else if (s->subtype() == Segment::SegEndBarLine) {
-                  if (ls && ls->subtype() == Segment::SegClef)
-                        additionalExtra = point(score()->styleS(ST_clefBarlineDistance));
-                  else
-                        additionalExtra = point(score()->styleS(ST_noteBarDistance));
-                  }
-            else if (s->subtype() == Segment::SegTimeSigAnnounce) {
-                  // additionalExtra = point(style->timesigLeftMargin);
-                  additionalMin   = _spatium;
-                  }
-            else if (s->subtype() == Segment::SegStartRepeatBarLine)
-                  additionalExtra = point(score()->styleS(ST_beginRepeatLeftMargin));
-
-            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  spaces[seg][staffIdx].setValid(false);
-                  if (!visible(staffIdx))
-                        continue;
-
-                  double min   = 0.0;
-                  double extra = 0.0;
-                  for (int voice = 0; voice < VOICES; ++voice) {
-                        Element* el  = s->element(staffIdx * VOICES + voice);
-                        if (!el)
-                              continue;
-                        spaces[seg][staffIdx].setValid(true);
-                        el->layout();
-                        double min1, extra1;
-                        el->space(min1, extra1);
-                        if (min1 > min)
-                              min = min1;
-                        if (extra1 > extra)
-                              extra = extra1;
-                        }
-
-                  Lyrics* lyrics = 0;
-                  const LyricsList* ll = s->lyricsList(staffIdx);
-                  for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
-                        if (!*l)
-                              continue;
-                        (*l)->layout();
-                        lyrics = *l;
-                        double lw = ((*l)->bbox().width()) * .5;
-                        if (lw > min)
-                              min = lw;
-                        if (lw > extra)
-                              extra = lw;
-                        spaces[seg][staffIdx].setValid(true);
-                        }
-                  spaces[seg][staffIdx].setMin(min + additionalMin);
-                  spaces[seg][staffIdx].setExtra(extra + additionalExtra);
-                  if (lyrics) {
-                        double y = lyrics->ipos().y() + lyrics->lineHeight()
-                             + point(score()->styleS(ST_lyricsMinBottomDistance));
-                        if (y > staves[staffIdx]->distance)
-                              staves[staffIdx]->distance = y;
-                        }
-                  }
-            }
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            Spatium min;
-            Spatium extra;
-            switch(first()->subtype()) {
-                  case Segment::SegClef:
-                        min = score()->styleS(ST_clefLeftMargin);
-                        break;
-                  case Segment::SegKeySig:
-                        min = score()->styleS(ST_keysigLeftMargin);
-                        break;
-                  case Segment::SegTimeSigAnnounce:
-                  case Segment::SegTimeSig:
-                        min = score()->styleS(ST_timesigLeftMargin);
-                        break;
-                  case Segment::SegChordRest:
-                        //
-                        // allow accidentals of chord to eat up extra
-                        // space from left margin of measure
-                        //
-                        min   = score()->styleS(ST_barNoteDistance);
-                        extra = min * .5;
-                        break;
-                  case Segment::SegGrace:
-                        min = score()->styleS(ST_barNoteDistance) * score()->styleD(ST_graceNoteMag);
-                        break;
-                  }
-            spaces[0][staffIdx].setMin(point(min));
-            spaces[0][staffIdx].setExtra(point(extra));
-
-            spaces[0][staffIdx].setValid(true);
-            }
-
-      //---------------------------------------------------
-      //    move extra space to previous cells
-      //---------------------------------------------------
-
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            for (int seg = segs; seg > 0; --seg) {    // seg 0 cannot move any space
-                  double extra = spaces[seg][staffIdx].extra();
-                  if (extra < 0.00001)
-                        continue;
-                  // move extra space to previous non empty Segment
-                  int tseg;
-                  for (tseg = seg-1; tseg >= 0; --tseg) {
-                        if (spaces[tseg][staffIdx].valid())
-                              break;
-                        }
-                  if (tseg)
-                        spaces[tseg][staffIdx].addMin(extra);
-                  }
-            }
-
-      //---------------------------------------------------
-      //    move min space to next cell
-      //---------------------------------------------------
-#if 0
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            for (int seg = 0; seg < segs - 1; ++seg) {
-                  if (types[seg] != Segment::SegChordRest)
-                        continue;
-                  double min = spaces[seg][staffIdx].min();
-                  if (min < 0.00001)
-                        continue;
-                  if (types[seg+1] != Segment::SegChordRest)
-                        continue;
-                  if (spaces[seg+1][staffIdx].valid())
-                        continue;
-                  spaces[seg][staffIdx].setMin(spaces[seg][staffIdx].min() * .5);
-                  }
-            }
-#endif
-      //---------------------------------------------------
-      //    populate width[] array
-      //---------------------------------------------------
-
-      for (int seg = segs; seg >= 0; --seg) {
-            double ww = 0.0;
-            double ew = 0.0;
-            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  if (!spaces[seg][staffIdx].valid())
-                        continue;
-                  double w   = spaces[seg][staffIdx].min();
-                  double eew = 0;
-                  if (seg == 0) {
-                        eew = spaces[1][staffIdx].extra() - spaces[0][staffIdx].extra();
-                        if (eew < 0.0)
-                              eew = 0;
-                        }
-                  for (int nseg = seg+1; nseg < segs+1; ++nseg) {
-                        if (spaces[nseg][staffIdx].valid())
-                              break;
-                        w -= width[nseg];
-                        if (w < 0.0)
-                              break;
-                        }
-                  if (w > ww)
-                        ww = w;
-                  if (eew > ew)
-                        ew = eew;
-                  }
-            width[seg] = ww + ew;
-            }
-
-      //---------------------------------------------------
-      //    segments with equal duration should have
-      //    equal width
-      //---------------------------------------------------
-
-      int ticks[segs+1];
-      memset(ticks, 0, (segs + 1) * sizeof(int));
-
-      //--------tick table for segments
-      int minTick   = 100000;
-      int ntick     = tick() + tickLen();   // position of next measure
-      int i         = 1;
-      for (Segment* seg = first(); seg; seg = seg->next(), ++i) {
-            if (seg->subtype() != Segment::SegChordRest)
-                  continue;
-            Segment* nseg = seg;
-            for (;;) {
-                  nseg = nseg->next();
-                  if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
-                        break;
-                  }
-            int nticks;
-            if (nseg)
-                  nticks = nseg->tick() - seg->tick();
-            else
-                  nticks = ntick - seg->tick();
-            if (nticks == 0) {
-                  printf("layoutX: empty measure: tick %d len %d\n", tick(), tickLen());
-                  printf("layoutX: nticks==0 tickLen %d size %d, idx %d, ticks: %d %d\n",
-                     tickLen(),
-                     size(), i-1, seg->tick(), nseg ? nseg->tick() : -1
-                     );
-                  }
-            else {
-                  if (nticks < minTick)
-                        minTick = nticks;
-                  }
-            ticks[i] = nticks;
-            }
-
-      // compute stretches:
-
-      springs.clear();
-      double stretchList[segs + 1];
-      double stretchSum   = 0.0;
-      stretchList[0]      = 0.0;
-
-      double minimum = width[0];  // + width[segs+1];
-      for (int i = 1; i < segs+1; ++i) {
-            double str = 1.0;
-            double d;
-
-            if (ticks[i] > 0 && (types[i-1] == Segment::SegChordRest)) {
-                  if (minTick > 0)
-                        str += .6 * log2(double(ticks[i]) / double(minTick));
-                  stretchList[i] = str;
-                  d = width[i] / str;
-                  }
-            else {
-                  stretchList[i] = 0.0;   // dont stretch timeSig and key
-                  d = 100000000.0;        // CHECK
-                  }
-            stretchSum += stretchList[i];
-            minimum += width[i];
-            springs.insert(std::pair<double, Spring>(d, Spring(i, stretchList[i], width[i])));
-            }
-
-      //---------------------------------------------------
-      //    distribute "stretch" to segments
-      //---------------------------------------------------
-
-      double force = sff(stretch, minimum);
-      for (iSpring i = springs.begin(); i != springs.end(); ++i) {
-            double stretch = force * i->second.stretch;
-            if (stretch < i->second.fix)
-                  stretch = i->second.fix;
-            width[i->second.seg] = stretch;
-            }
-
-      //-----------------------------------------------------------------------
-      //    xpos[segs+1]   - start of next measure (width of current measure)
-      //-----------------------------------------------------------------------
-
-      double xpos[segs+2];
-      xpos[0] = 0.0;
-      for (int seg = 0; seg < segs+1; ++seg)
-            xpos[seg+1] = xpos[seg] + width[seg];
-
-      if (stretch == 1.0) {
-            // printf("this is pass 1\n");
-            _mw = MeasureWidth(xpos[segs + 1], 0.0);
-            _dirty = false;
-            return;
-            }
-
-      //---------------------------------------------------
-      //    layout individual elements
-      //---------------------------------------------------
-
-      seg = 1;
-      for (Segment* s = first(); s; s = s->next(), ++seg) {
-            s->setPos(xpos[seg], 0.0);
-            for (int track = 0; track < tracks; ++track) {
-                  Element* e = s->element(track);
-                  if (e == 0)
-                        continue;
-                  ElementType t = e->type();
-                  if (t == REST) {
-                        Rest* rest = static_cast<Rest*>(e);
-                        if (rest->duration() == Duration::V_MEASURE) {
-                              // on pass 2 stretch is the real width of the measure
-                              // its assumed that s is the last segment in the measure
-                              if (_multiMeasure > 0) {
-                                    if (seg == 1)
-                                          rest->setMMWidth(xpos[segs] - 2 * s->x());
-                                    else
-                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
-                                    e->setXpos(0.0);
-                                    }
-                              else {
-                                    double x1;
-                                    if (seg <= 1)
-                                          x1 = 0.0;
-                                    else
-                                          x1 = xpos[seg] - point(score()->styleS(ST_clefKeyRightMargin));
-                                    double x2 = xpos[segs];    // bar line position
-                                    Element* ne = last()->element(track/VOICES);
-                                    if (ne && ne->type() == CLEF)
-                                          x2 -= ne->width();
-
-                                    // xx = x2 - e->width();                   // right aligned
-                                    // xx = x1;                                // left aligned
-                                    // xx = (x2 - x1 - e->width()) * .5 + x1;  // centered
-                                    e->setXpos((x2 - x1 - e->width()) * .5 + x1 - s->x());
-                                    }
-                              }
-                        }
-                  else if (t == CHORD) {
-                        Chord* chord = static_cast<Chord*>(e);
-                        if (chord->glissando())
-                              chord->glissando()->layout();
-                        chord->layout2();
-                        }
-                  else if (t == REPEAT_MEASURE) {
-                        e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
-                        }
-                  else {
-                        double y = 0.0;
-                        double xo = spaces[seg][track/VOICES].extra();
-                        if (t == CLEF)
-                              e->setPos(-e->bbox().x() - xo + point(score()->styleS(ST_clefLeftMargin)), y);
-                        else if (t == TIMESIG)
-                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_timesigLeftMargin)), y);
-                        else if (t == KEYSIG)
-                              e->setPos(- e->bbox().x() - xo + point(score()->styleS(ST_keysigLeftMargin)), y);
-                        else  if (s->subtype() == Segment::SegEndBarLine) {
-                              // align right
-                              e->setPos(width[seg] - e->width(), y);
-                              }
-                        else  if (s->subtype() == Segment::SegStartRepeatBarLine) {
-                              // align right
-                              // e->setPos(_spatium, y);
-                              e->setPos(0.0, y);
-                              }
-                        else
-                              e->setPos(-e->bbox().x() - xo, y);
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   removeStaves
 //---------------------------------------------------------
 
@@ -2415,15 +1917,8 @@ printf("drop staffList\n");
                   // see also cmdDeleteSelection()
                   //
                   _score->select(0, SELECT_SINGLE, 0);
-                  bool rmFlag = false;
                   for (Segment* s = first(); s; s = s->next()) {
-                        if (s->subtype() == Segment::SegEndBarLine
-                           || s->subtype() == Segment::SegTimeSigAnnounce
-                           || s->subtype() == Segment::SegStartRepeatBarLine)
-                              continue;
-                        if (s->subtype() == Segment::SegChordRest)
-                              rmFlag = true;
-                        if (rmFlag) {
+                        if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace) {
                               int strack = staffIdx * VOICES;
                               int etrack = strack + VOICES;
                               for (int track = strack; track < etrack; ++track) {
@@ -2431,9 +1926,8 @@ printf("drop staffList\n");
                                     if (el)
                                           _score->undoRemoveElement(el);
                                     }
-                              }
-                        if (s->isEmpty()) {
-                              _score->undoRemoveElement(s);
+                              if (s->isEmpty())
+                                    _score->undoRemoveElement(s);
                               }
                         }
                   //
@@ -2624,7 +2118,7 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
 
       MStaff* mstaff = staves[staff];
       if (mstaff->_vspacer)
-            xml.tag("vspacer", mstaff->_vspacer->space().val());
+            xml.tag("vspacer", mstaff->_vspacer->getSpace().val());
       if (!mstaff->_visible)
             xml.tag("visible", mstaff->_visible);
       if (mstaff->_slashStyle)
@@ -2845,7 +2339,7 @@ void Measure::read(QDomElement e, int idx)
                   rm->read(e);
                   Segment* s = getSegment(Segment::SegChordRest, rm->tick());
                   s->add(rm);
-                  score()->curTick = rm->tick() + rm->tickLen();
+                  score()->curTick = rm->tick() + tickLen();
                   }
             else if (tag == "Clef") {
                   Clef* clef = new Clef(score());
@@ -3440,7 +2934,7 @@ bool Measure::isMeasureRest(int staffIdx)
 
 Spatium Measure::userDistance(int i) const
       {
-      return staves[i]->_vspacer ? staves[i]->_vspacer->space() : Spatium(0);
+      return staves[i]->_vspacer ? staves[i]->_vspacer->getSpace() : Spatium(0);
       }
 
 //---------------------------------------------------------
@@ -3490,5 +2984,332 @@ Fraction Measure::fraction() const
       int z, n;
       score()->sigmap()->timesig(tick(), z, n);
       return Fraction(z, n);
+      }
+
+void Space::max(const Space& s)
+      {
+      if (s._lw > _lw)
+            _lw = s._lw;
+      if (s._rw > _rw)
+            _rw = s._rw;
+      }
+
+//---------------------------------------------------------
+//   Spring
+//---------------------------------------------------------
+
+struct Spring {
+      int seg;
+      double stretch;
+      double fix;
+      Spring(int i, double s, double f) : seg(i), stretch(s), fix(f) {}
+      };
+
+typedef std::multimap<double, Spring, std::less<double> > SpringMap;
+typedef SpringMap::iterator iSpring;
+
+//---------------------------------------------------------
+//   sff
+//    compute 1/Force for a given Extend
+//---------------------------------------------------------
+
+static double sff(double x, double xMin, SpringMap& springs)
+      {
+      if (x <= xMin)
+            return 0.0;
+      iSpring i = springs.begin();
+      double c  = i->second.stretch;
+      if (c == 0.0)           //DEBUG
+            c = 1.1;
+      double f = 0.0;
+      for (; i != springs.end();) {
+            xMin -= i->second.fix;
+            f = (x - xMin) / c;
+            ++i;
+            if (i == springs.end() || f <= i->first)
+                  break;
+            c += i->second.stretch;
+            }
+      return f;
+      }
+
+//-----------------------------------------------------------------------------
+///   \brief main layout routine for note spacing
+///   Return width of measure (in MeasureWidth), taking into account \a stretch.
+///   In the layout process this method is called twice, first with stretch==1
+///   to find out the minimal width of the measure.
+//-----------------------------------------------------------------------------
+
+void Measure::layoutX(double stretch)
+      {
+      if (!_dirty && (stretch == 1.0))
+            return;
+      int nstaves     = _score->nstaves();
+      int segs        = _size;
+
+      if (nstaves == 0 || segs == 0) {
+            _mw = MeasureWidth(1.0, 0.0);
+            _dirty = false;
+            return;
+            }
+
+      double _spatium           = spatium();
+      int tracks                = nstaves * VOICES;
+      double clefKeyRightMargin = score()->styleS(ST_clefKeyRightMargin).val() * _spatium;
+
+      double rest[nstaves];    // fixed space needed from previous segment
+      memset(rest, 0, nstaves * sizeof(double));
+      //--------tick table for segments
+      int ticks[segs];
+      memset(ticks, 0, (segs + 1) * sizeof(int));
+
+      double xpos[segs+1];
+      int types[segs];
+      double width[segs];
+
+      int segmentIdx  = 0;
+      double x        = 0.0;
+      int minTick     = 100000;
+      int ntick       = tick() + tickLen();   // position of next measure
+
+      for (const Segment* s = first(); s; s = s->next(), ++segmentIdx) {
+            types[segmentIdx] = s->subtype();
+            bool rest2[nstaves+1];
+            double segmentWidth    = 0.0;
+            double minDistance     = 0.0;
+            double stretchDistance = 0.0;
+
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  Space space;
+                  int track  = staffIdx * VOICES;
+                  bool found = false;
+                  if ((s->subtype() == Segment::SegChordRest) || (s->subtype() == Segment::SegGrace)) {
+                        for (int voice = 0; voice < VOICES; ++voice) {
+                              ChordRest* cr = static_cast<ChordRest*>(s->element(track+voice));
+                              if (!cr)
+                                    continue;
+                              found = true;
+                              if (s == first()) {
+                                    double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
+                                    minDistance     = sp * .3;
+                                    stretchDistance = sp * .7;
+                                    }
+                              else {
+                                    int pt = s->prev()->subtype();
+                                    if (pt == Segment::SegKeySig || pt == Segment::SegTimeSig || pt == Segment::SegClef) {
+                                          minDistance = clefKeyRightMargin;
+                                          }
+                                    else {
+                                          minDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
+                                          if (s->subtype() == Segment::SegGrace)
+                                                minDistance *= score()->styleD(ST_graceNoteMag);
+                                          }
+                                    }
+                              cr->layout();
+                              space.max(cr->space());
+                              }
+
+                        double w = 0.0;
+                        Lyrics* lyrics = 0;
+                        const LyricsList* ll = s->lyricsList(staffIdx);
+                        for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
+                              if (!*l)
+                                    continue;
+                              (*l)->layout();
+                              lyrics = *l;
+                              double lw = ((*l)->bbox().width()) * .5;
+                              if (lw > w)
+                                    w = lw;
+                              }
+                        if (lyrics) {
+                              found = true;
+                              double y = lyrics->ipos().y() + lyrics->lineHeight()
+                                 + point(score()->styleS(ST_lyricsMinBottomDistance));
+                              if (y > staves[staffIdx]->distance)
+                                 staves[staffIdx]->distance = y;
+                              }
+                        space.max(Space(w, w));
+                        }
+                  else {
+                        bool barLine = s->subtype() == Segment::SegEndBarLine;
+                        if (barLine && segmentIdx) {
+                              if (s->prev()->subtype() == Segment::SegClef)
+                                    minDistance = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
+                              else
+                                    stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
+                              }
+                        Element* e = s->element(barLine ? 0 : track);
+                        if (e) {
+                              found = true;
+                              e->layout();
+                              Space sp = e->space();
+                              if ((e->type() == CLEF) && (s != first())) {
+                                    sp.rLw() += sp.rw();
+                                    sp.setRw(0.0);
+                                    }
+                              space.max(sp);
+                              }
+                        }
+                  if (found) {
+                        double sp = minDistance + rest[staffIdx] + stretchDistance;
+                        if (space.lw() > stretchDistance)
+                              sp += (space.lw() - stretchDistance);
+                        rest[staffIdx]  = space.rw();
+                        rest2[staffIdx] = false;
+                        segmentWidth    = qMax(segmentWidth, sp);
+                        }
+                  else
+                        rest2[staffIdx] = true;
+                  }
+            x += segmentWidth;
+            xpos[segmentIdx]  = x;
+            if (segmentIdx)
+                  width[segmentIdx-1] = segmentWidth;
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  if (rest2[staffIdx])
+                        rest[staffIdx] -= segmentWidth;
+                  }
+            if ((s->subtype() == Segment::SegChordRest)) {
+                  const Segment* nseg = s;
+                  for (;;) {
+                        nseg = nseg->next();
+                        if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
+                              break;
+                        }
+                  int nticks = (nseg ? nseg->tick() : ntick) - s->tick();
+                  if (nticks == 0) {
+                        printf("layoutX: empty measure: tick %d len %d\n", tick(), tickLen());
+                        printf("layoutX: nticks==0 segmente %d, segmentIdx: %d, ticks: %d ntick %d\n",
+                           size(), segmentIdx-1, s->tick(), ntick
+                           );
+                        }
+                  else {
+                        if (nticks < minTick)
+                              minTick = nticks;
+                        }
+                  ticks[segmentIdx] = nticks;
+                  }
+            else
+                  ticks[segmentIdx] = 0;
+            }
+      double segmentWidth = 0.0;
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx)
+            segmentWidth = qMax(segmentWidth, rest[staffIdx]);
+      xpos[segmentIdx]    = x + segmentWidth;
+      width[segmentIdx-1] = segmentWidth;
+
+//      for (int i = 0; i < segs; ++i)
+//            printf("%3d: %4.2f  ticks: %3d\n", i, width[i], ticks[i]);
+
+      if (stretch == 1.0) {
+            // printf("this is pass 1\n");
+            _mw = MeasureWidth(xpos[segs], 0.0);
+            _dirty = false;
+            return;
+            }
+
+      //---------------------------------------------------
+      // compute stretches:
+      //---------------------------------------------------
+
+      SpringMap springs;
+      double stretchList[segs];
+      double stretchSum = 0.0;
+      stretchList[0]    = 0.0;
+
+      double minimum = xpos[0];
+      for (int i = 0; i < segs; ++i) {
+            double str = 1.0;
+            double d;
+            double w = width[i];
+
+            int t = ticks[i];
+            if (t) {
+                  if (minTick > 0)
+                        str += .6 * log2(double(t) / double(minTick));
+                  stretchList[i] = str;
+                  d = w / str;
+                  }
+            else {
+                  if (ticks[i]) {
+                        printf("zero segment %d\n", i);
+                        w = 0.0;
+                        }
+                  stretchList[i] = 0.0;   // dont stretch timeSig and key
+                  d = 100000000.0;        // CHECK
+                  }
+            stretchSum += stretchList[i];
+            minimum    += w;
+            springs.insert(std::pair<double, Spring>(d, Spring(i, stretchList[i], w)));
+            }
+
+      //---------------------------------------------------
+      //    distribute stretch to segments
+      //---------------------------------------------------
+
+      double force = sff(stretch, minimum, springs);
+
+      for (iSpring i = springs.begin(); i != springs.end(); ++i) {
+            double stretch = force * i->second.stretch;
+            if (stretch < i->second.fix)
+                  stretch = i->second.fix;
+            width[i->second.seg] = stretch;
+            }
+      x = xpos[0];
+      for (int i = 1; i <= segs; ++i) {
+            x += width[i-1];
+            xpos[i] = x;
+            }
+
+      //---------------------------------------------------
+      //    layout individual elements
+      //---------------------------------------------------
+
+      int seg = 0;
+      for (Segment* s = first(); s; s = s->next(), ++seg) {
+            s->setPos(xpos[seg], 0.0);
+            for (int track = 0; track < tracks; ++track) {
+                  Element* e = s->element(track);
+                  if (e == 0)
+                        continue;
+                  ElementType t = e->type();
+                  if (t == REST) {
+                        Rest* rest = static_cast<Rest*>(e);
+                        if (rest->duration() == Duration::V_MEASURE) {
+                              if (_multiMeasure > 0) {
+                                    if (seg == 1)
+                                          rest->setMMWidth(xpos[segs] - 2 * s->x());
+                                    else
+                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
+                                    e->setXpos(0.0);
+                                    }
+                              else {
+                                    double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
+                                    double w  = xpos[segs-1] - x1;
+                                    e->setXpos((w - e->width()) * .5 + x1 - s->x());
+                                    }
+                              }
+                        }
+                  else if (t == REPEAT_MEASURE) {
+                        double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
+                        double w  = xpos[segs-1] - x1;
+                        e->setXpos((w - e->width()) * .5 + x1 - s->x());
+                        }
+                  else if (t == CHORD) {
+                        Chord* chord = static_cast<Chord*>(e);
+                        if (chord->glissando())
+                              chord->glissando()->layout();
+                        chord->layout2();
+                        }
+                  else if ((t == CLEF) && (s != first())) {
+                        double w = xpos[seg+1] - xpos[seg];
+                        double m = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
+                        e->setXpos(w - e->width() - m);
+                        }
+                  else {
+                        e->setPos(-e->bbox().x(), 0.0);
+                        }
+                  }
+            }
       }
 

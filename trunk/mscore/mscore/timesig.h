@@ -55,15 +55,15 @@ class TimeSig : public Element {
       TimeSig(Score*, int st);
       TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
 
-      virtual TimeSig* clone() const   { return new TimeSig(*this); }
-      virtual ElementType type() const { return TIMESIG; }
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      virtual void setSubtype(int val);
-      virtual void draw(QPainter&) const;
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
-      virtual void layout();
-
+      TimeSig* clone() const   { return new TimeSig(*this); }
+      ElementType type() const { return TIMESIG; }
+      QPointF canvasPos() const;      ///< position in canvas coordinates
+      void setSubtype(int val);
+      void draw(QPainter&) const;
+      void write(Xml& xml) const;
+      void read(QDomElement);
+      void layout();
+      Space space() const;
 
       void getSig(int* n, int* z1) const;
       static void getSig(int st, int* n, int* z) {
@@ -75,8 +75,8 @@ class TimeSig : public Element {
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
-      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      Element* drop(const QPointF&, const QPointF&, Element*);
       static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
             }

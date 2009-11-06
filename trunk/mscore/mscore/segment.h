@@ -63,7 +63,7 @@ typedef LyricsList::const_iterator ciLyrics;
 class Segment : public Element {
       Segment* _next;
       Segment* _prev;
-      mutable bool empty;
+      mutable bool empty;     // cached value
 
    public:
       enum SegmentType {

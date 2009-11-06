@@ -894,7 +894,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation>自動</translation>
     </message>
     <message>
@@ -915,7 +917,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <extracomment>100 cent = 1 semitone intervall
+----------
+100 cent = 1 semitone intervall</extracomment>
         <translation>セント</translation>
     </message>
     <message>
@@ -940,12 +944,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
+        <extracomment>velocity type
+----------
+velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1409,6 +1417,12 @@ failed: </source>
     <message>
         <source>sp</source>
         <extracomment>spatium unit
+----------
+space unit
+----------
+space unit
+----------
+spatium unit
 ----------
 space unit
 ----------
@@ -3630,6 +3644,17 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
 </context>
 <context>
+    <name>Palette</name>
+    <message>
+        <source>Delete Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PaletteBox</name>
     <message>
         <source>Palettes</source>
@@ -3661,6 +3686,29 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <source>Delete Palette</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteCellProperties</name>
+    <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished">コードプロパティ</translation>
+    </message>
+    <message>
+        <source>Palette Cell Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished">x:</translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished">y:</translation>
     </message>
 </context>
 <context>
@@ -4234,7 +4282,9 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
+        <extracomment>millimeter
+----------
+millimeter</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5131,12 +5181,16 @@ failed: </source>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
+        <extracomment>do not translate
+----------
+do not translate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
+        <extracomment>do not translate - only for debugging
+----------
+do not translate - only for debugging</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5247,7 +5301,9 @@ failed: </source>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
+        <extracomment>Frequency Herz
+----------
+Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5570,7 +5626,9 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
+        <extracomment>coordinate
+----------
+coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5591,7 +5649,9 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
+        <extracomment>coordinate
+----------
+coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7754,6 +7814,10 @@ p, li { white-space: pre-wrap; }
         <source>Follow Song</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -7867,6 +7931,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>downmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ufermata</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

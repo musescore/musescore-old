@@ -443,10 +443,9 @@ void ClefList::insertTime(int tick, int len)
 //   space
 //---------------------------------------------------------
 
-void Clef::space(double& min, double& extra) const
+Space Clef::space() const
       {
-      min   = 0.0;
-      extra = width();
+      return Space(point(score()->styleS(ST_clefLeftMargin)), width());
       }
 
 //---------------------------------------------------------
@@ -455,15 +454,8 @@ void Clef::space(double& min, double& extra) const
 
 void Clef::setSmall(bool val)
       {
-      if (val != _small) {
+      if (val != _small)
             _small = val;
-/*            double smallMag = score()->style()->smallClefMag;
-            if (_small)
-                  setMag(mag() * smallMag);
-            else
-                  setMag(mag() / smallMag);
-            */
-            }
       layout();
       }
 

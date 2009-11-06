@@ -40,7 +40,7 @@ class Glissando : public Element {
       Glissando(Score* s);
       virtual Glissando* clone() const { return new Glissando(*this); }
       virtual ElementType type() const { return GLISSANDO; }
-      virtual void space(double& min, double& extra) const;
+      virtual Space space() const;
       virtual QRectF bbox() const;
 
       virtual void draw(QPainter&) const;

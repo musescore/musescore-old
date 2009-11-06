@@ -1330,7 +1330,7 @@ void ChangeKeySig::redo()
       if (oldKeySig != NO_KEY) {
             iKeyEvent ik = kl->find(tick);
             if (ik == kl->end()) {
-                  printf("ChangeKeySig::redo: cannot find key at tick %d\n", tick);
+                  printf("ChangeKeySig::redo: cannot find key at tick %d, listsize %d\n", tick, kl->size());
                   abort();
                   }
             else

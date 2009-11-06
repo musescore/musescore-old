@@ -338,14 +338,14 @@ Style::Style()
             StyleVal(ST_timesigLeftMargin, Spatium(0.5)),
 
             StyleVal(ST_clefKeyRightMargin, Spatium(1.75)),
-            StyleVal(ST_clefBarlineDistance, Spatium(0.5)),
+            StyleVal(ST_clefBarlineDistance, Spatium(0.18)),      // was 0.5
             StyleVal(ST_stemWidth, Spatium(0.13)),          // 0.09375
             StyleVal(ST_shortenStem, true),
             StyleVal(ST_shortStemProgression, Spatium(0.25)),
             StyleVal(ST_shortestStem,Spatium(2.25)),
             StyleVal(ST_beginRepeatLeftMargin,Spatium(1.0)),
             StyleVal(ST_minNoteDistance,Spatium(0.4)),
-            StyleVal(ST_barNoteDistance,Spatium(1.5)),
+            StyleVal(ST_barNoteDistance,Spatium(1.2)),
             StyleVal(ST_noteBarDistance,Spatium(1.0)),
 
             StyleVal(ST_measureSpacing,1.2),

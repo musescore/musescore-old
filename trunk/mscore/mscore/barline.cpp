@@ -266,10 +266,9 @@ void BarLine::read(QDomElement e)
 //   space
 //---------------------------------------------------------
 
-void BarLine::space(double& min, double& extra) const
+Space BarLine::space() const
       {
-      min   = width();
-      extra = 0.0;
+      return Space(0.0, width());
       }
 
 //---------------------------------------------------------

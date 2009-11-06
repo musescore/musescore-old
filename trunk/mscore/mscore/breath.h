@@ -38,7 +38,7 @@ class Breath : public Element {
       Breath(Score* s);
       virtual Breath* clone() const { return new Breath(*this); }
       virtual ElementType type() const { return BREATH; }
-      virtual void space(double& min, double& extra) const;
+      virtual Space space() const;
 
       virtual void draw(QPainter&) const;
       virtual void layout();

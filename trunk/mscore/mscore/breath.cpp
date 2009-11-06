@@ -82,10 +82,9 @@ void Breath::draw(QPainter& p) const
 //   space
 //---------------------------------------------------------
 
-void Breath::space(double& min, double& extra) const
+Space Breath::space() const
       {
-      min   = spatium() * 1.5;
-      extra = 0.0;
+      return Space(0.0, spatium() * 1.5);
       }
 
 //---------------------------------------------------------

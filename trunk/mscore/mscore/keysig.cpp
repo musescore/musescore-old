@@ -26,6 +26,7 @@
 #include "system.h"
 #include "segment.h"
 #include "measure.h"
+#include "score.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),   QT_TRANSLATE_NOOP("MuseScore", "Cb major, Ab minor"),
@@ -275,3 +276,14 @@ void KeySig::setOldSig(int old)
       int newSig = subtype() & 0xff;
       setSubtype(((old & 0xff) << 8) | (newSig & 0xff));
       }
+
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+Space KeySig::space() const
+      {
+      return Space(point(score()->styleS(ST_keysigLeftMargin)), width());
+      }
+
+
