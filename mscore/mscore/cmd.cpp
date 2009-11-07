@@ -1080,7 +1080,9 @@ printf("   sublist:\n");
                   }
             Measure* m  = cr1->measure();
             Measure* m1 = m->nextMeasure();
-            cr1         = static_cast<ChordRest*>(m1->firstCRSegment()->element(track));
+            if (m1 == 0)
+                  break;
+            cr1 = static_cast<ChordRest*>(m1->firstCRSegment()->element(track));
             }
       connectTies();
       }

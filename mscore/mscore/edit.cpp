@@ -1395,8 +1395,11 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      if (noteEntryMode())
+      if (noteEntryMode()) {
+printf("cmdTuplet %d noteEntry\n", n);
+            changeCRlen(_is.cr(), _is.duration);
             cmdTuplet(n, _is.cr(), _is.duration.fraction());
+            }
       else {
             QList<Element*>* sl = selection()->elements();
             foreach(Element* e, *sl) {
