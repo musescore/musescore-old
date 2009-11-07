@@ -914,14 +914,8 @@ static void collectMatch(void* data, Element* e)
             return;
       if ((p->staff != -1) && (p->staff != e->staffIdx()))
             return;
-      if (e->type() == CHORD || e->type() == REST) {
-            ChordRest* cr = static_cast<ChordRest*>(e);
-            if (p->voice != -1 && p->voice != cr->voice())
-                  return;
-            }
-      if (e->type() == NOTE) {
-            Note* n = static_cast<Note*>(e);
-            if (p->voice != -1 && p->voice != n->voice())
+      if (e->type() == CHORD || e->type() == REST || e->type() == NOTE || e->type() == LYRICS) {
+            if (p->voice != -1 && p->voice != e->voice())
                   return;
             }
       if (p->system) {

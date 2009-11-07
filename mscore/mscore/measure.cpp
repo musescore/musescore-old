@@ -2883,6 +2883,8 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                         }
                   LyricsList* ll = s->lyricsList(staffIdx);
                   foreach(Lyrics* l, *ll) {
+                        if (l == 0)
+                              continue;
                         if (l->voice() == v1)
                               l->setVoice(v2);
                         else if (l->voice() == v2)
