@@ -107,7 +107,7 @@ InputState::InputState() :
 
 ChordRest* InputState::cr() const
       {
-      return static_cast<ChordRest*>(_segment->element(track));
+      return _segment ? (static_cast<ChordRest*>(_segment->element(track))) : 0;
       }
 
 //---------------------------------------------------------

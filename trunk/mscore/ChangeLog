@@ -1,4 +1,5 @@
 7.nov. (ws)
+      - fix: tuplets in note entry mode
       - fix: grace notes don't transpose
       - layout: remove accidental, if two notes share the same note head
       (og)
