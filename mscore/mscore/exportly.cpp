@@ -52,6 +52,7 @@ using std::cout;
 #include "harmony.h"
 #include "key.h"
 #include "keysig.h"
+#include "lyrics.h"
 #include "measure.h"
 #include "note.h"
 #include "ottava.h"
@@ -80,7 +81,7 @@ using std::cout;
 static  const int MAX_SLURS = 8;
 static  const int BRACKSTAVES=64;
 static  const int MAXPARTGROUPS = 8;
-
+static const int VERSES = 8;
 
 //---------------------------------------------------------
 //   ExportLy
@@ -173,12 +174,23 @@ class ExportLy {
   QTextStream out;
   QString scorebuffer;
   QTextStream scorout;
+  //  int numberofverses;
 
   bool nochord;
   int chordcount;
   void chordName(struct InstructionAnchor chordanchor);
 
-  struct chordData{QString chrName; QString extName; int alt; QString bsnName; int bsnAlt; int ticklen; int tickpos;};
+  struct chordData
+  {
+    QString chrName; 
+    QString extName; 
+    int alt; 
+    QString bsnName; 
+    int bsnAlt; 
+    int ticklen; 
+    int tickpos;
+  };
+
   struct chordData thisHarmony;
   struct chordData prevHarmony;
   void resetChordData(struct chordData&);
@@ -193,18 +205,46 @@ class ExportLy {
   struct chordPost cp;
   struct chordPost * chordHead;
   struct chordPost * chordThis;
+
+
+  // one lyricsRecord for each staff. Each record have room for VERSES
+  // no. of verses.
+  struct lyricsData
+  {
+    QString verselyrics[VERSES];
+    QString voicename;
+    QString staffname;
+    int tick[VERSES];
+    int segmentnumber[VERSES];
+  };
+  
+  struct lyricsRecord
+  {
+    int numberofverses;
+    struct lyricsData lyrdat;
+    struct lyricsRecord * next;
+    struct lyricsRecord *prev;
+  };
+  
+  //  struct lyricsRecord * lyrrec;
+  struct lyricsRecord * thisLyrics;
+  struct lyricsRecord * headOfLyrics;
+  struct lyricsRecord * tailOfLyrics;
+
  
   void storeChord(struct InstructionAnchor chAnk);
   void chordInsertList(chordPost *);
   void printChordList();
   void cleanupChordList();
   void writeFingering (int&, QString fingering[5]);
+  void findLyrics(Segment* seg, lyricsRecord*&);
+  void newLyricsRecord();
+  void writeLyrics();
   void findGraceNotes(Note*,bool&, int);
   void setOctave(int&, int&, int (&foo)[12]);
   bool arpeggioTest(Chord* chord);
   bool glissandotest(Chord*);
   bool findNoteSymbol(Note*, QString &);
-  void writeNoteSymbol(QString);
   void buildGlissandoList(int strack, int etrack);
   void writeStringInstruction(int &, QString stringarr[10]);
   void findFingerAndStringno(Note* note, int&, int&, QString (&finger)[5], QString (&strng)[10]);
@@ -243,7 +283,7 @@ class ExportLy {
   void writeMeasuRestNum();
   void writeTremolo(Chord *);
 
-  void symbol(QString);
+  void writeSymbol(QString);
   void tempoText(TempoText *);
   void words(Text *);
   void hairpin(Hairpin* hp, int tick);
@@ -506,7 +546,7 @@ void ExportLy::instructionMarker(Marker* m)
 //   symbol
 //---------------------------------------------------------
 
-void ExportLy::symbol(QString name)
+void ExportLy::writeSymbol(QString name)
 {
   //  QString name = symbols[sym->sym()].name();
 
@@ -518,15 +558,26 @@ void ExportLy::symbol(QString name)
     out << "\\mark \\markup {\\musicglyph #\"scripts.rcomma\"} ";
   else if (name == "lcomma")
     out << "\\mark \\markup {\\musicglyph #\"scripts.lcomma\"} ";
+  else if (name == "trill")
+    out << "\\trill ";
   else if (name == "flageolet")
     out << "\\flageolet ";
   else if (name == "acc discant")
     out << "^\\markup{\\musicglyph #\"accordion.accDiscant\"} ";
   else if (name == "acc dot")
     //we need to place the dot on the correct place within the discant
-    //symbol. Is this possible in mscore? The entire example in lily
-    //manual "2.2.3 Accordion" must be input as a macro?
-    out << "\\dot "; 
+    //and other base symbols. Is this possible in mscore? The entire
+    //example in lily manual "2.2.3 Accordion" must be input as a
+    //macro?
+    out << "^\\markup{\\musicglyph #\"accordion.accDot\"} "; 
+  else if (name == "acc freebase")
+    out << "^\\markup{\\musicglyph #\"accordion.accFreebase\"} ";
+  else if (name == "acc stdbase")
+    out << "^\\markup{\\musicglyph #\"accordion.accStdbase\"} ";
+  else if (name == "acc bayanbase")
+    out << "^\\markup{\\musicglyph #\"accordion.accBayanbase\"} ";
+  else if (name == "acc old ee")
+    out << "^\\markup{\\musicglyph #\"accordion.accOldEE\"} ";
   else 
     {
     printf("ExportLy::symbol(): %s not supported\n", name.toLatin1().data());
@@ -985,7 +1036,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
   QPointF point;
   QString lineEnd = "none";
   QString type;
-  int lineoffset;
+  //  int lineoffset;
   QString lineType;
   SLine* sl = (SLine*) instruction;
   int fontsize=0;
@@ -1357,7 +1408,7 @@ void ExportLy::handleElement(Element* el)
 		printf("handleelement: SYMBOL\n");
 		sym = (Symbol*) instruction;
 		name = symbols[sym->sym()].name();
-		symbol(name);
+		writeSymbol(name);
 		break;
 	      }
 	      case TEMPO_TEXT:
@@ -2658,9 +2709,6 @@ bool ExportLy::glissandotest(Chord* chord)
   return gliss;
 }
 
-void ExportLy::writeNoteSymbol(QString name)
-{
-}
 
 //------------------------------------------------------------
 // findNoteSymbol
@@ -2670,7 +2718,6 @@ void ExportLy::writeNoteSymbol(QString name)
 bool ExportLy::findNoteSymbol(Note* n, QString &symbolname)
 {
   bool found = false;
-  int symbolsubtype;
   ElementList* notelmlist;
   symbolname="";
 
@@ -2732,7 +2779,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
       //if fingering found on _previous_ chordnote, now is the time for writing it:
       if (fing>0)  writeFingering(fing,fingering);
       if (streng>0) writeStringInstruction(streng,stringno);
-      
+
       //find diverse elements and attributes connected to the note
       findFingerAndStringno(n, fing, streng, fingering, stringno);
       findGraceNotes(n, chordstart, streng);//also writes start of chord symbol "<" if necessary
@@ -2741,9 +2788,12 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
       if (n->tieFor()) tie=true;
 
       if (gracecount==2) out << " [ ";
-      out << tpc2name(n->tpc());  //Output of The Notename Itself
+
+      
+      out << tpc2name(n->tpc()).toUtf8().data();  //Output of The Notename Itself
+      
       if ((chordstart) and (symb))
-	symbol(symbolname);
+       	writeSymbol(symbolname);
      
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());  //with -es or -is
@@ -2769,7 +2819,6 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
       out << " ";
     } //end of notelist = end of chord
 
-
   if ((nl->size() > 1) or (streng > 0))
     {
       //if fingering found on previous chordnote, now is the time for writing it:
@@ -2792,7 +2841,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
   writeLen(c->tickLen());
 
   if ((symb) and (nl->size() == 1))
-    symbol(symbolname);    
+    writeSymbol(symbolname);    
  
   if (arpeggioswitch)
     {
@@ -3140,7 +3189,6 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
     {
       //go to next segment, check if it is chord or end of measure.
       if (nextseg->isChordRest())	break; 
-      cout << nextseg->subTypeName() << "\n";
       nextseg = nextseg->next();
       nextelem = nextseg->element(track); //check if it is on this track
     }
@@ -3202,6 +3250,88 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
 }
 
 
+void ExportLy::findLyrics(Segment* seg, lyricsRecord * &lyrrec)
+{ 
+  int verse = 0;
+  LyricsList * lyrlist = seg->lyricsList(staffInd);
+  
+  for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix) 
+    {
+      if (*lix) 
+	{
+	  verse = (*lix)->no();
+	  lyrrec->lyrdat.segmentnumber[verse]++;
+	  lyrrec->lyrdat.tick[verse] = (*lix)->tick();
+	  if (verse > lyrrec->numberofverses)
+	    {
+	      lyrrec->numberofverses = verse;
+	      if (verse > 0)
+		{
+		  int segdiff = (lyrrec->lyrdat.segmentnumber[verse-1] -  lyrrec->lyrdat.segmentnumber[verse]);
+		    if (segdiff > 0)
+		      {
+			for (int i = 0; i < segdiff; i++)
+			lyrrec->lyrdat.verselyrics[verse] += " _ ";
+			lyrrec->lyrdat.segmentnumber[verse] += segdiff;
+		      }
+		}
+	    }
+
+	  lyrrec->lyrdat.verselyrics[verse] += (*lix)->getText(); //.toUtf8().data();
+	  lyrrec->lyrdat.staffname =  staffname[staffInd].staffid;
+	  lyrrec->lyrdat.voicename = staffname[staffInd].voicename[0];
+	  lyrrec->lyrdat.tick[verse] = (*lix)->tick();
+
+	  QString lyrikk = lyrrec->lyrdat.verselyrics[verse];
+
+	  int syl   = (*lix)->syllabic();
+	  switch(syl) 
+	    {
+	    case Lyrics::SINGLE: 
+	      lyrrec ->lyrdat.verselyrics[verse] += " ";
+	      break;
+	    case Lyrics::BEGIN:
+	      lyrrec->lyrdat.verselyrics[verse] +=  " -- ";
+	      break;
+	    case Lyrics::END:
+	      lyrrec->lyrdat.verselyrics[verse] += "  ";
+	      break;
+	    case Lyrics::MIDDLE: 
+	      lyrrec->lyrdat.verselyrics[verse] += " -- ";
+	      break;
+	    default:
+	      printf("unknown syllabic %d\n", syl);
+	    }
+	  if((*lix)->endTick() > 0)
+	    cout << "mer tekst følger \n";
+	}
+    } 
+}
+
+
+void ExportLy::writeLyrics()
+{
+  int i=0;
+  cout << "writeLyrics\n";
+  thisLyrics = headOfLyrics;
+  tailOfLyrics->next = NULL;
+  while (thisLyrics != NULL)
+    {
+      i++;
+      cout << "headoflyrics != null "  << i << "\n";;
+      for (int i = 0; i <= thisLyrics->numberofverses; ++i)
+	{
+	  char verseno = (i + 65);
+	  os << "  " << thisLyrics->lyrdat.staffname;
+	  os << "verse" << verseno << " = \\lyricmode { \\set stanza = \" " << i+1 << ". \" ";
+	  os << thisLyrics->lyrdat.verselyrics[i] << "}\n";
+	  thisLyrics->lyrdat.verselyrics[i] = "";
+	}
+      thisLyrics= thisLyrics->next;
+    }
+  thisLyrics = headOfLyrics;
+}
+
 
 //---------------------------------------------------------
 //   writeVoiceMeasure
@@ -3217,7 +3347,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
   Measure* m = (Measure*) mb;
 
   //print barchecksign and barnumber for previous measure:
-  if ((m->no() > 0) and (wholemeasurerest==0) and textspanswitch==false) 
+  if ((m->no() > 0) and (wholemeasurerest==0) and (textspanswitch==false)) 
     {
       indent();
       out << " | % " << m->no() << "\n" ; 
@@ -3247,7 +3377,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
       staffname[staffInd].voicename[voice].remove(QRegExp("[0-9]"));
       staffname[staffInd].voicename[voice].remove(QChar('.'));
       staffname[staffInd].voicename[voice].remove(QChar(' '));
-
+      
       out << staffname[staffInd].voicename[voice];
       out << " = \\relative c" << relativ;
       indent();
@@ -3272,7 +3402,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
       switch(voice)
 	{
-	case 0: break;
+	case 0: break; 
+	  // we don't want voiceOne-specific behaviour if there is only one
+	  // voice, so if there are more, we append "\voiceOne" later
 	case 1:
 	  out <<"\\voiceTwo" <<"\n\n";
 	  break;
@@ -3310,7 +3442,8 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
    
    for(Segment* s = m->first(); s; s = s->next())
      {
-       // for all segments in measure. Get element:
+
+       // for each segment in measure. Get element:
        int track = staffInd * VOICES + voice;
        e = s->element(track);
        
@@ -3321,10 +3454,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	 }
        else
          continue;
-       
+
        handlePreInstruction(e); // Handle instructions which are to be printed before the element itself
        barlen=m->tickLen();
-       
        //handle element:
        switch(e->type())
 	 {
@@ -3366,7 +3498,6 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	   break;
 	 case CHORD:
 	   {
-	     
 	     if (wholemeasurerest >=1) writeMeasuRestNum();
 	     int ntick = e->tick() - tick;
 	     if (ntick > 0)
@@ -3374,12 +3505,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 writeRest(ntick, 2);//invisible rest: s
 		 curTicks=-1;
 	       }
-	     
 	     tick += ntick;
 	     measuretick=measuretick+ntick;
-
 	     checkIfNextIsRest(mb, s, nextisrest, track);
-
 	     writeChord((Chord*)e, nextisrest);	     
 	     tick += ((Chord*)e)->ticks();
 	     measuretick=measuretick+((Chord*)e)->ticks();
@@ -3425,14 +3553,17 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  break;
 	} // end switch elementtype
       
+
       handleElement(e); //check for instructions anchored to element e.
-      
+
       if (tupletcount==-1)
 	{
 	  out << " } ";
 	  tupletcount=0;
 	}
 
+      //       if ((voice == 0))// and (staffInd = 0)) 
+      findLyrics(s, thisLyrics);
     } //end for all segments
 
    barlen=m->tickLen();
@@ -3464,8 +3595,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
    else // voice bar not empty
      {
 
-    //we have to fill with silent rests before and after nonsilent material
-    //Does not work in current state. 
+    //we have to fill with spacer rests before and after nonsilent material
     if ((measuretick < barlen) and (measurenumber>0))
       {
 	//fill rest of measure with silent rest
@@ -3477,8 +3607,36 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
      }
 
   writeVolta(measurenumber, lastind);
-
 } //end write VoiceMeasure
+
+
+void ExportLy::newLyricsRecord()
+{
+  lyricsRecord* lyrrec;
+  lyrrec = new lyricsRecord();
+
+  for (int i = 0; i < VERSES; i++)
+    {
+      lyrrec->lyrdat.tick[i]=0;
+      lyrrec->lyrdat.verselyrics[i] = "";
+      lyrrec->lyrdat.segmentnumber[i] = 0;
+    }
+  lyrrec->lyrdat.staffname = staffname[staffInd].staffid;
+  lyrrec->numberofverses=-1;
+  lyrrec->next = NULL;
+  lyrrec->prev = NULL;
+
+  //append the new one to tail.
+  //seems not to need a separate pointer to tail, as thisLyrics seems alwayr to point to tail.
+  if (tailOfLyrics != NULL) // if it is not the first one: append to previous one as tail.
+    tailOfLyrics->next = lyrrec;
+  tailOfLyrics = lyrrec;
+  if (tailOfLyrics->next == NULL) cout << "tailoflyricsnull ok\n"; else cout << "tailoflyrics not null not ok\n";
+  thisLyrics = lyrrec;
+  
+  //if this is the first one, make pointer to head.
+  if (headOfLyrics == NULL)  headOfLyrics = lyrrec;
+}
 
 
 //---------------------------------------------------------
@@ -3507,6 +3665,8 @@ void ExportLy::writeScore()
   glisscount = 0;
   textspanswitch = false;
   textspannerdown=false;
+  headOfLyrics = NULL;
+  tailOfLyrics = NULL;
 
 
   foreach(Part* part, *score->parts())
@@ -3527,6 +3687,7 @@ void ExportLy::writeScore()
 
       buildInstructionListPart(strack, etrack);
       buildGlissandoList(strack,etrack);
+      
 
       //ANCHORTEST: print instructionlist
       //printf("anchortest\n");
@@ -3591,20 +3752,9 @@ void ExportLy::writeScore()
 	  //printf("voltatest\n");
 	  //	  voltatest();
 
+	    newLyricsRecord();
+	  
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
-
-	  /*Each voice is traversed from beginning to end
-	    separately. If there was a way of checking whether the
-	    entire voice is empty in a more immediate way, this would
-	    not have been necessary. But I have not found it, so
-	    please tell me if there is. This means that the voice is
-	    not written to the outputstream (os) which is connected to
-	    the output file, immediately, but buffered to an
-	    outputstream (out) which is only connected to a string
-	    ("voicebuffer") in memory. If there is no material in the
-	    voice, this string is set to "". If there is material in
-	    the voice, the voicebuffer is appended to the output
-	    stream. The voicebuffer is thereafter set to "". (olav) */
 
 	  for (voice = 0; voice < VOICES; ++voice)
 	    {
@@ -3622,9 +3772,7 @@ void ExportLy::writeScore()
 		    markerAtMeasureStart( (Measure*) m );
 		  else
 		    printJumpOrMarker(measurenumber, true);
-
 		  writeVoiceMeasure(m, staff, staffInd, voice);
-
 		  if (staffInd == 0) 
 		    jumpAtMeasureStop( (Measure*) m);
 		  else
@@ -3662,18 +3810,23 @@ void ExportLy::writeScore()
 	      indent();
               out << "\\mergeDifferentlyDottedOn \n";
 	      ++level;
-	      for (voice = 0; voice < VOICES; ++voice)
+	      for (voice = 0; voice < voiceno; voice++)
 		{
 		  if (voiceActive[voice])
 		    {
+		      //have to go back to explicitly  naming the voices, so that
+		      //it will be possible to attach lyrics to them.
 		      indent();
+		      out << "\\context Voice = " << staffname[staffInd].voicename[voice] ;
+		      if (voice == 0) out << "{\\voiceOne ";
 		      out << "\\" << staffname[staffInd].voicename[voice];
-		      if (voice < VOICES) out << "\\\\ \n";
+		      if (voice == 0) out << "}";
+		      if (voice < voiceno-1) out << "\\\\ \n";
 		      else out <<"\n";
 		    }
 		}
 	      indent();
-	      out << ">> \n";
+	      out << ">> \n\n";
 	      level=0;
 	      indent();
 	      scorout<< voicebuffer;
@@ -3682,6 +3835,7 @@ void ExportLy::writeScore()
 
 	  ++staffInd;
 	}// end of foreach staff
+
       staffname[staffInd].staffid="laststaff";
       if (n > 1) {
 	--level;
@@ -3697,15 +3851,16 @@ void ExportLy::writeScore()
 // -------------------------------------------------------------------
 void ExportLy::writeScoreBlock()
 {
+  thisLyrics = headOfLyrics;
   
   if (nochord==false) // output the chords as a separate staff before the score-block
     {  
-     os << "theChords = \\chordmode { \n";
-     printChordList();
-     cleanupChordList();
-     level--;
+      os << "theChords = \\chordmode { \n";
+      printChordList();
+      cleanupChordList();
+      level--;
     }  
-
+  
   //  bracktest();
   
   level=0;
@@ -3739,13 +3894,13 @@ void ExportLy::writeScoreBlock()
 	    os << "\\context GrandStaff = " << (char)(lybracks[indx].braceno + 64) << "<< \n";
 	}
       
-      
       if ((nochord == false) && (indx==0)) //insert chords as the first staff.
 	{
 	  indentF();
 	  os << "\\new ChordNames { \\theChords } \n";
 	}
       
+
       ++level;
       indentF();
       os << "\\context Staff = " << staffname[indx].staffid << " << \n";
@@ -3768,8 +3923,27 @@ void ExportLy::writeScoreBlock()
       
       --level;
       indentF();
-      os << ">>\n";
-      
+      os << ">>\n\n";
+
+      /*      if (lyrics attached to one of the voices in this staff)*/
+      if (thisLyrics != NULL)
+	{
+	  for (int i = 0; i <= thisLyrics->numberofverses; i++)
+	    {
+	      if (thisLyrics->lyrdat.staffname == staffname[indx].staffid)
+		{
+		  char verseno = (i + 65);
+		  indentF();
+		  os << " \\context Lyrics = ";
+		  os << thisLyrics->lyrdat.staffname << "verse" << verseno << "\\lyricsto ";
+		  os << thisLyrics->lyrdat.voicename << "  \\" << thisLyrics->lyrdat.staffname << "verse" << verseno << "\n";;
+		}
+	    }
+	  if (thisLyrics->next != NULL) thisLyrics = thisLyrics->next;
+	}
+	  
+	  os << "\n";
+
       if (((lybracks[indx].brakstart) and (lybracks[indx].brakend)) or ((lybracks[indx].bracestart) and (lybracks[indx].braceend)))
 	{
 	  //if bracket or brace starts and ends on same staff: one-staff brace/bracket.
@@ -3793,9 +3967,14 @@ void ExportLy::writeScoreBlock()
 	  else
 	    os << ">> %end of GrandStaff" << (char)(lybracks[indx].braceno + 64) << "\n";
 	}
+
+
       --level;
       ++indx;
+
     }//while still more staves 
+
+
 
   os << "\n";
 
@@ -4080,6 +4259,8 @@ bool ExportLy::write(const QString& name)
   os << scorebuffer;
   scorebuffer = "";
 
+  writeLyrics();
+
   writeScoreBlock();
 
   f.close();
@@ -4093,6 +4274,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  7.nov. 2009: Lyrics. Works reasonably well on demo adeste.
+  
    1.nov. lefthandposition (roman numbers with line: violin, guitar),
    trill, pedal and general lines with/out text. 
    
@@ -4178,15 +4361,7 @@ bool ExportLy::write(const QString& name)
    - triplets, but not general tuplets.
    - PianoStaff reactivated.
 
-   NEW:
-   1. dotted 16th notes
-   2. Relative pitches
-   3. More grace-note types
-   4. Slurs and beams in grace-notes
-   5. Some adjustments in articulations
-   6. separation of staffs/voices from score-block. Unfinished for pianostaffs/GrandStaffs and voices on one staff.
-   7. completed the clef-secton.
-   Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
+  
 */
 
 
@@ -4204,8 +4379,6 @@ bool ExportLy::write(const QString& name)
 
       -- accordion symbols.
       
-      -- Lyrics (low priority in relation to music itself) 
-
    -- become clear on the difference between system text and staff
       text.
 
@@ -4214,8 +4387,6 @@ bool ExportLy::write(const QString& name)
    -- provide for more than one pianostaff in a score.
   
    -- Determine whether text goes above or below staff. 
-
-   -- correct indentation in score-block. 
 
    -- correct export of chordsymbols: many faults.
 
