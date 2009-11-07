@@ -643,6 +643,24 @@ void Beam::layout1()
                   }
             _up = -1;
             }
+      else if (_userModified[idx]) {
+            double p1x   = c1->upNote()->canvasPos().x();
+            double p2x   = c2->upNote()->canvasPos().x();
+            double beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
+            slope        = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
+            //
+            // set stem direction for every chord
+            //
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  Chord* c  = static_cast<Chord*>(cr);
+                  QPointF p = c->upNote()->canvasPos();
+                  double y1 = beamY + (p.x() - p1x) * slope;
+                  cr->setUp(y1 < p.y());
+                  }
+            _up = -1;
+            }
       else {
             foreach(ChordRest* cr, _elements)
                   cr->setUp(_up);
@@ -663,7 +681,7 @@ void Beam::layout()
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
             double beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
-            slope = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
+            slope        = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
             //
             // set stem direction for every chord
             //
@@ -674,6 +692,7 @@ void Beam::layout()
                   QPointF p = c->upNote()->canvasPos();
                   double y1 = beamY + (p.x() - p1x) * slope;
                   cr->setUp(y1 < p.y());
+printf("2: %p: %d %f < %f\n", cr, cr->up(), y1, p.y());
                   }
             _up = -1;
             }

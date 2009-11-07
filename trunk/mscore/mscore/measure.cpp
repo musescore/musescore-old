@@ -2881,6 +2881,13 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                         s->element(strack)->setTrack(strack);
                         s->setElement(dtrack, 0);
                         }
+                  LyricsList* ll = s->lyricsList(staffIdx);
+                  foreach(Lyrics* l, *ll) {
+                        if (l->voice() == v1)
+                              l->setVoice(v2);
+                        else if (l->voice() == v2)
+                              l->setVoice(v1);
+                        }
                   }
             }
       }
