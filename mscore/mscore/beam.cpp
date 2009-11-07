@@ -703,7 +703,6 @@ void Beam::layout()
                         continue;
                   Chord* c  = static_cast<Chord*>(cr);
                   double y  = c->upNote()->canvasPos().y();
-                  int move = c->staffMove();
                   c->setUp(beamY < y);
                   }
             _up = -1;

@@ -35,7 +35,6 @@ class Duration;
 class Rest : public ChordRest {
       Q_DECLARE_TR_FUNCTIONS(Rest)
 
-      int _staffMove;         // -1, 0, +1, used for crossbeaming
       int _sym;
 
       int dotline;            // depends on rest symbol
@@ -67,9 +66,6 @@ class Rest : public ChordRest {
       virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
-
-      virtual int staffMove() const { return _staffMove; }
-      void setStaffMove(int val)    { _staffMove = val; }
 
       void setMMWidth(double val)   { _mmWidth = val; }
       double mmWidth() const        { return _mmWidth; }

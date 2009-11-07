@@ -954,10 +954,8 @@ void Seq::nextMeasure()
             }
       if (!note)
             return;
-      MeasureBase* m = note->chord()->segment()->measure();
-      do {
-            m = m->next();
-            } while (m && m->type() != MEASURE);
+      Measure* m = note->chord()->measure();
+      m = m->nextMeasure();
       if (m) {
             int rtick = m->tick() - note->chord()->tick();
             seek(playPos.key() + rtick);
@@ -1001,10 +999,8 @@ void Seq::prevMeasure()
             }
       if (!note)
             return;
-      MeasureBase* m = note->chord()->segment()->measure();
-      do {
-            m = m->prev();
-            } while (m && m->type() != MEASURE);
+      Measure* m = note->chord()->measure();
+      m = m->prevMeasure();
 
       if (m) {
             int rtick = note->chord()->tick() - m->tick();

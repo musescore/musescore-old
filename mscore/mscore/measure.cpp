@@ -352,6 +352,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
             if (cr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
+                  int staffMove = chord->staffMove();
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   NoteList* nl = chord->noteList();
@@ -386,7 +387,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                         else  {
                               int accVal = ((tpc + 1) / 7) - 2;
                               accidental = ACC_NONE;
-                              if (accVal != tversatz[line] || note->hidden()) {
+                              if ((accVal != tversatz[line]) || note->hidden()) {
                                     if (note->tieBack() == 0)
                                           tversatz[line] = accVal;
                                     switch(accVal) {
@@ -404,7 +405,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                         //
                         // calculate the real note line depending on clef
                         //
-                        int staffIdx = note->staffIdx() + note->staffMove();
+                        int staffIdx = note->staffIdx() + staffMove;
                         int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
                         line = 127 - line - 82 + clefTable[clef].yOffset;
                         note->setLine(line);
@@ -448,7 +449,7 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 
       int startIdx, endIdx, incIdx;
 
-      if (notes[0]->chord()->up() || voices > 1) {
+      if (notes[0]->chord()->up() || (voices > 1)) {
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
@@ -472,14 +473,14 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
       bool moveLeft = false;
       int ll        = 1000;      // line distance to previous note head
       bool isLeft   = notes[startIdx]->chord()->up();
-      int move1     = notes[startIdx]->staffMove();
+      int move1     = notes[startIdx]->chord()->staffMove();
       bool mirror   = false;
       int lastHead  = -1;
 
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note   = notes[idx];
             Chord* chord = note->chord();
-            int move     = note->staffMove();
+            int move     = note->chord()->staffMove();
             int line     = note->line();
             int ticks    = chord->tickLen();
             int head     = note->noteHead();      // symbol number or note head
@@ -490,15 +491,21 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             bool nmirror  = chord->up() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
 
+// printf("conflict %d nmirror %d mirror %d idx %d sameHead %d\n",
+//      conflict, nmirror, mirror, idx, sameHead);
+
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
                         chord->setXpos(0.0);
-                        if (note->userOff().isNull() && notes[idx-1]->userOff().isNull()) {
-                              if (ticks > notes[idx-1]->chord()->tickLen()) {
-                                    notes[idx-1]->setHidden(true);
+                        Note* pnote = notes[idx-1];
+                        if (note->userOff().isNull() && pnote->userOff().isNull()) {
+                              if (ticks > pnote->chord()->tickLen()) {
+                                    pnote->setHidden(true);
+                                    pnote->setAccidental(0);  // DEBUG: should be unecessary; layout dependency
                                     note->setHidden(false);
                                     }
                               else {
+                                    note->setAccidental(0);
                                     note->setHidden(true);
                                     }
                               }
@@ -2024,6 +2031,8 @@ void Measure::adjustToLen(int ol, int nl)
                               ++chords;
                         }
                   }
+            if (rests == 1 && chords == 0 && rest->duration().type() == Duration::V_MEASURE)
+                  continue;
             // printf("rests = %d\n", rests);
             const AL::SigEvent ev(score()->sigmap()->timesig(tick()));
             if ((ev.nominator == ev.nominator2) && (rests == 1) && (chords == 0) && !_irregular) {

@@ -307,8 +307,8 @@ class Score : public QObject {
       Note* downAltCtrl(Note*) const;
       ChordRest* upStaff(ChordRest* cr);
       ChordRest* downStaff(ChordRest* cr);
-      void moveUp(Note*);
-      void moveDown(Note*);
+      void moveUp(Chord*);
+      void moveDown(Chord*);
 
       void convertMidi(MidiFile*);
       void convertCapella(Capella* cap);

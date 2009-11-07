@@ -1125,16 +1125,16 @@ class ChangeSlurProperties : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeNoteStaffMove
+//   ChangeChordStaffMove
 //---------------------------------------------------------
 
-class ChangeNoteStaffMove : public UndoCommand {
-      Note* note;
+class ChangeChordStaffMove : public UndoCommand {
+      Chord* chord;
       int staffMove;
       void flip();
 
    public:
-      ChangeNoteStaffMove(Note*, int);
+      ChangeChordStaffMove(Chord*, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

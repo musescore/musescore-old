@@ -1,4 +1,6 @@
-7.nov. (og)
+7.nov. (ws)
+      - layout: remove accidental, if two notes share the same note head
+      (og)
 	- exportly: lyrics. Works at least on demo adeste. several bugfixes.
 6.nov. (ws)
       - cross beam layout fix

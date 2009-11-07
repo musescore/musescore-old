@@ -2486,7 +2486,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             note->setHeadGroup(headGroup);
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
-            note->setStaffMove(move);
+            // note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
@@ -2527,6 +2527,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   Segment* s = measure->getSegment(st, cr->tick());
                   s->add(cr);
                   }
+            cr->setStaffMove(move);
 
 
             // pitch must be set before adding note to chord as note

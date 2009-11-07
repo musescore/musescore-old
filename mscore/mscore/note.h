@@ -94,7 +94,6 @@ class Note : public Element {
       int _offTimeUserOffset; ///< stop note user offset
 
       char _tpc;              ///< tonal pitch class
-      char _staffMove;        ///< -1, 0, +1, used for crossbeaming
 
       char _userAccidental;   ///< editorial accidental type (0-15)
       char _headGroup;
@@ -157,6 +156,7 @@ class Note : public Element {
 
       int accidentalType() const      { return _accidentalType; }
       Accidental* accidental() const  { return _accidental;     }
+      void setAccidental(Accidental* a);
       void setAccidentalType(int);
       void changeAccidental(int);
 
@@ -195,8 +195,6 @@ class Note : public Element {
       void setHidden(bool val)         { _hidden = val;  }
 
       NoteType noteType() const;
-      int staffMove() const            { return _staffMove; }
-      void setStaffMove(int val)       { _staffMove = val; }
 
       ElementList* el()                { return &_el; }
       const ElementList* el() const    { return &_el; }

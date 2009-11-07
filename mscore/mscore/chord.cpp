@@ -451,61 +451,6 @@ QRectF Chord::bbox() const
       }
 
 //---------------------------------------------------------
-//   layoutStem1
-//    called before layout spacing of notes
-//    set hook if necessary to get right note width for next
-//       pass
-//---------------------------------------------------------
-
-/**
- Layout chord stem and hook.
-*/
-
-void Chord::layoutStem1()
-      {
-      int istaff = staffIdx();
-
-      //-----------------------------------------
-      //  process stem
-      //-----------------------------------------
-
-      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
-      int hookIdx  = hasStem ? duration().hooks() : 0;
-
-      if (hasStem) {
-            if (!_stem)
-                  setStem(new Stem(score()));
-            }
-      else
-            setStem(0);
-
-      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
-            _stemSlash = new StemSlash(score());
-            _stemSlash->setMag(mag());
-            _stemSlash->setParent(this);
-            }
-      else {
-            delete _stemSlash;
-            _stemSlash = 0;
-            }
-
-      //-----------------------------------------
-      //  process hook
-      //-----------------------------------------
-
-      if (hookIdx) {
-            if (!up())
-                  hookIdx = -hookIdx;
-            if (!_hook)
-                  setHook(new Hook(score()));
-            _hook->setMag(mag());
-            _hook->setSubtype(hookIdx);
-            }
-      else
-            setHook(0);
-      }
-
-//---------------------------------------------------------
 //   addLedgerLine
 ///   Add a ledger line to a chord.
 ///   \arg x          center of note head
@@ -567,8 +512,6 @@ void Chord::addLedgerLines(double x, int move)
 
       for (riNote in = notes.rbegin(); in != notes.rend(); ++in) {
             const Note* note = in->second;
-            if (note->staffMove() != move)
-                  continue;
             int l = note->line();
             if (l >= 0)
                   break;
@@ -584,8 +527,6 @@ void Chord::addLedgerLines(double x, int move)
       int dlr = 0;
       for (ciNote in = notes.begin(); in != notes.end(); ++in) {
             const Note* note = in->second;
-            if (note->staffMove() != move)
-                  continue;
             int l = note->line();
             if (l <= 8)
                   break;
@@ -633,7 +574,7 @@ void Chord::computeUp()
             _up = _stemDirection == UP;
             return;
             }
-      if (_noteType != NOTE_NORMAL) {
+      if (_noteType != NOTE_NORMAL) {     // grace notes always go up
             _up = true;
             return;
             }
@@ -649,19 +590,17 @@ void Chord::computeUp()
             return;
             }
 
-      Note* upnote = upNote();
-      if (notes.size() == 1) {
-            if (upnote->staffMove() > 0)
+      if (notes.size() == 1 || staffMove()) {
+            if (staffMove() > 0)
                   _up = true;
-            else if (upnote->staffMove() < 0)
+            else if (staffMove() < 0)
                   _up = false;
             else
-                  _up = upnote->line() > 4;
+                  _up = upNote()->line() > 4;
             return;
             }
-      Note* downnote = downNote();
-      int ud = upnote->line() - 4;
-      int dd = downnote->line() - 4;
+      int ud = upNote()->line() - 4;
+      int dd = downNote()->line() - 4;
       if (-ud == dd) {
             int up = 0;
             for (ciNote in = notes.begin(); in != notes.end(); ++in) {
@@ -673,21 +612,8 @@ void Chord::computeUp()
                   }
             _up = up > 0;
             }
-      _up = dd > -ud;
-      }
-
-//---------------------------------------------------------
-//   staffMove
-//---------------------------------------------------------
-
-int Chord::staffMove() const
-      {
-      int move = notes.front()->staffMove();
-      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            if (in->second->staffMove() != move)
-                  return 0;
-            }
-      return move;
+      else
+            _up = dd > -ud;
       }
 
 //---------------------------------------------------------
@@ -815,7 +741,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
                   note->add(f);
                   }
             else if (tag == "move")
-                  note->setStaffMove(i);
+                  setStaffMove(i);
             else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
@@ -1078,6 +1004,61 @@ void Chord::setMag(double val)
       }
 
 //---------------------------------------------------------
+//   layoutStem1
+//    called before layout spacing of notes
+//    set hook if necessary to get right note width for next
+//       pass
+//---------------------------------------------------------
+
+/**
+ Layout chord stem and hook.
+*/
+
+void Chord::layoutStem1()
+      {
+      int istaff = staffIdx();
+
+      //-----------------------------------------
+      //  process stem
+      //-----------------------------------------
+
+      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
+      int hookIdx  = hasStem ? duration().hooks() : 0;
+
+      if (hasStem) {
+            if (!_stem)
+                  setStem(new Stem(score()));
+            }
+      else
+            setStem(0);
+
+      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
+            _stemSlash = new StemSlash(score());
+            _stemSlash->setMag(mag());
+            _stemSlash->setParent(this);
+            }
+      else {
+            delete _stemSlash;
+            _stemSlash = 0;
+            }
+
+      //-----------------------------------------
+      //  process hook
+      //-----------------------------------------
+
+      if (hookIdx) {
+            if (!up())
+                  hookIdx = -hookIdx;
+            if (!_hook)
+                  setHook(new Hook(score()));
+            _hook->setMag(mag());
+            _hook->setSubtype(hookIdx);
+            }
+      else
+            setHook(0);
+      }
+
+//---------------------------------------------------------
 //   layoutStem
 //---------------------------------------------------------
 
@@ -1229,15 +1210,6 @@ void Chord::layout2()
       }
 
 //---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-Space Chord::space() const
-      {
-      return Space(extraSpace, minSpace);
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -1271,9 +1243,6 @@ void Chord::layout()
       //    - position
       //-----------------------------------------
 
-      int minMove = 1;
-      int maxMove = -1;
-
       double lx = 0.0;
       _dotPosX  = 0.0;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
@@ -1282,19 +1251,12 @@ void Chord::layout()
 
             double x = 0.0;
 
-            int move = note->staffMove();
-            if (move < minMove)
-                  minMove = move;
-            if (move > maxMove)
-                  maxMove = move;
-
             bool stemUp = up();
-            if (note->staffMove() == -1) {
+/*            if (note->staffMove() < 0)
                   stemUp = false;
-                  }
-            else if (note->staffMove() == 1) {
+            else if (note->staffMove() > 0)
                   stemUp = true;
-                  }
+*/
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
 
@@ -1327,9 +1289,7 @@ void Chord::layout()
       if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
             x += headWidth;
 
-      addLedgerLines(x, -1);     // notes moved to upper staff
-      addLedgerLines(x, 0);
-      addLedgerLines(x, 1);      // notes moved to lower staff
+      addLedgerLines(x, staffMove());
 
       foreach(LedgerLine* l, _ledgerLines)
             l->layout();
@@ -1388,5 +1348,11 @@ void Chord::layout()
       extraSpace += point(_extraLeadingSpace);
       }
 
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
 
-
+Space Chord::space() const
+      {
+      return Space(extraSpace, minSpace);
+      }

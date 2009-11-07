@@ -222,7 +222,6 @@ class Chord : public ChordRest {
 
       virtual void scanElements(void* data, void (*func)(void*, Element*));
 
-      virtual int staffMove() const;
       virtual void setTrack(int val);
 
       void computeUp();

@@ -108,10 +108,11 @@ Articulation* ChordRest::hasArticulation(const Articulation* a)
 ChordRest::ChordRest(Score* s)
    : DurationElement(s)
       {
-      _beam     = 0;
-      _small    = false;
-      _beamMode = BEAM_AUTO;
-      _up       = true;
+      _beam      = 0;
+      _small     = false;
+      _beamMode  = BEAM_AUTO;
+      _up        = true;
+      _staffMove = 0;
       }
 
 ChordRest::ChordRest(const ChordRest& cr)
@@ -120,6 +121,7 @@ ChordRest::ChordRest(const ChordRest& cr)
       _duration           = cr._duration;
       _beam               = 0;
       _up                 = cr._up;
+      _staffMove          = cr._staffMove;
       _small              = cr._small;
       _beamMode           = cr._beamMode;
       _extraLeadingSpace  = cr._extraLeadingSpace;
@@ -197,6 +199,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
       if (duration().dots())
             pl.append(Prop("dots", duration().dots()));
+      if (_staffMove)
+            pl.append(Prop("move", _staffMove));
       pl.append(Prop("durationType", duration().name()));
       return pl;
       }
@@ -316,6 +320,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             _ticks = i;
       else if (tag == "dots")
             setDots(i);
+      else if (tag == "move")
+            _staffMove = i;
       else
             return false;
       return true;
@@ -327,7 +333,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
 
 void ChordRest::setSmall(bool val)
       {
-      _small     = val;
+      _small   = val;
       double m = 1.0;
       if (_small)
             m = score()->styleD(ST_smallNoteMag);

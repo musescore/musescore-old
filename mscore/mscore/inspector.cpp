@@ -739,7 +739,7 @@ void SegmentView::setElement(Element* e)
 ShowChordWidget::ShowChordWidget()
    : ShowElementBase()
       {
-      // chort rest
+      // chord rest
       QWidget* chr = new QWidget;
       crb.setupUi(chr);
       layout->addWidget(chr);
@@ -790,6 +790,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.dots->setValue(chord->dots());
       crb.ticks->setValue(chord->ticks());
       crb.duration->setValue(int(chord->duration().type()));
+      crb.move->setValue(chord->staffMove());
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
@@ -932,7 +933,6 @@ void ShowNoteWidget::setElement(Element* e)
       nb.ppitch->setValue(note->ppitch());
       nb.velo->setValue(note->velocity());
       nb.line->setValue(note->line());
-      nb.move->setValue(note->staffMove());
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
       nb.head->setValue(note->noteHead());
@@ -1014,6 +1014,7 @@ ShowRestWidget::ShowRestWidget()
       crb.beamMode->addItem(tr("beam end"));
       crb.beamMode->addItem(tr("no beam"));
       crb.beamMode->addItem(tr("begin 1/32"));
+
       connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
       connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
@@ -1052,6 +1053,7 @@ void ShowRestWidget::setElement(Element* e)
       crb.dots->setValue(rest->dots());
       crb.ticks->setValue(rest->ticks());
       crb.duration->setValue(int(rest->duration().type()));
+      crb.move->setValue(rest->staffMove());
 
       crb.slurFor->clear();
       foreach(Slur* slur, rest->slurFor()) {
