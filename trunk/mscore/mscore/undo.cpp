@@ -2204,18 +2204,18 @@ void ChangeSlurProperties::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeNoteStaffMove
+//   ChangeChordStaffMove
 //---------------------------------------------------------
 
-ChangeNoteStaffMove::ChangeNoteStaffMove(Note* n, int v)
-   : note(n), staffMove(v)
+ChangeChordStaffMove::ChangeChordStaffMove(Chord* c, int v)
+   : chord(c), staffMove(v)
       {
       }
 
-void ChangeNoteStaffMove::flip()
+void ChangeChordStaffMove::flip()
       {
-      int v = note->staffMove();
-      note->setStaffMove(staffMove);
+      int v = chord->staffMove();
+      chord->setStaffMove(staffMove);
       staffMove = v;
       }
 

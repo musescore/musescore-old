@@ -38,7 +38,6 @@ static TempoVal tempos[] = {
       TempoVal("Adagio",         60),
       TempoVal("Allegro",        80),
       TempoVal("Allegretto",    100),
-      TempoVal("Allegro",       120),
       TempoVal("Andante",        80),
       TempoVal("Con brio",      120),
       TempoVal("Con moto",      120),

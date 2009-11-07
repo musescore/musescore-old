@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
-    <height>402</height>
+    <width>738</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -173,22 +173,22 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>StaffMove:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="move"/>
+        </item>
+        <item>
          <widget class="QCheckBox" name="upFlag">
           <property name="toolTip">
            <string notr="true"/>
           </property>
           <property name="text">
            <string notr="true">Up</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="isUpFlag">
-          <property name="toolTip">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string notr="true">isUp</string>
           </property>
          </widget>
         </item>

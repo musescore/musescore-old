@@ -40,6 +40,7 @@ class Articulation;
 
 class ChordRest : public DurationElement {
       Duration _duration;
+      int _staffMove;         // -1, 0, +1, used for crossbeaming
 
       QList<Slur*> _slurFor;
       QList<Slur*> _slurBack;
@@ -92,7 +93,9 @@ class ChordRest : public DurationElement {
       Articulation* hasArticulation(const Articulation*);
       bool small() const                        { return _small; }
       void setSmall(bool val);
-      virtual int staffMove() const = 0;
+
+      int staffMove() const                     { return _staffMove; }
+      void setStaffMove(int val)                { _staffMove = val; }
 
       void addSlurFor(Slur*);
       void addSlurBack(Slur*);

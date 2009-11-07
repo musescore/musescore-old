@@ -1156,7 +1156,7 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
           c          = table1[step];
 
           int tmp = (note->line() - offset);
-          octave =(3-tmp+700)/7 + 5 - 100; 
+          octave =(3-tmp+700)/7 + 5 - 100;
       }
 
 //---------------------------------------------------------
@@ -1836,7 +1836,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
             // LVIFIX: check move() handling
             if (staff)
-                  xml.tag("staff", staff + note->staffMove());
+                  xml.tag("staff", staff + note->chord()->staffMove());
 
             //  beaming
             //    <beam number="1">start</beam>

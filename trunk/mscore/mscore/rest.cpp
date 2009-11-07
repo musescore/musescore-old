@@ -44,7 +44,6 @@ Rest::Rest(Score* s)
       {
       setOffsetType(OFFSET_SPATIUM);
       _beamMode  = BEAM_NO;
-      _staffMove = 0;
       dotline    = -1;
       _sym       = quartrestSym;
       }
@@ -53,7 +52,6 @@ Rest::Rest(Score* s, int tick, const Duration& d)
   : ChordRest(s)
       {
       _beamMode  = BEAM_NO;
-      _staffMove = 0;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
       _sym       = quartrestSym;
@@ -265,8 +263,6 @@ void Rest::write(Xml& xml) const
       {
       xml.stag("Rest");
       ChordRest::writeProperties(xml);
-      if (_staffMove)
-            xml.tag("move", _staffMove);
       xml.etag();
       }
 
@@ -277,21 +273,15 @@ void Rest::write(Xml& xml) const
 void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "move")
-                  _staffMove = i;
-            else if (!ChordRest::readProperties(e, tuplets, beams))
+            if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
-	  if (!duration().isValid())
+      if (!duration().isValid())
             convertTicks();
-	  if (!duration().isValid())
+	if (!duration().isValid())
             setDuration(Duration(Duration::V_MEASURE));
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
-
       }
 
 //---------------------------------------------------------

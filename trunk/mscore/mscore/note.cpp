@@ -97,7 +97,6 @@ Note::Note(Score* s)
       _mirror         = false;
       _userMirror     = DH_AUTO;
       _line           = 0;
-      _staffMove      = 0;
       _userAccidental = ACC_NONE;
       _lineOffset     = 0;
       _tieFor         = 0;
@@ -132,7 +131,6 @@ Note::Note(const Note& n)
       _tuning         = n._tuning;
       _tpc            = n._tpc;
       _line           = n._line;
-      _staffMove      = n._staffMove;
       _userAccidental = n._userAccidental;
       _accidental     = 0;
       _accidentalType = n._accidentalType;
@@ -307,7 +305,7 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
-      Staff* estaff = score()->staff(staffIdx() + staffMove());
+      Staff* estaff = score()->staff(staffIdx() + chord()->staffMove());
 
       int tick = chord()->tick();
       int clef = estaff->clef(tick);
@@ -448,9 +446,9 @@ QPointF Note::stemPos(bool upFlag) const
       double sw = point(score()->styleS(ST_stemWidth)) * .5;
       double x  = pos().x();
       double y  = pos().y();
-      if (staffMove()) {
+      if (chord()->staffMove()) {
             System* system = chord()->measure()->system();
-            y  += system->staff(staffIdx() + staffMove())->y() - system->staff(staffIdx())->y();
+            y  += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
             }
       if (_mirror)
             upFlag = !upFlag;
@@ -507,6 +505,16 @@ void Note::setAccidentalType(int pre)
             _accidental = 0;
             }
       _accidentalType = pre;
+      }
+
+//---------------------------------------------------------
+//   setAccidental
+//---------------------------------------------------------
+
+void Note::setAccidental(Accidental* a)
+      {
+      delete _accidental;
+      _accidental = a;
       }
 
 //---------------------------------------------------------
@@ -618,8 +626,6 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             if (!xml.clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
                   _tieFor->write(xml);
             }
-      if (_staffMove)
-            xml.tag("move", _staffMove);
       if (_headGroup != 0)
             xml.tag("head", _headGroup);
       if (_userMirror != DH_AUTO)
@@ -731,8 +737,8 @@ void Note::read(QDomElement e)
                   _accidental->read(e);
                   add(_accidental);
                   }
-            else if (tag == "move")
-                  _staffMove = i;
+            else if (tag == "move")             // obsolete
+                  chord()->setStaffMove(i);
             else if (tag == "mirror")
                   _userMirror = DirectionH(i);
             else if (tag == "veloType")
@@ -799,7 +805,7 @@ void Note::endDrag()
       _line      += _lineOffset;
       _lineOffset  = 0;
       dragMode     = false;
-      int staffIdx = chord()->staffIdx() + _staffMove;
+      int staffIdx = chord()->staffIdx() + chord()->staffMove();
       Staff* staff = score()->staff(staffIdx);
       int tick     = chord()->tick();
       int clef     = staff->clef(tick);
@@ -1271,7 +1277,7 @@ QPointF Note::canvasPos() const
       System* system = m->system();
       if (system == 0)
             return pos();
-      double yp = y() + system->staff(staffIdx() + staffMove())->y() + system->y();
+      double yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
       return QPointF(xp, yp);
       }
 

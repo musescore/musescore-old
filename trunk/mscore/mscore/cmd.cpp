@@ -1662,13 +1662,14 @@ void Score::resetUserStretch()
 //   moveUp
 //---------------------------------------------------------
 
-void Score::moveUp(Note* note)
+void Score::moveUp(Chord* chord)
       {
-      int rstaff = note->staff()->rstaff();
+      int rstaff    = chord->staff()->rstaff();
+      int staffMove = chord->staffMove();
 
-      if ((note->staffMove() == -1) || (rstaff + note->staffMove() <= 0))
+      if ((staffMove == -1) || (rstaff + staffMove <= 0))
             return;
-      _undo->push(new ChangeNoteStaffMove(note, note->staffMove()-1));
+      _undo->push(new ChangeChordStaffMove(chord, staffMove - 1));
       layoutAll = true;
       }
 
@@ -1676,16 +1677,17 @@ void Score::moveUp(Note* note)
 //   moveDown
 //---------------------------------------------------------
 
-void Score::moveDown(Note* note)
+void Score::moveDown(Chord* chord)
       {
-      Staff* staff = note->staff();
-      Part* part   = staff->part();
-      int rstaff   = staff->rstaff();
-      int rstaves  = part->nstaves();
+      Staff* staff  = chord->staff();
+      Part* part    = staff->part();
+      int rstaff    = staff->rstaff();
+      int rstaves   = part->nstaves();
+      int staffMove = chord->staffMove();
 
-      if ((note->staffMove() == 1) || (rstaff + note->staffMove() >= rstaves-1))
+      if ((staffMove == 1) || (rstaff + staffMove >= rstaves - 1))
             return;
-      _undo->push(new ChangeNoteStaffMove(note, note->staffMove()+1));
+      _undo->push(new ChangeChordStaffMove(chord, staffMove + 1));
       layoutAll = true;
       }
 
@@ -1936,7 +1938,7 @@ void Score::cmd(const QAction* a)
                   Element* el = selection()->element(); // single selection
                   if (el && el->type() == NOTE) {
                         Note* note = static_cast<Note*>(el);
-                        moveUp(note);
+                        moveUp(note->chord());
                         }
                   }
             else if (cmd == "move-down") {
@@ -1944,7 +1946,7 @@ void Score::cmd(const QAction* a)
                   Element* el = selection()->element(); // single selection
                   if (el && el->type() == NOTE) {
                         Note* note = static_cast<Note*>(el);
-                        moveDown(note);
+                        moveDown(note->chord());
                         }
                   }
             else if (cmd == "up-chord") {
@@ -2529,16 +2531,16 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     // check if staffMove moves a note to a
                                     // nonexistant staff
                                     //
-                                    Chord* c = static_cast<Chord*>(cr);
-                                    NoteList* nl = c->noteList();
-                                    Part* part = cr->staff()->part();
+                                    Chord* c      = static_cast<Chord*>(cr);
+                                    NoteList* nl  = c->noteList();
+                                    Part* part    = cr->staff()->part();
+                                    int nn = (track / VOICES) + c->staffMove();
+                                    if (nn < 0 || nn >= nstaves())
+                                          c->setStaffMove(0);
                                     for (iNote i = nl->begin(); i != nl->end(); ++i) {
                                           Note* n = i->second;
                                           n->setPitch(n->pitch() - part->pitchOffset());
                                           n->setTrack(track);
-                                          int nn = (track / VOICES) + n->staffMove();
-                                          if (nn < 0 || nn >= nstaves())
-                                                n->setStaffMove(0);
                                           }
                                     }
 
