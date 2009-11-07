@@ -248,6 +248,7 @@ class Element {
       virtual void setTrack(int val)          { _track = val;  }
       int staffIdx() const                    { return _track / VOICES; }
       int voice() const                       { return _track % VOICES; }
+      void setVoice(int v)                    { _track = (_track / VOICES) + v; }
       Staff* staff() const;
 
       virtual void add(Element*);
