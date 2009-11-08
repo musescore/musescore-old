@@ -232,7 +232,6 @@ void Score::doLayout()
             System* system = _systems.takeLast();
             delete system;
             }
-
       rebuildBspTree();
       }
 

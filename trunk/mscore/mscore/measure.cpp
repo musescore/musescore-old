@@ -491,7 +491,8 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             bool nmirror  = chord->up() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
 
-// printf("conflict %d nmirror %d mirror %d idx %d sameHead %d\n",
+// printf("dir (%d %d) conflict %d nmirror %d mirror %d idx %d sameHead %d\n",
+//      notes[0]->chord()->up(), voices > 1,
 //      conflict, nmirror, mirror, idx, sameHead);
 
             if (conflict && (nmirror == mirror) && idx) {
