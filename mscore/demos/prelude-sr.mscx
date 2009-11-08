@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.12">
-  <Mag>1.71901</Mag>
-  <xoff>-723.839</xoff>
-  <yoff>-245.33</yoff>
+  <Mag>0.884797</Mag>
+  <xoff>2.05862</xoff>
+  <yoff>3.21786</yoff>
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Style>
@@ -469,7 +469,6 @@
     <up>1</up>
     </Slur>
   <Slur id="93">
-    <tick>0</tick>
     <SlurSegment no="0">
       <offset x="0" y="-1.62124"/>
       </SlurSegment>
@@ -8749,7 +8748,6 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.20342" y="-6.40772"/>
           </Articulation>
         <Beam>115</Beam>
         <Note>
@@ -8838,7 +8836,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.0805605" y="2.91851"/>
+          <offset x="0.720549" y="-12.5195"/>
           </Articulation>
         <Beam>116</Beam>
         <Note>
@@ -9124,7 +9122,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.205046" y="6.9245"/>
+          <offset x="0.720549" y="-12.2493"/>
           </Articulation>
         <Beam>120</Beam>
         <Note>
@@ -9264,7 +9262,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.10171" y="7.20249"/>
+          <offset x="0.360275" y="-12.6096"/>
           </Articulation>
         <Beam>122</Beam>
         <Note>
@@ -9470,7 +9468,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-3.34683e-07" y="2.57721"/>
+          <offset x="0.180137" y="-12.6997"/>
           </Articulation>
         <Beam>124</Beam>
         <Note>
@@ -9644,7 +9642,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.224569" y="3.04544"/>
+          <offset x="0.630481" y="-12.2103"/>
           </Articulation>
         <Beam>126</Beam>
         <Note>
@@ -9833,6 +9831,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
+          <offset x="0.450343" y="-8.82673"/>
           </Articulation>
         <Beam>128</Beam>
         <Note>
@@ -9840,7 +9839,6 @@ p, li { white-space: pre-wrap; }
           <tpc>21</tpc>
           </Note>
         <Note>
-          <selected>1</selected>
           <pitch>64</pitch>
           <tpc>18</tpc>
           </Note>
@@ -9984,7 +9982,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.0834115" y="10.0862"/>
+          <offset x="0.450343" y="-9.09694"/>
           </Articulation>
         <Beam>130</Beam>
         <Note>
@@ -10170,7 +10168,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.220288" y="10.2511"/>
+          <offset x="0.540412" y="-8.55652"/>
           </Articulation>
         <Beam>132</Beam>
         <Note>
@@ -10310,7 +10308,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.377464" y="9.78883"/>
+          <offset x="0.630481" y="-9.27707"/>
           </Articulation>
         <Beam>134</Beam>
         <Note>
@@ -10474,7 +10472,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.219194" y="10.5493"/>
+          <offset x="0.450343" y="-9.54728"/>
           </Articulation>
         <Beam>136</Beam>
         <Note>
@@ -10625,7 +10623,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.133258" y="9.73021"/>
+          <offset x="0.720549" y="-9.45721"/>
           </Articulation>
         <Beam>138</Beam>
         <Note>
@@ -10814,7 +10812,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="-0.0728825" y="10.6962"/>
+          <offset x="0.900687" y="-9.36714"/>
           </Articulation>
         <Beam>140</Beam>
         <Note>
@@ -10931,7 +10929,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.4498" y="10.5319"/>
+          <offset x="0.810618" y="-9.63735"/>
           </Articulation>
         <Beam>142</Beam>
         <Note>
@@ -11105,7 +11103,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.438388" y="10.4063"/>
+          <offset x="0.450343" y="-9.36714"/>
           </Articulation>
         <Beam>144</Beam>
         <Note>
@@ -11222,7 +11220,8 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.304035" y="10.5319"/>
+          <offset x="0.540412" y="-9.36714"/>
+          <selected>1</selected>
           </Articulation>
         <Beam>146</Beam>
         <Note>
@@ -11310,7 +11309,6 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>sforzato</subtype>
-          <offset x="0.146859" y="-8.7381"/>
           <track>2</track>
           </Articulation>
         <Note>
