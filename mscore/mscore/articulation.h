@@ -24,6 +24,8 @@
 #include "ui_articulation.h"
 #include "symbol.h"
 
+class ChordRest;
+
 //---------------------------------------------------------
 //   ArticulationIdx
 //---------------------------------------------------------
@@ -107,6 +109,9 @@ class Articulation : public Symbol {
       QString name() const { return articulationList[subtype()].name; }
       int relGateTime() const { return articulationList[subtype()].relGateTime; }
       int relVelocity() const { return articulationList[subtype()].relVelocity; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+
+      ChordRest* chordRest() const { return (ChordRest*)(parent()); }
 
       static ArticulationInfo articulationList[];
 

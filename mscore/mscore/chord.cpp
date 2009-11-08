@@ -1252,15 +1252,17 @@ void Chord::layout()
             double x = 0.0;
 
             bool stemUp = up();
-/*            if (note->staffMove() < 0)
+#if 1
+            if (staffMove() < 0)
                   stemUp = false;
-            else if (note->staffMove() > 0)
+            else if (staffMove() > 0)
                   stemUp = true;
-*/
+#endif
+
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
 
-            note->setXpos(x);       // y is initialized in setLine()
+            note->setPos(x, note->line() * _spatium * .5);
             double xx = x + headWidth;
             if (xx > _dotPosX)
                   _dotPosX = xx;
@@ -1294,7 +1296,7 @@ void Chord::layout()
       foreach(LedgerLine* l, _ledgerLines)
             l->layout();
 
-      layoutArticulations();
+//      layoutArticulations();
 
       //-----------------------------------------
       //  Fingering

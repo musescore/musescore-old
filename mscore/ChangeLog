@@ -1,3 +1,5 @@
+8.nov. (ws)
+      - fix position of articulation element for staff displaced notes
 7.nov. (ws)
       - fix: tuplets in note entry mode
       - fix: grace notes don't transpose

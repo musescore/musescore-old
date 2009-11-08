@@ -802,7 +802,7 @@ void Note::endDrag()
       {
       if (_lineOffset == 0)
             return;
-      _line      += _lineOffset;
+      setLine(_line + _lineOffset);
       _lineOffset  = 0;
       dragMode     = false;
       int staffIdx = chord()->staffIdx() + chord()->staffMove();

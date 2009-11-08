@@ -344,7 +344,7 @@ void ChordRest::setSmall(bool val)
 
 //---------------------------------------------------------
 //   layoutArticulations
-//    if ((a->subtype() == TenutoSym) || (a->subtype() == StaccatoSym))
+//    called from chord()->layout()
 //---------------------------------------------------------
 
 void ChordRest::layoutArticulations()
@@ -354,10 +354,9 @@ void ChordRest::layoutArticulations()
       double _spatium  = spatium();
       Measure* m       = measure();
       System* s        = m->system();
-      int idx          = staff()->rstaff();
+      int idx          = staff()->rstaff() + staffMove();   // DEBUG
       qreal x          = centerX();
 
-//      double distance  = point(score()->styleS(ST_propertyDistance));
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));
       double distance2 = point(score()->styleS(ST_propertyDistanceStem));
 
