@@ -1014,6 +1014,7 @@ void Measure::layout2()
                                     if (tie)
                                           tie->layout();
                                     }
+                              a->layoutArticulations();     // DEBUG
                               }
                         else if (el->type() == BAR_LINE)
                               el->layout();

@@ -580,35 +580,25 @@ void Beam::layout1()
             delete *i;
       beamSegments.clear();
 
-      if (_direction == AUTO) {
-            int upCount = 0;
-            foreach(ChordRest* cr, _elements) {
-                  if (cr->type() == CHORD) {
-                        Chord* chord = static_cast<Chord*>(cr);
-                        //
-                        // if only one stem direction is manually set it
-                        // determines if beams are up or down
-                        //
-                        if (chord->stemDirection() != AUTO)
-                              upCount += chord->stemDirection() == UP ? 1000 : -1000;
-                        else
-                              upCount += chord->up() ? 1 : -1;
-                        }
-                  }
-            _up = upCount >= 0;
-            }
-      else
-            _up = _direction == UP;
-
       maxDuration.setType(Duration::V_INVALID);
-      c1       = 0;
-      c2       = 0;
-      minMove  = 1000;
-      maxMove  = -1000;
+      c1 = 0;
+      c2 = 0;
+      minMove = 1000;
+      maxMove = -1000;
       isGrace = false;
+      int upCount = 0;
       foreach(ChordRest* cr, _elements) {
             if (cr->type() == CHORD) {
                   c2 = static_cast<Chord*>(cr);
+                  //
+                  // if only one stem direction is manually set it
+                  // determines if beams are up or down
+                  //
+                  if (c2->stemDirection() != AUTO)
+                        upCount += c2->stemDirection() == UP ? 1000 : -1000;
+                  else
+                        upCount += c2->up() ? 1 : -1;
+
                   if (c2->noteType() != NOTE_NORMAL)
                         isGrace = true;
                   if (c1 == 0)
@@ -622,9 +612,11 @@ void Beam::layout1()
             if (!maxDuration.isValid() || (maxDuration < cr->duration()))
                   maxDuration = cr->duration();
             }
+      _up     = (_direction == AUTO) ? (upCount >= 0) : (_direction == UP);
       cross   = minMove < maxMove;
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       slope   = 0.0;
+
       if (cross && !_userModified[idx]) {
             //
             // guess stem direction for every chord
@@ -692,7 +684,6 @@ void Beam::layout()
                   QPointF p = c->upNote()->canvasPos();
                   double y1 = beamY + (p.x() - p1x) * slope;
                   cr->setUp(y1 < p.y());
-printf("2: %p: %d %f < %f\n", cr, cr->up(), y1, p.y());
                   }
             _up = -1;
             }

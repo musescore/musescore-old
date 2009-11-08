@@ -21,6 +21,9 @@
 #include "articulation.h"
 #include "sym.h"
 #include "score.h"
+#include "chordrest.h"
+#include "system.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
@@ -246,4 +249,28 @@ int Articulation::name2idx(const QString& s)
                   }
             }
       return -1;
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Articulation::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      ChordRest* cr = chordRest();
+      if (cr == 0 || cr->parent() == 0)
+            return pos();
+      Measure* m = cr->measure();
+      if (m == 0)
+            return pos();
+      System* system = m->system();
+      if (system == 0)
+            return pos();
+      double yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
+      return QPointF(xp, yp);
       }
