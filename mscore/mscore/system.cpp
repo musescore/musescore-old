@@ -111,6 +111,10 @@ QRectF System::bboxStaff(int staff) const
 SysStaff* System::insertStaff(int idx)
       {
       SysStaff* staff = new SysStaff;
+      if (idx) {
+            // HACK: guess position
+            staff->rbb().setY(_staves[idx-1]->y() + 6 * spatium());
+            }
       _staves.insert(idx, staff);
       if (!_vbox)
             setInstrumentName(idx);

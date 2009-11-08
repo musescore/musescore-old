@@ -617,7 +617,7 @@ void Beam::layout1()
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       slope   = 0.0;
 
-      if (cross && !_userModified[idx]) {
+      if (cross || _userModified[idx]) {
             //
             // guess stem direction for every chord
             //
@@ -632,24 +632,6 @@ void Beam::layout1()
                         c->setUp(true);
                   else if (move < 0)
                         c->setUp(false);
-                  }
-            _up = -1;
-            }
-      else if (_userModified[idx]) {
-            double p1x   = c1->upNote()->canvasPos().x();
-            double p2x   = c2->upNote()->canvasPos().x();
-            double beamY = _p1[idx].y() + c1->upNote()->chord()->canvasPos().y();
-            slope        = (_p2[idx].y() - _p1[idx].y()) / (p2x - p1x);
-            //
-            // set stem direction for every chord
-            //
-            foreach(ChordRest* cr, _elements) {
-                  if (cr->type() != CHORD)
-                        continue;
-                  Chord* c  = static_cast<Chord*>(cr);
-                  QPointF p = c->upNote()->canvasPos();
-                  double y1 = beamY + (p.x() - p1x) * slope;
-                  cr->setUp(y1 < p.y());
                   }
             _up = -1;
             }
@@ -683,7 +665,12 @@ void Beam::layout()
                   Chord* c  = static_cast<Chord*>(cr);
                   QPointF p = c->upNote()->canvasPos();
                   double y1 = beamY + (p.x() - p1x) * slope;
-                  cr->setUp(y1 < p.y());
+                  bool nup = y1 < p.y();
+                  if (c->up() != nup) {
+                        c->setUp(nup);
+                        // guess was wrong, have to relayout
+                        c->measure()->layoutChords1(c->segment(), c->staffIdx());
+                        }
                   }
             _up = -1;
             }
@@ -713,7 +700,12 @@ void Beam::layout()
                         continue;
                   Chord* c  = static_cast<Chord*>(cr);
                   double y  = c->upNote()->canvasPos().y();
-                  c->setUp(beamY < y);
+                  bool nup = beamY < y;
+                  if (c->up() != nup) {
+                        c->setUp(nup);
+                        // guess was wrong, have to relayout
+                        c->measure()->layoutChords1(c->segment(), c->staffIdx());
+                        }
                   }
             _up = -1;
             }
