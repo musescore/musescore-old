@@ -1,4 +1,6 @@
-8.nov. (ws)
+8.nov. (lv)
+      - import of MusicXML <metronome>
+       (ws)
       - fix position of articulation element for staff displaced notes
 7.nov. (ws)
       - fix: tuplets in note entry mode
