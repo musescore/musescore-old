@@ -166,6 +166,8 @@ void Palette::mousePressEvent(QMouseEvent* ev)
       dragStartPosition = ev->pos();
       if (_selectable) {
             int i = idx(dragStartPosition);
+            if (i == -1)
+                  return;
             if (i != selectedIdx) {
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
