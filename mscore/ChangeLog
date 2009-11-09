@@ -1,4 +1,5 @@
 9.nov. (ws)
+      - fix: drum palette crashes program on non-drum parts
       - autosave on is now the default in preferences
       - new autosave implementation: save into temporary files, not into
         original files. This also works for the buildin demo file and new

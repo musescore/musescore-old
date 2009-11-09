@@ -1232,6 +1232,7 @@ void MuseScore::updateDrumset()
 
 void MuseScore::drumPaletteSelected(int idx)
       {
+printf("drumPaletteSelected %d\n", idx);
       if (cs == 0)
             return;
       InputState& padState = cs->inputState();
