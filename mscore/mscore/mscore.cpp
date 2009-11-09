@@ -195,13 +195,21 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         return;
                         }
                   //
-                  // if score is still dirty, the the user has discareded the
+                  // if score is still dirty, the the user has discarded the
                   // score and we can remove it from the list
                   //
                   if (score->created() && score->dirty())
                         removeList.append(score);
                   }
             }
+      removeSessionFile();
+      foreach(Score* score, scoreList) {
+            if (!score->tmpName().isEmpty()) {
+                  QFile f(score->tmpName());
+                  f.remove();
+                  }
+            }
+
       // remove all new created/not save score so they are
       // note saved as session data
 
@@ -789,24 +797,6 @@ void MuseScore::startAutoSave()
       }
 
 //---------------------------------------------------------
-//   autoSaveTimerTimeout
-//---------------------------------------------------------
-
-void MuseScore::autoSaveTimerTimeout()
-      {
-      foreach(Score* s, scoreList) {
-            if (s->dirty() && !s->created()) {
-                  printf("auto save <%s>\n", qPrintable(s->name()));
-                  s->saveFile(true);
-                  }
-            }
-      if (preferences.autoSave) {
-            int t = preferences.autoSaveTime * 60 * 1000;
-            autoSaveTimer->start(t);
-            }
-      }
-
-//---------------------------------------------------------
 //   helpBrowser
 //    show local help
 //---------------------------------------------------------
@@ -1365,6 +1355,11 @@ void MuseScore::removeTab(int i)
       if (i >= (n-1))
             i = n-2;
       setCurrentScore(scoreList.isEmpty() ? 0 : scoreList[i]);
+      writeSessionFile();
+      if (!score->tmpName().isEmpty()) {
+            QFile f(score->tmpName());
+            f.remove();
+            }
       delete score;
       }
 
@@ -1429,6 +1424,168 @@ void setMscoreLocale(QString localeName)
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
+      }
+
+//---------------------------------------------------------
+//   loadScores
+//    load scores for a new session
+//---------------------------------------------------------
+
+static void loadScores(const QStringList& argv)
+      {
+      Score* currentScore = 0;
+      bool scoreCreated = false;
+      if (argv.isEmpty()) {
+            switch (preferences.sessionStart) {
+                  case LAST_SESSION:
+                        {
+                        QSettings settings;
+                        int n = settings.value("scores", 0).toInt();
+                        int c = settings.value("currentScore", 0).toInt();
+                        for (int i = 0; i < n; ++i) {
+                              QString s = settings.value(QString("score-%1").arg(i),"").toString();
+                              Score* score = new Score(defaultStyle);
+                              score->addViewer(new Canvas);
+                              scoreCreated = true;
+                              score->read(s);
+                              mscore->appendScore(score);
+                              if (i == c)
+                                    currentScore = score;
+                              }
+                        }
+                        break;
+                  case EMPTY_SESSION:
+                  case NEW_SESSION:
+                        break;
+                  case SCORE_SESSION:
+                        Score* score = new Score(defaultStyle);
+                        score->addViewer(new Canvas);
+                        scoreCreated = true;
+                        score->read(preferences.startScore);
+                        mscore->appendScore(score);
+                        currentScore = score;
+                        break;
+                  }
+            }
+      else {
+            foreach(const QString& name, argv) {
+                  if (!name.isEmpty()) {
+                        Score* score = new Score(defaultStyle);
+                        score->addViewer(new Canvas);
+                        scoreCreated = true;
+                        if (!score->read(name)) {
+                              QMessageBox::warning(0,
+                                    QWidget::tr("MuseScore"),
+                                    QWidget::tr("reading file <")
+                                       + name + "> failed: " +
+                                    QString(strerror(errno)),
+                                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                              }
+                        else
+                              mscore->appendScore(score);
+                        currentScore = score;
+                        }
+                  }
+            }
+
+      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
+            // start with empty score:
+            Score* score = new Score(defaultStyle);
+            score->addViewer(new Canvas);
+            score->fileInfo()->setFile(mscore->createDefaultName());
+            score->setCreated(true);
+            mscore->appendScore(score);
+            currentScore = score;
+            }
+      if (mscore->noScore())
+            currentScore = 0;
+      mscore->setCurrentScore(currentScore);
+      }
+
+//---------------------------------------------------------
+//   processNonGui
+//---------------------------------------------------------
+
+static bool processNonGui()
+      {
+      if (pluginMode) {
+            QString pn(pluginName);
+            bool res = false;
+            if (mscore->loadPlugin(pn)){
+                  Score* cs = mscore->currentScore();
+                  if (!styleFile.isEmpty()) {
+                        QFile f(styleFile);
+                        if (f.open(QIODevice::ReadOnly))
+                              cs->loadStyle(&f);
+                        }
+                  cs->doLayout();
+                  mscore->pluginTriggered(0);
+                  res = true;
+                  }
+            if (!converterMode)
+                  return res;
+            }
+
+      if (converterMode) {
+            QString fn(outFileName);
+            Score* cs = mscore->currentScore();
+            if (!styleFile.isEmpty()) {
+                  QFile f(styleFile);
+                  if (f.open(QIODevice::ReadOnly))
+                        cs->loadStyle(&f);
+                  }
+            cs->doLayout();
+
+            if (fn.endsWith(".mscx")) {
+                  QFileInfo fi(fn);
+                  try {
+                        cs->saveFile(fi, false);
+                        }
+                  catch(QString) {
+                        return false;
+                        }
+                  return true;
+                  }
+            if (fn.endsWith(".mscz")) {
+                  QFileInfo fi(fn);
+                  try {
+                        cs->saveCompressedFile(fi, false);
+                        }
+                  catch(QString) {
+                        return false;
+                        }
+                  return true;
+                  }
+            if (fn.endsWith(".xml"))
+                  return cs->saveXml(fn);
+            if (fn.endsWith(".mxl"))
+                  return cs->saveMxl(fn);
+            if (fn.endsWith(".mid"))
+                  return cs->saveMidi(fn);
+            if (fn.endsWith(".pdf"))
+                  return cs->savePsPdf(fn, QPrinter::PdfFormat);
+            if (fn.endsWith(".ps"))
+                  return cs->savePsPdf(fn, QPrinter::PostScriptFormat);
+            if (fn.endsWith(".png"))
+                  return cs->savePng(fn);
+            if (fn.endsWith(".svg"))
+                  return cs->saveSvg(fn);
+            if (fn.endsWith(".ly"))
+                  return cs->saveLilypond(fn);
+#ifdef HAS_AUDIOFILE
+            if (fn.endsWith(".wav"))
+                  return cs->saveWav(fn);
+            if (fn.endsWith(".ogg"))
+                  return cs->saveOgg(fn);
+            if (fn.endsWith(".flac"))
+                  return cs->saveFlac(fn);
+#endif
+            else {
+                  fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
+                  return false;
+                  }
+            }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1656,161 +1813,18 @@ int main(int argc, char* av[])
 
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
-      if (!converterMode) {
+
+      if (!(converterMode || pluginMode)) {
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
-            }
-
-      //-------------------------------
-      //  load scores
-      //-------------------------------
-
-      Score* currentScore = 0;
-      bool scoreCreated = false;
-      if (argv.isEmpty()) {
-            switch (preferences.sessionStart) {
-                  case LAST_SESSION:
-                        {
-                        QSettings settings;
-                        int n = settings.value("scores", 0).toInt();
-                        int c = settings.value("currentScore", 0).toInt();
-                        for (int i = 0; i < n; ++i) {
-                              QString s = settings.value(QString("score-%1").arg(i),"").toString();
-                              Score* score = new Score(defaultStyle);
-                              score->addViewer(new Canvas);
-                              scoreCreated = true;
-                              score->read(s);
-                              mscore->appendScore(score);
-                              if (i == c)
-                                    currentScore = score;
-                              }
-                        }
-                        break;
-                  case EMPTY_SESSION:
-                  case NEW_SESSION:
-                        break;
-                  case SCORE_SESSION:
-                        Score* score = new Score(defaultStyle);
-                        score->addViewer(new Canvas);
-                        scoreCreated = true;
-                        score->read(preferences.startScore);
-                        mscore->appendScore(score);
-                        currentScore = score;
-                        break;
-                  }
+            if (!mscore->restoreSession())
+                  loadScores(argv);
             }
       else {
-            foreach(QString name, argv) {
-                  if (!name.isEmpty()) {
-                        Score* score = new Score(defaultStyle);
-                        score->addViewer(new Canvas);
-                        scoreCreated = true;
-                        if (!score->read(name)) {
-                              QMessageBox::warning(0,
-                                    QWidget::tr("MuseScore"),
-                                    QWidget::tr("reading file <")
-                                       + name + "> failed: " +
-                                    QString(strerror(errno)),
-                                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-                              }
-                        else
-                              mscore->appendScore(score);
-                        currentScore = score;
-                        }
-                  }
-            }
-
-      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
-            // start with empty score:
-            Score* score = new Score(defaultStyle);
-            score->addViewer(new Canvas);
-            score->fileInfo()->setFile(mscore->createDefaultName());
-            score->setCreated(true);
-            mscore->appendScore(score);
-            currentScore = score;
-            }
-      if (mscore->noScore())
-            currentScore = 0;
-      mscore->setCurrentScore(currentScore);
-
-      if (pluginMode) {
-            QString pn(pluginName);
-            bool res = false;
-            if (mscore->loadPlugin(pn)){
-                  Score* cs = mscore->currentScore();
-                  if (!styleFile.isEmpty()) {
-                        QFile f(styleFile);
-                        if (f.open(QIODevice::ReadOnly))
-                              cs->loadStyle(&f);
-                        }
-                  cs->doLayout();
-                  mscore->pluginTriggered(0);
-                  res = true;
-                  }
-            if (!converterMode)
-                  exit(res ? 0 : -1);
-            }
-
-      if (converterMode) {
-            QString fn(outFileName);
-            Score* cs = mscore->currentScore();
-            if (!styleFile.isEmpty()) {
-                  QFile f(styleFile);
-                  if (f.open(QIODevice::ReadOnly))
-                        cs->loadStyle(&f);
-                  }
-            cs->doLayout();
-
-            bool rv = true;
-            if (fn.endsWith(".mscx")) {
-                  QFileInfo fi(fn);
-                  try {
-                        cs->saveFile(fi, false);
-                        }
-                  catch(QString) {
-                        rv = false;
-                        }
-                  }
-            else if (fn.endsWith(".mscz")) {
-                  QFileInfo fi(fn);
-                  try {
-                        cs->saveCompressedFile(fi, false);
-                        }
-                  catch(QString) {
-                        rv = false;
-                        }
-                  }
-            else if (fn.endsWith(".xml"))
-                  rv = cs->saveXml(fn);
-            else if (fn.endsWith(".mxl"))
-                  rv = cs->saveMxl(fn);
-            else if (fn.endsWith(".mid"))
-                  rv = cs->saveMidi(fn);
-            else if (fn.endsWith(".pdf"))
-                  rv = cs->savePsPdf(fn, QPrinter::PdfFormat);
-            else if (fn.endsWith(".ps"))
-                  rv = cs->savePsPdf(fn, QPrinter::PostScriptFormat);
-            else if (fn.endsWith(".png"))
-                  rv = cs->savePng(fn);
-            else if (fn.endsWith(".svg"))
-                  rv = cs->saveSvg(fn);
-            else if (fn.endsWith(".ly"))
-                  rv = cs->saveLilypond(fn);
-#ifdef HAS_AUDIOFILE
-            else if (fn.endsWith(".wav"))
-                  rv = cs->saveWav(fn);
-            else if (fn.endsWith(".ogg"))
-                  rv = cs->saveOgg(fn);
-            else if (fn.endsWith(".flac"))
-                  rv = cs->saveFlac(fn);
-#endif
-            else {
-                  fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
-                  rv = false;
-                  }
-            exit(rv ? 0 : -1);
+            loadScores(argv);
+            exit(processNonGui() ? 0 : -1);
             }
 
       mscore->loadPlugins();
@@ -1820,6 +1834,7 @@ int main(int argc, char* av[])
       if (debugMode)
             printf("start event loop...\n");
 
+      mscore->writeSessionFile();
       return qApp->exec();
       }
 
@@ -2431,5 +2446,182 @@ void MuseScore::editInPianoroll(Staff* staff)
       pianorollEditor->setStaff(staff);
       pianorollEditor->show();
       connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+      }
+
+//---------------------------------------------------------
+//   writeSessionFile
+//---------------------------------------------------------
+
+void MuseScore::writeSessionFile()
+      {
+      printf("create session file\n");
+
+      QFile f(dataPath + "/session");
+      if (!f.open(QIODevice::WriteOnly)) {
+            printf("cannot create session file <%s>\n", qPrintable(f.fileName()));
+            return;
+            }
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      foreach(Score* score, scoreList) {
+            xml.stag("Score");
+            xml.tag("created", score->created());
+            if (score->tmpName().isEmpty()) {
+                  xml.tag("path", score->filePath());
+                  }
+            else {
+                  xml.tag("name", score->filePath());
+                  xml.tag("path", score->tmpName());
+                  }
+            xml.etag();
+            }
+      xml.etag();
+      f.close();
+      }
+
+//---------------------------------------------------------
+//   removeSessionFile
+//    remove temp files and session file
+//---------------------------------------------------------
+
+void MuseScore::removeSessionFile()
+      {
+printf("remove session file\n");
+      QFile f(dataPath + "/session");
+      if (!f.exists())
+            return;
+      if (!f.remove()) {
+            printf("cannot remove session file <%s>\n", qPrintable(f.fileName()));
+            }
+      }
+
+//---------------------------------------------------------
+//   autoSaveTimerTimeout
+//---------------------------------------------------------
+
+void MuseScore::autoSaveTimerTimeout()
+      {
+      bool sessionChanged = false;
+      foreach(Score* s, scoreList) {
+            if (s->dirty()) {
+                  printf("auto save <%s>\n", qPrintable(s->name()));
+                  QString tmp = s->tmpName();
+                  try {
+                        if (!tmp.isEmpty()) {
+                              QFileInfo fi(tmp);
+                              s->saveCompressedFile(fi, true);
+                              }
+                        else {
+                              QTemporaryFile tf(dataPath + "/scXXXXXX.mscz");
+                              tf.setAutoRemove(false);
+                              tf.open();
+                              s->setTmpName(tf.fileName());
+                              QFileInfo info(tf.fileName());
+                              s->saveCompressedFile(&tf, info, true);
+                              tf.close();
+                              sessionChanged = true;
+                              }
+                        }
+                  catch (QString ss) {
+                        printf("auto save <%s> failed\n", qPrintable(s->name()));
+                        }
+                  }
+            }
+      if (sessionChanged)
+            writeSessionFile();
+      if (preferences.autoSave) {
+            int t = preferences.autoSaveTime * 60 * 1000;
+            autoSaveTimer->start(t);
+            }
+      }
+
+//---------------------------------------------------------
+//   restoreSession
+//    return true, if a previous crashed session was found
+//    and succesfully restored
+//---------------------------------------------------------
+
+bool MuseScore::restoreSession()
+      {
+      printf("restore session\n");
+      QFile f(dataPath + "/session");
+      if (!f.exists()) {
+            printf("no crashed session\n");
+            return false;
+            }
+      if (!f.open(QIODevice::ReadOnly)) {
+            printf("cannot open session file <%s>\n", qPrintable(f.fileName()));
+            return false;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      docName = f.fileName();
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading session file %s at line %d column %d: %s\n",
+               qPrintable(docName), line, column, qPrintable(err));
+            return false;
+            }
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  /* QString version = e.attribute(QString("version"));
+                  QStringList sl  = version.split('.');
+                  int v           = sl[0].toInt() * 100 + sl[1].toInt();
+                  */
+                  Score* currentScore;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Score") {
+                              QString name;
+                              bool created = false;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    QString val(eee.text());
+                                    if (tag == "name")
+                                          name = val;
+                                    else if (tag == "created")
+                                          created = val.toInt();
+                                    else if (tag == "path") {
+                                          printf("restore <%s>\n", qPrintable(val));
+                                          Score* score = new Score(defaultStyle);
+                                          if (!score->read(val)) {
+                                                printf("failed to restore <%s>\n", qPrintable(val));
+                                                delete score;
+                                                }
+                                          else {
+                                                score->addViewer(new Canvas);
+                                                if (!name.isEmpty()) {
+                                                      printf("set name <%s>\n", qPrintable(name));
+                                                      score->setName(name);
+                                                      }
+                                                appendScore(score);
+                                                currentScore = score;
+                                                score->setDirty();
+                                                score->setCreated(created);
+                                                }
+                                          }
+                                    else {
+                                          domError(eee);
+                                          return false;
+                                          }
+                                    }
+                              }
+                        else {
+                              domError(ee);
+                              return false;
+                              }
+                        }
+                  setCurrentScore(currentScore);
+                  }
+            else {
+                  domError(e);
+                  return false;
+                  }
+            }
+
+      f.close();
+      return true;
       }
 

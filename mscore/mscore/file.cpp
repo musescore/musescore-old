@@ -196,6 +196,7 @@ void MuseScore::loadFile()
       appendScore(score);
       lastOpenPath = score->fileInfo()->path();
       setCurrentScore(score);
+      writeSessionFile();
       }
 
 //---------------------------------------------------------

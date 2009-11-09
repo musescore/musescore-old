@@ -1,3 +1,8 @@
+9.nov. (ws)
+      - autosave on is now the default in preferences
+      - new autosave implementation: save into temporary files, not into
+        original files. This also works for the buildin demo file and new
+        created scores.
 8.nov. (lv)
       - import of MusicXML <metronome>
        (ws)
