@@ -208,7 +208,7 @@ void Preferences::init()
 
       alternateNoteEntryMethod = false;
       proximity                = 6;
-      autoSave                 = false;
+      autoSave                 = true;
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
       language                 = "System";

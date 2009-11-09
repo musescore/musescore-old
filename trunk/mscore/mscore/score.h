@@ -236,6 +236,7 @@ class Score : public QObject {
 
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
+      QString _tmpName;       ///< auto saved with this name if not empty
 
       // the following variables are reset on startCmd()
       //   modified during cmd processing and used in endCmd() to
@@ -856,6 +857,8 @@ class Score : public QObject {
       QList<Element*> buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);
+      QString tmpName() const           { return _tmpName; }
+      void setTmpName(const QString& s) { _tmpName = s; }
       };
 
 extern Score* gscore;

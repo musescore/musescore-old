@@ -280,6 +280,8 @@ class MuseScore : public QMainWindow {
       void showSynthControl(bool);
       void helpBrowser();
 
+      void removeSessionFile();
+
    private slots:
       void autoSaveTimerTimeout();
       void helpBrowser1();
@@ -364,6 +366,8 @@ class MuseScore : public QMainWindow {
       SynthControl* getSynthControl() const { return synthControl; }
       void editInPianoroll(Staff* staff);
       PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
+      void writeSessionFile();
+      bool restoreSession();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
