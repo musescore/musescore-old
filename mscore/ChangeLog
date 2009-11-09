@@ -1,4 +1,6 @@
-9.nov. (ws)
+9.nov. (lv)
+      - fix import of MusicXML <sound tempo="...">
+       (ws)
       - fix: drum palette crashes program on non-drum parts
       - autosave on is now the default in preferences
       - new autosave implementation: save into temporary files, not into
