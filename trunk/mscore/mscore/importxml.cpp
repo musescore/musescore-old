@@ -65,6 +65,7 @@
 #include "harmony.h"
 #include "tempotext.h"
 #include "articulation.h"
+#include "al/tempo.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -1574,7 +1575,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             }
 
-      if (dirType == "words" || dirType == "metronome") {
+      if ((dirType == "words" && txt != "") || dirType == "metronome") {
             printf("words txt='%s' metrEl='%s' tempo='%s' pl='%s' hasyoffs=%d fsz='%s' fst='%s' fw='%s'\n",
                     txt.toUtf8().data(),
                     qPrintable(metrEl.tagName()),
@@ -1588,7 +1589,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             Text* t;
             if (tempo != "") {
                   t = new TempoText(score);
-                  ((TempoText*) t)->setTempo(tempo.toDouble());
+                  double tpo = tempo.toDouble()/60.0;
+                  ((TempoText*) t)->setTempo(tpo);
+                  AL::TempoMap* tl = score->tempomap();
+                  if(tl) tl->addTempo(tick, tpo);
                   }
             else {
                   t = new Text(score);
