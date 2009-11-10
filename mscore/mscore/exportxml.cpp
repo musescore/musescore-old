@@ -1124,8 +1124,8 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
                              tick, note->pitch(), note->ppitch());
             }
       octave += ottava;
-      printf("pitch2xml() tick=%d offset=%d step=%d pitch()=%d ppitch()=%d npitch=%d alter=%d ottava=%d\n",
-             tick, offset, step, note->pitch(), note->ppitch(), npitch, alter, ottava);
+//      printf("pitch2xml() tick=%d offset=%d step=%d pitch()=%d ppitch()=%d npitch=%d alter=%d ottava=%d\n",
+//             tick, offset, step, note->pitch(), note->ppitch(), npitch, alter, ottava);
 
       //deal with Cb and B#
       if (alter > 2) {
@@ -1292,7 +1292,7 @@ void ExportMusicXml::barlineRight(Measure* m)
 
 void ExportMusicXml::moveToTick(int t)
       {
-      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
+//      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
             printf(" -> backup");
             attr.doAttr(xml, false);
@@ -1307,7 +1307,7 @@ void ExportMusicXml::moveToTick(int t)
             xml.tag("duration", (t - tick) / div);
             xml.etag();
             }
-      printf("\n");
+//      printf("\n");
       tick = t;
       }
 
@@ -1672,9 +1672,9 @@ static void arpeggiate(Arpeggio * arp, Xml& xml)
 
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
-      printf("ExportMusicXml::chord() oldtick=%d", tick);
+//      printf("ExportMusicXml::chord() oldtick=%d", tick);
       tick += chord->ticks();
-      printf(" newtick=%d\n", tick);
+//      printf(" newtick=%d\n", tick);
       NoteList* nl = chord->noteList();
 
       PageFormat* pf = score->pageFormat();
@@ -2093,8 +2093,68 @@ static void partGroupStart(Xml& xml, int number, int bracket)
 //   words
 //---------------------------------------------------------
 
+// a note, zero or more dots, zero or more spaces, an equals sign, zero or more spaces
+QRegExp metro("[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]? ?= ?");
+// a parenthesis open, zero or more spaces at end of line
+QRegExp leftParen("\\( ?$");
+// zero or more spaces, an equals sign, zero or more spaces at end of line
+QRegExp equals(" ?= ?$");
+
+static void findMetronome(QString words)
+      {
+      printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
+      int pos = metro.indexIn(words);
+      if (pos != -1) {
+            int len = metro.matchedLength();
+            printf(" mpos=%d mlen=%d\n",
+                   pos, len
+                  );
+            if (words.length() > pos + len) {
+                  QString s1 = words.mid(0, pos);    // string to the left of metronome
+                  QString s2 = words.mid(pos, len);  // first note and equals sign
+                  QString s3 = words.mid(pos + len); // string to the right of equals sign
+                  printf("found metronome: '%s'%s'%s'",
+                         qPrintable(s1),
+                         qPrintable(s2),
+                         qPrintable(s3)
+                        );
+                  // determine if metronome has parentheses
+                  // left part of string must end with parenthesis plus optional spaces
+                  // right part of string must have parenthesis (but not in first pos)
+                  int lparen = leftParen.indexIn(s1);
+                  int rparen = s3.indexOf(")");
+                  bool hasParen = (lparen != -1 && rparen > 0);
+                  printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
+                  QString wordsLeft;  // words left of metronome
+                  QString metroLeft;  // left part of metronome
+                  QString metroRight; // right part of metronome
+                  QString wordsRight; // words right of metronome
+                  if (hasParen) wordsLeft = s1.mid(0, lparen);
+                  else wordsLeft = s1;
+                  int equalsPos = equals.indexIn(s2);
+                  if (equalsPos != -1) metroLeft = s2.mid(0, equalsPos);
+                  else printf("\ncan't find equals in s2\n");
+                  if (hasParen) {
+                        metroRight = s3.mid(0, rparen);
+                        wordsRight = s3.mid(rparen + 1, s3.length() - rparen - 1);
+                        }
+                  else {
+                        metroRight = s3;
+                        }
+                  printf(" '%s'%s'%s'%s'\n",
+                         qPrintable(wordsLeft),
+                         qPrintable(metroLeft),
+                         qPrintable(metroRight),
+                         qPrintable(wordsRight)
+                        );
+                  }
+            }
+      }
+
 void ExportMusicXml::tempoText(TempoText* text, int staff)
       {
+      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
+      findMetronome(text->getText());
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
       xml.stag("direction-type");
@@ -2115,9 +2175,10 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 
 void ExportMusicXml::words(Text* text, int staff)
       {
-      printf("words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
+      printf("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
              text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
              text->getText().toUtf8().data());
+      findMetronome(text->getText());
       directionTag(xml, attr, text);
       if (text->subtypeName() == "RehearsalMark")
             xml.tag("rehearsal", text->getText());
