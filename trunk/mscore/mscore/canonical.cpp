@@ -40,33 +40,43 @@
 //   buildCanonical
 //---------------------------------------------------------
 
-QList<Element*> Score::buildCanonical(int track)
+QBuffer Score::buildCanonical(int track)
       {
-      QList<Element*> el;
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() == MEASURE) {
-                  Measure* m = static_cast<Measure*>(mb);
-                  bool firstCR = true;
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        Element* e = s->element(track);
-                        if (e)
-                              el.append(e);
-                        if (firstCR && (s->subtype() == Segment::SegChordRest)) {
-                              firstCR = false;
-                              if (!e) {
-                                    //
-                                    // fill empty voice with rest
-                                    // TODO: V_MEASURE cannot always translated to real duration
-                                    //
-                                    Rest* r = new Rest(this);
-                                    r->setDuration(Duration::V_MEASURE);
-                                    r->setGenerated(true);
-                                    el.append(r);
+      QBuffer buffer;
+      buffer.open(QBuffer::ReadWrite);
+      Xml xml(buffer);
+
+      xml.stag(QString("Track no=\"%1\"").arg(track);
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            bool firstCR = true;
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  if (s->subtype() == Segment::SegChordRest) {
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                        if (e) {
+                              if (e->type() == CHORD) {
+                                    xml.stag("Chord");
+                                    xml.tag("len", m->fraction());
                                     }
+                              else if (e->type() == REST) {
+                                    xml.stag("Rest");
+                                    xml.tag("len", m->fraction());
+                                    }
+                              xml.etag();
+                              }
+                        else if (firstCR) {
+                              //
+                              // fill empty voice with rest
+                              //
+                              xml.tag("IRest");
+                              xml.tag("len", m->fraction());
+                              xml.etag();
                               }
                         }
+                  firstCR = false;
                   }
             }
-      return el;
+      xml.etag();
+      buffer.close();
+      return buffer;
       }
 
