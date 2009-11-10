@@ -2578,7 +2578,7 @@ bool MuseScore::restoreSession()
                   QStringList sl  = version.split('.');
                   int v           = sl[0].toInt() * 100 + sl[1].toInt();
                   */
-                  Score* currentScore;
+                  Score* currentScore = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "Score") {
