@@ -1819,7 +1819,15 @@ int main(int argc, char* av[])
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
-            if (!mscore->restoreSession())
+            int files = 0;
+            foreach(const QString& name, argv) {
+                  if (!name.isEmpty())
+                        ++files;
+                  }
+            //
+            // TODO: delete old session backups
+            //
+            if (files || !mscore->restoreSession())
                   loadScores(argv);
             }
       else {
