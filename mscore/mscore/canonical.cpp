@@ -40,26 +40,28 @@
 //   buildCanonical
 //---------------------------------------------------------
 
-QBuffer Score::buildCanonical(int track)
+QByteArray Score::buildCanonical(int track)
       {
-      QBuffer buffer;
+      QByteArray a;
+      QBuffer buffer(&a);
       buffer.open(QBuffer::ReadWrite);
-      Xml xml(buffer);
+      Xml xml(&buffer);
 
-      xml.stag(QString("Track no=\"%1\"").arg(track);
+      xml.stag(QString("Track no=\"%1\"").arg(track));
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             bool firstCR = true;
             for (Segment* s = m->first(); s; s = s->next()) {
                   if (s->subtype() == Segment::SegChordRest) {
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                        if (e) {
-                              if (e->type() == CHORD) {
+                        if (cr) {
+                              Fraction f(cr->fraction());
+                              if (cr->type() == CHORD) {
                                     xml.stag("Chord");
-                                    xml.tag("len", m->fraction());
+                                    xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
                                     }
-                              else if (e->type() == REST) {
+                              else if (cr->type() == REST) {
                                     xml.stag("Rest");
-                                    xml.tag("len", m->fraction());
+                                    xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
                                     }
                               xml.etag();
                               }
@@ -67,8 +69,9 @@ QBuffer Score::buildCanonical(int track)
                               //
                               // fill empty voice with rest
                               //
-                              xml.tag("IRest");
-                              xml.tag("len", m->fraction());
+                              xml.stag("IRest");
+                              Fraction f(m->fraction());
+                              xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
                               xml.etag();
                               }
                         }
@@ -77,6 +80,6 @@ QBuffer Score::buildCanonical(int track)
             }
       xml.etag();
       buffer.close();
-      return buffer;
+      return a;
       }
 

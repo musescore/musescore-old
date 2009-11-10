@@ -480,7 +480,7 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note   = notes[idx];
             Chord* chord = note->chord();
-            int move     = note->chord()->staffMove();
+            int move     = chord->staffMove();
             int line     = note->line();
             int ticks    = chord->tickLen();
             int head     = note->noteHead();      // symbol number or note head
@@ -491,9 +491,10 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             bool nmirror  = chord->up() != isLeft;
             bool sameHead = (ll == line) && (head == lastHead);
 
-// printf("dir (%d %d) conflict %d nmirror %d mirror %d idx %d sameHead %d\n",
-//      notes[0]->chord()->up(), voices > 1,
-//      conflict, nmirror, mirror, idx, sameHead);
+printf("conflict %d(%d %d %d==%d) nmirror %d mirror %d idx %d sameHead %d\n",
+      conflict,
+      ll, line, move1, move,
+      nmirror, mirror, idx, sameHead);
 
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
@@ -514,10 +515,13 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
                               note->setHidden(false);
                         }
                   else {
+printf("A idx %d  startIdx %d\n", idx, startIdx);
                         if ((line > ll) || !chord->up()) {
+printf("A1\n");
                               note->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
                               }
                         else {
+printf("A2\n");
                               notes[idx-incIdx]->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
                               }
                         moveLeft = true;

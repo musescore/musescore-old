@@ -854,7 +854,7 @@ class Score : public QObject {
       void scanElements(void* data, void (*func)(void*, Element*));
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
-      QList<Element*> buildCanonical(int track);
+      QByteArray buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName; }
