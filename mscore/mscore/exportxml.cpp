@@ -2093,19 +2093,62 @@ static void partGroupStart(Xml& xml, int number, int bracket)
 //   words
 //---------------------------------------------------------
 
+// a line containing only a note and zero or more dots
+QRegExp metro("^[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]?$");
 // a note, zero or more dots, zero or more spaces, an equals sign, zero or more spaces
-QRegExp metro("[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]? ?= ?");
+QRegExp metroPlusEquals("[\\xe100\\xe101\\xe104-\\xe109][\\xe10a\\xe10b\\.]? ?= ?");
 // a parenthesis open, zero or more spaces at end of line
 QRegExp leftParen("\\( ?$");
 // zero or more spaces, an equals sign, zero or more spaces at end of line
 QRegExp equals(" ?= ?$");
 
-static void findMetronome(QString words)
+static bool findUnitAndDots(QString words, QString& unit, int& dots)
+      {
+      unit = "";
+      dots = 0;
+      printf("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
+      if (!metro.exactMatch(words)) { printf("\n"); return false; }
+      switch (words.at(0).unicode()) {
+            case 0xe100: unit = "breve"; break;
+            case 0xe101: unit = "whole"; break;
+            case 0xe104: unit = "half"; break;
+            case 0xe105: unit = "quarter"; break;
+            case 0xe106: unit = "eighth"; break;
+            case 0xe107: unit = "16th"; break;
+            case 0xe108: unit = "32nd"; break;
+            case 0xe109: unit = "64th"; break;
+            default: printf("findUnitAndDots: unknown char '%s'(0x%0xd)\n",
+                            qPrintable(words.mid(0, 1)), words.at(0).unicode());
+            }
+      for (int i = 1; i < words.length(); ++i)
+            switch (words.at(i).unicode()) {
+                  case '.':    // fall through
+                  case 0xe10a: ++dots; break;
+                  case 0xe10b: ++dots; ++dots; break;
+                  default: printf("findUnitAndDots: unknown char '%s'(0x%0xd)\n",
+                                  qPrintable(words.mid(i, 1)), words.at(i).unicode());
+                  }
+      printf(" unit='%s' dots=%d\n", qPrintable(unit), dots);
+      return true;
+      }
+
+static bool findMetronome(QString words,
+                          QString& wordsLeft,  // words left of metronome
+                          bool& hasParen,      // parenthesis
+                          QString& metroLeft,  // left part of metronome
+                          QString& metroRight, // right part of metronome
+                          QString& wordsRight  // words right of metronome
+                         )
       {
       printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
-      int pos = metro.indexIn(words);
+      wordsLeft  = "";
+      hasParen   = false;
+      metroLeft  = "";
+      metroRight = "";
+      wordsRight = "";
+      int pos = metroPlusEquals.indexIn(words);
       if (pos != -1) {
-            int len = metro.matchedLength();
+            int len = metroPlusEquals.matchedLength();
             printf(" mpos=%d mlen=%d\n",
                    pos, len
                   );
@@ -2123,12 +2166,8 @@ static void findMetronome(QString words)
                   // right part of string must have parenthesis (but not in first pos)
                   int lparen = leftParen.indexIn(s1);
                   int rparen = s3.indexOf(")");
-                  bool hasParen = (lparen != -1 && rparen > 0);
+                  hasParen = (lparen != -1 && rparen > 0);
                   printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
-                  QString wordsLeft;  // words left of metronome
-                  QString metroLeft;  // left part of metronome
-                  QString metroRight; // right part of metronome
-                  QString wordsRight; // words right of metronome
                   if (hasParen) wordsLeft = s1.mid(0, lparen);
                   else wordsLeft = s1;
                   int equalsPos = equals.indexIn(s2);
@@ -2147,19 +2186,71 @@ static void findMetronome(QString words)
                          qPrintable(metroRight),
                          qPrintable(wordsRight)
                         );
+//                  bool res;
+                  QString unit;
+                  int dots;
+                  return findUnitAndDots(metroLeft, unit, dots);
+/*
+                  printf("findUnitAndDots res=%d unit='%s' dots=%d\n",
+                         res1, qPrintable(unit), dots);
+                  res2 = findUnitAndDots(metroRight, unit, dots);
+                  printf("findUnitAndDots res=%d unit='%s' dots=%d\n",
+                         res2, qPrintable(unit), dots);
+                  return res1;
+*/
                   }
             }
+      return false;
       }
 
 void ExportMusicXml::tempoText(TempoText* text, int staff)
       {
       printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
-      findMetronome(text->getText());
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
-      xml.stag("direction-type");
-      xml.tag("words", text->getText());
-      xml.etag();
+      QString wordsLeft;  // words left of metronome
+      bool hasParen;      // parenthesis
+      QString metroLeft;  // left part of metronome
+      QString metroRight; // right part of metronome
+      QString wordsRight; // words right of metronome
+      if (findMetronome(text->getText(), wordsLeft, hasParen, metroLeft, metroRight, wordsRight)) {
+            if (wordsLeft != "") {
+                  xml.stag("direction-type");
+                  xml.tag("words", wordsLeft);
+                  xml.etag();
+                  }
+            xml.stag("direction-type");
+            xml.stag(QString("metronome parentheses=\"%1\"").arg(hasParen ? "yes" : "no"));
+            QString unit;
+            int dots;
+            findUnitAndDots(metroLeft, unit, dots);
+            xml.tag("beat-unit", unit);
+            while (dots > 0) {
+                  xml.tagE("beat-unit-dot");
+                  --dots;
+                  }
+            if (findUnitAndDots(metroRight, unit, dots)) {
+                  xml.tag("beat-unit", unit);
+                  while (dots > 0) {
+                        xml.tagE("beat-unit-dot");
+                        --dots;
+                        }
+                  }
+            else
+                  xml.tag("per-minute", metroRight);
+            xml.etag();
+            xml.etag();
+            if (wordsRight != "") {
+                  xml.stag("direction-type");
+                  xml.tag("words", wordsRight);
+                  xml.etag();
+                  }
+            }
+      else {
+            xml.stag("direction-type");
+            xml.tag("words", text->getText());
+            xml.etag();
+            }
       int offs = text->mxmlOff();
       if (offs)
             xml.tag("offset", offs);
@@ -2178,7 +2269,7 @@ void ExportMusicXml::words(Text* text, int staff)
       printf("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
              text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
              text->getText().toUtf8().data());
-      findMetronome(text->getText());
+      // findMetronome(text->getText());
       directionTag(xml, attr, text);
       if (text->subtypeName() == "RehearsalMark")
             xml.tag("rehearsal", text->getText());
