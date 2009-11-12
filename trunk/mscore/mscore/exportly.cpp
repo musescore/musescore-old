@@ -139,6 +139,7 @@ class ExportLy {
     QString voicename[VOICES];
     QString  staffid, partname, partshort;
     bool simultaneousvoices;
+    int numberofvoices;
   };
 
   struct staffnameinfo staffname[32];
@@ -239,6 +240,7 @@ class ExportLy {
   void writeFingering (int&, QString fingering[5]);
   void findLyrics();
   void newLyricsRecord();
+  void cleanupLyrics();
   void writeLyrics();
   void findGraceNotes(Note*,bool&, int);
   void setOctave(int&, int&, int (&foo)[12]);
@@ -3289,33 +3291,44 @@ void ExportLy::findLyrics()
   int track = 0;
   int vox = 0;
   int versecount = 0;
+  int prevverse =  0;
 
   for (int staffno=0; staffno < staffInd; staffno++)
     {
       newLyricsRecord();//one record for each staff. Contains multiple voices and verses.
       versecount = 0;//test only
+
       for (MeasureBase* mb = score->first(); mb; mb = mb->next())
 	{
 	  if (mb->type() != MEASURE) 
 	    continue;
 	  Measure* meas = (Measure*)mb;
+
 	  for(Segment* seg = meas->first(); seg; seg = seg->next())
 	    {
 	      LyricsList * lyrlist = seg->lyricsList(staffno);
-
-	      // if ((seg->isChordRest())  && (!(*lyrlist->begin())))
-	      // 	{
-	      // 	  cout << "on the way to trouble\n";
-	      // 	  vox = track - (staffno*VOICES);
-	      // 	  if ((seg->type() == CHORD) and (thisLyrics !=0))
-	      // 	    thisLyrics->lyrdat.verselyrics[vox] += " __ - ";
-	      // 	}
-
-		for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix) 
-		  {
+	      
+	      if ((seg->isChordRest())  && (!(*lyrlist->begin())))
+	       	{
+	       	  cout << "on the way to trouble\n";
+	       	  vox = track - (staffno*VOICES);
+		  //double underscore to start the melisma, and one for each note it shall last
+	          thisLyrics->lyrdat.verselyrics[vox-1] += " __ _ "; 
+	       	}
+	      
+	      for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix) 
+		{
 		  if (*lix) 
 		    {
+		      cout << "startof loop verse " << verse << " prevverse: " << prevverse << "\n";
+
 		      verse = (*lix)->no();
+		      cout << "verse = no in lyrlist: " << verse << "\n";
+		      if ((verse - prevverse) > 1)
+			{
+			  cout << "emptysyllable in verse " << verse - 1 << "  \n";
+			  thisLyrics->lyrdat.verselyrics[verse-1] += "__ _ ";
+			}
 		      versecount++;
 		      track = (*lix)->track();
 		      cout << "track " << track << "\n";
@@ -3377,13 +3390,19 @@ void ExportLy::findLyrics()
 		      if((*lix)->endTick() > 0)
 			cout << "mer tekst følger \n";
 		    } //if lyrics
+		  cout << "end of loop. verse: "<< verse << " prevverse: " << prevverse << "\n";
+		  prevverse = verse;		
 		} // for each member of lyricslist
+		if (verse < thisLyrics->numberofverses)
+		  thisLyrics->lyrdat.verselyrics[thisLyrics->numberofverses] += "__ _ ";
 	    } // for each segment
 	} //for each staff
     } //for measurebase first to last
 }// end of findlyrics
 
-
+//-------------------------------------------------------------
+// writeLyrics
+//-------------------------------------------------------------
 void ExportLy::writeLyrics()
 {
 
@@ -3402,6 +3421,20 @@ void ExportLy::writeLyrics()
       thisLyrics= thisLyrics->next;
     }
   thisLyrics = headOfLyrics;
+}
+
+//--------------------------------------------------------------------
+// cleanupLyrics
+//--------------------------------------------------------------------
+void ExportLy::cleanupLyrics()
+{
+  thisLyrics=headOfLyrics;
+  while (thisLyrics !=NULL)
+    {
+      headOfLyrics=headOfLyrics->next;
+      delete thisLyrics;
+      thisLyrics=headOfLyrics;
+    }
 }
 
 
@@ -3874,7 +3907,7 @@ void ExportLy::writeScore()
 	      scorout<< voicebuffer;
 	      voicebuffer = " \n";
 	    }
-
+	  staffname[staffInd].numberofvoices=voiceno;
 	  ++staffInd;
 	}// end of foreach staff
 
@@ -3969,24 +4002,35 @@ void ExportLy::writeScoreBlock()
       os << ">>\n\n";
 
       /*      if (lyrics attached to one of the voices in this staff)*/
-      if (thisLyrics != NULL)
+      thisLyrics =headOfLyrics;
+      while (thisLyrics != NULL)
 	{
-	  for (int i = 0; i <= thisLyrics->numberofverses; i++)
+	  for (int j=0; j< staffname[indx].numberofvoices; j++)
 	    {
-	      if (thisLyrics->lyrdat.staffname == staffname[indx].staffid)
+	      for (int ix = 0; ix < thisLyrics->numberofverses; ix++)
 		{
-		  char verseno = (i + 65);
-		  indentF();
-		  os << " \\context Lyrics = ";
-		  os << thisLyrics->lyrdat.staffname << "verse" << verseno << "\\lyricsto ";
-		  os << thisLyrics->lyrdat.voicename[i] << "  \\" << thisLyrics->lyrdat.staffname << "verse" << verseno << "\n";;
+		  if (thisLyrics->lyrdat.staffname == staffname[indx].staffid)
+		    {
+		      if (thisLyrics->lyrdat.voicename[ix] == staffname[indx].voicename[j])
+			{
+			  indentF();
+			  char verseno = ix + 65;
+			  os << " \\context Lyrics = " << staffname[indx].staffid;
+			  os << "verse"<<verseno;
+			  os << verseno << "\\lyricsto ";
+			  os << thisLyrics->lyrdat.voicename[ix] << "  \\";			  
+			  os << thisLyrics->lyrdat.staffname << "verse" << verseno << "\n";;
+			}
+		    }
 		}
 	    }
-	  if (thisLyrics->next != NULL) thisLyrics = thisLyrics->next;
-	}
 	  
-	  os << "\n";
-
+	  //if (thisLyrics->next != NULL) 
+	  thisLyrics = thisLyrics->next;
+	}
+      
+      os << "\n";
+      
       if (((lybracks[indx].brakstart) and (lybracks[indx].brakend)) or ((lybracks[indx].bracestart) and (lybracks[indx].braceend)))
 	{
 	  //if bracket or brace starts and ends on same staff: one-staff brace/bracket.
@@ -4017,7 +4061,7 @@ void ExportLy::writeScoreBlock()
 
     }//while still more staves 
 
-
+  cleanupLyrics();
 
   os << "\n";
 
