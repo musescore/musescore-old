@@ -19,12 +19,14 @@
 #=============================================================================
 
 install(FILES
+      instruments_ca.xml
       instruments_de.xml
-      instruments_it.xml
-      instruments_ru.xml
       instruments_fr.xml
+      instruments_gl.xml
+      instruments_it.xml
       instruments_nl.xml
       instruments_pt.xml
+      instruments_ru.xml
       instruments_zh_TW.xml
       instruments.xml
       Choir\ SATB.mscx
