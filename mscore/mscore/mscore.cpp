@@ -2475,6 +2475,7 @@ void MuseScore::writeSessionFile()
       foreach(Score* score, scoreList) {
             xml.stag("Score");
             xml.tag("created", score->created());
+            xml.tag("dirty", score->dirty());
             if (score->tmpName().isEmpty()) {
                   xml.tag("path", score->filePath());
                   }
@@ -2554,14 +2555,20 @@ bool MuseScore::restoreSession()
       {
       printf("restore session\n");
       QFile f(dataPath + "/session");
-      if (!f.exists()) {
-            printf("no crashed session\n");
+      if (!f.exists())
             return false;
-            }
       if (!f.open(QIODevice::ReadOnly)) {
             printf("cannot open session file <%s>\n", qPrintable(f.fileName()));
             return false;
             }
+      QMessageBox::StandardButton b = QMessageBox::question(0,
+            tr("MuseScore"),
+            tr("Last Session ended abnormal.\nRestore Session?"),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::Yes
+            );
+      if (b != QMessageBox::Yes)
+            return false;
       QDomDocument doc;
       int line, column;
       QString err;
@@ -2584,6 +2591,7 @@ bool MuseScore::restoreSession()
                         if (tag == "Score") {
                               QString name;
                               bool created = false;
+                              bool dirty = false;
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
                                     QString val(eee.text());
@@ -2591,6 +2599,8 @@ bool MuseScore::restoreSession()
                                           name = val;
                                     else if (tag == "created")
                                           created = val.toInt();
+                                    else if (tag == "dirty")
+                                          dirty = val.toInt();
                                     else if (tag == "path") {
                                           printf("restore <%s>\n", qPrintable(val));
                                           Score* score = new Score(defaultStyle);
@@ -2606,7 +2616,7 @@ bool MuseScore::restoreSession()
                                                       }
                                                 appendScore(score);
                                                 currentScore = score;
-                                                score->setDirty();
+                                                score->setDirty(dirty);
                                                 score->setCreated(created);
                                                 }
                                           }
