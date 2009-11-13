@@ -41,7 +41,7 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       reverb->setId(3);
       chorus->setId(4);
 
-      soundFont->setText(synth->soundFont());
+      soundFont->setText(preferences.soundFont);
       masterTuning->setValue(synth->masterTuning());
       setMasterGain(synth->masterGain());
 

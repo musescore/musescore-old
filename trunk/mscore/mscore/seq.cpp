@@ -233,9 +233,9 @@ bool Seq::init()
                                       "failed.\n"
                                       "Sequencer will be disabled.").arg(p);
                   QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
-                  delete driver;
-                  driver = 0;
-                  return false;
+//                  delete driver;
+//                  driver = 0;
+//                  return false;
                   }
             synth->setMasterTuning(preferences.tuning);
             synth->setMasterGain(preferences.masterGain);
