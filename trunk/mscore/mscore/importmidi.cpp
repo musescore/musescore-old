@@ -976,7 +976,7 @@ void Score::convertMidi(MidiFile* mf)
 
       foreach (MidiTrack* track, *tracks) {
             foreach (Event* e, track->events()) {
-                  if (e->type() == ME_META)
+                  if (e->type() == ME_META && e->metaType()!=META_LYRIC)
                         mf->processMeta(this, track, e);
                   }
             if (debugMode) {
@@ -1009,6 +1009,11 @@ void Score::convertMidi(MidiFile* mf)
                   }
             if (track->staffIdx() != -1)
                   convertTrack(track);
+                  
+            foreach (Event* e, track->events()) {
+              if (e->type() == ME_META && e->metaType()==META_LYRIC)
+                 mf->processMeta(this, track, e);
+              }      
             }
 
       for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {
