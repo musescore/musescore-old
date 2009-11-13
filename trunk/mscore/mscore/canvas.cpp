@@ -461,7 +461,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   // when clicked "a little bit" above or below it, getStaff
                   // may not find the staff and return -1, which would cause
                   // select() to crash
-                  if (_score->dragStaff >= 0) {
+                  if (!dragObject->selected() && _score->dragStaff >= 0) {
                         SelectType st = SELECT_SINGLE;
                         if (keyState == Qt::NoModifier)
                               st = SELECT_SINGLE;

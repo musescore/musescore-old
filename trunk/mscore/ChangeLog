@@ -1,4 +1,5 @@
 13.nov. (ws)
+      - right click does not change existing selection
       - fixed again: Measure repeat sign always on top when dragged from palette
       - do not disable sequencer and synthesizer, if soundfont cannot be loaded
       - show warning dialog, when soundfile loading failed
