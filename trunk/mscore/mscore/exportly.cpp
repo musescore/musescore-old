@@ -242,6 +242,7 @@ class ExportLy {
   void newLyricsRecord();
   void cleanupLyrics();
   void writeLyrics();
+  void connectLyricsToStaff();
   void findGraceNotes(Note*,bool&, int);
   void setOctave(int&, int&, int (&foo)[12]);
   bool arpeggioTest(Chord* chord);
@@ -3290,13 +3291,11 @@ void ExportLy::findLyrics()
   int verse = 0;
   int track = 0;
   int vox = 0;
-  int versecount = 0;
   int prevverse =  0;
 
   for (int staffno=0; staffno < staffInd; staffno++)
     {
       newLyricsRecord();//one record for each staff. Contains multiple voices and verses.
-      versecount = 0;//test only
 
       for (MeasureBase* mb = score->first(); mb; mb = mb->next())
 	{
@@ -3329,7 +3328,6 @@ void ExportLy::findLyrics()
 			  cout << "emptysyllable in verse " << verse - 1 << "  \n";
 			  thisLyrics->lyrdat.verselyrics[verse-1] += "__ _ ";
 			}
-		      versecount++;
 		      track = (*lix)->track();
 		      cout << "track " << track << "\n";
 		      vox = track - (staffno*VOICES);
@@ -3365,6 +3363,7 @@ void ExportLy::findLyrics()
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
 	     
+		      cout << "lyricsstaffname: " << thisLyrics->lyrdat.staffname.toUtf8().data() << "   ";
 		      cout << "lyrvoicename: "   << thisLyrics->lyrdat.voicename[verse].toUtf8().data() << "\n";
 		      	     
 		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
@@ -3408,20 +3407,78 @@ void ExportLy::writeLyrics()
 
   thisLyrics = headOfLyrics;
   tailOfLyrics->next = NULL;//???
+  int staffi=0;
+  int stanza=0;
 
   while (thisLyrics != NULL)
     {
-      for (int i = 0; i <= thisLyrics->numberofverses; ++i)
+      cout << "numberofverses:" << thisLyrics->numberofverses <<"\n";
+      staffi=0;
+      while (staffname[staffi].staffid != "laststaff")
 	{
-	  char verseno = (i + 65);
-	  os << "  " << thisLyrics->lyrdat.staffname;
-	  os << "verse" << verseno << " = \\lyricmode { \\set stanza = \" " << i+1 << ". \" ";
-	  os << thisLyrics->lyrdat.verselyrics[i] << "}\n";
+	  for (int j=0; j< staffname[staffi].numberofvoices; j++)
+	    {
+		  stanza=0;
+	      for (int ix = 0; ix < thisLyrics->numberofverses+1; ix++)//thisLyrics->numberofverses; ix++)
+		{
+		  if ((thisLyrics->lyrdat.staffname == staffname[staffi].staffid)
+		      and (thisLyrics->lyrdat.voicename[ix] == staffname[staffi].voicename[j]))
+		    {
+		      cout << " lyrstaffname: " << thisLyrics->lyrdat.staffname.toUtf8().data();
+		      cout << "lyrvoicename: "  << thisLyrics->lyrdat.voicename[ix].toUtf8().data()  << "  \n";
+		      indentF();
+		      stanza++;
+		      char verseno = (ix + 65);
+		      os << "  " << thisLyrics->lyrdat.staffname;
+		      os << "verse" << verseno << " = \\lyricmode { \\set stanza = \" " << stanza << ". \" ";
+		      os << thisLyrics->lyrdat.verselyrics[ix] << "}\n";
+		    }
+		}
+	    }
+	  staffi++;
 	}
-      thisLyrics= thisLyrics->next;
+       //if (thisLyrics->next != NULL) 
+      thisLyrics = thisLyrics->next;
     }
   thisLyrics = headOfLyrics;
 }
+
+
+
+//--------------------------------------------------------------
+// connectLyricsToStaff
+//--------------------------------------------------------------
+
+void ExportLy::connectLyricsToStaff()
+{
+  /*      if (lyrics attached to one of the voices in this staff)*/
+  thisLyrics =headOfLyrics;
+  while (thisLyrics != NULL)
+    {
+      for (int j=0; j< staffname[indx].numberofvoices; j++)
+	{
+	  for (int ix = 0; ix <= thisLyrics->numberofverses; ix++)//;
+	    {
+	      if (thisLyrics->lyrdat.staffname == staffname[indx].staffid)
+		{
+		  if (thisLyrics->lyrdat.voicename[ix] == staffname[indx].voicename[j])
+		    {
+		      indentF();
+		      char verseno = ix + 65;
+		      os << " \\context Lyrics = " << staffname[indx].staffid;
+		      os << "verse"<< verseno;
+		      os <<  "\\lyricsto ";
+		      os << thisLyrics->lyrdat.voicename[ix] << "  \\";			  
+		      os << thisLyrics->lyrdat.staffname << "verse" << verseno << "\n";;
+		    }
+		}
+	    }
+	}
+	  
+      //if (thisLyrics->next != NULL) 
+      thisLyrics = thisLyrics->next;
+    }
+}//end connectlyricstostaff
 
 //--------------------------------------------------------------------
 // cleanupLyrics
@@ -4001,33 +4058,7 @@ void ExportLy::writeScoreBlock()
       indentF();
       os << ">>\n\n";
 
-      /*      if (lyrics attached to one of the voices in this staff)*/
-      thisLyrics =headOfLyrics;
-      while (thisLyrics != NULL)
-	{
-	  for (int j=0; j< staffname[indx].numberofvoices; j++)
-	    {
-	      for (int ix = 0; ix < thisLyrics->numberofverses; ix++)
-		{
-		  if (thisLyrics->lyrdat.staffname == staffname[indx].staffid)
-		    {
-		      if (thisLyrics->lyrdat.voicename[ix] == staffname[indx].voicename[j])
-			{
-			  indentF();
-			  char verseno = ix + 65;
-			  os << " \\context Lyrics = " << staffname[indx].staffid;
-			  os << "verse"<<verseno;
-			  os << verseno << "\\lyricsto ";
-			  os << thisLyrics->lyrdat.voicename[ix] << "  \\";			  
-			  os << thisLyrics->lyrdat.staffname << "verse" << verseno << "\n";;
-			}
-		    }
-		}
-	    }
-	  
-	  //if (thisLyrics->next != NULL) 
-	  thisLyrics = thisLyrics->next;
-	}
+      connectLyricsToStaff();
       
       os << "\n";
       
