@@ -569,8 +569,11 @@ bool Element::genPropertyMenu(QMenu* popup) const
 
 void Element::propertyAction(const QString& s)
       {
-      if (s == "invisible")
-            score()->toggleInvisible(this);
+      QList<Element*>* el = score()->selection()->elements();
+      if (s == "invisible") {
+            foreach(Element* e, *el)
+                  score()->toggleInvisible(e);
+            }
       else if (s == "color") {
             score()->colorItem(this);
             }
