@@ -348,9 +348,13 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   else {
                         refresh |= e->abbox();
-                        _selection->add(e);
-                        //_is.duration.setVal(Duration::V_INVALID);
-                        selState = SEL_MULT;
+                        if(_selection->elements()->contains(e)){
+                            _selection->remove(e);
+                        }else{
+                            _selection->add(e);
+                            //_is.duration.setVal(Duration::V_INVALID);
+                            selState = SEL_MULT;
+                            }
                         }
                   }
             }
