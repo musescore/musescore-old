@@ -1,4 +1,5 @@
 13.nov. (ws)
+      - show warning dialog, when soundfile loading failed
       - save dirty state in session file
       - show dialog, when a session file is found
 12.nov. (lv)

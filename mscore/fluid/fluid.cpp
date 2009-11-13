@@ -685,6 +685,7 @@ void Fluid::start_voice(Voice* voice)
 
 //---------------------------------------------------------
 //   loadSoundFont
+//    return false on error
 //---------------------------------------------------------
 
 bool Fluid::loadSoundFont(const QString& s)
@@ -693,7 +694,7 @@ bool Fluid::loadSoundFont(const QString& s)
       system_reset();
       foreach(SFont* sf, sfonts)
             sfunload(sf->id(), true);
-      bool rv = sfload(s, true);
+      bool rv = sfload(s, true) != -1;
       mutex.unlock();
       return rv;
       }
@@ -704,16 +705,13 @@ bool Fluid::loadSoundFont(const QString& s)
 
 int Fluid::sfload(const QString& filename, int reset_presets)
       {
-      if (filename.isEmpty()) {
-            printf("Invalid filename");
+      if (filename.isEmpty())
             return -1;
-            }
 
       SFont* sf = new SFont(this);
       if (!sf->read(filename)) {
             delete sf;
             sf = 0;
-            printf("Failed to load SoundFont <%s>", qPrintable(filename));
             return -1;
             }
 
