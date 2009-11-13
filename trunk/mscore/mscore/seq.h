@@ -149,7 +149,6 @@ class Seq : public QObject {
       void collectEvents();
       void guiStop();
 
-      bool loadSoundFont(const QString&);
       bool init();
       void exit();
       bool isRunning() const    { return running; }

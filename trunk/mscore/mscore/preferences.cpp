@@ -1103,7 +1103,9 @@ void PreferenceDialog::apply()
                   }
             if (seq->isRunning()) {
                   sfChanged = false;
-                  seq->loadSoundFont(preferences.soundFont);
+                  Synth* synth = seq->getDriver()->getSynth();
+                  if (synth)
+                        synth->loadSoundFont(preferences.soundFont);
                   }
             }
       mscore->startAutoSave();
