@@ -1891,10 +1891,7 @@ printf("drop staffList\n");
             case BAR_LINE:
                   {
                   BarLine* bl = (BarLine*)e;
-                  MeasureBase* nmb = next();
-                  while (nmb && nmb->type() != MEASURE)
-                        nmb = nmb->next();
-                  Measure* nm = (Measure*) nmb;
+                  Measure* nm = nextMeasure();
                   switch(bl->subtype()) {
                         case END_BAR:
                         case NORMAL_BAR:

@@ -1062,6 +1062,16 @@ void Score::deleteItem(Element* el)
                         if (seg->isEmpty())
                               undoRemoveElement(seg);
                         }
+                  else if (seg->subtype() == Segment::SegEndBarLine) {
+                        if (m->endBarLineType() != NORMAL_BAR) {
+                              undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatEnd);
+                              Measure* nm = m->nextMeasure();
+                              if (nm)
+                                    undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
+                              undoChangeEndBarLineType(m, NORMAL_BAR);
+                              m->setEndBarLineGenerated(true);
+                              }
+                        }
                   }
                   break;
             case TUPLET:
