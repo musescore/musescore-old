@@ -17,8 +17,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r2308 translated JLWaltener - 13/11/2009 - QT Linguist v4.5.3</translatorcomment>
-        <translation>Révision : 2308</translation>
+        <translatorcomment>r2347 translated JLWaltener - 14/11/2009 - QT Linguist v4.5.3</translatorcomment>
+        <translation>Révision : 2347</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1569,7 +1569,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Small Clef Size</source>
-        <translation>Taille des petites clés</translation>
+        <translation>Taille des petites Clefs</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1649,7 +1649,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation>Distance des accolades du système :</translation>
+        <translation>Distance entre accolade et système :</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
@@ -1734,7 +1734,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Créer les rappels d&apos;indications de mesures</translation>
+        <translation>Créer les rappels d&apos;armatures</translation>
     </message>
     <message>
         <source>distance to note</source>
@@ -1750,11 +1750,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation>Nombres de mesures par système :</translation>
+        <translation>Nombre fixe de mesures par système :</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation>Largeur des mesures</translation>
+        <translation>Largeur fixe des mesures</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -3912,7 +3912,7 @@ Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.<
     </message>
     <message>
         <source>Straight</source>
-        <translation></translation>
+        <translation>Linéaire</translation>
     </message>
     <message>
         <source>Swing</source>
@@ -4066,7 +4066,7 @@ Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.<
     </message>
     <message>
         <source>Draw Antialiased</source>
-        <translation>Antialiassing</translation>
+        <translation>Antialiasing</translation>
     </message>
     <message>
         <source>Proximity for selecting elements</source>
@@ -4138,7 +4138,7 @@ Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.<
     </message>
     <message>
         <source>JACK Audio Server</source>
-        <translation>Serveur Audio JACK</translation>
+        <translation>Serveur JACK Audio</translation>
     </message>
     <message>
         <source>Left-Port:</source>
@@ -4334,7 +4334,7 @@ Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.<
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation>Attention : Tout changement sur cette page nécessite le redémarrage de MuseScore.</translation>
+        <translation>Attention : Le changement de langue nécessite le redémarrage de MuseScore.</translation>
     </message>
     <message>
         <source>Style</source>
@@ -4493,7 +4493,7 @@ millimeter</extracomment>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation>Controle à distance MIDI</translation>
+        <translation>Contrôle à distance MIDI</translation>
     </message>
     <message>
         <source>Use JACK midi output</source>
@@ -5383,7 +5383,7 @@ Frequency Herz</extracomment>
     </message>
     <message>
         <source>Number:</source>
-        <translation>Numéro :</translation>
+        <translation>Nombre :</translation>
     </message>
     <message>
         <source>Speed:</source>
