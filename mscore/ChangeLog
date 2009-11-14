@@ -1,3 +1,5 @@
+14.nov. (ws)
+      - delete barline reverts type to normal
 13.nov. (ws)
       - right click does not change existing selection
       - fixed again: Measure repeat sign always on top when dragged from palette

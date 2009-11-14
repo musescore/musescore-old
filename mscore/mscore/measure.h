@@ -212,10 +212,11 @@ class Measure : public MeasureBase {
 
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
-      int endBarLineType() const       { return _endBarLineType; }
+      int endBarLineType() const          { return _endBarLineType; }
       bool setStartRepeatBarLine(bool);
-      bool endBarLineGenerated() const { return _endBarLineGenerated; }
-      bool endBarLineVisible() const   { return _endBarLineVisible;   }
+      bool endBarLineGenerated() const    { return _endBarLineGenerated; }
+      void setEndBarLineGenerated(bool v) { _endBarLineGenerated = v; }
+      bool endBarLineVisible() const      { return _endBarLineVisible;   }
 
       void cmdRemoveEmptySegment(Segment* s);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
