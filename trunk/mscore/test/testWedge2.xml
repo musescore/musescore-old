@@ -1,43 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
+  <work>
+    <work-number>MuseScore testfile</work-number>
+    <work-title>Wedge 2</work-title>
+    </work>
   <identification>
+    <creator type="composer">Leon Vinken</creator>
     <encoding>
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
     </identification>
-  <defaults>
-    <scaling>
-      <millimeters>7.056</millimeters>
-      <tenths>40</tenths>
-      </scaling>
-    <page-layout>
-      <page-height>1683.67</page-height>
-      <page-width>1190.48</page-width>
-      <page-margins type="even">
-        <left-margin>56.6893</left-margin>
-        <right-margin>56.6893</right-margin>
-        <top-margin>56.6893</top-margin>
-        <bottom-margin>113.379</bottom-margin>
-        </page-margins>
-      <page-margins type="odd">
-        <left-margin>56.6893</left-margin>
-        <right-margin>56.6893</right-margin>
-        <top-margin>56.6893</top-margin>
-        <bottom-margin>113.379</bottom-margin>
-        </page-margins>
-      </page-layout>
-    </defaults>
-  <credit page="1">
-    <credit-words default-x="595.238" default-y="1626.98" font-size="24" justify="center" valign="top">Wedge 2</credit-words>
-    </credit>
-  <credit page="1">
-    <credit-words default-x="595.238" default-y="1570.29" font-size="14" justify="center" valign="top">MuseScore testfile</credit-words>
-    </credit>
-  <credit page="1">
-    <credit-words default-x="1133.79" default-y="1554.82" font-size="12" justify="right" valign="top">Leon Vinken</credit-words>
-    </credit>
   <part-list>
     <score-part id="P1">
       <part-name>Voice</part-name>
@@ -61,16 +35,7 @@
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1" width="295.22">
-      <print>
-        <system-layout>
-          <system-margins>
-            <left-margin>84.18</left-margin>
-            <right-margin>-0.00</right-margin>
-            </system-margins>
-          <top-system-distance>180.00</top-system-distance>
-          </system-layout>
-        </print>
+    <measure number="1">
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -91,7 +56,7 @@
           <wedge type="crescendo"/>
           </direction-type>
         </direction>
-      <note default-x="75.70" default-y="-30.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -101,8 +66,8 @@
         <type>whole</type>
         </note>
       </measure>
-    <measure number="2" width="234.53">
-      <note default-x="15.00" default-y="-25.00">
+    <measure number="2">
+      <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -117,13 +82,13 @@
           </direction-type>
         </direction>
       </measure>
-    <measure number="3" width="234.53">
+    <measure number="3">
       <direction placement="below">
         <direction-type>
           <wedge type="diminuendo"/>
           </direction-type>
         </direction>
-      <note default-x="15.00" default-y="-20.00">
+      <note>
         <pitch>
           <step>B</step>
           <octave>4</octave>
@@ -133,8 +98,8 @@
         <type>whole</type>
         </note>
       </measure>
-    <measure number="4" width="228.65">
-      <note default-x="15.00" default-y="-15.00">
+    <measure number="4">
+      <note>
         <pitch>
           <step>C</step>
           <octave>5</octave>
@@ -154,15 +119,7 @@
       </measure>
     </part>
   <part id="P2">
-    <measure number="1" width="295.22">
-      <print>
-        <staff-layout number="1">
-          <staff-distance>65.00</staff-distance>
-          </staff-layout>
-        <staff-layout number="2">
-          <staff-distance>65.00</staff-distance>
-          </staff-layout>
-        </print>
+    <measure number="1">
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -183,7 +140,7 @@
           <line>4</line>
           </clef>
         </attributes>
-      <note default-x="75.70" default-y="-135.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -196,7 +153,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="75.70" default-y="-240.00">
+      <note>
         <pitch>
           <step>B</step>
           <octave>2</octave>
@@ -213,7 +170,7 @@
           </direction-type>
         <staff>2</staff>
         </direction>
-      <note default-x="184.66" default-y="-235.00">
+      <note>
         <pitch>
           <step>C</step>
           <octave>3</octave>
@@ -227,7 +184,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="75.70" default-y="-250.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>2</octave>
@@ -238,8 +195,8 @@
         <staff>2</staff>
         </note>
       </measure>
-    <measure number="2" width="234.53">
-      <note default-x="15.00" default-y="-130.00">
+    <measure number="2">
+      <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -252,7 +209,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-230.00">
+      <note>
         <pitch>
           <step>D</step>
           <octave>3</octave>
@@ -265,7 +222,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-245.00">
+      <note>
         <pitch>
           <step>A</step>
           <octave>2</octave>
@@ -282,7 +239,7 @@
           </direction-type>
         <staff>2</staff>
         </direction>
-      <note default-x="123.96" default-y="-240.00">
+      <note>
         <pitch>
           <step>B</step>
           <octave>2</octave>
@@ -294,8 +251,8 @@
         <staff>2</staff>
         </note>
       </measure>
-    <measure number="3" width="234.53">
-      <note default-x="15.00" default-y="-125.00">
+    <measure number="3">
+      <note>
         <pitch>
           <step>B</step>
           <octave>4</octave>
@@ -308,7 +265,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-240.00">
+      <note>
         <pitch>
           <step>B</step>
           <octave>2</octave>
@@ -321,7 +278,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-250.00">
+      <note>
         <pitch>
           <step>G</step>
           <octave>2</octave>
@@ -338,7 +295,7 @@
           </direction-type>
         <staff>2</staff>
         </direction>
-      <note default-x="123.96" default-y="-245.00">
+      <note>
         <pitch>
           <step>A</step>
           <octave>2</octave>
@@ -350,8 +307,8 @@
         <staff>2</staff>
         </note>
       </measure>
-    <measure number="4" width="228.65">
-      <note default-x="15.00" default-y="-120.00">
+    <measure number="4">
+      <note>
         <pitch>
           <step>C</step>
           <octave>5</octave>
@@ -364,7 +321,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-230.00">
+      <note>
         <pitch>
           <step>D</step>
           <octave>3</octave>
@@ -381,7 +338,7 @@
           </direction-type>
         <staff>2</staff>
         </direction>
-      <note default-x="118.02" default-y="-225.00">
+      <note>
         <pitch>
           <step>E</step>
           <octave>3</octave>
@@ -395,7 +352,7 @@
       <backup>
         <duration>4</duration>
         </backup>
-      <note default-x="15.00" default-y="-245.00">
+      <note>
         <pitch>
           <step>A</step>
           <octave>2</octave>
@@ -406,7 +363,7 @@
         <stem>down</stem>
         <staff>2</staff>
         </note>
-      <note default-x="118.02" default-y="-240.00">
+      <note>
         <pitch>
           <step>B</step>
           <octave>2</octave>

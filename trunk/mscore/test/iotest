@@ -98,6 +98,7 @@ rwtestAllXml() {
       rwtestXml testNotesRests1.xml
       rwtestXml testSystemBrackets1.xml
       rwtestXml testSystemBrackets2.xml
+      rwtestXml testTempo1.xml
       rwtestXml testTimesig1.xml
       rwtestXml testTimesig3.xml
       rwtestXml testTremolo.xml

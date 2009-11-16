@@ -2049,7 +2049,6 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
 //            printf("\n");
             }
       xml.stag(tagname);
-      xml.stag("direction-type");
       }
 
 //---------------------------------------------------------
@@ -2058,7 +2057,6 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
 
 static void directionETag(Xml& xml, int staff, int offs = 0)
       {
-      xml.etag();
       if (offs)
             xml.tag("offset", offs);
       if (staff)
@@ -2203,11 +2201,8 @@ static bool findMetronome(QString words,
       return false;
       }
 
-void ExportMusicXml::tempoText(TempoText* text, int staff)
+static void wordsMetrome(Xml& xml, Text* text)
       {
-      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
-      attr.doAttr(xml, false);
-      xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
       QString wordsLeft;  // words left of metronome
       bool hasParen;      // parenthesis
       QString metroLeft;  // left part of metronome
@@ -2251,6 +2246,14 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
             xml.tag("words", text->getText());
             xml.etag();
             }
+      }
+
+void ExportMusicXml::tempoText(TempoText* text, int staff)
+      {
+      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
+      attr.doAttr(xml, false);
+      xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
+      wordsMetrome(xml, text);
       int offs = text->mxmlOff();
       if (offs)
             xml.tag("offset", offs);
@@ -2269,12 +2272,14 @@ void ExportMusicXml::words(Text* text, int staff)
       printf("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
              text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
              text->getText().toUtf8().data());
-      // findMetronome(text->getText());
       directionTag(xml, attr, text);
-      if (text->subtypeName() == "RehearsalMark")
+      if (text->subtypeName() == "RehearsalMark") {
+            xml.stag("direction-type");
             xml.tag("rehearsal", text->getText());
+            xml.etag();
+            }
       else
-            xml.tag("words", text->getText());
+            wordsMetrome(xml, text);
       directionETag(xml, staff, text->mxmlOff());
       }
 
@@ -2285,10 +2290,12 @@ void ExportMusicXml::words(Text* text, int staff)
 void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
       {
       directionTag(xml, attr, hp);
+      xml.stag("direction-type");
       if (hp->tick() == tick)
             xml.tagE("wedge type=\"%s\"", hp->subtype() ? "diminuendo" : "crescendo");
       else
             xml.tagE("wedge type=\"stop\"");
+      xml.etag();
       directionETag(xml, staff);
       }
 
@@ -2302,6 +2309,7 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
       {
       int st = ot->subtype();
       directionTag(xml, attr, ot);
+      xml.stag("direction-type");
       if (ot->tick() == tick) {
             const char* sz = 0;
             const char* tp = 0;
@@ -2336,6 +2344,7 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
             else
                   printf("ottava subtype %d not understood\n", st);
             }
+      xml.etag();
       directionETag(xml, staff);
       }
 
@@ -2346,10 +2355,12 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
 void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
       {
       directionTag(xml, attr, pd);
+      xml.stag("direction-type");
       if (pd->tick() == tick)
             xml.tagE("pedal type=\"start\" line=\"yes\"");
       else
             xml.tagE("pedal type=\"stop\" line=\"yes\"");
+      xml.etag();
       directionETag(xml, staff);
       }
 
@@ -2457,6 +2468,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
       {
       QString t = dyn->getText();
       directionTag(xml, attr, dyn);
+      xml.stag("direction-type");
       if (t == "p" || t == "pp" || t == "ppp" || t == "pppp" || t == "ppppp" || t == "pppppp"
        || t == "f" || t == "ff" || t == "fff" || t == "ffff" || t == "fffff" || t == "ffffff"
        || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
@@ -2472,6 +2484,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
             }
       else
             xml.tag("words", t);
+      xml.etag();
       directionETag(xml, staff, dyn->mxmlOff());
       }
 
@@ -2492,7 +2505,9 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
             return;
             }
       directionTag(xml, attr, sym);
+      xml.stag("direction-type");
       xml.tagE(mxmlName);
+      xml.etag();
       directionETag(xml, staff, sym->mxmlOff());
       }
 
