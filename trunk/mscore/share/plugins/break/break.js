@@ -49,9 +49,25 @@ function init()
 
 function run()
       {
-      print("break4");
+      var loader = new QUiLoader(null);
+      var file   = new QFile(pluginPath + "/break.ui");
+      file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
+      form = loader.load(file, null);
+      form.buttonBox.accepted.connect(accept);
+      form.show();
+      }
 
+//---------------------------------------------------------
+//    accept
+//    called when user presses "Accept" button
+//---------------------------------------------------------
+
+function accept()
+    {
+      var value = form.mSpinBox.value;
+      
       var cursor   = new Cursor(curScore);
+      curScore.startUndo();
       cursor.staff = 0;
       cursor.voice = 0;
       cursor.rewind();  // set cursor to first chord/rest
@@ -59,16 +75,17 @@ function run()
       var i = 1;
       while (!cursor.eos()) {
             var m = cursor.measure();
-            if (i % 4 == 0) {
-                  m.lineBreak = true;
-                  }
+            if (i % value == 0) {
+                  m.lineBreak = true;    
+            }
             else {
                   m.lineBreak = false;
-                  }
+            }
             cursor.nextMeasure();
             i++;
-            }
       }
+      curScore.endUndo();
+    }
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed
@@ -76,7 +93,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.Break 4',
+      menu: 'Plugins.Break every X measures',
       init: init,
       run:  run
       };

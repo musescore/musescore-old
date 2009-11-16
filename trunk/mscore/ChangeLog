@@ -1,3 +1,8 @@
+15.nov. (la)
+      - fix "can't add dot to rest outside note entry"
+      - fix bar line cut crash
+      - forbid dots on full measure rest and avoid crash
+      - enhance break plugin
 14.nov. (ws)
       - delete barline reverts type to normal
 13.nov. (ws)
