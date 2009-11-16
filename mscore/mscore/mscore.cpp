@@ -2514,26 +2514,25 @@ void MuseScore::autoSaveTimerTimeout()
       bool sessionChanged = false;
       foreach(Score* s, scoreList) {
             if (s->dirty()) {
-                  printf("auto save <%s>\n", qPrintable(s->name()));
+printf("auto save <%s>\n", qPrintable(s->name()));
                   QString tmp = s->tmpName();
-                  try {
-                        if (!tmp.isEmpty()) {
-                              QFileInfo fi(tmp);
-                              s->saveCompressedFile(fi, true);
-                              }
-                        else {
-                              QTemporaryFile tf(dataPath + "/scXXXXXX.mscz");
-                              tf.setAutoRemove(false);
-                              tf.open();
-                              s->setTmpName(tf.fileName());
-                              QFileInfo info(tf.fileName());
-                              s->saveCompressedFile(&tf, info, true);
-                              tf.close();
-                              sessionChanged = true;
-                              }
+                  if (!tmp.isEmpty()) {
+                        QFileInfo fi(tmp);
+                        // TODO: cannot catch exeption here:
+                        cs->saveCompressedFile(fi, true);
                         }
-                  catch (QString ss) {
-                        printf("auto save <%s> failed\n", qPrintable(s->name()));
+                  else {
+                        QTemporaryFile tf(dataPath + "/scXXXXXX.mscz");
+                        tf.setAutoRemove(false);
+                        if (!tf.open()) {
+                              printf("autoSaveTimerTimeout(): create temporary file failed\n");
+                              return;
+                              }
+                        s->setTmpName(tf.fileName());
+                        QFileInfo info(tf.fileName());
+                        s->saveCompressedFile(&tf, info, true);
+                        tf.close();
+                        sessionChanged = true;
                         }
                   }
             }
