@@ -1,5 +1,9 @@
 16.nov. (lv)
       - more work on MusicXML <metronome>
+      (db)
+      - change default foreground color to white
+      - turn auto-save on for "factory settings"
+      - better error message for SoundFont load failure
 15.nov. (la)
       - fix "can't add dot to rest outside note entry"
       - fix bar line cut crash

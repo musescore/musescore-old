@@ -228,10 +228,11 @@ bool Seq::init()
                   printf("load soundfont <%s>\n", qPrintable(p));
             bool rv = synth->loadSoundFont(p);
             if (!rv) {
-                  QString s = QString("Loading Soundfont\n"
+                  QString s = QString("Loading SoundFont\n"
                                       "\"%1\"\n"
-                                      "failed.\n"
-                                      "Sequencer will be disabled.").arg(p);
+                                      "failed. Playback will be disabled.\n\n"
+                                      "Go to Display > Synthesizer \n"
+                                      "and check that the file location is correct").arg(p);
                   QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
 //                  delete driver;
 //                  driver = 0;
