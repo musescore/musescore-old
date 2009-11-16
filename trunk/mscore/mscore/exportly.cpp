@@ -552,7 +552,8 @@ void ExportLy::instructionMarker(Marker* m)
 void ExportLy::writeSymbol(QString name)
 {
   //  QString name = symbols[sym->sym()].name();
-
+ 
+  if (wholemeasurerest > 0) writeMeasuRestNum(); 
   if (name == "pedal ped")
     out << " \\sustainOn ";
   else if (name == "pedalasterisk")
@@ -1408,7 +1409,7 @@ void ExportLy::handleElement(Element* el)
 	      break;
 	    case SYMBOL:
 	      {
-		printf("handleelement: SYMBOL\n");
+		cout << "symbol in anchorlist tick: " << anchors[i].tick << "  \n";
 		sym = (Symbol*) instruction;
 		name = symbols[sym->sym()].name();
 		writeSymbol(name);
@@ -2795,7 +2796,10 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
       out << tpc2name(n->tpc()).toUtf8().data();  //Output of The Notename Itself
       
       if ((chordstart) and (symb))
-       	writeSymbol(symbolname);
+	{
+	  cout << "symbol in chord\n";
+	  writeSymbol(symbolname);
+	}
      
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());  //with -es or -is
@@ -3478,6 +3482,7 @@ void ExportLy::connectLyricsToStaff()
       //if (thisLyrics->next != NULL) 
       thisLyrics = thisLyrics->next;
     }
+  os << "\n";
 }//end connectlyricstostaff
 
 //--------------------------------------------------------------------
@@ -4039,12 +4044,15 @@ void ExportLy::writeScoreBlock()
       os << "\\context Staff = " << staffname[indx].staffid << " << \n";
       ++level;
       indentF();
-      os << "\\";// << staffname[indx].staffid << "\\";
-      
+      os << "\\";
       if (staffname[indx].simultaneousvoices)
 	os << staffname[indx].staffid << "\n";
       else
-	os << staffname[indx].voicename[0] << "\n"; //voices are counted from 0.
+	{
+	  // have to reintroduce explicit naming of voices because of "\lyricsto"
+	  os << "context Voice = "  << staffname[indx].voicename[0] << " \\";
+	  os << staffname[indx].voicename[0] << "\n"; //voices are counted from 0.
+	}
       
       if (lybracks[indx].piano)
 	{
@@ -4056,11 +4064,9 @@ void ExportLy::writeScoreBlock()
       
       --level;
       indentF();
-      os << ">>\n\n";
+      os << ">>\n\n"; // end of this staff
 
       connectLyricsToStaff();
-      
-      os << "\n";
       
       if (((lybracks[indx].brakstart) and (lybracks[indx].brakend)) or ((lybracks[indx].bracestart) and (lybracks[indx].braceend)))
 	{
@@ -4074,7 +4080,7 @@ void ExportLy::writeScoreBlock()
       if (lybracks[indx].brakend)
 	{  --level;
 	  indentF();
-	  os << ">> %end of StaffGroup" << (char)(lybracks[indx].brakno + 64) << "\n";
+	  os << ">> %end of StaffGroup" << (char)(lybracks[indx].brakno + 64) << "\n\n";
 	}
       if (lybracks[indx].braceend)
 	{
@@ -4105,10 +4111,10 @@ void ExportLy::writeScoreBlock()
   if (rehearsalnumbers) os <<  "      \\set Score.markFormatter = #format-mark-box-numbers %%boxed rehearsal-numbers \n";
   else  os <<  "      \\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
   if ((timedenom == 2) and (z1 == 2))
-    { 
-      os << "       \\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n"
-	    "      %% remove previous line to get cut-time/alla breve or common time \n";
-      }
+    {os << "%% "; }
+  os << "       \\override Score.TimeSignature #'style = #'() %%makes timesigs always numerical\n"
+  "      %% remove previous line to get cut-time/alla breve or common time \n";
+      
 os <<
   "      \\set Score.pedalSustainStyle = #'mixed \n"
   "       %% make spanners comprise the note it end on, so that there is no doubt that this note is included.\n"
@@ -4122,8 +4128,12 @@ os <<
   "      \\override Score.ChordName #'font-size =#0 \n"
   "      %% In my experience the normal thing in printed scores is maj7 and not the triangle. (olagunde):\n"
   "      \\set Score.majorSevenSymbol = \\markup {maj7}\n"
-  "  >>\n"
-  "}\n\n";
+  "  >>\n\n"
+  "  %% Boosey and Hawkes, and Peters, have barlines spanning all staff-groups in a score,\n"
+  "  %% Eulenburg and Philharmonia, like Lilypond, have no barlines between staffgroups.\n"
+  "  %% If you want the Eulenburg/Lilypond style, comment out the following line:\n"
+  "  \\layout {\\context {\\Score \\consists Span_bar_engraver}}\n"
+  "}%% end of score-block \n\n";
 
   if (((pianostaff) and (indx==2)) or (indx < 2))
     os << "#(set-global-staff-size 20)\n";
@@ -4281,8 +4291,11 @@ void ExportLy::writePageFormat()
   os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
   os <<  "  %%indent = 0 \\mm \n";
   os <<  "  %%set to ##t if your score is less than one page: \n";
-  os <<  "  ragged-last-bottom = ##f \n";
+  os <<  "  ragged-last-bottom = ##t \n";
   os <<  "  ragged-bottom = ##f  \n";
+  os <<  "  %% in orchestral scores you probably want the two bold slashes \n";
+  os <<  "  %% separating the systems: so uncomment the following line: \n";
+  os <<  "  %% system-separator-markup = \\slashSeparator \n";
   os <<  "  }\n\n";
 }//end writepageformat
 
