@@ -565,7 +565,7 @@ void ExportLy::writeSymbol(QString name)
   else if (name == "trill")
     out << "\\trill ";
   else if (name == "flageolet")
-    out << "\\flageolet ";
+    out << "\\flageolet";
   else if (name == "acc discant")
     out << "^\\markup{\\musicglyph #\"accordion.accDiscant\"} ";
   else if (name == "acc dot")
@@ -4511,6 +4511,10 @@ bool ExportLy::write(const QString& name)
       -- breaks and spacers
 
       -- accordion symbols.
+
+      -- dotted rests in timesignatures which do not subdivide in 3
+         (like 6/8, 12/8) are plain and simply wrong, and must be made
+         impossible: translated to two separate rests.
       
    -- become clear on the difference between system text and staff
       text.
