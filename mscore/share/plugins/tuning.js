@@ -26,13 +26,6 @@
 // This is ECMAScript code (ECMA-262 aka "Java Script")
 //
 
-
-var colors = [new QColor(226,28,72),new QColor(242,102,34),new QColor(249,157,28),
-new QColor(255,204,51),new QColor(255,243,43),new QColor(188,216,95),
-new QColor(98,188,71),new QColor(0,156,149),new QColor(0,113,187),
-new QColor(94,80,161),new QColor(141,91,166),new QColor(207,62,150)];
-
-
 //---------------------------------------------------------
 //    init
 //    this function will be called on startup of mscore

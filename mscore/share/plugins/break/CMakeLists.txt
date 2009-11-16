@@ -19,19 +19,7 @@
 #=============================================================================
 
 install(FILES
-      abc_import.js
-      test.js
-      test2.js
-      createscore.js
-      notenames.js
-      colornotes.js
-      fonttest.js
-      removenotes.js
-      removenotes.ui
-      chordchart.js
-      tuning.js
-      tuning.ui
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
+      break.js
+      break.ui
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins/break
       )
-      
-subdirs( break )
