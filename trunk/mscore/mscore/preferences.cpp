@@ -138,7 +138,7 @@ void Preferences::init()
       fgUseColor         = false;
       bgWallpaper        = QString();
       fgWallpaper        = ":/data/paper3.png";
-      fgColor.setRgb(50, 50, 50);
+      fgColor.setRgb(255, 255, 255);
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
       //selectColor[0] = Qt::blue;
@@ -356,7 +356,7 @@ void Preferences::read()
       fgUseColor      = s.value("fgUseColor", false).toBool();
       bgWallpaper     = s.value("bgWallpaper").toString();
       fgWallpaper     = s.value("fgWallpaper", ":/data/paper3.png").toString();
-      fgColor         = s.value("fgColor", QColor(50,50,50)).value<QColor>();
+      fgColor         = s.value("fgColor", QColor(255, 255, 255)).value<QColor>();
       bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
 
       selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();     //blue
@@ -406,7 +406,7 @@ void Preferences::read()
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
       midiPorts                = s.value("midiPorts", 2).toInt();
       proximity                = s.value("proximity", 6).toInt();
-      autoSave                 = s.value("autoSave", false).toBool();
+      autoSave                 = s.value("autoSave", true).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
       pngScreenShot            = s.value("pngScreenShot", true).toBool();
       language                 = s.value("language", "system").toString();
