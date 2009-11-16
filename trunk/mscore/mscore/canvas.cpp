@@ -687,7 +687,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   if (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0)
                         return;
-                  {
+//                  {
                   if (dragObject && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
                         // drag selection
                         QString mimeType = _score->selection()->mimeType();
@@ -724,7 +724,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         setCursor(QCursor(Qt::SizeAllCursor));
                         return;
                         }
-                  }
+//                  }
                   break;
             case LASSO:
                   _score->addRefresh(lasso->abbox());

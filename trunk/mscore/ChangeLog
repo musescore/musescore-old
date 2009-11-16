@@ -1,4 +1,8 @@
-16.nov. (lv)
+16.nov. (ws)
+      - fix crash in autosave when autosave directory is not writable i.e. creating
+        a temporary file failed; more work has to be done on this to notify the
+        user about this condition
+      (lv)
       - more work on MusicXML <metronome>
       (db)
       - change default foreground color to white

@@ -45,6 +45,7 @@
 #include "limits.h"
 #include "tuplet.h"
 #include "beam.h"
+#include "textline.h"
 
 //---------------------------------------------------------
 //   Selection
@@ -738,7 +739,12 @@ QByteArray Selection::mimeData() const
       QByteArray a;
       switch (_state) {
             case SEL_SINGLE:
-                  a = element()->mimeData(QPointF());
+                  {
+                  Element* e = element();
+                  if (e->type() == TEXTLINE_SEGMENT)
+                        e = static_cast<TextLineSegment*>(e)->textLine();
+                  a = e->mimeData(QPointF());
+                  }
                   break;
             default:
             case SEL_NONE:
