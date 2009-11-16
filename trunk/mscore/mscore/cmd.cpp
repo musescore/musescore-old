@@ -1023,7 +1023,8 @@ printf("List:\n");
             makeGap(cr1, f2, tuplet);
 
             if (cr->type() == REST) {
-                  Rest* r = setRest(tick, track, f2, false, tuplet);
+				  
+                  Rest* r = setRest(tick, track, f2, (d.dots() > 0), tuplet);
                   if (first) {
                         select(r, SELECT_SINGLE, 0);
                         first = false;
