@@ -2151,6 +2151,7 @@ void Score::cmd(const QAction* a)
                         mimeData->setData(mimeSymbolFormat, el->mimeData(QPointF()));
                         QApplication::clipboard()->setMimeData(mimeData);
                         deleteItem(el);
+                        selection()->clear();
                         }
                   }
             else if (cmd == "copy")
