@@ -1,3 +1,5 @@
+17.nov. (ws)
+      - autosave: create dataPath if it does not exist
 16.nov. (ws)
       - fix crash in autosave when autosave directory is not writable i.e. creating
         a temporary file failed; more work has to be done on this to notify the

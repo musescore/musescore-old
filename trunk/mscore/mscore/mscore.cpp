@@ -2184,8 +2184,11 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.endGroup();
-      if (paletteBox && paletteBox->dirty())
-            paletteBox->write(dataPath + "/" + "mscore-palette.xml");
+      if (paletteBox && paletteBox->dirty()) {
+            QDir dir;
+            dir.mkpath(dataPath);
+            paletteBox->write(dataPath + "/mscore-palette.xml");
+            }
       }
 
 //---------------------------------------------------------
@@ -2464,6 +2467,8 @@ void MuseScore::writeSessionFile()
       {
       printf("create session file\n");
 
+      QDir dir;
+      dir.mkpath(dataPath);
       QFile f(dataPath + "/session");
       if (!f.open(QIODevice::WriteOnly)) {
             printf("cannot create session file <%s>\n", qPrintable(f.fileName()));
@@ -2512,6 +2517,8 @@ printf("remove session file\n");
 void MuseScore::autoSaveTimerTimeout()
       {
       bool sessionChanged = false;
+      QDir dir;
+      dir.mkpath(dataPath);
       foreach(Score* s, scoreList) {
             if (s->dirty()) {
 printf("auto save <%s>\n", qPrintable(s->name()));
