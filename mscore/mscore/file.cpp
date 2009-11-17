@@ -214,6 +214,14 @@ void MuseScore::saveFile()
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
             tab->setTabText(tab->currentIndex(), cs->name());
+            QString tmp = cs->tmpName();
+            if (!tmp.isEmpty()) {
+                  QFile f(tmp);
+                  if (!f.remove())
+                        printf("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
+                  cs->setTmpName("");
+                  }
+            writeSessionFile();
             }
       }
 

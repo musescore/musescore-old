@@ -2465,7 +2465,7 @@ void MuseScore::editInPianoroll(Staff* staff)
 
 void MuseScore::writeSessionFile()
       {
-      printf("create session file\n");
+      printf("write session file\n");
 
       QDir dir;
       dir.mkpath(dataPath);
@@ -2482,10 +2482,10 @@ void MuseScore::writeSessionFile()
             xml.tag("created", score->created());
             xml.tag("dirty", score->dirty());
             if (score->tmpName().isEmpty()) {
-                  xml.tag("path", score->filePath());
+                  xml.tag("path", score->fileInfo()->absoluteFilePath());
                   }
             else {
-                  xml.tag("name", score->filePath());
+                  xml.tag("name", score->fileInfo()->absoluteFilePath());
                   xml.tag("path", score->tmpName());
                   }
             xml.etag();
@@ -2517,8 +2517,6 @@ printf("remove session file\n");
 void MuseScore::autoSaveTimerTimeout()
       {
       bool sessionChanged = false;
-      QDir dir;
-      dir.mkpath(dataPath);
       foreach(Score* s, scoreList) {
             if (s->dirty()) {
 printf("auto save <%s>\n", qPrintable(s->name()));
@@ -2529,6 +2527,8 @@ printf("auto save <%s>\n", qPrintable(s->name()));
                         cs->saveCompressedFile(fi, true);
                         }
                   else {
+                        QDir dir;
+                        dir.mkpath(dataPath);
                         QTemporaryFile tf(dataPath + "/scXXXXXX.mscz");
                         tf.setAutoRemove(false);
                         if (!tf.open()) {
