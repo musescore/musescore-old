@@ -36,6 +36,7 @@
 #include "preferences.h"
 #include "seq.h"
 #include "part.h"
+#include "textline.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -714,6 +715,11 @@ void Palette::dropEvent(QDropEvent* event)
                   e = Element::create(type, gscore);
                   if (e)
                         e->read(el);
+                  if (e->type() == TEXTLINE) {
+                        TextLine* tl = static_cast<TextLine*>(e);
+                        tl->setLen(gscore->spatium() * 7);
+                        tl->setTrack(0);
+                        }
                   }
             }
       if (e) {
