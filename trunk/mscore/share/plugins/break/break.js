@@ -75,11 +75,15 @@ function accept()
       var i = 1;
       while (!cursor.eos()) {
             var m = cursor.measure();
-            if (i % value == 0) {
-                  m.lineBreak = true;    
-            }
-            else {
-                  m.lineBreak = false;
+            if(value != 0){
+                if (i % value == 0) {
+                      m.lineBreak = true;    
+                }
+                else {
+                      m.lineBreak = false;
+                }
+            }else{
+                m.lineBreak = false;
             }
             cursor.nextMeasure();
             i++;
