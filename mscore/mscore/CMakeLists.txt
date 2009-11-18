@@ -335,7 +335,9 @@ if (NOT MINGW AND NOT APPLE)
 #======================================
 
    add_executable(
-      smf2xml smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
+      smf2xml
+      ${ui_headers}
+      smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
       )
    target_link_libraries(smf2xml al ${QT_LIBRARIES} )
    set_target_properties( smf2xml
@@ -347,7 +349,9 @@ if (NOT MINGW AND NOT APPLE)
 #======================================
 
    add_executable(
-      xml2smf xml2smf.cpp midifile.cpp event.cpp drumset.cpp
+      xml2smf
+      ${ui_headers}
+      xml2smf.cpp midifile.cpp event.cpp drumset.cpp
       )
    target_link_libraries(xml2smf al ${QT_LIBRARIES} )
    set_target_properties( xml2smf
