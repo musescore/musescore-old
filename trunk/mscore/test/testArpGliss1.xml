@@ -221,7 +221,7 @@
         <type>half</type>
         <stem>down</stem>
         <notations>
-          <slide line-type="solid" number="1" type="start"/>
+          <slide line-type="solid" number="1" type="stop"/>
           </notations>
         </note>
       </measure>
