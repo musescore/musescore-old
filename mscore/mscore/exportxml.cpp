@@ -78,6 +78,7 @@
 #include "page.h"
 #include "system.h"
 #include "element.h"
+#include "glissando.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1639,25 +1640,70 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
 
 // <notations>
 //   <arpeggiate direction="up"/>
-// </notations>
+//   </notations>
 
-static void arpeggiate(Arpeggio * arp, Xml& xml)
+static void arpeggiate(Arpeggio * arp, bool front, bool back, Xml& xml, Notations& notations)
       {
       int st = arp->subtype();
       switch (st) {
             case 0:
+                  notations.tag(xml);
                   xml.tagE("arpeggiate");
                   break;
             case 1:
+                  notations.tag(xml);
                   xml.tagE("arpeggiate direction=\"up\"");
                   break;
             case 2:
+                  notations.tag(xml);
                   xml.tagE("arpeggiate direction=\"down\"");
+                  break;
+            case 3:
+                  if (front) {
+                        notations.tag(xml);
+                        xml.tagE("non-arpeggiate type=\"bottom\"");
+                        }
+                  if (back) {
+                        notations.tag(xml);
+                        xml.tagE("non-arpeggiate type=\"top\"");
+                        }
                   break;
             default:
                   printf("unknown arpeggio subtype %d\n", st);
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   glissando
+//---------------------------------------------------------
+
+// <notations>
+//   <slide line-type="solid" number="1" type="start"/>
+//   </notations>
+
+// <notations>
+//   <glissando line-type="wavy" number="1" type="start"/>
+//   </notations>
+
+static void glissando(Glissando * gli, bool start, Xml& xml, Notations& notations)
+      {
+/*
+      int st = gli->subtype();
+      switch (st) {
+            case 0:
+                  notations.tag(xml);
+                  xml.tagE("slide line-type=\"solid\" number=\"1\" type=\"stop\"");
+                  break;
+            case 1:
+                  notations.tag(xml);
+                  xml.tagE("glissando line-type=\"wavy\" number=\"1\" type=\"stop\"");
+                  break;
+            default:
+                  printf("unknown glissando subtype %d\n", st);
+                  break;
+            }
+*/
       }
 
 //---------------------------------------------------------
@@ -1816,22 +1862,22 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
             // no stem for whole notes and beyond
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
-            	xml.tag("stem", QString("none"));
+                  xml.tag("stem", QString("none"));
             }
             else if (note->chord()->tickLen() < 4*AL::division){
-            	xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
+                  xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
             if (note->headGroup()==5){
-                xml.tag("notehead", "slash");
-            }else if (note->headGroup()==3){
-                xml.tag("notehead", "triangle");
-            }else if(note->headGroup()==4){
-                xml.tag("notehead", "diamond");
-            }else if(note->headGroup()==1){
-                xml.tag("notehead", "x");
-            }else if(note->headGroup()==6){
-                xml.tag("notehead", "circle-x");
+                  xml.tag("notehead", "slash");
+            } else if (note->headGroup()==3){
+                  xml.tag("notehead", "triangle");
+            } else if(note->headGroup()==4){
+                  xml.tag("notehead", "diamond");
+            } else if(note->headGroup()==1){
+                  xml.tag("notehead", "x");
+            } else if(note->headGroup()==6){
+                  xml.tag("notehead", "circle-x");
             }
 
             // LVIFIX: check move() handling
@@ -1880,8 +1926,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   }
             technical.etag(xml);
             if (chord->arpeggio()) {
-                  notations.tag(xml);
-                  arpeggiate(chord->arpeggio(), xml);
+                  arpeggiate(chord->arpeggio(), note == nl->front(), note == nl->back(), xml, notations);
+                  }
+            if (chord->glissando()) {
+                  glissando(chord->glissando(), false, xml, notations);
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
