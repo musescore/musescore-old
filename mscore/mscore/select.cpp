@@ -104,7 +104,7 @@ bool Selection::isEndActive() const {
 
 Element* Selection::element() const
       {
-      if (_state == SEL_SINGLE)
+      if (_state == SEL_SINGLE && !_el.isEmpty())
             return _el.front();
       return 0;
       }
