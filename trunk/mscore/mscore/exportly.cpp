@@ -3310,15 +3310,7 @@ void ExportLy::findLyrics()
 	  for(Segment* seg = meas->first(); seg; seg = seg->next())
 	    {
 	      LyricsList * lyrlist = seg->lyricsList(staffno);
-	      
-	      if ((seg->isChordRest())  && (!(*lyrlist->begin())))
-	       	{
-	       	  cout << "on the way to trouble\n";
-	       	  vox = track - (staffno*VOICES);
-		  //double underscore to start the melisma, and one for each note it shall last
-	          thisLyrics->lyrdat.verselyrics[vox-1] += " __ _ "; 
-	       	}
-	      
+
 	      for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix) 
 		{
 		  if (*lix) 
@@ -4407,6 +4399,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  20.nov.2009  Tried to repair reported crash on file Cronicas.mscz
+
   7.nov. 2009: Lyrics. Works reasonably well on demo adeste.
   
    1.nov. lefthandposition (roman numbers with line: violin, guitar),
