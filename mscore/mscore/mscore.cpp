@@ -1788,7 +1788,7 @@ int main(int argc, char* av[])
       // sanity check for DPI
 
       if (DPI == 0) {           // this happens on windows if there is no printer installed
-            DPI = PDPI;
+            DPI = 600;          //600 is the value on my laptop with printer installed
             }
       DPMM = DPI / INCH;      // dots/mm
 
