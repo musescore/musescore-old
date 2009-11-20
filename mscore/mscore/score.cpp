@@ -275,6 +275,7 @@ Score::Score(const Style& s)
       _dragObject     = 0;
       _printing       = false;
       _playlistDirty  = false;
+      _autosaveDirty  = false;
       _dirty          = false;
       _saved          = false;
       _playPos        = 0;
@@ -1287,8 +1288,9 @@ void Score::setClean(bool val)
       {
       val = !val;
       if (_dirty != val) {
-            _dirty = val;
+            _dirty         = val;
             _playlistDirty = true;
+            _autosaveDirty = true;
             emit dirtyChanged(this);
             }
       }

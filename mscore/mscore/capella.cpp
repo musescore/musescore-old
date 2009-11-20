@@ -115,7 +115,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
+printf("read SimpletextObj(%d,%d) len %ld <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
@@ -573,6 +573,7 @@ void ChordObj::read()
             unsigned char b = cap->readByte();
             leftTie  = b & 1;
             rightTie = b & 2;
+printf("Chord: ties %d %d  ticks %d\n", leftTie, rightTie, ticks());
             }
       if (flags & 0x20) {
             beamShift = cap->readChar();
@@ -1215,6 +1216,9 @@ int BasicDurationalObj::ticks() const
             case D128:        len = AL::division >> 5; break;
             case D256:        len = AL::division >> 6; break;
             case D_BREVE:     len = AL::division * 8; break;
+            default:
+                  printf("BasicDurationalObj::ticks: illegal duration value %d\n", t);
+                  break;
             }
       int slen = len;
       int dots = nDots;
@@ -1359,6 +1363,8 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       // pass I
       //
       int startTick = tick;
+// printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick);
+
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
                   case T_REST:
@@ -1388,7 +1394,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               Rest* rest = new Rest(this);
                               rest->setTick(tick);
                               Duration d;
-                              d.setVal(ticks);
+                              if (o->fullMeasures)
+                                    d.setType(Duration::V_MEASURE);
+                              else
+                                    d.setVal(ticks);
                               rest->setDuration(d);
                               rest->setTrack(track);
                               s->add(rest);
@@ -1400,7 +1409,6 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
-
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(Segment::SegChordRest, tick);
                         Chord* chord = new Chord(this);
@@ -1625,7 +1633,16 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               printf("draw obj %d\n", o->type);
                         }
                   }
-            tick += d->ticks();
+            int ticks = d->ticks();
+            if (no->type() == T_REST) {
+                  RestObj* o = static_cast<RestObj*>(no);
+                  if (o->fullMeasures) {
+                        Measure* m = getCreateMeasure(tick);
+                        int ft     = m->tickLen();
+                        ticks = ft * o->fullMeasures;
+                        }
+                  }
+            tick += ticks;
             }
       return tick;
       }
