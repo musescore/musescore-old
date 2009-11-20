@@ -2518,7 +2518,7 @@ void MuseScore::autoSaveTimerTimeout()
       {
       bool sessionChanged = false;
       foreach(Score* s, scoreList) {
-            if (s->dirty()) {
+            if (s->autosaveDirty()) {
 printf("auto save <%s>\n", qPrintable(s->name()));
                   QString tmp = s->tmpName();
                   if (!tmp.isEmpty()) {
@@ -2541,6 +2541,7 @@ printf("auto save <%s>\n", qPrintable(s->name()));
                         tf.close();
                         sessionChanged = true;
                         }
+                  s->setAutosaveDirty(false);
                   }
             }
       if (sessionChanged)

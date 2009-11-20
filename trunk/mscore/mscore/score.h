@@ -263,6 +263,7 @@ class Score : public QObject {
 
       bool _printing;   ///< True if we are drawing to a printer
       bool _playlistDirty;
+      bool _autosaveDirty;
       bool _dirty;      ///< Score data was modified.
       bool _saved;      ///< True if project was already saved; only on first
                         ///< save a backup file will be created, subsequent
@@ -676,12 +677,14 @@ class Score : public QObject {
       void setName(const QString& s) { info.setFile(s); }
 
       bool isSavable() const;
-      bool dirty() const        { return _dirty;    }
-      void setCreated(bool val) { _created = val;   }
-      bool created() const      { return _created;  }
-      bool saved() const        { return _saved;    }
-      void setSaved(bool v)     { _saved = v;       }
-      bool printing() const     { return _printing; }
+      bool dirty() const             { return _dirty;         }
+      void setCreated(bool val)      { _created = val;        }
+      bool created() const           { return _created;       }
+      bool saved() const             { return _saved;         }
+      void setSaved(bool v)          { _saved = v;            }
+      bool printing() const          { return _printing;      }
+      void setAutosaveDirty(bool v)  { _autosaveDirty = v;    }
+      bool autosaveDirty() const     { return _autosaveDirty; }
 
       bool pos2TickAnchor(const QPointF&, int staffIdx, int* tick, QPointF* anchor) const;
       void spell();
@@ -710,8 +713,8 @@ class Score : public QObject {
       bool noteEntryMode() const               { return _is.noteEntryMode; }
       int inputPos() const;
       int inputTrack() const                   { return _is.track;   }
-      InputState& inputState()                 { return _is;        }
-      void setInputState(const InputState& st) { _is = st;          }
+      InputState& inputState()                 { return _is;         }
+      void setInputState(const InputState& st) { _is = st;           }
       void setInputTrack(int);
 
       TextStyle* textStyle(int idx) { return idx < 0 ? 0 : _textStyles[idx]; }
@@ -857,8 +860,8 @@ class Score : public QObject {
       QByteArray buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);
-      QString tmpName() const           { return _tmpName; }
-      void setTmpName(const QString& s) { _tmpName = s; }
+      QString tmpName() const           { return _tmpName;    }
+      void setTmpName(const QString& s) { _tmpName = s;       }
       };
 
 extern Score* gscore;
