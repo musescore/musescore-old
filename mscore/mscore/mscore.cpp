@@ -1786,9 +1786,9 @@ int main(int argc, char* av[])
       DPI  = pdev->logicalDpiX();      // logical drawing resolution
 
       // sanity check for DPI
-
       if (DPI == 0) {           // this happens on windows if there is no printer installed
-            DPI = 600;          //600 is the value on my laptop with printer installed
+            DPI = PDPI;
+            pdev = &wi;   //pdev is used to draw text, if it's qprinter, text is tiny.
             }
       DPMM = DPI / INCH;      // dots/mm
 

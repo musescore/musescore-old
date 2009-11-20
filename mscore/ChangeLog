@@ -1,5 +1,7 @@
 20.nov  (og) 
         - exportly: tried to fix reported crash on file Cronicaz.mscz
+        (la)
+        - fix tiny text on windows if no printer installed
 17.nov. (ws)
       - autosave: create dataPath if it does not exist
 16.nov. (ws)
