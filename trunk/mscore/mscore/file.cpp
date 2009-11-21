@@ -449,7 +449,7 @@ bool Score::saveAs(bool saveCopy)
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   mscore->updateRecentScores(this);
-                  writeSessionFile();
+                  mscore->writeSessionFile();
                   }
             }
       else if (ext == "xml" || selectedFilter == fl[2]) {
