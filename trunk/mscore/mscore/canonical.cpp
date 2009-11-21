@@ -35,51 +35,87 @@
 #include "rest.h"
 #include "measure.h"
 #include "durationtype.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
-//   buildCanonical
+//   CScore
+//    canonical (partial) score representation
+//
+//   buffer contains something like:
+//
+//    <Track no="0">
+//       <Chord>
+//          <len>1/4</len>
+//          </Chord>
+//       </Track>
 //---------------------------------------------------------
 
-QByteArray Score::buildCanonical(int track)
+class CScore {
+      QBuffer buffer;
+      Score* score;
+
+      Segment* write(Xml&, DurationElement*);
+
+   public:
+      CScore(Score* s, int track, Segment*);
+      const QByteArray& data() const { return buffer.data(); }
+      };
+
+//---------------------------------------------------------
+//   write ChordRest
+//---------------------------------------------------------
+
+Segment* CScore::write(Xml& xml, DurationElement* cr)
       {
-      QByteArray a;
-      QBuffer buffer(&a);
+      if (cr->tuplet()) {
+            xml.stag("Tuplet");
+            Tuplet* t = cr->tuplet();
+            foreach(DurationElement* e, t->elements())
+                  write(xml, e);
+            xml.etag();
+            return static_cast<ChordRest*>(t->elements().back())->segment();
+            }
+      Fraction f(cr->fraction());
+      if (cr->type() == CHORD) {
+            xml.stag("Chord");
+            xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
+            }
+      else if (cr->type() == REST) {
+            xml.stag("Rest");
+            xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
+            }
+      xml.etag();
+      return static_cast<ChordRest*>(cr)->segment();
+      }
+
+//---------------------------------------------------------
+//   CScore
+//---------------------------------------------------------
+
+CScore::CScore(Score* s, int track, Segment* segment)
+      {
+      score = s;
       buffer.open(QBuffer::ReadWrite);
       Xml xml(&buffer);
 
       xml.stag(QString("Track no=\"%1\"").arg(track));
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            bool firstCR = true;
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  if (s->subtype() == Segment::SegChordRest) {
-                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                        if (cr) {
-                              Fraction f(cr->fraction());
-                              if (cr->type() == CHORD) {
-                                    xml.stag("Chord");
-                                    xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
-                                    }
-                              else if (cr->type() == REST) {
-                                    xml.stag("Rest");
-                                    xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
-                                    }
-                              xml.etag();
-                              }
-                        else if (firstCR) {
-                              //
-                              // fill empty voice with rest
-                              //
-                              xml.stag("IRest");
-                              Fraction f(m->fraction());
-                              xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
-                              xml.etag();
-                              }
+      for (; segment; segment = segment->next()) {
+            if (segment->subtype() == Segment::SegChordRest) {
+                  ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                  if (cr)
+                        segment = write(xml, cr);
+                  else if (segment->tick() == segment->measure()->tick()) {
+                        //
+                        // fill empty voice with rest
+                        //
+                        xml.stag("IRest");
+                        Fraction f(cr->measure()->fraction());
+                        xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
+                        xml.etag();
                         }
-                  firstCR = false;
                   }
             }
       xml.etag();
       buffer.close();
-      return a;
       }
 
