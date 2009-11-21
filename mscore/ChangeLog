@@ -1,5 +1,7 @@
 21.nov (ws)
       - update session file after "save as"
+      (db)
+      - add handbook html, image, and font source files to SVN
 20.nov  (ws)
         - fix import of capella whole measure rests
         (og)

@@ -3,14 +3,26 @@ import sys
 
 
 # Get handbook from the web
-def obtainHTML(url, verbose):
+def obtainHTML(url, verbose, language_code='en'):
     if verbose:
         print 'Obtain HTML from musescore.org'
+
     import urllib2
-##    urllib.urlcleanup()
     sock = urllib2.urlopen(url)
     html_source = sock.read()
     sock.close()
+
+    if verbose:
+        print 'Save HTML sources to the sources directory'
+
+    import os
+    if not os.path.isdir('sources'):
+        os.mkdir('sources')
+
+    file_name = 'MuseScore-'+language_code+'.html'
+    out_file = open('sources/'+file_name,"w")
+    out_file.write(html_source)
+    out_file.close()
 
     return html_source
 
@@ -171,7 +183,8 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
         if internal_href[1:] not in anchors:
             if internal_href[0:7] == 'http://':
                 if internal_href.find('/en/') > -1 and language_code != 'en': #check for website bug that sometimes links to English URL instead of local language URL
-                    print " * WARNING: English language link: ", internal_href
+                    if internal_href.find('/node/1257') < 0: # check it is not a link to a bug report
+                        print " * WARNING: English language link: ", internal_href
                 elif internal_href.find('freelinking') > -1: #if url contains the "freelinking" text it means there is no matching page in the handbook
                     print " * WARNING: page does not exist: ", internal_href
                 elif url_language:
@@ -297,8 +310,8 @@ def downloadImages(html_source, verbose, download_images='all'):
     unusual_urls = 0
     file_name = ""
 
-    if not os.path.isdir('files'):
-        os.mkdir('files') 
+    if not os.path.isdir('sources'):
+        os.mkdir('sources') 
 
     broken_image = html_source.find('NOT FOUND:') #indicates a broken image on the website
     if broken_image > -1:
@@ -323,7 +336,7 @@ def downloadImages(html_source, verbose, download_images='all'):
                 download_image = False
                 
         if download_images == 'missing':
-            if os.path.isfile('files/'+file_name): # if file already exists of local computer
+            if os.path.isfile('sources/'+file_name): # if file already exists of local computer
                 download_image = False
 
         if download_image:
@@ -331,7 +344,7 @@ def downloadImages(html_source, verbose, download_images='all'):
                 print ' *', file_name
 
             sock = urllib.urlopen(url)
-            out_file = open('files/'+file_name,"wb")
+            out_file = open('sources/'+file_name,"wb")
             out_file.write(sock.read())
             out_file.close()
             sock.close()
@@ -511,7 +524,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
     print "Create handbook for",language_code
 
-    html = obtainHTML(url, verbose)
+    html = obtainHTML(url, verbose, language_code)
 
     anchors = [] #list of anchor names throughout document
     
