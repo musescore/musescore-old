@@ -415,8 +415,6 @@ bool Score::saveAs(bool saveCopy)
       if (fn.isEmpty())
             return false;
 
-printf("  return selected <%s>\n", qPrintable(selectedFilter));
-
       QFileInfo fi(fn);
       if (saveCopy)
             mscore->lastSaveCopyDirectory = fi.absolutePath();
@@ -451,6 +449,7 @@ printf("  return selected <%s>\n", qPrintable(selectedFilter));
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   mscore->updateRecentScores(this);
+                  writeSessionFile();
                   }
             }
       else if (ext == "xml" || selectedFilter == fl[2]) {
