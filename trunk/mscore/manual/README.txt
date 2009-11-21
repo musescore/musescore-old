@@ -1,4 +1,4 @@
-ProcessHTML.py create the PDF handbooks for MuseScore. 
+ProcessHTML.py creates the PDF handbooks for MuseScore. 
 
 ProcessHTML is written and maintained by David Bolton.
 http://davidbolton.info
@@ -50,6 +50,8 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+Version 1.4 (November 2009)
+* Add sources and font directory to SVN
 * Drop unimportant words (such as "a") from anchors to match URLs on website
 * Repress pisa warnings unless verbos output requested 
 * Repress information about external CSS unless versbose output requested
