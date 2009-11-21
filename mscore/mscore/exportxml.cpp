@@ -1678,6 +1678,29 @@ static void arpeggiate(Arpeggio * arp, bool front, bool back, Xml& xml, Notation
 //   glissando
 //---------------------------------------------------------
 
+// find the next chord in the same track
+
+static Chord* nextChord(Chord* ch)
+      {
+      Segment* s = ch->segment();
+      s = s->next1();
+      while (s) {
+            if (s->subtype() == Segment::SegChordRest && s->element(ch->track()))
+                  break;
+            s = s->next1();
+            }
+      if (s == 0) {
+            // printf("no segment for second note of glissando found\n");
+            return 0;
+            }
+      Chord* c = static_cast<Chord*>(s->element(ch->track()));
+      if (c == 0 || c->type() != CHORD) {
+            // printf("no second note for glissando found, track %d\n", track());
+            return 0;
+            }
+      return c;
+      }
+
 // <notations>
 //   <slide line-type="solid" number="1" type="start"/>
 //   </notations>
@@ -1688,7 +1711,7 @@ static void arpeggiate(Arpeggio * arp, bool front, bool back, Xml& xml, Notation
 
 static void glissando(Glissando * gli, bool start, Xml& xml, Notations& notations)
       {
-/*
+/**/
       int st = gli->subtype();
       switch (st) {
             case 0:
@@ -1703,7 +1726,7 @@ static void glissando(Glissando * gli, bool start, Xml& xml, Notations& notation
                   printf("unknown glissando subtype %d\n", st);
                   break;
             }
-*/
+/**/
       }
 
 //---------------------------------------------------------
@@ -1927,6 +1950,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             technical.etag(xml);
             if (chord->arpeggio()) {
                   arpeggiate(chord->arpeggio(), note == nl->front(), note == nl->back(), xml, notations);
+                  }
+            // write glissando (only for last note)
+            Chord* ch = nextChord(chord);
+//            printf("chord->gliss=%p nextchord=%p gliss=%p\n", chord->glissando(), ch, ch ? ch->glissando() : 0);
+            if ((note == nl->back()) && ch && ch->glissando()) {
+                  glissando(ch->glissando(), true, xml, notations);
                   }
             if (chord->glissando()) {
                   glissando(chord->glissando(), false, xml, notations);
