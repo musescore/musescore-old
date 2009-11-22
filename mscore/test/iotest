@@ -78,6 +78,8 @@ rwtestAllMsc() {
 rwtestAllXml() {
       rwtestXml testAccidentals1.xml
       rwtestXml testAccidentals2.xml
+      rwtestXml testArpGliss1.xml
+      rwtestXml testArpGliss2.xml
       rwtestXml testBarStyles.xml
       rwtestXml testDalSegno.xml
       rwtestXml testDCalCoda.xml

@@ -65,6 +65,8 @@
 #include "harmony.h"
 #include "tempotext.h"
 #include "articulation.h"
+#include "arpeggio.h"
+#include "glissando.h"
 #include "al/tempo.h"
 
 //---------------------------------------------------------
@@ -2145,7 +2147,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       Direction sd = AUTO;
       int dots     = 0;
       bool grace   = false;
+      QString arpeggioType;
       QString fermataType;
+      QString glissandoType;
       QString tupletType;
       QString tupletPlacement;
       QString tupletBracket;
@@ -2475,8 +2479,19 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           domError(eee);
                                     }
                               }
-                        else if (ee.tagName() == "arpeggiate")
-                              domNotImplemented(ee);
+                        else if (ee.tagName() == "arpeggiate") {
+                              arpeggioType = ee.attribute(QString("direction"));
+                              if (arpeggioType == "") arpeggioType = "none";
+                              }
+                        else if (ee.tagName() == "non-arpeggiate")
+                              arpeggioType = "non-arpeggiate";
+                        // glissando and slide are added to the "stop" chord only
+                        else if (ee.tagName() == "glissando") {
+                              if (ee.attribute("type") == "stop") glissandoType = "glissando";
+                              }
+                        else if (ee.tagName() == "slide") {
+                              if (ee.attribute("type") == "stop") glissandoType = "slide";
+                              }
                         else
                               domError(ee);
                         }
@@ -2508,17 +2523,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             else if (tag == "notehead") {
                   if (s == "slash")
-                	      headGroup = 5;
+                        headGroup = 5;
                   else if (s == "triangle")
-                	      headGroup = 3;
+                        headGroup = 3;
                   else if (s == "diamond")
-                	      headGroup = 4;
+                        headGroup = 4;
                   else if (s == "x")
-                	      headGroup = 1;
+                        headGroup = 1;
                   else if (s == "circle-x")
-                	      headGroup = 6;
+                        headGroup = 6;
                   else
-			     printf("unknown notehead %s\n", qPrintable(s));
+                        printf("unknown notehead %s\n", qPrintable(s));
                   }
             else if (tag == "instrument")
                   domNotImplemented(e);
@@ -2640,6 +2655,48 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   printf("unknown fermata type %s\n", fermataType.toLatin1().data());
                   delete f;
                   }
+            }
+      if (!arpeggioType.isEmpty()) {
+            Arpeggio* a = new Arpeggio(score);
+            if (arpeggioType == "none")
+                  a->setSubtype(0);
+            else if (arpeggioType == "up")
+                  a->setSubtype(1);
+            else if (arpeggioType == "down")
+                  a->setSubtype(2);
+            else if (arpeggioType == "non-arpeggiate")
+                  a->setSubtype(3);
+            else {
+                  printf("unknown arpeggio type %s\n", arpeggioType.toLatin1().data());
+                  delete a;
+                  a = 0;
+                  }
+            if ((static_cast<Chord*>(cr))->arpeggio()) {
+                  // there can be only one
+                  delete a;
+                  a = 0;
+                  }
+            else
+                  cr->add(a);
+            }
+      if (!glissandoType.isEmpty()) {
+            Glissando* g = new Glissando(score);
+            if (glissandoType == "slide")
+                  g->setSubtype(0);
+            else if (glissandoType == "glissando")
+                  g->setSubtype(1);
+            else {
+                  printf("unknown glissando type %s\n", glissandoType.toLatin1().data());
+                  delete g;
+                  g = 0;
+                  }
+            if ((static_cast<Chord*>(cr))->glissando()) {
+                  // there can be only one
+                  delete g;
+                  g = 0;
+                  }
+            else
+                  cr->add(g);
             }
       if (!strongAccentType.isEmpty()) {
             Articulation* na = new Articulation(score);
