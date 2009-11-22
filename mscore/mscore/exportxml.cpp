@@ -1563,6 +1563,15 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
             }
       }
 
+// determine if chord has breath-mark
+
+static bool hasBreathMark(Chord* ch)
+      {
+      Segment* s = ch->segment();
+      s = s->next1();
+      return (s->subtype() == Segment::SegBreath && s->element(ch->track()));
+      }
+
 //---------------------------------------------------------
 //   chordAttributes
 //---------------------------------------------------------
@@ -1649,6 +1658,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   }
             }
+            if (hasBreathMark(chord)) {
+                  printf("found breath-mark for chord %p\n", chord);
+                  notations.tag(xml);
+                  articulations.tag(xml);
+                  xml.tagE("breath-mark");
+                  }
             articulations.etag(xml);
       // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
@@ -3467,10 +3482,6 @@ foreach(Element* el, *(score->gel())) {
                                           //       bar((BarLine*) el);
                                           break;
 
-                                    // LVIFIX TODO: support breath mark, which is stored in a separate segment by mscore,
-                                    // and is note/notations/articulations/breathmark in MusicXML. It is not clear if
-                                    // the breath mark applies to the previous or next note. Furthermore, MusicXML supports
-                                    // only one type of breath mark while mscore has two different types.
                                     default:
                                           printf("ExportMusicXml::write unknown segment type %s\n", el->name());
                                           break;
