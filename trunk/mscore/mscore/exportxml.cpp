@@ -188,14 +188,29 @@ class Technical {
 //---------------------------------------------------------
 
 class SlurHandler {
-      const Slur* slur[MAX_SLURS];
-      bool started[MAX_SLURS];
+      const Slur* slur[MAX_NUMBER_LEVEL];
+      bool started[MAX_NUMBER_LEVEL];
       int findSlur(const Slur* s) const;
 
    public:
       SlurHandler();
       void doSlurStart(Chord* chord, Notations& notations, Xml& xml);
       void doSlurStop(Chord* chord, Notations& notations, Xml& xml);
+      };
+
+//---------------------------------------------------------
+//   glissando handler -- prints <glissando> tags
+//---------------------------------------------------------
+
+class GlissandoHandler {
+      const Chord* glissChrd[MAX_NUMBER_LEVEL];
+      const Chord* slideChrd[MAX_NUMBER_LEVEL];
+      int findChord(const Chord* c, int st) const;
+
+   public:
+      GlissandoHandler();
+      void doGlissandoStart(Chord* chord, Notations& notations, Xml& xml);
+      void doGlissandoStop(Chord* chord, Notations& notations, Xml& xml);
       };
 
 //---------------------------------------------------------
@@ -206,6 +221,7 @@ class ExportMusicXml {
       Score* score;
       Xml xml;
       SlurHandler sh;
+      GlissandoHandler gh;
       int tick;
       Attributes attr;
       TextLine* bracket[MAX_BRACKETS];
@@ -341,7 +357,7 @@ void Technical::etag(Xml& xml)
 
 SlurHandler::SlurHandler()
       {
-      for (int i = 0; i < MAX_SLURS; ++i) {
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i) {
             slur[i] = 0;
             started[i] = false;
             }
@@ -354,7 +370,7 @@ SlurHandler::SlurHandler()
 
 int SlurHandler::findSlur(const Slur* s) const
       {
-      for (int i = 0; i < MAX_SLURS; ++i)
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i)
             if (slur[i] == s) return i;
       return -1;
       }
@@ -422,7 +438,7 @@ void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
                   }
             }
       // search slur list for already started slur(s) stopping at this chord
-      for (int i = 0; i < MAX_SLURS; ++i) {
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i) {
             if (slur[i] && slur[i]->endElement() == chord) {
                   if (started[i]) {
                         slur[i] = 0;
@@ -432,6 +448,124 @@ void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   glissando
+//---------------------------------------------------------
+
+// <notations>
+//   <slide line-type="solid" number="1" type="start"/>
+//   </notations>
+
+// <notations>
+//   <glissando line-type="wavy" number="1" type="start"/>
+//   </notations>
+
+static void glissando(Glissando * gli, int number, bool start, Notations& notations, Xml& xml)
+      {
+      int st = gli->subtype();
+      switch (st) {
+            case 0:
+                  notations.tag(xml);
+                  xml.tagE("slide line-type=\"solid\" number=\"%d\" type=\"%s\"",
+                           number, start ? "start" : "stop");
+                  break;
+            case 1:
+                  notations.tag(xml);
+                  xml.tagE("glissando line-type=\"wavy\" number=\"%d\" type=\"%s\"",
+                           number, start ? "start" : "stop");
+                  break;
+            default:
+                  printf("unknown glissando subtype %d\n", st);
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   GlissandoHandler
+//---------------------------------------------------------
+
+GlissandoHandler::GlissandoHandler()
+      {
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i) {
+            glissChrd[i] = 0;
+            slideChrd[i] = 0;
+            }
+      }
+
+//---------------------------------------------------------
+//   findChord -- get index of chord in chord table for subtype st
+//   return -1 if not found
+//---------------------------------------------------------
+
+int GlissandoHandler::findChord(const Chord* c, int st) const
+      {
+      if (st != 0 && st != 1) {
+            printf("GlissandoHandler::findChord: unknown glissando subtype %d\n", st);
+            return -1;
+            }
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i) {
+            if (st == 0 && slideChrd[i] == c) return i;
+            if (st == 1 && glissChrd[i] == c) return i;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   doGlissandoStart
+//---------------------------------------------------------
+
+void GlissandoHandler::doGlissandoStart(Chord* chord, Notations& notations, Xml& xml)
+      {
+      int st = chord->glissando()->subtype();
+      if (st != 0 && st != 1) {
+            printf("doGlissandoStart: unknown glissando subtype %d\n", st);
+            return;
+            }
+      // check if on chord list
+      int i = findChord(chord, st);
+      if (i >= 0) {
+            // print error and remove from list
+            printf("doGlissandoStart: chord %p already on list\n", chord);
+            if (st == 0) slideChrd[i] = 0;
+            if (st == 1) glissChrd[i] = 0;
+            }
+      // find free slot to store it
+      i = findChord(0, st);
+      if (i >= 0) {
+            if (st == 0) slideChrd[i] = chord;
+            if (st == 1) glissChrd[i] = chord;
+            glissando(chord->glissando(), i + 1, true, notations, xml);
+            }
+      else
+            printf("doGlissandoStart: no free slot");
+      }
+
+//---------------------------------------------------------
+//   doGlissandoStop
+//---------------------------------------------------------
+
+void GlissandoHandler::doGlissandoStop(Chord* chord, Notations& notations, Xml& xml)
+      {
+      int st = chord->glissando()->subtype();
+      if (st != 0 && st != 1) {
+            printf("doGlissandoStop: unknown glissando subtype %d\n", st);
+            return;
+            }
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i) {
+            if (st == 0 && slideChrd[i] == chord) {
+                  slideChrd[i] = 0;
+                  glissando(chord->glissando(), i + 1, false, notations, xml);
+                  return;
+                  }
+            if (st == 1 && glissChrd[i] == chord) {
+                  glissChrd[i] = 0;
+                  glissando(chord->glissando(), i + 1, false, notations, xml);
+                  return;
+                  }
+            }
+      printf("doGlissandoStop: glissando chord %p not found\n", chord);
       }
 
 //---------------------------------------------------------
@@ -1674,10 +1808,6 @@ static void arpeggiate(Arpeggio * arp, bool front, bool back, Xml& xml, Notation
             }
       }
 
-//---------------------------------------------------------
-//   glissando
-//---------------------------------------------------------
-
 // find the next chord in the same track
 
 static Chord* nextChord(Chord* ch)
@@ -1699,34 +1829,6 @@ static Chord* nextChord(Chord* ch)
             return 0;
             }
       return c;
-      }
-
-// <notations>
-//   <slide line-type="solid" number="1" type="start"/>
-//   </notations>
-
-// <notations>
-//   <glissando line-type="wavy" number="1" type="start"/>
-//   </notations>
-
-static void glissando(Glissando * gli, bool start, Xml& xml, Notations& notations)
-      {
-/**/
-      int st = gli->subtype();
-      switch (st) {
-            case 0:
-                  notations.tag(xml);
-                  xml.tagE("slide line-type=\"solid\" number=\"1\" type=\"stop\"");
-                  break;
-            case 1:
-                  notations.tag(xml);
-                  xml.tagE("glissando line-type=\"wavy\" number=\"1\" type=\"stop\"");
-                  break;
-            default:
-                  printf("unknown glissando subtype %d\n", st);
-                  break;
-            }
-/**/
       }
 
 //---------------------------------------------------------
@@ -1955,10 +2057,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             Chord* ch = nextChord(chord);
 //            printf("chord->gliss=%p nextchord=%p gliss=%p\n", chord->glissando(), ch, ch ? ch->glissando() : 0);
             if ((note == nl->back()) && ch && ch->glissando()) {
-                  glissando(ch->glissando(), true, xml, notations);
+                  gh.doGlissandoStart(ch, notations, xml);
                   }
             if (chord->glissando()) {
-                  glissando(chord->glissando(), false, xml, notations);
+                  gh.doGlissandoStop(chord, notations, xml);
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
