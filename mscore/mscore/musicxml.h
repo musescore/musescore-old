@@ -68,10 +68,10 @@ struct MusicXmlPartGroup {
       bool barlineSpan;
       };
 
-const int MAX_LYRICS      = 8;
-const int MAX_PART_GROUPS = 8;
-const int MAX_SLURS       = 8;
-const int MAX_BRACKETS    = 8;
+const int MAX_LYRICS       = 8;
+const int MAX_PART_GROUPS  = 8;
+const int MAX_NUMBER_LEVEL = 6; // maximum number of overlapping MusicXML objects
+const int MAX_BRACKETS     = 8;
 
 //---------------------------------------------------------
 //   CreditWords
@@ -129,7 +129,7 @@ class MusicXml {
       Score* score;
       std::vector<int> voicelist[MAX_STAVES];
 
-      Slur* slur[MAX_SLURS];
+      Slur* slur[MAX_NUMBER_LEVEL];
 
       TextLine* bracket[MAX_BRACKETS];
 

@@ -331,7 +331,7 @@ void MusicXml::import(Score* s)
       {
       score  = s;
       tie    = 0;
-      for (int i = 0; i < MAX_SLURS; ++i)
+      for (int i = 0; i < MAX_NUMBER_LEVEL; ++i)
             slur[i] = 0;
       for (int i = 0; i < MAX_BRACKETS; ++i)
             bracket[i] = 0;
