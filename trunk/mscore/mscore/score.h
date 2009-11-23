@@ -36,6 +36,7 @@
 #include "bsp.h"
 #include "fraction.h"
 #include "al/al.h"
+#include "viewer.h"
 
 namespace AL {
       class TempoMap;
@@ -53,8 +54,6 @@ class Selection;
 class Segment;
 class Rest;
 class Xml;
-class Canvas;
-class Viewer;
 class Articulation;
 class Note;
 class Chord;
@@ -91,6 +90,7 @@ class RepeatList;
 class MusicXmlCreator;
 class TimeSig;
 class Clef;
+class TextB;
 
 extern bool showRubberBand;
 
@@ -214,10 +214,6 @@ class Score : public QObject {
       UndoStack* _undo;
       QList<ImagePath*> imagePathList;
 
-      int _magIdx;
-      double _mag;
-      double _xoff, _yoff;
-
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
 
@@ -243,13 +239,11 @@ class Score : public QObject {
       //   determine what to layout and what to repaint:
 
       QRectF refresh;
-      bool updateAll;
+      bool _updateAll;
       Measure* layoutStart;   ///< start a relayout at this measure
       bool layoutAll;         ///< do a complete relayout
 
       Qt::KeyboardModifiers keyState;
-
-      QList<Viewer*> viewer;
 
       bool _showInvisible;
       bool _showFrames;
@@ -299,10 +293,6 @@ class Score : public QObject {
       void cmdSetBeamMode(int);
       void cmdFlip();
       Note* getSelectedNote();
-      void pageNext();
-      void pagePrev();
-      void pageTop();
-      void pageEnd();
       Note* upAlt(Element*);
       Note* upAltCtrl(Note*) const;
       Note* downAlt(Element*);
@@ -390,6 +380,17 @@ class Score : public QObject {
       void dirtyChanged(Score*);
       void stateChanged(int);
       void posChanged(int);
+      void updateAll();
+      void dataChanged(const QRectF&);
+      void stateChanged(Viewer::State);
+      void moveCursor();
+      void setEditText(TextB*);
+      void startEdit(Element*, int startGrip);
+      void adjustCanvasPosition(Element* el, bool playBack);
+
+   public slots:
+      void setClean(bool val);
+      void setDirty(bool val = true) { setClean(!val); }
 
    public:
       int curTick;                  // for read optimizations
@@ -446,11 +447,6 @@ class Score : public QObject {
       void lyricsEndEdit();
       void harmonyEndEdit();
 
-   public slots:
-      void setClean(bool val);
-      void setDirty(bool val = true) { setClean(!val); }
-
-   public:
       Score(const Style&);
       ~Score();
 
@@ -472,8 +468,6 @@ class Score : public QObject {
          Segment**, QPointF* offset) const;
       Measure* pos2measure2(const QPointF&, int* tick, int* staffIdx, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
-
-      void addViewer(Viewer* v);
 
       void undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n);
       void undoChangeKeySig(Staff* staff, int tick, int o, int n);
@@ -533,8 +527,6 @@ class Score : public QObject {
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
       Rest* setRest(int tick,  int track, Fraction, bool useDots, Tuplet* tuplet);
 
-      Canvas* canvas() const;
-
       void select(Element* obj, SelectType, int staff);
       void deselect(Element* obj);
 
@@ -578,7 +570,7 @@ class Score : public QObject {
       void cmdRemoveKeySig(KeySig*);
       void cmdRemoveTimeSig(TimeSig*);
 
-      void setUpdateAll()              { updateAll = true; }
+      void setUpdateAll()              { _updateAll = true; }
       void setLayoutAll(bool val)      { layoutAll = val;  }
       void setLayoutStart(Measure* m)  { layoutStart = m;  }
       void addRefresh(const QRectF& r) { refresh |= r;     }
@@ -602,7 +594,6 @@ class Score : public QObject {
       void setNoteEntry(bool on);
 
       void colorItem(Element*);
-      void adjustCanvasPosition(Element* el, bool playBack);
       Element* dragObject() const    { return _dragObject; }
       void setDragObject(Element* e) { _dragObject = e; }
       void midiNoteReceived(int pitch, bool);
@@ -706,7 +697,6 @@ class Score : public QObject {
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
-      QList<Viewer*> getViewer()               { return viewer;      }
       int playPos() const                      { return _playPos;    }
       void setPlayPos(int val)                 { _playPos = val;     }
 
@@ -738,7 +728,7 @@ class Score : public QObject {
       MeasureBase* appendMeasure(int type);
       void addLyrics(int tick, int staffIdx, const QString&);
 
-      QList<Excerpt*>* excerpts() { return &_excerpts; }
+      QList<Excerpt*>* excerpts()  { return &_excerpts; }
       Score* createExcerpt(Excerpt*);
       MeasureBaseList* measures()  { return &_measures; }
 
@@ -791,15 +781,6 @@ class Score : public QObject {
       int prevState() const    { return _prevState; }
 
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
-
-      int magIdx() const      { return _magIdx; }
-      void setMagIdx(int val);
-      double mag()            { return _mag; }
-      void setMag(double d);
-      double xoff() const     { return _xoff; }
-      double yoff() const     { return _yoff; }
-      void setXoff(double v)  { _xoff = v;    }
-      void setYoff(double v)  { _yoff = v;    }
 
       ImagePath* addImage(const QString&);      // add image to imagePathList
       void moveBracket(int staffIdx, int srcCol, int dstCol);
@@ -860,8 +841,13 @@ class Score : public QObject {
       QByteArray buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);
-      QString tmpName() const           { return _tmpName;    }
-      void setTmpName(const QString& s) { _tmpName = s;       }
+      QString tmpName() const           { return _tmpName;      }
+      void setTmpName(const QString& s) { _tmpName = s;         }
+      void changeState(Viewer::State s) { emit stateChanged(s); }
+      void emitStartEdit(Element* e, int startGrip) { emit startEdit(e, startGrip); }
+      void emitAdjustCanvasPosition(Element* el, bool playBack) {
+            emit adjustCanvasPosition(el, playBack);
+            }
       };
 
 extern Score* gscore;

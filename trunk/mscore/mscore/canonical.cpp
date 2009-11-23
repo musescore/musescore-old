@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: rest.cpp 2080 2009-09-10 11:14:14Z wschweer $
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -36,30 +36,7 @@
 #include "measure.h"
 #include "durationtype.h"
 #include "tuplet.h"
-
-//---------------------------------------------------------
-//   CScore
-//    canonical (partial) score representation
-//
-//   buffer contains something like:
-//
-//    <Track no="0">
-//       <Chord>
-//          <len>1/4</len>
-//          </Chord>
-//       </Track>
-//---------------------------------------------------------
-
-class CScore {
-      QBuffer buffer;
-      Score* score;
-
-      Segment* write(Xml&, DurationElement*);
-
-   public:
-      CScore(Score* s, int track, Segment*);
-      const QByteArray& data() const { return buffer.data(); }
-      };
+#include "canonical.h"
 
 //---------------------------------------------------------
 //   write ChordRest

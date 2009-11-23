@@ -48,8 +48,8 @@ Navigator::Navigator(QWidget* parent)
 
 void MuseScore::showNavigator(bool visible)
       {
-      if (cs)
-            cs->canvas()->showNavigator(visible);
+      if (cv)
+            static_cast<Canvas*>(cv)->showNavigator(visible);
       }
 
 void Canvas::showNavigator(bool visible)

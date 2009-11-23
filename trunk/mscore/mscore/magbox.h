@@ -21,7 +21,7 @@
 #ifndef __MAGBOX_H__
 #define __MAGBOX_H__
 
-class Canvas;
+class Viewer;
 
 //---------------------------------------------------------
 //   magTable
@@ -66,7 +66,7 @@ class MagBox : public QComboBox {
       MagBox(QWidget* parent = 0);
       void setMag(double);
       void setMagIdx(int);
-      double getMag(Canvas*);
+      double getMag(Viewer*);
       };
 
 

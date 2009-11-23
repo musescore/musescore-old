@@ -191,11 +191,10 @@ void MuseScore::loadFile()
       if (fn.isEmpty())
             return;
       Score* score = new Score(defaultStyle);
-      score->addViewer(new Canvas);
       score->read(fn);
-      appendScore(score);
+      Viewer* viewer = appendScore(score);
       lastOpenPath = score->fileInfo()->path();
-      setCurrentScore(score);
+      setCurrentScore(viewer);
       writeSessionFile();
       }
 
@@ -581,7 +580,6 @@ void MuseScore::newFile()
       char ks = newWizard->keysig();
 
       Score* score = new Score(defaultStyle);
-      score->addViewer(new Canvas);
       score->setCreated(true);
 
       //
@@ -775,8 +773,7 @@ void MuseScore::newFile()
             score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
-      appendScore(score);
-      setCurrentScore(scoreList.back());
+      setCurrentScore(appendScore(score));
       }
 
 //---------------------------------------------------------
@@ -1036,13 +1033,6 @@ void Score::saveFile(QIODevice* f, bool autosave)
       Xml xml(f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-
-      if (_magIdx == MAG_FREE)
-            xml.tag("Mag", _mag);
-      else
-            xml.tag("MagIdx", _magIdx);
-      xml.tag("xoff", canvas()->xoffset() / DPMM);
-      xml.tag("yoff", canvas()->yoffset() / DPMM);
       write(xml, autosave);
       xml.etag();
       }
@@ -1209,21 +1199,19 @@ bool Score::read(QDomElement e)
                         _sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")
                         _tempomap->read(ee, _fileDivision);
-                  else if (tag == "Mag") {
-                        _mag = val.toDouble();
-                        _magIdx = MAG_FREE;
+                  else if (tag == "Mag")              // obsolete
+                        ;
+                  else if (tag == "MagIdx")           // obsolete
+                        ;
+                  else if (tag == "xoff") {           // obsolete
+                        //_xoff = val.toDouble();
+                        //if (_mscVersion >= 105)
+                        //      _xoff *= DPMM;
                         }
-                  else if (tag == "MagIdx")
-                        _magIdx = i;
-                  else if (tag == "xoff") {
-                        _xoff = val.toDouble();
-                        if (_mscVersion >= 105)
-                              _xoff *= DPMM;
-                        }
-                  else if (tag == "yoff") {
-                        _yoff = val.toDouble();
-                        if (_mscVersion >= 105)
-                              _yoff *= DPMM;
+                  else if (tag == "yoff") {           // obsolete
+                        //_yoff = val.toDouble();
+                        //if (_mscVersion >= 105)
+                        //      _yoff *= DPMM;
                         }
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
@@ -1678,6 +1666,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       else
           f = QImage::Format_ARGB32_Premultiplied;
 
+#if 0 // TODO?
       if (!canvas()->lassoRect().isEmpty() && !_printing) {
             // this is a special hack to export only the canvas lasso selection
             // into png (screen shot mode)
@@ -1713,7 +1702,9 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             canvas()->paintLasso(p, m);
             rv = printer.save(name, "png");
             }
-      else {
+      else
+#endif
+            {
             const QList<Page*>& pl = pages();
             int pages = pl.size();
 

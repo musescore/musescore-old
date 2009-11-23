@@ -182,10 +182,10 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
       if (sl->slurSegments()->size() != segments) {
             QList<SlurSegment*>* ss = sl->slurSegments();
             SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
-            score()->canvas()->setState(Canvas::NORMAL);
+            score()->changeState(Canvas::NORMAL);
             score()->endCmd();
             score()->startCmd();
-            score()->canvas()->startEdit(newSegment, curGrip);
+            score()->emitStartEdit(newSegment, curGrip);
             score()->setLayoutAll(true);
             }
       return true;

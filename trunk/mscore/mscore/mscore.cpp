@@ -287,6 +287,23 @@ void MuseScore::preferencesChanged()
                   canvas->setForeground(pm);
                   }
             }
+      for (int i = 0; i < tab2->count(); ++i) {
+            Canvas* canvas = static_cast<Canvas*>(tab2->widget(i));
+            if (preferences.bgUseColor)
+                  canvas->setBackground(preferences.bgColor);
+            else {
+                  QPixmap* pm = new QPixmap(preferences.bgWallpaper);
+                  canvas->setBackground(pm);
+                  }
+            if (preferences.fgUseColor)
+                  canvas->setForeground(preferences.fgColor);
+            else {
+                  QPixmap* pm = new QPixmap(preferences.fgWallpaper);
+                  if (pm == 0 || pm->isNull())
+                        printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
+                  canvas->setForeground(pm);
+                  }
+            }
 
       transportTools->setEnabled(!noSeq);
       playId->setEnabled(!noSeq);
@@ -341,6 +358,8 @@ MuseScore::MuseScore()
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
       pianorollEditor       = 0;
+      _splitScreen          = false;
+      _horizontalSplit      = true;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -377,13 +396,24 @@ MuseScore::MuseScore()
       mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
+      split = new QSplitter;
+
       tab = new QTabWidget;
       tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       tab->setTabsClosable(true);
       connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
       connect(tab, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
-      layout->addWidget(tab);
+      tab2 = new QTabWidget;
+      tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      tab2->setTabsClosable(true);
+      connect(tab2, SIGNAL(currentChanged(int)), SLOT(setCurrentScore2(int)));
+      connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
+
+      split->addWidget(tab);
+      split->addWidget(tab2);
+      tab2->setVisible(false);
+      layout->addWidget(split);
 
       searchDialog = 0;
 
@@ -734,6 +764,16 @@ MuseScore::MuseScore()
       menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
+      a = getAction("split-h");
+      a->setCheckable(true);
+      a->setChecked(false);
+      menuDisplay->addAction(a);
+      a = getAction("split-v");
+      a->setCheckable(true);
+      a->setChecked(false);
+      menuDisplay->addAction(a);
+
+      menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("show-invisible"));
       menuDisplay->addAction(getAction("show-frames"));
 
@@ -892,10 +932,8 @@ void MuseScore::selectScore(QAction* action)
       QString a = action->data().toString();
       if (!a.isEmpty()) {
             Score* score = new Score(defaultStyle);
-            score->addViewer(new Canvas);
             score->read(a);
-            appendScore(score);
-            setCurrentScore(score);
+            setCurrentScore(appendScore(score));
             }
       }
 
@@ -914,23 +952,34 @@ void MuseScore::selectionChanged(int state)
 //    append score to project list
 //---------------------------------------------------------
 
-void MuseScore::appendScore(Score* score)
+Viewer* MuseScore::appendScore(Score* score)
       {
-      if (score->getViewer().isEmpty())
-            score->addViewer(new Canvas);
+      Viewer* v;
 
       connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
       connect(score, SIGNAL(stateChanged(int)), SLOT(changeState(int)));
+      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+      connect(score, SIGNAL(posChanged(int)), SLOT(setPos(int)));
 
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
                   scoreList.insert(i, score);
                   tab->blockSignals(true);
-                  tab->insertTab(i, score->canvas(), score->name());
+                  tab2->blockSignals(true);
+
+                  Canvas* viewer = new Canvas;
+                  v = viewer;
+                  viewer->setScore(score);
+                  tab->insertTab(i, viewer, score->name());
+                  viewer = new Canvas;
+                  viewer->setScore(score);
+                  tab2->insertTab(i, viewer, score->name());
+
                   _undoGroup->addStack(score->undo());
                   tab->blockSignals(false);
-                  return;
+                  tab2->blockSignals(false);
+                  return v;
                   }
             }
 
@@ -938,8 +987,17 @@ void MuseScore::appendScore(Score* score)
       _undoGroup->addStack(score->undo());
 
       tab->blockSignals(true);
-      tab->addTab(score->canvas(), score->name());
+      tab2->blockSignals(true);
+      Canvas* viewer = new Canvas;
+      v = viewer;
+      viewer->setScore(score);
+      tab->addTab(viewer, score->name());
+      viewer = new Canvas;
+      viewer->setScore(score);
+      tab2->addTab(viewer, score->name());
       tab->blockSignals(false);
+      tab2->blockSignals(false);
+      return v;
       }
 
 //---------------------------------------------------------
@@ -962,6 +1020,10 @@ void MuseScore::updateTabNames()
       for (int i = 0; i < tab->count(); ++i) {
             Canvas* canvas = static_cast<Canvas*>(tab->widget(i));
             tab->setTabText(i, canvas->score()->name());
+            }
+      for (int i = 0; i < tab2->count(); ++i) {
+            Canvas* canvas = static_cast<Canvas*>(tab2->widget(i));
+            tab2->setTabText(i, canvas->score()->name());
             }
       }
 
@@ -1033,16 +1095,26 @@ void MuseScore::openRecentMenu()
 
 void MuseScore::setCurrentScore(int idx)
       {
-      setCurrentScore(scoreList[idx]);
+      QWidget* w = tab->widget(idx);
+      setCurrentScore(static_cast<Viewer*>(w));
+      }
+
+void MuseScore::setCurrentScore2(int idx)
+      {
+      QWidget* w = tab2->widget(idx);
+      setCurrentScore(static_cast<Viewer*>(w));
       }
 
 //---------------------------------------------------------
 //   setCurrentScore
 //---------------------------------------------------------
 
-void MuseScore::setCurrentScore(Score* score)
+void MuseScore::setCurrentScore(Viewer* viewer)
       {
-      bool enable = score != 0;
+      cv = viewer;
+      cs = viewer ? viewer->score() : 0;
+
+      bool enable = cs != 0;
       if (paletteBox)
             paletteBox->setEnabled(enable);
       transportTools->setEnabled(enable);
@@ -1067,33 +1139,31 @@ void MuseScore::setCurrentScore(Score* score)
             return;
             }
 
-      int idx = scoreList.indexOf(score);
-      if (tab->currentIndex() != idx) {
+      int idx = tab->indexOf(viewer);
+      if ((idx != -1) && (tab->currentIndex() != idx)) {
             tab->blockSignals(true);
             tab->setCurrentIndex(idx);
             tab->blockSignals(false);
             }
-      if (cs) {
-            cs->setXoff(cs->canvas()->xoffset());
-            cs->setYoff(cs->canvas()->yoffset());
-            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
-            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
+      else {
+            idx = tab2->indexOf(viewer);
+            if ((idx != -1) && (tab2->currentIndex() != idx)) {
+                  tab2->blockSignals(true);
+                  tab2->setCurrentIndex(idx);
+                  tab2->blockSignals(false);
+                  }
             }
-      cs = score;
+
       _undoGroup->setActiveStack(cs->undo());
-      cs->canvas()->setFocus(Qt::OtherFocusReason);
+      viewer->setFocus(Qt::OtherFocusReason);
 
       getAction("file-save")->setEnabled(cs->isSavable());
       getAction("show-invisible")->setChecked(cs->showInvisible());
       getAction("show-frames")->setChecked(cs->showFrames());
-      if (cs->magIdx() == MAG_FREE)
-            mag->setMag(cs->mag());
+      if (viewer->magIdx() == MAG_FREE)
+            mag->setMag(viewer->mag());
       else
-            mag->setMagIdx(cs->magIdx());
-      double m = getMag(cs->canvas());
-      cs->canvas()->setMag(m);
-      cs->canvas()->setOffset(cs->xoff(), cs->yoff());
-
+            mag->setMagIdx(viewer->magIdx());
 
       setWindowTitle("MuseScore: " + cs->name());
       if (seq)
@@ -1106,8 +1176,6 @@ void MuseScore::setCurrentScore(Score* score)
       QAction* a = getAction("concert-pitch");
       a->setChecked(cs->styleB(ST_concertPitch));
 
-      connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
       changeState(cs->state());
@@ -1142,17 +1210,15 @@ void MuseScore::dropEvent(QDropEvent* event)
       {
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
-            Score* lastScore = 0;
+            Viewer* viewer = 0;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score(defaultStyle);
-                        score->addViewer(new Canvas);
                         score->read(u.toLocalFile());
-                        appendScore(score);
-                        lastScore = score;
+                        viewer = appendScore(score);
                         }
                   }
-            setCurrentScore(lastScore);
+            setCurrentScore(viewer);
             event->acceptProposedAction();
             }
       }
@@ -1351,10 +1417,13 @@ void MuseScore::removeTab(int i)
       tab->blockSignals(true);
       tab->removeTab(i);
       tab->blockSignals(false);
+      tab2->blockSignals(true);
+      tab2->removeTab(i);
+      tab2->blockSignals(false);
       cs = 0;
       if (i >= (n-1))
             i = n-2;
-      setCurrentScore(scoreList.isEmpty() ? 0 : scoreList[i]);
+      setCurrentScore(scoreList.isEmpty() ? 0 : static_cast<Viewer*>(tab->widget(i)));
       writeSessionFile();
       if (!score->tmpName().isEmpty()) {
             QFile f(score->tmpName());
@@ -1433,7 +1502,7 @@ void setMscoreLocale(QString localeName)
 
 static void loadScores(const QStringList& argv)
       {
-      Score* currentScore = 0;
+      Viewer* currentViewer = 0;
       bool scoreCreated = false;
       if (argv.isEmpty()) {
             switch (preferences.sessionStart) {
@@ -1445,12 +1514,11 @@ static void loadScores(const QStringList& argv)
                         for (int i = 0; i < n; ++i) {
                               QString s = settings.value(QString("score-%1").arg(i),"").toString();
                               Score* score = new Score(defaultStyle);
-                              score->addViewer(new Canvas);
                               scoreCreated = true;
                               score->read(s);
-                              mscore->appendScore(score);
+                              Viewer* viewer = mscore->appendScore(score);
                               if (i == c)
-                                    currentScore = score;
+                                    currentViewer = viewer;
                               }
                         }
                         break;
@@ -1459,11 +1527,9 @@ static void loadScores(const QStringList& argv)
                         break;
                   case SCORE_SESSION:
                         Score* score = new Score(defaultStyle);
-                        score->addViewer(new Canvas);
                         scoreCreated = true;
                         score->read(preferences.startScore);
-                        mscore->appendScore(score);
-                        currentScore = score;
+                        currentViewer = mscore->appendScore(score);
                         break;
                   }
             }
@@ -1471,7 +1537,6 @@ static void loadScores(const QStringList& argv)
             foreach(const QString& name, argv) {
                   if (!name.isEmpty()) {
                         Score* score = new Score(defaultStyle);
-                        score->addViewer(new Canvas);
                         scoreCreated = true;
                         if (!score->read(name)) {
                               QMessageBox::warning(0,
@@ -1482,8 +1547,7 @@ static void loadScores(const QStringList& argv)
                                     QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
                               }
                         else
-                              mscore->appendScore(score);
-                        currentScore = score;
+                              currentViewer = mscore->appendScore(score);
                         }
                   }
             }
@@ -1491,15 +1555,13 @@ static void loadScores(const QStringList& argv)
       if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
             // start with empty score:
             Score* score = new Score(defaultStyle);
-            score->addViewer(new Canvas);
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
-            mscore->appendScore(score);
-            currentScore = score;
+            currentViewer = mscore->appendScore(score);
             }
       if (mscore->noScore())
-            currentScore = 0;
-      mscore->setCurrentScore(currentScore);
+            currentViewer = 0;
+      mscore->setCurrentScore(currentViewer);
       }
 
 //---------------------------------------------------------
@@ -1898,12 +1960,10 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "file-reload") {
             if (cs && !cs->created() && !checkDirty(cs)) {
                   Score* score = new Score(defaultStyle);
-                  score->addViewer(new Canvas);
                   score->read(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
-                  appendScore(score);
-                  setCurrentScore(score);
+                  setCurrentScore(appendScore(score));
                   }
             }
       else if (cmd == "file-close")
@@ -1970,6 +2030,30 @@ void MuseScore::cmd(QAction* a)
             helpBrowser();
       else if (cmd == "follow")
             preferences.followSong = a->isChecked();
+      else if (cmd == "split-h")
+            splitWindow(true);
+      else if (cmd == "split-v")
+            splitWindow(false);
+      else if (cmd == "mag") {
+            if (cv)
+                  cv->magCanvas();
+            }
+      else if (cmd == "page-prev") {
+            if (cv)
+                  cv->pagePrev();
+            }
+      else if (cmd == "page-next") {
+            if (cv)
+                  cv->pageNext();
+            }
+      else if (cmd == "page-top") {
+            if (cv)
+                  cv->pageTop();
+            }
+      else if (cmd == "page-end") {
+            if (cv)
+                  cv->pageEnd();
+            }
       else {
             if (cs)
                   cs->cmd(a);
@@ -2183,6 +2267,10 @@ void MuseScore::writeSettings()
       settings.setValue("maximized", isMaximized());
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
+      if (_splitScreen) {
+            settings.setValue("split", _horizontalSplit);
+            settings.setValue("splitter", split->saveState());
+            }
       settings.endGroup();
       if (paletteBox && paletteBox->dirty()) {
             QDir dir;
@@ -2209,6 +2297,22 @@ void MuseScore::readSettings()
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());
+      int n = settings.value("split", -1).toInt();
+      if (n == -1) {
+            _splitScreen = false;
+            }
+      else {
+            _horizontalSplit = n;
+            tab2->setVisible(true);
+            _splitScreen = true;
+            split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+#if 0
+            Score* s = scoreList[tab2->currentIndex()];
+            s->setLayoutAll(true);
+            s->end();
+#endif
+            split->restoreState(settings.value("splitter").toByteArray());
+            }
       settings.endGroup();
       }
 
@@ -2277,6 +2381,7 @@ void MuseScore::dirtyChanged(Score* score)
       if (score->dirty())
             label += "*";
       tab->setTabText(idx, label);
+      tab2->setTabText(idx, label);
       }
 
 //---------------------------------------------------------
@@ -2285,11 +2390,11 @@ void MuseScore::dirtyChanged(Score* score)
 
 void MuseScore::magChanged(int idx)
       {
-      if (cs) {
+      if (cv) {
             if (idx == MAG_FREE)
-                  cs->setMag(mag->getMag(cs->canvas()));
+                  cv->setMag(mag->getMag(cv));
             else
-                  cs->setMagIdx(idx);
+                  cv->setMagIdx(idx, mag->getMag(cv));
             }
       }
 
@@ -2299,11 +2404,11 @@ void MuseScore::magChanged(int idx)
 
 void MuseScore::incMag()
       {
-      if (cs) {
-            qreal _mag = cs->canvas()->mag() * 1.7;
+      if (cv) {
+            qreal _mag = cv->mag() * 1.7;
             if (_mag > 16.0)
                   _mag = 16.0;
-            setMag(_mag);
+            cv->setMag(_mag);
             }
       }
 
@@ -2313,11 +2418,11 @@ void MuseScore::incMag()
 
 void MuseScore::decMag()
       {
-      if (cs) {
-            qreal nmag = cs->canvas()->mag() / 1.7;
+      if (cv) {
+            qreal nmag = cv->mag() / 1.7;
             if (nmag < 0.05)
                   nmag = 0.05;
-            setMag(nmag);
+            cv->setMag(nmag);
             }
       }
 
@@ -2338,8 +2443,6 @@ void MuseScore::setMag(double d)
       {
       mag->setMag(d);
       mag->setMagIdx(MAG_FREE);
-      if (cs)
-            cs->setMag(d);
       }
 
 //---------------------------------------------------------
@@ -2437,11 +2540,9 @@ void MuseScore::handleMessage(const QString& message)
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(defaultStyle);
-      score->addViewer(new Canvas);
       score->read(message);
-      appendScore(score);
+      setCurrentScore(appendScore(score));
       lastOpenPath = score->fileInfo()->path();
-      setCurrentScore(score);
       }
 
 //---------------------------------------------------------
@@ -2592,7 +2693,7 @@ bool MuseScore::restoreSession()
                   QStringList sl  = version.split('.');
                   int v           = sl[0].toInt() * 100 + sl[1].toInt();
                   */
-                  Score* currentScore = 0;
+                  Viewer* currentViewer = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "Score") {
@@ -2616,13 +2717,11 @@ bool MuseScore::restoreSession()
                                                 delete score;
                                                 }
                                           else {
-                                                score->addViewer(new Canvas);
                                                 if (!name.isEmpty()) {
                                                       printf("set name <%s>\n", qPrintable(name));
                                                       score->setName(name);
                                                       }
-                                                appendScore(score);
-                                                currentScore = score;
+                                                currentViewer = appendScore(score);
                                                 score->setDirty(dirty);
                                                 score->setCreated(created);
                                                 }
@@ -2638,7 +2737,7 @@ bool MuseScore::restoreSession()
                               return false;
                               }
                         }
-                  setCurrentScore(currentScore);
+                  setCurrentScore(currentViewer);
                   }
             else {
                   domError(e);
@@ -2648,5 +2747,38 @@ bool MuseScore::restoreSession()
 
       f.close();
       return true;
+      }
+
+//---------------------------------------------------------
+//   splitWindow
+//---------------------------------------------------------
+
+void MuseScore::splitWindow(bool horizontal)
+      {
+      if (!_splitScreen) {
+            tab2->setVisible(true);
+            _splitScreen = true;
+            _horizontalSplit = horizontal;
+            split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+            Score* s = scoreList[tab2->currentIndex()];
+            s->setLayoutAll(true);
+            s->end();
+            }
+      else {
+            if (_horizontalSplit == horizontal) {
+                  _splitScreen = false;
+                  tab2->setVisible(false);
+                  }
+            else {
+                  _horizontalSplit = horizontal;
+                  QAction* a;
+                  if (_horizontalSplit)
+                        a = getAction("split-v");
+                  else
+                        a = getAction("split-h");
+                  a->setChecked(false);
+                  split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+                  }
+            }
       }
 

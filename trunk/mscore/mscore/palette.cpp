@@ -205,7 +205,7 @@ static void applyDrop(Score* score, Viewer* viewer, Element* target, Element* e)
             ne = target->drop(pt, pt, ne);
             if (ne)
                   score->select(ne, SELECT_SINGLE, 0);
-            score->canvas()->setDropTarget(0);     // acceptDrop sets dropTarget
+            viewer->setDropTarget(0);     // acceptDrop sets dropTarget
             }
       }
 
@@ -231,13 +231,13 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       Element* element    = cells[i]->element;
       if (element == 0)
             return;
-      Viewer* viewer      = score->canvas();
+      Viewer* viewer      = mscore->currentViewer();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
       score->startCmd();
       if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
-            foreach(Element* e, *el)
-                  applyDrop(score, viewer, e, element);
+      foreach(Element* e, *el)
+            applyDrop(score, viewer, e, element);
             }
       else if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
             int track1 = sel->staffStart * VOICES;

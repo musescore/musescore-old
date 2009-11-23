@@ -41,15 +41,10 @@ class Measure;
 //   Canvas
 //---------------------------------------------------------
 
-class Canvas : public QFrame, public Viewer {
+class Canvas : public Viewer {
       Q_OBJECT
 
-   public:
-      enum State {
-         NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
-         };
-
-   private:
+      QFocusFrame* focusFrame;
       Navigator* navigator;
       int level;
 
@@ -85,7 +80,6 @@ class Canvas : public QFrame, public Viewer {
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
-      virtual void updateAll(Score*) { update(); }
 
       void canvasPopup(const QPoint&);
       void objectPopup(const QPoint&, Element*);
@@ -101,13 +95,13 @@ class Canvas : public QFrame, public Viewer {
       virtual void mouseReleaseEvent(QMouseEvent*);
       virtual void mouseDoubleClickEvent(QMouseEvent*);
       virtual bool event(QEvent*);
-
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragLeaveEvent(QDragLeaveEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
-
       virtual void keyPressEvent(QKeyEvent*);
+      virtual void focusInEvent(QFocusEvent*);
+      virtual void focusOutEvent(QFocusEvent*);
 
       void contextItem(Element*);
 
@@ -125,13 +119,21 @@ class Canvas : public QFrame, public Viewer {
       const QList<const Element*> elementsAt(const QPointF&);
       void zoom(int step, const QPoint& pos);
 
+   private slots:
+      void setState(Viewer::State);
+      void moveCursor();
+
    public slots:
       void setViewRect(const QRectF&);
+      void dataChanged(const QRectF&);
+      bool startEdit(Element*, int startGrip);
 
    public:
       Canvas(QWidget* parent = 0);
       ~Canvas();
 
+      virtual void moveCursor(Segment*, int staffIdx);
+      virtual void setCursorOn(bool);
       void setBackground(QPixmap*);
       void setBackground(const QColor&);
       void setForeground(QPixmap*);
@@ -141,30 +143,12 @@ class Canvas : public QFrame, public Viewer {
 
       void modifyElement(Element* obj);
 
-      virtual void moveCursor();
-      virtual void moveCursor(Segment*, int staffIdx);
-      virtual void setCursorOn(bool);
       void clearScore();
 
-      virtual void dataChanged(const QRectF&);
-      void setState(State);
       State getState() const { return state; }
-      bool startEdit(Element*, int startGrip = -1);
       void setScore(Score* s);
 
-      qreal mag() const;
-      qreal xoffset() const;
-      qreal yoffset() const;
-      void setMag(qreal m);
-      void setOffset(qreal x, qreal y);
-      qreal xMag() const { return _matrix.m11(); }
-      qreal yMag() const { return _matrix.m22(); }
-
-      QRectF vGeometry() const {
-            return imatrix.mapRect(geometry());
-            }
-
-      QSizeF fsize() const;
+      virtual void setMag(qreal m);
       void showNavigator(bool visible);
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;

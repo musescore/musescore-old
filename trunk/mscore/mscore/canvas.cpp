@@ -62,7 +62,7 @@
 //---------------------------------------------------------
 
 Canvas::Canvas(QWidget* parent)
-   : QFrame(parent)
+   : Viewer(parent)
       {
       setAcceptDrops(true);
       setAttribute(Qt::WA_NoSystemBackground);
@@ -71,6 +71,8 @@ Canvas::Canvas(QWidget* parent)
       setAttribute(Qt::WA_KeyCompression);
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
+
+      focusFrame = 0;
 
       level            = 0;
       dragElement      = 0;
@@ -141,6 +143,13 @@ void Canvas::setScore(Score* s)
             navigator->setScore(_score);
             updateNavigator(false);
             }
+      connect(s, SIGNAL(moveCursor()),    SLOT(moveCursor()));
+      connect(s, SIGNAL(updateAll()),     SLOT(update()));
+      connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
+      connect(s, SIGNAL(stateChanged(Viewer::State)), SLOT(setState(Viewer::State)));
+      connect(s, SIGNAL(moveCursor()),             SLOT(moveCursor()));
+      connect(s, SIGNAL(startEdit(Element*,int)),  SLOT(startEdit(Element*,int)));
+      connect(s, SIGNAL(adjustCanvasPosition(Element*,bool)), SLOT(adjustCanvasPosition(Element*,bool)));
       }
 
 //---------------------------------------------------------
@@ -246,7 +255,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       if (cmd == "list")
             mscore->showElementContext(obj);
       else if (cmd == "edit") {
-            if (startEdit(obj))
+            if (startEdit(obj, -1))
                   return;
             }
       else if (cmd == "select-similar")
@@ -334,7 +343,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       else if (cmd == "color")
             _score->colorItem(obj);
       else if (cmd == "edit") {
-            if (startEdit(obj))
+            if (startEdit(obj, -1))
                   return;
             }
       else if (cmd == "edit-drumset") {
@@ -368,14 +377,14 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
 //   resizeEvent
 //---------------------------------------------------------
 
-void Canvas::resizeEvent(QResizeEvent*)
+void Canvas::resizeEvent(QResizeEvent* /*ev*/)
       {
-      int idx = score()->magIdx();
-      if (idx == MAG_PAGE_WIDTH || idx == MAG_PAGE || idx == MAG_DBL_PAGE) {
+      if (_magIdx == MAG_PAGE_WIDTH || _magIdx == MAG_PAGE || _magIdx == MAG_DBL_PAGE) {
             double m = mscore->getMag(this);
             setMag(m);
             }
 
+      update();
       if (navigator) {
             navigator->move(0, height() - navigator->height());
             updateNavigator(false);
@@ -604,7 +613,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       if (dragObject) {
             _score->startCmd();
             _score->setLayoutAll(false);
-            if (!startEdit(dragObject)) {
+            if (!startEdit(dragObject, -1)) {
                   _score->endCmd();
                   }
             }
@@ -1212,16 +1221,6 @@ void Canvas::setShadowNote(const QPointF& p)
       shadowNote->setHeadGroup(noteheadGroup);
       shadowNote->setHead(noteHead);
       shadowNote->setPos(pos.pos);
-      }
-
-//---------------------------------------------------------
-//   fsize
-//---------------------------------------------------------
-
-QSizeF Canvas::fsize() const
-      {
-      QSize s = size();
-      return QSizeF(s.width() * imatrix.m11(), s.height() * imatrix.m22());
       }
 
 //---------------------------------------------------------
@@ -2117,6 +2116,7 @@ void Canvas::zoom(int step, const QPoint& pos)
             _mag = 0.05;
 
       mscore->setMag(_mag);
+      setMag(_mag);
 
       QPointF p2 = imatrix.map(QPointF(pos));
       QPointF p3 = p2 - p1;
@@ -2134,10 +2134,9 @@ void Canvas::zoom(int step, const QPoint& pos)
       if ((dx > 0 || dy < 0) && navigatorVisible()) {
 	      QRect r(navigator->geometry());
       	r.translate(dx, dy);
-      	update(r);
             }
-      updateNavigator(false);
       update();
+      updateNavigator(false);
       }
 
 //---------------------------------------------------------
@@ -2403,48 +2402,32 @@ void Canvas::setMag(double nmag)
       _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m21(), nmag,
          _matrix.dx() * deltamag, _matrix.dy() * deltamag);
       imatrix = _matrix.inverted();
-
-      update();
-      updateNavigator(false);
       }
 
 //---------------------------------------------------------
-//   mag
+//   focusInEvent
 //---------------------------------------------------------
 
-qreal Canvas::mag() const
+void Canvas::focusInEvent(QFocusEvent* event)
       {
-      return _matrix.m11() *  DPI/PDPI;
+      mscore->setCurrentScore(static_cast<Viewer*>(this));
+
+      if (mscore->splitScreen()) {
+            if (!focusFrame)
+                  focusFrame = new QFocusFrame;
+            focusFrame->setWidget(static_cast<QWidget*>(parent()));
+            }
+      QWidget::focusInEvent(event);
       }
 
 //---------------------------------------------------------
-//   setOffset
+//   focusOutEvent
 //---------------------------------------------------------
 
-void Canvas::setOffset(qreal x, qreal y)
+void Canvas::focusOutEvent(QFocusEvent* event)
       {
-      double m = PDPI / DPI;
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), x * m, y * m);
-      imatrix = _matrix.inverted();
+      if (focusFrame)
+            focusFrame->setWidget(0);
+      QWidget::focusOutEvent(event);
       }
-
-//---------------------------------------------------------
-//   xoffset
-//---------------------------------------------------------
-
-qreal Canvas::xoffset() const
-      {
-      return _matrix.dx() * DPI / PDPI;
-      }
-
-//---------------------------------------------------------
-//   yoffset
-//---------------------------------------------------------
-
-qreal Canvas::yoffset() const
-      {
-      return _matrix.dy() * DPI / PDPI;
-      }
-
 

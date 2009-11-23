@@ -191,7 +191,8 @@ printf("sizeChanged\n");
 
 void TextTools::moveFocus()
       {
-      _textElement->score()->canvas()->setFocus();
+//TODO-S      _textElement->score()->canvas()->setFocus();
+//cannot work:      mscore->currentViewer()->setFocus();
       }
 
 //---------------------------------------------------------
@@ -318,7 +319,7 @@ void TextTools::showKeyboardClicked(bool val)
       {
       if (val) {
             if (textPalette == 0)
-                  textPalette = new TextPalette(_textElement->score()->canvas());
+                  textPalette = new TextPalette(mscore->currentViewer());
             textPalette->setText(_textElement);
             textPalette->show();
             }

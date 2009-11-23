@@ -2067,6 +2067,24 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","F"),
          QT_TRANSLATE_NOOP("action","Follow Song")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "split-h",
+         QT_TRANSLATE_NOOP("action","split window horizontal"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Split Horizontal"),
+         QT_TRANSLATE_NOOP("action","Split Horizontal")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "split-v",
+         QT_TRANSLATE_NOOP("action","split window vertical"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Split Vertical"),
+         QT_TRANSLATE_NOOP("action","Split Vertical")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

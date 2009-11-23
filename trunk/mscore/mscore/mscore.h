@@ -52,6 +52,7 @@ class ExcerptsDialog;
 class SynthControl;
 class PianorollEditor;
 class Staff;
+class Viewer;
 
 class QScriptEngineDebugger;
 
@@ -165,11 +166,14 @@ class MuseScore : public QMainWindow {
       UndoGroup* _undoGroup;
       QList<Score*> scoreList;
       Score* cs;              // current score
+      Viewer* cv;             // current viewer
 
       QQueue<Command> commandQueue;
 
-      QVBoxLayout* layout;
+      QVBoxLayout* layout;    // main window layout
+      QSplitter* split;
       QTabWidget* tab;
+      QTabWidget* tab2;
 
       QMenu* menuDisplay;
       QMenu* openRecent;
@@ -244,7 +248,8 @@ class MuseScore : public QMainWindow {
       QSignalMapper* pluginMapper;
 
       PianorollEditor* pianorollEditor;
-
+      bool _splitScreen;
+      bool _horizontalSplit;
 
       //---------------------
 
@@ -279,6 +284,7 @@ class MuseScore : public QMainWindow {
       void showMixer(bool);
       void showSynthControl(bool);
       void helpBrowser();
+      void splitWindow(bool horizontal);
 
       void removeSessionFile();
 
@@ -316,6 +322,7 @@ class MuseScore : public QMainWindow {
 
    public slots:
       void setCurrentScore(int);
+      void setCurrentScore2(int);
       void dirtyChanged(Score*);
       void changeState(int);
       void setPos(int tick);
@@ -328,7 +335,7 @@ class MuseScore : public QMainWindow {
       bool checkDirty(Score*);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
-      void appendScore(Score*);
+      Viewer* appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
 	void cmdAppendMeasures(int);
@@ -354,7 +361,7 @@ class MuseScore : public QMainWindow {
       void setDrumPalette(Palette* p) { drumPalette = p; }
       TextTools* textTools();
       void updateTabNames();
-      void setCurrentScore(Score*);
+      void setCurrentScore(Viewer*);
       QProgressBar* showProgressBar();
       void hideProgressBar();
       void updateRecentScores(Score*);
@@ -368,6 +375,8 @@ class MuseScore : public QMainWindow {
       PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
       void writeSessionFile();
       bool restoreSession();
+      Viewer* currentViewer() const { return cv; }
+      bool splitScreen() const { return _splitScreen; }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

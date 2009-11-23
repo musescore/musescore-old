@@ -135,14 +135,14 @@ void Score::endCmd()
 void Score::end()
       {
       if (noteEntryMode() && _state != STATE_PLAY)
-            canvas()->moveCursor();
+            emit moveCursor();
 
       if (layoutAll) {
-            updateAll = true;
+            _updateAll = true;
             layout();
             }
       else if (layoutStart) {
-            updateAll = true;
+            _updateAll = true;
             reLayout(layoutStart);
             }
 
@@ -150,15 +150,13 @@ void Score::end()
       double d = _spatium * .5;
       refresh.adjust(-d, -d, 2 * d, 2 * d);
 
-      foreach(Viewer* v, viewer) {
-            if (updateAll)
-                  v->updateAll(this);
-            else
-                  v->dataChanged(refresh);
-            }
+      if (_updateAll)
+            emit updateAll();
+      else
+            emit dataChanged(refresh);
       refresh    = QRectF();
       layoutAll  = false;
-      updateAll  = false;
+      _updateAll  = false;
       layoutStart = 0;
       if (!noteEntryMode())
             setPadState();
@@ -1023,7 +1021,7 @@ printf("List:\n");
             makeGap(cr1, f2, tuplet);
 
             if (cr->type() == REST) {
-				  
+
                   Rest* r = setRest(tick, track, f2, (d.dots() > 0), tuplet);
                   if (first) {
                         select(r, SELECT_SINGLE, 0);
@@ -1112,8 +1110,8 @@ void Score::cmdAddChordName()
 
       layoutAll = true;
       select(s, SELECT_SINGLE, 0);
-      canvas()->startEdit(s);
-      adjustCanvasPosition(s, false);
+      emit startEdit(s, -1);
+      emit adjustCanvasPosition(s, false);
       }
 
 //---------------------------------------------------------
@@ -1269,7 +1267,7 @@ void Score::cmdAddText(int subtype)
             undoAddElement(s);
             layoutAll = true;
             select(s, SELECT_SINGLE, 0);
-            canvas()->startEdit(s);
+            emit startEdit(s, -1);
             }
       else
             endCmd();
@@ -1798,7 +1796,7 @@ void Score::cmd(const QAction* a)
                   cmdCopy();
                   return;
                   }
-            canvas()->setState(Canvas::NORMAL);  //calls endEdit()
+            emit stateChanged(Canvas::NORMAL);  //calls endEdit()
             endCmd();
             }
       if (cmd == "print")
@@ -1820,8 +1818,6 @@ void Score::cmd(const QAction* a)
                   setNoteEntry(false);
             end();
             }
-      else if (cmd == "mag")
-            canvas()->magCanvas();
       else if (cmd == "play")
             seq->start();
       else if (cmd == "repeat")
@@ -1848,12 +1844,12 @@ void Score::cmd(const QAction* a)
             }
       else if (cmd == "show-invisible") {
             setShowInvisible(getAction(cmd.toLatin1().data())->isChecked());
-            updateAll = true;
+            _updateAll = true;
             end();
             }
       else if (cmd == "show-frames") {
             setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
-            updateAll = true;
+            _updateAll = true;
             end();
             }
       else {
@@ -1887,22 +1883,6 @@ void Score::cmd(const QAction* a)
             else if (cmd == "append-vbox") {
 		      MeasureBase* mb = appendMeasure(VBOX);
                   select(mb, SELECT_SINGLE, 0);
-                  }
-            else if (cmd == "page-prev") {
-                  pagePrev();
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "page-next") {
-                  pageNext();
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "page-top") {
-                  pageTop();
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "page-end") {
-                  pageEnd();
-                  setLayoutAll(false);
                   }
             else if (cmd == "add-slur")
                   cmdAddSlur();
@@ -2277,7 +2257,7 @@ void Score::cmd(const QAction* a)
                   Element* e = selection()->element();
                   if (e) {
                         setLayoutAll(false);
-                        canvas()->startEdit(e);
+                        emit startEdit(e, -1);
                         }
                   }
             else if (cmd == "reset-positions")
@@ -2820,7 +2800,7 @@ void Score::moveInputPos(Segment* s)
             el = s->element(_is.track / VOICES * VOICES);
       if (el->type() == CHORD)
             el = static_cast<Chord*>(el)->upNote();
-      adjustCanvasPosition(el, false);
+      emit adjustCanvasPosition(el, false);
       }
 
 //---------------------------------------------------------
@@ -2897,7 +2877,7 @@ void Score::move(const QString& cmd)
                   mscore->play(static_cast<Note*>(el));
                   }
             select(el, SELECT_SINGLE, 0);
-            adjustCanvasPosition(el, false);
+            emit adjustCanvasPosition(el, false);
             }
       }
 
@@ -2950,7 +2930,7 @@ void Score::selectMove(const QString& cmd)
                   el = downStaff(cr);
             if (el) {
                   select(el, SELECT_RANGE, el->staffIdx());
-                  adjustCanvasPosition(el, false);
+                  emit adjustCanvasPosition(el, false);
                   }
             }
       }

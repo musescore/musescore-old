@@ -253,11 +253,7 @@ Score::Score(const Style& s)
       _needLayout     = false;
       startLayout     = 0;
       _undo           = new UndoStack();
-      _magIdx         = MAG_100;
-      _mag            = 1.0;
-      _xoff           = 0.0;
-      _yoff           = 0.0;
-      _repeatList       = new RepeatList(this);
+      _repeatList     = new RepeatList(this);
       _style  = s;
       _swingRatio     = 0.0;
       // deep copy of defaultTextStyles:
@@ -265,7 +261,7 @@ Score::Score(const Style& s)
             _textStyles.append(new TextStyle(defaultTextStyles[i]));
 
       _created        = false;
-      updateAll       = false;
+      _updateAll      = false;
       layoutStart     = 0;
       layoutAll       = false;
       keyState        = 0;
@@ -311,31 +307,6 @@ Score::~Score()
       delete _sigmap;
       delete _selection;
       delete _repeatList;
-      }
-
-//---------------------------------------------------------
-//   addViewer
-//---------------------------------------------------------
-
-void Score::addViewer(Viewer* v)
-      {
-      viewer.push_back(v);
-      if (viewer.size() == 1) {
-            Canvas* c = canvas();
-            c->setScore(this);
-            setPaintDevice(c);
-            }
-      }
-
-//---------------------------------------------------------
-//   canvas
-//---------------------------------------------------------
-
-Canvas* Score::canvas() const
-      {
-      if (viewer.isEmpty())
-            return 0;
-      return static_cast<Canvas*>(viewer[0]);
       }
 
 //---------------------------------------------------------
@@ -457,7 +428,7 @@ void Score::write(Xml& xml, bool autosave)
       xml.curTrack = -1;
       if (!autosave && editObject) {                          // in edit mode?
             endCmd();
-            canvas()->setState(Canvas::NORMAL);  //calls endEdit()
+            emit stateChanged(Canvas::NORMAL);
             }
       _style.save(xml, true);      // save only differences to buildin style
       for (int i = 0; i < TEXT_STYLES; ++i) {
@@ -1075,7 +1046,7 @@ void Score::startEdit(Element* element)
       if (element->isTextB()) {
             editObject = element;
             TextB* t = static_cast<TextB*>(editObject);
-            canvas()->setEditText(t);
+            emit setEditText(t);
             mscore->textTools()->setText(t);
             mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
             mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
@@ -1090,7 +1061,7 @@ void Score::startEdit(Element* element)
             select(editObject, SELECT_SINGLE, 0);
             removeBsp(origEditObject);
             }
-      updateAll = true;
+      _updateAll = true;
       end();
       }
 
@@ -1199,7 +1170,7 @@ void Score::setNoteEntry(bool val)
 
             select(el, SELECT_SINGLE, 0);
             _is.noteEntryMode = true;
-            canvas()->moveCursor();
+            emit moveCursor();
             _is.rest = false;
             getAction("pad-rest")->setChecked(false);
             //
@@ -1215,9 +1186,9 @@ void Score::setNoteEntry(bool val)
                   static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
                   _is.slur = 0;
                   }
-            canvas()->moveCursor();
+            emit moveCursor();
             }
-      canvas()->setState(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
+      emit stateChanged(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
       setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
       }
 
@@ -1265,7 +1236,7 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
 void Score::setShowInvisible(bool v)
       {
       _showInvisible = v;
-      updateAll      = true;
+      _updateAll     = true;
       end();
       }
 
@@ -1276,7 +1247,7 @@ void Score::setShowInvisible(bool v)
 void Score::setShowFrames(bool v)
       {
       _showFrames = v;
-      updateAll   = true;
+      _updateAll  = true;
       end();
       }
 
@@ -1843,28 +1814,6 @@ void Score::setState(int s)
       }
 
 //---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void Score::setMag(double d)
-      {
-      _magIdx = MAG_FREE;
-      _mag    = d;
-      canvas()->setMag(_mag);
-      }
-
-//---------------------------------------------------------
-//   setMagIdx
-//---------------------------------------------------------
-
-void Score::setMagIdx(int idx)
-      {
-      _magIdx = idx;
-      double mag = mscore->getMag(canvas());
-      canvas()->setMag(mag);
-      }
-
-//---------------------------------------------------------
 //   checkHasMeasures
 //---------------------------------------------------------
 
@@ -2159,7 +2108,7 @@ void Score::search(const QString& s)
       for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
             if (++i < n)
                   continue;
-            adjustCanvasPosition(measure, true);
+            emit adjustCanvasPosition(measure, true);
             int tracks = nstaves() * VOICES;
             for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegChordRest)
@@ -2178,7 +2127,7 @@ void Score::search(const QString& s)
                   if (track != tracks)
                         break;
                   }
-            updateAll = true;
+            _updateAll = true;
             end();
             break;
             }

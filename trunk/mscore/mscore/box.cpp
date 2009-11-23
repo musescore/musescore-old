@@ -349,7 +349,7 @@ void HBox::propertyAction(const QString& cmd)
             s->setParent(this);
             score()->undoAddElement(s);
             score()->select(s, SELECT_SINGLE, 0);
-            score()->canvas()->startEdit(s);
+            score()->emitStartEdit(s, -1);
             score()->setLayoutAll(true);
             }
       }
@@ -457,7 +457,7 @@ void VBox::propertyAction(const QString& cmd)
             score()->undoAddElement(s);
             score()->select(s, SELECT_SINGLE, 0);
             if (s->type() == TEXT)
-                  score()->canvas()->startEdit(s);
+                  score()->emitStartEdit(s, -1);
             score()->setLayoutAll(true);
             }
       getAction("title-text")->blockSignals(false);

@@ -670,7 +670,7 @@ void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
             //
             if ((lastNote == 0) && !el->isEmpty()) {
                   SlurSegment* ss = el->front();
-                  canvas()->startEdit(ss);
+                  emit startEdit(ss, -1);
                   }
             }
       }
@@ -1310,7 +1310,7 @@ void Score::chordTab(bool back)
             return;
             }
 
-      canvas()->setState(Canvas::NORMAL);
+      emit stateChanged(Canvas::NORMAL);
       endCmd();
 
       startCmd();
@@ -1335,8 +1335,8 @@ void Score::chordTab(bool back)
             }
 
       select(cn, SELECT_SINGLE, 0);
-      canvas()->startEdit(cn);
-      adjustCanvasPosition(cn, false);
+      emit startEdit(cn, -1);
+      emit adjustCanvasPosition(cn, false);
       ((Harmony*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
@@ -1357,11 +1357,11 @@ void Score::changeLineSegment(bool last)
       else
             newSegment = segment->line()->lineSegments().front();
 
-      canvas()->setState(Canvas::NORMAL);
+      emit stateChanged(Canvas::NORMAL);
       endCmd();
 
       startCmd();
-      canvas()->startEdit(newSegment, -2);      // do not change curGrip
+      emit startEdit(newSegment, -2);      // do not change curGrip
       layoutAll = true;
       }
 
@@ -1395,7 +1395,7 @@ void Score::addLyrics()
       lyrics->setNo(no);
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
+      emit startEdit(lyrics, -1);
       setLayoutAll(true);
       }
 
@@ -1628,7 +1628,7 @@ void Score::changeVoice(int voice)
 
       _is._segment = _is._segment->measure()->firstCRSegment();
       emit posChanged(_is._segment->tick());
-      updateAll = true;
+      _updateAll = true;
       }
 
 //---------------------------------------------------------
