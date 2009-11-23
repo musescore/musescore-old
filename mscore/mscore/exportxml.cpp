@@ -1590,6 +1590,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   xml.tagE("fermata type=\"inverted\"");
                   }
             }
+
       // then the attributes whose elements are children of <articulations>
       Articulations articulations;
       for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
@@ -1659,12 +1660,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   }
             }
             if (hasBreathMark(chord)) {
-                  printf("found breath-mark for chord %p\n", chord);
                   notations.tag(xml);
                   articulations.tag(xml);
                   xml.tagE("breath-mark");
                   }
             articulations.etag(xml);
+
       // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
       for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
@@ -1751,6 +1752,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   }
             wavyLineStartStop(chord, notations, ornaments, xml);
             ornaments.etag(xml);
+
       // and finally the attributes whose elements are children of <technical>
       for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
@@ -3386,26 +3388,29 @@ foreach(Element* el, *(score->gel())) {
 
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
-                            	  QList<Element*> list;
+                                    QList<Element*> list;
 
-                            	  foreach(Element* he, *m->el()) {
+                                    foreach(Element* he, *m->el()) {
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
                                              && (he->tick() == el->tick())) {
-                                                 list << he;
+                                                list << he;
                                                 }
                                           }
 
-								  qSort(list.begin(), list.end(), elementRighter);
+                                    qSort(list.begin(), list.end(), elementRighter);
 
-								  foreach (Element* hhe, list){
-								        attr.doAttr(xml, false);
-									    harmony((Harmony*)hhe);
-									 }
-							       }
+                                    foreach (Element* hhe, list){
+                                          attr.doAttr(xml, false);
+                                          harmony((Harmony*)hhe);
+                                          }
+                                    }
 
+                              // generate backup or forward to the start time of the element
+                              // but not for breath, which has the same start time as the
+                              // previous note, while tick is already at the end of that note
                               if (tick != el->tick()) {
                                     attr.doAttr(xml, false);
-                                    moveToTick(el->tick());
+                                    if (el->type() != BREATH) moveToTick(el->tick());
                                     }
 /*
                               if (el->isChordRest()) {
@@ -3480,6 +3485,9 @@ foreach(Element* el, *(score->gel())) {
                                           // TODO: print barline only if middle
                                           // if (el->subtype() != START_REPEAT)
                                           //       bar((BarLine*) el);
+                                          break;
+                                    case BREATH:
+                                          // ignore, already exported as note articulation
                                           break;
 
                                     default:
