@@ -362,6 +362,11 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
+        <notations>
+          <articulations>
+            <breath-mark/>
+            </articulations>
+          </notations>
         </note>
       <note>
         <pitch>

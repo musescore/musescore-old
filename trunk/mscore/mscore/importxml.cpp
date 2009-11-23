@@ -67,6 +67,7 @@
 #include "articulation.h"
 #include "arpeggio.h"
 #include "glissando.h"
+#include "breath.h"
 #include "al/tempo.h"
 
 //---------------------------------------------------------
@@ -2165,6 +2166,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool trillMark = false;
       QString strongAccentType;
       bool accent = false;
+      bool breathmark = false;
       bool staccatissimo = false;
       bool staccato = false;
       bool tenuto = false;
@@ -2419,6 +2421,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     if (eee.tagName() == "accent")
                                           accent = true;
+                                    else if (eee.tagName() == "breath-mark")
+                                          breathmark = true;
                                     else if (eee.tagName() == "staccatissimo")
                                           staccatissimo = true;
                                     else if (eee.tagName() == "staccato")
@@ -2803,6 +2807,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Articulation* na = new Articulation(score);
             na->setSubtype(DownbowSym);
             cr->add(na);
+            }
+      if (breathmark) {
+            Breath* b = new Breath(score);
+            b->setTick(tick);
+            b->setTrack((staff + relStaff) * VOICES + voice);
+            Segment* seg = measure->getSegment(Segment::SegBreath, tick);
+            seg->add(b);
             }
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
