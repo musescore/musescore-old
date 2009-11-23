@@ -30,8 +30,13 @@ class TextB;
 //   Viewer
 //---------------------------------------------------------
 
-class Viewer {
+class Viewer : public QWidget {
+      Q_OBJECT
 
+   public:
+      enum State {
+         NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
+         };
    protected:
       Score* _score;
 
@@ -54,25 +59,40 @@ class Viewer {
       TextB* _editText;
 
       QMatrix _matrix, imatrix;
-      int _magIdx();
+      int _magIdx;
+
+   public slots:
+      void adjustCanvasPosition(Element* el, bool playBack);
+
 
    public:
-      Viewer();
+      Viewer(QWidget* parent = 0);
       virtual ~Viewer() {}
       void setScore(Score* s) { _score = s; }
       Score* score() const    { return _score; }
-      virtual void dataChanged(const QRectF&) = 0;
-
-      virtual void updateAll(Score*) = 0;
       void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
-      const QMatrix& matrix() const { return _matrix; }
-      virtual void moveCursor() {}
-      virtual void moveCursor(Segment*, int) {}
+      const QMatrix& matrix() const              { return _matrix; }
+      void setEditText(TextB* t)                 { _editText = t;      }
+      TextB* editText() const                    { return _editText;   }
+      virtual void magCanvas()                   {}
+      qreal mag() const;
+      int magIdx() const                         { return _magIdx; }
+      void setMagIdx(int idx, double mag);
+      virtual void setMag(double) = 0;
+      qreal xMag() const                         { return _matrix.m11(); }
+      qreal yMag() const                         { return _matrix.m22(); }
+      qreal xoffset() const;
+      qreal yoffset() const;
+      void setOffset(qreal x, qreal y);
+      QSizeF fsize() const;
       virtual void setCursorOn(bool) {}
-      void setEditText(TextB* t)              { _editText = t;      }
-      TextB* editText() const                 { return _editText;   }
+      virtual void moveCursor(Segment*, int) {}
+      void pageNext();
+      void pagePrev();
+      void pageTop();
+      void pageEnd();
       };
 
 #endif

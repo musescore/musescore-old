@@ -340,8 +340,7 @@ void MuseScore::seqStarted()
       if (cs->state() != STATE_PLAY)  // don't get stuck in play mode
            cs->setPrevState(cs->state());
       cs->setState(STATE_PLAY);
-      foreach(Viewer* v, cs->getViewer())
-            v->setCursorOn(true);
+      cv->setCursorOn(true);
       cs->end();
       }
 
@@ -359,8 +358,7 @@ void MuseScore::seqStopped()
       bool cursorOn = false;
       if (cs->state() == STATE_NOTE_ENTRY)
             cursorOn = true;
-      foreach(Viewer* v, cs->getViewer())
-            v->setCursorOn(cursorOn);
+      cv->setCursorOn(cursorOn);
       cs->setLayoutAll(false);
       cs->setUpdateAll();
       cs->end();
@@ -749,9 +747,8 @@ void Seq::heartBeat()
                   }
             }
       if (note) {
-            foreach(Viewer* v, cs->getViewer())
-                  v->moveCursor(note->chord()->segment(), -1);
-            cs->adjustCanvasPosition(note, true);
+            mscore->currentViewer()->moveCursor(note->chord()->segment(), -1);
+            cs->emitAdjustCanvasPosition(note, true);
             curTick  = note->chord()->tick();
             curUtick = guiPos.key();
             if (pp)
@@ -816,8 +813,7 @@ void Seq::seek(int tick)
             return;
       Segment* seg = cs->tick2segment(tick);
       if (seg) {
-            foreach(Viewer* v, cs->getViewer())
-                  v->moveCursor(seg, -1);
+            mscore->currentViewer()->moveCursor(seg, -1);
             }
       cs->setPlayPos(tick);
       cs->end();

@@ -110,7 +110,7 @@ QString appStyleSheet()
       "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#relTempo   { font-size: 10pt; font-family: \"San Serif\" }\n"
-      "AboutBoxDialog QLabel#titleLabel    { font-size: 28pt  }\n")
+      "AboutBoxDialog QLabel#titleLabel { font-size: 28pt  }\n")
          .arg(fff.pointSize())
          .arg(fff.family());
       }

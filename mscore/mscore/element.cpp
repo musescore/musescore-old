@@ -1024,7 +1024,7 @@ Cursor::Cursor(Score* s, Viewer* v)
 
 QRectF Cursor::bbox() const
       {
-      double w  = 3.0 / static_cast<Viewer*>(score()->canvas())->matrix().m11();
+      double w  = 3.0 / viewer->matrix().m11();
       _bbox = QRectF(0.0, 0.0, w, _h);
       return _bbox;
       }

@@ -292,7 +292,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             refresh |= _selection->deselectAll(this);
             if (e == 0) {
                   selState = SEL_NONE;
-                  updateAll = true;
+                  _updateAll = true;
                   }
             else {
                   if (e->type() == MEASURE) {
@@ -337,7 +337,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         select(0, SELECT_SINGLE, 0);
                         return;
                         }
-                  updateAll = true;
+                  _updateAll = true;
                   selState = SEL_SYSTEM;
                   updateSelectedElements(selState);
                   //_is.duration.setVal(Duration::V_INVALID);
@@ -616,7 +616,7 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
                   emit selectionChanged(int(_selection->state()));
                   }
             }
-      updateAll = true;
+      _updateAll = true;
       }
 
 //---------------------------------------------------------

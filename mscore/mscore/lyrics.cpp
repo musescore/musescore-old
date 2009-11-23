@@ -168,14 +168,14 @@ void Score::lyricsUpDown(bool up, bool end)
                   return;
             }
 
-      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
+      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
       startCmd();
       lyrics = ll->value(verse);
 
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
-      adjustCanvasPosition(lyrics, false);
+      emit startEdit(lyrics, -1);
+      emit adjustCanvasPosition(lyrics, false);
       if (end)
             ((Lyrics*)editObject)->moveCursorToEnd();
       else
@@ -216,7 +216,7 @@ void Score::lyricsTab(bool back, bool end)
       if (nextSegment == 0)
             return;
 
-      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
+      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
       // search previous lyric
@@ -269,8 +269,8 @@ void Score::lyricsTab(bool back, bool end)
       undoAddElement(lyrics);
 
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
-      adjustCanvasPosition(lyrics, false);
+      emit startEdit(lyrics, -1);
+      emit adjustCanvasPosition(lyrics, false);
       if (end)
             ((Lyrics*)editObject)->moveCursorToEnd();
       else
@@ -291,7 +291,7 @@ void Score::lyricsMinus()
       Segment* segment = (Segment*)(lyrics->parent());
       int verse        = lyrics->no();
 
-      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
+      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
       // search next chord
@@ -351,8 +351,8 @@ void Score::lyricsMinus()
       undoAddElement(lyrics);
 
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
-      adjustCanvasPosition(lyrics, false);
+      emit startEdit(lyrics, -1);
+      emit adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
@@ -371,7 +371,7 @@ void Score::lyricsUnderscore()
       int verse        = lyrics->no();
       int endTick      = lyrics->tick();
 
-      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
+      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
       // search next chord
@@ -438,8 +438,8 @@ void Score::lyricsUnderscore()
       undoAddElement(lyrics);
 
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
-      adjustCanvasPosition(lyrics, false);
+      emit startEdit(lyrics, -1);
+      emit adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
@@ -454,7 +454,7 @@ void Score::lyricsReturn()
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
 
-      canvas()->setState(Canvas::NORMAL);
+      emit stateChanged(Canvas::NORMAL);
       endCmd();
 
       startCmd();
@@ -468,8 +468,8 @@ void Score::lyricsReturn()
       lyrics->setNo(oldLyrics->no() + 1);
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
-      canvas()->startEdit(lyrics);
-      adjustCanvasPosition(lyrics, false);
+      emit startEdit(lyrics, -1);
+      emit adjustCanvasPosition(lyrics, false);
 
       setLayoutAll(true);
       }
