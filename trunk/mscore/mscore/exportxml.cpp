@@ -1860,10 +1860,17 @@ static Chord* nextChord(Chord* ch)
 
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
-//      printf("ExportMusicXml::chord() oldtick=%d", tick);
-      tick += chord->ticks();
-//      printf(" newtick=%d\n", tick);
+      printf("ExportMusicXml::chord() oldtick=%d\n", tick);
       NoteList* nl = chord->noteList();
+      NoteType gracen = nl->begin()->second->noteType();
+      bool grace = (gracen == NOTE_ACCIACCATURA
+                 || gracen == NOTE_APPOGGIATURA
+                 || gracen == NOTE_GRACE4
+                 || gracen == NOTE_GRACE16
+                 || gracen == NOTE_GRACE32);
+      printf("notetype=%d grace=%d\n", gracen, grace);
+      if (!grace) tick += chord->ticks();
+      printf(" newtick=%d\n", tick);
 
       PageFormat* pf = score->pageFormat();
       const double pageHeight  = getTenthsFromInches(pf->height());
@@ -1877,21 +1884,23 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             QString noteTag = QString("note");
 
             if (pf && (!converterMode || score->defaultsRead()) ) {
-                double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
-                double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
-                double noteX = getTenthsFromDots(note->canvasPos().x());
-                double noteY = pageHeight - getTenthsFromDots(note->canvasPos().y());
+                  double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
+                  double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
+                  double noteX = getTenthsFromDots(note->canvasPos().x());
+                  double noteY = pageHeight - getTenthsFromDots(note->canvasPos().y());
 
-                noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
-                noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
-            }
+                  noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
+                  noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
+                  }
 
             if(! note->visible() ){
-              noteTag += QString(" print-object=\"no\"");
-            }
+                  noteTag += QString(" print-object=\"no\"");
+                  }
 
             xml.stag(noteTag);
 
+            if (grace)
+                  xml.tagE("grace");
             if (i != nl->begin())
                   xml.tagE("chord");
 
@@ -1900,30 +1909,32 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             int octave;
             char buffer[2];
 
-            if(!useDrumset){
-                pitch2xml(note, c, alter, octave);
-                buffer[0] = c;
-                buffer[1] = 0;
-                // pitch
-                xml.stag("pitch");
-                xml.tag("step", QString(buffer));
-                if (alter)
-                      xml.tag("alter", alter);
-                xml.tag("octave", octave);
-                xml.etag();
-            }else{
-                // unpitched
-                unpitch2xml(note, c, octave);
-                buffer[0] = c;
-                buffer[1] = 0;
-                xml.stag("unpitched");
-                xml.tag("display-step", QString(buffer));
-                xml.tag("display-octave", octave);
-                xml.etag();
-            }
+            if (!useDrumset) {
+                  pitch2xml(note, c, alter, octave);
+                  buffer[0] = c;
+                  buffer[1] = 0;
+                  // pitch
+                  xml.stag("pitch");
+                  xml.tag("step", QString(buffer));
+                  if (alter)
+                        xml.tag("alter", alter);
+                  xml.tag("octave", octave);
+                  xml.etag();
+                  }
+            else {
+                  // unpitched
+                  unpitch2xml(note, c, octave);
+                  buffer[0] = c;
+                  buffer[1] = 0;
+                  xml.stag("unpitched");
+                  xml.tag("display-step", QString(buffer));
+                  xml.tag("display-octave", octave);
+                  xml.etag();
+                  }
 
             // duration
-            xml.tag("duration", note->chord()->tickLen() / div);
+            if (!grace)
+                  xml.tag("duration", note->chord()->tickLen() / div);
 
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
