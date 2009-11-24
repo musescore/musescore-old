@@ -55,6 +55,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QDockWidget>
 #include <QtGui/QStackedWidget>
+#include <QtGui/QStackedLayout>
 #include <QtGui/QListWidget>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QMessageBox>

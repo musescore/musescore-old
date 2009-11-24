@@ -903,9 +903,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall
-----------
-100 cent = 1 semitone intervall</extracomment>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>cent</translation>
     </message>
     <message>
@@ -914,9 +912,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -953,16 +949,12 @@ velocity type</extracomment>
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>uživatel</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>posun</translation>
     </message>
     <message>
@@ -995,6 +987,10 @@ velocity type</extracomment>
     <message>
         <source>SlurBack:</source>
         <translation>Legatový oblouček zpět:</translation>
+    </message>
+    <message>
+        <source>StaffMove:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1418,12 +1414,6 @@ nepodařilo se: </translation>
     <message>
         <source>sp</source>
         <extracomment>spatium unit
-----------
-space unit
-----------
-space unit
-----------
-spatium unit
 ----------
 space unit
 ----------
@@ -3412,6 +3402,11 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <source>Grace Notes</source>
         <translation>Noty ozdob</translation>
     </message>
+    <message>
+        <source>Last Session ended abnormal.
+Restore Session?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3942,10 +3937,6 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <translation>Vybrat pozadí</translation>
     </message>
     <message>
-        <source>MuseScore file (*.msc);;All (*)</source>
-        <translation>Soubor MuseScore (*.msc);;Vše (*)</translation>
-    </message>
-    <message>
         <source>Choose Working Directory</source>
         <translation>Vybrat pracovní adresář</translation>
     </message>
@@ -3960,6 +3951,10 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
     <message>
         <source>Instrument List (*.xml)</source>
         <translation>Seznam nástrojů (*.xml)</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4330,18 +4325,6 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
         <translation>Zavést</translation>
     </message>
     <message>
-        <source>Style used for import</source>
-        <translation>Styl používaný pro zavedení</translation>
-    </message>
-    <message>
-        <source>build in style</source>
-        <translation>Vestavěný styl</translation>
-    </message>
-    <message>
-        <source>use style file:</source>
-        <translation>Používat soubor se stylem:</translation>
-    </message>
-    <message>
         <source>Export</source>
         <translation>Vyvést</translation>
     </message>
@@ -4467,9 +4450,7 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter
-----------
-millimeter</extracomment>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4511,6 +4492,18 @@ millimeter</extracomment>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Nahradit (C) symbolem pro autorské právo © (týká se pouze textu v oddíle s autorským právem - copyright)</translation>
+    </message>
+    <message>
+        <source>Style Used for Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use style file:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5214,16 +5207,12 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate
-----------
-do not translate</extracomment>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging
-----------
-do not translate - only for debugging</extracomment>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5321,10 +5310,6 @@ do not translate - only for debugging</extracomment>
         <translation>Hla</translation>
     </message>
     <message>
-        <source>loaded sound font</source>
-        <translation>Nahrané zvukové písmo</translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -5334,14 +5319,8 @@ do not translate - only for debugging</extracomment>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz
-----------
-Frequency Herz</extracomment>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation>Zvukové písmo</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -5394,6 +5373,14 @@ Frequency Herz</extracomment>
     <message>
         <source>Depth:</source>
         <translation>Hloubka:</translation>
+    </message>
+    <message>
+        <source>Loaded SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5659,9 +5646,7 @@ Frequency Herz</extracomment>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5682,9 +5667,7 @@ coordinate</extracomment>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -7850,6 +7833,10 @@ p, li { white-space: pre-wrap; }
         <source>Follow Song</source>
         <translation>Sledovat píseň</translation>
     </message>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished">Místní nápověda</translation>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -7964,6 +7951,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>downmordent</source>
         <translation>Dolů mordent</translation>
+    </message>
+    <message>
+        <source>ufermata</source>
+        <translation type="unfinished">Fermata nahoře</translation>
     </message>
 </context>
 <context>

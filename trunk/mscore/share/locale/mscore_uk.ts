@@ -178,6 +178,34 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Форма</translation>
     </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Акорд</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished">Штиль</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Хвостик</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -1015,7 +1043,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">системний</translation>
     </message>
     <message>
         <source>align left</source>
@@ -3369,6 +3397,11 @@ before closing?</source>
 From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>З меню „Довідка“ спробуйте натомість вибрати „Підручник в Інтернеті“.</translation>
     </message>
+    <message>
+        <source>Last Session ended abnormal.
+Restore Session?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3665,7 +3698,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Властивості акорду</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4633,7 +4666,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Властивості акорду</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -7283,7 +7316,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вийти</translation>
     </message>
     <message>
         <source>Mag</source>

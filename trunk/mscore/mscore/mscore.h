@@ -67,6 +67,34 @@ static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
 
 //---------------------------------------------------------
+//   ScoreTab
+//---------------------------------------------------------
+
+class ScoreTab : public QWidget {
+      Q_OBJECT
+      QList<Viewer*> viewerList;
+      QTabBar* tab;
+      QStackedLayout* stack;
+
+   signals:
+      void currentChanged(int);
+      void tabCloseRequested(int);
+
+   public:
+      ScoreTab(QWidget* parent = 0);
+      void setViewer(int idx, Viewer*);
+      int count() const                   { return viewerList.size(); }
+      Viewer* viewer(int idx) const       { return viewerList[idx]; }
+      void insertTab(int idx, Viewer*, const QString&);
+      void addTab(Viewer*, const QString&);
+      void setTabText(int, const QString&);
+      int indexOf(Viewer* w) const       { return viewerList.indexOf(w); }
+      int currentIndex() const;
+      void setCurrentIndex(int);
+      void removeTab(int);
+      };
+
+//---------------------------------------------------------
 //   AboutBoxDialog
 //---------------------------------------------------------
 
@@ -171,9 +199,9 @@ class MuseScore : public QMainWindow {
       QQueue<Command> commandQueue;
 
       QVBoxLayout* layout;    // main window layout
-      QSplitter* split;
-      QTabWidget* tab;
-      QTabWidget* tab2;
+      QSplitter* splitter;
+      ScoreTab* tab1;
+      ScoreTab* tab2;
 
       QMenu* menuDisplay;
       QMenu* openRecent;
@@ -285,8 +313,8 @@ class MuseScore : public QMainWindow {
       void showSynthControl(bool);
       void helpBrowser();
       void splitWindow(bool horizontal);
-
       void removeSessionFile();
+      void loadPlugins();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -335,7 +363,7 @@ class MuseScore : public QMainWindow {
       bool checkDirty(Score*);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
-      Viewer* appendScore(Score*);
+      int appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
 	void cmdAppendMeasures(int);
@@ -350,7 +378,6 @@ class MuseScore : public QMainWindow {
       void writeSettings();
       void play(Element* e) const;
       void play(Element* e, int pitch) const;
-      void loadPlugins();
       bool loadPlugin(const QString& filename);
       QString createDefaultName() const;
       void startAutoSave();
@@ -377,6 +404,8 @@ class MuseScore : public QMainWindow {
       bool restoreSession();
       Viewer* currentViewer() const { return cv; }
       bool splitScreen() const { return _splitScreen; }
+      void setCurrentView(int tabIdx, int idx);
+      void start();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

@@ -270,8 +270,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
 
 void MuseScore::preferencesChanged()
       {
-      for (int i = 0; i < tab->count(); ++i) {
-            Canvas* canvas = static_cast<Canvas*>(tab->widget(i));
+      for (int i = 0; i < tab1->count(); ++i) {
+            Canvas* canvas = static_cast<Canvas*>(tab1->viewer(i));
             if (preferences.bgUseColor)
                   canvas->setBackground(preferences.bgColor);
             else {
@@ -288,7 +288,7 @@ void MuseScore::preferencesChanged()
                   }
             }
       for (int i = 0; i < tab2->count(); ++i) {
-            Canvas* canvas = static_cast<Canvas*>(tab2->widget(i));
+            Canvas* canvas = static_cast<Canvas*>(tab2->viewer(i));
             if (preferences.bgUseColor)
                   canvas->setBackground(preferences.bgColor);
             else {
@@ -325,6 +325,7 @@ MuseScore::MuseScore()
       setAcceptDrops(true);
       _undoGroup            = new UndoGroup();
       cs                    = 0;
+      cv                    = 0;
       se                    = 0;    // script engine
       debugger              = 0;
       instrList             = 0;
@@ -396,24 +397,22 @@ MuseScore::MuseScore()
       mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
-      split = new QSplitter;
+      splitter = new QSplitter;
 
-      tab = new QTabWidget;
-      tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      tab->setTabsClosable(true);
-      connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
-      connect(tab, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
+      tab1 = new ScoreTab;
+      tab1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      connect(tab1, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+      connect(tab1, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
-      tab2 = new QTabWidget;
+      tab2 = new ScoreTab;
       tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      tab2->setTabsClosable(true);
       connect(tab2, SIGNAL(currentChanged(int)), SLOT(setCurrentScore2(int)));
       connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
-      split->addWidget(tab);
-      split->addWidget(tab2);
+      splitter->addWidget(tab1);
+      splitter->addWidget(tab2);
       tab2->setVisible(false);
-      layout->addWidget(split);
+      layout->addWidget(splitter);
 
       searchDialog = 0;
 
@@ -925,6 +924,7 @@ void MuseScore::aboutQt()
 
 //---------------------------------------------------------
 //   selectScore
+//    "open recent"
 //---------------------------------------------------------
 
 void MuseScore::selectScore(QAction* action)
@@ -952,52 +952,39 @@ void MuseScore::selectionChanged(int state)
 //    append score to project list
 //---------------------------------------------------------
 
-Viewer* MuseScore::appendScore(Score* score)
+int MuseScore::appendScore(Score* score)
       {
-      Viewer* v;
-
-      connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(stateChanged(int)), SLOT(changeState(int)));
+      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
+      connect(score, SIGNAL(stateChanged(int)),     SLOT(changeState(int)));
       connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      connect(score, SIGNAL(posChanged(int)), SLOT(setPos(int)));
+      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
 
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
                   scoreList.insert(i, score);
-                  tab->blockSignals(true);
+
+                  tab1->blockSignals(true);
                   tab2->blockSignals(true);
-
-                  Canvas* viewer = new Canvas;
-                  v = viewer;
-                  viewer->setScore(score);
-                  tab->insertTab(i, viewer, score->name());
-                  viewer = new Canvas;
-                  viewer->setScore(score);
-                  tab2->insertTab(i, viewer, score->name());
-
+                  tab1->insertTab(i, 0, score->name());
+                  tab2->insertTab(i, 0, score->name());
                   _undoGroup->addStack(score->undo());
-                  tab->blockSignals(false);
+                  tab1->blockSignals(false);
                   tab2->blockSignals(false);
-                  return v;
+                  return i;
                   }
             }
 
       scoreList.push_back(score);
       _undoGroup->addStack(score->undo());
 
-      tab->blockSignals(true);
+      tab1->blockSignals(true);
       tab2->blockSignals(true);
-      Canvas* viewer = new Canvas;
-      v = viewer;
-      viewer->setScore(score);
-      tab->addTab(viewer, score->name());
-      viewer = new Canvas;
-      viewer->setScore(score);
-      tab2->addTab(viewer, score->name());
-      tab->blockSignals(false);
+      tab1->addTab(0, score->name());
+      tab2->addTab(0, score->name());
+      tab1->blockSignals(false);
       tab2->blockSignals(false);
-      return v;
+      return scoreList.size()-1;
       }
 
 //---------------------------------------------------------
@@ -1017,13 +1004,13 @@ void MuseScore::updateRecentScores(Score* score)
 
 void MuseScore::updateTabNames()
       {
-      for (int i = 0; i < tab->count(); ++i) {
-            Canvas* canvas = static_cast<Canvas*>(tab->widget(i));
-            tab->setTabText(i, canvas->score()->name());
+      for (int i = 0; i < tab1->count(); ++i) {
+            Viewer* viewer = tab1->viewer(i);
+            tab1->setTabText(i, viewer->score()->name());
             }
       for (int i = 0; i < tab2->count(); ++i) {
-            Canvas* canvas = static_cast<Canvas*>(tab2->widget(i));
-            tab2->setTabText(i, canvas->score()->name());
+            Viewer* viewer = tab2->viewer(i);
+            tab2->setTabText(i, viewer->score()->name());
             }
       }
 
@@ -1095,14 +1082,30 @@ void MuseScore::openRecentMenu()
 
 void MuseScore::setCurrentScore(int idx)
       {
-      QWidget* w = tab->widget(idx);
-      setCurrentScore(static_cast<Viewer*>(w));
+      setCurrentView(0, idx);
       }
 
 void MuseScore::setCurrentScore2(int idx)
       {
-      QWidget* w = tab2->widget(idx);
-      setCurrentScore(static_cast<Viewer*>(w));
+      setCurrentView(1, idx);
+      }
+
+//---------------------------------------------------------
+//   setCurrentView
+//---------------------------------------------------------
+
+void MuseScore::setCurrentView(int tabIdx, int idx)
+      {
+      if (idx == -1)
+            setCurrentScore(0);
+      Viewer* viewer = (tabIdx ? tab2 : tab1)->viewer(idx);
+printf("setCurrentView %d %d viewer %p\n", tabIdx, idx, viewer);
+      if (viewer == 0) {
+            viewer = new Canvas;
+            viewer->setScore(scoreList[idx]);
+            (tabIdx ? tab2 : tab1)->setViewer(idx, viewer);
+            }
+      setCurrentScore(viewer);
       }
 
 //---------------------------------------------------------
@@ -1139,19 +1142,13 @@ void MuseScore::setCurrentScore(Viewer* viewer)
             return;
             }
 
-      int idx = tab->indexOf(viewer);
-      if ((idx != -1) && (tab->currentIndex() != idx)) {
-            tab->blockSignals(true);
-            tab->setCurrentIndex(idx);
-            tab->blockSignals(false);
-            }
+      int idx = tab1->indexOf(viewer);
+      if (idx != -1)
+            tab1->setCurrentIndex(idx);
       else {
             idx = tab2->indexOf(viewer);
-            if ((idx != -1) && (tab2->currentIndex() != idx)) {
-                  tab2->blockSignals(true);
+            if (idx != -1)
                   tab2->setCurrentIndex(idx);
-                  tab2->blockSignals(false);
-                  }
             }
 
       _undoGroup->setActiveStack(cs->undo());
@@ -1210,7 +1207,7 @@ void MuseScore::dropEvent(QDropEvent* event)
       {
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
-            Viewer* viewer = 0;
+            int viewer = -1;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score(defaultStyle);
@@ -1414,16 +1411,16 @@ void MuseScore::removeTab(int i)
             seq->setScore(0);
 
       scoreList.removeAt(i);
-      tab->blockSignals(true);
-      tab->removeTab(i);
-      tab->blockSignals(false);
+      tab1->blockSignals(true);
+      tab1->removeTab(i);
+      tab1->blockSignals(false);
       tab2->blockSignals(true);
       tab2->removeTab(i);
       tab2->blockSignals(false);
       cs = 0;
       if (i >= (n-1))
             i = n-2;
-      setCurrentScore(scoreList.isEmpty() ? 0 : static_cast<Viewer*>(tab->widget(i)));
+      setCurrentScore(scoreList.isEmpty() ? 0 : tab1->viewer(i));
       writeSessionFile();
       if (!score->tmpName().isEmpty()) {
             QFile f(score->tmpName());
@@ -1502,7 +1499,7 @@ void setMscoreLocale(QString localeName)
 
 static void loadScores(const QStringList& argv)
       {
-      Viewer* currentViewer = 0;
+      int currentViewer = -1;
       bool scoreCreated = false;
       if (argv.isEmpty()) {
             switch (preferences.sessionStart) {
@@ -1516,7 +1513,7 @@ static void loadScores(const QStringList& argv)
                               Score* score = new Score(defaultStyle);
                               scoreCreated = true;
                               score->read(s);
-                              Viewer* viewer = mscore->appendScore(score);
+                              int viewer = mscore->appendScore(score);
                               if (i == c)
                                     currentViewer = viewer;
                               }
@@ -1561,7 +1558,7 @@ static void loadScores(const QStringList& argv)
             }
       if (mscore->noScore())
             currentViewer = 0;
-      mscore->setCurrentScore(currentViewer);
+      mscore->setCurrentView(0, currentViewer);
       }
 
 //---------------------------------------------------------
@@ -1896,15 +1893,11 @@ int main(int argc, char* av[])
             loadScores(argv);
             exit(processNonGui() ? 0 : -1);
             }
-
-      mscore->loadPlugins();
-      mscore->show();
+      mscore->start();
       if (sc)
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
-
-      mscore->writeSessionFile();
       return qApp->exec();
       }
 
@@ -2165,7 +2158,7 @@ void MuseScore::changeState(int val)
                         searchDialogLayout->addStretch(10);
                         searchDialog->hide();
 
-                        connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+                        connect(tab1, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
                         connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
                            SLOT(searchTextChanged(const QString&)));
                         }
@@ -2269,7 +2262,7 @@ void MuseScore::writeSettings()
       settings.setValue("state", saveState());
       if (_splitScreen) {
             settings.setValue("split", _horizontalSplit);
-            settings.setValue("splitter", split->saveState());
+            settings.setValue("splitter", splitter->saveState());
             }
       settings.endGroup();
       if (paletteBox && paletteBox->dirty()) {
@@ -2302,16 +2295,9 @@ void MuseScore::readSettings()
             _splitScreen = false;
             }
       else {
-            _horizontalSplit = n;
-            tab2->setVisible(true);
-            _splitScreen = true;
-            split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
-#if 0
-            Score* s = scoreList[tab2->currentIndex()];
-            s->setLayoutAll(true);
-            s->end();
-#endif
-            split->restoreState(settings.value("splitter").toByteArray());
+            splitWindow(n);
+            QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
+            a->setChecked(true);
             }
       settings.endGroup();
       }
@@ -2380,7 +2366,7 @@ void MuseScore::dirtyChanged(Score* score)
       QString label(score->name());
       if (score->dirty())
             label += "*";
-      tab->setTabText(idx, label);
+      tab1->setTabText(idx, label);
       tab2->setTabText(idx, label);
       }
 
@@ -2661,7 +2647,7 @@ printf("auto save <%s>\n", qPrintable(s->name()));
 
 bool MuseScore::restoreSession()
       {
-      printf("restore session\n");
+printf("restore session\n");
       QFile f(dataPath + "/session");
       if (!f.exists())
             return false;
@@ -2693,7 +2679,7 @@ bool MuseScore::restoreSession()
                   QStringList sl  = version.split('.');
                   int v           = sl[0].toInt() * 100 + sl[1].toInt();
                   */
-                  Viewer* currentViewer = 0;
+                  int currentViewer = -1;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "Score") {
@@ -2759,10 +2745,14 @@ void MuseScore::splitWindow(bool horizontal)
             tab2->setVisible(true);
             _splitScreen = true;
             _horizontalSplit = horizontal;
-            split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
-            Score* s = scoreList[tab2->currentIndex()];
-            s->setLayoutAll(true);
-            s->end();
+            splitter->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+            if (!scoreList.isEmpty()) {
+                  tab2->setCurrentIndex(0);
+                  Score* s = scoreList[0];
+                  s->setLayoutAll(true);
+                  s->end();
+                  setCurrentView(1, 0);
+                  }
             }
       else {
             if (_horizontalSplit == horizontal) {
@@ -2777,8 +2767,133 @@ void MuseScore::splitWindow(bool horizontal)
                   else
                         a = getAction("split-h");
                   a->setChecked(false);
-                  split->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+                  splitter->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   start
+//---------------------------------------------------------
+
+void MuseScore::start()
+      {
+      loadPlugins();
+      writeSessionFile();
+      if (splitScreen() && !noScore()) {
+            //
+            // create viewer for second tab widget
+            //
+            Viewer* viewer = tab2->viewer(0);
+            if (viewer == 0) {
+                  Viewer* viewer = new Canvas;
+                  viewer->setScore(scoreList[0]);
+                  tab2->setViewer(0, viewer);
+                  tab2->setCurrentIndex(0);
+                  }
+            }
+      show();
+      }
+
+//---------------------------------------------------------
+//   ScoreTab
+//---------------------------------------------------------
+
+ScoreTab::ScoreTab(QWidget* parent)
+   : QWidget(parent)
+      {
+      QVBoxLayout* layout = new QVBoxLayout;
+      setLayout(layout);
+      tab = new QTabBar;
+      stack = new QStackedLayout;
+      layout->addWidget(tab);
+      layout->addLayout(stack);
+      tab->setTabsClosable(true);
+      connect(tab, SIGNAL(currentChanged(int)), this, SIGNAL(currentChanged(int)));
+      connect(tab, SIGNAL(tabCloseRequested(int)), this, SIGNAL(tabCloseRequested(int)));
+      }
+
+//---------------------------------------------------------
+//   setViewer
+//---------------------------------------------------------
+
+void ScoreTab::setViewer(int idx, Viewer* v)
+      {
+      viewerList[idx] = v;
+      if (v)
+            stack->addWidget(v);
+      }
+
+//---------------------------------------------------------
+//   insertTab
+//---------------------------------------------------------
+
+void ScoreTab::insertTab(int idx, Viewer* w, const QString& s)
+      {
+      viewerList.insert(idx, w);
+      tab->insertTab(idx, s);
+      if (w)
+            stack->addWidget(w);
+      }
+
+//---------------------------------------------------------
+//   addTab
+//---------------------------------------------------------
+
+void ScoreTab::addTab(Viewer* w, const QString& s)
+      {
+      viewerList.append(w);
+      tab->addTab(s);
+      if (w)
+            stack->addWidget(w);
+      }
+
+//---------------------------------------------------------
+//   setTabText
+//---------------------------------------------------------
+
+void ScoreTab::setTabText(int idx, const QString& s)
+      {
+      tab->setTabText(idx, s);
+      }
+
+//---------------------------------------------------------
+//   currentIndex
+//---------------------------------------------------------
+
+int ScoreTab::currentIndex() const
+      {
+      return tab->currentIndex();
+      }
+
+//---------------------------------------------------------
+//   setCurrentIndex
+//---------------------------------------------------------
+
+void ScoreTab::setCurrentIndex(int idx)
+      {
+      tab->setCurrentIndex(idx);
+      stack->setCurrentWidget(viewerList[idx]);
+
+if (stack->currentWidget() != viewerList[idx]) {
+      printf("setCurrentIndex %d failed, size %d(%d) %p != %p\n",
+         idx, viewerList.size(), stack->count(), stack->currentWidget(), viewerList[idx]);
+      }
+      }
+
+//---------------------------------------------------------
+//   removeTab
+//---------------------------------------------------------
+
+void ScoreTab::removeTab(int idx)
+      {
+      tab->removeTab(idx);
+      for (int i = 0; i < stack->count(); ++i) {
+            if (stack->widget(i) == viewerList[idx]) {
+                  stack->takeAt(i);
+                  break;
+                  }
+            }
+      viewerList.removeAt(idx);
       }
 

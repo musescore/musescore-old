@@ -68,7 +68,7 @@ class Viewer : public QWidget {
    public:
       Viewer(QWidget* parent = 0);
       virtual ~Viewer() {}
-      void setScore(Score* s) { _score = s; }
+      virtual void setScore(Score* s) = 0;
       Score* score() const    { return _score; }
       void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);

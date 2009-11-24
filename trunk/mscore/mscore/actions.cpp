@@ -2073,8 +2073,8 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","split window horizontal"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Split Horizontal"),
-         QT_TRANSLATE_NOOP("action","Split Horizontal")
+         QT_TRANSLATE_NOOP("action","Documents Side by Side"),
+         QT_TRANSLATE_NOOP("action","Documents Side by Side")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -2082,8 +2082,8 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","split window vertical"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Split Vertical"),
-         QT_TRANSLATE_NOOP("action","Split Vertical")
+         QT_TRANSLATE_NOOP("action","Documents Stacked"),
+         QT_TRANSLATE_NOOP("action","Documents Stacked")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),

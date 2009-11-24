@@ -146,7 +146,7 @@ class Canvas : public Viewer {
       void clearScore();
 
       State getState() const { return state; }
-      void setScore(Score* s);
+      virtual void setScore(Score* s);
 
       virtual void setMag(qreal m);
       void showNavigator(bool visible);
