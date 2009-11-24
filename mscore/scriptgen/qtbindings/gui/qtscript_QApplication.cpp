@@ -348,7 +348,7 @@ static QScriptValue qtscript_QApplication_prototype_call(QScriptContext *context
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
-
+#if 0
     case 1:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isSessionRestored();
@@ -369,7 +369,7 @@ static QScriptValue qtscript_QApplication_prototype_call(QScriptContext *context
         return QScriptValue(context->engine(), _q_result);
     }
     break;
-
+#endif
     case 4:
     if (context->argumentCount() == 1) {
         QInputContext* _q_arg0 = qscriptvalue_cast<QInputContext*>(context->argument(0));
@@ -811,7 +811,7 @@ QScriptValue qtscript_create_QApplication_class(QScriptEngine *engine)
             fun, QScriptValue::SkipInEnumeration);
     }
 
-    qScriptRegisterMetaType<QApplication*>(engine, qtscript_QApplication_toScriptValue, 
+    qScriptRegisterMetaType<QApplication*>(engine, qtscript_QApplication_toScriptValue,
         qtscript_QApplication_fromScriptValue, proto);
 
     QScriptValue ctor = engine->newFunction(qtscript_QApplication_static_call, proto, function_lengths[0]);

@@ -192,9 +192,8 @@ void MuseScore::loadFile()
             return;
       Score* score = new Score(defaultStyle);
       score->read(fn);
-      Viewer* viewer = appendScore(score);
+      setCurrentScore(appendScore(score));
       lastOpenPath = score->fileInfo()->path();
-      setCurrentScore(viewer);
       writeSessionFile();
       }
 
@@ -212,7 +211,7 @@ void MuseScore::saveFile()
       {
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
-            tab->setTabText(tab->currentIndex(), cs->name());
+//TODO-S            tab1->setTabText(tab->currentIndex(), cs->name());
             QString tmp = cs->tmpName();
             if (!tmp.isEmpty()) {
                   QFile f(tmp);
@@ -794,10 +793,12 @@ void Score::saveCompressedFile(QFileInfo& info, bool autosave)
             throw(s);
             }
       saveCompressedFile(&fp, info, autosave);
+      fp.close();
       }
 
 //---------------------------------------------------------
 //   saveCompressedFile
+//    file is already opened
 //---------------------------------------------------------
 
 void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)

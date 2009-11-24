@@ -1164,7 +1164,7 @@ void Canvas::moveCursor(Segment* segment, int staffIdx)
             //
             // set cursor height for whole system
             //
-            double y2;
+            double y2 = 0.0;
             for (int i = 0; i < _score->nstaves(); ++i) {
                   SysStaff* ss = system->staff(i);
                   if (!ss->show())
@@ -2413,9 +2413,14 @@ void Canvas::focusInEvent(QFocusEvent* event)
       mscore->setCurrentScore(static_cast<Viewer*>(this));
 
       if (mscore->splitScreen()) {
-            if (!focusFrame)
+            if (!focusFrame) {
                   focusFrame = new QFocusFrame;
-            focusFrame->setWidget(static_cast<QWidget*>(parent()));
+                  QPalette p(focusFrame->palette());
+                  p.setColor(QPalette::WindowText, Qt::blue);
+                  focusFrame->setPalette(p);
+                  }
+//            focusFrame->setWidget(static_cast<QWidget*>(parent()));
+            focusFrame->setWidget(static_cast<QWidget*>(this));
             }
       QWidget::focusInEvent(event);
       }

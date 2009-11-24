@@ -894,9 +894,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall
-----------
-100 cent = 1 semitone intervall</extracomment>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -905,9 +903,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished">авто</translation>
     </message>
     <message>
@@ -944,16 +940,12 @@ velocity type</extracomment>
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -985,6 +977,10 @@ velocity type</extracomment>
     </message>
     <message>
         <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StaffMove:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1509,12 +1505,6 @@ failed: </source>
     <message>
         <source>sp</source>
         <extracomment>spatium unit
-----------
-space unit
-----------
-space unit
-----------
-spatium unit
 ----------
 space unit
 ----------
@@ -3398,6 +3388,11 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>Grace Notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Last Session ended abnormal.
+Restore Session?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3924,10 +3919,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Выберите фон рабочего поля</translation>
     </message>
     <message>
-        <source>MuseScore file (*.msc);;All (*)</source>
-        <translation>Файл MuseScore (*.msc);;Все файлы (*)</translation>
-    </message>
-    <message>
         <source>default</source>
         <translation>По умолчанию</translation>
     </message>
@@ -3945,6 +3936,10 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4255,18 +4250,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Импорт</translation>
     </message>
     <message>
-        <source>Style used for import</source>
-        <translation>Используемые при импорте стили</translation>
-    </message>
-    <message>
-        <source>build in style</source>
-        <translation>Встроенный стиль</translation>
-    </message>
-    <message>
-        <source>use style file:</source>
-        <translation>Использовать файл стиля:</translation>
-    </message>
-    <message>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
@@ -4452,9 +4435,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter
-----------
-millimeter</extracomment>
+        <extracomment>millimeter</extracomment>
         <translation>мм</translation>
     </message>
     <message>
@@ -4495,6 +4476,18 @@ millimeter</extracomment>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style Used for Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use style file:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5189,16 +5182,12 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate
-----------
-do not translate</extracomment>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging
-----------
-do not translate - only for debugging</extracomment>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5296,10 +5285,6 @@ do not translate - only for debugging</extracomment>
         <translation type="unfinished">Уровень</translation>
     </message>
     <message>
-        <source>loaded sound font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>
@@ -5309,14 +5294,8 @@ do not translate - only for debugging</extracomment>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz
-----------
-Frequency Herz</extracomment>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation type="unfinished">Sound Font</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -5368,6 +5347,14 @@ Frequency Herz</extracomment>
     </message>
     <message>
         <source>Depth:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loaded SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5634,9 +5621,7 @@ Frequency Herz</extracomment>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5657,9 +5642,7 @@ coordinate</extracomment>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>

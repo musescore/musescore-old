@@ -929,9 +929,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall
-----------
-100 cent = 1 semitone intervall</extracomment>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translatorcomment>100 cent = 1 halve toon</translatorcomment>
         <translation>cent</translation>
     </message>
@@ -942,9 +940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>automatisch</translation>
     </message>
     <message>
@@ -983,16 +979,12 @@ velocity type</extracomment>
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>gebruiker</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type
-----------
-velocity type</extracomment>
+        <extracomment>velocity type</extracomment>
         <translation>compensatie</translation>
     </message>
     <message>
@@ -1025,6 +1017,10 @@ velocity type</extracomment>
     </message>
     <message>
         <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>StaffMove:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1449,12 +1445,6 @@ failed: </source>
     <message>
         <source>sp</source>
         <extracomment>spatium unit
-----------
-space unit
-----------
-space unit
-----------
-spatium unit
 ----------
 space unit
 ----------
@@ -3508,6 +3498,11 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <source>Grace Notes</source>
         <translation>Voorslag Noten</translation>
     </message>
+    <message>
+        <source>Last Session ended abnormal.
+Restore Session?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4052,11 +4047,6 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <translation>Kies Achtergrond</translation>
     </message>
     <message>
-        <source>MuseScore file (*.msc);;All (*)</source>
-        <translatorcomment>All -&gt; Alle</translatorcomment>
-        <translation>MuseScore bestand (*.msc);;Alle (*)</translation>
-    </message>
-    <message>
         <source>default</source>
         <translation>standaard</translation>
     </message>
@@ -4075,6 +4065,10 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     <message>
         <source>Instrument List (*.xml)</source>
         <translation>Instrumenten Liist (*.xml)</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4408,18 +4402,6 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <translation>Importeer</translation>
     </message>
     <message>
-        <source>Style used for import</source>
-        <translation>Stijl gebruiken voor import</translation>
-    </message>
-    <message>
-        <source>build in style</source>
-        <translation>stijl inbouwen</translation>
-    </message>
-    <message>
-        <source>use style file:</source>
-        <translation>gebruik stijlbestand:</translation>
-    </message>
-    <message>
         <source>Export</source>
         <translation>Exporteer</translation>
     </message>
@@ -4601,9 +4583,7 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter
-----------
-millimeter</extracomment>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4646,6 +4626,18 @@ millimeter</extracomment>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translatorcomment>Vervang (C) met het copyright symbool © (Alleen van toepassing op tekst in het tekstvak auteursrechten)</translatorcomment>
         <translation>Vervang (C) met het copyright symbool © (Alleen van toepassing op tekst in het tekstvak auteursrechten)</translation>
+    </message>
+    <message>
+        <source>Style Used for Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built in style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use style file:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5369,16 +5361,12 @@ Probeer op een andere locatie op te slaan.</translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate
-----------
-do not translate</extracomment>
+        <extracomment>do not translate</extracomment>
         <translation></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging
-----------
-do not translate - only for debugging</extracomment>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5478,10 +5466,6 @@ do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
     <message>
-        <source>loaded sound font</source>
-        <translation>geladen sound font</translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -5491,14 +5475,8 @@ do not translate - only for debugging</extracomment>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz
-----------
-Frequency Herz</extracomment>
+        <extracomment>Frequency Herz</extracomment>
         <translation></translation>
-    </message>
-    <message>
-        <source>Sound Font</source>
-        <translation>Sound Font</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -5551,6 +5529,14 @@ Frequency Herz</extracomment>
     <message>
         <source>Depth:</source>
         <translation>Diepte:</translation>
+    </message>
+    <message>
+        <source>Loaded SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SoundFont</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5827,9 +5813,7 @@ Frequency Herz</extracomment>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5853,9 +5837,7 @@ coordinate</extracomment>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate
-----------
-coordinate</extracomment>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -8029,6 +8011,10 @@ p, li { white-space: pre-wrap; }
         <source>Follow Song</source>
         <translation>Volg Lied</translation>
     </message>
+    <message>
+        <source>local help</source>
+        <translation type="unfinished">lokaal help</translation>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8143,6 +8129,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>downmordent</source>
         <translation>onder praller</translation>
+    </message>
+    <message>
+        <source>ufermata</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
