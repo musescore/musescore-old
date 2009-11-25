@@ -2244,8 +2244,9 @@ void MuseScore::writeSettings()
       settings.setValue("maximized", isMaximized());
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
+      settings.setValue("splitScreen", _splitScreen);
       if (_splitScreen) {
-            settings.setValue("split", int(_horizontalSplit));
+            settings.setValue("split", _horizontalSplit);
             settings.setValue("splitter", splitter->saveState());
             }
       settings.endGroup();
@@ -2274,15 +2275,13 @@ void MuseScore::readSettings()
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());
-      int n = settings.value("split", -1).toInt();
-      if (n == -1) {
-            _splitScreen = false;
-            }
-      else {
-            splitWindow(n);
+      if (settings.value("splitScreen", false).toBool()) {
+            splitWindow(settings.value("split").toBool());
             QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
             a->setChecked(true);
             }
+      else
+            _splitScreen = false;
       settings.endGroup();
       }
 
