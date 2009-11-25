@@ -55,6 +55,7 @@
 #include "undo.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
+#include "scoretab.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -202,7 +203,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         removeList.append(score);
                   }
             }
-      removeSessionFile();
+      writeSessionFile(true);
       foreach(Score* score, scoreList) {
             if (!score->tmpName().isEmpty()) {
                   QFile f(score->tmpName());
@@ -272,6 +273,8 @@ void MuseScore::preferencesChanged()
       {
       for (int i = 0; i < tab1->count(); ++i) {
             Canvas* canvas = static_cast<Canvas*>(tab1->viewer(i));
+            if (canvas == 0)
+                  continue;
             if (preferences.bgUseColor)
                   canvas->setBackground(preferences.bgColor);
             else {
@@ -289,6 +292,8 @@ void MuseScore::preferencesChanged()
             }
       for (int i = 0; i < tab2->count(); ++i) {
             Canvas* canvas = static_cast<Canvas*>(tab2->viewer(i));
+            if (canvas == 0)
+                  continue;
             if (preferences.bgUseColor)
                   canvas->setBackground(preferences.bgColor);
             else {
@@ -399,14 +404,14 @@ MuseScore::MuseScore()
       layout->setSpacing(0);
       splitter = new QSplitter;
 
-      tab1 = new ScoreTab;
+      tab1 = new ScoreTab(&scoreList);
       tab1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      connect(tab1, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+      connect(tab1, SIGNAL(currentViewerChanged(Viewer*)), SLOT(setCurrentViewer(Viewer*)));
       connect(tab1, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
-      tab2 = new ScoreTab;
+      tab2 = new ScoreTab(&scoreList);
       tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      connect(tab2, SIGNAL(currentChanged(int)), SLOT(setCurrentScore2(int)));
+      connect(tab2, SIGNAL(currentViewerChanged(Viewer*)), SLOT(setCurrentViewer(Viewer*)));
       connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
 
       splitter->addWidget(tab1);
@@ -933,7 +938,7 @@ void MuseScore::selectScore(QAction* action)
       if (!a.isEmpty()) {
             Score* score = new Score(defaultStyle);
             score->read(a);
-            setCurrentScore(appendScore(score));
+            setCurrentViewer(appendScore(score));
             }
       }
 
@@ -966,8 +971,8 @@ int MuseScore::appendScore(Score* score)
 
                   tab1->blockSignals(true);
                   tab2->blockSignals(true);
-                  tab1->insertTab(i, 0, score->name());
-                  tab2->insertTab(i, 0, score->name());
+                  tab1->insertTab(i, score->name());
+                  tab2->insertTab(i, score->name());
                   _undoGroup->addStack(score->undo());
                   tab1->blockSignals(false);
                   tab2->blockSignals(false);
@@ -980,8 +985,8 @@ int MuseScore::appendScore(Score* score)
 
       tab1->blockSignals(true);
       tab2->blockSignals(true);
-      tab1->addTab(0, score->name());
-      tab2->addTab(0, score->name());
+      tab1->addTab(score->name());
+      tab2->addTab(score->name());
       tab1->blockSignals(false);
       tab2->blockSignals(false);
       return scoreList.size()-1;
@@ -1077,42 +1082,27 @@ void MuseScore::openRecentMenu()
       }
 
 //---------------------------------------------------------
-//   setCurrentScore
+//   setCurrentView
 //---------------------------------------------------------
 
-void MuseScore::setCurrentScore(int idx)
+void MuseScore::setCurrentViewer(int idx)
       {
       setCurrentView(0, idx);
       }
 
-void MuseScore::setCurrentScore2(int idx)
-      {
-      setCurrentView(1, idx);
-      }
-
-//---------------------------------------------------------
-//   setCurrentView
-//---------------------------------------------------------
-
 void MuseScore::setCurrentView(int tabIdx, int idx)
       {
       if (idx == -1)
-            setCurrentScore(0);
-      Viewer* viewer = (tabIdx ? tab2 : tab1)->viewer(idx);
-printf("setCurrentView %d %d viewer %p\n", tabIdx, idx, viewer);
-      if (viewer == 0) {
-            viewer = new Canvas;
-            viewer->setScore(scoreList[idx]);
-            (tabIdx ? tab2 : tab1)->setViewer(idx, viewer);
-            }
-      setCurrentScore(viewer);
+            setCurrentViewer(0);
+      else
+            (tabIdx ? tab2 : tab1)->setCurrentIndex(idx);
       }
 
 //---------------------------------------------------------
-//   setCurrentScore
+//   setCurrentViewer
 //---------------------------------------------------------
 
-void MuseScore::setCurrentScore(Viewer* viewer)
+void MuseScore::setCurrentViewer(Viewer* viewer)
       {
       cv = viewer;
       cs = viewer ? viewer->score() : 0;
@@ -1142,15 +1132,6 @@ void MuseScore::setCurrentScore(Viewer* viewer)
             return;
             }
 
-      int idx = tab1->indexOf(viewer);
-      if (idx != -1)
-            tab1->setCurrentIndex(idx);
-      else {
-            idx = tab2->indexOf(viewer);
-            if (idx != -1)
-                  tab2->setCurrentIndex(idx);
-            }
-
       _undoGroup->setActiveStack(cs->undo());
       viewer->setFocus(Qt::OtherFocusReason);
 
@@ -1168,8 +1149,6 @@ void MuseScore::setCurrentScore(Viewer* viewer)
       if (playPanel)
             playPanel->setScore(cs);
 
-      cs->setLayoutAll(true);
-      cs->end();
       QAction* a = getAction("concert-pitch");
       a->setChecked(cs->styleB(ST_concertPitch));
 
@@ -1215,7 +1194,7 @@ void MuseScore::dropEvent(QDropEvent* event)
                         viewer = appendScore(score);
                         }
                   }
-            setCurrentScore(viewer);
+            setCurrentViewer(viewer);
             event->acceptProposedAction();
             }
       }
@@ -1389,39 +1368,42 @@ bool MuseScore::playEnabled() const
 
 void MuseScore::removeTab()
       {
-      int n = scoreList.size();
-      for (int i = 0; i < n; ++i) {
-            if (scoreList[i] == cs) {
-                  removeTab(i);
-                  break;
-                  }
+      int n = scoreList.indexOf(cs);
+      if (n == -1) {
+            printf("removeTab: %p not found\n", cs);
+            return;
             }
+      removeTab(n);
       }
 
 void MuseScore::removeTab(int i)
       {
-      int n = scoreList.size();
-      if (n <= 0)
+      Score* score = scoreList.value(i);
+      if (score == 0)
             return;
-      Score* score = scoreList[i];
 
       if (checkDirty(score))
             return;
       if (seq->score() == score)
             seq->setScore(0);
 
-      scoreList.removeAt(i);
       tab1->blockSignals(true);
       tab1->removeTab(i);
       tab1->blockSignals(false);
+
       tab2->blockSignals(true);
       tab2->removeTab(i);
       tab2->blockSignals(false);
+
+      scoreList.removeAt(i);
+
       cs = 0;
+      cv = 0;
+      int n = scoreList.size();
       if (i >= (n-1))
             i = n-2;
-      setCurrentScore(scoreList.isEmpty() ? 0 : tab1->viewer(i));
-      writeSessionFile();
+      setCurrentViewer(scoreList.isEmpty() ? 0 : tab1->viewer(i));
+      writeSessionFile(false);
       if (!score->tmpName().isEmpty()) {
             QFile f(score->tmpName());
             f.remove();
@@ -1886,14 +1868,16 @@ int main(int argc, char* av[])
             //
             // TODO: delete old session backups
             //
-            if (files || !mscore->restoreSession())
+            if (files || !mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
                   loadScores(argv);
             }
       else {
             loadScores(argv);
             exit(processNonGui() ? 0 : -1);
             }
-      mscore->start();
+      mscore->loadPlugins();
+      mscore->writeSessionFile(false);
+      mscore->show();
       if (sc)
             sc->finish(mscore);
       if (debugMode)
@@ -1956,7 +1940,7 @@ void MuseScore::cmd(QAction* a)
                   score->read(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
-                  setCurrentScore(appendScore(score));
+                  setCurrentViewer(appendScore(score));
                   }
             }
       else if (cmd == "file-close")
@@ -2158,7 +2142,7 @@ void MuseScore::changeState(int val)
                         searchDialogLayout->addStretch(10);
                         searchDialog->hide();
 
-                        connect(tab1, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+                        // ?? connect(tab1, SIGNAL(currentChanged(int)), SLOT(setCurrentViewer(int)));
                         connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
                            SLOT(searchTextChanged(const QString&)));
                         }
@@ -2376,12 +2360,8 @@ void MuseScore::dirtyChanged(Score* score)
 
 void MuseScore::magChanged(int idx)
       {
-      if (cv) {
-            if (idx == MAG_FREE)
-                  cv->setMag(mag->getMag(cv));
-            else
-                  cv->setMagIdx(idx, mag->getMag(cv));
-            }
+      if (cv)
+            cv->setMag(idx, mag->getMag(cv));
       }
 
 //---------------------------------------------------------
@@ -2527,7 +2507,7 @@ void MuseScore::handleMessage(const QString& message)
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(defaultStyle);
       score->read(message);
-      setCurrentScore(appendScore(score));
+      setCurrentViewer(appendScore(score));
       lastOpenPath = score->fileInfo()->path();
       }
 
@@ -2550,7 +2530,7 @@ void MuseScore::editInPianoroll(Staff* staff)
 //   writeSessionFile
 //---------------------------------------------------------
 
-void MuseScore::writeSessionFile()
+void MuseScore::writeSessionFile(bool cleanExit)
       {
       printf("write session file\n");
 
@@ -2564,6 +2544,7 @@ void MuseScore::writeSessionFile()
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
+      xml.tagE(cleanExit ? "clean" : "dirty");
       foreach(Score* score, scoreList) {
             xml.stag("Score");
             xml.tag("created", score->created());
@@ -2577,8 +2558,55 @@ void MuseScore::writeSessionFile()
                   }
             xml.etag();
             }
+      int tab = 0;
+      int idx = 0;
+      for (int i = 0; i < tab1->count(); ++i) {
+            Viewer* v = tab1->viewer(i);
+            if (v) {
+                  if (v == cv) {
+                        tab = 0;
+                        idx = i;
+                        }
+                  xml.stag("Viewer");
+                  xml.tag("tab", tab);    // 0 instead of "tab" does not work
+                  xml.tag("idx", i);
+                  if (v->magIdx() == MAG_FREE)
+                        xml.tag("mag", v->mag());
+                  else
+                        xml.tag("magIdx", v->magIdx());
+                  xml.tag("x",   v->xoffset() / DPMM);
+                  xml.tag("y",   v->yoffset() / DPMM);
+                  xml.etag();
+                  }
+            }
+      if (splitScreen()) {
+            for (int i = 0; i < tab2->count(); ++i) {
+                  Viewer* v = tab2->viewer(i);
+                  if (v) {
+                        if (v == cv) {
+                              tab = 1;
+                              idx = i;
+                              }
+                        xml.stag("Viewer");
+                        xml.tag("tab", 1);
+                        xml.tag("idx", i);
+                        if (v->magIdx() == MAG_FREE)
+                              xml.tag("mag", v->mag());
+                        else
+                              xml.tag("magIdx", v->magIdx());
+                        xml.tag("x",   v->xoffset() / DPMM);
+                        xml.tag("y",   v->yoffset() / DPMM);
+                        xml.etag();
+                        }
+                  }
+            }
+      xml.tag("tab", tab);
+      xml.tag("idx", idx);
       xml.etag();
       f.close();
+      if (cleanExit) {
+            // TODO: remove all temporary session backup files
+            }
       }
 
 //---------------------------------------------------------
@@ -2604,9 +2632,9 @@ printf("remove session file\n");
 void MuseScore::autoSaveTimerTimeout()
       {
       bool sessionChanged = false;
+printf("auto save\n");
       foreach(Score* s, scoreList) {
             if (s->autosaveDirty()) {
-printf("auto save <%s>\n", qPrintable(s->name()));
                   QString tmp = s->tmpName();
                   if (!tmp.isEmpty()) {
                         QFileInfo fi(tmp);
@@ -2631,8 +2659,8 @@ printf("auto save <%s>\n", qPrintable(s->name()));
                   s->setAutosaveDirty(false);
                   }
             }
-      if (sessionChanged)
-            writeSessionFile();
+//      if (sessionChanged)
+            writeSessionFile(false);
       if (preferences.autoSave) {
             int t = preferences.autoSaveTime * 60 * 1000;
             autoSaveTimer->start(t);
@@ -2641,13 +2669,14 @@ printf("auto save <%s>\n", qPrintable(s->name()));
 
 //---------------------------------------------------------
 //   restoreSession
-//    return true, if a previous crashed session was found
-//    and succesfully restored
+//    Restore last session. If "always" is true, then restore
+//    last session even on a clean exit else only if last
+//    session ended abnormal.
+//    Return true if a session was found and restored.
 //---------------------------------------------------------
 
-bool MuseScore::restoreSession()
+bool MuseScore::restoreSession(bool always)
       {
-printf("restore session\n");
       QFile f(dataPath + "/session");
       if (!f.exists())
             return false;
@@ -2655,14 +2684,6 @@ printf("restore session\n");
             printf("cannot open session file <%s>\n", qPrintable(f.fileName()));
             return false;
             }
-      QMessageBox::StandardButton b = QMessageBox::question(0,
-            tr("MuseScore"),
-            tr("Last Session ended abnormal.\nRestore Session?"),
-            QMessageBox::Yes | QMessageBox::No,
-            QMessageBox::Yes
-            );
-      if (b != QMessageBox::Yes)
-            return false;
       QDomDocument doc;
       int line, column;
       QString err;
@@ -2673,16 +2694,35 @@ printf("restore session\n");
                qPrintable(docName), line, column, qPrintable(err));
             return false;
             }
+      int tab = 0;
+      int idx = 0;
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   /* QString version = e.attribute(QString("version"));
                   QStringList sl  = version.split('.');
                   int v           = sl[0].toInt() * 100 + sl[1].toInt();
                   */
-                  int currentViewer = -1;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-                        if (tag == "Score") {
+                        if (tag == "clean") {
+                              if (!always) {
+                                    f.close();
+                                    return false;
+                                    }
+                              }
+                        else if (tag == "dirty") {
+                              QMessageBox::StandardButton b = QMessageBox::question(0,
+                                 tr("MuseScore"),
+                                 tr("Last Session ended abnormal.\nRestore Session?"),
+                                 QMessageBox::Yes | QMessageBox::No,
+                                 QMessageBox::Yes
+                                 );
+                              if (b != QMessageBox::Yes) {
+                                    f.close();
+                                    return false;
+                                    }
+                              }
+                        else if (tag == "Score") {
                               QString name;
                               bool created = false;
                               bool dirty = false;
@@ -2707,30 +2747,65 @@ printf("restore session\n");
                                                       printf("set name <%s>\n", qPrintable(name));
                                                       score->setName(name);
                                                       }
-                                                currentViewer = appendScore(score);
+                                                appendScore(score);
                                                 score->setDirty(dirty);
                                                 score->setCreated(created);
                                                 }
                                           }
                                     else {
                                           domError(eee);
+                                          f.close();
                                           return false;
                                           }
                                     }
                               }
+                        else if (tag == "Viewer") {
+                              double x = .0, y = .0, vmag = .0;
+                              int magIdx = MAG_FREE;
+                              int tab = 0, idx = 0;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    QString val(eee.text());
+                                    if (tag == "tab")
+                                          tab = val.toInt();
+                                    else if (tag == "idx")
+                                          idx = val.toInt();
+                                    else if (tag == "mag")
+                                          vmag = val.toDouble();
+                                    else if (tag == "magIdx")
+                                          magIdx = val.toInt();
+                                    else if (tag == "x")
+                                          x = val.toDouble() * DPMM;
+                                    else if (tag == "y")
+                                          y = val.toDouble() * DPMM;
+                                    else {
+                                          domError(eee);
+                                          f.close();
+                                          return false;
+                                          }
+                                    }
+                              if (magIdx != MAG_FREE)
+                                    vmag = mag->getMag(cv);
+                              (tab == 0 ? tab1 : tab2)->initViewer(idx, vmag, magIdx, x, y);
+                              }
+                        else if (tag == "tab")
+                              tab = ee.text().toInt();
+                        else if (tag == "idx")
+                              idx = ee.text().toInt();
                         else {
                               domError(ee);
+                              f.close();
                               return false;
                               }
                         }
-                  setCurrentScore(currentViewer);
                   }
             else {
                   domError(e);
+                  f.close();
                   return false;
                   }
             }
-
+      setCurrentView(tab, idx);
       f.close();
       return true;
       }
@@ -2770,130 +2845,5 @@ void MuseScore::splitWindow(bool horizontal)
                   splitter->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   start
-//---------------------------------------------------------
-
-void MuseScore::start()
-      {
-      loadPlugins();
-      writeSessionFile();
-      if (splitScreen() && !noScore()) {
-            //
-            // create viewer for second tab widget
-            //
-            Viewer* viewer = tab2->viewer(0);
-            if (viewer == 0) {
-                  Viewer* viewer = new Canvas;
-                  viewer->setScore(scoreList[0]);
-                  tab2->setViewer(0, viewer);
-                  tab2->setCurrentIndex(0);
-                  }
-            }
-      show();
-      }
-
-//---------------------------------------------------------
-//   ScoreTab
-//---------------------------------------------------------
-
-ScoreTab::ScoreTab(QWidget* parent)
-   : QWidget(parent)
-      {
-      QVBoxLayout* layout = new QVBoxLayout;
-      setLayout(layout);
-      tab = new QTabBar;
-      stack = new QStackedLayout;
-      layout->addWidget(tab);
-      layout->addLayout(stack);
-      tab->setTabsClosable(true);
-      connect(tab, SIGNAL(currentChanged(int)), this, SIGNAL(currentChanged(int)));
-      connect(tab, SIGNAL(tabCloseRequested(int)), this, SIGNAL(tabCloseRequested(int)));
-      }
-
-//---------------------------------------------------------
-//   setViewer
-//---------------------------------------------------------
-
-void ScoreTab::setViewer(int idx, Viewer* v)
-      {
-      viewerList[idx] = v;
-      if (v)
-            stack->addWidget(v);
-      }
-
-//---------------------------------------------------------
-//   insertTab
-//---------------------------------------------------------
-
-void ScoreTab::insertTab(int idx, Viewer* w, const QString& s)
-      {
-      viewerList.insert(idx, w);
-      tab->insertTab(idx, s);
-      if (w)
-            stack->addWidget(w);
-      }
-
-//---------------------------------------------------------
-//   addTab
-//---------------------------------------------------------
-
-void ScoreTab::addTab(Viewer* w, const QString& s)
-      {
-      viewerList.append(w);
-      tab->addTab(s);
-      if (w)
-            stack->addWidget(w);
-      }
-
-//---------------------------------------------------------
-//   setTabText
-//---------------------------------------------------------
-
-void ScoreTab::setTabText(int idx, const QString& s)
-      {
-      tab->setTabText(idx, s);
-      }
-
-//---------------------------------------------------------
-//   currentIndex
-//---------------------------------------------------------
-
-int ScoreTab::currentIndex() const
-      {
-      return tab->currentIndex();
-      }
-
-//---------------------------------------------------------
-//   setCurrentIndex
-//---------------------------------------------------------
-
-void ScoreTab::setCurrentIndex(int idx)
-      {
-      tab->setCurrentIndex(idx);
-      stack->setCurrentWidget(viewerList[idx]);
-
-if (stack->currentWidget() != viewerList[idx]) {
-      printf("setCurrentIndex %d failed, size %d(%d) %p != %p\n",
-         idx, viewerList.size(), stack->count(), stack->currentWidget(), viewerList[idx]);
-      }
-      }
-
-//---------------------------------------------------------
-//   removeTab
-//---------------------------------------------------------
-
-void ScoreTab::removeTab(int idx)
-      {
-      tab->removeTab(idx);
-      for (int i = 0; i < stack->count(); ++i) {
-            if (stack->widget(i) == viewerList[idx]) {
-                  stack->takeAt(i);
-                  break;
-                  }
-            }
-      viewerList.removeAt(idx);
       }
 

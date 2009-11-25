@@ -64,7 +64,6 @@ class Viewer : public QWidget {
    public slots:
       void adjustCanvasPosition(Element* el, bool playBack);
 
-
    public:
       Viewer(QWidget* parent = 0);
       virtual ~Viewer() {}
@@ -79,10 +78,8 @@ class Viewer : public QWidget {
       virtual void magCanvas()                   {}
       qreal mag() const;
       int magIdx() const                         { return _magIdx; }
-      void setMagIdx(int idx, double mag);
+      void setMag(int idx, double mag);
       virtual void setMag(double) = 0;
-      qreal xMag() const                         { return _matrix.m11(); }
-      qreal yMag() const                         { return _matrix.m22(); }
       qreal xoffset() const;
       qreal yoffset() const;
       void setOffset(qreal x, qreal y);
