@@ -34,6 +34,9 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
       scoreList = sl;
       QVBoxLayout* layout = new QVBoxLayout;
       setLayout(layout);
+      layout->setSpacing(0);
+      layout->setMargin(2);
+
       tab = new QTabBar;
       tab->setExpanding(false);
       stack = new QStackedLayout;
