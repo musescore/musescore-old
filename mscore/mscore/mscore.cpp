@@ -2245,7 +2245,7 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       if (_splitScreen) {
-            settings.setValue("split", _horizontalSplit);
+            settings.setValue("split", int(_horizontalSplit));
             settings.setValue("splitter", splitter->saveState());
             }
       settings.endGroup();
