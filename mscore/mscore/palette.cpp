@@ -318,6 +318,9 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   QPointF spos = QPointF(dragStartPosition) / mag;
                   spos        -= QPointF(cells[currentIdx]->x, cells[currentIdx]->y);
 
+                  // DEBUG:
+                  spos.setX(0.0);
+
                   mimeData->setData(mimeSymbolFormat, el->mimeData(spos));
                   drag->setMimeData(mimeData);
 
