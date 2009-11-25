@@ -192,9 +192,9 @@ void MuseScore::loadFile()
             return;
       Score* score = new Score(defaultStyle);
       score->read(fn);
-      setCurrentScore(appendScore(score));
+      setCurrentViewer(appendScore(score));
       lastOpenPath = score->fileInfo()->path();
-      writeSessionFile();
+      writeSessionFile(false);
       }
 
 //---------------------------------------------------------
@@ -219,7 +219,7 @@ void MuseScore::saveFile()
                         printf("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
                   cs->setTmpName("");
                   }
-            writeSessionFile();
+            writeSessionFile(false);
             }
       }
 
@@ -447,7 +447,7 @@ bool Score::saveAs(bool saveCopy)
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   mscore->updateRecentScores(this);
-                  mscore->writeSessionFile();
+                  mscore->writeSessionFile(false);
                   }
             }
       else if (ext == "xml" || selectedFilter == fl[2]) {
@@ -580,6 +580,7 @@ void MuseScore::newFile()
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
+      score->layout();
 
       //
       //  create score from template
@@ -772,7 +773,7 @@ void MuseScore::newFile()
             score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
-      setCurrentScore(appendScore(score));
+      setCurrentViewer(appendScore(score));
       }
 
 //---------------------------------------------------------

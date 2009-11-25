@@ -186,7 +186,7 @@ qreal Viewer::yoffset() const
 //   setMagIdx
 //---------------------------------------------------------
 
-void Viewer::setMagIdx(int idx, double mag)
+void Viewer::setMag(int idx, double mag)
       {
       _magIdx = idx;
       setMag(mag);
@@ -214,9 +214,8 @@ void Viewer::pageNext()
             return;
 
       Page* page = score()->pages().back();
-      qreal mag  = xMag() * DPI / PDPI;
-      qreal x    = xoffset() - (page->width() + 25.0) * mag;
-      qreal lx   = 10.0 - page->canvasPos().x() * mag;
+      qreal x    = xoffset() - (page->width() + 25.0) * mag();
+      qreal lx   = 10.0 - page->canvasPos().x() * mag();
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
@@ -233,8 +232,7 @@ void Viewer::pagePrev()
       if (score()->pages().empty())
             return;
       Page* page = score()->pages().back();
-      qreal mag  = xMag() * DPI / PDPI;
-      qreal x = xoffset() +( page->width() + 25.0) * mag;
+      qreal x = xoffset() +( page->width() + 25.0) * mag();
       if (x > 10.0)
             x = 10.0;
       setOffset(x, 10.0);
@@ -263,8 +261,7 @@ void Viewer::pageEnd()
             return;
       Page* lastPage = score()->pages().back();
       QPointF p(lastPage->canvasPos());
-      qreal mag  = xMag() * DPI / PDPI;
-      setOffset(25.0 - p.x() * mag, 25.0);
+      setOffset(25.0 - p.x() * mag(), 25.0);
 //      updateNavigator(false);
       update();
       }
@@ -339,9 +336,8 @@ void Viewer::adjustCanvasPosition(Element* el, bool playBack)
 
 //       qDebug() << "showRect" << showRect << "\tcanvas" << r;
 
-      qreal mag = xMag() * DPI / PDPI;
-      qreal x   = - xoffset() / mag;
-      qreal y   = - yoffset() / mag;
+      qreal x   = - xoffset() / mag();
+      qreal y   = - yoffset() / mag();
 
       qreal oldX = x, oldY = y;
 
@@ -351,7 +347,7 @@ void Viewer::adjustCanvasPosition(Element* el, bool playBack)
             }
       else if (showRect.left() > r.right()) {
 //             qDebug() << "left > r.right";
-            x = showRect.right() - width() / mag + BORDER_X;
+            x = showRect.right() - width() / mag() + BORDER_X;
             }
       else if (r.width() >= showRect.width() && showRect.right() > r.right()) {
 //             qDebug() << "r.width >= width && right > r.right";
@@ -363,7 +359,7 @@ void Viewer::adjustCanvasPosition(Element* el, bool playBack)
             }
       else if (showRect.top() > r.bottom()) {
 //             qDebug() << "top > r.bottom";
-            y = showRect.bottom() - height() / mag + BORDER_Y;
+            y = showRect.bottom() - height() / mag() + BORDER_Y;
             }
       else if (r.height() >= showRect.height() && showRect.bottom() > r.bottom()) {
 //             qDebug() << "r.height >= height && bottom > r.bottom";
@@ -385,7 +381,7 @@ void Viewer::adjustCanvasPosition(Element* el, bool playBack)
       if (oldX == x && oldY == y)
             return;
 
-      setOffset(-x * mag, -y * mag);
+      setOffset(-x * mag(), -y * mag());
 //      updateNavigator(false);
       update();
       }

@@ -413,7 +413,7 @@ bool Score::read(QString name)
 
       mscore->updateRecentScores(this);
 
-      layoutAll = false;
+      _needLayout = true;
       return true;
       }
 
@@ -1287,7 +1287,7 @@ bool Score::playlistDirty()
 
 bool Score::pos2TickAnchor(const QPointF& pos, int staffIdx, int* tick, QPointF* anchor) const
       {
-      Segment* seg;
+      Segment* seg = 0;
       MeasureBase* m = pos2measure(pos, tick, &staffIdx, 0, &seg, 0);
       if (!m || m->type() != MEASURE) {
             printf("pos2TickAnchor: no measure found\n");

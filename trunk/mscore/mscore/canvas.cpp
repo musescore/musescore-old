@@ -2117,6 +2117,7 @@ void Canvas::zoom(int step, const QPoint& pos)
 
       mscore->setMag(_mag);
       setMag(_mag);
+      _magIdx = MAG_FREE;
 
       QPointF p2 = imatrix.map(QPointF(pos));
       QPointF p3 = p2 - p1;
@@ -2410,7 +2411,7 @@ void Canvas::setMag(double nmag)
 
 void Canvas::focusInEvent(QFocusEvent* event)
       {
-      mscore->setCurrentScore(static_cast<Viewer*>(this));
+      mscore->setCurrentViewer(static_cast<Viewer*>(this));
 
       if (mscore->splitScreen()) {
             if (!focusFrame) {

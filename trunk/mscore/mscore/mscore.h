@@ -53,9 +53,8 @@ class SynthControl;
 class PianorollEditor;
 class Staff;
 class Viewer;
-
+class ScoreTab;
 class QScriptEngineDebugger;
-
 struct Drumset;
 class TextTools;
 class ScriptEngine;
@@ -65,34 +64,6 @@ class UndoGroup;
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
-
-//---------------------------------------------------------
-//   ScoreTab
-//---------------------------------------------------------
-
-class ScoreTab : public QWidget {
-      Q_OBJECT
-      QList<Viewer*> viewerList;
-      QTabBar* tab;
-      QStackedLayout* stack;
-
-   signals:
-      void currentChanged(int);
-      void tabCloseRequested(int);
-
-   public:
-      ScoreTab(QWidget* parent = 0);
-      void setViewer(int idx, Viewer*);
-      int count() const                   { return viewerList.size(); }
-      Viewer* viewer(int idx) const       { return viewerList[idx]; }
-      void insertTab(int idx, Viewer*, const QString&);
-      void addTab(Viewer*, const QString&);
-      void setTabText(int, const QString&);
-      int indexOf(Viewer* w) const       { return viewerList.indexOf(w); }
-      int currentIndex() const;
-      void setCurrentIndex(int);
-      void removeTab(int);
-      };
 
 //---------------------------------------------------------
 //   AboutBoxDialog
@@ -314,7 +285,6 @@ class MuseScore : public QMainWindow {
       void helpBrowser();
       void splitWindow(bool horizontal);
       void removeSessionFile();
-      void loadPlugins();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -349,14 +319,14 @@ class MuseScore : public QMainWindow {
       void closeSynthControl();
 
    public slots:
-      void setCurrentScore(int);
-      void setCurrentScore2(int);
       void dirtyChanged(Score*);
       void changeState(int);
       void setPos(int tick);
       void searchTextChanged(const QString& s);
       void pluginTriggered(int);
       void handleMessage(const QString& message);
+      void setCurrentViewer(Viewer*);
+      void setCurrentViewer(int);
 
    public:
       MuseScore();
@@ -388,7 +358,6 @@ class MuseScore : public QMainWindow {
       void setDrumPalette(Palette* p) { drumPalette = p; }
       TextTools* textTools();
       void updateTabNames();
-      void setCurrentScore(Viewer*);
       QProgressBar* showProgressBar();
       void hideProgressBar();
       void updateRecentScores(Score*);
@@ -400,12 +369,12 @@ class MuseScore : public QMainWindow {
       SynthControl* getSynthControl() const { return synthControl; }
       void editInPianoroll(Staff* staff);
       PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
-      void writeSessionFile();
-      bool restoreSession();
+      void writeSessionFile(bool);
+      bool restoreSession(bool);
       Viewer* currentViewer() const { return cv; }
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
-      void start();
+      void loadPlugins();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
