@@ -2605,12 +2605,26 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
                   if (grace) {
+                        // LVIFIX: grace note at tick=0 does not work
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
                         cr->setTick(tick - (AL::division / 2));
-                        cr->setDuration(Duration::V_EIGHT);
+                        if (durationType.type() == Duration::V_QUARTER) {
+                              ((Chord*)cr)->setNoteType(NOTE_GRACE4);
+                              cr->setDuration(Duration::V_QUARTER);
+                              }
+                        else if (durationType.type() == Duration::V_16TH) {
+                              ((Chord*)cr)->setNoteType(NOTE_GRACE16);
+                              cr->setDuration(Duration::V_16TH);
+                              }
+                        else if (durationType.type() == Duration::V_32ND) {
+                              ((Chord*)cr)->setNoteType(NOTE_GRACE32);
+                              cr->setDuration(Duration::V_32ND);
+                              }
+                        else
+                              cr->setDuration(Duration::V_EIGHT);
                         st = Segment::SegGrace;
                         }
                   else {
