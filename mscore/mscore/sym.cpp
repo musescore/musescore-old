@@ -475,48 +475,52 @@ void initSymbols()
       symbols[sixteenthflagSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "sixteenth flag"),           0xe191, 0);
       symbols[thirtysecondflagSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "thirtysecond flag"),        0xe192, 0);
       symbols[sixtyfourthflagSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "sixtyfour flag"),           0xe193, 0);
-      symbols[deighthflagSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "deight flag"),              0xe194, 0);
-      symbols[gracedashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "grace dash"),               0xe195, 0);
-      symbols[dgracedashSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "dgrace dash"),              0xe196, 0);
-      symbols[dsixteenthflagSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "dsixteenth flag"),          0xe197, 0);
-      symbols[dthirtysecondflagSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "dthirtysecond flag"),       0xe198, 0);
-      symbols[dsixtyfourthflagSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "dsixtyfourth flag"),        0xe199, 0);
+      symbols[deighthflagSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "128 flag"),                 0xe194, 0);
 
-      symbols[altoclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "alto clef"),                0xe19a, 0);
-      symbols[caltoclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "calto clef"),               0xe19b, 0);
+      symbols[deighthflagSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "deight flag"),              0xe195, 0);
+      symbols[gracedashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "grace dash"),               0xe196, 0);
+      symbols[dgracedashSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "dgrace dash"),              0xe197, 0);
+      symbols[dsixteenthflagSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "dsixteenth flag"),          0xe198, 0);
+      symbols[dthirtysecondflagSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "dthirtysecond flag"),       0xe199, 0);
+      symbols[dsixtyfourthflagSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "dsixtyfourth flag"),        0xe19a, 0);
 
-      symbols[bassclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "bass clef"),                0xe19c, 0);
-      symbols[cbassclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "cbass clef"),               0xe19d, 0);
+      symbols[altoclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "alto clef"),                0xe19b, 0);
+
+      symbols[altoclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "alto clef"),                0xe19c, 0);
+      symbols[caltoclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "calto clef"),               0xe19d, 0);
+
+      symbols[bassclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "bass clef"),                0xe19e, 0);
+      symbols[cbassclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "cbass clef"),               0xe19f, 0);
 /*122*/
-      symbols[trebleclefSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "trebleclef"),               0xe19e, 0);   //G-Clef
-      symbols[ctrebleclefSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "ctrebleclef"),              0xe19f, 0);
-      symbols[percussionclefSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "percussion clef"),          0xe1a0, 0);
-      symbols[cpercussionclefSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "cpercussion clef"),         0xe1a1, 0);
-      symbols[tabclefSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "tab clef"),                 0xe1a2, 0);
-      symbols[ctabclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "ctab clef"),                0xe1a3, 0);
+      symbols[trebleclefSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "trebleclef"),               0xe1a0, 0);   //G-Clef
+      symbols[ctrebleclefSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "ctrebleclef"),              0xe1a1, 0);
+      symbols[percussionclefSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "percussion clef"),          0xe1a2, 0);
+      symbols[cpercussionclefSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "cpercussion clef"),         0xe1a3, 0);
+      symbols[tabclefSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "tab clef"),                 0xe1a4, 0);
+      symbols[ctabclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "ctab clef"),                0xe1a5, 0);
 
-      symbols[fourfourmeterSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "four four meter"),          0xe1a4, 0);
-      symbols[allabreveSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "allabreve"),                0xe1a5, 0);
-      symbols[pedalasteriskSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "pedalasterisk"),            0xe1a6, 0);
-      symbols[pedaldashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldash"),                0xe1a7, 0);
-      symbols[pedaldotSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldot"),                 0xe1a8, 0);
+      symbols[fourfourmeterSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "four four meter"),          0xe1a6, 0);
+      symbols[allabreveSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "allabreve"),                0xe1a7, 0);
+      symbols[pedalasteriskSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "pedalasterisk"),            0xe1a8, 0);
+      symbols[pedaldashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldash"),                0xe1a9, 0);
+      symbols[pedaldotSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldot"),                 0xe1aa, 0);
 
-      symbols[pedalPSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedalP"),                   0xe1a9, 0);
-      symbols[pedaldSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedald"),                   0xe1aa, 0);
-      symbols[pedaleSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedale"),                   0xe1ab, 0);
-      symbols[pedalPedSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedal ped"),                0xe1ac, 0);
+      symbols[pedalPSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedalP"),                   0xe1ab, 0);
+      symbols[pedaldSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedald"),                   0xe1ac, 0);
+      symbols[pedaleSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedale"),                   0xe1ad, 0);
+      symbols[pedalPedSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedal ped"),                0xe1ae, 0);
 
-      symbols[brackettipsRightUp]         = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right up"),    0xe1ad, 0);
-      symbols[brackettipsRightDown]       = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right down"),  0xe1ae, 0);
-      symbols[brackettipsLeftUp]          = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left up"),     0xe1b5, 0);
-      symbols[brackettipsLeftDown]        = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left down"),   0xe1b6, 0);
+      symbols[brackettipsRightUp]         = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right up"),    0xe1af, 0);
+      symbols[brackettipsRightDown]       = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right down"),  0xe1b0, 0);
+      symbols[brackettipsLeftUp]          = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left up"),     0xe1b7, 0);
+      symbols[brackettipsLeftDown]        = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left down"),   0xe1b8, 0);
 
-      symbols[accDiscantSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc discant"),              0xe1af, 0);
-      symbols[accDotSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "acc dot"),                  0xe1b0, 0);
-      symbols[accFreebaseSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "acc freebase"),             0xe1b1, 0);
-      symbols[accStdbaseSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc stdbase"),              0xe1b2, 0);
-      symbols[accBayanbaseSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "acc bayanbase"),            0xe1b3, 0);
-      symbols[accOldEESym]                = Sym(QT_TRANSLATE_NOOP("symbol", "acc old ee"),               0xe1b4, 0);
+      symbols[accDiscantSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc discant"),              0xe1b1, 0);
+      symbols[accDotSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "acc dot"),                  0xe1b2, 0);
+      symbols[accFreebaseSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "acc freebase"),             0xe1b3, 0);
+      symbols[accStdbaseSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc stdbase"),              0xe1b4, 0);
+      symbols[accBayanbaseSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "acc bayanbase"),            0xe1b5, 0);
+      symbols[accOldEESym]                = Sym(QT_TRANSLATE_NOOP("symbol", "acc old ee"),               0xe1b6, 0);
 
       symbols[wholediamond2headSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond2 head"),      0xe147, 0);
       symbols[halfdiamond2headSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond2 head"),       0xe148, 0);

@@ -44,10 +44,12 @@ void Hook::setSubtype(int i)
             case 2:    setSym(sixteenthflagSym);     break;
             case 3:    setSym(thirtysecondflagSym);  break;
             case 4:    setSym(sixtyfourthflagSym);   break;
+            case 5:    setSym(flag128Sym);   break;
             case -1:   setSym(deighthflagSym);       break;
             case -2:   setSym(dsixteenthflagSym);    break;
             case -3:   setSym(dthirtysecondflagSym); break;
             case -4:   setSym(dsixtyfourthflagSym);  break;
+            case -5:   setSym(dflag128Sym);  break;
             default:
                   printf("no hook for subtype %d\n", i);
                   break;
