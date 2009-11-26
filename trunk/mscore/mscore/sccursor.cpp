@@ -31,6 +31,7 @@
 #include "stafftext.h"
 #include "text.h"
 #include "measure.h"
+#include "repeatlist.h"
 
 //---------------------------------------------------------
 //   SCursor
@@ -42,6 +43,21 @@ SCursor::SCursor(Score* s)
       _staffIdx = 0;
       _voice    = 0;
       _segment  = 0;
+      _expandRepeat = false;
+      _curRepeatSegment = 0;
+      _curRepeatSegmentIndex = 0;
+      }
+      
+SCursor::SCursor(Score* s, bool expandRepeat)
+      {
+      _score    = s;
+      _staffIdx = 0;
+      _voice    = 0;
+      _segment  = 0;
+      _expandRepeat = expandRepeat;
+      _curRepeatSegment = 0;
+      _curRepeatSegmentIndex = 0;
+      _score->updateRepeatList(expandRepeat);
       }
 
 //---------------------------------------------------------
@@ -67,6 +83,10 @@ void SCursor::rewind()
       {
       _segment   = 0;
       Measure* m = _score->tick2measure(0);
+      if(_expandRepeat && !_score->repeatList()->isEmpty()){
+        _curRepeatSegment = _score->repeatList()->first();
+        _curRepeatSegmentIndex = 0;
+      }
       if (m) {
             _segment = m->first();
             if (_staffIdx >= 0) {
@@ -205,6 +225,13 @@ QScriptValue ScSCursor::newInstance(Score* score)
       SCursor* cursor = new SCursor(score);
       return newInstance(*cursor);
       }
+      
+
+QScriptValue ScSCursor::newInstance(Score* score, bool expandRepeat)
+      {
+      SCursor* cursor = new SCursor(score, expandRepeat);
+      return newInstance(*cursor);
+      }
 
 QScriptValue ScSCursor::newInstance(const SCursor& cursor)
       {
@@ -223,8 +250,16 @@ QScriptValue ScSCursor::construct(QScriptContext *ctx, QScriptEngine *)
             return QScriptValue();
       QScriptValue v = ctx->argument(0);
       ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-      if (sp)
-            return cls->newInstance(*sp);
+      if (sp){
+            bool expandRepeat = false;
+            if(ctx->argumentCount () > 1){
+              QScriptValue v1 = ctx->argument(1);
+              if(v1.isBoolean()){
+                expandRepeat = v1.toBoolean();
+              }
+            }
+            return cls->newInstance(*sp, expandRepeat);
+      }
       else
             return QScriptValue();
       }
@@ -395,6 +430,29 @@ bool ScSCursorPrototype::next()
       SCursor* cursor = thisSCursor();
       Segment* seg = cursor->segment();;
       seg = seg->next1();
+      RepeatSegment* rs = cursor->repeatSegment();
+      if(rs && cursor->expandRepeat()){
+            Score* score = cursor->score();
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;            
+            if ((seg  && (seg->tick() >= endTick) ) || (!seg) ){
+                int rsIdx = cursor->repeatSegmentIndex();
+                rsIdx ++;
+                if (rsIdx < score->repeatList()->size()){ //there is a next repeat segment
+                    rs = score->repeatList()->at(rsIdx);
+                    cursor->setRepeatSegment(rs);
+                    cursor->setRepeatSegmentIndex(rsIdx);
+                    Measure* m = score->tick2measure(rs->tick);
+                    if(m) 
+                      seg = m->first();
+                    else 
+                      seg = 0;
+                }else{
+                    seg = 0;
+                }
+            }    
+      }
+      
       int staffIdx = cursor->staffIdx();
       if (staffIdx >= 0) {
             int track = staffIdx * VOICES + cursor->voice();
@@ -412,14 +470,33 @@ bool ScSCursorPrototype::next()
 //---------------------------------------------------------
 
 bool ScSCursorPrototype::nextMeasure()
-      {
+{
       SCursor* cursor = thisSCursor();
       Measure* m = cursor->segment()->measure();
       m = m->nextMeasure();
+      RepeatSegment* rs = cursor->repeatSegment();
+      if(rs && cursor->expandRepeat()){
+            Score* score = cursor->score();
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;            
+            if ((m  && (m->tick() + m->tickLen() > endTick) ) || (!m) ){
+                int rsIdx = cursor->repeatSegmentIndex();
+                rsIdx ++;
+                if (rsIdx < score->repeatList()->size()){ //there is a next repeat segment
+                    rs = score->repeatList()->at(rsIdx);
+                    cursor->setRepeatSegment(rs);
+                    cursor->setRepeatSegmentIndex(rsIdx);
+                    m = score->tick2measure(rs->tick);
+                }else{
+                    m = 0;
+                }
+            }    
+      }
+      
       if (m == 0) {
             cursor->setSegment(0);
             return false;
-            }
+      }
       Segment* seg = m->first();
       int staffIdx = cursor->staffIdx();
       if (staffIdx >= 0) {
@@ -429,7 +506,8 @@ bool ScSCursorPrototype::nextMeasure()
             }
       cursor->setSegment(seg);
       return seg != 0;
-      }
+      
+}
 
 //---------------------------------------------------------
 //   putStaffText
@@ -492,3 +570,26 @@ void ScSCursorPrototype::add(ChordRestPtr c)
       score->undoAddElement(c);
       }
 
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+int ScSCursorPrototype::tick(){
+    SCursor* cursor = thisSCursor();
+    ChordRest* cr   = cursor->cr();
+    int offset = 0;
+    RepeatSegment* rs = cursor->repeatSegment();
+    if(rs && cursor->expandRepeat()){
+        offset = rs->utick - rs->tick;
+    }
+      
+    return cr->tick() + offset;
+}
+
+//---------------------------------------------------------
+//   time
+//---------------------------------------------------------
+double ScSCursorPrototype::time(){
+  int tick = this->tick();
+  SCursor* cursor = thisSCursor();
+  return cursor->score()->utick2utime(tick)*1000;
+}

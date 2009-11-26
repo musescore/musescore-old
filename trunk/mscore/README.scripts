@@ -94,6 +94,7 @@ Objects
 
    Cursor
          create:  var a = Cursor(Score score);
+                  var a = Cursor(Score score, bool expandRepeat);
 
          Properties:
             staff       integer
@@ -115,6 +116,8 @@ Objects
             measure()               return the current measure
             next()                  go to next segment
             nextMeasure()           go to first chord/rest of next measure
+            time()        double    current score time in ms
+            tick()          int       current score tick
 
    Chord
          create:   var a = Chord()
@@ -177,9 +180,6 @@ Objects
             y           double   y position (ro)
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
-            time        double   in ms
-            tick        int
-
 
 
 Global Variables
