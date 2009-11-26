@@ -19,8 +19,8 @@
 #=============================================================================
 
 
-REVISION  = `type mscore/mscore/revision.h`
-VERSION   = "0.9.6b${REVISION}"
+REVISION  = $(shell type mscore\mscore\revision.h)
+VERSION   = 0.9.6r${REVISION}
 MINGW_DIR = "C:\mingw"
 
 win32:
@@ -39,6 +39,9 @@ package:
 
 revision:
 	FOR /F "tokens=1 delims=M" %%A IN ('svnversion -n') DO echo %%A > mscore/mscore/revision.h
+	
+version:
+	@echo ${VERSION}
 	
 #
 # clean out of source build
