@@ -1,3 +1,5 @@
+26.nov (la)
+      - add "make version" for windows build
 25.nov (ws)
       - split screen fixes
       - refinement of session management
