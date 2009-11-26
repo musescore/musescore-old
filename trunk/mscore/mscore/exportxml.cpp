@@ -1893,14 +1893,18 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
                   }
 
-            if(! note->visible() ){
+            if (!note->visible()) {
                   noteTag += QString(" print-object=\"no\"");
                   }
 
             xml.stag(noteTag);
 
-            if (grace)
-                  xml.tagE("grace");
+            if (grace) {
+                  if (note->noteType() == NOTE_ACCIACCATURA)
+                        xml.tagE("grace slash=\"yes\"");
+                  else
+                        xml.tagE("grace");
+                  }
             if (i != nl->begin())
                   xml.tagE("chord");
 
