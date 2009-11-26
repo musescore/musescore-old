@@ -311,23 +311,7 @@ double ScMeasurePrototype::getHeight() const{
   Measure* m = thisMeasure();
   return m->bbox().height();
 }
-//---------------------------------------------------------
-//   getTick
-//---------------------------------------------------------
 
-int ScMeasurePrototype::getTick() const{
-  Measure* m = thisMeasure();
-  return m->tick();
-}
-
-//---------------------------------------------------------
-//   getTime
-//---------------------------------------------------------
-
-double ScMeasurePrototype::getTime() const{
-  Measure* m = thisMeasure();
-  return m->score()->utick2utime(m->tick())*1000;
-}
       
 
 

@@ -1,5 +1,7 @@
 26.nov (la)
       - add "make version" for windows build
+      - plugin framework: move time and tick to cursor instead of measure
+      - plugin framework: extend cursor to optionnally support repeats
 25.nov (ws)
       - split screen fixes
       - refinement of session management

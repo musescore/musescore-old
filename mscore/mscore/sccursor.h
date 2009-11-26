@@ -25,6 +25,7 @@ class Score;
 class Chord;
 class Rest;
 class Segment;
+class RepeatSegment;
 class SCursor;
 class ChordRest;
 class Text;
@@ -47,10 +48,16 @@ class SCursor {
       Score* _score;
       int _staffIdx;
       int _voice;
+      bool _expandRepeat;
+      
+      //state
       Segment* _segment;
-
+      RepeatSegment* _curRepeatSegment;
+      int _curRepeatSegmentIndex;
+      
    public:
       SCursor(Score*);
+      SCursor(Score*, bool);
       SCursor() {}
       int staffIdx() const        { return _staffIdx; }
       int voice() const           { return _voice;    }
@@ -58,6 +65,11 @@ class SCursor {
       void setVoice(int v)        { _voice = v;       }
       Segment* segment() const    { return _segment;  }
       void setSegment(Segment* s) { _segment = s;     }
+      RepeatSegment* repeatSegment() const      { return _curRepeatSegment;  }
+      void setRepeatSegment(RepeatSegment* s)   { _curRepeatSegment = s;     }
+      int repeatSegmentIndex()            { return _curRepeatSegmentIndex; }
+      void setRepeatSegmentIndex(int idx) { _curRepeatSegmentIndex = idx; }
+      bool expandRepeat()                 { return _expandRepeat; }
       Score* score() const        { return _score;    }
       ChordRest* cr() const;
       void rewind();
@@ -82,6 +94,7 @@ class ScSCursor : public QObject, public QScriptClass {
 
       QScriptValue constructor() { return ctor; }
       QScriptValue newInstance(Score*);
+      QScriptValue newInstance(Score*, bool);
       QScriptValue newInstance(const SCursor&);
       QueryFlags queryProperty(const QScriptValue& object,
          const QScriptString& name, QueryFlags flags, uint* id);
@@ -121,6 +134,8 @@ class ScSCursorPrototype : public QObject, public QScriptable
       bool isChord() const;
       bool isRest() const;
       void add(ChordRestPtr);
+      int tick();
+      double time();
       };
 
 Q_DECLARE_METATYPE(SCursor)
