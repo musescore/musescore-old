@@ -1,4 +1,6 @@
 27.nov (ws)
+      - more precise note stem position for different note head families
+      - added "do re mi fa la ti" note head families
       - added arrowed accidentals from latest lilypond font
 26.nov (ws)
       - add 128th flags from latest lilypond fonts

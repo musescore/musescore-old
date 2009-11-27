@@ -174,8 +174,8 @@ QFont fontId2font(int fontId)
 //   Sym
 //---------------------------------------------------------
 
-Sym::Sym(const char* name, const QChar& c, int fid)
-   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
+Sym::Sym(const char* name, const QChar& c, int fid, double ax, double ay)
+   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId)), _attach(ax * DPI/PPI, -ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
@@ -404,31 +404,55 @@ void initSymbols()
       symbols[leftparenSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "left parenthesis"),         0xe127, 0);
                                                                                                         //
       symbols[dotSym]                     = Sym(QT_TRANSLATE_NOOP("symbol", "dot"),                      0xe130, 0);
-      symbols[longaupSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "longa up"),                 0xe131, 0);
-      symbols[longadownSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "longa down"),               0xe132, 0);
-      symbols[brevisheadSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "brevis head"),              0xe133, 0);
-      symbols[wholeheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "whole head"),               0xe134, 0);
-      symbols[halfheadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half head"),                0xe135, 0);
-      symbols[quartheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "quart head"),               0xe136, 0);
-      symbols[wholediamondheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond head"),       0xe137, 0);
-      symbols[halfdiamondheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond head"),        0xe138, 0);
-      symbols[diamondheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "diamond head"),             0xe139, 0);
-      symbols[wholetriangleheadSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "whole triangle head"),      0xe13a, 0);
-      symbols[halftriangleheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "half triangle head"),       0xe13b, 0);
+      symbols[longaupSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "longa up"),                 0xe131, 0, 9.90013, 0.000000);
+      symbols[longadownSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "longa down"),               0xe132, 0, 9.900130, 0.000000);
+      symbols[brevisheadSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "brevis head"),              0xe133, 0, 9.900130, 0.000000);
+      symbols[wholeheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "whole head"),               0xe134, 0, 9.90004, 0.0);
+      symbols[halfheadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half head"),                0xe135, 0, 6.94992, 1.30693);
+      symbols[quartheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "quart head"),               0xe136, 0, 6.58089, 0.93907);
 
-      symbols[triangleheadSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "triangle head"),            0xe13d, 0);
-
-      symbols[wholeslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "whole slash head"),         0xe13f, 0);
-      symbols[halfslashheadSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "half slash head"),          0xe140, 0);
-      symbols[quartslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart slash head"),         0xe141, 0);
-      symbols[wholecrossedheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole cross head"),         0xe142, 0);
-      symbols[halfcrossedheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half cross head"),          0xe143, 0);
-      symbols[crossedheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "cross head"),               0xe144, 0);
-      symbols[xcircledheadSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "x circle head"),            0xe145, 0);
-
-      symbols[wholediamond2headSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond2 head"),      0xe150, 0);
-      symbols[halfdiamond2headSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond2 head"),       0xe151, 0);
-      symbols[diamond2headSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "diamond2 head"),            0xe152, 0);
+      symbols[wholediamondheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond head"),       0xe137, 0, 9.900130, 0.000000);
+      symbols[halfdiamondheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond head"),        0xe138, 0, 7.283570, 1.944170);
+      symbols[diamondheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "diamond head"),             0xe139, 0, 7.375050, 1.981250);
+      symbols[s0triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "whole triangle head"),      0xe13a, 0, 11.571000, 0.716340);
+      symbols[d1triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "half triangle head"),       0xe13b, 0, 7.038130, 3.445570);
+      symbols[u1triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "half triangle head"),       0xe13c, 0, 8.361570, 0.636730);
+      symbols[u2triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart triangle head"),      0xe13d, 0, 6.968000, 0.636730);
+      symbols[d2triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart triangle head"),      0xe13e, 0, 5.865130, 3.445570);
+      symbols[wholeslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "whole slash head"),         0xe13f, 0, 15.076480, 5.250030);
+      symbols[halfslashheadSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "half slash head"),          0xe140, 0, 11.726460, 5.250030);
+      symbols[quartslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart slash head"),         0xe141, 0, 8.57650, 5.250030);
+      symbols[wholecrossedheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole cross head"),         0xe142, 0, 8.58107, 1.582100);
+      symbols[halfcrossedheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half cross head"),          0xe143, 0, 7.58098, 1.650860);
+      symbols[crossedheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "cross head"),               0xe144, 0, 6.58089, 2.126480);
+      symbols[xcircledheadSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "x circle head"),            0xe145, 0, 7.82605, 0.000000);
+      symbols[s0doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole do head"),            0xe146, 0, 9.90005, -1.999950);
+      symbols[d1doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half do head"),             0xe147, 0, 6.94992, 1.999950);
+      symbols[u1doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half do head"),             0xe148, 0, 6.94992, -1.999950);
+      symbols[d2doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart do head"),            0xe149, 0, 6.58089, 1.999950);
+      symbols[u2doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart do head"),            0xe14a, 0, 6.58089, -1.999950);
+      symbols[s0reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole re head"),            0xe14b, 0, 9.90005, 0.899980);
+      symbols[u1reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half re head"),             0xe14c, 0, 6.94992, 0.899980);
+      symbols[d1reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half re head"),             0xe14d, 0, 6.94992, -0.899980);
+      symbols[u2reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart re head"),            0xe14e, 0, 6.58089, 0.899980);
+      symbols[d2reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart re head"),            0xe14f, 0, 6.58089, -0.899980);
+      symbols[s0miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole mi head"),            0xe150, 0, 9.90005, 0.000000);
+      symbols[s1miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half mi head"),             0xe151, 0, 6.58089, 0.000000);
+      symbols[s2miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart mi head"),            0xe152, 0, 6.58089, 0.000000);
+      symbols[u0faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole fa head"),            0xe153, 0, 9.90005, 0.000000);
+      symbols[d0faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole fa head"),            0xe154, 0, 9.90005, 0.000000);
+      symbols[u1faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half fa head"),             0xe155, 0, 6.94992, 0.000000);
+      symbols[d1faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half fa head"),             0xe156, 0, 6.94992, 0.000000);
+      symbols[u2faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart fa head"),            0xe157, 0, 6.58089, 0.000000);
+      symbols[d2faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart fa head"),            0xe158, 0, 6.58089, 0.000000);
+      symbols[s0laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole la head"),            0xe159, 0, 9.90005, 0.000000);
+      symbols[s1laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half la head"),             0xe15a, 0, 6.94992, 0.000000);
+      symbols[s2laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart la head"),            0xe15b, 0, 6.58089, 0.000000);
+      symbols[s0tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole ti head"),            0xe15c, 0, 9.90005, 0.629990);
+      symbols[u1tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half ti head"),             0xe15d, 0, 6.94992, 0.629990);
+      symbols[d1tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half ti head"),             0xe15e, 0, 6.94992, -0.629990);
+      symbols[u2tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart ti head"),            0xe15f, 0, 6.58089, 0.629990);
+      symbols[d2tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart ti head"),            0xe160, 0, 6.58089, -0.629990);
 
       symbols[ufermataSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "ufermata"),                 0xe161, 0);
       symbols[dfermataSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "dfermata"),                 0xe162, 0);
@@ -540,5 +564,8 @@ void initSymbols()
                   charReplaceMap.insert(pSymbols[i].text, &pSymbols[i]);
                   }
             }
+//      Sym* s = &symbols[quartheadSym];
+//      printf("DPI %f PPI %f  a/b=%f\n", DPI, PPI, DPI/PPI);
+//      printf("head width %f  attach %f %f\n", s->width(1.0), s->attach(1.0).x() * DPI/PPI, s->attach(1.0).y() * DPI/PPI);
       }
 
