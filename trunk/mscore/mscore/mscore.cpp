@@ -2740,6 +2740,8 @@ bool MuseScore::restoreSession(bool always)
                                           if (!score->read(val)) {
                                                 printf("failed to restore <%s>\n", qPrintable(val));
                                                 delete score;
+                                                f.close();
+                                                return false;
                                                 }
                                           else {
                                                 if (!name.isEmpty()) {

@@ -56,15 +56,35 @@
 //    note head groups
 //---------------------------------------------------------
 
-const int noteHeads[HEAD_GROUPS][4] = {
+const int noteHeads[2][HEAD_GROUPS][4] = {
+      {     // down stem
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
       { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym  },
-      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym,   wholetriangleheadSym },
-      { wholediamond2headSym, halfdiamond2headSym, diamond2headSym,   wholediamond2headSym },
-
+      { s0triangleHeadSym,    d1triangleHeadSym,   d2triangleHeadSym, s0triangleHeadSym    },
       { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym    },
       { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym      },
+      { s0doHeadSym,          d1doHeadSym,         d2doHeadSym,       -1                   },
+      { s0reHeadSym,          d1reHeadSym,         d2reHeadSym,       -1                   },
+      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
+      { d0faHeadSym,          d1faHeadSym,         d2faHeadSym,       -1                   },
+      { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
+      { s0tiHeadSym,          d1tiHeadSym,         d2tiHeadSym,       -1                   },
+      },
+      {     // up stem
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
+      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
+      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym  },
+      { s0triangleHeadSym,    u1triangleHeadSym,   u2triangleHeadSym, s0triangleHeadSym    },
+      { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym    },
+      { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym      },
+      { s0doHeadSym,          u1doHeadSym,         u2doHeadSym,       -1                   },
+      { s0reHeadSym,          u1reHeadSym,         u2reHeadSym,       -1                   },
+      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
+      { u0faHeadSym,          u1faHeadSym,         u2faHeadSym,       -1                   },
+      { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
+      { s0tiHeadSym,          u1tiHeadSym,         u2tiHeadSym,       -1                   },
+      }
       };
 
 //---------------------------------------------------------
@@ -232,7 +252,7 @@ Note::~Note()
 
 int Note::noteHead() const
       {
-      return noteHeads[int(_headGroup)][chord()->duration().headType()];
+      return noteHeads[chord()->up()][int(_headGroup)][chord()->duration().headType()];
       }
 
 //---------------------------------------------------------
@@ -465,31 +485,25 @@ void Note::remove(Element* e)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(score()->styleS(ST_stemWidth)) * .5;
-      double x  = pos().x();
-      double y  = pos().y();
+      QPointF pt(pos());
       if (chord()->staffMove()) {
             System* system = chord()->measure()->system();
-            y  += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
+            pt.ry() += system->staff(staffIdx() + chord()->staffMove())->y() - system->staff(staffIdx())->y();
             }
       if (_mirror)
             upFlag = !upFlag;
-      //
-      // TODO: implement table for all note heads
-      //
-      double _spatium = spatium();
-      qreal yo = _spatium * .2;
-      if (_headGroup == 5)
-            yo = _spatium * 1.0;
+
+      double sw   = point(score()->styleS(ST_stemWidth)) * .5;
+      QPointF off = symbols[noteHead()].attach(mag());
       if (upFlag) {
-            x += headWidth() - sw;
-            y -= yo;
+            pt.rx() += off.x() - sw;
+            pt.ry() += off.y();
             }
       else {
-            x += sw;
-            y += yo;
+            pt.rx() += symbols[noteHead()].width(mag()) - off.x() + sw;
+            pt.ry() -= off.y();
             }
-      return QPointF(x, y);
+      return pt;
       }
 
 //---------------------------------------------------------
@@ -558,7 +572,7 @@ void Note::draw(QPainter& p) const
                   else if (i < in->minPitchA || i > in->maxPitchA)
                         p.setPen(Qt::darkYellow);
                   }
-            symbols[noteHeads[int(_headGroup)][chord()->duration().headType()]].draw(p, magS());
+            symbols[noteHead()].draw(p, magS());
             }
 
       if (chord()) {
@@ -858,11 +872,11 @@ void ShadowNote::draw(QPainter& p) const
       pen.setWidthF(lw);
       p.setPen(pen);
 
-      symbols[noteHeads[_headGroup][_head]].draw(p, magS());
+      symbols[noteHeads[0][_headGroup][_head]].draw(p, magS());
 
       double ms = spatium();
 
-      double x1 = symbols[noteHeads[_headGroup][_head]].width(magS())*.5 - ms;
+      double x1 = symbols[noteHeads[0][_headGroup][_head]].width(magS())*.5 - ms;
       double x2 = x1 + 2 * ms;
 
       ms *= .5;
@@ -885,7 +899,7 @@ void ShadowNote::draw(QPainter& p) const
 
 QRectF ShadowNote::bbox() const
       {
-      QRectF b = symbols[noteHeads[_headGroup][_head]].bbox(magS());
+      QRectF b = symbols[noteHeads[0][_headGroup][_head]].bbox(magS());
       double _spatium = spatium();
       double x  = b.width()/2 - _spatium;
       double lw = point(score()->styleS(ST_ledgerLineWidth));
@@ -1020,10 +1034,16 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         case halfheadSym:         group = 0; break;
                         case halfcrossedheadSym:  group = 1; break;
                         case halfdiamondheadSym:  group = 2; break;
-                        case halftriangleheadSym: group = 3; break;
-                        case halfdiamond2headSym: group = 4; break;
-                        case halfslashheadSym:    group = 5; break;
-                        case xcircledheadSym:     group = 6; break;
+                        case u1triangleHeadSym:   group = 3; break;
+                        case halfslashheadSym:    group = 4; break;
+                        case xcircledheadSym:     group = 5; break;
+                        case u1doHeadSym:         group = 6; break;
+                        case u1reHeadSym:         group = 7; break;
+                        case s1miHeadSym:         group = 8; break;
+                        case u1faHeadSym:         group = 9; break;
+                        case s1laHeadSym:         group = 10; break;
+                        case u1tiHeadSym:         group = 11; break;
+
                         default: printf("unknown note head\n"); break;
                         }
                   delete s;

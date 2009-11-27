@@ -60,19 +60,22 @@ class Sym {
       QFont _font;
       double w;
       QRectF _bbox;
+      QPointF _attach;
 
    public:
       Sym() { _code = 0; }
-      Sym(const char* name, const QChar& c, int fid);
+      Sym(const char* name, const QChar& c, int fid,
+         double x=0.0, double y=0.0
+         );
 
       const char* name() const             { return _name; }
       const QRectF bbox(double mag) const;
       double height(double mag) const      { return _bbox.height() * mag; }
-
       double width(double mag) const       { return w * mag;  }
+      QPointF attach(double mag) const     { return _attach * mag;   }
       QChar code() const                   { return _code;    }
       int getFontId() const                { return fontId;   }
-      QFont font() const                   { return _font;   }
+      QFont font() const                   { return _font;    }
       void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;
@@ -150,6 +153,7 @@ enum {
       rightparenSym,
       leftparenSym,
       dotSym,
+
       longaupSym,
       longadownSym,
       brevisheadSym,
@@ -159,9 +163,11 @@ enum {
       wholediamondheadSym,
       halfdiamondheadSym,
       diamondheadSym,
-      wholetriangleheadSym,
-      halftriangleheadSym,
-      triangleheadSym,
+      s0triangleHeadSym,
+      d1triangleHeadSym,
+      u1triangleHeadSym,
+      u2triangleHeadSym,
+      d2triangleHeadSym,
       wholeslashheadSym,
       halfslashheadSym,
       quartslashheadSym,
@@ -169,6 +175,34 @@ enum {
       halfcrossedheadSym,
       crossedheadSym,
       xcircledheadSym,
+      s0doHeadSym,
+      d1doHeadSym,
+      u1doHeadSym,
+      d2doHeadSym,
+      u2doHeadSym,
+      s0reHeadSym,
+      u1reHeadSym,
+      d1reHeadSym,
+      u2reHeadSym,
+      d2reHeadSym,
+      s0miHeadSym,
+      s1miHeadSym,
+      s2miHeadSym,
+      u0faHeadSym,
+      d0faHeadSym,
+      u1faHeadSym,
+      d1faHeadSym,
+      u2faHeadSym,
+      d2faHeadSym,
+      s0laHeadSym,
+      s1laHeadSym,
+      s2laHeadSym,
+      s0tiHeadSym,
+      u1tiHeadSym,
+      d1tiHeadSym,
+      u2tiHeadSym,
+      d2tiHeadSym,
+
       ufermataSym,
       dfermataSym,
       thumbSym,

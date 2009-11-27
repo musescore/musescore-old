@@ -468,34 +468,12 @@ void MuseScore::showPalette(bool visible)
             sp->setMag(1.3);
             sp->setGrid(33, 36);
             sp->setDrawGrid(true);
-
-            NoteHead* nh = new NoteHead(gscore);
-            nh->setSym(halfheadSym);
-            sp->append(nh, tr("normal", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(halfcrossedheadSym);
-            sp->append(nh, tr("crossed", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(halfdiamondheadSym);
-            sp->append(nh, tr("diamond", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(halftriangleheadSym);
-            sp->append(nh, tr("triangle", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(halfdiamond2headSym);
-            sp->append(nh, tr("diamond2", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(halfslashheadSym);
-            sp->append(nh, tr("slash", "note head"));
-
-            nh = new NoteHead(gscore);
-            nh->setSym(xcircledheadSym);
-            sp->append(nh, tr("xcircle", "note head"));
+            for (int i = 0; i < HEAD_GROUPS; ++i) {
+                  int sym = noteHeads[0][i][1];
+                  NoteHead* nh = new NoteHead(gscore);
+                  nh->setSym(sym);
+                  sp->append(nh, tr(symbols[sym].name(), "note head"));
+                  }
 
             paletteBox->addPalette(sp);
 

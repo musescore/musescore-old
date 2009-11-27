@@ -43,10 +43,12 @@ class Viewer;
 //    note head groups
 //
 enum {
-      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE, HEAD_DIAMOND2,
-      HEAD_SLASH, HEAD_XCIRCLE,
+      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
+      HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI,
       HEAD_GROUPS
       };
+
+extern const int noteHeads[2][HEAD_GROUPS][4];
 
 //---------------------------------------------------------
 //   NoteHead
@@ -256,8 +258,6 @@ class ShadowNote : public Element {
       void setHead(int val)            { _head = val; }
       int head() const                 { return _head; }
       };
-
-extern const int noteHeads[HEAD_GROUPS][4];
 
 #endif
 
