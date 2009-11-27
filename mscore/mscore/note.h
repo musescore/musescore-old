@@ -113,7 +113,6 @@ class Note : public Element {
       Tie* _tieBack;
 
       int _lineOffset;        ///< Used during mouse dragging.
-      int  _head;              ///< note head symbol number
 
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
@@ -136,9 +135,9 @@ class Note : public Element {
 
       double headWidth() const;
       double headHeight() const;
-      int noteHead() const            { return _head;  }
+      int noteHead() const;
       int headGroup() const           { return _headGroup; }
-      void setHeadGroup(int val);
+      void setHeadGroup(int val)      { _headGroup = val;  }
 
       int pitch() const               { return _pitch;    }
       void setPitch(int val);

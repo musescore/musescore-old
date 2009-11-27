@@ -50,15 +50,21 @@
 #include "measure.h"
 #include "undo.h"
 #include "part.h"
+
+//---------------------------------------------------------
+//   noteHeads
+//    note head groups
+//---------------------------------------------------------
+
 const int noteHeads[HEAD_GROUPS][4] = {
-      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym },
-      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym },
-      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym },
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
+      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
+      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym  },
       { wholetriangleheadSym, halftriangleheadSym, triangleheadSym,   wholetriangleheadSym },
       { wholediamond2headSym, halfdiamond2headSym, diamond2headSym,   wholediamond2headSym },
 
-      { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym },
-      { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym },
+      { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym    },
+      { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym      },
       };
 
 //---------------------------------------------------------
@@ -105,7 +111,6 @@ Note::Note(Score* s)
       _headGroup      = 0;
       _hidden         = false;
       _subchannel     = 0;
-      _head           = noteHeads[0][2];
       _accidentalType = ACC_NONE;
 
       _veloType          = AUTO_VAL;
@@ -136,7 +141,6 @@ Note::Note(const Note& n)
       _accidentalType = n._accidentalType;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
-      _head           = n._head;
       _headGroup      = n._headGroup;
       _mirror         = n._mirror;
       _userMirror     = n._userMirror;
@@ -223,12 +227,21 @@ Note::~Note()
       }
 
 //---------------------------------------------------------
+//   noteHead
+//---------------------------------------------------------
+
+int Note::noteHead() const
+      {
+      return noteHeads[int(_headGroup)][chord()->duration().headType()];
+      }
+
+//---------------------------------------------------------
 //   headWidth
 //---------------------------------------------------------
 
 double Note::headWidth() const
       {
-      return symbols[_head].width(magS());
+      return symbols[noteHead()].width(magS());
       }
 
 //---------------------------------------------------------
@@ -237,7 +250,16 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[_head].height(magS());
+      return symbols[noteHead()].height(magS());
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Note::bbox() const
+      {
+      return symbols[noteHead()].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -460,7 +482,7 @@ QPointF Note::stemPos(bool upFlag) const
       if (_headGroup == 5)
             yo = _spatium * 1.0;
       if (upFlag) {
-            x += symbols[_head].width(magS()) - sw;
+            x += headWidth() - sw;
             y -= yo;
             }
       else {
@@ -518,21 +540,6 @@ void Note::setAccidental(Accidental* a)
       }
 
 //---------------------------------------------------------
-//   setHeadGroup
-//---------------------------------------------------------
-
-void Note::setHeadGroup(int val)
-      {
-      if (val >= HEAD_GROUPS) {
-            printf("wrong head group %d\n", val);
-            val = 0;
-            }
-      _headGroup = val;
-      if (chord())
-            _head = noteHeads[int(_headGroup)][chord()->duration().headType()];
-      }
-
-//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -551,7 +558,7 @@ void Note::draw(QPainter& p) const
                   else if (i < in->minPitchA || i > in->maxPitchA)
                         p.setPen(Qt::darkYellow);
                   }
-            symbols[_head].draw(p, magS());
+            symbols[noteHeads[int(_headGroup)][chord()->duration().headType()]].draw(p, magS());
             }
 
       if (chord()) {
@@ -585,15 +592,6 @@ void Note::draw(QPainter& p) const
                         symbols[dotSym].draw(p, magS(), x + d + dd * i, y);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Note::bbox() const
-      {
-      return symbols[_head].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -1239,7 +1237,6 @@ void Note::layout()
       {
       if (parent() == 0)
             return;
-      _head = noteHeads[int(_headGroup)][chord()->duration().headType()];
       if (_accidental)
             _accidental->setMag(mag());
       foreach(Element* e, _el) {

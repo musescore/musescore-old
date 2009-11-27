@@ -121,13 +121,22 @@ enum {
       nineSym,
 
       sharpSym,
+      sharpArrowUpSym,
+      sharpArrowDownSym,
+      sharpArrowBothSym,
       sharpslashSym,
       sharpslash2Sym,
       sharpslash3Sym,
       sharpslash4Sym,
 
       naturalSym,
+      naturalArrowUpSym,
+      naturalArrowDownSym,
+      naturalArrowBothSym,
       flatSym,
+      flatArrowUpSym,
+      flatArrowDownSym,
+      flatArrowBothSym,
 
       flatslashSym,
       flatslash2Sym,

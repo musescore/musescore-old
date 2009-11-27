@@ -62,7 +62,17 @@ Acc accList[] = {
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"), 0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"), 0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"), 0)
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"), 0),
+
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow down"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow both"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow up"),  0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow down"),  0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow both"),  0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow up"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow down"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow both"), 0)
       };
 
 //---------------------------------------------------------
@@ -189,6 +199,18 @@ void Accidental::setSubtype(int i)
             case 23: s->setSym(sharpslash2Sym); break;
             case 24: s->setSym(sharpslash3Sym); break;
             case 25: s->setSym(sharpslash4Sym); break;
+
+            case 26: s->setSym(sharpArrowUpSym); break;
+            case 27: s->setSym(sharpArrowDownSym); break;
+            case 28: s->setSym(sharpArrowBothSym); break;
+
+            case 29: s->setSym(flatArrowUpSym); break;
+            case 30: s->setSym(flatArrowDownSym); break;
+            case 31: s->setSym(flatArrowBothSym); break;
+
+            case 32: s->setSym(naturalArrowUpSym); break;
+            case 33: s->setSym(naturalArrowDownSym); break;
+            case 34: s->setSym(naturalArrowBothSym); break;
             }
       addElement(s, 0.0, 0.0);
       setMag(mag());
@@ -211,7 +233,8 @@ int Accidental::subtype2value(int st)
             1, -1, 2, -2, 0,  // () brackets
             1, -1, 2, -2, 0,  // [] brackets
             0, 0, 0, 0, 0, 0,  // special flats
-            0, 0, 0, 0        // spacial sharps
+            0, 0, 0, 0,        // spacial sharps
+            0,0,0,0,0,0,0,0,0  // arrows
             };
 
       if (st < 0 || st >= int(sizeof(preTab)/sizeof(*preTab)))
