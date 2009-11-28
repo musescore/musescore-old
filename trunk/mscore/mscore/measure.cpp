@@ -1039,12 +1039,12 @@ void Measure::layout2()
  Search for chord at position \a tick at \a staff in \a voice.
 */
 
-Chord* Measure::findChord(int tick, int track, bool /*grace*/)
+Chord* Measure::findChord(int tick, int track, bool grace)
       {
       for (Segment* seg = _first; seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
-            if (seg->tick() == tick) {
+            if (seg->tick() == tick && seg->isGrace() == grace) {
                   Element* el = seg->element(track);
                   if (el && el->type() == CHORD) {
                         return (Chord*)el;

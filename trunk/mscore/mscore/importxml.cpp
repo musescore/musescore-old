@@ -1995,18 +1995,18 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   domNotImplemented(e);
             else if (e.tagName() == "transpose")
                   //domNotImplemented(e);
-            	for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-            		if (ee.tagName() == "diatonic"){
-            		      // Not used in mscore ?
-						  }
-            		else if (ee.tagName() == "chromatic") {
-            			  int tr = ee.text().toInt();
-            			  Part* part = score->part(staff);
-            			  part->setPitchOffset(tr);
-						  }
-            		else
-            			  domError(ee);
-					}
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "diatonic"){
+                              // Not used in mscore ?
+                              }
+                        else if (ee.tagName() == "chromatic") {
+                              int tr = ee.text().toInt();
+                              Part* part = score->part(staff);
+                              part->setPitchOffset(tr);
+                              }
+                        else
+                              domError(ee);
+                        }
             else if (e.tagName() == "measure-style")
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "multiple-rest") {
@@ -2138,6 +2138,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
 
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
+      printf("xmlNote start tick=%d", tick);
       voice = 0;
       move  = 0;
 
@@ -2236,7 +2237,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             else if (tag == "type")
                   durationType = Duration(s);
-            else if (tag == "chord")
+            else if (!grace && tag == "chord")
                   tick -= lastLen;
             else if (tag == "voice")
                   voice = s.toInt() - 1;
@@ -2548,7 +2549,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
       int ticks = (AL::division * duration) / divisions;
 
-      if (tick + ticks > maxtick)
+      if (!grace && tick + ticks > maxtick)
             maxtick = tick + ticks;
 
 //      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
@@ -2604,13 +2605,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
+                  printf(" grace=%d", grace);
                   if (grace) {
-                        // LVIFIX: grace note at tick=0 does not work
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
-                        cr->setTick(tick - (AL::division / 2));
+                        // the subtraction causes a grace at tick=0 to fail
+                        // cr->setTick(tick - (AL::division / 2));
+                        cr->setTick(tick);
                         if (durationType.type() == Duration::V_QUARTER) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE4);
                               cr->setDuration(Duration::V_QUARTER);
@@ -2633,9 +2636,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cr->setDuration(durationType);
                         }
                   cr->setDots(dots);
+                  printf(" cr->tick()=%d", cr->tick());
                   Segment* s = measure->getSegment(st, cr->tick());
                   s->add(cr);
                   }
+            printf(" cr->tick()=%d", cr->tick());
             cr->setStaffMove(move);
 
 
@@ -2872,8 +2877,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   printf("unknown tremolo type %d\n", tremolo);
             }
 
-      lastLen = ticks;
-      tick += ticks;
+      if (!grace) {
+            lastLen = ticks;
+            tick += ticks;
+            }
+      printf(" after inserting note tick=%d\n", tick);
       }
 
 //---------------------------------------------------------
@@ -2944,9 +2952,9 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       double styleYOff = score->textStyle(TEXT_STYLE_HARMONY)->yoff;
       OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY)->offsetType;
-      if (offsetType == OFFSET_ABS){
-    	  styleYOff = styleYOff * DPMM / score->spatium();
-      }
+      if (offsetType == OFFSET_ABS) {
+            styleYOff = styleYOff * DPMM / score->spatium();
+            }
 
       double dy = e.attribute("default-y", QString::number(styleYOff*-10)).toDouble()*-0.1;
 
