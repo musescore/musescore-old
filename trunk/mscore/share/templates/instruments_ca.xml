@@ -1741,7 +1741,7 @@
 			<short-name>Tu. Fa</short-name>
 			<clef>4</clef>
 			<aPitchRange>26-64</aPitchRange>
-			<pPitchRange>24-69</pPitchRange>
+			<pPitchRange>24-72</pPitchRange>
 			<channel>
 				<program>58</program>
             </channel>
@@ -1752,7 +1752,7 @@
 			<short-name>Tu. Do</short-name>
 			<clef>4</clef>
 			<aPitchRange>26-60</aPitchRange>
-			<pPitchRange>24-65</pPitchRange>
+			<pPitchRange>24-72</pPitchRange>
 			<channel>
 				<program>58</program>
             </channel>
@@ -1763,7 +1763,7 @@
 			<short-name>Tu. Si<symbol name="flat" /></short-name>
 			<clef>4</clef>
 			<aPitchRange>28-58</aPitchRange>
-			<pPitchRange>22-63</pPitchRange>
+			<pPitchRange>22-72</pPitchRange>
 			<channel>
 				<program>58</program>
             </channel>
