@@ -752,19 +752,19 @@ MuseScore::MuseScore()
       menuDisplay->addAction(getAction("zoomout"));
       menuDisplay->addSeparator();
 
-      transportId = getAction("toggle-transport");
-      transportId->setCheckable(true);
-      transportId->setChecked(true);
-      menuDisplay->addAction(transportId);
+      a = getAction("toggle-transport");
+      a->setCheckable(true);
+      a->setChecked(transportTools->isVisible());
+      menuDisplay->addAction(a);
 
-      inputId = getAction("toggle-noteinput");
-      inputId->setCheckable(true);
-      inputId->setChecked(true);
-      menuDisplay->addAction(inputId);
+      a = getAction("toggle-noteinput");
+      a->setCheckable(true);
+      a->setChecked(true);
+      menuDisplay->addAction(a);
 
       a = getAction("toggle-statusbar");
       a->setCheckable(true);
-      a->setChecked(preferences.showStatusBar);
+      a->setChecked(true);
       menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
@@ -2283,6 +2283,10 @@ void MuseScore::readSettings()
       else
             _splitScreen = false;
       settings.endGroup();
+      QAction* a = getAction("toggle-transport");
+      a->setChecked(!transportTools->isHidden());
+      a = getAction("toggle-noteinput");
+      a->setChecked(!entryTools->isHidden());
       }
 
 //---------------------------------------------------------

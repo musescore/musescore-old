@@ -1,4 +1,5 @@
 28.nov  (ws)
+      - fix: Note input and transport bar state not well persistent
       - add music font configuration file created from lilypond font
       (lv)
       - MusicXML import/export of grace notes
