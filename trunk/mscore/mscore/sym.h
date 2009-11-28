@@ -64,9 +64,8 @@ class Sym {
 
    public:
       Sym() { _code = 0; }
-      Sym(const char* name, int c, int fid,
-         double x=0.0, double y=0.0
-         );
+      Sym(const char* name, int c, int fid, double x=0.0, double y=0.0);
+      Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
       const char* name() const             { return _name; }
       const QRectF bbox(double mag) const;

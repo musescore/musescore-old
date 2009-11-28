@@ -1,3 +1,29 @@
+//=============================================================================
+//  MuseScore
+//  Linux Music Score Editor
+//  $Id:$
+//
+//  Copyright (C) 2009 Werner Schweer and others
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
+
+//
+//    q+d hack to create a xml font description file from
+//    lilipond tables embedded in mscore-20.ttf
+//
+//    usage: genft mscore-20.ttf > symbols.xml
+//
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -52,7 +78,6 @@ static void parseLILC(char* buffer)
       {
       QString s(buffer);
       QStringList sl = s.split("\n");
-//      printf("strings %d %d\n", sl.size(), sl.size() % 5);
       QRegExp ra("\\(attachment\\s\\.\\s\\(([0-9\\+\\-\\.]{1,})\\s\\.\\s([0-9\\+\\-\\.]{1,})\\)\\)\\)\\)");
       QRegExp rb("\\(\\(bbox\\s\\.\\s\\(([0-9\\+\\-\\.]{1,})\\s([0-9\\+\\-\\.]{1,})\\s([0-9\\+\\-\\.]{1,})\\s([0-9\\+\\-\\.]{1,})\\)\\)");
       int n = sl.size();
@@ -61,7 +86,6 @@ static void parseLILC(char* buffer)
             QString s = sl[i];
             int nn = s.size();
             s = s.mid(1, nn - 3);
-//            printf("<%s>\n", qPrintable(s));
             g.name = s;
             int idx = 0;
             if (namemap.contains(s))
@@ -82,7 +106,7 @@ static void parseLILC(char* buffer)
                   exit(-5);
                   }
             g.attach.rx() = ra.cap(1).toDouble();
-            g.attach.ry() = ra.cap(2).toDouble();
+            g.attach.ry() = -ra.cap(2).toDouble();
 
             s = sl[i+1];
             val = rb.indexIn(s);
@@ -90,7 +114,11 @@ static void parseLILC(char* buffer)
                   printf("bad reg expr b\n");
                   exit(-5);
                   }
-            g.bbox = QRectF(rb.cap(1).toDouble(), rb.cap(2).toDouble(), rb.cap(3).toDouble(), rb.cap(4).toDouble());
+            double a = rb.cap(1).toDouble();
+            double b = rb.cap(2).toDouble();
+            double c = rb.cap(3).toDouble();
+            double d = rb.cap(4).toDouble();
+            g.bbox = QRectF(a, -b, c, b - d);
             glyphs.append(g);
             }
       }
@@ -138,7 +166,6 @@ int main(int, char* argv[])
             exit(-2);
             }
 
-//      FT_CharMap current_cmap = face->charmap;
       FT_Select_Charmap(face, FT_ENCODING_UNICODE);
 
       FT_ULong charcode;
@@ -148,17 +175,14 @@ int main(int, char* argv[])
          charcode = FT_Get_Next_Char(face, charcode, &gindex)) {
             char name[256];
             FT_Get_Glyph_Name(face, gindex, name, 256);
-            // printf("index %3d code 0x%04x <%s>\n", gindex, charcode, name);
             codemap[gindex] = charcode;
             namemap[name] = gindex;
             }
 
       char* p = getTable("LILC", face);
       parseLILC(p);
-      p = getTable("LILY", face);
-//      printf("<%s>\n", p);
-      p = getTable("LILF", face);
-//      printf("<%s>\n", p);
+      // p = getTable("LILY", face);      // global values, not used now
+      // p = getTable("LILF", face);      // subfont table, not used now
       genXml();
       return 0;
       }
