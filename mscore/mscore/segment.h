@@ -132,6 +132,7 @@ class Segment : public Element {
       bool isEmpty() const               { return empty; }
       void fixStaffIdx();
       bool isChordRest() const           { return subtype() == Segment::SegChordRest; }
+      bool isGrace() const               { return subtype() == Segment::SegGrace; }
       };
 
 #endif
