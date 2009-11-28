@@ -3,6 +3,8 @@
       - add music font configuration file created from lilypond font
       (lv)
       - MusicXML import/export of grace notes
+      (db)
+      - Extend professional range of tuba (en, ca, gl, nl)
 27.nov (ws)
       - more precise note stem position for different note head families
       - added "do re mi fa la ti" note head families
