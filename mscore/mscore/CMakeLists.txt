@@ -357,4 +357,20 @@ if (NOT MINGW AND NOT APPLE)
    set_target_properties( xml2smf
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
+
+#======================================
+#     target genft
+#     create font table
+#======================================
+
+   add_executable(
+      genft
+      ${ui_headers}
+      genft.cpp
+      )
+   target_link_libraries(genft al ${QT_LIBRARIES} )
+   set_target_properties(genft
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2"
+      )
 endif (NOT MINGW AND NOT APPLE)
+

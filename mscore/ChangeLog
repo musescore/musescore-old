@@ -1,4 +1,6 @@
-28.nov (lv)
+28.nov  (ws)
+      - add music font configuration file created from lilypond font
+      (lv)
       - MusicXML import/export of grace notes
 27.nov (ws)
       - more precise note stem position for different note head families

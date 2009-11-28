@@ -64,7 +64,7 @@ class Sym {
 
    public:
       Sym() { _code = 0; }
-      Sym(const char* name, const QChar& c, int fid,
+      Sym(const char* name, int c, int fid,
          double x=0.0, double y=0.0
          );
 
@@ -75,13 +75,14 @@ class Sym {
       QPointF attach(double mag) const     { return _attach * mag;   }
       QChar code() const                   { return _code;    }
       int getFontId() const                { return fontId;   }
+      int setFontId(int v)                 { return fontId = v;   }
       QFont font() const                   { return _font;    }
       void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;
       void draw(QPainter& painter) const;
       void draw(QPainter& painter, double mag) const;
-      static void writeCtable();
+      void setAttach(const QPointF& r)       { _attach = r; }
       };
 
 extern QVector<Sym> symbols;
@@ -91,6 +92,7 @@ enum {
       clefOneSym,
       clefFiveSym,
       wholerestSym,
+
       halfrestSym,
       outsidewholerestSym,
       outsidehalfrestSym,
@@ -103,7 +105,6 @@ enum {
       thirtysecondrestSym,
       sixtyfourthrestSym,
       hundredtwentyeighthrestSym,
-
       rest_M3,
       varcodaSym,
 
@@ -205,6 +206,7 @@ enum {
 
       ufermataSym,
       dfermataSym,
+
       thumbSym,
       sforzatoaccentSym,
       esprSym,
@@ -225,13 +227,16 @@ enum {
       trillSym,
       upedalheelSym,
       dpedalheelSym,
+
       upedaltoeSym,
       dpedaltoeSym,
       flageoletSym,
       segnoSym,
       codaSym,
+
       rcommaSym,
       lcommaSym,
+
       arpeggioSym,
       trillelementSym,
       arpeggioarrowdownSym,
@@ -242,12 +247,14 @@ enum {
       prallprallSym,
       prallmordentSym,
       upprallSym,
+
       downprallSym,
       upmordentSym,
       downmordentSym,
       lineprallSym,
       pralldownSym,
       prallupSym,
+
       eighthflagSym,
       sixteenthflagSym,
       thirtysecondflagSym,

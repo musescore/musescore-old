@@ -87,12 +87,20 @@ endgroup;
 enddef;
 
 
-fet_beginchar ("bracket tip right up", "right up");
+fet_beginchar ("bracket tip right up", "uright");
 	draw_bracket (0.45 staff_space#, 1.9 staff_space#, 1, 1);
 fet_endchar;
 
-fet_beginchar ("bracket tip right down", "right down");
+fet_beginchar ("bracket tip right down", "dright");
 	draw_bracket (0.45 staff_space#, 1.9 staff_space#, -1, 1);
+fet_endchar;
+
+fet_beginchar ("bracket tip left up", "uleft");
+	draw_bracket (0.45 staff_space#, 1.9 staff_space#, 1, -1);
+fet_endchar;
+
+fet_beginchar ("bracket tip left down", "dleft");
+	draw_bracket (0.45 staff_space#, 1.9 staff_space#, -1, -1);
 fet_endchar;
 
 

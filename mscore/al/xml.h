@@ -78,6 +78,7 @@ class Xml : public QTextStream {
 extern QString docName;
 extern QPointF readPoint(QDomElement);
 extern QSizeF readSize(QDomElement);
+extern QRectF readRectF(QDomElement);
 extern QColor readColor(QDomElement e);
 extern void domError(QDomElement node);
 extern void domNotImplemented(QDomElement node);

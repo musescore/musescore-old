@@ -43,16 +43,6 @@ if test = 0:
 	input feta-haak;
 	input feta-accordion;
 
-fet_beginchar ("bracket tip left up", "left up");
-	draw_bracket (0.45 staff_space#, 1.9 staff_space#, 1, -1);
-fet_endchar;
-
-fet_beginchar ("bracket tip left down", "left down");
-	draw_bracket (0.45 staff_space#, 1.9 staff_space#, -1, -1);
-fet_endchar;
-
-
-
 %      input mscore;
 else:
 	input feta-test-generic.mf;
