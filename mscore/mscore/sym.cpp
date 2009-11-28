@@ -411,13 +411,24 @@ QFont fontId2font(int fontId)
 //---------------------------------------------------------
 
 Sym::Sym(const char* name, int c, int fid, double ax, double ay)
-   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId)), _attach(ax * DPI/PPI, -ay * DPI/PPI)
+   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId)), _attach(ax * DPI/PPI, ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code.unicode(),c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
+      }
+
+Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
+   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
+      {
+      double s = DPI/PPI;
+      _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
+      _attach = a * s;
+//      _attach.rx() = a.x() * s;
+//      _attach.ry() = a.y() * s;
+      w = _bbox.width();
       }
 
 //---------------------------------------------------------
@@ -596,6 +607,7 @@ void initSymbols()
                               QString name;
                               int code = -1;
                               QPointF p;
+                              QRectF b;
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
                                     QString val(eee.text());
@@ -609,9 +621,8 @@ void initSymbols()
                                           }
                                     else if (tag == "attach")
                                           p = readPoint(eee);
-                                    else if (tag == "bbox") {
-                                          // QRectF r = Xml::readRectF(eee);
-                                          }
+                                    else if (tag == "bbox")
+                                          b = readRectF(eee);
                                     else
                                           domError(eee);
                                     }
@@ -619,7 +630,7 @@ void initSymbols()
                                     printf("no code for glyph <%s>\n", qPrintable(name));
                               int idx = lnhash[name];
                               if (idx > 0)
-                                    symbols[idx] = Sym(qPrintable(name), code, 0, p.x(), p.y());
+                                    symbols[idx] = Sym(qPrintable(name), code, 0, p, b);
                               else if (idx == 0)
                                     printf("symbol <%s> not found\n", qPrintable(name));
                               }

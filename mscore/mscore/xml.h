@@ -28,6 +28,7 @@
 using AL::Prop;
 using AL::docName;
 using AL::readPoint;
+using AL::readRectF;
 using AL::readSize;
 using AL::readColor;
 using AL::domError;
