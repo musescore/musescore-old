@@ -360,7 +360,7 @@ TextPalette::TextPalette(QWidget* parent)
             if (sc.fontId == -1)
                   tb->setText(sc.code);
             else {
-                  Sym sym("", sc.code, sc.fontId);
+                  Sym sym("", sc.code.unicode(), sc.fontId);
                   QIcon icon = symIcon(sym, 25, 35, 35);
                   tb->setIconSize(QSize(35, 35));
                   tb->setIcon(icon);

@@ -174,6 +174,12 @@ void Xml::tag(const QString& name, QVariant data)
                   *this << QString("<%1 x=\"%2\" y=\"%3\" w=\"%4\" h=\"%5\"/>\n").arg(name).arg(r.x()).arg(r.y()).arg(r.width()).arg(r.height());
                   }
                   break;
+            case QVariant::RectF:
+                  {
+                  QRectF r(data.value<QRectF>());
+                  *this << QString("<%1 x=\"%2\" y=\"%3\" w=\"%4\" h=\"%5\"/>\n").arg(name).arg(r.x()).arg(r.y()).arg(r.width()).arg(r.height());
+                  }
+                  break;
             case QVariant::PointF:
                   {
                   QPointF p(data.value<QPointF>());
@@ -272,6 +278,20 @@ QColor readColor(QDomElement e)
 QSizeF readSize(QDomElement e)
       {
       QSizeF p;
+      p.setWidth(e.attribute("w", "0.0").toDouble());
+      p.setHeight(e.attribute("h", "0.0").toDouble());
+      return p;
+      }
+
+//---------------------------------------------------------
+//   readRectF
+//---------------------------------------------------------
+
+QRectF readRectF(QDomElement e)
+      {
+      QRectF p;
+      p.setX(e.attribute("x", "0.0").toDouble());
+      p.setY(e.attribute("y", "0.0").toDouble());
       p.setWidth(e.attribute("w", "0.0").toDouble());
       p.setHeight(e.attribute("h", "0.0").toDouble());
       return p;

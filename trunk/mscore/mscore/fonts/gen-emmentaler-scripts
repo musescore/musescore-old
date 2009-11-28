@@ -71,9 +71,9 @@ endloop
 MergeFonts("feta-alphabet%(design_size)d.pfb");
 MergeKern("feta-alphabet%(design_size)d.tfm");
 
-# LoadTableFromFile("LILF", "%(filename)s-%(design_size)d.subfonts");
-# LoadTableFromFile("LILC", "feta%(design_size)d.otf-table");
-# LoadTableFromFile("LILY", "feta%(design_size)d.otf-gtable");
+LoadTableFromFile("LILF", "%(filename)s-%(design_size)d.subfonts");
+LoadTableFromFile("LILC", "feta%(design_size)d.otf-table");
+LoadTableFromFile("LILY", "feta%(design_size)d.otf-gtable");
 
 Generate("%(filename)s-%(design_size)d.ttf");
 # Generate("%(filename)s-%(design_size)d.otf");

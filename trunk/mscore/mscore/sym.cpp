@@ -28,6 +28,242 @@
 QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
+struct LilypondNames {
+      int msIndex;
+      const char* name;
+      } lilypondNames[] = {
+            { halfrestSym,          "rests.0" },
+            { outsidewholerestSym,  "rests.1" },
+            { outsidehalfrestSym,   "rests.0o" },
+            { longarestSym,         "rests.1o" },
+            { breverestSym,         "rests.M3" },
+            { quartrestSym,         "rests.M2" },
+            { eighthrestSym,        "rests.M1" },
+            { clasquartrestSym,     "rests.2" },
+            { sixteenthrestSym,     "rests.2classical" },
+            { thirtysecondrestSym,  "rests.3" },
+            { sixtyfourthrestSym,   "rests.4" },
+            { hundredtwentyeighthrestSym, "rests.5" },
+            { rest_M3,              "rests.6" },
+            { varcodaSym,           "rests.7" },
+            { sharpSym,             "accidentals.sharp" },
+            { sharpArrowUpSym,      "accidentals.sharp.arrowup" },
+            { sharpArrowDownSym,    "accidentals.sharp.arrowdown" },
+            { sharpArrowBothSym,    "accidentals.sharp.arrowboth" },
+            { sharpslashSym,        "accidentals.sharp.slashslash.stem" },
+            { sharpslash2Sym,       "accidentals.sharp.slashslashslash.stemstem" },
+            { sharpslash3Sym,       "accidentals.sharp.slashslashslash.stem" },
+            { sharpslash4Sym,       "accidentals.sharp.slashslash.stemstemstem" },
+            { naturalSym,           "accidentals.natural" },
+            { naturalArrowUpSym,    "accidentals.natural.arrowup" },
+            { naturalArrowDownSym,  "accidentals.natural.arrowdown" },
+            { naturalArrowBothSym,  "accidentals.natural.arrowboth" },
+            { flatSym,              "accidentals.flat" },
+            { flatArrowUpSym,       "accidentals.flat.arrowup" },
+            { flatArrowDownSym,     "accidentals.flat.arrowdown" },
+            { flatArrowBothSym,     "accidentals.flat.arrowboth" },
+            { flatslashSym,         "accidentals.flat.slash" },
+            { flatslash2Sym,        "accidentals.flat.slashslash" },
+            { mirroredflat2Sym,     "accidentals.mirroredflat.flat" },
+            { mirroredflatSym,      "accidentals.mirroredflat" },
+            { mirroredflatslashSym, "accidentals.mirroredflat.backslash" },
+            { flatflatSym,          "accidentals.flatflat" },
+            { flatflatslashSym,     "accidentals.flatflat.slash" },
+            { sharpsharpSym,        "accidentals.doublesharp" },
+            { rightparenSym,        "accidentals.rightparen" },
+            { leftparenSym,         "accidentals.leftparen" },
+            { -1, "arrowheads.open.01" },
+            { -1, "arrowheads.open.0M1" },
+            { -1, "arrowheads.open.11" },
+            { -1, "arrowheads.open.1M1" },
+            { -1, "arrowheads.close.01" },
+            { -1, "arrowheads.close.0M1" },
+            { -1, "arrowheads.close.11" },
+            { -1, "arrowheads.close.1M1" },
+            { dotSym,               "dots.dot" },
+            { longaupSym,           "noteheads.uM2" },
+            { longadownSym,         "noteheads.dM2" },
+            { brevisheadSym,        "noteheads.sM1" },
+            { wholeheadSym,         "noteheads.s0" },
+            { halfheadSym,          "noteheads.s1" },
+            { quartheadSym,         "noteheads.s2" },
+            { wholediamondheadSym,  "noteheads.s0diamond" },
+            { halfdiamondheadSym,   "noteheads.s1diamond" },
+            { diamondheadSym,       "noteheads.s2diamond" },
+            { s0triangleHeadSym,    "noteheads.s0triangle" },
+            { d1triangleHeadSym,    "noteheads.d1triangle" },
+            { u1triangleHeadSym,    "noteheads.u1triangle" },
+            { u2triangleHeadSym,    "noteheads.u2triangle" },
+            { d2triangleHeadSym,    "noteheads.d2triangle" },
+            { wholeslashheadSym,    "noteheads.s0slash" },
+            { halfslashheadSym,     "noteheads.s1slash" },
+            { quartslashheadSym,    "noteheads.s2slash" },
+            { wholecrossedheadSym,  "noteheads.s0cross" },
+            { halfcrossedheadSym,   "noteheads.s1cross" },
+            { crossedheadSym,       "noteheads.s2cross" },
+            { xcircledheadSym,      "noteheads.s2xcircle" },
+            { s0doHeadSym,          "noteheads.s0do" },
+            { d1doHeadSym,          "noteheads.d1do" },
+            { u1doHeadSym,          "noteheads.u1do" },
+            { d2doHeadSym,          "noteheads.d2do" },
+            { u2doHeadSym,          "noteheads.u2do" },
+            { s0reHeadSym,          "noteheads.s0re" },
+            { u1reHeadSym,          "noteheads.u1re" },
+            { d1reHeadSym,          "noteheads.d1re" },
+            { u2reHeadSym,          "noteheads.u2re" },
+            { d2reHeadSym,          "noteheads.d2re" },
+            { s0miHeadSym,          "noteheads.s0mi" },
+            { s1miHeadSym,          "noteheads.s1mi" },
+            { s2miHeadSym,          "noteheads.s2mi" },
+            { u0faHeadSym,          "noteheads.u0fa" },
+            { d0faHeadSym,          "noteheads.d0fa" },
+            { u1faHeadSym,          "noteheads.u1fa" },
+            { d1faHeadSym,          "noteheads.d1fa" },
+            { u2faHeadSym,          "noteheads.u2fa" },
+            { d2faHeadSym,          "noteheads.d2fa" },
+            { s0laHeadSym,          "noteheads.s0la" },
+            { s1laHeadSym,          "noteheads.s1la" },
+            { s2laHeadSym,          "noteheads.s2la" },
+            { s0tiHeadSym,          "noteheads.s0ti" },
+            { u1tiHeadSym,          "noteheads.u1ti" },
+            { d1tiHeadSym,          "noteheads.d1ti" },
+            { u2tiHeadSym,          "noteheads.u2ti" },
+            { d2tiHeadSym,          "noteheads.d2ti" },
+            { ufermataSym,          "scripts.ufermata" },
+            { dfermataSym,          "scripts.dfermata" },
+
+            { -1, "scripts.ushortfermata" },
+            { -1, "scripts.dshortfermata" },
+            { -1, "scripts.ulongfermata" },
+            { -1, "scripts.dlongfermata" },
+            { -1, "scripts.uverylongfermata" },
+            { -1, "scripts.dverylongfermata" },
+
+            { thumbSym,             "scripts.thumb" },
+            { sforzatoaccentSym,    "scripts.sforzato" },
+            { esprSym,              "scripts.espr" },
+            { staccatoSym,          "scripts.staccato" },
+            { ustaccatissimoSym,    "scripts.ustaccatissimo" },
+            { dstaccatissimoSym,    "scripts.dstaccatissimo" },
+            { tenutoSym,            "scripts.tenuto" },
+            { uportatoSym,          "scripts.uportato" },
+            { dportatoSym,          "scripts.dportato" },
+            { umarcatoSym,          "scripts.umarcato" },
+            { dmarcatoSym,          "scripts.dmarcato" },
+            { ouvertSym,            "scripts.open" },
+            { plusstopSym,          "scripts.stopped" },
+            { upbowSym,             "scripts.upbow" },
+            { downbowSym,           "scripts.downbow" },
+            { reverseturnSym,       "scripts.reverseturn" },
+            { turnSym,              "scripts.turn" },
+            { trillSym,             "scripts.trill" },
+            { upedalheelSym,        "scripts.upedalheel" },
+            { dpedalheelSym,        "scripts.dpedalheel" },
+
+            { upedaltoeSym,         "scripts.upedaltoe" },
+            { dpedaltoeSym,         "scripts.dpedaltoe" },
+            { flageoletSym,         "scripts.flageolet" },
+            { segnoSym,             "scripts.segno" },
+            { codaSym,              "scripts.coda" },
+            { varcodaSym,           "scripts.varcoda" },
+
+            { rcommaSym,            "scripts.rcomma" },
+            { lcommaSym,            "scripts.lcomma" },
+
+            { -1, "scripts.rvarcomma" },
+            { -1, "scripts.lvarcomma" },
+
+            { arpeggioSym,          "scripts.arpeggio" },
+            { trillelementSym,      "scripts.trill_element" },
+            { arpeggioarrowdownSym, "scripts.arpeggio.arrow.M1" },
+            { arpeggioarrowupSym,   "scripts.arpeggio.arrow.1" },
+            { trilelementSym,       "scripts.trilelement" },
+            { prallSym,             "scripts.prall" },
+            { mordentSym,           "scripts.mordent" },
+            { prallprallSym,        "scripts.prallprall" },
+            { prallmordentSym,      "scripts.prallmordent" },
+            { upprallSym,           "scripts.upprall" },
+
+            { upmordentSym,         "scripts.upmordent" },
+            { pralldownSym,         "scripts.pralldown" },
+            { downprallSym,         "scripts.downprall" },
+            { downmordentSym,       "scripts.downmordent" },
+            { prallupSym,           "scripts.prallup" },
+            { lineprallSym,         "scripts.lineprall" },
+            { -1, "scripts.caesura.curved" },
+            { -1, "scripts.caesura.straight" },
+
+            { eighthflagSym,        "flags.u3" },
+            { sixteenthflagSym,     "flags.u4" },
+            { thirtysecondflagSym,  "flags.u5" },
+            { sixtyfourthflagSym,   "flags.u6" },
+            { flag128Sym,           "flags.u7" },
+            { deighthflagSym,       "flags.d3" },
+            { gracedashSym,         "flags.ugrace" },
+            { dgracedashSym,        "flags.dgrace" },
+            { dsixteenthflagSym,    "flags.d4" },
+            { dthirtysecondflagSym, "flags.d5" },
+            { dsixtyfourthflagSym,  "flags.d6" },
+            { dflag128Sym,          "flags.d7" },
+            { altoclefSym,          "clefs.C" },
+            { caltoclefSym,         "clefs.C_change" },
+            { bassclefSym,          "clefs.F" },
+            { cbassclefSym,         "clefs.F_change" },
+            { trebleclefSym,        "clefs.G" },
+            { ctrebleclefSym,       "clefs.G_change" },
+            { percussionclefSym,    "clefs.percussion" },
+            { cpercussionclefSym,   "clefs.percussion_change" },
+            { tabclefSym,           "clefs.tab" },
+            { ctabclefSym,          "clefs.tab_change" },
+            { fourfourmeterSym,     "timesig.C44" },
+            { allabreveSym,         "timesig.C22" },
+            { pedalasteriskSym,     "pedal.*" },
+            { pedaldashSym,         "pedal.M" },
+            { pedaldotSym,          "pedal.." },
+            { pedalPSym,            "pedal.P" },
+            { pedaldSym,            "pedal.d" },
+            { pedaleSym,            "pedal.e" },
+            { pedalPedSym,          "pedal.Ped" },
+
+            { brackettipsRightUp,   "brackettips.uright"     },
+            { brackettipsRightDown, "brackettips.dright"     },
+            { brackettipsLeftUp,    "brackettips.uleft"      },
+            { brackettipsLeftDown,  "brackettips.dleft"      },
+            { accDotSym,            "accordion.accDot"       },
+            { accFreebaseSym,       "accordion.accFreebase"  },
+            { accStdbaseSym,        "accordion.accStdbase"   },
+            { accBayanbaseSym,      "accordion.accBayanbase" },
+            { accOldEESym,          "accordion.accOldEE"     },
+            { accDiscantSym,        "accordion.accDiscant"   },
+
+            { -1, "left up" },
+            { -1, "left down" },
+            { -1, "plus" },
+            { -1, "comma" },
+            { -1, "hyphen" },
+            { -1, "period" },
+
+            { zeroSym,        "zero" },
+            { oneSym,         "one" },
+            { twoSym,         "two" },
+            { threeSym,       "three" },
+            { fourSym,        "four" },
+            { fiveSym,        "five" },
+            { sixSym,         "six" },
+            { sevenSym,       "seven" },
+            { eightSym,       "eight" },
+            { nineSym,        "nine" },
+
+            { -1, "space" },
+
+            { letterzSym,     "z" },
+            { letterfSym,     "f" },
+            { lettersSym,     "s" },
+            { letterpSym,     "p" },
+            { lettermSym,     "m" },
+            { letterzSym,     "r" },
+      };
+
 SymCode pSymbols[] = {
       SymCode(0xe10e, 1),    //natural
       SymCode(0xe10c, 1),    // sharp
@@ -174,12 +410,12 @@ QFont fontId2font(int fontId)
 //   Sym
 //---------------------------------------------------------
 
-Sym::Sym(const char* name, const QChar& c, int fid, double ax, double ay)
+Sym::Sym(const char* name, int c, int fid, double ax, double ay)
    : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId)), _attach(ax * DPI/PPI, -ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
-            printf("Sym: character 0x%x <%s> are not in font <%s>\n", _code.unicode(), _name, qPrintable(_font.family()));
+            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code.unicode(),c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
       }
@@ -305,32 +541,6 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       }
 
 //---------------------------------------------------------
-//   writeCtable
-//---------------------------------------------------------
-
-void Sym::writeCtable()
-      {
-      QFile f("ctable.cpp");
-      f.open(QIODevice::WriteOnly);
-      QTextStream s(&f);
-
-      s << "      CTable ctable[] = {\n";
-      for (int i = 0; i < symbols.size(); ++i) {
-            const Sym& sym = symbols[i];
-            s << "            { " << int(sym._code.unicode())
-              << ", " << sym.fontId
-              << ", " << sym._bbox.x()
-              << ", " << sym._bbox.y()
-              << ", " << sym._bbox.width()
-              << ", " << sym._bbox.height()
-              << ", " << sym.w
-              << " },\n";
-              };
-      s << "            };\n";
-      f.close();
-      }
-
-//---------------------------------------------------------
 //   initSymbols
 //---------------------------------------------------------
 
@@ -339,212 +549,12 @@ void initSymbols()
       symbols[clefEightSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"),                 0x38, 2);
       symbols[clefOneSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),                   0x31, 2);
       symbols[clefFiveSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),                  0x35, 2);
-
-      symbols[plusSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "plus"),                       0x2b, 0);
-      symbols[zeroSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "zero"),                       0x30, 0);
-      symbols[oneSym]                     = Sym(QT_TRANSLATE_NOOP("symbol", "one"),                        0x31, 0);
-      symbols[twoSym]                     = Sym(QT_TRANSLATE_NOOP("symbol", "two"),                        0x32, 0);
-      symbols[threeSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "three"),                      0x33, 0);
-      symbols[fourSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "four"),                       0x34, 0);
-      symbols[fiveSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "five"),                       0x35, 0);
-      symbols[sixSym]                     = Sym(QT_TRANSLATE_NOOP("symbol", "six"),                        0x36, 0);
-      symbols[sevenSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "seven"),                      0x37, 0);
-      symbols[eightSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "eight"),                      0x38, 0);
-      symbols[nineSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "nine"),                       0x39, 0);
-
       symbols[letterfSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "f"),                          0x66, 1);
       symbols[lettermSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "m"),                          0x6d, 1);
       symbols[letterpSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "p"),                          0x70, 1);
       symbols[letterrSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "r"),                          0x72, 1);
       symbols[lettersSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "s"),                          0x73, 1);
       symbols[letterzSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "z"),                          0x7a, 1);
-
-      symbols[wholerestSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "whole rest"),               0xe100, 0);
-      symbols[halfrestSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half rest"),                0xe101, 0);
-      symbols[outsidewholerestSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "outside whole rest"),       0xe102, 0);
-      symbols[outsidehalfrestSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "outside half rest"),        0xe103, 0);
-      symbols[rest_M3]                    = Sym(QT_TRANSLATE_NOOP("symbol", "rest M3"),                  0xe104, 0);
-      symbols[longarestSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "longa rest"),               0xe105, 0);
-      symbols[breverestSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "breve rest"),               0xe106, 0);
-      symbols[quartrestSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "quart rest"),               0xe107, 0);
-
-      symbols[clasquartrestSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "clas quart rest"),          0xe108, 0);
-      symbols[eighthrestSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "eight rest"),               0xe109, 0);
-      symbols[sixteenthrestSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "16' rest"),                 0xe10a, 0);
-      symbols[thirtysecondrestSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "32'  rest"),                0xe10b, 0);
-      symbols[sixtyfourthrestSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "64' rest"),                 0xe10c, 0);
-      symbols[hundredtwentyeighthrestSym] = Sym(QT_TRANSLATE_NOOP("symbol", "128' rest"),                0xe10d, 0);
-
-      symbols[sharpSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "sharp"),                    0xe10e, 0);
-      symbols[sharpArrowUpSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "sharp arrow up"),           0xe10f, 0);
-      symbols[sharpArrowDownSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "sharp arrow down"),         0xe110, 0);
-      symbols[sharpArrowBothSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "sharp arrow both"),         0xe111, 0);
-      symbols[sharpslashSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "sharp slash"),              0xe112, 0);
-      symbols[sharpslash2Sym]             = Sym(QT_TRANSLATE_NOOP("symbol", "sharp slash2"),             0xe113, 0);
-      symbols[sharpslash3Sym]             = Sym(QT_TRANSLATE_NOOP("symbol", "sharp slash3"),             0xe114, 0);
-      symbols[sharpslash4Sym]             = Sym(QT_TRANSLATE_NOOP("symbol", "sharp slash4"),             0xe115, 0);
-      symbols[naturalSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "natural"),                  0xe116, 0);
-      symbols[naturalArrowUpSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "natural arrow up"),         0xe117, 0);
-      symbols[naturalArrowDownSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "natural arrow down"),       0xe118, 0);
-      symbols[naturalArrowBothSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "natural arrow both"),       0xe119, 0);
-      symbols[flatSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "flat"),                     0xe11a, 0);
-      symbols[flatArrowUpSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "flat arrow up"),            0xe11b, 0);
-      symbols[flatArrowDownSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "flat arrow down"),          0xe11c, 0);
-      symbols[flatArrowBothSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "flat arrow both"),          0xe11d, 0);
-      symbols[flatslashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "flat slash"),               0xe11e, 0);
-      symbols[flatslash2Sym]              = Sym(QT_TRANSLATE_NOOP("symbol", "flat slash2"),              0xe11f, 0);
-      symbols[mirroredflat2Sym]           = Sym(QT_TRANSLATE_NOOP("symbol", "mirrored flat2"),           0xe120, 0);
-      symbols[mirroredflatSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "mirrored flat"),            0xe121, 0);
-      symbols[mirroredflatslashSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "mirrored flat slash"),      0xe122, 0);
-      symbols[flatflatSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "flat flat"),                0xe123, 0);
-      symbols[flatflatslashSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "flat flat slash"),          0xe124, 0);
-      symbols[sharpsharpSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "sharp sharp"),              0xe125, 0);
-
-      symbols[rightparenSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "right parenthesis"),        0xe126, 0);
-      symbols[leftparenSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "left parenthesis"),         0xe127, 0);
-                                                                                                        //
-      symbols[dotSym]                     = Sym(QT_TRANSLATE_NOOP("symbol", "dot"),                      0xe130, 0);
-      symbols[longaupSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "longa up"),                 0xe131, 0, 9.90013, 0.000000);
-      symbols[longadownSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "longa down"),               0xe132, 0, 9.900130, 0.000000);
-      symbols[brevisheadSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "brevis head"),              0xe133, 0, 9.900130, 0.000000);
-      symbols[wholeheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "whole head"),               0xe134, 0, 9.90004, 0.0);
-      symbols[halfheadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half head"),                0xe135, 0, 6.94992, 1.30693);
-      symbols[quartheadSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "quart head"),               0xe136, 0, 6.58089, 0.93907);
-
-      symbols[wholediamondheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole diamond head"),       0xe137, 0, 9.900130, 0.000000);
-      symbols[halfdiamondheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half diamond head"),        0xe138, 0, 7.283570, 1.944170);
-      symbols[diamondheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "diamond head"),             0xe139, 0, 7.375050, 1.981250);
-      symbols[s0triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "whole triangle head"),      0xe13a, 0, 11.571000, 0.716340);
-      symbols[d1triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "half triangle head"),       0xe13b, 0, 7.038130, 3.445570);
-      symbols[u1triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "half triangle head"),       0xe13c, 0, 8.361570, 0.636730);
-      symbols[u2triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart triangle head"),      0xe13d, 0, 6.968000, 0.636730);
-      symbols[d2triangleHeadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart triangle head"),      0xe13e, 0, 5.865130, 3.445570);
-      symbols[wholeslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "whole slash head"),         0xe13f, 0, 15.076480, 5.250030);
-      symbols[halfslashheadSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "half slash head"),          0xe140, 0, 11.726460, 5.250030);
-      symbols[quartslashheadSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "quart slash head"),         0xe141, 0, 8.57650, 5.250030);
-      symbols[wholecrossedheadSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "whole cross head"),         0xe142, 0, 8.58107, 1.582100);
-      symbols[halfcrossedheadSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "half cross head"),          0xe143, 0, 7.58098, 1.650860);
-      symbols[crossedheadSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "cross head"),               0xe144, 0, 6.58089, 2.126480);
-      symbols[xcircledheadSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "x circle head"),            0xe145, 0, 7.82605, 0.000000);
-      symbols[s0doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole do head"),            0xe146, 0, 9.90005, -1.999950);
-      symbols[d1doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half do head"),             0xe147, 0, 6.94992, 1.999950);
-      symbols[u1doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half do head"),             0xe148, 0, 6.94992, -1.999950);
-      symbols[d2doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart do head"),            0xe149, 0, 6.58089, 1.999950);
-      symbols[u2doHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart do head"),            0xe14a, 0, 6.58089, -1.999950);
-      symbols[s0reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole re head"),            0xe14b, 0, 9.90005, 0.899980);
-      symbols[u1reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half re head"),             0xe14c, 0, 6.94992, 0.899980);
-      symbols[d1reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half re head"),             0xe14d, 0, 6.94992, -0.899980);
-      symbols[u2reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart re head"),            0xe14e, 0, 6.58089, 0.899980);
-      symbols[d2reHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart re head"),            0xe14f, 0, 6.58089, -0.899980);
-      symbols[s0miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole mi head"),            0xe150, 0, 9.90005, 0.000000);
-      symbols[s1miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half mi head"),             0xe151, 0, 6.58089, 0.000000);
-      symbols[s2miHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart mi head"),            0xe152, 0, 6.58089, 0.000000);
-      symbols[u0faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole fa head"),            0xe153, 0, 9.90005, 0.000000);
-      symbols[d0faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole fa head"),            0xe154, 0, 9.90005, 0.000000);
-      symbols[u1faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half fa head"),             0xe155, 0, 6.94992, 0.000000);
-      symbols[d1faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half fa head"),             0xe156, 0, 6.94992, 0.000000);
-      symbols[u2faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart fa head"),            0xe157, 0, 6.58089, 0.000000);
-      symbols[d2faHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart fa head"),            0xe158, 0, 6.58089, 0.000000);
-      symbols[s0laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole la head"),            0xe159, 0, 9.90005, 0.000000);
-      symbols[s1laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half la head"),             0xe15a, 0, 6.94992, 0.000000);
-      symbols[s2laHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart la head"),            0xe15b, 0, 6.58089, 0.000000);
-      symbols[s0tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "whole ti head"),            0xe15c, 0, 9.90005, 0.629990);
-      symbols[u1tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half ti head"),             0xe15d, 0, 6.94992, 0.629990);
-      symbols[d1tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "half ti head"),             0xe15e, 0, 6.94992, -0.629990);
-      symbols[u2tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart ti head"),            0xe15f, 0, 6.58089, 0.629990);
-      symbols[d2tiHeadSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "quart ti head"),            0xe160, 0, 6.58089, -0.629990);
-
-      symbols[ufermataSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "ufermata"),                 0xe161, 0);
-      symbols[dfermataSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "dfermata"),                 0xe162, 0);
-
-      symbols[thumbSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "thumb"),                    0xe169, 0);
-      symbols[sforzatoaccentSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "sforza to accent"),         0xe16a, 0);
-      symbols[esprSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "espressivo"),               0xe16b, 0);
-      symbols[staccatoSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "staccato"),                 0xe16c, 0);
-      symbols[ustaccatissimoSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "ustaccatissimo"),           0xe16d, 0);
-      symbols[dstaccatissimoSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "dstacattissimo"),           0xe16e, 0);
-      symbols[tenutoSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "tenuto"),                   0xe16f, 0);
-      symbols[uportatoSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "uportato"),                 0xe170, 0);
-      symbols[dportatoSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "dportato"),                 0xe171, 0);
-      symbols[umarcatoSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "umarcato"),                 0xe172, 0);
-      symbols[dmarcatoSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "dmarcato"),                 0xe173, 0);
-      symbols[ouvertSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "ouvert"),                   0xe174, 0);
-      symbols[plusstopSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "plus stop"),                0xe175, 0);
-      symbols[upbowSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "up bow"),                   0xe176, 0);
-      symbols[downbowSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "down bow"),                 0xe177, 0);
-      symbols[reverseturnSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "reverse turn"),             0xe178, 0);
-      symbols[turnSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "turn"),                     0xe179, 0);
-      symbols[trillSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "trill"),                    0xe17a, 0);
-      symbols[upedalheelSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "upedal heel"),              0xe17b, 0);
-      symbols[dpedalheelSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "dpedalheel"),               0xe17c, 0);
-      symbols[upedaltoeSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "upedal toe"),               0xe17d, 0);
-      symbols[dpedaltoeSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "dpedal toe"),               0xe17e, 0);
-      symbols[flageoletSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "flageolet"),                0xe17f, 0);
-      symbols[segnoSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "segno"),                    0xe180, 0);
-      symbols[codaSym]                    = Sym(QT_TRANSLATE_NOOP("symbol", "coda"),                     0xe181, 0);
-      symbols[varcodaSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "varied coda"),              0xe182, 0);
-      symbols[rcommaSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "rcomma"),                   0xe183, 0);
-      symbols[lcommaSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "lcomma"),                   0xe184, 0);
-
-      symbols[arpeggioSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "arpeggio"),                 0xe187, 0);
-      symbols[trillelementSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "trillelement"),             0xe188, 0);
-      symbols[arpeggioarrowdownSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "arpeggio arrow down"),      0xe189, 0);
-      symbols[arpeggioarrowupSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "arpeggio arrow up"),        0xe18a, 0);
-      symbols[trilelementSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "trill element"),            0xe18b, 0);
-      symbols[prallSym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "prall"),                    0xe18c, 0);
-      symbols[mordentSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "mordent"),                  0xe18d, 0);
-      symbols[prallprallSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "prall prall"),              0xe18e, 0);
-      symbols[prallmordentSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "prall mordent"),            0xe18f, 0);
-      symbols[upprallSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "up prall"),                 0xe190, 0);
-      symbols[upmordentSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "up mordent"),               0xe191, 0);
-      symbols[pralldownSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "prall down"),               0xe192, 0);
-      symbols[downprallSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "down prall"),               0xe193, 0);
-      symbols[downmordentSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "down mordent"),             0xe194, 0);
-      symbols[prallupSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "prall up"),                 0xe195, 0);
-      symbols[lineprallSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "line prall"),               0xe196, 0);
-
-      symbols[eighthflagSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "eight flag"),               0xe199, 0);
-      symbols[sixteenthflagSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "sixteenth flag"),           0xe19a, 0);
-      symbols[thirtysecondflagSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "thirtysecond flag"),        0xe19b, 0);
-      symbols[sixtyfourthflagSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "sixtyfour flag"),           0xe19c, 0);
-      symbols[deighthflagSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "128 flag"),                 0xe19d, 0);
-      symbols[deighthflagSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "deight flag"),              0xe19e, 0);
-      symbols[gracedashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "grace dash"),               0xe19f, 0);
-      symbols[dgracedashSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "dgrace dash"),              0xe1a0, 0);
-      symbols[dsixteenthflagSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "dsixteenth flag"),          0xe1a1, 0);
-      symbols[dthirtysecondflagSym]       = Sym(QT_TRANSLATE_NOOP("symbol", "dthirtysecond flag"),       0xe1a2, 0);
-      symbols[dsixtyfourthflagSym]        = Sym(QT_TRANSLATE_NOOP("symbol", "dsixtyfourth flag"),        0xe1a3, 0);
-      symbols[altoclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "alto clef"),                0xe1a4, 0);
-      symbols[altoclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "alto clef"),                0xe1a5, 0);
-      symbols[caltoclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "calto clef"),               0xe1a6, 0);
-      symbols[bassclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "bass clef"),                0xe1a7, 0);
-      symbols[cbassclefSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "cbass clef"),               0xe1a8, 0);
-      symbols[trebleclefSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "trebleclef"),               0xe1a9, 0);   //G-Clef
-      symbols[ctrebleclefSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "ctrebleclef"),              0xe1aa, 0);
-      symbols[percussionclefSym]          = Sym(QT_TRANSLATE_NOOP("symbol", "percussion clef"),          0xe1ab, 0);
-      symbols[cpercussionclefSym]         = Sym(QT_TRANSLATE_NOOP("symbol", "cpercussion clef"),         0xe1ac, 0);
-      symbols[tabclefSym]                 = Sym(QT_TRANSLATE_NOOP("symbol", "tab clef"),                 0xe1ad, 0);
-      symbols[ctabclefSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "ctab clef"),                0xe1ae, 0);
-      symbols[fourfourmeterSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "four four meter"),          0xe1af, 0);
-      symbols[allabreveSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "allabreve"),                0xe1b0, 0);
-      symbols[pedalasteriskSym]           = Sym(QT_TRANSLATE_NOOP("symbol", "pedalasterisk"),            0xe1b1, 0);
-      symbols[pedaldashSym]               = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldash"),                0xe1b2, 0);
-      symbols[pedaldotSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedaldot"),                 0xe1b3, 0);
-      symbols[pedalPSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedalP"),                   0xe1b4, 0);
-      symbols[pedaldSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedald"),                   0xe1b5, 0);
-      symbols[pedaleSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "pedale"),                   0xe1b6, 0);
-      symbols[pedalPedSym]                = Sym(QT_TRANSLATE_NOOP("symbol", "pedal ped"),                0xe1b7, 0);
-      symbols[brackettipsRightUp]         = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right up"),    0xe1b8, 0);
-      symbols[brackettipsRightDown]       = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips right down"),  0xe1b9, 0);
-      symbols[accDiscantSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc discant"),              0xe1ba, 0);
-      symbols[accDotSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "acc dot"),                  0xe1bb, 0);
-      symbols[accFreebaseSym]             = Sym(QT_TRANSLATE_NOOP("symbol", "acc freebase"),             0xe1bc, 0);
-      symbols[accStdbaseSym]              = Sym(QT_TRANSLATE_NOOP("symbol", "acc stdbase"),              0xe1bd, 0);
-      symbols[accBayanbaseSym]            = Sym(QT_TRANSLATE_NOOP("symbol", "acc bayanbase"),            0xe1be, 0);
-      symbols[accOldEESym]                = Sym(QT_TRANSLATE_NOOP("symbol", "acc old ee"),               0xe1bf, 0);
-      symbols[brackettipsLeftUp]          = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left up"),     0xe1c0, 0);
-      symbols[brackettipsLeftDown]        = Sym(QT_TRANSLATE_NOOP("symbol", "bracket tips left down"),   0xe1c1, 0);
-
       // used for GUI:
       symbols[note2Sym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
       symbols[note4Sym]                   = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0xe105, 1);
@@ -554,8 +564,72 @@ void initSymbols()
       symbols[note64Sym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/64"),  0xe109, 1);
       symbols[dotdotSym]                  = Sym(QT_TRANSLATE_NOOP("symbol", "dot dot"),    0xe10b, 1);
 
-//      Sym::writeCtable();
 
+      QHash<QString, int> lnhash;
+      for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)
+            lnhash[QString(lilypondNames[i].name)] = lilypondNames[i].msIndex;
+
+      QFile f(":/data/symbols.xml");
+      if (!f.open(QFile::ReadOnly)) {
+            printf("cannot open symbols file\n");
+            exit(-1);
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading style file %s at line %d column %d: %s\n",
+               f.fileName().toLatin1().data(), line, column, err.toLatin1().data());
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load font symbols failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+      f.close();
+      docName = f.fileName();
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "Glyph") {
+                              QString name;
+                              int code = -1;
+                              QPointF p;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull();  eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    QString val(eee.text());
+                                    if (tag == "name")
+                                          name = val;
+                                    else if (tag == "code") {
+                                          bool ok;
+                                          code = val.mid(2).toInt(&ok, 16);
+                                          if (!ok)
+                                                printf("cannot read code\n");
+                                          }
+                                    else if (tag == "attach")
+                                          p = readPoint(eee);
+                                    else if (tag == "bbox") {
+                                          // QRectF r = Xml::readRectF(eee);
+                                          }
+                                    else
+                                          domError(eee);
+                                    }
+                              if (code == -1)
+                                    printf("no code for glyph <%s>\n", qPrintable(name));
+                              int idx = lnhash[name];
+                              if (idx > 0)
+                                    symbols[idx] = Sym(qPrintable(name), code, 0, p.x(), p.y());
+                              else if (idx == 0)
+                                    printf("symbol <%s> not found\n", qPrintable(name));
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else
+                  domError(e);
+            }
 
       if (charReplaceMap.isEmpty()) {
             for (unsigned i = 0; pSymbols[i].code != -1; ++i) {
@@ -564,8 +638,5 @@ void initSymbols()
                   charReplaceMap.insert(pSymbols[i].text, &pSymbols[i]);
                   }
             }
-//      Sym* s = &symbols[quartheadSym];
-//      printf("DPI %f PPI %f  a/b=%f\n", DPI, PPI, DPI/PPI);
-//      printf("head width %f  attach %f %f\n", s->width(1.0), s->attach(1.0).x() * DPI/PPI, s->attach(1.0).y() * DPI/PPI);
       }
 
