@@ -426,8 +426,6 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       double s = DPI/PPI;
       _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
       _attach = a * s;
-//      _attach.rx() = a.x() * s;
-//      _attach.ry() = a.y() * s;
       w = _bbox.width();
       }
 

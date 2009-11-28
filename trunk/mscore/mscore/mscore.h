@@ -180,10 +180,7 @@ class MuseScore : public QMainWindow {
       Palette* notePalette;
 
       MagBox* mag;
-
       QAction* playId;
-      QAction* transportId;
-      QAction* inputId;
 
       QProgressBar* _progressBar;
       PreferenceDialog* preferenceDialog;
