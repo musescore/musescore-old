@@ -270,7 +270,6 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-printf("head h %f\n", symbols[noteHead()].height(magS()));
       return symbols[noteHead()].height(magS());
       }
 

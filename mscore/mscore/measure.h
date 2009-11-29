@@ -243,6 +243,7 @@ class Measure : public MeasureBase {
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
       Fraction fraction() const;
       void layoutChords1(Segment* segment, int startTrack);
+      void cleanupBeams();
       };
 
 #endif

@@ -1188,5 +1188,23 @@ class ChangeMStaffProperties : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeMeasureProperties
+//---------------------------------------------------------
+
+class ChangeMeasureProperties : public UndoCommand {
+      Measure* measure;
+      bool breakMM;
+      int repeatCount;
+      double stretch;
+      int noOffset;
+
+      void flip();
+   public:
+      ChangeMeasureProperties(Measure*, bool breakMM, int repeatCount, double stretch, int noOffset);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 

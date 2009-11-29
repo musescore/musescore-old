@@ -24,14 +24,14 @@ begingroup;
               if  leftright = 1:
 	            set_char_box (0, width#, .5 thick#, flare#);
               else:
-	            set_char_box (-width#, 0, .5 thick#, flare#);
+	            set_char_box (width#, width#, .5 thick#, flare#);
               fi;
 
 	else:
               if leftright = 1:
 	            set_char_box (0, width#, flare#, .5 thick#);
               else:
-	            set_char_box (-width#, 0, flare#, .5 thick#);
+	            set_char_box (width#, width#, flare#, .5 thick#);
               fi;
 	fi;
 

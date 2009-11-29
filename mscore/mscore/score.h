@@ -371,6 +371,7 @@ class Score : public QObject {
       void rebuildBspTree();
       Measure* skipEmptyMeasures(Measure*, System*);
       void cmdRepeatSelection();
+      void layoutBeams1();
 
    private slots:
       void textUndoLevelAdded();

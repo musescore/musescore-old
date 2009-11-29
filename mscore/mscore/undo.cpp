@@ -1330,7 +1330,7 @@ void ChangeKeySig::redo()
       if (oldKeySig != NO_KEY) {
             iKeyEvent ik = kl->find(tick);
             if (ik == kl->end()) {
-                  printf("ChangeKeySig::redo: cannot find key at tick %d, listsize %d\n", tick, kl->size());
+                  printf("ChangeKeySig::redo: cannot find key at tick %d, listsize %zd\n", tick, kl->size());
                   abort();
                   }
             else
@@ -2281,5 +2281,34 @@ void ChangeMStaffProperties::flip()
       mstaff->setSlashStyle(slashStyle);
       visible    = v;
       slashStyle = s;
+      }
+
+//---------------------------------------------------------
+//   ChangeMeasureProperties
+//---------------------------------------------------------
+
+ChangeMeasureProperties::ChangeMeasureProperties(Measure* m, bool _bmm, int rc,
+   double s, int o) : measure(m), breakMM(_bmm), repeatCount(rc), stretch(s), noOffset(o)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeMeasureProperties::flip()
+      {
+      bool a   = measure->breakMultiMeasureRest();
+      int r    = measure->repeatCount();
+      double s = measure->userStretch();
+      int o    = measure->noOffset();
+      measure->setBreakMultiMeasureRest(breakMM);
+      measure->setRepeatCount(repeatCount);
+      measure->setUserStretch(stretch);
+      measure->setNoOffset(noOffset);
+      breakMM = a;
+      repeatCount = r;
+      stretch = s;
+      noOffset = o;
       }
 
