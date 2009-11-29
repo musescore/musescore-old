@@ -494,13 +494,13 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
 
       double sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      QPointF off = symbols[noteHead()].attach(mag());
+      QPointF off = symbols[noteHead()].attach(magS());
       if (upFlag) {
             pt.rx() += off.x() - sw;
             pt.ry() += off.y();
             }
       else {
-            pt.rx() += symbols[noteHead()].width(mag()) - off.x() + sw;
+            pt.rx() += symbols[noteHead()].width(magS()) - off.x() + sw;
             pt.ry() -= off.y();
             }
       return pt;
