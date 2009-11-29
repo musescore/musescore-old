@@ -78,9 +78,7 @@ class Sym {
       QFont font() const                   { return _font;    }
       void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
-      void draw(QPainter& painter, double mag, qreal x, qreal y) const;
-      void draw(QPainter& painter) const;
-      void draw(QPainter& painter, double mag) const;
+      void draw(QPainter& painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
       };
 
