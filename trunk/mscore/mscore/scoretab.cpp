@@ -39,6 +39,7 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
 
       tab = new QTabBar;
       tab->setExpanding(false);
+      tab->setSelectionBehaviorOnRemove(QTabBar::SelectRightTab);
       stack = new QStackedLayout;
       layout->addWidget(tab);
       layout->addLayout(stack);
@@ -92,15 +93,6 @@ void ScoreTab::insertTab(int idx, const QString& s)
       }
 
 //---------------------------------------------------------
-//   addTab
-//---------------------------------------------------------
-
-void ScoreTab::addTab(const QString& s)
-      {
-      tab->addTab(s);
-      }
-
-//---------------------------------------------------------
 //   setTabText
 //---------------------------------------------------------
 
@@ -136,7 +128,6 @@ void ScoreTab::setCurrentIndex(int idx)
 
 void ScoreTab::removeTab(int idx)
       {
-      tab->removeTab(idx);
       Score* score = scoreList->value(idx);
       for (int i = 0; i < stack->count(); ++i) {
             Viewer* viewer = static_cast<Viewer*>(stack->widget(i));
@@ -146,6 +137,9 @@ void ScoreTab::removeTab(int idx)
                   return;
                   }
             }
+      tab->removeTab(idx);    // select next index if current index is idx
+      if (idx >= scoreList->size() && !scoreList->isEmpty())
+            setCurrentIndex(scoreList->size() - 1);
       }
 
 //---------------------------------------------------------

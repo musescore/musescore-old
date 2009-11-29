@@ -44,7 +44,6 @@ class ScoreTab : public QWidget {
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
       void insertTab(int idx, const QString&);
-      void addTab(const QString&);
       void setTabText(int, const QString&);
       int currentIndex() const;
       void setCurrentIndex(int);

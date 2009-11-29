@@ -1208,11 +1208,7 @@ void Note::propertyAction(const QString& s)
             ChordProperties vp(this);
             int rv = vp.exec();
             if (rv) {
-                  QList<Element*> sl = *score()->selection()->elements();
-                  foreach(Element* e, sl) {
-                        if (e->type() != NOTE)
-                              continue;
-                        Note* note = static_cast<Note*>(e);
+                  foreach(Note* note, score()->selection()->noteList()) {
                         Chord* chord = note->chord();
 
                         if (vp.small() != chord->small())

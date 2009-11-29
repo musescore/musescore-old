@@ -1,3 +1,5 @@
+29.nov (ws)
+      - note property changes are now applied to all selected notes
 28.nov  (ws)
       - fix: Note input and transport bar state not well persistent
       - add music font configuration file created from lilypond font
