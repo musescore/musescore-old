@@ -118,7 +118,7 @@ void genIcons()
       sharpsharpIcon     = symIcon(symbols[sharpsharpSym], 30, iw, ih);
       flatIcon           = symIcon(symbols[flatSym], 30, iw, ih);
       flatflatIcon       = symIcon(symbols[flatflatSym], 30, iw, ih);
-      quartrestIcon      = symIcon(symbols[quartrestSym], 30, iw, ih);
+      quartrestIcon      = symIcon(symbols[rest4Sym], 30, iw, ih);
       dotIcon            = symIcon(symbols[dotSym], 30, iw, ih);
       dotdotIcon         = symIcon(symbols[dotdotSym], 30, iw, ih);
       sforzatoaccentIcon = symIcon(symbols[sforzatoaccentSym], 20, iw, ih);

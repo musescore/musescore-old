@@ -45,7 +45,7 @@ Rest::Rest(Score* s)
       setOffsetType(OFFSET_SPATIUM);
       _beamMode  = BEAM_NO;
       dotline    = -1;
-      _sym       = quartrestSym;
+      _sym       = rest4Sym;
       }
 
 Rest::Rest(Score* s, int tick, const Duration& d)
@@ -54,7 +54,7 @@ Rest::Rest(Score* s, int tick, const Duration& d)
       _beamMode  = BEAM_NO;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
-      _sym       = quartrestSym;
+      _sym       = rest4Sym;
       setTick(tick);
       setDuration(d);
       }
@@ -340,26 +340,26 @@ void Rest::layout()
             case Duration::V_INVALID:
             case Duration::V_QUARTER:
             case Duration::V_ZERO:
-                  _sym = quartrestSym;
+                  _sym = rest4Sym;
                   break;
             case Duration::V_EIGHT:
-                  _sym = eighthrestSym;
+                  _sym = rest8Sym;
                   break;
             case Duration::V_16TH:
-                  _sym = sixteenthrestSym;
+                  _sym = rest16Sym;
                   break;
             case Duration::V_32ND:
-                  _sym = thirtysecondrestSym;
+                  _sym = rest32Sym;
                   break;
             case Duration::V_64TH:
-                  _sym = sixtyfourthrestSym;
+                  _sym = rest64Sym;
                   break;
             case Duration::V_128TH:
-                  _sym = hundredtwentyeighthrestSym;
+                  _sym = rest128Sym;
                   break;
             case Duration::V_256TH:
 printf("Rest: no symbol for 1/256\n");
-                  _sym = hundredtwentyeighthrestSym;  // TODO
+                  _sym = rest128Sym;  // TODO
                   break;
             }
       layoutArticulations();
