@@ -118,7 +118,7 @@ static void parseLILC(char* buffer)
             double b = rb.cap(2).toDouble();
             double c = rb.cap(3).toDouble();
             double d = rb.cap(4).toDouble();
-            g.bbox = QRectF(a, -b, c, b - d);
+            g.bbox = QRectF(a, -d, c, d - b);
             glyphs.append(g);
             }
       }

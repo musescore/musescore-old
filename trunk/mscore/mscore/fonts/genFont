@@ -76,4 +76,5 @@ mv mscore1-20.ttf ..
 
 cd ..
 /usr/bin/fontforge -script gen-jazz.pe
+../../../build/mscore/genft mscore-20.ttf > ../data/symbols.xml
 
