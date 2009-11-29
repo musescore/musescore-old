@@ -179,10 +179,10 @@ void Score::doLayout()
       //             on context
       //-----------------------------------------------------------------------
 
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            mb->setDirty();
-            if (mb->type() == MEASURE)
-                  static_cast<Measure*>(mb)->layout0();
+//      layoutBeams1();
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            m->setDirty();
+            m->layout0();
             }
 
       //-----------------------------------------
@@ -618,7 +618,6 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                         }
 
                   m->createEndBarLines();
-//                  m->layoutBeams1();  // find hooks
 
                   m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;

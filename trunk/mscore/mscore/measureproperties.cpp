@@ -164,13 +164,14 @@ void MeasureProperties::apply()
             if (ms->visible() != v || ms->slashStyle() != s)
                   score->undo()->push(new ChangeMStaffProperties(ms, v, s));
             }
-
-      m->setIrregular(isIrregular());
-      m->setBreakMultiMeasureRest(breakMultiMeasureRest->isChecked());
-
-      m->setRepeatCount(repeatCount());
-      m->setUserStretch(layoutStretch->value());
-      m->setNoOffset(measureNumberOffset->value());
+      if (isIrregular() != m->irregular()
+         || breakMultiMeasureRest->isChecked() != m->breakMultiMeasureRest()
+         || repeatCount() != m->repeatCount()
+         || layoutStretch->value() != m->userStretch()
+         || measureNumberOffset->value() != m->noOffset()) {
+            score->undo()->push(new ChangeMeasureProperties(m, breakMultiMeasureRest->isChecked(),
+               repeatCount(), layoutStretch->value(), measureNumberOffset->value()));
+            }
 
       score->setDirty();
       score->select(0, SELECT_SINGLE, 0);

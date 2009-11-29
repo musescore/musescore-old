@@ -1119,14 +1119,14 @@
   <Glyph>
     <name>brackettips.uleft</name>
     <code>0xe1ba</code>
-    <attach x="0" y="0"/>
-    <bbox x="9.49997" y="-6.84" w="0" h="7.965"/>
+    <attach x="9.49997" y="0"/>
+    <bbox x="-9.49997" y="-6.84" w="9.49997" h="7.965"/>
     </Glyph>
   <Glyph>
     <name>brackettips.dleft</name>
     <code>0xe1bb</code>
-    <attach x="0" y="0"/>
-    <bbox x="9.49997" y="-1.125" w="0" h="7.965"/>
+    <attach x="9.49997" y="0"/>
+    <bbox x="-9.49997" y="-1.125" w="9.49997" h="7.965"/>
     </Glyph>
   <Glyph>
     <name>accordion.accDiscant</name>

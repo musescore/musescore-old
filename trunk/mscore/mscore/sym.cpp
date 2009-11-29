@@ -254,6 +254,7 @@ struct LilypondNames {
             { sevenSym,       "seven" },
             { eightSym,       "eight" },
             { nineSym,        "nine" },
+            { plusSym,        "plus" },
 
             { -1, "space" },
 
@@ -262,7 +263,7 @@ struct LilypondNames {
             { lettersSym,     "s" },
             { letterpSym,     "p" },
             { lettermSym,     "m" },
-            { letterzSym,     "r" },
+            { letterrSym,     "r" },
       };
 
 SymCode pSymbols[] = {
@@ -611,7 +612,7 @@ void initSymbols()
                                     printf("no code for glyph <%s>\n", qPrintable(name));
                               int idx = lnhash[name];
                               if (idx > 0)
-                                    symbols[idx] = Sym(qPrintable(name), code, 0, p, b);
+                                    symbols[idx] = Sym(strdup(qPrintable(name)), code, 0, p, b);
                               else if (idx == 0)
                                     printf("symbol <%s> not found\n", qPrintable(name));
                               }

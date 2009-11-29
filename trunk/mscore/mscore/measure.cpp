@@ -658,10 +658,14 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 ///   depending on context.
 //-------------------------------------------------------------------
 
+#define OLD
+
 void Measure::layout0()
       {
+#ifdef OLD
       foreach(Beam* beam, _beams)
             beam->clear();
+#endif
 
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
             char tversatz[74];      // list of already set accidentals for this measure
@@ -707,12 +711,13 @@ void Measure::layout0()
                         static_cast<KeySig*>(e)->setOldSig(oval);
                         }
                   }
-
+#ifdef OLD
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
 
             for (int track = startTrack; track < endTrack; ++track)
                   layoutBeams1(track);
+#endif
 
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
@@ -720,13 +725,24 @@ void Measure::layout0()
                   }
             }
 
-            MeasureBase* mb = prev();
-            if (mb && mb->type() == MEASURE){
-                  Measure* prev = static_cast<Measure*>(mb);
-                  if (prev->endBarLineType() != NORMAL_BAR)
-                        _breakMMRest = true;
-              }
+      MeasureBase* mb = prev();
+      if (mb && mb->type() == MEASURE) {
+            Measure* prev = static_cast<Measure*>(mb);
+            if (prev->endBarLineType() != NORMAL_BAR)
+                  _breakMMRest = true;
+            }
+#ifdef OLD
+      cleanupBeams();
+#endif
+      }
 
+//---------------------------------------------------------
+//   cleanupBeams
+//    remove unneeded beam instances
+//---------------------------------------------------------
+
+void Measure::cleanupBeams()
+      {
       foreach(Beam* beam, _beams) {
             if (beam->elements().isEmpty()) {
                   remove(beam);

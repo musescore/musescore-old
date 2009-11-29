@@ -322,6 +322,197 @@ void Beam::move(double x, double y)
 //    called before layout spacing of notes
 //---------------------------------------------------------
 
+void Score::layoutBeams1()
+      {
+      int tracks = nstaves() * VOICES;
+
+      char tversatz[74];      // list of already set accidentals for this measure
+
+      for (int track = 0; track < tracks; ++track) {
+            ChordRest* a1;      // start of (potential) beam
+            Beam* beam;
+            Beam* oldBeam;
+            Measure* measure = 0;
+
+            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+                  Element* e = segment->element(track);
+                  if (((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                     || e == 0 || !e->isChordRest())
+                        continue;
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  if (cr->measure() != measure) {
+                        if (measure) {
+                              if (beam)
+                                    beam->layout1();
+                              else if (a1) {
+                                    a1->setBeam(0);
+                                    a1->layoutStem1();
+                                    }
+                              if ((track % VOICES) == (VOICES-1))
+                                    measure->cleanupBeams();
+                              }
+                        measure = cr->measure();
+                        a1      = 0;
+                        beam    = 0;
+                        oldBeam = 0;
+
+                        if ((track % VOICES) == 0) {
+                              foreach(Beam* beam, *measure->beams())
+                                    beam->clear();
+                              }
+                        }
+                  if (cr->type() == CHORD)
+                        static_cast<Chord*>(cr)->computeUp();
+                  if (segment->subtype() == Segment::SegGrace) {
+                        Segment* nseg = segment->next();
+                        if (nseg && nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
+                              Beam* b = cr->beam();
+                              if (b == 0) {
+                                    b = new Beam(this);
+                                    b->setTrack(track);
+                                    b->setGenerated(true);
+                                    measure->add(b);
+                                    }
+                              b->add(cr);
+                              Segment* s = nseg;
+                              for (;;) {
+                                    nseg = s;
+                                    ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
+                                    b->add(cr);
+                                    s = nseg->next();
+                                    if (!s || (s->subtype() != Segment::SegGrace) || !s->element(track))
+                                          break;
+                                    }
+                              b->layout1();
+                              segment = nseg;
+                              }
+                        else {
+                              cr->setBeam(0);
+                              cr->layoutStem1();
+                              }
+                        continue;
+                        }
+                  BeamMode bm = cr->beamMode();
+                  int len     = cr->duration().ticks();
+
+                  if ((len >= AL::division) || (bm == BEAM_NO)) {
+                        if (beam) {
+                              beam->layout1();
+                              beam = 0;
+                              }
+                        if (a1) {
+                              a1->setBeam(0);
+                              a1->layoutStem1();
+                              a1 = 0;
+                              }
+                        cr->setBeam(0);
+                        cr->layoutStem1();
+                        continue;
+                        }
+                  bool beamEnd = false;
+                  if (beam) {
+                        ChordRest* le = beam->elements().back();
+                        if (((bm != BEAM_MID) && (le->tuplet() != cr->tuplet())) || (bm == BEAM_BEGIN)) {
+                              beamEnd = true;
+                              }
+                        else if (bm != BEAM_MID) {
+                              int z, n;
+                              sigmap()->timesig(cr->tick(), z, n);
+                              if (endBeam(z, n, cr, cr->tick() - measure->tick()))
+                                    beamEnd = true;
+                              }
+                        if (beamEnd) {
+                              beam->layout1();
+                              beam = 0;
+                              a1   = 0;
+                              }
+                        else {
+                              beam->add(cr);
+                              cr = 0;
+
+                              // is this the last beam element?
+                              if (bm == BEAM_END) {
+                                    beam->layout1();
+                                    beam = 0;
+                                    }
+                              }
+                        }
+                  if (cr && cr->tuplet() && (cr->tuplet()->elements().back() == cr)) {
+                        if (beam) {
+                              beam->layout1();
+                              beam = 0;
+
+                              cr->setBeam(0);
+                              cr->layoutStem1();
+                              }
+                        else if (a1) {
+                              beam = a1->beam();
+                              if (beam == 0 || (beam == oldBeam)) {
+                                    beam = new Beam(this);
+                                    beam->setTrack(track);
+                                    beam->setGenerated(true);
+                                    add(beam);
+                                    }
+                              oldBeam = beam;
+                              beam->add(a1);
+                              beam->add(cr);
+                              a1 = 0;
+                              beam->layout1();
+                              beam = 0;
+                              }
+                        else {
+                              cr->setBeam(0);
+                              cr->layoutStem1();
+                              }
+                        }
+                  else if (cr) {
+                        if (a1 == 0)
+                              a1 = cr;
+                        else {
+                              int z, n;
+                              sigmap()->timesig(cr->tick(), z, n);
+                              if (bm != BEAM_MID
+                                 &&
+                                   (endBeam(z, n, cr, cr->tick() - measure->tick())
+                                   || bm == BEAM_BEGIN
+                                   || (a1->segment()->subtype() != cr->segment()->subtype())
+                                   )
+                                 ) {
+                                    a1->setBeam(0);
+                                    a1->layoutStem1();      //?
+                                    a1 = cr;
+                                    }
+                              else {
+                                    beam = a1->beam();
+                                    if (beam == 0 || (beam == oldBeam)) {
+                                          beam = new Beam(this);
+                                          beam->setGenerated(true);
+                                          beam->setTrack(track);
+                                          measure->add(beam);
+                                          }
+                                    oldBeam = beam;
+                                    beam->add(a1);
+                                    beam->add(cr);
+                                    a1 = 0;
+                                    }
+                              }
+                        }
+                  }
+            if (beam)
+                  beam->layout1();
+            else if (a1) {
+                  a1->setBeam(0);
+                  a1->layoutStem1();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   layoutBeams1
+//    auto - beamer
+//    called before layout spacing of notes
+//---------------------------------------------------------
+
 void Measure::layoutBeams1(int track)
       {
       ChordRest* a1 = 0;      // start of (potential) beam

@@ -70,6 +70,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "repeatlist.h"
+#include "scoretab.h"
 
 //---------------------------------------------------------
 //   load
@@ -211,7 +212,9 @@ void MuseScore::saveFile()
       {
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
-//TODO-S            tab1->setTabText(tab->currentIndex(), cs->name());
+            int idx = scoreList.indexOf(cs);
+            tab1->setTabText(idx, cs->name());
+            tab2->setTabText(idx, cs->name());
             QString tmp = cs->tmpName();
             if (!tmp.isEmpty()) {
                   QFile f(tmp);
@@ -285,6 +288,7 @@ bool Score::saveFile(bool autosave)
                   return false;
                   }
             _undo->setClean();
+            setClean(true);
             return true;
             }
       //
@@ -356,6 +360,7 @@ bool Score::saveFile(bool autosave)
          | QFile::ReadGroup | QFile::ReadOther);
 
       _undo->setClean();
+      setClean(true);
       setSaved(true);
       return true;
       }
