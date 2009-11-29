@@ -964,32 +964,23 @@ int MuseScore::appendScore(Score* score)
       connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
 
+      int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
-                  scoreList.insert(i, score);
-
-                  tab1->blockSignals(true);
-                  tab2->blockSignals(true);
-                  tab1->insertTab(i, score->name());
-                  tab2->insertTab(i, score->name());
-                  _undoGroup->addStack(score->undo());
-                  tab1->blockSignals(false);
-                  tab2->blockSignals(false);
-                  return i;
+                  index = i;
+                  break;
                   }
             }
-
-      scoreList.push_back(score);
-      _undoGroup->addStack(score->undo());
-
+      scoreList.insert(index, score);
       tab1->blockSignals(true);
       tab2->blockSignals(true);
-      tab1->addTab(score->name());
-      tab2->addTab(score->name());
+      tab1->insertTab(index, score->name());
+      tab2->insertTab(index, score->name());
+      _undoGroup->addStack(score->undo());
       tab1->blockSignals(false);
       tab2->blockSignals(false);
-      return scoreList.size()-1;
+      return index;
       }
 
 //---------------------------------------------------------
@@ -1514,19 +1505,21 @@ static void loadScores(const QStringList& argv)
             }
       else {
             foreach(const QString& name, argv) {
-                  if (!name.isEmpty()) {
-                        Score* score = new Score(defaultStyle);
-                        scoreCreated = true;
-                        if (!score->read(name)) {
-                              QMessageBox::warning(0,
-                                    QWidget::tr("MuseScore"),
-                                    QWidget::tr("reading file <")
-                                       + name + "> failed: " +
-                                    QString(strerror(errno)),
-                                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-                              }
-                        else
-                              currentViewer = mscore->appendScore(score);
+                  if (name.isEmpty())
+                        continue;
+                  Score* score = new Score(defaultStyle);
+                  scoreCreated = true;
+                  if (!score->read(name)) {
+                        QMessageBox::warning(0,
+                              QWidget::tr("MuseScore"),
+                              QWidget::tr("reading file <")
+                                 + name + "> failed: " +
+                              QString(strerror(errno)),
+                              QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                        }
+                  else {
+                        currentViewer = mscore->appendScore(score);
+                        printf("load %d <%s>\n", currentViewer, qPrintable(name));
                         }
                   }
             }
