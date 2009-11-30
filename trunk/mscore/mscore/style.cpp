@@ -395,20 +395,20 @@ Style::Style()
             StyleVal(ST_useGermanNoteNames, false),
 //            StyleVal(ST_warnPitchRange, true),
             StyleVal(ST_chordDescriptionFile, QString("stdchords.xml")),
-            StyleVal(ST_concertPitch,false),
-            StyleVal(ST_createMultiMeasureRests,false),
-            StyleVal(ST_minEmptyMeasures,2),
-            StyleVal(ST_minMMRestWidth,Spatium(4)),
-            StyleVal(ST_hideEmptyStaves,false),
-            StyleVal(ST_stemDir1,UP),
-            StyleVal(ST_stemDir2,DOWN),
-            StyleVal(ST_stemDir3,UP),
-            StyleVal(ST_stemDir4,DOWN),
+            StyleVal(ST_concertPitch, false),
+            StyleVal(ST_createMultiMeasureRests, false),
+            StyleVal(ST_minEmptyMeasures, 2),
+            StyleVal(ST_minMMRestWidth, Spatium(4)),
+            StyleVal(ST_hideEmptyStaves, false),
+            StyleVal(ST_stemDir1, UP),
+            StyleVal(ST_stemDir2, DOWN),
+            StyleVal(ST_stemDir3, UP),
+            StyleVal(ST_stemDir4, DOWN),
 
-            StyleVal(ST_gateTime,100),
-            StyleVal(ST_tenutoGateTime,100),
-            StyleVal(ST_staccatoGateTime,50),
-            StyleVal(ST_slurGateTime,100),
+            StyleVal(ST_gateTime, 100),
+            StyleVal(ST_tenutoGateTime, 100),
+            StyleVal(ST_staccatoGateTime, 50),
+            StyleVal(ST_slurGateTime, 100),
 
             StyleVal(ST_UfermataAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DfermataAnchor, int(A_BOTTOM_STAFF)),
@@ -693,6 +693,10 @@ void Style::load(QDomElement e, int /*version*/)
             QString tag(e.tagName());
             QString val(e.text());
 
+            if (tag == "displayInConcertPitch") {
+                  set(ST_concertPitch, bool(val.toInt()));
+                  continue;
+                  }
             if (tag == "stemDir") {
                   int voice = e.attribute("voice", "1").toInt() - 1;
                   switch(voice) {
