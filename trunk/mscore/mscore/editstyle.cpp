@@ -63,6 +63,8 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       articulationTable->setHorizontalHeaderLabels(headers);
       articulationTable->setColumnWidth(0, 200);
       articulationTable->setColumnWidth(1, 180);
+      articulationTable->setRowCount(ARTICULATIONS);
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
@@ -323,6 +325,8 @@ void EditStyle::setValues()
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
+            if (cb == 0)
+                  continue;
             int st  = lstyle[StyleIdx(ST_UfermataAnchor + i)].toInt();
             int idx = 0;
             if (st == A_TOP_STAFF)

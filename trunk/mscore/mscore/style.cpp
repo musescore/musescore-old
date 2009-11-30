@@ -412,6 +412,13 @@ Style::Style()
 
             StyleVal(ST_UfermataAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DfermataAnchor, int(A_BOTTOM_STAFF)),
+            StyleVal(ST_UshortfermataAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DshortfermataAnchor, int(A_BOTTOM_STAFF)),
+            StyleVal(ST_UlongfermataAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DlongfermataAnchor, int(A_BOTTOM_STAFF)),
+            StyleVal(ST_UverylongfermataAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_DverylongfermataAnchor, int(A_BOTTOM_STAFF)),
+
             StyleVal(ST_ThumbAnchor, int(A_CHORD)),
             StyleVal(ST_SforzatoaccentAnchor, int(A_CHORD)),
             StyleVal(ST_EspressivoAnchor, int(A_CHORD)),
@@ -438,6 +445,8 @@ Style::Style()
             StyleVal(ST_DownPrallAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_SnappizzicatoAnchor, int(A_CHORD)),
+
             StyleVal(ST_ArpeggioNoteDistance, Spatium(.5)),
             StyleVal(ST_ArpeggioLineWidth, Spatium(.18)),
             StyleVal(ST_ArpeggioHookLen, Spatium(.8)),

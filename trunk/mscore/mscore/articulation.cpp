@@ -32,6 +32,12 @@
 ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
       { ufermataSym,       QT_TRANSLATE_NOOP("articulation", "ufermata"),        100, 100  },
       { dfermataSym,       QT_TRANSLATE_NOOP("articulation", "dfermata"),        100, 100  },
+      { ushortfermataSym,    QT_TRANSLATE_NOOP("articulation", "ushortfermata"),    100, 100  },
+      { dshortfermataSym,    QT_TRANSLATE_NOOP("articulation", "dshortfermata"),    100, 100  },
+      { ulongfermataSym,     QT_TRANSLATE_NOOP("articulation", "ulongfermata"),     100, 100  },
+      { dlongfermataSym,     QT_TRANSLATE_NOOP("articulation", "dlongfermata"),     100, 100  },
+      { uverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "uverylongfermata"), 100, 100  },
+      { dverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "dverylongfermata"), 100, 100  },
       { thumbSym,          QT_TRANSLATE_NOOP("articulation", "thumb"),           100, 100  },
       { sforzatoaccentSym, QT_TRANSLATE_NOOP("articulation", "sforzato"),        120, 100  },
       { esprSym,           QT_TRANSLATE_NOOP("articulation", "espressivo"),      100, 100  },
@@ -58,6 +64,7 @@ ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
 	{ downprallSym,      QT_TRANSLATE_NOOP("articulation", "downprall"),       100, 100  },
 	{ upmordentSym,      QT_TRANSLATE_NOOP("articulation", "upmordent"),       100, 100  },
 	{ downmordentSym,    QT_TRANSLATE_NOOP("articulation", "downmordent"),     100, 100  },
+      { snappizzicatoSym,  QT_TRANSLATE_NOOP("articulation", "snappizzicato"),   100, 100  },
 	};
 
 //---------------------------------------------------------

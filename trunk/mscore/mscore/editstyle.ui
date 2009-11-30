@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
+    <width>902</width>
     <height>475</height>
    </rect>
   </property>
@@ -135,7 +135,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>12</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1886,11 +1886,18 @@
           <bool>false</bool>
          </property>
          <property name="rowCount">
-          <number>28</number>
+          <number>35</number>
          </property>
          <property name="columnCount">
           <number>2</number>
          </property>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
          <row/>
          <row/>
          <row/>

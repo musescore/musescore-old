@@ -241,9 +241,14 @@ enum StyleIdx {
 
       ST_UfermataAnchor,
       ST_DfermataAnchor,
+      ST_UshortfermataAnchor,
+      ST_DshortfermataAnchor,
+      ST_UlongfermataAnchor,
+      ST_DlongfermataAnchor,
+      ST_UverylongfermataAnchor,
+      ST_DverylongfermataAnchor,
       ST_ThumbAnchor,
       ST_SforzatoaccentAnchor,
-
       ST_EspressivoAnchor,
       ST_StaccatoAnchor,
       ST_UstaccatissimoAnchor,
@@ -268,6 +273,7 @@ enum StyleIdx {
       ST_DownPrallAnchor,
       ST_UpMordentAnchor,
       ST_DownMordentAnchor,
+      ST_SnappizzicatoAnchor,
 
       ST_ArpeggioNoteDistance,
       ST_ArpeggioLineWidth,
