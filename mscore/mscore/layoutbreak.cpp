@@ -52,6 +52,8 @@ void LayoutBreak::draw(QPainter& p) const
             pen.setColor(preferences.layoutBreakColor);
 
       pen.setWidthF(lw);
+      pen.setCapStyle(Qt::RoundCap);
+      pen.setJoinStyle(Qt::RoundJoin);
       p.setPen(pen);
       p.setBrush(Qt::NoBrush);
       p.drawPath(path);

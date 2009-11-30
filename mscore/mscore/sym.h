@@ -155,6 +155,7 @@ enum {
       longaupSym,
       longadownSym,
       brevisheadSym,
+      brevisdoubleheadSym,
       wholeheadSym,
       halfheadSym,
       quartheadSym,
@@ -204,7 +205,15 @@ enum {
       ufermataSym,
       dfermataSym,
 
+      snappizzicatoSym,
       thumbSym,
+      ushortfermataSym,
+      dshortfermataSym,
+      ulongfermataSym,
+      dlongfermataSym,
+      uverylongfermataSym,
+      dverylongfermataSym,
+
       sforzatoaccentSym,
       esprSym,
       staccatoSym,
@@ -251,6 +260,9 @@ enum {
       lineprallSym,
       pralldownSym,
       prallupSym,
+
+      caesuraCurvedSym,
+      caesuraStraight,
 
       eighthflagSym,
       sixteenthflagSym,

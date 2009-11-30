@@ -345,7 +345,7 @@ void MuseScore::showPalette(bool visible)
             sp->setName(tr("Breath"));
             sp->setGrid(42, 40);
 
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < 4; ++i) {
                   Breath* a = new Breath(gscore);
                   a->setSubtype(i);
                   sp->append(a, tr("breath"));

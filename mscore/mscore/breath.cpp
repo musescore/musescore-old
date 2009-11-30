@@ -25,7 +25,10 @@
 #include "measure.h"
 
 int Breath::symList[Breath::breathSymbols] = {
-      rcommaSym, lcommaSym, rcommaSym, lcommaSym
+      rcommaSym,
+      lcommaSym,
+      caesuraCurvedSym,
+      caesuraStraight
       };
 
 //---------------------------------------------------------

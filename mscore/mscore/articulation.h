@@ -33,6 +33,12 @@ class ChordRest;
 enum ArticulationIdx {
       UfermataSym,
       DfermataSym,
+      UshortfermataSym,
+      DshortfermataSym,
+      UlongfermataSym,
+      DlongfermataSym,
+      UverylongfermataSym,
+      DverylongfermataSym,
       ThumbSym,
       SforzatoaccentSym,
       EspressivoSym,
@@ -59,6 +65,7 @@ enum ArticulationIdx {
       DownPrallSym,
       UpMordentSym,
       DownMordentSym,
+      SnappizzicatoSym,
       ARTICULATIONS
       };
 

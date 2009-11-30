@@ -3,7 +3,7 @@
 %
 % source file of LilyPond's pretty-but-neat music font
 %
-% (c) 1997--2007 Jan Nieuwenhuizen <janneke@gnu.org>
+% (c) 1997--2009 Jan Nieuwenhuizen <janneke@gnu.org>
 % & Han-Wen Nienhuys <hanwen@xs4all.nl>
 % & Juergen Reuter <reuter@ipd.uka.de>
 %
@@ -221,7 +221,7 @@ fi;
 %
 % dimensions aren't entirely right.
 %
-def draw_brevis =
+def draw_brevis(expr linecount) =
 	save stemthick, fudge;
 
 	stemthick# = 2 stafflinethickness#;
@@ -243,14 +243,17 @@ def draw_brevis =
 	x4 = x3;
 	y4 = y2;
 	y3 = y1;
-
-	draw_gridline (z1, z2, stemthick);
-	draw_gridline (z3, z4, stemthick);
+      for i := 0 step 1 until linecount - 1:
+            draw_gridline (z1 - (1.5 * i * stemthick, 0),
+                         z2 - (1.5 * i * stemthick, 0), stemthick);
+            draw_gridline (z3 + (1.5 * i * stemthick, 0),
+                         z4 + (1.5 * i * stemthick, 0), stemthick);
+      endfor;
 enddef;
 
 
 fet_beginchar ("Brevis notehead", "sM1");
-	draw_brevis;
+	draw_brevis (1);
 
 	draw_staff (-2, 2, 0);
 fet_endchar;
@@ -258,10 +261,26 @@ fet_endchar;
 
 if test > 0:
 	fet_beginchar ("Brevis notehead", "sM1");
-		draw_brevis;
+		draw_brevis (1);
 
 		draw_staff (-2, 2, 0.5);
 	fet_endchar;
+fi;
+
+
+fet_beginchar ("Double-lined brevis notehead", "sM1double");
+      draw_brevis (2);
+
+      draw_staff (-2, 2, 0);
+fet_endchar;
+
+
+if test > 0:
+      fet_beginchar ("Double-lined brevis notehead", "sM1double");
+            draw_brevis (2);
+
+            draw_staff (-2, 2, 0.5);
+      fet_endchar;
 fi;
 
 

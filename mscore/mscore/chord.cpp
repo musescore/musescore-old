@@ -62,8 +62,9 @@ void Stem::draw(QPainter& p) const
       qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());
       pen.setWidthF(lw);
+//      pen.setCapStyle(Qt::FlatCap);
+      pen.setCapStyle(Qt::RoundCap);
       p.setPen(pen);
-
       p.drawLine(QLineF(0.0, 0.0, 0.0, stemLen()));
       }
 
