@@ -134,12 +134,21 @@ void ScoreTab::removeTab(int idx)
             if (viewer->score() == score) {
                   delete viewer;
                   stack->takeAt(i);
-                  return;
+                  break;
                   }
             }
       tab->removeTab(idx);    // select next index if current index is idx
-      if (idx >= scoreList->size() && !scoreList->isEmpty())
-            setCurrentIndex(scoreList->size() - 1);
+      if (idx >= scoreList->size() && !scoreList->isEmpty()) {
+            idx = scoreList->size() - 1;
+            setCurrentIndex(idx);
+            }
+      Viewer* v = viewer(idx);
+      if (!v)  {
+            v = new Canvas;
+            v->setScore(scoreList->value(idx));
+            stack->addWidget(v);
+            }
+      stack->setCurrentWidget(v);
       }
 
 //---------------------------------------------------------

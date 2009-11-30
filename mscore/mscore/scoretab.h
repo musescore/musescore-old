@@ -50,6 +50,7 @@ class ScoreTab : public QWidget {
       void removeTab(int);
       int count() const { return scoreList->size(); }
       Viewer* viewer(int) const;
+      Viewer* viewer() const { return viewer(currentIndex()); }
       bool contains(Viewer*) const;
       void initViewer(int idx, double mag, int magIdx, double xoffset, double yoffset);
       };
