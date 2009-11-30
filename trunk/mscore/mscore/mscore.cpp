@@ -2180,9 +2180,9 @@ Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k
       context     = cont;
       icon        = i;
       action      = 0;
-      descr       = d;        // qApp->translate("MuseScore", d);
-      help        = h;        // qApp->translate("MuseScore", h);
-      text        = txt;      // qApp->translate("MuseScore", txt);
+      descr       = qApp->translate("action", d);
+      help        = qApp->translate("action", h);
+      text        = qApp->translate("action", txt);
       translated  = false;
       }
 
@@ -2196,9 +2196,9 @@ Shortcut::Shortcut(int s, const char* name, const char* d, QKeySequence::Standar
       context     = cont;
       icon        = i;
       action      = 0;
-      descr       = d;        // qApp->translate("MuseScore", d);
-      help        = h;        // qApp->translate("MuseScore", h);
-      text        = txt;      // qApp->translate("MuseScore", txt);
+      descr       = qApp->translate("action", d);
+      help        = qApp->translate("action", h);
+      text        = qApp->translate("action", txt);
       translated  = false;
       }
 
@@ -2217,9 +2217,9 @@ Shortcut::Shortcut(const Shortcut& c)
             text    = c.text;
             }
       else {
-            descr   = qApp->translate("MuseScore", c.descr.toUtf8().data());
-            help    = qApp->translate("MuseScore", c.help.toUtf8().data());
-            text    = qApp->translate("MuseScore", c.text.toUtf8().data());
+            descr   = qApp->translate("action", c.descr.toUtf8().data());
+            help    = qApp->translate("action", c.help.toUtf8().data());
+            text    = qApp->translate("action", c.text.toUtf8().data());
             translated = true;
             }
       }
