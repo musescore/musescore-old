@@ -132,10 +132,6 @@ double RepeatList::utick2utime(int tick) const
                   return tt;
                   }
             }
-      if (debugMode) {
-            printf("utick %d not found in RepeatList\n", tick);
-            abort();
-            }
       return 0.0;
       }
 
