@@ -1378,6 +1378,12 @@ void MuseScore::removeTab(int i)
       if (seq->score() == score)
             seq->setScore(0);
 
+      int idx1 = tab1->currentIndex();
+      int idx2 = tab2->currentIndex();
+      bool firstTab = tab1->viewer(idx1) == cv;
+
+      scoreList.removeAt(i);
+
       tab1->blockSignals(true);
       tab1->removeTab(i);
       tab1->blockSignals(false);
@@ -1386,14 +1392,14 @@ void MuseScore::removeTab(int i)
       tab2->removeTab(i);
       tab2->blockSignals(false);
 
-      scoreList.removeAt(i);
-
       cs = 0;
       cv = 0;
       int n = scoreList.size();
-      if (i >= (n-1))
-            i = n-2;
-      setCurrentViewer(scoreList.isEmpty() ? 0 : tab1->viewer(i));
+      if (n == 0)
+            setCurrentViewer(0);
+      else {
+            setCurrentViewer((firstTab ? tab1 : tab2)->viewer());
+            }
       writeSessionFile(false);
       if (!score->tmpName().isEmpty()) {
             QFile f(score->tmpName());
