@@ -1086,7 +1086,7 @@ void Chord::layoutStem()
             Spatium progression(score()->styleS(ST_shortStemProgression));
             Spatium shortest(score()->styleS(ST_shortestStem));
 
-            double normalStemLen = 3.5;
+            double normalStemLen = small() ? 2.5 : 3.5;
             if (_noteType != NOTE_NORMAL)
                   normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
 

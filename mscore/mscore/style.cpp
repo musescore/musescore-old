@@ -149,6 +149,13 @@ StyleType styleTypes[] = {
 
       StyleType("UfermataAnchor",          ST_INT),
       StyleType("DfermataAnchor",          ST_INT),
+      StyleType("UshortfermataAnchor",     ST_INT),
+      StyleType("DshortfermataAnchor",     ST_INT),
+      StyleType("UlongfermataAnchor",      ST_INT),
+      StyleType("DlongfermataAnchor",      ST_INT),
+      StyleType("UverylongfermataAnchor",  ST_INT),
+      StyleType("DverylongfermataAnchor",  ST_INT),
+
       StyleType("ThumbAnchor",             ST_INT),
       StyleType("SforzatoaccentAnchor",    ST_INT),
       StyleType("EspressivoAnchor",        ST_INT),

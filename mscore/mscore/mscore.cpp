@@ -1084,7 +1084,7 @@ void MuseScore::setCurrentViewer(int idx)
 void MuseScore::setCurrentView(int tabIdx, int idx)
       {
       if (idx == -1)
-            setCurrentViewer(0);
+            setCurrentViewer((Viewer*)0);
       else
             (tabIdx ? tab2 : tab1)->setCurrentIndex(idx);
       }
@@ -1379,10 +1379,7 @@ void MuseScore::removeTab(int i)
             seq->setScore(0);
 
       int idx1 = tab1->currentIndex();
-      int idx2 = tab2->currentIndex();
       bool firstTab = tab1->viewer(idx1) == cv;
-
-      scoreList.removeAt(i);
 
       tab1->blockSignals(true);
       tab1->removeTab(i);
@@ -1392,11 +1389,14 @@ void MuseScore::removeTab(int i)
       tab2->removeTab(i);
       tab2->blockSignals(false);
 
+      scoreList.removeAt(i);
+
       cs = 0;
       cv = 0;
       int n = scoreList.size();
-      if (n == 0)
-            setCurrentViewer(0);
+      if (n == 0) {
+            setCurrentViewer((Viewer*)0);
+            }
       else {
             setCurrentViewer((firstTab ? tab1 : tab2)->viewer());
             }
