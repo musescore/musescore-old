@@ -2707,9 +2707,9 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
       QString name = symbols[sym->sym()].name();
       const char* mxmlName = "";
-      if (name == "pedal ped")
+      if (name == "pedal.Ped")
             mxmlName = "pedal type=\"start\"";
-      else if (name == "pedalasterisk")
+      else if (name == "pedal.*")
             mxmlName = "pedal type=\"stop\"";
       else {
             printf("ExportMusicXml::symbol(): %s not supported", name.toLatin1().data());
