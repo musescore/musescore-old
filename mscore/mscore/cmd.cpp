@@ -1396,7 +1396,7 @@ MeasureBase* Score::appendMeasure(int type)
       else if (type == VBOX)
             mb = new VBox(this);
       mb->setTick(tick);
-      if(!last)
+      if (!last)
         _sigmap->add(tick, 4, 4);
 
       if (type == MEASURE) {
