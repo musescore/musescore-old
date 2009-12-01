@@ -1,3 +1,5 @@
+1.dec (lv)
+      - fix MusicXML export of pedal symbols
 30.nov (ws)
       - fixed: Crash with rewind in debug mode
       - more articulation symbols
