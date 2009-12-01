@@ -493,15 +493,15 @@ void MuseScore::editInstrList()
       if (rv == 0)
             return;
 
- 	  cs->setNoteEntry(false);
-  	  cs->inputState().track = -1;
+      cs->setNoteEntry(false);
+  	cs->inputState().track = -1;
       //
       // process modified partitur list
       //
       cs->startCmd();
   	  //TODO check if current selection is in a removed staff?
   	  cs->selection()->clear();
- 
+
       QTreeWidget* pl = instrList->partiturList;
       Part* part   = 0;
       int staffIdx = 0;
@@ -656,6 +656,11 @@ void MuseScore::editInstrList()
                         cs->undoChangeBracketSpan(staff, ii, n - i);
                   }
             }
+      //
+      // there should be at least one measure
+      //
+      if (cs->measures()->size() == 0)
+            cs->appendMeasures(1, MEASURE);
 
       cs->setLayoutAll(true);
       cs->endCmd();
