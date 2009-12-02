@@ -782,7 +782,7 @@ QByteArray Selection::staffMimeData() const
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(tupletId++);
             foreach(Beam* beam, *m->beams())
-                  beam->setId(beamId);
+                  beam->setId(beamId++);
             }
 
       int ticks  = tickEnd() - tickStart();
