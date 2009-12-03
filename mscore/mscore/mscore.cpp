@@ -706,7 +706,7 @@ MuseScore::MuseScore()
 
       menuLayout->addAction(getAction("reset-stretch"));
       menuLayout->addAction(getAction("reset-beammode"));
-      menuLayout->addAction(tr("Breaks..."), this, SLOT(showLayoutBreakPalette()));
+      menuLayout->addAction(tr("Breaks && Spacer..."), this, SLOT(showLayoutBreakPalette()));
 
       //---------------------
       //    Menu Style
@@ -2715,7 +2715,7 @@ bool MuseScore::restoreSession(bool always)
                         else if (tag == "dirty") {
                               QMessageBox::StandardButton b = QMessageBox::question(0,
                                  tr("MuseScore"),
-                                 tr("Last Session ended abnormal.\nRestore Session?"),
+                                 tr("The previous session quit unexpectedly.\n\nRestore session?"),
                                  QMessageBox::Yes | QMessageBox::No,
                                  QMessageBox::Yes
                                  );
