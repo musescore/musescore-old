@@ -95,6 +95,7 @@ class ExportLy {
   int curTicks;
   Direction stemDirection;
   int indx;
+  int partial; //length of pickupbar
 
   int  timedenom, z1, z2, z3, z4; //timesignatures
   int barlen, wholemeasurerest;
@@ -2014,7 +2015,8 @@ void  ExportLy::findVolta()
     {// for all measures
       if (m->type() !=MEASURE )
 	continue;
-      ++taktnr;
+      
+      ++taktnr; //should really not be incremented in case of pickupbars.
 
       //needed because of problems with repeatflag and because there
       //are no readymade functions for finding startbarlines, and
@@ -3117,6 +3119,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	      break;
 	    case doublebar:
 	      if (wholemeasurerest > 0) writeMeasuRestNum();
+	      out << "\n";
 	      indent();
 	      out << "\\bar \"||\"";
 	      curTicks=-1;
@@ -3563,7 +3566,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	{
 	case 0: break; 
 	  // we don't want voiceOne-specific behaviour if there is only one
-	  // voice, so if there are more, we append "\voiceOne" later
+	  // voice, so if there are more voices, we append "\voiceOne" later
 	case 1:
 	  out <<"\\voiceTwo" <<"\n\n";
 	  break;
@@ -3575,7 +3578,8 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  break;
 	}
 
-      //check for implicit startrepeat before first measure:
+      //check for implicit startrepeat before first measure: (could
+      //this be done in findvolta()?)
       i=0;
       while ((voltarray[i].voltart != startrepeat) and (voltarray[i].voltart != endrepeat)
 	     and (voltarray[i].voltart !=bothrepeat) and (i<=lastind))
@@ -3631,17 +3635,17 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	     out << "\n";
 	     
 	     int nombarlen=z1*AL::division;
+	     cout << "nombarlen at pickup: " << nombarlen << "\n";
 	   
 	     if (timedenom==8) nombarlen=nombarlen/2;
 	     if (timedenom == 2) nombarlen = 2*nombarlen;
-	     
 	     
 	     if ((barlen<nombarlen) and (measurenumber==1))
 	       {
 		 cout << "pickup nombarlen: " << nombarlen << " barleng: " << barlen << "\n";
 		 pickup=true;
 		 int punkt=0;
-		 int partial=getLen(barlen, &punkt);
+		 partial=getLen(barlen, &punkt);
 		 indent();
 		 out << "\\partial " << partial << "\n";
 	       }
@@ -3680,7 +3684,10 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	     findTuplets((ChordRest *) e);
 	     int l = ((Rest*)e)->ticks();
 	     int mlen=((Rest*)e)->segment()->measure()->tickLen();
-	     if ((l==mlen) || (l==0)) //l == 0 ??
+
+	     int nombarl=z1*AL::division;
+
+	     if (((l==mlen) || (l==0)) and (mlen ==nombarl))  //l == 0 ??
 	       {	
 		 if (wholemeasurerest > 0) 
 		   {
@@ -3726,46 +3733,46 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
     } //end for all segments
 
    barlen=m->tickLen();
-   if (barempty == true)  // no stuff in this bar in this
-			    // voice: fill empty bar with
-			    // silent rest
+   if (barempty == true)  
+   // no stuff in this bar in this voice: fill empty bar with silent rest
     {
-      
       if ((pickup) and (measurenumber==1))
 	{
 	  int punkt=0;
 	  int partial=getLen(barlen, &punkt);
 	  out << "\\partial ";
-	  writeLen(partial);
+	  writeLen(barlen);
 	  out << " \n";
 	  indent();
-	  writeRest(partial,2);
+	  writeRest(barlen,2);
+	  out << "\n";
 	}//end if pickup
-
       else //if not pickupbar: full silent bar
-
 	{
 	  writeRest(barlen, 2);
 	  curTicks=-1;
 	}
-      
     }//end bar empty
-
    else // voice bar not empty
      {
-
-    //we have to fill with spacer rests before and after nonsilent material
-    if ((measuretick < barlen) and (measurenumber>0))
-      {
-	//fill rest of measure with silent rest
-	int negative=barlen-measuretick;
-	curTicks=-1;
-	writeRest(negative, 2);
-	curTicks=-1;
-      }
+       //we have to fill with spacer rests before and after nonsilent material
+       if ((measuretick < barlen) and (measurenumber>0))
+	 {
+	   //fill rest of measure with silent rest
+	   int negative=barlen-measuretick;
+	   curTicks=-1;
+	   writeRest(negative, 2);
+	   curTicks=-1;
+	 }
      }
 
-  writeVolta(measurenumber, lastind);
+   int mno;
+   if (partial!=0)
+     mno = measurenumber +1;
+   else 
+     mno = measurenumber;
+
+   writeVolta(mno, lastind);
 } //end write VoiceMeasure
 
 
@@ -3798,7 +3805,7 @@ void ExportLy::writeScore()
   textspannerdown=false;
   headOfLyrics = NULL;
   tailOfLyrics = NULL;
-
+  
 
   foreach(Part* part, *score->parts())
     {
@@ -3890,6 +3897,7 @@ void ExportLy::writeScore()
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
 	      donefirst=false;
+	      partial=0;
 
 	      //for all measures in this voice:
 	      for (MeasureBase* m = score->first(); m; m = m->next())
@@ -3901,7 +3909,9 @@ void ExportLy::writeScore()
 		    markerAtMeasureStart( (Measure*) m );
 		  else
 		    printJumpOrMarker(measurenumber, true);
-		  writeVoiceMeasure(m, staff, staffInd, voice);
+
+		  writeVoiceMeasure(m, staff, staffInd, voice); //really write the measure contents
+
 		  if (staffInd == 0) 
 		    jumpAtMeasureStop( (Measure*) m);
 		  else
@@ -4399,6 +4409,9 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  ..... Fixed bugs in repeats/doblebars and in wholemeasurerests
+  caused by pickupbar
+  
   20.nov.2009  Tried to repair reported crash on file Cronicas.mscz
 
   7.nov. 2009: Lyrics. Works reasonably well on demo adeste.
@@ -4493,8 +4506,8 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
-  
-     -- all kinds of symbols at the notelevel. More symbols on the
+
+      -- all kinds of symbols at the notelevel. More symbols on the
      measurelevel
  
       -- Coda/Segno symbols collides with rehearsalmarks, which
@@ -4508,7 +4521,7 @@ bool ExportLy::write(const QString& name)
 
       -- dotted rests in timesignatures which do not subdivide in 3
          (like 6/8, 12/8) are plain and simply wrong, and must be made
-         impossible: translated to two separate rests.
+         impossible: translate to two separate rests.
       
    -- become clear on the difference between system text and staff
       text.
@@ -4523,7 +4536,12 @@ bool ExportLy::write(const QString& name)
 
    -- cross-staff beaming in pianostaff cross-voice slurs!?!?!? seems
       _very_ complex to implement (example demos:promenade, bar 6)
-      fermata above/below rest. Will \partcombine do it?
+      Will \partcombine do it?
+
+   -- fermata above/below rest.
+
+   -- Bug: markuptext in cronicas disappears, second staff from
+      bottom, first measure.
 
    -- difficult problem with hairpins: Beginning of hairpin and
    -- end of hairpin are anchored to different notes. This is done
@@ -4566,7 +4584,7 @@ bool ExportLy::write(const QString& name)
      corresponding durations in the other staves." In earlier editions
      of the manual, this is rightly described as a bug. I am awaiting
      the correction of this in lilypond, which, given the promotion
-     from bug to "issue", probably will be never, and will not correct
+     from bug to "issue", probably will be never, and I will not correct
      for it here. (olav)   
  */
 

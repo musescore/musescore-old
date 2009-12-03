@@ -8,6 +8,8 @@
               slash (/) and comma (,) for palette titles
       - Better error message for restore session
       - Update pt_BR translation from ..vitor..
+      (og)
+	-exportly: fixed bugs connected to pickupbar.
 1.dec (lv)
       - fix MusicXML export of pedal symbols
 30.nov (ws)
