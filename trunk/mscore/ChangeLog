@@ -1,3 +1,13 @@
+3.dec (db)
+      - Add spacer to Layout > Breaks & Spacer
+      - Minor renaming
+            - Rename "Breaths" palette to "Breaths & Pauses" since 
+              it contains caesura
+            - Sentence case for all palette tooltips
+            - Standardize on ampersand (&) instead of mixed use of 
+              slash (/) and comma (,) for palette titles
+      - Better error message for restore session
+      - Update pt_BR translation from ..vitor..
 1.dec (lv)
       - fix MusicXML export of pedal symbols
 30.nov (ws)
