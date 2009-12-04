@@ -503,7 +503,7 @@ QPointF Note::stemPos(bool upFlag) const
             pt.rx() += symbols[noteHead()].width(magS()) - off.x() + sw;
             pt.ry() -= off.y();
             }
-      return pt;
+      return pt + chord()->canvasPos();
       }
 
 //---------------------------------------------------------

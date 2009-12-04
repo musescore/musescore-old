@@ -316,7 +316,7 @@ void Chord::setStem(Stem* s)
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
       const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
-      return note->stemPos(upFlag) + pos() + segment()->pos();
+      return note->stemPos(upFlag);
       }
 
 //---------------------------------------------------------
@@ -573,48 +573,43 @@ void Chord::computeUp()
       {
       if (_stemDirection != AUTO) {
             _up = _stemDirection == UP;
-            return;
             }
-      if (_noteType != NOTE_NORMAL) {     // grace notes always go up
+      else if (_noteType != NOTE_NORMAL) {     // grace notes always go up
             _up = true;
-            return;
             }
-
-      int si = staffIdx();
-      if (measure()->mstaff(si)->hasVoices) {
+      else if (measure()->mstaff(staffIdx())->hasVoices) {
             switch(voice()) {
                   case 0:  _up = (score()->style(ST_stemDir1).toDirection() == UP); break;
                   case 1:  _up = (score()->style(ST_stemDir2).toDirection() == UP); break;
                   case 2:  _up = (score()->style(ST_stemDir3).toDirection() == UP); break;
                   case 3:  _up = (score()->style(ST_stemDir4).toDirection() == UP); break;
                   }
-            return;
             }
-
-      if (notes.size() == 1 || staffMove()) {
+      else if (notes.size() == 1 || staffMove()) {
             if (staffMove() > 0)
                   _up = true;
             else if (staffMove() < 0)
                   _up = false;
             else
                   _up = upNote()->line() > 4;
-            return;
             }
-      int ud = upNote()->line() - 4;
-      int dd = downNote()->line() - 4;
-      if (-ud == dd) {
-            int up = 0;
-            for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-                  int l = in->second->line();
-                  if (l <= 4)
-                        --up;
-                  else
-                        ++up;
+      else {
+            int ud = upNote()->line() - 4;
+            int dd = downNote()->line() - 4;
+            if (-ud == dd) {
+                  int up = 0;
+                  for (ciNote in = notes.begin(); in != notes.end(); ++in) {
+                        int l = in->second->line();
+                        if (l <= 4)
+                              --up;
+                        else
+                              ++up;
+                        }
+                  _up = up > 0;
                   }
-            _up = up > 0;
+            else
+                  _up = dd > -ud;
             }
-      else
-            _up = dd > -ud;
       }
 
 //---------------------------------------------------------
@@ -693,7 +688,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
+void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
       {
       Note* note = new Note(score());
       int ptch   = e.attribute("pitch", "-1").toInt();
@@ -743,7 +738,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
                   }
             else if (tag == "move")
                   setStaffMove(i);
-            else if (!ChordRest::readProperties(e, tuplets, beams))
+            else if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
       if (ptch != -1)
@@ -760,8 +755,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
 void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
-      QList<Beam*> bl;
-      read(e, tl, bl);
+      read(e, tl);
       if (!duration().isValid())
             convertTicks();
       }
@@ -770,7 +764,7 @@ void Chord::read(QDomElement e)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
+void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -829,7 +823,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
                   _stem->read(e);
                   add(_stem);
                   }
-            else if (!ChordRest::readProperties(e, tuplets, beams))
+            else if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
       if (!duration().isValid())
@@ -1075,7 +1069,6 @@ void Chord::layoutStem()
 
       if (_stem) {
             Spatium stemLen;
-            QPointF npos;
 
             int hookIdx      = duration().hooks();
             Note* upnote     = upNote();
@@ -1098,8 +1091,7 @@ void Chord::layoutStem()
                         sel -= sel  * progression.val();
                   if (sel > 2.0)
                         sel = 2.0;
-                  npos       = downnote->stemPos(true);
-                  stemLen    = Spatium(sel - dy);
+                  stemLen = Spatium(sel - dy);
                   if (-stemLen < shortest)
                         stemLen = -shortest;
                   }
@@ -1111,14 +1103,15 @@ void Chord::layoutStem()
                         sel -= (sel - 4.0)  * progression.val();
                   if (sel < 2.0)
                         sel = 2.0;
-                  npos       = upnote->stemPos(false);
                   stemLen    = Spatium(sel - uy);
                   if (stemLen < shortest)
                         stemLen = shortest;
                   }
 
+            QPointF npos(stemPos(_up, false));
+
             _stem->setLen(point(stemLen));
-            _stem->setPos(npos);
+            _stem->setPos(npos - canvasPos());
 
             if (_stemSlash) {
                   // TODO: does not work for chords
@@ -1137,7 +1130,7 @@ void Chord::layoutStem()
                   _hook->setSubtype(hookIdx);
                   qreal lw  = point(score()->styleS(ST_stemWidth)) * .5;
                   QPointF p = npos + QPointF(lw, _stem->stemLen());
-                  _hook->setPos(p);
+                  _hook->setPos(p - canvasPos());
                   }
             else
                   setHook(0);

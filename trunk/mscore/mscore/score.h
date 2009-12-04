@@ -91,6 +91,7 @@ class MusicXmlCreator;
 class TimeSig;
 class Clef;
 class TextB;
+class Beam;
 
 extern bool showRubberBand;
 
@@ -219,6 +220,7 @@ class Score : public QObject {
 
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
+      QList<Beam*>    _beams;
       RepeatList* _repeatList;
       AL::TimeSigMap* _sigmap;
       AL::TempoMap* _tempomap;
@@ -371,7 +373,11 @@ class Score : public QObject {
       void rebuildBspTree();
       Measure* skipEmptyMeasures(Measure*, System*);
       void cmdRepeatSelection();
-      void layoutBeams1();
+
+      void layoutStage1();
+      void layoutStage2();
+      void layoutStage3();
+      void layoutChords1(Segment* segment, int staffIdx);
 
    private slots:
       void textUndoLevelAdded();
@@ -849,6 +855,9 @@ class Score : public QObject {
       void emitAdjustCanvasPosition(Element* el, bool playBack) {
             emit adjustCanvasPosition(el, playBack);
             }
+      QList<Beam*> beams() const { return _beams; }
+      QList<Beam*>& beams() { return _beams; }
+      Beam* beam(int id) const;
       };
 
 extern Score* gscore;

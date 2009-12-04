@@ -92,7 +92,6 @@ class Measure : public MeasureBase {
       int _repeatFlags;       ///< or'd RepeatType's
 
       QList<MStaff*>  staves;
-      QList<Beam*>    _beams;
       QList<Tuplet*>  _tuplets;
 
       int    _no;             ///< Measure number, counting from zero
@@ -119,8 +118,6 @@ class Measure : public MeasureBase {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
-      void layoutBeams();
-      void layoutChords0(Segment* segment, int startTrack, char* tversatz);
 
    public:
       Measure(Score*);
@@ -145,7 +142,6 @@ class Measure : public MeasureBase {
       QList<MStaff*>* staffList()          { return &staves;      }
       MStaff* mstaff(int staffIdx)         { return staves[staffIdx]; }
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
-      QList<Beam*>* beams()                { return &_beams;      }
       QList<Tuplet*>* tuplets()            { return &_tuplets;    }
       int no() const                       { return _no;          }
       bool irregular() const               { return _irregular;   }
@@ -181,9 +177,6 @@ class Measure : public MeasureBase {
       void insertStaff(Staff*, int staff);
       void insertMStaff(MStaff* staff, int idx);
       void removeMStaff(MStaff* staff, int idx);
-
-      void layoutBeams1(int track);
-      void layout0();
 
       virtual void moveTicks(int diff);
       void insert(Segment* ns, Segment* s);
@@ -234,6 +227,7 @@ class Measure : public MeasureBase {
 
       bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest | _breakMMRest; }
       bool breakMMRest() const                { return _breakMMRest; }
+      void setBreakMMRest(bool v)             { _breakMMRest = v;    }
       bool getBreakMultiMeasureRest() const   { return _breakMultiMeasureRest; }
       void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
 
@@ -243,8 +237,10 @@ class Measure : public MeasureBase {
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
       Fraction fraction() const;
       void layoutChords1(Segment* segment, int startTrack);
-      void cleanupBeams();
+      void layoutChords0(Segment* segment, int startTrack, char* tversatz);
       };
+
+extern void initLineList(char* ll, int key);
 
 #endif
 

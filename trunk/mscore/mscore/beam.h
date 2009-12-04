@@ -118,8 +118,6 @@ class Beam : public Element {
 
       virtual void toDefault();
 
-      Measure* measure() const            { return (Measure*)parent(); }
-
       void layout1();
       void layout();
 
@@ -140,5 +138,6 @@ class Beam : public Element {
       bool isUp();
       };
 
+extern bool endBeam(int tsZ, int tsN, ChordRest* cr, int p);
 #endif
 

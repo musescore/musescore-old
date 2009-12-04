@@ -470,10 +470,12 @@ void Score::write(Xml& xml, bool autosave)
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(tupletId++);
-            foreach(Beam* beam, *m->beams())
-                  beam->setId(beamId++);
             }
-
+      xml.curTrack = 0;
+      foreach(Beam* beam, _beams) {
+            beam->setId(beamId++);
+//            beam->write(xml);
+            }
       foreach(Element* el, _gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
@@ -2232,9 +2234,23 @@ void Score::scanElements(void* data, void (*func)(void*, Element*))
                   continue;
             element->scanElements(data, func);
             }
+      foreach(Beam* b, _beams)
+            func(data, b);
       for(MeasureBase* m = first(); m; m = m->next())
             m->scanElements(data, func);
       foreach(Page* page, pages())
             page->scanElements(data, func);
       }
 
+//---------------------------------------------------------
+//   beam
+//---------------------------------------------------------
+
+Beam* Score::beam(int id) const
+      {
+      foreach(Beam* b, _beams) {
+            if (b->id() == id)
+                  return b;
+            }
+      return 0;
+      }

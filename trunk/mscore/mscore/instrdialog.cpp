@@ -37,6 +37,7 @@
 #include "seq.h"
 #include "measure.h"
 #include "line.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -574,6 +575,11 @@ void MuseScore::editInstrList()
                                     Measure* m = (Measure*)mb;
                                     m->cmdRemoveStaves(sidx, eidx);
                                     }
+                              foreach(Beam* e, cs->beams()) {
+                                    int staffIdx = e->staffIdx();
+                                    if (staffIdx >= sidx && staffIdx < eidx)
+                                          cs->undoRemoveElement(e);
+                                    }
                               cs->cmdRemoveStaff(sidx);
                               }
                         else if (sli->op == ITEM_ADD) {
@@ -799,6 +805,10 @@ void Score::insertStaff(Staff* staff, int idx)
                         break;
                   }
             }
+      foreach (Beam* b, _beams) {
+            if (b->track() >= track)
+                  b->setTrack(b->track() + VOICES);
+            }
       }
 
 //---------------------------------------------------------
@@ -953,6 +963,14 @@ void Score::sortStaves(QList<int>& dst)
             Measure* m = static_cast<Measure*>(mb);
             m->sortStaves(dst);
             }
+
+      foreach(Beam* beam, _beams) {
+            int staffIdx = beam->staffIdx();
+            int voice    = beam->voice();
+            int idx      = dst.indexOf(staffIdx);
+            beam->setTrack(idx * VOICES + voice);
+            }
+
       foreach(Element* e, _gel) {
             switch(e->type()) {
                   case SLUR:

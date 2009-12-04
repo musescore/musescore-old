@@ -2429,11 +2429,11 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(0);
             }
+      foreach(Beam* beam, _beams)
+            beam->setId(-1);
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(-1);
-            foreach(Beam* beam, *m->beams())
-                  beam->setId(-1);
             }
 
       int dstStaffStart = dst->staffIdx();
@@ -2471,7 +2471,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   if (dstStaffIdx >= nstaves())
                         break;
                   QList<Tuplet*> tuplets;
-                  QList<Beam*> beams;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         const QString& tag(eee.tagName());
                         if (tag == "Tuplet") {
@@ -2501,7 +2500,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                    cr = new Rest(this);
                               cr->setTrack(curTrack);
                               cr->setTick(curTick);         // set default tick position
-                              cr->read(eee, tuplets, beams);
+                              cr->read(eee, tuplets);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);

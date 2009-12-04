@@ -1,10 +1,13 @@
+3.dec (ws)
+      - Reorganized layout of beams. They are not longer restricted to one measure.
+        However beams spanning systems do not work yet.
 3.dec (db)
       - Add spacer to Layout > Breaks & Spacer
       - Minor renaming
-            - Rename "Breaths" palette to "Breaths & Pauses" since 
+            - Rename "Breaths" palette to "Breaths & Pauses" since
               it contains caesura
             - Sentence case for all palette tooltips
-            - Standardize on ampersand (&) instead of mixed use of 
+            - Standardize on ampersand (&) instead of mixed use of
               slash (/) and comma (,) for palette titles
       - Better error message for restore session
       - Update pt_BR translation from ..vitor..
