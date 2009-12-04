@@ -228,8 +228,7 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
-   const QList<Beam*>& beams)
+bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
       {
       if (Element::readProperties(e))
             return true;
@@ -276,14 +275,12 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
       else if (tag == "trailingSpace")
             _extraTrailingSpace = Spatium(val.toDouble());
       else if (tag == "Beam") {
-            foreach(Beam* b, beams) {
-                  if (b->id() == i) {
-                        setBeam(b);
-                        b->add(this);
-                        break;
-                        }
+            Beam* b = score()->beam(i);
+            if (b) {
+                  setBeam(b);
+                  b->add(this);
                   }
-            if (beam() == 0)
+            else
                   printf("Beam id %d not found\n", i);
             }
       else if (tag == "small")

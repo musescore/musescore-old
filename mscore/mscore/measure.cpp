@@ -294,7 +294,7 @@ void Measure::push_front(Segment* e)
 //    preset lines list with accidentals for given key
 //---------------------------------------------------------
 
-static void initLineList(char* ll, int key)
+void initLineList(char* ll, int key)
       {
       memset(ll, 0, 74);
       for (int octave = 0; octave < 11; ++octave) {
@@ -327,6 +327,7 @@ struct AcEl {
 //---------------------------------------------------------
 //   layoutChords0
 //    only called from layout0
+//    computes note lines and accidentals
 //---------------------------------------------------------
 
 void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
@@ -410,6 +411,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                         line = 127 - line - 82 + clefTable[clef].yOffset;
                         note->setLine(line);
                         }
+                  chord->computeUp();
                   }
             cr->setMag(m);
             }
@@ -651,106 +653,6 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             }
       }
 
-//-------------------------------------------------------------------
-//    layout0
-///   First pass in layout measure.
-///   For \a staff set line & accidental & mirror for notes
-///   depending on context.
-//-------------------------------------------------------------------
-
-#define OLD
-
-void Measure::layout0()
-      {
-#ifdef OLD
-      foreach(Beam* beam, _beams)
-            beam->clear();
-#endif
-
-      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-            char tversatz[74];      // list of already set accidentals for this measure
-
-            Staff* staff    = _score->staff(staffIdx);
-            int key         = staff->keymap()->key(tick());
-
-            initLineList(tversatz, key);
-
-            _breakMMRest = false;
-            if (score()->styleB(ST_createMultiMeasureRests)) {
-                  // TODO: this is slow!
-                  foreach(const Element* el, *score()->gel()) {
-                        if (el->type() == VOLTA) {
-                              const Volta* volta = static_cast<const Volta*>(el);
-                              if (tick() >= volta->tick() && tick() <= volta->tick2()) {
-                                    _breakMMRest = true;
-                                    break;
-                                    }
-                              }
-                        }
-                  }
-            foreach(Element* e, _el) {
-                  if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                        _breakMMRest = true;
-                  else if (e->type() == TEMPO_TEXT)
-                        _breakMMRest = true;
-                  }
-            int track = staffIdx * VOICES;
-
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  Element* e = segment->element(track);
-                  if (segment->subtype() == Segment::SegKeySig
-                     || segment->subtype() == Segment::SegStartRepeatBarLine
-                     || segment->subtype() == Segment::SegTimeSig) {
-                        if (e && !e->generated())
-                              _breakMMRest = true;
-                        }
-                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
-                        layoutChords0(segment, staffIdx * VOICES, tversatz);
-                  if (e && e->type() == KEYSIG) {
-                        int oval = staff->keymap()->key(e->tick() - 1);
-                        static_cast<KeySig*>(e)->setOldSig(oval);
-                        }
-                  }
-#ifdef OLD
-            int startTrack = staffIdx * VOICES;
-            int endTrack   = startTrack + VOICES;
-
-            for (int track = startTrack; track < endTrack; ++track)
-                  layoutBeams1(track);
-#endif
-
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
-                        layoutChords1(segment, staffIdx);
-                  }
-            }
-
-      MeasureBase* mb = prev();
-      if (mb && mb->type() == MEASURE) {
-            Measure* prev = static_cast<Measure*>(mb);
-            if (prev->endBarLineType() != NORMAL_BAR)
-                  _breakMMRest = true;
-            }
-#ifdef OLD
-      cleanupBeams();
-#endif
-      }
-
-//---------------------------------------------------------
-//   cleanupBeams
-//    remove unneeded beam instances
-//---------------------------------------------------------
-
-void Measure::cleanupBeams()
-      {
-      foreach(Beam* beam, _beams) {
-            if (beam->elements().isEmpty()) {
-                  remove(beam);
-                  delete beam;
-                  }
-            }
-      }
-
 //---------------------------------------------------------
 //   findAccidental
 //---------------------------------------------------------
@@ -982,7 +884,7 @@ void Measure::layout2()
                   }
             }
 
-      layoutBeams();
+//      layoutBeams();
 
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
@@ -1199,14 +1101,6 @@ void Measure::add(Element* el)
             case SPACER:
                   staves[el->staffIdx()]->_vspacer = static_cast<Spacer*>(el);
                   break;
-            case BEAM:
-                  {
-                  Beam* b = static_cast<Beam*>(el);
-                  _beams.append(b);
-                  foreach(ChordRest* cr, b->elements())
-                        cr->setBeam(b);
-                  }
-                  break;
             case SEGMENT:
                   {
                   Segment* seg = static_cast<Segment*>(el);
@@ -1361,19 +1255,6 @@ void Measure::remove(Element* el)
                         tuplet->tuplet()->remove(tuplet);
                   }
                   break;
-
-            case BEAM:
-                  {
-                  Beam* b = static_cast<Beam*>(el);
-                  foreach(ChordRest* cr, b->elements())
-                        cr->setBeam(0);
-                  if (!_beams.removeOne(b)) {
-                        printf("Measure remove: Beam not found\n");
-                        return;
-                        }
-                  }
-                  break;
-
             case LAYOUT_BREAK:
                   switch(el->subtype()) {
                         case LAYOUT_BREAK_PAGE:
@@ -1500,6 +1381,7 @@ void Measure::removeStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
+#if 0
       foreach(Beam* e, _beams) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= eStaff) {
@@ -1508,6 +1390,7 @@ void Measure::removeStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
+#endif
       foreach(Tuplet* e, _tuplets) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= eStaff) {
@@ -1536,6 +1419,7 @@ void Measure::insertStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
+#if 0
       foreach(Beam* e, _beams) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= sStaff) {
@@ -1544,6 +1428,7 @@ void Measure::insertStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
+#endif
       foreach(Tuplet* e, _tuplets) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= sStaff) {
@@ -1581,11 +1466,6 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       foreach(Element* e, _el) {
             if (e->track() == -1)
                   continue;
-            int staffIdx = e->staffIdx();
-            if (staffIdx >= sStaff && staffIdx < eStaff)
-                  _score->undoRemoveElement(e);
-            }
-      foreach(Beam* e, _beams) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= sStaff && staffIdx < eStaff)
                   _score->undoRemoveElement(e);
@@ -2239,14 +2119,6 @@ void Measure::write(Xml& xml) const
                                           tuplet->setId(xml.tupletId++);
                                           tuplet->write(xml);
                                           }
-                                    if (de->isChordRest()) {
-                                          ChordRest* cr = static_cast<ChordRest*>(de);
-                                          Beam* beam = cr->beam();
-                                          if (beam && beam->elements().front() == cr) {
-                                                beam->setId(xml.beamId++);
-                                                beam->write(xml);
-                                                }
-                                          }
                                     }
                               e->write(xml);
                               }
@@ -2325,7 +2197,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->read(e, _tuplets, _beams);
+                  chord->read(e, _tuplets);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
@@ -2343,7 +2215,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->readNote(e, _tuplets, _beams);
+                  chord->readNote(e, _tuplets);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
@@ -2352,7 +2224,7 @@ void Measure::read(QDomElement e, int idx)
                   Rest* rest = new Rest(score());
                   rest->setTrack(score()->curTrack);
                   rest->setTick(score()->curTick);    // set default tick position
-                  rest->read(e, _tuplets, _beams);
+                  rest->read(e, _tuplets);
                   Segment* s = getSegment(rest);
                   s->add(rest);
                   int t = rest->tick();
@@ -2580,7 +2452,8 @@ void Measure::read(QDomElement e, int idx)
                   Beam* beam = new Beam(score());
                   beam->setTrack(score()->curTrack);
                   beam->read(e);
-                  add(beam);
+                  beam->setParent(0);
+                  score()->beams().append(beam);
                   }
             else
                   domError(e);
@@ -2669,10 +2542,6 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                   else
                         func(data, e);
                   }
-            }
-      foreach(Beam* b, _beams) {
-            if (visible(b->staffIdx()))
-                  func(data, b);
             }
       foreach(Tuplet* tuplet, _tuplets) {
             if (visible(tuplet->staffIdx()))
@@ -2861,13 +2730,6 @@ void Measure::sortStaves(QList<int>& dst)
             int staffIdx = e->staffIdx();
             int idx = dst.indexOf(staffIdx);
             e->setTrack(idx * VOICES + voice);
-            }
-
-      foreach(Beam* beam, _beams) {
-            int staffIdx = beam->staffIdx();
-            int voice    = beam->voice();
-            int idx = dst.indexOf(staffIdx);
-            beam->setTrack(idx * VOICES + voice);
             }
       }
 

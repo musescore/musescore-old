@@ -71,6 +71,7 @@
 #include "undo.h"
 #include "repeatlist.h"
 #include "scoretab.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   load
@@ -1338,6 +1339,12 @@ bool Score::read(QDomElement e)
                         Excerpt* e = new Excerpt(this);
                         e->read(ee);
                         _excerpts.append(e);
+                        }
+                  else if (tag == "Beam") {
+                        Beam* beam = new Beam(this);
+                        beam->read(ee);
+                        beam->setParent(0);
+                        _beams.append(beam);
                         }
                   else
                         domError(ee);

@@ -40,6 +40,7 @@
 #include "ui_textline.h"
 #include "ui_linesegment.h"
 #include "ui_lyrics.h"
+#include "ui_beam.h"
 
 class ShowElementBase;
 class Element;
@@ -82,6 +83,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       ShowElementBase* voltaView;
       ShowElementBase* voltaSegmentView;
       ShowElementBase* lyricsView;
+      ShowElementBase* beamView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -507,6 +509,23 @@ class LyricsView : public ShowElementBase {
 
    public:
       LyricsView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   BeamView
+//---------------------------------------------------------
+
+class BeamView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::BeamBase bb;
+
+   private slots:
+      void elementClicked(QTreeWidgetItem*);
+
+   public:
+      BeamView();
       virtual void setElement(Element*);
       };
 

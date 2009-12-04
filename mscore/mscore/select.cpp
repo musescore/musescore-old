@@ -778,11 +778,11 @@ QByteArray Selection::staffMimeData() const
             }
       int tupletId = 0;
       int beamId = 0;
+      foreach(Beam* beam, _score->beams())
+            beam->setId(beamId++);
       for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(tupletId++);
-            foreach(Beam* beam, *m->beams())
-                  beam->setId(beamId++);
             }
 
       int ticks  = tickEnd() - tickStart();
@@ -1009,7 +1009,6 @@ void Score::selectElementDialog(Element* e)
             scanElements(&pattern, collectMatch);
             if (sd.doReplace()) {
                   select(0, SELECT_SINGLE, 0);
-printf("select %d elements\n", pattern.el.size());
                   foreach(Element* ee, pattern.el)
                         select(ee, SELECT_ADD, 0);
                   }

@@ -141,6 +141,7 @@ Inspector::Inspector(QWidget* parent)
       voltaView    = new VoltaView;
       voltaSegmentView = new VoltaSegmentView;
       lyricsView   = new LyricsView;
+      beamView     = new BeamView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -163,6 +164,7 @@ Inspector::Inspector(QWidget* parent)
       stack->addWidget(voltaView);
       stack->addWidget(voltaSegmentView);
       stack->addWidget(lyricsView);
+      stack->addWidget(beamView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -185,6 +187,7 @@ Inspector::Inspector(QWidget* parent)
       connect(voltaView,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -313,6 +316,8 @@ void Inspector::updateList(Score* s)
             else
                   new ElementItem(li, el);
             }
+      foreach(Beam* beam, cs->beams())
+	      new ElementItem(li, beam);
 
       int staves = cs->nstaves();
       int tracks = staves * VOICES;
@@ -397,8 +402,6 @@ void Inspector::updateList(Score* s)
                                           }
                                     }
                               }
-                        foreach(Beam* beam, *measure->beams())
-					new ElementItem(mi, beam);
                         foreach(Tuplet* tuplet, *measure->tuplets()) {
 					ElementItem* item = new ElementItem(mi, tuplet);
                               if (tuplet->number())
@@ -527,6 +530,7 @@ void Inspector::updateElement(Element* el)
             case VOLTA:         ew = voltaView;    break;
             case VOLTA_SEGMENT: ew = voltaSegmentView; break;
             case LYRICS:        ew = lyricsView;   break;
+            case BEAM:          ew = beamView;     break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -646,7 +650,7 @@ void MeasureView::setElement(Element* e)
 
       mb.segments->setValue(m->size());
       mb.staves->setValue(m->staffList()->size());
-      mb.beams->setValue(m->beams()->size());
+//      mb.beams->setValue(m->beams()->size());
       mb.tuplets->setValue(m->tuplets()->size());
       mb.measureNo->setValue(m->no());
       mb.noOffset->setValue(m->noOffset());
@@ -1825,8 +1829,54 @@ void Inspector::forwardClicked()
 
 void Inspector::reloadClicked()
       {
-		Element* e = curElement;
-		updateList(cs);
-		if(e)
-			updateElement(e);
+      Element* e = curElement;
+	updateList(cs);
+	if (e)
+	      updateElement(e);
       }
+
+//---------------------------------------------------------
+//   BeamView
+//---------------------------------------------------------
+
+BeamView::BeamView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      bb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(bb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void BeamView::setElement(Element* e)
+      {
+      Beam* b = (Beam*)e;
+      ShowElementBase::setElement(e);
+
+      bb.up->setValue(b->up());
+      bb.elements->clear();
+      foreach (ChordRest* cr, b->elements()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)cr));
+            item->setText(1, cr->name());
+            bb.elements->addTopLevelItem(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void BeamView::elementClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+

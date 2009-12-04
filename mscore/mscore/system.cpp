@@ -521,6 +521,8 @@ void System::add(Element* el)
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
             _staves[el->staffIdx()]->instrumentName = static_cast<TextC*>(el);
             }
+      else if (el->type() == BEAM)
+            score()->add(el);
       else if (el->type() == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b   = static_cast<Bracket*>(el);
@@ -558,6 +560,8 @@ void System::remove(Element* el)
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
             _staves[el->staffIdx()]->instrumentName = 0;
             }
+      else if (el->type() == BEAM)
+            score()->remove(el);
       else if (el->type() == BRACKET) {
             SysStaff* staff = _staves[el->staffIdx()];
             for (int i = 0; i < staff->brackets.size(); ++i) {
