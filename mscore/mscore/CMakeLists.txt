@@ -300,6 +300,7 @@ else (MINGW)
       rtf2html
       qtsingleapp
       fluid
+      z
       )
 
    if (HAS_AUDIOFILE)
