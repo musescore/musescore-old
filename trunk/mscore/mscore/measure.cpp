@@ -2817,16 +2817,26 @@ bool Measure::isMeasureRest(int staffIdx)
       for (Segment* s = first(); s; s = s->next()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;
+			int count = 0;
+			bool measureRestSegment = false;	  
             for (int track = strack; track < etrack; ++track) {
-                  Element* e = s->element(staffIdx * VOICES);
-                  if (e && e->type() == REST) {
+                  Element* e = s->element(track);
+				  if(!e){
+					count++;
+                  }else if (e->type() == REST) {
                         Rest* r = static_cast<Rest*>(e);
                         Duration d = r->duration();
                         if (d.type() == Duration::V_MEASURE)
-                              return true;
+                              count++;
+							  measureRestSegment = true;
                         }
                   }
+			if(count == VOICES){ //all voices checked
+				return true;
+				}
+			break; //if we go that far we got a valid seg non empty
             }
+	  		
       return false;
       }
 
