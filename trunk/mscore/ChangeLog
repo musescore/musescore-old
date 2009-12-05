@@ -1,3 +1,6 @@
+5.dec (db)
+      - commit Toby's patch for manual/ProcessHTML.py 
+       (offline mode, proper command line options, and general code cleanup)
 3.dec (ws)
       - Reorganized layout of beams. They are not longer restricted to one measure.
         However beams spanning systems do not work yet.

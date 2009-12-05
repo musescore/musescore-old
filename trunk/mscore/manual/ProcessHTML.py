@@ -1,6 +1,8 @@
-# This Python file uses the following encoding: utf-8
-import sys
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+import sys
+from optparse import OptionParser
 
 # Get handbook from the web
 def obtainHTML(url, verbose, language_code='en'):
@@ -476,7 +478,7 @@ def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf
 
 
 # Create handbook based on language parameter
-def createHandbook(language_code, download_images='missing', pdf='openpdf', verbose=False, heading_switch=True):
+def createHandbook(language_code, download_images='missing', pdf='openpdf', verbose=False, heading_switch=True,offline=False):
 
     url = ''
     internal = ''
@@ -524,7 +526,13 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
     print "Create handbook for",language_code
 
-    html = obtainHTML(url, verbose, language_code)
+    if not offline:
+        html = obtainHTML(url, verbose, language_code)
+    else:
+        file_name = 'MuseScore-'+language_code+'.html'
+        html_file = open('sources/'+file_name,"r")
+        html = html_file.read()
+        html_file.close()
 
     anchors = [] #list of anchor names throughout document
     
@@ -542,7 +550,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     html = addCustomStyles(html, verbose, language_code)
     html = addPageNumbers(html, verbose)
 
-    if download_images != 'local':
+    if download_images != 'local' and not offline:
         downloadImages(html, verbose, download_images)
         
     html = fixImgSrc(html, verbose)
@@ -557,64 +565,53 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_code = 'en'
-    language_code = 'ja'
+    language_choices = ['all','en','nl','de','es','fi','fr','gl','it','ja','nb','ru','pl','pt-BR']
+  
+    parser = OptionParser()
+    parser.add_option("-l","--lang", dest="language_code",
+                    help="Specify language code for which to build manual",
+                    choices=language_choices,
+                    default="all")
+    parser.add_option("-o","--offline", dest="offline",
+                    help="Specify for offline mode",
+                    action="store_true",
+                    default=False)
+    parser.add_option("-v","--verbose", dest="verbose",
+                    action="store_true",
+                    help="Verbose output",
+                    default=False)
+    parser.add_option("-t", "--type", dest="pdf",
+                    help="PDF type",
+                    choices=('default','pdf','openpdf','nopdf'),
+                    default='pdf')
+    parser.add_option("-n", "--no-heading", dest="heading_switch",
+                    action="store_false",
+                    help="Heading level switching off",
+                    default=True)
+
+    (opts, args) = parser.parse_args()
+
+    language_code = opts.language_code
+    pdf = opts.pdf
+    heading_switch = opts.heading_switch
+    verbose = opts.verbose
+    offline = opts.offline
     download_images = 'missing'
-    pdf = 'default'
-    heading_switch = True
-    verbose = False
-
-    # Parse command line variable for language (en, nl, de, es, gl, fr)
-    if len(sys.argv) > 1:
-        language_code = sys.argv[1]
-
-    # Parse command line variable for images (all, local, missing)
-    if len(sys.argv) > 2:
-        if sys.argv[2] == 'openpdf':
-            pdf = 'openpdf'
-        elif sys.argv[2] == 'nopdf':
-            pdf = 'nopdf'
-        elif sys.argv[2] == 'pdf':
-            pdf = 'pdf'
-        else:
-            download_images = sys.argv[2]
-
-    # Parse command line variable for heading level switching which is processor heavy (on off)
-    if len(sys.argv) > 3:
-        if sys.argv[3] == 'off':
-            heading_switch = False
-        elif sys.argv[3] == 'verbose':
-            verbose = True
-        elif sys.argv[3] == 'openpdf':
-            pdf = 'openpdf'
-        elif sys.argv[3] == 'nopdf':
-            pdf = 'nopdf'
-        elif sys.argv[3] == 'pdf':
-            pdf = 'pdf'
     
     # Create Handbooks for all languages
     if language_code == 'all':
+        print 'Creating handbooks for all languages...'
         if pdf == 'default':
             pdf = 'pdf'
-        createHandbook('en', download_images, pdf, verbose, heading_switch)
-        createHandbook('nl', 'missing', pdf, verbose, heading_switch) # download only missing images for translations
-        createHandbook('de', 'missing', pdf, verbose, heading_switch)
-        createHandbook('es', 'missing', pdf, verbose, heading_switch)
-        createHandbook('fi', 'missing', pdf, verbose, heading_switch)
-        createHandbook('fr', 'missing', pdf, verbose, heading_switch)
-        createHandbook('gl', 'missing', pdf, verbose, heading_switch)
-        createHandbook('it', 'missing', pdf, verbose, heading_switch)
-        #createHandbook('ja', 'missing', pdf, verbose, heading_switch)
-        createHandbook('nb', 'missing', pdf, verbose, heading_switch)
-        createHandbook('ru', 'missing', pdf, verbose, heading_switch)
-        createHandbook('pl', 'missing', pdf, verbose, heading_switch)
-        createHandbook('pt-BR', 'missing', pdf, verbose, heading_switch)
+        for language in language_choices:
+            if language != "all":
+                createHandbook(language, download_images, pdf, verbose, heading_switch, offline)
 
     # Create Handbook for specific language
     else:
         if pdf == 'default':
             pdf = 'openpdf'
-        createHandbook(language_code, download_images, pdf, verbose, heading_switch)    
+        createHandbook(language_code, download_images, pdf, verbose, heading_switch, offline)
 
     print "Done"
     
