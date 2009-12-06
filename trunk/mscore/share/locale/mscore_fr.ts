@@ -17,8 +17,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r2347 translated JLWaltener - 14/11/2009 - QT Linguist v4.5.3</translatorcomment>
-        <translation>Révision : 2347</translation>
+        <translatorcomment>r2381 translated JLWaltener - 06/12/2009 - QT Linguist v4.6.0</translatorcomment>
+        <translation>Révision : 2381</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3404,7 +3404,8 @@ Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.<
     <message>
         <source>Last Session ended abnormal.
 Restore Session?</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêt anormal de la dernière session.
+Restaurer la session ?</translation>
     </message>
 </context>
 <context>
@@ -3954,7 +3955,7 @@ Restore Session?</source>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers MuseScore ( *.mscz *.mscx *.msc);;All (*)</translation>
     </message>
 </context>
 <context>
@@ -4494,15 +4495,15 @@ Restore Session?</source>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Style utilisé pour l&apos;import</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation type="unfinished"></translation>
+        <translation>Style embarqué</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le fichier de style :</translation>
     </message>
 </context>
 <context>
@@ -5374,11 +5375,11 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Loaded SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFont chargée</translation>
     </message>
     <message>
         <source>SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFont</translation>
     </message>
 </context>
 <context>
@@ -7831,17 +7832,9 @@ p, li { white-space: pre-wrap; }
         <source>Follow Song</source>
         <translation>Suivre la musique</translation>
     </message>
-    <message>
-        <source>local help</source>
-        <translation type="unfinished">Aide locale</translation>
-    </message>
 </context>
 <context>
     <name>articulation</name>
-    <message id="============================================================================">
-        <source>ufermata</source>
-        <translation>point d&apos;orgue vers le haut</translation>
-    </message>
     <message>
         <source>dfermata</source>
         <translation>point d&apos;orgue vers le bas</translation>
@@ -7952,7 +7945,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">point d&apos;orgue vers le haut</translation>
+        <translation>point d&apos;orgue vers le haut</translation>
     </message>
 </context>
 <context>
