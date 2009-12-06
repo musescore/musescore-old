@@ -70,6 +70,7 @@ class Duration {
       int dots() const    { return _dots; }
       void setDots(int v) { _dots = v; }
       Fraction fraction() const;
+      void print() const;
       };
 
 extern QList<Duration> toDurationList(Fraction, bool useDottedValues);
