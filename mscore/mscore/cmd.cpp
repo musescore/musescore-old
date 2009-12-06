@@ -921,10 +921,15 @@ Fraction Score::makeGap1(ChordRest* cr, Fraction len)
             Measure* m = cr->measure()->nextMeasure();
             if (m == 0) {
                   printf("EOS reached\n");
-                  return gap;
+                  appendMeasures(1, MEASURE);
+                  m = cr->measure()->nextMeasure();
+                  if (m == 0) {
+                        printf("===EOS reached\n");
+                        return gap;
+                        }
                   }
             Segment* s = m->firstCRSegment();
-            int track = cr->track();
+            int track  = cr->track();
             cr = static_cast<ChordRest*>(s->element(track));
             if (cr == 0) {
                   addRest(s->tick(), track, Duration(Duration::V_MEASURE), 0);
@@ -2266,8 +2271,10 @@ void Score::cmd(const QAction* a)
                   cmdDoubleDuration();
             else if (cmd == "half-duration")
                   cmdHalfDuration();
-            else if (cmd == "repeat-sel")
+            else if (cmd == "repeat-sel") {
+printf("repeat selection\n");
                   cmdRepeatSelection();
+                  }
             else if (cmd == "")
                   ;
             else
@@ -3015,12 +3022,16 @@ void Score::cmdDoubleDuration()
 
 void Score::cmdRepeatSelection()
       {
-      if (selection()->state() != SEL_STAFF && selection()->state() != SEL_SYSTEM)
+      if ((selection()->state() != SEL_STAFF) && (selection()->state() != SEL_SYSTEM)) {
+            printf("wrong selection type\n");
             return;
+            }
 
       QString mimeType = selection()->mimeType();
-      if (mimeType.isEmpty())
+      if (mimeType.isEmpty()) {
+            printf("mime type is empty\n");
             return;
+            }
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeType, selection()->mimeData());
       if (debugMode)
@@ -3050,6 +3061,10 @@ void Score::cmdRepeatSelection()
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   pasteStaff(doc.documentElement(), cr);
                   }
+            else
+                  printf("??? %p <%s>\n", e, e ? e->name() : "");
             }
+      else
+            printf("?? %p\n", endSegment);
       }
 
