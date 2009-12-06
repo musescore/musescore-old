@@ -3355,7 +3355,7 @@ void ExportLy::findLyrics()
 		      
 		      //cout << "hyphen"<< lyriks.toUtf8().data() << "hyphen\n";
 		      
-		      thisLyrics->lyrdat.verselyrics[verse] += lyriks; //.toUtf8().data();
+		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //.toUtf8().data();
 
 		      cout << "lyrics after " << thisLyrics->lyrdat.verselyrics[verse].toUtf8().data() << "\n";
 
