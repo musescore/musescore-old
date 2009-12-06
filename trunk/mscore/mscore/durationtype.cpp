@@ -506,3 +506,30 @@ QList<Duration> toDurationList(Fraction l, bool useDottedValues)
       return dList;
       }
 
+//---------------------------------------------------------
+//   print
+//---------------------------------------------------------
+
+void Duration::print() const
+      {
+      printf("Duration(");
+      const char* s;
+      switch(_val) {
+            case V_LONG:      s = "Long"; break;
+            case V_BREVE:     s = "Breve"; break;
+            case V_WHOLE:     s = "Whole"; break;
+            case V_HALF:      s = "Half"; break;
+            case V_QUARTER:   s = "Quarter"; break;
+            case V_EIGHT:     s = "Eight"; break;
+            case V_16TH:      s = "16th"; break;
+            case V_32ND:      s = "32th"; break;
+            case V_64TH:      s = "64th"; break;
+            case V_128TH:     s = "128th"; break;
+            case V_256TH:     s = "256th"; break;
+            case V_ZERO:      s = "Zero"; break;
+            case V_MEASURE:   s = "Measure"; break;
+            case V_INVALID:   s = "Invalid"; break;
+            };
+      printf("%s,dots=%d)", s, _dots);
+      }
+
