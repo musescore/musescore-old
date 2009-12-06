@@ -1369,6 +1369,7 @@ void MuseScore::removeTab()
 
 void MuseScore::removeTab(int i)
       {
+printf("remove tab %d\n", i);
       Score* score = scoreList.value(i);
       if (score == 0)
             return;
@@ -1378,9 +1379,10 @@ void MuseScore::removeTab(int i)
       if (seq->score() == score)
             seq->setScore(0);
 
-      int idx1 = tab1->currentIndex();
+      int idx1      = tab1->currentIndex();
       bool firstTab = tab1->viewer(idx1) == cv;
 
+      scoreList.removeAt(i);
       tab1->blockSignals(true);
       tab1->removeTab(i);
       tab1->blockSignals(false);
@@ -1388,8 +1390,6 @@ void MuseScore::removeTab(int i)
       tab2->blockSignals(true);
       tab2->removeTab(i);
       tab2->blockSignals(false);
-
-      scoreList.removeAt(i);
 
       cs = 0;
       cv = 0;
@@ -1478,7 +1478,7 @@ void setMscoreLocale(QString localeName)
 
 static void loadScores(const QStringList& argv)
       {
-      int currentViewer = -1;
+      int currentViewer = 0;
       bool scoreCreated = false;
       if (argv.isEmpty()) {
             switch (preferences.sessionStart) {
@@ -1524,8 +1524,7 @@ static void loadScores(const QStringList& argv)
                               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
                         }
                   else {
-                        currentViewer = mscore->appendScore(score);
-                        printf("load %d <%s>\n", currentViewer, qPrintable(name));
+                        mscore->appendScore(score);
                         }
                   }
             }
@@ -1535,10 +1534,10 @@ static void loadScores(const QStringList& argv)
             Score* score = new Score(defaultStyle);
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
-            currentViewer = mscore->appendScore(score);
+            mscore->appendScore(score);
             }
       if (mscore->noScore())
-            currentViewer = 0;
+            currentViewer = -1;
       mscore->setCurrentView(0, currentViewer);
       }
 
@@ -2066,7 +2065,8 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(ScoreState val)
       {
-printf("MuseScore::setState: %s\n", stateName(val));
+      if (debugMode)
+            printf("MuseScore::setState: %s\n", stateName(val));
 
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
@@ -2864,6 +2864,7 @@ const char* stateName(ScoreState s)
             case STATE_EDIT:           return "STATE_EDIT";
             case STATE_PLAY:           return "STATE_PLAY";
             case STATE_SEARCH:         return "STATE_SEARCH";
+            default:                   return "??";
             }
       }
 

@@ -1814,7 +1814,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
 void Score::setState(ScoreState s)
       {
-      printf("Score::setState: %s->%s\n", stateName(_state), stateName(s));
+      if (debugMode)
+            printf("Score::setState: %s->%s\n", stateName(_state), stateName(s));
 
       if (s == _state)
             return;

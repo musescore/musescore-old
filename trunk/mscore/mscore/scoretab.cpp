@@ -90,6 +90,7 @@ void ScoreTab::setCurrent(int n)
 void ScoreTab::insertTab(int idx, const QString& s)
       {
       tab->insertTab(idx, s);
+      tab->setTabData(idx, QVariant::fromValue<void*>(scoreList->value(idx)));
       }
 
 //---------------------------------------------------------
@@ -128,7 +129,7 @@ void ScoreTab::setCurrentIndex(int idx)
 
 void ScoreTab::removeTab(int idx)
       {
-      Score* score = scoreList->value(idx);
+      Score* score = static_cast<Score*>(tab->tabData(idx).value<void*>());
       for (int i = 0; i < stack->count(); ++i) {
             Viewer* viewer = static_cast<Viewer*>(stack->widget(i));
             if (viewer->score() == score) {
@@ -137,20 +138,12 @@ void ScoreTab::removeTab(int idx)
                   break;
                   }
             }
-      tab->removeTab(idx);    // select next index if current index is idx
-      if (scoreList->size() > 1) {
-            if (idx >= scoreList->size()) {
-                  idx = scoreList->size() - 1;
-                  setCurrentIndex(idx);
-                  }
-            Viewer* v = viewer(idx);
-            if (!v)  {
-                  v = new Canvas;
-                  v->setScore(scoreList->value(idx));
-                  stack->addWidget(v);
-                  }
-            stack->setCurrentWidget(v);
-            }
+
+      int cidx = currentIndex();
+      tab->removeTab(idx);
+      if (cidx > idx)
+            cidx -= 1;
+      setCurrentIndex(cidx);
       }
 
 //---------------------------------------------------------
