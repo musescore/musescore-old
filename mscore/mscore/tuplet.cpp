@@ -556,6 +556,7 @@ void Score::tupletDialog()
       tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
 
+#if 0
       // baseLen?
       Fraction fr(cr->fraction());
 printf("tupletDialog: ChordRest len %d/%d\n", fr.numerator(), fr.denominator());
@@ -572,6 +573,7 @@ printf("tupletDialog: baseLen %d/%d\n", fr.numerator(), fr.denominator());
 printf("tupletDialog: baseLen ");
 baseLen.print(); printf("\n");
       tuplet->setBaseLen(baseLen);
+#endif
 
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
@@ -608,6 +610,16 @@ void TupletDialog::setupTuplet(Tuplet* tuplet)
             tuplet->setBracketType(Tuplet::SHOW_BRACKET);
       else if (noBracket->isChecked())
             tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
+      Duration::DurationType dt;
+      switch(actualType->currentIndex()) {
+            case 0: dt = Duration::V_HALF;    break;
+            case 1: dt = Duration::V_QUARTER; break;
+            case 2: dt = Duration::V_EIGHT;   break;
+            case 3: dt = Duration::V_16TH;    break;
+            case 4: dt = Duration::V_32ND;    break;
+            case 5: dt = Duration::V_64TH;    break;
+            }
+      tuplet->setBaseLen(Duration(dt));
       }
 
 //---------------------------------------------------------
