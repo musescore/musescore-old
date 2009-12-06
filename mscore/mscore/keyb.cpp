@@ -47,6 +47,10 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       Qt::KeyboardModifiers modifiers = ev->modifiers();
       QString s                       = ev->text();
 
+      if (debugMode)
+            printf("keyPressEvent state %d key 0x%02x mod 0x%04x <%s>\n",
+               state, key, int(modifiers), qPrintable(s));
+
       if (state != EDIT && state != DRAG_EDIT) {
             ev->ignore();
             if (debugMode)
@@ -268,7 +272,7 @@ void Score::padToggle(int n)
             setPadState();    // updates dot state
             return;
             }
-            
+
       //do not allow to add a dot on a full measure rest
       if(selection()->state() == SEL_SINGLE){
           Element* e = selection()->element();

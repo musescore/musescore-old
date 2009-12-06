@@ -122,6 +122,18 @@ enum SelectType {
       SELECT_SINGLE, SELECT_RANGE, SELECT_ADD
       };
 
+//---------------------------------------------------------
+//    ScoreState
+//    used also to mask out shortcuts (actions.cpp)
+//---------------------------------------------------------
+
+enum ScoreState {
+      STATE_DISABLED = 1, STATE_NORMAL = 2, STATE_NOTE_ENTRY = 4, STATE_EDIT = 8,
+      STATE_PLAY = 16, STATE_SEARCH = 32
+      };
+
+extern const char* stateName(ScoreState);
+
 static const int VOICES = 4;
 static const int MAX_STAVES = 4;
 

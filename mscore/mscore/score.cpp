@@ -428,7 +428,7 @@ void Score::write(Xml& xml, bool autosave)
       xml.curTrack = -1;
       if (!autosave && editObject) {                          // in edit mode?
             endCmd();
-            emit stateChanged(Canvas::NORMAL);
+            setState(STATE_NORMAL);
             }
       _style.save(xml, true);      // save only differences to buildin style
       for (int i = 0; i < TEXT_STYLES; ++i) {
@@ -1044,6 +1044,7 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
+printf("Score::startEdit\n");
       origEditObject = element;
       if (element->isTextB()) {
             editObject = element;
@@ -1065,6 +1066,7 @@ void Score::startEdit(Element* element)
             }
       _updateAll = true;
       end();
+      setState(STATE_EDIT);
       }
 
 //---------------------------------------------------------
@@ -1082,6 +1084,10 @@ void Score::textUndoLevelAdded()
 
 void Score::endEdit()
       {
+      if (_state != STATE_EDIT) {
+            printf("Score::endEdit: not in state EDIT\n");
+            return;
+            }
       refresh |= editObject->bbox();
       editObject->endEdit();
       refresh |= editObject->bbox();
@@ -1101,7 +1107,6 @@ void Score::endEdit()
       else if (tp == HARMONY)
             harmonyEndEdit();
       layoutAll = true;
-      setState(STATE_NORMAL);
       editObject = 0;
       }
 
@@ -1190,7 +1195,6 @@ void Score::setNoteEntry(bool val)
                   }
             emit moveCursor();
             }
-      emit stateChanged(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
       setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
       }
 
@@ -1808,11 +1812,33 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 //   setState
 //---------------------------------------------------------
 
-void Score::setState(int s)
+void Score::setState(ScoreState s)
       {
-      if (s != _state)
-            emit stateChanged(s);
+      printf("Score::setState: %s->%s\n", stateName(_state), stateName(s));
+
+      if (s == _state)
+            return;
+      switch(s) {
+            case STATE_NORMAL:
+                  if (_state == STATE_EDIT) {
+                        endEdit();
+                        endCmd();
+                        }
+                  emit stateChanged(Viewer::NORMAL);
+                  break;
+            case STATE_NOTE_ENTRY:
+                  emit stateChanged(Viewer::NOTE_ENTRY);
+                  break;
+            case STATE_EDIT:
+                  emit stateChanged(Viewer::EDIT);
+                  break;
+            case STATE_DISABLED:
+            case STATE_PLAY:
+            case STATE_SEARCH:
+                  break;
+            }
       _state = s;
+      emit scoreStateChanged(_state);
       }
 
 //---------------------------------------------------------

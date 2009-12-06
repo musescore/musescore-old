@@ -159,8 +159,8 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
       xml.trackDiff = 0;
 
       if (editObject) {                          // in edit mode?
+            setState(STATE_NORMAL);
             endCmd();
-            emit stateChanged(Canvas::NORMAL);  //calls endEdit()
             }
       _style.save(xml, true);
       for (int i = 0; i < TEXT_STYLES; ++i) {

@@ -1092,10 +1092,7 @@ printf("   sublist:\n");
 
 void Score::cmdAddChordName()
       {
-      if (editObject) {
-            endEdit();
-            endCmd();
-            }
+      setState(STATE_NORMAL);
       if (!checkHasMeasures())
             return;
       ChordRest* cr = getSelectedChordRest();
@@ -1120,10 +1117,7 @@ void Score::cmdAddChordName()
 
 void Score::cmdAddChordName2()
       {
-      if (editObject) {
-            endEdit();
-            endCmd();
-            }
+      setState(STATE_NORMAL);
       if (!checkHasMeasures())
             return;
       ChordRest* cr = getSelectedChordRest();
@@ -1181,10 +1175,7 @@ void Score::cmdAddChordName2()
 
 void Score::cmdAddText(int subtype)
       {
-      if (editObject) {
-            endEdit();
-            endCmd();
-            }
+      setState(STATE_NORMAL);
       if (!checkHasMeasures()) {
             endCmd();
             return;
@@ -1784,7 +1775,7 @@ void Score::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
       if (debugMode)
-            printf("Score::cmd <%s>\n", cmd.toLatin1().data());
+            printf("Score::cmd <%s>\n", qPrintable(cmd));
 
       if (editObject) {                          // in edit mode?
             if (cmd == "paste") {
@@ -1796,14 +1787,13 @@ void Score::cmd(const QAction* a)
                   cmdCopy();
                   return;
                   }
-            emit stateChanged(Canvas::NORMAL);  //calls endEdit()
+            setState(STATE_NORMAL);
             endCmd();
             }
       if (cmd == "print")
             printFile();
       else if (cmd == "note-input") {
             setNoteEntry(a->isChecked());
-//            _is.rest = false;
             end();
             }
       else if (cmd == "find") {
@@ -1812,7 +1802,7 @@ void Score::cmd(const QAction* a)
             setState(STATE_SEARCH);
             }
       else if (cmd == "escape") {
-            if (state() == STATE_SEARCH)
+           if (state() == STATE_SEARCH)
                   setState(STATE_NORMAL);
             else if (noteEntryMode())
                   setNoteEntry(false);
@@ -2139,8 +2129,6 @@ void Score::cmd(const QAction* a)
                   cmdCopy();
             else if (cmd == "paste")
                   cmdPaste();
-            else if (cmd == "lyrics")
-                  return addLyrics();
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")
@@ -2286,22 +2274,31 @@ void Score::cmd(const QAction* a)
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();
             }
-      if (!midiInputQueue.isEmpty()) {
-            if (!noteEntryMode())
-                  setNoteEntry(true);
-            if (!noteEntryMode())
-                  return;
+      }
 
-            while (!midiInputQueue.isEmpty()) {
-                  MidiInputEvent ev = midiInputQueue.dequeue();
-                  if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
-                        midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
-                  else {
-                        startCmd();
-                        cmdAddPitch1(ev.pitch, ev.chord);
-                        layoutAll = true;
-                        endCmd();
-                        }
+//---------------------------------------------------------
+//   processMidiInput
+//---------------------------------------------------------
+
+void Score::processMidiInput()
+      {
+      if (midiInputQueue.isEmpty())
+            return;
+
+      if (!noteEntryMode())
+            setNoteEntry(true);
+      if (!noteEntryMode())
+            return;
+
+      while (!midiInputQueue.isEmpty()) {
+            MidiInputEvent ev = midiInputQueue.dequeue();
+            if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
+                  midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
+            else {
+                  startCmd();
+                  cmdAddPitch1(ev.pitch, ev.chord);
+                  layoutAll = true;
+                  endCmd();
                   }
             }
       }

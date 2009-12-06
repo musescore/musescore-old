@@ -159,6 +159,7 @@ class Canvas : public Viewer {
       void paintLasso(QPainter& p, double mag);
       bool navigatorVisible() const;
       void magCanvas();
+      virtual void cmd(const QAction* a);
       };
 
 extern int searchStaff(const Element* element);

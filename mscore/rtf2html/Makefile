@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ws/ws/mscore/mscore/trunk/mscore
+CMAKE_SOURCE_DIR = /home/ws/mscore/mscore/trunk/mscore
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ws/ws/mscore/mscore/trunk/mscore
+CMAKE_BINARY_DIR = /home/ws/mscore/mscore/trunk/mscore
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -98,7 +98,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /home/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -108,7 +108,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/ws/ws/mscore/mscore/trunk/mscore/CPackSourceConfig.cmake
+	cd /home/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/ws/mscore/mscore/trunk/mscore/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -127,14 +127,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -E cmake_progress_start /home/ws/ws/mscore/mscore/trunk/mscore/CMakeFiles /home/ws/ws/mscore/mscore/trunk/mscore/rtf2html/CMakeFiles/progress.make
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ws/ws/mscore/mscore/trunk/mscore/CMakeFiles 0
+	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -E cmake_progress_start /home/ws/mscore/mscore/trunk/mscore/CMakeFiles /home/ws/mscore/mscore/trunk/mscore/rtf2html/CMakeFiles/progress.make
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ws/mscore/mscore/trunk/mscore/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/clean
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rtf2html/CMakeFiles/rtf2html.dir/rule:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/CMakeFiles/rtf2html.dir/rule
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/CMakeFiles/rtf2html.dir/rule
 .PHONY : rtf2html/CMakeFiles/rtf2html.dir/rule
 
 # Convenience name for target.
@@ -167,7 +167,7 @@ rtf2html: rtf2html/CMakeFiles/rtf2html.dir/rule
 
 # fast build rule for target.
 rtf2html/fast:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/build
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/build
 .PHONY : rtf2html/fast
 
 fmt_opts.o: fmt_opts.cpp.o
@@ -175,7 +175,7 @@ fmt_opts.o: fmt_opts.cpp.o
 
 # target to build an object file
 fmt_opts.cpp.o:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.o
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.o
 .PHONY : fmt_opts.cpp.o
 
 fmt_opts.i: fmt_opts.cpp.i
@@ -183,7 +183,7 @@ fmt_opts.i: fmt_opts.cpp.i
 
 # target to preprocess a source file
 fmt_opts.cpp.i:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.i
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.i
 .PHONY : fmt_opts.cpp.i
 
 fmt_opts.s: fmt_opts.cpp.s
@@ -191,7 +191,7 @@ fmt_opts.s: fmt_opts.cpp.s
 
 # target to generate assembly for a file
 fmt_opts.cpp.s:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.s
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.s
 .PHONY : fmt_opts.cpp.s
 
 rtf2html.o: rtf2html.cpp.o
@@ -199,7 +199,7 @@ rtf2html.o: rtf2html.cpp.o
 
 # target to build an object file
 rtf2html.cpp.o:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.o
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.o
 .PHONY : rtf2html.cpp.o
 
 rtf2html.i: rtf2html.cpp.i
@@ -207,7 +207,7 @@ rtf2html.i: rtf2html.cpp.i
 
 # target to preprocess a source file
 rtf2html.cpp.i:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.i
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.i
 .PHONY : rtf2html.cpp.i
 
 rtf2html.s: rtf2html.cpp.s
@@ -215,7 +215,7 @@ rtf2html.s: rtf2html.cpp.s
 
 # target to generate assembly for a file
 rtf2html.cpp.s:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.s
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.s
 .PHONY : rtf2html.cpp.s
 
 rtf_keyword.o: rtf_keyword.cpp.o
@@ -223,7 +223,7 @@ rtf_keyword.o: rtf_keyword.cpp.o
 
 # target to build an object file
 rtf_keyword.cpp.o:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.o
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.o
 .PHONY : rtf_keyword.cpp.o
 
 rtf_keyword.i: rtf_keyword.cpp.i
@@ -231,7 +231,7 @@ rtf_keyword.i: rtf_keyword.cpp.i
 
 # target to preprocess a source file
 rtf_keyword.cpp.i:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.i
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.i
 .PHONY : rtf_keyword.cpp.i
 
 rtf_keyword.s: rtf_keyword.cpp.s
@@ -239,7 +239,7 @@ rtf_keyword.s: rtf_keyword.cpp.s
 
 # target to generate assembly for a file
 rtf_keyword.cpp.s:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.s
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.s
 .PHONY : rtf_keyword.cpp.s
 
 rtf_table.o: rtf_table.cpp.o
@@ -247,7 +247,7 @@ rtf_table.o: rtf_table.cpp.o
 
 # target to build an object file
 rtf_table.cpp.o:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.o
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.o
 .PHONY : rtf_table.cpp.o
 
 rtf_table.i: rtf_table.cpp.i
@@ -255,7 +255,7 @@ rtf_table.i: rtf_table.cpp.i
 
 # target to preprocess a source file
 rtf_table.cpp.i:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.i
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.i
 .PHONY : rtf_table.cpp.i
 
 rtf_table.s: rtf_table.cpp.s
@@ -263,7 +263,7 @@ rtf_table.s: rtf_table.cpp.s
 
 # target to generate assembly for a file
 rtf_table.cpp.s:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.s
+	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.s
 .PHONY : rtf_table.cpp.s
 
 # Help Target
@@ -304,6 +304,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ws/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -358,12 +358,10 @@ void Score::endUndoRedo()
 
       if (!noteEntryMode()) {
             // no input state
-            emit stateChanged(Canvas::NORMAL);
             setState(STATE_NORMAL);
             }
       else {
             // input state
-            emit stateChanged(Canvas::NOTE_ENTRY);
             setState(STATE_NOTE_ENTRY);
             }
       selection()->update();

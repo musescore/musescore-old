@@ -959,10 +959,10 @@ void MuseScore::selectionChanged(int state)
 
 int MuseScore::appendScore(Score* score)
       {
-      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(stateChanged(int)),     SLOT(changeState(int)));
-      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
+      connect(score, SIGNAL(dirtyChanged(Score*)),          SLOT(dirtyChanged(Score*)));
+      connect(score, SIGNAL(scoreStateChanged(ScoreState)), SLOT(changeState(ScoreState)));
+      connect(score, SIGNAL(selectionChanged(int)),         SLOT(selectionChanged(int)));
+      connect(score, SIGNAL(posChanged(int)),               SLOT(setPos(int)));
 
       int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {
@@ -2031,8 +2031,8 @@ void MuseScore::cmd(QAction* a)
                   cv->pageEnd();
             }
       else {
-            if (cs)
-                  cs->cmd(a);
+            if (cv)
+                  cv->cmd(a);
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             }
@@ -2064,9 +2064,9 @@ void MuseScore::clipboardChanged()
 //    score state has changed
 //---------------------------------------------------------
 
-void MuseScore::changeState(int val)
+void MuseScore::changeState(ScoreState val)
       {
-//      printf("changeState %d\n", val);
+printf("MuseScore::setState: %s\n", stateName(val));
 
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
@@ -2848,6 +2848,22 @@ void MuseScore::splitWindow(bool horizontal)
                   a->setChecked(false);
                   splitter->setOrientation(_horizontalSplit ? Qt::Horizontal : Qt::Vertical);
                   }
+            }
+      }
+
+//---------------------------------------------------------
+//   stateName
+//---------------------------------------------------------
+
+const char* stateName(ScoreState s)
+      {
+      switch(s) {
+            case STATE_DISABLED:       return "STATE_DISABLED";
+            case STATE_NORMAL:         return "STATE_NORMAL";
+            case STATE_NOTE_ENTRY:     return "STATE_NOTE_ENTRY";
+            case STATE_EDIT:           return "STATE_EDIT";
+            case STATE_PLAY:           return "STATE_PLAY";
+            case STATE_SEARCH:         return "STATE_SEARCH";
             }
       }
 
