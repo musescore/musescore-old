@@ -675,7 +675,7 @@ void Score::doLayout()
                   }
             }
 #endif
-      if (first() == 0) {
+      if (_staves.isEmpty() || first() == 0) {
             // score is empty
             foreach(Page* page, _pages)
                   delete page;
