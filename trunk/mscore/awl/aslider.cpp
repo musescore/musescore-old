@@ -40,6 +40,7 @@ AbstractSlider::AbstractSlider(QWidget* parent)
       _invert     = false;
       _scaleWidth = 4;
       _log        = false;
+      setFocusPolicy(Qt::StrongFocus);
       }
 
 //---------------------------------------------------------

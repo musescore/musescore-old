@@ -1,4 +1,6 @@
 6.dec (ws)
+      - enable input focus for slider widgets
+      - other tuplets dialog: user can now select the duration type of actual notes
       - fix: Tuplet crash 7:3
       - fix: pasting 2 measure on the last measure causes glitch
       - fix: crash removing last staff
