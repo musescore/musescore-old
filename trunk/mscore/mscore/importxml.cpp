@@ -2108,9 +2108,9 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
                   l->setText(l->getText()+e.text());
             else if (e.tagName() == "elision")
                   if (e.text().isEmpty()){
-                	  l->setText(l->getText()+" ");
+                        l->setText(l->getText()+" ");
                   }else{
-                	  l->setText(l->getText()+e.text());
+                        l->setText(l->getText()+e.text());
                   }
             else if (e.tagName() == "extend")
                   ;
@@ -2127,6 +2127,53 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
       }
 
 //---------------------------------------------------------
+//   hasElem
+//---------------------------------------------------------
+
+/**
+ Determine if \a e has a child \a tagname.
+ */
+
+static bool hasElem(const QDomElement e, const QString& tagname)
+      {
+      return !e.elementsByTagName(tagname).isEmpty();
+      }
+
+//---------------------------------------------------------
+//   nrOfGraceSegsReq
+//---------------------------------------------------------
+
+/**
+ Determine the number of grace segments required for the grace note represented by \a n.
+ */
+
+static int nrOfGraceSegsReq(QDomNode n)
+      {
+      if (!n.isElement() || n.nodeName() != "note") return 0;
+      QDomElement e = n.toElement();
+      if (!hasElem(e, "grace")) return 0;
+      int nsegs = 0;
+      // when counting starts in a grace chord but not at the first note,
+      // compensate for the missed first note
+      if (hasElem(e, "chord")) nsegs = 1;
+      // count the number of grace chords
+      // i.e the number of notes with grace but without chord child elements
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag != "note")
+                  printf("nrOfGraceSegsReq: found non-note tag '%s'\n",
+                         qPrintable(tag));
+            if (!hasElem(e, "grace"))
+                  // non-grace note found, done
+                  return nsegs;
+            if (!hasElem(e, "chord"))
+                  // first note of grace chord found
+                  ++nsegs;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   xmlNote
 //---------------------------------------------------------
 
@@ -2139,6 +2186,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
       printf("xmlNote start tick=%d", tick);
+      QDomNode pn = e.parentNode();
       voice = 0;
       move  = 0;
 
@@ -2598,6 +2646,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   tie = 0;
                   }
 
+            if (grace)
+                  printf("nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
                   Segment::SegmentType st = Segment::SegChordRest;
