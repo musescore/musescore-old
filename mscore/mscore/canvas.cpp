@@ -129,7 +129,7 @@ bool Canvas::navigatorVisible() const
 
 void Canvas::setScore(Score* s)
       {
-printf("Canvas(%p)::setScore: %p -> %p\n", this, _score, s);
+// printf("Canvas(%p)::setScore: %p -> %p\n", this, _score, s);
       _score = s;
       if (cursor == 0) {
             cursor = new Cursor(_score, this);
@@ -966,7 +966,7 @@ void Canvas::setState(State action)
 /*MAG        */ {  5,        0,    0,         0,     0,          0,   1 },
       };
 
-//      if (debugMode)
+      if (debugMode)
             printf("Canvas::setState: switch from %s to %s\n", stateNames[state], stateNames[action]);
 
       switch(stateTable[state][action]) {
