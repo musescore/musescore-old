@@ -317,7 +317,7 @@ class MuseScore : public QMainWindow {
 
    public slots:
       void dirtyChanged(Score*);
-      void changeState(int);
+      void changeState(ScoreState);
       void setPos(int tick);
       void searchTextChanged(const QString& s);
       void pluginTriggered(int);

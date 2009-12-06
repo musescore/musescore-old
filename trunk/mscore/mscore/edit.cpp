@@ -1309,8 +1309,7 @@ void Score::chordTab(bool back)
             printf("no next segment\n");
             return;
             }
-
-      emit stateChanged(Canvas::NORMAL);
+      setState(STATE_NORMAL);
       endCmd();
 
       startCmd();
@@ -1357,7 +1356,7 @@ void Score::changeLineSegment(bool last)
       else
             newSegment = segment->line()->lineSegments().front();
 
-      emit stateChanged(Canvas::NORMAL);
+      setState(STATE_NORMAL);
       endCmd();
 
       startCmd();
@@ -1370,13 +1369,12 @@ void Score::changeLineSegment(bool last)
 //    called from Keyboard Accelerator & menue
 //---------------------------------------------------------
 
-void Score::addLyrics()
+Lyrics* Score::addLyrics()
       {
+printf("Score::addLyrics\n");
       Note* e = getSelectedNote();
-      if (e == 0) {
-            endCmd();
-            return;
-            }
+      if (e == 0)
+            return 0;
 
       Chord* chord     = e->chord();
       Segment* segment = chord->segment();
@@ -1395,8 +1393,7 @@ void Score::addLyrics()
       lyrics->setNo(no);
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
-      emit startEdit(lyrics, -1);
-      setLayoutAll(true);
+      return lyrics;
       }
 
 //---------------------------------------------------------

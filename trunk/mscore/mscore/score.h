@@ -92,21 +92,9 @@ class TimeSig;
 class Clef;
 class TextB;
 class Beam;
+class Lyrics;
 
 extern bool showRubberBand;
-
-//
-// MuseScore _state
-//
-
-enum {
-      STATE_DISABLED   = 0,
-      STATE_NORMAL     = 1,
-      STATE_NOTE_ENTRY = 2,
-      STATE_EDIT       = 4,
-      STATE_PLAY       = 8,
-      STATE_SEARCH     = 16
-      };
 
 //---------------------------------------------------------
 //   MeasureBaseList
@@ -328,7 +316,6 @@ class Score : public QObject {
       void cmdAddInterval(int);
 
       void printFile();
-      void addLyrics();
       void addTempo();
       void addMetronome();
 
@@ -385,11 +372,11 @@ class Score : public QObject {
    signals:
       void selectionChanged(int);
       void dirtyChanged(Score*);
-      void stateChanged(int);
+      void stateChanged(Viewer::State);
+      void scoreStateChanged(ScoreState);
       void posChanged(int);
       void updateAll();
       void dataChanged(const QRectF&);
-      void stateChanged(Viewer::State);
       void moveCursor();
       void setEditText(TextB*);
       void startEdit(Element*, int startGrip);
@@ -411,8 +398,8 @@ class Score : public QObject {
       //    state information
       //---------------------------------------------------
 
-      int _state;
-      int _prevState;               ///< state before playback
+      ScoreState _state;
+      ScoreState _prevState;               ///< state before playback
 
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
@@ -782,10 +769,10 @@ class Score : public QObject {
       Page* searchPage(const QPointF&) const;
       bool getPosition(Position* pos, const QPointF&, int voice) const;
 
-      void setState(int s);
-      int state() const        { return _state; }
-      void setPrevState(int s) { _prevState = s; }
-      int prevState() const    { return _prevState; }
+      void setState(ScoreState s);
+      ScoreState state() const        { return _state; }
+      void setPrevState(ScoreState s) { _prevState = s; }
+      ScoreState prevState() const    { return _prevState; }
 
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
 
@@ -858,6 +845,8 @@ class Score : public QObject {
       QList<Beam*> beams() const { return _beams; }
       QList<Beam*>& beams() { return _beams; }
       Beam* beam(int id) const;
+      void processMidiInput();
+      Lyrics* addLyrics();
       };
 
 extern Score* gscore;

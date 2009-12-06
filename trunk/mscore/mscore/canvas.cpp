@@ -56,6 +56,7 @@
 #include "magbox.h"
 #include "measure.h"
 #include "drumroll.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -128,6 +129,7 @@ bool Canvas::navigatorVisible() const
 
 void Canvas::setScore(Score* s)
       {
+printf("Canvas(%p)::setScore: %p -> %p\n", this, _score, s);
       _score = s;
       if (cursor == 0) {
             cursor = new Cursor(_score, this);
@@ -964,7 +966,7 @@ void Canvas::setState(State action)
 /*MAG        */ {  5,        0,    0,         0,     0,          0,   1 },
       };
 
-      if (debugMode)
+//      if (debugMode)
             printf("Canvas::setState: switch from %s to %s\n", stateNames[state], stateNames[action]);
 
       switch(stateTable[state][action]) {
@@ -1007,13 +1009,11 @@ void Canvas::setState(State action)
                   break;
             case 8:     // NORMAL - EDIT
                   state = action;
-                  score()->setState(STATE_EDIT);
                   break;
             case  9:     // EDIT      - NORMAL
             case 11:     // DRAG_EDIT - NORMAL
                   state = action;
                   setDropTarget(0);
-                  _score->endEdit();
                   setEditText(0);
                   break;
             case 10:    // NOTE_ENTRY - EDIT
@@ -1078,11 +1078,12 @@ void Canvas::redraw(const QRectF& fr)
 
 bool Canvas::startEdit(Element* element, int startGrip)
       {
+printf("Cavnas::startEdit\n");
       dragObject = 0;
       if (element->startEdit(this, startMove)) {
             setFocus();
             _score->startEdit(element);
-            setState(EDIT);
+            // setState(EDIT);
             qreal w = 8.0 / _matrix.m11();
             qreal h = 8.0 / _matrix.m22();
             QRectF r(-w*.5, -h*.5, w, h);
@@ -1094,8 +1095,6 @@ bool Canvas::startEdit(Element* element, int startGrip)
             else if (startGrip >= 0)
                   curGrip = startGrip;
             // startGrip == -2  -> do not change curGrip
-
-            // update();         // DEBUG
             return true;
             }
       return false;
@@ -2420,7 +2419,6 @@ void Canvas::focusInEvent(QFocusEvent* event)
                   p.setColor(QPalette::WindowText, Qt::blue);
                   focusFrame->setPalette(p);
                   }
-//            focusFrame->setWidget(static_cast<QWidget*>(parent()));
             focusFrame->setWidget(static_cast<QWidget*>(this));
             }
       QWidget::focusInEvent(event);
@@ -2435,5 +2433,30 @@ void Canvas::focusOutEvent(QFocusEvent* event)
       if (focusFrame)
             focusFrame->setWidget(0);
       QWidget::focusOutEvent(event);
+      }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void Canvas::cmd(const QAction* a)
+      {
+      QString cmd(a ? a->data().toString() : "");
+      if (debugMode)
+            printf("Canvas::cmd <%s>\n", qPrintable(cmd));
+
+      if (cmd == "lyrics") {
+            _score->startCmd();
+            Lyrics* lyrics = _score->addLyrics();
+            if (lyrics) {
+                  startEdit(lyrics, -1);
+                  _score->setLayoutAll(true);
+                  return;     // no endCmd()
+                  }
+            _score->endCmd();
+            }
+      else
+            _score->cmd(a);
+      _score->processMidiInput();
       }
 

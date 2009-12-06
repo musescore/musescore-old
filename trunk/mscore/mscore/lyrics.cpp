@@ -168,7 +168,7 @@ void Score::lyricsUpDown(bool up, bool end)
                   return;
             }
 
-      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
+      setState(STATE_NORMAL);
       endCmd();
       startCmd();
       lyrics = ll->value(verse);
@@ -216,7 +216,7 @@ void Score::lyricsTab(bool back, bool end)
       if (nextSegment == 0)
             return;
 
-      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
+      setState(STATE_NORMAL);
       endCmd();
 
       // search previous lyric
@@ -233,6 +233,7 @@ void Score::lyricsTab(bool back, bool end)
                   }
             }
 
+printf("Score::lyricsTab: startCmd\n");
       startCmd();
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
@@ -269,6 +270,8 @@ void Score::lyricsTab(bool back, bool end)
       undoAddElement(lyrics);
 
       select(lyrics, SELECT_SINGLE, 0);
+printf("Score::lyricsTab: startEdit\n");
+      startEdit(lyrics, -1);
       emit startEdit(lyrics, -1);
       emit adjustCanvasPosition(lyrics, false);
       if (end)
@@ -291,7 +294,7 @@ void Score::lyricsMinus()
       Segment* segment = (Segment*)(lyrics->parent());
       int verse        = lyrics->no();
 
-      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
+      setState(STATE_NORMAL);
       endCmd();
 
       // search next chord
@@ -371,7 +374,7 @@ void Score::lyricsUnderscore()
       int verse        = lyrics->no();
       int endTick      = lyrics->tick();
 
-      emit stateChanged(Canvas::NORMAL); // this can remove lyrics if empty
+      setState(STATE_NORMAL);
       endCmd();
 
       // search next chord
@@ -454,7 +457,7 @@ void Score::lyricsReturn()
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
 
-      emit stateChanged(Canvas::NORMAL);
+      setState(STATE_NORMAL);
       endCmd();
 
       startCmd();

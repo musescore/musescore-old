@@ -90,6 +90,7 @@ class Viewer : public QWidget {
       void pagePrev();
       void pageTop();
       void pageEnd();
+      virtual void cmd(const QAction* a) = 0;
       };
 
 #endif
