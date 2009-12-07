@@ -2108,6 +2108,8 @@ void MuseScore::changeState(ScoreState val)
                   break;
             case STATE_NORMAL:
                   _modeText->hide();
+                  if(searchDialog)
+                    searchDialog->hide();
                   break;
             case STATE_NOTE_ENTRY:
                   _modeText->setText(tr("note entry mode"));
