@@ -1615,6 +1615,8 @@ bool Score::saveSvg(const QString& saveName)
       QList<Element*> eel;
       foreach (Element* element, _gel)
             element->scanElements(&eel, collectElements);
+      foreach (Beam* b, _beams)
+            b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
@@ -1728,6 +1730,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             QList<Element*> eel;
             foreach (Element* element, _gel)
                   element->scanElements(&eel, collectElements);
+            foreach (Beam* b, _beams)
+                  b->scanElements(&eel, collectElements);
             for (MeasureBase* m = _measures.first(); m; m = m->next()) {
                   // skip multi measure rests
                   if (m->type() == MEASURE) {
