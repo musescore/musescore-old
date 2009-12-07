@@ -22,11 +22,13 @@ install(FILES
       MuseScore-en.pdf
       MuseScore-de.pdf
       MuseScore-es.pdf
+      MuseScore-fi.pdf
       MuseScore-fr.pdf
       MuseScore-gl.pdf
       MuseScore-it.pdf
+      MuseScore-nb.pdf
       MuseScore-nl.pdf
-      MuseScore-fi.pdf
+      MuseScore-pl.pdf
       MuseScore-pt-br.pdf
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
       )
