@@ -2199,7 +2199,7 @@ void Score::cmd(const QAction* a)
             else if (cmd == "voice-x24")
                   cmdExchangeVoice(1, 3);
             else if (cmd == "voice-x34")
-                  cmdExchangeVoice(3, 4);
+                  cmdExchangeVoice(2, 3);
             else if (cmd == "system-break") {
                   Element* e = selection()->element();
                   if (e && e->type() == BAR_LINE) {
