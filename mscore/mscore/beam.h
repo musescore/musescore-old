@@ -127,7 +127,6 @@ class Beam : public Element {
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);
-      virtual QRectF bbox() const;
       virtual void draw(QPainter&) const;
       int up() const                      { return _up; }
       void setUp(int v)                   { _up = v; }

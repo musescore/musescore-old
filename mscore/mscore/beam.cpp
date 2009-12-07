@@ -760,22 +760,23 @@ void Beam::layout()
             if (tremolo)
                   tremolo->layout();
             }
-      }
 
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Beam::bbox() const
-      {
-      QRectF r;
+      _bbox = QRectF();
       for (ciBeamSegment ibs = beamSegments.begin();
          ibs != beamSegments.end(); ++ibs) {
             BeamSegment* bs = *ibs;
-            r |= QRectF(bs->p1, QSizeF(1.0, 1.0));
-            r |= QRectF(bs->p2, QSizeF(1.0, 1.0));
+
+            QPointF ip1 = bs->p1;
+            QPointF ip2 = bs->p2;
+            qreal lw2   = point(score()->styleS(ST_beamWidth)) * .5 * mag();
+
+            QPolygonF a(4);
+            a[0] = QPointF(ip1.x(), ip1.y()-lw2);
+            a[1] = QPointF(ip2.x(), ip2.y()-lw2);
+            a[2] = QPointF(ip2.x(), ip2.y()+lw2);
+            a[3] = QPointF(ip1.x(), ip1.y()+lw2);
+            _bbox |= a.boundingRect();
             }
-      return r;
       }
 
 //---------------------------------------------------------
