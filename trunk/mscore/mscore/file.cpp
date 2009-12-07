@@ -1516,6 +1516,9 @@ void Score::print(QPrinter* printer)
       QList<Element*> el;
       foreach (Element* element, _gel)
             element->scanElements(&el, collectElements);
+      foreach (Beam* b, _beams)
+            b->scanElements(&el, collectElements);
+
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
