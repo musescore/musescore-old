@@ -332,6 +332,7 @@ MuseScore::MuseScore()
       cs                    = 0;
       cv                    = 0;
       se                    = 0;    // script engine
+      pluginMapper          = 0;
       debugger              = 0;
       instrList             = 0;
       playPanel             = 0;
@@ -914,6 +915,8 @@ void MuseScore::helpBrowser1()
             help = QString::fromUtf8("http://www.musescore.org/ru/cправочник");
       else if (lang == "tr")
             help = QString::fromUtf8("http://www.musescore.org/tr/kullanım");
+      //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578   
+      help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(revision.trimmed()).arg(QString(VERSION));
       QUrl url(help);
       QDesktopServices::openUrl(url);
       }

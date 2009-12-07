@@ -90,6 +90,10 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             printf("Load plugin: no menu property\n");
             return;
             }
+      
+      if(!pluginMapper)
+        return;
+      
       QStringList ml   = menu.split(".", QString::SkipEmptyParts);
       int n            = ml.size();
       QWidget* curMenu = menuBar();
