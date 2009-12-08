@@ -954,11 +954,14 @@ void Measure::layout2()
 //---------------------------------------------------------
 
 /**
- Search for chord at position \a tick at \a staff in \a voice.
+ Search for chord at position \a tick in \a track at grace level \a gl.
+ TODO: grace level is 0 for a normal chord, 1 for the grace note closest
+ to the normal chord, etc.
 */
 
-Chord* Measure::findChord(int tick, int track, bool grace)
+Chord* Measure::findChord(int tick, int track, int gl)
       {
+      bool grace = gl > 0; // TODO
       for (Segment* seg = _first; seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
@@ -1068,6 +1071,20 @@ Segment* Measure::getSegment(Element* e)
 //---------------------------------------------------------
 
 Segment* Measure::getSegment(Segment::SegmentType st, int t)
+      {
+      Segment* s = findSegment(st, t);
+      if (!s) {
+            s = createSegment(st, t);
+            add(s);
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
+//   getSegment
+//---------------------------------------------------------
+
+Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
       {
       Segment* s = findSegment(st, t);
       if (!s) {
