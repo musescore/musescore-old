@@ -32,7 +32,7 @@ TimeDialog::TimeDialog(QWidget* parent)
    : QWidget(parent, Qt::Dialog | Qt::Window)
       {
       setupUi(this);
-      setWindowTitle(tr("MuseScore: TimeSignature"));
+      setWindowTitle(tr("MuseScore: Time Signatures"));
       QLayout* l = new QVBoxLayout();
       frame->setLayout(l);
       sp = new Palette();
@@ -56,7 +56,7 @@ TimeDialog::TimeDialog(QWidget* parent)
 	sp->append(new TimeSig(cs, 8, 9), "9/8");
 	sp->append(new TimeSig(cs, 8, 12), "12/8");
 	sp->append(new TimeSig(cs, TSIG_FOUR_FOUR), "4/4 common time");
-	sp->append(new TimeSig(cs, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
+	sp->append(new TimeSig(cs, TSIG_ALLA_BREVE), "2/2 alla breve");
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       }
