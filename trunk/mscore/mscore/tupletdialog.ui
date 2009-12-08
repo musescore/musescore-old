@@ -123,32 +123,32 @@
          <widget class="QComboBox" name="actualType">
           <item>
            <property name="text">
-            <string extracomment="note duration">1/2</string>
+            <string extracomment="note duration">Half</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string extracomment="note duration">1/4</string>
+            <string extracomment="note duration">Quarter</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string extracomment="note duration">1/8</string>
+            <string extracomment="note duration">Eighth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string extracomment="note duration">1/16</string>
+            <string extracomment="note duration">16th</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string extracomment="note duration">1/32</string>
+            <string extracomment="note duration">32nd</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string extracomment="note duration">1/64</string>
+            <string extracomment="note duration">64th</string>
            </property>
           </item>
          </widget>

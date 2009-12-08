@@ -159,7 +159,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette;
-            sp->setName(tr("Keys"));
+            sp->setName(tr("Key Signatures"));
             sp->setMag(0.8);
             sp->setGrid(56, 45);
             sp->setYOffset(6.0);
@@ -184,7 +184,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette;
-            sp->setName(tr("Time"));
+            sp->setName(tr("Time Signatures"));
             sp->setMag(.8);
             sp->setGrid(42, 38);
 
@@ -199,7 +199,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(new TimeSig(gscore, 8, 9), "9/8");
             sp->append(new TimeSig(gscore, 8, 12), "12/8");
             sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
-            sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
+            sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("2/2 alla breve"));
             paletteBox->addPalette(sp);
 
             //-----------------------------------
@@ -675,8 +675,8 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       popup->addAction(getAction("keys"));
       popup->addAction(getAction("times"));
       popup->addAction(tr("&Lines..."),          this, SLOT(lineMenu()));
-      popup->addAction(tr("System Brackets..."), this, SLOT(bracketMenu()));
-      popup->addAction(tr("Note Attributes..."), this, SLOT(noteAttributesMenu()));
+      popup->addAction(tr("Brackets..."), this, SLOT(bracketMenu()));
+      popup->addAction(tr("Articulations && Ornaments..."), this, SLOT(noteAttributesMenu()));
       popup->addAction(tr("Accidentals..."),     this, SLOT(accidentalsMenu()));
 
       QMenu* text = popup->addMenu(tr("Text"));
@@ -746,7 +746,7 @@ void MuseScore::keyMenu()
             sp->resize(400, 300);
             keyPalette = new PaletteScrollArea(sp);
             keyPalette->setRestrictHeight(false);
-            keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
+            keyPalette->setWindowTitle(tr("MuseScore: Key Signatures"));
             sp->setGrid(80, 60);
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
@@ -898,7 +898,7 @@ void MuseScore::bracketMenu()
             Palette* sp = new Palette();
             bracketPalette = new PaletteScrollArea(sp);
             bracketPalette->setRestrictHeight(false);
-            bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
+            bracketPalette->setWindowTitle(tr("MuseScore: Brackets"));
             sp->setGrid(40, 80);
 
             double _spatium = gscore->spatium();
@@ -928,7 +928,7 @@ void MuseScore::noteAttributesMenu()
             sp->resize(400, 300);
             noteAttributesPalette = new PaletteScrollArea(sp);
             noteAttributesPalette->setRestrictHeight(false);
-            noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
+            noteAttributesPalette->setWindowTitle(tr("MuseScore: Articulations && Ornaments"));
             unsigned nn = ARTICULATIONS;
             sp->setGrid(42, 30);
 
