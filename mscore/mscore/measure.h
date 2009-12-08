@@ -169,7 +169,7 @@ class Measure : public MeasureBase {
       void layout(double width);
       void layout2();
 
-      Chord* findChord(int tick, int track, bool grace);
+      Chord* findChord(int tick, int track, int gl);
       ChordRest* findChordRest(int tick, int track);
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
@@ -200,6 +200,7 @@ class Measure : public MeasureBase {
 
       Segment* getSegment(Element* el);
       Segment* getSegment(Segment::SegmentType st, int tick);
+      Segment* getSegment(Segment::SegmentType st, int tick, int gl);
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
 
