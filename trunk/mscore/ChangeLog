@@ -1,6 +1,7 @@
 8.dec (db)
       - add pl and nb handbooks to installer
       - update polish translation from perotinus
+      - add sound/TimGM6M.sf2 to installer (preferences not set yet)
 6.dec (ws)
       - enable input focus for slider widgets
       - other tuplets dialog: user can now select the duration type of actual notes
