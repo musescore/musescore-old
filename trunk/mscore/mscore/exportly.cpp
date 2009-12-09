@@ -329,7 +329,7 @@ class ExportLy {
   int  voltaCheckBar(Measure *, int);
   void writeVolta(int, int);
   void findTuplets(ChordRest*);
-  void writeArticulation(Chord*);
+  void writeArticulation(ChordRest*);
   void writeScoreBlock();
   void checkSlur(Chord*, bool);
   void doSlurStart(Chord*, bool);
@@ -552,42 +552,49 @@ void ExportLy::instructionMarker(Marker* m)
 
 void ExportLy::writeSymbol(QString name)
 {
-  //  QString name = symbols[sym->sym()].name();
- 
+ //  QString name = symbols[sym->sym()].name();
+  //this needs rewriting probably because of some rewriting of sym.cpp/sym.h
+  cout << "symbolname: " << name.toLatin1().data() << "\n";
+
   if (wholemeasurerest > 0) writeMeasuRestNum(); 
-  if (name == "pedal ped")
+
+  if (name == "clef eight")
+      out << "^\\markup \\tiny\\roman 8 ";
+  else if (name == "pedal ped")
     out << " \\sustainOn ";
   else if (name == "pedalasterisk")
     out << " \\sustainOff ";
+  else if (name == "scripts.trill")
+    out << "\\trill ";
+  else if (name == "scripts.flageolet")
+    out << "\\flageolet ";
   else if (name == "rcomma")
     out << "\\mark \\markup {\\musicglyph #\"scripts.rcomma\"} ";
   else if (name == "lcomma")
     out << "\\mark \\markup {\\musicglyph #\"scripts.lcomma\"} ";
-  else if (name == "trill")
-    out << "\\trill ";
-  else if (name == "flageolet")
-    out << "\\flageolet";
-  else if (name == "acc discant")
-    out << "^\\markup{\\musicglyph #\"accordion.accDiscant\"} ";
-  else if (name == "acc dot")
-    //we need to place the dot on the correct place within the discant
-    //and other base symbols. Is this possible in mscore? The entire
-    //example in lily manual "2.2.3 Accordion" must be input as a
-    //macro?
-    out << "^\\markup{\\musicglyph #\"accordion.accDot\"} "; 
-  else if (name == "acc freebase")
-    out << "^\\markup{\\musicglyph #\"accordion.accFreebase\"} ";
-  else if (name == "acc stdbase")
-    out << "^\\markup{\\musicglyph #\"accordion.accStdbase\"} ";
-  else if (name == "acc bayanbase")
-    out << "^\\markup{\\musicglyph #\"accordion.accBayanbase\"} ";
-  else if (name == "acc old ee")
-    out << "^\\markup{\\musicglyph #\"accordion.accOldEE\"} ";
-  else 
-    {
-    printf("ExportLy::symbol(): %s not supported\n", name.toLatin1().data());
-    return;
-    }
+  else
+    out << "^\\markup{\\musicglyph #\"" << name << "\"} ";
+  // else if (name == "acc discant")
+  //   out << "^\\markup{\\musicglyph #\"accordion.accDiscant\"} ";
+  // else if (name == "acc dot")
+  //   //we need to place the dot on the correct place within the discant
+  //   //and other base symbols. Is this possible in mscore? The entire
+  //   //example in lily manual "2.2.3 Accordion" must be input as a
+  //   //macro?
+  //   out << "^\\markup{\\musicglyph #\"accordion.accDot\"} "; 
+  // else if (name == "acc freebase")
+  //   out << "^\\markup{\\musicglyph #\"accordion.accFreebase\"} ";
+  // else if (name == "acc stdbase")
+  //   out << "^\\markup{\\musicglyph #\"accordion.accStdbase\"} ";
+  // else if (name == "acc bayanbase")
+  //   out << "^\\markup{\\musicglyph #\"accordion.accBayanbase\"} ";
+  // else if (name == "acc old ee")
+  //   out << "^\\markup{\\musicglyph #\"accordion.accOldEE\"} ";
+  // else 
+  //   {
+  //   printf("ExportLy::symbol(): %s not supported\n", name.toLatin1().data());
+  //   return;
+  //   }
 }
 
 
@@ -1048,7 +1055,6 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
   TextLine* tekstlinje = (TextLine *) instruction;
   bool post = false;
   if (pre == false) post = true;
-  if (post) cout << "POST\n";
 
   //start of line:
   if (tekstlinje->tick() == tick)  
@@ -1105,8 +1111,6 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	      out << "\\textSpannerNeutral ";
 	      textspannerdown = false;
 	    }
-	  //	  lineoffset = tekstlinje->mxmlOff();
-	  //      cout << "offset: " << lineoffset;
 	}// end if pre
 
       else if (post) //after note, start of line.
@@ -2387,7 +2391,7 @@ void ExportLy::checkSlur(Chord* chord, bool nextisrest)
 // -- called from there
 //-----------------------------------
 
-void ExportLy::writeArticulation(Chord* c)
+void ExportLy::writeArticulation(ChordRest* c)
 {
   foreach(Articulation* a, *c->getArticulations())
     {
@@ -2789,7 +2793,9 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
       findFingerAndStringno(n, fing, streng, fingering, stringno);
       findGraceNotes(n, chordstart, streng);//also writes start of chord symbol "<" if necessary
       findTuplets(n->chord());
+
       symb = findNoteSymbol(n, symbolname);
+
       if (n->tieFor()) tie=true;
 
       if (gracecount==2) out << " [ ";
@@ -3353,18 +3359,11 @@ void ExportLy::findLyrics()
 		      
 		      QString lyriks = (*lix)->getText();
 		      
-		      //cout << "hyphen"<< lyriks.toUtf8().data() << "hyphen\n";
-		      
 		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //.toUtf8().data();
-
-		      cout << "lyrics after " << thisLyrics->lyrdat.verselyrics[verse].toUtf8().data() << "\n";
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
 	     
-		      cout << "lyricsstaffname: " << thisLyrics->lyrdat.staffname.toUtf8().data() << "   ";
-		      cout << "lyrvoicename: "   << thisLyrics->lyrdat.voicename[verse].toUtf8().data() << "\n";
-		      	     
 		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
 	     
 		      int syl   = (*lix)->syllabic();
@@ -3423,8 +3422,6 @@ void ExportLy::writeLyrics()
 		  if ((thisLyrics->lyrdat.staffname == staffname[staffi].staffid)
 		      and (thisLyrics->lyrdat.voicename[ix] == staffname[staffi].voicename[j]))
 		    {
-		      cout << " lyrstaffname: " << thisLyrics->lyrdat.staffname.toUtf8().data();
-		      cout << "lyrvoicename: "  << thisLyrics->lyrdat.voicename[ix].toUtf8().data()  << "  \n";
 		      indentF();
 		      stanza++;
 		      char verseno = (ix + 65);
@@ -3635,14 +3632,12 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	     out << "\n";
 	     
 	     int nombarlen=z1*AL::division;
-	     cout << "nombarlen at pickup: " << nombarlen << "\n";
 	   
 	     if (timedenom==8) nombarlen=nombarlen/2;
 	     if (timedenom == 2) nombarlen = 2*nombarlen;
 	     
 	     if ((barlen<nombarlen) and (measurenumber==1))
 	       {
-		 cout << "pickup nombarlen: " << nombarlen << " barleng: " << barlen << "\n";
 		 pickup=true;
 		 int punkt=0;
 		 partial=getLen(barlen, &punkt);
@@ -3681,7 +3676,16 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	   
 	 case REST:
 	   { 
+	     bool articul=false;
 	     findTuplets((ChordRest *) e);
+
+	     QList<Articulation*> a;
+	     ChordRest * CR = (ChordRest*) e;
+	     
+	     a = *CR->getArticulations();
+
+	     if (!(a.isEmpty()) ) articul = true;
+	     
 	     int l = ((Rest*)e)->ticks();
 	     int mlen=((Rest*)e)->segment()->measure()->tickLen();
 
@@ -3691,12 +3695,26 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	       {	
 		 if (wholemeasurerest > 0) 
 		   {
+		     if (articul)
+		       {
+			 writeMeasuRestNum();
+			 writeRest(l,0);
+		         writeArticulation((ChordRest*) e);
+		       }
+		     else
 		     wholemeasurerest++;
 		   }
 		 else
 		   { 
+		     //wholemeasurerest: on fermata, output of * and start of new count.
 		     l = ((Rest*)e)->segment()->measure()->tickLen();
-		     writeRest(l, 1); //wholemeasure rest: R
+		     if (articul)
+		       {
+			 writeRest(l,0);
+			 writeArticulation((ChordRest*) e);
+		       }
+		     else
+		       writeRest(l, 1); //wholemeasure rest: R
 		   }
 	       }
 	     else
@@ -3704,8 +3722,8 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 if (wholemeasurerest >=1) 
 		   writeMeasuRestNum();
 		 writeRest(l, 0);//ordinary rest: r
+		 if (articul) writeArticulation((ChordRest*) e);
 	       }
-	     
 	     tick += l;
 	     measuretick=measuretick+l;
 	  } //end REST
@@ -3721,8 +3739,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  break;
 	} // end switch elementtype
       
-
-      handleElement(e); //check for instructions anchored to element e.
+       handleElement(e); //check for instructions anchored to element e.
 
       if (tupletcount==-1)
 	{
@@ -3771,7 +3788,6 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
      mno = measurenumber +1;
    else 
      mno = measurenumber;
-
    writeVolta(mno, lastind);
 } //end write VoiceMeasure
 
@@ -3905,7 +3921,7 @@ void ExportLy::writeScore()
 		  if (m->type() != MEASURE)
 		    continue;
 
-		  if (staffInd == 0)  
+		  if (staffInd == 0)
 		    markerAtMeasureStart( (Measure*) m );
 		  else
 		    printJumpOrMarker(measurenumber, true);
@@ -3917,6 +3933,7 @@ void ExportLy::writeScore()
 		  else
 		    printJumpOrMarker(measurenumber, false);
 		}
+
 	      level--;
 	      indent();
 	      out << "\\bar \"|.\" \n"; //thin-thick barline as last.
@@ -4383,10 +4400,13 @@ bool ExportLy::write(const QString& name)
   writeLilyHeader();
 
   writeScore();
+
   findLyrics();
 
   writeLilyMacros();
+
   writePageFormat();
+
   writeScoreTitles();
 
   findBrackets();
@@ -4409,8 +4429,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
-  ..... Fixed bugs in repeats/doblebars and in wholemeasurerests
-  caused by pickupbar
+   09.dec.09 Fermatas on rests (wholemeasure and others). Fixed bugs
+  in repeats/doblebars and in wholemeasurerests caused by pickupbar
   
   20.nov.2009  Tried to repair reported crash on file Cronicas.mscz
 
