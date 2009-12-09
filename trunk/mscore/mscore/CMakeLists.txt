@@ -245,6 +245,7 @@ if (MINGW)
 
    install_files ( /bin .dll
       ${CROSS}/bin/mingwm10.dll
+      ${CROSS}/bin/libgcc_s_dw2-1.dll
       ${CROSS}/bin/portaudio.dll
       ${CROSS}/bin/libsndfile-1.dll
       "C:/Windows/System32/libjack.dll"
