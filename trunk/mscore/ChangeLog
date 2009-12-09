@@ -1,6 +1,9 @@
+
 9.dec (db)
       - use same name for palette title, Create menu item, and window title
       - use words "half, quarter, etc" instead of fractions "1/2, 1/4" for tuplet dialog
+      (og)
+	- exportly: fermatas on rests.
 8.dec (db)
       - add pl and nb handbooks to installer
       - update polish translation from perotinus
