@@ -1341,7 +1341,8 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
             Segment* ss = sel->startSegment();
             Segment* es = sel->endSegment();
-
+			if(!ss || !es)
+				return;
             p.setBrush(Qt::NoBrush);
 
             QPen pen(QColor(Qt::blue));
