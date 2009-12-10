@@ -554,7 +554,7 @@ void ExportLy::writeSymbol(QString name)
 {
  //  QString name = symbols[sym->sym()].name();
   //this needs rewriting probably because of some rewriting of sym.cpp/sym.h
-  cout << "symbolname: " << name.toLatin1().data() << "\n";
+  //  cout << "symbolname: " << name.toLatin1().data() << "\n";
 
   if (wholemeasurerest > 0) writeMeasuRestNum(); 
 
@@ -816,6 +816,7 @@ void ExportLy::chordInsertList(chordPost * newchord)
 //-----------------------------------------------------------------
 void ExportLy::storeChord(struct InstructionAnchor chordanchor)
 {
+  cout << "chords!!!\n";
   //first create new element
   chordPost * aux;
   aux = new chordPost();
@@ -1426,6 +1427,7 @@ void ExportLy::handleElement(Element* el)
 	       break;
 	    case STAFF_TEXT:
 	    case TEXT:
+	      cout << "anchored text \n";
 	      if (wholemeasurerest) 
 		{
 		  Text* wmtx = (Text*) instruction;
@@ -1435,6 +1437,7 @@ void ExportLy::handleElement(Element* el)
 	       words((Text*) instruction);
 	      break;
 	    case DYNAMIC:
+	      cout << "anchored dynamic \n";
 	      dynamic((Dynamic*) instruction);
 	      break;
 	    case HAIRPIN:
@@ -1456,7 +1459,7 @@ void ExportLy::handleElement(Element* el)
 		     Element::name(instruction->type()), anchors[i].tick);
 	      break;
 	    }
-	  removeAnchor(i);
+	  //	  removeAnchor(i);
 	}
     } //foreach position i anchor-array.
 }
@@ -1523,30 +1526,39 @@ void ExportLy::preserveJumpOrMarker(Element* dir, int mnum, bool start)
 //---------------------------------------------------------------------
 void ExportLy::printJumpOrMarker(int mnum, bool start)
 {
+  cout << "test 1\n";
   int i=0;
   while (jumpOrMarkerList[i].measurenum < mnum)
     i++;
-  while (jumpOrMarkerList[i].measurenum == mnum)
+ 
+  cout << "test 2\n";
+  while ((jumpOrMarkerList[i].measurenum == mnum) and (i < 100))
     {
+      cout << "test 3\n";
       if (jumpOrMarkerList[i].start == start)
-	{
+	{  cout << "test 4\n";
 	  Element* moj = jumpOrMarkerList[i].marker;
 	  int tp = moj->type();
 	  if (tp == MARKER) 
 	    {
+	      cout << "test 5\n";
 	      Marker* ma = (Marker*) moj;
 	      instructionMarker(ma);
 	    }
 	  else if (tp ==JUMP)
 	    {
+	      cout << "test 6\n";
 	      Jump* jp = (Jump*) moj;
 	      instructionJump(jp);
-	    }
-	}
-  	i++;
-      if (i >= 100)
-            break;
+    	    }
+    	  cout << "test 7\n";
+    	}
+      i++;
+      cout << i << "\n";
+      // if (i >= 100)
+      // 	break;
     }
+  cout << "test 8\n";
 }
 
 
@@ -1792,6 +1804,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	  }
 	case HARMONY: 
 	  {
+	    cout << "harmony-chord found measure: " << measurenumber << "\n";
 	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
 	    if ((found) && (staffInd == 0)) //only save chords in first staff.
 	      {
@@ -3324,19 +3337,13 @@ void ExportLy::findLyrics()
 		{
 		  if (*lix) 
 		    {
-		      cout << "startof loop verse " << verse << " prevverse: " << prevverse << "\n";
-
 		      verse = (*lix)->no();
-		      cout << "verse = no in lyrlist: " << verse << "\n";
 		      if ((verse - prevverse) > 1)
 			{
-			  cout << "emptysyllable in verse " << verse - 1 << "  \n";
 			  thisLyrics->lyrdat.verselyrics[verse-1] += "__ _ ";
 			}
 		      track = (*lix)->track();
-		      cout << "track " << track << "\n";
 		      vox = track - (staffno*VOICES);
-		      cout << "vox " << vox << "\n";
 	     
 		      thisLyrics->lyrdat.segmentnumber[verse]++;
 		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
@@ -3355,7 +3362,6 @@ void ExportLy::findLyrics()
 				}
 			    }
 			}
-		      cout << "lyrics before: " << thisLyrics->lyrdat.verselyrics[verse].toUtf8().data() << "\n";
 		      
 		      QString lyriks = (*lix)->getText();
 		      
@@ -3384,10 +3390,8 @@ void ExportLy::findLyrics()
 			default:
 			  printf("unknown syllabic %d\n", syl);
 			}//case syllable
-		      if((*lix)->endTick() > 0)
-			cout << "mer tekst følger \n";
+		      if((*lix)->endTick() > 0) cout << "Mer tekst ?\n";
 		    } //if lyrics
-		  cout << "end of loop. verse: "<< verse << " prevverse: " << prevverse << "\n";
 		  prevverse = verse;		
 		} // for each member of lyricslist
 		if (verse < thisLyrics->numberofverses)
@@ -3410,7 +3414,6 @@ void ExportLy::writeLyrics()
 
   while (thisLyrics != NULL)
     {
-      cout << "numberofverses:" << thisLyrics->numberofverses <<"\n";
       staffi=0;
       while (staffname[staffi].staffid != "laststaff")
 	{
@@ -3746,7 +3749,6 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  out << " } ";
 	  tupletcount=0;
 	}
-
     } //end for all segments
 
    barlen=m->tickLen();
@@ -3782,7 +3784,6 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	   curTicks=-1;
 	 }
      }
-
    int mno;
    if (partial!=0)
      mno = measurenumber +1;
@@ -3844,8 +3845,8 @@ void ExportLy::writeScore()
       
 
       //ANCHORTEST: print instructionlist
-      //printf("anchortest\n");
-      //anchortest();
+      //      printf("anchortest\n");
+      //   anchortest();
       //      printf("jumptest\n");
       //      jumptest(); segfaults!?!?
 
@@ -3920,7 +3921,7 @@ void ExportLy::writeScore()
 		{
 		  if (m->type() != MEASURE)
 		    continue;
-
+		  
 		  if (staffInd == 0)
 		    markerAtMeasureStart( (Measure*) m );
 		  else
@@ -3933,7 +3934,6 @@ void ExportLy::writeScore()
 		  else
 		    printJumpOrMarker(measurenumber, false);
 		}
-
 	      level--;
 	      indent();
 	      out << "\\bar \"|.\" \n"; //thin-thick barline as last.
@@ -3952,7 +3952,8 @@ void ExportLy::writeScore()
 	  for (voice = 0; voice < VOICES; ++voice)
 	    if (voiceActive[voice]) voiceno++;
 
-	  if (voiceno == 1) staffname[staffInd].simultaneousvoices=false;
+	  if (voiceno == 1) 
+	    staffname[staffInd].simultaneousvoices=false;
 
 	  if (voiceno>1) //if more than one voice must be combined into one staff.
 	    {
@@ -4396,6 +4397,7 @@ bool ExportLy::write(const QString& name)
   phraseslur=0;
   ottvaswitch = false;
   jumpswitch = false;
+  nochord = true;
 
   writeLilyHeader();
 
@@ -4527,13 +4529,15 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------
 
-      -- all kinds of symbols at the notelevel. More symbols on the
-     measurelevel
- 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed.
+
+     -- b like in Bb-clarinet instrumentname.
+
+      -- all kinds of symbols at the notelevel. More symbols on the
+     measurelevel
       
-      -- odd noteheads and percussion staffs.
+      -- odd noteheads and percussion staffs.  See output from noteedit.
       
       -- breaks and spacers
 
@@ -4558,10 +4562,6 @@ bool ExportLy::write(const QString& name)
       _very_ complex to implement (example demos:promenade, bar 6)
       Will \partcombine do it?
 
-   -- fermata above/below rest.
-
-   -- Bug: markuptext in cronicas disappears, second staff from
-      bottom, first measure.
 
    -- difficult problem with hairpins: Beginning of hairpin and
    -- end of hairpin are anchored to different notes. This is done
