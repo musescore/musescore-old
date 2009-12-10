@@ -2669,7 +2669,7 @@ failed: </source>
     </message>
     <message>
         <source>F# major, D# minor</source>
-        <translation>Fa# mayor, Do# menor</translation>
+        <translation>Fa# mayor, Re# menor</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
@@ -2753,7 +2753,7 @@ failed: </source>
     </message>
     <message>
         <source>trill line</source>
-        <translation type="unfinished"></translation>
+        <translation>línea de trino</translation>
     </message>
     <message>
         <source>text line</source>
@@ -2897,7 +2897,7 @@ failed: </source>
     </message>
     <message>
         <source>System Brackets...</source>
-        <translation type="unfinished"></translation>
+        <translation>Llaves del Sistema...</translation>
     </message>
     <message>
         <source>Note Attributes...</source>
@@ -3179,15 +3179,15 @@ antes de cerrar?</translation>
     </message>
     <message>
         <source>broken</source>
-        <translation type="unfinished"></translation>
+        <translation>discontinua</translation>
     </message>
     <message>
         <source>End Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra Final</translation>
     </message>
     <message>
         <source>Double Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble Barra</translation>
     </message>
     <message>
         <source>Start Repeat</source>
@@ -3247,7 +3247,7 @@ antes de cerrar?</translation>
     </message>
     <message>
         <source>MuseScore: System Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Llaves del Sistema</translation>
     </message>
     <message>
         <source>MuseScore: Note Attributes</source>
@@ -3308,12 +3308,12 @@ Desde el menu de &quot;Ayuda. Intenta usar el &quot;Manual en &quot;Internet.</t
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas de Gracia</translation>
     </message>
     <message>
         <source>Last Session ended abnormal.
 Restore Session?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La última Sesión finalizó de forma anómala. Restaurar la Sesión anterior?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
@@ -3389,7 +3389,7 @@ Restore Session?</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crear Medida del Compás</translation>
+        <translation>Crear Compás</translation>
     </message>
 </context>
 <context>
@@ -4850,7 +4850,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Medida del Compás</translation>
+        <translation>Compás</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -6055,15 +6055,15 @@ p, li { white-space: pre-wrap; }
     <name>action</name>
     <message>
         <source>local help</source>
-        <translation type="unfinished"></translation>
+        <translation>ayuuda local</translation>
     </message>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Manual Local...</translation>
     </message>
     <message>
         <source>Show local Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Manual Local</translation>
     </message>
     <message>
         <source>file open</source>
@@ -6263,7 +6263,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Time...</source>
-        <translation type="unfinished"></translation>
+        <translation>Compás</translation>
     </message>
     <message>
         <source>Show Time Palette</source>
@@ -6739,7 +6739,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flip direction</source>
-        <translation type="unfinished"></translation>
+        <translation>cambiar la dirección de la plica</translation>
     </message>
     <message>
         <source>up</source>
@@ -7055,11 +7055,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note breve</source>
-        <translation>nota breve</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
+        <translation>cuadrada</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
@@ -7067,7 +7067,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
+        <translation>redonda</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
@@ -7075,7 +7075,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
+        <translation>blanca</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
@@ -7083,7 +7083,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
+        <translation>negra</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
@@ -7091,7 +7091,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>corchea</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
@@ -7099,7 +7099,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>semicorchea</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
@@ -7107,7 +7107,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>fusa</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
@@ -7115,7 +7115,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>semifusa</translation>
     </message>
     <message>
         <source>pad dot</source>
@@ -7123,7 +7123,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntillo</translation>
     </message>
     <message>
         <source>pad double dot</source>
@@ -7131,7 +7131,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble puntillo</translation>
     </message>
     <message>
         <source>tie</source>
@@ -7167,15 +7167,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace-4</source>
-        <translation type="unfinished"></translation>
+        <translation>negra de gracia</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation type="unfinished"></translation>
+        <translation>semicorchea de gracia</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation type="unfinished"></translation>
+        <translation>fusa de gracia</translation>
     </message>
     <message>
         <source>voice 1</source>
@@ -7199,7 +7199,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar Entrada desde el MIDI</translation>
     </message>
     <message>
         <source>editing sound on</source>
@@ -7243,7 +7243,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mixer</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegador</translation>
     </message>
     <message>
         <source>Transport Toolbar</source>
@@ -7631,7 +7631,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation>Mostrar Ivisible</translation>
+        <translation>Mostrar Invisible</translation>
     </message>
     <message>
         <source>show frames</source>
@@ -7900,6 +7900,34 @@ p, li { white-space: pre-wrap; }
         <source>downmordent</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>ushortfermata</source>
+        <translation>fermata corta superior</translation>
+    </message>
+    <message>
+        <source>dshortfermata</source>
+        <translation>fermata corta inferior</translation>
+    </message>
+    <message>
+        <source>ulongfermata</source>
+        <translation>fermata larga superior</translation>
+    </message>
+    <message>
+        <source>dlongfermata</source>
+        <translation>fermata larga inferior</translation>
+    </message>
+    <message>
+        <source>uverylongfermata</source>
+        <translation>fermata extralarga superior</translation>
+    </message>
+    <message>
+        <source>dverylongfermata</source>
+        <translation>fermata extralarga inferior</translation>
+    </message>
+    <message>
+        <source>snappizzicato</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>clefTable</name>
@@ -7941,7 +7969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation>Clave de Do en Cuarta</translation>
+        <translation>Clave de Do en Quinta</translation>
     </message>
     <message>
         <source>Subbass clef</source>
@@ -7973,11 +8001,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass clef 8va</source>
-        <translation>Clave de Bajo 8va</translation>
+        <translation>Clave de Fa 8va</translation>
     </message>
     <message>
         <source>Bass clef 15ma</source>
-        <translation>Clave de Bajo 15ma</translation>
+        <translation>Clave de Fa 15ma</translation>
     </message>
 </context>
 <context>
