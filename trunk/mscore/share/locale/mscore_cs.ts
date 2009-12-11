@@ -99,6 +99,21 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>BeamBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>up:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord/Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
@@ -177,34 +192,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Formulář</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>Akord</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>Nožička</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>Praporek</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <translation>Dlouhý příraz</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <translation>Směr nožičky:</translation>
-    </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation>Vlastnosti noty:</translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <translation>Pomocné linky:</translation>
     </message>
 </context>
 <context>
@@ -994,6 +981,49 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <source>Choose number of measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Look for three note chords and</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove  bottom note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove middle note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove top note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
@@ -1408,10 +1438,6 @@ nepodařilo se: </translation>
         <translation>Skrýt prázdné notové osnovy</translation>
     </message>
     <message>
-        <source>staff upper border</source>
-        <translation>Horní okraj notové osnovy</translation>
-    </message>
-    <message>
         <source>sp</source>
         <extracomment>spatium unit
 ----------
@@ -1419,40 +1445,6 @@ space unit
 ----------
 space unit</extracomment>
         <translation>sp (jednotka mezery)</translation>
-    </message>
-    <message>
-        <source>staff lower border</source>
-        <translation>Spodní okraj notové osnovy</translation>
-    </message>
-    <message>
-        <source>staff distance</source>
-        <translation>Vzdálenost notové osnovy</translation>
-    </message>
-    <message>
-        <source>akkolade distance</source>
-        <translation>Vzdálenost složené závorky</translation>
-    </message>
-    <message>
-        <source>system distance</source>
-        <translation>Vzdálenost osnovy</translation>
-    </message>
-    <message>
-        <source>lyrics top distance</source>
-        <translation>Horní odstup textu písně</translation>
-    </message>
-    <message>
-        <source>lyrics bottom dist.</source>
-        <translation>Spodní odstup textu písně</translation>
-    </message>
-    <message>
-        <source>staff v-frame dist.</source>
-        <translation>Odstup notové osnovy
-od svislého okraje rámečku</translation>
-    </message>
-    <message>
-        <source>v-frame staff dist.</source>
-        <translation>Odstup svislého okraje rámečku
-od notové osnovy</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1483,32 +1475,8 @@ od notové osnovy</translation>
         <translation>Vytvořit upozornění na taktová označení</translation>
     </message>
     <message>
-        <source>spacing (1=tight)</source>
-        <translation>Rozestupy (menší=užší)</translation>
-    </message>
-    <message>
-        <source>left margin</source>
-        <translation>levý okraj</translation>
-    </message>
-    <message>
         <source>spaces</source>
         <translation>Mezery</translation>
-    </message>
-    <message>
-        <source>min note distance</source>
-        <translation>Nejmenší odstup not</translation>
-    </message>
-    <message>
-        <source>clef left margin</source>
-        <translation>Klíč na levém okraji</translation>
-    </message>
-    <message>
-        <source>keysig left margin</source>
-        <translation>Tónina na levém okraji</translation>
-    </message>
-    <message>
-        <source>timesig left margin</source>
-        <translation>Taktové označení na levém okraji</translation>
     </message>
     <message>
         <source>Page Numbers</source>
@@ -1539,44 +1507,8 @@ od notové osnovy</translation>
         <translation>Interval</translation>
     </message>
     <message>
-        <source>beam width</source>
-        <translation>Šířka trámce</translation>
-    </message>
-    <message>
-        <source>beam distance</source>
-        <translation>Vzdálenost trámce</translation>
-    </message>
-    <message>
-        <source>min. len</source>
-        <translation>Nejmenší délka</translation>
-    </message>
-    <message>
-        <source>min. slope</source>
-        <translation>Nejmenší sklon</translation>
-    </message>
-    <message>
-        <source>max. slope</source>
-        <translation>Největší sklon</translation>
-    </message>
-    <message>
         <source>beam width units</source>
         <translation>Jednotka šířky trámce</translation>
-    </message>
-    <message>
-        <source>Small Staff Size</source>
-        <translation>Malá velikost notové osnovy</translation>
-    </message>
-    <message>
-        <source>Small Note Size</source>
-        <translation>Malá velikost not</translation>
-    </message>
-    <message>
-        <source>Grace Note Size</source>
-        <translation>Velikost noty dlouhého přírazu</translation>
-    </message>
-    <message>
-        <source>Small Clef Size</source>
-        <translation>Velikost malého klíče</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1585,30 +1517,6 @@ od notové osnovy</translation>
     <message>
         <source>Height</source>
         <translation>Výška</translation>
-    </message>
-    <message>
-        <source>Continue Height</source>
-        <translation>Výška pokračování</translation>
-    </message>
-    <message>
-        <source>use german names</source>
-        <translation>Používat německá označení</translation>
-    </message>
-    <message>
-        <source>articulation - note head distance</source>
-        <translation>Artikulace - vzdálenost notové hlavičky</translation>
-    </message>
-    <message>
-        <source>articulation - note stem distance</source>
-        <translation>Artikulace - vzdálenost notové nožičky</translation>
-    </message>
-    <message>
-        <source>articulation - articulation distance</source>
-        <translation>Artikulace - vzdálenost melodické ozdoby</translation>
-    </message>
-    <message>
-        <source>Stem Direction in multi voice context</source>
-        <translation>Směr nožičky v souvislosti s vícehlasem</translation>
     </message>
     <message>
         <source>Voice 1</source>
@@ -1651,24 +1559,8 @@ od notové osnovy</translation>
         <translation>Nejmenší počet prázdných taktů:</translation>
     </message>
     <message>
-        <source>begin repeat left margin</source>
-        <translation>Opakování začít od levého okraje</translation>
-    </message>
-    <message>
         <source>Notes</source>
         <translation>Noty</translation>
-    </message>
-    <message>
-        <source>note dot distance</source>
-        <translation>Odstup notové tečky</translation>
-    </message>
-    <message>
-        <source>dot dot distance</source>
-        <translation>Vzdálenost mezi dvěma tečkami</translation>
-    </message>
-    <message>
-        <source>ledger line width</source>
-        <translation>Tloušťka pomocné linky</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1676,48 +1568,12 @@ od notové osnovy</translation>
         <translation>sp (jednotka mezery)</translation>
     </message>
     <message>
-        <source>accidental note distance</source>
-        <translation>Vzdálenost noty předznamenání</translation>
-    </message>
-    <message>
-        <source>accidental distance</source>
-        <translation>Vzdálenost předznamenání</translation>
-    </message>
-    <message>
         <source>shorten stems</source>
         <translation>Zkrátit nožičky</translation>
     </message>
     <message>
-        <source>progression</source>
-        <translation>Posloupnost</translation>
-    </message>
-    <message>
-        <source>shortest stem</source>
-        <translation>Nejkratší nožička</translation>
-    </message>
-    <message>
-        <source>right margin</source>
-        <translation>pravý okraj</translation>
-    </message>
-    <message>
-        <source>clef-key distance</source>
-        <translation>Vzdálenost klíč-tónina</translation>
-    </message>
-    <message>
-        <source>clef-barline distance</source>
-        <translation>Vzdálenost klíč-taktová čára</translation>
-    </message>
-    <message>
-        <source>chord description file</source>
-        <translation>Soubor s popisem akordu</translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>show repeat bar tips</source>
-        <translation>Ukázat rady k opakování taktů</translation>
     </message>
     <message>
         <source>Arpeggios</source>
@@ -1726,18 +1582,6 @@ od notové osnovy</translation>
     <message>
         <source>Create courtesy key signatures</source>
         <translation>Vytvořit upozornění na tóniny</translation>
-    </message>
-    <message>
-        <source>distance to note</source>
-        <translation>Vzdálenost k notě</translation>
-    </message>
-    <message>
-        <source>line width</source>
-        <translation>Šířka linky</translation>
-    </message>
-    <message>
-        <source>hook len</source>
-        <translation>Délka praporku</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
@@ -1758,6 +1602,186 @@ od notové osnovy</translation>
     <message>
         <source>Barline at start of multiple staves</source>
         <translation>Taktová čára na začátku více notových osnov</translation>
+    </message>
+    <message>
+        <source>Music upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Music lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Akkolade distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V-frame upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V-frame lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spacing (1=tight)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min. note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key sig. left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time sig. left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef-key distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clef-barline distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortest stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidental note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accidental distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ledger line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Distance to note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small staff size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small note size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace note size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small clef size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line break height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use German names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord description file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation - note head distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation - note stem distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulation - articulation distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction in Multi Voice Context</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2792,10 +2816,6 @@ nepodařilo se: </translation>
         <translation>Nastavení strany...</translation>
     </message>
     <message>
-        <source>Breaks...</source>
-        <translation>Zalomení...</translation>
-    </message>
-    <message>
         <source>&amp;Style</source>
         <translation>&amp;Styl</translation>
     </message>
@@ -2842,38 +2862,6 @@ nepodařilo se: </translation>
     <message>
         <source>Untitled</source>
         <translation>Bez názvu</translation>
-    </message>
-    <message>
-        <source>crescendo</source>
-        <translation>Crescendo</translation>
-    </message>
-    <message>
-        <source>acciaccatura</source>
-        <translation>Acciaccatura</translation>
-    </message>
-    <message>
-        <source>appoggiatura</source>
-        <translation>Appogiatura</translation>
-    </message>
-    <message>
-        <source>grace-4</source>
-        <translation>Ozdoba-4</translation>
-    </message>
-    <message>
-        <source>grace-16</source>
-        <translation>Ozdoba-16</translation>
-    </message>
-    <message>
-        <source>grace-32</source>
-        <translation>Ozdoba-32</translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation>Žádný trámec</translation>
-    </message>
-    <message>
-        <source>auto beam</source>
-        <translation>Automatické trámce</translation>
     </message>
     <message>
         <source>G major, E minor</source>
@@ -2944,44 +2932,8 @@ nepodařilo se: </translation>
         <translation>Klíče</translation>
     </message>
     <message>
-        <source>Keys</source>
-        <translation>Tóniny</translation>
-    </message>
-    <message>
         <source>4/4 common time</source>
         <translation>4/4 čtyřčtvrťový takt/rytmus</translation>
-    </message>
-    <message>
-        <source>(2+2)/4 alla breve</source>
-        <translation>(2+2)/4 dvoupůlový takt (takt alla breve)</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Druh taktu</translation>
-    </message>
-    <message>
-        <source>Bar Lines</source>
-        <translation>Taktové čáry</translation>
-    </message>
-    <message>
-        <source>diminuendo</source>
-        <translation>Diminuendo</translation>
-    </message>
-    <message>
-        <source>prima volta</source>
-        <translation>Prima volta</translation>
-    </message>
-    <message>
-        <source>seconda volta</source>
-        <translation>Sekunda volta</translation>
-    </message>
-    <message>
-        <source>terza volta</source>
-        <translation>Terza volta</translation>
-    </message>
-    <message>
-        <source>seconda volta 2</source>
-        <translation>Sekunda volta 2</translation>
     </message>
     <message>
         <source>8va</source>
@@ -3004,36 +2956,8 @@ nepodařilo se: </translation>
         <translation>Prodleva (držený bas)</translation>
     </message>
     <message>
-        <source>trill line</source>
-        <translation>Trylková linka</translation>
-    </message>
-    <message>
-        <source>text line</source>
-        <translation>Textový řádek</translation>
-    </message>
-    <message>
-        <source>line</source>
-        <translation>Linka</translation>
-    </message>
-    <message>
         <source>Lines</source>
         <translation>Linky</translation>
-    </message>
-    <message>
-        <source>arpeggio</source>
-        <translation>Arpeggio</translation>
-    </message>
-    <message>
-        <source>glissando</source>
-        <translation>Glissando</translation>
-    </message>
-    <message>
-        <source>Arpeggio/Glissando</source>
-        <translation>Arpeggio/Glissando</translation>
-    </message>
-    <message>
-        <source>breath</source>
-        <translation>Dýchání</translation>
     </message>
     <message>
         <source>Breath</source>
@@ -3044,28 +2968,12 @@ nepodařilo se: </translation>
         <translation>Závorky</translation>
     </message>
     <message>
-        <source>Articulations, Ornaments</source>
-        <translation>Artikulace, melodické ozdoby</translation>
-    </message>
-    <message>
         <source>Accidentals</source>
         <translation>Předznamenání</translation>
     </message>
     <message>
-        <source>fingering %1</source>
-        <translation>Prstoklad %1</translation>
-    </message>
-    <message>
-        <source>string number %1</source>
-        <translation>Číslo struny %1</translation>
-    </message>
-    <message>
         <source>Tremolo</source>
         <translation>Tremolo</translation>
-    </message>
-    <message>
-        <source>repeat measure</source>
-        <translation>Opakovat takt</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3076,28 +2984,12 @@ nepodařilo se: </translation>
         <translation>Coda</translation>
     </message>
     <message>
-        <source>VarCoda</source>
-        <translation>Proměnná coda</translation>
-    </message>
-    <message>
         <source>Codetta</source>
         <translation>Codetta</translation>
     </message>
     <message>
         <source>Fine</source>
         <translation>Fine</translation>
-    </message>
-    <message>
-        <source>da Capo</source>
-        <translation>da Capo</translation>
-    </message>
-    <message>
-        <source>da Capo al Fine</source>
-        <translation>da Capo al Fine</translation>
-    </message>
-    <message>
-        <source>da Capo al Coda</source>
-        <translation>da Capo al Segno</translation>
     </message>
     <message>
         <source>D.S al Coda</source>
@@ -3118,34 +3010,6 @@ nepodařilo se: </translation>
     <message>
         <source>Repeats</source>
         <translation>Opakování</translation>
-    </message>
-    <message>
-        <source>break line</source>
-        <translation>Zalomení řádku</translation>
-    </message>
-    <message>
-        <source>break page</source>
-        <translation>Zalomení strany</translation>
-    </message>
-    <message>
-        <source>staff spacer</source>
-        <translation>Vymezovací prvek notové osnovy</translation>
-    </message>
-    <message>
-        <source>Breaks/Spacer</source>
-        <translation>Zalomení/Vymezovací prvek odstupu</translation>
-    </message>
-    <message>
-        <source>start beam</source>
-        <translation>Začít trámec</translation>
-    </message>
-    <message>
-        <source>middle of beam</source>
-        <translation>Střed trámce</translation>
-    </message>
-    <message>
-        <source>start subbeam</source>
-        <translation>Začít podtrámec</translation>
     </message>
     <message>
         <source>Beam Properties</source>
@@ -3172,14 +3036,6 @@ nepodařilo se: </translation>
         <translation>&amp;Linky...</translation>
     </message>
     <message>
-        <source>System Brackets...</source>
-        <translation>Závorky osnovy...</translation>
-    </message>
-    <message>
-        <source>Note Attributes...</source>
-        <translation>Vlastnosti noty...</translation>
-    </message>
-    <message>
         <source>Accidentals...</source>
         <translation>Předznamenání...</translation>
     </message>
@@ -3192,10 +3048,6 @@ nepodařilo se: </translation>
         <translation>MuseScore: Klíče</translation>
     </message>
     <message>
-        <source>MuseScore: Key Signature</source>
-        <translation>MuseScore: Taktové označení</translation>
-    </message>
-    <message>
         <source>no score</source>
         <translation>Žádný notový zápis</translation>
     </message>
@@ -3204,10 +3056,6 @@ nepodařilo se: </translation>
 before closing?</source>
         <translation>Uložit před zavřením změny
 do notového zápisu &quot;%1&quot;?</translation>
-    </message>
-    <message>
-        <source>NoteHeads</source>
-        <translation>Notové hlavičky</translation>
     </message>
     <message>
         <source></source>
@@ -3224,14 +3072,6 @@ do notového zápisu &quot;%1&quot;?</translation>
     <message>
         <source>Lyrics even lines</source>
         <translation>Text písně na sudých řádcích</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normální</translation>
-    </message>
-    <message>
-        <source>broken</source>
-        <translation>přerušovaný</translation>
     </message>
     <message>
         <source>End Bar</source>
@@ -3286,59 +3126,12 @@ do notového zápisu &quot;%1&quot;?</translation>
         <translation>Složená závorka (svorka, akoláda)</translation>
     </message>
     <message>
-        <source>normal</source>
-        <comment>note head</comment>
-        <translation>normální</translation>
-    </message>
-    <message>
-        <source>crossed</source>
-        <comment>note head</comment>
-        <translation>Kříž</translation>
-    </message>
-    <message>
-        <source>diamond</source>
-        <comment>note head</comment>
-        <translation>Kosočtverec</translation>
-    </message>
-    <message>
-        <source>triangle</source>
-        <comment>note head</comment>
-        <translation>Trojúhelník</translation>
-    </message>
-    <message>
-        <source>diamond2</source>
-        <comment>note head</comment>
-        <translation>Kosočtverec 2</translation>
-    </message>
-    <message>
-        <source>slash</source>
-        <comment>note head</comment>
-        <translation>Šikmá čára</translation>
-    </message>
-    <message>
-        <source>xcircle</source>
-        <comment>note head</comment>
-        <translation>X kruh</translation>
-    </message>
-    <message>
-        <source>slur</source>
-        <translation>Oblouček</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Hledat</translation>
     </message>
     <message>
         <source>MuseScore: Lines</source>
         <translation>MuseScore: Linky</translation>
-    </message>
-    <message>
-        <source>MuseScore: System Brackets</source>
-        <translation>MuseScore: závorky osnovy</translation>
-    </message>
-    <message>
-        <source>MuseScore: Note Attributes</source>
-        <translation>MuseScore: Vlastnosti noty</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
@@ -3403,8 +3196,209 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <translation>Noty ozdob</translation>
     </message>
     <message>
-        <source>Last Session ended abnormal.
-Restore Session?</source>
+        <source>Acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dashed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminuendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prima volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconda volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terza volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconda volta 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trill line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arpeggio &amp;&amp; Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breath &amp;&amp; Pauses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Caesura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulations &amp;&amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fingering %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>String number %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat measure sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Da Capo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Da Capo al Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Da Capo al Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breaks &amp;&amp; Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle of beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start subbeam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brackets...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articulations &amp;&amp; Ornaments...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Brackets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Articulations &amp;&amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breaks &amp;&amp; Spacer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The previous session quit unexpectedly.
+
+Restore session?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4634,6 +4628,10 @@ Vyberte, prosím, nějakou notu nebo pomlku a zkuste to ještě jednou
         <source>MuseScore: Open chord list failed:</source>
         <translation>MuseScore: Otevření souboru se seznamem akordů nezdařilo:</translation>
     </message>
+    <message>
+        <source>MuseScore: Load font symbols failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5780,8 +5778,8 @@ Zkuste uložení do jiného umístění.</translation>
 <context>
     <name>TimeDialog</name>
     <message>
-        <source>MuseScore: TimeSignature</source>
-        <translation>MuseScore: Taktové označení</translation>
+        <source>MuseScore: Time Signatures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5789,10 +5787,6 @@ Zkuste uložení do jiného umístění.</translation>
     <message>
         <source>Form</source>
         <translation>Formulář</translation>
-    </message>
-    <message>
-        <source>Create TimeSignature</source>
-        <translation>Vytvořit taktové označení</translation>
     </message>
     <message>
         <source>+</source>
@@ -5805,6 +5799,10 @@ Zkuste uložení do jiného umístění.</translation>
     <message>
         <source>Add</source>
         <translation>Přidat</translation>
+    </message>
+    <message>
+        <source>Create Time Signature</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5935,6 +5933,40 @@ p, li { white-space: pre-wrap; }
         <source>bracket</source>
         <translation>Závorka</translation>
     </message>
+    <message>
+        <source>actual type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th</source>
+        <extracomment>note duration</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TupletProperties</name>
@@ -5972,6 +6004,77 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>UnZip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partially corrupted archive. Some files might be extracted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corrupted archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create a directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid or incompatible zip archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inconsistent headers. Archive might be corrupted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -6006,6 +6109,49 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Vlastnosti čáry...</translation>
+    </message>
+</context>
+<context>
+    <name>Zip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6114,92 +6260,72 @@ p, li { white-space: pre-wrap; }
         <source>sharp-slash4</source>
         <translation>Křížek-šikmá čára 4</translation>
     </message>
+    <message>
+        <source>sharp arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sharp arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>flat arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>natural arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>natural arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>natural arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>action</name>
-    <message id="============================================================================">
-        <source>local help</source>
-        <translation>Místní nápověda</translation>
-    </message>
     <message>
         <source>Local &amp;Handbook...</source>
         <translation>Místní &amp;příručka...</translation>
-    </message>
-    <message>
-        <source>Show local Handbook</source>
-        <translation>Ukázat místní příručku</translation>
-    </message>
-    <message>
-        <source>file open</source>
-        <translation>Otevření souboru</translation>
     </message>
     <message>
         <source>Open...</source>
         <translation>Otevřít...</translation>
     </message>
     <message>
-        <source>Load Score from File</source>
-        <translation>Nahrát notový zápis ze souboru</translation>
-    </message>
-    <message>
-        <source>file save</source>
-        <translation>Uložení souboru</translation>
-    </message>
-    <message>
         <source>Save</source>
         <translation>Uložit</translation>
-    </message>
-    <message>
-        <source>Save Score to File</source>
-        <translation>Uložit notový zápis do souboru</translation>
-    </message>
-    <message>
-        <source>file save as</source>
-        <translation>Uložení souboru jako</translation>
     </message>
     <message>
         <source>Save As...</source>
         <translation>Uložit jako...</translation>
     </message>
     <message>
-        <source>Save Score to named File</source>
-        <translation>Uložit notový zápis do pojmenovaného souboru</translation>
-    </message>
-    <message>
-        <source>file save a copy</source>
-        <translation>Uložení souboru jako kopie</translation>
-    </message>
-    <message>
         <source>Save a Copy...</source>
         <translation>Uložit kopii...</translation>
-    </message>
-    <message>
-        <source>Save Score to named File, but keep current name</source>
-        <translation>Uložit notový zápis do pojmenovaného souboru, ale zachovat současný název</translation>
-    </message>
-    <message>
-        <source>file reload</source>
-        <translation>Znovunahrání souboru</translation>
     </message>
     <message>
         <source>Reload</source>
         <translation>Nahrát znovu</translation>
     </message>
     <message>
-        <source>Reload Score from File</source>
-        <translation>Nahrát notový zápis znovu ze souboru</translation>
-    </message>
-    <message>
-        <source>file close</source>
-        <translation>Zavření souboru</translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation>Zavřít</translation>
-    </message>
-    <message>
-        <source>Close Current Score</source>
-        <translation>Zavřít současný notový zápis</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6214,160 +6340,48 @@ p, li { white-space: pre-wrap; }
         <translation>Vytvořit nový notový zápis</translation>
     </message>
     <message>
-        <source>print</source>
-        <translation>Vytisknout</translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation>Tisk...</translation>
-    </message>
-    <message>
-        <source>Print Score</source>
-        <translation>Tisk notového zápisu</translation>
-    </message>
-    <message>
-        <source>undo</source>
-        <translation>Vrátit zpět</translation>
     </message>
     <message>
         <source>Undo</source>
         <translation>Zpět</translation>
     </message>
     <message>
-        <source>undo last change</source>
-        <translation>Vrátit poslední změnu zpět</translation>
-    </message>
-    <message>
-        <source>redo</source>
-        <translation>Provést znovu</translation>
-    </message>
-    <message>
         <source>Redo</source>
         <translation>Znovu</translation>
-    </message>
-    <message>
-        <source>redo last undo</source>
-        <translation>Provést poslední změnu vrácenou zpět znovu</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation>Vyjmout</translation>
     </message>
     <message>
         <source>Cut</source>
         <translation>Vyjmout</translation>
     </message>
     <message>
-        <source>copy</source>
-        <translation>Kopírovat</translation>
-    </message>
-    <message>
         <source>Copy</source>
         <translation>Kopírovat</translation>
-    </message>
-    <message>
-        <source>paste</source>
-        <translation>Vložit</translation>
     </message>
     <message>
         <source>Paste</source>
         <translation>Vložit</translation>
     </message>
     <message>
-        <source>show instruments dialog</source>
-        <translation>Ukázat dialog nástrojů</translation>
-    </message>
-    <message>
         <source>Instruments...</source>
         <translation>Nástroje...</translation>
-    </message>
-    <message>
-        <source>Show Instruments Dialog</source>
-        <translation>Ukázat dialog nástrojů</translation>
-    </message>
-    <message>
-        <source>show clefs palette</source>
-        <translation>Ukázat paletu klíčů</translation>
-    </message>
-    <message>
-        <source>Clef...</source>
-        <translation>Klíč...</translation>
-    </message>
-    <message>
-        <source>Show Clefs Palette</source>
-        <translation>Ukázat paletu klíčů</translation>
-    </message>
-    <message>
-        <source>show keys palette</source>
-        <translation>Ukázat paletu tónin</translation>
-    </message>
-    <message>
-        <source>Key...</source>
-        <translation>Tónina...</translation>
-    </message>
-    <message>
-        <source>Show Keys Palette</source>
-        <translation>Ukázat paletu tónin</translation>
-    </message>
-    <message>
-        <source>show symbols palette</source>
-        <translation>Ukázat paletu symbolů</translation>
     </message>
     <message>
         <source>Symbols...</source>
         <translation>Symboly...</translation>
     </message>
     <message>
-        <source>Show Symbols Palette</source>
-        <translation>Ukázat paletu symbolů</translation>
-    </message>
-    <message>
-        <source>show time palette</source>
-        <translation>Ukázat paletu druhů taktů</translation>
-    </message>
-    <message>
-        <source>Time...</source>
-        <translation>Druh taktu...</translation>
-    </message>
-    <message>
-        <source>Show Time Palette</source>
-        <translation>Ukázat paletu druhů taktů</translation>
-    </message>
-    <message>
-        <source>show dynamics palette</source>
-        <translation>Ukázat paletu hudebních značek určujících hlasitost (dynamiku)</translation>
-    </message>
-    <message>
         <source>Dynamics...</source>
         <translation>Hudební značky určující hlasitost...</translation>
-    </message>
-    <message>
-        <source>Show Dynamics Palette</source>
-        <translation>Ukázat paletu hudebních značek určujících hlasitost (dynamiku)</translation>
-    </message>
-    <message>
-        <source>note input</source>
-        <translation>Vkládání not</translation>
     </message>
     <message>
         <source>Note Input</source>
         <translation>Vkládání not</translation>
     </message>
     <message>
-        <source>toggle note input mode N</source>
-        <translation>Zapnout/Vypnout režim vkládání not N</translation>
-    </message>
-    <message>
-        <source>pitch spell</source>
-        <translation>Hláskování výšky tónu</translation>
-    </message>
-    <message>
         <source>Pitch Spell</source>
         <translation>Hláskování výšky tónu</translation>
-    </message>
-    <message>
-        <source>enter unison above</source>
-        <translation>Zadat interval primy nahoře</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -6378,20 +6392,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat interval primy nahoře</translation>
     </message>
     <message>
-        <source>enter second above</source>
-        <translation>Zadat sekundu nahoře</translation>
-    </message>
-    <message>
         <source>Second Above</source>
         <translation>Sekunda nahoře</translation>
     </message>
     <message>
         <source>Enter second above</source>
         <translation>Zadat sekundu nahoře</translation>
-    </message>
-    <message>
-        <source>enter third above</source>
-        <translation>Zadat tercii nahoře</translation>
     </message>
     <message>
         <source>Third Above</source>
@@ -6402,20 +6408,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat tercii nahoře</translation>
     </message>
     <message>
-        <source>enter fourth above</source>
-        <translation>Zadat kvartu nahoře</translation>
-    </message>
-    <message>
         <source>Fourth Above</source>
         <translation>Kvarta nahoře</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
         <translation>Zadat kvartu nahoře</translation>
-    </message>
-    <message>
-        <source>enter fifth above</source>
-        <translation>Zadat kvintu nahoře</translation>
     </message>
     <message>
         <source>Fifth Above</source>
@@ -6426,20 +6424,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat kvintu nahoře</translation>
     </message>
     <message>
-        <source>enter sixth above</source>
-        <translation>Zadat sextu nahoře</translation>
-    </message>
-    <message>
         <source>Sixth Above</source>
         <translation>Sexta nahoře</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
         <translation>Zadat sextu nahoře</translation>
-    </message>
-    <message>
-        <source>enter seventh above</source>
-        <translation>Zadat septimu nahoře</translation>
     </message>
     <message>
         <source>Seventh Above</source>
@@ -6450,20 +6440,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat septimu nahoře</translation>
     </message>
     <message>
-        <source>enter octave above</source>
-        <translation>Zadat oktávu nahoře</translation>
-    </message>
-    <message>
         <source>Octave Above</source>
         <translation>Oktáva nahoře</translation>
     </message>
     <message>
         <source>Enter octave above</source>
         <translation>Zadat oktávu nahoře</translation>
-    </message>
-    <message>
-        <source>enter ninth above</source>
-        <translation>Zadat nonu nahoře</translation>
     </message>
     <message>
         <source>Ninth Above</source>
@@ -6474,20 +6456,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat nonu nahoře</translation>
     </message>
     <message>
-        <source>enter second below</source>
-        <translation>Zadat sekundu dole</translation>
-    </message>
-    <message>
         <source>Second Below</source>
         <translation>Sekunda dole</translation>
     </message>
     <message>
         <source>Enter second below</source>
         <translation>Zadat sekundu dole</translation>
-    </message>
-    <message>
-        <source>enter third below</source>
-        <translation>Zadat tercii dole</translation>
     </message>
     <message>
         <source>Third Below</source>
@@ -6498,20 +6472,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat tercii dole</translation>
     </message>
     <message>
-        <source>enter fourth below</source>
-        <translation>Zadat kvartu dole</translation>
-    </message>
-    <message>
         <source>Fourth Below</source>
         <translation>Kvarta dole</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
         <translation>Zadat kvartu dole</translation>
-    </message>
-    <message>
-        <source>enter fifth below</source>
-        <translation>Zadat kvintu dole</translation>
     </message>
     <message>
         <source>Fifth Below</source>
@@ -6522,20 +6488,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat kvintu dole</translation>
     </message>
     <message>
-        <source>enter sixth below</source>
-        <translation>Zadat sextu dole</translation>
-    </message>
-    <message>
         <source>Sixth Below</source>
         <translation>Sexta dole</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
         <translation>Zadat sextu dole</translation>
-    </message>
-    <message>
-        <source>enter seventh below</source>
-        <translation>Zadat septimu dole</translation>
     </message>
     <message>
         <source>Seventh Below</source>
@@ -6546,20 +6504,12 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat septimu dole</translation>
     </message>
     <message>
-        <source>enter octave below</source>
-        <translation>Zadat oktávu dole</translation>
-    </message>
-    <message>
         <source>Octave Below</source>
         <translation>Oktáva dole</translation>
     </message>
     <message>
         <source>Enter octave below</source>
         <translation>Zadat oktávu dole</translation>
-    </message>
-    <message>
-        <source>enter ninth below</source>
-        <translation>Zadat nonu dole</translation>
     </message>
     <message>
         <source>Ninth Below</source>
@@ -6570,92 +6520,32 @@ p, li { white-space: pre-wrap; }
         <translation>Zadat nonu dole</translation>
     </message>
     <message>
-        <source>enter note a</source>
-        <translation>Zadat notu a</translation>
-    </message>
-    <message>
         <source>A</source>
         <translation>A</translation>
-    </message>
-    <message>
-        <source>Enter Note A</source>
-        <translation>Zadat notu A</translation>
-    </message>
-    <message>
-        <source>enter note b</source>
-        <translation>Zadat notu h</translation>
     </message>
     <message>
         <source>B</source>
         <translation>H</translation>
     </message>
     <message>
-        <source>Enter Note B</source>
-        <translation>Zadat notu H</translation>
-    </message>
-    <message>
-        <source>enter note c</source>
-        <translation>Zadat notu c</translation>
-    </message>
-    <message>
         <source>C</source>
         <translation>C</translation>
-    </message>
-    <message>
-        <source>Enter Note C</source>
-        <translation>Zadat notu C</translation>
-    </message>
-    <message>
-        <source>enter note d</source>
-        <translation>Zadat notu d</translation>
     </message>
     <message>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <source>Enter Note D</source>
-        <translation>Zadat notu D</translation>
-    </message>
-    <message>
-        <source>enter note e</source>
-        <translation>Zadat notu e</translation>
-    </message>
-    <message>
         <source>E</source>
         <translation>E</translation>
-    </message>
-    <message>
-        <source>Enter Note E</source>
-        <translation>Zadat notu E</translation>
-    </message>
-    <message>
-        <source>enter note f</source>
-        <translation>Zadat notu f</translation>
     </message>
     <message>
         <source>F</source>
         <translation>F</translation>
     </message>
     <message>
-        <source>Enter Note F</source>
-        <translation>Zadat notu F</translation>
-    </message>
-    <message>
-        <source>enter note g</source>
-        <translation>Zadat notu g</translation>
-    </message>
-    <message>
         <source>G</source>
         <translation>G</translation>
-    </message>
-    <message>
-        <source>Enter Note G</source>
-        <translation>Zadat notu G</translation>
-    </message>
-    <message>
-        <source>add a to chord</source>
-        <translation>Přidat a do akordu</translation>
     </message>
     <message>
         <source>Add A</source>
@@ -6666,20 +6556,12 @@ p, li { white-space: pre-wrap; }
         <translation>Přidat do akordu notu A</translation>
     </message>
     <message>
-        <source>add b to chord</source>
-        <translation>Přidat h do akordu</translation>
-    </message>
-    <message>
         <source>Add B</source>
         <translation>Přidat H</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
         <translation>Přidat do akordu notu H</translation>
-    </message>
-    <message>
-        <source>add c to chord</source>
-        <translation>Přidat c do akordu</translation>
     </message>
     <message>
         <source>Add C</source>
@@ -6690,20 +6572,12 @@ p, li { white-space: pre-wrap; }
         <translation>Přidat do akordu notu C</translation>
     </message>
     <message>
-        <source>add d to chord</source>
-        <translation>Přidat d do akordu</translation>
-    </message>
-    <message>
         <source>Add D</source>
         <translation>Přidat D</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
         <translation>Přidat do akordu notu D</translation>
-    </message>
-    <message>
-        <source>add e to chord</source>
-        <translation>Přidat e do akordu</translation>
     </message>
     <message>
         <source>Add E</source>
@@ -6714,20 +6588,12 @@ p, li { white-space: pre-wrap; }
         <translation>Přidat do akordu notu E</translation>
     </message>
     <message>
-        <source>add f to chord</source>
-        <translation>Přidat f do akordu</translation>
-    </message>
-    <message>
         <source>Add F</source>
         <translation>Přidat F</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
         <translation>Přidat do akordu notu F</translation>
-    </message>
-    <message>
-        <source>add g to chord</source>
-        <translation>Přidat g do akordu</translation>
     </message>
     <message>
         <source>Add G</source>
@@ -6738,36 +6604,8 @@ p, li { white-space: pre-wrap; }
         <translation>Přidat do akordu notu G</translation>
     </message>
     <message>
-        <source>enter rest</source>
-        <translation>Zadat pomlku</translation>
-    </message>
-    <message>
         <source>rest</source>
         <translation>pomlka</translation>
-    </message>
-    <message>
-        <source>add staccato</source>
-        <translation>Přidat staccato</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>Staccato</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>béčko</translation>
-    </message>
-    <message>
-        <source>add trill</source>
-        <translation>Přidat trylek</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>Trylek</translation>
-    </message>
-    <message>
-        <source>more stretch</source>
-        <translation>Větší protažení</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -6776,10 +6614,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Add more stretch to selected measure</source>
         <translation>Přidat do vybraného taktu větší protažení</translation>
-    </message>
-    <message>
-        <source>less stretch</source>
-        <translation>Menší protažení</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
@@ -6794,84 +6628,8 @@ p, li { white-space: pre-wrap; }
         <translation>Nastavit znovu režim trámců</translation>
     </message>
     <message>
-        <source>Reset Beam Mode of selected measures</source>
-        <translation>Nastavit znovu režim trámců u vybraných taktů</translation>
-    </message>
-    <message>
-        <source>flip stem</source>
-        <translation>Překlopit nožičku</translation>
-    </message>
-    <message>
-        <source>flip direction</source>
-        <translation>Překlopit směr</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation>Šipka nahoru</translation>
-    </message>
-    <message>
-        <source>up+ctrl</source>
-        <translation>Šipka nahoru + ctrl</translation>
-    </message>
-    <message>
-        <source>up note in chord</source>
-        <translation>O notu v akordu nahoru</translation>
-    </message>
-    <message>
-        <source>goto higher pitched note in chord</source>
-        <translation>Jít na notu v akordu s vyšší výškou tónu</translation>
-    </message>
-    <message>
-        <source>goto top note in chord</source>
-        <translation>Jít na nejvyšší notu v akordu</translation>
-    </message>
-    <message>
-        <source>top note in chord</source>
-        <translation>Nejvyšší nota v akordu</translation>
-    </message>
-    <message>
-        <source>move up</source>
-        <translation>Posunout nahoru</translation>
-    </message>
-    <message>
         <source>up+shift+ctrl</source>
         <translation>Šipka nahoru +shift + ctrl</translation>
-    </message>
-    <message>
-        <source>pitch down</source>
-        <translation>Výška tónu dolů</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation>Šipka dolů</translation>
-    </message>
-    <message>
-        <source>pitch down octave</source>
-        <translation>Výška tónu o oktávu dolů</translation>
-    </message>
-    <message>
-        <source>down+ctrl</source>
-        <translation>Šipka dolů + ctrl</translation>
-    </message>
-    <message>
-        <source>down note in chord</source>
-        <translation>O notu v akordu dolů</translation>
-    </message>
-    <message>
-        <source>goto lower pitched note in chord</source>
-        <translation>Jít na notu v akordu s nižší výškou tónu</translation>
-    </message>
-    <message>
-        <source>goto bottom note in chord</source>
-        <translation>Jít na nejnižší notu v akordu</translation>
-    </message>
-    <message>
-        <source>bottom note in chord</source>
-        <translation>Nejnižší nota v akordu</translation>
-    </message>
-    <message>
-        <source>move down</source>
-        <translation>Posunout dolů</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
@@ -6880,10 +6638,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>previous chord</source>
         <translation>Předchozí akord</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation>Šipka vlevo</translation>
     </message>
     <message>
         <source>previous measure</source>
@@ -6898,16 +6652,8 @@ p, li { white-space: pre-wrap; }
         <translation>Další akord</translation>
     </message>
     <message>
-        <source>right</source>
-        <translation>Šipka vpravo</translation>
-    </message>
-    <message>
         <source>next measure</source>
         <translation>Další takt</translation>
-    </message>
-    <message>
-        <source>right+ctrl</source>
-        <translation>Šipka vpravo + ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
@@ -7014,40 +6760,20 @@ p, li { white-space: pre-wrap; }
         <translation>Smazat</translation>
     </message>
     <message>
-        <source>delete selected measures</source>
-        <translation>Smazat vybrané takty</translation>
-    </message>
-    <message>
         <source>Delete Selected Measures</source>
         <translation>Smazat vybrané takty</translation>
-    </message>
-    <message>
-        <source>append measure</source>
-        <translation>Připojit takt</translation>
     </message>
     <message>
         <source>Append Measure</source>
         <translation>Připojit takt</translation>
     </message>
     <message>
-        <source>append measures</source>
-        <translation>Připojit takty</translation>
-    </message>
-    <message>
         <source>Append Measures...</source>
         <translation>Připojit takty...</translation>
     </message>
     <message>
-        <source>insert measure</source>
-        <translation>Vložit takt</translation>
-    </message>
-    <message>
         <source>Insert Measure</source>
         <translation>Vložit takt</translation>
-    </message>
-    <message>
-        <source>insert measures</source>
-        <translation>Vložit takty</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
@@ -7834,16 +7560,360 @@ p, li { white-space: pre-wrap; }
         <translation>Sledovat píseň</translation>
     </message>
     <message>
-        <source>local help</source>
-        <translation type="unfinished">Místní nápověda</translation>
+        <source>Local handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show local handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load score from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save score to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File save as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save score under a new file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File save a copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save a copy of the score in addition to the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload score from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close current score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo last change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo last undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show instruments dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show clefs palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clefs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show keys signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key Signatures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show key signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show symbols palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show time signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Signatures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show dynamics palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note input mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch spell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter note G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Less stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset beam mode of selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flip direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flip Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch up octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch up by an octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch up note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to higher pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to top note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch down octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch down by an octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitch down note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to lower pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to bottom note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>split window horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents Side by Side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>split window vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents Stacked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>articulation</name>
-    <message id="============================================================================">
-        <source>ufermata</source>
-        <translation>Fermata nahoře</translation>
-    </message>
     <message>
         <source>dfermata</source>
         <translation>Fermata dole</translation>
@@ -7955,6 +8025,34 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>ufermata</source>
         <translation type="unfinished">Fermata nahoře</translation>
+    </message>
+    <message>
+        <source>ushortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dshortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ulongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dlongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>snappizzicato</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8456,26 +8554,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>symbol</name>
     <message>
-        <source>acc discant</source>
-        <translation>Tahací harmonika Diskant</translation>
-    </message>
-    <message>
-        <source>acc dot</source>
-        <translation>Tahací harmonika Bod</translation>
-    </message>
-    <message>
-        <source>acc freebase</source>
-        <translation>Tahací harmonika Freebase</translation>
-    </message>
-    <message>
-        <source>acc stdbase</source>
-        <translation>Tahací harmonika Std.Base</translation>
-    </message>
-    <message>
-        <source>acc bayanbase</source>
-        <translation>Tahací harmonika Bayanbase</translation>
-    </message>
-    <message>
         <source>clef eight</source>
         <translation>Klíč 8</translation>
     </message>
@@ -8486,50 +8564,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>clef five</source>
         <translation>Klíč 5</translation>
-    </message>
-    <message>
-        <source>plus</source>
-        <translation>Plus</translation>
-    </message>
-    <message>
-        <source>zero</source>
-        <translation>Nula</translation>
-    </message>
-    <message>
-        <source>one</source>
-        <translation>Jeden</translation>
-    </message>
-    <message>
-        <source>two</source>
-        <translation>Dva</translation>
-    </message>
-    <message>
-        <source>three</source>
-        <translation>Tři</translation>
-    </message>
-    <message>
-        <source>four</source>
-        <translation>Čtyři</translation>
-    </message>
-    <message>
-        <source>five</source>
-        <translation>Pět</translation>
-    </message>
-    <message>
-        <source>six</source>
-        <translation>Šest</translation>
-    </message>
-    <message>
-        <source>seven</source>
-        <translation>Sedm</translation>
-    </message>
-    <message>
-        <source>eight</source>
-        <translation>Osm</translation>
-    </message>
-    <message>
-        <source>nine</source>
-        <translation>Devět</translation>
     </message>
     <message>
         <source>f</source>
@@ -8554,526 +8588,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>z</source>
         <translation>z</translation>
-    </message>
-    <message>
-        <source>whole rest</source>
-        <translation>Celá pomlka</translation>
-    </message>
-    <message>
-        <source>half rest</source>
-        <translation>Půlová pomlka</translation>
-    </message>
-    <message>
-        <source>outside whole rest</source>
-        <translation>Celá pomlka vně</translation>
-    </message>
-    <message>
-        <source>outside half rest</source>
-        <translation>Půlová pomlka vně</translation>
-    </message>
-    <message>
-        <source>rest M3</source>
-        <translation>Pomlka M3</translation>
-    </message>
-    <message>
-        <source>longa rest</source>
-        <translation>Pomlka Longa</translation>
-    </message>
-    <message>
-        <source>breve rest</source>
-        <translation>Pomlka Breve</translation>
-    </message>
-    <message>
-        <source>quart rest</source>
-        <translation>Čtvrťová pomlka</translation>
-    </message>
-    <message>
-        <source>clas quart rest</source>
-        <translation>Čtvrťová pomlka clas</translation>
-    </message>
-    <message>
-        <source>eight rest</source>
-        <translation>Osminová pomlka</translation>
-    </message>
-    <message>
-        <source>16&apos; rest</source>
-        <translation>Šestnáctinová pomlka</translation>
-    </message>
-    <message>
-        <source>32&apos;  rest</source>
-        <translation>Dvaatřicetinová pomlka</translation>
-    </message>
-    <message>
-        <source>64&apos; rest</source>
-        <translation>Čtyřiašedesátinová pomlka</translation>
-    </message>
-    <message>
-        <source>128&apos; rest</source>
-        <translation>Stoosmadvacetinová pomlka</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>křížek</translation>
-    </message>
-    <message>
-        <source>sharp slash</source>
-        <translation>Křížek šikmá čára</translation>
-    </message>
-    <message>
-        <source>sharp slash2</source>
-        <translation>Křížek šikmá čára 2</translation>
-    </message>
-    <message>
-        <source>sharp slash3</source>
-        <translation>Křížek šikmá čára 3</translation>
-    </message>
-    <message>
-        <source>sharp slash4</source>
-        <translation>Křížek šikmá čára 4</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>bez předznamenání</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>béčko</translation>
-    </message>
-    <message>
-        <source>flat slash</source>
-        <translation>Béčko šikmá čára</translation>
-    </message>
-    <message>
-        <source>flat slash2</source>
-        <translation>Béčko šikmá čára 2</translation>
-    </message>
-    <message>
-        <source>mirrored flat2</source>
-        <translation>Zrcadlené béčko 2</translation>
-    </message>
-    <message>
-        <source>mirrored flat</source>
-        <translation>Zrcadlené béčko</translation>
-    </message>
-    <message>
-        <source>mirrored flat slash</source>
-        <translation>Zrcadlené béčko + šikmá čára</translation>
-    </message>
-    <message>
-        <source>flat flat</source>
-        <translation>Béčko béčko</translation>
-    </message>
-    <message>
-        <source>flat flat slash</source>
-        <translation>Béčko béčko + šikmá čára</translation>
-    </message>
-    <message>
-        <source>sharp sharp</source>
-        <translation>Křížek křížek</translation>
-    </message>
-    <message>
-        <source>right parenthesis</source>
-        <translation>Pravá závorka</translation>
-    </message>
-    <message>
-        <source>left parenthesis</source>
-        <translation>Levá závorka</translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation>Tečka</translation>
-    </message>
-    <message>
-        <source>longa up</source>
-        <translation>Longa nahoru</translation>
-    </message>
-    <message>
-        <source>longa down</source>
-        <translation>Longa dolů</translation>
-    </message>
-    <message>
-        <source>brevis head</source>
-        <translation>Hlavička Breve</translation>
-    </message>
-    <message>
-        <source>whole head</source>
-        <translation>Hlavička celé noty</translation>
-    </message>
-    <message>
-        <source>half head</source>
-        <translation>Hlavička půlové noty</translation>
-    </message>
-    <message>
-        <source>quart head</source>
-        <translation>Hlavička čtvrťové noty</translation>
-    </message>
-    <message>
-        <source>whole diamond head</source>
-        <translation>Hlavička celé noty ve tvaru kosočtverce</translation>
-    </message>
-    <message>
-        <source>half diamond head</source>
-        <translation>Hlavička půlové noty ve tvaru kosočtverce</translation>
-    </message>
-    <message>
-        <source>diamond head</source>
-        <translation>Hlavička ve tvaru kosočtverce</translation>
-    </message>
-    <message>
-        <source>whole triangle head</source>
-        <translation>Hlavička celé noty ve tvaru trojúhelníku</translation>
-    </message>
-    <message>
-        <source>half triangle head</source>
-        <translation>Hlavička půlové noty ve tvaru trojúhelníku</translation>
-    </message>
-    <message>
-        <source>triangle head</source>
-        <translation>Hlavička ve tvaru trojúhelníku</translation>
-    </message>
-    <message>
-        <source>whole slash head</source>
-        <translation>Hlavička celé noty ve tvaru šikmé čáry</translation>
-    </message>
-    <message>
-        <source>half slash head</source>
-        <translation>Hlavička půlové noty ve tvaru šikmé čáry</translation>
-    </message>
-    <message>
-        <source>quart slash head</source>
-        <translation>Hlavička čtvrťové noty ve tvaru šikmé čáry</translation>
-    </message>
-    <message>
-        <source>whole cross head</source>
-        <translation>Hlavička celé noty ve tvaru kříže</translation>
-    </message>
-    <message>
-        <source>half cross head</source>
-        <translation>Hlavička půlové noty ve tvaru kříže</translation>
-    </message>
-    <message>
-        <source>cross head</source>
-        <translation>Hlavička ve tvaru kříže</translation>
-    </message>
-    <message>
-        <source>x circle head</source>
-        <translation>Hlavička x ve tvaru kruhu</translation>
-    </message>
-    <message>
-        <source>ufermata</source>
-        <translation>Fermata nahoře</translation>
-    </message>
-    <message>
-        <source>dfermata</source>
-        <translation>Fermata dole</translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation>Palec</translation>
-    </message>
-    <message>
-        <source>sforza to accent</source>
-        <translation>Sforzando (důrazně) do důrazu</translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation>Espressivo (výrazně)</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>Staccato</translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation>Staccatissimo nahoře</translation>
-    </message>
-    <message>
-        <source>dstacattissimo</source>
-        <translation>Staccatissimo dole</translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation>Tenuto</translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation>Portato nahoře</translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation>Portato dole</translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation>Marcato nahoře</translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation>Marcato dole</translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation>Předehra</translation>
-    </message>
-    <message>
-        <source>plus stop</source>
-        <translation>Plus stop</translation>
-    </message>
-    <message>
-        <source>up bow</source>
-        <translation>Smyk nahoru</translation>
-    </message>
-    <message>
-        <source>down bow</source>
-        <translation>Smyk dolů</translation>
-    </message>
-    <message>
-        <source>reverse turn</source>
-        <translation>Obrácený obal</translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation>Obal</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>Trylek</translation>
-    </message>
-    <message>
-        <source>upedal heel</source>
-        <translation>Patka pedálu nahoru</translation>
-    </message>
-    <message>
-        <source>dpedalheel</source>
-        <translation>Patka pedálu dolů</translation>
-    </message>
-    <message>
-        <source>upedal toe</source>
-        <translation>Prst pedálu nahoru</translation>
-    </message>
-    <message>
-        <source>dpedal toe</source>
-        <translation>Prst pedálu dolů</translation>
-    </message>
-    <message>
-        <source>flageolet</source>
-        <translation>Flažolet</translation>
-    </message>
-    <message>
-        <source>segno</source>
-        <translation>Segno</translation>
-    </message>
-    <message>
-        <source>coda</source>
-        <translation>Coda</translation>
-    </message>
-    <message>
-        <source>varied coda</source>
-        <translation>Proměnná coda</translation>
-    </message>
-    <message>
-        <source>rcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arpeggio</source>
-        <translation>Arpeggio</translation>
-    </message>
-    <message>
-        <source>trillelement</source>
-        <translation>Prvek trylku</translation>
-    </message>
-    <message>
-        <source>arpeggio arrow down</source>
-        <translation>Šipka arpeggia dolů</translation>
-    </message>
-    <message>
-        <source>arpeggio arrow up</source>
-        <translation>Šipka arpeggia nahoru</translation>
-    </message>
-    <message>
-        <source>trill element</source>
-        <translation>Prvek trylku</translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation>Náraz (prall)</translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation>Mordent</translation>
-    </message>
-    <message>
-        <source>prall prall</source>
-        <translation>Náraz náraz (prall prall)</translation>
-    </message>
-    <message>
-        <source>prall mordent</source>
-        <translation>Náraz (prall) mordent</translation>
-    </message>
-    <message>
-        <source>up prall</source>
-        <translation>Nahoru náraz (nahoru prall)</translation>
-    </message>
-    <message>
-        <source>up mordent</source>
-        <translation>Nahoru mordent</translation>
-    </message>
-    <message>
-        <source>prall down</source>
-        <translation>Náraz dolů (prall dolů)</translation>
-    </message>
-    <message>
-        <source>down prall</source>
-        <translation>Dolů náraz (dolů prall)</translation>
-    </message>
-    <message>
-        <source>down mordent</source>
-        <translation>Dolů mordent</translation>
-    </message>
-    <message>
-        <source>prall up</source>
-        <translation>Náraz nahoru (prall nahoru)</translation>
-    </message>
-    <message>
-        <source>line prall</source>
-        <translation>Náraz (prall) na lince</translation>
-    </message>
-    <message>
-        <source>eight flag</source>
-        <translation>Praporek osminové noty</translation>
-    </message>
-    <message>
-        <source>sixteenth flag</source>
-        <translation>Praporek šestnáctinové noty</translation>
-    </message>
-    <message>
-        <source>thirtysecond flag</source>
-        <translation>Praporek dvaatřicetinové noty</translation>
-    </message>
-    <message>
-        <source>sixtyfour flag</source>
-        <translation>Praporek čtyřiašedesátinové noty</translation>
-    </message>
-    <message>
-        <source>deight flag</source>
-        <translation>Praporek osminové noty dolů</translation>
-    </message>
-    <message>
-        <source>grace dash</source>
-        <translation>Čárka ozdoby</translation>
-    </message>
-    <message>
-        <source>dgrace dash</source>
-        <translation>Čárka ozdoby dolů</translation>
-    </message>
-    <message>
-        <source>dsixteenth flag</source>
-        <translation>Praporek šestnáctinové noty dolů</translation>
-    </message>
-    <message>
-        <source>dthirtysecond flag</source>
-        <translation>Praporek dvaatřicetinové noty dolů</translation>
-    </message>
-    <message>
-        <source>dsixtyfourth flag</source>
-        <translation>Praporek čtyřiašedesátinové noty dolů</translation>
-    </message>
-    <message>
-        <source>alto clef</source>
-        <translation>Violový klíč</translation>
-    </message>
-    <message>
-        <source>calto clef</source>
-        <translation>Violový klíč C</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>Basový klíč</translation>
-    </message>
-    <message>
-        <source>cbass clef</source>
-        <translation>Basový klíč C</translation>
-    </message>
-    <message>
-        <source>trebleclef</source>
-        <translation>Houslový klíč</translation>
-    </message>
-    <message>
-        <source>ctrebleclef</source>
-        <translation>Houslový klíč C</translation>
-    </message>
-    <message>
-        <source>percussion clef</source>
-        <translation>Klíč bicích</translation>
-    </message>
-    <message>
-        <source>cpercussion clef</source>
-        <translation>Klíč bicích C</translation>
-    </message>
-    <message>
-        <source>tab clef</source>
-        <translation>Klíč tabulatury</translation>
-    </message>
-    <message>
-        <source>ctab clef</source>
-        <translation>Klíč tabulatury C</translation>
-    </message>
-    <message>
-        <source>four four meter</source>
-        <translation type="unfinished">Měřidlo čtyři čtyři</translation>
-    </message>
-    <message>
-        <source>allabreve</source>
-        <translation>Alla Breve</translation>
-    </message>
-    <message>
-        <source>pedalasterisk</source>
-        <translation>Hvězdička pedálu</translation>
-    </message>
-    <message>
-        <source>pedaldash</source>
-        <translation>Čárka pedálu</translation>
-    </message>
-    <message>
-        <source>pedaldot</source>
-        <translation>Tečka pedálu</translation>
-    </message>
-    <message>
-        <source>pedalP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedald</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedale</source>
-        <translation>Pedál</translation>
-    </message>
-    <message>
-        <source>pedal ped</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc old ee</source>
-        <translation>Tahací harmonika starý ee</translation>
-    </message>
-    <message>
-        <source>whole diamond2 head</source>
-        <translation>Hlavička celé noty ve tvaru kosočtverce 2</translation>
-    </message>
-    <message>
-        <source>half diamond2 head</source>
-        <translation>Hlavička půlové noty ve tvaru kosočtverce 2</translation>
-    </message>
-    <message>
-        <source>diamond2 head</source>
-        <translation>Hlavička ve tvaru kosočtverce 2</translation>
     </message>
     <message>
         <source>note 1/2</source>
@@ -9102,22 +8616,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>dot dot</source>
         <translation>Tečka tečka</translation>
-    </message>
-    <message>
-        <source>bracket tips right up</source>
-        <translation>Špičky závorek vpravo nahoru</translation>
-    </message>
-    <message>
-        <source>bracket tips right down</source>
-        <translation>Špičky závorek vpravo dolů</translation>
-    </message>
-    <message>
-        <source>bracket tips left up</source>
-        <translation>Špičky závorek vlevo nahoru</translation>
-    </message>
-    <message>
-        <source>bracket tips left down</source>
-        <translation>Špičky závorek vlevo dolů</translation>
     </message>
 </context>
 </TS>

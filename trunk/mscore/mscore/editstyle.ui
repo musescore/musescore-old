@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>902</width>
+    <width>788</width>
     <height>475</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <widget class="QListWidget" name="pageList">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
+       <horstretch>2</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
@@ -130,12 +130,12 @@
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
+       <horstretch>4</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>12</number>
+      <number>13</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -231,7 +231,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>staff upper border</string>
+          <string>Music upper margin</string>
          </property>
         </widget>
        </item>
@@ -266,7 +266,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>staff lower border</string>
+          <string>Music lower margin</string>
          </property>
         </widget>
        </item>
@@ -301,7 +301,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>staff distance</string>
+          <string>Staff distance</string>
          </property>
         </widget>
        </item>
@@ -336,7 +336,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>akkolade distance</string>
+          <string>Akkolade distance</string>
          </property>
         </widget>
        </item>
@@ -371,7 +371,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>system distance</string>
+          <string>System distance</string>
          </property>
         </widget>
        </item>
@@ -406,7 +406,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>lyrics top distance</string>
+          <string>Lyrics upper margin</string>
          </property>
         </widget>
        </item>
@@ -435,7 +435,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>lyrics bottom dist.</string>
+          <string>Lyrics lower margin</string>
          </property>
         </widget>
        </item>
@@ -464,7 +464,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>staff v-frame dist.</string>
+          <string>V-frame upper margin</string>
          </property>
         </widget>
        </item>
@@ -496,7 +496,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>v-frame staff dist.</string>
+          <string>V-frame lower margin</string>
          </property>
         </widget>
        </item>
@@ -751,7 +751,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_11">
               <property name="text">
-               <string>spacing (1=tight)</string>
+               <string>Spacing (1=tight)</string>
               </property>
               <property name="textFormat">
                <enum>Qt::AutoText</enum>
@@ -777,7 +777,7 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_12">
               <property name="text">
-               <string>left margin</string>
+               <string>Left margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -800,7 +800,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_13">
               <property name="text">
-               <string>right margin</string>
+               <string>Right margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -823,7 +823,7 @@
             <item row="3" column="0">
              <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>min note distance</string>
+               <string>Min. note distance</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -846,7 +846,7 @@
             <item row="4" column="0">
              <widget class="QLabel" name="label_18">
               <property name="text">
-               <string>clef left margin</string>
+               <string>Clef left margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -869,7 +869,7 @@
             <item row="5" column="0">
              <widget class="QLabel" name="label_19">
               <property name="text">
-               <string>keysig left margin</string>
+               <string>Key sig. left margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -892,7 +892,7 @@
             <item row="6" column="0">
              <widget class="QLabel" name="label_20">
               <property name="text">
-               <string>timesig left margin</string>
+               <string>Time sig. left margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -915,7 +915,7 @@
             <item row="7" column="0">
              <widget class="QLabel" name="label_21">
               <property name="text">
-               <string>clef-key distance</string>
+               <string>Clef-key distance</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -938,7 +938,7 @@
             <item row="8" column="0">
              <widget class="QLabel" name="label_53">
               <property name="text">
-               <string>clef-barline distance</string>
+               <string>Clef-barline distance</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -955,7 +955,7 @@
             <item row="9" column="0">
              <widget class="QLabel" name="label_17">
               <property name="text">
-               <string>begin repeat left margin</string>
+               <string>Begin repeat left margin</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -993,7 +993,7 @@
           <item row="0" column="0">
            <widget class="QCheckBox" name="showRepeatBarTips">
             <property name="text">
-             <string>show repeat bar tips</string>
+             <string>Show repeat bar tips (&quot;winged&quot; repeats)</string>
             </property>
            </widget>
           </item>
@@ -1050,7 +1050,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_46">
                  <property name="text">
-                  <string>progression</string>
+                  <string>Progression</string>
                  </property>
                 </widget>
                </item>
@@ -1080,7 +1080,7 @@
                <item row="1" column="0">
                 <widget class="QLabel" name="label_47">
                  <property name="text">
-                  <string>shortest stem</string>
+                  <string>Shortest stem</string>
                  </property>
                 </widget>
                </item>
@@ -1110,7 +1110,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_25">
               <property name="text">
-               <string>accidental note distance</string>
+               <string>Accidental note distance</string>
               </property>
              </widget>
             </item>
@@ -1130,7 +1130,7 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_43">
               <property name="text">
-               <string>accidental distance</string>
+               <string>Accidental distance</string>
               </property>
              </widget>
             </item>
@@ -1150,7 +1150,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_22">
               <property name="text">
-               <string>note dot distance</string>
+               <string>Note dot distance</string>
               </property>
              </widget>
             </item>
@@ -1170,7 +1170,7 @@
             <item row="3" column="0">
              <widget class="QLabel" name="label_23">
               <property name="text">
-               <string>dot dot distance</string>
+               <string>Dot dot distance</string>
               </property>
              </widget>
             </item>
@@ -1190,7 +1190,7 @@
             <item row="4" column="0">
              <widget class="QLabel" name="label_24">
               <property name="text">
-               <string>ledger line width</string>
+               <string>Ledger line width</string>
               </property>
              </widget>
             </item>
@@ -1243,7 +1243,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_26">
               <property name="text">
-               <string>distance to note</string>
+               <string>Distance to note</string>
               </property>
              </widget>
             </item>
@@ -1263,7 +1263,7 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_27">
               <property name="text">
-               <string>line width</string>
+               <string>Line width</string>
               </property>
              </widget>
             </item>
@@ -1283,7 +1283,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_28">
               <property name="text">
-               <string>hook len</string>
+               <string>Hook length</string>
               </property>
              </widget>
             </item>
@@ -1445,7 +1445,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_62">
             <property name="text">
-             <string>beam width</string>
+             <string>Beam width</string>
             </property>
            </widget>
           </item>
@@ -1462,7 +1462,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_57">
             <property name="text">
-             <string>beam distance</string>
+             <string>Beam distance</string>
             </property>
            </widget>
           </item>
@@ -1479,7 +1479,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="label_59">
             <property name="text">
-             <string>min. len</string>
+             <string>Minimum length</string>
             </property>
            </widget>
           </item>
@@ -1496,7 +1496,7 @@
           <item row="3" column="0">
            <widget class="QLabel" name="label_61">
             <property name="text">
-             <string>min. slope</string>
+             <string>Minimum slope</string>
             </property>
            </widget>
           </item>
@@ -1513,7 +1513,7 @@
           <item row="4" column="0">
            <widget class="QLabel" name="label_56">
             <property name="text">
-             <string>max. slope</string>
+             <string>Maximum slope</string>
             </property>
            </widget>
           </item>
@@ -1556,7 +1556,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Small Staff Size</string>
+          <string>Small staff size</string>
          </property>
         </widget>
        </item>
@@ -1594,7 +1594,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Small Note Size</string>
+          <string>Small note size</string>
          </property>
         </widget>
        </item>
@@ -1629,7 +1629,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Grace Note Size</string>
+          <string>Grace note size</string>
          </property>
         </widget>
        </item>
@@ -1667,7 +1667,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Small Clef Size</string>
+          <string>Small clef size</string>
          </property>
         </widget>
        </item>
@@ -1746,12 +1746,9 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>Continue Height</string>
+          <string>Line break height</string>
          </property>
         </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QDoubleSpinBox" name="hairpinContinueHeight"/>
        </item>
        <item row="3" column="0">
         <spacer>
@@ -1765,6 +1762,9 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="hairpinContinueHeight"/>
        </item>
       </layout>
      </widget>
@@ -1782,7 +1782,7 @@
           <item>
            <widget class="QCheckBox" name="useGermanNoteNames">
             <property name="text">
-             <string>use german names</string>
+             <string>Use German names</string>
             </property>
            </widget>
           </item>
@@ -1791,7 +1791,7 @@
             <item>
              <widget class="QLabel" name="label_54">
               <property name="text">
-               <string>chord description file</string>
+               <string>Chord description file</string>
               </property>
              </widget>
             </item>
@@ -1836,7 +1836,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_35">
            <property name="text">
-            <string>articulation - note head distance</string>
+            <string>Articulation - note head distance</string>
            </property>
           </widget>
          </item>
@@ -1850,7 +1850,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_37">
            <property name="text">
-            <string>articulation - note stem distance</string>
+            <string>Articulation - note stem distance</string>
            </property>
           </widget>
          </item>
@@ -1864,7 +1864,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_41">
            <property name="text">
-            <string>articulation - articulation distance</string>
+            <string>Articulation - articulation distance</string>
            </property>
           </widget>
          </item>
@@ -1937,7 +1937,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Stem Direction in multi voice context</string>
+          <string>Stem Direction in Multi Voice Context</string>
          </property>
          <property name="flat">
           <bool>true</bool>
