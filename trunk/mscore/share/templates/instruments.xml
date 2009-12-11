@@ -1119,7 +1119,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Basson</name>
+        <name>Bassoon</name>
         <short-name>Bsn.</short-name>
         <clef>4</clef>
         <aPitchRange>34-69</aPitchRange>
@@ -1129,7 +1129,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Contrabasson</name>
+        <name>Contrabassoon</name>
         <short-name>Cbsn.</short-name>
         <transposition>-12</transposition>
         <clef>5</clef>
