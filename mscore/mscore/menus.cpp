@@ -207,7 +207,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette;
-            sp->setName(tr("Bar Lines"));
+            sp->setName(tr("Barlines"));
             sp->setMag(0.8);
             sp->setGrid(42, 38);
 
