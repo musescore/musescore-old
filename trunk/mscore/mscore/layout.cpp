@@ -960,7 +960,7 @@ bool Score::layoutPage()
                   nettoHeight += bh;
                   if (y > ey)
                         break;
-                  nettoHeight += point(styleS(ST_frameSystemDistance));
+                  nettoHeight -= point(styleS(ST_systemFrameDistance));
                   }
             else {
                   if (firstSystemOnPage) {
