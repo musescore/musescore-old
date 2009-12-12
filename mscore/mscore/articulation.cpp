@@ -188,7 +188,7 @@ ArticulationProperties::ArticulationProperties(Articulation* na, QWidget* parent
       Instrument* i = part->instrument();
       foreach(Channel* a, i->articulations) {
             if (a->name.isEmpty())
-                  articulationList->addItem(tr("normal"));
+                  articulationList->addItem("normal");
             else
                   articulationList->addItem(a->name);
             }

@@ -721,7 +721,7 @@ void MuseScore::clefMenu()
       {
       if (clefPalette == 0) {
             Palette* sp = new Palette;
-            sp->resize(400, 300);
+            sp->resize(360, 320);
             clefPalette = new PaletteScrollArea(sp);
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
@@ -928,7 +928,7 @@ void MuseScore::noteAttributesMenu()
             sp->resize(400, 300);
             noteAttributesPalette = new PaletteScrollArea(sp);
             noteAttributesPalette->setRestrictHeight(false);
-            noteAttributesPalette->setWindowTitle(tr("MuseScore: Articulations && Ornaments"));
+            noteAttributesPalette->setWindowTitle(tr("MuseScore: Articulations & Ornaments"));
             unsigned nn = ARTICULATIONS;
             sp->setGrid(42, 30);
 
@@ -1120,8 +1120,9 @@ void MuseScore::showLayoutBreakPalette()
             Palette* sp = new Palette;
             layoutBreakPalette = new PaletteScrollArea(sp);
             layoutBreakPalette->setRestrictHeight(false);
-            layoutBreakPalette->setWindowTitle(tr("MuseScore: Layout Breaks"));
+            layoutBreakPalette->setWindowTitle(tr("MuseScore: Breaks & Spacer"));
             sp->setGrid(80, 80);
+            sp->resize(160,80);
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             sp->append(lb, tr("Line break"));

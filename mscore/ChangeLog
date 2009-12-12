@@ -1,3 +1,7 @@
+12.dec (db)
+      - fix: Shift+3 (to add third below)
+      - better sizing for clefs and breaks & spacer palette
+      - remove "normal" channel from translation see http://www.musescore.org/en/node/3098
 11.dec (db)
       - improved wording of style dialog (particularly the "Page" section)
       - significant number of capitalization/wording fixes 

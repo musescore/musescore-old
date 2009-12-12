@@ -1209,7 +1209,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-acciaccatura",
          QT_TRANSLATE_NOOP("action","acciaccatura"),
-         Qt::Key_NumberSign,
+         Qt::Key_Slash,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","acciaccatura"),
          QT_TRANSLATE_NOOP("action","acciaccatura"),

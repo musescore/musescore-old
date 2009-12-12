@@ -3998,7 +3998,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Navigator</source>
-        <translation>Navigator:</translation>
+        <translation>Navigator</translation>
     </message>
     <message>
         <source>Auto Save</source>
