@@ -136,7 +136,7 @@
            <widget class="QComboBox" name="language">
             <item>
              <property name="text">
-              <string>system</string>
+              <string>System</string>
              </property>
             </item>
             <item>
@@ -384,7 +384,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_19">
             <property name="text">
-             <string>Navigator</string>
+             <string>Navigator:</string>
             </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
@@ -1573,7 +1573,7 @@
        <item>
         <widget class="QGroupBox" name="useJackMidi">
          <property name="title">
-          <string>Use JACK midi output</string>
+          <string>Use JACK MIDI output</string>
          </property>
          <property name="flat">
           <bool>true</bool>
