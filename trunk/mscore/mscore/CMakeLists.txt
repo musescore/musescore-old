@@ -370,7 +370,7 @@ if (NOT MINGW AND NOT APPLE)
       ${ui_headers}
       genft.cpp
       )
-   target_link_libraries(genft al ${QT_LIBRARIES} )
+   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype )
    set_target_properties(genft
       PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2"
       )
