@@ -324,6 +324,7 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
+      _sstate = STATE_DISABLED;
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
 
@@ -915,7 +916,7 @@ void MuseScore::helpBrowser1()
             help = QString::fromUtf8("http://www.musescore.org/ru/cправочник");
       else if (lang == "tr")
             help = QString::fromUtf8("http://www.musescore.org/tr/kullanım");
-      //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578   
+      //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578
       help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(revision.trimmed()).arg(QString(VERSION));
       QUrl url(help);
       QDesktopServices::openUrl(url);
@@ -963,7 +964,6 @@ void MuseScore::selectionChanged(int state)
 int MuseScore::appendScore(Score* score)
       {
       connect(score, SIGNAL(dirtyChanged(Score*)),          SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(scoreStateChanged(ScoreState)), SLOT(changeState(ScoreState)));
       connect(score, SIGNAL(selectionChanged(int)),         SLOT(selectionChanged(int)));
       connect(score, SIGNAL(posChanged(int)),               SLOT(setPos(int)));
 
@@ -1098,6 +1098,7 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
 
 void MuseScore::setCurrentViewer(Viewer* viewer)
       {
+      Canvas* c = static_cast<Canvas*>(viewer);
       cv = viewer;
       cs = viewer ? viewer->score() : 0;
 
@@ -1148,7 +1149,6 @@ void MuseScore::setCurrentViewer(Viewer* viewer)
 
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
-      changeState(cs->state());
       }
 
 //---------------------------------------------------------
@@ -1904,7 +1904,7 @@ void MuseScore::cmd(QAction* a)
             printf("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmd));
             return;
             }
-      if (cs && (sc->state & cs->state()) == 0) {
+      if (cs && (sc->state & _sstate) == 0) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: invalid command"),
                QString("command %1 not valid in current state").arg(cmd),
@@ -2012,10 +2012,6 @@ void MuseScore::cmd(QAction* a)
             splitWindow(true);
       else if (cmd == "split-v")
             splitWindow(false);
-      else if (cmd == "mag") {
-            if (cv)
-                  cv->magCanvas();
-            }
       else if (cmd == "page-prev") {
             if (cv)
                   cv->pagePrev();
@@ -2063,13 +2059,14 @@ void MuseScore::clipboardChanged()
 
 //---------------------------------------------------------
 //   changeState
-//    score state has changed
 //---------------------------------------------------------
 
 void MuseScore::changeState(ScoreState val)
       {
-      if (debugMode)
-            printf("MuseScore::setState: %s\n", stateName(val));
+      if (_sstate == val)
+            return;
+//      if (debugMode)
+            printf("MuseScore::changeState: %s\n", stateName(val));
 
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
@@ -2096,7 +2093,7 @@ void MuseScore::changeState(ScoreState val)
                         }
                   }
             }
-      if (cs && (cs->state() == STATE_SEARCH) && (val != STATE_SEARCH))
+      if (val != STATE_SEARCH && searchDialog)
             searchDialog->hide();
 
       switch(val) {
@@ -2163,6 +2160,7 @@ void MuseScore::changeState(ScoreState val)
             }
       QAction* a = getAction("note-input");
       a->setChecked(val == STATE_NOTE_ENTRY);
+      _sstate = val;
       }
 
 //---------------------------------------------------------
@@ -2444,8 +2442,8 @@ void MuseScore::setPos(int t)
 void MuseScore::undo()
       {
       _undoGroup->undo();
-      if (cs)
-            cs->endUndoRedo();
+      if (cv)
+            ((Canvas*)cv)->endUndoRedo();
       }
 
 //---------------------------------------------------------
@@ -2455,8 +2453,8 @@ void MuseScore::undo()
 void MuseScore::redo()
       {
       _undoGroup->redo();
-      if (cs)
-            cs->endUndoRedo();
+      if (cv)
+            ((Canvas*)cv)->endUndoRedo();
       }
 
 //---------------------------------------------------------
@@ -2499,8 +2497,8 @@ void MuseScore::searchTextChanged(const QString& s)
 
 void MuseScore::endSearch()
       {
-      if (cs)
-            cs->setState(STATE_NORMAL);
+//TODO-S      if (cv)
+//            ((Canvas*)cv)->setState(Canvas::NORMAL);
       }
 
 //---------------------------------------------------------

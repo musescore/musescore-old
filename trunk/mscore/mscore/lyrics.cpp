@@ -148,10 +148,9 @@ QPointF Lyrics::canvasPos() const
 //   lyricsUpDown
 //---------------------------------------------------------
 
-void Score::lyricsUpDown(bool up, bool end)
+void Canvas::lyricsUpDown(bool up, bool end)
       {
       Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
-      int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
       Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
@@ -168,27 +167,26 @@ void Score::lyricsUpDown(bool up, bool end)
                   return;
             }
 
-      setState(STATE_NORMAL);
-      endCmd();
-      startCmd();
+// TODO-S      setState(NORMAL);
+      _score->startCmd();
       lyrics = ll->value(verse);
 
-      select(lyrics, SELECT_SINGLE, 0);
-      emit startEdit(lyrics, -1);
-      emit adjustCanvasPosition(lyrics, false);
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
       if (end)
             ((Lyrics*)editObject)->moveCursorToEnd();
       else
             ((Lyrics*)editObject)->moveCursor(0);
 
-      layoutAll = true;
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   lyricsTab
 //---------------------------------------------------------
 
-void Score::lyricsTab(bool back, bool end)
+void Canvas::lyricsTab(bool back, bool end)
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -216,8 +214,7 @@ void Score::lyricsTab(bool back, bool end)
       if (nextSegment == 0)
             return;
 
-      setState(STATE_NORMAL);
-      endCmd();
+      endEdit();
 
       // search previous lyric
       Lyrics* oldLyrics = 0;
@@ -233,13 +230,12 @@ void Score::lyricsTab(bool back, bool end)
                   }
             }
 
-printf("Score::lyricsTab: startCmd\n");
-      startCmd();
+      _score->startCmd();
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
       if (!lyrics) {
-            lyrics = new Lyrics(this);
+            lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
@@ -267,26 +263,24 @@ printf("Score::lyricsTab: startCmd\n");
             }
 
       lyrics->setSyllabic(Lyrics::SINGLE);
-      undoAddElement(lyrics);
+      _score->undoAddElement(lyrics);
 
-      select(lyrics, SELECT_SINGLE, 0);
-printf("Score::lyricsTab: startEdit\n");
+      _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
-      emit startEdit(lyrics, -1);
-      emit adjustCanvasPosition(lyrics, false);
+      adjustCanvasPosition(lyrics, false);
       if (end)
             ((Lyrics*)editObject)->moveCursorToEnd();
       else
             ((Lyrics*)editObject)->moveCursor(0);
 
-      layoutAll = true;
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   lyricsMinus
 //---------------------------------------------------------
 
-void Score::lyricsMinus()
+void Canvas::lyricsMinus()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -294,8 +288,7 @@ void Score::lyricsMinus()
       Segment* segment = (Segment*)(lyrics->parent());
       int verse        = lyrics->no();
 
-      setState(STATE_NORMAL);
-      endCmd();
+      endEdit();
 
       // search next chord
       Segment* nextSegment = segment;
@@ -320,12 +313,12 @@ void Score::lyricsMinus()
             segment = segment->prev1();
             }
 
-      startCmd();
+      _score->startCmd();
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
       if (!lyrics) {
-            lyrics = new Lyrics(this);
+            lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
@@ -351,21 +344,21 @@ void Score::lyricsMinus()
                         break;
                   }
             }
-      undoAddElement(lyrics);
+      _score->undoAddElement(lyrics);
 
-      select(lyrics, SELECT_SINGLE, 0);
-      emit startEdit(lyrics, -1);
-      emit adjustCanvasPosition(lyrics, false);
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
-      setLayoutAll(true);
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   lyricsUnderscore
 //---------------------------------------------------------
 
-void Score::lyricsUnderscore()
+void Canvas::lyricsUnderscore()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -374,8 +367,7 @@ void Score::lyricsUnderscore()
       int verse        = lyrics->no();
       int endTick      = lyrics->tick();
 
-      setState(STATE_NORMAL);
-      endCmd();
+      endEdit();
 
       // search next chord
       Segment* nextSegment = segment;
@@ -412,12 +404,12 @@ void Score::lyricsUnderscore()
                   }
             return;
             }
-      startCmd();
+      _score->startCmd();
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
       if (!lyrics) {
-            lyrics = new Lyrics(this);
+            lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
@@ -438,50 +430,48 @@ void Score::lyricsUnderscore()
             if (oldLyrics->tick() < endTick)
                   oldLyrics->setEndTick(endTick);
             }
-      undoAddElement(lyrics);
+      _score->undoAddElement(lyrics);
 
-      select(lyrics, SELECT_SINGLE, 0);
-      emit startEdit(lyrics, -1);
-      emit adjustCanvasPosition(lyrics, false);
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
-      setLayoutAll(true);
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   lyricsReturn
 //---------------------------------------------------------
 
-void Score::lyricsReturn()
+void Canvas::lyricsReturn()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
 
-      setState(STATE_NORMAL);
-      endCmd();
+      endEdit();
 
-      startCmd();
+      _score->startCmd();
 
       Lyrics* oldLyrics = lyrics;
 
-      lyrics = new Lyrics(this);
+      lyrics = new Lyrics(_score);
       lyrics->setTick(segment->tick());
       lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no() + 1);
-      undoAddElement(lyrics);
-      select(lyrics, SELECT_SINGLE, 0);
-      emit startEdit(lyrics, -1);
-      emit adjustCanvasPosition(lyrics, false);
-
-      setLayoutAll(true);
+      _score->undoAddElement(lyrics);
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   lyricsEndEdit
 //---------------------------------------------------------
 
-void Score::lyricsEndEdit()
+void Canvas::lyricsEndEdit()
       {
       Lyrics* lyrics = (Lyrics*)editObject;
       Lyrics* origL  = (Lyrics*)origEditObject;
@@ -561,6 +551,7 @@ void Lyrics::paste()
       score()->end();
       txt = txt.mid(sl[0].size() + 1);
       QApplication::clipboard()->setText(txt, mode);
-      score()->lyricsTab(false, true);
+
+//TODO-S      score()->lyricsTab(false, true);
       }
 

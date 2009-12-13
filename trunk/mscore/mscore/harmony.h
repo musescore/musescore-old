@@ -232,7 +232,8 @@ class Harmony : public Text {
       virtual void propertyAction(const QString&);
       virtual void layout();
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable() { return true; }
+      virtual void startEdit(Viewer*, const QPointF&);
       virtual void endEdit();
 
       int baseTpc() const                      { return _baseTpc;      }

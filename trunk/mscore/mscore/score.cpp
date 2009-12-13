@@ -268,7 +268,7 @@ Score::Score(const Style& s)
       _showInvisible  = true;
       _showFrames     = true;
       editTempo       = 0;
-      _dragObject     = 0;
+//      _dragObject     = 0;
       _printing       = false;
       _playlistDirty  = false;
       _autosaveDirty  = false;
@@ -286,10 +286,10 @@ Score::Score(const Style& s)
       _tempomap        = new AL::TempoMap;
       _sigmap          = new AL::TimeSigMap;
       _sigmap->add(0, 4, 4);
-      _state          = STATE_NORMAL;
-      _prevState      = STATE_NORMAL;
-      origEditObject  = 0;
-      editObject      = 0;
+//      _state          = STATE_NORMAL;
+//      _prevState      = STATE_NORMAL;
+//      origEditObject  = 0;
+//      editObject      = 0;
 
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
@@ -426,10 +426,12 @@ void Score::write(Xml& xml, bool autosave)
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;
+#if 0 // TODO-S
       if (!autosave && editObject) {                          // in edit mode?
             endCmd();
             setState(STATE_NORMAL);
             }
+#endif
       _style.save(xml, true);      // save only differences to buildin style
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
@@ -1039,164 +1041,13 @@ int Measure::snap(int tick, const QPointF p) const
       }
 
 //---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-void Score::startEdit(Element* element)
-      {
-printf("Score::startEdit\n");
-      origEditObject = element;
-      if (element->isTextB()) {
-            editObject = element;
-            TextB* t = static_cast<TextB*>(editObject);
-            emit setEditText(t);
-            mscore->textTools()->setText(t);
-            mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
-            mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
-            textUndoLevel = 0;
-            connect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
-            }
-      else {
-            editObject = element->clone();
-            editObject->setSelected(false);
-            origEditObject->resetMode();
-            undoChangeElement(origEditObject, editObject);
-            select(editObject, SELECT_SINGLE, 0);
-            removeBsp(origEditObject);
-            }
-      _updateAll = true;
-      end();
-      setState(STATE_EDIT);
-      }
-
-//---------------------------------------------------------
 //   textUndoLevelAdded
 //---------------------------------------------------------
 
-void Score::textUndoLevelAdded()
-      {
-      ++textUndoLevel;
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Score::endEdit()
-      {
-      if (_state != STATE_EDIT) {
-            printf("Score::endEdit: not in state EDIT\n");
-            return;
-            }
-      refresh |= editObject->bbox();
-      editObject->endEdit();
-      refresh |= editObject->bbox();
-
-      if (editObject->isTextB()) {
-            TextB* t = static_cast<TextB*>(editObject);
-            // if (t->doc()->isUndoAvailable()) {
-            if (textUndoLevel)
-                  _undo->push(new EditText(t, textUndoLevel));
-            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
-            }
-
-      int tp = editObject->type();
-
-      if (tp == LYRICS)
-            lyricsEndEdit();
-      else if (tp == HARMONY)
-            harmonyEndEdit();
-      layoutAll = true;
-      editObject = 0;
-      }
-
-//---------------------------------------------------------
-//   startDrag
-//---------------------------------------------------------
-
-void Score::startDrag(Element* e)
-      {
-      _dragObject = e;
-      _startDragPosition = e->userOff();
-
-      QList<Element*> el;
-      e->scanElements(&el, collectElements);
-      foreach(Element* e, el)
-            removeBsp(e);
-      }
-
-//---------------------------------------------------------
-//   drag
-//---------------------------------------------------------
-
-void Score::drag(const QPointF& delta)
-      {
-      foreach(Element* e, *_selection->elements())
-            refresh |= e->drag(delta);
-      }
-
-//---------------------------------------------------------
-//   endDrag
-//---------------------------------------------------------
-
-void Score::endDrag()
-      {
-      _dragObject->endDrag();
-      QPointF npos = _dragObject->userOff();
-      _dragObject->setUserOff(_startDragPosition);
-      undoMove(_dragObject, npos);
-      layoutAll = true;
-      _dragObject = 0;
-      }
-
-//---------------------------------------------------------
-//   setNoteEntry
-//---------------------------------------------------------
-
-void Score::setNoteEntry(bool val)
-      {
-      _is._segment = 0;
-      if (val) {
-            Note* note  = 0;
-            Element* el = _selection->activeCR() ? _selection->activeCR() : _selection->element();
-            if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
-                  int track = _is.track == -1 ? 0 : _is.track;
-                  el = static_cast<ChordRest*>(searchNote(0, track));
-                  if (el == 0) {
-                        printf("no note or rest selected 1\n");
-                        return;
-                        }
-                  }
-            if (el->type() == CHORD) {
-                  Chord* c = static_cast<Chord*>(el);
-                  note = c->selectedNote();
-                  if (note == 0)
-                        note = c->upNote();
-                  el = note;
-                  }
-
-            select(el, SELECT_SINGLE, 0);
-            _is.noteEntryMode = true;
-            emit moveCursor();
-            _is.rest = false;
-            getAction("pad-rest")->setChecked(false);
-            //
-            // TODO: check for valid duration
-            //
-            }
-      else {
-            _is.noteEntryMode = false;
-            if (_is.slur) {
-                  QList<SlurSegment*>* el = _is.slur->slurSegments();
-                  if (!el->isEmpty())
-                        el->front()->setSelected(false);
-                  static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
-                  _is.slur = 0;
-                  }
-            emit moveCursor();
-            }
-      setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
-      }
+// void Score::textUndoLevelAdded()
+//      {
+//      ++textUndoLevel;
+//      }
 
 //---------------------------------------------------------
 //   midiNoteReceived
@@ -1806,40 +1657,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       y += pos->line * _spatium * .5 * mag;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
       return true;
-      }
-
-//---------------------------------------------------------
-//   setState
-//---------------------------------------------------------
-
-void Score::setState(ScoreState s)
-      {
-      if (debugMode)
-            printf("Score::setState: %s->%s\n", stateName(_state), stateName(s));
-
-      if (s == _state)
-            return;
-      switch(s) {
-            case STATE_NORMAL:
-                  if (_state == STATE_EDIT) {
-                        endEdit();
-                        endCmd();
-                        }
-                  emit stateChanged(Viewer::NORMAL);
-                  break;
-            case STATE_NOTE_ENTRY:
-                  emit stateChanged(Viewer::NOTE_ENTRY);
-                  break;
-            case STATE_EDIT:
-                  emit stateChanged(Viewer::EDIT);
-                  break;
-            case STATE_DISABLED:
-            case STATE_PLAY:
-            case STATE_SEARCH:
-                  break;
-            }
-      _state = s;
-      emit scoreStateChanged(_state);
       }
 
 //---------------------------------------------------------

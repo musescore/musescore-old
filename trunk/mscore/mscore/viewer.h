@@ -33,10 +33,6 @@ class TextB;
 class Viewer : public QWidget {
       Q_OBJECT
 
-   public:
-      enum State {
-         NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
-         };
    protected:
       Score* _score;
 
@@ -75,7 +71,6 @@ class Viewer : public QWidget {
       const QMatrix& matrix() const              { return _matrix; }
       void setEditText(TextB* t)                 { _editText = t;      }
       TextB* editText() const                    { return _editText;   }
-      virtual void magCanvas()                   {}
       qreal mag() const;
       int magIdx() const                         { return _magIdx; }
       void setMag(int idx, double mag);
@@ -91,6 +86,7 @@ class Viewer : public QWidget {
       void pageTop();
       void pageEnd();
       virtual void cmd(const QAction* a) = 0;
+      QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
       };
 
 #endif

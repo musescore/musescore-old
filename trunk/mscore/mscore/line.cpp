@@ -108,15 +108,6 @@ QPointF LineSegment::gripAnchor(int grip) const
       }
 
 //---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-bool LineSegment::startEdit(Viewer*, const QPointF&)
-      {
-      return true;
-      }
-
-//---------------------------------------------------------
 //   edit
 //    return true if event is accepted
 //---------------------------------------------------------

@@ -239,8 +239,6 @@ class Score : public QObject {
       bool _showFrames;
 
       EditTempo* editTempo;
-      Element* _dragObject;
-      QPointF _startDragPosition;
 
       QList<Part*> _parts;
       QList<Staff*> _staves;
@@ -273,7 +271,6 @@ class Score : public QObject {
       bool _creditsRead;             ///< credits were read at MusicXML import
       bool _defaultsRead;            ///< defaults were read at MusicXML import, allow export of defaults in convertermode
 
-      int textUndoLevel;
       Selection* _selection;
 
       //------------------
@@ -312,7 +309,6 @@ class Score : public QObject {
 
       void cmdAddPitch(int note, bool addFlag);
 
-      Note* cmdAddPitch1(int pitch, bool addFlag);
       void cmdAddInterval(int);
 
       void printFile();
@@ -321,8 +317,6 @@ class Score : public QObject {
 
       void undoSigInsertTime(int, int);
 
-      void cmdAddText(int style);
-      void cmdAddChordName();
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
@@ -335,7 +329,6 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void cmdExchangeVoice(int, int);
-      void cmdCopy();
       void cmdPaste();
 
       void updateSelectedElements(SelState);
@@ -347,7 +340,6 @@ class Score : public QObject {
 
       void resetUserStretch();
       void toDefault();
-      void expandVoice();
 
       Page* addPage();
       bool layoutPage();
@@ -366,19 +358,13 @@ class Score : public QObject {
       void layoutStage3();
       void layoutChords1(Segment* segment, int staffIdx);
 
-   private slots:
-      void textUndoLevelAdded();
-
    signals:
       void selectionChanged(int);
       void dirtyChanged(Score*);
-      void stateChanged(Viewer::State);
-      void scoreStateChanged(ScoreState);
       void posChanged(int);
       void updateAll();
       void dataChanged(const QRectF&);
       void moveCursor();
-      void setEditText(TextB*);
       void startEdit(Element*, int startGrip);
       void adjustCanvasPosition(Element* el, bool playBack);
 
@@ -391,21 +377,7 @@ class Score : public QObject {
       int curTrack;
 
       TextC* rights;                ///< Copyright printed at bottom of page
-
       int _pageOffset;              ///< Offset for page numbers.
-
-      //---------------------------------------------------
-      //    state information
-      //---------------------------------------------------
-
-      ScoreState _state;
-      ScoreState _prevState;               ///< state before playback
-
-      Element* origEditObject;
-      Element* editObject;          ///< Valid in edit mode
-
-      System* dragSystem;           ///< Valid if DRAG_STAFF.
-      int dragStaff;
 
       void cmdAppendMeasures(int);
       void cmdInsertMeasures(int);
@@ -427,8 +399,6 @@ class Score : public QObject {
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
-      void cmdAddSlur();
-      void cmdAddSlur(Note* firstNote, Note* lastNote);
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
@@ -437,9 +407,6 @@ class Score : public QObject {
 
       void cmdEnterRest();
       void cmdEnterRest(const Duration& d);
-
-      void lyricsEndEdit();
-      void harmonyEndEdit();
 
       Score(const Style&);
       ~Score();
@@ -569,27 +536,11 @@ class Score : public QObject {
       void setLayoutStart(Measure* m)  { layoutStart = m;  }
       void addRefresh(const QRectF& r) { refresh |= r;     }
 
-      void chordTab(bool back);
-      void lyricsTab(bool back, bool end);
-      void lyricsUpDown(bool up, bool end);
-      void lyricsReturn();
-      void lyricsMinus();
-      void lyricsUnderscore();
       void changeLineSegment(bool);
 
-      void startEdit(Element* element);
-      void endEdit();
-
-      void startDrag(Element*);
-      void drag(const QPointF&);
-      void endDrag();
-
       void changeVoice(int);
-      void setNoteEntry(bool on);
 
       void colorItem(Element*);
-      Element* dragObject() const    { return _dragObject; }
-      void setDragObject(Element* e) { _dragObject = e; }
       void midiNoteReceived(int pitch, bool);
       const QList<Part*>* parts() const  { return &_parts; }
       void appendPart(Part* p);
@@ -769,11 +720,6 @@ class Score : public QObject {
       Page* searchPage(const QPointF&) const;
       bool getPosition(Position* pos, const QPointF&, int voice) const;
 
-      void setState(ScoreState s);
-      ScoreState state() const        { return _state; }
-      void setPrevState(ScoreState s) { _prevState = s; }
-      ScoreState prevState() const    { return _prevState; }
-
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
 
       ImagePath* addImage(const QString&);      // add image to imagePathList
@@ -837,7 +783,6 @@ class Score : public QObject {
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName;      }
       void setTmpName(const QString& s) { _tmpName = s;         }
-      void changeState(Viewer::State s) { emit stateChanged(s); }
       void emitStartEdit(Element* e, int startGrip) { emit startEdit(e, startGrip); }
       void emitAdjustCanvasPosition(Element* el, bool playBack) {
             emit adjustCanvasPosition(el, playBack);
@@ -847,6 +792,9 @@ class Score : public QObject {
       Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
+      void cmdCopy();
+      void expandVoice();
+      Note* cmdAddPitch1(int pitch, bool addFlag);
       };
 
 extern Score* gscore;

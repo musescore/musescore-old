@@ -607,8 +607,10 @@ void Canvas::modifyElement(Element* el)
 //    'S' typed on keyboard
 //---------------------------------------------------------
 
-void Score::cmdAddSlur()
+void Canvas::cmdAddSlur()
       {
+      _score->startCmd();
+#if 0 // TODO-S
       if (noteEntryMode() && _is.slur) {
             QList<SlurSegment*>* el = _is.slur->slurSegments();
             if (!el->isEmpty())
@@ -617,7 +619,8 @@ void Score::cmdAddSlur()
             _is.slur = 0;
             return;
             }
-      QList<Note*> nl = _selection->noteList();
+#endif
+      QList<Note*> nl = _score->selection()->noteList();
       Note* firstNote = 0;
       Note* lastNote = 0;
       foreach(Note* n, nl) {
@@ -631,13 +634,14 @@ void Score::cmdAddSlur()
       if (firstNote == lastNote)
             lastNote = 0;
       cmdAddSlur(firstNote, lastNote);
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
 //   addSlur
 //---------------------------------------------------------
 
-void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
+void Canvas::cmdAddSlur(Note* firstNote, Note* lastNote)
       {
       ChordRest* cr1 = firstNote->chord();
       ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
@@ -646,15 +650,16 @@ void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
             printf("cannot create slur: at end\n");
             return;
             }
-      Slur* slur = new Slur(this);
+      Slur* slur = new Slur(_score);
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(0);
-      cmdAdd(slur);
+      _score->cmdAdd(slur);
 
       slur->layout();
       QList<SlurSegment*>* el = slur->slurSegments();
 
+#if 0
       if (noteEntryMode()) {
             _is.slur = slur;
             if (!el->isEmpty())
@@ -666,13 +671,14 @@ void Score::cmdAddSlur(Note* firstNote, Note* lastNote)
             }
       else {
             //
+#endif
             // start slur in edit mode if lastNote is not given
             //
             if ((lastNote == 0) && !el->isEmpty()) {
-                  SlurSegment* ss = el->front();
-                  emit startEdit(ss, -1);
+                  origEditObject = el->front();
+                  sm->postEvent(new CommandEvent("edit"));
                   }
-            }
+//            }
       }
 
 //---------------------------------------------------------
@@ -1281,7 +1287,7 @@ void Score::cmdDeleteSelection()
 //   chordTab
 //---------------------------------------------------------
 
-void Score::chordTab(bool back)
+void Canvas::chordTab(bool back)
       {
       Harmony* cn      = (Harmony*)editObject;
       Measure* measure = (Measure*)cn->parent();
@@ -1309,10 +1315,8 @@ void Score::chordTab(bool back)
             printf("no next segment\n");
             return;
             }
-      setState(STATE_NORMAL);
-      endCmd();
-
-      startCmd();
+      endEdit();
+      _score->startCmd();
 
       // search for next chord name
       cn              = 0;
@@ -1326,19 +1330,19 @@ void Score::chordTab(bool back)
             }
 
       if (!cn) {
-            cn = new Harmony(this);
+            cn = new Harmony(_score);
             cn->setTick(segment->tick());
             cn->setTrack(track);
             cn->setParent(measure);
-            undoAddElement(cn);
+            _score->undoAddElement(cn);
             }
 
-      select(cn, SELECT_SINGLE, 0);
-      emit startEdit(cn, -1);
-      emit adjustCanvasPosition(cn, false);
+      _score->select(cn, SELECT_SINGLE, 0);
+      startEdit(cn, -1);
+      adjustCanvasPosition(cn, false);
       ((Harmony*)editObject)->moveCursorToEnd();
 
-      setLayoutAll(true);
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1348,6 +1352,7 @@ void Score::chordTab(bool back)
 
 void Score::changeLineSegment(bool last)
       {
+#if 0 // TODO-S
       LineSegment* segment = static_cast<LineSegment*>(editObject);
 
       LineSegment* newSegment;
@@ -1362,6 +1367,7 @@ void Score::changeLineSegment(bool last)
       startCmd();
       emit startEdit(newSegment, -2);      // do not change curGrip
       layoutAll = true;
+#endif
       }
 
 //---------------------------------------------------------
@@ -1371,7 +1377,6 @@ void Score::changeLineSegment(bool last)
 
 Lyrics* Score::addLyrics()
       {
-printf("Score::addLyrics\n");
       Note* e = getSelectedNote();
       if (e == 0)
             return 0;
@@ -1529,7 +1534,7 @@ printf("cmdTuplet: "); tuplet->dump();
             el = cl[1];
       if (el) {
             select(el, SELECT_SINGLE, 0);
-            setNoteEntry(true);
+//TODO-S            setNoteEntry(true);
             _is.duration = baseLen;
             setPadState();
             }
@@ -1734,8 +1739,8 @@ void Score::cmdEnterRest()
 void Score::cmdEnterRest(const Duration& d)
       {
 printf("cmdEnterRest %s\n", qPrintable(d.name()));
-      if (!noteEntryMode())
-            setNoteEntry(true);
+//TODO-S      if (!noteEntryMode())
+//            setNoteEntry(true);
       expandVoice();
       if (_is.cr() == 0) {
             printf("cannot enter rest here\n");

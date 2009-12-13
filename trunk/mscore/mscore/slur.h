@@ -64,7 +64,7 @@ class SlurSegment : public Element {
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&) const;
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;

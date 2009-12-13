@@ -122,15 +122,6 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
       }
 
 //---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-bool SlurSegment::startEdit(Viewer*, const QPointF&)
-      {
-      return true;
-      }
-
-//---------------------------------------------------------
 //   edit
 //    return true if event is accepted
 //---------------------------------------------------------
@@ -182,7 +173,7 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
       if (sl->slurSegments()->size() != segments) {
             QList<SlurSegment*>* ss = sl->slurSegments();
             SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
-            score()->changeState(Canvas::NORMAL);
+//TODO-S            score()->changeState(Canvas::NORMAL);
             score()->endCmd();
             score()->startCmd();
             score()->emitStartEdit(newSegment, curGrip);

@@ -83,10 +83,9 @@ void Box::draw(QPainter& p) const
 //   startEdit
 //---------------------------------------------------------
 
-bool Box::startEdit(Viewer*, const QPointF&)
+void Box::startEdit(Viewer*, const QPointF&)
       {
       editMode = true;
-      return true;
       }
 
 //---------------------------------------------------------

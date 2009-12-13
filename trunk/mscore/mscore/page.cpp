@@ -135,11 +135,14 @@ void Page::layout()
             }
 
       // add copyright to page
+#if 0 // TODO-S
       if (score()->state() == STATE_EDIT) {      // for special case: edit copyright
             if (_copyright)
                   _copyright->layout();
             }
-      else {
+      else
+#endif
+            {
             if (_score->rights) {
                   if (_copyright == 0) {
                         _copyright = new TextC(*_score->rights);

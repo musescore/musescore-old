@@ -19,7 +19,7 @@
 //=============================================================================
 
 //
-//    q+d hack to create a xml font description file from
+//    q+d hack to create an xml font description file from
 //    lilipond tables embedded in mscore-20.ttf
 //
 //    usage: genft mscore-20.ttf > symbols.xml

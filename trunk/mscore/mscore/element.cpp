@@ -1139,15 +1139,6 @@ ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
       }
 
 //---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-bool Element::startEdit(Viewer*, const QPointF&)
-      {
-      return !_generated;
-      }
-
-//---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 

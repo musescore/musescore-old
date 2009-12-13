@@ -81,7 +81,7 @@ class Tuplet : public DurationElement {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable();
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
 
