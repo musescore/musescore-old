@@ -32,7 +32,8 @@ class ImagePath;
 //---------------------------------------------------------
 
 class Image : public BSymbol {
-   Q_DECLARE_TR_FUNCTIONS(Image)
+      Q_DECLARE_TR_FUNCTIONS(Image)
+
    protected:
       ImagePath* _ip;
       mutable QPixmap buffer;        ///< cached rendering
@@ -40,7 +41,7 @@ class Image : public BSymbol {
       bool _lockAspectRatio;
       mutable bool _dirty;
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void endEdit();
       virtual void draw(QPainter&) const;

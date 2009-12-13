@@ -130,7 +130,7 @@ class Measure : public MeasureBase {
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
       void readBox(QDomElement);
-      virtual bool startEdit(Viewer*, const QPointF&) { return false; }
+      virtual bool isEditable() { return false; }
 
       virtual bool isMovable() const { return false; }
       virtual void add(Element*);

@@ -684,10 +684,10 @@ int TupletProperties::bracketType() const
       }
 
 //---------------------------------------------------------
-//   startEdit
+//   isEditable
 //---------------------------------------------------------
 
-bool Tuplet::startEdit(Viewer*, const QPointF&)
+bool Tuplet::isEditable()
       {
       return _hasBracket;
       }

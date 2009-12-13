@@ -36,6 +36,18 @@ class Cursor;
 class ElementList;
 class Segment;
 class Measure;
+class System;
+
+//---------------------------------------------------------
+//   CommandEvent
+//---------------------------------------------------------
+
+struct CommandEvent : public QEvent
+      {
+      QString value;
+      CommandEvent(const QString& c)
+         : QEvent(QEvent::Type(QEvent::User+1)), value(c) {}
+      };
 
 //---------------------------------------------------------
 //   Canvas
@@ -44,11 +56,20 @@ class Measure;
 class Canvas : public Viewer {
       Q_OBJECT
 
+      QStateMachine* sm;
+      QState* stateNoteEntry;
+
+//   public:
+//      enum State {
+//         NORMAL, DRAG_OBJ, DRAG_EDIT, LASSO, NOTE_ENTRY
+//         };
+
+   private:
       QFocusFrame* focusFrame;
       Navigator* navigator;
       int level;
 
-      State state;
+//      State state;
       bool dragCanvasState;
       bool draggedCanvas;
       Element* dragElement;   // current moved drag&drop element
@@ -76,30 +97,33 @@ class Canvas : public Viewer {
       QPixmap* bgPixmap;
       QPixmap* fgPixmap;
 
+      Element* origEditObject;
+      Element* editObject;          ///< Valid in edit mode
+      QPointF _startDragPosition;
+      int textUndoLevel;
+      System* dragSystem;           ///< Valid if DRAG_STAFF.
+      int dragStaff;
       //============================================
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
 
-      void canvasPopup(const QPoint&);
       void objectPopup(const QPoint&, Element*);
       void measurePopup(const QPoint&, Measure*);
 
       void saveChord(Xml&);
 
       virtual void resizeEvent(QResizeEvent*);
-      virtual void mousePressEvent(QMouseEvent*);
-      virtual void mouseMoveEvent(QMouseEvent*);
+//      virtual void mousePressEvent(QMouseEvent*);
+//      virtual void mouseMoveEvent(QMouseEvent*);
       virtual void wheelEvent(QWheelEvent*);
-      void mouseMoveEvent1(QMouseEvent*);
-      virtual void mouseReleaseEvent(QMouseEvent*);
-      virtual void mouseDoubleClickEvent(QMouseEvent*);
+//      void mouseMoveEvent1(QMouseEvent*);
+//      virtual void mouseReleaseEvent(QMouseEvent*);
       virtual bool event(QEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragLeaveEvent(QDragLeaveEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
-      virtual void keyPressEvent(QKeyEvent*);
       virtual void focusInEvent(QFocusEvent*);
       virtual void focusOutEvent(QFocusEvent*);
 
@@ -117,20 +141,49 @@ class Canvas : public Viewer {
       bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
-      void zoom(int step, const QPoint& pos);
+      void lyricsTab(bool back, bool end);
+      void lyricsReturn();
+      void lyricsEndEdit();
+      void lyricsUpDown(bool up, bool end);
+      void lyricsMinus();
+      void lyricsUnderscore();
+      void harmonyEndEdit();
+      void chordTab(bool back);
+      void cmdAddPitch(int note, bool addFlag);
+      void cmdAddChordName();
+      void cmdAddText(int style);
 
    private slots:
-      void setState(Viewer::State);
       void moveCursor();
+      void textUndoLevelAdded();
+      void enterState();
+      void exitState();
 
    public slots:
       void setViewRect(const QRectF&);
       void dataChanged(const QRectF&);
-      bool startEdit(Element*, int startGrip);
+
+      void startEdit();
+      void endEdit();
+      void endStartEdit() { endEdit(); startEdit(); }
+
+      void startDrag();
+      void endDrag();
+
+      void endDragEdit();
+
+      void startNoteEntry();
+      void endNoteEntry();
+
+      void endLasso();
+      void deselectAll();
 
    public:
       Canvas(QWidget* parent = 0);
       ~Canvas();
+
+      void startEdit(Element*, int startGrip);
+      void startEdit(Element*);
 
       virtual void moveCursor(Segment*, int staffIdx);
       virtual void setCursorOn(bool);
@@ -145,7 +198,7 @@ class Canvas : public Viewer {
 
       void clearScore();
 
-      State getState() const { return state; }
+//      State getState() const { return state; }
       virtual void setScore(Score* s);
 
       virtual void setMag(qreal m);
@@ -158,8 +211,29 @@ class Canvas : public Viewer {
       void setLassoRect(const QRectF& r) { _lassoRect = r; }
       void paintLasso(QPainter& p, double mag);
       bool navigatorVisible() const;
-      void magCanvas();
       virtual void cmd(const QAction* a);
+
+      void drag(const QPointF&);
+      void endUndoRedo();
+      void zoom(int step, const QPoint& pos);
+      void contextPopup(QMouseEvent* ev);
+      void setOrigEditObject(Element* e) { origEditObject = e; }
+      void editKey(QKeyEvent*);
+      Element* getDragObject() const { return dragObject; }
+      void dragCanvas(QMouseEvent* ev);
+      void dragNoteEntry(QMouseEvent* ev);
+      void noteEntryButton(QMouseEvent* ev);
+      void doDragElement(QMouseEvent* ev);
+      void doDragLasso(QMouseEvent* ev);
+      void doDragEdit(QMouseEvent* ev);
+      void select(QMouseEvent*);
+      void mousePress(QMouseEvent* ev);
+      bool testElementDragTransition(QMouseEvent* ev) const;
+      bool editElementDragTransition(QMouseEvent* ev);
+      bool editCanvasDragTransition(QMouseEvent* e);
+      void cmdAddSlur();
+      void cmdAddSlur(Note* firstNote, Note* lastNote);
+      bool noteEntryMode() const;
       };
 
 extern int searchStaff(const Element* element);

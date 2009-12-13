@@ -111,6 +111,7 @@
 #include <QtGui/QGraphicsRectItem>
 #include <QtGui/QLabel>
 #include <QtGui/QFocusFrame>
+#include <QtGui/QMouseEventTransition>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

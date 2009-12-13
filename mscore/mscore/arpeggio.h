@@ -41,7 +41,7 @@ class Arpeggio : public Element {
       virtual ElementType type() const { return ARPEGGIO; }
       virtual QRectF bbox() const;
       virtual void draw(QPainter&) const;
-      virtual bool startEdit(Viewer*, const QPointF&) { return true; }
+      virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
       void read(QDomElement e);

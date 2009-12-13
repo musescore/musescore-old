@@ -166,7 +166,8 @@ class TextB : public Element {
 
       virtual void draw(QPainter&) const;
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable();
+      virtual void startEdit(Viewer*, const QPointF&);
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);

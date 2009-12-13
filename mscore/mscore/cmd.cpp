@@ -134,9 +134,6 @@ void Score::endCmd()
 */
 void Score::end()
       {
-      if (noteEntryMode() && _state != STATE_PLAY)
-            emit moveCursor();
-
       if (layoutAll) {
             _updateAll = true;
             layout();
@@ -418,23 +415,25 @@ void Score::cmdRemove(Element* e)
 //       insert note or add note to chord
 //---------------------------------------------------------
 
-void Score::cmdAddPitch(int note, bool addFlag)
+void Canvas::cmdAddPitch(int note, bool addFlag)
       {
-      if (!noteEntryMode())
-            setNoteEntry(true);
+      InputState& is = _score->inputState();
 
-      expandVoice();
-      if (_is.cr() == 0) {
+      _score->startCmd();
+      _score->expandVoice();
+      if (is.cr() == 0) {
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
+      if (!noteEntryMode())
+            sm->postEvent(new CommandEvent("note-input"));
 
       int key = 0;
 
       if (!preferences.alternateNoteEntryMethod)
-            key = staff(_is.track / VOICES)->keymap()->key(_is.tick());
+            key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
       int pitch;
-      Drumset* ds = _is.drumset;
+      Drumset* ds = is.drumset;
       if (ds) {
             char note1 = "CDEFGAB"[note];
             pitch = -1;
@@ -452,22 +451,24 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             }
       else {
-            int octave = _is.pitch / 12;
+            int octave = is.pitch / 12;
             pitch      = pitchKeyAdjust(note, key);
-            int delta  = _is.pitch - (octave*12 + pitch);
+            int delta  = is.pitch - (octave*12 + pitch);
             if (delta > 6)
-                  _is.pitch = (octave+1)*12 + pitch;
+                  is.pitch = (octave+1)*12 + pitch;
             else if (delta < -6)
-                  _is.pitch = (octave-1)*12 + pitch;
+                  is.pitch = (octave-1)*12 + pitch;
             else
-                  _is.pitch = octave*12 + pitch;
-            if (_is.pitch < 0)
-                  _is.pitch = 0;
-            if (_is.pitch > 127)
-                  _is.pitch = 127;
-            pitch = _is.pitch;
+                  is.pitch = octave*12 + pitch;
+            if (is.pitch < 0)
+                  is.pitch = 0;
+            if (is.pitch > 127)
+                  is.pitch = 127;
+            pitch = is.pitch;
             }
-      cmdAddPitch1(pitch, addFlag);
+      _score->cmdAddPitch1(pitch, addFlag);
+      moveCursor();
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -564,13 +565,13 @@ void Score::cmdAddInterval(int val)
       else
             return;
 
+//TODO-S            setNoteEntry(true);
+
       foreach(Element* e, nl) {
             if (e->type() != NOTE)
                   continue;
 
             Note* on = static_cast<Note*>(e);
-
-            setNoteEntry(true);
 
             Staff* staff = on->staff();
             int key = staff->keymap()->key(on->chord()->tick());
@@ -1095,25 +1096,27 @@ printf("   sublist:\n");
 //   cmdAddChordName
 //---------------------------------------------------------
 
-void Score::cmdAddChordName()
+void Canvas::cmdAddChordName()
       {
-      setState(STATE_NORMAL);
-      if (!checkHasMeasures())
+//    setState(STATE_NORMAL);
+      if (!_score->checkHasMeasures())
             return;
-      ChordRest* cr = getSelectedChordRest();
+      ChordRest* cr = _score->getSelectedChordRest();
       if (!cr)
             return;
+      _score->startCmd();
       Measure* measure = cr->measure();
-      Harmony* s = new Harmony(this);
+      Harmony* s = new Harmony(_score);
       s->setTrack(cr->track());
       s->setParent(measure);
       s->setTick(cr->tick());
-      undoAddElement(s);
+      _score->undoAddElement(s);
 
-      layoutAll = true;
-      select(s, SELECT_SINGLE, 0);
-      emit startEdit(s, -1);
-      emit adjustCanvasPosition(s, false);
+      _score->setLayoutAll(true);
+
+      _score->select(s, SELECT_SINGLE, 0);
+      adjustCanvasPosition(s, false);
+      startEdit(s);
       }
 
 //---------------------------------------------------------
@@ -1122,7 +1125,7 @@ void Score::cmdAddChordName()
 
 void Score::cmdAddChordName2()
       {
-      setState(STATE_NORMAL);
+//TODO-S      setState(STATE_NORMAL);
       if (!checkHasMeasures())
             return;
       ChordRest* cr = getSelectedChordRest();
@@ -1178,14 +1181,13 @@ void Score::cmdAddChordName2()
 //   cmdAddText
 //---------------------------------------------------------
 
-void Score::cmdAddText(int subtype)
+void Canvas::cmdAddText(int subtype)
       {
-      setState(STATE_NORMAL);
-      if (!checkHasMeasures()) {
-            endCmd();
+//TODO-S      setState(STATE_NORMAL);
+      if (!_score->checkHasMeasures())
             return;
-            }
-      Page* page = pages().front();
+      _score->startCmd();
+      Page* page = _score->pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
       Text* s = 0;
@@ -1197,12 +1199,12 @@ void Score::cmdAddText(int subtype)
                   {
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
-                        measure = new VBox(this);
+                        measure = new VBox(_score);
                         measure->setNext(ml.front());
                         measure->setTick(0);
-                        undoInsertMeasure(measure);
+                        _score->undoInsertMeasure(measure);
                         }
-                  s = new Text(this);
+                  s = new Text(_score);
                   switch(subtype) {
                         case TEXT_TITLE:        s->setTextStyle(TEXT_STYLE_TITLE); break;
                         case TEXT_SUBTITLE:     s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
@@ -1215,7 +1217,7 @@ void Score::cmdAddText(int subtype)
                   break;
             case TEXT_COPYRIGHT:
                   {
-                  s = new Text(this);
+                  s = new Text(_score);
                   s->setParent(page);
                   s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_COPYRIGHT);
@@ -1224,10 +1226,10 @@ void Score::cmdAddText(int subtype)
 
             case TEXT_REHEARSAL_MARK:
                   {
-                  ChordRest* cr = getSelectedChordRest();
+                  ChordRest* cr = _score->getSelectedChordRest();
                   if (!cr)
                         break;
-                  s = new Text(this);
+                  s = new Text(_score);
                   s->setTrack(0);
                   s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
@@ -1238,10 +1240,10 @@ void Score::cmdAddText(int subtype)
             case TEXT_STAFF:
             case TEXT_SYSTEM:
                   {
-                  ChordRest* cr = getSelectedChordRest();
+                  ChordRest* cr = _score->getSelectedChordRest();
                   if (!cr)
                         break;
-                  s = new StaffText(this);
+                  s = new StaffText(_score);
                   if (subtype == TEXT_SYSTEM) {
                         s->setTrack(0);
                         s->setSystemFlag(true);
@@ -1260,13 +1262,13 @@ void Score::cmdAddText(int subtype)
             }
 
       if (s) {
-            undoAddElement(s);
-            layoutAll = true;
-            select(s, SELECT_SINGLE, 0);
-            emit startEdit(s, -1);
+            _score->undoAddElement(s);
+            _score->setLayoutAll(true);
+            _score->select(s, SELECT_SINGLE, 0);
+            startEdit(s);
             }
       else
-            endCmd();
+            _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -1782,35 +1784,18 @@ void Score::cmd(const QAction* a)
       if (debugMode)
             printf("Score::cmd <%s>\n", qPrintable(cmd));
 
-      if (editObject) {                          // in edit mode?
-            if (cmd == "paste") {
-                  if (editObject->isTextB())
-                        static_cast<TextB*>(editObject)->paste();
-                  return;
-                  }
-            else if (cmd == "copy") {
-                  cmdCopy();
-                  return;
-                  }
-            setState(STATE_NORMAL);
-            endCmd();
-            }
       if (cmd == "print")
             printFile();
-      else if (cmd == "note-input") {
-            setNoteEntry(a->isChecked());
-            end();
-            }
       else if (cmd == "find") {
-            if (_state == STATE_NOTE_ENTRY)
-                  setNoteEntry(false);
-            setState(STATE_SEARCH);
+//            if (noteEntryMode())
+//                  setNoteEntry(false);
+//TODO-S            setState(STATE_SEARCH);
             }
       else if (cmd == "escape") {
-           if (state() == STATE_SEARCH)
-                  setState(STATE_NORMAL);
-            else if (noteEntryMode())
-                  setNoteEntry(false);
+//TODO-S           if (state() == STATE_SEARCH)
+//                  setState(STATE_NORMAL);
+/*            else*/ if (noteEntryMode())
+//                  setNoteEntry(false);
             end();
             }
       else if (cmd == "play")
@@ -1879,8 +1864,6 @@ void Score::cmd(const QAction* a)
 		      MeasureBase* mb = appendMeasure(VBOX);
                   select(mb, SELECT_SINGLE, 0);
                   }
-            else if (cmd == "add-slur")
-                  cmdAddSlur();
 	      else if (cmd == "add-staccato")
                   addArticulation(StaccatoSym);
 	      else if (cmd == "add-trill")
@@ -2003,35 +1986,6 @@ void Score::cmd(const QAction* a)
                   selectMove(cmd);
                   setLayoutAll(false);
                   }
-
-            else if (cmd == "note-c")
-                  cmdAddPitch(0, false);
-            else if (cmd == "note-d")
-                  cmdAddPitch(1, false);
-            else if (cmd == "note-e")
-                  cmdAddPitch(2, false);
-            else if (cmd == "note-f")
-                  cmdAddPitch(3, false);
-            else if (cmd == "note-g")
-                  cmdAddPitch(4, false);
-            else if (cmd == "note-a")
-                  cmdAddPitch(5, false);
-            else if (cmd == "note-b")
-                  cmdAddPitch(6, false);
-            else if (cmd == "chord-c")
-                  cmdAddPitch(0, true);
-            else if (cmd == "chord-d")
-                  cmdAddPitch(1, true);
-            else if (cmd == "chord-e")
-                  cmdAddPitch(2, true);
-            else if (cmd == "chord-f")
-                  cmdAddPitch(3, true);
-            else if (cmd == "chord-g")
-                  cmdAddPitch(4, true);
-            else if (cmd == "chord-a")
-                  cmdAddPitch(5, true);
-            else if (cmd == "chord-b")
-                  cmdAddPitch(6, true);
             else if (cmd == "note-longa")
                   padToggle(PAD_NOTE00);
             else if (cmd == "note-breve")
@@ -2140,26 +2094,8 @@ void Score::cmd(const QAction* a)
                   addMetronome();
             else if (cmd == "pitch-spell")
                   spell();
-            else if (cmd == "title-text")
-                  return cmdAddText(TEXT_TITLE);
-            else if (cmd == "subtitle-text")
-                  return cmdAddText(TEXT_SUBTITLE);
-            else if (cmd == "composer-text")
-                  return cmdAddText(TEXT_COMPOSER);
-            else if (cmd == "poet-text")
-                  return cmdAddText(TEXT_POET);
-            else if (cmd == "copyright-text")
-                  return cmdAddText(TEXT_COPYRIGHT);
-            else if (cmd == "system-text")
-                  return cmdAddText(TEXT_SYSTEM);
-            else if (cmd == "staff-text")
-                  return cmdAddText(TEXT_STAFF);
-            else if (cmd == "chord-text")
-                  return cmdAddChordName();
             else if (cmd == "harmony-properties")
                   cmdAddChordName2();
-            else if (cmd == "rehearsalmark-text")
-                  return cmdAddText(TEXT_REHEARSAL_MARK);
             else if (cmd == "select-all") {
                   MeasureBase* mb = _measures.last();
                   if (mb) {   // check for empty score
@@ -2246,13 +2182,6 @@ void Score::cmd(const QAction* a)
                               }
                         }
                   }
-            else if (cmd == "edit-element") {
-                  Element* e = selection()->element();
-                  if (e) {
-                        setLayoutAll(false);
-                        emit startEdit(e, -1);
-                        }
-                  }
             else if (cmd == "reset-positions")
                   toDefault();
             else if (cmd == "reset-stretch")
@@ -2292,8 +2221,8 @@ void Score::processMidiInput()
       if (midiInputQueue.isEmpty())
             return;
 
-      if (!noteEntryMode())
-            setNoteEntry(true);
+//TODO-S      if (!noteEntryMode())
+//            setNoteEntry(true);
       if (!noteEntryMode())
             return;
 
@@ -2316,6 +2245,7 @@ void Score::processMidiInput()
 
 void Score::cmdCopy()
       {
+#if 0 // TODO-S
       if (editObject && editObject->isTextB()) {
             //
             // store selection as plain text
@@ -2326,7 +2256,7 @@ void Score::cmdCopy()
                   QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Clipboard);
             return;
             }
-
+#endif
       QString mimeType = selection()->mimeType();
       if (!mimeType.isEmpty()) {
             QMimeData* mimeData = new QMimeData;

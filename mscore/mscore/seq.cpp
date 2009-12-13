@@ -301,8 +301,8 @@ void Seq::start()
       {
       if (!driver)
             return;
-      if (cs->noteEntryMode())
-            cs->setNoteEntry(false);
+//TODO-S      if (cs->noteEntryMode())
+//            cs->setNoteEntry(false);
       QAction* a = getAction("play");
       if (!a->isChecked())
             driver->stopTransport();
@@ -337,9 +337,11 @@ void Seq::stop()
 
 void MuseScore::seqStarted()
       {
+#if 0 // TODO-S
       if (cs->state() != STATE_PLAY)  // don't get stuck in play mode
            cs->setPrevState(cs->state());
       cs->setState(STATE_PLAY);
+#endif
       cv->setCursorOn(true);
       cs->end();
       }
@@ -352,6 +354,7 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
+#if 0 // TODO-S
       cs->setState(cs->prevState());
       // TODO: there should really be some sort of signal to the viewers
       // instead of the state change being handled here
@@ -359,6 +362,7 @@ void MuseScore::seqStopped()
       if (cs->state() == STATE_NOTE_ENTRY)
             cursorOn = true;
       cv->setCursorOn(cursorOn);
+#endif
       cs->setLayoutAll(false);
       cs->setUpdateAll();
       cs->end();

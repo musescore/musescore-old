@@ -38,86 +38,73 @@
 #include "part.h"
 
 //---------------------------------------------------------
-//   Canvas::keyPressEvent
+//   Canvas::editKey
 //---------------------------------------------------------
 
-void Canvas::keyPressEvent(QKeyEvent* ev)
+void Canvas::editKey(QKeyEvent* ev)
       {
       int key                         = ev->key();
       Qt::KeyboardModifiers modifiers = ev->modifiers();
       QString s                       = ev->text();
+      bool ctrl                       = modifiers == Qt::ControlModifier;
 
       if (debugMode)
-            printf("keyPressEvent state %d key 0x%02x mod 0x%04x <%s>\n",
-               state, key, int(modifiers), qPrintable(s));
+            printf("keyPressEvent key 0x%02x mod 0x%04x <%s>\n",
+               key, int(modifiers), qPrintable(s));
 
-      if (state != EDIT && state != DRAG_EDIT) {
-            ev->ignore();
-            if (debugMode)
-                  printf("  ignore\n");
-            return;
-            }
-      Element* e = _score->editObject;
-      if (key == Qt::Key_Escape) {  // TODO: no ESC arrived here because its defined as
-            if (state == DRAG_EDIT) //       a shortcut
-                  e->endEditDrag();
-            setState(NORMAL);
-            ev->accept();
-            return;
-            }
-      bool ctrl = ev->modifiers() == Qt::ControlModifier;
+      Element* e = editObject;
 
       if (e->type() == LYRICS) {
             int found = false;
 #ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::AltModifier)) {
+            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
 #else
-		if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+		if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
 #endif
                   // TODO: shift+tab events are filtered by qt
-                  _score->lyricsTab(modifiers & Qt::ShiftModifier, true);
+                  lyricsTab(modifiers & Qt::ShiftModifier, true);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
                   if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        _score->lyricsTab(true, true);      // go to previous lyrics
+                        lyricsTab(true, true);      // go to previous lyrics
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Right) {
                   if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        _score->lyricsTab(false, false);    // go to next lyrics
+                        lyricsTab(false, false);    // go to next lyrics
                   found = true;
                   }
             else if (ctrl && (ev->key() == Qt::Key_Up)) {
-                  _score->lyricsUpDown(true, true);
+                  lyricsUpDown(true, true);
                   found = true;
                   }
             else if (ctrl && (ev->key() == Qt::Key_Down)) {
-                  _score->lyricsUpDown(false, true);
+                  lyricsUpDown(false, true);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Return) {
-                  _score->lyricsReturn();
+                  lyricsReturn();
                   found = true;
                   }
 #ifdef Q_WS_MAC
-            else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::AltModifier)) {
+            else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::AltModifier)) {
 #else
-		else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::ControlModifier)) {
+		else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::ControlModifier)) {
 #endif
-                  _score->lyricsMinus();
+                  lyricsMinus();
                   found = true;
                   }
 #ifdef Q_WS_MAC
-		else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::AltModifier)) {
+		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::AltModifier)) {
 #else
-		else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::ControlModifier)) {
+		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::ControlModifier)) {
 #endif
-                  _score->lyricsUnderscore();
+                  lyricsUnderscore();
                   found = true;
                   }
             if (found) {
@@ -127,11 +114,11 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             }
       if (e->type() == HARMONY) {
 #ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::AltModifier)) {
+            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
 #else
-            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
 #endif
-                  _score->chordTab(modifiers & Qt::ShiftModifier);
+                  chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
                   return;
                   }

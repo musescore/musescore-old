@@ -57,6 +57,412 @@
 #include "measure.h"
 #include "drumroll.h"
 #include "lyrics.h"
+#include "textpalette.h"
+#include "undo.h"
+#include "slur.h"
+
+//---------------------------------------------------------
+//   CommandTransition
+//---------------------------------------------------------
+
+class CommandTransition : public QAbstractTransition
+      {
+      QString val;
+
+   protected:
+      virtual bool eventTest(QEvent* e);
+      virtual void onTransition(QEvent*) {}
+
+   public:
+      CommandTransition(const QString& cmd, QState* target) : val(cmd) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   MagTransition
+//---------------------------------------------------------
+
+class MagTransition1 : public QEventTransition
+      {
+   protected:
+      virtual bool eventTest(QEvent* e) {
+            if (!QEventTransition::eventTest(e)) {
+                  printf("MagTransition1: wrong event\n");
+                  return false;
+                  }
+            printf("MagTransition1: event %d\n", !(QApplication::keyboardModifiers() & Qt::ShiftModifier));
+            return !(QApplication::keyboardModifiers() & Qt::ShiftModifier);
+            }
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            bool b1 = me->button() == Qt::LeftButton;
+            Canvas* c = static_cast<Canvas*>(eventSource());
+            c->zoom(b1 ? 2 : -1, me->pos());
+            }
+   public:
+      MagTransition1(QObject* obj)
+         : QEventTransition(obj, QEvent::MouseButtonPress) {}
+      };
+
+class MagTransition2 : public QEventTransition
+      {
+   protected:
+      virtual bool eventTest(QEvent* e) {
+            if (!QEventTransition::eventTest(e)) {
+                  printf("MagTransition2: wrong event\n");
+                  return false;
+                  }
+            printf("MagTransition2: event %d\n", int (QApplication::keyboardModifiers() & Qt::ShiftModifier));
+            return bool(QApplication::keyboardModifiers() & Qt::ShiftModifier);
+            }
+      virtual void onTransition(QEvent* e) {
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(e)->event());
+            bool b1 = me->button() == Qt::LeftButton;
+            Canvas* c = static_cast<Canvas*>(eventSource());
+            c->zoom(b1 ? 2 : -1, me->pos());
+            }
+   public:
+      MagTransition2(QObject* obj)
+         : QEventTransition(obj, QEvent::MouseButtonPress) {}
+      };
+
+//---------------------------------------------------------
+//   ContextTransition
+//---------------------------------------------------------
+
+class ContextTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(e)->event());
+            canvas->contextPopup(me);
+            }
+   public:
+      ContextTransition(Canvas* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::RightButton), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   EditTransition
+//---------------------------------------------------------
+
+class EditTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
+            QPointF p = canvas->toLogical(me->pos());
+            Element* e = canvas->elementNear(p);
+            canvas->setOrigEditObject(e);
+            return e && e->isEditable();
+            }
+   public:
+      EditTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonDblClick, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   EditKeyTransition
+//---------------------------------------------------------
+
+class EditKeyTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QKeyEvent* ke = static_cast<QKeyEvent*>(we->event());
+            canvas->editKey(ke);
+            }
+   public:
+      EditKeyTransition(Canvas* c)
+         : QEventTransition(c, QEvent::KeyPress), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   CanvasDragTransition
+//---------------------------------------------------------
+
+class CanvasDragTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            if (me->modifiers() & Qt::ShiftModifier)
+                  return false;
+            canvas->mousePress(me);
+            return canvas->getDragObject() == 0;
+            }
+   public:
+      CanvasDragTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   CanvasLassoTransition
+//---------------------------------------------------------
+
+class CanvasLassoTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            if (!(me->modifiers() & Qt::ShiftModifier))
+                  return false;
+            canvas->mousePress(me);
+            return canvas->getDragObject() == 0;
+            }
+   public:
+      CanvasLassoTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   ElementDragTransition
+//---------------------------------------------------------
+
+class ElementDragTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->mousePress(me);
+            return canvas->testElementDragTransition(me);
+            }
+   public:
+      ElementDragTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseMove, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   EditElementDragTransition
+//---------------------------------------------------------
+
+class EditElementDragTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            return canvas->editElementDragTransition(me);
+            }
+   public:
+      EditElementDragTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   EditCanvasDragTransition
+//---------------------------------------------------------
+
+class EditCanvasDragTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
+            return canvas->editCanvasDragTransition(me);
+            }
+   public:
+      EditCanvasDragTransition(Canvas* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   CanvasSelectTransition
+//---------------------------------------------------------
+
+class CanvasSelectTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->mousePress(me);
+            return canvas->getDragObject() != 0;
+            }
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->select(me);
+            }
+   public:
+      CanvasSelectTransition(Canvas* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DragTransition
+//---------------------------------------------------------
+
+class DragTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->dragCanvas(me);
+            }
+   public:
+      DragTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   NoteEntryDragTransition
+//---------------------------------------------------------
+
+class NoteEntryDragTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->dragNoteEntry(me);
+            }
+   public:
+      NoteEntryDragTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   NoteEntryButtonTransition
+//---------------------------------------------------------
+
+class NoteEntryButtonTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->noteEntryButton(me);
+            }
+   public:
+      NoteEntryButtonTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseButtonPress), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DragElementTransition
+//---------------------------------------------------------
+
+class DragElementTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->doDragElement(me);
+            }
+   public:
+      DragElementTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DragEditTransition
+//---------------------------------------------------------
+
+class DragEditTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->doDragEdit(me);
+            }
+   public:
+      DragEditTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DragLassoTransition
+//---------------------------------------------------------
+
+class DragLassoTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->doDragLasso(me);
+            }
+   public:
+      DragLassoTransition(Canvas* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   eventTest
+//---------------------------------------------------------
+
+bool CommandTransition::eventTest(QEvent* e)
+      {
+      if (e->type() != QEvent::Type(QEvent::User+1))
+            return false;
+      CommandEvent* ce = static_cast<CommandEvent*>(e);
+      return ce->value == val;
+      }
 
 //---------------------------------------------------------
 //   Canvas
@@ -65,6 +471,141 @@
 Canvas::Canvas(QWidget* parent)
    : Viewer(parent)
       {
+      //---setup state machine-------------------------------------------------
+      sm          = new QStateMachine(this);
+      sm->setGlobalRestorePolicy(QStateMachine::RestoreProperties);
+
+      QState* stateActive     = new QState();
+      QState* stateNormal     = new QState(stateActive);
+      QState* stateDragObject = new QState(stateActive);
+      QState* stateEdit       = new QState(stateActive);
+      QState* stateDragEdit   = new QState(stateActive);
+      QState* stateLasso      = new QState(stateActive);
+      stateNoteEntry          = new QState(stateActive);
+      QState* stateMag        = new QState(stateActive);
+      QState* stateDrag       = new QState(stateActive);
+
+      stateActive->setObjectName("stateActive");
+      stateNormal->setObjectName("stateNormal");
+      stateDragObject->setObjectName("stateDragObject");
+      stateEdit->setObjectName("stateEdit");
+      stateDragEdit->setObjectName("stateDragEdit");
+      stateLasso->setObjectName("stateLasso");
+      stateNoteEntry->setObjectName("stateNoteEntry");
+      stateMag->setObjectName("stateMag");
+      stateDrag->setObjectName("stateDrag");
+
+      // setup mag state
+      stateMag->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
+      MagTransition1* mt1 = new MagTransition1(this);
+      mt1->setTargetState(stateNormal);
+      stateMag->addTransition(mt1);
+      MagTransition2* mt2 = new MagTransition2(this);
+      mt2->setTargetState(0);
+      stateMag->addTransition(mt2);
+
+      // setup normal state
+      stateNormal->addTransition(new ContextTransition(this));                         // context menu
+      EditTransition* et = new EditTransition(this, stateEdit);                        // ->edit
+      connect(et, SIGNAL(triggered()), SLOT(startEdit()));
+      stateNormal->addTransition(et);
+      stateNormal->addTransition(new CanvasSelectTransition(this));                    // select
+      connect(stateNormal, SIGNAL(entered()), mscore, SLOT(setNormalState()));
+      stateNormal->addTransition(new CanvasDragTransition(this, stateDrag));           // ->stateDrag
+      stateNormal->addTransition(new CanvasLassoTransition(this, stateLasso));         // ->stateLasso
+      stateNormal->addTransition(new ElementDragTransition(this, stateDragObject));    // ->stateDragObject
+      CommandTransition* ct = new CommandTransition("note-input", stateNoteEntry);     // ->noteEntry
+      stateNormal->addTransition(ct);
+      ct = new CommandTransition("escape", stateNormal);                               // escape
+      connect(ct, SIGNAL(triggered()), SLOT(deselectAll()));
+      stateNormal->addTransition(ct);
+      ct = new CommandTransition("edit", stateEdit);                                   // ->edit harmony/slur/lyrics
+      connect(ct, SIGNAL(triggered()), SLOT(startEdit()));
+      stateNormal->addTransition(ct);
+
+      // setup drag element state
+      QEventTransition* cl = new QEventTransition(this, QEvent::MouseButtonRelease);
+      cl->setTargetState(stateNormal);
+      stateDragObject->addTransition(cl);
+      stateDragObject->addTransition(new DragElementTransition(this));
+      connect(stateDragObject, SIGNAL(entered()), SLOT(startDrag()));
+      connect(stateDragObject, SIGNAL(exited()), SLOT(endDrag()));
+
+      //----- setup edit state
+      ct = new CommandTransition("escape", stateNormal);                            // edit->normal
+      connect(ct, SIGNAL(triggered()), SLOT(endEdit()));
+      stateEdit->addTransition(ct);
+      stateEdit->addTransition(new EditKeyTransition(this));                        // key events
+      et = new EditTransition(this, stateEdit);                                     // edit->edit
+      connect(et, SIGNAL(triggered()), SLOT(endStartEdit()));
+      stateEdit->addTransition(et);
+      connect(stateEdit, SIGNAL(entered()), mscore, SLOT(setEditState()));
+      stateEdit->addTransition(new EditElementDragTransition(this, stateDragEdit));  // edit->editDrag
+      EditCanvasDragTransition* ent = new EditCanvasDragTransition(this, stateDrag); // edit->drag
+      connect(ent, SIGNAL(triggered()), SLOT(endEdit()));
+      stateEdit->addTransition(ent);
+
+      // setup drag edit state
+      cl = new QEventTransition(this, QEvent::MouseButtonRelease);
+      cl->setTargetState(stateEdit);
+      stateDragEdit->addTransition(cl);
+      stateDragEdit->addTransition(new DragEditTransition(this));
+      connect(stateDragEdit, SIGNAL(exited()), SLOT(endDragEdit()));
+
+      // setup lasso state
+      cl = new QEventTransition(this, QEvent::MouseButtonRelease);            // ->normal
+      cl->setTargetState(stateNormal);
+      stateLasso->addTransition(cl);
+      stateLasso->addTransition(new class DragLassoTransition(this));         // drag
+      connect(stateLasso, SIGNAL(exited()), SLOT(endLasso()));
+
+      // setup note entry state
+      stateNoteEntry->assignProperty(this, "cursor", QCursor(Qt::UpArrowCursor));
+      stateNoteEntry->addTransition(new CommandTransition("escape", stateNormal));        // ->normal
+      stateNoteEntry->addTransition(new CommandTransition("note-input", stateNormal));    // ->normal
+      connect(stateNoteEntry, SIGNAL(entered()), mscore, SLOT(setNoteEntryState()));
+      connect(stateNoteEntry, SIGNAL(entered()), SLOT(startNoteEntry()));
+      connect(stateNoteEntry, SIGNAL(exited()), SLOT(endNoteEntry()));
+      stateNoteEntry->addTransition(new NoteEntryDragTransition(this));                   // mouse drag
+      stateNoteEntry->addTransition(new NoteEntryButtonTransition(this));                 // mouse button
+
+      // setup normal drag canvas state
+      cl = new QEventTransition(this, QEvent::MouseButtonRelease);
+      cl->setTargetState(stateNormal);
+      stateDrag->addTransition(cl);
+      connect(stateDrag, SIGNAL(entered()), SLOT(deselectAll()));
+      stateDrag->addTransition(new DragTransition(this));
+      stateDrag->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+
+      sm->addState(stateActive);
+      stateActive->setInitialState(stateNormal);
+      sm->setInitialState(stateActive);
+
+      stateNormal->addTransition(new CommandTransition("mag", stateMag));
+
+      // debug:
+      connect(stateActive,     SIGNAL(entered()), SLOT(enterState()));
+      connect(stateNormal,     SIGNAL(entered()), SLOT(enterState()));
+      connect(stateDragObject, SIGNAL(entered()), SLOT(enterState()));
+      connect(stateEdit,       SIGNAL(entered()), SLOT(enterState()));
+      connect(stateDragEdit,   SIGNAL(entered()), SLOT(enterState()));
+      connect(stateLasso,      SIGNAL(entered()), SLOT(enterState()));
+      connect(stateNoteEntry,  SIGNAL(entered()), SLOT(enterState()));
+      connect(stateMag,        SIGNAL(entered()), SLOT(enterState()));
+      connect(stateDrag,       SIGNAL(entered()), SLOT(enterState()));
+
+      connect(stateActive,     SIGNAL(exited()), SLOT(exitState()));
+      connect(stateNormal,     SIGNAL(exited()), SLOT(exitState()));
+      connect(stateDragObject, SIGNAL(exited()), SLOT(exitState()));
+      connect(stateEdit,       SIGNAL(exited()), SLOT(exitState()));
+      connect(stateDragEdit,   SIGNAL(exited()), SLOT(exitState()));
+      connect(stateLasso,      SIGNAL(exited()), SLOT(exitState()));
+      connect(stateNoteEntry,  SIGNAL(exited()), SLOT(exitState()));
+      connect(stateMag,        SIGNAL(exited()), SLOT(exitState()));
+      connect(stateDrag,       SIGNAL(exited()), SLOT(exitState()));
+      sm->start();
+      //-----------------------------------------------------------------------
+
       setAcceptDrops(true);
       setAttribute(Qt::WA_NoSystemBackground);
       setFocusPolicy(Qt::StrongFocus);
@@ -80,19 +621,18 @@ Canvas::Canvas(QWidget* parent)
       dragObject       = 0;
       navigator        = 0;
       _score           = 0;
-      dragCanvasState  = false;
-      draggedCanvas    = false;
       _bgColor         = Qt::darkBlue;
       _fgColor         = Qt::white;
       fgPixmap         = 0;
       bgPixmap         = 0;
       lasso            = new Lasso(_score);
 
-      state            = NORMAL;
       cursor           = 0;
       shadowNote       = 0;
       mousePressed     = false;
       grips            = 0;
+      origEditObject   = 0;
+      editObject       = 0;
 
       if (debugMode)
             setMouseTracking(true);
@@ -145,13 +685,8 @@ void Canvas::setScore(Score* s)
             navigator->setScore(_score);
             updateNavigator(false);
             }
-      connect(s, SIGNAL(moveCursor()),    SLOT(moveCursor()));
       connect(s, SIGNAL(updateAll()),     SLOT(update()));
       connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
-      connect(s, SIGNAL(stateChanged(Viewer::State)), SLOT(setState(Viewer::State)));
-      connect(s, SIGNAL(moveCursor()),             SLOT(moveCursor()));
-      connect(s, SIGNAL(startEdit(Element*,int)),  SLOT(startEdit(Element*,int)));
-      connect(s, SIGNAL(adjustCanvasPosition(Element*,bool)), SLOT(adjustCanvasPosition(Element*,bool)));
       }
 
 //---------------------------------------------------------
@@ -160,29 +695,31 @@ void Canvas::setScore(Score* s)
 
 bool Canvas::event(QEvent* ev)
       {
+#if 0
       if (ev->type() == QEvent::KeyPress) {
             QKeyEvent* ke = (QKeyEvent*) ev;
             if (debugMode) {
                   printf("key key:%x modifiers:%x text:<%s>\n", ke->key(),
                      int(ke->modifiers()), qPrintable(ke->text()));
                   }
-            int k = ke->key();
-            if ((state == EDIT) && ((k == Qt::Key_Tab) || (k == Qt::Key_Backtab))) {
-                  keyPressEvent(ke);
-                  return true;
-                  }
+//            int k = ke->key();
+//TODO-S            if ((state == EDIT) && ((k == Qt::Key_Tab) || (k == Qt::Key_Backtab))) {
+//                  keyPressEvent(ke);
+//                  return true;
+//                  }
             }
       if (ev->type() == QEvent::InputMethod) {
             QInputMethodEvent* ie = static_cast<QInputMethodEvent*>(ev);
-            if (state != EDIT && state != DRAG_EDIT)
-                  return false;
-            Element* e = _score->editObject;
+//TODO-S            if (state != EDIT && state != DRAG_EDIT)
+//                  return false;
+            Element* e = editObject;
             if (e->edit(this, curGrip, 0, 0, ie->commitString())) {
                   updateGrips();
                   _score->end();
                   return true;
                   }
             }
+#endif
       return QWidget::event(ev);
       }
 
@@ -195,19 +732,6 @@ Canvas::~Canvas()
       delete lasso;
       delete cursor;
       delete shadowNote;
-      }
-
-//---------------------------------------------------------
-//   cavasPopup
-//---------------------------------------------------------
-
-void Canvas::canvasPopup(const QPoint& pos)
-      {
-      QMenu* popup = mscore->genCreateMenu();
-      setState(NORMAL);
-      _score->setLayoutAll(true);
-      _score->end();
-      popup->popup(pos);
       }
 
 //---------------------------------------------------------
@@ -253,12 +777,13 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             // these actions are already activated
             return;
             }
-      _score->startCmd();
       if (cmd == "list")
             mscore->showElementContext(obj);
       else if (cmd == "edit") {
-            if (startEdit(obj, -1))
+            if (obj->isEditable()) {
+                  startEdit(obj);
                   return;
+                  }
             }
       else if (cmd == "select-similar")
             score()->selectSimilar(obj, false);
@@ -266,9 +791,11 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             score()->selectSimilar(obj, true);
       else if (cmd == "select-dialog")
             score()->selectElementDialog(obj);
-      else
+      else {
+            _score->startCmd();
             obj->propertyAction(cmd);
-      _score->endCmd();
+            _score->endCmd();
+            }
       }
 
 //---------------------------------------------------------
@@ -345,8 +872,10 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       else if (cmd == "color")
             _score->colorItem(obj);
       else if (cmd == "edit") {
-            if (startEdit(obj, -1))
+            if (obj->isEditable()) {
+                  startEdit(obj);
                   return;
+                  }
             }
       else if (cmd == "edit-drumset") {
             EditDrumset drumsetEdit(staff->part()->drumset(), this);
@@ -409,398 +938,12 @@ void Canvas::updateNavigator(bool layoutChanged) const
       }
 
 //---------------------------------------------------------
-//   mousePressEvent
-//---------------------------------------------------------
-
-void Canvas::mousePressEvent(QMouseEvent* ev)
-      {
-      mousePressed = true;
-
-      bool b1 = ev->button() == Qt::LeftButton;
-      bool b3 = ev->button() == Qt::RightButton;
-
-      if (ev->buttons() != ev->button()) {
-#ifdef Q_WS_MAC
-			//allow control click
-			if (! (b3 && ev->buttons() == (Qt::LeftButton))){
-#endif
-			if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
-                  ++level;
-                  mouseReleaseEvent(ev);
-                  b1 = true;
-                  b3 = false;
-                  }
-            else
-                  return;
-            }
-#ifdef Q_WS_MAC
-			}
-#endif
-
-      if (state == MAG) {
-            zoom(b1 ? 2 : -1, ev->pos());
-            return;
-            }
-
-      Qt::KeyboardModifiers keyState = ev->modifiers();
-      Qt::MouseButtons buttonState = ev->button();
-      startMove   = imatrix.map(QPointF(ev->pos()));
-
-      dragObject = elementNear(startMove);
-
-      if (mscore->playEnabled() && dragObject && dragObject->type() == NOTE) {
-            Note* note = static_cast<Note*>(dragObject);
-            Part* part = note->staff()->part();
-            int pitch  = note->ppitch();
-            Instrument* i = part->instrument();
-            seq->startNote(i->channel[note->subchannel()], pitch, 60, 1000, note->tuning());
-            }
-
-      //-----------------------------------------
-      //  context menus
-      //-----------------------------------------
-
-      if (b3) {
-            if (dragObject) {
-                  ElementType type = dragObject->type();
-                  _score->dragStaff = 0;
-                  if (type == MEASURE) {
-                        _score->dragSystem = (System*)(dragObject->parent());
-                        _score->dragStaff  = getStaff(_score->dragSystem, startMove);
-                        }
-                  // As findSelectableElement may return a measure
-                  // when clicked "a little bit" above or below it, getStaff
-                  // may not find the staff and return -1, which would cause
-                  // select() to crash
-                  if (!dragObject->selected() && _score->dragStaff >= 0) {
-                        SelectType st = SELECT_SINGLE;
-                        if (keyState == Qt::NoModifier)
-                              st = SELECT_SINGLE;
-                        else if (keyState & Qt::ShiftModifier)
-                              st = SELECT_RANGE;
-                        else if (keyState & Qt::ControlModifier)
-                              st = SELECT_ADD;
-                        _score->select(dragObject, st, _score->dragStaff);
-                        }
-                  seq->stopNotes();       // stop now because we dont get a mouseRelease event
-                  if (type == MEASURE) {
-                        measurePopup(ev->globalPos(), (Measure*)dragObject);
-                        }
-                  else {
-                        objectPopup(ev->globalPos(), dragObject);
-                        }
-                  dragObject = 0;
-                  }
-            else {
-                  canvasPopup(ev->globalPos());
-                  }
-            return;
-            }
-      if (state != EDIT)
-            _score->startCmd();
-      switch (state) {
-            case NORMAL:
-                  //-----------------------------------------
-                  //  select operation
-                  //-----------------------------------------
-
-                  if (dragObject) {
-                        ElementType type = dragObject->type();
-                        _score->dragStaff = 0;
-                        if (type == MEASURE) {
-                              _score->dragSystem = (System*)(dragObject->parent());
-                              _score->dragStaff  = getStaff(_score->dragSystem, startMove);
-                              }
-                        // As findSelectableElement may return a measure
-                        // when clicked "a little bit" above or below it, getStaff
-                        // may not find the staff and return -1, which would cause
-                        // select() to crash
-                        if (_score->dragStaff >= 0) {
-                              SelectType st = SELECT_SINGLE;
-                              if (keyState == Qt::NoModifier)
-                                    st = SELECT_SINGLE;
-                              else if (keyState & Qt::ShiftModifier)
-                                    st = SELECT_RANGE;
-                              else if (keyState & Qt::ControlModifier)
-                                    st = SELECT_ADD;
-                              _score->select(dragObject, st, _score->dragStaff);
-                              }
-                        else
-                              dragObject = 0;
-                        }
-                  else {
-                        // shift+drag selects "lasso mode"
-                        if (!(keyState & Qt::ShiftModifier)) {
-                              dragCanvasState = true;
-                              draggedCanvas = false;
-                              setCursor(Qt::SizeAllCursor);
-                              }
-                        update();
-                        }
-                  _score->setLayoutAll(false);
-                  _score->end();    // update
-                  break;
-
-            case NOTE_ENTRY:
-                  if (keyState & Qt::ControlModifier || ev->button() == Qt::MidButton) {
-                        dragCanvasState = true;
-                        // don't deselect when dragging in note entry mode
-                        draggedCanvas = true;
-                        setCursor(Qt::SizeAllCursor);
-                        }
-                  else
-                        _score->putNote(startMove, keyState & Qt::ShiftModifier);
-                  break;
-
-            case EDIT:
-                  if (ev->button() == Qt::MidButton) {
-                        // clipboard paste
-                        _score->editObject->mousePress(startMove, ev);
-                        break;
-                        }
-                  for (int i = 0; i < grips; ++i) {
-                        if (grip[i].contains(startMove)) {
-                              curGrip = i;
-                              setState(DRAG_EDIT);
-                              break;
-                              }
-                        }
-                  if (state == DRAG_EDIT)
-                        break;
-                  else if (_score->editObject->mousePress(startMove, ev))
-                        update();
-                  else {
-                        if (dragObject) {
-                              ElementType type = dragObject->type();
-                              _score->dragStaff = 0;
-                              if (type == MEASURE) {
-                                    _score->dragSystem = (System*)(dragObject->parent());
-                                    _score->dragStaff  = getStaff(_score->dragSystem, startMove);
-                                    }
-                              // As findSelectableElement may return a measure
-                              // when clicked "a little bit" above or below it, getStaff
-                              // may not find the staff and return -1, which would cause
-                              // select() to crash
-                              if (_score->dragStaff >= 0) {
-                                    SelectType st = SELECT_SINGLE;
-                                    if (keyState == Qt::NoModifier)
-                                          st = SELECT_SINGLE;
-                                    else if (keyState & Qt::ShiftModifier)
-                                          st = SELECT_RANGE;
-                                    else if (keyState & Qt::ControlModifier)
-                                          st = SELECT_ADD;
-                                    _score->select(dragObject, st, _score->dragStaff);
-                                    }
-                              else
-                                    dragObject = 0;
-                              }
-                        setState(NORMAL);
-                        }
-                  break;
-
-            default:
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   mouseDoubleClickEvent
-//---------------------------------------------------------
-
-void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
-      {
-      if (state == EDIT)
-            return;
-
-      if (dragObject) {
-            _score->startCmd();
-            _score->setLayoutAll(false);
-            if (!startEdit(dragObject, -1)) {
-                  _score->endCmd();
-                  }
-            }
-      else
-            mousePressEvent(ev);
-      }
-
-//---------------------------------------------------------
-//   mouseMoveEvent
-//---------------------------------------------------------
-
-void Canvas::mouseMoveEvent(QMouseEvent* ev)
-      {
-      if (QApplication::mouseButtons() == Qt::MidButton && dragObject) {
-            QString mimeType = _score->selection()->mimeType();
-            if (!mimeType.isEmpty()) {
-                  QDrag* drag = new QDrag(this);
-                  drag->setPixmap(QPixmap());
-                  QMimeData* mimeData = new QMimeData;
-                  mimeData->setData(mimeType, _score->selection()->mimeData());
-                  drag->setMimeData(mimeData);
-                  _score->endCmd();
-                  drag->start(Qt::CopyAction);
-                  return;
-                  }
-            }
-      Element* e = _score->editObject;
-      if (QApplication::mouseButtons() == Qt::LeftButton && e && e->isTextB()) {
-            TextB* text = static_cast<TextB*>(e);
-            QPointF pt   = imatrix.map(QPointF(ev->pos()));
-            text->dragTo(pt);
-            return;
-            }
-
-      mouseMoveEvent1(ev);
-      if (dragCanvasState)
-           return;
-      if (state == LASSO || state == NOTE_ENTRY)
-            _score->setLayoutAll(false);  // DEBUG
-      _score->end();
-      }
-
-//---------------------------------------------------------
-//   mouseMoveEvent1
-//---------------------------------------------------------
-
-void Canvas::mouseMoveEvent1(QMouseEvent* ev)
-      {
-      if (dragCanvasState) {
-            QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
-            int dx   = d.x();
-            int dy   = d.y();
-            QApplication::sendPostedEvents(this, 0);
-
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
-            imatrix = _matrix.inverted();
-            scroll(dx, dy, QRect(0, 0, width(), height()));
-
-            //
-            // this is necessary at least for qt4.1:
-            //
-            if ((dx > 0 || dy < 0) && navigatorVisible()) {
-	            QRect r(navigator->geometry());
-            	r.translate(dx, dy);
-            	update(r);
-                  }
-            updateNavigator(false);
-            if (!draggedCanvas)
-                  draggedCanvas = true;
-            return;
-            }
-
-      QPointF p     = imatrix.map(QPointF(ev->pos()));
-      QPointF delta = p - startMove;
-
-      switch (state) {
-            case NORMAL:
-                  if (QApplication::mouseButtons() == 0)    // debug
-                        return;
-                  if (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0)
-                        return;
-//                  {
-                  if (dragObject && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
-                        // drag selection
-                        QString mimeType = _score->selection()->mimeType();
-                        if (!mimeType.isEmpty()) {
-                              QDrag* drag = new QDrag(this);
-                              QMimeData* mimeData = new QMimeData;
-                              mimeData->setData(mimeType, score()->selection()->mimeData());
-                              drag->setMimeData(mimeData);
-                              _score->endCmd();
-                              //
-                              //  also set into the clipboard
-                              //
-                              QMimeData* clip = new QMimeData();
-                              clip->setData(mimeType, score()->selection()->mimeData());
-                              QApplication::clipboard()->setMimeData(clip);
-                              drag->start(Qt::CopyAction);
-                              }
-                        break;
-                        }
-                  if (dragObject && dragObject->isMovable()) {
-                        QPointF o;
-                        if (_score->selection()->state() != SEL_STAFF && _score->selection()->state() != SEL_SYSTEM) {
-                              _score->startDrag(dragObject);
-                              o = QPointF(dragObject->userOff());
-                              setState(DRAG_OBJ);
-                              }
-                        startMove -= o;
-                        break;
-                        }
-                  if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
-                        setState(LASSO);
-                  else {
-                        dragCanvasState = true;
-                        setCursor(QCursor(Qt::SizeAllCursor));
-                        return;
-                        }
-//                  }
-                  break;
-            case LASSO:
-                  _score->addRefresh(lasso->abbox());
-                  {
-                  QRectF r;
-                  r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
-                  lasso->setbbox(r);
-                  _lassoRect = lasso->abbox().normalized();
-                  r = _matrix.mapRect(_lassoRect);
-                  QSize sz(r.size().toSize());
-                  QString s("%1 x %2");
-                  mscore->statusBar()->showMessage(
-                     s.arg(sz.width()).arg(sz.height()), 3000);
-                  }
-                  _score->addRefresh(lasso->abbox());
-                  _score->lassoSelect(lasso->abbox());
-                  break;
-
-            case EDIT:
-                  break;
-
-
-            case DRAG_EDIT:
-                  {
-                  _score->setLayoutAll(false);
-                  Element* e = _score->editObject;
-                  score()->addRefresh(e->abbox());
-                  e->editDrag(curGrip, delta);
-                  updateGrips();
-                  startMove += delta;
-                  }
-                  break;
-
-            case DRAG_OBJ:
-                  {
-                  _score->drag(delta);
-                  Element* e = _score->getSelectedElement();
-                  if (e) {
-                        QLineF anchor = e->dragAnchor();
-                        if (!anchor.isNull())
-                              setDropAnchor(anchor);
-                        else
-                              setDropTarget(0); // this also resets dropAnchor
-                        }
-                  }
-                  break;
-
-            case NOTE_ENTRY:
-                  _score->addRefresh(shadowNote->abbox());
-                  setShadowNote(p);
-                  _score->addRefresh(shadowNote->abbox());
-                  break;
-
-            case MAG:
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
 //   updateGrips
 //---------------------------------------------------------
 
 void Canvas::updateGrips()
       {
-      Element* e = _score->editObject;
+      Element* e = editObject;
       if (e == 0)
             return;
 
@@ -827,85 +970,6 @@ void Canvas::updateGrips()
       else
             setDropTarget(0); // this also resets dropAnchor
       score()->addRefresh(e->abbox());
-      }
-
-//---------------------------------------------------------
-//   mouseReleaseEvent
-//---------------------------------------------------------
-
-void Canvas::mouseReleaseEvent(QMouseEvent* ev)
-      {
-      if (ev->button() == Qt::RightButton && ev->buttons() == Qt::LeftButton) {
-            _score->endCmd();
-            return;
-            }
-
-      if (ev->buttons() == 0)
-            level = 0;
-      if (dragCanvasState) {
-            dragCanvasState = false;
-            setCursor(QCursor(Qt::ArrowCursor));
-            mousePressed = false;
-            if (!draggedCanvas)
-                  _score->select(0, SELECT_SINGLE, 0);
-            _score->endCmd();
-            return;
-            }
-      if (!mousePressed) {
-            //
-            // this happens if a pulldown menu is pressed and the
-            // mouse release happens on the canvas
-            //
-            if (debugMode)
-                  printf("...spurious mouse release\n");
-            return;
-            }
-      mousePressed = false;
-
-      seq->stopNotes();
-
-      if (state == EDIT)
-            return;
-      if (state == MAG) {
-            if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
-                  return;
-            setState(NORMAL);
-            return;
-            }
-      switch (state) {
-            case DRAG_EDIT:
-                  setState(EDIT);
-                  break;
-
-            case LASSO:
-                  setState(NORMAL);
-                  _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
-                  lasso->setbbox(QRectF());
-                  _score->lassoSelectEnd(lasso->abbox());
-                  break;
-
-            case DRAG_OBJ:
-                  setState(NORMAL);
-                  break;
-
-            case NOTE_ENTRY:
-                  break;
-
-            case NORMAL:
-                  if (!dragObject)
-                        _score->select(0, SELECT_SINGLE, 0);      // deselect all
-                  break;
-
-            default:
-                  setState(NORMAL);
-                  break;
-            }
-
-      // here we can be in state EDIT again
-      if (state != EDIT)
-            _score->endCmd();
-      else
-            _score->end();
       }
 
 //---------------------------------------------------------
@@ -947,114 +1011,6 @@ void Canvas::setForeground(const QColor& color)
       }
 
 //---------------------------------------------------------
-//   setState
-//---------------------------------------------------------
-
-void Canvas::setState(State action)
-      {
-      static const char* stateNames[] = {
-            "NORMAL", "DRAG_OBJ", "EDIT", "DRAG_EDIT", "LASSO", "NOTE_ENTRY", "MAG"
-            };
-      int stateTable[7][7] = {
-//action      NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
-/*NORMAL     */ {  1,       99,    8,         0,     6,          2,   4 },
-/*DRAG_OBJ   */ { 12,        1,    0,         0,     0,          0,   0 },
-/*EDIT       */ {  9,        0,    1,        99,     0,          0,   0 },
-/*DRAG_EDIT  */ { 11,        0,   13,         1,     0,          0,   0 },
-/*LASSO      */ {  7,        0,    0,         0,     1,          0,   0 },
-/*NOTE_ENTRY */ {  3,        0,   10,         0,     0,          1,   0 },
-/*MAG        */ {  5,        0,    0,         0,     0,          0,   1 },
-      };
-
-      if (debugMode)
-            printf("Canvas::setState: switch from %s to %s\n", stateNames[state], stateNames[action]);
-
-      switch(stateTable[state][action]) {
-            default:
-            case 0:
-                  printf("illegal state switch from %s to %s\n",
-                     stateNames[state], stateNames[action]);
-                  break;
-            case 1:
-                  break;
-            case 2:     // NORMAL     - NOTE_ENTRY
-                  setCursor(QCursor(Qt::UpArrowCursor));
-                  setMouseTracking(true);
-                  shadowNote->setVisible(true);
-                  setCursorOn(true);
-                  state = action;
-                  break;
-            case 3:     // NOTE_ENTRY - NORMAL
-                  setCursor(QCursor(Qt::ArrowCursor));
-                  setMouseTracking(false);
-                  shadowNote->setVisible(false);
-                  setCursorOn(false);
-                  state = action;
-                  break;
-            case 4:     // NORMAL - MAG
-                  setCursor(QCursor(Qt::SizeAllCursor));
-                  state = action;
-                  break;
-            case 5:     // MAG        - NORMAL
-                  setCursor(QCursor(Qt::ArrowCursor));
-                  state = action;
-                  break;
-            case 6:     // NORMAL - LASSO
-                  lasso->setVisible(true);
-                  state = action;
-                  break;
-            case 7:     // LASSO - NORMAL
-                  lasso->setVisible(false);
-                  state = action;
-                  break;
-            case 8:     // NORMAL - EDIT
-                  state = action;
-                  break;
-            case  9:     // EDIT      - NORMAL
-            case 11:     // DRAG_EDIT - NORMAL
-                  state = action;
-                  setDropTarget(0);
-                  setEditText(0);
-                  break;
-            case 10:    // NOTE_ENTRY - EDIT
-                  state = action;
-                  setCursor(QCursor(Qt::ArrowCursor));
-                  setMouseTracking(false);
-                  shadowNote->setVisible(false);
-                  setCursorOn(false);
-                  break;
-            case 12:    // DRAG_OBJ - NORMAL
-                  _score->endDrag();
-                  setDropTarget(0); // this also resets dropAnchor
-                  state = NORMAL;
-                  break;
-            case 13:    // DRAG_EDIT - EDIT
-                  _score->addRefresh(_score->editObject->abbox());
-                  _score->editObject->endEditDrag();
-                  updateGrips();
-                  setDropTarget(0); // this also resets dropRectangle and dropAnchor
-                  _score->addRefresh(_score->editObject->abbox());
-                  state = EDIT;
-                  break;
-
-            case 99:
-                  state = action;
-                  break;
-            }
-      _score->addRefresh(shadowNote->abbox());
-      _score->addRefresh(cursor->abbox());
-      }
-
-//---------------------------------------------------------
-//   magCanvas
-//---------------------------------------------------------
-
-void Canvas::magCanvas()
-      {
-      setState(MAG);
-      }
-
-//---------------------------------------------------------
 //   dataChanged
 //---------------------------------------------------------
 
@@ -1076,28 +1032,59 @@ void Canvas::redraw(const QRectF& fr)
 //   startEdit
 //---------------------------------------------------------
 
-bool Canvas::startEdit(Element* element, int startGrip)
+void Canvas::startEdit(Element* element, int startGrip)
       {
-printf("Cavnas::startEdit\n");
+      origEditObject = element;
+      startEdit();
+      editObject->updateGrips(&grips, grip);
+      if (startGrip == -1)
+            curGrip = grips-1;
+      else if (startGrip >= 0)
+            curGrip = startGrip;
+      // startGrip == -2  -> do not change curGrip
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void Canvas::startEdit()
+      {
+printf("Canvas::startEdit: %s\n", origEditObject->name());
+      score()->startCmd();
+      score()->setLayoutAll(false);
       dragObject = 0;
-      if (element->startEdit(this, startMove)) {
-            setFocus();
-            _score->startEdit(element);
-            // setState(EDIT);
-            qreal w = 8.0 / _matrix.m11();
-            qreal h = 8.0 / _matrix.m22();
-            QRectF r(-w*.5, -h*.5, w, h);
-            for (int i = 0; i < 4; ++i)
-                  grip[i] = r;
-            _score->editObject->updateGrips(&grips, grip);
-            if (startGrip == -1)
-                  curGrip = grips-1;
-            else if (startGrip >= 0)
-                  curGrip = startGrip;
-            // startGrip == -2  -> do not change curGrip
-            return true;
+      origEditObject->startEdit(this, startMove);
+      setFocus();
+      if (origEditObject->isTextB()) {
+            editObject = origEditObject;
+            TextB* t = static_cast<TextB*>(editObject);
+            _editText = t;
+            mscore->textTools()->setText(t);
+            mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
+            mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
+            textUndoLevel = 0;
+            connect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
-      return false;
+      else {
+            editObject = origEditObject->clone();
+            editObject->setSelected(true);
+            origEditObject->resetMode();
+            _score->undoChangeElement(origEditObject, editObject);
+            _score->select(editObject, SELECT_SINGLE, 0);
+            _score->removeBsp(origEditObject);
+            }
+      _score->setLayoutAll(true);
+      _score->end();
+
+      qreal w = 8.0 / _matrix.m11();
+      qreal h = 8.0 / _matrix.m22();
+      QRectF r(-w*.5, -h*.5, w, h);
+      for (int i = 0; i < 4; ++i)
+            grip[i] = r;
+      editObject->updateGrips(&grips, grip);
+      curGrip = grips-1;
+      score()->end();
       }
 
 //---------------------------------------------------------
@@ -1110,7 +1097,7 @@ void Canvas::clearScore()
       shadowNote->setVisible(false);
       update();
 //TODO      padState.pitch = 64;
-      setState(NORMAL);
+//TODO-S      setState(NORMAL);
       }
 
 //---------------------------------------------------------
@@ -1258,7 +1245,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
             if (navigator)
                   navigator->layoutChanged();
-            if (state == EDIT || state == DRAG_EDIT)
+//TODO-S            if (state == EDIT || state == DRAG_EDIT)
+            if (grips)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
             }
@@ -1325,7 +1313,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
             p.drawRect(r);
             }
 
-      if (state == EDIT || state == DRAG_EDIT) {
+      if (grips) {
             qreal lw = 2.0/p.matrix().m11();
             // QPen pen(Qt::blue);
             QPen pen(preferences.defaultColor);
@@ -1952,7 +1940,7 @@ void Canvas::dropEvent(QDropEvent* event)
             score()->endCmd();
             dragElement = 0;
             setDropTarget(0); // this also resets dropRectangle and dropAnchor
-//DEBUG            setState(NORMAL);
+//DEBUG-S            setState(NORMAL);
             return;
             }
 
@@ -2002,10 +1990,10 @@ if (debugMode)
                   event->acceptProposedAction();
                   score()->endCmd();
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
-                  setState(NORMAL);
+//TODO-S                  setState(NORMAL);
                   return;
                   }
-            setState(NORMAL);
+//TODO-S            setState(NORMAL);
             return;
             }
 
@@ -2047,7 +2035,7 @@ if (debugMode)
       Element* el = elementAt(pos);
       if (el == 0 || el->type() != MEASURE) {
             setDropTarget(0);
-            setState(NORMAL);
+//TODO-S            setState(NORMAL);
             return;
             }
       Measure* measure = (Measure*) el;
@@ -2071,7 +2059,7 @@ if (debugMode)
             _score->endCmd();
             }
       setDropTarget(0); // this also resets dropRectangle and dropAnchor
-      setState(NORMAL);
+//TODO-S      setState(NORMAL);
       }
 
 //---------------------------------------------------------
@@ -2321,7 +2309,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                   }
             p.restore();
             }
-      Element* e = score()->dragObject();
+      Element* e = dragObject;
       if (e) {
             p.save();
             p.translate(e->canvasPos());
@@ -2329,7 +2317,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
             e->draw(p);
             p.restore();
             }
-      e = score()->editObject;
+      e = editObject;
       if (e) {
             p.save();
             p.translate(e->canvasPos());
@@ -2345,6 +2333,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
 
 void Canvas::paintLasso(QPainter& p, double mag)
       {
+#if 0 // TODO-S
       QRectF r = _matrix.mapRect(lassoRect());
       double x = r.x();
       double y = r.y();
@@ -2385,6 +2374,7 @@ void Canvas::paintLasso(QPainter& p, double mag)
       _matrix = omatrix;
       imatrix = _matrix.inverted();
       p.end();
+#endif
       }
 
 //---------------------------------------------------------
@@ -2443,21 +2433,577 @@ void Canvas::focusOutEvent(QFocusEvent* event)
 void Canvas::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
-      if (debugMode)
+//      if (debugMode)
             printf("Canvas::cmd <%s>\n", qPrintable(cmd));
 
-      if (cmd == "lyrics") {
+      if (cmd == "escape") {
+            if (mscore->state() == STATE_SEARCH)
+                  mscore->changeState(STATE_NORMAL);
+            sm->postEvent(new CommandEvent(cmd));
+            }
+      else if (cmd == "note-input")
+            sm->postEvent(new CommandEvent(cmd));
+#if 0 // TODO-S
+      else if (state == EDIT) {
+            if (cmd == "paste") {
+                  if (editObject->isTextB())
+                        static_cast<TextB*>(editObject)->paste();
+                  return;
+                  }
+            else if (cmd == "copy") {
+                  _score->cmdCopy();
+                  return;
+                  }
+            setState(NORMAL);
+            }
+#endif
+      else if (cmd == "lyrics") {
             _score->startCmd();
             Lyrics* lyrics = _score->addLyrics();
             if (lyrics) {
-                  startEdit(lyrics, -1);
+                  origEditObject = lyrics;
+printf("post lyrics command\n");
+                  sm->postEvent(new CommandEvent(cmd));
+                  // startEdit(lyrics, -1);
                   _score->setLayoutAll(true);
+                  _score->end();
                   return;     // no endCmd()
                   }
             _score->endCmd();
             }
+      else if (cmd == "mag")
+            sm->postEvent(new CommandEvent(cmd));
+      else if (cmd == "add-slur")
+            cmdAddSlur();
+      else if (cmd == "note-c")
+            cmdAddPitch(0, false);
+      else if (cmd == "note-d")
+            cmdAddPitch(1, false);
+      else if (cmd == "note-e")
+            cmdAddPitch(2, false);
+      else if (cmd == "note-f")
+            cmdAddPitch(3, false);
+      else if (cmd == "note-g")
+            cmdAddPitch(4, false);
+      else if (cmd == "note-a")
+            cmdAddPitch(5, false);
+      else if (cmd == "note-b")
+            cmdAddPitch(6, false);
+      else if (cmd == "chord-c")
+            cmdAddPitch(0, true);
+      else if (cmd == "chord-d")
+            cmdAddPitch(1, true);
+      else if (cmd == "chord-e")
+            cmdAddPitch(2, true);
+      else if (cmd == "chord-f")
+            cmdAddPitch(3, true);
+      else if (cmd == "chord-g")
+            cmdAddPitch(4, true);
+      else if (cmd == "chord-a")
+            cmdAddPitch(5, true);
+      else if (cmd == "chord-b")
+            cmdAddPitch(6, true);
+      else if (cmd == "chord-text")
+            cmdAddChordName();
+      else if (cmd == "title-text")
+            cmdAddText(TEXT_TITLE);
+      else if (cmd == "subtitle-text")
+            cmdAddText(TEXT_SUBTITLE);
+      else if (cmd == "composer-text")
+            cmdAddText(TEXT_COMPOSER);
+      else if (cmd == "poet-text")
+            cmdAddText(TEXT_POET);
+      else if (cmd == "copyright-text")
+            cmdAddText(TEXT_COPYRIGHT);
+      else if (cmd == "system-text")
+            cmdAddText(TEXT_SYSTEM);
+      else if (cmd == "staff-text")
+            cmdAddText(TEXT_STAFF);
+      else if (cmd == "rehearsalmark-text")
+            cmdAddText(TEXT_REHEARSAL_MARK);
+      else if (cmd == "edit-element") {
+            Element* e = _score->selection()->element();
+            if (e) {
+                  _score->setLayoutAll(false);
+                  startEdit(e);
+                  }
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void Canvas::startEdit(Element* e)
+      {
+      origEditObject = e;
+      sm->postEvent(new CommandEvent("edit"));
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Canvas::endEdit()
+      {
+printf("Canvas::endEdit\n");
+
+      setDropTarget(0);
+      setEditText(0);
+      _score->addRefresh(editObject->bbox());
+      editObject->endEdit();
+      _score->addRefresh(editObject->bbox());
+
+      if (editObject->isTextB()) {
+            TextB* t = static_cast<TextB*>(editObject);
+            // if (t->doc()->isUndoAvailable()) {
+            if (textUndoLevel)
+                  _score->undo()->push(new EditText(t, textUndoLevel));
+            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
+            }
+
+      int tp = editObject->type();
+
+      if (tp == LYRICS)
+            lyricsEndEdit();
+      else if (tp == HARMONY)
+            harmonyEndEdit();
+      _score->setLayoutAll(true);
+      _score->endCmd();
+      editObject = 0;
+      grips = 0;
+      }
+
+//---------------------------------------------------------
+//   startDrag
+//---------------------------------------------------------
+
+void Canvas::startDrag()
+      {
+      startMove -= dragObject->userOff();
+      _score->startCmd();
+      _startDragPosition = dragObject->userOff();
+      QList<Element*> el;
+      dragObject->scanElements(&el, collectElements);
+      foreach(Element* e, el)
+            _score->removeBsp(e);
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+void Canvas::drag(const QPointF& delta)
+      {
+      foreach(Element* e, *_score->selection()->elements())
+            _score->addRefresh(e->drag(delta));
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   endDrag
+//---------------------------------------------------------
+
+void Canvas::endDrag()
+      {
+      dragObject->endDrag();
+      QPointF npos = dragObject->userOff();
+      dragObject->setUserOff(_startDragPosition);
+      _score->undoMove(dragObject, npos);
+      _score->setLayoutAll(true);
+      dragObject = 0;
+      setDropTarget(0); // this also resets dropAnchor
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   textUndoLevelAdded
+//---------------------------------------------------------
+
+void Canvas::textUndoLevelAdded()
+      {
+      ++textUndoLevel;
+      }
+
+//---------------------------------------------------------
+//   startNoteEntry
+//---------------------------------------------------------
+
+void Canvas::startNoteEntry()
+      {
+      _score->inputState()._segment = 0;
+      Note* note  = 0;
+      Element* el = _score->selection()->activeCR() ? _score->selection()->activeCR() : _score->selection()->element();
+      if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
+            int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
+            el = static_cast<ChordRest*>(_score->searchNote(0, track));
+            if (el == 0) {
+printf("no note or rest selected 1\n");
+                  return;
+                  }
+            }
+      if (el->type() == CHORD) {
+            Chord* c = static_cast<Chord*>(el);
+            note = c->selectedNote();
+            if (note == 0)
+                  note = c->upNote();
+            el = note;
+            }
+
+      _score->select(el, SELECT_SINGLE, 0);
+      _score->inputState().noteEntryMode = true;
+      moveCursor();
+      _score->inputState().rest = false;
+      getAction("pad-rest")->setChecked(false);
+      setMouseTracking(true);
+      shadowNote->setVisible(true);
+      setCursorOn(true);
+      //
+      // TODO: check for valid duration
+      //
+      _score->setUpdateAll();
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   endNoteEntry
+//---------------------------------------------------------
+
+void Canvas::endNoteEntry()
+      {
+      _score->inputState()._segment = 0;
+      _score->inputState().noteEntryMode = false;
+      if (_score->inputState().slur) {
+            QList<SlurSegment*>* el = _score->inputState().slur->slurSegments();
+            if (!el->isEmpty())
+                  el->front()->setSelected(false);
+            static_cast<ChordRest*>(_score->inputState().slur->endElement())->addSlurBack(_score->inputState().slur);
+            _score->inputState().slur = 0;
+            }
+      moveCursor();
+      setMouseTracking(false);
+      shadowNote->setVisible(false);
+      setCursorOn(false);
+      _score->setUpdateAll();
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   enterState
+//    for debugging
+//---------------------------------------------------------
+
+void Canvas::enterState()
+      {
+      printf("enterState <%s>\n", qPrintable(sender()->objectName()));
+      }
+
+//---------------------------------------------------------
+//   exitState
+//    for debugging
+//---------------------------------------------------------
+
+void Canvas::exitState()
+      {
+      printf("exitState <%s>\n", qPrintable(sender()->objectName()));
+      }
+
+//---------------------------------------------------------
+//   contextPopup
+//---------------------------------------------------------
+
+void Canvas::contextPopup(QMouseEvent* ev)
+      {
+      QPoint gp = ev->globalPos();
+      startMove = toLogical(ev->pos());
+      Element* dragObject = elementNear(startMove);
+      if (dragObject) {
+            ElementType type = dragObject->type();
+            dragStaff = 0;
+            if (type == MEASURE) {
+                  dragSystem = (System*)(dragObject->parent());
+                  dragStaff  = getStaff(dragSystem, startMove);
+                  }
+            seq->stopNotes();       // stop now because we dont get a mouseRelease event
+            if (type == MEASURE)
+                  measurePopup(gp, static_cast<Measure*>(dragObject));
+            else
+                  objectPopup(gp, dragObject);
+            dragObject = 0;
+            }
+      else {
+            QMenu* popup = mscore->genCreateMenu();
+            _score->setLayoutAll(true);
+            _score->end();
+            popup->popup(gp);
+            }
+      }
+
+//---------------------------------------------------------
+//   dragCanvas
+//---------------------------------------------------------
+
+void Canvas::dragCanvas(QMouseEvent* ev)
+      {
+      QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
+      int dx   = d.x();
+      int dy   = d.y();
+
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      imatrix = _matrix.inverted();
+      scroll(dx, dy, QRect(0, 0, width(), height()));
+
+      //
+      // this is necessary at least for qt4.1:
+      //
+      if ((dx > 0 || dy < 0) && navigatorVisible()) {
+	      QRect r(navigator->geometry());
+      	r.translate(dx, dy);
+      	update(r);
+            }
+      updateNavigator(false);
+      if (!draggedCanvas)
+            draggedCanvas = true;
+      }
+
+//---------------------------------------------------------
+//   dragNoteEntry
+//    mouse move event in note entry mode
+//---------------------------------------------------------
+
+void Canvas::dragNoteEntry(QMouseEvent* ev)
+      {
+      QPointF p = toLogical(ev->pos());
+      _score->addRefresh(shadowNote->abbox());
+      setShadowNote(p);
+      _score->addRefresh(shadowNote->abbox());
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   noteEntryButton
+//    mouse button press in note entry mode
+//---------------------------------------------------------
+
+void Canvas::noteEntryButton(QMouseEvent* ev)
+      {
+      QPointF p = toLogical(ev->pos());
+      _score->startCmd();
+      _score->putNote(p, ev->modifiers() & Qt::ShiftModifier);
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   doDragElement
+//---------------------------------------------------------
+
+void Canvas::doDragElement(QMouseEvent* ev)
+      {
+      QPointF delta = toLogical(ev->pos()) - startMove;
+      drag(delta);
+      Element* e = _score->getSelectedElement();
+      if (e) {
+            QLineF anchor = e->dragAnchor();
+            if (!anchor.isNull())
+                  setDropAnchor(anchor);
+            else
+                  setDropTarget(0); // this also resets dropAnchor
+            }
+      }
+
+//---------------------------------------------------------
+//   select
+//---------------------------------------------------------
+
+void Canvas::select(QMouseEvent* ev)
+      {
+printf("select\n");
+      Qt::KeyboardModifiers keyState = ev->modifiers();
+      ElementType type = dragObject->type();
+      dragStaff = 0;
+      if (type == MEASURE) {
+            dragSystem = (System*)(dragObject->parent());
+            dragStaff  = getStaff(dragSystem, startMove);
+            }
+      // As findSelectableElement may return a measure
+      // when clicked "a little bit" above or below it, getStaff
+      // may not find the staff and return -1, which would cause
+      // select() to crash
+      if (dragStaff >= 0) {
+            SelectType st = SELECT_SINGLE;
+            if (keyState == Qt::NoModifier)
+                  st = SELECT_SINGLE;
+            else if (keyState & Qt::ShiftModifier)
+                  st = SELECT_RANGE;
+            else if (keyState & Qt::ControlModifier)
+                  st = SELECT_ADD;
+            _score->select(dragObject, st, dragStaff);
+            }
+      else
+            dragObject = 0;
+      _score->setLayoutAll(false);
+      _score->end();    // update
+      }
+
+//---------------------------------------------------------
+//   mousePress
+//---------------------------------------------------------
+
+void Canvas::mousePress(QMouseEvent* ev)
+      {
+      startMove   = imatrix.map(QPointF(ev->pos()));
+      dragObject  = elementNear(startMove);
+      }
+
+//---------------------------------------------------------
+//   testElementDragTransition
+//---------------------------------------------------------
+
+bool Canvas::testElementDragTransition(QMouseEvent* ev) const
+      {
+      if (dragObject == 0 || !dragObject->isMovable())
+            return false;
+      if (!(QApplication::mouseButtons() == Qt::LeftButton))
+            return false;
+      QPointF delta = toLogical(ev->pos()) - startMove;
+      return sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0;
+      }
+
+//---------------------------------------------------------
+//   endDragEdit
+//---------------------------------------------------------
+
+void Canvas::endDragEdit()
+      {
+      _score->addRefresh(editObject->abbox());
+      editObject->endEditDrag();
+      updateGrips();
+      setDropTarget(0); // this also resets dropRectangle and dropAnchor
+      _score->addRefresh(editObject->abbox());
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   doDragEdit
+//---------------------------------------------------------
+
+void Canvas::doDragEdit(QMouseEvent* ev)
+      {
+      QPointF p     = toLogical(ev->pos());
+      QPointF delta = p - startMove;
+      _score->setLayoutAll(false);
+      score()->addRefresh(editObject->abbox());
+      if (editObject->isTextB()) {
+            TextB* text = static_cast<TextB*>(editObject);
+            text->dragTo(p);
+            }
+      else {
+            editObject->editDrag(curGrip, delta);
+            updateGrips();
+            startMove = p;
+            }
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   editElementDragTransition
+//---------------------------------------------------------
+
+bool Canvas::editElementDragTransition(QMouseEvent* ev)
+      {
+      startMove = imatrix.map(QPointF(ev->pos()));
+      Element* e = elementNear(startMove);
+      if ((e == editObject) && (editObject->isTextB())) {
+            if (editObject->mousePress(startMove, ev)) {
+                  _score->addRefresh(editObject->abbox());
+                  _score->end();
+                  }
+            return true;
+            }
+      int i;
+      for (i = 0; i < grips; ++i) {
+            if (grip[i].contains(startMove)) {
+                  curGrip = i;
+                  updateGrips();
+                  score()->end();
+                  break;
+                  }
+            }
+      QPointF delta = toLogical(ev->pos()) - startMove;
+      return (i != grips) && (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0);
+      }
+
+//---------------------------------------------------------
+//   editCanvasDragTransition
+//    Check for mouse click outside of editObject.
+//---------------------------------------------------------
+
+bool Canvas::editCanvasDragTransition(QMouseEvent* ev)
+      {
+      QPointF p = toLogical(ev->pos());
+      Element* e = elementNear(p);
+      if (e != editObject) {
+            startMove  = p;
+            dragObject = e;
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   doDragLasso
+//---------------------------------------------------------
+
+void Canvas::doDragLasso(QMouseEvent* ev)
+      {
+      QPointF p = toLogical(ev->pos());
+      _score->addRefresh(lasso->abbox());
+      QRectF r;
+      r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
+      lasso->setbbox(r);
+      _lassoRect = lasso->abbox().normalized();
+      r = _matrix.mapRect(_lassoRect);
+      QSize sz(r.size().toSize());
+      mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
+      _score->addRefresh(lasso->abbox());
+      _score->lassoSelect(lasso->abbox());
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   endLasso
+//---------------------------------------------------------
+
+void Canvas::endLasso()
+      {
+      _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
+      lasso->setbbox(QRectF());
+      _score->lassoSelectEnd(lasso->abbox());
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   deselectAll
+//---------------------------------------------------------
+
+void Canvas::deselectAll()
+      {
+      _score->select(0, SELECT_SINGLE, 0);
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   noteEntryMode
+//---------------------------------------------------------
+
+bool Canvas::noteEntryMode() const
+      {
+      return sm->configuration().contains(stateNoteEntry);
       }
 

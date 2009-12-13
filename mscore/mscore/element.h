@@ -236,7 +236,8 @@ class Element {
       virtual void endDrag()                  {}
       virtual QLineF dragAnchor() const       { return QLineF(); }
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable()   { return !_generated; }
+      virtual void startEdit(Viewer*, const QPointF&) {}
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag()                               {}

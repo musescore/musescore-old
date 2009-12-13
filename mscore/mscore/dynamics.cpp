@@ -193,10 +193,10 @@ const QString Dynamic::subtypeName() const
 //   startEdit
 //---------------------------------------------------------
 
-bool Dynamic::startEdit(Viewer* v, const QPointF& p)
+void Dynamic::startEdit(Viewer* v, const QPointF& p)
       {
       setSubtype(0);
-      return Text::startEdit(v, p);
+      Text::startEdit(v, p);
       }
 
 //---------------------------------------------------------

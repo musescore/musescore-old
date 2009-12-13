@@ -869,10 +869,8 @@ bool TextB::readProperties(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool TextB::startEdit(Viewer* view, const QPointF& p)
+void TextB::startEdit(Viewer* view, const QPointF& p)
       {
-      if ((type() == TEXT) && (subtype() == TEXT_MEASURE_NUMBER))
-            return false;
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
@@ -894,7 +892,15 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
             }
       qreal w = 8.0 / view->matrix().m11();
       score()->addRefresh(abbox().adjusted(-w, -w, w, w));
-      return true;
+      }
+
+//---------------------------------------------------------
+//   isEditable
+//---------------------------------------------------------
+
+bool TextB::isEditable()
+      {
+      return !((type() == TEXT) && (subtype() == TEXT_MEASURE_NUMBER));
       }
 
 //---------------------------------------------------------

@@ -1,10 +1,14 @@
+13.dec (ws)
+      - move state information from Score() to Canvas()
+      - start code reorganization using QStateMachine
+      - Qt Version 4.6 is now required
 12.dec (db)
       - fix: Shift+3 (to add third below)
       - better sizing for clefs and breaks & spacer palette
       - remove "normal" channel from translation see http://www.musescore.org/en/node/3098
 11.dec (db)
       - improved wording of style dialog (particularly the "Page" section)
-      - significant number of capitalization/wording fixes 
+      - significant number of capitalization/wording fixes
        (I don't plan to make more significant capitalization fixes until next dev. cycle)
 9.dec (db)
       - use same name for palette title, Create menu item, and window title

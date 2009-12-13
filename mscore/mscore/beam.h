@@ -109,7 +109,7 @@ class Beam : public Element {
       virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 
       virtual bool isMovable() const                  { return false; }
-      virtual bool startEdit(Viewer*, const QPointF&) { return true; }
+      virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
 

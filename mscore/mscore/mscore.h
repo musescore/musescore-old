@@ -162,6 +162,7 @@ struct Command {
 class MuseScore : public QMainWindow {
       Q_OBJECT
 
+      ScoreState _sstate;
       UndoGroup* _undoGroup;
       QList<Score*> scoreList;
       Score* cs;              // current score
@@ -317,13 +318,15 @@ class MuseScore : public QMainWindow {
 
    public slots:
       void dirtyChanged(Score*);
-      void changeState(ScoreState);
       void setPos(int tick);
       void searchTextChanged(const QString& s);
       void pluginTriggered(int);
       void handleMessage(const QString& message);
       void setCurrentViewer(Viewer*);
       void setCurrentViewer(int);
+      void setNormalState()    { changeState(STATE_NORMAL); }
+      void setEditState()      { changeState(STATE_EDIT); }
+      void setNoteEntryState() { changeState(STATE_NOTE_ENTRY); }
 
    public:
       MuseScore();
@@ -372,6 +375,8 @@ class MuseScore : public QMainWindow {
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
       void loadPlugins();
+      ScoreState state() const { return _sstate; }
+      void changeState(ScoreState);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

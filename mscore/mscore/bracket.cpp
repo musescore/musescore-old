@@ -170,10 +170,9 @@ void Bracket::read(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool Bracket::startEdit(Viewer*, const QPointF&)
+void Bracket::startEdit(Viewer*, const QPointF&)
       {
       yoff = 0.0;
-      return true;
       }
 
 //---------------------------------------------------------

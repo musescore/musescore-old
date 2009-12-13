@@ -47,7 +47,8 @@ class Box : public MeasureBase {
       Box(Score*);
       virtual void draw(QPainter& p) const;
 
-      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool isEditable() { return true; }
+      virtual void startEdit(Viewer*, const QPointF&);
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();

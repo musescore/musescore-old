@@ -351,22 +351,21 @@ bool UndoGroup::isClean() const
  Common handling for ending undo or redo
 */
 
-void Score::endUndoRedo()
+void Canvas::endUndoRedo()
       {
-      if (_is._segment)
-            emit posChanged(_is.tick());
-
-      if (!noteEntryMode()) {
-            // no input state
-            setState(STATE_NORMAL);
-            }
-      else {
-            // input state
-            setState(STATE_NOTE_ENTRY);
-            }
-      selection()->update();
-      layoutAll = true;
-      end();
+      if (_score->inputState()._segment)
+            mscore->setPos(_score->inputState().tick());
+//TODO-S      if (state != NOTE_ENTRY) {
+//            // no input state
+//            setState(NORMAL);
+//            }
+//      else {
+//            // input state
+//            setState(NOTE_ENTRY);
+//            }
+      _score->selection()->update();
+      _score->setLayoutAll(true);
+      _score->end();
       }
 
 //---------------------------------------------------------

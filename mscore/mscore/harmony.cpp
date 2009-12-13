@@ -26,10 +26,10 @@
 #include "chordedit.h"
 #include "pitchspelling.h"
 #include "score.h"
-#include "sym.h"
 #include "system.h"
 #include "measure.h"
 #include "mscore.h"
+#include "canvas.h"
 
 static const bool useJazzFont = true;     // DEBUG
 
@@ -660,13 +660,13 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
 //   startEdit
 //---------------------------------------------------------
 
-bool Harmony::startEdit(Viewer* view, const QPointF& p)
+void Harmony::startEdit(Viewer* view, const QPointF& p)
       {
       if (!textList.isEmpty()) {
             QString s(harmonyName());
             setText(s);
             }
-      return TextB::startEdit(view, p);
+      TextB::startEdit(view, p);
       }
 
 //---------------------------------------------------------
@@ -784,7 +784,7 @@ const ChordDescription* Harmony::descr() const
 //   harmonyEndEdit
 //---------------------------------------------------------
 
-void Score::harmonyEndEdit()
+void Canvas::harmonyEndEdit()
       {
       Harmony* harmony = static_cast<Harmony*>(editObject);
       Harmony* origH   = static_cast<Harmony*>(origEditObject);

@@ -992,7 +992,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case SLUR:
                   delete e;
-                  score()->cmdAddSlur(this, 0);
+//TODO-S                  score()->cmdAddSlur(this, 0);
                   return 0;
 
             case HARMONY:
