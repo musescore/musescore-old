@@ -154,7 +154,6 @@ void Preferences::init()
 
       enableMidiInput    = true;
       playNotes          = true;
-      soundFont          = ":/data/piano1.sf2";
 
       lPort              = "";
       rPort              = "";
@@ -372,7 +371,7 @@ void Preferences::read()
       lPort           = s.value("lPort").toString();
       rPort           = s.value("rPort").toString();
 
-      soundFont       = s.value("soundFont", ":/data/piano1.sf2").toString();
+      soundFont       = s.value("soundFont", mscoreGlobalShare+"/sound/TimGM6mb.sf2").toString();
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();

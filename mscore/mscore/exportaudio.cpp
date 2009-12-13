@@ -48,14 +48,13 @@ bool Score::saveAudio(const QString& name, int format)
       else
             p = QString(getenv("DEFAULT_SOUNDFONT"));
       if (p.isEmpty()) {
-            //
-            // fallback to integrated soundfont
-            //
-            p = ":/data/piano1.sf2";
+            fprintf(stderr, "MuseScore: error: no soundfont configured\n");
+            delete synth;
+            return false;
             }
       bool rv = synth->loadSoundFont(p);
       if (!rv) {
-            fprintf(stderr, "loading sound font <%s> failed\n", qPrintable(p));
+            fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(p));
             delete synth;
             return false;
             }
