@@ -1761,6 +1761,9 @@ int main(int argc, char* av[])
 
       if (!useFactorySettings)
             preferences.read();
+      else {
+            preferences.soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
+            }
 
       QSplashScreen* sc = 0;
       if (!converterMode && !pluginMode && preferences.showSplashScreen) {

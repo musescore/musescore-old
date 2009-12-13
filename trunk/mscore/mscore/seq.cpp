@@ -219,24 +219,22 @@ bool Seq::init()
             else
                   p = QString(getenv("DEFAULT_SOUNDFONT"));
             if (p.isEmpty()) {
-                  //
-                  // fallback to integrated soundfont
-                  //
-                  p = ":/data/piano1.sf2";
+                  QMessageBox::critical(0, "MuseScore: Load SoundFont",
+                     "No SoundFont configured\n"
+                     "Playback will be disabled.");
                   }
-            if (debugMode)
-                  printf("load soundfont <%s>\n", qPrintable(p));
-            bool rv = synth->loadSoundFont(p);
-            if (!rv) {
-                  QString s = QString("Loading SoundFont\n"
-                                      "\"%1\"\n"
-                                      "failed. Playback will be disabled.\n\n"
-                                      "Go to Display > Synthesizer \n"
-                                      "and check that the file location is correct").arg(p);
-                  QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
-//                  delete driver;
-//                  driver = 0;
-//                  return false;
+            else {
+                  if (debugMode)
+                        printf("load soundfont <%s>\n", qPrintable(p));
+                  bool rv = synth->loadSoundFont(p);
+                  if (!rv) {
+                        QString s = QString("Loading SoundFont\n"
+                           "\"%1\"\n"
+                           "failed. Playback will be disabled.\n\n"
+                           "Go to Display > Synthesizer \n"
+                           "and check that the file location is correct").arg(p);
+                        QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
+                        }
                   }
             synth->setMasterTuning(preferences.tuning);
             synth->setMasterGain(preferences.masterGain);
