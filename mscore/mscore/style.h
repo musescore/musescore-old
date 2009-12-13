@@ -219,7 +219,7 @@ enum StyleIdx {
       ST_genCourtesyTimesig,
       ST_genCourtesyKeysig,
 
-      // 70
+      // 73
       ST_useGermanNoteNames,
       //
       ST_chordDescriptionFile,
@@ -231,7 +231,7 @@ enum StyleIdx {
       ST_stemDir1,
       ST_stemDir2,
 
-      // 80
+      // 82
       ST_stemDir3,
       ST_stemDir4,
       ST_gateTime,
@@ -251,6 +251,8 @@ enum StyleIdx {
       ST_SforzatoaccentAnchor,
       ST_EspressivoAnchor,
       ST_StaccatoAnchor,
+
+      // 100
       ST_UstaccatissimoAnchor,
       ST_DstaccatissimoAnchor,
       ST_TenutoAnchor,
@@ -261,6 +263,8 @@ enum StyleIdx {
       ST_OuvertAnchor,
       ST_PlusstopAnchor,
       ST_UpbowAnchor,
+
+      // 110
       ST_DownbowAnchor,
       ST_ReverseturnAnchor,
       ST_TurnAnchor,
@@ -271,14 +275,14 @@ enum StyleIdx {
       ST_PrallMordentAnchor,
       ST_UpPrallAnchor,
       ST_DownPrallAnchor,
+
+      // 120
       ST_UpMordentAnchor,
       ST_DownMordentAnchor,
       ST_SnappizzicatoAnchor,
-
       ST_ArpeggioNoteDistance,
       ST_ArpeggioLineWidth,
       ST_ArpeggioHookLen,
-
       ST_FixMeasureNumbers,
       ST_FixMeasureWidth,
 

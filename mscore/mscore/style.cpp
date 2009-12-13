@@ -56,23 +56,22 @@ StyleType styleTypes[] = {
       StyleType("doubleBarDistance",       ST_SPATIUM),
       StyleType("endBarDistance",          ST_SPATIUM),
       StyleType("repeatBarTips",           ST_BOOL),
-      StyleType("startBarlineSingle",           ST_BOOL),
-      StyleType("startBarlineMultiple",           ST_BOOL),
-
+      StyleType("startBarlineSingle",      ST_BOOL),
+      StyleType("startBarlineMultiple",    ST_BOOL),
       StyleType("bracketWidth",            ST_SPATIUM),     // system bracket width
       StyleType("bracketDistance",         ST_SPATIUM),     // system bracket distance
+
       StyleType("clefLeftMargin",          ST_SPATIUM),
       StyleType("keysigLeftMargin",        ST_SPATIUM),
       StyleType("timesigLeftMargin",       ST_SPATIUM),
-
       StyleType("clefKeyRightMargin",      ST_SPATIUM),
       StyleType("clefBarlineDistance",     ST_SPATIUM),
       StyleType("stemWidth",               ST_SPATIUM),
       StyleType("shortenStem",             ST_BOOL),        // ST_shortenStem,
       StyleType("shortStemProgression",    ST_SPATIUM),     // ST_shortStemProgression,
       StyleType("shortestStem",            ST_SPATIUM),
-
       StyleType("beginRepeatLeftMargin",   ST_SPATIUM),
+
       StyleType("minNoteDistance",         ST_SPATIUM),
       StyleType("barNoteDistance",         ST_SPATIUM),
       StyleType("noteBarDistance",         ST_SPATIUM),
@@ -80,10 +79,10 @@ StyleType styleTypes[] = {
       StyleType("staffLineWidth",          ST_SPATIUM),
       StyleType("ledgerLineWidth",         ST_SPATIUM),
       StyleType("akkoladeWidth",           ST_SPATIUM),
-
       StyleType("accidentalDistance",      ST_SPATIUM),
       StyleType("accidentalNoteDistance",  ST_SPATIUM),
       StyleType("beamWidth",               ST_SPATIUM),
+
       StyleType("beamDistance",            ST_DOUBLE),        // in beamWidth units
       StyleType("beamMinLen",              ST_SPATIUM),           // len for broken beams
       StyleType("beamMinSlope",            ST_DOUBLE),
@@ -91,10 +90,10 @@ StyleType styleTypes[] = {
       StyleType("maxBeamTicks",            ST_INT),
       StyleType("dotNoteDistance",         ST_SPATIUM),
       StyleType("dotRestDistance",         ST_SPATIUM),
-
       StyleType("dotDotDistance",          ST_SPATIUM),
       StyleType("propertyDistanceHead",    ST_SPATIUM),     // note property to note head
       StyleType("propertyDistanceStem",    ST_SPATIUM),     // note property to note stem
+
       StyleType("propertyDistance",        ST_SPATIUM),     // note property to note property
       StyleType("pageFillLimit",           ST_DOUBLE),      // 0-1.0
       StyleType("lastSystemFillLimit",     ST_DOUBLE),
@@ -102,10 +101,10 @@ StyleType styleTypes[] = {
       StyleType("hairpinContHeight",       ST_SPATIUM),
       StyleType("hairpinWidth",            ST_SPATIUM),
       StyleType("showPageNumber",          ST_BOOL),
-
       StyleType("showPageNumberOne",       ST_BOOL),
       StyleType("pageNumberOddEven",       ST_BOOL),
       StyleType("showMeasureNumber",       ST_BOOL),
+
       StyleType("showMeasureNumberOne",    ST_BOOL),
       StyleType("measureNumberInterval",   ST_INT),
       StyleType("measureNumberSystem",     ST_BOOL),
@@ -113,22 +112,23 @@ StyleType styleTypes[] = {
       StyleType("smallNoteMag",            ST_DOUBLE),
       StyleType("graceNoteMag",            ST_DOUBLE),
       StyleType("smallStaffMag",           ST_DOUBLE),
-
       StyleType("smallClefMag",            ST_DOUBLE),
       StyleType("genClef",                 ST_BOOL),           // create clef for all systems, not only for first
       StyleType("genKeysig",               ST_BOOL),         // create key signature for all systems
+
+      // 70
       StyleType("genTimesig",              ST_BOOL),
       StyleType("genCourtesyTimesig",      ST_BOOL),
       StyleType("genCourtesyKeysig",       ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
-      // StyleType("warnPitchRange",          ST_BOOL),
       StyleType("chordDescriptionFile",    ST_STRING),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
-
-/*70*/StyleType("createMultiMeasureRests", ST_BOOL),
+      StyleType("createMultiMeasureRests", ST_BOOL),
       StyleType("minEmptyMeasures",        ST_INT),         // minimum number of empty measures for multi measure rest
       StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
       StyleType("hideEmptyStaves",         ST_BOOL),
+
+      // 80
       StyleType("stemDir1",                ST_DIRECTION),
       StyleType("stemDir2",                ST_DIRECTION),
       StyleType("stemDir3",                ST_DIRECTION),
@@ -149,17 +149,20 @@ StyleType styleTypes[] = {
 
       StyleType("UfermataAnchor",          ST_INT),
       StyleType("DfermataAnchor",          ST_INT),
+
+      // 90
       StyleType("UshortfermataAnchor",     ST_INT),
       StyleType("DshortfermataAnchor",     ST_INT),
       StyleType("UlongfermataAnchor",      ST_INT),
       StyleType("DlongfermataAnchor",      ST_INT),
       StyleType("UverylongfermataAnchor",  ST_INT),
       StyleType("DverylongfermataAnchor",  ST_INT),
-
       StyleType("ThumbAnchor",             ST_INT),
       StyleType("SforzatoaccentAnchor",    ST_INT),
       StyleType("EspressivoAnchor",        ST_INT),
       StyleType("StaccatoAnchor",          ST_INT),
+
+      // 100
       StyleType("UstaccatissimoAnchor",    ST_INT),
       StyleType("DstaccatissimoAnchor",    ST_INT),
       StyleType("TenutoAnchor",            ST_INT),
@@ -170,6 +173,7 @@ StyleType styleTypes[] = {
       StyleType("OuvertAnchor",            ST_INT),
       StyleType("PlusstopAnchor",          ST_INT),
       StyleType("UpbowAnchor",             ST_INT),
+
       StyleType("DownbowAnchor",           ST_INT),
       StyleType("ReverseturnAnchor",       ST_INT),
       StyleType("TurnAnchor",              ST_INT),
@@ -180,13 +184,14 @@ StyleType styleTypes[] = {
       StyleType("PrallMordentAnchor",      ST_INT),
       StyleType("UpPrallAnchor",           ST_INT),
       StyleType("DownPrallAnchor",         ST_INT),
+
+      // 120
       StyleType("UpMordentAnchor",         ST_INT),
       StyleType("DownMordentAnchor",       ST_INT),
-
+      StyleType("SnappizzicatorAnchor",    ST_INT),
       StyleType("ArpeggioNoteDistance",    ST_SPATIUM),
       StyleType("ArpeggioLineWidth",       ST_SPATIUM),
       StyleType("ArpeggioHookLen",         ST_SPATIUM),
-
       StyleType("FixMeasureNumbers",     ST_INT),
       StyleType("FixMeasureWidth",       ST_BOOL)
       };
