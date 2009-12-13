@@ -2461,12 +2461,8 @@ void Canvas::cmd(const QAction* a)
             _score->startCmd();
             Lyrics* lyrics = _score->addLyrics();
             if (lyrics) {
-                  origEditObject = lyrics;
-printf("post lyrics command\n");
-                  sm->postEvent(new CommandEvent(cmd));
-                  // startEdit(lyrics, -1);
                   _score->setLayoutAll(true);
-                  _score->end();
+                  startEdit(lyrics);
                   return;     // no endCmd()
                   }
             _score->endCmd();
