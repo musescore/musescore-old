@@ -87,6 +87,7 @@ class Viewer : public QWidget {
       void pageEnd();
       virtual void cmd(const QAction* a) = 0;
       QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
+      virtual void startEdit(Element*) {}
       };
 
 #endif

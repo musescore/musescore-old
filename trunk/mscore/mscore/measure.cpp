@@ -1911,7 +1911,7 @@ bool Measure::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Measure::propertyAction(const QString& s)
+void Measure::propertyAction(Viewer*, const QString& s)
       {
       if (s == "props") {
             MeasureProperties im(this);
@@ -2835,7 +2835,7 @@ bool Measure::isMeasureRest(int staffIdx)
             if (s->subtype() != Segment::SegChordRest)
                   continue;
 			int count = 0;
-			bool measureRestSegment = false;	  
+			bool measureRestSegment = false;
             for (int track = strack; track < etrack; ++track) {
                   Element* e = s->element(track);
 				  if(!e){
@@ -2853,7 +2853,7 @@ bool Measure::isMeasureRest(int staffIdx)
 				}
 			break; //if we go that far we got a valid seg non empty
             }
-	  		
+
       return false;
       }
 

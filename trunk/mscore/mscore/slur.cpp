@@ -126,7 +126,7 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool SlurSegment::edit(Viewer* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (slurTie()->type() != SLUR)
             return false;
@@ -170,17 +170,15 @@ bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
 
       ups[curGrip].off = QPointF();
       sl->layout();
-#if 0 // TODO-S
       if (sl->slurSegments()->size() != segments) {
             QList<SlurSegment*>* ss = sl->slurSegments();
             SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
-            score()->changeState(Canvas::NORMAL);
+//TODO-S            score()->changeState(Canvas::NORMAL);
             score()->endCmd();
             score()->startCmd();
-            score()->emitStartEdit(newSegment, curGrip);
+            viewer->startEdit(newSegment);
             score()->setLayoutAll(true);
             }
-#endif
       return true;
       }
 
@@ -414,7 +412,7 @@ bool SlurSegment::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void SlurSegment::propertyAction(const QString& s)
+void SlurSegment::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             SlurProperties sp(0);
@@ -428,7 +426,7 @@ void SlurSegment::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 

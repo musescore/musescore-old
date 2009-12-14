@@ -1202,7 +1202,7 @@ bool Note::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Note::propertyAction(const QString& s)
+void Note::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             ChordProperties vp(this);
@@ -1242,7 +1242,7 @@ void Note::propertyAction(const QString& s)
       else if (s == "tupletDelete")
             score()->cmdDeleteTuplet(chord()->tuplet(), true);
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

@@ -61,7 +61,7 @@ class Image : public BSymbol {
       void setLockAspectRatio(bool v) { _lockAspectRatio = v; }
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
       void reference();
       void dereference();
       };

@@ -1309,7 +1309,7 @@ bool Text::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Text::propertyAction(const QString& s)
+void Text::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             Text* nText = clone();
@@ -1380,7 +1380,7 @@ void Text::propertyAction(const QString& s)
             delete nText;
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

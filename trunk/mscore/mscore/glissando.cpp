@@ -209,14 +209,14 @@ bool Glissando::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Glissando::propertyAction(const QString& s)
+void Glissando::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             GlissandoProperties vp(this);
             vp.exec();
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

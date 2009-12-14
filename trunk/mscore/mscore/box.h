@@ -91,7 +91,7 @@ class HBox : public Box {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       };
@@ -111,7 +111,7 @@ class VBox : public Box {
       virtual void layout();
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       virtual void add(Element*);
       virtual void remove(Element*);

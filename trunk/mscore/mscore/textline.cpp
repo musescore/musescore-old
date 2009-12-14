@@ -494,7 +494,7 @@ bool TextLineSegment::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void TextLineSegment::propertyAction(const QString& s)
+void TextLineSegment::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             TextLine* nTl  = textLine()->clone();
@@ -512,7 +512,7 @@ void TextLineSegment::propertyAction(const QString& s)
       else if (s == "invisible")
             score()->toggleInvisible(this);
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

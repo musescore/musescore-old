@@ -567,7 +567,7 @@ bool Element::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Element::propertyAction(const QString& s)
+void Element::propertyAction(Viewer*, const QString& s)
       {
       QList<Element*>* el = score()->selection()->elements();
       if (s == "invisible") {

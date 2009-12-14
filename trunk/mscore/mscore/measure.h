@@ -136,7 +136,7 @@ class Measure : public MeasureBase {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       System* system() const               { return (System*)parent(); }
       QList<MStaff*>* staffList()          { return &staves;      }

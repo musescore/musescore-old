@@ -94,10 +94,10 @@ set(QT_USE_QTUITOOLS TRUE)
 set(QT_USE_QTDESIGNER TRUE)
 set(QT_USE_QTSCRIPT   TRUE)
 
-find_package(Qt4 "4.5")
+find_package(Qt4 "4.6")
 
 if (NOT QT4_FOUND)
-      message(FATAL_ERROR "Fatal error: QT (version >= 4.5.0) required."
+      message(FATAL_ERROR "Fatal error: QT (version >= 4.6.0) required."
          " Cmake tries to detect QT4 by searching for 'qmake' in your PATH."
          "If you have QT4 installed, make sure qmake is found in your PATH. "
          "If you compiled QT4 yourself make sure your new qmake ist found"
@@ -117,13 +117,13 @@ FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript
    )
 
 # Set QT_QTSCRIPT_LIBRARY (for cmake 2.4)
-FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
-FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
+#FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+#FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
 
-FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
-FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
+#FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+#FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
 
-_QT4_ADJUST_LIB_VARS(QTSCRIPT)
+#_QT4_ADJUST_LIB_VARS(QTSCRIPT)
 # _QT4_ADJUST_LIB_VARS(QTSCRIPT_TOOLS)
 
 include(${QT_USE_FILE})

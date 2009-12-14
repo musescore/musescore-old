@@ -513,7 +513,7 @@ bool Tuplet::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Tuplet::propertyAction(const QString& s)
+void Tuplet::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             TupletProperties vp(this);
@@ -534,7 +534,7 @@ void Tuplet::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------
