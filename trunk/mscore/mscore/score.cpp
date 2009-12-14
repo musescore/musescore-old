@@ -1954,7 +1954,7 @@ void Score::search(const QString& s)
       for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
             if (++i < n)
                   continue;
-            emit adjustCanvasPosition(measure, true);
+//TODO-S            emit adjustCanvasPosition(measure, true);
             int tracks = nstaves() * VOICES;
             for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegChordRest)

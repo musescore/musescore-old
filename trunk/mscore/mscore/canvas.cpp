@@ -61,6 +61,11 @@
 #include "undo.h"
 #include "slur.h"
 
+static const char* stateNames[] = {
+      "stateNormal", "stateDragObject", "stateEdit", "stateDragEdit",
+      "stateLasso",  "stateNoteEntry", "stateMag", "stateDrag", "statePlay"
+      };
+
 //---------------------------------------------------------
 //   CommandTransition
 //---------------------------------------------------------
@@ -102,8 +107,10 @@ class MagTransition1 : public QEventTransition
             c->zoom(b1 ? 2 : -1, me->pos());
             }
    public:
-      MagTransition1(QObject* obj)
-         : QEventTransition(obj, QEvent::MouseButtonPress) {}
+      MagTransition1(QObject* obj, QState* target)
+         : QEventTransition(obj, QEvent::MouseButtonPress) {
+            setTargetState(target);
+            }
       };
 
 class MagTransition2 : public QEventTransition
@@ -156,7 +163,7 @@ class EditTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
             QPointF p = canvas->toLogical(me->pos());
@@ -200,7 +207,7 @@ class CanvasDragTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -226,7 +233,7 @@ class CanvasLassoTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -252,7 +259,7 @@ class ElementDragTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -276,7 +283,7 @@ class EditElementDragTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -290,6 +297,47 @@ class EditElementDragTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
+//   EditPasteTransition
+//---------------------------------------------------------
+
+class EditPasteTransition : public QMouseEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->onEditPasteTransition(me);
+            }
+   public:
+      EditPasteTransition(Canvas* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::MidButton), canvas(c) {
+            }
+      };
+
+//---------------------------------------------------------
+//   EditInputTransition
+//---------------------------------------------------------
+
+class EditInputTransition : public QEventTransition
+      {
+      Canvas* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            canvas->editInputTransition(static_cast<QInputMethodEvent*>(we->event()));
+            return true;
+            }
+   public:
+      EditInputTransition(Canvas* c)
+         : QEventTransition(c, QEvent::InputMethod), canvas(c) {}
+      };
+
+//---------------------------------------------------------
 //   EditCanvasDragTransition
 //---------------------------------------------------------
 
@@ -299,7 +347,7 @@ class EditCanvasDragTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
             return canvas->editCanvasDragTransition(me);
@@ -321,7 +369,7 @@ class CanvasSelectTransition : public QMouseEventTransition
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QEventTransition::eventTest(event))
+            if (!QMouseEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -475,134 +523,125 @@ Canvas::Canvas(QWidget* parent)
       sm          = new QStateMachine(this);
       sm->setGlobalRestorePolicy(QStateMachine::RestoreProperties);
 
-      QState* stateActive     = new QState();
-      QState* stateNormal     = new QState(stateActive);
-      QState* stateDragObject = new QState(stateActive);
-      QState* stateEdit       = new QState(stateActive);
-      QState* stateDragEdit   = new QState(stateActive);
-      QState* stateLasso      = new QState(stateActive);
-      stateNoteEntry          = new QState(stateActive);
-      QState* stateMag        = new QState(stateActive);
-      QState* stateDrag       = new QState(stateActive);
+      QState* stateActive = new QState();
+      for (int i = 0; i < STATES; ++i) {
+            states[i] = new QState(stateActive);
+            states[i]->setObjectName(stateNames[i]);
+            connect(states[i], SIGNAL(entered()), SLOT(enterState()));
+            connect(states[i], SIGNAL(exited()), SLOT(exitState()));
+            }
+      connect(stateActive, SIGNAL(entered()), SLOT(enterState()));
+      connect(stateActive, SIGNAL(exited()), SLOT(exitState()));
 
-      stateActive->setObjectName("stateActive");
-      stateNormal->setObjectName("stateNormal");
-      stateDragObject->setObjectName("stateDragObject");
-      stateEdit->setObjectName("stateEdit");
-      stateDragEdit->setObjectName("stateDragEdit");
-      stateLasso->setObjectName("stateLasso");
-      stateNoteEntry->setObjectName("stateNoteEntry");
-      stateMag->setObjectName("stateMag");
-      stateDrag->setObjectName("stateDrag");
-
-      // setup mag state
-      stateMag->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
-      MagTransition1* mt1 = new MagTransition1(this);
-      mt1->setTargetState(stateNormal);
-      stateMag->addTransition(mt1);
-      MagTransition2* mt2 = new MagTransition2(this);
-      mt2->setTargetState(0);
-      stateMag->addTransition(mt2);
+      CommandTransition* ct;
+      QState* s;
 
       // setup normal state
-      stateNormal->addTransition(new ContextTransition(this));                         // context menu
-      EditTransition* et = new EditTransition(this, stateEdit);                        // ->edit
+      s = states[NORMAL];
+      s->addTransition(new ContextTransition(this));                          // context menu
+      EditTransition* et = new EditTransition(this, states[EDIT]);            // ->edit
       connect(et, SIGNAL(triggered()), SLOT(startEdit()));
-      stateNormal->addTransition(et);
-      stateNormal->addTransition(new CanvasSelectTransition(this));                    // select
-      connect(stateNormal, SIGNAL(entered()), mscore, SLOT(setNormalState()));
-      stateNormal->addTransition(new CanvasDragTransition(this, stateDrag));           // ->stateDrag
-      stateNormal->addTransition(new CanvasLassoTransition(this, stateLasso));         // ->stateLasso
-      stateNormal->addTransition(new ElementDragTransition(this, stateDragObject));    // ->stateDragObject
-      CommandTransition* ct = new CommandTransition("note-input", stateNoteEntry);     // ->noteEntry
-      stateNormal->addTransition(ct);
-      ct = new CommandTransition("escape", stateNormal);                               // escape
+      s->addTransition(et);
+      s->addTransition(new CanvasSelectTransition(this));                     // select
+      connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
+      s->addTransition(new CanvasDragTransition(this, states[DRAG]));         // ->stateDrag
+      s->addTransition(new CanvasLassoTransition(this, states[LASSO]));       // ->stateLasso
+      s->addTransition(new ElementDragTransition(this, states[DRAG_OBJECT])); // ->stateDragObject
+      ct = new CommandTransition("note-input", states[NOTE_ENTRY]);           // ->noteEntry
+      s->addTransition(ct);
+      ct = new CommandTransition("escape", s);                                // escape
       connect(ct, SIGNAL(triggered()), SLOT(deselectAll()));
-      stateNormal->addTransition(ct);
-      ct = new CommandTransition("edit", stateEdit);                                   // ->edit harmony/slur/lyrics
+      s->addTransition(ct);
+      ct = new CommandTransition("edit", states[EDIT]);                       // ->edit harmony/slur/lyrics
       connect(ct, SIGNAL(triggered()), SLOT(startEdit()));
-      stateNormal->addTransition(ct);
+      s->addTransition(ct);
+      s->addTransition(new CommandTransition("mag", states[MAG]));
+      s->addTransition(new CommandTransition("play", states[PLAY]));
+
+      // setup mag state
+      s = states[MAG];
+      s->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
+      s->addTransition(new MagTransition1(this, states[NORMAL]));
+      s->addTransition(new MagTransition2(this));
 
       // setup drag element state
+      s = states[DRAG_OBJECT];
       QEventTransition* cl = new QEventTransition(this, QEvent::MouseButtonRelease);
-      cl->setTargetState(stateNormal);
-      stateDragObject->addTransition(cl);
-      stateDragObject->addTransition(new DragElementTransition(this));
-      connect(stateDragObject, SIGNAL(entered()), SLOT(startDrag()));
-      connect(stateDragObject, SIGNAL(exited()), SLOT(endDrag()));
+      cl->setTargetState(states[NORMAL]);
+      s->addTransition(cl);
+      s->addTransition(new DragElementTransition(this));
+      connect(s, SIGNAL(entered()), SLOT(startDrag()));
+      connect(s, SIGNAL(exited()), SLOT(endDrag()));
 
       //----- setup edit state
-      ct = new CommandTransition("escape", stateNormal);                            // edit->normal
+      s = states[EDIT];
+      connect(s, SIGNAL(entered()), mscore, SLOT(setEditState()));
+      ct = new CommandTransition("escape", states[NORMAL]);                   // ->normal
       connect(ct, SIGNAL(triggered()), SLOT(endEdit()));
-      stateEdit->addTransition(ct);
-      stateEdit->addTransition(new EditKeyTransition(this));                        // key events
-      et = new EditTransition(this, stateEdit);                                     // edit->edit
+      s->addTransition(ct);
+      s->addTransition(new EditKeyTransition(this));                                // key events
+      et = new EditTransition(this, s);                                             // ->edit
       connect(et, SIGNAL(triggered()), SLOT(endStartEdit()));
-      stateEdit->addTransition(et);
-      connect(stateEdit, SIGNAL(entered()), mscore, SLOT(setEditState()));
-      stateEdit->addTransition(new EditElementDragTransition(this, stateDragEdit));  // edit->editDrag
-      EditCanvasDragTransition* ent = new EditCanvasDragTransition(this, stateDrag); // edit->drag
+      s->addTransition(et);
+      s->addTransition(new EditElementDragTransition(this, states[DRAG_EDIT]));  // ->editDrag
+      EditCanvasDragTransition* ent = new EditCanvasDragTransition(this, states[DRAG]); // ->drag
       connect(ent, SIGNAL(triggered()), SLOT(endEdit()));
-      stateEdit->addTransition(ent);
+      s->addTransition(ent);
+      s->addTransition(new EditInputTransition(this));                        // compose text
+      s->addTransition(new EditPasteTransition(this));                        // paste text
 
       // setup drag edit state
+      s = states[DRAG_EDIT];
       cl = new QEventTransition(this, QEvent::MouseButtonRelease);
-      cl->setTargetState(stateEdit);
-      stateDragEdit->addTransition(cl);
-      stateDragEdit->addTransition(new DragEditTransition(this));
-      connect(stateDragEdit, SIGNAL(exited()), SLOT(endDragEdit()));
+      cl->setTargetState(states[EDIT]);
+      s->addTransition(cl);
+      s->addTransition(new DragEditTransition(this));
+      connect(s, SIGNAL(exited()), SLOT(endDragEdit()));
 
       // setup lasso state
+      s = states[LASSO];
       cl = new QEventTransition(this, QEvent::MouseButtonRelease);            // ->normal
-      cl->setTargetState(stateNormal);
-      stateLasso->addTransition(cl);
-      stateLasso->addTransition(new class DragLassoTransition(this));         // drag
-      connect(stateLasso, SIGNAL(exited()), SLOT(endLasso()));
+      cl->setTargetState(states[NORMAL]);
+      s->addTransition(cl);
+      s->addTransition(new class DragLassoTransition(this));                  // drag
+      connect(s, SIGNAL(exited()), SLOT(endLasso()));
 
       // setup note entry state
-      stateNoteEntry->assignProperty(this, "cursor", QCursor(Qt::UpArrowCursor));
-      stateNoteEntry->addTransition(new CommandTransition("escape", stateNormal));        // ->normal
-      stateNoteEntry->addTransition(new CommandTransition("note-input", stateNormal));    // ->normal
-      connect(stateNoteEntry, SIGNAL(entered()), mscore, SLOT(setNoteEntryState()));
-      connect(stateNoteEntry, SIGNAL(entered()), SLOT(startNoteEntry()));
-      connect(stateNoteEntry, SIGNAL(exited()), SLOT(endNoteEntry()));
-      stateNoteEntry->addTransition(new NoteEntryDragTransition(this));                   // mouse drag
-      stateNoteEntry->addTransition(new NoteEntryButtonTransition(this));                 // mouse button
+      s = states[NOTE_ENTRY];
+      s->assignProperty(this, "cursor", QCursor(Qt::UpArrowCursor));
+      s->addTransition(new CommandTransition("escape", states[NORMAL]));      // ->normal
+      s->addTransition(new CommandTransition("note-input", states[NORMAL]));  // ->normal
+      connect(s, SIGNAL(entered()), mscore, SLOT(setNoteEntryState()));
+      connect(s, SIGNAL(entered()), SLOT(startNoteEntry()));
+      connect(s, SIGNAL(exited()), SLOT(endNoteEntry()));
+      s->addTransition(new NoteEntryDragTransition(this));                          // mouse drag
+      s->addTransition(new NoteEntryButtonTransition(this));                        // mouse button
 
       // setup normal drag canvas state
+      s = states[DRAG];
       cl = new QEventTransition(this, QEvent::MouseButtonRelease);
-      cl->setTargetState(stateNormal);
-      stateDrag->addTransition(cl);
-      connect(stateDrag, SIGNAL(entered()), SLOT(deselectAll()));
-      stateDrag->addTransition(new DragTransition(this));
-      stateDrag->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+      cl->setTargetState(states[NORMAL]);
+      s->addTransition(cl);
+      connect(s, SIGNAL(entered()), SLOT(deselectAll()));
+      s->addTransition(new DragTransition(this));
+      s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+
+      // setup play state
+      s = states[PLAY];
+      s->addTransition(new CommandTransition("play", states[NORMAL]));
+      s->addTransition(new CommandTransition("escape", states[NORMAL]));
+      QSignalTransition* st = new QSignalTransition(seq, SIGNAL(stopped()));
+      st->setTargetState(states[NORMAL]);
+      s->addTransition(st);
+      connect(s, SIGNAL(entered()), mscore, SLOT(setPlayState()));
+      connect(s, SIGNAL(entered()), seq, SLOT(start()));
+      connect(s, SIGNAL(exited()), seq, SLOT(stop()));
 
       sm->addState(stateActive);
-      stateActive->setInitialState(stateNormal);
+      stateActive->setInitialState(states[NORMAL]);
       sm->setInitialState(stateActive);
 
-      stateNormal->addTransition(new CommandTransition("mag", stateMag));
 
-      // debug:
-      connect(stateActive,     SIGNAL(entered()), SLOT(enterState()));
-      connect(stateNormal,     SIGNAL(entered()), SLOT(enterState()));
-      connect(stateDragObject, SIGNAL(entered()), SLOT(enterState()));
-      connect(stateEdit,       SIGNAL(entered()), SLOT(enterState()));
-      connect(stateDragEdit,   SIGNAL(entered()), SLOT(enterState()));
-      connect(stateLasso,      SIGNAL(entered()), SLOT(enterState()));
-      connect(stateNoteEntry,  SIGNAL(entered()), SLOT(enterState()));
-      connect(stateMag,        SIGNAL(entered()), SLOT(enterState()));
-      connect(stateDrag,       SIGNAL(entered()), SLOT(enterState()));
-
-      connect(stateActive,     SIGNAL(exited()), SLOT(exitState()));
-      connect(stateNormal,     SIGNAL(exited()), SLOT(exitState()));
-      connect(stateDragObject, SIGNAL(exited()), SLOT(exitState()));
-      connect(stateEdit,       SIGNAL(exited()), SLOT(exitState()));
-      connect(stateDragEdit,   SIGNAL(exited()), SLOT(exitState()));
-      connect(stateLasso,      SIGNAL(exited()), SLOT(exitState()));
-      connect(stateNoteEntry,  SIGNAL(exited()), SLOT(exitState()));
-      connect(stateMag,        SIGNAL(exited()), SLOT(exitState()));
-      connect(stateDrag,       SIGNAL(exited()), SLOT(exitState()));
       sm->start();
       //-----------------------------------------------------------------------
 
@@ -693,9 +732,9 @@ void Canvas::setScore(Score* s)
 //   event
 //---------------------------------------------------------
 
+#if 0
 bool Canvas::event(QEvent* ev)
       {
-#if 0
       if (ev->type() == QEvent::KeyPress) {
             QKeyEvent* ke = (QKeyEvent*) ev;
             if (debugMode) {
@@ -719,9 +758,9 @@ bool Canvas::event(QEvent* ev)
                   return true;
                   }
             }
-#endif
       return QWidget::event(ev);
       }
+#endif
 
 //---------------------------------------------------------
 //   Canvas
@@ -2524,6 +2563,10 @@ void Canvas::cmd(const QAction* a)
                   startEdit(e);
                   }
             }
+      else if (cmd == "play") {
+            if (seq->canStart())
+                  sm->postEvent(new CommandEvent(cmd));
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2936,6 +2979,22 @@ bool Canvas::editElementDragTransition(QMouseEvent* ev)
       }
 
 //---------------------------------------------------------
+//   onEditPasteTransition
+//---------------------------------------------------------
+
+void Canvas::onEditPasteTransition(QMouseEvent* ev)
+      {
+      startMove = imatrix.map(QPointF(ev->pos()));
+      Element* e = elementNear(startMove);
+      if ((e == editObject)) {
+            if (editObject->mousePress(startMove, ev)) {
+                  _score->addRefresh(editObject->abbox());
+                  _score->end();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   editCanvasDragTransition
 //    Check for mouse click outside of editObject.
 //---------------------------------------------------------
@@ -3000,6 +3059,18 @@ void Canvas::deselectAll()
 
 bool Canvas::noteEntryMode() const
       {
-      return sm->configuration().contains(stateNoteEntry);
+      return sm->configuration().contains(states[NOTE_ENTRY]);
+      }
+
+//---------------------------------------------------------
+//   editInputTransition
+//---------------------------------------------------------
+
+void Canvas::editInputTransition(QInputMethodEvent* ie)
+      {
+      if (editObject->edit(this, curGrip, 0, 0, ie->commitString())) {
+            updateGrips();
+            _score->end();
+            }
       }
 

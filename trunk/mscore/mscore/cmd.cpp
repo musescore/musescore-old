@@ -1798,8 +1798,6 @@ void Score::cmd(const QAction* a)
 //                  setNoteEntry(false);
             end();
             }
-      else if (cmd == "play")
-            seq->start();
       else if (cmd == "repeat")
             preferences.playRepeats = !preferences.playRepeats;
       else if (cmd == "rewind")
@@ -2733,7 +2731,7 @@ void Score::moveInputPos(Segment* s)
             el = s->element(_is.track / VOICES * VOICES);
       if (el->type() == CHORD)
             el = static_cast<Chord*>(el)->upNote();
-      emit adjustCanvasPosition(el, false);
+//TODO-S      emit adjustCanvasPosition(el, false);
       }
 
 //---------------------------------------------------------
@@ -2810,7 +2808,7 @@ void Score::move(const QString& cmd)
                   mscore->play(static_cast<Note*>(el));
                   }
             select(el, SELECT_SINGLE, 0);
-            emit adjustCanvasPosition(el, false);
+//TODO-S            emit adjustCanvasPosition(el, false);
             }
       }
 
@@ -2863,7 +2861,7 @@ void Score::selectMove(const QString& cmd)
                   el = downStaff(cr);
             if (el) {
                   select(el, SELECT_RANGE, el->staffIdx());
-                  emit adjustCanvasPosition(el, false);
+//TODO-S                  emit adjustCanvasPosition(el, false);
                   }
             }
       }

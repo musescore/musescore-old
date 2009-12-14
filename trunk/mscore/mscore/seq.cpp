@@ -111,18 +111,19 @@ Seq::~Seq()
 //   setScore
 //---------------------------------------------------------
 
-void Seq::setScore(Score* s)
+void Seq::setViewer(Viewer* v)
       {
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
-            cs = s;
+            cs = v->score();
             stop();
 #ifndef __MINGW32__
             while (state != STOP)
                   usleep(100000);
 #endif
             }
-      cs = s;
+      cv = v;
+      cs = cv ? cv->score() : 0;
       playlistChanged = true;
       if (cs) {
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
@@ -291,30 +292,28 @@ void Seq::rewindStart()
       }
 
 //---------------------------------------------------------
+//   canStart
+//    return true if sequencer can be started
+//---------------------------------------------------------
+
+bool Seq::canStart()
+      {
+      if (!driver)
+            return false;
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
+            collectEvents();
+      return (!events.empty() && endTick != 0);
+      }
+
+//---------------------------------------------------------
 //   start
 //    called from gui thread
 //---------------------------------------------------------
 
 void Seq::start()
       {
-      if (!driver)
-            return;
-//TODO-S      if (cs->noteEntryMode())
-//            cs->setNoteEntry(false);
-      QAction* a = getAction("play");
-      if (!a->isChecked())
-            driver->stopTransport();
-      else {
-            if (events.empty() || cs->playlistDirty() || playlistChanged)
-                  collectEvents();
-
-            if (events.empty() || endTick == 0) {
-                  a->setChecked(false);
-                  return;
-                  }
-            seek(cs->playPos());
-            driver->startTransport();
-            }
+      seek(cs->playPos());
+      driver->startTransport();
       }
 
 //---------------------------------------------------------
@@ -335,11 +334,6 @@ void Seq::stop()
 
 void MuseScore::seqStarted()
       {
-#if 0 // TODO-S
-      if (cs->state() != STATE_PLAY)  // don't get stuck in play mode
-           cs->setPrevState(cs->state());
-      cs->setState(STATE_PLAY);
-#endif
       cv->setCursorOn(true);
       cs->end();
       }
@@ -352,15 +346,7 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
-#if 0 // TODO-S
-      cs->setState(cs->prevState());
-      // TODO: there should really be some sort of signal to the viewers
-      // instead of the state change being handled here
-      bool cursorOn = false;
-      if (cs->state() == STATE_NOTE_ENTRY)
-            cursorOn = true;
-      cv->setCursorOn(cursorOn);
-#endif
+      cv->setCursorOn(false);
       cs->setLayoutAll(false);
       cs->setUpdateAll();
       cs->end();
@@ -750,7 +736,7 @@ void Seq::heartBeat()
             }
       if (note) {
             mscore->currentViewer()->moveCursor(note->chord()->segment(), -1);
-            cs->emitAdjustCanvasPosition(note, true);
+            cv->adjustCanvasPosition(note, true);
             curTick  = note->chord()->tick();
             curUtick = guiPos.key();
             if (pp)

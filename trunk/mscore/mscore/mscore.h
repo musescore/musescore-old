@@ -327,6 +327,7 @@ class MuseScore : public QMainWindow {
       void setNormalState()    { changeState(STATE_NORMAL); }
       void setEditState()      { changeState(STATE_EDIT); }
       void setNoteEntryState() { changeState(STATE_NOTE_ENTRY); }
+      void setPlayState()      { changeState(STATE_PLAY); }
 
    public:
       MuseScore();

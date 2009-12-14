@@ -1122,7 +1122,7 @@ void MuseScore::setCurrentViewer(Viewer* viewer)
             }
       if (!enable) {
             changeState(STATE_DISABLED);
-            seq->setScore(0);
+            seq->setViewer(0);
             _undoGroup->setActiveStack(0);
             return;
             }
@@ -1140,7 +1140,7 @@ void MuseScore::setCurrentViewer(Viewer* viewer)
 
       setWindowTitle("MuseScore: " + cs->name());
       if (seq)
-            seq->setScore(cs);
+            seq->setViewer(cv);
       if (playPanel)
             playPanel->setScore(cs);
 
@@ -1380,7 +1380,7 @@ printf("remove tab %d\n", i);
       if (checkDirty(score))
             return;
       if (seq->score() == score)
-            seq->setScore(0);
+            seq->setViewer(0);
 
       int idx1      = tab1->currentIndex();
       bool firstTab = tab1->viewer(idx1) == cv;
