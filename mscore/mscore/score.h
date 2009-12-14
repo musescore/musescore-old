@@ -364,9 +364,6 @@ class Score : public QObject {
       void posChanged(int);
       void updateAll();
       void dataChanged(const QRectF&);
-      void moveCursor();
-      void startEdit(Element*, int startGrip);
-      void adjustCanvasPosition(Element* el, bool playBack);
 
    public slots:
       void setClean(bool val);
@@ -783,12 +780,8 @@ class Score : public QObject {
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName;      }
       void setTmpName(const QString& s) { _tmpName = s;         }
-      void emitStartEdit(Element* e, int startGrip) { emit startEdit(e, startGrip); }
-      void emitAdjustCanvasPosition(Element* el, bool playBack) {
-            emit adjustCanvasPosition(el, playBack);
-            }
-      QList<Beam*> beams() const { return _beams; }
-      QList<Beam*>& beams() { return _beams; }
+      QList<Beam*> beams() const        { return _beams; }
+      QList<Beam*>& beams()             { return _beams; }
       Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();

@@ -34,6 +34,7 @@ class Measure;
 class Driver;
 class Part;
 struct Channel;
+class Viewer;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -73,6 +74,7 @@ class Seq : public QObject {
       Q_OBJECT
 
       Score* cs;
+      Viewer* cv;
       bool running;                       // true if sequencer is available
       int state;                          // STOP, PLAY, START_PLAY
       bool playlistChanged;
@@ -125,6 +127,8 @@ class Seq : public QObject {
       void setMasterVolume(float);
       void seek(int);
       void stopNotes();
+      void start();
+      void stop();
 
    signals:
       void started();
@@ -137,8 +141,7 @@ class Seq : public QObject {
 
       Seq();
       ~Seq();
-      void start();
-      void stop();
+      bool canStart();
       void rewindStart();
       void seekEnd();
       void nextMeasure();
@@ -164,8 +167,9 @@ class Seq : public QObject {
       void startNote(Channel*, int, int, int, double nt);
       void setController(int, int, int);
       void sendEvent(const Event&);
-      void setScore(Score* s);
-      Score* score() const { return cs; }
+      void setViewer(Viewer*);
+      Score* score() const   { return cs; }
+      Viewer* viewer() const { return cv; }
       void initInstruments();
 
       const QList<MidiPatch*>& getPatchInfo() const;

@@ -56,20 +56,17 @@ struct CommandEvent : public QEvent
 class Canvas : public Viewer {
       Q_OBJECT
 
+      enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
+            NOTE_ENTRY, MAG, PLAY, STATES
+            };
+
       QStateMachine* sm;
-      QState* stateNoteEntry;
+      QState* states[STATES];
 
-//   public:
-//      enum State {
-//         NORMAL, DRAG_OBJ, DRAG_EDIT, LASSO, NOTE_ENTRY
-//         };
-
-   private:
       QFocusFrame* focusFrame;
       Navigator* navigator;
       int level;
 
-//      State state;
       bool dragCanvasState;
       bool draggedCanvas;
       Element* dragElement;   // current moved drag&drop element
@@ -119,7 +116,7 @@ class Canvas : public Viewer {
       virtual void wheelEvent(QWheelEvent*);
 //      void mouseMoveEvent1(QMouseEvent*);
 //      virtual void mouseReleaseEvent(QMouseEvent*);
-      virtual bool event(QEvent*);
+//      virtual bool event(QEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragLeaveEvent(QDragLeaveEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
@@ -234,6 +231,8 @@ class Canvas : public Viewer {
       void cmdAddSlur();
       void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
+      void editInputTransition(QInputMethodEvent* ie);
+      void onEditPasteTransition(QMouseEvent* ev);
       };
 
 extern int searchStaff(const Element* element);
