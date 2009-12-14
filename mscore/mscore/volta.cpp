@@ -184,7 +184,7 @@ bool VoltaSegment::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void VoltaSegment::propertyAction(const QString& s)
+void VoltaSegment::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             VoltaProperties vp;
@@ -214,6 +214,6 @@ void VoltaSegment::propertyAction(const QString& s)
                   delete nTl;
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 

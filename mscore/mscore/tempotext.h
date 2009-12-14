@@ -39,7 +39,7 @@ class TempoText : public Text  {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
       Measure* measure() const { return (Measure*)parent(); }
       double tempo() const     { return _tempo; }
       void setTempo(double v)  { _tempo = v; }

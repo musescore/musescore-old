@@ -229,7 +229,7 @@ class Harmony : public Text {
       const ChordDescription* descr() const;
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
       virtual void layout();
 
       virtual bool isEditable() { return true; }

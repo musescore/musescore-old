@@ -317,7 +317,7 @@ bool Image::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Image::propertyAction(const QString& s)
+void Image::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             ImageProperties vp(this);
@@ -326,7 +326,7 @@ void Image::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

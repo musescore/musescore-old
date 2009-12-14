@@ -278,7 +278,7 @@ bool Dynamic::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Dynamic::propertyAction(const QString& s)
+void Dynamic::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             Text* nText = new Text(*this);
@@ -303,7 +303,7 @@ void Dynamic::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

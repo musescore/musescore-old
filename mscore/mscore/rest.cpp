@@ -433,7 +433,7 @@ bool Rest::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Rest::propertyAction(const QString& s)
+void Rest::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             Rest r(*this);
@@ -479,7 +479,7 @@ void Rest::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

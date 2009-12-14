@@ -221,7 +221,7 @@ class Text : public TextB {
       virtual TextBase* textBase() const { return _tb; }
 
       virtual bool genPropertyMenu(QMenu* popup) const;
-      virtual void propertyAction(const QString& s);
+      virtual void propertyAction(Viewer*, const QString& s);
 
       void setModified(bool v)           { _tb->setModified(v); }
       };

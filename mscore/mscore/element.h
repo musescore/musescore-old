@@ -313,7 +313,7 @@ class Element {
  extend property menu by elemement specific items
  */
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
 /**
  delivers mouseEvent to element in edit mode

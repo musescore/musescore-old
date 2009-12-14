@@ -74,7 +74,7 @@ class SlurSegment : public Element {
       virtual void move(const QPointF& s);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       SlurTie* slurTie() const     { return (SlurTie*)parent(); }
 

@@ -413,7 +413,7 @@ bool Harmony::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Harmony::propertyAction(const QString& s)
+void Harmony::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             ChordEdit ce(score());
@@ -426,7 +426,7 @@ void Harmony::propertyAction(const QString& s)
                   }
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

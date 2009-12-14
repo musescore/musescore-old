@@ -336,7 +336,7 @@ bool HBox::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void HBox::propertyAction(const QString& cmd)
+void HBox::propertyAction(Viewer* viewer, const QString& cmd)
       {
       if (cmd == "props") {
             BoxProperties vp(this, 0);
@@ -348,7 +348,7 @@ void HBox::propertyAction(const QString& cmd)
             s->setParent(this);
             score()->undoAddElement(s);
             score()->select(s, SELECT_SINGLE, 0);
-//TODO-S            score()->emitStartEdit(s, -1);
+            viewer->startEdit(s);
             score()->setLayoutAll(true);
             }
       }
@@ -410,7 +410,7 @@ bool VBox::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void VBox::propertyAction(const QString& cmd)
+void VBox::propertyAction(Viewer* viewer, const QString& cmd)
       {
       if (cmd == "props") {
             BoxProperties vp(this, 0);
@@ -455,8 +455,7 @@ void VBox::propertyAction(const QString& cmd)
             s->setParent(this);
             score()->undoAddElement(s);
             score()->select(s, SELECT_SINGLE, 0);
-//TODO-S            if (s->type() == TEXT)
-//                  score()->emitStartEdit(s, -1);
+            viewer->startEdit(s);
             score()->setLayoutAll(true);
             }
       getAction("title-text")->blockSignals(false);

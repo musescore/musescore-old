@@ -832,7 +832,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             score()->selectElementDialog(obj);
       else {
             _score->startCmd();
-            obj->propertyAction(cmd);
+            obj->propertyAction(this, cmd);
             _score->endCmd();
             }
       }
@@ -938,7 +938,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
                   _score->splitStaff(staffIdx, splitStaff.getSplitPoint());
             }
       else
-            obj->propertyAction(cmd);
+            obj->propertyAction(this, cmd);
       _score->setLayoutAll(true);
       _score->endCmd();
       }

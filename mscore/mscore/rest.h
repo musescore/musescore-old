@@ -65,7 +65,7 @@ class Rest : public ChordRest {
       virtual void layout();
       virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       void setMMWidth(double val)   { _mmWidth = val; }
       double mmWidth() const        { return _mmWidth; }

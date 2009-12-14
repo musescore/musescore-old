@@ -166,8 +166,7 @@ void Canvas::lyricsUpDown(bool up, bool end)
             if (verse >= ll->size())
                   return;
             }
-
-// TODO-S      setState(NORMAL);
+      endEdit();
       _score->startCmd();
       lyrics = ll->value(verse);
 

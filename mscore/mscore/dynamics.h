@@ -79,7 +79,7 @@ class Dynamic : public Text {
       void setDynType(DynamicType t) { _dynType = t;    }
 
       virtual bool genPropertyMenu(QMenu* popup) const;
-      virtual void propertyAction(const QString& s);
+      virtual void propertyAction(Viewer*, const QString& s);
       };
 
 //---------------------------------------------------------

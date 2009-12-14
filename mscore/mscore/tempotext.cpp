@@ -84,14 +84,14 @@ bool TempoText::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void TempoText::propertyAction(const QString& s)
+void TempoText::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "props") {
             TempoProperties rp(this);
             rp.exec();
             }
       else
-            Element::propertyAction(s);
+            Element::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------

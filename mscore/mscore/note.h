@@ -190,7 +190,7 @@ class Note : public Element {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       bool hidden() const              { return _hidden; }
       void setHidden(bool val)         { _hidden = val;  }

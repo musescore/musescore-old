@@ -41,7 +41,7 @@ class StaffText : public Text  {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       QString channelName() const                { return _channelName;      }
       QString midiActionName() const             { return _midiActionName;   }

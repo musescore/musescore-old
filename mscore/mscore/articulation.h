@@ -131,7 +131,7 @@ class Articulation : public Symbol {
       void setChannelName(const QString& s) { _channelName = s;    }
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
+      virtual void propertyAction(Viewer*, const QString&);
 
       static QString idx2name(int idx);
       static int name2idx(const QString& name);

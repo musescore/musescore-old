@@ -180,7 +180,7 @@ class Canvas : public Viewer {
       ~Canvas();
 
       void startEdit(Element*, int startGrip);
-      void startEdit(Element*);
+      virtual void startEdit(Element*);
 
       virtual void moveCursor(Segment*, int staffIdx);
       virtual void setCursorOn(bool);

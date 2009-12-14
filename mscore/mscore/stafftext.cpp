@@ -85,14 +85,14 @@ bool StaffText::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void StaffText::propertyAction(const QString& s)
+void StaffText::propertyAction(Viewer* viewer, const QString& s)
       {
       if (s == "sprops") {
             StaffTextProperties rp(this);
             rp.exec();
             }
       else
-            Text::propertyAction(s);
+            Text::propertyAction(viewer, s);
       }
 
 //---------------------------------------------------------
