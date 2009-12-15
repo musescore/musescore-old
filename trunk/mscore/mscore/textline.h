@@ -56,7 +56,7 @@ class TextLineSegment : public LineSegment {
       void clearText();
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 //---------------------------------------------------------

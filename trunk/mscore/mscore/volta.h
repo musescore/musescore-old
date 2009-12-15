@@ -42,7 +42,7 @@ class VoltaSegment : public TextLineSegment {
       virtual VoltaSegment* clone() const  { return new VoltaSegment(*this); }
       Volta* volta() const                 { return (Volta*)parent(); }
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 //---------------------------------------------------------

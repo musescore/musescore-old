@@ -26,7 +26,7 @@
 #include "slur.h"
 #include "sym.h"
 #include "hairpin.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "mscore.h"
 #include "edittempo.h"
 #include "select.h"

@@ -21,7 +21,7 @@
 #ifndef __SCORETAB_H__
 #define __SCORETAB_H__
 
-class Viewer;
+class ScoreView;
 class Score;
 
 //---------------------------------------------------------
@@ -38,7 +38,7 @@ class ScoreTab : public QWidget {
       void setCurrent(int);
 
    signals:
-      void currentViewerChanged(Viewer*);
+      void currentScoreViewChanged(ScoreView*);
       void tabCloseRequested(int);
 
    public:
@@ -49,10 +49,10 @@ class ScoreTab : public QWidget {
       void setCurrentIndex(int);
       void removeTab(int);
       int count() const { return scoreList->size(); }
-      Viewer* viewer(int) const;
-      Viewer* viewer() const { return viewer(currentIndex()); }
-      bool contains(Viewer*) const;
-      void initViewer(int idx, double mag, int magIdx, double xoffset, double yoffset);
+      ScoreView* view(int) const;
+      ScoreView* view() const { return view(currentIndex()); }
+      bool contains(ScoreView*) const;
+      void initScoreView(int idx, double mag, int magIdx, double xoffset, double yoffset);
       };
 
 #endif

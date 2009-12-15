@@ -36,7 +36,7 @@
 #include "bsp.h"
 #include "fraction.h"
 #include "al/al.h"
-#include "viewer.h"
+#include "scoreview.h"
 
 namespace AL {
       class TempoMap;
@@ -191,8 +191,6 @@ class Score : public QObject {
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
 
-      bool _needLayout;
-      Measure* startLayout;
 
       // values used during doLayout:
       int curPage;
@@ -228,9 +226,10 @@ class Score : public QObject {
       //   modified during cmd processing and used in endCmd() to
       //   determine what to layout and what to repaint:
 
+      bool _needLayout;
       QRectF refresh;
       bool _updateAll;
-      Measure* layoutStart;   ///< start a relayout at this measure
+      Measure* startLayout;   ///< start a relayout at this measure
       bool layoutAll;         ///< do a complete relayout
 
       Qt::KeyboardModifiers keyState;
@@ -528,9 +527,8 @@ class Score : public QObject {
       void cmdRemoveKeySig(KeySig*);
       void cmdRemoveTimeSig(TimeSig*);
 
-      void setUpdateAll()              { _updateAll = true; }
+      void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val)      { layoutAll = val;  }
-      void setLayoutStart(Measure* m)  { layoutStart = m;  }
       void addRefresh(const QRectF& r) { refresh |= r;     }
 
       void changeLineSegment(bool);
@@ -731,7 +729,6 @@ class Score : public QObject {
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
       void endUndoRedo();
-      void search(const QString& s);
       Measure* searchLabel(const QString& s, Measure* start = 0);
       RepeatList* repeatList() { return _repeatList; }
       double utick2utime(int tick) const;

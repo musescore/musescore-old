@@ -193,7 +193,7 @@ const QString Dynamic::subtypeName() const
 //   startEdit
 //---------------------------------------------------------
 
-void Dynamic::startEdit(Viewer* v, const QPointF& p)
+void Dynamic::startEdit(ScoreView* v, const QPointF& p)
       {
       setSubtype(0);
       Text::startEdit(v, p);
@@ -278,7 +278,7 @@ bool Dynamic::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Dynamic::propertyAction(Viewer* viewer, const QString& s)
+void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             Text* nText = new Text(*this);

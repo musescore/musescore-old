@@ -23,7 +23,7 @@
 
 #include "element.h"
 
-class Viewer;
+class ScoreView;
 class Segment;
 
 enum BarType {
@@ -54,7 +54,7 @@ class BarLine : public Element {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
 
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       void setSpan(int val)    { _span = val;  }
       int span() const         { return _span; }

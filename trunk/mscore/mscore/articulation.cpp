@@ -163,7 +163,7 @@ bool Articulation::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Articulation::propertyAction(Viewer* viewer, const QString& s)
+void Articulation::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             ArticulationProperties rp(this);

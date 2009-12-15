@@ -28,7 +28,7 @@
 #include "score.h"
 #include "image.h"
 #include "xml.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "note.h"
 #include "chord.h"
 #include "clef.h"
@@ -197,7 +197,7 @@ void Palette::mousePressEvent(QMouseEvent* ev)
 //   applyDrop
 //---------------------------------------------------------
 
-static void applyDrop(Score* score, Viewer* viewer, Element* target, Element* e)
+static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element* e)
       {
       QPointF pt;
       if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
@@ -231,7 +231,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       Element* element    = cells[i]->element;
       if (element == 0)
             return;
-      Viewer* viewer      = mscore->currentViewer();
+      ScoreView* viewer      = mscore->currentScoreView();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
       score->startCmd();

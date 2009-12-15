@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "canvas.h"
+#include "scoreview.h"
 #include "note.h"
 #include "rest.h"
 #include "chord.h"
@@ -566,7 +566,7 @@ void Score::putNote(const QPointF& pos, bool replace)
 //   modifyElement
 //---------------------------------------------------------
 
-void Canvas::modifyElement(Element* el)
+void ScoreView::modifyElement(Element* el)
       {
       if (el == 0) {
             printf("modifyElement: el==0\n");
@@ -607,7 +607,7 @@ void Canvas::modifyElement(Element* el)
 //    'S' typed on keyboard
 //---------------------------------------------------------
 
-void Canvas::cmdAddSlur()
+void ScoreView::cmdAddSlur()
       {
       _score->startCmd();
 #if 0 // TODO-S
@@ -641,7 +641,7 @@ void Canvas::cmdAddSlur()
 //   addSlur
 //---------------------------------------------------------
 
-void Canvas::cmdAddSlur(Note* firstNote, Note* lastNote)
+void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       {
       ChordRest* cr1 = firstNote->chord();
       ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
@@ -1287,7 +1287,7 @@ void Score::cmdDeleteSelection()
 //   chordTab
 //---------------------------------------------------------
 
-void Canvas::chordTab(bool back)
+void ScoreView::chordTab(bool back)
       {
       Harmony* cn      = (Harmony*)editObject;
       Measure* measure = (Measure*)cn->parent();

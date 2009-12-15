@@ -75,7 +75,7 @@ class BspTree
 
       void insert(const Element* item);
       void remove(const Element* item);
-      void remove(const QSet<const Element*>& items);
+//      void remove(const QSet<const Element*>& items);
 
       QList<const Element*> items(const QRectF& rect);
       QList<const Element*> items(const QPointF& pos);

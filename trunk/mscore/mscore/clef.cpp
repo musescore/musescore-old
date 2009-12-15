@@ -30,7 +30,7 @@
 #include "symbol.h"
 #include "score.h"
 #include "staff.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "system.h"
 #include "style.h"
 #include "segment.h"
@@ -308,7 +308,7 @@ void Clef::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+bool Clef::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
       {
       if (type == CLEF) {
             viewer->setDropTarget(this);

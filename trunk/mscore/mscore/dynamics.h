@@ -68,7 +68,7 @@ class Dynamic : public Text {
       virtual void read(QDomElement);
 
       virtual bool isEditable() { return true; }
-      virtual void startEdit(Viewer*, const QPointF&);
+      virtual void startEdit(ScoreView*, const QPointF&);
       virtual void endEdit();
       virtual void toDefault();
 
@@ -79,7 +79,7 @@ class Dynamic : public Text {
       void setDynType(DynamicType t) { _dynType = t;    }
 
       virtual bool genPropertyMenu(QMenu* popup) const;
-      virtual void propertyAction(Viewer*, const QString& s);
+      virtual void propertyAction(ScoreView*, const QString& s);
       };
 
 //---------------------------------------------------------

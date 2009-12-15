@@ -1,3 +1,6 @@
+15.dec (ws)
+      - rename Canvas() to ScoreView()
+      - drop Viewer() class
 13.dec (ws)
       - move state information from Score() to Canvas()
       - start code reorganization using QStateMachine

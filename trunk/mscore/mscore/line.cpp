@@ -24,7 +24,7 @@
 #include "measure.h"
 #include "score.h"
 #include "xml.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "system.h"
 
 //---------------------------------------------------------
@@ -112,7 +112,7 @@ QPointF LineSegment::gripAnchor(int grip) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool LineSegment::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if ((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)

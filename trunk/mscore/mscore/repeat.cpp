@@ -265,7 +265,7 @@ bool Marker::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Marker::propertyAction(Viewer* viewer, const QString& s)
+void Marker::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             MarkerProperties rp(this);
@@ -411,7 +411,7 @@ bool Jump::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Jump::propertyAction(Viewer* viewer, const QString& s)
+void Jump::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             JumpProperties rp(this);

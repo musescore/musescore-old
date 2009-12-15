@@ -37,7 +37,7 @@ class Chord;
 class Text;
 class Score;
 class Sym;
-class Viewer;
+class ScoreView;
 
 //
 //    note head groups
@@ -186,11 +186,11 @@ class Note : public Element {
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       double stemYoff(bool upFlag) const;
 
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       bool hidden() const              { return _hidden; }
       void setHidden(bool val)         { _hidden = val;  }

@@ -34,7 +34,7 @@
 #include "system.h"
 #include "select.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "segment.h"
 #include "xml.h"
 #include "text.h"
@@ -262,13 +262,11 @@ Score::Score(const Style& s)
 
       _created        = false;
       _updateAll      = false;
-      layoutStart     = 0;
       layoutAll       = false;
       keyState        = 0;
       _showInvisible  = true;
       _showFrames     = true;
       editTempo       = 0;
-//      _dragObject     = 0;
       _printing       = false;
       _playlistDirty  = false;
       _autosaveDirty  = false;
@@ -286,11 +284,6 @@ Score::Score(const Style& s)
       _tempomap        = new AL::TempoMap;
       _sigmap          = new AL::TimeSigMap;
       _sigmap->add(0, 4, 4);
-//      _state          = STATE_NORMAL;
-//      _prevState      = STATE_NORMAL;
-//      origEditObject  = 0;
-//      editObject      = 0;
-
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
@@ -1409,10 +1402,10 @@ void Score::setLayout(Measure* m)
       {
       if (m)
             m->setDirty();
-      if (layoutStart && layoutStart != m)
+      if (startLayout && startLayout != m)
             setLayoutAll(true);
       else
-            layoutStart = m;
+            startLayout = m;
       }
 
 //---------------------------------------------------------
@@ -1935,47 +1928,6 @@ void Score::removeElement(Element* element)
                   break;
             default:
                   break;
-            }
-      }
-
-//---------------------------------------------------------
-//   search
-//---------------------------------------------------------
-
-void Score::search(const QString& s)
-      {
-      bool ok;
-
-      int n = s.toInt(&ok);
-      if (!ok || n <= 0)
-            return;
-
-      int i = 0;
-      for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
-            if (++i < n)
-                  continue;
-//TODO-S            emit adjustCanvasPosition(measure, true);
-            int tracks = nstaves() * VOICES;
-            for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != Segment::SegChordRest)
-                        continue;
-                  int track;
-                  for (track = 0; track < tracks; ++track) {
-                        ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
-                        if (cr) {
-                              if (cr->type() == CHORD)
-                                    select(static_cast<Chord*>(cr)->upNote(), SELECT_SINGLE, 0);
-                              else
-                                    select(cr, SELECT_SINGLE, 0);
-                              break;
-                              }
-                        }
-                  if (track != tracks)
-                        break;
-                  }
-            _updateAll = true;
-            end();
-            break;
             }
       }
 

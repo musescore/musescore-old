@@ -21,7 +21,7 @@
 #include "spacer.h"
 #include "preferences.h"
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -84,7 +84,7 @@ void Spacer::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Spacer::acceptDrop(Viewer*, const QPointF&, int, int) const
+bool Spacer::acceptDrop(ScoreView*, const QPointF&, int, int) const
       {
       return false;
       }

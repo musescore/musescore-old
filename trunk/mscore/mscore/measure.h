@@ -26,7 +26,6 @@
  Definition of classes MStaff, Measure and MeasureList.
 */
 
-#include "element.h"
 #include "segment.h"
 #include "measurebase.h"
 #include "fraction.h"
@@ -39,7 +38,7 @@ class Chord;
 class Text;
 class ChordRest;
 class Score;
-class Viewer;
+class ScoreView;
 class System;
 class Note;
 class Spacer;
@@ -136,7 +135,7 @@ class Measure : public MeasureBase {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       System* system() const               { return (System*)parent(); }
       QList<MStaff*>* staffList()          { return &staves;      }
@@ -192,7 +191,7 @@ class Measure : public MeasureBase {
       void sortStaves(QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       int repeatCount() const         { return _repeatCount; }

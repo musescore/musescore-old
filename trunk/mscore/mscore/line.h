@@ -26,7 +26,7 @@
 
 class SLine;
 class System;
-class Viewer;
+class ScoreView;
 
 //---------------------------------------------------------
 //   LineSegment
@@ -48,7 +48,7 @@ class LineSegment : public Element {
       virtual bool isMovable() const { return true; }
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
       virtual void layout() {}

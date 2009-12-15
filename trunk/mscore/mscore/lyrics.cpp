@@ -23,7 +23,7 @@
 #include "system.h"
 #include "measure.h"
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "sym.h"
 
 //---------------------------------------------------------
@@ -148,7 +148,7 @@ QPointF Lyrics::canvasPos() const
 //   lyricsUpDown
 //---------------------------------------------------------
 
-void Canvas::lyricsUpDown(bool up, bool end)
+void ScoreView::lyricsUpDown(bool up, bool end)
       {
       Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
       int staffIdx     = lyrics->staffIdx();
@@ -185,7 +185,7 @@ void Canvas::lyricsUpDown(bool up, bool end)
 //   lyricsTab
 //---------------------------------------------------------
 
-void Canvas::lyricsTab(bool back, bool end)
+void ScoreView::lyricsTab(bool back, bool end)
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -279,7 +279,7 @@ void Canvas::lyricsTab(bool back, bool end)
 //   lyricsMinus
 //---------------------------------------------------------
 
-void Canvas::lyricsMinus()
+void ScoreView::lyricsMinus()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -357,7 +357,7 @@ void Canvas::lyricsMinus()
 //   lyricsUnderscore
 //---------------------------------------------------------
 
-void Canvas::lyricsUnderscore()
+void ScoreView::lyricsUnderscore()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -443,7 +443,7 @@ void Canvas::lyricsUnderscore()
 //   lyricsReturn
 //---------------------------------------------------------
 
-void Canvas::lyricsReturn()
+void ScoreView::lyricsReturn()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
@@ -470,7 +470,7 @@ void Canvas::lyricsReturn()
 //   lyricsEndEdit
 //---------------------------------------------------------
 
-void Canvas::lyricsEndEdit()
+void ScoreView::lyricsEndEdit()
       {
       Lyrics* lyrics = (Lyrics*)editObject;
       Lyrics* origL  = (Lyrics*)origEditObject;

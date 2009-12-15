@@ -27,7 +27,7 @@
 #include "ui_aboutbox.h"
 #include "singleapp/src/qtsingleapplication.h"
 
-class Canvas;
+class ScoreView;
 class Element;
 class ToolButton;
 class PreferenceDialog;
@@ -52,7 +52,7 @@ class ExcerptsDialog;
 class SynthControl;
 class PianorollEditor;
 class Staff;
-class Viewer;
+class ScoreView;
 class ScoreTab;
 class QScriptEngineDebugger;
 struct Drumset;
@@ -166,7 +166,7 @@ class MuseScore : public QMainWindow {
       UndoGroup* _undoGroup;
       QList<Score*> scoreList;
       Score* cs;              // current score
-      Viewer* cv;             // current viewer
+      ScoreView* cv;             // current viewer
 
       QQueue<Command> commandQueue;
 
@@ -322,12 +322,13 @@ class MuseScore : public QMainWindow {
       void searchTextChanged(const QString& s);
       void pluginTriggered(int);
       void handleMessage(const QString& message);
-      void setCurrentViewer(Viewer*);
-      void setCurrentViewer(int);
+      void setCurrentScoreView(ScoreView*);
+      void setCurrentScoreView(int);
       void setNormalState()    { changeState(STATE_NORMAL); }
       void setEditState()      { changeState(STATE_EDIT); }
       void setNoteEntryState() { changeState(STATE_NOTE_ENTRY); }
       void setPlayState()      { changeState(STATE_PLAY); }
+      void setSearchState()    { changeState(STATE_SEARCH); }
 
    public:
       MuseScore();
@@ -353,7 +354,7 @@ class MuseScore : public QMainWindow {
       QString createDefaultName() const;
       void startAutoSave();
       void updateDrumset();
-      double getMag(Canvas*) const;
+      double getMag(ScoreView*) const;
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
       void setDrumPalette(Palette* p) { drumPalette = p; }
@@ -372,7 +373,7 @@ class MuseScore : public QMainWindow {
       PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
       void writeSessionFile(bool);
       bool restoreSession(bool);
-      Viewer* currentViewer() const { return cv; }
+      ScoreView* currentScoreView() const { return cv; }
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
       void loadPlugins();

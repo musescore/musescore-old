@@ -28,7 +28,7 @@ class Note;
 class System;
 class SlurTie;
 class Score;
-class Viewer;
+class ScoreView;
 
 struct UP {
       QPointF p;            // layout position relative to pos()
@@ -66,7 +66,7 @@ class SlurSegment : public Element {
 
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
 
@@ -74,7 +74,7 @@ class SlurSegment : public Element {
       virtual void move(const QPointF& s);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       SlurTie* slurTie() const     { return (SlurTie*)parent(); }
 

@@ -25,7 +25,7 @@
 #include "utils.h"
 #include "score.h"
 #include "sym.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "staff.h"
 #include "system.h"
 #include "measure.h"
@@ -275,7 +275,7 @@ Space BarLine::space() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(Viewer* v, const QPointF&, int type, int) const
+bool BarLine::acceptDrop(ScoreView* v, const QPointF&, int type, int) const
       {
       if (type == BAR_LINE) {
             v->setDropTarget(this);

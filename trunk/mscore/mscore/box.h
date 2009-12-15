@@ -29,7 +29,7 @@
 #include "measurebase.h"
 
 class BarLine;
-class Viewer;
+class ScoreView;
 
 //---------------------------------------------------------
 //   Box
@@ -48,8 +48,8 @@ class Box : public MeasureBase {
       virtual void draw(QPainter& p) const;
 
       virtual bool isEditable() { return true; }
-      virtual void startEdit(Viewer*, const QPointF&);
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();
       virtual void endEdit();
@@ -87,11 +87,11 @@ class HBox : public Box {
       virtual ElementType type() const { return HBOX;       }
 
       virtual void layout();
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       };
@@ -111,7 +111,7 @@ class VBox : public Box {
       virtual void layout();
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       virtual void add(Element*);
       virtual void remove(Element*);

@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "scoretab.h"
-#include "viewer.h"
-#include "canvas.h"
+#include "scoreview.h"
+#include "scoreview.h"
 #include "score.h"
 #include "magbox.h"
 
@@ -49,16 +49,16 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   viewer
+//   view
 //---------------------------------------------------------
 
-Viewer* ScoreTab::viewer(int n) const
+ScoreView* ScoreTab::view(int n) const
       {
       Score* score = scoreList->value(n);
       for (int i = 0; i < stack->count(); ++i) {
-            Viewer* viewer = static_cast<Viewer*>(stack->widget(i));
-            if (viewer->score() == score)
-                  return viewer;
+            ScoreView* v = static_cast<ScoreView*>(stack->widget(i));
+            if (v->score() == score)
+                  return v;
             }
       return 0;
       }
@@ -70,17 +70,17 @@ Viewer* ScoreTab::viewer(int n) const
 void ScoreTab::setCurrent(int n)
       {
       if (n == -1) {
-            emit currentViewerChanged(0);
+            emit currentScoreViewChanged(0);
             return;
             }
-      Viewer* v = viewer(n);
+      ScoreView* v = view(n);
       if (!v)  {
-            v = new Canvas;
+            v = new ScoreView;
             v->setScore(scoreList->value(n));
             stack->addWidget(v);
             }
       stack->setCurrentWidget(v);
-      emit currentViewerChanged(v);
+      emit currentScoreViewChanged(v);
       }
 
 //---------------------------------------------------------
@@ -131,10 +131,10 @@ void ScoreTab::removeTab(int idx)
       {
       Score* score = static_cast<Score*>(tab->tabData(idx).value<void*>());
       for (int i = 0; i < stack->count(); ++i) {
-            Viewer* viewer = static_cast<Viewer*>(stack->widget(i));
-            if (viewer->score() == score) {
+            ScoreView* v = static_cast<ScoreView*>(stack->widget(i));
+            if (v->score() == score) {
                   stack->takeAt(i);
-                  delete viewer;
+                  delete v;
                   break;
                   }
             }
@@ -147,17 +147,18 @@ void ScoreTab::removeTab(int idx)
       }
 
 //---------------------------------------------------------
-//   initViewer
+//   initScoreView
 //---------------------------------------------------------
 
-void ScoreTab::initViewer(int idx, double mag, int magIdx, double xoffset, double yoffset)
+void ScoreTab::initScoreView(int idx, double mag, int magIdx, double xoffset, double yoffset)
       {
-      Viewer* v = viewer(idx);
+      ScoreView* v = view(idx);
       if (!v)  {
-            v = new Canvas;
+            v = new ScoreView;
             v->setScore(scoreList->value(idx));
             stack->addWidget(v);
             }
       v->setMag(magIdx, mag);
       v->setOffset(xoffset, yoffset);
       }
+

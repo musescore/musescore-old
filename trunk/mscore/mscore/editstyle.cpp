@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "style.h"
 #include "editstyle.h"
 #include "articulation.h"

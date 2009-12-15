@@ -39,7 +39,7 @@ class Spacer : public Element {
 
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       void setSpace(const Spatium& sp) { _space = sp;   }
       Spatium getSpace() const         { return _space; }

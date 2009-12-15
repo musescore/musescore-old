@@ -50,7 +50,7 @@ class Glissando : public Element {
       virtual bool isMovable() const   { return false; }
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       void setSize(const QSizeF&);        // used for palette
 

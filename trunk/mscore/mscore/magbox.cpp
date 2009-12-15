@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "magbox.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "page.h"
 #include "mscore.h"
 #include "score.h"
@@ -77,7 +77,7 @@ void MagBox::indexChanged(int idx)
 //   txt2mag
 //---------------------------------------------------------
 
-double MagBox::getMag(Viewer* canvas)
+double MagBox::getMag(ScoreView* canvas)
       {
       switch(currentIndex()) {
             case MAG_25:      return 0.25;

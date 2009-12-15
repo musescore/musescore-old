@@ -494,7 +494,7 @@ bool TextLineSegment::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void TextLineSegment::propertyAction(Viewer* viewer, const QString& s)
+void TextLineSegment::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             TextLine* nTl  = textLine()->clone();

@@ -55,7 +55,7 @@
 #include "page.h"
 #include "lyrics.h"
 #include "measureproperties.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "volta.h"
 #include "image.h"
 #include "hook.h"
@@ -1611,7 +1611,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
+bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1911,7 +1911,7 @@ bool Measure::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Measure::propertyAction(Viewer*, const QString& s)
+void Measure::propertyAction(ScoreView*, const QString& s)
       {
       if (s == "props") {
             MeasureProperties im(this);

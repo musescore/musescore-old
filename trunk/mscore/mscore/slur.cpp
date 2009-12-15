@@ -29,9 +29,9 @@
 #include "system.h"
 #include "segment.h"
 #include "staff.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "navigate.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "articulation.h"
 #include "slurproperties.h"
 #include "undo.h"
@@ -126,7 +126,7 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(Viewer* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (slurTie()->type() != SLUR)
             return false;
@@ -412,7 +412,7 @@ bool SlurSegment::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void SlurSegment::propertyAction(Viewer* viewer, const QString& s)
+void SlurSegment::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             SlurProperties sp(0);

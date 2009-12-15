@@ -46,7 +46,7 @@
 #include "al/sig.h"
 #include "key.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "barline.h"
 #include "volta.h"
 #include "tuplet.h"
@@ -351,18 +351,18 @@ bool UndoGroup::isClean() const
  Common handling for ending undo or redo
 */
 
-void Canvas::endUndoRedo()
+void ScoreView::endUndoRedo()
       {
       if (_score->inputState()._segment)
             mscore->setPos(_score->inputState().tick());
-//TODO-S      if (state != NOTE_ENTRY) {
-//            // no input state
-//            setState(NORMAL);
-//            }
-//      else {
-//            // input state
-//            setState(NOTE_ENTRY);
-//            }
+      if (_score->inputState().noteEntryMode && !noteEntryMode()) {
+            // enter note entry mode
+            postCmd("note-input");
+            }
+      else if (!_score->inputState().noteEntryMode && noteEntryMode()) {
+            // leave note entry mode
+            postCmd("escape");
+            }
       _score->selection()->update();
       _score->setLayoutAll(true);
       _score->end();

@@ -34,7 +34,7 @@ class Measure;
 class Driver;
 class Part;
 struct Channel;
-class Viewer;
+class ScoreView;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -74,7 +74,7 @@ class Seq : public QObject {
       Q_OBJECT
 
       Score* cs;
-      Viewer* cv;
+      ScoreView* cv;
       bool running;                       // true if sequencer is available
       int state;                          // STOP, PLAY, START_PLAY
       bool playlistChanged;
@@ -167,9 +167,9 @@ class Seq : public QObject {
       void startNote(Channel*, int, int, int, double nt);
       void setController(int, int, int);
       void sendEvent(const Event&);
-      void setViewer(Viewer*);
+      void setScoreView(ScoreView*);
       Score* score() const   { return cs; }
-      Viewer* viewer() const { return cv; }
+      ScoreView* viewer() const { return cv; }
       void initInstruments();
 
       const QList<MidiPatch*>& getPatchInfo() const;

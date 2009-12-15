@@ -20,7 +20,7 @@
 
 #include "navigator.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "score.h"
 #include "page.h"
 #include "preferences.h"
@@ -49,10 +49,10 @@ Navigator::Navigator(QWidget* parent)
 void MuseScore::showNavigator(bool visible)
       {
       if (cv)
-            static_cast<Canvas*>(cv)->showNavigator(visible);
+            static_cast<ScoreView*>(cv)->showNavigator(visible);
       }
 
-void Canvas::showNavigator(bool visible)
+void ScoreView::showNavigator(bool visible)
       {
       if (navigator == 0) {
             navigator = new Navigator(this);

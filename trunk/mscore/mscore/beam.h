@@ -21,11 +21,11 @@
 #ifndef __BEAM_H__
 #define __BEAM_H__
 
-#include "chordlist.h"
 #include "element.h"
 #include "durationtype.h"
 
-class Viewer;
+class ChordRest;
+class ScoreView;
 class Chord;
 
 //---------------------------------------------------------

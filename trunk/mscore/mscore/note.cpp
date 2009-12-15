@@ -34,7 +34,7 @@
 #include "clef.h"
 #include "preferences.h"
 #include "staff.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "pitchspelling.h"
 #include "arpeggio.h"
 #include "tremolo.h"
@@ -802,7 +802,7 @@ QRectF Note::drag(const QPointF& s)
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2.0 / spatium());
 
-      score()->setLayoutStart(chord()->measure());
+      score()->setLayout(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }
 
@@ -918,7 +918,7 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
+bool Note::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) const
       {
       if (type == ARTICULATION
          || type == TEXT
@@ -1202,7 +1202,7 @@ bool Note::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Note::propertyAction(Viewer* viewer, const QString& s)
+void Note::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             ChordProperties vp(this);

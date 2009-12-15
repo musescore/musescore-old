@@ -25,7 +25,7 @@
 #include "style.h"
 #include "mscore.h"
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 
 extern TextPalette* textPalette;
 
@@ -192,7 +192,7 @@ printf("sizeChanged\n");
 void TextTools::moveFocus()
       {
 //TODO-S      _textElement->score()->canvas()->setFocus();
-//cannot work:      mscore->currentViewer()->setFocus();
+//cannot work:      mscore->currentScoreView()->setFocus();
       }
 
 //---------------------------------------------------------
@@ -319,7 +319,7 @@ void TextTools::showKeyboardClicked(bool val)
       {
       if (val) {
             if (textPalette == 0)
-                  textPalette = new TextPalette(mscore->currentViewer());
+                  textPalette = new TextPalette(mscore->currentScoreView());
             textPalette->setText(_textElement);
             textPalette->show();
             }

@@ -24,8 +24,8 @@
 #include "mscore.h"
 #include "barline.h"
 #include "repeat.h"
-#include "viewer.h"
-#include "canvas.h"
+#include "scoreview.h"
+#include "scoreview.h"
 #include "boxproperties.h"
 #include "symbol.h"
 #include "system.h"
@@ -83,7 +83,7 @@ void Box::draw(QPainter& p) const
 //   startEdit
 //---------------------------------------------------------
 
-void Box::startEdit(Viewer*, const QPointF&)
+void Box::startEdit(ScoreView*, const QPointF&)
       {
       editMode = true;
       }
@@ -92,7 +92,7 @@ void Box::startEdit(Viewer*, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Box::edit(Viewer*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const QString&)
+bool Box::edit(ScoreView*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const QString&)
       {
       return false;
       }
@@ -301,7 +301,7 @@ void HBox::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool HBox::acceptDrop(Viewer*, const QPointF&, int, int) const
+bool HBox::acceptDrop(ScoreView*, const QPointF&, int, int) const
       {
       return false;
       }
@@ -336,7 +336,7 @@ bool HBox::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void HBox::propertyAction(Viewer* viewer, const QString& cmd)
+void HBox::propertyAction(ScoreView* viewer, const QString& cmd)
       {
       if (cmd == "props") {
             BoxProperties vp(this, 0);
@@ -410,7 +410,7 @@ bool VBox::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void VBox::propertyAction(Viewer* viewer, const QString& cmd)
+void VBox::propertyAction(ScoreView* viewer, const QString& cmd)
       {
       if (cmd == "props") {
             BoxProperties vp(this, 0);
