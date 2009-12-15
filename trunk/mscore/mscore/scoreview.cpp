@@ -2388,6 +2388,28 @@ void ScoreView::focusOutEvent(QFocusEvent* event)
       }
 
 //---------------------------------------------------------
+//   setFocusRect
+//---------------------------------------------------------
+
+void ScoreView::setFocusRect()
+      {
+      if (mscore->splitScreen()) {
+            if (!focusFrame) {
+                  focusFrame = new QFocusFrame;
+                  QPalette p(focusFrame->palette());
+                  p.setColor(QPalette::WindowText, Qt::blue);
+                  focusFrame->setPalette(p);
+                  }
+            focusFrame->setWidget(static_cast<QWidget*>(this));
+            focusFrame->show();
+            }
+      else {
+            if (focusFrame)
+                  focusFrame->setWidget(0);
+            }
+      }
+
+//---------------------------------------------------------
 //   editCopy
 //---------------------------------------------------------
 

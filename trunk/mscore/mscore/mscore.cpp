@@ -1092,7 +1092,12 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       {
       ScoreView* c = static_cast<ScoreView*>(view);
       cv = view;
-      cs = view ? view->score() : 0;
+      if (view) {
+            cs = view->score();
+            view->setFocusRect();
+            }
+      else
+            cs = 0;
 
       bool enable = cs != 0;
       if (paletteBox)
