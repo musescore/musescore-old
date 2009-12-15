@@ -88,7 +88,7 @@ QT4_WRAP_UI (ui_headers
       )
 
 QT4_WRAP_CPP (mocs
-      canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
+      scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
       mscore.h navigator.h pagesettings.h palette.h partedit.h playpanel.h
       preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
@@ -101,7 +101,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h scscore.h scnote.h sctext.h scmeasure.h scbytearray.h
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
-      pianoscene.h splitstaff.h viewer.h scoretab.h
+      pianoscene.h splitstaff.h scoretab.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -151,7 +151,7 @@ add_executable ( ${ExecutableName}
       ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp
-      bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
+      bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp element.cpp exportxml.cpp file.cpp
       hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
@@ -166,7 +166,7 @@ add_executable ( ${ExecutableName}
       system.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
-      viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
+      volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       glissando.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp

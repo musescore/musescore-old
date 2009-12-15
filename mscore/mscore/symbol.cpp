@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "page.h"
 #include "score.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "image.h"
 
 //---------------------------------------------------------
@@ -87,7 +87,7 @@ void BSymbol::scanElements(void* data, void (*func)(void*, Element*))
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BSymbol::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+bool BSymbol::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
       {
       if (type == SYMBOL || type == IMAGE) {
             viewer->setDropTarget(this);

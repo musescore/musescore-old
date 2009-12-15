@@ -21,7 +21,7 @@
 #include "layoutbreak.h"
 #include "preferences.h"
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -140,7 +140,7 @@ const QString LayoutBreak::subtypeName() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool LayoutBreak::acceptDrop(Viewer*, const QPointF&, int type, int st) const
+bool LayoutBreak::acceptDrop(ScoreView*, const QPointF&, int type, int st) const
       {
       if (type == LAYOUT_BREAK && st != subtype())
             return true;

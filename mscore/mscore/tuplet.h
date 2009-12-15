@@ -67,7 +67,7 @@ class Tuplet : public DurationElement {
       QPointF bracketR[3];
 
       virtual bool genPropertyMenu(QMenu* menu) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
       virtual void setSelected(bool f);
 
    public:

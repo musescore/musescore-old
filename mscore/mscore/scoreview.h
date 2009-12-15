@@ -21,11 +21,8 @@
 #ifndef __SCANVAS_H__
 #define __SCANVAS_H__
 
-#include "viewer.h"
-
 class Rest;
 class Element;
-class Transformation;
 class Page;
 class Xml;
 class Note;
@@ -33,10 +30,11 @@ class Lasso;
 class ShadowNote;
 class Navigator;
 class Cursor;
-class ElementList;
 class Segment;
 class Measure;
 class System;
+class Score;
+class TextB;
 
 //---------------------------------------------------------
 //   CommandEvent
@@ -50,15 +48,39 @@ struct CommandEvent : public QEvent
       };
 
 //---------------------------------------------------------
-//   Canvas
+//   ScoreView
 //---------------------------------------------------------
 
-class Canvas : public Viewer {
+class ScoreView : public QWidget {
       Q_OBJECT
 
       enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
-            NOTE_ENTRY, MAG, PLAY, STATES
+            NOTE_ENTRY, MAG, PLAY, SEARCH, STATES
             };
+
+      Score* _score;
+
+      // the next elements are used during dragMove to give some visual
+      // feedback:
+      //    dropTarget:       if valid, the element is drawn in a different color
+      //                      to mark it as a valid drop target
+      //    dropRectangle:    if valid, the rectangle is filled with a
+      //                      color to visualize a valid drop area
+      //    dropAnchor:       if valid the line is drawn from the current
+      //                      cursor position to the current anchor point
+      // Note:
+      //    only one of the elements is active during drag
+
+      const Element* dropTarget;    ///< current drop target during dragMove
+      QRectF dropRectangle;         ///< current drop rectangle during dragMove
+      QLineF dropAnchor;            ///< line to current anchor point during dragMove
+
+      // in text edit mode text is framed
+      TextB* _editText;
+
+      QMatrix _matrix, imatrix;
+      int _magIdx;
+
 
       QStateMachine* sm;
       QState* states[STATES];
@@ -67,8 +89,8 @@ class Canvas : public Viewer {
       Navigator* navigator;
       int level;
 
-      bool dragCanvasState;
-      bool draggedCanvas;
+      bool dragScoreViewState;
+      bool draggedScoreView;
       Element* dragElement;   // current moved drag&drop element
       Element* dragObject;    // current canvas element
 
@@ -111,12 +133,7 @@ class Canvas : public Viewer {
       void saveChord(Xml&);
 
       virtual void resizeEvent(QResizeEvent*);
-//      virtual void mousePressEvent(QMouseEvent*);
-//      virtual void mouseMoveEvent(QMouseEvent*);
       virtual void wheelEvent(QWheelEvent*);
-//      void mouseMoveEvent1(QMouseEvent*);
-//      virtual void mouseReleaseEvent(QMouseEvent*);
-//      virtual bool event(QEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragLeaveEvent(QDragLeaveEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
@@ -174,31 +191,29 @@ class Canvas : public Viewer {
 
       void endLasso();
       void deselectAll();
+      void adjustCanvasPosition(Element* el, bool playBack);
+      void editCopy();
+      void editPaste();
 
    public:
-      Canvas(QWidget* parent = 0);
-      ~Canvas();
+      ScoreView(QWidget* parent = 0);
+      ~ScoreView();
 
       void startEdit(Element*, int startGrip);
-      virtual void startEdit(Element*);
+      void startEdit(Element*);
 
-      virtual void moveCursor(Segment*, int staffIdx);
-      virtual void setCursorOn(bool);
+      void moveCursor(Segment*, int staffIdx);
+      void setCursorOn(bool);
       void setBackground(QPixmap*);
       void setBackground(const QColor&);
       void setForeground(QPixmap*);
       void setForeground(const QColor&);
 
       Page* addPage();
-
       void modifyElement(Element* obj);
+      void setScore(Score* s);
 
-      void clearScore();
-
-//      State getState() const { return state; }
-      virtual void setScore(Score* s);
-
-      virtual void setMag(qreal m);
+      void setMag(qreal m);
       void showNavigator(bool visible);
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;
@@ -206,9 +221,8 @@ class Canvas : public Viewer {
       Element* elementNear(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
       void setLassoRect(const QRectF& r) { _lassoRect = r; }
-      void paintLasso(QPainter& p, double mag);
       bool navigatorVisible() const;
-      virtual void cmd(const QAction* a);
+      void cmd(const QAction* a);
 
       void drag(const QPointF&);
       void endUndoRedo();
@@ -217,7 +231,7 @@ class Canvas : public Viewer {
       void setOrigEditObject(Element* e) { origEditObject = e; }
       void editKey(QKeyEvent*);
       Element* getDragObject() const { return dragObject; }
-      void dragCanvas(QMouseEvent* ev);
+      void dragScoreView(QMouseEvent* ev);
       void dragNoteEntry(QMouseEvent* ev);
       void noteEntryButton(QMouseEvent* ev);
       void doDragElement(QMouseEvent* ev);
@@ -227,12 +241,34 @@ class Canvas : public Viewer {
       void mousePress(QMouseEvent* ev);
       bool testElementDragTransition(QMouseEvent* ev) const;
       bool editElementDragTransition(QMouseEvent* ev);
-      bool editCanvasDragTransition(QMouseEvent* e);
+      bool editScoreViewDragTransition(QMouseEvent* e);
       void cmdAddSlur();
       void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
       void editInputTransition(QInputMethodEvent* ie);
       void onEditPasteTransition(QMouseEvent* ev);
+
+      Score* score() const                      { return _score; }
+      void setDropRectangle(const QRectF&);
+      void setDropTarget(const Element*);
+      void setDropAnchor(const QLineF&);
+      const QMatrix& matrix() const              { return _matrix; }
+      void setEditText(TextB* t)                 { _editText = t;      }
+      TextB* editText() const                    { return _editText;   }
+      qreal mag() const;
+      int magIdx() const                         { return _magIdx; }
+      void setMag(int idx, double mag);
+      qreal xoffset() const;
+      qreal yoffset() const;
+      void setOffset(qreal x, qreal y);
+      QSizeF fsize() const;
+      void pageNext();
+      void pagePrev();
+      void pageTop();
+      void pageEnd();
+      QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
+      void search(const QString& s);
+      void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       };
 
 extern int searchStaff(const Element* element);

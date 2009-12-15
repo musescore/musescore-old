@@ -20,7 +20,7 @@
 
 #include "mscore.h"
 #include "midifile.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "file.h"
 #include "score.h"
 #include "key.h"
@@ -1009,11 +1009,11 @@ void Score::convertMidi(MidiFile* mf)
                   }
             if (track->staffIdx() != -1)
                   convertTrack(track);
-                  
+
             foreach (Event* e, track->events()) {
               if (e->type() == ME_META && e->metaType()==META_LYRIC)
                  mf->processMeta(this, track, e);
-              }      
+              }
             }
 
       for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {

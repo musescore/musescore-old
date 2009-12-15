@@ -23,7 +23,7 @@
 #include "xml.h"
 #include "style.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "score.h"
 #include "utils.h"
 #include "page.h"
@@ -869,7 +869,7 @@ bool TextB::readProperties(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-void TextB::startEdit(Viewer* view, const QPointF& p)
+void TextB::startEdit(ScoreView* view, const QPointF& p)
       {
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
@@ -908,7 +908,7 @@ bool TextB::isEditable()
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool TextB::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
             printf("TextB::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
@@ -1309,7 +1309,7 @@ bool Text::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Text::propertyAction(Viewer* viewer, const QString& s)
+void Text::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             Text* nText = clone();

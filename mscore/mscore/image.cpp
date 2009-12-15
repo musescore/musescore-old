@@ -317,7 +317,7 @@ bool Image::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Image::propertyAction(Viewer* viewer, const QString& s)
+void Image::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             ImageProperties vp(this);

@@ -30,7 +30,7 @@
 #include "staff.h"
 #include "style.h"
 #include "timesig.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "chord.h"
 #include "note.h"
 #include "slur.h"
@@ -663,7 +663,6 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-// printf("doLayout============\n");
       _needLayout = false;
 
 #if 0 // DEBUG

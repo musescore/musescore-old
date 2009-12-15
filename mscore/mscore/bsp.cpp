@@ -148,6 +148,7 @@ void BspTree::remove(const Element* element)
 //   remove
 //---------------------------------------------------------
 
+#if 0
 void BspTree::remove(const QSet<const Element*>& items)
       {
       for (int i = 0; i < leaves.size(); ++i) {
@@ -161,6 +162,7 @@ void BspTree::remove(const QSet<const Element*>& items)
             leaves[i] = newItemList;
             }
       }
+#endif
 
 //---------------------------------------------------------
 //   items

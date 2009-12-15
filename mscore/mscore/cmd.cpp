@@ -29,7 +29,7 @@
 #include "key.h"
 #include "clef.h"
 #include "navigate.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "slur.h"
 #include "note.h"
 #include "rest.h"
@@ -135,26 +135,27 @@ void Score::endCmd()
 void Score::end()
       {
       if (layoutAll) {
-            _updateAll = true;
-            layout();
+            _updateAll  = true;
+            _needLayout = true;
+            startLayout = 0;
             }
-      else if (layoutStart) {
+      else if (startLayout) {
             _updateAll = true;
-            reLayout(layoutStart);
+            _needLayout = true;
             }
-
-      // update a little more:
-      double d = _spatium * .5;
-      refresh.adjust(-d, -d, 2 * d, 2 * d);
 
       if (_updateAll)
             emit updateAll();
-      else
+      else {
+            // update a little more:
+            double d = _spatium * .5;
+            refresh.adjust(-d, -d, 2 * d, 2 * d);
             emit dataChanged(refresh);
-      refresh    = QRectF();
-      layoutAll  = false;
+            }
+      refresh     = QRectF();
+      layoutAll   = false;
       _updateAll  = false;
-      layoutStart = 0;
+      startLayout = 0;
       if (!noteEntryMode())
             setPadState();
       }
@@ -415,7 +416,7 @@ void Score::cmdRemove(Element* e)
 //       insert note or add note to chord
 //---------------------------------------------------------
 
-void Canvas::cmdAddPitch(int note, bool addFlag)
+void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
 
@@ -500,7 +501,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             Note* n = addNote(on->chord(), pitch);
             select(n, SELECT_SINGLE, 0);
             setLayoutAll(false);
-            setLayoutStart(on->chord()->measure());
+            setLayout(on->chord()->measure());
             moveToNextInputPos();
             return n;
             }
@@ -520,6 +521,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
 
       Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration, headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
+      setLayout(note->chord()->measure());
 
       if (_is.slur) {
             //
@@ -1096,9 +1098,8 @@ printf("   sublist:\n");
 //   cmdAddChordName
 //---------------------------------------------------------
 
-void Canvas::cmdAddChordName()
+void ScoreView::cmdAddChordName()
       {
-//    setState(STATE_NORMAL);
       if (!_score->checkHasMeasures())
             return;
       ChordRest* cr = _score->getSelectedChordRest();
@@ -1125,7 +1126,6 @@ void Canvas::cmdAddChordName()
 
 void Score::cmdAddChordName2()
       {
-//TODO-S      setState(STATE_NORMAL);
       if (!checkHasMeasures())
             return;
       ChordRest* cr = getSelectedChordRest();
@@ -1181,9 +1181,8 @@ void Score::cmdAddChordName2()
 //   cmdAddText
 //---------------------------------------------------------
 
-void Canvas::cmdAddText(int subtype)
+void ScoreView::cmdAddText(int subtype)
       {
-//TODO-S      setState(STATE_NORMAL);
       if (!_score->checkHasMeasures())
             return;
       _score->startCmd();
@@ -1282,7 +1281,7 @@ void Canvas::cmdAddText(int subtype)
 void Score::upDown(bool up, bool octave)
       {
       layoutAll   = false;
-      layoutStart = 0;        // DEBUG
+      startLayout = 0;        // DEBUG
       ElementList el;
 
       QList<Note*> nl = selection()->noteList();
@@ -1290,9 +1289,9 @@ void Score::upDown(bool up, bool octave)
       int tick = -1;
       bool playNotes = true;
       foreach(Note* note, nl) {
-            if (layoutStart == 0)
-                  layoutStart = note->chord()->segment()->measure();
-            else if (layoutStart != note->chord()->segment()->measure())
+            if (startLayout == 0)
+                  startLayout = note->chord()->segment()->measure();
+            else if (startLayout != note->chord()->segment()->measure())
                   layoutAll = true;
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
                   iElement ii;
@@ -1786,18 +1785,6 @@ void Score::cmd(const QAction* a)
 
       if (cmd == "print")
             printFile();
-      else if (cmd == "find") {
-//            if (noteEntryMode())
-//                  setNoteEntry(false);
-//TODO-S            setState(STATE_SEARCH);
-            }
-      else if (cmd == "escape") {
-//TODO-S           if (state() == STATE_SEARCH)
-//                  setState(STATE_NORMAL);
-/*            else*/ if (noteEntryMode())
-//                  setNoteEntry(false);
-            end();
-            }
       else if (cmd == "repeat")
             preferences.playRepeats = !preferences.playRepeats;
       else if (cmd == "rewind")
@@ -2995,4 +2982,44 @@ void Score::cmdRepeatSelection()
       else
             printf("?? %p\n", endSegment);
       }
+
+//---------------------------------------------------------
+//   search
+//---------------------------------------------------------
+
+void ScoreView::search(const QString& s)
+      {
+      bool ok;
+
+      int n = s.toInt(&ok);
+      if (!ok || n <= 0)
+            return;
+
+      int i = 0;
+      for (Measure* measure = _score->firstMeasure(); measure; measure = measure->nextMeasure()) {
+            if (++i < n)
+                  continue;
+            adjustCanvasPosition(measure, true);
+            int tracks = _score->nstaves() * VOICES;
+            for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                  if (segment->subtype() != Segment::SegChordRest)
+                        continue;
+                  int track;
+                  for (track = 0; track < tracks; ++track) {
+                        ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                        if (cr) {
+                              Element* e = cr->type() == CHORD ? static_cast<Chord*>(cr)->upNote() : 0;
+                              _score->select(e, SELECT_SINGLE, 0);
+                              break;
+                              }
+                        }
+                  if (track != tracks)
+                        break;
+                  }
+            _score->setUpdateAll(true);
+            _score->end();
+            break;
+            }
+      }
+
 

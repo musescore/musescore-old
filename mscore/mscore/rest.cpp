@@ -22,7 +22,7 @@
 #include "score.h"
 #include "xml.h"
 #include "style.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "restproperties.h"
 #include "utils.h"
 #include "tuplet.h"
@@ -155,7 +155,7 @@ QRectF Rest::drag(const QPointF& s)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
+bool Rest::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) const
       {
       if (
          (type == ICON && subtype == ICON_SBEAM)
@@ -433,7 +433,7 @@ bool Rest::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Rest::propertyAction(Viewer* viewer, const QString& s)
+void Rest::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             Rest r(*this);

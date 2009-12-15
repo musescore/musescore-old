@@ -22,7 +22,7 @@
 #include "mscore.h"
 #include "instrdialog.h"
 #include "instrtemplate.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "score.h"
 #include "system.h"
 #include "clef.h"

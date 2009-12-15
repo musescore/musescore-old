@@ -33,7 +33,7 @@
 #include "sym.h"
 #include "symbol.h"
 #include "clef.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "volta.h"
 #include "ottava.h"
 #include "textline.h"
@@ -57,7 +57,7 @@
 #include "page.h"
 #include "system.h"
 #include "stafftext.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "glissando.h"
 #include "articulation.h"
 #include "chord.h"
@@ -567,7 +567,7 @@ bool Element::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Element::propertyAction(Viewer*, const QString& s)
+void Element::propertyAction(ScoreView*, const QString& s)
       {
       QList<Element*>* el = score()->selection()->elements();
       if (s == "invisible") {
@@ -1008,7 +1008,7 @@ void Compound::clear()
 //   Cursor
 //---------------------------------------------------------
 
-Cursor::Cursor(Score* s, Viewer* v)
+Cursor::Cursor(Score* s, ScoreView* v)
    : Element(s)
       {
       viewer    = v;
@@ -1152,7 +1152,7 @@ void Element::editDrag(int, const QPointF& delta)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Element::edit(Viewer*, int, int key, Qt::KeyboardModifiers, const QString&)
+bool Element::edit(ScoreView*, int, int key, Qt::KeyboardModifiers, const QString&)
       {
       if (key ==  Qt::Key_Home) {
             setUserOff(QPoint());

@@ -25,7 +25,7 @@
 #include "globals.h"
 #include "config.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "xml.h"
 #include "element.h"
 #include "note.h"
@@ -194,7 +194,7 @@ void MuseScore::loadFile()
             return;
       Score* score = new Score(defaultStyle);
       score->read(fn);
-      setCurrentViewer(appendScore(score));
+      setCurrentScoreView(appendScore(score));
       lastOpenPath = score->fileInfo()->path();
       writeSessionFile(false);
       }
@@ -779,7 +779,7 @@ void MuseScore::newFile()
             score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
-      setCurrentViewer(appendScore(score));
+      setCurrentScoreView(appendScore(score));
       }
 
 //---------------------------------------------------------
@@ -1685,13 +1685,28 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       else
           f = QImage::Format_ARGB32_Premultiplied;
 
-#if 0 // TODO?
-      if (!canvas()->lassoRect().isEmpty() && !_printing) {
-            // this is a special hack to export only the canvas lasso selection
-            // into png (screen shot mode)
+      const QList<Page*>& pl = pages();
+      int pages = pl.size();
 
-            QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
+      QList<Element*> eel;
+      foreach (Element* element, _gel)
+            element->scanElements(&eel, collectElements);
+      foreach (Beam* b, _beams)
+            b->scanElements(&eel, collectElements);
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
+            m->scanElements(&eel, collectElements);
+            }
 
+      for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
+            Page* page = pl.at(pageNumber);
+
+            QRectF r = page->abbox();
             int w = lrint(r.width()  * convDpi / DPI);
             int h = lrint(r.height() * convDpi / DPI);
 
@@ -1702,111 +1717,56 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 
             printer.fill(transparent ? 0 : 0xffffffff);
 
-              if( format == QImage::Format_Indexed8){
-                //convert to grayscale & respect alpha
-                QVector<QRgb> colorTable;
-                colorTable.push_back(QColor(0, 0, 0, 0).rgba());
-                if(!transparent){
-                  for (int i = 1; i < 256; i++)
-                    colorTable.push_back(QColor(i, i, i).rgb());
-                }else{
-                  for (int i = 1; i < 256; i++)
-                    colorTable.push_back(QColor(0, 0, 0, i).rgba());
-                }
-                printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
-              }
-
-            double m = convDpi / PDPI;
+            double mag = convDpi / DPI;
             QPainter p(&printer);
-            canvas()->paintLasso(p, m);
-            rv = printer.save(name, "png");
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setRenderHint(QPainter::TextAntialiasing, true);
+            p.scale(mag, mag);
+
+            foreach(const Element* e, eel) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+
+            QList<Element*> el;
+            page->scanElements(&el, collectElements);
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+
+            if( format == QImage::Format_Indexed8){
+              //convert to grayscale & respect alpha
+              QVector<QRgb> colorTable;
+              colorTable.push_back(QColor(0, 0, 0, 0).rgba());
+              if(!transparent){
+                for (int i = 1; i < 256; i++)
+                  colorTable.push_back(QColor(i, i, i).rgb());
+              }else{
+                for (int i = 1; i < 256; i++)
+                  colorTable.push_back(QColor(0, 0, 0, i).rgba());
+              }
+              printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
             }
-      else
-#endif
-            {
-            const QList<Page*>& pl = pages();
-            int pages = pl.size();
 
-            QList<Element*> eel;
-            foreach (Element* element, _gel)
-                  element->scanElements(&eel, collectElements);
-            foreach (Beam* b, _beams)
-                  b->scanElements(&eel, collectElements);
-            for (MeasureBase* m = _measures.first(); m; m = m->next()) {
-                  // skip multi measure rests
-                  if (m->type() == MEASURE) {
-                        Measure* mm = static_cast<Measure*>(m);
-                        if (mm->multiMeasure() < 0)
-                              continue;
-                        }
-                  m->scanElements(&eel, collectElements);
-                  }
+            QString fileName(name);
+            if (fileName.endsWith(".png"))
+                  fileName = fileName.left(fileName.size() - 4);
+            fileName += QString("-%1.png").arg(pageNumber+1);
 
-            for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
-                  Page* page = pl.at(pageNumber);
-
-                  QRectF r = page->abbox();
-                  int w = lrint(r.width()  * convDpi / DPI);
-                  int h = lrint(r.height() * convDpi / DPI);
-
-                  QImage printer(w, h, f);
-
-                  printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
-                  printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-
-                  printer.fill(transparent ? 0 : 0xffffffff);
-
-                  double mag = convDpi / DPI;
-                  QPainter p(&printer);
-                  p.setRenderHint(QPainter::Antialiasing, true);
-                  p.setRenderHint(QPainter::TextAntialiasing, true);
-                  p.scale(mag, mag);
-
-                  foreach(const Element* e, eel) {
-                        if (!e->visible())
-                              continue;
-                        QPointF ap(e->canvasPos() - page->pos());
-                        p.translate(ap);
-                        p.setPen(QPen(e->color()));
-                        e->draw(p);
-                        p.translate(-ap);
-                        }
-
-                  QList<Element*> el;
-                  page->scanElements(&el, collectElements);
-                  foreach(const Element* e, el) {
-                        if (!e->visible())
-                              continue;
-                        QPointF ap(e->canvasPos() - page->pos());
-                        p.translate(ap);
-                        p.setPen(QPen(e->color()));
-                        e->draw(p);
-                        p.translate(-ap);
-                        }
-
-                  if( format == QImage::Format_Indexed8){
-                    //convert to grayscale & respect alpha
-                    QVector<QRgb> colorTable;
-                    colorTable.push_back(QColor(0, 0, 0, 0).rgba());
-                    if(!transparent){
-                      for (int i = 1; i < 256; i++)
-                        colorTable.push_back(QColor(i, i, i).rgb());
-                    }else{
-                      for (int i = 1; i < 256; i++)
-                        colorTable.push_back(QColor(0, 0, 0, i).rgba());
-                    }
-                    printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
-                  }
-
-                  QString fileName(name);
-                  if (fileName.endsWith(".png"))
-                        fileName = fileName.left(fileName.size() - 4);
-                  fileName += QString("-%1.png").arg(pageNumber+1);
-
-                  rv = printer.save(fileName, "png");
-                  if (!rv)
-                        break;
-                  }
+            rv = printer.save(fileName, "png");
+            if (!rv)
+                  break;
             }
       _printing = false;
       return rv;

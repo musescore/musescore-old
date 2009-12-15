@@ -37,7 +37,7 @@
 #include "note.h"
 #include "chord.h"
 #include "al/tempo.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "playpanel.h"
 #include "staff.h"
 #include "measure.h"
@@ -111,7 +111,7 @@ Seq::~Seq()
 //   setScore
 //---------------------------------------------------------
 
-void Seq::setViewer(Viewer* v)
+void Seq::setScoreView(ScoreView* v)
       {
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
@@ -735,7 +735,7 @@ void Seq::heartBeat()
                   }
             }
       if (note) {
-            mscore->currentViewer()->moveCursor(note->chord()->segment(), -1);
+            mscore->currentScoreView()->moveCursor(note->chord()->segment(), -1);
             cv->adjustCanvasPosition(note, true);
             curTick  = note->chord()->tick();
             curUtick = guiPos.key();
@@ -801,7 +801,7 @@ void Seq::seek(int tick)
             return;
       Segment* seg = cs->tick2segment(tick);
       if (seg) {
-            mscore->currentViewer()->moveCursor(seg, -1);
+            mscore->currentScoreView()->moveCursor(seg, -1);
             }
       cs->setPlayPos(tick);
       cs->end();

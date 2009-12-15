@@ -25,7 +25,7 @@
 #include "style.h"
 
 class TextPalette;
-class Viewer;
+class ScoreView;
 class TextProp;
 
 struct SymCode;
@@ -167,8 +167,8 @@ class TextB : public Element {
       virtual void draw(QPainter&) const;
 
       virtual bool isEditable();
-      virtual void startEdit(Viewer*, const QPointF&);
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString&);
+      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);
       void setCharFormat(const QTextCharFormat&);
@@ -221,7 +221,7 @@ class Text : public TextB {
       virtual TextBase* textBase() const { return _tb; }
 
       virtual bool genPropertyMenu(QMenu* popup) const;
-      virtual void propertyAction(Viewer*, const QString& s);
+      virtual void propertyAction(ScoreView*, const QString& s);
 
       void setModified(bool v)           { _tb->setModified(v); }
       };

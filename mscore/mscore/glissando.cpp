@@ -209,7 +209,7 @@ bool Glissando::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Glissando::propertyAction(Viewer* viewer, const QString& s)
+void Glissando::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             GlissandoProperties vp(this);

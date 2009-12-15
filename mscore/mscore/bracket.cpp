@@ -25,7 +25,7 @@
 #include "utils.h"
 #include "staff.h"
 #include "score.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "system.h"
 #include "sym.h"
 
@@ -170,7 +170,7 @@ void Bracket::read(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-void Bracket::startEdit(Viewer*, const QPointF&)
+void Bracket::startEdit(ScoreView*, const QPointF&)
       {
       yoff = 0.0;
       }
@@ -269,7 +269,7 @@ void Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+bool Bracket::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
       {
       if (type == BRACKET) {
             viewer->setDropTarget(this);
@@ -303,7 +303,7 @@ Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Bracket::edit(Viewer*, int, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool Bracket::edit(ScoreView*, int, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (modifiers & Qt::ShiftModifier) {
             if (key == Qt::Key_Left) {

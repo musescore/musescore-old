@@ -23,7 +23,7 @@
 
 #include "element.h"
 
-class Viewer;
+class ScoreView;
 class Segment;
 
 enum {
@@ -75,7 +75,7 @@ class TimeSig : public Element {
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       Element* drop(const QPointF&, const QPointF&, Element*);
       static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;

@@ -29,7 +29,7 @@
 #include "system.h"
 #include "measure.h"
 #include "mscore.h"
-#include "canvas.h"
+#include "scoreview.h"
 
 static const bool useJazzFont = true;     // DEBUG
 
@@ -413,7 +413,7 @@ bool Harmony::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Harmony::propertyAction(Viewer* viewer, const QString& s)
+void Harmony::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
             ChordEdit ce(score());
@@ -660,7 +660,7 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
 //   startEdit
 //---------------------------------------------------------
 
-void Harmony::startEdit(Viewer* view, const QPointF& p)
+void Harmony::startEdit(ScoreView* view, const QPointF& p)
       {
       if (!textList.isEmpty()) {
             QString s(harmonyName());
@@ -784,7 +784,7 @@ const ChordDescription* Harmony::descr() const
 //   harmonyEndEdit
 //---------------------------------------------------------
 
-void Canvas::harmonyEndEdit()
+void ScoreView::harmonyEndEdit()
       {
       Harmony* harmony = static_cast<Harmony*>(editObject);
       Harmony* origH   = static_cast<Harmony*>(origEditObject);

@@ -29,7 +29,7 @@
 #include "element.h"
 
 class Xml;
-class Viewer;
+class ScoreView;
 class Segment;
 
 static const int NO_CLEF = -1000;
@@ -55,7 +55,7 @@ class Clef : public Compound {
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual Space space() const;

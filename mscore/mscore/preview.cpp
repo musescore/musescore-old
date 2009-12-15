@@ -22,7 +22,6 @@
 #include "score.h"
 #include "page.h"
 #include "globals.h"
-#include "box.h"
 
 //---------------------------------------------------------
 //   PagePreview

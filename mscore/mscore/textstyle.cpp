@@ -22,7 +22,7 @@
 #include "textstyle.h"
 #include "globals.h"
 #include "score.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "textproperties.h"
 #include "undo.h"
 

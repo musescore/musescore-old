@@ -25,7 +25,7 @@
 #include "style.h"
 #include "sym.h"
 #include "symbol.h"
-#include "viewer.h"
+#include "scoreview.h"
 #include "system.h"
 #include "segment.h"
 #include "measure.h"
@@ -115,7 +115,7 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+bool TimeSig::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
       {
       if (type == TIMESIG) {
             viewer->setDropTarget(this);

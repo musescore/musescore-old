@@ -29,7 +29,7 @@
 #include "playpanel.h"
 #include "icons.h"
 #include "shortcutcapturedialog.h"
-#include "canvas.h"
+#include "scoreview.h"
 #include "sym.h"
 #include "palette.h"
 #include "pa.h"

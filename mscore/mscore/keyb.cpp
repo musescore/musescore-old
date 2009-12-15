@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "canvas.h"
+#include "scoreview.h"
 #include "note.h"
 #include "padids.h"
 #include "sym.h"
@@ -41,7 +41,7 @@
 //   Canvas::editKey
 //---------------------------------------------------------
 
-void Canvas::editKey(QKeyEvent* ev)
+void ScoreView::editKey(QKeyEvent* ev)
       {
       int key                         = ev->key();
       Qt::KeyboardModifiers modifiers = ev->modifiers();

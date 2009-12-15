@@ -36,7 +36,7 @@ class Measure;
 class Staff;
 class Score;
 class Sym;
-class Viewer;
+class ScoreView;
 class Segment;
 class TextStyle;
 
@@ -237,8 +237,8 @@ class Element {
       virtual QLineF dragAnchor() const       { return QLineF(); }
 
       virtual bool isEditable()   { return !_generated; }
-      virtual void startEdit(Viewer*, const QPointF&) {}
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual void startEdit(ScoreView*, const QPointF&) {}
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag()                               {}
       virtual void endEdit()                                   {}
@@ -286,7 +286,7 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const { return false; }
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element
@@ -313,7 +313,7 @@ class Element {
  extend property menu by elemement specific items
  */
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
 /**
  delivers mouseEvent to element in edit mode
@@ -432,14 +432,14 @@ class StaffLines : public Element {
 //---------------------------------------------------------
 
 class Cursor : public Element {
-      Viewer* viewer;
+      ScoreView* viewer;
       bool _blink;
       bool _on;
       double _h;
       Segment* _seg;
 
    public:
-      Cursor(Score*, Viewer*);
+      Cursor(Score*, ScoreView*);
       virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
       virtual void draw(QPainter&) const;

@@ -1948,7 +1948,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","backspace")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_SEARCH,
          "find",
          QT_TRANSLATE_NOOP("action","search"),
          QKeySequence::Find,        // Qt::CTRL + Qt::Key_F,

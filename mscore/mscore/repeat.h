@@ -81,7 +81,7 @@ class Marker : public Text {
       virtual void write(Xml& xml) const;
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       QString label() const            { return _label; }
       void setLabel(const QString& s)  { _label = s; }
@@ -123,7 +123,7 @@ class Jump : public Text {
       virtual void write(Xml& xml) const;
 
       virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(Viewer*, const QString&);
+      virtual void propertyAction(ScoreView*, const QString&);
 
       QString jumpTo()               const { return _jumpTo;     }
       QString playUntil()            const { return _playUntil;  }
