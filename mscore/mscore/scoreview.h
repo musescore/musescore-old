@@ -269,6 +269,7 @@ class ScoreView : public QWidget {
       QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
       void search(const QString& s);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
+      void setFocusRect();
       };
 
 extern int searchStaff(const Element* element);
