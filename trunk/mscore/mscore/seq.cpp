@@ -108,14 +108,14 @@ Seq::~Seq()
       }
 
 //---------------------------------------------------------
-//   setScore
+//   setScoreView
 //---------------------------------------------------------
 
 void Seq::setScoreView(ScoreView* v)
       {
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
-            cs = v->score();
+            cs = v ? v->score() : 0;
             stop();
 #ifndef __MINGW32__
             while (state != STOP)

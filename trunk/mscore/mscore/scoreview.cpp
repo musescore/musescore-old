@@ -258,13 +258,13 @@ class ScoreViewLassoTransition : public QMouseEventTransition
 //   ElementDragTransition
 //---------------------------------------------------------
 
-class ElementDragTransition : public QMouseEventTransition
+class ElementDragTransition : public QEventTransition
       {
       ScoreView* canvas;
 
    protected:
       virtual bool eventTest(QEvent* event) {
-            if (!QMouseEventTransition::eventTest(event))
+            if (!QEventTransition::eventTest(event))
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
@@ -273,7 +273,7 @@ class ElementDragTransition : public QMouseEventTransition
             }
    public:
       ElementDragTransition(ScoreView* c, QState* target)
-         : QMouseEventTransition(c, QEvent::MouseMove, Qt::LeftButton), canvas(c) {
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {
             setTargetState(target);
             }
       };
