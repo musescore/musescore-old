@@ -1,4 +1,6 @@
-15.dec (ws)
+15.dec (la)
+      - update CMakeLists.txt for Mac build & QtScript debugger
+       (ws)
       - rename Canvas() to ScoreView()
       - drop Viewer() class
 13.dec (ws)

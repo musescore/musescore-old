@@ -86,13 +86,14 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 ##  look for Qt4
 ##
 
-set(QT_MIN_VERSION "4.5.0")
+set(QT_MIN_VERSION "4.6.0")
 set(QT_USE_QTXML     TRUE)
 set(QT_USE_QTSVG     TRUE)
 set(QT_USE_QTNETWORK TRUE)
 set(QT_USE_QTUITOOLS TRUE)
 set(QT_USE_QTDESIGNER TRUE)
 set(QT_USE_QTSCRIPT   TRUE)
+set(QT_USE_QTSCRIPTTOOLS   TRUE)
 
 find_package(Qt4 "4.6")
 
