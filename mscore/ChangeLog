@@ -1,5 +1,7 @@
 15.dec (la)
       - update CMakeLists.txt for Mac build & QtScript debugger
+      - add "font exception" to GPL license see 
+          http://n2.nabble.com/GPL-License-font-soundfont-demos-td4118724.html
        (ws)
       - rename Canvas() to ScoreView()
       - drop Viewer() class
