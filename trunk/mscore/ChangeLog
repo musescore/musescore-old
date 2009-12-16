@@ -1,4 +1,5 @@
 16.dec (ws)
+      - fix: Add copyright text crash
       - all accidentals can now have brackets: drag bracket symbol on accidental
       (la)
       - expose more metadata to plugin framework

@@ -871,6 +871,7 @@ bool TextB::readProperties(QDomElement e)
 
 void TextB::startEdit(ScoreView* view, const QPointF& p)
       {
+printf("TextB::startEdit\n");
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
@@ -913,7 +914,7 @@ bool TextB::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers m
       if (debugMode)
             printf("TextB::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
       if (!editMode || !cursor) {
-            printf("TextB::edit: not in edit mode: %d %p\n", editMode, cursor);
+            printf("TextB::edit(%p): not in edit mode: %d %p\n", this, editMode, cursor);
             return false;
             }
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);

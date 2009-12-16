@@ -2064,7 +2064,7 @@ void MuseScore::changeState(ScoreState val)
       {
       if (_sstate == val)
             return;
-      if (debugMode)
+//      if (debugMode)
             printf("MuseScore::changeState: %s\n", stateName(val));
 
       foreach (Shortcut* s, shortcuts) {

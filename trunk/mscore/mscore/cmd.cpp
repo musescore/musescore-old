@@ -1185,11 +1185,10 @@ void ScoreView::cmdAddText(int subtype)
       {
       if (!_score->checkHasMeasures())
             return;
-      _score->startCmd();
       Page* page = _score->pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
-      Text* s = 0;
+      TextB* s = 0;
       switch(subtype) {
             case TEXT_TITLE:
             case TEXT_SUBTITLE:
@@ -1205,22 +1204,20 @@ void ScoreView::cmdAddText(int subtype)
                         }
                   s = new Text(_score);
                   switch(subtype) {
-                        case TEXT_TITLE:        s->setTextStyle(TEXT_STYLE_TITLE); break;
-                        case TEXT_SUBTITLE:     s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
-                        case TEXT_COMPOSER:     s->setTextStyle(TEXT_STYLE_COMPOSER); break;
-                        case TEXT_POET:         s->setTextStyle(TEXT_STYLE_POET); break;
+                        case TEXT_TITLE:    s->setTextStyle(TEXT_STYLE_TITLE);    break;
+                        case TEXT_SUBTITLE: s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
+                        case TEXT_COMPOSER: s->setTextStyle(TEXT_STYLE_COMPOSER); break;
+                        case TEXT_POET:     s->setTextStyle(TEXT_STYLE_POET);     break;
                         }
                   s->setSubtype(subtype);
                   s->setParent(measure);
                   }
                   break;
             case TEXT_COPYRIGHT:
-                  {
-                  s = new Text(_score);
+                  s = new TextC(_score);
                   s->setParent(page);
-                  s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                  }
+                  s->setSubtype(subtype);
                   break;
 
             case TEXT_REHEARSAL_MARK:
@@ -1266,8 +1263,6 @@ void ScoreView::cmdAddText(int subtype)
             _score->select(s, SELECT_SINGLE, 0);
             startEdit(s);
             }
-      else
-            _score->endCmd();
       }
 
 //---------------------------------------------------------
