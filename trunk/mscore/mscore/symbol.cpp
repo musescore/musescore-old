@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "page.h"
 #include "score.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "image.h"
 
 //---------------------------------------------------------
@@ -87,13 +87,9 @@ void BSymbol::scanElements(void* data, void (*func)(void*, Element*))
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BSymbol::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
+bool BSymbol::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
-      if (type == SYMBOL || type == IMAGE) {
-            viewer->setDropTarget(this);
-            return true;
-            }
-      return false;
+      return type == SYMBOL || type == IMAGE;
       }
 
 //---------------------------------------------------------
@@ -144,16 +140,6 @@ QRectF BSymbol::drag(const QPointF& pos)
       return r;
       }
 
-
-//---------------------------------------------------------
-//   Symbol
-//---------------------------------------------------------
-
-Symbol::Symbol(Score* s)
-   : BSymbol(s)
-      {
-      _sym = 0;
-      }
 
 //---------------------------------------------------------
 //   setAbove

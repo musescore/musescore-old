@@ -34,7 +34,9 @@ class Symbol : public BSymbol {
       int _sym;
 
    public:
-      Symbol(Score*);
+      Symbol(Score* s)         : BSymbol(s) { _sym = 0;  }
+      Symbol(Score* s, int sy) : BSymbol(s) { _sym = sy; }
+
       Symbol &operator=(const Symbol&);
 
       virtual Symbol* clone() const     { return new Symbol(*this); }

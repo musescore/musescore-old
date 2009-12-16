@@ -401,7 +401,8 @@ void MuseScore::showPalette(bool visible)
             sp->setName(tr("Accidentals"));
             sp->setGrid(33, 36);
 
-            for (int i = 1; i < 11; ++i) {
+            // for (int i = 1; i < 11; ++i) {
+            for (int i = 1; i < 6; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
                   sp->append(s, qApp->translate("Accidental", s->subTypeName()));
@@ -411,6 +412,9 @@ void MuseScore::showPalette(bool visible)
                   s->setSubtype(i);
                   sp->append(s, qApp->translate("Accidental", s->subTypeName()));
                   }
+            AccidentalBracket* ab = new AccidentalBracket(gscore);
+            ab->setSubtype(0);
+            sp->append(ab, tr("round bracket"));
             paletteBox->addPalette(sp);
 
             //-----------------------------------
