@@ -1409,8 +1409,14 @@ void Score::cmdTuplet(int n)
       {
       if (noteEntryMode()) {
 printf("cmdTuplet %d noteEntry\n", n);
+            expandVoice();
             changeCRlen(_is.cr(), _is.duration);
-            cmdTuplet(n, _is.cr(), _is.duration.fraction());
+            Fraction f;
+            if (_is.duration.type() == Duration::V_MEASURE)
+                  f = _is.cr()->measure()->fraction();
+            else
+                  f = _is.duration.fraction();
+            cmdTuplet(n, _is.cr(), f);
             }
       else {
             QList<Element*>* sl = selection()->elements();
@@ -1433,8 +1439,10 @@ printf("cmdTuplet %d noteEntry\n", n);
 
 void Score::cmdTuplet(int n, ChordRest* cr, Fraction f)
       {
-      if (cr == 0 || !f.isValid())
+      if (cr == 0 || !f.isValid()) {
+            printf("cannot create tuplet cr %p valid fraction %d\n", cr, f.isValid());
             return;
+            }
       int tick       = cr->tick();
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot     = cr->tuplet();

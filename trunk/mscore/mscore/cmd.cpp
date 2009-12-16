@@ -949,7 +949,11 @@ Fraction Score::makeGap1(ChordRest* cr, Fraction len)
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
       Fraction srcF = cr->fraction();
-      Fraction dstF(d.fraction());
+      Fraction dstF;
+      if (d.type() == Duration::V_MEASURE)
+            dstF = cr->measure()->fraction();
+      else
+            dstF = d.fraction();
 
       if (srcF == dstF)
             return;
