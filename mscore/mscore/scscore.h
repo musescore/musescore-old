@@ -22,8 +22,10 @@
 #define __SCSCORE_H__
 
 #include "score.h"
+#include "part.h"
 
 typedef Score* ScorePtr;
+typedef Part* PartPtr;
 
 //---------------------------------------------------------
 //   ScScore
@@ -67,7 +69,11 @@ class ScScorePrototype : public QObject, public QScriptable
       {
       Q_OBJECT
       Score* thisScore() const;
+      QString getText(int subtype);
       Q_PROPERTY(QString title READ title WRITE setTitle SCRIPTABLE true)
+      Q_PROPERTY(QString subtitle READ subtitle SCRIPTABLE true)
+      Q_PROPERTY(QString composer READ composer SCRIPTABLE true)
+      Q_PROPERTY(QString poet READ poet SCRIPTABLE true)
 
    public:
       ScScorePrototype(QObject *parent = 0) : QObject(parent) {}
@@ -93,7 +99,14 @@ class ScScorePrototype : public QObject, public QScriptable
       void appendPart(const QString& name);
       void appendMeasures(int n);
       void setTitle(const QString&);
-      QString title() const { return QString("dummy"); }
+      QString title();
+      QString subtitle();
+      QString composer();
+      QString poet();
+      int pages();
+      int measures();
+      int parts();
+      PartPtr part(int i);
       void startUndo()      { thisScore()->startCmd(); }
       void endUndo()        { thisScore()->endCmd();   }
       void setStyle(const QString& name, const QString& value);

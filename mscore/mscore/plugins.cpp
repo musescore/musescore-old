@@ -27,6 +27,7 @@
 #include "screst.h"
 #include "sccursor.h"
 #include "scnote.h"
+#include "scpart.h"
 #include "scharmony.h"
 #include "sctext.h"
 #include "scbytearray.h"
@@ -220,6 +221,9 @@ ScriptEngine::ScriptEngine()
 
       ScMeasure* measureClass = new ScMeasure(this);
       globalObject().setProperty("Measure", measureClass->constructor());
+      
+      ScPart* partClass = new ScPart(this);
+      globalObject().setProperty("Part", partClass->constructor());
 
       QScriptValue v = newVariant(AL::division);
       globalObject().setProperty("division", v);
