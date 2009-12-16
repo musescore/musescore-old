@@ -23,13 +23,13 @@
 
 #include "globals.h"
 #include "instrument.h"
+#include "text.h"
 
 class Xml;
 class Staff;
 class Score;
 class Drumset;
 class InstrumentTemplate;
-class TextC;
 
 //---------------------------------------------------------
 //   Part

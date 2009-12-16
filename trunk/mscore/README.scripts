@@ -53,6 +53,8 @@ activates the "test" menu entry.
       Bindings to internal MuseScore data
 =====================================================
 
+Note: (ro) stands for read-only.
+
 Objects
 =====================================
    Score
@@ -64,8 +66,11 @@ Objects
 
          Properties:
             name        string            file name
-            titel       string            title text on score
-            nstaves     integer
+            title       string            title text on score
+            subtitle    string            subtitle text on score (ro)
+            composer    string            composer text on score (ro)
+            poet        string            poet text on score (ro)
+            nstaves     integer           poet text on score (ro)
 
          Functions:
             bool saveXml(string path);
@@ -91,6 +96,10 @@ Objects
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
             endUndo()                     end undoable operations
+            int pages()                       number of pages
+            int measures()                    number of actual measures
+            int parts()                       number of parts
+            Part part(int i)                  part object at index i
 
    Cursor
          create:  var a = Cursor(Score score);
@@ -180,6 +189,14 @@ Objects
             y           double   y position (ro)
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
+            
+    Part
+
+         Properties:
+            longName    string      long name of the part (ro)
+            shortName   string      short name of the part (ro)
+            midiProgram int         midi program of the part (ro)
+            midiChannel int         midi channel of the part (ro)
 
 
 Global Variables

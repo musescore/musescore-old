@@ -25,7 +25,6 @@
 
 class ScScore;
 class ScSCursor;
-class ByteArrayClass;
 
 //---------------------------------------------------------
 //   ScriptEngine
@@ -34,7 +33,6 @@ class ByteArrayClass;
 class ScriptEngine : public QScriptEngine {
       Q_OBJECT
 
-      ByteArrayClass* baClass;
       ScScore* scoreClass;
       ScSCursor* cursorClass;
 

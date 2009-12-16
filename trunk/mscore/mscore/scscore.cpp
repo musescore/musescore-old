@@ -470,6 +470,51 @@ void ScScorePrototype::appendPart(const QString& name)
       }
 
 //---------------------------------------------------------
+//   pageCount
+//---------------------------------------------------------
+
+int ScScorePrototype::pages()
+      {
+      return thisScore()->pages().size();
+      }
+      
+//---------------------------------------------------------
+//   measures
+//---------------------------------------------------------
+
+int ScScorePrototype::measures()
+      {
+      int result = 0;
+      MeasureBaseList* ml = thisScore()->measures();
+      for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
+            if (mb->type() == MEASURE) {
+              result++;
+            }
+      }
+      return result;
+      }
+
+//---------------------------------------------------------
+//   parts
+//---------------------------------------------------------
+
+int ScScorePrototype::parts()
+      {
+      return thisScore()->parts()->size();
+      }
+      
+//---------------------------------------------------------
+//   parts
+//---------------------------------------------------------
+
+PartPtr ScScorePrototype::part(int i)
+      {
+      const QList<Part*>* il = thisScore()->parts();
+      PartPtr part = il->at(i);
+      return part;
+      }
+
+//---------------------------------------------------------
 //   setTitle
 //---------------------------------------------------------
 
@@ -490,6 +535,60 @@ void ScScorePrototype::setTitle(const QString& text)
       s->setParent(measure);
       s->setText(text);
       thisScore()->undoAddElement(s);
+      }
+      
+//---------------------------------------------------------
+//   title
+//---------------------------------------------------------
+
+QString ScScorePrototype::title()
+      {
+      return getText(TEXT_TITLE);
+      }
+
+//---------------------------------------------------------
+//   subtitle
+//---------------------------------------------------------
+
+QString ScScorePrototype::subtitle()
+      {
+      return getText(TEXT_SUBTITLE);
+      }
+
+//---------------------------------------------------------
+//   composer
+//---------------------------------------------------------
+
+QString ScScorePrototype::composer()
+      {
+      return getText(TEXT_COMPOSER);
+      }
+
+//---------------------------------------------------------
+//   poet
+//---------------------------------------------------------
+
+QString ScScorePrototype::poet()
+      {
+      return getText(TEXT_POET);
+      }
+      
+//---------------------------------------------------------
+//   getText
+//---------------------------------------------------------
+QString ScScorePrototype::getText(int subtype)
+      {
+      QString result = QString("");
+      const MeasureBase* measure = thisScore()->measures()->first();
+      foreach(const Element* element, *measure->el()) {
+          if (element->type() == TEXT) {
+              const Text* text = (const Text*)element;
+              if(text->subtype() == subtype){ 
+                result = text->getText().toUtf8();
+              }               
+          }
+      }
+      return result;
       }
 
 //---------------------------------------------------------

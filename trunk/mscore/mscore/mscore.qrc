@@ -37,7 +37,6 @@
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
       <file alias="data/demo.mscx">../demos/promenade.mscx</file>
-      <file>data/piano1.sf2</file>
       <file>data/speaker.svg</file>
       <file>data/midiin.svg</file>
       <file>data/undo.svg</file>
