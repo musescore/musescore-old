@@ -22,7 +22,7 @@
 #include "staff.h"
 #include "clef.h"
 #include "keysig.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "system.h"
 #include "segment.h"
 #include "measure.h"
@@ -230,13 +230,9 @@ void KeySig::draw(QPainter& p) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(ScoreView* v, const QPointF&, int type, int) const
+bool KeySig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
-      if (type == KEYSIG) {
-            v->setDropTarget(this);
-            return true;
-            }
-      return false;
+      return type == KEYSIG;
       }
 
 //---------------------------------------------------------

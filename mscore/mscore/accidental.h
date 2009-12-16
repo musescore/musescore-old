@@ -34,23 +34,49 @@ enum {
       ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
       };
 
+struct SymElement {
+      int sym;
+      double x;
+      SymElement(int _sym, double _x) : sym(_sym), x(_x) {}
+      };
+
 //---------------------------------------------------------
 //   Accidental
 //---------------------------------------------------------
 
-class Accidental : public Compound {
+class Accidental : public Element {
+      QList<SymElement> el;
+
    public:
-      Accidental(Score*);
+      Accidental(Score* s) : Element(s) {}
       virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const  { return ACCIDENTAL; }
       virtual void setSubtype(int v);
-      virtual void setMag(double val);
+//      virtual void setMag(double val);
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual void layout();
+      virtual void draw(QPainter&) const;
 
       const char* subTypeName() const;
       static int subtype2value(int);      // return effective pitch offset
       static int value2subtype(int);
       };
+
+//---------------------------------------------------------
+//   AccidentalBracket
+//    used as icon in palette
+//---------------------------------------------------------
+
+class AccidentalBracket : public Compound {
+   public:
+      AccidentalBracket(Score*);
+      virtual AccidentalBracket* clone() const { return new AccidentalBracket(*this); }
+      virtual ElementType type() const         { return ACCIDENTAL_BRACKET; }
+      virtual void setSubtype(int v);
+      };
+
 #endif
 

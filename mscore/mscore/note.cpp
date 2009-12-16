@@ -34,7 +34,7 @@
 #include "clef.h"
 #include "preferences.h"
 #include "staff.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "pitchspelling.h"
 #include "arpeggio.h"
 #include "tremolo.h"
@@ -918,7 +918,7 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) const
+bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
       if (type == ARTICULATION
          || type == TEXT
@@ -949,7 +949,6 @@ bool Note::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) 
          || (type == SLUR)
          || (type == STAFF_TEXT)
          ) {
-            viewer->setDropTarget(this);
             return true;
             }
       return false;
@@ -1253,8 +1252,6 @@ void Note::layout()
       {
       if (parent() == 0)
             return;
-      if (_accidental)
-            _accidental->setMag(mag());
       foreach(Element* e, _el) {
             e->setMag(mag());
             e->layout();

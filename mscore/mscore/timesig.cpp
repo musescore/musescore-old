@@ -115,13 +115,9 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
+bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
-      if (type == TIMESIG) {
-            viewer->setDropTarget(this);
-            return true;
-            }
-      return false;
+      return type == TIMESIG;
       }
 
 //---------------------------------------------------------

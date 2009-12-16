@@ -1598,17 +1598,6 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
 
             Element* el = 0;
             switch(type) {
-                  case SLUR:
-                        el = Element::create(type, gscore);
-                        break;
-                  case VOLTA:
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        el = Element::create(type, gscore);
-                        break;
                   case IMAGE:
                         {
                         // look ahead for image type
@@ -1637,6 +1626,13 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                         el = image;
                         }
                         break;
+                  case SLUR:
+                  case VOLTA:
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
                   case KEYSIG:
                   case CLEF:
                   case TIMESIG:
@@ -1659,6 +1655,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case SYMBOL:
                   case CHORD:
                   case SPACER:
+                  case ACCIDENTAL_BRACKET:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1718,8 +1715,10 @@ void ScoreView::dragSymbol(const QPointF& pos)
       const QList<const Element*> el = elementsAt(pos);
       const Element* e = el.isEmpty() ? 0 : el[0];
       if (e && (e->type() == NOTE || e->type() == SYMBOL || e->type() == IMAGE)) {
-            if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+            if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                  setDropTarget(e);
                   return;
+                  }
             else {
                   setDropTarget(0);
                   return;
@@ -1782,10 +1781,13 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case CHORD:
                   case SPACER:
                   case SLUR:
+                  case ACCIDENTAL_BRACKET:
                         {
                         Element* el = elementAt(pos);
-                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                              setDropTarget(el);
                               break;
+                              }
                         setDropTarget(0);
                         }
                         break;
@@ -1932,6 +1934,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case CHORD:
                   case SPACER:
                   case SLUR:
+                  case ACCIDENTAL_BRACKET:
                         {
                         Element* el = elementAt(pos);
                         if (!el) {

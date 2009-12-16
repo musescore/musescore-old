@@ -142,7 +142,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Layout"),
       QT_TRANSLATE_NOOP("elementName", "HBox"),
       QT_TRANSLATE_NOOP("elementName", "VBox"),
-      QT_TRANSLATE_NOOP("elementName", "Icon")
+      QT_TRANSLATE_NOOP("elementName", "Icon"),
+      QT_TRANSLATE_NOOP("elementName", "AccidentalBracket")
       };
 
 //---------------------------------------------------------
@@ -1251,6 +1252,7 @@ Element* Element::create(ElementType type, Score* score)
             case LYRICS:            return new Lyrics(score);
             case STEM:              return new Stem(score);
             case SLUR:              return new Slur(score);
+            case ACCIDENTAL_BRACKET: return new AccidentalBracket(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1368,6 +1370,7 @@ const char* Element::name(ElementType type)
             case HBOX:              return "HBox";
             case VBOX:              return "VBox";
             case ICON:              return "Icon";
+            case ACCIDENTAL_BRACKET: return "AccidentalBracket";
             case INVALID:
             case MAXTYPE:
                   break;

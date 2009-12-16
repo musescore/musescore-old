@@ -25,7 +25,7 @@
 #include "utils.h"
 #include "staff.h"
 #include "score.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "system.h"
 #include "sym.h"
 
@@ -269,13 +269,9 @@ void Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(ScoreView* viewer, const QPointF&, int type, int) const
+bool Bracket::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
-      if (type == BRACKET) {
-            viewer->setDropTarget(this);
-            return true;
-            }
-      return false;
+      return type == BRACKET;
       }
 
 //---------------------------------------------------------

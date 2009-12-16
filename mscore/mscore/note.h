@@ -80,6 +80,8 @@ class Note : public Element {
 
       bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
+      char _tpc;              ///< tonal pitch class
+
       char _ppitch;           ///< played pitch (honor voltas etc.); cached value
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
@@ -95,9 +97,7 @@ class Note : public Element {
       int _offTimeOffset;     ///< stop note offset in ticks
       int _offTimeUserOffset; ///< stop note user offset
 
-      char _tpc;              ///< tonal pitch class
-
-      char _userAccidental;   ///< editorial accidental type (0-15)
+      int  _userAccidental;   ///< editorial accidental type
       char _headGroup;
 
       bool _mirror;           ///< True if note is mirrored at stem.

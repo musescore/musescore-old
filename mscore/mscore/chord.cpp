@@ -1263,7 +1263,7 @@ void Chord::layout()
 
             Accidental* accidental = note->accidental();
             if (accidental)
-                  x = accidental->x() * mag();
+                  x = (accidental->x() + accidental->bbox().x()) * mag();
             if (x < lx)
                   lx = x;
             }

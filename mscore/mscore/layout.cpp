@@ -297,6 +297,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
             if (ac) {
+                  ac->setMag(note->mag());
+                  ac->layout();
                   AcEl acel;
                   acel.note = note;
                   acel.x    = 0.0;

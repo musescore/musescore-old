@@ -22,7 +22,7 @@
 #include "score.h"
 #include "xml.h"
 #include "style.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "restproperties.h"
 #include "utils.h"
 #include "tuplet.h"
@@ -155,7 +155,7 @@ QRectF Rest::drag(const QPointF& s)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) const
+bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
       if (
          (type == ICON && subtype == ICON_SBEAM)
@@ -174,7 +174,6 @@ bool Rest::acceptDrop(ScoreView* viewer, const QPointF&, int type, int subtype) 
          || (type == HARMONY)
          || (type == STAFF_TEXT)
          ) {
-            viewer->setDropTarget(this);
             return true;
             }
       return false;

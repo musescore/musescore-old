@@ -75,10 +75,12 @@ enum ElementType {
       // not drawable elements:
       HAIRPIN, OTTAVA, PEDAL, TRILL, TEXTLINE,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
+
       // special types for drag& drop:
       ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
       HBOX, VBOX,
       ICON,
+      ACCIDENTAL_BRACKET,
       MAXTYPE
       };
 

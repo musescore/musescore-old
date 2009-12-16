@@ -21,6 +21,8 @@
 #include "accidental.h"
 #include "symbol.h"
 #include "sym.h"
+#include "score.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   Acc
@@ -76,15 +78,6 @@ Acc accList[] = {
       };
 
 //---------------------------------------------------------
-//   Accidental
-//---------------------------------------------------------
-
-Accidental::Accidental(Score* sc)
-  : Compound(sc)
-      {
-      }
-
-//---------------------------------------------------------
 //   subtypeName
 //---------------------------------------------------------
 
@@ -120,100 +113,90 @@ void Accidental::setSubtype(const QString& tag)
 
 //---------------------------------------------------------
 //   setSubtype
-//    0 - no accidental
-//    1 - sharp          6  - (sharp)          11 - [sharp]
-//    2 - flat           7  - (flat)           12 - [flat]
-//    3 - double sharp   8  - (double sharp)   13 - [double sharp]
-//    4 - double flat    9  - (double flat)    14 - [double flat]
-//    5 - natural        10 - (natural)        15 - [natural]
-//
-//    16 - flat-slash
-//    17 - flat-slash2
-//    18 - mirrored-flat2
-//    19 - mirrored-flat
-//    20 - mirrored-flat-slash
-//    21 - flat-flat-slash
-//
-//    22 - sharp-slash
-//    23 - sharp-slash2
-//    24 - sharp-slash3
-//    25 - sharp-slash4
 //---------------------------------------------------------
 
 void Accidental::setSubtype(int i)
       {
-      if (subtype() == i)
-            return;
-      Element::setSubtype(i);
-      clear();
-
-      Symbol* s = new Symbol(score());
+      // change old coding
       switch(i) {
+            case 6:  i = 1 + 0x8000; break;
+            case 7:  i = 2 + 0x8000; break;
+            case 8:  i = 3 + 0x8000; break;
+            case 9:  i = 4 + 0x8000; break;
+            case 10: i = 5 + 0x8000; break;
+            }
+      Element::setSubtype(i);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Accidental::layout()
+      {
+      int i = subtype();
+      el.clear();
+
+      double m = magS();
+      QRectF r;
+
+      QPointF pos;
+      if (i & 0x8000) {
+            SymElement e(leftparenSym, 0.0);
+            el.append(e);
+            r |= symbols[leftparenSym].bbox(m);
+            pos = symbols[leftparenSym].attach(m);
+            }
+
+      int s;
+      switch (i & 0x7fff) {
             default:
                   printf("illegal accidental %d\n", i);
                   abort();
 
-            case  ACC_NONE:    delete s; return;
-            case  ACC_SHARP:   s->setSym(sharpSym);      break;
-            case  ACC_FLAT:    s->setSym(flatSym);       break;
-            case  ACC_SHARP2:  s->setSym(sharpsharpSym); break;
-            case  ACC_FLAT2:   s->setSym(flatflatSym);   break;
-            case  ACC_NATURAL: s->setSym(naturalSym);    break;
-
-            case  6 ... 10:
-                  {
-                  s->setSym(leftparenSym);
-                  addElement(s, 0.0, 0.0);
-                  double x = symbols[leftparenSym].width(magS());
-
-                  s = new Symbol(score());
-                  switch(i) {
-                        case  6: s->setSym(sharpSym);      break;
-                        case  7: s->setSym(flatSym);       break;
-                        case  8: s->setSym(sharpsharpSym); break;
-                        case  9: s->setSym(flatflatSym);   break;
-                        case 10: s->setSym(naturalSym);    break;
-                        }
-                  addElement(s, x - s->bbox().x(), 0.0);
-                  x += s->width();
-                  s = new Symbol(score());
-                  s->setSym(rightparenSym);
-                  addElement(s, x, 0.0);
-                  }
-                  return;
-
-            case 11: s->setSym(sharpSym);      break;
-            case 12: s->setSym(flatSym);       break;
-            case 13: s->setSym(sharpsharpSym); break;
-            case 14: s->setSym(flatflatSym);   break;
-            case 15: s->setSym(naturalSym);    break;
-
-            case 16: s->setSym(flatslashSym);         break;
-            case 17: s->setSym(flatslash2Sym);        break;
-            case 18: s->setSym(mirroredflat2Sym);     break;
-            case 19: s->setSym(mirroredflatSym);      break;
-            case 20: s->setSym(mirroredflatslashSym); break;
-            case 21: s->setSym(flatflatslashSym);     break;
-
-            case 22: s->setSym(sharpslashSym); break;
-            case 23: s->setSym(sharpslash2Sym); break;
-            case 24: s->setSym(sharpslash3Sym); break;
-            case 25: s->setSym(sharpslash4Sym); break;
-
-            case 26: s->setSym(sharpArrowUpSym); break;
-            case 27: s->setSym(sharpArrowDownSym); break;
-            case 28: s->setSym(sharpArrowBothSym); break;
-
-            case 29: s->setSym(flatArrowUpSym); break;
-            case 30: s->setSym(flatArrowDownSym); break;
-            case 31: s->setSym(flatArrowBothSym); break;
-
-            case 32: s->setSym(naturalArrowUpSym); break;
-            case 33: s->setSym(naturalArrowDownSym); break;
-            case 34: s->setSym(naturalArrowBothSym); break;
+            case  ACC_NONE:    return;
+            case  ACC_SHARP:   s = sharpSym;             break;
+            case  ACC_FLAT:    s = flatSym;              break;
+            case  ACC_SHARP2:  s = sharpsharpSym;        break;
+            case  ACC_FLAT2:   s = flatflatSym;          break;
+            case  ACC_NATURAL: s = naturalSym;           break;
+            case 11:           s = sharpSym;             break;
+            case 12:           s = flatSym;              break;
+            case 13:           s = sharpsharpSym;        break;
+            case 14:           s = flatflatSym;          break;
+            case 15:           s = naturalSym;           break;
+            case 16:           s = flatslashSym;         break;
+            case 17:           s = flatslash2Sym;        break;
+            case 18:           s = mirroredflat2Sym;     break;
+            case 19:           s = mirroredflatSym;      break;
+            case 20:           s = mirroredflatslashSym; break;
+            case 21:           s = flatflatslashSym;     break;
+            case 22:           s = sharpslashSym;        break;
+            case 23:           s = sharpslash2Sym;       break;
+            case 24:           s = sharpslash3Sym;       break;
+            case 25:           s = sharpslash4Sym;       break;
+            case 26:           s = sharpArrowUpSym;      break;
+            case 27:           s = sharpArrowDownSym;    break;
+            case 28:           s = sharpArrowBothSym;    break;
+            case 29:           s = flatArrowUpSym;       break;
+            case 30:           s = flatArrowDownSym;     break;
+            case 31:           s = flatArrowBothSym;     break;
+            case 32:           s = naturalArrowUpSym;    break;
+            case 33:           s = naturalArrowDownSym;  break;
+            case 34:           s = naturalArrowBothSym;  break;
             }
-      addElement(s, 0.0, 0.0);
-      setMag(mag());
+      SymElement e(s, pos.x());
+      el.append(e);
+      r |= symbols[s].bbox(m);
+      pos += symbols[s].attach(m);
+
+      if (i & 0x8000) {
+            double x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
+            SymElement e(rightparenSym, x);
+            el.append(e);
+            r |= symbols[rightparenSym].bbox(m).translated(x, 0.0);
+            }
+      setbbox(r);
       }
 
 //---------------------------------------------------------
@@ -236,10 +219,8 @@ int Accidental::subtype2value(int st)
             0, 0, 0, 0,        // spacial sharps
             0,0,0,0,0,0,0,0,0  // arrows
             };
-
       if (st < 0 || st >= int(sizeof(preTab)/sizeof(*preTab)))
-            abort();
-
+            return 0;
       return preTab[st];
       }
 
@@ -263,13 +244,77 @@ int Accidental::value2subtype(int v)
       }
 
 //---------------------------------------------------------
-//   setMag
+//   draw
 //---------------------------------------------------------
 
-void Accidental::setMag(double v)
+void Accidental::draw(QPainter& painter) const
       {
-      Element::setMag(v);
-      foreach(Element* e, getElemente())
-            e->setMag(v);
+      double m = magS();
+      foreach(const SymElement& e, el)
+            symbols[e.sym].draw(painter, m, e.x, 0.0);
+      }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool Accidental::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*/) const
+      {
+      return type == ACCIDENTAL_BRACKET;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Accidental::drop(const QPointF&, const QPointF&, Element* e)
+      {
+      switch(e->type()) {
+            case ACCIDENTAL_BRACKET:
+                  {
+                  int t = subtype();
+                  t |= 0x8000;
+                  score()->addAccidental(static_cast<Note*>(parent()), t);
+                  }
+                  break;
+
+            default:
+                  break;
+            }
+      delete e;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   AccidentalBracket
+//---------------------------------------------------------
+
+AccidentalBracket::AccidentalBracket(Score* s)
+   : Compound(s)
+      {
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void AccidentalBracket::setSubtype(int i)
+      {
+      Element::setSubtype(i);
+      clear();
+
+      Symbol* s1 = new Symbol(score());
+      Symbol* s2 = new Symbol(score());
+      switch(i) {
+            case 0:
+                  s1->setSym(leftparenSym);
+                  s2->setSym(rightparenSym);
+                  break;
+            default:
+            case 1:
+                  break;
+            }
+      addElement(s1, -s1->bbox().x(), 0.0);
+      addElement(s2, s2->bbox().width() - s2->bbox().x(), 0.0);
       }
 
