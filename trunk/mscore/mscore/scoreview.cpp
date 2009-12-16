@@ -219,7 +219,7 @@ class ScoreViewDragTransition : public QMouseEventTransition
             if (me->modifiers() & Qt::ShiftModifier)
                   return false;
             canvas->mousePress(me);
-            return canvas->getDragObject() == 0;
+            return !canvas->getDragObject();
             }
    public:
       ScoreViewDragTransition(ScoreView* c, QState* target)
@@ -2851,6 +2851,12 @@ void ScoreView::mousePress(QMouseEvent* ev)
       {
       startMove   = imatrix.map(QPointF(ev->pos()));
       dragObject  = elementNear(startMove);
+      if (dragObject && dragObject->type() == MEASURE) {
+            dragSystem = (System*)(dragObject->parent());
+            dragStaff  = getStaff(dragSystem, startMove);
+            if (dragStaff < 0)
+                  dragObject = 0;
+            }
       }
 
 //---------------------------------------------------------

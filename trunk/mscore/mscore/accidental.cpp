@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -35,46 +35,46 @@ struct Acc {
       };
 
 Acc accList[] = {
-      Acc(QT_TRANSLATE_NOOP("accidental", "none"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp"), 1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat"), -1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "double sharp"), 2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "double flat"), -2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "none"),                0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp"),               1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat"),               -1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "double sharp"),        2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "double flat"),        -2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural"),             0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(natural)"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"),             0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"),              0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"),      0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"),       0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(natural)"),           0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"),             0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"),              0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"),      0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"),       0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"),           0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash2"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash2"),         0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"),      0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat"),       0),
       Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat-slash"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"),     0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"), 0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"),         0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"),        0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"),        0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"),        0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow down"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow both"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow up"),  0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow down"),  0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow both"),  0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow up"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow down"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow both"), 0)
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"),      0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow down"),    0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow both"),    0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow up"),       0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow down"),     0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow both"),     0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow up"),    0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow down"),  0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow both"),  0)
       };
 
 //---------------------------------------------------------
