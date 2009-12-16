@@ -1088,7 +1088,6 @@ void ScoreView::startEdit(Element* element, int startGrip)
 
 void ScoreView::startEdit()
       {
-printf("ScoreView::startEdit: %s\n", origEditObject->name());
       score()->startCmd();
       score()->setLayoutAll(false);
       dragObject = 0;
@@ -2540,8 +2539,6 @@ void ScoreView::startEdit(Element* e)
 
 void ScoreView::endEdit()
       {
-printf("ScoreView::endEdit\n");
-
       setDropTarget(0);
       setEditText(0);
       _score->addRefresh(editObject->bbox());
@@ -2574,7 +2571,6 @@ printf("ScoreView::endEdit\n");
 
 void ScoreView::startDrag()
       {
-printf("startDrag\n");
       startMove -= dragObject->userOff();
       _score->startCmd();
       _startDragPosition = dragObject->userOff();
@@ -2815,7 +2811,6 @@ void ScoreView::doDragElement(QMouseEvent* ev)
 
 void ScoreView::select(QMouseEvent* ev)
       {
-printf("select\n");
       Qt::KeyboardModifiers keyState = ev->modifiers();
       ElementType type = dragObject->type();
       dragStaff = 0;
