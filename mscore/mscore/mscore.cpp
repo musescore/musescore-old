@@ -510,18 +510,25 @@ MuseScore::MuseScore()
       sl1 << "pad-note-64" << "pad-note-32" << "pad-note-16" << "pad-note-8"
          << "pad-note-4" << "pad-note-2" << "pad-note-1" << "note-breve" << "note-longa"
          << "pad-dot"
-         << "pad-dotdot" << "tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
-         << "pad-nat" << "pad-flat"  <<"pad-flat2";
+         << "pad-dotdot" << "tie" << "pad-rest";
 
       foreach(const QString& s, sl1) {
             NoteButton* nb = new NoteButton;
-            QAction* a = getAction(s.toLatin1().data());
+            QAction* a = getAction(qPrintable(s));
             if (s != "tie")
                   a->setCheckable(true);
             nb->setDefaultAction(a);
             entryTools->addWidget(nb);
             if (s == "tie" || s == "pad-rest")
                   entryTools->addSeparator();
+            }
+      QStringList sl2;
+      sl2 << "sharp2" << "sharp" << "nat" << "flat"  <<"flat2";
+      foreach(const QString& s, sl2) {
+            NoteButton* nb = new NoteButton;
+            QAction* a = getAction(qPrintable(s));
+            nb->setDefaultAction(a);
+            entryTools->addWidget(nb);
             }
 
       sl1.clear();

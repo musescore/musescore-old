@@ -886,6 +886,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       popup->addAction(getAction("cut"));
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
+      popup->addAction(getAction("delete"));
+      popup->addAction(getAction("insert-measure"));
       popup->addSeparator();
 
       if (obj->genPropertyMenu(popup))
@@ -898,7 +900,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       if (a == 0)
             return;
       QString cmd(a->data().toString());
-      if (cmd == "cut" || cmd =="copy" || cmd == "paste") {
+      if (cmd == "cut" || cmd =="copy" || cmd == "paste" || cmd == "insert-measure"
+         || cmd == "delete") {
             // these actions are already activated
             return;
             }
@@ -2644,6 +2647,7 @@ printf("no note or rest selected 1\n");
 
       _score->select(el, SELECT_SINGLE, 0);
       _score->inputState().noteEntryMode = true;
+      _score->setPadState();
       moveCursor();
       _score->inputState().rest = false;
       getAction("pad-rest")->setChecked(false);
@@ -2711,6 +2715,7 @@ void ScoreView::contextPopup(QMouseEvent* ev)
       startMove = toLogical(ev->pos());
       Element* dragObject = elementNear(startMove);
       if (dragObject) {
+            _score->select(dragObject, SELECT_SINGLE, 0);
             ElementType type = dragObject->type();
             dragStaff = 0;
             if (type == MEASURE) {

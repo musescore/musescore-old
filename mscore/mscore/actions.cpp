@@ -537,16 +537,6 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Staccato"),
          QT_TRANSLATE_NOOP("action","Add staccato")
          ),
-       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-flat",
-         QT_TRANSLATE_NOOP("action","Flat"),
-         Qt::Key_Minus,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Flat"),
-         QT_TRANSLATE_NOOP("action","Flat"),
-         &flatIcon
-         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-trill",
@@ -1167,7 +1157,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-sharp2",
+         "sharp2",
          QT_TRANSLATE_NOOP("action","double sharp"),
          0,
          Qt::WindowShortcut,
@@ -1177,9 +1167,9 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-sharp",
+         "sharp",
          QT_TRANSLATE_NOOP("action","sharp"),
-         0,
+         Qt::Key_NumberSign,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","sharp"),
          QT_TRANSLATE_NOOP("action","sharp"),
@@ -1187,7 +1177,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-nat",
+         "nat",
          QT_TRANSLATE_NOOP("action","natural"),
          0,
          Qt::WindowShortcut,
@@ -1195,9 +1185,19 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","natural"),
          &naturalIcon
          ),
+       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "flat",
+         QT_TRANSLATE_NOOP("action","Flat"),
+         Qt::Key_Minus,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Flat"),
+         QT_TRANSLATE_NOOP("action","Flat"),
+         &flatIcon
+         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-flat2",
+         "flat2",
          QT_TRANSLATE_NOOP("action","double flat"),
          0,
          Qt::WindowShortcut,
