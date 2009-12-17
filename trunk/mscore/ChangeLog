@@ -1,4 +1,9 @@
-17.dec (og)
+17.dec (ws)
+      - Changed accidental handling; accidental buttons in top note input
+        tool bar work as "add accidental" command button to all selected notes
+        independent of note input mode. Alternate method is to drag/drop from
+        the accidental palette.
+      (og)
       - exportly: stafftext and dynamics on same note.
 16.dec (ws)
       - fix: Add copyright text crash
