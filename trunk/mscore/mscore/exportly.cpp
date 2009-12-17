@@ -816,7 +816,6 @@ void ExportLy::chordInsertList(chordPost * newchord)
 //-----------------------------------------------------------------
 void ExportLy::storeChord(struct InstructionAnchor chordanchor)
 {
-  cout << "chords!!!\n";
   //first create new element
   chordPost * aux;
   aux = new chordPost();
@@ -1804,7 +1803,6 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	  }
 	case HARMONY: 
 	  {
-	    cout << "harmony-chord found measure: " << measurenumber << "\n";
 	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
 	    if ((found) && (staffInd == 0)) //only save chords in first staff.
 	      {
@@ -4431,6 +4429,8 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  17. dec.09 Dynamics and text can now be connected to the same note.
+
    09.dec.09 Fermatas on rests (wholemeasure and others). Fixed bugs
   in repeats/doblebars and in wholemeasurerests caused by pickupbar
   
@@ -4529,13 +4529,13 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------
 
-      -- Coda/Segno symbols collides with rehearsalmarks, which
-      accordingly are not printed.
-
-     -- b like in Bb-clarinet instrumentname.
+     -- no b in Bb-clarinet instrumentname.
 
       -- all kinds of symbols at the notelevel. More symbols on the
      measurelevel
+ 
+      -- Coda/Segno symbols collides with rehearsalmarks, which
+      accordingly are not printed.
       
       -- odd noteheads and percussion staffs.  See output from noteedit.
       
@@ -4562,6 +4562,10 @@ bool ExportLy::write(const QString& name)
       _very_ complex to implement (example demos:promenade, bar 6)
       Will \partcombine do it?
 
+   -- fermata above/below rest.
+
+   -- Bug: markuptext in cronicas disappears, second staff from
+      bottom, first measure.
 
    -- difficult problem with hairpins: Beginning of hairpin and
    -- end of hairpin are anchored to different notes. This is done
