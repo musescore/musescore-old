@@ -1411,23 +1411,18 @@ void Score::cmdTuplet(int n)
 printf("cmdTuplet %d noteEntry\n", n);
             expandVoice();
             changeCRlen(_is.cr(), _is.duration);
-            Fraction f;
-            if (_is.duration.type() == Duration::V_MEASURE)
-                  f = _is.cr()->measure()->fraction();
-            else
-                  f = _is.duration.fraction();
-            cmdTuplet(n, _is.cr(), f);
+            cmdTuplet(n, _is.cr());
             }
       else {
             QList<Element*>* sl = selection()->elements();
             foreach(Element* e, *sl) {
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
-                        cmdTuplet(n, cr, cr->fraction());
+                        cmdTuplet(n, cr);
                         }
                   else if (e->type() == NOTE) {
                         Chord* chord = static_cast<Chord*>(e->parent());
-                        cmdTuplet(n, static_cast<ChordRest*>(chord), chord->fraction());
+                        cmdTuplet(n, static_cast<ChordRest*>(chord));
                         }
                   }
             }
@@ -1437,17 +1432,34 @@ printf("cmdTuplet %d noteEntry\n", n);
 //   cmdTuplet
 //---------------------------------------------------------
 
-void Score::cmdTuplet(int n, ChordRest* cr, Fraction f)
+void Score::cmdTuplet(int n, ChordRest* cr)
       {
-      if (cr == 0 || !f.isValid()) {
-            printf("cannot create tuplet cr %p valid fraction %d\n", cr, f.isValid());
+      if (cr == 0) {
+            printf("cannot create tuplet cr %p\n", cr);
             return;
             }
+      Fraction f     = cr->fraction();
+printf("Tuplet: divide %d/%d  by %d\n", f.numerator(), f.denominator(), n);
+
       int tick       = cr->tick();
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot     = cr->tuplet();
 
-      Fraction fr = f;
+      Fraction ratio(n, f.numerator());
+      Fraction fr(1, f.denominator());
+
+      for (;;) {
+            if (qAbs(ratio.numerator()-ratio.denominator())
+               > qAbs(ratio.numerator()-ratio.denominator()*2)) {
+                  ratio /= 2;
+                  fr    /= 2;
+                  }
+            else
+                  break;
+            }
+      tuplet->setRatio(ratio.numerator(), ratio.denominator());
+
+#if 0
       switch (n) {
             case 2:                       // duplet
                   tuplet->setRatio(2, 3);
@@ -1462,24 +1474,8 @@ void Score::cmdTuplet(int n, ChordRest* cr, Fraction f)
                   fr /= 2;
                   break;
             case 5:                       // quintuplet
-                  // tuplet->setRatio(5, 3);
-                  // duration = duration.shift(1);
-
-                  {
-                  // HACK: whole measure rest with time signature 6/8
-                  int tz, tn;
-                  _sigmap->timesig(tick, tz, tn);
-                  int ticks = cr->ticks();
-                  if (ticks == (3 * AL::division) &&  tz == 6 && tn == 8)
-                        tuplet->setRatio(5, 6);
-                  else {
-                        //duration = duration.shift(1);
-                        //tuplet->setRatio(5, 2);
-                        // alternativ:
-                        fr /= 4;
-                        tuplet->setRatio(5, 4);
-                        }
-                  }
+                  fr /= 4;
+                  tuplet->setRatio(5, 4);
                   break;
             case 6:                       // sextuplet
                   tuplet->setRatio(6, 4);
@@ -1503,7 +1499,7 @@ void Score::cmdTuplet(int n, ChordRest* cr, Fraction f)
             //      duration = duration.shift(2);
                   break;
             }
-
+#endif
       if (noteEntryMode() && (fr != cr->fraction())) {
             cmdEnterRest();
             cr = getSelectedChordRest();
