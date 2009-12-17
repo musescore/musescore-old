@@ -69,6 +69,7 @@ class Selection {
       int activeTrack;
 
       QList<Element*>* elements()      { return &_el; }
+      QList<Note*> noteList() const;
       void add(Element*);
       void append(Element* el)         { _el.append(el); }
       QRectF deselectAll(Score*);
@@ -95,7 +96,6 @@ class Selection {
       bool isEndActive() const;
       int tickStart() const;
       int tickEnd() const;
-      QList<Note*> noteList() const;
       };
 
 struct ElementPattern;

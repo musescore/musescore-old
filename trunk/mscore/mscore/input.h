@@ -39,7 +39,6 @@ class InputState {
       bool rest;
       int pad;
       int pitch;
-      int prefix;
       NoteType noteType;
       BeamMode beamMode;
       int drumNote;

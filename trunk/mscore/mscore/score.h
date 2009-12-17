@@ -304,7 +304,6 @@ class Score : public QObject {
       void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
 
       void padToggle(int n);
-      void insertMeasures(int, int);
 
       void cmdAddPitch(int note, bool addFlag);
 
@@ -785,6 +784,7 @@ class Score : public QObject {
       void cmdCopy();
       void expandVoice();
       Note* cmdAddPitch1(int pitch, bool addFlag);
+      void insertMeasures(int, int);
       };
 
 extern Score* gscore;

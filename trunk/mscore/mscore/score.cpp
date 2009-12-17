@@ -89,7 +89,6 @@ InputState::InputState() :
    rest(false),
    pad(0),
    pitch(72),
-   prefix(0),
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
    drumNote(-1),

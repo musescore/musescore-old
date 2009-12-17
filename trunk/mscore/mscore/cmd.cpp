@@ -1553,10 +1553,8 @@ void Score::addArticulation(int attr)
 
 void Score::addAccidental(int idx)
       {
-      foreach(Element* el, *selection()->elements()) {
-            if (el->type() == NOTE)
-                  addAccidental(static_cast<Note*>(el), idx);
-            }
+      foreach(Note* note, selection()->noteList())
+            addAccidental(note, idx);
       }
 
 //---------------------------------------------------------
@@ -2004,26 +2002,16 @@ void Score::cmd(const QAction* a)
                   padToggle(PAD_BEAM32);
             else if (cmd == "tie")
                   cmdAddTie();
-            else if (cmd == "pad-sharp2") {
-                  _is.prefix = _is.prefix != 3 ? 3 : 0;
-                  addAccidental(_is.prefix);
-                  }
-            else if (cmd == "pad-sharp") {
-                  _is.prefix = _is.prefix != 1 ? 1 : 0;
-                  addAccidental(_is.prefix);
-                  }
-            else if (cmd == "pad-nat") {
-                  _is.prefix = _is.prefix != 5 ? 5 : 0;
-                  addAccidental(_is.prefix);
-                  }
-            else if (cmd == "pad-flat") {
-                  _is.prefix = _is.prefix != 2 ? 2 : 0;
-                  addAccidental(_is.prefix);
-                  }
-            else if (cmd == "pad-flat2") {
-                  _is.prefix = _is.prefix != 4 ? 4 : 0;
-                  addAccidental(_is.prefix);
-                  }
+            else if (cmd == "sharp2")
+                  addAccidental(3);
+            else if (cmd == "sharp")
+                  addAccidental(1);
+            else if (cmd == "nat")
+                  addAccidental(5);
+            else if (cmd == "flat")
+                  addAccidental(2);
+            else if (cmd == "flat2")
+                  addAccidental(4);
             else if (cmd == "flip")
                   cmdFlip();
             else if (cmd == "voice-1")

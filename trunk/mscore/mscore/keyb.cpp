@@ -306,7 +306,6 @@ void Score::setPadState(Element* e)
             _is.duration  = chord->duration();
             if (_is.duration.type() == Duration::V_MEASURE)
                   _is.duration.setVal(chord->measure()->tickLen());
-            _is.prefix    = note->accidentalType();
             _is.rest      = false;
             _is.track     = note->track();
             _is.pitch     = note->pitch();
@@ -316,7 +315,6 @@ void Score::setPadState(Element* e)
       else if (e->type() == REST) {
             Rest* rest   = static_cast<Rest*>(e);
             _is.duration = rest->duration();
-            _is.prefix   = 0;
             _is.rest     = true;
             _is.track    = rest->track();
             _is.beamMode = rest->beamMode();
@@ -325,7 +323,6 @@ void Score::setPadState(Element* e)
             _is.rest     = false;
             _is.duration.setDots(0);
             _is.duration = Duration::V_INVALID;
-            _is.prefix   = 0;
             _is.noteType = NOTE_INVALID;
             _is.beamMode = BEAM_INVALID;
             }
@@ -361,12 +358,6 @@ void Score::setPadState()
       getAction("pad-note-16")->setChecked(_is.duration == Duration::V_16TH);
       getAction("pad-note-32")->setChecked(_is.duration == Duration::V_32ND);
       getAction("pad-note-64")->setChecked(_is.duration == Duration::V_64TH);
-
-      getAction("pad-sharp2")->setChecked(_is.prefix == 3);
-      getAction("pad-sharp")->setChecked(_is.prefix == 1);
-      getAction("pad-nat")->setChecked(_is.prefix == 5);
-      getAction("pad-flat")->setChecked(_is.prefix == 2);
-      getAction("pad-flat2")->setChecked(_is.prefix == 4);
 
       int voice = _is.voice();
       getAction("voice-1")->setChecked(voice == 0);
