@@ -120,9 +120,6 @@ class ScoreView : public QWidget {
       Element* editObject;          ///< Valid in edit mode
       QPointF _startDragPosition;
       int textUndoLevel;
-      System* dragSystem;           ///< Valid if DRAG_STAFF.
-      int dragStaff;
-      //============================================
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
