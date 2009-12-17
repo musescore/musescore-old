@@ -2717,11 +2717,6 @@ void ScoreView::contextPopup(QMouseEvent* ev)
       if (dragObject) {
             _score->select(dragObject, SELECT_SINGLE, 0);
             ElementType type = dragObject->type();
-            dragStaff = 0;
-            if (type == MEASURE) {
-                  dragSystem = (System*)(dragObject->parent());
-                  dragStaff  = getStaff(dragSystem, startMove);
-                  }
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)
                   measurePopup(gp, static_cast<Measure*>(dragObject));
@@ -2818,9 +2813,9 @@ void ScoreView::select(QMouseEvent* ev)
       {
       Qt::KeyboardModifiers keyState = ev->modifiers();
       ElementType type = dragObject->type();
-      dragStaff = 0;
+      int dragStaff = 0;
       if (type == MEASURE) {
-            dragSystem = (System*)(dragObject->parent());
+            System* dragSystem = (System*)(dragObject->parent());
             dragStaff  = getStaff(dragSystem, startMove);
             }
       // As findSelectableElement may return a measure
@@ -2852,8 +2847,8 @@ void ScoreView::mousePress(QMouseEvent* ev)
       startMove   = imatrix.map(QPointF(ev->pos()));
       dragObject  = elementNear(startMove);
       if (dragObject && dragObject->type() == MEASURE) {
-            dragSystem = (System*)(dragObject->parent());
-            dragStaff  = getStaff(dragSystem, startMove);
+            System* dragSystem = (System*)(dragObject->parent());
+            int dragStaff  = getStaff(dragSystem, startMove);
             if (dragStaff < 0)
                   dragObject = 0;
             }
