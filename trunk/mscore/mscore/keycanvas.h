@@ -56,6 +56,7 @@ class KeyCanvas : public QFrame {
    public:
       KeyCanvas(QWidget* parent = 0);
       void clear();
+      const QList<Accidental*> getAccidentals() const { return accidentals; }
       };
 
 #endif

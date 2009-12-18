@@ -59,6 +59,7 @@ class Accidental : public Element {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual void draw(QPainter&) const;
+      int symbol();
 
       const char* subTypeName() const;
       static int subtype2value(int);      // return effective pitch offset
