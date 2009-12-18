@@ -252,6 +252,25 @@ Score* ScScorePrototype::thisScore() const
       }
 
 //---------------------------------------------------------
+//   saveMscz
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveMscz(const QString& name)
+      {
+      bool result = false;
+      QFileInfo fi(name);
+      
+      try {      
+         thisScore()->saveCompressedFile(fi, false);
+         result = true;
+      }catch (QString s) {
+            
+      }
+      
+      return result;
+      }
+
+//---------------------------------------------------------
 //   saveXml
 //---------------------------------------------------------
 

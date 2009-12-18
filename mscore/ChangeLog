@@ -1,3 +1,6 @@
+18.dec (la)
+      - fix group of menu items for plugins
+      - add saveMscz() in plugin framework
 17.dec (ws)
       - Changed accidental handling; accidental buttons in top note input
         tool bar work as "add accidental" command button to all selected notes

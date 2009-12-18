@@ -80,6 +80,7 @@ class ScScorePrototype : public QObject, public QScriptable
       ~ScScorePrototype() {}
 
    public slots:
+      bool saveMscz(const QString& name);
       bool saveXml(const QString& name);
       bool saveMxl(const QString&);
       bool saveMidi(const QString&);
