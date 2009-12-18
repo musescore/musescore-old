@@ -47,6 +47,12 @@ KeySig::KeySig(Score* s)
   : Element(s)
       {
       }
+KeySig::KeySig(const KeySig& k)
+   : Element(k)
+      {
+      foreach(KeySym* ks, keySymbols)
+            keySymbols.append(new KeySym(*ks));
+      }
 
 //---------------------------------------------------------
 //   canvasPos
@@ -65,19 +71,25 @@ QPointF KeySig::canvasPos() const
       }
 
 //---------------------------------------------------------
+//   setCustom
+//---------------------------------------------------------
+
+void KeySig::setCustom(const QList<KeySym*>& symbols)
+      {
+      setSubtype(CUSTOM_KEYSIG);
+      keySymbols = symbols;
+      }
+
+//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
 void KeySig::addLayout(int sym, double x, int line)
       {
-      double y = double(line) * .5;
-      QPointF pt(x, y);
       KeySym* ks = new KeySym;
-      ks->sym = sym;
-      ks->pos = pt * spatium();
+      ks->sym    = sym;
+      ks->spos   = QPointF(x, double(line) * .5);
       keySymbols.append(ks);
-      Sym* s = &symbols[sym];
-      _bbox |= s->bbox(magS()).translated(pt);
       }
 
 //---------------------------------------------------------
@@ -86,7 +98,14 @@ void KeySig::addLayout(int sym, double x, int line)
 
 void KeySig::layout()
       {
+      double _spatium = spatium();
+      _bbox           = QRectF(0, 0, 0, 0);
+
       if (subtype() == CUSTOM_KEYSIG) {
+            foreach(KeySym* ks, keySymbols) {
+                  ks->pos = ks->spos * _spatium;
+                  _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
+                  }
             return;
             }
 
@@ -101,7 +120,6 @@ void KeySig::layout()
             yoff = clefTable[clef].yOffset;
             }
 
-      _bbox    = QRectF(0, 0, 0, 0);
       char t1  = subtype() & ACCIDENTAL_MASK;
       char t2  = (subtype() & NATURAL_MASK) >> NATURAL_SHIFT;
       qreal xo = 0.0;
@@ -167,6 +185,10 @@ void KeySig::layout()
             default:
                   printf("illegal t1 key %d (t2=%d) subtype 0x%04x\n", t1, t2, subtype());
                   break;
+            }
+      foreach(KeySym* ks, keySymbols) {
+            ks->pos = ks->spos * _spatium;
+            _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
             }
       }
 
@@ -237,4 +259,47 @@ Space KeySig::space() const
       return Space(point(score()->styleS(ST_keysigLeftMargin)), width());
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void KeySig::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element:writeProperties(xml);
+      foreach(const KeySym* ks, keySymbols) {
+            xml.stag("KeySym");
+            xml.tag("sym", ks->sym);
+            xml.tag("pos", ks->spos);
+            xml.etag();
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void KeySig::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "KeySym") {
+                  KeySym* ks = new KeySym;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
+                        if (tag == "sym")
+                              ks->sym = val.toInt();
+                        else if (tag == "pos")
+                              ks->spos = readPoint(ee);
+                        else
+                              domError(ee);
+                        }
+                  keySymbols.append(ks);
+                  }
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
 

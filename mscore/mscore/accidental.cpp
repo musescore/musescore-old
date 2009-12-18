@@ -129,32 +129,15 @@ void Accidental::setSubtype(int i)
       }
 
 //---------------------------------------------------------
-//   layout
+//   symbol
 //---------------------------------------------------------
 
-void Accidental::layout()
+int Accidental::symbol()
       {
-      int i = subtype();
-      el.clear();
-
-      double m = magS();
-      QRectF r;
-
-      QPointF pos;
-      if (i & 0x8000) {
-            SymElement e(leftparenSym, 0.0);
-            el.append(e);
-            r |= symbols[leftparenSym].bbox(m);
-            pos = symbols[leftparenSym].attach(m);
-            }
-
       int s;
-      switch (i & 0x7fff) {
-            default:
-                  printf("illegal accidental %d\n", i);
-                  abort();
-
-            case  ACC_NONE:    return;
+      switch (subtype() & 0x7fff) {
+            default: printf("illegal accidental %d\n", subtype() & 0x7fff); abort();
+            case  ACC_NONE:    return -1;
             case  ACC_SHARP:   s = sharpSym;             break;
             case  ACC_FLAT:    s = flatSym;              break;
             case  ACC_SHARP2:  s = sharpsharpSym;        break;
@@ -185,6 +168,30 @@ void Accidental::layout()
             case 33:           s = naturalArrowDownSym;  break;
             case 34:           s = naturalArrowBothSym;  break;
             }
+      return s;
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Accidental::layout()
+      {
+      int i = subtype();
+      el.clear();
+
+      double m = magS();
+      QRectF r;
+
+      QPointF pos;
+      if (i & 0x8000) {
+            SymElement e(leftparenSym, 0.0);
+            el.append(e);
+            r |= symbols[leftparenSym].bbox(m);
+            pos = symbols[leftparenSym].attach(m);
+            }
+
+      int s = symbol();
       SymElement e(s, pos.x());
       el.append(e);
       r |= symbols[s].bbox(m);

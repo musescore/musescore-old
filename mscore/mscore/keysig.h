@@ -41,6 +41,7 @@ class Segment;
 
 struct KeySym {
       int sym;
+      QPointF spos;
       QPointF pos;
       };
 
@@ -50,6 +51,7 @@ class KeySig : public Element {
 
    public:
       KeySig(Score*);
+      KeySig(const KeySig&);
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void draw(QPainter&) const;
@@ -63,6 +65,9 @@ class KeySig : public Element {
       Measure* measure() const { return (Measure*)parent()->parent(); }
       int keySignature() const { return char(subtype() & 0xff); }    // -7 - +7
       Space space() const;
+      void setCustom(const QList<KeySym*>& symbols);
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
       };
 
 extern const char* keyNames[15];

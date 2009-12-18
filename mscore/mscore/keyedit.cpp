@@ -164,7 +164,7 @@ void KeyCanvas::mouseMoveEvent(QMouseEvent* event)
 //   mouseReleaseEvent
 //---------------------------------------------------------
 
-void KeyCanvas::mouseReleaseEvent(QMouseEvent* event)
+void KeyCanvas::mouseReleaseEvent(QMouseEvent*)
       {
       if (moveElement == 0)
             return;
@@ -329,8 +329,29 @@ KeyEditor::KeyEditor(QWidget* parent)
 
 void KeyEditor::addClicked()
       {
+      QList<KeySym*> symbols;
+
+      double extraMag = 2.0;
+      const QList<Accidental*> al = canvas->getAccidentals();
+      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double xoff = 10000000.0;
+      foreach(Accidental* a, al) {
+            QPointF pos = a->ipos();
+            if (pos.x() < xoff)
+                  xoff = pos.x();
+            }
+      foreach(Accidental* a, al) {
+            KeySym* s = new KeySym;
+            s->sym = a->symbol();
+            QPointF pos = a->ipos();
+            pos.rx() -= xoff;
+            s->spos = pos / spatium;
+            symbols.append(s);
+            }
+
       KeySig* ks = new KeySig(gscore);
-      sp->append(ks, "");
+      ks->setCustom(symbols);
+      sp->append(ks, "custom");
       }
 
 //---------------------------------------------------------
