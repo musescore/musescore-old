@@ -84,7 +84,7 @@ QT4_WRAP_UI (ui_headers
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
-      select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui
+      select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -101,7 +101,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h scscore.h scnote.h scpart.h sctext.h scmeasure.h scbytearray.h
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
-      pianoscene.h splitstaff.h scoretab.h
+      pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -161,19 +161,16 @@ add_executable ( ${ExecutableName}
       page.cpp pagesettings.cpp palette.cpp part.cpp
       partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
-      seq.cpp slur.cpp staff.cpp style.cpp
+      seq.cpp slur.cpp staff.cpp style.cpp instrtemplate.cpp boxproperties.cpp
       sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
       system.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
-      glissando.cpp
+      glissando.cpp lilypond.cpp exportly.cpp box.cpp measurebase.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      lilypond.cpp exportly.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
-      box.cpp measurebase.cpp
-      instrtemplate.cpp boxproperties.cpp
       newwizard.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
@@ -183,7 +180,7 @@ add_executable ( ${ExecutableName}
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
-      splitstaff.cpp scoretab.cpp
+      splitstaff.cpp scoretab.cpp keyedit.cpp
       ${AUDIO}
       )
 

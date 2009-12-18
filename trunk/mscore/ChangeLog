@@ -1,4 +1,6 @@
-18.dec (la)
+18.dec (ws)
+      - started custom key signature editor as experimental feature
+      (la)
       - fix group of menu items for plugins
       - add saveMscz() in plugin framework
 17.dec (ws)

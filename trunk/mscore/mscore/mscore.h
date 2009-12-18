@@ -58,6 +58,7 @@ class QScriptEngineDebugger;
 struct Drumset;
 class TextTools;
 class ScriptEngine;
+class KeyEditor;
 
 class UndoGroup;
 
@@ -214,6 +215,7 @@ class MuseScore : public QMainWindow {
 
       PaletteScrollArea* clefPalette;
       PaletteScrollArea* keyPalette;
+      KeyEditor* keyEditor;
       TimeDialog* timePalette;
       PaletteScrollArea* linePalette;
       PaletteScrollArea* bracketPalette;
@@ -263,6 +265,7 @@ class MuseScore : public QMainWindow {
       void symbolMenu();
       void clefMenu();
       void keyMenu();
+      void showKeyEditor();
       void timeMenu();
       void dynamicsMenu();
       void loadFile();

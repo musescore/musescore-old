@@ -339,6 +339,7 @@ MuseScore::MuseScore()
       symbolDialog          = 0;
       clefPalette           = 0;
       keyPalette            = 0;
+      keyEditor             = 0;
       timePalette           = 0;
       barPalette            = 0;
       fingeringPalette      = 0;

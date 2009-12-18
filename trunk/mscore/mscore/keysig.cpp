@@ -72,10 +72,9 @@ void KeySig::addLayout(int sym, double x, int line)
       {
       double y = double(line) * .5;
       QPointF pt(x, y);
-      pt *= spatium();
       KeySym* ks = new KeySym;
       ks->sym = sym;
-      ks->pos = pt;
+      ks->pos = pt * spatium();
       keySymbols.append(ks);
       Sym* s = &symbols[sym];
       _bbox |= s->bbox(magS()).translated(pt);
@@ -87,6 +86,10 @@ void KeySig::addLayout(int sym, double x, int line)
 
 void KeySig::layout()
       {
+      if (subtype() == CUSTOM_KEYSIG) {
+            return;
+            }
+
       foreach(KeySym* ks, keySymbols)
             delete ks;
       keySymbols.clear();
@@ -99,80 +102,33 @@ void KeySig::layout()
             }
 
       _bbox    = QRectF(0, 0, 0, 0);
-      char t1  = subtype() & 0xff;
-      char t2  = (subtype() & 0xff00) >> 8;
+      char t1  = subtype() & ACCIDENTAL_MASK;
+      char t2  = (subtype() & NATURAL_MASK) >> NATURAL_SHIFT;
       qreal xo = 0.0;
 
-
-      int accidentals = 0;
-      switch(t1) {
-            case 7:
-            case -7:
-                  accidentals = 0x7f;
-                  break;
-            case 6:
-            case -6:
-                  accidentals = 0x3f;
-                  break;
-            case 5:
-            case -5:
-                  accidentals = 0x1f;
-                  break;
-            case 4:
-            case -4:
-                  accidentals = 0xf;
-                  break;
-            case 3:
-            case -3:
-                  accidentals = 0x7;
-                  break;
-            case 2:
-            case -2:
-                  accidentals = 0x3;
-                  break;
-            case 1:
-            case -1:
-                  accidentals = 0x1;
-                  break;
-
-            case 0:   break;
+      int accidentals, naturals;
+      switch(qAbs(t1)) {
+            case 7: accidentals = 0x7f; break;
+            case 6: accidentals = 0x3f; break;
+            case 5: accidentals = 0x1f; break;
+            case 4: accidentals = 0xf;  break;
+            case 3: accidentals = 0x7;  break;
+            case 2: accidentals = 0x3;  break;
+            case 1: accidentals = 0x1;  break;
+            case 0: accidentals = 0;    break;
             default:
                   printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
                   break;
             }
-
-      int naturals = 0;
-      switch(t2) {
-            case 7:
-            case -7:
-                  naturals = 0x7f;
-                  break;
-            case 6:
-            case -6:
-                  naturals = 0x3f;
-                  break;
-            case 5:
-            case -5:
-                  naturals = 0x1f;
-                  break;
-            case 4:
-            case -4:
-                  naturals = 0xf;
-                  break;
-            case 3:
-            case -3:
-                  naturals = 0x7;
-                  break;
-            case 2:
-            case -2:
-                  naturals = 0x3;
-                  break;
-            case 1:
-            case -1:
-                  naturals = 0x1;
-                  break;
-
-            case 0:   break;
+      switch(qAbs(t2)) {
+            case 7: naturals = 0x7f; break;
+            case 6: naturals = 0x3f; break;
+            case 5: naturals = 0x1f; break;
+            case 4: naturals = 0xf;  break;
+            case 3: naturals = 0x7;  break;
+            case 2: naturals = 0x3;  break;
+            case 1: naturals = 0x1;  break;
+            case 0: naturals = 0;    break;
             default:
                   printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
                   break;
@@ -190,7 +146,6 @@ void KeySig::layout()
                   xo += 1.0;
                   }
             }
-
       switch(t1) {
             case 7:  addLayout(sharpSym, xo + 6.0, clefTable[clef].lines[6]);
             case 6:  addLayout(sharpSym, xo + 5.0, clefTable[clef].lines[5]);
