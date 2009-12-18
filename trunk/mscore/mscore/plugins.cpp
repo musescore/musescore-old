@@ -107,7 +107,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   QMenu* menu = qobject_cast<QMenu*>(o);
                   if (!menu)
                         continue;
-                  if (menu->objectName() == m) {
+                  if (menu->objectName() == m || menu->title() == m) {
                         curMenu = menu;
                         found = true;
                         break;
