@@ -184,9 +184,10 @@ class Element {
       virtual double x() const                { return pos().x();        }
       virtual double y() const                { return pos().y();        }
       void setPos(const QPointF& p)           { _pos = p;                }
+      void movePos(const QPointF& p)          { _pos += p;               }
       void setXpos(qreal x)                   { _pos.setX(x);            }
       void setYpos(qreal y)                   { _pos.setY(y);            }
-      void setPos(double x, double y)         { _pos = QPointF(x, y);    }
+      void setPos(double x, double y)         { _pos.setX(x); _pos.setY(y);    }
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 

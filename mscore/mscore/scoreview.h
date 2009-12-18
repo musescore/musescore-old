@@ -91,8 +91,7 @@ class ScoreView : public QWidget {
 
       bool dragScoreViewState;
       bool draggedScoreView;
-      Element* dragElement;   // current moved drag&drop element
-      Element* dragObject;    // current canvas element
+      Element* dragElement;
 
       QPointF dragOffset;
       bool mousePressed;
@@ -227,7 +226,6 @@ class ScoreView : public QWidget {
       void contextPopup(QMouseEvent* ev);
       void setOrigEditObject(Element* e) { origEditObject = e; }
       void editKey(QKeyEvent*);
-      Element* getDragObject() const { return dragObject; }
       void dragScoreView(QMouseEvent* ev);
       void dragNoteEntry(QMouseEvent* ev);
       void noteEntryButton(QMouseEvent* ev);
@@ -267,6 +265,7 @@ class ScoreView : public QWidget {
       void search(const QString& s);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
+      Element* getDragElement() const { return dragElement; }
       };
 
 extern int searchStaff(const Element* element);

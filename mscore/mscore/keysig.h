@@ -26,6 +26,11 @@
 class Sym;
 class Segment;
 
+#define CUSTOM_KEYSIG   0x10000
+#define ACCIDENTAL_MASK 0x00ff
+#define NATURAL_MASK    0xff00
+#define NATURAL_SHIFT   8
+
 //---------------------------------------------------------
 //   KeySig
 //---------------------------------------------------------

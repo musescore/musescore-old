@@ -699,7 +699,6 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       text->addAction(getAction("fingering"));
       text->addAction(getAction("dynamics"));
       text->addAction(getAction("tempo"));
-//      text->addAction(getAction("metronome"));
 
       popup->addAction(getAction("symbols"));
       return popup;
@@ -745,6 +744,10 @@ void MuseScore::clefMenu()
 
 void MuseScore::keyMenu()
       {
+      if (enableExperimental) {
+            showKeyEditor();
+            return;
+            }
       if (keyPalette == 0) {
             Palette* sp = new Palette();
             sp->resize(400, 300);

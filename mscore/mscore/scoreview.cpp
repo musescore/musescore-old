@@ -219,7 +219,7 @@ class ScoreViewDragTransition : public QMouseEventTransition
             if (me->modifiers() & Qt::ShiftModifier)
                   return false;
             canvas->mousePress(me);
-            return !canvas->getDragObject();
+            return !canvas->getDragElement();
             }
    public:
       ScoreViewDragTransition(ScoreView* c, QState* target)
@@ -245,7 +245,7 @@ class ScoreViewLassoTransition : public QMouseEventTransition
             if (!(me->modifiers() & Qt::ShiftModifier))
                   return false;
             canvas->mousePress(me);
-            return canvas->getDragObject() == 0;
+            return canvas->getDragElement() == 0;
             }
    public:
       ScoreViewLassoTransition(ScoreView* c, QState* target)
@@ -379,7 +379,7 @@ class ScoreViewSelectTransition : public QMouseEventTransition
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
             canvas->mousePress(me);
-            return canvas->getDragObject() != 0;
+            return canvas->getDragElement() != 0;
             }
       virtual void onTransition(QEvent* e) {
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
@@ -690,7 +690,6 @@ ScoreView::ScoreView(QWidget* parent)
 
       level            = 0;
       dragElement      = 0;
-      dragObject       = 0;
       navigator        = 0;
       _score           = 0;
       _bgColor         = Qt::darkBlue;
@@ -1093,7 +1092,7 @@ void ScoreView::startEdit()
       {
       score()->startCmd();
       score()->setLayoutAll(false);
-      dragObject = 0;
+      dragElement = 0;
       origEditObject->startEdit(this, startMove);
       setFocus();
       if (origEditObject->isTextB()) {
@@ -2327,13 +2326,6 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   }
             p.restore();
             }
-      if (dragObject) {
-            p.save();
-            p.translate(dragObject->canvasPos());
-            p.setPen(QPen(dragObject->curColor()));
-            dragObject->draw(p);
-            p.restore();
-            }
       if (editObject) {
             p.save();
             p.translate(editObject->canvasPos());
@@ -2574,11 +2566,11 @@ void ScoreView::endEdit()
 
 void ScoreView::startDrag()
       {
-      startMove -= dragObject->userOff();
+      startMove -= dragElement->userOff();
       _score->startCmd();
-      _startDragPosition = dragObject->userOff();
+      _startDragPosition = dragElement->userOff();
       QList<Element*> el;
-      dragObject->scanElements(&el, collectElements);
+      dragElement->scanElements(&el, collectElements);
       foreach(Element* e, el)
             _score->removeBsp(e);
       _score->end();
@@ -2601,12 +2593,12 @@ void ScoreView::drag(const QPointF& delta)
 
 void ScoreView::endDrag()
       {
-      dragObject->endDrag();
-      QPointF npos = dragObject->userOff();
-      dragObject->setUserOff(_startDragPosition);
-      _score->undoMove(dragObject, npos);
+      dragElement->endDrag();
+      QPointF npos = dragElement->userOff();
+      dragElement->setUserOff(_startDragPosition);
+      _score->undoMove(dragElement, npos);
       _score->setLayoutAll(true);
-      dragObject = 0;
+      dragElement = 0;
       setDropTarget(0); // this also resets dropAnchor
       _score->endCmd();
       }
@@ -2654,7 +2646,7 @@ printf("no note or rest selected 1\n");
       setMouseTracking(true);
       shadowNote->setVisible(true);
       setCursorOn(true);
-      dragObject = 0;
+      dragElement = 0;
       //
       // TODO: check for valid duration
       //
@@ -2713,16 +2705,15 @@ void ScoreView::contextPopup(QMouseEvent* ev)
       {
       QPoint gp = ev->globalPos();
       startMove = toLogical(ev->pos());
-      Element* dragObject = elementNear(startMove);
-      if (dragObject) {
-            _score->select(dragObject, SELECT_SINGLE, 0);
-            ElementType type = dragObject->type();
+      Element* dragElement = elementNear(startMove);
+      if (dragElement) {
+            _score->select(dragElement, SELECT_SINGLE, 0);
+            ElementType type = dragElement->type();
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)
-                  measurePopup(gp, static_cast<Measure*>(dragObject));
+                  measurePopup(gp, static_cast<Measure*>(dragElement));
             else
-                  objectPopup(gp, dragObject);
-            dragObject = 0;
+                  objectPopup(gp, dragElement);
             }
       else {
             QMenu* popup = mscore->genCreateMenu();
@@ -2812,10 +2803,10 @@ void ScoreView::doDragElement(QMouseEvent* ev)
 void ScoreView::select(QMouseEvent* ev)
       {
       Qt::KeyboardModifiers keyState = ev->modifiers();
-      ElementType type = dragObject->type();
+      ElementType type = dragElement->type();
       int dragStaff = 0;
       if (type == MEASURE) {
-            System* dragSystem = (System*)(dragObject->parent());
+            System* dragSystem = (System*)(dragElement->parent());
             dragStaff  = getStaff(dragSystem, startMove);
             }
       // As findSelectableElement may return a measure
@@ -2830,10 +2821,10 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_RANGE;
             else if (keyState & Qt::ControlModifier)
                   st = SELECT_ADD;
-            _score->select(dragObject, st, dragStaff);
+            _score->select(dragElement, st, dragStaff);
             }
       else
-            dragObject = 0;
+            dragElement = 0;
       _score->setLayoutAll(false);
       _score->end();    // update
       }
@@ -2845,12 +2836,12 @@ void ScoreView::select(QMouseEvent* ev)
 void ScoreView::mousePress(QMouseEvent* ev)
       {
       startMove   = imatrix.map(QPointF(ev->pos()));
-      dragObject  = elementNear(startMove);
-      if (dragObject && dragObject->type() == MEASURE) {
-            System* dragSystem = (System*)(dragObject->parent());
+      dragElement  = elementNear(startMove);
+      if (dragElement && dragElement->type() == MEASURE) {
+            System* dragSystem = (System*)(dragElement->parent());
             int dragStaff  = getStaff(dragSystem, startMove);
             if (dragStaff < 0)
-                  dragObject = 0;
+                  dragElement = 0;
             }
       }
 
@@ -2860,7 +2851,7 @@ void ScoreView::mousePress(QMouseEvent* ev)
 
 bool ScoreView::testElementDragTransition(QMouseEvent* ev) const
       {
-      if (dragObject == 0 || !dragObject->isMovable())
+      if (dragElement == 0 || !dragElement->isMovable())
             return false;
       if (!(QApplication::mouseButtons() == Qt::LeftButton))
             return false;
@@ -2959,7 +2950,7 @@ bool ScoreView::editScoreViewDragTransition(QMouseEvent* ev)
       Element* e = elementNear(p);
       if (e != editObject) {
             startMove  = p;
-            dragObject = e;
+            dragElement = e;
             return true;
             }
       return false;
