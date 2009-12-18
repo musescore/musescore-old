@@ -73,6 +73,7 @@ Objects
             nstaves     integer           poet text on score (ro)
 
          Functions:
+            bool saveMscz(string path);
             bool saveXml(string path);
             bool saveMxl(string path);
             bool saveMidi(string path);
