@@ -34,7 +34,6 @@
 #include "clef.h"
 #include "preferences.h"
 #include "staff.h"
-// #include "scoreview.h"
 #include "pitchspelling.h"
 #include "arpeggio.h"
 #include "tremolo.h"
@@ -62,11 +61,11 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
       { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym  },
       { s0triangleHeadSym,    d1triangleHeadSym,   d2triangleHeadSym, s0triangleHeadSym    },
+      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
       { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym    },
       { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym      },
       { s0doHeadSym,          d1doHeadSym,         d2doHeadSym,       -1                   },
       { s0reHeadSym,          d1reHeadSym,         d2reHeadSym,       -1                   },
-      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
       { d0faHeadSym,          d1faHeadSym,         d2faHeadSym,       -1                   },
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          d1tiHeadSym,         d2tiHeadSym,       -1                   },
@@ -76,11 +75,11 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym  },
       { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym  },
       { s0triangleHeadSym,    u1triangleHeadSym,   u2triangleHeadSym, s0triangleHeadSym    },
+      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
       { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym    },
       { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym      },
       { s0doHeadSym,          u1doHeadSym,         u2doHeadSym,       -1                   },
       { s0reHeadSym,          u1reHeadSym,         u2reHeadSym,       -1                   },
-      { s0miHeadSym,          s1miHeadSym,         s2miHeadSym,       -1                   },
       { u0faHeadSym,          u1faHeadSym,         u2faHeadSym,       -1                   },
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          u1tiHeadSym,         u2tiHeadSym,       -1                   },
