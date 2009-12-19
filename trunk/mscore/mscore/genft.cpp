@@ -52,14 +52,14 @@ static char* getTable(char* t, FT_Face face)
       FT_ULong length = 0;
       int error = FT_Load_Sfnt_Table(face, tag, 0, NULL, &length);
       if (error) {
-            fprintf(stderr, "cannot load table LILC\n");
+            fprintf(stderr, "genft: cannot load table LILC\n");
             exit(-3);
             }
       FT_Byte* buffer = (FT_Byte*)malloc(length + 1);
       error = FT_Load_Sfnt_Table(face, tag, 0, buffer, &length);
       buffer[length] = 0;
       if (error) {
-            fprintf(stderr, "cannot load font table LILC\n");
+            fprintf(stderr, "genft: cannot load font table LILC\n");
             exit(4);
             }
       return (char*)buffer;
@@ -91,7 +91,7 @@ static void parseLILC(char* buffer)
             if (namemap.contains(s))
                   idx = namemap[s];
             else
-                  fprintf(stderr, "<%s> not in map\n", qPrintable(s));
+                  fprintf(stderr, "genft: <%s> not in map\n", qPrintable(s));
             int code = 0;
             if (codemap.contains(idx))
                   code = codemap[idx];
