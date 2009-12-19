@@ -78,10 +78,6 @@ p, li { white-space: pre-wrap; }
         <source>Midi Action</source>
         <translation>Krok MIDI</translation>
     </message>
-    <message>
-        <source>normal</source>
-        <translation>normální</translation>
-    </message>
 </context>
 <context>
     <name>BarLineBase</name>
@@ -142,49 +138,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bottom:</source>
         <translation>Dolní:</translation>
-    </message>
-</context>
-<context>
-    <name>Canvas</name>
-    <message>
-        <source>Object Inspector</source>
-        <translation>Dohlížitel na předměty</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Notová osnova</translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation>Upravit skupinu bubnů...</translation>
-    </message>
-    <message>
-        <source>Staff Properties...</source>
-        <translation>Vlastnosti notové osnovy...</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Takt</translation>
-    </message>
-    <message>
-        <source>Select</source>
-        <translation>Vybrat</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation>Více...</translation>
-    </message>
-    <message>
-        <source>Drumroll Editor...</source>
-        <translation>Editor víření bubnů...</translation>
-    </message>
-    <message>
-        <source>Pianoroll Editor...</source>
-        <translation>Editor válečku...</translation>
-    </message>
-    <message>
-        <source>Split Staff...</source>
-        <translation>Rozdělit notovou osnovu...</translation>
     </message>
 </context>
 <context>
@@ -2255,6 +2208,36 @@ nepodařilo se: </translation>
     </message>
 </context>
 <context>
+    <name>KeyEdit</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Key Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KeyEditor</name>
+    <message>
+        <source>MuseScore: Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3150,10 +3133,6 @@ do notového zápisu &quot;%1&quot;?</translation>
         <translation>MuseScore: Prstoklad</translation>
     </message>
     <message>
-        <source>MuseScore: Layout Breaks</source>
-        <translation>MuseScore: Zalomení rozvržení</translation>
-    </message>
-    <message>
         <source>MuseScore: failure</source>
         <translation>MuseScore: Chyba</translation>
     </message>
@@ -3308,15 +3287,7 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note heads</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Var Coda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3388,10 +3359,6 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Breaks &amp;&amp; Spacer...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3399,6 +3366,26 @@ Z nabídky &quot;Nápověda&quot; zkuste místo toho vybrat &quot;Příručka do
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Varied coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Articulations &amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Breaks &amp; Spacer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3990,10 +3977,6 @@ Restore session?</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <source>system</source>
-        <translation>Soustava</translation>
-    </message>
-    <message>
         <source>de German</source>
         <translation>de němčina</translation>
     </message>
@@ -4052,10 +4035,6 @@ Restore session?</source>
     <message>
         <source>show</source>
         <translation>Ukázat</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation>Navigátor</translation>
     </message>
     <message>
         <source>Style</source>
@@ -4472,10 +4451,6 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
         <translation>Dálkové ovládání MIDI</translation>
     </message>
     <message>
-        <source>Use JACK midi output</source>
-        <translation>Použít výstup MIDI JACK</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Automatická oprava</translation>
     </message>
@@ -4497,6 +4472,18 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>Use style file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigator:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK MIDI output</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4920,6 +4907,49 @@ Try saving to a different location.</source>
 %1 
 
 Zkuste uložení do jiného umístění.</translation>
+    </message>
+</context>
+<context>
+    <name>ScoreView</name>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pianoroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Staff...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8412,6 +8442,10 @@ p, li { white-space: pre-wrap; }
         <source>Articulation</source>
         <translation>Artikulace, melodické ozdoby</translation>
     </message>
+    <message>
+        <source>AccidentalBracket</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>language</name>
@@ -8422,14 +8456,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Afrikaans</source>
         <translation>Afrikánština</translation>
-    </message>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CatalÃ </source>
-        <translation>Katalánština</translation>
     </message>
     <message>
         <source>Czech</source>
@@ -8444,10 +8470,6 @@ p, li { white-space: pre-wrap; }
         <translation>Němčina</translation>
     </message>
     <message>
-        <source>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation>Britská angličtina</translation>
     </message>
@@ -8456,16 +8478,8 @@ p, li { white-space: pre-wrap; }
         <translation>Americká angličtina</translation>
     </message>
     <message>
-        <source>EspaÃ±ol</source>
-        <translation>Španělština</translation>
-    </message>
-    <message>
         <source>Finnish</source>
         <translation>Finština</translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
-        <translation>Francouzština</translation>
     </message>
     <message>
         <source>Galego</source>
@@ -8500,39 +8514,59 @@ p, li { white-space: pre-wrap; }
         <translation>Polština</translation>
     </message>
     <message>
-        <source>PortuguÃªs</source>
-        <translation>Portugalština</translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation>Brazilská portugalština</translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation>Rumunština</translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Svenska</source>
         <translation>Švédština (Svenska)</translation>
-    </message>
-    <message>
-        <source>à¸ à¸²à¸©à¸²à¹à¸à¸¢</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation>Turečtina</translation>
     </message>
     <message>
         <source>Ukrajina</source>
         <translation>Ukrajinština</translation>
     </message>
     <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <source>العربية</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Català</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ελληνικά</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Español</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Français</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português brasileiro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Română</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ภาษาไทย</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Türkçe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>繁體中文 (台灣)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

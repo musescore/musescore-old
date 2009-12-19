@@ -471,7 +471,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette;
-            sp->setName(tr("Note heads"));
+            sp->setName(tr("Note Heads"));
             sp->setMag(1.3);
             sp->setGrid(33, 36);
             sp->setDrawGrid(true);
@@ -531,7 +531,7 @@ void MuseScore::showPalette(bool visible)
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_VARCODA);
-            sp->append(mk, tr("Var Coda"));
+            sp->append(mk, tr("Varied coda"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_CODETTA);
@@ -724,11 +724,11 @@ void MuseScore::clefMenu()
       {
       if (clefPalette == 0) {
             Palette* sp = new Palette;
-            sp->resize(360, 320);
+            sp->setGrid(60, 80);
+            sp->resize(360, 400);
             clefPalette = new PaletteScrollArea(sp);
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
-            sp->setGrid(60, 80);
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->append(k, qApp->translate("clefTable", clefTable[i].name));
@@ -1129,7 +1129,7 @@ void MuseScore::showLayoutBreakPalette()
             layoutBreakPalette->setRestrictHeight(false);
             layoutBreakPalette->setWindowTitle(tr("MuseScore: Breaks & Spacer"));
             sp->setGrid(80, 80);
-            sp->resize(160,80);
+            sp->resize(240,80);
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             sp->append(lb, tr("Line break"));

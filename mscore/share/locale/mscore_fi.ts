@@ -58,10 +58,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ArticulationProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normaali</translation>
-    </message>
-    <message>
         <source>MuseScore: Articulations Properties</source>
         <translation>MuseScore: Artikulointiominaisuudet</translation>
     </message>
@@ -133,49 +129,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bottom:</source>
         <translation>alas:</translation>
-    </message>
-</context>
-<context>
-    <name>Canvas</name>
-    <message>
-        <source>Object Inspector</source>
-        <translation>Objektin tarkastaja</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Viivasto</translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation>Muokkaa rumpusettiä...</translation>
-    </message>
-    <message>
-        <source>Staff Properties...</source>
-        <translation>Viivaston ominaisuudet...</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Tahti</translation>
-    </message>
-    <message>
-        <source>Select</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Split Staff...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2243,6 +2196,36 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>KeyEdit</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Key Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KeyEditor</name>
+    <message>
+        <source>MuseScore: Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3138,10 +3121,6 @@ ennen sulkemista?</translation>
         <translation>MuseScore: Sormitus</translation>
     </message>
     <message>
-        <source>MuseScore: Layout Breaks</source>
-        <translation>MuseScore: Ulkoasun muotoilu</translation>
-    </message>
-    <message>
         <source>MuseScore: failure</source>
         <translation>MuseScore: häiriö</translation>
     </message>
@@ -3293,15 +3272,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note heads</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Var Coda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3373,10 +3344,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Breaks &amp;&amp; Spacer...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3384,6 +3351,26 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Varied coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Articulations &amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Breaks &amp; Spacer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3995,10 +3982,6 @@ Restore session?</source>
         <translation>näytä</translation>
     </message>
     <message>
-        <source>Navigator</source>
-        <translation>Navigaattori</translation>
-    </message>
-    <message>
         <source>Auto Save</source>
         <translation>Automaattinen tallennus</translation>
     </message>
@@ -4009,10 +3992,6 @@ Restore session?</source>
     <message>
         <source>Language</source>
         <translation>Kieli</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <translation>Järjestelmä</translation>
     </message>
     <message>
         <source>de German</source>
@@ -4456,10 +4435,6 @@ Restore session?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use JACK midi output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4481,6 +4456,18 @@ Restore session?</source>
     </message>
     <message>
         <source>Use style file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigator:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK MIDI output</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4899,6 +4886,49 @@ epäonnistui:</translation>
 %1 
 
 Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ScoreView</name>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pianoroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Staff...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8391,6 +8421,10 @@ p, li { white-space: pre-wrap; }
         <source>Articulation</source>
         <translation>Artikulaatio</translation>
     </message>
+    <message>
+        <source>AccidentalBracket</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>language</name>
@@ -8400,14 +8434,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Afrikaans</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CatalÃ </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8423,10 +8449,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8435,15 +8457,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>EspaÃ±ol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8479,31 +8493,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>PortuguÃªs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Svenska</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>à¸ à¸²à¸©à¸²à¹à¸à¸¢</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8511,7 +8501,51 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
+        <source>العربية</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Català</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ελληνικά</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Español</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Français</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português brasileiro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Română</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ภาษาไทย</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Türkçe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>繁體中文 (台灣)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -550,7 +550,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "stretch+",
          QT_TRANSLATE_NOOP("action","More stretch"),
-         Qt::SHIFT + Qt::Key_Plus,
+         Qt::Key_BraceRight,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Add More Stretch"),
          QT_TRANSLATE_NOOP("action","Add more stretch to selected measure")
@@ -559,7 +559,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "stretch-",
          QT_TRANSLATE_NOOP("action","Less stretch"),
-         Qt::SHIFT + Qt::Key_Minus,
+         Qt::Key_BraceLeft,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Add Less Stretch"),
          QT_TRANSLATE_NOOP("action","Add less stretch to selected measure")
