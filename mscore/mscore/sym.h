@@ -68,6 +68,7 @@ class Sym {
       Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
       const char* name() const             { return _name; }
+      void setName(const char* s)          { _name = s; }
       const QRectF bbox(double mag) const;
       double height(double mag) const      { return _bbox.height() * mag; }
       double width(double mag) const       { return w * mag;  }
