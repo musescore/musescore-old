@@ -22,7 +22,6 @@
 #include "staff.h"
 #include "clef.h"
 #include "keysig.h"
-// #include "scoreview.h"
 #include "system.h"
 #include "segment.h"
 #include "measure.h"
@@ -50,7 +49,7 @@ KeySig::KeySig(Score* s)
 KeySig::KeySig(const KeySig& k)
    : Element(k)
       {
-      foreach(KeySym* ks, keySymbols)
+      foreach(KeySym* ks, k.keySymbols)
             keySymbols.append(new KeySym(*ks));
       }
 
@@ -76,7 +75,7 @@ QPointF KeySig::canvasPos() const
 
 void KeySig::setCustom(const QList<KeySym*>& symbols)
       {
-      setSubtype(CUSTOM_KEYSIG);
+      setSubtype(KEYSIG_CUSTOM);
       keySymbols = symbols;
       }
 
@@ -101,7 +100,7 @@ void KeySig::layout()
       double _spatium = spatium();
       _bbox           = QRectF(0, 0, 0, 0);
 
-      if (subtype() == CUSTOM_KEYSIG) {
+      if (subtype() & KEYSIG_CUSTOM_MASK) {
             foreach(KeySym* ks, keySymbols) {
                   ks->pos = ks->spos * _spatium;
                   _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
@@ -120,8 +119,8 @@ void KeySig::layout()
             yoff = clefTable[clef].yOffset;
             }
 
-      char t1  = subtype() & ACCIDENTAL_MASK;
-      char t2  = (subtype() & NATURAL_MASK) >> NATURAL_SHIFT;
+      char t1  = subtype() & KEYSIG_ACCIDENTAL_MASK;
+      char t2  = (subtype() & KEYSIG_NATURAL_MASK) >> KEYSIG_NATURAL_SHIFT;
       qreal xo = 0.0;
 
       int accidentals, naturals;
@@ -219,12 +218,24 @@ bool KeySig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == KEYSIG) {
-            KeySig* k = static_cast<KeySig*>(e);
-            char stype = k->subtype() & 0xff;
-            delete k;
-            int st = subtype();
-            if (st != stype)
-                  staff()->changeKeySig(tick(), stype);
+            KeySig* ks = static_cast<KeySig*>(e);
+            int customType = ks->customType();
+            if (customType) {
+                  int customIdx = score()->customKeySigIdx(ks);
+                  if (customIdx == -1)
+                        customIdx = score()->addCustomKeySig(ks);
+                  else
+                        delete ks;
+                  int stype = (customIdx+1) << KEYSIG_CUSTOM_SHIFT;
+                  if (stype != subtype())
+                        staff()->changeKeySig(tick(), stype);
+                  }
+            else {
+                  char stype = ks->keySignature();
+                  delete ks;
+                  if (keySignature() != stype)
+                        staff()->changeKeySig(tick(), stype);
+                  }
             return this;
             }
       delete e;
@@ -266,7 +277,7 @@ Space KeySig::space() const
 void KeySig::write(Xml& xml) const
       {
       xml.stag(name());
-      Element:writeProperties(xml);
+      Element::writeProperties(xml);
       foreach(const KeySym* ks, keySymbols) {
             xml.stag("KeySym");
             xml.tag("sym", ks->sym);
@@ -301,5 +312,58 @@ void KeySig::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   operator==
+//---------------------------------------------------------
+
+bool KeySig::operator==(const KeySig& k) const
+      {
+      bool ct1 = customType() != 0;
+      bool ct2 = k.customType() != 0;
+printf("== %d %d\n", ct1, ct2);
+      if (ct1 != ct2)
+            return false;
+
+      if (ct1) {
+            int n = keySymbols.size();
+printf("  %d %d\n", n, k.keySymbols.size());
+            if (n != k.keySymbols.size())
+                  return false;
+            for (int i = 0; i < n; ++i) {
+                  KeySym* ks1 = keySymbols[i];
+                  KeySym* ks2 = k.keySymbols[i];
+                  if (ks1->sym != ks2->sym)
+                        return false;
+                  if (ks1->spos != ks2->spos)
+                        return false;
+                  }
+            return true;
+            }
+      return subtype() != k.subtype();
+      }
+
+//---------------------------------------------------------
+//   changeType
+//---------------------------------------------------------
+
+void KeySig::changeType(int t)
+      {
+printf("KeySig::changeType: %d\n", t);
+      if (subtype() == t)
+            return;
+      if (t & KEYSIG_CUSTOM_MASK) {
+            int i = (t >> KEYSIG_CUSTOM_SHIFT) - 1;
+            KeySig* ks = _score->customKeySig(i);
+            foreach(KeySym* k, keySymbols)
+                  delete k;
+            keySymbols.clear();
+            foreach(KeySym* k, ks->keySymbols)
+                  keySymbols.append(new KeySym(*k));
+            setSubtype(t);
+            }
+      else
+            setSubtype(t);
       }
 

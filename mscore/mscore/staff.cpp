@@ -243,6 +243,7 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, int st)
       {
+printf("Staff::changeKeySig 0x%x\n", st);
       int ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change
@@ -278,7 +279,7 @@ void Staff::changeKeySig(int tick, int st)
             int etick = segment->tick();
             if (!e || (etick < tick))
                   continue;
-            int cst = char(e->subtype() & 0xff);
+            int cst = e->keySignature();
             if ((cst != st) && (etick > tick))
                   break;
             _score->undoRemoveElement(e);

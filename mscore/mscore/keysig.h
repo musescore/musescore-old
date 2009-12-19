@@ -26,10 +26,12 @@
 class Sym;
 class Segment;
 
-#define CUSTOM_KEYSIG   0x10000
-#define ACCIDENTAL_MASK 0x00ff
-#define NATURAL_MASK    0xff00
-#define NATURAL_SHIFT   8
+#define KEYSIG_CUSTOM_MASK     0xffff0000
+#define KEYSIG_CUSTOM_SHIFT    16
+#define KEYSIG_CUSTOM          0x10000
+#define KEYSIG_ACCIDENTAL_MASK 0x00ff
+#define KEYSIG_NATURAL_MASK    0xff00
+#define KEYSIG_NATURAL_SHIFT   8
 
 //---------------------------------------------------------
 //   KeySig
@@ -63,11 +65,14 @@ class KeySig : public Element {
       void setOldSig(int oldSig);
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
-      int keySignature() const { return char(subtype() & 0xff); }    // -7 - +7
+      int keySignature() const { return char(subtype() & KEYSIG_ACCIDENTAL_MASK); }    // -7 - +7
       Space space() const;
       void setCustom(const QList<KeySym*>& symbols);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      int customType() const { return (subtype() & KEYSIG_CUSTOM_MASK) >> KEYSIG_CUSTOM_SHIFT; }
+      bool operator==(const KeySig&) const;
+      void changeType(int);
       };
 
 extern const char* keyNames[15];

@@ -787,7 +787,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
             // we assume that keysigs and clefs are only in the first
             // track of a segment
 
-            int keyIdx = staff->keymap()->key(tick) & 0xff;
+            int keyIdx = staff->keymap()->key(tick);
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
@@ -799,7 +799,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   switch (el->type()) {
                         case KEYSIG:
                               hasKeysig = static_cast<KeySig*>(el);
-                              hasKeysig->setSubtype(keyIdx);
+                              hasKeysig->changeType(keyIdx);
                               hasKeysig->setMag(staff->mag());
                               break;
                         case CLEF:
@@ -819,11 +819,10 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   //
                   // create missing key signature
                   //
-                  KeySig* ks = new KeySig(this);
+                  KeySig* ks = keySigFactory(keyIdx);
                   ks->setTrack(i * VOICES);
                   ks->setTick(tick);
                   ks->setGenerated(true);
-                  ks->setSubtype(keyIdx);
                   ks->setMag(staff->mag());
                   Segment* seg = m->getSegment(ks);
                   seg->add(ks);

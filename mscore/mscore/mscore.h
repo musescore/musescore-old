@@ -264,7 +264,6 @@ class MuseScore : public QMainWindow {
       void editInstrList();
       void symbolMenu();
       void clefMenu();
-      void keyMenu();
       void showKeyEditor();
       void timeMenu();
       void dynamicsMenu();

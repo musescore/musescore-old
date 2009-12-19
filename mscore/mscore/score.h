@@ -271,6 +271,7 @@ class Score : public QObject {
       bool _defaultsRead;            ///< defaults were read at MusicXML import, allow export of defaults in convertermode
 
       Selection* _selection;
+      QList<KeySig*> customKeysigs;
 
       //------------------
 
@@ -785,6 +786,10 @@ class Score : public QObject {
       void expandVoice();
       Note* cmdAddPitch1(int pitch, bool addFlag);
       void insertMeasures(int, int);
+      int customKeySigIdx(KeySig*) const;
+      int addCustomKeySig(KeySig*);
+      KeySig* customKeySig(int) const;
+      KeySig* keySigFactory(int);
       };
 
 extern Score* gscore;

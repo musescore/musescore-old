@@ -24,11 +24,11 @@
 class Xml;
 class Score;
 
-static const int NO_KEY = 1000000;
+static const int NO_KEY = 0x80000000;
 
 //---------------------------------------------------------
 //   KeyList
-//    this list is instantiated for every Instrument
+//    this list is instantiated for every staff
 //    to keep track of key signature changes
 //---------------------------------------------------------
 

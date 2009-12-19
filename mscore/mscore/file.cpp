@@ -1203,6 +1203,11 @@ bool Score::read(QDomElement e)
                   int i = val.toInt();
                   if (tag == "Staff")
                         readStaff(ee);
+                  else if (tag == "KeySig") {
+                        KeySig* ks = new KeySig(this);
+                        ks->read(ee);
+                        customKeysigs.append(ks);
+                        }
                   else if (tag == "siglist")
                         _sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")

@@ -445,6 +445,9 @@ void Score::write(Xml& xml, bool autosave)
       if (!_source.isEmpty())
             xml.tag("source", _source);
 
+      foreach(KeySig* ks, customKeysigs)
+            ks->write(xml);
+
       _sigmap->write(xml);
       _tempomap->write(xml);
       foreach(const Part* part, _parts)
@@ -2048,4 +2051,65 @@ Beam* Score::beam(int id) const
                   return b;
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   customKeySigIdx
+//    try to find custom key signature in table,
+//    return index or -1 if not found
+//---------------------------------------------------------
+
+int Score::customKeySigIdx(KeySig* ks) const
+      {
+printf("Score::customKeySigIdx\n");
+      int idx = 0;
+      foreach(KeySig* k, customKeysigs) {
+            if (*k == *ks)
+                  return idx;
+            ++idx;
+            }
+      printf("  not found\n");
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   addCustomKeySig
+//---------------------------------------------------------
+
+int Score::addCustomKeySig(KeySig* ks)
+      {
+      customKeysigs.append(ks);
+      int idx = customKeysigs.size() - 1;
+      ks->setSubtype((idx+1) << KEYSIG_CUSTOM_SHIFT);
+      ks->setScore(this);
+printf("Score::addCustomKeySig idx %d\n", idx);
+      return idx;
+      }
+
+//---------------------------------------------------------
+//   customKeySig
+//---------------------------------------------------------
+
+KeySig* Score::customKeySig(int idx) const
+      {
+      return customKeysigs[idx];
+      }
+
+//---------------------------------------------------------
+//   keySigFactory
+//---------------------------------------------------------
+
+KeySig* Score::keySigFactory(int idx)
+      {
+printf("Score::keySigFactory %d\n", idx);
+      KeySig* ks;
+      if (idx & KEYSIG_CUSTOM_MASK) {
+            int i = (idx >> KEYSIG_CUSTOM_SHIFT) - 1;
+            ks = new KeySig(*customKeysigs[i]);
+            }
+      else {
+            ks = new KeySig(this);
+            ks->setSubtype(idx);
+            }
+      return ks;
       }
