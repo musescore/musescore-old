@@ -24,6 +24,8 @@
 #include "mscore.h"
 #include "score.h"
 
+extern bool useFactorySettings;
+
 //---------------------------------------------------------
 //   TimeDialog
 //---------------------------------------------------------
@@ -44,21 +46,29 @@ TimeDialog::TimeDialog(QWidget* parent)
       l->addWidget(timePalette);
       sp->setGrid(60, 60);
 
-      Score* cs = gscore;
-	sp->append(new TimeSig(cs, 2, 2), "2/2");
-	sp->append(new TimeSig(cs, 4, 2), "2/4");
-	sp->append(new TimeSig(cs, 4, 3), "3/4");
-	sp->append(new TimeSig(cs, 4, 4), "4/4");
-	sp->append(new TimeSig(cs, 4, 5), "5/4");
-	sp->append(new TimeSig(cs, 4, 6), "6/4");
-	sp->append(new TimeSig(cs, 8, 3), "3/8");
-	sp->append(new TimeSig(cs, 8, 6), "6/8");
-	sp->append(new TimeSig(cs, 8, 9), "9/8");
-	sp->append(new TimeSig(cs, 8, 12), "12/8");
-	sp->append(new TimeSig(cs, TSIG_FOUR_FOUR), "4/4 common time");
-	sp->append(new TimeSig(cs, TSIG_ALLA_BREVE), "2/2 alla breve");
-
+      _dirty = false;
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
+
+      if (!useFactorySettings) {
+            QFile f(dataPath + "/" + "timesigs.xml");
+            if (f.exists() && sp->read(&f))
+                  return;
+            }
+      //
+      // create default palette
+      //
+	sp->append(new TimeSig(gscore, 2, 2), "2/2");
+	sp->append(new TimeSig(gscore, 4, 2), "2/4");
+	sp->append(new TimeSig(gscore, 4, 3), "3/4");
+	sp->append(new TimeSig(gscore, 4, 4), "4/4");
+	sp->append(new TimeSig(gscore, 4, 5), "5/4");
+	sp->append(new TimeSig(gscore, 4, 6), "6/4");
+	sp->append(new TimeSig(gscore, 8, 3), "3/8");
+	sp->append(new TimeSig(gscore, 8, 6), "6/8");
+	sp->append(new TimeSig(gscore, 8, 9), "9/8");
+	sp->append(new TimeSig(gscore, 8, 12), "12/8");
+	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), "4/4 common time");
+	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), "2/2 alla breve");
       }
 
 //---------------------------------------------------------
@@ -70,5 +80,17 @@ void TimeDialog::addClicked()
       TimeSig* ts = new TimeSig(gscore, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
       // extend palette:
       sp->append(ts, "");
+      _dirty = true;
+      }
+
+//---------------------------------------------------------
+//   save
+//---------------------------------------------------------
+
+void TimeDialog::save()
+      {
+      QDir dir;
+      dir.mkpath(dataPath);
+      sp->write(dataPath + "/" + "timesigs.xml");
       }
 

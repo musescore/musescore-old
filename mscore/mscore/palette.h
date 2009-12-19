@@ -214,6 +214,8 @@ class Palette : public QWidget {
       bool drawGrid() const          { return _drawGrid; }
       void write(Xml&, const QString& name) const;
       void read(QDomElement);
+      void write(const QString& path);
+      bool read(QFile*);
       void clear();
       void setSelectable(bool val)   { _selectable = val;  }
       bool selectable() const        { return _selectable; }

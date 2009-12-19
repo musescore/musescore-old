@@ -56,6 +56,8 @@
 #include "synthcontrol.h"
 #include "pianoroll.h"
 #include "scoretab.h"
+#include "timedialog.h"
+#include "keyedit.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -1098,7 +1100,6 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
 
 void MuseScore::setCurrentScoreView(ScoreView* view)
       {
-      ScoreView* c = static_cast<ScoreView*>(view);
       cv = view;
       if (view) {
             cs = view->score();
@@ -2263,6 +2264,10 @@ void MuseScore::writeSettings()
             dir.mkpath(dataPath);
             paletteBox->write(dataPath + "/mscore-palette.xml");
             }
+      if (timePalette && timePalette->dirty())
+            timePalette->save();
+      if (keyEditor && keyEditor->dirty())
+            keyEditor->save();
       }
 
 //---------------------------------------------------------

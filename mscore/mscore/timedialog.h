@@ -34,12 +34,15 @@ class TimeDialog : public QWidget, Ui::TimeDialogBase {
       Q_OBJECT
 
       Palette* sp;
+      bool _dirty;
 
    private slots:
       void addClicked();
 
    public:
       TimeDialog(QWidget* parent = 0);
+      bool dirty() const  { return _dirty; }
+      void save();
       };
 
 #endif

@@ -27,6 +27,8 @@
 #include "keycanvas.h"
 #include "clef.h"
 
+extern bool useFactorySettings;
+
 //---------------------------------------------------------
 //   KeyCanvas
 //---------------------------------------------------------
@@ -281,20 +283,6 @@ KeyEditor::KeyEditor(QWidget* parent)
       sp->setGrid(56, 45);
       sp->setYOffset(6.0);
 
-      for (int i = 0; i < 7; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i+1);
-            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-            }
-      for (int i = -7; i < 0; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i & 0xff);
-            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-            }
-      KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
-      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
-
       // create accidental palette
 
       l = new QVBoxLayout();
@@ -321,6 +309,28 @@ KeyEditor::KeyEditor(QWidget* parent)
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
+
+      if (!useFactorySettings) {
+            QFile f(dataPath + "/" + "keysigs.xml");
+            if (f.exists() && sp->read(&f))
+                  return;
+            }
+      //
+      // create default palette
+      //
+      for (int i = 0; i < 7; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i+1);
+            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
+            }
+      for (int i = -7; i < 0; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i & 0xff);
+            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
+            }
+      KeySig* k = new KeySig(gscore);
+      k->setSubtype(0);
+      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       }
 
 //---------------------------------------------------------
@@ -352,6 +362,7 @@ void KeyEditor::addClicked()
       KeySig* ks = new KeySig(gscore);
       ks->setCustom(symbols);
       sp->append(ks, "custom");
+      _dirty = true;
       }
 
 //---------------------------------------------------------
@@ -361,6 +372,17 @@ void KeyEditor::addClicked()
 void KeyEditor::clearClicked()
       {
       canvas->clear();
+      }
+
+//---------------------------------------------------------
+//   save
+//---------------------------------------------------------
+
+void KeyEditor::save()
+      {
+      QDir dir;
+      dir.mkpath(dataPath);
+      sp->write(dataPath + "/" + "keysigs.xml");
       }
 
 //---------------------------------------------------------

@@ -34,6 +34,7 @@ class KeyEditor : public QWidget, Ui::KeyEdit {
 
       Palette* sp;
       Palette* sp1;
+      bool _dirty;
 
    private slots:
       void addClicked();
@@ -41,6 +42,8 @@ class KeyEditor : public QWidget, Ui::KeyEdit {
 
    public:
       KeyEditor(QWidget* parent = 0);
+      bool dirty() const { return _dirty; }
+      void save();
       };
 
 #endif
