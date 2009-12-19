@@ -800,6 +800,68 @@ void Palette::write(Xml& xml, const QString& name) const
 
 //---------------------------------------------------------
 //   read
+//    return false on error
+//---------------------------------------------------------
+
+bool Palette::read(QFile* qf)
+      {
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(qf, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading palette  %s at line %d column %d: %s\n",
+               qPrintable(qf->fileName()), line, column, qPrintable(err));
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load Palette failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return false;
+            }
+      docName = qf->fileName();
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  int versionId = sl[0].toInt() * 100 + sl[1].toInt();
+                  gscore->setMscVersion(versionId);
+
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Palette") {
+                              QString name = ee.attribute("name", "");
+                              setName(name);
+                              read(ee);
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Palette::write(const QString& path)
+      {
+      QFile f(path);
+      if (!f.open(QIODevice::WriteOnly)) {
+            printf("cannot write modified palettes\n");
+            return;
+            }
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      write(xml, name());
+      xml.etag();
+      f.close();
+      }
+
+//---------------------------------------------------------
+//   read
 //---------------------------------------------------------
 
 void Palette::read(QDomElement e)
