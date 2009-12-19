@@ -3,6 +3,11 @@
       (la)
       - fix group of menu items for plugins
       - add saveMscz() in plugin framework
+      (db)
+      - change measure stretch shortcuts from "Shift++" and "Shift+-" to "{" 
+        and "}" (avoids conflict with "+" for ties on US keyboards)
+      - change preferences.cpp to UTF-8 (it was opening as ASCII for me and 
+        corrupting the language choices text)
 17.dec (ws)
       - Changed accidental handling; accidental buttons in top note input
         tool bar work as "add accidental" command button to all selected notes
@@ -10,6 +15,7 @@
         the accidental palette.
       (og)
       - exportly: stafftext and dynamics on same note.
+      - exportly: export fermatas on rests
 16.dec (ws)
       - fix: Add copyright text crash
       - all accidentals can now have brackets: drag bracket symbol on accidental

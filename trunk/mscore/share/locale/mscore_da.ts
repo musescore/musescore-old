@@ -78,10 +78,6 @@ p, li { white-space: pre-wrap; }
         <source>Midi Action</source>
         <translation>Midi handling</translation>
     </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
 </context>
 <context>
     <name>BarLineBase</name>
@@ -142,49 +138,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bottom:</source>
         <translation>bund:</translation>
-    </message>
-</context>
-<context>
-    <name>Canvas</name>
-    <message>
-        <source>Object Inspector</source>
-        <translation>Objekt inspektor</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Stemme</translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation>Rediger trommesæt...</translation>
-    </message>
-    <message>
-        <source>Staff Properties...</source>
-        <translation>Stemme egenskaber...</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Takt</translation>
-    </message>
-    <message>
-        <source>Select</source>
-        <translation>Vælg</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation>Mere...</translation>
-    </message>
-    <message>
-        <source>Drumroll Editor...</source>
-        <translation>Tromme-rulle redigering...</translation>
-    </message>
-    <message>
-        <source>Pianoroll Editor...</source>
-        <translation>Klaver-rulle redigering...</translation>
-    </message>
-    <message>
-        <source>Split Staff...</source>
-        <translation>Del system...</translation>
     </message>
 </context>
 <context>
@@ -2252,6 +2205,36 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>KeyEdit</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Key Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KeyEditor</name>
+    <message>
+        <source>MuseScore: Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3147,10 +3130,6 @@ før lukning?</translation>
         <translation>MuseScore: Fingersætning</translation>
     </message>
     <message>
-        <source>MuseScore: Layout Breaks</source>
-        <translation>MuseScore: Layout ombrydninger</translation>
-    </message>
-    <message>
         <source>MuseScore: failure</source>
         <translation>MuseScore :fejl</translation>
     </message>
@@ -3304,16 +3283,8 @@ Prøv at vælge &quot;Online Håndbog&quot; fra &quot;Hjælp&quot;-menuen i sted
         <translation>Streng nummer %1</translation>
     </message>
     <message>
-        <source>Note heads</source>
-        <translation>Nodehoveder</translation>
-    </message>
-    <message>
         <source>Repeat measure sign</source>
         <translation>Gentag takt tegn</translation>
-    </message>
-    <message>
-        <source>Var Coda</source>
-        <translation></translation>
     </message>
     <message>
         <source>Da Capo</source>
@@ -3384,10 +3355,6 @@ Prøv at vælge &quot;Online Håndbog&quot; fra &quot;Hjælp&quot;-menuen i sted
         <translation>MuseScore: klammer</translation>
     </message>
     <message>
-        <source>MuseScore: Articulations &amp;&amp; Ornaments</source>
-        <translation>MuseScore: artikulationer &amp;&amp; ornamenter</translation>
-    </message>
-    <message>
         <source>Breaks &amp;&amp; Spacer...</source>
         <translation>Linieskift &amp;&amp; afstande...</translation>
     </message>
@@ -3398,6 +3365,26 @@ Restore session?</source>
         <translation>Den tidligere session blev afbrudt.
 
 Genskab denne session?</translation>
+    </message>
+    <message>
+        <source>round bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Varied coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Articulations &amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Breaks &amp; Spacer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3988,10 +3975,6 @@ Genskab denne session?</translation>
         <translation>Sprog</translation>
     </message>
     <message>
-        <source>system</source>
-        <translation>System</translation>
-    </message>
-    <message>
         <source>de German</source>
         <translation>de Tysk</translation>
     </message>
@@ -4050,10 +4033,6 @@ Genskab denne session?</translation>
     <message>
         <source>show</source>
         <translation>vis</translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation></translation>
     </message>
     <message>
         <source>Style</source>
@@ -4469,10 +4448,6 @@ Genskab denne session?</translation>
         <translation>MIDI Fjernstyring</translation>
     </message>
     <message>
-        <source>Use JACK midi output</source>
-        <translation>Benyt JACK midi output</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Auto-rettelser</translation>
     </message>
@@ -4495,6 +4470,18 @@ Genskab denne session?</translation>
     <message>
         <source>Use style file:</source>
         <translation>Benyt stilart fil:</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigator:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK MIDI output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4917,6 +4904,49 @@ Try saving to a different location.</source>
 %1
 
 Prøv af gemme den et andet sted.</translation>
+    </message>
+</context>
+<context>
+    <name>ScoreView</name>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pianoroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Staff...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8409,6 +8439,10 @@ p, li { white-space: pre-wrap; }
         <source>Articulation</source>
         <translation>Artikulation</translation>
     </message>
+    <message>
+        <source>AccidentalBracket</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>language</name>
@@ -8418,14 +8452,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Afrikaans</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ø§ÙØ¹Ø±Ø¨ÙØ©</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CatalÃ </source>
         <translation></translation>
     </message>
     <message>
@@ -8441,10 +8467,6 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>ÎµÎ»Î»Î·Î½Î¹ÎºÎ¬</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation></translation>
     </message>
@@ -8453,15 +8475,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>EspaÃ±ol</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Finnish</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>FranÃ§ais</source>
         <translation></translation>
     </message>
     <message>
@@ -8497,31 +8511,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>PortuguÃªs</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>PortuguÃªs brasileiro</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>RomÃ¢nÄ</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Svenska</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>à¸ à¸²à¸©à¸²à¹à¸à¸¢</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>TÃ¼rkÃ§e</source>
         <translation></translation>
     </message>
     <message>
@@ -8529,8 +8519,52 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>ç¹é«ä¸­æ (å°ç£)</source>
-        <translation></translation>
+        <source>العربية</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Català</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ελληνικά</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Español</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Français</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Português brasileiro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Română</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Русский</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ภาษาไทย</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Türkçe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>繁體中文 (台灣)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
