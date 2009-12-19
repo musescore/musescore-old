@@ -739,41 +739,6 @@ void MuseScore::clefMenu()
       }
 
 //---------------------------------------------------------
-//   keyMenu
-//---------------------------------------------------------
-
-void MuseScore::keyMenu()
-      {
-      if (enableExperimental) {
-            showKeyEditor();
-            return;
-            }
-      if (keyPalette == 0) {
-            Palette* sp = new Palette();
-            sp->resize(400, 300);
-            keyPalette = new PaletteScrollArea(sp);
-            keyPalette->setRestrictHeight(false);
-            keyPalette->setWindowTitle(tr("MuseScore: Key Signatures"));
-            sp->setGrid(80, 60);
-            for (int i = 0; i < 7; ++i) {
-                  KeySig* k = new KeySig(gscore);
-                  k->setSubtype(i+1);
-                  sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-                  }
-            for (int i = -7; i < 0; ++i) {
-                  KeySig* k = new KeySig(gscore);
-                  k->setSubtype(i & 0xff);
-                  sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-                  }
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(0);
-            sp->append(k, qApp->translate("MuseScore", keyNames[14]));
-            }
-      keyPalette->show();
-      keyPalette->raise();
-      }
-
-//---------------------------------------------------------
 //   timeMenu
 //---------------------------------------------------------
 

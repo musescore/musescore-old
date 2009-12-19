@@ -1932,7 +1932,7 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "clefs")
             clefMenu();
       else if (cmd == "keys")
-            keyMenu();
+            showKeyEditor();
       else if (cmd == "symbols")
             symbolMenu();
       else if (cmd == "times")
