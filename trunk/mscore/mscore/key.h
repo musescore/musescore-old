@@ -47,6 +47,7 @@ struct KeySigEvent {
       bool operator!=(const KeySigEvent& e) const;
       void setCustomType(int v);
       void setAccidentalType(int v);
+      void print() const;
       };
 
 //---------------------------------------------------------
@@ -55,8 +56,8 @@ struct KeySigEvent {
 //    to keep track of key signature changes
 //---------------------------------------------------------
 
-typedef std::map<const int, KeySigEvent>::iterator iKeyEvent;
-typedef std::map<const int, KeySigEvent>::const_iterator ciKeyEvent;
+typedef std::map<const int, KeySigEvent>::iterator iKeyList;
+typedef std::map<const int, KeySigEvent>::const_iterator ciKeyList;
 
 class KeyList : public std::map<const int, KeySigEvent> {
    public:

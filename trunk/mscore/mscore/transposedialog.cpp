@@ -158,7 +158,7 @@ void Score::transpose()
       if (transposeKeys) {
             for (int staffIdx = _selection->staffStart; staffIdx < _selection->staffEnd; ++staffIdx) {
                   KeyList* km = staff(staffIdx)->keymap();
-                  for (iKeyEvent ke = km->lower_bound(_selection->tickStart());
+                  for (iKeyList ke = km->lower_bound(_selection->tickStart());
                      ke != km->lower_bound(_selection->tickEnd()); ++ke) {
                         KeySigEvent oKey  = ke->second;
                         int tick  = ke->first;
@@ -215,7 +215,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
 #endif
             }
       KeyList* km = staff(staffIdx)->keymap();
-      for (iKeyEvent ke = km->begin(); ke != km->end(); ++ke) {
+      for (iKeyList ke = km->begin(); ke != km->end(); ++ke) {
             KeySigEvent oKey  = ke->second;
             int tick  = ke->first;
             int nKey  = transposeKey(oKey.accidentalType, diff);

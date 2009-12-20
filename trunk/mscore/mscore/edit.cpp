@@ -1151,7 +1151,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   if (i->first >= tick && (i->first < tick2) && i->first != 0)
                         undoChangeClef(staff, i->first, i->second, NO_CLEF);
                   }
-            for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
+            for (ciKeyList i = kl->begin(); i != kl->end(); ++i) {
                   if (i->first >= tick && (i->first < tick2) && i->first != 0)
                         undoChangeKey(staff, i->first, i->second, KeySigEvent());
                   }

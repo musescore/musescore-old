@@ -220,8 +220,9 @@ bool KeySig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == KEYSIG) {
-            KeySig* ks = static_cast<KeySig*>(e);
+            KeySig* ks    = static_cast<KeySig*>(e);
             KeySigEvent k = ks->keySigEvent();
+printf("drop ");k.print(); printf("\n");
             if (k.custom) {
                   int customIdx = score()->customKeySigIdx(ks);
                   if (customIdx == -1)
@@ -326,13 +327,11 @@ bool KeySig::operator==(const KeySig& k) const
       {
       bool ct1 = customType() != 0;
       bool ct2 = k.customType() != 0;
-printf("== %d %d\n", ct1, ct2);
       if (ct1 != ct2)
             return false;
 
       if (ct1) {
             int n = keySymbols.size();
-printf("  %d %d\n", n, k.keySymbols.size());
             if (n != k.keySymbols.size())
                   return false;
             for (int i = 0; i < n; ++i) {
@@ -354,7 +353,6 @@ printf("  %d %d\n", n, k.keySymbols.size());
 
 void KeySig::changeType(KeySigEvent t)
       {
-printf("KeySig::changeType: %d\n", t.accidentalType);
       if (keySigEvent() == t)
             return;
       if (t.custom) {

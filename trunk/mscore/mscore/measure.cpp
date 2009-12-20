@@ -1757,7 +1757,7 @@ printf("drop staffList\n");
                   break;
 
             case KEYSIG:
-                  staff->changeKeySig(tick(), static_cast<KeySig*>(e)->keySignature());
+                  staff->changeKeySig(tick(), static_cast<KeySig*>(e)->keySigEvent());
                   delete e;
                   break;
 
