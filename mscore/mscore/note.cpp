@@ -218,8 +218,8 @@ void Note::setPitch(int val)
                   }
             }
       _ppitch = _pitch + pitchOffset;
-      int key = (staff() && chord()) ? staff()->key(chord()->tick()) : 0;
-      _tpc    = pitch2tpc(_pitch, key);
+      KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
+      _tpc    = pitch2tpc(_pitch, key.accidentalType);
       }
 
 //---------------------------------------------------------
@@ -820,7 +820,7 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int tick     = chord()->tick();
       int clef     = staff->clef(tick);
-      int key      = staff->key(tick);
+      int key      = staff->key(tick).accidentalType;
       int npitch   = line2pitch(_line, clef, key);
       score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
       }

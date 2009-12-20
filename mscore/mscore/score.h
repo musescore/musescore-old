@@ -37,6 +37,7 @@
 #include "fraction.h"
 #include "al/al.h"
 #include "scoreview.h"
+#include "key.h"
 
 namespace AL {
       class TempoMap;
@@ -427,9 +428,8 @@ class Score : public QObject {
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
       void undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n);
-      void undoChangeKeySig(Staff* staff, int tick, int o, int n);
+      void undoChangeKey(Staff* staff, int tick, KeySigEvent o, KeySigEvent n);
       void undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n);
-      void undoChangeKey(Staff* staff, int tick, int o, int n);
       void undoChangeClef(Staff* staff, int tick, int o, int n);
       void undoAddElement(Element* element);
       void undoRemoveElement(Element* element);
@@ -789,7 +789,7 @@ class Score : public QObject {
       int customKeySigIdx(KeySig*) const;
       int addCustomKeySig(KeySig*);
       KeySig* customKeySig(int) const;
-      KeySig* keySigFactory(int);
+      KeySig* keySigFactory(KeySigEvent);
       };
 
 extern Score* gscore;

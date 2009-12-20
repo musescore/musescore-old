@@ -1880,10 +1880,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   int staffIdx = staff;
                   if (number != -1)
                         staffIdx += number - 1;
-                  int key = 0;
+                  KeySigEvent key;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "fifths")
-                              key = ee.text().toInt();
+                              key.setAccidentalType(ee.text().toInt());
                         else if (ee.tagName() == "mode")
                               domNotImplemented(ee);
                         else
@@ -1898,7 +1898,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         //
                         int staves = score->part(staff)->nstaves();
                         for (int i = 0; i < staves; ++i) {
-                              int oldkey = score->staff(staffIdx+i)->keymap()->key(tick);
+                              KeySigEvent oldkey = score->staff(staffIdx+i)->keymap()->key(tick);
                               if (oldkey != key) {
                                     // new key differs from key in effect at this tick
                                     (*score->staff(staffIdx+i)->keymap())[tick] = key;
@@ -1919,7 +1919,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         //
                         //    apply key to staff(staffIdx) only
                         //
-                        int oldkey = score->staff(staffIdx)->keymap()->key(tick);
+                        KeySigEvent oldkey = score->staff(staffIdx)->keymap()->key(tick);
                         if (oldkey != key) {
                               // new key differs from key in effect at this tick
                               (*score->staff(staffIdx)->keymap())[tick] = key;
@@ -1960,9 +1960,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         st->setBarLineSpan(2); //seems to be default in musicXML
                         }
                   // set key signature
-                  int key = score->staff(staff)->keymap()->key(tick);
+                  KeySigEvent key = score->staff(staff)->keymap()->key(tick);
                   for (int i = 1; i < staves; ++i) {
-                        int oldkey = score->staff(staff+i)->keymap()->key(tick);
+                        KeySigEvent oldkey = score->staff(staff+i)->keymap()->key(tick);
                         if (oldkey != key)
                               (*score->staff(staff+i)->keymap())[tick] = key;
                         }

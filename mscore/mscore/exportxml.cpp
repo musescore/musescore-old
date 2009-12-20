@@ -3302,10 +3302,10 @@ foreach(Element* el, *(score->gel())) {
                         int ti = ksig->tick();
                         //TODO_K
                         KeyList* kl = score->staff(0)->keymap();
-                        int key = kl->key(ti);
+                        KeySigEvent key = kl->key(ti);
                         ciKeyEvent ci = kl->find(ti);
                         if (ci != kl->end()) {
-                              keysig(key);
+                              keysig(key.accidentalType);
                               }
                         }
                   else if (tick == 0)

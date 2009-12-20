@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,10 +24,76 @@
 #include "score.h"
 
 //---------------------------------------------------------
+//   KeySigEvent
+//---------------------------------------------------------
+
+KeySigEvent::KeySigEvent()
+      {
+      subtype = 0;
+      invalid = true;
+      }
+
+KeySigEvent::KeySigEvent(int v)
+      {
+      subtype = v;
+      }
+
+//---------------------------------------------------------
+//   setCustomType
+//---------------------------------------------------------
+
+void KeySigEvent::setCustomType(int v)
+      {
+      accidentalType = 0;
+      customType     = v;
+      custom         = true;
+      invalid        = false;
+      }
+
+//---------------------------------------------------------
+//   setAccidentalType
+//---------------------------------------------------------
+
+void KeySigEvent::setAccidentalType(int v)
+      {
+      accidentalType = v;
+      custom         = false;
+      invalid        = false;
+      }
+
+//---------------------------------------------------------
+//   KeySigEvent::operator==
+//---------------------------------------------------------
+
+bool KeySigEvent::operator==(const KeySigEvent& e) const
+      {
+      if (e.invalid || invalid || (e.custom != custom))
+            return false;
+      if (custom)
+            return e.customType != customType;
+      else
+            return e.accidentalType != accidentalType;
+      }
+
+//---------------------------------------------------------
+//   KeySigEvent::operator!=
+//---------------------------------------------------------
+
+bool KeySigEvent::operator!=(const KeySigEvent& e) const
+      {
+      if (e.invalid || invalid || (e.custom != custom))
+            return true;
+      if (custom)
+            return e.customType == customType;
+      else
+            return e.accidentalType == accidentalType;
+      }
+
+//---------------------------------------------------------
 //   key
 //---------------------------------------------------------
 
-int KeyList::key(int tick) const
+KeySigEvent KeyList::key(int tick) const
       {
       if (empty())
             return 0;
@@ -45,8 +111,12 @@ int KeyList::key(int tick) const
 void KeyList::write(Xml& xml, const char* name) const
       {
       xml.stag(name);
-      for (ciKeyEvent i = begin(); i != end(); ++i)
-            xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second);
+      for (ciKeyEvent i = begin(); i != end(); ++i) {
+            if (i->second.custom)
+                  xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType);
+            else
+                  xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second.accidentalType);
+            }
       xml.etag();
       }
 
@@ -59,9 +129,13 @@ void KeyList::read(QDomElement e, Score* cs)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "key") {
+                  KeySigEvent ke;
                   int tick = e.attribute("tick", "0").toInt();
-                  int idx  = e.attribute("idx", "0").toInt();
-                  (*this)[cs->fileDivision(tick)] = idx;
+                  if (e.hasAttribute("custom"))
+                        ke.setCustomType(e.attribute("custom").toInt());
+                  else
+                        ke.setAccidentalType(e.attribute("idx").toInt());
+                  (*this)[cs->fileDivision(tick)] = ke;
                   }
             else
                   domError(e);

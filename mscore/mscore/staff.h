@@ -26,6 +26,8 @@
  Definition of class Staff.
 */
 
+#include "key.h"
+
 class Instrument;
 class ClefList;
 class Xml;
@@ -99,11 +101,11 @@ class Staff {
 
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clefList() const     { return _clefList;    }
-      void changeKeySig(int tick, int st);
+      void changeKeySig(int tick, KeySigEvent st);
       void changeClef(int tick, int st);
       int clef(int tick) const;
       void setClef(int tick, int clef);
-      int key(int tick) const;
+      KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
 
       bool show() const              { return _show;        }

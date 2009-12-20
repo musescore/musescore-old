@@ -647,7 +647,7 @@ void Score::undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n)
 //   undoChangeKey
 //---------------------------------------------------------
 
-void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
+void Score::undoChangeKey(Staff* staff, int tick, KeySigEvent o, KeySigEvent n)
       {
       _undo->push(new ChangeKey(staff, tick, o, n));
       }
@@ -659,15 +659,6 @@ void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
 void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
       {
       _undo->push(new ChangeClef(staff, tick, o, n));
-      }
-
-//---------------------------------------------------------
-//   undoChangeKeySig
-//---------------------------------------------------------
-
-void Score::undoChangeKeySig(Staff* staff, int tick, int o, int n)
-      {
-      _undo->push(new ChangeKeySig(staff, tick, o, n));
       }
 
 //---------------------------------------------------------
@@ -1298,46 +1289,6 @@ void RemoveStaves::redo()
       }
 
 //---------------------------------------------------------
-//   ChangeKeySig
-//---------------------------------------------------------
-
-ChangeKeySig::ChangeKeySig(Staff* s, int t, int oks, int nks)
-      {
-      staff     = s;
-      tick      = t;
-      oldKeySig = oks;
-      newKeySig = nks;
-      }
-
-void ChangeKeySig::undo()
-      {
-      KeyList* kl = staff->keymap();
-      // remove new value if there is any
-      if (newKeySig != NO_KEY) {
-            iKeyEvent ik = kl->find(tick);
-            kl->erase(ik);
-            }
-      if (oldKeySig != NO_KEY)
-            (*kl)[tick] = oldKeySig;
-      }
-
-void ChangeKeySig::redo()
-      {
-      KeyList* kl = staff->keymap();
-      if (oldKeySig != NO_KEY) {
-            iKeyEvent ik = kl->find(tick);
-            if (ik == kl->end()) {
-                  printf("ChangeKeySig::redo: cannot find key at tick %d, listsize %zd\n", tick, kl->size());
-                  abort();
-                  }
-            else
-                  kl->erase(ik);
-            }
-      if (newKeySig != NO_KEY)
-            (*kl)[tick] = newKeySig;
-      }
-
-//---------------------------------------------------------
 //   ChangeClef
 //---------------------------------------------------------
 
@@ -1379,7 +1330,7 @@ void ChangeClef::redo()
 //   ChangeKey
 //---------------------------------------------------------
 
-ChangeKey::ChangeKey(Staff* s, int _tick, int _o, int _n)
+ChangeKey::ChangeKey(Staff* s, int _tick, KeySigEvent _o, KeySigEvent _n)
       {
       staff = s;
       tick  = _tick;
@@ -1391,28 +1342,28 @@ void ChangeKey::undo()
       {
       KeyList* kl = staff->keymap();
       // remove new value if there is any
-      if (n != NO_KEY) {
-            iClefEvent ik = kl->find(tick);
+      if (n.isValid()) {
+            iKeyEvent ik = kl->find(tick);
             if (ik == kl->end())
                   printf("UndoOp::ChangeKey1 %d: not found\n", tick);
             else
                   kl->erase(ik);
             }
-      if (o != NO_KEY)
+      if (o.isValid())
             (*kl)[tick] = o;
       }
 
 void ChangeKey::redo()
       {
       KeyList* kl = staff->keymap();
-      if (o != NO_KEY) {
+      if (o.isValid()) {
             iKeyEvent ik = kl->find(tick);
             if (ik == kl->end())
                   printf("UndoOp::ChangeKey2 %d: not found\n", tick);
             else
                   kl->erase(ik);
             }
-      if (n != NO_KEY)
+      if (n.isValid())
             (*kl)[tick] = n;
       }
 
