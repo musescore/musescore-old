@@ -762,7 +762,7 @@ void Palette::dropEvent(QDropEvent* event)
 
 void Palette::write(Xml& xml, const QString& name) const
       {
-      xml.stag(QString("Palette name=\"%1\"").arg(name));
+      xml.stag(QString("Palette name=\"%1\"").arg(Xml::xmlString(name)));
       xml.tag("gridWidth", hgrid);
       xml.tag("gridHeight", vgrid);
       if (extraMag != 1.0)
@@ -782,7 +782,7 @@ void Palette::write(Xml& xml, const QString& name) const
                         continue;
                         }
                   if (!cells[i]->name.isEmpty())
-                        xml.stag(QString("Cell name=\"%1\"").arg(cells[i]->name));
+                        xml.stag(QString("Cell name=\"%1\"").arg(Xml::xmlString(cells[i]->name)));
                   else
                         xml.stag("Cell");
                   if (cells[i]->drawStaff)
