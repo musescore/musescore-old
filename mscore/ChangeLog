@@ -1,3 +1,5 @@
+20.dec (ws)
+      - key signature updates; changed the format for custom key signatures
 19.dec (ws)
       - custom key signatures are now usable; in the current implementation they
         are only graphical symbols with no semantic on pitch etc.
