@@ -81,7 +81,6 @@ class ScoreView : public QWidget {
       QMatrix _matrix, imatrix;
       int _magIdx;
 
-
       QStateMachine* sm;
       QState* states[STATES];
 
@@ -91,17 +90,18 @@ class ScoreView : public QWidget {
 
       bool dragScoreViewState;
       bool draggedScoreView;
-      Element* dragElement;
+      Element* dragElement;   // valid in state DRAG_OBJECT
+
+      Element* curElement;    // current item at mouse press
+      QPointF startMove;      // position of last mouse press
+      QPoint  startMoveI;
 
       QPointF dragOffset;
-      bool mousePressed;
 
       // editing mode
       int curGrip;
       QRectF grip[4];         // edit "grips"
       int grips;              // number of used grips
-
-      QPointF startMove;
 
       //--input state:
       Cursor* cursor;
@@ -233,7 +233,7 @@ class ScoreView : public QWidget {
       void doDragLasso(QMouseEvent* ev);
       void doDragEdit(QMouseEvent* ev);
       void select(QMouseEvent*);
-      void mousePress(QMouseEvent* ev);
+      bool mousePress(QMouseEvent* ev);
       bool testElementDragTransition(QMouseEvent* ev) const;
       bool editElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);
