@@ -1592,7 +1592,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
-         QT_TRANSLATE_NOOP("action","player play"),
+         QT_TRANSLATE_NOOP("action","Player play"),
          Qt::CTRL + Qt::Key_Space,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Play"),
@@ -1602,43 +1602,43 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_PLAY,
          "play-prev-chord",
-         QT_TRANSLATE_NOOP("action","previous chord"),
+         QT_TRANSLATE_NOOP("action","Previous chord"),
          Qt::Key_Left,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","left chord"),
-         QT_TRANSLATE_NOOP("action","left chord")
+         QT_TRANSLATE_NOOP("action","Previous chord"),
+         QT_TRANSLATE_NOOP("action","Previous chord")
          ),
       Shortcut(
          STATE_PLAY,
          "play-prev-measure",
-         QT_TRANSLATE_NOOP("action","previous measure"),
+         QT_TRANSLATE_NOOP("action","Previous measure"),
          Qt::CTRL+Qt::Key_Left,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","previous measure"),
-         QT_TRANSLATE_NOOP("action","prev measure")
+         QT_TRANSLATE_NOOP("action","Previous measure"),
+         QT_TRANSLATE_NOOP("action","Previous measure")
          ),
       Shortcut(
          STATE_PLAY,
          "play-next-chord",
-         QT_TRANSLATE_NOOP("action","next chord"),
+         QT_TRANSLATE_NOOP("action","Next chord"),
          Qt::Key_Right,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","next chord"),
-         QT_TRANSLATE_NOOP("action","next chord")
+         QT_TRANSLATE_NOOP("action","Next chord"),
+         QT_TRANSLATE_NOOP("action","Next chord")
          ),
       Shortcut(
          STATE_PLAY,
          "play-next-measure",
-         QT_TRANSLATE_NOOP("action","next measure"),
+         QT_TRANSLATE_NOOP("action","Next measure"),
          Qt::CTRL+Qt::Key_Right,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","next measure"),
-         QT_TRANSLATE_NOOP("action","next measure")
+         QT_TRANSLATE_NOOP("action","Next measure"),
+         QT_TRANSLATE_NOOP("action","Next measure")
          ),
       Shortcut(
          STATE_PLAY,
          "seek-begin",
-         QT_TRANSLATE_NOOP("action","seek to begin"),
+         QT_TRANSLATE_NOOP("action","Seek to begin"),
          Qt::Key_Home,
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action",""),
@@ -1647,17 +1647,17 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "rewind",
-         QT_TRANSLATE_NOOP("action","player rewind"),
+         QT_TRANSLATE_NOOP("action","Player rewind"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Rewind"),
-         QT_TRANSLATE_NOOP("action","rewind to start position"),
+         QT_TRANSLATE_NOOP("action","Rewind to start position"),
          &startIcon
          ),
       Shortcut(
          STATE_PLAY,
          "seek-end",
-         QT_TRANSLATE_NOOP("action","seek to end"),
+         QT_TRANSLATE_NOOP("action","Seek to end"),
          Qt::Key_End,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action",""),
@@ -1666,17 +1666,17 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL,
          "repeat",
-         QT_TRANSLATE_NOOP("action","play repeats on"),
+         QT_TRANSLATE_NOOP("action","Play repeats on/off"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Repeat"),
-         QT_TRANSLATE_NOOP("action","play repeats on/off"),
+         QT_TRANSLATE_NOOP("action","Play repeats on/off"),
          &repeatIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "load-style",
-         QT_TRANSLATE_NOOP("action","load style"),
+         QT_TRANSLATE_NOOP("action","Load style"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Load Style..."),
@@ -1686,7 +1686,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "save-style",
-         QT_TRANSLATE_NOOP("action","save style"),
+         QT_TRANSLATE_NOOP("action","Save style"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Save Style..."),
@@ -1696,7 +1696,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "select-all",
-         QT_TRANSLATE_NOOP("action","select all"),
+         QT_TRANSLATE_NOOP("action","Select all"),
          Qt::CTRL+Qt::Key_A,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Select All"),
@@ -1705,7 +1705,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut (
          STATE_NORMAL,
          "transpose",
-         QT_TRANSLATE_NOOP("action","transpose"),
+         QT_TRANSLATE_NOOP("action","Transpose"),
          0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Transpose..."),
