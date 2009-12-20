@@ -1256,7 +1256,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             }
       for (ciKeyEvent i = km->begin(); i != km->end(); ++i) {
             int tick = i->first;
-            int key  = i->second;
+            KeySigEvent key  = i->second;
             if (tick == 0)
                   continue;
             KeySig* ks = new KeySig(this);

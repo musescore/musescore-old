@@ -24,7 +24,30 @@
 class Xml;
 class Score;
 
-static const int NO_KEY = 0x80000000;
+//---------------------------------------------------------
+//   KeySigEvent
+//---------------------------------------------------------
+
+struct KeySigEvent {
+      union {
+            int subtype;
+            struct {
+                  int accidentalType:4;
+                  int naturalType:4;
+                  unsigned customType:16;
+                  bool custom : 1;
+                  bool invalid : 1;
+                  };
+            };
+      KeySigEvent();
+      KeySigEvent(int v);
+
+      bool isValid() const { return !invalid; }
+      bool operator==(const KeySigEvent& e) const;
+      bool operator!=(const KeySigEvent& e) const;
+      void setCustomType(int v);
+      void setAccidentalType(int v);
+      };
 
 //---------------------------------------------------------
 //   KeyList
@@ -32,13 +55,13 @@ static const int NO_KEY = 0x80000000;
 //    to keep track of key signature changes
 //---------------------------------------------------------
 
-typedef std::map<const int, int>::iterator iKeyEvent;
-typedef std::map<const int, int>::const_iterator ciKeyEvent;
+typedef std::map<const int, KeySigEvent>::iterator iKeyEvent;
+typedef std::map<const int, KeySigEvent>::const_iterator ciKeyEvent;
 
-class KeyList : public std::map<const int, int> {
+class KeyList : public std::map<const int, KeySigEvent> {
    public:
       KeyList() {}
-      int key(int tick) const;
+      KeySigEvent key(int tick) const;
       void read(QDomElement, Score*);
       void write(Xml&, const char* name) const;
 

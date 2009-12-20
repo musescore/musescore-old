@@ -154,7 +154,7 @@ void ExportMidi::writeHeader()
             for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
                   Event* ev  = new Event(ME_META);
                   ev->setOntime(ik->first);
-                  int key       = ik->second;   // -7 -- +7
+                  int key       = ik->second.accidentalType;   // -7 -- +7
                   ev->setMetaType(META_KEY_SIGNATURE);
                   ev->setLen(2);
                   unsigned char* data = new unsigned char[2];

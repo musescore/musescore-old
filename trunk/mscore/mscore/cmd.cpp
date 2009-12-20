@@ -336,11 +336,11 @@ void Score::cmdRemoveKeySig(KeySig* ks)
             printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
             return;
             }
-      int oval = ki->second;
+      KeySigEvent oval = ki->second;
       iKeyEvent nki = ki;
       ++nki;
 
-      undoChangeKeySig(staff, tick, oval, NO_KEY);
+      undoChangeKey(staff, tick, oval, KeySigEvent());
 
       undoRemoveElement(ks);
       Segment* segment = ks->segment()->next1();
@@ -348,7 +348,7 @@ void Score::cmdRemoveKeySig(KeySig* ks)
 
       oval = kl->key(tick);
       if ((nki != kl->end()) && (nki->second == oval))
-            undoChangeKeySig(staff, nki->first, oval, NO_KEY);
+            undoChangeKey(staff, nki->first, oval, KeySigEvent());
 
       int track = ks->track();
       for (; segment; segment = segment->next1()) {
@@ -356,7 +356,7 @@ void Score::cmdRemoveKeySig(KeySig* ks)
                   continue;
             KeySig* e = static_cast<KeySig*>(segment->element(track));
             if (e) {
-                  int cst = char(e->subtype() & 0xff);
+                  KeySigEvent cst = e->keySigEvent();
                   if (cst == oval) {
                         // remove redundant key signature
                         undoRemoveElement(e);
@@ -429,7 +429,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
       if (!noteEntryMode())
             sm->postEvent(new CommandEvent("note-input"));
 
-      int key = 0;
+      KeySigEvent key;
 
       if (!preferences.alternateNoteEntryMethod)
             key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
@@ -453,7 +453,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
             }
       else {
             int octave = is.pitch / 12;
-            pitch      = pitchKeyAdjust(note, key);
+            pitch      = pitchKeyAdjust(note, key.accidentalType);
             int delta  = is.pitch - (octave*12 + pitch);
             if (delta > 6)
                   is.pitch = (octave+1)*12 + pitch;
@@ -576,7 +576,7 @@ void Score::cmdAddInterval(int val)
             Note* on = static_cast<Note*>(e);
 
             Staff* staff = on->staff();
-            int key = staff->keymap()->key(on->chord()->tick());
+            KeySigEvent key = staff->keymap()->key(on->chord()->tick());
 
             int kt[15] = {
                   //  cb gb db ab  eb bb  f  c  g  d  a  e   b  f# c#
@@ -584,7 +584,7 @@ void Score::cmdAddInterval(int val)
                      11,  6, 1, 8, 3, 10, 5, 0, 7, 2, 9, 4, 11, 6, 1
                   };
 
-            int po = 12 - kt[key + 7];
+            int po = 12 - kt[key.accidentalType + 7];
 
             static int pt[12][16] = {
                   //   2   3   4  5   6    7  OK   9   -2  -3  -4, -5, -6, -7,   OK   -9

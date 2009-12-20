@@ -160,9 +160,9 @@ void Score::transpose()
                   KeyList* km = staff(staffIdx)->keymap();
                   for (iKeyEvent ke = km->lower_bound(_selection->tickStart());
                      ke != km->lower_bound(_selection->tickEnd()); ++ke) {
-                        int oKey  = ke->second;
+                        KeySigEvent oKey  = ke->second;
                         int tick  = ke->first;
-                        int nKey  = transposeKey(oKey, diff);
+                        int nKey  = transposeKey(oKey.accidentalType, diff);
                         undoChangeKey(staff(staffIdx), tick, oKey, nKey);
                         }
                   }
@@ -216,9 +216,9 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
             }
       KeyList* km = staff(staffIdx)->keymap();
       for (iKeyEvent ke = km->begin(); ke != km->end(); ++ke) {
-            int oKey  = ke->second;
+            KeySigEvent oKey  = ke->second;
             int tick  = ke->first;
-            int nKey  = transposeKey(oKey, diff);
+            int nKey  = transposeKey(oKey.accidentalType, diff);
             undoChangeKey(staff(staffIdx), tick, oKey, nKey);
             }
       // spell(staffIdx, staffIdx+1, _selection->startSegment(), _selection->endSegment());

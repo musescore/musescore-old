@@ -2080,7 +2080,9 @@ int Score::addCustomKeySig(KeySig* ks)
       {
       customKeysigs.append(ks);
       int idx = customKeysigs.size() - 1;
-      ks->setSubtype((idx+1) << KEYSIG_CUSTOM_SHIFT);
+      KeySigEvent k = ks->keySigEvent();
+      k.setCustomType(idx);
+      ks->setSubtype(k);
       ks->setScore(this);
 printf("Score::addCustomKeySig idx %d\n", idx);
       return idx;
@@ -2099,17 +2101,17 @@ KeySig* Score::customKeySig(int idx) const
 //   keySigFactory
 //---------------------------------------------------------
 
-KeySig* Score::keySigFactory(int idx)
+KeySig* Score::keySigFactory(KeySigEvent e)
       {
-printf("Score::keySigFactory %d\n", idx);
       KeySig* ks;
-      if (idx & KEYSIG_CUSTOM_MASK) {
-            int i = (idx >> KEYSIG_CUSTOM_SHIFT) - 1;
-            ks = new KeySig(*customKeysigs[i]);
+      if (!e.isValid())
+            return 0;
+      if (e.custom) {
+            ks = new KeySig(*customKeysigs[e.customType]);
             }
       else {
             ks = new KeySig(this);
-            ks->setSubtype(idx);
+            ks->setSubtype(e);
             }
       return ks;
       }

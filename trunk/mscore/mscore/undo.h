@@ -32,6 +32,7 @@
 #include "al/tempo.h"
 #include "input.h"
 #include "style.h"
+#include "key.h"
 
 class ElementList;
 class Element;
@@ -439,17 +440,17 @@ class FlipBeamDirection : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeKeySig
+//   ChangeKey
 //---------------------------------------------------------
 
-class ChangeKeySig : public UndoCommand {
+class ChangeKey : public UndoCommand {
       Staff* staff;
       int tick;
-      int oldKeySig;
-      int newKeySig;
+      KeySigEvent o;
+      KeySigEvent n;
 
    public:
-      ChangeKeySig(Staff*, int tick, int oldKeySig, int newKeySig);
+      ChangeKey(Staff*, int tick, KeySigEvent oldKeySig, KeySigEvent newKeySig);
       virtual void undo();
       virtual void redo();
       };
@@ -531,22 +532,6 @@ class ChangeElement : public UndoCommand {
       ChangeElement(Element* oldElement, Element* newElement);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
-      };
-
-//---------------------------------------------------------
-//   ChangeKey
-//---------------------------------------------------------
-
-class ChangeKey : public UndoCommand {
-      Staff* staff;
-      int tick;
-      int o;
-      int n;
-
-   public:
-      ChangeKey(Staff*, int tick, int o, int n);
-      virtual void undo();
-      virtual void redo();
       };
 
 //---------------------------------------------------------

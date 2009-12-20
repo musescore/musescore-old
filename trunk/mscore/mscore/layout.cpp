@@ -400,10 +400,10 @@ void Score::layoutStage1()
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             m->setDirty();
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  int key = staff(staffIdx)->keymap()->key(m->tick());
+                  KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
 
                   char tversatz[74];      // list of already set accidentals for this measure
-                  initLineList(tversatz, key);
+                  initLineList(tversatz, key.accidentalType);
 
                   m->setBreakMMRest(false);
                   if (styleB(ST_createMultiMeasureRests)) {
@@ -437,8 +437,8 @@ void Score::layoutStage1()
                         if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
                               m->layoutChords0(segment, staffIdx * VOICES, tversatz);
                         if (e && e->type() == KEYSIG) {
-                              int oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
-                              static_cast<KeySig*>(e)->setOldSig(oval);
+                              KeySigEvent oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
+                              static_cast<KeySig*>(e)->setOldSig(oval.accidentalType);
                               }
                         }
                   }
@@ -787,7 +787,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
             // we assume that keysigs and clefs are only in the first
             // track of a segment
 
-            int keyIdx = staff->keymap()->key(tick);
+            KeySigEvent keyIdx = staff->keymap()->key(tick);
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
@@ -814,7 +814,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                               break;
                         }
                   }
-            bool needKeysig = keyIdx && (isFirstSystem || styleB(ST_genKeysig));
+            bool needKeysig = keyIdx.isValid() && (isFirstSystem || styleB(ST_genKeysig));
             if (needKeysig && !hasKeysig) {
                   //
                   // create missing key signature
@@ -1299,15 +1299,15 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
                               Staff* staff = _staves[staffIdx];
-                              int key1 = staff->key(tick - 1);
-                              int key2 = staff->key(tick);
+                              KeySigEvent key1 = staff->key(tick - 1);
+                              KeySigEvent key2 = staff->key(tick);
                               if (key1 != key2) {
                                     hasCourtesyKeysig = true;
                                     Segment* s  = m->getSegment(Segment::SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);
-                                          ks->setSig(key1, key2);
+                                          ks->setSig(key1.accidentalType, key2.accidentalType);
                                           ks->setTrack(track);
                                           ks->setGenerated(true);
                                           ks->setMag(staff->mag());

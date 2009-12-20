@@ -497,9 +497,9 @@ void Score::putNote(const QPointF& pos, bool replace)
       int staffIdx            = p.staffIdx;
       int line                = p.line;
       Staff* st               = staff(staffIdx);
-      int key                 = st->keymap()->key(tick);
+      KeySigEvent key         = st->keymap()->key(tick);
       int clef                = st->clef(tick);
-      int pitch               = line2pitch(line, clef, key);
+      int pitch               = line2pitch(line, clef, key.accidentalType);
       Instrument* instr       = st->part()->instrument();
       _is.track               = staffIdx * VOICES + (_is.track % VOICES);
       _is.pitch               = pitch;
@@ -1153,7 +1153,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
                   if (i->first >= tick && (i->first < tick2) && i->first != 0)
-                        undoChangeKey(staff, i->first, i->second, NO_KEY);
+                        undoChangeKey(staff, i->first, i->second, KeySigEvent());
                   }
             }
       undoInsertTime(tick, -len);

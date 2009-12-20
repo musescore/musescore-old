@@ -21,17 +21,11 @@
 #ifndef __KEYSIG_H__
 #define __KEYSIG_H__
 
+#include "key.h"
 #include "element.h"
 
 class Sym;
 class Segment;
-
-#define KEYSIG_CUSTOM_MASK     0xffff0000
-#define KEYSIG_CUSTOM_SHIFT    16
-#define KEYSIG_CUSTOM          0x10000
-#define KEYSIG_ACCIDENTAL_MASK 0x00ff
-#define KEYSIG_NATURAL_MASK    0xff00
-#define KEYSIG_NATURAL_SHIFT   8
 
 //---------------------------------------------------------
 //   KeySig
@@ -65,14 +59,17 @@ class KeySig : public Element {
       void setOldSig(int oldSig);
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
-      int keySignature() const { return char(subtype() & KEYSIG_ACCIDENTAL_MASK); }    // -7 - +7
       Space space() const;
       void setCustom(const QList<KeySym*>& symbols);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      int customType() const { return (subtype() & KEYSIG_CUSTOM_MASK) >> KEYSIG_CUSTOM_SHIFT; }
+      int keySignature() const        { return KeySigEvent(subtype()).accidentalType; }    // -7 - +7
+      int customType() const          { return KeySigEvent(subtype()).customType; }
+      bool isCustom() const           { return KeySigEvent(subtype()).custom; }
+      KeySigEvent keySigEvent() const { return KeySigEvent(subtype()); }
       bool operator==(const KeySig&) const;
-      void changeType(int);
+      void changeType(KeySigEvent);
+      void setSubtype(KeySigEvent e)  { Element::setSubtype(e.subtype); }
       };
 
 extern const char* keyNames[15];

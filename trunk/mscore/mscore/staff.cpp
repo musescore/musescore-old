@@ -27,7 +27,6 @@
 #include "xml.h"
 #include "score.h"
 #include "bracket.h"
-#include "key.h"
 #include "keysig.h"
 #include "segment.h"
 #include "style.h"
@@ -168,7 +167,7 @@ int Staff::clef(int tick) const
 //   Staff::key
 //---------------------------------------------------------
 
-int Staff::key(int tick) const
+KeySigEvent Staff::key(int tick) const
       {
       return _keymap->key(tick);
       }
@@ -241,19 +240,19 @@ void Staff::read(QDomElement e)
 /// in response to gui command (drop keysig on measure or keysig)
 //---------------------------------------------------------
 
-void Staff::changeKeySig(int tick, int st)
+void Staff::changeKeySig(int tick, KeySigEvent st)
       {
-printf("Staff::changeKeySig 0x%x\n", st);
-      int ot = _keymap->key(tick);
+printf("Staff::changeKeySig 0x%x\n", st.subtype);
+      KeySigEvent ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change
 
-      iKeyEvent ki    = _keymap->find(tick);
-      int oval        = ki != _keymap->end() ? ki->second : NO_KEY;
-      bool removeFlag = st == _keymap->key(tick-1);
-      int nval        = removeFlag ? NO_KEY : st;
+      iKeyEvent ki     = _keymap->find(tick);
+      KeySigEvent oval = ki != _keymap->end() ? ki->second : KeySigEvent();
+      bool removeFlag  = st == _keymap->key(tick-1);
+      KeySigEvent nval = removeFlag ? KeySigEvent() : st;
 
-      _score->undoChangeKeySig(this, tick, oval, nval);
+      _score->undoChangeKey(this, tick, oval, nval);
 
       //---------------------------------------------
       //    if the next keysig has the same subtype
@@ -279,7 +278,7 @@ printf("Staff::changeKeySig 0x%x\n", st);
             int etick = segment->tick();
             if (!e || (etick < tick))
                   continue;
-            int cst = e->keySignature();
+            KeySigEvent cst = e->keySignature();
             if ((cst != st) && (etick > tick))
                   break;
             _score->undoRemoveElement(e);
@@ -296,7 +295,7 @@ printf("Staff::changeKeySig 0x%x\n", st);
             KeySig* keysig = new KeySig(_score);
             keysig->setTrack(idx() * VOICES);
             keysig->setTick(tick);
-            keysig->setSig(0, st);
+            keysig->setSig(0, st.accidentalType);
 
             Segment::SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);

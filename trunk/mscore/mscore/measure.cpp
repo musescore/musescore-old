@@ -660,8 +660,8 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 int Measure::findAccidental(Note* note) const
       {
       char tversatz[74];      // list of already set accidentals for this measure
-      int key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key);
+      KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
+      initLineList(tversatz, key.accidentalType);
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
@@ -739,8 +739,8 @@ int Measure::findAccidental(Note* note) const
 int Measure::findAccidental2(Note* note) const
       {
       char tversatz[74];      // list of already set accidentals for this measure
-      int key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key);
+      KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
+      initLineList(tversatz, key.accidentalType);
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
@@ -1084,7 +1084,7 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 //   getSegment
 //---------------------------------------------------------
 
-Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
+Segment* Measure::getSegment(Segment::SegmentType st, int t, int /*gl*/)
       {
       Segment* s = findSegment(st, t);
       if (!s) {
