@@ -278,6 +278,8 @@ KeyEditor::KeyEditor(QWidget* parent)
       l->setContentsMargins(0, 0, 0, 0);
       frame->setLayout(l);
       sp = new Palette();
+      sp->setReadOnly(false);
+
       PaletteScrollArea* keyPalette = new PaletteScrollArea(sp);
       QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       keyPalette->setSizePolicy(policy);
