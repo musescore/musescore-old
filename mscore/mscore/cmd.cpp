@@ -331,13 +331,13 @@ void Score::cmdRemoveKeySig(KeySig* ks)
       Staff* staff = ks->staff();
       KeyList* kl  = staff->keymap();
       int tick     = ks->tick();
-      iKeyEvent ki = kl->find(tick);
+      iKeyList ki = kl->find(tick);
       if (ki == kl->end()) {
             printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
             return;
             }
       KeySigEvent oval = ki->second;
-      iKeyEvent nki = ki;
+      iKeyList nki = ki;
       ++nki;
 
       undoChangeKey(staff, tick, oval, KeySigEvent());

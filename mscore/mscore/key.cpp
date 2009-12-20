@@ -51,6 +51,23 @@ void KeySigEvent::setCustomType(int v)
       }
 
 //---------------------------------------------------------
+//   print
+//---------------------------------------------------------
+
+void KeySigEvent::print() const
+      {
+printf("<KeySigEvent: ");
+      if (invalid)
+            printf("invalid>");
+      else {
+            if (custom)
+                  printf("nat %d custom %d>", naturalType, customType);
+            else
+                  printf("nat %d accidental %d>", naturalType, accidentalType);
+            }
+      }
+
+//---------------------------------------------------------
 //   setAccidentalType
 //---------------------------------------------------------
 
@@ -97,7 +114,7 @@ KeySigEvent KeyList::key(int tick) const
       {
       if (empty())
             return 0;
-      ciKeyEvent i = upper_bound(tick);
+      ciKeyList i = upper_bound(tick);
       if (i == begin())
             return 0;
       --i;
@@ -111,7 +128,7 @@ KeySigEvent KeyList::key(int tick) const
 void KeyList::write(Xml& xml, const char* name) const
       {
       xml.stag(name);
-      for (ciKeyEvent i = begin(); i != end(); ++i) {
+      for (ciKeyList i = begin(); i != end(); ++i) {
             if (i->second.custom)
                   xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType);
             else
@@ -149,7 +166,7 @@ void KeyList::read(QDomElement e, Score* cs)
 void KeyList::removeTime(int tick, int len)
       {
       KeyList tmp;
-      for (ciKeyEvent i = begin(); i != end(); ++i) {
+      for (ciKeyList i = begin(); i != end(); ++i) {
             if ((i->first >= tick) && (tick != 0)) {
                   if (i->first >= tick + len)
                         tmp[i->first - len] = i->second;
@@ -170,7 +187,7 @@ void KeyList::removeTime(int tick, int len)
 void KeyList::insertTime(int tick, int len)
       {
       KeyList tmp;
-      for (ciKeyEvent i = begin(); i != end(); ++i) {
+      for (ciKeyList i = begin(); i != end(); ++i) {
             if ((i->first >= tick) && (tick != 0))
                   tmp[i->first + len] = i->second;
             else

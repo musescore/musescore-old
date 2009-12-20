@@ -151,7 +151,7 @@ void ExportMidi::writeHeader()
             MidiTrack* track  = tl->at(i);
 
             KeyList* keymap = cs->staff(i)->keymap();
-            for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
+            for (iKeyList ik = keymap->begin(); ik != keymap->end(); ++ik) {
                   Event* ev  = new Event(ME_META);
                   ev->setOntime(ik->first);
                   int key       = ik->second.accidentalType;   // -7 -- +7

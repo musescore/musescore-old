@@ -3303,7 +3303,7 @@ foreach(Element* el, *(score->gel())) {
                         //TODO_K
                         KeyList* kl = score->staff(0)->keymap();
                         KeySigEvent key = kl->key(ti);
-                        ciKeyEvent ci = kl->find(ti);
+                        ciKeyList ci = kl->find(ti);
                         if (ci != kl->end()) {
                               keysig(key.accidentalType);
                               }
@@ -3459,7 +3459,7 @@ foreach(Element* el, *(score->gel())) {
                                           int ti = el->tick();
                                           int key = score->keymap->key(el->tick());
                                           KeyList* kl = score->keymap;
-                                          ciKeyEvent ci = kl->find(ti);
+                                          ciKeyList ci = kl->find(ti);
                                           if (ci != kl->end()) {
                                                 keysig(key);
                                                 }

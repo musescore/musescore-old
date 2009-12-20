@@ -84,7 +84,8 @@ void KeyCanvas::clear()
 
 void KeyCanvas::paintEvent(QPaintEvent*)
       {
-      gscore->setSpatium(SPATIUM20  * DPI);
+      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      gscore->setSpatium(spatium);
       gscore->setPaintDevice(this);
 
       QPainter p(this);
@@ -99,15 +100,19 @@ void KeyCanvas::paintEvent(QPaintEvent*)
 
       qreal x = 3;
       qreal w = ww - 6;
+
+      p.setWorldTransform(_matrix);
+
+      QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
+
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * PALETTE_SPATIUM * extraMag);
+      pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * spatium);
       p.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {
-            qreal yy = y + PALETTE_SPATIUM * i * extraMag;
-            p.drawLine(QLineF(x, yy, x + w, yy));
+            qreal yy = r.y() + i * spatium;
+            p.drawLine(QLineF(r.x(), yy, r.x() + r.width(), yy));
             }
-      p.setWorldTransform(_matrix);
       if (dragElement) {
             p.save();
             p.translate(dragElement->canvasPos());

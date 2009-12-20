@@ -1343,7 +1343,7 @@ void ChangeKey::undo()
       KeyList* kl = staff->keymap();
       // remove new value if there is any
       if (n.isValid()) {
-            iKeyEvent ik = kl->find(tick);
+            iKeyList ik = kl->find(tick);
             if (ik == kl->end())
                   printf("UndoOp::ChangeKey1 %d: not found\n", tick);
             else
@@ -1357,7 +1357,7 @@ void ChangeKey::redo()
       {
       KeyList* kl = staff->keymap();
       if (o.isValid()) {
-            iKeyEvent ik = kl->find(tick);
+            iKeyList ik = kl->find(tick);
             if (ik == kl->end())
                   printf("UndoOp::ChangeKey2 %d: not found\n", tick);
             else

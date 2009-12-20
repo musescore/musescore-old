@@ -1254,7 +1254,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
             (*km)[0] = key;
             }
-      for (ciKeyEvent i = km->begin(); i != km->end(); ++i) {
+      for (ciKeyList i = km->begin(); i != km->end(); ++i) {
             int tick = i->first;
             KeySigEvent key  = i->second;
             if (tick == 0)

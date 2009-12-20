@@ -242,12 +242,12 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, KeySigEvent st)
       {
-printf("Staff::changeKeySig 0x%x\n", st.subtype);
+printf("Staff::changeKeySig "); st.print(); printf("\n");
       KeySigEvent ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change
 
-      iKeyEvent ki     = _keymap->find(tick);
+      iKeyList ki     = _keymap->find(tick);
       KeySigEvent oval = ki != _keymap->end() ? ki->second : KeySigEvent();
       bool removeFlag  = st == _keymap->key(tick-1);
       KeySigEvent nval = removeFlag ? KeySigEvent() : st;
