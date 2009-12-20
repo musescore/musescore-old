@@ -87,9 +87,9 @@ bool KeySigEvent::operator==(const KeySigEvent& e) const
       if (e.invalid || invalid || (e.custom != custom))
             return false;
       if (custom)
-            return e.customType != customType;
+            return e.customType == customType;
       else
-            return e.accidentalType != accidentalType;
+            return e.accidentalType == accidentalType;
       }
 
 //---------------------------------------------------------
@@ -101,9 +101,9 @@ bool KeySigEvent::operator!=(const KeySigEvent& e) const
       if (e.invalid || invalid || (e.custom != custom))
             return true;
       if (custom)
-            return e.customType == customType;
+            return e.customType != customType;
       else
-            return e.accidentalType == accidentalType;
+            return e.accidentalType != accidentalType;
       }
 
 //---------------------------------------------------------
