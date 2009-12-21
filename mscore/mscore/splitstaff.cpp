@@ -29,6 +29,7 @@
 #include "bracket.h"
 #include "system.h"
 #include "seq.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -95,6 +96,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       select(0, SELECT_SINGLE, 0);
       int strack = staffIdx * VOICES;
       int dtrack = (staffIdx + 1) * VOICES;
+      QList<Note*> notesToRemove;
       for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;
@@ -106,10 +108,19 @@ void Score::splitStaff(int staffIdx, int splitPoint)
             for (iNote i = nl->begin(); i != nl->end(); ++i) {
                   Note* note = i->second;
                   if (note->pitch() < splitPoint) {
+                        if (note->tieBack()) {
+                              notesToRemove.append(note);
+                              continue;
+                              }
                         SNote n;
                         n.tick     = c->tick();
                         n.pitch    = note->pitch();
                         n.fraction = c->duration().fraction();
+                        Note* nn = note;
+                        while (nn && nn->tieFor()) {
+                              n.fraction += nn->chord()->duration().fraction();
+                              nn = nn->tieFor()->endNote();
+                              }
                         n.note     = note;
                         notes.append(n);
                         }
@@ -120,11 +131,28 @@ void Score::splitStaff(int staffIdx, int splitPoint)
             Measure* m = n.note->chord()->measure();
             if (ctick < m->tick())
                   ctick = m->tick();
-            Duration d(n.fraction);
-            if (n.tick > ctick) {
-                  Segment* s = m->tick2segment(ctick);
+            QList<Duration> dl = toDurationList(n.fraction, true);
+            foreach(Duration d, dl) {
+                  if (n.tick > ctick) {
+                        Segment* s = m->tick2segment(ctick);
+                        if (s == 0) {
+                              printf("no segment at %d - measure %d\n", ctick, m->tick());
+                              continue;
+                              }
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+                        if (cr == 0) {
+                              printf("no cr at %d - measure %d\n", ctick, m->tick());
+                              continue;
+                              }
+                        Fraction f = Fraction::fromTicks(n.tick - ctick);
+                        f = makeGap(cr, f, 0);
+
+                        setRest(ctick, dtrack, f, false, 0);
+                        }
+                  ctick = n.tick;
+                  Segment* s = m->tick2segment(n.tick);
                   if (s == 0) {
-                        printf("no segment at %d - measure %d\n", ctick, m->tick());
+                        printf("no segment at %d - measure %d\n", n.tick, m->tick());
                         continue;
                         }
                   ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
@@ -132,26 +160,13 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                         printf("no cr at %d - measure %d\n", ctick, m->tick());
                         continue;
                         }
-                  Fraction f = Fraction::fromTicks(n.tick - ctick);
-                  f = makeGap(cr, f, 0);
-
-                  setRest(ctick, dtrack, f, false, 0);
+                  setNoteRest(cr, dtrack, n.pitch, d, 0, AUTO);
+                  ctick += d.ticks();
                   }
-            ctick = n.tick;
-            Segment* s = m->tick2segment(n.tick);
-            if (s == 0) {
-                  printf("no segment at %d - measure %d\n", n.tick, m->tick());
-                  continue;
-                  }
-            ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
-            if (cr == 0) {
-                  printf("no cr at %d - measure %d\n", ctick, m->tick());
-                  continue;
-                  }
-            setNoteRest(cr, dtrack, n.pitch, d, 0, AUTO);
-            ctick += d.ticks();
             }
       foreach(SNote n, notes)
             deleteItem(n.note);
+      foreach(Note* n, notesToRemove)
+            deleteItem(n);
       }
 
