@@ -1121,6 +1121,8 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     note->setOffTimeType(USER_VAL);
                                     int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
                                     note->setOffTimeOffset(ot);
+                                    note->setVeloType(USER_VAL);
+                                    note->setVelocity(mn->velo());
 
                                     if (useDrumset) {
                                           if (!drumset->isValid(mn->pitch())) {
@@ -1227,6 +1229,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               note->setOffTimeType(USER_VAL);
                               int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
                               note->setOffTimeOffset(ot);
+                              note->setVeloType(USER_VAL);
+                              note->setVelocity(mn->velo());
                               }
                         n->mc->setDuration(n->mc->duration() - len);
                         if (n->mc->duration() <= 0) {

@@ -870,7 +870,7 @@ void MidiTrack::mergeNoteOnOff()
                         if (t <= 0)
                               t = 1;
                         note->setDuration(t);
-                        note->setVelo(e->velo());
+//                        note->setVelo(e->velo());
                         delete e;
                         _events[k] = 0;
                         break;
