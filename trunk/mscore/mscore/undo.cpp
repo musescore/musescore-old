@@ -390,8 +390,8 @@ void SaveState::undo()
       {
       if (!redoSelection)
             redoSelection = new Selection(score);
-      foreach(Element* e, *score->selection()->elements())
-            e->setSelected(false);
+//      foreach(Element* e, *score->selection()->elements())
+//            e->setSelected(false);
       *redoSelection = *score->selection();
       if (undoSelection) {
             score->setSelection(new Selection(*undoSelection));

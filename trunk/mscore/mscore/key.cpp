@@ -56,7 +56,7 @@ void KeySigEvent::setCustomType(int v)
 
 void KeySigEvent::print() const
       {
-printf("<KeySigEvent: ");
+      printf("<KeySigEvent: ");
       if (invalid)
             printf("invalid>");
       else {
