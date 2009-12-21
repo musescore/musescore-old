@@ -1301,7 +1301,6 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               Staff* staff = _staves[staffIdx];
                               KeySigEvent key1 = staff->key(tick - 1);
                               KeySigEvent key2 = staff->key(tick);
-printf("key "); key1.print(); key2.print(); printf("\n");
                               if (key1 != key2) {
                                     hasCourtesyKeysig = true;
                                     Segment* s  = m->getSegment(Segment::SegKeySigAnnounce, tick);

@@ -1241,6 +1241,7 @@ static void paintElement(void* data, Element* e)
       {
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
+      p->setPen(QPen(e->curColor()));
       p->translate(e->canvasPos());
       e->draw(*p);
       p->restore();
@@ -1285,10 +1286,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
-      if (dragElement) {
-            p.setPen(preferences.defaultColor);
+      if (dragElement)
             dragElement->scanElements(&p, paintElement);
-            }
       }
 
 //---------------------------------------------------------
@@ -2564,15 +2563,20 @@ void ScoreView::endEdit()
 
 void ScoreView::startDrag()
       {
+printf("startDrag %p %d\n", curElement, curElement->selected());
       dragElement = curElement;
       startMove -= dragElement->userOff();
       _score->startCmd();
+printf("  1startDrag %p %d\n", curElement, curElement->selected());
       _startDragPosition = dragElement->userOff();
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
+printf("  2startDrag %p %d\n", curElement, curElement->selected());
       foreach(Element* e, el)
             _score->removeBsp(e);
+printf("  3startDrag %p %d\n", curElement, curElement->selected());
       _score->end();
+printf("  4startDrag %p %d\n", curElement, curElement->selected());
       }
 
 //---------------------------------------------------------
@@ -2581,8 +2585,9 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
-      foreach(Element* e, *_score->selection()->elements())
+      foreach(Element* e, *_score->selection()->elements()) {
             _score->addRefresh(e->drag(delta));
+            }
       _score->end();
       }
 
@@ -2710,7 +2715,7 @@ void ScoreView::contextPopup(QMouseEvent* ev)
             ElementType type = e->type();
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)
-                  measurePopup(gp, static_cast<Measure*>(dragElement));
+                  measurePopup(gp, static_cast<Measure*>(e));
             else
                   objectPopup(gp, e);
             }
@@ -2820,9 +2825,10 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_RANGE;
             else if (keyState & Qt::ControlModifier)
                   st = SELECT_ADD;
-            _score->addRefresh(curElement->abbox());
+printf("select\n");
+//            _score->addRefresh(curElement->abbox());
             _score->select(curElement, st, dragStaff);
-            _score->addRefresh(curElement->abbox());
+//            _score->addRefresh(curElement->abbox());
             }
       else
             curElement = 0;
@@ -2854,9 +2860,7 @@ bool ScoreView::mousePress(QMouseEvent* ev)
 
 bool ScoreView::testElementDragTransition(QMouseEvent* ev) const
       {
-      if (curElement == 0 || !curElement->isMovable())
-            return false;
-      if (!(QApplication::mouseButtons() == Qt::LeftButton))
+      if (curElement == 0 || !curElement->isMovable() || QApplication::mouseButtons() != Qt::LeftButton)
             return false;
       QPoint delta = ev->pos() - startMoveI;
       return sqrt(pow(delta.x(),2) + pow(delta.y(),2)) > 2;
