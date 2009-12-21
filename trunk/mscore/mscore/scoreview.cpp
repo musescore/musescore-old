@@ -2825,10 +2825,13 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_RANGE;
             else if (keyState & Qt::ControlModifier)
                   st = SELECT_ADD;
-printf("select\n");
-//            _score->addRefresh(curElement->abbox());
             _score->select(curElement, st, dragStaff);
-//            _score->addRefresh(curElement->abbox());
+            if (mscore->playEnabled() && curElement && curElement->type() == NOTE) {
+                  Note* note = static_cast<Note*>(curElement);
+                  Instrument* i = note->staff()->part()->instrument();
+                  int pitch = note->ppitch();
+                  seq->startNote(i->channel[note->subchannel()], pitch, 60, 1000, note->tuning());
+                  }
             }
       else
             curElement = 0;
@@ -2852,6 +2855,16 @@ bool ScoreView::mousePress(QMouseEvent* ev)
                   curElement = 0;
             }
       return curElement != 0;
+      }
+
+//---------------------------------------------------------
+//   mouseReleaseEvent
+//---------------------------------------------------------
+
+void ScoreView::mouseReleaseEvent(QMouseEvent* event)
+      {
+      seq->stopNotes();
+      QWidget::mouseReleaseEvent(event);
       }
 
 //---------------------------------------------------------

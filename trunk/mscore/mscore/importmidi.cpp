@@ -714,7 +714,9 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                               printf("ImportMidi: illegal key %d\n", key);
                               break;
                               }
-                        (*staff->keymap())[mm->ontime()] = key;
+                        KeySigEvent ks;
+                        ks.setAccidentalType(key);
+                        (*staff->keymap())[mm->ontime()] = ks;
                         track->setHasKey(true);
                         }
                   else
@@ -1252,7 +1254,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   }
             }
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
-            (*km)[0] = key;
+            KeySigEvent ks;
+            ks.setAccidentalType(key);
+            (*km)[0] = ks;
             }
       for (ciKeyList i = km->begin(); i != km->end(); ++i) {
             int tick = i->first;

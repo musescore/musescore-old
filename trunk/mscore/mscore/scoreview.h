@@ -136,6 +136,8 @@ class ScoreView : public QWidget {
       virtual void dropEvent(QDropEvent*);
       virtual void focusInEvent(QFocusEvent*);
       virtual void focusOutEvent(QFocusEvent*);
+      virtual void mouseReleaseEvent(QMouseEvent*);
+
 
       void contextItem(Element*);
 
