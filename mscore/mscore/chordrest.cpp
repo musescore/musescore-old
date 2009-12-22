@@ -579,7 +579,7 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   {
                   Note* note = static_cast<Note*>(e);
                   score()->setNoteRest(this, track(), note->pitch(),
-                     Duration(Duration::V_QUARTER), note->headGroup(), AUTO);
+                     Fraction(1, 4), note->headGroup(), AUTO);
                   delete e;
                   }
                   break;

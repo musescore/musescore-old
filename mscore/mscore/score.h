@@ -470,7 +470,7 @@ class Score : public QObject {
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
 
-      Segment* setNoteRest(ChordRest*, int track, int pitch, const Duration&, int headGroup = 0,
+      Segment* setNoteRest(ChordRest*, int track, int pitch, Fraction, int headGroup = 0,
          Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, const Duration&);
 

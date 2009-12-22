@@ -555,25 +555,7 @@ void Score::tupletDialog()
       tuplet->setTrack(cr->track());
       tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
-
-#if 0
-      // baseLen?
-      Fraction fr(cr->fraction());
-printf("tupletDialog: ChordRest len %d/%d\n", fr.numerator(), fr.denominator());
-
-      int n = int(log2(double(cr->fraction().denominator())));
-      int nn = int(exp2(double(n)));
-printf("%d -> %d -> %d\n", cr->fraction().denominator(), n, nn);
-
-      fr /= nn;
-
-      Duration baseLen(fr);
-      baseLen.setDots(0);
-printf("tupletDialog: baseLen %d/%d\n", fr.numerator(), fr.denominator());
-printf("tupletDialog: baseLen ");
-baseLen.print(); printf("\n");
-      tuplet->setBaseLen(baseLen);
-#endif
+      tuplet->setFraction(cr->fraction());
 
       Measure* measure = cr->measure();
       tuplet->setParent(measure);

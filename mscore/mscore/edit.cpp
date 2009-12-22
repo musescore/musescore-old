@@ -551,13 +551,13 @@ void Score::putNote(const QPointF& pos, bool replace)
                   select(note, SELECT_SINGLE, 0);
                   }
             else
-                  setNoteRest(cr, _is.track, pitch, _is.duration, headGroup, stemDirection);
+                  setNoteRest(cr, _is.track, pitch, _is.duration.fraction(), headGroup, stemDirection);
             }
       else {
             // replace chord
             if (_is.rest)
                   pitch = -1;
-            setNoteRest(cr, _is.track, pitch, _is.duration, headGroup, stemDirection);
+            setNoteRest(cr, _is.track, pitch, _is.duration.fraction(), headGroup, stemDirection);
             }
       moveToNextInputPos();
       }
@@ -1439,8 +1439,6 @@ void Score::cmdTuplet(int n, ChordRest* cr)
             return;
             }
       Fraction f     = cr->fraction();
-printf("Tuplet: divide %d/%d  by %d\n", f.numerator(), f.denominator(), n);
-
       int tick       = cr->tick();
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot     = cr->tuplet();
@@ -1459,47 +1457,6 @@ printf("Tuplet: divide %d/%d  by %d\n", f.numerator(), f.denominator(), n);
             }
       tuplet->setRatio(ratio.numerator(), ratio.denominator());
 
-#if 0
-      switch (n) {
-            case 2:                       // duplet
-                  tuplet->setRatio(2, 3);
-                  fr /= 2;
-                  break;
-            case 3:                       // triplet
-                  tuplet->setRatio(3, 2);
-                  fr /= 2;
-                  break;
-            case 4:                       // quadruplet
-                  tuplet->setRatio(4, 3);
-                  fr /= 2;
-                  break;
-            case 5:                       // quintuplet
-                  fr /= 4;
-                  tuplet->setRatio(5, 4);
-                  break;
-            case 6:                       // sextuplet
-                  tuplet->setRatio(6, 4);
-                  fr /= 2;
-                  break;
-            case 7:                       // septuplet
-                  tuplet->setRatio(7, 4);
-                  // tuplet->setRatio(6, 4);  alternative
-                  fr /= 4;
-            //      tuplet->setRatio(7, 6);
-            //      duration = duration.shift(2);
-                  break;
-            case 8:                       // octuplet
-                  tuplet->setRatio(8, 6);
-                  fr /= 2;
-                  break;
-            case 9:                       // nonuplet
-                  tuplet->setRatio(9, 8);
-                  fr /= 8;
-            //      tuplet->setRatio(9, 6);
-            //      duration = duration.shift(2);
-                  break;
-            }
-#endif
       if (noteEntryMode() && (fr != cr->fraction())) {
             cmdEnterRest();
             cr = getSelectedChordRest();
@@ -1752,7 +1709,7 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
             }
 
       int track = _is.track;
-      Segment* seg = setNoteRest(_is.cr(), track, -1, d, 0, AUTO);
+      Segment* seg = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
       if (cr)
             nextInputPos(cr, false);
