@@ -568,6 +568,12 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new CommandTransition("mag", states[MAG]));
       s->addTransition(new CommandTransition("play", states[PLAY]));
       s->addTransition(new CommandTransition("find", states[SEARCH]));
+      ct = new CommandTransition("paste", 0);                     // paste
+      connect(ct, SIGNAL(triggered()), SLOT(normalPaste()));
+      s->addTransition(ct);
+      ct = new CommandTransition("copy", 0);                      // copy
+      connect(ct, SIGNAL(triggered()), SLOT(normalCopy()));
+      s->addTransition(ct);
 
       // setup mag state
       s = states[MAG];
@@ -2409,7 +2415,31 @@ void ScoreView::setFocusRect()
 
 void ScoreView::editCopy()
       {
-      _score->cmdCopy();
+      if (editObject && editObject->isTextB()) {
+            //
+            // store selection as plain text
+            //
+            TextB* text = static_cast<TextB*>(editObject);
+            QTextCursor* cursor = text->getCursor();
+            if (cursor && cursor->hasSelection())
+                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Clipboard);
+            }
+      }
+
+//---------------------------------------------------------
+//   normalCopy
+//---------------------------------------------------------
+
+void ScoreView::normalCopy()
+      {
+      QString mimeType = _score->selection()->mimeType();
+      if (!mimeType.isEmpty()) {
+            QMimeData* mimeData = new QMimeData;
+            mimeData->setData(mimeType, _score->selection()->mimeData());
+            if (debugMode)
+                  printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
+            QApplication::clipboard()->setMimeData(mimeData);
+            }
       }
 
 //---------------------------------------------------------
@@ -2420,6 +2450,17 @@ void ScoreView::editPaste()
       {
       if (editObject->isTextB())
             static_cast<TextB*>(editObject)->paste();
+      }
+
+//---------------------------------------------------------
+//   normalPaste
+//---------------------------------------------------------
+
+void ScoreView::normalPaste()
+      {
+      _score->startCmd();
+      _score->cmdPaste();
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -2563,20 +2604,15 @@ void ScoreView::endEdit()
 
 void ScoreView::startDrag()
       {
-printf("startDrag %p %d\n", curElement, curElement->selected());
       dragElement = curElement;
       startMove -= dragElement->userOff();
       _score->startCmd();
-printf("  1startDrag %p %d\n", curElement, curElement->selected());
       _startDragPosition = dragElement->userOff();
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
-printf("  2startDrag %p %d\n", curElement, curElement->selected());
       foreach(Element* e, el)
             _score->removeBsp(e);
-printf("  3startDrag %p %d\n", curElement, curElement->selected());
       _score->end();
-printf("  4startDrag %p %d\n", curElement, curElement->selected());
       }
 
 //---------------------------------------------------------
