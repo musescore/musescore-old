@@ -1,6 +1,9 @@
 22.dec (la)
       - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users 
         see http://www.musescore.org/en/node/3475
+      (db)
+      - update handbooks (includes license statement, fix missing images)
+      - update handbook script (images, refine link checking, fix style removal)
 20.dec (ws)
       - key signature updates; changed the format for custom key signatures
 19.dec (ws)

@@ -180,10 +180,10 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
 ##            internal_href = 'http://musescore.org/en/' + internal_href[3:]
 
         url_language = re.search('/[a-z]{2}(-[a-z]{2})?/',internal_href)
-        
+
         split[i] = split[i].replace(original_href, internal_href)
         if internal_href[1:] not in anchors:
-            if internal_href[0:7] == 'http://':
+            if internal_href[0:20] == 'http://www.musescore':
                 if internal_href.find('/en/') > -1 and language_code != 'en': #check for website bug that sometimes links to English URL instead of local language URL
                     if internal_href.find('/node/1257') < 0: # check it is not a link to a bug report
                         print " * WARNING: English language link: ", internal_href
@@ -192,7 +192,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
                 elif url_language:
                     if internal_href[url_language.start()+1:url_language.end()-1] != language_code: #check whether url language code and handbook language code match
                         print " * WARNING: Language does not match handbook ", internal_href
-            elif internal_href[0:7] != 'mailto:' and internal_href[0:19] != 'https://help.ubuntu':
+            elif internal_href[0:7] != 'mailto:' and internal_href[0:4] != 'http':
                 print " * WARNING: no anchor tag corresponding to ", internal_href
 
     html_source = 'href="'.join(split)
@@ -265,22 +265,21 @@ def addCustomStyles(html_source, verbose, language_code='en'):
     BeautifulSoup.NESTABLE_TAGS.update({'kbd':[]}) # add 'kbd' to list of nestable tags
     html_soup = BeautifulSoup(html_source)
 
-    for i in range(0, len(html_soup('style'))):
+    for i in reversed( range(0, len(html_soup('style')) ) ):
         ##if html_soup('h1')[i].parent.parent.parent.name == 'div':
         if html_soup('style')[i].parent.name != 'head':
             if verbose:
                 print ' * ' + str(i) + " " + html_soup('style')[i].name
             html_soup('style')[i].extract() # remove style from document
 
-    for i in range(0, len(html_soup('link'))):
-        if html_soup('link')[i].get("rel", None) == "stylesheet":
-            try:
-                if verbose:
-                    print ' * external stylesheet: %s' % html_soup('link')[i].get("href")
-            except:
-                if verbose:
-                    print ' * external stylesheet'
-            html_soup('link')[i].extract()
+    for i in reversed( range(0, len(html_soup('link')) ) ):
+        try:
+            if verbose:
+                print ' * external stylesheet: %s' % html_soup('link')[i].get("href")
+        except:
+            if verbose:
+                print ' * external stylesheet'
+        html_soup('link')[i].extract()
 
     html_source = str(html_soup)
 
@@ -361,8 +360,8 @@ def fixImgSrc(html_source, verbose):
     if verbose:
         print 'Fix image src attributes'
 
-    html_source = html_source.replace('src="/sites/musescore.org/','src="./')
-    html_source = html_source.replace('http://www.musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png','files/image-x-generic.png') #Work-around for temporary bug
+    html_source = html_source.replace('src="/sites/musescore.org/files/','src="sources/')
+    html_source = html_source.replace('http://www.musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png','sources/image-x-generic.png') #Work-around for temporary bug
 
     return html_source
 
@@ -446,7 +445,7 @@ def insertSpaces(html_source):
     h = re.sub('>'+space,'>',h)
     h = re.sub(space+'<','<',h)
     h = re.sub(space,' ',h)
-    print h
+    #print h
     
     html_source = h
     
