@@ -955,7 +955,6 @@ void Chord::setTrack(int val)
 LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
-      setLineWidth(score()->styleS(ST_ledgerLineWidth));
       setLen(Spatium(2.0));
       }
 
@@ -971,6 +970,16 @@ QPointF LedgerLine::canvasPos() const
       System* system = chord()->measure()->system();
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void LedgerLine::layout()
+      {
+      setLineWidth(score()->styleS(ST_ledgerLineWidth));
+      Line::layout();
       }
 
 //---------------------------------------------------------

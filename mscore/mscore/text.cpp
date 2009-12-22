@@ -225,10 +225,11 @@ QString TextBase::getHtml() const
 //   writeProperties
 //---------------------------------------------------------
 
-void TextBase::writeProperties(Xml& xml, TextStyle* ts, double spatium, bool writeText) const
+void TextBase::writeProperties(Xml& xml, TextStyle* ts, double /*spatium*/, bool writeText) const
       {
       // write all properties which are different from style
 
+      xml.tag("frame", _hasFrame);
       if (_hasFrame) {
             if (ts == 0 || _frameWidth != ts->frameWidth)
                   xml.tag("frameWidth", _frameWidth);
@@ -259,6 +260,8 @@ bool TextBase::readProperties(QDomElement e)
 
       if (tag == "data")                  // obsolete
             _doc->setHtml(val);
+      else if (tag == "frame")
+            _hasFrame = val.toInt();
       else if (tag == "html") {
             QString s = Xml::htmlToString(e);
             _doc->setHtml(s);
@@ -731,7 +734,7 @@ void TextB::write(Xml& xml, const char* name) const
 
 void TextB::read(QDomElement e)
       {
-      _align  = 0;
+      _align = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
@@ -871,7 +874,6 @@ bool TextB::readProperties(QDomElement e)
 
 void TextB::startEdit(ScoreView* view, const QPointF& p)
       {
-printf("TextB::startEdit\n");
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);

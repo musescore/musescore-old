@@ -1260,9 +1260,11 @@ void ScoreView::cmdAddText(int subtype)
             }
 
       if (s) {
+            _score->startCmd();
             _score->undoAddElement(s);
             _score->setLayoutAll(true);
             _score->select(s, SELECT_SINGLE, 0);
+            _score->endCmd();
             startEdit(s);
             }
       }
