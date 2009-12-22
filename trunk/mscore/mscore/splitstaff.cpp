@@ -131,28 +131,13 @@ void Score::splitStaff(int staffIdx, int splitPoint)
             Measure* m = n.note->chord()->measure();
             if (ctick < m->tick())
                   ctick = m->tick();
-            QList<Duration> dl = toDurationList(n.fraction, true);
-            foreach(Duration d, dl) {
-                  if (n.tick > ctick) {
-                        Segment* s = m->tick2segment(ctick);
-                        if (s == 0) {
-                              printf("no segment at %d - measure %d\n", ctick, m->tick());
-                              continue;
-                              }
-                        ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
-                        if (cr == 0) {
-                              printf("no cr at %d - measure %d\n", ctick, m->tick());
-                              continue;
-                              }
-                        Fraction f = Fraction::fromTicks(n.tick - ctick);
-                        f = makeGap(cr, f, 0);
-
-                        setRest(ctick, dtrack, f, false, 0);
-                        }
-                  ctick = n.tick;
-                  Segment* s = m->tick2segment(n.tick);
+            if (n.tick > ctick) {
+                  //
+                  // fill with rest
+                  //
+                  Segment* s = m->tick2segment(ctick);
                   if (s == 0) {
-                        printf("no segment at %d - measure %d\n", n.tick, m->tick());
+                        printf("no segment at %d - measure %d\n", ctick, m->tick());
                         continue;
                         }
                   ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
@@ -160,9 +145,24 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                         printf("no cr at %d - measure %d\n", ctick, m->tick());
                         continue;
                         }
-                  setNoteRest(cr, dtrack, n.pitch, d, 0, AUTO);
-                  ctick += d.ticks();
+                  Fraction f = Fraction::fromTicks(n.tick - ctick);
+                  f = makeGap(cr, f, 0);
+
+                  setRest(ctick, dtrack, f, false, 0);
                   }
+            ctick = n.tick;
+            Segment* s = m->tick2segment(n.tick);
+            if (s == 0) {
+                  printf("no segment at %d - measure %d\n", n.tick, m->tick());
+                  continue;
+                  }
+            ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+            if (cr == 0) {
+                  printf("no cr at %d - measure %d\n", ctick, m->tick());
+                  continue;
+                  }
+            setNoteRest(cr, dtrack, n.pitch, n.fraction, 0, AUTO);
+            ctick += n.fraction.ticks();
             }
       foreach(SNote n, notes)
             deleteItem(n.note);

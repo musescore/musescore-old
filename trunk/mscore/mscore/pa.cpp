@@ -239,7 +239,7 @@ bool Portaudio::start()
 
 bool Portaudio::stop()
       {
-      PaError err = Pa_StopStream(stream);
+      PaError err = Pa_StopStream(stream);      // sometimes the program hangs here on exit
       if (err != paNoError) {
             printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
             return false;

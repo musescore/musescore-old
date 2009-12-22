@@ -519,7 +519,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
             }
 
-      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration, headGroup, stemDirection);
+      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration.fraction(), headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
       setLayout(note->chord()->measure());
 
@@ -678,15 +678,12 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 //    return segment of last created note/rest
 //---------------------------------------------------------
 
-Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, const Duration& d,
+Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
    int headGroup, Direction stemDirection)
       {
       int tick = cr->tick();
-printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), track);
       Element* nr   = 0;
       Tie* tie      = 0;
-
-      Fraction sd = (d.type() == Duration::V_MEASURE) ? cr->measure()->fraction() : d.fraction();
 
       Segment* seg = 0;
       Measure* measure = 0;
@@ -695,7 +692,8 @@ printf("setNoteRest at %d type: %s track %d\n", tick, qPrintable(d.name()), trac
             Fraction dd = makeGap(cr, sd, cr->tuplet());
 
             if (dd.isZero()) {
-                  printf("cannot get gap at %d type: %s\n", tick, qPrintable(d.name()));
+                  printf("cannot get gap at %d type: %d/%d\n", tick, sd.numerator(),
+                     sd.denominator());
                   break;
                   }
             QList<Duration> dl = toDurationList(dd, true);
