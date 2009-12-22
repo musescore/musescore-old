@@ -3,17 +3,32 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="search" href="http://www.musescore.org/fr/opensearch/apachesolr_search" type="application/opensearchdescription+xml" title="MuseScore Recherche" />
+
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_4983fdf0e7da3f07fdbcc7bf4f3b0b80.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_91fa41e7fb5e641667b429896c9f2014.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip"}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
 //--><!]]>
 </script>
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://www.musescore.org/fr/manuel/manuel' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_1872123c99d9b7ff32fde2dde7740aac.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/project/project.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/project_issue/project_issue.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/book/book.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/node/node.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/poll/poll.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/defaults.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system-menus.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/user/user.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/cck/theme/content-module.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/filefield/filefield.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/simplenews/simplenews.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/forum/forum.css?y" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/print/css/print.css?y" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -713,9 +728,22 @@ Les fioritures sont placées avant le note.</p>
   </div>
 <div id="node-240" class="section-3">
   <h1 class="book-heading">Silence sur une mesure entière</h1>
-  <p>Lorsqu'une mesure est entièrement vide de notes, on utilise une <strong>Pause</strong>.</p>
+  <h3>Silence sur une mesure</h3>
+<p>Lorsqu'une mesure est entièrement vide de notes, on utilise une <strong>Pause</strong>.</p>
 <p>Ce type de silence peut être créé en sélectionnant une mesure et en appuyant sur <kbd><kbd>Suppr</kbd></kbd>.<br />
 Toutes les notes et silences de la mesure seront alors remplacés par une pause.</p>
+<h3>Silence multi-mesures</h3>
+<p><img src="/sites/musescore.org/files/multimeasure-rests_2.png" alt="Capture d&#039;un silence multi-mesures dans MuseScore" title="Capture d&#039;un silence multi-mesures dans MuseScore" width="386" height="37" class="inline" /></p>
+<p>Les silences multi-mesures indiquent une longue durée de silence pour un instrument et sont fréquemment utilisé dans les partitions d'ensemble. Dans les versions 0.9.5 et précédentes cette fonctionnalité est encore expérimentale (voir les limitations ci-dessous)</p>
+<h4>Instructions</h4>
+<ol>
+<li>Dans le menu, choisissez <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Editer le Style</samp></kbd></li>
+<li>Cliquez sur l'ongle "Partition" s'il n'est pas déjà sélectionné</li>
+<li>Sélectionnez la case "Créer les pauses multi-mesures"</li>
+</ol>
+<h4>Limitations</h4>
+<p>Les versions 0.9.5 et précédentes n'arrêtent pas automatiquement un silence multi-mesures à des endroits importants comme les doubles barres, les armatures, etc... Ceci est corrigé pour la future version 0.9.6. Pour une solution alternative avec les versions précédentes voir la section "Supprimer les pauses multi mesures" à la page <a href="http://www.musescore.org/fr/manuel/opérations-sur-les-mesures" title="Opérations sur les mesures">Opérations sur les mesures</a>.</p>
+<p>L'option de style crée automatiquement les silences multi mesures dans toute la partition. Par conséquent, il est recommandé d'entrer toutes vos notes et d'utiliser cette option à la fin.</p>
   </div>
 <div id="node-250" class="section-3">
   <h1 class="book-heading">Tremolo</h1>
@@ -1037,8 +1065,9 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
 </div>
 </div>
     <div class="print-taxonomy"></div>
-    <div class="print-footer"></div>
     <hr class="print-hr" />
+    <div class="print-footer">Sous licence <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0</a>, 2002-2009 <a href="mailto:ws at seh dot de">Werner Schweer</a> et autres contributeurs.
+</div>
     <div class="print-source_url"></div>
     <div class="print-links"></div>
   </body>

@@ -50,6 +50,11 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+* Unix style command line options
+* Fix: broken images
+* Fix: removable of stylesheets (change in website revealed bug)
+* Better handling of link checks
+
 Version 1.4 (November 2009)
 * Add sources and font directory to SVN
 * Drop unimportant words (such as "a") from anchors to match URLs on website
