@@ -190,8 +190,10 @@ class ScoreView : public QWidget {
       void endLasso();
       void deselectAll();
       void adjustCanvasPosition(Element* el, bool playBack);
+      void normalCopy();
       void editCopy();
       void editPaste();
+      void normalPaste();
 
    public:
       ScoreView(QWidget* parent = 0);

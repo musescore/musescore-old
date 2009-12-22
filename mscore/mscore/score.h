@@ -329,7 +329,6 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void cmdExchangeVoice(int, int);
-      void cmdPaste();
 
       void updateSelectedElements(SelState);
       void removeChordRest(ChordRest* cr, bool clearSegment);
@@ -782,7 +781,7 @@ class Score : public QObject {
       Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
-      void cmdCopy();
+//      void cmdCopy();
       void expandVoice();
       Note* cmdAddPitch1(int pitch, bool addFlag);
       void insertMeasures(int, int);
@@ -790,6 +789,7 @@ class Score : public QObject {
       int addCustomKeySig(KeySig*);
       KeySig* customKeySig(int) const;
       KeySig* keySigFactory(KeySigEvent);
+      void cmdPaste();
       };
 
 extern Score* gscore;

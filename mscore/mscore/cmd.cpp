@@ -2054,10 +2054,6 @@ void Score::cmd(const QAction* a)
                         selection()->clear();
                         }
                   }
-            else if (cmd == "copy")
-                  cmdCopy();
-            else if (cmd == "paste")
-                  cmdPaste();
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")
@@ -2210,34 +2206,6 @@ void Score::processMidiInput()
       }
 
 //---------------------------------------------------------
-//   cmdCopy
-//---------------------------------------------------------
-
-void Score::cmdCopy()
-      {
-#if 0 // TODO-S
-      if (editObject && editObject->isTextB()) {
-            //
-            // store selection as plain text
-            //
-            TextB* text = static_cast<TextB*>(editObject);
-            QTextCursor* cursor = text->getCursor();
-            if (cursor && cursor->hasSelection())
-                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Clipboard);
-            return;
-            }
-#endif
-      QString mimeType = selection()->mimeType();
-      if (!mimeType.isEmpty()) {
-            QMimeData* mimeData = new QMimeData;
-            mimeData->setData(mimeType, selection()->mimeData());
-            if (debugMode)
-                  printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
-            QApplication::clipboard()->setMimeData(mimeData);
-            }
-      }
-
-//---------------------------------------------------------
 //   cmdPaste
 //---------------------------------------------------------
 
@@ -2250,7 +2218,6 @@ void Score::cmdPaste()
             }
       if (selection()->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
-// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
