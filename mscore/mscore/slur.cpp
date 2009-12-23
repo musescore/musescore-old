@@ -288,12 +288,14 @@ void SlurSegment::write(Xml& xml, int no) const
                   break;
                   }
             }
-      if (!userOff().isNull())
+      if (!userOff().isNull() || !visible())
             empty = false;
       if (empty)
             return;
 
       xml.stag(QString("SlurSegment no=\"%1\"").arg(no));
+      if (!visible())
+            xml.tag("visible", visible());
       if (!userOff().isNull())
             xml.tag("offset", userOff() / spatium());
       if (!(ups[0].off.isNull()))
@@ -668,6 +670,10 @@ bool SlurTie::readProperties(QDomElement e)
       QString val(e.text());
 
       if (tag == "SlurSegment") {
+            int idx = e.attribute("no", 0).toInt();
+            int n = segments.size();
+            for (int i = n; i < idx; ++i)
+                  add(new SlurSegment(score()));
             SlurSegment* segment = new SlurSegment(score());
             segment->read(e);
             add(segment);
