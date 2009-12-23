@@ -1,3 +1,6 @@
+23.dec (og)
+	Exportly: Flat symbol in instrumentnames are now handled. Some
+	progress on reconciling rehearsalmarks and segno/coda-symbols.	
 22.dec (la)
       - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users 
         see http://www.musescore.org/en/node/3475
