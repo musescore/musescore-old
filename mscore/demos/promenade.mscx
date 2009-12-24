@@ -8,15 +8,9 @@
   <Style>
     <akkoladeDistance>6.4</akkoladeDistance>
     <systemDistance>9.2</systemDistance>
-    <lyricsDistance>6.5</lyricsDistance>
     <frameSystemDistance>7</frameSystemDistance>
-    <bracketDistance>0.3</bracketDistance>
-    <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.3</measureSpacing>
-    <ledgerLineWidth>0.08</ledgerLineWidth>
-    <dotNoteDistance>0.5</dotNoteDistance>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <smallClefMag>0.7</smallClefMag>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>

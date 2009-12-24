@@ -1,8 +1,10 @@
+24.dec (ws)
+      - allow editing of text properties for chord names
 23.dec (og)
 	Exportly: Flat symbol in instrumentnames are now handled. Some
-	progress on reconciling rehearsalmarks and segno/coda-symbols.	
+	progress on reconciling rehearsalmarks and segno/coda-symbols.
 22.dec (la)
-      - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users 
+      - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users
         see http://www.musescore.org/en/node/3475
       (db)
       - update handbooks (includes license statement, fix missing images)
