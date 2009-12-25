@@ -1057,7 +1057,17 @@ Segment* Measure::getSegment(Element* e)
       {
       Segment::SegmentType st;
       if ((e->type() == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
-            Segment* s = createSegment(Segment::SegGrace, e->tick());
+            Segment* s = findSegment(Segment::SegGrace, e->tick());
+            if (s) {
+                  if (s->element(e->track())) {
+                        s = s->next();
+                        if (s && s->subtype() == Segment::SegGrace && !s->element(e->track()))
+                              return s;
+                        }
+                  else
+                        return s;
+                  }
+            s = createSegment(Segment::SegGrace, e->tick());
             add(s);
             return s;
             }
