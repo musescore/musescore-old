@@ -1629,7 +1629,6 @@ int ExportLy::checkJumpOrMarker(int mnum, bool start, Element* &moj)
   while (jumpOrMarkerList[i].measurenum < mnum) 
     {
       ++i;
-      cout << "checkJOM i: " << i << " jumpOrMarkerList[i].measurenum " << jumpOrMarkerList[i].measurenum << " measurenumber: " << mnum << "\n";
       if (jumpOrMarkerList[i].measurenum ==0 )
 	goto endofcheck;
     }
@@ -2017,8 +2016,8 @@ void ExportLy::indent()
 
 void ExportLy::indentF()
 {
-  for (int i = 0; i < level; ++i)
-    os << "    ";
+      for (int i = 0; i < level; ++i)
+	    os << "    ";
 }
 
 
@@ -2027,21 +2026,9 @@ void ExportLy::indentF()
 //-------------------------------------
 
 void ExportLy::findTuplets(ChordRest* cr)
-      {
-	//explanation from tuplet.h:
-//------------------------------------------------------------------------
-//   Tuplet
-//     Example of 1/8 triplet:
-//       _baseLen     = 1/8
-//       _actualNotes = 3
-//       _normalNotes = 2     (3 notes played in the time of 2/8)
-//
-//    the tuplet has a len of _baseLen * _normalNotes
-//    a tuplet note has len of _baseLen * _normalNotes / _actualNotes
-//------------------------------------------------------------------------
-
+{      
       Tuplet* t = cr->tuplet();
-
+      
       if (t) {
             if (tupletcount == 0) {
                   int actNotes   = t->actualNotes();
@@ -2932,9 +2919,10 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
   arpeggioswitch=arpeggioTest(c);
 
   gliss = glissandotest(c);
-
+  int iter=0;
   for (iNote notesinchord = nl->begin();;)
     {
+	  iter++;
       Note* n = notesinchord->second;
       //if fingering found on _previous_ chordnote, now is the time for writing it:
       if (fing>0)  writeFingering(fing,fingering);
@@ -2942,8 +2930,10 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
       //find diverse elements and attributes connected to the note
       findFingerAndStringno(n, fing, streng, fingering, stringno);
+      
+      if (iter == 1) findTuplets(n->chord());
+
       findGraceNotes(n, chordstart, streng);//also writes start of chord symbol "<" if necessary
-      findTuplets(n->chord());
 
       symb = findNoteSymbol(n, symbolname);
 
@@ -3698,10 +3688,10 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
     }
   measurenumber=m->no()+1;
 
-   if (m->irregular())
-     {
-       printf("irregular measure, number: %d\n", measurenumber);
-     }
+   // if (m->irregular())
+   //   {
+   // 	       printf("irregular measure, number: %d\n", measurenumber);
+   //   }
 
 
    if ((measurenumber==1) and (donefirst==false)) 
@@ -3814,54 +3804,82 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	   break;
 	 case TIMESIG:
 	   {
-	     if (wholemeasurerest >=1) writeMeasuRestNum();
-	     out << "%bartimesig: \n";
-	     writeTimeSig((TimeSig*)e);
-	     out << "\n";
-	     
-	     int nombarlen=z1*AL::division;
-	   
-	     if (timedenom==8) nombarlen=nombarlen/2;
-	     if (timedenom == 2) nombarlen = 2*nombarlen;
-	     
-	     if ((barlen<nombarlen) and (measurenumber==1))
-	       {
-		 pickup=true;
-		 int punkt=0;
-		 partial=getLen(barlen, &punkt);
+		 if (wholemeasurerest >=1) 
+		       writeMeasuRestNum();
+		 out << "%bartimesig: \n";
+		 writeTimeSig((TimeSig*)e);
+		 out << "\n";
+		 
+		 int nombarlen=z1*AL::division;
+		 
+		 if (timedenom==8) nombarlen=nombarlen/2;
+		 if (timedenom == 2) nombarlen = 2*nombarlen;
+		 
+		 if ((barlen<nombarlen) and (measurenumber==1))
+		       {
+			     pickup=true;
+			     int punkt=0;
+			     partial=getLen(barlen, &punkt);
+			     indent();
+			     out << "\\partial " << partial << "\n";
+		       }
+		 curTicks=-1; //we always need explicit length after timesig.
 		 indent();
-		 out << "\\partial " << partial << "\n";
-	       }
-	     curTicks=-1; //we always need explicit length after timesig.
-	     indent();
-	     break;
+		 break;
 	   }
 	 case KEYSIG:
-	   if (wholemeasurerest >=1) writeMeasuRestNum();
-	   out << "%barkeysig: \n";
-	   indent();
-	   writeKeySig(e->subtype());
-	   indent();
-	   curTicks=-1; //feels safe to force explicit length after keysig
-	   break;
+	     {
+		 if (wholemeasurerest >=1) writeMeasuRestNum();
+		 
+		 out << "%barkeysig: \n";
+		 //this simple line did the job before mid-december
+		 // 2009: 
+
+		 //writeKeySig(e->subtype());
+
+		 //but then, some changes must have been made to
+		 // keysig.cpp and .h I then stole (as usual) the code
+		 // below from exportxml.cpp. It was, however marked
+		 // with a "todo". The check for not end of keylist
+		 // prevents some keychanges in the middle of the
+		 // piece from being written, so I had to comment it
+		 // out. (olav.)
+
+		 KeySig* ksig= (KeySig*) e;
+		 int keytick = ksig->tick();
+		 cout << "at tick: " << keytick << "\n";
+		 KeyList* kl = score->staff(staffInd)-> keymap();
+		 KeySigEvent key = kl->key(keytick);
+		 ciKeyList ci = kl->find(keytick);
+		 //
+		 //		 if (ci != kl->end())
+		 //     {
+			 cout << "barkeysig: " << key.accidentalType << " measureno: " << measurenumber << "\n";
+			 indent();
+			 writeKeySig(key.accidentalType);
+		 //    }
+
+		 indent();
+		 curTicks=-1; //feels safe to force explicit length after keysig
+		 break;
+	     }
 	 case CHORD:
-	   {
-	     if (wholemeasurerest >=1) writeMeasuRestNum();
-	     int ntick = e->tick() - tick;
-	     if (ntick > 0)
-	       {
-		 writeRest(ntick, 2);//invisible rest: s
-		 curTicks=-1;
-	       }
-	     tick += ntick;
-	     measuretick=measuretick+ntick;
-	     checkIfNextIsRest(mb, s, nextisrest, track);
-	     writeChord((Chord*)e, nextisrest);	     
-	     tick += ((Chord*)e)->ticks();
-	     measuretick=measuretick+((Chord*)e)->ticks();
-	   }
-	   break;
-	   
+	     {
+		 if (wholemeasurerest >=1) writeMeasuRestNum();
+		 int ntick = e->tick() - tick;
+		 if (ntick > 0)
+		     {
+			 writeRest(ntick, 2);//invisible rest: s
+			 curTicks=-1;
+		     }
+		 tick += ntick;
+		 measuretick=measuretick+ntick;
+		 checkIfNextIsRest(mb, s, nextisrest, track);
+		 writeChord((Chord*)e, nextisrest);	     
+		 tick += ((Chord*)e)->ticks();
+		 measuretick=measuretick+((Chord*)e)->ticks();
+		 break;
+	     }
 	 case REST:
 	   { 
 	     bool articul=false;
@@ -4562,7 +4580,6 @@ void ExportLy::writeScoreTitles()
 
 bool ExportLy::write(const QString& name)
 {
-  cout << "starting export\n";
   //init of some fundamental variables.
   pianostaff=false;
   rehearsalnumbers=false;
@@ -4618,6 +4635,10 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  26.dec.09 Fixed bug in triplets of chords. Tried to update outdated
+  code on keychanges.
+
+
   23,dec.09 Flat symbol in instrumentnames are now handled. Some
   progress on reconciling rehearsalmarks and segno/coda-symbols.
 
@@ -4688,38 +4709,14 @@ bool ExportLy::write(const QString& name)
    NEW 18. jan. 2009
    -- Now avoids export of empty voices.
 
-   NEW 23.dec.2008
-   -- export of note of lengths longa and brevis, and some rests longer than whole.
-
-   NEW 9. dec. 2008:
-   -- Some improvements to triplets and finding the right octave for single note after chord.
-   -- started work on codas and segnos.
-
-   NEW 24. nov. 2008:
-   -- added dynamic signs and staff-text, by stealing from exportxml.cpp.
-
-   NEW 1. nov. 2008
-   --pickupbar (But not irregular bars in general.)
-   --ties
-   --management of incomplete bars in voices 2-4.
-
-   NEW 26. oct. 2008
-  - voice separation and recombination in score-block for easier editing of Lilypondfile.
-    todo/unresolved: writes voices 2-4 in Lilypond file even if voice is empty.
-  - better finding of correct octave when jumping intervals of fifths or more.
-
-  NEW 10.oct.2008:
-   - rudimentary handling of slurs.
-   - voltas and endings
-   - dotted 8ths and 4ths.
-   - triplets, but not general tuplets.
-   - PianoStaff reactivated.
-
+   DELETED HISTORY PRE 2009.
   
 */
 
 
 /*----------------------TODOS------------------------------------
+
+      -- two dynamics on the same (long) note.
 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed. Lilypond has automatic
@@ -4739,18 +4736,12 @@ bool ExportLy::write(const QString& name)
       automatic incrementation, I chose to make exportly.cpp increment
       the rehearsalmarks. This gives the cleanest lilypond-code.
 
-     -- b like in Bb-clarinet instrumentname.
-
-     -- Triplets of chords not written correctly.
-
       -- all kinds of symbols at the notelevel. More symbols on the
      measurelevel
 
       -- odd noteheads and percussion staffs.  See output from noteedit.
       
       -- breaks and spacers
-
-      -- two dynamics on the same (long) note.
 
       -- accordion symbols.
 
