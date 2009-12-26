@@ -1,3 +1,6 @@
+26.dec (og)
+	-exportly: Fixed bug in triplets of chords. Tried to update outdated code on
+	keychanges.
 24.dec (ws)
       - allow editing of text properties for chord names
 23.dec (og)
