@@ -296,7 +296,7 @@ class ExportLy {
   void hairpin(Hairpin* hp, int tick);
   void ottava(Ottava* ot, int tick);
   void pedal(Pedal* pd, int tick);
-  void dynamic(Dynamic* dyn);
+  void dynamic(Dynamic*, int);
   void textLine(Element*, int, bool);
   void findTextProperties(Text* , QString&, int &);
   bool textspannerdown;
@@ -1041,7 +1041,7 @@ void ExportLy::pedal(Pedal* pd, int tick)
 //---------------------------------------------------------
 //   dynamic
 //---------------------------------------------------------
-void ExportLy::dynamic(Dynamic* dyn)
+void ExportLy::dynamic(Dynamic* dyn, int nop)
 {
   QString t = dyn->getText();
   if (t == "p" || t == "pp" || t == "ppp" || t == "pppp" || t == "ppppp" || t == "pppppp"
@@ -1050,7 +1050,22 @@ void ExportLy::dynamic(Dynamic* dyn)
       || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
       || t == "rf" || t == "rfz" || t == "sfz" || t == "sffz" || t == "fz" || t == "sff")
     {
-      out << "\\" << t.toLatin1().data() << " ";
+	switch(nop)
+	    {
+	    case 0:
+		out << "\\" << t << " ";
+		break;
+	    case 1:
+		out << "_\\markup\{\\dynamic " << t.toLatin1().data() << " \\halign #-2 ";
+		break;
+	    case 2:
+		out <<  " \\dynamic " << t.toLatin1().data() << " } ";
+		break;
+	    default:
+		out << "\\" << t.toLatin1().data() << " ";
+		break;
+	    }
+
     }
   else if (t == "m" || t == "z")
     {
@@ -1486,70 +1501,87 @@ void ExportLy::handleElement(Element* el)
   QString name;
   for (i = 0; i<=nextAnchor; i++)//run thru filled part of list
     {
-      //anchored to start of this element: (possibly obsolete)
-      if (anchors[i].anchor != 0 and anchors[i].anchor==el)// && anchors[i].start == start)
-       {
-	  Element* instruction = anchors[i].instruct;
-	  ElementType instructiontype = instruction->type();
-
-	  switch(instructiontype)
+	if (anchors[i].anchor != 0 and anchors[i].anchor==el) // if anchored to this element
 	    {
-	    case MARKER:
-	      printf("MARKER\n");
-	      instructionMarker((Marker*) instruction);
-	      break;
-	    case JUMP:
-	      printf("JUMP\n");
-	      instructionJump((Jump*) instruction);
-	      break;
-	    case SYMBOL:
-	      {
-		cout << "symbol in anchorlist tick: " << anchors[i].tick << "  \n";
-		sym = (Symbol*) instruction;
-		name = symbols[sym->sym()].name();
-		writeSymbol(name);
-		break;
-	      }
-	      case TEMPO_TEXT:
-	    //   printf("TEMPOTEXT MEASURE\n");
-	    //   tempoText((TempoText*) instruction);
-	       break;
-	    case STAFF_TEXT:
-	    case TEXT:
-	      cout << "anchored text \n";
-	      if (wholemeasurerest) 
-		{
-		  Text* wmtx = (Text*) instruction;
-		  wholemeasuretext = wmtx->getText();
-		}
-	      else
-	       words((Text*) instruction);
-	      break;
-	    case DYNAMIC:
-	      cout << "anchored dynamic \n";
-	      dynamic((Dynamic*) instruction);
-	      break;
-	    case HAIRPIN:
-	      hairpin((Hairpin*) instruction, anchors[i].tick);
-	      break;
-	    case HARMONY:
-	      words((Text*) instruction);
-	      break;
-	    case PEDAL:
-	      pedal((Pedal*) instruction, anchors[i].tick);
-	      break;
-	    case TEXTLINE:
-	      textLine(instruction, anchors[i].tick, false);
-	      break;
-	    case OTTAVA:
-	      break;
-	    default:
-	      printf("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
-		     Element::name(instruction->type()), anchors[i].tick);
-	      break;
+		Element* instruction = anchors[i].instruct;
+		ElementType instructiontype = instruction->type();
+		
+		switch(instructiontype)
+		    {
+		    case MARKER:
+			printf("MARKER\n");
+			instructionMarker((Marker*) instruction);
+			break;
+		    case JUMP:
+			printf("JUMP\n");
+			instructionJump((Jump*) instruction);
+			break;
+		    case SYMBOL:
+			{
+			    cout << "symbol in anchorlist tick: " << anchors[i].tick << "  \n";
+			    sym = (Symbol*) instruction;
+			    name = symbols[sym->sym()].name();
+			    writeSymbol(name);
+			    break;
+			}
+		    case TEMPO_TEXT:
+			//   printf("TEMPOTEXT MEASURE\n");
+			//   tempoText((TempoText*) instruction);
+			break;
+		    case STAFF_TEXT:
+		    case TEXT:
+			cout << "anchored text \n";
+			if (wholemeasurerest) 
+			    {
+				Text* wmtx = (Text*) instruction;
+				wholemeasuretext = wmtx->getText();
+			    }
+			else
+			    words((Text*) instruction);
+			break;
+		    case DYNAMIC:
+			{
+			    int nextorprev=0;
+			    
+			    if ((anchors[i+1].anchor != 0) and (anchors[i+i].anchor==el))
+				{
+				    
+				    Element* nextinstruct = anchors[i+1].instruct;
+				    ElementType nextinstrtype = nextinstruct->type();
+				    if (nextinstrtype == DYNAMIC)
+				    nextorprev = 1;
+				}
+			    else if ((anchors[i-1].anchor != 0) and (anchors[i-1].anchor==el))
+				{
+				    Element* previnstruct = anchors[i-1].instruct;
+				    ElementType previnstrtype = previnstruct->type();
+				    if (previnstrtype == DYNAMIC)
+					nextorprev=2;
+				}
+			    dynamic((Dynamic*) instruction, nextorprev);
+			    break;
+			}
+		    case HAIRPIN:
+			hairpin((Hairpin*) instruction, anchors[i].tick);
+			break;
+		    case HARMONY:
+			words((Text*) instruction);
+			break;
+		    case PEDAL:
+			pedal((Pedal*) instruction, anchors[i].tick);
+			break;
+		    case TEXTLINE:
+			textLine(instruction, anchors[i].tick, false);
+			break;
+		    case OTTAVA:
+			break;
+		    default:
+			printf("post-InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
+			       Element::name(instruction->type()), anchors[i].tick);
+			break;
+		    }
+		//	  removeAnchor(i);
 	    }
-	  //	  removeAnchor(i);
-	}
     } //foreach position i anchor-array.
 }
 
@@ -4635,9 +4667,11 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+  27.dec.09 Two (and not more than two) dynamic signs on the same
+  note.
+  
   26.dec.09 Fixed bug in triplets of chords. Tried to update outdated
   code on keychanges.
-
 
   23,dec.09 Flat symbol in instrumentnames are now handled. Some
   progress on reconciling rehearsalmarks and segno/coda-symbols.
@@ -4715,8 +4749,6 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
-
-      -- two dynamics on the same (long) note.
 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed. Lilypond has automatic

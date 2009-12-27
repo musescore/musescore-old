@@ -1,3 +1,5 @@
+27.dec (og)
+	exportly: two (and not more than two) standard dynamics on one note.
 26.dec (og)
 	-exportly: Fixed bug in triplets of chords. Tried to update outdated code on
 	keychanges.
