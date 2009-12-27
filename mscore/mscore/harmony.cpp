@@ -1024,7 +1024,11 @@ void ChordList::read(QDomElement e)
 
 bool ChordList::read(const QString& name)
       {
-      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
+      QString path;
+      if (name[0] == '/')
+            path = name;
+      else
+            path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
       if (debugMode)
             printf("read chordlist from <%s>\n", qPrintable(path));
       if (name.isEmpty())

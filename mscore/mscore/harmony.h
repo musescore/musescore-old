@@ -164,6 +164,9 @@ class ChordList : public QMap<int, ChordDescription*> {
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }
       };
 
+typedef QMap<int, ChordDescription*>::iterator iChordDescription;
+typedef QMap<int, ChordDescription*>::const_iterator ciChordDescription;
+
 //---------------------------------------------------------
 //   TextSegment
 //---------------------------------------------------------

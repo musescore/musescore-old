@@ -59,7 +59,7 @@ struct Drumset;
 class TextTools;
 class ScriptEngine;
 class KeyEditor;
-
+class ChordStyleEditor;
 class UndoGroup;
 
 extern QString mscoreGlobalShare;
@@ -216,6 +216,7 @@ class MuseScore : public QMainWindow {
       PaletteScrollArea* clefPalette;
       PaletteScrollArea* keyPalette;
       KeyEditor* keyEditor;
+      ChordStyleEditor* chordStyleEditor;
       TimeDialog* timePalette;
       PaletteScrollArea* linePalette;
       PaletteScrollArea* bracketPalette;
@@ -285,6 +286,7 @@ class MuseScore : public QMainWindow {
       void helpBrowser();
       void splitWindow(bool horizontal);
       void removeSessionFile();
+      void editChordStyle();
 
    private slots:
       void autoSaveTimerTimeout();
