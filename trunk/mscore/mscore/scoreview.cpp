@@ -2842,6 +2842,7 @@ void ScoreView::doDragElement(QMouseEvent* ev)
 
 void ScoreView::select(QMouseEvent* ev)
       {
+printf("ScoreView::select\n");
       Qt::KeyboardModifiers keyState = ev->modifiers();
       ElementType type = curElement->type();
       int dragStaff = 0;
@@ -2873,6 +2874,7 @@ void ScoreView::select(QMouseEvent* ev)
             curElement = 0;
       _score->setLayoutAll(false);
       _score->end();    // update
+printf("  -ScoreView::select\n");
       }
 
 //---------------------------------------------------------

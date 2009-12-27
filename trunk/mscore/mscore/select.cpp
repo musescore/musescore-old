@@ -282,7 +282,7 @@ void Score::updateSelectedElements(SelState state)
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
-      if (debugMode)
+//      if (debugMode)
             printf("select element <%s> type %d(state %d) staff %d\n",
                e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
 
@@ -340,7 +340,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   _updateAll = true;
                   selState = SEL_SYSTEM;
                   updateSelectedElements(selState);
-                  //_is.duration.setVal(Duration::V_INVALID);
                   }
             else {
                   if (_selection->state() == SEL_STAFF || _selection->state() == SEL_SYSTEM) {
@@ -349,20 +348,21 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   else {
                         refresh |= e->abbox();
-                        if(_selection->elements()->contains(e)){
-                            _selection->remove(e);
-                        }else{
+                        if (_selection->elements()->contains(e))
+                              _selection->remove(e);
+                        else {
                             _selection->add(e);
-                            //_is.duration.setVal(Duration::V_INVALID);
                             selState = SEL_MULT;
                             }
                         }
                   }
             }
       else if (type == SELECT_RANGE) {
+printf("sel range\n");
             bool activeIsFirst = false;
             int activeTrack = e->track();
             if (e->type() == MEASURE) {
+printf("sel range measure\n");
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
                   int etick = tick + m->tickLen();
@@ -514,11 +514,12 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection->setEndSegment(cr->segment()->next());
                   }
             else {
+printf("sel range ??\n");
                   select(e, SELECT_SINGLE, staffIdx);
                   return;
                   }
 
-// printf("range %d-%d %d-%d\n", _selection->staffStart, _selection->staffEnd, _selection->tickStart(), _selection->tickEnd());
+printf("range %d-%d %d-%d\n", _selection->staffStart, _selection->staffEnd, _selection->tickStart(), _selection->tickEnd());
             if (activeIsFirst)
                   _selection->setActiveSegment(_selection->startSegment());
             else
@@ -528,8 +529,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
             selState = SEL_STAFF;
             updateSelectedElements(selState);
-            //_is.duration.setVal(Duration::V_INVALID);
             }
+printf("sel setState %d\n", int(selState));
       _selection->setState(selState);
       emit selectionChanged(int(_selection->state()));
       }

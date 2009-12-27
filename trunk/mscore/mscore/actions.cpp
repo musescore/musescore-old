@@ -2005,6 +2005,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "edit-harmony",
+         QT_TRANSLATE_NOOP("action","Edit Chord Style..."),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Edit Chord Style..."),
+         QT_TRANSLATE_NOOP("action","Edit Chord Style...")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-similar",
          QT_TRANSLATE_NOOP("action","Select all similar elements"),
          0,

@@ -58,6 +58,7 @@
 #include "scoretab.h"
 #include "timedialog.h"
 #include "keyedit.h"
+#include "harmonyedit.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -363,6 +364,7 @@ MuseScore::MuseScore()
       pianorollEditor       = 0;
       _splitScreen          = false;
       _horizontalSplit      = true;
+      chordStyleEditor      = 0;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -720,6 +722,7 @@ MuseScore::MuseScore()
       menuStyle->setObjectName("Style");
       menuStyle->addAction(getAction("edit-style"));
       menuStyle->addAction(getAction("edit-text-style"));
+      menuStyle->addAction(getAction("edit-harmony"));
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));
@@ -2036,6 +2039,8 @@ void MuseScore::cmd(QAction* a)
             if (cv)
                   cv->pageEnd();
             }
+      else if (cmd == "edit-harmony")
+            editChordStyle();
       else {
             if (cv)
                   cv->cmd(a);
@@ -2268,6 +2273,8 @@ void MuseScore::writeSettings()
             timePalette->save();
       if (keyEditor && keyEditor->dirty())
             keyEditor->save();
+      if (chordStyleEditor)
+            chordStyleEditor->save();
       }
 
 //---------------------------------------------------------
