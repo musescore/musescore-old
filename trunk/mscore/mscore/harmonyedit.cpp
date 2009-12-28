@@ -164,11 +164,9 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
             printf("cannot read <%s>\n", qPrintable(s));
             return;
             }
-      descriptionFile->setText(s);
-      if (chordList)
-            delete chordList;
-      chordList = cl;
-      for (iChordDescription i = chordList->begin(); i != chordList->end(); ++i) {
+      descriptionFile->setText(s);  // set text in text entry widget
+      harmonyList->clear();
+      for (iChordDescription i = cl->begin(); i != cl->end(); ++i) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             ChordDescription* d = i.value();
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(d));
@@ -176,6 +174,10 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
             item->setText(1, QString("%1").arg(d->name));
             harmonyList->addTopLevelItem(item);
             }
+      if (chordList)
+            delete chordList;
+      chordList = cl;
+      canvas->setChordDescription(0, 0);
       }
 
 //---------------------------------------------------------
@@ -451,11 +453,14 @@ void HarmonyCanvas::setChordDescription(ChordDescription* sd, ChordList* sl)
       foreach(TextSegment* s, textList)
             delete s;
       textList.clear();
-      int tpc = 14;
-      double x = 0.0, y = 0.0;
-      render(chordList->renderListRoot, x, y, 14);
-      render(chordDescription->renderList, x, y, tpc);
 
+      if (chordList) {
+            int tpc = 14;
+            double x = 0.0, y = 0.0;
+            render(chordList->renderListRoot, x, y, 14);
+            render(chordDescription->renderList, x, y, tpc);
+            }
+      moveElement = 0;
       update();
       }
 
