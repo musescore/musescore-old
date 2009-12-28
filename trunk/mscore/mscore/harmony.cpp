@@ -931,6 +931,44 @@ static void readRenderList(QString val, QList<RenderAction>& renderList)
       }
 
 //---------------------------------------------------------
+//   writeRenderList
+//---------------------------------------------------------
+
+static void writeRenderList(Xml& xml, const QList<RenderAction>* al, const QString& name)
+      {
+      QString s;
+
+      int n = al->size();
+      for (int i = 0; i < n; ++i) {
+            if (!s.isEmpty())
+                  s += " ";
+            const RenderAction& a = (*al)[i];
+            switch(a.type) {
+                  case RenderAction::RENDER_SET:
+                        s += a.text;
+                        break;
+                  case RenderAction::RENDER_MOVE:
+                        if (a.movex != 0.0 || a.movey != 0.0)
+                              s += QString("m:%1:%2").arg(a.movex).arg(a.movey);
+                        break;
+                  case RenderAction::RENDER_PUSH:
+                        s += ":push";
+                        break;
+                  case RenderAction::RENDER_POP:
+                        s += ":pop";
+                        break;
+                  case RenderAction::RENDER_NOTE:
+                        s += ":n";
+                        break;
+                  case RenderAction::RENDER_ACCIDENTAL:
+                        s += ":a";
+                        break;
+                  }
+            }
+      xml.tag(name, s);
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -953,6 +991,22 @@ void ChordDescription::read(QDomElement e)
             else
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void ChordDescription::write(Xml& xml)
+      {
+      xml.stag(QString("chord id=\"%1\"").arg(id));
+      // xml.tag("name", name);
+      // xml.tag("xml", xmlKind);
+      // xml.tag("voicing", chord.getKeys());
+      // foreach(const QString& s, xmlDegrees)
+      //      xml.tag("degree", s);
+      writeRenderList(xml, &renderList, "render");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1064,6 +1118,57 @@ bool ChordList::read(const QString& name)
                   // int _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   read(e);
                   }
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+bool ChordList::write(const QString& name)
+      {
+      printf("ChordList::write <%s>\n", qPrintable(name));
+
+      QString ext(".xml");
+      QFileInfo info(name);
+
+      if (info.suffix().isEmpty())
+            info.setFile(info.filePath() + ext);
+      QFile f(info.filePath());
+      if (!f.open(QIODevice::WriteOnly)) {
+            QString s = ("Open Chord Description\n") + f.fileName() + ("\nfailed: ")
+               + QString(strerror(errno));
+            QMessageBox::critical(mscore, ("MuseScore: Open Chord Description"), s);
+            return false;
+            }
+
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      int fontIdx = 0;
+      foreach (ChordFont f, fonts) {
+            xml.stag(QString("font id=\"%1\" family=\"%2\"").arg(fontIdx).arg(f.family));
+            xml.tag("mag", f.mag);
+            foreach(ChordSymbol s, symbols) {
+                  if (s.fontIdx == fontIdx) {
+                        xml.tagE(QString("sym name=\"%1\" code=\"%2\"").arg(s.name).arg(s.code.unicode()));
+                        }
+                  }
+            xml.etag();
+            ++fontIdx;
+            }
+      if (!renderListRoot.isEmpty())
+            writeRenderList(xml, &renderListRoot, "renderRoot");
+      if (!renderListBase.isEmpty())
+            writeRenderList(xml, &renderListBase, "renderBase");
+      foreach(ChordDescription* d, *this)
+            d->write(xml);
+
+      xml.etag();
+      if (f.error() != QFile::NoError) {
+            QString s = QString("Write Chord Description failed: ") + f.errorString();
+            QMessageBox::critical(0, ("MuseScore: Write Chord Description"), s);
             }
       return true;
       }

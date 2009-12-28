@@ -52,6 +52,7 @@ class HarmonyCanvas : public QWidget {
       HarmonyCanvas(QWidget* parent = 0);
       void setChordDescription(ChordDescription* sd, ChordList* cl);
       const QList<TextSegment*>& getTextList() const { return textList; }
+      ChordDescription* getChordDescription() const { return chordDescription; }
       };
 
 #endif

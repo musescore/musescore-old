@@ -86,6 +86,7 @@ ChordStyleEditor::ChordStyleEditor(QWidget* parent)
       sp->append(k, qApp->translate("MuseScore", keyNames[14]));
 #endif
       connect(fileButton, SIGNAL(clicked()), SLOT(fileButtonClicked()));
+      connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
       connect(harmonyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
          SLOT(harmonyChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
       }
@@ -125,6 +126,30 @@ void ChordStyleEditor::fileButtonClicked()
       }
 
 //---------------------------------------------------------
+//   saveButtonClicked
+//---------------------------------------------------------
+
+void ChordStyleEditor::saveButtonClicked()
+      {
+      if (!chordList)
+            return;
+      ChordDescription* d = canvas->getChordDescription();
+      updateChordDescription(d);
+
+      QString path = QString("%1styles/").arg(mscoreGlobalShare);
+      QString fn = QFileDialog::getSaveFileName(
+         0, QWidget::tr("MuseScore: Save Chord Description File"),
+         path,
+            QWidget::tr("MuseScore Chord Description (*.xml);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      chordList->write(fn);
+      }
+
+//---------------------------------------------------------
 //   loadChordDescriptionFile
 //---------------------------------------------------------
 
@@ -154,39 +179,47 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
       }
 
 //---------------------------------------------------------
+//   updateCurrentChordDescription
+//---------------------------------------------------------
+
+void ChordStyleEditor::updateChordDescription(ChordDescription* d)
+      {
+      double extraMag     = 3.0;
+      double _spatium     = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double mag          = PALETTE_SPATIUM * extraMag / _spatium;
+      d->renderList.clear();
+      QList<TextSegment*> tl = canvas->getTextList();
+      int idx = 0;
+      double x, y;
+      foreach(const TextSegment* ts, tl) {
+            ++idx;
+            if (idx == 1) {     // dont save base
+                  x = ts->x + ts->width();
+                  y = ts->y;
+                  continue;
+                  }
+            RenderAction ra(RenderAction::RENDER_MOVE);
+            ra.movex = (ts->x - x) / mag;
+            ra.movey = (ts->y - y) / mag;
+            d->renderList.append(ra);
+
+            ra.type  = RenderAction::RENDER_SET;
+            ra.text  = ts->text;
+            d->renderList.append(ra);
+            x = ts->x + ts->width();
+            y = ts->y;
+            }
+      }
+
+//---------------------------------------------------------
 //   harmonyChanged
 //---------------------------------------------------------
 
 void ChordStyleEditor::harmonyChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
       {
       if (previous) {
-            double extraMag     = 3.0;
-            double _spatium     = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
-            double mag          = PALETTE_SPATIUM * extraMag / _spatium;
             ChordDescription* d = static_cast<ChordDescription*>(previous->data(0, Qt::UserRole).value<void*>());
-
-            d->renderList.clear();
-            QList<TextSegment*> tl = canvas->getTextList();
-            int idx = 0;
-            double x, y;
-            foreach(const TextSegment* ts, tl) {
-                  ++idx;
-                  if (idx == 1) {     // dont save base
-                        x = ts->x + ts->width();
-                        y = ts->y;
-                        continue;
-                        }
-                  RenderAction ra(RenderAction::RENDER_MOVE);
-                  ra.movex = (ts->x - x) / mag;
-                  ra.movey = (ts->y - y) / mag;
-                  d->renderList.append(ra);
-
-                  ra.type  = RenderAction::RENDER_SET;
-                  ra.text  = ts->text;
-                  d->renderList.append(ra);
-                  x = ts->x + ts->width();
-                  y = ts->y;
-                  }
+            updateChordDescription(d);
             }
       if (current) {
             ChordDescription* d = static_cast<ChordDescription*>(current->data(0, Qt::UserRole).value<void*>());

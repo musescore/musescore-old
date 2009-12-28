@@ -38,9 +38,11 @@ class ChordStyleEditor : public QWidget, Ui::ChordStyleEditor {
       ChordList* chordList;
 
       void loadChordDescriptionFile(const QString&);
+      void updateChordDescription(ChordDescription*);
 
    private slots:
       void fileButtonClicked();
+      void saveButtonClicked();
       void harmonyChanged(QTreeWidgetItem*, QTreeWidgetItem*);
 
    public:
