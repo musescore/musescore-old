@@ -22,7 +22,6 @@
 #include "score.h"
 #include "xml.h"
 #include "style.h"
-// #include "scoreview.h"
 #include "restproperties.h"
 #include "utils.h"
 #include "tuplet.h"
@@ -275,10 +274,12 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
             if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (!duration().isValid())
-            convertTicks();
-	if (!duration().isValid())
-            setDuration(Duration(Duration::V_MEASURE));
+      if (!duration().isValid()) {
+            if (_ticks == 0)
+                  setDuration(Duration(Duration::V_MEASURE));
+            else
+                  convertTicks();
+            }
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
       }

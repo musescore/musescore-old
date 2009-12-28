@@ -1,3 +1,5 @@
+29.dec (ws)
+      - fix: Full-measure rests from 0.9.4 (Compatibility)
 28.dec (ws)
       - new feature: persistent JACK midi connections
       - "save as" for chord style editor
