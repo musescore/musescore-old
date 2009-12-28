@@ -750,14 +750,6 @@
     <degree>addb13</degree>
     <voicing>C F G Bb D# F# Ab</voicing>
     </chord>
-  <chord id="148">
-    <name>7sus#9b13</name>
-    <xml>suspended-fourth</xml>
-    <degree>add7</degree>
-    <degree>add#9</degree>
-    <degree>addb13</degree>
-    <voicing>C F G Bb D# Ab</voicing>
-    </chord>
   <chord id="152">
     <name>7susb5</name>
     <xml>suspended-fourth</xml>
