@@ -121,6 +121,7 @@ struct ChordDescription {
 
    public:
       void read(QDomElement);
+      void write(Xml&);
       };
 
 //---------------------------------------------------------
@@ -159,6 +160,7 @@ class ChordList : public QMap<int, ChordDescription*> {
 
       ChordList() {}
       virtual ~ChordList();
+      bool write(const QString& path);
       bool read(const QString& path);
       void read(QDomElement);
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }

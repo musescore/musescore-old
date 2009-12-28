@@ -26,7 +26,6 @@
 #include "measure.h"
 #include "staff.h"
 #include "tuplet.h"
-#include "chordlist.h"
 #include "score.h"
 #include "sym.h"
 #include "slur.h"
@@ -435,15 +434,6 @@ void ChordRest::layoutArticulations()
                   dyBot += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void ChordRestList::add(ChordRest* n)
-      {
-      std::multimap<const int, ChordRest*, std::less<int> >::insert(std::pair<const int, ChordRest*> (n->tick(), n));
       }
 
 //---------------------------------------------------------
