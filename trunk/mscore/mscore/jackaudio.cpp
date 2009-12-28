@@ -36,7 +36,6 @@
 JackAudio::JackAudio(Seq* s)
    : Driver(s)
       {
-printf("JackAudio() midi %d audio %d\n", preferences.useJackMidi, preferences.useJackAudio);
       client        = 0;
       synth         = 0;
       }
@@ -47,7 +46,6 @@ printf("JackAudio() midi %d audio %d\n", preferences.useJackMidi, preferences.us
 
 JackAudio::~JackAudio()
       {
-printf("~JackAudio()\n");
       if (client) {
             if (jack_client_close(client)) {
                   fprintf(stderr, "jack_client_close() failed: %s\n",
@@ -63,7 +61,6 @@ printf("~JackAudio()\n");
 
 int JackAudio::registerPort(const QString& name, bool input, bool midi)
       {
-printf("JackAudio:: register port input %d midi %d\n", input, midi);
       int portFlag         = input ? JackPortIsInput : JackPortIsOutput;
       const char* portType = midi ? JACK_DEFAULT_MIDI_TYPE : JACK_DEFAULT_AUDIO_TYPE;
       jack_port_t* port = jack_port_register(client, qPrintable(name), portType, portFlag, 0);
@@ -121,9 +118,6 @@ void JackAudio::connect(void* src, void* dst)
       {
       const char* sn = jack_port_name((jack_port_t*) src);
       const char* dn = jack_port_name((jack_port_t*) dst);
-
-      fprintf(stderr, "jack connect <%s>%p - <%s>%p\n",
-               sn, src, dn, dst);
 
       if (sn == 0 || dn == 0) {
             fprintf(stderr, "JackAudio::connect: unknown jack ports\n");
@@ -187,6 +181,25 @@ bool JackAudio::start()
                            src, qPrintable(rport), rv);
                         }
                   }
+
+            }
+      if (preferences.useJackMidi && preferences.rememberLastMidiConnections) {
+            QSettings settings;
+            int nPorts = midiPorts.size(); // settings.value("midiPorts", 0).toInt();
+            for (int i = 0; i < nPorts; ++i) {
+                  int n = settings.value(QString("midi-%1-connections").arg(i), 0).toInt();
+                  const char* src = jack_port_name(midiPorts[i]);
+                  for (int k = 0; k < n; ++k) {
+                        QString dst = settings.value(QString("midi-%1-%2").arg(i).arg(k), "").toString();
+                        if (!dst.isEmpty()) {
+                              int rv = jack_connect(client, src, qPrintable(dst));
+                              if (rv) {
+                                    fprintf(stderr, "jack connect <%s> - <%s> failed: %d\n",
+                                       src, qPrintable(dst), rv);
+                                    }
+                              }
+                        }
+                  }
             }
       return true;
       }
@@ -198,14 +211,33 @@ bool JackAudio::start()
 
 bool JackAudio::stop()
       {
-printf("JackAudio::stop\n");
+      if (preferences.useJackMidi && preferences.rememberLastMidiConnections) {
+            QSettings settings;
+            settings.setValue("midiPorts", midiPorts.size());
+            int port = 0;
+            foreach(jack_port_t* mp, midiPorts) {
+                  const char** cc = jack_port_get_connections(mp);
+                  const char** c = cc;
+                  int idx = 0;
+                  while (c) {
+                        const char* p = *c++;
+                        if (p == 0)
+                              break;
+                        settings.setValue(QString("midi-%1-%2").arg(port).arg(idx), p);
+                        ++idx;
+                        }
+                  settings.setValue(QString("midi-%1-connections").arg(port), idx);
+                  free((void*)cc);
+                  ++port;
+                  }
+            }
+
 //      jack_client_close(client);
-#if 1
+
       if (jack_deactivate(client)) {
             fprintf (stderr, "cannot deactivate client");
             return false;
             }
-#endif
       return true;
       }
 
@@ -222,7 +254,7 @@ int JackAudio::framePos() const
 
 static int bufsize_callback(jack_nframes_t n, void*)
       {
-      printf("JACK: buffersize changed %d\n", n);
+//      printf("JACK: buffersize changed %d\n", n);
       return 0;
       }
 
@@ -242,7 +274,7 @@ static int srate_callback(jack_nframes_t, void*)
 
 static void registration_callback(jack_port_id_t, int, void*)
       {
-      printf("JACK: registration changed\n");
+//      printf("JACK: registration changed\n");
       }
 
 static int graph_callback(void*)
@@ -312,7 +344,6 @@ static void noJackError(const char* /* s */)
 
 bool JackAudio::init()
       {
-printf("JackAudio()::init()\n");
       jack_set_error_function(noJackError);
 
       client = 0;

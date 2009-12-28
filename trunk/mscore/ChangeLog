@@ -1,3 +1,6 @@
+28.dec (ws)
+      - new feature: persistent JACK midi connections
+      - "save as" for chord style editor
 27.dec (ws)
       - first code for chord style editor
       (og)

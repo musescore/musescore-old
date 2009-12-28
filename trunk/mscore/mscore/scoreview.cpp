@@ -3083,7 +3083,6 @@ void ScoreView::editInputTransition(QInputMethodEvent* ie)
 
 void ScoreView::setDropTarget(const Element* el)
       {
-printf("setDropTarget %s\n", el? el->name() : "--");
       if (dropTarget != el) {
             if (dropTarget) {
                   dropTarget->setDropTarget(false);

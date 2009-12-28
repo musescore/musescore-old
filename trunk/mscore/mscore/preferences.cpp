@@ -179,6 +179,7 @@ void Preferences::init()
       alsaFragments      = 3;
       portaudioDevice    = -1;
       midiPorts          = 2;
+      rememberLastMidiConnections = true;
 
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
@@ -277,6 +278,7 @@ void Preferences::write()
       s.setValue("useJackMidi",        useJackMidi);
       s.setValue("usePortaudioAudio",  usePortaudioAudio);
       s.setValue("midiPorts",          midiPorts);
+      s.setValue("rememberLastMidiConnections", rememberLastMidiConnections);
 
       s.setValue("alsaDevice",         alsaDevice);
       s.setValue("alsaSampleRate",     alsaSampleRate);
@@ -404,6 +406,7 @@ void Preferences::read()
       playRepeats              = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
       midiPorts                = s.value("midiPorts", 2).toInt();
+      rememberLastMidiConnections = s.value("rememberLastMidiConnections", true).toBool();
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", true).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
@@ -605,6 +608,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       alternateInput->setChecked(p->alternateNoteEntryMethod);
 
       midiPorts->setValue(p->midiPorts);
+      rememberLastMidiConnections->setChecked(p->rememberLastMidiConnections);
       proximity->setValue(p->proximity);
       autoSave->setChecked(p->autoSave);
       autoSaveTime->setValue(p->autoSaveTime);
@@ -1027,6 +1031,7 @@ void PreferenceDialog::apply()
       preferences.alternateNoteEntryMethod = alternateInput->isChecked();
 
       preferences.midiPorts          = midiPorts->value();
+      preferences.rememberLastMidiConnections = rememberLastMidiConnections->isChecked();
       preferences.proximity          = proximity->value();
       preferences.autoSave           = autoSave->isChecked();
       preferences.autoSaveTime       = autoSaveTime->value();
