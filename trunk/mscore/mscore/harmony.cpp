@@ -857,6 +857,7 @@ void Harmony::draw(QPainter& p) const
 TextSegment::TextSegment(const QString& s, const QFont& f, double x, double y)
       {
       set(s, f, x, y);
+      select = false;
       }
 
 //---------------------------------------------------------

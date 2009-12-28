@@ -69,7 +69,6 @@ Portaudio::Portaudio(Seq* s)
 
 Portaudio::~Portaudio()
       {
-printf("~Portaudio %d\n", initialized);
       if (initialized) {
             Pa_Terminate();      // DEBUG: crashes
             }
@@ -82,7 +81,6 @@ printf("~Portaudio %d\n", initialized);
 
 bool Portaudio::init()
       {
-printf("Portaudio::init\n");
       PaError err = Pa_Initialize();
       if (err != paNoError) {
             printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
@@ -230,7 +228,6 @@ void Portaudio::disconnect(void* /*src*/, void* /*dst*/)
 
 bool Portaudio::start()
       {
-printf("Portaudio::start\n");
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
             printf("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
@@ -245,7 +242,6 @@ printf("Portaudio::start\n");
 
 bool Portaudio::stop()
       {
-printf("Portaudio::stop\n");
       PaError err = Pa_StopStream(stream);      // sometimes the program hangs here on exit
       if (err != paNoError) {
             printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));

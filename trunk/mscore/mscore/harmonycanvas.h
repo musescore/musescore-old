@@ -39,6 +39,8 @@ class HarmonyCanvas : public QWidget {
       ChordList* chordList;
       QTransform _matrix, imatrix;
       double extraMag;
+      QPointF startMove;
+      TextSegment* moveElement;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
@@ -49,6 +51,7 @@ class HarmonyCanvas : public QWidget {
    public:
       HarmonyCanvas(QWidget* parent = 0);
       void setChordDescription(ChordDescription* sd, ChordList* cl);
+      const QList<TextSegment*>& getTextList() const { return textList; }
       };
 
 #endif
