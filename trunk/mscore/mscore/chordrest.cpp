@@ -71,22 +71,6 @@ int DurationElement::ticks() const
       }
 
 //---------------------------------------------------------
-//   convertTicks
-//---------------------------------------------------------
-
-void DurationElement::convertTicks()
-      {
-      if (_ticks < 0)
-            return;
-      if (_tuplet == 0) {
-            setFraction(Fraction::fromTicks(_ticks));
-            }
-      else {
-            ;
-            }
-      }
-
-//---------------------------------------------------------
 //   hasArticulation
 //---------------------------------------------------------
 
@@ -629,4 +613,17 @@ void ChordRest::setFraction(const Fraction& f)
       {
       _duration = Duration(f);
       }
+
+//---------------------------------------------------------
+//   convertTicks
+//---------------------------------------------------------
+
+void DurationElement::convertTicks()
+      {
+      if (_ticks < 0)
+            return;
+      if (_tuplet == 0)
+            setFraction(Fraction::fromTicks(_ticks));
+      }
+
 
