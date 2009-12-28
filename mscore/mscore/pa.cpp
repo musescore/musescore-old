@@ -149,7 +149,8 @@ QStringList Portaudio::apiList() const
       PaHostApiIndex apis = Pa_GetHostApiCount();
       for (PaHostApiIndex i = 0; i < apis; ++i) {
             const PaHostApiInfo* info = Pa_GetHostApiInfo(i);
-            al.append(info->name);
+            if (info)
+                  al.append(info->name);
             }
       return al;
       }
@@ -162,10 +163,13 @@ QStringList Portaudio::deviceList(int apiIdx)
       {
       QStringList dl;
       const PaHostApiInfo* info = Pa_GetHostApiInfo(apiIdx);
-      for (int i = 0; i < info->deviceCount; ++i) {
-            PaDeviceIndex idx = Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, i);
-            const PaDeviceInfo* di = Pa_GetDeviceInfo(idx);
-            dl.append(di->name);
+      if (info) {
+            for (int i = 0; i < info->deviceCount; ++i) {
+                  PaDeviceIndex idx = Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, i);
+                  const PaDeviceInfo* di = Pa_GetDeviceInfo(idx);
+                  if (di)
+                        dl.append(di->name);
+                  }
             }
       return dl;
       }
@@ -326,10 +330,12 @@ int Portaudio::currentApi() const
 
       for (int api = 0; api < Pa_GetHostApiCount(); ++api) {
             const PaHostApiInfo* info = Pa_GetHostApiInfo(api);
-            for (int k = 0; k < info->deviceCount; ++k) {
-                  PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
-                  if (i == idx)
-                        return api;
+            if (info) {
+                  for (int k = 0; k < info->deviceCount; ++k) {
+                        PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
+                        if (i == idx)
+                              return api;
+                        }
                   }
             }
       printf("Portaudio: no current api found for device %d\n", idx);
@@ -348,10 +354,12 @@ int Portaudio::currentDevice() const
 
       for (int api = 0; api < Pa_GetHostApiCount(); ++api) {
             const PaHostApiInfo* info = Pa_GetHostApiInfo(api);
-            for (int k = 0; k < info->deviceCount; ++k) {
-                  PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
-                  if (i == idx)
-                        return k;
+            if (info) {
+                  for (int k = 0; k < info->deviceCount; ++k) {
+                        PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
+                        if (i == idx)
+                              return k;
+                        }
                   }
             }
       printf("Portaudio: no current ApiDevice found for device %d\n", idx);

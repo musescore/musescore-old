@@ -69,6 +69,7 @@ struct Preferences {
       bool usePortaudioAudio;
       bool useJackMidi;
       int midiPorts;
+      bool rememberLastMidiConnections;
 
       QString alsaDevice;
       int alsaSampleRate;
