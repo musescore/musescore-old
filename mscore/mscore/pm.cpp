@@ -18,14 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __APPLE__			// should probably also not be included in linux...
+#if defined(__APPLE__) || defined(Q_WS_LINUX)
   #include <windows.h>
   #include <mmsystem.h>
 #endif
 
 #include "portmidi/porttime/porttime.h"
 
-// #include "mididriver.h"
 #include "pm.h"
 #include "mscore.h"
 #include "seq.h"
@@ -116,7 +115,7 @@ PortMidiDriver::~PortMidiDriver()
 
 bool PortMidiDriver::init()
       {
-      inputId  = Pm_GetDefaultInputDeviceID();    
+      inputId  = Pm_GetDefaultInputDeviceID();
       outputId = Pm_GetDefaultOutputDeviceID();
 
       if (inputId == pmNoDevice)
@@ -231,7 +230,7 @@ void PortMidiDriver::read()
 void PortMidiDriver::write(const Event&)
       {
       }
-      
+
 //---------------------------------------------------------
 //   deviceInList
 //---------------------------------------------------------
@@ -247,7 +246,7 @@ QStringList PortMidiDriver::deviceInList() const
             }
       return il;
       }
-      
+
 //---------------------------------------------------------
 //   getDeviceIn
 //---------------------------------------------------------

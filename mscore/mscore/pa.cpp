@@ -69,8 +69,9 @@ Portaudio::Portaudio(Seq* s)
 
 Portaudio::~Portaudio()
       {
+printf("~Portaudio %d\n", initialized);
       if (initialized) {
-            // Pa_Terminate();      // DEBUG: crashes
+            Pa_Terminate();      // DEBUG: crashes
             }
       }
 
@@ -81,6 +82,7 @@ Portaudio::~Portaudio()
 
 bool Portaudio::init()
       {
+printf("Portaudio::init\n");
       PaError err = Pa_Initialize();
       if (err != paNoError) {
             printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
@@ -98,6 +100,7 @@ bool Portaudio::init()
 
       /* Open an audio I/O stream. */
       struct PaStreamParameters out;
+      memset(&out, 0, sizeof(out));
 
       out.device           = idx;
       out.channelCount     = 2;
@@ -110,9 +113,10 @@ bool Portaudio::init()
             // fall back to default device:
             out.device = Pa_GetDefaultOutputDevice();
             err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
-            if (err != paNoError)
+            if (err != paNoError) {
                   printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
-            return false;
+                  return false;
+                  }
             }
       synth = new FluidS::Fluid();
       synth->init(_sampleRate);
@@ -124,6 +128,7 @@ bool Portaudio::init()
       midiDriver = new PortMidiDriver(seq);
 #endif
       if (midiDriver && !midiDriver->init()) {
+            printf("Init midi driver failed\n");
             delete midiDriver;
             midiDriver = 0;
 #ifdef USE_PORTMIDI
@@ -225,6 +230,7 @@ void Portaudio::disconnect(void* /*src*/, void* /*dst*/)
 
 bool Portaudio::start()
       {
+printf("Portaudio::start\n");
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
             printf("Portaudio: start stream failed: %s\n", Pa_GetErrorText(err));
@@ -239,6 +245,7 @@ bool Portaudio::start()
 
 bool Portaudio::stop()
       {
+printf("Portaudio::stop\n");
       PaError err = Pa_StopStream(stream);      // sometimes the program hangs here on exit
       if (err != paNoError) {
             printf("Portaudio: stop failed: %s\n", Pa_GetErrorText(err));
