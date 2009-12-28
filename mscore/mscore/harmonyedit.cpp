@@ -240,6 +240,7 @@ void ChordStyleEditor::save()
       settings.setValue("splitter1", splitter1->saveState());
       settings.setValue("splitter2", splitter2->saveState());
 //      settings.setValue("list", harmonyList->saveState());
+      settings.setValue("col1", harmonyList->columnWidth(0));
       }
 
 //---------------------------------------------------------
@@ -253,7 +254,7 @@ void ChordStyleEditor::restore()
             settings.beginGroup("ChordStyleEditor");
             splitter1->restoreState(settings.value("splitter1").toByteArray());
             splitter2->restoreState(settings.value("splitter2").toByteArray());
-//            harmonyList->restoreState(settings.value("list").toByteArray());
+            harmonyList->setColumnWidth(0, settings.value("col1", 30).toInt());
             }
       }
 
@@ -262,8 +263,9 @@ void ChordStyleEditor::restore()
 //---------------------------------------------------------
 
 HarmonyCanvas::HarmonyCanvas(QWidget* parent)
-   : QWidget(parent)
+   : QFrame(parent)
       {
+      setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
       setAcceptDrops(true);
       setFocusPolicy(Qt::StrongFocus);
       extraMag = 3.0;
@@ -276,8 +278,9 @@ HarmonyCanvas::HarmonyCanvas(QWidget* parent)
 //   paintEvent
 //---------------------------------------------------------
 
-void HarmonyCanvas::paintEvent(QPaintEvent*)
+void HarmonyCanvas::paintEvent(QPaintEvent* event)
       {
+      QFrame::paintEvent(event);
       if (!chordDescription)
             return;
 
@@ -296,6 +299,11 @@ void HarmonyCanvas::paintEvent(QPaintEvent*)
       imatrix    = _matrix.inverted();
 
       p.setWorldTransform(_matrix);
+      QRectF f = imatrix.mapRect(QRectF(0.0, 0.0, ww, wh));
+
+      p.setPen(QPen(Qt::darkGray));
+      p.drawLine(f.x(), 0.0, f.width(), 0.0);
+      p.drawLine(0.0, f.y(), 0.0, f.height());
 
       foreach(const TextSegment* ts, textList) {
             p.setFont(ts->font);

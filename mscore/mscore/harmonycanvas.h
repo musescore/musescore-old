@@ -31,7 +31,7 @@ class ChordList;
 //   HarmonyCanvas
 //---------------------------------------------------------
 
-class HarmonyCanvas : public QWidget {
+class HarmonyCanvas : public QFrame {
       Q_OBJECT
 
       QList<TextSegment*> textList;       // rendered chord
