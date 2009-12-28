@@ -159,6 +159,35 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
 
 void ChordStyleEditor::harmonyChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
       {
+      if (previous) {
+            double extraMag     = 3.0;
+            double _spatium     = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+            double mag          = PALETTE_SPATIUM * extraMag / _spatium;
+            ChordDescription* d = static_cast<ChordDescription*>(previous->data(0, Qt::UserRole).value<void*>());
+
+            d->renderList.clear();
+            QList<TextSegment*> tl = canvas->getTextList();
+            int idx = 0;
+            double x, y;
+            foreach(const TextSegment* ts, tl) {
+                  ++idx;
+                  if (idx == 1) {     // dont save base
+                        x = ts->x + ts->width();
+                        y = ts->y;
+                        continue;
+                        }
+                  RenderAction ra(RenderAction::RENDER_MOVE);
+                  ra.movex = (ts->x - x) / mag;
+                  ra.movey = (ts->y - y) / mag;
+                  d->renderList.append(ra);
+
+                  ra.type  = RenderAction::RENDER_SET;
+                  ra.text  = ts->text;
+                  d->renderList.append(ra);
+                  x = ts->x + ts->width();
+                  y = ts->y;
+                  }
+            }
       if (current) {
             ChordDescription* d = static_cast<ChordDescription*>(current->data(0, Qt::UserRole).value<void*>());
             canvas->setChordDescription(d, chordList);
@@ -205,6 +234,7 @@ HarmonyCanvas::HarmonyCanvas(QWidget* parent)
       extraMag = 3.0;
       chordDescription = 0;
       chordList = 0;
+      moveElement = 0;
       }
 
 //---------------------------------------------------------
@@ -220,30 +250,23 @@ void HarmonyCanvas::paintEvent(QPaintEvent*)
       gscore->setSpatium(spatium);
       gscore->setPaintDevice(this);
 
-      foreach(TextSegment* s, textList)
-            delete s;
-      textList.clear();
-      int tpc = 14;
-      double x = 0.0, y = 0.0;
-      render(chordList->renderListRoot, x, y, 14);
-      render(chordDescription->renderList, x, y, tpc);
-
       QPainter p(this);
 
       p.setRenderHint(QPainter::Antialiasing, true);
       qreal wh = double(height());
       qreal ww = double(width());
 
-      qreal mag  = PALETTE_SPATIUM * extraMag / gscore->spatium();
-      _matrix    = QTransform(mag, 0.0, 0.0, mag, 0.0, 0.0);
+      qreal mag  = PALETTE_SPATIUM * extraMag / spatium;
+      _matrix    = QTransform(mag, 0.0, 0.0, mag, ww*.1, wh*.8);
       imatrix    = _matrix.inverted();
-      QRectF r   = imatrix.mapRect(QRectF(0.0, 0.0, ww, wh));
 
       p.setWorldTransform(_matrix);
 
       foreach(const TextSegment* ts, textList) {
             p.setFont(ts->font);
-            p.drawText(ts->x + r.width()*.1, ts->y + r.height()*.8, ts->text);
+            QPen pen(ts->select ? Qt::blue : Qt::black);
+            p.setPen(pen);
+            p.drawText(ts->x, ts->y, ts->text);
             }
       }
 
@@ -255,8 +278,8 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
       {
       QStack<QPointF> stack;
       int fontIdx = 0;
-      double _spatium = gscore->spatium();
-      double mag = (DPI / PPI) * (_spatium / (SPATIUM20 * DPI));
+      double _spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      qreal mag  = PALETTE_SPATIUM * extraMag / _spatium;
 
       QList<QFont> fontList;              // temp values used in render()
       TextStyle* st = gscore->textStyle(TEXT_STYLE_HARMONY);
@@ -342,21 +365,37 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
             }
       }
 
-
 //---------------------------------------------------------
 //   mousePressEvent
 //---------------------------------------------------------
 
-void HarmonyCanvas::mousePressEvent(QMouseEvent*)
+void HarmonyCanvas::mousePressEvent(QMouseEvent* event)
       {
+      startMove = imatrix.map(QPointF(event->pos()));
+      moveElement = 0;
+      foreach(TextSegment* ts, textList) {
+            QRectF r = ts->boundingRect().translated(ts->x, ts->y);
+            ts->select = r.contains(startMove);
+            if (ts->select)
+                  moveElement = ts;
+            }
+      update();
       }
 
 //---------------------------------------------------------
 //   mouseMoveEvent
 //---------------------------------------------------------
 
-void HarmonyCanvas::mouseMoveEvent(QMouseEvent*)
+void HarmonyCanvas::mouseMoveEvent(QMouseEvent* event)
       {
+      if (moveElement == 0)
+            return;
+      QPointF p = imatrix.map(QPointF(event->pos()));
+      QPointF delta = p - startMove;
+      moveElement->x += delta.x();
+      moveElement->y += delta.y();
+      startMove = p;
+      update();
       }
 
 //---------------------------------------------------------
@@ -375,6 +414,15 @@ void HarmonyCanvas::setChordDescription(ChordDescription* sd, ChordList* sl)
       {
       chordDescription = sd;
       chordList = sl;
+
+      foreach(TextSegment* s, textList)
+            delete s;
+      textList.clear();
+      int tpc = 14;
+      double x = 0.0, y = 0.0;
+      render(chordList->renderListRoot, x, y, 14);
+      render(chordDescription->renderList, x, y, tpc);
+
       update();
       }
 

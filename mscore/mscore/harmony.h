@@ -175,12 +175,13 @@ struct TextSegment {
       QFont font;
       QString text;
       double x, y;
+      bool select;
 
-      TextSegment()                { x = y = 0.0; }
       double width() const;
       QRectF boundingRect() const;
 
-      TextSegment(const QFont& f, double _x, double _y) : font(f), x(_x), y(_y) {}
+      TextSegment()                { select = false; x = y = 0.0; }
+      TextSegment(const QFont& f, double _x, double _y) : font(f), x(_x), y(_y), select(false) {}
       TextSegment(const QString&, const QFont&, double x, double y);
       void set(const QString&, const QFont&, double x, double y);
       void setText(const QString& t)      { text = t; }
