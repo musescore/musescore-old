@@ -1514,62 +1514,6 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
       }
 
 //---------------------------------------------------------
-//   dragAboveMeasure
-//---------------------------------------------------------
-
-bool ScoreView::dragAboveMeasure(const QPointF& pos)
-      {
-      int staffIdx = -1;
-      Segment* seg;
-      QPointF offset;
-      int tick;
-      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
-      if (mb && mb->type() == MEASURE) {
-            Measure* m = (Measure*)mb;
-            System* s = m->system();
-
-            // compute rectangle of staff in measure
-            QRectF rrr(s->staff(staffIdx)->bbox().translated(s->canvasPos()));
-            QRectF rr(m->abbox());
-            QRectF r(rr.x(), rrr.y()-rrr.height(), rr.width(), rrr.height());
-
-            setDropRectangle(r);
-            return true;
-            }
-      setDropTarget(0);
-      return false;
-      }
-
-//---------------------------------------------------------
-//   dragAboveSystem
-//---------------------------------------------------------
-
-bool ScoreView::dragAboveSystem(const QPointF& pos)
-      {
-      int staffIdx = -1;
-      Segment* seg;
-      QPointF offset;
-      int tick;
-      MeasureBase* m = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
-      if (m && m->type() == MEASURE) {
-            System* s = m->system();
-            if (staffIdx) {
-                  setDropTarget(0);
-                  return false;
-                  }
-            // compute rectangle of staff in measure
-            QRectF rrr(s->staff(staffIdx)->bbox().translated(s->canvasPos()));
-            QRectF rr(m->abbox());
-            QRectF r(rr.x(), rrr.y()-rrr.height(), rr.width(), rrr.height());
-
-            setDropRectangle(r);
-            return true;
-            }
-      setDropTarget(0);
-      return false;
-      }
-
-//---------------------------------------------------------
 //   dragEnterEvent
 //---------------------------------------------------------
 
@@ -1798,10 +1742,8 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case ACCIDENTAL_BRACKET:
                         {
                         Element* el = elementAt(pos);
-                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
-                              setDropTarget(el);
+                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
                               break;
-                              }
                         setDropTarget(0);
                         }
                         break;
@@ -1809,10 +1751,11 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                         break;
                   }
             score()->addRefresh(dragElement->abbox());
-            QRectF r(dragElement->abbox());
+//            QRectF r(dragElement->abbox());
             dragElement->setPos(pos - dragOffset);
             score()->addRefresh(dragElement->abbox());
             _score->end();
+//            update();
             return;
             }
 

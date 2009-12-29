@@ -926,7 +926,6 @@ bool Score::layoutPage()
       int rows = 0;
       bool firstSystemOnPage = true;
 
-      double nettoHeight = 0.0;
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
@@ -945,27 +944,23 @@ bool Score::layoutPage()
                   if (((y + bh) > ey) && !firstSystemOnPage)
                         break;
 
-                  system->setPos(QPointF(x, y));
-                  system->setHeight(vbox->height());
+                  system->setPos(x, y);
+                  system->setHeight(bh);
 
                   system->measures().push_back(vbox);
                   page->appendSystem(system);
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-// printf("Frame %f + %f < %f\n", y, bh + point(styleS(ST_frameSystemDistance)), ey);
-                  y           += bh + point(styleS(ST_frameSystemDistance));
-                  nettoHeight += bh;
+                  y += bh + point(styleS(ST_frameSystemDistance));
                   if (y > ey) {
                         ++rows;
                         break;
                         }
-                  nettoHeight -= point(styleS(ST_systemFrameDistance));
                   }
             else {
-                  if (firstSystemOnPage) {
+                  if (firstSystemOnPage)
                         y += sub;
-                        }
                   int cs          = curSystem;
                   MeasureBase* cm = curMeasure;
                   double h;
@@ -989,8 +984,7 @@ bool Score::layoutPage()
                         }
                   firstSystem       = false;
                   firstSystemOnPage = false;
-                  y           += h;
-                  nettoHeight += h;
+                  y += h;
                   if (sl.back()->pageBreak()) {
                         ++rows;
                         break;
@@ -1004,17 +998,14 @@ bool Score::layoutPage()
       // then increase system distance to fill page
       //-----------------------------------------------------------------------
 
-      double restHeight = ey - y; //  + systemDistance;
-
-      double ph = page->loHeight() - page->bm() - page->tm() - slb - sub;
+      double restHeight = ey - y;
+      double ph         = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
       if ((rows <= 1) || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return true;
 
       double systemDistance = point(styleS(ST_systemDistance));
-      double extraDist = (ph - nettoHeight + systemDistance) / (rows - 1);
-// printf("rows %d extra %f rest %f\n", rows, ph - nettoHeight, restHeight);
-      extraDist = (restHeight + systemDistance) / (rows - 1);
+      double extraDist      = (restHeight + systemDistance) / (rows - 1);
       y = 0;
       int n = page->systems()->size();
       for (int i = 0; i < n;) {

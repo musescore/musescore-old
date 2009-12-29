@@ -75,6 +75,7 @@ void Box::draw(QPainter& p) const
             pen.setWidthF(w);
             p.setPen(pen);
             p.setBrush(QBrush());
+            w *= .5;
             p.drawRect(bbox().adjusted(w, w, -w, -w));
             }
       }
