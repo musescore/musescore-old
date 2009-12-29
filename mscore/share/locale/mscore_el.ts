@@ -941,6 +941,37 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordStyleEditor</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Description File:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Chord Style Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dialog</name>
     <message>
         <source>Dialog</source>
@@ -4510,6 +4541,10 @@ Restore session?</source>
         <source>Use JACK MIDI output</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Remember last connection(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -4645,6 +4680,14 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Chord Description File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Chord Description File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7938,6 +7981,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Chord Style...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,20 +1,23 @@
 29.dec (ws)
       - fix: Full-measure rests from 0.9.4 (Compatibility)
+      (db)
+      - remove shortcuts for Display > Zoom In and Zoom Out due to conflicts
+      - update .ts files
 28.dec (ws)
       - new feature: persistent JACK midi connections
       - "save as" for chord style editor
 27.dec (ws)
       - first code for chord style editor
       (og)
-	exportly: two (and not more than two) standard dynamics on one note.
+      exportly: two (and not more than two) standard dynamics on one note.
 26.dec (og)
-	-exportly: Fixed bug in triplets of chords. Tried to update outdated code on
-	keychanges.
+      -exportly: Fixed bug in triplets of chords. Tried to update outdated code on
+      keychanges.
 24.dec (ws)
       - allow editing of text properties for chord names
 23.dec (og)
-	Exportly: Flat symbol in instrumentnames are now handled. Some
-	progress on reconciling rehearsalmarks and segno/coda-symbols.
+      Exportly: Flat symbol in instrumentnames are now handled. Some
+      progress on reconciling rehearsalmarks and segno/coda-symbols.
 22.dec (la)
       - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users
         see http://www.musescore.org/en/node/3475

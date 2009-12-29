@@ -1960,7 +1960,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "zoomin",
          QT_TRANSLATE_NOOP("action","Zoom In"),
-         QKeySequence::ZoomIn,
+         0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Zoom In")
          ),
@@ -1971,7 +1971,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "zoomout",
          QT_TRANSLATE_NOOP("action","Zoom Out"),
-         QKeySequence::ZoomOut,
+         0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Zoom Out")
          ),

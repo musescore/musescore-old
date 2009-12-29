@@ -925,6 +925,80 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordStyleEditor</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Description File:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Chord Style Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dialog</name>
+    <message>
+        <source>Choose number of measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Look for three note chords and</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove  bottom note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove middle note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove top note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
@@ -4428,6 +4502,10 @@ Restore session?</source>
         <source>Use JACK MIDI output</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Remember last connection(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -4560,6 +4638,14 @@ Selecciona una única nota o silencio y vuelve a intentar la operación, por fav
     <message>
         <source>MuseScore: Load Palette failed:</source>
         <translation>MuseScore: Fallo al Cargar Paleta:</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Chord Description File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Chord Description File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5971,6 +6057,77 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>UnZip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partially corrupted archive. Some files might be extracted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corrupted archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create a directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid or incompatible zip archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inconsistent headers. Archive might be corrupted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -6005,6 +6162,49 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Propiedades de la Línea...</translation>
+    </message>
+</context>
+<context>
+    <name>Zip</name>
+    <message>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7730,6 +7930,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Chord Style...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
