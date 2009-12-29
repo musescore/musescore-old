@@ -2397,7 +2397,8 @@ void MuseScore::incMag()
             qreal _mag = cv->mag() * 1.7;
             if (_mag > 16.0)
                   _mag = 16.0;
-            cv->setMag(_mag);
+            cv->setMag(MAG_FREE, _mag);
+            setMag(_mag);
             }
       }
 
@@ -2408,10 +2409,11 @@ void MuseScore::incMag()
 void MuseScore::decMag()
       {
       if (cv) {
-            qreal nmag = cv->mag() / 1.7;
-            if (nmag < 0.05)
-                  nmag = 0.05;
-            cv->setMag(nmag);
+            qreal _mag = cv->mag() / 1.7;
+            if (_mag < 0.05)
+                  _mag = 0.05;
+            cv->setMag(MAG_FREE, _mag);
+            setMag(_mag);
             }
       }
 

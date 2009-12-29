@@ -2310,6 +2310,18 @@ void ScoreView::setMag(double nmag)
       }
 
 //---------------------------------------------------------
+//   setMagIdx
+//---------------------------------------------------------
+
+void ScoreView::setMag(int idx, double mag)
+      {
+      _magIdx = idx;
+      setMag(mag);
+      update();
+      // TODO? updateNavigator(false);
+      }
+
+//---------------------------------------------------------
 //   focusInEvent
 //---------------------------------------------------------
 
@@ -3158,18 +3170,6 @@ qreal ScoreView::xoffset() const
 qreal ScoreView::yoffset() const
       {
       return _matrix.dy() * DPI / PDPI;
-      }
-
-//---------------------------------------------------------
-//   setMagIdx
-//---------------------------------------------------------
-
-void ScoreView::setMag(int idx, double mag)
-      {
-      _magIdx = idx;
-      setMag(mag);
-      update();
-      // TODO? updateNavigator(false);
       }
 
 //---------------------------------------------------------
