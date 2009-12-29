@@ -123,6 +123,8 @@ void EditStaff::apply()
       if (l != staff->lines() || s != staff->small() || noStems != staff->slashStyle()
          || inv != staff->invisible())
             score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv));
+      score->setUpdateAll(true);
+      score->end();
       }
 
 //---------------------------------------------------------
