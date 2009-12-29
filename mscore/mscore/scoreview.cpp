@@ -1315,8 +1315,18 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
-      foreach (const Page* page, _score->pages())
-            r1 -= _matrix.mapRect(page->abbox()).toAlignedRect();
+      foreach (const Page* page, _score->pages()) {
+            QRectF pr(page->abbox());
+            if (debugMode) {
+                  //
+                  // show page margins
+                  //
+                  QRectF bpr = pr.adjusted(page->lm(), page->tm(), -page->rm(), -page->bm());
+                  p.setPen(QPen(Qt::gray));
+                  p.drawRect(bpr);
+                  }
+            r1 -= _matrix.mapRect(pr).toAlignedRect();
+            }
 //      p.setClipRect(fr);
 
       QList<const Element*> ell = _score->items(fr);
