@@ -2285,8 +2285,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             else if (tag == "type")
                   durationType = Duration(s);
-            else if (!grace && tag == "chord")
-                  tick -= lastLen;
+            else if (tag == "chord") {
+                  if (!grace)
+                        tick -= lastLen;
+                  }
             else if (tag == "voice")
                   voice = s.toInt() - 1;
             else if (tag == "stem") {
@@ -2295,7 +2297,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else if (s == "down")
                         sd = DOWN;
                   else if (s == "none")
-                	    noStem = true;
+                        noStem = true;
                   else if (s == "double")
                         ;
                   else
@@ -2647,7 +2649,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
 
             if (grace)
-                  printf("nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
+                  printf(" grace: nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
+            int gl = nrOfGraceSegsReq(pn);
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
                   Segment::SegmentType st = Segment::SegChordRest;
@@ -2655,7 +2658,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
-                  printf(" grace=%d", grace);
+                  printf(" grace=%d\n", grace);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
@@ -2686,13 +2689,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cr->setDuration(durationType);
                         }
                   cr->setDots(dots);
-                  printf(" cr->tick()=%d", cr->tick());
-                  Segment* s = measure->getSegment(st, cr->tick());
+                  printf(" cr->tick()=%d ", cr->tick());
+                  Segment* s = measure->getSegment(st, cr->tick(), gl);
                   s->add(cr);
                   }
             printf(" cr->tick()=%d", cr->tick());
             cr->setStaffMove(move);
-
 
             // pitch must be set before adding note to chord as note
             // is inserted into pitch sorted list (ws)

@@ -24,6 +24,7 @@ rwtest() {
             diff $1 mops.mscx
             echo "+++++++++++++++++++++++++++"
       fi
+      rm mops.mscx
       testcount=$(($testcount+1))
       }
 
@@ -39,6 +40,7 @@ rwtestXml() {
             diff $1 mops.xml
             echo "+++++++++++++++++++++++++++"
       fi
+      rm mops.xml
       testcount=$(($testcount+1))
       }
 
@@ -88,6 +90,7 @@ rwtestAllXml() {
       rwtestXml testDynamics1.xml
       rwtestXml testDynamics2.xml
       rwtestXml testGrace1.xml
+      rwtestXml testGrace2.xml
       rwtestXml testHarmony1.xml
       rwtestXml testHarmony2.xml
       rwtestXml testHello.xml
