@@ -1,4 +1,6 @@
-29.dec (ws)
+29.dec (lv)
+      - MusicXML support for multiple (beamed/chord) grace notes
+      (ws)
       - fix: Full-measure rests from 0.9.4 (Compatibility)
       (db)
       - remove shortcuts for Display > Zoom In and Zoom Out due to conflicts

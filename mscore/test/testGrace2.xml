@@ -26,15 +26,6 @@
     </part-list>
   <part id="P1">
     <measure number="1">
-      <print>
-        <system-layout>
-          <system-margins>
-            <left-margin>67.65</left-margin>
-            <right-margin>-0.00</right-margin>
-            </system-margins>
-          <top-system-distance>70.00</top-system-distance>
-          </system-layout>
-        </print>
       <attributes>
         <divisions>8</divisions>
         <key>

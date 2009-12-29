@@ -955,19 +955,21 @@ void Measure::layout2()
 
 /**
  Search for chord at position \a tick in \a track at grace level \a gl.
- TODO: grace level is 0 for a normal chord, 1 for the grace note closest
+ Grace level is 0 for a normal chord, 1 for the grace note closest
  to the normal chord, etc.
 */
 
 Chord* Measure::findChord(int tick, int track, int gl)
       {
-      bool grace = gl > 0; // TODO
-      for (Segment* seg = _first; seg; seg = seg->next()) {
-            if (seg->tick() > tick)
+      int graces = 0;
+      for (Segment* seg = last(); seg; seg = seg->prev()) {
+            if (seg->tick() < tick)
                   return 0;
-            if (seg->tick() == tick && seg->isGrace() == grace) {
+            if (seg->tick() == tick) {
+                  if (seg->subtype() == Segment::SegGrace)
+                        graces++;
                   Element* el = seg->element(track);
-                  if (el && el->type() == CHORD) {
+                  if (el && el->type() == CHORD && graces == gl) {
                         return (Chord*)el;
                         }
                   }
@@ -1019,6 +1021,10 @@ Segment* Measure::tick2segment(int tick, bool grace) const
 //---------------------------------------------------------
 //   findSegment
 //---------------------------------------------------------
+
+/**
+ Search for a segment of type \a st at position \a t.
+*/
 
 Segment* Measure::findSegment(Segment::SegmentType st, int t)
       {
@@ -1080,6 +1086,11 @@ Segment* Measure::getSegment(Element* e)
 //   getSegment
 //---------------------------------------------------------
 
+/**
+ Get a segment of type \a st at position \a t.
+ If the segment does not exist, it is created.
+*/
+
 Segment* Measure::getSegment(Segment::SegmentType st, int t)
       {
       Segment* s = findSegment(st, t);
@@ -1094,14 +1105,94 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 //   getSegment
 //---------------------------------------------------------
 
-Segment* Measure::getSegment(Segment::SegmentType st, int t, int /*gl*/)
+/**
+ Get a segment of type \a st at position \a t and grace level \a gl.
+ Grace level is 0 for a normal chord, 1 for the grace note closest
+ to the normal chord, etc.
+ If the segment does not exist, it is created.
+*/
+
+// when looking for a SegChordRest, return the first one found at t
+// when looking for a SegGrace, first search for a SegChordRest at t,
+// then search backwards for gl SegGraces
+
+Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
       {
-      Segment* s = findSegment(st, t);
-      if (!s) {
-            s = createSegment(st, t);
-            add(s);
+      printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
+      if (st != Segment::SegChordRest && st != Segment::SegGrace) {
+            printf("Measure::getSegment(st=%d, t=%d, gl=%d): incorrect segment type\n", st, t, gl);
+            return 0;
             }
-      return s;
+      Segment* s;
+
+      // find the first segment at tick >= t
+      for (s = first(); s && s->tick() < t; s = s->next())
+            ;
+
+      // find the first SegChordRest segment at tick = t
+      // while counting the Segment::SegGrace segments
+      int nGraces = 0;
+      Segment* sCr = 0;
+      for (Segment* ss = s; ss && ss->tick() == t; ss = ss->next()) {
+            if (ss->subtype() == Segment::SegGrace) nGraces++;
+            if (ss->subtype() == Segment::SegChordRest) {
+                  sCr = ss;
+                  break;
+                  }
+            }
+
+      printf("s=%p sCr=%p nGr=%d\n", s, sCr, nGraces);
+      printf("segment list\n");
+      for (Segment* s = first(); s; s = s->next())
+            printf("  %d: %d\n", s->tick(), s->subtype());
+
+      if (gl == 0) {
+            if (sCr) return sCr;
+            // no SegChordRest at tick = t, must create it
+            printf("creating SegChordRest at tick=%d\n", t);
+            s = createSegment(Segment::SegChordRest, t);
+            add(s);
+            return s;
+            }
+
+      if (gl > 0) {
+            if (gl <= nGraces) {
+                  printf("grace segment already exist, returning it\n");
+                  int graces = 0;
+                  for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
+                        if (ss->subtype() == Segment::SegGrace && ss->tick() == t) graces++;
+                        if (gl == graces) return ss;
+                        }
+                  return 0; // should not be reached
+                  }
+            else {
+                  printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
+                  Segment* prevs = 0; // last segment inserted
+                  // insert the first grace segment
+                  if (nGraces == 0) {
+                        ++nGraces;
+                        s = createSegment(Segment::SegGrace, t);
+                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+                        add(s);
+                        prevs = s;
+                        // return s;
+                        }
+                  // find the first grace segment at t
+                  for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev())
+                        if (ss->subtype() == Segment::SegGrace && ss->tick() == t) prevs = ss;
+                  // add the missing grace segments before the one already present
+                  while (nGraces < gl) {
+                        ++nGraces;
+                        s = createSegment(Segment::SegGrace, t);
+                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+                        insert(s, prevs);
+                        prevs = s;
+                        }
+                  return s;
+                  }
+            }
+
+      return 0; // should not be reached
       }
 
 //---------------------------------------------------------
