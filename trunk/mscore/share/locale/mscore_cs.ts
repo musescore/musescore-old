@@ -6817,10 +6817,6 @@ p, li { white-space: pre-wrap; }
         <translation>ESCAPE</translation>
     </message>
     <message>
-        <source>delete</source>
-        <translation>Smazat</translation>
-    </message>
-    <message>
         <source>Delete Selected Measures</source>
         <translation>Smazat vybrané takty</translation>
     </message>
@@ -7958,6 +7954,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

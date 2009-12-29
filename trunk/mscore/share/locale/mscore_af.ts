@@ -9092,11 +9092,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="877"/>
-        <source>delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="889"/>
         <source>Delete Selected Measures</source>
         <translation type="unfinished"></translation>
@@ -9796,6 +9791,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1708"/>
         <location filename="../../mscore/actions.cpp" line="1712"/>
         <source>Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="877"/>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

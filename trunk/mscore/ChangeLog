@@ -3,6 +3,7 @@
       (db)
       - remove shortcuts for Display > Zoom In and Zoom Out due to conflicts
       - update .ts files
+      - fix tempo in inv13.mscx demo
 28.dec (ws)
       - new feature: persistent JACK midi connections
       - "save as" for chord style editor
