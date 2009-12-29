@@ -3024,7 +3024,7 @@ void Measure::layoutX(double stretch)
                               if (!cr)
                                     continue;
                               found = true;
-                              if (s == first()) {
+                              if (s == first() || s->prev()->subtype() == Segment::SegStartRepeatBarLine) {
                                     double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
                                     minDistance     = sp * .3;
                                     stretchDistance = sp * .7;
@@ -3066,6 +3066,9 @@ void Measure::layoutX(double stretch)
                         space.max(Space(w, w));
                         }
                   else {
+                        if (s->subtype() == Segment::SegStartRepeatBarLine) {
+                              minDistance = .5 * _spatium;
+                              }
                         bool barLine = s->subtype() == Segment::SegEndBarLine;
                         if (barLine && segmentIdx) {
                               if (s->prev()->subtype() == Segment::SegClef)
@@ -3080,7 +3083,7 @@ void Measure::layoutX(double stretch)
                               Space sp = e->space();
                               if ((e->type() == CLEF) && (s != first())) {
                                     sp.rLw() += sp.rw();
-                                    sp.setRw(0.0);
+                                    sp.rRw() = 0.0;
                                     }
                               space.max(sp);
                               }
@@ -3132,9 +3135,6 @@ void Measure::layoutX(double stretch)
             segmentWidth = qMax(segmentWidth, rest[staffIdx]);
       xpos[segmentIdx]    = x + segmentWidth;
       width[segmentIdx-1] = segmentWidth;
-
-//      for (int i = 0; i < segs; ++i)
-//            printf("%3d: %4.2f  ticks: %3d\n", i, width[i], ticks[i]);
 
       if (stretch == 1.0) {
             // printf("this is pass 1\n");

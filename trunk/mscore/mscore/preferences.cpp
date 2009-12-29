@@ -773,7 +773,6 @@ void PreferenceDialog::updateSCListView()
             ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
             newItem->setIcon(0, *s->icon);
-            QKeySequence seq = s->key;
             newItem->setText(1, s->key.toString(QKeySequence::NativeText));
             newItem->setData(0, Qt::UserRole, s->xml);
             shortcutList->addTopLevelItem(newItem);
