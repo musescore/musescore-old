@@ -6789,10 +6789,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Selected Measures</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7930,6 +7926,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

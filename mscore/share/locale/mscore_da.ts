@@ -1366,7 +1366,7 @@ fejl:</translation>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: Rediger stil</translation>
+        <translation>MuseScore: Rediger layout-stil</translation>
     </message>
     <message>
         <source>Score</source>
@@ -1467,7 +1467,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show first</source>
-        <translation>Vis først</translation>
+        <translation>vis først</translation>
     </message>
     <message>
         <source>odd/even</source>
@@ -1552,7 +1552,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>shorten stems</source>
-        <translation>forkortede halse</translation>
+        <translation>forkort nodehalse</translation>
     </message>
     <message>
         <source>...</source>
@@ -1572,7 +1572,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation>Ret tak bredde</translation>
+        <translation>Ret takt bredde</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -1580,7 +1580,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation>Taktstreg ved begyndelser af enkelt system</translation>
+        <translation>Taktstreg ved begyndelsen af enkelt system</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
@@ -1664,7 +1664,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation>Vis gentagelses takter toppe (&quot;med vinger&quot;)</translation>
+        <translation>Vis gentagelses-takter med toppe (eller &quot;vinger&quot;)</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1934,7 +1934,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst egenskaber...</translation>
     </message>
 </context>
 <context>
@@ -2243,30 +2243,30 @@ failed: </source>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>FOrmular</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Opret toneart</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Nulstil</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
+        <translation>tilføj taktart til paletten</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tonearter</translation>
     </message>
 </context>
 <context>
@@ -2832,7 +2832,7 @@ failed: </source>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Stil</translation>
+        <translation>&amp;Layout-stil</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -3399,23 +3399,23 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>rund klamme</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodehoveder</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Varieret coda</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Artikulationer &amp; ornamenter</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Linieskift &amp;&amp; afstande</translation>
     </message>
 </context>
 <context>
@@ -4067,7 +4067,7 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation>Stil</translation>
+        <translation>Layout-stil</translation>
     </message>
     <message>
         <source>Auto Save</source>
@@ -4151,7 +4151,7 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation>farver</translation>
+        <translation>Farver</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4488,31 +4488,31 @@ Genskab denne session?</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Erstat (C) med copyright symboler © (kun gældende for tekst i copyright sektionen)</translation>
+        <translation>Erstat (C) med copyright symbolet © (kun gældende for tekst i copyright sektionen)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation>Stilart benyttet til import</translation>
+        <translation>Layout-stil benyttet til import</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation>Indbygget stilart</translation>
+        <translation>Indbygget layout-stil</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation>Benyt stilart fil:</translation>
+        <translation>Benyt layout-stil fra filen:</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigation</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"></translation>
+        <translation>Benyt JACK MIDI output</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
@@ -4597,7 +4597,7 @@ Vælg venligst en node eller pause of prøv igen
     </message>
     <message>
         <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Indlæs stil</translation>
+        <translation>MuseScore: Indlæs layout-stil</translation>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
@@ -4653,7 +4653,7 @@ Vælg venligst en node eller pause of prøv igen
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Indlæsning af palette fejlede: </translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
@@ -4813,24 +4813,24 @@ fejl:</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Gem stil</translation>
+        <translation>MuseScore: Gem layout-stil</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation>MuseScore Stil fil (*.mss)</translation>
+        <translation>MuseScore Layout-stil (*.mss)</translation>
     </message>
     <message>
         <source>Open Style File
 </source>
-        <translation>Åben stil fil</translation>
+        <translation>Åben layout-stil</translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Åben stil fil</translation>
+        <translation>MuseScore: Åben layout-stil</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Skriv stil</translation>
+        <translation>MuseScore: Skriv layout-stil</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -4957,43 +4957,43 @@ Prøv af gemme den et andet sted.</translation>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mere...</translation>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt inspektor</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodelinie</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigér trommesæt...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tromme editor...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaverrulle editor...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodelinie egenskaber...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation type="unfinished"></translation>
+        <translation>Split nodelinie...</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt</translation>
     </message>
 </context>
 <context>
@@ -5645,7 +5645,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stil:</translation>
+        <translation>Layout-stil:</translation>
     </message>
     <message>
         <source>bold</source>
@@ -5834,7 +5834,7 @@ Prøv af gemme den et andet sted.</translation>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Redgiér tekst stil</translation>
+        <translation>MuseScore: Redigér tekst stil</translation>
     </message>
 </context>
 <context>
@@ -6813,10 +6813,6 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>delete</source>
-        <translation>slet</translation>
-    </message>
-    <message>
         <source>Delete Selected Measures</source>
         <translation>Slet de valgte takter</translation>
     </message>
@@ -7090,7 +7086,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mixer</source>
-        <translation>Micer</translation>
+        <translation>Mixer</translation>
     </message>
     <message>
         <source>Transport Toolbar</source>
@@ -7282,19 +7278,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load Style...</source>
-        <translation>Indlæs stilart...</translation>
+        <translation>Indlæs layout-stil...</translation>
     </message>
     <message>
         <source>Load Style</source>
-        <translation>Indlæs stilart</translation>
+        <translation>Indlæs layout-stil</translation>
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Gem stilart...</translation>
+        <translation>Gem layout-stil...</translation>
     </message>
     <message>
         <source>Save Style</source>
-        <translation>Gem stilart</translation>
+        <translation>Gem layout-stil</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -7426,7 +7422,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation>Vis usynlinge</translation>
+        <translation>Vis usynlige</translation>
     </message>
     <message>
         <source>show frames</source>
@@ -7510,11 +7506,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation>Redigér generel stilart...</translation>
+        <translation>Redigér generel layout-stil...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
-        <translation>Rediger tekst stilart...</translation>
+        <translation>Rediger tekst layout-stil...</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -7918,38 +7914,42 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Player play</source>
-        <translation type="unfinished"></translation>
+        <translation>Afspiller spil</translation>
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg til begyndelsen</translation>
     </message>
     <message>
         <source>Player rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>Spol tilbage</translation>
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished"></translation>
+        <translation>Spil tilbage til start positionen</translation>
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg til slutning</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"></translation>
+        <translation>Afspil gentagelser til/fra</translation>
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished"></translation>
+        <translation>Indlæs layout-stil</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished"></translation>
+        <translation>Gem layout-stil</translation>
     </message>
     <message>
         <source>Select all</source>
+        <translation>Vælg alt</translation>
+    </message>
+    <message>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8460,7 +8460,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"></translation>
+        <translation>FortegnKlamme</translation>
     </message>
 </context>
 <context>
@@ -8539,51 +8539,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>العربية</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Català</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ελληνικά</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Español</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Português</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Português brasileiro</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Română</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Русский</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ภาษาไทย</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>繁體中文 (台灣)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Fran๺is</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Türk๾</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -8669,11 +8669,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole rest</source>
-        <translation type="unfinished"></translation>
+        <translation>helnode pause</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation type="unfinished"></translation>
+        <translation>halvnode pause</translation>
     </message>
     <message>
         <source>outside whole rest</source>
