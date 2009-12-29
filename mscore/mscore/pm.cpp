@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#if defined(__APPLE__) || defined(Q_WS_LINUX)
+#if defined(Q_WS_WIN)
   #include <windows.h>
   #include <mmsystem.h>
 #endif
