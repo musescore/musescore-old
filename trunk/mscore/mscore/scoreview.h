@@ -149,8 +149,6 @@ class ScoreView : public QWidget {
       bool dragTimeAnchorElement(const QPointF& pos);
       void dragSymbol(const QPointF& pos);
       bool dragMeasureAnchorElement(const QPointF& pos);
-      bool dragAboveMeasure(const QPointF& pos);
-      bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
       void lyricsTab(bool back, bool end);
