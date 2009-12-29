@@ -2254,11 +2254,7 @@ void Measure::read(QDomElement e, int idx)
                   rest->read(e, _tuplets);
                   Segment* s = getSegment(rest);
                   s->add(rest);
-                  int t = rest->tick();
-                  if (rest->tickLen() == 0)
-                        t += tickLen();
-                  else
-                        t += rest->tickLen();
+                  int t = rest->tick() + (rest->ticks() <= 0 ? tickLen() : rest->ticks());
                   score()->curTick = t;
                   }
             else if (tag == "RepeatMeasure") {

@@ -275,7 +275,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
                   domError(e);
             }
       if (!duration().isValid()) {
-            if (_ticks == 0)
+            if (_ticks <= 0)
                   setDuration(Duration(Duration::V_MEASURE));
             else
                   convertTicks();
