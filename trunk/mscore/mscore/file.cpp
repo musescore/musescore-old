@@ -1036,11 +1036,15 @@ void Score::saveStyle()
 //    return true on success
 //---------------------------------------------------------
 
+extern QString revision;
+
 void Score::saveFile(QIODevice* f, bool autosave)
       {
       Xml xml(f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
+      xml.tag("programVersion", VERSION);
+      xml.tag("programRevision", revision);
       write(xml, autosave);
       xml.etag();
       }
@@ -1212,6 +1216,41 @@ bool Score::read(QDomElement e)
                         _sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")
                         _tempomap->read(ee, _fileDivision);
+                  else if (tag == "programVersion") {
+                        QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+                        int v1, v2, v3, rv1, rv2, rv3;
+                        if (re.indexIn(VERSION) != -1) {
+                              QStringList sl = re.capturedTexts();
+                              if (sl.size() == 4) {
+                                    v1 = sl[1].toInt();
+                                    v2 = sl[2].toInt();
+                                    v3 = sl[3].toInt();
+                                    if (re.indexIn(val) != -1) {
+                                          sl = re.capturedTexts();
+                                          if (sl.size() == 4) {
+                                                rv1 = sl[1].toInt();
+                                                rv2 = sl[2].toInt();
+                                                rv3 = sl[3].toInt();
+
+                                                printf("Version %d.%d.%d   read %d.%d.%d\n",
+                                                   v1, v2, v3, rv1, rv2, rv3);
+
+                                                int currentVersion = v1 * 10000 + v2 * 100 + v3;
+                                                int readVersion = rv1 * 10000 + rv2 * 100 + v3;
+                                                if (readVersion > currentVersion) {
+                                                      printf("read future version\n");
+                                                      }
+                                                }
+                                          }
+                                    else
+                                          printf("1cannot parse <%s>\n", qPrintable(val));
+                                    }
+                              }
+                        else
+                              printf("2cannot parse <%s>\n", VERSION);
+                        }
+                  else if (tag == "programRevision")
+                        ;
                   else if (tag == "Mag")              // obsolete
                         ;
                   else if (tag == "MagIdx")           // obsolete
