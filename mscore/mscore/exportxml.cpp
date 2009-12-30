@@ -2703,13 +2703,16 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 //   symbol
 //---------------------------------------------------------
 
+// TODO: remove dependency on symbol name and replace by a more stable interface
+// changes in sym.cpp r2494 broke MusicXML export of pedals (again)
+
 void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
       QString name = symbols[sym->sym()].name();
       const char* mxmlName = "";
-      if (name == "pedal.Ped")
+      if (name == "pedal ped")
             mxmlName = "pedal type=\"start\"";
-      else if (name == "pedal.*")
+      else if (name == "pedalasterisk")
             mxmlName = "pedal type=\"stop\"";
       else {
             printf("ExportMusicXml::symbol(): %s not supported", name.toLatin1().data());

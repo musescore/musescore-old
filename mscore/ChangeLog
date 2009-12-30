@@ -1,3 +1,5 @@
+30.dec (lv)
+      - fix MusicXML export of pedal (broken by r2494 sym.cpp changes)
 29.dec (lv)
       - MusicXML support for multiple (beamed/chord) grace notes
       (ws)
