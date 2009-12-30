@@ -22,6 +22,7 @@
 #define __NAVIGATOR_H__
 
 class Score;
+class ScoreView;
 
 //---------------------------------------------------------
 //   Navigator
@@ -31,6 +32,8 @@ class Navigator : public QFrame {
       Q_OBJECT
 
       Score* _score;
+      ScoreView* _cv;
+
       QRect viewRect;
       QPoint startMove;
       bool moving;
@@ -42,13 +45,18 @@ class Navigator : public QFrame {
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
+      virtual void resizeEvent(QResizeEvent*);
+
+   public slots:
+      void updateViewRect();
+      void updateLayout();
 
    signals:
-      void viewRectMoved(const QRectF& r);
+      void viewRectMoved(const QRectF&);
 
    public:
-      Navigator(QWidget* parent);
-      void setScore(Score*);
+      Navigator(QWidget* parent = 0);
+      void setScore(ScoreView*);
       void setViewRect(const QRectF& r);
       void layoutChanged();
       };

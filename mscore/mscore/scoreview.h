@@ -28,7 +28,6 @@ class Xml;
 class Note;
 class Lasso;
 class ShadowNote;
-class Navigator;
 class Cursor;
 class Segment;
 class Measure;
@@ -85,7 +84,6 @@ class ScoreView : public QWidget {
       QState* states[STATES];
 
       QFocusFrame* focusFrame;
-      Navigator* navigator;
       int level;
 
       bool dragScoreViewState;
@@ -193,6 +191,9 @@ class ScoreView : public QWidget {
       void editPaste();
       void normalPaste();
 
+   signals:
+      void viewRectChanged();
+
    public:
       ScoreView(QWidget* parent = 0);
       ~ScoreView();
@@ -212,9 +213,7 @@ class ScoreView : public QWidget {
       void setScore(Score* s);
 
       void setMag(qreal m);
-      void showNavigator(bool visible);
       void redraw(const QRectF& r);
-      void updateNavigator(bool layoutChanged) const;
       Element* elementAt(const QPointF& pp);
       Element* elementNear(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
@@ -264,6 +263,7 @@ class ScoreView : public QWidget {
       void pageTop();
       void pageEnd();
       QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
+      QRectF toLogical(const QRectF& r) const { return imatrix.mapRect(r); }
       void search(const QString& s);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();

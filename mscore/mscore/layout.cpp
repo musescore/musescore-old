@@ -760,6 +760,7 @@ void Score::doLayout()
             delete system;
             }
       rebuildBspTree();
+      emit layoutChanged();
       }
 
 //---------------------------------------------------------

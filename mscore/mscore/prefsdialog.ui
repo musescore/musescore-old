@@ -23,7 +23,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="accessibleName">
@@ -887,8 +887,8 @@
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>511</width>
-         <height>351</height>
+         <width>567</width>
+         <height>82</height>
         </rect>
        </property>
        <property name="title">
@@ -897,32 +897,22 @@
        <property name="flat">
         <bool>true</bool>
        </property>
-       <widget class="QCheckBox" name="replaceFractions">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>451</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Replace 1/2 with fraction character ½</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="replaceCopyrightSymbol">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>70</y>
-          <width>421</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QCheckBox" name="replaceFractions">
+          <property name="text">
+           <string>Replace 1/2 with fraction character ½</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="replaceCopyrightSymbol">
+          <property name="text">
+           <string>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="tab3">
