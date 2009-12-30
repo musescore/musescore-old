@@ -59,6 +59,7 @@
 #include "timedialog.h"
 #include "keyedit.h"
 #include "harmonyedit.h"
+#include "navigator.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -396,11 +397,25 @@ MuseScore::MuseScore()
       addActions(ag->actions());
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
-      QWidget* mainWindow = new QWidget;
+      mainWindow = new QSplitter;
+      mainWindow->setOrientation(Qt::Vertical);
+      QLayout* mlayout = new QVBoxLayout;
+      mlayout->setMargin(0);
+      mlayout->setSpacing(0);
+      mainWindow->setLayout(mlayout);
+
+      QWidget* mainScore = new QWidget;
+      mainScore->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       layout = new QVBoxLayout;
-      mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
+      mainScore->setLayout(layout);
+      mainWindow->addWidget(mainScore);
+      navigator = new Navigator;
+      navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      mainWindow->addWidget(navigator);
+      navigator->setShown(preferences.showNavigator);
+
       splitter = new QSplitter;
 
       tab1 = new ScoreTab(&scoreList);
@@ -744,6 +759,7 @@ MuseScore::MuseScore()
 
       a = getAction("toggle-navigator");
       a->setCheckable(true);
+      a->setChecked(preferences.showNavigator);
       menuDisplay->addAction(a);
 
       a = getAction("toggle-mixer");
@@ -1110,7 +1126,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             }
       else
             cs = 0;
-
       bool enable = cs != 0;
       if (paletteBox)
             paletteBox->setEnabled(enable);
@@ -1158,6 +1173,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
 
       setPos(cs->inputPos());
       _statusBar->showMessage(cs->filePath(), 2000);
+      if (navigator)
+            navigator->setScore(cv);
       }
 
 //---------------------------------------------------------
@@ -2259,6 +2276,7 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.setValue("splitScreen", _splitScreen);
+      settings.setValue("inspectorSplitter", mainWindow->saveState());
       if (_splitScreen) {
             settings.setValue("split", _horizontalSplit);
             settings.setValue("splitter", splitter->saveState());
@@ -2290,6 +2308,8 @@ void MuseScore::readSettings()
       QSettings settings;
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 700)).toSize());
+      mainWindow->restoreState(settings.value("inspectorSplitter").toByteArray());
+      settings.setValue("inspectorSplitter", mainWindow->saveState());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();

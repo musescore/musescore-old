@@ -32,7 +32,6 @@
 #include "mscore.h"
 #include "seq.h"
 #include "staff.h"
-#include "navigator.h"
 #include "chord.h"
 #include "rest.h"
 #include "page.h"
@@ -694,7 +693,6 @@ ScoreView::ScoreView(QWidget* parent)
       level            = 0;
       dragElement      = 0;
       curElement       = 0;
-      navigator        = 0;
       _score           = 0;
       _bgColor         = Qt::darkBlue;
       _fgColor         = Qt::white;
@@ -725,16 +723,6 @@ ScoreView::ScoreView(QWidget* parent)
                   printf("no valid pixmap %s\n", qPrintable(preferences.fgWallpaper));
             setForeground(pm);
             }
-      showNavigator(preferences.showNavigator);
-      }
-
-//---------------------------------------------------------
-//   navigatorVisible
-//---------------------------------------------------------
-
-bool ScoreView::navigatorVisible() const
-      {
-      return navigator && navigator->isVisible();
       }
 
 //---------------------------------------------------------
@@ -754,10 +742,6 @@ void ScoreView::setScore(Score* s)
       else {
             cursor->setScore(_score);
             shadowNote->setScore(_score);
-            }
-      if (navigator) {
-            navigator->setScore(_score);
-            updateNavigator(false);
             }
       connect(s, SIGNAL(updateAll()),     SLOT(update()));
       connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
@@ -957,27 +941,7 @@ void ScoreView::resizeEvent(QResizeEvent* /*ev*/)
             double m = mscore->getMag(this);
             setMag(m);
             }
-
       update();
-      if (navigator) {
-            navigator->move(0, height() - navigator->height());
-            updateNavigator(false);
-            }
-      }
-
-//---------------------------------------------------------
-//   updateNavigator
-//---------------------------------------------------------
-
-void ScoreView::updateNavigator(bool layoutChanged) const
-      {
-      if (navigator) {
-            navigator->setScore(_score);  // adapt to new paper size
-            if (layoutChanged)
-                  navigator->layoutChanged();
-            QRectF r(0.0, 0.0, width(), height());
-            navigator->setViewRect(imatrix.mapRect(r));
-            }
       }
 
 //---------------------------------------------------------
@@ -1268,8 +1232,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       QRegion region;
       if (_score->needLayout()) {
             _score->doLayout();
-            if (navigator)
-                  navigator->layoutChanged();
             if (grips)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
@@ -1460,12 +1422,6 @@ void ScoreView::setViewRect(const QRectF& r)
          _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-
-      if ((dx > 0 || dy < 0) && navigatorVisible()) {
-		QRect r(navigator->geometry());
-            r.translate(dx, dy);
-            update(r);
-            }
       }
 
 //---------------------------------------------------------
@@ -2092,13 +2048,8 @@ void ScoreView::zoom(int step, const QPoint& pos)
          _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-
-      if ((dx > 0 || dy < 0) && navigatorVisible()) {
-	      QRect r(navigator->geometry());
-      	r.translate(dx, dy);
-            }
+      emit viewRectChanged();
       update();
-      updateNavigator(false);
       }
 
 //---------------------------------------------------------
@@ -2138,16 +2089,7 @@ void ScoreView::wheelEvent(QWheelEvent* event)
       imatrix = _matrix.inverted();
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
-
-      //
-      // this is necessary at least for qt4.1:
-      //
-      if ((dy < 0 || dx > 0) && navigatorVisible()) {
-		QRect r(navigator->geometry());
-		r.translate(dx, dy);
-		update(r);
-            }
-	updateNavigator(false);
+      emit viewRectChanged();
       }
 
 //---------------------------------------------------------
@@ -2318,7 +2260,6 @@ void ScoreView::setMag(int idx, double mag)
       _magIdx = idx;
       setMag(mag);
       update();
-      // TODO? updateNavigator(false);
       }
 
 //---------------------------------------------------------
@@ -2743,17 +2684,9 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
 
-      //
-      // this is necessary at least for qt4.1:
-      //
-      if ((dx > 0 || dy < 0) && navigatorVisible()) {
-	      QRect r(navigator->geometry());
-      	r.translate(dx, dy);
-      	update(r);
-            }
-      updateNavigator(false);
       if (!draggedScoreView)
             draggedScoreView = true;
+      emit viewRectChanged();
       }
 
 //---------------------------------------------------------
@@ -3197,7 +3130,6 @@ void ScoreView::pageNext()
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
-//      updateNavigator(false);
       update();
       }
 
@@ -3214,7 +3146,6 @@ void ScoreView::pagePrev()
       if (x > 10.0)
             x = 10.0;
       setOffset(x, 10.0);
-//      updateNavigator(false);
       update();
       }
 
@@ -3225,7 +3156,6 @@ void ScoreView::pagePrev()
 void ScoreView::pageTop()
       {
       setOffset(10.0, 10.0);
-//      updateNavigator(false);
       update();
       }
 
@@ -3240,7 +3170,6 @@ void ScoreView::pageEnd()
       Page* lastPage = score()->pages().back();
       QPointF p(lastPage->canvasPos());
       setOffset(25.0 - p.x() * mag(), 25.0);
-//      updateNavigator(false);
       update();
       }
 
@@ -3360,7 +3289,6 @@ void ScoreView::adjustCanvasPosition(Element* el, bool playBack)
             return;
 
       setOffset(-x * mag(), -y * mag());
-//      updateNavigator(false);
       update();
       }
 

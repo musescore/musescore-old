@@ -30,16 +30,31 @@
 //---------------------------------------------------------
 
 Navigator::Navigator(QWidget* parent)
-  : QFrame(parent), pm(200,100)
+  : QFrame(parent)
       {
       setAttribute(Qt::WA_NoBackground);
-      setFixedSize(200, 100);
 
       setFrameStyle(QFrame::Box | QFrame::Raised);
       setLineWidth(2);
       _score = 0;
+      _cv    = 0;
       moving = false;
       redraw = false;
+      }
+
+//---------------------------------------------------------
+//   resizeEvent
+//---------------------------------------------------------
+
+void Navigator::resizeEvent(QResizeEvent* ev)
+      {
+      pm = QPixmap(ev->size());
+      redraw = true;
+      if (_score) {
+            qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+            matrix.setMatrix(m, matrix.m12(), matrix.m21(), m, 5, 5);
+            }
+      pm.fill(Qt::gray);
       }
 
 //---------------------------------------------------------
@@ -48,22 +63,12 @@ Navigator::Navigator(QWidget* parent)
 
 void MuseScore::showNavigator(bool visible)
       {
-      if (cv)
-            static_cast<ScoreView*>(cv)->showNavigator(visible);
-      }
-
-void ScoreView::showNavigator(bool visible)
-      {
       if (navigator == 0) {
             navigator = new Navigator(this);
-            navigator->move(0, height() - navigator->height());
-            if (_score) {
-                  navigator->setScore(_score);
-                  QRectF r(0.0, 0.0, width(), height());
-                  navigator->setViewRect(imatrix.mapRect(r));
-                  }
+            navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             connect(navigator, SIGNAL(viewRectMoved(const QRectF&)), SLOT(setViewRect(const QRectF&)));
             }
+      navigator->setScore(cv);
       navigator->setShown(visible);
       getAction("toggle-navigator")->setChecked(visible);
       }
@@ -72,12 +77,43 @@ void ScoreView::showNavigator(bool visible)
 //   setScore
 //---------------------------------------------------------
 
-void Navigator::setScore(Score* s)
+void Navigator::setScore(ScoreView* v)
       {
-      redraw  = true;
-      _score  = s;
+      if (_cv) {
+            disconnect(this, SIGNAL(viewRectMoved(const QRectF&)), _cv, SLOT(setViewRect(const QRectF&)));
+            disconnect(_cv, SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
+            if (_score)
+                  disconnect(_score, SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
+            }
+      _score  = v->score();
+      _cv     = v;
+      connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
+      connect(v,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
+      connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
+      updateViewRect();
+      updateLayout();
+      }
+
+//---------------------------------------------------------
+//   updateViewRect
+//---------------------------------------------------------
+
+void Navigator::updateViewRect()
+      {
       qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
       matrix.setMatrix(m, matrix.m12(), matrix.m21(), m, 5, 5);
+      QRectF r(0.0, 0.0, _cv->width(), _cv->height());
+      setViewRect(_cv->toLogical(r));
+      }
+
+//---------------------------------------------------------
+//   updateLayout
+//---------------------------------------------------------
+
+void Navigator::updateLayout()
+      {
+      redraw = true;
+      update();
       }
 
 //---------------------------------------------------------
@@ -89,55 +125,56 @@ void Navigator::paintEvent(QPaintEvent* ev)
       QPainter p;
       QRect r(ev->rect());
       if (redraw) {
-            redraw = false;
-            QColor _fgColor(Qt::white);
-            QColor _bgColor(Qt::gray);
-            int dx = lrint(matrix.m11());
-            int dy = lrint(matrix.m22());
+            if (_cv) {
+                  redraw = false;
+                  qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+                  matrix.setMatrix(m, matrix.m12(), matrix.m21(), m, 5, 5);
 
-            r.setRect(0, 0, width(), height());
-            QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
+                  QColor _fgColor(Qt::white);
+                  QColor _bgColor(Qt::gray);
+                  int dx = lrint(matrix.m11());
+                  int dy = lrint(matrix.m22());
 
-            p.begin(&pm);
-//            p.setRenderHint(QPainter::Antialiasing, true);
-            p.setRenderHint(QPainter::Antialiasing, false);
+                  r.setRect(0, 0, width(), height());
+                  QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
 
-            p.fillRect(rr, _fgColor);
-            if (_score->pages().empty())
-                  return;
-            p.setMatrix(matrix);
-            QRegion r1(rr);
-            foreach(const Page* page, _score->pages()) {
-                  QRectF pbbox(page->abbox());
-                  r1 -= matrix.mapRect(pbbox).toRect();
-                  p.translate(page->pos());
-                  page->draw(p);
-                  p.translate(-page->pos());
+                  p.begin(&pm);
+                  p.setRenderHint(QPainter::Antialiasing, false);
+
+                  p.fillRect(rr, _fgColor);
+                  p.setMatrix(matrix);
+                  QRegion r1(rr);
+                  foreach(const Page* page, _score->pages()) {
+                        QRectF pbbox(page->abbox());
+                        r1 -= matrix.mapRect(pbbox).toRect();
+                        p.translate(page->pos());
+                        page->draw(p);
+                        p.translate(-page->pos());
+                        }
+
+                  QRectF fr = matrix.inverted().mapRect(QRectF(rr));
+                  QList<const Element*> ell = _score->items(fr);
+
+                  for (int i = 0; i < ell.size(); ++i) {
+                        const Element* e = ell.at(i);
+                        e->itemDiscovered = 0;
+
+                        if (!(e->visible() || _score->showInvisible()))
+                              continue;
+
+                        QPointF ap(e->canvasPos());
+                        p.translate(ap);
+                        p.setPen(QPen(e->color()));
+                        e->draw(p);
+                        p.translate(-ap);
+                        }
+
+                  p.setMatrixEnabled(false);
+                  p.setClipRegion(r1);
+                  p.fillRect(rr, _bgColor);
+                  p.end();
                   }
-
-            QRectF fr = matrix.inverted().mapRect(QRectF(rr));
-            QList<const Element*> ell = _score->items(fr);
-
-            for (int i = 0; i < ell.size(); ++i) {
-                  const Element* e = ell.at(i);
-                  e->itemDiscovered = 0;
-
-                  if (!(e->visible() || _score->showInvisible()))
-                        continue;
-
-                  QPointF ap(e->canvasPos());
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(p);
-                  p.translate(-ap);
-                  }
-
-            p.setMatrixEnabled(false);
-            p.setClipRegion(r1);
-            p.fillRect(rr, _bgColor);
-            p.end();
             }
-
       p.begin(this);
       p.drawPixmap(r.topLeft(), pm, r);
       QPen pen(Qt::blue, 2.0);

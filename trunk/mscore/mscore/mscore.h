@@ -61,6 +61,7 @@ class ScriptEngine;
 class KeyEditor;
 class ChordStyleEditor;
 class UndoGroup;
+class Navigator;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -175,6 +176,8 @@ class MuseScore : public QMainWindow {
       QSplitter* splitter;
       ScoreTab* tab1;
       ScoreTab* tab2;
+      Navigator* navigator;
+      QSplitter* mainWindow;
 
       QMenu* menuDisplay;
       QMenu* openRecent;
