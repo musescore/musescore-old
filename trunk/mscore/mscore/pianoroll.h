@@ -39,7 +39,7 @@ namespace Awl {
 //   PianorollEditor
 //---------------------------------------------------------
 
-class PianorollEditor : public QDialog {
+class PianorollEditor : public QMainWindow {
       Q_OBJECT
 
       PianoView* gv;

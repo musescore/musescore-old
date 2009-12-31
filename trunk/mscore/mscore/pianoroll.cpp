@@ -44,12 +44,17 @@
 //---------------------------------------------------------
 
 PianorollEditor::PianorollEditor(QWidget* parent)
-   : QDialog(parent)
+   : QMainWindow(parent)
       {
+      setWindowTitle(QString("MuseScore"));
+      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
+
+      QWidget* mainWidget = new QWidget;
       QGridLayout* layout = new QGridLayout;
+      mainWidget->setLayout(layout);
       layout->setSpacing(0);
 
-      QToolBar* tb = new QToolBar;
+      QToolBar* tb = addToolBar(tr("toolbar1"));
       tb->addAction(getAction("undo"));
       tb->addAction(getAction("redo"));
       tb->addSeparator();
@@ -67,9 +72,9 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       tb->addAction(getAction("rewind"));
       tb->addAction(getAction("play"));
       tb->addSeparator();
-      layout->addWidget(tb, 0, 0, 1, 2);
 
-      tb = new QToolBar;
+      //-------------
+      tb = addToolBar(tr("toolbar2"));
       layout->addWidget(tb, 1, 0, 1, 2);
       VoiceSelector* vs = new VoiceSelector;
       tb->addWidget(vs);
@@ -117,7 +122,7 @@ PianorollEditor::PianorollEditor(QWidget* parent)
       piano->setFixedWidth(pianoWidth);
       layout->addWidget(piano, 3, 0);
 
-      setLayout(layout);
+      setCentralWidget(mainWidget);
 
       connect(gv->verticalScrollBar(), SIGNAL(valueChanged(int)), piano, SLOT(setYpos(int)));
       connect(gv->horizontalScrollBar(), SIGNAL(valueChanged(int)), ruler, SLOT(setXpos(int)));

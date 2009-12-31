@@ -25,6 +25,7 @@
 #include "chord.h"
 #include "score.h"
 #include "note.h"
+#include "slur.h"
 
 static const int MAP_OFFSET = 480;
 
@@ -51,15 +52,19 @@ PianoItem::PianoItem(Note* n)
    : QGraphicsRectItem(), note(n)
       {
       setFlags(flags() | QGraphicsItem::ItemIsSelectable);
-      int pitch    = n->pitch();
-      Chord* chord = n->chord();
-      int len      = chord->tickLen();
+      int pitch = n->pitch();
+      int len   = 0;
+      Note* nn  = n;
+      while (nn) {      // akkumulate all tied notes
+            len += nn->chord()->tickLen();
+            nn = nn->tieFor() ? nn->tieFor()->endNote() : 0;
+            }
       setRect(0, 0, len, keyHeight/2);
       setBrush(QBrush());
       setSelected(n->selected());
       setData(0, QVariant::fromValue<void*>(n));
 
-      setPos(chord->tick() + 480, pitch2y(pitch) + keyHeight / 4);
+      setPos(n->chord()->tick() + 480, pitch2y(pitch) + keyHeight / 4);
       }
 
 //---------------------------------------------------------
@@ -210,27 +215,22 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                                     p->drawLine(xp, y1, xp, y2);
                                     }
                               }
-                        else if (magStep == -1) {
-                              int n = (AL::division * 4) / stick.timesig().denominator;
-                              for (int i = 0; i < 2; ++i) {
-                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ 2);
-                                    int xp = pos2pix(xx);
-                                    if (xp < 0)
-                                          continue;
-                                    if (xp > 0) {
-                                          p->setPen(i == 0 && beat == 0 ? Qt::lightGray : Qt::gray);
-                                          p->drawLine(xp, y1, xp, y2);
-                                          }
-                                    else {
-                                          p->setPen(Qt::black);
-                                          p->drawLine(xp, y1, xp, y2);
-                                          }
-                                    }
-                              }
                         else {
+                              int k;
+                              if (magStep == -1)
+                                    k = 2;
+                              else if (magStep == -2)
+                                    k = 4;
+                              else if (magStep == -3)
+                                    k = 8;
+                              else if (magStep == -4)
+                                    k = 16;
+                              else
+                                    k = 32;
+
                               int n = (AL::division * 4) / stick.timesig().denominator;
-                              for (int i = 0; i < 4; ++i) {
-                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ 4);
+                              for (int i = 0; i < k; ++i) {
+                                    AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ k);
                                     int xp = pos2pix(xx);
                                     if (xp < 0)
                                           continue;
@@ -295,19 +295,21 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
             scene()->addItem(locatorLines[i]);
             }
 
-      Measure* m = staff->score()->firstMeasure();
       int staffIdx = staff->idx();
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      for (Segment* s = m->first(); s; s = s->next1()) {
+      for (Segment* s = staff->score()->firstMeasure()->first(); s; s = s->next1()) {
             for (int track = startTrack; track < endTrack; ++track) {
                   Element* e = s->element(track);
                   if (e == 0 || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
                   NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
+                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                        if (in->second->tieBack())
+                              continue;
                         scene()->addItem(new PianoItem(in->second));
+                        }
                   }
             }
       scene()->blockSignals(false);
@@ -376,7 +378,11 @@ void PianoView::wheelEvent(QWheelEvent* event)
             emit magChanged(xmag, ymag);
 
             int tpix  = (480 * 4) * xmag;
-            magStep = -3;
+            magStep = -5;
+            if (tpix <= 4000)
+                  magStep = -4;
+            if (tpix <= 2000)
+                  magStep = -3;
             if (tpix <= 1000)
                   magStep = -2;
             if (tpix <= 500)

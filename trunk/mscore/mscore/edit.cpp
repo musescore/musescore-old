@@ -1128,20 +1128,22 @@ void Score::cmdRemoveTime(int tick, int len)
       //-----------------
       AL::SigEvent e1 = _sigmap->timesig(tick + len);
       for (AL::ciSigEvent i = _sigmap->begin(); i != _sigmap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick2))
+            if (i->first != 0 && i->first >= tick && (i->first < tick2)) {
                   undoChangeSig(i->first, i->second, AL::SigEvent());
+                  }
             }
       undoSigInsertTime(tick, -len);
       AL::SigEvent e2 = _sigmap->timesig(tick);
       if (!(e1 == e2)) {
             AL::ciSigEvent i = _sigmap->find(tick);
-            if (i == _sigmap->end())
+            if (i == _sigmap->end()) {
                   undoChangeSig(tick, AL::SigEvent(), e1);
+                  }
             }
       //-----------------
 
       for (AL::ciTEvent i = _tempomap->begin(); i != _tempomap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick2))
+            if (i->first != 0 && i->first >= tick && (i->first < tick2))
                   undoChangeTempo(i->first, i->second, AL::TEvent());
             }
       foreach(Staff* staff, _staves) {
@@ -1208,6 +1210,7 @@ void Score::cmdDeleteSelectedMeasures()
             }
       selection()->elements()->clear();
       select(0, SELECT_SINGLE, 0);
+      _is._segment = 0;        // invalidate position
       layoutAll = true;
       }
 
