@@ -963,13 +963,16 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
       {
       int division = mf->division();
 
-      int mintick = division * 64;
       iEvent i = _events.begin();
       for (; i != _events.end(); ++i) {
             if ((*i)->ontime() >= startTick)
                   break;
             }
+      //
+      // find shortest note in measure
+      //
       iEvent si = i;
+      int mintick = division;
       for (; i != _events.end(); ++i) {
             Event* e = *i;
             if (e->ontime() >= endTick)
@@ -977,6 +980,10 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
             if (e->type() == ME_NOTE && (e->duration() < mintick))
                   mintick = e->duration();
             }
+      //
+      // determine suitable quantization value based
+      // on shortest note in measure
+      //
       if (mintick <= division / 16)        // minimum duration is 1/64
             mintick = division / 16;
       else if (mintick <= division / 8)
@@ -997,25 +1004,23 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
       if (mintick < mf->shortestNote())
             mintick = mf->shortestNote();
 
-      int raster;
-      if (mintick > division)
-            raster = division;
-      else
-            raster = mintick;
-
+      int raster  = mintick;
+      int raster2 = raster >> 1;
       for (iEvent i = si; i != _events.end(); ++i) {
             Event* e = *i;
             if (e->ontime() >= endTick)
                   break;
+            Event* ee = new Event(*e);
             if (e->type() == ME_NOTE) {
-	            int len  = quantizeLen(division, e->duration(), raster);
-      	      int tick = (e->ontime() / raster) * raster;
-                  e->setNoquantOntime(e->ontime());
-                  e->setNoquantDuration(e->duration());
-	            e->setOntime(tick);
-      	      e->setDuration(len);
+	            int len  = quantizeLen(e->duration(), raster);
+      	      int tick = ((e->ontime() + raster2) / raster) * raster;
+
+                  ee->setNoquantOntime(e->ontime());
+                  ee->setNoquantDuration(e->duration());
+	            ee->setOntime(tick);
+      	      ee->setDuration(len);
                   }
-            dst->insert(e);
+            dst->insert(ee);
             }
       }
 
@@ -1052,24 +1057,32 @@ void MidiTrack::cleanup()
       //
       //
       //
+      foreach(Event* e, _events)
+            delete e;
       _events.clear();
 
-      for(iEvent i = dl.begin(); i != dl.end(); ++i) {
-            Event* e = *i;
+      int n = dl.size();
+      for (int i = 0; i < n; ++i) {
+            Event* e = dl[i];
             if (e->type() == ME_NOTE) {
-                  iEvent ii = i;
-                  ++ii;
-                  for (; ii != dl.end(); ++ii) {
-                        Event* ee = *ii;
-                        if (ee->type() != ME_NOTE || ee->pitch() != e->pitch())
+                  int ii = i + 1;
+                  for (; ii < n; ++ii) {
+                        Event* ee = dl[ii];
+                        if ((ee->type() != ME_NOTE) || (ee->pitch() != e->pitch()))
                               continue;
-                        if (ee->ontime() >= e->ontime() + e->duration())
+                        if (ee->ontime() >= (e->ontime() + e->duration()))
                               break;
+                        printf("MidiTrack::cleanup: overlapping events: %d:%d+%d %d:%d+%d\n",
+                           e->pitch(), e->ontime(), e->duration(),
+                           ee->pitch(), ee->ontime(), ee->duration());
+                        printf("%p - %p\n", e, ee);
                         e->setDuration(ee->ontime() - e->ontime());
                         break;
                         }
-                  if (e->duration() <= 0)
+                  if (e->duration() <= 0) {
+                        printf("MidiTrack::cleanup: duration <= 0: drop note at %d\n", e->ontime());
                         continue;
+                        }
                   }
 		_events.insert(e);
             }
@@ -1394,7 +1407,7 @@ int MidiTrack::getInitProgram()
             if (e->controller() == CTRL_PROGRAM)
                   return e->value();
             }
-      return -1;
+      return 0;
       }
 
 //---------------------------------------------------------

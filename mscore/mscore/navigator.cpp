@@ -202,25 +202,12 @@ void Navigator::mousePressEvent(QMouseEvent* ev)
 
 void Navigator::mouseMoveEvent(QMouseEvent* ev)
       {
-      if (moving) {
-            QPoint delta = ev->pos() - startMove;
-            viewRect.translate(delta);
-            startMove = ev->pos();
+      if (!moving)
+            return;
+      QPoint delta = ev->pos() - startMove;
+      viewRect.translate(delta);
+      startMove = ev->pos();
 
-            setViewRect(matrix.inverted().mapRect(viewRect));
-
-            // viewRect is now within bounds
-            emit viewRectMoved(matrix.inverted().mapRect(viewRect));
-            }
-      }
-
-//---------------------------------------------------------
-//   setViewRect
-//---------------------------------------------------------
-
-void Navigator::setViewRect(const QRectF& _viewRect)
-      {
-      viewRect  = matrix.mapRect(_viewRect).toRect();
       if (viewRect.x() < 0) {
             double dx = -viewRect.x() / matrix.m11();
             viewRect.moveLeft(0);
@@ -238,6 +225,37 @@ void Navigator::setViewRect(const QRectF& _viewRect)
             viewRect.moveTop(0);
       else if (viewRect.bottom() > height())
             viewRect.moveBottom(height());
+
+      emit viewRectMoved(matrix.inverted().mapRect(viewRect));
+      update();
+      }
+
+//---------------------------------------------------------
+//   setViewRect
+//---------------------------------------------------------
+
+void Navigator::setViewRect(const QRectF& _viewRect)
+      {
+      viewRect  = matrix.mapRect(_viewRect).toRect();
+#if 0
+      if (viewRect.x() < 0) {
+            double dx = -viewRect.x() / matrix.m11();
+            viewRect.moveLeft(0);
+            if (matrix.dx() < 5.0)
+                  matrix.translate(dx, 0.0);
+            redraw = true;
+            }
+      if (viewRect.right() > width()) {
+            double dx = (rect().right() - viewRect.right()) / matrix.m11();
+            viewRect.moveRight(width());
+            matrix.translate(dx, 0.0);
+            redraw = true;
+            }
+      if (viewRect.y() < 0)
+            viewRect.moveTop(0);
+      else if (viewRect.bottom() > height())
+            viewRect.moveBottom(height());
+#endif
       update();
       }
 

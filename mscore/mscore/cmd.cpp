@@ -1191,6 +1191,7 @@ void ScoreView::cmdAddText(int subtype)
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
       TextB* s = 0;
+      _score->startCmd();
       switch(subtype) {
             case TEXT_TITLE:
             case TEXT_SUBTITLE:
@@ -1260,13 +1261,15 @@ void ScoreView::cmdAddText(int subtype)
             }
 
       if (s) {
-            _score->startCmd();
+printf("insert TEXT\n");
             _score->undoAddElement(s);
             _score->setLayoutAll(true);
             _score->select(s, SELECT_SINGLE, 0);
             _score->endCmd();
             startEdit(s);
             }
+      else
+            _score->endCmd();
       }
 
 //---------------------------------------------------------

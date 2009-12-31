@@ -799,7 +799,7 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
                         }
                   }
             if (nntick == -1)
-                  len = quantizeLen(AL::division, len, raster);
+                  len = quantizeLen(len, raster);
             else {
                   int diff = nntick - ntick;
                   if (diff > 0) {
@@ -807,13 +807,13 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
                         if (diff <= raster)
                               len = nntick - tick;
                         else
-                              len = quantizeLen(AL::division, len, raster);
+                              len = quantizeLen(len, raster);
                         }
                   else {
                         if (diff > -raster)
                               len = nntick - tick;
                         else
-                              len = quantizeLen(AL::division, len, raster);
+                              len = quantizeLen(len, raster);
                         }
                   }
             note->setDuration(len);

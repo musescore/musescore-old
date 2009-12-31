@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 //   quantizeLen
 //---------------------------------------------------------
 
-int quantizeLen(int, int len, int raster)
+int quantizeLen(int len, int raster)
       {
       int rl = ((len + raster - 1) / raster) * raster;
       rl /= 2;

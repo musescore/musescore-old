@@ -364,7 +364,8 @@ void TimeSigMap::removeTime(int tick, int len)
       {
       TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick) {
+            // do not remove entry at tick 0
+            if ((i->first >= tick) && (i->first != 0)) {
                   if (i->first >= tick + len)
                         tmp.add(i->first - len, i->second);
                   else
