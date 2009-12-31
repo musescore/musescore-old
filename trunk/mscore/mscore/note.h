@@ -209,26 +209,26 @@ class Note : public Element {
       virtual void toDefault();
       virtual void setMag(double val);
 
-      ValueType veloType() const       { return _veloType;   }
-      void setVeloType(ValueType v)    { _veloType = v;      }
-      int velocity() const             { return _velocity;   }
-      void setVelocity(int v)          { _velocity = v;      }
-      int veloOffset() const           { return _veloOffset; }
-      void setVeloOffset(int v)        { _veloOffset = v;    }
+      ValueType veloType() const       { return _veloType;          }
+      void setVeloType(ValueType v)    { _veloType = v;             }
+      int velocity() const             { return _velocity;          }
+      void setVelocity(int v)          { _velocity = v;             }
+      int veloOffset() const           { return _veloOffset;        }
+      void setVeloOffset(int v)        { _veloOffset = v;           }
 
-      ValueType onTimeType() const     { return _onTimeType;    }
-      void setOnTimeType(ValueType v)  { _onTimeType = v;       }
-      int onTimeOffset() const         { return _onTimeOffset;  }
-      void setOnTimeOffset(int v)      { _onTimeOffset = v;     }
-      int onTimeUserOffset() const     { return _onTimeOffset;  }
-      void setOnUserTimeOffset(int v)  { _onTimeOffset = v;     }
+      ValueType onTimeType() const     { return _onTimeType;        }
+      void setOnTimeType(ValueType v)  { _onTimeType = v;           }
+      int onTimeOffset() const         { return _onTimeOffset;      }
+      void setOnTimeOffset(int v)      { _onTimeOffset = v;         }
+      int onTimeUserOffset() const     { return _onTimeUserOffset;  }
+      void setOnTimeUserOffset(int v)  { _onTimeUserOffset = v;     }
 
-      ValueType offTimeType() const    { return _offTimeType;   }
-      void setOffTimeType(ValueType v) { _offTimeType = v;      }
-      int offTimeOffset() const        { return _offTimeOffset; }
-      void setOffTimeOffset(int v)     { _offTimeOffset = v;    }
-      int offTimeUserOffset() const    { return _offTimeOffset; }
-      void setOffUserTimeOffset(int v) { _offTimeOffset = v;    }
+      ValueType offTimeType() const    { return _offTimeType;       }
+      void setOffTimeType(ValueType v) { _offTimeType = v;          }
+      int offTimeOffset() const        { return _offTimeOffset;     }
+      void setOffTimeOffset(int v)     { _offTimeOffset = v;        }
+      int offTimeUserOffset() const    { return _offTimeUserOffset; }
+      void setOffTimeUserOffset(int v) { _offTimeUserOffset = v;    }
       };
 
 //---------------------------------------------------------

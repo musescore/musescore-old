@@ -1208,7 +1208,6 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
             if (rv) {
                   foreach(Note* note, score()->selection()->noteList()) {
                         Chord* chord = note->chord();
-
                         if (vp.small() != chord->small())
                               score()->undoChangeChordRestSize(chord, vp.small());
                         if (Spatium(vp.leadingSpace()) != chord->extraLeadingSpace()
@@ -1224,6 +1223,17 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                               score()->undoChangeTuning(note, vp.tuning());
                         if (DirectionH(vp.getUserMirror()) != note->userMirror())
                               score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
+                        }
+                  if (veloType() != vp.veloType() || velocity() != vp.velo()
+                     || veloOffset() != vp.veloOffset()
+                     || onTimeType() != vp.onTimeType() || onTimeOffset() != vp.onTimeOffset()
+                     || onTimeUserOffset() != vp.onTimeUserOffset()
+                     || offTimeType() != vp.offTimeType() || offTimeOffset() != vp.offTimeOffset()
+                     || offTimeUserOffset() != vp.offTimeUserOffset()) {
+                        score()->undo()->push(new ChangeNoteProperties(this,
+                           vp.veloType(), vp.velo(), vp.veloOffset(),
+                           vp.onTimeType(), vp.onTimeOffset(), vp.onTimeUserOffset(),
+                           vp.offTimeType(), vp.offTimeOffset(), vp.offTimeUserOffset()));
                         }
                   }
             }
