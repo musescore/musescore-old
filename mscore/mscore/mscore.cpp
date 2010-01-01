@@ -2040,22 +2040,6 @@ void MuseScore::cmd(QAction* a)
             splitWindow(true);
       else if (cmd == "split-v")
             splitWindow(false);
-      else if (cmd == "page-prev") {
-            if (cv)
-                  cv->pagePrev();
-            }
-      else if (cmd == "page-next") {
-            if (cv)
-                  cv->pageNext();
-            }
-      else if (cmd == "page-top") {
-            if (cv)
-                  cv->pageTop();
-            }
-      else if (cmd == "page-end") {
-            if (cv)
-                  cv->pageEnd();
-            }
       else if (cmd == "edit-harmony")
             editChordStyle();
       else {

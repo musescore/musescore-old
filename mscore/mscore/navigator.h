@@ -32,14 +32,14 @@ class Navigator : public QFrame {
       Q_OBJECT
 
       Score* _score;
-      ScoreView* _cv;
+      QPointer<ScoreView> _cv;
 
       QRect viewRect;
       QPoint startMove;
       bool moving;
       QPixmap pm;
       bool redraw;
-      QMatrix matrix;
+      QTransform matrix;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
