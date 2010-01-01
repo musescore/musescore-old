@@ -85,7 +85,7 @@ bool showRubberBand  = true;
 //---------------------------------------------------------
 
 InputState::InputState() :
-   duration(Duration::V_INVALID),
+   _duration(Duration::V_INVALID),
    rest(false),
    pad(0),
    pitch(72),

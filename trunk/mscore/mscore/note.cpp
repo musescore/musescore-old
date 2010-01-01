@@ -1162,7 +1162,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   int t         = (staffIdx() * VOICES) + (n->voice() % VOICES);
                   score()->select(0, SELECT_SINGLE, 0);
                   Segment* seg = score()->setNoteRest(chord(), t, n->pitch(),
-                     score()->inputState().duration.fraction(),
+                     score()->inputState().duration().fraction(),
                      headGroup, dir);
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
                   if (cr)

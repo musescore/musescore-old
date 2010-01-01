@@ -534,7 +534,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       //       add a note with cr->duration tied to another note which adds
       //       to a total duration of _is.duration
       //
-      if (!replace && (cr->duration() == _is.duration) && (cr->type() == CHORD) && !_is.rest) {
+      if (!replace && (cr->duration() == _is.duration()) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
             if (note) {
@@ -551,13 +551,13 @@ void Score::putNote(const QPointF& pos, bool replace)
                   select(note, SELECT_SINGLE, 0);
                   }
             else
-                  setNoteRest(cr, _is.track, pitch, _is.duration.fraction(), headGroup, stemDirection);
+                  setNoteRest(cr, _is.track, pitch, _is.duration().fraction(), headGroup, stemDirection);
             }
       else {
             // replace chord
             if (_is.rest)
                   pitch = -1;
-            setNoteRest(cr, _is.track, pitch, _is.duration.fraction(), headGroup, stemDirection);
+            setNoteRest(cr, _is.track, pitch, _is.duration().fraction(), headGroup, stemDirection);
             }
       moveToNextInputPos();
       }
@@ -1413,7 +1413,7 @@ void Score::cmdTuplet(int n)
       if (noteEntryMode()) {
 printf("cmdTuplet %d noteEntry\n", n);
             expandVoice();
-            changeCRlen(_is.cr(), _is.duration);
+            changeCRlen(_is.cr(), _is.duration());
             cmdTuplet(n, _is.cr());
             }
       else {
@@ -1499,7 +1499,7 @@ printf("cmdTuplet: "); tuplet->dump();
       if (el) {
             select(el, SELECT_SINGLE, 0);
 //TODO-S            setNoteEntry(true);
-            _is.duration = baseLen;
+            _is.setDuration(baseLen);
             setPadState();
             }
       }
@@ -1693,7 +1693,7 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
 
 void Score::cmdEnterRest()
       {
-      cmdEnterRest(_is.duration);
+      cmdEnterRest(_is.duration());
       }
 
 //---------------------------------------------------------
