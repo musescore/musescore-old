@@ -30,7 +30,7 @@ class Score;
 class PagePreview : public QWidget {
       Q_OBJECT
       Score* _score;
-      QMatrix matrix;
+      QTransform matrix;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void resizeEvent(QResizeEvent*);

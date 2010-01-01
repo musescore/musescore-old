@@ -523,7 +523,7 @@ ScoreView::ScoreView(QWidget* parent)
       _score     = 0;
       dropTarget = 0;
       _editText  = 0;
-      _matrix    = QMatrix(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
+      _matrix    = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
       imatrix    = _matrix.inverted();
       _magIdx    = MAG_100;
 
@@ -1243,7 +1243,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       foreach(const QRect& r, vector)
             paint(r, p);
 
-      p.setMatrix(_matrix);
+      p.setTransform(_matrix);
       p.setClipping(false);
 
       cursor->draw(p);
@@ -1273,7 +1273,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                - QPoint(lrint(_matrix.dx()), lrint(_matrix.dy())));
             }
 
-      p.setMatrix(_matrix);
+      p.setTransform(_matrix);
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
@@ -1418,8 +1418,8 @@ void ScoreView::setViewRect(const QRectF& r)
       int dx   = -d.x();
       int dy   = -d.y();
       QApplication::sendPostedEvents(this, 0);
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       }
@@ -2044,8 +2044,8 @@ void ScoreView::zoom(int step, const QPoint& pos)
       int dx    = lrint(p3.x() * m);
       int dy    = lrint(p3.y() * m);
 
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
@@ -2084,8 +2084,8 @@ void ScoreView::wheelEvent(QWheelEvent* event)
             dy = event->delta() * n / 120;
             }
 
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), _matrix.dx() + dx, _matrix.dy() + dy);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
@@ -2246,8 +2246,8 @@ void ScoreView::setMag(double nmag)
       double deltamag = nmag / m;
       nmag *= (PDPI/DPI);
 
-      _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m21(), nmag,
-         _matrix.dx() * deltamag, _matrix.dy() * deltamag);
+      _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
       imatrix = _matrix.inverted();
       }
 
@@ -2268,7 +2268,7 @@ void ScoreView::setMag(int idx, double mag)
 
 void ScoreView::focusInEvent(QFocusEvent* event)
       {
-      mscore->setCurrentScoreView(static_cast<ScoreView*>(this));
+      mscore->setCurrentScoreView(this);
 
       if (mscore->splitScreen()) {
             if (!focusFrame) {
@@ -2456,6 +2456,14 @@ void ScoreView::cmd(const QAction* a)
             }
       else if (cmd == "find")
             sm->postEvent(new CommandEvent(cmd));
+      else if (cmd == "page-prev")
+            pagePrev();
+      else if (cmd == "page-next")
+            pageNext();
+      else if (cmd == "page-top")
+            pageTop();
+      else if (cmd == "page-end")
+            pageEnd();
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2679,8 +2687,8 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
       int dx   = d.x();
       int dy   = d.y();
 
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
 
@@ -3082,9 +3090,10 @@ qreal ScoreView::mag() const
 void ScoreView::setOffset(qreal x, qreal y)
       {
       double m = PDPI / DPI;
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), x * m, y * m);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), x*m, y*m, _matrix.m33());
       imatrix = _matrix.inverted();
+      emit viewRectChanged();
       }
 
 //---------------------------------------------------------

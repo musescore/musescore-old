@@ -77,7 +77,7 @@ class ScoreView : public QWidget {
       // in text edit mode text is framed
       TextB* _editText;
 
-      QMatrix _matrix, imatrix;
+      QTransform _matrix, imatrix;
       int _magIdx;
 
       QStateMachine* sm;
@@ -135,7 +135,6 @@ class ScoreView : public QWidget {
       virtual void focusInEvent(QFocusEvent*);
       virtual void focusOutEvent(QFocusEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
-
 
       void contextItem(Element*);
 
@@ -248,7 +247,7 @@ class ScoreView : public QWidget {
       void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
-      const QMatrix& matrix() const              { return _matrix; }
+      const QTransform& matrix() const           { return _matrix; }
       void setEditText(TextB* t)                 { _editText = t;      }
       TextB* editText() const                    { return _editText;   }
       qreal mag() const;
