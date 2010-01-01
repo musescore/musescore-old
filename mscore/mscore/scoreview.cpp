@@ -1186,7 +1186,7 @@ void ScoreView::setShadowNote(const QPointF& p)
       Instrument* instr = staff->part()->instrument();
       int noteheadGroup = 0;
       int line          = pos.line;
-      int noteHead      = score()->inputState().duration.headType();
+      int noteHead      = score()->inputState().duration().headType();
 
 
       if (instr->useDrumset) {

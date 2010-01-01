@@ -519,7 +519,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
             }
 
-      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration.fraction(), headGroup, stemDirection);
+      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration().fraction(), headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
       setLayout(note->chord()->measure());
 
@@ -2843,7 +2843,7 @@ void Score::cmdHalfDuration()
             return;
 
       ChordRest* cr = static_cast<ChordRest*>(el);
-      Duration d = _is.duration.shift(1);
+      Duration d = _is.duration().shift(1);
       if (!d.isValid() || (d.type() > Duration::V_64TH))
             return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
@@ -2854,7 +2854,7 @@ void Score::cmdHalfDuration()
             }
       else
             changeCRlen(cr, d);
-      _is.duration = d;
+      _is.setDuration(d);
       nextInputPos(cr, false);
       }
 
@@ -2873,7 +2873,7 @@ void Score::cmdDoubleDuration()
             return;
 
       ChordRest* cr = static_cast<ChordRest*>(el);
-      Duration d = _is.duration.shift(-1);
+      Duration d = _is.duration().shift(-1);
       if (!d.isValid() || (d.type() < Duration::V_WHOLE))
             return;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
@@ -2884,7 +2884,7 @@ void Score::cmdDoubleDuration()
             }
       else
             changeCRlen(cr, d);
-      _is.duration = d;
+      _is.setDuration(d);
       nextInputPos(cr, false);
       }
 

@@ -34,8 +34,9 @@ class Segment;
 //---------------------------------------------------------
 
 class InputState {
+      Duration _duration;      // currently duration
+
    public:
-      Duration duration;      // currently selected duration
       bool rest;
       int pad;
       int pitch;
@@ -49,10 +50,13 @@ class InputState {
       Slur* slur;
 
       InputState();
-      int voice() const     { return track % VOICES;   }
-      int tickLen() const   { return duration.ticks(); }
+      int voice() const                   { return track % VOICES;   }
+      int tickLen() const                 { return _duration.ticks(); }
       ChordRest* cr() const;
       int tick() const;
+      void setDuration(const Duration& d) { _duration = d; }
+      Duration duration() const           { return _duration; }
+      void setDots(int n)                 { _duration.setDots(n); }
       };
 
 #endif

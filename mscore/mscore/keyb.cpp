@@ -187,46 +187,46 @@ void Score::padToggle(int n)
       {
       switch (n) {
             case PAD_NOTE00:
-                  _is.duration = Duration::V_LONG;
+                  _is.setDuration(Duration::V_LONG);
                   break;
             case PAD_NOTE0:
-                  _is.duration = Duration::V_BREVE;
+                  _is.setDuration(Duration::V_BREVE);
                   break;
             case PAD_NOTE1:
-                  _is.duration = Duration::V_WHOLE;
+                  _is.setDuration(Duration::V_WHOLE);
                   break;
             case PAD_NOTE2:
-                  _is.duration = Duration::V_HALF;
+                  _is.setDuration(Duration::V_HALF);
                   break;
             case PAD_NOTE4:
-                  _is.duration = Duration::V_QUARTER;
+                  _is.setDuration(Duration::V_QUARTER);
                   break;
             case PAD_NOTE8:
-                  _is.duration = Duration::V_EIGHT;
+                  _is.setDuration(Duration::V_EIGHT);
                   break;
             case PAD_NOTE16:
-                  _is.duration = Duration::V_16TH;
+                  _is.setDuration(Duration::V_16TH);
                   break;
             case PAD_NOTE32:
-                  _is.duration = Duration::V_32ND;
+                  _is.setDuration(Duration::V_32ND);
                   break;
             case PAD_NOTE64:
-                  _is.duration = Duration::V_64TH;
+                  _is.setDuration(Duration::V_64TH);
                   break;
             case PAD_REST:
                   _is.rest = !_is.rest;
                   break;
             case PAD_DOT:
-                  if (_is.duration.dots() == 1)
-                        _is.duration.setDots(0);
+                  if (_is.duration().dots() == 1)
+                        _is.setDots(0);
                   else
-                        _is.duration.setDots(1);
+                        _is.setDots(1);
                   break;
             case PAD_DOTDOT:
-                  if (_is.duration.dots() == 2)
-                        _is.duration.setDots(0);
+                  if (_is.duration().dots() == 2)
+                        _is.setDots(0);
                   else
-                        _is.duration.setDots(2);
+                        _is.setDots(2);
                   break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
@@ -246,7 +246,7 @@ void Score::padToggle(int n)
             return;
 
       if (n >= PAD_NOTE00 && n <= PAD_NOTE64) {
-            _is.duration.setDots(0);
+            _is.setDots(0);
             //
             // if in "note enter" mode, reset
             // rest flag
@@ -267,7 +267,7 @@ void Score::padToggle(int n)
               Rest* r = static_cast<Rest*>(e);
               Duration d = r->duration();
               if (d.type() == Duration::V_MEASURE){
-                    _is.duration.setDots(0);
+                    _is.setDots(0);
                     setPadState();    // updates dot state
                     return;
               }
@@ -285,10 +285,10 @@ void Score::padToggle(int n)
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setDuration(_is.duration);
+            cr->setDuration(_is.duration());
             }
       else
-            changeCRlen(cr, _is.duration);
+            changeCRlen(cr, _is.duration());
       }
 
 //---------------------------------------------------------
@@ -303,9 +303,7 @@ void Score::setPadState(Element* e)
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
-            _is.duration  = chord->duration();
-            if (_is.duration.type() == Duration::V_MEASURE)
-                  _is.duration.setVal(chord->measure()->tickLen());
+            _is.setDuration(chord->duration());
             _is.rest      = false;
             _is.track     = note->track();
             _is.pitch     = note->pitch();
@@ -314,15 +312,18 @@ void Score::setPadState(Element* e)
             }
       else if (e->type() == REST) {
             Rest* rest   = static_cast<Rest*>(e);
-            _is.duration = rest->duration();
+            if (rest->duration().type() == Duration::V_MEASURE)
+                  _is.setDuration(Duration::V_QUARTER);
+            else
+                  _is.setDuration(rest->duration());
             _is.rest     = true;
             _is.track    = rest->track();
             _is.beamMode = rest->beamMode();
             }
       else {
             _is.rest     = false;
-            _is.duration.setDots(0);
-            _is.duration = Duration::V_INVALID;
+            _is.setDots(0);
+            _is.setDuration(Duration::V_INVALID);
             _is.noteType = NOTE_INVALID;
             _is.beamMode = BEAM_INVALID;
             }
@@ -346,18 +347,18 @@ void Score::setPadState(Element* e)
 void Score::setPadState()
       {
       getAction("pad-rest")->setChecked(_is.rest);
-      getAction("pad-dot")->setChecked(_is.duration.dots() == 1);
-      getAction("pad-dotdot")->setChecked(_is.duration.dots() == 2);
+      getAction("pad-dot")->setChecked(_is.duration().dots() == 1);
+      getAction("pad-dotdot")->setChecked(_is.duration().dots() == 2);
 
-      getAction("note-longa")->setChecked(_is.duration  == Duration::V_LONG);
-      getAction("note-breve")->setChecked(_is.duration  == Duration::V_BREVE);
-      getAction("pad-note-1")->setChecked(_is.duration  == Duration::V_WHOLE);
-      getAction("pad-note-2")->setChecked(_is.duration  == Duration::V_HALF);
-      getAction("pad-note-4")->setChecked(_is.duration  == Duration::V_QUARTER);
-      getAction("pad-note-8")->setChecked(_is.duration  == Duration::V_EIGHT);
-      getAction("pad-note-16")->setChecked(_is.duration == Duration::V_16TH);
-      getAction("pad-note-32")->setChecked(_is.duration == Duration::V_32ND);
-      getAction("pad-note-64")->setChecked(_is.duration == Duration::V_64TH);
+      getAction("note-longa")->setChecked(_is.duration()  == Duration::V_LONG);
+      getAction("note-breve")->setChecked(_is.duration()  == Duration::V_BREVE);
+      getAction("pad-note-1")->setChecked(_is.duration()  == Duration::V_WHOLE);
+      getAction("pad-note-2")->setChecked(_is.duration()  == Duration::V_HALF);
+      getAction("pad-note-4")->setChecked(_is.duration()  == Duration::V_QUARTER);
+      getAction("pad-note-8")->setChecked(_is.duration()  == Duration::V_EIGHT);
+      getAction("pad-note-16")->setChecked(_is.duration() == Duration::V_16TH);
+      getAction("pad-note-32")->setChecked(_is.duration() == Duration::V_32ND);
+      getAction("pad-note-64")->setChecked(_is.duration() == Duration::V_64TH);
 
       int voice = _is.voice();
       getAction("voice-1")->setChecked(voice == 0);
