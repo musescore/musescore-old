@@ -512,14 +512,14 @@ printf("sel range measure\n");
                   selState = SEL_STAFF;
                   if (!_selection->endSegment())
                         _selection->setEndSegment(cr->segment()->next());
+                  if (!_selection->startSegment())
+                        _selection->setStartSegment(cr->segment());
                   }
             else {
-printf("sel range ??\n");
                   select(e, SELECT_SINGLE, staffIdx);
                   return;
                   }
 
-printf("range %d-%d %d-%d\n", _selection->staffStart, _selection->staffEnd, _selection->tickStart(), _selection->tickEnd());
             if (activeIsFirst)
                   _selection->setActiveSegment(_selection->startSegment());
             else
