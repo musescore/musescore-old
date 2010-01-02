@@ -2021,14 +2021,12 @@ void ScoreView::zoom(int step, const QPoint& pos)
 
       if (step > 0) {
             for (int i = 0; i < step; ++i) {
-                   _mag += 0.1;
-                  //_mag *= 1.1;
+                   _mag *= 1.1;
                   }
             }
       else {
             for (int i = 0; i < -step; ++i) {
-                  _mag -= 0.1;
-                  // _mag *= 0.9;
+                  _mag /= 1.1;
                   }
             }
       if (_mag > 16.0)

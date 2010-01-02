@@ -4176,7 +4176,7 @@
         <aPitchRange>48-79</aPitchRange>
         <pPitchRange>48-93</pPitchRange>
         <channel>
-           <program>49</program>
+           <program>48</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4208,7 +4208,7 @@
         <aPitchRange>36-67</aPitchRange>
         <pPitchRange>36-90</pPitchRange>
         <channel>
-           <program>49</program>
+           <program>48</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4233,6 +4233,22 @@
           <program value="44"/>
           </channel>
         </instrument>
+     <instrument>
+        <name>Double Bass</name>
+        <short-name>Cb.</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-62</aPitchRange>
+        <pPitchRange>23-67</pPitchRange>
+        <channel>
+           <program>43</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="32"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
       <instrument>
         <name>Contrabasses</name>
         <short-name>Cbs.</short-name>
@@ -4240,7 +4256,23 @@
         <aPitchRange>28-62</aPitchRange>
         <pPitchRange>23-67</pPitchRange>
         <channel>
-           <program>49</program>
+           <program>48</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+      <instrument>
+        <name>Double Basses</name>
+        <short-name>Dbs.</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-62</aPitchRange>
+        <pPitchRange>23-67</pPitchRange>
+        <channel>
+           <program>48</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
