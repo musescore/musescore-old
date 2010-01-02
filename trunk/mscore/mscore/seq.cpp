@@ -531,14 +531,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       int driverState = driver->getState();
 
       if (driverState != state) {
-            if (state == START_PLAY && driverState == PLAY)
+            if ((state == STOP || state == START_PLAY) && driverState == PLAY)
                   startTransport();
-            else if (state == PLAY && driverState == STOP)
+            else if ((state == PLAY || state == START_PLAY) && driverState == STOP)
                   stopTransport();
-            else if (state == START_PLAY && driverState == STOP)
-                  stopTransport();
-            else if (state == STOP && driverState == PLAY)
-                  startTransport();
             else if (state != driverState)
                   printf("Seq: state transition %d -> %d ?\n",
                      state, driverState);
@@ -645,6 +641,7 @@ void Seq::collectEvents()
       foreach(Event* e, events)
             delete e;
       events.clear();
+      activeNotes.clear();
 
       cs->toEList(&events);
       endTick = 0;
@@ -657,6 +654,8 @@ void Seq::collectEvents()
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->setEndpos(endTick);
+      playlistChanged = false;
+      cs->setPlaylistDirty(false);
       }
 
 //---------------------------------------------------------
@@ -779,11 +778,14 @@ void Seq::setPos(int utick)
       {
       // send note off events
       foreach(const Event* n, activeNotes) {
+            if (n->type() != ME_NOTEON)
+                  continue;
             Event e(*n);
             e.setVelo(0);
             driver->putEvent(e, 0);
             }
       activeNotes.clear();
+
       playTime  = cs->utick2utime(utick);
       startTime = curTime() - playTime;
       playPos   = events.lowerBound(utick);

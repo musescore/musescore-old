@@ -595,6 +595,7 @@ class Score : public QObject {
       void addArticulation(Element*, Articulation* atr);
 
       bool playlistDirty();
+      void setPlaylistDirty(bool val) { _playlistDirty = val; }
       void changeTimeSig(int tick, int st);
 
       void cmd(const QAction*);
