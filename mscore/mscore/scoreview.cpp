@@ -2020,12 +2020,16 @@ void ScoreView::zoom(int step, const QPoint& pos)
       qreal _mag = mag();
 
       if (step > 0) {
-            for (int i = 0; i < step; ++i)
-                  _mag += 0.1;
+            for (int i = 0; i < step; ++i) {
+                  // _mag += 0.1;
+                  _mag *= 1.1;
+                  }
             }
       else {
-            for (int i = 0; i < -step; ++i)
-                  _mag -= 0.1;
+            for (int i = 0; i < -step; ++i) {
+                  // _mag -= 0.1;
+                  _mag *= 0.9;
+                  }
             }
       if (_mag > 16.0)
             _mag = 16.0;
@@ -2657,11 +2661,20 @@ void ScoreView::exitState()
 
 void ScoreView::contextPopup(QMouseEvent* ev)
       {
+printf("contextPopup\n");
       QPoint gp = ev->globalPos();
       startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
       if (e) {
-            _score->select(e, SELECT_SINGLE, 0);
+            bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
+            if (control) {
+                  if (!e->selected())
+                        _score->select(e, SELECT_ADD, 0);
+                  }
+            else
+                  _score->select(e, SELECT_SINGLE, 0);
+
+
             ElementType type = e->type();
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)
@@ -2748,7 +2761,6 @@ void ScoreView::doDragElement(QMouseEvent* ev)
 
 void ScoreView::select(QMouseEvent* ev)
       {
-printf("ScoreView::select\n");
       Qt::KeyboardModifiers keyState = ev->modifiers();
       ElementType type = curElement->type();
       int dragStaff = 0;
@@ -2780,7 +2792,6 @@ printf("ScoreView::select\n");
             curElement = 0;
       _score->setLayoutAll(false);
       _score->end();    // update
-printf("  -ScoreView::select\n");
       }
 
 //---------------------------------------------------------
