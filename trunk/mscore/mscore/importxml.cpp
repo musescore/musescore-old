@@ -2185,7 +2185,7 @@ static int nrOfGraceSegsReq(QDomNode n)
 
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
-      printf("xmlNote start tick=%d", tick);
+      printf("xmlNote start tick=%d\n", tick);
       QDomNode pn = e.parentNode();
       voice = 0;
       move  = 0;
@@ -2303,48 +2303,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else
                         printf("unknown stem direction %s\n", e.text().toLatin1().data());
                   }
-            else if (tag == "staff") {
+            else if (tag == "staff")
                   relStaff = s.toInt() - 1;
-                  //
-                  // Musicxml voices are counted for all staffs of an
-                  // instrument. They are not limited. In mscore voices are associated
-                  // with a staff. Every staff can have at most VOICES voices.
-                  // The following lines map musicXml voices to mscore voices.
-                  // If a voice crosses two staffs, this is expressed with the
-                  // "move" parameter in mscore.
-                  //
-                  // Musicxml voices are unique within a part, but not across parts.
-                  // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
-                  // the the staves of the part it belongs to.
-
-//                  printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
-                  int found = false;
-                  for (int s = 0; s < MAX_STAVES; ++s) {
-                        int v = 0;
-                        for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
-                              if (*i == voice) {
-                                    int d = relStaff - s;
-                                    relStaff = s;
-                                    move += d;
-                                    voice = v;
-//                                    printf(" found at s=%d", s);
-                                    found = true;
-                                    break;
-                                    }
-                              }
-                        }
-                  if (!found) {
-                        if (voicelist[relStaff].size() >= unsigned(VOICES))
-                              printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
-                                 staff, relStaff, voicelist[relStaff].size(), VOICES);
-                        else {
-                              voicelist[relStaff].push_back(voice);
-// printf(" append %d to voicelist[%d]\n", voice, relStaff);
-                              voice = voicelist[relStaff].size() -1;
-                              }
-                        }
-//                  printf(" after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
-                  }
             else if (tag == "beam") {
                   if (s == "begin") {
                         bm = BEAM_BEGIN;
@@ -2597,6 +2557,50 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             }
+
+      // Musicxml voices are counted for all staffs of an
+      // instrument. They are not limited. In mscore voices are associated
+      // with a staff. Every staff can have at most VOICES voices.
+      // The following lines map musicXml voices to mscore voices.
+      // If a voice crosses two staffs, this is expressed with the
+      // "move" parameter in mscore.
+
+      // Musicxml voices are unique within a part, but not across parts.
+      // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
+      // the the staves of the part it belongs to.
+
+      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
+      int found = false;
+      for (int s = 0; s < MAX_STAVES; ++s) {
+            int v = 0;
+            for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
+                  if (*i == voice) {
+                        int d = relStaff - s;
+                        relStaff = s;
+                        move += d;
+                        voice = v;
+                        printf(" -> found at s=%d\n", s);
+                        found = true;
+                        break;
+                        }
+                  }
+            } // for (int s ...
+      if (!found) {
+            if (voicelist[relStaff].size() >= unsigned(VOICES))
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                         staff, relStaff, voicelist[relStaff].size(), VOICES);
+            else {
+                  voicelist[relStaff].push_back(voice);
+                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
+                  voice = voicelist[relStaff].size() -1;
+                  }
+            }
+      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
+
+      int track = (staff + relStaff) * VOICES + voice;
+//      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
+//             staff, relStaff, VOICES, voice, track);
+
       int ticks = (AL::division * duration) / divisions;
 
       if (!grace && tick + ticks > maxtick)
@@ -2620,7 +2624,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // TODO: try to find out if this rest is part of a beam
             cr->setBeamMode(BEAM_NO);
 //            cr->setBeamMode(BEAM_AUTO);
-            cr->setTrack((staff + relStaff) * VOICES + voice);
+            cr->setTrack(track);
             ((Rest*)cr)->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
             s->add(cr);
@@ -2630,7 +2634,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
             note->setHeadGroup(headGroup);
-            int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
             // note->setStaffMove(move);
 
