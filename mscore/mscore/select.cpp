@@ -794,6 +794,25 @@ QByteArray Selection::staffMimeData() const
 
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
+
+            for (MeasureBase* mb = seg1->measure(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = static_cast<Measure*>(mb);
+                  if (seg2 && m->tick() >= seg2->tick())
+                        break;
+                  foreach(Element* e, *m->el()) {
+                        if (e->type() == HARMONY) {
+                              if ((e->staffIdx() != staffIdx) || (e->tick() < seg1->tick()))
+                                    continue;
+                              if (seg2 && (e->tick() >= seg2->tick()))
+                                    continue;
+                              e->write(xml);
+                              }
+                        }
+                  m->writeTuplets(xml, staffIdx);
+                  }
+
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
@@ -836,22 +855,6 @@ QByteArray Selection::staffMimeData() const
                                     if (l)
                                           l->write(xml);
                                     }
-                              }
-                        }
-                  }
-            for (MeasureBase* mb = seg1->measure(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = static_cast<Measure*>(mb);
-                  if (seg2 && m->tick() >= seg2->tick())
-                        break;
-                  foreach(Element* e, *m->el()) {
-                        if (e->type() == HARMONY) {
-                              if ((e->staffIdx() != staffIdx) || (e->tick() < seg1->tick()))
-                                    continue;
-                              if (seg2 && (e->tick() >= seg2->tick()))
-                                    continue;
-                              e->write(xml);
                               }
                         }
                   }
