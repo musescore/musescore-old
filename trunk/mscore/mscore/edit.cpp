@@ -1097,7 +1097,6 @@ void Score::deleteItem(Element* el)
 void Score::cmdRemoveTime(int tick, int len)
       {
       int etick = tick + len;
-      int idx = 0;
       foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
                   Slur* slur = static_cast<Slur*>(e);
@@ -1108,27 +1107,25 @@ void Score::cmdRemoveTime(int tick, int len)
                         undoRemoveElement(e);
                         }
                   }
-            ++idx;
-            }
-
-      int tick2 = tick + len;
-      foreach(Element* el, _gel) {
-            if (el->type() == SLUR) {
-                  Slur* s = (Slur*) el;
-                  if (s->tick() >= tick && s->tick2() < tick2)
-                        undoRemoveElement(el);
+            else if (e->isSLine()) {
+                  SLine* s = static_cast<SLine*>(e);
+                  if (s->tick() >= tick && s->tick2() < etick)
+                        undoRemoveElement(e);
                   }
-            else if (el->isSLine()) {
-                  SLine* s = (SLine*) el;
-                  if (s->tick() >= tick && s->tick2() < tick2)
-                        undoRemoveElement(el);
+            }
+      foreach (Beam* b, _beams) {
+            Element* e1 = b->elements().front();
+            Element* e2 = b->elements().back();
+            if ((e1->tick() >= tick && e1->tick() < etick)
+               || (e2->tick() >= tick && e2->tick() < etick)) {
+                  undoRemoveElement(b);
                   }
             }
 
       //-----------------
       AL::SigEvent e1 = _sigmap->timesig(tick + len);
       for (AL::ciSigEvent i = _sigmap->begin(); i != _sigmap->end(); ++i) {
-            if (i->first != 0 && i->first >= tick && (i->first < tick2)) {
+            if (i->first != 0 && i->first >= tick && (i->first < etick)) {
                   undoChangeSig(i->first, i->second, AL::SigEvent());
                   }
             }
@@ -1143,18 +1140,18 @@ void Score::cmdRemoveTime(int tick, int len)
       //-----------------
 
       for (AL::ciTEvent i = _tempomap->begin(); i != _tempomap->end(); ++i) {
-            if (i->first != 0 && i->first >= tick && (i->first < tick2))
+            if (i->first != 0 && i->first >= tick && (i->first < etick))
                   undoChangeTempo(i->first, i->second, AL::TEvent());
             }
       foreach(Staff* staff, _staves) {
             ClefList* cl = staff->clefList();
             KeyList*  kl = staff->keymap();
             for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick2) && i->first != 0)
+                  if (i->first >= tick && (i->first < etick) && i->first != 0)
                         undoChangeClef(staff, i->first, i->second, NO_CLEF);
                   }
             for (ciKeyList i = kl->begin(); i != kl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick2) && i->first != 0)
+                  if (i->first >= tick && (i->first < etick) && i->first != 0)
                         undoChangeKey(staff, i->first, i->second, KeySigEvent());
                   }
             }

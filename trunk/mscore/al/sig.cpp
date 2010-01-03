@@ -362,14 +362,15 @@ int SigEvent::read(QDomElement e, int fileDivision)
 
 void TimeSigMap::removeTime(int tick, int len)
       {
+printf("TimeSigMap::removeTime %d len %d\n", tick, len);
       TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-            // do not remove entry at tick 0
+            // entry at tick 0 is sticky
             if ((i->first >= tick) && (i->first != 0)) {
                   if (i->first >= tick + len)
                         tmp.add(i->first - len, i->second);
                   else
-                        printf("remove sig event\n");
+                        printf("TimeSigMap::remove sig event\n");
                   }
             else
                   tmp.add(i->first, i->second);
@@ -385,9 +386,11 @@ void TimeSigMap::removeTime(int tick, int len)
 
 void TimeSigMap::insertTime(int tick, int len)
       {
+printf("TimeSigMap::insertTime %d len %d\n", tick, len);
       TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick)
+            // entry at tick 0 is sticky
+            if (i->first >= tick && (i->first != 0))
                   tmp.add(i->first + len, i->second);
             else
                   tmp.add(i->first, i->second);

@@ -238,6 +238,7 @@ class Measure : public MeasureBase {
       Fraction fraction() const;
       void layoutChords1(Segment* segment, int startTrack);
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
+      void writeTuplets(Xml&, int staff) const;
       };
 
 extern void initLineList(char* ll, int key);

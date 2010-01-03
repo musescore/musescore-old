@@ -69,7 +69,7 @@ static const char* stateNames[] = {
       "Normal", "Drag", "DragObject", "Edit", "DragEdit",
       "Lasso",  "NoteEntry", "Mag", "Play", "Search"
       };
-      
+
 //---------------------------------------------------------
 //   CommandTransition
 //---------------------------------------------------------
@@ -2031,7 +2031,7 @@ void ScoreView::zoom(int step, const QPoint& pos)
             for (int i = 0; i < -step; ++i) {
                   _mag /= 1.1;
                   }
-            }      
+            }
       if (_mag > 16.0)
             _mag = 16.0;
       else if (_mag < 0.05)
@@ -2668,16 +2668,10 @@ printf("contextPopup\n");
       Element* e = elementNear(startMove);
       if (e) {
             bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
-            if (control) {
-                  if (!e->selected())
-                        _score->select(e, SELECT_ADD, 0);
+            if (!e->selected()) {
+                  bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
+                  _score->select(e, control ? SELECT_ADD : SELECT_SINGLE, 0);
                   }
-            else{
-                  if (!e->selected()){
-                    	_score->select(e, SELECT_SINGLE, 0);
-                  		}
-            	  }
-
             ElementType type = e->type();
             seq->stopNotes();       // stop now because we dont get a mouseRelease event
             if (type == MEASURE)

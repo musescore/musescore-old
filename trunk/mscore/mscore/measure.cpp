@@ -2117,6 +2117,30 @@ void Measure::adjustToLen(int ol, int nl)
       }
 
 //---------------------------------------------------------
+//   writeTuplets
+//---------------------------------------------------------
+
+void Measure::writeTuplets(Xml& xml, int staff) const
+      {
+      for (int level = 0; true; level++) {                // write tuplets
+            bool found = false;
+            foreach(Tuplet* tuplet, _tuplets) {
+                  if (tuplet->staffIdx() == staff) {
+                        int l = 0;
+                        for (Tuplet* t = tuplet->tuplet(); t; t = t->tuplet())
+                              ++l;
+                        if (l == level) {
+                              tuplet->write(xml);
+                              found = true;
+                              }
+                        }
+                  }
+            if (!found)
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -2158,22 +2182,9 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   el->write(xml);
                   }
             }
-      for (int level = 0; true; level++) {                // write tuplets
-            bool found = false;
-            foreach(Tuplet* tuplet, _tuplets) {
-                  if (tuplet->staffIdx() == staff) {
-                        int l = 0;
-                        for (Tuplet* t = tuplet->tuplet(); t; t = t->tuplet())
-                              ++l;
-                        if (l == level) {
-                              tuplet->write(xml);
-                              found = true;
-                              }
-                        }
-                  }
-            if (!found)
-                  break;
-            }
+
+      writeTuplets(xml, staff);
+
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
