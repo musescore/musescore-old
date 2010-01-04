@@ -43,52 +43,6 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 extern bool useFactorySettings;
 
 //---------------------------------------------------------
-//   LanguageItem
-//---------------------------------------------------------
-
-struct LanguageItem {
-      QString key;
-      QString name;
-      LanguageItem(const char* k, const char* n) {
-            key = QString::fromUtf8(k);
-            name = QString::fromUtf8(n);
-            }
-      };
-
-LanguageItem languages[] = {
-      LanguageItem("",      QT_TRANSLATE_NOOP("language","System")),
-      LanguageItem("af",    QT_TRANSLATE_NOOP("language","Afrikaans")),
-      LanguageItem("ar",    QT_TRANSLATE_NOOP("language","\x0627\x0644\x0639\x0631\x0628\x064a\x0629")),
-      LanguageItem("ca",    QT_TRANSLATE_NOOP("language","Catal\xe0")),
-      LanguageItem("cs",    QT_TRANSLATE_NOOP("language","Czech")),
-      LanguageItem("da",    QT_TRANSLATE_NOOP("language","Dansk")),
-      LanguageItem("de",    QT_TRANSLATE_NOOP("language","Deutsch")),
-      LanguageItem("el",    QT_TRANSLATE_NOOP("language","\x03b5\x03bb\x03bb\x03b7\x03bd\x03b9\x03ba\x03ac")),
-      LanguageItem("en_GB", QT_TRANSLATE_NOOP("language","English (GB)")),
-      LanguageItem("en_US", QT_TRANSLATE_NOOP("language","English (US)")),
-      LanguageItem("es",    QT_TRANSLATE_NOOP("language","Espa\xf1ol")),
-      LanguageItem("fi",    QT_TRANSLATE_NOOP("language","Finnish")),
-      LanguageItem("fr",    QT_TRANSLATE_NOOP("language","Fran\xe7ais")),
-      LanguageItem("gl",    QT_TRANSLATE_NOOP("language","Galego")),
-      LanguageItem("hi_IN", QT_TRANSLATE_NOOP("language","Hindi")),
-      LanguageItem("hu",    QT_TRANSLATE_NOOP("language","Hungary")),
-      LanguageItem("it",    QT_TRANSLATE_NOOP("language","Italiano")),
-      LanguageItem("ja",    QT_TRANSLATE_NOOP("language","Japanese")),
-      LanguageItem("nl",    QT_TRANSLATE_NOOP("language","Nederlands")),
-      LanguageItem("nb",    QT_TRANSLATE_NOOP("language","Norsk")),
-      LanguageItem("pl",    QT_TRANSLATE_NOOP("language","Polski")),
-      LanguageItem("pt",    QT_TRANSLATE_NOOP("language","Portugu\xeas")),
-      LanguageItem("pt_BR", QT_TRANSLATE_NOOP("language","Portugu\xeas brasileiro")),
-      LanguageItem("ro",    QT_TRANSLATE_NOOP("language","Rom\x00e2n\x0103")),
-      LanguageItem("ru",    QT_TRANSLATE_NOOP("language","\x0420\x0443\x0441\x0441\x043a\x0438\x0439")),
-      LanguageItem("sv",    QT_TRANSLATE_NOOP("language","Svenska")),
-      LanguageItem("th",    QT_TRANSLATE_NOOP("language","\x0e20\x0e32\x0e29\x0e32\x0e44\x0e17\x0e22")),
-      LanguageItem("tr",    QT_TRANSLATE_NOOP("language","T\xfcrk\xe7e")),
-      LanguageItem("uk",    QT_TRANSLATE_NOOP("language","Ukrajina")),
-      LanguageItem("zh_TW", QT_TRANSLATE_NOOP("language","\x7e41\x9ad4\x4e2d\x6587 (\x53f0\x7063)")),
-      };
-
-//---------------------------------------------------------
 //   appStyleSheet
 //---------------------------------------------------------
 
@@ -725,9 +679,9 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       language->clear();
       int curIdx = 0;
-      for(unsigned i = 0; i < sizeof(languages)/sizeof(*languages); ++i) {
-            language->addItem(languages[i].name, i);
-            if (languages[i].key == p->language)
+      for(unsigned i = 0; i < languages.size(); ++i) {
+            language->addItem(languages.at(i).name, i);
+            if (languages.at(i).key == p->language)
                   curIdx = i;
             }
       language->setCurrentIndex(curIdx);

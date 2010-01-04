@@ -1,5 +1,7 @@
 4.jan (ws)
       - do not allow to remove time signature at tick zero.
+      (la)
+      - add external file to list languages (languages.xml)
 3.jan (lv)
       - fix import of Gatti.xml
 2.jan.2010 (db)

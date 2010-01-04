@@ -69,6 +69,8 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
+QList<LanguageItem> languages;
+
 bool debugMode          = false;
 bool enableExperimental = false;
 
@@ -872,9 +874,9 @@ void MuseScore::helpBrowser()
       {
       QString lang;
       if (localeName.toLower() == "system")
-            lang = QLocale::system().name().left(2);
+            lang = QLocale::system().name();
       else
-            lang = localeName.left(2);
+            lang = localeName;
       if (debugMode)
             printf("open handbook for language <%s>\n", qPrintable(lang));
 
@@ -883,14 +885,18 @@ void MuseScore::helpBrowser()
             if (debugMode) {
                   printf("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
                   }
-            mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
-            if (!mscoreHelp.isReadable()) {
-                  QString info(tr("MuseScore handbook not found at: \n"));
-                  info += mscoreHelp.filePath();
-                  info += tr("\n\nFrom the \"Help\" menu try choosing \"Online Handbook\" instead.");
-                  QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
-                  return;
-                  }
+            lang = lang.left(2);      
+            mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));      
+            if(!mscoreHelp.isReadable()){
+                mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
+                if (!mscoreHelp.isReadable()) {
+                      QString info(tr("MuseScore handbook not found at: \n"));
+                      info += mscoreHelp.filePath();
+                      info += tr("\n\nFrom the \"Help\" menu try choosing \"Online Handbook\" instead.");
+                      QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
+                      return;
+                      }
+                }
             }
       QString p = mscoreHelp.filePath();
       p = p.replace(" ", "%20");    // HACK: why does'nt fromLocalFile() do this?
@@ -907,36 +913,37 @@ void MuseScore::helpBrowser1()
       {
       QString lang;
       if (localeName.toLower() == "system")
-            lang = QLocale::system().name().left(2);
+            lang = QLocale::system().name();
       else
-            lang = localeName.left(2);
+            lang = localeName;
       if (debugMode)
             printf("open online handbook for language <%s>\n", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");
-      if (lang == "de")
-            help = QString::fromUtf8("http://www.musescore.org/de/handbuch");
-      else if (lang == "es")
-            help = QString::fromUtf8("http://www.musescore.org/es/manual");
-      else if (lang == "fi")
-            help = QString::fromUtf8("http://www.musescore.org/fi/käsikirja");
-      else if (lang == "fr")
-            help = QString::fromUtf8("http://www.musescore.org/fr/manuel");
-      else if (lang == "gl")
-            help = QString::fromUtf8("http://www.musescore.org/gl/manual");
-      else if (lang == "it")
-            help = QString::fromUtf8("http://www.musescore.org/it/manuale");
-      else if (lang == "nb")
-            help = QString::fromUtf8("http://www.musescore.org/nb/håndbok");
-      else if (lang == "nl")
-            help = QString::fromUtf8("http://www.musescore.org/nl/handboek");
-      else if (lang == "pl")
-            help = QString::fromUtf8("http://www.musescore.org/pl/podręcznik");
-      else if (lang == "pt")
-            help = QString::fromUtf8("http://www.musescore.org/pt-br/manual");
-      else if (lang == "ru")
-            help = QString::fromUtf8("http://www.musescore.org/ru/cправочник");
-      else if (lang == "tr")
-            help = QString::fromUtf8("http://www.musescore.org/tr/kullanım");
+      //try to find an exact match
+      bool found = false;
+      for(int i = 0; i < languages.size(); ++i) {
+            if (languages.at(i).key == lang){
+                  QString handbook = languages.at(i).handbook;
+                  if(!handbook.isNull()){
+                      help = languages.at(i).handbook;
+                      found = true;
+                      }
+                  break;
+                  }
+            }
+      //try a to find a match on first two letters 
+      if(!found && lang.size() > 2){
+            lang = lang.left(2);
+            for(int i = 0; i < languages.size(); ++i) {
+                  if (languages.at(i).key == lang){
+                      QString handbook = languages.at(i).handbook;
+                      if(!handbook.isNull())
+                          help = languages.at(i).handbook;
+                      break;
+                      }
+                  }
+            }
+              
       //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578
       help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(revision.trimmed()).arg(QString(VERSION));
       QUrl url(help);
@@ -1770,8 +1777,10 @@ int main(int argc, char* av[])
       mscoreGlobalShare = getSharePath();
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
-
-      //
+      
+      //read languages list
+      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");   
+      
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
@@ -1912,6 +1921,43 @@ int main(int argc, char* av[])
       if (debugMode)
             printf("start event loop...\n");
       return qApp->exec();
+      }
+
+
+bool MuseScore::readLanguages(const QString& path)
+      {
+      languages.append(LanguageItem("", tr("System")));
+      QFile qf(path);
+      if (qf.exists()){
+          QDomDocument doc;
+          int line, column;
+          QString err;
+          if (!doc.setContent(&qf, false, &err, &line, &column)) {
+                QString error;
+                error.sprintf("error reading language file  %s at line %d column %d: %s\n",
+                   qPrintable(qf.fileName()), line, column, qPrintable(err));
+                QMessageBox::warning(0,
+                   QWidget::tr("MuseScore: Load languages failed:"),
+                   error,
+                   QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                return false;
+                }
+          
+          for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+                if(e.tagName() == "languages"){
+                      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+                           if (e.tagName() == "language") {
+                              QString code = e.attribute(QString("code"));
+                              QString name = e.attribute(QString("name"));
+                              QString handbook = e.attribute(QString("handbook"));
+                              languages.append(LanguageItem(code, name, handbook));  
+                              }
+                          }
+                      }
+                }
+          return true;
+        }
+        return false;
       }
 
 //---------------------------------------------------------

@@ -48,6 +48,7 @@ install(FILES
       mscore_tr.qm
       mscore_uk.qm
       mscore_zh_TW.qm
+      languages.xml
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 
