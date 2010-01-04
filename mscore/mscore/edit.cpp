@@ -208,7 +208,12 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
 
 ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       {
-      ChordRest* newcr = (ChordRest*)cr->clone();
+      ChordRest* newcr;
+      // change a RepeatMeasure() into an Rest()
+      if (cr->type() == REPEAT_MEASURE)
+            newcr = new Rest(*static_cast<Rest*>(cr));
+      else
+            newcr = static_cast<ChordRest*>(cr->clone());
       newcr->setDuration(d);
       newcr->setTuplet(cr->tuplet());
       newcr->setTick(tick);
