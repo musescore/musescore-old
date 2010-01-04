@@ -362,7 +362,7 @@ int SigEvent::read(QDomElement e, int fileDivision)
 
 void TimeSigMap::removeTime(int tick, int len)
       {
-printf("TimeSigMap::removeTime %d len %d\n", tick, len);
+// printf("TimeSigMap::removeTime %d len %d\n", tick, len);
       TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
             // entry at tick 0 is sticky
@@ -386,7 +386,7 @@ printf("TimeSigMap::removeTime %d len %d\n", tick, len);
 
 void TimeSigMap::insertTime(int tick, int len)
       {
-printf("TimeSigMap::insertTime %d len %d\n", tick, len);
+// printf("TimeSigMap::insertTime %d len %d\n", tick, len);
       TimeSigMap tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
             // entry at tick 0 is sticky

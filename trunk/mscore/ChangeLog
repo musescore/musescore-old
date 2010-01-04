@@ -1,3 +1,5 @@
+4.jan (ws)
+      - do not allow to remove time signature at tick zero.
 3.jan (lv)
       - fix import of Gatti.xml
 2.jan.2010 (db)
