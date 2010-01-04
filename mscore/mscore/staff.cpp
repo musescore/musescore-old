@@ -124,12 +124,24 @@ void Staff::cleanupBrackets()
       for (int i = 0; i < _brackets.size(); ++i) {
             if (_brackets[i]._bracket != NO_BRACKET) {
                   int span = _brackets[i]._bracketSpan;
-                  if (span > (n - index))
+                  if (span > (n - index)) {
                         span = n - index;
+                        _brackets[i]._bracketSpan = span;
+                        }
+                  }
+            }
+      for (int i = 0; i < _brackets.size(); ++i) {
+            if (_brackets[i]._bracket != NO_BRACKET) {
+                  int span = _brackets[i]._bracketSpan;
                   if (span <= 1)
                         _brackets[i] = BracketItem();
-                  else
-                        _brackets[i]._bracketSpan = span;
+                  else {
+                        // delete all other brackets with same span
+                        for (int k = i + 1; k < _brackets.size(); ++k) {
+                              if (span == _brackets[k]._bracketSpan)
+                                    _brackets[k] = BracketItem();
+                              }
+                        }
                   }
             }
       }
