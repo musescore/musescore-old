@@ -597,7 +597,7 @@ void ChordRest::toDefault()
 
 Fraction ChordRest::fraction() const
       {
-      if (_duration.type() == Duration::V_MEASURE) {
+      if (_duration.type() == Duration::V_MEASURE || _duration.type() == Duration::V_INVALID) {
             if (parent() == 0)
                   return AL::division * 4;
             return measure()->fraction();

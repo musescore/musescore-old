@@ -1468,10 +1468,10 @@ void Measure::moveTicks(int diff)
             for (int staff = 0; staff < staves; ++staff) {
                   const LyricsList* ll = segment->lyricsList(staff);
                   for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                        if (*i)
+                        if (*i) {
                               (*i)->setTick((*i)->tick() + diff);
-                              if((*i)->endTick() != 0){
-                                (*i)->setEndTick((*i)->endTick() + diff);
+                              if ((*i)->endTick() != 0)
+                                    (*i)->setEndTick((*i)->endTick() + diff);
                               }
                         }
                   }
