@@ -850,7 +850,6 @@ printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
                   tuplet = 0;
                   }
             else {
-                  td = cr->fraction();
                   printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
                   undoRemoveElement(cr);
                   if (seg->isEmpty())
