@@ -396,6 +396,13 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
+      if (ts->tick() == 0) {    // cannot remove time signature at tick 0
+            QMessageBox::information(0,
+               tr("MuseScore"),
+               tr("you cannot remove the first time signature")
+               );
+            return;
+            }
       undoFixTicks();
       // record old tick lengths, since they will be modified when time is added/removed
       QVector<int> tickLens;
