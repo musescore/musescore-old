@@ -1543,7 +1543,7 @@ void ExportLy::handleElement(Element* el)
 			{
 			    int nextorprev=0;
 
-			    if ((anchors[i+1].anchor != 0) and (anchors[i+i].anchor==el))
+			    if ((anchors[i+1].anchor != 0) and (anchors[i+1].anchor==el))
 				{
 
 				    Element* nextinstruct = anchors[i+1].instruct;
