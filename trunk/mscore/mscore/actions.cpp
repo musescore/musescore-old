@@ -874,11 +874,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "delete",
-         QT_TRANSLATE_NOOP("action","Clear"),
+         QT_TRANSLATE_NOOP("action","Delete"),
          Qt::Key_Delete,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action",""),
-         QT_TRANSLATE_NOOP("action","")
+         QT_TRANSLATE_NOOP("action","Delete"),
+         QT_TRANSLATE_NOOP("action","Delete contents of the selected measures")
          ),
       Shortcut(
          STATE_NORMAL,

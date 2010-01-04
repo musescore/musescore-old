@@ -859,11 +859,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>note head positon </source>
         <translation type="unfinished"></translation>
     </message>
@@ -911,6 +906,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>offtime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> ticks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3855,6 +3859,14 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toolbar1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toolbar2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7946,7 +7958,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clear</source>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete contents of the selected measures</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
