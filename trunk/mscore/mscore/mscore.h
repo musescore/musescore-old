@@ -62,10 +62,33 @@ class KeyEditor;
 class ChordStyleEditor;
 class UndoGroup;
 class Navigator;
+class LanguageItem;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
+
+//---------------------------------------------------------
+//   LanguageItem
+//---------------------------------------------------------
+
+struct LanguageItem {
+      QString key;
+      QString name;
+      QString handbook;
+      LanguageItem(const QString k, const QString n) {
+            key = k;
+            name = n;
+            handbook = QString::null;  
+            }
+      LanguageItem(const QString k, const QString n, const QString h) {
+            key = k;
+            name = n;
+            handbook = h;
+            }
+      };
+
+extern QList<LanguageItem> languages;
 
 //---------------------------------------------------------
 //   AboutBoxDialog
@@ -345,7 +368,7 @@ class MuseScore : public QMainWindow {
       int appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
-	void cmdAppendMeasures(int);
+	    void cmdAppendMeasures(int);
       bool midiinEnabled() const;
       bool playEnabled() const;
       Score* currentScore() const { return cs; }
@@ -386,6 +409,7 @@ class MuseScore : public QMainWindow {
       void loadPlugins();
       ScoreState state() const { return _sstate; }
       void changeState(ScoreState);
+      bool readLanguages(const QString& path);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
