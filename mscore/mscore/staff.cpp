@@ -114,6 +114,27 @@ void Staff::addBracket(BracketItem b)
       }
 
 //---------------------------------------------------------
+//   cleanupBrackets
+//---------------------------------------------------------
+
+void Staff::cleanupBrackets()
+      {
+      int index = idx();
+      int n = _score->nstaves();
+      for (int i = 0; i < _brackets.size(); ++i) {
+            if (_brackets[i]._bracket != NO_BRACKET) {
+                  int span = _brackets[i]._bracketSpan;
+                  if (span > (n - index))
+                        span = n - index;
+                  if (span <= 1)
+                        _brackets[i] = BracketItem();
+                  else
+                        _brackets[i]._bracketSpan = span;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   trackName
 //---------------------------------------------------------
 
