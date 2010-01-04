@@ -144,6 +144,12 @@ Score* Score::createExcerpt(Excerpt* excerpt)
                   }
             s->parts()->front()->setShortName("");
             }
+      //
+      // remove all brackets with span <= 1
+      //
+      foreach (Staff* staff, s->staves()) {
+            staff->cleanupBrackets();
+            }
 
       s->renumberMeasures();
       s->setCreated(true);
