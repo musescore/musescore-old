@@ -136,9 +136,13 @@ Score* Score::createExcerpt(Excerpt* excerpt)
             txt->setText(excerpt->title());
             measure->add(txt);
             }
-      if ((s->parts()->size() == 1) && !excerpt->title().isEmpty()) {
-            // remove long instrument name and replace with 10 spaces
-            s->parts()->front()->setLongName(QString("          "));
+
+      if ((s->parts()->size() == 1)) {
+             if (!excerpt->title().isEmpty()) {
+                  // remove long instrument name and replace with 10 spaces
+                  s->parts()->front()->setLongName(QString("          "));
+                  }
+            s->parts()->front()->setShortName("");
             }
 
       s->renumberMeasures();
