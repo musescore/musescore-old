@@ -115,7 +115,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%d,%d) len %ld <%s> char0: %02x\n",
+printf("read SimpletextObj(%d,%d) len %zd <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
@@ -1204,7 +1204,7 @@ int BasicDurationalObj::ticks() const
       {
       if (noDuration)
             return 0;
-      int len;
+      int len = 0;
       switch (t) {
             case D1:          len = 4 * AL::division; break;
             case D2:          len = 2 * AL::division; break;

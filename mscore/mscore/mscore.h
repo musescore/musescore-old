@@ -79,7 +79,7 @@ struct LanguageItem {
       LanguageItem(const QString k, const QString n) {
             key = k;
             name = n;
-            handbook = QString::null;  
+            handbook = QString::null;
             }
       LanguageItem(const QString k, const QString n, const QString h) {
             key = k;
@@ -204,8 +204,6 @@ class MuseScore : public QMainWindow {
 
       QMenu* menuDisplay;
       QMenu* openRecent;
-
-      Palette* notePalette;
 
       MagBox* mag;
       QAction* playId;

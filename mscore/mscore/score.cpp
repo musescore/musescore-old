@@ -413,7 +413,7 @@ bool Score::read(QString name)
 //   write
 //---------------------------------------------------------
 
-void Score::write(Xml& xml, bool autosave)
+void Score::write(Xml& xml, bool /*autosave*/)
       {
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);

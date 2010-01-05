@@ -609,11 +609,11 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
 //   keysig
 //---------------------------------------------------------
 
-int NewWizardPage5::keysig() const
+KeySigEvent NewWizardPage5::keysig() const
       {
-      int idx = sp->getSelectedIdx();
+      int idx    = sp->getSelectedIdx();
       Element* e = sp->element(idx);
-      return e->subtype();
+      return static_cast<KeySig*>(e)->keySigEvent();
       }
 
 //---------------------------------------------------------
@@ -674,7 +674,7 @@ NewWizard::NewWizard(QWidget* parent)
     setOption(QWizard::CancelButtonOnLeft, true);
     setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
     setOption(QWizard::HaveNextButtonOnLastPage, true);
-    
+
 
       p1 = new NewWizardPage1;
       p2 = new NewWizardPage2;

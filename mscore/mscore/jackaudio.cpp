@@ -252,7 +252,7 @@ int JackAudio::framePos() const
       }
 
 
-static int bufsize_callback(jack_nframes_t n, void*)
+static int bufsize_callback(jack_nframes_t /*n*/, void*)
       {
 //      printf("JACK: buffersize changed %d\n", n);
       return 0;

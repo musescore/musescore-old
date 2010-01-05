@@ -54,7 +54,7 @@ class ScoreView : public QWidget {
       Q_OBJECT
 
       enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
-            NOTE_ENTRY, MAG, PLAY, SEARCH, STATES
+            NOTE_ENTRY, MAG, PLAY, SEARCH, ENTRY_PLAY, STATES
             };
 
       Score* _score;

@@ -100,6 +100,7 @@ class Tuplet : public DurationElement {
       int actualNotes() const       { return _ratio.numerator();  }
 
       const QList<DurationElement*>& elements() const { return _elements; }
+      int lastTick() const          { return _elements.last()->tick(); }
       void clear()                  { _elements.clear(); }
 
       virtual void layout();
