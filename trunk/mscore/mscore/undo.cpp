@@ -57,6 +57,7 @@
 #include "dynamics.h"
 #include "seq.h"
 #include "page.h"
+#include "keysig.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -1365,6 +1366,27 @@ void ChangeKey::redo()
             }
       if (n.isValid())
             (*kl)[tick] = n;
+      }
+
+//---------------------------------------------------------
+//   ChangeKeySig
+//---------------------------------------------------------
+
+ChangeKeySig::ChangeKeySig(KeySig* _keysig, KeySigEvent _ks)
+      {
+      keysig = _keysig;
+      ks     = _ks;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeKeySig::flip()
+      {
+      KeySigEvent oe = keysig->keySigEvent();
+      keysig->setSubtype(ks);
+      ks = oe;
       }
 
 //---------------------------------------------------------

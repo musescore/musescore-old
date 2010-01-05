@@ -712,7 +712,7 @@ int pitch2tpc(int pitch, int key)
             {  14, 21, 16, 23, 18, 25, 20, 15, 22, 17, 24, 19 },     // Fis
             {  26, 21, 16, 23, 18, 25, 20, 15, 22, 17, 24, 19 },     // Cis
             };
-printf("pitch2tpc %d(%d) %d = %d\n", pitch, step, key, ptab[key+7][step]);
+// printf("pitch2tpc %d(%d) %d = %d\n", pitch, step, key, ptab[key+7][step]);
       return ptab[key+7][step];
       }
 
