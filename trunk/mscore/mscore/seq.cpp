@@ -326,6 +326,10 @@ void Seq::stop()
       if (!driver)
             return;
       driver->stopTransport();
+      cv->setCursorOn(false);
+      cs->setLayoutAll(false);
+      cs->setUpdateAll();
+      cs->end();
       }
 
 //---------------------------------------------------------
@@ -346,10 +350,11 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
-      cv->setCursorOn(false);
+#if 0
       cs->setLayoutAll(false);
       cs->setUpdateAll();
       cs->end();
+#endif
       }
 
 //---------------------------------------------------------

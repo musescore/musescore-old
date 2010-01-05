@@ -1117,11 +1117,6 @@ void ScoreView::moveCursor()
             track = 0;
 
       double d = cursor->spatium() * .5;
-      if (track == cursor->track() && cursor->tick() == _score->inputPos()) {
-            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
-            return;
-            }
-
       cursor->setTrack(track);
       cursor->setTick(_score->inputPos());
 
@@ -1130,7 +1125,6 @@ void ScoreView::moveCursor()
             moveCursor(segment, track / VOICES);
             return;
             }
-// printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
       }
 
 void ScoreView::moveCursor(Segment* segment, int staffIdx)
@@ -1166,8 +1160,8 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
             h += y2;
             }
       cursor->setHeight(h);
-      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setTick(segment->tick());
+      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       }
 
 //---------------------------------------------------------
@@ -2586,7 +2580,6 @@ void ScoreView::textUndoLevelAdded()
 
 void ScoreView::startNoteEntry()
       {
-printf("startNoteEntry\n");
       _score->inputState()._segment = 0;
       Note* note  = 0;
       Element* el = _score->selection()->activeCR() ? _score->selection()->activeCR() : _score->selection()->element();
@@ -2594,7 +2587,6 @@ printf("startNoteEntry\n");
             int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
             if (el == 0) {
-printf("no note or rest selected 1\n");
                   return;
                   }
             }
@@ -2609,12 +2601,12 @@ printf("no note or rest selected 1\n");
       _score->select(el, SELECT_SINGLE, 0);
       _score->inputState().noteEntryMode = true;
       _score->setPadState();
+      setCursorOn(true);
       moveCursor();
       _score->inputState().rest = false;
       getAction("pad-rest")->setChecked(false);
       setMouseTracking(true);
       shadowNote->setVisible(true);
-      setCursorOn(true);
       dragElement = 0;
       //
       // TODO: check for valid duration
