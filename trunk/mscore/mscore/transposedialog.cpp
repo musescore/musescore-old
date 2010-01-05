@@ -30,6 +30,7 @@
 #include "pitchspelling.h"
 #include "measure.h"
 #include "undo.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -49,7 +50,8 @@ void Score::transpose(Note* n, int diff)
       {
       int npitch = n->pitch() + diff;
       int d      = diff < 0 ? -diff : diff;
-      int tpc    = (d % 12) == 0 ? n->tpc() : pitch2tpc(npitch, 0);
+      KeySigEvent key = n->staff()->key(n->chord()->tick());
+      int tpc    = (d % 12) == 0 ? n->tpc() : pitch2tpc(npitch, key.accidentalType);
       int acc    = (d % 12) == 0 ? n->userAccidental() : 0;
       undoChangePitch(n, npitch, tpc, acc);
       }
@@ -111,6 +113,34 @@ void Score::transpose()
             startTrack = 0;
             endTrack   = nstaves() * VOICES;
             }
+
+      if (transposeKeys) {
+            for (int staffIdx = _selection->staffStart; staffIdx < _selection->staffEnd; ++staffIdx) {
+                  KeyList* km = staff(staffIdx)->keymap();
+                  for (iKeyList ke = km->lower_bound(_selection->tickStart());
+                     ke != km->lower_bound(_selection->tickEnd()); ++ke) {
+                        KeySigEvent oKey  = ke->second;
+                        int tick  = ke->first;
+                        int nKey  = transposeKey(oKey.accidentalType, diff);
+                        undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
+                        }
+                  for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                        if (s->subtype() != Segment::SegKeySig)
+                              continue;
+                        if (s->tick() < _selection->tickStart())
+                              continue;
+                        if (s->tick() >= _selection->tickEnd())
+                              break;
+                        KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
+                        if (ks) {
+                              KeySigEvent key = km->key(s->tick());
+                              KeySigEvent okey = km->key(s->tick()-1);
+                              ks->setSig(okey.accidentalType, key.accidentalType);
+                              }
+                        }
+                  }
+            }
+
       for (int st = startTrack; st < endTrack; ++st) {
             for (Segment* segment = _selection->startSegment(); segment && segment != _selection->endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
@@ -155,23 +185,10 @@ void Score::transpose()
                   }
             }
 
-      if (transposeKeys) {
-            for (int staffIdx = _selection->staffStart; staffIdx < _selection->staffEnd; ++staffIdx) {
-                  KeyList* km = staff(staffIdx)->keymap();
-                  for (iKeyList ke = km->lower_bound(_selection->tickStart());
-                     ke != km->lower_bound(_selection->tickEnd()); ++ke) {
-                        KeySigEvent oKey  = ke->second;
-                        int tick  = ke->first;
-                        int nKey  = transposeKey(oKey.accidentalType, diff);
-                        undoChangeKey(staff(staffIdx), tick, oKey, nKey);
-                        }
-                  }
-            }
-      //
       // do not respell if transposing a full octave
       //
       if (!fullOctave) {
-            spell(_selection->staffStart, _selection->staffEnd, _selection->startSegment(), _selection->endSegment());
+//            spell(_selection->staffStart, _selection->staffEnd, _selection->startSegment(), _selection->endSegment());
             }
       }
 
@@ -184,6 +201,23 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
+      KeyList* km = staff(staffIdx)->keymap();
+      for (iKeyList ke = km->begin(); ke != km->end(); ++ke) {
+            KeySigEvent oKey  = ke->second;
+            int tick  = ke->first;
+            int nKey  = transposeKey(oKey.accidentalType, diff);
+            undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
+            }
+      for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+            if (s->subtype() != Segment::SegKeySig)
+                  continue;
+            KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
+            if (ks) {
+                  KeySigEvent key  = km->key(s->tick());
+                  KeySigEvent okey = km->key(s->tick()-1);
+                  ks->setSig(okey.accidentalType, key.accidentalType);
+                  }
+            }
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -213,13 +247,6 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                   undoTransposeHarmony(harmony, diff);
                   }
 #endif
-            }
-      KeyList* km = staff(staffIdx)->keymap();
-      for (iKeyList ke = km->begin(); ke != km->end(); ++ke) {
-            KeySigEvent oKey  = ke->second;
-            int tick  = ke->first;
-            int nKey  = transposeKey(oKey.accidentalType, diff);
-            undoChangeKey(staff(staffIdx), tick, oKey, nKey);
             }
       // spell(staffIdx, staffIdx+1, _selection->startSegment(), _selection->endSegment());
       spell();
