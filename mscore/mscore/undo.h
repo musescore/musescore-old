@@ -60,6 +60,7 @@ struct PageFormat;
 class TextStyle;
 class Tuplet;
 class UndoGroup;
+class KeySig;
 
 //---------------------------------------------------------
 //   UndoCommand
@@ -453,6 +454,22 @@ class ChangeKey : public UndoCommand {
       ChangeKey(Staff*, int tick, KeySigEvent oldKeySig, KeySigEvent newKeySig);
       virtual void undo();
       virtual void redo();
+      };
+
+//---------------------------------------------------------
+//   ChangeKeySig
+//---------------------------------------------------------
+
+class ChangeKeySig : public UndoCommand {
+      KeySig* keysig;
+      KeySigEvent ks;
+
+      void flip();
+
+   public:
+      ChangeKeySig(KeySig*, KeySigEvent newKeySig);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
       };
 
 //---------------------------------------------------------

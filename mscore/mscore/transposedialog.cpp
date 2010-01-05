@@ -133,9 +133,10 @@ void Score::transpose()
                               break;
                         KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
                         if (ks) {
-                              KeySigEvent key = km->key(s->tick());
+                              KeySigEvent key  = km->key(s->tick());
                               KeySigEvent okey = km->key(s->tick()-1);
-                              ks->setSig(okey.accidentalType, key.accidentalType);
+                              key.naturalType  = okey.accidentalType;
+                              _undo->push(new ChangeKeySig(ks, key));
                               }
                         }
                   }
@@ -213,9 +214,10 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                   continue;
             KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
             if (ks) {
-                  KeySigEvent key  = km->key(s->tick());
+                  KeySigEvent key = km->key(s->tick());
                   KeySigEvent okey = km->key(s->tick()-1);
-                  ks->setSig(okey.accidentalType, key.accidentalType);
+                  key.naturalType = okey.accidentalType;
+                  _undo->push(new ChangeKeySig(ks, key));
                   }
             }
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
