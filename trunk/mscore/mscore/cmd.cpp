@@ -644,9 +644,15 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       int track        = chord->track();
 
       Segment::SegmentType st = Segment::SegGrace;
-      seg = measure->createSegment(st, tick);
-
-      undoAddElement(seg);
+      Segment* s = seg->prev();
+      while (s && s->subtype() == st && s->element(track))
+            s = s->prev();
+      if (s && (s->subtype() == st) && (!s->element(track)))
+            seg = s;
+      else {
+            seg = measure->createSegment(st, tick);
+            undoAddElement(seg);
+            }
       double mag = staff(track/VOICES)->mag() * styleD(ST_graceNoteMag);
 
       Note* note = new Note(this);
@@ -713,9 +719,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         Note* note = new Note(this);
                         nr = note;
                         note->setTrack(track);
-                        note->setPitch(pitch);
                         note->setHeadGroup(headGroup);
-                        mscore->play(note);
 
                         if (tie) {
                               tie->setEndNote(note);
@@ -728,6 +732,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->setTuplet(cr->tuplet());
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
+                        note->setPitch(pitch);
+                        mscore->play(note);
                         ncr = chord;
                         if (i+1 < n) {
                               tie = new Tie(this);
@@ -745,9 +751,6 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         }
                   ncr->setParent(seg);
                   undoAddElement(ncr);
-
-                  if (nr->type() == NOTE)
-                        spell((Note*)nr);
                   tick += ncr->ticks();
                   }
 

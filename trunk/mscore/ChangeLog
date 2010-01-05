@@ -1,3 +1,9 @@
+5.jan (ws)
+      - better pitch spelling during note input
+      - start with reasonable sized navigator window
+      - fix: key signature crash
+      - fix: grace note spacing on multi-staves
+      - fix: Delete part of tuplet corrupts file
 4.jan (ws)
       - do not allow to remove time signature at tick zero.
       (la)

@@ -679,7 +679,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       language->clear();
       int curIdx = 0;
-      for(unsigned i = 0; i < languages.size(); ++i) {
+      for(int i = 0; i < languages.size(); ++i) {
             language->addItem(languages.at(i).name, i);
             if (languages.at(i).key == p->language)
                   curIdx = i;

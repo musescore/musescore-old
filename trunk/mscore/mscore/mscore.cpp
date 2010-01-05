@@ -417,6 +417,9 @@ MuseScore::MuseScore()
       navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       mainWindow->addWidget(navigator);
       navigator->setShown(preferences.showNavigator);
+      QList<int> sizes;
+      sizes << 500 << 100;
+      mainWindow->setSizes(sizes);
 
       splitter = new QSplitter;
 
@@ -885,8 +888,8 @@ void MuseScore::helpBrowser()
             if (debugMode) {
                   printf("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
                   }
-            lang = lang.left(2);      
-            mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));      
+            lang = lang.left(2);
+            mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
             if(!mscoreHelp.isReadable()){
                 mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
                 if (!mscoreHelp.isReadable()) {
@@ -931,7 +934,7 @@ void MuseScore::helpBrowser1()
                   break;
                   }
             }
-      //try a to find a match on first two letters 
+      //try a to find a match on first two letters
       if(!found && lang.size() > 2){
             lang = lang.left(2);
             for(int i = 0; i < languages.size(); ++i) {
@@ -943,7 +946,7 @@ void MuseScore::helpBrowser1()
                       }
                   }
             }
-              
+
       //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578
       help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(revision.trimmed()).arg(QString(VERSION));
       QUrl url(help);
@@ -1777,10 +1780,10 @@ int main(int argc, char* av[])
       mscoreGlobalShare = getSharePath();
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
-      
+
       //read languages list
-      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");   
-      
+      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
+
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
@@ -1942,7 +1945,7 @@ bool MuseScore::readLanguages(const QString& path)
                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
                 return false;
                 }
-          
+
           for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
                 if(e.tagName() == "languages"){
                       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -1950,7 +1953,7 @@ bool MuseScore::readLanguages(const QString& path)
                               QString code = e.attribute(QString("code"));
                               QString name = e.attribute(QString("name"));
                               QString handbook = e.attribute(QString("handbook"));
-                              languages.append(LanguageItem(code, name, handbook));  
+                              languages.append(LanguageItem(code, name, handbook));
                               }
                           }
                       }
@@ -2333,6 +2336,9 @@ void MuseScore::readSettings()
       {
       if (useFactorySettings) {
             resize(QSize(800, 600));
+            QList<int> sizes;
+            sizes << 500 << 100;
+            mainWindow->setSizes(sizes);
             return;
             }
       QSettings settings;

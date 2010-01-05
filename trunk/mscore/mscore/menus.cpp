@@ -89,7 +89,7 @@ void MuseScore::showPalette(bool visible)
             //    notes
             //-----------------------------------
 
-            notePalette = new Palette;
+            Palette* notePalette = new Palette;
             notePalette->setName(tr("Grace Notes"));
             notePalette->setGrid(27, 40);
             notePalette->setDrawGrid(true);
@@ -1189,7 +1189,6 @@ void MuseScore::updateDrumset()
 
 void MuseScore::drumPaletteSelected(int idx)
       {
-printf("drumPaletteSelected %d\n", idx);
       if (cs == 0)
             return;
       InputState& padState = cs->inputState();

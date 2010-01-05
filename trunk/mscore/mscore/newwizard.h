@@ -25,6 +25,8 @@
 #include "ui_timesigwizard.h"
 #include "ui_newwizard.h"
 
+#include "key.h"
+
 class Score;
 class Palette;
 
@@ -167,7 +169,7 @@ class NewWizardPage5 : public QWizardPage {
    public:
       NewWizardPage5(QWidget* parent = 0);
       virtual bool isComplete() const { return true; }
-      int keysig() const;
+      KeySigEvent keysig() const;
       void init();
       };
 
@@ -201,7 +203,7 @@ class NewWizard : public QWizard {
       QString composer() const           { return p1->composer();    }
       QString poet() const               { return p1->poet();        }
       QString copyright() const          { return p1->copyright();   }
-      int keysig() const                 { return p5->keysig();      }
+      KeySigEvent keysig() const                 { return p5->keysig();      }
       bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
       };
 

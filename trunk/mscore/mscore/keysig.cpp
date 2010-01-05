@@ -125,7 +125,7 @@ void KeySig::layout()
       char t2  = keySigEvent().naturalType;
       qreal xo = 0.0;
 
-      int accidentals, naturals;
+      int accidentals = 0, naturals = 0;
       switch(qAbs(t1)) {
             case 7: accidentals = 0x7f; break;
             case 6: accidentals = 0x3f; break;

@@ -1208,7 +1208,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   chord->setTrack(staffIdx * VOICES + voice);
                   Segment* s = measure->getSegment(chord);
                   s->add(chord);
-                  int len = 0x7fffffff;      // MAXINT;
+                  int len = INT_MAX;
             	foreach (MNote* n, notes) {
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();

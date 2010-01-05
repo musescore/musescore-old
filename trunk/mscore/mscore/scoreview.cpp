@@ -67,7 +67,7 @@
 
 static const char* stateNames[] = {
       "Normal", "Drag", "DragObject", "Edit", "DragEdit",
-      "Lasso",  "NoteEntry", "Mag", "Play", "Search"
+      "Lasso",  "NoteEntry", "Mag", "Play", "Search", "EntryPlay"
       };
 
 //---------------------------------------------------------
@@ -556,21 +556,20 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new ScoreViewDragTransition(this, states[DRAG]));      // ->stateDrag
       s->addTransition(new ScoreViewLassoTransition(this, states[LASSO]));    // ->stateLasso
       s->addTransition(new ElementDragTransition(this, states[DRAG_OBJECT])); // ->stateDragObject
-      ct = new CommandTransition("note-input", states[NOTE_ENTRY]);           // ->noteEntry
-      s->addTransition(ct);
+      s->addTransition(new CommandTransition("note-input", states[NOTE_ENTRY])); // ->noteEntry
       ct = new CommandTransition("escape", s);                                // escape
       connect(ct, SIGNAL(triggered()), SLOT(deselectAll()));
       s->addTransition(ct);
       ct = new CommandTransition("edit", states[EDIT]);                       // ->edit harmony/slur/lyrics
       connect(ct, SIGNAL(triggered()), SLOT(startEdit()));
       s->addTransition(ct);
-      s->addTransition(new CommandTransition("mag", states[MAG]));
-      s->addTransition(new CommandTransition("play", states[PLAY]));
-      s->addTransition(new CommandTransition("find", states[SEARCH]));
-      ct = new CommandTransition("paste", 0);                     // paste
+      s->addTransition(new CommandTransition("mag", states[MAG]));            // ->mag
+      s->addTransition(new CommandTransition("play", states[PLAY]));          // ->play
+      s->addTransition(new CommandTransition("find", states[SEARCH]));        // ->search
+      ct = new CommandTransition("paste", 0);                                 // paste
       connect(ct, SIGNAL(triggered()), SLOT(normalPaste()));
       s->addTransition(ct);
-      ct = new CommandTransition("copy", 0);                      // copy
+      ct = new CommandTransition("copy", 0);                                  // copy
       connect(ct, SIGNAL(triggered()), SLOT(normalCopy()));
       s->addTransition(ct);
 
@@ -642,6 +641,7 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(exited()), SLOT(endNoteEntry()));
       s->addTransition(new NoteEntryDragTransition(this));                          // mouse drag
       s->addTransition(new NoteEntryButtonTransition(this));                        // mouse button
+      s->addTransition(new CommandTransition("play", states[ENTRY_PLAY]));     // ->entryPlay
 
       // setup normal drag canvas state
       s = states[DRAG];
@@ -670,6 +670,18 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new CommandTransition("escape", states[NORMAL]));
       s->addTransition(new CommandTransition("find", states[NORMAL]));
       connect(s, SIGNAL(entered()), mscore, SLOT(setSearchState()));
+
+      // setup editPlay state
+      s = states[ENTRY_PLAY];
+      s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+      s->addTransition(new CommandTransition("play", states[NOTE_ENTRY]));
+      s->addTransition(new CommandTransition("escape", states[NOTE_ENTRY]));
+      st = new QSignalTransition(seq, SIGNAL(stopped()));
+      st->setTargetState(states[NOTE_ENTRY]);
+      s->addTransition(st);
+      connect(s, SIGNAL(entered()), mscore, SLOT(setPlayState()));
+      connect(s, SIGNAL(entered()), seq, SLOT(start()));
+      connect(s, SIGNAL(exited()),  seq, SLOT(stop()));
 
 
       sm->addState(stateActive);
@@ -2574,6 +2586,7 @@ void ScoreView::textUndoLevelAdded()
 
 void ScoreView::startNoteEntry()
       {
+printf("startNoteEntry\n");
       _score->inputState()._segment = 0;
       Note* note  = 0;
       Element* el = _score->selection()->activeCR() ? _score->selection()->activeCR() : _score->selection()->element();
@@ -2664,7 +2677,6 @@ printf("contextPopup\n");
       startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
       if (e) {
-            bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
             if (!e->selected()) {
                   bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
                   _score->select(e, control ? SELECT_ADD : SELECT_SINGLE, 0);

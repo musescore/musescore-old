@@ -441,7 +441,7 @@ printf("sel range measure\n");
                         }
                   else if (_selection->state() == SEL_SINGLE) {
                         Element* oe = _selection->element();
-                        if (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD) {
+                        if (oe && (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD)) {
                               if (oe->type() == NOTE)
                                     oe = oe->parent();
                               ChordRest* ocr = static_cast<ChordRest*>(oe);

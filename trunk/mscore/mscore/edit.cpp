@@ -177,14 +177,20 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
             undoAddElement(seg);
             }
       Chord* chord = new Chord(this);
+      chord->setTuplet(tuplet);
+      chord->setTrack(oc->track());
+      chord->setDuration(d);
+      chord->setTick(tick);
+      chord->setParent(seg);
+      undoAddElement(chord);
 
       NoteList* nl = oc->noteList();
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
             Note* n = i->second;
             Note* nn = new Note(this);
+            chord->add(nn);
             nn->setPitch(n->pitch());
             nn->setTpc(n->tpc());
-            chord->add(nn);
             if (genTie) {
                   Tie* tie = new Tie(this);
                   tie->setStartNote(n);
@@ -193,12 +199,6 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
-      chord->setTuplet(tuplet);
-      chord->setTrack(oc->track());
-      chord->setDuration(d);
-      chord->setTick(tick);
-      chord->setParent(seg);
-      undoAddElement(chord);
       return chord;
       }
 
@@ -275,9 +275,8 @@ Note* Score::addNote(Chord* chord, int pitch)
       Note* note = new Note(this);
       note->setParent(chord);
       note->setTrack(chord->track());
-      note->setPitch(pitch);
       cmdAdd(note);
-      spell(note);
+      note->setPitch(pitch);  // set pitch after inserting note to get proper tpc
       mscore->play(note);
       setLayout(chord->measure());
       return note;
@@ -1233,53 +1232,67 @@ void Score::cmdDeleteSelection()
             cmdDeleteSelectedMeasures();
             return;
             }
-
       if (selection()->state() == SEL_STAFF) {
             Segment* s1 = selection()->startSegment();
             Segment* s2 = selection()->endSegment();
+            int tick2   = s2 ? s2->tick() : INT_MAX;
             int track1  = selection()->staffStart * VOICES;
             int track2  = selection()->staffEnd * VOICES;
-            for (Segment* s = s1; s != s2; s = s->next1()) {
-                  if (s->subtype() != Segment::SegChordRest)
-                        continue;
-                  for (int track = track1; track < track2; ++track) {
-                        if (s->element(track)) {
-                              ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                              if (cr->tuplet()) {
-                                    //
-                                    // remove top level tuplet
-                                    //
+            for (int track = track1; track < track2; ++track) {
+                  Fraction f;
+                  int tick  = -1;
+                  Tuplet* tuplet = 0;
+                  for (Segment* s = s1; s != s2; s = s->next1()) {
+                        if (s->subtype() == Segment::SegGrace &&  s->element(track)) {
+                              deleteItem(s->element(track));
+                              continue;
+                              }
+                        if (s->subtype() != Segment::SegChordRest || !s->element(track))
+                              continue;
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                        if (tick == -1) {
+                              // first ChordRest found:
+                              tick   = cr->tick();
+                              f      = Fraction();
+                              tuplet = cr->tuplet();
+                              if (tuplet && (tuplet->tick() == tick) && (tuplet->lastTick() < tick2) ) {
+                                    // remove complete top level tuplet
+
                                     Tuplet* t = cr->tuplet();
                                     while (t->tuplet())
                                           t = t->tuplet();
                                     cmdDeleteTuplet(t, false);
+                                    f += t->fraction();
+                                    tuplet = 0;
                                     continue;
                                     }
+                              }
+                        if (tuplet != cr->tuplet()) {
+                              if (cr->tuplet() && (cr->tuplet()->lastTick() < tick2)) {
+                                    // remove complete top level tuplet
+
+                                    Tuplet* t = cr->tuplet();
+                                    while (t->tuplet())
+                                          t = t->tuplet();
+                                    cmdDeleteTuplet(t, false);
+                                    f += t->fraction();
+                                    tuplet = 0;
+                                    continue;
+                                    }
+                              if (f.isValid())
+                                    setRest(tick, track, f, false, tuplet);
+                              tick = cr->tick();
+                              tuplet = cr->tuplet();
                               removeChordRest(cr, true);
+                              f = cr->fraction();
+                              }
+                        else {
+                              removeChordRest(cr, true);
+                              f += cr->fraction();
                               }
                         }
-                  }
-
-            for (int staffIdx = selection()->staffStart; staffIdx < selection()->staffEnd; ++staffIdx) {
-                  int tick   = s1->tick();
-                  int gapLen;
-                  if (s2)
-                        gapLen = s2->tick() - tick;
-                  else {
-                        MeasureBase* m = measures()->last();
-                        gapLen = m->tick() - tick;
-                        if (m->type() == MEASURE)
-                              gapLen += static_cast<Measure*>(m)->tickLen();
-                        }
-
-                  while (gapLen) {
-                        Measure* m = tick2measure(tick);
-                        int maxGap = m->tick() + m->tickLen() - tick;
-                        int len    = gapLen > maxGap ? maxGap : gapLen;
-                        setRest(tick, staffIdx * VOICES, Fraction::fromTicks(len), false, 0);
-                        gapLen -= len;
-                        tick   += len;
-                        }
+                  if (f.isValid())
+                        setRest(tick, track, f, false, tuplet);
                   }
             }
       else {
@@ -1763,6 +1776,7 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
 
 void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       {
+printf("cmdDeleteTuplet\n");
       foreach(DurationElement* de, tuplet->elements()) {
             if (de->type() == CHORD || de->type() == REST)
                   removeChordRest(static_cast<ChordRest*>(de), true);

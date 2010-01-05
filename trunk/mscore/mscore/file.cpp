@@ -582,7 +582,7 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       newWizard->timesig(&timesigZ, &timesigN);
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
-      char ks = newWizard->keysig();
+      KeySigEvent ks = newWizard->keysig();
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
@@ -692,17 +692,17 @@ void MuseScore::newFile()
                               //
                               // transpose key
                               //
-                              int nKey = ks;
+                              KeySigEvent nKey = ks;
                               if (instrument->pitchOffset && !newWizard->useTemplate()) {
                                     int diff = -instrument->pitchOffset;
-                                    nKey = transposeKey(nKey, diff);
+                                    nKey.accidentalType = transposeKey(nKey.accidentalType, diff);
                                     }
-                              if (nKey) {
+                              if (nKey.accidentalType) {
                                     (*(staff->keymap()))[0] = nKey;
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack(staffIdx * VOICES);
                                     keysig->setTick(0);
-                                    keysig->setSig(0, nKey);
+                                    keysig->setSubtype(nKey);
                                     s = measure->getSegment(keysig);
                                     s->add(keysig);
                                     }
