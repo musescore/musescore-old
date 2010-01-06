@@ -325,7 +325,9 @@ MuseScore::MuseScore()
       _sstate = STATE_DISABLED;
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
-
+      
+      ucheck = new UpdateChecker();
+      
       setAcceptDrops(true);
       _undoGroup            = new UndoGroup();
       cs                    = 0;
@@ -819,6 +821,7 @@ MuseScore::MuseScore()
 
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
+      menuHelp->addAction(tr("Check for update"), this, SLOT(checkForUpdate()));
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
       menuHelp->addSeparator();
@@ -948,7 +951,7 @@ void MuseScore::helpBrowser1()
             }
 
       //track visits. see: http://www.google.com/support/googleanalytics/bin/answer.py?answer=55578
-      help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(revision.trimmed()).arg(QString(VERSION));
+      help += QString("?utm_source=software&utm_medium=menu&utm_content=r%1&utm_campaign=MuseScore%2").arg(rev.trimmed()).arg(QString(VERSION));
       QUrl url(help);
       QDesktopServices::openUrl(url);
       }
@@ -1895,7 +1898,9 @@ int main(int argc, char* av[])
 
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
-
+      
+      mscore->setRevision(revision);
+      
       if (!(converterMode || pluginMode)) {
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
@@ -1910,7 +1915,7 @@ int main(int argc, char* av[])
             // TODO: delete old session backups
             //
             if (files || !mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
-                  loadScores(argv);
+                  loadScores(argv); 
             }
       else {
             loadScores(argv);
@@ -1923,9 +1928,15 @@ int main(int argc, char* av[])
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
+      //if(preferences.checkUpdateStartup)
+      //  mscore->checkForUpdate();
       return qApp->exec();
       }
 
+void MuseScore::checkForUpdate(){
+      if (ucheck)
+          ucheck->check(revision()); 
+}
 
 bool MuseScore::readLanguages(const QString& path)
       {

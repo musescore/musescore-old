@@ -193,6 +193,9 @@ void Preferences::init()
       defaultPlayDuration     = 300;      // ms
       warnPitchRange          = true;
       followSong              = true;
+      
+      //update
+      checkUpdateStartup      = true;
       };
 
 //---------------------------------------------------------
@@ -291,6 +294,9 @@ void Preferences::write()
       s.setValue("importStyleFile", importStyleFile);
       s.setValue("warnPitchRange", warnPitchRange);
       s.setValue("followSong", followSong);
+
+      //update
+      s.setValue("checkUpdateStartup", checkUpdateStartup);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -393,6 +399,8 @@ void Preferences::read()
       importStyleFile        = s.value("importStyleFile", "").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
+      
+      checkUpdateStartup = s.value("checkUpdateStartup", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -511,7 +519,10 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       enableMidiInput->setChecked(p->enableMidiInput);
       playNotes->setChecked(p->playNotes);
-
+      
+      //Update
+      checkUpdateStartup->setChecked(p->checkUpdateStartup);
+      
       if (seq->isRunning()) {
             QList<QString> sl = seq->inputPorts();
             int idx = 0;
@@ -1016,6 +1027,9 @@ void PreferenceDialog::apply()
 
       preferences.replaceFractions       = replaceFractions->isChecked();
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
+      
+      //update
+      preferences.checkUpdateStartup = checkUpdateStartup->isChecked();
 
       bool mmUnit = true;
       double f  = mmUnit ? 1.0/INCH : 1.0;

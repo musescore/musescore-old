@@ -26,6 +26,7 @@
 #include "ui_insertmeasuresdialog.h"
 #include "ui_aboutbox.h"
 #include "singleapp/src/qtsingleapplication.h"
+#include "updatechecker.h"
 
 class ScoreView;
 class Element;
@@ -189,6 +190,7 @@ class MuseScore : public QMainWindow {
 
       ScoreState _sstate;
       UndoGroup* _undoGroup;
+      UpdateChecker* ucheck;
       QList<Score*> scoreList;
       Score* cs;              // current score
       ScoreView* cv;             // current viewer
@@ -274,14 +276,15 @@ class MuseScore : public QMainWindow {
       PianorollEditor* pianorollEditor;
       bool _splitScreen;
       bool _horizontalSplit;
-
+      
+      QString rev;
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
 
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dropEvent(QDropEvent*);
-
+      
       void playVisible(bool flag);
       void launchBrowser(const QString whereTo);
 
@@ -357,6 +360,7 @@ class MuseScore : public QMainWindow {
       void setNoteEntryState() { changeState(STATE_NOTE_ENTRY); }
       void setPlayState()      { changeState(STATE_PLAY); }
       void setSearchState()    { changeState(STATE_SEARCH); }
+      void checkForUpdate();
 
    public:
       MuseScore();
@@ -408,6 +412,8 @@ class MuseScore : public QMainWindow {
       ScoreState state() const { return _sstate; }
       void changeState(ScoreState);
       bool readLanguages(const QString& path);
+      void setRevision(QString& r){rev = r;}
+      QString revision(){return rev;}
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
