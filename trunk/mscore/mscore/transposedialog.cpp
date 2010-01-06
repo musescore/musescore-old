@@ -33,6 +33,51 @@
 #include "keysig.h"
 
 //---------------------------------------------------------
+//   Interval
+//---------------------------------------------------------
+
+struct Interval {
+      int steps;
+      int semitones;
+      };
+
+static Interval intervalList[26] = {
+      { 0, 0 },         // Perfect Unison
+      { 0, 1 },         // Augmented Unison
+
+      { 1, 0 },         // Diminished Second
+      { 1, 1 },         // Minor Second
+      { 1, 2 },         // Major Second
+      { 1, 3 },         // Augmented Second
+
+      { 2, 2 },         // Diminished Third
+      { 2, 3 },         // Minor Third
+      { 2, 4 },         // Major Third
+      { 2, 5 },         // Augmented Third
+
+      { 3, 4 },         // Diminished Fourth
+      { 3, 5 },         // Perfect Fourth
+      { 3, 6 },         // Augmented Fourth
+
+      { 4, 6 },         // Diminished Fifth
+      { 4, 7 },         // Perfect Fifth
+      { 4, 8 },         // Augmented Fifth
+
+      { 5, 7 },         // Diminished Sixth
+      { 5, 8 },         // Minor Sixth
+      { 5, 9 },         // Major Sixth
+      { 5, 10 },        // Augmented Sixth
+
+      { 6, 9 },         // Diminished Seventh
+      { 6, 10 },        // Minor Seventh
+      { 6, 11 },        // Major Seventh
+      { 6, 12 },        // Augmented Seventh
+
+      { 7, 11 },        // Diminshed Octave
+      { 7, 12 }         // Perfect Octave
+      };
+
+//---------------------------------------------------------
 //   TransposeDialog
 //---------------------------------------------------------
 
@@ -40,20 +85,62 @@ TransposeDialog::TransposeDialog(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      connect(transposeByKey, SIGNAL(clicked(bool)), SLOT(transposeByKeyToggled(bool)));
+      connect(transposeByInterval, SIGNAL(clicked(bool)), SLOT(transposeByIntervalToggled(bool)));
       }
 
 //---------------------------------------------------------
-//   transpose
+//   transposeByKeyToggled
 //---------------------------------------------------------
 
-void Score::transpose(Note* n, int diff)
+void TransposeDialog::transposeByKeyToggled(bool val)
       {
-      int npitch = n->pitch() + diff;
-      int d      = diff < 0 ? -diff : diff;
-      KeySigEvent key = n->staff()->key(n->chord()->tick());
-      int tpc    = (d % 12) == 0 ? n->tpc() : pitch2tpc(npitch, key.accidentalType);
-      int acc    = (d % 12) == 0 ? n->userAccidental() : 0;
-      undoChangePitch(n, npitch, tpc, acc);
+      transposeByInterval->setChecked(!val);
+      }
+
+//---------------------------------------------------------
+//   transposeByIntervalToggled
+//---------------------------------------------------------
+
+void TransposeDialog::transposeByIntervalToggled(bool val)
+      {
+      transposeByKey->setChecked(!val);
+      }
+
+//---------------------------------------------------------
+//   mode
+//---------------------------------------------------------
+
+TransposeMode TransposeDialog::mode() const
+      {
+      return transposeByKey->isChecked() ? TRANSPOSE_BY_KEY : TRANSPOSE_BY_INTERVAL;
+      }
+
+//---------------------------------------------------------
+//   direction
+//---------------------------------------------------------
+
+TransposeDirection TransposeDialog::direction() const
+      {
+      if (mode() == TRANSPOSE_BY_KEY) {
+            if (closestKey->isChecked())
+                  return TRANSPOSE_CLOSEST;
+            if (upKey->isChecked())
+                  return TRANSPOSE_UP;
+            return TRANSPOSE_DOWN;
+            }
+      if (upInterval->isChecked())
+            return TRANSPOSE_UP;
+      return TRANSPOSE_DOWN;
+      }
+
+//---------------------------------------------------------
+//   getSemitones
+//---------------------------------------------------------
+
+int TransposeDialog::getSemitones() const
+      {
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -88,14 +175,18 @@ void Score::transpose()
       td.enableTransposeKeys(_selection->state() == SEL_SYSTEM);
       if (!td.exec())
             return;
-      int diff           = td.getSemitones();
-      bool transposeKeys = td.getTransposeKeys();
+      int diff                 = td.getSemitones();
+      bool transposeKeys       = td.getTransposeKeys();
+      bool transposeChordNames = td.getTransposeChordNames();
+
       if (_selection->state() != SEL_SYSTEM)
             transposeKeys = false;
       int d = diff < 0 ? -diff : diff;
       bool fullOctave = (d % 12) == 0;
-      if (fullOctave)
+      if (fullOctave) {
             transposeKeys = false;
+            transposeChordNames = false;
+            }
 
       if (_selection->state() == SEL_SINGLE || _selection->state() == SEL_MULT) {
             QList<Element*>* el = _selection->elements();
@@ -121,7 +212,10 @@ void Score::transpose()
                      ke != km->lower_bound(_selection->tickEnd()); ++ke) {
                         KeySigEvent oKey  = ke->second;
                         int tick  = ke->first;
-                        int nKey  = transposeKey(oKey.accidentalType, diff);
+                        int nKey = 0;
+                        if (td.mode() == TRANSPOSE_BY_KEY)
+                              nKey  = td.transposeKey();
+                              // nKey  = transposeKey(oKey.accidentalType, diff);
                         undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
                         }
                   for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
@@ -155,12 +249,16 @@ void Score::transpose()
                   QList<Note*> nl;
                   for (iNote i = notes->begin(); i != notes->end(); ++i)
                         nl.append(i->second);
-                  foreach(Note* n, nl)
-                        transpose(n, diff);
+                  foreach(Note* n, nl) {
+                        if (td.mode() == TRANSPOSE_BY_KEY)
+                              transposeByKey(n, td.transposeKey(), td.direction());
+                        else
+                              transposeByInterval(n, td.transposeInterval(), td.direction());
+                        }
                   }
             }
 
-      if (!fullOctave && td.getTransposeChordNames()) {
+      if (transposeChordNames) {
             Measure* sm = _selection->startSegment()->measure();
             Measure* em = _selection->endSegment()->measure();
             int stick   = _selection->startSegment()->tick();
@@ -185,12 +283,7 @@ void Score::transpose()
                   m = static_cast<Measure*>(mb);
                   }
             }
-
-      // do not respell if transposing a full octave
-      //
-      if (!fullOctave) {
-//            spell(_selection->staffStart, _selection->staffEnd, _selection->startSegment(), _selection->endSegment());
-            }
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -271,5 +364,79 @@ void Score::cmdConcertPitchChanged(bool flag)
                  offset = -offset;
             cmdTransposeStaff(staff->idx(), offset);
             }
+      }
+
+//---------------------------------------------------------
+//   transpose
+//---------------------------------------------------------
+
+void Score::transpose(Note* n, int diff)
+      {
+      int npitch = n->pitch() + diff;
+      int d      = diff < 0 ? -diff : diff;
+      KeySigEvent key = n->staff()->key(n->chord()->tick());
+      int tpc    = (d % 12) == 0 ? n->tpc() : pitch2tpc(npitch, key.accidentalType);
+      int acc    = (d % 12) == 0 ? n->userAccidental() : 0;
+      undoChangePitch(n, npitch, tpc, acc);
+      }
+
+//---------------------------------------------------------
+//   transposeByKey
+//---------------------------------------------------------
+
+void Score::transposeByKey(Note* /*n*/, int /*keysig*/, TransposeDirection /*dir*/)
+      {
+
+      }
+
+//---------------------------------------------------------
+//   transposeByInterval
+//---------------------------------------------------------
+
+void Score::transposeByInterval(Note* n, int interval, TransposeDirection dir)
+      {
+      int pitch     = n->pitch();
+      int npitch;
+      int tpc       = n->tpc();
+      int steps     = intervalList[interval].steps;
+      int semitones = intervalList[interval].semitones;
+
+      if (dir == TRANSPOSE_DOWN) {
+            steps     = -steps;
+            semitones = -semitones;
+            npitch    = pitch - intervalList[interval].semitones;
+            }
+      else
+            npitch    = pitch + intervalList[interval].semitones;
+
+      int step, alter;
+
+      for (;;) {
+            int s1     = tpc2step(tpc);
+            int octave = (pitch / 12);
+
+            step       = tpc2step(tpc) + steps;
+            while (step < 0) {
+                  step += 7;
+                  octave -= 1;
+                  }
+            while (step >= 7) {
+                  step -= 7;
+                  octave += 1;
+                  }
+
+            int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
+            alter      = semitones - (p1 - pitch);
+printf("Interval(%d,%d,%d) step %d octave %d p1 %d(%d-%d) alter %d\n",
+    interval, steps, semitones, step, octave, p1, pitch, npitch, alter);
+            if (alter > 2)
+                  steps -= 1;
+            else if (alter < -2)
+                  steps += 1;
+            else
+                  break;
+            }
+      tpc  = step2tpc(step, alter);
+      undoChangePitch(n, npitch, tpc, 0);
       }
 

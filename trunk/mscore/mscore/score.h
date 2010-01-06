@@ -401,6 +401,8 @@ class Score : public QObject {
       void cmdAddStretch(double);
       void transpose();
       void transpose(Note* n, int diff);
+      void transposeByKey(Note* n, int keysig, TransposeDirection dir);
+      void transposeByInterval(Note* n, int keysig, TransposeDirection dir);
 
       void cmdEnterRest();
       void cmdEnterRest(const Duration& d);
@@ -783,7 +785,6 @@ class Score : public QObject {
       Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
-//      void cmdCopy();
       void expandVoice();
       Note* cmdAddPitch1(int pitch, bool addFlag);
       void insertMeasures(int, int);
