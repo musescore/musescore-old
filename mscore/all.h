@@ -116,6 +116,9 @@
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
 
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptable>

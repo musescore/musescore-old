@@ -108,7 +108,10 @@ struct Preferences {
       bool landscape;
       bool twosided;
       double spatium;
-
+      
+      //update
+      bool checkUpdateStartup;
+      
       float tuning;                 // synthesizer master tuning offset (440Hz)
       float masterGain;            // synthesizer master gain
       float chorusGain;

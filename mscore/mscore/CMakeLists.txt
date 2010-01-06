@@ -103,7 +103,7 @@ QT4_WRAP_CPP (mocs
       dynamics.h undo.h textproperties.h screst.h scharmony.h scchordrest.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h
+      harmonycanvas.h updatechecker.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -182,7 +182,7 @@ add_executable ( ${ExecutableName}
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
-      splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
+      splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       ${AUDIO}
       )
 

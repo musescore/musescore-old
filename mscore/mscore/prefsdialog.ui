@@ -2175,6 +2175,39 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="update">
+      <property name="accessibleName">
+       <string/>
+      </property>
+      <attribute name="title">
+       <string>Update</string>
+      </attribute>
+      <widget class="QGroupBox" name="groupBox_17">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>567</width>
+         <height>82</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Update check configuration</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QCheckBox" name="checkUpdateStartup">
+          <property name="text">
+           <string>Check for update on startup</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </widget>
    </item>
    <item>
