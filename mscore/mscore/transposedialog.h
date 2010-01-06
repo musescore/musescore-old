@@ -22,6 +22,7 @@
 #define __TRANSPOSEDIALOG_H__
 
 #include "ui_transposedialog.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -30,12 +31,21 @@
 class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
       Q_OBJECT
 
+   private slots:
+      void transposeByKeyToggled(bool);
+      void transposeByIntervalToggled(bool);
+
    public:
       TransposeDialog(QWidget* parent = 0);
       void enableTransposeKeys(bool val)  { transposeKeys->setEnabled(val);       }
       bool getTransposeKeys() const       { return transposeKeys->isChecked();    }
-      int getSemitones() const            { return semitones->value();            }
       bool getTransposeChordNames() const { return transposeChordNames->isChecked(); }
+      int transposeKey() const            { return keyList->currentIndex() + 7;      }
+      int transposeInterval() const       { return intervalList->currentIndex();     }
+      TransposeDirection direction() const;
+      TransposeMode mode() const;
+
+      int getSemitones() const;
       };
 #endif
 

@@ -104,6 +104,9 @@ enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
       BEAM_NO, BEAM_BEGIN32, BEAM_INVALID
       };
 
+enum TransposeDirection { TRANSPOSE_UP, TRANSPOSE_DOWN, TRANSPOSE_CLOSEST };
+enum TransposeMode      { TRANSPOSE_BY_KEY, TRANSPOSE_BY_INTERVAL };
+
 //---------------------------------------------------------
 //   NoteType
 //---------------------------------------------------------
