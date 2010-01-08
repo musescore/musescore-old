@@ -642,6 +642,7 @@ void MuseScore::editInstrList()
                   break;
                   }
             }
+
       if (sort)
             cs->undo()->push(new SortStaves(cs, dl));
 
@@ -933,6 +934,10 @@ void Score::removeStaff(Staff* staff)
                         break;
                   }
             }
+      foreach(Beam* e, beams()) {
+            if (e->track() > track)
+                  e->setTrack(e->track() - VOICES);
+            }
       }
 
 //---------------------------------------------------------
@@ -964,10 +969,12 @@ void Score::sortStaves(QList<int>& dst)
             m->sortStaves(dst);
             }
 
+printf("sortStaves\n");
       foreach(Beam* beam, _beams) {
             int staffIdx = beam->staffIdx();
             int voice    = beam->voice();
             int idx      = dst.indexOf(staffIdx);
+printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
             beam->setTrack(idx * VOICES + voice);
             }
 
