@@ -1116,7 +1116,7 @@ void ScoreView::moveCursor()
       if (track == -1)
             track = 0;
 
-      double d = cursor->spatium() * .5;
+//      double d = cursor->spatium() * .5;
       cursor->setTrack(track);
       cursor->setTick(_score->inputPos());
 

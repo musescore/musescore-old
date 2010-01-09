@@ -34,7 +34,7 @@
 #include "config.h"
 #include "element.h"
 #include "bsp.h"
-#include "fraction.h"
+#include "al/fraction.h"
 #include "al/al.h"
 #include "scoreview.h"
 #include "key.h"

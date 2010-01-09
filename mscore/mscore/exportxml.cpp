@@ -3315,8 +3315,8 @@ foreach(Element* el, *(score->gel())) {
                         // always write a keysig at tick = 0
                         keysig(0);
                   if (tsig) {
-                        int z, n;
-                        score->sigmap()->timesig(tsig->tick(), z, n);
+                        // int z, n;
+                        // score->sigmap()->timesig(tsig->tick(), z, n);
                         timesig(tsig);
                         }
                   // output attributes with the first actual measure (pickup or regular) only

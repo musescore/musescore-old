@@ -3018,9 +3018,7 @@ Segment* Measure::firstCRSegment() const
 
 Fraction Measure::fraction() const
       {
-      int z, n;
-      score()->sigmap()->timesig(tick(), z, n);
-      return Fraction(z, n);
+      return score()->sigmap()->timesig(tick()).fraction();
       }
 
 void Space::max(const Space& s)

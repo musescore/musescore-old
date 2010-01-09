@@ -154,7 +154,7 @@ static BeamHint endBeamList[] = {
 //   endBeam
 //---------------------------------------------------------
 
-bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
+bool endBeam(const Fraction& ts, ChordRest* cr, int p)
       {
       if (cr->tuplet()) {
             if (cr->tuplet()->elements().front() == cr) {
@@ -165,31 +165,24 @@ bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
       int l = cr->ticks();
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
-            if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
+            if (h.timeSig.numerator() && (h.timeSig != ts))
                   continue;
-            if (h.noteLenZ) {
-                  int len = (4 * h.noteLenZ * AL::division)/ h.noteLenN;
+            if (h.noteLen.numerator()) {
+                  int len = (4 * h.noteLen.numerator() * AL::division)/ h.noteLen.denominator();
                   if (len != l)
                         continue;
                   }
-            if (h.posZ) {
-                  int pos = (4 * h.posZ * AL::division) / h.posN;
+            if (h.pos.numerator()) {
+                  int pos = (4 * h.pos.numerator() * AL::division) / h.pos.denominator();
                   if (pos != p)
                         continue;
                   }
-            if (h.posZ == 0) {
+            if (h.pos.numerator() == 0) {
                   // stop on every beat
-                  int len = (4 * AL::division) / h.timeSigN;
+                  int len = (4 * AL::division) / h.timeSig.denominator();
                   if (p % len)
                         continue;
                   }
-
-/*   printf("  endBeam(pos %d len %d  ts %d/%d: table-note: %d/%d  table-pos:%d/%d\n",
-      p, l,
-      tsZ, tsN,
-      h.noteLenZ, h.noteLenN,
-      h.posZ, h.posN);
-*/
             return true;
             }
       return false;

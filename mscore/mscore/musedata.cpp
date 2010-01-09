@@ -504,10 +504,9 @@ Measure* MuseData::createMeasure()
                   return m;
             if (curTick > st && curTick < (st+l)) {
                   // irregular measure
-                  int z, n;
-                  score->sigmap()->timesig(st, z, n);
-                  score->sigmap()->add(st, curTick - st, z, n);
-                  score->sigmap()->add(curTick, z, n);
+                  Fraction f = score->sigmap()->timesig(st).fraction();
+                  score->sigmap()->add(st, curTick - st, f.numerator(), f.denominator());
+                  score->sigmap()->add(curTick, f);
                   break;
                   }
             if (curTick < st + l) {
