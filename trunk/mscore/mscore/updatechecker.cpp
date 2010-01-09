@@ -63,11 +63,11 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
     if (reader.error())
         qDebug() << reader.error() << reader.errorString();
     
-    QString message = QString(tr("An update for MuseScore is available : <a href=\"%1\">MuseScore %2r%3</a>")).arg(downloadUrl).arg(version).arg(upgradeRevision);
+    QString message = QString(tr("An update for MuseScore is available: <a href=\"%1\">MuseScore %2 r.%3</a>")).arg(downloadUrl).arg(version).arg(upgradeRevision);
     printf("revision %s\n", revision.toAscii().constData());
     if(!version.isNull() &&  upgradeRevision > revision ){
         QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Update available"));
+        msgBox.setWindowTitle(tr("Update Available"));
         msgBox.setText(message);
         msgBox.setTextFormat(Qt::RichText);
         msgBox.exec();

@@ -8,6 +8,8 @@
         shortcut of input method in many windows system, mostly multibytes
         languages in asia.
       - show new score dialog when start configured as "start with new score"
+      (db)
+      - copy edits for newly added strings
 6.jan (ws)
       - first code for interval based transposition (incomplete)
       (la)
