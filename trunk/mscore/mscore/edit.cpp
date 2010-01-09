@@ -419,7 +419,7 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
       if (ts->tick() == 0) {    // cannot remove time signature at tick 0
             QMessageBox::information(0,
                tr("MuseScore"),
-               tr("you cannot remove the first time signature")
+               tr("The first time signature of a piece can not be removed.")
                );
             return;
             }
