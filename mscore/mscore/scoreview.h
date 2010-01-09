@@ -86,7 +86,6 @@ class ScoreView : public QWidget {
       QFocusFrame* focusFrame;
       int level;
 
-      bool dragScoreViewState;
       Element* dragElement;   // valid in state DRAG_OBJECT
 
       Element* curElement;    // current item at mouse press

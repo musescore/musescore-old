@@ -529,8 +529,6 @@ ScoreView::ScoreView(QWidget* parent)
 
       //---setup state machine-------------------------------------------------
       sm          = new QStateMachine(this);
-//      sm->setGlobalRestorePolicy(QStateMachine::RestoreProperties);
-
       QState* stateActive = new QState();
       for (int i = 0; i < STATES; ++i) {
             states[i] = new QState(stateActive);
@@ -705,7 +703,6 @@ ScoreView::ScoreView(QWidget* parent)
       level            = 0;
       dragElement      = 0;
       curElement       = 0;
-      _score           = 0;
       _bgColor         = Qt::darkBlue;
       _fgColor         = Qt::white;
       fgPixmap         = 0;
@@ -1071,8 +1068,8 @@ void ScoreView::startEdit()
       {
       score()->startCmd();
       score()->setLayoutAll(false);
-      dragElement = 0;
-      curElement = 0;
+//      dragElement = 0;
+      curElement  = 0;
       origEditObject->startEdit(this, startMove);
       setFocus();
       if (origEditObject->isTextB()) {
@@ -1482,7 +1479,7 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
       double _spatium = score()->spatium();
-      delete dragElement;
+//      delete dragElement;
       dragElement = 0;
 
       const QMimeData* data = event->mimeData();
@@ -1494,7 +1491,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             return;
             }
 
-      else if (data->hasFormat(mimeSymbolFormat)) {
+      if (data->hasFormat(mimeSymbolFormat)) {
             event->acceptProposedAction();
 
             QByteArray a = data->data(mimeSymbolFormat);
@@ -1594,9 +1591,10 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   dragElement->read(e);
                   dragElement->layout();
                   }
+            return;
             }
 
-      else if (data->hasUrls()) {
+      if (data->hasUrls()) {
             QList<QUrl>ul = data->urls();
             foreach(const QUrl& u, ul) {
                   if (debugMode)
@@ -1615,14 +1613,13 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                               }
                         }
                   }
+            return;
             }
-      else {
-            QString s = QString("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
-            foreach(QString ss, data->formats())
-                  s += (QString("   <%1>\n").arg(ss));
-            QMessageBox::warning(0,
-               "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
-            }
+      QString s = QString("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
+      foreach(QString ss, data->formats())
+            s += (QString("   <%1>\n").arg(ss));
+      QMessageBox::warning(0,
+      "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
       }
 
 //---------------------------------------------------------
@@ -1713,11 +1710,9 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                         break;
                   }
             score()->addRefresh(dragElement->abbox());
-//            QRectF r(dragElement->abbox());
             dragElement->setPos(pos - dragOffset);
             score()->addRefresh(dragElement->abbox());
             _score->end();
-//            update();
             return;
             }
 
@@ -1789,7 +1784,7 @@ void ScoreView::dropEvent(QDropEvent* event)
 
       if (dragElement) {
             _score->startCmd();
-            dragElement->setScore(_score);
+            dragElement->setScore(_score);      // CHECK: should already be ok
             _score->addRefresh(dragElement->abbox());
             switch(dragElement->type()) {
                   case VOLTA:
