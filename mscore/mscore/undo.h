@@ -785,11 +785,11 @@ class ChangeCopyright : public UndoCommand {
 
 class TransposeHarmony : public UndoCommand {
       Harmony* harmony;
-      int semitones;
+      int rootTpc, baseTpc;
       void flip();
 
    public:
-      TransposeHarmony(Harmony*, int semitones);
+      TransposeHarmony(Harmony*, int rootTpc, int baseTpc);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

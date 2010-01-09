@@ -78,6 +78,45 @@ static Interval intervalList[26] = {
       };
 
 //---------------------------------------------------------
+//   transposeTpc
+//---------------------------------------------------------
+
+static int transposeTpc(int tpc, int interval, TransposeDirection dir)
+      {
+      if (tpc == INVALID_TPC || interval == 0 || interval == 25) // perfect unison & perfect octave
+            return tpc;
+
+      int steps     = intervalList[interval].steps;
+      int semitones = intervalList[interval].semitones;
+
+      if (dir == TRANSPOSE_DOWN) {
+            steps     = -steps;
+            semitones = -semitones;
+            }
+
+      int step, alter;
+      int pitch = tpc2pitch(tpc);
+
+      for (;;) {
+            int s1     = tpc2step(tpc);
+            step       = tpc2step(tpc) + steps;
+            while (step < 0)
+                  step += 7;
+            while (step >= 7)
+                  step -= 7;
+            int p1     = tpc2pitch(step2tpc(step, 0));
+            alter      = semitones - (p1 - pitch);
+            if (alter > 2)
+                  steps -= 1;
+            else if (alter < -2)
+                  steps += 1;
+            else
+                  break;
+            }
+      return step2tpc(step, alter);
+      }
+
+//---------------------------------------------------------
 //   TransposeDialog
 //---------------------------------------------------------
 
@@ -175,13 +214,21 @@ void Score::transpose()
       td.enableTransposeKeys(_selection->state() == SEL_SYSTEM);
       if (!td.exec())
             return;
-      int diff                 = td.getSemitones();
+
+      int semitones;
+      if (td.mode() == TRANSPOSE_BY_KEY)
+            semitones = 0;    // TODO
+      else {
+            semitones = intervalList[td.transposeInterval()].semitones;
+            if (td.direction() == TRANSPOSE_DOWN)
+                  semitones = -semitones;
+            }
       bool transposeKeys       = td.getTransposeKeys();
       bool transposeChordNames = td.getTransposeChordNames();
 
       if (_selection->state() != SEL_SYSTEM)
             transposeKeys = false;
-      int d = diff < 0 ? -diff : diff;
+      int d = semitones < 0 ? -semitones : semitones;
       bool fullOctave = (d % 12) == 0;
       if (fullOctave) {
             transposeKeys = false;
@@ -193,7 +240,7 @@ void Score::transpose()
             foreach(Element* e, *el) {
                   if (e->type() != NOTE)
                         continue;
-                  transpose(static_cast<Note*>(e), diff);
+                  transpose(static_cast<Note*>(e), semitones);
                   }
             return;
             }
@@ -215,7 +262,8 @@ void Score::transpose()
                         int nKey = 0;
                         if (td.mode() == TRANSPOSE_BY_KEY)
                               nKey  = td.transposeKey();
-                              // nKey  = transposeKey(oKey.accidentalType, diff);
+                        else
+                              nKey  = transposeKey(oKey.accidentalType, semitones);
                         undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
                         }
                   for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
@@ -271,7 +319,15 @@ void Score::transpose()
                         Harmony* harmony = static_cast<Harmony*>(e);
                         if (harmony->tick() >= etick)
                               break;
-                        undoTransposeHarmony(harmony, diff);
+                        if (td.mode() == TRANSPOSE_BY_KEY)
+                              ; // TODO
+                        else {
+                              int rootTpc = transposeTpc(harmony->rootTpc(),
+                                 td.transposeInterval(), td.direction());
+                              int baseTpc = transposeTpc(harmony->baseTpc(),
+                                 td.transposeInterval(), td.direction());
+                              undoTransposeHarmony(harmony, rootTpc, baseTpc);
+                              }
                         }
                   if (m == em)
                         break;
