@@ -276,7 +276,7 @@ class MuseScore : public QMainWindow {
       PianorollEditor* pianorollEditor;
       bool _splitScreen;
       bool _horizontalSplit;
-      
+
       QString rev;
       //---------------------
 
@@ -284,7 +284,7 @@ class MuseScore : public QMainWindow {
 
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dropEvent(QDropEvent*);
-      
+
       void playVisible(bool flag);
       void launchBrowser(const QString whereTo);
 
@@ -297,7 +297,6 @@ class MuseScore : public QMainWindow {
       void dynamicsMenu();
       void loadFile();
       void saveFile();
-      void newFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
       void startInspector();
@@ -414,6 +413,7 @@ class MuseScore : public QMainWindow {
       bool readLanguages(const QString& path);
       void setRevision(QString& r){rev = r;}
       QString revision(){return rev;}
+      void newFile();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

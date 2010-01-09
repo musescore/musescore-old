@@ -52,6 +52,11 @@ int ticks_measure(int z, int n)
       return m;
       }
 
+int ticks_measure(const Fraction& f)
+      {
+      return (AL::division * 4 * f.numerator()) / f.denominator();
+      }
+
 //---------------------------------------------------------
 //   SigEvent
 //---------------------------------------------------------
@@ -64,6 +69,16 @@ SigEvent::SigEvent(int z, int n)
       denominator2 = n;
       bar          = 0;
       ticks        = ticks_measure(z, n);
+      }
+
+SigEvent::SigEvent(const Fraction& f)
+      {
+      nominator    = f.numerator();
+      denominator  = f.denominator();
+      nominator2   = f.numerator();
+      denominator2 = f.denominator();
+      bar          = 0;
+      ticks        = ticks_measure(f);
       }
 
 SigEvent::SigEvent(int z1, int n1, int z2, int n2)
@@ -101,6 +116,15 @@ void TimeSigMap::add(int tick, int z, int n)
             printf("illegal signature %d/%d\n", z, n);
             }
       (*this)[tick] = SigEvent(z, n);
+      normalize();
+      }
+
+void TimeSigMap::add(int tick, const Fraction& f)
+      {
+      if (!f.isValid()) {
+            printf("illegal signature %d/%d\n", f.numerator(), f.denominator());
+            }
+      (*this)[tick] = SigEvent(f);
       normalize();
       }
 
@@ -204,24 +228,11 @@ int TimeSigMap::ticksMeasure(int tick) const
 //   timesig
 //---------------------------------------------------------
 
-void TimeSigMap::timesig(int tick, int& z, int& n) const
+const SigEvent& TimeSigMap::timesig(int tick) const
       {
-      if (empty()) {
-            z = 4;
-            n = 4;
-            return;
-            }
-      ciSigEvent i = upper_bound(tick);
-      if (i != begin())
-            --i;
-      z = i->second.nominator;
-      n = i->second.denominator;
-      }
-
-SigEvent TimeSigMap::timesig(int tick) const
-      {
+      static const SigEvent ev(4, 4);
       if (empty())
-            return SigEvent(4, 4);
+            return ev;
       ciSigEvent i = upper_bound(tick);
       if (i != begin())
             --i;

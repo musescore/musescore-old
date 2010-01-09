@@ -49,6 +49,7 @@ set (al_src
    tempo.cpp
    sig.cpp
    pos.cpp
+   fraction.cpp
    )
 
 if (USE_SSE)

@@ -325,9 +325,9 @@ MuseScore::MuseScore()
       _sstate = STATE_DISABLED;
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
-      
+
       ucheck = new UpdateChecker();
-      
+
       setAcceptDrops(true);
       _undoGroup            = new UndoGroup();
       cs                    = 0;
@@ -1540,7 +1540,9 @@ static void loadScores(const QStringList& argv)
                         }
                         break;
                   case EMPTY_SESSION:
+                        break;
                   case NEW_SESSION:
+                        mscore->newFile();
                         break;
                   case SCORE_SESSION:
                         Score* score = new Score(defaultStyle);
@@ -1570,7 +1572,8 @@ static void loadScores(const QStringList& argv)
                   }
             }
 
-      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
+      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION
+         && preferences.sessionStart != NEW_SESSION) {
             // start with empty score:
             Score* score = new Score(defaultStyle);
             score->fileInfo()->setFile(mscore->createDefaultName());
@@ -1898,9 +1901,9 @@ int main(int argc, char* av[])
 
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
-      
+
       mscore->setRevision(revision);
-      
+
       if (!(converterMode || pluginMode)) {
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
@@ -1915,7 +1918,7 @@ int main(int argc, char* av[])
             // TODO: delete old session backups
             //
             if (files || !mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
-                  loadScores(argv); 
+                  loadScores(argv);
             }
       else {
             loadScores(argv);
@@ -1935,7 +1938,7 @@ int main(int argc, char* av[])
 
 void MuseScore::checkForUpdate(){
       if (ucheck)
-          ucheck->check(revision()); 
+          ucheck->check(revision());
 }
 
 bool MuseScore::readLanguages(const QString& path)
