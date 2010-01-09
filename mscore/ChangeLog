@@ -1,4 +1,6 @@
 9.jan (ws)
+      - silently change old default sound font path from ":/data/piano1.sf2"
+        to the new TimGM6mb.sf2 when reading preference settings
       - fix: right click on lower staff selects top staff
       - Removed shortcut Ctrl+Space for playback since Ctrl+Space is default
         shortcut of input method in many windows system, mostly multibytes
