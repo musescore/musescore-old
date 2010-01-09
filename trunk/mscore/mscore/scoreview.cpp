@@ -2670,8 +2670,10 @@ printf("contextPopup\n");
       Element* e = elementNear(startMove);
       if (e) {
             if (!e->selected()) {
-                  bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
-                  _score->select(e, control ? SELECT_ADD : SELECT_SINGLE, 0);
+                  // bool control = (ev->modifiers() & Qt::ControlModifier) ? true : false;
+                  // _score->select(e, control ? SELECT_ADD : SELECT_SINGLE, 0);
+                  curElement = e;
+                  select(ev);
                   }
             ElementType type = e->type();
             seq->stopNotes();       // stop now because we dont get a mouseRelease event

@@ -1,4 +1,5 @@
 9.jan (ws)
+      - fix: right click on lower staff selects top staff
       - Removed shortcut Ctrl+Space for playback since Ctrl+Space is default
         shortcut of input method in many windows system, mostly multibytes
         languages in asia.
