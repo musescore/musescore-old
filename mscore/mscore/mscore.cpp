@@ -645,7 +645,6 @@ MuseScore::MuseScore()
 
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("edit-meta"));
-      menuEdit->addSeparator();
       menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
@@ -821,9 +820,10 @@ MuseScore::MuseScore()
 
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
-      menuHelp->addAction(tr("Check for update"), this, SLOT(checkForUpdate()));
+      menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
+      menuHelp->addAction(tr("Check for Update"), this, SLOT(checkForUpdate()));
       menuHelp->addSeparator();
 
       a = getAction("script-debug");

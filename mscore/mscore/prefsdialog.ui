@@ -23,7 +23,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>10</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="accessibleName">
@@ -2192,7 +2192,7 @@
         </rect>
        </property>
        <property name="title">
-        <string>Update check configuration</string>
+        <string>Automatic Update Check</string>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -2201,7 +2201,7 @@
         <item>
          <widget class="QCheckBox" name="checkUpdateStartup">
           <property name="text">
-           <string>Check for update on startup</string>
+           <string>Check for new versions of MuseScore on startup</string>
           </property>
          </widget>
         </item>
