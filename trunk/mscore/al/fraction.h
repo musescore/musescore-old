@@ -66,6 +66,7 @@ class Fraction {
       bool operator>(const Fraction&) const;
       bool operator==(const Fraction&) const;
       bool operator!=(const Fraction&) const;
+      QString print() const { return QString("%1/%2").arg(_numerator).arg(_denominator); }
       };
 
 #endif

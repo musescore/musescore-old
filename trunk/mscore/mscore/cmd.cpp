@@ -1398,7 +1398,7 @@ MeasureBase* Score::appendMeasure(int type)
             mb = new VBox(this);
       mb->setTick(tick);
       if (!last)
-        _sigmap->add(tick, 4, 4);
+        _sigmap->add(tick, Fraction(4, 4));
 
       if (type == MEASURE) {
             Measure* measure = (Measure*)mb;

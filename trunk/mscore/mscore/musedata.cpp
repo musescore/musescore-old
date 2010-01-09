@@ -64,7 +64,7 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   int z = tl[0].toInt();
                   int n = tl[1].toInt();
                   if ((z > 0) && (n > 0)) {
-                        score->sigmap()->add(curTick, z, n);
+                        score->sigmap()->add(curTick, Fraction(z, n));
                         TimeSig* ts = new TimeSig(score);
                         ts->setTick(curTick);
                         Staff* staff = part->staff(0);
@@ -505,7 +505,7 @@ Measure* MuseData::createMeasure()
             if (curTick > st && curTick < (st+l)) {
                   // irregular measure
                   Fraction f = score->sigmap()->timesig(st).fraction();
-                  score->sigmap()->add(st, curTick - st, f.numerator(), f.denominator());
+                  score->sigmap()->add(st, curTick - st, f);
                   score->sigmap()->add(curTick, f);
                   break;
                   }

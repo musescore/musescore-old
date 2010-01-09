@@ -62,7 +62,7 @@ add_library(al STATIC
    )
 
 set_source_files_properties(
-   dsp.cpp xml.cpp tempo.cpp sig.cpp pos.cpp
+   dsp.cpp xml.cpp tempo.cpp sig.cpp pos.cpp fraction.cpp
    PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
    )
 

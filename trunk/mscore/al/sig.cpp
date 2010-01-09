@@ -42,16 +42,6 @@ static int ticks_beat(int n)
 //   ticks_measure
 //---------------------------------------------------------
 
-int ticks_measure(int z, int n)
-      {
-      int m = (AL::division * 4 * z) / n;
-      if ((AL::division * 4 * z) % n) {
-            fprintf(stderr, "Mscore: ticks_measure(%d, %d): bad divisor\n", z, n);
-            abort();
-            }
-      return m;
-      }
-
 int ticks_measure(const Fraction& f)
       {
       return (AL::division * 4 * f.numerator()) / f.denominator();
@@ -61,40 +51,29 @@ int ticks_measure(const Fraction& f)
 //   SigEvent
 //---------------------------------------------------------
 
-SigEvent::SigEvent(int z, int n)
-      {
-      nominator    = z;
-      denominator  = n;
-      nominator2   = z;
-      denominator2 = n;
-      bar          = 0;
-      ticks        = ticks_measure(z, n);
-      }
-
 SigEvent::SigEvent(const Fraction& f)
       {
-      nominator    = f.numerator();
-      denominator  = f.denominator();
-      nominator2   = f.numerator();
-      denominator2 = f.denominator();
-      bar          = 0;
-      ticks        = ticks_measure(f);
+      actual  = f;
+      nominal = f;
+      bar     = 0;
+      ticks   = ticks_measure(f);
       }
 
-SigEvent::SigEvent(int z1, int n1, int z2, int n2)
+SigEvent::SigEvent(const Fraction& a, const Fraction& n)
       {
-      nominator    = z1;
-      denominator  = n1;
-      nominator2   = z2;
-      denominator2 = n2;
-      bar          = 0;
-      ticks        = ticks_measure(z1, n1);
+      actual  = a;
+      nominal = n;
+      bar     = 0;
+      ticks   = ticks_measure(a);
       }
+
+//---------------------------------------------------------
+//   operator==
+//---------------------------------------------------------
 
 bool SigEvent::operator==(const SigEvent& e) const
       {
-      return e.nominator == nominator && e.denominator == denominator
-         && e.nominator2 == nominator2 && e.denominator2 == denominator2;
+      return (actual == e.actual) && (nominal == e.nominal);
       }
 
 //---------------------------------------------------------
@@ -110,15 +89,6 @@ TimeSigMap::TimeSigMap()
 //   add
 //---------------------------------------------------------
 
-void TimeSigMap::add(int tick, int z, int n)
-      {
-      if (z == 0 || n == 0) {
-            printf("illegal signature %d/%d\n", z, n);
-            }
-      (*this)[tick] = SigEvent(z, n);
-      normalize();
-      }
-
 void TimeSigMap::add(int tick, const Fraction& f)
       {
       if (!f.isValid()) {
@@ -128,12 +98,9 @@ void TimeSigMap::add(int tick, const Fraction& f)
       normalize();
       }
 
-void TimeSigMap::add(int tick, int z, int n, int z2, int n2)
+void TimeSigMap::add(int tick, const Fraction& a, const Fraction& n)
       {
-      if (z == 0 || n == 0 || z2 == 0 || n2 == 0) {
-            printf("illegal signature %d/%d\n", z, n);
-            }
-      (*this)[tick] = SigEvent(z, n, z2, n2);
+      (*this)[tick] = SigEvent(a, n);
       normalize();
       }
 
@@ -143,32 +110,26 @@ void TimeSigMap::add(int tick, const SigEvent& ev)
       normalize();
       }
 
-void TimeSigMap::add(int tick, int ticks, int z2, int n2)
+void TimeSigMap::add(int tick, int ticks, const Fraction& nominal)
       {
-      if (z2 == 0 || n2 == 0) {
-            printf("illegal signature %d/%d\n", z2, n2);
-            }
-      int z = 1, n = 4;
+      Fraction actual(1, 4);
       if ((ticks % AL::division) == 0) {
-            z = ticks / AL::division;
-            n = 4;
+            actual = Fraction(ticks / AL::division, 4);
             }
       else if ((ticks % (AL::division/2)) == 0) {
-            z = ticks / (AL::division/2);
-            n = 8;
+            actual = Fraction(ticks / AL::division/2, 8);
             }
       else if ((ticks % (AL::division/4)) == 0) {
-            z = ticks / (AL::division/4);
-            n = 16;
+            actual = Fraction(ticks / AL::division/4, 16);
             }
       else {
             printf("TimeSigMap::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
-               tick, ticks, z2, n2);
+               tick, ticks, nominal.numerator(), nominal.denominator());
             if (debugMsg)
                   abort();
             }
 
-      (*this)[tick] = SigEvent(z, n, z2, n2);
+      (*this)[tick] = SigEvent(actual, nominal);
       normalize();
       }
 
@@ -192,15 +153,15 @@ void TimeSigMap::normalize()
       int n    = 4;
       int tick = 0;
       int bar  = 0;
-      int tm   = ticks_measure(z, n);
+      int tm   = ticks_measure(Fraction(z, n));
 
       for (iSigEvent i = begin(); i != end(); ++i) {
             SigEvent& e  = i->second;
             e.bar        = bar + (i->first - tick) / tm;
             bar          = e.bar;
             tick         = i->first;
-            if (e.nominator == e.nominator2 && e.denominator == e.denominator2) {
-                  tm      = ticks_measure(e.nominator, e.denominator);
+            if (e.nominalEqualActual()) {
+                  tm      = ticks_measure(e.fraction());
                   e.ticks = tm;
                   }
             }
@@ -230,7 +191,7 @@ int TimeSigMap::ticksMeasure(int tick) const
 
 const SigEvent& TimeSigMap::timesig(int tick) const
       {
-      static const SigEvent ev(4, 4);
+      static const SigEvent ev(Fraction(4, 4));
       if (empty())
             return ev;
       ciSigEvent i = upper_bound(tick);
@@ -252,8 +213,8 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
             }
       --e;
       int delta  = t - e->first;
-      int ticksB = ticks_beat(e->second.denominator);
-      int ticksM = ticksB * e->second.nominator;
+      int ticksB = ticks_beat(e->second.fraction().denominator());
+      int ticksM = ticksB * e->second.fraction().numerator();
       *bar       = e->second.bar + delta / ticksM;
       int rest   = delta % ticksM;
       *beat      = rest / ticksB;
@@ -281,8 +242,8 @@ int TimeSigMap::bar2tick(int bar, int beat, int tick) const
             return 0;
             }
       --e;
-      int ticksB = ticks_beat(e->second.denominator);
-      int ticksM = ticksB * e->second.nominator;
+      int ticksB = ticks_beat(e->second.fraction().denominator());
+      int ticksM = ticksB * e->second.fraction().numerator();
       return e->first + (bar - e->second.bar) * ticksM + ticksB * beat + tick;
       }
 
@@ -324,12 +285,12 @@ void TimeSigMap::read(QDomElement e, int fileDivision)
 void SigEvent::write(Xml& xml, int tick) const
       {
       xml.stag(QString("sig tick=\"%1\"").arg(tick));
-      if ((nominator2 != nominator) || (denominator2 != denominator)) {
-            xml.tag("nom2", nominator2);
-            xml.tag("denom2", denominator2);
+      if (!nominalEqualActual()) {
+            xml.tag("nom2",   nominal.numerator());
+            xml.tag("denom2", nominal.denominator());
             }
-      xml.tag("nom", nominator);
-      xml.tag("denom", denominator);
+      xml.tag("nom",   actual.numerator());
+      xml.tag("denom", actual.denominator());
       xml.etag();
       }
 
@@ -342,8 +303,10 @@ int SigEvent::read(QDomElement e, int fileDivision)
       int tick  = e.attribute("tick", "0").toInt();
       tick      = tick * AL::division / fileDivision;
 
-      denominator2 = -1;
-      nominator2   = -1;
+      int nominator;
+      int denominator;
+      int denominator2 = -1;
+      int nominator2   = -1;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
@@ -363,7 +326,9 @@ int SigEvent::read(QDomElement e, int fileDivision)
             nominator2   = nominator;
             denominator2 = denominator;
             }
-      ticks = ticks_measure(nominator, denominator);
+      actual = Fraction(nominator, denominator);
+      nominal = Fraction(nominator2, denominator2);
+      ticks = ticks_measure(actual);
       return tick;
       }
 
@@ -426,7 +391,7 @@ unsigned TimeSigMap::raster(unsigned t, int raster) const
             return t;
             }
       int delta  = t - e->first;
-      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      int ticksM = ticks_beat(e->second.fraction().denominator()) * e->second.fraction().numerator();
       if (raster == 0)
             raster = ticksM;
       int rest   = delta % ticksM;
@@ -446,7 +411,7 @@ unsigned TimeSigMap::raster1(unsigned t, int raster) const
       ciSigEvent e = upper_bound(t);
 
       int delta  = t - e->first;
-      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      int ticksM = ticks_beat(e->second.fraction().denominator()) * e->second.fraction().numerator();
       if (raster == 0)
             raster = ticksM;
       int rest   = delta % ticksM;
@@ -466,7 +431,7 @@ unsigned TimeSigMap::raster2(unsigned t, int raster) const
       ciSigEvent e = upper_bound(t);
 
       int delta  = t - e->first;
-      int ticksM = ticks_beat(e->second.denominator) * e->second.nominator;
+      int ticksM = ticks_beat(e->second.fraction().denominator()) * e->second.fraction().numerator();
       if (raster == 0)
             raster = ticksM;
       int rest   = delta % ticksM;
@@ -482,9 +447,24 @@ int TimeSigMap::rasterStep(unsigned t, int raster) const
       {
       if (raster == 0) {
             ciSigEvent e = upper_bound(t);
-            return ticks_beat(e->second.denominator) * e->second.nominator;
+            return ticks_beat(e->second.fraction().denominator()) * e->second.fraction().numerator();
             }
       return raster;
+      }
+
+//---------------------------------------------------------
+//   measureRest
+//    return (measure end - tick) as a fraction
+//    (silly implementation)
+//---------------------------------------------------------
+
+Fraction TimeSigMap::measureRest(unsigned tick) const
+      {
+      const SigEvent& e = timesig(tick);
+      int bar, beat, restTicks;
+      tickValues(tick, &bar, &beat, &restTicks);
+      int stick = bar2tick(bar, 0, 0);
+      return e.fraction() - Fraction::fromTicks(tick - stick);
       }
 }     // namespace AL
 

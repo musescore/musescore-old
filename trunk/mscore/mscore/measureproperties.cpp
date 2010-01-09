@@ -36,10 +36,11 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       setupUi(this);
       const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
 
-      actualZ->setValue(ev.nominator);
-      actualN->setValue(ev.denominator);
-      nominalZ->setValue(ev.nominator2);
-      nominalN->setValue(ev.denominator2);
+      actualZ->setValue(ev.fraction().numerator());
+      actualN->setValue(ev.fraction().denominator());
+      nominalZ->setValue(ev.getNominal().numerator());
+      nominalN->setValue(ev.getNominal().denominator());
+
       irregular->setChecked(m->irregular());
       breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
       int n  = m->repeatCount();
@@ -126,8 +127,8 @@ bool MeasureProperties::slashStyle(int staffIdx)
 
 AL::SigEvent MeasureProperties::sig() const
       {
-      AL::SigEvent e(actualZ->value(), actualN->value(),
-         nominalZ->value(), nominalN->value());
+      AL::SigEvent e(Fraction(actualZ->value(), actualN->value()),
+         Fraction(nominalZ->value(), nominalN->value()));
       return e;
       }
 

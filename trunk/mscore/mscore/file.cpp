@@ -661,13 +661,13 @@ void MuseScore::newFile()
 
       AL::TimeSigMap* sigmap = score->sigmap();
       if (pickupMeasure) {
-            sigmap->add(0, AL::SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
+            sigmap->add(0, AL::SigEvent(Fraction(pickupTimesigZ, pickupTimesigN), Fraction(timesigZ, timesigN)));
             int tick = score->sigmap()->ticksMeasure(0);
-            sigmap->add(tick, AL::SigEvent(timesigZ, timesigN));
+            sigmap->add(tick, AL::SigEvent(Fraction(timesigZ, timesigN)));
             score->firstMeasure()->setIrregular(true);
             }
       else {
-            sigmap->add(0, AL::SigEvent(timesigZ, timesigN));
+            sigmap->add(0, AL::SigEvent(Fraction(timesigZ, timesigN)));
             }
 
       int tick = 0;

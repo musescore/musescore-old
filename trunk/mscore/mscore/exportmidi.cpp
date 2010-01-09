@@ -115,9 +115,9 @@ void ExportMidi::writeHeader()
       for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
             AL::SigEvent se   = is->second;
             unsigned char* data = new unsigned char[4];
-            data[0] = se.nominator;
+            data[0] = se.fraction().numerator();
             int n;
-            switch (se.denominator) {
+            switch (se.fraction().denominator()) {
                   case 1:  n = 0; break;
                   case 2:  n = 1; break;
                   case 4:  n = 2; break;
@@ -126,7 +126,8 @@ void ExportMidi::writeHeader()
                   case 32: n = 5; break;
                   default:
                         n = 2;
-                        printf("ExportMidi: unknown time signature %d/%d\n", se.nominator, n);
+                        printf("ExportMidi: unknown time signature %s\n",
+                           qPrintable(se.fraction().print()));
                         break;
                   }
             data[1] = n;

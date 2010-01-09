@@ -2052,7 +2052,7 @@ void Measure::adjustToLen(int ol, int nl)
                   continue;
             // printf("rests = %d\n", rests);
             const AL::SigEvent ev(score()->sigmap()->timesig(tick()));
-            if ((ev.nominator == ev.nominator2) && (rests == 1) && (chords == 0) && !_irregular) {
+            if (ev.nominalEqualActual() && (rests == 1) && (chords == 0) && !_irregular) {
                   rest->setDuration(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
