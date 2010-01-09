@@ -97,11 +97,6 @@
         </direction>
       </measure>
     <measure number="2">
-      <direction placement="above">
-        <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid"/>
-          </direction-type>
-        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -112,6 +107,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -132,6 +132,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="above">
+        <direction-type>
+          <bracket type="stop" number="1" line-end="none"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -142,13 +147,16 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
-      <direction placement="above">
-        <direction-type>
-          <bracket type="stop" number="1" line-end="none"/>
-          </direction-type>
-        </direction>
       </measure>
     <measure number="3">
+      <direction placement="below">
+        <direction-type>
+          <words>VII</words>
+          </direction-type>
+        <direction-type>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -189,6 +197,11 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <bracket type="stop" number="1" line-end="down"/>
+          </direction-type>
+        </direction>
       </measure>
     <measure number="4">
       <note>
@@ -201,6 +214,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -221,6 +239,11 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
+      <direction placement="below">
+        <direction-type>
+          <bracket type="stop" number="1" line-end="none"/>
+          </direction-type>
+        </direction>
       <note>
         <pitch>
           <step>E</step>
