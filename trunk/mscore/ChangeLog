@@ -1,6 +1,7 @@
 9.jan (lv)
       - made import of MusicXML brackets position compatible with Ottava and Volta
       (ws)
+      - fixed memory corruption during drag&drop
       - silently change old default sound font path from ":/data/piano1.sf2"
         to the new TimGM6mb.sf2 when reading preference settings
       - fix: right click on lower staff selects top staff
