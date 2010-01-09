@@ -98,7 +98,6 @@ static int transposeTpc(int tpc, int interval, TransposeDirection dir)
       int pitch = tpc2pitch(tpc);
 
       for (;;) {
-            int s1     = tpc2step(tpc);
             step       = tpc2step(tpc) + steps;
             while (step < 0)
                   step += 7;
@@ -468,7 +467,6 @@ void Score::transposeByInterval(Note* n, int interval, TransposeDirection dir)
       int step, alter;
 
       for (;;) {
-            int s1     = tpc2step(tpc);
             int octave = (pitch / 12);
 
             step       = tpc2step(tpc) + steps;

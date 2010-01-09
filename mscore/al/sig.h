@@ -21,6 +21,8 @@
 #ifndef __AL_SIG_H__
 #define __AL_SIG_H__
 
+#include "fraction.h"
+
 namespace AL {
 class Xml;
 
@@ -40,6 +42,7 @@ struct SigEvent {
       void write(Xml&, int) const;
 
       SigEvent() { nominator = 0; }
+      SigEvent(const Fraction&);                      ///< set regular event
       SigEvent(int z, int n);                         ///< set regular event
       SigEvent(int z1, int n1, int z2, int n2);       ///< set irregular event
 
@@ -57,6 +60,7 @@ struct SigEvent {
       bool nominalEqualActual() const {
             return (nominator == nominator2) && (denominator == denominator2);
             }
+      Fraction fraction() const { return Fraction(nominator, denominator); }
       };
 
 //---------------------------------------------------------
@@ -72,6 +76,7 @@ class TimeSigMap : public std::map<const int, SigEvent > {
 
    public:
       TimeSigMap();
+      void add(int tick, const Fraction&);
       void add(int tick, int z, int n);
       void add(int tick, int z, int n, int z2, int n2);
       void add(int tick, int ticks, int z, int n);
@@ -82,8 +87,8 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       void read(QDomElement, int fileDiv);
       void write(Xml&) const;
 
-      void timesig(int tick, int& z, int& n) const;
-      SigEvent timesig(int tick) const;
+//      SigEvent timesig(int tick) const;
+      const SigEvent& timesig(int tick) const;
 
       void tickValues(int t, int* bar, int* beat, int* tick) const;
       int bar2tick(int bar, int beat, int tick) const;
@@ -100,6 +105,7 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       };
 
 extern int ticks_measure(int nominator, int denominator);
+extern int ticks_measure(const Fraction&);
 
 }     // namespace AL
 #endif
