@@ -1727,8 +1727,12 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // what does placement affect?
                         //yoffset += (placement == "above" ? 0.0 : 5.0);
                         // store for later to set in segment
-                        b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                        // b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                         b->setMxmlOff(offset);
+                        if (placement == "") placement = "above"; // set default
+                        setSLinePlacement(b,
+                                          score->spatium(), placement,
+                                          hasYoffset, yoffset);
 
                         // TODO: MuseScore doesn't support hooks at beginning of lines
 
@@ -1758,6 +1762,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   else {
                         b->setTick2(tick);
                         // TODO: MuseScore doesn't support lines which start and end on different staves
+                        /*
                         QPointF userOff = b->userOff();
                         b->add(b->createLineSegment());
 
@@ -1769,6 +1774,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         //yoffset += (placement == "above" ? 0.0 : 5.0);
                         ls1->setUserOff(userOff);
                         ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
+                        */
                         b->setEndHook(lineEnd != "none");
                         if (endLength != 0)
                               b->setEndHookHeight(Spatium(lineEnd == "up" ? endLength : -endLength));
