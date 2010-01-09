@@ -208,7 +208,7 @@ bool MidiFile::read(QIODevice* in)
       fp = in;
       _tracks.clear();
       _siglist.clear();
-      _siglist.add(0, 4, 4);   // default time signature
+      _siglist.add(0, Fraction(4, 4));   // default time signature
 
       curPos    = 0;
 
@@ -928,14 +928,14 @@ void MidiTrack::extractTimeSig(AL::TimeSigMap* sigmap)
                   int n  = 1;
                   for (int i = 0; i < nn; ++i)
                         n *= 2;
-                  sigmap->add(e->ontime(), z, n);
+                  sigmap->add(e->ontime(), Fraction(z, n));
                   }
             else
                   el.insert(e);
             }
       _events = el;
       if (sigmap->empty())                // set default
-            sigmap->add(0, 4, 4);
+            sigmap->add(0, Fraction(4, 4));
       }
 
 //---------------------------------------------------------

@@ -33,34 +33,29 @@ class Xml;
 //---------------------------------------------------------
 
 struct SigEvent {
-      int nominator, denominator;   ///< actual values
-      int nominator2, denominator2; ///< nominal values for irregular measures
-      int bar;                      ///< precomputed value
-      int ticks;                    ///< ticks per measure, precomputed value
+      Fraction actual;
+      Fraction nominal;
+      int bar;                ///< precomputed value
+      int ticks;              ///< ticks per measure, precomputed value
 
       int read(QDomElement, int fileDivision);
       void write(Xml&, int) const;
 
-      SigEvent() { nominator = 0; }
+      SigEvent() {}
       SigEvent(const Fraction&);                      ///< set regular event
-      SigEvent(int z, int n);                         ///< set regular event
-      SigEvent(int z1, int n1, int z2, int n2);       ///< set irregular event
+      SigEvent(const Fraction&, const Fraction&);     ///< set irregular event
 
       bool operator==(const SigEvent& e) const;
-      bool valid() const { return nominator > 0; }
+      bool valid() const { return actual.isValid(); }
       QString print() const {
-            if (valid())
-                  return QString("%1/%2").arg(nominator).arg(denominator);
-            else
-                  return QString("void");
+            return valid() ? actual.print() : QString("void");
             }
       bool nominalEqual(const SigEvent& e) const {
-            return (e.nominator2 == nominator2) && (e.denominator2 == denominator2);
+            return nominal == e.nominal;
             }
-      bool nominalEqualActual() const {
-            return (nominator == nominator2) && (denominator == denominator2);
-            }
-      Fraction fraction() const { return Fraction(nominator, denominator); }
+      bool nominalEqualActual() const { return actual == nominal; }
+      Fraction fraction() const       { return actual;            }
+      Fraction getNominal() const     { return nominal;           }
       };
 
 //---------------------------------------------------------
@@ -77,9 +72,8 @@ class TimeSigMap : public std::map<const int, SigEvent > {
    public:
       TimeSigMap();
       void add(int tick, const Fraction&);
-      void add(int tick, int z, int n);
-      void add(int tick, int z, int n, int z2, int n2);
-      void add(int tick, int ticks, int z, int n);
+      void add(int tick, const Fraction& a, const Fraction& n);
+      void add(int tick, int ticks, const Fraction& nominal);
       void add(int tick, const SigEvent& ev);
 
       void del(int tick);
@@ -87,7 +81,6 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       void read(QDomElement, int fileDiv);
       void write(Xml&) const;
 
-//      SigEvent timesig(int tick) const;
       const SigEvent& timesig(int tick) const;
 
       void tickValues(int t, int* bar, int* beat, int* tick) const;
@@ -102,9 +95,9 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       unsigned raster1(unsigned tick, int raster) const;    // round down
       unsigned raster2(unsigned tick, int raster) const;    // round up
       int rasterStep(unsigned tick, int raster) const;
+      Fraction measureRest(unsigned tick) const;
       };
 
-extern int ticks_measure(int nominator, int denominator);
 extern int ticks_measure(const Fraction&);
 
 }     // namespace AL

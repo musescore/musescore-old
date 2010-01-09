@@ -1178,8 +1178,8 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   AL::SigEvent se = sigmap->timesig(tick);
 
 // printf("Add Sig %d  len %d  %d / %d\n", tick, measureLen, z, n);
-                  score->sigmap()->add(tick, measureLen, se.nominator2, se.denominator2);
-                  int tm = AL::ticks_measure(se.nominator, se.denominator);
+                  score->sigmap()->add(tick, measureLen, se.getNominal());
+                  int tm = AL::ticks_measure(se.fraction());
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
                             /* MusicXML's implicit means "don't print measure number",

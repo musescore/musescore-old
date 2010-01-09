@@ -1278,7 +1278,8 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track) == 0) {
-                                    TimeSig* ts = new TimeSig(this, sig2.denominator, sig2.nominator);
+                                    TimeSig* ts = new TimeSig(this, sig2.fraction().denominator(),
+                                       sig2.fraction().numerator());
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
                                     ts->setMag(ts->staff()->mag());

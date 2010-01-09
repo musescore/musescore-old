@@ -1533,7 +1533,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         if (o->log2Denom > 7)
                               break;
                         AL::SigEvent se = sigmap()->timesig(tick);
-                        AL::SigEvent ne(o->numerator, 1 << o->log2Denom);
+                        AL::SigEvent ne(Fraction(o->numerator, 1 << o->log2Denom));
                         if (!(se == ne))
                               sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
@@ -1659,7 +1659,7 @@ void Score::convertCapella(Capella* cap)
       int staves   = cap->systems[0]->staves.size();
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
-            sigmap()->add(0, cs->numerator, 1 << cs->log2Denom);
+            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {

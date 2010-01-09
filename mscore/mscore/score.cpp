@@ -282,7 +282,7 @@ Score::Score(const Style& s)
       _pageOffset     = 0;
       _tempomap        = new AL::TempoMap;
       _sigmap          = new AL::TimeSigMap;
-      _sigmap->add(0, 4, 4);
+      _sigmap->add(0, Fraction(4, 4));
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 

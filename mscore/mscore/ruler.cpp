@@ -249,7 +249,7 @@ void Ruler::paintEvent(QPaintEvent* e)
                   }
             else {
                   AL::SigEvent sig = stick.timesig();
-                  int z = sig.nominator;
+                  int z = sig.fraction().numerator();
                   for (int beat = 0; beat < z; beat++) {
                         AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);

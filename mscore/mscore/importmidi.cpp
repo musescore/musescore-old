@@ -762,17 +762,11 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   break;
 
             case META_COPYRIGHT:
-                  {
                   cs->setCopyright(QString((char*)(mm->data())));
-                  }
                   break;
 
             case META_TIME_SIGNATURE:
-                  {
-                  int z = data[0];
-                  int n = 1 << data[1];
-                  cs->sigmap()->add(tick, z, n);
-                  }
+                  cs->sigmap()->add(tick, Fraction(data[0], 1 << data[1]));
                   break;
 
             default:
@@ -1027,7 +1021,7 @@ void Score::convertMidi(MidiFile* mf)
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   TimeSig* ts = new TimeSig(this);
                   ts->setTick(tick);
-                  ts->setSig(se.denominator, se.nominator);
+                  ts->setSig(se);
                   ts->setTrack(staffIdx * VOICES);
                   Segment* seg = m->getSegment(ts);
                   seg->add(ts);

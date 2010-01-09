@@ -236,35 +236,51 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       {
       Measure* measure = tick2measure(tick);
 
-      const AL::SigEvent ev(sigmap()->timesig(tick));
-      if ((ev.nominator == ev.nominator2)       // not in pickup measure
-         && (measure->tick() == tick)
-         && (measure->tickLen() == l.ticks())
-         && (l < Duration(Duration::V_BREVE).fraction())) {
-            return addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
-            }
-      //
-      // compute list of durations which will fit l
-      //
+      while (!l.isZero()) {
+            //
+            // divide into measures
+            //
+            Fraction f;
+            if (measure->tick() < tick)
+                  f = sigmap()->measureRest(tick);
+            else
+                  f = measure->fraction();
 
-      QList<Duration> dList = toDurationList(l, useDots);
-      if (dList.isEmpty())
-            return 0;
+            const AL::SigEvent ev(sigmap()->timesig(tick));
+            if (ev.nominalEqualActual()   // not in pickup measure
+               && (measure->tick() == tick)
+               && (measure->fraction() == f)
+               && (f < Duration(Duration::V_BREVE).fraction())) {
+                  addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
+                  }
+            else {
+                  //
+                  // compute list of durations which will fit l
+                  //
 
-      Rest* rest = 0;
-      if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
-            foreach(Duration d, dList) {
-                  rest = addRest(tick, track, d, tuplet);
-                  tick += rest->ticks();
+                  QList<Duration> dList = toDurationList(f, useDots);
+                  if (dList.isEmpty())
+                        return 0;
+
+                  Rest* rest = 0;
+                  if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
+                        foreach(Duration d, dList) {
+                              rest = addRest(tick, track, d, tuplet);
+                              tick += rest->ticks();
+                              }
+                        }
+                  else {
+                        for (int i = dList.size() - 1; i >= 0; --i) {
+                              rest = addRest(tick, track, dList[i], tuplet);
+                              tick += rest->ticks();
+                              }
+                        }
                   }
+            measure = measure->nextMeasure();
+            tick = measure->tick();
+            l -= f;
             }
-      else {
-            for (int i = dList.size() - 1; i >= 0; --i) {
-                  rest = addRest(tick, track, dList[i], tuplet);
-                  tick += rest->ticks();
-                  }
-            }
-      return rest;
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -1370,7 +1386,7 @@ void ScoreView::chordTab(bool back)
 //    switch to first/last LineSegment while editing
 //---------------------------------------------------------
 
-void Score::changeLineSegment(bool last)
+void Score::changeLineSegment(bool /*last*/)
       {
 #if 0 // TODO-S
       LineSegment* segment = static_cast<LineSegment*>(editObject);

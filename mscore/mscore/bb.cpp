@@ -93,7 +93,7 @@ BBFile::~BBFile()
 bool BBFile::read(const QString& name)
       {
       _siglist.clear();
-      _siglist.add(0, 4, 4);        // debug
+      _siglist.add(0, Fraction(4, 4));        // debug
 
       _path = name;
       QFile f(name);

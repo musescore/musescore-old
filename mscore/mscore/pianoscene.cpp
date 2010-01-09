@@ -199,7 +199,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                         }
                   }
             else {
-                  int z = stick.timesig().nominator;
+                  int z = stick.timesig().fraction().numerator();
                   for (int beat = 0; beat < z; beat++) {
                         if (magStep == 0) {
                               AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
@@ -228,7 +228,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                               else
                                     k = 32;
 
-                              int n = (AL::division * 4) / stick.timesig().denominator;
+                              int n = (AL::division * 4) / stick.timesig().fraction().denominator();
                               for (int i = 0; i < k; ++i) {
                                     AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ k);
                                     int xp = pos2pix(xx);
