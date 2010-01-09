@@ -2056,10 +2056,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   }
             if (st) {
                   // add timesig to all staves
-                  int n;
-                  int z;
-                  TimeSig::getSig(st, &n, &z);
-                  score->sigmap()->add(tick, z, n);
+                  score->sigmap()->add(tick, TimeSig::getSig(st));
                   Part* part = score->part(staff);
                   int staves = part->nstaves();
                   for (int i = 0; i < staves; ++i) {

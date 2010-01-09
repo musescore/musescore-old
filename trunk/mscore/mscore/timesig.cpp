@@ -89,15 +89,6 @@ void TimeSig::setSig(int n, int z1, int z2, int z3, int z4)
 //   getSig
 //---------------------------------------------------------
 
-void TimeSig::getSig(int* n, int* z) const
-      {
-      getSig(subtype(), n, z);
-      }
-
-//---------------------------------------------------------
-//   getSig
-//---------------------------------------------------------
-
 void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
       {
       int st = subtype();

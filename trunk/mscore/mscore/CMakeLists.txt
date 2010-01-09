@@ -180,7 +180,7 @@ add_executable ( ${ExecutableName}
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scbytearray.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
-      screst.cpp scharmony.cpp fraction.cpp slurproperties.cpp synthcontrol.cpp
+      screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       ${AUDIO}

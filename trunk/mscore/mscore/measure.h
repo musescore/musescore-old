@@ -28,7 +28,7 @@
 
 #include "segment.h"
 #include "measurebase.h"
-#include "fraction.h"
+#include "al/fraction.h"
 
 class Xml;
 class Beam;

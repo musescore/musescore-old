@@ -37,23 +37,12 @@ class Chord;
 //---------------------------------------------------------
 
 struct BeamHint {
-      int noteLenZ;
-      int noteLenN;
+      Fraction noteLen;
+      Fraction timeSig;     // valid for this timesig; zero = valid for all
+      Fraction pos;
 
-      int timeSigZ;     // valid for this timesig; zero = valid for all
-      int timeSigN;
-
-      int posZ;
-      int posN;
-
-      BeamHint(int a, int b, int c, int d, int e, int f) {
-            noteLenZ = a;
-            noteLenN = b;
-            timeSigZ = c;
-            timeSigN = d;
-            posZ     = e;
-            posN     = f;
-            }
+      BeamHint(int a, int b, int c, int d, int e, int f)
+         : noteLen(a, b), timeSig(c, d), pos(e, f) {}
       };
 
 //---------------------------------------------------------
@@ -137,6 +126,6 @@ class Beam : public Element {
       bool isUp();
       };
 
-extern bool endBeam(int tsZ, int tsN, ChordRest* cr, int p);
+extern bool endBeam(const Fraction&, ChordRest* cr, int p);
 #endif
 

@@ -22,6 +22,7 @@
 #define __TIMESIG_H__
 
 #include "element.h"
+#include "al/fraction.h"
 
 class ScoreView;
 class Segment;
@@ -65,13 +66,13 @@ class TimeSig : public Element {
       void layout();
       Space space() const;
 
-      void getSig(int* n, int* z1) const;
-      static void getSig(int st, int* n, int* z) {
-            *n = st & 0x3f;
-            *z =    ((st>>24)& 0x3f)
+      Fraction getSig() const { return getSig(subtype()); }
+      static Fraction getSig(int st) {
+            return Fraction(
+                  ((st>>24)& 0x3f)
                   + ((st>>18)& 0x3f)
                   + ((st>>12)& 0x3f)
-                  + ((st>>6) & 0x3f);
+                  + ((st>>6) & 0x3f), st & 0x3f);
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);

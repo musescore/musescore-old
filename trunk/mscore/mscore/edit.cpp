@@ -246,6 +246,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       //
       // compute list of durations which will fit l
       //
+
       QList<Duration> dList = toDurationList(l, useDots);
       if (dList.isEmpty())
             return 0;
@@ -298,12 +299,11 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             tickLens.append(m->tickLen());
 
-      int oz, on;
-      _sigmap->timesig(tick, oz, on);
-      int z, n;
-      TimeSig::getSig(timeSigSubtype, &n, &z);
+      Fraction ofraction(_sigmap->timesig(tick).fraction());
+//      int z, n;
+      Fraction nfraction(TimeSig::getSig(timeSigSubtype));
 
-      if ((oz == z) && (on == n)) {
+      if (ofraction == nfraction) {
             //
             // check if there is already a time signature symbol
             //
@@ -325,7 +325,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                   }
             // no TimeSig: we have to add a symbol
             addTimeSig(tick, timeSigSubtype);
-            AL::SigEvent nSig(z, n);
+            AL::SigEvent nSig(nfraction);
             undoChangeSig(tick, AL::SigEvent(), nSig);
             return;
             }
@@ -336,12 +336,12 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       if (i != _sigmap->end()) {
             oSig = i->second;
             AL::SigEvent e = _sigmap->timesig(tick - 1);
-            if ((tick == 0) || (e.nominator != z) || (e.denominator != n)) {
-                  nSig = AL::SigEvent(z, n);
+            if ((tick == 0) || (e.fraction() != nfraction)) {
+                  nSig = AL::SigEvent(nfraction);
                   }
             }
       else {
-            nSig = AL::SigEvent(z, n);
+            nSig = AL::SigEvent(nfraction);
             }
 
       undoChangeSig(tick, oSig, nSig);
@@ -360,7 +360,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             int etick = segment->tick();
             if (etick >= tick) {
                   AL::iSigEvent i = _sigmap->find(segment->tick());
-                  if ((etick > tick) && (i->second.nominator != z || i->second.denominator != n))
+                  if ((etick > tick) && (i->second.fraction() != nfraction))
                         break;
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         Element* e = segment->element(staffIdx * VOICES);
@@ -430,18 +430,13 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
       if (nsi->second == oval)
             undoChangeSig(nsi->first, oval, AL::SigEvent());
 
-      int z = oval.nominator;
-      int n = oval.denominator;
-
       Segment* s = ts->segment()->next1();;
       for (; s; s = s->next1()) {
             if (s->subtype() != Segment::SegTimeSig)
                   continue;
             TimeSig* e = static_cast<TimeSig*>(s->element(0));
             if (e) {
-                  int nz, nn;
-                  e->getSig(&nn, &nz);
-                  if (nz != z || nn != n)
+                  if (e->getSig() != oval.fraction())
                         s = 0;
                   break;
                   }

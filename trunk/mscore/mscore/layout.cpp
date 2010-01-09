@@ -545,9 +545,8 @@ void Score::layoutStage2()
                               beamEnd = true;
                               }
                         else if (bm != BEAM_MID) {
-                              int z, n;
-                              sigmap()->timesig(cr->tick(), z, n);
-                              if (endBeam(z, n, cr, cr->tick() - measure->tick()))
+                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
+                              if (endBeam(f, cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
                               }
                         if (beamEnd) {
@@ -598,11 +597,10 @@ void Score::layoutStage2()
                         if (a1 == 0)
                               a1 = cr;
                         else {
-                              int z, n;
-                              sigmap()->timesig(cr->tick(), z, n);
+                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
                               if (bm != BEAM_MID
                                  &&
-                                   (endBeam(z, n, cr, cr->tick() - measure->tick())
+                                   (endBeam(f, cr, cr->tick() - measure->tick())
                                    || bm == BEAM_BEGIN
                                    || (a1->segment()->subtype() != cr->segment()->subtype())
                                    )

@@ -1033,6 +1033,7 @@ void Score::convertMidi(MidiFile* mf)
                   seg->add(ts);
                   }
             }
+      connectTies();
       }
 
 //---------------------------------------------------------
