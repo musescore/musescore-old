@@ -2702,9 +2702,6 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-
-      if (!draggedScoreView)
-            draggedScoreView = true;
       emit viewRectChanged();
       }
 

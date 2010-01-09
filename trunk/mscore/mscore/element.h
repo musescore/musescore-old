@@ -179,10 +179,10 @@ class Element {
       bool dropTarget() const                 { return _dropTarget; }
       void setDropTarget(bool f) const        { _dropTarget = f;    }
 
-      virtual QPointF ipos() const            { return _pos;        }
-      virtual QPointF pos() const;
-      virtual double x() const                { return pos().x();        }
-      virtual double y() const                { return pos().y();        }
+      virtual QPointF ipos() const            { return _pos;                    }
+      virtual QPointF pos() const             { return _pos + _userOff;         }
+      virtual double x() const                { return _pos.x() + _userOff.x(); }
+      virtual double y() const                { return _pos.y() + _userOff.y(); }
       void setPos(const QPointF& p)           { _pos = p;                }
       void movePos(const QPointF& p)          { _pos += p;               }
       void setXpos(qreal x)                   { _pos.setX(x);            }
