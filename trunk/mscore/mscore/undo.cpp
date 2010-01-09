@@ -549,9 +549,9 @@ void Score::undoChangeCopyright(const QString& s)
 //   undoTransposeHarmony
 //---------------------------------------------------------
 
-void Score::undoTransposeHarmony(Harmony* h, int semitones)
+void Score::undoTransposeHarmony(Harmony* h, int rootTpc, int baseTpc)
       {
-      _undo->push(new TransposeHarmony(h, semitones));
+      _undo->push(new TransposeHarmony(h, rootTpc, baseTpc));
       }
 
 //---------------------------------------------------------
@@ -1751,20 +1751,22 @@ void ChangeCopyright::flip()
 //   TransposeHarmony
 //---------------------------------------------------------
 
-TransposeHarmony::TransposeHarmony(Harmony* h, int st)
+TransposeHarmony::TransposeHarmony(Harmony* h, int rtpc, int btpc)
       {
       harmony = h;
-      semitones = st;
+      rootTpc = rtpc;
+      baseTpc = btpc;
       }
 
 void TransposeHarmony::flip()
       {
-      int baseTpc = harmony->baseTpc();
-      int rootTpc = harmony->rootTpc();
-      harmony->setBaseTpc(transposeTpc(baseTpc, semitones));
-      harmony->setRootTpc(transposeTpc(rootTpc, semitones));
+      int baseTpc1 = harmony->baseTpc();
+      int rootTpc1 = harmony->rootTpc();
+      harmony->setBaseTpc(baseTpc);
+      harmony->setRootTpc(rootTpc);
       harmony->render();
-      semitones = -semitones;
+      rootTpc = rootTpc1;
+      baseTpc = baseTpc1;
       }
 
 //---------------------------------------------------------

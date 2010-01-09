@@ -644,26 +644,6 @@ void Score::spellNotelist(QList<Note*>& notes)
       }
 
 //---------------------------------------------------------
-//   transposeTpc
-//---------------------------------------------------------
-
-int transposeTpc(int tpc, int semitones)
-      {
-      if (semitones == 0)
-            return tpc;
-      if (tpc == INVALID_TPC)
-            return INVALID_TPC;
-      if (semitones < 0)
-            semitones = 12 + semitones;
-      else
-            semitones = (semitones % 12);
-      if (semitones == 0)
-            return tpc;
-      int pitch = tpc2pitch(tpc) + semitones;
-      return pitch2tpc(pitch);
-      }
-
-//---------------------------------------------------------
 //   pitch2tpc2
 //---------------------------------------------------------
 
