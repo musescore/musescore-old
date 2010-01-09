@@ -40,6 +40,7 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
       tab = new QTabBar;
       tab->setExpanding(false);
       tab->setSelectionBehaviorOnRemove(QTabBar::SelectRightTab);
+      tab->setFocusPolicy(Qt::StrongFocus);
       stack = new QStackedLayout;
       layout->addWidget(tab);
       layout->addLayout(stack);

@@ -193,7 +193,7 @@ void Preferences::init()
       defaultPlayDuration     = 300;      // ms
       warnPitchRange          = true;
       followSong              = true;
-      
+
       //update
       checkUpdateStartup      = true;
       };
@@ -334,6 +334,10 @@ void Preferences::read()
       rPort           = s.value("rPort").toString();
 
       soundFont       = s.value("soundFont", mscoreGlobalShare+"/sound/TimGM6mb.sf2").toString();
+      if (soundFont == ":/data/piano1.sf2") {
+            // silently change to new default sound font
+            soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
+            }
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
@@ -399,7 +403,7 @@ void Preferences::read()
       importStyleFile        = s.value("importStyleFile", "").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
-      
+
       checkUpdateStartup = s.value("checkUpdateStartup", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
@@ -519,10 +523,10 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       enableMidiInput->setChecked(p->enableMidiInput);
       playNotes->setChecked(p->playNotes);
-      
+
       //Update
       checkUpdateStartup->setChecked(p->checkUpdateStartup);
-      
+
       if (seq->isRunning()) {
             QList<QString> sl = seq->inputPorts();
             int idx = 0;
@@ -1027,7 +1031,7 @@ void PreferenceDialog::apply()
 
       preferences.replaceFractions       = replaceFractions->isChecked();
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
-      
+
       //update
       preferences.checkUpdateStartup = checkUpdateStartup->isChecked();
 
