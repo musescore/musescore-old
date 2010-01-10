@@ -31,8 +31,6 @@ class Fraction {
       int _numerator;
       int _denominator;
 
-      void reduce();
-
    public:
       Fraction(int z = 0, int n = 1);
       int numerator() const      { return _numerator;           }
@@ -40,8 +38,11 @@ class Fraction {
       void setNumerator(int v)   { _numerator = v;              }
       void setDenominator(int v) { _denominator = v;               }
       void set(int z, int n)     { _numerator = z; _denominator = n; }
+
       bool isZero() const        { return _numerator == 0;      }
       bool isValid() const       { return _denominator != 0;    }
+      void reduce();
+      Fraction reduced() const;
 
       int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
       static Fraction fromTicks(int v);
