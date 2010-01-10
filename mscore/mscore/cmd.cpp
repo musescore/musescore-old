@@ -1509,20 +1509,64 @@ void Score::insertMeasures(int n, int type)
         			s->add(rest);
 		            }
               	undoFixTicks();
-		      }
-            undoInsertMeasure(m);
-            if (type == MEASURE) {
+
+                  QList<TimeSig*> tsl;
+                  QList<KeySig*>  ksl;
+
                   if (tick == 0) {
-                        AL::SigEvent e1 = _sigmap->timesig(tick);
-                        undoChangeSig(0, e1, AL::SigEvent());
-                        undoSigInsertTime(tick, ticks);
-                        undoChangeSig(tick, AL::SigEvent(), e1);
-                        // TODO: move time signature
+                        //
+                        // remove time and key signatures
+                        //
+                        for (Segment* s = firstMeasure()->first(); s; s = s->next()) {
+                              if (s->subtype() == Segment::SegKeySig) {
+                                    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                                          Element* e = s->element(staffIdx * VOICES);
+                                          if (e && !e->generated()) {
+                                                ksl.append(static_cast<KeySig*>(e));
+                                                undoRemoveElement(e);
+                                                }
+                                          }
+                                    }
+                              else if (s->subtype() == Segment::SegTimeSig) {
+                                    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                                          Element* e = s->element(staffIdx * VOICES);
+                                          if (e && !e->generated()) {
+                                                tsl.append(static_cast<TimeSig*>(e));
+                                                undoRemoveElement(e);
+                                                }
+                                          }
+                                    }
+                              }
                         }
+                  undoInsertMeasure(measure);
                   undoInsertTime(tick, ticks);
                   undoSigInsertTime(tick, ticks);
                   undoFixTicks();
+
+                  //
+                  // if measure is inserted at tick zero,
+                  // create key and time signature
+                  //
+                  Segment* s;
+                  if (!tsl.isEmpty())
+                        s = measure->createSegment(Segment::SegTimeSig, 0);
+                  foreach(TimeSig* ts, tsl) {
+                        TimeSig* nts = new TimeSig(*ts);
+                        nts->setParent(s);
+                        undoAddElement(s);
+                        undoAddElement(nts);
+                        }
+                  if (!ksl.isEmpty())
+                        s = measure->createSegment(Segment::SegKeySig, 0);
+                  foreach(KeySig* ks, ksl) {
+                        KeySig* nks = new KeySig(*ks);
+                        nks->setParent(s);
+                        undoAddElement(s);
+                        undoAddElement(nks);
+                        }
                   }
+            else
+                  undoInsertMeasure(m);
             }
       select(0, SELECT_SINGLE, 0);
       layoutAll = true;
