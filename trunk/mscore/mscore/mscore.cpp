@@ -87,6 +87,7 @@ QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
 static bool pluginMode = false;
+static bool startWithNewScore = false;
 double converterDpi = 300;
 
 static QString outFileName;
@@ -1060,6 +1061,7 @@ static void usage()
         "   -D        enable plugin script debugger\n"
         "   -s        no internal synthesizer\n"
         "   -m        no midi\n"
+        "   -n        start with new score\n"
         "   -L        layout debug\n"
         "   -I        dump midi input\n"
         "   -O        dump midi output\n"
@@ -1522,34 +1524,38 @@ static void loadScores(const QStringList& argv)
       int currentScoreView = 0;
       bool scoreCreated = false;
       if (argv.isEmpty()) {
-            switch (preferences.sessionStart) {
-                  case LAST_SESSION:
-                        {
-                        QSettings settings;
-                        int n = settings.value("scores", 0).toInt();
-                        int c = settings.value("currentScore", 0).toInt();
-                        for (int i = 0; i < n; ++i) {
-                              QString s = settings.value(QString("score-%1").arg(i),"").toString();
+            if (startWithNewScore)
+                  mscore->newFile();
+            else {
+                  switch (preferences.sessionStart) {
+                        case LAST_SESSION:
+                              {
+                              QSettings settings;
+                              int n = settings.value("scores", 0).toInt();
+                              int c = settings.value("currentScore", 0).toInt();
+                              for (int i = 0; i < n; ++i) {
+                                    QString s = settings.value(QString("score-%1").arg(i),"").toString();
+                                    Score* score = new Score(defaultStyle);
+                                    scoreCreated = true;
+                                    score->read(s);
+                                    int view = mscore->appendScore(score);
+                                    if (i == c)
+                                          currentScoreView = view;
+                                    }
+                              }
+                              break;
+                        case EMPTY_SESSION:
+                              break;
+                        case NEW_SESSION:
+                              mscore->newFile();
+                              break;
+                        case SCORE_SESSION:
                               Score* score = new Score(defaultStyle);
                               scoreCreated = true;
-                              score->read(s);
-                              int view = mscore->appendScore(score);
-                              if (i == c)
-                                    currentScoreView = view;
-                              }
+                              score->read(preferences.startScore);
+                              currentScoreView = mscore->appendScore(score);
+                              break;
                         }
-                        break;
-                  case EMPTY_SESSION:
-                        break;
-                  case NEW_SESSION:
-                        mscore->newFile();
-                        break;
-                  case SCORE_SESSION:
-                        Score* score = new Score(defaultStyle);
-                        scoreCreated = true;
-                        score->read(preferences.startScore);
-                        currentScoreView = mscore->appendScore(score);
-                        break;
                   }
             }
       else {
@@ -1708,6 +1714,9 @@ int main(int argc, char* av[])
                         break;
                   case 'm':
                         noMidi = true;
+                        break;
+                  case 'n':
+                        startWithNewScore = true;
                         break;
                   case 'i':
                   case 'I':

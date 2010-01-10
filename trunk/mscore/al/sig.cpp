@@ -351,8 +351,9 @@ printf("TimeSigMap::removeTime %d len %d\n", tick, len);
             else
                   tmp.add(i->first, i->second);
             }
-      clear();
-      insert(tmp.begin(), tmp.end());
+      *this = tmp;
+//      clear();
+//      insert(tmp.begin(), tmp.end());
       normalize();
       }
 
@@ -371,8 +372,9 @@ printf("TimeSigMap::insertTime %d len %d\n", tick, len);
             else
                   tmp.add(i->first, i->second);
             }
-      clear();
-      insert(tmp.begin(), tmp.end());
+      *this = tmp;
+//      clear();
+//      insert(tmp.begin(), tmp.end());
       normalize();
       }
 
