@@ -2063,8 +2063,8 @@ void ExportLy::findTuplets(ChordRest* cr)
 
       if (t) {
             if (tupletcount == 0) {
-                  int actNotes   = t->actualNotes();
-                  int nrmNotes   = t->normalNotes();
+                  int actNotes   = t->ratio().numerator();
+                  int nrmNotes   = t->ratio().denominator();
                   int baselength = t->ticks() / nrmNotes;
                   int thislength = cr->ticks();
 		  tupletcount    = nrmNotes * baselength - thislength;
@@ -3553,7 +3553,7 @@ void ExportLy::findLyrics()
 		      cout << " lyrics endtick: " << (*lix)->endTick() << "\n";
 		      if ((*lix)->endTick() > 0) //more than one note on this syllable
 			{
-			  cout << " _ "; 
+			  cout << " _ ";
 			  thisLyrics->lyrdat.verselyrics[verse] += " _ ";
 			}
 		    } //if lyrics

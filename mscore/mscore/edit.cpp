@@ -1493,7 +1493,7 @@ void Score::cmdTuplet(int n, ChordRest* cr)
             else
                   break;
             }
-      tuplet->setRatio(ratio.numerator(), ratio.denominator());
+      tuplet->setRatio(ratio);
 
       if (noteEntryMode() && (fr != cr->fraction())) {
             cmdEnterRest();
@@ -1511,8 +1511,6 @@ void Score::cmdTuplet(int n, ChordRest* cr)
       tuplet->setFraction(f);
       Duration baseLen(fr);
       tuplet->setBaseLen(baseLen);
-
-printf("cmdTuplet: "); tuplet->dump();
 
       tuplet->setTrack(cr->track());
       tuplet->setTick(tick);
@@ -1546,7 +1544,7 @@ printf("cmdTuplet: "); tuplet->dump();
 
 void Score::cmdCreateTuplet(ChordRest* ocr, Tuplet* tuplet)
       {
-printf("createTuplet at %d <%s>\n", ocr->tick(), ocr->name());
+printf("createTuplet at %d <%s> duration %s\n", ocr->tick(), ocr->name(), qPrintable(ocr->fraction().print()));
 
       int track        = ocr->track();
       Measure* measure = ocr->measure();
@@ -1570,7 +1568,7 @@ printf("createTuplet at %d <%s>\n", ocr->tick(), ocr->name());
       else
             cr = new Rest(this);
 
-      int actualNotes  = tuplet->actualNotes();
+      int actualNotes = tuplet->ratio().numerator();
 
       cr->setTick(tick);
       cr->setTuplet(tuplet);

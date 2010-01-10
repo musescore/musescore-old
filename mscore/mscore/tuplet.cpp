@@ -421,7 +421,7 @@ void Tuplet::read(QDomElement e)
             }
       Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());
       setFraction(f);
-      if (bl != -1) {
+      if (bl != -1) {         // obsolete
             Duration d;
             d.setVal(bl);
             _baseLen = d;
@@ -579,7 +579,7 @@ TupletDialog::TupletDialog(QWidget* parent)
 
 void TupletDialog::setupTuplet(Tuplet* tuplet)
       {
-      tuplet->setRatio(actualNotes->value(), normalNotes->value());
+      tuplet->setRatio(Fraction(actualNotes->value(), normalNotes->value()));
       if (number->isChecked())
             tuplet->setNumberType(Tuplet::SHOW_NUMBER);
       else if (relation->isChecked())
@@ -592,16 +592,6 @@ void TupletDialog::setupTuplet(Tuplet* tuplet)
             tuplet->setBracketType(Tuplet::SHOW_BRACKET);
       else if (noBracket->isChecked())
             tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
-      Duration::DurationType dt;
-      switch(actualType->currentIndex()) {
-            case 0: dt = Duration::V_HALF;    break;
-            case 1: dt = Duration::V_QUARTER; break;
-            case 2: dt = Duration::V_EIGHT;   break;
-            case 3: dt = Duration::V_16TH;    break;
-            case 4: dt = Duration::V_32ND;    break;
-            case 5: dt = Duration::V_64TH;    break;
-            }
-      tuplet->setBaseLen(Duration(dt));
       }
 
 //---------------------------------------------------------
@@ -719,7 +709,6 @@ void Tuplet::toDefault()
 void Tuplet::dump() const
       {
       Element::dump();
-      printf("ratio %d/%d  baseLen %s\n",
-         _ratio.numerator(), _ratio.denominator(), qPrintable(_baseLen.name()));
+      printf("ratio %s\n", qPrintable(_ratio.print()));
       }
 
