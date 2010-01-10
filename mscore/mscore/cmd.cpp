@@ -1489,7 +1489,7 @@ void Score::insertMeasures(int n, int type)
             }
 
 	int tick  = selection()->startSegment()->tick();
-	int ticks = _sigmap->ticksMeasure(tick);
+	int ticks = _sigmap->ticksMeasure(tick == 0 ? 0 : tick-1);
 
 	for (int i = 0; i < n; ++i) {
             MeasureBase* m;

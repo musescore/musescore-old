@@ -1,3 +1,7 @@
+10.jan (ws)
+      - fixes for "insert measure" operations
+      - New command line option "-n" to start with the "new score" wizard
+        to create a new score, overriding preference settings for start mode.
 9.jan (lv)
       - made import of MusicXML brackets position compatible with Ottava and Volta
       (ws)
