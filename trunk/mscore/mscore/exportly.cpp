@@ -3525,7 +3525,7 @@ void ExportLy::findLyrics()
 
 		      QString lyriks = (*lix)->getText();
 
-		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //.toUtf8().data();
+		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //bolton: if two words on one note.
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
@@ -3549,8 +3549,13 @@ void ExportLy::findLyrics()
 			  break;
 			default:
 			  printf("unknown syllabic %d\n", syl);
-			}//case syllable
-		      if((*lix)->endTick() > 0) cout << "Mer tekst ?\n";
+			}//switch syllable
+		      cout << " lyrics endtick: " << (*lix)->endTick() << "\n";
+		      if ((*lix)->endTick() > 0) //more than one note on this syllable
+			{
+			  cout << " _ "; 
+			  thisLyrics->lyrdat.verselyrics[verse] += " _ ";
+			}
 		    } //if lyrics
 		  prevverse = verse;
 		} // for each member of lyricslist
@@ -4360,7 +4365,7 @@ void ExportLy::writeScoreBlock()
 
   os << "\n"
   "      \\set Score.skipBars = ##t\n"
-  "      \\set Score.melismaBusyProperties = #'()\n"
+  "      %%\\set Score.melismaBusyProperties = #'()\n"
   "      \\override Score.BarNumber #'break-visibility = #end-of-line-invisible %%every bar is numbered.!!!\n"
   "      %% remove previous line to get barnumbers only at beginning of system.\n"
   "       #(set-accidental-style 'modern-cautionary)\n";
