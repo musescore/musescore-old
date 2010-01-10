@@ -235,7 +235,9 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
 Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
+      Rest* r = 0;
 
+printf("setRest at %d\n", tick);
       while (!l.isZero()) {
             //
             // divide into measures
@@ -246,12 +248,17 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             else
                   f = measure->fraction();
 
+            if (f > l)
+                  f = l;
+
             const AL::SigEvent ev(sigmap()->timesig(tick));
             if (ev.nominalEqualActual()   // not in pickup measure
                && (measure->tick() == tick)
                && (measure->fraction() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
-                  addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
+                  Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
+                  if (r == 0)
+                        r = rest;
                   }
             else {
                   //
@@ -266,21 +273,30 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
                         foreach(Duration d, dList) {
                               rest = addRest(tick, track, d, tuplet);
+                              if (r == 0)
+                                    r = rest;
                               tick += rest->ticks();
                               }
                         }
                   else {
                         for (int i = dList.size() - 1; i >= 0; --i) {
                               rest = addRest(tick, track, dList[i], tuplet);
+                              if (r == 0)
+                                    r = rest;
                               tick += rest->ticks();
                               }
                         }
                   }
-            measure = measure->nextMeasure();
-            tick = measure->tick();
+printf("setRest %s - %s\n", qPrintable(l.print()), qPrintable(f.print()));
             l -= f;
+printf("  =%s\n", qPrintable(l.print()));
+            measure = measure->nextMeasure();
+            if (!measure)
+                  break;
+            tick = measure->tick();
             }
-      return 0;
+      printf("====setRest\n");
+      return r;
       }
 
 //---------------------------------------------------------
@@ -1265,8 +1281,15 @@ void Score::cmdDeleteSelection()
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                         if (tick == -1) {
                               // first ChordRest found:
-                              tick   = cr->tick();
-                              f      = Fraction();
+                              int offset = cr->tick() - cr->measure()->tick();
+                              if (offset) {
+                                    f = Fraction::fromTicks(offset);
+                                    tick = cr->measure()->tick();
+                                    }
+                              else {
+                                    tick   = cr->tick();
+                                    f      = Fraction();
+                                    }
                               tuplet = cr->tuplet();
                               if (tuplet && (tuplet->tick() == tick) && (tuplet->lastTick() < tick2) ) {
                                     // remove complete top level tuplet
