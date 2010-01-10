@@ -2188,7 +2188,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                    el->width(), el->height(),
                    el->userOff().y());
 */
-            if (el->type() == HAIRPIN || el->type() == OTTAVA) {
+            if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
                   SLine* sl = static_cast<const SLine*>(el);
 //                  printf("slin segsz=%d", sl->lineSegments().size());
                   if (sl->lineSegments().size() > 0) {
@@ -2646,13 +2646,12 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
             }
 
       if (p.x() != 0)
-            rest += QString(" default-x=\"%1\"").arg(p.x() * 10);
+            rest += QString(" default-x=\"%1\"").arg(p.x() * 10 / tl->spatium());
       if (p.y() != 0)
-            rest += QString(" default-y=\"%1\"").arg(p.y() * -10);
+            rest += QString(" default-y=\"%1\"").arg(p.y() * -10 / tl->spatium());
 
-      attr.doAttr(xml, false);
-      xml.stag(QString("direction placement=\"%1\"").arg((p.y() > 0.0) ? "below" : "above"));
-      if (tl->beginText()) {
+      directionTag(xml, attr, tl);
+      if (tl->beginText() && tl->tick() == tick) {
             xml.stag("direction-type");
             xml.tag("words", tl->beginText()->getText());
             xml.etag();
@@ -2664,7 +2663,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
-      xml.etag();
+      directionETag(xml, staff);
       }
 
 //---------------------------------------------------------
