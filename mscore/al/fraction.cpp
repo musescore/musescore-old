@@ -49,8 +49,6 @@ static unsigned lcm(int a, int b)
 Fraction::Fraction(int z, int n)
    : _numerator(z), _denominator(n)
       {
-      if (isValid())
-            reduce();
       }
 
 //---------------------------------------------------------
@@ -65,6 +63,16 @@ void Fraction::reduce()
       }
 
 //---------------------------------------------------------
+//   reduced
+//---------------------------------------------------------
+
+Fraction Fraction::reduced() const
+      {
+      int tmp = gcd(_numerator, _denominator);
+      return Fraction(_numerator / tmp, _denominator / tmp);
+      }
+
+//---------------------------------------------------------
 //   operator+=
 //---------------------------------------------------------
 
@@ -72,8 +80,7 @@ Fraction& Fraction::operator+=(const Fraction& val)
       {
       const int tmp = lcm(_denominator, val._denominator);
       _numerator = _numerator * (tmp / _denominator) + val._numerator * (tmp / val._denominator);
-      _denominator  = tmp;
-      reduce();
+      _denominator = tmp;
       return *this;
       }
 
@@ -120,7 +127,6 @@ Fraction& Fraction::operator-=(const Fraction& val)
       const unsigned tmp = lcm(_denominator, val._denominator);
       _numerator = _numerator * (tmp / _denominator) - val._numerator * (tmp / val._denominator);
       _denominator  = tmp;
-      reduce();
       return *this;
       }
 
@@ -132,14 +138,12 @@ Fraction& Fraction::operator*=(const Fraction& val)
       {
       _numerator *= val._numerator;
       _denominator  *= val._denominator;
-      reduce();
       return *this;
       }
 
 Fraction& Fraction::operator*=(int val)
       {
       _numerator *= val;
-      reduce();
       return *this;
       }
 
@@ -151,7 +155,6 @@ Fraction& Fraction::operator/=(const Fraction& val)
       {
       _numerator *= val._denominator;
       _denominator  *= val._numerator;
-      reduce();
       return *this;
       }
 
