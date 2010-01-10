@@ -392,8 +392,9 @@ Fraction Duration::fraction() const
       return a;
       }
 
-Duration::Duration(const Fraction& f)
+Duration::Duration(const Fraction& _f)
       {
+      Fraction f(_f.reduced());
       _dots = 0;
       if (f.numerator() == 0) {
             _val  = V_ZERO;
