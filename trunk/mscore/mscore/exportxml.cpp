@@ -1960,8 +1960,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             int actNotes = 1;
             int nrmNotes = 1;
             if (t) {
-                  actNotes = t->actualNotes();
-                  nrmNotes = t->normalNotes();
+                  actNotes = t->ratio().numerator();
+                  nrmNotes = t->ratio().denominator();
                   }
 
             QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, &dots);
@@ -2155,8 +2155,8 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       if (rest->tuplet()) {
             Tuplet* t = rest->tuplet();
             xml.stag("time-modification");
-            xml.tag("actual-notes", t->actualNotes());
-            xml.tag("normal-notes", t->normalNotes());
+            xml.tag("actual-notes", t->ratio().numerator());
+            xml.tag("normal-notes", t->ratio().denominator());
             xml.etag();
             }
 

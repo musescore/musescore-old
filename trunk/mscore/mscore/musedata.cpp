@@ -245,7 +245,7 @@ void MuseData::readNote(Part* part, const QString& s)
                         tuplet->setTrack(gstaff * VOICES);
                         tuplet->setTick(tick);
                         ntuplet = a;
-                        tuplet->setRatio(a, b);
+                        tuplet->setRatio(Fraction(a, b));
                         measure->add(tuplet);
                         }
                   }

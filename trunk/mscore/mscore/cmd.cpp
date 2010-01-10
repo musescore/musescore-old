@@ -1520,19 +1520,25 @@ void Score::insertMeasures(int n, int type)
                         for (Segment* s = firstMeasure()->first(); s; s = s->next()) {
                               if (s->subtype() == Segment::SegKeySig) {
                                     for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                                          Element* e = s->element(staffIdx * VOICES);
+                                          KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
                                           if (e && !e->generated()) {
                                                 ksl.append(static_cast<KeySig*>(e));
                                                 undoRemoveElement(e);
+                                                if (e->segment()->isEmpty()) {
+                                                      undoRemoveElement(e->segment());
+                                                      }
                                                 }
                                           }
                                     }
                               else if (s->subtype() == Segment::SegTimeSig) {
                                     for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                                          Element* e = s->element(staffIdx * VOICES);
+                                          TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
                                           if (e && !e->generated()) {
                                                 tsl.append(static_cast<TimeSig*>(e));
                                                 undoRemoveElement(e);
+                                                if (e->segment()->isEmpty()) {
+                                                      undoRemoveElement(e->segment());
+                                                      }
                                                 }
                                           }
                                     }
@@ -1547,21 +1553,26 @@ void Score::insertMeasures(int n, int type)
                   // if measure is inserted at tick zero,
                   // create key and time signature
                   //
-                  Segment* s;
-                  if (!tsl.isEmpty())
-                        s = measure->createSegment(Segment::SegTimeSig, 0);
                   foreach(TimeSig* ts, tsl) {
                         TimeSig* nts = new TimeSig(*ts);
+                        Segment::SegmentType st = Segment::SegTimeSig;
+                        Segment* s = measure->findSegment(st, 0);
+                        if (s == 0) {
+                              s = measure->createSegment(st, 0);
+                              undoAddElement(s);
+                              }
                         nts->setParent(s);
-                        undoAddElement(s);
                         undoAddElement(nts);
                         }
-                  if (!ksl.isEmpty())
-                        s = measure->createSegment(Segment::SegKeySig, 0);
                   foreach(KeySig* ks, ksl) {
                         KeySig* nks = new KeySig(*ks);
+                        Segment::SegmentType st = Segment::SegKeySig;
+                        Segment* s = measure->findSegment(st, 0);
+                        if (s == 0) {
+                              s = measure->createSegment(st, 0);
+                              undoAddElement(s);
+                              }
                         nks->setParent(s);
-                        undoAddElement(s);
                         undoAddElement(nks);
                         }
                   }

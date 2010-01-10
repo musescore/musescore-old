@@ -95,9 +95,6 @@ class Tuplet : public DurationElement {
 
       Fraction ratio() const        { return _ratio;            }
       void setRatio(const Fraction& r) { _ratio = r;            }
-      void setRatio(int z, int n)   { _ratio = Fraction(z,n);   }
-      int normalNotes() const       { return _ratio.denominator();   }
-      int actualNotes() const       { return _ratio.numerator();  }
 
       const QList<DurationElement*>& elements() const { return _elements; }
       int lastTick() const          { return _elements.last()->tick(); }
@@ -114,8 +111,10 @@ class Tuplet : public DurationElement {
       virtual void draw(QPainter&) const;
       int id() const                       { return _id;          }
       void setId(int i) const              { _id = i;             }
+
       Duration baseLen() const             { return _baseLen;     }
       void setBaseLen(const Duration& d)   { _baseLen = d;        }
+
       virtual void dump() const;
 
       void setFraction(const Fraction& f)  { _fraction = f; }

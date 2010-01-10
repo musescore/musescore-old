@@ -2896,7 +2896,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
                   tuplet->setTrack((staff + relStaff) * VOICES);
-                  tuplet->setRatio(actualNotes, normalNotes);
+                  tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(tick);
                   // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
                   // avoid rounding errors:
