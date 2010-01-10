@@ -1118,6 +1118,8 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
+printf("Score::cmdRemoveTime %d %d\n", tick, len);
+
       int etick = tick + len;
       foreach(Element* e, _gel) {
             if (e->type() == SLUR) {

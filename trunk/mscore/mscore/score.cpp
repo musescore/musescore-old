@@ -532,6 +532,7 @@ void Score::removeMeasure(MeasureBase* im)
 
 void Score::insertTime(int tick, int len)
       {
+printf("Score::insertTime %d %d\n", tick, len);
       if (len < 0) {
             //
             // remove time

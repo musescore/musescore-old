@@ -1491,25 +1491,25 @@ void Score::insertMeasures(int n, int type)
 	int tick  = selection()->startSegment()->tick();
 	int ticks = _sigmap->ticksMeasure(tick);
 
-	for (int ino = 0; ino < n; ++ino) {
-			MeasureBase* m = 0;
+	for (int i = 0; i < n; ++i) {
+            MeasureBase* m;
             if (type == MEASURE)
                   m = new Measure(this);
             else if (type == HBOX)
                   m = new HBox(this);
-            else if (type == VBOX)
+            else        // if (type == VBOX)
                   m = new VBox(this);
-		    m->setTick(tick);
+		m->setTick(tick);
             if (type == MEASURE) {
-      		    Measure* measure = static_cast<Measure*>(m);
-	      	    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-    		      	    Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
-        	      		rest->setTrack(staffIdx * VOICES);
-        		      	Segment* s = measure->getSegment(rest);
-        			      s->add(rest);
+      	      Measure* measure = static_cast<Measure*>(m);
+	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+    		            Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
+        	      	rest->setTrack(staffIdx * VOICES);
+        		      Segment* s = measure->getSegment(rest);
+        			s->add(rest);
 		            }
               	undoFixTicks();
-		          }
+		      }
             undoInsertMeasure(m);
             if (type == MEASURE) {
                   if (tick == 0) {
@@ -1520,11 +1520,12 @@ void Score::insertMeasures(int n, int type)
                         // TODO: move time signature
                         }
                   undoInsertTime(tick, ticks);
+                  undoSigInsertTime(tick, ticks);
                   undoFixTicks();
                   }
-        }
-        select(0, SELECT_SINGLE, 0);
-        layoutAll = true;
+            }
+      select(0, SELECT_SINGLE, 0);
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
