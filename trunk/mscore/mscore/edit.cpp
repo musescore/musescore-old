@@ -237,7 +237,6 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       Measure* measure = tick2measure(tick);
       Rest* r = 0;
 
-printf("setRest at %d\n", tick);
       while (!l.isZero()) {
             //
             // divide into measures
@@ -250,6 +249,14 @@ printf("setRest at %d\n", tick);
 
             if (f > l)
                   f = l;
+            if ((track % VOICES) && !measure->hasVoice(track)) {
+                  l -= f;
+                  measure = measure->nextMeasure();
+                  if (!measure)
+                        break;
+                  tick = measure->tick();
+                  continue;
+                  }
 
             const AL::SigEvent ev(sigmap()->timesig(tick));
             if (ev.nominalEqualActual()   // not in pickup measure
@@ -287,15 +294,12 @@ printf("setRest at %d\n", tick);
                               }
                         }
                   }
-printf("setRest %s - %s\n", qPrintable(l.print()), qPrintable(f.print()));
             l -= f;
-printf("  =%s\n", qPrintable(l.print()));
             measure = measure->nextMeasure();
             if (!measure)
                   break;
             tick = measure->tick();
             }
-      printf("====setRest\n");
       return r;
       }
 
@@ -1272,7 +1276,9 @@ void Score::cmdDeleteSelection()
                   int tick  = -1;
                   Tuplet* tuplet = 0;
                   for (Segment* s = s1; s != s2; s = s->next1()) {
-                        if (s->subtype() == Segment::SegGrace &&  s->element(track)) {
+                        if (s->element(track) &&
+                           ((s->subtype() == Segment::SegBreath)
+                           || (s->subtype() == Segment::SegGrace))) {
                               deleteItem(s->element(track));
                               continue;
                               }

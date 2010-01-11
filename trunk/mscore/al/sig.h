@@ -41,7 +41,7 @@ struct SigEvent {
       int read(QDomElement, int fileDivision);
       void write(Xml&, int) const;
 
-      SigEvent() {}
+      SigEvent() : actual(0, 0) {}                    ///< default SigEvent is invalid
       SigEvent(const Fraction&);                      ///< set regular event
       SigEvent(const Fraction&, const Fraction&);     ///< set irregular event
 

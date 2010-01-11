@@ -221,6 +221,7 @@ class Measure : public MeasureBase {
       int findAccidental2(Note*) const;
       void exchangeVoice(int, int, int, int);
       void checkMultiVoices(int staffIdx);
+      bool hasVoice(int track) const;
       bool isMeasureRest(int staffIdx);
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;

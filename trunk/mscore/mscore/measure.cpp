@@ -2927,6 +2927,21 @@ void Measure::checkMultiVoices(int staffIdx)
       }
 
 //---------------------------------------------------------
+//   hasVoice
+//---------------------------------------------------------
+
+bool Measure::hasVoice(int track) const
+      {
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            if (s->element(track))
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   isMeasureRest
 //---------------------------------------------------------
 
