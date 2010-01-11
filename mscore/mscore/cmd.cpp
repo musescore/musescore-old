@@ -469,6 +469,13 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
             }
       _score->cmdAddPitch1(pitch, addFlag);
       moveCursor();
+      ChordRest* cr = _score->inputState().cr();
+      if (cr) {
+            Element* e = cr;
+            if (cr->type() == CHORD)
+                  e = static_cast<Chord*>(cr)->upNote();
+            adjustCanvasPosition(e, false);
+            }
       _score->endCmd();
       }
 
@@ -2009,26 +2016,6 @@ void Score::cmd(const QAction* a)
                         }
                   setLayoutAll(false);
                   }
-            else if (cmd == "next-chord"
-               || cmd == "prev-chord"
-               || cmd == "next-measure"
-               || cmd == "prev-measure") {
-                  move(cmd);
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "select-next-chord"
-               || cmd == "select-prev-chord"
-               || cmd == "select-next-measure"
-               || cmd == "select-prev-measure"
-               || cmd == "select-begin-line"
-               || cmd == "select-end-line"
-               || cmd == "select-begin-score"
-               || cmd == "select-end-score"
-               || cmd == "select-staff-above"
-               || cmd == "select-staff-below") {
-                  selectMove(cmd);
-                  setLayoutAll(false);
-                  }
             else if (cmd == "note-longa")
                   padToggle(PAD_NOTE00);
             else if (cmd == "note-breve")
@@ -2760,13 +2747,13 @@ void Score::moveToNextInputPos()
 //    move current selection
 //---------------------------------------------------------
 
-void Score::move(const QString& cmd)
+Element* Score::move(const QString& cmd)
       {
       ChordRest* cr = selection()->lastChordRest();
       if (selection()->activeCR())
             cr = selection()->activeCR();
       if (!cr)
-            return;
+            return 0;
 
       Element* el = 0;
       if (cmd == "next-chord") {
@@ -2784,7 +2771,7 @@ void Score::move(const QString& cmd)
                   while (s && s->subtype() != Segment::SegChordRest)
                         s = s->prev1();
                   if (s == 0)
-                        return;
+                        return 0;
                   Measure* m = s->measure();
 
                   int track  = _is.track;
@@ -2810,21 +2797,21 @@ void Score::move(const QString& cmd)
                   mscore->play(static_cast<Note*>(el));
                   }
             select(el, SELECT_SINGLE, 0);
-//TODO-S            emit adjustCanvasPosition(el, false);
             }
+      return el;
       }
 
 //---------------------------------------------------------
 //   selectMove
 //---------------------------------------------------------
 
-void Score::selectMove(const QString& cmd)
+Element* Score::selectMove(const QString& cmd)
       {
       ChordRest* cr = selection()->lastChordRest();
       if (selection()->activeCR())
             cr = selection()->activeCR();
+      ChordRest* el = 0;
       if (cr) {
-            ChordRest* el = 0;
             if (cmd == "select-next-chord")
                   el = nextChordRest(cr);
             else if (cmd == "select-prev-chord")
@@ -2836,36 +2823,35 @@ void Score::selectMove(const QString& cmd)
             else if (cmd == "select-begin-line") {
                   Measure* measure = cr->segment()->measure()->system()->firstMeasure();
                   if (!measure)
-                        return;
+                        return 0;
                   el = measure->first()->nextChordRest(cr->track());
                   }
             else if (cmd == "select-end-line") {
                   Measure* measure = cr->segment()->measure()->system()->lastMeasure();
                   if (!measure)
-                        return;
+                        return 0;
                   el = measure->last()->nextChordRest(cr->track(), true);
                   }
             else if (cmd == "select-begin-score") {
                   Measure* measure = first()->system()->firstMeasure();
                   if (!measure)
-                        return;
+                        return 0;
                   el = measure->first()->nextChordRest(cr->track());
                   }
             else if (cmd == "select-end-score") {
                   Measure* measure = last()->system()->lastMeasure();
                   if (!measure)
-                        return;
+                        return 0;
                   el = measure->last()->nextChordRest(cr->track(), true);
                   }
             else if (cmd == "select-staff-above")
                   el = upStaff(cr);
             else if (cmd == "select-staff-below")
                   el = downStaff(cr);
-            if (el) {
+            if (el)
                   select(el, SELECT_RANGE, el->staffIdx());
-//TODO-S                  emit adjustCanvasPosition(el, false);
-                  }
             }
+      return el;
       }
 
 //---------------------------------------------------------

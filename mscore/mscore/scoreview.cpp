@@ -2467,6 +2467,30 @@ void ScoreView::cmd(const QAction* a)
             pageTop();
       else if (cmd == "page-end")
             pageEnd();
+      else if (cmd == "select-next-chord"
+         || cmd == "select-prev-chord"
+         || cmd == "select-next-measure"
+         || cmd == "select-prev-measure"
+         || cmd == "select-begin-line"
+         || cmd == "select-end-line"
+         || cmd == "select-begin-score"
+         || cmd == "select-end-score"
+         || cmd == "select-staff-above"
+         || cmd == "select-staff-below") {
+            Element* el = _score->selectMove(cmd);
+            if (el)
+                  adjustCanvasPosition(el, false);
+            update();
+            }
+      else if (cmd == "next-chord"
+         || cmd == "prev-chord"
+         || cmd == "next-measure"
+         || cmd == "prev-measure") {
+            Element* el = _score->move(cmd);
+            if (el)
+                  adjustCanvasPosition(el, false);
+            update();
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
