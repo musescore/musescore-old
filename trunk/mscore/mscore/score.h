@@ -296,10 +296,8 @@ class Score : public QObject {
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
 
-      void move(const QString& cmd);
       void moveInputPos(Segment* s);
       void moveToNextInputPos();
-      void selectMove(const QString& cmd);
 
       void collectNote(EventMap* events, int channel, Note* note, int onTime, int len);
       void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
@@ -793,6 +791,8 @@ class Score : public QObject {
       KeySig* customKeySig(int) const;
       KeySig* keySigFactory(KeySigEvent);
       void cmdPaste();
+      Element* selectMove(const QString& cmd);
+      Element* move(const QString& cmd);
       };
 
 extern Score* gscore;
