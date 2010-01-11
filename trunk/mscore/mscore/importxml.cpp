@@ -1776,8 +1776,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
                         */
                         b->setEndHook(lineEnd != "none");
-                        if (endLength != 0)
-                              b->setEndHookHeight(Spatium(lineEnd == "up" ? endLength : -endLength));
+                        if (lineEnd == "up")
+                              b->setEndHookHeight(-1 * b->endHookHeight());
                         score->add(b);
                         bracket[n] = 0;
                         }

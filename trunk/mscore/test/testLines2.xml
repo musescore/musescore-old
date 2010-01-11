@@ -47,7 +47,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
           </direction-type>
         </direction>
       <note>
@@ -92,7 +92,7 @@
         </note>
       <direction placement="above">
         <direction-type>
-          <bracket type="stop" number="1" line-end="down"/>
+          <bracket type="stop" number="1" line-end="down" end-length="15"/>
           </direction-type>
         </direction>
       </measure>
@@ -109,7 +109,7 @@
         </note>
       <direction placement="above">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="30"/>
           </direction-type>
         </direction>
       <note>
@@ -154,7 +154,7 @@
           <words>VII</words>
           </direction-type>
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
           </direction-type>
         </direction>
       <note>
@@ -199,7 +199,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <bracket type="stop" number="1" line-end="down"/>
+          <bracket type="stop" number="1" line-end="up" end-length="15"/>
           </direction-type>
         </direction>
       </measure>
@@ -216,7 +216,7 @@
         </note>
       <direction placement="below">
         <direction-type>
-          <bracket type="start" number="1" line-end="none" line-type="solid"/>
+          <bracket type="start" number="1" line-end="none" line-type="solid" default-y="-80"/>
           </direction-type>
         </direction>
       <note>
