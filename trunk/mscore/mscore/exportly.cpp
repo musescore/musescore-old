@@ -313,7 +313,7 @@ class ExportLy {
   QString primitiveMarker(Marker*);
   int checkJumpOrMarker(int, bool, Element*&);
   void writeCombinedMarker(int, Element* );
-  void flatInInstrName(QString &);
+  QString flatInInstrName(QString);
 
   void indent(); //buffer-string
   void indentF(); //file
@@ -3664,7 +3664,7 @@ void ExportLy::cleanupLyrics()
 //-----------------------------------------------------------------------
 // flatInInstrName
 //-----------------------------------------------------------------------
-void ExportLy::flatInInstrName(QString &name)
+QString ExportLy::flatInInstrName(QString name)
 {
   //(unecessarily?) big deal for handling the flat-sign in instrumentnames.
   int pt = 0;
@@ -3694,13 +3694,9 @@ void ExportLy::flatInInstrName(QString &name)
     {
       newname.prepend("\\markup{");
       newname.append("}");
-      name = newname;
     }
-  else
-    {
-      name.prepend("#\"");
-      name.append("\"");
-    }
+  else newname = "";
+  return newname;
 }
 
 
@@ -3757,12 +3753,32 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
       indent();
       if (voice==0)
 	{
-	  flatInInstrName(staffname[staffInd].partname);
-	  flatInInstrName(staffname[staffInd].partshort);
+	  QString flatpartn="";
+	  QString flatshortn="";
 
-	  out <<"\\set Staff.instrumentName = " << staffname[staffInd].partname << "\n";
+	  cout << "X" << staffname[staffInd].partname.toUtf8().data() << "x\n";
+	  
+	  flatpartn = flatInInstrName(staffname[staffInd].partname);
+	  flatshortn = flatInInstrName(staffname[staffInd].partshort);
+
+	  out <<"\\set Staff.instrumentName = ";
+
+	  cout << "F" << flatpartn.toUtf8().data() << "f\n";
+
+	  if (flatpartn == "") 
+	    out<< "#\"" << staffname[staffInd].partname << "\"";
+	  else
+	    out << flatpartn;
+	  out << "\n";
+	 
 	  indent();
-	  out << "\\set Staff.shortInstrumentName = " << staffname[staffInd].partshort << "\n";
+	  out << "\\set Staff.shortInstrumentName = ";
+	  if (flatshortn =="")
+	    out << "#\"" << staffname[staffInd].partshort << "\"";
+	  else
+	    out << flatshortn;
+	  out << "\n";
+
 	  indent();
 	  writeClef(staff->clef(0));
 	  indent();
@@ -3852,7 +3868,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 if (timedenom==8) nombarlen=nombarlen/2;
 		 if (timedenom == 2) nombarlen = 2*nombarlen;
 
-		 if ((barlen<nombarlen) and (measurenumber==1))
+		 if ((barlen<nombarlen) and (measurenumber==1) and (voice ==0))
 		       {
 			     pickup=true;
 			     int punkt=0;
