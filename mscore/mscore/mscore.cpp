@@ -998,9 +998,9 @@ void MuseScore::selectionChanged(int state)
 
 int MuseScore::appendScore(Score* score)
       {
-      connect(score, SIGNAL(dirtyChanged(Score*)),          SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(selectionChanged(int)),         SLOT(selectionChanged(int)));
-      connect(score, SIGNAL(posChanged(int)),               SLOT(setPos(int)));
+      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
+      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
 
       int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {

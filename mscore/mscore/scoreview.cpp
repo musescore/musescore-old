@@ -2491,6 +2491,16 @@ void ScoreView::cmd(const QAction* a)
                   adjustCanvasPosition(el, false);
             update();
             }
+      else if (cmd == "rest")
+            cmdEnterRest();
+      else if (cmd == "rest-1")
+            cmdEnterRest(Duration(Duration::V_WHOLE));
+      else if (cmd == "rest-2")
+            cmdEnterRest(Duration(Duration::V_HALF));
+      else if (cmd == "rest-4")
+            cmdEnterRest(Duration(Duration::V_QUARTER));
+      else if (cmd == "rest-8")
+            cmdEnterRest(Duration(Duration::V_EIGHT));
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -3328,3 +3338,38 @@ void ScoreView::adjustCanvasPosition(Element* el, bool playBack)
       update();
       }
 
+//---------------------------------------------------------
+//   cmdEnterRest
+//---------------------------------------------------------
+
+void ScoreView::cmdEnterRest()
+      {
+      cmdEnterRest(_score->inputState().duration());
+      }
+
+//---------------------------------------------------------
+//   cmdEnterRest
+//---------------------------------------------------------
+
+void ScoreView::cmdEnterRest(const Duration& d)
+      {
+printf("cmdEnterRest %s\n", qPrintable(d.name()));
+      if (!noteEntryMode())
+            sm->postEvent(new CommandEvent("note-input"));
+      _score->cmdEnterRest(d);
+#if 0
+      expandVoice();
+      if (_is.cr() == 0) {
+            printf("cannot enter rest here\n");
+            return;
+            }
+
+      int track = _is.track;
+      Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
+      ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+      if (cr)
+            nextInputPos(cr, false);
+      _is.rest = false;  // continue with normal note entry
+#endif
+      moveCursor();
+      }

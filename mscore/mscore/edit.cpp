@@ -652,16 +652,15 @@ void ScoreView::modifyElement(Element* el)
 void ScoreView::cmdAddSlur()
       {
       _score->startCmd();
-#if 0 // TODO-S
-      if (noteEntryMode() && _is.slur) {
-            QList<SlurSegment*>* el = _is.slur->slurSegments();
+      InputState& is = _score->inputState();
+      if (noteEntryMode() && is.slur) {
+            QList<SlurSegment*>* el = is.slur->slurSegments();
             if (!el->isEmpty())
                   el->front()->setSelected(false);
-            static_cast<ChordRest*>(_is.slur->endElement())->addSlurBack(_is.slur);
-            _is.slur = 0;
+            static_cast<ChordRest*>(is.slur->endElement())->addSlurBack(is.slur);
+            is.slur = 0;
             return;
             }
-#endif
       QList<Note*> nl = _score->selection()->noteList();
       Note* firstNote = 0;
       Note* lastNote = 0;
@@ -1288,7 +1287,7 @@ void Score::cmdDeleteSelection()
                         if (tick == -1) {
                               // first ChordRest found:
                               int offset = cr->tick() - cr->measure()->tick();
-                              if (offset) {
+                              if (cr->measure()->tick() >= s1->tick() && offset) {
                                     f = Fraction::fromTicks(offset);
                                     tick = cr->measure()->tick();
                                     }
@@ -1525,7 +1524,7 @@ void Score::cmdTuplet(int n, ChordRest* cr)
       tuplet->setRatio(ratio);
 
       if (noteEntryMode() && (fr != cr->fraction())) {
-            cmdEnterRest();
+//TODO-S            cmdEnterRest();
             cr = getSelectedChordRest();
             }
 
@@ -1753,20 +1752,9 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
 //   cmdEnterRest
 //---------------------------------------------------------
 
-void Score::cmdEnterRest()
-      {
-      cmdEnterRest(_is.duration());
-      }
-
-//---------------------------------------------------------
-//   cmdEnterRest
-//---------------------------------------------------------
-
 void Score::cmdEnterRest(const Duration& d)
       {
-printf("cmdEnterRest %s\n", qPrintable(d.name()));
-//TODO-S      if (!noteEntryMode())
-//            setNoteEntry(true);
+      startCmd();
       expandVoice();
       if (_is.cr() == 0) {
             printf("cannot enter rest here\n");
@@ -1774,11 +1762,12 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
             }
 
       int track = _is.track;
-      Segment* seg = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
+      Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
       if (cr)
             nextInputPos(cr, false);
       _is.rest = false;  // continue with normal note entry
+      endCmd();
       }
 
 //---------------------------------------------------------
