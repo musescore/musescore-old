@@ -374,7 +374,7 @@ void Preferences::read()
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", true).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
-      pngScreenShot            = s.value("pngScreenShot", true).toBool();
+      pngScreenShot            = s.value("pngScreenShot", false).toBool();
       language                 = s.value("language", "system").toString();
       iconHeight               = s.value("iconHeight", 24).toInt();
       iconWidth                = s.value("iconHeight", 24).toInt();

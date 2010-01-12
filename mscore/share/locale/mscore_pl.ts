@@ -864,11 +864,6 @@ p, li { white-space: pre-wrap; }
         <translation>odstrojenie</translation>
     </message>
     <message>
-        <source>cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation>cent</translation>
-    </message>
-    <message>
         <source>note head positon </source>
         <translation>pozycja główki nuty</translation>
     </message>
@@ -913,6 +908,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>offtime</source>
         <translation>offtime</translation>
+    </message>
+    <message>
+        <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> ticks</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3410,6 +3414,10 @@ Restore session?</source>
         <source>MuseScore: Breaks &amp; Spacer</source>
         <translation>MuseScore: Łamanie &amp; Odstęp</translation>
     </message>
+    <message>
+        <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3852,6 +3860,14 @@ Restore session?</source>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
         <translation>MuseScore: &lt;%1&gt; Pięciolinia: %2</translation>
+    </message>
+    <message>
+        <source>toolbar1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toolbar2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4511,6 +4527,18 @@ Restore session?</source>
         <source>Remember last connection(s)</source>
         <translation>Pamiętaj ostatnie połączenia</translation>
     </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatic Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for new versions of MuseScore on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -4654,6 +4682,10 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację</transla
     <message>
         <source>MuseScore: Save Chord Description File</source>
         <translation>MuseScore: Zapisz plik opis akordów</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load languages failed:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4941,6 +4973,14 @@ Try saving to a different location.</source>
 %1
 
 Spróbuj zapisać w innym miejscu.</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The first time signature of a piece can not be removed.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5916,20 +5956,216 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>TransposeDialogBase</name>
     <message>
-        <source>Dialog</source>
-        <translation>Okno dialogowe</translation>
-    </message>
-    <message>
-        <source>Semitones:</source>
-        <translation>Półtony:</translation>
-    </message>
-    <message>
         <source>Transpose key signatures</source>
         <translation>Transponuj tonację</translation>
     </message>
     <message>
         <source>Transpose chord names</source>
         <translation>Transponuj nazwy akordów</translation>
+    </message>
+    <message>
+        <source>MuseScore: Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose by Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cb major / Ab minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gb major / Eb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Db major / Bb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ab major / F minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eb major / C minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bb major / G minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F major / D minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C major / A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G major / E minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D major / B minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A major / F# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E major / C# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B major / G# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F# major / D# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C# major / A# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose by Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Major Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Major Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Major Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minor Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Major Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single sharps and flats only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use double sharps and flats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use multi sharps and flats</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5955,14 +6191,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Type</source>
         <translation>Typ</translation>
-    </message>
-    <message>
-        <source>actual notes</source>
-        <translation>rzeczywiste nuty</translation>
-    </message>
-    <message>
-        <source>normal notes</source>
-        <translation>normalne nuty</translation>
     </message>
     <message>
         <source>Format</source>
@@ -5997,38 +6225,12 @@ p, li { white-space: pre-wrap; }
         <translation>klamra</translation>
     </message>
     <message>
-        <source>actual type</source>
-        <translation>rzeczywisty typ</translation>
+        <source>relation:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Half</source>
-        <extracomment>note duration</extracomment>
-        <translation>Półnuta</translation>
-    </message>
-    <message>
-        <source>Quarter</source>
-        <extracomment>note duration</extracomment>
-        <translation>Ćwierćnuta</translation>
-    </message>
-    <message>
-        <source>Eighth</source>
-        <extracomment>note duration</extracomment>
-        <translation>Ósemka</translation>
-    </message>
-    <message>
-        <source>16th</source>
-        <extracomment>note duration</extracomment>
-        <translation>16-ka</translation>
-    </message>
-    <message>
-        <source>32nd</source>
-        <extracomment>note duration</extracomment>
-        <translation>32-ka</translation>
-    </message>
-    <message>
-        <source>64th</source>
-        <extracomment>note duration</extracomment>
-        <translation>64-ka</translation>
+        <source>/</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6135,6 +6337,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Unknown error.</source>
         <translation>Nieznany błąd.</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateChecker</name>
+    <message>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update Available</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7943,8 +8156,12 @@ p, li { white-space: pre-wrap; }
         <translation>Edytuj styl akordu...</translation>
     </message>
     <message>
-        <source>Clear</source>
-        <translation>Wyczyść</translation>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete contents of the selected measures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8450,129 +8667,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>AccidentalBracket</source>
         <translation>NawiasZnaku</translation>
-    </message>
-</context>
-<context>
-    <name>language</name>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
-    </message>
-    <message>
-        <source>Afrikaans</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hungary</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Norsk</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Polski</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Svenska</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ukrajina</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>العربية</source>
-        <translation>العربية</translation>
-    </message>
-    <message>
-        <source>Català</source>
-        <translation>Català</translation>
-    </message>
-    <message>
-        <source>ελληνικά</source>
-        <translation>Grecki</translation>
-    </message>
-    <message>
-        <source>Español</source>
-        <translation>Hiszpański</translation>
-    </message>
-    <message>
-        <source>Português</source>
-        <translation>Portugalski</translation>
-    </message>
-    <message>
-        <source>Português brasileiro</source>
-        <translation>Portugalski brazylijski</translation>
-    </message>
-    <message>
-        <source>Română</source>
-        <translation>Rumuński</translation>
-    </message>
-    <message>
-        <source>Русский</source>
-        <translation>Rosyjski</translation>
-    </message>
-    <message>
-        <source>ภาษาไทย</source>
-        <translation>ภาษาไทย</translation>
-    </message>
-    <message>
-        <source>繁體中文 (台灣)</source>
-        <translation>繁體中文 (台灣)</translation>
-    </message>
-    <message>
-        <source>Fran๺is</source>
-        <translation>Francuski</translation>
-    </message>
-    <message>
-        <source>Türk๾</source>
-        <translation>Turecki</translation>
     </message>
 </context>
 <context>

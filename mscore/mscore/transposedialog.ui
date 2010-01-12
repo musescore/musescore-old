@@ -57,94 +57,84 @@
          <property name="verticalSpacing">
           <number>0</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QRadioButton" name="closestKey">
-           <property name="text">
-            <string>Closest</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QComboBox" name="keyList">
            <property name="currentIndex">
-            <number>7</number>
+            <number>0</number>
            </property>
            <item>
             <property name="text">
-             <string>Cb</string>
+             <string>Cb major / Ab minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Gb</string>
+             <string>Gb major / Eb minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Db</string>
+             <string>Db major / Bb minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Ab</string>
+             <string>Ab major / F minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Eb</string>
+             <string>Eb major / C minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Bb</string>
+             <string>Bb major / G minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>F</string>
+             <string>F major / D minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>C</string>
+             <string>C major / A minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>G</string>
+             <string>G major / E minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>D</string>
+             <string>D major / B minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>A</string>
+             <string>A major / F# minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>E</string>
+             <string>E major / C# minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>B</string>
+             <string>B major / G# minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>F#</string>
+             <string>F# major / D# minor</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>C#</string>
+             <string>C# major / A# minor</string>
             </property>
            </item>
           </widget>
@@ -160,6 +150,16 @@
           <widget class="QRadioButton" name="downKey">
            <property name="text">
             <string>Down</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QRadioButton" name="closestKey">
+           <property name="text">
+            <string>Closest</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
