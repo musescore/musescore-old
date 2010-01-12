@@ -1,3 +1,6 @@
+12.jan (db)
+      - turn off "screen-shot" preference by default
+      - add major and minor key signature names to transpose dialog
 11.jan (lv)
       - fix import of MusicXML bracket line-end
 10.jan (ws)
