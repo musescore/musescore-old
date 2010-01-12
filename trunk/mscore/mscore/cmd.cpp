@@ -1926,16 +1926,6 @@ void Score::cmd(const QAction* a)
                   cmdDeleteSelection();
             else if (cmd == "delete-measures")
                   cmdDeleteSelectedMeasures();
-            else if (cmd == "rest")
-                  cmdEnterRest();
-            else if (cmd == "rest-1")
-                  cmdEnterRest(Duration(Duration::V_WHOLE));
-            else if (cmd == "rest-2")
-                  cmdEnterRest(Duration(Duration::V_HALF));
-            else if (cmd == "rest-4")
-                  cmdEnterRest(Duration(Duration::V_QUARTER));
-            else if (cmd == "rest-8")
-                  cmdEnterRest(Duration(Duration::V_EIGHT));
             else if (cmd == "pitch-up")
                   upDown(true, false);
             else if (cmd == "pitch-down")

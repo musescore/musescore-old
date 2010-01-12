@@ -21,6 +21,8 @@
 #ifndef __SCANVAS_H__
 #define __SCANVAS_H__
 
+#include "durationtype.h"
+
 class Rest;
 class Element;
 class Page;
@@ -157,6 +159,8 @@ class ScoreView : public QWidget {
       void cmdAddPitch(int note, bool addFlag);
       void cmdAddChordName();
       void cmdAddText(int style);
+      void cmdEnterRest(const Duration& d);
+      void cmdEnterRest();
 
    private slots:
       void moveCursor();

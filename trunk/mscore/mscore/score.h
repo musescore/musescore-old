@@ -402,9 +402,6 @@ class Score : public QObject {
       void transposeByKey(Note* n, int keysig, TransposeDirection dir);
       void transposeByInterval(Note* n, int keysig, TransposeDirection dir);
 
-      void cmdEnterRest();
-      void cmdEnterRest(const Duration& d);
-
       Score(const Style&);
       ~Score();
 
@@ -793,6 +790,7 @@ class Score : public QObject {
       void cmdPaste();
       Element* selectMove(const QString& cmd);
       Element* move(const QString& cmd);
+      void cmdEnterRest(const Duration& d);
       };
 
 extern Score* gscore;
