@@ -228,7 +228,7 @@ void Score::transpose()
             int stick   = _selection.startSegment()->tick();
             int etick   = _selection.endSegment()->tick();
 
-            for (Measure* m = sm;;) {
+            for (Measure* m = sm; m; m = m->nextMeasure()) {
                   foreach (Element* e, *m->el()) {
                         if (e->type() != HARMONY || e->tick() < stick)
                               continue;
@@ -247,12 +247,6 @@ void Score::transpose()
                         }
                   if (m == em)
                         break;
-                  MeasureBase* mb = m->next();
-                  while (mb && (mb->type() != MEASURE))
-                        mb = mb->next();
-                  if (mb == 0)
-                        break;
-                  m = static_cast<Measure*>(mb);
                   }
             }
       setLayoutAll(true);
@@ -285,10 +279,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                   _undo->push(new ChangeKeySig(ks, key));
                   }
             }
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int st = startTrack; st < endTrack; ++st) {
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         Element* e = segment->element(st);
