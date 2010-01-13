@@ -42,6 +42,7 @@ class ChordRest;
 class Element;
 class Segment;
 class Note;
+struct ElementPattern;
 
 //---------------------------------------------------------
 //   Selection
@@ -55,20 +56,21 @@ class Selection {
       Segment* _endSegment;         // next segment after selection
       Segment* _activeSegment;
 
+      int _staffStart;              // valid if selState is SEL_STAFF
+      int _staffEnd;                // valid if selState is SEL_STAFF
+      int _activeTrack;
+
       QByteArray staffMimeData() const;
 
    public:
       Selection(Score*);
-      Score* score() const      { return _score; }
-      SelState state() const    { return _state; }
-      void setState(SelState s) { _state = s;    }
+      Score* score() const             { return _score; }
+      SelState state() const           { return _state; }
+      void setState(SelState s)        { _state = s;    }
 
-      int staffStart;         // valid if selState is SEL_STAFF
-      int staffEnd;           // valid if selState is SEL_STAFF
-
-      int activeTrack;
-
-      QList<Element*>* elements()      { return &_el; }
+      void searchSelectedElements();
+      const QList<Element*>& elements() const { return _el; }
+      void clearElements()             { _el.clear(); }
       QList<Note*> noteList() const;
       void add(Element*);
       void append(Element* el)         { _el.append(el); }
@@ -84,21 +86,25 @@ class Selection {
       QString mimeType() const;
       QByteArray mimeData() const;
 
-      Segment* startSegment() const    { return _startSegment; }
-      Segment* endSegment() const      { return _endSegment;   }
-      void setStartSegment(Segment* s) { _startSegment = s; }
-      void setEndSegment(Segment* s)   { _endSegment = s; }
+      Segment* startSegment() const     { return _startSegment; }
+      Segment* endSegment() const       { return _endSegment;   }
+      void setStartSegment(Segment* s)  { _startSegment = s; }
+      void setEndSegment(Segment* s)    { _endSegment = s; }
       void setRange(Segment* a, Segment* b, int c, int d);
-      Segment* activeSegment() const   { return _activeSegment; }
+      Segment* activeSegment() const    { return _activeSegment; }
       void setActiveSegment(Segment* s) { _activeSegment = s; }
       ChordRest* activeCR() const;
       bool isStartActive() const;
       bool isEndActive() const;
       int tickStart() const;
       int tickEnd() const;
+      int staffStart() const            { return _staffStart;  }
+      int staffEnd() const              { return _staffEnd;    }
+      int activeTrack() const           { return _activeTrack; }
+      void setStaffStart(int v)         { _staffStart = v;  }
+      void setStaffEnd(int v)           { _staffEnd = v;    }
+      void setActiveTrack(int v)        { _activeTrack = v; }
       };
-
-struct ElementPattern;
 
 //---------------------------------------------------------
 //   SelectDialog

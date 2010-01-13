@@ -31,89 +31,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "keysig.h"
-
-//---------------------------------------------------------
-//   Interval
-//---------------------------------------------------------
-
-struct Interval {
-      int steps;
-      int semitones;
-      };
-
-static Interval intervalList[26] = {
-      { 0, 0 },         // Perfect Unison
-      { 0, 1 },         // Augmented Unison
-
-      { 1, 0 },         // Diminished Second
-      { 1, 1 },         // Minor Second
-      { 1, 2 },         // Major Second
-      { 1, 3 },         // Augmented Second
-
-      { 2, 2 },         // Diminished Third
-      { 2, 3 },         // Minor Third
-      { 2, 4 },         // Major Third
-      { 2, 5 },         // Augmented Third
-
-      { 3, 4 },         // Diminished Fourth
-      { 3, 5 },         // Perfect Fourth
-      { 3, 6 },         // Augmented Fourth
-
-      { 4, 6 },         // Diminished Fifth
-      { 4, 7 },         // Perfect Fifth
-      { 4, 8 },         // Augmented Fifth
-
-      { 5, 7 },         // Diminished Sixth
-      { 5, 8 },         // Minor Sixth
-      { 5, 9 },         // Major Sixth
-      { 5, 10 },        // Augmented Sixth
-
-      { 6, 9 },         // Diminished Seventh
-      { 6, 10 },        // Minor Seventh
-      { 6, 11 },        // Major Seventh
-      { 6, 12 },        // Augmented Seventh
-
-      { 7, 11 },        // Diminshed Octave
-      { 7, 12 }         // Perfect Octave
-      };
-
-//---------------------------------------------------------
-//   transposeTpc
-//---------------------------------------------------------
-
-static int transposeTpc(int tpc, int interval, TransposeDirection dir)
-      {
-      if (tpc == INVALID_TPC || interval == 0 || interval == 25) // perfect unison & perfect octave
-            return tpc;
-
-      int steps     = intervalList[interval].steps;
-      int semitones = intervalList[interval].semitones;
-
-      if (dir == TRANSPOSE_DOWN) {
-            steps     = -steps;
-            semitones = -semitones;
-            }
-
-      int step, alter;
-      int pitch = tpc2pitch(tpc);
-
-      for (;;) {
-            step       = tpc2step(tpc) + steps;
-            while (step < 0)
-                  step += 7;
-            while (step >= 7)
-                  step -= 7;
-            int p1     = tpc2pitch(step2tpc(step, 0));
-            alter      = semitones - (p1 - pitch);
-            if (alter > 2)
-                  steps -= 1;
-            else if (alter < -2)
-                  steps += 1;
-            else
-                  break;
-            }
-      return step2tpc(step, alter);
-      }
+#include "utils.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -201,16 +119,16 @@ void Score::transpose()
             //
             // select all
             //
-            _selection->setState(SEL_SYSTEM);
-            _selection->setStartSegment(tick2segment(0));
-            _selection->setEndSegment(
+            _selection.setState(SEL_SYSTEM);
+            _selection.setStartSegment(tick2segment(0));
+            _selection.setEndSegment(
                tick2segment(last()->tick() + last()->tickLen())
                );
-            _selection->staffStart = 0;
-            _selection->staffEnd   = nstaves();
+            _selection.setStaffStart(0);
+            _selection.setStaffEnd(nstaves());
             }
       TransposeDialog td;
-      td.enableTransposeKeys(_selection->state() == SEL_SYSTEM);
+      td.enableTransposeKeys(_selection.state() == SEL_SYSTEM);
       if (!td.exec())
             return;
 
@@ -225,7 +143,7 @@ void Score::transpose()
       bool transposeKeys       = td.getTransposeKeys();
       bool transposeChordNames = td.getTransposeChordNames();
 
-      if (_selection->state() != SEL_SYSTEM)
+      if (_selection.state() != SEL_SYSTEM)
             transposeKeys = false;
       int d = semitones < 0 ? -semitones : semitones;
       bool fullOctave = (d % 12) == 0;
@@ -234,9 +152,8 @@ void Score::transpose()
             transposeChordNames = false;
             }
 
-      if (_selection->state() == SEL_SINGLE || _selection->state() == SEL_MULT) {
-            QList<Element*>* el = _selection->elements();
-            foreach(Element* e, *el) {
+      if (_selection.state() == SEL_SINGLE || _selection.state() == SEL_MULT) {
+            foreach(Element* e, _selection.elements()) {
                   if (e->type() != NOTE)
                         continue;
                   transpose(static_cast<Note*>(e), semitones);
@@ -244,18 +161,18 @@ void Score::transpose()
             return;
             }
 
-      int startTrack = _selection->staffStart * VOICES;
-      int endTrack   = _selection->staffEnd * VOICES;
-      if (_selection->state() == SEL_SYSTEM) {
+      int startTrack = _selection.staffStart() * VOICES;
+      int endTrack   = _selection.staffEnd() * VOICES;
+      if (_selection.state() == SEL_SYSTEM) {
             startTrack = 0;
             endTrack   = nstaves() * VOICES;
             }
 
       if (transposeKeys) {
-            for (int staffIdx = _selection->staffStart; staffIdx < _selection->staffEnd; ++staffIdx) {
+            for (int staffIdx = _selection.staffStart(); staffIdx < _selection.staffEnd(); ++staffIdx) {
                   KeyList* km = staff(staffIdx)->keymap();
-                  for (iKeyList ke = km->lower_bound(_selection->tickStart());
-                     ke != km->lower_bound(_selection->tickEnd()); ++ke) {
+                  for (iKeyList ke = km->lower_bound(_selection.tickStart());
+                     ke != km->lower_bound(_selection.tickEnd()); ++ke) {
                         KeySigEvent oKey  = ke->second;
                         int tick  = ke->first;
                         int nKey = 0;
@@ -268,9 +185,9 @@ void Score::transpose()
                   for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
                         if (s->subtype() != Segment::SegKeySig)
                               continue;
-                        if (s->tick() < _selection->tickStart())
+                        if (s->tick() < _selection.tickStart())
                               continue;
-                        if (s->tick() >= _selection->tickEnd())
+                        if (s->tick() >= _selection.tickEnd())
                               break;
                         KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
                         if (ks) {
@@ -284,7 +201,7 @@ void Score::transpose()
             }
 
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* segment = _selection->startSegment(); segment && segment != _selection->endSegment(); segment = segment->next1()) {
+            for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
                         continue;
@@ -306,10 +223,10 @@ void Score::transpose()
             }
 
       if (transposeChordNames) {
-            Measure* sm = _selection->startSegment()->measure();
-            Measure* em = _selection->endSegment()->measure();
-            int stick   = _selection->startSegment()->tick();
-            int etick   = _selection->endSegment()->tick();
+            Measure* sm = _selection.startSegment()->measure();
+            Measure* em = _selection.endSegment()->measure();
+            int stick   = _selection.startSegment()->tick();
+            int etick   = _selection.endSegment()->tick();
 
             for (Measure* m = sm;;) {
                   foreach (Element* e, *m->el()) {
@@ -398,7 +315,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                   }
 #endif
             }
-      // spell(staffIdx, staffIdx+1, _selection->startSegment(), _selection->endSegment());
+      // spell(staffIdx, staffIdx+1, _selection.startSegment(), _selection.endSegment());
       spell();
       }
 
@@ -441,7 +358,6 @@ void Score::transpose(Note* n, int diff)
 
 void Score::transposeByKey(Note* /*n*/, int /*keysig*/, TransposeDirection /*dir*/)
       {
-
       }
 
 //---------------------------------------------------------
@@ -450,47 +366,9 @@ void Score::transposeByKey(Note* /*n*/, int /*keysig*/, TransposeDirection /*dir
 
 void Score::transposeByInterval(Note* n, int interval, TransposeDirection dir)
       {
-      int pitch     = n->pitch();
       int npitch;
-      int tpc       = n->tpc();
-      int steps     = intervalList[interval].steps;
-      int semitones = intervalList[interval].semitones;
-
-      if (dir == TRANSPOSE_DOWN) {
-            steps     = -steps;
-            semitones = -semitones;
-            npitch    = pitch - intervalList[interval].semitones;
-            }
-      else
-            npitch    = pitch + intervalList[interval].semitones;
-
-      int step, alter;
-
-      for (;;) {
-            int octave = (pitch / 12);
-
-            step       = tpc2step(tpc) + steps;
-            while (step < 0) {
-                  step += 7;
-                  octave -= 1;
-                  }
-            while (step >= 7) {
-                  step -= 7;
-                  octave += 1;
-                  }
-
-            int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
-            alter      = semitones - (p1 - pitch);
-printf("Interval(%d,%d,%d) step %d octave %d p1 %d(%d-%d) alter %d\n",
-    interval, steps, semitones, step, octave, p1, pitch, npitch, alter);
-            if (alter > 2)
-                  steps -= 1;
-            else if (alter < -2)
-                  steps += 1;
-            else
-                  break;
-            }
-      tpc  = step2tpc(step, alter);
-      undoChangePitch(n, npitch, tpc, 0);
+      int ntpc;
+      transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval, dir);
+      undoChangePitch(n, npitch, ntpc, 0);
       }
 

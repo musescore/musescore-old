@@ -455,8 +455,7 @@ void Rest::propertyAction(ScoreView* viewer, const QString& s)
                   int bracketType = vp.bracketType();
                   int numberType  = vp.numberType();
 
-                  QList<Element*>* sl = score()->selection()->elements();
-                  foreach(Element* e, *sl) {
+                  foreach(Element* e, score()->selection()->elements()) {
                         if (e->type() == REST) {
                               Rest* r = static_cast<Rest*>(e);
                               if (r->tuplet()) {
@@ -469,8 +468,7 @@ void Rest::propertyAction(ScoreView* viewer, const QString& s)
                   }
             }
       else if (s == "tupletDelete") {
-            QList<Element*>* sl = score()->selection()->elements();
-            foreach(Element* e, *sl) {
+            foreach(Element* e, score()->selection()->elements()) {
                   if (e->type() == REST) {
                         Rest* r = static_cast<Rest*>(e);
                         if (r->tuplet())

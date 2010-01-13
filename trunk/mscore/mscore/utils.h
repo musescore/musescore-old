@@ -34,6 +34,15 @@ static inline unsigned long long cycles()
       return rv;
       }
 
+//---------------------------------------------------------
+//   Interval
+//---------------------------------------------------------
+
+struct Interval {
+      int steps;
+      int semitones;
+      };
+
 class Measure;
 class Segment;
 class System;
@@ -53,7 +62,10 @@ extern void selectNoteRestMessage();
 extern void selectNoteSlurMessage();
 extern void selectStavesMessage();
 extern QString pitch2string(int v);
+extern void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int interval, TransposeDirection);
+extern int transposeTpc(int tpc, int interval, TransposeDirection);
 
+extern Interval intervalList[26];
 
 #endif
 

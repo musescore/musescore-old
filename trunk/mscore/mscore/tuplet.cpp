@@ -523,8 +523,7 @@ void Tuplet::propertyAction(ScoreView* viewer, const QString& s)
                   //
                   int bracketType = vp.bracketType();
                   int numberType  = vp.numberType();
-                  QList<Element*>* sl = score()->selection()->elements();
-                  foreach(Element* e, *sl) {
+                  foreach(Element* e, score()->selection()->elements()) {
                         if (e->type() == TUPLET) {
                               Tuplet* tuplet = static_cast<Tuplet*>(e);
                               if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
