@@ -226,7 +226,6 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       if (sel->state() == SEL_NONE)
             return;
 
-      QList<Element*>* el = sel->elements();
       QMimeData* mimeData = new QMimeData;
       Element* element    = cells[i]->element;
       if (element == 0)
@@ -236,12 +235,12 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
       score->startCmd();
       if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
-      foreach(Element* e, *el)
-            applyDrop(score, viewer, e, element);
+            foreach(Element* e, sel->elements())
+                  applyDrop(score, viewer, e, element);
             }
       else if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
-            int track1 = sel->staffStart * VOICES;
-            int track2 = sel->staffEnd * VOICES;
+            int track1 = sel->staffStart() * VOICES;
+            int track2 = sel->staffEnd() * VOICES;
             for (Segment* s = sel->startSegment(); s && s != sel->endSegment(); s = s->next1()) {
                   for (int track = track1; track < track2; ++track) {
                         Element* e = s->element(track);

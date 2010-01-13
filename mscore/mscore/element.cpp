@@ -207,13 +207,11 @@ bool Element::operator>(const Element& el) const
 Element::~Element()
       {
       if (score()) {
-            Selection* s = score()->selection();
-            QList<Element*>* el = s->elements();
-            foreach(Element* e, *el) {
+            foreach(Element* e, score()->selection()->elements()) {
                   if (e == this) {
-                        if (debugMode)
+//                        if (debugMode)
                               printf("======~Element: %p still in selection!\n", this);
-                        el->removeAt(el->indexOf(this));
+//                        el->removeAt(el->indexOf(this));
                         }
                   }
             }
@@ -561,9 +559,8 @@ bool Element::genPropertyMenu(QMenu* popup) const
 
 void Element::propertyAction(ScoreView*, const QString& s)
       {
-      QList<Element*>* el = score()->selection()->elements();
       if (s == "invisible") {
-            foreach(Element* e, *el)
+            foreach(Element* e, score()->selection()->elements())
                   score()->toggleInvisible(e);
             }
       else if (s == "color") {

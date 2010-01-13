@@ -269,6 +269,7 @@ class ScoreView : public QWidget {
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
+      void changeLineSegment(bool);
       };
 
 extern int searchStaff(const Element* element);

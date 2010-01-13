@@ -120,7 +120,7 @@ void Score::endCmd()
             return;
             }
       _undo->endMacro(_undo->current()->childCount() <= 1);
-      foreach(Element* e, *selection()->elements())
+      foreach(Element* e, selection()->elements())
             e->setSelected(true);
       end();
       }
@@ -559,32 +559,14 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
 //   cmdAddInterval
 //---------------------------------------------------------
 
-void Score::cmdAddInterval(int val)
+void Score::cmdAddInterval(int val, const QList<Note*>& nl)
       {
-      QList<Note*> nl;
-      if (_selection->state() == SEL_SINGLE || _selection->state() == SEL_MULT) {
-            QList<Element*>* el = _selection->elements();
-            foreach(Element* e, *el) {
-                  if (e->type() == NOTE)
-                        nl.append(static_cast<Note*>(e));
-                  }
-            }
-      else if (_selection->state() == SEL_STAFF)
-            nl = _selection->noteList();
-      else
-            return;
-
-//TODO-S            setNoteEntry(true);
-
-      foreach(Element* e, nl) {
-            if (e->type() != NOTE)
-                  continue;
-
-            Note* on = static_cast<Note*>(e);
-
+      startCmd();
+      foreach(Note* on, nl) {
+#if 0
             Staff* staff = on->staff();
-            KeySigEvent key = staff->keymap()->key(on->chord()->tick());
 
+            KeySigEvent key = staff->keymap()->key(on->chord()->tick());
             int kt[15] = {
                   //  cb gb db ab  eb bb  f  c  g  d  a  e   b  f# c#
                   // -7  -6 -5 -4 -3  -2 -1  0  1  2  3  4   5  6  7
@@ -622,16 +604,42 @@ void Score::cmdAddInterval(int val)
                   interval = pt[(pitch+po) % 12][idx];
 
             pitch += interval;
-
             if (pitch > 127)
                   pitch = 127;
             if (pitch < 0)
                   pitch = 0;
-            Note* n = addNote(on->chord(), pitch);
-            select(n, SELECT_SINGLE, 0);
-            _is.pitch = n->pitch();
+#endif
+            static int itable[] = {
+             //   0,  1, 2, 3,  4,  5,  6,  7,  8,  9
+                  0,  0, 4, 8, 11, 14, 18, 22, 25,  4
+                  };
+
+            int interval = itable[qAbs(val)];
+printf("val %d -> interval %d\n", val, interval);
+
+printf("note %d %d\n", on->pitch(), on->tpc());
+            Note* note = new Note(*on);
+            note->setParent(on->chord());
+printf("note %d %d\n", note->pitch(), note->tpc());
+            int npitch, ntpc;
+            transposeInterval(note->pitch(), note->tpc(), &npitch, &ntpc, interval, val > 0 ? TRANSPOSE_UP : TRANSPOSE_DOWN);
+            note->setPitch(npitch, ntpc);
+
+printf("  note %d %d\n", note->pitch(), note->tpc());
+            if (val > 8)
+                  note->setPitch(note->pitch() + 12, note->tpc());
+            else if (val < -8)
+                  note->setPitch(note->pitch() - 12, note->tpc());
+
+            cmdAdd(note);
+            mscore->play(note);
+            setLayout(on->chord()->measure());
+
+            select(note, SELECT_SINGLE, 0);
+            _is.pitch = note->pitch();
             }
       moveToNextInputPos();
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -1602,7 +1610,7 @@ void Score::insertMeasures(int n, int type)
 
 void Score::addArticulation(int attr)
       {
-      foreach(Element* el, *selection()->elements()) {
+      foreach(Element* el, selection()->elements()) {
             if (el->type() == NOTE || el->type() == CHORD) {
                   Articulation* na = new Articulation(this);
                   na->setSubtype(attr);
@@ -1700,9 +1708,8 @@ void Score::addArticulation(Element* el, Articulation* atr)
 
 void Score::toDefault()
       {
-      QList<Element*> el = *selection()->elements();
-      for (iElement i = el.begin(); i != el.end(); ++i)
-            (*i)->toDefault();
+      foreach(Element* e, selection()->elements())
+            e->toDefault();
       layoutAll = true;
       setClean(false);
       }
@@ -2060,10 +2067,6 @@ void Score::cmd(const QAction* a)
                   changeVoice(2);
             else if (cmd == "voice-4")
                   changeVoice(3);
-            else if (cmd.startsWith("interval")) {
-                  int n = cmd.mid(8).toInt();
-                  cmdAddInterval(n);
-                  }
             else if (cmd == "duplet")
                   cmdTuplet(2);
             else if (cmd == "triplet")
@@ -2959,7 +2962,7 @@ void Score::cmdRepeatSelection()
             }
       docName = "--";
 
-      int dStaff = selection()->staffStart;
+      int dStaff = selection()->staffStart();
       Segment* endSegment = selection()->endSegment();
       if (endSegment && endSegment->element(dStaff)) {
             Element* e = endSegment->element(dStaff * VOICES);

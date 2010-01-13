@@ -245,6 +245,7 @@ void Score::setSpatium(double v)
 //---------------------------------------------------------
 
 Score::Score(const Style& s)
+   : _selection(this)
       {
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
@@ -275,7 +276,6 @@ Score::Score(const Style& s)
       _fileDivision   = AL::division;
       _creditsRead    = false;
       _defaultsRead   = false;
-      _selection      = new Selection(this);
 
       rights          = 0;
       rights          = 0;
@@ -297,7 +297,6 @@ Score::~Score()
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete _tempomap;
       delete _sigmap;
-      delete _selection;
       delete _repeatList;
       }
 
@@ -1974,16 +1973,6 @@ double Score::utick2utime(int tick) const
 int Score::utime2utick(double utime)
       {
       return _repeatList->utime2utick(utime);
-      }
-
-//---------------------------------------------------------
-//   setSelection
-//---------------------------------------------------------
-
-void Score::setSelection(Selection* s)
-      {
-      delete _selection;
-      _selection = s;
       }
 
 StyleVal Score::style(StyleIdx idx) const

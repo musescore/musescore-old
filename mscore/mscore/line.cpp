@@ -112,7 +112,7 @@ QPointF LineSegment::gripAnchor(int grip) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool LineSegment::edit(ScoreView* view, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if ((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
@@ -197,7 +197,7 @@ bool LineSegment::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers m
 
             line()->layout();
             if (line()->lineSegments().size() != segments)
-                  score()->changeLineSegment(curGrip == 1);
+                  view->changeLineSegment(curGrip == 1);
             if (line()->type() == OTTAVA)
                   score()->fixPpitch();
             return true;

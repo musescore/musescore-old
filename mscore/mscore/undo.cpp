@@ -391,12 +391,12 @@ void SaveState::undo()
       {
       if (!redoSelection)
             redoSelection = new Selection(score);
-//      foreach(Element* e, *score->selection()->elements())
-//            e->setSelected(false);
       *redoSelection = *score->selection();
       if (undoSelection) {
-            score->setSelection(new Selection(*undoSelection));
-            foreach(Element* e, *score->selection()->elements())
+            foreach(Element* e, score->selection()->elements())
+                  e->setSelected(false);
+            score->setSelection(*undoSelection);
+            foreach(Element* e, undoSelection->elements())
                   e->setSelected(true);
             }
       redoInputState = score->inputState();
@@ -407,12 +407,14 @@ void SaveState::redo()
       {
       if (!undoSelection)
             undoSelection = new Selection(score);
-      foreach(Element* e, *score->selection()->elements())
-            e->setSelected(false);
+//      foreach(Element* e, score->selection()->elements())
+//            e->setSelected(false);
       *undoSelection = *score->selection();
       if (redoSelection) {
-            score->setSelection(new Selection(*redoSelection));
-            foreach(Element* e, *score->selection()->elements())
+            foreach(Element* e, score->selection()->elements())
+                  e->setSelected(false);
+            score->setSelection(*redoSelection);
+            foreach(Element* e, redoSelection->elements())
                   e->setSelected(true);
             }
       undoInputState = score->inputState();

@@ -29,6 +29,7 @@
 #include "utils.h"
 #include "system.h"
 #include "measure.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   RecordButton
@@ -421,4 +422,129 @@ QString pitch2string(int v)
       QString s(octave < 0 ? valu[i] : vall[i]);
       return QString("%1%2").arg(octave < 0 ? valu[i] : vall[i]).arg(octave);
       }
+
+//---------------------------------------------------------
+//   Interval
+//---------------------------------------------------------
+
+Interval intervalList[26] = {
+      { 0, 0 },         // Perfect Unison
+      { 0, 1 },         // Augmented Unison
+
+      { 1, 0 },         // Diminished Second
+      { 1, 1 },         // Minor Second
+      { 1, 2 },         // Major Second
+      { 1, 3 },         // Augmented Second
+
+      { 2, 2 },         // Diminished Third
+      { 2, 3 },         // Minor Third
+      { 2, 4 },         // Major Third
+      { 2, 5 },         // Augmented Third
+
+      { 3, 4 },         // Diminished Fourth
+      { 3, 5 },         // Perfect Fourth
+      { 3, 6 },         // Augmented Fourth
+
+      { 4, 6 },         // Diminished Fifth
+      { 4, 7 },         // Perfect Fifth
+      { 4, 8 },         // Augmented Fifth
+
+      { 5, 7 },         // Diminished Sixth
+      { 5, 8 },         // Minor Sixth
+      { 5, 9 },         // Major Sixth
+      { 5, 10 },        // Augmented Sixth
+
+      { 6, 9 },         // Diminished Seventh
+      { 6, 10 },        // Minor Seventh
+      { 6, 11 },        // Major Seventh
+      { 6, 12 },        // Augmented Seventh
+
+      { 7, 11 },        // Diminshed Octave
+      { 7, 12 }         // Perfect Octave
+      };
+
+//---------------------------------------------------------
+//   transposeInterval
+//---------------------------------------------------------
+
+void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int interval, TransposeDirection dir)
+      {
+      int steps     = intervalList[interval].steps;
+      int semitones = intervalList[interval].semitones;
+
+      if (dir == TRANSPOSE_DOWN) {
+            steps     = -steps;
+            semitones = -semitones;
+            *rpitch    = pitch - intervalList[interval].semitones;
+            }
+      else
+            *rpitch    = pitch + intervalList[interval].semitones;
+
+      int step, alter;
+
+      for (;;) {
+            int octave = (pitch / 12);
+
+            step       = tpc2step(tpc) + steps;
+            while (step < 0) {
+                  step += 7;
+                  octave -= 1;
+                  }
+            while (step >= 7) {
+                  step -= 7;
+                  octave += 1;
+                  }
+
+            int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
+            alter      = semitones - (p1 - pitch);
+printf("Interval(%d,%d,%d) step %d octave %d p1 %d(%d-%d) alter %d\n",
+    interval, steps, semitones, step, octave, p1, pitch, *rpitch, alter);
+            if (alter > 2)
+                  steps += 1;
+            else if (alter < -2)
+                  steps -= 1;
+            else
+                  break;
+            }
+      *rtpc  = step2tpc(step, alter);
+      }
+
+//---------------------------------------------------------
+//   transposeTpc
+//---------------------------------------------------------
+
+int transposeTpc(int tpc, int interval, TransposeDirection dir)
+      {
+      if (tpc == INVALID_TPC || interval == 0 || interval == 25) // perfect unison & perfect octave
+            return tpc;
+
+      int steps     = intervalList[interval].steps;
+      int semitones = intervalList[interval].semitones;
+
+      if (dir == TRANSPOSE_DOWN) {
+            steps     = -steps;
+            semitones = -semitones;
+            }
+
+      int step, alter;
+      int pitch = tpc2pitch(tpc);
+
+      for (;;) {
+            step       = tpc2step(tpc) + steps;
+            while (step < 0)
+                  step += 7;
+            while (step >= 7)
+                  step -= 7;
+            int p1     = tpc2pitch(step2tpc(step, 0));
+            alter      = semitones - (p1 - pitch);
+            if (alter > 2)
+                  steps -= 1;
+            else if (alter < -2)
+                  steps += 1;
+            else
+                  break;
+            }
+      return step2tpc(step, alter);
+      }
+
 

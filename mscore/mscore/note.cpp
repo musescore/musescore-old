@@ -222,6 +222,16 @@ void Note::setPitch(int val)
       _tpc    = pitch2tpc(_pitch, key.accidentalType);
       }
 
+void Note::setPitch(int a, int b)
+      {
+      if (a > 127)
+            a = 127;
+      else if (a < 0)
+            a = 0;
+      _pitch = a;
+      _tpc = b;
+      }
+
 //---------------------------------------------------------
 //   setTpc
 //---------------------------------------------------------

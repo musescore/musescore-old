@@ -1350,8 +1350,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             p.setPen(pen);
             double _spatium = score()->spatium();
             double x2      = ss->canvasPos().x() - _spatium;
-            int staffStart = sel->staffStart;
-            int staffEnd   = sel->staffEnd;
+            int staffStart = sel->staffStart();
+            int staffEnd   = sel->staffEnd();
 
             System* system2 = ss->measure()->system();
             QPointF pt      = ss->canvasPos();
@@ -2501,6 +2501,15 @@ void ScoreView::cmd(const QAction* a)
             cmdEnterRest(Duration(Duration::V_QUARTER));
       else if (cmd == "rest-8")
             cmdEnterRest(Duration(Duration::V_EIGHT));
+      else if (cmd.startsWith("interval")) {
+            int n = cmd.mid(8).toInt();
+            QList<Note*> nl = _score->selection()->noteList();
+            if (!nl.isEmpty()) {
+                  if (!noteEntryMode())
+                        sm->postEvent(new CommandEvent("note-input"));
+                  _score->cmdAddInterval(n, nl);
+                  }
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2572,7 +2581,7 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
-      foreach(Element* e, *_score->selection()->elements()) {
+      foreach(Element* e, _score->selection()->elements()) {
             _score->addRefresh(e->drag(delta));
             }
       _score->end();

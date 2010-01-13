@@ -271,7 +271,7 @@ class Score : public QObject {
       bool _creditsRead;             ///< credits were read at MusicXML import
       bool _defaultsRead;            ///< defaults were read at MusicXML import, allow export of defaults in convertermode
 
-      Selection* _selection;
+      Selection _selection;
       QList<KeySig*> customKeysigs;
 
       //------------------
@@ -306,8 +306,6 @@ class Score : public QObject {
       void padToggle(int n);
 
       void cmdAddPitch(int note, bool addFlag);
-
-      void cmdAddInterval(int);
 
       void printFile();
       void addTempo();
@@ -580,9 +578,10 @@ class Score : public QObject {
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 
-      Element* getSelectedElement() const { return _selection->element(); }
-      Selection* selection() const        { return _selection; }
-      void setSelection(Selection* s);
+      Element* getSelectedElement() const   { return _selection.element(); }
+      Selection* selection()                { return &_selection; }
+      const Selection* selection() const    { return &_selection; }
+      void setSelection(const Selection& s) { _selection = s; }
 
       int pos();
       Measure* tick2measure(int tick) const;
@@ -791,6 +790,7 @@ class Score : public QObject {
       Element* selectMove(const QString& cmd);
       Element* move(const QString& cmd);
       void cmdEnterRest(const Duration& d);
+      void cmdAddInterval(int, const QList<Note*>&);
       };
 
 extern Score* gscore;

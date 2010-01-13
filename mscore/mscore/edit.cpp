@@ -93,7 +93,7 @@ void Score::getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const
       {
       *cr1 = 0;
       *cr2 = 0;
-      foreach(Element* e, *selection()->elements()) {
+      foreach(Element* e, selection()->elements()) {
             if (e->type() == NOTE)
                   e = e->parent();
             if (e->isChordRest()) {
@@ -839,12 +839,12 @@ void Score::cmdSetBeamMode(int mode)
 
 void Score::cmdFlip()
       {
-      QList<Element*>* el = selection()->elements();
-      if (el->isEmpty()) {
+      const QList<Element*>& el = selection()->elements();
+      if (el.isEmpty()) {
             selectNoteSlurMessage();
             return;
             }
-      foreach(Element* e, *el) {
+      foreach(Element* e, el) {
             if (e->type() == NOTE) {
                   Chord* chord = static_cast<Note*>(e)->chord();
                   if (chord->beam())
@@ -1248,7 +1248,7 @@ void Score::cmdDeleteSelectedMeasures()
                         }
                   }
             }
-      selection()->elements()->clear();
+      selection()->clearElements();
       select(0, SELECT_SINGLE, 0);
       _is._segment = 0;        // invalidate position
       layoutAll = true;
@@ -1268,8 +1268,8 @@ void Score::cmdDeleteSelection()
             Segment* s1 = selection()->startSegment();
             Segment* s2 = selection()->endSegment();
             int tick2   = s2 ? s2->tick() : INT_MAX;
-            int track1  = selection()->staffStart * VOICES;
-            int track2  = selection()->staffEnd * VOICES;
+            int track1  = selection()->staffStart() * VOICES;
+            int track2  = selection()->staffEnd() * VOICES;
             for (int track = track1; track < track2; ++track) {
                   Fraction f;
                   int tick  = -1;
@@ -1339,12 +1339,12 @@ void Score::cmdDeleteSelection()
       else {
             // deleteItem modifies selection()->elements() list,
             // so we need a local copy:
-            foreach(Element* e, *selection()->elements()) {
+            foreach(Element* e, selection()->elements()) {
                   e->setSelected(false);  // in case item is not deleted
                   deleteItem(e);
                   }
             }
-      selection()->elements()->clear();
+      selection()->clearElements();
       select(0, SELECT_SINGLE, 0);
       layoutAll = true;
       }
@@ -1416,9 +1416,8 @@ void ScoreView::chordTab(bool back)
 //    switch to first/last LineSegment while editing
 //---------------------------------------------------------
 
-void Score::changeLineSegment(bool /*last*/)
+void ScoreView::changeLineSegment(bool last)
       {
-#if 0 // TODO-S
       LineSegment* segment = static_cast<LineSegment*>(editObject);
 
       LineSegment* newSegment;
@@ -1427,13 +1426,12 @@ void Score::changeLineSegment(bool /*last*/)
       else
             newSegment = segment->line()->lineSegments().front();
 
-      setState(STATE_NORMAL);
-      endCmd();
+      endEdit();
+      _score->endCmd();
 
-      startCmd();
-      emit startEdit(newSegment, -2);      // do not change curGrip
-      layoutAll = true;
-#endif
+      _score->startCmd();
+      startEdit(newSegment, -2);      // do not change curGrip
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1480,8 +1478,7 @@ printf("cmdTuplet %d noteEntry\n", n);
             cmdTuplet(n, _is.cr());
             }
       else {
-            QList<Element*>* sl = selection()->elements();
-            foreach(Element* e, *sl) {
+            foreach(Element* e, selection()->elements()) {
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         cmdTuplet(n, cr);
@@ -1696,7 +1693,7 @@ void Score::colorItem(Element* element)
       if (!c.isValid())
             return;
 
-      foreach(Element* e, *selection()->elements()) {
+      foreach(Element* e, selection()->elements()) {
             if (e->color() != c) {
                   _undo->push(new ChangeColor(e, c));
                   e->setGenerated(false);
@@ -1738,7 +1735,7 @@ void Score::cmdExchangeVoice(int s, int d)
       Measure* m2 = tick2measure(t2);
 printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2);
       for (;;) {
-            undoExchangeVoice(m1, s, d, selection()->staffStart, selection()->staffEnd);
+            undoExchangeVoice(m1, s, d, selection()->staffStart(), selection()->staffEnd());
             MeasureBase* mb = m1->next();
             while (mb && mb->type() != MEASURE)
                   mb = mb->next();
