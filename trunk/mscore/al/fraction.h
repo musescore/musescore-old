@@ -43,6 +43,7 @@ class Fraction {
       bool isValid() const       { return _denominator != 0;    }
       void reduce();
       Fraction reduced() const;
+      bool identical(const Fraction& v) const { return (_numerator == v._numerator) && (_denominator == v._denominator); }
 
       int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
       static Fraction fromTicks(int v);
