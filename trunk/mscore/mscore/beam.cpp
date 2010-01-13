@@ -130,7 +130,7 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32,  4,  8, 1, 8 ),
       BeamHint(1, 32,  4,  8, 3, 8 ),
 
-      //BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature    //Feature does not work when beam is every three notes instead of every two. (db)
+    //BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature    //Feature does not work when beam is every three notes instead of every two. (db)
       BeamHint(0,  0,  6, 8,  3, 8 ),
 
       BeamHint(0,  0,  9, 8,  3, 8 ),
@@ -165,20 +165,19 @@ bool endBeam(const Fraction& ts, ChordRest* cr, int p)
       int l = cr->ticks();
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
-            if (h.timeSig.numerator() && (h.timeSig != ts))
+            if (!h.timeSig.isZero() && (!h.timeSig.identical(ts)))
                   continue;
             if (h.noteLen.numerator()) {
-                  int len = (4 * h.noteLen.numerator() * AL::division)/ h.noteLen.denominator();
+                  int len = h.noteLen.ticks();
                   if (len != l)
                         continue;
                   }
-            if (h.pos.numerator()) {
-                  int pos = (4 * h.pos.numerator() * AL::division) / h.pos.denominator();
+            if (!h.pos.isZero()) {
+                  int pos = h.pos.ticks();
                   if (pos != p)
                         continue;
                   }
-            if (h.pos.numerator() == 0) {
-                  // stop on every beat
+            else {            // if (h.pos.numerator() == 0) {   // stop on every beat
                   int len = (4 * AL::division) / h.timeSig.denominator();
                   if (p % len)
                         continue;
