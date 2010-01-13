@@ -2045,8 +2045,6 @@ void Score::cmd(const QAction* a)
                   padToggle(PAD_BEAM_NO);
             else if (cmd == "beam-32")
                   padToggle(PAD_BEAM32);
-            else if (cmd == "tie")
-                  cmdAddTie();
             else if (cmd == "sharp2")
                   addAccidental(3);
             else if (cmd == "sharp")
