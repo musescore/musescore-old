@@ -724,7 +724,6 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
 
 //---------------------------------------------------------
 //   addTie
-//    shift+'S' typed on keyboard
 //---------------------------------------------------------
 
 void Score::cmdAddTie()
@@ -743,6 +742,7 @@ void Score::cmdAddTie()
                   printf("cmdAddTie: no pos\n");
                   return;
                   }
+            startCmd();
             Note* n = cmdAddPitch1(note->pitch(), false);
             if (n) {
                   n->setLine(note->line());
@@ -755,6 +755,7 @@ void Score::cmdAddTie()
                   n->setTieBack(tie);
                   undoAddElement(tie);
                   }
+            endCmd();
             return;
             }
       ChordRest* el = nextChordRest(chord);
@@ -776,7 +777,7 @@ void Score::cmdAddTie()
                   printf("addTie: next note for tie not found\n");
             return;
             }
-
+      startCmd();
       Tie* tie = new Tie(this);
       tie->setStartNote(note);
       tie->setEndNote(note2);
@@ -784,6 +785,7 @@ void Score::cmdAddTie()
       undoAddElement(tie);
       layoutAll = true;
       select(note2, SELECT_SINGLE, 0);
+      endCmd();
       }
 
 //---------------------------------------------------------

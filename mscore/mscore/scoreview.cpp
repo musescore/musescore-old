@@ -2510,6 +2510,10 @@ void ScoreView::cmd(const QAction* a)
                   _score->cmdAddInterval(n, nl);
                   }
             }
+      else if (cmd == "tie") {
+            _score->cmdAddTie();
+            moveCursor();
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
