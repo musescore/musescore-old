@@ -2304,17 +2304,17 @@ space unit</extracomment>
 <context>
     <name>Element</name>
     <message>
-        <location filename="../../mscore/element.cpp" line="549"/>
+        <location filename="../../mscore/element.cpp" line="547"/>
         <source>Set Invisible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="551"/>
+        <location filename="../../mscore/element.cpp" line="549"/>
         <source>Set Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/element.cpp" line="553"/>
+        <location filename="../../mscore/element.cpp" line="551"/>
         <source>Color...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2424,7 +2424,7 @@ space unit</extracomment>
 <context>
     <name>GreendotButton</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="52"/>
+        <location filename="../../mscore/utils.cpp" line="53"/>
         <source>record</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4472,22 +4472,22 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="1187"/>
+        <location filename="../../mscore/note.cpp" line="1197"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1190"/>
+        <location filename="../../mscore/note.cpp" line="1200"/>
         <source>Tuplet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1191"/>
+        <location filename="../../mscore/note.cpp" line="1201"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1193"/>
+        <location filename="../../mscore/note.cpp" line="1203"/>
         <source>Delete Tuplet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4679,7 +4679,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1118"/>
+        <location filename="../../mscore/palette.cpp" line="1117"/>
         <source>Palettes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4687,32 +4687,32 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>PaletteBoxButton</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1028"/>
+        <location filename="../../mscore/palette.cpp" line="1027"/>
         <source>Palette Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1031"/>
+        <location filename="../../mscore/palette.cpp" line="1030"/>
         <source>Insert new Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1034"/>
+        <location filename="../../mscore/palette.cpp" line="1033"/>
         <source>Move Palette Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1037"/>
+        <location filename="../../mscore/palette.cpp" line="1036"/>
         <source>Move Palette Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1040"/>
+        <location filename="../../mscore/palette.cpp" line="1039"/>
         <source>Enable Editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1045"/>
+        <location filename="../../mscore/palette.cpp" line="1044"/>
         <source>Delete Palette</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5808,35 +5808,35 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="373"/>
-        <location filename="../../mscore/utils.cpp" line="382"/>
-        <location filename="../../mscore/utils.cpp" line="391"/>
-        <location filename="../../mscore/utils.cpp" line="399"/>
+        <location filename="../../mscore/utils.cpp" line="374"/>
+        <location filename="../../mscore/utils.cpp" line="383"/>
+        <location filename="../../mscore/utils.cpp" line="392"/>
+        <location filename="../../mscore/utils.cpp" line="400"/>
         <source>MuseScore:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="374"/>
+        <location filename="../../mscore/utils.cpp" line="375"/>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="383"/>
+        <location filename="../../mscore/utils.cpp" line="384"/>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="392"/>
+        <location filename="../../mscore/utils.cpp" line="393"/>
         <source>Please select a single note or slur and retry operation
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="400"/>
+        <location filename="../../mscore/utils.cpp" line="401"/>
         <source>Please select one or more staves and retry operation
 </source>
         <translation type="unfinished"></translation>
@@ -5860,8 +5860,8 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/mscore.cpp" line="1573"/>
         <location filename="../../mscore/mscore.cpp" line="1968"/>
         <location filename="../../mscore/mscore.cpp" line="2011"/>
-        <location filename="../../mscore/palette.cpp" line="818"/>
-        <location filename="../../mscore/palette.cpp" line="1300"/>
+        <location filename="../../mscore/palette.cpp" line="817"/>
+        <location filename="../../mscore/palette.cpp" line="1299"/>
         <location filename="../../mscore/sym.cpp" line="574"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
@@ -5942,12 +5942,12 @@ Please select a single note or rest and retry operation
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="816"/>
+        <location filename="../../mscore/palette.cpp" line="815"/>
         <source>MuseScore: Load Palette failed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/palette.cpp" line="1298"/>
+        <location filename="../../mscore/palette.cpp" line="1297"/>
         <source>MuseScore: Load Palettes failed:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5975,7 +5975,7 @@ Please select a single note or rest and retry operation
 <context>
     <name>RecordButton</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="41"/>
+        <location filename="../../mscore/utils.cpp" line="42"/>
         <source>record</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6102,14 +6102,14 @@ Try saving to a different location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1435"/>
+        <location filename="../../mscore/cmd.cpp" line="1443"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1493"/>
+        <location filename="../../mscore/cmd.cpp" line="1501"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation type="unfinished"></translation>
@@ -6316,12 +6316,12 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/transposedialog.cpp" line="194"/>
+        <location filename="../../mscore/transposedialog.cpp" line="112"/>
         <source>MuseScore: transpose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/transposedialog.cpp" line="195"/>
+        <location filename="../../mscore/transposedialog.cpp" line="113"/>
         <source>There is nothing selected. Transpose whole score?</source>
         <translation type="unfinished"></translation>
     </message>
