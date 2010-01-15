@@ -1507,10 +1507,10 @@ void Score::cmdTuplet(int n, ChordRest* cr)
       int tick       = cr->tick();
       Tuplet* tuplet = new Tuplet(this);
       Tuplet* ot     = cr->tuplet();
-
+      
+      f.reduce(); //measure duration might not be reduced
       Fraction ratio(n, f.numerator());
       Fraction fr(1, f.denominator());
-
       for (;;) {
             if (qAbs(ratio.numerator()-ratio.denominator())
                > qAbs(ratio.numerator()-ratio.denominator()*2)) {

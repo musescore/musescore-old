@@ -1163,6 +1163,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             changeState(STATE_DISABLED);
             seq->setScoreView(0);
             _undoGroup->setActiveStack(0);
+            setWindowTitle("MuseScore");
             return;
             }
 
