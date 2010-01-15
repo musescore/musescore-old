@@ -113,7 +113,7 @@ Seq::~Seq()
 
 void Seq::setScoreView(ScoreView* v)
       {
-      if (cs) {
+      if (cv!=v && cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             cs = v ? v->score() : 0;
             stop();
