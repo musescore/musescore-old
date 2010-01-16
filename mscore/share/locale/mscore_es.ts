@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -106,7 +106,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Acorde/Silencio</translation>
     </message>
 </context>
 <context>
@@ -847,7 +847,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -884,12 +883,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
         <translation>usuario</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
         <translation>desplazamiento</translation>
     </message>
     <message>
@@ -910,7 +907,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -966,49 +962,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Chord Style Editor</source>
         <translation>MuseScore: Editor de Estilos de Acordes</translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Choose number of measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number of measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1409,11 +1362,6 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -3205,10 +3153,6 @@ Desde el menu de &quot;Ayuda. Intenta usar el &quot;Manual en &quot;Internet.</t
         <translation>Notas de Gracia</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Todos los Archivos Soportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Archivos de MuseScore (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;Archivos de MIDI (*.mid *.midi *.kar);;Archivos de Datos de Muse (*.md);;Capella Files (*.cap);;Archivos BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Todos los Archivos (*)</translation>
-    </message>
-    <message>
         <source>Acciaccatura</source>
         <translation>Acciaccatura</translation>
     </message>
@@ -3420,6 +3364,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4464,7 +4412,6 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4495,11 +4442,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation>Auto-corrección</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Reemplazar 1/2 con el caracter de fracción ½</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Reemplazar (C) con el símbolo del copyright © (Solo tiene efecto en la sección de copyright)</translation>
     </message>
@@ -4975,7 +4922,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5002,7 +4949,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Editar Percusión...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5307,12 +5254,10 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
         <translation></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5419,7 +5364,6 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5746,7 +5690,6 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5767,7 +5710,6 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6032,11 +5974,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arriba</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abajo</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6229,7 +6171,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6265,77 +6207,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bracket</source>
         <translation>llave</translation>
-    </message>
-</context>
-<context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6384,49 +6255,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Propiedades de la Línea...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7976,7 +7804,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arriba</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8020,7 +7848,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abajo</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8156,7 +7984,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eliminar</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8807,15 +8635,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sostenido</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sostenido con flecha hacia arriba</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sostenido con ambas flechas</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8835,31 +8663,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">becuadro</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">becuadro con flecha hacia arriba</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">becuadro con flecha hacia abajo</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">becuadro con ambas flechas</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bemol</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bemol con flecha hacia arriba</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bemol con ambas flechas</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -8903,7 +8731,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">punteado</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9103,11 +8931,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata superior</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata inferior</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9115,31 +8943,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata corta superior</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata corta inferior</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata larga superior</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata larga inferior</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata extralarga superior</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fermata extralarga inferior</translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pulgar</translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9147,39 +8975,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>espressivo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">staccatissimo ascendente</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">staccatissimo descendente</translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">portato superior</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">portato inferior</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">marcato superior</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">macato inferior</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -9203,11 +9031,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">floreo</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">trino</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -9275,7 +9103,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mordent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mordente</translation>
     </message>
     <message>
         <source>prall prall</source>
@@ -9379,7 +9207,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">clave de bajo</translation>
     </message>
     <message>
         <source>cbass clef</source>

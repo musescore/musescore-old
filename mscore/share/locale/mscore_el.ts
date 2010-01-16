@@ -20,7 +20,7 @@
         <translation>Ελληνική μετάφραση: ΙΟΝΙΟ ΠΑΝΕΠΙΣΤΗΜΙΟ
 Τμήμα Μουσικών Σπουδών</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -102,7 +102,7 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μορφή</translation>
     </message>
     <message>
         <source>up:</source>
@@ -110,7 +110,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Συγχωρδία/Παύση</translation>
     </message>
 </context>
 <context>
@@ -849,7 +849,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
         <translation>αυτόματο</translation>
     </message>
     <message>
@@ -878,12 +877,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
         <translation>χρήστης</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
         <translation>απόκλιση</translation>
     </message>
     <message>
@@ -916,7 +913,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -948,7 +944,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μορφή</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
@@ -956,7 +952,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -964,7 +960,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Όνομα</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -972,49 +968,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Διάλογος</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Ψάξε για τρίφωνες συγχoρδίες και</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>αφαίρεσε την κάτω νότα</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>αφαίρεσε τη μεσαία νότα</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>αφαίρεσε την κορυφαία νότα</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Διάλεξε απόκλιση κουρδίσματος</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Απόκλιση Κουρδίσματος</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cent</translation>
-    </message>
-    <message>
-        <source>Choose number of measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number of measures</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1282,7 +1235,7 @@ failed: </source>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Πεντάγραμμα</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1459,11 +1412,6 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -1960,7 +1908,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ιδιότητες Κειμένου...</translation>
     </message>
 </context>
 <context>
@@ -2273,7 +2221,7 @@ failed: </source>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μορφή</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
@@ -2281,15 +2229,15 @@ failed: </source>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Καθαρισμός</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">προσθήκη ετικέτας χρόνου σε παλέτα</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Προσθήκη</translation>
     </message>
 </context>
 <context>
@@ -2593,7 +2541,7 @@ failed: </source>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
     <message>
         <source>actual</source>
@@ -2693,7 +2641,7 @@ failed: </source>
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>
@@ -2744,10 +2692,6 @@ before closing?</source>
     <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: Φόρτωση Παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Όλα τα Υποστηριζόμενα Αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;Αρχεία MIDI (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;Αρχεία BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Όλα τα Αρχεία (*)</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3269,7 +3213,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Διαστολές</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3317,7 +3261,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Γραμμή</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
@@ -3325,7 +3269,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αρπισμός</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
@@ -3447,6 +3391,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3745,7 +3693,7 @@ Restore session?</source>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ιδιότητες Συγχορδίας</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -3821,7 +3769,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αντήχηση</translation>
     </message>
     <message>
         <source>Chorus</source>
@@ -4318,7 +4266,7 @@ Restore session?</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>record</source>
@@ -4362,7 +4310,6 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -4525,11 +4472,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace 1/2 with fraction character ½</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4547,7 +4494,7 @@ Restore session?</source>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Σύστημα</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4817,7 +4764,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
 </context>
 <context>
@@ -5013,7 +4960,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5040,7 +4987,7 @@ failed: </source>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επεξεργασία Drumset...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5060,7 +5007,7 @@ failed: </source>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μέτρο</translation>
     </message>
 </context>
 <context>
@@ -5207,7 +5154,7 @@ failed: </source>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">αυτόματο</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5227,19 +5174,19 @@ failed: </source>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αρχή 1/32</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αυτόματο</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επάνω</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κάτω</translation>
     </message>
 </context>
 <context>
@@ -5345,12 +5292,10 @@ failed: </source>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5358,7 +5303,7 @@ failed: </source>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore: Επεξεργασία Πενταγράμμου/Ιδιότητες Μερών</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5449,7 +5394,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -5457,7 +5402,6 @@ failed: </source>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translatorcomment>I know what Hz means! 1/T = N Hz</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
@@ -5573,12 +5517,12 @@ failed: </source>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5722,7 +5666,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">B (Σι)</translation>
     </message>
     <message>
         <source>italic</source>
@@ -5786,7 +5730,6 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5807,7 +5750,6 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5876,7 +5818,7 @@ failed: </source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -5944,7 +5886,7 @@ failed: </source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Δημιουργία Ετικέτας Χρόνου</translation>
     </message>
 </context>
 <context>
@@ -6072,11 +6014,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επάνω</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κάτω</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6270,7 +6212,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6306,77 +6248,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bracket</source>
         <translation>αγκύλη</translation>
-    </message>
-</context>
-<context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Η λειτουργία ZIP ολοκληρώθηκε επιτυχώς.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Αποτυχία αναγνώρισης ή φόρτωσης της βιβλιοθήκης zip.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>σφάλμα βιβλιοθήκης zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Ανικανότητα δημιουργίας ή ανοίγματος αρχείου.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Μερικώς φθαρμένο αρχείο. Κάποια αρχεία ίσως αποσυμπιεστούν.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Κατεστραμένο αρχείο.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Λάθος συνθηματικό.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Δεν έχει δημιουργηθεί αρχείο ακόμα.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Το αρχείο ή ο κατάλογος δεν υπάρχει.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Σφάλμα ανάγνωσης αρχείου.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Σφάλμα εγγραφής αρχείου.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Ανικανότητα δημιουργίας καταλόγου.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Άκυρη συσκευή.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Άκυρο ή ασύμβατο αρχείο zip.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Άγνωστο σφάλμα.</translation>
     </message>
 </context>
 <context>
@@ -6425,50 +6296,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Ιδιότητες Γραμμής...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Η λειτουργία ZIP ολοκληρώθηκε επιτυχώς.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Αποτυχία αναγνώρισης ή φόρτωσης της βιβλιοθήκης zip.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>σφάλμα βιβλιοθήκης zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Ανικανότητα δημιουργίας ή ανάγνωσης αρχείου.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Δεν έχει δημιουργηθεί αρχείο ακόμη.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Το αρχείο ή ο κατάλογος δεν υπάρχει.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Σφάλμα ανάγνωσης αρχείου.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Σφάλμα εγγραφής αρχείου.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translatorcomment>seek = και αναζήτηση αλλά έτσι δε θα γίνεται κατανοητό το σφάλμα.</translatorcomment>
-        <translation>Σφάλμα seek σε αρχείο.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Άγνωστο Σφάλμα.</translation>
     </message>
 </context>
 <context>
@@ -6646,7 +6473,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αποθήκευση</translation>
     </message>
     <message>
         <source>Save score to file</source>
@@ -6962,7 +6789,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A (Λα)</translation>
     </message>
     <message>
         <source>Enter note B</source>
@@ -6970,7 +6797,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">B (Σι)</translation>
     </message>
     <message>
         <source>Enter note C</source>
@@ -6978,7 +6805,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">C (Ντο)</translation>
     </message>
     <message>
         <source>Enter note D</source>
@@ -6986,7 +6813,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">D (Ρε)</translation>
     </message>
     <message>
         <source>Enter note E</source>
@@ -6994,7 +6821,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">E (Μι)</translation>
     </message>
     <message>
         <source>Enter note F</source>
@@ -7002,7 +6829,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F (Φα)</translation>
     </message>
     <message>
         <source>Enter note G</source>
@@ -7010,7 +6837,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">G (Σολ)</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
@@ -7074,7 +6901,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rest</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Παύση</translation>
     </message>
     <message>
         <source>Add staccato</source>
@@ -7094,7 +6921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Τρίλια</translation>
     </message>
     <message>
         <source>More stretch</source>
@@ -7142,7 +6969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επάνω</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -7190,7 +7017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κάτω</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -7566,19 +7393,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">διπλή δίεση</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">δίεση</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">αναίρεση</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">διπλή ύφεση</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -7638,11 +7465,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">μέσο φθογγοβραχίωνα</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">δίχως φθογγοβραχίωνα</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7686,7 +7513,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Έξοδος</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7694,11 +7521,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εστίαση Κανβά</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Στίχοι</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -7710,7 +7537,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Δακτυλισμοί</translation>
     </message>
     <message>
         <source>Tempo Palette</source>
@@ -7722,11 +7549,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μετρονόμος</translation>
     </message>
     <message>
         <source>Add System Text</source>
@@ -7746,7 +7573,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Προσθήκη Κειμένου</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7758,7 +7585,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Τίτλος</translation>
     </message>
     <message>
         <source>Add Title Text</source>
@@ -7770,7 +7597,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Υπότιτλος</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
@@ -7782,7 +7609,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Συνθέτης</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
@@ -7794,7 +7621,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ποιητής</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
@@ -7806,7 +7633,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Πνευματικά Δικαιώματα</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
@@ -7838,11 +7665,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Σημείο Πρόβας</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7850,7 +7677,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Γρήγορη κίνηση πίσω</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7882,7 +7709,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Τρανσπόρτο</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7922,11 +7749,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Πραγματική Τονικότητα</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εμφάνιση σε Πραγματική Τονικότητα</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -8070,7 +7897,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Αναζήτηση</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -8198,7 +8025,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Διαγραφή</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8745,7 +8572,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <source>p</source>
@@ -8849,7 +8676,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">δίεση</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
@@ -8877,7 +8704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">αναίρεση</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -8893,7 +8720,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ύφεση</translation>
     </message>
     <message>
         <source>flat arrow up</source>
@@ -8945,7 +8772,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τελείες</translation>
     </message>
     <message>
         <source>longa up</source>
