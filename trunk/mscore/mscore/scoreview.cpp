@@ -2361,8 +2361,10 @@ void ScoreView::normalCopy()
 
 void ScoreView::normalCut()
       {
+      _score->startCmd();
       normalCopy();
       _score->cmdDeleteSelection();
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -2398,7 +2400,7 @@ void ScoreView::cmd(const QAction* a)
 
       if (cmd == "escape")
             sm->postEvent(new CommandEvent(cmd));
-      else if (cmd == "note-input" || cmd == "copy" || cmd == "paste")
+      else if (cmd == "note-input" || cmd == "copy" || cmd == "paste" || cmd == "cut")
             sm->postEvent(new CommandEvent(cmd));
       else if (cmd == "lyrics") {
             _score->startCmd();

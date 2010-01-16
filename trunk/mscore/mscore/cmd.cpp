@@ -2404,7 +2404,9 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
-
+                              foreach(Articulation* a, *cr->getArticulations()) {
+                                    a->setTrack(track);
+                                    }
                               curTick  = cr->tick();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
