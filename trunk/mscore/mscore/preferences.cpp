@@ -42,6 +42,28 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
 
+ //---------------------------------------------------------	 
+ //   PeriodItem	 
+ //---------------------------------------------------------
+ struct PeriodItem {	 
+       int time;	 
+       QString text;	 
+       PeriodItem(const int t, const char* txt) {	 
+             time = t;	 
+             text = QString::fromUtf8(txt);	 
+             }	 
+       };
+
+PeriodItem updatePeriods[] = {
+  PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
+  PeriodItem(24,      QT_TRANSLATE_NOOP("preferences","Every day")),
+  PeriodItem(72,      QT_TRANSLATE_NOOP("preferences","Every 3 days")),
+  PeriodItem(7*24,      QT_TRANSLATE_NOOP("preferences","Every week")),
+  PeriodItem(2*7*24,      QT_TRANSLATE_NOOP("preferences","Every 2 weeks")),
+  PeriodItem(30*24,      QT_TRANSLATE_NOOP("preferences","Every month")),
+  PeriodItem(2*30*24,      QT_TRANSLATE_NOOP("preferences","Every 2 months")),
+};
+
 //---------------------------------------------------------
 //   appStyleSheet
 //---------------------------------------------------------
@@ -195,7 +217,7 @@ void Preferences::init()
       followSong              = true;
 
       //update
-      checkUpdateStartup      = true;
+      checkUpdateStartup      = 0;
       };
 
 //---------------------------------------------------------
@@ -404,8 +426,11 @@ void Preferences::read()
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
 
-      checkUpdateStartup = s.value("checkUpdateStartup", true).toBool();
-
+      checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
+      if (checkUpdateStartup == 0){
+          checkUpdateStartup = UpdateChecker::defaultPeriod();
+      }
+      
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
             sessionStart = LAST_SESSION;
@@ -525,8 +550,19 @@ void PreferenceDialog::updateValues(Preferences* p)
       playNotes->setChecked(p->playNotes);
 
       //Update
-      checkUpdateStartup->setChecked(p->checkUpdateStartup);
+      checkUpdateStartup->clear();
+      int curPeriodIdx = 0;
+      printf("checkUpdateStartup %d\n",  p->checkUpdateStartup);
 
+      printf("checkUpdateStartup %d\n",  p->checkUpdateStartup);
+      for(unsigned i = 0; i < sizeof(updatePeriods)/sizeof(*updatePeriods); ++i) {
+            checkUpdateStartup->addItem(updatePeriods[i].text, i);
+            if (updatePeriods[i].time == p->checkUpdateStartup)
+                  curPeriodIdx = i;
+            }
+      printf("curPeriodIdx %d\n",  curPeriodIdx);      
+      checkUpdateStartup->setCurrentIndex(curPeriodIdx);
+      
       if (seq->isRunning()) {
             QList<QString> sl = seq->inputPorts();
             int idx = 0;
@@ -1017,7 +1053,7 @@ void PreferenceDialog::apply()
                   }
             }
       int lang = language->itemData(language->currentIndex()).toInt();
-      QString l = lang == 0 ? "system" : languages[lang].key;
+      QString l = lang == 0 ? "system" : languages.at(lang).key;
       bool languageChanged = l != preferences.language;
       preferences.language = l;
 
@@ -1033,8 +1069,10 @@ void PreferenceDialog::apply()
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
 
       //update
-      preferences.checkUpdateStartup = checkUpdateStartup->isChecked();
-
+      int periodIndex = checkUpdateStartup->currentIndex();
+      int t = updatePeriods[periodIndex].time;
+      preferences.checkUpdateStartup = t;
+      
       bool mmUnit = true;
       double f  = mmUnit ? 1.0/INCH : 1.0;
       preferences.twosided    = twosided->isChecked();

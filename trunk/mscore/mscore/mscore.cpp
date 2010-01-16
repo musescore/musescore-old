@@ -1943,15 +1943,30 @@ int main(int argc, char* av[])
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
-      //if(preferences.checkUpdateStartup)
-      //  mscore->checkForUpdate();
+      if(mscore->hasToCheckForUpdate())
+            mscore->checkForUpdate();
       return qApp->exec();
       }
 
+bool MuseScore::unstable(){
+#ifdef MSCORE_UNSTABLE
+     return true;
+#else
+     return false;
+#endif
+     }
+
+bool MuseScore::hasToCheckForUpdate(){
+    if (ucheck)
+          return ucheck->hasToCheck();
+    else 
+          return false;
+    }
+
 void MuseScore::checkForUpdate(){
-      if (ucheck)
-          ucheck->check(revision());
-}
+    if (ucheck)
+        ucheck->check(revision());
+    }
 
 bool MuseScore::readLanguages(const QString& path)
       {

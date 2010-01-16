@@ -30,6 +30,8 @@ class UpdateChecker : public QObject{
  
 public:
     void check(QString);
+    static int defaultPeriod();
+    static bool hasToCheck();
  
 public slots:
     void onRequestFinished(QNetworkReply*);
