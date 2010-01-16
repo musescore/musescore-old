@@ -57,6 +57,9 @@ class Tuplet : public DurationElement {
       Fraction _ratio;
       Duration _baseLen;      // 1/8 for a triplet of 1/8
 
+      Direction _direction;
+      bool _isUp;
+
       bool _userModified;
       QPointF p1, p2;
       QPointF _p1, _p2;
@@ -119,6 +122,10 @@ class Tuplet : public DurationElement {
 
       void setFraction(const Fraction& f)  { _fraction = f; }
       virtual Fraction fraction() const    { return _fraction; }
+
+      void setDirection(Direction d)       { _direction = d; }
+      Direction direction() const          { return _direction; }
+      bool isUp() const                    { return _isUp; }
       };
 
 //---------------------------------------------------------

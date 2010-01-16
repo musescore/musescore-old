@@ -200,6 +200,8 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
 void Navigator::mousePressEvent(QMouseEvent* ev)
       {
+      if (_cv == 0)
+            return;
       startMove = ev->pos();
       if (!viewRect.contains(startMove)) {
             QPointF p = matrix.inverted().map(QPointF(ev->pos()));

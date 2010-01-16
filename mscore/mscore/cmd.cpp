@@ -2076,7 +2076,7 @@ void Score::cmd(const QAction* a)
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
                   cmdAddStretch(-0.1);
-            else if (cmd == "cut") {
+/*            else if (cmd == "cut") {
                   if (selection()->state() == SEL_SINGLE) {
                         QMimeData* mimeData = new QMimeData;
                         Element* el = selection()->element();
@@ -2086,6 +2086,7 @@ void Score::cmd(const QAction* a)
                         selection()->clear();
                         }
                   }
+*/
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")

@@ -43,6 +43,7 @@ Tuplet::Tuplet(Score* s)
       _number       = 0;
       _hasBracket   = false;
       _userModified = false;
+      _isUp           = true;
       }
 
 //---------------------------------------------------------
@@ -105,27 +106,33 @@ void Tuplet::layout()
       //
       // find out main direction
       //
-      int up = 1;
-      foreach(const DurationElement* e, _elements) {
-            if (e->type() == CHORD) {
-                  const Chord* c = static_cast<const Chord*>(e);
-                  if (c->stemDirection() != AUTO)
-                        up += c->stemDirection() == UP ? 1000 : -1000;
-                  else
-                        up += c->up() ? 1 : -1;
+      if (_direction == AUTO) {
+            int up = 1;
+            foreach(const DurationElement* e, _elements) {
+                  if (e->type() == CHORD) {
+                        const Chord* c = static_cast<const Chord*>(e);
+                        if (c->stemDirection() != AUTO)
+                              up += c->stemDirection() == UP ? 1000 : -1000;
+                        else
+                              up += c->up() ? 1 : -1;
+                        }
+                  else if (e->type() == TUPLET) {
+                        // TODO
+                        }
                   }
-            else if (e->type() == TUPLET) {
-                  // TODO
-                  }
+            _isUp = up > 0;
             }
-      bool isUp = up > 0;
+      else if (_direction == UP)
+            _isUp = true;
+      else
+            _isUp = false;
 
       //
       // set all elements to main direction
       //
       foreach(DurationElement* e, _elements) {
             if (e->type() == CHORD || e->type() == REST)
-                  static_cast<ChordRest*>(e)->setUp(up);
+                  static_cast<ChordRest*>(e)->setUp(_isUp);
             }
 
       const DurationElement* cr1 = _elements.front();
@@ -145,7 +152,7 @@ void Tuplet::layout()
             _hasBracket = _bracketType != SHOW_NO_BRACKET;
             }
 
-      if (isUp) {
+      if (_isUp) {
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
@@ -232,7 +239,7 @@ void Tuplet::layout()
 
             y3 = p1.y() + (p2.y() - p1.y()) * .5
                - _number->bbox().height() * .5
-               - (l1 + l2) * (isUp ? 1.0 : -1.0);
+               - (l1 + l2) * (_isUp ? 1.0 : -1.0);
 
             numberWidth = _number->bbox().width();
             _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
@@ -241,7 +248,7 @@ void Tuplet::layout()
       if (_hasBracket) {
             qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
 
-            if (isUp) {
+            if (_isUp) {
                   if (_number) {
                         bracketL[0] = QPointF(p1.x(), p1.y() - l2);
                         bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
@@ -350,6 +357,11 @@ void Tuplet::write(Xml& xml) const
       xml.tag("normalNotes", _ratio.denominator());
       xml.tag("actualNotes", _ratio.numerator());
       xml.tag("baseNote",    _baseLen.name());
+      switch(_direction) {
+            case UP:   xml.tag("direction", QVariant("up")); break;
+            case DOWN: xml.tag("direction", QVariant("down")); break;
+            case AUTO: break;
+            }
       if (_number)
             _number->write(xml, "Number");
       if (_userModified) {
@@ -371,7 +383,8 @@ void Tuplet::read(QDomElement e)
       _id = e.attribute("id", "0").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            int i = e.text().toInt();
+            QString val(e.text());
+            int i = val.toInt();
             if (tag == "hasNumber")             // obsolete
                   _numberType = i ? SHOW_NUMBER : NO_TEXT;
             else if (tag == "hasLine") {          // obsolete
@@ -396,6 +409,14 @@ void Tuplet::read(QDomElement e)
                   _number->read(e);
                   _number->setSubtype(TEXT_TUPLET);   // override read
                   _number->setTextStyle(TEXT_STYLE_TUPLET);
+                  }
+            else if (tag == "direction") {
+                  if (val == "up")
+                        _direction = UP;
+                  else if (val == "down")
+                        _direction = DOWN;
+                  else
+                        _direction = AUTO;
                   }
             else if (tag == "p1") {
                   _userModified = true;

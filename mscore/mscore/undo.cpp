@@ -1177,6 +1177,20 @@ void FlipBeamDirection::flip()
       }
 
 //---------------------------------------------------------
+//   FlipTupletDirection
+//---------------------------------------------------------
+
+FlipTupletDirection::FlipTupletDirection(Tuplet* b)
+      {
+      tuplet = b;
+      }
+
+void FlipTupletDirection::flip()
+      {
+      tuplet->setDirection(tuplet->isUp() ? DOWN : UP);
+      }
+
+//---------------------------------------------------------
 //   ChangeSubtype
 //---------------------------------------------------------
 

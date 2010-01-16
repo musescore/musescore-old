@@ -570,6 +570,9 @@ ScoreView::ScoreView(QWidget* parent)
       ct = new CommandTransition("copy", 0);                                  // copy
       connect(ct, SIGNAL(triggered()), SLOT(normalCopy()));
       s->addTransition(ct);
+      ct = new CommandTransition("cut", 0);                                  // copy
+      connect(ct, SIGNAL(triggered()), SLOT(normalCut()));
+      s->addTransition(ct);
 
       // setup mag state
       s = states[MAG];
@@ -2350,6 +2353,16 @@ void ScoreView::normalCopy()
                   printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
             QApplication::clipboard()->setMimeData(mimeData);
             }
+      }
+
+//---------------------------------------------------------
+//   normalCut
+//---------------------------------------------------------
+
+void ScoreView::normalCut()
+      {
+      normalCopy();
+      _score->cmdDeleteSelection();
       }
 
 //---------------------------------------------------------
