@@ -18,6 +18,8 @@
 //=============================================================================
 
 #include "updatechecker.h"
+#include "mscore.h"
+#include "preferences.h"
 
 UpdateChecker::UpdateChecker()
 {   
@@ -31,6 +33,11 @@ UpdateChecker::~UpdateChecker()
  
 void UpdateChecker::onRequestFinished(QNetworkReply* reply)
 {
+    QSettings s;
+    s.beginGroup("Update");
+    s.setValue("lastUpdateDate", QDateTime::currentDateTime());
+    s.endGroup();
+    
     QByteArray data = reply->readAll();
     QXmlStreamReader reader(data);
     QString version;
@@ -91,18 +98,54 @@ void UpdateChecker::check(QString rev)
     os = "mac";
     #endif
     if(qApp->applicationName() == "MuseScore"){ //avoid nightly cymbals
-        #if defined(MSCORE_UNSTABLE)
-        release = "pre";
-        #else
-        release = "stable";
-        #endif
+          if(MuseScore::unstable){
+                  release = "pre";
+          }else{
+                  release = "stable";
+          }
     }else{
         release = "nightly";
     }
-        
+    printf("release type: %s\n", release.toAscii().constData());    
     if(!os.isNull() && !release.isNull()){
         revision =  rev;   
         manager->get(QNetworkRequest(QUrl("http://update.musescore.org/update_"+os +"_" + release +".xml")));
         connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));
     }
 }
+
+//---------------------------------------------------------
+//   default period
+//---------------------------------------------------------
+
+int UpdateChecker::defaultPeriod()
+      {
+        int result = 24;
+        if(qApp->applicationName() == "MuseScore"){ //avoid nightly cymbals
+            if(MuseScore::unstable()){
+                  result = 72;
+            }else{
+                  result = 30*24;
+            }
+        }
+        return result;
+        }
+        
+bool UpdateChecker::hasToCheck(){
+    QSettings s;
+    s.beginGroup("Update");
+    QDateTime lastUpdate = s.value("lastUpdateDate", QDateTime::currentDateTime()).value<QDateTime>();
+    
+    printf("preferences.checkUpdateStartup: %d\n" , preferences.checkUpdateStartup);
+    printf("lastupdate: %s\n", lastUpdate.toString("dd.MM.yyyy hh:mm:ss.zzz").toAscii().constData());
+    
+    if(preferences.checkUpdateStartup < 0 ){ //Never
+      return false;
+    }else if (preferences.checkUpdateStartup == 0) { // factory
+      preferences.checkUpdateStartup = UpdateChecker::defaultPeriod();
+      preferences.dirty = true;
+    } 
+    s.endGroup();
+    return QDateTime::currentDateTime() > lastUpdate.addSecs(3600 * preferences.checkUpdateStartup);
+}
+    

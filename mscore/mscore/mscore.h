@@ -414,6 +414,8 @@ class MuseScore : public QMainWindow {
       void setRevision(QString& r){rev = r;}
       QString revision(){return rev;}
       void newFile();
+      bool hasToCheckForUpdate();
+      static bool unstable();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

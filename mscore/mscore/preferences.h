@@ -110,7 +110,7 @@ struct Preferences {
       double spatium;
       
       //update
-      bool checkUpdateStartup;
+      int checkUpdateStartup;
       
       float tuning;                 // synthesizer master tuning offset (440Hz)
       float masterGain;            // synthesizer master gain
