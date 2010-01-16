@@ -2515,6 +2515,22 @@ void ScoreView::cmd(const QAction* a)
             _score->cmdAddTie();
             moveCursor();
             }
+      else if (cmd == "duplet")
+            cmdTuplet(2);
+      else if (cmd == "triplet")
+            cmdTuplet(3);
+      else if (cmd == "quadruplet")
+            cmdTuplet(4);
+      else if (cmd == "quintuplet")
+            cmdTuplet(5);
+      else if (cmd == "sextuplet")
+            cmdTuplet(6);
+      else if (cmd == "septuplet")
+            cmdTuplet(7);
+      else if (cmd == "octuplet")
+            cmdTuplet(8);
+      else if (cmd == "nonuplet")
+            cmdTuplet(9);
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2682,32 +2698,12 @@ void ScoreView::endNoteEntry()
       }
 
 //---------------------------------------------------------
-//   enterState
-//    for debugging
-//---------------------------------------------------------
-
-void ScoreView::enterState()
-      {
-      printf("enterState <%s>\n", qPrintable(sender()->objectName()));
-      }
-
-//---------------------------------------------------------
-//   exitState
-//    for debugging
-//---------------------------------------------------------
-
-void ScoreView::exitState()
-      {
-      printf("exitState <%s>\n", qPrintable(sender()->objectName()));
-      }
-
-//---------------------------------------------------------
 //   contextPopup
 //---------------------------------------------------------
 
 void ScoreView::contextPopup(QMouseEvent* ev)
       {
-printf("contextPopup\n");
+// printf("contextPopup\n");
       QPoint gp = ev->globalPos();
       startMove = toLogical(ev->pos());
       Element* e = elementNear(startMove);
@@ -2981,13 +2977,13 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
       _score->addRefresh(lasso->abbox());
       QRectF r;
       r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
-      lasso->setbbox(r);
-      _lassoRect = lasso->abbox().normalized();
+      lasso->setbbox(r.normalized());
+      _lassoRect = lasso->abbox();
       r = _matrix.mapRect(_lassoRect);
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
-      _score->addRefresh(lasso->abbox());
-      _score->lassoSelect(lasso->abbox());
+      _score->addRefresh(_lassoRect);
+      _score->lassoSelect(_lassoRect);
       _score->end();
       }
 
@@ -2997,9 +2993,10 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
 
 void ScoreView::endLasso()
       {
-      _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
+//      _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
+      _score->addRefresh(lasso->abbox());
       lasso->setbbox(QRectF());
-      _score->lassoSelectEnd(lasso->abbox());
+      _score->lassoSelectEnd();
       _score->end();
       }
 
@@ -3009,7 +3006,7 @@ void ScoreView::endLasso()
 
 void ScoreView::deselectAll()
       {
-      _score->select(0, SELECT_SINGLE, 0);
+      _score->selection()->deselectAll();
       _score->end();
       }
 
@@ -3387,3 +3384,27 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
 #endif
       moveCursor();
       }
+
+//---------------------------------------------------------
+//   enterState
+//    for debugging
+//---------------------------------------------------------
+
+void ScoreView::enterState()
+      {
+      if (debugMode)
+            printf("enterState <%s>\n", qPrintable(sender()->objectName()));
+      }
+
+//---------------------------------------------------------
+//   exitState
+//    for debugging
+//---------------------------------------------------------
+
+void ScoreView::exitState()
+      {
+      if (debugMode)
+            printf("exitState <%s>\n", qPrintable(sender()->objectName()));
+      }
+
+

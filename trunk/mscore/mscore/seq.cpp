@@ -327,7 +327,7 @@ void Seq::stop()
             return;
       driver->stopTransport();
       if (cv)
-        cv->setCursorOn(false);
+            cv->setCursorOn(false);
       if (cs) {
             cs->setLayoutAll(false);
             cs->setUpdateAll();

@@ -955,6 +955,7 @@ void Chord::setTrack(int val)
 LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
+      setSelectable(false);
       setLen(Spatium(2.0));
       }
 

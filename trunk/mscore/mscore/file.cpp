@@ -1232,8 +1232,8 @@ bool Score::read(QDomElement e)
                                                 rv2 = sl[2].toInt();
                                                 rv3 = sl[3].toInt();
 
-                                                printf("Version %d.%d.%d   read %d.%d.%d\n",
-                                                   v1, v2, v3, rv1, rv2, rv3);
+//                                                printf("Version %d.%d.%d   read %d.%d.%d\n",
+//                                                   v1, v2, v3, rv1, rv2, rv3);
 
                                                 int currentVersion = v1 * 10000 + v2 * 100 + v3;
                                                 int readVersion = rv1 * 10000 + rv2 * 100 + v3;

@@ -178,11 +178,10 @@ ChordRest* Selection::lastChordRest(int track) const
 //   deselectAll
 //---------------------------------------------------------
 
-QRectF Selection::deselectAll(Score* cs)
+QRectF Selection::deselectAll()
       {
-      QRectF r;
       if (_state == SEL_STAFF || _state == SEL_SYSTEM)
-            cs->setUpdateAll();
+            _score->setUpdateAll();
       return clear();
       }
 
@@ -276,19 +275,19 @@ void Score::updateSelectedElements(SelState state)
 
 //---------------------------------------------------------
 //   select
-//    staff is valid, if obj is of type MEASURE
+//    staffIdx is valid, if element is of type MEASURE
 //---------------------------------------------------------
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
-//      if (debugMode)
+      if (debugMode)
             printf("select element <%s> type %d(state %d) staff %d\n",
                e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
 
       SelState selState = _selection.state();
 
       if (type == SELECT_SINGLE) {
-            refresh |= _selection.deselectAll(this);
+            refresh |= _selection.deselectAll();
             if (e == 0) {
                   selState = SEL_NONE;
                   _updateAll = true;
@@ -357,11 +356,9 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   }
             }
       else if (type == SELECT_RANGE) {
-printf("sel range\n");
             bool activeIsFirst = false;
             int activeTrack = e->track();
             if (e->type() == MEASURE) {
-printf("sel range measure\n");
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
                   int etick = tick + m->tickLen();
@@ -529,7 +526,6 @@ printf("sel range measure\n");
             selState = SEL_STAFF;
             updateSelectedElements(selState);
             }
-printf("sel setState %d\n", int(selState));
       _selection.setState(selState);
       emit selectionChanged(int(_selection.state()));
       }
@@ -547,7 +543,7 @@ void Score::lassoSelect(const QRectF& bbox)
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
             if (lr.contains(e->abbox())) {
-                  if (e->type() != MEASURE)
+                  if (e->type() != MEASURE && e->selectable())
                         select(const_cast<Element*>(e), SELECT_ADD, 0);
                   }
             }
@@ -570,7 +566,7 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
 //   lassoSelectEnd
 //---------------------------------------------------------
 
-void Score::lassoSelectEnd(const QRectF& /*bbox*/)
+void Score::lassoSelectEnd()
       {
       int noteRestCount     = 0;
       Segment* startSegment = 0;

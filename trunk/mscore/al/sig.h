@@ -26,11 +26,11 @@
 namespace AL {
 class Xml;
 
-//---------------------------------------------------------
+//-------------------------------------------------------------------
 //   Time Signature Event
-//    for irregular measures the nominal values
-//    nominator2 denominator2 are also given
-//---------------------------------------------------------
+//    Incomplete measures as for example pickup measures have
+//    a nominal duration different from actual duration.
+//-------------------------------------------------------------------
 
 struct SigEvent {
       Fraction actual;

@@ -174,15 +174,7 @@ void TimeSigMap::normalize()
 
 int TimeSigMap::ticksMeasure(int tick) const
       {
-      ciSigEvent i = upper_bound(tick);
-      if (empty() || i == begin()) {
-            printf("TimeSigMap::ticksMeasure(): timesig(%d): not found\n", tick);
-            if (debugMsg)
-                  abort();
-            return 4 * AL::division;
-            }
-      --i;
-      return i->second.ticks;
+      return timesig(tick).ticks;
       }
 
 //---------------------------------------------------------

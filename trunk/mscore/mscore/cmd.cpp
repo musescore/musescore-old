@@ -120,8 +120,6 @@ void Score::endCmd()
             return;
             }
       _undo->endMacro(_undo->current()->childCount() <= 1);
-      foreach(Element* e, selection()->elements())
-            e->setSelected(true);
       end();
       }
 
@@ -2065,22 +2063,6 @@ void Score::cmd(const QAction* a)
                   changeVoice(2);
             else if (cmd == "voice-4")
                   changeVoice(3);
-            else if (cmd == "duplet")
-                  cmdTuplet(2);
-            else if (cmd == "triplet")
-                  cmdTuplet(3);
-            else if (cmd == "quadruplet")
-                  cmdTuplet(4);
-            else if (cmd == "quintuplet")
-                  cmdTuplet(5);
-            else if (cmd == "sextuplet")
-                  cmdTuplet(6);
-            else if (cmd == "septuplet")
-                  cmdTuplet(7);
-            else if (cmd == "octuplet")
-                  cmdTuplet(8);
-            else if (cmd == "nonuplet")
-                  cmdTuplet(9);
             else if (cmd == "stretch+")
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
