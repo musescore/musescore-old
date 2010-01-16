@@ -897,6 +897,8 @@ void Score::cmdFlip()
                   if (newSubtype != -1)
                         _undo->push(new ChangeSubtype(e, newSubtype));
                   }
+            else if (e->type() == TUPLET)
+                  _undo->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
             }
       layoutAll = true;
       }
@@ -1574,7 +1576,12 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
 
 void Score::cmdCreateTuplet(ChordRest* ocr, Tuplet* tuplet)
       {
-printf("createTuplet at %d <%s> duration %s\n", ocr->tick(), ocr->name(), qPrintable(ocr->fraction().print()));
+printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
+  ocr->tick(), ocr->name(),
+  qPrintable(ocr->fraction().print()),
+  qPrintable(tuplet->ratio().print()),
+  qPrintable(tuplet->baseLen().fraction().print())
+            );
 
       int track        = ocr->track();
       Measure* measure = ocr->measure();
@@ -1598,7 +1605,7 @@ printf("createTuplet at %d <%s> duration %s\n", ocr->tick(), ocr->name(), qPrint
       else
             cr = new Rest(this);
 
-      Fraction an = tuplet->fraction() / tuplet->ratio() / tuplet->baseLen().fraction();
+      Fraction an     = (tuplet->fraction() * tuplet->ratio()) / tuplet->baseLen().fraction();
       int actualNotes = an.numerator() / an.denominator();
             // tuplet->ratio().numerator();
 

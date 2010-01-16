@@ -438,6 +438,20 @@ class FlipBeamDirection : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   FlipTupletDirection
+//---------------------------------------------------------
+
+class FlipTupletDirection : public UndoCommand {
+      Tuplet* tuplet;
+      void flip();
+
+   public:
+      FlipTupletDirection(Tuplet*);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
 //   ChangeKey
 //---------------------------------------------------------
 
