@@ -2152,7 +2152,7 @@ void MuseScore::changeState(ScoreState val)
       {
       if (_sstate == val)
             return;
-//      if (debugMode)
+      if (debugMode)
             printf("MuseScore::changeState: %s\n", stateName(val));
 
       foreach (Shortcut* s, shortcuts) {
@@ -2637,7 +2637,7 @@ void MuseScore::editInPianoroll(Staff* staff)
 
 void MuseScore::writeSessionFile(bool cleanExit)
       {
-      printf("write session file\n");
+//      printf("write session file\n");
 
       QDir dir;
       dir.mkpath(dataPath);
@@ -2839,7 +2839,7 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "dirty")
                                           dirty = val.toInt();
                                     else if (tag == "path") {
-                                          printf("restore <%s>\n", qPrintable(val));
+//                                          printf("restore <%s>\n", qPrintable(val));
                                           Score* score = new Score(defaultStyle);
                                           if (!score->read(val)) {
                                                 printf("failed to restore <%s>\n", qPrintable(val));
@@ -2849,7 +2849,7 @@ bool MuseScore::restoreSession(bool always)
                                                 }
                                           else {
                                                 if (!name.isEmpty()) {
-                                                      printf("set name <%s>\n", qPrintable(name));
+//                                                      printf("set name <%s>\n", qPrintable(name));
                                                       score->setName(name);
                                                       }
                                                 appendScore(score);

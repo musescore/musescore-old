@@ -23,6 +23,7 @@
 
 #include "durationtype.h"
 
+class ChordRest;
 class Rest;
 class Element;
 class Page;
@@ -161,6 +162,8 @@ class ScoreView : public QWidget {
       void cmdAddText(int style);
       void cmdEnterRest(const Duration& d);
       void cmdEnterRest();
+      void cmdTuplet(int n, ChordRest* cr);
+      void cmdTuplet(int);
 
    private slots:
       void moveCursor();

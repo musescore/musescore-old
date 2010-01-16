@@ -375,48 +375,18 @@ void ScoreView::endUndoRedo()
 
 SaveState::SaveState(Score* s)
       {
-      score         = s;
-      redoSelection = 0;
-      undoSelection = 0;
+      score          = s;
       redoInputState = score->inputState();
-      }
-
-SaveState::~SaveState()
-      {
-      delete undoSelection;
-      delete redoSelection;
       }
 
 void SaveState::undo()
       {
-      if (!redoSelection)
-            redoSelection = new Selection(score);
-      *redoSelection = *score->selection();
-      if (undoSelection) {
-            foreach(Element* e, score->selection()->elements())
-                  e->setSelected(false);
-            score->setSelection(*undoSelection);
-            foreach(Element* e, undoSelection->elements())
-                  e->setSelected(true);
-            }
       redoInputState = score->inputState();
       score->setInputState(undoInputState);
       }
 
 void SaveState::redo()
       {
-      if (!undoSelection)
-            undoSelection = new Selection(score);
-//      foreach(Element* e, score->selection()->elements())
-//            e->setSelected(false);
-      *undoSelection = *score->selection();
-      if (redoSelection) {
-            foreach(Element* e, score->selection()->elements())
-                  e->setSelected(false);
-            score->setSelection(*redoSelection);
-            foreach(Element* e, redoSelection->elements())
-                  e->setSelected(true);
-            }
       undoInputState = score->inputState();
       score->setInputState(redoInputState);
       }

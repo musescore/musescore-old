@@ -323,7 +323,6 @@ class Score : public QObject {
       void tupletDialog();
 
       void cmdInsertClef(int type);
-      void cmdCreateTuplet(ChordRest*, Tuplet*);
       void cmdExchangeVoice(int, int);
 
       void updateSelectedElements(SelState);
@@ -387,8 +386,6 @@ class Score : public QObject {
 
       void undoFixTicks();
 
-      void cmdTuplet(int);
-      void cmdTuplet(int n, ChordRest* cr);
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
@@ -707,7 +704,7 @@ class Score : public QObject {
       int numberOfCreators() const                   { return _creators.size(); }
 
       void lassoSelect(const QRectF&);
-      void lassoSelectEnd(const QRectF&);
+      void lassoSelectEnd();
 
       Page* searchPage(const QPointF&) const;
       bool getPosition(Position* pos, const QPointF&, int voice) const;
@@ -791,6 +788,7 @@ class Score : public QObject {
       Element* move(const QString& cmd);
       void cmdEnterRest(const Duration& d);
       void cmdAddInterval(int, const QList<Note*>&);
+      void cmdCreateTuplet(ChordRest*, Tuplet*);
       };
 
 extern Score* gscore;

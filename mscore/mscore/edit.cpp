@@ -1471,60 +1471,57 @@ Lyrics* Score::addLyrics()
 //   cmdTuplet
 //---------------------------------------------------------
 
-void Score::cmdTuplet(int n)
+void ScoreView::cmdTuplet(int n)
       {
+      _score->startCmd();
       if (noteEntryMode()) {
-printf("cmdTuplet %d noteEntry\n", n);
-            expandVoice();
-            changeCRlen(_is.cr(), _is.duration());
-            cmdTuplet(n, _is.cr());
+            _score->expandVoice();
+            _score->changeCRlen(_score->inputState().cr(), _score->inputState().duration());
+            if (_score->inputState().cr())
+                  cmdTuplet(n, _score->inputState().cr());
             }
       else {
-            foreach(Element* e, selection()->elements()) {
-                  if (e->isChordRest()) {
-                        ChordRest* cr = static_cast<ChordRest*>(e);
-                        cmdTuplet(n, cr);
-                        }
-                  else if (e->type() == NOTE) {
-                        Chord* chord = static_cast<Chord*>(e->parent());
-                        cmdTuplet(n, static_cast<ChordRest*>(chord));
-                        }
+            foreach(Element* e, _score->selection()->elements()) {
+                  if (e->type() == NOTE)
+                        e = static_cast<Note*>(e)->chord();
+                  if (e->isChordRest())
+                        cmdTuplet(n, static_cast<ChordRest*>(e));
                   }
             }
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
 //   cmdTuplet
 //---------------------------------------------------------
 
-void Score::cmdTuplet(int n, ChordRest* cr)
+void ScoreView::cmdTuplet(int n, ChordRest* cr)
       {
-      if (cr == 0) {
-            printf("cannot create tuplet cr %p\n", cr);
-            return;
-            }
-      Fraction f     = cr->fraction();
-      int tick       = cr->tick();
-      Tuplet* tuplet = new Tuplet(this);
-      Tuplet* ot     = cr->tuplet();
+      Fraction f  = cr->fraction();
+      int tick    = cr->tick();
+      Tuplet* ot  = cr->tuplet();
       
       f.reduce(); //measure duration might not be reduced
       Fraction ratio(n, f.numerator());
       Fraction fr(1, f.denominator());
       for (;;) {
-            if (qAbs(ratio.numerator()-ratio.denominator())
-               > qAbs(ratio.numerator()-ratio.denominator()*2)) {
+            if (qAbs(ratio.numerator() - ratio.denominator())
+               > qAbs(ratio.numerator() - ratio.denominator() * 2)) {
                   ratio /= 2;
                   fr    /= 2;
                   }
             else
                   break;
             }
+      if (ratio == Fraction(1,1))   // this is not a tuplet
+            return;
+
+      Tuplet* tuplet = new Tuplet(_score);
       tuplet->setRatio(ratio);
 
       if (noteEntryMode() && (fr != cr->fraction())) {
-//TODO-S            cmdEnterRest();
-            cr = getSelectedChordRest();
+            cmdEnterRest();
+            cr = _score->getSelectedChordRest();
             }
 
       //
@@ -1546,7 +1543,7 @@ void Score::cmdTuplet(int n, ChordRest* cr)
 
       if (ot)
             tuplet->setTuplet(ot);
-      cmdCreateTuplet(cr, tuplet);
+      _score->cmdCreateTuplet(cr, tuplet);
 
       const QList<DurationElement*>& cl = tuplet->elements();
 
@@ -1557,10 +1554,11 @@ void Score::cmdTuplet(int n, ChordRest* cr)
       else if (ne > 1)
             el = cl[1];
       if (el) {
-            select(el, SELECT_SINGLE, 0);
-//TODO-S            setNoteEntry(true);
-            _is.setDuration(baseLen);
-            setPadState();
+            _score->select(el, SELECT_SINGLE, 0);
+            if (!noteEntryMode())
+                  sm->postEvent(new CommandEvent("note-input"));
+            _score->inputState().setDuration(baseLen);
+            _score->setPadState();
             }
       }
 
@@ -1717,7 +1715,7 @@ void Score::colorItem(Element* element)
                         }
                   }
             }
-      selection()->deselectAll(this);
+      selection()->deselectAll();
       }
 
 //---------------------------------------------------------

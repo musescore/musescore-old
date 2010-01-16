@@ -43,9 +43,17 @@ class Fraction {
       bool isValid() const       { return _denominator != 0;    }
       void reduce();
       Fraction reduced() const;
-      bool identical(const Fraction& v) const { return (_numerator == v._numerator) && (_denominator == v._denominator); }
 
-      int ticks() const          { return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator; }
+      // check if two fractions are identical (numerator & denominator)
+      // == operator checks for equal value:
+      bool identical(const Fraction& v) const {
+            return (_numerator == v._numerator) && (_denominator == v._denominator);
+            }
+
+      int ticks() const       {
+            return (_numerator * AL::division * 4 + (_denominator/2)) / _denominator;
+            }
+
       static Fraction fromTicks(int v);
 
       Fraction& operator+=(const Fraction&);
@@ -68,6 +76,7 @@ class Fraction {
       bool operator>(const Fraction&) const;
       bool operator==(const Fraction&) const;
       bool operator!=(const Fraction&) const;
+
       QString print() const { return QString("%1/%2").arg(_numerator).arg(_denominator); }
       };
 

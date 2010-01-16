@@ -150,12 +150,9 @@ class SaveState : public UndoCommand {
       InputState undoInputState;
       InputState redoInputState;
       Score* score;
-      Selection* undoSelection;
-      Selection* redoSelection;
 
    public:
       SaveState(Score*);
-      ~SaveState();
       virtual void undo();
       virtual void redo();
       };

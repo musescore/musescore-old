@@ -74,7 +74,7 @@ class Selection {
       QList<Note*> noteList() const;
       void add(Element*);
       void append(Element* el)         { _el.append(el); }
-      QRectF deselectAll(Score*);
+      QRectF deselectAll();
       void remove(Element*);
       QRectF clear();
       Element* element() const;
