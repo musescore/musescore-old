@@ -388,7 +388,6 @@ class Score : public QObject {
 
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
-      void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
@@ -467,7 +466,7 @@ class Score : public QObject {
       void changeCRlen(ChordRest* cr, const Duration&);
 
       Fraction makeGap(ChordRest*, const Fraction&, Tuplet*);
-      Fraction makeGap1(ChordRest*, Fraction);
+      void makeGap1(int tick, int staffIdx, Fraction len);
 
       Rest* addRest(int tick, int track, Duration, Tuplet*);
       Rest* addRest(Segment* seg, int track, Duration d, Tuplet*);

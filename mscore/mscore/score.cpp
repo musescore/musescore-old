@@ -1805,6 +1805,8 @@ void Score::addElement(Element* element)
             add(element);
             return;
             }
+
+      select(element, SELECT_ADD, 0);
       if (element->parent() == 0)
             add(element);
       else
@@ -1873,6 +1875,7 @@ void Score::removeElement(Element* element)
             remove(element);
             return;
             }
+      select(element, SELECT_ADD, 0);
       if (parent)
             parent->remove(element);
       else

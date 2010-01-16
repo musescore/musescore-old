@@ -554,14 +554,16 @@ void Score::tupletDialog()
       tuplet->setTrack(cr->track());
       tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
+//      tuplet->setRatio(tuplet->ratio().reduced());
       tuplet->setFraction(cr->fraction());
       Fraction f1 = cr->fraction();
       Fraction f = f1 * tuplet->ratio();
+      f.reduce();
 
-//      printf("len %s  ratio %s  base %s\n",
-//            qPrintable(f1.print()),
-//            qPrintable(tuplet->ratio().print()),
-//            qPrintable(f.print()));
+      printf("len %s  ratio %s  base %s\n",
+            qPrintable(f1.print()),
+            qPrintable(tuplet->ratio().print()),
+            qPrintable(f.print()));
 
       tuplet->setBaseLen(Fraction(1, f.denominator()));
 

@@ -217,12 +217,17 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       newcr->setDuration(d);
       newcr->setTuplet(cr->tuplet());
       newcr->setTick(tick);
+
+printf("addClone %s: tick %d, track %d\n", newcr->name(), newcr->tick(), newcr->track());
+
       Segment* seg = cr->measure()->findSegment(Segment::SegChordRest, tick);
       if (seg == 0) {
             seg = cr->measure()->createSegment(Segment::SegChordRest, tick);
+printf("  add segment\n");
             undoAddElement(seg);
             }
       newcr->setParent(seg);
+printf("  add cr\n");
       undoAddElement(newcr);
       return newcr;
       }
@@ -1500,7 +1505,7 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
       Fraction f  = cr->fraction();
       int tick    = cr->tick();
       Tuplet* ot  = cr->tuplet();
-      
+
       f.reduce(); //measure duration might not be reduced
       Fraction ratio(n, f.numerator());
       Fraction fr(1, f.denominator());
@@ -1513,8 +1518,8 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
             else
                   break;
             }
-      if (ratio == Fraction(1,1))   // this is not a tuplet
-            return;
+//      if (ratio == Fraction(1,1))   // this is not a tuplet
+//            return;
 
       Tuplet* tuplet = new Tuplet(_score);
       tuplet->setRatio(ratio);
@@ -1593,7 +1598,9 @@ printf("createTuplet at %d <%s> duration %s\n", ocr->tick(), ocr->name(), qPrint
       else
             cr = new Rest(this);
 
-      int actualNotes = tuplet->ratio().numerator();
+      Fraction an = tuplet->fraction() / tuplet->ratio() / tuplet->baseLen().fraction();
+      int actualNotes = an.numerator() / an.denominator();
+            // tuplet->ratio().numerator();
 
       cr->setTick(tick);
       cr->setTuplet(tuplet);

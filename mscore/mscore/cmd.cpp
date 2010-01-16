@@ -164,7 +164,6 @@ void Score::end()
 
 void Score::cmdAdd(Element* e)
       {
-      e->setSelected(false);
       undoAddElement(e);
       layoutAll = true;
       }
@@ -175,7 +174,6 @@ void Score::cmdAdd(Element* e)
 
 void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       {
-      e->setSelected(false);
       int staffIdx = -1;
       int pitch, tick;
       QPointF offset;
@@ -816,7 +814,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
-printf("makeGap %d/%d at %d\n", _sd.numerator(), _sd.denominator(), cr->tick());
+printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -922,8 +920,20 @@ printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator
 //    return size of actual gap
 //---------------------------------------------------------
 
-Fraction Score::makeGap1(ChordRest* cr, Fraction len)
+void Score::makeGap1(int tick, int staffIdx, Fraction len)
       {
+      ChordRest* cr = 0;
+      Segment* seg = tick2segment(tick);
+      if (!seg) {
+            printf("makeGap1: no segment at %d\n", tick);
+            return;
+            }
+      cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
+      if (!cr) {
+            printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
+            return;
+            }
+
       Fraction gap;
       for (;;) {
             Fraction l = makeGap(cr, len, 0);
@@ -941,7 +951,7 @@ Fraction Score::makeGap1(ChordRest* cr, Fraction len)
                   m = cr->measure()->nextMeasure();
                   if (m == 0) {
                         printf("===EOS reached\n");
-                        return gap;
+                        return;
                         }
                   }
             Segment* s = m->firstCRSegment();
@@ -952,7 +962,6 @@ Fraction Score::makeGap1(ChordRest* cr, Fraction len)
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
             }
-      return gap;
       }
 
 //---------------------------------------------------------
@@ -2347,11 +2356,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   int staffIdx = i + dstStaffStart;
                   if (staffIdx >= nstaves())
                         break;
-                  Fraction len = Fraction(tickLen, 1) / Fraction(AL::division * 4, 1);
-                  Fraction gap = makeGap1(dst, len);
-                  if (gap != len)
-                        printf("cannot make gap %d/%d at %d (got %d/%d) staff %d\n",
-                           len.numerator(), len.denominator(), tickLen, gap.numerator(), gap.denominator(), staffIdx);
+                  makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen));
                   }
 
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -2575,105 +2580,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             }
       connectTies();
       fixPpitch();
-      }
-
-//---------------------------------------------------------
-//   cmdReplaceElements
-//---------------------------------------------------------
-
-void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int dstStaffIdx)
-      {
-      //
-      // TODO: handle special cases: sm->tickLen() != ds->tickLen()
-      //
-
-      select(0, SELECT_SINGLE, 0);
-      //
-      // clear staff in destination Measure
-      //
-      for (Segment* s = dm->first(); s;) {
-            if (s->subtype() == Segment::SegEndBarLine) {     // do not remove
-                  s = s->next();
-                  continue;
-                  }
-            int startTrack = dstStaffIdx * VOICES;
-            int endTrack   = startTrack + VOICES;
-            for (int t = startTrack; t < endTrack; ++t) {
-                  Element* e = s->element(t);
-                  if (e) {
-                        if (e->generated()) {
-                              s->remove(e);
-                              }
-                        else {
-                              undoRemoveElement(e);
-                              }
-                        }
-                  }
-            Segment* ns = s->next();
-            dm->cmdRemoveEmptySegment(s);
-            s = ns;
-            }
-
-      foreach(Tuplet* tuplet, *dm->tuplets()) {
-            if (tuplet->staffIdx() == dstStaffIdx)
-                  undoRemoveElement(tuplet);
-            }
-
-      int trackOffset   = (dstStaffIdx - srcStaffIdx) * VOICES;
-      foreach(Tuplet* tuplet, *sm->tuplets()) {
-            tuplet->setParent(dm);
-            tuplet->setTrack(tuplet->track() + trackOffset);
-            tuplet->clear();
-            undoAddElement(tuplet);
-            }
-
-      //
-      // add src elements to destination
-      //
-
-      int srcTickOffset = sm->tick();
-      int dstTickOffset = dm->tick();
-
-      for (Segment* s = sm->first(); s; s = s->next()) {
-            //
-            // paste only notes and rests
-            //
-            if (s->subtype() != Segment::SegGrace && s->subtype() != Segment::SegChordRest)
-                  continue;
-            int startTrack = srcStaffIdx * VOICES;
-            int endTrack   = startTrack + VOICES;
-            int tick       = s->tick() - srcTickOffset + dstTickOffset;
-            Segment* ns    = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
-            if (ns == 0) {
-                  ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
-                  undoAddElement(ns);
-                  printf("add segment %s\n", ns->subTypeName());
-                  }
-            for (int t = startTrack; t < endTrack; ++t) {
-                  Element* e = s->element(t);
-                  if (!e || !e->isChordRest())
-                        continue;
-                  e->setParent(ns);
-                  e->setTick(tick);
-                  e->setTrack(e->track() + trackOffset);
-                  undoAddElement(e);
-// printf("add elem %s\n", e->name());
-                  e->setSelected(false);
-                  if (e->type() == REST)
-                        select(e, SELECT_RANGE, 0);
-                  else {
-                        Chord* c = (Chord*)e;
-                        NoteList* nl = c->noteList();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              select(in->second, SELECT_RANGE, 0);
-                              }
-                        }
-                  }
-            if (ns->isEmpty()) {
-                  dm->cmdRemoveEmptySegment(ns);
-// printf("remove empty segment %s in copy!\n", ns->subTypeName());
-                  }
-            }
       }
 
 //---------------------------------------------------------
