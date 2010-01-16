@@ -89,7 +89,7 @@ class PaletteBoxButton : public QToolButton {
 
       int id;
 
-      virtual void paintEvent(QPaintEvent*);
+//      virtual void paintEvent(QPaintEvent*);
       virtual void changeEvent(QEvent*);
 
    private slots:

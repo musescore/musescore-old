@@ -83,12 +83,19 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       qreal x   = (width  - w) * .5 - bb.x();
       qreal y   = (height - h) * .5 - bb.y();
 
+      QWidget wi;
+
       QPixmap image(width, height);
+      QColor bg(wi.palette().brush(QPalette::Normal, QPalette::Window).color());
+
       image.fill(QColor(255, 255, 255, 0));
       QPainter painter(&image);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setFont(sc.font());
-      painter.setPen(QPen(QColor(0, 0, 0, 255)));
+
+      QPen pen(wi.palette().brush(QPalette::Normal, QPalette::Text).color());
+
+      painter.setPen(pen);
       sc.draw(painter, mag, x, y);
       painter.end();
       return QIcon(image);

@@ -42,16 +42,16 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
 
- //---------------------------------------------------------	 
- //   PeriodItem	 
  //---------------------------------------------------------
- struct PeriodItem {	 
-       int time;	 
-       QString text;	 
-       PeriodItem(const int t, const char* txt) {	 
-             time = t;	 
-             text = QString::fromUtf8(txt);	 
-             }	 
+ //   PeriodItem
+ //---------------------------------------------------------
+ struct PeriodItem {
+       int time;
+       QString text;
+       PeriodItem(const int t, const char* txt) {
+             time = t;
+             text = QString::fromUtf8(txt);
+             }
        };
 
 PeriodItem updatePeriods[] = {
@@ -78,8 +78,8 @@ QString appStyleSheet()
       return QString(
       "* { font-size: %1pt; font-family: \"%2\"}\n"
 //      "PaletteBoxButton  { font-size: 8px; background-color: rgb(215, 215, 215) }\n"
-      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
-      "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
+//      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
+//      "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#timeLabel      { font-size: 28pt; font-family: \"San Serif\" }\n"
       "SynthControl QLabel#titleLabel  { font-size: 24pt; font-family: \"San Serif\" }\n"
@@ -430,7 +430,7 @@ void Preferences::read()
       if (checkUpdateStartup == 0){
           checkUpdateStartup = UpdateChecker::defaultPeriod();
       }
-      
+
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
             sessionStart = LAST_SESSION;
@@ -560,9 +560,9 @@ void PreferenceDialog::updateValues(Preferences* p)
             if (updatePeriods[i].time == p->checkUpdateStartup)
                   curPeriodIdx = i;
             }
-      printf("curPeriodIdx %d\n",  curPeriodIdx);      
+      printf("curPeriodIdx %d\n",  curPeriodIdx);
       checkUpdateStartup->setCurrentIndex(curPeriodIdx);
-      
+
       if (seq->isRunning()) {
             QList<QString> sl = seq->inputPorts();
             int idx = 0;
@@ -1072,7 +1072,7 @@ void PreferenceDialog::apply()
       int periodIndex = checkUpdateStartup->currentIndex();
       int t = updatePeriods[periodIndex].time;
       preferences.checkUpdateStartup = t;
-      
+
       bool mmUnit = true;
       double f  = mmUnit ? 1.0/INCH : 1.0;
       preferences.twosided    = twosided->isChecked();
