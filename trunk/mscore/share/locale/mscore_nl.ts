@@ -7,7 +7,7 @@
         <source>Version: 0.9.0</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -818,7 +818,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
         <translation>automatisch</translation>
     </message>
     <message>
@@ -827,7 +826,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
         <translation>gebruiker</translation>
     </message>
     <message>
@@ -856,7 +854,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
         <translation>compensatie</translation>
     </message>
     <message>
@@ -910,7 +907,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation>cent</translation>
     </message>
     <message>
@@ -966,49 +962,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Chord Style Editor</source>
         <translation>MuseScore: Akkoord Stijlbewerker</translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>cent</source>
-        <translation>procent</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Zoek drie akkoorden en</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>verwijder de bovenste noot</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>verwijder de middelste noot</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Kies stemming compensatie</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialoog</translation>
-    </message>
-    <message>
-        <source>Number of measures</source>
-        <translation>Aantal maten</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Stemming compensatie</translation>
-    </message>
-    <message>
-        <source>Choose number of measures</source>
-        <translation>Kies aantal maten</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>verwijder de onderste noot</translation>
     </message>
 </context>
 <context>
@@ -1377,11 +1330,6 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -2810,10 +2758,6 @@ failed: </source>
         <translation>C# majeur, A# mineur</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
-    </message>
-    <message>
         <source>edit mode</source>
         <translation>bewerkingsmodus</translation>
     </message>
@@ -3424,6 +3368,10 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <source>Check for Update</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3990,7 +3938,6 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4217,7 +4164,7 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <source>Color notes outside of usable pitch range</source>
         <translation>Kleur de noten welke buiten het berijk van het instrument liggen</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Vervang 1/2 met  karakterr ½</translation>
     </message>
@@ -4385,7 +4332,7 @@ Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;
         <source>ru Russian</source>
         <translation>ru Russisch</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Vervang (C) met het copyright symbool © (Alleen van toepassing op tekst in het tekstvak auteursrechten)</translation>
     </message>
@@ -4985,7 +4932,7 @@ mislukt:</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5317,12 +5264,10 @@ mislukt:</translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5393,7 +5338,6 @@ mislukt:</translation>
     <name>SynthControl</name>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -5684,12 +5628,10 @@ mislukt:</translation>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6239,7 +6181,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6275,77 +6217,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>auto bracket</source>
         <translation>automatisch afbreken</translation>
-    </message>
-</context>
-<context>
-    <name>UnZip</name>
-    <message>
-        <source>File write error.</source>
-        <translation>Bestand schrijffout.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Bestand onderzoekfout.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Ongeldig of onverenigbaar zip-archief.</translation>
-    </message>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP operatie sucsesvol voltooid.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Onbekende fout.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Inconsistente headers. Archief kan worden beschadigd.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Kan geen bestand creëeren of openen.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Bestand of map bestaat niet.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Ongeldig apparaat.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib bibliotheek fout.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Archief is nog niet aangemaakt.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Beschadigd archief.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Kan geen bestand creëeren of openen.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Verkeerd wachtwoord.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Gedeeltelijk beschadigd archief. Sommige bestanden kunnen worden uitgepakt.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Initialiseren of zlib bibliotheek laden is mislukt.</translation>
     </message>
 </context>
 <context>
@@ -6394,49 +6265,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Lijn-eigenschappen...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>File write error.</source>
-        <translation>Bestand schrijffout.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Bestand onderzoekfout.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Bestand leesfout.</translation>
-    </message>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP operatie sucsesvol voltooid.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Onbekende fout.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Bestand of map bestaat niet.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib bibliotheek fout.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Archief is nog niet aangemaakt.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Kan geen bestand creëeren of openen.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Initialiseren van zlib bibliotheek laden is mislukt.</translation>
     </message>
 </context>
 <context>

@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revision: 628</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -847,7 +847,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -884,12 +883,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
         <translation>bruger</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
         <translation>offset</translation>
     </message>
     <message>
@@ -910,7 +907,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -949,7 +945,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -957,7 +953,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Navn</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -966,49 +962,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Chord Style Editor</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Choose number of measures</source>
-        <translation>Vælg antal takter</translation>
-    </message>
-    <message>
-        <source>Number of measures</source>
-        <translation>Antal takter</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Kig efter treklange og</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>fjern nederste node</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>fjern midterste node</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>fjern øverste node</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Vælg tuning offset</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Tuning offset</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cent</translation>
     </message>
 </context>
 <context>
@@ -1426,11 +1379,6 @@ fejl:</translation>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -3202,10 +3150,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
 Prøv at vælge &quot;Online Håndbog&quot; fra &quot;Hjælp&quot;-menuen i stedet.</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle understøttede filformater (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Filer (*.mscz *.mscx *.msc);;MusicXML Filer (*.xml *.mxl);;MIDI Filer (*.mid *.midi *.kar);;Muse Data Filer (*.md);;Capella Filer (*.cap);;BB Files &lt;eksperimentel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Filer (*)</translation>
-    </message>
-    <message>
         <source>Grace Notes</source>
         <translation>Forslagsnoder</translation>
     </message>
@@ -3423,6 +3367,10 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4467,7 +4415,6 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -4498,11 +4445,11 @@ Genskab denne session?</translation>
         <source>Auto-correction</source>
         <translation>Auto-rettelser</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Erstat 1/2 med brøktegnet ½</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Erstat (C) med copyright symbolet © (kun gældende for tekst i copyright sektionen)</translation>
     </message>
@@ -4986,7 +4933,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5318,12 +5265,10 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
         <translation></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5430,7 +5375,6 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5757,7 +5701,6 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5778,7 +5721,6 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6043,11 +5985,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Op</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ned</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6240,7 +6182,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6276,77 +6218,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bracket</source>
         <translation>klamme</translation>
-    </message>
-</context>
-<context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP operationen blev korrekt gennemført.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Fejl ved opstart eller indlæsning af zlib bibliotek.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib bibliotek fejl.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Kunne ikke oprette eller indlæse fil.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Delvist ødelagt arkiv. Nogle filer blev måske pakket ud.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Ødelagt arkiv.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Forkert kodeord.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Der er ikke oprettet noget arkiv endnu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Fil eller mappe eksisterer ikke.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Fil indlæsningsfejl.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Fil skrivningsfejl.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Fil søgningsfejl.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Kunne ikke oprettet mappe.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Ugyldig enhed.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Ugyldigt eller inkompatibelt zip arkiv.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Ugyldige header. Arkiv er måske ødelagt.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Ukendt fejl.</translation>
     </message>
 </context>
 <context>
@@ -6395,49 +6266,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Linie egenskaber...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>ZIP operationen blev korrekt gennemført.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Fejl ved opstart eller indlæsning af zlib bibliotek.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib bibliotek fejl.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Kunne ikke oprette eller indlæse fil.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Der er ikke oprettet noget arkiv endnu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Fil eller mappe eksisterer ikke.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Fil indlæsningsfejl.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Fil skrivningsfejl.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Fil søgningsfejl.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Ukendt fejl.</translation>
     </message>
 </context>
 <context>
@@ -8167,7 +7995,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8819,15 +8647,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kryds</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kryds pil op</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kryds pil op/ned</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8847,31 +8675,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">opløsningstegn</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">opløsningstegn pil op</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">opløsningstegn pil ned</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">opløsningstegn pil op/ned</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">b</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">b pil op</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">b pil op/ned</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -8915,7 +8743,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">prikker</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9115,11 +8943,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ufermat</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">dfermat</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9151,7 +8979,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tommelfinger</translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9163,7 +8991,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
@@ -9215,11 +9043,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">vend</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">trille</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -9283,7 +9111,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">praltrille</translation>
     </message>
     <message>
         <source>mordent</source>
@@ -9391,7 +9219,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">basnøgle</translation>
     </message>
     <message>
         <source>cbass clef</source>

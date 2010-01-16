@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Wydanie:628</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -844,7 +844,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -885,12 +884,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
-        <extracomment>velocity type</extracomment>
         <translation>użytkownik</translation>
     </message>
     <message>
         <source>offset</source>
-        <extracomment>velocity type</extracomment>
         <translation>offset</translation>
     </message>
     <message>
@@ -911,7 +908,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -967,49 +963,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Chord Style Editor</source>
         <translation>MuseScore: Edytor stylu akordów</translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Choose number of measures</source>
-        <translation>Wybierz liczbę taktów</translation>
-    </message>
-    <message>
-        <source>Number of measures</source>
-        <translation>Liczba taktów</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Okno dialogowe</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Szukaj trójdźwięków i </translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>usuń najniższą nutę</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>usuń środkową nutę</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>usuń najwyższą nutę</translation>
-    </message>
-    <message>
-        <source>Choose tuning offset</source>
-        <translation>Wybierz wielkość odstrojenia</translation>
-    </message>
-    <message>
-        <source>Tuning offset</source>
-        <translation>Odstrojenie</translation>
-    </message>
-    <message>
-        <source>cent</source>
-        <translation>cent</translation>
     </message>
 </context>
 <context>
@@ -1436,11 +1389,6 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -3197,10 +3145,6 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation>Z menu &quot;Pomoc&quot; wybierz &quot;Podręcznik online&quot;.</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Wszystkie wspierane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Pliki MuseScore (*.mscz *.mscx *.msc);;Pliki MusicXML (*.xml *.mxl);;Pliki MIDI (*.mid *.midi *.kar);;Pliki Muse Data (*.md);;Pliki Capella (*.cap);;Pliki BB &lt;experimentalnie&gt; (*.mgu *.MGU *.sgu *.SGU);;Wszystkie pliki (*)</translation>
-    </message>
-    <message>
         <source>Grace Notes</source>
         <translation>Przednutki</translation>
     </message>
@@ -3416,6 +3360,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4304,7 +4252,6 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
-        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4491,11 +4438,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation>Auto-poprawianie</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Zamień 1/2 na symbol ½</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Zamień (C) na symbol copyright © (Dotyczy tylko tekstu w sekcji praw autorskich)</translation>
     </message>
@@ -4976,7 +4923,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5308,12 +5255,10 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>startElement</source>
-        <extracomment>do not translate</extracomment>
         <translation></translation>
     </message>
     <message>
         <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5420,7 +5365,6 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5747,7 +5691,6 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>X:</source>
-        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5768,7 +5711,6 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>Y:</source>
-        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6230,7 +6172,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6266,77 +6208,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>bracket</source>
         <translation>klamra</translation>
-    </message>
-</context>
-<context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Operacja zipowania zakończona powodzeniem.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Nie udało się zainicjować, lub wczytać biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>błąd biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Nie można utworzyć, lub otworzyć pliku.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Archiwum częściowo uszkodzone. Niektóre pliki mogą być rozpakowane.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Archiwum uszkodzone.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Błędne hasło.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Nie utworzono jeszcze żadnego archiwum.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Plik, lub katalog nie istnieje.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Błąd odczytu pliku.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Błąd zapisu pliku.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Błąd poszukiwania pliku.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Nie można utworzyć katalogu.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Niewłaściwe urządzenie.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Nieprawidłowe, lub niekompatybilne archiwum.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Sprzeczne nagłówki. Archiwum może być uszkodzone.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Nieznany błąd.</translation>
     </message>
 </context>
 <context>
@@ -6385,49 +6256,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Właściwości lini...</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Operacja zipowania zakończona sukcesem.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Nie udało się zainicjować, lub wczytać biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>błąd biblioteki zlib.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Nie można utworzyć, lub otworzyć pliku.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Nie utworzono jeszcze żadnego archiwum.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Plik, lub katalog nie istnieje.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Błąd odczytu pliku.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Błąd zapisu pliku.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Błąd poszukiwania pliku.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Nieznany błąd.</translation>
     </message>
 </context>
 <context>
@@ -8157,7 +7985,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usuń</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
