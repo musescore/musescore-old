@@ -2993,7 +2993,6 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
 
 void ScoreView::endLasso()
       {
-//      _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
       _score->addRefresh(lasso->abbox());
       lasso->setbbox(QRectF());
       _score->lassoSelectEnd();
@@ -3006,7 +3005,7 @@ void ScoreView::endLasso()
 
 void ScoreView::deselectAll()
       {
-      _score->selection()->deselectAll();
+      _score->addRefresh(_score->selection()->deselectAll());
       _score->end();
       }
 
