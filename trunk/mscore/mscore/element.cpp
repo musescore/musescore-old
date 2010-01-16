@@ -213,6 +213,7 @@ Element::~Element()
                               printf("======~Element: %p still in selection!\n", this);
                         abort();
 //                        el->removeAt(el->indexOf(this));
+                        abort();
                         }
                   }
             }
