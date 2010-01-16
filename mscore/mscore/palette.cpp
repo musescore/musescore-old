@@ -1074,6 +1074,7 @@ void PaletteBoxButton::changeEvent(QEvent* ev)
             setFixedHeight(QFontMetrics(font()).height() + 2);
       }
 
+#if 0
 //---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
@@ -1082,6 +1083,7 @@ void PaletteBoxButton::paintEvent(QPaintEvent* e)
       {
       QToolButton::paintEvent(e);
       }
+#endif
 
 //---------------------------------------------------------
 //   PaletteScrollArea

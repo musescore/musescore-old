@@ -1907,11 +1907,11 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
-      if (!converterMode)
-            genIcons();
       initDrumset();
 
       gscore = new Score(defaultStyle);
+      if (!converterMode)
+            genIcons();
       mscore = new MuseScore();
 
       mscore->setRevision(revision);
@@ -1959,7 +1959,7 @@ bool MuseScore::unstable(){
 bool MuseScore::hasToCheckForUpdate(){
     if (ucheck)
           return ucheck->hasToCheck();
-    else 
+    else
           return false;
     }
 
