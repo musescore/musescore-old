@@ -86,12 +86,20 @@ void Navigator::setScore(ScoreView* v)
             if (_score)
                   disconnect(_score, SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
             }
-      _score  = v->score();
-      _cv     = QPointer<ScoreView>(v);
-      connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
-      connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
-      connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
-      updateLayout();
+      _cv = QPointer<ScoreView>(v);
+      if (v) {
+            _score  = v->score();
+            connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
+            connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
+            if (_score)
+                  connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
+            updateLayout();
+            }
+      else {
+            _score = 0;
+            pm.fill(Qt::gray);
+            update();
+            }
       }
 
 //---------------------------------------------------------
