@@ -43,7 +43,8 @@ Tuplet::Tuplet(Score* s)
       _number       = 0;
       _hasBracket   = false;
       _userModified = false;
-      _isUp           = true;
+      _isUp         = true;
+      _direction    = AUTO;
       }
 
 //---------------------------------------------------------
