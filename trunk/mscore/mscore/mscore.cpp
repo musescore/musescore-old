@@ -1164,6 +1164,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             seq->setScoreView(0);
             _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
+            if (navigator)
+                  navigator->setScore(0);
             return;
             }
 
