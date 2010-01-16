@@ -169,7 +169,10 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
-      editButton->setEnabled(false);
+      if (enableExperimental)
+            editButton->setEnabled(false);
+      else
+            editButton->setVisible(false);
       aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
       }
@@ -223,7 +226,7 @@ void InstrumentsDialog::on_instrumentList_itemSelectionChanged()
       QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
       bool flag = !wi.isEmpty();
       addButton->setEnabled(flag);
-      editButton->setEnabled(flag);
+//      editButton->setEnabled(flag);
       }
 
 //---------------------------------------------------------
