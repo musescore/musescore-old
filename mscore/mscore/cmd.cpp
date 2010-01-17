@@ -119,6 +119,7 @@ void Score::endCmd()
             end();
             return;
             }
+      setClean(false);
       _undo->endMacro(_undo->current()->childCount() <= 1);
       end();
       }
