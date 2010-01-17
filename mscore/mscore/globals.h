@@ -60,6 +60,19 @@ extern qreal PDPI;      // physical drawing resolution
 extern qreal DPI;       // logical drawing resolution
 extern qreal DPMM;      // logical dots/mm
 
+//
+//    note head groups
+//
+enum NoteHeadGroup {
+      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
+      HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI,
+      HEAD_GROUPS
+      };
+
+enum NoteHeadType {
+      HEAD_AUTO, HEAD_WHOLE, HEAD_HALF, HEAD_QUARTER, HEAD_BREVIS
+      };
+
 enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
 // used for stem and slur:
