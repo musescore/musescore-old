@@ -27,9 +27,10 @@ class UpdateChecker : public QObject{
     QString os;
     QString release;
     QString revision;
+    bool manual;
  
 public:
-    void check(QString);
+    void check(QString,bool);
     static int defaultPeriod();
     static bool hasToCheck();
  

@@ -824,7 +824,9 @@ MuseScore::MuseScore()
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
+      #if defined(Q_WS_MAC) || defined(Q_WS_WIN)
       menuHelp->addAction(tr("Check for Update"), this, SLOT(checkForUpdate()));
+      #endif
       menuHelp->addSeparator();
 
       a = getAction("script-debug");
@@ -1965,7 +1967,7 @@ bool MuseScore::hasToCheckForUpdate(){
 
 void MuseScore::checkForUpdate(){
     if (ucheck)
-        ucheck->check(revision());
+        ucheck->check(revision(), (sender()!=0));
     }
 
 bool MuseScore::readLanguages(const QString& path)
