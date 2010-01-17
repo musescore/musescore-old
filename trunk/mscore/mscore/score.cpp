@@ -1498,10 +1498,9 @@ Page* Score::searchPage(const QPointF& p) const
 //   getNextCRSegment
 //---------------------------------------------------------
 
-static Segment* getNextCRSegment(Segment* s, int staffIdx)
+static Segment* getNextCRSegment(Segment* s, int track)
       {
-      int idx = staffIdx * VOICES;
-      while (s && ((s->subtype() != Segment::SegChordRest) || !(s->element(idx) || s->element(idx+1) || s->element(idx+2) || s->element(idx+3))))
+      while (s && ((s->subtype() != Segment::SegChordRest) || !s->element(track)))
             s = s->next();
       return s;
       }
@@ -1598,10 +1597,10 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
       int track = pos->staffIdx * VOICES + voice;
       for (segment = pos->measure->first(); segment;) {
-            segment = getNextCRSegment(segment, pos->staffIdx);
+            segment = getNextCRSegment(segment, track);
             if (segment == 0)
                   break;
-            Segment* ns = getNextCRSegment(segment->next(), pos->staffIdx);
+            Segment* ns = getNextCRSegment(segment->next(), track);
 
             double x1 = segment->x();
             double x2;
@@ -1616,6 +1615,9 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   x2    = pos->measure->bbox().width();
                   ntick = pos->measure->tick() + pos->measure->tickLen();
                   d = (x2 - x1) * 2.0;
+                  x = x1;
+                  pos->tick = segment->tick();
+                  break;      ///?
                   }
 
             if (x < (x1 + d * .5) && segment->element(track)) {
@@ -1625,7 +1627,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   }
             segment = ns;
             }
-
       if (segment == 0) {
             if (voice) {
                   //
@@ -1635,7 +1636,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   for (segment = pos->measure->first(); segment;) {
                         if (segment->subtype() == Segment::SegChordRest)
                               break;
-                        segment = getNextCRSegment(segment, pos->staffIdx);
+                        segment = getNextCRSegment(segment, track);
                         }
                   x = segment->x();
                   pos->tick = pos->measure->tick();
@@ -1649,9 +1650,9 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       // TODO: restrict to reasonable values (pitch 0-127)
       //
       double mag = staff(pos->staffIdx)->mag();
-      pos->line = lrint((pppp.y() - sstaff->bbox().y()) / (_spatium * mag) * 2.0);
-      double y  = pos->measure->canvasPos().y() + sstaff->y();
-      y += pos->line * _spatium * .5 * mag;
+      pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / (_spatium * mag) * 2.0);
+      double y   = pos->measure->canvasPos().y() + sstaff->y();
+      y         += pos->line * _spatium * .5 * mag;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
       return true;
       }

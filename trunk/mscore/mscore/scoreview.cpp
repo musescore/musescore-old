@@ -640,9 +640,9 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), mscore, SLOT(setNoteEntryState()));
       connect(s, SIGNAL(entered()), SLOT(startNoteEntry()));
       connect(s, SIGNAL(exited()), SLOT(endNoteEntry()));
-      s->addTransition(new NoteEntryDragTransition(this));                          // mouse drag
-      s->addTransition(new NoteEntryButtonTransition(this));                        // mouse button
-      s->addTransition(new CommandTransition("play", states[ENTRY_PLAY]));     // ->entryPlay
+      s->addTransition(new NoteEntryDragTransition(this));                    // mouse drag
+      s->addTransition(new NoteEntryButtonTransition(this));                  // mouse button
+      s->addTransition(new CommandTransition("play", states[ENTRY_PLAY]));    // ->entryPlay
 
       // setup normal drag canvas state
       s = states[DRAG];
