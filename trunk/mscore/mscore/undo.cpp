@@ -823,8 +823,8 @@ void RemoveElement::redo()
 //   ChangeNoteHead
 //---------------------------------------------------------
 
-ChangeNoteHead::ChangeNoteHead(Note* n, int g)
-   : UndoCommand(), note(n), group(g)
+ChangeNoteHead::ChangeNoteHead(Note* n, int g, NoteHeadType t)
+   : UndoCommand(), note(n), group(g), type(t)
       {
       }
 
@@ -835,12 +835,15 @@ ChangeNoteHead::ChangeNoteHead(Note* n, int g)
 void ChangeNoteHead::flip()
       {
       int headGroup = note->headGroup();
+      NoteHeadType t = note->headType();
       QRectF r = note->abbox();
       note->setHeadGroup(group);
+      note->setHeadType(type);
       r |= note->abbox();
       group = headGroup;
+      type  = t;
       note->score()->addRefresh(r);
-      note->score()->end();
+//      note->score()->end();
       }
 
 //---------------------------------------------------------

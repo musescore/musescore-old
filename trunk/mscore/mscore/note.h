@@ -39,15 +39,6 @@ class Score;
 class Sym;
 class ScoreView;
 
-//
-//    note head groups
-//
-enum {
-      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
-      HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI,
-      HEAD_GROUPS
-      };
-
 extern const int noteHeads[2][HEAD_GROUPS][4];
 
 //---------------------------------------------------------
@@ -99,6 +90,7 @@ class Note : public Element {
 
       int  _userAccidental;   ///< editorial accidental type
       char _headGroup;
+      NoteHeadType _headType;
 
       bool _mirror;           ///< True if note is mirrored at stem.
       DirectionH _userMirror; ///< user override of mirror
@@ -138,8 +130,10 @@ class Note : public Element {
       double headWidth() const;
       double headHeight() const;
       int noteHead() const;
-      int headGroup() const           { return _headGroup; }
-      void setHeadGroup(int val)      { _headGroup = val;  }
+      int headGroup() const            { return _headGroup; }
+      NoteHeadType headType() const    { return _headType;  }
+      void setHeadGroup(int val)       { _headGroup = val;  }
+      void setHeadType(NoteHeadType t) { _headType = t;     }
 
       int pitch() const               { return _pitch;    }
       void setPitch(int val);

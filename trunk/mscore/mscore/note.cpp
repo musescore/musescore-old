@@ -114,23 +114,25 @@ void NoteHead::write(Xml& xml) const
 Note::Note(Score* s)
    : Element(s)
       {
-      dragMode        = false;
-      _pitch          = 0;
-      _ppitch         = 0;
-      _tuning         = 0.0;
-      _accidental     = 0;
-      _mirror         = false;
-      _userMirror     = DH_AUTO;
-      _line           = 0;
-      _userAccidental = ACC_NONE;
-      _lineOffset     = 0;
-      _tieFor         = 0;
-      _tieBack        = 0;
-      _tpc            = -1;
-      _headGroup      = 0;
-      _hidden         = false;
-      _subchannel     = 0;
-      _accidentalType = ACC_NONE;
+      dragMode           = false;
+      _pitch             = 0;
+      _ppitch            = 0;
+      _tuning            = 0.0;
+      _accidental        = 0;
+      _mirror            = false;
+      _userMirror        = DH_AUTO;
+      _line              = 0;
+      _userAccidental    = ACC_NONE;
+      _lineOffset        = 0;
+      _tieFor            = 0;
+      _tieBack           = 0;
+      _tpc               = -1;
+      _headGroup         = 0;
+      _headType          = HEAD_AUTO;
+
+      _hidden            = false;
+      _subchannel        = 0;
+      _accidentalType    = ACC_NONE;
 
       _veloType          = AUTO_VAL;
       _velocity          = 80;
@@ -161,6 +163,7 @@ Note::Note(const Note& n)
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
       _headGroup      = n._headGroup;
+      _headType       = n._headType;
       _mirror         = n._mirror;
       _userMirror     = n._userMirror;
 
@@ -261,7 +264,19 @@ Note::~Note()
 
 int Note::noteHead() const
       {
-      return noteHeads[chord()->up()][int(_headGroup)][chord()->duration().headType()];
+      switch(_headType) {
+            default:
+            case HEAD_AUTO:
+                  return noteHeads[chord()->up()][int(_headGroup)][chord()->duration().headType()];
+            case HEAD_WHOLE:
+                  return noteHeads[chord()->up()][int(_headGroup)][0];
+            case HEAD_HALF:
+                  return noteHeads[chord()->up()][int(_headGroup)][1];
+            case HEAD_QUARTER:
+                  return noteHeads[chord()->up()][int(_headGroup)][2];
+            case HEAD_BREVIS:
+                  return noteHeads[chord()->up()][int(_headGroup)][3];
+            }
       }
 
 //---------------------------------------------------------
@@ -649,6 +664,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             }
       if (_headGroup != 0)
             xml.tag("head", _headGroup);
+      if (_headType != HEAD_AUTO)
+            xml.tag("headType", _headType);
       if (_userMirror != DH_AUTO)
             xml.tag("mirror", _userMirror);
       if (_veloType != AUTO_VAL) {
@@ -751,6 +768,8 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "head")
                   _headGroup = i;
+            else if (tag == "headType")
+                  _headType = NoteHeadType(i);
             else if (tag == "userAccidental")
                   _userAccidental = i;
             else if (tag == "Accidental") {
@@ -1056,7 +1075,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         }
                   delete s;
                   if (group != _headGroup)
-                        score()->undo()->push(new ChangeNoteHead(this, group));
+                        score()->undo()->push(new ChangeNoteHead(this, group, _headType));
                   }
                   break;
 
@@ -1233,6 +1252,8 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                               score()->undoChangeTuning(note, vp.tuning());
                         if (DirectionH(vp.getUserMirror()) != note->userMirror())
                               score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
+                        if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
+                              score()->undo()->push(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
                         }
                   if (veloType() != vp.veloType() || velocity() != vp.velo()
                      || veloOffset() != vp.veloOffset()

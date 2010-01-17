@@ -38,6 +38,8 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       tuningSpinBox->setValue(note->tuning());
       userMirror->setCurrentIndex(int(note->userMirror()));
       stemDirection->setCurrentIndex(int(chord->stemDirection()));
+      noteHeadGroup->setCurrentIndex(note->headGroup());
+      noteHeadType->setCurrentIndex(int(note->headType()));
 
       ValueType vt  = note->veloType();
       _velo         = note->velocity();

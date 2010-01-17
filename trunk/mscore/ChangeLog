@@ -1,4 +1,6 @@
 17.jan (ws)
+      - Extend the note properties dialog to make note head group and type
+        selectable
       - Implement line break for horizontal frame. This allows frames at the
         end of a system
       (la)
