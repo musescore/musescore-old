@@ -25,6 +25,7 @@
 #include "score.h"
 #include "chord.h"
 #include "note.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   MeasureBase
@@ -85,7 +86,27 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*))
 void MeasureBase::add(Element* el)
       {
       el->setParent(this);
-      _el.append(el);
+      if (el->type() == LAYOUT_BREAK) {
+            for (iElement i = _el.begin(); i != _el.end(); ++i) {
+                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
+                        if (debugMode)
+                              printf("warning: layout break already set\n");
+                        return;
+                        }
+                  }
+            switch(el->subtype()) {
+                  case LAYOUT_BREAK_PAGE:
+                        _pageBreak = true;
+                        break;
+                  case LAYOUT_BREAK_LINE:
+                        _lineBreak = true;
+                        break;
+                  }
+            _el.push_back(el);
+            }
+      else {
+            _el.append(el);
+            }
       }
 
 //---------------------------------------------------------
@@ -98,6 +119,16 @@ void MeasureBase::add(Element* el)
 
 void MeasureBase::remove(Element* el)
       {
+      if (el->type() == LAYOUT_BREAK) {
+            switch(el->subtype()) {
+                  case LAYOUT_BREAK_PAGE:
+                        _pageBreak = false;
+                        break;
+                  case LAYOUT_BREAK_LINE:
+                        _lineBreak = false;
+                        break;
+                  }
+            }
       if (!_el.remove(el))
             printf("MeasureBase(%p)::remove(%s,%p) not found\n", this, el->name(), el);
       }
