@@ -312,6 +312,8 @@ bool Seq::canStart()
 
 void Seq::start()
       {
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
+            collectEvents();
       seek(cs->playPos());
       driver->startTransport();
       }
