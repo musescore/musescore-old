@@ -23,7 +23,8 @@
 
 UpdateChecker::UpdateChecker()
 {   
-    manager = new QNetworkAccessManager(this);  
+    manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));  
 }
 
 UpdateChecker::~UpdateChecker()
@@ -78,6 +79,12 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
         msgBox.setText(message);
         msgBox.setTextFormat(Qt::RichText);
         msgBox.exec();
+    }else if(manual){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("No Update Available"));
+        msgBox.setText(tr("No Update Available"));
+        msgBox.setTextFormat(Qt::RichText);
+        msgBox.exec();
     }    
 }
 
@@ -89,8 +96,9 @@ QString UpdateChecker::parseText(QXmlStreamReader& reader){
     return result;
 }
  
-void UpdateChecker::check(QString rev)
+void UpdateChecker::check(QString rev, bool m)
 {   
+    manual = m;
     #if defined(Q_WS_WIN)
     os = "win";
     #endif
@@ -110,7 +118,6 @@ void UpdateChecker::check(QString rev)
     if(!os.isNull() && !release.isNull()){
         revision =  rev;   
         manager->get(QNetworkRequest(QUrl("http://update.musescore.org/update_"+os +"_" + release +".xml")));
-        connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));
     }
 }
 
