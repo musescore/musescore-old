@@ -1,6 +1,11 @@
-17.jan (la)
+17.jan (ws)
+      - Implement line break for horizontal frame. This allows frames at the
+        end of a system
+      (la)
       - add "No update available" dialog on manual update check
-16.jan (la)
+16.jan (ws)
+      - new function: flip tuplet bracket direction
+      (la)
       - add frequency preference for automatic update check
 12.jan (db)
       - turn off "screen-shot" preference by default

@@ -1058,6 +1058,7 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
 
 //---------------------------------------------------------
 //   layoutSystem1
+//    return true on line break
 //---------------------------------------------------------
 
 bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
@@ -1100,8 +1101,11 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
             if (curMeasure->type() == HBOX) {
                   ww = point(static_cast<Box*>(curMeasure)->boxWidth());
-                  if (!isFirstMeasure)
-                        continueFlag = true;    //try to put another system on current row
+                  if (!isFirstMeasure) {
+                        // try to put another system on current row
+                        // if not a line break
+                        continueFlag = !curMeasure->lineBreak();
+                        }
                   }
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);

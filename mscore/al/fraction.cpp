@@ -174,6 +174,5 @@ Fraction& Fraction::operator/=(int val)
 
 Fraction Fraction::fromTicks(int ticks)
       {
-      Fraction f = Fraction(ticks, 1) / Fraction(AL::division * 4, 1);
-      return f.reduced();
+      return Fraction(ticks, 1) / Fraction(AL::division * 4, 1).reduced();
       }

@@ -416,6 +416,10 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
 
+      if (is._segment == 0) {
+            printf("cannot enter notes here (no chord rest at current position)\n");
+            return;
+            }
       _score->startCmd();
       _score->expandVoice();
       if (is.cr() == 0) {

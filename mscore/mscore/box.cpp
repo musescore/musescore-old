@@ -30,6 +30,7 @@
 #include "symbol.h"
 #include "system.h"
 #include "image.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   Box
@@ -249,6 +250,11 @@ void Box::read(QDomElement e)
                         add(image);
                         }
                   }
+            else if (tag == "LayoutBreak") {
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  lb->read(e);
+                  add(lb);
+                  }
             else if (tag == "HBox") {
                   HBox* hb = new HBox(score());
                   hb->read(e);
@@ -302,8 +308,10 @@ void HBox::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool HBox::acceptDrop(ScoreView*, const QPointF&, int, int) const
+bool HBox::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
+      if (type == LAYOUT_BREAK)
+            return true;
       return false;
       }
 
@@ -313,10 +321,39 @@ bool HBox::acceptDrop(ScoreView*, const QPointF&, int, int) const
 
 Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
       {
-      e->setParent(this);
-      score()->select(e, SELECT_SINGLE, 0);
-      score()->cmdAdd(e);
-      return e;
+      switch(e->type()) {
+            case LAYOUT_BREAK:
+                  {
+                  LayoutBreak* lb = static_cast<LayoutBreak*>(e);
+                  if (_pageBreak || _lineBreak) {
+                        if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
+                           || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
+                              //
+                              // if break already set
+                              //
+                              delete lb;
+                              break;
+                              }
+                        foreach(Element* elem, _el) {
+                              if (elem->type() == LAYOUT_BREAK) {
+                                    score()->undoChangeElement(elem, e);
+                                    break;
+                                    }
+                              }
+                        break;
+                        }
+                  lb->setTrack(-1);       // this are system elements
+                  lb->setParent(this);
+                  score()->cmdAdd(lb);
+                  return lb;
+                  }
+            default:
+                  e->setParent(this);
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->cmdAdd(e);
+                  return e;
+            }
+      return 0;
       }
 
 //---------------------------------------------------------
