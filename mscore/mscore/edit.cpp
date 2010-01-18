@@ -1257,7 +1257,7 @@ void Score::cmdDeleteSelectedMeasures()
                         }
                   }
             }
-      selection()->clearElements();
+//      selection()->clearElements();
       select(0, SELECT_SINGLE, 0);
       _is._segment = 0;        // invalidate position
       layoutAll = true;
@@ -1353,7 +1353,6 @@ void Score::cmdDeleteSelection()
                   deleteItem(e);
                   }
             }
-      selection()->clearElements();
       select(0, SELECT_SINGLE, 0);
       layoutAll = true;
       }
@@ -1525,11 +1524,6 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
 
       Tuplet* tuplet = new Tuplet(_score);
       tuplet->setRatio(ratio);
-
-      if (noteEntryMode() && (fr != cr->fraction())) {
-            cmdEnterRest();
-            cr = _score->getSelectedChordRest();
-            }
 
       //
       // "fr" is the fraction value of one tuple element

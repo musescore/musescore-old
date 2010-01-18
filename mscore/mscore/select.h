@@ -74,9 +74,9 @@ class Selection {
       QList<Note*> noteList() const;
       void add(Element*);
       void append(Element* el)         { _el.append(el); }
-      QRectF deselectAll();
+      void deselectAll();
       void remove(Element*);
-      QRectF clear();
+      void clear();
       Element* element() const;
       ChordRest* firstChordRest(int track = -1) const;
       ChordRest* lastChordRest(int track = -1) const;

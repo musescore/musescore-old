@@ -61,6 +61,9 @@ class Sym {
       double w;
       QRectF _bbox;
       QPointF _attach;
+      QTextLayout* tl;
+
+      void createTextLayout();
 
    public:
       Sym() { _code = 0; }

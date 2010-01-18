@@ -178,28 +178,26 @@ ChordRest* Selection::lastChordRest(int track) const
 //   deselectAll
 //---------------------------------------------------------
 
-QRectF Selection::deselectAll()
+void Selection::deselectAll()
       {
       if (_state == SEL_STAFF || _state == SEL_SYSTEM)
             _score->setUpdateAll();
-      return clear();
+      clear();
       }
 
 //---------------------------------------------------------
 //   clear
 //---------------------------------------------------------
 
-QRectF Selection::clear()
+void Selection::clear()
       {
-      QRectF r;
       foreach(Element* e, _el) {
-            r |= e->abbox();
+            _score->addRefresh(e->abbox());
             e->setSelected(false);
-            r |= e->abbox();
+            _score->addRefresh(e->abbox());
             }
       _el.clear();
       setState(SEL_NONE);
-      return r;
       }
 
 //---------------------------------------------------------
@@ -287,7 +285,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
       SelState selState = _selection.state();
 
       if (type == SELECT_SINGLE) {
-            refresh |= _selection.deselectAll();
+            _selection.deselectAll();
             if (e == 0) {
                   selState = SEL_NONE;
                   _updateAll = true;

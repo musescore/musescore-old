@@ -414,6 +414,7 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code.unicode(),c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
+      createTextLayout();
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -423,6 +424,23 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
       _attach = a * s;
       w = _bbox.width();
+      createTextLayout();
+      }
+
+//---------------------------------------------------------
+//   createTextLayout
+//    create a cached text layout to speedup drawing
+//---------------------------------------------------------
+
+void Sym::createTextLayout()
+      {
+      tl = new QTextLayout(QString(_code), _font);
+      tl->beginLayout();
+      QTextLine l = tl->createLine();
+      l.setNumColumns(1);
+      l.setPosition(QPointF(0.0, -l.ascent()));
+      tl->endLayout();
+      tl->setCacheEnabled(true);
       }
 
 //---------------------------------------------------------
@@ -455,8 +473,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-      painter.setFont(_font);
-      painter.drawText(x * imag, y * imag, QString(_code));
+      tl->draw(&painter, QPointF(x * imag, y * imag));
       painter.scale(imag, imag);
       }
 
