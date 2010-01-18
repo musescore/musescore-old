@@ -3868,7 +3868,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 if (timedenom==8) nombarlen=nombarlen/2;
 		 if (timedenom == 2) nombarlen = 2*nombarlen;
 
-		 if ((barlen<nombarlen) and (measurenumber==1) and (voice ==0))
+		 if ((barlen<nombarlen) and (measurenumber==1) and (voice == 0))
 		       {
 			     pickup=true;
 			     int punkt=0;
@@ -4011,7 +4011,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
    if (barempty == true)
    // no stuff in this bar in this voice: fill empty bar with silent rest
     {
-      if ((pickup) and (measurenumber==1))
+      if ((pickup) and (measurenumber==1) and (voice == 0))
 	{
 	  int punkt=0;
 	  int partial=getLen(barlen, &punkt);
@@ -4022,7 +4022,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  writeRest(barlen,2);
 	  out << "\n";
 	}//end if pickup
-      else //if not pickupbar: full silent bar
+      else //if not pickupbar: full measure silent bar
 	{
 	  writeRest(barlen, 2);
 	  curTicks=-1;
