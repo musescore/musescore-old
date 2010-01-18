@@ -1245,6 +1245,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       else
             region = ev->region();
 
+// double startTime = curTime();
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
             paint(r, p);
@@ -1262,6 +1263,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             }
       if (dragElement)
             dragElement->scanElements(&p, paintElement);
+//double elapsed = curTime() - startTime;
+//printf("paintEvent %f msec\n", elapsed * 1000.0);
       }
 
 //---------------------------------------------------------
@@ -3020,7 +3023,7 @@ void ScoreView::endLasso()
 
 void ScoreView::deselectAll()
       {
-      _score->addRefresh(_score->selection()->deselectAll());
+      _score->selection()->deselectAll();
       _score->end();
       }
 
