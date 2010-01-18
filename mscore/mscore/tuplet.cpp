@@ -123,15 +123,16 @@ void Tuplet::layout()
                   }
             _isUp = up > 0;
             }
-      else if (_direction == UP)
-            _isUp = true;
       else
-            _isUp = false;
+            _isUp = _direction == UP;
 
       //
       // set all elements to main direction
       //
+      bool tupletContainsRest = false;
       foreach(DurationElement* e, _elements) {
+            if (e->type() == REST)
+                  tupletContainsRest = true;
             if (e->type() == CHORD || e->type() == REST)
                   static_cast<ChordRest*>(e)->setUp(_isUp);
             }
@@ -143,7 +144,7 @@ void Tuplet::layout()
       while (cr2->type() == TUPLET)
             cr2 = static_cast<const Tuplet*>(cr2)->elements().back();
 
-      if (cr1->beam()) {
+      if (cr1->beam() && !tupletContainsRest) {
             if (_bracketType == AUTO_BRACKET)
                   _hasBracket = false;
             else
@@ -154,28 +155,20 @@ void Tuplet::layout()
             }
 
       if (_isUp) {
+            p1 = cr1->abbox().topLeft();
             if (cr1->type() == CHORD) {
-                  const Chord* chord1 = static_cast<const Chord*>(cr1);
-                  Stem* stem = chord1->stem();
+                  Stem* stem = static_cast<const Chord*>(cr1)->stem();
                   if (stem)
-                        p1 = QPointF(stem->abbox().topLeft());
-                  else
-                        p1 = QPointF(cr1->abbox().topLeft());
-                  }
-            else {
-                  p1 = QPointF(cr1->abbox().topLeft());
+                        p1.setY(stem->abbox().y());
                   }
 
+            p2 = cr2->abbox().topRight();
             if (cr2->type() == CHORD) {
-                  const Chord* chord2 = static_cast<const Chord*>(cr2);
-                  Stem* stem = chord2->stem();
+                  Stem* stem = static_cast<const Chord*>(cr2)->stem();
                   if (stem)
-                        p2 = QPointF(stem->abbox().topLeft());
-                  else
-                        p2 = QPointF(cr2->abbox().topLeft());
+                        p2 = stem->abbox().topRight();
                   }
             else  {
-                  p2 = QPointF(cr2->abbox().topRight());
                   if (p1.y() < p2.y())
                         p2.setY(p1.y());
                   else
@@ -183,30 +176,21 @@ void Tuplet::layout()
                   }
             }
       else {
+            p1 = cr1->abbox().bottomLeft();
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
                   if (stem)
-                        p1 = QPointF(stem->abbox().bottomLeft());
-                  else
-                        p1 = QPointF();
-                  }
-            else {
-                  QPointF p(cr1->abbox().bottomLeft());
-                  p1 = p;
+                        p1 = stem->abbox().bottomLeft();
                   }
 
+            p2 = cr2->abbox().bottomRight();
             if (cr2->type() == CHORD) {
-                  const Chord* chord2 = static_cast<const Chord*>(cr2);
-                  Stem* stem = chord2->stem();
+                  Stem* stem = static_cast<const Chord*>(cr2)->stem();
                   if (stem)
-                        p2 = QPointF(stem->abbox().bottomLeft());
-                  else
-                        p2 = QPointF();
+                        p2.setY(stem->abbox().bottom());
                   }
             else  {
-                  QPointF p(cr2->abbox().bottomRight());
-                  p2 = p;
                   if (p1.y() > p2.y())
                         p2.setY(p1.y());
                   else
