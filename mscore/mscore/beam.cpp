@@ -254,10 +254,8 @@ QPointF Beam::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = static_cast<System*>(parent());
-      if (system == 0) {
-            printf("Beam(%p)::canvasPos: Beam parent is zero\n", this);
+      if (system == 0)
             return pos();
-            }
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
@@ -448,7 +446,7 @@ void Beam::layout()
                         c->measure()->layoutChords1(c->segment(), c->staffIdx());
                         }
                   }
-            _up = -1;
+            _up = _elements.front()->up();
             }
       else if (cross) {
             double beamY   = 0.0;  // y position of main beam start

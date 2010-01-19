@@ -359,6 +359,20 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                   NoteList* nl = chord->noteList();
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note = in->second;
+                        if (note->tieBack()) {
+                              int line = note->tieBack()->startNote()->line();
+                              note->setLine(line);
+
+                              int tpc = note->tpc();
+                              line = tpc2step(tpc) + (note->pitch()/12) * 7;
+                              int tpcPitch   = tpc2pitch(tpc);
+                              if (tpcPitch < 0)
+                                    line += 7;
+                              else
+                                    line -= (tpcPitch/12)*7;
+                              tversatz[line] = ((tpc + 1) / 7) - 2;
+                              continue;
+                              }
 
                         int pitch = note->pitch();
                         if (drumset) {
@@ -659,7 +673,7 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 
 int Measure::findAccidental(Note* note) const
       {
-      char tversatz[74];      // list of already set accidentals for this measure
+      char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
       initLineList(tversatz, key.accidentalType);
 
@@ -686,7 +700,6 @@ int Measure::findAccidental(Note* note) const
                   for (int i = 0; i < nNotes; ++i) {
                         Note* note1  = notes[i];
                         int pitch   = note1->pitch();
-
                         //
                         // compute accidental
                         //
@@ -738,7 +751,7 @@ int Measure::findAccidental(Note* note) const
 
 int Measure::findAccidental2(Note* note) const
       {
-      char tversatz[74];      // list of already set accidentals for this measure
+      char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
       initLineList(tversatz, key.accidentalType);
 

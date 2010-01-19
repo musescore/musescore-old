@@ -97,7 +97,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       int strack = staffIdx * VOICES;
       int dtrack = (staffIdx + 1) * VOICES;
       QList<Note*> notesToRemove;
-      for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+      for (Segment* s = firstSegment(); s; s = s->next1()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;
             ChordRest* cr = static_cast<ChordRest*>(s->element(strack));

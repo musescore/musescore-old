@@ -166,7 +166,7 @@ void Tuplet::layout()
             if (cr2->type() == CHORD) {
                   Stem* stem = static_cast<const Chord*>(cr2)->stem();
                   if (stem)
-                        p2 = stem->abbox().topRight();
+                        p2.setY(stem->abbox().top());
                   }
             else  {
                   if (p1.y() < p2.y())
@@ -181,7 +181,7 @@ void Tuplet::layout()
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
                   if (stem)
-                        p1 = stem->abbox().bottomLeft();
+                        p1.setY(stem->abbox().bottom());
                   }
 
             p2 = cr2->abbox().bottomRight();

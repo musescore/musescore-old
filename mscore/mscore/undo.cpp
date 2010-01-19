@@ -1070,8 +1070,8 @@ ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc, int _userAccidental)
 
 void ChangePitch::flip()
       {
-      int f_pitch  = note->pitch();
-      int f_tpc    = note->tpc();
+      int f_pitch   = note->pitch();
+      int f_tpc     = note->tpc();
       int f_userAcc = note->userAccidental();
 
       note->changePitch(pitch);

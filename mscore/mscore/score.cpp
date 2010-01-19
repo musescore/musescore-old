@@ -531,7 +531,6 @@ void Score::removeMeasure(MeasureBase* im)
 
 void Score::insertTime(int tick, int len)
       {
-printf("Score::insertTime %d %d\n", tick, len);
       if (len < 0) {
             //
             // remove time
@@ -1161,7 +1160,7 @@ void Score::spell()
       {
       for (int i = 0; i < nstaves(); ++i) {
             QList<Note*> notes;
-            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+            for (Segment* s = firstSegment(); s; s = s->next1()) {
                   int strack = i * VOICES;
                   int etrack = strack + VOICES;
                   for (int track = strack; track < etrack; ++track) {
@@ -1825,7 +1824,7 @@ void Score::addElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
                   for (int track = startTrack; track < endTrack; ++track) {
@@ -1878,6 +1877,9 @@ void Score::removeElement(Element* element)
             remove(element);
             return;
             }
+      if (element->type() == BEAM)          // beam parent does not survive layout
+            element->setParent(0);
+
       select(element, SELECT_ADD, 0);
       if (parent)
             parent->remove(element);
@@ -1909,7 +1911,7 @@ void Score::removeElement(Element* element)
                   //-----------------------------------------------
 
                   bool endFound = false;
-                  for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+                  for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                         int startTrack = staffIdx * VOICES;
                         int endTrack   = startTrack + VOICES;
                         for (int track = startTrack; track < endTrack; ++track) {
@@ -1961,6 +1963,16 @@ Measure* Score::lastMeasure() const
       while (mb && mb->type() != MEASURE)
             mb = mb->prev();
       return static_cast<Measure*>(mb);
+      }
+
+//---------------------------------------------------------
+//   firstSegment
+//---------------------------------------------------------
+
+Segment* Score::firstSegment() const
+      {
+      Measure* m = firstMeasure();
+      return m ? m->first() : 0;
       }
 
 //---------------------------------------------------------

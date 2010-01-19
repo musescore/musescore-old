@@ -594,7 +594,7 @@ void Score::fixPpitch()
             int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
             Instrument* instr = part(staffIdx)->instrument();
 
-            for (Segment* seg = firstMeasure()->first(); seg; seg = seg->next1()) {
+            for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
                   if (seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
                         continue;
                   int ottavaShift = 0;

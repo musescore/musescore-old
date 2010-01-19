@@ -298,7 +298,7 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       int staffIdx = staff->idx();
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      for (Segment* s = staff->score()->firstMeasure()->first(); s; s = s->next1()) {
+      for (Segment* s = staff->score()->firstSegment(); s; s = s->next1()) {
             for (int track = startTrack; track < endTrack; ++track) {
                   Element* e = s->element(track);
                   if (e == 0 || e->type() != CHORD)
