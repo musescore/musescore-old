@@ -176,7 +176,7 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
 //TODO-S            score()->changeState(Canvas::NORMAL);
             score()->endCmd();
             score()->startCmd();
-            viewer->startEdit(newSegment);
+            viewer->startEdit(newSegment, curGrip);
             score()->setLayoutAll(true);
             }
       return true;
