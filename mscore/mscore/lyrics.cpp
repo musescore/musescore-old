@@ -241,7 +241,7 @@ void ScoreView::lyricsTab(bool back, bool end)
             lyrics->setNo(verse);
             }
 
-      lyrics->setSyllabic(Lyrics::SINGLE);
+      //lyrics->setSyllabic(Lyrics::SINGLE);
 
       if (oldLyrics) {
             switch(oldLyrics->syllabic()) {
@@ -261,7 +261,7 @@ void ScoreView::lyricsTab(bool back, bool end)
                   }
             }
 
-      lyrics->setSyllabic(Lyrics::SINGLE);
+      //lyrics->setSyllabic(Lyrics::SINGLE);
       _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
@@ -324,22 +324,22 @@ void ScoreView::lyricsMinus()
             lyrics->setNo(verse);
             }
 
-      lyrics->setSyllabic(Lyrics::END);
+      //lyrics->setSyllabic(Lyrics::END);
 
       if (oldLyrics) {
             switch(oldLyrics->syllabic()) {
                   case Lyrics::SINGLE:
                         oldLyrics->setSyllabic(Lyrics::BEGIN);
-                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        //lyrics->setSyllabic(Lyrics::MIDDLE);
                         break;
                   case Lyrics::BEGIN:
-                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        //lyrics->setSyllabic(Lyrics::MIDDLE);
                         break;
                   case Lyrics::MIDDLE:
                         break;
                   case Lyrics::END:
                         oldLyrics->setSyllabic(Lyrics::MIDDLE);
-                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        //lyrics->setSyllabic(Lyrics::MIDDLE);
                         break;
                   }
             }
