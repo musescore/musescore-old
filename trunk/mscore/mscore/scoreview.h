@@ -149,7 +149,7 @@ class ScoreView : public QWidget {
       bool dragMeasureAnchorElement(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
-      void lyricsTab(bool back, bool end);
+      void lyricsTab(bool back, bool end, bool moveOnly);
       void lyricsReturn();
       void lyricsEndEdit();
       void lyricsUpDown(bool up, bool end);
