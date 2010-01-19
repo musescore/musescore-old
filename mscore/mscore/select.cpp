@@ -206,7 +206,7 @@ void Selection::clear()
 
 void Selection::remove(Element* el)
       {
-      _el.removeAll(el);
+      _el.removeOne(el);
       el->setSelected(false);
       updateState();
       }
