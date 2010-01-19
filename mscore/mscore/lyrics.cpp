@@ -185,7 +185,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
 //   lyricsTab
 //---------------------------------------------------------
 
-void ScoreView::lyricsTab(bool back, bool end)
+void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -243,7 +243,7 @@ void ScoreView::lyricsTab(bool back, bool end)
 
       //lyrics->setSyllabic(Lyrics::SINGLE);
 
-      if (oldLyrics) {
+      if (oldLyrics && !moveOnly) {
             switch(oldLyrics->syllabic()) {
                   case Lyrics::SINGLE:
                   case Lyrics::END:

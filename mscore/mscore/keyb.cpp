@@ -62,21 +62,21 @@ void ScoreView::editKey(QKeyEvent* ev)
 		if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
 #endif
                   // TODO: shift+tab events are filtered by qt
-                  lyricsTab(modifiers & Qt::ShiftModifier, true);
+                  lyricsTab(modifiers & Qt::ShiftModifier, true, false);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
                   if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        lyricsTab(true, true);      // go to previous lyrics
+                        lyricsTab(true, true, true);      // go to previous lyrics
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Right) {
                   if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
-                        lyricsTab(false, false);    // go to next lyrics
+                        lyricsTab(false, false, true);    // go to next lyrics
                   found = true;
                   }
             else if (ctrl && (ev->key() == Qt::Key_Up)) {
