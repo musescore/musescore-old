@@ -182,7 +182,7 @@ void Score::transpose()
                               nKey  = transposeKey(oKey.accidentalType, semitones);
                         undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
                         }
-                  for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                  for (Segment* s = firstSegment(); s; s = s->next1()) {
                         if (s->subtype() != Segment::SegKeySig)
                               continue;
                         if (s->tick() < _selection.tickStart())
@@ -268,7 +268,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
             int nKey  = transposeKey(oKey.accidentalType, diff);
             undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
             }
-      for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+      for (Segment* s = firstSegment(); s; s = s->next1()) {
             if (s->subtype() != Segment::SegKeySig)
                   continue;
             KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));

@@ -211,7 +211,7 @@ void Note::setPitch(int val)
             val = 127;
       else if (val < 0)
             val = 0;
-      _pitch          = val;
+      _pitch = val;
       int pitchOffset = 0;
       if (score()) {
             Part* part = score()->part(staffIdx());

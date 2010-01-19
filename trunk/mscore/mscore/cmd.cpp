@@ -1358,24 +1358,25 @@ void Score::upDown(bool up, bool octave)
             else {
                   if (octave)  {
                         newPitch = pitch + (up ? 12 : -12);
-                        newTpc   = oNote->tpc();
+                        if (newPitch < 0)
+                              newPitch = 0;
+                        else if (newPitch > 127)
+                              newPitch = 127;
+                        newTpc = oNote->tpc();
                         }
                   else {
                         newPitch = up ? pitch+1 : pitch-1;
-                        newTpc   = pitch2tpc2(newPitch, up);
+                        if (newPitch < 0)
+                              newPitch = 0;
+                        else if (newPitch > 127)
+                              newPitch = 127;
+                        newTpc = pitch2tpc2(newPitch, up);
                         }
-                  }
-            if (newPitch < 0) {
-                  newPitch = 0;
-                  newTpc   = pitch2tpc(newPitch);
-                  }
-            else if (newPitch > 127) {
-                  newPitch = 127;
-                  newTpc   = pitch2tpc(newPitch);
                   }
             _is.pitch = newPitch;
 
-            undoChangePitch(oNote, newPitch, newTpc, 0);
+            if (oNote->pitch() != newPitch || oNote->tpc() != newTpc)
+                  undoChangePitch(oNote, newPitch, newTpc, 0);
 
             // play new note with velocity 80 for 0.3 sec:
             if (playNotes)
@@ -1544,7 +1545,7 @@ void Score::insertMeasures(int n, int type)
                         //
                         // remove time and key signatures
                         //
-                        for (Segment* s = firstMeasure()->first(); s; s = s->next()) {
+                        for (Segment* s = firstSegment(); s; s = s->next()) {
                               if (s->subtype() == Segment::SegKeySig) {
                                     for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                                           KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));

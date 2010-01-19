@@ -206,6 +206,8 @@ bool Element::operator>(const Element& el) const
 
 Element::~Element()
       {
+      if (selected())
+            printf("===========~Element: selected\n");
       if (score()) {
             foreach(Element* e, score()->selection()->elements()) {
                   if (e == this) {
@@ -213,7 +215,6 @@ Element::~Element()
                               printf("======~Element: %p still in selection!\n", this);
                         abort();
 //                        el->removeAt(el->indexOf(this));
-                        abort();
                         }
                   }
             }

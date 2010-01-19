@@ -348,7 +348,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             //
             // check if there is already a time signature symbol
             //
-            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+            for (Segment* s = firstSegment(); s; s = s->next1()) {
                   if (s->subtype() != Segment::SegTimeSig)
                         continue;
                   int etick = s->tick();
@@ -392,7 +392,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       //---------------------------------------------
 
       int staves = nstaves();
-      for (Segment* segment = firstMeasure()->first(); segment;) {
+      for (Segment* segment = firstSegment(); segment;) {
             Segment* nseg = segment->next1();
             if (segment->subtype() != Segment::SegTimeSig) {
                   segment = nseg;
@@ -1146,8 +1146,6 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
-printf("Score::cmdRemoveTime %d %d\n", tick, len);
-
       int etick = tick + len;
       foreach(Element* e, _gel) {
             if (e->type() == SLUR) {

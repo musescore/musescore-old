@@ -397,12 +397,14 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
 void Score::layoutStage1()
       {
+      int idx = 0;
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            ++idx;
             m->setDirty();
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
 
-                  char tversatz[74];      // list of already set accidentals for this measure
+                  char tversatz[75];      // list of already set accidentals for this measure
                   initLineList(tversatz, key.accidentalType);
 
                   m->setBreakMMRest(false);
@@ -424,16 +426,19 @@ void Score::layoutStage1()
                         else if (e->type() == TEMPO_TEXT)
                               m->setBreakMMRest(true);
                         }
+
                   int track = staffIdx * VOICES;
 
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         Element* e = segment->element(track);
+
                         if (segment->subtype() == Segment::SegKeySig
                            || segment->subtype() == Segment::SegStartRepeatBarLine
                            || segment->subtype() == Segment::SegTimeSig) {
                               if (e && !e->generated())
                                     m->setBreakMMRest(true);
                               }
+
                         if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
                               m->layoutChords0(segment, staffIdx * VOICES, tversatz);
                         if (e && e->type() == KEYSIG) {
@@ -470,7 +475,7 @@ void Score::layoutStage2()
             Measure* measure = 0;
 
             BeamMode bm = BEAM_AUTO;
-            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   Element* e = segment->element(track);
                   if (((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                      || e == 0 || !e->isChordRest())
@@ -647,7 +652,7 @@ void Score::layoutStage2()
 void Score::layoutStage3()
       {
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
                         layoutChords1(segment, staffIdx);
                   }
@@ -721,7 +726,7 @@ void Score::doLayout()
 
       int tracks = nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
-            for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   Element* e = segment->element(track);
                   if (e && e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
