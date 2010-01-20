@@ -2383,11 +2383,12 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
                               tuplet->setTick(curTick);
-                              tuplet->read(eee);
+                              tuplet->read(eee, tuplets);
                               curTick  = tuplet->tick();
                               int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
+                              tuplet->setTick(tick);
                               tuplets.append(tuplet);
                               undoAddElement(tuplet);
                               }

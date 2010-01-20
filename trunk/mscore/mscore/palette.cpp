@@ -387,6 +387,8 @@ void Palette::append(Element* s, const QString& name)
 
 void Palette::append(int symIdx)
       {
+      if (!symbols[symIdx].isValid())
+            return;
       Symbol* s = new Symbol(gscore);
       s->setSym(symIdx);
       append(s, qApp->translate("symbol", ::symbols[symIdx].name()));

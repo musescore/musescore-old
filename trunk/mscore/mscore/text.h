@@ -115,7 +115,7 @@ class TextB : public Element {
 
    protected:
       bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
-      bool editMode;
+      bool _editMode;
       QTextCursor* cursor;
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
       int cursorPos;
@@ -202,6 +202,7 @@ class TextB : public Element {
       virtual void setTextStyle(int);
       int textStyle() const                 { return _textStyle; }
       void dragTo(const QPointF&p);
+      bool editMode() const { return _editMode; }
       };
 
 //---------------------------------------------------------
@@ -228,7 +229,7 @@ class Text : public TextB {
 
 //---------------------------------------------------------
 //   class Text
-//    shared text
+//    shared text, used for coypright and instrument names
 //---------------------------------------------------------
 
 class TextC : public TextB {

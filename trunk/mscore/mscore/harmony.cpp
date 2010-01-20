@@ -707,7 +707,7 @@ void Harmony::endEdit()
 
 qreal Harmony::baseLine() const
       {
-      return (editMode || textList.isEmpty()) ? Text::baseLine() : 0.0;
+      return (_editMode || textList.isEmpty()) ? Text::baseLine() : 0.0;
       }
 
 //---------------------------------------------------------
@@ -817,7 +817,7 @@ void Harmony::layout()
       {
       setSubtype(TEXT_CHORD);    // apply style changes
 
-      if (editMode || textList.isEmpty()) {
+      if (_editMode || textList.isEmpty()) {
             Text::layout();
             return;
             }
@@ -840,7 +840,7 @@ void Harmony::layout()
 
 void Harmony::draw(QPainter& p) const
       {
-      if (editMode || textList.isEmpty()) {
+      if (_editMode || textList.isEmpty()) {
             Text::draw(p);
             return;
             }

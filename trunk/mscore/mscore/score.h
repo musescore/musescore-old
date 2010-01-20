@@ -351,6 +351,8 @@ class Score : public QObject {
       void layoutStage2();
       void layoutStage3();
       void layoutChords1(Segment* segment, int staffIdx);
+      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
+         TransposeMode mode, int key, int semitones);
 
    signals:
       void selectionChanged(int);
@@ -747,6 +749,7 @@ class Score : public QObject {
       Measure* firstMeasure() const;
       Measure* lastMeasure() const;
       Segment* firstSegment() const;
+      Segment* lastSegment() const;
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
       QPaintDevice* paintDevice() const             { return _paintDevice; }

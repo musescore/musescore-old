@@ -2521,8 +2521,8 @@ void Measure::read(QDomElement e, int idx)
                   tuplet->setTrack(score()->curTrack);
                   tuplet->setTick(score()->curTick);
                   tuplet->setTrack(score()->curTrack);
-                  tuplet->setParent(this);      // tuplet read needs access to measure
-                  tuplet->read(e);
+                  tuplet->setParent(this);
+                  tuplet->read(e, _tuplets);
                   add(tuplet);
                   }
             else if (tag == "Marker") {

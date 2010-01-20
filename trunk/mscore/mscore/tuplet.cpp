@@ -77,6 +77,10 @@ void Tuplet::setSelected(bool f)
 
 void Tuplet::layout()
       {
+      if (_elements.empty()) {
+            printf("Tuplet::layout(): tuplet is empty\n");
+            return;
+            }
       double _spatium = spatium();
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
@@ -138,11 +142,19 @@ void Tuplet::layout()
             }
 
       const DurationElement* cr1 = _elements.front();
-      while (cr1->type() == TUPLET)
-            cr1 = static_cast<const Tuplet*>(cr1)->elements().front();
+      while (cr1->type() == TUPLET) {
+            const Tuplet* t = static_cast<const Tuplet*>(cr1);
+            if (t->elements().empty())
+                  break;
+            cr1 = t->elements().front();
+            }
       const DurationElement* cr2 = _elements.back();
-      while (cr2->type() == TUPLET)
-            cr2 = static_cast<const Tuplet*>(cr2)->elements().back();
+      while (cr2->type() == TUPLET) {
+            const Tuplet* t = static_cast<const Tuplet*>(cr2);
+            if (t->elements().empty())
+                  break;
+            cr2 = t->elements().back();
+            }
 
       if (cr1->beam() && !tupletContainsRest) {
             if (_bracketType == AUTO_BRACKET)
@@ -362,10 +374,11 @@ void Tuplet::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tuplet::read(QDomElement e)
+void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets)
       {
       int bl = -1;
-      _id = e.attribute("id", "0").toInt();
+      _id    = e.attribute("id", "0").toInt();
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -412,8 +425,7 @@ void Tuplet::read(QDomElement e)
                   _p2 = readPoint(e);
                   }
             else if (tag == "Tuplet") {
-                  setTuplet(0);
-                  foreach(Tuplet* t, *measure()->tuplets()) {
+                  foreach(Tuplet* t, tuplets) {
                         if (t->id() == i) {
                               setTuplet(t);
                               break;

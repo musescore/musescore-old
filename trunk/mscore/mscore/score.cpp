@@ -1635,7 +1635,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   for (segment = pos->measure->first(); segment;) {
                         if (segment->subtype() == Segment::SegChordRest)
                               break;
-                        segment = getNextCRSegment(segment, track);
+                        segment = segment->next();
                         }
                   x = segment->x();
                   pos->tick = pos->measure->tick();
@@ -1973,6 +1973,16 @@ Segment* Score::firstSegment() const
       {
       Measure* m = firstMeasure();
       return m ? m->first() : 0;
+      }
+
+//---------------------------------------------------------
+//   lastSegment
+//---------------------------------------------------------
+
+Segment* Score::lastSegment() const
+      {
+      Measure* m = lastMeasure();
+      return m ? m->last() : 0;
       }
 
 //---------------------------------------------------------

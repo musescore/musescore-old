@@ -774,13 +774,12 @@ QByteArray Selection::staffMimeData() const
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(slurId++);
             }
-      int tupletId = 0;
       int beamId = 0;
       foreach(Beam* beam, _score->beams())
             beam->setId(beamId++);
       for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
-                  tuplet->setId(tupletId++);
+                  tuplet->setId(-1);
             }
 
       int ticks  = tickEnd() - tickStart();
@@ -807,7 +806,6 @@ QByteArray Selection::staffMimeData() const
                               e->write(xml);
                               }
                         }
-                  m->writeTuplets(xml, staffIdx);
                   }
 
             int startTrack = staffIdx * VOICES;
@@ -825,8 +823,19 @@ QByteArray Selection::staffMimeData() const
                               ChordRest* cr = static_cast<ChordRest*>(e);
                               Tuplet* tuplet = cr->tuplet();
                               if (tuplet && tuplet->elements().front() == cr) {
-                                    tuplet->setId(xml.tupletId++);
-                                    tuplet->write(xml);
+                                    QList<Tuplet*> tl;
+                                    tl.prepend(tuplet);
+                                    Tuplet* t = tuplet;
+                                    while (t->tuplet()) {
+                                          t = t->tuplet();
+                                          tl.prepend(t);
+                                          }
+                                    foreach(Tuplet* t, tl) {
+                                          if (t->id() == -1) {
+                                                tuplet->setId(xml.tupletId++);
+                                                tuplet->write(xml);
+                                                }
+                                          }
                                     }
                               foreach(Slur* slur, cr->slurFor()) {
                                     if (slur->startElement()->tick() >= tickStart()

@@ -388,7 +388,7 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
 TextB::TextB(Score* s)
    : Element(s)
       {
-      editMode   = false;
+      _editMode   = false;
       cursorPos  = 0;
       cursor     = 0;
       _movable   = true;
@@ -400,7 +400,7 @@ TextB::TextB(const TextB& e)
       {
       _movable                = e._movable;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
-      editMode                = e.editMode;
+      _editMode               = e._editMode;
       cursorPos               = e.cursorPos;
       _textStyle              = e._textStyle;
       cursor                  = 0;
@@ -447,7 +447,7 @@ TextC::~TextC()
 
 void TextC::baseChanged()
       {
-      if (editMode) {
+      if (_editMode) {
             delete cursor;
             cursor = new QTextCursor(textBase()->doc());
             cursor->setPosition(cursorPos);
@@ -473,7 +473,7 @@ Text::Text(const Text& e)
    : TextB(e)
       {
       _tb = new TextBase(*(e._tb));
-      if (editMode) {
+      if (_editMode) {
             cursor = new QTextCursor(textBase()->doc());
             cursor->setPosition(cursorPos);
             cursor->setBlockFormat(e.cursor->blockFormat());
@@ -623,7 +623,7 @@ void TextB::setSubtype(const QString& s)
 
 void TextB::resetMode()
       {
-      editMode = 0;
+      _editMode = 0;
       delete cursor;
       cursor = 0;
       }
@@ -877,7 +877,7 @@ void TextB::startEdit(ScoreView* view, const QPointF& p)
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
-      editMode = true;
+      _editMode = true;
       setCursor(p);
       cursorPos = cursor->position();
 
@@ -915,8 +915,8 @@ bool TextB::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers m
       {
       if (debugMode)
             printf("TextB::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));
-      if (!editMode || !cursor) {
-            printf("TextB::edit(%p): not in edit mode: %d %p\n", this, editMode, cursor);
+      if (!_editMode || !cursor) {
+            printf("TextB::edit(%p): not in edit mode: %d %p\n", this, _editMode, cursor);
             return false;
             }
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
@@ -1120,8 +1120,8 @@ void TextB::moveCursor(int col)
 
 void TextB::endEdit()
       {
-      if (!editMode || !cursor) {
-            printf("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, editMode, cursor);
+      if (!_editMode || !cursor) {
+            printf("endEdit<%p>: not in edit mode or no cursor: %d %p\n", this, _editMode, cursor);
             return;
             }
       cursorPos = cursor->position();
@@ -1130,7 +1130,7 @@ void TextB::endEdit()
       mscore->textTools()->hide();
       delete cursor;
       cursor = 0;
-      editMode = false;
+      _editMode = false;
 
       if (subtype() == TEXT_COPYRIGHT)
             score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
