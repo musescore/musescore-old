@@ -66,7 +66,7 @@ class Sym {
       void createTextLayout();
 
    public:
-      Sym() { _code = 0; }
+      Sym() { _code = 0; tl = 0; }
       Sym(const char* name, int c, int fid, double x=0.0, double y=0.0);
       Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
@@ -80,10 +80,10 @@ class Sym {
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
       QFont font() const                   { return _font;    }
-      void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
+      bool isValid() const                   { return tl != 0; }
       };
 
 extern QVector<Sym> symbols;

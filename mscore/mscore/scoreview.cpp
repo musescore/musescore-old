@@ -1071,7 +1071,6 @@ void ScoreView::startEdit()
       {
       score()->startCmd();
       score()->setLayoutAll(false);
-//      dragElement = 0;
       curElement  = 0;
       origEditObject->startEdit(this, startMove);
       setFocus();
@@ -1087,15 +1086,10 @@ void ScoreView::startEdit()
             }
       else {
             editObject = origEditObject->clone();
-            editObject->setSelected(true);
             origEditObject->resetMode();
+            editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
-            _score->select(editObject, SELECT_SINGLE, 0);
-            _score->removeBsp(origEditObject);
             }
-      _score->setLayoutAll(true);
-      _score->end();
-
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
@@ -1103,6 +1097,7 @@ void ScoreView::startEdit()
             grip[i] = r;
       editObject->updateGrips(&grips, grip);
       curGrip = grips-1;
+      _score->setLayoutAll(true);
       score()->end();
       }
 
@@ -2233,13 +2228,15 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   }
             p.restore();
             }
-      if (editObject) {
+#if 0
+      if (editObject && !editObject->isTextB()) {
             p.save();
             p.translate(editObject->canvasPos());
             p.setPen(QPen(editObject->curColor()));
             editObject->draw(p);
             p.restore();
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -2579,7 +2576,6 @@ void ScoreView::endEdit()
 
       if (editObject->isTextB()) {
             TextB* t = static_cast<TextB*>(editObject);
-            // if (t->doc()->isUndoAvailable()) {
             if (textUndoLevel)
                   _score->undo()->push(new EditText(t, textUndoLevel));
             disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
