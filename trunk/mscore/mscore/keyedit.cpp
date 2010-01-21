@@ -259,7 +259,7 @@ void KeyCanvas::snap(Accidental* a)
       double spatium2 = PALETTE_SPATIUM / (PDPI/DPI * extraMag);
       int line = int(y / spatium2);
       y = line * spatium2;
-      a->setYpos(y);
+      a->rypos() = y;
       }
 
 //---------------------------------------------------------

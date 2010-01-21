@@ -366,6 +366,12 @@ void ScoreView::endUndoRedo()
             }
       _score->selection()->update();
       _score->setLayoutAll(true);
+      if (_score->noteEntryMode() != noteEntryMode()) {
+printf("noteEntryMode changed\n");
+            }
+      if (noteEntryMode()) {
+            moveCursor();
+            }
       _score->end();
       }
 
@@ -1125,8 +1131,7 @@ void ChangeAccidental::undo()
       int b  = note->tpc();
       int c  = note->accidentalType();
 
-      note->setPitch(pitch);
-      note->setTpc(tpc);
+      note->setPitch(pitch, tpc);
       note->setAccidentalType(acc);
 
       pitch = a;

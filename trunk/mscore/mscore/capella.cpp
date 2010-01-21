@@ -1474,6 +1474,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     pitch = 0;
 
                               note->setPitch(pitch);
+                              note->setTpcFromPitch();
                               /*int alter1 =*/ tpc2alter(note->tpc());
                               int _tpc = pitch2tpc(note->pitch(), 0);
                               /*int alter2 =*/ tpc2alter(_tpc);

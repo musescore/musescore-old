@@ -284,7 +284,7 @@ void System::layout(double xo1)
                               }
                         }
                   // right align bracket
-                  b->setXpos(_leftMargin - xo + bracketWidth[i] - b->width());
+                  b->rxpos() = _leftMargin - xo + bracketWidth[i] - b->width();
                   }
             }
 
@@ -298,7 +298,7 @@ void System::layout(double xo1)
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
                   double d  = point(instrumentNameOffset) + s->instrumentName->bbox().width();
-                  s->instrumentName->setXpos(xoff2 - d + xo1);
+                  s->instrumentName->rxpos() = xoff2 - d + xo1;
                   }
             idx += nstaves;
             }
@@ -387,7 +387,7 @@ void System::layout2()
                         }
                   qreal sy = ss->bbox().top();
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
-                  b->setYpos(sy);
+                  b->rypos() = sy;
                   b->setHeight(ey - sy);
                   b->layout();
                   }
@@ -408,7 +408,7 @@ void System::layout2()
                   double y1 = s->bbox().top();
                   double y2 = staff(staffIdx + nstaves - 1)->bbox().bottom();
                   double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
-                  s->instrumentName->setYpos(y);
+                  s->instrumentName->rypos() = y;
                   }
             staffIdx += nstaves;
             }

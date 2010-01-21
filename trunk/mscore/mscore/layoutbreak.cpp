@@ -30,7 +30,7 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      setRXoff(100.0);
+      _reloff.rx() = 100.0;
       setXoff(-1.0);
       setYoff(-2.0);
       setOffsetType(OFFSET_SPATIUM);

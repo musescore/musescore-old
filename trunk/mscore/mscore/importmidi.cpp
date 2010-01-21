@@ -1106,8 +1106,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                               for (int i = 0; i < nl.size(); ++i) {
                                     Event* mn = nl[i];
                         		Note* note = new Note(this);
-                                    note->setPitch(mn->pitch());
-                                    note->setTpc(mn->tpc());
+                                    note->setPitch(mn->pitch(), mn->tpc());
                         		note->setTrack(chord->track());
                   	      	chord->add(note);
                                     note->setTick(tick);
@@ -1214,10 +1213,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             	foreach (MNote* n, notes) {
                         foreach(Event* mn, n->mc->notes()) {
                   		Note* note = new Note(this);
-                              note->setPitch(mn->pitch());
+                              note->setPitch(mn->pitch(), mn->tpc());
             	      	note->setTrack(staffIdx * VOICES + voice);
                               note->setTick(tick);
-                              note->setTpc(mn->tpc());
             	      	chord->add(note);
                               note->setOnTimeType(USER_VAL);
                               note->setOnTimeOffset(tick - mn->noquantOntime() - tick);

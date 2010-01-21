@@ -680,6 +680,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       chord->setTrack(track);
       chord->add(note);
       note->setPitch(pitch);
+      note->setTpcFromPitch();
 
       Duration d;
       d.setVal(len);
@@ -703,7 +704,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
    int headGroup, Direction stemDirection)
       {
-      int tick = cr->tick();
+      int tick      = cr->tick();
       Element* nr   = 0;
       Tie* tie      = 0;
 
@@ -720,6 +721,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   }
             QList<Duration> dl = toDurationList(dd, true);
 
+            measure = cr->measure();
             int n = dl.size();
             for (int i = 0; i < n; ++i) {
                   Duration d = dl[i];
@@ -745,10 +747,10 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->setTick(tick);
                         chord->setTrack(track);
                         chord->setDuration(d);
-                        chord->setTuplet(cr->tuplet());
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
                         note->setPitch(pitch);
+                        note->setTpcFromPitch();
                         mscore->play(note);
                         ncr = chord;
                         if (i+1 < n) {
@@ -758,7 +760,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                               note->setTieFor(tie);
                               }
                         }
-                  measure = tick2measure(tick);
+                  ncr->setTuplet(cr->tuplet());
                   Segment::SegmentType st = Segment::SegChordRest;
                   seg = measure->findSegment(st, tick);
                   if (seg == 0) {
@@ -2432,6 +2434,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     for (iNote i = nl->begin(); i != nl->end(); ++i) {
                                           Note* n = i->second;
                                           n->setPitch(n->pitch() - part->pitchOffset());
+                                          n->setTpcFromPitch();
                                           n->setTrack(track);
                                           }
                                     }

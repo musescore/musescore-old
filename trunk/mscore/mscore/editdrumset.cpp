@@ -305,6 +305,7 @@ void EditDrumset::updateExample()
       note->setParent(chord);
       note->setTrack(voice);
       note->setPitch(pitch);
+      note->setTpcFromPitch();
       note->setLine(line);
       note->setPos(0.0, gscore->spatium() * .5 * line);
       note->setHeadGroup(noteHead);

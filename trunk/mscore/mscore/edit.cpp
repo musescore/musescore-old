@@ -189,8 +189,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
             Note* n = i->second;
             Note* nn = new Note(this);
             chord->add(nn);
-            nn->setPitch(n->pitch());
-            nn->setTpc(n->tpc());
+            nn->setPitch(n->pitch(), n->tpc());
             if (genTie) {
                   Tie* tie = new Tie(this);
                   tie->setStartNote(n);
@@ -317,8 +316,9 @@ Note* Score::addNote(Chord* chord, int pitch)
       Note* note = new Note(this);
       note->setParent(chord);
       note->setTrack(chord->track());
+      note->setPitch(pitch);
+      note->setTpcFromPitch();
       cmdAdd(note);
-      note->setPitch(pitch);  // set pitch after inserting note to get proper tpc
       mscore->play(note);
       setLayout(chord->measure());
       return note;
@@ -1589,8 +1589,7 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       if (ocr->type() == CHORD) {
             cr = new Chord(this);
             Note* note = new Note(this);
-            note->setPitch(static_cast<Chord*>(ocr)->upNote()->pitch());
-            note->setTpc(static_cast<Chord*>(ocr)->upNote()->tpc());
+            note->setPitch(static_cast<Chord*>(ocr)->upNote()->pitch(), static_cast<Chord*>(ocr)->upNote()->tpc());
             note->setTrack(track);
             cr->add(note);
             }

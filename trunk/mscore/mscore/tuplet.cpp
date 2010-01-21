@@ -137,8 +137,6 @@ void Tuplet::layout()
       foreach(DurationElement* e, _elements) {
             if (e->type() == REST)
                   tupletContainsRest = true;
-            if (e->type() == CHORD || e->type() == REST)
-                  static_cast<ChordRest*>(e)->setUp(_isUp);
             }
 
       const DurationElement* cr1 = _elements.front();
@@ -156,31 +154,50 @@ void Tuplet::layout()
             cr2 = t->elements().back();
             }
 
+      //
+      //   shall we draw a bracket?
+      //
       if (cr1->beam() && !tupletContainsRest) {
             if (_bracketType == AUTO_BRACKET)
                   _hasBracket = false;
             else
                   _hasBracket = _bracketType == SHOW_BRACKET;
             }
-      else {
+      else
             _hasBracket = _bracketType != SHOW_NO_BRACKET;
-            }
 
+
+      //
+      //    calculate bracket start and end point p1 p2
+      //
+      double headDistance = _spatium * .75;
       if (_isUp) {
             p1 = cr1->abbox().topLeft();
+            p1.ry() -= headDistance;
+
             if (cr1->type() == CHORD) {
-                  Stem* stem = static_cast<const Chord*>(cr1)->stem();
-                  if (stem)
+                  const Chord* chord1 = static_cast<const Chord*>(cr1);
+                  Stem* stem = chord1->stem();
+                  if (stem && chord1->up())
                         p1.setY(stem->abbox().y());
                   }
 
             p2 = cr2->abbox().topRight();
+            p2.ry() -= headDistance;
+
             if (cr2->type() == CHORD) {
-                  Stem* stem = static_cast<const Chord*>(cr2)->stem();
-                  if (stem)
+                  const Chord* chord2 = static_cast<const Chord*>(cr2);
+                  Stem* stem = chord2->stem();
+                  if (stem && chord2->up())
                         p2.setY(stem->abbox().top());
                   }
-            else  {
+            if (cr1->type() != CHORD && cr2->type() == CHORD) {
+                  if (p2.y() < p1.y())
+                        p1.setY(p2.y());
+                  else
+                        p2.setY(p1.y());
+                  }
+            else if (cr1->type() == CHORD && cr2->type() != CHORD) {
                   if (p1.y() < p2.y())
                         p2.setY(p1.y());
                   else
@@ -189,20 +206,31 @@ void Tuplet::layout()
             }
       else {
             p1 = cr1->abbox().bottomLeft();
+            p1.ry() += headDistance;
+
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
-                  if (stem)
+                  if (stem && !chord1->up())
                         p1.setY(stem->abbox().bottom());
                   }
 
             p2 = cr2->abbox().bottomRight();
+            p2.ry() += headDistance;
+
             if (cr2->type() == CHORD) {
-                  Stem* stem = static_cast<const Chord*>(cr2)->stem();
-                  if (stem)
+                  const Chord* chord2 = static_cast<const Chord*>(cr2);
+                  Stem* stem = chord2->stem();
+                  if (stem && !chord2->up())
                         p2.setY(stem->abbox().bottom());
                   }
-            else  {
+            if (cr1->type() != CHORD && cr2->type() == CHORD) {
+                  if (p2.y() > p1.y())
+                        p1.setY(p2.y());
+                  else
+                        p2.setY(p1.y());
+                  }
+            else if (cr1->type() == CHORD && cr2->type() != CHORD) {
                   if (p1.y() > p2.y())
                         p2.setY(p1.y());
                   else
@@ -220,12 +248,10 @@ void Tuplet::layout()
 
       if (_userModified) {
             p1.rx() += _p1.x();
-            p1.setY(_p1.y());
             p2.rx() += _p2.x();
-            p2.setY(_p2.y());
             }
-      _p1.setY(p1.y());
-      _p2.setY(p2.y());
+      _p1.ry() = p1.y();
+      _p2.ry() = p2.y();
 
       // center number
       qreal x3 = 0.0, y3 = 0.0;

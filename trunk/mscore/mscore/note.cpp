@@ -221,18 +221,22 @@ void Note::setPitch(int val)
                   }
             }
       _ppitch = _pitch + pitchOffset;
-      KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
-      _tpc    = pitch2tpc(_pitch, key.accidentalType);
       }
 
 void Note::setPitch(int a, int b)
       {
-      if (a > 127)
-            a = 127;
-      else if (a < 0)
-            a = 0;
-      _pitch = a;
+      setPitch(a);
       _tpc = b;
+      }
+
+//---------------------------------------------------------
+//   setTpcFromPitch
+//---------------------------------------------------------
+
+void Note::setTpcFromPitch()
+      {
+      KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
+      _tpc    = pitch2tpc(_pitch, key.accidentalType);
       }
 
 //---------------------------------------------------------
@@ -1389,6 +1393,6 @@ void Note::setMag(double val)
 void Note::setLine(int n)
       {
       _line = n;
-      setYpos(_line * spatium() * .5);
+      _pos.ry() = _line * spatium() * .5;
       }
 
