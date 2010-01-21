@@ -192,7 +192,7 @@ void ChordStyleEditor::updateChordDescription(ChordDescription* d)
       d->renderList.clear();
       QList<TextSegment*> tl = canvas->getTextList();
       int idx = 0;
-      double x, y;
+      double x  = 0, y = 0;
       foreach(const TextSegment* ts, tl) {
             ++idx;
             if (idx == 1) {     // dont save base

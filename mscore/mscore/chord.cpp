@@ -741,8 +741,10 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
             else if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (ptch != -1)
+      if (ptch != -1) {
             note->setPitch(ptch);
+            note->setTpcFromPitch();
+            }
       if (tpc != -1)
             note->setTpc(tpc);
       add(note);

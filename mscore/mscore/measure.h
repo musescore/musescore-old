@@ -54,9 +54,9 @@ class Spacer;
 struct MStaff {
       double distance;
       StaffLines*  lines;
+      Spacer* _vspacer;
       bool hasVoices;         ///< indicates that MStaff contains more than one voice,
                               ///< this changes some layout rules
-      Spacer* _vspacer;
       bool _visible;
       bool _slashStyle;
 
@@ -98,18 +98,19 @@ class Measure : public MeasureBase {
       Text* _noText;          ///< Measure number text object
 
       double _userStretch;
+
       bool _irregular;              ///< Irregular measure, do not count
       bool _breakMultiMeasureRest;  ///< set by user
       bool _breakMMRest;            ///< set by layout
+      bool _endBarLineGenerated;
+      bool _endBarLineVisible;
+      int _endBarLineType;
 
       int _multiMeasure;      // set from layout();
                               //   0 - normal measure
                               // > 0 - multi measure rest;
                               // < 0 - skipped measure
 
-      int _endBarLineType;
-      bool _endBarLineGenerated;
-      bool _endBarLineVisible;
       QColor _endBarLineColor;
 
       mutable int _tickLen;   // cached value

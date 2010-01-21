@@ -98,8 +98,8 @@ void TextProp::set(TextB* tb)
 
       xOffset->setValue(tb->xoff());
       yOffset->setValue(tb->yoff());
-      rxOffset->setValue(tb->rxoff());
-      ryOffset->setValue(tb->ryoff());
+      rxOffset->setValue(tb->reloff().x());
+      ryOffset->setValue(tb->reloff().y());
       mmUnit->setChecked(tb->offsetType() == OFFSET_ABS);
       spatiumUnit->setChecked(tb->offsetType() == OFFSET_SPATIUM);
 
@@ -142,8 +142,7 @@ void TextProp::get(TextB* tb)
 
       tb->setXoff(xOffset->value());
       tb->setYoff(yOffset->value());
-      tb->setRXoff(rxOffset->value());
-      tb->setRYoff(ryOffset->value());
+      tb->setReloff(QPointF(rxOffset->value(), ryOffset->value()));
       tb->setOffsetType(mmUnit->isChecked() ? OFFSET_ABS : OFFSET_SPATIUM);
       }
 

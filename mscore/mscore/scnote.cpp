@@ -129,6 +129,7 @@ int ScNotePrototype::getPitch() const
 void ScNotePrototype::setPitch(int v)
       {
       thisNote()->setPitch(v);
+      thisNote()->setTpcFromPitch();
       }
 
 //---------------------------------------------------------

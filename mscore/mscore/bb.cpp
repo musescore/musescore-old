@@ -560,8 +560,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
             for (int i = 0; i < nl.size(); ++i) {
                   Event* mn = nl[i];
       		Note* note = new Note(this);
-                  note->setPitch(mn->pitch());
-                  note->setTpc(mn->tpc());
+                  note->setPitch(mn->pitch(), mn->tpc());
       		note->setTrack(track);
             	chord->add(note);
                   note->setTick(tick);

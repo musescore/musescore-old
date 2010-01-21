@@ -1237,8 +1237,8 @@ void TextView::setElement(Element* e)
       tb.text->setDocument(te->doc()->clone());
       tb.xoffset->setValue(te->xoff());
       tb.yoffset->setValue(te->yoff());
-      tb.rxoffset->setValue(te->rxoff());
-      tb.ryoffset->setValue(te->ryoff());
+      tb.rxoffset->setValue(te->reloff().x());
+      tb.ryoffset->setValue(te->reloff().y());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
       tb.textStyle->setCurrentIndex(te->textStyle());
       }

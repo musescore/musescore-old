@@ -514,7 +514,7 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
-                        chord->setXpos(0.0);
+                        chord->rxpos() = 0.0;
                         Note* pnote = notes[idx-1];
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
                               if (ticks > pnote->chord()->tickLen()) {
@@ -534,17 +534,17 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
 // printf("A idx %d  startIdx %d\n", idx, startIdx);
                         if ((line > ll) || !chord->up()) {
 //printf("A1\n");
-                              note->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
+                              note->chord()->rxpos() = note->headWidth() - note->point(score()->styleS(ST_stemWidth));
                               }
                         else {
 //printf("A2\n");
-                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - note->point(score()->styleS(ST_stemWidth)));
+                              notes[idx-incIdx]->chord()->rxpos() = note->headWidth() - note->point(score()->styleS(ST_stemWidth));
                               }
                         moveLeft = true;
                         }
                   }
             else {
-                  chord->setXpos(0.0);
+                  chord->rxpos() = 0.0;
                   note->setHidden(false);
                   }
 
@@ -3344,19 +3344,19 @@ void Measure::layoutX(double stretch)
                                           rest->setMMWidth(xpos[segs] - 2 * s->x());
                                     else
                                           rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
-                                    e->setXpos(0.0);
+                                    e->rxpos() = 0.0;
                                     }
                               else {
                                     double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
                                     double w  = xpos[segs-1] - x1;
-                                    e->setXpos((w - e->width()) * .5 + x1 - s->x());
+                                    e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                                     }
                               }
                         }
                   else if (t == REPEAT_MEASURE) {
                         double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
                         double w  = xpos[segs-1] - x1;
-                        e->setXpos((w - e->width()) * .5 + x1 - s->x());
+                        e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                         }
                   else if (t == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
@@ -3367,7 +3367,7 @@ void Measure::layoutX(double stretch)
                   else if ((t == CLEF) && (s != first())) {
                         double w = xpos[seg+1] - xpos[seg];
                         double m = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
-                        e->setXpos(w - e->width() - m);
+                        e->rxpos() = w - e->width() - m;
                         }
                   else {
                         e->setPos(-e->bbox().x(), 0.0);

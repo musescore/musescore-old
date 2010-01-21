@@ -146,6 +146,7 @@ class Note : public Element {
       int tpc() const                 { return _tpc;      }
       void setTpc(int v);
       void changePitch(int val);
+      void setTpcFromPitch();
 
       int userAccidental() const      { return _userAccidental; }
       void setUserAccidental(int n)   { _userAccidental = n; }

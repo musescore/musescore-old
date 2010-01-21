@@ -239,7 +239,7 @@ Element::Element(Score* s) :
    _mag(1.0),
    _score(s),
    _align(ALIGN_LEFT | ALIGN_TOP),
-   _xoff(0), _yoff(0), _rxoff(0), _ryoff(0),
+   _xoff(0), _yoff(0),
    _offsetType(OFFSET_SPATIUM),
    _mxmlOff(0),
    itemDiscovered(0)
@@ -265,8 +265,7 @@ Element::Element(const Element& e)
       _align      = e._align;
       _xoff       = e._xoff;
       _yoff       = e._yoff;
-      _rxoff      = e._rxoff;
-      _ryoff      = e._ryoff;
+      _reloff     = e._reloff;
       _offsetType = e._offsetType;
       _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
@@ -414,7 +413,7 @@ void Element::layout()
       else
             o *= DPI;
       if (parent())
-            o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
+            o += QPointF(_reloff.x() * parent()->width() * 0.01, _reloff.y() * parent()->height() * 0.01);
       double h = height();
       double w = width();
       QPointF p;

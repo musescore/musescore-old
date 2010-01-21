@@ -293,6 +293,7 @@ void Lilypond::addNote(const LNote& lnote)
 
       Note* note = new Note(score);
       note->setPitch(lnote.pitch);
+      note->setTpcFromPitch();
       note->setParent(chord);
       note->setTrack(staff->idx() * VOICES);
       chord->add(note);

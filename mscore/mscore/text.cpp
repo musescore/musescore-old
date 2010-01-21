@@ -657,7 +657,7 @@ void TextB::layout()
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
             qreal textlineLineWidth = point(tl->lineWidth());
-            setYpos(pos().y() - textlineLineWidth * .5);
+            _pos.ry() = pos().y() - textlineLineWidth * .5;
             }
 
       if (parent() == 0)
@@ -692,8 +692,8 @@ void TextB::setTextStyle(int idx)
       _align         = s->align;
       _xoff          = s->xoff;
       _yoff          = s->yoff;
-      _rxoff         = s->rxoff;
-      _ryoff         = s->ryoff;
+      _reloff.rx()   = s->rxoff;
+      _reloff.ry()   = s->ryoff;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       setSystemFlag(s->systemFlag);
@@ -773,10 +773,10 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
             xml.tag("xoffset", _xoff);
       if (st == 0 || _yoff != st->yoff)
             xml.tag("yoffset", _yoff);
-      if (st == 0 || _rxoff != st->rxoff)
-            xml.tag("rxoffset", _rxoff);
-      if (st == 0 || _ryoff != st->ryoff)
-            xml.tag("ryoffset", _ryoff);
+      if (st == 0 || _reloff.x() != st->rxoff)
+            xml.tag("rxoffset", _reloff.x());
+      if (st == 0 || _reloff.y() != st->ryoff)
+            xml.tag("ryoffset", _reloff.y());
 
       if (st == 0 || _offsetType != st->offsetType) {
             const char* p = 0;
@@ -848,9 +848,9 @@ bool TextB::readProperties(QDomElement e)
       else if (tag == "yoffset")
             _yoff = val.toDouble();
       else if (tag == "rxoffset")
-            _rxoff = val.toDouble();
+            _reloff.rx() = val.toDouble();
       else if (tag == "ryoffset")
-            _ryoff = val.toDouble();
+            _reloff.ry() = val.toDouble();
       else if (tag == "offsetType") {
             if (val == "absolute")
                   _offsetType = OFFSET_ABS;
@@ -1364,10 +1364,8 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                               tt->setXoff(nText->xoff());
                         if (nText->yoff() != yoff())
                               tt->setYoff(nText->yoff());
-                        if (nText->rxoff() != rxoff())
-                              tt->setRXoff(nText->rxoff());
-                        if (nText->ryoff() != ryoff())
-                              tt->setRYoff(nText->ryoff());
+                        if (nText->reloff() != _reloff)
+                              tt->setReloff(nText->reloff());
                         if (nText->offsetType() != offsetType())
                               tt->setOffsetType(nText->offsetType());
 

@@ -144,7 +144,7 @@ class Element {
                                   ///< Usually set from layout().
       Align  _align;
       double _xoff, _yoff;
-      double _rxoff, _ryoff;
+      QPointF _reloff;
       OffsetType _offsetType;
 
       int _mxmlOff;               ///< MusicXML offset in ticks.
@@ -179,15 +179,15 @@ class Element {
       bool dropTarget() const                 { return _dropTarget; }
       void setDropTarget(bool f) const        { _dropTarget = f;    }
 
-      virtual QPointF ipos() const            { return _pos;                    }
+      const QPointF& ipos() const             { return _pos;                    }
       virtual QPointF pos() const             { return _pos + _userOff;         }
       virtual double x() const                { return _pos.x() + _userOff.x(); }
       virtual double y() const                { return _pos.y() + _userOff.y(); }
       void setPos(const QPointF& p)           { _pos = p;                }
+      void setPos(double x, double y)         { _pos.rx() = x; _pos.ry() = y;    }
       void movePos(const QPointF& p)          { _pos += p;               }
-      void setXpos(qreal x)                   { _pos.setX(x);            }
-      void setYpos(qreal y)                   { _pos.setY(y);            }
-      void setPos(double x, double y)         { _pos.setX(x); _pos.setY(y);    }
+      double& rxpos()                         { return _pos.rx();        }
+      double& rypos()                         { return _pos.ry();        }
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
@@ -344,13 +344,11 @@ class Element {
       OffsetType offsetType() const         { return _offsetType;   }
       double xoff() const                   { return _xoff;         }
       double yoff() const                   { return _yoff;         }
-      double rxoff() const                  { return _rxoff;        }
-      double ryoff() const                  { return _ryoff;        }
+      QPointF reloff() const                { return _reloff;       }
+      void setReloff(const QPointF& val)    { _reloff = val;        }
       void setAlign(Align val)              { _align  = val;        }
       void setXoff(double val)              { _xoff   = val;        }
       void setYoff(double val)              { _yoff   = val;        }
-      void setRXoff(double val)             { _rxoff  = val;        }
-      void setRYoff(double val)             { _ryoff  = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
 
       bool systemFlag() const               { return _systemFlag;   }

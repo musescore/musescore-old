@@ -235,7 +235,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
-                        chord->setXpos(0.0);
+                        chord->rxpos() = 0.0;
                         Note* pnote = notes[idx-1];
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
                               if (ticks > pnote->chord()->tickLen()) {
@@ -255,17 +255,17 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 // printf("A idx %d  startIdx %d\n", idx, startIdx);
                         if ((line > ll) || !chord->up()) {
 //printf("A1\n");
-                              note->chord()->setXpos(note->headWidth() - note->point(styleS(ST_stemWidth)));
+                              note->chord()->rxpos() = note->headWidth() - note->point(styleS(ST_stemWidth));
                               }
                         else {
 //printf("A2\n");
-                              notes[idx-incIdx]->chord()->setXpos(note->headWidth() - note->point(styleS(ST_stemWidth)));
+                              notes[idx-incIdx]->chord()->rxpos() = note->headWidth() - note->point(styleS(ST_stemWidth));
                               }
                         moveLeft = true;
                         }
                   }
             else {
-                  chord->setXpos(0.0);
+                  chord->rxpos() = 0.0;
                   note->setHidden(false);
                   }
 
@@ -984,7 +984,7 @@ bool Score::layoutPage()
 
                   foreach (System* system, sl) {
                         page->appendSystem(system);
-                        system->setYpos(y);
+                        system->rypos() = y;
                         }
                   firstSystem       = false;
                   firstSystemOnPage = false;
