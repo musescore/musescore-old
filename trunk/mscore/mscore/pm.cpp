@@ -25,6 +25,7 @@
 
 #include "portmidi/porttime/porttime.h"
 
+#include "preferences.h"
 #include "pm.h"
 #include "mscore.h"
 #include "seq.h"
@@ -115,7 +116,9 @@ PortMidiDriver::~PortMidiDriver()
 
 bool PortMidiDriver::init()
       {
-      inputId  = Pm_GetDefaultInputDeviceID();
+      inputId = getDeviceIn(preferences.portMidiInput);
+      if(inputId == -1)
+        inputId  = Pm_GetDefaultInputDeviceID();
       outputId = Pm_GetDefaultOutputDeviceID();
 
       if (inputId == pmNoDevice)
@@ -251,7 +254,7 @@ QStringList PortMidiDriver::deviceInList() const
 //   getDeviceIn
 //---------------------------------------------------------
 
-int PortMidiDriver::getDeviceIn(char* name)
+int PortMidiDriver::getDeviceIn(QString name)
       {
 
       int interf = Pm_CountDevices();

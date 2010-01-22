@@ -71,6 +71,7 @@ class Portaudio : public Driver {
       int deviceIndex(int apiIdx, int apiDevIdx);
       int currentApi() const;
       int currentDevice() const;
+      MidiDriver* mididriver() {return midiDriver;}
       };
 
 #endif

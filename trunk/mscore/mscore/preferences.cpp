@@ -33,6 +33,7 @@
 #include "sym.h"
 #include "palette.h"
 #include "pa.h"
+#include "pm.h"
 #include "page.h"
 
 extern void writeShortcuts();
@@ -154,6 +155,7 @@ void Preferences::init()
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
       portaudioDevice    = -1;
+      portMidiInput      = "";
       midiPorts          = 2;
       rememberLastMidiConnections = true;
 
@@ -264,6 +266,7 @@ void Preferences::write()
       s.setValue("alsaPeriodSize",     alsaPeriodSize);
       s.setValue("alsaFragments",      alsaFragments);
       s.setValue("portaudioDevice",    portaudioDevice);
+      s.setValue("portMidiInput",   portMidiInput);
 
       s.setValue("layoutBreakColor",   layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
@@ -381,6 +384,7 @@ void Preferences::read()
       alsaPeriodSize     = s.value("alsaPeriodSize", 1024).toInt();
       alsaFragments      = s.value("alsaFragments", 3).toInt();
       portaudioDevice    = s.value("portaudioDevice", -1).toInt();
+      portMidiInput      = s.value("portMidiInput", "").toString();
       layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
 
@@ -483,6 +487,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #endif
 #ifndef USE_PORTAUDIO
       portaudioDriver->setEnabled(false);
+#endif
+#ifndef USE_PORTMIDI
+      portmidiDriverInput->setEnabled(false);
 #endif
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
@@ -666,7 +673,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 #ifdef USE_PORTAUDIO
       if (usePortaudio) {
             Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
-
+            
             QStringList apis = audio->apiList();
             portaudioApi->addItems(apis);
             portaudioApi->setCurrentIndex(audio->currentApi());
@@ -676,8 +683,22 @@ void PreferenceDialog::updateValues(Preferences* p)
             portaudioDevice->setCurrentIndex(audio->currentDevice());
 
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
+#ifdef USE_PORTMIDI  
+            PortMidiDriver* midiDriver = static_cast<PortMidiDriver*>(audio->mididriver());
+            if(midiDriver){
+                QStringList midiInputs = midiDriver->deviceInList();
+                int curMidiInIdx = 0;
+                for(int i = 0; i < midiInputs.size(); ++i) {
+                      portMidiInput->addItem(midiInputs.at(i), i);
+                      if (midiInputs.at(i) == p->portMidiInput)
+                            curMidiInIdx = i;
+                      }
+                portMidiInput->setCurrentIndex(curMidiInIdx);
+                }
+#endif
             }
 #endif
+
 #ifndef HAS_MIDI
       enableMidiInput->setEnabled(false);
       rcGroup->setEnabled(false);
@@ -1017,6 +1038,10 @@ void PreferenceDialog::apply()
       Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
       preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
          portaudioDevice->currentIndex());
+#endif
+
+#ifdef USE_PORTMIDI
+      preferences.portMidiInput = portMidiInput->currentText();
 #endif
 
       if (lastSession->isChecked())
