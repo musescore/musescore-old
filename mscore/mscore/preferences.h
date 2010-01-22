@@ -76,6 +76,7 @@ struct Preferences {
       int alsaPeriodSize;
       int alsaFragments;
       int portaudioDevice;
+      QString portMidiInput;
 
       QColor layoutBreakColor;
       bool antialiasedDrawing;

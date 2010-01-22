@@ -1916,6 +1916,32 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="portmidiDriverInput">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>47</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Choose PortMidi input interface</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <widget class="QComboBox" name="portMidiInput">
+          <property name="geometry">
+           <rect>
+            <x>17</x>
+            <y>20</y>
+            <width>201</width>
+            <height>20</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="restartWarning">
          <property name="palette">
           <palette>
