@@ -33,7 +33,6 @@ class Measure;
 
 typedef Rest* RestPtr;
 typedef Chord* ChordPtr;
-typedef ChordRest* ChordRestPtr;
 typedef Measure* MeasurePtr;
 typedef Text* TextPtr;
 
@@ -49,12 +48,12 @@ class SCursor {
       int _staffIdx;
       int _voice;
       bool _expandRepeat;
-      
+
       //state
       Segment* _segment;
       RepeatSegment* _curRepeatSegment;
       int _curRepeatSegmentIndex;
-      
+
    public:
       SCursor(Score*);
       SCursor(Score*, bool);
@@ -118,6 +117,8 @@ class ScSCursorPrototype : public QObject, public QScriptable
       Q_OBJECT
       SCursor* thisSCursor() const;
 
+      void add(ChordRest*);
+
    public:
       ScSCursorPrototype(QObject *parent = 0) : QObject(parent) {}
       ~ScSCursorPrototype() {}
@@ -125,15 +126,16 @@ class ScSCursorPrototype : public QObject, public QScriptable
    public slots:
       void rewind();
       bool eos() const;
-      ChordRestPtr chord();
-      ChordRestPtr rest();
+      ChordPtr chord();
+      RestPtr rest();
       MeasurePtr measure();
       bool next();
       bool nextMeasure();
       void putStaffText(TextPtr);
       bool isChord() const;
       bool isRest() const;
-      void add(ChordRestPtr);
+      void addChord(ChordPtr p) { add((ChordRest*)p); }
+      void addRest(RestPtr p)   { add((ChordRest*)p); }
       int tick();
       double time();
       };

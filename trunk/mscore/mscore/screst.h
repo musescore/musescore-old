@@ -31,10 +31,11 @@ typedef Rest* RestPtr;
 //   ScRest
 //---------------------------------------------------------
 
-class ScRest : public QObject, public QScriptClass {
+class ScRest : public QObject, public QScriptClass
+      {
       static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const ChordRestPtr& ba);
-      static void fromScriptValue(const QScriptValue &obj, ChordRestPtr& ba);
+      static QScriptValue toScriptValue(QScriptEngine *eng, const RestPtr& ba);
+      static void fromScriptValue(const QScriptValue &obj, RestPtr& ba);
 
       QScriptValue proto;
       QScriptValue ctor;
@@ -45,16 +46,7 @@ class ScRest : public QObject, public QScriptClass {
 
       QScriptValue constructor() { return ctor; }
       QScriptValue newInstance(Score*);
-      QScriptValue newInstance(const ChordRestPtr&);
-      QueryFlags queryProperty(const QScriptValue& object,
-         const QScriptString& name, QueryFlags flags, uint* id);
-      QScriptValue property(const QScriptValue& obhect,
-         const QScriptString& name, uint id);
-      virtual void setProperty(QScriptValue& object, const QScriptString& name,
-         uint id, const QScriptValue& value);
-      QScriptValue::PropertyFlags propertyFlags(
-         const QScriptValue& object, const QScriptString& name, uint id);
-      QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
+      QScriptValue newInstance(const RestPtr&);
       QString name() const           { return QLatin1String("Rest"); }
       QScriptValue prototype() const { return proto; }
       };
@@ -76,5 +68,7 @@ class ScRestPrototype : public ScChordRestPrototype
       };
 
 Q_DECLARE_METATYPE(ScRest*)
+Q_DECLARE_METATYPE(RestPtr)
+Q_DECLARE_METATYPE(RestPtr*)
 
 #endif

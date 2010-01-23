@@ -39,12 +39,18 @@ function init()
 function addNote(cursor, pitch, duration)
       {
       var chord     = new Chord();
+
+      print("duration0", chord.tickLen);
+      print("\n");
       chord.tickLen = duration;
+      print("duration1", chord.tickLen);
+      print("\n");
+
       var note      = new Note();
       note.pitch    = pitch;
 
       chord.addNote(note);
-      cursor.add(chord);
+      cursor.addChord(chord);
       cursor.next();
       };
 

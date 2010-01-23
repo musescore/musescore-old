@@ -32,6 +32,7 @@
 #include "sctext.h"
 #include "scbytearray.h"
 #include "scmeasure.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -91,10 +92,10 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             printf("Load plugin: no menu property\n");
             return;
             }
-      
+
       if(!pluginMapper)
         return;
-      
+
       QStringList ml   = menu.split(".", QString::SkipEmptyParts);
       int n            = ml.size();
       QWidget* curMenu = menuBar();
@@ -181,6 +182,21 @@ bool MuseScore::loadPlugin(const QString& filename)
       }
 
 //---------------------------------------------------------
+//   chordConstructor
+//---------------------------------------------------------
+
+static QScriptValue chordConstructor(QScriptContext* ctx, QScriptEngine* engine)
+      {
+      QScriptValue v = ctx->argument(0);
+      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
+      Score* score = sp ? *sp : 0;
+      ChordPtr ptr = new Chord(score);
+      ptr->setDurationVal(480);
+      QScriptValue sv = engine->toScriptValue(ptr);
+      return sv;
+      }
+
+//---------------------------------------------------------
 //   ScriptEngine
 //---------------------------------------------------------
 
@@ -204,8 +220,11 @@ ScriptEngine::ScriptEngine()
       cursorClass = new ScSCursor(this);
       globalObject().setProperty("Cursor", cursorClass->constructor());
 
-      ScChord* chordClass = new ScChord(this);
-      globalObject().setProperty("Chord", chordClass->constructor());
+      ScChordPrototype* chordProto = new ScChordPrototype(0);
+      QScriptValue qsChordProto = newQObject(chordProto);
+      setDefaultPrototype(qMetaTypeId<ChordPtr>(), qsChordProto);
+      QScriptValue qsChordCtor = newFunction(chordConstructor, qsChordProto);
+      globalObject().setProperty("Chord", qsChordCtor);
 
       ScRest* restClass = new ScRest(this);
       globalObject().setProperty("Rest", restClass->constructor());
@@ -221,7 +240,7 @@ ScriptEngine::ScriptEngine()
 
       ScMeasure* measureClass = new ScMeasure(this);
       globalObject().setProperty("Measure", measureClass->constructor());
-      
+
       ScPart* partClass = new ScPart(this);
       globalObject().setProperty("Part", partClass->constructor());
 
@@ -294,6 +313,16 @@ void MuseScore::pluginTriggered(int idx)
       foreach(Score* s, scoreList)
             s->startCmd();
       run.call();
+      if (se->hasUncaughtException()) {
+            QScriptValue sv = se->uncaughtException();
+            QMessageBox::critical(0, "MuseScore Error",
+               QString("Error loading plugin\n"
+                  "\"%1\" line %2:\n"
+                  "%3").arg(pluginPath)
+                     .arg(se->uncaughtExceptionLineNumber())
+                     .arg(sv.toString())
+               );
+            }
       foreach(Score* s, scoreList)
             s->endCmd();
       cs->end();
