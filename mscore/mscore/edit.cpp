@@ -759,6 +759,8 @@ void Score::cmdAddTie()
                   note->setTieFor(tie);
                   n->setTieBack(tie);
                   undoAddElement(tie);
+                  select(n, SELECT_SINGLE, 0);
+                  nextInputPos(n->chord(), false);
                   }
             endCmd();
             return;

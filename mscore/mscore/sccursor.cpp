@@ -47,7 +47,7 @@ SCursor::SCursor(Score* s)
       _curRepeatSegment = 0;
       _curRepeatSegmentIndex = 0;
       }
-      
+
 SCursor::SCursor(Score* s, bool expandRepeat)
       {
       _score    = s;
@@ -69,7 +69,7 @@ ChordRest* SCursor::cr() const
       if (_segment) {
             int track = _staffIdx * VOICES + _voice;
             Element* e = _segment->element(track);
-            if (e->isChordRest())
+            if (e && e->isChordRest())
                   return static_cast<ChordRest*>(e);
             }
       return 0;
@@ -225,7 +225,7 @@ QScriptValue ScSCursor::newInstance(Score* score)
       SCursor* cursor = new SCursor(score);
       return newInstance(*cursor);
       }
-      
+
 
 QScriptValue ScSCursor::newInstance(Score* score, bool expandRepeat)
       {
@@ -360,13 +360,13 @@ bool ScSCursorPrototype::eos() const
 //    get chord at current position
 //---------------------------------------------------------
 
-ChordRestPtr ScSCursorPrototype::chord()
+ChordPtr ScSCursorPrototype::chord()
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr = cursor->cr();
       if (cr == 0 || cr->type() != CHORD)
             return 0;
-      return static_cast<ChordRestPtr>(cr);
+      return static_cast<ChordPtr>(cr);
       }
 
 //---------------------------------------------------------
@@ -374,13 +374,13 @@ ChordRestPtr ScSCursorPrototype::chord()
 //    get rest at current position
 //---------------------------------------------------------
 
-ChordRestPtr ScSCursorPrototype::rest()
+RestPtr ScSCursorPrototype::rest()
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr = cursor->cr();
       if (cr == 0 || cr->type() != REST)
             return 0;
-      return static_cast<ChordRestPtr>(cr);
+      return static_cast<RestPtr>(cr);
       }
 
 //---------------------------------------------------------
@@ -434,7 +434,7 @@ bool ScSCursorPrototype::next()
       if(rs && cursor->expandRepeat()){
             Score* score = cursor->score();
             int startTick  = rs->tick;
-            int endTick    = startTick + rs->len;            
+            int endTick    = startTick + rs->len;
             if ((seg  && (seg->tick() >= endTick) ) || (!seg) ){
                 int rsIdx = cursor->repeatSegmentIndex();
                 rsIdx ++;
@@ -443,16 +443,16 @@ bool ScSCursorPrototype::next()
                     cursor->setRepeatSegment(rs);
                     cursor->setRepeatSegmentIndex(rsIdx);
                     Measure* m = score->tick2measure(rs->tick);
-                    if(m) 
+                    if(m)
                       seg = m->first();
-                    else 
+                    else
                       seg = 0;
                 }else{
                     seg = 0;
                 }
-            }    
+            }
       }
-      
+
       int staffIdx = cursor->staffIdx();
       if (staffIdx >= 0) {
             int track = staffIdx * VOICES + cursor->voice();
@@ -478,7 +478,7 @@ bool ScSCursorPrototype::nextMeasure()
       if(rs && cursor->expandRepeat()){
             Score* score = cursor->score();
             int startTick  = rs->tick;
-            int endTick    = startTick + rs->len;            
+            int endTick    = startTick + rs->len;
             if ((m  && (m->tick() + m->tickLen() > endTick) ) || (!m) ){
                 int rsIdx = cursor->repeatSegmentIndex();
                 rsIdx ++;
@@ -490,9 +490,9 @@ bool ScSCursorPrototype::nextMeasure()
                 }else{
                     m = 0;
                 }
-            }    
+            }
       }
-      
+
       if (m == 0) {
             cursor->setSegment(0);
             return false;
@@ -506,7 +506,7 @@ bool ScSCursorPrototype::nextMeasure()
             }
       cursor->setSegment(seg);
       return seg != 0;
-      
+
 }
 
 //---------------------------------------------------------
@@ -533,7 +533,7 @@ void ScSCursorPrototype::putStaffText(TextPtr s)
 //   add
 //---------------------------------------------------------
 
-void ScSCursorPrototype::add(ChordRestPtr c)
+void ScSCursorPrototype::add(ChordRest* c)
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr   = cursor->cr();
@@ -573,23 +573,25 @@ void ScSCursorPrototype::add(ChordRestPtr c)
 //---------------------------------------------------------
 //   tick
 //---------------------------------------------------------
-int ScSCursorPrototype::tick(){
-    SCursor* cursor = thisSCursor();
-    ChordRest* cr   = cursor->cr();
-    int offset = 0;
-    RepeatSegment* rs = cursor->repeatSegment();
-    if(rs && cursor->expandRepeat()){
-        offset = rs->utick - rs->tick;
-    }
-      
-    return cr->tick() + offset;
-}
+
+int ScSCursorPrototype::tick()
+      {
+      SCursor* cursor = thisSCursor();
+      ChordRest* cr   = cursor->cr();
+      int offset = 0;
+      RepeatSegment* rs = cursor->repeatSegment();
+      if (rs && cursor->expandRepeat())
+            offset = rs->utick - rs->tick;
+      return cr->tick() + offset;
+      }
 
 //---------------------------------------------------------
 //   time
 //---------------------------------------------------------
-double ScSCursorPrototype::time(){
-  int tick = this->tick();
-  SCursor* cursor = thisSCursor();
-  return cursor->score()->utick2utime(tick)*1000;
-}
+
+double ScSCursorPrototype::time()
+      {
+      int tick = this->tick();
+      SCursor* cursor = thisSCursor();
+      return cursor->score()->utick2utime(tick)*1000;
+      }

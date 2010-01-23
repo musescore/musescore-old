@@ -1042,11 +1042,13 @@ void MuseScore::updateTabNames()
       {
       for (int i = 0; i < tab1->count(); ++i) {
             ScoreView* view = tab1->view(i);
-            tab1->setTabText(i, view->score()->name());
+            if (view)
+                  tab1->setTabText(i, view->score()->name());
             }
       for (int i = 0; i < tab2->count(); ++i) {
             ScoreView* view = tab2->view(i);
-            tab2->setTabText(i, view->score()->name());
+            if (view)
+                  tab2->setTabText(i, view->score()->name());
             }
       }
 

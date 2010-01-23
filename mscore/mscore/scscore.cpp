@@ -155,7 +155,7 @@ QScriptValue ScScore::newInstance(const QString& name)
       if (s.isEmpty())
             s = mscore->createDefaultName();
       ns->setName(s);
-      mscore->appendScore(ns);
+      mscore->setCurrentScoreView(mscore->appendScore(ns));
       ns->startCmd();
       return newInstance(ns);
       }
@@ -259,14 +259,14 @@ bool ScScorePrototype::saveMscz(const QString& name)
       {
       bool result = false;
       QFileInfo fi(name);
-      
-      try {      
+
+      try {
          thisScore()->saveCompressedFile(fi, false);
          result = true;
       }catch (QString s) {
-            
+
       }
-      
+
       return result;
       }
 
@@ -496,7 +496,7 @@ int ScScorePrototype::pages()
       {
       return thisScore()->pages().size();
       }
-      
+
 //---------------------------------------------------------
 //   measures
 //---------------------------------------------------------
@@ -521,7 +521,7 @@ int ScScorePrototype::parts()
       {
       return thisScore()->parts()->size();
       }
-      
+
 //---------------------------------------------------------
 //   parts
 //---------------------------------------------------------
@@ -555,7 +555,7 @@ void ScScorePrototype::setTitle(const QString& text)
       s->setText(text);
       thisScore()->undoAddElement(s);
       }
-      
+
 //---------------------------------------------------------
 //   title
 //---------------------------------------------------------
@@ -591,7 +591,7 @@ QString ScScorePrototype::poet()
       {
       return getText(TEXT_POET);
       }
-      
+
 //---------------------------------------------------------
 //   getText
 //---------------------------------------------------------
@@ -602,9 +602,9 @@ QString ScScorePrototype::getText(int subtype)
       foreach(const Element* element, *measure->el()) {
           if (element->type() == TEXT) {
               const Text* text = (const Text*)element;
-              if(text->subtype() == subtype){ 
+              if(text->subtype() == subtype){
                 result = text->getText().toUtf8();
-              }               
+              }
           }
       }
       return result;

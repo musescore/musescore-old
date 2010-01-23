@@ -22,12 +22,12 @@
 #define __SCCHORDREST_H__
 
 class ChordRest;
-typedef ChordRest* ChordRestPtr;
-
+class Chord;
 class Harmony;
-typedef Harmony* HarmonyPtr;
 class Note;
-typedef Note* NotePtr;
+typedef Chord*   ChordPtr;
+typedef Harmony* HarmonyPtr;
+typedef Note*    NotePtr;
 
 //---------------------------------------------------------
 //   ScChordRestPrototype
@@ -36,8 +36,9 @@ typedef Note* NotePtr;
 class ScChordRestPrototype : public QObject, public QScriptable
       {
       Q_OBJECT
-      ChordRest* thisChordRest() const;
       Q_PROPERTY(int tickLen READ getTickLen WRITE setTickLen SCRIPTABLE true)
+
+      ChordRest* thisChordRest() const;
 
    public slots:
       void addHarmony(HarmonyPtr h);
@@ -47,16 +48,12 @@ class ScChordRestPrototype : public QObject, public QScriptable
       void removeNote(int);
       int notes() const;
       NotePtr note(int) const;
+      int getTickLen() const;
+      void setTickLen(int v);
 
    public:
       ScChordRestPrototype(QObject *parent = 0) : QObject(parent) {}
       ~ScChordRestPrototype() {}
-
-      int getTickLen() const;
-      void setTickLen(int v);
       };
-
-Q_DECLARE_METATYPE(ChordRestPtr)
-Q_DECLARE_METATYPE(ChordRestPtr*)
 
 #endif
