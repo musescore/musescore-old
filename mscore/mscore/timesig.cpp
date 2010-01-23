@@ -63,7 +63,7 @@ QPointF TimeSig::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      double yp = system ? y() + system->staff(staffIdx())->y() + system->y() : 0.0;
       return QPointF(xp, yp);
       }
 
