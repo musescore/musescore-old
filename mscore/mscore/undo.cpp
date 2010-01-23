@@ -356,7 +356,7 @@ void ScoreView::endUndoRedo()
       {
       if (_score->inputState()._segment)
             mscore->setPos(_score->inputState().tick());
-      if (_score->inputState().noteEntryMode && !noteEntryMode()) {
+      if (_score->noteEntryMode() && !noteEntryMode()) {
             // enter note entry mode
             postCmd("note-input");
             }
@@ -366,9 +366,7 @@ void ScoreView::endUndoRedo()
             }
       _score->selection()->update();
       _score->setLayoutAll(true);
-      if (_score->noteEntryMode() != noteEntryMode()) {
-printf("noteEntryMode changed\n");
-            }
+      _score->setPadState();
       if (noteEntryMode()) {
             moveCursor();
             }
