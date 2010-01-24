@@ -35,7 +35,6 @@ release:
             cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
-            make lupdate;                              \
             make lrelease;                             \
             make -j ${CPUS};                           \
          else                                          \
@@ -50,7 +49,6 @@ debug:
             cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
-            make lupdate;                              \
             make lrelease;                             \
             make -j ${CPUS};                           \
          else                                          \
@@ -73,7 +71,6 @@ win32:
             fi;                                        \
             cd win32build;                             \
             cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=DEBUG  ../mscore; \
-            make lupdate ;                             \
             make lrelease;                             \
             make -j ${CPUS};                           \
             make install;                              \
