@@ -425,6 +425,7 @@ QString pitch2string(int v)
 
 //---------------------------------------------------------
 //   Interval
+//    steps - semitones
 //---------------------------------------------------------
 
 Interval intervalList[26] = {
@@ -462,6 +463,20 @@ Interval intervalList[26] = {
       { 7, 11 },        // Diminshed Octave
       { 7, 12 }         // Perfect Octave
       };
+
+//---------------------------------------------------------
+//   searchInterval
+//---------------------------------------------------------
+
+int searchInterval(int steps, int semitones)
+      {
+      unsigned n = sizeof(intervalList)/sizeof(*intervalList);
+      for (unsigned i = 0; i < n; ++i) {
+            if ((intervalList[i].steps == steps) && (intervalList[i].semitones == semitones))
+                  return i;
+            }
+      return -1;
+      }
 
 //---------------------------------------------------------
 //   transposeInterval

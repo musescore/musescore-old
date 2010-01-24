@@ -265,8 +265,19 @@ void Score::updateSelectedElements(SelState state)
                   Element* e = s->element(st);
                   if (!e)
                         continue;
-                  e->setSelected(true);
-                  _selection.append(e);
+                  if (e->type() == CHORD) {
+                        Chord* chord = static_cast<Chord*>(e);
+                        NoteList* nl = chord->noteList();
+                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                              Note* note = in->second;
+                              note->setSelected(true);
+                              _selection.append(note);
+                              }
+                        }
+                  else {
+                        e->setSelected(true);
+                        _selection.append(e);
+                        }
                   }
             }
       }

@@ -40,7 +40,7 @@ class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
       void enableTransposeKeys(bool val)  { transposeKeys->setEnabled(val);       }
       bool getTransposeKeys() const       { return transposeKeys->isChecked();    }
       bool getTransposeChordNames() const { return transposeChordNames->isChecked(); }
-      int transposeKey() const            { return keyList->currentIndex() + 7;      }
+      int transposeKey() const            { return keyList->currentIndex() - 7;      }
       int transposeInterval() const       { return intervalList->currentIndex();     }
       TransposeDirection direction() const;
       TransposeMode mode() const;

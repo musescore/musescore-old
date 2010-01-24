@@ -561,12 +561,13 @@ bool Element::genPropertyMenu(QMenu* popup) const
 
 void Element::propertyAction(ScoreView*, const QString& s)
       {
-      if (s == "invisible") {
-            foreach(Element* e, score()->selection()->elements())
-                  score()->toggleInvisible(e);
-            }
-      else if (s == "color") {
-            score()->colorItem(this);
+      foreach(Element* e, score()->selection()->elements()) {
+            if (e->type() == type()) {
+                  if (s == "invisible")
+                        score()->toggleInvisible(e);
+                  else if (s == "color")
+                        score()->colorItem(e);
+                  }
             }
       }
 
