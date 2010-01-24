@@ -1,3 +1,6 @@
+24.jan (ws)
+      - do not call lupdate anymore when starting a complete build from the
+        top level Makefile
 22.jan (la)
       - add ability to choose MIDI input interface
 19.jan (ws)
