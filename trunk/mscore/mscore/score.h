@@ -394,9 +394,9 @@ class Score : public QObject {
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
       void transpose();
-      void transpose(Note* n, int diff);
+      void transposeBySemitones(Note* n, int diff);
       void transposeByKey(Note* n, int keysig, TransposeDirection dir);
-      void transposeByInterval(Note* n, int keysig, TransposeDirection dir);
+      void transposeByInterval(Note* n, int interval, TransposeDirection dir);
 
       Score(const Style&);
       ~Score();

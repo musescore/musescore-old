@@ -134,20 +134,20 @@ void Score::transpose()
 
       int semitones;
       if (td.mode() == TRANSPOSE_BY_KEY)
-            semitones = 0;    // TODO
+            semitones = -1;    // TODO
       else {
             semitones = intervalList[td.transposeInterval()].semitones;
             if (td.direction() == TRANSPOSE_DOWN)
                   semitones = -semitones;
             }
-      bool trKeys       = td.getTransposeKeys();
+      bool trKeys              = td.getTransposeKeys();
       bool transposeChordNames = td.getTransposeChordNames();
 
       if (_selection.state() != SEL_SYSTEM)
             trKeys = false;
       int d = semitones < 0 ? -semitones : semitones;
       bool fullOctave = (d % 12) == 0;
-      if (fullOctave) {
+      if (fullOctave && td.mode() != TRANSPOSE_BY_KEY) {
             trKeys = false;
             transposeChordNames = false;
             }
@@ -172,12 +172,6 @@ void Score::transpose()
             endTrack   = nstaves() * VOICES;
             }
 
-      if (trKeys) {
-            transposeKeys(_selection.staffStart(), _selection.staffEnd(),
-               _selection.tickStart(), _selection.tickEnd(),
-               td.mode(), td.transposeKey(), semitones);
-            }
-
       for (int st = startTrack; st < endTrack; ++st) {
             for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
@@ -198,6 +192,12 @@ void Score::transpose()
                               transposeByInterval(n, td.transposeInterval(), td.direction());
                         }
                   }
+            }
+
+      if (trKeys) {
+            transposeKeys(_selection.staffStart(), _selection.staffEnd(),
+               _selection.tickStart(), _selection.tickEnd(),
+               td.mode(), td.transposeKey(), semitones);
             }
 
       if (transposeChordNames) {
@@ -257,7 +257,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                  for (iNote i = notes->begin(); i != notes->end(); ++i)
                        nl.append(i->second);
                  foreach(Note* n, nl)
-                       transpose(n, diff);
+                       transposeBySemitones(n, diff);
                  }
            }
 #if 0
@@ -295,9 +295,10 @@ void Score::cmdConcertPitchChanged(bool flag)
 
 //---------------------------------------------------------
 //   transpose
+//    transpose by semitones
 //---------------------------------------------------------
 
-void Score::transpose(Note* n, int diff)
+void Score::transposeBySemitones(Note* n, int diff)
       {
       int npitch = n->pitch() + diff;
       int d      = diff < 0 ? -diff : diff;
@@ -309,11 +310,37 @@ void Score::transpose(Note* n, int diff)
 
 //---------------------------------------------------------
 //   transposeByKey
+//    keysig -   -7(Cb) - +7(C#)
 //    TODO
 //---------------------------------------------------------
 
-void Score::transposeByKey(Note* /*n*/, int /*keysig*/, TransposeDirection /*dir*/)
+void Score::transposeByKey(Note* n, int nKey, TransposeDirection dir)
       {
+      KeyList* km = n->staff()->keymap();
+      int oKey    = km->key(n->chord()->tick()).accidentalType;
+      int semitones;
+      int cofSteps;     // circle of fifth steps
+      if (nKey > oKey)
+            cofSteps = nKey - oKey;
+      else
+            cofSteps = 12 - (oKey - nKey);
+      semitones = (cofSteps * 7) % 12;
+      int steps = (cofSteps * 4) % 7;
+printf("transposeByKey %p %d %d-%d cofSteps %d, semitones %d steps %d\n",
+   n, n->chord()->tick(), oKey, nKey, cofSteps, semitones, steps);
+      if ((dir == TRANSPOSE_CLOSEST) && (semitones > 6))
+            dir = TRANSPOSE_DOWN;
+
+      if (dir == TRANSPOSE_DOWN) {
+            semitones -= 12;
+            }
+
+      int interval = searchInterval(steps, semitones);
+      if (interval == -1) {
+            printf("transposeByKey: cannot determine interval %d %d\n", steps, semitones);
+            return;
+            }
+      transposeByInterval(n, interval, dir);
       }
 
 //---------------------------------------------------------
@@ -330,15 +357,17 @@ void Score::transposeByInterval(Note* n, int interval, TransposeDirection dir)
 
 //---------------------------------------------------------
 //   transposeKeys
+//    key -   -7(Cb) - +7(C#)
 //---------------------------------------------------------
 
 void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
    TransposeMode mode, int key, int semitones)
       {
+printf("transpose keys\n");
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             KeyList* km = staff(staffIdx)->keymap();
-            for (iKeyList ke = km->lower_bound(_selection.tickStart());
-               ke != km->lower_bound(_selection.tickEnd()); ++ke) {
+            for (iKeyList ke = km->lower_bound(tickStart);
+               ke != km->lower_bound(tickEnd); ++ke) {
                   KeySigEvent oKey  = ke->second;
                   int tick  = ke->first;
                   int nKey = 0;
@@ -351,14 +380,14 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
             for (Segment* s = firstSegment(); s; s = s->next1()) {
                   if (s->subtype() != Segment::SegKeySig)
                         continue;
-                  if (s->tick() < _selection.tickStart())
+                  if (s->tick() < tickStart)
                         continue;
-                  if (s->tick() >= _selection.tickEnd())
+                  if (s->tick() >= tickEnd)
                         break;
                   KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
                   if (ks) {
                         KeySigEvent key  = km->key(s->tick());
-                        KeySigEvent okey = km->key(s->tick()-1);
+                        KeySigEvent okey = km->key(s->tick() - 1);
                         key.naturalType  = okey.accidentalType;
                         _undo->push(new ChangeKeySig(ks, key));
                         }

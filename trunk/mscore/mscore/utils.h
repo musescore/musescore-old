@@ -66,6 +66,7 @@ extern void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int in
 extern int transposeTpc(int tpc, int interval, TransposeDirection);
 
 extern Interval intervalList[26];
+extern int searchInterval(int steps, int semitones);
 
 #endif
 
