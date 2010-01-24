@@ -2269,11 +2269,17 @@ void ChangeMeasureProperties::flip()
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
-      measure->setNoOffset(noOffset);
-      breakMM = a;
+      Score* score = measure->score();
+      if (measure->noOffset() != noOffset) {
+            measure->setNoOffset(noOffset);
+            score->renumberMeasures();
+            }
+      breakMM     = a;
       repeatCount = r;
-      stretch = s;
-      noOffset = o;
+      stretch     = s;
+      noOffset    = o;
+      score->setLayoutAll(true);
+      score->setDirty();
       }
 
 //---------------------------------------------------------
