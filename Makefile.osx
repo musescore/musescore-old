@@ -35,7 +35,6 @@ release:
             cd build;                                  \
             cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore -G Xcode; 			       \
-            xcodebuild -project mscore.xcodeproj -target lupdate;                              \
             xcodebuild -project mscore.xcodeproj -target lrelease;                             \
 	    xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
          else                                          \
@@ -49,7 +48,6 @@ debug:
             cd build;                                  \
             cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
                    ../mscore -G Xcode;                         \
-            xcodebuild -project mscore.xcodeproj -target lupdate;                              \
             xcodebuild -project mscore.xcodeproj -target lrelease;                             \
             xcodebuild -project mscore.xcodeproj -configuration Debug -target ALL_BUILD;                            \
          else                                          \

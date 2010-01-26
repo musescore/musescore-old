@@ -26,8 +26,7 @@ MINGW_DIR = C:\Qt\2009.05\mingw
 win32:
 	if not exist win32build\nul mkdir win32build
 	if not exist win32install\nul mkdir win32install
-	cd win32build & cmake -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.mingw.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=${MINGW_DIR}\bin\mingw32-make.exe ../mscore  
-	cd win32build & $(MAKE) lupdate                              
+	cd win32build & cmake -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.mingw.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=${MINGW_DIR}\bin\mingw32-make.exe ../mscore                                
 	cd win32build & $(MAKE) lrelease                             
 	cd win32build & $(MAKE)
 
