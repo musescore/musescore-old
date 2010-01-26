@@ -2001,6 +2001,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         case ACC_SHARP2:  s = "double-sharp"; break;
                         case ACC_FLAT2:   s = "flat-flat";    break;
                         case ACC_NATURAL: s = "natural";      break;
+                        case 19: s = "quarter-flat";          break;
+                        case 22: s = "quarter-sharp";         break;
+                        case 18: s = "three-quarters-flat";   break;
+                        case 25: s = "three-quarters-sharp";  break;
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
