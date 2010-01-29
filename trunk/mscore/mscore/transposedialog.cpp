@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -91,15 +91,6 @@ TransposeDirection TransposeDialog::direction() const
       }
 
 //---------------------------------------------------------
-//   getSemitones
-//---------------------------------------------------------
-
-int TransposeDialog::getSemitones() const
-      {
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   transpose
 //---------------------------------------------------------
 
@@ -129,6 +120,15 @@ void Score::transpose()
             }
       TransposeDialog td;
       td.enableTransposeKeys(_selection.state() == SEL_SYSTEM);
+      int startStaffIdx = 0;
+      int startTick = 0;
+      if (selection()->state() == SEL_STAFF || selection()->state() == SEL_SYSTEM) {
+            startStaffIdx = selection()->staffStart();
+            startTick     = selection()->tickStart();
+            }
+      KeyList* km = staff(startStaffIdx)->keymap();
+      int key     = km->key(startTick).accidentalType;
+      td.setKey(key);
       if (!td.exec())
             return;
 
@@ -326,8 +326,10 @@ void Score::transposeByKey(Note* n, int nKey, TransposeDirection dir)
             cofSteps = 12 - (oKey - nKey);
       semitones = (cofSteps * 7) % 12;
       int steps = (cofSteps * 4) % 7;
+
 printf("transposeByKey %p %d %d-%d cofSteps %d, semitones %d steps %d\n",
    n, n->chord()->tick(), oKey, nKey, cofSteps, semitones, steps);
+
       if ((dir == TRANSPOSE_CLOSEST) && (semitones > 6))
             dir = TRANSPOSE_DOWN;
 
