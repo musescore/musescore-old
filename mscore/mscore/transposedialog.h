@@ -44,8 +44,7 @@ class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
       int transposeInterval() const       { return intervalList->currentIndex();     }
       TransposeDirection direction() const;
       TransposeMode mode() const;
-
-      int getSemitones() const;
+      void setKey(int k)                  { keyList->setCurrentIndex(k + 7); }
       };
 #endif
 
