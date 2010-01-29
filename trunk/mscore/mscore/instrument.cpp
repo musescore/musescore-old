@@ -71,13 +71,14 @@ Instrument::Instrument()
       a->name         = "normal";
       channel.append(a);
 
-      minPitchA        = 0;
-      maxPitchA        = 127;
-      minPitchP        = 0;
-      maxPitchP        = 127;
-      pitchOffset     = 0;
-      drumset         = 0;
-      useDrumset      = false;
+      minPitchA          = 0;
+      maxPitchA          = 127;
+      minPitchP          = 0;
+      maxPitchP          = 127;
+      transposeDiatonic  = 0;
+      transposeChromatic = 0;
+      drumset            = 0;
+      useDrumset         = false;
       }
 
 //---------------------------------------------------------
@@ -95,8 +96,10 @@ void Instrument::write(Xml& xml) const
             xml.tag("minPitchA", minPitchA);
       if (maxPitchA < 127)
             xml.tag("maxPitchA", maxPitchA);
-      if (pitchOffset)
-            xml.tag("transposition", pitchOffset);
+      if (transposeDiatonic)
+            xml.tag("transposeDiatonic", transposeDiatonic);
+      if (transposeChromatic)
+            xml.tag("transposeChromatic", transposeChromatic);
       if (useDrumset) {
             xml.tag("useDrumset", useDrumset);
             drumset->save(xml);
@@ -146,8 +149,12 @@ void Instrument::read(QDomElement e)
                   maxPitchA = i;
             else if (tag == "maxPitchP")
                   maxPitchP = i;
-            else if (tag == "transposition")
-                  pitchOffset = i;
+            else if (tag == "transposition")    // obsolete
+                  transposeChromatic = i;
+            else if (tag == "transposeChromatic")
+                  transposeChromatic = i;
+            else if (tag == "transposeDiatonic")
+                  transposeDiatonic = i;
             else if (tag == "useDrumset") {
                   useDrumset = i;
                   if (useDrumset)

@@ -591,7 +591,7 @@ void Score::fixPpitch()
             }
 
       for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
-            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
+            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->transposeChromatic;
             Instrument* instr = part(staffIdx)->instrument();
 
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {

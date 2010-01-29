@@ -50,7 +50,9 @@ struct InstrumentTemplate {
       char minPitchP;         // pitch range playable by professional
       char maxPitchP;
 
-      char transpose;          // for transposing instruments
+      char transposeChromatic;      // for transposing instruments
+      char transposeDiatonic;
+
       bool useDrumset;
       Drumset* drumset;
       QList<NamedEventList> midiActions;

@@ -2000,16 +2000,13 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose")
-                  //domNotImplemented(e);
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "diatonic"){
-                              // Not used in mscore ?
-                              }
-                        else if (ee.tagName() == "chromatic") {
-                              int tr = ee.text().toInt();
-                              Part* part = score->part(staff);
-                              part->setPitchOffset(tr);
-                              }
+                        Part* part = score->part(staff);
+                        int i = ee.text().toInt();
+                        if (ee.tagName() == "diatonic")
+                              part->setTransposeDiatonic(i);
+                        else if (ee.tagName() == "chromatic")
+                              part->setTransposeChromatic(i);
                         else
                               domError(ee);
                         }
@@ -2590,7 +2587,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             } // for (int s ...
       if (!found) {
             if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %zd >= %d)\n",
                          staff, relStaff, voicelist[relStaff].size(), VOICES);
             else {
                   voicelist[relStaff].push_back(voice);

@@ -101,6 +101,10 @@ class Part {
       void setMaxPitchP(int v)                 { _instrument.maxPitchP = v;     }
       void setMinPitchA(int v)                 { _instrument.minPitchA = v;     }
       void setMaxPitchA(int v)                 { _instrument.maxPitchA = v;     }
+      int transposeChromatic() const           { return _instrument.transposeChromatic; }
+      int transposeDiatonic() const            { return _instrument.transposeDiatonic; }
+      void setTransposeChromatic(int v)        { _instrument.transposeChromatic = v; }
+      void setTransposeDiatonic(int v)         { _instrument.transposeDiatonic = v; }
 
       int volume() const;
       int reverb() const;
@@ -112,8 +116,6 @@ class Part {
       int midiChannel() const;
       void setMidiChannel(int);
 
-      void setPitchOffset(int val)             { _instrument.pitchOffset = val;  }
-      int pitchOffset() const                  { return _instrument.pitchOffset; }
       void insertStaff(Staff*);
       void removeStaff(Staff*);
       const Instrument* instrument() const     { return &_instrument; }

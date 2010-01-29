@@ -46,7 +46,8 @@ void EditInstrument::setInstrument(InstrumentTemplate* t)
 //      shortNameEdit->setText(t->shortName);
       minPitch->setValue(t->minPitchA);
       maxPitch->setValue(t->maxPitchA);
-      transpose->setValue(t->transpose);
+      transposeChromatic->setValue(t->transposeChromatic);
+      transposeDiatonic->setValue(t->transposeDiatonic);
 //      midiProgram->setValue(t->midiProgram);
       staves->setValue(t->staves);
       }
@@ -89,7 +90,8 @@ void EditInstrument::valueChanged()
 //      lt->shortName   = shortNameEdit->text();
       lt->minPitchA    = minPitch->value();
       lt->maxPitchA    = maxPitch->value();
-      lt->transpose   = transpose->value();
+      lt->transposeDiatonic   = transposeDiatonic->value();
+      lt->transposeChromatic   = transposeChromatic->value();
 //      lt->midiProgram = midiProgram->value();
       lt->staves      = staves->value();
       }

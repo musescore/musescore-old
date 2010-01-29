@@ -96,10 +96,11 @@ struct Channel {
 
 struct Instrument {
       char minPitchA, maxPitchA, minPitchP, maxPitchP;
-      char pitchOffset;
+      char transposeDiatonic;
+      char transposeChromatic;
 
-      Drumset* drumset;
       bool useDrumset;
+      Drumset* drumset;
 
       QList<NamedEventList> midiActions;
       QList<Channel*> channel;      // at least one entry
