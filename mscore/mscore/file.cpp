@@ -693,8 +693,8 @@ void MuseScore::newFile()
                               // transpose key
                               //
                               KeySigEvent nKey = ks;
-                              if (instrument->pitchOffset && !newWizard->useTemplate()) {
-                                    int diff = -instrument->pitchOffset;
+                              if (instrument->transposeChromatic && !newWizard->useTemplate()) {
+                                    int diff = -instrument->transposeChromatic;
                                     nKey.accidentalType = transposeKey(nKey.accidentalType, diff);
                                     }
                               if (nKey.accidentalType) {

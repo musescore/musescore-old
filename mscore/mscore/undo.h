@@ -1061,7 +1061,8 @@ class ChangeStaff : public UndoCommand {
 class ChangePart : public UndoCommand {
       Part* part;
       bool useDrumset;
-      int transposition;
+      int transposeDiatonic;
+      int transposeChromatic;
       QTextDocument* longName;
       QTextDocument* shortName;
       int aMin, aMax, pMin, pMax;
@@ -1069,8 +1070,8 @@ class ChangePart : public UndoCommand {
       void flip();
 
    public:
-      ChangePart(Part*, bool useDrumset, int transposition, const QTextDocument*, const QTextDocument*,
-         int, int, int, int);
+      ChangePart(Part*, bool useDrumset, int td, int tc, const QTextDocument*,
+         const QTextDocument*, int, int, int, int);
       ~ChangePart();
 
       virtual void undo() { flip(); }

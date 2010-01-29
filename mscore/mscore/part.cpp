@@ -65,7 +65,8 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       setTrackName(t->trackName);
       setLongNameEncoded(t->name);
 
-      setPitchOffset(t->transpose);
+      setTransposeDiatonic(t->transposeDiatonic);
+      setTransposeChromatic(t->transposeChromatic);
       if (t->useDrumset) {
             setUseDrumset(true);
             setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));

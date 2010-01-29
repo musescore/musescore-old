@@ -2024,19 +2024,20 @@ void ChangeStaff::flip()
 //   ChangePart
 //---------------------------------------------------------
 
-ChangePart::ChangePart(Part* _part, bool _useDrumset, int _transposition,
+ChangePart::ChangePart(Part* _part, bool _useDrumset, int _tDiatonic, int _tChromatic,
    const QTextDocument* _longName, const QTextDocument* _shortName,
    int _aMin, int _aMax, int _pMin, int _pMax)
       {
-      longName      = _longName->clone(0);
-      shortName     = _shortName->clone(0);
-      part          = _part;
-      useDrumset    = _useDrumset;
-      transposition = _transposition;
-      aMin          = _aMin;
-      aMax          = _aMax;
-      pMin          = _pMin;
-      pMax          = _pMax;
+      longName           = _longName->clone(0);
+      shortName          = _shortName->clone(0);
+      part               = _part;
+      useDrumset         = _useDrumset;
+      transposeDiatonic  = _tDiatonic;
+      transposeChromatic = _tChromatic;
+      aMin               = _aMin;
+      aMax               = _aMax;
+      pMin               = _pMin;
+      pMax               = _pMax;
       }
 
 ChangePart::~ChangePart()
@@ -2051,28 +2052,31 @@ ChangePart::~ChangePart()
 
 void ChangePart::flip()
       {
-      bool oldUseDrumset   = part->useDrumset();
-      int oldTransposition = part->pitchOffset();
-      int oaMin            = part->minPitchA();
-      int oaMax            = part->maxPitchA();
-      int opMin            = part->minPitchP();
-      int opMax            = part->maxPitchP();
+      bool oldUseDrumset    = part->useDrumset();
+      int oldTransDiatonic  = part->transposeDiatonic();
+      int oldTransChromatic = part->transposeChromatic();
+      int oaMin             = part->minPitchA();
+      int oaMax             = part->maxPitchA();
+      int opMin             = part->minPitchP();
+      int opMax             = part->maxPitchP();
 
       longName  = part->longName()->swapDoc(longName);
       shortName = part->shortName()->swapDoc(shortName);
       part->setUseDrumset(useDrumset);
-      part->setPitchOffset(transposition);
+      part->setTransposeDiatonic(transposeDiatonic);
+      part->setTransposeChromatic(transposeChromatic);
       part->setMinPitchA(aMin);
       part->setMaxPitchA(aMax);
       part->setMinPitchP(pMin);
       part->setMaxPitchP(pMax);
 
-      useDrumset    = oldUseDrumset;
-      transposition = oldTransposition;
-      aMin          = oaMin;
-      aMax          = oaMax;
-      pMin          = opMin;
-      pMax          = opMax;
+      useDrumset         = oldUseDrumset;
+      transposeDiatonic  = oldTransDiatonic;
+      transposeChromatic = oldTransChromatic;
+      aMin               = oaMin;
+      aMax               = oaMax;
+      pMin               = opMin;
+      pMax               = opMax;
 
       part->score()->setInstrumentNames();
       }

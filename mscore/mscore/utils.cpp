@@ -482,25 +482,15 @@ int searchInterval(int steps, int semitones)
 //   transposeInterval
 //---------------------------------------------------------
 
-void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int interval, TransposeDirection dir)
+void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, int semitones)
       {
-      int steps     = intervalList[interval].steps;
-      int semitones = intervalList[interval].semitones;
-
-      if (dir == TRANSPOSE_DOWN) {
-            steps     = -steps;
-            semitones = -semitones;
-            *rpitch    = pitch - intervalList[interval].semitones;
-            }
-      else
-            *rpitch    = pitch + intervalList[interval].semitones;
+      *rpitch = pitch + semitones;
 
       int step, alter;
-
       for (;;) {
             int octave = (pitch / 12);
 
-            step       = tpc2step(tpc) + steps;
+            step = tpc2step(tpc) + steps;
             while (step < 0) {
                   step += 7;
                   octave -= 1;
@@ -512,8 +502,6 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int interval,
 
             int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
             alter      = semitones - (p1 - pitch);
-printf("Interval(%d,%d,%d) step %d octave %d p1 %d(%d-%d) alter %d\n",
-    interval, steps, semitones, step, octave, p1, pitch, *rpitch, alter);
             if (alter > 2)
                   steps += 1;
             else if (alter < -2)

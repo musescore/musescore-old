@@ -217,7 +217,7 @@ void Note::setPitch(int val)
             Part* part = score()->part(staffIdx());
             if (part) {
                   Instrument* instr = part->instrument();
-                  pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
+                  pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->transposeChromatic;
                   }
             }
       _ppitch = _pitch + pitchOffset;

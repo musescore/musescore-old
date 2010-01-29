@@ -26,6 +26,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "text.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -43,7 +44,23 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       editDrumset->setEnabled(part->useDrumset());
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
-      transposition->setValue(part->pitchOffset());
+      int diatonic  = part->transposeDiatonic();
+      int chromatic = part->transposeChromatic();
+      bool upFlag = true;
+      if (chromatic < 0 || diatonic < 0) {
+            upFlag = false;
+            chromatic = -chromatic;
+            diatonic  = -diatonic;
+            }
+      int interval = searchInterval(diatonic, chromatic);
+      if (interval == -1) {
+            printf("unknown interval %d %d\n", diatonic, chromatic);
+            }
+      else {
+            iList->setCurrentIndex(interval);
+            up->setChecked(upFlag);
+            }
+
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
       slashStyle->setChecked(staff->slashStyle());
@@ -90,11 +107,19 @@ void EditStaff::bboxClicked(QAbstractButton* button)
 
 void EditStaff::apply()
       {
-      Score* score = staff->score();
-      Part* part   = staff->part();
+      Score* score  = staff->score();
+      Part* part    = staff->part();
 
-      bool ud                 = useDrumset->isChecked();
-      int  po                 = transposition->value();
+      bool ud       = useDrumset->isChecked();
+      int interval  = iList->currentIndex();
+      bool upFlag   = up->isChecked();
+      int diatonic  = intervalList[interval].steps;
+      int chromatic = intervalList[interval].semitones;
+
+      if (!upFlag) {
+            diatonic  = -diatonic;
+            chromatic = -chromatic;
+            }
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
 
@@ -106,14 +131,16 @@ void EditStaff::apply()
       int pMax = pPitchMax->value();
 
       if ((ud != part->useDrumset())
-         || (po != part->pitchOffset())
+         || (diatonic != part->transposeDiatonic())
+         || (chromatic != part->transposeChromatic())
          || snd || lnd
          || aMin != part->minPitchA()
          || aMax != part->maxPitchA()
          || pMin != part->minPitchP()
          || pMax != part->maxPitchP()
          ) {
-            score->undo()->push(new ChangePart(part, ud, po, ln, sn, aMin, aMax, pMin, pMax));
+            score->undo()->push(new ChangePart(part, ud, diatonic,
+               chromatic, ln, sn, aMin, aMax, pMin, pMax));
             }
 
       int l        = lines->value();

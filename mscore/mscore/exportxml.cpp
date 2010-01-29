@@ -3378,9 +3378,10 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        if(part->pitchOffset()!=0){
+                        if (part->transposeDiatonic() || part->transposeChromatic()) {
                           xml.stag("transpose");
-                          xml.tag("chromatic", part->pitchOffset());
+                          xml.tag("chromatic", part->transposeChromatic());
+                          xml.tag("diatonic", part->transposeDiatonic());
                           xml.etag();
                         }
                       }

@@ -35,18 +35,19 @@ QList<MidiArticulation*> articulation;                // global articulations
 
 InstrumentTemplate::InstrumentTemplate()
       {
-      staves        = 1;
-      clefIdx[0]    = CLEF_G;
-      staffLines[0] = 5;
-      smallStaff[0] = false;
-      bracket       = NO_BRACKET;
-      minPitchA     = 0;
-      maxPitchA     = 127;
-      minPitchP     = 0;
-      maxPitchP     = 127;
-      transpose     = 0;
-      useDrumset    = false;
-      drumset       = 0;
+      staves             = 1;
+      clefIdx[0]         = CLEF_G;
+      staffLines[0]      = 5;
+      smallStaff[0]      = false;
+      bracket            = NO_BRACKET;
+      minPitchA          = 0;
+      maxPitchA          = 127;
+      minPitchP          = 0;
+      maxPitchP          = 127;
+      transposeChromatic = 0;
+      transposeDiatonic  = 0;
+      useDrumset         = false;
+      drumset            = 0;
       }
 
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
@@ -63,12 +64,13 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
             smallStaff[i] = t.smallStaff[i];
             }
       bracket    = t.bracket;
-      minPitchA  =  t.minPitchA;
-      maxPitchA  =  t.maxPitchA;
-      minPitchP  =  t.minPitchP;
-      maxPitchP  =  t.maxPitchP;
-      transpose  =  t.transpose;
-      useDrumset =  t.useDrumset;
+      minPitchA  = t.minPitchA;
+      maxPitchA  = t.maxPitchA;
+      minPitchP  = t.minPitchP;
+      maxPitchP  = t.maxPitchP;
+      transposeChromatic = t.transposeChromatic;
+      transposeDiatonic  = t.transposeDiatonic;
+      useDrumset = t.useDrumset;
       if (t.drumset)
             drumset = new Drumset(*t.drumset);
       else
@@ -120,8 +122,10 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("aPitchRange", QString("%1-%2").arg(minPitchA).arg(maxPitchA));
       if (minPitchP != 0 || maxPitchP != 127)
             xml.tag("pPitchRange", QString("%1-%2").arg(minPitchP).arg(maxPitchP));
-      if (transpose)
-            xml.tag("transposition", transpose);
+      if (transposeDiatonic)
+            xml.tag("transposeDiatonic", transposeDiatonic);
+      if (transposeChromatic)
+            xml.tag("transposeChromatic", transposeChromatic);
       if (useDrumset) {
             xml.tag("drumset", useDrumset);
             drumset->save(xml);
@@ -207,7 +211,8 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
       maxPitchA  = 127;
       minPitchP  = 0;
       maxPitchP  = 127;
-      transpose  = 0;
+      transposeDiatonic  = 0;
+      transposeChromatic  = 0;
       useDrumset = false;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -247,8 +252,12 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   setPitchRange(val, &minPitchA, &maxPitchA);
             else if (tag == "pPitchRange")
                   setPitchRange(val, &minPitchP, &maxPitchP);
-            else if (tag == "transposition")
-                  transpose = i;
+            else if (tag == "transposition")    // obsolete
+                  transposeChromatic = i;
+            else if (tag == "transposeChromatic")
+                  transposeChromatic = i;
+            else if (tag == "transposeDiatonic")
+                  transposeDiatonic = i;
             else if (tag == "drumset")
                   useDrumset = i;
             else if (tag == "Drum") {

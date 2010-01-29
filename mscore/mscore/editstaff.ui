@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>453</height>
+    <width>596</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -255,17 +255,155 @@
                <item>
                 <widget class="QLabel" name="label_2">
                  <property name="text">
-                  <string>Play Transposition (Semitones)</string>
+                  <string>Play Transposition:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="transposition">
-                 <property name="minimum">
-                  <number>-127</number>
+                <widget class="QComboBox" name="iList">
+                 <item>
+                  <property name="text">
+                   <string>Perfect Unison</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Unison</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Second</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Minor Second</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Major Second</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Second</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Third</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Minor Third</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Major Third</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Third</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Fourth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Perfect Fourth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Fourth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Fifth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Perfect Fifth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Fifth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Sixth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Minor Sixth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Major Sixth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Sixth</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Seventh</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Minor Seventh</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Major Seventh</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Augmented Seventh</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Diminished Octave</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Perfect Octave</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="up">
+                 <property name="text">
+                  <string>up</string>
                  </property>
-                 <property name="maximum">
-                  <number>127</number>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="down">
+                 <property name="text">
+                  <string>down</string>
                  </property>
                 </widget>
                </item>
@@ -276,8 +414,8 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>161</width>
-                   <height>20</height>
+                   <width>17</width>
+                   <height>18</height>
                   </size>
                  </property>
                 </spacer>

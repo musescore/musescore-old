@@ -152,6 +152,14 @@ void Score::transpose()
             transposeChordNames = false;
             }
 
+      int interval = td.transposeInterval();
+      int diatonic  = intervalList[interval].steps;
+      int chromatic = intervalList[interval].semitones;
+      if (td.direction() == TRANSPOSE_DOWN) {
+            diatonic  = -diatonic;
+            chromatic = -chromatic;
+            }
+
       if (_selection.state() == SEL_SINGLE || _selection.state() == SEL_MULT) {
             foreach(Element* e, _selection.elements()) {
                   if (e->type() != NOTE)
@@ -160,7 +168,7 @@ void Score::transpose()
                   if (td.mode() == TRANSPOSE_BY_KEY)
                         transposeByKey(n, td.transposeKey(), td.direction());
                   else
-                        transposeByInterval(n, td.transposeInterval(), td.direction());
+                        transposeByInterval(n, diatonic, chromatic);
                   }
             return;
             }
@@ -189,7 +197,7 @@ void Score::transpose()
                         if (td.mode() == TRANSPOSE_BY_KEY)
                               transposeByKey(n, td.transposeKey(), td.direction());
                         else
-                              transposeByInterval(n, td.transposeInterval(), td.direction());
+                              transposeByInterval(n, diatonic, chromatic);
                         }
                   }
             }
@@ -234,14 +242,14 @@ void Score::transpose()
 //   transposeStaff
 //---------------------------------------------------------
 
-void Score::cmdTransposeStaff(int staffIdx, int diff)
+void Score::cmdTransposeStaff(int staffIdx, int diatonic, int chromatic)
       {
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
-      transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), TRANSPOSE_BY_INTERVAL, 0, diff);
+      transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), TRANSPOSE_BY_INTERVAL, 0, chromatic);
 
-     for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
+      for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
            if (segment->subtype() != Segment::SegChordRest)
                  continue;
            for (int st = startTrack; st < endTrack; ++st) {
@@ -257,21 +265,9 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                  for (iNote i = notes->begin(); i != notes->end(); ++i)
                        nl.append(i->second);
                  foreach(Note* n, nl)
-                       transposeBySemitones(n, diff);
+                        transposeByInterval(n, diatonic, chromatic);
                  }
            }
-#if 0
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            foreach (Element* e, *m->el()) {
-                  if (e->type() != HARMONY)
-                        continue;
-                  Harmony* harmony = static_cast<Harmony*>(e);
-                  undoTransposeHarmony(harmony, diff);
-                  }
-            }
-#endif
-//    spell(staffIdx, staffIdx+1, _selection.startSegment(), _selection.endSegment());
-      spell();
       }
 
 //---------------------------------------------------------
@@ -284,12 +280,15 @@ void Score::cmdConcertPitchChanged(bool flag)
 
       foreach(Staff* staff, _staves) {
             Instrument* instr = staff->part()->instrument();
-            int offset = instr->pitchOffset;
-            if (offset == 0)
+            int transposeDiatonic = instr->transposeDiatonic;
+            int transposeChromatic = instr->transposeChromatic;
+            if (transposeChromatic == 0 && transposeDiatonic == 0)
                   continue;
-            if (!flag)
-                 offset = -offset;
-            cmdTransposeStaff(staff->idx(), offset);
+            if (!flag) {
+                  transposeChromatic = -transposeChromatic;
+                  transposeDiatonic  = -transposeDiatonic;
+                  }
+            cmdTransposeStaff(staff->idx(), transposeDiatonic, transposeChromatic);
             }
       }
 
@@ -334,26 +333,21 @@ printf("transposeByKey %p %d %d-%d cofSteps %d, semitones %d steps %d\n",
             dir = TRANSPOSE_DOWN;
 
       if (dir == TRANSPOSE_DOWN) {
-            semitones -= 12;
+            semitones = -semitones;
+            steps = -steps;
             }
-
-      int interval = searchInterval(steps, semitones);
-      if (interval == -1) {
-            printf("transposeByKey: cannot determine interval %d %d\n", steps, semitones);
-            return;
-            }
-      transposeByInterval(n, interval, dir);
+      transposeByInterval(n, steps, semitones);
       }
 
 //---------------------------------------------------------
 //   transposeByInterval
 //---------------------------------------------------------
 
-void Score::transposeByInterval(Note* n, int interval, TransposeDirection dir)
+void Score::transposeByInterval(Note* n, int diatonic, int chromatic)
       {
       int npitch;
       int ntpc;
-      transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval, dir);
+      transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, diatonic, chromatic);
       undoChangePitch(n, npitch, ntpc, 0);
       }
 
