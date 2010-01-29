@@ -1540,7 +1540,8 @@
         <name>B<symbol name="flat"/> Trumpet</name>
         <short-name>B<symbol name="flat"/> Tpt.</short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>52-80</aPitchRange>
         <pPitchRange>52-85</pPitchRange>
         <channel>
