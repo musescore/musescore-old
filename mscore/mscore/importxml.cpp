@@ -2185,7 +2185,7 @@ static int nrOfGraceSegsReq(QDomNode n)
 
 void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
-      printf("xmlNote start tick=%d\n", tick);
+//      printf("xmlNote start tick=%d\n", tick);
       QDomNode pn = e.parentNode();
       voice = 0;
       move  = 0;
@@ -2569,7 +2569,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
       // the the staves of the part it belongs to.
 
-      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
+//      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
       int found = false;
       for (int s = 0; s < MAX_STAVES; ++s) {
             int v = 0;
@@ -2579,7 +2579,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         relStaff = s;
                         move += d;
                         voice = v;
-                        printf(" -> found at s=%d\n", s);
+//                        printf(" -> found at s=%d\n", s);
                         found = true;
                         break;
                         }
@@ -2587,15 +2587,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             } // for (int s ...
       if (!found) {
             if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %zd >= %d)\n",
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
                          staff, relStaff, voicelist[relStaff].size(), VOICES);
             else {
                   voicelist[relStaff].push_back(voice);
-                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
+//                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
                   voice = voicelist[relStaff].size() -1;
                   }
             }
-      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
+//      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
 
       int track = (staff + relStaff) * VOICES + voice;
 //      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
@@ -2651,8 +2651,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   tie = 0;
                   }
 
-            if (grace)
-                  printf(" grace: nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
+//            if (grace)
+//                  printf(" grace: nrOfGraceSegsReq: %d\n", nrOfGraceSegsReq(pn));
             int gl = nrOfGraceSegsReq(pn);
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
@@ -2661,7 +2661,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
-                  printf(" grace=%d\n", grace);
+//                  printf(" grace=%d\n", grace);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
@@ -2692,11 +2692,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cr->setDuration(durationType);
                         }
                   cr->setDots(dots);
-                  printf(" cr->tick()=%d ", cr->tick());
+//                  printf(" cr->tick()=%d ", cr->tick());
                   Segment* s = measure->getSegment(st, cr->tick(), gl);
                   s->add(cr);
                   }
-            printf(" cr->tick()=%d", cr->tick());
+//            printf(" cr->tick()=%d", cr->tick());
             cr->setStaffMove(move);
 
             // pitch must be set before adding note to chord as note
@@ -2936,7 +2936,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             lastLen = ticks;
             tick += ticks;
             }
-      printf(" after inserting note tick=%d\n", tick);
+//      printf(" after inserting note tick=%d\n", tick);
       }
 
 //---------------------------------------------------------
@@ -3183,22 +3183,34 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
             else
                   domError(ee);
             }
-      if (c == "G" && i == 0)
+      if (c == "G" && i == 0 && line == 2)
             clef = CLEF_G;
-      else if (c == "G" && i == 1)
+      else if (c == "G" && i == 1 && line == 2)
             clef = CLEF_G1;
-      else if (c == "G" && i == 2)
+      else if (c == "G" && i == 2 && line == 2)
             clef = CLEF_G2;
-      else if (c == "G" && i == -1)
+      else if (c == "G" && i == -1 && line == 2)
             clef = CLEF_G3;
-      else if (c == "F" && i == 0)
+      else if (c == "G" && i == 0 && line == 1)
+            clef = CLEF_G4;
+      else if (c == "F" && i == 0 && line == 3)
+            clef = CLEF_F_B;
+      else if (c == "F" && i == 0 && line == 4)
             clef = CLEF_F;
-      else if (c == "F" && i == -1)
+      else if (c == "F" && i == 1 && line == 4)
+            clef = CLEF_F_8VA;
+      else if (c == "F" && i == 2 && line == 4)
+            clef = CLEF_F_15MA;
+      else if (c == "F" && i == -1 && line == 4)
             clef = CLEF_F8;
-      else if (c == "F" && i == -2)
+      else if (c == "F" && i == -2 && line == 4)
             clef = CLEF_F15;
+      else if (c == "F" && i == 0 && line == 5)
+            clef = CLEF_F_C;
       else if (c == "C") {
-            if (line == 4)
+            if (line == 5)
+                  clef = CLEF_C5;
+            else if (line == 4)
                   clef = CLEF_C4;
             else if (line == 3)
                   clef = CLEF_C3;
@@ -3210,7 +3222,7 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       else if (c == "percussion")
             clef = CLEF_PERC;
       else
-            printf("ImportMusicXML: unknown clef <%s>\n", qPrintable(c));
+            printf("ImportMusicXML: unknown clef <sign=%s line=%d oct ch=%d>\n", qPrintable(c), line, i);
       Staff* part = score->staff(staffIdx + clefno);
       ClefList* ct = part->clefList();
       (*ct)[tick] = clef;

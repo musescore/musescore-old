@@ -1131,7 +1131,7 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 
 Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
       {
-      printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
+//      printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
       if (st != Segment::SegChordRest && st != Segment::SegGrace) {
             printf("Measure::getSegment(st=%d, t=%d, gl=%d): incorrect segment type\n", st, t, gl);
             return 0;
@@ -1154,15 +1154,15 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
                   }
             }
 
-      printf("s=%p sCr=%p nGr=%d\n", s, sCr, nGraces);
-      printf("segment list\n");
-      for (Segment* s = first(); s; s = s->next())
-            printf("  %d: %d\n", s->tick(), s->subtype());
+//      printf("s=%p sCr=%p nGr=%d\n", s, sCr, nGraces);
+//      printf("segment list\n");
+//      for (Segment* s = first(); s; s = s->next())
+//            printf("  %d: %d\n", s->tick(), s->subtype());
 
       if (gl == 0) {
             if (sCr) return sCr;
             // no SegChordRest at tick = t, must create it
-            printf("creating SegChordRest at tick=%d\n", t);
+//            printf("creating SegChordRest at tick=%d\n", t);
             s = createSegment(Segment::SegChordRest, t);
             add(s);
             return s;
@@ -1170,7 +1170,7 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
 
       if (gl > 0) {
             if (gl <= nGraces) {
-                  printf("grace segment already exist, returning it\n");
+//                  printf("grace segment already exist, returning it\n");
                   int graces = 0;
                   for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
                         if (ss->subtype() == Segment::SegGrace && ss->tick() == t) graces++;
@@ -1179,13 +1179,13 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
                   return 0; // should not be reached
                   }
             else {
-                  printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
+//                  printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
                   Segment* prevs = 0; // last segment inserted
                   // insert the first grace segment
                   if (nGraces == 0) {
                         ++nGraces;
                         s = createSegment(Segment::SegGrace, t);
-                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         add(s);
                         prevs = s;
                         // return s;
@@ -1197,7 +1197,7 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t, int gl)
                   while (nGraces < gl) {
                         ++nGraces;
                         s = createSegment(Segment::SegGrace, t);
-                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         insert(s, prevs);
                         prevs = s;
                         }
