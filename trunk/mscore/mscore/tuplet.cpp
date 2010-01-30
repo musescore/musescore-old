@@ -178,8 +178,11 @@ void Tuplet::layout()
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
-                  if (stem && chord1->up())
+                  if (stem && chord1->up()) {
                         p1.setY(stem->abbox().y());
+                        if (chord1->beam())
+                              p1.setX(stem->abbox().x());
+                        }
                   }
 
             p2 = cr2->abbox().topRight();
@@ -188,8 +191,11 @@ void Tuplet::layout()
             if (cr2->type() == CHORD) {
                   const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem = chord2->stem();
-                  if (stem && chord2->up())
+                  if (stem && chord2->up()) {
+                        if (chord2->beam())
+                              p2.setX(stem->abbox().x());
                         p2.setY(stem->abbox().top());
+                        }
                   }
             if (cr1->type() != CHORD && cr2->type() == CHORD) {
                   if (p2.y() < p1.y())
@@ -211,8 +217,11 @@ void Tuplet::layout()
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
-                  if (stem && !chord1->up())
+                  if (stem && !chord1->up()) {
                         p1.setY(stem->abbox().bottom());
+                        if (chord1->beam())
+                              p1.setX(stem->abbox().x());
+                        }
                   }
 
             p2 = cr2->abbox().bottomRight();
@@ -221,8 +230,11 @@ void Tuplet::layout()
             if (cr2->type() == CHORD) {
                   const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem = chord2->stem();
-                  if (stem && !chord2->up())
+                  if (stem && !chord2->up()) {
+                        if (chord2->beam())
+                              p2.setX(stem->abbox().x());
                         p2.setY(stem->abbox().bottom());
+                        }
                   }
             if (cr1->type() != CHORD && cr2->type() == CHORD) {
                   if (p2.y() > p1.y())
