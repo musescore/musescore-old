@@ -2469,7 +2469,7 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
       {
       printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
       attr.doAttr(xml, false);
-      xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
+      xml.stag(QString("direction placement=\"%1\"").arg((text->parent()->y()-text->y() < 0.0) ? "below" : "above"));
       wordsMetrome(xml, text);
       int offs = text->mxmlOff();
       if (offs)
