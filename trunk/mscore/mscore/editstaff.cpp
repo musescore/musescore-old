@@ -55,11 +55,11 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       int interval = searchInterval(diatonic, chromatic);
       if (interval == -1) {
             printf("unknown interval %d %d\n", diatonic, chromatic);
+            interval = 0;
             }
-      else {
-            iList->setCurrentIndex(interval);
-            up->setChecked(upFlag);
-            }
+      iList->setCurrentIndex(interval);
+      up->setChecked(upFlag);
+      down->setChecked(!upFlag);
 
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
