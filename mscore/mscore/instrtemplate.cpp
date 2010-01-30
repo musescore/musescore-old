@@ -25,6 +25,7 @@
 #include "drumset.h"
 #include "clef.h"
 #include "bracket.h"
+#include "utils.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
 QList<MidiArticulation*> articulation;                // global articulations
@@ -252,8 +253,10 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   setPitchRange(val, &minPitchA, &maxPitchA);
             else if (tag == "pPitchRange")
                   setPitchRange(val, &minPitchP, &maxPitchP);
-            else if (tag == "transposition")    // obsolete
+            else if (tag == "transposition") {    // obsolete
                   transposeChromatic = i;
+                  transposeDiatonic = chromatic2diatonic(i);
+                  }
             else if (tag == "transposeChromatic")
                   transposeChromatic = i;
             else if (tag == "transposeDiatonic")

@@ -429,40 +429,72 @@ QString pitch2string(int v)
 //---------------------------------------------------------
 
 Interval intervalList[26] = {
-      { 0, 0 },         // Perfect Unison
-      { 0, 1 },         // Augmented Unison
+      { 0, 0 },         //  0 Perfect Unison
+      { 0, 1 },         //  1 Augmented Unison
 
-      { 1, 0 },         // Diminished Second
-      { 1, 1 },         // Minor Second
-      { 1, 2 },         // Major Second
-      { 1, 3 },         // Augmented Second
+      { 1, 0 },         //  2 Diminished Second
+      { 1, 1 },         //  3 Minor Second
+      { 1, 2 },         //  4 Major Second
+      { 1, 3 },         //  5 Augmented Second
 
-      { 2, 2 },         // Diminished Third
-      { 2, 3 },         // Minor Third
-      { 2, 4 },         // Major Third
-      { 2, 5 },         // Augmented Third
+      { 2, 2 },         //  6 Diminished Third
+      { 2, 3 },         //  7 Minor Third
+      { 2, 4 },         //  8 Major Third
+      { 2, 5 },         //  9 Augmented Third
 
-      { 3, 4 },         // Diminished Fourth
-      { 3, 5 },         // Perfect Fourth
-      { 3, 6 },         // Augmented Fourth
+      { 3, 4 },         // 10 Diminished Fourth
+      { 3, 5 },         // 11 Perfect Fourth
+      { 3, 6 },         // 12 Augmented Fourth
 
-      { 4, 6 },         // Diminished Fifth
-      { 4, 7 },         // Perfect Fifth
-      { 4, 8 },         // Augmented Fifth
+      { 4, 6 },         // 13 Diminished Fifth
+      { 4, 7 },         // 14 Perfect Fifth
+      { 4, 8 },         // 15 Augmented Fifth
 
-      { 5, 7 },         // Diminished Sixth
-      { 5, 8 },         // Minor Sixth
-      { 5, 9 },         // Major Sixth
-      { 5, 10 },        // Augmented Sixth
+      { 5, 7 },         // 16 Diminished Sixth
+      { 5, 8 },         // 17 Minor Sixth
+      { 5, 9 },         // 18 Major Sixth
+      { 5, 10 },        // 19 Augmented Sixth
 
-      { 6, 9 },         // Diminished Seventh
-      { 6, 10 },        // Minor Seventh
-      { 6, 11 },        // Major Seventh
-      { 6, 12 },        // Augmented Seventh
+      { 6, 9 },         // 20 Diminished Seventh
+      { 6, 10 },        // 21 Minor Seventh
+      { 6, 11 },        // 22 Major Seventh
+      { 6, 12 },        // 23 Augmented Seventh
 
-      { 7, 11 },        // Diminshed Octave
-      { 7, 12 }         // Perfect Octave
+      { 7, 11 },        // 24 Diminshed Octave
+      { 7, 12 }         // 25 Perfect Octave
       };
+
+//---------------------------------------------------------
+//   chromatic2diatonic
+//    find the most likely interval for an
+//    semitone distance
+//---------------------------------------------------------
+
+int chromatic2diatonic(int val)
+      {
+      static int il[12] = {
+            0,    // Perfect Unison
+            3,    // Minor Second
+            4,    // Major Second
+            7,    // Minor Third
+            8,    // Major Third
+            11,   // Perfect Fourth
+            12,   // Augmented Fourth
+            14,   // Perfect Fifth
+            17,   // Minor Sixth
+            18,   // Major Sixth
+            21,   // Minor Seventh
+            22,   // Major Seventh
+            // 25    Perfect Octave
+            };
+      bool down = val < 0;
+      if (down)
+            val = -val;
+      val = val % 12;
+      int intervalIndex = il[val];
+      int steps = intervalList[intervalIndex].steps;
+      return down ? -steps : steps;
+      }
 
 //---------------------------------------------------------
 //   searchInterval

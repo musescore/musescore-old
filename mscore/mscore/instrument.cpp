@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "drumset.h"
 #include "articulation.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   write
@@ -149,8 +150,10 @@ void Instrument::read(QDomElement e)
                   maxPitchA = i;
             else if (tag == "maxPitchP")
                   maxPitchP = i;
-            else if (tag == "transposition")    // obsolete
+            else if (tag == "transposition") {    // obsolete
                   transposeChromatic = i;
+                  transposeDiatonic = chromatic2diatonic(i);
+                  }
             else if (tag == "transposeChromatic")
                   transposeChromatic = i;
             else if (tag == "transposeDiatonic")
