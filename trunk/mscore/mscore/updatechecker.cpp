@@ -22,23 +22,23 @@
 #include "preferences.h"
 
 UpdateChecker::UpdateChecker()
-{   
+{
     manager = new QNetworkAccessManager(this);
-    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));  
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));
 }
 
 UpdateChecker::~UpdateChecker()
 {
 
-} 
- 
+}
+
 void UpdateChecker::onRequestFinished(QNetworkReply* reply)
 {
     QSettings s;
     s.beginGroup("Update");
     s.setValue("lastUpdateDate", QDateTime::currentDateTime());
     s.endGroup();
-    
+
     QByteArray data = reply->readAll();
     QXmlStreamReader reader(data);
     QString version;
@@ -47,7 +47,7 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
     QString infoUrl;
     QString description;
     QString releaseType;
-    
+
     while (!reader.atEnd() && !reader.hasError()) {
         QXmlStreamReader::TokenType token = reader.readNext();
         if(token == QXmlStreamReader::StartDocument) {
@@ -64,13 +64,13 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
                 infoUrl = parseText(reader);
             }else if (reader.name() == "description") {
                 description = parseText(reader);
-            }            
+            }
         }
     }
-    
+
     if (reader.error())
         qDebug() << reader.error() << reader.errorString();
-    
+
     QString message = QString(tr("An update for MuseScore is available: <a href=\"%1\">MuseScore %2 r.%3</a>")).arg(downloadUrl).arg(version).arg(upgradeRevision);
     printf("revision %s\n", revision.toAscii().constData());
     if(!version.isNull() &&  upgradeRevision > revision ){
@@ -85,19 +85,19 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
         msgBox.setText(tr("No Update Available"));
         msgBox.setTextFormat(Qt::RichText);
         msgBox.exec();
-    }    
+    }
 }
 
 QString UpdateChecker::parseText(QXmlStreamReader& reader){
     QString result;
-    reader.readNext();  
+    reader.readNext();
     if(reader.tokenType() == QXmlStreamReader::Characters)
       result = reader.text().toString();
     return result;
 }
- 
+
 void UpdateChecker::check(QString rev, bool m)
-{   
+{
     manual = m;
     #if defined(Q_WS_WIN)
     os = "win";
@@ -106,7 +106,7 @@ void UpdateChecker::check(QString rev, bool m)
     os = "mac";
     #endif
     if(qApp->applicationName() == "MuseScore"){ //avoid nightly cymbals
-          if(MuseScore::unstable){
+          if(MuseScore::unstable()){
                   release = "pre";
           }else{
                   release = "stable";
@@ -114,9 +114,9 @@ void UpdateChecker::check(QString rev, bool m)
     }else{
         release = "nightly";
     }
-    printf("release type: %s\n", release.toAscii().constData());    
+    printf("release type: %s\n", release.toAscii().constData());
     if(!os.isNull() && !release.isNull()){
-        revision =  rev;   
+        revision =  rev;
         manager->get(QNetworkRequest(QUrl("http://update.musescore.org/update_"+os +"_" + release +".xml")));
     }
 }
@@ -137,22 +137,22 @@ int UpdateChecker::defaultPeriod()
         }
         return result;
         }
-        
+
 bool UpdateChecker::hasToCheck(){
     QSettings s;
     s.beginGroup("Update");
     QDateTime lastUpdate = s.value("lastUpdateDate", QDateTime::currentDateTime()).value<QDateTime>();
-    
+
     printf("preferences.checkUpdateStartup: %d\n" , preferences.checkUpdateStartup);
     printf("lastupdate: %s\n", lastUpdate.toString("dd.MM.yyyy hh:mm:ss.zzz").toAscii().constData());
-    
+
     if(preferences.checkUpdateStartup < 0 ){ //Never
       return false;
     }else if (preferences.checkUpdateStartup == 0) { // factory
       preferences.checkUpdateStartup = UpdateChecker::defaultPeriod();
       preferences.dirty = true;
-    } 
+    }
     s.endGroup();
     return QDateTime::currentDateTime() > lastUpdate.addSecs(3600 * preferences.checkUpdateStartup);
 }
-    
+
