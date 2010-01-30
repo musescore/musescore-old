@@ -1065,6 +1065,7 @@ void Score::deleteItem(Element* el)
                               rest->setTuplet(tuplet);
                               rest->setDuration(chord->duration());
                               }
+                        select(rest, SELECT_SINGLE, 0);
                         }
                   else  {
                         // remove segment if empty
@@ -1343,12 +1344,11 @@ void Score::cmdDeleteSelection()
       else {
             // deleteItem modifies selection().elements() list,
             // so we need a local copy:
-            foreach(Element* e, selection().elements()) {
-                  e->setSelected(false);  // in case item is not deleted
+            QList<Element*> el(selection().elements());
+            foreach(Element* e, el) {
                   deleteItem(e);
                   }
             }
-      select(0, SELECT_SINGLE, 0);
       layoutAll = true;
       }
 
