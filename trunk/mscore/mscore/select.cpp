@@ -104,9 +104,7 @@ bool Selection::isEndActive() const {
 
 Element* Selection::element() const
       {
-      if (_state == SEL_SINGLE && !_el.isEmpty())
-            return _el.front();
-      return 0;
+      return isSingle() ? _el.front() : 0;
       }
 
 //---------------------------------------------------------
@@ -115,7 +113,7 @@ Element* Selection::element() const
 
 ChordRest* Selection::activeCR() const
       {
-      if ((_state != SEL_STAFF && _state != SEL_SYSTEM) || !_activeSegment)
+      if ((_state != SEL_RANGE) || !_activeSegment)
             return 0;
       if (_activeSegment == _startSegment)
             return firstChordRest(_activeTrack);
@@ -180,7 +178,7 @@ ChordRest* Selection::lastChordRest(int track) const
 
 void Selection::deselectAll()
       {
-      if (_state == SEL_STAFF || _state == SEL_SYSTEM)
+      if (_state == SEL_RANGE)
             _score->setUpdateAll();
       clear();
       }
@@ -228,7 +226,7 @@ void Selection::add(Element* el)
 void Score::deselect(Element* obj)
       {
       refresh |= obj->abbox();
-      selection()->remove(obj);
+      deselect(obj);
       obj->setSelected(false);
       }
 
@@ -236,20 +234,13 @@ void Score::deselect(Element* obj)
 //   updateSelectedElements
 //---------------------------------------------------------
 
-void Score::updateSelectedElements(SelState state)
+void Score::updateSelectedElements(SelState /*state*/)
       {
       setUpdateAll();
       foreach(Element* e, _selection.elements())
             e->setSelected(false);
       _selection.clearElements();
 
-      //
-      //  select all elements in range
-      //
-      if (state == SEL_SYSTEM) {
-            _selection.setStaffStart(0);
-            _selection.setStaffEnd(nstaves());
-            }
       // assert:
       if (_selection.staffStart() < 0 || _selection.staffStart() >= nstaves() || _selection.staffEnd() < 0 || _selection.staffEnd() > nstaves()
          || _selection.staffStart() >= _selection.staffEnd()) {
@@ -291,7 +282,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
       {
       if (debugMode)
             printf("select element <%s> type %d(state %d) staff %d\n",
-               e ? e->name() : "", type, selection()->state(), e ? e->staffIdx() : -1);
+               e ? e->name() : "", type, selection().state(), e ? e->staffIdx() : -1);
 
       SelState selState = _selection.state();
 
@@ -314,7 +305,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   else {
                         _selection.add(e);
                         _is.track = e->track();
-                        selState = SEL_SINGLE;
+                        selState = SEL_LIST;
                         }
                   if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
                         if (e->type() == NOTE)
@@ -333,23 +324,18 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStartSegment(m->tick2segment(tick, true));
                         _selection.setEndSegment(tick2segment(etick));
                         }
-                  else if (_selection.state() == SEL_SYSTEM) {
-                        if (tick < _selection.tickStart()) {
-                              _selection.setStartSegment(m->tick2segment(tick, true));
-                              }
-                        else if (etick >= _selection.tickEnd())
-                              _selection.setEndSegment(tick2segment(etick));
-                        }
                   else {
                         select(0, SELECT_SINGLE, 0);
                         return;
                         }
                   _updateAll = true;
-                  selState = SEL_SYSTEM;
+                  selState = SEL_RANGE;
+                  _selection.setStaffStart(0);
+                  _selection.setStaffEnd(nstaves());
                   updateSelectedElements(selState);
                   }
             else {
-                  if (_selection.state() == SEL_STAFF || _selection.state() == SEL_SYSTEM) {
+                  if (_selection.state() == SEL_RANGE) {
                         select(0, SELECT_SINGLE, 0);
                         return;
                         }
@@ -359,7 +345,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               _selection.remove(e);
                         else {
                             _selection.add(e);
-                            selState = SEL_MULT;
+                            selState = SEL_LIST;
                             }
                         }
                   }
@@ -378,7 +364,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStartSegment(m->tick2segment(tick, true));
                         _selection.setEndSegment(tick2segment(etick));
                         }
-                  else if (_selection.state() == SEL_STAFF) {
+                  else if (_selection.state() == SEL_RANGE) {
                         if (staffIdx < _selection.staffStart())
                               _selection.setStaffStart(staffIdx);
                         else if (staffIdx >= _selection.staffEnd())
@@ -398,7 +384,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                                     _selection.setEndSegment(tick2segment(etick));
                               }
                         }
-                  else if (_selection.state() == SEL_SINGLE) {
+                  else if (_selection.isSingle()) {
                         Segment* seg = 0;
                         Element* oe = _selection.element();
                         bool reverse = false;
@@ -444,7 +430,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStartSegment(cr->segment());
                         _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
                         }
-                  else if (_selection.state() == SEL_SINGLE) {
+                  else if (_selection.isSingle()) {
                         Element* oe = _selection.element();
                         if (oe && (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD)) {
                               if (oe->type() == NOTE)
@@ -484,7 +470,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               return;
                               }
                         }
-                  else if (_selection.state() == SEL_STAFF) {
+                  else if (_selection.state() == SEL_RANGE) {
                         staffIdx = cr->staffIdx();
                         int tick = cr->tick();
                         if (staffIdx < _selection.staffStart())
@@ -514,7 +500,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   else {
                         printf("sel state %d\n", _selection.state());
                         }
-                  selState = SEL_STAFF;
+                  selState = SEL_RANGE;
                   if (!_selection.endSegment())
                         _selection.setEndSegment(cr->segment()->next());
                   if (!_selection.startSegment())
@@ -532,7 +518,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
             _selection.setActiveTrack(activeTrack);
 
-            selState = SEL_STAFF;
+            selState = SEL_RANGE;
             updateSelectedElements(selState);
             }
       _selection.setState(selState);
@@ -588,10 +574,7 @@ void Score::lassoSelectEnd()
             _selection.setState(SEL_NONE);
             return;
             }
-      if (_selection.elements().size() == 1) {
-            _selection.setState(SEL_SINGLE);
-            return;
-            }
+      _selection.setState(SEL_RANGE);
 
       foreach(const Element* e, _selection.elements()) {
             if (e->type() != NOTE && e->type() != REST)
@@ -615,8 +598,8 @@ void Score::lassoSelectEnd()
       if (noteRestCount > 0) {
             endSegment = endSegment->nextCR(endTrack);
             _selection.setRange(startSegment, endSegment, startStaff, endStaff+1);
-            if (_selection.state() != SEL_STAFF) {
-                  _selection.setState(SEL_STAFF);
+            if (_selection.state() != SEL_RANGE) {
+                  _selection.setState(SEL_RANGE);
                   emit selectionChanged(int(_selection.state()));
                   }
             }
@@ -673,14 +656,11 @@ void Selection::update()
 void Selection::dump()
       {
       printf("Selection dump: ");
-      if (_state == SEL_NONE) {
-            printf("NONE\n");
-            return;
+      switch(_state) {
+            case SEL_NONE:   printf("NONE\n"); return;
+            case SEL_RANGE:  printf("RANGE\n"); break;
+            case SEL_LIST:   printf("LIST\n"); break;
             }
-      if (_state == SEL_SINGLE)
-            printf("SINGLE\n");
-      else
-            printf("MULTI\n");
       for (ciElement i = _el.begin(); i != _el.end(); ++i)
             printf("  %p %s\n", *i, (*i)->name());
       }
@@ -696,11 +676,13 @@ void Selection::dump()
 void Selection::updateState()
       {
       int n = _el.size();
-      if (_state == SEL_NONE || _state == SEL_SINGLE || _state == SEL_MULT) {
-            if (n == 0)
-                  setState(SEL_NONE);
-            else if (n == 1) {
-                  setState(SEL_SINGLE);
+      if (n == 0) {
+            setState(SEL_NONE);
+            return;
+            }
+      if (_state == SEL_NONE || _state == SEL_LIST) {
+            setState(SEL_LIST);
+            if (n == 1) {
                   Element* e = element();
                   if (e->type() == NOTE || e->type() == REST) {
                         if (!_score->noteEntryMode())
@@ -711,11 +693,7 @@ void Selection::updateState()
                         _score->setInputTrack(e->track());
                         }
                   }
-            else
-                  setState(SEL_MULT);
             }
-      else if (n == 0)
-            setState(SEL_NONE);
       }
 
 //---------------------------------------------------------
@@ -728,14 +706,10 @@ QString Selection::mimeType() const
             default:
             case SEL_NONE:
                   return QString();
-            case SEL_SINGLE:
-                  return mimeSymbolFormat;
-            case SEL_MULT:
-                  return mimeSymbolListFormat;
-            case SEL_STAFF:
+            case SEL_LIST:
+                  return isSingle() ? mimeSymbolFormat : mimeSymbolListFormat;
+            case SEL_RANGE:
                   return mimeStaffListFormat;
-            case SEL_SYSTEM:
-                  return mimeMeasureListFormat;
             }
       }
 
@@ -747,21 +721,17 @@ QByteArray Selection::mimeData() const
       {
       QByteArray a;
       switch (_state) {
-            case SEL_SINGLE:
-                  {
-                  Element* e = element();
-                  if (e->type() == TEXTLINE_SEGMENT)
-                        e = static_cast<TextLineSegment*>(e)->textLine();
-                  a = e->mimeData(QPointF());
-                  }
+            case SEL_LIST:
+                  if (isSingle()) {
+                        Element* e = element();
+                        if (e->type() == TEXTLINE_SEGMENT)
+                              e = static_cast<TextLineSegment*>(e)->textLine();
+                        a = e->mimeData(QPointF());
+                        }
                   break;
-            default:
             case SEL_NONE:
                   break;
-            case SEL_MULT:
-                  break;
-            case SEL_STAFF:
-            case SEL_SYSTEM:
+            case SEL_RANGE:
                   a = staffMimeData();
                   break;
             }
@@ -890,13 +860,13 @@ QList<Note*> Selection::noteList() const
       {
       QList<Note*>nl;
 
-      if (_state == SEL_SINGLE || _state == SEL_MULT) {
+      if (_state == SEL_LIST) {
             foreach(Element* e, _el) {
                   if (e->type() == NOTE)
                         nl.append(static_cast<Note*>(e));
                   }
             }
-      else if (_state == SEL_STAFF || _state == SEL_SYSTEM) {
+      else if (_state == SEL_RANGE) {
             for (int staffIdx = staffStart(); staffIdx < staffEnd(); ++staffIdx) {
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;

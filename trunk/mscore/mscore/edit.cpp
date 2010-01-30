@@ -57,7 +57,7 @@
 
 Note* Score::getSelectedNote()
       {
-      Element* el = selection()->element();
+      Element* el = selection().element();
       if (el) {
             if (el->type() == NOTE)
                   return static_cast<Note*>(el);
@@ -72,7 +72,7 @@ Note* Score::getSelectedNote()
 
 ChordRest* Score::getSelectedChordRest() const
       {
-      Element* el = selection()->element();
+      Element* el = selection().element();
       if (el) {
             if (el->type() == NOTE)
                   return static_cast<Note*>(el)->chord();
@@ -93,7 +93,7 @@ void Score::getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const
       {
       *cr1 = 0;
       *cr2 = 0;
-      foreach(Element* e, selection()->elements()) {
+      foreach(Element* e, selection().elements()) {
             if (e->type() == NOTE)
                   e = e->parent();
             if (e->isChordRest()) {
@@ -116,9 +116,9 @@ void Score::getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const
 
 int Score::pos()
       {
-      Element* el = selection()->element();
-      if (selection()->activeCR())
-            el = selection()->activeCR();
+      Element* el = selection().element();
+      if (selection().activeCR())
+            el = selection().activeCR();
       if (el && (el->type() == REST || el->type() == REPEAT_MEASURE || el->type() == NOTE || el->type() == CHORD)) {
             if (el->type() == NOTE)
                   el = el->parent();
@@ -321,6 +321,7 @@ Note* Score::addNote(Chord* chord, int pitch)
       cmdAdd(note);
       mscore->play(note);
       setLayout(chord->measure());
+      select(note, SELECT_SINGLE, 0);
       return note;
       }
 
@@ -594,8 +595,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
       if (addToChord) {
             if (cr->type() == CHORD) {
-                  Note* note = addNote(static_cast<Chord*>(cr), pitch);
-                  select(note, SELECT_SINGLE, 0);
+                  addNote(static_cast<Chord*>(cr), pitch);
                   }
             else
                   setNoteRest(cr, _is.track, pitch, _is.duration().fraction(), headGroup, stemDirection);
@@ -620,12 +620,12 @@ void ScoreView::modifyElement(Element* el)
             return;
             }
       Score* cs = el->score();
-      if (cs->selection()->state() != SEL_SINGLE) {
-            printf("modifyElement: cs->selection()->state() != SEL_SINGLE\n");
+      if (!cs->selection().isSingle()) {
+            printf("modifyElement: cs->selection().state() != SEL_SINGLE\n");
             delete el;
             return;
             }
-      Element* e = cs->selection()->element();
+      Element* e = cs->selection().element();
       Chord* chord;
       if (e->type() == CHORD)
             chord = static_cast<Chord*>(e);
@@ -666,7 +666,7 @@ void ScoreView::cmdAddSlur()
             is.slur = 0;
             return;
             }
-      QList<Note*> nl = _score->selection()->noteList();
+      QList<Note*> nl = _score->selection().noteList();
       Note* firstNote = 0;
       Note* lastNote = 0;
       foreach(Note* n, nl) {
@@ -759,7 +759,6 @@ void Score::cmdAddTie()
                   note->setTieFor(tie);
                   n->setTieBack(tie);
                   undoAddElement(tie);
-                  select(n, SELECT_SINGLE, 0);
                   nextInputPos(n->chord(), false);
                   }
             endCmd();
@@ -848,7 +847,7 @@ void Score::cmdSetBeamMode(int mode)
 
 void Score::cmdFlip()
       {
-      const QList<Element*>& el = selection()->elements();
+      const QList<Element*>& el = selection().elements();
       if (el.isEmpty()) {
             selectNoteSlurMessage();
             return;
@@ -1217,15 +1216,15 @@ void Score::cmdRemoveTime(int tick, int len)
 
 void Score::cmdDeleteSelectedMeasures()
       {
-      if (selection()->state() != SEL_STAFF && selection()->state() != SEL_SYSTEM)
+      if (selection().state() != SEL_RANGE)
             return;
-      MeasureBase* is = selection()->startSegment()->measure();
+      MeasureBase* is = selection().startSegment()->measure();
       bool createEndBar = false;
       if (is->next()) {
-            Segment* seg = selection()->endSegment();
+            Segment* seg = selection().endSegment();
             MeasureBase* ie = seg ? seg->measure() : lastMeasure();
             if (ie) {
-                  if ((seg == 0) || (ie->tick() < selection()->endSegment()->tick())) {
+                  if ((seg == 0) || (ie->tick() < selection().endSegment()->tick())) {
                         // if last measure is selected
                         if (ie->type() == MEASURE)
                               createEndBar = static_cast<Measure*>(ie)->endBarLineType() == END_BAR;
@@ -1257,7 +1256,7 @@ void Score::cmdDeleteSelectedMeasures()
                         }
                   }
             }
-//      selection()->clearElements();
+//      selection().clearElements();
       select(0, SELECT_SINGLE, 0);
       _is._segment = 0;        // invalidate position
       layoutAll = true;
@@ -1269,16 +1268,12 @@ void Score::cmdDeleteSelectedMeasures()
 
 void Score::cmdDeleteSelection()
       {
-      if (selection()->state() == SEL_SYSTEM) {
-            cmdDeleteSelectedMeasures();
-            return;
-            }
-      if (selection()->state() == SEL_STAFF) {
-            Segment* s1 = selection()->startSegment();
-            Segment* s2 = selection()->endSegment();
+      if (selection().state() == SEL_RANGE) {
+            Segment* s1 = selection().startSegment();
+            Segment* s2 = selection().endSegment();
             int tick2   = s2 ? s2->tick() : INT_MAX;
-            int track1  = selection()->staffStart() * VOICES;
-            int track2  = selection()->staffEnd() * VOICES;
+            int track1  = selection().staffStart() * VOICES;
+            int track2  = selection().staffEnd() * VOICES;
             for (int track = track1; track < track2; ++track) {
                   Fraction f;
                   int tick  = -1;
@@ -1346,9 +1341,9 @@ void Score::cmdDeleteSelection()
                   }
             }
       else {
-            // deleteItem modifies selection()->elements() list,
+            // deleteItem modifies selection().elements() list,
             // so we need a local copy:
-            foreach(Element* e, selection()->elements()) {
+            foreach(Element* e, selection().elements()) {
                   e->setSelected(false);  // in case item is not deleted
                   deleteItem(e);
                   }
@@ -1487,7 +1482,7 @@ void ScoreView::cmdTuplet(int n)
                   cmdTuplet(n, _score->inputState().cr());
             }
       else {
-            foreach(Element* e, _score->selection()->elements()) {
+            foreach(Element* e, _score->selection().elements()) {
                   if (e->type() == NOTE)
                         e = static_cast<Note*>(e)->chord();
                   if (e->isChordRest())
@@ -1700,7 +1695,7 @@ void Score::colorItem(Element* element)
       if (!c.isValid())
             return;
 
-      foreach(Element* e, selection()->elements()) {
+      foreach(Element* e, selection().elements()) {
             if (e->color() != c) {
                   _undo->push(new ChangeColor(e, c));
                   e->setGenerated(false);
@@ -1722,7 +1717,7 @@ void Score::colorItem(Element* element)
                         }
                   }
             }
-      selection()->deselectAll();
+      _selection.deselectAll();
       }
 
 //---------------------------------------------------------
@@ -1731,18 +1726,18 @@ void Score::colorItem(Element* element)
 
 void Score::cmdExchangeVoice(int s, int d)
       {
-      if (selection()->state() != SEL_STAFF) {
+      if (selection().state() != SEL_RANGE) {
             selectStavesMessage();
             return;
             }
-      int t1 = selection()->startSegment()->tick();
-      int t2 = selection()->endSegment()->tick();
+      int t1 = selection().startSegment()->tick();
+      int t2 = selection().endSegment()->tick();
 
       Measure* m1 = tick2measure(t1);
       Measure* m2 = tick2measure(t2);
 printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2);
       for (;;) {
-            undoExchangeVoice(m1, s, d, selection()->staffStart(), selection()->staffEnd());
+            undoExchangeVoice(m1, s, d, selection().staffStart(), selection().staffEnd());
             MeasureBase* mb = m1->next();
             while (mb && mb->type() != MEASURE)
                   mb = mb->next();

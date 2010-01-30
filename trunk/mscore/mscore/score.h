@@ -382,7 +382,6 @@ class Score : public QObject {
       void cmdRemoveStaff(int staffIdx);
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
-      void removeMeasure(MeasureBase*);
       void appendMeasures(int, int);
       void readStaff(QDomElement);
 
@@ -479,6 +478,8 @@ class Score : public QObject {
 
       void select(Element* obj, SelectType, int staff);
       void deselect(Element* obj);
+      void deselectAll() { _selection.deselectAll(); }
+      void updateSelection() { _selection.update(); }
 
       void searchSelectedElements();
 
@@ -577,9 +578,8 @@ class Score : public QObject {
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 
       Element* getSelectedElement() const   { return _selection.element(); }
-      Selection* selection()                { return &_selection; }
-      const Selection* selection() const    { return &_selection; }
-      void setSelection(const Selection& s) { _selection = s; }
+      const Selection& selection() const    { return _selection; }
+      void setSelection(const Selection& s);
 
       int pos();
       Measure* tick2measure(int tick) const;

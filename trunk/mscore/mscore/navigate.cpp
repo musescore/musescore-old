@@ -266,13 +266,12 @@ ChordRest* Score::nextMeasure(ChordRest* element, bool selectBehavior)
       int endTick = element->measure()->last()->nextChordRest(element->track(), true)->tick();
       bool last = false;
 
-      bool range = selection()->state() == SEL_STAFF;
-      if (range) {
-            if (element->tick() != endTick && selection()->endSegment()->tick() <= endTick) {
+      if (selection().state() == SEL_RANGE) {
+            if (element->tick() != endTick && selection().endSegment()->tick() <= endTick) {
                   measure = element->measure();
                   last = true;
                   }
-            else if (element->tick() == endTick && selection()->isEndActive())
+            else if (element->tick() == endTick && selection().isEndActive())
                   last = true;
             }
       else if (element->tick() != endTick && selectBehavior) {
@@ -316,8 +315,8 @@ ChordRest* Score::prevMeasure(ChordRest* element)
       int startTick = element->measure()->first()->nextChordRest(element->track())->tick();
       bool last = false;
 
-      bool range = selection()->state() == SEL_STAFF;
-      if (range && selection()->isEndActive() && selection()->startSegment()->tick() <= startTick)
+      if ((selection().state() == SEL_RANGE)
+         && selection().isEndActive() && selection().startSegment()->tick() <= startTick)
             last = true;
       else if (element->tick() != startTick) {
             measure = element->measure();

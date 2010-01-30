@@ -474,7 +474,7 @@ void System::setInstrumentName(int staffIdx)
       //
       if (staff->instrumentName && !staff->instrumentName->editMode()) {
             if (staff->instrumentName->selected())
-                  _score->selection()->remove(staff->instrumentName);
+                  _score->deselect(staff->instrumentName);
             delete staff->instrumentName;
             staff->instrumentName = 0;
             }
@@ -579,7 +579,7 @@ void System::remove(Element* el)
             printf("internal error: bracket not found\n");
             }
       else if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX)
-            score()->removeMeasure((MeasureBase*)el);
+            score()->remove(el);
       else
             printf("System::remove(%s) not implemented\n", el->name());
       }

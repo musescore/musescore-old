@@ -1,6 +1,9 @@
+30.jan (ws)
+      - simplify selection model; remove system selection (dotted line selection)
+      - new shortcut: Ctrl+Delete removes selected measure timewise
 28,jan (db)
       - export slash flats as quarter notes
-      - better BPM for each tempo text (traditional metronome numbers and 
+      - better BPM for each tempo text (traditional metronome numbers and
         correct speeds)
       - logical order for "Never" in preferences update tab
 24.jan (ws)

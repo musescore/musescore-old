@@ -856,6 +856,7 @@ void Note::endDrag()
       int key      = staff->key(tick).accidentalType;
       int npitch   = line2pitch(_line, clef, key);
       score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
+      score()->select(this, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -1239,7 +1240,7 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
             ChordProperties vp(this);
             int rv = vp.exec();
             if (rv) {
-                  foreach(Note* note, score()->selection()->noteList()) {
+                  foreach(Note* note, score()->selection().noteList()) {
                         Chord* chord = note->chord();
                         if (vp.small() != chord->small())
                               score()->undoChangeChordRestSize(chord, vp.small());

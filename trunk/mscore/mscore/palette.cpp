@@ -221,9 +221,9 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       Score* score   = mscore->currentScore();
       if (score == 0)
             return;
-      Selection* sel = score->selection();
+      const Selection& sel = score->selection();
 
-      if (sel->state() == SEL_NONE)
+      if (sel.state() == SEL_NONE)
             return;
 
       QMimeData* mimeData = new QMimeData;
@@ -234,14 +234,14 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
       score->startCmd();
-      if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
-            foreach(Element* e, sel->elements())
+      if (sel.state() == SEL_LIST) {
+            foreach(Element* e, sel.elements())
                   applyDrop(score, viewer, e, element);
             }
-      else if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
-            int track1 = sel->staffStart() * VOICES;
-            int track2 = sel->staffEnd() * VOICES;
-            for (Segment* s = sel->startSegment(); s && s != sel->endSegment(); s = s->next1()) {
+      else if (sel.state() == SEL_RANGE) {
+            int track1 = sel.staffStart() * VOICES;
+            int track2 = sel.staffEnd() * VOICES;
+            for (Segment* s = sel.startSegment(); s && s != sel.endSegment(); s = s->next1()) {
                   for (int track = track1; track < track2; ++track) {
                         Element* e = s->element(track);
                         if (e == 0)

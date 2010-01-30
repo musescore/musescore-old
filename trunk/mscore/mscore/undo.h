@@ -33,6 +33,7 @@
 #include "input.h"
 #include "style.h"
 #include "key.h"
+#include "select.h"
 
 class ElementList;
 class Element;
@@ -149,6 +150,8 @@ class UndoGroup : public QObject {
 class SaveState : public UndoCommand {
       InputState undoInputState;
       InputState redoInputState;
+      Selection  undoSelection;
+      Selection  redoSelection;
       Score* score;
 
    public:

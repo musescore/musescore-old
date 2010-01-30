@@ -517,15 +517,6 @@ void Score::addMeasure(MeasureBase* m)
       }
 
 //---------------------------------------------------------
-//   removeMeasure
-//---------------------------------------------------------
-
-void Score::removeMeasure(MeasureBase* im)
-      {
-      remove(im);
-      }
-
-//---------------------------------------------------------
 //   insertTime
 //---------------------------------------------------------
 
@@ -1808,7 +1799,6 @@ void Score::addElement(Element* element)
             return;
             }
 
-      select(element, SELECT_ADD, 0);
       if (element->parent() == 0)
             add(element);
       else
@@ -1880,7 +1870,6 @@ void Score::removeElement(Element* element)
       if (element->type() == BEAM)          // beam parent does not survive layout
             element->setParent(0);
 
-      select(element, SELECT_ADD, 0);
       if (parent)
             parent->remove(element);
       else
@@ -2133,3 +2122,14 @@ KeySig* Score::keySigFactory(KeySigEvent e)
             }
       return ks;
       }
+
+//---------------------------------------------------------
+//   setSelection
+//---------------------------------------------------------
+
+void Score::setSelection(const Selection& s)
+      {
+      deselectAll();
+      _selection = s;
+      }
+

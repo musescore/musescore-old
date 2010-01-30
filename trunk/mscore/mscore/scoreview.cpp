@@ -1322,11 +1322,11 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   p.drawRect(grip[i]);
                   }
             }
-      Selection* sel = _score->selection();
+      const Selection& sel = _score->selection();
 
-      if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
-            Segment* ss = sel->startSegment();
-            Segment* es = sel->endSegment();
+      if (sel.state() == SEL_RANGE) {
+            Segment* ss = sel.startSegment();
+            Segment* es = sel.endSegment();
 			if(!ss || !es)
 				return;
             p.setBrush(Qt::NoBrush);
@@ -1334,25 +1334,13 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             QPen pen(QColor(Qt::blue));
             pen.setWidthF(2.0 / p.matrix().m11());
 
-            if (sel->state() == SEL_SYSTEM) {
-                  pen.setStyle(Qt::DotLine);
-#ifdef Q_WS_MAC
-                  //TODO: remove if qt fix. This is a workaround for a qt bug on mac apparenlty
-			//For dotline the spaces are not proportional to the line width except for custom dash
-			QVector<qreal> dashes;
-			qreal space = 2;
-			dashes << 2 << space << 2;
-			pen.setDashPattern(dashes);
-#endif
-			}
-            else
-                  pen.setStyle(Qt::SolidLine);
+            pen.setStyle(Qt::SolidLine);
 
             p.setPen(pen);
             double _spatium = score()->spatium();
             double x2      = ss->canvasPos().x() - _spatium;
-            int staffStart = sel->staffStart();
-            int staffEnd   = sel->staffEnd();
+            int staffStart = sel.staffStart();
+            int staffEnd   = sel.staffEnd();
 
             System* system2 = ss->measure()->system();
             QPointF pt      = ss->canvasPos();
@@ -1486,8 +1474,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       const QMimeData* data = event->mimeData();
 
       if (data->hasFormat(mimeSymbolListFormat)
-         || data->hasFormat(mimeStaffListFormat)
-         || data->hasFormat(mimeMeasureListFormat)) {
+         || data->hasFormat(mimeStaffListFormat)) {
             event->acceptProposedAction();
             return;
             }
@@ -1753,10 +1740,6 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
             etype = STAFF_LIST;
             data = md->data(mimeStaffListFormat);
             }
-      else if (md->hasFormat(mimeMeasureListFormat)) {
-            etype = MEASURE_LIST;
-            data = md->data(mimeMeasureListFormat);
-            }
       else {
             _score->end();
             return;
@@ -1940,10 +1923,6 @@ if (debugMode)
       else if (md->hasFormat(mimeStaffListFormat)) {
             etype = STAFF_LIST;
             data = md->data(mimeStaffListFormat);
-            }
-      else if (md->hasFormat(mimeMeasureListFormat)) {
-            etype = MEASURE_LIST;
-            data = md->data(mimeMeasureListFormat);
             }
       else {
             printf("cannot drop this object: unknown mime type\n");
@@ -2345,10 +2324,10 @@ void ScoreView::editCopy()
 
 void ScoreView::normalCopy()
       {
-      QString mimeType = _score->selection()->mimeType();
+      QString mimeType = _score->selection().mimeType();
       if (!mimeType.isEmpty()) {
             QMimeData* mimeData = new QMimeData;
-            mimeData->setData(mimeType, _score->selection()->mimeData());
+            mimeData->setData(mimeType, _score->selection().mimeData());
             if (debugMode)
                   printf("cmd copy: <%s>\n", mimeData->data(mimeType).data());
             QApplication::clipboard()->setMimeData(mimeData);
@@ -2463,7 +2442,7 @@ void ScoreView::cmd(const QAction* a)
       else if (cmd == "rehearsalmark-text")
             cmdAddText(TEXT_REHEARSAL_MARK);
       else if (cmd == "edit-element") {
-            Element* e = _score->selection()->element();
+            Element* e = _score->selection().element();
             if (e) {
                   _score->setLayoutAll(false);
                   startEdit(e);
@@ -2519,7 +2498,7 @@ void ScoreView::cmd(const QAction* a)
             cmdEnterRest(Duration(Duration::V_EIGHT));
       else if (cmd.startsWith("interval")) {
             int n = cmd.mid(8).toInt();
-            QList<Note*> nl = _score->selection()->noteList();
+            QList<Note*> nl = _score->selection().noteList();
             if (!nl.isEmpty()) {
                   if (!noteEntryMode())
                         sm->postEvent(new CommandEvent("note-input"));
@@ -2616,7 +2595,7 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
-      foreach(Element* e, _score->selection()->elements()) {
+      foreach(Element* e, _score->selection().elements()) {
             _score->addRefresh(e->drag(delta));
             }
       _score->end();
@@ -2655,7 +2634,7 @@ void ScoreView::startNoteEntry()
       {
       _score->inputState()._segment = 0;
       Note* note  = 0;
-      Element* el = _score->selection()->activeCR() ? _score->selection()->activeCR() : _score->selection()->element();
+      Element* el = _score->selection().activeCR() ? _score->selection().activeCR() : _score->selection().element();
       if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
             int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
@@ -3019,7 +2998,7 @@ void ScoreView::endLasso()
 
 void ScoreView::deselectAll()
       {
-      _score->selection()->deselectAll();
+      _score->deselectAll();
       _score->end();
       }
 

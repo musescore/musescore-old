@@ -1323,7 +1323,7 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                   if (tp.applyToAll())
                         score()->scanElements(&sl, collectElements);
                   else
-                        sl = score()->selection()->elements();
+                        sl = score()->selection().elements();
                   QList<Element*> selectedElements;
                   foreach(Element* e, sl) {
                         if ((e->type() != type()) || (e->subtype() != subtype()))

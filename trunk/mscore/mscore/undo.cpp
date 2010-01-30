@@ -364,7 +364,7 @@ void ScoreView::endUndoRedo()
             // leave note entry mode
             postCmd("escape");
             }
-      _score->selection()->update();
+      _score->updateSelection();
       _score->setLayoutAll(true);
       _score->setPadState();
       if (noteEntryMode()) {
@@ -381,18 +381,27 @@ SaveState::SaveState(Score* s)
       {
       score          = s;
       redoInputState = score->inputState();
+      redoSelection  = score->selection();
       }
 
 void SaveState::undo()
       {
       redoInputState = score->inputState();
+      redoSelection  = score->selection();
+//      redoSelection.clearElements();
       score->setInputState(undoInputState);
+//      undoSelection.searchSelectedElements();
+      score->setSelection(undoSelection);
       }
 
 void SaveState::redo()
       {
       undoInputState = score->inputState();
+      undoSelection  = score->selection();
+//      undoSelection.clearElements();
       score->setInputState(redoInputState);
+//      redoSelection.searchSelectedElements();
+      score->setSelection(redoSelection);
       }
 
 //---------------------------------------------------------
@@ -1006,7 +1015,7 @@ InsertMeasure::InsertMeasure(MeasureBase* m)
 
 void InsertMeasure::undo()
       {
-      measure->score()->removeMeasure(measure);
+      measure->score()->remove(measure);
       }
 
 void InsertMeasure::redo()
