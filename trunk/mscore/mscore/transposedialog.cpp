@@ -315,28 +315,38 @@ void Score::transposeBySemitones(Note* n, int diff)
 
 void Score::transposeByKey(Note* n, int nKey, TransposeDirection dir)
       {
+      static int stepTable[15] = {
+            // C  G  D  A  E  B Fis
+               0, 4, 1, 5, 2, 6, 3,
+            };
+
       KeyList* km = n->staff()->keymap();
       int oKey    = km->key(n->chord()->tick()).accidentalType;
-      int semitones;
       int cofSteps;     // circle of fifth steps
-      if (nKey > oKey)
+      int diatonic;
+      if (nKey > oKey) {
             cofSteps = nKey - oKey;
-      else
+            diatonic = stepTable[(nKey + 7) % 7] - stepTable[(oKey + 7) % 7];
+            }
+      else {
             cofSteps = 12 - (oKey - nKey);
-      semitones = (cofSteps * 7) % 12;
-      int steps = (cofSteps * 4) % 7;
+            diatonic = 7  - stepTable[(oKey + 7) % 7] - stepTable[(nKey + 7) % 7];
+            }
+      int chromatic = (cofSteps * 7) % 12;
 
-printf("transposeByKey %p %d %d-%d cofSteps %d, semitones %d steps %d\n",
-   n, n->chord()->tick(), oKey, nKey, cofSteps, semitones, steps);
 
-      if ((dir == TRANSPOSE_CLOSEST) && (semitones > 6))
+      if ((dir == TRANSPOSE_CLOSEST) && (chromatic > 6))
             dir = TRANSPOSE_DOWN;
 
       if (dir == TRANSPOSE_DOWN) {
-            semitones = -semitones;
-            steps = -steps;
+            chromatic = chromatic - 12;
+            diatonic  = diatonic - 7;
             }
-      transposeByInterval(n, steps, semitones);
+printf("transposeByKey %p at %d key %d - %d -> chromatic %d diatonic %d %s\n",
+   n, n->chord()->tick(), oKey, nKey, chromatic, diatonic,
+   dir == TRANSPOSE_DOWN ? "down" : "up");
+
+      transposeByInterval(n, diatonic, chromatic);
       }
 
 //---------------------------------------------------------
