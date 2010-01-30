@@ -144,7 +144,7 @@ void Seq::selectionChanged(int mode)
       if (tick == -1)
             return;
 
-      if (mode != SEL_SINGLE || state == STOP)
+      if ((mode != SEL_LIST) || (state == STOP))
             cs->setPlayPos(tick);
       else
             seek(tick);

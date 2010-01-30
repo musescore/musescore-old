@@ -28,11 +28,10 @@
 //---------------------------------------------------------
 
 enum SelState {
-      SEL_NONE,         // nothing is selected
-      SEL_SINGLE,       // a single object is selected
-      SEL_MULT,         // more than one object is selected
-      SEL_STAFF,        // a range in one or more staffs is selected
-      SEL_SYSTEM,       // a system range ("passage") is selected
+      SEL_NONE,   // nothing is selected
+      SEL_LIST,   // disjoint selection
+      SEL_RANGE,  // adjacent selection, a range in one or more staves
+                  // is selected
       };
 
 class Score;
@@ -51,18 +50,20 @@ struct ElementPattern;
 class Selection {
       Score* _score;
       SelState _state;
-      QList<Element*> _el;          // valid in mode SEL_SINGLE and SEL_MULT
+      QList<Element*> _el;          // valid in mode SEL_LIST
+
+      int _staffStart;              // valid if selState is SEL_RANGE
+      int _staffEnd;
       Segment* _startSegment;
       Segment* _endSegment;         // next segment after selection
-      Segment* _activeSegment;
 
-      int _staffStart;              // valid if selState is SEL_STAFF
-      int _staffEnd;                // valid if selState is SEL_STAFF
+      Segment* _activeSegment;
       int _activeTrack;
 
       QByteArray staffMimeData() const;
 
    public:
+      Selection()                      { _score = 0; _state = SEL_NONE; }
       Selection(Score*);
       Score* score() const             { return _score; }
       SelState state() const           { return _state; }
@@ -70,7 +71,8 @@ class Selection {
 
       void searchSelectedElements();
       const QList<Element*>& elements() const { return _el; }
-      void clearElements()             { _el.clear(); }
+      void clearElements()                    { _el.clear(); }
+      bool isSingle() const                   { return (_state == SEL_LIST) && (_el.size() == 1); }
       QList<Note*> noteList() const;
       void add(Element*);
       void append(Element* el)         { _el.append(el); }

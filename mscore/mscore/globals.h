@@ -50,7 +50,6 @@ extern double converterDpi;
 static const char mimeSymbolFormat[]      = "application/mscore/symbol";
 static const char mimeSymbolListFormat[]  = "application/mscore/symbollist";
 static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
-static const char mimeMeasureListFormat[] = "application/mscore/measurelist";
 
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;           // printer points per inch

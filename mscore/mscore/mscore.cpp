@@ -2159,7 +2159,6 @@ void MuseScore::clipboardChanged()
 
       bool flag = ms->hasFormat(mimeSymbolFormat)
             ||    ms->hasFormat(mimeStaffListFormat)
-            ||    ms->hasFormat(mimeMeasureListFormat)
             ||    ms->hasFormat(mimeSymbolListFormat);
       // TODO: depends on selection state
       getAction("paste")->setEnabled(flag);
@@ -2184,9 +2183,9 @@ void MuseScore::changeState(ScoreState val)
             else if (strcmp(s->xml, "redo") == 0)
                   s->action->setEnabled((s->state & val) && _undoGroup->canRedo());
             else if (strcmp(s->xml, "cut") == 0)
-                  s->action->setEnabled(cs && cs->selection()->state());
+                  s->action->setEnabled(cs && cs->selection().state());
             else if (strcmp(s->xml, "copy") == 0)
-                  s->action->setEnabled(cs && cs->selection()->state());
+                  s->action->setEnabled(cs && cs->selection().state());
             else if (strcmp(s->xml, "synth-control") == 0) {
                   Driver* driver = seq ? seq->getDriver() : 0;
                   s->action->setEnabled(driver && driver->getSynth());

@@ -98,7 +98,7 @@ void Score::transpose()
       {
       if (last() == 0)     // empty score?
             return;
-      if (selection()->state() == SEL_NONE) {
+      if (selection().state() == SEL_NONE) {
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
                tr("MuseScore: transpose"),
                tr("There is nothing selected. Transpose whole score?"),
@@ -110,7 +110,7 @@ void Score::transpose()
             //
             // select all
             //
-            _selection.setState(SEL_SYSTEM);
+            _selection.setState(SEL_RANGE);
             _selection.setStartSegment(tick2segment(0));
             _selection.setEndSegment(
                tick2segment(last()->tick() + last()->tickLen())
@@ -119,12 +119,12 @@ void Score::transpose()
             _selection.setStaffEnd(nstaves());
             }
       TransposeDialog td;
-      td.enableTransposeKeys(_selection.state() == SEL_SYSTEM);
+      td.enableTransposeKeys(_selection.state() == SEL_RANGE);
       int startStaffIdx = 0;
       int startTick = 0;
-      if (selection()->state() == SEL_STAFF || selection()->state() == SEL_SYSTEM) {
-            startStaffIdx = selection()->staffStart();
-            startTick     = selection()->tickStart();
+      if (selection().state() == SEL_RANGE) {
+            startStaffIdx = selection().staffStart();
+            startTick     = selection().tickStart();
             }
       KeyList* km = staff(startStaffIdx)->keymap();
       int key     = km->key(startTick).accidentalType;
@@ -143,7 +143,7 @@ void Score::transpose()
       bool trKeys              = td.getTransposeKeys();
       bool transposeChordNames = td.getTransposeChordNames();
 
-      if (_selection.state() != SEL_SYSTEM)
+      if (_selection.state() != SEL_RANGE)
             trKeys = false;
       int d = semitones < 0 ? -semitones : semitones;
       bool fullOctave = (d % 12) == 0;
@@ -160,7 +160,7 @@ void Score::transpose()
             chromatic = -chromatic;
             }
 
-      if (_selection.state() == SEL_SINGLE || _selection.state() == SEL_MULT) {
+      if (_selection.state() == SEL_RANGE) {
             foreach(Element* e, _selection.elements()) {
                   if (e->type() != NOTE)
                         continue;
@@ -175,10 +175,6 @@ void Score::transpose()
 
       int startTrack = _selection.staffStart() * VOICES;
       int endTrack   = _selection.staffEnd() * VOICES;
-      if (_selection.state() == SEL_SYSTEM) {
-            startTrack = 0;
-            endTrack   = nstaves() * VOICES;
-            }
 
       for (int st = startTrack; st < endTrack; ++st) {
             for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {

@@ -255,26 +255,26 @@ void Score::padToggle(int n)
                   _is.rest = false;
             }
 
-      if (noteEntryMode() || selection()->state() != SEL_SINGLE) {
+      if (noteEntryMode() || !selection().isSingle()) {
             setPadState();    // updates dot state
             return;
             }
 
       //do not allow to add a dot on a full measure rest
-      if(selection()->state() == SEL_SINGLE){
-          Element* e = selection()->element();
-          if (e && e->type() == REST) {
-              Rest* r = static_cast<Rest*>(e);
-              Duration d = r->duration();
-              if (d.type() == Duration::V_MEASURE){
-                    _is.setDots(0);
-                    setPadState();    // updates dot state
-                    return;
-              }
-          }
-      }
+      if (selection().isSingle()) {
+            Element* e = selection().element();
+            if (e && e->type() == REST) {
+                  Rest* r = static_cast<Rest*>(e);
+                  Duration d = r->duration();
+                  if (d.type() == Duration::V_MEASURE) {
+                        _is.setDots(0);
+                        setPadState();    // updates dot state
+                        return;
+                        }
+                  }
+            }
 
-      Element* el = selection()->element();
+      Element* el = selection().element();
       if (el->type() == NOTE)
             el = el->parent();
       if (!el->isChordRest())

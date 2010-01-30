@@ -507,7 +507,6 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             if (on == 0)
                   return 0;
             Note* n = addNote(on->chord(), pitch);
-            select(n, SELECT_SINGLE, 0);
             setLayoutAll(false);
             setLayout(on->chord()->measure());
             moveToNextInputPos();
@@ -1317,7 +1316,7 @@ void Score::upDown(bool up, bool octave)
       startLayout = 0;        // DEBUG
       ElementList el;
 
-      QList<Note*> nl = selection()->noteList();
+      QList<Note*> nl = selection().noteList();
 
       int tick = -1;
       bool playNotes = true;
@@ -1384,7 +1383,7 @@ void Score::upDown(bool up, bool octave)
             if (playNotes)
                   mscore->play(oNote);
             }
-      selection()->updateState();     // accidentals may have changed
+      _selection.updateState();     // accidentals may have changed
       }
 
 //---------------------------------------------------------
@@ -1511,14 +1510,14 @@ void Score::cmdInsertMeasures(int n)
 
 void Score::insertMeasures(int n, int type)
       {
-	if (selection()->state() != SEL_STAFF && selection()->state() != SEL_SYSTEM) {
+	if (selection().state() != SEL_RANGE) {
 		QMessageBox::warning(0, "MuseScore",
 			tr("No Measure selected:\n"
 			"please select a measure and try again"));
 		return;
             }
 
-	int tick  = selection()->startSegment()->tick();
+	int tick  = selection().startSegment()->tick();
 	int ticks = _sigmap->ticksMeasure(tick == 0 ? 0 : tick-1);
 
 	for (int i = 0; i < n; ++i) {
@@ -1625,7 +1624,7 @@ void Score::insertMeasures(int n, int type)
 
 void Score::addArticulation(int attr)
       {
-      foreach(Element* el, selection()->elements()) {
+      foreach(Element* el, selection().elements()) {
             if (el->type() == NOTE || el->type() == CHORD) {
                   Articulation* na = new Articulation(this);
                   na->setSubtype(attr);
@@ -1644,7 +1643,7 @@ void Score::addArticulation(int attr)
 
 void Score::addAccidental(int idx)
       {
-      foreach(Note* note, selection()->noteList())
+      foreach(Note* note, selection().noteList())
             addAccidental(note, idx);
       }
 
@@ -1723,7 +1722,7 @@ void Score::addArticulation(Element* el, Articulation* atr)
 
 void Score::toDefault()
       {
-      foreach(Element* e, selection()->elements())
+      foreach(Element* e, selection().elements())
             e->toDefault();
       layoutAll = true;
       setClean(false);
@@ -1782,10 +1781,10 @@ void Score::moveDown(Chord* chord)
 
 void Score::cmdAddStretch(double val)
       {
-      if (selection()->state() != SEL_SYSTEM && selection()->state() != SEL_STAFF)
+      if (selection().state() != SEL_RANGE)
             return;
-      int startTick = selection()->startSegment()->tick();
-      int endTick   = selection()->endSegment()->tick();
+      int startTick = selection().startSegment()->tick();
+      int endTick   = selection().endSegment()->tick();
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             if (m->tick() < startTick)
                   continue;
@@ -1816,12 +1815,12 @@ void Score::cmdInsertClef(int type)
 
 void Score::cmdResetBeamMode()
       {
-      if (selection()->state() != SEL_SYSTEM && selection()->state() != SEL_STAFF) {
+      if (selection().state() != SEL_RANGE) {
             printf("no system or staff selected\n");
             return;
             }
-      int startTick = selection()->startSegment()->tick();
-      int endTick   = selection()->endSegment()->tick();
+      int startTick = selection().startSegment()->tick();
+      int endTick   = selection().endSegment()->tick();
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
@@ -1914,7 +1913,7 @@ void Score::cmd(const QAction* a)
             //
             // Hack for moving articulations while selected
             //
-            Element* el = selection()->element();
+            Element* el = selection().element();
             if (el && el->type() == ARTICULATION && cmd == "pitch-up")
                   cmdMove(el, QPointF(0.0, -.25));
             else if (el && el->type() == ARTICULATION && cmd == "pitch-down")
@@ -1948,6 +1947,11 @@ void Score::cmd(const QAction* a)
                   cmdDeleteSelection();
             else if (cmd == "delete-measures")
                   cmdDeleteSelectedMeasures();
+            else if (cmd == "time-delete") {
+                  // TODO:
+                  // remove measures if stave-range is 0-nstaves()
+                  cmdDeleteSelectedMeasures();
+                  }
             else if (cmd == "pitch-up")
                   upDown(true, false);
             else if (cmd == "pitch-down")
@@ -1958,7 +1962,7 @@ void Score::cmd(const QAction* a)
                   upDown(false, true);
             else if (cmd == "move-up") {
                   setLayoutAll(false);
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && el->type() == NOTE) {
                         Note* note = static_cast<Note*>(el);
                         moveUp(note->chord());
@@ -1966,14 +1970,14 @@ void Score::cmd(const QAction* a)
                   }
             else if (cmd == "move-down") {
                   setLayoutAll(false);
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && el->type() == NOTE) {
                         Note* note = static_cast<Note*>(el);
                         moveDown(note->chord());
                         }
                   }
             else if (cmd == "up-chord") {
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         Element* e = upAlt(el);
                         if (e) {
@@ -1987,7 +1991,7 @@ void Score::cmd(const QAction* a)
                   setLayoutAll(false);
                   }
             else if (cmd == "down-chord") {
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         Element* e = downAlt(el);
                         if (e) {
@@ -2001,7 +2005,7 @@ void Score::cmd(const QAction* a)
                   setLayoutAll(false);
                   }
             else if (cmd == "top-chord" ) {
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && el->type() == NOTE) {
                         Element* e = upAltCtrl(static_cast<Note*>(el));
                         if (e) {
@@ -2015,7 +2019,7 @@ void Score::cmd(const QAction* a)
                   setLayoutAll(false);
                   }
             else if (cmd == "bottom-chord") {
-                  Element* el = selection()->element(); // single selection
+                  Element* el = selection().element(); // single selection
                   if (el && el->type() == NOTE) {
                         Element* e = downAltCtrl(static_cast<Note*>(el));
                         if (e) {
@@ -2084,17 +2088,6 @@ void Score::cmd(const QAction* a)
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
                   cmdAddStretch(-0.1);
-/*            else if (cmd == "cut") {
-                  if (selection()->state() == SEL_SINGLE) {
-                        QMimeData* mimeData = new QMimeData;
-                        Element* el = selection()->element();
-                        mimeData->setData(mimeSymbolFormat, el->mimeData(QPointF()));
-                        QApplication::clipboard()->setMimeData(mimeData);
-                        deleteItem(el);
-                        selection()->clear();
-                        }
-                  }
-*/
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")
@@ -2106,11 +2099,11 @@ void Score::cmd(const QAction* a)
             else if (cmd == "select-all") {
                   MeasureBase* mb = _measures.last();
                   if (mb) {   // check for empty score
-                        selection()->setState(SEL_SYSTEM);
+                        _selection.setState(SEL_RANGE);
                         int tick = mb->tick();
                         if (mb->type() == MEASURE)
                               tick += static_cast<Measure*>(mb)->tickLen();
-                        selection()->setRange(tick2segment(0), tick2segment(tick), 0, nstaves());
+                        _selection.setRange(tick2segment(0), tick2segment(tick), 0, nstaves());
                         }
                   }
             else if (cmd == "transpose")
@@ -2144,7 +2137,7 @@ void Score::cmd(const QAction* a)
             else if (cmd == "voice-x34")
                   cmdExchangeVoice(2, 3);
             else if (cmd == "system-break") {
-                  Element* e = selection()->element();
+                  Element* e = selection().element();
                   if (e && e->type() == BAR_LINE) {
                         BarLine* barline = static_cast<BarLine*>(e);
                         Measure* measure = barline->measure();
@@ -2167,7 +2160,7 @@ void Score::cmd(const QAction* a)
                         }
                   }
             else if (cmd == "page-break") {
-                  Element* e = selection()->element();
+                  Element* e = selection().element();
                   if (e && e->type() == BAR_LINE) {
                         BarLine* barline = static_cast<BarLine*>(e);
                         Measure* measure = barline->measure();
@@ -2257,7 +2250,7 @@ void Score::cmdPaste()
             printf("no application mime data\n");
             return;
             }
-      if (selection()->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
+      if (selection().isSingle() && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
             QDomDocument doc;
             int line, column;
@@ -2276,23 +2269,23 @@ void Score::cmdPaste()
                   Element* el = Element::create(type, this);
                   if (el) {
                         el->read(e);
-                        addRefresh(selection()->element()->abbox());   // layout() ?!
-                        selection()->element()->drop(QPointF(), QPointF(), el);
-                        if (selection()->element())
-                              addRefresh(selection()->element()->abbox());
+                        addRefresh(selection().element()->abbox());   // layout() ?!
+                        selection().element()->drop(QPointF(), QPointF(), el);
+                        if (selection().element())
+                              addRefresh(selection().element()->abbox());
                         }
                   }
             else
                   printf("cannot read type\n");
             }
-      else if ((selection()->state() == SEL_STAFF || selection()->state() == SEL_SINGLE)
+      else if ((selection().state() == SEL_RANGE || selection().state() == SEL_LIST)
          && ms->hasFormat(mimeStaffListFormat)) {
             ChordRest* cr = 0;
-            if (selection()->state() == SEL_STAFF) {
-                  cr = selection()->firstChordRest();
+            if (selection().state() == SEL_RANGE) {
+                  cr = selection().firstChordRest();
                   }
-            else if (selection()->state() == SEL_SINGLE) {
-                  Element* e = selection()->element();
+            else if (selection().isSingle()) {
+                  Element* e = selection().element();
                   if (e->type() != NOTE && e->type() != REST) {
                         printf("cannot paste to %s\n", e->name());
                         return;
@@ -2320,12 +2313,12 @@ void Score::cmdPaste()
             docName = "--";
             pasteStaff(doc.documentElement(), cr);
             }
-      else if (ms->hasFormat(mimeSymbolListFormat) && selection()->state() == SEL_SINGLE) {
+      else if (ms->hasFormat(mimeSymbolListFormat) && selection().isSingle()) {
             printf("cannot paste symbol list to element\n");
             }
       else {
             printf("cannot paste selState %d staffList %d\n",
-               selection()->state(), ms->hasFormat(mimeStaffListFormat));
+               selection().state(), ms->hasFormat(mimeStaffListFormat));
             foreach(const QString& s, ms->formats())
                   printf("  format %s\n", qPrintable(s));
             }
@@ -2584,11 +2577,11 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   }
             Segment* s1 = tick2segment(dstTick);
             Segment* s2 = tick2segment(dstTick + tickLen);
-            selection()->setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
-            updateSelectedElements(SEL_STAFF);
-            if (selection()->state() != SEL_STAFF) {
-                  selection()->setState(SEL_STAFF);
-                  emit selectionChanged(int(selection()->state()));
+            _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
+            updateSelectedElements(SEL_RANGE);
+            if (selection().state() != SEL_RANGE) {
+                  _selection.setState(SEL_RANGE);
+                  emit selectionChanged(int(selection().state()));
                   }
             }
       connectTies();
@@ -2641,9 +2634,9 @@ void Score::moveToNextInputPos()
 
 Element* Score::move(const QString& cmd)
       {
-      ChordRest* cr = selection()->lastChordRest();
-      if (selection()->activeCR())
-            cr = selection()->activeCR();
+      ChordRest* cr = selection().lastChordRest();
+      if (selection().activeCR())
+            cr = selection().activeCR();
       if (!cr)
             return 0;
 
@@ -2699,9 +2692,9 @@ Element* Score::move(const QString& cmd)
 
 Element* Score::selectMove(const QString& cmd)
       {
-      ChordRest* cr = selection()->lastChordRest();
-      if (selection()->activeCR())
-            cr = selection()->activeCR();
+      ChordRest* cr = selection().lastChordRest();
+      if (selection().activeCR())
+            cr = selection().activeCR();
       ChordRest* el = 0;
       if (cr) {
             if (cmd == "select-next-chord")
@@ -2770,7 +2763,7 @@ void Score::cmdMirrorNoteHead()
 
 void Score::cmdHalfDuration()
       {
-      Element* el = selection()->element();
+      Element* el = selection().element();
       if (el == 0)
             return;
       if (el->type() == NOTE)
@@ -2800,7 +2793,7 @@ void Score::cmdHalfDuration()
 
 void Score::cmdDoubleDuration()
       {
-      Element* el = selection()->element();
+      Element* el = selection().element();
       if (el == 0)
             return;
       if (el->type() == NOTE)
@@ -2830,18 +2823,18 @@ void Score::cmdDoubleDuration()
 
 void Score::cmdRepeatSelection()
       {
-      if ((selection()->state() != SEL_STAFF) && (selection()->state() != SEL_SYSTEM)) {
+      if (selection().state() != SEL_RANGE) {
             printf("wrong selection type\n");
             return;
             }
 
-      QString mimeType = selection()->mimeType();
+      QString mimeType = selection().mimeType();
       if (mimeType.isEmpty()) {
             printf("mime type is empty\n");
             return;
             }
       QMimeData* mimeData = new QMimeData;
-      mimeData->setData(mimeType, selection()->mimeData());
+      mimeData->setData(mimeType, selection().mimeData());
       if (debugMode)
             printf("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
       QApplication::clipboard()->setMimeData(mimeData);
@@ -2861,8 +2854,8 @@ void Score::cmdRepeatSelection()
             }
       docName = "--";
 
-      int dStaff = selection()->staffStart();
-      Segment* endSegment = selection()->endSegment();
+      int dStaff = selection().staffStart();
+      Segment* endSegment = selection().endSegment();
       if (endSegment && endSegment->element(dStaff)) {
             Element* e = endSegment->element(dStaff * VOICES);
             if (e && e->isChordRest()) {

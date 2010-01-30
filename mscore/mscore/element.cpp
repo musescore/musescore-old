@@ -209,12 +209,12 @@ Element::~Element()
       if (selected())
             printf("===========~Element: selected\n");
       if (score()) {
-            foreach(Element* e, score()->selection()->elements()) {
+            foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {
 //                        if (debugMode)
                               printf("======~Element: %p still in selection!\n", this);
 //                        abort();
-                        score()->selection()->remove(this);
+                        score()->deselect(this);
                         }
                   }
             }
@@ -561,7 +561,7 @@ bool Element::genPropertyMenu(QMenu* popup) const
 
 void Element::propertyAction(ScoreView*, const QString& s)
       {
-      foreach(Element* e, score()->selection()->elements()) {
+      foreach(Element* e, score()->selection().elements()) {
             if (e->type() == type()) {
                   if (s == "invisible")
                         score()->toggleInvisible(e);
