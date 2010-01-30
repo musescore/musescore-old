@@ -254,7 +254,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diatonic, int chromatic)
                  continue;
            for (int st = startTrack; st < endTrack; ++st) {
                  Element* e = segment->element(st);
-                 if (!e)
+                 if (!e || e->type() != CHORD)
                        continue;
                  Chord* chord = static_cast<Chord*>(e);
                  NoteList* notes = chord->noteList();
