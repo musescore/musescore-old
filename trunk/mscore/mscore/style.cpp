@@ -275,7 +275,8 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_CENTER),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "System"), ff,  10, false, false, false,
-         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true,
+         0.0, 0.0, 25, Qt::black, false, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Staff"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
@@ -288,7 +289,8 @@ const TextStyle defaultTextStyleArray[] = {
          0.3, 1.0, 20, Qt::black, false, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Repeat Text"), ff,  12, false, false, false,
-         ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true),
+         ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true,
+         0.0, 0.0, 25, Qt::black, false, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Volta"), ff, 11, true, false, false,
          ALIGN_LEFT, 0.5, .0, OS, 0, 0, true),
