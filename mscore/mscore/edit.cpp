@@ -748,7 +748,7 @@ void Score::cmdAddTie()
                   return;
                   }
             startCmd();
-            Note* n = cmdAddPitch1(note->pitch(), false);
+            Note* n = addPitch(note->pitch(), false);
             if (n) {
                   n->setLine(note->line());
                   n->setTpc(note->tpc());
