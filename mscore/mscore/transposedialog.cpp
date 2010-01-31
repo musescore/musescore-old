@@ -386,7 +386,7 @@ printf("transpose keys\n");
                         continue;
                   if (s->tick() >= tickEnd)
                         break;
-                  KeySig* ks = static_cast<KeySig*>(s->element(staffIdx));
+                  KeySig* ks = static_cast<KeySig*>(s->element(staffIdx * VOICES));
                   if (ks) {
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
