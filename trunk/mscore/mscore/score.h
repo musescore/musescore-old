@@ -345,7 +345,6 @@ class Score : public QObject {
       bool doReLayout();
       void rebuildBspTree();
       Measure* skipEmptyMeasures(Measure*, System*);
-      void cmdRepeatSelection();
 
       void layoutStage1();
       void layoutStage2();
@@ -780,7 +779,7 @@ class Score : public QObject {
       void processMidiInput();
       Lyrics* addLyrics();
       void expandVoice();
-      Note* cmdAddPitch1(int pitch, bool addFlag);
+      Note* addPitch(int pitch, bool addFlag);
       void insertMeasures(int, int);
       int customKeySigIdx(KeySig*) const;
       int addCustomKeySig(KeySig*);

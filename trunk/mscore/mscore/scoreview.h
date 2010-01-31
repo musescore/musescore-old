@@ -158,12 +158,14 @@ class ScoreView : public QWidget {
       void harmonyEndEdit();
       void chordTab(bool back);
       void cmdAddPitch(int note, bool addFlag);
+      void cmdAddPitch1(int, bool);
       void cmdAddChordName();
       void cmdAddText(int style);
       void cmdEnterRest(const Duration& d);
       void cmdEnterRest();
       void cmdTuplet(int n, ChordRest* cr);
       void cmdTuplet(int);
+      void cmdRepeatSelection();
 
    private slots:
       void moveCursor();

@@ -416,26 +416,8 @@ void Score::cmdRemove(Element* e)
 void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
-
-      if (is._segment == 0) {
-            printf("cannot enter notes here (no chord rest at current position)\n");
-            return;
-            }
-      _score->startCmd();
-      _score->expandVoice();
-      if (is.cr() == 0) {
-            printf("cannot enter notes here (no chord rest at current position)\n");
-            return;
-            }
-      if (!noteEntryMode())
-            sm->postEvent(new CommandEvent("note-input"));
-
-      KeySigEvent key;
-
-      if (!preferences.alternateNoteEntryMethod)
-            key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
-      int pitch;
       Drumset* ds = is.drumset;
+      int pitch;
       if (ds) {
             char note1 = "CDEFGAB"[note];
             pitch = -1;
@@ -453,6 +435,9 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
                   }
             }
       else {
+            KeySigEvent key;
+            if (!preferences.alternateNoteEntryMethod)
+                  key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
             int octave = is.pitch / 12;
             pitch      = pitchKeyAdjust(note, key.accidentalType);
             int delta  = is.pitch - (octave*12 + pitch);
@@ -468,7 +453,31 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
                   is.pitch = 127;
             pitch = is.pitch;
             }
-      _score->cmdAddPitch1(pitch, addFlag);
+      cmdAddPitch1(pitch, addFlag);
+      }
+
+//---------------------------------------------------------
+//   cmdAddPitch1
+//---------------------------------------------------------
+
+void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
+      {
+      InputState& is = _score->inputState();
+
+      if (is._segment == 0) {
+            printf("cannot enter notes here (no chord rest at current position)\n");
+            return;
+            }
+      _score->startCmd();
+      _score->expandVoice();
+      if (is.cr() == 0) {
+            printf("cannot enter notes here (no chord rest at current position)\n");
+            return;
+            }
+      if (!noteEntryMode())
+            sm->postEvent(new CommandEvent("note-input"));
+
+      _score->addPitch(pitch, addFlag);
       moveCursor();
       ChordRest* cr = _score->inputState().cr();
       if (cr) {
@@ -496,10 +505,10 @@ void Score::expandVoice()
       }
 
 //---------------------------------------------------------
-//   cmdAddPitch1
+//   addPitch
 //---------------------------------------------------------
 
-Note* Score::cmdAddPitch1(int pitch, bool addFlag)
+Note* Score::addPitch(int pitch, bool addFlag)
       {
       if (addFlag) {
             // add note to chord
@@ -548,7 +557,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                         _is.slur->setEndElement(e);
                   }
             else
-                  printf("cmdAddPitch1: cannot find slur note\n");
+                  printf("addPitch: cannot find slur note\n");
             setLayoutAll(true);
             }
       moveToNextInputPos();
@@ -2200,10 +2209,6 @@ void Score::cmd(const QAction* a)
                   cmdDoubleDuration();
             else if (cmd == "half-duration")
                   cmdHalfDuration();
-            else if (cmd == "repeat-sel") {
-printf("repeat selection\n");
-                  cmdRepeatSelection();
-                  }
             else if (cmd == "")
                   ;
             else
@@ -2232,7 +2237,7 @@ void Score::processMidiInput()
                   midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
             else {
                   startCmd();
-                  cmdAddPitch1(ev.pitch, ev.chord);
+                  addPitch(ev.pitch, ev.chord);
                   layoutAll = true;
                   endCmd();
                   }
@@ -2821,20 +2826,27 @@ void Score::cmdDoubleDuration()
 //   cmdRepeatSelection
 //---------------------------------------------------------
 
-void Score::cmdRepeatSelection()
+void ScoreView::cmdRepeatSelection()
       {
-      if (selection().state() != SEL_RANGE) {
+      const Selection& selection = _score->selection();
+      if (selection.isSingle() && noteEntryMode()) {
+            const InputState& is = _score->inputState();
+            cmdAddPitch1(is.pitch, false);
+            return;
+            }
+
+      if (selection.state() != SEL_RANGE) {
             printf("wrong selection type\n");
             return;
             }
 
-      QString mimeType = selection().mimeType();
+      QString mimeType = selection.mimeType();
       if (mimeType.isEmpty()) {
             printf("mime type is empty\n");
             return;
             }
       QMimeData* mimeData = new QMimeData;
-      mimeData->setData(mimeType, selection().mimeData());
+      mimeData->setData(mimeType, selection.mimeData());
       if (debugMode)
             printf("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
       QApplication::clipboard()->setMimeData(mimeData);
@@ -2854,13 +2866,16 @@ void Score::cmdRepeatSelection()
             }
       docName = "--";
 
-      int dStaff = selection().staffStart();
-      Segment* endSegment = selection().endSegment();
+      int dStaff = selection.staffStart();
+      Segment* endSegment = selection.endSegment();
       if (endSegment && endSegment->element(dStaff)) {
             Element* e = endSegment->element(dStaff * VOICES);
             if (e && e->isChordRest()) {
                   ChordRest* cr = static_cast<ChordRest*>(e);
-                  pasteStaff(doc.documentElement(), cr);
+                  _score->startCmd();
+                  _score->pasteStaff(doc.documentElement(), cr);
+                  _score->setLayoutAll(true);
+                  _score->endCmd();
                   }
             else
                   printf("??? %p <%s>\n", e, e ? e->name() : "");

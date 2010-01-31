@@ -2525,6 +2525,8 @@ void ScoreView::cmd(const QAction* a)
             cmdTuplet(8);
       else if (cmd == "nonuplet")
             cmdTuplet(9);
+      else if (cmd == "repeat-sel")
+            cmdRepeatSelection();
       else
             _score->cmd(a);
       _score->processMidiInput();
