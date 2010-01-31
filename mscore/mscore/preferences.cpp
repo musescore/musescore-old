@@ -840,17 +840,19 @@ void PreferenceDialog::clearShortcutClicked()
 void PreferenceDialog::defineShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
-      QString str = active->data(0, Qt::UserRole).toString();
-      if (str.isEmpty())
-            return;
-      Shortcut* s = localShortcuts[str];
-      ShortcutCaptureDialog sc(s, localShortcuts, this);
-      if (sc.exec()) {
-            s->key = sc.getKey();
-            active->setText(1, s->key.toString(QKeySequence::NativeText));
-            shortcutsChanged = true;
-            }
-//      clearButton->setEnabled(true);
+      if(active){
+          QString str = active->data(0, Qt::UserRole).toString();
+          if (str.isEmpty())
+                return;
+          Shortcut* s = localShortcuts[str];
+          ShortcutCaptureDialog sc(s, localShortcuts, this);
+          if (sc.exec()) {
+                s->key = sc.getKey();
+                active->setText(1, s->key.toString(QKeySequence::NativeText));
+                shortcutsChanged = true;
+                }
+//        clearButton->setEnabled(true);
+          }
       }
 
 //---------------------------------------------------------
