@@ -1,4 +1,7 @@
-31.jan (lv)
+31.jan (ws)
+      - add systemFlag property to text style dialog and text property dialog
+      - on default set systemFlag for repeat text style and system text style
+      (lv)
       - fix MusicXML import/export of several clefs
 30.jan (ws)
       - simplify selection model; remove system selection (dotted line selection)

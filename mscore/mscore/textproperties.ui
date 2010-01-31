@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>515</width>
-    <height>373</height>
+    <width>411</width>
+    <height>323</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
@@ -348,7 +348,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label_23">
        <property name="sizePolicy">
@@ -364,6 +364,12 @@
      </item>
      <item>
       <widget class="Awl::ColorLabel" name="color">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -372,6 +378,27 @@
        </property>
        <property name="toolTip">
         <string>text color</string>
+       </property>
+       <zorder>horizontalSpacer_2</zorder>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="systemFlag">
+       <property name="text">
+        <string>System Flag</string>
        </property>
       </widget>
      </item>
@@ -400,7 +427,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <property name="topMargin">
-       <number>9</number>
+       <number>4</number>
       </property>
       <item row="0" column="0" rowspan="2">
        <layout class="QFormLayout" name="formLayout_3">
@@ -577,6 +604,9 @@
       <bool>true</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="topMargin">
+       <number>4</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
@@ -680,8 +710,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>frame</zorder>
-  <zorder>groupBox</zorder>
  </widget>
  <customwidgets>
   <customwidget>
