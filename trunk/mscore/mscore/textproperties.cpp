@@ -78,6 +78,8 @@ void TextProp::set(TextB* tb)
       else
             alignTop->setChecked(true);
 
+      systemFlag->setChecked(tb->systemFlag());
+
       QFont f = tb->defaultFont();
       fontBold->setChecked(f.bold());
       fontItalic->setChecked(f.italic());
@@ -127,6 +129,7 @@ void TextProp::get(TextB* tb)
       f.setUnderline(fontUnderline->isChecked());
       tb->setDefaultFont(f);
       tb->setColor(color->color());
+      tb->setSystemFlag(systemFlag->isChecked());
 
       int a = 0;
       if (alignHCenter->isChecked())
@@ -157,6 +160,7 @@ void TextProp::set(TextStyle* s)
       fontUnderline->setChecked(s->underline);
       fontSize->setValue(s->size);
 
+      systemFlag->setChecked(s->systemFlag);
       int a = s->align;
       if (a & ALIGN_HCENTER)
             alignHCenter->setChecked(true);
@@ -229,5 +233,6 @@ void TextProp::get(TextStyle* s)
       s->circle       = circleButton->isChecked();
       s->frameRound   = frameRound->value();
       s->hasFrame     = frame->isChecked();
+      s->systemFlag   = systemFlag->isChecked();
       }
 
