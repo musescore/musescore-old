@@ -491,8 +491,10 @@ int chromatic2diatonic(int val)
       if (down)
             val = -val;
       val = val % 12;
+      int octave = val / 12;
       int intervalIndex = il[val];
       int steps = intervalList[intervalIndex].steps;
+      steps = steps + octave * 7;
       return down ? -steps : steps;
       }
 
