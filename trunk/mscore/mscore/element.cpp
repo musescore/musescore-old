@@ -206,6 +206,7 @@ bool Element::operator>(const Element& el) const
 
 Element::~Element()
       {
+//      printf("~Element %p\n", this);
       if (selected())
             printf("===========~Element: selected\n");
       if (score()) {
