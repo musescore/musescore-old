@@ -242,6 +242,7 @@ class TextC : public TextB {
       virtual TextC* clone() const;
       virtual TextBase* textBase() const { return _tb; }
       void baseChanged();
+      void changeBase(TextBase* b);
       };
 
 //---------------------------------------------------------

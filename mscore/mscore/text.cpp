@@ -429,7 +429,7 @@ TextC::TextC(const TextC& e)
 TextC* TextC::clone() const
       {
       TextC* t = new TextC(*this);
-      _tb->decRefCount();
+      //? _tb->decRefCount();
       t->_tb = new TextBase(*_tb);
       return t;
       }
@@ -439,6 +439,20 @@ TextC::~TextC()
       _tb->decRefCount();
       if (_tb->refCount() <= 0)
             delete _tb;
+      }
+
+//---------------------------------------------------------
+//   changeBase
+//---------------------------------------------------------
+
+void TextC::changeBase(TextBase* b)
+      {
+      _tb->decRefCount();
+      if (_tb->refCount() <= 0)
+            delete _tb;
+      _tb = b;
+      _tb->incRefCount();
+      baseChanged();
       }
 
 //---------------------------------------------------------

@@ -472,18 +472,21 @@ void System::setInstrumentName(int staffIdx)
       // instrument name can change after inserting/deleting parts
       //    do not delete if in edit mode
       //
-      if (staff->instrumentName && !staff->instrumentName->editMode()) {
-            if (staff->instrumentName->selected())
-                  _score->deselect(staff->instrumentName);
-            delete staff->instrumentName;
-            staff->instrumentName = 0;
-            }
-      if (!staff->instrumentName) {
+      TextC* iname = staff->instrumentName;
+      Part* part = s->part();
+      if (!iname) {
             Part* part = s->part();
-            staff->instrumentName = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            iname = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            staff->instrumentName = iname;
             }
-      staff->instrumentName->setParent(this);
-      staff->instrumentName->setTrack(staffIdx * VOICES);
+      else {
+            TextBase* otb = iname->textBase();
+            TextBase* ntb = _firstSystem ? part->longName()->textBase() : part->shortName()->textBase();
+            if (otb != ntb)
+                  iname->changeBase(ntb);
+            }
+      iname->setParent(this);
+      iname->setTrack(staffIdx * VOICES);
       }
 
 //---------------------------------------------------------

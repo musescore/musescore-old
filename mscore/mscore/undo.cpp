@@ -1884,12 +1884,14 @@ void ChangeBracketSpan::flip()
 
 void EditText::undo()
       {
+printf("EditText %p->%p::undo: undoLevel %d\n", text, text->doc(), undoLevel);
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->undo();
       }
 
 void EditText::redo()
       {
+printf("EditText %p->%p::redo: undoLevel %d\n", text, text->doc(), undoLevel);
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->redo();
       }
