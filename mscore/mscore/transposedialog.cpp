@@ -152,7 +152,7 @@ void Score::transpose()
             transposeChordNames = false;
             }
 
-      int interval = td.transposeInterval();
+      int interval  = td.transposeInterval();
       int diatonic  = intervalList[interval].steps;
       int chromatic = intervalList[interval].semitones;
       if (td.direction() == TRANSPOSE_DOWN) {
@@ -160,7 +160,7 @@ void Score::transpose()
             chromatic = -chromatic;
             }
 
-      if (_selection.state() == SEL_RANGE) {
+      if (_selection.state() == SEL_LIST) {
             foreach(Element* e, _selection.elements()) {
                   if (e->type() != NOTE)
                         continue;
@@ -189,7 +189,7 @@ void Score::transpose()
                   QList<Note*> nl;
                   for (iNote i = notes->begin(); i != notes->end(); ++i)
                         nl.append(i->second);
-                  foreach(Note* n, nl) {
+                  foreach (Note* n, nl) {
                         if (td.mode() == TRANSPOSE_BY_KEY)
                               transposeByKey(n, td.transposeKey(), td.direction());
                         else
@@ -306,7 +306,6 @@ void Score::transposeBySemitones(Note* n, int diff)
 //---------------------------------------------------------
 //   transposeByKey
 //    keysig -   -7(Cb) - +7(C#)
-//    TODO
 //---------------------------------------------------------
 
 void Score::transposeByKey(Note* n, int nKey, TransposeDirection dir)
@@ -322,12 +321,13 @@ void Score::transposeByKey(Note* n, int nKey, TransposeDirection dir)
       int diatonic;
       if (nKey > oKey) {
             cofSteps = nKey - oKey;
-            diatonic = stepTable[(nKey + 7) % 7] - stepTable[(oKey + 7) % 7];
             }
       else {
             cofSteps = 12 - (oKey - nKey);
-            diatonic = 7  - stepTable[(oKey + 7) % 7] - stepTable[(nKey + 7) % 7];
             }
+      diatonic = stepTable[(nKey + 7) % 7] - stepTable[(oKey + 7) % 7];
+      if (diatonic < 0)
+            diatonic += 7;
       int chromatic = (cofSteps * 7) % 12;
 
 
