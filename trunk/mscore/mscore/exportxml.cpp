@@ -3311,7 +3311,7 @@ foreach(Element* el, *(score->gel())) {
                         // at line beginning
                         int ti = ksig->tick();
                         //TODO_K
-                        KeyList* kl = score->staff(0)->keymap();
+                        KeyList* kl = score->staff(strack/VOICES)->keymap();
                         KeySigEvent key = kl->key(ti);
                         ciKeyList ci = kl->find(ti);
                         if (ci != kl->end()) {
@@ -3380,8 +3380,8 @@ foreach(Element* el, *(score->gel())) {
                         }
                         if (part->transposeDiatonic() || part->transposeChromatic()) {
                           xml.stag("transpose");
-                          xml.tag("chromatic", part->transposeChromatic());
                           xml.tag("diatonic", part->transposeDiatonic());
+                          xml.tag("chromatic", part->transposeChromatic());
                           xml.etag();
                         }
                       }
