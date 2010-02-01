@@ -8,26 +8,26 @@
         <translation>Versie: 0.9.0</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Bezoek &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; voor nieuwe versies en meer informatie.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Ondersteun MuseScore met &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;uw donatie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Bezoek &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; voor nieuwe versies en meer informatie.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Ondersteun MuseScore met &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;uw donatie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer en Anderen. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Gepubliseerd onder de GNU Generale Publieke Licensie&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer en Anderen. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Gepubliseerd onder de GNU Generale Publieke Licensie&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>AboutBox</source>
@@ -1013,7 +1013,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1277,14 +1277,6 @@ mislukt: </translation>
         <translation>Naam</translation>
     </message>
     <message>
-        <source>max. Pitch</source>
-        <translation>max. Toonhoogte</translation>
-    </message>
-    <message>
-        <source>min. Pitch</source>
-        <translation>min. Toonhoogte</translation>
-    </message>
-    <message>
         <source>MuseScore: Edit Instrument Properties</source>
         <translation>MuseScore: Bewerk Instrument-eigenschappen</translation>
     </message>
@@ -1311,6 +1303,10 @@ mislukt: </translation>
     <message>
         <source>Short Name</source>
         <translation>Korte Naam</translation>
+    </message>
+    <message>
+        <source>Pitch</source>
+        <translation type="unfinished">Toonhoogte</translation>
     </message>
 </context>
 <context>
@@ -1344,10 +1340,6 @@ mislukt: </translation>
         <translation>Lijnen:</translation>
     </message>
     <message>
-        <source>Play Transposition (Semitones)</source>
-        <translation>Speel Transpositie (Halve tonen)</translation>
-    </message>
-    <message>
         <source>Long Instrument Name:</source>
         <translation>Lange Naam Instrument:</translation>
     </message>
@@ -1378,6 +1370,122 @@ mislukt: </translation>
     <message>
         <source>Part Properties</source>
         <translation>Partij-eigenschappen</translation>
+    </message>
+    <message>
+        <source>Play Transposition:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect Unison</source>
+        <translation type="unfinished">Reine prime</translation>
+    </message>
+    <message>
+        <source>Augmented Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Second</source>
+        <translation type="unfinished">Verminderde secunde</translation>
+    </message>
+    <message>
+        <source>Minor Second</source>
+        <translation type="unfinished">Kleine secunde</translation>
+    </message>
+    <message>
+        <source>Major Second</source>
+        <translation type="unfinished">Grote secunde</translation>
+    </message>
+    <message>
+        <source>Augmented Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Third</source>
+        <translation type="unfinished">Verminderde terts</translation>
+    </message>
+    <message>
+        <source>Minor Third</source>
+        <translation type="unfinished">Kleine terts</translation>
+    </message>
+    <message>
+        <source>Major Third</source>
+        <translation type="unfinished">Grote terts</translation>
+    </message>
+    <message>
+        <source>Augmented Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Fourth</source>
+        <translation type="unfinished">Verminderde kwart</translation>
+    </message>
+    <message>
+        <source>Perfect Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Augmented Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diminished Fifth</source>
+        <translation type="unfinished">Verminderde kwint</translation>
+    </message>
+    <message>
+        <source>Perfect Fifth</source>
+        <translation type="unfinished">Reine kwint</translation>
+    </message>
+    <message>
+        <source>Augmented Fifth</source>
+        <translation type="unfinished">Vergrote kwint</translation>
+    </message>
+    <message>
+        <source>Diminished Sixth</source>
+        <translation type="unfinished">Verminderde sext</translation>
+    </message>
+    <message>
+        <source>Minor Sixth</source>
+        <translation type="unfinished">Kleine sext</translation>
+    </message>
+    <message>
+        <source>Major Sixth</source>
+        <translation type="unfinished">Grote sext</translation>
+    </message>
+    <message>
+        <source>Augmented Sixth</source>
+        <translation type="unfinished">Vergrote sext</translation>
+    </message>
+    <message>
+        <source>Diminished Seventh</source>
+        <translation type="unfinished">Verminderde septiem</translation>
+    </message>
+    <message>
+        <source>Minor Seventh</source>
+        <translation type="unfinished">Kleine septiem</translation>
+    </message>
+    <message>
+        <source>Major Seventh</source>
+        <translation type="unfinished">Grote septiem</translation>
+    </message>
+    <message>
+        <source>Augmented Seventh</source>
+        <translation type="unfinished">Vergrote septiem</translation>
+    </message>
+    <message>
+        <source>Diminished Octave</source>
+        <translation type="unfinished">Verminderde octaaf</translation>
+    </message>
+    <message>
+        <source>Perfect Octave</source>
+        <translation type="unfinished">Octaaf</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">omhoog</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">omlaag</translation>
     </message>
 </context>
 <context>
@@ -1722,7 +1830,7 @@ mislukt: </translation>
         <translation>Systeemafstand</translation>
     </message>
     <message>
-        <source>Show repeat bar tips ("winged" repeats)</source>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
         <translation>Toon herhalen bar tips</translation>
     </message>
     <message>
@@ -2693,8 +2801,8 @@ mislukt: </translation>
 <context>
     <name>MuseScore</name>
     <message>
-        <source/>
-        <translation/>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <source>8va</source>
@@ -2889,9 +2997,9 @@ mislukt: </translation>
         <translation>MuseScore: fout</translation>
     </message>
     <message>
-        <source>Save changes to the score "%1"
+        <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Bewaar de wijzigingen aan partituur "%1"
+        <translation>Bewaar de wijzigingen aan partituur &quot;%1&quot;
 voordat u afsluit?</translation>
     </message>
     <message>
@@ -3160,15 +3268,15 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>1 between notes</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>3 between notes</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>2 between notes</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3224,15 +3332,15 @@ Sessie herstellen?</translation>
     </message>
     <message>
         <source>1 through stem</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>2 through stem</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>3 through stem</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
@@ -3343,10 +3451,10 @@ Sessie herstellen?</translation>
     <message>
         <source>
 
-From the "Help" menu try choosing "Online Handbook" instead.</source>
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>
 
-Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
+Probeer van het &quot;Help&quot; menu te kiezen voor &quot;Online handboek&quot;.</translation>
     </message>
     <message>
         <source>Tuplets</source>
@@ -3676,11 +3784,11 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Even Page Margins</source>
-        <translation>Marges van Even Pagina's</translation>
+        <translation>Marges van Even Pagina&apos;s</translation>
     </message>
     <message>
         <source>Odd Page Margins</source>
-        <translation>Marges van Oneven Pagina's</translation>
+        <translation>Marges van Oneven Pagina&apos;s</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -5900,6 +6008,10 @@ mislukt: </translation>
         <source>align top edge of text to reference point</source>
         <translation>uitlijnen bovenrand van tekst naar referentiepunt</translation>
     </message>
+    <message>
+        <source>System Flag</source>
+        <translation type="unfinished">Systeem Vlag</translation>
+    </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
@@ -5960,14 +6072,14 @@ mislukt: </translation>
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Tip: u kunt ook na het maken van de partituur nog maten toevoegen of verwijderen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Tip: u kunt ook na het maken van de partituur nog maten toevoegen of verwijderen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
@@ -6094,7 +6206,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Diminished Second</source>
@@ -6110,7 +6222,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Diminished Third</source>
@@ -6126,7 +6238,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
@@ -6134,11 +6246,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
@@ -6312,8 +6424,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished">Er is een update voor MuseScore beschikbaar: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation type="unfinished">Er is een update voor MuseScore beschikbaar: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -8094,16 +8206,24 @@ p, li { white-space: pre-wrap; }
         <source>Delete contents of the selected measures</source>
         <translation>Verwijder inhoud van geselecteerde maten</translation>
     </message>
+    <message>
+        <source>Timewise Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete element and duration</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>articulation</name>
     <message>
         <source>turn</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>prall</source>
@@ -8111,7 +8231,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>trill</source>
@@ -8119,7 +8239,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upbow</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
@@ -8143,7 +8263,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plusstop</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>downmordent</source>
@@ -8167,11 +8287,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dportato</source>
@@ -8195,7 +8315,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverseturn</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>staccato</source>
@@ -8203,19 +8323,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>upprall</source>
@@ -8389,7 +8509,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Lasso</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8481,7 +8601,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Compound</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>NoteHead</source>
@@ -8501,7 +8621,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>RubberBand</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8604,7 +8724,7 @@ p, li { white-space: pre-wrap; }
     <name>magTable</name>
     <message>
         <source>Two Pages</source>
-        <translation>Twee Pagina's</translation>
+        <translation>Twee Pagina&apos;s</translation>
     </message>
     <message>
         <source>Whole Page</source>
@@ -8753,19 +8873,19 @@ p, li { white-space: pre-wrap; }
         <translation>achtste rust</translation>
     </message>
     <message>
-        <source>16' rest</source>
+        <source>16&apos; rest</source>
         <translation>16e rust</translation>
     </message>
     <message>
-        <source>32' rest</source>
+        <source>32&apos; rest</source>
         <translation>32e rust</translation>
     </message>
     <message>
-        <source>64' rest</source>
+        <source>64&apos; rest</source>
         <translation>64e rust</translation>
     </message>
     <message>
-        <source>128' rest</source>
+        <source>128&apos; rest</source>
         <translation>128e rust</translation>
     </message>
     <message>
@@ -8962,7 +9082,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d1do head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u1do head</source>
@@ -8970,7 +9090,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d2do head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u2do head</source>
@@ -8986,7 +9106,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d1re head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u2re head</source>
@@ -8994,7 +9114,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d2re head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>s0mi head</source>
@@ -9014,7 +9134,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d0fa head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u1fa head</source>
@@ -9022,7 +9142,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d1fa head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u2fa head</source>
@@ -9030,7 +9150,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d2fa head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>s0la head</source>
@@ -9054,7 +9174,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d1ti head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>u2ti head</source>
@@ -9062,7 +9182,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d2ti head</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -9074,27 +9194,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dverylongfermata</source>
@@ -9102,7 +9222,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9150,11 +9270,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plus stop</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>up bow</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>down bow</source>
@@ -9162,11 +9282,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverse turn</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>turn</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>trill</source>
@@ -9310,11 +9430,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
@@ -9330,7 +9450,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d128flag</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>alto clef</source>
@@ -9430,15 +9550,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc freebase</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation/>
+        <translation></translation>
     </message>
     <message>
         <source>acc old ee</source>

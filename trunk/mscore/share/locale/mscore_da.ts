@@ -1285,14 +1285,6 @@ fejl: </translation>
         <translation>Kort navn</translation>
     </message>
     <message>
-        <source>min. Pitch</source>
-        <translation>min. Tonehøjde</translation>
-    </message>
-    <message>
-        <source>max. Pitch</source>
-        <translation>maks. Tonehøjde</translation>
-    </message>
-    <message>
         <source>Transpose</source>
         <translation>Flyt</translation>
     </message>
@@ -1311,6 +1303,10 @@ fejl: </translation>
     <message>
         <source>Cancel</source>
         <translation>Fortryd</translation>
+    </message>
+    <message>
+        <source>Pitch</source>
+        <translation type="unfinished">Tonehøjde</translation>
     </message>
 </context>
 <context>
@@ -1344,10 +1340,6 @@ fejl: </translation>
         <translation>Kort instrumentnavn:</translation>
     </message>
     <message>
-        <source>Play Transposition (Semitones)</source>
-        <translation>Spil transponeret (halvtoner)</translation>
-    </message>
-    <message>
         <source>Use Drumset</source>
         <translation>Brug trommesæt</translation>
     </message>
@@ -1378,6 +1370,122 @@ fejl: </translation>
     <message>
         <source>Professional:</source>
         <translation>Professionel:</translation>
+    </message>
+    <message>
+        <source>Play Transposition:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Perfect Unison</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Unison</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Second</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Minor Second</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Major Second</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Second</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Third</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Minor Third</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Major Third</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Third</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Fourth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Perfect Fourth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Fourth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Fifth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Perfect Fifth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Fifth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Sixth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Minor Sixth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Major Sixth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Sixth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Seventh</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Minor Seventh</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Major Seventh</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Augmented Seventh</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Diminished Octave</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Perfect Octave</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="unfinished">op</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="unfinished">ned</translation>
     </message>
 </context>
 <context>
@@ -5899,6 +6007,10 @@ Prøv af gemme den et andet sted.</translation>
         <source>frame color</source>
         <translation>ramme farve</translation>
     </message>
+    <message>
+        <source>System Flag</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
@@ -8091,6 +8203,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Timewise Delete</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Delete element and duration</source>
         <translation type="unfinished"/>
     </message>
 </context>
