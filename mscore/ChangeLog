@@ -5,6 +5,8 @@
       - fix MusicXML import/export of several clefs
       (db)
       - splash screen for beta
+      - update handbooks
+      - latest TS translation files
 30.jan (ws)
       - simplify selection model; remove system selection (dotted line selection)
       - new shortcut: Ctrl+Delete removes selected measure timewise

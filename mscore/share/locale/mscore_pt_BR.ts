@@ -3270,7 +3270,7 @@ Ao invés disso, experimente selecionar "Manual Online" no menu "Ajuda".</transl
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation/>
+        <translation>2/2</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -3278,7 +3278,7 @@ Ao invés disso, experimente selecionar "Manual Online" no menu "Ajuda".</transl
     </message>
     <message>
         <source>Normal</source>
-        <translation/>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Dashed</source>
@@ -3290,7 +3290,7 @@ Ao invés disso, experimente selecionar "Manual Online" no menu "Ajuda".</transl
     </message>
     <message>
         <source>Crescendo</source>
-        <translation/>
+        <translation>Crescendo</translation>
     </message>
     <message>
         <source>Diminuendo</source>
@@ -3358,15 +3358,15 @@ Ao invés disso, experimente selecionar "Manual Online" no menu "Ajuda".</transl
     </message>
     <message>
         <source>Da Capo</source>
-        <translation/>
+        <translation>Da Capo</translation>
     </message>
     <message>
         <source>Da Capo al Fine</source>
-        <translation/>
+        <translation>Da Capo al Fine</translation>
     </message>
     <message>
         <source>Da Capo al Coda</source>
-        <translation/>
+        <translation>Da Capo al Coda</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
@@ -3454,7 +3454,7 @@ Restaurar sessão?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Todos os Arquivos Suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Arquivos do MuseScore (*.mscz *.mscx *.msc);;Arquivos MusicXML (*.xml *.mxl);;Arquivos MIDI (*.mid *.midi *.kar);;Arquivos Muse Data (*.md);;Arquivos Capella (*.cap);;</translation>
     </message>
 </context>
 <context>
@@ -5319,7 +5319,7 @@ Tente salvar em um local diferente.</translation>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Propriedades de 1a e 2a vezes</translation>
+        <translation>Propriedades da Chave...</translation>
     </message>
     <message>
         <source>Slur Properties</source>
@@ -6320,7 +6320,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>No Update Available</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nenhuma Atualização Disponível</translation>
     </message>
 </context>
 <context>
@@ -6338,7 +6338,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Propriedades de 1a e 2a vezes</translation>
+        <translation>Propriedades da Chave...</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -6353,7 +6353,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation>Propriedades de Ritornello...</translation>
+        <translation>Propriedades da Chave...</translation>
     </message>
     <message>
         <source>Line Properties...</source>
@@ -6468,39 +6468,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>sustenido seta acima</translation>
+        <translation>sustenido com seta acima</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation>sustenido seta abaixo</translation>
+        <translation>sustenido com seta abaixo</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>sustenido duas setas</translation>
+        <translation>sustenido com duas setas</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation>bemol seta acima</translation>
+        <translation>bemol com seta acima</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation>bemol seta abaixo</translation>
+        <translation>bemol com seta abaixo</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>bemol duas setas</translation>
+        <translation>bemol com duas setas</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>bequadro seta acima</translation>
+        <translation>bequadro com seta acima</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>bequadro seta abaixo</translation>
+        <translation>bequadro com seta abaixo</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>bequadro duas setas</translation>
+        <translation>bequadro com duas setas</translation>
     </message>
 </context>
 <context>
@@ -8468,7 +8468,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VoltaSegment</source>
-        <translation>Segmento de Chaves de 1a e 2a</translation>
+        <translation>Segmento de Chaves de 1ª e 2ª</translation>
     </message>
     <message>
         <source>LayoutBreak</source>
@@ -8618,31 +8618,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nunca</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Diariamente</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A cada 3 dias</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Semanalmente</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A cada 2 semanas</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mensalmente</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A cada 2 meses</translation>
     </message>
 </context>
 <context>
@@ -8773,11 +8773,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">sustenido seta acima</translation>
+        <translation type="unfinished">sustenido com seta acima</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">sustenido duas setas</translation>
+        <translation type="unfinished">sustenido com duas setas</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8801,15 +8801,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">bequadro seta acima</translation>
+        <translation type="unfinished">bequadro com seta acima</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">bequadro seta abaixo</translation>
+        <translation type="unfinished">bequadro com seta abaixo</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">bequadro duas setas</translation>
+        <translation type="unfinished">bequadro com duas setas</translation>
     </message>
     <message>
         <source>flat</source>
@@ -8817,11 +8817,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished">bemol seta acima</translation>
+        <translation type="unfinished">bemol com seta acima</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">bemol duas setas</translation>
+        <translation type="unfinished">bemol com duas setas</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -8957,111 +8957,111 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0do head</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d1do head</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u1do head</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d2do head</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u2do head</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0re head</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u1re head</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d1re head</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u2re head</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d2re head</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0mi head</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s1mi head</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s2mi head</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u0fa head</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d0fa head</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u1fa head</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d1fa head</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u2fa head</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d2fa head</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0la head</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s1la head</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s2la head</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0ti head</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u1ti head</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d1ti head</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">u2ti head</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d2ti head</translation>
     </message>
     <message>
         <source>ufermata</source>

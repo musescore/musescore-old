@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Έκδοση: 0.9.5</translation>
+        <translation>Έκδοση: 0.9.6</translation>
     </message>
     <message>
         <source>Revision: 628</source>
@@ -31,15 +31,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; για νέες εκδόσεις και περισσότερες πληροφορίες.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Υποστηρίξτε το MuseScore με &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;τις δωρεές σας&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -63,7 +63,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">round bracket</translation>
+        <translation type="unfinished">στρογγυλή αγκύλη</translation>
     </message>
 </context>
 <context>
@@ -830,7 +830,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>small</source>
-        <translation>μικρό μέγεθος</translation>
+        <translation>μικρό</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -924,15 +924,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"> ticks</translation>
+        <translation type="unfinished"> κτύπος</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished">Note Head Group</translation>
+        <translation type="unfinished">Ομάδα Κεφαλών Νοτών</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished">Note Head Type</translation>
+        <translation type="unfinished">Τύπος Κεφαλών Νοτών</translation>
     </message>
     <message>
         <source>normal</source>
@@ -1012,15 +1012,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished">SlurFor</translation>
+        <translation type="unfinished">Σύζευξη Μπροστά</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished">SlurBack</translation>
+        <translation type="unfinished">Σύζευξη Πίσω</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished">StaffMove</translation>
+        <translation type="unfinished">Μετακίνηση Πενταγράμμου:</translation>
     </message>
 </context>
 <context>
@@ -1031,7 +1031,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished">Αρχείο περιγραφής συγχορδίας</translation>
+        <translation type="unfinished">Αρχείο Περιγραφής Συγχορδίας:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1039,7 +1039,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Id</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1051,7 +1051,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Επεξεργαστής Στύλ Συγχορδίας</translation>
     </message>
 </context>
 <context>
@@ -1369,7 +1369,7 @@ failed: </source>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation>Χρησιμοποιήσιμη Τονική Έκταση:</translation>
+        <translation>Ωφέλιμη Τονική Έκταση:</translation>
     </message>
     <message>
         <source>Amateur:</source>
@@ -1404,15 +1404,15 @@ failed: </source>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished">Anchor</translation>
+        <translation type="unfinished">Άγκυρα</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished">TopStaff</translation>
+        <translation type="unfinished">Επάνω Πεντάγραμμο</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished">BottomStaff</translation>
+        <translation type="unfinished">Κάτω Πεντάγραμμο</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1459,7 +1459,7 @@ failed: </source>
     </message>
     <message>
         <source>Beams</source>
-        <translation>Φθογγοβραχίωνες</translation>
+        <translation>Δοκοί</translation>
     </message>
     <message>
         <source>Sizes</source>
@@ -1467,7 +1467,7 @@ failed: </source>
     </message>
     <message>
         <source>Hairpins</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Φουρκέτες</translation>
     </message>
     <message>
         <source>Chordnames</source>
@@ -1528,7 +1528,7 @@ failed: </source>
     <message>
         <source>Create time signatures</source>
         <translatorcomment>χρόνου = μέτρου</translatorcomment>
-        <translation>Δημιουργία ετικέτας χρόνου</translation>
+        <translation>Δημιουργία Ετικέτας Χρόνου</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
@@ -1641,11 +1641,11 @@ failed: </source>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο μουσικής επάνω</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο μουσικής κάτω</translation>
     </message>
     <message>
         <source>Staff distance</source>
@@ -1661,23 +1661,23 @@ failed: </source>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο στοίχων επάνω</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο στοίχων κάτω</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο V-frame επάνω</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Περιθώριο V-frame κάτω</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished">Διακενό (1=στενά)</translation>
+        <translation type="unfinished">Διακενό (1=στενό)</translation>
     </message>
     <message>
         <source>Left margin</source>
@@ -1697,11 +1697,11 @@ failed: </source>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished">αριστερό περιθώριο οπλισμού</translation>
+        <translation type="unfinished">Αριστερό περιθώριο οπλισμού</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished">αριστερό περιθώριο ετικέτας χρόνου</translation>
+        <translation type="unfinished">Αριστερό περιθώριο ετικέτας χρόνου</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -1717,7 +1717,7 @@ failed: </source>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Πληροφορίες μέτρου επανάλυψης ("φτερωτή" επανάλυψη)</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1749,7 +1749,7 @@ failed: </source>
     </message>
     <message>
         <source>Distance to note</source>
-        <translation type="unfinished">Απόσταση ως προσ τη νότα</translation>
+        <translation type="unfinished">Απόσταση ως προς τη νότα</translation>
     </message>
     <message>
         <source>Hook length</source>
@@ -1785,15 +1785,15 @@ failed: </source>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Μέγεθος ποικιλματικής νότας</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished">Μικρό Μέγεθος Κλειδιού</translation>
+        <translation type="unfinished">Μικρό μέγεθος κλειδιού</translation>
     </message>
     <message>
         <source>Line break height</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ύψος αλλαγής γραμμής</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -1911,11 +1911,11 @@ failed: </source>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished">Όνομα αρχείου</translation>
+        <translation type="unfinished">Όνομα αρχείου:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation type="unfinished">Τίτλος μέρους</translation>
+        <translation type="unfinished">Τίτλος μέρους:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -1972,15 +1972,15 @@ failed: </source>
     </message>
     <message>
         <source>Hairpin</source>
-        <translation type="unfinished">Hairpin</translation>
+        <translation type="unfinished">Φουρκέτα</translation>
     </message>
     <message>
         <source>Tick1:</source>
-        <translation>Tick1:</translation>
+        <translation>Κτύπος1:</translation>
     </message>
     <message>
         <source>Tick2:</source>
-        <translation>Tick2:</translation>
+        <translation>Κτύπος2:</translation>
     </message>
 </context>
 <context>
@@ -2013,7 +2013,7 @@ failed: </source>
     </message>
     <message>
         <source>lock aspect ratio</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">κλείδωμα αναλογίας προοπτικής</translation>
     </message>
 </context>
 <context>
@@ -2308,7 +2308,7 @@ failed: </source>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished">Δημιουργία ετικέτας οπλισμού</translation>
+        <translation type="unfinished">Δημιουργία Ετικέτας Οπλισμού</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2410,7 +2410,7 @@ failed: </source>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (πεντάλ)</translation>
+        <translation>Ped (Πεντάλ)</translation>
     </message>
     <message>
         <source>x:</source>
@@ -2446,11 +2446,11 @@ failed: </source>
     </message>
     <message>
         <source>LineSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Γραμμής</translation>
     </message>
     <message>
         <source>SegmentType:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τύπος Τμήματος:</translation>
     </message>
     <message>
         <source>SINGLE</source>
@@ -2470,11 +2470,11 @@ failed: </source>
     </message>
     <message>
         <source>Pos2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Θέση2</translation>
     </message>
     <message>
         <source>Offset2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Απόκλιση2</translation>
     </message>
 </context>
 <context>
@@ -2514,7 +2514,7 @@ failed: </source>
     </message>
     <message>
         <source>End Tick:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τελικός Κτύπος:</translation>
     </message>
 </context>
 <context>
@@ -2628,7 +2628,7 @@ failed: </source>
     </message>
     <message>
         <source>actual</source>
-        <translation type="unfinished">πραγματικό</translation>
+        <translation type="unfinished">τρέχων</translation>
     </message>
     <message>
         <source>Other</source>
@@ -2640,7 +2640,7 @@ failed: </source>
     </message>
     <message>
         <source>irregular</source>
-        <translation type="unfinished">μη - ομαλό</translation>
+        <translation type="unfinished">μη ομαλό</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -2858,7 +2858,7 @@ before closing?</source>
     </message>
     <message>
         <source>Drums</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Drums</translation>
     </message>
     <message>
         <source>Clefs</source>
@@ -2894,19 +2894,19 @@ before closing?</source>
     </message>
     <message>
         <source>8va</source>
-        <translation/>
+        <translation>8va</translation>
     </message>
     <message>
         <source>15ma</source>
-        <translation/>
+        <translation>15ma</translation>
     </message>
     <message>
         <source>8vb</source>
-        <translation/>
+        <translation>8vb</translation>
     </message>
     <message>
         <source>15mb</source>
-        <translation/>
+        <translation>15mb</translation>
     </message>
     <message>
         <source>pedal</source>
@@ -2971,7 +2971,7 @@ before closing?</source>
     </message>
     <message>
         <source>Segno</source>
-        <translation/>
+        <translation>Segno</translation>
     </message>
     <message>
         <source>Coda</source>
@@ -2983,19 +2983,19 @@ before closing?</source>
     </message>
     <message>
         <source>Fine</source>
-        <translation/>
+        <translation>Fine</translation>
     </message>
     <message>
         <source>D.S al Coda</source>
-        <translation/>
+        <translation>D.S al Coda</translation>
     </message>
     <message>
         <source>D.S al Fine</source>
-        <translation/>
+        <translation>D.S al Fine</translation>
     </message>
     <message>
         <source>D.S</source>
-        <translation/>
+        <translation>D.S</translation>
     </message>
     <message>
         <source>To Coda</source>
@@ -3003,7 +3003,7 @@ before closing?</source>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Ιδιότητες Φθογγοβραχίωνα</translation>
+        <translation>Ιδιότητες Δοκού</translation>
     </message>
     <message>
         <source>Symbols</source>
@@ -3193,15 +3193,15 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ολόκληρο Όνομα Οργάνων</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Σύντομο Όνομα Οργάνων</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Απόσπασμα Οργάνων</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -3249,7 +3249,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Γραμμή Κειμένου</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -3261,7 +3261,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ottava</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -4609,7 +4609,7 @@ Restore session?</source>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (πεντάλ)</translation>
+        <translation>Ped (Πεντάλ)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -4796,7 +4796,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>small</source>
-        <translation>μικρό μέγεθος</translation>
+        <translation>μικρό</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5650,7 +5650,7 @@ failed: </source>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Γραμμή Κειμένου</translation>
     </message>
     <message>
         <source>line width:</source>
@@ -8555,7 +8555,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ottava</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8567,7 +8567,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Γραμμή Κειμένου</translation>
     </message>
     <message>
         <source>Segment</source>

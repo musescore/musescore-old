@@ -8064,7 +8064,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Activar/Desactivar reproducción con repeticiones</translation>
     </message>
     <message>
         <source>Load style</source>
@@ -8746,23 +8746,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>eight rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">silencio de corchea</translation>
     </message>
     <message>
         <source>16' rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">silencio de semicorchea</translation>
     </message>
     <message>
         <source>32' rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">silencio de fusa</translation>
     </message>
     <message>
         <source>64' rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">silencio de semifusa</translation>
     </message>
     <message>
         <source>128' rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">silencio de garrapatea</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -8882,15 +8882,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">cabeza de redonda</translation>
     </message>
     <message>
         <source>half head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">cabeza de blanca</translation>
     </message>
     <message>
         <source>quart head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">cabeza de negra</translation>
     </message>
     <message>
         <source>whole diamond head</source>
@@ -8898,7 +8898,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>half diamond head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">blanca con cabeza de diamante</translation>
     </message>
     <message>
         <source>diamond head</source>
@@ -8930,7 +8930,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Blanca con cabeza de barra inclinada</translation>
     </message>
     <message>
         <source>quart slash head</source>
@@ -8942,7 +8942,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>half cross head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">blanca con cabeza en cruz</translation>
     </message>
     <message>
         <source>cross head</source>
@@ -8950,7 +8950,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">cabeza circular con cruz</translation>
     </message>
     <message>
         <source>s0do head</source>
@@ -9218,11 +9218,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">arpeggio descendente</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">arpeggio ascendente</translation>
     </message>
     <message>
         <source>trill element</source>

@@ -6830,15 +6830,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Strg+Umschalt+Auf</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Strg+Umschalt+Ab</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Strg+Links</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
@@ -6846,7 +6846,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>left+shift</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Umschalt+Links</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
@@ -6858,19 +6858,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right+shift</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Umschalt+Rechts</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bis zum Ende des Takts markieren</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Strg+Umschalt+Rechts</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bis zum Anfang der Zeile markieren</translation>
     </message>
     <message>
         <source>shift+home</source>
@@ -6878,11 +6878,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bis zum Ende der Zeile markieren</translation>
     </message>
     <message>
         <source>shift+end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Umschalt+Ende</translation>
     </message>
     <message>
         <source>select to beginning of score</source>
@@ -6898,7 +6898,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ctrl+shift+end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Strg+Umschalt+Ende</translation>
     </message>
     <message>
         <source>add staff above to selection</source>
@@ -6910,11 +6910,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>page-prev</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Seite zurück</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Seite vor</translation>
     </message>
     <message>
         <source>page-top</source>
@@ -6954,27 +6954,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takt einfügen</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takte einfügen...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Horizontalen Rahmen einfügen</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vertikalen Rahmen einfügen</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Horizontalen Rahmen anfügen</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vertikalen Rahmen anfügen</translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -7438,7 +7438,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">Bass-Schlussel</translation>
+        <translation type="unfinished">Bassschlüssel</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
@@ -8006,27 +8006,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Markierte Takte löschen</translation>
     </message>
     <message>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takt anfügen</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takte anfügen</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takt einfügen</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Takte einfügen</translation>
     </message>
     <message>
         <source>split window horizontal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fenster horizontal teilen</translation>
     </message>
     <message>
         <source>Documents Side by Side</source>
@@ -8034,7 +8034,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>split window vertical</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fenster vertikal teilen</translation>
     </message>
     <message>
         <source>Documents Stacked</source>
@@ -8613,31 +8613,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nie</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jeden Tag</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jeden dritten Tag</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jede Woche</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jede zweite Woche</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jeden Monat</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jeden zweiten Monat</translation>
     </message>
 </context>
 <context>
@@ -8852,11 +8852,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right parenthesis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Runde Klammer zu</translation>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Runde Klammer auf</translation>
     </message>
     <message>
         <source>dot</source>
@@ -9336,7 +9336,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">Bass-Schlussel</translation>
+        <translation type="unfinished">Bassschlüssel</translation>
     </message>
     <message>
         <source>cbass clef</source>
@@ -9444,43 +9444,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Null</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eins</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zwei</translation>
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Drei</translation>
     </message>
     <message>
         <source>four</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vier</translation>
     </message>
     <message>
         <source>five</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fünf</translation>
     </message>
     <message>
         <source>six</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sechs</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sieben</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acht</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Neun</translation>
     </message>
     <message>
         <source>plus</source>

@@ -5,19 +5,19 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Névjegy...</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Verzió: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Revízió: 628</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -30,29 +30,38 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
+p, li { white-space: pre-wrap; }line break&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
+line break&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;A GNU General Public License feltételeinek megfelelő kiadás&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Unstable Prerelease A ... verzió kibocsátása előtti nem-stabil változat </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Verzió: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Revízió: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">zárójelben</translation>
     </message>
 </context>
 <context>
@@ -749,7 +758,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">egy se</translation>
     </message>
     <message>
         <source>/C</source>
@@ -2725,7 +2734,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>Save changes to the score "%1"
@@ -4650,7 +4659,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -4981,7 +4990,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -6321,79 +6330,79 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">egy se</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kettőskereszt</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kettős bé</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel</translation>
     </message>
     <message>
         <source>(sharp)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">(kereszt)</translation>
     </message>
     <message>
         <source>(flat)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">(bé)</translation>
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">(kettőskereszt)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">(kettős bé)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">(feloldójel)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">[kereszt]</translation>
     </message>
     <message>
         <source>[flat]</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">[bé]</translation>
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">[kettőskereszt]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">[kettős bé]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">[feloldójel]</translation>
     </message>
     <message>
         <source>flat-slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, vessző</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, vessző,vessző</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">vissza 2bé</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
@@ -6405,59 +6414,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé-bé, vessző</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, vessző</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, 2 vessző</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, 3 vessző</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, 4 vessző</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, fel-nyíl</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, le-nyíl</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, fel-le nyíl</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, fel-nyíl</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, le-nyíl</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, fel-le nyíl</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, fel-nyíl</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, le-nyíl</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, fel-le nyíl</translation>
     </message>
 </context>
 <context>
@@ -7076,19 +7085,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kettőskereszt</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kettős bé</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -8726,15 +8735,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, fel-nyíl</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt, fel-le nyíl</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8754,31 +8763,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, fel-nyíl</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, le-nyíl</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">feloldójel, fel-le nyíl</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, fel-nyíl</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">bé, fel-le nyíl</translation>
     </message>
     <message>
         <source>flat slash</source>
