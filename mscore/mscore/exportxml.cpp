@@ -2129,6 +2129,10 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       }
 
       xml.stag(noteTag);
+// Either <rest/>
+// or <rest><display-step>F</display-step><display-octave>5</display-octave></rest>
+//      printf(" sp=%g useroffx,y=%g,%g", rest->spatium(), rest->userOff().x(), rest->userOff().y());
+      printf(" yshift=%g", rest->userOff().y() / rest->spatium());
       xml.tagE("rest");
 
       Duration d = rest->duration();
