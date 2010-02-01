@@ -1032,7 +1032,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation/>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
@@ -3968,7 +3968,7 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Straight</source>
-        <translation/>
+        <translation>Rechtstreeks</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -4206,7 +4206,7 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation/>
+        <translation>Samplefrequentie:</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
@@ -4578,7 +4578,7 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kies PortMidi input-interface</translation>
     </message>
 </context>
 <context>
@@ -5448,7 +5448,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Sine</source>
-        <translation/>
+        <translation>Sinus</translation>
     </message>
     <message>
         <source>Damp:</source>
@@ -5706,7 +5706,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>I</source>
-        <translation/>
+        <translation>I</translation>
     </message>
     <message>
         <source>U</source>
@@ -6010,31 +6010,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transponeer bij Voortekening</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cb majeur / Ab mineur</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gb majeur / Eb mineur</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Db majeur / Bb mineur</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ab majeur / F mineur</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eb majeur / C mineur</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bb majeur / G mineur</translation>
     </message>
     <message>
         <source>F major / D minor</source>
@@ -6090,7 +6090,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Reine prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -6102,11 +6102,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kleine secunde</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grote secunde</translation>
     </message>
     <message>
         <source>Augmented Second</source>
@@ -6118,11 +6118,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kleine terts</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Grote terts</translation>
     </message>
     <message>
         <source>Augmented Third</source>
@@ -7748,7 +7748,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move down</source>
-        <translation/>
+        <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <source>Staff Text</source>
@@ -8123,23 +8123,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation/>
+        <translation>dstaccatissimo</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation/>
+        <translation>ustaccatissimo</translation>
     </message>
     <message>
         <source>prallprall</source>
-        <translation/>
+        <translation>dubbele praller</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation/>
+        <translation>dmarcato</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation/>
+        <translation>umarcato</translation>
     </message>
     <message>
         <source>plusstop</source>
@@ -8175,11 +8175,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dportato</source>
-        <translation/>
+        <translation>dportato</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation/>
+        <translation>uportato</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -8187,11 +8187,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation/>
+        <translation>tenuto</translation>
     </message>
     <message>
         <source>espressivo</source>
-        <translation/>
+        <translation>espressivo</translation>
     </message>
     <message>
         <source>reverseturn</source>
@@ -8223,15 +8223,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dfermata</source>
-        <translation/>
+        <translation>dfermata</translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation/>
+        <translation>ufermata</translation>
     </message>
     <message>
         <source>sforzato</source>
-        <translation/>
+        <translation>sforzato</translation>
     </message>
     <message>
         <source>downprall</source>
@@ -8333,7 +8333,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HBox</source>
-        <translation/>
+        <translation>HBox</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -8369,7 +8369,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VBox</source>
-        <translation/>
+        <translation>VBox</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -8437,7 +8437,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cursor</source>
-        <translation/>
+        <translation>Cursor</translation>
     </message>
     <message>
         <source>KeySig</source>
@@ -8619,38 +8619,38 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nooit</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elke dag</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eens in de 3 dagen</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elke week</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eens in de 2 weken</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elke maand</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eens in de 2 maanden</translation>
     </message>
 </context>
 <context>
     <name>symbol</name>
     <message>
         <source>f</source>
-        <translation/>
+        <translation>f</translation>
     </message>
     <message>
         <source>m</source>
@@ -8658,19 +8658,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>p</source>
-        <translation/>
+        <translation>p</translation>
     </message>
     <message>
         <source>r</source>
-        <translation/>
+        <translation>r</translation>
     </message>
     <message>
         <source>s</source>
-        <translation/>
+        <translation>s</translation>
     </message>
     <message>
         <source>z</source>
-        <translation/>
+        <translation>z</translation>
     </message>
     <message>
         <source>clef one</source>
@@ -9066,11 +9066,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation/>
+        <translation>ufermata</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation/>
+        <translation>dfermata</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9110,7 +9110,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>espressivo</source>
-        <translation/>
+        <translation>espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
@@ -9118,31 +9118,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation/>
+        <translation>ustaccatissimo</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation/>
+        <translation>dstaccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation/>
+        <translation>tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation/>
+        <translation>uportato</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation/>
+        <translation>dportato</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation/>
+        <translation>umarcato</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation/>
+        <translation>dmarcato</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -9190,7 +9190,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flageolet</source>
-        <translation/>
+        <translation>flageolet</translation>
     </message>
     <message>
         <source>segno</source>
@@ -9378,7 +9378,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>allabreve</source>
-        <translation/>
+        <translation>allabreve</translation>
     </message>
     <message>
         <source>pedalasterisk</source>
@@ -9426,7 +9426,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc dot</source>
-        <translation/>
+        <translation>acc punt</translation>
     </message>
     <message>
         <source>acc freebase</source>
@@ -9442,11 +9442,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc old ee</source>
-        <translation/>
+        <translation>acc oude ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation/>
+        <translation>acc discant</translation>
     </message>
     <message>
         <source>zero</source>
@@ -9490,7 +9490,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plus</source>
-        <translation/>
+        <translation>plus</translation>
     </message>
 </context>
 </TS>
