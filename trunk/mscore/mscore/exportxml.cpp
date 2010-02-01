@@ -3233,53 +3233,58 @@ foreach(Element* el, *(score->gel())) {
                         m->canvasPos().y() > (previousMeasure->canvasPos().y()))  // TODO: MeasureBase
                         currentSystem = NewSystem;
 
-                  if (currentSystem != NoSystem
-                      && (!converterMode || score->defaultsRead()) ){
-//                      const double pageHeight  = getTenthsFromInches(pf->height());
-                      const double pageWidth  = getTenthsFromInches(pf->width());
-                      const double lm = getTenthsFromInches(pf->oddLeftMargin);
-                      const double rm = getTenthsFromInches(pf->oddRightMargin);
-                      const double tm = getTenthsFromInches(pf->oddTopMargin);
+                  if (currentSystem != NoSystem) {
+                      if (!converterMode || score->defaultsRead()) {
+                          const double pageWidth  = getTenthsFromInches(pf->width());
+                          const double lm = getTenthsFromInches(pf->oddLeftMargin);
+                          const double rm = getTenthsFromInches(pf->oddRightMargin);
+                          const double tm = getTenthsFromInches(pf->oddTopMargin);
 
-                      if (currentSystem == TopSystem)
-                          xml.stag("print");
-                      else if (currentSystem == NewSystem)
-                          xml.stag("print new-system=\"yes\"");
-                      else if (currentSystem == NewPage)
-                          xml.stag("print new-page=\"yes\"");
-
-                      // System Layout
-                      // Put the system print suggestions only for the first part in a score...
-                      if (idx == 0){
-
-                          double systemLM = getTenthsFromDots(m->canvasPos().x() - m->system()->page()->canvasPos().x()) - lm;
-
-                          double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
-                          // Find the right margin of the system.
-
-                          xml.stag("system-layout");
-                          xml.stag("system-margins");
-                          xml.tag("left-margin", QString("%1").arg(QString::number(systemLM,'f',2)));
-                          xml.tag("right-margin", QString("%1").arg(QString::number(systemRM,'f',2)) );
-                          xml.etag();
-
-                          if (currentSystem == NewPage || currentSystem == TopSystem)
-                              xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y()) - tm,'f',2)) );
+                          if (currentSystem == TopSystem)
+                              xml.stag("print");
                           else if (currentSystem == NewSystem)
-                              xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y() - previousMeasure->canvasPos().y() - previousMeasure->bbox().height()),'f',2)));
+                              xml.stag("print new-system=\"yes\"");
+                          else if (currentSystem == NewPage)
+                              xml.stag("print new-page=\"yes\"");
+
+                          // System Layout
+                          // Put the system print suggestions only for the first part in a score...
+                          if (idx == 0) {
+                              // Find the right margin of the system.
+                              double systemLM = getTenthsFromDots(m->canvasPos().x() - m->system()->page()->canvasPos().x()) - lm;
+                              double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
+
+                              xml.stag("system-layout");
+                              xml.stag("system-margins");
+                              xml.tag("left-margin", QString("%1").arg(QString::number(systemLM,'f',2)));
+                              xml.tag("right-margin", QString("%1").arg(QString::number(systemRM,'f',2)) );
+                              xml.etag();
+
+                              if (currentSystem == NewPage || currentSystem == TopSystem)
+                                  xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y()) - tm,'f',2)) );
+                              else if (currentSystem == NewSystem)
+                                  xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y() - previousMeasure->canvasPos().y() - previousMeasure->bbox().height()),'f',2)));
+
+                              xml.etag();
+                              }
+
+                          // Staff layout elements.
+                          for (int staffIdx = (staffCount == 0) ? 1 : 0; staffIdx < staves; staffIdx++) {
+                              xml.stag(QString("staff-layout number=\"%1\"").arg(staffIdx + 1));
+                              xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distance())),'f',2)));
+                              xml.etag();
+                              }
 
                           xml.etag();
-                      }
-                      // Staff layout elements.
-                      for (int staffIdx = (staffCount == 0) ? 1 : 0; staffIdx < staves; staffIdx++) {
-                          xml.stag(QString("staff-layout number=\"%1\"").arg(staffIdx + 1));
-                          xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distance())),'f',2)));
-                          xml.etag();
-                      }
+                          } // if (!converterMode ...
 
-                      xml.etag();
-
-                  }
+                      else {
+                          if (currentSystem == NewSystem)
+                              xml.tagE("print new-system=\"yes\"");
+                          else if (currentSystem == NewPage)
+                              xml.tagE("print new-page=\"yes\"");
+                          } // if (!converterMode ...
+                      } // if (currentSystem ...
 
                   attr.start();
                   dh.buildDirectionsList(m, false, part, strack, etrack);

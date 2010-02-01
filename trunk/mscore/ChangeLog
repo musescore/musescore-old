@@ -1,3 +1,5 @@
+1.feb (lv)
+      - export MusicXML <print new-system> also in converter mode
 31.jan (ws)
       - add systemFlag property to text style dialog and text property dialog
       - on default set systemFlag for repeat text style and system text style

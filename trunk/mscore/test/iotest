@@ -83,6 +83,7 @@ rwtestAllXml() {
       rwtestXml testArpGliss1.xml
       rwtestXml testArpGliss2.xml
       rwtestXml testBarStyles.xml
+      rwtestXml testClefs1.xml
       rwtestXml testDalSegno.xml
       rwtestXml testDCalCoda.xml
       rwtestXml testDCalFine.xml
