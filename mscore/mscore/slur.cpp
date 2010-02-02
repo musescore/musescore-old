@@ -859,7 +859,7 @@ void Slur::layout()
       {
       double _spatium = spatium();
 
-      if (score() == gscore) {      // HACK
+      if (score() == gscore || !startElement()) {      // HACK
             //
             // when used in a palette, slur has no parent and
             // tick and tick2 has no meaning so no layout is
