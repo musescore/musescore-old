@@ -1815,7 +1815,7 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
 ///   element \a type and \a subtype.
 //---------------------------------------------------------
 
-Element* Measure::drop(const QPointF& p, const QPointF& dragOffset, Element* e)
+Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, Element* e)
       {
       // determine staff
       System* s = system();

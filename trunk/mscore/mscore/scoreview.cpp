@@ -1468,7 +1468,6 @@ bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
 void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       {
       double _spatium = score()->spatium();
-//      delete dragElement;
       dragElement = 0;
 
       const QMimeData* data = event->mimeData();
@@ -1689,8 +1688,10 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case ACCIDENTAL_BRACKET:
                         {
                         Element* el = elementAt(pos);
-                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                              dropTarget = el;  //?
                               break;
+                              }
                         setDropTarget(0);
                         }
                         break;
@@ -1799,7 +1800,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                              }
                         _score->addRefresh(el->abbox());
                         _score->addRefresh(dragElement->abbox());
-                        Element* dropElement = el->drop(pos, dragOffset, dragElement);
+                        Element* dropElement = el->drop(this, pos, dragOffset, dragElement);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               _score->select(dropElement, SELECT_SINGLE, 0);
@@ -1842,7 +1843,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                               }
                         _score->addRefresh(el->abbox());
                         _score->addRefresh(dragElement->abbox());
-                        Element* dropElement = el->drop(pos, dragOffset, dragElement);
+                        Element* dropElement = el->drop(this, pos, dragOffset, dragElement);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               if (!_score->noteEntryMode())
@@ -2363,7 +2364,7 @@ void ScoreView::editPaste()
 void ScoreView::normalPaste()
       {
       _score->startCmd();
-      _score->cmdPaste();
+      _score->cmdPaste(this);
       _score->endCmd();
       }
 

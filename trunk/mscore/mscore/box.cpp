@@ -319,7 +319,7 @@ bool HBox::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
+Element* HBox::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       switch(e->type()) {
             case LAYOUT_BREAK:

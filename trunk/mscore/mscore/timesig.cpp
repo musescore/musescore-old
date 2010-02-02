@@ -115,7 +115,7 @@ bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* TimeSig::drop(const QPointF&, const QPointF&, Element* e)
+Element* TimeSig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == TIMESIG) {
             TimeSig* ts = (TimeSig*)e;

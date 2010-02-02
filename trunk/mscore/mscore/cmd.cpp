@@ -2248,7 +2248,7 @@ void Score::processMidiInput()
 //   cmdPaste
 //---------------------------------------------------------
 
-void Score::cmdPaste()
+void Score::cmdPaste(ScoreView* view)
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0) {
@@ -2275,7 +2275,7 @@ void Score::cmdPaste()
                   if (el) {
                         el->read(e);
                         addRefresh(selection().element()->abbox());   // layout() ?!
-                        selection().element()->drop(QPointF(), QPointF(), el);
+                        selection().element()->drop(view, QPointF(), QPointF(), el);
                         if (selection().element())
                               addRefresh(selection().element()->abbox());
                         }

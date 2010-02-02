@@ -484,7 +484,7 @@ void ChordRest::removeSlurBack(Slur* s)
 //   drop
 //---------------------------------------------------------
 
-Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
+Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
       {
       Measure* m  = measure();
       switch (e->type()) {
@@ -512,7 +512,7 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
                   if ((bl->tick() == m->tick())
                      || (bl->tick() == m->tick() + m->tickLen())) {
-                        return m->drop(p1, p2, e);
+                        return m->drop(view, p1, p2, e);
                         }
 
                   Segment* seg = m->findSegment(Segment::SegBarLine, tick());

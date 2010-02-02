@@ -284,7 +284,7 @@ bool BarLine::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* BarLine::drop(const QPointF& p1, const QPointF& p2, Element* e)
+Element* BarLine::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
       {
       int type = e->type();
       int st   = e->subtype();
@@ -300,7 +300,7 @@ Element* BarLine::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   return 0;
                   }
             }
-      m->drop(p1, p2, e);
+      m->drop(view, p1, p2, e);
       return 0;
       }
 

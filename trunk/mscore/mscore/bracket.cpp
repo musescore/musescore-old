@@ -278,7 +278,7 @@ bool Bracket::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
+Element* Bracket::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == BRACKET) {
             Bracket* b = (Bracket*)e;

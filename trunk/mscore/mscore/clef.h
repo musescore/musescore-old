@@ -56,7 +56,7 @@ class Clef : public Compound {
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual Space space() const;
 

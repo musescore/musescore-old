@@ -96,7 +96,7 @@ bool BSymbol::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* BSymbol::drop(const QPointF&, const QPointF&, Element* el)
+Element* BSymbol::drop(ScoreView*, const QPointF&, const QPointF&, Element* el)
       {
       if (el->type() == SYMBOL || el->type() == IMAGE) {
             el->setParent(this);

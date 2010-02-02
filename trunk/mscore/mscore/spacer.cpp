@@ -93,7 +93,7 @@ bool Spacer::acceptDrop(ScoreView*, const QPointF&, int, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* Spacer::drop(const QPointF&, const QPointF&, Element* e)
+Element* Spacer::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       return e;
       }
