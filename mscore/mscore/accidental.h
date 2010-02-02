@@ -56,7 +56,7 @@ class Accidental : public Element {
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual void draw(QPainter&) const;
       int symbol();

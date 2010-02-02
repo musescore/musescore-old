@@ -41,7 +41,7 @@ class BSymbol : public Element {
       virtual void remove(Element*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual QRectF drag(const QPointF& pos);
       virtual bool isMovable() const { return true; }

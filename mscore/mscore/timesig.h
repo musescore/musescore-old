@@ -80,7 +80,7 @@ class TimeSig : public Element {
       void setSig(const AL::SigEvent& e) { setSig(e.fraction()); }
 
       bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      Element* drop(const QPointF&, const QPointF&, Element*);
+      Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
             }

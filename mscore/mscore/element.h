@@ -297,7 +297,7 @@ class Element {
 
  Reimplemented by elements that accept drops.
 */
-      virtual Element* drop(const QPointF&, const QPointF&, Element*) { return 0;}
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.

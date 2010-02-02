@@ -217,7 +217,7 @@ bool KeySig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
+Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == KEYSIG) {
             KeySig* ks    = static_cast<KeySig*>(e);

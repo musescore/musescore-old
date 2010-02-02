@@ -274,7 +274,7 @@ bool Accidental::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*
 //   drop
 //---------------------------------------------------------
 
-Element* Accidental::drop(const QPointF&, const QPointF&, Element* e)
+Element* Accidental::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       switch(e->type()) {
             case ACCIDENTAL_BRACKET:

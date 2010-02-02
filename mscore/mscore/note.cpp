@@ -991,13 +991,13 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
+Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
       {
       Chord* ch = chord();
       switch(e->type()) {
             case ARTICULATION:
                   {
-                  Articulation* atr = (Articulation*)e;
+                  Articulation* atr = static_cast<Articulation*>(e);
                   Articulation* oa = ch->hasArticulation(atr);
                   if (oa) {
                         delete atr;
@@ -1024,7 +1024,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case SLUR:
                   delete e;
-//TODO-S                  score()->cmdAddSlur(this, 0);
+                  view->cmdAddSlur(this, 0);
                   return 0;
 
             case HARMONY:
@@ -1206,7 +1206,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   break;
 
             default:
-                  return ch->drop(p1, p2, e);
+                  return ch->drop(view, p1, p2, e);
             }
       return 0;
       }

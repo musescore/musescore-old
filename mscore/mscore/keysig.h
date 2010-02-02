@@ -53,7 +53,7 @@ class KeySig : public Element {
       virtual void draw(QPainter&) const;
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       void setSig(int oldSig, int newSig);
       void setOldSig(int oldSig);
