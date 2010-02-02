@@ -3790,20 +3790,27 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 // 	  out << "\\time " << z1<< "/" << timedenom << " \n";
 	}
 
-      switch(voice)
+      cout << "pianostaff: " << pianostaff << "\n";
+
+      if (pianostaff==false)
+	//voice settings does not work very well with pianostaffs. Use
+	//\stemUp \stemNeutral \stemDown instead
 	{
-	case 0: break;
-	  // we don't want voiceOne-specific behaviour if there is only one
-	  // voice, so if there are more voices, we append "\voiceOne" later
-	case 1:
-	  out <<"\\voiceTwo" <<"\n\n";
-	  break;
-	case 2:
-	  out <<"\\voiceThree" <<"\n\n";
-	  break;
-	case 3:
-	  out <<"\\voiceFour" <<"\n\n";
-	  break;
+	  switch(voice)
+	    {
+	    case 0: break;
+	      // we don't want voiceOne-specific behaviour if there is only one
+	      // voice, so if there are more voices, we append "\voiceOne" later
+	    case 1:
+	      out <<"\\voiceTwo" <<"\n\n";
+	      break;
+	    case 2:
+	      out <<"\\voiceThree" <<"\n\n";
+	      break;
+	    case 3:
+	      out <<"\\voiceFour" <<"\n\n";
+	      break;
+	    }
 	}
 
       //check for implicit startrepeat before first measure: (could
@@ -4093,7 +4100,11 @@ void ExportLy::writeScore()
       curTicks=-1;
       pickup=false;
 
-      //      int staves = part->nstaves();
+      if (part->nstaves()==2) 
+	pianostaff = true;
+      else 
+	pianostaff = false;
+
       int strack = score->staffIdx(part) * VOICES;
       int etrack = strack + n* VOICES;
 
@@ -4224,6 +4235,7 @@ void ExportLy::writeScore()
 	      indent();
               out << "\\mergeDifferentlyDottedOn \n";
 	      ++level;
+
 	      for (voice = 0; voice < voiceno; voice++)
 		{
 		  if (voiceActive[voice])
@@ -4232,13 +4244,16 @@ void ExportLy::writeScore()
 		      //it will be possible to attach lyrics to them.
 		      indent();
 		      out << "\\context Voice = " << staffname[staffInd].voicename[voice] ;
-		      if (voice == 0) out << "{\\voiceOne ";
+		      if ((voice == 0) and (pianostaff ==false)) 
+			out << "{\\voiceOne ";
 		      out << "\\" << staffname[staffInd].voicename[voice];
-		      if (voice == 0) out << "}";
+		      if ((voice == 0) and (pianostaff == false)) 
+			out << "}";
 		      if (voice < voiceno-1) out << "\\\\ \n";
 		      else out <<"\n";
 		    }
 		}
+	      
 	      indent();
 	      out << ">> \n\n";
 	      level=0;
@@ -4688,6 +4703,12 @@ bool ExportLy::write(const QString& name)
 /*----------------------- NEWS and HISTORY:--------------------  */
 
 /*
+
+  02.feb 2010. If \voiceOne etc. is used in pianostaff, articulation
+  signs are either placed on only above or only below staff, and not
+  in any reasonable connection with the notehead. So \voiceOne etc. is
+  no longer used in pianostaff.
+
   27.dec.09 Two (and not more than two) dynamic signs on the same
   note.
 
@@ -4770,6 +4791,7 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
+  
 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed. Lilypond has automatic
