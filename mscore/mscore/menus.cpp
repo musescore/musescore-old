@@ -389,7 +389,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
-                  sp->append(s, s->subtypeName());
+                  sp->append(s, qApp->translate("articulation", s->subtypeName().toAscii().constData()));
                   }
             paletteBox->addPalette(sp);
 
@@ -404,12 +404,12 @@ void MuseScore::showPalette(bool visible)
             for (int i = 1; i < 6; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             for (int i = 16; i < 26+9; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             AccidentalBracket* ab = new AccidentalBracket(gscore);
             ab->setSubtype(0);
@@ -478,7 +478,7 @@ void MuseScore::showPalette(bool visible)
                   int sym = noteHeads[0][i][1];
                   NoteHead* nh = new NoteHead(gscore);
                   nh->setSym(sym);
-                  sp->append(nh, tr(symbols[sym].name(), "Note head"));
+                  sp->append(nh, qApp->translate("symbol", symbols[sym].name()));
                   }
 
             paletteBox->addPalette(sp);
