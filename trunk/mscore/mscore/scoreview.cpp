@@ -1689,7 +1689,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                         {
                         Element* el = elementAt(pos);
                         if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
-                              dropTarget = el;  //?
+                              setDropTarget(el);
                               break;
                               }
                         setDropTarget(0);
