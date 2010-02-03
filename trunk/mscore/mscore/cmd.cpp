@@ -2431,7 +2431,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           c->setStaffMove(0);
                                     for (iNote i = nl->begin(); i != nl->end(); ++i) {
                                           Note* n = i->second;
-                                          n->setPitch(n->pitch() - part->transposeDiatonic());
+                                          n->setPitch(n->pitch() - part->transposeChromatic());
                                           n->setTpcFromPitch();
                                           n->setTrack(track);
                                           }
