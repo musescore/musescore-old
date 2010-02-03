@@ -884,7 +884,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "time-delete",
          QT_TRANSLATE_NOOP("action","Timewise Delete"),
-         Qt::CTRL + Qt::Key_Delete,
+         0, // Qt::CTRL + Qt::Key_Delete,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Timewise Delete"),
          QT_TRANSLATE_NOOP("action","Delete element and duration")
@@ -893,7 +893,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "delete-measures",
          QT_TRANSLATE_NOOP("action","Delete selected measures"),
-         0,
+         Qt::CTRL + Qt::Key_Delete,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Delete Selected Measures"),
          QT_TRANSLATE_NOOP("action","Delete selected measures")
