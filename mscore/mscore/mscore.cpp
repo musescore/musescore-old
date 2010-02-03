@@ -2137,8 +2137,10 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "edit-harmony")
             editChordStyle();
       else {
-            if (cv)
+            if (cv) {
+                  cv->setFocus();
                   cv->cmd(a);
+                  }
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             }
