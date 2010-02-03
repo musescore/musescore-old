@@ -99,7 +99,7 @@ Shortcut MuseScore::sc[] = {
          "file-new",
          QT_TRANSLATE_NOOP("action","file new"),
          Qt::CTRL+Qt::Key_N,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","New..."),
          QT_TRANSLATE_NOOP("action","Create new score"),
          &fileNewIcon
