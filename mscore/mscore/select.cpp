@@ -223,11 +223,11 @@ void Selection::add(Element* el)
 //   deselect
 //---------------------------------------------------------
 
-void Score::deselect(Element* obj)
+void Score::deselect(Element* el)
       {
-      refresh |= obj->abbox();
-      deselect(obj);
-      obj->setSelected(false);
+      refresh |= el->abbox();
+      _selection.remove(el);
+      el->setSelected(false);
       }
 
 //---------------------------------------------------------
