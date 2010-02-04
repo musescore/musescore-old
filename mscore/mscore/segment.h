@@ -108,7 +108,7 @@ class Segment : public Element {
 
       ChordRest* nextChordRest(int track, bool backwards = false) const;
 
-      Element* element(int track) const { return _elist[track];    }
+      Element* element(int track) const { return ((track<_elist.size() )? _elist[track]:0);    }
       void removeElement(int track);
       void setElement(int track, Element* el);
       LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }
