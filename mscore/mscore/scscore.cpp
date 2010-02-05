@@ -30,6 +30,9 @@
 #include "box.h"
 #include "preferences.h"
 #include "style.h"
+#include "measure.h"
+#include "segment.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   ScScorePropertyIterator
@@ -620,3 +623,39 @@ void ScScorePrototype::setStyle(const QString& name, const QString& val)
       thisScore()->setStyle(sv.getIdx(), sv);
       }
 
+//---------------------------------------------------------
+//   hasLyrics
+//---------------------------------------------------------
+
+bool ScScorePrototype::hasLyrics(){
+    for (MeasureBase* mb = thisScore()->measures()->first(); mb; mb = mb->next()){
+        if (mb->type() != MEASURE)
+            continue;
+        Measure* measure = (Measure*) mb;
+        for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+            for (int i = 0; i < thisScore()->nstaves(); ++i) {
+                if (seg->lyricsList(i)->size() > 0){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------
+//   hasHarmonies
+//---------------------------------------------------------
+
+bool ScScorePrototype::hasHarmonies(){
+    for (MeasureBase* mb = thisScore()->measures()->first(); mb; mb = mb->next()){
+        foreach(Element* element, *mb->el()) {
+            if (element->type() == HARMONY){
+              Harmony* h = (Harmony*)element;
+              if (h->id() != -1)
+                  return true;
+            }
+        }
+    }
+    return false;
+}
