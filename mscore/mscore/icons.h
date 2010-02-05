@@ -27,51 +27,26 @@ enum {
       };
 
 extern void genIcons();
-extern QIcon longaUpIcon;
-extern QIcon brevisIcon;
-extern QIcon noteIcon;
-extern QIcon note2Icon;
-extern QIcon note4Icon;
-extern QIcon note8Icon;
-extern QIcon note16Icon;
-extern QIcon note32Icon;
-extern QIcon note64Icon;
 
-extern QIcon naturalIcon;
-extern QIcon sharpIcon;
-extern QIcon sharpsharpIcon;
-extern QIcon flatIcon;
-extern QIcon flatflatIcon;
-extern QIcon staccatoIcon;
-extern QIcon quartrestIcon;
-extern QIcon dotIcon;
-extern QIcon dotdotIcon;
-extern QIcon sforzatoaccentIcon;
-extern QIcon staccatoIcon;
-extern QIcon tenutoIcon;
-extern QIcon plusIcon;
-extern QIcon flipIcon;
-extern QIcon voiceIcons[];
-
-extern QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
-extern QIcon printIcon, clefIcon;
-extern QIcon midiinIcon, speakerIcon, startIcon, playIcon, repeatIcon;
-extern QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon, abeamIcon;
-extern QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
-extern QIcon exitIcon, viewmagIcon;
-extern QIcon windowIcon;
-
-extern QIcon acciaccaturaIcon, appoggiaturaIcon;
-extern QIcon grace4Icon, grace16Icon, grace32Icon;
+enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON, note16_ICON,
+      note32_ICON, note64_ICON, natural_ICON, sharp_ICON, sharpsharp_ICON, flat_ICON, flatflat_ICON,
+      staccato_ICON, quartrest_ICON, dot_ICON, dotdot_ICON, sforzatoaccent_ICON,
+      tenuto_ICON, plus_ICON, flip_ICON, voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
+      undo_ICON, redo_ICON, cut_ICON, copy_ICON, paste_ICON, print_ICON, clef_ICON,
+      midiin_ICON, speaker_ICON, start_ICON, play_ICON, repeat_ICON, sbeam_ICON, mbeam_ICON,
+      nbeam_ICON, beam32_ICON, abeam_ICON, fileOpen_ICON, fileNew_ICON, fileSave_ICON,
+      fileSaveAs_ICON, exit_ICON, viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
+      grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON,
+      ICONS
+      };
+extern QIcon* icons[ICONS];
 
 class Sym;
 
 static const int ICON_HEIGHT = 24;
 static const int ICON_WIDTH  = 20;
 
-extern QIcon symIcon(const Sym&, int size, int width, int height);
-extern QIcon noteEntryIcon;
-extern QIcon keysIcon;
+extern QIcon* symIcon(const Sym&, int size, int width, int height);
 
 #endif
 

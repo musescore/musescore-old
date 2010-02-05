@@ -38,7 +38,7 @@ ChordStyleEditor::ChordStyleEditor(QWidget* parent)
       {
       setupUi(this);
       setWindowTitle(tr("MuseScore: Chord Style Editor"));
-      fileButton->setIcon(fileOpenIcon);
+      fileButton->setIcon(*icons[fileOpen_ICON]);
       chordList = 0;
 
       // create symbol palette

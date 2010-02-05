@@ -44,7 +44,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Open..."),
          QT_TRANSLATE_NOOP("action","Load score from file"),
-         &fileOpenIcon
+         fileOpen_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -54,7 +54,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Save"),
          QT_TRANSLATE_NOOP("action","Save score to file"),
-         &fileSaveIcon
+          fileSave_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -64,7 +64,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Save As..."),
          QT_TRANSLATE_NOOP("action","Save score under a new file name"),
-         &fileSaveIcon
+          fileSave_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -92,7 +92,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Close"),
          QT_TRANSLATE_NOOP("action","Close current score"),
-         &fileSaveIcon
+          fileSave_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -102,7 +102,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","New..."),
          QT_TRANSLATE_NOOP("action","Create new score"),
-         &fileNewIcon
+          fileNew_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -112,7 +112,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Print..."),
          QT_TRANSLATE_NOOP("action","Print score"),
-         &printIcon
+          print_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -122,7 +122,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Undo"),
          QT_TRANSLATE_NOOP("action","Undo last change"),
-         &undoIcon
+          undo_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -132,7 +132,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Redo"),
          QT_TRANSLATE_NOOP("action","Redo last undo"),
-         &redoIcon
+          redo_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -142,7 +142,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Cut"),
          QT_TRANSLATE_NOOP("action",""),
-         &cutIcon
+          cut_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -152,7 +152,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Copy"),
          QT_TRANSLATE_NOOP("action",""),
-         &copyIcon
+          copy_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -162,7 +162,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Paste"),
          QT_TRANSLATE_NOOP("action",""),
-         &pasteIcon
+          paste_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -181,7 +181,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Clefs..."),
          QT_TRANSLATE_NOOP("action","Show clefs palette"),
-         &clefIcon
+          clef_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -191,7 +191,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Key Signatures..."),
          QT_TRANSLATE_NOOP("action","Show key signatures palette"),
-         &sharpIcon
+          sharp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -228,7 +228,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Note Input"),
          QT_TRANSLATE_NOOP("action","Note input mode"),
-         &noteEntryIcon
+          noteEntry_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -526,7 +526,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Rest"),
          QT_TRANSLATE_NOOP("action","Enter rest"),
-         &quartrestIcon
+          quartrest_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -581,7 +581,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Flip Direction"),
          QT_TRANSLATE_NOOP("action","Flip direction"),
-         &flipIcon
+          flip_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1042,7 +1042,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Longa"),
          QT_TRANSLATE_NOOP("action","Longa"),
-         &longaUpIcon
+          longaUp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1052,7 +1052,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Double whole note (breve)"),
          QT_TRANSLATE_NOOP("action","Double whole note (breve)"),
-         &brevisIcon
+          brevis_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1062,7 +1062,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Whole note (semibreve)"),
          QT_TRANSLATE_NOOP("action","Whole note (semibreve)"),
-         &noteIcon
+          note_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1072,7 +1072,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Half note (minim)"),
          QT_TRANSLATE_NOOP("action","Half note (minim)"),
-         &note2Icon
+          note2_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1082,7 +1082,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Quarter note (crochet)"),
          QT_TRANSLATE_NOOP("action","Quarter note (crochet)"),
-         &note4Icon
+          note4_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1092,7 +1092,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Eighth note (quaver)"),
          QT_TRANSLATE_NOOP("action","Eighth note (quaver)"),
-         &note8Icon
+          note8_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1102,7 +1102,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","16th note (semiquaver)"),
          QT_TRANSLATE_NOOP("action","16th note (semiquaver)"),
-         &note16Icon
+          note16_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1112,7 +1112,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
          QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
-         &note32Icon
+          note32_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1122,7 +1122,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
          QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
-         &note64Icon
+          note64_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1132,7 +1132,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Dot"),
          QT_TRANSLATE_NOOP("action","Dot"),
-         &dotIcon
+          dot_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1142,7 +1142,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Double dot"),
          QT_TRANSLATE_NOOP("action","Double dot"),
-         &dotdotIcon
+          dotdot_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1152,7 +1152,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","tie"),
          QT_TRANSLATE_NOOP("action","tie"),
-         &plusIcon
+          plus_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1162,7 +1162,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","rest"),
          QT_TRANSLATE_NOOP("action","rest"),
-         &quartrestIcon
+          quartrest_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1172,7 +1172,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","double sharp"),
          QT_TRANSLATE_NOOP("action","double sharp"),
-         &sharpsharpIcon
+          sharpsharp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1182,7 +1182,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","sharp"),
          QT_TRANSLATE_NOOP("action","sharp"),
-         &sharpIcon
+          sharp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1192,7 +1192,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","natural"),
          QT_TRANSLATE_NOOP("action","natural"),
-         &naturalIcon
+          natural_ICON
          ),
        Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1202,7 +1202,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Flat"),
          QT_TRANSLATE_NOOP("action","Flat"),
-         &flatIcon
+          flat_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1212,7 +1212,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","double flat"),
          QT_TRANSLATE_NOOP("action","double flat"),
-         &flatflatIcon
+          flatflat_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1222,7 +1222,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","acciaccatura"),
          QT_TRANSLATE_NOOP("action","acciaccatura"),
-         &acciaccaturaIcon
+          acciaccatura_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1232,7 +1232,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","appoggiatura"),
          QT_TRANSLATE_NOOP("action","appoggiatura"),
-         &appoggiaturaIcon
+          appoggiatura_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1243,7 +1243,7 @@ Shortcut MuseScore::sc[] = {
         Qt::WindowShortcut,
         QT_TRANSLATE_NOOP("action","grace-4"),
         QT_TRANSLATE_NOOP("action","grace-4"),
-        &grace4Icon
+         grace4_ICON
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1254,7 +1254,7 @@ Shortcut MuseScore::sc[] = {
         Qt::WindowShortcut,
         QT_TRANSLATE_NOOP("action","grace-16"),
         QT_TRANSLATE_NOOP("action","grace-16"),
-        &grace16Icon
+         grace16_ICON
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1265,7 +1265,7 @@ Shortcut MuseScore::sc[] = {
         Qt::WindowShortcut,
         QT_TRANSLATE_NOOP("action","grace-32"),
         QT_TRANSLATE_NOOP("action","grace-32"),
-        &grace32Icon
+         grace32_ICON
         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1275,7 +1275,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","voice 1"),
          QT_TRANSLATE_NOOP("action","voice 1"),
-         &voiceIcons[0]
+          voice1_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1285,7 +1285,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","voice 2"),
          QT_TRANSLATE_NOOP("action","voice 2"),
-         &voiceIcons[1]
+          voice2_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1295,7 +1295,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","voice 3"),
          QT_TRANSLATE_NOOP("action","voice 3"),
-         &voiceIcons[2]
+          voice3_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1305,7 +1305,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","voice 4"),
          QT_TRANSLATE_NOOP("action","voice 4"),
-         &voiceIcons[3]
+          voice4_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1315,7 +1315,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
          QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
-         &midiinIcon
+          midiin_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1325,7 +1325,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Enable sound while editing"),
          QT_TRANSLATE_NOOP("action","Enable sound while editing"),
-         &speakerIcon
+          speaker_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1335,7 +1335,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","beam start"),
          QT_TRANSLATE_NOOP("action","beam start"),
-         &sbeamIcon
+          sbeam_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1345,7 +1345,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","beam mid"),
          QT_TRANSLATE_NOOP("action","beam mid"),
-         &mbeamIcon
+          mbeam_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1355,7 +1355,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","no beam"),
          QT_TRANSLATE_NOOP("action","no beam"),
-         &nbeamIcon
+          nbeam_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1365,7 +1365,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","beam 32"),
          QT_TRANSLATE_NOOP("action","beam 32"),
-         &beam32Icon
+          beam32_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1375,7 +1375,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","auto beam"),
          QT_TRANSLATE_NOOP("action","auto beam"),
-         &abeamIcon
+          abeam_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -1449,7 +1449,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Quit"),
          QT_TRANSLATE_NOOP("action","Quit"),
-         &exitIcon
+          exit_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
@@ -1459,7 +1459,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Mag"),
          QT_TRANSLATE_NOOP("action","Zoom Canvas"),
-         &viewmagIcon
+          viewmag_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1606,7 +1606,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Play"),
          QT_TRANSLATE_NOOP("action","Start or stop playback"),
-         &playIcon
+          play_ICON
          ),
       Shortcut(
          STATE_PLAY,
@@ -1661,7 +1661,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Rewind"),
          QT_TRANSLATE_NOOP("action","Rewind to start position"),
-         &startIcon
+          start_ICON
          ),
       Shortcut(
          STATE_PLAY,
@@ -1680,7 +1680,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Repeat"),
          QT_TRANSLATE_NOOP("action","Play repeats on/off"),
-         &repeatIcon
+          repeat_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -1690,7 +1690,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Load Style..."),
          QT_TRANSLATE_NOOP("action","Load Style"),
-         &fileOpenIcon
+          fileOpen_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -1700,7 +1700,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Save Style..."),
          QT_TRANSLATE_NOOP("action","Save Style"),
-         &fileSaveIcon
+          fileSave_ICON
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -1809,7 +1809,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Repeat last command"),
          QT_TRANSLATE_NOOP("action","Repeat last command"),
-         &fileOpenIcon
+          fileOpen_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1900,7 +1900,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Show Keyboard"),
          QT_TRANSLATE_NOOP("action","Show Keyboard"),
-         &keysIcon
+          keys_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
@@ -1992,7 +1992,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","mirror note head"),
          QT_TRANSLATE_NOOP("action","mirror note head"),
-         &flipIcon
+          flip_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -2074,7 +2074,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Repeat selection"),
          QT_TRANSLATE_NOOP("action","Repeat selection"),
-         &fileOpenIcon
+          fileOpen_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,

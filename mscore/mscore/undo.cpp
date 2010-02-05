@@ -1234,8 +1234,12 @@ ChangeElement::ChangeElement(Element* oe, Element* ne)
 
 void ChangeElement::flip()
       {
+      Score* score = oldElement->score();
+      if (oldElement->selected())
+            score->deselect(oldElement);
+      if (newElement->selected())
+            score->select(newElement);
       if (oldElement->parent() == 0) {
-            Score* score = oldElement->score();
             score->removeElement(oldElement);
             score->addElement(newElement);
             }

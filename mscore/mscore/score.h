@@ -475,7 +475,7 @@ class Score : public QObject {
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
       Rest* setRest(int tick,  int track, Fraction, bool useDots, Tuplet* tuplet);
 
-      void select(Element* obj, SelectType, int staff);
+      void select(Element* obj, SelectType = SELECT_SINGLE, int staff = 0);
       void deselect(Element* obj);
       void deselectAll() { _selection.deselectAll(); }
       void updateSelection() { _selection.update(); }
