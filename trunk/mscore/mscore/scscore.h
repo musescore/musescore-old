@@ -111,6 +111,8 @@ class ScScorePrototype : public QObject, public QScriptable
       void startUndo()      { thisScore()->startCmd(); }
       void endUndo()        { thisScore()->endCmd();   }
       void setStyle(const QString& name, const QString& value);
+      bool hasLyrics();
+      bool hasHarmonies();
       };
 
 Q_DECLARE_METATYPE(ScorePtr)

@@ -97,10 +97,12 @@ Objects
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
             endUndo()                     end undoable operations
-            int pages()                       number of pages
-            int measures()                    number of actual measures
-            int parts()                       number of parts
-            Part part(int i)                  part object at index i
+            int pages()                   number of pages
+            int measures()                number of actual measures
+            int parts()                   number of parts
+            Part part(int i)              part object at index i
+            bool hasLyrics                true if a lyric element is found in the core
+            bool hasHarmonies             true if a valid chordname is found    
 
    Cursor
          create:  var a = Cursor(Score score);
