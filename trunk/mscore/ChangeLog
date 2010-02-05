@@ -1,7 +1,10 @@
+5.feb (ws)
+      - fixed crash on exit with newest qt libraries: replaced global QIcon with QIcon* to avoid
+        destructor call on exit
 04 feb (la)
       - Change app name in windows installer
       - Change default install path for windows installer
-02.feb (og) 
+02.feb (og)
 	Exportly.cpp: If \voiceOne etc. is used in pianostaff,
 	articulation signs are either placed on only above or only below
 	staff, and not in any reasonable connection with the notehead. So

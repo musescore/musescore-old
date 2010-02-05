@@ -361,9 +361,9 @@ TextPalette::TextPalette(QWidget* parent)
                   tb->setText(sc.code);
             else {
                   Sym sym("", sc.code.unicode(), sc.fontId);
-                  QIcon icon = symIcon(sym, 25, 35, 35);
+                  QIcon* icon = symIcon(sym, 25, 35, 35);
                   tb->setIconSize(QSize(35, 35));
-                  tb->setIcon(icon);
+                  tb->setIcon(*icon);
                   }
             gl->addWidget(tb, buttonIndex / 16, buttonIndex % 16);
             sg->addButton(tb, i);

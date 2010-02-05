@@ -158,17 +158,17 @@ class Shortcut {
       Qt::ShortcutContext context;
       QString text;           //! text as shown on buttons or menus
       QString help;           //! ballon help
-      QIcon* icon;
+      int icon;
       QAction* action;        //! cached action
       bool translated;
 
       Shortcut();
       Shortcut(int state, const char* name, const char* d, QKeySequence::StandardKey sk = QKeySequence::UnknownKey,
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
-         const char* txt = 0, const char* h = 0, QIcon* i = 0);
+         const char* txt = 0, const char* h = 0, int i = -1);
       Shortcut(int state, const char* name, const char* d, const QKeySequence& k = QKeySequence(),
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
-         const char* txt = 0, const char* h = 0, QIcon* i = 0);
+         const char* txt = 0, const char* h = 0, int i = -1);
       Shortcut(const Shortcut& c);
       };
 

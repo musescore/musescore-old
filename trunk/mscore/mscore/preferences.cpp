@@ -673,7 +673,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 #ifdef USE_PORTAUDIO
       if (usePortaudio) {
             Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
-            
+
             QStringList apis = audio->apiList();
             portaudioApi->addItems(apis);
             portaudioApi->setCurrentIndex(audio->currentApi());
@@ -683,7 +683,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             portaudioDevice->setCurrentIndex(audio->currentDevice());
 
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
-#ifdef USE_PORTMIDI  
+#ifdef USE_PORTMIDI
             PortMidiDriver* midiDriver = static_cast<PortMidiDriver*>(audio->mididriver());
             if(midiDriver){
                 QStringList midiInputs = midiDriver->deviceInList();
@@ -798,7 +798,7 @@ void PreferenceDialog::updateSCListView()
                   continue;
             ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
-            newItem->setIcon(0, *s->icon);
+            newItem->setIcon(0, *icons[s->icon]);
             newItem->setText(1, s->key.toString(QKeySequence::NativeText));
             newItem->setData(0, Qt::UserRole, s->xml);
             shortcutList->addTopLevelItem(newItem);
@@ -1285,8 +1285,8 @@ QAction* getAction(Shortcut* s)
                   }
             if (!s->text.isEmpty())
                   a->setText(s->text);
-            if (s->icon)
-                  a->setIcon(*s->icon);
+            if (s->icon != -1)
+                  a->setIcon(*icons[s->icon]);
             }
       return s->action;
       }

@@ -592,7 +592,7 @@ MuseScore::MuseScore()
 
       menuFile->addAction(getAction("file-new"));
       menuFile->addAction(getAction("file-open"));
-      openRecent = menuFile->addMenu(fileOpenIcon, tr("Open &Recent"));
+      openRecent = menuFile->addMenu(*icons[fileOpen_ICON], tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
       connect(openRecent, SIGNAL(triggered(QAction*)), SLOT(selectScore(QAction*)));
       menuFile->addSeparator();
@@ -1509,7 +1509,15 @@ void setMscoreLocale(QString localeName)
             qApp->installTranslator(qtTranslator);
             translatorList.append(qtTranslator);
             }
+      // initShortcuts();
+      }
 
+//---------------------------------------------------------
+//   initShortcuts
+//---------------------------------------------------------
+
+static void initShortcuts()
+      {
       //
       // initialize shortcut hash table
       //
@@ -1779,7 +1787,6 @@ int main(int argc, char* av[])
       QCoreApplication::setApplicationName("MuseScore");
 
       if (!converterMode) {
-            qApp->setWindowIcon(windowIcon);
             if (!argv.isEmpty()) {
                   int ok = true;
                   foreach(QString message, argv) {
@@ -1911,13 +1918,15 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
+      if (!converterMode) {
+            genIcons();
+            qApp->setWindowIcon(*icons[window_ICON]);
+            initShortcuts();
+            }
       initDrumset();
 
       gscore = new Score(defaultStyle);
-      if (!converterMode)
-            genIcons();
       mscore = new MuseScore();
-
       mscore->setRevision(revision);
 
       if (!(converterMode || pluginMode)) {
@@ -1947,30 +1956,49 @@ int main(int argc, char* av[])
             sc->finish(mscore);
       if (debugMode)
             printf("start event loop...\n");
-      if(mscore->hasToCheckForUpdate())
+      if (mscore->hasToCheckForUpdate())
             mscore->checkForUpdate();
       return qApp->exec();
       }
 
-bool MuseScore::unstable(){
+//---------------------------------------------------------
+//   unstable
+//---------------------------------------------------------
+
+bool MuseScore::unstable()
+      {
 #ifdef MSCORE_UNSTABLE
-     return true;
+      return true;
 #else
-     return false;
+      return false;
 #endif
-     }
+      }
 
-bool MuseScore::hasToCheckForUpdate(){
-    if (ucheck)
-          return ucheck->hasToCheck();
-    else
+//---------------------------------------------------------
+//   hasToCheckForUpdate
+//---------------------------------------------------------
+
+bool MuseScore::hasToCheckForUpdate()
+      {
+      if (ucheck)
+            return ucheck->hasToCheck();
+      else
           return false;
-    }
+      }
 
-void MuseScore::checkForUpdate(){
-    if (ucheck)
-        ucheck->check(revision(), (sender()!=0));
-    }
+//---------------------------------------------------------
+//   checkForUpdate
+//---------------------------------------------------------
+
+void MuseScore::checkForUpdate()
+      {
+      if (ucheck)
+            ucheck->check(revision(), sender() != 0);
+      }
+
+//---------------------------------------------------------
+//   readLanguages
+//---------------------------------------------------------
 
 bool MuseScore::readLanguages(const QString& path)
       {
@@ -2282,13 +2310,13 @@ Shortcut::Shortcut()
       standardKey = QKeySequence::UnknownKey;
       key         = 0;
       context     = Qt::WindowShortcut;
-      icon        = 0;
+      icon        = -1;
       action      = 0;
       translated  = false;
       }
 
 Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k,
-   Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
+   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
       {
       state       = s;
       xml         = name;
@@ -2304,7 +2332,7 @@ Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k
       }
 
 Shortcut::Shortcut(int s, const char* name, const char* d, QKeySequence::StandardKey sk,
-   Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
+   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
       {
       state       = s;
       xml         = name;
