@@ -2120,6 +2120,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
+      static char table2[]  = "CDEFGAB";
       printf("ExportMusicXml::rest() oldtick=%d", tick);
       attr.doAttr(xml, false);
 
@@ -2127,13 +2128,31 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       if(! rest->visible() ){
           noteTag += QString(" print-object=\"no\"");
       }
-
       xml.stag(noteTag);
-// Either <rest/>
-// or <rest><display-step>F</display-step><display-octave>5</display-octave></rest>
-//      printf(" sp=%g useroffx,y=%g,%g", rest->spatium(), rest->userOff().x(), rest->userOff().y());
-      printf(" yshift=%g", rest->userOff().y() / rest->spatium());
-      xml.tagE("rest");
+
+      double yOffsSp = rest->userOff().y() / rest->spatium();                    // y offset in spatium (negative = up)
+      int    yOffsSt = - 2 * int(yOffsSp > 0.0 ? yOffsSp + 0.5 : yOffsSp - 0.5); // same rounded to int (positive = up)
+//      printf(" yshift=%g", yOffsSp);
+//      printf(" (up %d steps)", yOffsSt);
+      int clef = rest->staff()->clefList()->clef(rest->tick());
+      int po = clefTable[clef].pitchOffset;
+      po -= 4;          // pitch middle staff line (two lines times two steps lower than top line)
+      po += yOffsSt;    // rest "pitch"
+      int oct = po / 7; // octave
+      int stp = po % 7; // step
+//      printf("\nclef=%d line=%d po=%d stp=%d oct=%d", clef, clefTable[clef].line, po, stp, oct);
+
+      // Either <rest/>
+      // or <rest><display-step>F</display-step><display-octave>5</display-octave></rest>
+      if (yOffsSt == 0) {
+            xml.tagE("rest");
+            }
+      else {
+            xml.stag("rest");
+            xml.tag("display-step", QString(QChar(table2[stp])));
+            xml.tag("display-octave", oct - 1);
+            xml.etag();
+            }
 
       Duration d = rest->duration();
       int tickLen = rest->tickLen();
