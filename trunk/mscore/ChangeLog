@@ -1,3 +1,5 @@
+6.feb (lv)
+      - MusicXML import/export of rest display-step and -octave
 5.feb (ws)
       - fixed crash on exit with newest qt libraries: replaced global QIcon with QIcon* to avoid
         destructor call on exit

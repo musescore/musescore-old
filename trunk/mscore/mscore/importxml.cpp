@@ -2321,8 +2321,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else
                         printf("unknown beam keyword <%s>\n", s.toLatin1().data());
                   }
-            else if (tag == "rest")
+            else if (tag == "rest") {
                   rest = true;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "display-step")          // A-G
+                              step = ee.text();
+                        else if (ee.tagName() == "display-octave")   // 0-9 4=middle C
+                              octave = ee.text().toInt();
+                        else
+                              domError(ee);
+                        }
+                  }
             else if (tag == "lyric")
                   xmlLyric(measure, relStaff + staff, e);
             else if (tag == "dot")
@@ -2629,6 +2638,23 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Segment* s = measure->getSegment(cr);
             s->add(cr);
             cr->setVisible(printObject == "yes");
+            if (step != "" && 0 <= octave && octave <= 9) {
+                  printf("rest step=%s oct=%d", qPrintable(step), octave);
+                  int clef = cr->staff()->clefList()->clef(tick);
+                  int po = clefTable[clef].pitchOffset;
+                  int istep = step[0].toAscii() - 'A';
+                  printf(" clef=%d po=%d istep=%d\n", clef, po, istep);
+                  if (istep < 0 || istep > 6) {
+                        printf("rest: illegal display-step %d, <%s>\n", istep, qPrintable(step));
+                        }
+                  else {
+                        //                        a  b  c  d  e  f  g
+                        static int table2[7]  = { 5, 6, 0, 1, 2, 3, 4 };
+                        int dp = 7 * (octave + 2) + table2[istep];
+                        printf("dp=%d\n", dp);
+                        cr->setUserYoffset((po - dp + 3) * score->spatium() / 2);
+                        }
+                  }
             }
       else {
             char c     = step[0].toLatin1();
