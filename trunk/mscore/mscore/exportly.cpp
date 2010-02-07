@@ -944,8 +944,9 @@ void ExportLy::tempoText(TempoText* text)
       {
 	QString temptekst = text->getText();
 	double met = text->tempo();
-	met = met * 60;
-	out << "\\tempo \""  << text->getText() << "\" " <<  timedenom << " = " << met << "  ";
+	int metronome;
+	metronome = (int) met * 60;
+	out << "\\tempo \""  << text->getText() << "\" " <<  timedenom << " = " << metronome << "  ";
       }
 
 
@@ -2568,90 +2569,90 @@ void ExportLy::writeArticulation(ChordRest* c)
       switch(a->subtype())
 	{
 	case UfermataSym:
-	  out << "\\fermata";
+	  out << "\\fermata ";
 	  break;
 	case DfermataSym:
-	  out << "_\\fermata";
+	  out << "_\\fermata ";
 	  break;
 	case ThumbSym:
-	  out << "\\thumb";
+	  out << "\\thumb ";
 	  break;
 	case SforzatoaccentSym:
-	  out << "->";
+	  out << "-> ";
 	  break;
 	case EspressivoSym:
-	  out << "\\espressivo";
+	  out << "\\espressivo ";
 	  break;
 	case StaccatoSym:
-	  out << "-.";
+	  out << "-. ";
 	  break;
 	case UstaccatissimoSym:
-	  out << "-|";
+	  out << "-| ";
 	  break;
 	case DstaccatissimoSym:
-	  out << "_|";
+	  out << "_| ";
 	  break;
 	case TenutoSym:
-	  out << "--";
+	  out << "-- ";
 	  break;
 	case flageoletSym:
 	  out << "\\flageolet ";
 	case UportatoSym:
-	  out << "-_";
+	  out << "-_ ";
 	  break;
 	case DportatoSym:
-	  out << "__";
+	  out << "__ ";
 	  break;
 	case UmarcatoSym:
-	  out << "-^";
+	  out << "-^ ";
 	  break;
 	case DmarcatoSym:
-	  out << "_^";
+	  out << "_^ ";
 	  break;
 	case OuvertSym:
-	  out << "\\open";
+	  out << "\\open ";
 	  break;
 	case PlusstopSym:
-	  out << "-+";
+	  out << "-+ ";
 	  break;
 	case UpbowSym:
-	  out << "\\upbow";
+	  out << "\\upbow ";
 	  break;
 	case DownbowSym:
-	  out << "\\downbow";
+	  out << "\\downbow ";
 	  break;
 	case ReverseturnSym:
-	  out << "\\reverseturn";
+	  out << "\\reverseturn ";
 	  break;
 	case TurnSym:
-	  out << "\\turn";
+	  out << "\\turn ";
 	  break;
 	case TrillSym:
-	  out << "\\trill";
+	  out << "\\trill ";
 	  break;
 	case PrallSym:
-	  out << "\\prall";
+	  out << "\\prall ";
 	  break;
 	case MordentSym:
-	  out << "\\mordent";
+	  out << "\\mordent ";
 	  break;
 	case PrallPrallSym:
-	  out << "\\prallprall";
+	  out << "\\prallprall ";
 	  break;
 	case PrallMordentSym:
-	  out << "\\prallmordent";
+	  out << "\\prallmordent ";
 	  break;
 	case UpPrallSym:
-	  out << "\\prallup";
+	  out << "\\prallup ";
 	  break;
 	case DownPrallSym:
-	  out << "\\pralldown";
+	  out << "\\pralldown ";
 	  break;
 	case UpMordentSym:
-	  out << "\\upmordent";
+	  out << "\\upmordent ";
 	  break;
 	case DownMordentSym:
-	  out << "\\downmordent";
+	  out << "\\downmordent ";
 	  break;
 	default:
 	  printf("unsupported note attribute %d\n", a->subtype());
@@ -3252,6 +3253,8 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
   bool utgang=false;
   int i=0;
 
+  if (pickup) 
+    measurenumber--;
   while ((voltarray[i].barno < measurenumber) and (i<=lastind))
     {
       //find the present measure
@@ -4779,7 +4782,7 @@ bool ExportLy::write(const QString& name)
    harp), and for bracketing single staffs.
 
    NEW 22.jan. 2009
-   -- fixed a problem with beames on grace-notes, and
+   -- fixed a problem with beams on grace-notes, and
    some faults produced by the previous revision of exportly.
 
    NEW 18. jan. 2009

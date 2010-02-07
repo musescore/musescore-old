@@ -1,5 +1,8 @@
 7.feb (db)
-      - instrument lists updated with new transposition tags
+	- instrument lists updated with new transposition tags
+	(og)
+	- exportly, fixed bug: incorrect placement of repeats and
+	double-bars after pickup-bar.
 6.feb (lv)
       - MusicXML import/export of rest display-step and -octave
       (la)
