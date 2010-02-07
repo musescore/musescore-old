@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
 
    <Articulation name="staccato">
@@ -27,7 +27,8 @@
          <name>高音長笛</name>
          <short-name>高音長笛</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>67-100</aPitchRange>
          <pPitchRange>67-103</pPitchRange>
          <channel>
@@ -38,7 +39,8 @@
          <name>降Ｅ調長笛</name>
          <short-name>降Ｅ調長笛</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>63-96</aPitchRange>
          <pPitchRange>63-101</pPitchRange>
          <channel>
@@ -59,7 +61,8 @@
          <name>中音長笛</name>
          <short-name>中音長笛</short-name>
          <clef>0</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>55-88</aPitchRange>
          <pPitchRange>55-91</pPitchRange>
          <channel>
@@ -69,7 +72,8 @@
       <instrument>
          <name>低音長笛</name>
          <short-name>低音長笛</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>0</clef>
          <aPitchRange>48-77</aPitchRange>
          <pPitchRange>48-81</pPitchRange>
@@ -81,7 +85,8 @@
          <name>倍中音長笛</name>
          <short-name>倍中音長笛</short-name>
          <clef>0</clef>
-         <transposition>-17</transposition>
+         <transposeDiatonic>-10</transposeDiatonic>
+        <transposeChromatic>-17</transposeChromatic>
          <aPitchRange>43-76</aPitchRange>
          <pPitchRange>42-79</pPitchRange>
          <channel>
@@ -102,7 +107,8 @@
          <name>超倍中音長笛</name>
          <short-name>超倍中音長笛</short-name>
          <clef>4</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>31-60</aPitchRange>
          <pPitchRange>31-64</pPitchRange>
          <channel>
@@ -303,7 +309,8 @@
          <name>中音Ｃ調陶笛</name>
          <short-name>中音Ｃ調陶笛</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-76</pPitchRange>
          <channel>
@@ -334,7 +341,8 @@
          <name>Ｂ調嘉樂貝笛</name>
          <short-name>Ｂ調嘉樂貝笛</short-name>
          <clef>0</clef>
-         <transposition>23</transposition>
+         <transposeDiatonic>13</transposeDiatonic>
+        <transposeChromatic>23</transposeChromatic>
          <aPitchRange>86-105</aPitchRange>
          <pPitchRange>74,76,78,80,86-108,112</pPitchRange>
          <channel>
@@ -355,7 +363,8 @@
          <name>高音雙簧管</name>
          <short-name>高音雙簧管</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-90</aPitchRange>
          <pPitchRange>61-94</pPitchRange>
          <channel>
@@ -376,7 +385,8 @@
          <name>柔音雙簧管</name>
          <short-name>柔音雙簧管</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>56-84</aPitchRange>
          <pPitchRange>56-87</pPitchRange>
          <channel>
@@ -387,7 +397,8 @@
          <name>英國管</name>
          <short-name>英國管</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>52-81</aPitchRange>
          <pPitchRange>52-83</pPitchRange>
          <channel>
@@ -588,7 +599,8 @@
          <name>高音單簧管(Soprano Cl.)</name>
          <short-name>高音單簧管</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>59-88</aPitchRange>
          <pPitchRange>59-88</pPitchRange>
          <channel>
@@ -599,7 +611,8 @@
          <name>高音單簧管(Piccolo Cl.)</name>
          <short-name>高音單簧管</short-name>
          <clef>0</clef>
-         <transposition>8</transposition>
+         <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>8</transposeChromatic>
          <aPitchRange>60-99</aPitchRange>
          <pPitchRange>60-104</pPitchRange>
          <channel>
@@ -610,7 +623,8 @@
          <name>降Ｅ調單簧管</name>
          <short-name>降Ｅ調單簧管</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>55-94</aPitchRange>
          <pPitchRange>55-99</pPitchRange>
          <channel>
@@ -621,7 +635,8 @@
          <name>Ｄ調單簧管</name>
          <short-name>Ｄ調單簧管</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>54-93</aPitchRange>
          <pPitchRange>54-98</pPitchRange>
          <channel>
@@ -642,7 +657,8 @@
          <name>降Ｂ調單簧管</name>
          <short-name>降Ｂ調單簧管</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>50-89</aPitchRange>
          <pPitchRange>50-94</pPitchRange>
          <channel>
@@ -653,7 +669,8 @@
          <name>Ａ調單簧管</name>
          <short-name>Ａ調單簧管</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>49-88</aPitchRange>
          <pPitchRange>49-93</pPitchRange>
          <channel>
@@ -664,7 +681,8 @@
          <name>巴塞單簧管</name>
          <short-name>巴塞單簧管</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>45-88</aPitchRange>
          <pPitchRange>45-93</pPitchRange>
          <channel>
@@ -675,7 +693,8 @@
          <name>中音單簧管</name>
          <short-name>中音單簧管</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>43-80</aPitchRange>
          <pPitchRange>43-84</pPitchRange>
          <channel>
@@ -686,7 +705,8 @@
          <name>巴塞管</name>
          <short-name>巴塞管</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>41-84</aPitchRange>
          <pPitchRange>41-86</pPitchRange>
          <channel>
@@ -697,7 +717,8 @@
          <name>低音單簧管</name>
          <short-name>低音單簧管</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>37-75</aPitchRange>
          <pPitchRange>37-79</pPitchRange>
          <channel>
@@ -708,7 +729,8 @@
          <name>倍中音單簧管</name>
          <short-name>倍中音單簧管</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>31-70</aPitchRange>
          <pPitchRange>31-75</pPitchRange>
          <channel>
@@ -719,7 +741,8 @@
          <name>倍低音單簧管</name>
          <short-name>倍低音單簧管</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>26-65</aPitchRange>
          <pPitchRange>26-70</pPitchRange>
          <channel>
@@ -779,7 +802,8 @@
       <instrument>
          <name>倍低音管</name>
          <short-name>倍低音管</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>22-57</aPitchRange>
          <pPitchRange>22-60</pPitchRange>
@@ -811,7 +835,8 @@
          <name>最高音薩魯管</name>
          <short-name>最高音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-87</aPitchRange>
          <pPitchRange>61-90</pPitchRange>
          <channel>
@@ -822,7 +847,8 @@
          <name>高音薩魯管</name>
          <short-name>高音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>56-87</aPitchRange>
          <pPitchRange>56-92</pPitchRange>
          <channel>
@@ -833,7 +859,8 @@
          <name>中音薩魯管</name>
          <short-name>中音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>49-80</aPitchRange>
          <pPitchRange>49-85</pPitchRange>
          <channel>
@@ -844,7 +871,8 @@
          <name>次中音薩魯管</name>
          <short-name>次中音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>44-75</aPitchRange>
          <pPitchRange>44-80</pPitchRange>
          <channel>
@@ -855,7 +883,8 @@
          <name>上低音薩魯管</name>
          <short-name>上低音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>37-68</aPitchRange>
          <pPitchRange>36-73</pPitchRange>
          <channel>
@@ -866,7 +895,8 @@
          <name>低音薩魯管</name>
          <short-name>低音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>32-63</aPitchRange>
          <pPitchRange>32-68</pPitchRange>
          <channel>
@@ -877,7 +907,8 @@
          <name>倍低音薩魯管</name>
          <short-name>倍低音薩魯管</short-name>
          <clef>0</clef>
-         <transposition>-33</transposition>
+         <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
          <aPitchRange>25-53</aPitchRange>
          <pPitchRange>25-56</pPitchRange>
          <channel>
@@ -888,7 +919,8 @@
          <name>超特高音薩克管</name>
          <short-name>超特高音薩克管</short-name>
          <clef>0</clef>
-         <transposition>10</transposition>
+         <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
          <aPitchRange>68-92</aPitchRange>
          <pPitchRange>68-97</pPitchRange>
          <channel>
@@ -899,7 +931,8 @@
          <name>最高音薩克管</name>
          <short-name>最高音薩克管</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-87</aPitchRange>
          <pPitchRange>61-90</pPitchRange>
          <channel>
@@ -910,7 +943,8 @@
          <name>高音薩克管</name>
          <short-name>高音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>56-89</aPitchRange>
          <pPitchRange>56-94</pPitchRange>
          <channel>
@@ -921,7 +955,8 @@
          <name>中音薩克管</name>
          <short-name>中音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>49-82</aPitchRange>
          <pPitchRange>49-87</pPitchRange>
          <channel>
@@ -932,7 +967,8 @@
          <name>次中音薩克管</name>
          <short-name>次中音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>44-77</aPitchRange>
          <pPitchRange>44-82</pPitchRange>
          <channel>
@@ -943,7 +979,8 @@
          <name>上低音薩克管</name>
          <short-name>上低音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>37-70</aPitchRange>
          <pPitchRange>36-75</pPitchRange>
          <channel>
@@ -954,7 +991,8 @@
          <name>低音薩克管</name>
          <short-name>低音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>32-65</aPitchRange>
          <pPitchRange>32-70</pPitchRange>
          <channel>
@@ -965,7 +1003,8 @@
          <name>倍低音薩克管</name>
          <short-name>倍低音薩克管</short-name>
          <clef>0</clef>
-         <transposition>-33</transposition>
+         <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
          <aPitchRange>25-53</aPitchRange>
          <pPitchRange>25-56</pPitchRange>
          <channel>
@@ -989,7 +1028,8 @@
          <name>法國號</name>
          <short-name>法國號</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>35-75</aPitchRange>
          <pPitchRange>29-77</pPitchRange>
          <channel>
@@ -1010,7 +1050,8 @@
          <name>高音降Ｂ調法國號</name>
          <short-name>高音降Ｂ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>44-77</aPitchRange>
          <pPitchRange>40-82</pPitchRange>
          <channel>
@@ -1021,7 +1062,8 @@
          <name>Ａ調法國號</name>
          <short-name>Ａ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>43-76</aPitchRange>
          <pPitchRange>39-81</pPitchRange>
          <channel>
@@ -1032,7 +1074,8 @@
          <name>降Ａ調法國號</name>
          <short-name>降Ａ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-4</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-4</transposeChromatic>
          <aPitchRange>42-75</aPitchRange>
          <pPitchRange>38-80</pPitchRange>
          <channel>
@@ -1043,7 +1086,8 @@
          <name>Ｇ調法國號</name>
          <short-name>Ｇ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>41-74</aPitchRange>
          <pPitchRange>37-79</pPitchRange>
          <channel>
@@ -1054,7 +1098,8 @@
          <name>Ｅ調法國號</name>
          <short-name>Ｅ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-8</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-8</transposeChromatic>
          <aPitchRange>38-71</aPitchRange>
          <pPitchRange>34-76</pPitchRange>
          <channel>
@@ -1065,7 +1110,8 @@
          <name>降Ｅ調法國號</name>
          <short-name>降Ｅ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>37-70</aPitchRange>
          <pPitchRange>33-75</pPitchRange>
          <channel>
@@ -1076,7 +1122,8 @@
          <name>Ｄ調法國號</name>
          <short-name>Ｄ調法國號</short-name>
          <clef>0</clef>
-         <transposition>-10</transposition>
+         <transposeDiatonic>-6</transposeDiatonic>
+        <transposeChromatic>-10</transposeChromatic>
          <aPitchRange>36-69</aPitchRange>
          <pPitchRange>32-74</pPitchRange>
          <channel>
@@ -1097,7 +1144,8 @@
          <name>低音降Ｂ調法國號</name>
          <short-name>低音降Ｂ調法國號</short-name>
          <clef>4</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>32-65</aPitchRange>
          <pPitchRange>28-70</pPitchRange>
          <channel>
@@ -1108,7 +1156,8 @@
          <name>降Ｂ調高音小號</name>
          <short-name>降Ｂ調高音小號</short-name>
          <clef>0</clef>
-         <transposition>10</transposition>
+         <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
          <aPitchRange>59-86</aPitchRange>
          <pPitchRange>59-89</pPitchRange>
          <channel>
@@ -1122,7 +1171,8 @@
          <name>Ａ調高音小號</name>
          <short-name>Ａ調高音小號</short-name>
          <clef>0</clef>
-         <transposition>9</transposition>
+         <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>9</transposeChromatic>
          <aPitchRange>58-85</aPitchRange>
          <pPitchRange>58-88</pPitchRange>
          <channel>
@@ -1136,7 +1186,8 @@
          <name>降Ｅ調小號</name>
          <short-name>降Ｅ調小號</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>57-84</aPitchRange>
          <pPitchRange>57-87</pPitchRange>
          <channel>
@@ -1150,7 +1201,8 @@
          <name>Ｄ調小號</name>
          <short-name>Ｄ調小號</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>56-83</aPitchRange>
          <pPitchRange>56-86</pPitchRange>
          <channel>
@@ -1177,7 +1229,8 @@
          <name>降Ｂ調小號</name>
          <short-name>降Ｂ調小號</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>52-80</aPitchRange>
          <pPitchRange>52-85</pPitchRange>
          <channel>
@@ -1191,7 +1244,8 @@
          <name>降Ｅ調低音小號</name>
          <short-name>降Ｅ調低音小號</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>46-73</aPitchRange>
          <pPitchRange>46-76</pPitchRange>
          <channel>
@@ -1205,7 +1259,8 @@
          <name>降Ｂ調低音小號</name>
          <short-name>降Ｂ調低音小號</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>39-66</aPitchRange>
          <pPitchRange>39-69</pPitchRange>
          <channel>
@@ -1219,7 +1274,8 @@
          <name>Ｆ調巴洛克小號</name>
          <short-name>Ｆ調巴洛克小號</short-name>
          <clef>0</clef>
-         <transposition>5</transposition>
+         <transposeDiatonic>3</transposeDiatonic>
+        <transposeChromatic>5</transposeChromatic>
          <aPitchRange>65-86</aPitchRange>
          <pPitchRange>65-90</pPitchRange>
          <channel>
@@ -1233,7 +1289,8 @@
          <name>降Ｅ調巴洛克小號</name>
          <short-name>降Ｅ調巴洛克小號</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>63-84</aPitchRange>
          <pPitchRange>63-88</pPitchRange>
          <channel>
@@ -1247,7 +1304,8 @@
          <name>Ｄ調巴洛克小號</name>
          <short-name>Ｄ調巴洛克小號</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>62-83</aPitchRange>
          <pPitchRange>62-87</pPitchRange>
          <channel>
@@ -1274,7 +1332,8 @@
          <name>降Ｂ調巴洛克小號</name>
          <short-name>降Ｂ調巴洛克小號</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>58-79</aPitchRange>
          <pPitchRange>58-83</pPitchRange>
          <channel>
@@ -1288,7 +1347,8 @@
          <name>降Ｅ調短號</name>
          <short-name>降Ｅ調短號</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>57-84</aPitchRange>
          <pPitchRange>57-87</pPitchRange>
          <channel>
@@ -1302,7 +1362,8 @@
          <name>降Ｂ調短號</name>
          <short-name>降Ｂ調短號</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>52-79</aPitchRange>
          <pPitchRange>52-82</pPitchRange>
          <channel>
@@ -1316,7 +1377,8 @@
          <name>富魯格號</name>
          <short-name>富魯格號</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>52-79</aPitchRange>
          <pPitchRange>52-82</pPitchRange>
          <channel>
@@ -1420,7 +1482,8 @@
          <name>Ｆ調中音號</name>
          <short-name>Ｆ調中音號</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1431,7 +1494,8 @@
          <name> 降Ｅ調中音號</name>
          <short-name> 降Ｅ調中音號</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1452,7 +1516,8 @@
          <name>Ｆ調中音圓號</name>
          <short-name>Ｆ調中音圓號</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1463,7 +1528,8 @@
          <name>降Ｅ調中音圓號</name>
          <short-name>降Ｅ調中音圓號</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1474,7 +1540,8 @@
          <name>Ｆ調 Mellophonium</name>
          <short-name>Ｆ調 Mellophonium</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1485,7 +1552,8 @@
          <name>降Ｅ調 Mellophonium</name>
          <short-name>降Ｅ調 Mellophonium</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1496,7 +1564,8 @@
          <name>降Ｂ調華格納低音號</name>
          <short-name>降Ｂ調華格納低音號</short-name>
          <clef>4</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>40-75</aPitchRange>
          <pPitchRange>40-79</pPitchRange>
          <channel>
@@ -1507,7 +1576,8 @@
          <name>Ｆ調華格納低音號</name>
          <short-name>Ｆ調華格納低音號</short-name>
          <clef>4</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>35-74</aPitchRange>
          <pPitchRange>35-77</pPitchRange>
          <channel>
@@ -3254,7 +3324,8 @@
       <instrument>
          <name>低音吉他</name>
          <short-name>低音吉他</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-83</aPitchRange>
          <pPitchRange>28-83</pPitchRange>
@@ -3265,7 +3336,8 @@
       <instrument>
          <name>原音貝斯</name>
          <short-name>原音貝斯</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-83</aPitchRange>
          <pPitchRange>28-83</pPitchRange>
@@ -3276,7 +3348,8 @@
       <instrument>
          <name>電貝斯</name>
          <short-name>電貝斯</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>33</program>
@@ -3285,7 +3358,8 @@
       <instrument>
          <name>無琴格電貝斯</name>
          <short-name>無琴格電貝斯</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>35</program>
@@ -3712,7 +3786,8 @@
       <instrument>
          <name>低音提琴</name>
          <short-name>低音提琴</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
@@ -3729,7 +3804,8 @@
        <instrument>
          <name>低音提琴組</name>
          <short-name>低音提琴組</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
@@ -3829,3 +3905,4 @@
       <ref>Violone</ref>
       </instrument-group>
    </museScore>
+Ƀ

@@ -26,7 +26,8 @@
         <name>Flauta baixo (sol)</name>
         <short-name>Fl. b.</short-name>
         <clef>0</clef>
-        <transposition>7</transposition>
+        <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
         <aPitchRange>67-100</aPitchRange>
         <pPitchRange>67-103</pPitchRange>
         <channel>
@@ -37,7 +38,8 @@
         <name>Flauta en mi<symbol name="flat"/></name>
         <short-name>Fl. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>63-96</aPitchRange>
         <pPitchRange>63-101</pPitchRange>
         <channel>
@@ -58,7 +60,8 @@
         <name>Flauta alto</name>
         <short-name>Fl. a.</short-name>
         <clef>0</clef>
-        <transposition>-5</transposition>
+        <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
         <aPitchRange>55-88</aPitchRange>
         <pPitchRange>55-91</pPitchRange>
         <channel>
@@ -79,7 +82,8 @@
         <name>Flauta contralto</name>
         <short-name>Fl. c-a.</short-name>
         <clef>0</clef>
-        <transposition>-17</transposition>
+        <transposeDiatonic>-10</transposeDiatonic>
+        <transposeChromatic>-17</transposeChromatic>
         <aPitchRange>43-76</aPitchRange>
         <pPitchRange>42-79</pPitchRange>
         <channel>
@@ -100,7 +104,8 @@
         <name>Flauta subcontralto</name>
         <short-name>Fl. sca.</short-name>
         <clef>4</clef>
-        <transposition>-5</transposition>
+        <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
         <aPitchRange>31-60</aPitchRange>
         <pPitchRange>31-64</pPitchRange>
         <channel>
@@ -511,7 +516,8 @@
         <name>Galoubet en si</name>
         <short-name>Gal. si</short-name>
         <clef>0</clef>
-        <transposition>23</transposition>
+        <transposeDiatonic>13</transposeDiatonic>
+        <transposeChromatic>23</transposeChromatic>
         <aPitchRange>86-105</aPitchRange>
         <pPitchRange>74,76,78,80,86-108,112</pPitchRange>
         <channel>
@@ -532,7 +538,8 @@
         <name>Oboe piccolo</name>
         <short-name>Ob. p.</short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>61-90</aPitchRange>
         <pPitchRange>61-94</pPitchRange>
         <channel>
@@ -553,7 +560,8 @@
         <name>Oboe d'amore</name>
         <short-name>Ob. d'a.</short-name>
         <clef>0</clef>
-        <transposition>-3</transposition>
+        <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
         <aPitchRange>56-84</aPitchRange>
         <pPitchRange>56-87</pPitchRange>
         <channel>
@@ -564,7 +572,8 @@
         <name>Corno inglés</name>
         <short-name>Co. in.</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>52-81</aPitchRange>
         <pPitchRange>52-83</pPitchRange>
         <channel>
@@ -605,7 +614,8 @@
         <name>Oboe da caccia</name>
         <short-name>Ob. d. ca.</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>53-79</aPitchRange>
         <pPitchRange>53-81</pPitchRange>
         <channel>
@@ -906,7 +916,8 @@
         <name>Clarinete soprano</name>
         <short-name>Cl. s.</short-name>
         <clef>0</clef>
-        <transposition>7</transposition>
+        <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
         <aPitchRange>59-88</aPitchRange>
         <pPitchRange>59-88</pPitchRange>
         <channel>
@@ -917,7 +928,8 @@
         <name>Clarinete piccolo</name>
         <short-name>Cl. p.</short-name>
         <clef>0</clef>
-        <transposition>8</transposition>
+        <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>8</transposeChromatic>
         <aPitchRange>60-99</aPitchRange>
         <pPitchRange>60-104</pPitchRange>
         <channel>
@@ -928,7 +940,8 @@
         <name>Clarinete en mi<symbol name="flat"/></name>
         <short-name>Cl. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>55-94</aPitchRange>
         <pPitchRange>55-99</pPitchRange>
         <channel>
@@ -939,7 +952,8 @@
         <name>Clarinete en re</name>
         <short-name>Cl. re</short-name>
         <clef>0</clef>
-        <transposition>2</transposition>
+        <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
         <aPitchRange>54-93</aPitchRange>
         <pPitchRange>54-98</pPitchRange>
         <channel>
@@ -960,7 +974,8 @@
         <name>Clarinete en si<symbol name="flat"/></name>
         <short-name>Cl. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>50-89</aPitchRange>
         <pPitchRange>50-94</pPitchRange>
         <channel>
@@ -971,7 +986,8 @@
         <name>Clarinete en la</name>
         <short-name>Cl. la</short-name>
         <clef>0</clef>
-        <transposition>-3</transposition>
+        <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
         <aPitchRange>49-88</aPitchRange>
         <pPitchRange>49-93</pPitchRange>
         <channel>
@@ -982,7 +998,8 @@
         <name>Clarinete tenor</name>
         <short-name>Cl. t.</short-name>
         <clef>0</clef>
-        <transposition>-3</transposition>
+        <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
         <aPitchRange>45-88</aPitchRange>
         <pPitchRange>45-93</pPitchRange>
         <channel>
@@ -993,7 +1010,8 @@
         <name>Clarinete alto</name>
         <short-name>Cl. a.</short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>43-80</aPitchRange>
         <pPitchRange>43-84</pPitchRange>
         <channel>
@@ -1004,7 +1022,8 @@
         <name>Corno tenor</name>
         <short-name>Co. t.</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>41-84</aPitchRange>
         <pPitchRange>41-86</pPitchRange>
         <channel>
@@ -1015,7 +1034,8 @@
         <name>Clarinete baixo</name>
         <short-name>Cl. b.</short-name>
         <clef>0</clef>
-        <transposition>-14</transposition>
+        <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
         <aPitchRange>37-75</aPitchRange>
         <pPitchRange>37-79</pPitchRange>
         <channel>
@@ -1026,7 +1046,8 @@
         <name>Clarinete contralto</name>
         <short-name>Cl. ca.</short-name>
         <clef>0</clef>
-        <transposition>-21</transposition>
+        <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
         <aPitchRange>31-70</aPitchRange>
         <pPitchRange>31-75</pPitchRange>
         <channel>
@@ -1037,7 +1058,8 @@
         <name>Clarinete contrabaixo</name>
         <short-name>Cl. cb.</short-name>
         <clef>0</clef>
-        <transposition>-26</transposition>
+        <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
         <aPitchRange>26-65</aPitchRange>
         <pPitchRange>26-70</pPitchRange>
         <channel>
@@ -1117,7 +1139,8 @@
      <instrument>
         <name>Contrafagot</name>
         <short-name>Cfa.</short-name>
-        <transposition>-12</transposition>
+        <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
         <clef>5</clef>
         <aPitchRange>22-57</aPitchRange>
         <pPitchRange>22-60</pPitchRange>
@@ -1149,7 +1172,8 @@
         <name>Sarrusofón sopranino</name>
         <short-name>Sar. si.</short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>61-87</aPitchRange>
         <pPitchRange>61-90</pPitchRange>
         <channel>
@@ -1160,7 +1184,8 @@
         <name>Sarrusofón soprano</name>
         <short-name>Sar. s.</short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>56-87</aPitchRange>
         <pPitchRange>56-92</pPitchRange>
         <channel>
@@ -1171,7 +1196,8 @@
         <name>Sarrusofón alto</name>
         <short-name>Sar. a.</short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>49-80</aPitchRange>
         <pPitchRange>49-85</pPitchRange>
         <channel>
@@ -1182,7 +1208,8 @@
         <name>Sarrusofón tenor</name>
         <short-name>Sar. t.</short-name>
         <clef>0</clef>
-        <transposition>-14</transposition>
+        <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
         <aPitchRange>44-75</aPitchRange>
         <pPitchRange>44-80</pPitchRange>
         <channel>
@@ -1193,7 +1220,8 @@
         <name>Sarrusofón barítono</name>
         <short-name>Sar. bar.</short-name>
         <clef>0</clef>
-        <transposition>-21</transposition>
+        <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
         <aPitchRange>37-68</aPitchRange>
         <pPitchRange>36-73</pPitchRange>
         <channel>
@@ -1204,7 +1232,8 @@
         <name>Sarrusofón baixo</name>
         <short-name>Sar. b.</short-name>
         <clef>0</clef>
-        <transposition>-26</transposition>
+        <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
         <aPitchRange>32-63</aPitchRange>
         <pPitchRange>32-68</pPitchRange>
         <channel>
@@ -1215,7 +1244,8 @@
         <name>Sarrusofón contrabaixo</name>
         <short-name>Sar. cb.</short-name>
         <clef>0</clef>
-        <transposition>-33</transposition>
+        <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
         <aPitchRange>25-53</aPitchRange>
         <pPitchRange>25-56</pPitchRange>
         <channel>
@@ -1226,7 +1256,8 @@
         <name>Saxofón sopranísimo</name>
         <short-name>Saxo sio.</short-name>
         <clef>0</clef>
-        <transposition>10</transposition>
+        <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
         <aPitchRange>68-92</aPitchRange>
         <pPitchRange>68-97</pPitchRange>
         <channel>
@@ -1237,7 +1268,8 @@
         <name>Saxofón sopranino</name>
         <short-name>Saxo si.</short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>61-87</aPitchRange>
         <pPitchRange>61-90</pPitchRange>
         <channel>
@@ -1248,7 +1280,8 @@
         <name>Saxofón soprano</name>
         <short-name>Saxo s.</short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>56-89</aPitchRange>
         <pPitchRange>56-94</pPitchRange>
         <channel>
@@ -1259,7 +1292,8 @@
         <name>Saxofón alto</name>
         <short-name>Saxo a.</short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>49-82</aPitchRange>
         <pPitchRange>49-87</pPitchRange>
         <channel>
@@ -1270,7 +1304,8 @@
         <name>Saxofón tenor</name>
         <short-name>Saxo t.</short-name>
         <clef>0</clef>
-        <transposition>-14</transposition>
+        <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
         <aPitchRange>44-77</aPitchRange>
         <pPitchRange>44-82</pPitchRange>
         <channel>
@@ -1281,7 +1316,8 @@
         <name>Saxofón barítono</name>
         <short-name>Saxo bar.</short-name>
         <clef>0</clef>
-        <transposition>-21</transposition>
+        <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
         <aPitchRange>37-70</aPitchRange>
         <pPitchRange>36-75</pPitchRange>
         <channel>
@@ -1292,7 +1328,8 @@
         <name>Saxofón baixo</name>
         <short-name>Saxo b.</short-name>
         <clef>0</clef>
-        <transposition>-26</transposition>
+        <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
         <aPitchRange>32-65</aPitchRange>
         <pPitchRange>32-70</pPitchRange>
         <channel>
@@ -1303,7 +1340,8 @@
         <name>Saxofón contrabaixo</name>
         <short-name>Saxo cb.</short-name>
         <clef>0</clef>
-        <transposition>-33</transposition>
+        <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
         <aPitchRange>25-53</aPitchRange>
         <pPitchRange>25-56</pPitchRange>
         <channel>
@@ -1314,7 +1352,8 @@
         <name>Saxofón subcontrabaixo</name>
         <short-name>Saxo scb.</short-name>
         <clef>0</clef>
-        <transposition>-38</transposition>
+        <transposeDiatonic>-22</transposeDiatonic>
+        <transposeChromatic>-38</transposeChromatic>
         <aPitchRange>20-52</aPitchRange>
         <pPitchRange>20-60</pPitchRange>
         <channel>
@@ -1338,7 +1377,8 @@
         <name>Trompa</name>
         <short-name>Tr.</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>35-75</aPitchRange>
         <pPitchRange>29-77</pPitchRange>
         <channel>
@@ -1359,7 +1399,8 @@
         <name>Trompa en si<symbol name="flat"/> alto</name>
         <short-name>Tr. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>44-77</aPitchRange>
         <pPitchRange>40-82</pPitchRange>
         <channel>
@@ -1370,7 +1411,8 @@
         <name>Trompa en la</name>
         <short-name>Tr. la</short-name>
         <clef>0</clef>
-        <transposition>-3</transposition>
+        <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
         <aPitchRange>43-76</aPitchRange>
         <pPitchRange>39-81</pPitchRange>
         <channel>
@@ -1381,7 +1423,8 @@
         <name>Trompa en la<symbol name="flat"/></name>
         <short-name>Tr. la<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-4</transposition>
+        <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-4</transposeChromatic>
         <aPitchRange>42-75</aPitchRange>
         <pPitchRange>38-80</pPitchRange>
         <channel>
@@ -1392,7 +1435,8 @@
         <name>Trompa en sol</name>
         <short-name>Tr. sol</short-name>
         <clef>0</clef>
-        <transposition>-5</transposition>
+        <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
         <aPitchRange>41-74</aPitchRange>
         <pPitchRange>37-79</pPitchRange>
         <channel>
@@ -1403,7 +1447,8 @@
         <name>Trompa en mi</name>
         <short-name>Tr. mi</short-name>
         <clef>0</clef>
-        <transposition>-8</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-8</transposeChromatic>
         <aPitchRange>38-71</aPitchRange>
         <pPitchRange>34-76</pPitchRange>
         <channel>
@@ -1414,7 +1459,8 @@
         <name>Trompa en mi<symbol name="flat"/></name>
         <short-name>Tr. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>37-70</aPitchRange>
         <pPitchRange>33-75</pPitchRange>
         <channel>
@@ -1425,7 +1471,8 @@
         <name>Trompa en re</name>
         <short-name>Tr. re</short-name>
         <clef>0</clef>
-        <transposition>-10</transposition>
+        <transposeDiatonic>-6</transposeDiatonic>
+        <transposeChromatic>-10</transposeChromatic>
         <aPitchRange>36-69</aPitchRange>
         <pPitchRange>32-74</pPitchRange>
         <channel>
@@ -1446,7 +1493,8 @@
         <name>Trompa en si<symbol name="flat"/> baixo</name>
         <short-name>Tr. si<symbol name="flat"/> b.</short-name>
         <clef>4</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>32-65</aPitchRange>
         <pPitchRange>28-70</pPitchRange>
         <channel>
@@ -1457,7 +1505,8 @@
         <name>Trompeta piccolo en si<symbol name="flat"/></name>
         <short-name>Tpt. p. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>10</transposition>
+        <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
         <aPitchRange>59-86</aPitchRange>
         <pPitchRange>59-89</pPitchRange>
         <channel>
@@ -1471,7 +1520,8 @@
         <name>Trompeta piccolo en la</name>
         <short-name>Tpt. p. la</short-name>
         <clef>0</clef>
-        <transposition>9</transposition>
+        <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>9</transposeChromatic>
         <aPitchRange>58-85</aPitchRange>
         <pPitchRange>58-88</pPitchRange>
         <channel>
@@ -1485,7 +1535,8 @@
         <name>Trompeta en mi<symbol name="flat"/></name>
         <short-name>Tpt. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>57-84</aPitchRange>
         <pPitchRange>57-87</pPitchRange>
         <channel>
@@ -1499,7 +1550,8 @@
         <name>Trompeta en re</name>
         <short-name>Tpt. re</short-name>
         <clef>0</clef>
-        <transposition>2</transposition>
+        <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
         <aPitchRange>56-83</aPitchRange>
         <pPitchRange>56-86</pPitchRange>
         <channel>
@@ -1526,7 +1578,8 @@
         <name>Trompeta en si<symbol name="flat"/></name>
         <short-name>Tpt. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>52-80</aPitchRange>
         <pPitchRange>52-85</pPitchRange>
         <channel>
@@ -1540,7 +1593,8 @@
         <name>Trompeta baixo en mi<symbol name="flat"/></name>
         <short-name>Tpt. b. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>46-73</aPitchRange>
         <pPitchRange>46-76</pPitchRange>
         <channel>
@@ -1554,7 +1608,8 @@
         <name>Trompeta baixo en si<symbol name="flat"/></name>
         <short-name>Tpt. b. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-14</transposition>
+        <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
         <aPitchRange>39-66</aPitchRange>
         <pPitchRange>39-69</pPitchRange>
         <channel>
@@ -1568,7 +1623,8 @@
         <name>Trompeta barroca en fa</name>
         <short-name>Tpt. bc. fa</short-name>
         <clef>0</clef>
-        <transposition>5</transposition>
+        <transposeDiatonic>3</transposeDiatonic>
+        <transposeChromatic>5</transposeChromatic>
         <aPitchRange>65-86</aPitchRange>
         <pPitchRange>65-90</pPitchRange>
         <channel>
@@ -1582,7 +1638,8 @@
         <name>Trompeta barroca en mi<symbol name="flat"/></name>
         <short-name>Tpt. bc. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>63-84</aPitchRange>
         <pPitchRange>63-88</pPitchRange>
         <channel>
@@ -1596,7 +1653,8 @@
         <name>Trompeta barroca en re</name>
         <short-name>Tpt. bc. re</short-name>
         <clef>0</clef>
-        <transposition>2</transposition>
+        <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
         <aPitchRange>62-83</aPitchRange>
         <pPitchRange>62-87</pPitchRange>
         <channel>
@@ -1623,7 +1681,8 @@
         <name>Trompeta barroca en si<symbol name="flat"/></name>
         <short-name>Tpt. bc. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>58-79</aPitchRange>
         <pPitchRange>58-83</pPitchRange>
         <channel>
@@ -1637,7 +1696,8 @@
         <name>Corneta en mi<symbol name="flat"/></name>
         <short-name>Cnt. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>3</transposition>
+        <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
         <aPitchRange>57-84</aPitchRange>
         <pPitchRange>57-87</pPitchRange>
         <channel>
@@ -1651,7 +1711,8 @@
         <name>Corneta en si<symbol name="flat"/></name>
         <short-name>Cnt. si<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>52-79</aPitchRange>
         <pPitchRange>52-82</pPitchRange>
         <channel>
@@ -1665,7 +1726,8 @@
         <name>Fliscorno</name>
         <short-name>Fls.</short-name>
         <clef>0</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>52-79</aPitchRange>
         <pPitchRange>52-82</pPitchRange>
         <channel>
@@ -1769,7 +1831,8 @@
         <name>Trompa alto en fa</name>
         <short-name>Tr. a. fa</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>47-74</aPitchRange>
         <pPitchRange>47-77</pPitchRange>
         <channel>
@@ -1780,7 +1843,8 @@
         <name>Trompa alto en mi<symbol name="flat"/></name>
         <short-name>Tr. a. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>45-72</aPitchRange>
         <pPitchRange>45-75</pPitchRange>
         <channel>
@@ -1801,7 +1865,8 @@
         <name>Melofón en fa</name>
         <short-name>Mf. fa</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>47-74</aPitchRange>
         <pPitchRange>47-77</pPitchRange>
         <channel>
@@ -1812,7 +1877,8 @@
         <name>Melofón en mi<symbol name="flat"/></name>
         <short-name>Mf. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>45-72</aPitchRange>
         <pPitchRange>45-75</pPitchRange>
         <channel>
@@ -1823,7 +1889,8 @@
         <name>Melofonio en fa</name>
         <short-name>Mfi. fa</short-name>
         <clef>0</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>47-74</aPitchRange>
         <pPitchRange>47-77</pPitchRange>
         <channel>
@@ -1834,7 +1901,8 @@
         <name>Melofonio en mi<symbol name="flat"/></name>
         <short-name>Mfi. mi<symbol name="flat"/></short-name>
         <clef>0</clef>
-        <transposition>-9</transposition>
+        <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
         <aPitchRange>45-72</aPitchRange>
         <pPitchRange>45-75</pPitchRange>
         <channel>
@@ -1845,7 +1913,8 @@
         <name>Trompa wagneriana en si<symbol name="flat"/></name>
         <short-name>Tr. wag. si<symbol name="flat"/></short-name>
         <clef>4</clef>
-        <transposition>-2</transposition>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>40-75</aPitchRange>
         <pPitchRange>40-79</pPitchRange>
         <channel>
@@ -1856,7 +1925,8 @@
         <name>Trompa wagneriana en fa</name>
         <short-name>Tr. wag. fa</short-name>
         <clef>4</clef>
-        <transposition>-7</transposition>
+        <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
         <aPitchRange>35-74</aPitchRange>
         <pPitchRange>35-77</pPitchRange>
         <channel>

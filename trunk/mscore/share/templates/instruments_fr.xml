@@ -36,7 +36,8 @@
       <instrument>
          <name>Flûte Alto</name>
          <short-name>Fl. Alt.</short-name>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <channel>
             <program>73</program>
             </channel>
@@ -44,7 +45,8 @@
       <instrument>
          <name>Flûte Basse</name>
          <short-name>Fl. Bs.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <channel>
             <program>73</program>
             </channel>
@@ -97,7 +99,8 @@
       <instrument>
          <name>Cor Anglais</name>
          <short-name>Cr An.</short-name>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <channel>
             <program>69</program>
             </channel>
@@ -105,7 +108,8 @@
       <instrument>
          <name>Clarinette en Si <symbol name="flat"/></name>
          <short-name>Cl. Si <symbol name="flat"/></short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>71</program>
             </channel>
@@ -113,7 +117,8 @@
       <instrument>
          <name>Clarinette en Mi <symbol name="flat"/></name>
          <short-name>Cl. Mi <symbol name="flat"/></short-name>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <channel>
             <program>71</program>
             </channel>
@@ -121,7 +126,8 @@
       <instrument>
          <name>Clarinette en La</name>
          <short-name>Cl. La</short-name>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <channel>
             <program>71</program>
             </channel>
@@ -129,7 +135,8 @@
       <instrument>
          <name>Clarinette Basse</name>
          <short-name>Cl. Bs.</short-name>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <channel>
             <program>71</program>
             </channel>
@@ -145,7 +152,8 @@
       <instrument>
          <name>Contrebasson</name>
          <short-name>Cbsn.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>70</program>
@@ -154,7 +162,8 @@
       <instrument>
          <name>Saxophone</name>
          <short-name>Sax.</short-name>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <channel>
             <program>65</program>
             </channel>
@@ -162,7 +171,8 @@
       <instrument>
          <name>Saxophone Soprano</name>
          <short-name>Sax. Sop.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>64</program>
             </channel>
@@ -170,7 +180,8 @@
       <instrument>
          <name>Saxophone Alto</name>
          <short-name>Sax. Alt.</short-name>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <channel>
             <program>65</program>
             </channel>
@@ -178,7 +189,8 @@
       <instrument>
          <name>Saxophone Ténor</name>
          <short-name>Sax. Tén.</short-name>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <clef>0</clef>
          <channel>
             <program>66</program>
@@ -187,7 +199,8 @@
       <instrument>
          <name>Saxophone Baryton</name>
          <short-name>Sax. Bar.</short-name>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <channel>
             <program>67</program>
             </channel>
@@ -195,7 +208,8 @@
       <instrument>
          <name>Saxophone Basse</name>
          <short-name>Sax. Bs.</short-name>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <channel>
             <program>67</program>
             </channel>
@@ -206,7 +220,8 @@
       <instrument>
          <name>Cor en Fa</name>
          <short-name>Cr. Fa</short-name>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <channel>
             <program>60</program>
             </channel>
@@ -214,7 +229,8 @@
       <instrument>
          <name>Trompette en Si <symbol name="flat"/></name>
          <short-name>Tpt. Si <symbol name="flat"/></short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -225,7 +241,8 @@
       <instrument>
          <name>Trompette en Ré</name>
          <short-name>Tpt. Ré</short-name>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -246,7 +263,8 @@
       <instrument>
          <name>Trompette en Mi <symbol name="flat"/></name>
          <short-name>Tpt. Mi <symbol name="flat"/></short-name>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -267,7 +285,8 @@
       <instrument>
          <name>Cornet en Si <symbol name="flat"/></name>
          <short-name>Cnt. Si <symbol name="flat"/></short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -278,7 +297,8 @@
       <instrument>
          <name>Bugle</name>
          <short-name>Bu.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -640,7 +660,8 @@
       <instrument>
          <name>Guitare Basse</name>
          <short-name>Guit. B.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>33</program>
@@ -889,7 +910,8 @@
       <instrument>
          <name>Basse</name>
          <short-name>Bs.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>32</program>
@@ -904,7 +926,8 @@
       <instrument>
          <name>Contrebasse</name>
          <short-name>Cb.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>43</program>
@@ -919,7 +942,8 @@
        <instrument>
          <name>Contrebasses</name>
          <short-name>Cbs.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>49</program>
