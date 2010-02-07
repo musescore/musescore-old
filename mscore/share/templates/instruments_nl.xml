@@ -27,7 +27,8 @@
          <name>Sopraan Fluit</name>
          <short-name>So.Fl.</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>67-100</aPitchRange>
          <pPitchRange>67-103</pPitchRange>
          <channel>
@@ -38,7 +39,8 @@
          <name>E<symbol name="flat"/> Fluit</name>
          <short-name>E<symbol name="flat"/> Fl.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>63-96</aPitchRange>
          <pPitchRange>63-101</pPitchRange>
          <channel>
@@ -59,7 +61,8 @@
          <name>Alt Fluit</name>
          <short-name>A.Fl.</short-name>
          <clef>0</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>55-88</aPitchRange>
          <pPitchRange>55-91</pPitchRange>
          <channel>
@@ -69,7 +72,8 @@
       <instrument>
          <name>Bas Fluit</name>
          <short-name>B.Fl.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>0</clef>
          <aPitchRange>48-77</aPitchRange>
          <pPitchRange>48-81</pPitchRange>
@@ -81,7 +85,8 @@
          <name>Contra-alt Fluit</name>
          <short-name>C-a.Fl.</short-name>
          <clef>0</clef>
-         <transposition>-17</transposition>
+         <transposeDiatonic>-10</transposeDiatonic>
+        <transposeChromatic>-17</transposeChromatic>
          <aPitchRange>43-76</aPitchRange>
          <pPitchRange>42-79</pPitchRange>
          <channel>
@@ -102,7 +107,8 @@
          <name>Subcontra-Altfluit</name>
          <short-name>Sc-Altfl.</short-name>
          <clef>4</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>31-60</aPitchRange>
          <pPitchRange>31-64</pPitchRange>
          <channel>
@@ -303,7 +309,8 @@
          <name>C Alt Ocarina</name>
          <short-name>C A.Oc.</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>60-74</aPitchRange>
          <pPitchRange>60-76</pPitchRange>
          <channel>
@@ -334,7 +341,8 @@
          <name>B Galoubet</name>
          <short-name>B Gal.</short-name>
          <clef>0</clef>
-         <transposition>23</transposition>
+         <transposeDiatonic>13</transposeDiatonic>
+        <transposeChromatic>23</transposeChromatic>
          <aPitchRange>86-105</aPitchRange>
          <pPitchRange>74,76,78,80,86-108,112</pPitchRange>
          <channel>
@@ -355,7 +363,8 @@
          <name>Piccolo Hobo</name>
          <short-name>P.Hb.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-90</aPitchRange>
          <pPitchRange>61-94</pPitchRange>
          <channel>
@@ -376,7 +385,8 @@
          <name>Hobo d'amore</name>
          <short-name>Ho.d'a.</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>56-84</aPitchRange>
          <pPitchRange>56-87</pPitchRange>
          <channel>
@@ -387,7 +397,8 @@
          <name>Engelse Hoorn</name>
          <short-name>E.Hn.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>52-81</aPitchRange>
          <pPitchRange>52-83</pPitchRange>
          <channel>
@@ -588,7 +599,8 @@
          <name>Sopraan Clarinet</name>
          <short-name>S.Cl.</short-name>
          <clef>0</clef>
-         <transposition>7</transposition>
+         <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
          <aPitchRange>59-88</aPitchRange>
          <pPitchRange>59-88</pPitchRange>
          <channel>
@@ -599,7 +611,8 @@
          <name>Piccolo Clarinet</name>
          <short-name>P.Cl.</short-name>
          <clef>0</clef>
-         <transposition>8</transposition>
+         <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>8</transposeChromatic>
          <aPitchRange>60-99</aPitchRange>
          <pPitchRange>60-104</pPitchRange>
          <channel>
@@ -610,7 +623,8 @@
          <name>E<symbol name="flat"/> Clarinet</name>
          <short-name>E<symbol name="flat"/> Cl.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>55-94</aPitchRange>
          <pPitchRange>55-99</pPitchRange>
          <channel>
@@ -621,7 +635,8 @@
          <name>D Clarinet</name>
          <short-name>D.Cl.</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>54-93</aPitchRange>
          <pPitchRange>54-98</pPitchRange>
          <channel>
@@ -642,7 +657,8 @@
          <name>B<symbol name="flat"/> Clarinet</name>
          <short-name>B<symbol name="flat"/> Cl.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>50-89</aPitchRange>
          <pPitchRange>50-94</pPitchRange>
          <channel>
@@ -653,7 +669,8 @@
          <name>A Clarinet</name>
          <short-name>A.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>49-88</aPitchRange>
          <pPitchRange>49-93</pPitchRange>
          <channel>
@@ -664,7 +681,8 @@
          <name>Bas Clarinet</name>
          <short-name>Ba.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>45-88</aPitchRange>
          <pPitchRange>45-93</pPitchRange>
          <channel>
@@ -675,7 +693,8 @@
          <name>Alt Clarinet</name>
          <short-name>A.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>43-80</aPitchRange>
          <pPitchRange>43-84</pPitchRange>
          <channel>
@@ -686,7 +705,8 @@
          <name>Bas Horn</name>
          <short-name>Ba.Hn.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>41-84</aPitchRange>
          <pPitchRange>41-86</pPitchRange>
          <channel>
@@ -697,7 +717,8 @@
          <name>Bass Clarinet</name>
          <short-name>B.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>37-75</aPitchRange>
          <pPitchRange>37-79</pPitchRange>
          <channel>
@@ -708,7 +729,8 @@
          <name>Contra-alto Clarinet</name>
          <short-name>C-a.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>31-70</aPitchRange>
          <pPitchRange>31-75</pPitchRange>
          <channel>
@@ -719,7 +741,8 @@
          <name>Contrabass Clarinet</name>
          <short-name>Cb.Cl.</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>26-65</aPitchRange>
          <pPitchRange>26-70</pPitchRange>
          <channel>
@@ -779,7 +802,8 @@
       <instrument>
          <name>Contrabasfagot</name>
          <short-name>Cbfg.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>22-57</aPitchRange>
          <pPitchRange>22-60</pPitchRange>
@@ -811,7 +835,8 @@
          <name>Sopranino Sarrusofoon</name>
          <short-name>Si.Sar.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-87</aPitchRange>
          <pPitchRange>61-90</pPitchRange>
          <channel>
@@ -822,7 +847,8 @@
          <name>Sopraan Sarrusofoon</name>
          <short-name>S.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>56-87</aPitchRange>
          <pPitchRange>56-92</pPitchRange>
          <channel>
@@ -833,7 +859,8 @@
          <name>Alt Sarrusofoon</name>
          <short-name>A.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>49-80</aPitchRange>
          <pPitchRange>49-85</pPitchRange>
          <channel>
@@ -844,7 +871,8 @@
          <name>Tenor Sarrusofoon</name>
          <short-name>T.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>44-75</aPitchRange>
          <pPitchRange>44-80</pPitchRange>
          <channel>
@@ -855,7 +883,8 @@
          <name>Bariton Sarrusofoon</name>
          <short-name>Bar.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>37-68</aPitchRange>
          <pPitchRange>36-73</pPitchRange>
          <channel>
@@ -866,7 +895,8 @@
          <name>Bass Sarrusofoon</name>
          <short-name>B.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>32-63</aPitchRange>
          <pPitchRange>32-68</pPitchRange>
          <channel>
@@ -877,7 +907,8 @@
          <name>Contrabass Sarrusofoon</name>
          <short-name>Cb.Sar.</short-name>
          <clef>0</clef>
-         <transposition>-33</transposition>
+         <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
          <aPitchRange>25-53</aPitchRange>
          <pPitchRange>25-56</pPitchRange>
          <channel>
@@ -888,7 +919,8 @@
          <name>Sopranissimo Saxofoon</name>
          <short-name>Sio.Sax.</short-name>
          <clef>0</clef>
-         <transposition>10</transposition>
+         <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
          <aPitchRange>68-92</aPitchRange>
          <pPitchRange>68-97</pPitchRange>
          <channel>
@@ -899,7 +931,8 @@
          <name>Sopranino Saxofoon</name>
          <short-name>Si.Sax.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>61-87</aPitchRange>
          <pPitchRange>61-90</pPitchRange>
          <channel>
@@ -910,7 +943,8 @@
          <name>Sopraan Saxofoon</name>
          <short-name>S.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>56-89</aPitchRange>
          <pPitchRange>56-94</pPitchRange>
          <channel>
@@ -921,7 +955,8 @@
          <name>Alt Saxofoon</name>
          <short-name>A.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>49-82</aPitchRange>
          <pPitchRange>49-87</pPitchRange>
          <channel>
@@ -932,7 +967,8 @@
          <name>Tenor Saxofoon</name>
          <short-name>T.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>44-77</aPitchRange>
          <pPitchRange>44-82</pPitchRange>
          <channel>
@@ -943,7 +979,8 @@
          <name>Bariton Saxofoon</name>
          <short-name>Bar.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <aPitchRange>37-70</aPitchRange>
          <pPitchRange>36-75</pPitchRange>
          <channel>
@@ -954,7 +991,8 @@
          <name>Bass Saxofoon</name>
          <short-name>B.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <aPitchRange>32-65</aPitchRange>
          <pPitchRange>32-70</pPitchRange>
          <channel>
@@ -965,7 +1003,8 @@
          <name>Contrabass Saxofoon</name>
          <short-name>Cb.Sax.</short-name>
          <clef>0</clef>
-         <transposition>-33</transposition>
+         <transposeDiatonic>-19</transposeDiatonic>
+        <transposeChromatic>-33</transposeChromatic>
          <aPitchRange>25-53</aPitchRange>
          <pPitchRange>25-56</pPitchRange>
          <channel>
@@ -989,7 +1028,8 @@
          <name>Hoorn</name>
          <short-name>Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>35-75</aPitchRange>
          <pPitchRange>29-77</pPitchRange>
          <channel>
@@ -1010,7 +1050,8 @@
          <name>Hoge B<symbol name="flat"/> Hoorn</name>
          <short-name>H.B<symbol name="flat"/> Hn.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>44-77</aPitchRange>
          <pPitchRange>40-82</pPitchRange>
          <channel>
@@ -1021,7 +1062,8 @@
          <name>A Hoorn</name>
          <short-name>A Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <aPitchRange>43-76</aPitchRange>
          <pPitchRange>39-81</pPitchRange>
          <channel>
@@ -1032,7 +1074,8 @@
          <name>A<symbol name="flat"/> Hoorn</name>
          <short-name>A<symbol name="flat"/> Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-4</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-4</transposeChromatic>
          <aPitchRange>42-75</aPitchRange>
          <pPitchRange>38-80</pPitchRange>
          <channel>
@@ -1043,7 +1086,8 @@
          <name>G Hoorn</name>
          <short-name>G.Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <aPitchRange>41-74</aPitchRange>
          <pPitchRange>37-79</pPitchRange>
          <channel>
@@ -1054,7 +1098,8 @@
          <name>E Hoorn</name>
          <short-name>E.Hn.</short-name>
          <clef>0</clef>
-         <transposition>-8</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-8</transposeChromatic>
          <aPitchRange>38-71</aPitchRange>
          <pPitchRange>34-76</pPitchRange>
          <channel>
@@ -1065,7 +1110,8 @@
          <name>E<symbol name="flat"/> Hoorn</name>
          <short-name>E<symbol name="flat"/> Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>37-70</aPitchRange>
          <pPitchRange>33-75</pPitchRange>
          <channel>
@@ -1076,7 +1122,8 @@
          <name>D Hoorn</name>
          <short-name>D.Hrn.</short-name>
          <clef>0</clef>
-         <transposition>-10</transposition>
+         <transposeDiatonic>-6</transposeDiatonic>
+        <transposeChromatic>-10</transposeChromatic>
          <aPitchRange>36-69</aPitchRange>
          <pPitchRange>32-74</pPitchRange>
          <channel>
@@ -1097,7 +1144,8 @@
          <name>Lage B<symbol name="flat"/> Horn</name>
          <short-name>L. B<symbol name="flat"/> Hn.</short-name>
          <clef>4</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>32-65</aPitchRange>
          <pPitchRange>28-70</pPitchRange>
          <channel>
@@ -1108,7 +1156,8 @@
          <name>B<symbol name="flat"/> Piccolo Trompet</name>
          <short-name>B<symbol name="flat"/> P.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>10</transposition>
+         <transposeDiatonic>6</transposeDiatonic>
+        <transposeChromatic>10</transposeChromatic>
          <aPitchRange>59-86</aPitchRange>
          <pPitchRange>59-89</pPitchRange>
          <channel>
@@ -1122,7 +1171,8 @@
          <name>A Piccolo Trompet</name>
          <short-name>A P.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>9</transposition>
+         <transposeDiatonic>5</transposeDiatonic>
+        <transposeChromatic>9</transposeChromatic>
          <aPitchRange>58-85</aPitchRange>
          <pPitchRange>58-88</pPitchRange>
          <channel>
@@ -1136,7 +1186,8 @@
          <name>E<symbol name="flat"/> Trompet</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>57-84</aPitchRange>
          <pPitchRange>57-87</pPitchRange>
          <channel>
@@ -1150,7 +1201,8 @@
          <name>D Trompet</name>
          <short-name>D.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>56-83</aPitchRange>
          <pPitchRange>56-86</pPitchRange>
          <channel>
@@ -1177,7 +1229,8 @@
          <name>B<symbol name="flat"/> Trompet</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>53-80</aPitchRange>
          <pPitchRange>53-83</pPitchRange>
          <channel>
@@ -1191,7 +1244,8 @@
          <name>E<symbol name="flat"/> Bas Trompet</name>
          <short-name>E<symbol name="flat"/> B.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>46-73</aPitchRange>
          <pPitchRange>46-76</pPitchRange>
          <channel>
@@ -1205,7 +1259,8 @@
          <name>B<symbol name="flat"/> Bas Trompet</name>
          <short-name>B<symbol name="flat"/> B.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <aPitchRange>39-66</aPitchRange>
          <pPitchRange>39-69</pPitchRange>
          <channel>
@@ -1219,7 +1274,8 @@
          <name>F Baroque Trompet</name>
          <short-name>F Bq.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>5</transposition>
+         <transposeDiatonic>3</transposeDiatonic>
+        <transposeChromatic>5</transposeChromatic>
          <aPitchRange>65-86</aPitchRange>
          <pPitchRange>65-90</pPitchRange>
          <channel>
@@ -1233,7 +1289,8 @@
          <name>E<symbol name="flat"/> Baroque Trompet</name>
          <short-name>E<symbol name="flat"/> Bq.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>63-84</aPitchRange>
          <pPitchRange>63-88</pPitchRange>
          <channel>
@@ -1247,7 +1304,8 @@
          <name>D Baroque Trompet</name>
          <short-name>D Bq.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <aPitchRange>62-83</aPitchRange>
          <pPitchRange>62-87</pPitchRange>
          <channel>
@@ -1274,7 +1332,8 @@
          <name>B<symbol name="flat"/> Baroque Trompet</name>
          <short-name>B<symbol name="flat"/> Bq.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>58-79</aPitchRange>
          <pPitchRange>58-83</pPitchRange>
          <channel>
@@ -1288,7 +1347,8 @@
          <name>E<symbol name="flat"/> Cornet</name>
          <short-name>E<symbol name="flat"/> B.Tpt.</short-name>
          <clef>0</clef>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <aPitchRange>57-84</aPitchRange>
          <pPitchRange>57-87</pPitchRange>
          <channel>
@@ -1302,7 +1362,8 @@
          <name>B<symbol name="flat"/> Cornet</name>
          <short-name>B<symbol name="flat"/> Cnt.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>52-79</aPitchRange>
          <pPitchRange>52-82</pPitchRange>
          <channel>
@@ -1316,7 +1377,8 @@
          <name>Bugel</name>
          <short-name>Bgl.</short-name>
          <clef>0</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>52-79</aPitchRange>
          <pPitchRange>52-82</pPitchRange>
          <channel>
@@ -1420,7 +1482,8 @@
          <name>F Alt Hoorn</name>
          <short-name>F A.Hn.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1431,7 +1494,8 @@
          <name>E<symbol name="flat"/> Alt Hoorn</name>
          <short-name>E<symbol name="flat"/> A.Hn.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1452,7 +1516,8 @@
          <name>F Mellofoon</name>
          <short-name>F Mlf.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1463,7 +1528,8 @@
          <name>E<symbol name="flat"/> Mellofoon</name>
          <short-name>E<symbol name="flat"/> Mlf.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1474,7 +1540,8 @@
          <name>F Mellophonium</name>
          <short-name>F Mlm.</short-name>
          <clef>0</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>47-74</aPitchRange>
          <pPitchRange>47-77</pPitchRange>
          <channel>
@@ -1485,7 +1552,8 @@
          <name>E<symbol name="flat"/> Mellophonium</name>
          <short-name>E<symbol name="flat"/> Mlm.</short-name>
          <clef>0</clef>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <aPitchRange>45-72</aPitchRange>
          <pPitchRange>45-75</pPitchRange>
          <channel>
@@ -1496,7 +1564,8 @@
          <name>B<symbol name="flat"/> Wagnertuba</name>
          <short-name>B<symbol name="flat"/> Wag.Tu.</short-name>
          <clef>4</clef>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <aPitchRange>40-75</aPitchRange>
          <pPitchRange>40-79</pPitchRange>
          <channel>
@@ -1507,7 +1576,8 @@
          <name>F Wagnertuba</name>
          <short-name>F Wag.Tu.</short-name>
          <clef>4</clef>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <aPitchRange>35-74</aPitchRange>
          <pPitchRange>35-77</pPitchRange>
          <channel>
@@ -3254,7 +3324,8 @@
       <instrument>
          <name>Bas Gitaar</name>
          <short-name>B.Git.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-83</aPitchRange>
          <pPitchRange>28-83</pPitchRange>
@@ -3265,7 +3336,8 @@
       <instrument>
          <name>Acoustische Bas</name>
          <short-name>B.Git.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-83</aPitchRange>
          <pPitchRange>28-83</pPitchRange>
@@ -3276,7 +3348,8 @@
       <instrument>
          <name>Electrische Bas</name>
          <short-name>El.B.Guit.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>33</program>
@@ -3285,7 +3358,8 @@
       <instrument>
          <name>Fretless Electrische Bas</name>
          <short-name>Frtl.El.B.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>35</program>
@@ -3712,7 +3786,8 @@
       <instrument>
          <name>Contrabas</name>
          <short-name>Cb.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>
@@ -3729,7 +3804,8 @@
        <instrument>
          <name>Contrabassen</name>
          <short-name>Cbs.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <aPitchRange>28-62</aPitchRange>
          <pPitchRange>23-67</pPitchRange>

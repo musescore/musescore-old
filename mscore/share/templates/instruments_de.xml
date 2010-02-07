@@ -16,13 +16,15 @@
       <instrument>
          <name>Alto Flute</name>
          <short-name>Alt. Fl.</short-name>
-         <transposition>-5</transposition>
+         <transposeDiatonic>-3</transposeDiatonic>
+        <transposeChromatic>-5</transposeChromatic>
          <midiprogram>73</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Flute</name>
          <short-name>Bs. Fl.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <midiprogram>73</midiprogram>
          </instrument>
       <instrument>
@@ -69,30 +71,35 @@
       <instrument>
          <name>Englisch Horn</name>
          <short-name>Eng. Hn.</short-name>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <midiprogram>69</midiprogram>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Clarinette</name>
          <short-name>B<symbol name="flat"/> Cl.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Clarinette</name>
          <short-name>E<symbol name="flat"/> Cl.</short-name>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
          <name>A Clarinette</name>
          <short-name>A Cl.</short-name>
-         <transposition>-3</transposition>
+         <transposeDiatonic>-2</transposeDiatonic>
+        <transposeChromatic>-3</transposeChromatic>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Clarinette</name>
          <short-name>Bs. Cl.</short-name>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
@@ -104,44 +111,51 @@
       <instrument>
          <name>Contrabassoon</name>
          <short-name>Cbsn.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <midiprogram>70</midiprogram>
          </instrument>
       <instrument>
          <name>Saxophone</name>
          <short-name>Sax.</short-name>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <midiprogram>65</midiprogram>
          </instrument>
       <instrument>
          <name>Soprano Saxophone</name>
          <short-name>Sop. Sax.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <midiprogram>64</midiprogram>
          </instrument>
       <instrument>
          <name>Alto Saxophone</name>
          <short-name>Alt. Sax.</short-name>
-         <transposition>-9</transposition>
+         <transposeDiatonic>-5</transposeDiatonic>
+        <transposeChromatic>-9</transposeChromatic>
          <midiprogram>65</midiprogram>
          </instrument>
       <instrument>
          <name>Tenor Saxophone</name>
          <short-name>Ten. Sax.</short-name>
-         <transposition>-14</transposition>
+         <transposeDiatonic>-8</transposeDiatonic>
+        <transposeChromatic>-14</transposeChromatic>
          <midiprogram>66</midiprogram>
          </instrument>
       <instrument>
          <name>Baritone Saxophone</name>
          <short-name>Bar. Sax.</short-name>
-         <transposition>-21</transposition>
+         <transposeDiatonic>-12</transposeDiatonic>
+        <transposeChromatic>-21</transposeChromatic>
          <midiprogram>67</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Saxophone</name>
          <short-name>Bs. Sax.</short-name>
-         <transposition>-26</transposition>
+         <transposeDiatonic>-15</transposeDiatonic>
+        <transposeChromatic>-26</transposeChromatic>
          <midiprogram>67</midiprogram>
          </instrument>
       </instrument-group>
@@ -150,13 +164,15 @@
       <instrument>
          <name>Horn</name>
          <short-name>F Hn.</short-name>
-         <transposition>-7</transposition>
+         <transposeDiatonic>-4</transposeDiatonic>
+        <transposeChromatic>-7</transposeChromatic>
          <midiprogram>60</midiprogram>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Trompete</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -167,7 +183,8 @@
       <instrument>
          <name>D Trompete</name>
          <short-name>D Tpt.</short-name>
-         <transposition>2</transposition>
+         <transposeDiatonic>1</transposeDiatonic>
+        <transposeChromatic>2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -188,7 +205,8 @@
       <instrument>
          <name>E<symbol name="flat"/> Trompete</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
-         <transposition>3</transposition>
+         <transposeDiatonic>2</transposeDiatonic>
+        <transposeChromatic>3</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -209,7 +227,8 @@
       <instrument>
          <name>B<symbol name="flat"/> Kornett</name>
          <short-name>B<symbol name="flat"/> Knt.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -220,7 +239,8 @@
       <instrument>
          <name>Flügelhorn</name>
          <short-name>Flh.</short-name>
-         <transposition>-2</transposition>
+         <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
          <channel>
             <program>56</program>
             </channel>
@@ -546,7 +566,8 @@
       <instrument>
          <name>Bass Gitarre</name>
          <short-name>B. Guit.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>33</program>
@@ -765,7 +786,8 @@
        <instrument>
           <name>Double Bass</name>
           <short-name>D.B.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
           <clef>4</clef>
           <channel>
             <program>32</program>
@@ -780,7 +802,8 @@
       <instrument>
          <name>Kontrabass</name>
          <short-name>C.B.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
          <clef>4</clef>
          <channel>
             <program>43</program>
@@ -795,7 +818,8 @@
         <instrument>
           <name>Contrabasses</name>
           <short-name>Cbs.</short-name>
-         <transposition>-12</transposition>
+         <transposeDiatonic>-7</transposeDiatonic>
+        <transposeChromatic>-12</transposeChromatic>
           <clef>4</clef>
           <channel>
             <program>49</program>
