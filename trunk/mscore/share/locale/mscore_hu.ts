@@ -46,7 +46,7 @@ line break&#13;
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished">Unstable Prerelease A ... verzió kibocsátása előtti nem-stabil változat </translation>
+        <translation type="unfinished">Instabil előzetes ehhez a verzióhoz: </translation>
     </message>
     <message>
         <source>Version: </source>
@@ -83,7 +83,7 @@ line break&#13;
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished">MIDI tevékenység</translation>
+        <translation type="unfinished">MIDI műveletek</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@ line break&#13;
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -178,7 +178,7 @@ line break&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation type="unfinished">bb (duplán leszállított)</translation>
+        <translation type="unfinished">bb (kettős bé)</translation>
     </message>
     <message>
         <source>F</source>
@@ -186,7 +186,7 @@ line break&#13;
     </message>
     <message>
         <source>b (flat)</source>
-        <translation type="unfinished">b (leszállított)</translation>
+        <translation type="unfinished">b (bé)</translation>
     </message>
     <message>
         <source>G</source>
@@ -202,7 +202,7 @@ line break&#13;
     </message>
     <message>
         <source># (sharp)</source>
-        <translation type="unfinished"># (felemelt)</translation>
+        <translation type="unfinished"># (kereszt)</translation>
     </message>
     <message>
         <source>B</source>
@@ -210,7 +210,7 @@ line break&#13;
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation type="unfinished">## (duplán felemelt)</translation>
+        <translation type="unfinished">## (kettős kereszt)</translation>
     </message>
     <message>
         <source>D</source>
@@ -218,7 +218,7 @@ line break&#13;
     </message>
     <message>
         <source>Extension</source>
-        <translation type="unfinished">Kiegészítés</translation>
+        <translation type="unfinished">Bővítmény</translation>
     </message>
     <message>
         <source>Maj</source>
@@ -754,7 +754,7 @@ line break&#13;
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished">Basszus / Inverzió</translation>
+        <translation type="unfinished">Basszus / Megfordítás</translation>
     </message>
     <message>
         <source>none</source>
@@ -882,51 +882,51 @@ line break&#13;
     </message>
     <message>
         <source>velocity type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">billentési hangerő típusa</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hangerő (0-127)</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">felhasználói</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">eltolás</translation>
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hangzóidő eltérés típusa</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hangzóidő eltérés</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">elhallgatásidő eltérés típusa</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">elhallgatásidő</translation>
     </message>
     <message>
         <source> cent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"> cent</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"> MIDI időegység</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottafej-csoport</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottafej típusa</translation>
     </message>
     <message>
         <source>normal</source>
@@ -934,7 +934,7 @@ line break&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kereszt</translation>
     </message>
     <message>
         <source>diamond</source>
@@ -954,27 +954,27 @@ line break&#13;
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dó</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ré</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fá</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">lá</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ti</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -982,19 +982,19 @@ line break&#13;
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">egészhang</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">félhang</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">negyedhang</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">brévisz</translation>
     </message>
 </context>
 <context>
@@ -1005,15 +1005,15 @@ line break&#13;
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">előrekötés</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">visszakötés</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kotta helyezés</translation>
     </message>
 </context>
 <context>
@@ -1024,7 +1024,7 @@ line break&#13;
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordleíró fájl:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1032,7 +1032,7 @@ line break&#13;
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Azonosító</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1040,11 +1040,11 @@ line break&#13;
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mentés másként</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Akkordstílus szerkesztése</translation>
     </message>
 </context>
 <context>
@@ -1067,7 +1067,7 @@ line break&#13;
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIDI tulajdonságok...</translation>
     </message>
 </context>
 <context>
@@ -1085,15 +1085,15 @@ line break&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Sebesség:</translation>
+        <translation type="unfinished">Gyorsaság:</translation>
     </message>
     <message>
         <source>staff</source>
-        <translation type="unfinished">vonalrendszer</translation>
+        <translation type="unfinished">kottasor</translation>
     </message>
     <message>
         <source>part</source>
-        <translation type="unfinished">kivonat</translation>
+        <translation type="unfinished">szólam</translation>
     </message>
     <message>
         <source>system</source>
@@ -1105,11 +1105,11 @@ line break&#13;
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIDI értékek</translation>
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Alkalmazás erre:</translation>
     </message>
 </context>
 <context>
@@ -1227,7 +1227,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation type="unfinished">Alapértelmezett hang:</translation>
+        <translation type="unfinished">Alapértelmezett hangszer:</translation>
     </message>
     <message>
         <source>Shortcut:</source>
@@ -1274,7 +1274,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation type="unfinished">Hangszer tulajdonságai</translation>
+        <translation type="unfinished">Hangszer tulajdonságok</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1329,15 +1329,15 @@ hiba: </translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation type="unfinished">Kivonat tulajdonságai</translation>
+        <translation type="unfinished">Szólam tulajdonságai</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
-        <translation type="unfinished">Hosszú hangszernév:</translation>
+        <translation type="unfinished">Teljes hangszernév:</translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
-        <translation type="unfinished">Rövid hangszernév:</translation>
+        <translation type="unfinished">Rövidített hangszernév:</translation>
     </message>
     <message>
         <source>Use Drumset</source>
@@ -1349,135 +1349,135 @@ hiba: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished">Nincsenek szárak</translation>
+        <translation type="unfinished">Nincs szára</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Láthatatlan</translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangterjedelem:</translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Amatőr:</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">-</translation>
     </message>
     <message>
         <source>Professional:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Professzionális:</translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A transpozíció lejátszása</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Uniszónó (perfekt prím)</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített prím</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szekund</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kisszekund</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagyszekund</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szekund</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített terc</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kisterc</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagyterc</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített terc</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített kvart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfekt kvart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített kvart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített kvint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfect kvint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített kvint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis-szext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagy-szeksz</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szeksz</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szeptim</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis-szeptim</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagy-szeptim</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szeptim</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített oktáv</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfekt oktáv</translation>
     </message>
     <message>
         <source>up</source>
@@ -1496,15 +1496,15 @@ hiba: </translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished">Helye</translation>
+        <translation type="unfinished">Rögzítő</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished">Vonalrendszer felett</translation>
+        <translation type="unfinished">Legfelső sor</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished">Vonalrendszer alatt</translation>
+        <translation type="unfinished">Legalsó sor</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1559,23 +1559,23 @@ hiba: </translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished">Artikuláció, díszítések</translation>
+        <translation type="unfinished">Frazeálás, díszítések</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished">Hangok</translation>
+        <translation type="unfinished">Szólamok</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Megjelenítés koncertmagasságban</translation>
+        <translation type="unfinished">Hangzó magasságban kottáz</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
-        <translation type="unfinished">Többütemes szünetek létrehozása</translation>
+        <translation type="unfinished">Többütemnyi szünetek létrehozása</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished">Ütem minimális szélessége:</translation>
+        <translation type="unfinished">Minimális ütemszélesség:</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1587,7 +1587,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation type="unfinished">Üres vonalrenszerek elrejtése</translation>
+        <translation type="unfinished">Üres sorok elrejtése</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1607,7 +1607,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation type="unfinished">Ütemmutatók létrehozása</translation>
+        <translation type="unfinished">Ütemelőjegyzés létrehozása</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
@@ -1615,11 +1615,11 @@ hiba: </translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation type="unfinished">Saját ütemmutatók létrehozása</translation>
+        <translation type="unfinished">Figyelmeztető ütemelőjegyzés létrehozása</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished">Rendszer összekapcsolások távolsága:</translation>
+        <translation type="unfinished">Csoportosító kapcsolójelek távolsága:</translation>
     </message>
     <message>
         <source>shorten stems</source>
@@ -1643,7 +1643,7 @@ hiba: </translation>
     </message>
     <message>
         <source>all staffs</source>
-        <translation type="unfinished">minden vonalrendszer</translation>
+        <translation type="unfinished">az összes sor</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1651,7 +1651,7 @@ hiba: </translation>
     </message>
     <message>
         <source>interval</source>
-        <translation type="unfinished">intervallum</translation>
+        <translation type="unfinished">köz</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1659,7 +1659,7 @@ hiba: </translation>
     </message>
     <message>
         <source>beam width units</source>
-        <translation type="unfinished">gerendavastagság</translation>
+        <translation type="unfinished">gerendavastagság egysége</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1676,7 +1676,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Voice 1</source>
-        <translation type="unfinished">1. hang</translation>
+        <translation type="unfinished">1. szólam</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1688,15 +1688,15 @@ hiba: </translation>
     </message>
     <message>
         <source>Voice 2</source>
-        <translation type="unfinished">2. hang</translation>
+        <translation type="unfinished">2. szólam</translation>
     </message>
     <message>
         <source>Voice 3</source>
-        <translation type="unfinished">3. hang</translation>
+        <translation type="unfinished">3. szólam</translation>
     </message>
     <message>
         <source>Voice 4</source>
-        <translation type="unfinished">4. hang</translation>
+        <translation type="unfinished">4. szólam</translation>
     </message>
     <message>
         <source>...</source>
@@ -1704,218 +1704,218 @@ hiba: </translation>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordtörések</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Figyelmeztető előjegyzések létrehozása</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A rendszer/ütemek rögzített száma:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rögzített ütemszélesség</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemvonalak</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemvonal az egysoros kotta elején</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemvonal többsoros kotta elején</translation>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta felső margó</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta alsó margó</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sorok távolsága egymástól</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kapcsolódó kották közti távolság</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rendszerek távolsága egymástól</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dalszöveg felső margó</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dalszöveg alsó margó</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Függ. keret felső margó</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Függ. keret alsó margó</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Térköz (1=szoros)</translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bal margó</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jobb margó</translation>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangjegyek min. távolsága</translation>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kulcs bal margója</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzés bal margója</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemelőjegyzés bal margója</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzés távolság</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kulcs-ütemvonal távolság</translation>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kezdő ismétlőjel bal margója</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Az ismétlőjel két végén (balra vagy jobbra rajzolt) füleg megjelenítése</translation>
     </message>
     <message>
         <source>Progression</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szekvencia</translation>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Legrövidebb kottaszár</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Módosítójel-hangjegy távolság</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Módosítójelek távolsága</translation>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangjegy-pont távolság</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pont-pont távolság</translation>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pótvonalak szélessége</translation>
     </message>
     <message>
         <source>Distance to note</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Távolság a hangjegyektől</translation>
     </message>
     <message>
         <source>Hook length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zászló hossza</translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gerenda szélesség</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gerenda távolság</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minimális hossz</translation>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minimális meredekség</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Maximális meredekség</translation>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis sor mérete</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis hangjegyek mérete</translation>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előkék mérete</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis kulcsok mérete</translation>
     </message>
     <message>
         <source>Line break height</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Új 'bekezdés' utáni üres rész magassága</translation>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Használjon német neveket</translation>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordleíró fájl</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frazeálás - kottafej távolság</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frazeálás - szártávolság</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frazeálás - frázis távolság</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottaszárak iránya több szólam esetében</translation>
     </message>
 </context>
 <context>
     <name>EditTempoBase</name>
     <message>
         <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished">MuseScore: Tempószöveg</translation>
+        <translation type="unfinished">MuseScore: Tempó szöveg</translation>
     </message>
     <message>
         <source>BPM:</source>
@@ -1961,11 +1961,11 @@ hiba: </translation>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kijelölhető</translation>
     </message>
     <message>
         <source>droptarget</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ráhúzási cél</translation>
     </message>
 </context>
 <context>
@@ -2000,11 +2000,11 @@ hiba: </translation>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl neve:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kivonat cím</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2100,7 +2100,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kép tulajdonságai</translation>
     </message>
 </context>
 <context>
@@ -2176,11 +2176,11 @@ hiba: </translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vissza</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előre</translation>
     </message>
     <message>
         <source>...</source>
@@ -2393,7 +2393,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzés létrehozása</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2412,7 +2412,7 @@ hiba: </translation>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Előjegyzések</translation>
     </message>
 </context>
 <context>
@@ -2644,14 +2644,14 @@ hiba: </translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Többütemes szünet felosztása</translation>
     </message>
 </context>
 <context>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">látható</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -2722,23 +2722,23 @@ hiba: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished">Nincsenek szárak</translation>
+        <translation type="unfinished">Nincs szára</translation>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Új sor</translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">a</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">látható</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">c</translation>
     </message>
 </context>
 <context>
@@ -2768,7 +2768,7 @@ hiba: </translation>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">&amp;Hangjegyek</translation>
     </message>
 </context>
 <context>
@@ -2992,7 +2992,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cezúra</translation>
     </message>
     <message>
         <source>Brackets</source>
@@ -3164,7 +3164,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished">Hangok</translation>
+        <translation type="unfinished">Szólamok</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3324,66 +3324,69 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Online kézikönyv</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A MuseScore kézikönyv nem található itt: 
+</translation>
     </message>
     <message>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">
+
+A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Díszítőhangok</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acciaccatura</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Appoggiatura</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Negyed díszítőhang</translation>
     </message>
     <message>
         <source>16th grace note</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tizenhatod díszítőhang</translation>
     </message>
     <message>
         <source>32nd grace note</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1/32 díszítőhang</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzések</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemmutatók</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2/2 alla breve</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemvonalak</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Normál</translation>
     </message>
     <message>
         <source>Dashed</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Áthúzott</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -3391,35 +3394,35 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Crescendo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Crescendo</translation>
     </message>
     <message>
         <source>Diminuendo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Diminuendo</translation>
     </message>
     <message>
         <source>Prima volta</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Prima volta</translation>
     </message>
     <message>
         <source>Seconda volta</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Seconda volta</translation>
     </message>
     <message>
         <source>Terza volta</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Terza volta</translation>
     </message>
     <message>
         <source>Seconda volta 2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Seconda volta 2</translation>
     </message>
     <message>
         <source>Trill line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Trilla hullámvonal</translation>
     </message>
     <message>
         <source>Text line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szövegsor</translation>
     </message>
     <message>
         <source>Line</source>
@@ -3427,7 +3430,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Arpeggio &amp;&amp; Glissando</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3435,83 +3438,83 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cezúra és Koronák</translation>
     </message>
     <message>
         <source>Caesura</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cezúra</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Artikuláció &amp;&amp; Díszítések</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ujjrend %1</translation>
     </message>
     <message>
         <source>String number %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">%1 számú húr</translation>
     </message>
     <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemismétlés</translation>
     </message>
     <message>
         <source>Da Capo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Da Capo</translation>
     </message>
     <message>
         <source>Da Capo al Fine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Da Capo al Fine</translation>
     </message>
     <message>
         <source>Da Capo al Coda</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Da Capo al Coda</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Törések &amp;&amp; Elválasztás</translation>
     </message>
     <message>
         <source>Line break</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sortörés</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Oldaltörés</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vonalrendszer térköz</translation>
     </message>
     <message>
         <source>Start beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gerenda kezdete</translation>
     </message>
     <message>
         <source>Middle of beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gerenda közepe</translation>
     </message>
     <message>
         <source>No beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nincs gerenda</translation>
     </message>
     <message>
         <source>Start subbeam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Újabb gerenda kezdete</translation>
     </message>
     <message>
         <source>Auto beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Auto gerenda</translation>
     </message>
     <message>
         <source>Brackets...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Összekapcsolások...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Artikuláció &amp;&amp; Díszítések...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3519,41 +3522,43 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Összekapcsolások</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Törések &amp;&amp; Elválasztás</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Az előző munkamenet váratlanul ért véget.&#13;
+&#13;
+Helyreállítsa a munkamenetet?</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottafejek</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Coda változat</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Artikuláció &amp; Díszítések</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Törések &amp; Elválasztás</translation>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frissítések keresése</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minden ismert fájl (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore fájlok (*.mscz *.mscx *.msc);;MusicXML fájlok (*.xml *.mxl);;MIDI fájlok (*.mid *.midi *.kar);;Muse Data fájlok (*.md);;Capella fájlok (*.cap);;</translation>
     </message>
 </context>
 <context>
@@ -3677,7 +3682,7 @@ Restore session?</source>
     </message>
     <message>
         <source>head index</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fő mutató</translation>
     </message>
     <message>
         <source>note head group</source>
@@ -3685,7 +3690,7 @@ Restore session?</source>
     </message>
     <message>
         <source>OnTimeType:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">OnTimeTípus:</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -3693,7 +3698,7 @@ Restore session?</source>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Felhasználói</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -3701,7 +3706,7 @@ Restore session?</source>
     </message>
     <message>
         <source>OffTimeType:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">OffTime Típus:</translation>
     </message>
 </context>
 <context>
@@ -3806,11 +3811,11 @@ Restore session?</source>
     <name>Palette</name>
     <message>
         <source>Delete Contents</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tartalom törlése</translation>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tulajdonságok...</translation>
     </message>
 </context>
 <context>
@@ -3855,11 +3860,11 @@ Restore session?</source>
     </message>
     <message>
         <source>Palette Cell Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eszköztár-cella tulajdonságai</translation>
     </message>
     <message>
         <source>Content Offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tartalom eltolása</translation>
     </message>
     <message>
         <source>x:</source>
@@ -3972,11 +3977,11 @@ Restore session?</source>
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kurzor:</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Sebesség:</translation>
+        <translation type="unfinished">Gyorsaság:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -3984,27 +3989,27 @@ Restore session?</source>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">felhasználói</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">eltolás</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Magasság:</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: &lt;%1&gt; Vonalrendszer: %2</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">eszköztár1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">eszköztár2</translation>
     </message>
 </context>
 <context>
@@ -4063,15 +4068,15 @@ Restore session?</source>
     </message>
     <message>
         <source>Straight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Normál</translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Swing</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Inga</translation>
     </message>
 </context>
 <context>
@@ -4094,23 +4099,23 @@ Restore session?</source>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Munkakönyvtár kiválasztása</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangszerlista kiválasztása</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kezdő kotta kiválasztása</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangszerlista (*.xml)</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore fájlok (*.mscz *.mscx *.msc);;Minden (*)</translation>
     </message>
 </context>
 <context>
@@ -4337,19 +4342,19 @@ Restore session?</source>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation type="unfinished">1. hang kijelölése</translation>
+        <translation type="unfinished">1. szólam kijelölése</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation type="unfinished">2. hang kijelölése</translation>
+        <translation type="unfinished">2. szólam kijelölése</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation type="unfinished">3. hang kijelölése</translation>
+        <translation type="unfinished">3. szólam kijelölése</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation type="unfinished">4. hang kijelölése</translation>
+        <translation type="unfinished">4. szólam kijelölése</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -4601,51 +4606,51 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore beállítások</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tallózás...</translation>
     </message>
     <message>
         <source>Use Current Dimensions</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A mostani méret használata</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A hangterjedelmen kívüli hangok színezése</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIDI exportálás</translation>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIDI távirányítás</translation>
     </message>
     <message>
         <source>Auto-correction</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Auto-javítás</translation>
     </message>
     <message>
         <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Az 1/2 szöveg helyettesítése az ½ karakterrel</translation>
     </message>
     <message>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A (C) szöveg helyettesítése a  © karakterrel (csak a szerzői jog szövegében)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Importáláskor használt stílus</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Beépített stílus</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stílusfájl használata:</translation>
     </message>
     <message>
         <source>System</source>
@@ -4653,31 +4658,31 @@ Restore session?</source>
     </message>
     <message>
         <source>Navigator:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Navigátor:</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">JACK MIDI kimenet használata</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Legutóbbi kapcsolatok megjegyzése</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frissítés</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Frissítések automatikus ellenőrzése</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A MuseScore új verzióinak keresése indításkor</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Válaszd ki a PortMidi kapcsolófelületet</translation>
     </message>
 </context>
 <context>
@@ -4806,27 +4811,27 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Akkordleíró fájl megnyitása sikertelen:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: a fontkészlet szimbólumok betöltése nem sikerült:</translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Eszköztár betöltése sikertelen:</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Akkordleíró fájl betöltése</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Akkordleíró fájl mentése</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Nyelvek betöltése sikertelen:</translation>
     </message>
 </context>
 <context>
@@ -5113,7 +5118,10 @@ hiba: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A következő fájl zárolva van:&#13;
+%1&#13;
+&#13;
+Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -5121,18 +5129,18 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A darab első ütemmutatóját nem lehet törölni.</translation>
     </message>
 </context>
 <context>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kijelöl</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Több...</translation>
     </message>
     <message>
         <source>Object Inspector</source>
@@ -5148,11 +5156,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dobpergés szerkesztő...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zongorahenger szerkesztő...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -5160,7 +5168,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vonalrendszer szétválasztása...</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -5199,7 +5207,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Breath Segment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lélekzetvétel szegmens</translation>
     </message>
     <message>
         <source>End Bar Line</source>
@@ -5207,7 +5215,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemelőjegyzés figyelmeztetés</translation>
     </message>
     <message>
         <source>Lyrics:</source>
@@ -5222,27 +5230,27 @@ Try saving to a different location.</source>
     <name>SelectDialog</name>
     <message>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Kijelölés</translation>
     </message>
     <message>
         <source>Search for</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Keresés</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elem típusa:</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ugyanebben a vonalrendszerben</translation>
     </message>
     <message>
         <source>same voice</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ugyanebben a szólamban</translation>
     </message>
     <message>
         <source>same system</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ugyanaz a rendszer</translation>
     </message>
     <message>
         <source>Action</source>
@@ -5250,19 +5258,19 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>replace selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kijelölés cseréje</translation>
     </message>
     <message>
         <source>add to selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hozzáadás a kijelöléshez</translation>
     </message>
     <message>
         <source>search in selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">keresés a kijelölésben</translation>
     </message>
     <message>
         <source>subtract from selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">eltávolítás a kijelölésből</translation>
     </message>
 </context>
 <context>
@@ -5404,7 +5412,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Voice:</source>
-        <translation type="unfinished">Hang:</translation>
+        <translation type="unfinished">Szólam:</translation>
     </message>
     <message>
         <source>Tick:</source>
@@ -5419,7 +5427,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hajlítás tulajdonságai</translation>
     </message>
     <message>
         <source>solid</source>
@@ -5427,7 +5435,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>dotted</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">pontozott</translation>
     </message>
 </context>
 <context>
@@ -5438,7 +5446,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hajlítás tulajdonságai...</translation>
     </message>
 </context>
 <context>
@@ -5449,11 +5457,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>startElement</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kezdőElem</translation>
     </message>
     <message>
         <source>endElement</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">befejezőElem</translation>
     </message>
 </context>
 <context>
@@ -5464,11 +5472,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Split Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vonalrendszer szétválasztása</translation>
     </message>
     <message>
         <source>Split Point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szétválasztási pont</translation>
     </message>
 </context>
 <context>
@@ -5494,7 +5502,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished">MIDI tevékenység</translation>
+        <translation type="unfinished">MIDI műveletek</translation>
     </message>
 </context>
 <context>
@@ -5523,7 +5531,7 @@ Try saving to a different location.</source>
     <name>SynthControl</name>
     <message>
         <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Válassz szintetizátor SoundFont-ot</translation>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
@@ -5531,7 +5539,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szintetizátor</translation>
     </message>
     <message>
         <source>Rev</source>
@@ -5543,7 +5551,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">rendszer hangerő</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -5555,11 +5563,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rendszerhangolás</translation>
     </message>
     <message>
         <source>Hz</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hz</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -5567,11 +5575,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Room Size:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szoba mérete:</translation>
     </message>
     <message>
         <source>Damp:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tompítás</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -5579,11 +5587,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Preset:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előre beállított</translation>
     </message>
     <message>
         <source>not implemented</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">nincs megvalósítva</translation>
     </message>
     <message>
         <source>Chorus</source>
@@ -5595,31 +5603,31 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Sine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szinusz</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Háromszög</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kontrolszám</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sebesség:</translation>
     </message>
     <message>
         <source>Depth:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mélység</translation>
     </message>
     <message>
         <source>Loaded SoundFont</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Betöltött SoundFont</translation>
     </message>
     <message>
         <source>SoundFont</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">SoundFont</translation>
     </message>
 </context>
 <context>
@@ -5682,12 +5690,12 @@ Try saving to a different location.</source>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eltolás:</translation>
     </message>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Absz.:</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -5704,12 +5712,12 @@ Try saving to a different location.</source>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rel.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szövegstílus:</translation>
     </message>
 </context>
 <context>
@@ -5786,7 +5794,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">alkalmazza az összes azonos típusú elemre</translation>
     </message>
 </context>
 <context>
@@ -6015,14 +6023,14 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Text Tools</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szövegeszközök</translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Ütemmutatók</translation>
     </message>
 </context>
 <context>
@@ -6105,71 +6113,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Transzponálás</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transzponálás előjegyzéssel</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cesz-dúr / asz-moll</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gesz-dúr / esz-moll</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Desz-dúr / b-moll</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Asz-dúr / f-moll</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Esz-dúr / c-moll</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B-dúr / g-moll</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">F-dúr / d-moll</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">C-dúr / a-moll</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">G-dúr / e-moll</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D-dúr / h-moll</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A-dúr / fisz-moll</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">E-dúr / cisz-moll</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">H-dúr / gisz-moll</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fisz-dúr / disz-moll</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cisz-dúr / aisz-moll</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6181,131 +6189,131 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Legközelebbi</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transzponálás hangközzel</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Uniszónó (perfekt prím)</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített prím</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szekund</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kisszekund</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagyszekund</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szekund</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített terc</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kisterc</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagyterc</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített terc</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített kvart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfekt kvart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített kvart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített kvint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfect kvint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített kvint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis-szext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagy-szeksz</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szeksz</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített szeptim</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kis-szeptim</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nagy-szeptim</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bővített szeptim</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szűkített oktáv</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfekt oktáv</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Beállítások</translation>
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Csak egyszeres keresztek és b-k</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Használjon dupla kereszteket és b-ket</translation>
     </message>
     <message>
         <source>Use multi sharps and flats</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Használjon többszörös kereszteket és b-ket</translation>
     </message>
 </context>
 <context>
@@ -6366,7 +6374,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">arány</translation>
     </message>
     <message>
         <source>/</source>
@@ -6412,15 +6420,15 @@ p, li { white-space: pre-wrap; }
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Új frissítés érhető el a MuseScore-hoz: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elérhető frissítés</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nincs elérhető frissítés</translation>
     </message>
 </context>
 <context>
@@ -6453,7 +6461,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">alkalkom tulajdonság</translation>
     </message>
     <message>
         <source>Line Properties...</source>
@@ -6540,11 +6548,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">tükrözött b</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">tükrözött b áthúzva</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
@@ -6607,7 +6615,7 @@ p, li { white-space: pre-wrap; }
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Helyi &amp;Kézikönyv...</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -7047,7 +7055,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kijelölt ütemek törlése</translation>
     </message>
     <message>
         <source>Append Measure</source>
@@ -7255,19 +7263,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation type="unfinished">1. hang</translation>
+        <translation type="unfinished">1. szólam</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation type="unfinished">2. hang</translation>
+        <translation type="unfinished">2. szólam</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation type="unfinished">3. hang</translation>
+        <translation type="unfinished">3. szólam</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation type="unfinished">4. hang</translation>
+        <translation type="unfinished">4. szólam</translation>
     </message>
     <message>
         <source>midi input in</source>
@@ -7275,7 +7283,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIDI bemenet engedélyezése</translation>
     </message>
     <message>
         <source>editing sound on</source>
@@ -7499,7 +7507,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Start or stop playback</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lejátszás indítása vagy megállítása</translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -7547,27 +7555,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
-        <translation type="unfinished">1-2 hangok cseréje</translation>
+        <translation type="unfinished">1-2 szólamok cseréje</translation>
     </message>
     <message>
         <source>Exchange Voice 1-3</source>
-        <translation type="unfinished">1-3 hangok cseréje</translation>
+        <translation type="unfinished">1-3 szólamok cseréje</translation>
     </message>
     <message>
         <source>Exchange Voice 1-4</source>
-        <translation type="unfinished">1-4 hangok cseréje</translation>
+        <translation type="unfinished">1-4 szólamok cseréje</translation>
     </message>
     <message>
         <source>Exchange Voice 2-3</source>
-        <translation type="unfinished">2-3 hangok cseréje</translation>
+        <translation type="unfinished">2-3 szólamok cseréje</translation>
     </message>
     <message>
         <source>Exchange Voice 2-4</source>
-        <translation type="unfinished">2-4 hangok cseréje</translation>
+        <translation type="unfinished">2-4 szólamok cseréje</translation>
     </message>
     <message>
         <source>Exchange Voice 3-4</source>
-        <translation type="unfinished">3-4 hangok cseréje</translation>
+        <translation type="unfinished">3-4 szólamok cseréje</translation>
     </message>
     <message>
         <source>display in concert pitch</source>
@@ -7579,7 +7587,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Megjelenítés koncertmagasságban</translation>
+        <translation type="unfinished">Hangzó magasságban kottáz</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7739,7 +7747,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Általános stíílus szerkesztése...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
@@ -7747,203 +7755,203 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minden hasonló elem kijelölése</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minden hasonló elem</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minden hasonló elem kijelölése ebben a vonalrendszerben</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minden hasonló elem ebben a vonalrendszerben</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szintetizátor</translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szintetizátor vezérlő</translation>
     </message>
     <message>
         <source>double duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kétszeres időtartam</translation>
     </message>
     <message>
         <source>half duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fél időtartam</translation>
     </message>
     <message>
         <source>repeat selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kijelölés ismétlése</translation>
     </message>
     <message>
         <source>Repeat selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kijelölés ismétlése</translation>
     </message>
     <message>
         <source>follow song</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kövesd a dalt</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kövesd a dalt</translation>
     </message>
     <message>
         <source>Local handbook</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Helyi kézikönyv</translation>
     </message>
     <message>
         <source>Show local handbook</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Helyi kézikönyv megtekintése</translation>
     </message>
     <message>
         <source>File open</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl megnyitása</translation>
     </message>
     <message>
         <source>Load score from file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta betöltése fájlból</translation>
     </message>
     <message>
         <source>File save</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl mentése</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta mentése fájlba</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl mentése másként</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta mentése új fájlnévvel</translation>
     </message>
     <message>
         <source>File save a copy</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl másolat mentése</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A kotta egy másolatának mentése a meglévő fájl mellett</translation>
     </message>
     <message>
         <source>File reload</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl újratöltése</translation>
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta újbóli betöltése fájlból</translation>
     </message>
     <message>
         <source>File close</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fájl bezárása</translation>
     </message>
     <message>
         <source>Close current score</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Aktuális kotta bezárása</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nyomtatás</translation>
     </message>
     <message>
         <source>Print score</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kotta nyomtatása</translation>
     </message>
     <message>
         <source>Undo last change</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utolsó változtatás visszavonása</translation>
     </message>
     <message>
         <source>Redo last undo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utolsó visszavont változtatás érvényesítése</translation>
     </message>
     <message>
         <source>Show instruments dialog</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangszerek ablak megnyitása</translation>
     </message>
     <message>
         <source>Show clefs palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kulcsok eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Clefs...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kulcsok...</translation>
     </message>
     <message>
         <source>show keys signatures palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">előjegyzés eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzések...</translation>
     </message>
     <message>
         <source>Show key signatures palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előjegyzés eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Show symbols palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szimbólum eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemmutató eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemmutatók...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dinamika eszköztár megnyitása</translation>
     </message>
     <message>
         <source>Note input mode</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangjegybevitel mód</translation>
     </message>
     <message>
         <source>Pitch spell</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hangmagasság helyesírása</translation>
     </message>
     <message>
         <source>Enter note A</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A hang bevitele</translation>
     </message>
     <message>
         <source>Enter note B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">H hang bevitele</translation>
     </message>
     <message>
         <source>Enter note C</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">C hang bevitele</translation>
     </message>
     <message>
         <source>Enter note D</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D hang bevitele</translation>
     </message>
     <message>
         <source>Enter note E</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">E hang bevitele</translation>
     </message>
     <message>
         <source>Enter note F</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">F hang bevitele</translation>
     </message>
     <message>
         <source>Enter note G</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">G hang bevitele</translation>
     </message>
     <message>
         <source>Enter rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Szünet bevitele</translation>
     </message>
     <message>
         <source>Rest</source>
@@ -7951,19 +7959,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add staccato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Staccato hozzáadása</translation>
     </message>
     <message>
         <source>Staccato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Staccato</translation>
     </message>
     <message>
         <source>Flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">b</translation>
     </message>
     <message>
         <source>Add trill</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Trilla hozzáadása</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -7971,27 +7979,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>More stretch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tovább szélesítsd</translation>
     </message>
     <message>
         <source>Less stretch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kevesebb szélesítés</translation>
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Gerendák alaphelyzetbe állítása a kijelölt ütemekben</translation>
     </message>
     <message>
         <source>Flip direction</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottaszár megfordítása</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kottaszár megfordítása</translation>
     </message>
     <message>
         <source>Pitch up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Magasabbra</translation>
     </message>
     <message>
         <source>Up</source>
@@ -7999,43 +8007,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch up octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Magasabbra egy oktávval</translation>
     </message>
     <message>
         <source>Up Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fel egy oktávval</translation>
     </message>
     <message>
         <source>Pitch up by an octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Magasabbra egy oktávval</translation>
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordhang felfelé</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkord felső hangja</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lépj az akkord magasabb hangjára</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ugrás az akkord legmagasabb hangjára</translation>
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkord legmagasabb hangja</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mozgatás felfelé</translation>
     </message>
     <message>
         <source>Pitch down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mélyebbre</translation>
     </message>
     <message>
         <source>Down</source>
@@ -8043,147 +8051,147 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mélyebbre egy oktávval</translation>
     </message>
     <message>
         <source>Down octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mélyebbre egy oktávval</translation>
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mélyebbre egy oktávval</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordhang lefelé</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkord alsó hangja</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lépj az akkord alacsonyabb hangjára</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ugrás az akkord legmélyebb hangjára</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkord legmélyebb hangja</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mozgatás lefelé</translation>
     </message>
     <message>
         <source>Previous chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előző akkord</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előző akkord</translation>
     </message>
     <message>
         <source>Previous measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előző ütem</translation>
     </message>
     <message>
         <source>Previous Measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Előző ütem</translation>
     </message>
     <message>
         <source>Next chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Következő akkord</translation>
     </message>
     <message>
         <source>Next Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Következő akkord</translation>
     </message>
     <message>
         <source>Next measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Következő ütem</translation>
     </message>
     <message>
         <source>Next Measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Következő ütem</translation>
     </message>
     <message>
         <source>Delete selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kijelölt ütemek törlése</translation>
     </message>
     <message>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütem hozzáadása</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemek hozzáadása</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütem beszúrása</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ütemek beszúrása</translation>
     </message>
     <message>
         <source>split window horizontal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ablak elválasztása vízszintesen</translation>
     </message>
     <message>
         <source>Documents Side by Side</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dokumentumok egymás mellett</translation>
     </message>
     <message>
         <source>split window vertical</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ablak elválasztása függőlegesen</translation>
     </message>
     <message>
         <source>Documents Stacked</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dokumentumok egymás fölött</translation>
     </message>
     <message>
         <source>Player play</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lejátszás indítása</translation>
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ugorj az elejére</translation>
     </message>
     <message>
         <source>Player rewind</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lejátszás visszatekerése</translation>
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Visszatekerés a kezdőpozícióba</translation>
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ugorj a végére</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ismétlések lejátszása ki/be</translation>
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stílus betöltése</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stílus mentése</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MIndent kijelöl</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akkordstílus szerkesztése...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8191,15 +8199,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kijelölt ütemek tartalmának törlése</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Időarányos törlés</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Elem és hosszának törlése</translation>
     </message>
 </context>
 <context>
@@ -8210,11 +8218,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hüvelykujj</translation>
     </message>
     <message>
         <source>sforzato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sforzato</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -8230,7 +8238,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">alsó staccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -8258,23 +8266,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plusstop</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">extra megállás</translation>
     </message>
     <message>
         <source>upbow</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">vonó fel</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">vonó le</translation>
     </message>
     <message>
         <source>reverseturn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">visszafordítás</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fordulat</translation>
     </message>
     <message>
         <source>trill</source>
@@ -8290,27 +8298,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prallprall</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">prallprall</translation>
     </message>
     <message>
         <source>prallmordent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">prallmordent</translation>
     </message>
     <message>
         <source>upprall</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">trilla felfelé</translation>
     </message>
     <message>
         <source>downprall</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">trilla lefelé</translation>
     </message>
     <message>
         <source>upmordent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mordent felfelé</translation>
     </message>
     <message>
         <source>downmordent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mordent lefelé</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -8318,31 +8326,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel rövid fermata</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le rövid fermata</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel hosszú fermata</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le hosszú fermata</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel nagyon hosszú fermata</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le nagyon hosszú fermata</translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">talpas pizzicato</translation>
     </message>
 </context>
 <context>
@@ -8488,7 +8496,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Breath</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Cezúra</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -8704,7 +8712,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zárójeles módosítójel</translation>
     </message>
 </context>
 <context>
@@ -8726,31 +8734,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Soha</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Naponta</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">3 naponta</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hetente</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kéthetente</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Havonta</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kéthavonta</translation>
     </message>
 </context>
 <context>
@@ -8865,7 +8873,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>32' rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1/32 szünet</translation>
     </message>
     <message>
         <source>64' rest</source>
@@ -8989,7 +8997,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>brevis double head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kétszeres brevis kottafej</translation>
     </message>
     <message>
         <source>whole head</source>
@@ -9021,19 +9029,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>down half triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">félhang háromszög fej lefelé</translation>
     </message>
     <message>
         <source>up half triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">félhang háromszög fej felfelé</translation>
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">negyedhang háromszög fej felfelé</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">negyedhang háromszög fej lefelé</translation>
     </message>
     <message>
         <source>whole slash head</source>
@@ -9065,111 +9073,111 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0 dó fej</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le1 dó fej</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel1 dó fej</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le2 dó fej</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel2 dó fej</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0 ré fej</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel1 ré fej</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le1 ré fej</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel2 ré fej</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le2 ré fej</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0 mi fej</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s1 mi fej</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s2 mi fej</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel0 fá fej</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le0 fá fej</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel1 fá fej</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le1 fá fej</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel2 fá fej</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le2 fá fej</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0 lá fej</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s1 lá fej</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s2 lá fej</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">s0 ti fej</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel1 ti fej</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le1 ti fej</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel2 ti fej</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le2 ti fej</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -9181,39 +9189,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">talpas pizzicato</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel rövid fermata</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le rövid fermata</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel hosszú fermata</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le hosszú fermata</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fel nagyon hosszú fermata</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">le nagyon hosszú fermata</translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">hüvelykujj</translation>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">erősen hangsúlyos</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9229,7 +9237,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">alsó staccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9269,11 +9277,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverse turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">visszaforgatás</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fordulat</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9289,15 +9297,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upedal toe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">upedal toe</translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dpedal toe</translation>
     </message>
     <message>
         <source>flageolet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">üveghang</translation>
     </message>
     <message>
         <source>segno</source>
@@ -9385,11 +9393,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">kerek korona</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">szögletes korona</translation>
     </message>
     <message>
         <source>eight flag</source>
@@ -9409,7 +9417,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>128flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1/128 zászló</translation>
     </message>
     <message>
         <source>deight flag</source>
@@ -9437,7 +9445,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d128flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1/128 zászló lefelé</translation>
     </message>
     <message>
         <source>alto clef</source>
@@ -9517,43 +9525,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kapcsolójel felfelé mutató teteje</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kapcsolójel lefelé mutató alja</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kapcsolójel balra mutató teteje</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kapcsolójel balra mutató alja</translation>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc dot</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc old ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">acc discant</translation>
     </message>
     <message>
         <source>zero</source>
