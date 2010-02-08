@@ -33,6 +33,7 @@
 #include "scbytearray.h"
 #include "scmeasure.h"
 #include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -188,10 +189,24 @@ bool MuseScore::loadPlugin(const QString& filename)
 static QScriptValue chordConstructor(QScriptContext* ctx, QScriptEngine* engine)
       {
       QScriptValue v = ctx->argument(0);
-      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-      Score* score = sp ? *sp : 0;
-      ChordPtr ptr = new Chord(score);
+      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
+      Score* score   = sp ? *sp : 0;
+      ChordPtr ptr   = new Chord(score);
       ptr->setDurationVal(480);
+      QScriptValue sv = engine->toScriptValue(ptr);
+      return sv;
+      }
+
+//---------------------------------------------------------
+//   noteConstructor
+//---------------------------------------------------------
+
+static QScriptValue noteConstructor(QScriptContext* ctx, QScriptEngine* engine)
+      {
+      QScriptValue v = ctx->argument(0);
+      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
+      Score* score   = sp ? *sp : 0;
+      NotePtr ptr    = new Note(score);
       QScriptValue sv = engine->toScriptValue(ptr);
       return sv;
       }
@@ -221,16 +236,19 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("Cursor", cursorClass->constructor());
 
       ScChordPrototype* chordProto = new ScChordPrototype(0);
-      QScriptValue qsChordProto = newQObject(chordProto);
+      QScriptValue qsChordProto    = newQObject(chordProto);
       setDefaultPrototype(qMetaTypeId<ChordPtr>(), qsChordProto);
       QScriptValue qsChordCtor = newFunction(chordConstructor, qsChordProto);
       globalObject().setProperty("Chord", qsChordCtor);
 
+      ScNotePrototype* noteProto = new ScNotePrototype(0);
+      QScriptValue qsNoteProto   = newQObject(noteProto);
+      setDefaultPrototype(qMetaTypeId<NotePtr>(), qsNoteProto);
+      QScriptValue qsNoteCtor = newFunction(noteConstructor, qsNoteProto);
+      globalObject().setProperty("Note", qsNoteCtor);
+
       ScRest* restClass = new ScRest(this);
       globalObject().setProperty("Rest", restClass->constructor());
-
-      ScNote* noteClass = new ScNote(this);
-      globalObject().setProperty("Note", noteClass->constructor());
 
       ScHarmony* harmonyClass = new ScHarmony(this);
       globalObject().setProperty("Harmony", harmonyClass->constructor());

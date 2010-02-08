@@ -26,79 +26,13 @@
 #include "undo.h"
 
 //---------------------------------------------------------
-//   ScNote
-//---------------------------------------------------------
-
-ScNote::ScNote(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
-      {
-      qScriptRegisterMetaType<NotePtr>(engine, toScriptValue, fromScriptValue);
-
-      proto = engine->newQObject(new ScNotePrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties
-         );
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScNote::newInstance(Score* score)
-      {
-      Note* note = new Note(score);
-      return newInstance(note);
-      }
-
-QScriptValue ScNote::newInstance(const NotePtr& note)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(note));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScNote::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScNote *cls = qscriptvalue_cast<ScNote*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      return cls->newInstance(sp ? *sp : 0);
-      }
-
-QScriptValue ScNote::toScriptValue(QScriptEngine* eng, const NotePtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Note");
-      ScNote* cls = qscriptvalue_cast<ScNote*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScNote::fromScriptValue(const QScriptValue& obj, NotePtr& ba)
-      {
-      NotePtr* np = qscriptvalue_cast<NotePtr*>(obj.data());
-      ba = np ? *np : 0;
-      }
-
-//---------------------------------------------------------
 //   thisNote
 //---------------------------------------------------------
 
 Note* ScNotePrototype::thisNote() const
       {
-      NotePtr* np = qscriptvalue_cast<NotePtr*>(thisObject().data());
+      NotePtr* np = qscriptvalue_cast<NotePtr*>(thisObject());
+printf("===========ScNotePrototype::thisNote %p\n", np);
       if (np)
             return *np;
       return 0;
@@ -128,6 +62,8 @@ int ScNotePrototype::getPitch() const
 
 void ScNotePrototype::setPitch(int v)
       {
+printf("ScNotePrototype::setPitch %d\n", v);
+
       thisNote()->setPitch(v);
       thisNote()->setTpcFromPitch();
       }

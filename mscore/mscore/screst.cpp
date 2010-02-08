@@ -88,7 +88,7 @@ QScriptValue ScRest::toScriptValue(QScriptEngine* eng, const RestPtr& ba)
 
 void ScRest::fromScriptValue(const QScriptValue& obj, RestPtr& ba)
       {
-      Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(obj.data());
+      Rest** cp = qscriptvalue_cast<RestPtr*>(obj.data());
       ba = cp ? *cp : 0;
       }
 
@@ -98,7 +98,8 @@ void ScRest::fromScriptValue(const QScriptValue& obj, RestPtr& ba)
 
 Rest* ScRestPrototype::thisRest() const
       {
-      Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(thisObject().data());
+      // Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(thisObject().data());
+      Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(thisObject());
       if (cp)
             return *cp;
       return 0;
@@ -110,17 +111,13 @@ Rest* ScRestPrototype::thisRest() const
 
 ChordRest* ScChordRestPrototype::thisChordRest() const
       {
-      QScriptValue sv(thisObject().data());
-
-printf("thisChordRest valid %d\n", sv.isValid());
-
-      Chord** c = qscriptvalue_cast<ChordPtr*>(sv);
+      Chord** c = qscriptvalue_cast<ChordPtr*>(thisObject());
       if (c)
             return static_cast<ChordRest*>(*c);
-      Rest** r = qscriptvalue_cast<RestPtr*>(sv);
+      Rest** r = qscriptvalue_cast<RestPtr*>(thisObject());
       if (r)
             return static_cast<ChordRest*>(*r);
-      printf("thisChordRest(): null,valid: %d\n", sv.isValid());
+      printf("thisChordRest(): null\n");
       return 0;
       }
 
@@ -130,7 +127,6 @@ printf("thisChordRest valid %d\n", sv.isValid());
 
 int ScChordRestPrototype::getTickLen() const
       {
-printf("ScChordRestPrototype::getTickLen\n");
       ChordRest* cr = thisChordRest();
       return cr->tickLen();
       }
@@ -141,7 +137,6 @@ printf("ScChordRestPrototype::getTickLen\n");
 
 void ScChordRestPrototype::setTickLen(int v)
       {
-printf("ScChordRestPrototype::setTickLen %d\n", v);
       ChordRest* cr = thisChordRest();
       cr->setDurationVal(v);
       }
@@ -182,7 +177,6 @@ NotePtr ScChordRestPrototype::topNote() const
 
 void ScChordRestPrototype::addNote(NotePtr note)
       {
-printf("ScChordRestPrototype::addNote\n");
       ChordRest* cr = thisChordRest();
       if (cr->type() != CHORD)
             return;
