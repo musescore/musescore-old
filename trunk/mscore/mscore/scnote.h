@@ -26,29 +26,6 @@ class Score;
 typedef Note* NotePtr;
 
 //---------------------------------------------------------
-//   ScNote
-//---------------------------------------------------------
-
-class ScNote : public QObject, public QScriptClass {
-      static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const NotePtr& ba);
-      static void fromScriptValue(const QScriptValue &obj, NotePtr& ba);
-
-      QScriptValue proto;
-      QScriptValue ctor;
-
-   public:
-      ScNote(QScriptEngine* se);
-      ~ScNote() {}
-
-      QScriptValue prototype() const { return proto; }
-      QScriptValue constructor()     { return ctor; }
-      QString name() const           { return QLatin1String("Note"); }
-      QScriptValue newInstance(Score*);
-      QScriptValue newInstance(const NotePtr&);
-      };
-
-//---------------------------------------------------------
 //   ScNotePrototype
 //---------------------------------------------------------
 
@@ -79,7 +56,6 @@ class ScNotePrototype : public QObject, public QScriptable
 
 Q_DECLARE_METATYPE(NotePtr)
 Q_DECLARE_METATYPE(NotePtr*)
-Q_DECLARE_METATYPE(ScNote*)
 
 #endif
 

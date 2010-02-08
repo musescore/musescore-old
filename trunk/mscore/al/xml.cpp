@@ -393,6 +393,9 @@ QString Xml::htmlToString(QDomElement e)
 void Xml::writeHtml(const QString& s)
       {
       QStringList sl(s.split("\n"));
+      //
+      // remove first line from html (DOCTYPE...)
+      //
       for (int i = 1; i < sl.size(); ++i)
             *this << sl[i] << "\n";
       }

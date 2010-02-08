@@ -17,7 +17,7 @@
 
 Chord* ScChordPrototype::thisChord() const
       {
-      Chord** cp = qscriptvalue_cast<ChordPtr*>(thisObject().data());
+      Chord** cp = qscriptvalue_cast<ChordPtr*>(thisObject());
       if (cp)
             return *cp;
       return 0;
