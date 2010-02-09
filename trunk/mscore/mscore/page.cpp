@@ -147,6 +147,7 @@ void Page::layout()
                   if (_copyright == 0) {
                         _copyright = new TextC(*_score->rights);
                         _copyright->setParent(this);
+                        _copyright->setTextStyle(TEXT_STYLE_COPYRIGHT);
                         }
                   _copyright->layout();
                   }

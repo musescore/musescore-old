@@ -1256,7 +1256,9 @@ void ScoreView::cmdAddText(int subtype)
                   }
                   break;
             case TEXT_COPYRIGHT:
-                  s = new TextC(_score);
+                  if (_score->rights == 0)
+                        _score->rights = new TextC(_score);
+                  s = new TextC(*_score->rights);
                   s->setParent(page);
                   s->setTextStyle(TEXT_STYLE_COPYRIGHT);
                   s->setSubtype(subtype);
@@ -1300,7 +1302,6 @@ void ScoreView::cmdAddText(int subtype)
             }
 
       if (s) {
-printf("insert TEXT\n");
             _score->undoAddElement(s);
             _score->setLayoutAll(true);
             _score->select(s, SELECT_SINGLE, 0);
