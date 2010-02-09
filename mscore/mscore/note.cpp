@@ -1061,26 +1061,23 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case NOTEHEAD:
                   {
                   Symbol* s = (Symbol*)e;
-                  int group = _headGroup;
-                  switch(s->sym()) {
-                        case halfheadSym:         group = 0; break;
-                        case halfcrossedheadSym:  group = 1; break;
-                        case halfdiamondheadSym:  group = 2; break;
-                        case u1triangleHeadSym:   group = 3; break;
-                        case halfslashheadSym:    group = 4; break;
-                        case xcircledheadSym:     group = 5; break;
-                        case u1doHeadSym:         group = 6; break;
-                        case u1reHeadSym:         group = 7; break;
-                        case s1miHeadSym:         group = 8; break;
-                        case u1faHeadSym:         group = 9; break;
-                        case s1laHeadSym:         group = 10; break;
-                        case u1tiHeadSym:         group = 11; break;
+                  int group = -1;
 
-                        default: printf("unknown note head\n"); break;
+                  for (int i = 0; i < HEAD_GROUPS; ++i) {
+                        if (noteHeads[0][i][1] == s->sym()) {
+                              group = i;
+                              break;
+                              }
+                        }
+                  if (group == -1) {
+                        printf("unknown note head\n");
+                        group = 0;
                         }
                   delete s;
-                  if (group != _headGroup)
+                  if (group != _headGroup) {
                         score()->undo()->push(new ChangeNoteHead(this, group, _headType));
+                        score()->select(this);
+                        }
                   }
                   break;
 
