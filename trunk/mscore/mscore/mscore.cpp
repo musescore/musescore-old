@@ -1918,13 +1918,12 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
+      genIcons();
+      initShortcuts();
       if (!converterMode) {
-            genIcons();
             qApp->setWindowIcon(*icons[window_ICON]);
-            initShortcuts();
             }
       initDrumset();
-
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
       mscore->setRevision(revision);
