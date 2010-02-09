@@ -1146,8 +1146,8 @@ void TextB::endEdit()
       cursor = 0;
       _editMode = false;
 
-      if (subtype() == TEXT_COPYRIGHT)
-            score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
+//      if (subtype() == TEXT_COPYRIGHT)
+//            score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
       }
 
 //---------------------------------------------------------
